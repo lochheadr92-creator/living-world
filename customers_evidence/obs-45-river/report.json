@@ -1,0 +1,64 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 51,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 149.721,
+  "alive": 27,
+  "deaths": 6,
+  "materialAsksStarted": 160,
+  "materialAsksMade": 21,
+  "materialAsksByStatus": {
+    "declined": 15,
+    "fulfilled": 3,
+    "failed": 2,
+    "partial": 1
+  },
+  "demandHeard": 2,
+  "leadsNotedInLogs": 0,
+  "leadsNow": 7,
+  "declinedMaterialAsksByNote": {
+    "unwilling": 4,
+    "making": 1,
+    "committed": 3,
+    "own need": 7
+  },
+  "leadsByItem": {
+    "planks": 2,
+    "wood": 5
+  },
+  "supplyOffersStarted": 0,
+  "supplySwapsStarted": 0,
+  "supplyWalksStarted": 1,
+  "suppliedTotal": 2,
+  "suppliedByHand": 0,
+  "suppliedBySwap": 0,
+  "suppliedAtSite": 2,
+  "suppliedByItem": {
+    "planks": 2
+  },
+  "unitsSupplied": 6,
+  "returns": [],
+  "repeatCustomers": 0,
+  "lapsed": 2,
+  "localSwapsStarted": 90,
+  "localSwapAsks": 16,
+  "localSwapAsksByNote": {
+    "declined | no room to carry the swap": 7,
+    "declined | nothing to spare": 9
+  },
+  "swapEvents": 0,
+  "exchangeJourneys": 0,
+  "townships": 1,
+  "tradesNow": 19,
+  "tradesFromDemand": 0,
+  "tradesFromReturns": 0,
+  "hash": "00c23ce6",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

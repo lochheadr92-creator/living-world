@@ -1,0 +1,41 @@
+Browser tab: 1, Title: "Staged project helper verification", URL: "http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 13, 32, 37, 39-71, 96-99, 128-135
++					156 text 14:32
+~					23 button Pause
++					157 text 16× · achieved 16×
+~					36 text Ada · by hand running
++					158 text chose socialize:7:request:plan:stone · day 1 14:35
++					159 text 14:27 · Ask Cora for stone → applied
++					160 text still under way
++					161 text chosen by hand
++					162 text Nothing to decide just now.
++					163 text decisions 1, engine 0, refused 0
+~						88 text Brook household Home: lean-to (98% sound) — the household has only 2 food to hand and wants 3 before starting a hut Township: Willowbank
++								164 text Talking with Cora.
++								165 container
++									166 text 0%
+~						127 button (expanded) Conversation now, Secondary Actions: Collapse
++							167 text Conversation
++							168 text now
++						169 container lw-sec-talk
++							170 container Talking now
++								171 text TALKING NOW now
++								172 button Look at Cora
++								173 text · asking for something
++								174 definition list
++									175 container Step
++										176 text Step
++									177 text Saying what it is about
++									178 container Outcome
++										179 text Outcome
++									180 text Under way
++							181 container Last conversation
++								182 text LAST CONVERSATION 56s ago
++								183 button Look at Cora
++								184 text came to Ada with an offer of help
++								185 definition list
++									186 container Outcome
++										187 text Outcome
++									188 text Friendly
+The focused UI element is 1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json

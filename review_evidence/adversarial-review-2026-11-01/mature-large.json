@@ -1,0 +1,62 @@
+{
+ "rules": 109,
+ "tick": 108240,
+ "day": 45.1,
+ "loadMs": 587.1014,
+ "inputBytes": 21779189,
+ "serializedBytes": 21914346,
+ "saveMs": 159.76320000000032,
+ "inspectMs": {
+  "p50": 3.017099999999573,
+  "p95": 6.772200000000339,
+  "max": 22.206800000000385,
+  "all": 416.77829999999994
+ },
+ "entityInspectMs": {
+  "p95": 0.25489999999990687,
+  "n": 95
+ },
+ "pureSerialized": true,
+ "pureHash": true,
+ "tickMs": {
+  "p50": 8.534700000000157,
+  "p95": 13.541400000000067,
+  "max": 24.433799999999792,
+  "mean": 8.777595416666667
+ },
+ "conservationOk": true,
+ "counts": {
+  "persons": 110,
+  "alive": 110,
+  "deceased": 3,
+  "buildings": 95,
+  "sites": 11,
+  "piles": 8,
+  "graves": 3,
+  "events": 500,
+  "chronicle": 400,
+  "requests": 260,
+  "reservations": 5,
+  "conversations": 1,
+  "meals": 35,
+  "occasions": 12,
+  "tools": 263,
+  "carts": 0,
+  "sumLog": 6556,
+  "sumBeliefs": 67328,
+  "sumCommitments": 328,
+  "sumHeard": 3274,
+  "sumSocialMemory": 3104,
+  "sumWhereabouts": 6975,
+  "sumRelations": 5484,
+  "sumCooldownKeys": 13126,
+  "sumFailures": 1973
+ },
+ "longestPanel": {
+  "name": "Cole",
+  "chars": 34738,
+  "decisions": 9,
+  "relationshipLines": 65,
+  "logLines": 60
+ }
+}

@@ -1,0 +1,234 @@
+P
+Petra
+Follow
+Elder, 66
+Bramble household
+Home: lean-to (60% sound) — last considered 11s ago: too thirsty to start a building
+Township: Willowbank
+MOOD
+Content
+HEALTH
+100
+ON THEIR MIND
+What are they up to?
+More
+Gathering wild grain (82% of this task).
+82%
+WHAT ARE THEY SET ON?
+Make a hoe. Step: get 1 more stone for the hoe — settled on, not started. Still needs 1 stone.
+NEEDS
+Food
+57
+Water
+49
+Energy
+94
+Warmth
+67
+Safety
+84
+Company
+93
+CARRYING
+×3
+×2
+4.8 / 6
+TOOLS
+none
+Township & shared work
+
+Willowbank: 13 households. Membership belongs to the household and does not change with walking.
+
+Recent recorded production and resource flows:
+
+gathering: 180 berries, 17 fish, 24 fruit, 54 grain, 17 stone, 82 wood; 2 recorded days. Last source #758 at tick 4795.
+
+Too little repeated activity recorded to describe a specialisation.
+
+No transfers between township affiliations recorded.
+
+No repeated-support faction currently established.
+
+No shared project proposed yet.
+
+Household history
+
+Bramble household formed at tick 0; formation cause is not recorded.
+
+Members: Petra.
+
+Home #898: lean_to; recorded builders: unknown.
+
+Request #2172: Cole asked Petra; fulfilled: promise kept; promise #2185; site #1977.
+
+Request #2601: Arlo asked Petra; declined: making; site #2490.
+
+Relationship history
+
+Yusuf: trust 20, affinity 11.
+
+Earlier cause not recorded.
+
+Nico: trust 12, affinity 2.
+
+Earlier cause not recorded.
+
+Isla: trust 13, affinity -3.
+
+Earlier cause not recorded.
+
+Bram: trust 16, affinity -1.
+
+Remembered at tick 2701: worked alongside Bram. Event link not recorded.
+
+Arlo: trust 2, affinity -21.
+
+Request #2601, helper, tick 3718: declined — making; site #2490. Task: wood (wood); asked 4; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Kaia: trust 22, affinity 22.
+
+Earlier cause not recorded.
+
+Hal: trust 10, affinity -6.
+
+Earlier cause not recorded.
+
+Delia: trust 17, affinity 7.
+
+Remembered at tick 329: saw Delia help Arlo. Event link not recorded.
+
+Mira: trust 19, affinity -8.
+
+Remembered at tick 501: worked alongside Mira. Event link not recorded.
+
+Cole: trust 21, affinity -3.
+
+Request #2172, helper, tick 2957: fulfilled — promise kept; site #1977. Task: wood (wood); asked 1; agreed 1. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 2957; completion tick 2957, commitment #2185. Acknowledged at tick 2957.
+
+Theo: trust 44, affinity 41.
+
+Remembered at tick 19: saw Theo help Nico. Event link not recorded.
+
+Remembered at tick 2701: worked alongside Theo. Event link not recorded.
+
+Silas: trust 33, affinity 22.
+
+Earlier cause not recorded.
+
+Recent decisions
+
+Tick 4691 (one hundred ticks ago), free: chose “Gathering wild grain”; still under way. Passed over then: Gathering wild grain, Picking berries, Tend the crops. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).
+
+Tick 4681 (one hundred ticks ago), free: chose “Eat what I am carrying”; ended success at tick 4690: done. Passed over then: Gathering wild grain, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Work on the building site (site is waiting for materials (2 wood, 3 stone)); Lay out a hut (too hungry to start a building).
+
+Tick 4470 (3 hundred ticks ago), free: chose “Stay at my lean-to until it is light” as a step of plan #2424; ended success at tick 4680: daylight arrived. Passed over then: Eat what I am carrying, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).
+
+Tick 3630 (12 hundred ticks ago), review: chose “Sleep at my lean-to”; ended success at tick 4469: rested. Passed over then: Sleep at the fire, Potter about near home. Set aside then: nothing.
+
+Tick 3571 (12 hundred ticks ago), review: chose “Potter about near home”; ended interrupted at tick 3630: something better came up. Passed over then: Explore somewhere new. Set aside then: nothing.
+
+Tick 3409 (14 hundred ticks ago), free: chose “Sit down and rest”; ended interrupted at tick 3571: something better came up. Passed over then: Potter about near home, Sleep at my lean-to. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood for a friend’s hut (no room in my pack for one wood).
+
+Tick 3310 (15 hundred ticks ago), free: chose “Chopping wood for a friend’s hut” as a step of plan #962; ended success at tick 3408: felled the tree. Passed over then: Chopping wood for a friend’s hut, Fishing, Fishing. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get stone for a friend’s hut (no room in my pack for one stone).
+
+Tick 3242 (16 hundred ticks ago), review: chose “Go and drink at the water”; ended success at tick 3309: done. Passed over then: Ask Theo for wood, Fishing, Picking berries. Set aside then: nothing.
+
+37 earlier decisions were compacted and are not kept.
+
+Conversation
+LAST CONVERSATION
+1.7 min ago
+Arlo
+came to Petra with a request
+Outcome
+Refused (making)
+Promises
+1
+DONE
+made 3.2 min ago
+Haul 1 wood to the building site, as promised to Cole
+1 of 1 delivered
+Worries
+2
+Nearby
+People
+14
+Requests
+2
+Recent
+14
+Knows
+154
+Family
+Traits
+
+Reserved, homebody. Hopes for a store that would see them through a lean season (0% there).
+
+frugal
+generous
+reserved
+sociable
+bold
+cautious
+easygoing
+diligent
+homebody
+curious
+SKILLS
+
+Started with a general practical background. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.
+
+Foraging
+×1.18
+Fishing
+×0.87
+Woodcutting
+×0.93
+Stonework
+×1.11
+Building
+×0.93
+Farming
+×1.24
+Crafting
+×0.95
+Carpentry
+×1.06
+Kiln work
+×1.10
+Smithing
+×1.00
+Baking
+×0.90
+
+Charcoal firing: known on arrival (initial background). Iron smelting: known on arrival (initial background). Iron forging: known on arrival (initial background).
+
+Their trade: farming — quicker at it than at anything else.
+
+morning: Plant seed. 1 successful days (activity #1908 at tick 2426). still learning from separate days. Last outcome: completed. morning: Tend the crops. 2 successful days (activity #1126 at tick 199; activity #1923 at tick 2450). still learning from separate days. Last outcome: completed. morning: Tend the crops. 1 successful days (activity #1939 at tick 2474). still learning from separate days. Last outcome: completed. morning: Picking berries. 1 successful days (activity #1997 at tick 2624). still learning from separate days. Last outcome: completed. morning: Gathering wild grain. 2 successful days (activity #1292 at tick 507; activity #2045 at tick 2701). still learning from separate days. Last outcome: completed. afternoon: Deliver materials to the lean-to site. 1 successful days (activity #2211 at tick 2957). still learning from separate days. Last outcome: completed. afternoon: Picking berries. 1 successful days (activity #2240 at tick 3026). still learning from separate days. Last outcome: completed. afternoon: Chopping wood for a friend’s hut. 1 successful days (activity #2425 at tick 3408). still learning from separate days. Last outcome: completed.
+
+Carried 2 weight of materials to building sites in 1 load over the last 1 day(s).
+
+THEIR CUSTOMERS
+Arlo asked me for 4 wood 0.5 days ago; none to spare yet.
+WHAT HAS PAID THEM
+Foraging
+1.4× · 4
+Woodcutting
+0.4× · 3
+
+Tree #495 (location no longer known): 1 productive visit, 118% of estimated return for time spent. Berry bush #703: 1 productive visit, 138% of estimated return for time spent. Wild grain #761: 2 productive visits, 142% of estimated return for time spent. Berry bush #705: 1 productive visit, 126% of estimated return for time spent.
+
+WHAT THEY HAVE HEARD OF PEOPLE
+Talia picked a quarrel with Hana.
+Arlo told me, today
+Talia helped Lena.
+saw it, today
+Edda helped Tomas.
+saw it, yesterday
+Viktor helped Tomas.
+Cole told me (2 mouths on), yesterday
+Delia helped Arlo.
+saw it, yesterday
+Theo helped Nico.
+saw it, yesterday

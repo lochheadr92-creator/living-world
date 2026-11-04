@@ -1,0 +1,40 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 53,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 114.629,
+  "alive": 22,
+  "deaths": 9,
+  "exposure": {
+    "adultSamples": 7617,
+    "hardshipNow": 1005,
+    "sustainedHardship": 144,
+    "withDestination": 140,
+    "withDestinationAndHouseholdTogether": 31,
+    "withDestinationAndNoRecentAgreement": 140
+  },
+  "peopleEverInHardship": 18,
+  "peopleEverWithDestination": 10,
+  "stepsStarted": {
+    "propose": 1
+  },
+  "agreements": 0,
+  "agreementsByPhase": {},
+  "agreementDetails": [],
+  "townships": [
+    {
+      "name": "Willowbank",
+      "founded": 0,
+      "origin": false
+    }
+  ],
+  "hash": "4ec1241a",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

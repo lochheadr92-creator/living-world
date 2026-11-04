@@ -1,0 +1,365 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-project-inputs",
+  "head": "5ab3100523ec88b21e1d3c499453dcf8f3ea8d10",
+  "branch": "refs/heads/codex/project-inputs115",
+  "workingFiles": [
+    {
+      "path": "autonomy-inputs114-forest-15.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs114-forest-15.log",
+      "kind": "ignored-evidence",
+      "sha256": "a9d0e15631e6e157ce7b4295c35864bb81df9d1d467958b70570e73fb4b027fa",
+      "bytes": 838,
+      "archiveObject": "objects/a9/a9d0e15631e6e157ce7b4295c35864bb81df9d1d467958b70570e73fb4b027fa.gz"
+    },
+    {
+      "path": "autonomy-inputs114-meadow-5.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs114-meadow-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "d98be37fbd75767236cad34306fa04042fb6ae53449022dc6d86f42f4501fbec",
+      "bytes": 838,
+      "archiveObject": "objects/d9/d98be37fbd75767236cad34306fa04042fb6ae53449022dc6d86f42f4501fbec.gz"
+    },
+    {
+      "path": "autonomy-inputs114-river-5.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs114-river-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "9617a97ca4fbb26de79ee9faefcf82659af01770f15e27c334958eaaea1bfb2b",
+      "bytes": 835,
+      "archiveObject": "objects/96/9617a97ca4fbb26de79ee9faefcf82659af01770f15e27c334958eaaea1bfb2b.gz"
+    },
+    {
+      "path": "autonomy-inputs115-autonomous-trace-detailed.log",
+      "kind": "ignored-evidence",
+      "sha256": "6373823f7557c3cd76895e9420e644552f73f1b4853779fe304f3b499d365f5a",
+      "bytes": 24011,
+      "archiveObject": "objects/63/6373823f7557c3cd76895e9420e644552f73f1b4853779fe304f3b499d365f5a.gz"
+    },
+    {
+      "path": "autonomy-inputs115-autonomous-trace.log",
+      "kind": "ignored-evidence",
+      "sha256": "1db38d257655580b94ce2728e84448b727fbebe268d375030a0b68014fdcb164",
+      "bytes": 18307,
+      "archiveObject": "objects/1d/1db38d257655580b94ce2728e84448b727fbebe268d375030a0b68014fdcb164.gz"
+    },
+    {
+      "path": "autonomy-inputs115-browser-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "0f45c205ba3d5c716155063e51c84ab4f0cc5be59eee5d2b8f050e21210a8fc6",
+      "bytes": 506,
+      "archiveObject": "objects/0f/0f45c205ba3d5c716155063e51c84ab4f0cc5be59eee5d2b8f050e21210a8fc6.gz"
+    },
+    {
+      "path": "autonomy-inputs115-browser-verified.log",
+      "kind": "ignored-evidence",
+      "sha256": "0f45c205ba3d5c716155063e51c84ab4f0cc5be59eee5d2b8f050e21210a8fc6",
+      "bytes": 506,
+      "archiveObject": "objects/0f/0f45c205ba3d5c716155063e51c84ab4f0cc5be59eee5d2b8f050e21210a8fc6.gz"
+    },
+    {
+      "path": "autonomy-inputs115-browser.log",
+      "kind": "ignored-evidence",
+      "sha256": "ab386ab0a135f934838d0abec6f2278d5cdecb2f8eed5fba20de22df2cb4531b",
+      "bytes": 506,
+      "archiveObject": "objects/ab/ab386ab0a135f934838d0abec6f2278d5cdecb2f8eed5fba20de22df2cb4531b.gz"
+    },
+    {
+      "path": "autonomy-inputs115-build-reviewed.log",
+      "kind": "ignored-evidence",
+      "sha256": "99b537e392d6c22b22b85728022e3ac93fa998b0f635b8ff8002350ecf0db59f",
+      "bytes": 2200,
+      "archiveObject": "objects/99/99b537e392d6c22b22b85728022e3ac93fa998b0f635b8ff8002350ecf0db59f.gz"
+    },
+    {
+      "path": "autonomy-inputs115-duplicate-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "7f3c460636238a566ab1e2a7f986eb0a7b130711e5f783c96a4af0ed0764ad3c",
+      "bytes": 2523,
+      "archiveObject": "objects/7f/7f3c460636238a566ab1e2a7f986eb0a7b130711e5f783c96a4af0ed0764ad3c.gz"
+    },
+    {
+      "path": "autonomy-inputs115-focused-reviewed.log",
+      "kind": "ignored-evidence",
+      "sha256": "e7e6976aa36326cfa4984653c033c845c5bcfb5ba8d39c34d3e9919fff32ab05",
+      "bytes": 1965,
+      "archiveObject": "objects/e7/e7e6976aa36326cfa4984653c033c845c5bcfb5ba8d39c34d3e9919fff32ab05.gz"
+    },
+    {
+      "path": "autonomy-inputs115-forest-15.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs115-forest-15.log",
+      "kind": "ignored-evidence",
+      "sha256": "a98774787a1470178efa28197b8488c6e7ba2400d196e89b3b4bc3e6300be274",
+      "bytes": 838,
+      "archiveObject": "objects/a9/a98774787a1470178efa28197b8488c6e7ba2400d196e89b3b4bc3e6300be274.gz"
+    },
+    {
+      "path": "autonomy-inputs115-full-reviewed.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs115-full-reviewed.log",
+      "kind": "ignored-evidence",
+      "sha256": "c4f6d8fa72582ed6e7ac3fd39b55a5cb448c7d1e790bff4f75946b68551c24f6",
+      "bytes": 6413,
+      "archiveObject": "objects/c4/c4f6d8fa72582ed6e7ac3fd39b55a5cb448c7d1e790bff4f75946b68551c24f6.gz"
+    },
+    {
+      "path": "autonomy-inputs115-meadow-5.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs115-meadow-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "21dbe8a7b8b606683364ed3240a92456b44a3995d62b6e0f9ac530cace336722",
+      "bytes": 831,
+      "archiveObject": "objects/21/21dbe8a7b8b606683364ed3240a92456b44a3995d62b6e0f9ac530cace336722.gz"
+    },
+    {
+      "path": "autonomy-inputs115-river-5.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-inputs115-river-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "11c1723aceb1828dae44a9bcd51a5babf1550479cf1d6d44ca6988491f68aa4f",
+      "bytes": 828,
+      "archiveObject": "objects/11/11c1723aceb1828dae44a9bcd51a5babf1550479cf1d6d44ca6988491f68aa4f.gz"
+    },
+    {
+      "path": "autonomy-inputs115-typecheck-reviewed.log",
+      "kind": "ignored-evidence",
+      "sha256": "b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790",
+      "bytes": 52,
+      "archiveObject": "objects/b9/b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-adoption-review.log",
+      "kind": "ignored-evidence",
+      "sha256": "910bb7fb9115ffd2dd141af3215bdd53e1adef90ed602b0a8ed89152b5dbf7ef",
+      "bytes": 2012,
+      "archiveObject": "objects/91/910bb7fb9115ffd2dd141af3215bdd53e1adef90ed602b0a8ed89152b5dbf7ef.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "f9cdc9b3c30724674c5df236255fa4e8de110de1512a4fa8605646c5deb32387",
+      "bytes": 3209,
+      "archiveObject": "objects/f9/f9cdc9b3c30724674c5df236255fa4e8de110de1512a4fa8605646c5deb32387.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-build-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "2455c2df02ac2bd142699da52d6fdeda91ec3870f9a487701f72670b2a2d9f1d",
+      "bytes": 2200,
+      "archiveObject": "objects/24/2455c2df02ac2bd142699da52d6fdeda91ec3870f9a487701f72670b2a2d9f1d.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "0568b88a1674fb0370de5cc92674130d0dabd0132e43c002cb63ddadb18e047e",
+      "bytes": 2200,
+      "archiveObject": "objects/05/0568b88a1674fb0370de5cc92674130d0dabd0132e43c002cb63ddadb18e047e.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-first-complete.log",
+      "kind": "ignored-evidence",
+      "sha256": "6fb75c65e58117beb69cd0ea7bb60e44c796c167f6d6a19e48022c6bbf21257b",
+      "bytes": 1861,
+      "archiveObject": "objects/6f/6fb75c65e58117beb69cd0ea7bb60e44c796c167f6d6a19e48022c6bbf21257b.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-first.log",
+      "kind": "ignored-evidence",
+      "sha256": "8e4a9aa92a0b39a23ba638fc3ba68e748e9a27d8fbc04fbd61c0c70882ee2925",
+      "bytes": 3492,
+      "archiveObject": "objects/8e/8e4a9aa92a0b39a23ba638fc3ba68e748e9a27d8fbc04fbd61c0c70882ee2925.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-focused-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "cd48caab1c6e47212ab1dbc72f7e1f56745571dc1858645cc455a9601499a77f",
+      "bytes": 1963,
+      "archiveObject": "objects/cd/cd48caab1c6e47212ab1dbc72f7e1f56745571dc1858645cc455a9601499a77f.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "4b4bd0ce9a534b1b63c1bd5a14af72bf596b2218ab03a751edbe1ae6bff4649b",
+      "bytes": 1961,
+      "archiveObject": "objects/4b/4b4bd0ce9a534b1b63c1bd5a14af72bf596b2218ab03a751edbe1ae6bff4649b.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-full.log",
+      "kind": "ignored-evidence",
+      "sha256": "00cb570c03e5d8b97df7bbae59671057629d97022cd5c7da7c9b50b055296e48",
+      "bytes": 1655,
+      "archiveObject": "objects/00/00cb570c03e5d8b97df7bbae59671057629d97022cd5c7da7c9b50b055296e48.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-reviewed.log",
+      "kind": "ignored-evidence",
+      "sha256": "fd9f1be4875da4bc7df5a17ce5158f3c94893b4636903a19ecab3341ccccf4d7",
+      "bytes": 1861,
+      "archiveObject": "objects/fd/fd9f1be4875da4bc7df5a17ce5158f3c94893b4636903a19ecab3341ccccf4d7.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-typecheck-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790",
+      "bytes": 52,
+      "archiveObject": "objects/b9/b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790.gz"
+    },
+    {
+      "path": "autonomy-project-inputs115-typecheck.log",
+      "kind": "ignored-evidence",
+      "sha256": "b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790",
+      "bytes": 52,
+      "archiveObject": "objects/b9/b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790.gz"
+    },
+    {
+      "path": "autonomy-v115-reference-check.log",
+      "kind": "ignored-evidence",
+      "sha256": "83a229ad9df837f0084675f5669cba1761b763289dda24d035403973879bdabf",
+      "bytes": 1883,
+      "archiveObject": "objects/83/83a229ad9df837f0084675f5669cba1761b763289dda24d035403973879bdabf.gz"
+    },
+    {
+      "path": "autonomy-v115-reference-generate.log",
+      "kind": "ignored-evidence",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "autonomy_evidence/inputs114-forest-15/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "19e8e9df9c452c21c947a77b549b70807e9b0e7f044ca325939624d088f97b59",
+      "bytes": 4415869,
+      "archiveObject": "objects/19/19e8e9df9c452c21c947a77b549b70807e9b0e7f044ca325939624d088f97b59.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs114-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "d00794e93c49dc3dc7252dd6e527fa44ececcd11e74834ce058a1c32b7ba764e",
+      "bytes": 2642726,
+      "archiveObject": "objects/d0/d00794e93c49dc3dc7252dd6e527fa44ececcd11e74834ce058a1c32b7ba764e.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs114-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "5c0860545d695a7fb37705b5c5910303993c62af89848b9da8c84347015b9255",
+      "bytes": 3386970,
+      "archiveObject": "objects/5c/5c0860545d695a7fb37705b5c5910303993c62af89848b9da8c84347015b9255.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-forest-15/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "2e6fcc51b55d0e2ca7a90ffb8db4cb29ec4e135ee1bfcd4d6c009ab028b4bf5f",
+      "bytes": 4415869,
+      "archiveObject": "objects/2e/2e6fcc51b55d0e2ca7a90ffb8db4cb29ec4e135ee1bfcd4d6c009ab028b4bf5f.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "a5467196c481a31e13d8e7d75f6fd8c3af07ca3ed0296ff4f080d32d5c7fb954",
+      "bytes": 2642726,
+      "archiveObject": "objects/a5/a5467196c481a31e13d8e7d75f6fd8c3af07ca3ed0296ff4f080d32d5c7fb954.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered-final/hammer-made.png",
+      "kind": "untracked",
+      "sha256": "c197f453bf659cffc41f72d5b3f4a631a17444e92896289e756ebb773a47dbd4",
+      "bytes": 653807,
+      "archiveObject": "objects/c1/c197f453bf659cffc41f72d5b3f4a631a17444e92896289e756ebb773a47dbd4.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered-final/ingredients-set-aside.png",
+      "kind": "untracked",
+      "sha256": "6026f0e1ea5c194a73c27afc3dfe4947dc75d8fec8bbe926bfeb9fa005489256",
+      "bytes": 650244,
+      "archiveObject": "objects/60/6026f0e1ea5c194a73c27afc3dfe4947dc75d8fec8bbe926bfeb9fa005489256.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered-final/making-prerequisite-hammer.png",
+      "kind": "untracked",
+      "sha256": "9c15931f5ddd87678d011ae35299acc4123e5390226a0de7d701e4f03a476b53",
+      "bytes": 643970,
+      "archiveObject": "objects/9c/9c15931f5ddd87678d011ae35299acc4123e5390226a0de7d701e4f03a476b53.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered-final/report.json",
+      "kind": "untracked",
+      "sha256": "2ed27334cdaa4dc57978e805576db660e116b603e7d01235a18285e819d50aa3",
+      "bytes": 2712,
+      "archiveObject": "objects/2e/2ed27334cdaa4dc57978e805576db660e116b603e7d01235a18285e819d50aa3.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered/hammer-made.png",
+      "kind": "untracked",
+      "sha256": "c9f6a47c45686f2c100fbfaa871b5dc80703506a457f47a97cdb9c63c45e488f",
+      "bytes": 624600,
+      "archiveObject": "objects/c9/c9f6a47c45686f2c100fbfaa871b5dc80703506a457f47a97cdb9c63c45e488f.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered/ingredients-set-aside.png",
+      "kind": "untracked",
+      "sha256": "6026f0e1ea5c194a73c27afc3dfe4947dc75d8fec8bbe926bfeb9fa005489256",
+      "bytes": 650244,
+      "archiveObject": "objects/60/6026f0e1ea5c194a73c27afc3dfe4947dc75d8fec8bbe926bfeb9fa005489256.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered/making-prerequisite-hammer.png",
+      "kind": "untracked",
+      "sha256": "17a32bef38452b5033fb6fbe0f40c84dae49824d7d2c152a321ad74d17c26594",
+      "bytes": 650485,
+      "archiveObject": "objects/17/17a32bef38452b5033fb6fbe0f40c84dae49824d7d2c152a321ad74d17c26594.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-rendered/report.json",
+      "kind": "untracked",
+      "sha256": "79aefb9030a02dc7cbaf20a4e7e1e27f0ec988175d49b3deac5b8af0be216150",
+      "bytes": 2633,
+      "archiveObject": "objects/79/79aefb9030a02dc7cbaf20a4e7e1e27f0ec988175d49b3deac5b8af0be216150.gz"
+    },
+    {
+      "path": "autonomy_evidence/inputs115-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "943a730d1ab9e905e7a161321126088305883bf11e33850be05bc18660d5c741",
+      "bytes": 3386970,
+      "archiveObject": "objects/94/943a730d1ab9e905e7a161321126088305883bf11e33850be05bc18660d5c741.gz"
+    }
+  ],
+  "stagedFiles": []
+}

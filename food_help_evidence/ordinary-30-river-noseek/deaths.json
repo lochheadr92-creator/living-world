@@ -1,0 +1,44 @@
+[
+  {
+    "tick": 71818,
+    "id": 1122,
+    "name": "Eli",
+    "cause": "hunger",
+    "age": 5,
+    "packFoodBefore": 0,
+    "invBefore": {
+      "seeds": 2,
+      "wood": 2
+    },
+    "hungerBefore": 0,
+    "activityBefore": "gather:Fishing",
+    "homeFood": 0,
+    "membersWithSpare": 2,
+    "members": [
+      {
+        "id": 1119,
+        "name": "Cora",
+        "food": 0,
+        "surplus": 0,
+        "dist": 49,
+        "hunger": 28
+      },
+      {
+        "id": 1120,
+        "name": "Abel",
+        "food": 9,
+        "surplus": 9,
+        "dist": 29,
+        "hunger": 66
+      },
+      {
+        "id": 1121,
+        "name": "Ivo",
+        "food": 5,
+        "surplus": 4,
+        "dist": 30,
+        "hunger": 93
+      }
+    ]
+  }
+]

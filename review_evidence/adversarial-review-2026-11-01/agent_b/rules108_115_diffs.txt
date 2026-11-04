@@ -1,0 +1,585 @@
+=================== 8193b8f Use remembered homes for replacement layout decisions under rules 108
+commit 8193b8f909e2b391e7e88d294e65092ad8ac2ab8
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 21:31:33 2026 +1000
+
+    Use remembered homes for replacement layout decisions under rules 108
+    
+    Existing modules touched: options_work uses personal home knowledge; act_build enforces physical duplicate allocation at both boundaries; rulesversion and lab retain prior behaviour. Record null ordinary loss screens and the corrected adverse staged recovery without claiming full WS16 completion.
+
+--- a/src/sim/act_build.ts
++++ b/src/sim/act_build.ts
+@@ -1,5 +1,6 @@
+ import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
+ import {hasPromiseKnowledge} from './promise_knowledge';
++import {homeLayoutConflict} from './home_replacement';
+ import { preservesAccess, allSitesNeedAccess } from './construction_access';
+ import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_WAIT } from './layout_claims';
+ import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
+@@ -292,6 +293,7 @@ export function openSitesNear(world: World, near?: Spot): number {
+ 
+ /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
+ export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
++  const housing=homeLayoutConflict(world,type,hh,upgradeOf);if(housing)return housing;
+   const rules = rulesOf(world);
+   if (isFacilityType(type) || upgradeOf) {
+     if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';
+new file mode 100644
+--- /dev/null
++++ b/src/sim/home_replacement.ts
+@@ -0,0 +1,27 @@
++// Housing intention uses personal knowledge; layout allocation remains an execution check.
++import {isHomeType} from './constants';
++import {ownHomeBeliefFor} from './shelter';
++import {runsRulesVersion} from './rulesversion';
++import type {Ctx} from './optutil';
++import type {BuildingType,World} from './types';
++
++let enabled=true;
++export const homeReplacementOn=()=>enabled;
++export function setHomeReplacement(on:boolean):void{enabled=on;}
++export const hasHomeReplacement=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,108);
++/** Coordinates are the remembered centre, not a fabricated live Building. */
++export function layoutHome(ctx:Ctx):{type:BuildingType;x:number;y:number}|null{
++ if(hasHomeReplacement(ctx.world)){
++  const b=ownHomeBeliefFor(ctx.p);
++  return b?{type:b.btype as BuildingType,x:b.x,y:b.y}:null;
++ }
++ const b=ctx.home;return b?{type:b.type,x:b.x+b.w/2,y:b.y+b.h/2}:null;
++}
++/** A stale/unknown home may motivate an attempt, but cannot allocate a second home. No belief is written. */
++export function homeLayoutConflict(w:World,type:BuildingType,household:number,upgradeOf=0):string|null{
++ if(!hasHomeReplacement(w)||upgradeOf||!isHomeType(type))return null;
++ const hh=w.households.find(h=>h.id===household),home=hh?.homeId?w.byId.get(hh.homeId):undefined;
++ if(!home||home.ent!=='building'||!isHomeType(home.type))return null;
++ if(home.type==='lean_to'&&type!=='lean_to')return null;
++ return 'the household already has housing allocated';
++}
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -7,6 +7,7 @@ import { newActivity } from './activities';
+ import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
+ import { durableReserve } from './provision';
+ import { explainsHousing } from './shelter';
++import {hasHomeReplacement,layoutHome} from './home_replacement';
+ import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
+ import { makesSpears } from './defence';
+ import { isThreat } from './wildlife';
+@@ -685,9 +686,10 @@ function optPlanBuild(ctx: Ctx): void {
+   const { world, p, hh } = ctx;
+   if (!hh || ctx.stage === 'child') return;
+   if (world.settings.scene !== 'natural') return; // staged scenes stay exactly as staged
+-  const wantsHome = !ctx.home || ctx.home.type === 'lean_to';
++  const home=layoutHome(ctx);
++  const wantsHome = !home || home.type === 'lean_to';
+   if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28) {
+-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', ctx.drives.hunger > 28 ? 'too hungry to start a building' : 'too thirsty to start a building');
++    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', ctx.drives.hunger > 28 ? 'too hungry to start a building' : 'too thirsty to start a building');
+     return;
+   }
+   const tm = traitMods(p);
+@@ -699,14 +701,14 @@ function optPlanBuild(ctx: Ctx): void {
+   if (mySites.length > 0) {
+     // Not a dead end: the household has already started something, and the site's own card, the build and haul options and
+     // (from rules version 7) the shelter plan are where a viewer follows it from here.
+-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
++    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
+     return;
+   }
+   if (world.sites.filter((s) => s.hhId === hh.id && (!ownHomeOnly || isHomeType(s.type))).length > 0) return; // someone in my household already started one
+   const rules = rulesOf(world);
+   const anchor = settlementAnchor(ctx);
+   if (!ownHomeOnly && openSitesNear(world, anchor) >= rules.maxOpenSites) {
+-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', 'too much already being built here at once');
++    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', 'too much already being built here at once');
+     return;
+   }
+   const hs = hhState(ctx);
+@@ -738,10 +740,9 @@ function optPlanBuild(ctx: Ctx): void {
+       targetId: 0,
+       tag: 'build',
+       make: () => {
+-        const home = ctx.home;
+-        const hub = (hasTownships(world) && type === 'storehouse' ? townshipOf(world, p) : undefined) ?? baseHub(world, p, home);
+-        const ax = home ? home.x + home.w / 2 : hub.x;
+-        const ay = home ? home.y + home.h / 2 : hub.y;
++        const hub = (hasTownships(world) && type === 'storehouse' ? townshipOf(world, p) : undefined) ?? (hasHomeReplacement(world)?nearestHub(world,home?.x??p.x,home?.y??p.y):baseHub(world,p,ctx.home));
++        const ax = home ? home.x : hub.x;
++        const ay = home ? home.y : hub.y;
+         let spot = null as { x: number; y: number } | null;
+         if (type === 'storehouse') spot = findBuildSpot(world, p, type, hub.x, hub.y, 4, 11, 7);
+         else if (type === 'fire') spot = findBuildSpot(world, p, type, ax, ay, 3, 9, 5);
+@@ -773,12 +774,12 @@ function optPlanBuild(ctx: Ctx): void {
+     });
+   };
+ 
+-  if (!ctx.home) {
++  if (!home) {
+     if (knowTrees) {
+       const urgent = 22 + (hs.shortage < 0.6 ? 6 : 0) + 4 * Math.min(members, 3);
+       tryPlan('lean_to', urgent, 'no shelter of our own yet');
+     } else noteHousingBlock(ctx, 'lean_to', 'does not know of three trees to cut');
+-  } else if (ctx.home.type === 'lean_to') {
++  } else if (home.type === 'lean_to') {
+     // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED except that, from rules
+     // version 9, a household of one may build one too: the labour and the materials never needed a crew, only the rule
+     // did. Each one still says when it is the one holding things up, instead of the whole question disappearing.
+=================== 9b45375 Keep fully supplied construction eligible through completion under rules 109
+commit 9b45375797d1b8a15d76fde4b2513bdd4a73532f
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 21:38:58 2026 +1000
+
+    Keep fully supplied construction eligible through completion under rules 109
+    
+    Existing modules touched: options_work delegates only the full-material eligibility boundary, with rulesversion and lab gating. Physical handlers and old rules remain unchanged. Record ordinary offers/endings and the same staged collapse now built and slept in, retaining later thirst death.
+
+new file mode 100644
+--- /dev/null
++++ b/src/sim/construction_finish.ts
+@@ -0,0 +1,11 @@
++// Option eligibility from remembered progress/materials; physical work remains in act_build.
++import {runsRulesVersion} from './rulesversion';
++import type {World} from './types';
++let enabled=true;
++export const constructionFinishOn=()=>enabled;
++export function setConstructionFinish(on:boolean):void{enabled=on;}
++export function knownConstructionWork(w:World,progress:number,available:number):boolean{
++ if(enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,109)&&available>=1)return progress<1;
++ // Preserve the historical headroom at partial-material boundaries and in old worlds.
++ return progress<Math.min(1,0.06+available)-0.02;
++}
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -8,6 +8,7 @@ import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from
+ import { durableReserve } from './provision';
+ import { explainsHousing } from './shelter';
+ import {hasHomeReplacement,layoutHome} from './home_replacement';
++import {knownConstructionWork} from './construction_finish';
+ import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
+ import { makesSpears } from './defence';
+ import { isThreat } from './wildlife';
+@@ -611,7 +612,7 @@ function optSites(ctx: Ctx): void {
+     // work on it
+     const avail = fractionAvailable(b);
+     const done = b.progress ?? 0;
+-    const canWork = done < Math.min(1, 0.06 + avail) - 0.02;
++    const canWork = knownConstructionWork(world,done,avail);
+     if (!canWork) {
+       // rules 32+: derive the shortfall from the site's ledger (required minus delivered minus used), not the stale
+       // belief snapshot, so the reason does not list material that has already been delivered. The text is part of the
+=================== 9242d60 Preserve water-search purpose and answer critical night thirst under rules 110
+commit 9242d603eb01835065301dd7dafee252f671005b
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 21:48:31 2026 +1000
+
+    Preserve water-search purpose and answer critical night thirst under rules 110
+    
+    Existing modules touched: exploration in options_work uses a bounded water_search descriptor; rulesversion and lab retain old behavior. No resource or need-pressure changes. Record saved physical drinking, ordinary nulls and the retained thirst death.
+
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -9,6 +9,7 @@ import { durableReserve } from './provision';
+ import { explainsHousing } from './shelter';
+ import {hasHomeReplacement,layoutHome} from './home_replacement';
+ import {knownConstructionWork} from './construction_finish';
++import {waterSearchPurpose} from './water_search';
+ import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
+ import { makesSpears } from './defence';
+ import { isThreat } from './wildlife';
+@@ -1351,10 +1352,12 @@ function optWaterRun(ctx: Ctx): void {
+ // ───────────────────────── exploring ─────────────────────────
+ function optExplore(ctx: Ctx): void {
+   const { world, p } = ctx;
+-  if (ctx.stage === 'child' || ctx.night) return;
++  if (ctx.stage === 'child') return;
+   // someone hungry with no known way to eat has every reason to go looking
+   const noFoodLead = ctx.drives.hunger > 25 && !ctx.options.some((o) => o.tag === 'food' && (o.kind === 'gather' || o.kind === 'eat' || o.kind === 'eat_store'));
+   const noWaterLead = ctx.drives.thirst > 18 && !ctx.options.some((o) => o.tag === 'water');
++  const waterSearch=waterSearchPurpose(ctx,noWaterLead);
++  if(ctx.night&&!waterSearch?.afterDark)return;
+   // timber is wanted (a house to raise, a roof to mend) but there is no tree they know of left to fell
+   const woodWanted = ctx.wood < 2 && materialNeeds(ctx).some((n) => n.item === 'wood');
+   const noWoodLead = woodWanted && !ctx.options.some((o) => o.kind === 'gather' && (o.tag === 'site' || o.tag === 'repair' || o.tag === 'fire' || o.tag === 'craft'));
+@@ -1389,8 +1392,8 @@ function optExplore(ctx: Ctx): void {
+   // pick a frontier: sample points and prefer those whose surroundings are unexplored
+   let best: { x: number; y: number; score: number } | null = null;
+   const hub = nearestHub(world, p.x, p.y);
+-  const ax = ctx.home ? ctx.home.x : hub.x;
+-  const ay = ctx.home ? ctx.home.y : hub.y;
++  const ax = waterSearch?.x ?? (ctx.home ? ctx.home.x : hub.x);
++  const ay = waterSearch?.y ?? (ctx.home ? ctx.home.y : hub.y);
+   for (let i = 0; i < 16; i++) {
+     const ang = hashUnit(p.id, Math.floor(world.tick / 60), i * 7) * Math.PI * 2;
+     const r = rMin + hashUnit(p.id, Math.floor(world.tick / 60), i * 13 + 1) * (rMax - rMin);
+@@ -1418,7 +1421,7 @@ function optExplore(ctx: Ctx): void {
+   if (!best) return;
+   const target = best;
+   const e = hyp(target.x - p.x, target.y - p.y) * 1.18 / Math.max(0.03, ctx.speed);
+-  const sc = new Scorer().add('curiosity', base * (hs.shortage > 0.6 ? 1 : 0.9)).add('walking', -pen(e) * 0.5).add('daylight to spare', 2);
++  const sc = new Scorer().add('curiosity', base * (hs.shortage > 0.6 ? 1 : 0.9)).add('walking', -pen(e) * 0.5).add(ctx.night&&waterSearch?.afterDark?'critical thirst after dark':'daylight to spare', 2);
+   addOption(ctx, {
+     kind: 'explore',
+     label: noWaterLead ? 'Search for water' : noWoodLead && !noFoodLead ? 'Look for timber' : dLead && !noFoodLead ? `Look for ${dLead.what === 'clay_pit' ? 'clay' : dLead.what === 'ore_vein' ? 'ore' : 'stone'}` : 'Explore somewhere new',
+@@ -1438,8 +1441,9 @@ function optExplore(ctx: Ctx): void {
+       }
+       return newActivity(world, p, {
+         kind: 'explore',
+-        label: noWoodLead && !noFoodLead ? 'Looking for timber' : 'Exploring',
+-        goal: noWoodLead && !noFoodLead ? 'to find trees to fell' : foodKnown < 4 ? 'to look for food sources' : 'to see what is out there',
++        label: waterSearch?.label ?? (noWoodLead && !noFoodLead ? 'Looking for timber' : 'Exploring'),
++        goal: waterSearch?.goal ?? (noWoodLead && !noFoodLead ? 'to find trees to fell' : foodKnown < 4 ? 'to look for food sources' : 'to see what is out there'),
++        ...(waterSearch?{need:waterSearch.need}:{}),
+         tx: spot.x,
+         ty: spot.y,
+         spotX: spot.x,
+new file mode 100644
+--- /dev/null
++++ b/src/sim/water_search.ts
+@@ -0,0 +1,10 @@
++// A personally motivated water search: no source location or future supply is supplied here.
++import {runsRulesVersion} from './rulesversion';
++import type {Ctx} from './optutil';
++let enabled=true;
++export const waterSearchOn=()=>enabled;
++export function setWaterSearch(on:boolean):void{enabled=on;}
++export function waterSearchPurpose(ctx:Ctx,noWaterLead:boolean){
++ if(!enabled||ctx.world.settings.dynamics!=='rich'||!runsRulesVersion(ctx.world,110)||!noWaterLead)return null;
++ return {x:ctx.p.x,y:ctx.p.y,label:'Searching for water',goal:'to find water',need:'thirst' as const,afterDark:ctx.criticals.includes('thirst')};
++}
+=================== 0d6db43 Keep an admitted guest eligible to finish the ongoing occasion under rules 111
+commit 0d6db43f807b87ecbdbaee9f4a9be4fe0d23ca99
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 21:57:04 2026 +1000
+
+    Keep an admitted guest eligible to finish the ongoing occasion under rules 111
+    
+    Existing modules touched, and why: occasions uses the bounded participation owner to distinguish current admission from a past visit and labels staying honestly; rulesversion gates the change; lab exposes removal. Ordinary scoring, interruption, duration, physical admission and rewards are unchanged. Focused 28/5, rendered 7/7 and build pass; full and fixed ordinary screens remain running.
+
+new file mode 100644
+--- /dev/null
++++ b/src/sim/occasion_participation.ts
+@@ -0,0 +1,15 @@
++// Attendance history prevents a second visit; it must not erase the value of the visit still underway.
++import {presentAt} from './market_contact';
++import {runsRulesVersion} from './rulesversion';
++import type {Ctx} from './optutil';
++import type {Occasion} from './types';
++let enabled=true;
++export const occasionParticipationOn=()=>enabled;
++export function setOccasionParticipation(on:boolean):void{enabled=on;}
++/** Only the same physically admitted, unfinished activity. No admission, reward or sticky commitment here. */
++export function continuingOccasion(ctx:Ctx,o:Occasion):boolean{
++ const {world,p}=ctx,a=p.activity;
++ return enabled&&world.settings.dynamics==='rich'&&runsRulesVersion(world,111)&&
++  !!a&&a.kind==='attend'&&a.targetId===o.id&&a.data.occasion===o.id&&a.phase==='work'&&
++  a.progress<a.duration&&o.attended.includes(p.id)&&presentAt(world,p,o);
++}
+--- a/src/sim/occasions.ts
++++ b/src/sim/occasions.ts
+@@ -1,4 +1,5 @@
+ import { deceasedById } from './historical_index';
++import { continuingOccasion } from './occasion_participation';
+ import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
+ import { hasLocalDeath, knowsDeath } from './death_knowledge';
+ // Occasions (rich worlds only): a place and a time at which many people gather at once - a funeral, a wedding, a feast for a birth or
+@@ -193,7 +194,8 @@ export function attendOptions(ctx: Ctx): void {
+   if (ctx.criticals.length || ctx.dangers.length) return;
+   for (const o of list) {
+     // worth setting out for a little before it opens, so that people arrive as it begins rather than as it ends
+-    if (o.status === 'done' || o.attended.includes(p.id) || o.about.includes(p.id)) continue;
++    const continuing=continuingOccasion(ctx,o);
++    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || o.about.includes(p.id)) continue;
+     if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
+     if (o.status === 'called' && world.tick < o.at - 200) continue;
+     if(hasLocalMarket(world)&&!p.beliefs[o.placeId])continue;
+@@ -219,7 +221,7 @@ export function attendOptions(ctx: Ctx): void {
+     if (sc.total < 8) continue;
+     addOption(ctx, {
+       kind: 'attend',
+-      label: `Go to the ${KIND_LABEL[o.kind]} at ${o.placeName}`,
++      label: `${continuing?'Stay at':'Go to'} the ${KIND_LABEL[o.kind]} at ${o.placeName}`,
+       goal: o.kind === 'funeral' ? 'to mourn' : o.kind === 'market' ? 'to trade' : 'to celebrate',
+       need: 'social',
+       util: sc.total,
+=================== 33d22ed Resume valid occasion participation after conversation under rules 112
+commit 33d22ed20d3deac7d984536a5e236098abb28bbc
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 22:10:48 2026 +1000
+
+    Resume valid occasion participation after conversation under rules 112
+    
+    Existing modules touched, and why: activities delegates attendance pause retention and resumption validity to occasion_recovery; rulesversion and lab gate the slice. Original time limits and ordinary interruption remain. Invalid visits end with reasons instead of silently disappearing. Staged real conversation/save/recovery, focused contracts and rendered 8/8 pass; full and ordinary windows remain running.
+
+--- a/src/sim/activities.ts
++++ b/src/sim/activities.ts
+@@ -1,4 +1,5 @@
+ import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
++import {hasOccasionRecovery,occasionResumeFailure} from './occasion_recovery';
+ import { closeDecision } from './decision_ledger';
+ import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
+ import { floodEscapePath, waitForFlood } from './flood_access';
+@@ -551,7 +552,7 @@ export function suspendActivity(world: World, p: Person): void {
+   // the progress below is about to be thrown away: credit what it was worth first, or a broken night would count for nothing
+   creditShelterFrom(p, a);
+   releaseClaims(world, a.claims);
+-  if (a.phase === 'work') {
++  if (a.phase === 'work' && !hasOccasionRecovery(world,a)) {
+     a.phase = 'travel';
+     a.path = [];
+     a.pi = 0;
+@@ -569,8 +570,13 @@ export function resumeSuspended(world: World, p: Person): boolean {
+   if (!a) return false;
+   p.suspended = null;
+   if (p.activity) return false;
+-  if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
+-  if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
++  if (hasOccasionRecovery(world,a)) {
++    const failure=occasionResumeFailure(world,p,a);
++    if(failure){p.activity=a;endActivity(world,p,'interrupted',failure);return false;}
++  } else {
++    if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
++    if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
++  }
+   p.activity = a;
+   if (hasLayoutClaims(world) && a.kind === 'plan_site') {
+     const blocked = layoutClaimBlock(world, p, a);
+new file mode 100644
+--- /dev/null
++++ b/src/sim/occasion_recovery.ts
+@@ -0,0 +1,21 @@
++// A conversation pauses participation; an occasion id is not an entity id.
++import {runsRulesVersion} from './rulesversion';
++import {hyp} from './util';
++import type {Activity,Person,World} from './types';
++let enabled=true;
++export const occasionRecoveryOn=()=>enabled;
++export function setOccasionRecovery(on:boolean):void{enabled=on;}
++export const hasOccasionRecovery=(w:World,a:Activity)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,112)&&a.kind==='attend';
++/** Execution revalidation only. No extra time, admission, reward or route knowledge is granted. */
++export function occasionResumeFailure(w:World,p:Person,a:Activity):string|null{
++ if(w.tick>a.expire)return 'the gathering trip has taken too long';
++ const o=w.occasions?.find(o=>o.id===a.data.occasion&&o.id===a.targetId);
++ if(!o||o.status==='done'||w.tick>=o.until)return 'the occasion is over';
++ const place=w.byId.get(o.placeId);
++ if(!place||place.ent!=='building'||place.condition<=0)return 'the gathering place is gone';
++ if(a.phase==='work'){
++  if(p.indoors||p.pose==='sleep'||hyp(p.x-o.x,p.y-o.y)>8)return 'I am no longer at the gathering';
++  if(a.progress>=a.duration)return 'the visit has already run its course';
++ }else if(o.attended.includes(p.id))return 'I already left this occasion';
++ return null;
++}
+=================== 4e98484 Require physical grain payment when saving wild seeds at rules113
+commit 4e9848415f8214f3e1a43f40590e5582195aa098
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 22:19:30 2026 +1000
+
+    Require physical grain payment when saving wild seeds at rules113
+
+--- a/src/sim/act_resource.ts
++++ b/src/sim/act_resource.ts
+@@ -1,4 +1,5 @@
+ import {pileAccessBlocker} from './pile_access';
++import {saveSeedFromGrain} from './wild_seed';
+ import { harvestPressure } from './ecology';
+ import { hasFloodAccess } from './flood';
+ import { drawWater, hasWaterBudget } from './hydrology';
+@@ -186,9 +187,7 @@ registerHandler('gather', {
+     let retained=got;
+     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
+       // shell some of the grain heads for seed
+-      consume(world, p.inv, 'grain', 1, 'saved as seed');
+-      produce(world, p.inv, carryCap(world, p), 'seeds', 1, 'seed saved from wild grain');
+-      retained--;
++      retained-=saveSeedFromGrain(world,p);
+     }
+     if(a.data.careSupply)a.data.careAcquired=(a.data.careAcquired??0)+retained;
+     observe(world, p, s);
+new file mode 100644
+--- /dev/null
++++ b/src/sim/wild_seed.ts
+@@ -0,0 +1,17 @@
++// Saving a seed is the existing grain-to-seed conversion, and must pay its grain input.
++import {consume,produce} from './economy';
++import {carryCap} from './people';
++import {runsRulesVersion} from './rulesversion';
++import type {Person,World} from './types';
++let enabled=true;
++export const wildSeedInputOn=()=>enabled;
++export function setWildSeedInput(on:boolean):void{enabled=on;}
++const requiresInput=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,113);
++/** Called after the unchanged seed-chance draw. Returns the harvest units no longer retained as food. */
++export function saveSeedFromGrain(w:World,p:Person):number{
++ const checked=requiresInput(w);
++ if(checked&&(p.inv.grain??0)<1)return 0;
++ const paid=consume(w,p.inv,'grain',1,'saved as seed');
++ if(!checked||paid===1)produce(w,p.inv,carryCap(w,p),'seeds',1,'seed saved from wild grain');
++ return checked?paid:1;
++}
+=================== c52d7d4 Allow hungry people to harvest known ripe household grain at rules 114
+commit c52d7d49adfb78efcef22e2d3293d50c93bbf238
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 22:44:01 2026 +1000
+
+    Allow hungry people to harvest known ripe household grain at rules 114
+
+new file mode 100644
+--- /dev/null
++++ b/src/sim/hungry_harvest.ts
+@@ -0,0 +1,28 @@
++// Ripe personally known household grain can answer hunger; growing it remains discretionary work.
++import {runsRulesVersion} from './rulesversion';
++import {WORK} from './constants';
++import {invRoom} from './economy';
++import {recentFailure} from './knowledge';
++import {newActivity} from './activities';
++import {Scorer,addOption,addBlocked,beliefsByKind,eta,pen,spotNear,dangerAt} from './optutil';
++import type {Ctx} from './optutil';
++import type {World} from './types';
++let enabled=true;
++export const hungryHarvestOn=()=>enabled;
++export function setHungryHarvest(on:boolean):void{enabled=on;}
++export const hasHungryHarvest=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,114);
++/** Pure offering. Physical ownership, ripeness, claims and capacity are checked by the unchanged harvest handler. */
++export function hungryHarvestOptions(ctx:Ctx):void{
++ const {world,p,hh}=ctx;
++ if(!hasHungryHarvest(world)||!hh||ctx.stage==='child'||ctx.drives.hunger<=30)return;
++ for(const b of beliefsByKind(p,['plot'])){
++  if(b.hh!==hh.id||b.state!=='ripe'||b.amount<1)continue;
++  const fail=recentFailure(world,p,b.id,220);
++  if(fail){addBlocked(ctx,'harvest','Harvest food from the ripe crop',b.id,`tried recently: ${fail.reason}`,'food');continue;}
++  if(invRoom(world,p,'grain')<1){addBlocked(ctx,'harvest','Harvest food from the ripe crop',b.id,'no room to carry a grain from the crop','food');continue;}
++  const walk=eta(ctx,b.x,b.y),work=Math.round(WORK.harvest/p.skills.farm),sc=new Scorer().add('hungry',ctx.drives.hunger).add('known ripe household grain',4).add('walking',-pen(walk));
++  const danger=dangerAt(ctx,b.x,b.y);if(danger>0)sc.add('known danger near the crop',-26*danger);
++  addOption(ctx,{kind:'harvest',label:'Harvest food from the ripe crop',goal:'to harvest grain to ease hunger',need:'hunger',util:sc.total,parts:sc.parts,eta:walk+work+10,key:`harvest:${b.id}`,targetId:b.id,tag:'food',
++   make:()=>{const spot=spotNear(world,p,b);if(!spot)return null;return newActivity(world,p,{kind:'harvest',label:'Harvesting grain to eat',goal:'to harvest grain to ease hunger',need:'hunger',targetId:b.id,targetType:'plot',tx:b.x,ty:b.y,spotX:spot.x,spotY:spot.y,utility:sc.total,minCommit:60,maxTicks:700});}});
++ }
++}
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -1,3 +1,4 @@
++import {hungryHarvestOptions} from './hungry_harvest';
+ import { hasEcology } from './ecology';
+ import {mayTakeKnownPile} from './pile_access';
+ import {hasOffcuts} from './offcuts';
+@@ -1057,6 +1058,7 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
+ 
+ // ───────────────────────── farming ─────────────────────────
+ function optFarm(ctx: Ctx): void {
++  hungryHarvestOptions(ctx);
+   const { world, p, hh } = ctx;
+   if (!hh || ctx.stage === 'child') return;
+   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 40) return;
+=================== fef1304 Retain current project hand-tool inputs without duplicate tool claims at rules 115
+commit fef13048629887a25ebfaad88de0fdd76176a113
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Sat Oct 31 22:55:12 2026 +1000
+
+    Retain current project hand-tool inputs without duplicate tool claims at rules 115
+
+--- a/src/sim/batch_plan.ts
++++ b/src/sim/batch_plan.ts
+@@ -1,3 +1,4 @@
++import {currentHandInputs} from './project_hand_inputs';
+ // A BATCH PLAN: seeing a wanted workshop product through (rules version 50, rich worlds only).
+ //
+ // What the 45-day chain audits of ordinary rules-48 worlds showed (chain_evidence/audit-45-*): every seed wanted planks, bricks
+@@ -283,6 +284,6 @@ function reviewBatchProject(ctx:Ctx,i:Intention):void{
+  recordProjectStep(ctx,i);
+ }
+ 
+-setBatchHooks({ want: batchWanted, step: batchStep, outcome: batchOutcome, review: reviewBatchProject,
++setBatchHooks({ prepare:(ctx,i)=>{if(i.project&&currentHandInputs(ctx.world,i.project,nextProjectStep(ctx,i.project,i)))recordProjectStep(ctx,i);}, want: batchWanted, step: batchStep, outcome: batchOutcome, review: reviewBatchProject,
+  canAcquire: (ctx,i,item) => i.project && hasProjectPlans(ctx.world)
+   ? compileProject(ctx,{item,quantity:1,tier:0}).ok : hasKnownResource(ctx.world,ctx.p,item) });
+--- a/src/sim/intent.ts
++++ b/src/sim/intent.ts
+@@ -1,3 +1,4 @@
++import {alreadyPreparingHandTool} from './project_hand_inputs';
+ import {hasPromiseExpectations,expectedOutstanding,personalRequests} from './promise_expectations';
+ import {hasWorkHandover,handedOver} from './handover_state';
+ import type {ProjectGraph} from './project_graph';
+@@ -296,6 +297,7 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
+ // Rules 50 (batch_plan.ts): a batch plan's want, step and outcome live beside the planner that offers its options; they are
+ // installed from there, so that this module does not import the planner (which imports this one).
+ export interface BatchHooks {
++  prepare?: (ctx: Ctx, i: Intention) => void;
+   review?: (ctx: Ctx, i: Intention) => void;
+   canAcquire?: (ctx: Ctx, i: Intention, item: ItemKind) => boolean;
+   want: (ctx: Ctx) => { item: string; recipe: string; facilityId: number; qty: number; forSite: number; why: string; wants: Partial<Items>; project?: ProjectGraph } | null;
+@@ -626,7 +628,7 @@ export function preparingReserve(p: Person): boolean {
+ /** Would a tool be worth making, and is the only thing in the way the materials? */
+ function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null {
+   const t = wantedTool ? wantedTool(ctx) : null;
+-  if (!t) return null;
++  if (!t || alreadyPreparingHandTool(ctx.world,ctx.p,t)) return null;
+   const r = TOOL_RECIPE[t];
+   // a plan that does not exist yet may count only what no live plan of theirs has already spoken for
+   const spare: Partial<Items> = { wood: freeOf(ctx.p, 'wood'), stone: freeOf(ctx.p, 'stone') };
+@@ -1026,6 +1028,7 @@ function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown:
+   made.stepKey = st.key;
+   made.blocked = st.blocked;
+   p.intentions.push(made);
++  if(made.kind==='batch')batchHooks?.prepare?.(ctx,made);
+   return made;
+ }
+ 
+@@ -1098,6 +1101,7 @@ function makeBatchIntention(ctx: Ctx, batch: BatchWantLike): Intention {
+   made.stepKey = st.key;
+   made.blocked = st.blocked;
+   p.intentions.push(made);
++  if(made.kind==='batch')batchHooks?.prepare?.(ctx,made);
+   addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
+   return made;
+ }
+new file mode 100644
+--- /dev/null
++++ b/src/sim/project_hand_inputs.ts
+@@ -0,0 +1,30 @@
++// Personal inputs for only the hand-tool prerequisite currently being prepared, not the whole graph.
++import {TOOL_DEFS,TOOL_RECIPE} from './constants';
++import {runsRulesVersion} from './rulesversion';
++import type {ProjectGraph} from './project_graph';
++import type {ProjectStep} from './project_step';
++import type {Items,Person,ToolKind,World} from './types';
++let enabled=true;
++export const projectHandInputsOn=()=>enabled;
++export function setProjectHandInputs(on:boolean):void{enabled=on;}
++export const hasProjectHandInputs=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,115);
++/** Pure desired input claim. Existing inventory/commitment owners decide which actual goods are available. */
++export function currentHandInputs(w:World,g:ProjectGraph,s:ProjectStep):Items|null{
++ if(!hasProjectHandInputs(w)||!['acquire','craft'].includes(s.phase))return null;
++ // A hand recipe has only raw carried input children. A sibling/future hand tool is not the current task.
++ const hand=s.node.method==='hand'?s.node:g.nodes.find(n=>n.method==='hand'&&n.dependencies.includes(s.node.id));
++ if(!hand||hand.destination!==0||!TOOL_DEFS[hand.item as ToolKind]?.hand)return null;
++ const r=TOOL_RECIPE[hand.item as ToolKind],inputs:Items={};
++ if(r.wood>0)inputs.wood=r.wood;if(r.stone>0)inputs.stone=r.stone;return inputs;
++}
++
++/** A separate tool intention must not reserve the very same prerequisite a live batch is already preparing. */
++export function alreadyPreparingHandTool(w:World,p:Person,tool:ToolKind):boolean{
++ if(!hasProjectHandInputs(w))return false;
++ return p.intentions.some(i=>{
++  if(i.status!=='active'||i.kind!=='batch'||!i.project||i.project.failure)return false;
++  const g=i.project,n=g.nodes.find(n=>n.id===g.current);if(!n)return false;
++  const hand=n.method==='hand'?n:g.nodes.find(parent=>parent.method==='hand'&&parent.dependencies.includes(n.id));
++  return hand?.item===tool;
++ });
++}
+--- a/src/sim/project_step.ts
++++ b/src/sim/project_step.ts
+@@ -1,3 +1,4 @@
++import {currentHandInputs} from './project_hand_inputs';
+ // Pure interpretation of a saved prerequisite graph. It describes a next ordinary action; it never executes one.
+ import {runsRulesVersion} from './rulesversion';
+ import {reservedFor} from './social';
+@@ -74,7 +75,7 @@ export function recordProjectStep(ctx:Ctx,i:Intention):void{
+   if(g.history.length>PROJECT_LIMITS.history)g.history.splice(0,g.history.length-PROJECT_LIMITS.history);
+  }
+  g.current=step.node.id;g.completed=step.completed;
+- // Claims cover the current physical trip, never distant stock or the whole prerequisite tree.
+- i.wants=step.node.item==='cart'||step.phase==='blocked'||step.phase==='wait'||step.phase==='done'?{}:
+-  step.phase==='acquire'||step.phase==='deposit'?{[step.node.item]:step.quantity}:{};
++ // Claims cover the current trip or immediate hand-tool inputs, never distant stock or the whole tree.
++ i.wants=currentHandInputs(ctx.world,g,step)??(step.node.item==='cart'||step.phase==='blocked'||step.phase==='wait'||step.phase==='done'?{}:
++  step.phase==='acquire'||step.phase==='deposit'?{[step.node.item]:step.quantity}:{});
+ }

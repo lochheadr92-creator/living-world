@@ -1,0 +1,85 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 47,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 120.634,
+  "alive": 29,
+  "deaths": 4,
+  "deathCauses": {
+    "exposure": 1,
+    "hunger": 1,
+    "wolf attack": 2
+  },
+  "exposureDeathsWithoutHome": 1,
+  "exposureDeathsHomeBelow40": 0,
+  "starts": {
+    "plan_site:lean_to": 10,
+    "haul": 210,
+    "build": 152,
+    "plan_site:hut": 23,
+    "plan_site:storehouse": 1,
+    "repair": 143,
+    "plan_site:hall": 2,
+    "plan_site:timber_yard": 7,
+    "plan_site:quarry": 5,
+    "plan_site:granary": 1,
+    "plan_site:kiln": 4,
+    "plan_site:house": 2,
+    "plan_site:smithy": 3,
+    "plan_site:bakery": 1
+  },
+  "winterNudged": {
+    "repair": 54,
+    "plan_site:hut": 10,
+    "build": 14,
+    "haul": 19,
+    "plan_site:lean_to": 1
+  },
+  "events": {
+    "home laid out": 18,
+    "home finished": 15,
+    "repair": 6,
+    "site abandoned": 2
+  },
+  "totals": {
+    "samples": 8839,
+    "homePlanOffers": 86,
+    "homePlanBlocked": 1923,
+    "homePlanBlockedCap": 309,
+    "homePlanBlockedWorkshop": 0,
+    "repairOffers": 2998,
+    "winterNudgeOffers": 386
+  },
+  "homesAtEnd": [
+    "lean_to:4",
+    "lean_to:78",
+    "lean_to:69",
+    "lean_to:70",
+    "lean_to:89",
+    "lean_to:14",
+    "lean_to:31",
+    "lean_to:15",
+    "hut:62",
+    "hut:35",
+    "hut:8",
+    "hut:74",
+    "hut:2",
+    "hut:66",
+    "hut:26",
+    "lean_to:63",
+    "hut:25",
+    "hut:81",
+    "hut:38"
+  ],
+  "homelessAtEnd": 1,
+  "spoiledInStores": 333,
+  "hash": "8511d3cb",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

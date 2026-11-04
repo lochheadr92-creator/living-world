@@ -1,0 +1,3 @@
+Browser tab: 1, Title: "Staged project helper verification", URL: "http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json".
+There has been no change in the accessibility tree.
+The focused UI element is 1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json

@@ -1,0 +1,161 @@
+Browser tab: 2, Title: "Staged experience connection verification", URL: "http://127.0.0.1:5275/scripts/browser/experience_connections_manual.html?start=/inhabitant_evidence/connections-learner-manual-replay/browser-final.json&actor=Ben".
+1 AXWebArea Staged experience connection verification, URL: 127.0.0.1:5275/scripts/browser/experience_connections_manual.html?start=/inhabitant_evidence/connections-learner-manual-replay/browser-final.json&actor=Ben
+	2 container app
+		3 image Description: The simulated world, ID: world
+		4 container ui
+			5 container
+				6 heading Living World, Value: 1
+					7 text Living World
+				8 pop up button (collapsed) Description: World menu. Current seed: learner-instruction, Secondary Actions: Expand
+				9 button Copy seed
+				10 button Help and controls
+				11 checkbox Description: Fold the top bar, Value: 0
+				12 container World summary
+					272 text 23:21
+					238 text Day 1 · night
+					15 text Clear
+					271 text 6 °C
+					17 container
+						18 text 2  people
+					19 text all grown
+					20 text 1 household
+					21 text 0 homes
+				22 toolbar Time controls
+					23 button Play
+					24 button Step forward one tick
+					25 container Simulation speed
+						26 checkbox Description: Speed 0.5×, Value: 0
+						27 checkbox Description: Speed 1×, Value: 0
+						28 checkbox Description: Speed 2×, Value: 0
+						29 checkbox Description: Speed 4×, Value: 0
+						30 checkbox Description: Speed 8×, Value: 0
+						31 checkbox Description: Speed 16×, Value: 1
+				273 text PAUSED
+			33 container
+				34 text TEST SCENE STAGED, NOT SPONTANEOUS STAGED: learner requests instruction for charcoal work
+				35 button Back to the natural world
+			36 container
+				37 container AI inhabitant
+					38 text AI inhabitant
+					39 text Ben · by hand thinking…
+					274 text day 1 23:21
+					275 text 22:44 · Potter about the camp → applied
+					276 text success: done
+					277 text chosen by hand
+					41 text Your turn
+					278 text 23:20
+					279 text Ben is thirsty. Last: Pottering about — success.
+					280 text Plans: be fed, watered and under shelter before dark; next: drink before the night
+					281 text Action estimates and memory ages use the world clock.
+					282 button Sleep right here About 3 world min, Help: Sleep right here · about 3 world min
+						283 text Sleep right here
+						284 text About 3 world min
+					285 button Potter about the camp About 24 world min, Help: Potter about the camp · about 24 world min
+						286 text Potter about the camp
+						287 text About 24 world min
+					288 button Let the engine choose
+					289 button (collapsed) Answer from a chat, Secondary Actions: Expand
+						290 text Answer from a chat
+					263 text decisions 13, engine 0, refused 0
+					55 button Save transcript
+					56 button Stop
+				57 container Happenings feed
+					58 button (expanded) Description: Happenings, Secondary Actions: Collapse
+					59 container lw-feed-body
+						60 container Filter happenings by kind
+							61 checkbox All, Value: 1
+							62 checkbox Life, Value: 0
+							63 checkbox Social, Value: 0
+							64 checkbox Build & farm, Value: 0
+							65 checkbox Workshops, Value: 0
+							66 checkbox Danger & conflict, Value: 0
+							67 checkbox Nature, Value: 0
+							68 checkbox Chronicle, Value: 0
+						69 container Recent happenings
+							264 button Ben finished charcoal at the kiln. (58s ago). Show where.
+								265 text Ben finished charcoal at the kiln.
+								291 text 1 min ago
+							267 button Ben learned charcoal firing from Ada. (2.3 min ago). Show where.
+								268 text Ben learned charcoal firing from Ada.
+								269 text 2.3 min ago
+			73 container
+				74 button (expanded) Description: Hide the inspector, Secondary Actions: Collapse
+				75 container Inspector
+					76 container
+						77 heading Ben, Value: 2
+							78 text Ben
+						79 checkbox Description: Follow this person with the camera, Value: 1
+						80 button Show on the map
+						81 button Close inspector
+						82 text Youth, 12
+						83 text Sparrow household Home: no home yet — too thirsty to start a building Township: Willowbank
+					84 container
+						85 text MOOD Content HEALTH 100 ON THEIR MIND
+						86 container What are they up to?
+							87 heading What are they up to?, Value: 3, ID: lw-upto-h
+								88 text What are they up to?
+							89 button (collapsed) More, Secondary Actions: Expand
+							90 definition list lw-upto-qa
+								292 text Between tasks (last chose “Potter about the camp”).
+								293 container WHAT IS STOPPING THEM?
+									294 text WHAT IS STOPPING THEM?
+								295 text Lay out a lean-to: too thirsty to start a building.
+								209 container WHAT ARE THEY SET ON?
+									210 text WHAT ARE THEY SET ON?
+								255 text Be fed, watered and under shelter before dark. Step: drink before the night — settled on, not started.
+						95 button (expanded) Township & shared work, Secondary Actions: Collapse
+							96 text Township & shared work
+						229 text Willowbank: 1 households. Membership belongs to the household and does not change with walking.
+						230 text Recent recorded production and resource flows:
+						231 text workshop: 3 charcoal; 1 recorded days. Last source #5 at tick 991.
+						232 text Too little repeated activity recorded to describe a specialisation.
+						233 text No transfers between township affiliations recorded.
+						234 text No repeated-support faction currently established.
+						235 text No shared project proposed yet.
+						104 button (collapsed) Household history, Secondary Actions: Expand
+							105 text Household history
+						106 button (collapsed) Relationship history, Secondary Actions: Expand
+							107 text Relationship history
+						108 text NEEDS
+						109 container Needs
+							110 level indicator Description: Food, Value: 50
+							111 level indicator Description: Water, Value: 33
+							112 level indicator Description: Energy, Value: 33
+							113 level indicator Description: Warmth, Value: 54
+							114 level indicator Description: Safety, Value: 66
+							115 level indicator Description: Company, Value: 56
+						116 text CARRYING nothing 0 / 9 TOOLS none
+						117 button (expanded) Conversation, Secondary Actions: Collapse
+						118 container Last conversation
+							119 text LAST CONVERSATION 2.3 min ago
+							120 button Look at Ada
+							121 text · asking to learn charcoal firing
+							122 definition list
+								123 container Outcome
+									124 text Outcome
+								125 text Learned (learned charcoal firing after 180 ticks together)
+						126 container More about them
+							127 button (collapsed) Nearby, Secondary Actions: Expand
+							128 button (collapsed) People 1, Secondary Actions: Expand
+								129 text People
+								130 text 1
+							131 button (collapsed) Requests, Secondary Actions: Expand
+							132 button (collapsed) Recent 7, Secondary Actions: Expand
+								133 text Recent
+								236 text 7
+							135 button (collapsed) Knows 2, Secondary Actions: Expand
+								136 text Knows
+								137 text 2
+							138 button (collapsed) Family, Secondary Actions: Expand
+							139 button (collapsed) Traits, Secondary Actions: Expand
+				140 button (expanded) Description: Map, Secondary Actions: Collapse
+				141 image Map of the whole world. Click or drag to move the camera.
+			142 container Map overlays
+				143 checkbox Description: Perception overlay, Value: 0
+				144 checkbox Description: Paths overlay, Value: 0
+				145 checkbox Description: Intentions overlay, Value: 0
+				146 checkbox Description: Knowledge overlay, Value: 0
+				147 checkbox Description: Labels overlay, Value: 0
+	148 button Save verification bundle
+
+The focused UI element is 1 AXWebArea Staged experience connection verification, URL: 127.0.0.1:5275/scripts/browser/experience_connections_manual.html?start=/inhabitant_evidence/connections-learner-manual-replay/browser-final.json&actor=Ben

@@ -1,0 +1,6 @@
+harsh:river: tick 24000, alive 2/2, deaths 26, graves 26, estates 17, leftovers 0, buildings 12, sites 2, piles 18, meals 0, requests 162, civic 1, flood yes, hardship -, relocations 0, carts 0, journeys 0, socialMemory 20
+harsh:forest: tick 24000, alive 3/3, deaths 25, graves 25, estates 24, leftovers 0, buildings 13, sites 3, piles 24, meals 0, requests 146, civic 0, flood no, hardship -, relocations 0, carts 0, journeys 0, socialMemory 33
+winter:meadow: tick 38400, alive 27/27, deaths 1, graves 1, estates 1, leftovers 0, buildings 23, sites 3, piles 2, meals 0, requests 223, civic 0, flood no, hardship -, relocations 0, carts 0, journeys 0, socialMemory 410
+harsh:river: tick 24000, alive 2/2, deaths 26, graves 26, estates 17, leftovers 0, buildings 12, sites 2, piles 18, meals 0, requests 162, civic 1, flood yes, hardship -, relocations 0, carts 0, journeys 0, socialMemory 20
+harsh:forest: tick 24000, alive 3/3, deaths 25, graves 25, estates 24, leftovers 0, buildings 13, sites 3, piles 24, meals 0, requests 146, civic 0, flood no, hardship -, relocations 0, carts 0, journeys 0, socialMemory 33
+winter:meadow: tick 38400, alive 27/27, deaths 1, graves 1, estates 1, leftovers 0, buildings 23, sites 3, piles 2, meals 0, requests 223, civic 0, flood no, hardship -, relocations 0, carts 0, journeys 0, socialMemory 410

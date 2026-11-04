@@ -1,0 +1,450 @@
+{
+  "seed": "river",
+  "rules": 39,
+  "ticks": 14400,
+  "stop": "day 6",
+  "head": "c35db6b9824a1608e7c60108c113cbb01d08cc3d",
+  "hash": "a1c11972",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "attempts": [
+    {
+      "start": 815,
+      "person": 1120,
+      "name": "Abel",
+      "helper": 1132,
+      "activity": 1728,
+      "key": "socialize:1132:request:plan:stone",
+      "targetActivity": "eat_store",
+      "lastResult": {
+        "tick": 814,
+        "label": "Building the lean-to",
+        "outcome": "success",
+        "detail": "done"
+      },
+      "end": 847,
+      "request": null,
+      "timeline": [
+        {
+          "tick": 816,
+          "activity": "socialize",
+          "conversation": null,
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 847,
+          "activity": "converse",
+          "conversation": {
+            "a": 1119,
+            "b": 1120,
+            "purpose": "chat",
+            "phase": 1
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 856,
+          "activity": "converse",
+          "conversation": {
+            "a": 1119,
+            "b": 1120,
+            "purpose": "chat",
+            "phase": 2
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 878,
+          "activity": "converse",
+          "conversation": {
+            "a": 1119,
+            "b": 1120,
+            "purpose": "chat",
+            "phase": 3
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 900,
+          "activity": "converse",
+          "conversation": {
+            "a": 1119,
+            "b": 1120,
+            "purpose": "chat",
+            "phase": 4
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 916,
+          "activity": "socialize",
+          "conversation": null,
+          "result": null,
+          "interaction": {
+            "tick": 915,
+            "partner": 1119,
+            "purpose": "chat",
+            "role": "answered",
+            "outcome": "friendly",
+            "detail": ""
+          }
+        },
+        {
+          "tick": 917,
+          "activity": "gather",
+          "conversation": null,
+          "result": {
+            "tick": 916,
+            "label": "Ask Petra for stone",
+            "outcome": "interrupted",
+            "detail": "something better came up"
+          },
+          "interaction": {
+            "tick": 915,
+            "partner": 1119,
+            "purpose": "chat",
+            "role": "answered",
+            "outcome": "friendly",
+            "detail": ""
+          }
+        },
+        {
+          "tick": 1023,
+          "activity": null,
+          "conversation": null,
+          "result": {
+            "tick": 1022,
+            "label": "Chopping wood",
+            "outcome": "failed",
+            "detail": "it is gone"
+          },
+          "interaction": {
+            "tick": 915,
+            "partner": 1119,
+            "purpose": "chat",
+            "role": "answered",
+            "outcome": "friendly",
+            "detail": ""
+          }
+        },
+        {
+          "tick": 1024,
+          "activity": "gather",
+          "conversation": null,
+          "result": {
+            "tick": 1022,
+            "label": "Chopping wood",
+            "outcome": "failed",
+            "detail": "it is gone"
+          },
+          "interaction": {
+            "tick": 915,
+            "partner": 1119,
+            "purpose": "chat",
+            "role": "answered",
+            "outcome": "friendly",
+            "detail": ""
+          }
+        },
+        {
+          "tick": 1136,
+          "activity": "sleep",
+          "conversation": null,
+          "result": {
+            "tick": 1135,
+            "label": "Chopping wood",
+            "outcome": "interrupted",
+            "detail": "something better came up"
+          },
+          "interaction": {
+            "tick": 915,
+            "partner": 1119,
+            "purpose": "chat",
+            "role": "answered",
+            "outcome": "friendly",
+            "detail": ""
+          }
+        }
+      ],
+      "nextActivity": "converse"
+    },
+    {
+      "start": 1952,
+      "person": 1106,
+      "name": "Mira",
+      "helper": 1107,
+      "activity": 2019,
+      "key": "socialize:1107:request:plan:wood",
+      "targetActivity": "rest",
+      "lastResult": {
+        "tick": 1951,
+        "label": "Drinking at the water",
+        "outcome": "success",
+        "detail": "done"
+      },
+      "end": 2042,
+      "request": {
+        "id": 2030,
+        "kind": "wood",
+        "from": 1106,
+        "to": 1107,
+        "item": "wood",
+        "amount": 2,
+        "offer": null,
+        "offerAmount": 0,
+        "siteId": 0,
+        "infoKind": "",
+        "planId": 1167,
+        "likely": true,
+        "created": 1981,
+        "expires": 2681,
+        "status": "declined",
+        "note": "making",
+        "resolved": 2003,
+        "purpose": "make a hoe",
+        "destKind": "person",
+        "destId": 1106,
+        "deadline": 0,
+        "milestone": "",
+        "toolKind": null,
+        "outcome": "refused"
+      },
+      "timeline": [
+        {
+          "tick": 1953,
+          "activity": "socialize",
+          "conversation": null,
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 1973,
+          "activity": "converse",
+          "conversation": {
+            "a": 1106,
+            "b": 1107,
+            "purpose": "request",
+            "phase": 1
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 1982,
+          "activity": "converse",
+          "conversation": {
+            "a": 1106,
+            "b": 1107,
+            "purpose": "request",
+            "phase": 2
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 2004,
+          "activity": "converse",
+          "conversation": {
+            "a": 1106,
+            "b": 1107,
+            "purpose": "request",
+            "phase": 3
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 2026,
+          "activity": "converse",
+          "conversation": {
+            "a": 1106,
+            "b": 1107,
+            "purpose": "request",
+            "phase": 4
+          },
+          "result": null,
+          "interaction": null
+        },
+        {
+          "tick": 2042,
+          "activity": null,
+          "conversation": null,
+          "result": null,
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2043,
+          "activity": "sleep",
+          "conversation": null,
+          "result": null,
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2117,
+          "activity": null,
+          "conversation": null,
+          "result": {
+            "tick": 2116,
+            "label": "Sleeping by my lean-to",
+            "outcome": "success",
+            "detail": "rested"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2118,
+          "activity": "rest",
+          "conversation": null,
+          "result": {
+            "tick": 2116,
+            "label": "Sleeping by my lean-to",
+            "outcome": "success",
+            "detail": "rested"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2276,
+          "activity": "give",
+          "conversation": null,
+          "result": {
+            "tick": 2275,
+            "label": "Staying at my lean-to",
+            "outcome": "interrupted",
+            "detail": "something better came up"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2307,
+          "activity": null,
+          "conversation": null,
+          "result": {
+            "tick": 2306,
+            "label": "Bringing berries to Theo",
+            "outcome": "success",
+            "detail": "done"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2308,
+          "activity": "gather",
+          "conversation": null,
+          "result": {
+            "tick": 2306,
+            "label": "Bringing berries to Theo",
+            "outcome": "success",
+            "detail": "done"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        },
+        {
+          "tick": 2407,
+          "activity": "gather",
+          "conversation": null,
+          "result": {
+            "tick": 2406,
+            "label": "Gathering wild grain",
+            "outcome": "interrupted",
+            "detail": "something better came up"
+          },
+          "interaction": {
+            "tick": 2041,
+            "partner": 1107,
+            "purpose": "request",
+            "role": "asked",
+            "outcome": "refused",
+            "detail": "making"
+          }
+        }
+      ],
+      "nextActivity": null
+    }
+  ],
+  "requests": [
+    {
+      "id": 2030,
+      "kind": "wood",
+      "from": 1106,
+      "to": 1107,
+      "item": "wood",
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "planId": 1167,
+      "likely": true,
+      "created": 1981,
+      "expires": 2681,
+      "status": "declined",
+      "note": "making",
+      "resolved": 2003,
+      "purpose": "make a hoe",
+      "destKind": "person",
+      "destId": 1106,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    }
+  ],
+  "seconds": 8.06
+}

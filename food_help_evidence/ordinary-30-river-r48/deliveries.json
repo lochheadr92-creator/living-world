@@ -1,0 +1,1178 @@
+[
+  {
+    "tick": 23,
+    "from": "person:1119",
+    "to": "person:1121",
+    "item": "grain",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 470,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 653,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 654,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 840,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 2220,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 2287,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 2396,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 2529,
+    "from": "person:1144",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 3217,
+    "from": "person:1119",
+    "to": "person:1134",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 4308,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 4661,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 5785,
+    "from": "person:1137",
+    "to": "person:1109",
+    "item": "stone",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 6601,
+    "from": "person:1145",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 6980,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 6984,
+    "from": "person:1119",
+    "to": "person:1121",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 7380,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 7524,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 7990,
+    "from": "person:1134",
+    "to": "person:1150",
+    "item": "berries",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 7998,
+    "from": "person:1144",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 8034,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 8064,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 8152,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 8259,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "fruit",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 8351,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 8373,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 9050,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 9501,
+    "from": "person:1145",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 9517,
+    "from": "person:1113",
+    "to": "person:1109",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 9775,
+    "from": "person:1145",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 9845,
+    "from": "person:1113",
+    "to": "person:1128",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 9870,
+    "from": "person:1121",
+    "to": "person:1119",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 10340,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 11465,
+    "from": "person:1146",
+    "to": "person:1147",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 12002,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 12272,
+    "from": "person:1149",
+    "to": "person:1150",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 12757,
+    "from": "person:1120",
+    "to": "person:1128",
+    "item": "grain",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 13290,
+    "from": "person:1146",
+    "to": "person:1108",
+    "item": "fruit",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 14307,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "fish",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 14434,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 14599,
+    "from": "person:1138",
+    "to": "person:1128",
+    "item": "fish",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 14616,
+    "from": "person:1135",
+    "to": "person:1142",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 14833,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 14999,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "fish",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 15453,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 15676,
+    "from": "person:1107",
+    "to": "person:1128",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 15715,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 16442,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 16823,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 17223,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "grain",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 17253,
+    "from": "person:1116",
+    "to": "person:1140",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 18962,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 20067,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 20243,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 20259,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 21394,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 21428,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 23887,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 23937,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 25749,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 26375,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 26650,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 26693,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 26976,
+    "from": "person:1119",
+    "to": "person:1138",
+    "item": "stone",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 28736,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 28998,
+    "from": "person:1119",
+    "to": "person:1120",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 29343,
+    "from": "person:1119",
+    "to": "person:1120",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 29485,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 32617,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 33891,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "grain",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 35887,
+    "from": "person:1121",
+    "to": "person:1122",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 36241,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 37724,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 38383,
+    "from": "person:1121",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 38558,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 40797,
+    "from": "person:1121",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 47897,
+    "from": "person:1144",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 47939,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 50690,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 50841,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 50916,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 51216,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 51336,
+    "from": "person:1107",
+    "to": "person:1109",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 51486,
+    "from": "person:1125",
+    "to": "person:1107",
+    "item": "fish",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 51707,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 52769,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 52829,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 52980,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 53032,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 53048,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 53250,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 55146,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 55324,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 55431,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 55499,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 55548,
+    "from": "person:1113",
+    "to": "person:1146",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 56143,
+    "from": "person:1135",
+    "to": "person:1149",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 57506,
+    "from": "person:1144",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 57897,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 58010,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 58181,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 58218,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 58493,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 58867,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 59982,
+    "from": "person:1150",
+    "to": "person:1149",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 60201,
+    "from": "person:1137",
+    "to": "person:1139",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 60226,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 60783,
+    "from": "person:1135",
+    "to": "person:1122",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 60924,
+    "from": "person:1137",
+    "to": "person:1139",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 61220,
+    "from": "person:1144",
+    "to": "person:1142",
+    "item": "fish",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 62207,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 62357,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 62627,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 62776,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 62919,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 63137,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 63198,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "grain",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 63315,
+    "from": "person:1144",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 63350,
+    "from": "person:1107",
+    "to": "person:1108",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 63396,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 63427,
+    "from": "person:1137",
+    "to": "person:1140",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 64845,
+    "from": "person:1144",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 65116,
+    "from": "person:1132",
+    "to": "person:1131",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 65196,
+    "from": "person:1132",
+    "to": "person:24129",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 65357,
+    "from": "person:1138",
+    "to": "person:1139",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 65446,
+    "from": "person:1132",
+    "to": "person:24129",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 65894,
+    "from": "person:1107",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 67451,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 67759,
+    "from": "person:1106",
+    "to": "person:1109",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 68448,
+    "from": "person:1145",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 68557,
+    "from": "person:1116",
+    "to": "person:1108",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 68782,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 3,
+    "reason": "given"
+  },
+  {
+    "tick": 69627,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 69818,
+    "from": "person:1137",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 69839,
+    "from": "person:1106",
+    "to": "person:1108",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 69921,
+    "from": "person:1137",
+    "to": "person:24514",
+    "item": "berries",
+    "n": 3,
+    "reason": "given"
+  },
+  {
+    "tick": 69960,
+    "from": "person:1106",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70057,
+    "from": "person:1150",
+    "to": "person:8896",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 70225,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70278,
+    "from": "person:1150",
+    "to": "person:1149",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70327,
+    "from": "person:1138",
+    "to": "person:1140",
+    "item": "fish",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70379,
+    "from": "person:1120",
+    "to": "person:1122",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70527,
+    "from": "person:1150",
+    "to": "person:1149",
+    "item": "fruit",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 70538,
+    "from": "person:1116",
+    "to": "person:24514",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 70874,
+    "from": "person:1145",
+    "to": "person:1147",
+    "item": "berries",
+    "n": 2,
+    "reason": "given"
+  },
+  {
+    "tick": 71765,
+    "from": "person:1119",
+    "to": "person:1122",
+    "item": "berries",
+    "n": 1,
+    "reason": "given"
+  },
+  {
+    "tick": 71877,
+    "from": "person:1116",
+    "to": "person:1147",
+    "item": "grain",
+    "n": 2,
+    "reason": "gift on request"
+  }
+]

@@ -1,0 +1,342 @@
+{
+ "seed": "forest",
+ "failures": 14,
+ "successes": 2,
+ "failedWithUnwalkableSouth": 0,
+ "repeatsSamePersonSameTile": [
+  [
+   "Isla@46,40",
+   13
+  ]
+ ],
+ "rows": [
+  {
+   "tick": 126,
+   "who": "Petra",
+   "px": 45,
+   "py": 38,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 346,
+   "who": "Thea",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "the ground there is no longer free"
+  },
+  {
+   "tick": 368,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 452,
+   "who": "Mira",
+   "px": 44,
+   "py": 46,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 725,
+   "who": "Thea",
+   "px": 39,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 987,
+   "who": "Thea",
+   "px": 39,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 1104,
+   "who": "Thea",
+   "px": 38,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 2391,
+   "who": "Petra",
+   "px": 44,
+   "py": 38,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 2704,
+   "who": "Jax",
+   "px": 46,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 3069,
+   "who": "Thea",
+   "px": 39,
+   "py": 42,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 3204,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 3384,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 3484,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 5413,
+   "who": "Yusuf",
+   "px": 43,
+   "py": 33,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 5639,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 5792,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 5880,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 5937,
+   "who": "Lena",
+   "px": 39,
+   "py": 47,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 7531,
+   "who": "Hal",
+   "px": 49,
+   "py": 43,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 8336,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 9472,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 9798,
+   "who": "Delia",
+   "px": 38,
+   "py": 52,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 9827,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 9986,
+   "who": "Bram",
+   "px": 45,
+   "py": 48,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 9999,
+   "who": "Dov",
+   "px": 49,
+   "py": 55,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 10154,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10332,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10447,
+   "who": "Maren",
+   "px": 49,
+   "py": 54,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 10477,
+   "who": "Hal",
+   "px": 49,
+   "py": 42,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 10595,
+   "who": "Bram",
+   "px": 45,
+   "py": 48,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 10729,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 11903,
+   "who": "Isla",
+   "px": 46,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  }
+ ],
+ "T": {
+  "DEEP": 0,
+  "SHALLOW": 1,
+  "SAND": 2,
+  "GRASS": 3,
+  "FOREST": 4,
+  "STONY": 5
+ }
+}

@@ -1,0 +1,10 @@
+﻿{
+    "Run":  "households-forest",
+    "Complete":  true,
+    "ExitCode":  0,
+    "StopReason":  "horizon",
+    "DaysReached":  1,
+    "Alive":  28,
+    "Conserved":  true,
+    "Failure":  ""
+}

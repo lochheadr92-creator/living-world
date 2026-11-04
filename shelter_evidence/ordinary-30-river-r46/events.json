@@ -1,0 +1,110 @@
+[
+  {
+    "tick": 696,
+    "day": 0.29,
+    "kind": "home finished",
+    "text": "Zia finished a lean-to for the Linden household."
+  },
+  {
+    "tick": 2431,
+    "day": 1.01,
+    "kind": "home finished",
+    "text": "Milo finished a lean-to for the Thistle household."
+  },
+  {
+    "tick": 2575,
+    "day": 1.07,
+    "kind": "home finished",
+    "text": "Basil finished a lean-to for the Willow household."
+  },
+  {
+    "tick": 2998,
+    "day": 1.25,
+    "kind": "home finished",
+    "text": "Talia finished a lean-to for the Marsh household."
+  },
+  {
+    "tick": 4759,
+    "day": 1.98,
+    "kind": "home finished",
+    "text": "Milo finished a hut for the Finch household."
+  },
+  {
+    "tick": 5200,
+    "day": 2.17,
+    "kind": "home finished",
+    "text": "Jax finished a hut for the Thistle household."
+  },
+  {
+    "tick": 5536,
+    "day": 2.31,
+    "kind": "home finished",
+    "text": "Basil finished a hut for the Willow household."
+  },
+  {
+    "tick": 10292,
+    "day": 4.29,
+    "kind": "home finished",
+    "text": "Petra finished a hut for the Bramble household."
+  },
+  {
+    "tick": 12452,
+    "day": 5.19,
+    "kind": "site abandoned",
+    "text": "The lean-to site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 15314,
+    "day": 6.38,
+    "kind": "home finished",
+    "text": "Talia finished a hut for the Marsh household."
+  },
+  {
+    "tick": 21590,
+    "day": 9,
+    "kind": "repair",
+    "text": "Lena repaired a lean-to."
+  },
+  {
+    "tick": 24452,
+    "day": 10.19,
+    "kind": "site abandoned",
+    "text": "The lean-to site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 27656,
+    "day": 11.52,
+    "kind": "home finished",
+    "text": "Cole finished a hut for the Linden household."
+  },
+  {
+    "tick": 29880,
+    "day": 12.45,
+    "kind": "home finished",
+    "text": "Arlo finished a hut for the Clover household."
+  },
+  {
+    "tick": 32181,
+    "day": 13.41,
+    "kind": "repair",
+    "text": "Basil repaired a hut."
+  },
+  {
+    "tick": 38974,
+    "day": 16.24,
+    "kind": "home finished",
+    "text": "Ivo finished a hut for the Brook household."
+  },
+  {
+    "tick": 39445,
+    "day": 16.44,
+    "kind": "collapse",
+    "text": "A lean-to collapsed from neglect."
+  },
+  {
+    "tick": 41207,
+    "day": 17.17,
+    "kind": "collapse",
+    "text": "A lean-to collapsed from neglect."
+  }
+]

@@ -1,0 +1,1258 @@
+{
+ "seed": "river",
+ "settings": {
+  "seed": "river",
+  "population": 28,
+  "harsh": false,
+  "immigration": false,
+  "scene": "natural",
+  "dynamics": "rich",
+  "rulesVersion": 115
+ },
+ "samples": [
+  {
+   "census": {
+    "tick": 0,
+    "day": 0,
+    "alive": 28,
+    "deceased": 0,
+    "nextId": 1167,
+    "world": {
+     "buildings": 8,
+     "sites": 0,
+     "plots": 0,
+     "piles": 0,
+     "graves": 0,
+     "tools": 6,
+     "carts": 0,
+     "meals": 0,
+     "requests": 0,
+     "requestsLive": 0,
+     "conversations": 0,
+     "reservations": 0,
+     "events": 0,
+     "chronicle": 0,
+     "fx": 0,
+     "delayed": 0,
+     "occasions": 0,
+     "crews": 0,
+     "traditions": 0,
+     "stumps": 0,
+     "civicProjects": 0,
+     "exchangeReceipts": 0,
+     "econProduction": 0,
+     "econFlows": 0,
+     "ledgerReasons": 0,
+     "households": 12,
+     "hhRelocations": 0,
+     "hhUnfinished": 0,
+     "sources": 1108,
+     "animals": 3,
+     "waterBodies": 3
+    },
+    "perPersonSum": {
+     "beliefs": 3037,
+     "staleBeliefs": 0,
+     "waterBeliefs": 420,
+     "floodBeliefs": 0,
+     "whereabouts": 574,
+     "whereaboutsOfGonePersons": 0,
+     "relations": 756,
+     "relationsWithGonePersons": 0,
+     "asked": 0,
+     "askedGone": 0,
+     "told": 0,
+     "toldGone": 0,
+     "cooldowns": 0,
+     "cooldownsExpired": 0,
+     "optCooldowns": 0,
+     "failures": 0,
+     "failuresStaleTarget": 0,
+     "failuresOlderThanDay": 0,
+     "commitments": 0,
+     "commitmentsActive": 0,
+     "intentions": 0,
+     "intentionsActive": 0,
+     "heard": 0,
+     "socialMemory": 0,
+     "log": 0,
+     "decisions": 0,
+     "decisionsDropped": 0,
+     "concerns": 0,
+     "seen": 574,
+     "customers": 0,
+     "civicOutcomes": 0,
+     "heardDemand": 0,
+     "tradeLeads": 0,
+     "exchangeJourneys": 0,
+     "civicAlignment": 0,
+     "thoughts": 0,
+     "relHistory": 0,
+     "handovers": 0,
+     "meetings": 0,
+     "accounts": 0,
+     "workHeardTold": 0,
+     "payoffKeys": 0,
+     "techniques": 12,
+     "bykindIds": 3037
+    },
+    "perPersonMax": {
+     "beliefs": 111,
+     "whereabouts": 26,
+     "relations": 27,
+     "cooldowns": 0,
+     "failures": 0,
+     "commitments": 0,
+     "intentions": 0
+    },
+    "cooldownPrefix": {}
+   },
+   "sizes": {
+    "totalRaw": 931916,
+    "totalGz": 80388,
+    "packed": true,
+    "fields": [
+     {
+      "name": "sources",
+      "raw": 227985,
+      "gz": 11778
+     },
+     {
+      "name": "persons.beliefs",
+      "raw": 199150,
+      "gz": 17481
+     },
+     {
+      "name": "persons.seen",
+      "raw": 135127,
+      "gz": 2329
+     },
+     {
+      "name": "persons.relations",
+      "raw": 133909,
+      "gz": 20207
+     },
+     {
+      "name": "persons.whereabouts",
+      "raw": 66295,
+      "gz": 1379
+     },
+     {
+      "name": "occ",
+      "raw": 34157,
+      "gz": 3869
+     },
+     {
+      "name": "wear",
+      "raw": 34157,
+      "gz": 95
+     },
+     {
+      "name": "persons.bykind",
+      "raw": 17130,
+      "gz": 763
+     },
+     {
+      "name": "persons.explored",
+      "raw": 10657,
+      "gz": 1677
+     },
+     {
+      "name": "terrain",
+      "raw": 8556,
+      "gz": 1111
+     },
+     {
+      "name": "solid",
+      "raw": 8556,
+      "gz": 1027
+     },
+     {
+      "name": "waterDist",
+      "raw": 8556,
+      "gz": 838
+     },
+     {
+      "name": "persons.skills",
+      "raw": 8371,
+      "gz": 3152
+     },
+     {
+      "name": "persons.traits",
+      "raw": 4409,
+      "gz": 1412
+     },
+     {
+      "name": "persons.needs",
+      "raw": 4164,
+      "gz": 1455
+     },
+     {
+      "name": "persons.look",
+      "raw": 3266,
+      "gz": 818
+     },
+     {
+      "name": "waterBodies",
+      "raw": 2861,
+      "gz": 1122
+     },
+     {
+      "name": "persons.stats",
+      "raw": 2297,
+      "gz": 99
+     },
+     {
+      "name": "accessCell",
+      "raw": 2157,
+      "gz": 292
+     },
+     {
+      "name": "buildings",
+      "raw": 1861,
+      "gz": 442
+     },
+     {
+      "name": "households",
+      "raw": 1406,
+      "gz": 367
+     },
+     {
+      "name": "persons.background",
+      "raw": 1152,
+      "gz": 168
+     },
+     {
+      "name": "persons.lastPercept",
+      "raw": 1008,
+      "gz": 135
+     },
+     {
+      "name": "animals",
+      "raw": 964,
+      "gz": 296
+     },
+     {
+      "name": "persons.techniques",
+      "raw": 749,
+      "gz": 115
+     },
+     {
+      "name": "tools",
+      "raw": 728,
+      "gz": 179
+     }
+    ]
+   },
+   "msPerTickThisDay": null
+  },
+  {
+   "census": {
+    "tick": 2400,
+    "day": 1,
+    "alive": 28,
+    "deceased": 0,
+    "nextId": 2177,
+    "world": {
+     "buildings": 11,
+     "sites": 2,
+     "plots": 9,
+     "piles": 0,
+     "graves": 0,
+     "tools": 8,
+     "carts": 0,
+     "meals": 0,
+     "requests": 14,
+     "requestsLive": 0,
+     "conversations": 1,
+     "reservations": 8,
+     "events": 49,
+     "chronicle": 15,
+     "fx": 400,
+     "delayed": 0,
+     "occasions": 0,
+     "crews": 4,
+     "traditions": 0,
+     "stumps": 7,
+     "civicProjects": 0,
+     "exchangeReceipts": 0,
+     "econProduction": 1,
+     "econFlows": 0,
+     "ledgerReasons": 21,
+     "households": 12,
+     "hhRelocations": 0,
+     "hhUnfinished": 0,
+     "sources": 1105,
+     "animals": 6,
+     "waterBodies": 3
+    },
+    "perPersonSum": {
+     "beliefs": 5161,
+     "staleBeliefs": 120,
+     "waterBeliefs": 489,
+     "floodBeliefs": 0,
+     "whereabouts": 746,
+     "whereaboutsOfGonePersons": 0,
+     "relations": 756,
+     "relationsWithGonePersons": 0,
+     "asked": 14,
+     "askedGone": 0,
+     "told": 96,
+     "toldGone": 96,
+     "cooldowns": 677,
+     "cooldownsExpired": 365,
+     "optCooldowns": 55,
+     "failures": 20,
+     "failuresStaleTarget": 2,
+     "failuresOlderThanDay": 0,
+     "commitments": 4,
+     "commitmentsActive": 0,
+     "intentions": 31,
+     "intentionsActive": 20,
+     "heard": 65,
+     "socialMemory": 28,
+     "log": 1177,
+     "decisions": 224,
+     "decisionsDropped": 301,
+     "concerns": 43,
+     "seen": 383,
+     "customers": 5,
+     "civicOutcomes": 0,
+     "heardDemand": 9,
+     "tradeLeads": 0,
+     "exchangeJourneys": 0,
+     "civicAlignment": 0,
+     "thoughts": 13,
+     "relHistory": 479,
+     "handovers": 0,
+     "meetings": 0,
+     "accounts": 10,
+     "workHeardTold": 0,
+     "payoffKeys": 60,
+     "techniques": 12,
+     "bykindIds": 5161
+    },
+    "perPersonMax": {
+     "beliefs": 301,
+     "whereabouts": 27,
+     "relations": 27,
+     "cooldowns": 32,
+     "failures": 2,
+     "commitments": 2,
+     "intentions": 2
+    },
+    "cooldownPrefix": {
+     "greet": 526,
+     "trade": 20,
+     "stageCode": 28,
+     "opt": 55,
+     "talk": 17,
+     "pause": 5,
+     "argue": 4,
+     "fedUntil": 3,
+     "tend": 5,
+     "fleeCheck": 2,
+     "fedfire": 2,
+     "check": 1,
+     "askMaterials": 9
+    }
+   },
+   "sizes": {
+    "totalRaw": 2094277,
+    "totalGz": 347632,
+    "packed": false,
+    "fields": [
+     {
+      "name": "persons",
+      "raw": 1695721,
+      "gz": 311261
+     },
+     {
+      "name": "sources",
+      "raw": 227427,
+      "gz": 11900
+     },
+     {
+      "name": "occ",
+      "raw": 34157,
+      "gz": 3930
+     },
+     {
+      "name": "wear",
+      "raw": 34157,
+      "gz": 2852
+     },
+     {
+      "name": "fx",
+      "raw": 22980,
+      "gz": 2810
+     },
+     {
+      "name": "terrain",
+      "raw": 8556,
+      "gz": 1111
+     },
+     {
+      "name": "solid",
+      "raw": 8556,
+      "gz": 1030
+     },
+     {
+      "name": "waterDist",
+      "raw": 8556,
+      "gz": 838
+     },
+     {
+      "name": "roadAge",
+      "raw": 8556,
+      "gz": 76
+     },
+     {
+      "name": "roads",
+      "raw": 8556,
+      "gz": 69
+     },
+     {
+      "name": "events",
+      "raw": 7040,
+      "gz": 2110
+     },
+     {
+      "name": "requests",
+      "raw": 5026,
+      "gz": 886
+     },
+     {
+      "name": "ecology",
+      "raw": 3003,
+      "gz": 685
+     },
+     {
+      "name": "animals",
+      "raw": 2966,
+      "gz": 995
+     },
+     {
+      "name": "waterBodies",
+      "raw": 2930,
+      "gz": 1170
+     },
+     {
+      "name": "buildings",
+      "raw": 2559,
+      "gz": 582
+     },
+     {
+      "name": "chronicle",
+      "raw": 2286,
+      "gz": 860
+     },
+     {
+      "name": "plots",
+      "raw": 2193,
+      "gz": 562
+     },
+     {
+      "name": "accessCell",
+      "raw": 2157,
+      "gz": 292
+     },
+     {
+      "name": "households",
+      "raw": 1415,
+      "gz": 379
+     },
+     {
+      "name": "tools",
+      "raw": 1009,
+      "gz": 246
+     },
+     {
+      "name": "ledger",
+      "raw": 886,
+      "gz": 436
+     },
+     {
+      "name": "reservations",
+      "raw": 695,
+      "gz": 215
+     },
+     {
+      "name": "sites",
+      "raw": 641,
+      "gz": 311
+     },
+     {
+      "name": "crews",
+      "raw": 371,
+      "gz": 175
+     },
+     {
+      "name": "usedNames",
+      "raw": 205,
+      "gz": 158
+     }
+    ]
+   },
+   "msPerTickThisDay": 0.9160915833333394
+  },
+  {
+   "census": {
+    "tick": 4800,
+    "day": 2,
+    "alive": 28,
+    "deceased": 0,
+    "nextId": 3089,
+    "world": {
+     "buildings": 15,
+     "sites": 4,
+     "plots": 13,
+     "piles": 0,
+     "graves": 0,
+     "tools": 8,
+     "carts": 0,
+     "meals": 0,
+     "requests": 18,
+     "requestsLive": 0,
+     "conversations": 2,
+     "reservations": 5,
+     "events": 74,
+     "chronicle": 21,
+     "fx": 400,
+     "delayed": 0,
+     "occasions": 0,
+     "crews": 4,
+     "traditions": 0,
+     "stumps": 13,
+     "civicProjects": 0,
+     "exchangeReceipts": 0,
+     "econProduction": 2,
+     "econFlows": 0,
+     "ledgerReasons": 22,
+     "households": 12,
+     "hhRelocations": 0,
+     "hhUnfinished": 0,
+     "sources": 1103,
+     "animals": 6,
+     "waterBodies": 3
+    },
+    "perPersonSum": {
+     "beliefs": 6589,
+     "staleBeliefs": 177,
+     "waterBeliefs": 535,
+     "floodBeliefs": 0,
+     "whereabouts": 754,
+     "whereaboutsOfGonePersons": 0,
+     "relations": 756,
+     "relationsWithGonePersons": 0,
+     "asked": 18,
+     "askedGone": 0,
+     "told": 245,
+     "toldGone": 245,
+     "cooldowns": 864,
+     "cooldownsExpired": 619,
+     "optCooldowns": 102,
+     "failures": 32,
+     "failuresStaleTarget": 3,
+     "failuresOlderThanDay": 17,
+     "commitments": 6,
+     "commitmentsActive": 0,
+     "intentions": 56,
+     "intentionsActive": 19,
+     "heard": 125,
+     "socialMemory": 36,
+     "log": 1661,
+     "decisions": 224,
+     "decisionsDropped": 806,
+     "concerns": 13,
+     "seen": 261,
+     "customers": 5,
+     "civicOutcomes": 0,
+     "heardDemand": 11,
+     "tradeLeads": 0,
+     "exchangeJourneys": 0,
+     "civicAlignment": 0,
+     "thoughts": 14,
+     "relHistory": 796,
+     "handovers": 0,
+     "meetings": 0,
+     "accounts": 28,
+     "workHeardTold": 2,
+     "payoffKeys": 72,
+     "techniques": 12,
+     "bykindIds": 6589
+    },
+    "perPersonMax": {
+     "beliefs": 353,
+     "whereabouts": 27,
+     "relations": 27,
+     "cooldowns": 40,
+     "failures": 3,
+     "commitments": 2,
+     "intentions": 5
+    },
+    "cooldownPrefix": {
+     "greet": 652,
+     "trade": 20,
+     "stageCode": 28,
+     "opt": 102,
+     "tend": 13,
+     "check": 4,
+     "fleeCheck": 9,
+     "pause": 7,
+     "argue": 4,
+     "fedUntil": 5,
+     "fedfire": 4,
+     "talk": 6,
+     "offer_teach": 1,
+     "askMaterials": 9
+    }
+   },
+   "sizes": {
+    "totalRaw": 2472948,
+    "totalGz": 411381,
+    "packed": false,
+    "fields": [
+     {
+      "name": "persons",
+      "raw": 2066200,
+      "gz": 372411
+     },
+     {
+      "name": "sources",
+      "raw": 225829,
+      "gz": 10933
+     },
+     {
+      "name": "occ",
+      "raw": 34157,
+      "gz": 4019
+     },
+     {
+      "name": "wear",
+      "raw": 34157,
+      "gz": 3949
+     },
+     {
+      "name": "fx",
+      "raw": 22736,
+      "gz": 2893
+     },
+     {
+      "name": "events",
+      "raw": 10572,
+      "gz": 2912
+     },
+     {
+      "name": "terrain",
+      "raw": 8556,
+      "gz": 1111
+     },
+     {
+      "name": "solid",
+      "raw": 8556,
+      "gz": 1048
+     },
+     {
+      "name": "waterDist",
+      "raw": 8556,
+      "gz": 838
+     },
+     {
+      "name": "roadAge",
+      "raw": 8556,
+      "gz": 99
+     },
+     {
+      "name": "roads",
+      "raw": 8556,
+      "gz": 69
+     },
+     {
+      "name": "requests",
+      "raw": 6628,
+      "gz": 1154
+     },
+     {
+      "name": "ecology",
+      "raw": 4044,
+      "gz": 891
+     },
+     {
+      "name": "buildings",
+      "raw": 3569,
+      "gz": 740
+     },
+     {
+      "name": "plots",
+      "raw": 3200,
+      "gz": 746
+     },
+     {
+      "name": "chronicle",
+      "raw": 3108,
+      "gz": 1070
+     },
+     {
+      "name": "animals",
+      "raw": 3058,
+      "gz": 1012
+     },
+     {
+      "name": "waterBodies",
+      "raw": 2947,
+      "gz": 1185
+     },
+     {
+      "name": "accessCell",
+      "raw": 2157,
+      "gz": 292
+     },
+     {
+      "name": "households",
+      "raw": 1421,
+      "gz": 384
+     },
+     {
+      "name": "sites",
+      "raw": 1325,
+      "gz": 438
+     },
+     {
+      "name": "tools",
+      "raw": 1004,
+      "gz": 250
+     },
+     {
+      "name": "ledger",
+      "raw": 921,
+      "gz": 449
+     },
+     {
+      "name": "reservations",
+      "raw": 437,
+      "gz": 171
+     },
+     {
+      "name": "crews",
+      "raw": 371,
+      "gz": 176
+     },
+     {
+      "name": "stumps",
+      "raw": 360,
+      "gz": 150
+     }
+    ]
+   },
+   "msPerTickThisDay": 0.9531402916666639
+  },
+  {
+   "census": {
+    "tick": 7200,
+    "day": 3,
+    "alive": 28,
+    "deceased": 0,
+    "nextId": 3965,
+    "world": {
+     "buildings": 16,
+     "sites": 3,
+     "plots": 16,
+     "piles": 0,
+     "graves": 0,
+     "tools": 10,
+     "carts": 0,
+     "meals": 0,
+     "requests": 29,
+     "requestsLive": 1,
+     "conversations": 0,
+     "reservations": 7,
+     "events": 96,
+     "chronicle": 26,
+     "fx": 400,
+     "delayed": 0,
+     "occasions": 0,
+     "crews": 4,
+     "traditions": 0,
+     "stumps": 18,
+     "civicProjects": 0,
+     "exchangeReceipts": 0,
+     "econProduction": 3,
+     "econFlows": 0,
+     "ledgerReasons": 24,
+     "households": 12,
+     "hhRelocations": 0,
+     "hhUnfinished": 0,
+     "sources": 1107,
+     "animals": 6,
+     "waterBodies": 3
+    },
+    "perPersonSum": {
+     "beliefs": 8065,
+     "staleBeliefs": 200,
+     "waterBeliefs": 625,
+     "floodBeliefs": 0,
+     "whereabouts": 755,
+     "whereaboutsOfGonePersons": 0,
+     "relations": 756,
+     "relationsWithGonePersons": 0,
+     "asked": 29,
+     "askedGone": 0,
+     "told": 423,
+     "toldGone": 423,
+     "cooldowns": 955,
+     "cooldownsExpired": 772,
+     "optCooldowns": 144,
+     "failures": 50,
+     "failuresStaleTarget": 4,
+     "failuresOlderThanDay": 29,
+     "commitments": 8,
+     "commitmentsActive": 1,
+     "intentions": 77,
+     "intentionsActive": 16,
+     "heard": 196,
+     "socialMemory": 57,
+     "log": 1680,
+     "decisions": 224,
+     "decisionsDropped": 1295,
+     "concerns": 18,
+     "seen": 204,
+     "customers": 5,
+     "civicOutcomes": 0,
+     "heardDemand": 16,
+     "tradeLeads": 0,
+     "exchangeJourneys": 0,
+     "civicAlignment": 0,
+     "thoughts": 45,
+     "relHistory": 1008,
+     "handovers": 0,
+     "meetings": 0,
+     "accounts": 38,
+     "workHeardTold": 2,
+     "payoffKeys": 82,
+     "techniques": 12,
+     "bykindIds": 8065
+    },
+    "perPersonMax": {
+     "beliefs": 567,
+     "whereabouts": 27,
+     "relations": 27,
+     "cooldowns": 42,
+     "failures": 4,
+     "commitments": 2,
+     "intentions": 6
+    },
+    "cooldownPrefix": {
+     "greet": 678,
+     "trade": 20,
+     "stageCode": 28,
+     "opt": 144,
+     "tend": 15,
+     "check": 7,
+     "mediate": 1,
+     "fleeCheck": 17,
+     "pause": 7,
+     "fedUntil": 7,
+     "argue": 4,
+     "talk": 8,
+     "askMaterials": 11,
+     "fedfire": 6,
+     "offer_teach": 1,
+     "hurt": 1
+    }
+   },
+   "sizes": {
+    "totalRaw": 2774753,
+    "totalGz": 458588,
+    "packed": false,
+    "fields": [
+     {
+      "name": "persons",
+      "raw": 2357139,
+      "gz": 415599
+     },
+     {
+      "name": "sources",
+      "raw": 226809,
+      "gz": 11126
+     },
+     {
+      "name": "occ",
+      "raw": 34157,
+      "gz": 4062
+     },
+     {
+      "name": "wear",
+      "raw": 34157,
+      "gz": 5196
+     },
+     {
+      "name": "fx",
+      "raw": 23177,
+      "gz": 3244
+     },
+     {
+      "name": "events",
+      "raw": 13559,
+      "gz": 3700
+     },
+     {
+      "name": "requests",
+      "raw": 10483,
+      "gz": 1600
+     },
+     {
+      "name": "terrain",
+      "raw": 8556,
+      "gz": 1111
+     },
+     {
+      "name": "solid",
+      "raw": 8556,
+      "gz": 1048
+     },
+     {
+      "name": "waterDist",
+      "raw": 8556,
+      "gz": 838
+     },
+     {
+      "name": "roadAge",
+      "raw": 8556,
+      "gz": 128
+     },
+     {
+      "name": "roads",
+      "raw": 8556,
+      "gz": 82
+     },
+     {
+      "name": "ecology",
+      "raw": 4832,
+      "gz": 1050
+     },
+     {
+      "name": "plots",
+      "raw": 3860,
+      "gz": 852
+     },
+     {
+      "name": "buildings",
+      "raw": 3769,
+      "gz": 775
+     },
+     {
+      "name": "chronicle",
+      "raw": 3748,
+      "gz": 1297
+     },
+     {
+      "name": "waterBodies",
+      "raw": 2964,
+      "gz": 1188
+     },
+     {
+      "name": "animals",
+      "raw": 2925,
+      "gz": 981
+     },
+     {
+      "name": "accessCell",
+      "raw": 2157,
+      "gz": 292
+     },
+     {
+      "name": "households",
+      "raw": 1421,
+      "gz": 385
+     },
+     {
+      "name": "tools",
+      "raw": 1289,
+      "gz": 294
+     },
+     {
+      "name": "sites",
+      "raw": 1123,
+      "gz": 411
+     },
+     {
+      "name": "ledger",
+      "raw": 988,
+      "gz": 466
+     },
+     {
+      "name": "reservations",
+      "raw": 612,
+      "gz": 213
+     },
+     {
+      "name": "economicObservations",
+      "raw": 502,
+      "gz": 235
+     },
+     {
+      "name": "stumps",
+      "raw": 500,
+      "gz": 184
+     }
+    ]
+   },
+   "msPerTickThisDay": 0.8484315416666709
+  },
+  {
+   "census": {
+    "tick": 9600,
+    "day": 4,
+    "alive": 28,
+    "deceased": 0,
+    "nextId": 4704,
+    "world": {
+     "buildings": 18,
+     "sites": 2,
+     "plots": 18,
+     "piles": 0,
+     "graves": 0,
+     "tools": 12,
+     "carts": 0,
+     "meals": 0,
+     "requests": 38,
+     "requestsLive": 1,
+     "conversations": 0,
+     "reservations": 5,
+     "events": 121,
+     "chronicle": 31,
+     "fx": 400,
+     "delayed": 0,
+     "occasions": 0,
+     "crews": 4,
+     "traditions": 0,
+     "stumps": 22,
+     "civicProjects": 1,
+     "exchangeReceipts": 0,
+     "econProduction": 4,
+     "econFlows": 0,
+     "ledgerReasons": 27,
+     "households": 12,
+     "hhRelocations": 0,
+     "hhUnfinished": 0,
+     "sources": 1111,
+     "animals": 6,
+     "waterBodies": 3
+    },
+    "perPersonSum": {
+     "beliefs": 8881,
+     "staleBeliefs": 165,
+     "waterBeliefs": 679,
+     "floodBeliefs": 0,
+     "whereabouts": 756,
+     "whereaboutsOfGonePersons": 0,
+     "relations": 756,
+     "relationsWithGonePersons": 0,
+     "asked": 38,
+     "askedGone": 0,
+     "told": 549,
+     "toldGone": 549,
+     "cooldowns": 1038,
+     "cooldownsExpired": 881,
+     "optCooldowns": 177,
+     "failures": 76,
+     "failuresStaleTarget": 7,
+     "failuresOlderThanDay": 46,
+     "commitments": 12,
+     "commitmentsActive": 1,
+     "intentions": 95,
+     "intentionsActive": 20,
+     "heard": 288,
+     "socialMemory": 75,
+     "log": 1680,
+     "decisions": 224,
+     "decisionsDropped": 1751,
+     "concerns": 49,
+     "seen": 217,
+     "customers": 5,
+     "civicOutcomes": 0,
+     "heardDemand": 8,
+     "tradeLeads": 0,
+     "exchangeJourneys": 0,
+     "civicAlignment": 2,
+     "thoughts": 44,
+     "relHistory": 1180,
+     "handovers": 0,
+     "meetings": 0,
+     "accounts": 54,
+     "workHeardTold": 4,
+     "payoffKeys": 89,
+     "techniques": 12,
+     "bykindIds": 8881
+    },
+    "perPersonMax": {
+     "beliefs": 579,
+     "whereabouts": 27,
+     "relations": 27,
+     "cooldowns": 44,
+     "failures": 9,
+     "commitments": 3,
+     "intentions": 7
+    },
+    "cooldownPrefix": {
+     "greet": 714,
+     "trade": 20,
+     "stageCode": 28,
+     "opt": 177,
+     "tend": 17,
+     "check": 9,
+     "mediate": 1,
+     "askMaterials": 12,
+     "askPlan": 1,
+     "fleeCheck": 18,
+     "talk": 10,
+     "pause": 9,
+     "fedUntil": 9,
+     "argue": 4,
+     "fedfire": 7,
+     "offer_teach": 1,
+     "hurt": 1
+    }
+   },
+   "sizes": {
+    "totalRaw": 2987375,
+    "totalGz": 495018,
+    "packed": false,
+    "fields": [
+     {
+      "name": "persons",
+      "raw": 2557239,
+      "gz": 449027
+     },
+     {
+      "name": "sources",
+      "raw": 227800,
+      "gz": 11426
+     },
+     {
+      "name": "occ",
+      "raw": 34157,
+      "gz": 4097
+     },
+     {
+      "name": "wear",
+      "raw": 34157,
+      "gz": 5591
+     },
+     {
+      "name": "fx",
+      "raw": 24169,
+      "gz": 3077
+     },
+     {
+      "name": "events",
+      "raw": 16893,
+      "gz": 4561
+     },
+     {
+      "name": "requests",
+      "raw": 13799,
+      "gz": 2036
+     },
+     {
+      "name": "terrain",
+      "raw": 8556,
+      "gz": 1111
+     },
+     {
+      "name": "solid",
+      "raw": 8556,
+      "gz": 1058
+     },
+     {
+      "name": "waterDist",
+      "raw": 8556,
+      "gz": 838
+     },
+     {
+      "name": "roadAge",
+      "raw": 8556,
+      "gz": 176
+     },
+     {
+      "name": "roads",
+      "raw": 8556,
+      "gz": 100
+     },
+     {
+      "name": "ecology",
+      "raw": 5478,
+      "gz": 1205
+     },
+     {
+      "name": "plots",
+      "raw": 4392,
+      "gz": 943
+     },
+     {
+      "name": "chronicle",
+      "raw": 4330,
+      "gz": 1444
+     },
+     {
+      "name": "buildings",
+      "raw": 4195,
+      "gz": 828
+     },
+     {
+      "name": "animals",
+      "raw": 3041,
+      "gz": 1048
+     },
+     {
+      "name": "waterBodies",
+      "raw": 3023,
+      "gz": 1215
+     },
+     {
+      "name": "accessCell",
+      "raw": 2157,
+      "gz": 292
+     },
+     {
+      "name": "tools",
+      "raw": 1586,
+      "gz": 340
+     },
+     {
+      "name": "households",
+      "raw": 1421,
+      "gz": 387
+     },
+     {
+      "name": "civicProjects",
+      "raw": 1373,
+      "gz": 534
+     },
+     {
+      "name": "ledger",
+      "raw": 1094,
+      "gz": 506
+     },
+     {
+      "name": "sites",
+      "raw": 765,
+      "gz": 364
+     },
+     {
+      "name": "economicObservations",
+      "raw": 656,
+      "gz": 263
+     },
+     {
+      "name": "stumps",
+      "raw": 612,
+      "gz": 209
+     }
+    ]
+   },
+   "msPerTickThisDay": 0.8080013750000065
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "continuity (rules 55): household history: \"Ada left the household home unfinished N days ago.\"",
+    "ok": true,
+    "note": "Ada left the household home unfinished 0.0 days ago."
+  },
+  {
+    "name": "continuity: reading the page leaves the state untouched",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "succession (rules 55): household history: \"Ben took over the journey from Ada at tick N: died.\"",
+    "ok": true,
+    "note": "Ben took over the journey from Ada at tick 3423: died."
+  },
+  {
+    "name": "succession: reading the page leaves the state untouched",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "rescue (rules 55): household history: \"Ada looked for Ben at x, y (tick N): found nobody.\"",
+    "ok": true,
+    "note": "Ada looked for Ben at 57, 57 (tick 3586): found nobody."
+  },
+  {
+    "name": "rescue: reading the page leaves the state untouched",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "transport (rules 55): person card: \"Carried 84 weight … in 7 loads …; enough to want a cart.\"",
+    "ok": true,
+    "note": "Carried 84 weight of materials to building sites in 7 loads over the last 1 day(s); enough to want a cart."
+  },
+  {
+    "name": "transport: reading the page leaves the state untouched",
+    "ok": true,
+    "note": ""
+  }
+]

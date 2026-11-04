@@ -1,0 +1,62 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 53,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 117.549,
+  "alive": 31,
+  "deaths": 1,
+  "unfinishedRecorded": 0,
+  "unfinishedByKind": {},
+  "takenUp": 0,
+  "takenUpByKindAndStatus": {},
+  "succeeded": [],
+  "cancelledUnfinished": 0,
+  "finishedWhatBegan": 0,
+  "unfinishedOpenAtEnd": 0,
+  "reservesLaid": 2,
+  "reserveLaidYears": [
+    3,
+    1
+  ],
+  "peopleWithWinterMeals": 32,
+  "practiceHolders": 2,
+  "practiceByeSource": {
+    "family": 2
+  },
+  "practice": [
+    {
+      "person": "Eli",
+      "alive": true,
+      "learned": 57605,
+      "source": "family",
+      "from": 1032,
+      "year": 1,
+      "meals": 4,
+      "fromName": "Jonas"
+    },
+    {
+      "person": "Lena",
+      "alive": true,
+      "learned": 57605,
+      "source": "family",
+      "from": 1032,
+      "year": 1,
+      "meals": 3,
+      "fromName": "Jonas"
+    }
+  ],
+  "seasonStockPlans": 25,
+  "seasonStockPlansByHolder": {
+    "other": 25
+  },
+  "earlyCueAdoptions": 0,
+  "hash": "099ba1fd",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

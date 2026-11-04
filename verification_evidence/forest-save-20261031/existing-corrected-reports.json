@@ -1,0 +1,41 @@
+[
+  {
+    "Observer": "cart",
+    "Head": "0182849ff7944e5e8b1e3b4866165fa674a44773",
+    "Rules": 107,
+    "Stop": "horizon",
+    "Tick": 108000,
+    "PureChecks": 900,
+    "Twin": true,
+    "Conserved": true,
+    "Population": 4,
+    "Deaths": 27,
+    "FinalSHA256": "D6B77277899998E43F3818093B86838F0E9AAFFBC572D5AB889D2AAF564C1F62"
+  },
+  {
+    "Observer": "supply",
+    "Head": "0182849ff7944e5e8b1e3b4866165fa674a44773",
+    "Rules": 107,
+    "Stop": "horizon",
+    "Tick": 108000,
+    "PureChecks": 900,
+    "Twin": true,
+    "Conserved": true,
+    "Population": 4,
+    "Deaths": 27,
+    "FinalSHA256": "D6B77277899998E43F3818093B86838F0E9AAFFBC572D5AB889D2AAF564C1F62"
+  },
+  {
+    "Observer": "promise",
+    "Head": "0182849ff7944e5e8b1e3b4866165fa674a44773",
+    "Rules": 107,
+    "Stop": "horizon",
+    "Tick": 108000,
+    "PureChecks": 900,
+    "Twin": true,
+    "Conserved": true,
+    "Population": 4,
+    "Deaths": 27,
+    "FinalSHA256": "D6B77277899998E43F3818093B86838F0E9AAFFBC572D5AB889D2AAF564C1F62"
+  }
+]

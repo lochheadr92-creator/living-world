@@ -1,0 +1,106 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-pavel-talia-integration",
+  "head": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+  "branch": "refs/heads/integrate/pavel-talia-after-118",
+  "workingFiles": [
+    {
+      "path": "integration_evidence/browser-current-world.log",
+      "kind": "ignored-evidence",
+      "sha256": "385e3cb592baea5321161ee6341c71df0b18f3aa8f392bc8de979f06f216313e",
+      "bytes": 1470,
+      "archiveObject": "objects/38/385e3cb592baea5321161ee6341c71df0b18f3aa8f392bc8de979f06f216313e.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121.log",
+      "kind": "ignored-evidence",
+      "sha256": "fec67ea2245d9f480940bc99658ed8a200eabf8d6334e40294fbb2235646302f",
+      "bytes": 2949,
+      "archiveObject": "objects/fe/fec67ea2245d9f480940bc99658ed8a200eabf8d6334e40294fbb2235646302f.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121/inhabit-after-load.png",
+      "kind": "untracked",
+      "sha256": "398b329e76dc8c31e9ca7faaafecbc5f715afcd1eaaa01a2ec4a8c8633bc45b9",
+      "bytes": 1086391,
+      "archiveObject": "objects/39/398b329e76dc8c31e9ca7faaafecbc5f715afcd1eaaa01a2ec4a8c8633bc45b9.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121/inhabit-pending.png",
+      "kind": "untracked",
+      "sha256": "34292eb8bf7d4dd03b98e75eea5a67485479cd34140e911af79ca0db99122d22",
+      "bytes": 934734,
+      "archiveObject": "objects/34/34292eb8bf7d4dd03b98e75eea5a67485479cd34140e911af79ca0db99122d22.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121/pavel-company.png",
+      "kind": "untracked",
+      "sha256": "af980dc60f6efbfed7c6d65e3ed05bd906e08323fd591796075b84e3dfd2d5eb",
+      "bytes": 1046761,
+      "archiveObject": "objects/af/af980dc60f6efbfed7c6d65e3ed05bd906e08323fd591796075b84e3dfd2d5eb.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121/report.json",
+      "kind": "untracked",
+      "sha256": "755b44913272d2a8cba7e74c940730e576fc1bd23c411ec4fe8e577213cf31da",
+      "bytes": 4633,
+      "archiveObject": "objects/75/755b44913272d2a8cba7e74c940730e576fc1bd23c411ec4fe8e577213cf31da.gz"
+    },
+    {
+      "path": "integration_evidence/browser-pavel-talia-121/talia-childhood.png",
+      "kind": "untracked",
+      "sha256": "0d6cf00e4646dc2844af58af72c2e430673bfbbcb932962343d12fac05de8860",
+      "bytes": 1044044,
+      "archiveObject": "objects/0d/0d6cf00e4646dc2844af58af72c2e430673bfbbcb932962343d12fac05de8860.gz"
+    },
+    {
+      "path": "integration_evidence/browser-stored-save-121-rerun.log",
+      "kind": "ignored-evidence",
+      "sha256": "4fac5f866691fee6a99267309c7e9d98bf37d51fedead2b37be2eced6d642a34",
+      "bytes": 976,
+      "archiveObject": "objects/4f/4fac5f866691fee6a99267309c7e9d98bf37d51fedead2b37be2eced6d642a34.gz"
+    },
+    {
+      "path": "integration_evidence/browser-stored-save-121-rerun/report.json",
+      "kind": "untracked",
+      "sha256": "2448da55074e3b3d09102dbefe5c7fea50f50b67d87d4cf72ec0012d4b4d068f",
+      "bytes": 1763,
+      "archiveObject": "objects/24/2448da55074e3b3d09102dbefe5c7fea50f50b67d87d4cf72ec0012d4b4d068f.gz"
+    },
+    {
+      "path": "integration_evidence/browser-stored-save-121.log",
+      "kind": "ignored-evidence",
+      "sha256": "02282b9f7c82df0d6f19115316e56f9d9c084a25b543e3934cf8b1de214dd6f1",
+      "bytes": 976,
+      "archiveObject": "objects/02/02282b9f7c82df0d6f19115316e56f9d9c084a25b543e3934cf8b1de214dd6f1.gz"
+    },
+    {
+      "path": "integration_evidence/browser-stored-save-121/report.json",
+      "kind": "untracked",
+      "sha256": "c65eae512d13aaaef6621391cb4316963e1f3ba476fd6fc5ef25619f7842d348",
+      "bytes": 1764,
+      "archiveObject": "objects/c6/c65eae512d13aaaef6621391cb4316963e1f3ba476fd6fc5ef25619f7842d348.gz"
+    },
+    {
+      "path": "integration_evidence/build.log",
+      "kind": "ignored-evidence",
+      "sha256": "4611ce5764b83a0b3fa3a09ce8c36cd15c05e41a222b7408f016bd27a09bba20",
+      "bytes": 2491,
+      "archiveObject": "objects/46/4611ce5764b83a0b3fa3a09ce8c36cd15c05e41a222b7408f016bd27a09bba20.gz"
+    },
+    {
+      "path": "integration_evidence/devserver.log",
+      "kind": "ignored-evidence",
+      "sha256": "659ff6eb8331b10b9cf2edbc790708939fc593edf1e6baf4677db9fbb71e615f",
+      "bytes": 1963,
+      "archiveObject": "objects/65/659ff6eb8331b10b9cf2edbc790708939fc593edf1e6baf4677db9fbb71e615f.gz"
+    },
+    {
+      "path": "integration_evidence/full-suite.log",
+      "kind": "ignored-evidence",
+      "sha256": "150a4734b158833634101c84eb0d33ffd893417a276b57bdabe05b617ccbee72",
+      "bytes": 2182,
+      "archiveObject": "objects/15/150a4734b158833634101c84eb0d33ffd893417a276b57bdabe05b617ccbee72.gz"
+    }
+  ],
+  "stagedFiles": []
+}

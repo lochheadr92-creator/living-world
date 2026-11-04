@@ -1,0 +1,11 @@
+﻿{
+    "forestPid":  46772,
+    "branches":  "nudge:1,nudge:2,rich-no-childhood,rich-no-lived-life,rich-no-critical-search,rich-no-reachable-tilling",
+    "eightSeedPid":  43856,
+    "profile":  "normal",
+    "days":  21,
+    "started":  "2026-11-02T18:45:19",
+    "commit":  "3df2ac8e038b7bd127ddee84c46c12444478f8c0",
+    "fork":  4,
+    "arrivals":  "off (lab_seed forces immigration:false)"
+}

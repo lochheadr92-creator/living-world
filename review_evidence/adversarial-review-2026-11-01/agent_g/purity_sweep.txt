@@ -1,0 +1,2 @@
+river: 1000 ticks, 1188695 looks, 0 serialized differences, persons alive 28, events kept 41 (oldest 1283 ticks back), chronicle 13
+meadow: 2000 ticks, 538887 looks, 0 serialized differences, persons alive 28, events kept 41 (oldest 2283 ticks back), chronicle 15

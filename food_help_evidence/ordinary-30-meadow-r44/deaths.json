@@ -1,0 +1,19 @@
+[
+  {
+    "tick": 58913,
+    "id": 997,
+    "name": "Pavel",
+    "cause": "hunger",
+    "age": 73,
+    "packFoodBefore": 0,
+    "invBefore": {
+      "seeds": 4,
+      "wood": 2
+    },
+    "hungerBefore": 0,
+    "activityBefore": "gather:Gathering wild grain",
+    "homeFood": null,
+    "membersWithSpare": 0,
+    "members": []
+  }
+]

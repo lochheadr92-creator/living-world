@@ -1,0 +1,682 @@
+[
+  {
+    "tick": 12151,
+    "person": 902,
+    "name": "Bram",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +32 · winter is coming +12 · walking −7"
+  },
+  {
+    "tick": 12237,
+    "person": 943,
+    "name": "Theo",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +34 · I promised +26 · walking −14 · winter is coming +12"
+  },
+  {
+    "tick": 12337,
+    "person": 942,
+    "name": "Delia",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +37 · I promised +26 · winter is coming +12 · good builder −2"
+  },
+  {
+    "tick": 12515,
+    "person": 908,
+    "name": "Lena",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +27 · walking −12 · winter is coming +12"
+  },
+  {
+    "tick": 12731,
+    "person": 908,
+    "name": "Lena",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 12799,
+    "person": 902,
+    "name": "Bram",
+    "kind": "plan_site",
+    "label": "Marking out a hut",
+    "why": "to build a proper hut +15 · winter is coming +12"
+  },
+  {
+    "tick": 12895,
+    "person": 902,
+    "name": "Bram",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −2"
+  },
+  {
+    "tick": 12926,
+    "person": 908,
+    "name": "Lena",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "a step toward “get the household's hut built”: take 1 stone to the hut; no room for a full batch · carrying what it needs +44 · winter is coming +12 · walking −7"
+  },
+  {
+    "tick": 14273,
+    "person": 902,
+    "name": "Bram",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +37 · winter is coming +12 · walking −6 · good builder −1"
+  },
+  {
+    "tick": 14365,
+    "person": 911,
+    "name": "Ada",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +17 · winter is coming +12 · walking −5"
+  },
+  {
+    "tick": 14421,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +17 · winter is coming +12 · walking −8"
+  },
+  {
+    "tick": 14508,
+    "person": 943,
+    "name": "Theo",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +34 · winter is coming +12 · walking −5 · good builder −2"
+  },
+  {
+    "tick": 14559,
+    "person": 908,
+    "name": "Lena",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +30 · winter is coming +12 · walking −8"
+  },
+  {
+    "tick": 14567,
+    "person": 942,
+    "name": "Delia",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +37 · I promised +26 · winter is coming +12 · good builder −2"
+  },
+  {
+    "tick": 14668,
+    "person": 899,
+    "name": "Petra",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +22 · winter is coming +12 · walking −4"
+  },
+  {
+    "tick": 14736,
+    "person": 908,
+    "name": "Lena",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 14803,
+    "person": 924,
+    "name": "Hal",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +31 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 14944,
+    "person": 902,
+    "name": "Bram",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · walking −19 · winter is coming +12"
+  },
+  {
+    "tick": 15125,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "plan_site",
+    "label": "Marking out a hut",
+    "why": "to build a proper hut +29 · winter is coming +12"
+  },
+  {
+    "tick": 15214,
+    "person": 929,
+    "name": "Isla",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +20 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 15272,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +39 · winter is coming +12 · walking −1 · good builder −1"
+  },
+  {
+    "tick": 15275,
+    "person": 902,
+    "name": "Bram",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −7"
+  },
+  {
+    "tick": 15408,
+    "person": 940,
+    "name": "Dov",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +19 · winter is coming +12 · walking −4"
+  },
+  {
+    "tick": 15487,
+    "person": 914,
+    "name": "Edda",
+    "kind": "haul",
+    "label": "Delivering wood to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −3"
+  },
+  {
+    "tick": 15551,
+    "person": 899,
+    "name": "Petra",
+    "kind": "plan_site",
+    "label": "Marking out a hut",
+    "why": "to build a proper hut +16 · winter is coming +12"
+  },
+  {
+    "tick": 15642,
+    "person": 902,
+    "name": "Bram",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · walking −12 · winter is coming +12"
+  },
+  {
+    "tick": 16759,
+    "person": 928,
+    "name": "Jax",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +22 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 16854,
+    "person": 935,
+    "name": "Zeke",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +21 · winter is coming +12 · walking −1"
+  },
+  {
+    "tick": 17273,
+    "person": 931,
+    "name": "Greta",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · I promised +20 · winter is coming +12 · walking −10"
+  },
+  {
+    "tick": 17345,
+    "person": 908,
+    "name": "Lena",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +32 · walking −26 · winter is coming +12"
+  },
+  {
+    "tick": 17422,
+    "person": 902,
+    "name": "Bram",
+    "kind": "haul",
+    "label": "Delivering wood to the building site",
+    "why": "carrying what it needs +44 · walking −27 · winter is coming +12"
+  },
+  {
+    "tick": 17460,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "carrying what it needs +44 · walking −22 · winter is coming +12"
+  },
+  {
+    "tick": 17691,
+    "person": 902,
+    "name": "Bram",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +37 · winter is coming +12 · walking −1 · good builder −1"
+  },
+  {
+    "tick": 17865,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "haul",
+    "label": "Delivering stone to the building site",
+    "why": "a step toward “get the household's hut built”: take 4 wood to the hut · carrying what it needs +44 · walking −26 · winter is coming +12"
+  },
+  {
+    "tick": 19081,
+    "person": 924,
+    "name": "Hal",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +25 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 40822,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +36 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 40886,
+    "person": 931,
+    "name": "Greta",
+    "kind": "plan_site",
+    "label": "Marking out a lean-to",
+    "why": "no shelter of our own yet +32 · winter is coming +12"
+  },
+  {
+    "tick": 40939,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "haul",
+    "label": "Delivering wood to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −12"
+  },
+  {
+    "tick": 41011,
+    "person": 908,
+    "name": "Lena",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "I enjoy building; another close work choice was available · needs repair +21 · walking −12 · winter is coming +12"
+  },
+  {
+    "tick": 41042,
+    "person": 924,
+    "name": "Hal",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +26 · winter is coming +12 · walking −1"
+  },
+  {
+    "tick": 41101,
+    "person": 914,
+    "name": "Edda",
+    "kind": "haul",
+    "label": "Delivering wood to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −8"
+  },
+  {
+    "tick": 41116,
+    "person": 939,
+    "name": "Maren",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +28 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 41165,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +27 · winter is coming +12 · walking −9"
+  },
+  {
+    "tick": 41187,
+    "person": 943,
+    "name": "Theo",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "a step toward “get the roof sound again”: mend the hut · needs repair +28 · walking −12 · winter is coming +12"
+  },
+  {
+    "tick": 41279,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "haul",
+    "label": "Delivering wood to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −5"
+  },
+  {
+    "tick": 41357,
+    "person": 902,
+    "name": "Bram",
+    "kind": "build",
+    "label": "Building the hut",
+    "why": "building work to do +37 · walking −30 · winter is coming +12"
+  },
+  {
+    "tick": 41362,
+    "person": 923,
+    "name": "Faye",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +28 · winter is coming +12 · walking −4"
+  },
+  {
+    "tick": 41379,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +36 · walking −22 · winter is coming +12"
+  },
+  {
+    "tick": 41737,
+    "person": 931,
+    "name": "Greta",
+    "kind": "plan_site",
+    "label": "Marking out a lean-to",
+    "why": "no shelter of our own yet +32 · winter is coming +12 · night is coming +8"
+  },
+  {
+    "tick": 41806,
+    "person": 942,
+    "name": "Delia",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +31 · walking −14 · winter is coming +12"
+  },
+  {
+    "tick": 43081,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +38 · winter is coming +12 · walking −1"
+  },
+  {
+    "tick": 43373,
+    "person": 902,
+    "name": "Bram",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +32 · walking −14 · winter is coming +12"
+  },
+  {
+    "tick": 43647,
+    "person": 931,
+    "name": "Greta",
+    "kind": "plan_site",
+    "label": "Marking out a lean-to",
+    "why": "no shelter of our own yet +32 · winter is coming +12"
+  },
+  {
+    "tick": 43775,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · walking −28 · needs repair +18 · winter is coming +12"
+  },
+  {
+    "tick": 43801,
+    "person": 942,
+    "name": "Delia",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +34 · winter is coming +12 · walking −5"
+  },
+  {
+    "tick": 43895,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · walking −21 · needs repair +19 · winter is coming +12"
+  },
+  {
+    "tick": 45500,
+    "person": 929,
+    "name": "Isla",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +27 · winter is coming +12"
+  },
+  {
+    "tick": 45608,
+    "person": 929,
+    "name": "Isla",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +22 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 45660,
+    "person": 902,
+    "name": "Bram",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +33 · winter is coming +12 · walking −11"
+  },
+  {
+    "tick": 45862,
+    "person": 899,
+    "name": "Petra",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +28 · walking −20 · winter is coming +12"
+  },
+  {
+    "tick": 45868,
+    "person": 911,
+    "name": "Ada",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +49 · walking −33 · winter is coming +12"
+  },
+  {
+    "tick": 46117,
+    "person": 902,
+    "name": "Bram",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "a step toward “get the roof sound again”: mend the lean-to · needs repair +38 · winter is coming +12 · walking −3"
+  },
+  {
+    "tick": 46160,
+    "person": 935,
+    "name": "Zeke",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +23 · winter is coming +12 · walking −9"
+  },
+  {
+    "tick": 46246,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +26 · walking −13 · winter is coming +12"
+  },
+  {
+    "tick": 46461,
+    "person": 939,
+    "name": "Maren",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +25 · winter is coming +12 · walking −10"
+  },
+  {
+    "tick": 46618,
+    "person": 939,
+    "name": "Maren",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +25 · winter is coming +12 · walking −6"
+  },
+  {
+    "tick": 46657,
+    "person": 940,
+    "name": "Dov",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +24 · winter is coming +12 · walking −9"
+  },
+  {
+    "tick": 46716,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +21 · winter is coming +12 · walking −3"
+  },
+  {
+    "tick": 47901,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +22 · winter is coming +12 · walking −5"
+  },
+  {
+    "tick": 69674,
+    "person": 928,
+    "name": "Jax",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +22 · winter is coming +12 · walking −1"
+  },
+  {
+    "tick": 69693,
+    "person": 935,
+    "name": "Zeke",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +19 · winter is coming +12 · walking −9"
+  },
+  {
+    "tick": 69695,
+    "person": 923,
+    "name": "Faye",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "I enjoy building; another close work choice was available · needs repair +23 · winter is coming +12 · walking −4"
+  },
+  {
+    "tick": 69712,
+    "person": 929,
+    "name": "Isla",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +23 · winter is coming +12 · walking −11"
+  },
+  {
+    "tick": 70139,
+    "person": 905,
+    "name": "Mira",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +19 · winter is coming +12 · walking −7"
+  },
+  {
+    "tick": 70230,
+    "person": 914,
+    "name": "Edda",
+    "kind": "haul",
+    "label": "Delivering planks to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −7"
+  },
+  {
+    "tick": 70304,
+    "person": 914,
+    "name": "Edda",
+    "kind": "build",
+    "label": "Building the house",
+    "why": "building work to do +38 · winter is coming +12 · good builder −2 · walking −1"
+  },
+  {
+    "tick": 70497,
+    "person": 939,
+    "name": "Maren",
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "why": "needs repair +22 · winter is coming +12 · walking −10"
+  },
+  {
+    "tick": 70498,
+    "person": 935,
+    "name": "Zeke",
+    "kind": "plan_site",
+    "label": "Marking out a hut",
+    "why": "to build a proper hut +18 · winter is coming +12"
+  },
+  {
+    "tick": 70523,
+    "person": 914,
+    "name": "Edda",
+    "kind": "build",
+    "label": "Building the house",
+    "why": "building work to do +38 · winter is coming +12 · walking −4 · good builder −2"
+  },
+  {
+    "tick": 70541,
+    "person": 917,
+    "name": "Hana",
+    "kind": "haul",
+    "label": "Delivering planks to the building site",
+    "why": "carrying what it needs +44 · winter is coming +12 · walking −9"
+  },
+  {
+    "tick": 70557,
+    "person": 915,
+    "name": "Tomas",
+    "kind": "build",
+    "label": "Building the house",
+    "why": "building work to do +39 · winter is coming +12 · walking −5 · good builder +1"
+  },
+  {
+    "tick": 70642,
+    "person": 917,
+    "name": "Hana",
+    "kind": "build",
+    "label": "Building the house",
+    "why": "building work to do +37 · winter is coming +12 · good builder −2 · walking −1"
+  },
+  {
+    "tick": 70773,
+    "person": 908,
+    "name": "Lena",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +19 · walking −14 · winter is coming +12"
+  },
+  {
+    "tick": 71948,
+    "person": 908,
+    "name": "Lena",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +22 · winter is coming +12 · walking −5"
+  },
+  {
+    "tick": 71981,
+    "person": 920,
+    "name": "Yusuf",
+    "kind": "repair",
+    "label": "Repairing the hut",
+    "why": "needs repair +20 · winter is coming +12 · walking −1"
+  }
+]

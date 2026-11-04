@@ -1,0 +1,44 @@
+[
+  {
+    "day": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 2,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 3,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 4,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 5,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 6,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

@@ -1,0 +1,131 @@
+Counterfactual lab: 8 seeds (aspen, birch, cedar, fern, gen-1, gen-2, meadow, river), normal profile, forked at day 0, run 30 days.
+Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).
+Civilisation metrics: retained records are lower bounds within their retention windows, not lifetime totals. AtEnd means living/present at the end. Production distance uses only towns with at least three recorded days in the last eight; zero with fewer than two eligible towns is not evidence of sameness.
+
+Noise floor: spread (sd) of the difference a one-draw nudge makes in one seed, and when it parts from the control
+  nudge branches parted from the control in 8/8 runs, median 0.05 days after the fork
+  workplaces ±1.7   solidHomes ±1.4   buildings ±2.9   plots ±2.6   people ±2.8   deaths ±3.2   homeless ±2.1   belowCritical ±2.2   meanHunger ±10.7   firstYardDay ±2.6   firstHallDay ±5.7   meanMood ±11.4   lowMood ±3.6   tools ±8.6   meanCondition ±5.8   projectsAdopted ±15.3   projectsDone ±8.7   projectAsks ±3.8   askUnitsDelivered ±3.5   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±12.0   prepSeason ±6.7   prepHardship ±14.1   prepDone ±9.8   prepDropped ±9.3   prepUnits ±60.2   prepDays ±3.6   hungerExposure ±0.0   homeFoodPerPerson ±0.6   storeFoodPerPerson ±0.7   spears ±1.8   armedAtEnd ±1.8   defenceOffered ±6.3   defenceSetOut ±2.9   defenceTried ±1.5   defenceDroveOff ±1.9   defenceFailed ±0.6   defenceLeftOnItsOwn ±2.1   wolvesWary ±0.0   bitesTaken ±6.9   retainedSharedCompleted ±0.5   retainedSharedFailed ±0.8   retainedRelocationsSettled ±0.0   retainedRelocationsFailed ±0.4   retainedExchangePairs ±0.0   retainedExchangeReceipts ±0.0   alignedResidentsAtEnd ±0.0   factionsAtEnd ±0.0   charcoalHoldersAtEnd ±1.1   taughtCharcoalAtEnd ±0.6   supperHoldersAtEnd ±0.4   familySupperAtEnd ±0.0   secondTransmissionAtEnd ±0.0   newbornSupperAtEnd ±0.0   townsWithRepeatedProduction ±0.0   townProductionDistance ±0.0
+
+── nudge:1: 1 extra random draw at the fork and nothing else (the noise floor)  [8 seeds; e.g. 1 draws]
+   final state identical to control in 0/8 seeds; parted in 8, median 0.05 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        5.6     5.5    -0.1   [-1.3, +0.9]        4/3  not distinguishable from chance
+   solidHomes                        9.8     9.6    -0.1   [-1.0, +0.8]        3/4  not distinguishable from chance
+   buildings                        25.4    24.5    -0.9   [-2.8, +1.1]        3/5  not distinguishable from chance
+   plots                            28.5    26.8    -1.8   [-3.5, -0.1]        2/6  systematic, within the noise floor
+   people                           25.4    24.6    -0.8   [-2.5, +1.1]        4/4  not distinguishable from chance
+   deaths                            5.0     6.3    +1.3   [-0.6, +3.4]        3/4  not distinguishable from chance
+   homeless                          0.0     0.9    +0.9   [0, +2.4]           2/0  not distinguishable from chance
+   belowCritical                     0.1     1.1    +1.0   [-0.3, +2.5]        2/1  not distinguishable from chance
+   meanHunger                       64.6    58.6    -6.0   [-13.1, +0.4]       3/5  not distinguishable from chance
+   firstYardDay                     11.0     9.7    -1.3   [-3.0, +0.3]        3/5  not distinguishable from chance
+   firstHallDay                     21.2    21.0    -0.1   [-3.6, +3.6]        3/4  not distinguishable from chance
+   meanMood                         -6.3   -11.9    -5.7   [-13.4, +1.2]       4/4  not distinguishable from chance
+   lowMood                           1.0     2.9    +1.9   [-0.3, +4.3]        4/3  not distinguishable from chance
+   tools                            33.5    27.0    -6.5   [-11.9, -1.1]       2/6  systematic, within the noise floor
+   meanCondition                    62.2    58.7    -3.5   [-7.2, +0.1]        2/6  not distinguishable from chance
+   projectsAdopted                 191.5   182.4    -9.1   [-18.0, +1.4]       2/6  not distinguishable from chance
+   projectsDone                     57.8    49.6    -8.1   [-13.4, -2.4]       1/7  systematic, within the noise floor
+   projectAsks                       4.5     4.1    -0.4   [-2.8, +2.1]        3/4  not distinguishable from chance
+   askUnitsDelivered                 3.8     4.0    +0.3   [-2.1, +2.5]        4/3  not distinguishable from chance
+   specialisation                    0.5     0.5       0   [0, 0]              6/2  systematic, within the noise floor
+   topKindShare                      0.7     0.7       0   [0, 0]              7/1  systematic, within the noise floor
+   prepAdopted                     136.0   129.3    -6.8   [-14.0, +1.3]       2/6  not distinguishable from chance
+   prepSeason                       17.9    12.8    -5.1   [-10.0, -1.3]       2/5  systematic, within the noise floor
+   prepHardship                    118.1   116.5    -1.6   [-11.0, +7.3]       4/4  not distinguishable from chance
+   prepDone                         32.3    26.1    -6.1   [-12.1, +0.3]       2/6  not distinguishable from chance
+   prepDropped                      94.3    96.0    +1.8   [-4.4, +7.9]        4/4  not distinguishable from chance
+   prepUnits                       530.3   461.6   -68.6   [-107.8, -28.3]     1/7  larger than chance
+   prepDays                         35.8    35.8    +0.1   [-2.1, +2.5]        4/4  not distinguishable from chance
+   hungerExposure                    0.0     0.0       0   [0, 0]              6/2  systematic, within the noise floor
+   homeFoodPerPerson                 0.9     0.9       0   [-0.4, +0.4]        3/5  not distinguishable from chance
+   storeFoodPerPerson                1.0     0.9    -0.1   [-0.4, +0.5]        3/5  not distinguishable from chance
+   spears                            3.8     2.5    -1.3   [-2.5, -0.3]        0/4  systematic, within the noise floor
+   armedAtEnd                        3.8     2.1    -1.6   [-2.8, -0.6]        0/5  systematic, within the noise floor
+   defenceOffered                    7.4     8.6    +1.3   [-3.1, +5.1]        6/2  not distinguishable from chance
+   defenceSetOut                     3.3     2.9    -0.4   [-2.5, +1.1]        2/1  not distinguishable from chance
+   defenceTried                      1.3     1.4    +0.1   [-0.8, +1.1]        2/2  not distinguishable from chance
+   defenceDroveOff                   0.5     0.8    +0.3   [-1.0, +1.6]        2/1  not distinguishable from chance
+   defenceFailed                     0.8     0.6    -0.1   [-0.5, +0.3]        1/2  not distinguishable from chance
+   defenceLeftOnItsOwn               1.8     1.1    -0.6   [-2.1, +0.5]        3/3  not distinguishable from chance
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   bitesTaken                       15.5    15.0    -0.5   [-4.9, +3.8]        4/4  not distinguishable from chance
+   retainedSharedCompleted           0.8     1.0    +0.3   [0, +0.6]           2/0  not distinguishable from chance
+   retainedSharedFailed              0.6     0.1    -0.5   [-1.0, 0]           0/3  not distinguishable from chance
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   retainedRelocationsFailed         0.0     0.1    +0.1   [0, +0.4]           1/0  not distinguishable from chance
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   charcoalHoldersAtEnd              4.0     3.9    -0.1   [-0.8, +0.6]        2/4  not distinguishable from chance
+   taughtCharcoalAtEnd               0.5     0.4    -0.1   [-0.5, +0.3]        1/2  not distinguishable from chance
+   supperHoldersAtEnd                0.0     0.1    +0.1   [0, +0.4]           1/0  not distinguishable from chance
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   townsWithRepeatedProduction       1.0     1.0       0   [0, 0]              0/0  not distinguishable from chance
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   In words: prepUnits 530.3 → 461.6 (-68.6, lower in 7 and higher in 1 of 8 seeds).
+
+── rich-no-civic-food-benefit: remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49  [8 seeds]
+   final state identical to control in 5/8 seeds; parted in 3, median 12.80 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        5.6     5.6    +0.1   [-0.4, +0.6]        3/4  not distinguishable from chance
+   solidHomes                        9.7     9.8    +0.1   [-0.4, +0.5]        4/3  not distinguishable from chance
+   buildings                        24.9    25.4    +0.4   [-0.6, +1.4]        5/3  not distinguishable from chance
+   plots                            27.6    28.5    +0.9   [+0.1, +1.8]        6/2  systematic, within the noise floor
+   people                           25.0    25.4    +0.4   [-0.6, +1.3]        4/4  not distinguishable from chance
+   deaths                            5.6     5.0    -0.6   [-1.7, +0.3]        4/3  not distinguishable from chance
+   homeless                          0.4     0.0    -0.4   [-1.2, 0]           0/2  not distinguishable from chance
+   belowCritical                     0.6     0.1    -0.5   [-1.3, +0.1]        1/2  not distinguishable from chance
+   meanHunger                       61.6    64.6    +3.0   [-0.2, +6.5]        5/3  not distinguishable from chance
+   firstYardDay                     10.4    11.0    +0.7   [-0.1, +1.5]        5/3  not distinguishable from chance
+   firstHallDay                     21.1    21.2    +0.1   [-1.8, +1.8]        4/3  not distinguishable from chance
+   meanMood                         -9.1    -6.3    +2.8   [-0.6, +6.7]        4/4  not distinguishable from chance
+   lowMood                           1.9     1.0    -0.9   [-2.1, +0.1]        3/4  not distinguishable from chance
+   tools                            30.3    33.5    +3.3   [+0.6, +5.9]        6/2  systematic, within the noise floor
+   meanCondition                    60.4    62.2    +1.8   [-0.1, +3.6]        6/2  not distinguishable from chance
+   projectsAdopted                 186.9   191.5    +4.6   [-0.7, +9.0]        6/2  not distinguishable from chance
+   projectsDone                     53.7    57.8    +4.1   [+1.2, +6.7]        7/1  systematic, within the noise floor
+   projectAsks                       4.3     4.5    +0.2   [-1.0, +1.4]        4/3  not distinguishable from chance
+   askUnitsDelivered                 3.9     3.8    -0.1   [-1.3, +1.1]        3/4  not distinguishable from chance
+   specialisation                    0.5     0.5       0   [0, 0]              2/6  systematic, within the noise floor
+   topKindShare                      0.7     0.7       0   [0, 0]              1/7  systematic, within the noise floor
+   prepAdopted                     132.6   136.0    +3.4   [-0.6, +7.0]        6/2  not distinguishable from chance
+   prepSeason                       15.3    17.9    +2.6   [+0.6, +5.0]        5/2  systematic, within the noise floor
+   prepHardship                    117.3   118.1    +0.8   [-3.6, +5.5]        4/4  not distinguishable from chance
+   prepDone                         29.2    32.3    +3.1   [-0.1, +6.1]        6/2  not distinguishable from chance
+   prepDropped                      95.1    94.3    -0.9   [-3.9, +2.2]        4/4  not distinguishable from chance
+   prepUnits                       495.9   530.3   +34.3   [+14.1, +53.9]      7/1  systematic, within the noise floor
+   prepDays                         35.8    35.8       0   [-1.2, +1.0]        4/4  not distinguishable from chance
+   hungerExposure                    0.0     0.0       0   [0, 0]              2/6  systematic, within the noise floor
+   homeFoodPerPerson                 0.9     0.9       0   [-0.2, +0.2]        5/3  not distinguishable from chance
+   storeFoodPerPerson                0.9     1.0       0   [-0.2, +0.2]        5/3  not distinguishable from chance
+   spears                            3.1     3.8    +0.6   [+0.1, +1.3]        4/0  systematic, within the noise floor
+   armedAtEnd                        2.9     3.8    +0.8   [+0.3, +1.4]        5/0  systematic, within the noise floor
+   defenceOffered                    8.0     7.4    -0.6   [-2.6, +1.6]        2/6  not distinguishable from chance
+   defenceSetOut                     3.1     3.3    +0.2   [-0.6, +1.3]        1/2  not distinguishable from chance
+   defenceTried                      1.3     1.3    -0.1   [-0.6, +0.4]        2/2  not distinguishable from chance
+   defenceDroveOff                   0.6     0.5    -0.1   [-0.8, +0.5]        1/2  not distinguishable from chance
+   defenceFailed                     0.7     0.8    +0.1   [-0.1, +0.3]        2/1  not distinguishable from chance
+   defenceLeftOnItsOwn               1.4     1.8    +0.3   [-0.3, +1.1]        3/3  not distinguishable from chance
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   bitesTaken                       15.3    15.5    +0.3   [-1.9, +2.4]        4/4  not distinguishable from chance
+   retainedSharedCompleted           0.9     0.8    -0.1   [-0.3, 0]           0/2  not distinguishable from chance
+   retainedSharedFailed              0.4     0.6    +0.3   [+0.1, +0.5]        3/0  systematic, within the noise floor
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   retainedRelocationsFailed         0.1     0.0    -0.1   [-0.2, 0]           0/1  not distinguishable from chance
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   charcoalHoldersAtEnd              3.9     4.0    +0.1   [-0.3, +0.4]        4/2  not distinguishable from chance
+   taughtCharcoalAtEnd               0.4     0.5    +0.1   [-0.1, +0.3]        2/1  not distinguishable from chance
+   supperHoldersAtEnd                0.1     0.0    -0.1   [-0.2, 0]           0/1  not distinguishable from chance
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   townsWithRepeatedProduction       1.0     1.0       0   [0, 0]              0/0  not distinguishable from chance
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   In words: nothing moved by more than a one-draw nudge moves it.

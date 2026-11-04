@@ -1,0 +1,65 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 52,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 155.613,
+  "alive": 28,
+  "deaths": 5,
+  "holdersAtStart": {
+    "charcoal": 7,
+    "smelting": 4,
+    "forging": 1
+  },
+  "holdersAtEnd": {
+    "charcoal": 8,
+    "smelting": 4,
+    "forging": 1
+  },
+  "holdersDead": {
+    "charcoal": 0,
+    "smelting": 0,
+    "forging": 0
+  },
+  "lessonsByKind": {},
+  "lessonOffersStarted": 0,
+  "lessonRequestsStarted": 6,
+  "learned": [
+    {
+      "person": "Talia",
+      "kind": "charcoal",
+      "source": "taught",
+      "tick": 106546,
+      "teacher": "Milo",
+      "attempts": null
+    }
+  ],
+  "trialBatchesStarted": 0,
+  "trialAttemptsLogged": 0,
+  "trialsWorkedOut": 0,
+  "trialsOpenAtEnd": [],
+  "optionSamples": 1258,
+  "wantedKinds": {
+    "charcoal": 38,
+    "smelting": 8,
+    "forging": 8
+  },
+  "blockedBy": {
+    "has not learned charcoal firing": 35,
+    "has not learned iron forging": 14
+  },
+  "smithies": 1,
+  "smithySites": 0,
+  "firstSmithyDay": 37.37083333333333,
+  "ironMade": 0,
+  "charcoalMade": 6,
+  "oreTaken": 0,
+  "hash": "3dfd540d",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

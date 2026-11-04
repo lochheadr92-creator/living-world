@@ -1,0 +1,386 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-hearth-check1",
+  "head": "de35037cc65ce39ff0f54f27803312252470b01f",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "autonomy_evidence/helper-receipt107-first-invalid/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "c24c9d0e40b60ec9d50e9cbee88f7b01969338dd9e00fd3a8218d383c7d3fa9b",
+      "bytes": 4487372,
+      "archiveObject": "objects/c2/c24c9d0e40b60ec9d50e9cbee88f7b01969338dd9e00fd3a8218d383c7d3fa9b.gz"
+    },
+    {
+      "path": "scripts/lab/lab.ts",
+      "kind": "tracked-change",
+      "sha256": "26ad3c4804f2e5897615df137f990d0c8d79acbad5773377e15dbcaba4ad9dcf",
+      "bytes": 71601,
+      "archiveObject": "objects/26/26ad3c4804f2e5897615df137f990d0c8d79acbad5773377e15dbcaba4ad9dcf.gz"
+    },
+    {
+      "path": "scripts/observers/survival.ts",
+      "kind": "tracked-change",
+      "sha256": "ba0a4d64872f6ea2787d04207f6d53c0858ca990c0943d1f4aebe1a0085ad960",
+      "bytes": 6271,
+      "archiveObject": "objects/ba/ba0a4d64872f6ea2787d04207f6d53c0858ca990c0943d1f4aebe1a0085ad960.gz"
+    },
+    {
+      "path": "src/app/save.ts",
+      "kind": "tracked-change",
+      "sha256": "6861cc6787dd0feee7c1416df8c32a2503fdc057af14afdc3567e443a630ab16",
+      "bytes": 22999,
+      "archiveObject": "objects/68/6861cc6787dd0feee7c1416df8c32a2503fdc057af14afdc3567e443a630ab16.gz"
+    },
+    {
+      "path": "src/sim/act_build.ts",
+      "kind": "tracked-change",
+      "sha256": "19e453c59ceae252597b3f791d2a5a88ff54d3ce5663ed9785b959272975b5e6",
+      "bytes": 27422,
+      "archiveObject": "objects/19/19e453c59ceae252597b3f791d2a5a88ff54d3ce5663ed9785b959272975b5e6.gz"
+    },
+    {
+      "path": "src/sim/activities.ts",
+      "kind": "tracked-change",
+      "sha256": "5b5af802c6d464008f9eb321f1a5b32c66a5e6c5c76972339352c6e8494bc484",
+      "bytes": 27080,
+      "archiveObject": "objects/5b/5b5af802c6d464008f9eb321f1a5b32c66a5e6c5c76972339352c6e8494bc484.gz"
+    },
+    {
+      "path": "src/sim/buildings.ts",
+      "kind": "tracked-change",
+      "sha256": "d2830f96c7c6d91b2d2c7c115eb20af5d6f80859183c1c054ff17f8a4de424ab",
+      "bytes": 14901,
+      "archiveObject": "objects/d2/d2830f96c7c6d91b2d2c7c115eb20af5d6f80859183c1c054ff17f8a4de424ab.gz"
+    },
+    {
+      "path": "src/sim/habitation.ts",
+      "kind": "tracked-change",
+      "sha256": "8b217fc6007f0ec77e795f07315e0097d38cb3b190a6b3df17410a187ff703c2",
+      "bytes": 6103,
+      "archiveObject": "objects/8b/8b217fc6007f0ec77e795f07315e0097d38cb3b190a6b3df17410a187ff703c2.gz"
+    },
+    {
+      "path": "src/sim/hearth.ts",
+      "kind": "untracked",
+      "sha256": "ac2008c939d2d01b2ac49d02e66c12947ed4ee79b9cb0211e4a212d714c52c65",
+      "bytes": 7365,
+      "archiveObject": "objects/ac/ac2008c939d2d01b2ac49d02e66c12947ed4ee79b9cb0211e4a212d714c52c65.gz"
+    },
+    {
+      "path": "src/sim/inspect.ts",
+      "kind": "tracked-change",
+      "sha256": "43d16a0381745d39ee4e3145744362eb685a97a7bb61420d8f2d99c015b8d789",
+      "bytes": 48710,
+      "archiveObject": "objects/43/43d16a0381745d39ee4e3145744362eb685a97a7bb61420d8f2d99c015b8d789.gz"
+    },
+    {
+      "path": "src/sim/knowledge.ts",
+      "kind": "tracked-change",
+      "sha256": "25c50fde3397a0be2871f1a35cbf49a668b4e33ca0828e3419ba169b7b6565af",
+      "bytes": 9506,
+      "archiveObject": "objects/25/25c50fde3397a0be2871f1a35cbf49a668b4e33ca0828e3419ba169b7b6565af.gz"
+    },
+    {
+      "path": "src/sim/needs.ts",
+      "kind": "tracked-change",
+      "sha256": "744116254a17a43a95618ba78bd8d9c4d860cdaed5a65217e636e072cbe93c44",
+      "bytes": 7523,
+      "archiveObject": "objects/74/744116254a17a43a95618ba78bd8d9c4d860cdaed5a65217e636e072cbe93c44.gz"
+    },
+    {
+      "path": "src/sim/options_work.ts",
+      "kind": "tracked-change",
+      "sha256": "5d4adf4a3754c900d9cf031bb7804202d63b4e50f1a9e8c9dc4f00521be66a0d",
+      "bytes": 102228,
+      "archiveObject": "objects/5d/5d4adf4a3754c900d9cf031bb7804202d63b4e50f1a9e8c9dc4f00521be66a0d.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "kind": "tracked-change",
+      "sha256": "10c2e873d6ffccbdc87a18709514fb764a18cc6335a69a7dedb41894d006cbe3",
+      "bytes": 67206,
+      "archiveObject": "objects/10/10c2e873d6ffccbdc87a18709514fb764a18cc6335a69a7dedb41894d006cbe3.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "fd72a2a4175f9b60abde96d1e0535929fb69ad1b3d625fad45cf424b59115df1",
+      "bytes": 25825,
+      "archiveObject": "objects/fd/fd72a2a4175f9b60abde96d1e0535929fb69ad1b3d625fad45cf424b59115df1.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "544e4c2a4610a105b6652a137e9bbab4687dde31195a920fef578ea3d753f0ac",
+      "bytes": 54609,
+      "archiveObject": "objects/54/544e4c2a4610a105b6652a137e9bbab4687dde31195a920fef578ea3d753f0ac.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "3fdc08fe1f688a3538a8ea43dc906479650576f7f7cd78ee9de4d0e6f87e64ab",
+      "bytes": 30218,
+      "archiveObject": "objects/3f/3fdc08fe1f688a3538a8ea43dc906479650576f7f7cd78ee9de4d0e6f87e64ab.gz"
+    },
+    {
+      "path": "tests/hearth.test.ts",
+      "kind": "untracked",
+      "sha256": "e05d5c8bd37d8d9dca61723a695809f9184e68bea6f18154747f66dedb232996",
+      "bytes": 6909,
+      "archiveObject": "objects/e0/e05d5c8bd37d8d9dca61723a695809f9184e68bea6f18154747f66dedb232996.gz"
+    },
+    {
+      "path": "tests/zz_review_a_flood_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "530f74ac9dd580a2d07cf1a3c1767e76e0d35c8cbed5b3e2f107da7ab0610bd2",
+      "bytes": 3560,
+      "repositoryPath": "tests/zz_review_a_flood_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_a_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "b80e45dafd597a51b40b5307b93a7c2c89d3372c19bf879ee1808086ca6eaf2e",
+      "bytes": 7276,
+      "repositoryPath": "tests/zz_review_a_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "bfca3a504e0d2c5a14f6d14c5b1bc74120bee9749d0f062c76d5a005b60abea9",
+      "bytes": 4391,
+      "repositoryPath": "tests/zz_review_b_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_roundtrip.test.ts",
+      "kind": "untracked",
+      "sha256": "1b84c2a750ec4185b0a1ae28b595071a95dd61072a8b7fe8d7032f36af4f0d1f",
+      "bytes": 9814,
+      "repositoryPath": "tests/zz_review_b_roundtrip.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_undefined_keyorder.test.ts",
+      "kind": "untracked",
+      "sha256": "8544f11fe1c398bc38dd8f61e1f1b51af821327f1b301c1dc5aa114f5d057bc5",
+      "bytes": 2803,
+      "repositoryPath": "tests/zz_review_b_undefined_keyorder.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators.test.ts",
+      "kind": "untracked",
+      "sha256": "65204e8ebe29185304bf6329108db53571918cd60bd0f1a2b1f1930ff104102d",
+      "bytes": 2950,
+      "repositoryPath": "tests/zz_review_b_validators.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators_harsh.test.ts",
+      "kind": "untracked",
+      "sha256": "866dd0b2052aaceea94b2efe9d5665cc1a1d062e3cf1a7afd777b6e6adf0f18b",
+      "bytes": 3069,
+      "repositoryPath": "tests/zz_review_b_validators_harsh.test.ts"
+    },
+    {
+      "path": "tests/zz_review_c_v115gate.test.ts",
+      "kind": "untracked",
+      "sha256": "abdadd432652379df232ff4134db59b36fa4c600f97f4f136e189616d9f2775a",
+      "bytes": 2010,
+      "repositoryPath": "tests/zz_review_c_v115gate.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_claim_home_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "efcdd878fd72bd659921fa0f06e47bf0eb660d4bdc674aa67a2bbccf28b4431a",
+      "bytes": 1917,
+      "repositoryPath": "tests/zz_review_d_claim_home_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_dependents_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "dacb64678ce1a8ae26eb1aab94d1a201b11b313223fe17d42507af08b92c6f67",
+      "bytes": 2117,
+      "repositoryPath": "tests/zz_review_d_dependents_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_perceive_store.test.ts",
+      "kind": "untracked",
+      "sha256": "657786e9070682b4b546421ae9aa8c87157f542baaf2d4a95a795db84ad0a65d",
+      "bytes": 1406,
+      "repositoryPath": "tests/zz_review_d_perceive_store.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_propose_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "103836ce3f3ed3be3a1016476c865556fb79904a7917b4a34c204c771c3a87e5",
+      "bytes": 2112,
+      "repositoryPath": "tests/zz_review_d_propose_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_request_site_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "74ec2edb45e83cc29ca3cffbc977e5bfd872b432d1aadf092ac5f7d9b4868742",
+      "bytes": 1971,
+      "repositoryPath": "tests/zz_review_d_request_site_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_welfare_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "5ff7eb3f49f505483dc01a5d0fda38caa0891dede7f5fed8bf390336a3a51ece",
+      "bytes": 3817,
+      "repositoryPath": "tests/zz_review_d_welfare_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_famine_trace.test.ts",
+      "kind": "untracked",
+      "sha256": "227946d1cb08caf459f286a78540ca55dbc699d13dcec84c99352a8d749656ed",
+      "bytes": 13950,
+      "repositoryPath": "tests/zz_review_e_famine_trace.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_fullpack_care.test.ts",
+      "kind": "untracked",
+      "sha256": "5a743b3f410265cae5b51a9ad34e37a775a4dffc5499ca25e3a9d555ba211d43",
+      "bytes": 8174,
+      "repositoryPath": "tests/zz_review_e_fullpack_care.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_granary.test.ts",
+      "kind": "untracked",
+      "sha256": "17ca6f3be6bf094fd37d4ec8cf59f408dbf9eea00f6db17bd0e8f9773e2d3ffa",
+      "bytes": 4085,
+      "repositoryPath": "tests/zz_review_e_granary.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_night_water.test.ts",
+      "kind": "untracked",
+      "sha256": "8bc6fe0d4a54937d88cfcbe95e3ac719787b37dcb996c09756175c7b72a1c673",
+      "bytes": 6333,
+      "repositoryPath": "tests/zz_review_e_night_water.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_acquire_double_count.test.ts",
+      "kind": "untracked",
+      "sha256": "de00e7cf2be270607e0995e7cad038bf75d37b618b9f4f07b43852191e0fb76e",
+      "bytes": 7360,
+      "repositoryPath": "tests/zz_review_f_acquire_double_count.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_chain_time.test.ts",
+      "kind": "untracked",
+      "sha256": "053ee6cac47834225cf78a211068a63969444ba8a579f7905ed2cccafa75ea39",
+      "bytes": 5199,
+      "repositoryPath": "tests/zz_review_f_chain_time.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_ordinary_probe.test.ts",
+      "kind": "untracked",
+      "sha256": "4ce05ff42eaf0bc6bd628e48c9daa0ac1b39ab72ce5de1c93594b4c2be821a90",
+      "bytes": 8590,
+      "repositoryPath": "tests/zz_review_f_ordinary_probe.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_plank_diversion.test.ts",
+      "kind": "untracked",
+      "sha256": "987e80c64fb886cccc0923ceec4a3a498eae9724c1173f835e3e0f98eec8296a",
+      "bytes": 4207,
+      "repositoryPath": "tests/zz_review_f_plank_diversion.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_sibling_claim.test.ts",
+      "kind": "untracked",
+      "sha256": "1ea670d439a9590d80780d58986595ce1c34af81da10c6746fb5eae9f4502ca3",
+      "bytes": 4066,
+      "repositoryPath": "tests/zz_review_f_sibling_claim.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_feed_caps.test.ts",
+      "kind": "untracked",
+      "sha256": "e3bd58c0a18e155de886711f604d1095a926245e66445e6f3c2ebacd6b026d0c",
+      "bytes": 2165,
+      "repositoryPath": "tests/zz_review_g_feed_caps.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_ledger_endings.test.ts",
+      "kind": "untracked",
+      "sha256": "0d7cf87733c762c85ad41103d7eba7689d1b9e9789b2f250a2a9bb13ba00c265",
+      "bytes": 6497,
+      "repositoryPath": "tests/zz_review_g_ledger_endings.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "a9f37506d44a30b2400efc766e92b8cb6bcd7c9935127270ed2adb3a9903d55a",
+      "bytes": 8302,
+      "repositoryPath": "tests/zz_review_g_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_stale_blocked.test.ts",
+      "kind": "untracked",
+      "sha256": "0698c3a31df129d2cc905b26e87c6bed3c9c06ea79d6d4807c20c3f95a0c2826",
+      "bytes": 3081,
+      "repositoryPath": "tests/zz_review_g_stale_blocked.test.ts"
+    },
+    {
+      "path": "tests/zz_review_h_retention.test.ts",
+      "kind": "untracked",
+      "sha256": "176ee8af50f357c6f3af3021e70593b4197325f5ca17a4438e86ea87ad457748",
+      "bytes": 4946,
+      "repositoryPath": "tests/zz_review_h_retention.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_large_cost.test.ts",
+      "kind": "untracked",
+      "sha256": "a330db571d8708e93ba59703dff27e33db3c8d1cd7875cd12963a739e23bfc4c",
+      "bytes": 2556,
+      "repositoryPath": "tests/zz_review_main_large_cost.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_liveness.test.ts",
+      "kind": "untracked",
+      "sha256": "d63b35c0518a7d993307a36b0a39422c3b9159666f415ca4a947e91ec966dcba",
+      "bytes": 4391,
+      "repositoryPath": "tests/zz_review_main_liveness.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_mature_large.test.ts",
+      "kind": "untracked",
+      "sha256": "fe4c738270642518a7d51083b17dd43b85e8f02e00179c71e6e61988d4675d4c",
+      "bytes": 4568,
+      "repositoryPath": "tests/zz_review_main_mature_large.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_site_fate.test.ts",
+      "kind": "untracked",
+      "sha256": "c26c6f1efa49699b16332f9031b9fdbdaa355d24fe058a4f39db11d2b976d8f6",
+      "bytes": 2383,
+      "repositoryPath": "tests/zz_review_main_site_fate.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_till_path.test.ts",
+      "kind": "untracked",
+      "sha256": "84d9d4972a90bdf6efdaa693f8321395105d4d71c7b1c582f31d58e69bde0aba",
+      "bytes": 2948,
+      "repositoryPath": "tests/zz_review_main_till_path.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_till_root.test.ts",
+      "kind": "untracked",
+      "sha256": "551536030ca957256560e5c9615263d70c9e963798935599ee38abcaadafeec5",
+      "bytes": 2516,
+      "repositoryPath": "tests/zz_review_main_till_root.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_tool_capacity.test.ts",
+      "kind": "untracked",
+      "sha256": "b786042e04f61323961e6d3c739ac33c219fac52ce347e8355e744119fd5b64b",
+      "bytes": 4509,
+      "repositoryPath": "tests/zz_review_main_tool_capacity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_toolreport_saves.test.ts",
+      "kind": "untracked",
+      "sha256": "df7292d5568d545c261cff0a4215ad3641ebd6e576da17919e9a8d26c2453c7e",
+      "bytes": 3458,
+      "repositoryPath": "tests/zz_review_main_toolreport_saves.test.ts"
+    }
+  ],
+  "stagedFiles": []
+}

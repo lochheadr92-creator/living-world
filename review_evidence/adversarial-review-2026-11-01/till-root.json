@@ -1,0 +1,176 @@
+{
+ "tick": 3203,
+ "isla": {
+  "x": 41.356873622373676,
+  "y": 52.51473245427478
+ },
+ "spot": {
+  "x": 45,
+  "y": 41
+ },
+ "standing": {
+  "x": 45.5,
+  "y": 42.5
+ },
+ "pathExactLen": null,
+ "pathLooseLen": null,
+ "around": {
+  "43,39": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "44,39": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "45,39": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "46,39": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "47,39": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "43,40": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "44,40": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "45,40": {
+   "terrain": "FOREST",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "46,40": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": true,
+   "ents": []
+  },
+  "47,40": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "43,41": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "44,41": {
+   "terrain": "FOREST",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "45,41": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "46,41": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": true,
+   "ents": []
+  },
+  "47,41": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": false,
+   "ents": []
+  },
+  "43,42": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "44,42": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": false,
+   "ents": []
+  },
+  "45,42": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": false,
+   "ents": []
+  },
+  "46,42": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "47,42": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "43,43": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "44,43": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": false,
+   "ents": []
+  },
+  "45,43": {
+   "terrain": "GRASS",
+   "free": false,
+   "walk": false,
+   "ents": []
+  },
+  "46,43": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  },
+  "47,43": {
+   "terrain": "GRASS",
+   "free": true,
+   "walk": true,
+   "ents": []
+  }
+ },
+ "homeTile": {
+  "type": "lean_to",
+  "x": 47,
+  "y": 38,
+  "w": 1,
+  "h": 1
+ }
+}

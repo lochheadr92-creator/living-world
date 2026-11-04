@@ -1,0 +1,79 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 52,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 125.315,
+  "alive": 28,
+  "deaths": 3,
+  "holdersAtStart": {
+    "charcoal": 5,
+    "smelting": 4,
+    "forging": 4
+  },
+  "holdersAtEnd": {
+    "charcoal": 8,
+    "smelting": 4,
+    "forging": 4
+  },
+  "holdersDead": {
+    "charcoal": 0,
+    "smelting": 0,
+    "forging": 0
+  },
+  "lessonsByKind": {},
+  "lessonOffersStarted": 8,
+  "lessonRequestsStarted": 8,
+  "learned": [
+    {
+      "person": "Pia",
+      "kind": "charcoal",
+      "source": "taught",
+      "tick": 97080,
+      "teacher": "Hal",
+      "attempts": null
+    },
+    {
+      "person": "Mona",
+      "kind": "charcoal",
+      "source": "taught",
+      "tick": 82336,
+      "teacher": "Dax",
+      "attempts": null
+    },
+    {
+      "person": "Talia",
+      "kind": "charcoal",
+      "source": "taught",
+      "tick": 101006,
+      "teacher": "Yara",
+      "attempts": null
+    }
+  ],
+  "trialBatchesStarted": 0,
+  "trialAttemptsLogged": 0,
+  "trialsWorkedOut": 0,
+  "trialsOpenAtEnd": [],
+  "optionSamples": 1248,
+  "wantedKinds": {
+    "charcoal": 47
+  },
+  "blockedBy": {
+    "has not learned iron forging": 20,
+    "has not learned charcoal firing": 32
+  },
+  "smithies": 1,
+  "smithySites": 0,
+  "firstSmithyDay": 33.41625,
+  "ironMade": 0,
+  "charcoalMade": 12,
+  "oreTaken": 0,
+  "hash": "55dd6258",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

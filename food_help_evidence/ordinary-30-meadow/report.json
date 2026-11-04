@@ -1,0 +1,57 @@
+{
+  "seed": "meadow",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 45,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 74.512,
+  "alive": 28,
+  "deaths": 1,
+  "deathCauses": {
+    "fever": 1
+  },
+  "foodRequests": 155,
+  "foodRequestOutcomes": {
+    "declined:no item": 44,
+    "fulfilled": 18,
+    "failed": 11,
+    "declined:own need": 35,
+    "broken": 7,
+    "expired": 3,
+    "declined:unwilling": 25,
+    "partial": 4,
+    "interrupted": 1,
+    "promised": 6,
+    "pending": 1
+  },
+  "fetchPromises": 36,
+  "promisedDelivered": 20,
+  "promisedDeliveredUnits": 37,
+  "giftsOnRequest": 10,
+  "gives": 135,
+  "seeks": 6,
+  "seekOutcomes": {
+    "other": 3,
+    "found": 1,
+    "not there": 2
+  },
+  "totals": {
+    "samples": 8236,
+    "foodAskOffers": 681,
+    "foodAskBlocked": 7,
+    "seekOffers": 40,
+    "seekBlocked": 6,
+    "hungryWithFood": 159,
+    "hungryWithFoodNoEatOption": 99,
+    "hungryWithFoodEatBlocked": 99
+  },
+  "deathsWithFoodInPack": 0,
+  "hungerDeathsWithSpareInHousehold": 0,
+  "hash": "210c03fa",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

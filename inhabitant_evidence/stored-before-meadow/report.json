@@ -1,0 +1,15 @@
+{
+  "seed": "meadow",
+  "rules": 39,
+  "ticks": 14400,
+  "stop": "day 6",
+  "head": "c35db6b9824a1608e7c60108c113cbb01d08cc3d",
+  "hash": "20abb63d",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "attempts": [],
+  "requests": [],
+  "seconds": 7.268
+}

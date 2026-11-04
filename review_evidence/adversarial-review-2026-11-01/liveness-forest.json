@@ -1,0 +1,1536 @@
+{
+ "seed": "forest",
+ "ticks": 12000,
+ "alive": 28,
+ "danglingConv": 0,
+ "longConv": 0,
+ "longSuspended": 0,
+ "longIdle": 0,
+ "conversations": 2,
+ "samples": [],
+ "endings": {
+  "Marking out a lean-to": {
+   "success": 5,
+   "failed": 9,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Collecting 2 wood": {
+   "success": 4,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Nico": {
+   "success": 1,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Collecting 1 wood": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Picking berries": {
+   "success": 68,
+   "failed": 34,
+   "interrupted": 72,
+   "partial": 73,
+   "starts": 0
+  },
+  "Gathering wild grain": {
+   "success": 38,
+   "failed": 24,
+   "interrupted": 48,
+   "partial": 30,
+   "starts": 0
+  },
+  "Bringing berries to Arlo": {
+   "success": 4,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Pottering about": {
+   "success": 19,
+   "failed": 2,
+   "interrupted": 62,
+   "partial": 0,
+   "starts": 0
+  },
+  "Breaking new ground": {
+   "success": 2,
+   "failed": 19,
+   "interrupted": 16,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chopping wood": {
+   "success": 76,
+   "failed": 17,
+   "interrupted": 30,
+   "partial": 3,
+   "starts": 0
+  },
+  "Breaking stone": {
+   "success": 28,
+   "failed": 1,
+   "interrupted": 19,
+   "partial": 0,
+   "starts": 0
+  },
+  "Finish preparing the field": {
+   "success": 8,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Greta": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Maren": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Exploring": {
+   "success": 9,
+   "failed": 0,
+   "interrupted": 18,
+   "partial": 0,
+   "starts": 0
+  },
+  "Plant seed": {
+   "success": 11,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Tend the crops": {
+   "success": 19,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Eating": {
+   "success": 182,
+   "failed": 0,
+   "interrupted": 4,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Mira a swap: berries for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Pottering about at the water's edge": {
+   "success": 5,
+   "failed": 0,
+   "interrupted": 4,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries and water to Arlo": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Thea a swap: berries for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Drinking": {
+   "success": 12,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Petra a swap: berries for wood": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing food home": {
+   "success": 50,
+   "failed": 0,
+   "interrupted": 8,
+   "partial": 2,
+   "starts": 0
+  },
+  "Making a hoe": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Delivering wood to the building site": {
+   "success": 36,
+   "failed": 2,
+   "interrupted": 6,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing grain to Nico": {
+   "success": 1,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Drinking at the water": {
+   "success": 204,
+   "failed": 0,
+   "interrupted": 10,
+   "partial": 0,
+   "starts": 0
+  },
+  "Building the lean-to": {
+   "success": 5,
+   "failed": 4,
+   "interrupted": 5,
+   "partial": 6,
+   "starts": 0
+  },
+  "Fishing": {
+   "success": 32,
+   "failed": 21,
+   "interrupted": 35,
+   "partial": 6,
+   "starts": 0
+  },
+  "Sitting out among the trees": {
+   "success": 13,
+   "failed": 0,
+   "interrupted": 3,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Dov for wood": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Bram for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Running from the wolf toward the fire": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 11,
+   "partial": 0,
+   "starts": 0
+  },
+  "Picking fruit": {
+   "success": 31,
+   "failed": 3,
+   "interrupted": 19,
+   "partial": 6,
+   "starts": 0
+  },
+  "Looking for timber": {
+   "success": 3,
+   "failed": 0,
+   "interrupted": 10,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Bram a swap: berries for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Dov a swap: berries for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Making a pick": {
+   "success": 3,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Resting": {
+   "success": 4,
+   "failed": 0,
+   "interrupted": 29,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Viktor": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Feeding the fire": {
+   "success": 10,
+   "failed": 0,
+   "interrupted": 7,
+   "partial": 0,
+   "starts": 0
+  },
+  "Fetching water (promised)": {
+   "success": 4,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Strolling about the square": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Sleeping by my lean-to": {
+   "success": 107,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing water to Tomas (promised)": {
+   "success": 3,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Staying at the fire": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 9,
+   "partial": 0,
+   "starts": 0
+  },
+  "Staying at my lean-to": {
+   "success": 15,
+   "failed": 0,
+   "interrupted": 63,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries and water to Hana": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Sleeping by the fire": {
+   "success": 18,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Eating at home": {
+   "success": 46,
+   "failed": 1,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Petra": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Hal": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Maren to help with the lean-to": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Marking out a hut": {
+   "success": 9,
+   "failed": 8,
+   "interrupted": 12,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Hana": {
+   "success": 1,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Tessa about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Delivering wood & stone to the building site": {
+   "success": 6,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Talking with Theo": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Talking with Delia": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Zeke": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking water to Theo": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Yusuf": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Kaia": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Maren": {
+   "success": 0,
+   "failed": 6,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Isla for food": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Lena": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Building the hut": {
+   "success": 5,
+   "failed": 1,
+   "interrupted": 22,
+   "partial": 11,
+   "starts": 0
+  },
+  "Chat with Theo": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Silas": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer grain to Bram": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Jax for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Talia": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Hana": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Delivering stone to the building site": {
+   "success": 16,
+   "failed": 0,
+   "interrupted": 4,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Greta a swap: berries for wood": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Running from the wolf toward away from it": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Leaving water at Tomas’s lean-to (promised)": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Zeke for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Tell Thea to stop my obsolete request": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing wood to Mira (promised)": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Leaving wood at Mira’s lean-to (promised)": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer Lena a swap: berries for stone": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Tomas": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Arlo for water": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Cutting stone": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Cole": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Tessa": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Sleeping on the ground": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Ada for wood": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Maren for stone": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Running from the wolf toward other people": {
+   "success": 3,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Collecting 3 wood": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Theo": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Kaia": {
+   "success": 2,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Arguing with Bram": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Talia about the wolf": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Cole about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Thea for food": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Viktor for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Making an axe": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Talia": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Thea for water": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Silas about the wolf": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Make peace with Theo": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Making a basket": {
+   "success": 5,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Nico": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer berries to Greta": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Ada for stone": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Kaia about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Lena for stone": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Arlo about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Marking out a storehouse": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Sleeping inside the hut": {
+   "success": 43,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Resting inside the hut": {
+   "success": 6,
+   "failed": 0,
+   "interrupted": 19,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Viktor": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Cole": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Thea for wood": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Silas for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer grain to Greta": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Kaia for food": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Tell Faye to stop my obsolete request": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking grain to Greta": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Tell Viktor my promised work is complete": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Leaving grain at Cole’s lean-to (promised)": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking grain to Maren": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Stalking a deer": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Tell Bram to stop my obsolete request": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking refuge inside the hut": {
+   "success": 5,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking fruit to Maren": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Repairing the lean-to": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 2,
+   "starts": 0
+  },
+  "Offer grain to Petra": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer fruit to Yusuf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Running from the wolf toward home": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 5,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking wood to Edda": {
+   "success": 1,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Theo about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Going to eat at the fire": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Going to lay the table at the fire": {
+   "success": 2,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Delia about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Collecting 1 fish": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer fruit to Hal": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Jax about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Dov": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Sleeping by my hut": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer meat to Yusuf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking fruit to Greta": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Tomas for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Tessa for food": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Mira for wood": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Hana about the wolf": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Viktor for food": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking meat to Faye": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing fruit to Silas": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Isla": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Hana": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Chat with Arlo": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Lena for food": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking fruit to Kaia": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Arlo for food": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Jax for food": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Hal for food": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 2,
+   "partial": 0,
+   "starts": 0
+  },
+  "Making a saw": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Kaia (promised)": {
+   "success": 0,
+   "failed": 3,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer fruit to Kaia": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Leaving grain at Arlo’s lean-to (promised)": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer berries to Yusuf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Leaving berries at Kaia’s lean-to (promised)": {
+   "success": 3,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer berries to Kaia": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Ask Ada for food": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Zeke about the wolf": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Fetching water": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer fruit to Nico": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking berries to Petra": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing fruit to Kaia": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing berries to Viktor at home": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking berries to Kaia": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Harvesting grain to eat": {
+   "success": 1,
+   "failed": 0,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Fetching water for Arlo": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  },
+  "Offer fish to Ada": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Bringing grain to Arlo": {
+   "success": 0,
+   "failed": 2,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Taking fish to Faye": {
+   "success": 0,
+   "failed": 1,
+   "interrupted": 0,
+   "partial": 0,
+   "starts": 0
+  },
+  "Warn Tomas about the wolf": {
+   "success": 0,
+   "failed": 0,
+   "interrupted": 1,
+   "partial": 0,
+   "starts": 0
+  }
+ },
+ "failDetails": [
+  [
+   "Picking berries | partial | nothing left",
+   38
+  ],
+  [
+   "Picking berries | partial | someone else is already taking it",
+   34
+  ],
+  [
+   "Picking berries | failed | nothing left",
+   22
+  ],
+  [
+   "Breaking new ground | failed | no way to get there",
+   18
+  ],
+  [
+   "Gathering wild grain | failed | nothing left",
+   17
+  ],
+  [
+   "Gathering wild grain | partial | someone else is already taking it",
+   15
+  ],
+  [
+   "Gathering wild grain | partial | nothing left",
+   15
+  ],
+  [
+   "Fishing | failed | nothing left",
+   15
+  ],
+  [
+   "Chopping wood | failed | it is gone",
+   13
+  ],
+  [
+   "Picking berries | failed | someone else is already taking it",
+   12
+  ],
+  [
+   "Gathering wild grain | failed | someone else is already taking it",
+   7
+  ],
+  [
+   "Marking out a lean-to | failed | the household already has a home layout under way",
+   5
+  ],
+  [
+   "Building the hut | partial | no materials to work with (# wood, # stone)",
+   5
+  ],
+  [
+   "Fishing | failed | someone else is already taking it",
+   5
+  ],
+  [
+   "Fishing | partial | nothing left",
+   5
+  ],
+  [
+   "Picking fruit | partial | nothing left",
+   5
+  ],
+  [
+   "Marking out a lean-to | failed | another layout already reserves this footprint or its access gap",
+   4
+  ],
+  [
+   "Chopping wood | failed | someone else is already taking it",
+   4
+  ],
+  [
+   "Marking out a hut | failed | the household already has a home layout under way",
+   4
+  ],
+  [
+   "Building the lean-to | partial | no materials to work with (# wood)",
+   3
+  ],
+  [
+   "Building the lean-to | partial | the site is no longer here; its fate is unknown",
+   3
+  ],
+  [
+   "Building the lean-to | failed | the site is already finished or gone",
+   3
+  ],
+  [
+   "Bringing berries to Hana | failed | they had no room to carry it",
+   3
+  ],
+  [
+   "Marking out a hut | failed | too many projects under way already",
+   3
+  ],
+  [
+   "Chat with Maren | failed | Maren was too busy to stop",
+   3
+  ],
+  [
+   "Chat with Lena | failed | Lena was too busy to stop",
+   3
+  ],
+  [
+   "Bringing water to Tomas (promised) | failed | they had no room to carry it",
+   3
+  ],
+  [
+   "Building the hut | partial | no materials to work with (# stone)",
+   3
+  ],
+  [
+   "Building the hut | partial | the site is no longer here; its fate is unknown",
+   3
+  ],
+  [
+   "Tell Faye to stop my obsolete request | failed | Faye was too busy to stop",
+   3
+  ],
+  [
+   "Chat with Dov | failed | they are inside a different space",
+   3
+  ],
+  [
+   "Ask Lena for food | failed | Lena was too busy to stop",
+   3
+  ],
+  [
+   "Offer Petra a swap: berries for wood | failed | Petra was too busy to stop",
+   2
+  ],
+  [
+   "Ask Dov for wood | failed | Dov was too busy to stop",
+   2
+  ],
+  [
+   "Delivering wood to the building site | failed | the site no longer needs that",
+   2
+  ],
+  [
+   "Pottering about | failed | took too long",
+   2
+  ],
+  [
+   "Bringing berries to Nico | failed | they had no room to carry it",
+   2
+  ],
+  [
+   "Chat with Zeke | failed | Zeke was too busy to stop",
+   2
+  ],
+  [
+   "Chat with Yusuf | failed | Yusuf was too busy to stop",
+   2
+  ],
+  [
+   "Chat with Kaia | failed | Kaia was too busy to stop",
+   2
+  ],
+  [
+   "Ask Isla for food | failed | Isla was too busy to stop",
+   2
+  ],
+  [
+   "Chat with Theo | failed | Theo was too busy to stop",
+   2
+  ],
+  [
+   "Bringing berries to Cole | failed | they had no room to carry it",
+   2
+  ],
+  [
+   "Bringing berries to Viktor | failed | they had no room to carry it",
+   2
+  ],
+  [
+   "Ask Ada for wood | failed | Ada was too busy to stop",
+   2
+  ],
+  [
+   "Chopping wood | partial | someone else is already taking it",
+   2
+  ],
+  [
+   "Bringing food home | partial | no room for everything",
+   2
+  ],
+  [
+   "Ask Kaia for food | failed | Kaia was too busy to stop",
+   2
+  ],
+  [
+   "Tell Viktor my promised work is complete | failed | Viktor was too busy to stop",
+   2
+  ],
+  [
+   "Repairing the lean-to | partial | ran out of materials",
+   2
+  ],
+  [
+   "Chat with Maren | failed | they are inside a different space",
+   2
+  ],
+  [
+   "Bringing berries to Kaia (promised) | failed | they had no room to carry it",
+   2
+  ],
+  [
+   "Picking fruit | failed | nothing left",
+   2
+  ],
+  [
+   "Bringing grain to Nico | failed | they had no room to carry it",
+   2
+  ],
+  [
+   "Offer Mira a swap: berries for wood | failed | Mira was too busy to stop",
+   1
+  ],
+  [
+   "Offer Thea a swap: berries for wood | failed | Thea was too busy to stop",
+   1
+  ],
+  [
+   "Breaking new ground | failed | the ground there is no longer free",
+   1
+  ],
+  [
+   "Fishing | failed | pack is full",
+   1
+  ],
+  [
+   "Ask Bram for wood | failed | Bram was too busy to stop",
+   1
+  ],
+  [
+   "Offer Bram a swap: berries for wood | failed | Bram was too busy to stop",
+   1
+  ]
+ ]
+}

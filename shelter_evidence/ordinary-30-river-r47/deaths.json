@@ -1,0 +1,30 @@
+[
+  {
+    "tick": 56935,
+    "name": "Milo",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 57350,
+    "name": "Maren",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 59242,
+    "name": "Petra",
+    "cause": "wolf attack",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 70337,
+    "name": "Faye",
+    "cause": "wolf attack",
+    "home": null,
+    "cond": null
+  }
+]

@@ -1,0 +1,22 @@
+natural:river: reached tick 19200, alive 28/28, deaths 0, buildings 20, sites 5, piles 0, meals 0, requests 124, townships 1, civic 1, flood no, water bodies 3
+natural:meadow: reached tick 19200, alive 28/28, deaths 0, buildings 20, sites 4, piles 0, meals 0, requests 84, townships 1, civic 0, flood no, water bodies 3
+natural:forest: reached tick 19200, alive 28/28, deaths 0, buildings 23, sites 5, piles 0, meals 2, requests 96, townships 1, civic 0, flood no, water bodies 3
+scene:meal rulesVersion=115 dynamics=rich persons=3
+scene:meal: reached tick 7272, alive 3/3, deaths 0, buildings 2, sites 0, piles 0, meals 3, requests 2, townships 1, civic 0, flood no, water bodies 1
+scene:haul rulesVersion=115 dynamics=rich persons=1
+scene:haul: reached tick 7200, alive 1/1, deaths 0, buildings 3, sites 0, piles 0, meals 0, requests 0, townships 1, civic 0, flood no, water bodies 1
+scene:care rulesVersion=115 dynamics=rich persons=3
+scene:care: reached tick 7368, alive 3/3, deaths 0, buildings 2, sites 0, piles 0, meals 1, requests 5, townships 1, civic 0, flood no, water bodies 1
+scene:workshop rulesVersion=115 dynamics=rich persons=2
+scene:workshop: reached tick 7200, alive 2/2, deaths 0, buildings 4, sites 0, piles 0, meals 0, requests 0, townships 1, civic 0, flood no, water bodies 1
+natural:river: reached tick 19200, alive 28/28, deaths 0, buildings 20, sites 5, piles 0, meals 0, requests 124, townships 1, civic 1, flood no, water bodies 3
+natural:meadow: reached tick 19200, alive 28/28, deaths 0, buildings 20, sites 4, piles 0, meals 0, requests 84, townships 1, civic 0, flood no, water bodies 3
+natural:forest: reached tick 19200, alive 28/28, deaths 0, buildings 23, sites 5, piles 0, meals 2, requests 96, townships 1, civic 0, flood no, water bodies 3
+scene:meal rulesVersion=115 dynamics=rich persons=3
+scene:meal: reached tick 7272, alive 3/3, deaths 0, buildings 2, sites 0, piles 0, meals 3, requests 2, townships 1, civic 0, flood no, water bodies 1
+scene:haul rulesVersion=115 dynamics=rich persons=1
+scene:haul: reached tick 7200, alive 1/1, deaths 0, buildings 3, sites 0, piles 0, meals 0, requests 0, townships 1, civic 0, flood no, water bodies 1
+scene:care rulesVersion=115 dynamics=rich persons=3
+scene:care: reached tick 7368, alive 3/3, deaths 0, buildings 2, sites 0, piles 0, meals 1, requests 5, townships 1, civic 0, flood no, water bodies 1
+scene:workshop rulesVersion=115 dynamics=rich persons=2
+scene:workshop: reached tick 7200, alive 2/2, deaths 0, buildings 4, sites 0, piles 0, meals 0, requests 0, townships 1, civic 0, flood no, water bodies 1

@@ -1,0 +1,258 @@
+P
+Petra
+Follow
+Elder, 66
+Bramble household
+Home: lean-to (56% sound) — last considered just now: the household has already laid out a hut
+Township: Willowbank
+MOOD
+Content
+HEALTH
+100
+ON THEIR MIND
++6
+Helped finish a hut
+-5
+The lean season
+What are they up to?
+More
+Sleeping by my lean-to — walking to Lean-to (8 tiles to go).
+on the way
+WHAT ARE THEY SET ON?
+Put 4 units of food by for the household. Step: gather food to put by (2 more) — settled on, not started. 3 of 4 units put by so far. Why: there is next to nothing at home to fall back on.
+NEEDS
+Food
+63
+Water
+55
+Energy
+34
+Warmth
+89
+Safety
+78
+Company
+99
+CARRYING
+×3
+×2
+2.8 / 6
+TOOLS
+none
+Township & shared work
+
+Willowbank: 13 households. Membership belongs to the household and does not change with walking.
+
+Recent recorded production and resource flows:
+
+gathering: 234 berries, 43 fish, 26 fruit, 69 grain, 33 stone, 108 wood; 3 recorded days. Last source #863 at tick 5994.
+
+Repeated activities: gathering: berries on 3 days; gathering: grain on 3 days; gathering: wood on 3 days; gathering: stone on 3 days; gathering: fruit on 3 days; gathering: fish on 3 days.
+
+No transfers between township affiliations recorded.
+
+No repeated-support faction currently established.
+
+No shared project proposed yet.
+
+Household history
+
+Bramble household formed at tick 0; formation cause is not recorded.
+
+Members: Petra.
+
+Home #898: lean_to; recorded builders: unknown.
+
+Site #3402 (hut), proposed by Petra; waiting for materials.
+
+Request #2172: Cole asked Petra; fulfilled: promise kept; promise #2185; site #1977.
+
+Request #2601: Arlo asked Petra; declined: making; site #2490.
+
+Relationship history
+
+Ada: trust 31, affinity 14.
+
+Earlier cause not recorded.
+
+Edda: trust 25, affinity 28.
+
+Remembered at tick 5651: worked alongside Edda. Event link not recorded.
+
+Remembered at tick 5701: worked alongside Edda. Event link not recorded.
+
+Tomas: trust 23, affinity 21.
+
+Remembered at tick 5651: worked alongside Tomas. Event link not recorded.
+
+Remembered at tick 5701: worked alongside Tomas. Event link not recorded.
+
+Cole: trust 22, affinity -3.
+
+Accounts of places checked: 1, borne out 1. Last: the clay pit #956 described as about 21 (told at tick 2877), 21 there at tick 5413 against about 21 expected: borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.
+
+Request #2172, helper, tick 2957: fulfilled — promise kept; site #1977. Task: wood (wood); asked 1; agreed 1. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 2957; completion tick 2957, commitment #2185. Acknowledged at tick 2957.
+
+Remembered at tick 5413: the clay pit Cole described was as described when I got there. Event link not recorded.
+
+Hana: trust 32, affinity 43.
+
+Earlier cause not recorded.
+
+Kaia: trust 22, affinity 23.
+
+Remembered at tick 5151: worked alongside Kaia. Event link not recorded.
+
+Thea: trust 24, affinity 16.
+
+Remembered at tick 5200: saw Thea help Talia. Event link not recorded.
+
+Talia: trust 17, affinity -8.
+
+Remembered at tick 2560: saw Talia help Lena. Event link not recorded.
+
+Remembered at tick 5151: worked alongside Talia. Event link not recorded.
+
+Theo: trust 43, affinity 41.
+
+Remembered at tick 4881: saw Theo quarrel. Event link not recorded.
+
+Remembered at tick 5101: worked alongside Theo. Event link not recorded.
+
+Bram: trust 16, affinity 0.
+
+Remembered at tick 4851: worked alongside Bram. Event link not recorded.
+
+Remembered at tick 4881: saw Bram quarrel. Event link not recorded.
+
+Viktor: trust 20, affinity -8.
+
+Remembered at tick 4851: worked alongside Viktor. Event link not recorded.
+
+Yusuf: trust 21, affinity 13.
+
+Remembered at tick 4801: worked alongside Yusuf. Event link not recorded.
+
+Remembered at tick 4851: worked alongside Yusuf. Event link not recorded.
+
+Recent decisions
+
+Tick 5990 (just now), free: chose “Sleep at my lean-to”; still under way. Passed over then: Gathering wild grain, Ask Edda to help with the hut, Go and drink at the water. Set aside then: Stay in shelter until it is light (not at a shelter); Picking berries (believes it is empty); Gathering wild grain (believes it is empty).
+
+Tick 5769 (2 hundred ticks ago), free: chose “Lay out a hut”; ended success at tick 5989: done. Passed over then: Offer berries to Greta, Picking berries, Fetch water. Set aside then: Gathering wild grain (believes it is empty); Work on the building site (site is waiting for materials (3 stone)); Picking berries (not enough estimated time for the trip and return: energy for the return).
+
+Tick 5715 (3 hundred ticks ago), free: chose “Tend the crops”; ended success at tick 5768: done. Passed over then: Lay out a hut, Offer berries to Greta, Picking berries. Set aside then: Gathering wild grain (believes it is empty); Work on the building site (site is waiting for materials (3 stone)); Breaking stone for a friend’s hut (not enough estimated time for the trip and return: energy for the return).
+
+Tick 5502 (5 hundred ticks ago), free: chose “Build the hut”; ended success at tick 5714: done. Passed over then: Lay out a hut, Tend the crops, Gathering wild grain. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Work on the building site (site is waiting for materials (4 stone)).
+
+Tick 5440 (6 hundred ticks ago), free: chose “Bring food home” as a step of plan #2795; ended success at tick 5501: done. Passed over then: Tend the crops, Build the hut, Lay out a hut. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood to keep the fire going (no room in my pack for one wood).
+
+Tick 5194 (8 hundred ticks ago), free: chose “Tend the crops”; ended success at tick 5439: done. Passed over then: Tend the crops, Potter about near home. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+Tick 5106 (9 hundred ticks ago), free: chose “Picking berries” as a step of plan #2795; ended success at tick 5193: done. Passed over then: Picking berries, Picking berries, Breaking stone for a friend’s hut. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+Tick 4970 (10 hundred ticks ago), free: chose “Deliver materials to the hut site”; ended success at tick 5105: done. Passed over then: Offer Yusuf a swap: wood for grain, Offer Theo a swap: wood for berries, Offer Isla a swap: wood for grain. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood to keep the fire going (no room in my pack for one wood).
+
+47 earlier decisions were compacted and are not kept.
+
+Conversation
+LAST CONVERSATION
+7s ago
+Ada
+came to Petra for a chat
+Outcome
+Friendly
+Promises
+1
+DONE
+made 5.2 min ago
+Haul 1 wood to the building site, as promised to Cole
+1 of 1 delivered
+Worries
+1
+Nearby
+People
+14
+Requests
+1
+Recent
+14
+Knows
+153
+Family
+Traits
+
+Reserved, homebody. Hopes for a store that would see them through a lean season (0% there).
+
+frugal
+generous
+reserved
+sociable
+bold
+cautious
+easygoing
+diligent
+homebody
+curious
+SKILLS
+
+Started with a general practical background. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.
+
+Foraging
+×1.20
+Fishing
+×0.87
+Woodcutting
+×0.93
+Stonework
+×1.11
+Building
+×0.99
+Farming
+×1.25
+Crafting
+×0.95
+Carpentry
+×1.06
+Kiln work
+×1.10
+Smithing
+×1.00
+Baking
+×0.90
+
+Charcoal firing: known on arrival (initial background). Iron smelting: known on arrival (initial background). Iron forging: known on arrival (initial background).
+
+Their trade: farming — quicker at it than at anything else.
+
+morning: Gathering wild grain. 1 successful days (activity #2734 at tick 4803). still learning from separate days. Last outcome: completed. morning: Gathering wild grain. 1 successful days (activity #2796 at tick 4859). still learning from separate days. Last outcome: completed. morning: Deliver materials to the hut site. 1 successful days (activity #2893 at tick 5105). still learning from separate days. Last outcome: completed. morning: Picking berries. 1 successful days (activity #2972 at tick 5193). still learning from separate days. Last outcome: completed. morning: Tend the crops. 1 successful days (activity #3011 at tick 5439). still learning from separate days. Last outcome: completed. afternoon: Bring food home. 1 successful days (activity #3126 at tick 5501). still learning from separate days. Last outcome: completed. afternoon: Build the hut. 1 successful days (activity #3149 at tick 5714). still learning from separate days. Last outcome: completed. afternoon: Tend the crops. 1 successful days (activity #3273 at tick 5768). still learning from separate days. Last outcome: completed.
+
+Carried 6 weight of materials to building sites in 2 loads over the last 1 day(s).
+
+THEIR CUSTOMERS
+Arlo asked me for wood 1.0 days ago; I took them 2 0.4 days ago to their site, and nothing came back for it.
+WHAT HAS PAID THEM
+Foraging
+1.3× · 7
+Woodcutting
+0.4× · 3
+
+Berry bush #720: 1 productive visit, 132% of estimated return for time spent. Wild grain #759: 1 productive visit, 127% of estimated return for time spent. Wild grain #762: 1 productive visit, 124% of estimated return for time spent. Tree #495 (location no longer known): 1 productive visit, 118% of estimated return for time spent. Berry bush #703: 1 productive visit, 138% of estimated return for time spent. Wild grain #761: 2 productive visits, 142% of estimated return for time spent. Berry bush #705: 1 productive visit, 126% of estimated return for time spent.
+
+WHAT THEY HAVE HEARD OF PEOPLE
+Thea helped Talia.
+saw it, today
+Theo picked a quarrel with Bram.
+saw it, today
+Talia picked a quarrel with Hana.
+Arlo told me, yesterday
+Talia helped Lena.
+saw it, yesterday
+Edda helped Tomas.
+saw it, yesterday
+Viktor helped Tomas.
+Cole told me (2 mouths on), 2 days ago
+Delia helped Arlo.
+saw it, 2 days ago
+Theo helped Nico.
+saw it, 2 days ago

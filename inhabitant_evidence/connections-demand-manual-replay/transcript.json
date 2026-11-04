@@ -1,0 +1,1052 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "heard-local-demand",
+    "settings": {
+      "seed": "heard-local-demand",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 43
+    },
+    "personId": 5,
+    "personName": "Ben",
+    "startTick": 142,
+    "startHash": "515603d4",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "manual",
+      "kind": "manual",
+      "config": {
+        "by": "hand"
+      }
+    },
+    "budget": {
+      "maxCallsPerDay": 1048576,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 2147483647,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {
+      "showScores": false
+    },
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 142,
+      "attempt": 0,
+      "observationHash": "8443deaf",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 142,
+          "day": 1,
+          "clock": "08:37",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 13
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1,
+            "fish": 1,
+            "wood": 1,
+            "stone": 1,
+            "build": 1,
+            "farm": 1,
+            "craft": 1,
+            "carpentry": 1,
+            "kiln": 1,
+            "smith": 1,
+            "bake": 1
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 96,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 94,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 94,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 83,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 100,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "planks": 4
+          },
+          "load": {
+            "used": 8,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 4
+          },
+          "available": {
+            "planks": 4
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42,
+            "y": 40.5
+          },
+          "mood": 9,
+          "thoughts": [],
+          "trade": {
+            "kind": "carpentry",
+            "why": "2 people asked me for planks"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Thistle",
+          "members": [],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "refused",
+            "detail": "own need",
+            "when": "1 world min ago",
+            "t": 141
+          },
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.7,
+              "y": 40.5,
+              "distance": 1,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Close friend"
+            },
+            {
+              "id": 7,
+              "name": "Cora",
+              "x": 43.4,
+              "y": 40.5,
+              "distance": 1,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Close friend"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 9,
+              "what": "house site",
+              "x": 47,
+              "y": 44,
+              "distance": 6,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Bramble",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            },
+            {
+              "id": 11,
+              "what": "house site",
+              "x": 48,
+              "y": 52,
+              "distance": 13,
+              "direction": "south",
+              "seen": "1 world h 25 min ago",
+              "source": "told by Cora",
+              "stale": false,
+              "owner": "Hazel",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            },
+            {
+              "id": 10,
+              "what": "house site",
+              "x": 56,
+              "y": 44,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "1 world h 25 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "timber yard",
+              "x": 21.5,
+              "y": 36,
+              "distance": 21,
+              "direction": "north-west",
+              "seen": "1 world h 25 min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 9
+              },
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 1,
+            "building site": 3
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Close friend",
+              "affinity": 72,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "43 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            },
+            {
+              "id": 7,
+              "name": "Cora",
+              "label": "Close friend",
+              "affinity": 72,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "1 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Cora",
+              "what": "4 planks",
+              "status": "declined",
+              "note": "own need",
+              "when": "37 world min ago"
+            },
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "4 planks",
+              "status": "declined",
+              "note": "own need",
+              "when": "1 world h 19 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to get the household's house built: the household is still in no shelter of its own, and their house wants 6 wood, 8 planks and 6 bricks.",
+              "kind": "work",
+              "t": 142
+            },
+            {
+              "when": "10 world min ago",
+              "text": "Cora told me about a building site a short walk south of camp.",
+              "kind": "info",
+              "t": 125
+            },
+            {
+              "when": "23 world min ago",
+              "text": "Turned down Cora's request (own need).",
+              "kind": "social",
+              "t": 103
+            },
+            {
+              "when": "23 world min ago",
+              "text": "Cora asked me for planks; I will remember this local demand.",
+              "kind": "social",
+              "t": 103
+            },
+            {
+              "when": "1 world h 6 min ago",
+              "text": "Turned down Ada's request (own need).",
+              "kind": "social",
+              "t": 32
+            },
+            {
+              "when": "1 world h 6 min ago",
+              "text": "Ada asked me for planks; I will remember this local demand.",
+              "kind": "social",
+              "t": 32
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "haul:9",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish a friend’s house",
+            "need": null,
+            "eta": "51 world min",
+            "target": "house site 6 tiles south (seen just now)"
+          },
+          {
+            "key": "build:9",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on a friend’s house",
+            "need": null,
+            "eta": "1 world h 39 min",
+            "target": "house site 6 tiles south (seen just now)"
+          },
+          {
+            "key": "build:11",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on a friend’s house",
+            "need": null,
+            "eta": "2 world h 23 min",
+            "target": "house site 13 tiles south (seen 1 world h 25 min ago)"
+          },
+          {
+            "key": "haul:11",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish a friend’s house",
+            "need": null,
+            "eta": "1 world h 35 min",
+            "target": "house site 13 tiles south (seen 1 world h 25 min ago)"
+          },
+          {
+            "key": "operate:8:hew_planks",
+            "kind": "operate",
+            "label": "Hewing planks",
+            "goal": "for a friend’s house",
+            "need": null,
+            "eta": "3 world h 8 min",
+            "target": "timber yard 21 tiles north-west (seen 1 world h 25 min ago)"
+          },
+          {
+            "key": "haul:10",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish my household’s house",
+            "need": null,
+            "eta": "1 world h 44 min",
+            "target": "house site 14 tiles south-east (seen 1 world h 25 min ago)"
+          },
+          {
+            "key": "build:10",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on my household’s house",
+            "need": null,
+            "eta": "2 world h 32 min",
+            "target": "house site 14 tiles south-east (seen 1 world h 25 min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Look for timber",
+            "goal": "to find trees to fell",
+            "need": null,
+            "eta": "2 world h 45 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get wood for a friend’s house",
+            "reason": "does not know any tree worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "the household has already laid out a house",
+            "target": null
+          },
+          {
+            "label": "Sawing planks",
+            "reason": "needs a saw and has none (and none is on the rack)",
+            "target": "timber yard 21 tiles north-west (seen 1 world h 25 min ago)"
+          },
+          {
+            "label": "Firing bricks",
+            "reason": "does not know of a kiln they may use",
+            "target": null
+          },
+          {
+            "label": "Building a handcart",
+            "reason": "needs a hammer and has none (and none is on the rack)",
+            "target": "timber yard 21 tiles north-west (seen 1 world h 25 min ago)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "get the household's house built",
+            "kind": "shelter",
+            "status": "active",
+            "step": "get 4 wood for the house (it wants 6 wood, 8 planks and 6 bricks)",
+            "wants": {
+              "wood": 4
+            },
+            "blocked": "",
+            "reason": "the household is still in no shelter of its own, and their house wants 6 wood, 8 planks and 6 bricks",
+            "since": "just now"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"operate:8:hew_planks\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 10642
+      },
+      "proposal": {
+        "choose": "operate:8:hew_planks",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 399,
+      "attempt": 0,
+      "observationHash": "a5a10258",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 399,
+          "day": 1,
+          "clock": "11:11",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 17
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1,
+            "fish": 1,
+            "wood": 1,
+            "stone": 1,
+            "build": 1,
+            "farm": 1,
+            "craft": 1,
+            "carpentry": 1.01,
+            "kiln": 1,
+            "smith": 1,
+            "bake": 1
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 88,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 84,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 84,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 88,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 94,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "planks": 4
+          },
+          "load": {
+            "used": 8,
+            "cap": 12
+          },
+          "spokenFor": {},
+          "available": {
+            "planks": 4
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 23.6,
+            "y": 37.6
+          },
+          "mood": 8,
+          "thoughts": [],
+          "trade": {
+            "kind": "carpentry",
+            "why": "2 people asked me for planks"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Thistle",
+          "members": [],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Hewing planks",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 398
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "refused",
+            "detail": "own need",
+            "when": "2 world h 35 min ago",
+            "t": 141
+          },
+          "lastChoice": {
+            "label": "Hewing planks",
+            "when": "2 world h 34 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 8,
+              "what": "timber yard",
+              "x": 21.5,
+              "y": 36,
+              "distance": 3,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6,
+                "planks": 1
+              },
+              "condition": 99
+            },
+            {
+              "id": 9,
+              "what": "house site",
+              "x": 47,
+              "y": 44,
+              "distance": 24,
+              "direction": "south-east",
+              "seen": "2 world h 11 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Bramble",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            },
+            {
+              "id": 11,
+              "what": "house site",
+              "x": 48,
+              "y": 52,
+              "distance": 28,
+              "direction": "south",
+              "seen": "3 world h 59 min ago",
+              "source": "told by Cora",
+              "stale": false,
+              "owner": "Hazel",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            },
+            {
+              "id": 10,
+              "what": "house site",
+              "x": 56,
+              "y": 44,
+              "distance": 33,
+              "direction": "south-east",
+              "seen": "3 world h 59 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "missing": {
+                "wood": 6,
+                "planks": 8,
+                "bricks": 6
+              },
+              "progress": 0
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 1,
+            "building site": 3
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Close friend",
+              "affinity": 72,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "3 world h 17 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            },
+            {
+              "id": 7,
+              "name": "Cora",
+              "label": "Close friend",
+              "affinity": 72,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "2 world h 35 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.7,
+              "y": 40.5,
+              "when": "1 world h 40 min ago"
+            },
+            {
+              "id": 7,
+              "name": "Cora",
+              "x": 43.4,
+              "y": 40.5,
+              "when": "1 world h 55 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Cora",
+              "what": "4 planks",
+              "status": "declined",
+              "note": "own need",
+              "when": "3 world h 11 min ago"
+            },
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "4 planks",
+              "status": "declined",
+              "note": "own need",
+              "when": "3 world h 53 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Gave up on get the household's house built: no known source of wood with anything left.",
+              "kind": "work",
+              "t": 399
+            },
+            {
+              "when": "1 world min ago",
+              "text": "Finished hewn planks at the timber yard.",
+              "kind": "work",
+              "t": 398
+            },
+            {
+              "when": "1 world min ago",
+              "text": "Finished hewn planks at the timber yard.",
+              "kind": "work",
+              "t": 398
+            },
+            {
+              "when": "2 world h 34 min ago",
+              "text": "Means to get the household's house built: the household is still in no shelter of its own, and their house wants 6 wood, 8 planks and 6 bricks.",
+              "kind": "work",
+              "t": 142
+            },
+            {
+              "when": "2 world h 44 min ago",
+              "text": "Cora told me about a building site a short walk south of camp.",
+              "kind": "info",
+              "t": 125
+            },
+            {
+              "when": "2 world h 58 min ago",
+              "text": "Turned down Cora's request (own need).",
+              "kind": "social",
+              "t": 103
+            },
+            {
+              "when": "2 world h 58 min ago",
+              "text": "Cora asked me for planks; I will remember this local demand.",
+              "kind": "social",
+              "t": 103
+            },
+            {
+              "when": "3 world h 40 min ago",
+              "text": "Turned down Ada's request (own need).",
+              "kind": "social",
+              "t": 32
+            },
+            {
+              "when": "3 world h 40 min ago",
+              "text": "Ada asked me for planks; I will remember this local demand.",
+              "kind": "social",
+              "t": 32
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "operate:8:hew_planks",
+            "kind": "operate",
+            "label": "Hewing planks",
+            "goal": "for a friend’s house",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "timber yard 3 tiles north (seen 1 world min ago)"
+          },
+          {
+            "key": "collect:8:planks",
+            "kind": "withdraw",
+            "label": "Collect 1 planks from the timber yard",
+            "goal": "for a friend’s house",
+            "need": null,
+            "eta": "32 world min",
+            "target": "timber yard 3 tiles north (seen 1 world min ago)"
+          },
+          {
+            "key": "build:9",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on a friend’s house",
+            "need": null,
+            "eta": "3 world h 35 min",
+            "target": "house site 24 tiles south-east (seen 2 world h 11 min ago)"
+          },
+          {
+            "key": "haul:9",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish a friend’s house",
+            "need": null,
+            "eta": "2 world h 47 min",
+            "target": "house site 24 tiles south-east (seen 2 world h 11 min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Look for timber",
+            "goal": "to find trees to fell",
+            "need": null,
+            "eta": "1 world h 58 min",
+            "target": null
+          },
+          {
+            "key": "build:11",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on a friend’s house",
+            "need": null,
+            "eta": "4 world h 1 min",
+            "target": "house site 28 tiles south (seen 3 world h 59 min ago)"
+          },
+          {
+            "key": "haul:11",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish a friend’s house",
+            "need": null,
+            "eta": "3 world h 13 min",
+            "target": "house site 28 tiles south (seen 3 world h 59 min ago)"
+          },
+          {
+            "key": "build:10",
+            "kind": "build",
+            "label": "Build the house",
+            "goal": "to work on my household’s house",
+            "need": null,
+            "eta": "4 world h 30 min",
+            "target": "house site 33 tiles south-east (seen 3 world h 59 min ago)"
+          },
+          {
+            "key": "haul:10",
+            "kind": "haul",
+            "label": "Deliver materials to the house site",
+            "goal": "to help finish my household’s house",
+            "need": null,
+            "eta": "3 world h 42 min",
+            "target": "house site 33 tiles south-east (seen 3 world h 59 min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get wood for a friend’s house",
+            "reason": "does not know any tree worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "the household has already laid out a house",
+            "target": null
+          },
+          {
+            "label": "Sawing planks",
+            "reason": "needs a saw and has none (and none is on the rack)",
+            "target": "timber yard 3 tiles north (seen 1 world min ago)"
+          },
+          {
+            "label": "Firing bricks",
+            "reason": "does not know of a kiln they may use",
+            "target": null
+          },
+          {
+            "label": "Building a handcart",
+            "reason": "needs a hammer and has none (and none is on the rack)",
+            "target": "timber yard 3 tiles north (seen 1 world min ago)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "get the household's house built",
+            "kind": "shelter",
+            "status": "dropped",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "no known source of wood with anything left",
+            "since": "2 world h 34 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": false,
+        "text": null,
+        "reason": "model call failed: control was handed back to the engine",
+        "latencyMs": 24002
+      },
+      "proposal": null,
+      "problem": "model call failed: control was handed back to the engine",
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 142,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "8443deaf",
+      "worldHash": "28c99aed",
+      "choice": {
+        "kind": "pick",
+        "key": "operate:8:hew_planks"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "operate:8:hew_planks",
+        "activityId": 21,
+        "label": "Hewing planks"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 399,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "a5a10258",
+      "worldHash": "391cf20c",
+      "choice": {
+        "kind": "defer"
+      },
+      "timing": "exact",
+      "result": null
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 21,
+      "label": "Hewing planks",
+      "tick": 399,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 143,
+      "events": []
+    }
+  ],
+  "end": {
+    "tick": 400,
+    "hash": "a9034dc3",
+    "died": false,
+    "calls": 2,
+    "applied": 1,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 2,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 16848,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

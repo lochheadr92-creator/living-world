@@ -1,0 +1,59 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ada",
+  "startPath": "/inhabitant_evidence/stored-materials-staged-first/stale-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 794,
+  "browserHash": "aff426c9",
+  "replayHash": "aff426c9",
+  "fullSerializedEqual": true,
+  "applied": 1,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 12,
+      "label": "Collecting 1 stone",
+      "tick": 793,
+      "outcome": "failed",
+      "detail": "there was nothing to take"
+    }
+  ],
+  "requests": [],
+  "inventory": {
+    "wood": 2
+  },
+  "plans": [
+    {
+      "id": 11,
+      "kind": "tool",
+      "goal": "make an axe",
+      "since": 700,
+      "until": 5500,
+      "status": "dropped",
+      "reason": "no known source of stone with anything left",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "axe",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 793,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    }
+  ],
+  "commitments": [],
+  "relations": {},
+  "tools": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

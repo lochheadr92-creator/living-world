@@ -1,0 +1,436 @@
+{
+  "day": 20,
+  "alive": 110,
+  "projects": [
+    {
+      "id": 12147,
+      "townshipId": 4298,
+      "siteId": 12146,
+      "organiserId": 4338,
+      "proposed": 5315,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 4338,
+          "requestId": 0,
+          "since": 5315,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 7
+          },
+          "work": 94.5598840306601,
+          "supports": 4338
+        },
+        {
+          "personId": 4318,
+          "requestId": 12201,
+          "since": 5363,
+          "status": "supporting",
+          "reason": "Viktor supports Bram coordinating and will help build",
+          "materials": {
+            "wood": 2
+          },
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Viktor supports Bram coordinating and will help build",
+              "tick": 5363
+            }
+          ],
+          "supports": 4338
+        },
+        {
+          "personId": 4329,
+          "requestId": 13790,
+          "since": 6762,
+          "status": "supporting",
+          "reason": "Eli supports Bram coordinating and will help build",
+          "materials": {
+            "wood": 1,
+            "stone": 3
+          },
+          "work": 222.8415630304773,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Eli supports Bram coordinating and will help build",
+              "tick": 6762
+            }
+          ],
+          "supports": 4338
+        },
+        {
+          "personId": 4331,
+          "requestId": 13863,
+          "since": 6836,
+          "status": "refused",
+          "reason": "own needs take priority",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": false,
+              "reason": "own needs take priority",
+              "tick": 6836
+            }
+          ]
+        },
+        {
+          "personId": 4333,
+          "requestId": 13963,
+          "since": 6947,
+          "status": "supporting",
+          "reason": "Isla supports Bram coordinating and will help build",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Isla supports Bram coordinating and will help build",
+              "tick": 6947
+            }
+          ],
+          "supports": 4338
+        },
+        {
+          "personId": 4311,
+          "requestId": 14026,
+          "since": 7022,
+          "status": "supporting",
+          "reason": "Nico supports Bram coordinating and will help build",
+          "materials": {},
+          "work": 99.8199741042759,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Nico supports Bram coordinating and will help build",
+              "tick": 7022
+            }
+          ],
+          "supports": 4338
+        },
+        {
+          "personId": 4300,
+          "requestId": 14336,
+          "since": 7190,
+          "status": "supporting",
+          "reason": "Greta supports Bram coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 185.6238748704924,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Greta supports Bram coordinating and will help build",
+              "tick": 7190
+            }
+          ],
+          "supports": 4338
+        },
+        {
+          "personId": 4330,
+          "requestId": 15140,
+          "since": 7883,
+          "status": "supporting",
+          "reason": "Una supports Bram coordinating and will help build",
+          "materials": {},
+          "work": 37.154703964094324,
+          "decisions": [
+            {
+              "candidateId": 4338,
+              "accepted": true,
+              "reason": "Una supports Bram coordinating and will help build",
+              "tick": 7883
+            }
+          ],
+          "supports": 4338
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 4338,
+            "tick": 5315,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 4338,
+        "changes": [
+          {
+            "tick": 5363,
+            "from": 0,
+            "to": 4338,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 7998,
+      "buildingId": 15483
+    },
+    {
+      "id": 17490,
+      "townshipId": 4396,
+      "siteId": 17489,
+      "organiserId": 4420,
+      "proposed": 9720,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 4420,
+          "requestId": 0,
+          "since": 9720,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 6,
+            "stone": 3
+          },
+          "work": 561.0118280102201,
+          "supports": 4420
+        },
+        {
+          "personId": 4419,
+          "requestId": 17947,
+          "since": 10045,
+          "status": "supporting",
+          "reason": "Basil supports Jess coordinating and will help build",
+          "materials": {
+            "stone": 1,
+            "wood": 4
+          },
+          "work": 78.98817198977983,
+          "decisions": [
+            {
+              "candidateId": 4420,
+              "accepted": true,
+              "reason": "Basil supports Jess coordinating and will help build",
+              "tick": 10045
+            }
+          ],
+          "supports": 4420
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 4420,
+            "tick": 9720,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 4420,
+        "changes": [
+          {
+            "tick": 10045,
+            "from": 0,
+            "to": 4420,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 13131,
+      "buildingId": 22373
+    },
+    {
+      "id": 18739,
+      "townshipId": 4443,
+      "siteId": 18738,
+      "organiserId": 4463,
+      "proposed": 10506,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 4463,
+          "requestId": 0,
+          "since": 10506,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 1,
+            "stone": 3
+          },
+          "work": 351.0599952062629,
+          "supports": 4463
+        },
+        {
+          "personId": 4477,
+          "requestId": 18908,
+          "since": 10624,
+          "status": "supporting",
+          "reason": "Wilma supports Hana coordinating and will help build",
+          "materials": {
+            "wood": 3
+          },
+          "work": 134.51033985689617,
+          "decisions": [
+            {
+              "candidateId": 4463,
+              "accepted": true,
+              "reason": "Wilma supports Hana coordinating and will help build",
+              "tick": 10624
+            }
+          ],
+          "supports": 4463
+        },
+        {
+          "personId": 4462,
+          "requestId": 19774,
+          "since": 11760,
+          "status": "supporting",
+          "reason": "Felix supports Hana coordinating and will help build",
+          "materials": {
+            "wood": 6,
+            "stone": 1
+          },
+          "work": 154.42966493684094,
+          "decisions": [
+            {
+              "candidateId": 4463,
+              "accepted": true,
+              "reason": "Felix supports Hana coordinating and will help build",
+              "tick": 11760
+            }
+          ],
+          "supports": 4463
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 4463,
+            "tick": 10506,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 4463,
+        "changes": [
+          {
+            "tick": 10624,
+            "from": 0,
+            "to": 4463,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 12924,
+      "buildingId": 21966
+    },
+    {
+      "id": 30286,
+      "townshipId": 4347,
+      "siteId": 30285,
+      "organiserId": 4377,
+      "proposed": 19776,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 4377,
+          "requestId": 0,
+          "since": 19776,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "stone": 3,
+            "wood": 6
+          },
+          "work": 371.6383434239601,
+          "supports": 4377
+        },
+        {
+          "personId": 4378,
+          "requestId": 32857,
+          "since": 22504,
+          "status": "supporting",
+          "reason": "Oren supports Pia coordinating and will help build",
+          "materials": {
+            "stone": 1,
+            "wood": 4
+          },
+          "work": 268.3616565760399,
+          "decisions": [
+            {
+              "candidateId": 4377,
+              "accepted": true,
+              "reason": "Oren supports Pia coordinating and will help build",
+              "tick": 22504
+            }
+          ],
+          "supports": 4377
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 4377,
+            "tick": 19776,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 4377,
+        "changes": [
+          {
+            "tick": 22504,
+            "from": 0,
+            "to": 4377,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 29073,
+      "buildingId": 41369
+    }
+  ],
+  "storehouses": [
+    {
+      "id": 15483,
+      "items": {
+        "grain": 1
+      }
+    },
+    {
+      "id": 21966,
+      "items": {
+        "grain": 6
+      }
+    },
+    {
+      "id": 22373,
+      "items": {
+        "fruit": 2,
+        "grain": 4,
+        "berries": 1
+      }
+    },
+    {
+      "id": 41369,
+      "items": {
+        "wood": 2,
+        "grain": 12
+      }
+    }
+  ],
+  "sampledOffers": [],
+  "deposits": 201,
+  "withdrawals": 29,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

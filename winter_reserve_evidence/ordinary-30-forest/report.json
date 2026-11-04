@@ -1,0 +1,185 @@
+{
+  "seed": "forest",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 45,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 109.194,
+  "alive": 14,
+  "deaths": 15,
+  "deathsByDay": {
+    "10": [
+      {
+        "name": "Edda",
+        "cause": "fever"
+      },
+      {
+        "name": "Viktor",
+        "cause": "fever"
+      }
+    ],
+    "11": [
+      {
+        "name": "Tomas",
+        "cause": "fever"
+      }
+    ],
+    "22": [
+      {
+        "name": "Cole",
+        "cause": "hunger"
+      },
+      {
+        "name": "Silas",
+        "cause": "exposure"
+      },
+      {
+        "name": "Thea",
+        "cause": "hunger"
+      },
+      {
+        "name": "Zeke",
+        "cause": "hunger"
+      },
+      {
+        "name": "Hana",
+        "cause": "exposure"
+      },
+      {
+        "name": "Talia",
+        "cause": "hunger"
+      },
+      {
+        "name": "Delia",
+        "cause": "exposure"
+      },
+      {
+        "name": "Bram",
+        "cause": "hunger"
+      },
+      {
+        "name": "Arlo",
+        "cause": "hunger"
+      }
+    ],
+    "23": [
+      {
+        "name": "Greta",
+        "cause": "exposure"
+      },
+      {
+        "name": "Nico",
+        "cause": "hunger"
+      },
+      {
+        "name": "Petra",
+        "cause": "injuries"
+      }
+    ]
+  },
+  "plans": {
+    "season": {
+      "adopted": 3,
+      "done": 0,
+      "dropped": 3,
+      "unitsWorked": 6,
+      "targets": [
+        8,
+        8,
+        4
+      ]
+    },
+    "hardship": {
+      "adopted": 103,
+      "done": 23,
+      "dropped": 75,
+      "unitsWorked": 274
+    }
+  },
+  "flows": {
+    "deposit:lean_to:deposit": 135,
+    "out:lean_to:eat from store": 75,
+    "ledger:xstored food spoiled": 205,
+    "ledger:-eaten": 1934,
+    "ledger:-eaten at the source": 558,
+    "ledger:-eaten at a shared meal": 5,
+    "deposit:hut:deposit": 330,
+    "out:hut:eat from store": 83,
+    "deposit:storehouse:deposit": 4,
+    "out:storehouse:eat from store": 2
+  },
+  "totals": {
+    "samples": 7030,
+    "winterSamples": 1964,
+    "winterHungry": 619,
+    "winterHungryWithHomeFood": 9,
+    "winterHungryNoEatStore": 468,
+    "eatStoreOffers": 1345,
+    "eatStoreBlockedEmpty": 7158,
+    "depositOffers": 3002,
+    "depositBlockedFull": 13
+  },
+  "buildings": [
+    {
+      "type": "lean_to",
+      "hh": 903,
+      "cond": 61,
+      "food": 2
+    },
+    {
+      "type": "hut",
+      "hh": 921,
+      "cond": 61,
+      "food": 2
+    },
+    {
+      "type": "hut",
+      "hh": 938,
+      "cond": 66,
+      "food": 9
+    },
+    {
+      "type": "hut",
+      "hh": 918,
+      "cond": 68,
+      "food": 2
+    },
+    {
+      "type": "hut",
+      "hh": 927,
+      "cond": 73,
+      "food": 4
+    },
+    {
+      "type": "hut",
+      "hh": 906,
+      "cond": 51,
+      "food": 2
+    },
+    {
+      "type": "hut",
+      "hh": 941,
+      "cond": 53,
+      "food": 1
+    },
+    {
+      "type": "storehouse",
+      "hh": 0,
+      "cond": 63,
+      "food": 0
+    },
+    {
+      "type": "granary",
+      "hh": 0,
+      "cond": 88,
+      "food": 0
+    }
+  ],
+  "hash": "28c0bb66",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

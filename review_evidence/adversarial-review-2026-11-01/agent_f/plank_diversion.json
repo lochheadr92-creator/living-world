@@ -1,0 +1,656 @@
+[
+ {
+  "variant": "no plank site (baseline)",
+  "cart": 1,
+  "tick": 365,
+  "plan": {
+   "status": "active",
+   "reason": "to haul heavy loads",
+   "step": "work on cart for cart",
+   "since": 0,
+   "until": 7200,
+   "history": [
+    {
+     "tick": 100,
+     "node": 2,
+     "reason": "operate: planks"
+    },
+    {
+     "tick": 257,
+     "node": 1,
+     "reason": "operate: cart"
+    }
+   ]
+  },
+  "laterPlans": [],
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "yardEarmarks": [
+   {
+    "kind": "out",
+    "item": "offcuts",
+    "n": 2,
+    "owner": 2,
+    "until": 3856,
+    "reason": "to haul heavy loads (a handcart)"
+   }
+  ],
+  "inv": {
+   "bread": 3,
+   "water": 3,
+   "hammer": 1,
+   "saw": 1,
+   "wood": 1
+  },
+  "planksCreated": 4,
+  "planksConsumed": 4,
+  "plankEvents": [
+   {
+    "tick": 100,
+    "ev": "Hana start operate saw_planks {} target 5 (to haul heavy loads (a handcart))"
+   },
+   {
+    "tick": 213,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   },
+   {
+    "tick": 214,
+    "ev": "Hana start operate saw_planks {} target 5 (to haul heavy loads (a handcart))"
+   },
+   {
+    "tick": 256,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   }
+  ],
+  "operates": [
+   "100 Hana start operate saw_planks  (to haul heavy loads (a handcart))",
+   "214 Hana start operate saw_planks  (to haul heavy loads (a handcart))",
+   "257 Hana start operate build_cart  (to haul heavy loads)"
+  ],
+  "goals": {
+   "gather:for my household’s storehouse": 1,
+   "operate:to haul heavy loads (a handcart)": 2,
+   "operate:to haul heavy loads": 1
+  },
+  "conservation": true
+ },
+ {
+  "variant": "communal granary site wants 8 planks",
+  "cart": 1,
+  "tick": 257,
+  "plan": {
+   "status": "active",
+   "reason": "to haul heavy loads",
+   "step": "work on cart for cart",
+   "since": 0,
+   "until": 7200,
+   "history": [
+    {
+     "tick": 106,
+     "node": 2,
+     "reason": "operate: planks"
+    },
+    {
+     "tick": 149,
+     "node": 1,
+     "reason": "operate: cart"
+    }
+   ]
+  },
+  "laterPlans": [],
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "yardEarmarks": [
+   {
+    "kind": "out",
+    "item": "offcuts",
+    "n": 2,
+    "owner": 2,
+    "until": 3748,
+    "reason": "for the shared granary"
+   }
+  ],
+  "inv": {
+   "bread": 3,
+   "water": 3,
+   "hammer": 1,
+   "saw": 1
+  },
+  "siteDelivered": {},
+  "planksCreated": 4,
+  "planksConsumed": 4,
+  "plankEvents": [
+   {
+    "tick": 0,
+    "ev": "Hana start operate saw_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 105,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   },
+   {
+    "tick": 106,
+    "ev": "Hana start operate saw_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 148,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   }
+  ],
+  "operates": [
+   "0 Hana start operate saw_planks  (for the shared granary)",
+   "106 Hana start operate saw_planks  (for the shared granary)",
+   "149 Hana start operate build_cart  (to haul heavy loads)"
+  ],
+  "goals": {
+   "operate:for the shared granary": 2,
+   "operate:to haul heavy loads": 1
+  },
+  "conservation": true
+ },
+ {
+  "variant": "own-household granary site wants 8 planks",
+  "cart": 1,
+  "tick": 257,
+  "plan": {
+   "status": "active",
+   "reason": "to haul heavy loads",
+   "step": "work on cart for cart",
+   "since": 0,
+   "until": 7200,
+   "history": [
+    {
+     "tick": 106,
+     "node": 2,
+     "reason": "operate: planks"
+    },
+    {
+     "tick": 149,
+     "node": 1,
+     "reason": "operate: cart"
+    }
+   ]
+  },
+  "laterPlans": [],
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "yardEarmarks": [
+   {
+    "kind": "out",
+    "item": "offcuts",
+    "n": 2,
+    "owner": 2,
+    "until": 3748,
+    "reason": "for my household’s granary"
+   }
+  ],
+  "inv": {
+   "bread": 3,
+   "water": 3,
+   "hammer": 1,
+   "saw": 1
+  },
+  "siteDelivered": {},
+  "planksCreated": 4,
+  "planksConsumed": 4,
+  "plankEvents": [
+   {
+    "tick": 0,
+    "ev": "Hana start operate saw_planks {} target 5 (for my household’s granary)"
+   },
+   {
+    "tick": 105,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   },
+   {
+    "tick": 106,
+    "ev": "Hana start operate saw_planks {} target 5 (for my household’s granary)"
+   },
+   {
+    "tick": 148,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   }
+  ],
+  "operates": [
+   "0 Hana start operate saw_planks  (for my household’s granary)",
+   "106 Hana start operate saw_planks  (for my household’s granary)",
+   "149 Hana start operate build_cart  (to haul heavy loads)"
+  ],
+  "goals": {
+   "operate:for my household’s granary": 2,
+   "operate:to haul heavy loads": 1
+  },
+  "conservation": true
+ },
+ {
+  "variant": "HEW PATH (no saw, yard 8 wood): no plank site",
+  "cart": 1,
+  "tick": 3216,
+  "plan": {
+   "status": "active",
+   "reason": "to haul heavy loads",
+   "step": "work on cart for cart",
+   "since": 2738,
+   "until": 9938,
+   "history": [
+    {
+     "tick": 2960,
+     "node": 3,
+     "reason": "deposit: wood"
+    },
+    {
+     "tick": 3056,
+     "node": 2,
+     "reason": "operate: planks"
+    },
+    {
+     "tick": 3099,
+     "node": 5,
+     "reason": "deposit: wood"
+    },
+    {
+     "tick": 3108,
+     "node": 1,
+     "reason": "operate: cart"
+    }
+   ]
+  },
+  "laterPlans": [
+   "tool:saw done made the saw"
+  ],
+  "yardShelf": {
+   "offcuts": 5
+  },
+  "yardEarmarks": [
+   {
+    "kind": "out",
+    "item": "offcuts",
+    "n": 5,
+    "owner": 2,
+    "until": 6698,
+    "reason": "to haul heavy loads (a handcart)"
+   }
+  ],
+  "inv": {
+   "bread": 1,
+   "hammer": 1,
+   "saw": 1,
+   "wood": 1
+  },
+  "planksCreated": 4,
+  "planksConsumed": 4,
+  "plankEvents": [
+   {
+    "tick": 273,
+    "ev": "Hana start operate hew_planks {} target 5 (to haul heavy loads (a handcart))"
+   },
+   {
+    "tick": 404,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 405,
+    "ev": "Hana start operate hew_planks {} target 5 (to haul heavy loads (a handcart))"
+   },
+   {
+    "tick": 468,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 2960,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (to haul heavy loads (a handcart) (sawn planks))"
+   },
+   {
+    "tick": 3056,
+    "ev": "Hana start operate saw_planks {} target 5 (to haul heavy loads (a handcart))"
+   },
+   {
+    "tick": 3098,
+    "ev": "Hana end operate saw_planks success done moved {}"
+   }
+  ],
+  "operates": [
+   "273 Hana start operate hew_planks  (to haul heavy loads (a handcart))",
+   "405 Hana start operate hew_planks  (to haul heavy loads (a handcart))",
+   "3056 Hana start operate saw_planks  (to haul heavy loads (a handcart))",
+   "3108 Hana start operate build_cart  (to haul heavy loads)"
+  ],
+  "goals": {
+   "gather:for my household’s storehouse": 5,
+   "build:to finish my household’s storehouse": 1,
+   "operate:to haul heavy loads (a handcart)": 3,
+   "explore:to find trees to fell": 1,
+   "wander:nothing needs doing right now": 3,
+   "drink:to quench thirst (61/100)": 1,
+   "sleep:to recover energy (46/100)": 1,
+   "eat:to ease hunger (51/100)": 1,
+   "sleep:to recover energy (88/100)": 1,
+   "rest:waiting for the light": 1,
+   "drink:to quench thirst (50/100)": 1,
+   "craft:to work faster": 1,
+   "deposit:to haul heavy loads (a handcart) (sawn planks)": 1,
+   "deposit:to haul heavy loads (a handcart)": 1,
+   "operate:to haul heavy loads": 1
+  },
+  "conservation": true
+ },
+ {
+  "variant": "HEW PATH (no saw, yard 8 wood): communal granary site wants 8 planks",
+  "cart": 0,
+  "tick": 7800,
+  "plan": null,
+  "laterPlans": [
+   "tool:saw done made the saw",
+   "tool:basket done made the basket",
+   "stock: active there is next to nothing at home to fall back on"
+  ],
+  "yardShelf": {
+   "handles": 2,
+   "planks": 4,
+   "offcuts": 8
+  },
+  "yardEarmarks": [],
+  "inv": {
+   "hammer": 1,
+   "saw": 1,
+   "stone": 1,
+   "basket": 1
+  },
+  "siteDelivered": {},
+  "planksCreated": 4,
+  "plankEvents": [
+   {
+    "tick": 99,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 233,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 234,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 297,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 608,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 801,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 933,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 934,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 1115,
+    "ev": "Hana start deposit  {\"wood\":2} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 2463,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 2615,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   }
+  ],
+  "operates": [
+   "99 Hana start operate hew_planks  (for the shared granary)",
+   "234 Hana start operate hew_planks  (for the shared granary)",
+   "801 Hana start operate hew_planks  (for the shared granary)",
+   "2463 Hana start operate hew_planks  (for the shared granary)"
+  ],
+  "goals": {
+   "gather:for my household’s storehouse": 9,
+   "operate:for the shared granary": 4,
+   "build:to finish my household’s storehouse": 1,
+   "build:to finish the shared granary": 1,
+   "deposit:for the shared granary (hewn planks)": 3,
+   "drink:to quench thirst (54/100)": 1,
+   "sleep:to recover energy (42/100)": 1,
+   "eat:to ease hunger (49/100)": 1,
+   "sleep:to recover energy (88/100)": 1,
+   "rest:waiting for the light": 2,
+   "drink:to quench thirst (49/100)": 1,
+   "haul:to help finish my household’s storehouse": 7,
+   "withdraw:for my household’s storehouse": 7,
+   "craft:to work faster": 2,
+   "wander:nothing needs doing right now": 9,
+   "eat:to ease hunger (58/100)": 1,
+   "explore:to look for food sources": 2,
+   "sleep:to recover energy (40/100)": 1,
+   "eat_store:to ease hunger (58/100)": 1,
+   "explore:to find trees to fell": 1,
+   "drink:to quench thirst (0/100)": 1,
+   "sleep:to recover energy (30/100)": 1,
+   "eat_store:to ease hunger (39/100)": 1,
+   "drink:to quench thirst (39/100)": 1,
+   "sleep:to recover energy (80/100)": 1,
+   "eat_store:to ease hunger (40/100)": 1
+  },
+  "conservation": true
+ },
+ {
+  "variant": "HEW PATH (no saw, yard 8 wood): another villager wants planks for the site",
+  "cart": 0,
+  "tick": 7800,
+  "plan": null,
+  "laterPlans": [
+   "tool:saw done made the saw",
+   "tool:basket dropped no known source of wood with anything left"
+  ],
+  "yardShelf": {
+   "handles": 2,
+   "offcuts": 10,
+   "wood": 1
+  },
+  "yardEarmarks": [],
+  "inv": {
+   "hammer": 1,
+   "saw": 1,
+   "stone": 1
+  },
+  "benInv": {
+   "saw": 1,
+   "grain": 1
+  },
+  "siteDelivered": {
+   "stone": 4,
+   "planks": 5
+  },
+  "planksCreated": 5,
+  "plankEvents": [
+   {
+    "tick": 99,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 233,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 234,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 292,
+    "ev": "Ben start operate hew_planks {} target 5 (for the shared granary (lend a hand))"
+   },
+   {
+    "tick": 297,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 368,
+    "ev": "Ben end operate hew_planks failed lacks 1 wood moved {}"
+   },
+   {
+    "tick": 369,
+    "ev": "Ben start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 462,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 573,
+    "ev": "Ben start operate hew_planks {} target 5 (for the shared granary (lend a hand))"
+   },
+   {
+    "tick": 580,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 581,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 641,
+    "ev": "Ben end operate hew_planks failed lacks 2 wood moved {}"
+   },
+   {
+    "tick": 642,
+    "ev": "Ben start deposit  {\"wood\":2} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 706,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 837,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 838,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 946,
+    "ev": "Ben start deposit  {\"wood\":2} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 962,
+    "ev": "Hana start deposit  {\"wood\":1} target 5 (for the shared granary (hewn planks))"
+   },
+   {
+    "tick": 1246,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 1367,
+    "ev": "Hana end operate hew_planks interrupted something better came up moved {}"
+   },
+   {
+    "tick": 2397,
+    "ev": "Hana start operate hew_planks {} target 5 (for the shared granary (get back to it))"
+   },
+   {
+    "tick": 2454,
+    "ev": "Hana end operate hew_planks success done moved {}"
+   },
+   {
+    "tick": 2601,
+    "ev": "Ben start withdraw  {\"planks\":1} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 2654,
+    "ev": "Ben end withdraw  failed there was nothing to take moved {\"planks\":1}"
+   },
+   {
+    "tick": 4987,
+    "ev": "Ben start withdraw  {\"planks\":5} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 5105,
+    "ev": "Ben end withdraw  interrupted something better came up moved {\"planks\":5}"
+   },
+   {
+    "tick": 5201,
+    "ev": "Ben start withdraw  {\"planks\":5} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 5298,
+    "ev": "Ben end withdraw  failed there was nothing to take moved {\"planks\":5}"
+   },
+   {
+    "tick": 5765,
+    "ev": "Ben start withdraw  {\"planks\":5} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 5986,
+    "ev": "Ben end withdraw  failed there was nothing to take moved {\"planks\":5}"
+   },
+   {
+    "tick": 7121,
+    "ev": "Ben start withdraw  {\"planks\":5} target 5 (for the shared granary)"
+   },
+   {
+    "tick": 7161,
+    "ev": "Ben end withdraw  success done moved {\"planks\":5}"
+   },
+   {
+    "tick": 7162,
+    "ev": "Ben start haul  {\"planks\":5} target 11 (to help finish the shared granary)"
+   },
+   {
+    "tick": 7229,
+    "ev": "Ben end haul  success done moved {\"planks\":5}"
+   }
+  ],
+  "operates": [
+   "99 Hana start operate hew_planks  (for the shared granary)",
+   "234 Hana start operate hew_planks  (for the shared granary)",
+   "292 Ben start operate hew_planks  (for the shared granary (lend a hand))",
+   "462 Hana start operate hew_planks  (for the shared granary)",
+   "573 Ben start operate hew_planks  (for the shared granary (lend a hand))",
+   "706 Hana start operate hew_planks  (for the shared granary)",
+   "1246 Hana start operate hew_planks  (for the shared granary)",
+   "2397 Hana start operate hew_planks  (for the shared granary (get back to it))"
+  ],
+  "goals": {
+   "gather:for my household’s storehouse": 10,
+   "operate:for the shared granary": 5,
+   "build:to finish my household’s storehouse": 1,
+   "deposit:for the shared granary (hewn planks)": 3,
+   "socialize:to finish the storehouse": 1,
+   "drink:to quench thirst (51/100)": 1,
+   "socialize:to learn where wood can be found": 1,
+   "sleep:to recover energy (40/100)": 1,
+   "eat:to ease hunger (45/100)": 1,
+   "rest:waiting for the light": 3,
+   "operate:for the shared granary (get back to it)": 1,
+   "drink:to quench thirst (54/100)": 1,
+   "socialize:to catch up and share news": 5,
+   "craft:to work faster": 1,
+   "withdraw:for my household’s storehouse": 2,
+   "converse:a chat": 2,
+   "wander:nothing needs doing right now": 7,
+   "explore:to find trees to fell": 2,
+   "eat:to ease hunger (55/100)": 1,
+   "sleep:to recover energy (43/100)": 1,
+   "eat_store:to ease hunger (56/100)": 1,
+   "drink:to quench thirst (0/100)": 1,
+   "haul:to help finish my household’s storehouse": 4,
+   "eat_store:to ease hunger (48/100)": 1,
+   "rest:to recover energy (29/100)": 1,
+   "sleep:to recover energy (32/100)": 1,
+   "drink:to quench thirst (39/100)": 1,
+   "eat:to ease hunger (56/100)": 1,
+   "sleep:to recover energy (81/100)": 1
+  },
+  "conservation": true
+ }
+]

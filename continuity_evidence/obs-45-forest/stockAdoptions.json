@@ -1,0 +1,80 @@
+[
+  {
+    "person": 902,
+    "day": 6.26,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 905,
+    "day": 6.35,
+    "why": "set aside: a wolf about",
+    "holder": false
+  },
+  {
+    "person": 908,
+    "day": 7.19,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 924,
+    "day": 29.09,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 939,
+    "day": 29.03,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 908,
+    "day": 30.23,
+    "why": "set aside: a wolf about",
+    "holder": false
+  },
+  {
+    "person": 924,
+    "day": 30.41,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 923,
+    "day": 31.29,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 908,
+    "day": 39.5,
+    "why": "winter is coming and we keep stores: the store is thin",
+    "holder": true
+  },
+  {
+    "person": 911,
+    "day": 41.11,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 908,
+    "day": 41.39,
+    "why": "winter is close and the store is thin",
+    "holder": true
+  },
+  {
+    "person": 924,
+    "day": 43.04,
+    "why": "winter is close and the store is thin",
+    "holder": false
+  },
+  {
+    "person": 908,
+    "day": 43.31,
+    "why": "put 3 units of food by; the store holds 9",
+    "holder": true
+  }
+]

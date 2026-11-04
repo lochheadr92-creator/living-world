@@ -1,0 +1,1035 @@
+{
+  "arms": {
+    "r118-on": {
+      "control": {
+        "alive": 3,
+        "deaths": 30,
+        "finalHash": "6bae05fa",
+        "identicalControls": 8
+      },
+      "draws": [
+        {
+          "spec": "control",
+          "fork": 2,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 27,
+          "finalHash": "6bae05fa",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 2,
+          "alive": 7,
+          "deaths": 26,
+          "day20": 28,
+          "finalHash": "35defa25",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 2,
+          "alive": 7,
+          "deaths": 30,
+          "day20": 26,
+          "finalHash": "26e4a493",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 2,
+          "alive": 5,
+          "deaths": 28,
+          "day20": 28,
+          "finalHash": "21ba1cb6",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 2,
+          "alive": 3,
+          "deaths": 33,
+          "day20": 30,
+          "finalHash": "bf52ec8b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 3,
+          "alive": 2,
+          "deaths": 31,
+          "day20": 26,
+          "finalHash": "29ce53b9",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 3,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 27,
+          "finalHash": "6bae05fa",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 3,
+          "alive": 2,
+          "deaths": 31,
+          "day20": 26,
+          "finalHash": "29ce53b9",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 3,
+          "alive": 2,
+          "deaths": 29,
+          "day20": 24,
+          "finalHash": "be62d15f",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 4,
+          "alive": 7,
+          "deaths": 25,
+          "day20": 22,
+          "finalHash": "24d71bce",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 4,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 29,
+          "finalHash": "103a4fce",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 4,
+          "alive": 0,
+          "deaths": 35,
+          "day20": 31,
+          "finalHash": "0bd1751b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 4,
+          "alive": 0,
+          "deaths": 31,
+          "day20": 29,
+          "finalHash": "d1037088",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:5",
+          "fork": 4,
+          "alive": 0,
+          "deaths": 35,
+          "day20": 31,
+          "finalHash": "0bd1751b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:6",
+          "fork": 4,
+          "alive": 5,
+          "deaths": 26,
+          "day20": 27,
+          "finalHash": "c3421e59",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:7",
+          "fork": 4,
+          "alive": 3,
+          "deaths": 27,
+          "day20": 29,
+          "finalHash": "07814899",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:8",
+          "fork": 4,
+          "alive": 5,
+          "deaths": 26,
+          "day20": 27,
+          "finalHash": "c3421e59",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 5,
+          "alive": 0,
+          "deaths": 31,
+          "day20": 30,
+          "finalHash": "790391e2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 5,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 27,
+          "finalHash": "6bae05fa",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 5,
+          "alive": 0,
+          "deaths": 31,
+          "day20": 30,
+          "finalHash": "790391e2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 5,
+          "alive": 2,
+          "deaths": 32,
+          "day20": 30,
+          "finalHash": "201f0cd3",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 6,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "b6046428",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 6,
+          "alive": 7,
+          "deaths": 26,
+          "day20": 26,
+          "finalHash": "79e25962",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 6,
+          "alive": 8,
+          "deaths": 23,
+          "day20": 26,
+          "finalHash": "3fe7ac62",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 6,
+          "alive": 0,
+          "deaths": 30,
+          "day20": 28,
+          "finalHash": "6dbb0892",
+          "divergedAfterTicks": 120
+        }
+      ],
+      "n": 25,
+      "alive": {
+        "mean": 3.12,
+        "sd": 2.6032031550892576,
+        "median": 3,
+        "min": 0,
+        "max": 8
+      },
+      "deaths": {
+        "mean": 29.36
+      },
+      "atLeast10": 0,
+      "day20": {
+        "mean": 27.6
+      },
+      "sameAsControl": 2,
+      "p01aMatch": true
+    },
+    "r121-on": {
+      "control": {
+        "alive": 4,
+        "deaths": 29,
+        "finalHash": "ae96c7d7",
+        "identicalControls": 8
+      },
+      "draws": [
+        {
+          "spec": "control",
+          "fork": 2,
+          "alive": 4,
+          "deaths": 29,
+          "day20": 27,
+          "finalHash": "ae96c7d7",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 2,
+          "alive": 8,
+          "deaths": 24,
+          "day20": 31,
+          "finalHash": "f9e39111",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 2,
+          "alive": 6,
+          "deaths": 28,
+          "day20": 29,
+          "finalHash": "6fd413e3",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 2,
+          "alive": 9,
+          "deaths": 26,
+          "day20": 28,
+          "finalHash": "beee79b0",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 2,
+          "alive": 3,
+          "deaths": 28,
+          "day20": 30,
+          "finalHash": "746d3586",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 3,
+          "alive": 5,
+          "deaths": 29,
+          "day20": 29,
+          "finalHash": "8113f8b0",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 3,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 11,
+          "finalHash": "eb8f8b65",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 3,
+          "alive": 2,
+          "deaths": 27,
+          "day20": 29,
+          "finalHash": "0f8f7fc6",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 3,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 11,
+          "finalHash": "eb8f8b65",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 4,
+          "alive": 4,
+          "deaths": 28,
+          "day20": 29,
+          "finalHash": "cc4329fd",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 4,
+          "alive": 4,
+          "deaths": 29,
+          "day20": 33,
+          "finalHash": "482350d8",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 4,
+          "alive": 2,
+          "deaths": 30,
+          "day20": 28,
+          "finalHash": "6cccb76e",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 4,
+          "alive": 9,
+          "deaths": 22,
+          "day20": 15,
+          "finalHash": "c3e065d2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:5",
+          "fork": 4,
+          "alive": 8,
+          "deaths": 24,
+          "day20": 25,
+          "finalHash": "e1ad3bd9",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:6",
+          "fork": 4,
+          "alive": 7,
+          "deaths": 24,
+          "day20": 29,
+          "finalHash": "491004d2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:7",
+          "fork": 4,
+          "alive": 2,
+          "deaths": 30,
+          "day20": 28,
+          "finalHash": "435c8072",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:8",
+          "fork": 4,
+          "alive": 7,
+          "deaths": 25,
+          "day20": 30,
+          "finalHash": "5c8e253b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 5,
+          "alive": 5,
+          "deaths": 32,
+          "day20": 27,
+          "finalHash": "07fbed1e",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 5,
+          "alive": 4,
+          "deaths": 29,
+          "day20": 27,
+          "finalHash": "ae96c7d7",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 5,
+          "alive": 0,
+          "deaths": 33,
+          "day20": 27,
+          "finalHash": "0f0c262c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 5,
+          "alive": 6,
+          "deaths": 26,
+          "day20": 31,
+          "finalHash": "a2eb744b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 6,
+          "alive": 5,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "71cf5724",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 6,
+          "alive": 15,
+          "deaths": 21,
+          "day20": 27,
+          "finalHash": "1dea4228",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 6,
+          "alive": 3,
+          "deaths": 30,
+          "day20": 31,
+          "finalHash": "f4b56634",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 6,
+          "alive": 15,
+          "deaths": 21,
+          "day20": 27,
+          "finalHash": "1dea4228",
+          "divergedAfterTicks": 120
+        }
+      ],
+      "n": 25,
+      "alive": {
+        "mean": 5.56,
+        "sd": 3.675141720623392,
+        "median": 5,
+        "min": 0,
+        "max": 15
+      },
+      "deaths": {
+        "mean": 27.32
+      },
+      "atLeast10": 2,
+      "day20": {
+        "mean": 26.6
+      },
+      "sameAsControl": 1,
+      "p01aMatch": true
+    },
+    "r118-off": {
+      "control": {
+        "alive": 21,
+        "deaths": 10,
+        "finalHash": "a86a01c8",
+        "identicalControls": 8
+      },
+      "draws": [
+        {
+          "spec": "control",
+          "fork": 2,
+          "alive": 21,
+          "deaths": 10,
+          "day20": 26,
+          "finalHash": "a86a01c8",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 2,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "6dbe51c2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 2,
+          "alive": 5,
+          "deaths": 24,
+          "day20": 27,
+          "finalHash": "0af2fc98",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 2,
+          "alive": 3,
+          "deaths": 27,
+          "day20": 30,
+          "finalHash": "52ab4530",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 2,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "d73fc2e0",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 3,
+          "alive": 1,
+          "deaths": 27,
+          "day20": 27,
+          "finalHash": "a3c35484",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 3,
+          "alive": 10,
+          "deaths": 19,
+          "day20": 26,
+          "finalHash": "21e3668c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 3,
+          "alive": 6,
+          "deaths": 23,
+          "day20": 28,
+          "finalHash": "d8ff6fdc",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 3,
+          "alive": 5,
+          "deaths": 24,
+          "day20": 28,
+          "finalHash": "c7087d1b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 4,
+          "alive": 18,
+          "deaths": 10,
+          "day20": 27,
+          "finalHash": "f4a9dd27",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 4,
+          "alive": 3,
+          "deaths": 25,
+          "day20": 27,
+          "finalHash": "dd2cf408",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 4,
+          "alive": 18,
+          "deaths": 10,
+          "day20": 27,
+          "finalHash": "f4a9dd27",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 4,
+          "alive": 4,
+          "deaths": 23,
+          "day20": 25,
+          "finalHash": "926ade1a",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:5",
+          "fork": 4,
+          "alive": 2,
+          "deaths": 26,
+          "day20": 28,
+          "finalHash": "6bbeff71",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:6",
+          "fork": 4,
+          "alive": 10,
+          "deaths": 18,
+          "day20": 27,
+          "finalHash": "f6f907f7",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:7",
+          "fork": 4,
+          "alive": 14,
+          "deaths": 13,
+          "day20": 26,
+          "finalHash": "e34cfe30",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:8",
+          "fork": 4,
+          "alive": 16,
+          "deaths": 13,
+          "day20": 29,
+          "finalHash": "e14daf1e",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 5,
+          "alive": 18,
+          "deaths": 12,
+          "day20": 27,
+          "finalHash": "2db43459",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 5,
+          "alive": 1,
+          "deaths": 26,
+          "day20": 26,
+          "finalHash": "7fd6e772",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 5,
+          "alive": 10,
+          "deaths": 17,
+          "day20": 24,
+          "finalHash": "1f7f0c61",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 5,
+          "alive": 8,
+          "deaths": 20,
+          "day20": 27,
+          "finalHash": "ae57cdd5",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 6,
+          "alive": 11,
+          "deaths": 16,
+          "day20": 26,
+          "finalHash": "d523701c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 6,
+          "alive": 7,
+          "deaths": 21,
+          "day20": 27,
+          "finalHash": "fb0412b7",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 6,
+          "alive": 11,
+          "deaths": 17,
+          "day20": 25,
+          "finalHash": "6b811d13",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 6,
+          "alive": 13,
+          "deaths": 15,
+          "day20": 25,
+          "finalHash": "4f609d86",
+          "divergedAfterTicks": 120
+        }
+      ],
+      "n": 25,
+      "alive": {
+        "mean": 8.68,
+        "sd": 6.236451982764986,
+        "median": 8,
+        "min": 1,
+        "max": 21
+      },
+      "deaths": {
+        "mean": 19.68
+      },
+      "atLeast10": 12,
+      "day20": {
+        "mean": 26.68
+      },
+      "sameAsControl": 0,
+      "p01aMatch": true
+    },
+    "r121-off": {
+      "control": {
+        "alive": 1,
+        "deaths": 28,
+        "finalHash": "c608c46e",
+        "identicalControls": 8
+      },
+      "draws": [
+        {
+          "spec": "control",
+          "fork": 2,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "c608c46e",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 2,
+          "alive": 9,
+          "deaths": 19,
+          "day20": 28,
+          "finalHash": "14db0226",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 2,
+          "alive": 4,
+          "deaths": 25,
+          "day20": 28,
+          "finalHash": "234819d8",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 2,
+          "alive": 12,
+          "deaths": 17,
+          "day20": 27,
+          "finalHash": "4b5a6afb",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 2,
+          "alive": 6,
+          "deaths": 23,
+          "day20": 26,
+          "finalHash": "dc423a5c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 3,
+          "alive": 10,
+          "deaths": 21,
+          "day20": 31,
+          "finalHash": "c94e6842",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 3,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "c608c46e",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 3,
+          "alive": 10,
+          "deaths": 21,
+          "day20": 31,
+          "finalHash": "c94e6842",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 3,
+          "alive": 6,
+          "deaths": 23,
+          "day20": 29,
+          "finalHash": "7832cc1c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 4,
+          "alive": 2,
+          "deaths": 28,
+          "day20": 28,
+          "finalHash": "18493089",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 4,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 26,
+          "finalHash": "c608c46e",
+          "divergedAfterTicks": null
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 4,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 29,
+          "finalHash": "cc92aa7b",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 4,
+          "alive": 4,
+          "deaths": 25,
+          "day20": 24,
+          "finalHash": "59bfd6a4",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:5",
+          "fork": 4,
+          "alive": 15,
+          "deaths": 14,
+          "day20": 29,
+          "finalHash": "ce02eafb",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:6",
+          "fork": 4,
+          "alive": 5,
+          "deaths": 25,
+          "day20": 29,
+          "finalHash": "d3371755",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:7",
+          "fork": 4,
+          "alive": 1,
+          "deaths": 29,
+          "day20": 29,
+          "finalHash": "c199281c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:8",
+          "fork": 4,
+          "alive": 9,
+          "deaths": 20,
+          "day20": 27,
+          "finalHash": "0118234a",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 5,
+          "alive": 2,
+          "deaths": 27,
+          "day20": 28,
+          "finalHash": "0beb748c",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 5,
+          "alive": 1,
+          "deaths": 28,
+          "day20": 28,
+          "finalHash": "b8872be2",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 5,
+          "alive": 3,
+          "deaths": 26,
+          "day20": 27,
+          "finalHash": "a80ab765",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 5,
+          "alive": 1,
+          "deaths": 29,
+          "day20": 28,
+          "finalHash": "5af0fc94",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:1",
+          "fork": 6,
+          "alive": 6,
+          "deaths": 23,
+          "day20": 29,
+          "finalHash": "997b5257",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:2",
+          "fork": 6,
+          "alive": 16,
+          "deaths": 13,
+          "day20": 25,
+          "finalHash": "a8195b17",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:3",
+          "fork": 6,
+          "alive": 3,
+          "deaths": 26,
+          "day20": 29,
+          "finalHash": "a14573e7",
+          "divergedAfterTicks": 120
+        },
+        {
+          "spec": "nudge:4",
+          "fork": 6,
+          "alive": 11,
+          "deaths": 18,
+          "day20": 29,
+          "finalHash": "babc8eda",
+          "divergedAfterTicks": 120
+        }
+      ],
+      "n": 25,
+      "alive": {
+        "mean": 5.6,
+        "sd": 4.663689526544407,
+        "median": 4,
+        "min": 1,
+        "max": 16
+      },
+      "deaths": {
+        "mean": 23.68
+      },
+      "atLeast10": 6,
+      "day20": {
+        "mean": 27.84
+      },
+      "sameAsControl": 2,
+      "p01aMatch": true
+    }
+  },
+  "contrasts": {
+    "arrivals on: 118 - 121": {
+      "diff": -2.4399999999999995,
+      "p": 0.0095995200239988,
+      "ci95": [
+        -4.2,
+        -0.7200000000000002
+      ]
+    },
+    "arrivals off: 118 - 121": {
+      "diff": 3.08,
+      "p": 0.05619719014049297,
+      "ci95": [
+        0.08000000000000007,
+        6.040000000000001
+      ]
+    }
+  },
+  "p01b": {
+    "compared": 25,
+    "same": 25
+  },
+  "problems": []
+}

@@ -1,0 +1,302 @@
+[
+  {
+    "tick": 240,
+    "known": 1,
+    "offers": 1
+  },
+  {
+    "tick": 480,
+    "known": 1,
+    "offers": 1
+  },
+  {
+    "tick": 720,
+    "known": 1,
+    "offers": 1
+  },
+  {
+    "tick": 960,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 1200,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 1440,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 1680,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 1920,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 2160,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 2400,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 2640,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 2880,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 3120,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 3360,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 3600,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 3840,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 4080,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 4320,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 4560,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 4800,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 5040,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 5280,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 5520,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 5760,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 6000,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 6240,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 6480,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 6720,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 6960,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 7200,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 7440,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 7680,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 7920,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 8160,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 8400,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 8640,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 8880,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 9120,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 9360,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 9600,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 9840,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 10080,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 10320,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 10560,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 10800,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 11040,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 11280,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 11520,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 11760,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 12000,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 12240,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 12480,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 12720,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 12960,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 13200,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 13440,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 13680,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 13920,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 14160,
+    "known": 0,
+    "offers": 0
+  },
+  {
+    "tick": 14400,
+    "known": 0,
+    "offers": 0
+  }
+]

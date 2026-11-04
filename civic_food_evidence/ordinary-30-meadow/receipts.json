@@ -1,0 +1,12 @@
+[
+  {
+    "person": 1022,
+    "name": "Maren",
+    "projectId": 4865,
+    "organiserId": 1036,
+    "item": "grain",
+    "amount": 1,
+    "tick": 19112,
+    "ate": false
+  }
+]

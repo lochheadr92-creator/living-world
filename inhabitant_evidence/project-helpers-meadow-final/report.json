@@ -1,0 +1,19 @@
+{
+  "seed": "meadow",
+  "profile": "normal",
+  "staged": false,
+  "ticks": 14400,
+  "days": 6,
+  "stop": "day 6",
+  "seconds": 8.004,
+  "comparisons": 0,
+  "changed": 0,
+  "projectRequests": 0,
+  "outcomes": {},
+  "delivered": 0,
+  "hash": "20abb63d",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,4 @@
+300 ticks 416 ms; persons 28 byId 1151 W*H 6400
+serialize 14.8 ms 1493992 bytes
+describePerson all 42.1 ms
+describeEntity all 3.9 ms

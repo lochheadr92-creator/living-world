@@ -1,0 +1,16 @@
+{
+  "staged": true,
+  "witnessed": true,
+  "hash": "561f0f90",
+  "replayHash": "561f0f90",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "built": [
+    {
+      "id": 7,
+      "built": 467
+    }
+  ]
+}

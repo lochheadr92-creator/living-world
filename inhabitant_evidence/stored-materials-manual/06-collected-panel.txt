@@ -1,0 +1,3 @@
+Browser tab: 3, Title: "Staged stored material verification", URL: "http://127.0.0.1:5273/scripts/browser/stored_materials_manual.html?start=/inhabitant_evidence/stored-materials-staged-first/plan-start.json".
+There has been no change in the accessibility tree.
+The focused UI element is 0 AXWebArea Staged stored material verification, URL: 127.0.0.1:5273/scripts/browser/stored_materials_manual.html?start=/inhabitant_evidence/stored-materials-staged-first/plan-start.json

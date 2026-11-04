@@ -1,0 +1,53 @@
+AI inhabitant
+Pia · by hand
+thinking…
+day 5 07:26
+Your turn
+07:25
+Pia is in no particular need. Last: Gathering wild grain — partial.
+hopes for a solid home of their own (25% there); earlier achieved: a trade of their own · Plans: put 12 units of food by for the household; next: take the food home (1 more to put by) · Unreserved: 1 basket, 4 seeds, 3 berries, 1 fish, 3 grain
+Action estimates and memory ages use the world clock.
+Eat what I am carrying
+About 7 world min
+Breaking stone for my household’s hut
+rock outcrop 22 tiles west (seen 4 world days 12 h 42 min ago)
+About 3 world h 25 min
+Gathering wild grain
+wild grain 2 tiles west (seen 1 world min ago)
+About 45 world min
+Gathering wild grain
+wild grain 2 tiles north-west (seen 1 world min ago)
+About 43 world min
+Gathering wild grain
+wild grain 3 tiles south-west (seen 1 world min ago)
+About 49 world min
+Chopping wood to keep the fire going
+tree 3 tiles north-west (seen 1 world min ago)
+About 1 world h 41 min
+Build the hut
+hut site 5 tiles south-east (seen 1 world min ago)
+About 1 world h 29 min
+Breaking stone for my household’s hut
+rock outcrop 27 tiles south-east (seen 1 world day 17 h 46 min ago)
+About 3 world h 55 min
+Chopping wood to keep the fire going
+tree 4 tiles north-west (seen 1 world min ago)
+About 2 world h 14 min
+Eat from the home store
+lean-to 11 tiles east (seen 49 world min ago)
+About 1 world h 23 min
+Bring fish to Maren
+Maren (last seen 3 world h 24 min ago)
+About 2 world h 16 min
+Finish preparing the field
+field plot 9 tiles east (seen 1 world min ago)
+About 1 world h 32 min
+Explore somewhere new
+About 3 world h 2 min
+Wander out to the trees
+About 24 world min
+Let the engine choose
+Answer from a chat
+decisions 0, engine 0, refused 0
+Save transcript
+Stop

@@ -1,0 +1,96 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 46,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 75.493,
+  "alive": 31,
+  "deaths": 1,
+  "deathsByDay": {
+    "8": [
+      {
+        "name": "Tomas",
+        "cause": "wolf attack"
+      }
+    ]
+  },
+  "plans": {
+    "season": {
+      "adopted": 15,
+      "done": 2,
+      "dropped": 13,
+      "unitsWorked": 62,
+      "targets": [
+        8,
+        20,
+        16,
+        16,
+        8,
+        20,
+        20,
+        20,
+        20,
+        20,
+        16,
+        16,
+        20,
+        16,
+        20
+      ]
+    },
+    "hardship": {
+      "adopted": 119,
+      "done": 22,
+      "dropped": 86,
+      "unitsWorked": 400
+    }
+  },
+  "flows": {
+    "deposit:lean_to:deposit": 384,
+    "out:lean_to:eat from store": 124,
+    "ledger:xstored food spoiled": 476,
+    "ledger:-eaten": 2611,
+    "ledger:-eaten at the source": 507,
+    "ledger:-eaten at a shared meal": 4,
+    "deposit:hut:deposit": 642,
+    "out:hut:eat from store": 203,
+    "deposit:granary:deposit": 11,
+    "deposit:storehouse:deposit": 5,
+    "out:storehouse:eat from store": 4,
+    "ledger:xgrain bins: stored food spoiled": 2,
+    "out:granary:eat from store": 4
+  },
+  "totals": {
+    "samples": 8843,
+    "winterSamples": 2377,
+    "winterHungry": 283,
+    "winterHungryWithHomeFood": 34,
+    "winterHungryNoEatStore": 152,
+    "eatStoreOffers": 3679,
+    "eatStoreBlockedEmpty": 9173,
+    "depositOffers": 3820,
+    "depositBlockedFull": 125
+  },
+  "buildings": [
+    {
+      "type": "storehouse",
+      "hh": 0,
+      "cond": 63,
+      "food": 0
+    },
+    {
+      "type": "granary",
+      "hh": 0,
+      "cond": 36,
+      "food": 0
+    }
+  ],
+  "hash": "05b89f87",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

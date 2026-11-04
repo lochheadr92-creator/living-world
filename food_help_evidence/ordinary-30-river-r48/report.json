@@ -1,0 +1,60 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 48,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 94.053,
+  "alive": 30,
+  "deaths": 1,
+  "deathCauses": {
+    "injuries": 1
+  },
+  "foodRequests": 388,
+  "foodRequestOutcomes": {
+    "declined:no item": 165,
+    "partial": 22,
+    "fulfilled": 36,
+    "declined:disliked": 1,
+    "declined:own need": 77,
+    "declined:unwilling": 39,
+    "failed": 27,
+    "broken": 5,
+    "expired": 3,
+    "interrupted": 2,
+    "promised": 10,
+    "pending": 1
+  },
+  "fetchPromises": 55,
+  "promisedDelivered": 36,
+  "promisedDeliveredUnits": 68,
+  "giftsOnRequest": 28,
+  "gives": 119,
+  "seeks": 18,
+  "seekOutcomes": {
+    "other": 16,
+    "not there": 2
+  },
+  "doorPromises": 40,
+  "doorDeliveries": 1,
+  "totals": {
+    "samples": 8646,
+    "foodAskOffers": 1755,
+    "foodAskBlocked": 32,
+    "foodAskTrustLeaned": 1258,
+    "seekOffers": 112,
+    "seekBlocked": 19,
+    "hungryWithFood": 354,
+    "hungryWithFoodNoEatOption": 251,
+    "hungryWithFoodEatBlocked": 251
+  },
+  "deathsWithFoodInPack": 0,
+  "hungerDeathsWithSpareInHousehold": 0,
+  "hash": "58d488c2",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

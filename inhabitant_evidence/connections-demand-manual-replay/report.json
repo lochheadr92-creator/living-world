@@ -1,0 +1,178 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ben",
+  "startPath": "/inhabitant_evidence/connections-demand-first/enabled-demand-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 400,
+  "browserHash": "a9034dc3",
+  "replayHash": "a9034dc3",
+  "fullSerializedEqual": true,
+  "applied": 1,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 21,
+      "label": "Hewing planks",
+      "tick": 399,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "requests": [
+    {
+      "id": 15,
+      "kind": "goods",
+      "from": 2,
+      "to": 5,
+      "item": "planks",
+      "amount": 4,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 9,
+      "infoKind": "",
+      "created": 10,
+      "expires": 710,
+      "status": "declined",
+      "note": "own need",
+      "resolved": 32,
+      "purpose": "for the house",
+      "destKind": "site",
+      "destId": 9,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    },
+    {
+      "id": 19,
+      "kind": "goods",
+      "from": 7,
+      "to": 5,
+      "item": "planks",
+      "amount": 4,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 11,
+      "infoKind": "",
+      "created": 81,
+      "expires": 781,
+      "status": "declined",
+      "note": "own need",
+      "resolved": 103,
+      "purpose": "for the house",
+      "destKind": "site",
+      "destId": 11,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    }
+  ],
+  "techniques": {
+    "charcoal": {
+      "source": "initial",
+      "learned": 0,
+      "teacher": 0
+    }
+  },
+  "trade": {
+    "key": "carpentry",
+    "since": 142,
+    "why": "2 people asked me for planks"
+  },
+  "inventory": {
+    "planks": 4
+  },
+  "plans": [
+    {
+      "id": 20,
+      "kind": "shelter",
+      "goal": "get the household's house built",
+      "since": 142,
+      "until": 7342,
+      "status": "dropped",
+      "reason": "no known source of wood with anything left",
+      "setAside": 0,
+      "aboutId": 10,
+      "wants": {},
+      "makes": "",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 399,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    }
+  ],
+  "commitments": [],
+  "relations": {
+    "2": {
+      "affinity": 71.75647483044169,
+      "trust": 10.5976,
+      "familiarity": 1.3,
+      "lastMet": 70,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    },
+    "7": {
+      "affinity": 71.78294237127508,
+      "trust": 10.8964,
+      "familiarity": 1.3,
+      "lastMet": 141,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    }
+  },
+  "socialMemory": [
+    {
+      "requestId": 15,
+      "otherId": 2,
+      "siteId": 9,
+      "tick": 32,
+      "outcome": "declined",
+      "reason": "own need",
+      "role": "helper"
+    },
+    {
+      "requestId": 19,
+      "otherId": 7,
+      "siteId": 11,
+      "tick": 103,
+      "outcome": "declined",
+      "reason": "own need",
+      "role": "helper"
+    }
+  ],
+  "buildings": [
+    {
+      "id": 8,
+      "type": "timber_yard",
+      "store": {
+        "items": {
+          "wood": 6,
+          "planks": 1
+        },
+        "cap": 70
+      }
+    }
+  ],
+  "tools": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

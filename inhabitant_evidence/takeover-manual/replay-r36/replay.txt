@@ -1,0 +1,2 @@
+replay of inhabitant_evidence/takeover-manual/transcript-r36.json: OK
+ended at tick 2769 in state df0f97da (recorded df0f97da); 3 decisions consumed, 0 overrides matched

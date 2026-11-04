@@ -1,0 +1,395 @@
+I
+Isla
+Follow
+Adult, 38
+Sorrel household
+Home: lean-to (37% sound) — last considered 5s ago: too thirsty to start a building
+Township: Willowbank
+MOOD
+Okay
+HEALTH
+92
+ON THEIR MIND
+-10
+Is cold
+-3
+It is winter
+What are they up to?
+More
+Sheltering at the lean-to (19% of this task).
+19%
+WHAT ARE THEY SET ON?
+Get the household's hut built. Step: get 1 stone for the hut (it wants 1 stone) (Bram promised 1 wood, expected by tick 108794) — on hold: warmth comes first. 3 units carried there so far. Last known site requirements: 1 wood and 1 stone. Why: set aside: warmth comes first. Set aside 2 times so far. Still needs 1 stone.
+NEEDS
+Food
+49
+Water
+31
+Energy
+90
+Warmth
+12
+Safety
+83
+Company
+64
+CARRYING
+×4
+×7
+×2
+16.5 / 18
+TOOLS
+Township & shared work
+
+Willowbank: 9 households. Membership belongs to the household and does not change with walking.
+
+Recent recorded production and resource flows:
+
+gathering: 211 berries, 7 clay, 58 fish, 95 fruit, 227 grain, 8 stone, 75 wood; 7 recorded days. Last source #4257 at tick 107650.
+
+harvest: 105 grain, 33 seeds; 6 recorded days. Last source #17496 at tick 107505.
+
+workshop: 3 bricks, 2 offcuts, 1 planks; 2 recorded days. Last source #56386 at tick 103262.
+
+Repeated activities: gathering: berries on 7 days; gathering: grain on 7 days; gathering: fruit on 7 days; gathering: wood on 7 days; gathering: fish on 7 days; gathering: stone on 5 days; gathering: clay on 3 days; harvest: grain on 6 days; harvest: seeds on 5 days.
+
+Recent transfers between township affiliations (gross, including returns; not net trade):
+
+Willowbank → Alderfield: 1 wood, deposit; Tomas → kiln, tick 103894.
+
+Alderfield → Willowbank: 1 wood, withdraw; bakery → Tomas, tick 103941.
+
+Willowbank → Alderfield: 1 wood, deposit; Tomas → kiln, tick 103990.
+
+Willowbank → Alderfield: 2 grain, deposit; Tomas → granary, tick 104322.
+
+Willowbank → Stoneford: 5 grain, deposit; Greta → granary, tick 105468.
+
+Willowbank → Alderfield: 1 wood, deposit; Tomas → kiln, tick 105932.
+
+Heard from Dov at tick 75611: spare 2 wood; last meeting 102, 77. They may have moved or used these goods.
+
+Heard from Hana at tick 92396: spare 3 wood, 1 berries, 1 fish; last meeting 116, 70. They may have moved or used these goods.
+
+Heard from Zeke at tick 96780: spare 1 wood; last meeting 63, 62. They may have moved or used these goods.
+
+No repeated-support faction currently established.
+
+Shared storehouse #41920: completed. Proposed by: Finn.
+
+Proposed: a shared storehouse for the settlement. Voluntary support: 2.
+
+Coordinator: Finn. Construction requires two people and a clear lead in support.
+
+Finn proposes to coordinate: proposed the physical project; 3 supporting.
+
+Bea supported Finn: Bea supports Finn coordinating and will help build.
+
+Lars supported Finn: Lars supports Finn coordinating and will help build.
+
+Cass refused Finn: not willing to commit to this proposal.
+
+Isla refused Finn: own needs take priority.
+
+Tomas refused Finn: not willing to commit to this proposal.
+
+Hal refused Finn: own needs take priority.
+
+Bram supported Finn: Bram supports Finn coordinating and will help build.
+
+Una refused Finn: not eligible for this township project.
+
+Outcome: materials supplied and construction completed.
+
+Finn: supporting — proposed this shared storehouse; supplied no materials; 9 work.
+
+Bea: supporting — Bea supports Finn coordinating and will help build; supplied 3 wood; 184 work.
+
+Lars: withdrawn — urgent personal survival needs; supplied 4 wood, 4 stone; 253 work.
+
+Cass: refused — not willing to commit to this proposal; supplied no materials; 0 work.
+
+Isla: refused — own needs take priority; supplied no materials; 0 work.
+
+Tomas: refused — not willing to commit to this proposal; supplied no materials; 0 work.
+
+Hal: refused — own needs take priority; supplied no materials; 0 work.
+
+Bram: supporting — Bram supports Finn coordinating and will help build; supplied 3 wood; 191 work.
+
+Una: refused — not eligible for this township project; supplied no materials; 0 work.
+
+Household history
+
+Sorrel household formed at tick 0; formation cause is not recorded.
+
+Members: Isla.
+
+Home #105254: lean_to; recorded builders: Isla.
+
+Site #131325 (hut), proposed by Isla; waiting for 3 wood, 1 stone.
+
+Request #132521: Nora asked Isla; declined: own need.
+
+Request #133906: Isla asked Cass; failed: could not carry it; site #131325.
+
+Request #137447: Isla asked Lars; partial: promise kept: 2 of the 3 asked for; promise #137502; site #131325.
+
+Request #141906: Una asked Isla; declined: no room to carry the swap.
+
+Request #142244: Isla asked Bram; partial: promise kept: 2 of the 4 asked for; promise #142298; site #131325.
+
+Relationship history
+
+Viktor: trust 10, affinity 8.
+
+Remembered at tick 98309: saw Viktor help Dax. Event link not recorded.
+
+Remembered at tick 99068: saw Viktor help Dax. Event link not recorded.
+
+Dax: trust 15, affinity 11.
+
+Remembered at tick 40917: worked alongside Dax. Event link not recorded.
+
+Remembered at tick 87417: worked alongside Dax. Event link not recorded.
+
+Bram: trust 16, affinity 38.
+
+Accounts of places checked: 3, borne out 1. Last: the wild grain #3698 described as about 2 (told at tick 88964), bare at tick 91148 against about 5 expected: not borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.
+
+Request #142244, asker, tick 106394: promised — Bram agreed to help; expected by tick 108794. Later progress is not known.; site #131325. Task: wood (wood); asked 4; agreed 1. No direct material receipt recorded; ability is not established by this outcome. Heard agreement: conversation #142232, tick 106394, commitment #142298; expected by tick 108794. Waiting on personal knowledge, not the helper’s private progress.
+
+Remembered at tick 106267: worked alongside Bram. Event link not recorded.
+
+Remembered at tick 106317: worked alongside Bram. Event link not recorded.
+
+Cass: trust 17, affinity 18.
+
+Request #81228, asker, tick 60569: declined — own need. Task: food; asked 2; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Request #133906, asker, tick 100979: failed — could not carry it; site #131325. Task: wood (wood); asked 4; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Remembered at tick 98417: worked alongside Cass. Event link not recorded.
+
+Remembered at tick 100717: worked alongside Cass. Event link not recorded.
+
+Una: trust 13, affinity 11.
+
+Request #141906, helper, tick 106216: declined — no room to carry the swap. Task: trade (grain); asked 1; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Remembered at tick 22117: worked alongside Una. Event link not recorded.
+
+Remembered at tick 62567: worked alongside Una. Event link not recorded.
+
+Zed: trust 14, affinity 7.
+
+Remembered at tick 101260: saw Zed help Nora. Event link not recorded.
+
+Leo: trust 14, affinity 8.
+
+Request #62335, helper, tick 46278: fulfilled — promise kept. Task: care; asked 2; agreed 2. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 46278; completion tick 46278, commitment #62390, activity #62850. No acknowledgement received.
+
+Remembered at tick 417: worked alongside Leo. Event link not recorded.
+
+Greta: trust 15, affinity 9.
+
+Accounts of places checked: 1, borne out 1. Last: the clay pit #4508 described as about 46 (told at tick 53203), 46 there at tick 56204 against about 46 expected: borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.
+
+Remembered at tick 100767: worked alongside Greta. Event link not recorded.
+
+Remembered at tick 104007: saw Greta help Ben II. Event link not recorded.
+
+Finn: trust 14, affinity 6.
+
+Accounts of places checked: 1, borne out 1. Last: the clay pit #4508 described as about 46 (told at tick 74010), 46 there at tick 74132 against about 46 expected: borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.
+
+Request #44457, helper, tick 31460: declined — own needs take priority; site #41920. Task: help_build; asked 1; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Request #97454, asker, tick 73988: declined — own need; site #94860. Task: wood (wood); asked 4; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Remembered at tick 74132: the clay pit Finn described was as described when I got there. Event link not recorded.
+
+Remembered at tick 87284: met at the feast. Event link not recorded.
+
+Nora: trust 11, affinity 5.
+
+Accounts of places checked: 1, borne out 1. Last: the stone outcrop #4502 described as about 90 (told at tick 99810), 90 there at tick 101225 against about 90 expected: borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.
+
+Request #132521, helper, tick 99788: declined — own need. Task: food; asked 2; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.
+
+Remembered at tick 82617: worked alongside Nora. Event link not recorded.
+
+Remembered at tick 101225: the stone outcrop Nora described was as described when I got there. Event link not recorded.
+
+Rhea: trust 14, affinity 12.
+
+Remembered at tick 86817: worked alongside Rhea. Event link not recorded.
+
+Remembered at tick 86867: worked alongside Rhea. Event link not recorded.
+
+Sofia: trust 9, affinity 2.
+
+Remembered at tick 34388: saw Sofia help Ben. Event link not recorded.
+
+Remembered at tick 79504: met at the market. Event link not recorded.
+
+Recent decisions
+
+Tick 107951 (just now), free: chose “Shelter at the lean-to”; still under way. Passed over then: nothing. Set aside then: Eat from the stores (remembers it being empty); Eat from the stores (remembers it being empty); Warm up at the fire (thinks the fire has gone out).
+
+Tick 107691 (3 hundred ticks ago), free: chose “Shelter at the lean-to” as a step of plan #142383; ended success at tick 107950: done. Passed over then: nothing. Set aside then: Eat from the stores (remembers it being empty); Eat from the stores (remembers it being empty); Warm up at the fire (thinks the fire has gone out).
+
+Tick 107431 (6 hundred ticks ago), free: chose “Shelter at the lean-to” as a step of plan #142383; ended success at tick 107690: done. Passed over then: Sleep at my lean-to, Stay at my lean-to until it is light, Deliver materials to the hut site. Set aside then: Warm up at the fire (thinks the fire has gone out); Warm up at the fire (thinks the fire has gone out); Warm up at the fire (thinks the fire has gone out).
+
+Tick 106802 (12 hundred ticks ago), free: chose “Sleep at my lean-to” as a step of plan #142383; ended partial at tick 107430: too cold to sleep. Passed over then: Potter about near home, Build the hut. Set aside then: Stay in shelter until it is light (not at a shelter); Get wood for my household’s hut (Bram promised 1 wood, expected by tick 108794); Get wood for my household’s hut (no room in my pack for one wood).
+
+Tick 106652 (13 hundred ticks ago), free: chose “Chopping wood for my household’s hut” as a step of plan #141141; ended success at tick 106801: done. Passed over then: Chopping wood for my household’s hut, Build the hut, Breaking stone for my household’s hut. Set aside then: Get wood for my household’s hut (Bram promised 1 wood, expected by tick 108794); Work on the building site (site is waiting for materials (6 bricks)); Work on the building site (site is waiting for materials (1 bricks)).
+
+Tick 106433 (16 hundred ticks ago), free: chose “Deliver materials to the hut site” as a step of plan #141141; ended success at tick 106651: done. Passed over then: Invite Bram to eat together at the communal hall, Build the hut, Fetch water. Set aside then: Get wood for my household’s hut (Bram promised 1 wood, expected by tick 108794); Get wood for my household’s hut (no room in my pack for one wood); Get stone for my household’s hut (no room in my pack for one stone).
+
+Tick 106341 (17 hundred ticks ago), free: chose “Ask Bram for wood”; ended success at tick 106432: finished a conversation. Passed over then: Ask Cass for wood, Invite Bram to eat together at the communal hall, Build the hut. Set aside then: Get wood for my household’s hut (no room in my pack for one wood); Get stone for my household’s hut (no room in my pack for one stone); Work on the building site (site is waiting for materials (6 bricks)).
+
+Tick 106308 (17 hundred ticks ago), free: chose “Chopping wood for my household’s hut” as a step of plan #141141; ended success at tick 106340: felled the tree. Passed over then: Chopping wood for my household’s hut, Breaking stone for my household’s hut, Deliver materials to the hut site. Set aside then: Work on the building site (site is waiting for materials (6 bricks)); Work on the building site (site is waiting for materials (1 bricks)); Lay out a hut (the household has already laid out a hut).
+
+1089 earlier decisions were compacted and are not kept.
+
+Conversation
+LAST CONVERSATION
+2.6 min ago
+Bram
+· asking for something
+Outcome
+Promised (Bram will bring 1 of the 4 wood)
+Promises
+5
+DONE
+made 23.4 min ago
+Bring 2 fish to Ben II
+2 of 2 delivered
+EXPIRED
+made 60 min ago
+Bring 2 berries to Ben
+1 of 2 delivered · only 50% was done in time
+DONE
+made 26 days ago
+Bring 2 berries to Leo
+2 of 2 delivered
+DONE
+made 29 days ago
+Haul 2 wood to the building site, as promised to Kira
+2 of 2 delivered
+DONE
+made 32 days ago
+Bring 2 grain to someone
+2 of 2 delivered
+Nearby
+People
+14
+Requests
+3
+Recent
+14
+Knows
+947
+Family
+1
+Traits
+
+Sociable, curious, generous. Hopes for a family (50% there).
+
+frugal
+generous
+reserved
+sociable
+bold
+cautious
+easygoing
+diligent
+homebody
+curious
+SKILLS
+
+Started with a specialty in farm; other skills may be much less developed. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.
+
+Foraging
+×1.31
+Fishing
+×0.85
+Woodcutting
+×0.78
+Stonework
+×0.71
+Building
+×1.06
+Farming
+×1.80
+Crafting
+×0.94
+Carpentry
+×0.93
+Kiln work
+×0.65
+Smithing
+×0.98
+Baking
+×0.63
+
+Charcoal firing: not learned. Kiln proficiency alone does not supply this technique. Iron smelting: not learned (must learn charcoal firing first). Iron forging: not learned (must learn iron smelting first).
+
+Their trade: farming — quicker at it than at anything else.
+
+morning: Plant seed. 1 successful days (activity #140534 at tick 105554). the season changed. Last outcome: completed. morning: Tend the crops. 1 successful days (activity #140562 at tick 105566). the season changed. Last outcome: completed. morning: Tend the crops. 1 successful days (activity #140594 at tick 105578). the season changed. Last outcome: completed. morning: Deliver materials to the hut site. 1 successful days (activity #141142 at tick 105902). still learning from separate days. Last outcome: completed. afternoon: Chopping wood for my household’s hut. 1 successful days (activity #141823 at tick 106287). still learning from separate days. Last outcome: completed. afternoon: Deliver materials to the hut site. 1 successful days (activity #142384 at tick 106651). still learning from separate days. Last outcome: completed. afternoon: Chopping wood for my household’s hut. 1 successful days (activity #142809 at tick 106801). still learning from separate days. Last outcome: completed. night: Shelter at the lean-to. 1 successful days (activity #143347 at tick 107690). still learning from separate days. Last outcome: completed.
+
+Carried 13 weight of materials to building sites in 5 loads over the last 4 day(s).
+
+WHAT HAS PAID THEM
+Woodcutting
+1.1× · 38
+Foraging
+1.1× · 92
+Stonework
+0.5× · 8
+Fishing
+0.4× · 16
+
+Tree #1393: 1 productive visit, 135% of estimated return for time spent. Tree #1419 (location no longer known): 2 productive visits, 81% of estimated return for time spent. Tree #1543 (location no longer known): 1 productive visit, 122% of estimated return for time spent. Rock #4075: 1 productive visit, 81% of estimated return for time spent. Wild grain #3591: 1 productive visit, 139% of estimated return for time spent. Wild grain #3706: 1 productive visit, 159% of estimated return for time spent. Fruit tree #3776: 1 productive visit, 157% of estimated return for time spent. Tree #48484 (location no longer known): 1 productive visit, 177% of estimated return for time spent.
+
+WHAT THEY HAVE HEARD OF PEOPLE
+Nora helped Zed.
+Bram told me, yesterday
+Greta helped Ben II.
+saw it, yesterday
+Zed helped Nora.
+saw it, 2 days ago
+Viktor helped Dax.
+saw it, 4 days ago
+Greta helped Ben II.
+Cass told me (2 mouths on), 4 days ago
+Dax helped Ben.
+Bram told me, 4 days ago
+Nell helped Sofia II.
+saw it, 5 days ago
+Rhea helped Dax.
+Cass told me, 5 days ago
+Arlo helped Kaia.
+saw it, 5 days ago
+Hal helped Greta.
+Lars told me, 5 days ago
+Milo helped Jess II.
+Zeke told me (2 mouths on), 5 days ago
+Orla helped Silas II.
+Ben II told me, 6 days ago
+Sofia picked a quarrel with Cass.
+Nora told me, 6 days ago
+Milo helped Jess II.
+Faye II told me, 7 days ago
+Nico helped Bea.
+saw it, 8 days ago
+Zeke helped Lena II.
+Uri told me, 8 days ago
+They still tell how A feast for Ben II and Greta is called at the hall tomorrow.
+Lars told me, 9 days ago
+Nora helped Zed.
+Xavi II told me, 9 days ago
+Pia helped Una.
+Bram told me, 11 days ago

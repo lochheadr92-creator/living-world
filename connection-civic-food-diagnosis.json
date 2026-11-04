@@ -1,0 +1,32 @@
+[
+  {
+    "seed": "meadow",
+    "fromDay": 30,
+    "toDay": 33,
+    "uses": [],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "seed": "river",
+    "fromDay": 30,
+    "toDay": 33,
+    "uses": [],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "seed": "forest",
+    "fromDay": 30,
+    "toDay": 33,
+    "uses": [],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

@@ -1,0 +1,262 @@
+{
+  "seed": "forest",
+  "days": 30,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 60.31,
+  "totals": {
+    "samples": 7459,
+    "peopleWithoutCharcoal": 2226,
+    "adultOrYouthWithoutCharcoal": 38,
+    "wantedTechnique": 0,
+    "learnerOffers": 0,
+    "teacherOffers": 19,
+    "materialRequestOffers": 1064,
+    "materialBlocked": 874,
+    "knownNeedySites": 1287,
+    "nearbyPeople": 38393,
+    "nearbyWoodCarriers": 27856,
+    "nearbyStoneCarriers": 6606,
+    "nearbyPlankCarriers": 373,
+    "workshopOptions": 267
+  },
+  "selected": 642,
+  "requests": 390,
+  "heardRequests": 56,
+  "demandTrades": 0,
+  "benefits": 0,
+  "learned": 1,
+  "buildings": [
+    {
+      "id": 895,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 904,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 913,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 919,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1565,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2040,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 3324,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3465,
+      "type": "hut",
+      "items": {
+        "berries": 3
+      }
+    },
+    {
+      "id": 4122,
+      "type": "hut",
+      "items": {
+        "berries": 2,
+        "grain": 4
+      }
+    },
+    {
+      "id": 4643,
+      "type": "hut",
+      "items": {
+        "fruit": 3,
+        "berries": 2
+      }
+    },
+    {
+      "id": 6271,
+      "type": "hut",
+      "items": {
+        "grain": 2,
+        "berries": 2
+      }
+    },
+    {
+      "id": 6403,
+      "type": "hut",
+      "items": {
+        "grain": 4
+      }
+    },
+    {
+      "id": 6441,
+      "type": "quarry",
+      "items": {
+        "stone": 6
+      }
+    },
+    {
+      "id": 7349,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 7795,
+      "type": "timber_yard",
+      "items": {
+        "planks": 4
+      }
+    },
+    {
+      "id": 9530,
+      "type": "hut",
+      "items": {
+        "berries": 5
+      }
+    },
+    {
+      "id": 11310,
+      "type": "kiln",
+      "items": {
+        "bricks": 1,
+        "wood": 2
+      }
+    },
+    {
+      "id": 13771,
+      "type": "hall",
+      "items": {}
+    },
+    {
+      "id": 15043,
+      "type": "storehouse",
+      "items": {
+        "grain": 1,
+        "berries": 5
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 12171,
+      "townshipId": 897,
+      "siteId": 12170,
+      "organiserId": 942,
+      "proposed": 32029,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 942,
+          "requestId": 0,
+          "since": 32029,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 10
+          },
+          "work": 212.2137336418243,
+          "supports": 942
+        },
+        {
+          "personId": 943,
+          "requestId": 12230,
+          "since": 32170,
+          "status": "supporting",
+          "reason": "Theo supports Delia coordinating and will help build",
+          "materials": {
+            "stone": 2
+          },
+          "work": 159.59727676452596,
+          "decisions": [
+            {
+              "candidateId": 942,
+              "accepted": true,
+              "reason": "Theo supports Delia coordinating and will help build",
+              "tick": 32170
+            }
+          ],
+          "supports": 942
+        },
+        {
+          "personId": 928,
+          "requestId": 14542,
+          "since": 39005,
+          "status": "supporting",
+          "reason": "Jax supports Delia coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 942,
+              "accepted": true,
+              "reason": "Jax supports Delia coordinating and will help build",
+              "tick": 39005
+            }
+          ],
+          "supports": 942
+        },
+        {
+          "personId": 929,
+          "requestId": 14587,
+          "since": 39101,
+          "status": "supporting",
+          "reason": "Isla supports Delia coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 268.18898959364975,
+          "decisions": [
+            {
+              "candidateId": 942,
+              "accepted": true,
+              "reason": "Isla supports Delia coordinating and will help build",
+              "tick": 39101
+            }
+          ],
+          "supports": 942
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 942,
+            "tick": 32029,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 942,
+        "changes": [
+          {
+            "tick": 32170,
+            "from": 0,
+            "to": 942,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 40759,
+      "buildingId": 15043
+    }
+  ],
+  "hash": "0388f406",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

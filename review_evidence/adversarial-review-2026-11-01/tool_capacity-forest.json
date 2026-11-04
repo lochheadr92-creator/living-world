@@ -1,0 +1,84 @@
+{
+ "seed": "forest",
+ "ticks": 12000,
+ "alive": 28,
+ "toolPlans": 33,
+ "infeasible": 2,
+ "byStage": {
+  "elder:INFEASIBLE": 2,
+  "adult:feasible": 30,
+  "elder:feasible": 1
+ },
+ "outcomes": {
+  "INFEASIBLE:dropped:never got round to the hoe (still short # stone)": 1,
+  "INFEASIBLE:dropped:never got round to the pick (still short # wood and # stone)": 1,
+  "feasible:done:made the hoe": 2,
+  "feasible:done:made the pick": 3,
+  "feasible:dropped:put the household home ahead of the unfinished tool; release": 7,
+  "feasible:dropped:never got round to the pick (still short # stone)": 4,
+  "feasible:dropped:had the makings for the axe but never sat down to it": 1,
+  "feasible:done:made the basket": 3,
+  "feasible:dropped:never got round to the spear (still short # wood)": 1,
+  "feasible:done:made the axe": 1,
+  "feasible:active:taken up again": 1,
+  "feasible:done:made the saw": 1,
+  "feasible:active:it would make the work easier, and the makings are short": 7
+ },
+ "infeasibleList": [
+  {
+   "id": 962,
+   "who": "Petra#899",
+   "stage": "elder",
+   "cap": 6,
+   "tool": "hoe",
+   "need": 7,
+   "feasible": false,
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "wantsHeld": "{\"wood\":2,\"stone\":0}"
+  },
+  {
+   "id": 964,
+   "who": "Bram#902",
+   "stage": "elder",
+   "cap": 6,
+   "tool": "pick",
+   "need": 10,
+   "feasible": false,
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 wood and 2 stone)",
+   "wantsHeld": "{\"wood\":1,\"stone\":0}"
+  }
+ ],
+ "snapshot": {
+  "tick": 651,
+  "who": "Petra#899",
+  "stage": "elder",
+  "cap": 6,
+  "tool": "hoe",
+  "need": 7,
+  "inv": {
+   "seeds": 4,
+   "wood": 2,
+   "grain": 1
+  },
+  "step": "get 1 more stone for the hoe",
+  "stepKey": null,
+  "blocked": "",
+  "wants": {
+   "wood": 2,
+   "stone": 1
+  },
+  "craftOffered": [],
+  "blockedForPlan": [
+   {
+    "label": "Get stone to make a hoe",
+    "blocked": "no room in my pack for one stone"
+   }
+  ]
+ }
+}

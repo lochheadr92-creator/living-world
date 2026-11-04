@@ -1,0 +1,63 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 51,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 118.978,
+  "alive": 28,
+  "deaths": 3,
+  "materialAsksStarted": 157,
+  "materialAsksMade": 30,
+  "materialAsksByStatus": {
+    "declined": 15,
+    "failed": 4,
+    "fulfilled": 5,
+    "partial": 2,
+    "expired": 3,
+    "promised": 1
+  },
+  "demandHeard": 1,
+  "leadsNotedInLogs": 0,
+  "leadsNow": 2,
+  "declinedMaterialAsksByNote": {
+    "own need": 5,
+    "making": 4,
+    "unwilling": 5,
+    "committed": 1
+  },
+  "leadsByItem": {
+    "wood": 2
+  },
+  "supplyOffersStarted": 0,
+  "supplySwapsStarted": 0,
+  "supplyWalksStarted": 1,
+  "suppliedTotal": 0,
+  "suppliedByHand": 0,
+  "suppliedBySwap": 0,
+  "suppliedAtSite": 0,
+  "suppliedByItem": {},
+  "unitsSupplied": 0,
+  "returns": [],
+  "repeatCustomers": 0,
+  "lapsed": 0,
+  "localSwapsStarted": 301,
+  "localSwapAsks": 60,
+  "localSwapAsksByNote": {
+    "declined | nothing to spare": 47,
+    "declined | no room to carry the swap": 13
+  },
+  "swapEvents": 0,
+  "exchangeJourneys": 0,
+  "townships": 1,
+  "tradesNow": 19,
+  "tradesFromDemand": 0,
+  "tradesFromReturns": 0,
+  "hash": "ea581156",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

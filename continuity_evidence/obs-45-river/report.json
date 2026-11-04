@@ -1,0 +1,55 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 53,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 131.436,
+  "alive": 22,
+  "deaths": 9,
+  "unfinishedRecorded": 2,
+  "unfinishedByKind": {
+    "stock": 1,
+    "batch": 1
+  },
+  "takenUp": 0,
+  "takenUpByKindAndStatus": {},
+  "succeeded": [],
+  "cancelledUnfinished": 0,
+  "finishedWhatBegan": 0,
+  "unfinishedOpenAtEnd": 1,
+  "reservesLaid": 2,
+  "reserveLaidYears": [
+    1,
+    1
+  ],
+  "peopleWithWinterMeals": 23,
+  "practiceHolders": 1,
+  "practiceByeSource": {
+    "family": 1
+  },
+  "practice": [
+    {
+      "person": "Corin",
+      "alive": true,
+      "learned": 57605,
+      "source": "family",
+      "from": 1107,
+      "year": 1,
+      "meals": 4,
+      "fromName": "Emre"
+    }
+  ],
+  "seasonStockPlans": 13,
+  "seasonStockPlansByHolder": {
+    "other": 13
+  },
+  "earlyCueAdoptions": 0,
+  "hash": "4ec1241a",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

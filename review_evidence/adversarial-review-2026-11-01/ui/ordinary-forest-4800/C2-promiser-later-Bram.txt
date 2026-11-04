@@ -1,0 +1,268 @@
+B
+Bram
+Follow
+Elder, 75
+Rowan household
+Home: lean-to (66% sound) — last considered just now: the household has only 1 food to hand and wants 3 before starting a hut
+Township: Willowbank
+MOOD
+Okay
+HEALTH
+100
+ON THEIR MIND
+-6
+Argued with Theo
+-5
+The lean season
+What are they up to?
+More
+Wolf near the south-west woods!
+Talking with Silas.
+0%
+WHAT ARE THEY SET ON?
+Put 4 units of food by for the household. Step: gather food to put by (4 more) — on hold: a wolf about. 0 of 4 units put by so far. Why: set aside: a wolf about. Set aside 5 times so far.
+NEEDS
+Food
+57
+Water
+70
+Energy
+29
+Warmth
+94
+Safety
+79
+Company
+100
+CARRYING
+×2
+×1
+5.5 / 6
+TOOLS
+none
+Township & shared work
+
+Willowbank: 13 households. Membership belongs to the household and does not change with walking.
+
+Recent recorded production and resource flows:
+
+gathering: 234 berries, 43 fish, 26 fruit, 69 grain, 33 stone, 108 wood; 3 recorded days. Last source #863 at tick 5994.
+
+Repeated activities: gathering: berries on 3 days; gathering: grain on 3 days; gathering: wood on 3 days; gathering: stone on 3 days; gathering: fruit on 3 days; gathering: fish on 3 days.
+
+No transfers between township affiliations recorded.
+
+No repeated-support faction currently established.
+
+No shared project proposed yet.
+
+Household history
+
+Rowan household formed at tick 0; formation cause is not recorded.
+
+Members: Bram.
+
+Home #901: lean_to; recorded builders: unknown.
+
+Request #2427: Hana asked Bram; cancelled: I saw that the promised site was no longer there; its fate is unknown. My contribution remains 2/4.; promise #2441; site #2280.
+
+Relationship history
+
+Silas: trust 11, affinity -7.
+
+Remembered at tick 5048: worked alongside Silas. Event link not recorded.
+
+Hana: trust 12, affinity 2.
+
+Request #2427, helper, tick 5738: cancelled — I saw that the promised site was no longer there; its fate is unknown. My contribution remains 2/4.; site #2280. Task: wood (wood); asked 4; agreed 4. No direct material receipt recorded; ability is not established by this outcome. Outcome knowledge: own outcome, learned tick 5738; obligation ended tick 5738, commitment #2441. Target evidence: observed absence, site #2280, tick 5728, at (45, 43). No acknowledgement received.
+
+Nico: trust 13, affinity 4.
+
+Earlier cause not recorded.
+
+Kaia: trust 33, affinity 24.
+
+Remembered at tick 5048: worked alongside Kaia. Event link not recorded.
+
+Dov: trust 25, affinity 10.
+
+Earlier cause not recorded.
+
+Cole: trust 16, affinity 9.
+
+Earlier cause not recorded.
+
+Jax: trust 16, affinity 8.
+
+Remembered at tick 2664: saw Jax help Greta. Event link not recorded.
+
+Remembered at tick 5248: worked alongside Jax. Event link not recorded.
+
+Mira: trust 6, affinity -6.
+
+Remembered at tick 5248: worked alongside Mira. Event link not recorded.
+
+Theo: trust 22, affinity -7.
+
+Open grievance: we argued over the last wood (since tick 4881).
+
+Remembered at tick 4881: sore: we argued over the last wood. Event link not recorded.
+
+Remembered at tick 5217: saw Theo help Arlo. Event link not recorded.
+
+Yusuf: trust 14, affinity -3.
+
+Earlier cause not recorded.
+
+Zeke: trust 21, affinity 21.
+
+Remembered at tick 5048: worked alongside Zeke. Event link not recorded.
+
+Tessa: trust 8, affinity -9.
+
+Remembered at tick 2998: worked alongside Tessa. Event link not recorded.
+
+Remembered at tick 4948: worked alongside Tessa. Event link not recorded.
+
+Recent decisions
+
+Tick 5983 (just now), free: chose “Warn Silas about the wolf”; still under way. Passed over then: Warn Greta about the wolf, Warn Maren about the wolf, Warn Edda about the wolf. Set aside then: Eat from the stores (remembers it being empty); Picking berries (believes it is empty); Gathering wild grain (believes it is empty).
+
+Tick 5932 (one hundred ticks ago), free: chose “Warn Arlo about the wolf”; ended failed at tick 5982: Arlo was already talking to someone. Passed over then: Warn Cole about the wolf, Warn Silas about the wolf, Sit down and rest. Set aside then: Eat from the stores (remembers it being empty); Picking berries (believes it is empty); Gathering wild grain (believes it is empty).
+
+Tick 5830 (2 hundred ticks ago), free: chose “Warn Hana about the wolf”; ended success at tick 5931: finished a conversation. Passed over then: Warn Silas about the wolf, Warn Cole about the wolf, Warn Ada about the wolf. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+Tick 5755 (2 hundred ticks ago), free: chose “Warn Nico about the wolf”; ended success at tick 5829: finished a conversation. Passed over then: Warn Hana about the wolf, Warn Maren about the wolf, Warn Ada about the wolf. Set aside then: Gathering wild grain (believes it is empty); Fishing (believes it is empty); Get wood to keep the fire going (no room in my pack for one wood).
+
+Tick 5588 (4 hundred ticks ago), free: chose “Warn Kaia about the wolf”; ended success at tick 5754: finished a conversation. Passed over then: Warn Theo about the wolf, Warn Dov about the wolf, Warn Delia about the wolf. Set aside then: Gathering wild grain (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+Tick 5539 (5 hundred ticks ago), danger: chose “Run to safety (other people)”; ended success at tick 5587: done. Passed over then: nothing. Set aside then: nothing.
+
+Tick 5489 (5 hundred ticks ago), free: chose “Explore somewhere new”; ended interrupted at tick 5539: danger nearby. Passed over then: Potter about near home. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+Tick 5425 (6 hundred ticks ago), free: chose “Go and drink at the water”; ended success at tick 5488: done. Passed over then: Explore somewhere new, Go and drink at the water, Potter about near home. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Fishing (believes it is empty).
+
+40 earlier decisions were compacted and are not kept.
+
+Conversation
+now
+TALKING NOW
+now
+Silas
+· a warning
+Step
+The answer
+Outcome
+Under way
+LAST CONVERSATION
+7s ago
+Hana
+· a warning
+Outcome
+Warned them (they had not heard; they know now)
+Promises
+1
+MOOT
+made 4.4 min ago
+Haul 4 wood to the building site, as promised to Hana
+2 of 4 delivered · I saw that the promised site was no longer there; its fate is unknown. My contribution remains 2/4.
+Quarrels
+1
+Theo
+COMPETITION
+started 1.9 min ago
+We argued over the last wood
+Sore
+28
+Apologies
+0 of 3
+Nearby
+People
+14
+Requests
+1
+Recent
+14
+Knows
+181
+Family
+Traits
+
+Reserved, generous. Hopes for a good name among their neighbours (0% there).
+
+frugal
+generous
+reserved
+sociable
+bold
+cautious
+easygoing
+diligent
+homebody
+curious
+SKILLS
+
+Started with a specialty in stone; other skills may be much less developed. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.
+
+Foraging
+×0.98
+Fishing
+×0.92
+Woodcutting
+×0.74
+Stonework
+×1.74
+Building
+×0.81
+Farming
+×0.53
+Crafting
+×0.61
+Carpentry
+×0.58
+Kiln work
+×0.78
+Smithing
+×0.51
+Baking
+×0.63
+
+Charcoal firing: not learned. Kiln proficiency alone does not supply this technique. Iron smelting: not learned (must learn charcoal firing first). Iron forging: not learned (must learn iron smelting first).
+
+Their trade: stonework — quicker at it than at anything else.
+
+morning: Wander out to the trees. 1 successful days (activity #1212 at tick 451). still learning from separate days. Last outcome: completed. morning: Potter about near home. 1 successful days (activity #1020 at tick 121). still learning from separate days. Last outcome: completed. afternoon: Chopping wood to keep the fire going. 1 successful days (activity #1386 at tick 730). still learning from separate days. Last outcome: completed. morning: Fishing. 1 successful days (activity #2180 at tick 3026). still learning from separate days. Last outcome: completed. afternoon: Deliver materials to the hut site. 1 successful days (activity #2468 at tick 3478). still learning from separate days. Last outcome: completed. afternoon: Sit down and rest. 1 successful days (activity #1482 at tick 962). still learning from separate days. Last outcome: interrupted: something better came up. night: Chopping wood to keep my promise to bring it. 1 successful days (activity #2724 at tick 4976). still learning from separate days. Last outcome: completed. morning: Fishing. 1 successful days (activity #2968 at tick 5291). still learning from separate days. Last outcome: completed.
+
+Carried 4 weight of materials to building sites in 1 load over the last 1 day(s).
+
+WHAT HAS PAID THEM
+Fishing
+1.1× · 2
+Woodcutting
+0.8× · 3
+Foraging
+0.5× · 2
+
+Fish spot #887: 1 productive visit, 111% of estimated return for time spent. Tree #431 (location no longer known): 1 productive visit, 65% of estimated return for time spent. Fish spot #886: 1 productive visit, 111% of estimated return for time spent. Tree #374 (location no longer known): 1 productive visit, 107% of estimated return for time spent.
+
+WHAT THEY HAVE HEARD OF PEOPLE
+Theo helped Arlo.
+saw it, today
+Thea helped Talia.
+Kaia told me, today
+Faye helped Tessa.
+saw it, today
+Saw Edda complete a promise to Tomas.
+Hana told me (2 mouths on), yesterday
+Jax helped Greta.
+saw it, yesterday
+Edda helped Tomas.
+saw it, yesterday
+Viktor helped Tomas.
+saw it, 2 days ago
+Delia helped Theo.
+Talia told me, 2 days ago
+Greta picked a quarrel with Maren.
+Nico told me, 2 days ago
+Theo helped Nico.
+saw it, 2 days ago

@@ -1,0 +1,133 @@
+{
+  "staged": false,
+  "controlled": false,
+  "input": "inhabitant_evidence/connections-background-45-meadow/natural-lesson-start.json",
+  "inputSha256": "b68a50dccc23875efa04d8e660d261f6393e5acc80c6387386cec30f5e6e468d",
+  "person": 1013,
+  "name": "Pia",
+  "tick": 94477,
+  "techniques": {
+    "charcoal": {
+      "source": "taught",
+      "learned": 92530,
+      "teacher": 16766,
+      "lesson": 42441,
+      "started": 92350
+    }
+  },
+  "actions": [
+    {
+      "tick": 92308,
+      "id": 42436,
+      "label": "Ask Hana to teach charcoal firing",
+      "kind": "socialize",
+      "target": 16766,
+      "data": {
+        "purpose": "learn_technique",
+        "conv": {},
+        "optKey": "socialize:16766:learn_technique",
+        "why": "I want to fire charcoal but have not learned how · I need charcoal firing for wanted work +29 · walking −1"
+      }
+    },
+    {
+      "tick": 93693,
+      "id": 42903,
+      "label": "Burning charcoal",
+      "kind": "operate",
+      "target": 29352,
+      "data": {
+        "recipe": "burn_charcoal",
+        "client": 1013,
+        "purpose": "the smithy burns charcoal to smelt and forge",
+        "destSite": 0,
+        "optKey": "operate:29352:burn_charcoal",
+        "why": "the smithy burns charcoal to smelt and forge +27 · practised at it +6 · walking −5"
+      }
+    }
+  ],
+  "production": [
+    {
+      "tick": 94476,
+      "charcoal": 3,
+      "events": [
+        {
+          "id": 43456,
+          "tick": 94476,
+          "kind": "work",
+          "text": "Pia finished charcoal at the kiln.",
+          "ids": [
+            1013
+          ],
+          "x": 30,
+          "y": 36
+        }
+      ],
+      "kilns": [
+        {
+          "id": 29352,
+          "store": {
+            "items": {
+              "clay": 3,
+              "charcoal": 3
+            },
+            "cap": 50
+          },
+          "ops": {
+            "job": null,
+            "earmarks": [
+              {
+                "kind": "out",
+                "item": "charcoal",
+                "n": 3,
+                "owner": 1013,
+                "until": 98076,
+                "reason": "the smithy burns charcoal to smelt and forge"
+              }
+            ],
+            "batches": 4,
+            "produced": {
+              "bricks": 9,
+              "charcoal": 3
+            },
+            "consumed": {
+              "wood": 12,
+              "clay": 12
+            },
+            "contributions": {
+              "1001": 100,
+              "1007": 51,
+              "1013": 25,
+              "1036": 53
+            },
+            "lastRun": 94476,
+            "lastBlocker": "",
+            "depositId": 0,
+            "shares": {},
+            "present": {},
+            "builders": {
+              "1005": 0.3244019138755977,
+              "1011": 0.023923444976076617,
+              "1030": 0.047846889952153235,
+              "1035": 0.023923444976076617,
+              "1038": 0.09569377990430647,
+              "3469": 0.07177033492822986,
+              "5899": 0.11100478468899556,
+              "13557": 0.26889952153109964,
+              "16765": 0.03253588516746421
+            },
+            "wasted": {
+              "clay that cracked and shrank in the fire": 3,
+              "smoke and ash": 3
+            },
+            "tended": 65725
+          }
+        }
+      ]
+    }
+  ],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "hash": "75272bc8"
+}

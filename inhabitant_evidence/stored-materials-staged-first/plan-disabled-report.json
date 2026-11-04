@@ -1,0 +1,66 @@
+{
+  "scenario": "plan",
+  "arm": "disabled",
+  "firstChoice": "Explore somewhere new",
+  "requests": [],
+  "inventory": {
+    "wood": 2
+  },
+  "plans": [
+    {
+      "id": 11,
+      "kind": "tool",
+      "goal": "make an axe",
+      "since": 700,
+      "until": 5500,
+      "status": "dropped",
+      "reason": "no known source of stone with anything left",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "axe",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 700,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    },
+    {
+      "id": 13,
+      "kind": "night",
+      "goal": "be fed, watered and under shelter before dark",
+      "since": 917,
+      "until": 2520,
+      "status": "active",
+      "step": "stay at my lean-to until it is light",
+      "stepKind": "stay",
+      "stepTarget": 6,
+      "stepItem": null,
+      "stepKey": "shelter:6",
+      "blocked": "",
+      "reason": "nowhere to shelter nearby for the night",
+      "setAside": 0,
+      "aboutId": 6,
+      "wants": {},
+      "makes": "",
+      "sheltered": 128,
+      "worked": 0,
+      "ended": 0
+    }
+  ],
+  "relations": {},
+  "socialMemory": [],
+  "tools": [],
+  "milestones": [],
+  "hash": "eb983250",
+  "replayHash": "eb983250",
+  "fullReplayEqual": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

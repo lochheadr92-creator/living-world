@@ -1,0 +1,332 @@
+{
+ "seed": "river",
+ "failures": 9,
+ "successes": 7,
+ "failedWithUnwalkableSouth": 0,
+ "repeatsSamePersonSameTile": [
+  [
+   "Jax@49,37",
+   9
+  ]
+ ],
+ "rows": [
+  {
+   "tick": 80,
+   "who": "Ben",
+   "px": 42,
+   "py": 45,
+   "southWalkable": true,
+   "southTerrain": 2,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 108,
+   "who": "Milo",
+   "px": 37,
+   "py": 47,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 156,
+   "who": "Ben",
+   "px": 42,
+   "py": 44,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 309,
+   "who": "Mira",
+   "px": 40,
+   "py": 46,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 482,
+   "who": "Petra",
+   "px": 40,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 522,
+   "who": "Mira",
+   "px": 40,
+   "py": 47,
+   "southWalkable": true,
+   "southTerrain": 2,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 781,
+   "who": "Ben",
+   "px": 42,
+   "py": 43,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 1095,
+   "who": "Talia",
+   "px": 38,
+   "py": 45,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 1116,
+   "who": "Petra",
+   "px": 41,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 1178,
+   "who": "Cora",
+   "px": 36,
+   "py": 45,
+   "southWalkable": true,
+   "southTerrain": 4,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 2399,
+   "who": "Milo",
+   "px": 37,
+   "py": 46,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 2446,
+   "who": "Cora",
+   "px": 33,
+   "py": 50,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 2473,
+   "who": "Basil",
+   "px": 46,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 2725,
+   "who": "Talia",
+   "px": 37,
+   "py": 39,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 5333,
+   "who": "Ivy",
+   "px": 45,
+   "py": 41,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 5612,
+   "who": "Cole",
+   "px": 36,
+   "py": 51,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 5680,
+   "who": "Cora",
+   "px": 32,
+   "py": 50,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 5936,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 7534,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 8014,
+   "who": "Cole",
+   "px": 36,
+   "py": 52,
+   "southWalkable": true,
+   "southTerrain": 4,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 8050,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 8119,
+   "who": "Cole",
+   "px": 36,
+   "py": 52,
+   "southWalkable": true,
+   "southTerrain": 4,
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 8202,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 8296,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 9692,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10032,
+   "who": "Petra",
+   "px": 41,
+   "py": 40,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "interrupted",
+   "detail": "something better came up"
+  },
+  {
+   "tick": 10089,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10285,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10425,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10541,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  },
+  {
+   "tick": 10687,
+   "who": "Jax",
+   "px": 49,
+   "py": 37,
+   "southWalkable": true,
+   "southTerrain": 3,
+   "outcome": "failed",
+   "detail": "no way to get there"
+  }
+ ],
+ "T": {
+  "DEEP": 0,
+  "SHALLOW": 1,
+  "SAND": 2,
+  "GRASS": 3,
+  "FOREST": 4,
+  "STONY": 5
+ }
+}

@@ -1,0 +1,133 @@
+{
+  "seed": "forest",
+  "days": 6,
+  "tick": 14400,
+  "stop": "horizon",
+  "seconds": 14.53,
+  "totals": {
+    "samples": 1680,
+    "peopleWithoutCharcoal": 540,
+    "adultOrYouthWithoutCharcoal": 0,
+    "wantedTechnique": 0,
+    "learnerOffers": 0,
+    "teacherOffers": 0,
+    "materialRequestOffers": 568,
+    "materialBlocked": 251,
+    "knownNeedySites": 550,
+    "nearbyPeople": 14250,
+    "nearbyWoodCarriers": 8969,
+    "nearbyStoneCarriers": 1586,
+    "nearbyPlankCarriers": 0,
+    "workshopOptions": 0
+  },
+  "selected": 111,
+  "requests": 86,
+  "heardRequests": 33,
+  "demandTrades": 0,
+  "benefits": 0,
+  "learned": 0,
+  "buildings": [
+    {
+      "id": 895,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 898,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 901,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 904,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 907,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 910,
+      "type": "lean_to",
+      "items": {
+        "wood": 2
+      }
+    },
+    {
+      "id": 913,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 919,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 922,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1565,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1579,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1991,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2040,
+      "type": "lean_to",
+      "items": {
+        "grain": 5,
+        "berries": 1
+      }
+    },
+    {
+      "id": 2335,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 3324,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3465,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 4122,
+      "type": "hut",
+      "items": {
+        "berries": 1
+      }
+    },
+    {
+      "id": 4643,
+      "type": "hut",
+      "items": {}
+    }
+  ],
+  "hash": "4a57751c",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

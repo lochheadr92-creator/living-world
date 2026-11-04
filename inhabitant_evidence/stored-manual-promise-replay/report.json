@@ -1,0 +1,179 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ada",
+  "startPath": "/inhabitant_evidence/stored-materials-staged-first/promise-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 1160,
+  "browserHash": "d53004c7",
+  "replayHash": "d53004c7",
+  "fullSerializedEqual": true,
+  "applied": 5,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 19,
+      "label": "Ask Ben for stone",
+      "tick": 775,
+      "outcome": "partial",
+      "detail": "Ben will bring 2 stone"
+    },
+    {
+      "call": 1,
+      "activityId": 25,
+      "label": "Strolling about the square",
+      "tick": 830,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 28,
+      "label": "Pottering about",
+      "tick": 902,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 3,
+      "activityId": 30,
+      "label": "Strolling about the square",
+      "tick": 1000,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 4,
+      "activityId": 34,
+      "label": "Making a pick",
+      "tick": 1159,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "requests": [
+    {
+      "id": 22,
+      "kind": "stone",
+      "from": 2,
+      "to": 7,
+      "item": "stone",
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "planId": 17,
+      "likely": true,
+      "created": 714,
+      "expires": 1414,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 989,
+      "purpose": "make a pick",
+      "destKind": "person",
+      "destId": 2,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 23,
+      "offered": 2,
+      "delivered": 2
+    }
+  ],
+  "inventory": {
+    "pick": 1
+  },
+  "plans": [
+    {
+      "id": 17,
+      "kind": "tool",
+      "goal": "make a pick",
+      "since": 700,
+      "until": 5500,
+      "status": "done",
+      "reason": "made the pick (Ben brought 2 of the stone)",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "pick",
+      "sheltered": 0,
+      "worked": 1,
+      "ended": 1159,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    }
+  ],
+  "commitments": [],
+  "relations": {
+    "5": {
+      "affinity": 0,
+      "trust": 10,
+      "familiarity": 0,
+      "lastMet": -99999,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    },
+    "7": {
+      "affinity": 13.428792376944923,
+      "trust": 20.6924,
+      "familiarity": 2.8,
+      "lastMet": 989,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": -0.5,
+      "history": [
+        {
+          "tick": 989,
+          "text": "Ben gave me 2 stone"
+        },
+        {
+          "tick": 989,
+          "text": "Ben kept their promise"
+        }
+      ],
+      "grievance": null,
+      "settledAt": -99999
+    }
+  },
+  "socialMemory": [
+    {
+      "requestId": 22,
+      "otherId": 7,
+      "siteId": 0,
+      "tick": 989,
+      "outcome": "fulfilled",
+      "reason": "promise kept",
+      "role": "asker"
+    }
+  ],
+  "tools": [
+    {
+      "ent": "tool",
+      "id": 38,
+      "kind": "pick",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1,
+      "holder": 2,
+      "loan": null,
+      "madeTick": 1158,
+      "maker": 2
+    }
+  ],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

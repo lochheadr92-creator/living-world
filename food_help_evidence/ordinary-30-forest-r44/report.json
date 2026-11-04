@@ -1,0 +1,47 @@
+{
+  "seed": "forest",
+  "days": 30,
+  "immigration": false,
+  "rulesVersion": 44,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 55.137,
+  "alive": 18,
+  "deaths": 11,
+  "deathCauses": {
+    "thirst": 1,
+    "wolf attack": 1,
+    "exposure": 5,
+    "hunger": 4
+  },
+  "foodRequests": 205,
+  "foodRequestOutcomes": {
+    "declined:no item": 144,
+    "partial": 13,
+    "declined:unwilling": 19,
+    "declined:disliked": 1,
+    "declined:own need": 6,
+    "fulfilled": 4,
+    "failed": 18
+  },
+  "fetchPromises": 0,
+  "promisedDelivered": 0,
+  "promisedDeliveredUnits": 0,
+  "giftsOnRequest": 17,
+  "promisedGives": 43,
+  "totals": {
+    "samples": 7139,
+    "foodAskOffers": 1002,
+    "foodAskBlocked": 2,
+    "hungryWithFood": 300,
+    "hungryWithFoodNoEatOption": 180,
+    "hungryWithFoodEatBlocked": 180
+  },
+  "deathsWithFoodInPack": 2,
+  "hungerDeathsWithSpareInHousehold": 0,
+  "hash": "72443f03",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "input": "inhabitant_evidence/stored-materials-staged-first/promise-enabled-final.json",
+  "staged": true,
+  "until": 7000,
+  "prediction": "Earned trust may change the recipient of a later offered project-material request. Opportunity is not guaranteed.",
+  "stop": "5000 ticks, no tuning or supplied opportunities; preserve null."
+}

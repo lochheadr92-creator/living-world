@@ -1,0 +1,2421 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "stored-material-promise",
+    "settings": {
+      "seed": "stored-material-promise",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 40
+    },
+    "personId": 7,
+    "personName": "Ben",
+    "startTick": 737,
+    "startHash": "3aa31d9a",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "restricted-stored-helper",
+      "kind": "stub",
+      "config": {}
+    },
+    "budget": {
+      "maxCallsPerDay": 400,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 60000,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {},
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 790,
+      "attempt": 0,
+      "observationHash": "8d14ac63",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 790,
+          "day": 1,
+          "clock": "15:06",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable",
+          "skills": {
+            "forage": 1.3,
+            "fish": 0.82,
+            "wood": 1.8,
+            "stone": 1.31,
+            "build": 0.94,
+            "farm": 0.91,
+            "craft": 0.99,
+            "carpentry": 0.86,
+            "kiln": 0.94,
+            "smith": 1.06,
+            "bake": 0.87
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 97,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 96,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 96,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 88,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 1,
+            "stone": 1
+          },
+          "load": {
+            "used": 5,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 3
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42.5,
+            "y": 40.5
+          },
+          "mood": 9,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Reed",
+          "members": [],
+          "home": "lean-to 3 tiles north-east (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "10 world min ago",
+            "t": 774
+          },
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 2,
+              "direction": "south-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            },
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 38.9,
+              "distance": 3,
+              "direction": "north",
+              "looks": [],
+              "doing": "exploring",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 3,
+              "direction": "north-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 4,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 7
+              },
+              "condition": 100
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 5,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 18,
+              "direction": "south-east",
+              "seen": "7 world h 54 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "7 world h 54 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "7 world h 54 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 30,
+              "direction": "south-east",
+              "seen": "7 world h 54 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Acquaintance",
+              "affinity": 5,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "10 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "46 world min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Bring 2 stone to Ada",
+              "status": "active",
+              "detail": "0 of 2 delivered",
+              "due": "in 17 world h 28 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "19 world min ago",
+              "text": "Ada told me about a rock outcrop a long way south-east of camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "32 world min ago",
+              "text": "Promised Ada 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "54 world min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "collect:12:stone#choice:0",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the storehouse",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to keep my promise to Ada",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "3 world h 36 min",
+            "target": "rock outcrop 30 tiles south-east (seen 7 world h 54 min ago)"
+          },
+          {
+            "key": "gather:13",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "2 world h 46 min",
+            "target": "tree 18 tiles south-east (seen 7 world h 54 min ago)"
+          },
+          {
+            "key": "gather:14",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "2 world h 57 min",
+            "target": "tree 20 tiles south-east (seen 7 world h 54 min ago)"
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 38 min",
+            "target": null
+          },
+          {
+            "key": "socialize:5:request:plan:wood",
+            "kind": "socialize",
+            "label": "Ask Cora for wood",
+            "goal": "make an axe",
+            "need": null,
+            "eta": "54 world min",
+            "target": "Cora (in sight, 2 tiles south-west)"
+          },
+          {
+            "key": "collect:12:stone#choice:7",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the storehouse",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 1 more wood for the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "54 world min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"collect:12:stone#choice:0\",\"why\":\"Collect material I remember to keep my own promise, then take it to the person.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "collect:12:stone#choice:0",
+        "why": "Collect material I remember to keep my own promise, then take it to the person."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 887,
+      "attempt": 0,
+      "observationHash": "4a926daa",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 887,
+          "day": 1,
+          "clock": "16:04",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable",
+          "skills": {
+            "forage": 1.3,
+            "fish": 0.82,
+            "wood": 1.8,
+            "stone": 1.31,
+            "build": 0.94,
+            "farm": 0.91,
+            "craft": 0.99,
+            "carpentry": 0.86,
+            "kiln": 0.94,
+            "smith": 1.06,
+            "bake": 0.87
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 94,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 92,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 92,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 86,
+              "state": "ok"
+            }
+          },
+          "aspiration": "has what they hoped for, a trade of their own",
+          "carrying": {
+            "wood": 1,
+            "stone": 2
+          },
+          "load": {
+            "used": 8,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 3
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 51.5,
+            "y": 45.4
+          },
+          "mood": 21,
+          "thoughts": [
+            "+12 has a trade of their own"
+          ],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Reed",
+          "members": [],
+          "home": "lean-to 11 tiles north (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Collecting 1 stone",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 886
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "1 world h 8 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Collect 1 stone from the storehouse",
+            "when": "58 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 1,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 9,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "8 world h 52 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 11,
+              "direction": "north",
+              "seen": "16 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 13,
+              "direction": "south-east",
+              "seen": "8 world h 52 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 15,
+              "direction": "north",
+              "seen": "32 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 7
+              },
+              "condition": 100
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "8 world h 52 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Acquaintance",
+              "affinity": 5,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "1 world h 8 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "when": "9 world min ago"
+            },
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 39.3,
+              "y": 35.7,
+              "when": "41 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "1 world h 44 min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Bring 2 stone to Ada",
+              "status": "active",
+              "detail": "0 of 2 delivered",
+              "due": "in 16 world h 29 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Took 1 item from storage.",
+              "kind": "work",
+              "t": 886
+            },
+            {
+              "when": "35 world min ago",
+              "text": "I have what I hoped for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "35 world min ago",
+              "text": "What I hope for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "1 world h 17 min ago",
+              "text": "Ada told me about a rock outcrop a long way south-east of camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "1 world h 31 min ago",
+              "text": "Promised Ada 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "1 world h 52 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "give:2:promise",
+            "kind": "give",
+            "label": "Take stone to Ada as promised",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "1 world h 39 min",
+            "target": "Ada (last seen 41 world min ago)"
+          },
+          {
+            "key": "gather:13",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "1 world h 52 min",
+            "target": "tree 9 tiles south-east (seen just now)"
+          },
+          {
+            "key": "gather:14",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "2 world h 5 min",
+            "target": "tree 11 tiles south-east (seen 8 world h 52 min ago)"
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "24 world min",
+            "target": "storehouse 1 tiles north-east (seen just now)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 21 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 1 more wood for the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "1 world h 52 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"give:2:promise\",\"why\":\"Collect material I remember to keep my own promise, then take it to the person.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "give:2:promise",
+        "why": "Collect material I remember to keep my own promise, then take it to the person."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 2,
+      "tick": 1030,
+      "attempt": 0,
+      "observationHash": "2038326e",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1030,
+          "day": 1,
+          "clock": "17:30",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 16
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable",
+          "skills": {
+            "forage": 1.3,
+            "fish": 0.82,
+            "wood": 1.8,
+            "stone": 1.31,
+            "build": 0.94,
+            "farm": 0.91,
+            "craft": 0.99,
+            "carpentry": 0.86,
+            "kiln": 0.94,
+            "smith": 1.06,
+            "bake": 0.87
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 90,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 87,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 87,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 97,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 83,
+              "state": "ok"
+            }
+          },
+          "aspiration": "has what they hoped for, a trade of their own",
+          "carrying": {
+            "wood": 1,
+            "stone": 2
+          },
+          "load": {
+            "used": 8,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 3
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 39.3,
+            "y": 35.7
+          },
+          "mood": 20,
+          "thoughts": [
+            "+12 has a trade of their own"
+          ],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Reed",
+          "members": [],
+          "home": "lean-to 5 tiles south (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Bringing stone to Ada (promised)",
+            "outcome": "failed",
+            "detail": "Ada was not where I expected",
+            "when": "1 world min ago",
+            "t": 1029
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "2 world h 34 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Take stone to Ada as promised",
+            "when": "1 world h 26 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 8,
+              "direction": "south",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 3,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 5,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 15,
+              "direction": "south",
+              "seen": "28 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 23,
+              "direction": "south",
+              "seen": "1 world h 24 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 25,
+              "direction": "south-east",
+              "seen": "10 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 27,
+              "direction": "south-east",
+              "seen": "10 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 34,
+              "direction": "south-east",
+              "seen": "10 world h 18 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Acquaintance",
+              "affinity": 5,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "2 world h 34 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "3 world h 10 min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Bring 2 stone to Ada",
+              "status": "active",
+              "detail": "0 of 2 delivered",
+              "due": "in 15 world h 4 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Gave up “Bringing stone to Ada (promised)”: Ada was not where I expected.",
+              "kind": "work",
+              "t": 1029
+            },
+            {
+              "when": "1 world h 26 min ago",
+              "text": "Took 1 item from storage.",
+              "kind": "work",
+              "t": 886
+            },
+            {
+              "when": "2 world h 1 min ago",
+              "text": "I have what I hoped for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "2 world h 1 min ago",
+              "text": "What I hope for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "2 world h 43 min ago",
+              "text": "Ada told me about a rock outcrop a long way south-east of camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "2 world h 56 min ago",
+              "text": "Promised Ada 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "3 world h 18 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "gather:13",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "3 world h 21 min",
+            "target": "tree 23 tiles south (seen 1 world h 24 min ago)"
+          },
+          {
+            "key": "gather:14",
+            "kind": "gather",
+            "label": "Chopping wood to make an axe",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "3 world h 32 min",
+            "target": "tree 25 tiles south-east (seen 10 world h 18 min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 55 min",
+            "target": null
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make an axe",
+            "need": null,
+            "eta": "1 world h 51 min",
+            "target": "storehouse 15 tiles south (seen 28 world min ago)"
+          },
+          {
+            "key": "socialize:5:request:plan:wood",
+            "kind": "socialize",
+            "label": "Ask Cora for wood",
+            "goal": "make an axe",
+            "need": null,
+            "eta": "1 world h 30 min",
+            "target": "Cora (in sight, 8 tiles south)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 1 more wood for the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "3 world h 18 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"gather:13\",\"why\":\"Collect material I remember to keep my own promise, then take it to the person.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "gather:13",
+        "why": "Collect material I remember to keep my own promise, then take it to the person."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 3,
+      "tick": 1293,
+      "attempt": 0,
+      "observationHash": "8b46f1f7",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1293,
+          "day": 1,
+          "clock": "20:07",
+          "phase": "dusk",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 11
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable",
+          "skills": {
+            "forage": 1.3,
+            "fish": 0.82,
+            "wood": 1.8,
+            "stone": 1.31,
+            "build": 0.94,
+            "farm": 0.91,
+            "craft": 0.99,
+            "carpentry": 0.86,
+            "kiln": 0.94,
+            "smith": 1.06,
+            "bake": 0.87
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 82,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 76,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 76,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 81,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 77,
+              "state": "ok"
+            }
+          },
+          "aspiration": "has what they hoped for, a trade of their own",
+          "carrying": {
+            "wood": 3,
+            "stone": 2
+          },
+          "load": {
+            "used": 12,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 3
+          },
+          "available": {
+            "wood": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 59.5,
+            "y": 43.6
+          },
+          "mood": 12,
+          "thoughts": [
+            "+11 has a trade of their own"
+          ],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Reed",
+          "members": [],
+          "home": "lean-to 17 tiles north-west (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Chopping wood",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1292
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "5 world h 11 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Chopping wood to make an axe",
+            "when": "2 world h 38 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 1,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 7
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 3,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 5,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 8,
+              "direction": "north-west",
+              "seen": "44 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 99
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 13,
+              "direction": "south-east",
+              "seen": "12 world h 56 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 17,
+              "direction": "north-west",
+              "seen": "1 world h 36 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 22,
+              "direction": "north-west",
+              "seen": "1 world h 54 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 6
+              },
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Acquaintance",
+              "affinity": 5,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "5 world h 11 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "when": "1 world h 34 min ago"
+            },
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 45,
+              "y": 35.7,
+              "when": "1 world h 41 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "5 world h 47 min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Bring 2 stone to Ada",
+              "status": "active",
+              "detail": "0 of 2 delivered",
+              "due": "in 12 world h 26 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 1293
+            },
+            {
+              "when": "1 world min ago",
+              "text": "Gathered 2 wood from the tree.",
+              "kind": "work",
+              "t": 1292
+            },
+            {
+              "when": "2 world h 38 min ago",
+              "text": "Gave up “Bringing stone to Ada (promised)”: Ada was not where I expected.",
+              "kind": "work",
+              "t": 1029
+            },
+            {
+              "when": "4 world h 4 min ago",
+              "text": "Took 1 item from storage.",
+              "kind": "work",
+              "t": 886
+            },
+            {
+              "when": "4 world h 38 min ago",
+              "text": "I have what I hoped for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "4 world h 38 min ago",
+              "text": "What I hope for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "5 world h 21 min ago",
+              "text": "Ada told me about a rock outcrop a long way south-east of camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "5 world h 34 min ago",
+              "text": "Promised Ada 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "5 world h 56 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "give:2:promise",
+            "kind": "give",
+            "label": "Take stone to Ada as promised",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "2 world h 3 min",
+            "target": "Ada (last seen 1 world h 41 min ago)"
+          },
+          {
+            "key": "sleep:11",
+            "kind": "sleep",
+            "label": "Sleep at my lean-to",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "2 world h 32 min",
+            "target": "lean-to 17 tiles north-west (seen 1 world h 36 min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 50 min",
+            "target": "storehouse 8 tiles north-west (seen 44 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "get to my lean-to",
+            "wants": {},
+            "blocked": "",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "just now"
+          },
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "5 world h 56 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"give:2:promise\",\"why\":\"Collect material I remember to keep my own promise, then take it to the person.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "give:2:promise",
+        "why": "Collect material I remember to keep my own promise, then take it to the person."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 4,
+      "tick": 1468,
+      "attempt": 0,
+      "observationHash": "80c1a4ea",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1468,
+          "day": 1,
+          "clock": "21:52",
+          "phase": "night",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 8
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable",
+          "skills": {
+            "forage": 1.3,
+            "fish": 0.82,
+            "wood": 1.8,
+            "stone": 1.31,
+            "build": 0.94,
+            "farm": 0.91,
+            "craft": 0.99,
+            "carpentry": 0.86,
+            "kiln": 0.94,
+            "smith": 1.06,
+            "bake": 0.87
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 77,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 69,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 69,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 66,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 72,
+              "state": "ok"
+            }
+          },
+          "aspiration": "has what they hoped for, a trade of their own",
+          "carrying": {
+            "wood": 3,
+            "stone": 2
+          },
+          "load": {
+            "used": 12,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 3
+          },
+          "available": {
+            "wood": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 45,
+            "y": 35.7
+          },
+          "mood": 10,
+          "thoughts": [
+            "+11 has a trade of their own"
+          ],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Reed",
+          "members": [],
+          "home": "lean-to 2 tiles west (98% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Bringing stone to Ada (promised)",
+            "outcome": "failed",
+            "detail": "Ada was not where I expected",
+            "when": "1 world min ago",
+            "t": 1467
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "6 world h 56 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Take stone to Ada as promised",
+            "when": "1 world h 45 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 2,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 7
+              },
+              "condition": 98
+            },
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 7,
+              "direction": "west",
+              "seen": "3 world h 39 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 11,
+              "direction": "south",
+              "seen": "39 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 99
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 18,
+              "direction": "south",
+              "seen": "1 world h 20 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 7
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south",
+              "seen": "1 world h 33 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 21,
+              "direction": "south",
+              "seen": "1 world h 46 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 28,
+              "direction": "south-east",
+              "seen": "14 world h 41 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Acquaintance",
+              "affinity": 5,
+              "trust": 11,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "6 world h 56 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "when": "3 world h 19 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "7 world h 32 min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Bring 2 stone to Ada",
+              "status": "active",
+              "detail": "0 of 2 delivered",
+              "due": "in 10 world h 41 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Gave up “Bringing stone to Ada (promised)”: Ada was not where I expected.",
+              "kind": "work",
+              "t": 1467
+            },
+            {
+              "when": "1 world h 45 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 1293
+            },
+            {
+              "when": "1 world h 46 min ago",
+              "text": "Gathered 2 wood from the tree.",
+              "kind": "work",
+              "t": 1292
+            },
+            {
+              "when": "4 world h 23 min ago",
+              "text": "Gave up “Bringing stone to Ada (promised)”: Ada was not where I expected.",
+              "kind": "work",
+              "t": 1029
+            },
+            {
+              "when": "5 world h 49 min ago",
+              "text": "Took 1 item from storage.",
+              "kind": "work",
+              "t": 886
+            },
+            {
+              "when": "6 world h 23 min ago",
+              "text": "I have what I hoped for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "6 world h 23 min ago",
+              "text": "What I hope for: a trade of their own.",
+              "kind": "life",
+              "t": 829
+            },
+            {
+              "when": "7 world h 6 min ago",
+              "text": "Ada told me about a rock outcrop a long way south-east of camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "7 world h 19 min ago",
+              "text": "Promised Ada 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "7 world h 41 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:11",
+            "kind": "sleep",
+            "label": "Sleep at my lean-to",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "41 world min",
+            "target": "lean-to 2 tiles west (seen 1 world min ago)"
+          },
+          {
+            "key": "shelter:11",
+            "kind": "rest",
+            "label": "Stay at my lean-to until it is light",
+            "goal": "to let the night pass under shelter",
+            "need": "warmth",
+            "eta": "8 world h 7 min",
+            "target": "lean-to 2 tiles west (seen 1 world min ago)",
+            "limits": [
+              {
+                "field": "ticks",
+                "kind": "count",
+                "min": 30,
+                "max": 812,
+                "note": "how long to stay, at most until it is light"
+              }
+            ]
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "lean-to 2 tiles west (seen 1 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "stay at my lean-to until it is light",
+            "wants": {},
+            "blocked": "",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "1 world h 45 min ago"
+          },
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "7 world h 41 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"sleep:11\",\"why\":\"Collect material I remember to keep my own promise, then take it to the person.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "sleep:11",
+        "why": "Collect material I remember to keep my own promise, then take it to the person."
+      },
+      "problem": null,
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 790,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "8d14ac63",
+      "worldHash": "92f9694b",
+      "choice": {
+        "kind": "pick",
+        "key": "collect:12:stone#choice:0"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "collect:12:stone#choice:0",
+        "activityId": 26,
+        "label": "Collecting 1 stone"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 887,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "4a926daa",
+      "worldHash": "0f54a9d0",
+      "choice": {
+        "kind": "pick",
+        "key": "give:2:promise"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "give:2:promise",
+        "activityId": 28,
+        "label": "Bringing stone to Ada (promised)"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 1030,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "2038326e",
+      "worldHash": "1161e70f",
+      "choice": {
+        "kind": "pick",
+        "key": "gather:13"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "gather:13",
+        "activityId": 31,
+        "label": "Chopping wood"
+      }
+    },
+    {
+      "seq": 3,
+      "tick": 1293,
+      "attempt": 0,
+      "ask": 3,
+      "observationHash": "8b46f1f7",
+      "worldHash": "790beb70",
+      "choice": {
+        "kind": "pick",
+        "key": "give:2:promise"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "give:2:promise",
+        "activityId": 37,
+        "label": "Bringing stone to Ada (promised)"
+      }
+    },
+    {
+      "seq": 4,
+      "tick": 1468,
+      "attempt": 0,
+      "ask": 4,
+      "observationHash": "80c1a4ea",
+      "worldHash": "b125fe78",
+      "choice": {
+        "kind": "pick",
+        "key": "sleep:11"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "sleep:11",
+        "activityId": 39,
+        "label": "Sleeping by my lean-to"
+      }
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 26,
+      "label": "Collecting 1 stone",
+      "tick": 887,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 28,
+      "label": "Bringing stone to Ada (promised)",
+      "tick": 1030,
+      "outcome": "failed",
+      "detail": "Ada was not where I expected"
+    },
+    {
+      "call": 2,
+      "activityId": 31,
+      "label": "Chopping wood",
+      "tick": 1293,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 3,
+      "activityId": 37,
+      "label": "Bringing stone to Ada (promised)",
+      "tick": 1468,
+      "outcome": "failed",
+      "detail": "Ada was not where I expected"
+    },
+    {
+      "call": 4,
+      "activityId": 39,
+      "label": "Sleeping by my lean-to",
+      "tick": 1537,
+      "outcome": "unfinished",
+      "detail": "the window ended while this was still under way"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 791,
+      "events": []
+    },
+    {
+      "call": 1,
+      "tick": 888,
+      "events": [
+        {
+          "tick": 829,
+          "kind": "life",
+          "text": "Ben has what they hoped for: a trade of their own."
+        }
+      ]
+    },
+    {
+      "call": 2,
+      "tick": 1031,
+      "events": []
+    },
+    {
+      "call": 3,
+      "tick": 1294,
+      "events": []
+    },
+    {
+      "call": 4,
+      "tick": 1469,
+      "events": []
+    }
+  ],
+  "end": {
+    "tick": 1537,
+    "hash": "e9fe439f",
+    "died": false,
+    "calls": 5,
+    "applied": 5,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 5,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 37143,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

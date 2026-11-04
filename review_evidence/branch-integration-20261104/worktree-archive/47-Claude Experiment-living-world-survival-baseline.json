@@ -1,0 +1,120 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-survival-baseline",
+  "head": "61cb6e5139adbedfd52f463fc635a90d4172327b",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "tests/zz_review_a_flood_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "530f74ac9dd580a2d07cf1a3c1767e76e0d35c8cbed5b3e2f107da7ab0610bd2",
+      "bytes": 3560,
+      "repositoryPath": "tests/zz_review_a_flood_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_a_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "b80e45dafd597a51b40b5307b93a7c2c89d3372c19bf879ee1808086ca6eaf2e",
+      "bytes": 7276,
+      "repositoryPath": "tests/zz_review_a_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "bfca3a504e0d2c5a14f6d14c5b1bc74120bee9749d0f062c76d5a005b60abea9",
+      "bytes": 4391,
+      "repositoryPath": "tests/zz_review_b_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_roundtrip.test.ts",
+      "kind": "untracked",
+      "sha256": "1b84c2a750ec4185b0a1ae28b595071a95dd61072a8b7fe8d7032f36af4f0d1f",
+      "bytes": 9814,
+      "repositoryPath": "tests/zz_review_b_roundtrip.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_undefined_keyorder.test.ts",
+      "kind": "untracked",
+      "sha256": "8544f11fe1c398bc38dd8f61e1f1b51af821327f1b301c1dc5aa114f5d057bc5",
+      "bytes": 2803,
+      "repositoryPath": "tests/zz_review_b_undefined_keyorder.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators.test.ts",
+      "kind": "untracked",
+      "sha256": "65204e8ebe29185304bf6329108db53571918cd60bd0f1a2b1f1930ff104102d",
+      "bytes": 2950,
+      "repositoryPath": "tests/zz_review_b_validators.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators_harsh.test.ts",
+      "kind": "untracked",
+      "sha256": "866dd0b2052aaceea94b2efe9d5665cc1a1d062e3cf1a7afd777b6e6adf0f18b",
+      "bytes": 3069,
+      "repositoryPath": "tests/zz_review_b_validators_harsh.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_acquire_double_count.test.ts",
+      "kind": "untracked",
+      "sha256": "de00e7cf2be270607e0995e7cad038bf75d37b618b9f4f07b43852191e0fb76e",
+      "bytes": 7360,
+      "repositoryPath": "tests/zz_review_f_acquire_double_count.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_plank_diversion.test.ts",
+      "kind": "untracked",
+      "sha256": "987e80c64fb886cccc0923ceec4a3a498eae9724c1173f835e3e0f98eec8296a",
+      "bytes": 4207,
+      "repositoryPath": "tests/zz_review_f_plank_diversion.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_feed_caps.test.ts",
+      "kind": "untracked",
+      "sha256": "e3bd58c0a18e155de886711f604d1095a926245e66445e6f3c2ebacd6b026d0c",
+      "bytes": 2165,
+      "repositoryPath": "tests/zz_review_g_feed_caps.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_ledger_endings.test.ts",
+      "kind": "untracked",
+      "sha256": "0d7cf87733c762c85ad41103d7eba7689d1b9e9789b2f250a2a9bb13ba00c265",
+      "bytes": 6497,
+      "repositoryPath": "tests/zz_review_g_ledger_endings.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "a9f37506d44a30b2400efc766e92b8cb6bcd7c9935127270ed2adb3a9903d55a",
+      "bytes": 8302,
+      "repositoryPath": "tests/zz_review_g_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_stale_blocked.test.ts",
+      "kind": "untracked",
+      "sha256": "0698c3a31df129d2cc905b26e87c6bed3c9c06ea79d6d4807c20c3f95a0c2826",
+      "bytes": 3081,
+      "repositoryPath": "tests/zz_review_g_stale_blocked.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_mature_large.test.ts",
+      "kind": "untracked",
+      "sha256": "fe4c738270642518a7d51083b17dd43b85e8f02e00179c71e6e61988d4675d4c",
+      "bytes": 4568,
+      "repositoryPath": "tests/zz_review_main_mature_large.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_site_fate.test.ts",
+      "kind": "untracked",
+      "sha256": "c26c6f1efa49699b16332f9031b9fdbdaa355d24fe058a4f39db11d2b976d8f6",
+      "bytes": 2383,
+      "repositoryPath": "tests/zz_review_main_site_fate.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_toolreport_saves.test.ts",
+      "kind": "untracked",
+      "sha256": "df7292d5568d545c261cff0a4215ad3641ebd6e576da17919e9a8d26c2453c7e",
+      "bytes": 3458,
+      "repositoryPath": "tests/zz_review_main_toolreport_saves.test.ts"
+    }
+  ],
+  "stagedFiles": []
+}

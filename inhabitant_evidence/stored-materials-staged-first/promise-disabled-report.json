@@ -1,0 +1,199 @@
+{
+  "scenario": "promise",
+  "arm": "disabled",
+  "firstChoice": "Ask Ben for stone",
+  "requests": [
+    {
+      "id": 22,
+      "kind": "stone",
+      "from": 2,
+      "to": 7,
+      "item": "stone",
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "planId": 17,
+      "likely": true,
+      "created": 714,
+      "expires": 1414,
+      "status": "declined",
+      "note": "making",
+      "resolved": 736,
+      "purpose": "make a pick",
+      "destKind": "person",
+      "destId": 2,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    }
+  ],
+  "inventory": {
+    "pick": 1
+  },
+  "plans": [
+    {
+      "id": 17,
+      "kind": "tool",
+      "goal": "make a pick",
+      "since": 700,
+      "until": 5500,
+      "status": "done",
+      "reason": "made the pick",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "pick",
+      "sheltered": 0,
+      "worked": 1,
+      "ended": 1293,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    },
+    {
+      "id": 28,
+      "kind": "night",
+      "goal": "be fed, watered and under shelter before dark",
+      "since": 966,
+      "until": 2520,
+      "status": "active",
+      "step": "stay at my lean-to until it is light",
+      "stepKind": "stay",
+      "stepTarget": 10,
+      "stepItem": null,
+      "stepKey": "shelter:10",
+      "blocked": "",
+      "reason": "nowhere to shelter nearby for the night",
+      "setAside": 0,
+      "aboutId": 10,
+      "wants": {},
+      "makes": "",
+      "sheltered": 231,
+      "worked": 0,
+      "ended": 0
+    }
+  ],
+  "relations": {
+    "5": {
+      "affinity": 0,
+      "trust": 10,
+      "familiarity": 0.5,
+      "lastMet": 1370,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    },
+    "7": {
+      "affinity": 4.964970300194635,
+      "trust": 10.882143425151078,
+      "familiarity": 1.8,
+      "lastMet": 1183,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    }
+  },
+  "socialMemory": [
+    {
+      "requestId": 22,
+      "otherId": 7,
+      "siteId": 0,
+      "tick": 736,
+      "outcome": "declined",
+      "reason": "making",
+      "role": "asker"
+    }
+  ],
+  "tools": [
+    {
+      "ent": "tool",
+      "id": 37,
+      "kind": "pick",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1,
+      "holder": 2,
+      "loan": null,
+      "madeTick": 1292,
+      "maker": 2
+    }
+  ],
+  "milestones": [
+    {
+      "tick": 1207,
+      "stage": "store-stock-change",
+      "item": "stone",
+      "before": 5,
+      "after": 3
+    },
+    {
+      "tick": 1294,
+      "stage": "crafted",
+      "plans": [
+        {
+          "id": 17,
+          "kind": "tool",
+          "goal": "make a pick",
+          "since": 700,
+          "until": 5500,
+          "status": "done",
+          "reason": "made the pick",
+          "setAside": 0,
+          "aboutId": 0,
+          "wants": {},
+          "makes": "pick",
+          "sheltered": 0,
+          "worked": 1,
+          "ended": 1293,
+          "step": "",
+          "stepKind": "none",
+          "stepTarget": 0,
+          "stepItem": null,
+          "stepKey": null,
+          "blocked": ""
+        },
+        {
+          "id": 28,
+          "kind": "night",
+          "goal": "be fed, watered and under shelter before dark",
+          "since": 966,
+          "until": 2520,
+          "status": "active",
+          "step": "get to my lean-to",
+          "stepKind": "goto",
+          "stepTarget": 10,
+          "stepItem": null,
+          "stepKey": null,
+          "blocked": "",
+          "reason": "nowhere to shelter nearby for the night",
+          "setAside": 0,
+          "aboutId": 10,
+          "wants": {},
+          "makes": "",
+          "sheltered": 0,
+          "worked": 0,
+          "ended": 0
+        }
+      ]
+    }
+  ],
+  "hash": "50dba083",
+  "replayHash": "50dba083",
+  "fullReplayEqual": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

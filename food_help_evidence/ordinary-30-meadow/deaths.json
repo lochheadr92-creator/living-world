@@ -1,0 +1,18 @@
+[
+  {
+    "tick": 24448,
+    "id": 1004,
+    "name": "Felix",
+    "cause": "fever",
+    "age": 75,
+    "packFoodBefore": 0,
+    "invBefore": {
+      "wood": 1
+    },
+    "hungerBefore": 37.669999999997,
+    "activityBefore": "warm:Warming up by the fire",
+    "homeFood": null,
+    "membersWithSpare": 0,
+    "members": []
+  }
+]

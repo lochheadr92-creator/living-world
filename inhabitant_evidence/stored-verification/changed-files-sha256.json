@@ -1,0 +1,102 @@
+[
+  {
+    "path": "AGENTS.md",
+    "sha256": "62b15a7af7eb1482645b2a536522df2fb49f3f269cc2abe3d7cc4b837daea034"
+  },
+  {
+    "path": "docs/CIVILISATION_IMPLEMENTATION.md",
+    "sha256": "91d14c7b566c634d4b1a6dbb4f422087f77bd713a88082c9273123b515c1bd47"
+  },
+  {
+    "path": "docs/ECONOMY.md",
+    "sha256": "98b836a6b197faad6426315940032e07cbf7ea6d2af650760d852dbae44927f4"
+  },
+  {
+    "path": "docs/MEANINGFUL_CONNECTIONS.md",
+    "sha256": "97b0ce5a4b9f5e977418ab836d1385ede4d586b6da66884965b05c0d0af117c1"
+  },
+  {
+    "path": "docs/STAGE_VERIFICATION_RUNBOOK.md",
+    "sha256": "f3e7f4342303052e7e3361a31ea00cb972cf24791c0bb8fb6442a8174b62c272"
+  },
+  {
+    "path": "docs/STORED_MATERIAL_CONNECTIONS.md",
+    "sha256": "ac145895a4c99480ea2f9dc58ba5de17163f24d5219608d101c2dcd124470722"
+  },
+  {
+    "path": "scripts/browser/stored_materials_manual.html",
+    "sha256": "f54c15de330e9e891bd97d0402fe6f04a01966e1cbc263a3f40b024981bdedf2"
+  },
+  {
+    "path": "scripts/lab/lab.ts",
+    "sha256": "35871bca02b3837fe826dad0ef158e7c9e2dbff5b97f6f53dd53cc0ed450b6e5"
+  },
+  {
+    "path": "scripts/project_attempts_trace.ts",
+    "sha256": "0b740b46f7b449f364d945227688b4082e3111a26bd10bba1bd1bfb091db059a"
+  },
+  {
+    "path": "scripts/stored_materials_feedback.ts",
+    "sha256": "c02d38c2a0dcfb7c55466e2652c08ec784c6a6ec877a7c311dcd0d9694812a75"
+  },
+  {
+    "path": "scripts/stored_materials_inhabitant.ts",
+    "sha256": "5655f8e06c7f7a51fef581b1e032e8a191b7e9b4e5e5b8a5656e49eeb4f7c91a"
+  },
+  {
+    "path": "scripts/stored_materials_manual_replay.ts",
+    "sha256": "7403d7e343707ec92abb40a07e3d2fa0e8538fa2c0e630a53eeb64ea7c704034"
+  },
+  {
+    "path": "scripts/stored_materials_observe.ts",
+    "sha256": "a528bdafafd5d31f86ac635dd97344684df113be7501db177f049163c3721d97"
+  },
+  {
+    "path": "src/sim/act_resource.ts",
+    "sha256": "9ec9544e71b8b2c4d418e2387eccf65732d3995af3669cb44e2259ec94fa13ec"
+  },
+  {
+    "path": "src/sim/intent.ts",
+    "sha256": "fc35d858661c30b3420fc83044738e177c13861ce8e0cc2d986754bd56042e69"
+  },
+  {
+    "path": "src/sim/material_stock.ts",
+    "sha256": "42cdb1f26f5736446dd0299473dc5764f85a63bfdbeea51849d9493cca3fa25b"
+  },
+  {
+    "path": "src/sim/options_work.ts",
+    "sha256": "8848c53e7146826cc401e297e5a6ff65214e985000e15cadde0f6bcb48e0dab5"
+  },
+  {
+    "path": "src/sim/production.ts",
+    "sha256": "570a810b29da7ee10422b665bc54ff98cc57bc927f3e7e39d432aae829a36820"
+  },
+  {
+    "path": "src/sim/rulesversion.ts",
+    "sha256": "19bab6348e44a4051bd766b70525632857ff2273176e341e6b3497687ffc0f28"
+  },
+  {
+    "path": "src/sim/social.ts",
+    "sha256": "fbc6e5fac98a5d43e6d3772ffc1e0ef7fa914cfbe93777484c2b915e47edf871"
+  },
+  {
+    "path": "tests/helpers/stored_materials.ts",
+    "sha256": "d5996e2b76badadadf74180502737433b4d9be37508f84ead61c261e43cc934f"
+  },
+  {
+    "path": "tests/inhabit_choice_identity.test.ts",
+    "sha256": "bf18db0862f2f7421ed8302744ce17772e56c25ff8d0d4d2de1747ab3a1052a1"
+  },
+  {
+    "path": "tests/plan_reconsider.test.ts",
+    "sha256": "e900ad5e95df4c382bc5fbe9678e080066aaf39f14a4f942a3cd14254d4e32da"
+  },
+  {
+    "path": "tests/stored_materials.test.ts",
+    "sha256": "44784a0113dd967e79c16ab9ba836cbacaba8a47fc2042088ef129922891965b"
+  },
+  {
+    "path": "tests/work_tastes.test.ts",
+    "sha256": "5c503ff611cb69c160e7c301bc2ff39bad47a51acc1854e415ba7b80a2cc7f68"
+  }
+]

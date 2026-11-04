@@ -1,0 +1,182 @@
+{
+  "seed": "forest",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 46,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 52.833,
+  "alive": 9,
+  "deaths": 21,
+  "deathsByDay": {
+    "10": [
+      {
+        "name": "Bram",
+        "cause": "exposure"
+      }
+    ],
+    "12": [
+      {
+        "name": "Silas",
+        "cause": "injuries"
+      }
+    ],
+    "22": [
+      {
+        "name": "Cole",
+        "cause": "hunger"
+      },
+      {
+        "name": "Viktor",
+        "cause": "hunger"
+      },
+      {
+        "name": "Uri",
+        "cause": "fever"
+      },
+      {
+        "name": "Dov",
+        "cause": "fever"
+      },
+      {
+        "name": "Zeke",
+        "cause": "exposure"
+      },
+      {
+        "name": "Nico",
+        "cause": "hunger"
+      },
+      {
+        "name": "Greta",
+        "cause": "hunger"
+      },
+      {
+        "name": "Kaia",
+        "cause": "hunger"
+      },
+      {
+        "name": "Thea",
+        "cause": "hunger"
+      },
+      {
+        "name": "Hal",
+        "cause": "exposure"
+      },
+      {
+        "name": "Ada",
+        "cause": "exposure"
+      },
+      {
+        "name": "Tomas",
+        "cause": "exposure"
+      },
+      {
+        "name": "Hana",
+        "cause": "exposure"
+      },
+      {
+        "name": "Petra",
+        "cause": "hunger"
+      },
+      {
+        "name": "Edda",
+        "cause": "exposure"
+      },
+      {
+        "name": "Delia",
+        "cause": "exposure"
+      }
+    ],
+    "23": [
+      {
+        "name": "Arlo",
+        "cause": "hunger"
+      },
+      {
+        "name": "Lena",
+        "cause": "hunger"
+      },
+      {
+        "name": "Yusuf",
+        "cause": "hunger"
+      }
+    ]
+  },
+  "plans": {
+    "season": {
+      "adopted": 7,
+      "done": 0,
+      "dropped": 7,
+      "unitsWorked": 5,
+      "targets": [
+        8,
+        12,
+        16,
+        16,
+        16,
+        8,
+        8
+      ]
+    },
+    "hardship": {
+      "adopted": 99,
+      "done": 23,
+      "dropped": 72,
+      "unitsWorked": 281
+    }
+  },
+  "flows": {
+    "deposit:lean_to:deposit": 183,
+    "out:lean_to:eat from store": 81,
+    "ledger:xstored food spoiled": 201,
+    "ledger:-eaten": 1961,
+    "ledger:-eaten at the source": 442,
+    "ledger:-eaten at a shared meal": 5,
+    "deposit:hut:deposit": 268,
+    "out:hut:eat from store": 60,
+    "ledger:xleft-out food spoiled": 4
+  },
+  "totals": {
+    "samples": 6803,
+    "winterSamples": 1965,
+    "winterHungry": 698,
+    "winterHungryWithHomeFood": 3,
+    "winterHungryNoEatStore": 525,
+    "eatStoreOffers": 1297,
+    "eatStoreBlockedEmpty": 5554,
+    "depositOffers": 2205,
+    "depositBlockedFull": 21
+  },
+  "buildings": [
+    {
+      "type": "hut",
+      "hh": 938,
+      "cond": 55,
+      "food": 4
+    },
+    {
+      "type": "hut",
+      "hh": 941,
+      "cond": 41,
+      "food": 4
+    },
+    {
+      "type": "granary",
+      "hh": 0,
+      "cond": 49,
+      "food": 0
+    },
+    {
+      "type": "storehouse",
+      "hh": 0,
+      "cond": 53,
+      "food": 0
+    }
+  ],
+  "hash": "274b4daa",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

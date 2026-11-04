@@ -1,0 +1,34 @@
+{
+  "seed": "meadow",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 49,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 46.612,
+  "alive": 28,
+  "deaths": 1,
+  "publicStorehouses": 1,
+  "projects": [
+    "completed"
+  ],
+  "witnessesWithBuilding": 1,
+  "publicMealStarts": 10,
+  "publicWithdrawals": 5,
+  "unitsFromPublic": {
+    "grain": 9,
+    "fruit": 2,
+    "berries": 1
+  },
+  "mealsByWitness": 1,
+  "mealsTotal": 12,
+  "receipts": 1,
+  "receiptsByMeal": 0,
+  "receiptsByWithdrawal": 1,
+  "hash": "2ccd4fcc",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-pavel",
+  "head": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+  "branch": "refs/heads/feature/pavel-lived-life",
+  "workingFiles": [
+    {
+      "path": "pavel-final-full-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "ca284f50b81182694263c05826ae23ea61365d4e3e6f06d47399ad0009be375e",
+      "bytes": 433,
+      "archiveObject": "objects/ca/ca284f50b81182694263c05826ae23ea61365d4e3e6f06d47399ad0009be375e.gz"
+    },
+    {
+      "path": "pavel-final-observe.log",
+      "kind": "ignored-evidence",
+      "sha256": "97427a0210b5d633cd80b786265e300b172709e8bf74c61704a4bf50ef1dd6cf",
+      "bytes": 1640,
+      "archiveObject": "objects/97/97427a0210b5d633cd80b786265e300b172709e8bf74c61704a4bf50ef1dd6cf.gz"
+    },
+    {
+      "path": "pavel-full-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "9fcbfc8790dc90a94d73be54625c2c62243c129674033cd279b6f28a266abc48",
+      "bytes": 2285,
+      "archiveObject": "objects/9f/9fcbfc8790dc90a94d73be54625c2c62243c129674033cd279b6f28a266abc48.gz"
+    },
+    {
+      "path": "pavel-observe.log",
+      "kind": "ignored-evidence",
+      "sha256": "d381e2c5774b89838cc38a952ca9a291cf6156ec14f908d01d42cd7ff6d5f188",
+      "bytes": 1640,
+      "archiveObject": "objects/d3/d381e2c5774b89838cc38a952ca9a291cf6156ec14f908d01d42cd7ff6d5f188.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/forest-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "a8e5827f871db55df4cda636a8f39a3aed7b87022aa105ecf354ea45a46b07c2",
+      "bytes": 3255646,
+      "archiveObject": "objects/a8/a8e5827f871db55df4cda636a8f39a3aed7b87022aa105ecf354ea45a46b07c2.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/forest-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    },
+    {
+      "path": "pavel_evidence/final117/live-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "5c164e2e5555268ae8349d9b84c5bfb8fe6e66dc211fff9c874ce95a5f53df34",
+      "bytes": 2213032,
+      "archiveObject": "objects/5c/5c164e2e5555268ae8349d9b84c5bfb8fe6e66dc211fff9c874ce95a5f53df34.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/live-initial.json",
+      "kind": "ignored-evidence",
+      "sha256": "3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819",
+      "bytes": 1861614,
+      "archiveObject": "objects/38/3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/live-transcript.json",
+      "kind": "ignored-evidence",
+      "sha256": "bb78d9332cf685f81b7342dcb8b662ef5cec2daed2707052951af8ac4e659674",
+      "bytes": 952499,
+      "archiveObject": "objects/bb/bb78d9332cf685f81b7342dcb8b662ef5cec2daed2707052951af8ac4e659674.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/meadow-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "15b7fe6569a27be92717d22683d99f05ec3b7a8c16c8455e7e3f3f913d133b09",
+      "bytes": 2942338,
+      "archiveObject": "objects/15/15b7fe6569a27be92717d22683d99f05ec3b7a8c16c8455e7e3f3f913d133b09.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/meadow-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    },
+    {
+      "path": "pavel_evidence/final117/river-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "95e4cd36fc51a55da646a31a631f5cb77ae65dd0138c584d854839f1b6b60b87",
+      "bytes": 3624166,
+      "archiveObject": "objects/95/95e4cd36fc51a55da646a31a631f5cb77ae65dd0138c584d854839f1b6b60b87.gz"
+    },
+    {
+      "path": "pavel_evidence/final117/river-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    },
+    {
+      "path": "pavel_evidence/run117/forest-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "3560d2e087ad3251b00cc6ebc584d406d6018e9ddb44279ef9c93f7161306b15",
+      "bytes": 3255646,
+      "archiveObject": "objects/35/3560d2e087ad3251b00cc6ebc584d406d6018e9ddb44279ef9c93f7161306b15.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/forest-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    },
+    {
+      "path": "pavel_evidence/run117/live-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "5c164e2e5555268ae8349d9b84c5bfb8fe6e66dc211fff9c874ce95a5f53df34",
+      "bytes": 2213032,
+      "archiveObject": "objects/5c/5c164e2e5555268ae8349d9b84c5bfb8fe6e66dc211fff9c874ce95a5f53df34.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/live-initial.json",
+      "kind": "ignored-evidence",
+      "sha256": "3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819",
+      "bytes": 1861614,
+      "archiveObject": "objects/38/3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/live-transcript.json",
+      "kind": "ignored-evidence",
+      "sha256": "90c485b20f7ddbdb90ccbf02bd33f7644c92c1ab9718b87c8552b9a624d5953c",
+      "bytes": 952499,
+      "archiveObject": "objects/90/90c485b20f7ddbdb90ccbf02bd33f7644c92c1ab9718b87c8552b9a624d5953c.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/meadow-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "15b7fe6569a27be92717d22683d99f05ec3b7a8c16c8455e7e3f3f913d133b09",
+      "bytes": 2942338,
+      "archiveObject": "objects/15/15b7fe6569a27be92717d22683d99f05ec3b7a8c16c8455e7e3f3f913d133b09.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/meadow-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    },
+    {
+      "path": "pavel_evidence/run117/river-final.json",
+      "kind": "ignored-evidence",
+      "sha256": "90f2fe0290c2d2e727704766fbe9209e2c865bcc853817fca610627a2f73404c",
+      "bytes": 3624166,
+      "archiveObject": "objects/90/90f2fe0290c2d2e727704766fbe9209e2c865bcc853817fca610627a2f73404c.gz"
+    },
+    {
+      "path": "pavel_evidence/run117/river-observations.json",
+      "kind": "ignored-evidence",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2,
+      "repositoryPath": "civic_food_evidence/ordinary-30-forest/meals.json"
+    }
+  ],
+  "stagedFiles": []
+}

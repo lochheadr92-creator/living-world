@@ -1,0 +1,104 @@
+
+[forest]
+cp 600: {"tick":600,"alive":28,"conversations":3,"reservations":11,"carts":0,"openMeals":0,"indoors":0,"withClaims":11,"suspended":3,"activeCommitments":1,"pendingRequests":1,"intentions":19,"sites":4,"buildings":9,"piles":0,"tools":7}
+  anomalies: -0 at persons[11].mood.level; present-but-undefined keys: 143 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[1].lastDecision.chosen.blocked, persons[1].lastDecision.alternatives[0].blocked, persons[1].lastDecision.alternatives[1].blocked, persons[1].lastDecision.alternatives[2].blocked
+  packed persons: false; bytes 1586178
+  static-grid cells whose entity order differs after load: 2 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×95, buildings[].ops×9, requests[].planId×4, requests[].likely×4
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: leisure | ; order differs: false)
+  continued 300 ticks identical (hash 76f1ab48)
+cp 3000: {"tick":3000,"alive":28,"conversations":0,"reservations":11,"carts":0,"openMeals":0,"indoors":0,"withClaims":11,"suspended":0,"activeCommitments":4,"pendingRequests":4,"intentions":34,"sites":3,"buildings":13,"piles":0,"tools":10}
+  anomalies: present-but-undefined keys: 165 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2028716
+  static-grid cells whose entity order differs after load: 4 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×85, buildings[].ops×13, requests[].planId×18, requests[].likely×18
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: relocationHardship | heardDemand,hauling,socialMemory; order differs: false)
+  continued 300 ticks identical (hash 3d62251e)
+cp 6000: {"tick":6000,"alive":28,"conversations":2,"reservations":5,"carts":0,"openMeals":0,"indoors":0,"withClaims":5,"suspended":2,"activeCommitments":1,"pendingRequests":1,"intentions":67,"sites":4,"buildings":17,"piles":0,"tools":13}
+  anomalies: present-but-undefined keys: 208 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2414985
+  static-grid cells whose entity order differs after load: 4 (cells holding mixed kinds: 8)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×100, buildings[].ops×17, requests[].planId×30, requests[].likely×30
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: crowd | customers; order differs: false)
+  continued 300 ticks identical (hash e636aedc)
+
+[river]
+cp 600: {"tick":600,"alive":28,"conversations":0,"reservations":10,"carts":0,"openMeals":0,"indoors":0,"withClaims":10,"suspended":0,"activeCommitments":0,"pendingRequests":0,"intentions":20,"sites":4,"buildings":8,"piles":0,"tools":6}
+  anomalies: present-but-undefined keys: 148 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 1686128
+  static-grid cells whose entity order differs after load: 1 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×103, buildings[].ops×8, requests[].planId×3, requests[].likely×3
+  packPersons fallback cause: top-level undefined person keys: []; person 1107: keys differ from person 1106 (only in one:  | dailyRoutines; order differs: false)
+  continued 300 ticks identical (hash 261f9baa)
+cp 3000: {"tick":3000,"alive":28,"conversations":3,"reservations":8,"carts":0,"openMeals":0,"indoors":0,"withClaims":8,"suspended":3,"activeCommitments":0,"pendingRequests":0,"intentions":37,"sites":3,"buildings":13,"piles":0,"tools":8}
+  anomalies: present-but-undefined keys: 170 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2312881
+  static-grid cells whose entity order differs after load: 3 (cells holding mixed kinds: 8)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×94, buildings[].ops×13, requests[].planId×16, requests[].likely×16
+  packPersons fallback cause: top-level undefined person keys: []; person 1107: keys differ from person 1106 (only in one:  | ; order differs: true)
+  continued 300 ticks identical (hash 72d38f36)
+cp 6000: {"tick":6000,"alive":28,"conversations":1,"reservations":2,"carts":0,"openMeals":0,"indoors":2,"withClaims":2,"suspended":1,"activeCommitments":2,"pendingRequests":2,"intentions":73,"sites":4,"buildings":15,"piles":0,"tools":10}
+  anomalies: present-but-undefined keys: 197 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2706949
+  static-grid cells whose entity order differs after load: 3 (cells holding mixed kinds: 8)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×95, buildings[].ops×15, requests[].planId×28, requests[].likely×28
+  packPersons fallback cause: top-level undefined person keys: []; person 1107: keys differ from person 1106 (only in one:  | injury; order differs: false)
+  continued 300 ticks identical (hash d6033fe6)
+
+[meadow]
+cp 600: {"tick":600,"alive":28,"conversations":1,"reservations":7,"carts":0,"openMeals":0,"indoors":0,"withClaims":7,"suspended":1,"activeCommitments":1,"pendingRequests":1,"intentions":19,"sites":4,"buildings":8,"piles":0,"tools":6}
+  anomalies: present-but-undefined keys: 141 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 1582617
+  static-grid cells whose entity order differs after load: 0 (cells holding mixed kinds: 4)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×98, buildings[].ops×8, requests[].planId×2, requests[].likely×2
+  packPersons fallback cause: top-level undefined person keys: []; person 1000: keys differ from person 997 (only in one: heard | crowd; order differs: false)
+  continued 300 ticks identical (hash d126590a)
+cp 3000: {"tick":3000,"alive":28,"conversations":4,"reservations":6,"carts":0,"openMeals":0,"indoors":0,"withClaims":6,"suspended":4,"activeCommitments":2,"pendingRequests":2,"intentions":34,"sites":4,"buildings":12,"piles":0,"tools":9}
+  anomalies: present-but-undefined keys: 167 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2049442
+  static-grid cells whose entity order differs after load: 2 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×96, buildings[].ops×12, requests[].planId×14, requests[].likely×14
+  packPersons fallback cause: top-level undefined person keys: []; person 1000: keys differ from person 997 (only in one:  | crowd; order differs: false)
+  continued 300 ticks identical (hash 7c41c943)
+cp 6000: {"tick":6000,"alive":28,"conversations":0,"reservations":4,"carts":0,"openMeals":0,"indoors":0,"withClaims":4,"suspended":0,"activeCommitments":4,"pendingRequests":4,"intentions":54,"sites":4,"buildings":12,"piles":0,"tools":9}
+  anomalies: present-but-undefined keys: 194 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2402384
+  static-grid cells whose entity order differs after load: 2 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×109, buildings[].ops×12, requests[].planId×21, requests[].likely×21
+  packPersons fallback cause: top-level undefined person keys: []; person 1000: keys differ from person 997 (only in one:  | hauling; order differs: false)
+  continued 300 ticks identical (hash 2ef76cb4)
+
+[forest]
+cp 600: {"tick":600,"alive":28,"conversations":3,"reservations":11,"carts":0,"openMeals":0,"indoors":0,"withClaims":11,"suspended":3,"activeCommitments":1,"pendingRequests":1,"intentions":19,"sites":4,"buildings":9,"piles":0,"tools":7}
+  anomalies: -0 at persons[11].mood.level; present-but-undefined keys: 143 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[1].lastDecision.chosen.blocked, persons[1].lastDecision.alternatives[0].blocked, persons[1].lastDecision.alternatives[1].blocked, persons[1].lastDecision.alternatives[2].blocked
+  packed persons: false; bytes 1586178
+  static-grid cells whose entity order differs after load: 2 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×95, buildings[].ops×9, requests[].planId×4, requests[].likely×4
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: leisure | ; order differs: false)
+  continued 300 ticks identical (hash 76f1ab48)
+cp 3000: {"tick":3000,"alive":28,"conversations":0,"reservations":11,"carts":0,"openMeals":0,"indoors":0,"withClaims":11,"suspended":0,"activeCommitments":4,"pendingRequests":4,"intentions":34,"sites":3,"buildings":13,"piles":0,"tools":10}
+  anomalies: present-but-undefined keys: 165 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2028716
+  static-grid cells whose entity order differs after load: 4 (cells holding mixed kinds: 6)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×85, buildings[].ops×13, requests[].planId×18, requests[].likely×18
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: relocationHardship | heardDemand,hauling,socialMemory; order differs: false)
+  continued 300 ticks identical (hash 3d62251e)
+cp 6000: {"tick":6000,"alive":28,"conversations":2,"reservations":5,"carts":0,"openMeals":0,"indoors":0,"withClaims":5,"suspended":2,"activeCommitments":1,"pendingRequests":1,"intentions":67,"sites":4,"buildings":17,"piles":0,"tools":13}
+  anomalies: present-but-undefined keys: 208 e.g. settings.profile, settings.ruleSet, settings.settlementFounders, persons[0].lastDecision.chosen.blocked, persons[0].lastDecision.alternatives[0].blocked, persons[0].lastDecision.alternatives[1].blocked, persons[0].lastDecision.alternatives[2].blocked, persons[0].lastDecision.alternatives[3].blocked
+  packed persons: false; bytes 2414985
+  static-grid cells whose entity order differs after load: 4 (cells holding mixed kinds: 8)
+  runtime cells not in ascending-id order: 0
+  present-but-undefined key paths: settings.profile×1, settings.ruleSet×1, settings.settlementFounders×1, persons[].lastDecision.chosen.blocked×28, persons[].lastDecision.alternatives[].blocked×100, buildings[].ops×17, requests[].planId×30, requests[].likely×30
+  packPersons fallback cause: top-level undefined person keys: []; person 902: keys differ from person 899 (only in one: crowd | customers; order differs: false)
+  continued 300 ticks identical (hash e636aedc)

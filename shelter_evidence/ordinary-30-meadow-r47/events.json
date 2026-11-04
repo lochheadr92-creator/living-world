@@ -1,0 +1,140 @@
+[
+  {
+    "tick": 995,
+    "day": 0.41,
+    "kind": "home finished",
+    "text": "Edda finished a lean-to for the Fern household."
+  },
+  {
+    "tick": 2421,
+    "day": 1.01,
+    "kind": "home finished",
+    "text": "Jonas finished a lean-to for the Sedge household."
+  },
+  {
+    "tick": 2642,
+    "day": 1.1,
+    "kind": "home finished",
+    "text": "Quinn finished a lean-to for the Moss household."
+  },
+  {
+    "tick": 2788,
+    "day": 1.16,
+    "kind": "home finished",
+    "text": "Vik finished a lean-to for the Briar household."
+  },
+  {
+    "tick": 7693,
+    "day": 3.21,
+    "kind": "home finished",
+    "text": "Maren finished a hut for the Thistle household."
+  },
+  {
+    "tick": 8028,
+    "day": 3.35,
+    "kind": "home finished",
+    "text": "Ivo finished a hut for the Brook household."
+  },
+  {
+    "tick": 9732,
+    "day": 4.05,
+    "kind": "home finished",
+    "text": "Pia finished a hut for the Sorrel household."
+  },
+  {
+    "tick": 10774,
+    "day": 4.49,
+    "kind": "home finished",
+    "text": "Jax finished a hut for the Hazel household."
+  },
+  {
+    "tick": 13228,
+    "day": 5.51,
+    "kind": "home finished",
+    "text": "Yara finished a hut for the Moss household."
+  },
+  {
+    "tick": 17712,
+    "day": 7.38,
+    "kind": "home finished",
+    "text": "Bea finished a hut for the Juniper household."
+  },
+  {
+    "tick": 28952,
+    "day": 12.06,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 29101,
+    "day": 12.13,
+    "kind": "home finished",
+    "text": "Zeke finished a hut for the Fern household."
+  },
+  {
+    "tick": 33603,
+    "day": 14,
+    "kind": "repair",
+    "text": "Vik repaired a lean-to."
+  },
+  {
+    "tick": 37096,
+    "day": 15.46,
+    "kind": "repair",
+    "text": "Maren repaired a hut."
+  },
+  {
+    "tick": 46194,
+    "day": 19.25,
+    "kind": "repair",
+    "text": "Edda repaired a lean-to."
+  },
+  {
+    "tick": 46244,
+    "day": 19.27,
+    "kind": "home finished",
+    "text": "Zeke finished a hut for the Sedge household."
+  },
+  {
+    "tick": 46305,
+    "day": 19.29,
+    "kind": "home finished",
+    "text": "Vik finished a hut for the Briar household."
+  },
+  {
+    "tick": 46459,
+    "day": 19.36,
+    "kind": "home finished",
+    "text": "Felix finished a hut for the Heron household."
+  },
+  {
+    "tick": 50929,
+    "day": 21.22,
+    "kind": "home finished",
+    "text": "Pavel finished a hut for the Rowan household."
+  },
+  {
+    "tick": 51386,
+    "day": 21.41,
+    "kind": "repair",
+    "text": "Vik repaired a lean-to."
+  },
+  {
+    "tick": 51451,
+    "day": 21.44,
+    "kind": "repair",
+    "text": "Maren repaired a lean-to."
+  },
+  {
+    "tick": 51480,
+    "day": 21.45,
+    "kind": "repair",
+    "text": "Jonas repaired a lean-to."
+  },
+  {
+    "tick": 51579,
+    "day": 21.49,
+    "kind": "repair",
+    "text": "Jax repaired a lean-to."
+  }
+]

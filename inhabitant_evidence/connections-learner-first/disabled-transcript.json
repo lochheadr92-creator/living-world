@@ -1,0 +1,6508 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "learner-instruction",
+    "settings": {
+      "seed": "learner-instruction",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 41
+    },
+    "personId": 4,
+    "personName": "Ben",
+    "startTick": 0,
+    "startHash": "99eda424",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "restricted-learner",
+      "kind": "stub",
+      "config": {}
+    },
+    "budget": {
+      "maxCallsPerDay": 400,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 60000,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {},
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 0,
+      "attempt": 0,
+      "observationHash": "1012eb76",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 0,
+          "day": 1,
+          "clock": "07:11",
+          "phase": "dawn",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 11
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 98,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 98,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 98,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 95,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 94,
+              "state": "ok"
+            },
+            "social": {
+              "value": 70,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42,
+            "y": 40.5
+          },
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": null,
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 5,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 0,
+              "kin": "parent",
+              "lastMet": "never",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "50 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 41 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "50 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 5 tiles south (seen just now)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 76,
+      "attempt": 0,
+      "observationHash": "07bf02ba",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 76,
+          "day": 1,
+          "clock": "07:57",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 12
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 96,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 95,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 95,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 84,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 68,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 37.9,
+            "y": 44.9
+          },
+          "mood": 8,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 75
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "46 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 5,
+              "direction": "east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "26 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "40 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "Ada (in sight, 5 tiles east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 32 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "Ada (in sight, 5 tiles east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 7 tiles south-east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 2,
+      "tick": 142,
+      "attempt": 0,
+      "observationHash": "11fc2af8",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 142,
+          "day": 1,
+          "clock": "08:37",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 13
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 94,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 92,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 92,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 81,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 67,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.6,
+            "y": 46.5
+          },
+          "mood": 7,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 141
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "40 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 6,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 5,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 9,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "1 world h 19 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "Ada (in sight, 6 tiles north-east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 36 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "Ada (in sight, 6 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 5 tiles east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 1
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 3,
+      "tick": 196,
+      "attempt": 0,
+      "observationHash": "1b9b601e",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 196,
+          "day": 1,
+          "clock": "09:09",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 14
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 92,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 90,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 90,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 80,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 65,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 37.8,
+            "y": 45
+          },
+          "mood": 6,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 195
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "32 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 5,
+              "direction": "east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "25 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "1 world h 52 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "Ada (in sight, 5 tiles east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 30 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 11 min",
+            "target": "Ada (in sight, 5 tiles east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 7 tiles south-east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 4,
+      "tick": 274,
+      "attempt": 0,
+      "observationHash": "155c4850",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 274,
+          "day": 1,
+          "clock": "09:56",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 15
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 90,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 87,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 87,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 82,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 64,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.1,
+            "y": 43.1
+          },
+          "mood": 6,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 273
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "47 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 3,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 4,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "2 world h 38 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "57 world min",
+            "target": "Ada (in sight, 3 tiles north-east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 25 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "57 world min",
+            "target": "Ada (in sight, 3 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 4 tiles south-east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 5,
+      "tick": 320,
+      "attempt": 0,
+      "observationHash": "eb7928bf",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 320,
+          "day": 1,
+          "clock": "10:24",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 16
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 88,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 85,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 85,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 83,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 63,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42.2,
+            "y": 44.7
+          },
+          "mood": 6,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 319
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "28 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 5,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 3,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "3 world h 6 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 7 min",
+            "target": "Ada (in sight, 5 tiles north-east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 53 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 7 min",
+            "target": "Ada (in sight, 5 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 3 tiles south-east (seen just now)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 6,
+      "tick": 408,
+      "attempt": 0,
+      "observationHash": "6de3aa7f",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 408,
+          "day": 1,
+          "clock": "11:16",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 17
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 86,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 82,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 82,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 88,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 61,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42.4,
+            "y": 40.4
+          },
+          "mood": 6,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 407
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "53 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 4,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "3 world h 59 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "52 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 27 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "52 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 4 tiles south (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 1
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 7,
+      "tick": 484,
+      "attempt": 0,
+      "observationHash": "dd1b69a2",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 484,
+          "day": 1,
+          "clock": "12:02",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 83,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 79,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 79,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 92,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 59,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42,
+            "y": 45.9
+          },
+          "mood": 5,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 483
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "46 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 6,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 4,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "41 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 13 min",
+            "target": "Ada (in sight, 6 tiles north-east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 31 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 13 min",
+            "target": "Ada (in sight, 6 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 4 tiles east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 8,
+      "tick": 564,
+      "attempt": 0,
+      "observationHash": "5fa62e00",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 564,
+          "day": 1,
+          "clock": "12:50",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 81,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 75,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 75,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 95,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 57,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.6,
+            "y": 49
+          },
+          "mood": 4,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 563
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "48 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 5,
+              "direction": "north-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "1 world h 29 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "33 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 15 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 5 tiles north-east (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 9,
+      "tick": 616,
+      "attempt": 0,
+      "observationHash": "63e03fe9",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 616,
+          "day": 1,
+          "clock": "13:21",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 79,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 73,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 73,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 96,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 56,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.7,
+            "y": 45.1
+          },
+          "mood": 3,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 615
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "31 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 5,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 3,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "2 world h ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 9 min",
+            "target": "Ada (in sight, 5 tiles north-east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 9 min",
+            "target": "Ada (in sight, 5 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 3 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 37)",
+            "target": null
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 10,
+      "tick": 668,
+      "attempt": 0,
+      "observationHash": "8fc892ed",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 668,
+          "day": 1,
+          "clock": "13:52",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 78,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 71,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 71,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 97,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 54,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 44.7,
+            "y": 47.1
+          },
+          "mood": 2,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 667
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "31 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 8,
+              "direction": "north",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 3,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 5,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "2 world h 31 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 16 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 26 min",
+            "target": "Ada (in sight, 8 tiles north)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 26 min",
+            "target": "Ada (in sight, 8 tiles north)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 3 tiles north-east (seen just now)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 11,
+      "tick": 706,
+      "attempt": 0,
+      "observationHash": "cfeeb3e5",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 706,
+          "day": 1,
+          "clock": "14:15",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 77,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 70,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 70,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 98,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 53,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42.9,
+            "y": 47.7
+          },
+          "mood": 2,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 705
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "23 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 8,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 4,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "2 world h 54 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 24 min",
+            "target": "Ada (in sight, 8 tiles north-east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 24 min",
+            "target": "Ada (in sight, 8 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 4 tiles east (seen 1 world min ago)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 37)",
+            "target": null
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 12,
+      "tick": 754,
+      "attempt": 0,
+      "observationHash": "49efb73e",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 754,
+          "day": 1,
+          "clock": "14:44",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 75,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 68,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 68,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 98,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 52,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.8,
+            "y": 49.3
+          },
+          "mood": 1,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 753
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "29 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 9,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 7,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 10,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "3 world h 23 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 31 min",
+            "target": "Ada (in sight, 9 tiles north-east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 31 min",
+            "target": "Ada (in sight, 9 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 7 tiles east (seen 1 world min ago)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 34)",
+            "target": null
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 13,
+      "tick": 848,
+      "attempt": 0,
+      "observationHash": "da840a23",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 848,
+          "day": 1,
+          "clock": "15:40",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 73,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 64,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 64,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 99,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 50,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.6,
+            "y": 44.3
+          },
+          "mood": 0,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 847
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "56 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 4,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 4,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "4 world h 19 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "1 world h 3 min",
+            "target": "Ada (in sight, 4 tiles north-east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "1 world h 3 min",
+            "target": "Ada (in sight, 4 tiles north-east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 4 tiles south-east (seen just now)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 28)",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "just now"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 14,
+      "tick": 916,
+      "attempt": 0,
+      "observationHash": "619273ea",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 916,
+          "day": 1,
+          "clock": "16:21",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 17
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 70,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 61,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 61,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 99,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 49,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 39.2,
+            "y": 42.2
+          },
+          "mood": -1,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 915
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "41 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 6,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "14 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "41 world min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "54 world min",
+            "target": "Ada (in sight, 2 tiles east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "54 world min",
+            "target": "Ada (in sight, 2 tiles east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 6 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 29)",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "41 world min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 1
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 15,
+      "tick": 954,
+      "attempt": 0,
+      "observationHash": "bb08c3c5",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 954,
+          "day": 1,
+          "clock": "16:44",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 17
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 69,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 60,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 60,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 98,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 48,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40,
+            "y": 41
+          },
+          "mood": -2,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 953
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "23 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 1,
+              "direction": "east",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 6,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "37 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world h 4 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "46 world min",
+            "target": "Ada (in sight, 1 tiles east)"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "46 world min",
+            "target": "Ada (in sight, 1 tiles east)"
+          },
+          {
+            "key": "socialize:2:chat",
+            "kind": "socialize",
+            "label": "Chat with Ada",
+            "goal": "to catch up and share news",
+            "need": "social",
+            "eta": "46 world min",
+            "target": "Ada (in sight, 1 tiles east)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 6 tiles south (seen 1 world min ago)"
+          },
+          {
+            "label": "Explore somewhere new",
+            "reason": "would leave them too far from water for too long (no water known; thirst would fall to 24)",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "1 world h 4 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 16,
+      "tick": 1058,
+      "attempt": 0,
+      "observationHash": "22a26420",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1058,
+          "day": 1,
+          "clock": "17:46",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 16
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 66,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 56,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 56,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 95,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 45,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.1,
+            "y": 51.3
+          },
+          "mood": -4,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1057
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "1 world h 2 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 8,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 9,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "1 world h 40 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "23 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "2 world h 6 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Search for water",
+            "goal": "to find water",
+            "need": "thirst",
+            "eta": "1 world h 50 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 8 tiles north-east (seen just now)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "2 world h 6 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 17,
+      "tick": 1102,
+      "attempt": 0,
+      "observationHash": "14c4d934",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1102,
+          "day": 1,
+          "clock": "18:13",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 15
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 65,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 54,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 54,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 93,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 44,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.4,
+            "y": 50.3
+          },
+          "mood": -4,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1101
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "26 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 8,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 11,
+              "direction": "east",
+              "seen": "26 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "2 world h 6 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "50 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "2 world h 32 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:here",
+            "kind": "sleep",
+            "label": "Sleep right here",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "3 world min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 8 tiles east (seen 1 world min ago)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "2 world h 32 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 1
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 18,
+      "tick": 1154,
+      "attempt": 0,
+      "observationHash": "527b58df",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1154,
+          "day": 1,
+          "clock": "18:44",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 14
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 63,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 52,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 52,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 90,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 43,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.3,
+            "y": 51.4
+          },
+          "mood": -5,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1153
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "31 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 8,
+              "direction": "north-east",
+              "seen": "5 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 9,
+              "direction": "east",
+              "seen": "58 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "2 world h 37 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "1 world h 21 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "3 world h 4 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:here",
+            "kind": "sleep",
+            "label": "Sleep right here",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "3 world min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "too thirsty to start a building",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "3 world h 4 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 19,
+      "tick": 1224,
+      "attempt": 0,
+      "observationHash": "59a0a019",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1224,
+          "day": 1,
+          "clock": "19:26",
+          "phase": "dusk",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 13
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 61,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 49,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 49,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 86,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 41,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 46.6,
+            "y": 50.3
+          },
+          "mood": -7,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1223
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "42 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 7,
+              "direction": "north-east",
+              "seen": "15 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 7,
+              "direction": "north-east",
+              "seen": "20 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "3 world h 19 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "2 world h 3 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "3 world h 46 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:here",
+            "kind": "sleep",
+            "label": "Sleep right here",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "3 world min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "too thirsty to start a building",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "3 world h 46 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 20,
+      "tick": 1332,
+      "attempt": 0,
+      "observationHash": "c4b1efab",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1332,
+          "day": 1,
+          "clock": "20:31",
+          "phase": "night",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 11
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 58,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 45,
+              "state": "low"
+            },
+            "energy": {
+              "value": 45,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 77,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 39,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.9,
+            "y": 48.3
+          },
+          "mood": -9,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1331
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "1 world h 5 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 6,
+              "direction": "east",
+              "seen": "31 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 98
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 9,
+              "direction": "east",
+              "seen": "1 world h 25 min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "4 world h 24 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "3 world h 8 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "4 world h 50 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:here",
+            "kind": "sleep",
+            "label": "Sleep right here",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "3 world min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "too thirsty to start a building",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "4 world h 50 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 21,
+      "tick": 1374,
+      "attempt": 0,
+      "observationHash": "1df4aaa7",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1374,
+          "day": 1,
+          "clock": "20:56",
+          "phase": "night",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 10
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 57,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 43,
+              "state": "low"
+            },
+            "energy": {
+              "value": 43,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 74,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 38,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 39.7,
+            "y": 45.7
+          },
+          "mood": -10,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1373
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about the camp",
+            "when": "25 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 6,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 98
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "1 world h 50 min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 99
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 81,
+              "trust": 60,
+              "familiarity": 2,
+              "kin": "parent",
+              "lastMet": "4 world h 49 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "when": "3 world h 33 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "5 world h 16 min ago",
+              "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+              "kind": "need",
+              "t": 848
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:here",
+            "kind": "sleep",
+            "label": "Sleep right here",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "3 world min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Lay out a lean-to",
+            "reason": "too thirsty to start a building",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "active",
+            "step": "find somewhere to shelter",
+            "wants": {},
+            "blocked": "no shelter remembered nearby",
+            "reason": "nowhere to shelter nearby for the night",
+            "since": "5 world h 16 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Ask for the technique my offered work lacks, then use it at the kiln when offered.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Ask for the technique my offered work lacks, then use it at the kiln when offered."
+      },
+      "problem": null,
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 0,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "1012eb76",
+      "worldHash": "39c1ed7b",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 7,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 76,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "07bf02ba",
+      "worldHash": "2ecac508",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 8,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 142,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "11fc2af8",
+      "worldHash": "6004f12f",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 9,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 3,
+      "tick": 196,
+      "attempt": 0,
+      "ask": 3,
+      "observationHash": "1b9b601e",
+      "worldHash": "37ad4009",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 10,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 4,
+      "tick": 274,
+      "attempt": 0,
+      "ask": 4,
+      "observationHash": "155c4850",
+      "worldHash": "f525087e",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 11,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 5,
+      "tick": 320,
+      "attempt": 0,
+      "ask": 5,
+      "observationHash": "eb7928bf",
+      "worldHash": "bc7e60d3",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 12,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 6,
+      "tick": 408,
+      "attempt": 0,
+      "ask": 6,
+      "observationHash": "6de3aa7f",
+      "worldHash": "d0df66cc",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 13,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 7,
+      "tick": 484,
+      "attempt": 0,
+      "ask": 7,
+      "observationHash": "dd1b69a2",
+      "worldHash": "b4d204a7",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 14,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 8,
+      "tick": 564,
+      "attempt": 0,
+      "ask": 8,
+      "observationHash": "5fa62e00",
+      "worldHash": "f5a42585",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 15,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 9,
+      "tick": 616,
+      "attempt": 0,
+      "ask": 9,
+      "observationHash": "63e03fe9",
+      "worldHash": "51d55a14",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 16,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 10,
+      "tick": 668,
+      "attempt": 0,
+      "ask": 10,
+      "observationHash": "8fc892ed",
+      "worldHash": "1ff62033",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 17,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 11,
+      "tick": 706,
+      "attempt": 0,
+      "ask": 11,
+      "observationHash": "cfeeb3e5",
+      "worldHash": "88bfe45c",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 18,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 12,
+      "tick": 754,
+      "attempt": 0,
+      "ask": 12,
+      "observationHash": "49efb73e",
+      "worldHash": "1798a06a",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 19,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 13,
+      "tick": 848,
+      "attempt": 0,
+      "ask": 13,
+      "observationHash": "da840a23",
+      "worldHash": "8f2c77cc",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 21,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 14,
+      "tick": 916,
+      "attempt": 0,
+      "ask": 14,
+      "observationHash": "619273ea",
+      "worldHash": "6dadbc8c",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 22,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 15,
+      "tick": 954,
+      "attempt": 0,
+      "ask": 15,
+      "observationHash": "bb08c3c5",
+      "worldHash": "8104abfa",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 23,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 16,
+      "tick": 1058,
+      "attempt": 0,
+      "ask": 16,
+      "observationHash": "22a26420",
+      "worldHash": "aea40e75",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 24,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 17,
+      "tick": 1102,
+      "attempt": 0,
+      "ask": 17,
+      "observationHash": "14c4d934",
+      "worldHash": "0f0170f3",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 25,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 18,
+      "tick": 1154,
+      "attempt": 0,
+      "ask": 18,
+      "observationHash": "527b58df",
+      "worldHash": "9b4a49e8",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 26,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 19,
+      "tick": 1224,
+      "attempt": 0,
+      "ask": 19,
+      "observationHash": "59a0a019",
+      "worldHash": "2b355013",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 27,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 20,
+      "tick": 1332,
+      "attempt": 0,
+      "ask": 20,
+      "observationHash": "c4b1efab",
+      "worldHash": "e416e66c",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 28,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 21,
+      "tick": 1374,
+      "attempt": 0,
+      "ask": 21,
+      "observationHash": "1df4aaa7",
+      "worldHash": "0c978b70",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 29,
+        "label": "Pottering about"
+      }
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 7,
+      "label": "Pottering about",
+      "tick": 76,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 8,
+      "label": "Pottering about",
+      "tick": 142,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 9,
+      "label": "Pottering about",
+      "tick": 196,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 3,
+      "activityId": 10,
+      "label": "Pottering about",
+      "tick": 274,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 4,
+      "activityId": 11,
+      "label": "Pottering about",
+      "tick": 320,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 5,
+      "activityId": 12,
+      "label": "Pottering about",
+      "tick": 408,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 6,
+      "activityId": 13,
+      "label": "Pottering about",
+      "tick": 484,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 7,
+      "activityId": 14,
+      "label": "Pottering about",
+      "tick": 564,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 8,
+      "activityId": 15,
+      "label": "Pottering about",
+      "tick": 616,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 9,
+      "activityId": 16,
+      "label": "Pottering about",
+      "tick": 668,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 10,
+      "activityId": 17,
+      "label": "Pottering about",
+      "tick": 706,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 11,
+      "activityId": 18,
+      "label": "Pottering about",
+      "tick": 754,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 12,
+      "activityId": 19,
+      "label": "Pottering about",
+      "tick": 848,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 13,
+      "activityId": 21,
+      "label": "Pottering about",
+      "tick": 916,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 14,
+      "activityId": 22,
+      "label": "Pottering about",
+      "tick": 954,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 15,
+      "activityId": 23,
+      "label": "Pottering about",
+      "tick": 1058,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 16,
+      "activityId": 24,
+      "label": "Pottering about",
+      "tick": 1102,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 17,
+      "activityId": 25,
+      "label": "Pottering about",
+      "tick": 1154,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 18,
+      "activityId": 26,
+      "label": "Pottering about",
+      "tick": 1224,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 19,
+      "activityId": 27,
+      "label": "Pottering about",
+      "tick": 1332,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 20,
+      "activityId": 28,
+      "label": "Pottering about",
+      "tick": 1374,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 21,
+      "activityId": 29,
+      "label": "Pottering about",
+      "tick": 1400,
+      "outcome": "unfinished",
+      "detail": "the window ended while this was still under way"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 1,
+      "events": []
+    },
+    {
+      "call": 1,
+      "tick": 77,
+      "events": []
+    },
+    {
+      "call": 2,
+      "tick": 143,
+      "events": []
+    },
+    {
+      "call": 3,
+      "tick": 197,
+      "events": []
+    },
+    {
+      "call": 4,
+      "tick": 275,
+      "events": []
+    },
+    {
+      "call": 5,
+      "tick": 321,
+      "events": []
+    },
+    {
+      "call": 6,
+      "tick": 409,
+      "events": []
+    },
+    {
+      "call": 7,
+      "tick": 485,
+      "events": []
+    },
+    {
+      "call": 8,
+      "tick": 565,
+      "events": []
+    },
+    {
+      "call": 9,
+      "tick": 617,
+      "events": []
+    },
+    {
+      "call": 10,
+      "tick": 669,
+      "events": []
+    },
+    {
+      "call": 11,
+      "tick": 707,
+      "events": []
+    },
+    {
+      "call": 12,
+      "tick": 755,
+      "events": []
+    },
+    {
+      "call": 13,
+      "tick": 849,
+      "events": []
+    },
+    {
+      "call": 14,
+      "tick": 917,
+      "events": []
+    },
+    {
+      "call": 15,
+      "tick": 955,
+      "events": []
+    },
+    {
+      "call": 16,
+      "tick": 1059,
+      "events": []
+    },
+    {
+      "call": 17,
+      "tick": 1103,
+      "events": []
+    },
+    {
+      "call": 18,
+      "tick": 1155,
+      "events": []
+    },
+    {
+      "call": 19,
+      "tick": 1225,
+      "events": []
+    },
+    {
+      "call": 20,
+      "tick": 1333,
+      "events": []
+    },
+    {
+      "call": 21,
+      "tick": 1375,
+      "events": []
+    }
+  ],
+  "end": {
+    "tick": 1400,
+    "hash": "8efe9518",
+    "died": false,
+    "calls": 22,
+    "applied": 22,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 22,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 102004,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

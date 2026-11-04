@@ -1,0 +1,10 @@
+﻿{
+    "Run":  "production-forest",
+    "Complete":  false,
+    "ExitCode":  1,
+    "StopReason":  "budget",
+    "DaysReached":  0.1,
+    "Alive":  28,
+    "Conserved":  true,
+    "Failure":  "PROCESS_EXIT_1"
+}

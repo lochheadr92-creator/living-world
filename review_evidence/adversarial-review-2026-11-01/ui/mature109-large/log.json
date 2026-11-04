@@ -1,0 +1,145 @@
+[
+  {
+    "k": "loaded",
+    "v": {
+      "fetchMs": 123.40000000596046,
+      "loadMs": 392.59999999403954,
+      "tick": 108000,
+      "alive": 110,
+      "rules": 109,
+      "buildings": {
+        "fire": 4,
+        "lean_to": 32,
+        "hut": 30,
+        "house": 1,
+        "storehouse": 3,
+        "timber_yard": 4,
+        "quarry": 5,
+        "hall": 4,
+        "granary": 3,
+        "kiln": 4,
+        "bakery": 2,
+        "smithy": 3
+      },
+      "carts": 0
+    }
+  },
+  {
+    "k": "picks",
+    "v": [
+      4333,
+      4355,
+      4301
+    ]
+  },
+  {
+    "k": "inspect:M-mostRelations:Isla",
+    "v": {
+      "name": "Isla",
+      "id": 4333,
+      "textLen": 17513,
+      "selectUpdateMs": 23.599999994039536,
+      "fullUpdateMs": 0.7000000029802322,
+      "pure": true,
+      "hashSame": true,
+      "relations": 83,
+      "intentions": [
+        {
+          "kind": "shelter",
+          "goal": "get the household's hut built",
+          "step": "get 1 stone for the hut (it wants 1 stone) (Bram promised 1 wood, expected by tick 108794)",
+          "blocked": "warmth comes first",
+          "since": 105814,
+          "until": 113014
+        }
+      ],
+      "commitments": 0,
+      "age": 38
+    }
+  },
+  {
+    "k": "inspect:M-planner:Lia",
+    "v": {
+      "name": "Lia",
+      "id": 4355,
+      "textLen": 16489,
+      "selectUpdateMs": 9.5,
+      "fullUpdateMs": 0.7000000029802322,
+      "pure": true,
+      "hashSame": true,
+      "relations": 54,
+      "intentions": [
+        {
+          "kind": "batch",
+          "goal": "see 13 bricks through at the kiln for the site",
+          "step": "collect bricks for bricks",
+          "blocked": "",
+          "since": 105750,
+          "until": 112950
+        }
+      ],
+      "commitments": 0,
+      "age": 46
+    }
+  },
+  {
+    "k": "inspect:M-promiser:Hal",
+    "v": {
+      "name": "Hal",
+      "id": 4301,
+      "textLen": 20648,
+      "selectUpdateMs": 9.100000008940697,
+      "fullUpdateMs": 0.9000000059604645,
+      "pure": true,
+      "hashSame": true,
+      "relations": 69,
+      "intentions": [
+        {
+          "kind": "shelter",
+          "goal": "get the household's hut built",
+          "step": "get 3 wood for the hut (it wants 3 wood)",
+          "blocked": "warmth comes first",
+          "since": 107438,
+          "until": 114638
+        }
+      ],
+      "commitments": 1,
+      "age": 37
+    }
+  },
+  {
+    "k": "playback1x",
+    "v": {
+      "ticksRan": 41,
+      "wallMs": 4014.2999999970198,
+      "stats": {
+        "playing": false,
+        "requested": 1,
+        "achieved": 0,
+        "dropped": 0,
+        "recentDropped": 0,
+        "behind": false,
+        "lastFrameTicks": 1
+      }
+    }
+  },
+  {
+    "k": "playback8x",
+    "v": {
+      "ticksRan": 320,
+      "stats": {
+        "playing": false,
+        "requested": 8,
+        "achieved": 0,
+        "dropped": 0,
+        "recentDropped": 0,
+        "behind": false,
+        "lastFrameTicks": 1
+      }
+    }
+  },
+  {
+    "k": "browserErrors",
+    "v": []
+  }
+]

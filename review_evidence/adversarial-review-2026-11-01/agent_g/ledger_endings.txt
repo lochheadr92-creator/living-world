@@ -1,0 +1,10 @@
+natural river 1500 ticks: ledger entries with an activity 224; closed 196; still running/suspended 28; ORPHANS: silently dropped (started, never ended by endActivity) 0; ended but not closed 0; recorded but never started 0; suspended activities seen to vanish without an ending 0
+feed: 41 events kept; oldest is 1483 ticks old at tick 1500; chronicle 13
+unit drop: Mira act#1297 "Breaking new ground" dropped at resume; ledger row: Tick 126 (one hundred ticks ago), free: chose “Break ground for a new plot”; ending not recorded. Passed over then: Bring food home, Tell Emre about my tool work, Build the lean-to. Set aside then: Get wood for a friend’s lean-to (no room in my pack for one wood); Get stone to make a hoe (no room in my pack for one stone); Lay out a hut (too early in the settlement for a hut).
+unit drop: qa.doing="Between tasks (last chose “Break ground for a new plot”)." qa.lastAttempt="Picking berries → success: done (8s ago)"
+converse listener why-misattribution: 5 cases in <=2400 ticks
+  tick 239 Mira: doing="Talking with Theo." why="Weighed up: seed to sow, ground to prepare +28" (last decision chose "Break ground for a new plot" at tick 126)
+  tick 240 Mira: doing="Talking with Theo." why="Weighed up: seed to sow, ground to prepare +28" (last decision chose "Break ground for a new plot" at tick 126)
+  tick 241 Mira: doing="Talking with Theo." why="Weighed up: seed to sow, ground to prepare +28" (last decision chose "Break ground for a new plot" at tick 126)
+  tick 242 Mira: doing="Talking with Theo." why="Weighed up: seed to sow, ground to prepare +28" (last decision chose "Break ground for a new plot" at tick 126)
+  tick 243 Mira: doing="Talking with Theo." why="Weighed up: seed to sow, ground to prepare +28" (last decision chose "Break ground for a new plot" at tick 126)

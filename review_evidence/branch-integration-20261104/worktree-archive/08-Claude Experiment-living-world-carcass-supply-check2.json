@@ -1,0 +1,106 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-carcass-supply-check2",
+  "head": "0c01373b61c3d55c3a523e6b08696f70da26e817",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/browser/carcass_supply_check.mjs",
+      "kind": "untracked",
+      "sha256": "5429e60f8ece24af6c20bcb9ed2787b766bcbbf118e931ec4a8371c475479501",
+      "bytes": 1910,
+      "archiveObject": "objects/54/5429e60f8ece24af6c20bcb9ed2787b766bcbbf118e931ec4a8371c475479501.gz"
+    },
+    {
+      "path": "scripts/browser/carcass_supply_manual.html",
+      "kind": "untracked",
+      "sha256": "1c052fc1762ef9160d43eb8c54ebbdbd1a9c9946fb04b1302e0d1105f96f16c2",
+      "bytes": 3989,
+      "archiveObject": "objects/1c/1c052fc1762ef9160d43eb8c54ebbdbd1a9c9946fb04b1302e0d1105f96f16c2.gz"
+    },
+    {
+      "path": "scripts/carcass_route_trace.ts",
+      "kind": "untracked",
+      "sha256": "95554f82fa925e6adf91f6eef84cce66a7b5d9b78e53d2486924b5e98750275d",
+      "bytes": 2546,
+      "archiveObject": "objects/95/95554f82fa925e6adf91f6eef84cce66a7b5d9b78e53d2486924b5e98750275d.gz"
+    },
+    {
+      "path": "scripts/observers/clothing.ts",
+      "kind": "tracked-change",
+      "sha256": "86b69769c16be7d8ee4151b065dffc7dda4b4f3682ee0dce8f3fc83371cd0b21",
+      "bytes": 2556,
+      "archiveObject": "objects/86/86b69769c16be7d8ee4151b065dffc7dda4b4f3682ee0dce8f3fc83371cd0b21.gz"
+    },
+    {
+      "path": "scripts/survival_compare.mjs",
+      "kind": "untracked",
+      "sha256": "ec69857104a9e9ab88c45b7b3cfdb02bfd54db43213cb40156baee6ef84fec7e",
+      "bytes": 5384,
+      "archiveObject": "objects/ec/ec69857104a9e9ab88c45b7b3cfdb02bfd54db43213cb40156baee6ef84fec7e.gz"
+    },
+    {
+      "path": "scripts/survival_ensemble.ts",
+      "kind": "tracked-change",
+      "sha256": "d9dc698102377482b6a42097f56c9df9694ec10d3b2c5c4ca1a029555e82f55a",
+      "bytes": 4385,
+      "archiveObject": "objects/d9/d9dc698102377482b6a42097f56c9df9694ec10d3b2c5c4ca1a029555e82f55a.gz"
+    },
+    {
+      "path": "scripts/trap_activation_scan.ts",
+      "kind": "untracked",
+      "sha256": "56e34b39e705a7cfa445a4be4ff1ea77ba2032ac6df6be8e9db2f53f96a2b2ed",
+      "bytes": 3042,
+      "archiveObject": "objects/56/56e34b39e705a7cfa445a4be4ff1ea77ba2032ac6df6be8e9db2f53f96a2b2ed.gz"
+    },
+    {
+      "path": "scripts/trap_encounter_trace.ts",
+      "kind": "untracked",
+      "sha256": "187c187d3bd5f563d73cafebe10f8f0c885ea9c5670ac34aab3ee33d5a7c7e42",
+      "bytes": 2214,
+      "archiveObject": "objects/18/187c187d3bd5f563d73cafebe10f8f0c885ea9c5670ac34aab3ee33d5a7c7e42.gz"
+    },
+    {
+      "path": "scripts/v130_reference.ts",
+      "kind": "untracked",
+      "sha256": "782cc53db07423757bfe5fbc02f19814d88f09057144f0e1769738003f207a2e",
+      "bytes": 1416,
+      "archiveObject": "objects/78/782cc53db07423757bfe5fbc02f19814d88f09057144f0e1769738003f207a2e.gz"
+    },
+    {
+      "path": "src/sim/carcass.ts",
+      "kind": "tracked-change",
+      "sha256": "b16cc854dd79d0b231b642411d67bf67603e0e902773abcf062228226cc5b9f6",
+      "bytes": 8736,
+      "archiveObject": "objects/b1/b16cc854dd79d0b231b642411d67bf67603e0e902773abcf062228226cc5b9f6.gz"
+    },
+    {
+      "path": "src/sim/carcass_supply.ts",
+      "kind": "untracked",
+      "sha256": "2dba46a4983523e289a9782b9d1388920c2f068b1e882b9f8d1f59dff8faf59b",
+      "bytes": 2368,
+      "archiveObject": "objects/2d/2dba46a4983523e289a9782b9d1388920c2f068b1e882b9f8d1f59dff8faf59b.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "kind": "tracked-change",
+      "sha256": "be4fd228f4ab8eea0f8c6f1268fa3808a0825b281a41b43e0d22e5808af630f0",
+      "bytes": 70183,
+      "archiveObject": "objects/be/be4fd228f4ab8eea0f8c6f1268fa3808a0825b281a41b43e0d22e5808af630f0.gz"
+    },
+    {
+      "path": "src/sim/project_compile.ts",
+      "kind": "tracked-change",
+      "sha256": "aa5146b58679774e6d5da4dd0ebfdf74c278fe687eb97fa60eeb2385ed9dbb30",
+      "bytes": 6135,
+      "archiveObject": "objects/aa/aa5146b58679774e6d5da4dd0ebfdf74c278fe687eb97fa60eeb2385ed9dbb30.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "5523df8d9e562589dcd64267fefc52ce3f852081a887d6d225723657b3cab04b",
+      "bytes": 26222,
+      "archiveObject": "objects/55/5523df8d9e562589dcd64267fefc52ce3f852081a887d6d225723657b3cab04b.gz"
+    }
+  ],
+  "stagedFiles": []
+}

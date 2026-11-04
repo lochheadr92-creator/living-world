@@ -1,0 +1,140 @@
+{
+  "seed": "forest",
+  "rules": 39,
+  "ticks": 14400,
+  "stop": "day 6",
+  "head": "c35db6b9824a1608e7c60108c113cbb01d08cc3d",
+  "hash": "11fb4353",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "attempts": [
+    {
+      "start": 782,
+      "person": 908,
+      "name": "Lena",
+      "helper": 911,
+      "activity": 1498,
+      "key": "socialize:911:request:plan:stone",
+      "targetActivity": "drink",
+      "lastResult": {
+        "tick": 879,
+        "label": "Ask Ada for stone",
+        "outcome": "failed",
+        "detail": "Ada was too busy to stop"
+      },
+      "end": 880,
+      "request": null,
+      "nextActivity": null
+    },
+    {
+      "start": 2015,
+      "person": 929,
+      "name": "Isla",
+      "helper": 920,
+      "activity": 1756,
+      "key": "socialize:920:request:plan:stone",
+      "targetActivity": "rest",
+      "lastResult": {
+        "tick": 2014,
+        "label": "Delivering wood to the building site",
+        "outcome": "success",
+        "detail": "done"
+      },
+      "end": 2118,
+      "request": {
+        "id": 1768,
+        "kind": "stone",
+        "from": 929,
+        "to": 920,
+        "item": "stone",
+        "amount": 1,
+        "offer": null,
+        "offerAmount": 0,
+        "siteId": 0,
+        "infoKind": "",
+        "planId": 1222,
+        "likely": true,
+        "created": 2057,
+        "expires": 2757,
+        "status": "declined",
+        "note": "making",
+        "resolved": 2079,
+        "purpose": "make an axe",
+        "destKind": "person",
+        "destId": 929,
+        "deadline": 0,
+        "milestone": "",
+        "toolKind": null,
+        "outcome": "refused"
+      },
+      "nextActivity": null
+    },
+    {
+      "start": 2034,
+      "person": 939,
+      "name": "Maren",
+      "helper": 923,
+      "activity": 1761,
+      "key": "socialize:923:request:plan:stone",
+      "targetActivity": "rest",
+      "lastResult": {
+        "tick": 2041,
+        "label": "Ask Faye for stone",
+        "outcome": "failed",
+        "detail": "Faye was too busy to stop"
+      },
+      "end": 2042,
+      "request": null,
+      "nextActivity": null
+    },
+    {
+      "start": 2207,
+      "person": 940,
+      "name": "Dov",
+      "helper": 923,
+      "activity": 1801,
+      "key": "socialize:923:request:plan:stone",
+      "targetActivity": "rest",
+      "lastResult": {
+        "tick": 2214,
+        "label": "Ask Faye for stone",
+        "outcome": "failed",
+        "detail": "Faye was too busy to stop"
+      },
+      "end": 2215,
+      "request": null,
+      "nextActivity": null
+    }
+  ],
+  "requests": [
+    {
+      "id": 1768,
+      "kind": "stone",
+      "from": 929,
+      "to": 920,
+      "item": "stone",
+      "amount": 1,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "planId": 1222,
+      "likely": true,
+      "created": 2057,
+      "expires": 2757,
+      "status": "declined",
+      "note": "making",
+      "resolved": 2079,
+      "purpose": "make an axe",
+      "destKind": "person",
+      "destId": 929,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    }
+  ],
+  "seconds": 7.79
+}

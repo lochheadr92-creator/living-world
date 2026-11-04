@@ -1,0 +1,994 @@
+[
+  {
+    "tick": 0,
+    "person": 899,
+    "activity": 963,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 898
+  },
+  {
+    "tick": 0,
+    "person": 902,
+    "activity": 965,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 901
+  },
+  {
+    "tick": 0,
+    "person": 920,
+    "activity": 978,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 919
+  },
+  {
+    "tick": 138,
+    "person": 905,
+    "activity": 1120,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 904
+  },
+  {
+    "tick": 232,
+    "person": 899,
+    "activity": 1193,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 898
+  },
+  {
+    "tick": 453,
+    "person": 932,
+    "activity": 1330,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 905,
+    "purpose": "request"
+  },
+  {
+    "tick": 493,
+    "person": 932,
+    "activity": 1344,
+    "kind": "socialize",
+    "label": "Ask Petra for wood",
+    "target": 899,
+    "purpose": "request"
+  },
+  {
+    "tick": 558,
+    "person": 915,
+    "activity": 1382,
+    "kind": "socialize",
+    "label": "Ask Viktor for water",
+    "target": 916,
+    "purpose": "request"
+  },
+  {
+    "tick": 704,
+    "person": 934,
+    "activity": 1461,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 707,
+    "person": 934,
+    "activity": 1463,
+    "kind": "socialize",
+    "label": "Ask Faye for wood",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 870,
+    "person": 937,
+    "activity": 1538,
+    "kind": "socialize",
+    "label": "Ask Hal for wood",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 987,
+    "person": 915,
+    "activity": 1590,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 913
+  },
+  {
+    "tick": 1121,
+    "person": 945,
+    "activity": 1653,
+    "kind": "socialize",
+    "label": "Ask Lena for wood",
+    "target": 908,
+    "purpose": "request"
+  },
+  {
+    "tick": 1143,
+    "person": 945,
+    "activity": 1668,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 905,
+    "purpose": "request"
+  },
+  {
+    "tick": 1271,
+    "person": 936,
+    "activity": 1721,
+    "kind": "socialize",
+    "label": "Ask Lena for wood",
+    "target": 908,
+    "purpose": "request"
+  },
+  {
+    "tick": 1285,
+    "person": 936,
+    "activity": 1724,
+    "kind": "socialize",
+    "label": "Ask Isla for wood",
+    "target": 929,
+    "purpose": "request"
+  },
+  {
+    "tick": 1292,
+    "person": 936,
+    "activity": 1727,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 1850,
+    "person": 937,
+    "activity": 1757,
+    "kind": "socialize",
+    "label": "Ask Yusuf for wood",
+    "target": 920,
+    "purpose": "request"
+  },
+  {
+    "tick": 2059,
+    "person": 939,
+    "activity": 1802,
+    "kind": "socialize",
+    "label": "Ask Faye for stone",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 2250,
+    "person": 932,
+    "activity": 1863,
+    "kind": "socialize",
+    "label": "Ask Viktor for water",
+    "target": 916,
+    "purpose": "request"
+  },
+  {
+    "tick": 2714,
+    "person": 899,
+    "activity": 2133,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 944,
+    "purpose": "request"
+  },
+  {
+    "tick": 2799,
+    "person": 899,
+    "activity": 2184,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 936,
+    "purpose": "request"
+  },
+  {
+    "tick": 2806,
+    "person": 929,
+    "activity": 2194,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 914,
+    "purpose": "request"
+  },
+  {
+    "tick": 2893,
+    "person": 945,
+    "activity": 2245,
+    "kind": "socialize",
+    "label": "Ask Delia for wood",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 2967,
+    "person": 944,
+    "activity": 2283,
+    "kind": "socialize",
+    "label": "Ask Greta for wood",
+    "target": 931,
+    "purpose": "request"
+  },
+  {
+    "tick": 3135,
+    "person": 937,
+    "activity": 2384,
+    "kind": "socialize",
+    "label": "Ask Zeke for wood",
+    "target": 935,
+    "purpose": "request"
+  },
+  {
+    "tick": 3275,
+    "person": 916,
+    "activity": 2475,
+    "kind": "socialize",
+    "label": "Ask Dov for wood",
+    "target": 940,
+    "purpose": "request"
+  },
+  {
+    "tick": 3296,
+    "person": 934,
+    "activity": 2485,
+    "kind": "socialize",
+    "label": "Ask Yusuf for wood",
+    "target": 920,
+    "purpose": "request"
+  },
+  {
+    "tick": 3348,
+    "person": 937,
+    "activity": 2513,
+    "kind": "socialize",
+    "label": "Ask Tomas for water",
+    "target": 915,
+    "purpose": "request"
+  },
+  {
+    "tick": 3385,
+    "person": 917,
+    "activity": 2538,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 914,
+    "purpose": "request"
+  },
+  {
+    "tick": 3436,
+    "person": 899,
+    "activity": 2564,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 943,
+    "purpose": "request"
+  },
+  {
+    "tick": 3569,
+    "person": 899,
+    "activity": 2625,
+    "kind": "socialize",
+    "label": "Ask Isla for food",
+    "target": 929,
+    "purpose": "request"
+  },
+  {
+    "tick": 3574,
+    "person": 899,
+    "activity": 2629,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 3666,
+    "person": 936,
+    "activity": 2654,
+    "kind": "socialize",
+    "label": "Ask Delia for wood",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 4668,
+    "person": 916,
+    "activity": 2774,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 914,
+    "purpose": "request"
+  },
+  {
+    "tick": 4761,
+    "person": 914,
+    "activity": 2832,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 913
+  },
+  {
+    "tick": 4840,
+    "person": 917,
+    "activity": 2884,
+    "kind": "socialize",
+    "label": "Ask Tomas for wood",
+    "target": 915,
+    "purpose": "request"
+  },
+  {
+    "tick": 5001,
+    "person": 934,
+    "activity": 2980,
+    "kind": "socialize",
+    "label": "Ask Bram for wood",
+    "target": 902,
+    "purpose": "request"
+  },
+  {
+    "tick": 5038,
+    "person": 937,
+    "activity": 3008,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 5070,
+    "person": 937,
+    "activity": 3022,
+    "kind": "socialize",
+    "label": "Ask Theo for wood",
+    "target": 943,
+    "purpose": "request"
+  },
+  {
+    "tick": 5116,
+    "person": 936,
+    "activity": 3049,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 5167,
+    "person": 936,
+    "activity": 3077,
+    "kind": "socialize",
+    "label": "Ask Isla for wood",
+    "target": 929,
+    "purpose": "request"
+  },
+  {
+    "tick": 5349,
+    "person": 917,
+    "activity": 3177,
+    "kind": "socialize",
+    "label": "Ask Viktor for water",
+    "target": 916,
+    "purpose": "request"
+  },
+  {
+    "tick": 5585,
+    "person": 916,
+    "activity": 3289,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 7171,
+    "person": 917,
+    "activity": 3660,
+    "kind": "socialize",
+    "label": "Ask Faye for stone",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 7362,
+    "person": 899,
+    "activity": 3744,
+    "kind": "socialize",
+    "label": "Ask Theo for wood",
+    "target": 943,
+    "purpose": "request"
+  },
+  {
+    "tick": 7383,
+    "person": 899,
+    "activity": 3756,
+    "kind": "socialize",
+    "label": "Ask Bram for wood",
+    "target": 902,
+    "purpose": "request"
+  },
+  {
+    "tick": 7404,
+    "person": 899,
+    "activity": 3763,
+    "kind": "socialize",
+    "label": "Ask Thea for wood",
+    "target": 934,
+    "purpose": "request"
+  },
+  {
+    "tick": 7627,
+    "person": 932,
+    "activity": 3888,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 937,
+    "purpose": "request"
+  },
+  {
+    "tick": 8286,
+    "person": 945,
+    "activity": 4181,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 916,
+    "purpose": "request"
+  },
+  {
+    "tick": 9166,
+    "person": 899,
+    "activity": 4293,
+    "kind": "socialize",
+    "label": "Ask Cole for wood",
+    "target": 936,
+    "purpose": "request"
+  },
+  {
+    "tick": 9453,
+    "person": 905,
+    "activity": 4338,
+    "kind": "socialize",
+    "label": "Ask Greta for food",
+    "target": 931,
+    "purpose": "request"
+  },
+  {
+    "tick": 9542,
+    "person": 917,
+    "activity": 4383,
+    "kind": "socialize",
+    "label": "Ask Ada for stone",
+    "target": 911,
+    "purpose": "request"
+  },
+  {
+    "tick": 9621,
+    "person": 944,
+    "activity": 4421,
+    "kind": "socialize",
+    "label": "Ask Delia for wood",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 9851,
+    "person": 944,
+    "activity": 4510,
+    "kind": "socialize",
+    "label": "Ask Kaia for food",
+    "target": 925,
+    "purpose": "request"
+  },
+  {
+    "tick": 9882,
+    "person": 916,
+    "activity": 4528,
+    "kind": "socialize",
+    "label": "Ask Tomas for stone",
+    "target": 915,
+    "purpose": "request"
+  },
+  {
+    "tick": 9924,
+    "person": 944,
+    "activity": 4547,
+    "kind": "socialize",
+    "label": "Ask Bram for food",
+    "target": 902,
+    "purpose": "request"
+  },
+  {
+    "tick": 9951,
+    "person": 936,
+    "activity": 4561,
+    "kind": "socialize",
+    "label": "Ask Zeke for water",
+    "target": 935,
+    "purpose": "request"
+  },
+  {
+    "tick": 10007,
+    "person": 914,
+    "activity": 4593,
+    "kind": "socialize",
+    "label": "Ask Tomas for stone",
+    "target": 915,
+    "purpose": "request"
+  },
+  {
+    "tick": 10028,
+    "person": 936,
+    "activity": 4607,
+    "kind": "socialize",
+    "label": "Ask Thea for water",
+    "target": 934,
+    "purpose": "request"
+  },
+  {
+    "tick": 10109,
+    "person": 899,
+    "activity": 4653,
+    "kind": "socialize",
+    "label": "Ask Kaia for wood",
+    "target": 925,
+    "purpose": "request"
+  },
+  {
+    "tick": 10434,
+    "person": 944,
+    "activity": 4804,
+    "kind": "socialize",
+    "label": "Ask Tessa for food",
+    "target": 926,
+    "purpose": "request"
+  },
+  {
+    "tick": 10512,
+    "person": 944,
+    "activity": 4839,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 937,
+    "purpose": "request"
+  },
+  {
+    "tick": 10515,
+    "person": 920,
+    "activity": 4841,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 944,
+    "purpose": "request"
+  },
+  {
+    "tick": 10521,
+    "person": 925,
+    "activity": 4846,
+    "kind": "socialize",
+    "label": "Ask Hal for wood",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 10586,
+    "person": 944,
+    "activity": 4888,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 914,
+    "purpose": "request"
+  },
+  {
+    "tick": 10753,
+    "person": 944,
+    "activity": 4956,
+    "kind": "socialize",
+    "label": "Ask Delia for food",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 10765,
+    "person": 920,
+    "activity": 4964,
+    "kind": "socialize",
+    "label": "Ask Tessa for food",
+    "target": 926,
+    "purpose": "request"
+  },
+  {
+    "tick": 11074,
+    "person": 944,
+    "activity": 5034,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 936,
+    "purpose": "request"
+  },
+  {
+    "tick": 12197,
+    "person": 925,
+    "activity": 5174,
+    "kind": "socialize",
+    "label": "Ask Silas for wood",
+    "target": 932,
+    "purpose": "request"
+  },
+  {
+    "tick": 12203,
+    "person": 925,
+    "activity": 5175,
+    "kind": "socialize",
+    "label": "Ask Hal for wood",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 12315,
+    "person": 916,
+    "activity": 5213,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 915,
+    "purpose": "request"
+  },
+  {
+    "tick": 12377,
+    "person": 944,
+    "activity": 5240,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 945,
+    "purpose": "request"
+  },
+  {
+    "tick": 12386,
+    "person": 916,
+    "activity": 5250,
+    "kind": "socialize",
+    "label": "Ask Kaia for food",
+    "target": 925,
+    "purpose": "request"
+  },
+  {
+    "tick": 12406,
+    "person": 916,
+    "activity": 5256,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 12436,
+    "person": 936,
+    "activity": 5274,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 937,
+    "purpose": "request"
+  },
+  {
+    "tick": 12452,
+    "person": 944,
+    "activity": 5288,
+    "kind": "socialize",
+    "label": "Ask Isla for food",
+    "target": 929,
+    "purpose": "request"
+  },
+  {
+    "tick": 12506,
+    "person": 936,
+    "activity": 5323,
+    "kind": "socialize",
+    "label": "Ask Hal for food",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 12556,
+    "person": 936,
+    "activity": 5359,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 12621,
+    "person": 944,
+    "activity": 5389,
+    "kind": "socialize",
+    "label": "Ask Zeke for stone",
+    "target": 935,
+    "purpose": "request"
+  },
+  {
+    "tick": 12627,
+    "person": 936,
+    "activity": 5396,
+    "kind": "socialize",
+    "label": "Ask Delia for food",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 12712,
+    "person": 936,
+    "activity": 5430,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 934,
+    "purpose": "request"
+  },
+  {
+    "tick": 12714,
+    "person": 944,
+    "activity": 5433,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 12727,
+    "person": 925,
+    "activity": 5442,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 12774,
+    "person": 917,
+    "activity": 5472,
+    "kind": "socialize",
+    "label": "Ask Mira for stone",
+    "target": 905,
+    "purpose": "request"
+  },
+  {
+    "tick": 12774,
+    "person": 926,
+    "activity": 5473,
+    "kind": "socialize",
+    "label": "Ask Isla for wood",
+    "target": 929,
+    "purpose": "request"
+  },
+  {
+    "tick": 12782,
+    "person": 945,
+    "activity": 5475,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 12818,
+    "person": 942,
+    "activity": 5495,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 12825,
+    "person": 917,
+    "activity": 5498,
+    "kind": "socialize",
+    "label": "Ask Ada for stone",
+    "target": 911,
+    "purpose": "request"
+  },
+  {
+    "tick": 12826,
+    "person": 925,
+    "activity": 5499,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 936,
+    "purpose": "request"
+  },
+  {
+    "tick": 12829,
+    "person": 928,
+    "activity": 5500,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 12900,
+    "person": 945,
+    "activity": 5542,
+    "kind": "socialize",
+    "label": "Ask Zeke for stone",
+    "target": 935,
+    "purpose": "request"
+  },
+  {
+    "tick": 12905,
+    "person": 945,
+    "activity": 5548,
+    "kind": "socialize",
+    "label": "Ask Mira for stone",
+    "target": 905,
+    "purpose": "request"
+  },
+  {
+    "tick": 12911,
+    "person": 923,
+    "activity": 5550,
+    "kind": "socialize",
+    "label": "Ask Hal for food",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 12953,
+    "person": 944,
+    "activity": 5577,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 13176,
+    "person": 925,
+    "activity": 5684,
+    "kind": "socialize",
+    "label": "Ask Mira for stone",
+    "target": 905,
+    "purpose": "request"
+  },
+  {
+    "tick": 13191,
+    "person": 945,
+    "activity": 5689,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 944,
+    "purpose": "request"
+  },
+  {
+    "tick": 13209,
+    "person": 925,
+    "activity": 5701,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 928,
+    "purpose": "request"
+  },
+  {
+    "tick": 13235,
+    "person": 916,
+    "activity": 5719,
+    "kind": "socialize",
+    "label": "Ask Delia for food",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 13245,
+    "person": 916,
+    "activity": 5722,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 936,
+    "purpose": "request"
+  },
+  {
+    "tick": 13255,
+    "person": 916,
+    "activity": 5731,
+    "kind": "socialize",
+    "label": "Ask Zeke for food",
+    "target": 935,
+    "purpose": "request"
+  },
+  {
+    "tick": 13522,
+    "person": 925,
+    "activity": 5778,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 923,
+    "purpose": "request"
+  },
+  {
+    "tick": 13929,
+    "person": 925,
+    "activity": 5821,
+    "kind": "socialize",
+    "label": "Ask Hal for food",
+    "target": 924,
+    "purpose": "request"
+  },
+  {
+    "tick": 14013,
+    "person": 925,
+    "activity": 5836,
+    "kind": "socialize",
+    "label": "Ask Tessa for food",
+    "target": 926,
+    "purpose": "request"
+  },
+  {
+    "tick": 14083,
+    "person": 925,
+    "activity": 5847,
+    "kind": "socialize",
+    "label": "Ask Maren for food",
+    "target": 939,
+    "purpose": "request"
+  },
+  {
+    "tick": 14092,
+    "person": 925,
+    "activity": 5849,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 943,
+    "purpose": "request"
+  },
+  {
+    "tick": 14244,
+    "person": 944,
+    "activity": 5881,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 945,
+    "purpose": "request"
+  },
+  {
+    "tick": 14315,
+    "person": 944,
+    "activity": 5923,
+    "kind": "socialize",
+    "label": "Ask Delia for food",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 14315,
+    "person": 945,
+    "activity": 5924,
+    "kind": "socialize",
+    "label": "Ask Delia for food",
+    "target": 942,
+    "purpose": "request"
+  },
+  {
+    "tick": 14323,
+    "person": 944,
+    "activity": 5933,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 943,
+    "purpose": "request"
+  },
+  {
+    "tick": 14386,
+    "person": 945,
+    "activity": 5976,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 908,
+    "purpose": "request"
+  }
+]

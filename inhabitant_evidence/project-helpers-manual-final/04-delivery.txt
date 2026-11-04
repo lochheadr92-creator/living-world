@@ -1,0 +1,60 @@
+Browser tab: 1, Title: "Staged project helper verification", URL: "http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 16, 77, 102, 126, 144, 156-162, 164-188
++					164 text 15:14
++					165 text 18 °C
+~					23 button Play
++				166 text PAUSED
+~					36 text Ada · by hand thinking…
++					167 text day 1 15:14
++					168 text 14:27 · Ask Cora for stone → applied
++					169 text success: received 1 stone
++					170 text chosen by hand
++					171 text 15:13
++					172 text Ada is in no particular need. Last: request — kept.
++					173 text Plans: make an axe; next: make the axe · wood: 2 carried and reserved, 0 still missing (2 wanted) · stone: 1 carried and reserved, 0 still missing (1 wanted) · Unreserved: 2 wood · Promises and actions serving the plan may use reserved goods; each offered action has its own limits.
++					174 text Action estimates and memory ages use the world clock.
++					175 container
++						176 button Make an axe lean-to 2 tiles north (seen 1 world min ago) About 1 world h 5 min, Help: Make an axe — lean-to 2 tiles north (seen 1 world min ago) · about 1 world h 5 min
++							177 text Make an axe
++							178 text lean-to 2 tiles north (seen 1 world min ago)
++							179 text About 1 world h 5 min
++						180 button Ask Ben where to find food Ben (in sight, 2 tiles south-east) About 56 world min, Help: Ask Ben where to find food — Ben (in sight, 2 tiles south-east) · about 56 world min
++							181 text Ask Ben where to find food
++							182 text Ben (in sight, 2 tiles south-east)
++							183 text About 56 world min
++						184 button Wander down to the square About 24 world min, Help: Wander down to the square · about 24 world min
++							185 text Wander down to the square
++							186 text About 24 world min
++					187 button Let the engine choose
++					188 button (collapsed) Answer from a chat, Secondary Actions: Expand
++						189 text Answer from a chat
++						190 text 1
++						191 text Cora gave 1 stone to Ada.
+~						90 text MOOD Content HEALTH 100 ON THEIR MIND +8 Cora gave me 1 stone
++								192 text Between tasks (last chose “Ask Cora for stone”).
++								193 container WHAT IS STOPPING THEM?
++									194 text WHAT IS STOPPING THEM?
++								195 text Lay out a hut: the household has only 2 food to hand and wants 3 before starting a hut.
++								196 text Make an axe. Step: make the axe — settled on, not started. Cora brought the stone (1).
+~							118 level indicator Description: Food, Value: 73
+~							119 level indicator Description: Water, Value: 71
+~							120 level indicator Description: Energy, Value: 63
+~							123 level indicator Description: Company, Value: 92
++						197 container 1 stone
++						198 text 11 / 12 TOOLS none
+~						127 button (expanded) Conversation, Secondary Actions: Collapse
++						199 container Last conversation
++							200 text LAST CONVERSATION just now
++							201 button Look at Cora
++							202 text · asking for something
++							203 definition list
++								204 container Outcome
++									205 text Outcome
++								206 text Kept (received 1 stone)
+~							141 button (collapsed) Requests 1, Secondary Actions: Expand
++								207 text Requests
++								208 text 1
+~							142 button (collapsed) Recent 7, Secondary Actions: Expand
++								209 text 7
+The focused UI element is 1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json

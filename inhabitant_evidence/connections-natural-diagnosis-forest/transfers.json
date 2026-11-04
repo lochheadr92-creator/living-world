@@ -1,0 +1,58 @@
+[
+  {
+    "tick": 10,
+    "from": "building:919",
+    "to": "person:920",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 21,
+    "from": "building:901",
+    "to": "person:902",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 26,
+    "from": "building:898",
+    "to": "person:899",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 168,
+    "from": "building:904",
+    "to": "person:905",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 286,
+    "from": "building:898",
+    "to": "person:899",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 995,
+    "from": "building:913",
+    "to": "person:915",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 4796,
+    "from": "building:913",
+    "to": "person:914",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  }
+]

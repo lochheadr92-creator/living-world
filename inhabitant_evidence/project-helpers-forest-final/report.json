@@ -1,0 +1,21 @@
+{
+  "seed": "forest",
+  "profile": "normal",
+  "staged": false,
+  "ticks": 14400,
+  "days": 6,
+  "stop": "day 6",
+  "seconds": 8.565,
+  "comparisons": 4,
+  "changed": 1,
+  "projectRequests": 1,
+  "outcomes": {
+    "declined": 1
+  },
+  "delivered": 0,
+  "hash": "11fb4353",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

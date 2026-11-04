@@ -1,0 +1,41 @@
+[
+  {
+    "person": 923,
+    "name": "Faye",
+    "makes": "planks",
+    "forSite": 10081,
+    "status": "dropped",
+    "reason": "the time is up (was going to hewing planks)",
+    "since": 64064,
+    "ended": 71266
+  },
+  {
+    "person": 911,
+    "name": "Ada",
+    "makes": "bricks",
+    "forSite": 23818,
+    "status": "dropped",
+    "reason": "the time is up (was going to firing bricks)",
+    "since": 94510,
+    "ended": 101712
+  },
+  {
+    "person": 908,
+    "name": "Lena",
+    "makes": "bricks",
+    "forSite": 23818,
+    "status": "dropped",
+    "reason": "the time is up (was going to firing bricks)",
+    "since": 96118,
+    "ended": 103320
+  },
+  {
+    "person": 908,
+    "name": "Lena",
+    "makes": "bricks",
+    "forSite": 26248,
+    "status": "active",
+    "reason": "taken up again",
+    "since": 105994
+  }
+]

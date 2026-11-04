@@ -1,0 +1,48 @@
+{
+ "site": {
+  "x": 44,
+  "y": 42,
+  "w": 2,
+  "h": 2,
+  "type": "hut",
+  "hhId": 912,
+  "createdTick": 3035
+ },
+ "stillSite": false,
+ "onFootprint": [
+  {
+   "id": 3271,
+   "type": "hut",
+   "hhId": 912,
+   "built": 5714
+  }
+ ],
+ "commitment": {
+  "status": "moot",
+  "reason": "I saw that the promised site was no longer there; its fate is unknown. My contribution remains 2/4.",
+  "delivered": 2,
+  "amount": 4,
+  "targetEvidence": {
+   "targetId": 2280,
+   "kind": "site",
+   "tick": 5728,
+   "x": 45,
+   "y": 43,
+   "source": "observed absence"
+  }
+ },
+ "events": [
+  {
+   "tick": 3035,
+   "text": "Tomas marked out a hut for the Linden household."
+  },
+  {
+   "tick": 5714,
+   "text": "Petra finished a hut for the Linden household."
+  }
+ ],
+ "hanaHome": {
+  "id": 912,
+  "homeId": 3271
+ }
+}

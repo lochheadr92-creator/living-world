@@ -1,0 +1,40 @@
+AI inhabitant
+Pavel · by hand
+thinking…
+day 2 12:54
+12:42 · Eat what I am carrying → applied
+success: done
+chosen by hand
+Your turn
+12:54
+Pavel is in no particular need. Last: Eating — success.
+hopes for a family (0% there) · Plans: get the household's hut built; next: take 2 wood to the hut; no room for a full batch (a wolf about) · wood: 2 carried and reserved, 2 still missing (4 wanted) · Promises and actions serving the plan may use reserved goods; each offered action has its own limits.
+Action estimates and memory ages use the world clock.
+Deliver materials to the hut site
+hut site 10 tiles south-east (seen 1 world min ago)
+About 1 world h 28 min
+Chopping wood for my household’s hut
+tree 6 tiles south-west (seen 1 world min ago)
+About 1 world h 13 min
+Chopping wood for my household’s hut
+tree 9 tiles south (seen 1 world min ago)
+About 1 world h 36 min
+Warn Orla about the wolf
+Orla (in sight, 6 tiles north-west)
+About 1 world h 32 min
+Picking berries
+berry bush 6 tiles north-west (seen 1 world min ago)
+About 1 world h 7 min
+Picking berries
+berry bush 6 tiles north-west (seen 1 world min ago)
+About 1 world h 13 min
+Picking berries
+berry bush 10 tiles south (seen 15 world min ago)
+About 1 world h 40 min
+Potter about near home
+About 24 world min
+Let the engine choose
+Answer from a chat
+decisions 4, engine 0, refused 0
+Save transcript
+Stop

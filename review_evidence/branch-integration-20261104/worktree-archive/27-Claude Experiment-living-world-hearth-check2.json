@@ -1,0 +1,309 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-hearth-check2",
+  "head": "de35037cc65ce39ff0f54f27803312252470b01f",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/browser/hearth_check.mjs",
+      "kind": "tracked-change",
+      "sha256": "06abe1eca0ab287ec2c057152f9086c4eebb0f8a196c81d9ace182980b5f600d",
+      "bytes": 3797,
+      "archiveObject": "objects/06/06abe1eca0ab287ec2c057152f9086c4eebb0f8a196c81d9ace182980b5f600d.gz"
+    },
+    {
+      "path": "scripts/browser/hearth_manual.html",
+      "kind": "tracked-change",
+      "sha256": "5a98a5890ab040ca7f5b9532b409b9185909efe82153daf536379f5338d7a8bc",
+      "bytes": 2441,
+      "archiveObject": "objects/5a/5a98a5890ab040ca7f5b9532b409b9185909efe82153daf536379f5338d7a8bc.gz"
+    },
+    {
+      "path": "scripts/lab/lab.ts",
+      "kind": "tracked-change",
+      "sha256": "26ad3c4804f2e5897615df137f990d0c8d79acbad5773377e15dbcaba4ad9dcf",
+      "bytes": 71601,
+      "archiveObject": "objects/26/26ad3c4804f2e5897615df137f990d0c8d79acbad5773377e15dbcaba4ad9dcf.gz"
+    },
+    {
+      "path": "scripts/observers/survival.ts",
+      "kind": "tracked-change",
+      "sha256": "c3dded049959ac86f2bf4a107c6191085050b1b12a11d2c44e4c076eb0b493d1",
+      "bytes": 8176,
+      "archiveObject": "objects/c3/c3dded049959ac86f2bf4a107c6191085050b1b12a11d2c44e4c076eb0b493d1.gz"
+    },
+    {
+      "path": "src/app/save.ts",
+      "kind": "tracked-change",
+      "sha256": "6861cc6787dd0feee7c1416df8c32a2503fdc057af14afdc3567e443a630ab16",
+      "bytes": 22999,
+      "archiveObject": "objects/68/6861cc6787dd0feee7c1416df8c32a2503fdc057af14afdc3567e443a630ab16.gz"
+    },
+    {
+      "path": "src/sim/act_build.ts",
+      "kind": "tracked-change",
+      "sha256": "19e453c59ceae252597b3f791d2a5a88ff54d3ce5663ed9785b959272975b5e6",
+      "bytes": 27422,
+      "archiveObject": "objects/19/19e453c59ceae252597b3f791d2a5a88ff54d3ce5663ed9785b959272975b5e6.gz"
+    },
+    {
+      "path": "src/sim/activities.ts",
+      "kind": "tracked-change",
+      "sha256": "5b5af802c6d464008f9eb321f1a5b32c66a5e6c5c76972339352c6e8494bc484",
+      "bytes": 27080,
+      "archiveObject": "objects/5b/5b5af802c6d464008f9eb321f1a5b32c66a5e6c5c76972339352c6e8494bc484.gz"
+    },
+    {
+      "path": "src/sim/buildings.ts",
+      "kind": "tracked-change",
+      "sha256": "a061ce6b293ab803b265e0a9545941c8bb6cb0415536d93c21a069b5a93a5c6e",
+      "bytes": 15211,
+      "archiveObject": "objects/a0/a061ce6b293ab803b265e0a9545941c8bb6cb0415536d93c21a069b5a93a5c6e.gz"
+    },
+    {
+      "path": "src/sim/habitation.ts",
+      "kind": "tracked-change",
+      "sha256": "8b217fc6007f0ec77e795f07315e0097d38cb3b190a6b3df17410a187ff703c2",
+      "bytes": 6103,
+      "archiveObject": "objects/8b/8b217fc6007f0ec77e795f07315e0097d38cb3b190a6b3df17410a187ff703c2.gz"
+    },
+    {
+      "path": "src/sim/hearth.ts",
+      "kind": "tracked-change",
+      "sha256": "ac2008c939d2d01b2ac49d02e66c12947ed4ee79b9cb0211e4a212d714c52c65",
+      "bytes": 7365,
+      "archiveObject": "objects/ac/ac2008c939d2d01b2ac49d02e66c12947ed4ee79b9cb0211e4a212d714c52c65.gz"
+    },
+    {
+      "path": "src/sim/inspect.ts",
+      "kind": "tracked-change",
+      "sha256": "43d16a0381745d39ee4e3145744362eb685a97a7bb61420d8f2d99c015b8d789",
+      "bytes": 48710,
+      "archiveObject": "objects/43/43d16a0381745d39ee4e3145744362eb685a97a7bb61420d8f2d99c015b8d789.gz"
+    },
+    {
+      "path": "src/sim/knowledge.ts",
+      "kind": "tracked-change",
+      "sha256": "25c50fde3397a0be2871f1a35cbf49a668b4e33ca0828e3419ba169b7b6565af",
+      "bytes": 9506,
+      "archiveObject": "objects/25/25c50fde3397a0be2871f1a35cbf49a668b4e33ca0828e3419ba169b7b6565af.gz"
+    },
+    {
+      "path": "src/sim/needs.ts",
+      "kind": "tracked-change",
+      "sha256": "744116254a17a43a95618ba78bd8d9c4d860cdaed5a65217e636e072cbe93c44",
+      "bytes": 7523,
+      "archiveObject": "objects/74/744116254a17a43a95618ba78bd8d9c4d860cdaed5a65217e636e072cbe93c44.gz"
+    },
+    {
+      "path": "src/sim/options_work.ts",
+      "kind": "tracked-change",
+      "sha256": "5d4adf4a3754c900d9cf031bb7804202d63b4e50f1a9e8c9dc4f00521be66a0d",
+      "bytes": 102228,
+      "archiveObject": "objects/5d/5d4adf4a3754c900d9cf031bb7804202d63b4e50f1a9e8c9dc4f00521be66a0d.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "kind": "tracked-change",
+      "sha256": "10c2e873d6ffccbdc87a18709514fb764a18cc6335a69a7dedb41894d006cbe3",
+      "bytes": 67206,
+      "archiveObject": "objects/10/10c2e873d6ffccbdc87a18709514fb764a18cc6335a69a7dedb41894d006cbe3.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "fd72a2a4175f9b60abde96d1e0535929fb69ad1b3d625fad45cf424b59115df1",
+      "bytes": 25825,
+      "archiveObject": "objects/fd/fd72a2a4175f9b60abde96d1e0535929fb69ad1b3d625fad45cf424b59115df1.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "544e4c2a4610a105b6652a137e9bbab4687dde31195a920fef578ea3d753f0ac",
+      "bytes": 54609,
+      "archiveObject": "objects/54/544e4c2a4610a105b6652a137e9bbab4687dde31195a920fef578ea3d753f0ac.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "3fdc08fe1f688a3538a8ea43dc906479650576f7f7cd78ee9de4d0e6f87e64ab",
+      "bytes": 30218,
+      "archiveObject": "objects/3f/3fdc08fe1f688a3538a8ea43dc906479650576f7f7cd78ee9de4d0e6f87e64ab.gz"
+    },
+    {
+      "path": "tests/hearth.test.ts",
+      "kind": "tracked-change",
+      "sha256": "ce3b241c916f5d73ec5888a284fcaf470c0bcca14dc9d79f5a784d14cb106eed",
+      "bytes": 8659,
+      "archiveObject": "objects/ce/ce3b241c916f5d73ec5888a284fcaf470c0bcca14dc9d79f5a784d14cb106eed.gz"
+    },
+    {
+      "path": "tests/helpers/hearth.ts",
+      "kind": "tracked-change",
+      "sha256": "bfbf155de5c54dd53498417e349d0cf6a06c60c8c7125ac3f1e72ffd5ce9dba4",
+      "bytes": 440,
+      "archiveObject": "objects/bf/bfbf155de5c54dd53498417e349d0cf6a06c60c8c7125ac3f1e72ffd5ce9dba4.gz"
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "scripts/browser/hearth_check.mjs",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "cf3506c3ad389a4570f11df27b6eddf1109ba8390d97ba960be99f3ebca04d11",
+      "bytes": 3755,
+      "archiveObject": "objects/cf/cf3506c3ad389a4570f11df27b6eddf1109ba8390d97ba960be99f3ebca04d11.gz"
+    },
+    {
+      "path": "scripts/browser/hearth_manual.html",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "a668e44bfe065a03379188f2b798f7291f2ba4f45e0d2bdb73db9a9cd27a165e",
+      "bytes": 2412,
+      "archiveObject": "objects/a6/a668e44bfe065a03379188f2b798f7291f2ba4f45e0d2bdb73db9a9cd27a165e.gz"
+    },
+    {
+      "path": "scripts/lab/lab.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "a4803519b26e67ced90581aa5cdb9a0e21c6050529662f7bfc29f4328d73ac82",
+      "bytes": 70632,
+      "archiveObject": "objects/a4/a4803519b26e67ced90581aa5cdb9a0e21c6050529662f7bfc29f4328d73ac82.gz"
+    },
+    {
+      "path": "scripts/observers/survival.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "c68f6aab5c0db9cfea516689dc619b09fa68ab1bba8094b2d49f5956752068bb",
+      "bytes": 8057,
+      "archiveObject": "objects/c6/c68f6aab5c0db9cfea516689dc619b09fa68ab1bba8094b2d49f5956752068bb.gz"
+    },
+    {
+      "path": "src/app/save.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "d47241ff3fd94bb147294bfc618c59e0e0bada408cc5b7984e539435aee81c3c",
+      "bytes": 22446,
+      "archiveObject": "objects/d4/d47241ff3fd94bb147294bfc618c59e0e0bada408cc5b7984e539435aee81c3c.gz"
+    },
+    {
+      "path": "src/sim/act_build.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "ea312b91b189aecae5756d4512eaf7f713fbb7f9d8cb655c2eec9ccb19b56644",
+      "bytes": 26929,
+      "archiveObject": "objects/ea/ea312b91b189aecae5756d4512eaf7f713fbb7f9d8cb655c2eec9ccb19b56644.gz"
+    },
+    {
+      "path": "src/sim/activities.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "38e84cc70a24209a7a8aa0c9fac696f77d29816511437b2e24114c6b835eb76a",
+      "bytes": 26444,
+      "archiveObject": "objects/38/38e84cc70a24209a7a8aa0c9fac696f77d29816511437b2e24114c6b835eb76a.gz"
+    },
+    {
+      "path": "src/sim/buildings.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "fcbc0168626b9460a5f9d48c40b2f6f4f7cf626c46dbf9b5b8fe40ef22a9e9b3",
+      "bytes": 14849,
+      "archiveObject": "objects/fc/fcbc0168626b9460a5f9d48c40b2f6f4f7cf626c46dbf9b5b8fe40ef22a9e9b3.gz"
+    },
+    {
+      "path": "src/sim/habitation.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "d47c4259a02b3e02fa6435eb4e4e01263350f075fd3ed91ba4512c67e6716209",
+      "bytes": 5988,
+      "archiveObject": "objects/d4/d47c4259a02b3e02fa6435eb4e4e01263350f075fd3ed91ba4512c67e6716209.gz"
+    },
+    {
+      "path": "src/sim/hearth.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "5af177900839bed27f0cfb6259b0e87533d8331235bcf2fa30611ca0b81e5498",
+      "bytes": 7244,
+      "archiveObject": "objects/5a/5af177900839bed27f0cfb6259b0e87533d8331235bcf2fa30611ca0b81e5498.gz"
+    },
+    {
+      "path": "src/sim/inspect.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "4ce1b8a5ad4c74100e635d2b050b5b425634fa6e36d87ccdf772dc1512994b07",
+      "bytes": 47816,
+      "archiveObject": "objects/4c/4ce1b8a5ad4c74100e635d2b050b5b425634fa6e36d87ccdf772dc1512994b07.gz"
+    },
+    {
+      "path": "src/sim/knowledge.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "a3bcb23cb990f393e88c7f27b87437b03ed6c0f2a8db5d1f3f12849f223edd25",
+      "bytes": 9260,
+      "archiveObject": "objects/a3/a3bcb23cb990f393e88c7f27b87437b03ed6c0f2a8db5d1f3f12849f223edd25.gz"
+    },
+    {
+      "path": "src/sim/needs.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "1611b98bd1a0551000f57d30b29da44768bb24e190488cda83a14e5aaabf2af0",
+      "bytes": 7346,
+      "archiveObject": "objects/16/1611b98bd1a0551000f57d30b29da44768bb24e190488cda83a14e5aaabf2af0.gz"
+    },
+    {
+      "path": "src/sim/options_work.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "4d37d09b10ffee91c2045a934426028946085c90225dd052ab187e3afdf7f1be",
+      "bytes": 100204,
+      "archiveObject": "objects/4d/4d37d09b10ffee91c2045a934426028946085c90225dd052ab187e3afdf7f1be.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "2cd91a63f75364ca46326b995c483ddc6a8eaa9ae7da1408a3f1e680813578b5",
+      "bytes": 65878,
+      "archiveObject": "objects/2c/2cd91a63f75364ca46326b995c483ddc6a8eaa9ae7da1408a3f1e680813578b5.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "11169fd19bf21a5c97940a670374e8eb63d5a3cbe1d527193bcf70e4bc6ffd90",
+      "bytes": 25539,
+      "archiveObject": "objects/11/11169fd19bf21a5c97940a670374e8eb63d5a3cbe1d527193bcf70e4bc6ffd90.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "0ed74576b0f32fc8bfe1bacc5d6dda64494fbe50b38c36eae1745d30d0ecaae5",
+      "bytes": 53137,
+      "archiveObject": "objects/0e/0ed74576b0f32fc8bfe1bacc5d6dda64494fbe50b38c36eae1745d30d0ecaae5.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "a68c293eb348808c5eefedae0b484f8f8299e3b7bad0cab7cc0b8b0e6671a59b",
+      "bytes": 29721,
+      "archiveObject": "objects/a6/a68c293eb348808c5eefedae0b484f8f8299e3b7bad0cab7cc0b8b0e6671a59b.gz"
+    },
+    {
+      "path": "tests/hearth.test.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "fd79d615a2229575abc2ff7ed83fbe5554192649cfbb942b374af13d3ab3b0c5",
+      "bytes": 8532,
+      "archiveObject": "objects/fd/fd79d615a2229575abc2ff7ed83fbe5554192649cfbb942b374af13d3ab3b0c5.gz"
+    },
+    {
+      "path": "tests/helpers/hearth.ts",
+      "mode": "100644",
+      "stage": "0",
+      "sha256": "8863942ea8db5e3cc8ec804b7ad11d86d651c955831ee53db5b3d97f45354c4e",
+      "bytes": 432,
+      "archiveObject": "objects/88/8863942ea8db5e3cc8ec804b7ad11d86d651c955831ee53db5b3d97f45354c4e.gz"
+    }
+  ]
+}

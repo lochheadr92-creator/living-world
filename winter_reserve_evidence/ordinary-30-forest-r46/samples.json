@@ -1,0 +1,2644 @@
+[
+  {
+    "tick": 240,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 480,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 2,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 720,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 0,
+    "depositBlockedFull": 2
+  },
+  {
+    "tick": 960,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 1200,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 1,
+    "depositBlockedFull": 2
+  },
+  {
+    "tick": 1440,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 2,
+    "depositBlockedFull": 2
+  },
+  {
+    "tick": 1680,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 1920,
+    "samples": 28,
+    "eatStoreOffers": 16,
+    "eatStoreBlockedEmpty": 0,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 2160,
+    "samples": 28,
+    "eatStoreOffers": 10,
+    "eatStoreBlockedEmpty": 1,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 2400,
+    "samples": 28,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 2640,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 2880,
+    "samples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 3120,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 3360,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 2,
+    "depositOffers": 6,
+    "depositBlockedFull": 2
+  },
+  {
+    "tick": 3600,
+    "samples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 1,
+    "depositOffers": 7,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 3840,
+    "samples": 28,
+    "eatStoreOffers": 10,
+    "eatStoreBlockedEmpty": 2,
+    "depositOffers": 9,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 4080,
+    "samples": 28,
+    "eatStoreOffers": 12,
+    "eatStoreBlockedEmpty": 2,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 4320,
+    "samples": 28,
+    "eatStoreOffers": 10,
+    "eatStoreBlockedEmpty": 2,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 4560,
+    "samples": 28,
+    "eatStoreOffers": 12,
+    "eatStoreBlockedEmpty": 2,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 4800,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 3,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 5040,
+    "samples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 5280,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 5520,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 3,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 5760,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 6000,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 3,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 6240,
+    "samples": 28,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 6480,
+    "samples": 28,
+    "eatStoreOffers": 20,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 6720,
+    "samples": 28,
+    "eatStoreOffers": 23,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 6960,
+    "samples": 28,
+    "eatStoreOffers": 14,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 7200,
+    "samples": 28,
+    "eatStoreOffers": 21,
+    "eatStoreBlockedEmpty": 1,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 7440,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 7680,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 7920,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 3,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 8160,
+    "samples": 28,
+    "eatStoreOffers": 14,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 3,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 8400,
+    "samples": 28,
+    "eatStoreOffers": 11,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 8640,
+    "samples": 28,
+    "eatStoreOffers": 11,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 8880,
+    "samples": 28,
+    "eatStoreOffers": 13,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 9120,
+    "samples": 28,
+    "eatStoreOffers": 12,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 9360,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 9600,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 9840,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 10080,
+    "samples": 28,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 10320,
+    "samples": 28,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 10560,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 10800,
+    "samples": 28,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 11040,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 11280,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 11520,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 11760,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 12000,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 12240,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 25,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 12480,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 2,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 12720,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 12960,
+    "samples": 28,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 13200,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 13440,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 13680,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 13920,
+    "samples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 14160,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 14400,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 14640,
+    "samples": 28,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 14880,
+    "samples": 28,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 15120,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 2,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 15360,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 15600,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 5,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 15840,
+    "samples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 14,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 16080,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 14,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 16320,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 13,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 16560,
+    "samples": 28,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 6,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 16800,
+    "samples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 4,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 17040,
+    "samples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 1,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 17280,
+    "samples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 6,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 17520,
+    "samples": 28,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 6,
+    "depositBlockedFull": 1
+  },
+  {
+    "tick": 17760,
+    "samples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 18000,
+    "samples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 18240,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 18480,
+    "samples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 19,
+    "depositOffers": 17,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 18720,
+    "samples": 28,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 19,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 18960,
+    "samples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 19,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 19200,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 10,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 19440,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 5,
+    "depositBlockedFull": 0,
+    "winterHungry": 2,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 19680,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 19920,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 7,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 20160,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 20400,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 4,
+    "depositBlockedFull": 0,
+    "winterHungry": 2,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 20640,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 7,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 20880,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 7,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 21120,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 5,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 21360,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 34,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 21600,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 30,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 21840,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 33,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 22080,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 31,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 22320,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 1,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 22560,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 3
+  },
+  {
+    "tick": 22800,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 1,
+    "depositBlockedFull": 0,
+    "winterHungry": 7,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 23040,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 23280,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 33,
+    "depositOffers": 11,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 23520,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 33,
+    "depositOffers": 10,
+    "depositBlockedFull": 0,
+    "winterHungry": 13,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 23760,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 37,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 24000,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 6,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 6,
+    "winterHungryWithHomeFood": 1
+  },
+  {
+    "tick": 24240,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 4,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 6
+  },
+  {
+    "tick": 24480,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 12,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 8
+  },
+  {
+    "tick": 24720,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 14,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 24960,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 25200,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 7,
+    "depositBlockedFull": 0,
+    "winterHungry": 6,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 25440,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 25680,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 34,
+    "depositOffers": 6,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 25920,
+    "samples": 28,
+    "winterSamples": 28,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 35,
+    "depositOffers": 5,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 4
+  },
+  {
+    "tick": 26160,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 30,
+    "depositOffers": 4,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 3,
+    "winterHungryWithHomeFood": 1
+  },
+  {
+    "tick": 26400,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 26640,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 16,
+    "depositOffers": 10,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 26880,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 13,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 27120,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 12,
+    "depositBlockedFull": 0,
+    "winterHungry": 6,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 27360,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 11,
+    "depositBlockedFull": 0,
+    "winterHungry": 7,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 27600,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 16,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 27840,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 11,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 28080,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 10,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 28320,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 12,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 28560,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryWithHomeFood": 1,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 28800,
+    "samples": 27,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 29040,
+    "samples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 29280,
+    "samples": 27,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 22,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 29520,
+    "samples": 27,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 16,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 29760,
+    "samples": 27,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 22,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 30000,
+    "samples": 27,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 19,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 30240,
+    "samples": 27,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 30480,
+    "samples": 27,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 30720,
+    "samples": 27,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 30960,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 31200,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 31440,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 31680,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 31920,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 32160,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 32400,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 32640,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 16,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 32880,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 33120,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 16,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 33360,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 33600,
+    "samples": 26,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 33840,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 34080,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 34320,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 34560,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 34800,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 15,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 35040,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 17,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 35280,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 18,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 35520,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 35760,
+    "samples": 26,
+    "eatStoreOffers": 10,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 17,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 36000,
+    "samples": 26,
+    "eatStoreOffers": 13,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 36240,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 17,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 36480,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 19,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 36720,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 36960,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 37200,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 37440,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 21,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 37680,
+    "samples": 26,
+    "eatStoreOffers": 11,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 23,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 37920,
+    "samples": 26,
+    "eatStoreOffers": 14,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 21,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 38160,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 16,
+    "depositOffers": 20,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 38400,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 18,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 38640,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 38880,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 39120,
+    "samples": 26,
+    "eatStoreOffers": 8,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 21,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 39360,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 21,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 39600,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 18,
+    "depositOffers": 21,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 39840,
+    "samples": 26,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 20,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 40080,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 40320,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 15,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 40560,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 17,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 40800,
+    "samples": 26,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 41040,
+    "samples": 26,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 22,
+    "depositOffers": 14,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 41280,
+    "samples": 26,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 41520,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 41760,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 42000,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 24,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 42240,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 30,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 42480,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 31,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 42720,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 31,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 42960,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 43200,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 28,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 43440,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 28,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 43680,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 31,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 43920,
+    "samples": 26,
+    "eatStoreOffers": 9,
+    "eatStoreBlockedEmpty": 34,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 44160,
+    "samples": 26,
+    "eatStoreOffers": 14,
+    "eatStoreBlockedEmpty": 30,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 44400,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 29,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 44640,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 29,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 44880,
+    "samples": 26,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 28,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 45120,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 45360,
+    "samples": 26,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 45600,
+    "samples": 26,
+    "eatStoreOffers": 10,
+    "eatStoreBlockedEmpty": 34,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 45840,
+    "samples": 26,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 32,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 46080,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 46320,
+    "samples": 26,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 29,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 46560,
+    "samples": 26,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 27,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 46800,
+    "samples": 26,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 21,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 47040,
+    "samples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 47280,
+    "samples": 27,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 47520,
+    "samples": 27,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 25,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 47760,
+    "samples": 27,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 29,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 48000,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 40,
+    "depositOffers": 12,
+    "depositBlockedFull": 0,
+    "winterHungry": 4,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 48240,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 41,
+    "depositOffers": 10,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 48480,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 37,
+    "depositOffers": 13,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 48720,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 40,
+    "depositOffers": 13,
+    "depositBlockedFull": 0,
+    "winterHungry": 5,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 48960,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 43,
+    "depositOffers": 15,
+    "depositBlockedFull": 0,
+    "winterHungry": 7,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 49200,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 45,
+    "depositOffers": 5,
+    "depositBlockedFull": 0,
+    "winterHungry": 7,
+    "winterHungryNoEatStore": 6
+  },
+  {
+    "tick": 49440,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 47,
+    "depositOffers": 8,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 49680,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 47,
+    "depositOffers": 7,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 49920,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 50,
+    "depositOffers": 4,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 8
+  },
+  {
+    "tick": 50160,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 52,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 9
+  },
+  {
+    "tick": 50400,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 50,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 8
+  },
+  {
+    "tick": 50640,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 53,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 10
+  },
+  {
+    "tick": 50880,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 54,
+    "depositOffers": 1,
+    "depositBlockedFull": 0,
+    "winterHungry": 12,
+    "winterHungryNoEatStore": 12
+  },
+  {
+    "tick": 51120,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 47,
+    "depositOffers": 1,
+    "depositBlockedFull": 0,
+    "winterHungry": 11,
+    "winterHungryNoEatStore": 11
+  },
+  {
+    "tick": 51360,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 52,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 14
+  },
+  {
+    "tick": 51600,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 53,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 13
+  },
+  {
+    "tick": 51840,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 55,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 15,
+    "winterHungryNoEatStore": 13
+  },
+  {
+    "tick": 52080,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 60,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 13
+  },
+  {
+    "tick": 52320,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 62,
+    "depositOffers": 2,
+    "depositBlockedFull": 0,
+    "winterHungry": 18,
+    "winterHungryNoEatStore": 12
+  },
+  {
+    "tick": 52560,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 59,
+    "depositOffers": 1,
+    "depositBlockedFull": 0,
+    "winterHungry": 19,
+    "winterHungryNoEatStore": 12
+  },
+  {
+    "tick": 52800,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 57,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 20,
+    "winterHungryNoEatStore": 15
+  },
+  {
+    "tick": 53040,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 54,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 19,
+    "winterHungryNoEatStore": 18
+  },
+  {
+    "tick": 53280,
+    "samples": 27,
+    "winterSamples": 27,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 57,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 22,
+    "winterHungryNoEatStore": 21
+  },
+  {
+    "tick": 53520,
+    "samples": 26,
+    "winterSamples": 26,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 56,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 21,
+    "winterHungryNoEatStore": 21
+  },
+  {
+    "tick": 53760,
+    "samples": 26,
+    "winterSamples": 26,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 56,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 21,
+    "winterHungryNoEatStore": 20
+  },
+  {
+    "tick": 54000,
+    "samples": 24,
+    "winterSamples": 24,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 52,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 16,
+    "winterHungryNoEatStore": 15
+  },
+  {
+    "tick": 54240,
+    "samples": 21,
+    "winterSamples": 21,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 45,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 15,
+    "winterHungryNoEatStore": 14
+  },
+  {
+    "tick": 54480,
+    "samples": 18,
+    "winterSamples": 18,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 37,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 13,
+    "winterHungryNoEatStore": 12
+  },
+  {
+    "tick": 54720,
+    "samples": 17,
+    "winterSamples": 17,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 37,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 14,
+    "winterHungryNoEatStore": 10
+  },
+  {
+    "tick": 54960,
+    "samples": 15,
+    "winterSamples": 15,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 34,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 13,
+    "winterHungryNoEatStore": 10
+  },
+  {
+    "tick": 55200,
+    "samples": 11,
+    "winterSamples": 11,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 28,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 9,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 55440,
+    "samples": 11,
+    "winterSamples": 11,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 28,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 10,
+    "winterHungryNoEatStore": 9
+  },
+  {
+    "tick": 55680,
+    "samples": 9,
+    "winterSamples": 9,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 6
+  },
+  {
+    "tick": 55920,
+    "samples": 9,
+    "winterSamples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 26,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 8,
+    "winterHungryNoEatStore": 8
+  },
+  {
+    "tick": 56160,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 23,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 7,
+    "winterHungryNoEatStore": 7
+  },
+  {
+    "tick": 56400,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 6,
+    "winterHungryNoEatStore": 5
+  },
+  {
+    "tick": 56640,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 2,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 56880,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 2,
+    "winterHungryNoEatStore": 2
+  },
+  {
+    "tick": 57120,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 3,
+    "winterHungryNoEatStore": 3
+  },
+  {
+    "tick": 57360,
+    "samples": 8,
+    "winterSamples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 17,
+    "depositOffers": 0,
+    "depositBlockedFull": 0,
+    "winterHungry": 1,
+    "winterHungryNoEatStore": 1
+  },
+  {
+    "tick": 57600,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 20,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 57840,
+    "samples": 8,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 16,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 58080,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 58320,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 58560,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 58800,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 59040,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 59280,
+    "samples": 8,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 59520,
+    "samples": 8,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 16,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 59760,
+    "samples": 8,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 16,
+    "depositOffers": 2,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 60000,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 60240,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 60480,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 60720,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 11,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 60960,
+    "samples": 8,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 61200,
+    "samples": 8,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 61440,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 61680,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 61920,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 12,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 62160,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 11,
+    "depositOffers": 13,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 62400,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 62640,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 3,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 62880,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 1,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 63120,
+    "samples": 9,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 9,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 63360,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 63600,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 63840,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 64080,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 64320,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 64560,
+    "samples": 9,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 6,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 64800,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 65040,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 8,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 65280,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 7,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 65520,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 5,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 65760,
+    "samples": 9,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 13,
+    "depositOffers": 8,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 66000,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 66240,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 66480,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 66720,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 66960,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 67200,
+    "samples": 9,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 67440,
+    "samples": 9,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 67680,
+    "samples": 9,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 67920,
+    "samples": 9,
+    "eatStoreOffers": 1,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 10,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 68160,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 2,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 68400,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 68640,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 68880,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 69120,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 6,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 69360,
+    "samples": 9,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 9,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 69600,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 4,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 69840,
+    "samples": 9,
+    "eatStoreOffers": 2,
+    "eatStoreBlockedEmpty": 4,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 70080,
+    "samples": 9,
+    "eatStoreOffers": 7,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 70320,
+    "samples": 9,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 1,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 70560,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 5,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 70800,
+    "samples": 9,
+    "eatStoreOffers": 3,
+    "eatStoreBlockedEmpty": 3,
+    "depositOffers": 3,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 71040,
+    "samples": 9,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 7,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 71280,
+    "samples": 9,
+    "eatStoreOffers": 6,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 71520,
+    "samples": 9,
+    "eatStoreOffers": 5,
+    "eatStoreBlockedEmpty": 10,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 71760,
+    "samples": 9,
+    "eatStoreOffers": 4,
+    "eatStoreBlockedEmpty": 14,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  },
+  {
+    "tick": 72000,
+    "samples": 9,
+    "eatStoreOffers": 0,
+    "eatStoreBlockedEmpty": 12,
+    "depositOffers": 0,
+    "depositBlockedFull": 0
+  }
+]

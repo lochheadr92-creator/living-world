@@ -1,0 +1,22 @@
+{
+  "name": "Hal",
+  "id": 4301,
+  "textLen": 20648,
+  "selectUpdateMs": 9.100000008940697,
+  "fullUpdateMs": 0.9000000059604645,
+  "pure": true,
+  "hashSame": true,
+  "relations": 69,
+  "intentions": [
+    {
+      "kind": "shelter",
+      "goal": "get the household's hut built",
+      "step": "get 3 wood for the hut (it wants 3 wood)",
+      "blocked": "warmth comes first",
+      "since": 107438,
+      "until": 114638
+    }
+  ],
+  "commitments": 1,
+  "age": 37
+}

@@ -1,0 +1,554 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-carcass-check2",
+  "head": "eb0feb123ec723c094455d1b8d9b5eaaefcee09f",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "autonomy_evidence/helper-receipt107-first-invalid/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "c24c9d0e40b60ec9d50e9cbee88f7b01969338dd9e00fd3a8218d383c7d3fa9b",
+      "bytes": 4487372,
+      "archiveObject": "objects/c2/c24c9d0e40b60ec9d50e9cbee88f7b01969338dd9e00fd3a8218d383c7d3fa9b.gz"
+    },
+    {
+      "path": "docs/SURVIVAL_CAPABILITIES.md",
+      "kind": "tracked-change",
+      "sha256": "6133a754e6fae537a33c879c0a367f239e8c809e86ddbc70e9b646fba601bb34",
+      "bytes": 35742,
+      "archiveObject": "objects/61/6133a754e6fae537a33c879c0a367f239e8c809e86ddbc70e9b646fba601bb34.gz"
+    },
+    {
+      "path": "scripts/observers/carcass.ts",
+      "kind": "untracked",
+      "sha256": "c52bd9cffe450bad49ce1f945fd0f2feba23ae1465609eac59b0cda0a8f631dc",
+      "bytes": 1796,
+      "archiveObject": "objects/c5/c52bd9cffe450bad49ce1f945fd0f2feba23ae1465609eac59b0cda0a8f631dc.gz"
+    },
+    {
+      "path": "scripts/ready_step_observe.ts",
+      "kind": "tracked-change",
+      "sha256": "5084681a9ab6b0f96831b854725c2946ab614f48a3c7e5bf5d20c91b4ffb7d38",
+      "bytes": 6785,
+      "archiveObject": "objects/50/5084681a9ab6b0f96831b854725c2946ab614f48a3c7e5bf5d20c91b4ffb7d38.gz"
+    },
+    {
+      "path": "src/app/save.ts",
+      "kind": "tracked-change",
+      "sha256": "4f7e28050b4ec8397768562890977a15ee0db56c9a077a72d634bd2c6fbc0eda",
+      "bytes": 23150,
+      "archiveObject": "objects/4f/4f7e28050b4ec8397768562890977a15ee0db56c9a077a72d634bd2c6fbc0eda.gz"
+    },
+    {
+      "path": "src/render/scenery.ts",
+      "kind": "tracked-change",
+      "sha256": "bc06685d5c31c9a11ae48223ab90975cee0b48009967b6110a14dcb3a9c1b221",
+      "bytes": 19951,
+      "archiveObject": "objects/bc/bc06685d5c31c9a11ae48223ab90975cee0b48009967b6110a14dcb3a9c1b221.gz"
+    },
+    {
+      "path": "src/sim/buildings.ts",
+      "kind": "tracked-change",
+      "sha256": "af11fea412a1fce0c2ee6b7167e2b715791fecb3c43ef5efdad0d7f263329315",
+      "bytes": 15261,
+      "archiveObject": "objects/af/af11fea412a1fce0c2ee6b7167e2b715791fecb3c43ef5efdad0d7f263329315.gz"
+    },
+    {
+      "path": "src/sim/carcass.ts",
+      "kind": "untracked",
+      "sha256": "df6c22f10c8c421c87b53e7b90fb14feadd61b26bd24ee61afebe179159dbd05",
+      "bytes": 8171,
+      "archiveObject": "objects/df/df6c22f10c8c421c87b53e7b90fb14feadd61b26bd24ee61afebe179159dbd05.gz"
+    },
+    {
+      "path": "src/sim/clothing.ts",
+      "kind": "tracked-change",
+      "sha256": "3c375116f892d1adbb413922165595659c335ce54d5d6f126524291b59e2713b",
+      "bytes": 10677,
+      "archiveObject": "objects/3c/3c375116f892d1adbb413922165595659c335ce54d5d6f126524291b59e2713b.gz"
+    },
+    {
+      "path": "src/sim/constants.ts",
+      "kind": "tracked-change",
+      "sha256": "a2937bde8207d252aa490b20efe1b1b0432ee269977c6baf8c01812ac5aaf5cd",
+      "bytes": 19083,
+      "archiveObject": "objects/a2/a2937bde8207d252aa490b20efe1b1b0432ee269977c6baf8c01812ac5aaf5cd.gz"
+    },
+    {
+      "path": "src/sim/dialogue.ts",
+      "kind": "tracked-change",
+      "sha256": "dd68f565f7931acdff2b7e084d9278e86efe6b32e96aa0d95f8eba6b3b59ddf7",
+      "bytes": 10333,
+      "archiveObject": "objects/dd/dd68f565f7931acdff2b7e084d9278e86efe6b32e96aa0d95f8eba6b3b59ddf7.gz"
+    },
+    {
+      "path": "src/sim/economy.ts",
+      "kind": "tracked-change",
+      "sha256": "0909255b3470b6a241bbc3981fbdb09ba95def04b9e753643d15e54de8c5ee4b",
+      "bytes": 12757,
+      "archiveObject": "objects/09/0909255b3470b6a241bbc3981fbdb09ba95def04b9e753643d15e54de8c5ee4b.gz"
+    },
+    {
+      "path": "src/sim/facilities.ts",
+      "kind": "tracked-change",
+      "sha256": "52a2cda73c93383f551f044eebeb3a80e43c1e9a7e71675085419fa39795c2f7",
+      "bytes": 35689,
+      "archiveObject": "objects/52/52a2cda73c93383f551f044eebeb3a80e43c1e9a7e71675085419fa39795c2f7.gz"
+    },
+    {
+      "path": "src/sim/history.ts",
+      "kind": "tracked-change",
+      "sha256": "8315030c42c151e1190746e94b13898c2384cffa85bce7d4b1aed736ae0884de",
+      "bytes": 11572,
+      "archiveObject": "objects/83/8315030c42c151e1190746e94b13898c2384cffa85bce7d4b1aed736ae0884de.gz"
+    },
+    {
+      "path": "src/sim/hunting.ts",
+      "kind": "tracked-change",
+      "sha256": "2dc3bb62335672eed4071c30338308615582e7fb1f0bfd16f4c26b3de1a4885c",
+      "bytes": 7876,
+      "archiveObject": "objects/2d/2dc3bb62335672eed4071c30338308615582e7fb1f0bfd16f4c26b3de1a4885c.gz"
+    },
+    {
+      "path": "src/sim/inspect.ts",
+      "kind": "tracked-change",
+      "sha256": "2bdc3f6718c7cfcb9c71da93afad52cd9f1367d87903f195d008d1f4d00aea28",
+      "bytes": 49508,
+      "archiveObject": "objects/2b/2bdc3f6718c7cfcb9c71da93afad52cd9f1367d87903f195d008d1f4d00aea28.gz"
+    },
+    {
+      "path": "src/sim/inspect_work.ts",
+      "kind": "tracked-change",
+      "sha256": "343fe80b4e38f79ed369140765a298210221bab7204063f665ce6a7717598bd9",
+      "bytes": 29590,
+      "archiveObject": "objects/34/343fe80b4e38f79ed369140765a298210221bab7204063f665ce6a7717598bd9.gz"
+    },
+    {
+      "path": "src/sim/knowledge.ts",
+      "kind": "tracked-change",
+      "sha256": "357f451fbb930d5a354f588d7b68500f3184689a23fd9c262c586218473a6391",
+      "bytes": 9924,
+      "archiveObject": "objects/35/357f451fbb930d5a354f588d7b68500f3184689a23fd9c262c586218473a6391.gz"
+    },
+    {
+      "path": "src/sim/labels.ts",
+      "kind": "tracked-change",
+      "sha256": "ca7f6b4628ecf32a65c48026c5982ecabc201fe09e3f8bcc4ffd11537ca5e0cc",
+      "bytes": 3981,
+      "archiveObject": "objects/ca/ca7f6b4628ecf32a65c48026c5982ecabc201fe09e3f8bcc4ffd11537ca5e0cc.gz"
+    },
+    {
+      "path": "src/sim/meals.ts",
+      "kind": "tracked-change",
+      "sha256": "7be068e71a8521253eacb73647ae7fca38daac3dc0f462d9cba0f0445eaa401f",
+      "bytes": 39339,
+      "archiveObject": "objects/7b/7be068e71a8521253eacb73647ae7fca38daac3dc0f462d9cba0f0445eaa401f.gz"
+    },
+    {
+      "path": "src/sim/mood.ts",
+      "kind": "tracked-change",
+      "sha256": "bb397936c38235e8dd9346c9920251dc33625b3cdc89b0a7b2bcff2f74137a78",
+      "bytes": 6191,
+      "archiveObject": "objects/bb/bb397936c38235e8dd9346c9920251dc33625b3cdc89b0a7b2bcff2f74137a78.gz"
+    },
+    {
+      "path": "src/sim/needs.ts",
+      "kind": "tracked-change",
+      "sha256": "78b1604d1e6ac79708a6a33c7cd7bc4e67ac24c477935dd50dc0357c8a403f76",
+      "bytes": 7615,
+      "archiveObject": "objects/78/78b1604d1e6ac79708a6a33c7cd7bc4e67ac24c477935dd50dc0357c8a403f76.gz"
+    },
+    {
+      "path": "src/sim/options_survival.ts",
+      "kind": "tracked-change",
+      "sha256": "8df79dfb81e8d71c43908c585b6949d4b25aed094d5919dd12250aee4971a5d7",
+      "bytes": 32021,
+      "archiveObject": "objects/8d/8df79dfb81e8d71c43908c585b6949d4b25aed094d5919dd12250aee4971a5d7.gz"
+    },
+    {
+      "path": "src/sim/options_work.ts",
+      "kind": "tracked-change",
+      "sha256": "73ad154c8390a84c9750ec62c478afdd7bb1eb2d068c97d90d90ccd2eba5bf66",
+      "bytes": 102358,
+      "archiveObject": "objects/73/73ad154c8390a84c9750ec62c478afdd7bb1eb2d068c97d90d90ccd2eba5bf66.gz"
+    },
+    {
+      "path": "src/sim/optutil.ts",
+      "kind": "tracked-change",
+      "sha256": "bb2c78b5bcd26c828eb171d7850997f313a36680ac42e8f83abd63ab33f89e17",
+      "bytes": 14740,
+      "archiveObject": "objects/bb/bb2c78b5bcd26c828eb171d7850997f313a36680ac42e8f83abd63ab33f89e17.gz"
+    },
+    {
+      "path": "src/sim/perception.ts",
+      "kind": "tracked-change",
+      "sha256": "788c062f2e2459791f6c53fab004771cefe233b1a5d6bacebda2c1fbc75430ce",
+      "bytes": 9852,
+      "archiveObject": "objects/78/788c062f2e2459791f6c53fab004771cefe233b1a5d6bacebda2c1fbc75430ce.gz"
+    },
+    {
+      "path": "src/sim/preservation.ts",
+      "kind": "tracked-change",
+      "sha256": "8c78bc40eb7933cf77a3dbb829271de5d3543f239fdbeb53f54be18f3073f844",
+      "bytes": 7942,
+      "archiveObject": "objects/8c/8c78bc40eb7933cf77a3dbb829271de5d3543f239fdbeb53f54be18f3073f844.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "kind": "tracked-change",
+      "sha256": "1f58e1cd4ffd7ba820f0f2b98b1a31f6666105845a430d41f5f1569aeacb0538",
+      "bytes": 69067,
+      "archiveObject": "objects/1f/1f58e1cd4ffd7ba820f0f2b98b1a31f6666105845a430d41f5f1569aeacb0538.gz"
+    },
+    {
+      "path": "src/sim/project_compile.ts",
+      "kind": "tracked-change",
+      "sha256": "dc41d9f1453781b5becfffad5ef901766d7a35ed3afbcf0a0de7cf8d9c49905f",
+      "bytes": 5930,
+      "archiveObject": "objects/dc/dc41d9f1453781b5becfffad5ef901766d7a35ed3afbcf0a0de7cf8d9c49905f.gz"
+    },
+    {
+      "path": "src/sim/provision.ts",
+      "kind": "tracked-change",
+      "sha256": "33a58330a04c636e767b062d46c295b590e72e4ec35eed4a7a20704004c7ec0f",
+      "bytes": 20754,
+      "archiveObject": "objects/33/33a58330a04c636e767b062d46c295b590e72e4ec35eed4a7a20704004c7ec0f.gz"
+    },
+    {
+      "path": "src/sim/recipes.ts",
+      "kind": "tracked-change",
+      "sha256": "25675ffd752341893415667a6db1ff4f9710f8dce40d6cd436a8280e6e3db2f7",
+      "bytes": 14097,
+      "archiveObject": "objects/25/25675ffd752341893415667a6db1ff4f9710f8dce40d6cd436a8280e6e3db2f7.gz"
+    },
+    {
+      "path": "src/sim/relocation.ts",
+      "kind": "tracked-change",
+      "sha256": "b785a6858aed9365c0cd22df97c02afb27a1d5486b23c4bc648aaf389d7c2ebb",
+      "bytes": 32394,
+      "archiveObject": "objects/b7/b785a6858aed9365c0cd22df97c02afb27a1d5486b23c4bc648aaf389d7c2ebb.gz"
+    },
+    {
+      "path": "src/sim/resident_care.ts",
+      "kind": "tracked-change",
+      "sha256": "73bd112ba337439baea0d19052bc4d25504d960166848473914a0d4992635cc5",
+      "bytes": 5145,
+      "archiveObject": "objects/73/73bd112ba337439baea0d19052bc4d25504d960166848473914a0d4992635cc5.gz"
+    },
+    {
+      "path": "src/sim/responsibilities.ts",
+      "kind": "tracked-change",
+      "sha256": "bbd167526ff81717e28812dd25f12907f4f238530c5d80213a8566cd8bd00cb9",
+      "bytes": 8493,
+      "archiveObject": "objects/bb/bbd167526ff81717e28812dd25f12907f4f238530c5d80213a8566cd8bd00cb9.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "4c0b423bf87497d872515c20f96774b4dff39d096a2ffc1abfac66ed5e03312e",
+      "bytes": 26089,
+      "archiveObject": "objects/4c/4c0b423bf87497d872515c20f96774b4dff39d096a2ffc1abfac66ed5e03312e.gz"
+    },
+    {
+      "path": "src/sim/social.ts",
+      "kind": "tracked-change",
+      "sha256": "8f3876f260281e54c6ef6386ade66e129915c89ee85a1464874e53f511d48ec6",
+      "bytes": 124731,
+      "archiveObject": "objects/8f/8f3876f260281e54c6ef6386ade66e129915c89ee85a1464874e53f511d48ec6.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "40b6c29a842989b26c412913101be78d56986ffc6436003048156be8c4ff4dd0",
+      "bytes": 55439,
+      "archiveObject": "objects/40/40b6c29a842989b26c412913101be78d56986ffc6436003048156be8c4ff4dd0.gz"
+    },
+    {
+      "path": "src/sim/welfare.ts",
+      "kind": "tracked-change",
+      "sha256": "73ab3d1e0afad72897ab426cd89f4fd18eb97a6faf4e173e4f3b6864c5eaf866",
+      "bytes": 19222,
+      "archiveObject": "objects/73/73ab3d1e0afad72897ab426cd89f4fd18eb97a6faf4e173e4f3b6864c5eaf866.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "7c9f2abef7d8b3882a6e995cd8dee539d833bafc311088c9e0a819e552548da0",
+      "bytes": 30614,
+      "archiveObject": "objects/7c/7c9f2abef7d8b3882a6e995cd8dee539d833bafc311088c9e0a819e552548da0.gz"
+    },
+    {
+      "path": "src/ui/icons.ts",
+      "kind": "tracked-change",
+      "sha256": "de47894a8b266f64fb74488339da21e9b090c789f071360079effdc0b53616cb",
+      "bytes": 20717,
+      "archiveObject": "objects/de/de47894a8b266f64fb74488339da21e9b090c789f071360079effdc0b53616cb.gz"
+    },
+    {
+      "path": "tests/carcass.test.ts",
+      "kind": "untracked",
+      "sha256": "04c1a34d543a3559a67b9b668880597eee4cbfd57f1232e7c4ec0f575f6cd41a",
+      "bytes": 13106,
+      "archiveObject": "objects/04/04c1a34d543a3559a67b9b668880597eee4cbfd57f1232e7c4ec0f575f6cd41a.gz"
+    },
+    {
+      "path": "tests/workshops.test.ts",
+      "kind": "tracked-change",
+      "sha256": "3b59c801e1753251f7db04f8256cba78496d549a0b48db157ca0f20aab032d1d",
+      "bytes": 23861,
+      "archiveObject": "objects/3b/3b59c801e1753251f7db04f8256cba78496d549a0b48db157ca0f20aab032d1d.gz"
+    },
+    {
+      "path": "tests/zz_review_a_flood_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "530f74ac9dd580a2d07cf1a3c1767e76e0d35c8cbed5b3e2f107da7ab0610bd2",
+      "bytes": 3560,
+      "repositoryPath": "tests/zz_review_a_flood_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_a_tools.test.ts",
+      "kind": "untracked",
+      "sha256": "b80e45dafd597a51b40b5307b93a7c2c89d3372c19bf879ee1808086ca6eaf2e",
+      "bytes": 7276,
+      "repositoryPath": "tests/zz_review_a_tools.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "bfca3a504e0d2c5a14f6d14c5b1bc74120bee9749d0f062c76d5a005b60abea9",
+      "bytes": 4391,
+      "repositoryPath": "tests/zz_review_b_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_roundtrip.test.ts",
+      "kind": "untracked",
+      "sha256": "1b84c2a750ec4185b0a1ae28b595071a95dd61072a8b7fe8d7032f36af4f0d1f",
+      "bytes": 9814,
+      "repositoryPath": "tests/zz_review_b_roundtrip.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_undefined_keyorder.test.ts",
+      "kind": "untracked",
+      "sha256": "8544f11fe1c398bc38dd8f61e1f1b51af821327f1b301c1dc5aa114f5d057bc5",
+      "bytes": 2803,
+      "repositoryPath": "tests/zz_review_b_undefined_keyorder.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators.test.ts",
+      "kind": "untracked",
+      "sha256": "65204e8ebe29185304bf6329108db53571918cd60bd0f1a2b1f1930ff104102d",
+      "bytes": 2950,
+      "repositoryPath": "tests/zz_review_b_validators.test.ts"
+    },
+    {
+      "path": "tests/zz_review_b_validators_harsh.test.ts",
+      "kind": "untracked",
+      "sha256": "866dd0b2052aaceea94b2efe9d5665cc1a1d062e3cf1a7afd777b6e6adf0f18b",
+      "bytes": 3069,
+      "repositoryPath": "tests/zz_review_b_validators_harsh.test.ts"
+    },
+    {
+      "path": "tests/zz_review_c_v115gate.test.ts",
+      "kind": "untracked",
+      "sha256": "abdadd432652379df232ff4134db59b36fa4c600f97f4f136e189616d9f2775a",
+      "bytes": 2010,
+      "repositoryPath": "tests/zz_review_c_v115gate.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_claim_home_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "efcdd878fd72bd659921fa0f06e47bf0eb660d4bdc674aa67a2bbccf28b4431a",
+      "bytes": 1917,
+      "repositoryPath": "tests/zz_review_d_claim_home_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_dependents_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "dacb64678ce1a8ae26eb1aab94d1a201b11b313223fe17d42507af08b92c6f67",
+      "bytes": 2117,
+      "repositoryPath": "tests/zz_review_d_dependents_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_perceive_store.test.ts",
+      "kind": "untracked",
+      "sha256": "657786e9070682b4b546421ae9aa8c87157f542baaf2d4a95a795db84ad0a65d",
+      "bytes": 1406,
+      "repositoryPath": "tests/zz_review_d_perceive_store.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_propose_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "103836ce3f3ed3be3a1016476c865556fb79904a7917b4a34c204c771c3a87e5",
+      "bytes": 2112,
+      "repositoryPath": "tests/zz_review_d_propose_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_request_site_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "74ec2edb45e83cc29ca3cffbc977e5bfd872b432d1aadf092ac5f7d9b4868742",
+      "bytes": 1971,
+      "repositoryPath": "tests/zz_review_d_request_site_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_d_welfare_truth.test.ts",
+      "kind": "untracked",
+      "sha256": "5ff7eb3f49f505483dc01a5d0fda38caa0891dede7f5fed8bf390336a3a51ece",
+      "bytes": 3817,
+      "repositoryPath": "tests/zz_review_d_welfare_truth.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_famine_trace.test.ts",
+      "kind": "untracked",
+      "sha256": "227946d1cb08caf459f286a78540ca55dbc699d13dcec84c99352a8d749656ed",
+      "bytes": 13950,
+      "repositoryPath": "tests/zz_review_e_famine_trace.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_fullpack_care.test.ts",
+      "kind": "untracked",
+      "sha256": "5a743b3f410265cae5b51a9ad34e37a775a4dffc5499ca25e3a9d555ba211d43",
+      "bytes": 8174,
+      "repositoryPath": "tests/zz_review_e_fullpack_care.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_granary.test.ts",
+      "kind": "untracked",
+      "sha256": "17ca6f3be6bf094fd37d4ec8cf59f408dbf9eea00f6db17bd0e8f9773e2d3ffa",
+      "bytes": 4085,
+      "repositoryPath": "tests/zz_review_e_granary.test.ts"
+    },
+    {
+      "path": "tests/zz_review_e_night_water.test.ts",
+      "kind": "untracked",
+      "sha256": "8bc6fe0d4a54937d88cfcbe95e3ac719787b37dcb996c09756175c7b72a1c673",
+      "bytes": 6333,
+      "repositoryPath": "tests/zz_review_e_night_water.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_acquire_double_count.test.ts",
+      "kind": "untracked",
+      "sha256": "de00e7cf2be270607e0995e7cad038bf75d37b618b9f4f07b43852191e0fb76e",
+      "bytes": 7360,
+      "repositoryPath": "tests/zz_review_f_acquire_double_count.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_chain_time.test.ts",
+      "kind": "untracked",
+      "sha256": "053ee6cac47834225cf78a211068a63969444ba8a579f7905ed2cccafa75ea39",
+      "bytes": 5199,
+      "repositoryPath": "tests/zz_review_f_chain_time.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_ordinary_probe.test.ts",
+      "kind": "untracked",
+      "sha256": "4ce05ff42eaf0bc6bd628e48c9daa0ac1b39ab72ce5de1c93594b4c2be821a90",
+      "bytes": 8590,
+      "repositoryPath": "tests/zz_review_f_ordinary_probe.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_plank_diversion.test.ts",
+      "kind": "untracked",
+      "sha256": "987e80c64fb886cccc0923ceec4a3a498eae9724c1173f835e3e0f98eec8296a",
+      "bytes": 4207,
+      "repositoryPath": "tests/zz_review_f_plank_diversion.test.ts"
+    },
+    {
+      "path": "tests/zz_review_f_sibling_claim.test.ts",
+      "kind": "untracked",
+      "sha256": "1ea670d439a9590d80780d58986595ce1c34af81da10c6746fb5eae9f4502ca3",
+      "bytes": 4066,
+      "repositoryPath": "tests/zz_review_f_sibling_claim.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_feed_caps.test.ts",
+      "kind": "untracked",
+      "sha256": "e3bd58c0a18e155de886711f604d1095a926245e66445e6f3c2ebacd6b026d0c",
+      "bytes": 2165,
+      "repositoryPath": "tests/zz_review_g_feed_caps.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_ledger_endings.test.ts",
+      "kind": "untracked",
+      "sha256": "0d7cf87733c762c85ad41103d7eba7689d1b9e9789b2f250a2a9bb13ba00c265",
+      "bytes": 6497,
+      "repositoryPath": "tests/zz_review_g_ledger_endings.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_observer_purity.test.ts",
+      "kind": "untracked",
+      "sha256": "a9f37506d44a30b2400efc766e92b8cb6bcd7c9935127270ed2adb3a9903d55a",
+      "bytes": 8302,
+      "repositoryPath": "tests/zz_review_g_observer_purity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_g_stale_blocked.test.ts",
+      "kind": "untracked",
+      "sha256": "0698c3a31df129d2cc905b26e87c6bed3c9c06ea79d6d4807c20c3f95a0c2826",
+      "bytes": 3081,
+      "repositoryPath": "tests/zz_review_g_stale_blocked.test.ts"
+    },
+    {
+      "path": "tests/zz_review_h_retention.test.ts",
+      "kind": "untracked",
+      "sha256": "176ee8af50f357c6f3af3021e70593b4197325f5ca17a4438e86ea87ad457748",
+      "bytes": 4946,
+      "repositoryPath": "tests/zz_review_h_retention.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_large_cost.test.ts",
+      "kind": "untracked",
+      "sha256": "a330db571d8708e93ba59703dff27e33db3c8d1cd7875cd12963a739e23bfc4c",
+      "bytes": 2556,
+      "repositoryPath": "tests/zz_review_main_large_cost.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_liveness.test.ts",
+      "kind": "untracked",
+      "sha256": "d63b35c0518a7d993307a36b0a39422c3b9159666f415ca4a947e91ec966dcba",
+      "bytes": 4391,
+      "repositoryPath": "tests/zz_review_main_liveness.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_mature_large.test.ts",
+      "kind": "untracked",
+      "sha256": "fe4c738270642518a7d51083b17dd43b85e8f02e00179c71e6e61988d4675d4c",
+      "bytes": 4568,
+      "repositoryPath": "tests/zz_review_main_mature_large.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_site_fate.test.ts",
+      "kind": "untracked",
+      "sha256": "c26c6f1efa49699b16332f9031b9fdbdaa355d24fe058a4f39db11d2b976d8f6",
+      "bytes": 2383,
+      "repositoryPath": "tests/zz_review_main_site_fate.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_till_path.test.ts",
+      "kind": "untracked",
+      "sha256": "84d9d4972a90bdf6efdaa693f8321395105d4d71c7b1c582f31d58e69bde0aba",
+      "bytes": 2948,
+      "repositoryPath": "tests/zz_review_main_till_path.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_till_root.test.ts",
+      "kind": "untracked",
+      "sha256": "551536030ca957256560e5c9615263d70c9e963798935599ee38abcaadafeec5",
+      "bytes": 2516,
+      "repositoryPath": "tests/zz_review_main_till_root.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_tool_capacity.test.ts",
+      "kind": "untracked",
+      "sha256": "b786042e04f61323961e6d3c739ac33c219fac52ce347e8355e744119fd5b64b",
+      "bytes": 4509,
+      "repositoryPath": "tests/zz_review_main_tool_capacity.test.ts"
+    },
+    {
+      "path": "tests/zz_review_main_toolreport_saves.test.ts",
+      "kind": "untracked",
+      "sha256": "df7292d5568d545c261cff0a4215ad3641ebd6e576da17919e9a8d26c2453c7e",
+      "bytes": 3458,
+      "repositoryPath": "tests/zz_review_main_toolreport_saves.test.ts"
+    }
+  ],
+  "stagedFiles": []
+}

@@ -1,0 +1,72 @@
+{
+ "path": "C:/dev/Claude Experiment/living-world-integrate/autonomy_evidence/helper-receipt107-first-invalid/final.json",
+ "rulesVersion": 107,
+ "profile": "normal",
+ "tick": 43680,
+ "day": 18.2,
+ "persons": 29,
+ "alive": 29,
+ "deceased": 1,
+ "graves": 1,
+ "loadMs": 123.1223,
+ "packedColumns": false,
+ "references": {
+  "relations": 817,
+  "relationsToGone": 8,
+  "relationsToGoneByDeathKnowledge": {
+   "deathKnown": 8
+  },
+  "whereabouts": 823,
+  "whereaboutsOfGone": 13,
+  "asked": 186,
+  "askedGone": 0,
+  "told": 1816,
+  "toldGone": 1816,
+  "beliefs": 14492,
+  "staleBeliefs": 291,
+  "cooldowns": 1944,
+  "cooldownsExpired": 1829,
+  "failures": 284,
+  "failuresStaleTarget": 42,
+  "heard": 870,
+  "socialMemory": 574
+ },
+ "bytes": {
+  "full": {
+   "raw": 4486332,
+   "gz": 753726
+  },
+  "withoutGoneReferences": {
+   "raw": 4450497,
+   "gz": 742224
+  },
+  "withoutStaleBeliefs": {
+   "raw": 4438073,
+   "gz": 747916
+  }
+ },
+ "columns": {
+  "persons(unpacked)": 3946982,
+  "requests": 88994,
+  "events": 59414,
+  "wear": 34157,
+  "chronicle": 16243,
+  "tools": 3230,
+  "economicObservations": 2460,
+  "stumps": 1976,
+  "ledger": 1844,
+  "graves": 136,
+  "piles": 108,
+  "deceased": 66,
+  "explored": 4,
+  "meals": 2
+ },
+ "stepMs": {
+  "mean": 1.9652608333333415,
+  "p95": 4.379500000000007
+ },
+ "inspectMs": {
+  "mean": 1.898246666666705,
+  "p95": 3.2705000000000837
+ }
+}

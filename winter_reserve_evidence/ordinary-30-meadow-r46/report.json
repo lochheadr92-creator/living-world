@@ -1,0 +1,127 @@
+{
+  "seed": "meadow",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 46,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 64.255,
+  "alive": 28,
+  "deaths": 1,
+  "deathsByDay": {
+    "10": [
+      {
+        "name": "Felix",
+        "cause": "fever"
+      }
+    ]
+  },
+  "plans": {
+    "season": {
+      "adopted": 12,
+      "done": 1,
+      "dropped": 10,
+      "unitsWorked": 47,
+      "targets": [
+        16,
+        20,
+        20,
+        20,
+        16,
+        16,
+        16,
+        20,
+        20,
+        8,
+        20,
+        16
+      ]
+    },
+    "hardship": {
+      "adopted": 100,
+      "done": 26,
+      "dropped": 66,
+      "unitsWorked": 508
+    }
+  },
+  "flows": {
+    "deposit:lean_to:deposit": 421,
+    "ledger:xstored food spoiled": 509,
+    "ledger:-eaten": 2542,
+    "ledger:-eaten at the source": 402,
+    "out:lean_to:eat from store": 149,
+    "deposit:hut:deposit": 559,
+    "out:hut:eat from store": 124,
+    "deposit:storehouse:deposit": 30,
+    "deposit:granary:deposit": 11,
+    "ledger:xgrain bins: stored food spoiled": 4,
+    "out:granary:eat from store": 4
+  },
+  "totals": {
+    "samples": 8212,
+    "winterSamples": 2182,
+    "winterHungry": 298,
+    "winterHungryWithHomeFood": 39,
+    "winterHungryNoEatStore": 129,
+    "eatStoreOffers": 4136,
+    "eatStoreBlockedEmpty": 6194,
+    "depositOffers": 5694,
+    "depositBlockedFull": 110
+  },
+  "buildings": [
+    {
+      "type": "lean_to",
+      "hh": 1038,
+      "cond": 55,
+      "food": 3
+    },
+    {
+      "type": "lean_to",
+      "hh": 1035,
+      "cond": 56,
+      "food": 1
+    },
+    {
+      "type": "hut",
+      "hh": 1020,
+      "cond": 51,
+      "food": 4
+    },
+    {
+      "type": "hut",
+      "hh": 998,
+      "cond": 58,
+      "food": 4
+    },
+    {
+      "type": "storehouse",
+      "hh": 0,
+      "cond": 91,
+      "food": 0
+    },
+    {
+      "type": "granary",
+      "hh": 0,
+      "cond": 53,
+      "food": 0
+    },
+    {
+      "type": "hut",
+      "hh": 1035,
+      "cond": 34,
+      "food": 2
+    },
+    {
+      "type": "hut",
+      "hh": 1030,
+      "cond": 87,
+      "food": 5
+    }
+  ],
+  "hash": "3e03c3aa",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

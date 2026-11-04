@@ -1,0 +1,4859 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "river",
+    "settings": {
+      "seed": "river",
+      "population": 28,
+      "harsh": false,
+      "immigration": true,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 44
+    },
+    "personId": 1106,
+    "personName": "Mira",
+    "startTick": 72000,
+    "startHash": "e45c5074",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "manual",
+      "kind": "manual",
+      "config": {
+        "by": "hand"
+      }
+    },
+    "budget": {
+      "maxCallsPerDay": 1048576,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 2147483647,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {
+      "showScores": false
+    },
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 72073,
+      "attempt": 0,
+      "observationHash": "753c8048",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 72073,
+          "day": 31,
+          "clock": "07:55",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Cloudy",
+          "tempC": 11
+        },
+        "self": {
+          "name": "Mira",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 34,
+          "character": "diligent, reserved, cautious",
+          "skills": {
+            "forage": 1.44,
+            "fish": 0.39,
+            "wood": 0.46,
+            "stone": 0.44,
+            "build": 0.67,
+            "farm": 0.97,
+            "craft": 0.43,
+            "carpentry": 0.51,
+            "kiln": 0.51,
+            "smith": 0.73,
+            "bake": 0.42
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 88,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 59,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 78,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 83,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 57,
+              "state": "ok"
+            }
+          },
+          "aspiration": "hopes for a store that would see them through a lean season (0% there); earlier achieved: a solid home of their own",
+          "carrying": {
+            "seeds": 12,
+            "basket": 1,
+            "berries": 2,
+            "wood": 2,
+            "grain": 3
+          },
+          "load": {
+            "used": 13,
+            "cap": 18
+          },
+          "spokenFor": {},
+          "available": {
+            "seeds": 12,
+            "basket": 1,
+            "berries": 2,
+            "wood": 2,
+            "grain": 3
+          },
+          "tools": [
+            {
+              "kind": "basket",
+              "label": "basket",
+              "wear": 12,
+              "loan": null
+            }
+          ],
+          "pullingCart": false,
+          "position": {
+            "x": 43.6,
+            "y": 42.4
+          },
+          "mood": -11,
+          "thoughts": [
+            "-7 Viktor has died (witnessed)",
+            "-2 the lean season",
+            "-2 still hopes for a store that would see them through a lean season",
+            "0 Emre has died (saw their grave)"
+          ],
+          "trade": {
+            "kind": "smith",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Briar",
+          "members": [
+            {
+              "name": "Theo",
+              "kin": "child"
+            },
+            {
+              "name": "Sven",
+              "kin": "child"
+            }
+          ],
+          "home": "hut 10 tiles north-west (33% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": [
+            "Viktor",
+            "Theo",
+            "Sven"
+          ]
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Gathering wild grain",
+            "outcome": "failed",
+            "detail": "nothing left",
+            "when": "1 world min ago",
+            "t": 72072
+          },
+          "lastInteraction": {
+            "purpose": "chat",
+            "outcome": "friendly",
+            "detail": "",
+            "when": "18 world min ago",
+            "t": 72043
+          },
+          "lastChoice": {
+            "label": "Gathering wild grain",
+            "when": "1 world h 34 min ago",
+            "trigger": "review"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 1144,
+              "name": "Alma",
+              "x": 44.5,
+              "y": 42.5,
+              "distance": 1,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "seeds",
+                "wood",
+                "stone",
+                "axe",
+                "basket"
+              ],
+              "talking": false,
+              "relation": "Friendly"
+            },
+            {
+              "id": 1145,
+              "name": "Jax",
+              "x": 43.6,
+              "y": 41.4,
+              "distance": 1,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "harvesting",
+              "carrying": [
+                "berries",
+                "fruit",
+                "grain",
+                "seeds",
+                "wood",
+                "axe",
+                "hoe",
+                "basket",
+                "spear"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            },
+            {
+              "id": 9521,
+              "name": "Sven",
+              "x": 44.4,
+              "y": 39.4,
+              "distance": 3,
+              "direction": "north-east",
+              "looks": [
+                "a child"
+              ],
+              "doing": "gathering",
+              "carrying": [
+                "berries",
+                "grain"
+              ],
+              "talking": false,
+              "relation": "Child"
+            },
+            {
+              "id": 3222,
+              "name": "Mona",
+              "x": 43.8,
+              "y": 45.2,
+              "distance": 3,
+              "direction": "south-west",
+              "looks": [],
+              "doing": "gathering",
+              "carrying": [
+                "seeds",
+                "wood",
+                "axe",
+                "hoe",
+                "basket",
+                "saw"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            },
+            {
+              "id": 1149,
+              "name": "Lena",
+              "x": 46.6,
+              "y": 40.4,
+              "distance": 4,
+              "direction": "east",
+              "looks": [],
+              "doing": "giving",
+              "carrying": [
+                "berries",
+                "grain",
+                "seeds",
+                "wood",
+                "axe",
+                "hoe",
+                "basket",
+                "hammer"
+              ],
+              "talking": false,
+              "relation": "Friendly"
+            },
+            {
+              "id": 1132,
+              "name": "Petra",
+              "x": 48,
+              "y": 43.5,
+              "distance": 5,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "gathering",
+              "carrying": [
+                "seeds",
+                "wood",
+                "stone",
+                "axe",
+                "pick",
+                "hoe",
+                "basket",
+                "saw",
+                "spear"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            },
+            {
+              "id": 1137,
+              "name": "Ivy",
+              "x": 48.3,
+              "y": 43.8,
+              "distance": 5,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "crafting",
+              "carrying": [
+                "fish",
+                "seeds",
+                "wood",
+                "stone",
+                "basket"
+              ],
+              "talking": false,
+              "relation": "Friendly"
+            },
+            {
+              "id": 1128,
+              "name": "Tomas",
+              "x": 49,
+              "y": 44.6,
+              "distance": 6,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "drinking",
+              "carrying": [
+                "berries",
+                "fish",
+                "wood",
+                "pick",
+                "basket",
+                "saw",
+                "spear"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            },
+            {
+              "id": 1150,
+              "name": "Arlo",
+              "x": 49.5,
+              "y": 40.5,
+              "distance": 6,
+              "direction": "south-east",
+              "looks": [
+                "hungry",
+                "hurt"
+              ],
+              "doing": "gathering",
+              "carrying": [
+                "seeds",
+                "wood",
+                "stone",
+                "saw"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 13012,
+              "what": "field plot",
+              "x": 43.5,
+              "y": 42.5,
+              "distance": 0,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "state": "ripe",
+              "progress": 1,
+              "amount": 2
+            },
+            {
+              "id": 939,
+              "what": "berry bush",
+              "x": 43.5,
+              "y": 41.5,
+              "distance": 1,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 991,
+              "what": "wild grain",
+              "x": 44.5,
+              "y": 41.5,
+              "distance": 1,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 7833,
+              "what": "lean-to",
+              "x": 42.5,
+              "y": 41.5,
+              "distance": 1,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Marsh",
+              "condition": 19
+            },
+            {
+              "id": 11393,
+              "what": "field plot",
+              "x": 44.5,
+              "y": 42.5,
+              "distance": 1,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "state": "growing",
+              "progress": 0.11
+            },
+            {
+              "id": 13634,
+              "what": "field plot",
+              "x": 44.5,
+              "y": 43.5,
+              "distance": 1,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "state": "ripe",
+              "progress": 1,
+              "amount": 3
+            },
+            {
+              "id": 938,
+              "what": "berry bush",
+              "x": 45.5,
+              "y": 43.5,
+              "distance": 2,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 940,
+              "what": "berry bush",
+              "x": 42.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1105,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 43.5,
+              "distance": 2,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Briar",
+              "condition": 37
+            },
+            {
+              "id": 9953,
+              "what": "hut",
+              "x": 46,
+              "y": 42,
+              "distance": 2,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "items": {
+                "fish": 2
+              },
+              "condition": 60
+            },
+            {
+              "id": 1539,
+              "what": "field plot",
+              "x": 42.5,
+              "y": 43.5,
+              "distance": 2,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "state": "growing",
+              "progress": 0.72
+            },
+            {
+              "id": 6129,
+              "what": "field plot",
+              "x": 41.5,
+              "y": 41.5,
+              "distance": 2,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Marsh",
+              "state": "growing",
+              "progress": 0.33
+            },
+            {
+              "id": 1280,
+              "what": "field plot",
+              "x": 42.5,
+              "y": 44.5,
+              "distance": 2,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "state": "growing",
+              "progress": 0.72
+            },
+            {
+              "id": 29334,
+              "what": "pile of goods",
+              "x": 45.5,
+              "y": 41.5,
+              "distance": 2,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6,
+                "planks": 8
+              }
+            },
+            {
+              "id": 4127,
+              "what": "field plot",
+              "x": 41.5,
+              "y": 40.5,
+              "distance": 3,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Marsh",
+              "state": "growing",
+              "progress": 0.76
+            },
+            {
+              "id": 2174,
+              "what": "field plot",
+              "x": 40.5,
+              "y": 42.5,
+              "distance": 3,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "state": "growing",
+              "progress": 0.94
+            },
+            {
+              "id": 990,
+              "what": "wild grain",
+              "x": 46.5,
+              "y": 39.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 992,
+              "what": "wild grain",
+              "x": 45.5,
+              "y": 38.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 1160,
+              "what": "clay pit",
+              "x": 47.5,
+              "y": 42.5,
+              "distance": 4,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 34
+            },
+            {
+              "id": 2522,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 39.5,
+              "distance": 4,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "condition": 49
+            },
+            {
+              "id": 30200,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 45.5,
+              "distance": 4,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Ash",
+              "condition": 76
+            },
+            {
+              "id": 3264,
+              "what": "hut",
+              "x": 44,
+              "y": 38,
+              "distance": 4,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "items": {
+                "grain": 1
+              },
+              "condition": 78
+            },
+            {
+              "id": 989,
+              "what": "wild grain",
+              "x": 47.5,
+              "y": 39.5,
+              "distance": 5,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1091,
+              "what": "fishing spot",
+              "x": 44.5,
+              "y": 47.5,
+              "distance": 5,
+              "direction": "south-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 13845,
+              "what": "hut",
+              "x": 39,
+              "y": 43,
+              "distance": 5,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Juniper",
+              "condition": 77
+            },
+            {
+              "id": 4974,
+              "what": "hut",
+              "x": 49,
+              "y": 42,
+              "distance": 5,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "condition": 50
+            },
+            {
+              "id": 993,
+              "what": "wild grain",
+              "x": 48.5,
+              "y": 39.5,
+              "distance": 6,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1130,
+              "what": "lean-to",
+              "x": 39.5,
+              "y": 38.5,
+              "distance": 6,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Bramble",
+              "condition": 70
+            },
+            {
+              "id": 1111,
+              "what": "lean-to",
+              "x": 39.5,
+              "y": 46.5,
+              "distance": 6,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "condition": 27
+            },
+            {
+              "id": 3894,
+              "what": "hut",
+              "x": 48,
+              "y": 38,
+              "distance": 6,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Bramble",
+              "condition": 51
+            },
+            {
+              "id": 1102,
+              "what": "campfire",
+              "x": 36.5,
+              "y": 42.5,
+              "distance": 7,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 100,
+              "fuel": 857
+            },
+            {
+              "id": 1067,
+              "what": "rock outcrop",
+              "x": 51.5,
+              "y": 39.5,
+              "distance": 8,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 2195,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 36.5,
+              "distance": 8,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "condition": 85
+            },
+            {
+              "id": 1064,
+              "what": "rock outcrop",
+              "x": 50.5,
+              "y": 37.5,
+              "distance": 9,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1063,
+              "what": "rock outcrop",
+              "x": 49.5,
+              "y": 35.5,
+              "distance": 9,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 4421,
+              "what": "lean-to",
+              "x": 36.5,
+              "y": 47.5,
+              "distance": 9,
+              "direction": "west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Heron",
+              "items": {
+                "grain": 2
+              },
+              "condition": 57
+            },
+            {
+              "id": 1127,
+              "what": "lean-to",
+              "x": 35.5,
+              "y": 37.5,
+              "distance": 9,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Juniper",
+              "condition": 46
+            },
+            {
+              "id": 948,
+              "what": "berry bush",
+              "x": 53.5,
+              "y": 40.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "4 world days 9 h 13 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 6
+            },
+            {
+              "id": 16492,
+              "what": "hut",
+              "x": 34,
+              "y": 41,
+              "distance": 10,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "condition": 30
+            },
+            {
+              "id": 17319,
+              "what": "hut",
+              "x": 34,
+              "y": 44,
+              "distance": 10,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Briar",
+              "condition": 33
+            },
+            {
+              "id": 11816,
+              "what": "quarry",
+              "x": 49,
+              "y": 34,
+              "distance": 10,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 1
+              },
+              "condition": 45
+            },
+            {
+              "id": 31736,
+              "what": "kiln",
+              "x": 40,
+              "y": 33,
+              "distance": 10,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 98
+            },
+            {
+              "id": 1062,
+              "what": "rock outcrop",
+              "x": 50.5,
+              "y": 34.5,
+              "distance": 11,
+              "direction": "east",
+              "seen": "4 world days 12 h 38 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 7
+            },
+            {
+              "id": 26860,
+              "what": "pile of goods",
+              "x": 36.5,
+              "y": 51.5,
+              "distance": 11,
+              "direction": "west",
+              "seen": "9 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 1,
+                "seeds": 1
+              }
+            },
+            {
+              "id": 946,
+              "what": "berry bush",
+              "x": 55.5,
+              "y": 43.5,
+              "distance": 12,
+              "direction": "south-east",
+              "seen": "4 world days 9 h 20 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 19046,
+              "what": "hut",
+              "x": 46,
+              "y": 31,
+              "distance": 12,
+              "direction": "north-east",
+              "seen": "8 world days 23 h 47 min ago",
+              "source": "seen",
+              "stale": true,
+              "owner": "nobody",
+              "condition": 81
+            },
+            {
+              "id": 28195,
+              "what": "lean-to",
+              "x": 32.5,
+              "y": 46.5,
+              "distance": 12,
+              "direction": "north-west",
+              "seen": "14 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Birch",
+              "condition": 59
+            },
+            {
+              "id": 18554,
+              "what": "communal hall",
+              "x": 32.5,
+              "y": 37.5,
+              "distance": 12,
+              "direction": "north",
+              "seen": "18 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 56
+            },
+            {
+              "id": 1118,
+              "what": "lean-to",
+              "x": 31.5,
+              "y": 44.5,
+              "distance": 12,
+              "direction": "north-west",
+              "seen": "18 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "condition": 72
+            },
+            {
+              "id": 15008,
+              "what": "hut site",
+              "x": 46,
+              "y": 31,
+              "distance": 12,
+              "direction": "north-east",
+              "seen": "13 world days 20 h 10 min ago",
+              "source": "seen",
+              "stale": true,
+              "owner": "nobody",
+              "missing": {
+                "stone": 2
+              },
+              "progress": 0.31
+            },
+            {
+              "id": 26861,
+              "what": "grave",
+              "x": 35.5,
+              "y": 51.5,
+              "distance": 12,
+              "direction": "west",
+              "seen": "13 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 947,
+              "what": "berry bush",
+              "x": 56.5,
+              "y": 40.5,
+              "distance": 13,
+              "direction": "south-east",
+              "seen": "4 world days 9 h 27 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1163,
+              "what": "stone outcrop",
+              "x": 51.5,
+              "y": 32.5,
+              "distance": 13,
+              "direction": "east",
+              "seen": "6 world days 18 h 29 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 11
+            },
+            {
+              "id": 11823,
+              "what": "storehouse",
+              "x": 33,
+              "y": 50,
+              "distance": 13,
+              "direction": "west",
+              "seen": "14 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 75
+            },
+            {
+              "id": 25518,
+              "what": "grave",
+              "x": 36.5,
+              "y": 53.5,
+              "distance": 13,
+              "direction": "west",
+              "seen": "1 world h 14 min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 936,
+              "what": "berry bush",
+              "x": 30.5,
+              "y": 48.5,
+              "distance": 14,
+              "direction": "west",
+              "seen": "1 world h 12 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 2
+            },
+            {
+              "id": 438,
+              "what": "tree",
+              "x": 38.5,
+              "y": 29.5,
+              "distance": 14,
+              "direction": "north-east",
+              "seen": "15 world days 14 h 58 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 2
+            },
+            {
+              "id": 418,
+              "what": "tree",
+              "x": 40.5,
+              "y": 28.5,
+              "distance": 14,
+              "direction": "north-east",
+              "seen": "15 world days 15 h ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 4
+            },
+            {
+              "id": 1161,
+              "what": "clay pit",
+              "x": 37.5,
+              "y": 54.5,
+              "distance": 14,
+              "direction": "west",
+              "seen": "28 world min ago",
+              "source": "told by Mona",
+              "stale": false,
+              "amount": 57
+            },
+            {
+              "id": 1162,
+              "what": "clay pit",
+              "x": 56.5,
+              "y": 47.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "2 world days 14 h 11 min ago",
+              "source": "told by Cole",
+              "stale": true,
+              "amount": 48
+            },
+            {
+              "id": 15399,
+              "what": "kiln site",
+              "x": 33,
+              "y": 33,
+              "distance": 14,
+              "direction": "north",
+              "seen": "7 world days 17 h 15 min ago",
+              "source": "seen",
+              "stale": true,
+              "owner": "Brook",
+              "progress": 0.98
+            },
+            {
+              "id": 26055,
+              "what": "pile of goods",
+              "x": 56.5,
+              "y": 47.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "5 world days 23 h 8 min ago",
+              "source": "seen",
+              "stale": true,
+              "items": {
+                "wood": 2
+              }
+            },
+            {
+              "id": 25546,
+              "what": "pile of goods",
+              "x": 57.5,
+              "y": 42.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "4 world days 9 h 31 min ago",
+              "source": "seen",
+              "stale": true,
+              "items": {
+                "seeds": 6,
+                "wood": 2
+              }
+            },
+            {
+              "id": 25547,
+              "what": "grave",
+              "x": 57.5,
+              "y": 42.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "4 world days 9 h 31 min ago",
+              "source": "seen",
+              "stale": true
+            },
+            {
+              "id": 26056,
+              "what": "grave",
+              "x": 57.5,
+              "y": 46.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "5 world days 23 h 15 min ago",
+              "source": "seen",
+              "stale": true
+            },
+            {
+              "id": 934,
+              "what": "berry bush",
+              "x": 30.5,
+              "y": 49.5,
+              "distance": 15,
+              "direction": "west",
+              "seen": "1 world h 14 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 392,
+              "what": "tree",
+              "x": 45.5,
+              "y": 27.5,
+              "distance": 15,
+              "direction": "north-east",
+              "seen": "15 world days 15 h 5 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 5
+            },
+            {
+              "id": 419,
+              "what": "tree",
+              "x": 49.5,
+              "y": 28.5,
+              "distance": 15,
+              "direction": "east",
+              "seen": "15 world days 15 h 34 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 4
+            },
+            {
+              "id": 24525,
+              "what": "tree",
+              "x": 56.5,
+              "y": 34.5,
+              "distance": 15,
+              "direction": "east",
+              "seen": "6 world days 4 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 3
+            },
+            {
+              "id": 442,
+              "what": "tree",
+              "x": 51.5,
+              "y": 29.5,
+              "distance": 15,
+              "direction": "east",
+              "seen": "15 world days 16 h 53 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 4
+            },
+            {
+              "id": 1059,
+              "what": "rock outcrop",
+              "x": 53.5,
+              "y": 31.5,
+              "distance": 15,
+              "direction": "east",
+              "seen": "8 world days 23 h 58 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 6,
+              "estimate": 10
+            },
+            {
+              "id": 18704,
+              "what": "house site",
+              "x": 34,
+              "y": 54,
+              "distance": 15,
+              "direction": "west",
+              "seen": "1 world h 17 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Heron",
+              "missing": {
+                "bricks": 6
+              },
+              "progress": 0.06
+            },
+            {
+              "id": 28762,
+              "what": "pile of goods",
+              "x": 29.5,
+              "y": 46.5,
+              "distance": 15,
+              "direction": "north-west",
+              "seen": "1 world h 14 min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "seeds": 1,
+                "wood": 1
+              }
+            },
+            {
+              "id": 1094,
+              "what": "fishing spot",
+              "x": 55.5,
+              "y": 53.5,
+              "distance": 16,
+              "direction": "south",
+              "seen": "5 world days 22 h 41 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 10
+            },
+            {
+              "id": 1061,
+              "what": "rock outcrop",
+              "x": 56.5,
+              "y": 33.5,
+              "distance": 16,
+              "direction": "east",
+              "seen": "6 world days 7 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 7,
+              "estimate": 10
+            },
+            {
+              "id": 27828,
+              "what": "pile of goods",
+              "x": 29.5,
+              "y": 49.5,
+              "distance": 16,
+              "direction": "west",
+              "seen": "1 world h 17 min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 1,
+                "seeds": 1
+              }
+            },
+            {
+              "id": 972,
+              "what": "fruit tree",
+              "x": 35.5,
+              "y": 60.5,
+              "distance": 20,
+              "direction": "west",
+              "seen": "4 world h 13 min ago",
+              "source": "told by Mona",
+              "stale": false,
+              "amount": 1,
+              "estimate": 2
+            },
+            {
+              "id": 1164,
+              "what": "stone outcrop",
+              "x": 33.5,
+              "y": 25.5,
+              "distance": 20,
+              "direction": "north",
+              "seen": "15 world days 15 h 36 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 59
+            },
+            {
+              "id": 973,
+              "what": "fruit tree",
+              "x": 34.5,
+              "y": 61.5,
+              "distance": 21,
+              "direction": "west",
+              "seen": "18 world h 5 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1096,
+              "what": "fishing spot",
+              "x": 57.5,
+              "y": 57.5,
+              "distance": 21,
+              "direction": "south",
+              "seen": "5 world days 21 h ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 10
+            },
+            {
+              "id": 1092,
+              "what": "fishing spot",
+              "x": 40.5,
+              "y": 63.5,
+              "distance": 21,
+              "direction": "south-west",
+              "seen": "18 world h 31 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 971,
+              "what": "fruit tree",
+              "x": 33.5,
+              "y": 62.5,
+              "distance": 22,
+              "direction": "west",
+              "seen": "18 world h 27 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1098,
+              "what": "fishing spot",
+              "x": 44.5,
+              "y": 65.5,
+              "distance": 23,
+              "direction": "south-west",
+              "seen": "18 world h 59 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 985,
+              "what": "fruit tree",
+              "x": 69.5,
+              "y": 39.5,
+              "distance": 26,
+              "direction": "south-east",
+              "seen": "4 world days 10 h 55 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 8
+            },
+            {
+              "id": 996,
+              "what": "wild grain",
+              "x": 43.5,
+              "y": 68.5,
+              "distance": 26,
+              "direction": "south-west",
+              "seen": "19 world h 5 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 5
+            },
+            {
+              "id": 1101,
+              "what": "fishing spot",
+              "x": 52.5,
+              "y": 66.5,
+              "distance": 26,
+              "direction": "south-west",
+              "seen": "4 world days 17 h 2 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 10
+            },
+            {
+              "id": 994,
+              "what": "wild grain",
+              "x": 43.5,
+              "y": 69.5,
+              "distance": 27,
+              "direction": "south-west",
+              "seen": "19 world h 8 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 5
+            },
+            {
+              "id": 995,
+              "what": "wild grain",
+              "x": 42.5,
+              "y": 69.5,
+              "distance": 27,
+              "direction": "south-west",
+              "seen": "19 world h 7 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 5
+            },
+            {
+              "id": 974,
+              "what": "fruit tree",
+              "x": 32.5,
+              "y": 15.5,
+              "distance": 29,
+              "direction": "north-east",
+              "seen": "25 world days 14 h 22 min ago",
+              "source": "told by Ivy (3 mouths)",
+              "stale": true,
+              "amount": 8
+            },
+            {
+              "id": 1165,
+              "what": "ore vein",
+              "x": 29.5,
+              "y": 67.5,
+              "distance": 29,
+              "direction": "west",
+              "seen": "15 world h 5 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 17
+            },
+            {
+              "id": 984,
+              "what": "fruit tree",
+              "x": 72.5,
+              "y": 35.5,
+              "distance": 30,
+              "direction": "south-east",
+              "seen": "6 world days 15 h 25 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 4,
+              "estimate": 8
+            },
+            {
+              "id": 987,
+              "what": "fruit tree",
+              "x": 60.5,
+              "y": 67.5,
+              "distance": 30,
+              "direction": "south",
+              "seen": "4 world days 17 h 38 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 8
+            },
+            {
+              "id": 983,
+              "what": "fruit tree",
+              "x": 73.5,
+              "y": 36.5,
+              "distance": 31,
+              "direction": "south-east",
+              "seen": "6 world days 15 h 27 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 2,
+              "estimate": 8
+            },
+            {
+              "id": 1166,
+              "what": "ore vein",
+              "x": 17.5,
+              "y": 60.5,
+              "distance": 32,
+              "direction": "west",
+              "seen": "12 world h 49 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 18
+            }
+          ],
+          "water": [
+            {
+              "id": 1000231,
+              "what": "water (shore)",
+              "x": 45.5,
+              "y": 45.5,
+              "distance": 4,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000230,
+              "what": "water (shore)",
+              "x": 42.5,
+              "y": 46.5,
+              "distance": 4,
+              "direction": "south-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000251,
+              "what": "water (shore)",
+              "x": 44.5,
+              "y": 48.5,
+              "distance": 6,
+              "direction": "south-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000232,
+              "what": "water (shore)",
+              "x": 49.5,
+              "y": 45.5,
+              "distance": 7,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false
+            }
+          ],
+          "dangers": [],
+          "counts": {
+            "tree": 477,
+            "berry bush": 30,
+            "fruit tree": 16,
+            "wild grain": 13,
+            "rock outcrop": 35,
+            "fishing spot": 10,
+            "building": 30,
+            "clay pit": 3,
+            "stone outcrop": 2,
+            "ore vein": 2,
+            "field plot": 36,
+            "building site": 3,
+            "grave": 15,
+            "pile of goods": 15,
+            "water (shore)": 43
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 1107,
+              "name": "Emre",
+              "label": "Partner",
+              "affinity": 100,
+              "trust": 100,
+              "familiarity": 60,
+              "kin": "partner",
+              "lastMet": "7 world days 5 h 46 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Emre help Viktor",
+              "grievance": null
+            },
+            {
+              "id": 1109,
+              "name": "Theo",
+              "label": "Child",
+              "affinity": 100,
+              "trust": 91,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "1 world day 20 h 21 min ago",
+              "avoiding": false,
+              "owesMe": 4,
+              "lastNote": "worked alongside Theo",
+              "grievance": null
+            },
+            {
+              "id": 9521,
+              "name": "Sven",
+              "label": "Child",
+              "affinity": 100,
+              "trust": 92,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "2 world h 49 min ago",
+              "avoiding": false,
+              "owesMe": 4,
+              "lastNote": "worked alongside Sven",
+              "grievance": null
+            },
+            {
+              "id": 1108,
+              "name": "Viktor",
+              "label": "Child",
+              "affinity": 99,
+              "trust": 84,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "4 world days 21 h 25 min ago",
+              "avoiding": false,
+              "owesMe": 3,
+              "lastNote": "I gave Viktor 2 berries",
+              "grievance": null
+            },
+            {
+              "id": 1144,
+              "name": "Alma",
+              "label": "Friendly",
+              "affinity": 25,
+              "trust": 23,
+              "familiarity": 26,
+              "kin": "",
+              "lastMet": "1 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "Alma gave me 1 berries",
+              "grievance": null
+            },
+            {
+              "id": 1137,
+              "name": "Ivy",
+              "label": "Friendly",
+              "affinity": 24,
+              "trust": 24,
+              "familiarity": 28,
+              "kin": "",
+              "lastMet": "2 world days 16 h 18 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Ivy",
+              "grievance": null
+            },
+            {
+              "id": 1113,
+              "name": "Zia",
+              "label": "Friendly",
+              "affinity": 14,
+              "trust": 18,
+              "familiarity": 20,
+              "kin": "",
+              "lastMet": "3 world h 9 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Zia help Fenn",
+              "grievance": null
+            },
+            {
+              "id": 1134,
+              "name": "Yan",
+              "label": "Friendly",
+              "affinity": 12,
+              "trust": 16,
+              "familiarity": 22,
+              "kin": "",
+              "lastMet": "7 world days 8 h 25 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Yan",
+              "grievance": null
+            },
+            {
+              "id": 1149,
+              "name": "Lena",
+              "label": "Friendly",
+              "affinity": 12,
+              "trust": 15,
+              "familiarity": 15,
+              "kin": "",
+              "lastMet": "9 world days 15 h 43 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "met at the feast",
+              "grievance": null
+            },
+            {
+              "id": 1142,
+              "name": "Talia",
+              "label": "Acquaintance",
+              "affinity": 10,
+              "trust": 17,
+              "familiarity": 16,
+              "kin": "",
+              "lastMet": "6 world days 21 h 51 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Talia help Emre",
+              "grievance": null
+            },
+            {
+              "id": 1119,
+              "name": "Cora",
+              "label": "Friendly",
+              "affinity": 10,
+              "trust": 14,
+              "familiarity": 15,
+              "kin": "",
+              "lastMet": "19 world h 19 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Cora help Tomas",
+              "grievance": null
+            },
+            {
+              "id": 3222,
+              "name": "Mona",
+              "label": "Acquaintance",
+              "affinity": 10,
+              "trust": 13,
+              "familiarity": 9,
+              "kin": "",
+              "lastMet": "18 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Mona",
+              "grievance": null
+            },
+            {
+              "id": 1122,
+              "name": "Eli",
+              "label": "Acquaintance",
+              "affinity": 9,
+              "trust": 14,
+              "familiarity": 11,
+              "kin": "",
+              "lastMet": "1 world day 16 h 45 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Eli",
+              "grievance": null
+            },
+            {
+              "id": 1147,
+              "name": "Faye",
+              "label": "Acquaintance",
+              "affinity": 8,
+              "trust": 15,
+              "familiarity": 20,
+              "kin": "",
+              "lastMet": "11 world days 22 h 26 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Faye",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 1122,
+              "name": "Eli",
+              "x": 37.8,
+              "y": 52.6,
+              "when": "16 world min ago"
+            },
+            {
+              "id": 1120,
+              "name": "Abel",
+              "x": 32.6,
+              "y": 47.8,
+              "when": "18 world min ago"
+            },
+            {
+              "id": 1142,
+              "name": "Talia",
+              "x": 49.6,
+              "y": 44.3,
+              "when": "29 world min ago"
+            },
+            {
+              "id": 1140,
+              "name": "Nico",
+              "x": 49.4,
+              "y": 44.2,
+              "when": "45 world min ago"
+            },
+            {
+              "id": 1138,
+              "name": "Basil",
+              "x": 33.5,
+              "y": 48.4,
+              "when": "56 world min ago"
+            },
+            {
+              "id": 1119,
+              "name": "Cora",
+              "x": 37.5,
+              "y": 52.5,
+              "when": "2 world h 6 min ago"
+            },
+            {
+              "id": 1121,
+              "name": "Ivo",
+              "x": 37.4,
+              "y": 52.5,
+              "when": "2 world h 26 min ago"
+            },
+            {
+              "id": 16983,
+              "name": "Corin",
+              "x": 42.4,
+              "y": 46.4,
+              "when": "2 world h 40 min ago"
+            },
+            {
+              "id": 1113,
+              "name": "Zia",
+              "x": 42.5,
+              "y": 46.5,
+              "when": "2 world h 42 min ago"
+            },
+            {
+              "id": 16982,
+              "name": "Brigid",
+              "x": 41.3,
+              "y": 42,
+              "when": "2 world h 46 min ago"
+            }
+          ],
+          "worries": [
+            {
+              "about": "Fenn",
+              "kind": "looked thirsty",
+              "seen": "2 world h 59 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Theo",
+              "kind": "looked hungry",
+              "seen": "8 world h 8 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Eli",
+              "kind": "looked hungry",
+              "seen": "20 world min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Ivo",
+              "kind": "looked thirsty",
+              "seen": "2 world h 30 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Cora",
+              "kind": "looked thirsty",
+              "seen": "2 world h 8 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Arlo",
+              "kind": "looked hurt",
+              "seen": "6 world min ago",
+              "source": "saw it myself"
+            }
+          ],
+          "requests": [],
+          "promises": [
+            {
+              "text": "Haul 1 planks to the house site 15 tiles west, as promised to Mona",
+              "status": "done",
+              "detail": "1 of 1 delivered",
+              "due": "11 world days 19 h ago"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to put 12 units of food by for the household: there is next to nothing at home to fall back on.",
+              "kind": "work",
+              "t": 72073
+            },
+            {
+              "when": "1 world min ago",
+              "text": "The wild grain was empty when I got there.",
+              "kind": "work",
+              "t": 72072
+            },
+            {
+              "when": "26 world min ago",
+              "text": "Gave up on: make a hoe - never got round to the hoe (still short 1 stone).",
+              "kind": "work",
+              "t": 72030
+            },
+            {
+              "when": "28 world min ago",
+              "text": "Mona told me about a fruit tree by the water, a fair way south-west of camp.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "28 world min ago",
+              "text": "Mona told me about a clay pit by the water, a short walk south-west of camp.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "28 world min ago",
+              "text": "Mona told me Ivy helped Nico.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "1 world h 56 min ago",
+              "text": "Got through the night under shelter (567 ticks of it).",
+              "kind": "need",
+              "t": 71880
+            },
+            {
+              "when": "2 world h 49 min ago",
+              "text": "Gave up “Chat with Sven”: Sven was too busy to stop.",
+              "kind": "work",
+              "t": 71792
+            },
+            {
+              "when": "2 world h 49 min ago",
+              "text": "Wanted a word with Sven, who was too busy to stop.",
+              "kind": "social",
+              "t": 71792
+            },
+            {
+              "when": "3 world h 41 min ago",
+              "text": "Slept and recovered 65 energy.",
+              "kind": "need",
+              "t": 71705
+            },
+            {
+              "when": "12 world h 31 min ago",
+              "text": "The berry bush I had remembered (about 2, 9.3 min old) was bare when I got close.",
+              "kind": "info",
+              "t": 70822
+            },
+            {
+              "when": "14 world h 1 min ago",
+              "text": "The wild grain has been picked clean.",
+              "kind": "info",
+              "t": 70672
+            },
+            {
+              "when": "14 world h 1 min ago",
+              "text": "Gathered 5 grain from the wild grain.",
+              "kind": "work",
+              "t": 70672
+            },
+            {
+              "when": "14 world h 10 min ago",
+              "text": "The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+              "kind": "info",
+              "t": 70657
+            }
+          ],
+          "failures": [
+            {
+              "place": "wild grain 1 tiles east (seen just now)",
+              "when": "1 world min ago",
+              "reason": "nothing left"
+            }
+          ]
+        },
+        "options": [
+          {
+            "key": "deposit:17319:food",
+            "kind": "deposit",
+            "label": "Bring food home",
+            "goal": "to feed the household",
+            "need": null,
+            "eta": "1 world h 4 min",
+            "target": "hut 10 tiles north-west (seen just now)"
+          },
+          {
+            "key": "gather:948",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "1 world h 54 min",
+            "target": "berry bush 10 tiles south-east (seen 4 world days 9 h 13 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 5,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "gather:946",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "2 world h 3 min",
+            "target": "berry bush 12 tiles south-east (seen 4 world days 9 h 20 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 5,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "gather:947",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "2 world h 9 min",
+            "target": "berry bush 13 tiles south-east (seen 4 world days 9 h 27 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 5,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "repair:1105",
+            "kind": "repair",
+            "label": "Repair the lean-to",
+            "goal": "to keep it sound",
+            "need": null,
+            "eta": "1 world h",
+            "target": "lean-to 2 tiles west (seen just now)"
+          },
+          {
+            "key": "repair:17319",
+            "kind": "repair",
+            "label": "Repair the hut",
+            "goal": "to keep it sound",
+            "need": null,
+            "eta": "1 world h 40 min",
+            "target": "hut 10 tiles north-west (seen just now)"
+          },
+          {
+            "key": "deposit:1105:food",
+            "kind": "deposit",
+            "label": "Bring food home",
+            "goal": "to feed the household",
+            "need": null,
+            "eta": "24 world min",
+            "target": "lean-to 2 tiles west (seen just now)"
+          },
+          {
+            "key": "plan_site:smithy",
+            "kind": "plan_site",
+            "label": "Lay out a smithy",
+            "goal": "tools are wearing out and there is ore to be smelted",
+            "need": null,
+            "eta": "42 world min (the walk there is not counted)",
+            "target": null
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to see what is out there",
+            "need": null,
+            "eta": "2 world h 11 min",
+            "target": null
+          },
+          {
+            "key": "tend:1547",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 3 min",
+            "target": "field plot 5 tiles west (seen just now)"
+          },
+          {
+            "key": "tend:2204",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h",
+            "target": "field plot 5 tiles west (seen just now)"
+          },
+          {
+            "key": "tend:1738",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 7 min",
+            "target": "field plot 6 tiles west (seen just now)"
+          },
+          {
+            "key": "tend:2764",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 10 min",
+            "target": "field plot 6 tiles west (seen just now)"
+          },
+          {
+            "key": "withdraw:25546:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 32 min",
+            "target": "pile of goods 14 tiles south-east (seen 4 world days 9 h 31 min ago)"
+          },
+          {
+            "key": "gather:438",
+            "kind": "gather",
+            "label": "Chopping wood to repair the hut",
+            "goal": "to repair the hut",
+            "need": null,
+            "eta": "2 world h 9 min",
+            "target": "tree 14 tiles north-east (seen 15 world days 14 h 58 min ago)"
+          },
+          {
+            "key": "gather:418",
+            "kind": "gather",
+            "label": "Chopping wood to repair the hut",
+            "goal": "to repair the hut",
+            "need": null,
+            "eta": "2 world h 11 min",
+            "target": "tree 14 tiles north-east (seen 15 world days 15 h ago)"
+          },
+          {
+            "key": "repair:11816",
+            "kind": "repair",
+            "label": "Help repair a neighbour’s quarry",
+            "goal": "to keep a neighbour’s roof over their head",
+            "need": null,
+            "eta": "1 world h 41 min",
+            "target": "quarry 10 tiles east (seen just now)"
+          },
+          {
+            "key": "collect:11816:stone",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the quarry",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 8 min",
+            "target": "quarry 10 tiles east (seen just now)"
+          },
+          {
+            "key": "deposit:11823:food",
+            "kind": "deposit",
+            "label": "Add food to the storehouse",
+            "goal": "to share with the community",
+            "need": null,
+            "eta": "1 world h 21 min",
+            "target": "storehouse 13 tiles west (seen 14 world min ago)"
+          },
+          {
+            "key": "withdraw:27188:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 49 min",
+            "target": "pile of goods 17 tiles west (seen 2 world h 46 min ago)"
+          },
+          {
+            "key": "drink:1000231",
+            "kind": "drink",
+            "label": "Go and drink at the water",
+            "goal": "to quench thirst",
+            "need": "thirst",
+            "eta": "37 world min",
+            "target": "water (shore) 4 tiles south (seen just now)"
+          },
+          {
+            "key": "withdraw:26771:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 42 min",
+            "target": "pile of goods 16 tiles south (seen 5 world days 22 h 46 min ago)"
+          },
+          {
+            "key": "fetch_water",
+            "kind": "fetch_water",
+            "label": "Fetch water",
+            "goal": "to water the crops",
+            "need": null,
+            "eta": "55 world min",
+            "target": "water (shore) 4 tiles south (seen just now)"
+          },
+          {
+            "key": "collect:27188:stone",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the heap",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 46 min",
+            "target": "pile of goods 17 tiles west (seen 2 world h 46 min ago)"
+          },
+          {
+            "key": "drink:1000249",
+            "kind": "drink",
+            "label": "Go and drink at the water",
+            "goal": "to quench thirst",
+            "need": "thirst",
+            "eta": "1 world h 9 min",
+            "target": "water (shore) 10 tiles west (seen 4 world min ago)"
+          },
+          {
+            "key": "bring:31736:wood",
+            "kind": "deposit",
+            "label": "Bring 1 wood to the kiln",
+            "goal": "to carry more water at a time (a water jar)",
+            "need": null,
+            "eta": "1 world h 6 min",
+            "target": "kiln 10 tiles north-east (seen just now)"
+          },
+          {
+            "key": "gather:1062",
+            "kind": "gather",
+            "label": "Breaking stone to make a hoe",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 32 min",
+            "target": "rock outcrop 11 tiles east (seen 4 world days 12 h 38 min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          },
+          {
+            "key": "gather:1163",
+            "kind": "gather",
+            "label": "Cutting stone to make a hoe",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 46 min",
+            "target": "stone outcrop 13 tiles east (seen 6 world days 18 h 29 min ago)"
+          },
+          {
+            "key": "withdraw:28035:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 49 min",
+            "target": "pile of goods 17 tiles north-west (seen 1 world h 26 min ago)"
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 2 tiles south (seen just now)"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 1 tiles north-east (seen just now)"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 2 tiles north (seen just now)"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 15 tiles west (seen 1 world h 16 min ago)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty",
+            "target": "wild grain 5 tiles east (seen just now)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty",
+            "target": "wild grain 6 tiles east (seen just now)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "failed there 1 ticks ago (nothing left)",
+            "target": "wild grain 1 tiles east (seen just now)"
+          },
+          {
+            "label": "Work on the building site",
+            "reason": "site is waiting for materials (unknown)",
+            "target": "kiln site 14 tiles north (seen 7 world days 17 h 15 min ago)"
+          },
+          {
+            "label": "Care for Theo",
+            "reason": "does not know where they are",
+            "target": "Theo (last seen 15 world h 14 min ago)"
+          },
+          {
+            "label": "Check on Fenn",
+            "reason": "they are not close enough to go looking",
+            "target": "Fenn (last seen 3 world h ago)"
+          },
+          {
+            "label": "Bring something to Theo",
+            "reason": "has nothing to spare for someone hungry",
+            "target": "Theo (last seen 15 world h 14 min ago)"
+          },
+          {
+            "label": "Check on Eli",
+            "reason": "they are not close enough to go looking",
+            "target": "Eli (last seen 16 world min ago)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "put 12 units of food by for the household",
+            "kind": "stock",
+            "status": "active",
+            "step": "take the food home (12 more to put by)",
+            "wants": {},
+            "blocked": "",
+            "reason": "there is next to nothing at home to fall back on",
+            "since": "just now"
+          },
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "done",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "under shelter for 567 ticks of the night, fed and watered by morning",
+            "since": "15 world h 59 min ago"
+          },
+          {
+            "goal": "make a hoe",
+            "kind": "tool",
+            "status": "dropped",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "never got round to the hoe (still short 1 stone)",
+            "since": "2 world days 26 min ago"
+          },
+          {
+            "goal": "get the roof sound again",
+            "kind": "repair",
+            "status": "dropped",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "worked on it but it is still not sound (put back 56, it is at 57)",
+            "since": "4 world days 37 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"deposit:17319:food\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 18155
+      },
+      "proposal": {
+        "choose": "deposit:17319:food",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 72153,
+      "attempt": 0,
+      "observationHash": "d1b26f2a",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 72153,
+          "day": 31,
+          "clock": "08:43",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Cloudy",
+          "tempC": 13
+        },
+        "self": {
+          "name": "Mira",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 34,
+          "character": "diligent, reserved, cautious",
+          "skills": {
+            "forage": 1.44,
+            "fish": 0.39,
+            "wood": 0.46,
+            "stone": 0.44,
+            "build": 0.67,
+            "farm": 0.97,
+            "craft": 0.43,
+            "carpentry": 0.51,
+            "kiln": 0.51,
+            "smith": 0.73,
+            "bake": 0.42
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 85,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 56,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 75,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 88,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 90,
+              "state": "ok"
+            },
+            "social": {
+              "value": 56,
+              "state": "ok"
+            }
+          },
+          "aspiration": "hopes for a store that would see them through a lean season (0% there); earlier achieved: a solid home of their own",
+          "carrying": {
+            "seeds": 12,
+            "basket": 1,
+            "berries": 2,
+            "wood": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 18
+          },
+          "spokenFor": {},
+          "available": {
+            "seeds": 12,
+            "basket": 1,
+            "berries": 2,
+            "wood": 2
+          },
+          "tools": [
+            {
+              "kind": "basket",
+              "label": "basket",
+              "wear": 12,
+              "loan": null
+            }
+          ],
+          "pullingCart": false,
+          "position": {
+            "x": 35.5,
+            "y": 42.5
+          },
+          "mood": -11,
+          "thoughts": [
+            "-6 Viktor has died (witnessed)",
+            "-1 the lean season",
+            "-1 still hopes for a store that would see them through a lean season"
+          ],
+          "trade": {
+            "kind": "smith",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Briar",
+          "members": [
+            {
+              "name": "Theo",
+              "kin": "child"
+            },
+            {
+              "name": "Sven",
+              "kin": "child"
+            }
+          ],
+          "home": "hut 2 tiles west (33% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": [
+            "Viktor",
+            "Theo",
+            "Sven"
+          ]
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Bringing food home",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 72152
+          },
+          "lastInteraction": {
+            "purpose": "chat",
+            "outcome": "friendly",
+            "detail": "",
+            "when": "1 world h 6 min ago",
+            "t": 72043
+          },
+          "lastChoice": {
+            "label": "Bring food home",
+            "when": "48 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 1144,
+              "name": "Alma",
+              "x": 40.7,
+              "y": 38.2,
+              "distance": 7,
+              "direction": "east",
+              "looks": [],
+              "doing": "delivering materials",
+              "carrying": [
+                "seeds",
+                "wood",
+                "stone",
+                "axe",
+                "basket"
+              ],
+              "talking": false,
+              "relation": "Friendly"
+            },
+            {
+              "id": 1145,
+              "name": "Jax",
+              "x": 43.5,
+              "y": 40.1,
+              "distance": 8,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "storing goods",
+              "carrying": [
+                "berries",
+                "fruit",
+                "grain",
+                "seeds",
+                "wood",
+                "axe",
+                "hoe",
+                "basket",
+                "spear"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 1102,
+              "what": "campfire",
+              "x": 36.5,
+              "y": 42.5,
+              "distance": 1,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100,
+              "fuel": 818
+            },
+            {
+              "id": 6648,
+              "what": "field plot",
+              "x": 36.5,
+              "y": 43.5,
+              "distance": 1,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "state": "growing",
+              "progress": 0.73
+            },
+            {
+              "id": 16492,
+              "what": "hut",
+              "x": 34,
+              "y": 41,
+              "distance": 2,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "condition": 30
+            },
+            {
+              "id": 17319,
+              "what": "hut",
+              "x": 34,
+              "y": 44,
+              "distance": 2,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Briar",
+              "items": {
+                "grain": 3
+              },
+              "condition": 33
+            },
+            {
+              "id": 2469,
+              "what": "field plot",
+              "x": 36.5,
+              "y": 44.5,
+              "distance": 2,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "state": "growing",
+              "progress": 0.3
+            },
+            {
+              "id": 1500,
+              "what": "field plot",
+              "x": 36.5,
+              "y": 45.5,
+              "distance": 3,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "state": "growing",
+              "progress": 0.29
+            },
+            {
+              "id": 13845,
+              "what": "hut",
+              "x": 39,
+              "y": 43,
+              "distance": 4,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Juniper",
+              "condition": 77
+            },
+            {
+              "id": 1118,
+              "what": "lean-to",
+              "x": 31.5,
+              "y": 44.5,
+              "distance": 4,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "condition": 71
+            },
+            {
+              "id": 19991,
+              "what": "field plot",
+              "x": 37.5,
+              "y": 39.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Ash",
+              "state": "tilled",
+              "progress": 0
+            },
+            {
+              "id": 4754,
+              "what": "field plot",
+              "x": 38.5,
+              "y": 44.5,
+              "distance": 4,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "state": "growing",
+              "progress": 0.31
+            },
+            {
+              "id": 19097,
+              "what": "field plot",
+              "x": 38.5,
+              "y": 39.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Ash",
+              "state": "growing",
+              "progress": 0.16
+            },
+            {
+              "id": 11947,
+              "what": "field plot",
+              "x": 38.5,
+              "y": 45.5,
+              "distance": 4,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "state": "growing",
+              "progress": 0.33
+            },
+            {
+              "id": 1602,
+              "what": "field plot",
+              "x": 39.5,
+              "y": 44.5,
+              "distance": 4,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "state": "growing",
+              "progress": 0.34
+            },
+            {
+              "id": 1127,
+              "what": "lean-to",
+              "x": 35.5,
+              "y": 37.5,
+              "distance": 5,
+              "direction": "north-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Juniper",
+              "condition": 46
+            },
+            {
+              "id": 28195,
+              "what": "lean-to",
+              "x": 32.5,
+              "y": 46.5,
+              "distance": 5,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Birch",
+              "condition": 59
+            },
+            {
+              "id": 4421,
+              "what": "lean-to",
+              "x": 36.5,
+              "y": 47.5,
+              "distance": 5,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Heron",
+              "items": {
+                "grain": 2
+              },
+              "condition": 57
+            },
+            {
+              "id": 1130,
+              "what": "lean-to",
+              "x": 39.5,
+              "y": 38.5,
+              "distance": 6,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Bramble",
+              "condition": 70
+            },
+            {
+              "id": 1111,
+              "what": "lean-to",
+              "x": 39.5,
+              "y": 46.5,
+              "distance": 6,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Finch",
+              "condition": 27
+            },
+            {
+              "id": 18554,
+              "what": "communal hall",
+              "x": 32.5,
+              "y": 37.5,
+              "distance": 6,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 56
+            },
+            {
+              "id": 1105,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 43.5,
+              "distance": 6,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Briar",
+              "condition": 37
+            },
+            {
+              "id": 940,
+              "what": "berry bush",
+              "x": 42.5,
+              "y": 40.5,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 2195,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 36.5,
+              "distance": 7,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "condition": 85
+            },
+            {
+              "id": 2522,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 39.5,
+              "distance": 7,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "condition": 49
+            },
+            {
+              "id": 30200,
+              "what": "lean-to",
+              "x": 41.5,
+              "y": 45.5,
+              "distance": 7,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Ash",
+              "condition": 75
+            },
+            {
+              "id": 7833,
+              "what": "lean-to",
+              "x": 42.5,
+              "y": 41.5,
+              "distance": 7,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Marsh",
+              "condition": 19
+            },
+            {
+              "id": 14835,
+              "what": "timber yard",
+              "x": 28.5,
+              "y": 41,
+              "distance": 7,
+              "direction": "north-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 71
+            },
+            {
+              "id": 28762,
+              "what": "pile of goods",
+              "x": 29.5,
+              "y": 46.5,
+              "distance": 7,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "seeds": 1,
+                "wood": 1
+              }
+            },
+            {
+              "id": 28763,
+              "what": "grave",
+              "x": 29.5,
+              "y": 46.5,
+              "distance": 7,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 936,
+              "what": "berry bush",
+              "x": 30.5,
+              "y": 48.5,
+              "distance": 8,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 2
+            },
+            {
+              "id": 939,
+              "what": "berry bush",
+              "x": 43.5,
+              "y": 41.5,
+              "distance": 8,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 937,
+              "what": "berry bush",
+              "x": 29.5,
+              "y": 48.5,
+              "distance": 8,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 11823,
+              "what": "storehouse",
+              "x": 33,
+              "y": 50,
+              "distance": 8,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 75
+            },
+            {
+              "id": 934,
+              "what": "berry bush",
+              "x": 30.5,
+              "y": 49.5,
+              "distance": 9,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 935,
+              "what": "berry bush",
+              "x": 29.5,
+              "y": 49.5,
+              "distance": 9,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 2
+            },
+            {
+              "id": 991,
+              "what": "wild grain",
+              "x": 44.5,
+              "y": 41.5,
+              "distance": 9,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 28043,
+              "what": "pile of goods",
+              "x": 27.5,
+              "y": 45.5,
+              "distance": 9,
+              "direction": "north-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "seeds": 3,
+                "basket": 1,
+                "wood": 2
+              }
+            },
+            {
+              "id": 26860,
+              "what": "pile of goods",
+              "x": 36.5,
+              "y": 51.5,
+              "distance": 9,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 1,
+                "seeds": 1
+              }
+            },
+            {
+              "id": 28035,
+              "what": "pile of goods",
+              "x": 26.5,
+              "y": 44.5,
+              "distance": 9,
+              "direction": "north-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 5,
+                "stone": 8
+              }
+            },
+            {
+              "id": 27828,
+              "what": "pile of goods",
+              "x": 29.5,
+              "y": 49.5,
+              "distance": 9,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 1,
+                "seeds": 1
+              }
+            },
+            {
+              "id": 28044,
+              "what": "grave",
+              "x": 27.5,
+              "y": 45.5,
+              "distance": 9,
+              "direction": "north-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 26861,
+              "what": "grave",
+              "x": 35.5,
+              "y": 51.5,
+              "distance": 9,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 27829,
+              "what": "grave",
+              "x": 28.5,
+              "y": 48.5,
+              "distance": 9,
+              "direction": "west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 938,
+              "what": "berry bush",
+              "x": 45.5,
+              "y": 43.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "14 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1091,
+              "what": "fishing spot",
+              "x": 44.5,
+              "y": 47.5,
+              "distance": 10,
+              "direction": "south",
+              "seen": "17 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 3264,
+              "what": "hut",
+              "x": 44,
+              "y": 38,
+              "distance": 10,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Thistle",
+              "items": {
+                "grain": 1
+              },
+              "condition": 78
+            },
+            {
+              "id": 31736,
+              "what": "kiln",
+              "x": 40,
+              "y": 33,
+              "distance": 10,
+              "direction": "east",
+              "seen": "7 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 98
+            },
+            {
+              "id": 15399,
+              "what": "kiln site",
+              "x": 33,
+              "y": 33,
+              "distance": 10,
+              "direction": "north-east",
+              "seen": "7 world days 18 h 3 min ago",
+              "source": "seen",
+              "stale": true,
+              "owner": "Brook",
+              "progress": 0.98
+            },
+            {
+              "id": 29334,
+              "what": "pile of goods",
+              "x": 45.5,
+              "y": 41.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "14 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6,
+                "planks": 8
+              }
+            },
+            {
+              "id": 943,
+              "what": "berry bush",
+              "x": 24.5,
+              "y": 42.5,
+              "distance": 11,
+              "direction": "north-west",
+              "seen": "10 world h 11 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0,
+              "estimate": 3
+            },
+            {
+              "id": 992,
+              "what": "wild grain",
+              "x": 45.5,
+              "y": 38.5,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "16 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 990,
+              "what": "wild grain",
+              "x": 46.5,
+              "y": 39.5,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "19 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1
+            },
+            {
+              "id": 9953,
+              "what": "hut",
+              "x": 46,
+              "y": 42,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "14 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Willow",
+              "items": {
+                "fish": 2
+              },
+              "condition": 60
+            },
+            {
+              "id": 5126,
+              "what": "hut",
+              "x": 29,
+              "y": 33,
+              "distance": 11,
+              "direction": "north",
+              "seen": "2 world days 18 h 10 min ago",
+              "source": "seen",
+              "stale": true,
+              "condition": 23
+            },
+            {
+              "id": 989,
+              "what": "wild grain",
+              "x": 47.5,
+              "y": 39.5,
+              "distance": 12,
+              "direction": "south-east",
+              "seen": "23 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1160,
+              "what": "clay pit",
+              "x": 47.5,
+              "y": 42.5,
+              "distance": 12,
+              "direction": "south-east",
+              "seen": "23 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 34
+            },
+            {
+              "id": 1161,
+              "what": "clay pit",
+              "x": 37.5,
+              "y": 54.5,
+              "distance": 12,
+              "direction": "south-west",
+              "seen": "1 world h 16 min ago",
+              "source": "told by Mona",
+              "stale": false,
+              "amount": 57
+            },
+            {
+              "id": 6210,
+              "what": "hut",
+              "x": 34,
+              "y": 54,
+              "distance": 12,
+              "direction": "south-west",
+              "seen": "2 world h 5 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Heron",
+              "condition": 71
+            },
+            {
+              "id": 9218,
+              "what": "hut",
+              "x": 30,
+              "y": 53,
+              "distance": 12,
+              "direction": "west",
+              "seen": "2 world h 13 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Brook",
+              "condition": 55
+            },
+            {
+              "id": 18704,
+              "what": "house site",
+              "x": 34,
+              "y": 54,
+              "distance": 12,
+              "direction": "south-west",
+              "seen": "2 world h 5 min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Heron",
+              "missing": {
+                "bricks": 6
+              },
+              "progress": 0.06
+            },
+            {
+              "id": 993,
+              "what": "wild grain",
+              "x": 48.5,
+              "y": 39.5,
+              "distance": 13,
+              "direction": "south-east",
+              "seen": "28 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 438,
+              "what": "tree",
+              "x": 38.5,
+              "y": 29.5,
+              "distance": 13,
+              "direction": "north-east",
+              "seen": "15 world days 15 h 46 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 2
+            },
+            {
+              "id": 25777,
+              "what": "tree",
+              "x": 26.5,
+              "y": 32.5,
+              "distance": 13,
+              "direction": "north",
+              "seen": "3 world days 20 h 50 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 5
+            },
+            {
+              "id": 5391,
+              "what": "tree",
+              "x": 27.5,
+              "y": 31.5,
+              "distance": 14,
+              "direction": "north",
+              "seen": "11 world days 21 h 17 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1
+            },
+            {
+              "id": 1961,
+              "what": "tree",
+              "x": 28.5,
+              "y": 30.5,
+              "distance": 14,
+              "direction": "north",
+              "seen": "25 world days 22 h 33 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 2
+            },
+            {
+              "id": 461,
+              "what": "tree",
+              "x": 27.5,
+              "y": 30.5,
+              "distance": 14,
+              "direction": "north",
+              "seen": "25 world days 22 h 33 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 3
+            },
+            {
+              "id": 1073,
+              "what": "rock outcrop",
+              "x": 29.5,
+              "y": 55.5,
+              "distance": 14,
+              "direction": "west",
+              "seen": "16 world h 11 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0,
+              "estimate": 1
+            },
+            {
+              "id": 475,
+              "what": "tree",
+              "x": 25.5,
+              "y": 31.5,
+              "distance": 15,
+              "direction": "north",
+              "seen": "11 world days 21 h 17 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 3
+            },
+            {
+              "id": 1071,
+              "what": "rock outcrop",
+              "x": 25.5,
+              "y": 53.5,
+              "distance": 15,
+              "direction": "west",
+              "seen": "16 world h 4 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0,
+              "estimate": 1
+            },
+            {
+              "id": 1063,
+              "what": "rock outcrop",
+              "x": 49.5,
+              "y": 35.5,
+              "distance": 16,
+              "direction": "east",
+              "seen": "44 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1064,
+              "what": "rock outcrop",
+              "x": 50.5,
+              "y": 37.5,
+              "distance": 16,
+              "direction": "south-east",
+              "seen": "43 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 1067,
+              "what": "rock outcrop",
+              "x": 51.5,
+              "y": 39.5,
+              "distance": 16,
+              "direction": "south-east",
+              "seen": "43 world min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 0
+            },
+            {
+              "id": 15008,
+              "what": "hut site",
+              "x": 46,
+              "y": 31,
+              "distance": 16,
+              "direction": "east",
+              "seen": "13 world days 20 h 58 min ago",
+              "source": "seen",
+              "stale": true,
+              "owner": "nobody",
+              "missing": {
+                "stone": 2
+              },
+              "progress": 0.31
+            },
+            {
+              "id": 1062,
+              "what": "rock outcrop",
+              "x": 50.5,
+              "y": 34.5,
+              "distance": 17,
+              "direction": "east",
+              "seen": "4 world days 13 h 26 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 7
+            },
+            {
+              "id": 1164,
+              "what": "stone outcrop",
+              "x": 33.5,
+              "y": 25.5,
+              "distance": 17,
+              "direction": "north-east",
+              "seen": "15 world days 16 h 24 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 59
+            },
+            {
+              "id": 972,
+              "what": "fruit tree",
+              "x": 35.5,
+              "y": 60.5,
+              "distance": 18,
+              "direction": "south-west",
+              "seen": "5 world h 1 min ago",
+              "source": "told by Mona",
+              "stale": false,
+              "amount": 1,
+              "estimate": 2
+            },
+            {
+              "id": 973,
+              "what": "fruit tree",
+              "x": 34.5,
+              "y": 61.5,
+              "distance": 19,
+              "direction": "south-west",
+              "seen": "18 world h 53 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1163,
+              "what": "stone outcrop",
+              "x": 51.5,
+              "y": 32.5,
+              "distance": 19,
+              "direction": "east",
+              "seen": "6 world days 19 h 17 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 11
+            },
+            {
+              "id": 971,
+              "what": "fruit tree",
+              "x": 33.5,
+              "y": 62.5,
+              "distance": 20,
+              "direction": "south-west",
+              "seen": "19 world h 15 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1092,
+              "what": "fishing spot",
+              "x": 40.5,
+              "y": 63.5,
+              "distance": 22,
+              "direction": "south-west",
+              "seen": "19 world h 19 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 1093,
+              "what": "fishing spot",
+              "x": 14.5,
+              "y": 48.5,
+              "distance": 22,
+              "direction": "north-west",
+              "seen": "11 world h 38 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 1,
+              "estimate": 6
+            },
+            {
+              "id": 1162,
+              "what": "clay pit",
+              "x": 56.5,
+              "y": 47.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "2 world days 14 h 59 min ago",
+              "source": "told by Cole",
+              "stale": true,
+              "amount": 48
+            },
+            {
+              "id": 1094,
+              "what": "fishing spot",
+              "x": 55.5,
+              "y": 53.5,
+              "distance": 23,
+              "direction": "south",
+              "seen": "5 world days 23 h 29 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 10
+            },
+            {
+              "id": 1095,
+              "what": "fishing spot",
+              "x": 11.5,
+              "y": 45.5,
+              "distance": 24,
+              "direction": "north-west",
+              "seen": "2 world days 19 h 19 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 10
+            },
+            {
+              "id": 1098,
+              "what": "fishing spot",
+              "x": 44.5,
+              "y": 65.5,
+              "distance": 25,
+              "direction": "south-west",
+              "seen": "19 world h 47 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 1166,
+              "what": "ore vein",
+              "x": 17.5,
+              "y": 60.5,
+              "distance": 25,
+              "direction": "west",
+              "seen": "13 world h 37 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 18
+            },
+            {
+              "id": 1165,
+              "what": "ore vein",
+              "x": 29.5,
+              "y": 67.5,
+              "distance": 26,
+              "direction": "south-west",
+              "seen": "15 world h 53 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 17
+            },
+            {
+              "id": 974,
+              "what": "fruit tree",
+              "x": 32.5,
+              "y": 15.5,
+              "distance": 27,
+              "direction": "north-east",
+              "seen": "25 world days 15 h 10 min ago",
+              "source": "told by Ivy (3 mouths)",
+              "stale": true,
+              "amount": 8
+            },
+            {
+              "id": 978,
+              "what": "fruit tree",
+              "x": 8.5,
+              "y": 38.5,
+              "distance": 27,
+              "direction": "north-west",
+              "seen": "2 world days 19 h 13 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 996,
+              "what": "wild grain",
+              "x": 43.5,
+              "y": 68.5,
+              "distance": 27,
+              "direction": "south-west",
+              "seen": "19 world h 53 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 5
+            },
+            {
+              "id": 995,
+              "what": "wild grain",
+              "x": 42.5,
+              "y": 69.5,
+              "distance": 28,
+              "direction": "south-west",
+              "seen": "19 world h 55 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 5
+            },
+            {
+              "id": 994,
+              "what": "wild grain",
+              "x": 43.5,
+              "y": 69.5,
+              "distance": 28,
+              "direction": "south-west",
+              "seen": "19 world h 56 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 5
+            },
+            {
+              "id": 977,
+              "what": "fruit tree",
+              "x": 7.5,
+              "y": 34.5,
+              "distance": 29,
+              "direction": "north-west",
+              "seen": "2 world days 19 h 20 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 979,
+              "what": "fruit tree",
+              "x": 6.5,
+              "y": 38.5,
+              "distance": 29,
+              "direction": "north-west",
+              "seen": "2 world days 19 h 24 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 0,
+              "estimate": 8
+            },
+            {
+              "id": 985,
+              "what": "fruit tree",
+              "x": 69.5,
+              "y": 39.5,
+              "distance": 34,
+              "direction": "south-east",
+              "seen": "4 world days 11 h 43 min ago",
+              "source": "seen",
+              "stale": true,
+              "amount": 1,
+              "estimate": 8
+            }
+          ],
+          "water": [
+            {
+              "id": 1000230,
+              "what": "water (shore)",
+              "x": 42.5,
+              "y": 46.5,
+              "distance": 8,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000249,
+              "what": "water (shore)",
+              "x": 38.5,
+              "y": 50.5,
+              "distance": 9,
+              "direction": "south-west",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000250,
+              "what": "water (shore)",
+              "x": 41.5,
+              "y": 49.5,
+              "distance": 9,
+              "direction": "south",
+              "seen": "19 world min ago",
+              "source": "seen",
+              "stale": false
+            },
+            {
+              "id": 1000231,
+              "what": "water (shore)",
+              "x": 45.5,
+              "y": 45.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "19 world min ago",
+              "source": "seen",
+              "stale": false
+            }
+          ],
+          "dangers": [],
+          "counts": {
+            "tree": 477,
+            "berry bush": 30,
+            "fruit tree": 16,
+            "wild grain": 13,
+            "rock outcrop": 35,
+            "fishing spot": 10,
+            "building": 30,
+            "clay pit": 3,
+            "stone outcrop": 2,
+            "ore vein": 2,
+            "field plot": 36,
+            "building site": 3,
+            "pile of goods": 16,
+            "grave": 15,
+            "water (shore)": 43
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 1107,
+              "name": "Emre",
+              "label": "Partner",
+              "affinity": 100,
+              "trust": 100,
+              "familiarity": 60,
+              "kin": "partner",
+              "lastMet": "7 world days 6 h 34 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Emre help Viktor",
+              "grievance": null
+            },
+            {
+              "id": 1109,
+              "name": "Theo",
+              "label": "Child",
+              "affinity": 100,
+              "trust": 91,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "1 world day 21 h 9 min ago",
+              "avoiding": false,
+              "owesMe": 4,
+              "lastNote": "worked alongside Theo",
+              "grievance": null
+            },
+            {
+              "id": 9521,
+              "name": "Sven",
+              "label": "Child",
+              "affinity": 100,
+              "trust": 92,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "3 world h 37 min ago",
+              "avoiding": false,
+              "owesMe": 4,
+              "lastNote": "worked alongside Sven",
+              "grievance": null
+            },
+            {
+              "id": 1108,
+              "name": "Viktor",
+              "label": "Child",
+              "affinity": 99,
+              "trust": 84,
+              "familiarity": 60,
+              "kin": "child",
+              "lastMet": "4 world days 22 h 13 min ago",
+              "avoiding": false,
+              "owesMe": 3,
+              "lastNote": "I gave Viktor 2 berries",
+              "grievance": null
+            },
+            {
+              "id": 1137,
+              "name": "Ivy",
+              "label": "Friendly",
+              "affinity": 24,
+              "trust": 24,
+              "familiarity": 28,
+              "kin": "",
+              "lastMet": "2 world days 17 h 6 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Ivy",
+              "grievance": null
+            },
+            {
+              "id": 1144,
+              "name": "Alma",
+              "label": "Friendly",
+              "affinity": 24,
+              "trust": 23,
+              "familiarity": 26,
+              "kin": "",
+              "lastMet": "49 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "Alma gave me 1 berries",
+              "grievance": null
+            },
+            {
+              "id": 1113,
+              "name": "Zia",
+              "label": "Friendly",
+              "affinity": 14,
+              "trust": 18,
+              "familiarity": 20,
+              "kin": "",
+              "lastMet": "3 world h 57 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Zia help Fenn",
+              "grievance": null
+            },
+            {
+              "id": 1134,
+              "name": "Yan",
+              "label": "Friendly",
+              "affinity": 12,
+              "trust": 15,
+              "familiarity": 22,
+              "kin": "",
+              "lastMet": "7 world days 9 h 13 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Yan",
+              "grievance": null
+            },
+            {
+              "id": 1149,
+              "name": "Lena",
+              "label": "Friendly",
+              "affinity": 12,
+              "trust": 15,
+              "familiarity": 15,
+              "kin": "",
+              "lastMet": "9 world days 16 h 31 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "met at the feast",
+              "grievance": null
+            },
+            {
+              "id": 1142,
+              "name": "Talia",
+              "label": "Acquaintance",
+              "affinity": 10,
+              "trust": 17,
+              "familiarity": 16,
+              "kin": "",
+              "lastMet": "6 world days 22 h 39 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Talia help Emre",
+              "grievance": null
+            },
+            {
+              "id": 1119,
+              "name": "Cora",
+              "label": "Friendly",
+              "affinity": 10,
+              "trust": 14,
+              "familiarity": 15,
+              "kin": "",
+              "lastMet": "20 world h 7 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "saw Cora help Tomas",
+              "grievance": null
+            },
+            {
+              "id": 3222,
+              "name": "Mona",
+              "label": "Acquaintance",
+              "affinity": 10,
+              "trust": 13,
+              "familiarity": 9,
+              "kin": "",
+              "lastMet": "1 world h 6 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Mona",
+              "grievance": null
+            },
+            {
+              "id": 1122,
+              "name": "Eli",
+              "label": "Acquaintance",
+              "affinity": 9,
+              "trust": 14,
+              "familiarity": 11,
+              "kin": "",
+              "lastMet": "1 world day 17 h 33 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Eli",
+              "grievance": null
+            },
+            {
+              "id": 1147,
+              "name": "Faye",
+              "label": "Acquaintance",
+              "affinity": 8,
+              "trust": 15,
+              "familiarity": 20,
+              "kin": "",
+              "lastMet": "11 world days 23 h 14 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "worked alongside Faye",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 1137,
+              "name": "Ivy",
+              "x": 45.5,
+              "y": 43.5,
+              "when": "17 world min ago"
+            },
+            {
+              "id": 3222,
+              "name": "Mona",
+              "x": 47.5,
+              "y": 42,
+              "when": "25 world min ago"
+            },
+            {
+              "id": 9521,
+              "name": "Sven",
+              "x": 47.1,
+              "y": 39.4,
+              "when": "26 world min ago"
+            },
+            {
+              "id": 1149,
+              "name": "Lena",
+              "x": 49.3,
+              "y": 40.5,
+              "when": "34 world min ago"
+            },
+            {
+              "id": 1128,
+              "name": "Tomas",
+              "x": 49.5,
+              "y": 45.5,
+              "when": "37 world min ago"
+            },
+            {
+              "id": 1132,
+              "name": "Petra",
+              "x": 49.8,
+              "y": 43.5,
+              "when": "39 world min ago"
+            },
+            {
+              "id": 1150,
+              "name": "Arlo",
+              "x": 50.7,
+              "y": 40.5,
+              "when": "41 world min ago"
+            },
+            {
+              "id": 1122,
+              "name": "Eli",
+              "x": 37.8,
+              "y": 52.6,
+              "when": "1 world h 4 min ago"
+            },
+            {
+              "id": 1120,
+              "name": "Abel",
+              "x": 32.6,
+              "y": 47.8,
+              "when": "1 world h 6 min ago"
+            },
+            {
+              "id": 1142,
+              "name": "Talia",
+              "x": 49.6,
+              "y": 44.3,
+              "when": "1 world h 17 min ago"
+            }
+          ],
+          "worries": [
+            {
+              "about": "Fenn",
+              "kind": "looked thirsty",
+              "seen": "3 world h 47 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Theo",
+              "kind": "looked hungry",
+              "seen": "8 world h 56 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Eli",
+              "kind": "looked hungry",
+              "seen": "1 world h 8 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Ivo",
+              "kind": "looked thirsty",
+              "seen": "3 world h 18 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Cora",
+              "kind": "looked thirsty",
+              "seen": "2 world h 56 min ago",
+              "source": "saw it myself"
+            },
+            {
+              "about": "Arlo",
+              "kind": "looked hurt",
+              "seen": "40 world min ago",
+              "source": "saw it myself"
+            }
+          ],
+          "requests": [],
+          "promises": [
+            {
+              "text": "Haul 1 planks to the house site 12 tiles south-west, as promised to Mona",
+              "status": "done",
+              "detail": "1 of 1 delivered",
+              "due": "11 world days 19 h 48 min ago"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Put 3 grain into the home store.",
+              "kind": "work",
+              "t": 72152
+            },
+            {
+              "when": "48 world min ago",
+              "text": "Means to put 12 units of food by for the household: there is next to nothing at home to fall back on.",
+              "kind": "work",
+              "t": 72073
+            },
+            {
+              "when": "49 world min ago",
+              "text": "The wild grain was empty when I got there.",
+              "kind": "work",
+              "t": 72072
+            },
+            {
+              "when": "1 world h 14 min ago",
+              "text": "Gave up on: make a hoe - never got round to the hoe (still short 1 stone).",
+              "kind": "work",
+              "t": 72030
+            },
+            {
+              "when": "1 world h 16 min ago",
+              "text": "Mona told me about a fruit tree by the water, a fair way south-west of camp.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "1 world h 16 min ago",
+              "text": "Mona told me about a clay pit by the water, a short walk south-west of camp.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "1 world h 16 min ago",
+              "text": "Mona told me Ivy helped Nico.",
+              "kind": "info",
+              "t": 72027
+            },
+            {
+              "when": "2 world h 44 min ago",
+              "text": "Got through the night under shelter (567 ticks of it).",
+              "kind": "need",
+              "t": 71880
+            },
+            {
+              "when": "3 world h 37 min ago",
+              "text": "Gave up “Chat with Sven”: Sven was too busy to stop.",
+              "kind": "work",
+              "t": 71792
+            },
+            {
+              "when": "3 world h 37 min ago",
+              "text": "Wanted a word with Sven, who was too busy to stop.",
+              "kind": "social",
+              "t": 71792
+            },
+            {
+              "when": "4 world h 29 min ago",
+              "text": "Slept and recovered 65 energy.",
+              "kind": "need",
+              "t": 71705
+            },
+            {
+              "when": "13 world h 19 min ago",
+              "text": "The berry bush I had remembered (about 2, 9.3 min old) was bare when I got close.",
+              "kind": "info",
+              "t": 70822
+            },
+            {
+              "when": "14 world h 49 min ago",
+              "text": "The wild grain has been picked clean.",
+              "kind": "info",
+              "t": 70672
+            },
+            {
+              "when": "14 world h 49 min ago",
+              "text": "Gathered 5 grain from the wild grain.",
+              "kind": "work",
+              "t": 70672
+            }
+          ],
+          "failures": [
+            {
+              "place": "wild grain 9 tiles south-east (seen 1 world min ago)",
+              "when": "49 world min ago",
+              "reason": "nothing left"
+            }
+          ]
+        },
+        "options": [
+          {
+            "key": "gather:942",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "1 world h 39 min",
+            "target": "berry bush 11 tiles north-west (seen 10 world h 22 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 3,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "gather:943",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "1 world h 37 min",
+            "target": "berry bush 11 tiles north-west (seen 10 world h 11 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 3,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "gather:941",
+            "kind": "gather",
+            "label": "Picking berries",
+            "goal": "to stock the household",
+            "need": null,
+            "eta": "1 world h 55 min",
+            "target": "berry bush 12 tiles north-west (seen 10 world h 20 min ago)",
+            "limits": [
+              {
+                "field": "amount",
+                "kind": "count",
+                "min": 1,
+                "max": 4,
+                "note": "how many to take (the engine still stops at what the source holds and the pack can carry)"
+              }
+            ]
+          },
+          {
+            "key": "give:9521",
+            "kind": "give",
+            "label": "Bring berries to Sven",
+            "goal": "to look after Sven",
+            "need": null,
+            "eta": "1 world h 18 min",
+            "target": "Sven (last seen 26 world min ago)"
+          },
+          {
+            "key": "repair:17319",
+            "kind": "repair",
+            "label": "Repair the hut",
+            "goal": "to keep it sound",
+            "need": null,
+            "eta": "1 world h",
+            "target": "hut 2 tiles west (seen 1 world min ago)"
+          },
+          {
+            "key": "repair:1105",
+            "kind": "repair",
+            "label": "Repair the lean-to",
+            "goal": "to keep it sound",
+            "need": null,
+            "eta": "1 world h 22 min",
+            "target": "lean-to 6 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to see what is out there",
+            "need": null,
+            "eta": "1 world h 58 min",
+            "target": null
+          },
+          {
+            "key": "plan_site:smithy",
+            "kind": "plan_site",
+            "label": "Lay out a smithy",
+            "goal": "tools are wearing out and there is ore to be smelted",
+            "need": null,
+            "eta": "42 world min (the walk there is not counted)",
+            "target": null
+          },
+          {
+            "key": "tend:2764",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 12 min",
+            "target": "field plot 6 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "tend:1547",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 12 min",
+            "target": "field plot 6 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "drink:1000230",
+            "kind": "drink",
+            "label": "Go and drink at the water",
+            "goal": "to quench thirst",
+            "need": "thirst",
+            "eta": "1 world h 3 min",
+            "target": "water (shore) 8 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "gather:438",
+            "kind": "gather",
+            "label": "Chopping wood to repair the hut",
+            "goal": "to repair the hut",
+            "need": null,
+            "eta": "2 world h 9 min",
+            "target": "tree 13 tiles north-east (seen 15 world days 15 h 46 min ago)"
+          },
+          {
+            "key": "tend:1738",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 15 min",
+            "target": "field plot 7 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "withdraw:27188:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 32 min",
+            "target": "pile of goods 13 tiles south-west (seen 3 world h 34 min ago)"
+          },
+          {
+            "key": "gather:25777",
+            "kind": "gather",
+            "label": "Chopping wood to repair the hut",
+            "goal": "to repair the hut",
+            "need": null,
+            "eta": "3 world h 5 min",
+            "target": "tree 13 tiles north (seen 3 world days 20 h 50 min ago)"
+          },
+          {
+            "key": "tend:2204",
+            "kind": "tend",
+            "label": "Tend the crops",
+            "goal": "to help the crop grow",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "field plot 7 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "drink:1000269",
+            "kind": "drink",
+            "label": "Go and drink at the water",
+            "goal": "to quench thirst",
+            "need": "thirst",
+            "eta": "1 world h 20 min",
+            "target": "water (shore) 11 tiles south-west (seen 3 world h 28 min ago)"
+          },
+          {
+            "key": "collect:25320:stone",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the heap",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 13 min",
+            "target": "pile of goods 10 tiles north-east (seen 10 world min ago)"
+          },
+          {
+            "key": "collect:28035:stone",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the heap",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 6 min",
+            "target": "pile of goods 9 tiles north-west (seen 1 world min ago)"
+          },
+          {
+            "key": "withdraw:28035:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "1 world h 9 min",
+            "target": "pile of goods 9 tiles north-west (seen 1 world min ago)"
+          },
+          {
+            "key": "repair:11816",
+            "kind": "repair",
+            "label": "Help repair a neighbour’s quarry",
+            "goal": "to keep a neighbour’s roof over their head",
+            "need": null,
+            "eta": "2 world h 17 min",
+            "target": "quarry 16 tiles east (seen 46 world min ago)"
+          },
+          {
+            "key": "withdraw:25546:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "2 world h 20 min",
+            "target": "pile of goods 22 tiles south-east (seen 4 world days 10 h 19 min ago)"
+          },
+          {
+            "key": "withdraw:26771:salvage",
+            "kind": "withdraw",
+            "label": "Gather up what was left behind",
+            "goal": "to put left-behind belongings to use",
+            "need": null,
+            "eta": "2 world h 25 min",
+            "target": "pile of goods 23 tiles south (seen 5 world days 23 h 34 min ago)"
+          },
+          {
+            "key": "bring:31736:wood",
+            "kind": "deposit",
+            "label": "Bring 1 wood to the kiln",
+            "goal": "to carry more water at a time (a water jar)",
+            "need": null,
+            "eta": "1 world h 10 min",
+            "target": "kiln 10 tiles east (seen 7 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          },
+          {
+            "key": "gather:1073",
+            "kind": "gather",
+            "label": "Breaking stone to make a hoe",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 56 min",
+            "target": "rock outcrop 14 tiles west (seen 16 world h 11 min ago)"
+          },
+          {
+            "key": "gather:1071",
+            "kind": "gather",
+            "label": "Breaking stone to make a hoe",
+            "goal": "to make a hoe",
+            "need": null,
+            "eta": "1 world h 59 min",
+            "target": "rock outcrop 15 tiles west (seen 16 world h 4 min ago)"
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 10 tiles south-east (seen 14 world min ago)"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 8 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty",
+            "target": "berry bush 7 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty",
+            "target": "wild grain 12 tiles south-east (seen 23 world min ago)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty",
+            "target": "wild grain 13 tiles south-east (seen 28 world min ago)"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "failed there 81 ticks ago (nothing left)",
+            "target": "wild grain 9 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "label": "Work on the building site",
+            "reason": "site is waiting for materials (unknown)",
+            "target": "kiln site 10 tiles north-east (seen 7 world days 18 h 3 min ago)"
+          },
+          {
+            "label": "Care for Theo",
+            "reason": "does not know where they are",
+            "target": "Theo (last seen 16 world h 2 min ago)"
+          },
+          {
+            "label": "Check on Fenn",
+            "reason": "they are not close enough to go looking",
+            "target": "Fenn (last seen 3 world h 48 min ago)"
+          },
+          {
+            "label": "Bring something to Theo",
+            "reason": "has nothing to spare for someone hungry",
+            "target": "Theo (last seen 16 world h 2 min ago)"
+          },
+          {
+            "label": "Check on Eli",
+            "reason": "they are not close enough to go looking",
+            "target": "Eli (last seen 1 world h 4 min ago)"
+          },
+          {
+            "label": "Check on Ivo",
+            "reason": "they are not close enough to go looking",
+            "target": "Ivo (last seen 3 world h 14 min ago)"
+          }
+        ],
+        "plans": [
+          {
+            "goal": "put 12 units of food by for the household",
+            "kind": "stock",
+            "status": "active",
+            "step": "gather food to put by (9 more)",
+            "wants": {},
+            "blocked": "",
+            "reason": "there is next to nothing at home to fall back on",
+            "since": "48 world min ago"
+          },
+          {
+            "goal": "be fed, watered and under shelter before dark",
+            "kind": "night",
+            "status": "done",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "under shelter for 567 ticks of the night, fed and watered by morning",
+            "since": "16 world h 47 min ago"
+          },
+          {
+            "goal": "make a hoe",
+            "kind": "tool",
+            "status": "dropped",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "never got round to the hoe (still short 1 stone)",
+            "since": "2 world days 1 h 14 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": false,
+        "text": null,
+        "reason": "model call failed: control was handed back to the engine",
+        "latencyMs": 37208
+      },
+      "proposal": null,
+      "problem": "model call failed: control was handed back to the engine",
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 72073,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "753c8048",
+      "worldHash": "aded6509",
+      "choice": {
+        "kind": "pick",
+        "key": "deposit:17319:food"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "deposit:17319:food",
+        "activityId": 32141,
+        "label": "Bringing food home"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 72153,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "d1b26f2a",
+      "worldHash": "dbbb23ad",
+      "choice": {
+        "kind": "defer"
+      },
+      "timing": "exact",
+      "result": null
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 32141,
+      "label": "Bringing food home",
+      "tick": 72153,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 72074,
+      "events": []
+    }
+  ],
+  "end": {
+    "tick": 72154,
+    "hash": "0e556ffb",
+    "died": false,
+    "calls": 2,
+    "applied": 1,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 2,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 72158,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

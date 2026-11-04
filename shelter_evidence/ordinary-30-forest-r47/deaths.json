@@ -1,0 +1,65 @@
+[
+  {
+    "tick": 23823,
+    "name": "Thea",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 23940,
+    "name": "Viktor",
+    "cause": "fever",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 47238,
+    "name": "Bram",
+    "cause": "old age",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 50911,
+    "name": "Silas",
+    "cause": "wolf attack",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54030,
+    "name": "Greta",
+    "cause": "fever",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 56877,
+    "name": "Nico",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 56917,
+    "name": "Cole",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 57123,
+    "name": "Delia",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 57386,
+    "name": "Arlo",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  }
+]

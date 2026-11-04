@@ -1,0 +1,15 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-preservation-trace132",
+  "head": "216619d59e9cc094accb797ee8d0426a4c791b48",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/preservation_uptake_trace.ts",
+      "kind": "untracked",
+      "sha256": "4e0fa0afb2f52b99694009bd36c364d39ca5eceb870e4aad575f6d3e65fb4a96",
+      "bytes": 4031,
+      "archiveObject": "objects/4e/4e0fa0afb2f52b99694009bd36c364d39ca5eceb870e4aad575f6d3e65fb4a96.gz"
+    }
+  ],
+  "stagedFiles": []
+}

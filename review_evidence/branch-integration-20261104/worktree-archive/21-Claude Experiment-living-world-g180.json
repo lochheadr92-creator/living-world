@@ -1,0 +1,134 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-g180",
+  "head": "39c3027304d48ec3cd3d902b55ddc17db1edfd80",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "g180_12s.err.log",
+      "kind": "ignored-evidence",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "g180_12s.log",
+      "kind": "ignored-evidence",
+      "sha256": "bb7757bc96e07a89c6fd86872584d156046805b1c490a3dc693740a551bd5cdd",
+      "bytes": 23625,
+      "archiveObject": "objects/bb/bb7757bc96e07a89c6fd86872584d156046805b1c490a3dc693740a551bd5cdd.gz"
+    },
+    {
+      "path": "g180_12s.manifest.txt",
+      "kind": "untracked",
+      "sha256": "0f577b0ce9ba0156dc823d28a8967e65dabb77fe383e10b1cbc2dd3c6d0ae794",
+      "bytes": 697,
+      "archiveObject": "objects/0f/0f577b0ce9ba0156dc823d28a8967e65dabb77fe383e10b1cbc2dd3c6d0ae794.gz"
+    },
+    {
+      "path": "g180_12s/lab_aspen.jsonl",
+      "kind": "untracked",
+      "sha256": "dcd33cff0cbb33ce79b10b0fe7cff9a3f2aac2683efe4ff6d62058dc093d6832",
+      "bytes": 8232,
+      "archiveObject": "objects/dc/dcd33cff0cbb33ce79b10b0fe7cff9a3f2aac2683efe4ff6d62058dc093d6832.gz"
+    },
+    {
+      "path": "g180_12s/lab_birch.jsonl",
+      "kind": "untracked",
+      "sha256": "429f7a4cacb2f8e80bfdbadc36e4b5894be311eee96bb2ee1777271a28e7e645",
+      "bytes": 8163,
+      "archiveObject": "objects/42/429f7a4cacb2f8e80bfdbadc36e4b5894be311eee96bb2ee1777271a28e7e645.gz"
+    },
+    {
+      "path": "g180_12s/lab_cedar.jsonl",
+      "kind": "untracked",
+      "sha256": "c28fff3130efaf229d1b3ef4115092d55ac4419c0402cf8125729202af85f000",
+      "bytes": 8420,
+      "archiveObject": "objects/c2/c28fff3130efaf229d1b3ef4115092d55ac4419c0402cf8125729202af85f000.gz"
+    },
+    {
+      "path": "g180_12s/lab_fern.jsonl",
+      "kind": "untracked",
+      "sha256": "84f85454b65f6b2e9d8d1d070acfb72005f53466f446888d6915a6ae46702cbe",
+      "bytes": 8381,
+      "archiveObject": "objects/84/84f85454b65f6b2e9d8d1d070acfb72005f53466f446888d6915a6ae46702cbe.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-1.jsonl",
+      "kind": "untracked",
+      "sha256": "6ecafd0dc8e7740d963480874e1fa1e961030debf9f795ed80b0eb37726afb9a",
+      "bytes": 7858,
+      "archiveObject": "objects/6e/6ecafd0dc8e7740d963480874e1fa1e961030debf9f795ed80b0eb37726afb9a.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-2.jsonl",
+      "kind": "untracked",
+      "sha256": "7e88f3a062e74c45da9f87b374fc2ae112b3209efa4166f61be9e0a441d663de",
+      "bytes": 8350,
+      "archiveObject": "objects/7e/7e88f3a062e74c45da9f87b374fc2ae112b3209efa4166f61be9e0a441d663de.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-3.jsonl",
+      "kind": "untracked",
+      "sha256": "b96bc986acef540402c80da610044ea0696e208128b67a51555d47fb1f6374cd",
+      "bytes": 8275,
+      "archiveObject": "objects/b9/b96bc986acef540402c80da610044ea0696e208128b67a51555d47fb1f6374cd.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-4.jsonl",
+      "kind": "untracked",
+      "sha256": "633c630bc0524ecf3fe5748f9aec485d29363f006a8d915ddbba8820b5526bb8",
+      "bytes": 8572,
+      "archiveObject": "objects/63/633c630bc0524ecf3fe5748f9aec485d29363f006a8d915ddbba8820b5526bb8.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-5.jsonl",
+      "kind": "untracked",
+      "sha256": "1ef2e9be9c94bd99d04e8bb43f8bf1ee5ec0920eb0ed3ca87037fbafb1c0d3c0",
+      "bytes": 8209,
+      "archiveObject": "objects/1e/1ef2e9be9c94bd99d04e8bb43f8bf1ee5ec0920eb0ed3ca87037fbafb1c0d3c0.gz"
+    },
+    {
+      "path": "g180_12s/lab_gen-6.jsonl",
+      "kind": "untracked",
+      "sha256": "4c3facc193386e66184f2a67fe8da44cab3f67a6827c44fb692dbffdd77b31c1",
+      "bytes": 8356,
+      "archiveObject": "objects/4c/4c3facc193386e66184f2a67fe8da44cab3f67a6827c44fb692dbffdd77b31c1.gz"
+    },
+    {
+      "path": "g180_12s/lab_meadow.jsonl",
+      "kind": "untracked",
+      "sha256": "47875604ad01377d4c4c577ecbea083d5bc27f80002aeec12c4774a83b8a03b5",
+      "bytes": 8061,
+      "archiveObject": "objects/47/47875604ad01377d4c4c577ecbea083d5bc27f80002aeec12c4774a83b8a03b5.gz"
+    },
+    {
+      "path": "g180_12s/lab_river.jsonl",
+      "kind": "untracked",
+      "sha256": "98c3169ae2afd2cb25cae54c1753ccba347d92a341542f88c72b2e07e06e21de",
+      "bytes": 8404,
+      "archiveObject": "objects/98/98c3169ae2afd2cb25cae54c1753ccba347d92a341542f88c72b2e07e06e21de.gz"
+    },
+    {
+      "path": "g180_12s/report.txt",
+      "kind": "untracked",
+      "sha256": "381f844b83f04afcc2fb887d0521049088cd2eedf7fb01764a886e12e8045bb9",
+      "bytes": 23252,
+      "archiveObject": "objects/38/381f844b83f04afcc2fb887d0521049088cd2eedf7fb01764a886e12e8045bb9.gz"
+    },
+    {
+      "path": "g180_smoke/lab_meadow.jsonl",
+      "kind": "untracked",
+      "sha256": "b65a9b377c7be66cb3613e98c61913a459c9fc98b3c4b1e8124ba85014d42ab1",
+      "bytes": 5695,
+      "archiveObject": "objects/b6/b65a9b377c7be66cb3613e98c61913a459c9fc98b3c4b1e8124ba85014d42ab1.gz"
+    },
+    {
+      "path": "g180_smoke/report.txt",
+      "kind": "untracked",
+      "sha256": "327541b86d17ecc229b449c5cccd1fb414f6a91ed661ba270b0d39ec321b3492",
+      "bytes": 20467,
+      "archiveObject": "objects/32/327541b86d17ecc229b449c5cccd1fb414f6a91ed661ba270b0d39ec321b3492.gz"
+    }
+  ],
+  "stagedFiles": []
+}

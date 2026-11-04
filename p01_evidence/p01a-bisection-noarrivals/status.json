@@ -1,0 +1,74 @@
+{
+  "forest-r121": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.860Z",
+    "seconds": 317
+  },
+  "forest-r120": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.865Z",
+    "seconds": 323
+  },
+  "forest-r119": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.869Z",
+    "seconds": 341
+  },
+  "forest-r118": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.872Z",
+    "seconds": 322
+  },
+  "river-r121": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.876Z",
+    "seconds": 381
+  },
+  "river-r120": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.880Z",
+    "seconds": 378
+  },
+  "river-r119": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.884Z",
+    "seconds": 382
+  },
+  "river-r118": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.888Z",
+    "seconds": 366
+  },
+  "meadow-r121": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.893Z",
+    "seconds": 344
+  },
+  "meadow-r120": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.897Z",
+    "seconds": 335
+  },
+  "meadow-r119": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.902Z",
+    "seconds": 323
+  },
+  "meadow-r118": {
+    "state": "done",
+    "exit": 0,
+    "started": "2026-11-02T08:17:45.907Z",
+    "seconds": 322
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "tick": 66421,
+    "id": 1131,
+    "name": "Kai",
+    "cause": "injuries",
+    "age": 27,
+    "packFoodBefore": 0,
+    "invBefore": {
+      "pick": 1,
+      "seeds": 4,
+      "hammer": 1,
+      "basket": 1,
+      "axe": 1,
+      "hoe": 1,
+      "spear": 1,
+      "wood": 4
+    },
+    "hungerBefore": 31.42999999999904,
+    "activityBefore": "rest:Sheltering at the hut",
+    "homeFood": 0,
+    "membersWithSpare": 2,
+    "members": [
+      {
+        "id": 1132,
+        "name": "Petra",
+        "food": 7,
+        "surplus": 4,
+        "dist": 4,
+        "hunger": 75
+      },
+      {
+        "id": 24129,
+        "name": "Maren",
+        "food": 2,
+        "surplus": 1,
+        "dist": 4,
+        "hunger": 62
+      }
+    ]
+  }
+]

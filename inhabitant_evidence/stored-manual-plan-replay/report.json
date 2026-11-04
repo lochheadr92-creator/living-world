@@ -1,0 +1,111 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ada",
+  "startPath": "/inhabitant_evidence/stored-materials-staged-first/plan-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 981,
+  "browserHash": "cf5fbc8e",
+  "replayHash": "cf5fbc8e",
+  "fullSerializedEqual": true,
+  "applied": 3,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 12,
+      "label": "Collecting 1 stone",
+      "tick": 793,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 13,
+      "label": "Making an axe",
+      "tick": 868,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 16,
+      "label": "Chopping wood",
+      "tick": 980,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "requests": [],
+  "inventory": {
+    "axe": 1,
+    "wood": 3
+  },
+  "plans": [
+    {
+      "id": 11,
+      "kind": "tool",
+      "goal": "make an axe",
+      "since": 700,
+      "until": 5500,
+      "status": "done",
+      "reason": "made the axe",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "axe",
+      "sheltered": 0,
+      "worked": 1,
+      "ended": 868,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    },
+    {
+      "id": 20,
+      "kind": "night",
+      "goal": "be fed, watered and under shelter before dark",
+      "since": 980,
+      "until": 2520,
+      "status": "active",
+      "step": "get to my lean-to",
+      "stepKind": "goto",
+      "stepTarget": 6,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": "",
+      "reason": "nowhere to shelter nearby for the night",
+      "setAside": 0,
+      "aboutId": 6,
+      "wants": {},
+      "makes": "",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 0
+    }
+  ],
+  "commitments": [],
+  "relations": {},
+  "tools": [
+    {
+      "ent": "tool",
+      "id": 14,
+      "kind": "axe",
+      "tier": 0,
+      "wear": 1.512,
+      "ownerHh": 1,
+      "holder": 2,
+      "loan": null,
+      "madeTick": 867,
+      "maker": 2
+    }
+  ],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

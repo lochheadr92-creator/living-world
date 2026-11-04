@@ -1,0 +1,114 @@
+[
+  {
+    "tick": 815,
+    "person": 1120,
+    "name": "Abel",
+    "item": "stone",
+    "chosen": 1132,
+    "disabled": 1132,
+    "changed": false,
+    "reason": "I am wary of Petra, but can still ask · make a pick and the stone is short +24 · they are carrying more than one stone +4 · walking −2",
+    "trust": 4.886917058718569,
+    "history": []
+  },
+  {
+    "tick": 1952,
+    "person": 1106,
+    "name": "Mira",
+    "item": "wood",
+    "chosen": 1107,
+    "disabled": 1113,
+    "changed": true,
+    "reason": "I trust Emre; they may still need it themselves · make a hoe and the wood is short +23 · I could fetch wood myself soon −8 · they are carrying more than one wood +4 · walking −2",
+    "trust": 78.80000000000001,
+    "history": [
+      {
+        "tick": 7244,
+        "text": "worked alongside Emre"
+      },
+      {
+        "tick": 7294,
+        "text": "worked alongside Emre"
+      },
+      {
+        "tick": 7344,
+        "text": "worked alongside Emre"
+      },
+      {
+        "tick": 7644,
+        "text": "worked alongside Emre"
+      },
+      {
+        "tick": 10744,
+        "text": "worked alongside Emre"
+      },
+      {
+        "tick": 11215,
+        "text": "Emre warned me about a wolf"
+      }
+    ]
+  },
+  {
+    "tick": 5801,
+    "kind": "executed-transfer",
+    "from": "person:1142",
+    "to": "person:1145",
+    "item": "stone",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 6222,
+    "kind": "executed-transfer",
+    "from": "person:1140",
+    "to": "person:1139",
+    "item": "berries",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 7599,
+    "kind": "executed-transfer",
+    "from": "person:1150",
+    "to": "person:1119",
+    "item": "fish",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 10833,
+    "kind": "executed-transfer",
+    "from": "person:1122",
+    "to": "person:1113",
+    "item": "fish",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 12216,
+    "kind": "executed-transfer",
+    "from": "person:1142",
+    "to": "person:1109",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 12468,
+    "kind": "executed-transfer",
+    "from": "person:1142",
+    "to": "person:1119",
+    "item": "grain",
+    "n": 2,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 13190,
+    "kind": "executed-transfer",
+    "from": "person:1125",
+    "to": "person:1131",
+    "item": "fish",
+    "n": 1,
+    "reason": "gift on request"
+  }
+]

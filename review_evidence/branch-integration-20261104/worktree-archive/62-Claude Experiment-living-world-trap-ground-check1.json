@@ -1,0 +1,64 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-trap-ground-check1",
+  "head": "2fdf0ea159c56af9adac1ce24f376d34e5c6c976",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "src/sim/knowledge.ts",
+      "kind": "tracked-change",
+      "sha256": "5990a5ec2f9d82bfa24da9647e88edad1212297aba38b2abb7508eadb1842a9d",
+      "bytes": 11006,
+      "archiveObject": "objects/59/5990a5ec2f9d82bfa24da9647e88edad1212297aba38b2abb7508eadb1842a9d.gz"
+    },
+    {
+      "path": "src/sim/labels.ts",
+      "kind": "tracked-change",
+      "sha256": "a61fa81c1b0690c3d099bb264b09f1b9b6a6b9880e036e8670356cf170067cbe",
+      "bytes": 4062,
+      "archiveObject": "objects/a6/a61fa81c1b0690c3d099bb264b09f1b9b6a6b9880e036e8670356cf170067cbe.gz"
+    },
+    {
+      "path": "src/sim/passive_gear.ts",
+      "kind": "tracked-change",
+      "sha256": "c3441a3cd33b78bc51ef271343495f5321e14544e64a7e8b99a12326a4753823",
+      "bytes": 13104,
+      "archiveObject": "objects/c3/c3441a3cd33b78bc51ef271343495f5321e14544e64a7e8b99a12326a4753823.gz"
+    },
+    {
+      "path": "src/sim/perception.ts",
+      "kind": "tracked-change",
+      "sha256": "6683ad1ec2c6cf5ff60945391ffcc77d8e086df2b0e064e0ce6780cf58e6e895",
+      "bytes": 9997,
+      "archiveObject": "objects/66/6683ad1ec2c6cf5ff60945391ffcc77d8e086df2b0e064e0ce6780cf58e6e895.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "5038ad0cb54ab9c5adae1fce6bd53cceaa1a44f035dd822d171e35f4afb3f759",
+      "bytes": 26258,
+      "archiveObject": "objects/50/5038ad0cb54ab9c5adae1fce6bd53cceaa1a44f035dd822d171e35f4afb3f759.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "bdbd6a29ae0f6a4ad9b835e637d58f3537e1f76026aa6373c09518650937266c",
+      "bytes": 55996,
+      "archiveObject": "objects/bd/bdbd6a29ae0f6a4ad9b835e637d58f3537e1f76026aa6373c09518650937266c.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "194bd684c4f081ff161803a7ef63866f265b7a2bb17103c5f4daab154f4f224a",
+      "bytes": 31049,
+      "archiveObject": "objects/19/194bd684c4f081ff161803a7ef63866f265b7a2bb17103c5f4daab154f4f224a.gz"
+    },
+    {
+      "path": "tests/trap_ground.test.ts",
+      "kind": "untracked",
+      "sha256": "b103974306ac79de2bfe57379f0847e7d178346fa9eee326faf0c66a6e670961",
+      "bytes": 4356,
+      "archiveObject": "objects/b1/b103974306ac79de2bfe57379f0847e7d178346fa9eee326faf0c66a6e670961.gz"
+    }
+  ],
+  "stagedFiles": []
+}

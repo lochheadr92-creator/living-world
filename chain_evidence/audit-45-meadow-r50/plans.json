@@ -1,0 +1,142 @@
+[
+  {
+    "person": 1039,
+    "name": "Edda",
+    "makes": "planks",
+    "forSite": 7138,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the planks from the timber yard)",
+    "since": 28016,
+    "ended": 35218
+  },
+  {
+    "person": 1036,
+    "name": "Vik",
+    "makes": "planks",
+    "forSite": 7138,
+    "status": "dropped",
+    "reason": "the site came by its planks some other way",
+    "since": 36375,
+    "ended": 36463
+  },
+  {
+    "person": 1039,
+    "name": "Edda",
+    "makes": "planks",
+    "forSite": 7138,
+    "status": "dropped",
+    "reason": "the site the planks were for is finished or gone",
+    "since": 37047,
+    "ended": 37049
+  },
+  {
+    "person": 1019,
+    "name": "Jax",
+    "makes": "planks",
+    "forSite": 14724,
+    "status": "done",
+    "reason": "brought 2 planks from the timber yard to the site",
+    "since": 39428,
+    "ended": 43486
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "planks",
+    "forSite": 14724,
+    "status": "done",
+    "reason": "brought 1 planks from the timber yard to the site",
+    "since": 48160,
+    "ended": 48965
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "planks",
+    "forSite": 14724,
+    "status": "dropped",
+    "reason": "the site came by its planks some other way",
+    "since": 51613,
+    "ended": 55414
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "jar",
+    "forSite": 0,
+    "status": "dropped",
+    "reason": "the time is up (was going to firing a water jar)",
+    "since": 58512,
+    "ended": 65714
+  },
+  {
+    "person": 1036,
+    "name": "Vik",
+    "makes": "bricks",
+    "forSite": 23559,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the bricks from the kiln)",
+    "since": 63442,
+    "ended": 70644
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "bricks",
+    "forSite": 23559,
+    "status": "dropped",
+    "reason": "the time is up (was going to get 1 more clay for the fired bricks)",
+    "since": 68128,
+    "ended": 75330
+  },
+  {
+    "person": 1019,
+    "name": "Jax",
+    "makes": "bricks",
+    "forSite": 23559,
+    "status": "done",
+    "reason": "brought 3 bricks from the kiln to the site",
+    "since": 70713,
+    "ended": 77706
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "planks",
+    "forSite": 0,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the planks from the timber yard)",
+    "since": 79149,
+    "ended": 86351
+  },
+  {
+    "person": 1018,
+    "name": "Alma",
+    "makes": "jar",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the jar from the kiln",
+    "since": 87339,
+    "ended": 91104
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "jar",
+    "forSite": 0,
+    "status": "dropped",
+    "reason": "the time is up (was going to get 2 more clay for the a water jar)",
+    "since": 88815,
+    "ended": 96017
+  },
+  {
+    "person": 1001,
+    "name": "Bea",
+    "makes": "jar",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the jar from the kiln",
+    "since": 98429,
+    "ended": 103678
+  }
+]

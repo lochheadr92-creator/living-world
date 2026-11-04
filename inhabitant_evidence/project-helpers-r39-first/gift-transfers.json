@@ -1,0 +1,10 @@
+[
+  {
+    "tick": 139,
+    "from": "person:7",
+    "to": "person:2",
+    "item": "berries",
+    "n": 2,
+    "reason": "offered gift"
+  }
+]

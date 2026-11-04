@@ -1,0 +1,144 @@
+[
+  {
+    "arm": "enabled",
+    "staged": true,
+    "externalModel": false,
+    "hash": "aba0ee4a",
+    "fullReplayEqual": true,
+    "memory": [
+      {
+        "projectId": 14,
+        "organiserId": 5,
+        "success": true,
+        "tick": 699,
+        "buildingId": 7,
+        "benefit": {
+          "tick": 709,
+          "item": "stone",
+          "amount": 2
+        }
+      }
+    ],
+    "inventory": {
+      "wood": 2,
+      "stone": 2
+    },
+    "participation": {
+      "personId": 2,
+      "requestId": 26,
+      "since": 700,
+      "status": "supporting",
+      "reason": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+      "materials": {},
+      "work": 0,
+      "supports": 5,
+      "decisions": [
+        {
+          "candidateId": 5,
+          "accepted": true,
+          "reason": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+          "tick": 1000
+        }
+      ]
+    },
+    "requests": [
+      {
+        "id": 26,
+        "kind": "help_build",
+        "from": 5,
+        "to": 2,
+        "item": null,
+        "amount": 1,
+        "offer": null,
+        "offerAmount": 0,
+        "siteId": 15,
+        "infoKind": "",
+        "created": 978,
+        "expires": 1678,
+        "status": "promised",
+        "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+        "resolved": 0,
+        "purpose": "",
+        "destKind": "site",
+        "destId": 15,
+        "deadline": 0,
+        "milestone": "",
+        "toolKind": null,
+        "outcome": "",
+        "commitmentId": 27
+      }
+    ],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "arm": "disabled",
+    "staged": true,
+    "externalModel": false,
+    "hash": "dfc580f7",
+    "fullReplayEqual": true,
+    "memory": [
+      {
+        "projectId": 14,
+        "organiserId": 5,
+        "success": true,
+        "tick": 699,
+        "buildingId": 7
+      }
+    ],
+    "inventory": {
+      "wood": 2,
+      "stone": 2
+    },
+    "participation": {
+      "personId": 2,
+      "requestId": 0,
+      "since": 700,
+      "status": "supporting",
+      "reason": "staged initial support",
+      "materials": {},
+      "work": 0,
+      "supports": 13,
+      "decisions": [
+        {
+          "candidateId": 5,
+          "accepted": false,
+          "reason": "prefers the organiser already supported (#13)",
+          "tick": 1000
+        }
+      ]
+    },
+    "requests": [
+      {
+        "id": 26,
+        "kind": "help_build",
+        "from": 5,
+        "to": 2,
+        "item": null,
+        "amount": 1,
+        "offer": null,
+        "offerAmount": 0,
+        "siteId": 15,
+        "infoKind": "",
+        "created": 978,
+        "expires": 1678,
+        "status": "declined",
+        "note": "prefers the organiser already supported (#13)",
+        "resolved": 1000,
+        "purpose": "",
+        "destKind": "site",
+        "destId": 15,
+        "deadline": 0,
+        "milestone": "",
+        "toolKind": null,
+        "outcome": "refused"
+      }
+    ],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

@@ -1,0 +1,380 @@
+[
+  {
+    "tick": 0,
+    "person": 997,
+    "name": "Pavel",
+    "activity": 1058,
+    "item": "wood",
+    "store": 996,
+    "rememberedStore": {
+      "id": 996,
+      "kind": "building",
+      "x": 44.5,
+      "y": 36.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 994,
+      "cond": 75.55771176470444,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "fruit": 1,
+        "wood": 2
+      },
+      "origin": 997,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 1057,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1057,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 1000,
+    "name": "Sven",
+    "activity": 1060,
+    "item": "wood",
+    "store": 999,
+    "rememberedStore": {
+      "id": 999,
+      "kind": "building",
+      "x": 43.5,
+      "y": 41.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 998,
+      "cond": 72.51021338161081,
+      "fuel": 0,
+      "items": {
+        "berries": 4,
+        "fruit": 2,
+        "wood": 2
+      },
+      "origin": 1000,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 1059,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1059,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 1001,
+    "name": "Bea",
+    "activity": 1062,
+    "item": "wood",
+    "store": 999,
+    "rememberedStore": {
+      "id": 999,
+      "kind": "building",
+      "x": 43.5,
+      "y": 41.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 998,
+      "cond": 72.51021338161081,
+      "fuel": 0,
+      "items": {
+        "berries": 4,
+        "fruit": 2,
+        "wood": 2
+      },
+      "origin": 1001,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 1061,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1061,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 1007,
+    "name": "Sofia",
+    "activity": 1066,
+    "item": "wood",
+    "store": 1006,
+    "rememberedStore": {
+      "id": 1006,
+      "kind": "building",
+      "x": 34.5,
+      "y": 40.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 1005,
+      "cond": 98.06507128523663,
+      "fuel": 0,
+      "items": {
+        "berries": 6,
+        "fruit": 3,
+        "wood": 2
+      },
+      "origin": 1007,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 1065,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1065,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 61,
+    "person": 1023,
+    "name": "Dax",
+    "activity": 1153,
+    "item": "wood",
+    "store": 1021,
+    "rememberedStore": {
+      "id": 1021,
+      "kind": "building",
+      "x": 42.5,
+      "y": 33.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 60,
+      "src": "seen",
+      "from": 0,
+      "learned": 60,
+      "btype": "lean_to",
+      "hh": 1020,
+      "cond": 77.73163034215698,
+      "fuel": 0,
+      "items": {
+        "berries": 5,
+        "fruit": 2,
+        "wood": 2
+      },
+      "origin": 1023,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": null,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1082,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 701,
+    "person": 997,
+    "name": "Pavel",
+    "activity": 1585,
+    "item": "wood",
+    "store": 996,
+    "rememberedStore": {
+      "id": 996,
+      "kind": "building",
+      "x": 44.5,
+      "y": 36.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 701,
+      "src": "seen",
+      "from": 0,
+      "learned": 701,
+      "btype": "lean_to",
+      "hh": 994,
+      "cond": 73.38151176470203,
+      "fuel": 0,
+      "items": {
+        "berries": 2,
+        "fruit": 1,
+        "wood": 1
+      },
+      "origin": 997,
+      "hops": 0
+    },
+    "goal": "to make a spear",
+    "kind": "plans",
+    "planId": 1057,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1057,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "setAside": 3,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": "a wolf about"
+      }
+    ]
+  }
+]

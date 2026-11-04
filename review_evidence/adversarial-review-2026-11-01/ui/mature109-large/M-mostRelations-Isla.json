@@ -1,0 +1,22 @@
+{
+  "name": "Isla",
+  "id": 4333,
+  "textLen": 17513,
+  "selectUpdateMs": 23.599999994039536,
+  "fullUpdateMs": 0.7000000029802322,
+  "pure": true,
+  "hashSame": true,
+  "relations": 83,
+  "intentions": [
+    {
+      "kind": "shelter",
+      "goal": "get the household's hut built",
+      "step": "get 1 stone for the hut (it wants 1 stone) (Bram promised 1 wood, expected by tick 108794)",
+      "blocked": "warmth comes first",
+      "since": 105814,
+      "until": 113014
+    }
+  ],
+  "commitments": 0,
+  "age": 38
+}

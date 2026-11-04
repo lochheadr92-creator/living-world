@@ -1,0 +1,92 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-occasion-recovery",
+  "head": "49a7255e58a72325325238004ae6316af64fcb7b",
+  "branch": "refs/heads/codex/occasion-recovery112",
+  "workingFiles": [
+    {
+      "path": "autonomy-occasion112-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "df4c5297adacb711e8a09b1de12f5cc41a4671225c36bbb4f1d16aebed069de4",
+      "bytes": 2569,
+      "archiveObject": "objects/df/df4c5297adacb711e8a09b1de12f5cc41a4671225c36bbb4f1d16aebed069de4.gz"
+    },
+    {
+      "path": "autonomy-occasion112-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "056ff47d3f073d566206d15da2203e67fb6f9bd54bf1a4ca65e97451c9e22a85",
+      "bytes": 2200,
+      "archiveObject": "objects/05/056ff47d3f073d566206d15da2203e67fb6f9bd54bf1a4ca65e97451c9e22a85.gz"
+    },
+    {
+      "path": "autonomy-occasion112-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "35f0f3f65a9288f005dd0f136d613a0930516d09b09b7cb932d24c0c3522c807",
+      "bytes": 1859,
+      "archiveObject": "objects/35/35f0f3f65a9288f005dd0f136d613a0930516d09b09b7cb932d24c0c3522c807.gz"
+    },
+    {
+      "path": "autonomy-occasion112-full-tests.err",
+      "kind": "untracked",
+      "sha256": "036aa736a6d0f3bf0e760cd57cea25510d193fd79f020e04eb5b7847c98e65db",
+      "bytes": 1569,
+      "archiveObject": "objects/03/036aa736a6d0f3bf0e760cd57cea25510d193fd79f020e04eb5b7847c98e65db.gz"
+    },
+    {
+      "path": "autonomy-occasion112-full-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "4eee2323cc412f72440665d49e5efc8a8e212e404020064f6068541d1bafb677",
+      "bytes": 54802,
+      "archiveObject": "objects/4e/4eee2323cc412f72440665d49e5efc8a8e212e404020064f6068541d1bafb677.gz"
+    },
+    {
+      "path": "autonomy-occasion112-full-tests.pid",
+      "kind": "untracked",
+      "sha256": "1d4ecd3a82ae6182577678c37490adae4da64ecb0ab366cad59f85004a63e0c7",
+      "bytes": 7,
+      "archiveObject": "objects/1d/1d4ecd3a82ae6182577678c37490adae4da64ecb0ab366cad59f85004a63e0c7.gz"
+    },
+    {
+      "path": "autonomy-occasion112-reference.log",
+      "kind": "ignored-evidence",
+      "sha256": "64ca4b5d5f45acaea5ebfab545b029c487fcefb66e4d371719e29ea084a0de0e",
+      "bytes": 1858,
+      "archiveObject": "objects/64/64ca4b5d5f45acaea5ebfab545b029c487fcefb66e4d371719e29ea084a0de0e.gz"
+    },
+    {
+      "path": "autonomy-occasion112-review.log",
+      "kind": "ignored-evidence",
+      "sha256": "98b19261e8d294f3ec7051fb58e177b42acef4626f8fa568174aad1b6612cc5d",
+      "bytes": 1599,
+      "archiveObject": "objects/98/98b19261e8d294f3ec7051fb58e177b42acef4626f8fa568174aad1b6612cc5d.gz"
+    },
+    {
+      "path": "autonomy_evidence/recovery111-meadow-20/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "609351d1e792d34f98146fb658ded5aac28d2836822fff6819df0f20e41502c2",
+      "bytes": 3594124,
+      "archiveObject": "objects/60/609351d1e792d34f98146fb658ded5aac28d2836822fff6819df0f20e41502c2.gz"
+    },
+    {
+      "path": "autonomy_evidence/recovery111-river-20/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "15208829c95b6cf1769ddd97e2491ba4ea6135e5198e4c8b8e00273314b80aeb",
+      "bytes": 5417934,
+      "archiveObject": "objects/15/15208829c95b6cf1769ddd97e2491ba4ea6135e5198e4c8b8e00273314b80aeb.gz"
+    },
+    {
+      "path": "autonomy_evidence/recovery112-meadow-20/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "8cd880e0f719cb7c52324d023fc1eba225972ec3919e33f9194ba617d09cf77d",
+      "bytes": 3620864,
+      "archiveObject": "objects/8c/8cd880e0f719cb7c52324d023fc1eba225972ec3919e33f9194ba617d09cf77d.gz"
+    },
+    {
+      "path": "autonomy_evidence/recovery112-river-20/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "922025496f2688e88e8eff26c06d294009f5f4f6d716eefe755cea6cd375fae0",
+      "bytes": 5317032,
+      "archiveObject": "objects/92/922025496f2688e88e8eff26c06d294009f5f4f6d716eefe755cea6cd375fae0.gz"
+    }
+  ],
+  "stagedFiles": []
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "tick": 696,
+    "day": 0.29,
+    "kind": "home finished",
+    "text": "Zia finished a lean-to for the Linden household."
+  },
+  {
+    "tick": 2431,
+    "day": 1.01,
+    "kind": "home finished",
+    "text": "Milo finished a lean-to for the Thistle household."
+  },
+  {
+    "tick": 2575,
+    "day": 1.07,
+    "kind": "home finished",
+    "text": "Basil finished a lean-to for the Willow household."
+  },
+  {
+    "tick": 2998,
+    "day": 1.25,
+    "kind": "home finished",
+    "text": "Talia finished a lean-to for the Marsh household."
+  },
+  {
+    "tick": 4759,
+    "day": 1.98,
+    "kind": "home finished",
+    "text": "Milo finished a hut for the Finch household."
+  },
+  {
+    "tick": 5200,
+    "day": 2.17,
+    "kind": "home finished",
+    "text": "Jax finished a hut for the Thistle household."
+  },
+  {
+    "tick": 5536,
+    "day": 2.31,
+    "kind": "home finished",
+    "text": "Basil finished a hut for the Willow household."
+  },
+  {
+    "tick": 10292,
+    "day": 4.29,
+    "kind": "home finished",
+    "text": "Petra finished a hut for the Bramble household."
+  },
+  {
+    "tick": 15211,
+    "day": 6.34,
+    "kind": "home finished",
+    "text": "Talia finished a hut for the Marsh household."
+  },
+  {
+    "tick": 22506,
+    "day": 9.38,
+    "kind": "home finished",
+    "text": "Cole finished a hut for the Linden household."
+  },
+  {
+    "tick": 22572,
+    "day": 9.4,
+    "kind": "repair",
+    "text": "Alma repaired a lean-to."
+  },
+  {
+    "tick": 24827,
+    "day": 10.34,
+    "kind": "home finished",
+    "text": "Abel finished a hut for the Brook household."
+  },
+  {
+    "tick": 28952,
+    "day": 12.06,
+    "kind": "site abandoned",
+    "text": "The lean-to site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 31342,
+    "day": 13.06,
+    "kind": "repair",
+    "text": "Cole repaired a lean-to."
+  },
+  {
+    "tick": 32252,
+    "day": 13.44,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 34410,
+    "day": 14.34,
+    "kind": "home finished",
+    "text": "Lena finished a lean-to for the Clover household."
+  },
+  {
+    "tick": 36346,
+    "day": 15.14,
+    "kind": "repair",
+    "text": "Alma repaired a lean-to."
+  },
+  {
+    "tick": 36486,
+    "day": 15.2,
+    "kind": "home finished",
+    "text": "Mira finished a hut for the Briar household."
+  },
+  {
+    "tick": 36601,
+    "day": 15.25,
+    "kind": "home finished",
+    "text": "Tomas finished a hut for the Juniper household."
+  },
+  {
+    "tick": 43157,
+    "day": 17.98,
+    "kind": "home finished",
+    "text": "Talia finished a hut for the Clover household."
+  },
+  {
+    "tick": 43468,
+    "day": 18.11,
+    "kind": "repair",
+    "text": "Cole repaired a hut."
+  },
+  {
+    "tick": 43960,
+    "day": 18.32,
+    "kind": "repair",
+    "text": "Yan repaired a lean-to."
+  },
+  {
+    "tick": 44000,
+    "day": 18.33,
+    "kind": "repair",
+    "text": "Cole repaired a lean-to."
+  }
+]

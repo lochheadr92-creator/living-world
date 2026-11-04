@@ -1,0 +1,16 @@
+C:\dev\Claude Experiment\living-world-integrate\src\sim\helper_learning.ts:91
+    if (!allowed() || !r || !__vite_ssr_import_2__.ALL_ITEMS.includes(r.item) || !amount(r.amount) || r.amount <= 0 || !integer(r.tick, 0, w.tick) || !["conversation", "activity"].includes(r.eventKind) || !integer(r.eventId, 1)) throw new Error("Invalid helper direct receipt");
+                                                                                                                                                                                                                                           ^
+
+Error: Invalid helper direct receipt
+    at receipt (C:\dev\Claude Experiment\living-world-integrate\src\sim\helper_learning.ts:70:223)
+    at validateHelperLearning (C:\dev\Claude Experiment\living-world-integrate\src\sim\helper_learning.ts:71:60)
+    at deserializeWorld (C:\dev\Claude Experiment\living-world-integrate\src\app\save.ts:274:3)
+    at C:\dev\Claude Experiment\living-world-integrate\scripts\household_supply_observe.ts:41:156
+    at ViteNodeRunner.runModule (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:369:4)
+    at ViteNodeRunner.directRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:349:3)
+    at ViteNodeRunner.cachedRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:182:11)
+    at ViteNodeRunner.executeFile (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:157:10)
+    at CAC.run (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/cli.mjs:95:28)
+
+Node.js v24.19.0

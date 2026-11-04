@@ -1,0 +1,196 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ben",
+  "startPath": "/inhabitant_evidence/connections-civic-first/civic-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 1079,
+  "browserHash": "9da36361",
+  "replayHash": "9da36361",
+  "fullSerializedEqual": false,
+  "applied": 3,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 18,
+      "label": "Collecting 2 stone",
+      "tick": 710,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 19,
+      "label": "Pottering about",
+      "tick": 884,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 20,
+      "label": "Strolling about the square",
+      "tick": 1078,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "requests": [
+    {
+      "id": 26,
+      "kind": "help_build",
+      "from": 5,
+      "to": 2,
+      "item": null,
+      "amount": 1,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 15,
+      "infoKind": "",
+      "created": 978,
+      "expires": 1678,
+      "status": "promised",
+      "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+      "resolved": 0,
+      "purpose": "",
+      "destKind": "site",
+      "destId": 15,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "",
+      "commitmentId": 27
+    }
+  ],
+  "techniques": {
+    "charcoal": {
+      "source": "initial",
+      "learned": 0,
+      "teacher": 0
+    }
+  },
+  "trade": {
+    "key": "wood",
+    "since": 700,
+    "why": "quicker at it than at anything else"
+  },
+  "civicOutcomes": [
+    {
+      "projectId": 14,
+      "organiserId": 5,
+      "success": true,
+      "tick": 699,
+      "buildingId": 7,
+      "benefit": {
+        "tick": 709,
+        "item": "stone",
+        "amount": 2
+      }
+    }
+  ],
+  "inventory": {
+    "wood": 2,
+    "stone": 2
+  },
+  "plans": [
+    {
+      "id": 11,
+      "kind": "tool",
+      "goal": "make an axe",
+      "since": 700,
+      "until": 5500,
+      "status": "active",
+      "reason": "it would make the work easier, and the makings are short",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {
+        "wood": 2,
+        "stone": 1
+      },
+      "makes": "axe",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 0,
+      "step": "make the axe",
+      "stepKind": "make",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": "craft:axe",
+      "blocked": ""
+    }
+  ],
+  "commitments": [
+    {
+      "id": 27,
+      "requestId": 26,
+      "kind": "help_build",
+      "to": 5,
+      "item": null,
+      "amount": 1,
+      "siteId": 15,
+      "made": 1000,
+      "deadline": 2800,
+      "status": "active",
+      "delivered": 0,
+      "destKind": "site",
+      "destId": 15,
+      "grace": 0,
+      "milestone": "work on it or bring materials"
+    }
+  ],
+  "relations": {
+    "5": {
+      "affinity": 42.026898271529525,
+      "trust": 10.6,
+      "familiarity": 1.8,
+      "lastMet": 1038,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    },
+    "13": {
+      "affinity": 39.72049,
+      "trust": 10,
+      "familiarity": 0,
+      "lastMet": -99999,
+      "kin": "",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    }
+  },
+  "buildings": [
+    {
+      "id": 6,
+      "type": "lean_to",
+      "store": {
+        "items": {
+          "berries": 8
+        },
+        "cap": 12
+      }
+    },
+    {
+      "id": 7,
+      "type": "storehouse",
+      "store": {
+        "items": {
+          "stone": 2
+        },
+        "cap": 160
+      }
+    }
+  ],
+  "tools": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

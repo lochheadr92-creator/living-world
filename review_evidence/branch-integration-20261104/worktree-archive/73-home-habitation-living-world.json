@@ -1,0 +1,22 @@
+{
+  "worktree": "C:\\Users\\RJLoc\\.codex\\worktrees\\home-habitation\\living-world",
+  "head": "d84e5eaa828e86ea01b9847809875acd4259cf3a",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/_find_moments_rich.ts",
+      "kind": "untracked",
+      "sha256": "f76e0f125d43e030653d0edf2afff7a46da6d4ecb751f341ed6979d1e9d59b1c",
+      "bytes": 1857,
+      "archiveObject": "objects/f7/f76e0f125d43e030653d0edf2afff7a46da6d4ecb751f341ed6979d1e9d59b1c.gz"
+    },
+    {
+      "path": "scripts/_warmth_probe2.ts",
+      "kind": "untracked",
+      "sha256": "67d77f4d8c96c53420c8f1ce96b80bfedd4a4bc01ae2804b05d6c6f3716d3820",
+      "bytes": 2597,
+      "archiveObject": "objects/67/67d77f4d8c96c53420c8f1ce96b80bfedd4a4bc01ae2804b05d6c6f3716d3820.gz"
+    }
+  ],
+  "stagedFiles": []
+}

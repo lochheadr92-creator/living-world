@@ -1,0 +1,554 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": true,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 172.832,
+  "totals": {
+    "samples": 13889,
+    "peopleWithoutCharcoal": 11170,
+    "adultOrYouthWithoutCharcoal": 7561,
+    "wantedTechnique": 0,
+    "learnerOffers": 0,
+    "teacherOffers": 0,
+    "materialRequestOffers": 2119,
+    "materialBlocked": 1416,
+    "knownNeedySites": 2956,
+    "nearbyPeople": 85497,
+    "nearbyWoodCarriers": 53611,
+    "nearbyStoneCarriers": 12836,
+    "nearbyPlankCarriers": 834,
+    "workshopOptions": 672
+  },
+  "selected": 1176,
+  "requests": 683,
+  "heardRequests": 87,
+  "demandTrades": 0,
+  "benefits": 1,
+  "learned": 0,
+  "newPeople": [
+    {
+      "id": 3222,
+      "name": "Mona",
+      "stage": "adult",
+      "background": {
+        "kind": "generalist",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 9521,
+      "name": "Sven",
+      "stage": "child",
+      "techniques": {}
+    },
+    {
+      "id": 16982,
+      "name": "Brigid",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "fish"
+      },
+      "techniques": {
+        "charcoal": {
+          "source": "initial",
+          "learned": 37811,
+          "teacher": 0
+        }
+      }
+    },
+    {
+      "id": 16983,
+      "name": "Corin",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "smith"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 19810,
+      "name": "Fenn",
+      "stage": "child",
+      "techniques": {}
+    },
+    {
+      "id": 20843,
+      "name": "Zora",
+      "stage": "child",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 34156,
+      "name": "Gus",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 42922,
+      "name": "Hugo",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "fish"
+      },
+      "techniques": {}
+    }
+  ],
+  "buildings": [
+    {
+      "id": 1102,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 1111,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1118,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1127,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1130,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2195,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2522,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 3264,
+      "type": "hut",
+      "items": {
+        "grain": 29,
+        "berries": 1
+      }
+    },
+    {
+      "id": 3894,
+      "type": "hut",
+      "items": {
+        "grain": 9
+      }
+    },
+    {
+      "id": 4421,
+      "type": "lean_to",
+      "items": {
+        "grain": 3
+      }
+    },
+    {
+      "id": 4974,
+      "type": "hut",
+      "items": {
+        "grain": 3
+      }
+    },
+    {
+      "id": 6210,
+      "type": "hut",
+      "items": {
+        "grain": 5
+      }
+    },
+    {
+      "id": 9178,
+      "type": "quarry",
+      "items": {
+        "stone": 8
+      }
+    },
+    {
+      "id": 9218,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 9953,
+      "type": "hut",
+      "items": {
+        "grain": 8,
+        "berries": 3
+      }
+    },
+    {
+      "id": 11816,
+      "type": "quarry",
+      "items": {
+        "stone": 1
+      }
+    },
+    {
+      "id": 11823,
+      "type": "storehouse",
+      "items": {}
+    },
+    {
+      "id": 13845,
+      "type": "hut",
+      "items": {
+        "grain": 3,
+        "fish": 1
+      }
+    },
+    {
+      "id": 14835,
+      "type": "timber_yard",
+      "items": {
+        "wood": 2
+      }
+    },
+    {
+      "id": 16492,
+      "type": "hut",
+      "items": {
+        "grain": 6
+      }
+    },
+    {
+      "id": 17319,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 18554,
+      "type": "hall",
+      "items": {}
+    },
+    {
+      "id": 19056,
+      "type": "hut",
+      "items": {
+        "grain": 2,
+        "fruit": 1
+      }
+    },
+    {
+      "id": 30200,
+      "type": "lean_to",
+      "items": {
+        "grain": 4
+      }
+    },
+    {
+      "id": 31736,
+      "type": "kiln",
+      "items": {
+        "bricks": 3
+      }
+    },
+    {
+      "id": 34456,
+      "type": "lean_to",
+      "items": {
+        "grain": 6
+      }
+    },
+    {
+      "id": 36494,
+      "type": "granary",
+      "items": {}
+    },
+    {
+      "id": 37224,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 42756,
+      "type": "hut",
+      "items": {
+        "grain": 7
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 7733,
+      "townshipId": 1104,
+      "siteId": 7732,
+      "organiserId": 1116,
+      "proposed": 17059,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 1116,
+          "requestId": 0,
+          "since": 17059,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 1
+          },
+          "work": 125.45388393599764,
+          "supports": 1116
+        },
+        {
+          "personId": 1125,
+          "requestId": 8059,
+          "since": 17625,
+          "status": "supporting",
+          "reason": "Ines supports Milo coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 65.43148051240519,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Ines supports Milo coordinating and will help build",
+              "tick": 17625
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1144,
+          "requestId": 8264,
+          "since": 17982,
+          "status": "withdrawn",
+          "reason": "urgent personal survival needs",
+          "materials": {
+            "wood": 7
+          },
+          "work": 30.162261133152754,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Alma supports Milo coordinating and will help build",
+              "tick": 17982
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1120,
+          "requestId": 8420,
+          "since": 18958,
+          "status": "supporting",
+          "reason": "Abel supports Milo coordinating and will help build",
+          "materials": {
+            "wood": 1
+          },
+          "work": 29.50631541257451,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Abel supports Milo coordinating and will help build",
+              "tick": 18958
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1134,
+          "requestId": 8438,
+          "since": 19030,
+          "status": "withdrawn",
+          "reason": "urgent personal survival needs",
+          "materials": {
+            "wood": 1
+          },
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Yan supports Milo coordinating and will help build",
+              "tick": 19030
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1107,
+          "requestId": 8531,
+          "since": 19173,
+          "status": "supporting",
+          "reason": "Emre supports Milo coordinating and will help build",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Emre supports Milo coordinating and will help build",
+              "tick": 19173
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1150,
+          "requestId": 8709,
+          "since": 19383,
+          "status": "supporting",
+          "reason": "Arlo supports Milo coordinating and will help build",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Arlo supports Milo coordinating and will help build",
+              "tick": 19383
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 3222,
+          "requestId": 8855,
+          "since": 19583,
+          "status": "supporting",
+          "reason": "Mona supports Milo coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 144.3870712151943,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Mona supports Milo coordinating and will help build",
+              "tick": 19583
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1113,
+          "requestId": 9853,
+          "since": 22456,
+          "status": "supporting",
+          "reason": "Zia supports Milo coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 67.44384484323211,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Zia supports Milo coordinating and will help build",
+              "tick": 22456
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1131,
+          "requestId": 9900,
+          "since": 22528,
+          "status": "supporting",
+          "reason": "Kai supports Milo coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 177.61514294744347,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Kai supports Milo coordinating and will help build",
+              "tick": 22528
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1135,
+          "requestId": 9982,
+          "since": 22727,
+          "status": "refused",
+          "reason": "own needs take priority",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": false,
+              "reason": "own needs take priority",
+              "tick": 22727
+            }
+          ]
+        },
+        {
+          "personId": 1112,
+          "requestId": 10010,
+          "since": 22806,
+          "status": "refused",
+          "reason": "own needs take priority",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": false,
+              "reason": "own needs take priority",
+              "tick": 22806
+            }
+          ]
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 1116,
+            "tick": 17059,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 1116,
+        "changes": [
+          {
+            "tick": 17625,
+            "from": 0,
+            "to": 1116,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 27264,
+      "buildingId": 11823
+    }
+  ],
+  "hash": "1c5cc697",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

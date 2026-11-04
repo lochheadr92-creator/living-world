@@ -1,0 +1,122 @@
+[
+  {
+    "tick": 2339,
+    "day": 0.97,
+    "kind": "home finished",
+    "text": "Maren finished a lean-to for the Ash household."
+  },
+  {
+    "tick": 2393,
+    "day": 1,
+    "kind": "home finished",
+    "text": "Zeke finished a lean-to for the Marsh household."
+  },
+  {
+    "tick": 2448,
+    "day": 1.02,
+    "kind": "home finished",
+    "text": "Jax finished a lean-to for the Moss household."
+  },
+  {
+    "tick": 2536,
+    "day": 1.06,
+    "kind": "home finished",
+    "text": "Theo finished a lean-to for the Heron household."
+  },
+  {
+    "tick": 3709,
+    "day": 1.55,
+    "kind": "home finished",
+    "text": "Faye finished a hut for the Wren household."
+  },
+  {
+    "tick": 5045,
+    "day": 2.1,
+    "kind": "home finished",
+    "text": "Greta finished a lean-to for the Alder household."
+  },
+  {
+    "tick": 7643,
+    "day": 3.18,
+    "kind": "home finished",
+    "text": "Maren finished a hut for the Ash household."
+  },
+  {
+    "tick": 7824,
+    "day": 3.26,
+    "kind": "home finished",
+    "text": "Mira finished a hut for the Briar household."
+  },
+  {
+    "tick": 7934,
+    "day": 3.31,
+    "kind": "home finished",
+    "text": "Yusuf finished a hut for the Finch household."
+  },
+  {
+    "tick": 10681,
+    "day": 4.45,
+    "kind": "home finished",
+    "text": "Jax finished a hut for the Moss household."
+  },
+  {
+    "tick": 14495,
+    "day": 6.04,
+    "kind": "home finished",
+    "text": "Lena finished a hut for the Reed household."
+  },
+  {
+    "tick": 14907,
+    "day": 6.21,
+    "kind": "home finished",
+    "text": "Delia finished a hut for the Heron household."
+  },
+  {
+    "tick": 26552,
+    "day": 11.06,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 27102,
+    "day": 11.29,
+    "kind": "repair",
+    "text": "Ada repaired a lean-to."
+  },
+  {
+    "tick": 27152,
+    "day": 11.31,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 29852,
+    "day": 12.44,
+    "kind": "site abandoned",
+    "text": "The storehouse site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 40977,
+    "day": 17.07,
+    "kind": "repair",
+    "text": "Mira repaired a hut."
+  },
+  {
+    "tick": 41100,
+    "day": 17.13,
+    "kind": "collapse",
+    "text": "A lean-to collapsed from neglect."
+  },
+  {
+    "tick": 46671,
+    "day": 19.45,
+    "kind": "collapse",
+    "text": "A lean-to collapsed from neglect."
+  },
+  {
+    "tick": 51152,
+    "day": 21.31,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  }
+]

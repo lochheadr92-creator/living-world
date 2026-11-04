@@ -1,0 +1,1490 @@
+diff --git a/AGENTS.md b/AGENTS.md
+index 7f70814..e3993e6 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -44,7 +44,9 @@ Scaling and performance history: `docs/SCALING.md`.
+ 
+ ## Current civilisation implementation
+ 
+-Current rules version 39 uses personal trust to choose among otherwise eligible visible helpers for a tool plan's material request (`src/sim/options_social.ts`). Observation 12 / protocols 21-22 explain the choice without guaranteeing help. The isolated lab removal is `rich-no-project-helper-choice`; rules 38 and earlier retain their recorded choice. Staged execution, exact manual replay, ordinary null results and limits: `docs/MEANINGFUL_CONNECTIONS.md`.
++Current rules version 40 connects remembered raw material in own homes/public storehouses to personal/building material acquisition, plan viability and voluntary material promises (`src/sim/material_stock.ts`). Physical withdrawal still checks access, stock and capacity; no new knowledge or receipt schema. Isolated lab removals: `rich-no-stored-material-plans` and `rich-no-stored-material-promises`. Rules 39 and earlier retain their recorded semantics. Contract, ordinary occurrence, preserved failures and exact manual replay: `docs/STORED_MATERIAL_CONNECTIONS.md`.
++
++Rules version 39 uses personal trust to choose among otherwise eligible visible helpers for a tool plan's material request (`src/sim/options_social.ts`). Observation 12 / protocols 21-22 explain the choice without guaranteeing help. The isolated lab removal is `rich-no-project-helper-choice`; rules 38 and earlier retain their recorded choice. Staged execution, exact manual replay, ordinary null results and limits: `docs/MEANINGFUL_CONNECTIONS.md`.
+ 
+ Rules version 38 adds locally witnessed construction satisfaction and later aspirations, following rules 36 competing-plan release and 37 partial shelter delivery. Observation 11 exposes personal hopes and truthful plan summaries. Full evidence and compatibility boundaries: `docs/SIX_STAGE_COMPLETION.md`. Earlier rules version 33 lets a person short of wood or stone whose pack has no room leave the heaviest left-over of the other at a storehouse or shared workplace they know (`src/sim/leave_heaviest.ts`, `docs/LEAVE_HEAVIEST.md`; rarely chosen, no measured benefit) after version 32, which makes a stalled site's shortfall text and one belief-outcome log line match the ledger (`docs/OBSERVER_TRUTH.md`; presentation only) after version 31, which adds personal work tastes (`src/sim/temperament.ts`) after version 30, which adds execution-boundary pending-layout claims (one home layout per household, one-tile footprint separation) and a bounded wait for transient footprint occupants; `src/sim/layout_claims.ts` owns this concept. Claims derive from active unexpired activities; paused work must reacquire. Access safety and rules 29/older are preserved. Version 29 snapshots event participant IDs (`src/sim/events.ts`), so later crew joins cannot rewrite historical participants or change story eligibility across save/load. Rules 28 and earlier retain their recorded semantics. Version 28 adds varied spare time (places to go when nothing is pressing, `src/sim/leisure.ts`) after version 27 night wait across conversation after version 26 spatial finite-deposit geology after version 25 bounded cosmetic stump marks and expired pair timers, with indexed historical lookup, after household practices transmitted through real meals after persistent political alignment after personally informed exchange journeys after settlement production/flow observations and household relocation and construction access, following person-held techniques, developmental proficiency, physical markets, competing coordinators, local death news, social history and township projects.
+ `docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
+diff --git a/docs/CIVILISATION_IMPLEMENTATION.md b/docs/CIVILISATION_IMPLEMENTATION.md
+index 9fb819a..a436474 100644
+--- a/docs/CIVILISATION_IMPLEMENTATION.md
++++ b/docs/CIVILISATION_IMPLEMENTATION.md
+@@ -1,5 +1,31 @@
+ # Civilisation implementation register
+ 
++## Remembered stores, plans and promises — 2026-10-29
++
++Continued authoritative local main from `0fba6ed`; separate dirty `deepseek-b1`
++checkout and pre-existing evidence preserved. Nothing pushed. The predecessor
++rules-39 continuation was recorded before successor behavior in `c35db6b`.
++
++Rules **40** adds one pure remembered-stock capability with two consumers:
++personal/building material supply and plan viability; voluntary promise feasibility
++and collection. Existing beliefs, withdrawal, commitments, transfer, crafting,
++contribution attribution, trust and receipts carry the chain. No new global knowledge,
++inventory, reward or saved schema. Observation 12 / protocols 21–22 are unchanged.
++
++Staged isolated comparisons prove both connections; actual rendered manual success
++and stale-stock failure reproduce their complete browser states through transcript
++replay. Ordinary Normal meadow/river/forest, six days each: **15 selected collections,
++14 successful, 22 wood transferred from household homes; three associated completed
++tools later used**. Zero promise-stock collections in those windows. A bounded
++subsequent staged run found no later material ask. No aggregate-benefit claim.
++
++Full final suite **1322 tests / 173 files** passes; typecheck/build/diff check pass.
++Three actual manual journeys replay with exact full-state equality. Verdict:
++**TURN_INTEGRATION_VERIFIED** for the selected slice. Full evidence is recorded in
++[STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md), with the current/
++parked map, ownership boundaries, initial failing tests, review findings, all nulls,
++screenshots and replay paths. Reproduction: [STAGE_VERIFICATION_RUNBOOK.md](STAGE_VERIFICATION_RUNBOOK.md).
++
+ ## Personal trust and project help — 2026-10-28
+ 
+ Continued local main from `4135461`; nothing pushed. Rules **39** use the asker's
+diff --git a/docs/ECONOMY.md b/docs/ECONOMY.md
+index fd68045..96c37f0 100644
+--- a/docs/ECONOMY.md
++++ b/docs/ECONOMY.md
+@@ -147,6 +147,15 @@ for a wheeled route before anything is loaded and is refused honestly if there i
+ 
+ ## What drives work: wants, not orders
+ 
++From rules 40, raw wood/stone/clay/ore remembered in a person's own home or a public
++storehouse also feeds the existing material acquisition path. The same personal
++knowledge supports plan viability and voluntary promises to fetch material. These
++offers use ordinary physical withdrawal: access, stock and carrying room are checked
++on arrival and transfer, so stale knowledge or changed ownership can still fail.
++No stock is claimed or delivered by being remembered or promised. Earlier rules keep
++their natural-source behavior for these consumers. Contract and measured limits:
++[STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md).
++
+ Each person decides from what they know. For each thing they might want — material for a building site they know of, a
+ repair, a better tool, bread for the household, a cart for heavy hauling, a promise they made — the **supply planner**
+ (`production.ts`) works backwards through the recipe table, stopping at the first thing that is at hand:
+diff --git a/docs/MEANINGFUL_CONNECTIONS.md b/docs/MEANINGFUL_CONNECTIONS.md
+index bc2d4f3..8f82ef5 100644
+--- a/docs/MEANINGFUL_CONNECTIONS.md
++++ b/docs/MEANINGFUL_CONNECTIONS.md
+@@ -1,5 +1,8 @@
+ # Meaningful connections — 28 October 2026
+ 
++Successor increment (rules 40, 29 October): [remembered stores, plans and promises](STORED_MATERIAL_CONNECTIONS.md).
++The record below remains the dated rules-39 evidence, including its ordinary nulls.
++
+ Implementation pass starting from `C:\dev\Claude Experiment\living-world-integrate`,
+ `main@4135461d167422a5693f2a4c27bc6622ec5dea7b`, rules 38. Tracked tree clean;
+ existing untracked evidence retained. Separate dirty `deepseek-b1` untouched. No push.
+diff --git a/docs/STAGE_VERIFICATION_RUNBOOK.md b/docs/STAGE_VERIFICATION_RUNBOOK.md
+index f60371b..b383542 100644
+--- a/docs/STAGE_VERIFICATION_RUNBOOK.md
++++ b/docs/STAGE_VERIFICATION_RUNBOOK.md
+@@ -1,5 +1,84 @@
+ # Stage verification runbook
+ 
++## Rules 40 stored material connections — 29 October 2026
++
++Use `C:\dev\Claude Experiment\living-world-integrate` and fresh output folders.
++All commands below use the installed local runtime, require no model key and no push.
++These bounded Normal probes take seconds; any future Large ensemble must use the
++detached Windows workflow and a separate preregistration. Do not restart the stopped batch.
++
++Focused contracts and predecessor continuity (89 tests at the recorded source):
++
++```powershell
++npx vitest run tests/stored_materials.test.ts tests/plan_reconsider.test.ts tests/inhabit_choice_identity.test.ts tests/work_tastes.test.ts tests/project_helpers.test.ts tests/project_cooperation.test.ts tests/social_memory.test.ts tests/v39_continuation.test.ts --maxWorkers=4
++```
++
++Staged independent on/off comparisons, restricted policies, helper failure path and full replay:
++
++```powershell
++node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_inhabitant.ts inhabitant_evidence/stored-materials-new
++```
++
++Ordinary six-day occurrence (repeat with registered meadow, river, forest and a new
++folder for each). This is not a population-effect ensemble:
++
++```powershell
++node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_observe.ts inhabitant_evidence/stored-ordinary-meadow-new meadow
++```
++
++Reproduce prior rules-39 project-attempt endings without editing an inhabitant:
++
++```powershell
++node node_modules/vite-node/dist/cli.mjs scripts/project_attempts_trace.ts inhabitant_evidence/stored-before-river-new river
++```
++
++Bounded staged later-opportunity probe (5000 ticks, preserve an empty comparison):
++
++```powershell
++node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_feedback.ts inhabitant_evidence/stored-materials-new/promise-enabled-final.json inhabitant_evidence/stored-feedback-new
++```
++
++Manual rendered check, using the existing local dev server or `npm run dev`:
++
++1. Open `http://127.0.0.1:5273/scripts/browser/stored_materials_manual.html?start=/inhabitant_evidence/stored-materials-new/promise-start.json`.
++2. Read Ada's own plan and offered actions. Ask Ben for stone, allow the promised
++   trip by choosing offered nearby wander/rest actions, then make the offered pick.
++   Do not count the promise as delivered; wait for actual handover and crafting.
++3. Repeat from `plan-start.json`: collect stone, craft axe, use it in offered wood work.
++   Repeat from `stale-start.json`: the same remembered-stock option fails physically
++   and the plan is reconsidered. The competing transfer is explicit staging.
++4. Save screenshots and visible panel text at the promise/delivery/result boundaries.
++   Click **Stop**, then **Save verification bundle**. This includes the standard
++   panel transcript, starting save and authoritative final state for exact comparison.
++5. Replay the downloaded bundle into a fresh folder; inspect outcome/stock/plan fields
++   as well as the full-state equality result:
++
++```powershell
++node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_manual_replay.ts "C:\Users\RJLoc\Downloads\stored-materials-Ada-promise-start-bundle.json" inhabitant_evidence/stored-manual-replay-new
++```
++
++Full stable-source checks, each separately in PowerShell:
++
++```powershell
++npx vitest run --maxWorkers=4
++```
++
++```powershell
++npm run typecheck
++```
++
++```powershell
++npm run build
++```
++
++```powershell
++git diff --check
++```
++
++Do not rerun `scripts/v39_reference.ts` to make a regression pass. The checked-in
++reference is the pre-successor evidence. Results, source manifests and evidence
++limits: [STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md).
++
+ ## Rules 39 project-helper connection — 28 October 2026
+ 
+ Run from `C:\dev\Claude Experiment\living-world-integrate`; these checks need no
+diff --git a/docs/STORED_MATERIAL_CONNECTIONS.md b/docs/STORED_MATERIAL_CONNECTIONS.md
+new file mode 100644
+index 0000000..9392891
+--- /dev/null
++++ b/docs/STORED_MATERIAL_CONNECTIONS.md
+@@ -0,0 +1,325 @@
++# Remembered stores, plans and promises — 29 October 2026
++
++Starting authority: `C:\dev\Claude Experiment\living-world-integrate`, main
++`0fba6ede47fe1e20d939f39a31cda4f834f1002f`, rules 39. No tracked edits;
++pre-existing untracked evidence retained. The dirty `deepseek-b1` checkout is untouched.
++One existing Vite process (PID 52896) serves this integration checkout; no lab/test
++process was running. Owner authorizes local commits, no push.
++
++## Selected contract (recorded before implementation)
++
++Two uses of one small capability: a person's remembered, accessible **raw material
++stock** can support (1) a private/building material plan and (2) a material delivery
++promise. Current natural-source searches ignore stored wood/stone/clay/ore; plan
++reconsideration calls stored material unavailable, and helpers cannot promise to
++fetch it. A completed storehouse and its actual deposits therefore lack these consumers.
++
++The primitive is a pure query over existing building beliefs, limited to public
++storehouses and the person's own household home. No remote stock lookup, workshop
++earmark inference, new knowledge, inventory, receipt or persisted schema. Knowledge
++owns the remembered quantity; production owns offered collection; existing resource
++actions validate and transfer at physical contact; requests/commitments own delivery
++and termination; relationships and current helper choice own feedback. An empty,
++destroyed, inaccessible or changed store can still defeat an attempt.
++
++Before: these consumers require a natural deposit even when known storage holds the
++material. After: ordinary collection competes with gathering at existing utility,
++travel and danger costs; useful known stock keeps a plan viable and can make a
++voluntary promise feasible. Only actual delivery earns existing help/trust credit;
++later helper choice can read that trust. No scores, capacities, deadlines or refusal
++rules are relaxed. Both connections have isolated lab switches; old rules are gated.
++
++Expected files: a small sim material-stock query; intent/social/options_work/production
++call sites; withdrawal validation for the new offers; rulesversion and lab switches;
++contract/continuation tests; evidence runners and this record/register/runbook.
++
++## Pre-registration
++
++Capture full rules-39 river/Normal continuation at ticks 5280 and 9600 before changing
++successor behavior. Never regenerate a historical expected file to conceal a leak.
++
++Staged predictions: a person who knows stored stone but no natural stone keeps their
++tool plan and physically collects/crafts with plan access enabled; disabled drops it.
++A willing helper with reserved carried stone and remembered shared stock can accept,
++collect the remainder and deliver a requested batch; disabled retains the legitimate
++refusal. The delivered material changes the recipient's inventory, completed tool,
++personal trust and later feasible helper selection. Staging supplies/positions and
++negative conditions will be labelled. Each comparison starts from identical state.
++
++Ordinary diagnostic, BEFORE changes: repeat meadow/river/forest, Normal, no arrivals,
++6 days, rules 39; follow every project ask from selection to final activity/request.
++Prediction: previous two contact refusals are own-work reservations; uncontacted
++attempts need actual recorded endings, not inferred deadlock. No thresholds or seeds
++will be retuned. Budget 180 seconds per seed; stop day 6, invariant failure or budget.
++
++Ordinary successor occurrence: same three seeds/settings for 6 days, rules 40. Record
++stock opportunities, selected collections, successful withdrawals, accepted promises,
++actual deliveries, completed/use of resulting tools/buildings and subsequent personal
++feedback separately, preserving zeroes and denominators. Compare each affected offer
++with its isolated removal at the same decision without mutation. This is occurrence
++and decision-mechanism evidence, **not aggregate benefit**. No population improvement
++claim or revived owner-stopped ensemble. Same 180-second per-seed stop; no retuning.
++
++## Current and parked map
++
++This is the current call-site map, not a declaration that every roadmap has shipped.
++The dated autonomy and civilisation tables contain superseded gaps; current code and
++the six-stage register take precedence.
++
++| Source event/state → legitimate knower | Owner → existing consumers | Classification and decision in this pass |
++|---|---|---|
++| Seen place/stock, spoken information → witness/listener's dated beliefs | `perception`, `knowledge`, conversation sharing → option generators and restricted observation | Active. Reuse beliefs; never consult the remote inventory to decide availability. |
++| Hunger, cold, injury, illness, threat → own needs/thoughts and locally perceived threat | needs/hardship/illness/mood → critical filters, mood weights, rest/relief/work choices | Active. Preserve priorities; a feasible promise is still refused when needs or other obligations prevent it. |
++| Remembered accessible raw stock → its observer | **`material_stock` → `intent.hasKnownResource`, `social.canObtain`, `options_work.gatherMaterial` → production collection** | Previously weak: raw material consumers searched natural sources while the same material could sit in a known home/store. Selected two consumers, one small query. |
++| Personal shortage, failures and outstanding requests → plan owner | `intent` → reservations, reconsideration, next step, project asks | Active. Rules 40 adds storage to viability; observed depletion still drops an unsupplied plan and releases its claims. |
++| Contact, answer, promise, actual handover → actual parties; outcome witnesses where already supported | `social`/activities/economy → commitments, transferred units, plan contribution reason, relationship trust and bounded `social_memory` | Active, often opportunity-limited. No new commitment schema or credit. Rules 40 adds stored raw material to promise feasibility and execution. |
++| Gift/kept promise → receiver's relationship | `relations` → willingness, lending, civic confidence, rules-39 helper ordering | Active. Reuse earned, bounded, drifting trust. A fulfilled receipt is not a second reward. A fresh 5000-tick staged continuation found no later project ask: the new chain does not establish repeated cooperation. |
++| Co-presence, household membership, shared work → participants/nearby people | households/habitation, `social.bondWorkers`, crews → shelter, work/social choices, `crewNudge` | Active. No assigned workforce or duplicate work credit. Direct activity reads in crew preference remain a separate locality-audit opportunity. |
++| Actual work/practice, taught technique → worker/taught learner | development/skills/trade/work tastes/techniques → tool efficiency, preferences, recipe access, operation | Active, with narrow capabilities. Charcoal teaching exists; broader technology/culture is not implied. Storage supplies the existing tool/work path, not a new productivity multiplier. |
++| Own surplus, seen goods, locally heard destination → trader/recipient | markets/exchange journeys → provisioned travel, ordinary barter, receipts | Implemented but ordinary reach remains incompletely evidenced. Prior zero journeys are not proof of a missing implementation. No caravan/currency framework added. |
++| Actual contribution, local discussion, witnessed result → contributor/witness/recruit | townships/civic decision/political alignment → projects, coordinator confidence, political support and access | Active. Completed storehouses already create a place to deposit/collect. This increment gives their remembered raw stock additional consumers; it does not manufacture civic participation. |
++| Recorded production/flow totals → developer/viewer inspection | `settlement_economy` → inspector/report | Recorded state without a simulation decision consumer, deliberately observational. Do not turn it into global inhabitant knowledge. |
++| Own achievement / witnessed construction → goal owner / awake nearby contributor | `buildings.constructionAftermath`, achievement/life → mood, `goalNudge`, later hope | Active since rules 38. Older “completion has no emotional aftermath” roadmap text is superseded. The scene's incidental trade aspiration is not counted as an effect of this increment. |
++| Deliberative sub-goals, long political institutions, dissenting subgroup secession | Roadmap concepts, not current action owners | Documented but not implemented. A generic planner, global knowledge or guaranteed cooperation is outside this increment. |
++
++Parked/historical disposition:
++
++- `place-scar@f82d42d` was inspected with `git show`, without checkout or merge.
++  It adds a broad ranking penalty for recent place failures. Branch lifecycle marks
++  it retired by owner direction; it does not establish a failed technical test as
++  the reason. Existing local failure cooldowns and rules-34 reconsideration already
++  serve this slice. No evidence justifies importing another penalty.
++- Retired mood/wolf branches have historical version meanings and compatibility
++  constraints. Retirement is an explicit scope decision, not evidence that every
++  branch feature shipped. No wholesale revival or save relabelling.
++- Historical courier/table-eating candidates are integrated at main rules 11;
++  work tastes are integrated at 31; achievement aftermath at 38. They are superseded
++  candidates, not missing prerequisites to activate again.
++- The large civilisation ensemble was stopped by the owner. Long-run frequency and
++  aggregate effects were deferred for evidence/runtime reasons. It remains stopped.
++- Exchange/relocation/technique/practice outcomes with prior ordinary nulls remain
++  evidence gaps. Their technical mechanisms exist. This pass neither declares them
++  dormant defects nor adds activity merely to make counters nonzero.
++
++## Primitive, lifecycle and version boundary
++
++The missing capability is an authoritative **query of remembered accessible raw
++stock** shared by material consumers. Existing beliefs, commitments, activities and
++receipts already represent all required state; another persistence structure would
++duplicate them. `material_stock.ts` owns this narrow interpretation, not logistics.
++
++Observation or existing communication creates/updates a belief. The plan owner and
++the answering helper can query only their own beliefs. At most two nearest known
++stores add collection options, in stable order, using the existing collection cost,
++travel, danger, weather and night calculations. Remembered quantity and carrying room
++cap the offered amount. Nothing reserves or transfers goods by being considered.
++
++The ordinary withdrawal travels to the place, observes it, rechecks own/public access
++at both arrival and transfer, applies `withdrawAllowance` and capacity, then moves only
++real units. Another person's home or a place whose ownership changed is rejected.
++Depletion can yield a partial transfer or failure; disappearance is learned at arrival.
++Interrupting before transfer grants nothing. Existing failures suppress immediate
++retries. Requests retain ordinary refusal, deadline, cancellation and competing-need
++rules. Only a real handover fulfils the promise and earns existing outcome credit.
++
++Rules **40** gates both producers/consumers. `rich-no-stored-material-plans` removes
++personal/building collection and viability; `rich-no-stored-material-promises` removes
++promise feasibility and acquisition. They restore their previous switch value, do
++not mutate saved settings, and have no effect through rules 39. New collection
++activities carry one `materialStock` item marker in existing serialized activity data
++so changed ownership is checked during execution. No save-format, observation or
++protocol change: format 4, observation 12, protocols 21/22 retain their contracts.
++
++Before successor edits, commit `c35db6b` recorded the rules-39 reference. Saved SHA256:
++`6607c2ccce52ff047bd2297f044464cab8256dea5d6f4433a9b56a2aa6419b7a`;
++both uninterrupted and saved/loaded continuation through tick 9600:
++`4f3845f4abb1945a9272c20c55079b08652fe0569c9e4fb8d2ae33d09a176f1a`.
++No existing expected JSON or golden was regenerated.
++
++## Known open chain: observed endings, not forced success
++
++Rules-39 meadow/river/forest, Normal, no arrivals, 14400 ticks each reproduced the
++prior hashes (`20abb63d`, `a1c11972`, `11fb4353`). The six selected project asks were:
++
++- Meadow: zero selected attempts.
++- River: Abel's stone approach was paused by an incoming chat, resumed, then interrupted
++  for another choice. Mira contacted Emre and was refused (`making`).
++- Forest: three attempts ended “too busy to stop”; Isla contacted Petra and was
++  refused (`making`).
++
++Thus 6 selected → 2 actual requests → 0 accepted promises → 0 deliveries in those
++windows. No deadlock, forced acceptance or missing delivery execution was inferred
++from those zeroes. Detailed timeline: `inhabitant_evidence/stored-before-{river,forest}-detailed/report.json`;
++the meadow report is `stored-before-meadow/report.json`. The storage omission was
++separately reproduced by three failing contract tests before implementation.
++
++## Causal comparison and inhabitant evidence
++
++`inhabitant_evidence/stored-materials-staged-first/` records source SHA256s, identical
++starting checkpoints, restricted observations, transcripts, milestones, final states
++and conservation for each independently disabled connection. These scenes stage
++supplies, skills and positions. Cora/Dara are stationary bystanders; Ben has a finite
++initial pause so the request starts before his work. Outcomes are not assigned.
++
++| Connection / arm | First changed choice or response | Physical and saved outcome |
++|---|---|---|
++| Plans enabled | Collect 1 stone from the remembered public store | Transfer at 793; axe crafted at 868; later chopping uses/wears it; plan done; ledger and full replay agree. |
++| Plans disabled | Explore; storage-only plan drops | No axe in the same 1300-tick window. No free replacement material. |
++| Promises enabled | Offered ask at 700; request at 714; Ben voluntarily promises at 736 | Ben collects 1 stone to add to his carried unit, gives 2 at 989; Ada crafts pick at 1159; plan names Ben's actual contribution; personal fulfilled receipt and trust remain. |
++| Promises disabled | Same ask; Ben declines `making` | Zero delivered stone from that request. Ada later crafts a pick by another route. **This comparison does not show more completed picks.** |
++
++Full serialized replay is equal in all four arms. Plan hashes enabled/disabled:
++`016fba06` / `eb983250`; promise hashes: `0a8d3d03` / `50dba083`.
++No external-model inference was used; these are scripted offered-action policies.
++
++The helper's independent restricted run starts from the accepted-promise save. Ben
++sees his own commitment, collects one missing stone at 887, and twice attempts delivery.
++Both deliveries fail because Ada is not where he expected (1030/1468); the commitment
++is still active at the 1537 cutoff. Full replay and conservation agree. This preserves
++the legitimate travel/local-information failure, rather than turning remembered
++whereabouts into tracking. `helper-observations.json` and `helper-transcript.json`
++retain the offers and failures.
++
++A further preregistered bounded extension (`stored-feedback-final/prediction.json`) of the
++successful staged final state runs 5000 ticks without editing needs, stock, positions,
++trust or cooldowns. It produces **no later project-material ask**, so its recipient
++offer list is empty. Replay agrees (`e1803fa2`). Existing rules-39 tests prove earned
++trust can change a later eligible recipient; a repeated-cooperation loop in this new
++scenario remains unobserved. The immediate changed downstream action is crafting
++with the delivered stone, not a claimed second favour.
++
++Actual rendered manual panel, production driver/renderer/UI:
++
++- Ada: offered ask → three offered nearby waits → make pick. Five applied choices,
++  zero rejected. Promise is shown as undelivered until handover; the completed plan
++  says “made the pick (Ben brought 2 of the stone)”; the personal help thought is
++  visible and trust rises from 10 to 20.6924 through existing delivery/commitment rules.
++  An incidental fulfilled trade aspiration is visible too, but the fixture's staged
++  skills/trade path mean it is not credited as this connection's causal outcome.
++  Stopped at tick 1160, browser/replay hash `d53004c7`,
++  **entire serialized browser state equal**.
++- Stale-stock failure: a real staged competing transfer emptied the remembered store.
++  Ada's offered collection is accepted but fails on arrival, transfers zero stone,
++  removes the stale offer and drops the plan. One applied choice, zero rejected;
++  tick 794, browser/replay hash `aff426c9`, full state equal.
++- Independent personal collection/crafting/use: three applied choices, zero rejected.
++  Collect stone at 793, craft axe at 868, finish chopping at 980. At stop tick 981,
++  Ada holds an axe (wear 1.512) and three newly gathered wood; making a basket is now
++  offered. Browser/replay hash `cf5fbc8e`, entire state equal.
++
++Screenshots and panel text: `inhabitant_evidence/stored-materials-manual/`
++(`01-promised.jpg`, `02-delivered.jpg`, `03-crafted.jpg`, `05-stale-failure.jpg`,
++`07-axe-crafted.jpg`, `08-axe-used.jpg`). All three browser error-log audits are empty.
++Original exported bundle, starting state, transcript, browser final and replay final:
++`inhabitant_evidence/stored-manual-{promise,failure,plan}-replay/`. The fixture button
++exports developer evidence only after interaction; hidden world data never selects
++the manual action. Visual evidence establishes rendered state, not human usability.
++
++## Ordinary occurrence (registered seeds, no retuning)
++
++All three rules-40 Normal runs completed day 6 in about 10–11 seconds locally with
++unchanged source manifests, no staged supplies/actions and passing daily conservation.
++
++| Seed | Selected raw-store collections | Successful transfers | Units | Promise collections | Associated tool plans completed | Those tools later used |
++|---|---:|---:|---:|---:|---:|---:|
++| meadow | 6 | 5 | 8 | 0 | 1 | 1 |
++| river | 2 | 2 | 4 | 0 | 1 | 1 |
++| forest | 7 | 7 | 10 | 0 | 1 | 1 |
++
++All 15 selected offers disappear under their isolated switch at the same recorded
++decision. All these ordinary collections are **wood from household lean-tos**;
++public-storehouse collection and storage-backed promise delivery remain staged proof
++in this pass. Examples: meadow Bea's pick finishes at 901 and is used at 3337; river
++Ben's hoe finishes at 982 and is used at 1038; forest Mira's hoe finishes at 537 and
++is used at 1076. Tool wear is recorded on the actual tool, not inferred from a hash.
++Several associated plans still expire. Edda's forest hut plan records carrying four
++units but expires unfinished; delivery is not construction completion.
++
++The observer samples every 240 ticks: 1680 person-samples per seed, with raw-stock
++knowledge on 3/72/137 person-samples and 3/28/39 eligible raw-withdraw option samples.
++These are sampled opportunities, not unique people or an exhaustive count of every
++decision. Selected and successful counts are event hooks, not the sampled denominator.
++Final retained completed plans are explicitly not lifetime completions.
++
++Project requests in these changed worlds: meadow 3 contacts, two immediate fulfilled
++wood requests (1 and 2 units), one decline; river 2 declines; forest 1 decline. None
++is a new promise-stock collection. They are recorded occurrence, not evidence that
++the new connection caused those additional handovers. No control/nudge aggregate
++ensemble was run or claimed. Final hashes: `0c22abaa`, `2fd55a24`, `593950f9`.
++Final artifacts: `inhabitant_evidence/stored-ordinary-{meadow,river,forest}-final/`, including
++selections, transfers, request statuses, plan endings, tool use, samples and final save.
++
++## Verification and fresh critical review
++
++The pre-implementation red run failed all three new contracts: storage-only plan
++dropped, `canObtain` false, promise collection missing (`stored-materials-red.log`).
++The implemented boundary suite has 15 passing tests: locality/purity, independent
++switches and old rules, real successful collection/crafting/tool use, actual request
++and promise delivery, absent observer, urgent need and competing commitments,
++stale/depleted stock, ownership change mid-work, interruption/capacity/idempotence,
++partial withdrawal, disappeared target, expiry/cancellation and journey save/load.
++
++Initial broader checks preserved four failures for diagnosis. Two plan-reconsideration
++tests assumed deleting natural-source beliefs removed every source, despite remembered
++wood at home. Their assertions now retain the rules-39 drop and require rules-40
++viability. The full run then exposed two trajectory assumptions: the historical Sven
++work-taste demonstrator is now explicitly pinned to its rules-39 trajectory with all
++old assertions retained; current hunger-identity verification explicitly selects the
++original fruit alternative (two units), since berries (three units) can now precede
++it. Action identity, quantity, conservation and replay assertions are not weakened.
++The diagnosis confirmed both public identities execute the selected option correctly.
++
++Focused final: **89 tests / 8 files pass** (`stored-materials-focused-final.log`).
++Full final suite: **1322 tests / 173 files pass**, 209.04 seconds
++(`stored-materials-full-final.log`). `npm run typecheck`, `npm run build` and
++`git diff --check` pass. Vite config-extension warnings and the full-suite
++timeout-overflow warning are retained, not suppressed. Verification-gate verdict:
++**TURN_INTEGRATION_VERIFIED** for this bounded slice, subject to the limits below.
++
++Fresh review also found a diagnostic-only issue: the first later-feedback runner
++retained its original world reference across `runLive` rewinds. It now records the
++actual restricted observation's later offers, with no stale world query. Re-running
++the identical saved state/window in `stored-feedback-final` preserves the same hash,
++replay and empty offer list. The earlier directory is retained as superseded diagnostic
++evidence, not the final comparison. No simulation rule changed for this repair.
++The ordinary observer's isolated comparison was also tightened to match action key,
++kind and goal rather than the new `yields` marker. Repeating the same three registered
++runs preserves every final hash and count; all 15 actual offers still disappear with
++their connection disabled. No seeds, thresholds, supplies or simulation rules changed.
++
++Fresh review conclusions:
++
++- PASS semantic ownership: narrow knowledge query, existing production/action/receipt
++  owners, no global logistics or shadow state.
++- PASS information boundary: own beliefs before travel; actual observation and access
++  checks at physical contact; no absent observer receipt, no remote inventory reads.
++- PASS accounting and lifecycle: real transfers, limited capacity, partial/failure
++  outcomes, cancellation/expiry, no credit for intent, no duplicate fulfilment.
++- PASS bounded feedback: existing trust limits/drift and 32-entry receipt history;
++  no added reward, timer, unbounded memory or reinforcing score.
++- PASS continuity: predecessor reference untouched, historical regressions, collection
++  midpoint save/load, four staged replays and three exact rendered replays.
++- LIMIT occurrence: ordinary personal/home collection verified; ordinary promise-stock
++  delivery and repeated cooperation not observed; no aggregate-benefit claim.
++- LIMIT cost: two offers per requested raw item, queries/sort over existing building
++  beliefs, no new tick-wide scan or persisted history. Mature Large-world performance
++  was not measured; the short Normal timings include instrumentation.
++
++No incompatible gate baseline was overwritten. DEVELOPMENT_POLICY explicitly permits
++a causal feature without an aggregate claim and states that a new generation cannot
++pass an older generation's gate. Full gate/control/nudge measurements remain unrun.
++
++## Reproduction and follow-up
++
++Exact commands are in the rules-40 section of `STAGE_VERIFICATION_RUNBOOK.md`.
++Production changes: `material_stock.ts`, `intent.ts`, `social.ts`, `options_work.ts`,
++`production.ts`, `act_resource.ts`, `rulesversion.ts`; lab switches in `scripts/lab/lab.ts`.
++Tests/helpers/reference and staged/ordinary/manual runners are committed with this
++record. Generated evidence stays local; nothing is pushed.
++
++Follow-up opportunities, deliberately outside the delivered slice: quantify promise
++opportunity frequency in longer established towns; separate provisioned journey
++failure from stale whereabouts; audit crew/goal locality readers; measure whether
++access to finite stored material improves or worsens long-run distribution before
++making any welfare/productivity claim. Do not force more acceptance or erase the
++ordinary/refusal and helper-journey nulls to make these measurements look successful.
+diff --git a/scripts/browser/stored_materials_manual.html b/scripts/browser/stored_materials_manual.html
+new file mode 100644
+index 0000000..0a5bf6e
+--- /dev/null
++++ b/scripts/browser/stored_materials_manual.html
+@@ -0,0 +1,47 @@
++<!doctype html>
++<html lang="en">
++<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Staged stored material verification</title></head>
++<body>
++  <div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
++  <script type="module">
++    // Staged starting state; actual renderer, manual panel, actions and driver.
++    import '/src/styles.css';
++    import { Game } from '/src/app/game.ts';
++    import { deserializeWorld, serializeWorld } from '/src/app/save.ts';
++    import { InhabitDriver, inhabitConfigFromUrl } from '/src/app/inhabit.ts';
++    import { Renderer } from '/src/render/renderer.ts';
++    import { mountUI } from '/src/ui/index.ts';
++    const params = new URLSearchParams(location.search);
++    const startPath = params.get('start'), actor = params.get('actor') ?? 'Ada';
++    if (!startPath?.startsWith('/inhabitant_evidence/stored-') || !['Ada','Ben'].includes(actor)) throw new Error('Supply a recorded stored-material checkpoint and actor');
++    const start = await (await fetch(startPath)).text();
++    const world = deserializeWorld(start);
++    const game = new Game(world.settings);
++    game.restoreWorld(world, world.settings);
++    const cfg = inhabitConfigFromUrl(`?inhabit=${actor}&manual=1&from=0&days=0.6&noarrivals=1`, { seed: world.seed });
++    const driver = new InhabitDriver(game, cfg);
++    const renderer = new Renderer(document.getElementById('world'), game);
++    const ui = mountUI(game, document.getElementById('ui'), { inhabit: driver });
++    // Export authoritative evidence after interaction, separate from inhabitant knowledge.
++    const saveEvidence = document.createElement('button');
++    saveEvidence.textContent = 'Save verification bundle';
++    saveEvidence.style.cssText = 'position:fixed;top:70px;left:45%;z-index:1000';
++    saveEvidence.onclick = () => {
++      const bundle = { staged: true, actor, startPath, start, final: serializeWorld(game.world), transcript: driver.transcriptNow() };
++      const url = URL.createObjectURL(new Blob([JSON.stringify(bundle)], { type: 'application/json' }));
++      const a = document.createElement('a'); a.href = url;
++      a.download = `stored-materials-${actor}-${startPath.split('/').at(-1).replace('.json','')}-bundle.json`;
++      a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
++    };
++    document.body.append(saveEvidence);
++    await driver.start(); game.setSpeed(16);
++    let last = performance.now();
++    function frame(now) {
++      const dt = (now-last)/1000; last=now;
++      game.advance(dt); renderer.frame(Math.min(0.25,dt)); ui.update(Math.min(0.25,dt));
++      requestAnimationFrame(frame);
++    }
++    requestAnimationFrame(frame);
++  </script>
++</body>
++</html>
+diff --git a/scripts/lab/lab.ts b/scripts/lab/lab.ts
+index 49c5284..7adc0e2 100644
+--- a/scripts/lab/lab.ts
++++ b/scripts/lab/lab.ts
+@@ -1,5 +1,6 @@
+ import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
+ import { projectHelperChoiceOn, setProjectHelperChoice } from '../../src/sim/options_social';
++import { storedMaterialPlansOn, setStoredMaterialPlans, storedMaterialPromisesOn, setStoredMaterialPromises } from '../../src/sim/material_stock';
+ import { workTastesOn, setWorkTastes } from '../../src/sim/temperament';
+ import { leaveHeaviestOn, setLeaveHeaviest } from '../../src/sim/leave_heaviest';
+ import { nightWaitBoundaryOn, setNightWaitBoundary } from '../../src/sim/night_wait';
+@@ -251,6 +252,8 @@ export function parseIntervention(specIn: string): Intervention {
+   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
+   if (kind === 'rich-no-work-tastes') return {spec:label,summary:'remove personal work tastes only; changes nothing below version 31',apply:()=> 'work tastes off',install(){const was=workTastesOn();setWorkTastes(false);return ()=>setWorkTastes(was);}};
+   if (kind === 'rich-no-leave-heaviest') return {spec:label,summary:'remove leaving a left-over to free the hands only; changes nothing below version 33',apply:()=> 'leave-heaviest off',install(){const was=leaveHeaviestOn();setLeaveHeaviest(false);return ()=>setLeaveHeaviest(was);}};
++  if (kind === 'rich-no-stored-material-plans') return {spec:label,summary:'remove remembered raw storage from personal/building acquisition and plan viability; no effect below rules 40',install(){const was=storedMaterialPlansOn();setStoredMaterialPlans(false);return ()=>setStoredMaterialPlans(was);}};
++  if (kind === 'rich-no-stored-material-promises') return {spec:label,summary:'remove remembered raw storage from promise feasibility and acquisition; no effect below rules 40',install(){const was=storedMaterialPromisesOn();setStoredMaterialPromises(false);return ()=>setStoredMaterialPromises(was);}};
+   if (kind === 'rich-no-project-helper-choice') return {spec:label,summary:'use first feasible project-material helper instead of personal trust; no effect below rules 39',install(){const was=projectHelperChoiceOn();setProjectHelperChoice(false);return ()=>setProjectHelperChoice(was);}};
+   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
+   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};
+diff --git a/scripts/project_attempts_trace.ts b/scripts/project_attempts_trace.ts
+new file mode 100644
+index 0000000..1672643
+--- /dev/null
++++ b/scripts/project_attempts_trace.ts
+@@ -0,0 +1,52 @@
++// Developer-only ordinary-world diagnostic. No actor, knowledge, resource or choice edits.
++import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
++import { execFileSync } from 'node:child_process';
++import { createWorld } from '../src/sim/factory';
++import { settingsForProfile } from '../src/sim/profiles';
++import { stepWorld, hashWorld } from '../src/sim/world';
++import { DAY } from '../src/sim/constants';
++import { conservationReport } from '../src/sim/economy';
++import { serializeWorld } from '../src/app/save';
++import type { Request } from '../src/sim/types';
++
++const [out, seed] = process.argv.slice(2);
++if (!out || !['meadow', 'river', 'forest'].includes(seed) || existsSync(out)) throw new Error('Supply new output and registered seed');
++mkdirSync(out, { recursive: true });
++const w = createWorld({ ...settingsForProfile('normal', seed, { dynamics: 'rich', immigration: false }), rulesVersion: 39 });
++const attempts: any[] = [], requests = new Map<number, Request>();
++w.hooks = { onActivityStart(p, a) {
++  if (!String(a.data.optKey ?? '').includes(':request:plan:')) return;
++  attempts.push({ start: w.tick, person: p.id, name: p.name, helper: a.targetId, activity: a.id,
++    key: a.data.optKey, targetActivity: w.byId.get(a.targetId)?.ent === 'person' ? (w.byId.get(a.targetId) as typeof p).activity?.kind ?? null : null,
++    lastResult: null, end: null, request: null, timeline: [] });
++} };
++const started = Date.now();
++let stop = 'day 6';
++while (w.tick < 6 * DAY) {
++  stepWorld(w);
++  for (const r of w.requests) if (r.planId) requests.set(r.id, { ...r });
++  for (const a of attempts) {
++    const p = w.persons.find(p => p.id === a.person);
++    if (p && w.tick <= a.start + 500) {
++      const c=w.conversations.find(c=>c.a===p.id||c.b===p.id);
++      const state={activity:p.activity?.kind??null,conversation:c?{a:c.a,b:c.b,purpose:c.purpose,phase:c.phase}:null,result:p.lastResult&&p.lastResult.tick>=a.start?{...p.lastResult}:null,interaction:p.lastInteraction&&p.lastInteraction.tick>=a.start?{...p.lastInteraction}:null};
++      const sig=JSON.stringify(state);
++      if(a.lastSignature!==sig){a.timeline.push({tick:w.tick,...state});a.lastSignature=sig;}
++    }
++    if (a.end === null && p?.activity?.id !== a.activity) {
++      a.end = w.tick; a.lastResult = p?.lastResult ? { ...p.lastResult } : null;
++      a.nextActivity = p?.activity?.kind ?? null;
++    }
++    const r = [...requests.values()].find(r => r.from === a.person && r.to === a.helper && r.created >= a.start && r.created < a.start + 700);
++    if (r) a.request = { ...r };
++  }
++  if (w.tick % DAY === 0 && !conservationReport(w).ok) { stop = 'conservation failure'; break; }
++  if (w.tick % 240 === 0 && Date.now() - started > 180000) { stop = 'runtime budget'; break; }
++}
++for(const a of attempts)delete a.lastSignature;
++const report = { seed, rules: 39, ticks: w.tick, stop, head: execFileSync('git', ['rev-parse', 'HEAD'], {encoding:'utf8'}).trim(),
++  hash: hashWorld(w), conservation: conservationReport(w), attempts, requests: [...requests.values()], seconds: (Date.now()-started)/1000 };
++writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2));
++writeFileSync(`${out}/final.json`, serializeWorld(w));
++console.log(JSON.stringify(report));
++if (stop !== 'day 6') process.exitCode = 1;
+diff --git a/scripts/stored_materials_feedback.ts b/scripts/stored_materials_feedback.ts
+new file mode 100644
+index 0000000..e8ed405
+--- /dev/null
++++ b/scripts/stored_materials_feedback.ts
+@@ -0,0 +1,38 @@
++// Bounded extension of the staged promise run, with no edited needs, stock, trust,
++// positions or cooldowns. The acting policy reads only offered actions.
++import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { deserializeWorld, serializeWorld } from '../src/app/save';
++import { runLive, runReplay } from '../src/agent/run';
++import { stubModel } from '../src/agent/model';
++import { observationFromPrompt } from '../src/agent/protocol';
++import { conservationReport } from '../src/sim/economy';
++import { hashWorld } from '../src/sim/world';
++
++const [input, out] = process.argv.slice(2);
++if (!input || !out || existsSync(out)) throw new Error('Recorded staged final state and fresh output required');
++mkdirSync(out, { recursive: true });
++const start = readFileSync(input, 'utf8'), w = deserializeWorld(start);
++const ada = w.persons.find(p => p.name === 'Ada')!;
++const until = w.tick + 5000;
++writeFileSync(`${out}/prediction.json`, JSON.stringify({ input, staged: true, until,
++  prediction: 'Earned trust may change the recipient of a later offered project-material request. Opportunity is not guaranteed.',
++  stop: '5000 ticks, no tuning or supplied opportunities; preserve null.' }, null, 2));
++const decisions: unknown[] = [], laterOffers: unknown[] = [];
++const result = await runLive(w, ada.id, stubModel('stored-materials-later-choice', req => {
++  const o = observationFromPrompt(req.user)!;
++  const urgent = o.options.find(a => a.need && o.self.needs[a.need as keyof typeof o.self.needs]?.state === 'critical');
++  const choice = urgent ?? o.options.find(a => a.key.includes(':request:plan:')) ?? o.options[0];
++  decisions.push({ tick: o.time.tick, choice, requests: o.people.requests, plans: o.plans });
++  // Record the actual observation after each rewind. An outer World/Person
++  // reference would become stale when runLive replaces the replayed world.
++  const offered = o.options.filter(a => a.key.includes(':request:plan:'));
++  if (offered.length) laterOffers.push({ tick:o.time.tick, offered, relations:o.people.relations });
++  return JSON.stringify({ choose: choice.key, why: 'Meet an urgent need; otherwise ask an offered helper for my new plan, or take the first offered action.' });
++}), { until });
++const replay = runReplay(deserializeWorld(start), result.transcript);
++const report = { staged:true, externalModel:false, until, laterOffers, finalRequests:result.world.requests.filter(r=>r.from===ada.id),
++  hash:hashWorld(result.world), fullReplayEqual:serializeWorld(replay.world)===serializeWorld(result.world), conservation:conservationReport(result.world) };
++for (const [name, data] of Object.entries({start, decisions, transcript:result.transcript, final:serializeWorld(result.world), report}))
++  writeFileSync(`${out}/${name}.json`, typeof data==='string'?data:JSON.stringify(data,null,2));
++console.log(JSON.stringify(report));
++if (!report.fullReplayEqual || !report.conservation.ok) process.exitCode = 1;
+diff --git a/scripts/stored_materials_inhabitant.ts b/scripts/stored_materials_inhabitant.ts
+new file mode 100644
+index 0000000..e386a18
+--- /dev/null
++++ b/scripts/stored_materials_inhabitant.ts
+@@ -0,0 +1,77 @@
++// Staged mechanism comparisons; restricted offered-action policies, no external model.
++import { existsSync, mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
++import { createHash } from 'node:crypto';
++import { execFileSync } from 'node:child_process';
++import { materialPlanScene, materialPromiseScene, materialChoice } from '../tests/helpers/stored_materials';
++import { observeNow } from '../tests/helpers/inhabit';
++import { serializeWorld, deserializeWorld } from '../src/app/save';
++import { runLive, runReplay } from '../src/agent/run';
++import { stubModel } from '../src/agent/model';
++import { observationFromPrompt } from '../src/agent/protocol';
++import { conservationReport, transfer } from '../src/sim/economy';
++import { hashWorld } from '../src/sim/world';
++import { parseIntervention } from './lab/lab';
++
++const out=process.argv[2];if(!out||existsSync(out))throw new Error('Supply a fresh evidence directory');
++mkdirSync(out,{recursive:true});
++const write=(n:string,v:unknown)=>writeFileSync(`${out}/${n}`,typeof v==='string'?v:JSON.stringify(v,null,2));
++const paths=[...readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p),'scripts/stored_materials_inhabitant.ts','scripts/lab/lab.ts','tests/helpers/stored_materials.ts'].sort();
++const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));
++const source=manifest();write('provenance.json',{head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,staged:true});
++const reports=[];
++let promiseCheckpoint='';
++for(const scenario of ['plan','promise'] as const){
++  const fixture=scenario==='plan'?materialPlanScene():materialPromiseScene();
++  const start=serializeWorld(fixture.w);write(`${scenario}-start.json`,start);
++  for(const arm of ['enabled','disabled'] as const){
++    const w=deserializeWorld(start),actor=w.persons.find(p=>p.id===fixture.ada.id)!;
++    const restore=arm==='disabled'?parseIntervention(`rich-no-stored-material-${scenario==='plan'?'plans':'promises'}`).install!():()=>{};
++    try{
++      const observations:NonNullable<ReturnType<typeof observationFromPrompt>>[]=[],milestones:unknown[]=[];
++      let prevStore={...w.buildings.find(b=>b.id===fixture.store.id)!.store.items};
++      let delivered=0,crafted=false;
++      const result=await runLive(w,actor.id,stubModel('restricted-stored-materials',req=>{
++        const o=observationFromPrompt(req.user)!;observations.push(o);
++        return JSON.stringify({choose:materialChoice(o,scenario).key,why:scenario==='plan'?'Use the offered known store, then make and use my axe.':'Ask the offered helper, allow an accepted promise time, then make my pick.'});
++      }),{until:w.tick+1300,onTick(current){
++        const r=current.requests.find(r=>r.from===actor.id&&r.item==='stone');
++        if(scenario==='promise'&&arm==='enabled'&&r?.status==='promised'&&!promiseCheckpoint){promiseCheckpoint=serializeWorld(current);write('promise-midpoint.json',promiseCheckpoint);}
++        if(r&&(r.delivered??0)>delivered){milestones.push({tick:current.tick,stage:'delivered',request:{...r}});delivered=r.delivered??0;}
++        const store=current.buildings.find(b=>b.id===fixture.store.id)!;
++        for(const item of ['stone','wood'] as const)if((store.store.items[item]??0)!==(prevStore[item]??0))milestones.push({tick:current.tick,stage:'store-stock-change',item,before:prevStore[item]??0,after:store.store.items[item]??0});
++        prevStore={...store.store.items};
++        const p=current.persons.find(p=>p.id===actor.id)!;
++        if(!crafted&&p.intentions.some(i=>i.kind==='tool'&&i.status==='done')){crafted=true;milestones.push({tick:current.tick,stage:'crafted',plans:p.intentions.map(i=>({...i,wants:{...i.wants}}))});}
++      }});
++      const replay=runReplay(deserializeWorld(start),result.transcript);
++      const p=result.world.persons.find(p=>p.id===actor.id)!;
++      const report={scenario,arm,firstChoice:observations[0]?.options.find(o=>o.key===materialChoice(observations[0],scenario).key)?.label,
++        requests:result.world.requests.filter(r=>r.from===actor.id),inventory:p.inv,plans:p.intentions,relations:p.relations,socialMemory:p.socialMemory??[],
++        tools:result.world.tools.filter(t=>t.holder===p.id),milestones,hash:hashWorld(result.world),replayHash:hashWorld(replay.world),
++        fullReplayEqual:serializeWorld(result.world)===serializeWorld(replay.world),conservation:conservationReport(result.world)};
++      reports.push(report);write(`${scenario}-${arm}-report.json`,report);write(`${scenario}-${arm}-transcript.json`,result.transcript);write(`${scenario}-${arm}-observations.json`,observations);write(`${scenario}-${arm}-final.json`,serializeWorld(result.world));
++      if(!report.fullReplayEqual||!report.conservation.ok)throw new Error('Replay or conservation failed');
++      if(arm==='enabled'&&!(p.inv[scenario==='plan'?'axe':'pick']))throw new Error('Staged completion failed');
++      if(scenario==='promise'&&arm==='enabled'&&!report.requests.some(r=>r.status==='fulfilled'&&r.delivered===2))throw new Error('Delivery not demonstrated');
++      if(scenario==='promise'&&arm==='disabled'&&!report.requests.some(r=>r.status==='declined'&&r.note==='making'))throw new Error('Expected preserved refusal absent');
++    }finally{restore();}
++  }
++}
++if(!promiseCheckpoint)throw new Error('No accepted midpoint');
++// Replay a helper's side independently, using only their own commitment and offers.
++const hw=deserializeWorld(promiseCheckpoint),helper=hw.persons.find(p=>p.name==='Ben')!;
++const helperSeen:NonNullable<ReturnType<typeof observationFromPrompt>>[]=[];
++const hr=await runLive(hw,helper.id,stubModel('restricted-stored-helper',req=>{
++  const o=observationFromPrompt(req.user)!;helperSeen.push(o);
++  const choice=o.options.find(a=>a.kind==='give'&&/promised/.test(a.label))??o.options.find(a=>a.kind==='withdraw'&&/stone/.test(a.label)&&/promise/.test(a.goal))??o.options[0];
++  return JSON.stringify({choose:choice.key,why:'Collect material I remember to keep my own promise, then take it to the person.'});
++}),{until:hw.tick+800});
++write('helper-observations.json',helperSeen);write('helper-transcript.json',hr.transcript);write('helper-final.json',serializeWorld(hr.world));
++const helperReplay=runReplay(deserializeWorld(promiseCheckpoint),hr.transcript);
++if(serializeWorld(helperReplay.world)!==serializeWorld(hr.world)||!conservationReport(hr.world).ok)throw new Error('Helper replay failed');
++// A labelled stale-knowledge failure uses a real competing transfer; no goods vanish.
++const failure=materialPlanScene();transfer(failure.w,failure.store.store.items,failure.outsider.inv,999,'stone',4,`building:${failure.store.id}`,`person:${failure.outsider.id}`,'staged competing withdrawal');
++write('stale-start.json',serializeWorld(failure.w));write('stale-observation.json',observeNow(failure.w,failure.ada));
++if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during evidence run');
++write('report.json',{staged:true,externalModel:false,reports:reports.map(r=>({scenario:r.scenario,arm:r.arm,firstChoice:r.firstChoice,inventory:r.inventory,requests:r.requests,milestones:r.milestones,hash:r.hash,fullReplayEqual:r.fullReplayEqual,conservation:r.conservation})),helper:{hash:hashWorld(hr.world),fullReplayEqual:true,choices:helperSeen.map(o=>({tick:o.time.tick,promises:o.people.promises,options:o.options.filter(a=>/promise/.test(a.goal))}))}});
++console.log(JSON.stringify(reports.map(r=>({scenario:r.scenario,arm:r.arm,firstChoice:r.firstChoice,inventory:r.inventory,requests:r.requests.map(x=>({status:x.status,delivered:x.delivered??0})),hash:r.hash,fullReplayEqual:r.fullReplayEqual}))));
+diff --git a/scripts/stored_materials_manual_replay.ts b/scripts/stored_materials_manual_replay.ts
+new file mode 100644
+index 0000000..1201ab9
+--- /dev/null
++++ b/scripts/stored_materials_manual_replay.ts
+@@ -0,0 +1,25 @@
++// Verify evidence exported AFTER offered choices in the actual rendered manual panel.
++import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { deserializeWorld, serializeWorld } from '../src/app/save';
++import { runReplay } from '../src/agent/run';
++import { hashWorld } from '../src/sim/world';
++import { conservationReport } from '../src/sim/economy';
++import type { Transcript } from '../src/agent/transcript';
++const [file,out]=process.argv.slice(2);
++if(!file||!out||existsSync(out))throw new Error('Downloaded bundle and fresh output required');
++const raw=readFileSync(file,'utf8');
++const b=JSON.parse(raw) as {staged:boolean;actor:string;startPath:string;start:string;final:string;transcript:Transcript};
++if(!b.staged||!b.transcript?.end)throw new Error('Stop the manual run before exporting its bundle');
++mkdirSync(out,{recursive:true});
++const r=runReplay(deserializeWorld(b.start),b.transcript),final=serializeWorld(r.world);
++const p=r.world.persons.find(p=>p.id===b.transcript.header.personId)!;
++const report={staged:true,externalModel:false,actor:b.actor,startPath:b.startPath,protocol:b.transcript.header.protocol,
++  observationVersion:b.transcript.header.observationVersion,tick:r.world.tick,browserHash:b.transcript.end.hash,replayHash:hashWorld(r.world),
++  fullSerializedEqual:final===b.final,applied:b.transcript.end.applied,rejected:b.transcript.end.rejected,
++  outcomes:b.transcript.outcomes,requests:r.world.requests.filter(q=>q.from===p.id||q.to===p.id),
++  inventory:p.inv,plans:p.intentions,commitments:p.commitments,relations:p.relations,socialMemory:p.socialMemory,
++  tools:r.world.tools.filter(t=>t.holder===p.id),conservation:conservationReport(r.world)};
++for(const [name,data]of Object.entries({bundle:raw,start:b.start,'browser-final':b.final,'replay-final':final,transcript:b.transcript,report}))
++  writeFileSync(`${out}/${name}.json`,typeof data==='string'?data:JSON.stringify(data,null,2));
++console.log(JSON.stringify(report));
++if(!report.fullSerializedEqual||report.browserHash!==report.replayHash||!report.conservation.ok||report.rejected)process.exitCode=1;
+diff --git a/scripts/stored_materials_observe.ts b/scripts/stored_materials_observe.ts
+new file mode 100644
+index 0000000..796349b
+--- /dev/null
++++ b/scripts/stored_materials_observe.ts
+@@ -0,0 +1,84 @@
++// Preregistered ordinary occurrence; observer samples never choose or change actions.
++import {existsSync,mkdirSync,writeFileSync,readFileSync,readdirSync} from 'node:fs';
++import {createHash} from 'node:crypto';
++import {execFileSync} from 'node:child_process';
++import {createWorld} from '../src/sim/factory';
++import {currentWorldSettings} from '../src/sim/profiles';
++import {stepWorld,hashWorld} from '../src/sim/world';
++import {DAY} from '../src/sim/constants';
++import {serializeWorld} from '../src/app/save';
++import {conservationReport} from '../src/sim/economy';
++import {generateOptions} from '../src/sim/decision';
++import {rememberedMaterialStores} from '../src/sim/material_stock';
++import {parseIntervention} from './lab/lab';
++import type {Request,ItemKind} from '../src/sim/types';
++
++const [out,seed]=process.argv.slice(2);if(!out||existsSync(out)||!['meadow','river','forest'].includes(seed))throw new Error('Fresh output and registered seed required');
++mkdirSync(out,{recursive:true});
++const paths=[...readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p),'scripts/stored_materials_observe.ts','scripts/lab/lab.ts'].sort();
++const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));
++const source=manifest();
++writeFileSync(`${out}/provenance.json`,JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,seed,profile:'normal',days:6,immigration:false,budgetSeconds:180,stop:'day 6, invariant failure, or budget; no tuning'},null,2));
++const w=createWorld(currentWorldSettings('normal',seed,{immigration:false}));
++const selections:any[]=[],transfers:any[]=[],requests=new Map<number,Request>(),daily:any[]=[],samples:any[]=[],consequences:any[]=[];
++const finished=new Set<number>(),usedTools=new Set<number>(),knownRequestStatus=new Map<number,string>();
++let samplePersons=0,stockKnowledgeSamples=0,eligibleOptionSamples=0;
++w.hooks={onActivityStart(p,a){
++  if(!a.data.materialStock)return;
++  const before=serializeWorld(w),purpose=/promise/.test(a.goal)?'promises':'plans';
++  const restore=parseIntervention(`rich-no-stored-material-${purpose}`).install!();
++  let alt;
++  // Compare the offered action itself, not the new yields/diagnostic marker:
++  // an older production path might offer the same collection without that marker.
++  try{alt=generateOptions(w,p,true,true).options.filter(o=>o.key===a.data.optKey&&o.kind===a.kind&&o.goal===a.goal);}finally{restore();}
++  if(serializeWorld(w)!==before)throw new Error('Counterfactual observer mutated state');
++  selections.push({tick:w.tick,person:p.id,name:p.name,activity:a.id,item:a.data.materialStock,store:a.targetId,rememberedStore:{...p.beliefs[a.targetId]},goal:a.goal,kind:purpose,planId:a.data.forPlan??null,offStillOffers:alt.length>0,
++    commitments:p.commitments.filter(c=>c.status==='active').map(c=>({...c})),plans:p.intentions.filter(i=>i.status==='active').map(i=>({...i,wants:{...i.wants}}))});
++},onTransfer(t){
++  if(t.reason!=='withdraw'&&t.reason!=='given'&&t.reason!=='gift on request')return;
++  const pid=t.to.startsWith('person:')?Number(t.to.slice(7)):0,p=w.persons.find(p=>p.id===pid);
++  const aid=p?.activity?.data.materialStock?p.activity.id:null;
++  if(aid||t.reason!=='withdraw')transfers.push({tick:w.tick,...t,collectionActivity:aid,commitmentId:t.from.startsWith('person:')?w.persons.find(p=>p.id===Number(t.from.slice(7)))?.activity?.data.commitmentId:null});
++}};
++const began=Date.now();let stop='day 6';
++while(w.tick<6*DAY){
++  stepWorld(w);
++  for(const r of w.requests)if(r.planId||r.status==='promised'||requests.has(r.id))requests.set(r.id,{...r});
++  const selectedPlans=new Set(selections.map(s=>s.planId).filter(Boolean));
++  const selectedRequests=new Set(selections.flatMap(s=>s.commitments.map((c:any)=>c.requestId)));
++  for(const r of w.requests)if(selectedRequests.has(r.id)&&knownRequestStatus.get(r.id)!==r.status){
++    knownRequestStatus.set(r.id,r.status);const receiver=w.persons.find(p=>p.id===r.from);
++    consequences.push({tick:w.tick,stage:'linked-request',request:{...r},receiverTrust:receiver?.relations[r.to]?.trust??null,memory:receiver?.socialMemory?.filter(m=>m.requestId===r.id)??[]});
++  }
++  for(const p of w.persons)for(const i of p.intentions)if(selectedPlans.has(i.id)&&i.status!=='active'&&!finished.has(i.id)){
++    finished.add(i.id);consequences.push({tick:w.tick,stage:'linked-plan-ended',person:p.id,plan:{...i,wants:{...i.wants}}});
++  }
++  for(const t of w.tools)if(t.wear>0&&!usedTools.has(t.id)&&selections.some(s=>s.person===t.maker&&s.tick<=t.madeTick&&s.plans.some((i:any)=>i.makes===t.kind))){
++    usedTools.add(t.id);consequences.push({tick:w.tick,stage:'later-tool-use',tool:{...t}});
++  }
++  if(w.tick%240===0){
++    const before=serializeWorld(w);let known=0,offers=0;
++    for(const p of w.persons){samplePersons++;if(!['wood','stone','clay','ore'].some(item=>rememberedMaterialStores(w,p,item as ItemKind).length))continue;
++      known++;const opts=generateOptions(w,p,true,true).options.filter(o=>o.kind==='withdraw'&&o.yields&&['wood','stone','clay','ore'].includes(o.yields));offers+=opts.length;
++    }
++    stockKnowledgeSamples+=known;eligibleOptionSamples+=offers;samples.push({tick:w.tick,known,offers});
++    if(serializeWorld(w)!==before)throw new Error('Sample observer mutated state');
++    if(Date.now()-began>180000){stop='runtime budget';break;}
++  }
++  if(w.tick%DAY===0){const ledger=conservationReport(w);daily.push({day:w.tick/DAY,ledger});if(!ledger.ok){stop='invariant failure';break;}}
++}
++if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during occurrence run');
++const completedPlans=w.persons.flatMap(p=>p.intentions.filter(i=>i.status==='done').map(i=>({person:p.id,...i})));
++const relevantIds=new Set(selections.flatMap(s=>s.commitments.map((c:any)=>c.requestId)));
++const report={seed,ticks:w.tick,stop,seconds:(Date.now()-began)/1000,samplePersons,stockKnowledgeSamples,eligibleOptionSamples,
++  selected:selections.length,planCollections:selections.filter(s=>s.kind==='plans').length,promiseCollections:selections.filter(s=>s.kind==='promises').length,
++  successfulCollections:new Set(transfers.filter(t=>t.collectionActivity).map(t=>t.collectionActivity)).size,
++  stockUnitsWithdrawn:transfers.filter(t=>t.collectionActivity).reduce((n,t)=>n+t.n,0),
++  linkedRequests:[...requests.values()].filter(r=>relevantIds.has(r.id)),
++  projectRequests:[...requests.values()].filter(r=>r.planId),retainedCompletedPlans:completedPlans,
++  linkedPlansCompleted:consequences.filter(c=>c.stage==='linked-plan-ended'&&c.plan.status==='done').length,
++  laterToolsUsed:usedTools.size,hash:hashWorld(w),conservation:conservationReport(w)};
++for(const [name,data]of Object.entries({report,selections,transfers,requests:[...requests.values()],daily,samples,consequences}))writeFileSync(`${out}/${name}.json`,JSON.stringify(data,null,2));
++writeFileSync(`${out}/final.json`,serializeWorld(w));
++console.log(JSON.stringify({...report,retainedCompletedPlans:completedPlans.length}));
++if(stop!=='day 6')process.exitCode=1;
+diff --git a/src/sim/act_resource.ts b/src/sim/act_resource.ts
+index 1e0140a..cdd15de 100644
+--- a/src/sim/act_resource.ts
++++ b/src/sim/act_resource.ts
+@@ -1,4 +1,5 @@
+ import { relocationPackingBlocker } from './relocation';
++import { mayCollectMaterialStock } from './material_stock';
+ import { creditProject, mayWorkProject } from './townships';
+ import { faceToward, registerHandler } from './activities';
+ import type { WorkResult } from './activities';
+@@ -588,6 +589,7 @@ registerHandler('withdraw', {
+     }
+     const e = world.byId.get(a.targetId)!;
+     observe(world, p, e);
++    if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e))) return 'this material store is no longer shared or ours';
+     a.duration = transferDuration(a.data.items ?? {});
+     a.tx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : p.x;
+     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
+@@ -602,6 +604,10 @@ registerHandler('withdraw', {
+     const want = (a.data.items ?? {}) as Record<string, number>;
+     let moved = 0;
+     const e = world.byId.get(a.targetId);
++    if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e))) {
++      if (e) observe(world, p, e);
++      return 'fail:this material store is no longer shared or ours';
++    }
+     for (const k of Object.keys(want)) {
+       let n = want[k];
+       if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);
+diff --git a/src/sim/intent.ts b/src/sim/intent.ts
+index 2a008aa..aaf38af 100644
+--- a/src/sim/intent.ts
++++ b/src/sim/intent.ts
+@@ -19,6 +19,7 @@ import { isRich } from './mood';
+ import { beliefsByKind } from './optutil';
+ import { estimatedAmount, recentFailure } from './knowledge';
+ import { runsRulesVersion } from './rulesversion';
++import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
+ import {
+   SHELTER_BATCH,
+   believesHoused,
+@@ -86,6 +87,7 @@ export const reconsiderOn = (): boolean => reconsider;
+ 
+ /** Does the person know a source of `item` they reckon has anything left, counting regrowth? */
+ function hasKnownResource(world: World, p: Person, item: ItemKind): boolean {
++  if (usesMaterialStock(world, 'plan') && rememberedMaterialStores(world, p, item).length) return true;
+   for (const st of Object.keys(SOURCE_ITEM) as SourceType[]) {
+     if (SOURCE_ITEM[st] !== item) continue;
+     for (const b of beliefsByKind(p, [st as BeliefKind])) {
+diff --git a/src/sim/material_stock.ts b/src/sim/material_stock.ts
+new file mode 100644
+index 0000000..67bdb12
+--- /dev/null
++++ b/src/sim/material_stock.ts
+@@ -0,0 +1,38 @@
++// Remembered raw material in ordinary storage. Beliefs are prospects, not claims:
++// only an ordinary physical withdrawal can establish that any stock is available.
++import { isHomeType } from './constants';
++import { recentFailure } from './knowledge';
++import { runsRulesVersion } from './rulesversion';
++import type { Belief, Building, ItemKind, Person, World } from './types';
++
++let plans = true, promises = true;
++export const storedMaterialPlansOn = (): boolean => plans;
++export const storedMaterialPromisesOn = (): boolean => promises;
++export function setStoredMaterialPlans(on: boolean): void { plans = on; }
++export function setStoredMaterialPromises(on: boolean): void { promises = on; }
++export function usesMaterialStock(w: World, purpose: 'plan' | 'promise'): boolean {
++  return w.settings.dynamics === 'rich' && runsRulesVersion(w, 40) && (purpose === 'promise' ? promises : plans);
++}
++
++export const isStoredRawMaterial = (item: ItemKind): boolean => ['wood', 'stone', 'clay', 'ore'].includes(item);
++const accessible = (p: Person, type: string | undefined, hh: number | undefined): boolean =>
++  type === 'storehouse' || (isHomeType(type) && hh === p.hhId);
++
++/** No world entity/inventory lookup. Own homes and public stores only: workshop
++ * earmarks, other homes, granary shares and cart ownership keep their existing rules. */
++export function rememberedMaterialStores(w: World, p: Person, item: ItemKind): Belief[] {
++  if (!isStoredRawMaterial(item)) return [];
++  const found: Belief[] = [];
++  for (const id of p.bykind.building ?? []) {
++    const b = p.beliefs[id];
++    if (b?.kind !== 'building' || !accessible(p, b.btype, b.hh) || (b.items?.[item] ?? 0) < 1) continue;
++    if (recentFailure(w, p, b.id, 320)) continue;
++    found.push(b);
++  }
++  return found;
++}
++
++/** The matching execution boundary, checked again if ownership changes mid-walk/work. */
++export function mayCollectMaterialStock(p: Person, building: Building): boolean {
++  return accessible(p, building.type, building.hhId);
++}
+diff --git a/src/sim/options_work.ts b/src/sim/options_work.ts
+index 9bd0cf6..7d3413c 100644
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -9,7 +9,8 @@ import { openSitesNear, repairMaterial } from './act_build';
+ import { rulesOf, within } from './rules';
+ import { runsRulesVersion } from './rulesversion';
+ import { baseHub, nearestHub } from './settlements';
+-import { depositLead } from './production';
++import { collectMaterialStock, depositLead } from './production';
++import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
+ import { isFacilityType } from './recipes';
+ import { toolsHeldBy } from './toolreg';
+ import { findBuildSpot } from './buildings';
+@@ -361,6 +362,11 @@ export const isRawMaterial = (k: ItemKind): k is RawMaterial => k === 'wood' ||
+ 
+ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string): void {
+   const { world, p } = ctx;
++  if (usesMaterialStock(world, tag === 'promise' ? 'promise' : 'plan')) {
++    const stores = rememberedMaterialStores(world, p, item).map(b => ({ b, e: eta(ctx, b.x, b.y) }));
++    stores.sort((a, b) => a.e - b.e);
++    for (const { b } of stores.slice(0, 2)) collectMaterialStock(ctx, b, item, want, base, why, tag);
++  }
+   const tm = traitMods(p);
+   const kinds: BeliefKind[] = RAW_KINDS[item];
+   const cands: { b: Belief; est: number; e: number; score: number }[] = [];
+diff --git a/src/sim/production.ts b/src/sim/production.ts
+index 48624b0..86f2254 100644
+--- a/src/sim/production.ts
++++ b/src/sim/production.ts
+@@ -109,7 +109,7 @@ function nameOf(b: Belief): string {
+ }
+ 
+ /** Go and take stock out of a store, a workplace's shelves or a heap. */
+-function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = []): void {
++function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
+   const { world, p } = ctx;
+   if (recentFailure(world, p, b.id, 320)) {
+     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items)}`, b.id, `tried recently and found none to take`, tag);
+@@ -133,6 +133,7 @@ function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
+     key: `collect:${b.id}:${Object.keys(items).join('+')}`,
+     targetId: b.id,
+     tag,
++    ...(materialStock ? { yields: materialStock } : {}),
+     make: () => {
+       const spot = spotNear(world, p, b);
+       if (!spot) return null;
+@@ -149,12 +150,20 @@ function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
+         utility: util,
+         minCommit: 30,
+         maxTicks: 700,
+-        data: { items },
++        data: { items, ...(materialStock ? { materialStock } : {}) },
+       });
+     },
+   });
+ }
+ 
++/** Reuse the ordinary collection action for one remembered raw-material store.
++ * The caller has checked personal knowledge; execution still checks the real place. */
++export function collectMaterialStock(ctx: Ctx, b: Belief, item: ItemKind, want: number, base: number, why: string, tag: string): void {
++  const take = Math.min(b.items?.[item] ?? 0, Math.max(1, Math.ceil(want)), invRoom(ctx.world, ctx.p, item));
++  if (take < 1) return;
++  collectLeaf(ctx, b, { [item]: take }, base * 0.95, why, tag, [], item);
++}
++
+ /** Carry goods to a workplace so that a batch can be started there. */
+ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, siteId = 0): void {
+   const { world, p } = ctx;
+diff --git a/src/sim/rulesversion.ts b/src/sim/rulesversion.ts
+index ac398c4..af91566 100644
+--- a/src/sim/rulesversion.ts
++++ b/src/sim/rulesversion.ts
+@@ -86,10 +86,11 @@ import type { Settings, World } from './types';
+ // Version 37: a full pack can deliver a partial household shelter batch through ordinary hauling.
+ // Version 38: witnessed construction satisfaction and a new unfulfilled hope after three days of fulfilment.
+ // Version 39: personal trust selects among feasible helpers for a tool plan's material ask.
+-export const CURRENT_RULES_VERSION = 39;
++// Version 40: remembered own/shared raw-material stores support plans and delivery promises.
++export const CURRENT_RULES_VERSION = 40;
+ 
+ /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
+-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
++export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+ 
+ /**
+  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
+diff --git a/src/sim/social.ts b/src/sim/social.ts
+index 0753e7e..3e18725 100644
+--- a/src/sim/social.ts
++++ b/src/sim/social.ts
+@@ -6,6 +6,7 @@ import { recordProjectResponse, projectAt, canInvite, organiserExperience } from
+ import { outstandingForPlan, planShortfall, plannedFor } from './intent';
+ import { isRich, think } from './mood';
+ import { runsRulesVersion } from './rulesversion';
++import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
+ import { noteWedding } from './occasions';
+ import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
+ import { expose } from './illness';
+@@ -321,6 +322,7 @@ export function willingness(world: World, B: Person, A: Person, severity: number
+ 
+ /** Could B get hold of this item from somewhere they know of? (Used before promising to fetch it.) */
+ export function canObtain(world: World, B: Person, item: ItemKind): boolean {
++  if (usesMaterialStock(world, 'promise') && rememberedMaterialStores(world, B, item).length) return true;
+   const need = item === 'wood' ? 'tree' : item === 'stone' ? 'rock' : item === 'clay' ? 'clay_pit' : item === 'ore' ? 'ore_vein' : item === 'water' ? 'water' : null;
+   const usable = (b: Belief): boolean => {
+     const f = B.failures[b.id];
+diff --git a/tests/helpers/stored_materials.ts b/tests/helpers/stored_materials.ts
+new file mode 100644
+index 0000000..5648729
+--- /dev/null
++++ b/tests/helpers/stored_materials.ts
+@@ -0,0 +1,76 @@
++// Explicit staged supplies, skills and stationary neighbours; no assigned outcomes.
++import { addPerson, building, done, pin, stage } from './kit';
++import { CURRENT_RULES_VERSION } from '../../src/sim/rulesversion';
++import { makeSource } from '../../src/sim/sources';
++import { observe } from '../../src/sim/knowledge';
++import { perceive } from '../../src/sim/perception';
++import { generateOptions } from '../../src/sim/decision';
++import { reviewIntentions } from '../../src/sim/intent';
++import { relOf } from '../../src/sim/relations';
++import type { InhabitantObservation } from '../../src/agent/observe';
++
++export function materialPlanScene(version = CURRENT_RULES_VERSION) {
++  const s = stage('stored-material-plan');
++  s.w.settings.dynamics = 'rich'; s.w.settings.rulesVersion = version;
++  const ada = addPerson(s, 'Ada', 40.5, 40.5, { age: 30, inv: { wood: 2 }, hunger: 100, thirst: 100, energy: 100 });
++  const outsider = addPerson(s, 'Dara', 75.5, 70.5, { age: 30 }); pin(outsider);
++  const home = building(s, 'lean_to', 38, 38, ada.hhId, { berries: 8 });
++  s.w.households.find(h => h.id === ada.hhId)!.homeId = home.id;
++  const store = building(s, 'storehouse', 50, 40, 0, { stone: 4 });
++  for (const x of [60, 62, 64]) observe(s.w, ada, makeSource(s.w, 'tree', x, 44, 9));
++  ada.stats.gathered = 12; ada.skills.wood = 1.8;
++  ada.needs.warmth = 100; ada.needs.safety = 100;
++  done(s); s.w.tick = 700;
++  observe(s.w, ada, store); perceive(s.w, ada);
++  reviewIntentions(generateOptions(s.w, ada, true));
++  return { w: s.w, ada, outsider, store, home };
++}
++
++export function materialPromiseScene(version = CURRENT_RULES_VERSION) {
++  const s = stage('stored-material-promise');
++  s.w.settings.dynamics = 'rich'; s.w.settings.rulesVersion = version;
++  const ada = addPerson(s, 'Ada', 40.5, 40.5, { age: 30, inv: { wood: 2 }, hunger: 100, thirst: 100, energy: 100 });
++  const cora = addPerson(s, 'Cora', 42.5, 42.5, { age: 30, inv: { wood: 3 }, traits: { generosity: 1 }, hunger: 100, thirst: 100, energy: 100 });
++  const ben = addPerson(s, 'Ben', 42.5, 40.5, { age: 30, inv: { wood: 1, stone: 1 }, traits: { generosity: 1, sociability: 1 }, hunger: 100, thirst: 100, energy: 100 });
++  const outsider = addPerson(s, 'Dara', 75.5, 70.5, { age: 30 }); pin(outsider); pin(cora);
++  const home = building(s, 'lean_to', 38, 38, ada.hhId, { berries: 8 });
++  s.w.households.find(h => h.id === ada.hhId)!.homeId = home.id;
++  const benHome = building(s, 'lean_to', 43, 37, ben.hhId, { berries: 8 });
++  s.w.households.find(h => h.id === ben.hhId)!.homeId = benHome.id;
++  const store = building(s, 'storehouse', 51, 43, 0, { stone: 5, wood: 3 });
++  for (const x of [60, 62, 64]) {
++    const tree = makeSource(s.w, 'tree', x, 44, 9);
++    observe(s.w, ada, tree); observe(s.w, ben, tree);
++  }
++  observe(s.w, ada, makeSource(s.w, 'rock', 72, 40, 12));
++  ada.stats.gathered = 12; ada.skills.stone = 1.8; ada.skills.wood = 0.5; ada.skills.forage = 0.2;
++  ben.stats.gathered = 12; ben.skills.wood = 1.8;
++  for (const p of [ada, ben, cora]) { p.needs.warmth = 100; p.needs.safety = 100; }
++  relOf(ada, cora.id); relOf(ada, ben.id); relOf(ben, ada.id);
++  done(s); s.w.tick = 700;
++  // Finite staged pause lets Ada start her request before Ben sets off; it expires normally.
++  ben.cooldowns.pause = s.w.tick + 90;
++  observe(s.w, ben, store);
++  for (const p of [ada, ben]) { perceive(s.w, p); reviewIntentions(generateOptions(s.w, p, true)); }
++  return { w: s.w, ada, ben, cora, outsider, store };
++}
++
++/** A policy that reads only the restricted offer/own request and inventory. */
++export function materialChoice(o: InhabitantObservation, scenario: 'plan' | 'promise') {
++  const urgent = o.options.find(a => a.need && o.self.needs[a.need as keyof typeof o.self.needs]?.state === 'critical');
++  if (urgent) return urgent;
++  if (scenario === 'promise') {
++    const ask = o.options.find(a => a.label === 'Ask Ben for stone');
++    if (ask && !o.people.requests.some(r => r.direction === 'I asked' && r.other === 'Ben')) return ask;
++    const craft = o.options.find(a => a.kind === 'craft' && /pick/i.test(a.label));
++    if (craft) return craft;
++    if (o.people.requests.some(r => r.direction === 'I asked' && r.status === 'promised'))
++      return o.options.find(a => a.kind === 'rest') ?? o.options.find(a => a.kind === 'wander') ?? o.options[0];
++  } else {
++    const craft = o.options.find(a => a.kind === 'craft' && /axe/i.test(a.label));
++    if (craft) return craft;
++    const collect = o.options.find(a => a.kind === 'withdraw' && /stone/.test(a.label));
++    if (collect) return collect;
++  }
++  return o.options[0];
++}
+diff --git a/tests/inhabit_choice_identity.test.ts b/tests/inhabit_choice_identity.test.ts
+index 1e113d8..7337798 100644
+--- a/tests/inhabit_choice_identity.test.ts
++++ b/tests/inhabit_choice_identity.test.ts
+@@ -31,7 +31,9 @@ it('new public identities select the actual hunger alternative with its own amou
+  const {w,p}=fixture();const initial=serializeWorld(w);
+  const result=await runLive(w,p.id,chooser('choose-hunger',o=>{
+   expect(new Set(o.options.map(o=>o.key)).size).toBe(o.options.length);
+-  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.key.includes('#choice:'))!;
++  // Fruit is the two-unit contract. Successor trajectories can offer berries
++  // (three units) ahead of it; order is not the identity under test.
++  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.label==='Picking fruit'&&o.key.includes('#choice:'))!;
+   expect(selected.limits?.find(b=>b.field==='amount')?.max).toBe(2);
+   return selected.key;
+  }),{until:119});
+diff --git a/tests/plan_reconsider.test.ts b/tests/plan_reconsider.test.ts
+index 135d20d..e0da8a9 100644
+--- a/tests/plan_reconsider.test.ts
++++ b/tests/plan_reconsider.test.ts
+@@ -25,8 +25,9 @@ function make(seed = 'reconsider') {
+   return { w, p };
+ }
+ 
+-it('relinquishes a material-fetch plan with no known source and no promise (rules 34)', () => {
++it('through rules 39, relinquishes a material-fetch plan with no natural source or promise even if home stock is known', () => {
+   const { w, p } = make();
++  w.settings.rulesVersion = 39;
+   reviewIntentions(makeCtx(w, p, true, true));
+   expect(p.intentions[0].status).toBe('dropped');
+   expect(p.intentions[0].reason).toContain('no known source of wood');
+@@ -120,12 +121,14 @@ it('rules 36 and the ablation retain the full-batch shelter step', () => {
+  }
+ });
+ 
+-it('retains a plan for an accepted live promise, but releases it after that promise is interrupted', () => {
+- const {w,p}=make();const helper=w.persons[1];
++it('after an interrupted promise, old rules release the plan while rules 40 can still use known home stock', () => {
++ for (const version of [39,40]) {
++ const {w,p}=make();w.settings.rulesVersion=version;const helper=w.persons[1];
+  const r=createRequest(w,p,helper,{kind:'wood',item:'wood',amount:2,planId:p.intentions[0].id});
+  r.status='promised';r.commitmentId=w.nextId++;
+  helper.commitments.push({id:r.commitmentId,requestId:r.id,kind:'deliver',to:p.id,item:'wood',amount:2,delivered:0,siteId:0,made:w.tick,deadline:w.tick+1000,status:'active'});
+  reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe('active');
+  helper.commitments.at(-1)!.status='interrupted';r.status='interrupted';
+- reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe('dropped');
++ reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe(version===39?'dropped':'active');
++ }
+ });
+diff --git a/tests/stored_materials.test.ts b/tests/stored_materials.test.ts
+new file mode 100644
+index 0000000..5e337b0
+--- /dev/null
++++ b/tests/stored_materials.test.ts
+@@ -0,0 +1,249 @@
++import { afterEach, expect, it } from 'vitest';
++import { projectHelperScene } from './helpers/project_helpers';
++import { building } from './helpers/kit';
++import { delBelief, observe } from '../src/sim/knowledge';
++import { generateOptions } from '../src/sim/decision';
++import { reviewIntentions } from '../src/sim/intent';
++import { canObtain } from '../src/sim/social';
++import { RNG } from '../src/sim/rng';
++import { materialPlanScene, materialPromiseScene, materialChoice } from './helpers/stored_materials';
++import { setStoredMaterialPlans, setStoredMaterialPromises, rememberedMaterialStores } from '../src/sim/material_stock';
++import { parseIntervention } from '../scripts/lab/lab';
++import { evaluateRequest, createRequest, checkCommitments, fulfillCommitment } from '../src/sim/social';
++import { rankOptions } from '../src/sim/decision';
++import { startActivity, endActivity } from '../src/sim/activities';
++import { stepWorld } from '../src/sim/world';
++import { serializeWorld, deserializeWorld } from '../src/app/save';
++import { conservationReport, transfer, snapshotInitial } from '../src/sim/economy';
++import { runLive, runReplay } from '../src/agent/run';
++import { stubModel } from '../src/agent/model';
++import { observationFromPrompt } from '../src/agent/protocol';
++import { observeNow } from './helpers/inhabit';
++import { describePerson } from '../src/sim/inspect';
++import { destroyBuilding } from '../src/sim/buildings';
++import { makeSource } from '../src/sim/sources';
++import type { Person, World } from '../src/sim/types';
++
++afterEach(() => { setStoredMaterialPlans(true); setStoredMaterialPromises(true); });
++const collection = (w: World, p: Person, id: number) => generateOptions(w, p, true, true).options.find(o => o.kind === 'withdraw' && o.targetId === id && o.yields === 'stone');
++function startCollection(f: ReturnType<typeof materialPlanScene>) {
++  const o = collection(f.w, f.ada, f.store.id)!;
++  expect(o).toBeDefined(); const a = o.make!()!; startActivity(f.w, f.ada, a); f.ada.nextThink = 1e9;
++  return a;
++}
++function finishAction(w: World, p: Person, limit = 600) {
++  const a = p.activity; let i = 0;
++  while (p.activity === a && i++ < limit) stepWorld(w);
++  expect(p.activity).not.toBe(a);
++}
++
++function storedScene() {
++  const f = projectHelperScene();
++  const store = building({ w: f.w, rng: new RNG(1) }, 'storehouse', 55, 40, 0, { stone: 4 });
++  observe(f.w, f.ada, store); observe(f.w, f.ben, store);
++  for (const b of Object.values(f.ada.beliefs)) if (b.kind === 'rock' || b.kind === 'outcrop') delBelief(f.ada, b.id);
++  return { ...f, store };
++}
++
++it('keeps a material plan viable when remembered shared storage is the only stone source', () => {
++  const { w, ada } = storedScene();
++  const plan = ada.intentions.find(i => i.kind === 'tool')!;
++  reviewIntentions(generateOptions(w, ada, true));
++  expect(plan.status).toBe('active');
++  expect(generateOptions(w, ada, true, true).options.some(o => o.kind === 'withdraw' && o.yields === 'stone')).toBe(true);
++});
++
++it('allows a helper to consider remembered shared material, without consulting remote inventory', () => {
++  const { w, ben, store } = storedScene();
++  expect(canObtain(w, ben, 'stone')).toBe(true);
++  store.store.items = {};
++  expect(canObtain(w, ben, 'stone'), 'unseen depletion is not knowledge').toBe(true);
++});
++
++it('offers ordinary collection to execute a raw-material commitment', () => {
++  const { w, ada, ben, store } = storedScene();
++  ben.inv.stone = 0;
++  ben.commitments.push({ id: w.nextId++, requestId: 0, kind: 'deliver', to: ada.id, item: 'stone', amount: 2, siteId: 0, made: w.tick, deadline: w.tick + 1800, status: 'active', destKind: 'person', destId: ada.id });
++  const option = generateOptions(w, ben, true, true).options.find(o => o.kind === 'withdraw' && o.targetId === store.id && o.tag === 'promise');
++  expect(option).toBeDefined();
++});
++
++it('only reads known own/public stocks, with pure observers and no knowledge for an absent person', () => {
++  const f = materialPlanScene();
++  const strangerHome = building({ w: f.w, rng: new RNG(2) }, 'hut', 63, 30, f.outsider.hhId, { stone: 6 });
++  observe(f.w, f.ada, strangerHome);
++  const before = serializeWorld(f.w);
++  for (let i = 0; i < 3; i++) {
++    expect(rememberedMaterialStores(f.w, f.ada, 'stone').map(b => b.id)).toEqual([f.store.id]);
++    expect(rememberedMaterialStores(f.w, f.outsider, 'stone')).toEqual([]);
++    expect(observeNow(f.w, f.outsider).remembered.places.some(b => b.id === f.store.id)).toBe(false);
++    observeNow(f.w, f.ada); describePerson(f.w, f.ada.id);
++  }
++  expect(serializeWorld(f.w)).toBe(before);
++  // A remote stock change leaves the decision at its remembered quantity.
++  f.store.store.items.stone = 0;
++  expect(collection(f.w, f.ada, f.store.id)?.make!()?.data.items).toEqual({ stone: 1 });
++});
++
++it('isolates plan and promise connections and retains all rules-39 behavior', () => {
++  for (const version of [39, 40]) {
++    const f = materialPlanScene(version), g = materialPromiseScene(version);
++    const restorePlan = parseIntervention('rich-no-stored-material-plans').install!();
++    expect(collection(f.w, f.ada, f.store.id)).toBeUndefined();
++    reviewIntentions(generateOptions(f.w, f.ada, true));
++    expect(f.ada.intentions.find(i => i.makes === 'axe')?.status).toBe('dropped');
++    expect(canObtain(g.w, g.ben, 'stone')).toBe(version === 40);
++    restorePlan();
++    const restorePromise = parseIntervention('rich-no-stored-material-promises').install!();
++    expect(canObtain(g.w, g.ben, 'stone')).toBe(false);
++    expect(collection(f.w, f.ada, f.store.id) !== undefined).toBe(version === 40);
++    restorePromise();
++  }
++});
++
++it('uses real withdrawal, crafting and later tool work with full-state save/replay equality', async () => {
++  const f = materialPlanScene(); const start = serializeWorld(f.w);
++  const observations: NonNullable<ReturnType<typeof observationFromPrompt>>[] = [];
++  const model = stubModel('stored-plan', req => {
++    const o = observationFromPrompt(req.user)!; observations.push(o);
++    return JSON.stringify({choose: materialChoice(o, 'plan').key, why: 'Use the offered known store, then make and use my axe.'});
++  });
++  const result = await runLive(f.w, f.ada.id, model, {until: 2000});
++  const p = result.world.persons.find(p => p.id === f.ada.id)!;
++  expect(p.inv.axe).toBe(1);
++  expect(result.world.tools.find(t => t.holder === p.id && t.kind === 'axe')!.wear).toBeGreaterThan(0);
++  expect(p.intentions.find(i => i.makes === 'axe')?.status).toBe('done');
++  expect(observations[0].options.some(o => /Collect 1 stone from the storehouse/.test(o.label))).toBe(true);
++  expect(conservationReport(result.world).ok).toBe(true);
++  expect(serializeWorld(runReplay(deserializeWorld(start), result.transcript).world)).toBe(serializeWorld(result.world));
++});
++
++it('an offered request creates a voluntary promise, collects stock, delivers, credits use and retains personal feedback', async () => {
++  const f = materialPromiseScene(); const start = serializeWorld(f.w); const beforeTrust = f.ada.relations[f.ben.id].trust;
++  const observations: NonNullable<ReturnType<typeof observationFromPrompt>>[] = [];
++  const model = stubModel('stored-promise', req => {
++    const o = observationFromPrompt(req.user)!; observations.push(o);
++    return JSON.stringify({choose: materialChoice(o, 'promise').key, why: 'Ask the offered helper, allow an accepted promise time, then make my pick.'});
++  });
++  const result = await runLive(f.w, f.ada.id, model, {until: 2000});
++  const p = result.world.persons.find(p => p.id === f.ada.id)!, ben = result.world.persons.find(p => p.id === f.ben.id)!;
++  const r = result.world.requests.find(r => r.from === p.id && r.to === ben.id)!;
++  expect(r.status).toBe('fulfilled'); expect(r.delivered).toBe(2);
++  expect(ben.commitments.find(c => c.requestId === r.id)?.status).toBe('done');
++  expect(p.inv.pick).toBe(1);
++  expect(p.intentions.find(i => i.makes === 'pick')?.reason).toContain('Ben brought 2');
++  expect(p.relations[ben.id].trust).toBeGreaterThan(beforeTrust);
++  expect(p.socialMemory?.some(m => m.requestId === r.id && m.outcome === 'fulfilled')).toBe(true);
++  expect(result.world.persons.find(p => p.id === f.outsider.id)!.socialMemory?.length ?? 0).toBe(0);
++  expect(observations.some(o => o.people.requests.some(r => r.status === 'promised'))).toBe(true);
++  expect(observations.some(o => o.people.requests.some(r => r.status === 'fulfilled'))).toBe(true);
++  expect(conservationReport(result.world).ok).toBe(true);
++  expect(serializeWorld(runReplay(deserializeWorld(start), result.transcript).world)).toBe(serializeWorld(result.world));
++  const once = serializeWorld(result.world);
++  fulfillCommitment(result.world, ben, r.commitmentId!); checkCommitments(result.world, ben);
++  expect(serializeWorld(result.world)).toBe(once);
++});
++
++it('storage knowledge does not override urgent needs, conflicting commitments or refusal', () => {
++  const f = materialPromiseScene();
++  const req = createRequest(f.w, f.ada, f.ben, {kind:'stone', item:'stone', amount:2, destKind:'person', destId:f.ada.id});
++  expect(evaluateRequest(f.w, f.ben, f.ada, req).kind).toBe('promise');
++  f.ben.needs.thirst = 6;
++  f.ben.inv.water = 1; // Explicit urgent-needs fixture: there is an ordinary drink available.
++  expect(evaluateRequest(f.w, f.ben, f.ada, req).kind).toBe('decline');
++  expect(rankOptions(generateOptions(f.w, f.ben, true, true))[0].need).toBe('thirst');
++  f.ben.needs.thirst = 100;
++  for (let i = 0; i < 2; i++) f.ben.commitments.push({id:f.w.nextId++,requestId:0,kind:'deliver',to:f.cora.id,item:'wood',amount:1,siteId:0,made:f.w.tick,deadline:2500,status:'active'});
++  expect(evaluateRequest(f.w, f.ben, f.ada, req).kind).toBe('decline');
++});
++
++it('stale stock fails physically, records the failure, and stops offering the empty place', () => {
++  const f = materialPlanScene(); startCollection(f);
++  transfer(f.w, f.store.store.items, f.outsider.inv, 999, 'stone', 4, `building:${f.store.id}`, `person:${f.outsider.id}`, 'test competing withdrawal');
++  finishAction(f.w, f.ada);
++  expect(f.ada.lastResult?.outcome).toBe('failed'); expect(f.ada.inv.stone ?? 0).toBe(0);
++  expect(f.ada.failures[f.store.id]?.reason).toBe('nothing there to take');
++  expect(collection(f.w, f.ada, f.store.id)).toBeUndefined();
++  expect(conservationReport(f.w).ok).toBe(true);
++});
++
++it('revalidates a private store after household ownership changes during the work', () => {
++  const f = materialPlanScene();
++  f.store.type = 'hut'; f.store.hhId = f.ada.hhId; observe(f.w, f.ada, f.store);
++  const a = startCollection(f);
++  while (f.ada.activity === a && a.phase !== 'work') stepWorld(f.w);
++  expect(f.ada.activity).toBe(a);
++  f.store.hhId = f.outsider.hhId;
++  finishAction(f.w, f.ada);
++  expect(f.ada.lastResult?.detail).toMatch(/no longer shared or ours/);
++  expect(f.ada.inv.stone ?? 0).toBe(0); expect(f.store.store.items.stone).toBe(4);
++  expect(collection(f.w, f.ada, f.store.id)).toBeUndefined();
++});
++
++it('interruption, capacity changes and repeated completion cannot duplicate stock', () => {
++  const f = materialPlanScene(); const a = startCollection(f);
++  endActivity(f.w, f.ada, 'interrupted', 'test urgent interruption');
++  expect(f.store.store.items.stone).toBe(4); expect(f.ada.inv.stone ?? 0).toBe(0);
++  // A new offered action after interruption is a new physical attempt.
++  startCollection(f);
++  f.ada.inv.ore = 50; snapshotInitial(f.w);
++  finishAction(f.w, f.ada);
++  expect(f.ada.inv.stone ?? 0).toBe(0); expect(f.store.store.items.stone).toBe(4);
++  expect(collection(f.w, f.ada, f.store.id)).toBeUndefined();
++  const once = serializeWorld(f.w); endActivity(f.w, f.ada, 'success', 'duplicate');
++  expect(serializeWorld(f.w)).toBe(once); expect(a.cycle).toBe(0);
++});
++
++it('continues identically after a save during a real collection journey', () => {
++  const f = materialPlanScene(); startCollection(f);
++  for (let i = 0; i < 20; i++) stepWorld(f.w);
++  expect(f.ada.activity?.kind).toBe('withdraw');
++  const loaded = deserializeWorld(serializeWorld(f.w));
++  for (let i = 0; i < 180; i++) { stepWorld(f.w); stepWorld(loaded); }
++  expect(serializeWorld(loaded)).toBe(serializeWorld(f.w));
++  expect(conservationReport(loaded).ok).toBe(true);
++});
++
++it('accepts a partial physical withdrawal and lets later observation correct the remaining shortage', () => {
++  const f = materialPlanScene();
++  // A pick really needs two stone. A remembered exhausted rock establishes the
++  // tool's use without providing an alternative supply in this partial-stock case.
++  observe(f.w,f.ada,makeSource(f.w,'rock',65,30,0));
++  f.ada.skills.stone=1.8;f.ada.skills.wood=0.5;f.ada.skills.forage=0.2;
++  f.ada.intentions[0].makes='pick';f.ada.intentions[0].goal='make a pick';
++  f.ada.intentions[0].wants.stone = 2;
++  // Competing withdrawal leaves just one unit after the two-unit offer was accepted.
++  const a = startCollection(f);
++  expect(a.data.items).toEqual({stone:2});
++  transfer(f.w, f.store.store.items, f.outsider.inv, 999, 'stone', 3, `building:${f.store.id}`, `person:${f.outsider.id}`, 'test competing withdrawal');
++  finishAction(f.w,f.ada);
++  expect(f.ada.inv.stone).toBe(1);expect(a.cycle).toBe(1);
++  expect(f.store.store.items.stone ?? 0).toBe(0);
++  reviewIntentions(generateOptions(f.w,f.ada,true));
++  expect(f.ada.intentions[0].status).toBe('dropped');
++  expect(f.ada.intentions[0].reason).toContain('no known source of stone');
++  expect(conservationReport(f.w).ok).toBe(true);
++});
++
++it('a demolished destination is learned at arrival, without transferring its scattered goods remotely', () => {
++  const f=materialPlanScene();startCollection(f);
++  destroyBuilding(f.w,f.store,'test collapse during journey');
++  finishAction(f.w,f.ada);
++  expect(f.ada.lastResult?.outcome).toBe('failed');
++  expect(f.ada.inv.stone ?? 0).toBe(0);
++  expect(f.ada.beliefs[f.store.id]).toBeUndefined();
++  expect(conservationReport(f.w).ok).toBe(true);
++});
++
++it('cancelled and expired commitments stop demanding collection and never acquire delivery credit', () => {
++  const f=materialPromiseScene();
++  const r=createRequest(f.w,f.ada,f.ben,{kind:'stone',item:'stone',amount:2,destKind:'person',destId:f.ada.id});
++  const c={id:f.w.nextId++,requestId:r.id,kind:'deliver' as const,to:f.ada.id,item:'stone' as const,amount:2,siteId:0,made:f.w.tick-2000,deadline:f.w.tick-1,status:'active' as const};
++  f.ben.commitments.push(c);r.commitmentId=c.id;r.status='promised';
++  checkCommitments(f.w,f.ben);
++  expect(f.ben.commitments[0].status).not.toBe('active');
++  expect(r.status).not.toBe('fulfilled');expect(r.delivered ?? 0).toBe(0);
++  expect(generateOptions(f.w,f.ben,true,true).options.filter(o=>o.kind==='withdraw'&&o.tag==='promise')).toEqual([]);
++  r.status='cancelled';f.ben.commitments[0].status='cancelled';
++  expect(generateOptions(f.w,f.ben,true,true).options.filter(o=>o.kind==='withdraw'&&o.tag==='promise')).toEqual([]);
++});
+diff --git a/tests/work_tastes.test.ts b/tests/work_tastes.test.ts
+index 5d00f19..2fbce1b 100644
+--- a/tests/work_tastes.test.ts
++++ b/tests/work_tastes.test.ts
+@@ -69,11 +69,14 @@ it('continues deterministically through saving during ordinary work and observer
+  const c=deserializeWorld(before);run(a,400);run(c,400);expect(hashWorld(c)).toBe(hashWorld(a));
+  expect(c.persons.map(p=>personalWorkTaste(c,p))).toEqual(a.persons.map(p=>personalWorkTaste(a,p)));
+ });
+-it('changes Sven’s actual ordinary-world choice, with a recorded reason rather than an assigned job',()=>{
+- const a=make('meadow');run(a,105);
++it('preserves the recorded rules-39 Sven choice and taste explanation',()=>{
++ // This is a particular historical trajectory, not a promise that successor
++ // worlds offer the same close alternatives after their resource paths change.
++ const recorded=()=>createWorld({...freshRunSettings('rich','normal','meadow',{immigration:false}),rulesVersion:39});
++ const a=recorded();run(a,105);
+  const on=a.persons.find(p=>p.id===1000)!;
+  expect(on.name).toBe('Sven');expect(on.activity?.kind).toBe('till');
+  expect(on.lastDecision?.because).toContain('I enjoy farming');
+- setWorkTastes(false);const b=make('meadow');run(b,105);
++ setWorkTastes(false);const b=recorded();run(b,105);
+  expect(b.persons.find(p=>p.id===1000)?.activity?.kind).toBe('gather');
+ });

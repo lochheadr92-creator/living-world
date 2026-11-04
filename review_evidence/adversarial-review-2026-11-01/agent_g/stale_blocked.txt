@@ -1,0 +1,4 @@
+after 2 ticks outside: phase=travel blocked="home exit is blocked" | card: doing="Wandering (21 tiles to go)." stopping="Home exit is blocked." historical=false activity.blocked="home exit is blocked"
+after 12 ticks outside: phase=travel blocked="home exit is blocked" | card: doing="Wandering (20 tiles to go)." stopping="Home exit is blocked." historical=false activity.blocked="home exit is blocked"
+after 22 ticks outside: phase=travel blocked="home exit is blocked" | card: doing="Wandering (19 tiles to go)." stopping="Home exit is blocked." historical=false activity.blocked="home exit is blocked"
+after 32 ticks outside: phase=travel blocked="home exit is blocked" | card: doing="Wandering (18 tiles to go)." stopping="Home exit is blocked." historical=false activity.blocked="home exit is blocked"

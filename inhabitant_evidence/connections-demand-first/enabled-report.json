@@ -1,0 +1,83 @@
+{
+  "arm": "enabled",
+  "staged": true,
+  "externalModel": false,
+  "hash": "b67ebce2",
+  "fullReplayEqual": true,
+  "heard": [
+    {
+      "requestId": 15,
+      "from": 2,
+      "item": "planks",
+      "tick": 32
+    },
+    {
+      "requestId": 19,
+      "from": 7,
+      "item": "planks",
+      "tick": 103
+    }
+  ],
+  "trade": {
+    "key": "carpentry",
+    "since": 142,
+    "why": "2 people asked me for planks"
+  },
+  "produced": {
+    "planks": 1
+  },
+  "requests": [
+    {
+      "id": 15,
+      "kind": "goods",
+      "from": 2,
+      "to": 5,
+      "item": "planks",
+      "amount": 4,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 9,
+      "infoKind": "",
+      "created": 10,
+      "expires": 710,
+      "status": "declined",
+      "note": "own need",
+      "resolved": 32,
+      "purpose": "for the house",
+      "destKind": "site",
+      "destId": 9,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    },
+    {
+      "id": 19,
+      "kind": "goods",
+      "from": 7,
+      "to": 5,
+      "item": "planks",
+      "amount": 4,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 11,
+      "infoKind": "",
+      "created": 81,
+      "expires": 781,
+      "status": "declined",
+      "note": "own need",
+      "resolved": 103,
+      "purpose": "for the house",
+      "destKind": "site",
+      "destId": 11,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "refused"
+    }
+  ],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

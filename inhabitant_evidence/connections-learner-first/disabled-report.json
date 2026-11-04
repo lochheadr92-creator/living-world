@@ -1,0 +1,15 @@
+{
+  "arm": "disabled",
+  "staged": true,
+  "externalModel": false,
+  "hash": "8efe9518",
+  "fullReplayEqual": true,
+  "learned": false,
+  "produced": false,
+  "knowledge": {},
+  "milestones": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,6326 @@
+[
+  {
+    "tick": 5040,
+    "id": 1142,
+    "name": "Talia",
+    "hunger": 25,
+    "inv": {
+      "wood": 2,
+      "fish": 2
+    },
+    "eat": 76,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=76",
+      "Fishing=62"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 5280,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 26,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 1,
+      "berries": 2,
+      "wood": 1,
+      "hoe": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=59",
+      "Chat with Abel=58"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 5520,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 18,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 1,
+      "berries": 6,
+      "wood": 1,
+      "hoe": 1,
+      "fish": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Eat from the home store=68"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 9360,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 26,
+    "inv": {
+      "wood": 5,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=95",
+      "Fishing=63"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 9600,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 29,
+    "inv": {
+      "berries": 2,
+      "seeds": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=62",
+      "Warm up at the fire=49"
+    ],
+    "activity": "eat_store:Eating at home"
+  },
+  {
+    "tick": 9600,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 18,
+    "inv": {
+      "wood": 5,
+      "grain": 2
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Run to safety (away from it)=119",
+      "Sit down and rest=90"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 10080,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 22,
+    "inv": {
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=53",
+      "Picking berries=52"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 10800,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 24,
+    "inv": {
+      "berries": 2,
+      "seeds": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=47",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 11040,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 23,
+    "inv": {
+      "fruit": 7
+    },
+    "eat": 78,
+    "blocked": null,
+    "top": [
+      "Run to safety (the fire)=117",
+      "Eat what I am carrying=78"
+    ],
+    "activity": "flee:Running from the wolf toward the fire"
+  },
+  {
+    "tick": 11040,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 21,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=61",
+      "Gathering wild grain=58"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 11280,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 1,
+      "hoe": 1,
+      "stone": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Eli=65",
+      "Bring berries to Ivo=48"
+    ],
+    "activity": "give:Bringing berries to Eli"
+  },
+  {
+    "tick": 11760,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Alma for food=54",
+      "Ask Theo for food=53"
+    ],
+    "activity": "converse:Talking with Ben"
+  },
+  {
+    "tick": 12000,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "wood": 4,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Nico for food=55",
+      "Ask Zia for food=54"
+    ],
+    "activity": "give:Bringing berries to Viktor"
+  },
+  {
+    "tick": 12000,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 29,
+    "inv": {
+      "berries": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Emre for food=50",
+      "Ask Zia for food=50"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 12000,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 21,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=50",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 12240,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 10,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 1,
+      "hoe": 1,
+      "stone": 1,
+      "fish": 1
+    },
+    "eat": 93,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=93",
+      "Fishing=67"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 12480,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "inv": {
+      "berries": 2,
+      "seeds": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Edda for food=52",
+      "Ask Alma for food=52"
+    ],
+    "activity": "converse:Talking with Ivy"
+  },
+  {
+    "tick": 12480,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 30,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 1,
+      "hoe": 1,
+      "stone": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=50",
+      "Gathering wild grain=50"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 12480,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 24,
+    "inv": {
+      "fish": 3,
+      "berries": 1,
+      "stone": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=50",
+      "Picking fruit=47"
+    ],
+    "activity": "converse:Talking with Nico"
+  },
+  {
+    "tick": 12480,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 20,
+    "inv": {
+      "wood": 2,
+      "stone": 2,
+      "fish": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=60"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 12480,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 25,
+    "inv": {
+      "berries": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Alma for food=55",
+      "Ask Cole for food=55"
+    ],
+    "activity": "converse:Talking with Emre"
+  },
+  {
+    "tick": 12720,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 27,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ivo for food=53",
+      "Ask Jax for food=52"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 12960,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 28,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=44",
+      "Picking berries=40"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 12960,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ivo for food=55",
+      "Ask Theo for food=54"
+    ],
+    "activity": "socialize:Ask Ivo for food"
+  },
+  {
+    "tick": 12960,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 29,
+    "inv": {
+      "axe": 1,
+      "fish": 2,
+      "berries": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=57",
+      "Go and drink at the water=56"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 13200,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 22,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=42",
+      "Picking berries=40"
+    ],
+    "activity": "socialize:Ask Mira for food"
+  },
+  {
+    "tick": 13200,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 22,
+    "inv": {
+      "axe": 1,
+      "fish": 2,
+      "berries": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=48",
+      "Picking berries=43"
+    ],
+    "activity": "converse:Talking with Mira"
+  },
+  {
+    "tick": 13200,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 29,
+    "inv": {
+      "berries": 1,
+      "wood": 3,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=46",
+      "Fishing=42"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 13440,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 22,
+    "inv": {
+      "berries": 1,
+      "wood": 3,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=62",
+      "Fishing=50"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 13920,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 26,
+    "inv": {
+      "berries": 2,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=38",
+      "Picking berries=38"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 14160,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 24,
+    "inv": {
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring fruit to Theo=70",
+      "Bring fruit to Viktor=61"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 14160,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 27,
+    "inv": {
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ivo for food=53",
+      "Picking berries=43"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 14160,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 27,
+    "inv": {
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Viktor for food=53",
+      "Picking berries=43"
+    ],
+    "activity": "converse:Talking with Faye"
+  },
+  {
+    "tick": 14160,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=47",
+      "Fishing=46"
+    ],
+    "activity": "converse:Talking with Ivy"
+  },
+  {
+    "tick": 14160,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 30,
+    "inv": {
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=46",
+      "Picking berries=44"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 14400,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 20,
+    "inv": {
+      "berries": 3
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=41"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 14400,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 21,
+    "inv": {
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Kai for food=60",
+      "Ask Eli for food=58"
+    ],
+    "activity": "socialize:Ask Kai for food"
+  },
+  {
+    "tick": 14400,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 23,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Fishing=46"
+    ],
+    "activity": "converse:Talking with Faye"
+  },
+  {
+    "tick": 14640,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 6,
+    "inv": {
+      "seeds": 1,
+      "wood": 4,
+      "fish": 2
+    },
+    "eat": 97,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=97",
+      "Fishing=55"
+    ],
+    "activity": "converse:Talking with Kai"
+  },
+  {
+    "tick": 14640,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 23,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 2,
+      "hoe": 1,
+      "stone": 1,
+      "grain": 2,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring grain to Eli=65",
+      "Ask Faye for food=56"
+    ],
+    "activity": "converse:Talking with Ivo"
+  },
+  {
+    "tick": 14640,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 20,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=48"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 14640,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 29,
+    "inv": {
+      "berries": 1,
+      "fish": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=46",
+      "Picking berries=41"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 14880,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Jax for food=50",
+      "Picking fruit=34"
+    ],
+    "activity": "socialize:Ask Jax for food"
+  },
+  {
+    "tick": 14880,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 23,
+    "inv": {
+      "berries": 1,
+      "fish": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=45",
+      "Picking berries=41"
+    ],
+    "activity": "converse:Talking with Edda"
+  },
+  {
+    "tick": 15120,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 27,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Viktor=52",
+      "Picking berries=52"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 15120,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 21,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Jax for food=57",
+      "Fishing=45"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 15360,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 19,
+    "inv": {
+      "berries": 4
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Fishing=61"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 15360,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 27,
+    "inv": {
+      "stone": 2,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring fish to Eli=60",
+      "Picking berries=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 15360,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 24,
+    "inv": {
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Picking berries=43"
+    ],
+    "activity": "converse:Talking with Jax"
+  },
+  {
+    "tick": 15600,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "inv": {
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=49",
+      "Sleep at my lean-to=48"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 15600,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 19,
+    "inv": {
+      "stone": 2,
+      "fish": 1,
+      "berries": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Picking berries=58"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 15840,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 20,
+    "inv": {
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=56"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 15840,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 30,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 2,
+      "hoe": 1,
+      "stone": 1,
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=50",
+      "Sleep at my hut=44"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 16080,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 16,
+    "inv": {
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Fishing=59"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 18000,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 29,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=48",
+      "Picking berries=41"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 20160,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 2,
+      "hoe": 1,
+      "wood": 1,
+      "fish": 1,
+      "berries": 3,
+      "stone": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=55",
+      "Fishing=50"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 22800,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 29,
+    "inv": {
+      "berries": 3,
+      "grain": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Sofia=50",
+      "Picking berries=46"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 22800,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 30,
+    "inv": {
+      "berries": 2,
+      "seeds": 2,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Zia for food=52",
+      "Ask Abel for food=51"
+    ],
+    "activity": "socialize:Ask Sofia for food"
+  },
+  {
+    "tick": 23040,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 21,
+    "inv": {
+      "berries": 4,
+      "grain": 3
+    },
+    "eat": 80,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=80",
+      "Bring berries to Viktor=68"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 23040,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 25,
+    "inv": {
+      "berries": 2,
+      "seeds": 2,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Gathering wild grain=47"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 23040,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 28,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=47",
+      "Sleep at my lean-to=46"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 23280,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 27,
+    "inv": {
+      "seeds": 3,
+      "berries": 6,
+      "grain": 3
+    },
+    "eat": 74,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=74",
+      "Bring berries to Theo=61"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 23280,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 21,
+    "inv": {
+      "berries": 2,
+      "seeds": 2,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=51",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 23280,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 29,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=47",
+      "Picking berries=46"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 23280,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 23,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=53",
+      "Go and drink at the water=50"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 23520,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 20,
+    "inv": {
+      "seeds": 3,
+      "berries": 6,
+      "grain": 3
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Warm up at the fire=86",
+      "Eat what I am carrying=82"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 23520,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 15,
+    "inv": {
+      "berries": 2,
+      "seeds": 2,
+      "wood": 1
+    },
+    "eat": 88,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=88",
+      "Warm up at the fire=84"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 23520,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 30,
+    "inv": {
+      "wood": 1,
+      "berries": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=83",
+      "Shelter at the lean-to=48"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 22,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=87",
+      "Go and drink at the water=58"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 17,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Warm up at the fire=83"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 24,
+    "inv": {
+      "wood": 1,
+      "berries": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=62",
+      "Go and drink at the water=59"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 16,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Go and drink at the water=67"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 28,
+    "inv": {
+      "berries": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=64",
+      "Warm up at the fire=60"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 26,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=46",
+      "Fishing=45"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 28,
+    "inv": {
+      "wood": 2,
+      "berries": 2
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=73",
+      "Go and drink at the water=68"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 24240,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 28,
+    "inv": {
+      "grain": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=58",
+      "Bring grain to Theo=52"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24240,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 20,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=50"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24480,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 20,
+    "inv": {
+      "grain": 1,
+      "fish": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=58",
+      "Picking berries=58"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24480,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 29,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Sofia for food=52",
+      "Ask Talia for food=52"
+    ],
+    "activity": "socialize:Ask Abel for food"
+  },
+  {
+    "tick": 24720,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 23,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=54",
+      "Picking berries=54"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24960,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=53",
+      "Fishing=50"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 25920,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 29,
+    "inv": {
+      "berries": 2,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=78",
+      "Sleep at my lean-to=59"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 26160,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 28,
+    "inv": {
+      "berries": 1,
+      "wood": 1,
+      "fish": 1,
+      "seeds": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=57",
+      "Picking berries=56"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 26160,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 22,
+    "inv": {
+      "berries": 2,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=57",
+      "Sleep at my lean-to=55"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 26400,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Gathering wild grain=38"
+    ],
+    "activity": "converse:Talking with Theo"
+  },
+  {
+    "tick": 26640,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 23,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=48",
+      "Fishing=47"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 26640,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 25,
+    "inv": {
+      "wood": 1,
+      "grain": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Zia for food=55",
+      "Ask Nico for food=54"
+    ],
+    "activity": "converse:Talking with Talia"
+  },
+  {
+    "tick": 26880,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 19,
+    "inv": {
+      "wood": 1,
+      "grain": 1,
+      "fish": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Picking berries=53"
+    ],
+    "activity": "converse:Talking with Mira"
+  },
+  {
+    "tick": 27120,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 21,
+    "inv": {
+      "berries": 4,
+      "fish": 3
+    },
+    "eat": 80,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=80",
+      "Go and drink at the water=56"
+    ],
+    "activity": "converse:Talking with Viktor"
+  },
+  {
+    "tick": 27120,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 26,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=46",
+      "Picking berries=45"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 27360,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "berries": 6
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=57",
+      "Fishing=39"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 27360,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=52",
+      "Picking berries=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 27600,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 13,
+    "inv": {
+      "seeds": 3,
+      "berries": 6,
+      "fish": 2
+    },
+    "eat": 89,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=89",
+      "Fishing=65"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 28080,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my lean-to=60",
+      "Sleep at the fire=45"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28320,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 23,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my lean-to=51",
+      "Gathering wild grain=50"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28560,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=53",
+      "Picking berries=52"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 29040,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 30,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ines for food=52",
+      "Ask Nico for food=51"
+    ],
+    "activity": "converse:Talking with Emre"
+  },
+  {
+    "tick": 29040,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 29,
+    "inv": {
+      "wood": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=48",
+      "Picking berries=42"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 34080,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=54",
+      "Go and drink at the water=50"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 35520,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 25,
+    "inv": {
+      "berries": 2,
+      "fish": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=53",
+      "Picking berries=50"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 35760,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 18,
+    "inv": {
+      "berries": 2,
+      "fish": 1,
+      "grain": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=59"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 37920,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 29,
+    "inv": {
+      "berries": 6,
+      "seeds": 1,
+      "stone": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=56",
+      "Picking berries=53"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 38640,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 28,
+    "inv": {
+      "wood": 1,
+      "berries": 2,
+      "seeds": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=61",
+      "Picking berries=49"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 38880,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=63",
+      "Shelter at the hut=61"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 38880,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 22,
+    "inv": {
+      "wood": 1,
+      "berries": 2,
+      "seeds": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=60",
+      "Go and drink at the water=56"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 38880,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=55",
+      "Go and drink at the water=51"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 39120,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=58",
+      "Gathering wild grain=54"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 40560,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "inv": {
+      "wood": 1,
+      "seeds": 2,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=53",
+      "Picking berries=52"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 45120,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 29,
+    "inv": {
+      "berries": 2,
+      "seeds": 12,
+      "basket": 1,
+      "stone": 2,
+      "wood": 1,
+      "planks": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=63",
+      "Picking berries=63"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 51360,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 30,
+    "inv": {
+      "berries": 2,
+      "seeds": 3,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=40",
+      "Picking berries=39"
+    ],
+    "activity": "flee:Running from the wolf toward home"
+  },
+  {
+    "tick": 51600,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 24,
+    "inv": {
+      "berries": 2,
+      "seeds": 3,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=62",
+      "Fishing=50"
+    ],
+    "activity": "eat_store:Eating at home"
+  },
+  {
+    "tick": 51840,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 17,
+    "inv": {
+      "berries": 2,
+      "seeds": 3,
+      "wood": 1
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Shelter at the hut=57"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52320,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 26,
+    "inv": {
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=87",
+      "Go and drink at the water=62"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 24,
+    "inv": {
+      "seeds": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=92",
+      "Shelter at the hut=88"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52560,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 19,
+    "inv": {
+      "fruit": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=88",
+      "Eat what I am carrying=82"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 26,
+    "inv": {
+      "seeds": 3,
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": 75,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=85",
+      "Go and drink at the water=84"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52560,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "grain": 2,
+      "wood": 1,
+      "berries": 1,
+      "clay": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=92",
+      "Shelter at the hut=89"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "berries": 2,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 7
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=88",
+      "Eat what I am carrying=73"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 29,
+    "inv": {
+      "basket": 1,
+      "seeds": 8,
+      "axe": 1,
+      "hammer": 1,
+      "wood": 4,
+      "saw": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": 72,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=88",
+      "Warm up at the fire=84"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 24,
+    "inv": {
+      "axe": 1,
+      "berries": 2,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "fish": 1,
+      "wood": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=88",
+      "Go and drink at the water=73"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 18,
+    "inv": {
+      "seeds": 2,
+      "berries": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Warm up at the fire=89",
+      "Eat what I am carrying=84"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 13,
+    "inv": {
+      "fruit": 1
+    },
+    "eat": 89,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=89",
+      "Warm up at the fire=88"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52800,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 19,
+    "inv": {
+      "seeds": 3,
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Shelter at the hut=82"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 18,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "grain": 2,
+      "wood": 1,
+      "berries": 1,
+      "clay": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Warm up at the fire=86",
+      "Eat what I am carrying=84"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 21,
+    "inv": {
+      "basket": 1,
+      "berries": 2,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 7
+    },
+    "eat": 81,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=82",
+      "Eat what I am carrying=81"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 1128,
+    "name": "Tomas",
+    "hunger": 24,
+    "inv": {
+      "pick": 1,
+      "fish": 4,
+      "wood": 2
+    },
+    "eat": 78,
+    "blocked": null,
+    "top": [
+      "Warm up at the fire=90",
+      "Shelter at the hut=83"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52800,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 21,
+    "inv": {
+      "basket": 1,
+      "seeds": 8,
+      "axe": 1,
+      "hammer": 1,
+      "wood": 4,
+      "saw": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": 80,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=86",
+      "Warm up at the fire=83"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52800,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 29,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "berries": 1,
+      "grain": 4
+    },
+    "eat": 71,
+    "blocked": null,
+    "top": [
+      "Warm up at the fire=93",
+      "Shelter at the hut=79"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52800,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "inv": {
+      "seeds": 2,
+      "fruit": 1,
+      "berries": 1,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=85",
+      "Go and drink at the water=77"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52800,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 17,
+    "inv": {
+      "axe": 1,
+      "berries": 2,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "fish": 1,
+      "wood": 2
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Go and drink at the water=87",
+      "Eat what I am carrying=85"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 52800,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 28,
+    "inv": {
+      "berries": 6,
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 1,
+      "stone": 1
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=89",
+      "Warm up at the fire=88"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 52800,
+    "id": 15315,
+    "name": "Ana",
+    "hunger": 30,
+    "inv": {
+      "fish": 1
+    },
+    "eat": 71,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=82",
+      "Eat what I am carrying=71"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1113,
+    "name": "Zia",
+    "hunger": 24,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "grain": 2,
+      "saw": 1
+    },
+    "eat": 78,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=78",
+      "Eat from the home store=64"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 53040,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 25,
+    "inv": {
+      "berries": 4,
+      "seeds": 5,
+      "fruit": 3
+    },
+    "eat": 77,
+    "blocked": null,
+    "top": [
+      "Go and drink at the water=77",
+      "Eat what I am carrying=77"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1128,
+    "name": "Tomas",
+    "hunger": 16,
+    "inv": {
+      "pick": 1,
+      "fish": 4,
+      "wood": 2
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Warm up at the fire=71"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 14,
+    "inv": {
+      "basket": 1,
+      "seeds": 8,
+      "axe": 1,
+      "hammer": 1,
+      "wood": 4,
+      "saw": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": 88,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=88",
+      "Gathering wild grain=69"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 22,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "berries": 1,
+      "grain": 4
+    },
+    "eat": 79,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=79",
+      "Gathering wild grain=68"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 20,
+    "inv": {
+      "seeds": 2,
+      "fruit": 1,
+      "berries": 1,
+      "wood": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Shelter at the hut=77"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1142,
+    "name": "Talia",
+    "hunger": 23,
+    "inv": {
+      "seeds": 3,
+      "hoe": 1,
+      "basket": 1,
+      "hammer": 1,
+      "stone": 1,
+      "berries": 2,
+      "grain": 1
+    },
+    "eat": 78,
+    "blocked": null,
+    "top": [
+      "Go and drink at the water=80",
+      "Eat what I am carrying=78"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 53040,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 20,
+    "inv": {
+      "berries": 6,
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 1,
+      "stone": 1
+    },
+    "eat": 81,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=81",
+      "Gathering wild grain=70"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 27,
+    "inv": {
+      "basket": 1,
+      "stone": 1,
+      "seeds": 3,
+      "axe": 1,
+      "wood": 4,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=64",
+      "Gathering wild grain=55"
+    ],
+    "activity": "eat_store:Eating at home"
+  },
+  {
+    "tick": 53040,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "spear": 1,
+      "seeds": 5,
+      "saw": 1,
+      "wood": 1,
+      "berries": 4,
+      "fruit": 3
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=73",
+      "Eat from the home store=60"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "berries": 2,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=54",
+      "Picking berries=53"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 18,
+    "inv": {
+      "seeds": 2,
+      "berries": 3
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=55"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 1131,
+    "name": "Kai",
+    "hunger": 19,
+    "inv": {
+      "pick": 1,
+      "basket": 1,
+      "seeds": 1,
+      "stone": 3,
+      "fish": 2
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Shelter at the hut=69"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 2,
+      "berries": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the storehouse=48",
+      "Picking berries=47"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "berries": 2,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=46",
+      "Picking berries=45"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53520,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 21,
+    "inv": {
+      "seeds": 2,
+      "berries": 1,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=52",
+      "Picking fruit=51"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 53520,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 21,
+    "inv": {
+      "seeds": 1,
+      "berries": 2,
+      "fish": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=53",
+      "Picking berries=50"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 53760,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=48",
+      "Picking berries=48"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 54000,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 29,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ivo for food=50",
+      "Shelter at the hut=41"
+    ],
+    "activity": "converse:Talking with Vera"
+  },
+  {
+    "tick": 54000,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=78",
+      "Shelter at the lean-to=45"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 54240,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 23,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=48",
+      "Gathering wild grain=47"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54240,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=43",
+      "Picking berries=42"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 54240,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 25,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "wood": 2,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=74",
+      "Sleep at my hut=61"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 54240,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 23,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=51",
+      "Picking berries=45"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 27,
+    "inv": {
+      "seeds": 2,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=53",
+      "Picking berries=45"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 29,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring fish to Eli=108",
+      "Bring fish to Vera=67"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 17,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Picking berries=56"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 29,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "berries": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=63",
+      "Gathering wild grain=63"
+    ],
+    "activity": ""
+  },
+  {
+    "tick": 54480,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 18,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "wood": 2,
+      "fish": 2
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Shelter at the hut=71"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 17,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Gathering wild grain=60"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 25,
+    "inv": {
+      "seeds": 3,
+      "berries": 2,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=75",
+      "Bring berries to Theo=66"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 22,
+    "inv": {
+      "seeds": 2,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=75",
+      "Picking berries=49"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 24,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring fish to Eli=100",
+      "Shelter at the hut=75"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Chat with Ivy=83",
+      "Chat with Nico=82"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 18,
+    "inv": {
+      "seeds": 3,
+      "berries": 2,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 4
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Shelter at the hut=83"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 16,
+    "inv": {
+      "seeds": 2,
+      "fruit": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Shelter at the hut=83"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 17,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Bring fish to Eli=108",
+      "Eat what I am carrying=86"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "seeds": 8,
+      "axe": 1,
+      "hammer": 1,
+      "wood": 4,
+      "saw": 1,
+      "grain": 4
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=83",
+      "Go and drink at the water=74"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 29,
+    "inv": {
+      "axe": 1,
+      "hoe": 1,
+      "basket": 1,
+      "spear": 1,
+      "saw": 1,
+      "hammer": 1,
+      "wood": 3,
+      "berries": 1
+    },
+    "eat": 72,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=84",
+      "Eat what I am carrying=72"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 22,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Chat with Ivy=87",
+      "Chat with Nico=86"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 24,
+    "inv": {
+      "seeds": 5,
+      "berries": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Theo=84",
+      "Bring berries to Viktor=76"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 29,
+    "inv": {
+      "hoe": 1,
+      "spear": 1,
+      "basket": 1,
+      "seeds": 1,
+      "axe": 1,
+      "hammer": 1,
+      "fruit": 3
+    },
+    "eat": 72,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=73",
+      "Eat what I am carrying=72"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1131,
+    "name": "Kai",
+    "hunger": 23,
+    "inv": {
+      "pick": 1,
+      "basket": 1,
+      "seeds": 3,
+      "stone": 3,
+      "grain": 4
+    },
+    "eat": 78,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=78",
+      "Go and drink at the water=72"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 20,
+    "inv": {
+      "basket": 1,
+      "seeds": 8,
+      "axe": 1,
+      "hammer": 1,
+      "wood": 4,
+      "saw": 1,
+      "grain": 4
+    },
+    "eat": 81,
+    "blocked": null,
+    "top": [
+      "Shelter at the hut=84",
+      "Eat what I am carrying=81"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 21,
+    "inv": {
+      "axe": 1,
+      "hoe": 1,
+      "basket": 1,
+      "spear": 1,
+      "saw": 1,
+      "hammer": 1,
+      "wood": 3,
+      "berries": 1
+    },
+    "eat": 80,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=80",
+      "Shelter at the hut=67"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 29,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "berries": 1,
+      "grain": 4
+    },
+    "eat": 72,
+    "blocked": null,
+    "top": [
+      "Bring berries to Thea=76",
+      "Bring berries to Nico=73"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 16,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": 87,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=87",
+      "Chat with Eli=75"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1142,
+    "name": "Talia",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "hoe": 1,
+      "basket": 1,
+      "hammer": 1,
+      "stone": 1,
+      "berries": 1
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Go and drink at the water=81",
+      "Go and drink at the water=77"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 55440,
+    "id": 16007,
+    "name": "Vera",
+    "hunger": 25,
+    "inv": {
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=46",
+      "Picking berries=45"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 55680,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 23,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 1,
+      "clay": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring fruit to Eli=90",
+      "Bring fruit to Vera=73"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 55680,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 19,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking fruit=49"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55680,
+    "id": 15315,
+    "name": "Ana",
+    "hunger": 8,
+    "inv": {
+      "berries": 2
+    },
+    "eat": 96,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=96",
+      "Fishing=59"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 55920,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 6,
+    "inv": {
+      "seeds": 2,
+      "fish": 2
+    },
+    "eat": 98,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=98",
+      "Fishing=72"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55920,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 25,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=48",
+      "Fishing=45"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55920,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 12,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": 91,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=91",
+      "Fishing=65"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55920,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Lena for food=54",
+      "Ask Arlo for food=51"
+    ],
+    "activity": "converse:Talking with Kai"
+  },
+  {
+    "tick": 55920,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=47",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56160,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 3,
+    "inv": {
+      "fish": 1
+    },
+    "eat": 100,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=100",
+      "Fishing=73"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56160,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=51",
+      "Picking fruit=48"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "berries": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=56"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 56400,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 25,
+    "inv": {
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Cole for food=55",
+      "Fishing=41"
+    ],
+    "activity": "converse:Talking with Cole"
+  },
+  {
+    "tick": 56400,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 30,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 2,
+      "clay": 1,
+      "fish": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=52",
+      "Fishing=41"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56400,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 26,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=52",
+      "Picking fruit=39"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56640,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 18,
+    "inv": {
+      "fish": 3
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Fishing=59"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56640,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 30,
+    "inv": {
+      "seeds": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=48",
+      "Fishing=39"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56880,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 23,
+    "inv": {
+      "seeds": 1,
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=51",
+      "Fishing=46"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 57120,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=41",
+      "Fishing=40"
+    ],
+    "activity": "flee:Taking refuge inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 29,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "wood": 2,
+      "berries": 3,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=60",
+      "Fishing=56"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "inv": {
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=44",
+      "Picking berries=44"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 23,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=52",
+      "Fishing=50"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 57360,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 25,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "wood": 2,
+      "berries": 3,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=67",
+      "Go and drink at the water=63"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 57360,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=57",
+      "Go and drink at the water=53"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57600,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 24,
+    "inv": {
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=47",
+      "Picking fruit=47"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 57600,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 28,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=46",
+      "Picking berries=44"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 57600,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=51",
+      "Fishing=51"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 57600,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "stone": 1,
+      "seeds": 3,
+      "axe": 1,
+      "wood": 5,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=48",
+      "Picking fruit=47"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 57840,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 23,
+    "inv": {
+      "seeds": 5,
+      "wood": 1,
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Mira for food=54",
+      "Ask Cole for food=53"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 57840,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 23,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 4,
+      "hoe": 1,
+      "wood": 2,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=47",
+      "Warn Theo about the wolf=47"
+    ],
+    "activity": "converse:Talking with Eli"
+  },
+  {
+    "tick": 57840,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 22,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Jax for food=55",
+      "Fishing=46"
+    ],
+    "activity": "converse:Talking with Cora"
+  },
+  {
+    "tick": 57840,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Alma for food=53",
+      "Ask Jax for food=51"
+    ],
+    "activity": "socialize:Ask Alma for food"
+  },
+  {
+    "tick": 58080,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=61",
+      "Go and drink at the water=51"
+    ],
+    "activity": "converse:Talking with Viktor"
+  },
+  {
+    "tick": 58080,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Milo for food=58",
+      "Ask Abel for food=56"
+    ],
+    "activity": "socialize:Ask Milo for food"
+  },
+  {
+    "tick": 58080,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "spear": 1,
+      "seeds": 5,
+      "saw": 1,
+      "wood": 2,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=50",
+      "Picking berries=50"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 58320,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 22,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Ivo for food=57",
+      "Ask Cole for food=57"
+    ],
+    "activity": "converse:Talking with Nico"
+  },
+  {
+    "tick": 58560,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 25,
+    "inv": {
+      "seeds": 2,
+      "fish": 2,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Fishing=40"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 58560,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 21,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Picking berries=49"
+    ],
+    "activity": "converse:Talking with Faye"
+  },
+  {
+    "tick": 58800,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 18,
+    "inv": {
+      "seeds": 2,
+      "fish": 2,
+      "grain": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Fishing=50"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 58800,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 25,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Jax for food=56",
+      "Picking berries=42"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 59040,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 24,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fish": 2,
+      "grain": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=41",
+      "Sleep at my lean-to=40"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 59040,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 19,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Sleep at my hut=56"
+    ],
+    "activity": "sleep:Sleeping by my hut"
+  },
+  {
+    "tick": 59040,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 21,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=46",
+      "Go and drink at the water=44"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 59280,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 17,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fish": 2,
+      "grain": 3
+    },
+    "eat": 85,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Gathering wild grain=46"
+    ],
+    "activity": "sleep:Sleeping on the ground"
+  },
+  {
+    "tick": 59280,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 14,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": 88,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=88",
+      "Picking berries=56"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 59760,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 27,
+    "inv": {
+      "basket": 1,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 59760,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 24,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "fruit": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Run to safety (home)=115",
+      "Go and drink at the water=59"
+    ],
+    "activity": "flee:Running from the wolf toward home"
+  },
+  {
+    "tick": 60000,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 27,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "fruit": 3,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Fishing=47"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 60240,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 20,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "fruit": 3,
+      "grain": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=56"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 60240,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 27,
+    "inv": {
+      "seeds": 1,
+      "berries": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=45",
+      "Picking berries=43"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 60480,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "berries": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Arlo for food=55",
+      "Fishing=41"
+    ],
+    "activity": "converse:Talking with Ana"
+  },
+  {
+    "tick": 60720,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 26,
+    "inv": {
+      "seeds": 5,
+      "wood": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=48",
+      "Picking fruit=48"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 60720,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Mira for food=52",
+      "Ask Ivy for food=52"
+    ],
+    "activity": "converse:Talking with Alma"
+  },
+  {
+    "tick": 60720,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 24,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=47",
+      "Picking berries=45"
+    ],
+    "activity": "converse:Talking with Faye"
+  },
+  {
+    "tick": 60720,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 16,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fruit": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Picking fruit=62"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 60960,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 19,
+    "inv": {
+      "seeds": 5,
+      "wood": 1,
+      "grain": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Picking fruit=49"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 60960,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 25,
+    "inv": {
+      "fish": 2,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Picking berries=46"
+    ],
+    "activity": "converse:Talking with Sofia"
+  },
+  {
+    "tick": 60960,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 24,
+    "inv": {
+      "berries": 3,
+      "seeds": 8
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Eat from the home store=59",
+      "Fishing=48"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 60960,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 20,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Gathering wild grain=46"
+    ],
+    "activity": "converse:Talking with Talia"
+  },
+  {
+    "tick": 60960,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 26,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "wood": 2,
+      "fish": 3,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=52",
+      "Sit down and rest=51"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 61200,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Talia for food=51",
+      "Picking fruit=41"
+    ],
+    "activity": "converse:Talking with Ana"
+  },
+  {
+    "tick": 61200,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 26,
+    "inv": {
+      "seeds": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Talia for food=53",
+      "Picking fruit=38"
+    ],
+    "activity": "converse:Talking with Abel"
+  },
+  {
+    "tick": 61440,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 21,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=51",
+      "Fishing=49"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 61440,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 20,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Sleep at my hut=53"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 61680,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=47",
+      "Gathering wild grain=43"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 61680,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=57",
+      "Sleep at my lean-to=47"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 61680,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=48",
+      "Picking berries=47"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 61680,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 27,
+    "inv": {
+      "basket": 1,
+      "spear": 1,
+      "seeds": 5,
+      "saw": 1,
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=53",
+      "Picking berries=52"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 61920,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 24,
+    "inv": {
+      "seeds": 2,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 61920,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=53",
+      "Gathering wild grain=52"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 61920,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 23,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=57",
+      "Picking berries=56"
+    ],
+    "activity": "argue:Arguing with Ana"
+  },
+  {
+    "tick": 61920,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 25,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=45",
+      "Fishing=44"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62160,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 27,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring grain to Sofia=62",
+      "Go and drink at the water=60"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 62160,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 19,
+    "inv": {
+      "basket": 1,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "fish": 3
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Go and drink at the water=64"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62160,
+    "id": 15315,
+    "name": "Ana",
+    "hunger": 29,
+    "inv": {
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": 72,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=72",
+      "Fishing=49"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62400,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 20,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "grain": 2,
+      "berries": 3
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Bring berries to Sofia=70"
+    ],
+    "activity": "give:Bringing berries to Sofia"
+  },
+  {
+    "tick": 62400,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "planks": 2,
+      "seeds": 1,
+      "axe": 1,
+      "wood": 5,
+      "fruit": 1
+    },
+    "eat": 76,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=76",
+      "Fishing=60"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 62400,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=43",
+      "Picking berries=42"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62640,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 29,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 3,
+      "hoe": 1,
+      "wood": 2,
+      "clay": 1,
+      "grain": 2,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring grain to Eli=66",
+      "Bring grain to Vera=59"
+    ],
+    "activity": "give:Bringing grain to Eli"
+  },
+  {
+    "tick": 62640,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 20,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "clay": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=57",
+      "Picking berries=57"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 62640,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=56",
+      "Fishing=52"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62640,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 18,
+    "inv": {
+      "seeds": 1,
+      "berries": 2,
+      "fruit": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Fishing=60"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 62880,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 21,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 3,
+      "hoe": 1,
+      "wood": 2,
+      "clay": 1,
+      "grain": 2,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=56",
+      "Go and drink at the water=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 63360,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 24,
+    "inv": {
+      "wood": 2,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Alma for food=56",
+      "Ask Kai for food=55"
+    ],
+    "activity": "converse:Talking with Jax"
+  },
+  {
+    "tick": 63360,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 30,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Fishing=43"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 63840,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 26,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=66",
+      "Sleep at my lean-to=54"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 63840,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "fruit": 2,
+      "fish": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=62",
+      "Sleep at my lean-to=53"
+    ],
+    "activity": "sleep:Sleeping by my hut"
+  },
+  {
+    "tick": 64080,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 22,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=56",
+      "Sleep at my hut=54"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 64080,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 28,
+    "inv": {
+      "basket": 1,
+      "stone": 1,
+      "seeds": 3,
+      "axe": 1,
+      "wood": 5,
+      "fruit": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=52",
+      "Picking berries=52"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 64080,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 19,
+    "inv": {
+      "seeds": 1,
+      "fruit": 2,
+      "fish": 1,
+      "grain": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Eat from the home store=73"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 64320,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 25,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=58",
+      "Go and drink at the water=53"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 64320,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 18,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 2,
+      "stone": 1,
+      "clay": 1,
+      "fish": 1
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=64"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 64320,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 23,
+    "inv": {
+      "basket": 1,
+      "stone": 1,
+      "seeds": 3,
+      "axe": 1,
+      "wood": 5,
+      "fruit": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=56",
+      "Fishing=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 64320,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 16,
+    "inv": {
+      "seeds": 1,
+      "fruit": 2,
+      "fish": 1,
+      "grain": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Eat from the home store=76"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 64800,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=45",
+      "Picking berries=45"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 65040,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 2,
+      "grain": 2,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=54",
+      "Go and drink at the water=51"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 65280,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 25,
+    "inv": {
+      "seeds": 11,
+      "wood": 2,
+      "berries": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Nico=56",
+      "Fishing=49"
+    ],
+    "activity": "give:Bringing berries to Nico"
+  },
+  {
+    "tick": 65520,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 21,
+    "inv": {
+      "basket": 1,
+      "pick": 1,
+      "seeds": 3,
+      "hoe": 1,
+      "wood": 2,
+      "clay": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=50",
+      "Gathering wild grain=48"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 65760,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=46",
+      "Picking fruit=44"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 66480,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 28,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=44",
+      "Gathering wild grain=44"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 66480,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 25,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=52",
+      "Shelter at the hut=52"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 66720,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 28,
+    "inv": {
+      "seeds": 5,
+      "wood": 1,
+      "berries": 2,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=66",
+      "Go and drink at the water=64"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 66720,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "inv": {
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=44",
+      "Picking berries=44"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 66720,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 23,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=52",
+      "Picking berries=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 66720,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 19,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Go and drink at the water=66"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 66960,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 20,
+    "inv": {
+      "seeds": 5,
+      "wood": 1,
+      "berries": 2,
+      "fish": 2,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=57",
+      "Picking berries=55"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 66960,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "inv": {
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=51"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 66960,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 17,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Run to safety (home)=115",
+      "Eat what I am carrying=86"
+    ],
+    "activity": "flee:Running from the wolf toward other people"
+  },
+  {
+    "tick": 66960,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 27,
+    "inv": {
+      "seeds": 11,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring grain to Thea=52",
+      "Go and drink at the water=50"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 66960,
+    "id": 16007,
+    "name": "Vera",
+    "hunger": 30,
+    "inv": {
+      "berries": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=62",
+      "Go and drink at the water=58"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 67200,
+    "id": 16007,
+    "name": "Vera",
+    "hunger": 24,
+    "inv": {
+      "berries": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=48",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 67440,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 24,
+    "inv": {
+      "basket": 1,
+      "spear": 1,
+      "seeds": 5,
+      "saw": 1,
+      "wood": 3,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=50"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 67440,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 24,
+    "inv": {
+      "seeds": 1,
+      "berries": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=51",
+      "Picking berries=47"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 67680,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 27,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 1,
+      "stone": 1,
+      "clay": 1,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Picking fruit=45"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 67680,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 16,
+    "inv": {
+      "seeds": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": 86,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Fishing=61"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 67920,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Theo for food=56",
+      "Ask Ivo for food=52"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 67920,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 20,
+    "inv": {
+      "seeds": 10,
+      "basket": 1,
+      "planks": 1,
+      "hoe": 1,
+      "wood": 1,
+      "stone": 1,
+      "clay": 1,
+      "berries": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=56"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 68160,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 22,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 4,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=52",
+      "Fishing=48"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 68160,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 24,
+    "inv": {
+      "berries": 4,
+      "seeds": 9,
+      "wood": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=48",
+      "Picking berries=48"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 68400,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 26,
+    "inv": {
+      "seeds": 2,
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=45",
+      "Picking fruit=45"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 68400,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=44",
+      "Picking fruit=44"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 68880,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 28,
+    "inv": {
+      "seeds": 2,
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=55",
+      "Sleep at my lean-to=52"
+    ],
+    "activity": "sleep:Sleeping by my hut"
+  },
+  {
+    "tick": 68880,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 30,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=49",
+      "Picking berries=42"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 69120,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 22,
+    "inv": {
+      "seeds": 2,
+      "fish": 3
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=69",
+      "Sleep at my lean-to=55"
+    ],
+    "activity": "converse:Talking with Eli"
+  },
+  {
+    "tick": 69120,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 26,
+    "inv": {
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=45",
+      "Picking berries=43"
+    ],
+    "activity": "converse:Talking with Viktor"
+  },
+  {
+    "tick": 69120,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Gathering wild grain=50",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 69120,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 29,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=55",
+      "Go and drink at the water=55"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 69360,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Viktor=73",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 69360,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 18,
+    "inv": {
+      "seeds": 2,
+      "fish": 3
+    },
+    "eat": 84,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=84",
+      "Sleep at my hut=57"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 69360,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 20,
+    "inv": {
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Gathering wild grain=55"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 69360,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 20,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Warm up at the fire=54",
+      "Picking berries=52"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 69360,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 25,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=59",
+      "Go and drink at the water=57"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 69600,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 21,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "fruit": 2,
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Bring berries to Sofia=68",
+      "Fishing=49"
+    ],
+    "activity": "give:Bringing berries to Sofia"
+  },
+  {
+    "tick": 69600,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 30,
+    "inv": {
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=56",
+      "Go and drink at the water=51"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 69600,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 20,
+    "inv": {
+      "seeds": 2,
+      "wood": 1,
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=50",
+      "Fishing=49"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 69600,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 26,
+    "inv": {
+      "seeds": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=45",
+      "Picking berries=44"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 69600,
+    "id": 16007,
+    "name": "Vera",
+    "hunger": 20,
+    "inv": {
+      "fruit": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=50",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 69840,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 30,
+    "inv": {
+      "seeds": 9,
+      "wood": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=49",
+      "Fishing=47"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 69840,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 24,
+    "inv": {
+      "wood": 2,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=47",
+      "Picking fruit=45"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 69840,
+    "id": 8869,
+    "name": "Sofia",
+    "hunger": 20,
+    "inv": {
+      "seeds": 1,
+      "berries": 1,
+      "fish": 2
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=49"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 70080,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "inv": {
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=42",
+      "Fishing=41"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 70080,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "berries": 1,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Ask Abel for food=52",
+      "Ask Emre for food=51"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 70080,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "spear": 1,
+      "seeds": 5,
+      "saw": 1,
+      "wood": 3,
+      "berries": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=48",
+      "Picking berries=46"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 70320,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 26,
+    "inv": {
+      "seeds": 7,
+      "wood": 3,
+      "berries": 3,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go to the feast at the hall=55",
+      "Picking berries=49"
+    ],
+    "activity": "attend:At the feast"
+  },
+  {
+    "tick": 70320,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "inv": {
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Fishing=55",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 70320,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 25,
+    "inv": {
+      "basket": 1,
+      "seeds": 2,
+      "stone": 1,
+      "hoe": 1,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go to the feast at the hall=60",
+      "Picking berries=49"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 70560,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 19,
+    "inv": {
+      "seeds": 7,
+      "wood": 3,
+      "berries": 3,
+      "grain": 1
+    },
+    "eat": 83,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=83",
+      "Fishing=55"
+    ],
+    "activity": "converse:Talking with Mira"
+  },
+  {
+    "tick": 70560,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 27,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=39",
+      "Fishing=39"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 70800,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 29,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "grain": 5
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking fruit=52",
+      "Picking fruit=50"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 71040,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 29,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Shelter at the hut=57",
+      "Sleep at my hut=56"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 71040,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 28,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "berries": 1,
+      "fish": 4
+    },
+    "eat": 73,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=73",
+      "Shelter at the hut=69"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 71280,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 23,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=52",
+      "Picking berries=49"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 71280,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 21,
+    "inv": {
+      "axe": 1,
+      "basket": 1,
+      "seeds": 10,
+      "hoe": 1,
+      "berries": 1,
+      "fish": 4
+    },
+    "eat": 81,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=81",
+      "Gathering wild grain=63"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 71520,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 19,
+    "inv": {
+      "seeds": 4,
+      "wood": 1,
+      "grain": 2
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Gathering wild grain=58"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 71520,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 22,
+    "inv": {
+      "basket": 1,
+      "stone": 1,
+      "seeds": 3,
+      "axe": 1,
+      "wood": 3,
+      "grain": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Sleep at my hut=62",
+      "Bring grain to Ana=60"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 71760,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 20,
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "eat": 82,
+    "blocked": null,
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=49"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 71760,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=46",
+      "Picking berries=46"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 72000,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 28,
+    "inv": {
+      "seeds": 3,
+      "stone": 1,
+      "wood": 1,
+      "grain": 5,
+      "fruit": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Go and drink at the water=67",
+      "Go and drink at the water=65"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 72000,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 24,
+    "inv": {
+      "berries": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=49",
+      "Picking berries=48"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 72000,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 25,
+    "inv": {
+      "seeds": 14,
+      "fruit": 4
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=59",
+      "Picking berries=59"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 72000,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 23,
+    "inv": {
+      "seeds": 3,
+      "wood": 1,
+      "fish": 1
+    },
+    "eat": null,
+    "blocked": "saving the food for dependents",
+    "top": [
+      "Picking berries=50",
+      "Fishing=48"
+    ],
+    "activity": "gather:Picking berries"
+  }
+]

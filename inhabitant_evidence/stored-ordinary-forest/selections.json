@@ -1,0 +1,281 @@
+[
+  {
+    "tick": 0,
+    "person": 899,
+    "name": "Petra",
+    "activity": 963,
+    "item": "wood",
+    "store": 898,
+    "goal": "to make a hoe",
+    "kind": "plans",
+    "planId": 962,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 902,
+    "name": "Bram",
+    "activity": 965,
+    "item": "wood",
+    "store": 901,
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 964,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 964,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 920,
+    "name": "Yusuf",
+    "activity": 978,
+    "item": "wood",
+    "store": 919,
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 977,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 977,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 138,
+    "person": 905,
+    "name": "Mira",
+    "activity": 1120,
+    "item": "wood",
+    "store": 904,
+    "goal": "for a friend’s lean-to",
+    "kind": "plans",
+    "planId": 966,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 966,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 232,
+    "person": 899,
+    "name": "Petra",
+    "activity": 1193,
+    "item": "wood",
+    "store": 898,
+    "goal": "to make a hoe",
+    "kind": "plans",
+    "planId": 962,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 987,
+    "person": 915,
+    "name": "Tomas",
+    "activity": 1590,
+    "item": "wood",
+    "store": 913,
+    "goal": "to keep the fire going",
+    "kind": "plans",
+    "planId": null,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 973,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more stone for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "stone",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 4761,
+    "person": 914,
+    "name": "Edda",
+    "activity": 2832,
+    "item": "wood",
+    "store": 913,
+    "goal": "for my household’s hut",
+    "kind": "plans",
+    "planId": 2213,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 2213,
+        "kind": "shelter",
+        "goal": "get the household's hut built",
+        "since": 2843,
+        "until": 10043,
+        "status": "active",
+        "reason": "the household is still in a lean-to, and their hut wants 8 wood and 4 stone",
+        "setAside": 0,
+        "aboutId": 2211,
+        "wants": {
+          "wood": 4
+        },
+        "makes": "",
+        "sheltered": 0,
+        "worked": 4,
+        "ended": 0,
+        "step": "get 2 wood for the hut (it wants 4 wood and 4 stone)",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  }
+]

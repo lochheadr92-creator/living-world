@@ -1,0 +1,77 @@
+start 43440 end 45840 alive 29->29 meanHunger 47.4->62.0
+hardship0 null regrow0 1 winter0 0
+hardship1 {"kind":"lean","since":45605,"until":55660} regrow1 0.1 winter1 0
+sources0 {"berry_bush":{"n":39,"nonempty":22,"amount":78,"regrow":300},"fruit_tree":{"n":19,"nonempty":14,"amount":57,"regrow":340},"wild_grain":{"n":21,"nonempty":15,"amount":17,"regrow":330},"fish_spot":{"n":9,"nonempty":5,"amount":14,"regrow":230}}
+sources1 {"berry_bush":{"n":39,"nonempty":37,"amount":170,"regrow":300},"fruit_tree":{"n":19,"nonempty":18,"amount":113,"regrow":340},"wild_grain":{"n":21,"nonempty":18,"amount":64,"regrow":330},"fish_spot":{"n":9,"nonempty":9,"amount":35,"regrow":230}}
+ledger created diff {"wood":24,"berries":136,"fruit":79,"fish":47,"grain":111,"seeds":15,"water":19,"axe":1}
+ledger consumed diff {"grain":50,"seeds":1,"fruit":22,"water":86,"wood":21,"stone":3,"berries":30,"fish":20,"planks":2,"meat":4}
+ledger reasons diff {"+tree growth":24,"+regrowth: berry bush":136,"+regrowth: fruit tree":79,"+regrowth: fish spot":47,"+regrowth: wild grain":103,"xstored food spoiled":5,"xnatural water evaporation":31,"-saved as seed":10,"+seed saved from wild grain":13,"-sown":1,"-eaten":74,"-drunk at natural water":86,"-fuel for the fire":5,"-eaten at the source":42,"-construction: hut":3,"+rain captured in natural water":19,"+crop growth":10,"-repairs":11,"-construction: hall":4,"-crafting: axe":3,"+crafted: axe":1}
+eatsCompleted 91
+critOccupancy {"drink|travel":39,"drink|work":19,"gather|travel":218,"gather|work":119,"rest|work":36}
+sampleCounts {
+ "critical samples": 3,
+ "no eligible food option": 1,
+ "no eligible food: lead=hunger criticals=hunger+thirst+energy top=drink": 1,
+ "top:drink": 1,
+ "current:drink|travel": 1,
+ "actual nonempty food source within 10 tiles": 3,
+ "top:gather": 2,
+ "current:gather|travel": 1,
+ "current:gather|work": 1
+}
+gatherTravelBetter 28 classes {
+ "target still believed nonempty -> next=give": 2,
+ "target has a failure note -> next=gather(food)": 2,
+ "target still believed nonempty -> next=gather(food) farther": 9,
+ "target still believed nonempty -> next=gather(food) nearer": 2,
+ "target now believed empty -> next=gather(food)": 1,
+ "target still believed nonempty -> next=wander": 1,
+ "target still believed nonempty -> next=gather(material) nearer": 1,
+ "target still believed nonempty -> next=socialize": 5,
+ "target now believed empty -> next=withdraw": 1,
+ "target has a failure note -> next=explore": 1,
+ "target still believed nonempty -> next=sleep": 2,
+ "target now believed empty -> next=give": 1
+}
+endings:
+  92 converse|work|success|finished a conversation
+  42 drink|work|success|done
+  40 gather|work|success|done
+  36 gather|work|interrupted|something better came up
+  34 sleep|work|success|rested
+  30 eat|work|success|done
+  28 gather|travel|interrupted|something better came up
+  18 gather|work|partial|nothing left
+  17 rest|work|interrupted|something better came up
+  15 wander|work|success|done
+  14 deposit|work|success|done
+  12 gather|work|partial|someone else is already taking it
+  11 socialize|travel|interrupted|something better came up
+  7 rest|work|success|done
+  7 wander|travel|interrupted|something better came up
+  6 give|work|success|done
+  6 repair|work|interrupted|something better came up
+  6 gather|travel|interrupted|danger nearby
+  6 flee|travel|interrupted|something better came up
+  6 attend|work|interrupted|something better came up
+  6 argue|work|success|done
+  6 eat_store|work|success|done
+  5 give|work|failed|they had no room to carry it
+  5 attend|travel|interrupted|something better came up
+  5 till|travel|failed|no way to get there
+  5 gather|work|failed|someone else is already taking it
+  5 socialize|travel|failed|they are inside a different space
+  4 gather|work|success|felled the tree
+  4 gather|work|failed|nothing left
+  4 rest|work|success|daylight arrived
+  3 give|travel|interrupted|something better came up
+  3 harvest|work|success|done
+  3 flee|work|success|done
+  3 tend|work|success|done
+  3 socialize|work|failed|they walked away
+  3 socialize|work|failed|Kaia was too busy to stop
+  3 sleep|work|success|morning came
+  2 socialize|work|failed|Mira was too busy to stop
+  2 gather|work|interrupted|danger nearby
+  2 explore|travel|interrupted|something better came up
+deaths []

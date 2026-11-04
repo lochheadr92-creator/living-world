@@ -1,0 +1,403 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "reports": [
+    {
+      "scenario": "plan",
+      "arm": "enabled",
+      "firstChoice": "Collect 1 stone from the storehouse",
+      "inventory": {
+        "axe": 1,
+        "wood": 3
+      },
+      "requests": [],
+      "milestones": [
+        {
+          "tick": 793,
+          "stage": "store-stock-change",
+          "item": "stone",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "tick": 869,
+          "stage": "crafted",
+          "plans": [
+            {
+              "id": 11,
+              "kind": "tool",
+              "goal": "make an axe",
+              "since": 700,
+              "until": 5500,
+              "status": "done",
+              "reason": "made the axe",
+              "setAside": 0,
+              "aboutId": 0,
+              "wants": {},
+              "makes": "axe",
+              "sheltered": 0,
+              "worked": 1,
+              "ended": 868,
+              "step": "",
+              "stepKind": "none",
+              "stepTarget": 0,
+              "stepItem": null,
+              "stepKey": null,
+              "blocked": ""
+            }
+          ]
+        }
+      ],
+      "hash": "016fba06",
+      "fullReplayEqual": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "scenario": "plan",
+      "arm": "disabled",
+      "firstChoice": "Explore somewhere new",
+      "inventory": {
+        "wood": 2
+      },
+      "requests": [],
+      "milestones": [],
+      "hash": "eb983250",
+      "fullReplayEqual": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "scenario": "promise",
+      "arm": "enabled",
+      "firstChoice": "Ask Ben for stone",
+      "inventory": {
+        "pick": 1
+      },
+      "requests": [
+        {
+          "id": 22,
+          "kind": "stone",
+          "from": 2,
+          "to": 7,
+          "item": "stone",
+          "amount": 2,
+          "offer": null,
+          "offerAmount": 0,
+          "siteId": 0,
+          "infoKind": "",
+          "planId": 17,
+          "likely": true,
+          "created": 714,
+          "expires": 1414,
+          "status": "fulfilled",
+          "note": "promise kept",
+          "resolved": 989,
+          "purpose": "make a pick",
+          "destKind": "person",
+          "destId": 2,
+          "deadline": 0,
+          "milestone": "",
+          "toolKind": null,
+          "outcome": "kept",
+          "commitmentId": 23,
+          "offered": 2,
+          "delivered": 2
+        }
+      ],
+      "milestones": [
+        {
+          "tick": 887,
+          "stage": "store-stock-change",
+          "item": "stone",
+          "before": 5,
+          "after": 4
+        },
+        {
+          "tick": 990,
+          "stage": "delivered",
+          "request": {
+            "id": 22,
+            "kind": "stone",
+            "from": 2,
+            "to": 7,
+            "item": "stone",
+            "amount": 2,
+            "offer": null,
+            "offerAmount": 0,
+            "siteId": 0,
+            "infoKind": "",
+            "planId": 17,
+            "likely": true,
+            "created": 714,
+            "expires": 1414,
+            "status": "fulfilled",
+            "note": "promise kept",
+            "resolved": 989,
+            "purpose": "make a pick",
+            "destKind": "person",
+            "destId": 2,
+            "deadline": 0,
+            "milestone": "",
+            "toolKind": null,
+            "outcome": "kept",
+            "commitmentId": 23,
+            "offered": 2,
+            "delivered": 2
+          }
+        },
+        {
+          "tick": 1160,
+          "stage": "crafted",
+          "plans": [
+            {
+              "id": 17,
+              "kind": "tool",
+              "goal": "make a pick",
+              "since": 700,
+              "until": 5500,
+              "status": "done",
+              "reason": "made the pick (Ben brought 2 of the stone)",
+              "setAside": 0,
+              "aboutId": 0,
+              "wants": {},
+              "makes": "pick",
+              "sheltered": 0,
+              "worked": 1,
+              "ended": 1159,
+              "step": "",
+              "stepKind": "none",
+              "stepTarget": 0,
+              "stepItem": null,
+              "stepKey": null,
+              "blocked": ""
+            }
+          ]
+        },
+        {
+          "tick": 1260,
+          "stage": "store-stock-change",
+          "item": "stone",
+          "before": 4,
+          "after": 3
+        }
+      ],
+      "hash": "0a8d3d03",
+      "fullReplayEqual": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "scenario": "promise",
+      "arm": "disabled",
+      "firstChoice": "Ask Ben for stone",
+      "inventory": {
+        "pick": 1
+      },
+      "requests": [
+        {
+          "id": 22,
+          "kind": "stone",
+          "from": 2,
+          "to": 7,
+          "item": "stone",
+          "amount": 2,
+          "offer": null,
+          "offerAmount": 0,
+          "siteId": 0,
+          "infoKind": "",
+          "planId": 17,
+          "likely": true,
+          "created": 714,
+          "expires": 1414,
+          "status": "declined",
+          "note": "making",
+          "resolved": 736,
+          "purpose": "make a pick",
+          "destKind": "person",
+          "destId": 2,
+          "deadline": 0,
+          "milestone": "",
+          "toolKind": null,
+          "outcome": "refused"
+        }
+      ],
+      "milestones": [
+        {
+          "tick": 1207,
+          "stage": "store-stock-change",
+          "item": "stone",
+          "before": 5,
+          "after": 3
+        },
+        {
+          "tick": 1294,
+          "stage": "crafted",
+          "plans": [
+            {
+              "id": 17,
+              "kind": "tool",
+              "goal": "make a pick",
+              "since": 700,
+              "until": 5500,
+              "status": "done",
+              "reason": "made the pick",
+              "setAside": 0,
+              "aboutId": 0,
+              "wants": {},
+              "makes": "pick",
+              "sheltered": 0,
+              "worked": 1,
+              "ended": 1293,
+              "step": "",
+              "stepKind": "none",
+              "stepTarget": 0,
+              "stepItem": null,
+              "stepKey": null,
+              "blocked": ""
+            },
+            {
+              "id": 28,
+              "kind": "night",
+              "goal": "be fed, watered and under shelter before dark",
+              "since": 966,
+              "until": 2520,
+              "status": "active",
+              "step": "get to my lean-to",
+              "stepKind": "goto",
+              "stepTarget": 10,
+              "stepItem": null,
+              "stepKey": null,
+              "blocked": "",
+              "reason": "nowhere to shelter nearby for the night",
+              "setAside": 0,
+              "aboutId": 10,
+              "wants": {},
+              "makes": "",
+              "sheltered": 0,
+              "worked": 0,
+              "ended": 0
+            }
+          ]
+        }
+      ],
+      "hash": "50dba083",
+      "fullReplayEqual": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    }
+  ],
+  "helper": {
+    "hash": "e9fe439f",
+    "fullReplayEqual": true,
+    "choices": [
+      {
+        "tick": 790,
+        "promises": [
+          {
+            "text": "Bring 2 stone to Ada",
+            "status": "active",
+            "detail": "0 of 2 delivered",
+            "due": "in 17 world h 28 min"
+          }
+        ],
+        "options": [
+          {
+            "key": "collect:12:stone#choice:0",
+            "kind": "withdraw",
+            "label": "Collect 1 stone from the storehouse",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world min ago)"
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to keep my promise to Ada",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "3 world h 36 min",
+            "target": "rock outcrop 30 tiles south-east (seen 7 world h 54 min ago)"
+          }
+        ]
+      },
+      {
+        "tick": 887,
+        "promises": [
+          {
+            "text": "Bring 2 stone to Ada",
+            "status": "active",
+            "detail": "0 of 2 delivered",
+            "due": "in 16 world h 29 min"
+          }
+        ],
+        "options": [
+          {
+            "key": "give:2:promise",
+            "kind": "give",
+            "label": "Take stone to Ada as promised",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "1 world h 39 min",
+            "target": "Ada (last seen 41 world min ago)"
+          }
+        ]
+      },
+      {
+        "tick": 1030,
+        "promises": [
+          {
+            "text": "Bring 2 stone to Ada",
+            "status": "active",
+            "detail": "0 of 2 delivered",
+            "due": "in 15 world h 4 min"
+          }
+        ],
+        "options": []
+      },
+      {
+        "tick": 1293,
+        "promises": [
+          {
+            "text": "Bring 2 stone to Ada",
+            "status": "active",
+            "detail": "0 of 2 delivered",
+            "due": "in 12 world h 26 min"
+          }
+        ],
+        "options": [
+          {
+            "key": "give:2:promise",
+            "kind": "give",
+            "label": "Take stone to Ada as promised",
+            "goal": "to keep my promise to Ada",
+            "need": null,
+            "eta": "2 world h 3 min",
+            "target": "Ada (last seen 1 world h 41 min ago)"
+          }
+        ]
+      },
+      {
+        "tick": 1468,
+        "promises": [
+          {
+            "text": "Bring 2 stone to Ada",
+            "status": "active",
+            "detail": "0 of 2 delivered",
+            "due": "in 10 world h 41 min"
+          }
+        ],
+        "options": []
+      }
+    ]
+  }
+}

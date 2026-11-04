@@ -1,0 +1,308 @@
+{
+  "seed": "meadow",
+  "days": 30,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 65.826,
+  "totals": {
+    "samples": 8400,
+    "peopleWithoutCharcoal": 2700,
+    "adultOrYouthWithoutCharcoal": 0,
+    "wantedTechnique": 0,
+    "learnerOffers": 0,
+    "teacherOffers": 4,
+    "materialRequestOffers": 1200,
+    "materialBlocked": 964,
+    "knownNeedySites": 2921,
+    "nearbyPeople": 39183,
+    "nearbyWoodCarriers": 25936,
+    "nearbyStoneCarriers": 8048,
+    "nearbyPlankCarriers": 558,
+    "workshopOptions": 1314
+  },
+  "selected": 684,
+  "requests": 450,
+  "heardRequests": 89,
+  "demandTrades": 1,
+  "benefits": 0,
+  "learned": 0,
+  "buildings": [
+    {
+      "id": 993,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 996,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 999,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1003,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1006,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1012,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1017,
+      "type": "lean_to",
+      "items": {
+        "grain": 5
+      }
+    },
+    {
+      "id": 1021,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1631,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1825,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1857,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2139,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 3062,
+      "type": "hut",
+      "items": {
+        "berries": 1
+      }
+    },
+    {
+      "id": 3137,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3200,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3804,
+      "type": "hut",
+      "items": {
+        "grain": 3,
+        "berries": 1
+      }
+    },
+    {
+      "id": 4412,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 5394,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 5507,
+      "type": "storehouse",
+      "items": {
+        "stone": 2
+      }
+    },
+    {
+      "id": 6356,
+      "type": "hut",
+      "items": {
+        "berries": 1,
+        "grain": 2
+      }
+    },
+    {
+      "id": 6488,
+      "type": "timber_yard",
+      "items": {
+        "wood": 1
+      }
+    },
+    {
+      "id": 11087,
+      "type": "kiln",
+      "items": {
+        "wood": 2,
+        "bricks": 3
+      }
+    },
+    {
+      "id": 11501,
+      "type": "hall",
+      "items": {}
+    },
+    {
+      "id": 15239,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 16516,
+      "type": "quarry",
+      "items": {
+        "stone": 4
+      }
+    },
+    {
+      "id": 18649,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 19088,
+      "type": "granary",
+      "items": {}
+    }
+  ],
+  "projects": [
+    {
+      "id": 3164,
+      "townshipId": 995,
+      "siteId": 3163,
+      "organiserId": 1036,
+      "proposed": 5290,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 1036,
+          "requestId": 0,
+          "since": 5290,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 8
+          },
+          "work": 575.6788976115025,
+          "supports": 1036
+        },
+        {
+          "personId": 1001,
+          "requestId": 3174,
+          "since": 5324,
+          "status": "refused",
+          "reason": "not willing to commit to this proposal",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1036,
+              "accepted": false,
+              "reason": "not willing to commit to this proposal",
+              "tick": 5324
+            }
+          ]
+        },
+        {
+          "personId": 1027,
+          "requestId": 3322,
+          "since": 5555,
+          "status": "supporting",
+          "reason": "Quinn supports Vik coordinating and will help build",
+          "materials": {
+            "wood": 2,
+            "stone": 4
+          },
+          "work": 64.32110238849751,
+          "decisions": [
+            {
+              "candidateId": 1036,
+              "accepted": true,
+              "reason": "Quinn supports Vik coordinating and will help build",
+              "tick": 5555
+            }
+          ],
+          "supports": 1036
+        },
+        {
+          "personId": 1040,
+          "requestId": 3483,
+          "since": 5913,
+          "status": "refused",
+          "reason": "own needs take priority",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1036,
+              "accepted": false,
+              "reason": "own needs take priority",
+              "tick": 5913
+            }
+          ]
+        },
+        {
+          "personId": 1018,
+          "requestId": 3640,
+          "since": 6885,
+          "status": "refused",
+          "reason": "not willing to commit to this proposal",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1036,
+              "accepted": false,
+              "reason": "not willing to commit to this proposal",
+              "tick": 6885
+            }
+          ]
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 1036,
+            "tick": 5290,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 1036,
+        "changes": [
+          {
+            "tick": 5555,
+            "from": 0,
+            "to": 1036,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 11963,
+      "buildingId": 5507
+    }
+  ],
+  "hash": "810e8fc5",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

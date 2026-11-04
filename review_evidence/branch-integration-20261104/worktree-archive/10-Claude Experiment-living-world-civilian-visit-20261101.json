@@ -1,0 +1,148 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-civilian-visit-20261101",
+  "head": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "civilian_evidence/REPORT.md",
+      "kind": "untracked",
+      "sha256": "dce922ebb726fb0a0bc822c7c2929121a598a7da9dd981b58397b66f8e1f9cff",
+      "bytes": 12591,
+      "archiveObject": "objects/dc/dce922ebb726fb0a0bc822c7c2929121a598a7da9dd981b58397b66f8e1f9cff.gz"
+    },
+    {
+      "path": "civilian_evidence/checkpoint-5024.json",
+      "kind": "untracked",
+      "sha256": "53880d06daa6b2c581c7af58beb4b4dea24583e851abe1a534092601b15c608e",
+      "bytes": 339022,
+      "archiveObject": "objects/53/53880d06daa6b2c581c7af58beb4b4dea24583e851abe1a534092601b15c608e.gz"
+    },
+    {
+      "path": "civilian_evidence/diagnose.ts",
+      "kind": "untracked",
+      "sha256": "cc58f179f18349d33b45362d7ec84191fa15ec61b0a8e9288e0192b751249229",
+      "bytes": 1346,
+      "archiveObject": "objects/cc/cc58f179f18349d33b45362d7ec84191fa15ec61b0a8e9288e0192b751249229.gz"
+    },
+    {
+      "path": "civilian_evidence/diagnostic-transcript-first-hash-only.json",
+      "kind": "untracked",
+      "sha256": "6bbbdc1f7ddc534dd205fecd6a2a591794da93078986f039c04712a4f9de7efe",
+      "bytes": 2056555,
+      "archiveObject": "objects/6b/6bbbdc1f7ddc534dd205fecd6a2a591794da93078986f039c04712a4f9de7efe.gz"
+    },
+    {
+      "path": "civilian_evidence/final-view.txt",
+      "kind": "untracked",
+      "sha256": "837672f244574c589aabf95fa35604227c071865117a1deb981faae006ef72ab",
+      "bytes": 3902,
+      "archiveObject": "objects/83/837672f244574c589aabf95fa35604227c071865117a1deb981faae006ef72ab.gz"
+    },
+    {
+      "path": "civilian_evidence/initial.json",
+      "kind": "untracked",
+      "sha256": "3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819",
+      "bytes": 1861614,
+      "archiveObject": "objects/38/3874f0b4914cbed44e29bcf92e4ef8de6e67a38824a95cf074ae5e20fb633819.gz"
+    },
+    {
+      "path": "civilian_evidence/inspect-neutrality.ts",
+      "kind": "untracked",
+      "sha256": "26e176fc8fb0b070bca31c114363678bbbcacc27764e4f8bbd40b444a767f29c",
+      "bytes": 692,
+      "archiveObject": "objects/26/26e176fc8fb0b070bca31c114363678bbbcacc27764e4f8bbd40b444a767f29c.gz"
+    },
+    {
+      "path": "civilian_evidence/inspection-neutrality.json",
+      "kind": "untracked",
+      "sha256": "3ce24a707c2135f41b70495cc805dbd504d999894a435081212250ce5cd70d6e",
+      "bytes": 19,
+      "archiveObject": "objects/3c/3ce24a707c2135f41b70495cc805dbd504d999894a435081212250ce5cd70d6e.gz"
+    },
+    {
+      "path": "civilian_evidence/provenance.json",
+      "kind": "untracked",
+      "sha256": "53be47b5e02dfc6a0a3ec159ed32530295a927e5eaf91ba174508beeb8ca0708",
+      "bytes": 1684,
+      "archiveObject": "objects/53/53be47b5e02dfc6a0a3ec159ed32530295a927e5eaf91ba174508beeb8ca0708.gz"
+    },
+    {
+      "path": "civilian_evidence/replay-diagnosis.json",
+      "kind": "untracked",
+      "sha256": "d4dab2e8df7d4530acf7e538012d301bacd874c5e44b1d98e26296c4db5fcf76",
+      "bytes": 3670,
+      "archiveObject": "objects/d4/d4dab2e8df7d4530acf7e538012d301bacd874c5e44b1d98e26296c4db5fcf76.gz"
+    },
+    {
+      "path": "civilian_evidence/replay-failure.json",
+      "kind": "untracked",
+      "sha256": "9ae3a7858a355aeb21fa63238cb305d8e9aa9a808d032b785aef683b895fc3fb",
+      "bytes": 359,
+      "archiveObject": "objects/9a/9ae3a7858a355aeb21fa63238cb305d8e9aa9a808d032b785aef683b895fc3fb.gz"
+    },
+    {
+      "path": "civilian_evidence/strict-replay.json",
+      "kind": "untracked",
+      "sha256": "4e5516b89fb4a574911aaa5d107ecada790ed7fe3b2636893c551d0d5f3511ef",
+      "bytes": 236,
+      "archiveObject": "objects/4e/4e5516b89fb4a574911aaa5d107ecada790ed7fe3b2636893c551d0d5f3511ef.gz"
+    },
+    {
+      "path": "civilian_evidence/summarize.mjs",
+      "kind": "untracked",
+      "sha256": "dbfb5c9ff928147086fc6619d31f978b6727d4a099dfa20f980d73ce0a0e2fc4",
+      "bytes": 1857,
+      "archiveObject": "objects/db/dbfb5c9ff928147086fc6619d31f978b6727d4a099dfa20f980d73ce0a0e2fc4.gz"
+    },
+    {
+      "path": "civilian_evidence/summary.json",
+      "kind": "untracked",
+      "sha256": "7556a706220eb5a0ae55cd3363096114a7e4a3309d5184859cbc639728299d5f",
+      "bytes": 148837,
+      "archiveObject": "objects/75/7556a706220eb5a0ae55cd3363096114a7e4a3309d5184859cbc639728299d5f.gz"
+    },
+    {
+      "path": "civilian_evidence/talia-final.jpg",
+      "kind": "untracked",
+      "sha256": "ebd31f21dae94350c9242bc4541c2054a2bf6547ad15d56f8fe4e7b485b3e0bf",
+      "bytes": 46006,
+      "archiveObject": "objects/eb/ebd31f21dae94350c9242bc4541c2054a2bf6547ad15d56f8fe4e7b485b3e0bf.gz"
+    },
+    {
+      "path": "civilian_evidence/talia-hut-dawn.jpg",
+      "kind": "untracked",
+      "sha256": "66643bab28493a4e319691e4242aaf347c483a7af11a03ce7ad9049f4c817963",
+      "bytes": 42195,
+      "archiveObject": "objects/66/66643bab28493a4e319691e4242aaf347c483a7af11a03ce7ad9049f4c817963.gz"
+    },
+    {
+      "path": "civilian_evidence/talia-only-wander.jpg",
+      "kind": "untracked",
+      "sha256": "e8de7fdc98410c207426c9a68f8654623cfa8ed4def28d7949592d88c1a05d37",
+      "bytes": 39410,
+      "archiveObject": "objects/e8/e8de7fdc98410c207426c9a68f8654623cfa8ed4def28d7949592d88c1a05d37.gz"
+    },
+    {
+      "path": "civilian_evidence/transcript.json",
+      "kind": "untracked",
+      "sha256": "bc0ab8a1fd13d13ef1ba7fc7f211beb106b1b729432551d631a8dde075bb259b",
+      "bytes": 1046499,
+      "archiveObject": "objects/bc/bc0ab8a1fd13d13ef1ba7fc7f211beb106b1b729432551d631a8dde075bb259b.gz"
+    },
+    {
+      "path": "civilian_evidence/verification-command.log",
+      "kind": "ignored-evidence",
+      "sha256": "50d9884de718c8a156b9379a6c0214509827666ccb9dc2a9cb4d93ee973655f8",
+      "bytes": 1298,
+      "archiveObject": "objects/50/50d9884de718c8a156b9379a6c0214509827666ccb9dc2a9cb4d93ee973655f8.gz"
+    },
+    {
+      "path": "civilian_evidence/verify.ts",
+      "kind": "untracked",
+      "sha256": "afbe8f22cfe5d9a6212710ee7ecb16bb86c4705438e9457ddf1ce7e1af09ad43",
+      "bytes": 3306,
+      "archiveObject": "objects/af/afbe8f22cfe5d9a6212710ee7ecb16bb86c4705438e9457ddf1ce7e1af09ad43.gz"
+    }
+  ],
+  "stagedFiles": []
+}

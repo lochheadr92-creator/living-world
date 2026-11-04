@@ -1,0 +1,82 @@
+[
+  {
+    "tick": 0,
+    "person": 1112,
+    "name": "Ben",
+    "activity": 1174,
+    "item": "wood",
+    "store": 1111,
+    "goal": "to make a hoe",
+    "kind": "plans",
+    "planId": 1173,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1173,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 734,
+    "person": 1107,
+    "name": "Emre",
+    "activity": 1683,
+    "item": "wood",
+    "store": 1105,
+    "goal": "to keep the fire going",
+    "kind": "plans",
+    "planId": 1169,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 1169,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  }
+]

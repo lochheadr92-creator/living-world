@@ -1,0 +1,87 @@
+{
+  "staged": true,
+  "choices": "actual rendered manual panel; offered buttons only; no external model",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 885,
+  "browserHash": "36b6d3c1",
+  "replayHash": "36b6d3c1",
+  "fullSerializedEqual": true,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 26,
+      "label": "Ask Cora for stone",
+      "tick": 803,
+      "outcome": "success",
+      "detail": "received 1 stone"
+    },
+    {
+      "call": 1,
+      "activityId": 31,
+      "label": "Making an axe",
+      "tick": 884,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "applied": 2,
+  "rejected": 0,
+  "requests": [
+    {
+      "id": 29,
+      "kind": "stone",
+      "from": 2,
+      "to": 7,
+      "item": "stone",
+      "amount": 1,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "planId": 15,
+      "likely": true,
+      "created": 742,
+      "expires": 1442,
+      "status": "fulfilled",
+      "note": "received 1 stone",
+      "resolved": 764,
+      "purpose": "make an axe",
+      "destKind": "person",
+      "destId": 2,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "delivered": 1,
+      "offered": 1
+    }
+  ],
+  "axe": 1,
+  "plan": {
+    "id": 15,
+    "kind": "tool",
+    "goal": "make an axe",
+    "since": 100,
+    "until": 4900,
+    "status": "done",
+    "reason": "made the axe (Cora brought 1 of the stone)",
+    "setAside": 0,
+    "aboutId": 0,
+    "wants": {},
+    "makes": "axe",
+    "sheltered": 0,
+    "worked": 1,
+    "ended": 884,
+    "step": "",
+    "stepKind": "none",
+    "stepTarget": 0,
+    "stepItem": null,
+    "stepKey": null,
+    "blocked": ""
+  },
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

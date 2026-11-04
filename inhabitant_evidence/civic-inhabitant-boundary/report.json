@@ -1,0 +1,240 @@
+{
+  "storehouseChoices": 1,
+  "success": true,
+  "hash": "2d1dc051",
+  "replayHash": "2d1dc051",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 27028,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "ea180297",
+      "worldHash": "4e0ea47b",
+      "choice": {
+        "kind": "pick",
+        "key": "collect:39062:planks"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "collect:39062:planks",
+        "activityId": 40190,
+        "label": "Collecting 1 planks"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 27055,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "a088163b",
+      "worldHash": "8da0aef7",
+      "choice": {
+        "kind": "pick",
+        "key": "eat:0"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "eat:0",
+        "activityId": 40253,
+        "label": "Eating"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 27095,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "cf716670",
+      "worldHash": "9a583919",
+      "choice": {
+        "kind": "pick",
+        "key": "gather:3829"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "gather:3829",
+        "activityId": 40341,
+        "label": "Picking berries"
+      }
+    },
+    {
+      "seq": 3,
+      "tick": 27123,
+      "attempt": 0,
+      "ask": 3,
+      "observationHash": "b4b4769f",
+      "worldHash": "585e0de9",
+      "choice": {
+        "kind": "pick",
+        "key": "deposit:21182:food"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "deposit:21182:food",
+        "activityId": 40413,
+        "label": "Bringing food home"
+      }
+    },
+    {
+      "seq": 4,
+      "tick": 27167,
+      "attempt": 0,
+      "ask": 4,
+      "observationHash": "138da684",
+      "worldHash": "08430115",
+      "choice": {
+        "kind": "pick",
+        "key": "gather:3821"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "gather:3821",
+        "activityId": 40495,
+        "label": "Picking berries"
+      }
+    },
+    {
+      "seq": 5,
+      "tick": 27183,
+      "attempt": 0,
+      "ask": 5,
+      "observationHash": "83dd1e8c",
+      "worldHash": "edb2f744",
+      "choice": {
+        "kind": "pick",
+        "key": "gather:3827"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "gather:3827",
+        "activityId": 40513,
+        "label": "Picking berries"
+      }
+    },
+    {
+      "seq": 6,
+      "tick": 27211,
+      "attempt": 0,
+      "ask": 6,
+      "observationHash": "67f36b66",
+      "worldHash": "e980e763",
+      "choice": {
+        "kind": "pick",
+        "key": "build:21623"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "build:21623",
+        "activityId": 40554,
+        "label": "Building the hall"
+      }
+    },
+    {
+      "seq": 7,
+      "tick": 27315,
+      "attempt": 0,
+      "ask": 7,
+      "observationHash": "a6be446e",
+      "worldHash": "d6aba23c",
+      "choice": {
+        "kind": "pick",
+        "key": "gather:3826"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "gather:3826",
+        "activityId": 40762,
+        "label": "Picking berries"
+      }
+    },
+    {
+      "seq": 8,
+      "tick": 27350,
+      "attempt": 0,
+      "ask": 8,
+      "observationHash": "dbfb4cdb",
+      "worldHash": "66a4c8bd",
+      "choice": {
+        "kind": "pick",
+        "key": "drink:1001065"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "drink:1001065",
+        "activityId": 40837,
+        "label": "Drinking at the water"
+      }
+    },
+    {
+      "seq": 9,
+      "tick": 27500,
+      "attempt": 0,
+      "ask": 9,
+      "observationHash": "3d15ab22",
+      "worldHash": "9690f046",
+      "choice": {
+        "kind": "pick",
+        "key": "collect:19436:wood"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "collect:19436:wood",
+        "activityId": 41121,
+        "label": "Collecting 2 wood"
+      }
+    },
+    {
+      "seq": 10,
+      "tick": 27547,
+      "attempt": 0,
+      "ask": 10,
+      "observationHash": "57dd1618",
+      "worldHash": "27ebeef0",
+      "choice": {
+        "kind": "pick",
+        "key": "bring:39062:wood"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "bring:39062:wood",
+        "activityId": 41218,
+        "label": "Bringing 3 wood to the timber yard"
+      }
+    },
+    {
+      "seq": 11,
+      "tick": 27624,
+      "attempt": 0,
+      "ask": 11,
+      "observationHash": "107193ff",
+      "worldHash": "1d92544c",
+      "choice": {
+        "kind": "pick",
+        "key": "sleep:4450"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "sleep:4450",
+        "activityId": 41357,
+        "label": "Sleeping by my lean-to"
+      }
+    }
+  ]
+}

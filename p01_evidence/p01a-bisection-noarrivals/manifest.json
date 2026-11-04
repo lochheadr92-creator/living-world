@@ -1,0 +1,27 @@
+{
+  "step": "P0.1a rules bisection",
+  "plan": "brain knowledge/living-world/domain-plan-revised",
+  "source": "C:/dev/Claude Experiment/living-world-p01-noarrivals-3f65f8c",
+  "commit": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+  "dirtyTracked": false,
+  "node": "v24.19.0",
+  "observer": "scripts/household_supply_observe.ts",
+  "days": 25,
+  "budgetSeconds": 5400,
+  "concurrency": 12,
+  "rules": [
+    118,
+    119,
+    120,
+    121
+  ],
+  "seeds": [
+    "forest",
+    "river",
+    "meadow"
+  ],
+  "arrivals": "off (observer forces immigration:false at 3f65f8c)",
+  "crossCheck": "forest r121 must reproduce 1 alive / 28 deaths (integration121_evidence/longrun-25days-noarrivals); forest r118 compared with Stage 3 21 alive / 10 deaths at 50f2f78",
+  "started": "2026-11-02T08:17:45.858Z",
+  "finished": "2026-11-02T08:24:07.677Z"
+}

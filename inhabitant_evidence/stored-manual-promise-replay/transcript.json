@@ -1,0 +1,2685 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "stored-material-promise",
+    "settings": {
+      "seed": "stored-material-promise",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 40
+    },
+    "personId": 2,
+    "personName": "Ada",
+    "startTick": 700,
+    "startHash": "c5e468e7",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "manual",
+      "kind": "manual",
+      "config": {
+        "by": "hand"
+      }
+    },
+    "budget": {
+      "maxCallsPerDay": 1048576,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 2147483647,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {
+      "showScores": false
+    },
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 700,
+      "attempt": 0,
+      "observationHash": "ae4c56b6",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 700,
+          "day": 1,
+          "clock": "14:12",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.16,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 100,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 100,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 100,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 99,
+              "state": "ok"
+            },
+            "social": {
+              "value": 70,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2
+          },
+          "load": {
+            "used": 4,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 2
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 40.5,
+            "y": 40.5
+          },
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 3 tiles north (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": null,
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 42.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood",
+                "stone"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            },
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 3,
+              "direction": "south",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 3,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 24,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 32,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:7:request:plan:stone",
+            "kind": "socialize",
+            "label": "Ask Ben for stone",
+            "goal": "make a pick",
+            "need": null,
+            "eta": "54 world min",
+            "target": "Ben (in sight, 2 tiles south-east)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 38 min",
+            "target": null
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "4 world h 20 min",
+            "target": "rock outcrop 32 tiles south-east (seen 7 world h ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 2 more stone for the pick",
+            "wants": {
+              "wood": 2,
+              "stone": 2
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "just now"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"socialize:7:request:plan:stone\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 4160
+      },
+      "proposal": {
+        "choose": "socialize:7:request:plan:stone",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 775,
+      "attempt": 0,
+      "observationHash": "3bf9f5b6",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 775,
+          "day": 1,
+          "clock": "14:57",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.16,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 98,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 97,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 97,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 84,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2
+          },
+          "load": {
+            "used": 4,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 2
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.2,
+            "y": 40.5
+          },
+          "mood": 9,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 3 tiles north (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "1 world min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Ask Ben for stone",
+            "when": "45 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 42.5,
+              "y": 40.5,
+              "distance": 1,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood",
+                "stone"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            },
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 2,
+              "direction": "south",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 3,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 4,
+              "direction": "east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "10 world min ago",
+              "source": "told by Ben",
+              "stale": false,
+              "items": {
+                "stone": 5,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "7 world h 45 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "7 world h 45 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 24,
+              "direction": "south-east",
+              "seen": "7 world h 45 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 31,
+              "direction": "south-east",
+              "seen": "7 world h 45 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "label": "Acquaintance",
+              "affinity": 6,
+              "trust": 12,
+              "familiarity": 1,
+              "kin": "",
+              "lastMet": "1 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "I asked",
+              "other": "Ben",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "37 world min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "10 world min ago",
+              "text": "Ben told me about a building near camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "23 world min ago",
+              "text": "Ben promised to bring me 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "37 world min ago",
+              "text": "Asked Ben for stone.",
+              "kind": "social",
+              "t": 714
+            },
+            {
+              "when": "45 world min ago",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 22 min",
+            "target": null
+          },
+          {
+            "key": "collect:12:stone",
+            "kind": "withdraw",
+            "label": "Collect 2 stone from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 22 min",
+            "target": "storehouse 11 tiles south-east (seen 10 world min ago)"
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "4 world h 16 min",
+            "target": "rock outcrop 31 tiles south-east (seen 7 world h 45 min ago)"
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 22 min",
+            "target": "storehouse 11 tiles south-east (seen 10 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 2 more stone for the pick (Ben promised 2, not yet delivered)",
+            "wants": {
+              "wood": 2,
+              "stone": 2
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "45 world min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 15355
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 2,
+      "tick": 830,
+      "attempt": 0,
+      "observationHash": "82d6190a",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 830,
+          "day": 1,
+          "clock": "15:29",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.16,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 96,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 95,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 95,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 83,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2
+          },
+          "load": {
+            "used": 4,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 2
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.9,
+            "y": 42.8
+          },
+          "mood": 10,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 5 tiles north (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Strolling about the square",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 829
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "34 world min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Wander down to the square",
+            "when": "33 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 1,
+              "direction": "east",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            },
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 46.5,
+              "y": 43,
+              "distance": 5,
+              "direction": "south-east",
+              "looks": [],
+              "doing": "taking from storage",
+              "carrying": [
+                "wood",
+                "stone"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 5,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 7
+              },
+              "condition": 100
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 6,
+              "direction": "north-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "43 world min ago",
+              "source": "told by Ben",
+              "stale": false,
+              "items": {
+                "stone": 5,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 19,
+              "direction": "south-east",
+              "seen": "8 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 21,
+              "direction": "south-east",
+              "seen": "8 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 23,
+              "direction": "south-east",
+              "seen": "8 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 31,
+              "direction": "south-east",
+              "seen": "8 world h 18 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "label": "Acquaintance",
+              "affinity": 7,
+              "trust": 12,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "12 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "I asked",
+              "other": "Ben",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "1 world h 10 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "43 world min ago",
+              "text": "Ben told me about a building near camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "56 world min ago",
+              "text": "Ben promised to bring me 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "1 world h 10 min ago",
+              "text": "Asked Ben for stone.",
+              "kind": "social",
+              "t": 714
+            },
+            {
+              "when": "1 world h 18 min ago",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "collect:12:stone",
+            "kind": "withdraw",
+            "label": "Collect 2 stone from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 15 min",
+            "target": "storehouse 10 tiles south-east (seen 43 world min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 20 min",
+            "target": null
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "4 world h 12 min",
+            "target": "rock outcrop 31 tiles south-east (seen 8 world h 18 min ago)"
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 15 min",
+            "target": "storehouse 10 tiles south-east (seen 43 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          },
+          {
+            "key": "gather:13",
+            "kind": "gather",
+            "label": "Chopping wood to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "2 world h 45 min",
+            "target": "tree 19 tiles south-east (seen 8 world h 18 min ago)"
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 2 more stone for the pick (Ben promised 2, not yet delivered)",
+            "wants": {
+              "wood": 2,
+              "stone": 2
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "1 world h 18 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 16333
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 3,
+      "tick": 902,
+      "attempt": 0,
+      "observationHash": "7c9e3f37",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 902,
+          "day": 1,
+          "clock": "16:13",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.16,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 94,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 92,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 92,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 82,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2
+          },
+          "load": {
+            "used": 4,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 2
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42.3,
+            "y": 40.3
+          },
+          "mood": 9,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 4 tiles north (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 901
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "1 world h 17 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Potter about near home",
+            "when": "43 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 2,
+              "direction": "south-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            },
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 49.9,
+              "y": 44.9,
+              "distance": 9,
+              "direction": "south",
+              "looks": [],
+              "doing": "giving",
+              "carrying": [
+                "wood",
+                "stone"
+              ],
+              "talking": false,
+              "relation": "Acquaintance"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 3,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 4,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "1 world h 26 min ago",
+              "source": "told by Ben",
+              "stale": false,
+              "items": {
+                "stone": 5,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 19,
+              "direction": "south-east",
+              "seen": "9 world h 1 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 21,
+              "direction": "south-east",
+              "seen": "9 world h 1 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 23,
+              "direction": "south-east",
+              "seen": "9 world h 1 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 30,
+              "direction": "south-east",
+              "seen": "9 world h 1 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "label": "Acquaintance",
+              "affinity": 7,
+              "trust": 12,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "55 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "I asked",
+              "other": "Ben",
+              "what": "2 stone",
+              "status": "promised",
+              "note": "Ben will bring 2 stone",
+              "when": "1 world h 53 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world h 26 min ago",
+              "text": "Ben told me about a building near camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "1 world h 40 min ago",
+              "text": "Ben promised to bring me 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "1 world h 53 min ago",
+              "text": "Asked Ben for stone.",
+              "kind": "social",
+              "t": 714
+            },
+            {
+              "when": "2 world h 1 min ago",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "collect:12:stone",
+            "kind": "withdraw",
+            "label": "Collect 2 stone from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world h 26 min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 32 min",
+            "target": null
+          },
+          {
+            "key": "gather:16",
+            "kind": "gather",
+            "label": "Breaking stone to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "4 world h 8 min",
+            "target": "rock outcrop 30 tiles south-east (seen 9 world h 1 min ago)"
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 2 wood from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 16 min",
+            "target": "storehouse 10 tiles south-east (seen 1 world h 26 min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          },
+          {
+            "key": "gather:13",
+            "kind": "gather",
+            "label": "Chopping wood to make a pick",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "2 world h 44 min",
+            "target": "tree 19 tiles south-east (seen 9 world h 1 min ago)"
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 2 more stone for the pick (Ben promised 2, not yet delivered)",
+            "wants": {
+              "wood": 2,
+              "stone": 2
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "2 world h 1 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 55860
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 4,
+      "tick": 1000,
+      "attempt": 0,
+      "observationHash": "ed69ece1",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1000,
+          "day": 1,
+          "clock": "17:12",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 16
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.16,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 91,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 88,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 88,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 98,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 81,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 2
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.7,
+            "y": 46.6
+          },
+          "mood": 16,
+          "thoughts": [
+            "+8 Ben gave me 2 stone"
+          ],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 9 tiles north-east (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Strolling about the square",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 999
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "2 world h 16 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Wander down to the square",
+            "when": "59 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 43.9,
+              "y": 45.6,
+              "distance": 2,
+              "direction": "east",
+              "looks": [],
+              "doing": "gathering",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Friendly"
+            },
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 4,
+              "direction": "north-east",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 9,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 6
+              },
+              "condition": 99
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 9,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 11,
+              "direction": "south-east",
+              "seen": "43 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 19,
+              "direction": "south-east",
+              "seen": "10 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 21,
+              "direction": "south-east",
+              "seen": "10 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 23,
+              "direction": "south-east",
+              "seen": "10 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 31,
+              "direction": "south-east",
+              "seen": "10 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "label": "Friendly",
+              "affinity": 13,
+              "trust": 21,
+              "familiarity": 3,
+              "kin": "",
+              "lastMet": "7 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "Ben kept their promise",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "I asked",
+              "other": "Ben",
+              "what": "2 stone",
+              "status": "fulfilled",
+              "note": "promise kept",
+              "when": "2 world h 52 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "7 world min ago",
+              "text": "Ben gave me 2 stone.",
+              "kind": "social",
+              "t": 989
+            },
+            {
+              "when": "2 world h 25 min ago",
+              "text": "Ben told me about a building near camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "2 world h 38 min ago",
+              "text": "Ben promised to bring me 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "2 world h 52 min ago",
+              "text": "Asked Ben for stone.",
+              "kind": "social",
+              "t": 714
+            },
+            {
+              "when": "3 world h ago",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "craft:pick",
+            "kind": "craft",
+            "label": "Make a pick",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 58 min",
+            "target": "lean-to 9 tiles north-east (seen just now)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "3 world h 38 min",
+            "target": null
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 1 wood from the storehouse",
+            "goal": "to make a pick",
+            "need": null,
+            "eta": "1 world h 25 min",
+            "target": "storehouse 11 tiles south-east (seen 43 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the pick",
+            "wants": {
+              "wood": 2,
+              "stone": 2
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "3 world h ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"craft:pick\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 44236
+      },
+      "proposal": {
+        "choose": "craft:pick",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 5,
+      "tick": 1159,
+      "attempt": 0,
+      "observationHash": "c46c8559",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1159,
+          "day": 1,
+          "clock": "18:47",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 14
+        },
+        "self": {
+          "name": "Ada",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "balanced",
+          "skills": {
+            "forage": 0.2,
+            "fish": 1.11,
+            "wood": 0.5,
+            "stone": 1.8,
+            "build": 1.24,
+            "farm": 0.89,
+            "craft": 1.18,
+            "carpentry": 0.99,
+            "kiln": 0.88,
+            "smith": 0.99,
+            "bake": 1.21
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 86,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 81,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 80,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 97,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 79,
+              "state": "ok"
+            }
+          },
+          "aspiration": "has what they hoped for, a trade of their own",
+          "carrying": {
+            "pick": 1
+          },
+          "load": {
+            "used": 1,
+            "cap": 12
+          },
+          "spokenFor": {},
+          "available": {
+            "pick": 1
+          },
+          "tools": [
+            {
+              "kind": "pick",
+              "label": "pickaxe",
+              "wear": 0,
+              "loan": null
+            }
+          ],
+          "pullingCart": false,
+          "position": {
+            "x": 38.6,
+            "y": 39.4
+          },
+          "mood": 26,
+          "thoughts": [
+            "+12 has a trade of their own",
+            "+7 Ben gave me 2 stone"
+          ],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Clover",
+          "members": [],
+          "home": "lean-to 1 tiles north-east (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Making a pick",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1158
+          },
+          "lastInteraction": {
+            "purpose": "request",
+            "outcome": "promised",
+            "detail": "Ben will bring 2 stone",
+            "when": "3 world h 51 min ago",
+            "t": 774
+          },
+          "lastChoice": {
+            "label": "Make a pick",
+            "when": "1 world h 35 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Cora",
+              "x": 42.5,
+              "y": 42.5,
+              "distance": 5,
+              "direction": "south",
+              "looks": [],
+              "doing": "",
+              "carrying": [
+                "wood"
+              ],
+              "talking": false,
+              "relation": "Stranger"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 10,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 1,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Clover",
+              "items": {
+                "berries": 5
+              },
+              "condition": 99
+            },
+            {
+              "id": 11,
+              "what": "lean-to",
+              "x": 43.5,
+              "y": 37.5,
+              "distance": 5,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Reed",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 12,
+              "what": "storehouse",
+              "x": 52,
+              "y": 44,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "2 world h 19 min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4,
+                "wood": 3
+              },
+              "condition": 100
+            },
+            {
+              "id": 13,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "11 world h 35 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 14,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 24,
+              "direction": "south-east",
+              "seen": "11 world h 35 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 15,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 26,
+              "direction": "south-east",
+              "seen": "11 world h 35 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 16,
+              "what": "rock outcrop",
+              "x": 72.5,
+              "y": 40.5,
+              "distance": 34,
+              "direction": "south-east",
+              "seen": "11 world h 35 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 12,
+              "estimate": 10
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 3,
+            "tree": 3,
+            "rock outcrop": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "label": "Friendly",
+              "affinity": 13,
+              "trust": 21,
+              "familiarity": 3,
+              "kin": "",
+              "lastMet": "1 world h 42 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "Ben kept their promise",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 7,
+              "name": "Ben",
+              "x": 48.2,
+              "y": 45.6,
+              "when": "1 world h 16 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "I asked",
+              "other": "Ben",
+              "what": "2 stone",
+              "status": "fulfilled",
+              "note": "promise kept",
+              "when": "4 world h 27 min ago"
+            }
+          ],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Finished: make a pick - made the pick (Ben brought 2 of the stone).",
+              "kind": "work",
+              "t": 1159
+            },
+            {
+              "when": "1 world min ago",
+              "text": "Made a pick.",
+              "kind": "work",
+              "t": 1158
+            },
+            {
+              "when": "39 world min ago",
+              "text": "I have what I hoped for: a trade of their own.",
+              "kind": "life",
+              "t": 1094
+            },
+            {
+              "when": "39 world min ago",
+              "text": "What I hope for: a trade of their own.",
+              "kind": "life",
+              "t": 1094
+            },
+            {
+              "when": "1 world h 42 min ago",
+              "text": "Ben gave me 2 stone.",
+              "kind": "social",
+              "t": 989
+            },
+            {
+              "when": "4 world h 1 min ago",
+              "text": "Ben told me about a building near camp.",
+              "kind": "info",
+              "t": 758
+            },
+            {
+              "when": "4 world h 14 min ago",
+              "text": "Ben promised to bring me 2 stone.",
+              "kind": "social",
+              "t": 736
+            },
+            {
+              "when": "4 world h 27 min ago",
+              "text": "Asked Ben for stone.",
+              "kind": "social",
+              "t": 714
+            },
+            {
+              "when": "4 world h 35 min ago",
+              "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "sleep:10",
+            "kind": "sleep",
+            "label": "Sleep at my lean-to",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "29 world min",
+            "target": "lean-to 1 tiles north-east (seen just now)"
+          },
+          {
+            "key": "shelter:10",
+            "kind": "rest",
+            "label": "Stay at my lean-to until it is light",
+            "goal": "to let the night pass under shelter",
+            "need": "warmth",
+            "eta": "11 world h 13 min",
+            "target": "lean-to 1 tiles north-east (seen just now)",
+            "limits": [
+              {
+                "field": "ticks",
+                "kind": "count",
+                "min": 30,
+                "max": 1121,
+                "note": "how long to stay, at most until it is light"
+              }
+            ]
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          },
+          {
+            "key": "collect:12:wood",
+            "kind": "withdraw",
+            "label": "Collect 3 wood from the storehouse",
+            "goal": "to make a basket",
+            "need": null,
+            "eta": "1 world h 33 min",
+            "target": "storehouse 14 tiles south-east (seen 2 world h 19 min ago)"
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a hut",
+            "reason": "too early in the settlement for a hut",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make a pick",
+            "kind": "tool",
+            "status": "done",
+            "step": "",
+            "wants": {},
+            "blocked": "",
+            "reason": "made the pick (Ben brought 2 of the stone)",
+            "since": "4 world h 35 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": false,
+        "text": null,
+        "reason": "model call failed: control was handed back to the engine",
+        "latencyMs": 41822
+      },
+      "proposal": null,
+      "problem": "model call failed: control was handed back to the engine",
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 700,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "ae4c56b6",
+      "worldHash": "72074fd6",
+      "choice": {
+        "kind": "pick",
+        "key": "socialize:7:request:plan:stone"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "socialize:7:request:plan:stone",
+        "activityId": 19,
+        "label": "Ask Ben for stone"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 775,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "3bf9f5b6",
+      "worldHash": "37c07dc5",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 25,
+        "label": "Strolling about the square"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 830,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "82d6190a",
+      "worldHash": "fda4ad04",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 28,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 3,
+      "tick": 902,
+      "attempt": 0,
+      "ask": 3,
+      "observationHash": "7c9e3f37",
+      "worldHash": "90b87d66",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 30,
+        "label": "Strolling about the square"
+      }
+    },
+    {
+      "seq": 4,
+      "tick": 1000,
+      "attempt": 0,
+      "ask": 4,
+      "observationHash": "ed69ece1",
+      "worldHash": "8294e9d3",
+      "choice": {
+        "kind": "pick",
+        "key": "craft:pick"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "craft:pick",
+        "activityId": 34,
+        "label": "Making a pick"
+      }
+    },
+    {
+      "seq": 5,
+      "tick": 1159,
+      "attempt": 0,
+      "ask": 5,
+      "observationHash": "c46c8559",
+      "worldHash": "f2806900",
+      "choice": {
+        "kind": "defer"
+      },
+      "timing": "exact",
+      "result": null
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 19,
+      "label": "Ask Ben for stone",
+      "tick": 775,
+      "outcome": "partial",
+      "detail": "Ben will bring 2 stone"
+    },
+    {
+      "call": 1,
+      "activityId": 25,
+      "label": "Strolling about the square",
+      "tick": 830,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 28,
+      "label": "Pottering about",
+      "tick": 902,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 3,
+      "activityId": 30,
+      "label": "Strolling about the square",
+      "tick": 1000,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 4,
+      "activityId": 34,
+      "label": "Making a pick",
+      "tick": 1159,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 701,
+      "events": []
+    },
+    {
+      "call": 1,
+      "tick": 776,
+      "events": [
+        {
+          "tick": 736,
+          "kind": "social",
+          "text": "Ben promised Ada stone."
+        }
+      ]
+    },
+    {
+      "call": 2,
+      "tick": 831,
+      "events": []
+    },
+    {
+      "call": 3,
+      "tick": 903,
+      "events": []
+    },
+    {
+      "call": 4,
+      "tick": 1001,
+      "events": [
+        {
+          "tick": 989,
+          "kind": "social",
+          "text": "Ben gave 2 stone to Ada."
+        },
+        {
+          "tick": 989,
+          "kind": "social",
+          "text": "Ben kept a promise to Ada."
+        }
+      ]
+    }
+  ],
+  "end": {
+    "tick": 1160,
+    "hash": "d53004c7",
+    "died": false,
+    "calls": 6,
+    "applied": 5,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 6,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 39943,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

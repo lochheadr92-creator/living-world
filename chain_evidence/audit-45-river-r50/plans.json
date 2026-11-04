@@ -1,0 +1,132 @@
+[
+  {
+    "person": 1145,
+    "name": "Jax",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "dropped",
+    "reason": "gave it up after 3 tries: nothing there to take",
+    "since": 34182,
+    "ended": 37089
+  },
+  {
+    "person": 1112,
+    "name": "Ben",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "done",
+    "reason": "brought 1 planks from the timber yard to the site",
+    "since": 37624,
+    "ended": 38730
+  },
+  {
+    "person": 1106,
+    "name": "Mira",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the planks from the timber yard)",
+    "since": 38402,
+    "ended": 45604
+  },
+  {
+    "person": 1128,
+    "name": "Tomas",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "dropped",
+    "reason": "the time is up (was going to get 2 more wood for the hewn planks)",
+    "since": 39495,
+    "ended": 46697
+  },
+  {
+    "person": 1145,
+    "name": "Jax",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "dropped",
+    "reason": "gave it up after 4 tries: nothing there to take",
+    "since": 43684,
+    "ended": 45718
+  },
+  {
+    "person": 1138,
+    "name": "Basil",
+    "makes": "planks",
+    "forSite": 10082,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the planks from the timber yard)",
+    "since": 48007,
+    "ended": 55209
+  },
+  {
+    "person": 1131,
+    "name": "Kai",
+    "makes": "bricks",
+    "forSite": 18966,
+    "status": "done",
+    "reason": "brought 3 bricks from the kiln to the site",
+    "since": 50663,
+    "ended": 53214
+  },
+  {
+    "person": 1131,
+    "name": "Kai",
+    "makes": "bricks",
+    "forSite": 18966,
+    "status": "dropped",
+    "reason": "the time is up (was going to collect the bricks from the kiln)",
+    "since": 58121,
+    "ended": 65323
+  },
+  {
+    "person": 1106,
+    "name": "Mira",
+    "makes": "jar",
+    "forSite": 0,
+    "status": "dropped",
+    "reason": "the time is up (was going to firing a water jar)",
+    "since": 78930,
+    "ended": 86132
+  },
+  {
+    "person": 1128,
+    "name": "Tomas",
+    "makes": "charcoal",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the charcoal from the kiln",
+    "since": 87377,
+    "ended": 87563
+  },
+  {
+    "person": 1128,
+    "name": "Tomas",
+    "makes": "charcoal",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the charcoal from the kiln",
+    "since": 96633,
+    "ended": 96635
+  },
+  {
+    "person": 1128,
+    "name": "Tomas",
+    "makes": "charcoal",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the charcoal from the kiln",
+    "since": 103082,
+    "ended": 103084
+  },
+  {
+    "person": 1128,
+    "name": "Tomas",
+    "makes": "charcoal",
+    "forSite": 0,
+    "status": "done",
+    "reason": "has the charcoal from the kiln",
+    "since": 105549,
+    "ended": 105551
+  }
+]

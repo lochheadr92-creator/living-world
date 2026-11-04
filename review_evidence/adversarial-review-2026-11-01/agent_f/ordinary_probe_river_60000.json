@@ -1,0 +1,5758 @@
+{
+ "seed": "river",
+ "rulesVersion": 115,
+ "tick": 60000,
+ "stop": "horizon",
+ "seconds": 77.36030769999999,
+ "alive": 30,
+ "deaths": 2,
+ "pureChecks": 100,
+ "counts": {
+  "adult samples": 2039,
+  "plan_site start:lean_to": 5,
+  "haul start": 166,
+  "haul success": 126,
+  "rock gather end:success:done": 45,
+  "rock gather end:interrupted:something better came up": 27,
+  "craft start:hoe": 10,
+  "craft end:hoe:success": 6,
+  "craft start:pick": 2,
+  "craft end:pick:success": 2,
+  "rock gather end:interrupted:danger nearby": 6,
+  "plan_site start:hut": 23,
+  "plan_site start:storehouse": 2,
+  "craft start:basket": 17,
+  "craft end:basket:success": 14,
+  "rock gather end:failed:nothing left": 18,
+  "craft end:hoe:interrupted": 4,
+  "craft end:basket:interrupted": 3,
+  "adult samples with hauling ground": 14,
+  "craft start:spear": 6,
+  "craft end:spear:success": 2,
+  "plan_site start:hall": 1,
+  "plan_site start:quarry": 2,
+  "plan_site start:timber_yard": 4,
+  "craft start:saw": 9,
+  "craft end:saw:success": 7,
+  "craft end:spear:interrupted": 4,
+  "craft start:hammer": 5,
+  "craft end:hammer:interrupted": 3,
+  "craft start:axe": 5,
+  "craft end:axe:success": 4,
+  "rock gather end:failed:no way to get there": 2,
+  "operate start:quarry_stone": 7,
+  "operate end:quarry_stone:success": 1,
+  "operate end:quarry_stone:interrupted": 6,
+  "adult samples knowing a usable yard": 711,
+  "active batch samples:planks": 42,
+  "operate start:hew_planks": 103,
+  "operate end:hew_planks:interrupted": 18,
+  "operate start:saw_planks": 70,
+  "operate end:saw_planks:failed:lacks # wood": 63,
+  "operate failed by access:friend:lacks # wood:shelf wood 3": 105,
+  "operate end:hew_planks:failed:lacks # wood": 74,
+  "operate failed by access:builder:lacks # wood:shelf wood 3": 2,
+  "operate failed by access:owner:lacks # wood:shelf wood 3": 15,
+  "operate end:saw_planks:interrupted": 4,
+  "plan_site start:granary": 2,
+  "operate end:hew_planks:success": 12,
+  "craft end:hammer:success": 2,
+  "plan_site start:kiln": 1,
+  "craft end:saw:interrupted": 2,
+  "operate end:hew_planks:failed:needs a saw": 1,
+  "operate failed by access:friend:needs a saw:shelf wood 0": 1,
+  "operate end:saw_planks:success": 1,
+  "operate failed by access:friend:lacks # wood:shelf wood 5": 14,
+  "operate failed by access:builder:lacks # wood:shelf wood 5": 1,
+  "craft end:axe:interrupted": 1
+ },
+ "firstSeen": {
+  "building:fire": 0,
+  "building:lean_to": 0,
+  "site:lean_to": 120,
+  "site:hut": 2520,
+  "building:hut": 3360,
+  "site:storehouse": 7320,
+  "building:storehouse": 10920,
+  "site:hall": 12840,
+  "site:quarry": 13200,
+  "building:quarry": 22080,
+  "site:timber_yard": 24960,
+  "building:timber_yard": 27120,
+  "site:granary": 36360
+ },
+ "buildings": {
+  "fire": 1,
+  "lean_to": 11,
+  "hut": 12,
+  "storehouse": 1,
+  "quarry": 1,
+  "timber_yard": 1
+ },
+ "sites": {
+  "hall": {
+   "n": 1,
+   "missing": [
+    "wood:0,planks:1,stone:0"
+   ]
+  },
+  "granary": {
+   "n": 1,
+   "missing": [
+    "wood:0,planks:7,stone:0"
+   ]
+  }
+ },
+ "tools": {
+  "pick": 3,
+  "basket": 16,
+  "axe": 6,
+  "hoe": 7,
+  "spear": 2,
+  "saw": 7,
+  "hammer": 2
+ },
+ "stores": {
+  "storehouse#5318 hh0": {
+   "items": {},
+   "racked": [],
+   "adultsMayUse": 20,
+   "adults": 20,
+   "accessLevels": {
+    "communal": 20
+   },
+   "job": null
+  },
+  "timber_yard#10853 hh1129": {
+   "items": {
+    "offcuts": 17,
+    "planks": 1,
+    "wood": 2
+   },
+   "racked": [],
+   "adultsMayUse": 14,
+   "adults": 20,
+   "accessLevels": {
+    "none": 6,
+    "friend": 11,
+    "builder": 1,
+    "owner": 2
+   },
+   "builders": {
+    "1123": 0.22556390977443797,
+    "1129": 0.6992481203007493,
+    "1136": 0.07518796992481266
+   },
+   "job": null
+  }
+ },
+ "carts": 0,
+ "hauling": [
+  {
+   "name": "Ines",
+   "maxWeight": 34,
+   "maxTrips": 6,
+   "everEnough": 26
+  },
+  {
+   "name": "Tomas",
+   "maxWeight": 34,
+   "maxTrips": 5,
+   "everEnough": 0
+  },
+  {
+   "name": "Ben",
+   "maxWeight": 30,
+   "maxTrips": 5,
+   "everEnough": 0
+  },
+  {
+   "name": "Kai",
+   "maxWeight": 30,
+   "maxTrips": 7,
+   "everEnough": 94
+  },
+  {
+   "name": "Ivy",
+   "maxWeight": 26,
+   "maxTrips": 6,
+   "everEnough": 0
+  },
+  {
+   "name": "Talia",
+   "maxWeight": 25,
+   "maxTrips": 6,
+   "everEnough": 0
+  },
+  {
+   "name": "Petra",
+   "maxWeight": 23,
+   "maxTrips": 4,
+   "everEnough": 0
+  },
+  {
+   "name": "Cole",
+   "maxWeight": 22,
+   "maxTrips": 5,
+   "everEnough": 0
+  },
+  {
+   "name": "Milo",
+   "maxWeight": 21,
+   "maxTrips": 8,
+   "everEnough": 0
+  },
+  {
+   "name": "Jax",
+   "maxWeight": 20,
+   "maxTrips": 4,
+   "everEnough": 0
+  },
+  {
+   "name": "Lena",
+   "maxWeight": 20,
+   "maxTrips": 2,
+   "everEnough": 0
+  },
+  {
+   "name": "Cora",
+   "maxWeight": 18,
+   "maxTrips": 4,
+   "everEnough": 0
+  }
+ ],
+ "haulThreshold": {
+  "HAUL_EXPERIENCE": 30,
+  "HAUL_TRIPS": 6
+ },
+ "cartDemandRows": [],
+ "stepRows": [
+  {
+   "tick": 27600,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "bring wood to the workshop for planks",
+   "stepKey": null,
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:4185",
+     "util": 48.6
+    },
+    {
+     "key": "sleep:1111",
+     "util": 42.9
+    },
+    {
+     "key": "socialize:1121:chat",
+     "util": 34.1
+    }
+   ],
+   "needs": {
+    "hunger": 66,
+    "thirst": 56,
+    "energy": 44,
+    "warmth": 78
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 28200,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 6.531369974924526,
+   "top": [
+    {
+     "key": "socialize:1135:chat",
+     "util": 55.3
+    },
+    {
+     "key": "shelter:4185",
+     "util": 30
+    },
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 6.5
+    }
+   ],
+   "needs": {
+    "hunger": 55,
+    "thirst": 100,
+    "energy": 93,
+    "warmth": 68
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 28800,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 43.040741837210824,
+   "top": [
+    {
+     "key": "tend:1237",
+     "util": 30.7
+    },
+    {
+     "key": "plant:1237",
+     "util": 28.7
+    },
+    {
+     "key": "gather:10183",
+     "util": 24.5
+    }
+   ],
+   "needs": {
+    "hunger": 82,
+    "thirst": 77,
+    "energy": 84,
+    "warmth": 73
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 29400,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 43.4630146862702,
+   "top": [
+    {
+     "key": "gather:955",
+     "util": 14.7
+    },
+    {
+     "key": "drink:1000230",
+     "util": 18
+    },
+    {
+     "key": "fuel:1102",
+     "util": 18.1
+    }
+   ],
+   "needs": {
+    "hunger": 64,
+    "thirst": 53,
+    "energy": 60,
+    "warmth": 97
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 30000,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 9.375713394980995,
+   "top": [
+    {
+     "key": "sleep:4185",
+     "util": 46.6
+    },
+    {
+     "key": "harvest:1277",
+     "util": 31.4
+    },
+    {
+     "key": "sleep:1111",
+     "util": 44.8
+    }
+   ],
+   "needs": {
+    "hunger": 67,
+    "thirst": 90,
+    "energy": 35,
+    "warmth": 95
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 30600,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 6.542988000906676,
+   "top": [
+    {
+     "key": "sleep:4185",
+     "util": 43.7
+    },
+    {
+     "key": "harvest:1277",
+     "util": 25.4
+    },
+    {
+     "key": "sleep:1111",
+     "util": 32.3
+    }
+   ],
+   "needs": {
+    "hunger": 55,
+    "thirst": 73,
+    "energy": 78,
+    "warmth": 90
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 31200,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 37.255425127308875,
+   "top": [
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 37.3
+    },
+    {
+     "key": "tend:1277",
+     "util": 35.1
+    },
+    {
+     "key": "plant:1277",
+     "util": 32.5
+    }
+   ],
+   "needs": {
+    "hunger": 60,
+    "thirst": 86,
+    "energy": 74,
+    "warmth": 76
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 31800,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "haul:12648",
+     "util": 24.6
+    },
+    {
+     "key": "fuel:1102",
+     "util": 20.5
+    },
+    {
+     "key": "gather:954",
+     "util": 5.5
+    }
+   ],
+   "needs": {
+    "hunger": 64,
+    "thirst": 76,
+    "energy": 49,
+    "warmth": 98
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 32400,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "nothing there to take",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:4185",
+     "util": 52.4
+    },
+    {
+     "key": "sleep:1111",
+     "util": 43
+    },
+    {
+     "key": "eat_store:4185",
+     "util": 31.8
+    }
+   ],
+   "needs": {
+    "hunger": 45,
+    "thirst": 51,
+    "energy": 36,
+    "warmth": 84
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 33000,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "nothing there to take",
+   "offered": false,
+   "top": [
+    {
+     "key": "drink:1000268",
+     "util": 62.7
+    },
+    {
+     "key": "drink:1000250",
+     "util": 57.5
+    },
+    {
+     "key": "eat_store:4185",
+     "util": 57.8
+    }
+   ],
+   "needs": {
+    "hunger": 34,
+    "thirst": 35,
+    "energy": 93,
+    "warmth": 87
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 33600,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 37.7
+    },
+    {
+     "key": "warm:1102",
+     "util": 22.5
+    },
+    {
+     "key": "gather:990",
+     "util": 22.4
+    }
+   ],
+   "needs": {
+    "hunger": 82,
+    "thirst": 77,
+    "energy": 94,
+    "warmth": 72
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 34200,
+   "person": 1113,
+   "name": "Zia",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 36.92069830982212,
+   "top": [
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 36.9
+    },
+    {
+     "key": "socialize:1116:chat",
+     "util": 23.4
+    },
+    {
+     "key": "socialize:9010:chat",
+     "util": 22
+    }
+   ],
+   "needs": {
+    "hunger": 64,
+    "thirst": 53,
+    "energy": 87,
+    "warmth": 84
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 39000,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "nothing there to take",
+   "offered": false,
+   "top": [
+    {
+     "key": "drink:1000093",
+     "util": 35.5
+    },
+    {
+     "key": "drink:1000053",
+     "util": 31.6
+    },
+    {
+     "key": "wander",
+     "util": 6
+    }
+   ],
+   "needs": {
+    "hunger": 65,
+    "thirst": 46,
+    "energy": 58,
+    "warmth": 95
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 39600,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 30.1
+    },
+    {
+     "key": "sleep:2038",
+     "util": 16.7
+    },
+    {
+     "key": "wander",
+     "util": 6
+    }
+   ],
+   "needs": {
+    "hunger": 58,
+    "thirst": 82,
+    "energy": 41,
+    "warmth": 87
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 40200,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 58.9
+    },
+    {
+     "key": "harvest:6088",
+     "util": 47.3
+    },
+    {
+     "key": "sleep:2038",
+     "util": 48.1
+    }
+   ],
+   "needs": {
+    "hunger": 42,
+    "thirst": 60,
+    "energy": 48,
+    "warmth": 79
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 40800,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:saw_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 52.1564276366277,
+   "top": [
+    {
+     "key": "gather:953",
+     "util": 8.9
+    },
+    {
+     "key": "gather:955",
+     "util": 6.9
+    },
+    {
+     "key": "explore",
+     "util": 23
+    }
+   ],
+   "needs": {
+    "hunger": 57,
+    "thirst": 82,
+    "energy": 87,
+    "warmth": 67
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 40800,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "harvest:6088",
+     "util": 45.5
+    },
+    {
+     "key": "deposit:2883:food",
+     "util": 21.6
+    },
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 38.8
+    }
+   ],
+   "needs": {
+    "hunger": 63,
+    "thirst": 99,
+    "energy": 85,
+    "warmth": 66
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 41400,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:saw_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 49.64428360713882,
+   "top": [
+    {
+     "key": "attend:15388",
+     "util": 38.2
+    },
+    {
+     "key": "plant:6088",
+     "util": 34.1
+    },
+    {
+     "key": "tend:6088",
+     "util": 33
+    }
+   ],
+   "needs": {
+    "hunger": 63,
+    "thirst": 58,
+    "energy": 62,
+    "warmth": 95
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 41400,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 43.546331765217545,
+   "top": [
+    {
+     "key": "operate:10853:hew_planks",
+     "util": 43.5
+    },
+    {
+     "key": "deposit:2883:food",
+     "util": 17.8
+    },
+    {
+     "key": "tend:6088",
+     "util": 34.6
+    }
+   ],
+   "needs": {
+    "hunger": 66,
+    "thirst": 73,
+    "energy": 59,
+    "warmth": 98
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 42000,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:saw_planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "fuel:1102",
+     "util": 21
+    },
+    {
+     "key": "sleep:2038",
+     "util": -1.6
+    },
+    {
+     "key": "wander",
+     "util": 6
+    }
+   ],
+   "needs": {
+    "hunger": 69,
+    "thirst": 88,
+    "energy": 38,
+    "warmth": 90
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 42000,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 46.1
+    },
+    {
+     "key": "gather:954",
+     "util": 24.6
+    },
+    {
+     "key": "gather:953",
+     "util": 24.7
+    }
+   ],
+   "needs": {
+    "hunger": 48,
+    "thirst": 49,
+    "energy": 35,
+    "warmth": 90
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 42600,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:saw_planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 9.993736017146261,
+   "top": [
+    {
+     "key": "sleep:2038",
+     "util": 42.2
+    },
+    {
+     "key": "shelter:2038",
+     "util": 30
+    },
+    {
+     "key": "sleep:2883",
+     "util": 42.7
+    }
+   ],
+   "needs": {
+    "hunger": 57,
+    "thirst": 70,
+    "energy": 70,
+    "warmth": 67
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 42600,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:991",
+     "util": 48.4
+    },
+    {
+     "key": "drink:1000231",
+     "util": 64.5
+    },
+    {
+     "key": "gather:938",
+     "util": 48
+    }
+   ],
+   "needs": {
+    "hunger": 35,
+    "thirst": 32,
+    "energy": 74,
+    "warmth": 89
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 43200,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:saw_planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "drink:1000230",
+     "util": 30
+    },
+    {
+     "key": "drink:1000232",
+     "util": 27.9
+    },
+    {
+     "key": "explore",
+     "util": 28.4
+    }
+   ],
+   "needs": {
+    "hunger": 86,
+    "thirst": 50,
+    "energy": 94,
+    "warmth": 72
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 43200,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "work on planks for planks",
+   "stepKey": "operate:10853:hew_planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:993",
+     "util": 34.4
+    },
+    {
+     "key": "gather:950",
+     "util": 32.2
+    },
+    {
+     "key": "gather:992",
+     "util": 31.7
+    }
+   ],
+   "needs": {
+    "hunger": 44,
+    "thirst": 83,
+    "energy": 90,
+    "warmth": 66
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 43800,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "bring planks to the site",
+   "stepKey": "haul:5929",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 28.47668564483654,
+   "top": [
+    {
+     "key": "haul:5929",
+     "util": 28.5
+    },
+    {
+     "key": "deposit:2883:food",
+     "util": 16.2
+    },
+    {
+     "key": "operate:10853:saw_planks",
+     "util": 32.2
+    }
+   ],
+   "needs": {
+    "hunger": 67,
+    "thirst": 83,
+    "energy": 69,
+    "warmth": 97
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 43800,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 12.43393263478613,
+   "top": [
+    {
+     "key": "gather:1094",
+     "util": 37
+    },
+    {
+     "key": "gather:1101",
+     "util": 35.1
+    },
+    {
+     "key": "gather:1096",
+     "util": 31.2
+    }
+   ],
+   "needs": {
+    "hunger": 73,
+    "thirst": 57,
+    "energy": 65,
+    "warmth": 95
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 44400,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "drink:1000293",
+     "util": 19
+    },
+    {
+     "key": "drink:1000254",
+     "util": 10.9
+    },
+    {
+     "key": "wander",
+     "util": 6
+    }
+   ],
+   "needs": {
+    "hunger": 76,
+    "thirst": 57,
+    "energy": 43,
+    "warmth": 87
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 44400,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": true,
+   "servingUtil": 4.494746239104683,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 53.2
+    },
+    {
+     "key": "sleep:2038",
+     "util": 48.3
+    },
+    {
+     "key": "gather:990",
+     "util": 8.2
+    }
+   ],
+   "needs": {
+    "hunger": 53,
+    "thirst": 79,
+    "energy": 38,
+    "warmth": 97
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 45000,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 45.9
+    },
+    {
+     "key": "shelter:2883",
+     "util": 22
+    },
+    {
+     "key": "sleep:2038",
+     "util": 36.6
+    }
+   ],
+   "needs": {
+    "hunger": 88,
+    "thirst": 74,
+    "energy": 74,
+    "warmth": 87
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 45000,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:950",
+     "util": 35.7
+    },
+    {
+     "key": "gather:952",
+     "util": 34.4
+    },
+    {
+     "key": "gather:951",
+     "util": 34
+    }
+   ],
+   "needs": {
+    "hunger": 42,
+    "thirst": 63,
+    "energy": 91,
+    "warmth": 74
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 45600,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 14.199863229493484,
+   "top": [
+    {
+     "key": "gather:421",
+     "util": 21.3
+    },
+    {
+     "key": "gather:442",
+     "util": 21.3
+    },
+    {
+     "key": "gather:421",
+     "util": 18.1
+    }
+   ],
+   "needs": {
+    "hunger": 72,
+    "thirst": 53,
+    "energy": 95,
+    "warmth": 75
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 45600,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "nothing there to take",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:955",
+     "util": 29.4
+    },
+    {
+     "key": "gather:1100",
+     "util": 27.9
+    },
+    {
+     "key": "gather:954",
+     "util": 23.7
+    }
+   ],
+   "needs": {
+    "hunger": 81,
+    "thirst": 92,
+    "energy": 90,
+    "warmth": 65
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 46200,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:975",
+     "util": 31.9
+    },
+    {
+     "key": "gather:974",
+     "util": 29.7
+    },
+    {
+     "key": "gather:976",
+     "util": 28.3
+    }
+   ],
+   "needs": {
+    "hunger": 53,
+    "thirst": 64,
+    "energy": 70,
+    "warmth": 94
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 46800,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 4.339818197682536,
+   "top": [
+    {
+     "key": "shelter:2038",
+     "util": 22
+    },
+    {
+     "key": "collect:10853:planks",
+     "util": 4.3
+    },
+    {
+     "key": "gather:550",
+     "util": 0.7
+    }
+   ],
+   "needs": {
+    "hunger": 63,
+    "thirst": 100,
+    "energy": 46,
+    "warmth": 96
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 47400,
+   "person": 1144,
+   "name": "Alma",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 3.7967034166624747,
+   "top": [
+    {
+     "key": "shelter:2038",
+     "util": 30
+    },
+    {
+     "key": "rest:home:2038",
+     "util": 16.1
+    },
+    {
+     "key": "visit:1147",
+     "util": 27
+    }
+   ],
+   "needs": {
+    "hunger": 51,
+    "thirst": 83,
+    "energy": 95,
+    "warmth": 44
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 57600,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:983",
+     "util": 61.1
+    },
+    {
+     "key": "gather:984",
+     "util": 61.3
+    },
+    {
+     "key": "gather:1096",
+     "util": 60.2
+    }
+   ],
+   "needs": {
+    "hunger": 9,
+    "thirst": 77,
+    "energy": 55,
+    "warmth": 44
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 58200,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": false,
+   "top": [
+    {
+     "key": "harvest:7716",
+     "util": 95.5
+    },
+    {
+     "key": "gather:954",
+     "util": 64.2
+    },
+    {
+     "key": "gather:1098",
+     "util": 61.6
+    }
+   ],
+   "needs": {
+    "hunger": 5,
+    "thirst": 49,
+    "energy": 26,
+    "warmth": 92
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 58800,
+   "person": 1131,
+   "name": "Kai",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": false,
+   "top": [
+    {
+     "key": "socialize:1108:chat",
+     "util": 90
+    },
+    {
+     "key": "gather:969",
+     "util": 49.7
+    },
+    {
+     "key": "gather:970",
+     "util": 49.3
+    }
+   ],
+   "needs": {
+    "hunger": 21,
+    "thirst": 57,
+    "energy": 18,
+    "warmth": 84
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 58800,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "a wolf about",
+   "offered": false,
+   "top": [
+    {
+     "key": "sleep:2883",
+     "util": 61.7
+    },
+    {
+     "key": "sleep:2038",
+     "util": 50.7
+    },
+    {
+     "key": "attend:21558",
+     "util": 43.3
+    }
+   ],
+   "needs": {
+    "hunger": 75,
+    "thirst": 94,
+    "energy": 26,
+    "warmth": 88
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 59400,
+   "person": 1131,
+   "name": "Kai",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "hunger comes first",
+   "offered": false,
+   "top": [
+    {
+     "key": "gather:991",
+     "util": 67.9
+    },
+    {
+     "key": "gather:938",
+     "util": 68
+    },
+    {
+     "key": "gather:939",
+     "util": 67.1
+    }
+   ],
+   "needs": {
+    "hunger": 3,
+    "thirst": 33,
+    "energy": 0,
+    "warmth": 48
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  },
+  {
+   "tick": 59400,
+   "person": 1145,
+   "name": "Jax",
+   "makes": "planks",
+   "step": "collect planks for planks",
+   "stepKey": "collect:10853:planks",
+   "blocked": "",
+   "offered": true,
+   "servingUtil": 4.341116996960232,
+   "top": [
+    {
+     "key": "gather:1101",
+     "util": 40.6
+    },
+    {
+     "key": "shelter:2883",
+     "util": 22
+    },
+    {
+     "key": "gather:1092",
+     "util": 35.1
+    }
+   ],
+   "needs": {
+    "hunger": 65,
+    "thirst": 79,
+    "energy": 94,
+    "warmth": 84
+   },
+   "knowsStone": true,
+   "knowsWood": true
+  }
+ ],
+ "plans": [
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 1 wood and 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 13320
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 0,
+   "until": 4800,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 13080
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 115,
+   "until": 4915,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 19680
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 16080
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 10680
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 13080
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "done",
+   "reason": "made the pick",
+   "step": "",
+   "project": false,
+   "lastSeen": 17640
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12840
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 15360
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22680
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 22560
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 10800
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12240
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12480
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 0,
+   "until": 4800,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 17040
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 1958,
+   "until": 6758,
+   "status": "done",
+   "reason": "put 6 units of food by; the store holds 8",
+   "step": "",
+   "project": false,
+   "lastSeen": 13080
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 2271,
+   "until": 7071,
+   "status": "dropped",
+   "reason": "the store came to hold 9 without their doing",
+   "step": "",
+   "project": false,
+   "lastSeen": 17640
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 2439,
+   "until": 9639,
+   "status": "dropped",
+   "reason": "carried 12 to the hut, but it still wants building and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 10680
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 2407,
+   "until": 9607,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 9 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12840
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's lean-to built",
+   "since": 2609,
+   "until": 9809,
+   "status": "dropped",
+   "reason": "the site they were fetching for is no longer one they know of",
+   "step": "",
+   "project": false,
+   "lastSeen": 10800
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 2675,
+   "until": 9875,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 4 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12480
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 2766,
+   "until": 9966,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 2 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 12240
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 2903,
+   "until": 7703,
+   "status": "done",
+   "reason": "put 6 units of food by; the store holds 6",
+   "step": "",
+   "project": false,
+   "lastSeen": 10800
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 3032,
+   "until": 10232,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 12 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 13080
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 3258,
+   "until": 8058,
+   "status": "done",
+   "reason": "put 9 units of food by; the store holds 9",
+   "step": "",
+   "project": false,
+   "lastSeen": 12840
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 3398,
+   "until": 10598,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 12 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 13080
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 4319,
+   "until": 11519,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 4295,
+   "until": 9095,
+   "status": "done",
+   "reason": "put 9 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 12480
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 4567,
+   "until": 9367,
+   "status": "done",
+   "reason": "put 9 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 21120
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 4783,
+   "until": 11983,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 22560
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 4809,
+   "until": 9609,
+   "status": "dropped",
+   "reason": "put 2 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 4802,
+   "until": 9602,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 16080
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 4805,
+   "until": 12005,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 9 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 4931,
+   "until": 9731,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 19680
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 4973,
+   "until": 9773,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 12840
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 4972,
+   "until": 9772,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 2 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 15360
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 5148,
+   "until": 9948,
+   "status": "dropped",
+   "reason": "put 2 units by, but the store is at 2 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 22680
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 5074,
+   "until": 9874,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 20400
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 5048,
+   "until": 9848,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 12960
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 6537,
+   "until": 11337,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 wood and 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 17640
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 7152,
+   "until": 11952,
+   "status": "dropped",
+   "reason": "put 7 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 7152,
+   "until": 11952,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22560
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 7201,
+   "until": 12001,
+   "status": "dropped",
+   "reason": "had the makings for the basket but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 21840
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 7405,
+   "until": 12205,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 7425,
+   "until": 12225,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 21120
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 7543,
+   "until": 12343,
+   "status": "dropped",
+   "reason": "never got round to the basket (still short 2 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 21960
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 7661,
+   "until": 12461,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 19560
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 7737,
+   "until": 12537,
+   "status": "done",
+   "reason": "made the spear",
+   "step": "",
+   "project": false,
+   "lastSeen": 17040
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 7893,
+   "until": 12693,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 2 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 21480
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 7998,
+   "until": 12798,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 3 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 20160
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 7953,
+   "until": 12753,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 24240
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 8377,
+   "until": 13177,
+   "status": "dropped",
+   "reason": "put 2 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 15240
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 9388,
+   "until": 14188,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 20400
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 9672,
+   "until": 14472,
+   "status": "dropped",
+   "reason": "never got to the roof (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22080
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 9606,
+   "until": 14406,
+   "status": "dropped",
+   "reason": "had the makings for the basket but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 16080
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 9743,
+   "until": 14543,
+   "status": "dropped",
+   "reason": "never got round to the basket (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 25080
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 9817,
+   "until": 14617,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22440
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 9861,
+   "until": 14661,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 17280
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 10173,
+   "until": 14973,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 22680
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 10372,
+   "until": 15172,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 17280
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 11553,
+   "until": 16353,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 17640
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 11942,
+   "until": 16742,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22440
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 12088,
+   "until": 16888,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 21840
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 12141,
+   "until": 16941,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 20160
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 12277,
+   "until": 17077,
+   "status": "dropped",
+   "reason": "had the makings for the basket but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 25200
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 12318,
+   "until": 17118,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 2 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 21120
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 12427,
+   "until": 19200,
+   "status": "dropped",
+   "reason": "put 6 units by, but the store is at 3 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 34440
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 12459,
+   "until": 17259,
+   "status": "dropped",
+   "reason": "put 5 units by, but the store is at 5 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 21960
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 12695,
+   "until": 17495,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 19560
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 12828,
+   "until": 17628,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 21480
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 13075,
+   "until": 17875,
+   "status": "dropped",
+   "reason": "had the makings for the spear but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 24240
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 14293,
+   "until": 21493,
+   "status": "dropped",
+   "reason": "carried 6 to the hut, but it still wants 3 stone and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 26640
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 14495,
+   "until": 19295,
+   "status": "done",
+   "reason": "put 4 units of food by; the store holds 4",
+   "step": "",
+   "project": false,
+   "lastSeen": 23400
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 14751,
+   "until": 19551,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 25680
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 14705,
+   "until": 19505,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 6 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22680
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 14707,
+   "until": 19507,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 3 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 22440
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 14840,
+   "until": 19640,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 26280
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 14792,
+   "until": 19592,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 25080
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 14815,
+   "until": 19615,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 31200
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 14844,
+   "until": 19644,
+   "status": "dropped",
+   "reason": "put 16 units by, but the store is at 7 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 32040
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 15250,
+   "until": 20050,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 6 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 26280
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 16474,
+   "until": 21274,
+   "status": "dropped",
+   "reason": "had the makings for the hammer but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 26760
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 16769,
+   "until": 21569,
+   "status": "done",
+   "reason": "put 18 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 34560
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 16786,
+   "until": 21586,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 22440
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 16901,
+   "until": 21701,
+   "status": "dropped",
+   "reason": "someone else saw to the roof first",
+   "step": "",
+   "project": false,
+   "lastSeen": 30840
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 17015,
+   "until": 21815,
+   "status": "done",
+   "reason": "put 7 units of food by; the store holds 9",
+   "step": "",
+   "project": false,
+   "lastSeen": 28080
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 17134,
+   "until": 21934,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 28560
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 17069,
+   "until": 21869,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 28560
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 17174,
+   "until": 21974,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 23400
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 17510,
+   "until": 22310,
+   "status": "dropped",
+   "reason": "had the makings for the spear but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 36840
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 17547,
+   "until": 22347,
+   "status": "dropped",
+   "reason": "put the household home ahead of the unfinished tool; released its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 30840
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 17772,
+   "until": 22572,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 29520
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 18528,
+   "until": 23328,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 8 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 37080
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 19433,
+   "until": 24233,
+   "status": "done",
+   "reason": "made the axe",
+   "step": "",
+   "project": false,
+   "lastSeen": 28080
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 19358,
+   "until": 24158,
+   "status": "done",
+   "reason": "put 6 units of food by; the store holds 6",
+   "step": "",
+   "project": false,
+   "lastSeen": 33840
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 19530,
+   "until": 24330,
+   "status": "done",
+   "reason": "made the axe",
+   "step": "",
+   "project": false,
+   "lastSeen": 28080
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 19550,
+   "until": 26750,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 31200
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 19669,
+   "until": 26869,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 2 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 25080
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 19763,
+   "until": 24563,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 31200
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 19695,
+   "until": 24495,
+   "status": "dropped",
+   "reason": "put 2 units by, but the store is at 0 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 30720
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 19905,
+   "until": 24705,
+   "status": "done",
+   "reason": "put 4 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 28560
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 19978,
+   "until": 24778,
+   "status": "dropped",
+   "reason": "put 6 units by, but the store is at 0 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 41640
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 19969,
+   "until": 24769,
+   "status": "done",
+   "reason": "put 7 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 29520
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 20498,
+   "until": 25298,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 28560
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 21025,
+   "until": 28225,
+   "status": "dropped",
+   "reason": "carried 1 to the hut, but it still wants 1 stone and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 34560
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 21177,
+   "until": 28377,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 2 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 34440
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 21538,
+   "until": 26338,
+   "status": "done",
+   "reason": "put 4 units of food by; the store holds 8",
+   "step": "",
+   "project": false,
+   "lastSeen": 28080
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 21554,
+   "until": 26354,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 2 of 4 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 32040
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 21685,
+   "until": 26485,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 36960
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 21740,
+   "until": 26540,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 30840
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 21915,
+   "until": 26715,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 36360
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 21881,
+   "until": 26681,
+   "status": "dropped",
+   "reason": "never got round to the spear (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 29520
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 22060,
+   "until": 26860,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 31200
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 21983,
+   "until": 26783,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39360
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 22417,
+   "until": 27217,
+   "status": "done",
+   "reason": "made the axe",
+   "step": "",
+   "project": false,
+   "lastSeen": 34080
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 22475,
+   "until": 27275,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 36840
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 22681,
+   "until": 27481,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 33360
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 22808,
+   "until": 27608,
+   "status": "done",
+   "reason": "put 4 units of food by; the store holds 8",
+   "step": "",
+   "project": false,
+   "lastSeen": 34080
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 24049,
+   "until": 28849,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 33840
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 24053,
+   "until": 28853,
+   "status": "dropped",
+   "reason": "put 12 units by, but the store is at 6 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 39240
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 24647,
+   "until": 29447,
+   "status": "dropped",
+   "reason": "put 8 units by, but the store is at 5 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 41880
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 24830,
+   "until": 29630,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 41640
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 24880,
+   "until": 29680,
+   "status": "dropped",
+   "reason": "never got round to the basket (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39480
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 25221,
+   "until": 30021,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 2 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 40920
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 25928,
+   "until": 30728,
+   "status": "done",
+   "reason": "put 11 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 37080
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 26290,
+   "until": 31090,
+   "status": "done",
+   "reason": "made the pick",
+   "step": "",
+   "project": false,
+   "lastSeen": 34080
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 26429,
+   "until": 31229,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 37200
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 26478,
+   "until": 31278,
+   "status": "done",
+   "reason": "put 5 units of food by; the store holds 13",
+   "step": "",
+   "project": false,
+   "lastSeen": 48360
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 26661,
+   "until": 31461,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 36960
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 26669,
+   "until": 31469,
+   "status": "done",
+   "reason": "mended it themselves (put back 56 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 32040
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 27017,
+   "until": 34217,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 40320
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 27174,
+   "until": 31974,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 41880
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 27429,
+   "until": 32229,
+   "status": "done",
+   "reason": "made the spear",
+   "step": "",
+   "project": false,
+   "lastSeen": 37320
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 27470,
+   "until": 32270,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 46440
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 10 planks through at the timber yard for the site",
+   "since": 27482,
+   "until": 34682,
+   "status": "dropped",
+   "reason": "the time is up (was going to work on planks for planks)",
+   "step": "",
+   "project": true,
+   "lastSeen": 37200
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 27598,
+   "until": 32398,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39000
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 28101,
+   "until": 32901,
+   "status": "done",
+   "reason": "put 11 units of food by; the store holds 10",
+   "step": "",
+   "project": false,
+   "lastSeen": 41640
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 28160,
+   "until": 32960,
+   "status": "dropped",
+   "reason": "never got round to the spear (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 37080
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 28276,
+   "until": 33076,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 45240
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 28408,
+   "until": 33208,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 3 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39360
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 28693,
+   "until": 33493,
+   "status": "dropped",
+   "reason": "put 5 units by, but the store is at 2 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 28711,
+   "until": 33511,
+   "status": "done",
+   "reason": "put 5 units of food by; the store holds 8",
+   "step": "",
+   "project": false,
+   "lastSeen": 47400
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 28800,
+   "until": 33600,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 41880
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 28921,
+   "until": 33721,
+   "status": "dropped",
+   "reason": "the store came to hold 8 without their doing",
+   "step": "",
+   "project": false,
+   "lastSeen": 46800
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 28949,
+   "until": 33749,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39240
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 29122,
+   "until": 33922,
+   "status": "done",
+   "reason": "put 8 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 40680
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 29235,
+   "until": 34035,
+   "status": "done",
+   "reason": "put 6 units of food by; the store holds 4",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 29550,
+   "until": 34350,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 41880
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 29670,
+   "until": 34470,
+   "status": "dropped",
+   "reason": "the store came to hold 9 without their doing",
+   "step": "",
+   "project": false,
+   "lastSeen": 44040
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 29791,
+   "until": 34591,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 48360
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 29894,
+   "until": 34694,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 0 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 39480
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 30728,
+   "until": 35528,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 10 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 46440
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 30847,
+   "until": 35647,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 40320
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 31093,
+   "until": 35893,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 40920
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 31219,
+   "until": 36019,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 8 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 37320
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 31523,
+   "until": 36323,
+   "status": "done",
+   "reason": "made the hammer",
+   "step": "",
+   "project": false,
+   "lastSeen": 47400
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 31546,
+   "until": 36346,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 31952,
+   "until": 36752,
+   "status": "dropped",
+   "reason": "had the makings for the saw but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 46800
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 32998,
+   "until": 37798,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44040
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 33142,
+   "until": 37942,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 45240
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 33256,
+   "until": 38056,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 39000
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 33519,
+   "until": 38319,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 33556,
+   "until": 38356,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 46800
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 33657,
+   "until": 38457,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 33772,
+   "until": 38572,
+   "status": "done",
+   "reason": "put 8 units of food by; the store holds 14",
+   "step": "",
+   "project": false,
+   "lastSeen": 51240
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 33830,
+   "until": 38630,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 54000
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 33869,
+   "until": 38669,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 33990,
+   "until": 38790,
+   "status": "dropped",
+   "reason": "put 11 units by, but the store is at 6 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 47400
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 34399,
+   "until": 39199,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 41880
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 34620,
+   "until": 39420,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 35217,
+   "until": 42417,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 50640
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 35244,
+   "until": 40044,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 35366,
+   "until": 40166,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44400
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 35670,
+   "until": 40470,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 45120
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 35999,
+   "until": 40799,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 2 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 51480
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 36144,
+   "until": 43344,
+   "status": "done",
+   "reason": "the household has a hut, and they carried 1 of its materials",
+   "step": "",
+   "project": false,
+   "lastSeen": 42600
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "shelter",
+   "makes": "",
+   "goal": "get the household's hut built",
+   "since": 36275,
+   "until": 43475,
+   "status": "dropped",
+   "reason": "the household got a hut without their carrying anything to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 46440
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 36241,
+   "until": 41041,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 36804,
+   "until": 41604,
+   "status": "done",
+   "reason": "made the hoe",
+   "step": "",
+   "project": false,
+   "lastSeen": 53880
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 36850,
+   "until": 41650,
+   "status": "done",
+   "reason": "put 9 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 50640
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 36900,
+   "until": 41700,
+   "status": "dropped",
+   "reason": "never got round to the basket (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48360
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 37183,
+   "until": 41983,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 51240
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 37293,
+   "until": 42093,
+   "status": "dropped",
+   "reason": "the store came to hold 12 without their doing",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 37373,
+   "until": 42173,
+   "status": "done",
+   "reason": "put 3 units of food by; the store holds 12",
+   "step": "",
+   "project": false,
+   "lastSeen": 51240
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 38089,
+   "until": 42889,
+   "status": "dropped",
+   "reason": "the store came to hold 8 without their doing",
+   "step": "",
+   "project": false,
+   "lastSeen": 51480
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 38166,
+   "until": 42966,
+   "status": "done",
+   "reason": "mended it themselves (put back 28 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48960
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 38211,
+   "until": 43011,
+   "status": "done",
+   "reason": "mended it themselves (put back 56 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 57840
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 38281,
+   "until": 43081,
+   "status": "done",
+   "reason": "put 8 units of food by; the store holds 8",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 38658,
+   "until": 43458,
+   "status": "dropped",
+   "reason": "put 16 units by, but the store is at 9 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 15 planks through at the timber yard for the site",
+   "since": 38702,
+   "until": 45902,
+   "status": "dropped",
+   "reason": "the time is up (was going to collect planks for planks)",
+   "step": "",
+   "project": true,
+   "lastSeen": 54000
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 38819,
+   "until": 43619,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 wood and 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 38987,
+   "until": 43787,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 48960
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 39170,
+   "until": 43970,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 39345,
+   "until": 44145,
+   "status": "dropped",
+   "reason": "never got round to the basket (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 50640
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 39302,
+   "until": 44102,
+   "status": "done",
+   "reason": "put 7 units of food by; the store holds 9",
+   "step": "",
+   "project": false,
+   "lastSeen": 46800
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 39251,
+   "until": 44051,
+   "status": "done",
+   "reason": "put 4 units of food by; the store holds 9",
+   "step": "",
+   "project": false,
+   "lastSeen": 44160
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 39491,
+   "until": 44291,
+   "status": "dropped",
+   "reason": "put 6 units by, but the store is at 5 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 55080
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 39505,
+   "until": 44305,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 48840
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 39628,
+   "until": 44428,
+   "status": "dropped",
+   "reason": "never got round to the spear (still short 1 wood and 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 53520
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 40247,
+   "until": 45047,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 51240
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 40220,
+   "until": 45020,
+   "status": "done",
+   "reason": "made the hammer",
+   "step": "",
+   "project": false,
+   "lastSeen": 51480
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 14 planks through at the timber yard for the site",
+   "since": 40210,
+   "until": 47410,
+   "status": "dropped",
+   "reason": "the time is up (was going to collect planks for planks)",
+   "step": "",
+   "project": true,
+   "lastSeen": 50400
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 40533,
+   "until": 45333,
+   "status": "dropped",
+   "reason": "put 5 units by, but the store is at 1 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 50400
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 40735,
+   "until": 45535,
+   "status": "done",
+   "reason": "put 12 units of food by; the store holds 13",
+   "step": "",
+   "project": false,
+   "lastSeen": 53760
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 40701,
+   "until": 45501,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 1 of 4 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 50280
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 40683,
+   "until": 45483,
+   "status": "dropped",
+   "reason": "put 8 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 54000
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 40920,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "put 5 units by, but the store is at 10 of 20 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 53880
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 40944,
+   "until": 45744,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 51480
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 41789,
+   "until": 46589,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 53760
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 41859,
+   "until": 46659,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 54360
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 41963,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "put 7 units by, but the store is at 10 of 20 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 51240
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 41946,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "put 2 units by, but the store is at 1 of 20 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 42570,
+   "until": 47370,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 3 of 4 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 57840
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 42504,
+   "until": 47304,
+   "status": "dropped",
+   "reason": "put 5 units by, but the store is at 1 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 54000
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 42529,
+   "until": 47329,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 1 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 43494,
+   "until": 48294,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 43899,
+   "until": 48699,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56520
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 16 units of food by for the household",
+   "since": 43832,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "put 6 units by, but the store is at 5 of 16 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 56400
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 43973,
+   "until": 48773,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 2 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 51480
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 44176,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 1 of 20 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 44494,
+   "until": 49294,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 44907,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 10 of 20)",
+   "step": "",
+   "project": false,
+   "lastSeen": 50640
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 45096,
+   "until": 49896,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 53760
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 45138,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 1 of 20)",
+   "step": "",
+   "project": false,
+   "lastSeen": 53520
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 45487,
+   "until": 50287,
+   "status": "dropped",
+   "reason": "never got round to the spear (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56280
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 45718,
+   "until": 50518,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 20 units of food by for the household",
+   "since": 45843,
+   "until": 48000,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 1 of 20)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 46000,
+   "until": 50800,
+   "status": "dropped",
+   "reason": "had the makings for the saw but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 46694,
+   "until": 51494,
+   "status": "dropped",
+   "reason": "put 3 units by, but the store is at 2 of 8 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 47509,
+   "until": 52309,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 wood)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 47622,
+   "until": 52422,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 47988,
+   "until": 52788,
+   "status": "done",
+   "reason": "put 5 units of food by; the store holds 5",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 10 planks through at the timber yard for the site",
+   "since": 48100,
+   "until": 55300,
+   "status": "dropped",
+   "reason": "gave it up after 3 tries: nothing there to take",
+   "step": "collect planks for planks",
+   "project": true,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 48026,
+   "until": 52826,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 48087,
+   "until": 52887,
+   "status": "done",
+   "reason": "made the basket",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 48089,
+   "until": 52889,
+   "status": "done",
+   "reason": "made the saw",
+   "step": "",
+   "project": false,
+   "lastSeen": 56400
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 48129,
+   "until": 52929,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 48142,
+   "until": 52942,
+   "status": "done",
+   "reason": "made the axe",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 48194,
+   "until": 52994,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "tool",
+   "makes": "basket",
+   "goal": "make a basket",
+   "since": 48198,
+   "until": 52998,
+   "status": "dropped",
+   "reason": "had the makings for the basket but never sat down to it",
+   "step": "",
+   "project": false,
+   "lastSeen": 54000
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 48317,
+   "until": 53117,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 48327,
+   "until": 53127,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56040
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 48548,
+   "until": 53348,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 48800,
+   "until": 53600,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 48888,
+   "until": 53688,
+   "status": "dropped",
+   "reason": "never got round to the saw (still short 1 wood and 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56520
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 49839,
+   "until": 54639,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 50201,
+   "until": 55001,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "tool",
+   "makes": "spear",
+   "goal": "make a spear",
+   "since": 50290,
+   "until": 55090,
+   "status": "dropped",
+   "reason": "never got round to the spear (still short 2 wood and 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 50302,
+   "until": 55102,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 56280
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 50424,
+   "until": 55224,
+   "status": "dropped",
+   "reason": "put 7 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 50844,
+   "until": 55644,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58560
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 50930,
+   "until": 55730,
+   "status": "dropped",
+   "reason": "put 6 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 51143,
+   "until": 55943,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "tool",
+   "makes": "pick",
+   "goal": "make a pick",
+   "since": 51442,
+   "until": 56242,
+   "status": "dropped",
+   "reason": "never got round to the pick (still short 2 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 52102,
+   "until": 56902,
+   "status": "dropped",
+   "reason": "never got round to the hoe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 52856,
+   "until": 57656,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 52867,
+   "until": 57667,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1137,
+   "name": "Ivy",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 53021,
+   "until": 57821,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 58200
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 53113,
+   "until": 57913,
+   "status": "dropped",
+   "reason": "put 1 unit by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 53134,
+   "until": 57934,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1149,
+   "name": "Lena",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 53369,
+   "until": 58169,
+   "status": "dropped",
+   "reason": "never got round to the axe (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 53457,
+   "until": 58257,
+   "status": "dropped",
+   "reason": "put 4 units by, but the store is at 0 of 12 and the time is up",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 53714,
+   "until": 58514,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 8)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 53754,
+   "until": 58554,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 53876,
+   "until": 58676,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 12)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 53933,
+   "until": 58733,
+   "status": "dropped",
+   "reason": "never got any food put by (the store is at 0 of 4)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1106,
+   "name": "Mira",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 55093,
+   "until": 59893,
+   "status": "dropped",
+   "reason": "had what it needed but never got to the roof",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1144,
+   "name": "Alma",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 55125,
+   "until": 59925,
+   "status": "dropped",
+   "reason": "never got round to the hammer (still short 1 stone)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1121,
+   "name": "Ivo",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 55239,
+   "until": 60039,
+   "status": "dropped",
+   "reason": "someone else saw to the roof first",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1128,
+   "name": "Tomas",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 4 units of food by for the household",
+   "since": 55270,
+   "until": 60070,
+   "status": "active",
+   "reason": "taken up again",
+   "step": "gather food to put by (4 more)",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1119,
+   "name": "Cora",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 55739,
+   "until": 60539,
+   "status": "active",
+   "reason": "set aside: a wolf about",
+   "step": "get 1 wood to mend the lean-to",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1112,
+   "name": "Ben",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 55806,
+   "until": 60606,
+   "status": "active",
+   "reason": "taken up again",
+   "step": "mend the lean-to",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1107,
+   "name": "Emre",
+   "kind": "tool",
+   "makes": "hoe",
+   "goal": "make a hoe",
+   "since": 56987,
+   "until": 61787,
+   "status": "active",
+   "reason": "set aside: energy comes first",
+   "step": "get 1 more stone for the hoe",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 8 planks through at the timber yard for the site",
+   "since": 57050,
+   "until": 64250,
+   "status": "active",
+   "reason": "taken up again",
+   "step": "collect planks for planks",
+   "project": true,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 57677,
+   "until": 62477,
+   "status": "done",
+   "reason": "mended it themselves (put back 56 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1120,
+   "name": "Abel",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 57755,
+   "until": 62555,
+   "status": "done",
+   "reason": "mended it themselves (put back 56 of its condition)",
+   "step": "",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1113,
+   "name": "Zia",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 57923,
+   "until": 62723,
+   "status": "active",
+   "reason": "it would make the work easier, and the makings are short",
+   "step": "get 2 more wood for the saw",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1132,
+   "name": "Petra",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 57910,
+   "until": 62710,
+   "status": "active",
+   "reason": "set aside: hunger comes first",
+   "step": "gather food to put by (8 more)",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1150,
+   "name": "Arlo",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 8 units of food by for the household",
+   "since": 57856,
+   "until": 62656,
+   "status": "active",
+   "reason": "set aside: energy comes first",
+   "step": "gather food to put by (8 more)",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1142,
+   "name": "Talia",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 57963,
+   "until": 62763,
+   "status": "active",
+   "reason": "set aside: hunger comes first",
+   "step": "gather food to put by (12 more)",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1125,
+   "name": "Ines",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 58525,
+   "until": 63325,
+   "status": "active",
+   "reason": "it would make the work easier, and the makings are short",
+   "step": "get 2 more stone for the saw",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1131,
+   "name": "Kai",
+   "kind": "batch",
+   "makes": "planks",
+   "goal": "see 8 planks through at the timber yard for the site",
+   "since": 58599,
+   "until": 65799,
+   "status": "active",
+   "reason": "set aside: energy comes first",
+   "step": "collect planks for planks",
+   "project": true,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1135,
+   "name": "Cole",
+   "kind": "tool",
+   "makes": "hammer",
+   "goal": "make a hammer",
+   "since": 58726,
+   "until": 63526,
+   "status": "active",
+   "reason": "it would make the work easier, and the makings are short",
+   "step": "get 2 more stone for the hammer",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1138,
+   "name": "Basil",
+   "kind": "repair",
+   "makes": "",
+   "goal": "get the roof sound again",
+   "since": 59355,
+   "until": 64155,
+   "status": "active",
+   "reason": "the roof is going and there is nothing to mend it with",
+   "step": "get 1 wood to mend the lean-to",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1116,
+   "name": "Milo",
+   "kind": "tool",
+   "makes": "saw",
+   "goal": "make a saw",
+   "since": 59652,
+   "until": 64452,
+   "status": "active",
+   "reason": "it would make the work easier, and the makings are short",
+   "step": "get 1 more wood for the saw",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1134,
+   "name": "Yan",
+   "kind": "tool",
+   "makes": "axe",
+   "goal": "make an axe",
+   "since": 59931,
+   "until": 64731,
+   "status": "active",
+   "reason": "it would make the work easier, and the makings are short",
+   "step": "get 1 more stone for the axe",
+   "project": false,
+   "lastSeen": 60000
+  },
+  {
+   "person": 1145,
+   "name": "Jax",
+   "kind": "stock",
+   "makes": "",
+   "goal": "put 12 units of food by for the household",
+   "since": 59921,
+   "until": 64721,
+   "status": "active",
+   "reason": "went hungry lately and there is next to nothing at home",
+   "step": "gather food to put by (12 more)",
+   "project": false,
+   "lastSeen": 60000
+  }
+ ],
+ "planSummary": {
+  "tool:hoe:dropped": 11,
+  "tool:pick:dropped": 16,
+  "tool:hoe:done": 6,
+  "tool:pick:done": 2,
+  "stock:-:done": 27,
+  "stock:-:dropped": 94,
+  "shelter:-:dropped": 10,
+  "shelter:-:done": 9,
+  "tool:basket:done": 11,
+  "tool:hammer:dropped": 11,
+  "tool:basket:dropped": 9,
+  "tool:saw:dropped": 21,
+  "tool:axe:dropped": 8,
+  "tool:spear:done": 2,
+  "repair:-:dropped": 4,
+  "repair:-:done": 11,
+  "tool:spear:dropped": 7,
+  "tool:saw:done": 7,
+  "tool:axe:done": 4,
+  "batch:planks:dropped": 4,
+  "tool:hammer:done": 2,
+  "stock:-:active": 5,
+  "repair:-:active": 3,
+  "tool:hoe:active": 1,
+  "batch:planks:active": 2,
+  "tool:saw:active": 3,
+  "tool:hammer:active": 1,
+  "tool:axe:active": 1
+ },
+ "planReasons": {
+  "tool:hoe -> never got round to the hoe (still short # stone)": 9,
+  "tool:pick -> never got round to the pick (still short # wood and # stone)": 1,
+  "tool:hoe -> made the hoe": 6,
+  "tool:hoe -> put the household home ahead of the unfinished tool; released its materials": 2,
+  "tool:pick -> never got round to the pick (still short # stone)": 8,
+  "tool:pick -> put the household home ahead of the unfinished tool; released its materials": 7,
+  "tool:pick -> made the pick": 2,
+  "stock:- -> put # units of food by; the store holds #": 27,
+  "stock:- -> the store came to hold # without their doing": 5,
+  "shelter:- -> carried # to the hut, but it still wants building and the time is up": 1,
+  "shelter:- -> the household has a hut, and they carried # of its materials": 9,
+  "shelter:- -> the site they were fetching for is no longer one they know of": 1,
+  "shelter:- -> the household got a hut without their carrying anything to it": 6,
+  "stock:- -> put # units by, but the store is at # of # and the time is up": 38,
+  "stock:- -> never got any food put by (the store is at # of #)": 50,
+  "tool:basket -> made the basket": 11,
+  "tool:hammer -> never got round to the hammer (still short # wood and # stone)": 1,
+  "tool:basket -> had the makings for the basket but never sat down to it": 4,
+  "tool:saw -> never got round to the saw (still short # stone)": 15,
+  "tool:basket -> never got round to the basket (still short # wood)": 5,
+  "tool:axe -> never got round to the axe (still short # stone)": 8,
+  "tool:spear -> made the spear": 2,
+  "repair:- -> never got to the roof (still short # wood)": 1,
+  "repair:- -> mended it themselves (put back # of its condition)": 11,
+  "tool:spear -> had the makings for the spear but never sat down to it": 2,
+  "shelter:- -> carried # to the hut, but it still wants # stone and the time is up": 2,
+  "tool:hammer -> had the makings for the hammer but never sat down to it": 1,
+  "tool:saw -> made the saw": 7,
+  "repair:- -> someone else saw to the roof first": 2,
+  "tool:axe -> made the axe": 4,
+  "tool:spear -> never got round to the spear (still short # stone)": 2,
+  "batch:planks -> the time is up (was going to work on planks for planks)": 1,
+  "tool:hammer -> never got round to the hammer (still short # stone)": 9,
+  "tool:hammer -> made the hammer": 2,
+  "tool:saw -> had the makings for the saw but never sat down to it": 2,
+  "tool:saw -> never got round to the saw (still short # wood)": 2,
+  "batch:planks -> the time is up (was going to collect planks for planks)": 2,
+  "tool:saw -> never got round to the saw (still short # wood and # stone)": 2,
+  "tool:spear -> never got round to the spear (still short # wood and # stone)": 2,
+  "tool:spear -> never got round to the spear (still short # wood)": 1,
+  "batch:planks -> gave it up after # tries: nothing there to take": 1,
+  "stock:- -> put # unit by, but the store is at # of # and the time is up": 1,
+  "repair:- -> had what it needed but never got to the roof": 1
+ }
+}

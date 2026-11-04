@@ -1,0 +1,15 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-survival-baseline-metrics",
+  "head": "61cb6e5139adbedfd52f463fc635a90d4172327b",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/survival_ensemble.ts",
+      "kind": "untracked",
+      "sha256": "d355e75ce520815cd10811de555c14566c260f49e7718c6d3d64b4e7a310cb66",
+      "bytes": 4275,
+      "archiveObject": "objects/d3/d355e75ce520815cd10811de555c14566c260f49e7718c6d3d64b4e7a310cb66.gz"
+    }
+  ],
+  "stagedFiles": []
+}

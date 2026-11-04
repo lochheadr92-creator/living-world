@@ -1,0 +1,271 @@
+{
+  "version": 12,
+  "time": {
+    "tick": 700,
+    "day": 1,
+    "clock": "14:12",
+    "phase": "afternoon",
+    "light": "daylight",
+    "weather": "Clear",
+    "tempC": 16
+  },
+  "self": {
+    "name": "Ada",
+    "sex": "f",
+    "stage": "adult",
+    "ageYears": 30,
+    "character": "balanced",
+    "skills": {
+      "forage": 1.03,
+      "fish": 1.23,
+      "wood": 1.8,
+      "stone": 1.23,
+      "build": 0.91,
+      "farm": 0.96,
+      "craft": 1.2,
+      "carpentry": 1.11,
+      "kiln": 1.18,
+      "smith": 1.31,
+      "bake": 0.94
+    },
+    "health": 100,
+    "needs": {
+      "hunger": {
+        "value": 100,
+        "state": "ok"
+      },
+      "thirst": {
+        "value": 100,
+        "state": "ok"
+      },
+      "energy": {
+        "value": 100,
+        "state": "ok"
+      },
+      "warmth": {
+        "value": 100,
+        "state": "ok"
+      },
+      "safety": {
+        "value": 100,
+        "state": "ok"
+      },
+      "social": {
+        "value": 70,
+        "state": "ok"
+      }
+    },
+    "aspiration": null,
+    "carrying": {
+      "wood": 2
+    },
+    "load": {
+      "used": 4,
+      "cap": 12
+    },
+    "spokenFor": {
+      "wood": 2,
+      "stone": 1
+    },
+    "available": {},
+    "tools": [],
+    "pullingCart": false,
+    "position": {
+      "x": 40.5,
+      "y": 40.5
+    },
+    "trade": null,
+    "techniques": [
+      "charcoal firing"
+    ]
+  },
+  "household": {
+    "name": "Sedge",
+    "members": [],
+    "home": "lean-to 3 tiles north (100% sound when last seen)",
+    "partner": null,
+    "parents": [],
+    "children": []
+  },
+  "doing": {
+    "activity": null,
+    "suspended": null,
+    "conversation": null,
+    "lastResult": null,
+    "lastInteraction": null,
+    "lastChoice": null
+  },
+  "seen": {
+    "people": [],
+    "wolves": []
+  },
+  "remembered": {
+    "places": [
+      {
+        "id": 6,
+        "what": "lean-to",
+        "x": 38.5,
+        "y": 38.5,
+        "distance": 3,
+        "direction": "north",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "owner": "Sedge",
+        "items": {
+          "berries": 8
+        },
+        "condition": 100
+      },
+      {
+        "id": 7,
+        "what": "storehouse",
+        "x": 51,
+        "y": 41,
+        "distance": 11,
+        "direction": "south-east",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "items": {
+          "stone": 4
+        },
+        "condition": 100
+      },
+      {
+        "id": 8,
+        "what": "tree",
+        "x": 60.5,
+        "y": 44.5,
+        "distance": 20,
+        "direction": "south-east",
+        "seen": "7 world h ago",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      },
+      {
+        "id": 9,
+        "what": "tree",
+        "x": 62.5,
+        "y": 44.5,
+        "distance": 22,
+        "direction": "south-east",
+        "seen": "7 world h ago",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      },
+      {
+        "id": 10,
+        "what": "tree",
+        "x": 64.5,
+        "y": 44.5,
+        "distance": 24,
+        "direction": "south-east",
+        "seen": "7 world h ago",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      }
+    ],
+    "water": [],
+    "dangers": [],
+    "counts": {
+      "building": 2,
+      "tree": 3
+    }
+  },
+  "people": {
+    "relations": [],
+    "whereabouts": [],
+    "worries": [],
+    "requests": [],
+    "promises": []
+  },
+  "recent": {
+    "memory": [
+      {
+        "when": "just now",
+        "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+        "kind": "work",
+        "t": 700
+      }
+    ],
+    "failures": []
+  },
+  "options": [
+    {
+      "key": "collect:7:stone",
+      "kind": "withdraw",
+      "label": "Collect 1 stone from the storehouse",
+      "goal": "to make an axe",
+      "need": null,
+      "eta": "1 world h 17 min",
+      "target": "storehouse 11 tiles south-east (seen just now)"
+    },
+    {
+      "key": "explore",
+      "kind": "explore",
+      "label": "Explore somewhere new",
+      "goal": "to look for food sources",
+      "need": null,
+      "eta": "2 world h 38 min",
+      "target": null
+    },
+    {
+      "key": "gather:8",
+      "kind": "gather",
+      "label": "Chopping wood to make an axe",
+      "goal": "to make an axe",
+      "need": null,
+      "eta": "2 world h 55 min",
+      "target": "tree 20 tiles south-east (seen 7 world h ago)"
+    },
+    {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Potter about near home",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    {
+      "key": "gather:9",
+      "kind": "gather",
+      "label": "Chopping wood to make an axe",
+      "goal": "to make an axe",
+      "need": null,
+      "eta": "3 world h 7 min",
+      "target": "tree 22 tiles south-east (seen 7 world h ago)"
+    }
+  ],
+  "setAside": [
+    {
+      "label": "Get stone to make an axe",
+      "reason": "does not know any rock outcrop worth visiting",
+      "target": null
+    },
+    {
+      "label": "Lay out a hut",
+      "reason": "does not know where to break stone",
+      "target": null
+    }
+  ],
+  "plans": [
+    {
+      "goal": "make an axe",
+      "kind": "tool",
+      "status": "active",
+      "step": "get 1 more stone for the axe",
+      "wants": {
+        "wood": 2,
+        "stone": 1
+      },
+      "blocked": "",
+      "reason": "it would make the work easier, and the makings are short",
+      "since": "just now"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+tick 1200: events emitted so far 36; kept 36 (oldest kept 1183 ticks back); chronicle 13; persons 28; logs at the 60 cap 0; longest log reach 1200 ticks
+tick 2400: events emitted so far 49; kept 49 (oldest kept 2383 ticks back); chronicle 15; persons 28; logs at the 60 cap 1; longest log reach 2400 ticks
+tick 3600: events emitted so far 67; kept 67 (oldest kept 3583 ticks back); chronicle 18; persons 28; logs at the 60 cap 24; longest log reach 3600 ticks
+tick 4800: events emitted so far 74; kept 74 (oldest kept 4783 ticks back); chronicle 21; persons 28; logs at the 60 cap 26; longest log reach 4800 ticks
+busiest person Faye: 12 feed events emitted about them over two days, 12 still in the feed, log length 60 (card shows last 14)

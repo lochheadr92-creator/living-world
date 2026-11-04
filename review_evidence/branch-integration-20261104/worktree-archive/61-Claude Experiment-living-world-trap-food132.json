@@ -1,0 +1,148 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-trap-food132",
+  "head": "c75fe2d616c82eee3c3d107df3b9c59ddac58524",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "scripts/browser/nourishment_check.mjs",
+      "kind": "untracked",
+      "sha256": "6eb5812901657f779a2af1d10471c3ebbb32bf49aa3c4bbeffb148a9ffe8bde6",
+      "bytes": 2029,
+      "archiveObject": "objects/6e/6eb5812901657f779a2af1d10471c3ebbb32bf49aa3c4bbeffb148a9ffe8bde6.gz"
+    },
+    {
+      "path": "scripts/browser/nourishment_manual.html",
+      "kind": "untracked",
+      "sha256": "d69feacd9312689a8f0b4871452370c44df898411ceee211a4ca221cd7c63426",
+      "bytes": 3046,
+      "archiveObject": "objects/d6/d69feacd9312689a8f0b4871452370c44df898411ceee211a4ca221cd7c63426.gz"
+    },
+    {
+      "path": "scripts/observers/nourishment.ts",
+      "kind": "untracked",
+      "sha256": "c67e419b77e02756aab25e7a6ee82f313f3900fd80dfb7af5d83a3a27725a2ac",
+      "bytes": 2042,
+      "archiveObject": "objects/c6/c67e419b77e02756aab25e7a6ee82f313f3900fd80dfb7af5d83a3a27725a2ac.gz"
+    },
+    {
+      "path": "scripts/ready_step_observe.ts",
+      "kind": "tracked-change",
+      "sha256": "8199bec00746d911d75dda1cd6e9ba75aaef27ff09b3def6cf870e26a5d8dcf0",
+      "bytes": 7334,
+      "archiveObject": "objects/81/8199bec00746d911d75dda1cd6e9ba75aaef27ff09b3def6cf870e26a5d8dcf0.gz"
+    },
+    {
+      "path": "scripts/survival_compare.mjs",
+      "kind": "untracked",
+      "sha256": "3beb86b77d559e3398f4457414a0951b61f05bedf6335953c1ba1dad98be71cf",
+      "bytes": 5928,
+      "archiveObject": "objects/3b/3beb86b77d559e3398f4457414a0951b61f05bedf6335953c1ba1dad98be71cf.gz"
+    },
+    {
+      "path": "scripts/survival_ensemble.ts",
+      "kind": "tracked-change",
+      "sha256": "5049fe25bde3c12fc6fd59674a600d9d43316f252aa3a6cc8c2709ab46f35bbb",
+      "bytes": 4716,
+      "archiveObject": "objects/50/5049fe25bde3c12fc6fd59674a600d9d43316f252aa3a6cc8c2709ab46f35bbb.gz"
+    },
+    {
+      "path": "scripts/trap_activation_scan.ts",
+      "kind": "untracked",
+      "sha256": "56e34b39e705a7cfa445a4be4ff1ea77ba2032ac6df6be8e9db2f53f96a2b2ed",
+      "bytes": 3042,
+      "archiveObject": "objects/56/56e34b39e705a7cfa445a4be4ff1ea77ba2032ac6df6be8e9db2f53f96a2b2ed.gz"
+    },
+    {
+      "path": "scripts/trap_food_replay.ts",
+      "kind": "untracked",
+      "sha256": "09fe26d952d9f0420d0382741d0a2ef92a5d132c8ebb25e348508fcd18c796bd",
+      "bytes": 4220,
+      "archiveObject": "objects/09/09fe26d952d9f0420d0382741d0a2ef92a5d132c8ebb25e348508fcd18c796bd.gz"
+    },
+    {
+      "path": "src/agent/observe.ts",
+      "kind": "tracked-change",
+      "sha256": "7eacc818ad9ba467feed669415175ad84d348334aa60267baa98329370bdab5c",
+      "bytes": 33509,
+      "archiveObject": "objects/7e/7eacc818ad9ba467feed669415175ad84d348334aa60267baa98329370bdab5c.gz"
+    },
+    {
+      "path": "src/app/save.ts",
+      "kind": "tracked-change",
+      "sha256": "477b906876b685e0a34d2581be7ae09429780382e86c62ce86fa1ae7a4316f49",
+      "bytes": 22820,
+      "archiveObject": "objects/47/477b906876b685e0a34d2581be7ae09429780382e86c62ce86fa1ae7a4316f49.gz"
+    },
+    {
+      "path": "src/sim/act_resource.ts",
+      "kind": "tracked-change",
+      "sha256": "3c173e063fa20500300ed26e94f83653ab92eff1e5d9a2e32097d401eebd369f",
+      "bytes": 40380,
+      "archiveObject": "objects/3c/3c173e063fa20500300ed26e94f83653ab92eff1e5d9a2e32097d401eebd369f.gz"
+    },
+    {
+      "path": "src/sim/inspect.ts",
+      "kind": "tracked-change",
+      "sha256": "826cfb20e38f4d835079a3b10679cac4eb3841e7b947b67e5c5a717902ad763a",
+      "bytes": 51528,
+      "archiveObject": "objects/82/826cfb20e38f4d835079a3b10679cac4eb3841e7b947b67e5c5a717902ad763a.gz"
+    },
+    {
+      "path": "src/sim/meals.ts",
+      "kind": "tracked-change",
+      "sha256": "d9b9536aa59fd77962c931809534e117b3abddc028bd590cdfa3c6cff171fda7",
+      "bytes": 38562,
+      "archiveObject": "objects/d9/d9b9536aa59fd77962c931809534e117b3abddc028bd590cdfa3c6cff171fda7.gz"
+    },
+    {
+      "path": "src/sim/needs.ts",
+      "kind": "tracked-change",
+      "sha256": "51f6aeac8bc866693b846abcf54779e1444141662480f3b255bb3282665fe708",
+      "bytes": 7878,
+      "archiveObject": "objects/51/51f6aeac8bc866693b846abcf54779e1444141662480f3b255bb3282665fe708.gz"
+    },
+    {
+      "path": "src/sim/nourishment.ts",
+      "kind": "untracked",
+      "sha256": "a4a562992f66afb647b8be0fedbc7ea7f72e4607b31976df54fd90368597f441",
+      "bytes": 2860,
+      "archiveObject": "objects/a4/a4a562992f66afb647b8be0fedbc7ea7f72e4607b31976df54fd90368597f441.gz"
+    },
+    {
+      "path": "src/sim/people.ts",
+      "kind": "tracked-change",
+      "sha256": "93a942e92fd02c29675da30a9bf4326f5a6bcb026aa8a901c61c2d8c867decf2",
+      "bytes": 9159,
+      "archiveObject": "objects/93/93a942e92fd02c29675da30a9bf4326f5a6bcb026aa8a901c61c2d8c867decf2.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "94dd205a90b18a5c9e9f7d4af172db4c641b2ecaeade8a6247c2ce8192af1e37",
+      "bytes": 26401,
+      "archiveObject": "objects/94/94dd205a90b18a5c9e9f7d4af172db4c641b2ecaeade8a6247c2ce8192af1e37.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "4ec60e39a99bde6bb0d997f209d1fd9698f4c511015ee96eda2cb33e33bcf198",
+      "bytes": 54854,
+      "archiveObject": "objects/4e/4ec60e39a99bde6bb0d997f209d1fd9698f4c511015ee96eda2cb33e33bcf198.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "47ecb5e0599b7442149cb10ebde76871433f2758fa42a08d8bccf5cbd2f5c713",
+      "bytes": 30950,
+      "archiveObject": "objects/47/47ecb5e0599b7442149cb10ebde76871433f2758fa42a08d8bccf5cbd2f5c713.gz"
+    },
+    {
+      "path": "src/ui/person.ts",
+      "kind": "tracked-change",
+      "sha256": "da42e37ab0658b3ca2ff0f4900038a3e9e0d4d206712c2fd0b162a9e8083aeeb",
+      "bytes": 20227,
+      "archiveObject": "objects/da/da42e37ab0658b3ca2ff0f4900038a3e9e0d4d206712c2fd0b162a9e8083aeeb.gz"
+    }
+  ],
+  "stagedFiles": []
+}

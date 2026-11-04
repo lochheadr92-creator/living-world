@@ -1,0 +1,14 @@
+{
+ "forest": {
+  "tools": 18,
+  "firstProblem": null
+ },
+ "river": {
+  "tools": 14,
+  "firstProblem": null
+ },
+ "meadow": {
+  "tools": 15,
+  "firstProblem": null
+ }
+}

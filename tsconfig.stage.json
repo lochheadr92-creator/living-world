@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "tests", "scripts", "vite.config.ts"],
+  "exclude": ["tests/zz_review_*"]
+}

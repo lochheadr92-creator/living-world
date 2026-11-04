@@ -1,0 +1,265 @@
+﻿{
+    "started":  "2026-11-03T22:54:02",
+    "commit":  "b5694c7",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-p01c-b5694c7",
+    "profile":  "normal",
+    "seed":  "forest",
+    "processes":  [
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f4-n1-2",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:1,nudge:2",
+                          "pid":  7316
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f4-n3-4",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:3,nudge:4",
+                          "pid":  52120
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f4-n5-6",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:5,nudge:6",
+                          "pid":  39188
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f4-n7-8",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:7,nudge:8",
+                          "pid":  38764
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f2-n1-4",
+                          "fork":  2,
+                          "days":  23,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  18724
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f3-n1-4",
+                          "fork":  3,
+                          "days":  22,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  27076
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f5-n1-4",
+                          "fork":  5,
+                          "days":  20,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  556
+                      },
+                      {
+                          "arm":  "r118-on",
+                          "job":  "f6-n1-4",
+                          "fork":  6,
+                          "days":  19,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  29528
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f4-n1-2",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:1,nudge:2",
+                          "pid":  45208
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f4-n3-4",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:3,nudge:4",
+                          "pid":  3296
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f4-n5-6",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:5,nudge:6",
+                          "pid":  48900
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f4-n7-8",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:7,nudge:8",
+                          "pid":  23852
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f2-n1-4",
+                          "fork":  2,
+                          "days":  23,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  1484
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f3-n1-4",
+                          "fork":  3,
+                          "days":  22,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  19692
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f5-n1-4",
+                          "fork":  5,
+                          "days":  20,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  32952
+                      },
+                      {
+                          "arm":  "r121-on",
+                          "job":  "f6-n1-4",
+                          "fork":  6,
+                          "days":  19,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  24140
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f4-n1-2",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:1,nudge:2",
+                          "pid":  25380
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f4-n3-4",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:3,nudge:4",
+                          "pid":  33772
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f4-n5-6",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:5,nudge:6",
+                          "pid":  20728
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f4-n7-8",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:7,nudge:8",
+                          "pid":  19300
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f2-n1-4",
+                          "fork":  2,
+                          "days":  23,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  35528
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f3-n1-4",
+                          "fork":  3,
+                          "days":  22,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  52068
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f5-n1-4",
+                          "fork":  5,
+                          "days":  20,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  37288
+                      },
+                      {
+                          "arm":  "r118-off",
+                          "job":  "f6-n1-4",
+                          "fork":  6,
+                          "days":  19,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  50972
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f4-n1-2",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:1,nudge:2",
+                          "pid":  23184
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f4-n3-4",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:3,nudge:4",
+                          "pid":  44840
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f4-n5-6",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:5,nudge:6",
+                          "pid":  5596
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f4-n7-8",
+                          "fork":  4,
+                          "days":  21,
+                          "branches":  "nudge:7,nudge:8",
+                          "pid":  37808
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f2-n1-4",
+                          "fork":  2,
+                          "days":  23,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  38956
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f3-n1-4",
+                          "fork":  3,
+                          "days":  22,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  18712
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f5-n1-4",
+                          "fork":  5,
+                          "days":  20,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  36724
+                      },
+                      {
+                          "arm":  "r121-off",
+                          "job":  "f6-n1-4",
+                          "fork":  6,
+                          "days":  19,
+                          "branches":  "nudge:1,nudge:2,nudge:3,nudge:4",
+                          "pid":  31932
+                      }
+                  ]
+}

@@ -1,0 +1,99 @@
+{
+  "worktree": "C:\\Users\\RJLoc\\.codex\\worktrees\\inhabitant-fixes\\living-world",
+  "head": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+  "branch": "refs/heads/codex/inhabitant-fixes",
+  "workingFiles": [
+    {
+      "path": "f3-contract.log",
+      "kind": "ignored-evidence",
+      "sha256": "e03f411e9fd59ae4834af59e20ce5ea2c4e5370fc721accc8bcd95273b464725",
+      "bytes": 1603,
+      "archiveObject": "objects/e0/e03f411e9fd59ae4834af59e20ce5ea2c4e5370fc721accc8bcd95273b464725.gz"
+    },
+    {
+      "path": "f3-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "6980d2430afb6929ad800a3641b04387597ba1af1689fbf441a7944d0f2d0afe",
+      "bytes": 1805,
+      "archiveObject": "objects/69/6980d2430afb6929ad800a3641b04387597ba1af1689fbf441a7944d0f2d0afe.gz"
+    },
+    {
+      "path": "inhabitant-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "6d7d78f8d42fc29df9009f319c401d5e480d088b9e96c0b7bb4779dc292ab2bc",
+      "bytes": 1829,
+      "archiveObject": "objects/6d/6d7d78f8d42fc29df9009f319c401d5e480d088b9e96c0b7bb4779dc292ab2bc.gz"
+    },
+    {
+      "path": "inhabitant-f3-full.log",
+      "kind": "ignored-evidence",
+      "sha256": "e2545bfa6d37ceef8ed9e81e6dbbb4b7665ecfacef0412b47f7cc488bc7274a3",
+      "bytes": 4074,
+      "archiveObject": "objects/e2/e2545bfa6d37ceef8ed9e81e6dbbb4b7665ecfacef0412b47f7cc488bc7274a3.gz"
+    },
+    {
+      "path": "inhabitant-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "23edd9f0d42370953555b02d8f8c4321a2c3c4ac1cf72c8bfbffd5d33f44bc56",
+      "bytes": 2622,
+      "archiveObject": "objects/23/23edd9f0d42370953555b02d8f8c4321a2c3c4ac1cf72c8bfbffd5d33f44bc56.gz"
+    },
+    {
+      "path": "inhabitant-full.log",
+      "kind": "ignored-evidence",
+      "sha256": "acf3fd63ccfa330992ad993b91e8b160119079596930ee51bd16a16dc24ec1db",
+      "bytes": 1858,
+      "archiveObject": "objects/ac/acf3fd63ccfa330992ad993b91e8b160119079596930ee51bd16a16dc24ec1db.gz"
+    },
+    {
+      "path": "inhabitant_evidence/delivery-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "36d84c95d8d5a68397c556fc704c836ba694a536eccd24aeb57c3b737b8e2398",
+      "bytes": 1859,
+      "archiveObject": "objects/36/36d84c95d8d5a68397c556fc704c836ba694a536eccd24aeb57c3b737b8e2398.gz"
+    },
+    {
+      "path": "inhabitant_evidence/final-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "ea7a0a777449db3a3b146aac059264f29da9481c472706e1bd0f4c80d33efec6",
+      "bytes": 1829,
+      "archiveObject": "objects/ea/ea7a0a777449db3a3b146aac059264f29da9481c472706e1bd0f4c80d33efec6.gz"
+    },
+    {
+      "path": "inhabitant_evidence/final-golden.log",
+      "kind": "ignored-evidence",
+      "sha256": "f4333e03212bc4ce5c89e0b9deb2634ef73e976bb2ca74f6132b287de433a43a",
+      "bytes": 270,
+      "archiveObject": "objects/f4/f4333e03212bc4ce5c89e0b9deb2634ef73e976bb2ca74f6132b287de433a43a.gz"
+    },
+    {
+      "path": "inhabitant_evidence/final-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "85be08ebaeabaa6c3da5e1afab39ed02bb5108d03bb1191a61b434a44abd9549",
+      "bytes": 1859,
+      "archiveObject": "objects/85/85be08ebaeabaa6c3da5e1afab39ed02bb5108d03bb1191a61b434a44abd9549.gz"
+    },
+    {
+      "path": "inhabitant_evidence/provenance-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "7bd1a48c2d387d50c73f6acf808f5eac8de6258f57bdcac1155337024e10f6e5",
+      "bytes": 1829,
+      "archiveObject": "objects/7b/7bd1a48c2d387d50c73f6acf808f5eac8de6258f57bdcac1155337024e10f6e5.gz"
+    },
+    {
+      "path": "inhabitant_evidence/provenance-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "53ea7d9067a6ab759fec8ccc9416bb75442f80a157b4915e59a4de441bf66294",
+      "bytes": 1606,
+      "archiveObject": "objects/53/53ea7d9067a6ab759fec8ccc9416bb75442f80a157b4915e59a4de441bf66294.gz"
+    },
+    {
+      "path": "night-wait-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "949f91cf594080ce3360da3e1028146e96864462709074c9369748d04a61551d",
+      "bytes": 1603,
+      "archiveObject": "objects/94/949f91cf594080ce3360da3e1028146e96864462709074c9369748d04a61551d.gz"
+    }
+  ],
+  "stagedFiles": []
+}

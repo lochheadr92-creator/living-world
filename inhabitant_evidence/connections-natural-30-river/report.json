@@ -1,0 +1,275 @@
+{
+  "seed": "river",
+  "days": 30,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 75.583,
+  "totals": {
+    "samples": 8744,
+    "peopleWithoutCharcoal": 2752,
+    "adultOrYouthWithoutCharcoal": 45,
+    "wantedTechnique": 0,
+    "learnerOffers": 0,
+    "teacherOffers": 59,
+    "materialRequestOffers": 1812,
+    "materialBlocked": 996,
+    "knownNeedySites": 3396,
+    "nearbyPeople": 45754,
+    "nearbyWoodCarriers": 27994,
+    "nearbyStoneCarriers": 7977,
+    "nearbyPlankCarriers": 1957,
+    "workshopOptions": 753
+  },
+  "selected": 935,
+  "requests": 461,
+  "heardRequests": 117,
+  "demandTrades": 0,
+  "benefits": 0,
+  "learned": 1,
+  "buildings": [
+    {
+      "id": 1102,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 1105,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1111,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1115,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1130,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1931,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2115,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2129,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 2823,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3452,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3600,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3681,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 3725,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 4309,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 5803,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 6923,
+      "type": "quarry",
+      "items": {
+        "stone": 14
+      }
+    },
+    {
+      "id": 8415,
+      "type": "storehouse",
+      "items": {}
+    },
+    {
+      "id": 8473,
+      "type": "timber_yard",
+      "items": {
+        "wood": 1
+      }
+    },
+    {
+      "id": 9597,
+      "type": "hut",
+      "items": {
+        "fish": 1
+      }
+    },
+    {
+      "id": 12415,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 14038,
+      "type": "kiln",
+      "items": {
+        "bricks": 6,
+        "clay": 1,
+        "charcoal": 3
+      }
+    },
+    {
+      "id": 14804,
+      "type": "granary",
+      "items": {}
+    },
+    {
+      "id": 17814,
+      "type": "hall",
+      "items": {}
+    },
+    {
+      "id": 18142,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 26457,
+      "type": "smithy",
+      "items": {}
+    }
+  ],
+  "projects": [
+    {
+      "id": 4216,
+      "townshipId": 1104,
+      "siteId": 4215,
+      "organiserId": 1131,
+      "proposed": 7489,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 1131,
+          "requestId": 0,
+          "since": 7489,
+          "status": "withdrawn",
+          "reason": "urgent personal survival needs",
+          "materials": {
+            "wood": 5
+          },
+          "work": 97.52983895389004,
+          "supports": 1131
+        },
+        {
+          "personId": 1142,
+          "requestId": 4424,
+          "since": 7874,
+          "status": "refused",
+          "reason": "not willing to commit to this proposal",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1131,
+              "accepted": false,
+              "reason": "not willing to commit to this proposal",
+              "tick": 7874
+            }
+          ]
+        },
+        {
+          "personId": 1116,
+          "requestId": 4476,
+          "since": 7965,
+          "status": "supporting",
+          "reason": "Milo supports Kai coordinating and will help build",
+          "materials": {
+            "stone": 1
+          },
+          "work": 382.33439101899273,
+          "decisions": [
+            {
+              "candidateId": 1131,
+              "accepted": true,
+              "reason": "Milo supports Kai coordinating and will help build",
+              "tick": 7965
+            }
+          ],
+          "supports": 1131
+        },
+        {
+          "personId": 1132,
+          "requestId": 4836,
+          "since": 9243,
+          "status": "supporting",
+          "reason": "Petra supports Kai coordinating and will help build",
+          "materials": {
+            "wood": 5,
+            "stone": 3
+          },
+          "work": 160.13577002711725,
+          "decisions": [
+            {
+              "candidateId": 1131,
+              "accepted": true,
+              "reason": "Petra supports Kai coordinating and will help build",
+              "tick": 9243
+            }
+          ],
+          "supports": 1131
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 1131,
+            "tick": 7489,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 1131,
+        "changes": [
+          {
+            "tick": 7965,
+            "from": 0,
+            "to": 1131,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 19174,
+      "buildingId": 8415
+    }
+  ],
+  "hash": "ce27adc3",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

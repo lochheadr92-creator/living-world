@@ -1,0 +1,254 @@
+T
+Thea
+Follow
+Adult, 42
+Marsh household
+Home: lean-to (91% sound)
+Township: Willowbank
+MOOD
+Content
+HEALTH
+100
+ON THEIR MIND
+-5
+The lean season
+-1
+Has had too much company
+What are they up to?
+More
+Sleeping by my lean-to — walking to Lean-to (3 tiles to go).
+on the way
+WHAT ARE THEY SET ON?
+Put 12 units of food by for the household — done: put 3 units of food by; the store holds 12 (4.6 min ago).
+NEEDS
+Food
+52
+Water
+47
+Energy
+40
+Warmth
+87
+Safety
+78
+Company
+98
+CARRYING
+×1
+×5
+×2
+11.3 / 12
+TOOLS
+Township & shared work
+
+Willowbank: 13 households. Membership belongs to the household and does not change with walking.
+
+Recent recorded production and resource flows:
+
+gathering: 234 berries, 43 fish, 26 fruit, 69 grain, 33 stone, 108 wood; 3 recorded days. Last source #863 at tick 5994.
+
+Repeated activities: gathering: berries on 3 days; gathering: grain on 3 days; gathering: wood on 3 days; gathering: stone on 3 days; gathering: fruit on 3 days; gathering: fish on 3 days.
+
+No transfers between township affiliations recorded.
+
+No repeated-support faction currently established.
+
+No shared project proposed yet.
+
+Household history
+
+Marsh household formed at tick 0; formation cause is not recorded.
+
+Members: Thea, Zeke, Cole, Talia.
+
+Home #2364: lean_to; recorded builders: Zeke.
+
+Request #1371: Talia asked Lena; declined: unwilling.
+
+Request #1759: Silas asked Thea; fulfilled: promise kept; promise #1761; site #1190.
+
+Request #2172: Cole asked Petra; fulfilled: promise kept; promise #2185; site #1977.
+
+Relationship history
+
+Mira: trust 17, affinity 1.
+
+Earlier cause not recorded.
+
+Hal: trust 29, affinity 13.
+
+Remembered at tick 166: worked alongside Hal. Event link not recorded.
+
+Theo: trust 11, affinity -8.
+
+Remembered at tick 5716: worked alongside Theo. Event link not recorded.
+
+Remembered at tick 5766: worked alongside Theo. Event link not recorded.
+
+Arlo: trust 26, affinity 28.
+
+Remembered at tick 5566: worked alongside Arlo. Event link not recorded.
+
+Delia: trust 35, affinity 25.
+
+Remembered at tick 329: saw Delia help Arlo. Event link not recorded.
+
+Remembered at tick 5716: worked alongside Delia. Event link not recorded.
+
+Zeke: trust 81, affinity 91; partner.
+
+Remembered at tick 5016: worked alongside Zeke. Event link not recorded.
+
+Remembered at tick 5566: worked alongside Zeke. Event link not recorded.
+
+Kaia: trust 18, affinity 1.
+
+Remembered at tick 5166: worked alongside Kaia. Event link not recorded.
+
+Remembered at tick 5216: worked alongside Kaia. Event link not recorded.
+
+Talia: trust 79, affinity 88; child.
+
+Remembered at tick 5166: worked alongside Talia. Event link not recorded.
+
+Remembered at tick 5200: I gave Talia 2 berries. Event link not recorded.
+
+Bram: trust 19, affinity 12.
+
+Remembered at tick 5016: worked alongside Bram. Event link not recorded.
+
+Silas: trust 19, affinity 7.
+
+Request #1759, helper, tick 2220: fulfilled — promise kept; site #1190. Task: wood (wood); asked 4; agreed 4. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 2220; completion tick 2220, commitment #1761. No acknowledgement received. Cancellation: requester statement, tick 4846, from person #932; target #1190, observed absence at tick 3088. Heard in conversation #2818; target change is reported, not independently witnessed.
+
+Remembered at tick 166: worked alongside Silas. Event link not recorded.
+
+Remembered at tick 5016: worked alongside Silas. Event link not recorded.
+
+Faye: trust 26, affinity 28.
+
+Remembered at tick 166: worked alongside Faye. Event link not recorded.
+
+Remembered at tick 4918: saw Faye help Kaia. Event link not recorded.
+
+Ada: trust 24, affinity 29.
+
+Earlier cause not recorded.
+
+Recent decisions
+
+Tick 5942 (just now), review: chose “Sleep at my lean-to”; still under way. Passed over then: Sleep at the fire, Eat what I am carrying, Go and drink at the water. Set aside then: nothing.
+
+Tick 5822 (2 hundred ticks ago), review: chose “Lay out a hut”; ended interrupted at tick 5942: something better came up. Passed over then: Go and drink at the water, Eat what I am carrying, Tell Silas my promised work is complete. Set aside then: nothing.
+
+Tick 5669 (3 hundred ticks ago), free: chose “Build the hut”; ended interrupted at tick 5822: something better came up. Passed over then: Finish preparing the field, Add wood to the fire, Build the hut. Set aside then: Picking berries (believes it is empty); Store food (remembers it being full); Get wood to keep the fire going (no room in my pack for one wood).
+
+Tick 5591 (4 hundred ticks ago), free: chose “Tell Zeke about my stock work”; ended success at tick 5668: finished a conversation. Passed over then: Build the hut, Finish preparing the field, Add wood to the fire. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Store food (remembers it being full).
+
+Tick 5531 (5 hundred ticks ago), free: chose “Picking berries” as a step of plan #2380; ended success at tick 5590: done. Passed over then: Picking berries, Picking berries, Tell Zeke about my stock work. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Store food (remembers it being full).
+
+Tick 5521 (5 hundred ticks ago), free: chose “Eat what I am carrying”; ended success at tick 5530: done. Passed over then: Tell Zeke about my stock work, Finish preparing the field, Add wood to the fire. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Picking berries (believes it is empty).
+
+Tick 5375 (6 hundred ticks ago), free: chose “Picking berries” as a step of plan #2380; ended success at tick 5520: done. Passed over then: Picking berries, Picking berries, Lay out a hut. Set aside then: Eat carried food (saving the food for dependents); Picking berries (believes it is empty); Gathering wild grain (believes it is empty).
+
+Tick 5300 (7 hundred ticks ago), free: chose “Bring food home” as a step of plan #2380; ended success at tick 5374: done. Passed over then: Finish preparing the field, Tend the crops, Tend the crops. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood to make a basket (no room in my pack for one wood).
+
+46 earlier decisions were compacted and are not kept.
+
+Conversation
+LAST CONVERSATION
+33s ago
+Zeke
+· sharing a household undertaking
+Outcome
+Undertaking acknowledged (I am working to put 12 units of food by for the household; I have done 3 work so far.)
+Promises
+1
+DONE
+made 6.7 min ago
+Haul 4 wood to the building site, as promised to Silas
+4 of 4 delivered
+Nearby
+People
+14
+Requests
+Recent
+14
+Knows
+241
+Family
+3
+Traits
+
+Cautious, generous, reserved. Hopes for a good name among their neighbours (60% there). One of Thea's crew with Zeke, Cole, Talia.
+
+frugal
+generous
+reserved
+sociable
+bold
+cautious
+easygoing
+diligent
+homebody
+curious
+SKILLS
+
+Started with a specialty in wood; other skills may be much less developed. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.
+
+Foraging
+×0.63
+Fishing
+×0.94
+Woodcutting
+×1.63
+Stonework
+×0.93
+Building
+×0.62
+Farming
+×1.03
+Crafting
+×0.63
+Carpentry
+×0.53
+Kiln work
+×0.55
+Smithing
+×0.54
+Baking
+×0.53
+
+Charcoal firing: not learned. Kiln proficiency alone does not supply this technique. Iron smelting: not learned (must learn charcoal firing first). Iron forging: not learned (must learn iron smelting first).
+
+Their trade: woodcutting — quicker at it than at anything else.
+
+morning: Chopping wood for my household’s lean-to. 1 successful days (activity #2164 at tick 2900). the known household or home changed. Last outcome: completed. afternoon: Break ground for a new plot. 1 successful days (activity #1607 at tick 1103). the known household or home changed. Last outcome: interrupted: something better came up. afternoon: Picking berries. 1 successful days (activity #2430 at tick 3368). still learning from separate days. Last outcome: completed. morning: Gathering wild grain. 1 successful days (activity #2854 at tick 5040). still learning from separate days. Last outcome: completed. morning: Picking berries. 1 successful days (activity #3018 at tick 5299). still learning from separate days. Last outcome: completed. afternoon: Bring food home. 1 successful days (activity #3070 at tick 5374). still learning from separate days. Last outcome: completed. afternoon: Picking berries. 1 successful days (activity #3094 at tick 5520). still learning from separate days. Last outcome: completed. afternoon: Picking berries. 1 successful days (activity #3168 at tick 5590). still learning from separate days. Last outcome: completed.
+
+Carried 8 weight of materials to building sites in 2 loads over the last 2 day(s).
+
+WHAT HAS PAID THEM
+Woodcutting
+1.9× · 4
+Foraging
+0.8× · 9
+
+Berry bush #721: 1 productive visit, 112% of estimated return for time spent. Berry bush #707: 1 productive visit, 90% of estimated return for time spent. Berry bush #722: 1 productive visit, 77% of estimated return for time spent. Wild grain #760: 1 productive visit, 100% of estimated return for time spent. Berry bush #704: 1 productive visit, 108% of estimated return for time spent. Wild grain #758: 1 empty visit; later personally seen stocked. Tree #283: 1 productive visit, 164% of estimated return for time spent. Fruit tree #741: 1 productive visit, 83% of estimated return for time spent.
+
+WHAT THEY HAVE HEARD OF PEOPLE
+Theo helped Arlo.
+Zeke told me, today
+Faye helped Kaia.
+saw it, today
+Edda helped Tomas.
+saw it, yesterday
+Talia picked a quarrel with Hana.
+Ada told me, yesterday
+Viktor helped Tomas.
+saw it, 2 days ago
+Delia helped Arlo.
+saw it, 2 days ago
+Greta picked a quarrel with Maren.
+saw it, 2 days ago
+Theo helped Nico.
+Silas told me, 2 days ago

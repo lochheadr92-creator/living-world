@@ -1,0 +1,204 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-hungry-harvest",
+  "head": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd",
+  "branch": "refs/heads/codex/hungry-harvest114",
+  "workingFiles": [
+    {
+      "path": "autonomy-full-pack-crop114-forest.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-full-pack-crop114-forest.log",
+      "kind": "ignored-evidence",
+      "sha256": "4bbfb434764d6a9ea749fd2477bbee5e5fe39e1d335bf726192e5af09292f15d",
+      "bytes": 169,
+      "archiveObject": "objects/4b/4bbfb434764d6a9ea749fd2477bbee5e5fe39e1d335bf726192e5af09292f15d.gz"
+    },
+    {
+      "path": "autonomy-harvest113-forest-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "f2ef3f5f209ab6410ee4e46e3d50896d6c1fb61da922ab0f89bca588fe4d3cdc",
+      "bytes": 894,
+      "archiveObject": "objects/f2/f2ef3f5f209ab6410ee4e46e3d50896d6c1fb61da922ab0f89bca588fe4d3cdc.gz"
+    },
+    {
+      "path": "autonomy-harvest113-meadow-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "392d191feb38c2904a1d11a7dfecfe125703509ab37a8e457646c07173aff916",
+      "bytes": 1035,
+      "archiveObject": "objects/39/392d191feb38c2904a1d11a7dfecfe125703509ab37a8e457646c07173aff916.gz"
+    },
+    {
+      "path": "autonomy-harvest113-river-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "38e7beef926ebae0b8c8a78ca95eebd051a1821bb89778fbcfdc2a6ef6c706ae",
+      "bytes": 788,
+      "archiveObject": "objects/38/38e7beef926ebae0b8c8a78ca95eebd051a1821bb89778fbcfdc2a6ef6c706ae.gz"
+    },
+    {
+      "path": "autonomy-harvest114-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "be1c7c70f68b6a4691476c531eb716acbf716236509553c93b28f68cec039889",
+      "bytes": 3727,
+      "archiveObject": "objects/be/be1c7c70f68b6a4691476c531eb716acbf716236509553c93b28f68cec039889.gz"
+    },
+    {
+      "path": "autonomy-harvest114-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "466bbaa70cbefe200c70729e7659fb4d12901602ee0497375d258773ccc5b62e",
+      "bytes": 2200,
+      "archiveObject": "objects/46/466bbaa70cbefe200c70729e7659fb4d12901602ee0497375d258773ccc5b62e.gz"
+    },
+    {
+      "path": "autonomy-harvest114-expanded.log",
+      "kind": "ignored-evidence",
+      "sha256": "d31f7065bebd347db3e0fd3a923e5c4720f56281ff763fd272ec65d496567d30",
+      "bytes": 3117,
+      "archiveObject": "objects/d3/d31f7065bebd347db3e0fd3a923e5c4720f56281ff763fd272ec65d496567d30.gz"
+    },
+    {
+      "path": "autonomy-harvest114-focused-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "70214bde7cd6b83e28d1f80759d3e687f8675e19a1ce9110e7b9e45803483d48",
+      "bytes": 2005,
+      "archiveObject": "objects/70/70214bde7cd6b83e28d1f80759d3e687f8675e19a1ce9110e7b9e45803483d48.gz"
+    },
+    {
+      "path": "autonomy-harvest114-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "9951383d8898a82317e67ffd268f61ff5a9d2ec12fdfa628b79b2af16672507d",
+      "bytes": 1961,
+      "archiveObject": "objects/99/9951383d8898a82317e67ffd268f61ff5a9d2ec12fdfa628b79b2af16672507d.gz"
+    },
+    {
+      "path": "autonomy-harvest114-forest-45.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-harvest114-forest-45.log",
+      "kind": "ignored-evidence",
+      "sha256": "da5ce52ffec1e00ff84d9da67276f9a1cd998f67a5cf8b2b56fd07c4e566f0bd",
+      "bytes": 3334,
+      "archiveObject": "objects/da/da5ce52ffec1e00ff84d9da67276f9a1cd998f67a5cf8b2b56fd07c4e566f0bd.gz"
+    },
+    {
+      "path": "autonomy-harvest114-forest-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "d6f34405c8a418c3b4e18178a9d951a4fd121029c27a5794830a6d805fa6d986",
+      "bytes": 1162,
+      "archiveObject": "objects/d6/d6f34405c8a418c3b4e18178a9d951a4fd121029c27a5794830a6d805fa6d986.gz"
+    },
+    {
+      "path": "autonomy-harvest114-full-tests.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-harvest114-full-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "402c0c55a294f717413f7f4c77a2f06bdc029cef230e83f3d511b29050b76807",
+      "bytes": 1850,
+      "archiveObject": "objects/40/402c0c55a294f717413f7f4c77a2f06bdc029cef230e83f3d511b29050b76807.gz"
+    },
+    {
+      "path": "autonomy-harvest114-meadow-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "3ed2160947e011347dfc1013b5e11a5adcd6e074471fb40d0ac0195447628535",
+      "bytes": 1122,
+      "archiveObject": "objects/3e/3ed2160947e011347dfc1013b5e11a5adcd6e074471fb40d0ac0195447628535.gz"
+    },
+    {
+      "path": "autonomy-harvest114-river-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "57befbd2e4fe0c4573bb424ff10a7c39d5a23b6aff3b251b0b124ceed19762a4",
+      "bytes": 787,
+      "archiveObject": "objects/57/57befbd2e4fe0c4573bb424ff10a7c39d5a23b6aff3b251b0b124ceed19762a4.gz"
+    },
+    {
+      "path": "autonomy-v114-reference-check.log",
+      "kind": "ignored-evidence",
+      "sha256": "b445b33d560d030f560eefd8bb3f0f6effc9c86efcf7cfb887f9b82c78eafb7c",
+      "bytes": 1885,
+      "archiveObject": "objects/b4/b445b33d560d030f560eefd8bb3f0f6effc9c86efcf7cfb887f9b82c78eafb7c.gz"
+    },
+    {
+      "path": "autonomy-v114-reference-generate.log",
+      "kind": "ignored-evidence",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "autonomy_evidence/full-pack-crop114-forest/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "fa9a2b75165c0e20eb5710b66d2cb8e7e4a9c17c2c3af6529f35e2861467f84f",
+      "bytes": 4180334,
+      "archiveObject": "objects/fa/fa9a2b75165c0e20eb5710b66d2cb8e7e4a9c17c2c3af6529f35e2861467f84f.gz"
+    },
+    {
+      "path": "autonomy_evidence/full-pack-crop114-forest/trigger.json",
+      "kind": "untracked",
+      "sha256": "a5d67139b841491921c47c195a8bcc11ef7c9edd37eb01a9ecb76d6c469d8e81",
+      "bytes": 4073062,
+      "archiveObject": "objects/a5/a5d67139b841491921c47c195a8bcc11ef7c9edd37eb01a9ecb76d6c469d8e81.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest113-forest-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5",
+      "bytes": 3015099,
+      "archiveObject": "objects/e0/e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest113-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb",
+      "bytes": 2642726,
+      "archiveObject": "objects/1a/1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest113-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82",
+      "bytes": 3386970,
+      "archiveObject": "objects/c0/c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest114-forest-45/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "409e555c262e3343bbff309f5a5f939791d7f722597c0579fad425a2090aaddf",
+      "bytes": 568284,
+      "archiveObject": "objects/40/409e555c262e3343bbff309f5a5f939791d7f722597c0579fad425a2090aaddf.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest114-forest-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "cb56d6071aa978a28eca02692b1fab9eafc1355779677736599f07d4301f99cc",
+      "bytes": 3015892,
+      "archiveObject": "objects/cb/cb56d6071aa978a28eca02692b1fab9eafc1355779677736599f07d4301f99cc.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest114-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "d00794e93c49dc3dc7252dd6e527fa44ececcd11e74834ce058a1c32b7ba764e",
+      "bytes": 2642726,
+      "archiveObject": "objects/d0/d00794e93c49dc3dc7252dd6e527fa44ececcd11e74834ce058a1c32b7ba764e.gz"
+    },
+    {
+      "path": "autonomy_evidence/harvest114-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "5c0860545d695a7fb37705b5c5910303993c62af89848b9da8c84347015b9255",
+      "bytes": 3386970,
+      "archiveObject": "objects/5c/5c0860545d695a7fb37705b5c5910303993c62af89848b9da8c84347015b9255.gz"
+    }
+  ],
+  "stagedFiles": []
+}

@@ -1,0 +1,1229 @@
+{
+  "name": "Petra",
+  "id": 899,
+  "text": "P\nPetra\nFollow\nElder, 66\nBramble household\nHome: lean-to (60% sound) — last considered 11s ago: too thirsty to start a building\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nGathering wild grain (82% of this task).\n82%\nWHAT ARE THEY SET ON?\nMake a hoe. Step: get 1 more stone for the hoe — settled on, not started. Still needs 1 stone.\nNEEDS\nFood\n57\nWater\n49\nEnergy\n94\nWarmth\n67\nSafety\n84\nCompany\n93\nCARRYING\n×3\n×2\n4.8 / 6\nTOOLS\nnone\nTownship & shared work\n\nWillowbank: 13 households. Membership belongs to the household and does not change with walking.\n\nRecent recorded production and resource flows:\n\ngathering: 180 berries, 17 fish, 24 fruit, 54 grain, 17 stone, 82 wood; 2 recorded days. Last source #758 at tick 4795.\n\nToo little repeated activity recorded to describe a specialisation.\n\nNo transfers between township affiliations recorded.\n\nNo repeated-support faction currently established.\n\nNo shared project proposed yet.\n\nHousehold history\n\nBramble household formed at tick 0; formation cause is not recorded.\n\nMembers: Petra.\n\nHome #898: lean_to; recorded builders: unknown.\n\nRequest #2172: Cole asked Petra; fulfilled: promise kept; promise #2185; site #1977.\n\nRequest #2601: Arlo asked Petra; declined: making; site #2490.\n\nRelationship history\n\nYusuf: trust 20, affinity 11.\n\nEarlier cause not recorded.\n\nNico: trust 12, affinity 2.\n\nEarlier cause not recorded.\n\nIsla: trust 13, affinity -3.\n\nEarlier cause not recorded.\n\nBram: trust 16, affinity -1.\n\nRemembered at tick 2701: worked alongside Bram. Event link not recorded.\n\nArlo: trust 2, affinity -21.\n\nRequest #2601, helper, tick 3718: declined — making; site #2490. Task: wood (wood); asked 4; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.\n\nKaia: trust 22, affinity 22.\n\nEarlier cause not recorded.\n\nHal: trust 10, affinity -6.\n\nEarlier cause not recorded.\n\nDelia: trust 17, affinity 7.\n\nRemembered at tick 329: saw Delia help Arlo. Event link not recorded.\n\nMira: trust 19, affinity -8.\n\nRemembered at tick 501: worked alongside Mira. Event link not recorded.\n\nCole: trust 21, affinity -3.\n\nRequest #2172, helper, tick 2957: fulfilled — promise kept; site #1977. Task: wood (wood); asked 1; agreed 1. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 2957; completion tick 2957, commitment #2185. Acknowledged at tick 2957.\n\nTheo: trust 44, affinity 41.\n\nRemembered at tick 19: saw Theo help Nico. Event link not recorded.\n\nRemembered at tick 2701: worked alongside Theo. Event link not recorded.\n\nSilas: trust 33, affinity 22.\n\nEarlier cause not recorded.\n\nRecent decisions\n\nTick 4691 (one hundred ticks ago), free: chose “Gathering wild grain”; still under way. Passed over then: Gathering wild grain, Picking berries, Tend the crops. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).\n\nTick 4681 (one hundred ticks ago), free: chose “Eat what I am carrying”; ended success at tick 4690: done. Passed over then: Gathering wild grain, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Work on the building site (site is waiting for materials (2 wood, 3 stone)); Lay out a hut (too hungry to start a building).\n\nTick 4470 (3 hundred ticks ago), free: chose “Stay at my lean-to until it is light” as a step of plan #2424; ended success at tick 4680: daylight arrived. Passed over then: Eat what I am carrying, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).\n\nTick 3630 (12 hundred ticks ago), review: chose “Sleep at my lean-to”; ended success at tick 4469: rested. Passed over then: Sleep at the fire, Potter about near home. Set aside then: nothing.\n\nTick 3571 (12 hundred ticks ago), review: chose “Potter about near home”; ended interrupted at tick 3630: something better came up. Passed over then: Explore somewhere new. Set aside then: nothing.\n\nTick 3409 (14 hundred ticks ago), free: chose “Sit down and rest”; ended interrupted at tick 3571: something better came up. Passed over then: Potter about near home, Sleep at my lean-to. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood for a friend’s hut (no room in my pack for one wood).\n\nTick 3310 (15 hundred ticks ago), free: chose “Chopping wood for a friend’s hut” as a step of plan #962; ended success at tick 3408: felled the tree. Passed over then: Chopping wood for a friend’s hut, Fishing, Fishing. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get stone for a friend’s hut (no room in my pack for one stone).\n\nTick 3242 (16 hundred ticks ago), review: chose “Go and drink at the water”; ended success at tick 3309: done. Passed over then: Ask Theo for wood, Fishing, Picking berries. Set aside then: nothing.\n\n37 earlier decisions were compacted and are not kept.\n\nConversation\nLAST CONVERSATION\n1.7 min ago\nArlo\ncame to Petra with a request\nOutcome\nRefused (making)\nPromises\n1\nDONE\nmade 3.2 min ago\nHaul 1 wood to the building site, as promised to Cole\n1 of 1 delivered\nWorries\n2\nNearby\nPeople\n14\nRequests\n2\nRecent\n14\nKnows\n154\nFamily\nTraits\n\nReserved, homebody. Hopes for a store that would see them through a lean season (0% there).\n\nfrugal\ngenerous\nreserved\nsociable\nbold\ncautious\neasygoing\ndiligent\nhomebody\ncurious\nSKILLS\n\nStarted with a general practical background. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.\n\nForaging\n×1.18\nFishing\n×0.87\nWoodcutting\n×0.93\nStonework\n×1.11\nBuilding\n×0.93\nFarming\n×1.24\nCrafting\n×0.95\nCarpentry\n×1.06\nKiln work\n×1.10\nSmithing\n×1.00\nBaking\n×0.90\n\nCharcoal firing: known on arrival (initial background). Iron smelting: known on arrival (initial background). Iron forging: known on arrival (initial background).\n\nTheir trade: farming — quicker at it than at anything else.\n\nmorning: Plant seed. 1 successful days (activity #1908 at tick 2426). still learning from separate days. Last outcome: completed. morning: Tend the crops. 2 successful days (activity #1126 at tick 199; activity #1923 at tick 2450). still learning from separate days. Last outcome: completed. morning: Tend the crops. 1 successful days (activity #1939 at tick 2474). still learning from separate days. Last outcome: completed. morning: Picking berries. 1 successful days (activity #1997 at tick 2624). still learning from separate days. Last outcome: completed. morning: Gathering wild grain. 2 successful days (activity #1292 at tick 507; activity #2045 at tick 2701). still learning from separate days. Last outcome: completed. afternoon: Deliver materials to the lean-to site. 1 successful days (activity #2211 at tick 2957). still learning from separate days. Last outcome: completed. afternoon: Picking berries. 1 successful days (activity #2240 at tick 3026). still learning from separate days. Last outcome: completed. afternoon: Chopping wood for a friend’s hut. 1 successful days (activity #2425 at tick 3408). still learning from separate days. Last outcome: completed.\n\nCarried 2 weight of materials to building sites in 1 load over the last 1 day(s).\n\nTHEIR CUSTOMERS\nArlo asked me for 4 wood 0.5 days ago; none to spare yet.\nWHAT HAS PAID THEM\nForaging\n1.4× · 4\nWoodcutting\n0.4× · 3\n\nTree #495 (location no longer known): 1 productive visit, 118% of estimated return for time spent. Berry bush #703: 1 productive visit, 138% of estimated return for time spent. Wild grain #761: 2 productive visits, 142% of estimated return for time spent. Berry bush #705: 1 productive visit, 126% of estimated return for time spent.\n\nWHAT THEY HAVE HEARD OF PEOPLE\nTalia picked a quarrel with Hana.\nArlo told me, today\nTalia helped Lena.\nsaw it, today\nEdda helped Tomas.\nsaw it, yesterday\nViktor helped Tomas.\nCole told me (2 mouths on), yesterday\nDelia helped Arlo.\nsaw it, yesterday\nTheo helped Nico.\nsaw it, yesterday",
+  "view": {
+    "id": 899,
+    "name": "Petra",
+    "sex": "f",
+    "age": 66,
+    "stage": "elder",
+    "household": "Bramble",
+    "civic": {
+      "township": "Willowbank",
+      "lines": [
+        "Willowbank: 13 households. Membership belongs to the household and does not change with walking.",
+        "Recent recorded production and resource flows:",
+        "gathering: 180 berries, 17 fish, 24 fruit, 54 grain, 17 stone, 82 wood; 2 recorded days. Last source #758 at tick 4795.",
+        "Too little repeated activity recorded to describe a specialisation.",
+        "No transfers between township affiliations recorded.",
+        "No repeated-support faction currently established.",
+        "No shared project proposed yet."
+      ]
+    },
+    "householdHistory": [
+      "Bramble household formed at tick 0; formation cause is not recorded.",
+      "Members: Petra.",
+      "Home #898: lean_to; recorded builders: unknown.",
+      "Request #2172: Cole asked Petra; fulfilled: promise kept; promise #2185; site #1977.",
+      "Request #2601: Arlo asked Petra; declined: making; site #2490."
+    ],
+    "relationshipHistory": [
+      "Yusuf: trust 20, affinity 11.",
+      "Earlier cause not recorded.",
+      "Nico: trust 12, affinity 2.",
+      "Earlier cause not recorded.",
+      "Isla: trust 13, affinity -3.",
+      "Earlier cause not recorded.",
+      "Bram: trust 16, affinity -1.",
+      "Remembered at tick 2701: worked alongside Bram. Event link not recorded.",
+      "Arlo: trust 2, affinity -21.",
+      "Request #2601, helper, tick 3718: declined — making; site #2490. Task: wood (wood); asked 4; agreed not recorded. No direct material receipt recorded; ability is not established by this outcome.",
+      "Kaia: trust 22, affinity 22.",
+      "Earlier cause not recorded.",
+      "Hal: trust 10, affinity -6.",
+      "Earlier cause not recorded.",
+      "Delia: trust 17, affinity 7.",
+      "Remembered at tick 329: saw Delia help Arlo. Event link not recorded.",
+      "Mira: trust 19, affinity -8.",
+      "Remembered at tick 501: worked alongside Mira. Event link not recorded.",
+      "Cole: trust 21, affinity -3.",
+      "Request #2172, helper, tick 2957: fulfilled — promise kept; site #1977. Task: wood (wood); asked 1; agreed 1. No direct material receipt recorded; ability is not established by this outcome. Knowledge: own completion, learned tick 2957; completion tick 2957, commitment #2185. Acknowledged at tick 2957.",
+      "Theo: trust 44, affinity 41.",
+      "Remembered at tick 19: saw Theo help Nico. Event link not recorded.",
+      "Remembered at tick 2701: worked alongside Theo. Event link not recorded.",
+      "Silas: trust 33, affinity 22.",
+      "Earlier cause not recorded."
+    ],
+    "decisionHistory": [
+      "Tick 4691 (one hundred ticks ago), free: chose “Gathering wild grain”; still under way. Passed over then: Gathering wild grain, Picking berries, Tend the crops. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).",
+      "Tick 4681 (one hundred ticks ago), free: chose “Eat what I am carrying”; ended success at tick 4690: done. Passed over then: Gathering wild grain, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Work on the building site (site is waiting for materials (2 wood, 3 stone)); Lay out a hut (too hungry to start a building).",
+      "Tick 4470 (3 hundred ticks ago), free: chose “Stay at my lean-to until it is light” as a step of plan #2424; ended success at tick 4680: daylight arrived. Passed over then: Eat what I am carrying, Gathering wild grain, Gathering wild grain. Set aside then: Eat from the stores (remembers it being empty); Get wood for a friend’s hut (no room in my pack for one wood); Get stone for a friend’s hut (no room in my pack for one stone).",
+      "Tick 3630 (12 hundred ticks ago), review: chose “Sleep at my lean-to”; ended success at tick 4469: rested. Passed over then: Sleep at the fire, Potter about near home. Set aside then: nothing.",
+      "Tick 3571 (12 hundred ticks ago), review: chose “Potter about near home”; ended interrupted at tick 3630: something better came up. Passed over then: Explore somewhere new. Set aside then: nothing.",
+      "Tick 3409 (14 hundred ticks ago), free: chose “Sit down and rest”; ended interrupted at tick 3571: something better came up. Passed over then: Potter about near home, Sleep at my lean-to. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get wood for a friend’s hut (no room in my pack for one wood).",
+      "Tick 3310 (15 hundred ticks ago), free: chose “Chopping wood for a friend’s hut” as a step of plan #962; ended success at tick 3408: felled the tree. Passed over then: Chopping wood for a friend’s hut, Fishing, Fishing. Set aside then: Picking berries (believes it is empty); Gathering wild grain (believes it is empty); Get stone for a friend’s hut (no room in my pack for one stone).",
+      "Tick 3242 (16 hundred ticks ago), review: chose “Go and drink at the water”; ended success at tick 3309: done. Passed over then: Ask Theo for wood, Fishing, Picking berries. Set aside then: nothing.",
+      "37 earlier decisions were compacted and are not kept."
+    ],
+    "householdColor": 0,
+    "home": "lean-to (60% sound) — last considered 11s ago: too thirsty to start a building",
+    "health": 100,
+    "illness": null,
+    "mood": 68,
+    "thoughts": [],
+    "pregnant": false,
+    "partner": null,
+    "traits": [
+      {
+        "key": "generosity",
+        "value": 0.6145518765477835
+      },
+      {
+        "key": "sociability",
+        "value": 0.06
+      },
+      {
+        "key": "caution",
+        "value": 0.5343386257277422
+      },
+      {
+        "key": "diligence",
+        "value": 0.5941470014917655
+      },
+      {
+        "key": "curiosity",
+        "value": 0.3322133450108029
+      }
+    ],
+    "traitSummary": "reserved, homebody",
+    "goal": "hopes for a store that would see them through a lean season (0% there)",
+    "injury": null,
+    "lifeEvent": null,
+    "crew": null,
+    "skillExplanation": "Started with a general practical background. Newborn proficiency starts at ×0.20. Older entrants have an age-adjusted starting background. Skills improve through work; birthdays grant no experience.",
+    "techniques": [
+      "Charcoal firing: known on arrival (initial background).",
+      "Iron smelting: known on arrival (initial background).",
+      "Iron forging: known on arrival (initial background)."
+    ],
+    "skills": [
+      {
+        "key": "forage",
+        "value": 1.1765546358935535
+      },
+      {
+        "key": "fish",
+        "value": 0.8671326044015586
+      },
+      {
+        "key": "wood",
+        "value": 0.932963846899569
+      },
+      {
+        "key": "stone",
+        "value": 1.1125952266156673
+      },
+      {
+        "key": "build",
+        "value": 0.9273770926386069
+      },
+      {
+        "key": "farm",
+        "value": 1.2382263456657525
+      },
+      {
+        "key": "craft",
+        "value": 0.9453529566526413
+      },
+      {
+        "key": "carpentry",
+        "value": 1.0550397249870003
+      },
+      {
+        "key": "kiln",
+        "value": 1.100334589369595
+      },
+      {
+        "key": "smith",
+        "value": 0.9989488313905894
+      },
+      {
+        "key": "bake",
+        "value": 0.8975890861824155
+      }
+    ],
+    "payoffs": [
+      {
+        "key": "forage",
+        "ratio": 1.385,
+        "n": 4
+      },
+      {
+        "key": "wood",
+        "ratio": 0.371,
+        "n": 3
+      }
+    ],
+    "sourceExperience": [
+      "Tree #495 (location no longer known): 1 productive visit, 118% of estimated return for time spent.",
+      "Berry bush #703: 1 productive visit, 138% of estimated return for time spent.",
+      "Wild grain #761: 2 productive visits, 142% of estimated return for time spent.",
+      "Berry bush #705: 1 productive visit, 126% of estimated return for time spent."
+    ],
+    "heard": [
+      {
+        "about": 937,
+        "name": "Talia",
+        "text": "Talia picked a quarrel with Hana",
+        "via": "Arlo told me",
+        "age": 0,
+        "good": -0.45599999999999996
+      },
+      {
+        "about": 937,
+        "name": "Talia",
+        "text": "Talia helped Lena",
+        "via": "saw it",
+        "age": 0,
+        "good": 1
+      },
+      {
+        "about": 914,
+        "name": "Edda",
+        "text": "Edda helped Tomas",
+        "via": "saw it",
+        "age": 1,
+        "good": 1
+      },
+      {
+        "about": 916,
+        "name": "Viktor",
+        "text": "Viktor helped Tomas",
+        "via": "Cole told me (2 mouths on)",
+        "age": 1,
+        "good": 0.62
+      },
+      {
+        "about": 942,
+        "name": "Delia",
+        "text": "Delia helped Arlo",
+        "via": "saw it",
+        "age": 1,
+        "good": 1
+      },
+      {
+        "about": 943,
+        "name": "Theo",
+        "text": "Theo helped Nico",
+        "via": "saw it",
+        "age": 1,
+        "good": 1
+      }
+    ],
+    "trade": "farming — quicker at it than at anything else",
+    "customers": [
+      "Arlo asked me for 4 wood 0.5 days ago; none to spare yet."
+    ],
+    "winterPractice": [],
+    "dailyRoutines": [
+      "morning: Plant seed. 1 successful days (activity #1908 at tick 2426). still learning from separate days. Last outcome: completed.",
+      "morning: Tend the crops. 2 successful days (activity #1126 at tick 199; activity #1923 at tick 2450). still learning from separate days. Last outcome: completed.",
+      "morning: Tend the crops. 1 successful days (activity #1939 at tick 2474). still learning from separate days. Last outcome: completed.",
+      "morning: Picking berries. 1 successful days (activity #1997 at tick 2624). still learning from separate days. Last outcome: completed.",
+      "morning: Gathering wild grain. 2 successful days (activity #1292 at tick 507; activity #2045 at tick 2701). still learning from separate days. Last outcome: completed.",
+      "afternoon: Deliver materials to the lean-to site. 1 successful days (activity #2211 at tick 2957). still learning from separate days. Last outcome: completed.",
+      "afternoon: Picking berries. 1 successful days (activity #2240 at tick 3026). still learning from separate days. Last outcome: completed.",
+      "afternoon: Chopping wood for a friend’s hut. 1 successful days (activity #2425 at tick 3408). still learning from separate days. Last outcome: completed."
+    ],
+    "hauling": [
+      "Carried 2 weight of materials to building sites in 1 load over the last 1 day(s)."
+    ],
+    "needs": [
+      {
+        "key": "hunger",
+        "label": "Food",
+        "value": 56.95434252100863,
+        "state": "ok"
+      },
+      {
+        "key": "thirst",
+        "label": "Water",
+        "value": 49.31999999999624,
+        "state": "ok"
+      },
+      {
+        "key": "energy",
+        "label": "Energy",
+        "value": 94.25229999999932,
+        "state": "ok"
+      },
+      {
+        "key": "warmth",
+        "label": "Warmth",
+        "value": 66.64856898732448,
+        "state": "ok"
+      },
+      {
+        "key": "safety",
+        "label": "Safety",
+        "value": 83.78010099182488,
+        "state": "ok"
+      },
+      {
+        "key": "social",
+        "label": "Company",
+        "value": 93.2218206284386,
+        "state": "ok"
+      }
+    ],
+    "inventory": [
+      {
+        "kind": "seeds",
+        "n": 3
+      },
+      {
+        "kind": "wood",
+        "n": 2
+      }
+    ],
+    "carry": {
+      "used": 4.75,
+      "cap": 6
+    },
+    "position": {
+      "x": 48.531660897331314,
+      "y": 50.535835276846775
+    },
+    "activity": {
+      "label": "Gathering wild grain",
+      "goal": "to bring food home",
+      "phase": "work",
+      "progress": 0.8181818181818182,
+      "target": "Wild grain",
+      "blocked": "",
+      "kind": "gather",
+      "moving": false
+    },
+    "qa": {
+      "doing": "Gathering wild grain (82% of this task).",
+      "why": "Weighed up: plan up to 1 grain; estimated return 129 ticks · household is short of food +36 · walking −8 · well-liked food +2 · has paid me well before (1.4×) +2",
+      "trying": "To bring food home (Wild grain). plan up to 1 grain; estimated return 129 ticks. These are estimates; the work can be interrupted.",
+      "stopping": "Nothing in the way.",
+      "stoppingIsHistorical": false,
+      "lastAttempt": "Eating → success: done (11s ago)",
+      "plan": "Make a hoe. Step: get 1 more stone for the hoe — settled on, not started."
+    },
+    "plans": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "step": "get 1 more stone for the hoe",
+        "state": "waiting",
+        "detail": "Make a hoe. Step: get 1 more stone for the hoe — settled on, not started.",
+        "missing": "1 stone",
+        "progress": "",
+        "due": "by tick 4800",
+        "outcome": ""
+      }
+    ],
+    "tools": [],
+    "commitments": [
+      {
+        "id": 2185,
+        "text": "Haul 1 wood to the building site, as promised to Cole",
+        "status": "done",
+        "detail": "1 of 1 delivered",
+        "due": "3.2 min ago"
+      }
+    ],
+    "interaction": {
+      "current": null,
+      "previous": {
+        "partner": "Arlo",
+        "purpose": "Arlo came to Petra with a request",
+        "step": "over",
+        "outcome": "refused (making)",
+        "when": "1.7 min ago"
+      }
+    },
+    "meal": {
+      "current": null,
+      "previous": null
+    },
+    "concerns": [
+      {
+        "about": "Thea",
+        "kind": "looked thirsty",
+        "seen": "5s ago",
+        "source": "saw it themself"
+      },
+      {
+        "about": "Cole",
+        "kind": "looked thirsty",
+        "seen": "4s ago",
+        "source": "saw it themself"
+      }
+    ],
+    "grievances": [],
+    "decision": {
+      "when": "11s ago",
+      "trigger": "free",
+      "chosen": "Gathering wild grain",
+      "because": "plan up to 1 grain; estimated return 129 ticks · household is short of food +36 · walking −8 · well-liked food +2 · has paid me well before (1.4×) +2",
+      "alternatives": [
+        {
+          "label": "Gathering wild grain",
+          "utility": 31.6,
+          "parts": [
+            [
+              "household is short of food",
+              36
+            ],
+            [
+              "well-liked food",
+              2.4
+            ],
+            [
+              "walking",
+              -8.1
+            ],
+            [
+              "remembered strained patch (observed at tick 3859)",
+              -1.8
+            ],
+            [
+              "good at it",
+              0.9
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.3
+            ]
+          ]
+        },
+        {
+          "label": "Picking berries",
+          "utility": 30.3,
+          "parts": [
+            [
+              "household is short of food",
+              36.3
+            ],
+            [
+              "well-liked food",
+              1.3
+            ],
+            [
+              "walking",
+              -6.9
+            ],
+            [
+              "remembered strained patch (observed at tick 4690)",
+              -2
+            ],
+            [
+              "good at it",
+              0.9
+            ],
+            [
+              "my work at this source paid 1.4× of its estimate (1 outcome)",
+              0.7
+            ]
+          ]
+        },
+        {
+          "label": "Tend the crops",
+          "utility": 19.7,
+          "parts": [
+            [
+              "crop needs care",
+              23.7
+            ],
+            [
+              "walking",
+              -4
+            ]
+          ]
+        },
+        {
+          "label": "Tend the crops",
+          "utility": 19.2,
+          "parts": [
+            [
+              "crop needs care",
+              23.7
+            ],
+            [
+              "walking",
+              -4.5
+            ]
+          ]
+        }
+      ],
+      "blocked": [
+        {
+          "label": "Lay out a hut",
+          "reason": "too thirsty to start a building"
+        },
+        {
+          "label": "Eat from the stores",
+          "reason": "remembers it being empty"
+        },
+        {
+          "label": "Get wood for a friend’s hut",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for a friend’s hut",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (2 wood, 3 stone)"
+        },
+        {
+          "label": "Ask someone for stone",
+          "reason": "no room in my pack for it"
+        }
+      ],
+      "considered": 12,
+      "knownPlaces": 153,
+      "seenNow": 17
+    },
+    "opportunities": [
+      {
+        "id": 762,
+        "what": "wild grain (5 grain)",
+        "status": "chosen",
+        "detail": "This is what they are doing about it.",
+        "distance": 0.9646844177206132,
+        "x": 48.5,
+        "y": 51.5
+      },
+      {
+        "id": 758,
+        "what": "wild grain (3 grain)",
+        "status": "passed over",
+        "detail": "Considered (score 12) but preferred “Gathering wild grain” (32).",
+        "distance": 1.0363190305982322,
+        "x": 48.5,
+        "y": 49.5
+      },
+      {
+        "id": 759,
+        "what": "wild grain (4 grain)",
+        "status": "passed over",
+        "detail": "Considered (score 12) but preferred “Gathering wild grain” (32).",
+        "distance": 1.3664897479053149,
+        "x": 49.5,
+        "y": 51.5
+      },
+      {
+        "id": 761,
+        "what": "wild grain (3 grain)",
+        "status": "not needed",
+        "detail": "Other options scored higher.",
+        "distance": 1.4120686316378483,
+        "x": 47.5,
+        "y": 51.5
+      },
+      {
+        "id": 760,
+        "what": "wild grain (5 grain)",
+        "status": "not needed",
+        "detail": "Other options scored higher.",
+        "distance": 1.4619435446838183,
+        "x": 47.5,
+        "y": 49.5
+      },
+      {
+        "id": 1897,
+        "what": "hut site (Wren)",
+        "status": "not needed",
+        "detail": "It belongs to people they hardly know.",
+        "distance": 3.5667173451344056,
+        "x": 49,
+        "y": 47
+      },
+      {
+        "id": 705,
+        "what": "berry bush (2 berries)",
+        "status": "not needed",
+        "detail": "Other options scored higher.",
+        "distance": 5.427912735130028,
+        "x": 43.5,
+        "y": 48.5
+      },
+      {
+        "id": 2280,
+        "what": "hut site (Linden)",
+        "status": "not needed",
+        "detail": "It belongs to people they hardly know.",
+        "distance": 8.322345944113794,
+        "x": 45,
+        "y": 43
+      },
+      {
+        "id": 1927,
+        "what": "hut site (Sedge)",
+        "status": "not needed",
+        "detail": "It belongs to people they hardly know.",
+        "distance": 19.958909747739693,
+        "x": 39,
+        "y": 33
+      }
+    ],
+    "relationships": [
+      {
+        "id": 917,
+        "name": "Hana",
+        "label": "Friend",
+        "affinity": 43.306555762743564,
+        "trust": 32.65875762104415,
+        "familiarity": 2.5,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 943,
+        "name": "Theo",
+        "label": "Friend",
+        "affinity": 41.49402346017735,
+        "trust": 43.86041093054613,
+        "familiarity": 7.3,
+        "recent": "worked alongside Theo",
+        "avoiding": false
+      },
+      {
+        "id": 908,
+        "name": "Lena",
+        "label": "Friendly",
+        "affinity": 27.29158118038546,
+        "trust": 34.21853333802555,
+        "familiarity": 7.5,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 914,
+        "name": "Edda",
+        "label": "Friendly",
+        "affinity": 26.256408343829612,
+        "trust": 24.946214674146006,
+        "familiarity": 6.3,
+        "recent": "saw Edda help Tomas",
+        "avoiding": false
+      },
+      {
+        "id": 925,
+        "name": "Kaia",
+        "label": "Friendly",
+        "affinity": 22.407598276254422,
+        "trust": 21.871635742656522,
+        "familiarity": 3,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 932,
+        "name": "Silas",
+        "label": "Friendly",
+        "affinity": 21.766562892626553,
+        "trust": 32.54152313430013,
+        "familiarity": 5.5,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 945,
+        "name": "Arlo",
+        "label": "Wary",
+        "affinity": -21.389658129983847,
+        "trust": 2.4194347343375746,
+        "familiarity": 9.8,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 923,
+        "name": "Faye",
+        "label": "Friendly",
+        "affinity": 18.71274297606414,
+        "trust": 32.81725200134775,
+        "familiarity": 5,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 915,
+        "name": "Tomas",
+        "label": "Friendly",
+        "affinity": 18.515052672856324,
+        "trust": 21.97384063538212,
+        "familiarity": 7,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 926,
+        "name": "Tessa",
+        "label": "Friendly",
+        "affinity": 18.485617105262556,
+        "trust": 31.058786472904362,
+        "familiarity": 7,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 928,
+        "name": "Jax",
+        "label": "Friendly",
+        "affinity": 18.24562994841466,
+        "trust": 25.6891770774938,
+        "familiarity": 8,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 911,
+        "name": "Ada",
+        "label": "Friendly",
+        "affinity": 15.317820540991754,
+        "trust": 31.204794659268682,
+        "familiarity": 2,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 934,
+        "name": "Thea",
+        "label": "Friendly",
+        "affinity": 15.279221983846897,
+        "trust": 22.887142394609363,
+        "familiarity": 6,
+        "recent": "",
+        "avoiding": false
+      },
+      {
+        "id": 920,
+        "name": "Yusuf",
+        "label": "Friendly",
+        "affinity": 11.015954821426972,
+        "trust": 20.24470286988834,
+        "familiarity": 2.5,
+        "recent": "",
+        "avoiding": false
+      }
+    ],
+    "family": [],
+    "requests": [
+      {
+        "id": 2601,
+        "direction": "asked of me",
+        "other": "Arlo",
+        "text": "4 wood",
+        "status": "declined",
+        "note": "making",
+        "age": "1.8 min ago",
+        "purpose": "for the hut",
+        "progress": ""
+      },
+      {
+        "id": 2172,
+        "direction": "asked of me",
+        "other": "Cole",
+        "text": "1 wood",
+        "status": "fulfilled",
+        "note": "My accepted promise; no later outcome is known.",
+        "age": "3.3 min ago",
+        "purpose": "for the lean-to",
+        "progress": "1 of 1 wood brought"
+      }
+    ],
+    "memories": [
+      {
+        "when": "12s ago",
+        "text": "The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+        "kind": "info"
+      },
+      {
+        "when": "12s ago",
+        "text": "Got through the night under shelter (818 ticks of it).",
+        "kind": "need"
+      },
+      {
+        "when": "33s ago",
+        "text": "Slept and recovered 61 energy.",
+        "kind": "need"
+      },
+      {
+        "when": "1.6 min ago",
+        "text": "The berry bush I had remembered (about 2, 1.0 min old) was down to 1 when I got close.",
+        "kind": "info"
+      },
+      {
+        "when": "1.6 min ago",
+        "text": "The tree I had remembered (about 4, 2.1 min old) was down to 1 when I got close.",
+        "kind": "info"
+      },
+      {
+        "when": "1.7 min ago",
+        "text": "The berry bush I had remembered (about 2, 0.9 min old) was down to 1 when I got close.",
+        "kind": "info"
+      },
+      {
+        "when": "1.8 min ago",
+        "text": "Arlo told me Talia picked a quarrel with Hana.",
+        "kind": "info"
+      },
+      {
+        "when": "1.8 min ago",
+        "text": "Turned down Arlo's request (making).",
+        "kind": "social"
+      },
+      {
+        "when": "1.8 min ago",
+        "text": "Arlo asked me for wood and I had none to spare; if I come by some, Arlo is a customer for it.",
+        "kind": "social"
+      },
+      {
+        "when": "1.8 min ago",
+        "text": "Arlo asked me for wood; I will remember this local demand.",
+        "kind": "social"
+      },
+      {
+        "when": "2.3 min ago",
+        "text": "Gathered 1 items from the tree.",
+        "kind": "work"
+      },
+      {
+        "when": "2.5 min ago",
+        "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+        "kind": "need"
+      },
+      {
+        "when": "2.5 min ago",
+        "text": "The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+        "kind": "info"
+      },
+      {
+        "when": "2.7 min ago",
+        "text": "The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+        "kind": "info"
+      }
+    ],
+    "knowledge": {
+      "places": 154,
+      "seen": 152,
+      "hearsay": 2,
+      "stale": 59,
+      "byKind": [
+        {
+          "kind": "tree",
+          "n": 65
+        },
+        {
+          "kind": "water",
+          "n": 21
+        },
+        {
+          "kind": "berry bush",
+          "n": 15
+        },
+        {
+          "kind": "rock outcrop",
+          "n": 14
+        },
+        {
+          "kind": "building",
+          "n": 13
+        },
+        {
+          "kind": "field plot",
+          "n": 8
+        },
+        {
+          "kind": "wild grain",
+          "n": 5
+        },
+        {
+          "kind": "building site",
+          "n": 5
+        },
+        {
+          "kind": "fishing spot",
+          "n": 3
+        },
+        {
+          "kind": "clay pit",
+          "n": 3
+        },
+        {
+          "kind": "fruit tree",
+          "n": 1
+        },
+        {
+          "kind": "ore vein",
+          "n": 1
+        }
+      ]
+    },
+    "speech": null
+  },
+  "opps": [
+    {
+      "id": 762,
+      "what": "wild grain (5 grain)",
+      "status": "chosen",
+      "detail": "This is what they are doing about it.",
+      "distance": 0.9646844177206132,
+      "x": 48.5,
+      "y": 51.5
+    },
+    {
+      "id": 758,
+      "what": "wild grain (3 grain)",
+      "status": "passed over",
+      "detail": "Considered (score 12) but preferred “Gathering wild grain” (32).",
+      "distance": 1.0363190305982322,
+      "x": 48.5,
+      "y": 49.5
+    },
+    {
+      "id": 759,
+      "what": "wild grain (4 grain)",
+      "status": "passed over",
+      "detail": "Considered (score 12) but preferred “Gathering wild grain” (32).",
+      "distance": 1.3664897479053149,
+      "x": 49.5,
+      "y": 51.5
+    },
+    {
+      "id": 761,
+      "what": "wild grain (3 grain)",
+      "status": "not needed",
+      "detail": "Other options scored higher.",
+      "distance": 1.4120686316378483,
+      "x": 47.5,
+      "y": 51.5
+    },
+    {
+      "id": 760,
+      "what": "wild grain (5 grain)",
+      "status": "not needed",
+      "detail": "Other options scored higher.",
+      "distance": 1.4619435446838183,
+      "x": 47.5,
+      "y": 49.5
+    },
+    {
+      "id": 1897,
+      "what": "hut site (Wren)",
+      "status": "not needed",
+      "detail": "It belongs to people they hardly know.",
+      "distance": 3.5667173451344056,
+      "x": 49,
+      "y": 47
+    },
+    {
+      "id": 705,
+      "what": "berry bush (2 berries)",
+      "status": "not needed",
+      "detail": "Other options scored higher.",
+      "distance": 5.427912735130028,
+      "x": 43.5,
+      "y": 48.5
+    },
+    {
+      "id": 2280,
+      "what": "hut site (Linden)",
+      "status": "not needed",
+      "detail": "It belongs to people they hardly know.",
+      "distance": 8.322345944113794,
+      "x": 45,
+      "y": 43
+    },
+    {
+      "id": 1927,
+      "what": "hut site (Sedge)",
+      "status": "not needed",
+      "detail": "It belongs to people they hardly know.",
+      "distance": 19.958909747739693,
+      "x": 39,
+      "y": 33
+    }
+  ],
+  "pure": true,
+  "hashSame": true,
+  "rngSame": true,
+  "firstDiff": null,
+  "raw": {
+    "activity": {
+      "kind": "gather",
+      "phase": "work",
+      "goal": "to bring food home",
+      "why": "plan up to 1 grain; estimated return 129 ticks · household is short of food +36 · walking −8 · well-liked food +2 · has paid me well before (1.4×) +2",
+      "blocked": ""
+    },
+    "intentions": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more stone for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "stone",
+        "stepKey": null,
+        "blocked": ""
+      },
+      {
+        "id": 2424,
+        "kind": "night",
+        "goal": "be fed, watered and under shelter before dark",
+        "since": 3310,
+        "until": 4920,
+        "status": "done",
+        "step": "",
+        "stepKind": "none",
+        "stepTarget": 898,
+        "stepItem": null,
+        "stepKey": null,
+        "blocked": "",
+        "reason": "under shelter for 818 ticks of the night, fed and watered by morning",
+        "setAside": 0,
+        "aboutId": 898,
+        "wants": {},
+        "makes": "",
+        "sheltered": 818,
+        "worked": 0,
+        "ended": 4680
+      }
+    ],
+    "lastDecision": {
+      "tick": 4691,
+      "trigger": "free",
+      "chosen": {
+        "kind": "gather",
+        "label": "Gathering wild grain",
+        "utility": 31.7,
+        "parts": [
+          [
+            "household is short of food",
+            36
+          ],
+          [
+            "well-liked food",
+            2.4
+          ],
+          [
+            "walking",
+            -7.9
+          ],
+          [
+            "remembered strained patch (observed at tick 3859)",
+            -1.8
+          ],
+          [
+            "good at it",
+            0.9
+          ],
+          [
+            "has paid me well before (1.4×)",
+            2.3
+          ]
+        ]
+      },
+      "alternatives": [
+        {
+          "kind": "gather",
+          "label": "Gathering wild grain",
+          "utility": 31.6,
+          "parts": [
+            [
+              "household is short of food",
+              36
+            ],
+            [
+              "well-liked food",
+              2.4
+            ],
+            [
+              "walking",
+              -8.1
+            ],
+            [
+              "remembered strained patch (observed at tick 3859)",
+              -1.8
+            ],
+            [
+              "good at it",
+              0.9
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.3
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Picking berries",
+          "utility": 30.3,
+          "parts": [
+            [
+              "household is short of food",
+              36.3
+            ],
+            [
+              "well-liked food",
+              1.3
+            ],
+            [
+              "walking",
+              -6.9
+            ],
+            [
+              "remembered strained patch (observed at tick 4690)",
+              -2
+            ],
+            [
+              "good at it",
+              0.9
+            ],
+            [
+              "my work at this source paid 1.4× of its estimate (1 outcome)",
+              0.7
+            ]
+          ]
+        },
+        {
+          "kind": "tend",
+          "label": "Tend the crops",
+          "utility": 19.7,
+          "parts": [
+            [
+              "crop needs care",
+              23.7
+            ],
+            [
+              "walking",
+              -4
+            ]
+          ]
+        },
+        {
+          "kind": "tend",
+          "label": "Tend the crops",
+          "utility": 19.2,
+          "parts": [
+            [
+              "crop needs care",
+              23.7
+            ],
+            [
+              "walking",
+              -4.5
+            ]
+          ]
+        }
+      ],
+      "blocked": [
+        {
+          "kind": "plan_site",
+          "label": "Lay out a hut",
+          "utility": 0,
+          "parts": [],
+          "blocked": "too thirsty to start a building"
+        },
+        {
+          "kind": "eat_store",
+          "label": "Eat from the stores",
+          "utility": 0,
+          "parts": [],
+          "blocked": "remembers it being empty"
+        },
+        {
+          "kind": "gather",
+          "label": "Get wood for a friend’s hut",
+          "utility": 0,
+          "parts": [],
+          "blocked": "no room in my pack for one wood"
+        },
+        {
+          "kind": "gather",
+          "label": "Get stone for a friend’s hut",
+          "utility": 0,
+          "parts": [],
+          "blocked": "no room in my pack for one stone"
+        },
+        {
+          "kind": "build",
+          "label": "Work on the building site",
+          "utility": 0,
+          "parts": [],
+          "blocked": "site is waiting for materials (2 wood, 3 stone)"
+        },
+        {
+          "kind": "socialize",
+          "label": "Ask someone for stone",
+          "utility": 0,
+          "parts": [],
+          "blocked": "no room in my pack for it"
+        }
+      ],
+      "considered": 12,
+      "knownPlaces": 153,
+      "seenNow": 17,
+      "because": "plan up to 1 grain; estimated return 129 ticks · household is short of food +36 · walking −8 · well-liked food +2 · has paid me well before (1.4×) +2"
+    },
+    "commitments": [],
+    "inv": {
+      "seeds": 3,
+      "wood": 2
+    },
+    "needs": {
+      "hunger": 56.95434252100863,
+      "thirst": 49.31999999999624,
+      "energy": 94.25229999999932,
+      "warmth": 66.64856898732448,
+      "safety": 83.78010099182488,
+      "social": 93.2218206284386
+    },
+    "concerns": [
+      {
+        "about": 934,
+        "kind": "thirsty",
+        "seen": 4746,
+        "src": "seen",
+        "from": 899,
+        "checked": -99999
+      },
+      {
+        "about": 936,
+        "kind": "thirsty",
+        "seen": 4758,
+        "src": "seen",
+        "from": 899,
+        "checked": -99999
+      }
+    ],
+    "beliefsKnown": 154
+  }
+}

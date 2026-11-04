@@ -1,0 +1,127 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-trap-ground-check3",
+  "head": "2fdf0ea159c56af9adac1ce24f376d34e5c6c976",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "HANDOFF.md",
+      "kind": "tracked-change",
+      "sha256": "b8aadb75513f0b3ef60b8897405492c1e03d169b261d57551e5277eecf2effea",
+      "bytes": 48797,
+      "archiveObject": "objects/b8/b8aadb75513f0b3ef60b8897405492c1e03d169b261d57551e5277eecf2effea.gz"
+    },
+    {
+      "path": "docs/SURVIVAL_CAPABILITIES.md",
+      "kind": "tracked-change",
+      "sha256": "2d721cfdd91ce5fce01edde8ccfb7b43854b00076158c8389478e5c963adb0ca",
+      "bytes": 42137,
+      "archiveObject": "objects/2d/2d721cfdd91ce5fce01edde8ccfb7b43854b00076158c8389478e5c963adb0ca.gz"
+    },
+    {
+      "path": "scripts/browser/trap_ground_check.mjs",
+      "kind": "untracked",
+      "sha256": "e5ed1e647339e3a79e38848c3cfb07809d15d348cd36d38f0bb671b5768715ec",
+      "bytes": 1762,
+      "archiveObject": "objects/e5/e5ed1e647339e3a79e38848c3cfb07809d15d348cd36d38f0bb671b5768715ec.gz"
+    },
+    {
+      "path": "scripts/browser/trap_ground_manual.html",
+      "kind": "untracked",
+      "sha256": "4853535125a8b55b5b71458d3365923c43b0786858810c2dfb92dc892d0837a6",
+      "bytes": 4170,
+      "archiveObject": "objects/48/4853535125a8b55b5b71458d3365923c43b0786858810c2dfb92dc892d0837a6.gz"
+    },
+    {
+      "path": "scripts/v127_reference.ts",
+      "kind": "untracked",
+      "sha256": "bd2a5401439c8b7183bf73046c120a675003b1309c68f6f0a0ebd2b42060200b",
+      "bytes": 1481,
+      "archiveObject": "objects/bd/bd2a5401439c8b7183bf73046c120a675003b1309c68f6f0a0ebd2b42060200b.gz"
+    },
+    {
+      "path": "src/sim/knowledge.ts",
+      "kind": "tracked-change",
+      "sha256": "029b3076861fc7c5696a7ddc851a8fdc141d21409e5af12684bd930b0de47f23",
+      "bytes": 10747,
+      "archiveObject": "objects/02/029b3076861fc7c5696a7ddc851a8fdc141d21409e5af12684bd930b0de47f23.gz"
+    },
+    {
+      "path": "src/sim/labels.ts",
+      "kind": "tracked-change",
+      "sha256": "8d9dc39650ff04d84cb1377f638d2711cb348997aaa536caf06d452201575179",
+      "bytes": 3920,
+      "archiveObject": "objects/8d/8d9dc39650ff04d84cb1377f638d2711cb348997aaa536caf06d452201575179.gz"
+    },
+    {
+      "path": "src/sim/passive_gear.ts",
+      "kind": "tracked-change",
+      "sha256": "9b996c993a8c2eb1ef1ae136f6c26783fc9c9fcfbcca1dd9e1e570bf04f7d93f",
+      "bytes": 13789,
+      "archiveObject": "objects/9b/9b996c993a8c2eb1ef1ae136f6c26783fc9c9fcfbcca1dd9e1e570bf04f7d93f.gz"
+    },
+    {
+      "path": "src/sim/perception.ts",
+      "kind": "tracked-change",
+      "sha256": "7c3aa60020bb563969794d90616c4e25fe8fc11487c2f8fd1b9bf790b14a8dfe",
+      "bytes": 9745,
+      "archiveObject": "objects/7c/7c3aa60020bb563969794d90616c4e25fe8fc11487c2f8fd1b9bf790b14a8dfe.gz"
+    },
+    {
+      "path": "src/sim/production.ts",
+      "kind": "tracked-change",
+      "sha256": "5247d28feca78423d23c8b410f487c882ace33797de4c80195dd7c02b436d716",
+      "bytes": 68602,
+      "archiveObject": "objects/52/5247d28feca78423d23c8b410f487c882ace33797de4c80195dd7c02b436d716.gz"
+    },
+    {
+      "path": "src/sim/rulesversion.ts",
+      "kind": "tracked-change",
+      "sha256": "336b761b4687b3dd1a545675c03b190ef221d0e3ba8d07ed9fd4f69a5d13ff7e",
+      "bytes": 26060,
+      "archiveObject": "objects/33/336b761b4687b3dd1a545675c03b190ef221d0e3ba8d07ed9fd4f69a5d13ff7e.gz"
+    },
+    {
+      "path": "src/sim/types.ts",
+      "kind": "tracked-change",
+      "sha256": "7b99e6c15f193dcf6ff6cee15bae10d67be4eaa59df6715fde17d22a17b53b2f",
+      "bytes": 54503,
+      "archiveObject": "objects/7b/7b99e6c15f193dcf6ff6cee15bae10d67be4eaa59df6715fde17d22a17b53b2f.gz"
+    },
+    {
+      "path": "src/sim/world.ts",
+      "kind": "tracked-change",
+      "sha256": "8f7e1ae9798d489d22927ff652b4672a0d668746f7b55e9146508399d7580705",
+      "bytes": 30544,
+      "archiveObject": "objects/8f/8f7e1ae9798d489d22927ff652b4672a0d668746f7b55e9146508399d7580705.gz"
+    },
+    {
+      "path": "tests/helpers/v127ref.ts",
+      "kind": "untracked",
+      "sha256": "6d492dc0da88fcc3da24d910965f073318bcf13c52633a7a1d02461597d89fa3",
+      "bytes": 3218,
+      "archiveObject": "objects/6d/6d492dc0da88fcc3da24d910965f073318bcf13c52633a7a1d02461597d89fa3.gz"
+    },
+    {
+      "path": "tests/trap_ground.test.ts",
+      "kind": "untracked",
+      "sha256": "ad004070bfce8153b389080eb5e6585d9966be93e2a574c94d85796fba9623fd",
+      "bytes": 6449,
+      "archiveObject": "objects/ad/ad004070bfce8153b389080eb5e6585d9966be93e2a574c94d85796fba9623fd.gz"
+    },
+    {
+      "path": "tests/v127_continuation.expected.json",
+      "kind": "untracked",
+      "sha256": "d1131f0c7e830e3b4a69ff9b40542681cee0ba0003f65713df164d6915f8150e",
+      "bytes": 2378,
+      "archiveObject": "objects/d1/d1131f0c7e830e3b4a69ff9b40542681cee0ba0003f65713df164d6915f8150e.gz"
+    },
+    {
+      "path": "tests/v127_continuation.test.ts",
+      "kind": "untracked",
+      "sha256": "ac049ffcc55cab9e3254b09dbdb5ee2f2562f5957497c23976e317e744c7f67a",
+      "bytes": 386,
+      "archiveObject": "objects/ac/ac049ffcc55cab9e3254b09dbdb5ee2f2562f5957497c23976e317e744c7f67a.gz"
+    }
+  ],
+  "stagedFiles": []
+}

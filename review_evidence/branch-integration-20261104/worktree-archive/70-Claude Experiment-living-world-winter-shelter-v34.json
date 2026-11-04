@@ -1,0 +1,1030 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-winter-shelter-v34",
+  "head": "f33cd0bf4edce91bf06aec332325c6182022a771",
+  "branch": "refs/heads/claude/winter-shelter-v34",
+  "workingFiles": [
+    {
+      "path": "tally_v34/control_aspen.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_aspen.json",
+      "kind": "untracked",
+      "sha256": "45ad7fdf660843915a194ee4b52255936f53709dd747038dea73bf28d6e71882",
+      "bytes": 32244,
+      "archiveObject": "objects/45/45ad7fdf660843915a194ee4b52255936f53709dd747038dea73bf28d6e71882.gz"
+    },
+    {
+      "path": "tally_v34/control_aspen.log",
+      "kind": "ignored-evidence",
+      "sha256": "f82afe323eab46a4d46d8890dc0f823ea0b350edd30971c1677c2f2d5a57950d",
+      "bytes": 11759,
+      "archiveObject": "objects/f8/f82afe323eab46a4d46d8890dc0f823ea0b350edd30971c1677c2f2d5a57950d.gz"
+    },
+    {
+      "path": "tally_v34/control_birch.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_birch.json",
+      "kind": "untracked",
+      "sha256": "6d64cbae4ce777798fc9b93e2d35a8211107aa1ec52ca15c9a44547f197757a2",
+      "bytes": 24474,
+      "archiveObject": "objects/6d/6d64cbae4ce777798fc9b93e2d35a8211107aa1ec52ca15c9a44547f197757a2.gz"
+    },
+    {
+      "path": "tally_v34/control_birch.log",
+      "kind": "ignored-evidence",
+      "sha256": "faa7934659ddf405c8876f019dc35dc43a4fc737e768f831116c3bae31b975ba",
+      "bytes": 9118,
+      "archiveObject": "objects/fa/faa7934659ddf405c8876f019dc35dc43a4fc737e768f831116c3bae31b975ba.gz"
+    },
+    {
+      "path": "tally_v34/control_cedar.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_cedar.json",
+      "kind": "untracked",
+      "sha256": "cd0f3e430b393b0ab9878feecdb9446f20ba703cbc7deab3ecf1736e7f64cefe",
+      "bytes": 32563,
+      "archiveObject": "objects/cd/cd0f3e430b393b0ab9878feecdb9446f20ba703cbc7deab3ecf1736e7f64cefe.gz"
+    },
+    {
+      "path": "tally_v34/control_cedar.log",
+      "kind": "ignored-evidence",
+      "sha256": "fcea25b60b4923465ad367b98884146708e9a7ad47a5ec6b10a84eca0f77bc27",
+      "bytes": 12746,
+      "archiveObject": "objects/fc/fcea25b60b4923465ad367b98884146708e9a7ad47a5ec6b10a84eca0f77bc27.gz"
+    },
+    {
+      "path": "tally_v34/control_fern.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_fern.json",
+      "kind": "untracked",
+      "sha256": "c0e134a939d73911682c9a153ec6f6a198c357f0f39ee0af28d17f6cedf6b331",
+      "bytes": 28152,
+      "archiveObject": "objects/c0/c0e134a939d73911682c9a153ec6f6a198c357f0f39ee0af28d17f6cedf6b331.gz"
+    },
+    {
+      "path": "tally_v34/control_fern.log",
+      "kind": "ignored-evidence",
+      "sha256": "bc305009de8fce6f0e86fe6db1d17018fecf81fb60e86f12691ca2095a71e69d",
+      "bytes": 10727,
+      "archiveObject": "objects/bc/bc305009de8fce6f0e86fe6db1d17018fecf81fb60e86f12691ca2095a71e69d.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-1.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-1.json",
+      "kind": "untracked",
+      "sha256": "9154c742c3ba89cc848fc2c34c018dd5fe1653ac5df843d1792eff2814777648",
+      "bytes": 25224,
+      "archiveObject": "objects/91/9154c742c3ba89cc848fc2c34c018dd5fe1653ac5df843d1792eff2814777648.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-1.log",
+      "kind": "ignored-evidence",
+      "sha256": "35299629eecd529eca0ab2a7bc272fdb0cbd795024ebab7fc2a9e7a0d991f6b8",
+      "bytes": 9231,
+      "archiveObject": "objects/35/35299629eecd529eca0ab2a7bc272fdb0cbd795024ebab7fc2a9e7a0d991f6b8.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-2.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-2.json",
+      "kind": "untracked",
+      "sha256": "0a3ef851ebfb761717ff57013703fa55393d086133a52c33d8e624255252ac8b",
+      "bytes": 34113,
+      "archiveObject": "objects/0a/0a3ef851ebfb761717ff57013703fa55393d086133a52c33d8e624255252ac8b.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-2.log",
+      "kind": "ignored-evidence",
+      "sha256": "d07a9f256f4cd6112f2a457ce87b7e8e83a812073f101c30530b7547d5dcc9a4",
+      "bytes": 14356,
+      "archiveObject": "objects/d0/d07a9f256f4cd6112f2a457ce87b7e8e83a812073f101c30530b7547d5dcc9a4.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-3.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-3.json",
+      "kind": "untracked",
+      "sha256": "96e9a4a4a3297a4f2870e17a1f7b20076e912ebdaabd81a7d49f11a8301cd7aa",
+      "bytes": 35149,
+      "archiveObject": "objects/96/96e9a4a4a3297a4f2870e17a1f7b20076e912ebdaabd81a7d49f11a8301cd7aa.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-3.log",
+      "kind": "ignored-evidence",
+      "sha256": "5ec2a422f557b6f76928224d37ca750f5168fcb5c6969a17778e69582e791335",
+      "bytes": 13145,
+      "archiveObject": "objects/5e/5ec2a422f557b6f76928224d37ca750f5168fcb5c6969a17778e69582e791335.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-4.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-4.json",
+      "kind": "untracked",
+      "sha256": "26a1192b5a03e948440b2b4003e2c68db990759160a6e57c702ee19f4f2364a6",
+      "bytes": 30814,
+      "archiveObject": "objects/26/26a1192b5a03e948440b2b4003e2c68db990759160a6e57c702ee19f4f2364a6.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-4.log",
+      "kind": "ignored-evidence",
+      "sha256": "983dcd39433bd8b3ca39596bc642ff7a68bd52d1355d4ee6e90d98b08d2dd1c8",
+      "bytes": 12030,
+      "archiveObject": "objects/98/983dcd39433bd8b3ca39596bc642ff7a68bd52d1355d4ee6e90d98b08d2dd1c8.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-5.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-5.json",
+      "kind": "untracked",
+      "sha256": "afcbd1889314f308d5c67658431f2020d7cf25f2b2a16f8c9efc7cba922ebe8b",
+      "bytes": 35085,
+      "archiveObject": "objects/af/afcbd1889314f308d5c67658431f2020d7cf25f2b2a16f8c9efc7cba922ebe8b.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "680bd995d5658c86df1d8d609d8c7ea2cbc9998901d6a021b8d81009c59cd56b",
+      "bytes": 13637,
+      "archiveObject": "objects/68/680bd995d5658c86df1d8d609d8c7ea2cbc9998901d6a021b8d81009c59cd56b.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-6.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_gen-6.json",
+      "kind": "untracked",
+      "sha256": "6961e4188ebdba1faed51f52ff648473e8d7258129f34290094d6ea3279e60e2",
+      "bytes": 30537,
+      "archiveObject": "objects/69/6961e4188ebdba1faed51f52ff648473e8d7258129f34290094d6ea3279e60e2.gz"
+    },
+    {
+      "path": "tally_v34/control_gen-6.log",
+      "kind": "ignored-evidence",
+      "sha256": "e54736b63e08e1aeca26dc779425fb987ae151226cc92285baf0a29caa6bd897",
+      "bytes": 9681,
+      "archiveObject": "objects/e5/e54736b63e08e1aeca26dc779425fb987ae151226cc92285baf0a29caa6bd897.gz"
+    },
+    {
+      "path": "tally_v34/control_meadow.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_meadow.json",
+      "kind": "untracked",
+      "sha256": "34525e06d9a2db13005fdeac90e8642fc6b9e7d48793e4824963f8fcfa1e30e7",
+      "bytes": 36588,
+      "archiveObject": "objects/34/34525e06d9a2db13005fdeac90e8642fc6b9e7d48793e4824963f8fcfa1e30e7.gz"
+    },
+    {
+      "path": "tally_v34/control_meadow.log",
+      "kind": "ignored-evidence",
+      "sha256": "b8daba7e7659e6f46113cbc62b6377dc7703f2faaf94b38b2f01d1787a48094a",
+      "bytes": 13759,
+      "archiveObject": "objects/b8/b8daba7e7659e6f46113cbc62b6377dc7703f2faaf94b38b2f01d1787a48094a.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-1.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-1.json",
+      "kind": "untracked",
+      "sha256": "596396f9aa540e0541ceecef5d7996a5cdd4834c15772c82d5314b34a7a4df12",
+      "bytes": 29505,
+      "archiveObject": "objects/59/596396f9aa540e0541ceecef5d7996a5cdd4834c15772c82d5314b34a7a4df12.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-1.log",
+      "kind": "ignored-evidence",
+      "sha256": "3be9415bfabe00b8bc3857e65eb2ea86d5fd82462d08c100b11cde1716fe679a",
+      "bytes": 10746,
+      "archiveObject": "objects/3b/3be9415bfabe00b8bc3857e65eb2ea86d5fd82462d08c100b11cde1716fe679a.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-10.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-10.json",
+      "kind": "untracked",
+      "sha256": "929bf6956e2c1a68f50cf91210954966144f563659ea537f0110c68ddc3372cc",
+      "bytes": 31049,
+      "archiveObject": "objects/92/929bf6956e2c1a68f50cf91210954966144f563659ea537f0110c68ddc3372cc.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-10.log",
+      "kind": "ignored-evidence",
+      "sha256": "c86f668c2f432073c37c10a0369f3aa4fc98e80475d5ac5e8c5de11084d7dceb",
+      "bytes": 11915,
+      "archiveObject": "objects/c8/c86f668c2f432073c37c10a0369f3aa4fc98e80475d5ac5e8c5de11084d7dceb.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-11.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-11.json",
+      "kind": "untracked",
+      "sha256": "c45d7646f50845c209a24f8dbbd59444913f8c4da3e6822352cff447536def88",
+      "bytes": 34865,
+      "archiveObject": "objects/c4/c45d7646f50845c209a24f8dbbd59444913f8c4da3e6822352cff447536def88.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-11.log",
+      "kind": "ignored-evidence",
+      "sha256": "cca9bc81833fd2e9b0db71407a522b989ca6df17480fdbf3a893763094eda528",
+      "bytes": 11846,
+      "archiveObject": "objects/cc/cca9bc81833fd2e9b0db71407a522b989ca6df17480fdbf3a893763094eda528.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-12.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-12.json",
+      "kind": "untracked",
+      "sha256": "46c26c05f47f48d971124d656df8ba0eadedac7f67a5885db48af13af8a1d1f1",
+      "bytes": 37739,
+      "archiveObject": "objects/46/46c26c05f47f48d971124d656df8ba0eadedac7f67a5885db48af13af8a1d1f1.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-12.log",
+      "kind": "ignored-evidence",
+      "sha256": "5d6291ec31c91f90722513b338367b7410e08073a87b9ea937d2828496a208f0",
+      "bytes": 15091,
+      "archiveObject": "objects/5d/5d6291ec31c91f90722513b338367b7410e08073a87b9ea937d2828496a208f0.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-2.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-2.json",
+      "kind": "untracked",
+      "sha256": "bd5afa973df6891dc26424e6f7c6621b9e2106db978bd0ef77a19bde8b7cf7bb",
+      "bytes": 34401,
+      "archiveObject": "objects/bd/bd5afa973df6891dc26424e6f7c6621b9e2106db978bd0ef77a19bde8b7cf7bb.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-2.log",
+      "kind": "ignored-evidence",
+      "sha256": "5656084d175da508c7b9bb3d122cdb126becd8f2736c2a535d8893c310b4a669",
+      "bytes": 12720,
+      "archiveObject": "objects/56/5656084d175da508c7b9bb3d122cdb126becd8f2736c2a535d8893c310b4a669.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-3.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-3.json",
+      "kind": "untracked",
+      "sha256": "a8bd9ed7cc984b6cb827c2be13e98becd89b032e0e44186306cc3a435b7cf0bd",
+      "bytes": 32036,
+      "archiveObject": "objects/a8/a8bd9ed7cc984b6cb827c2be13e98becd89b032e0e44186306cc3a435b7cf0bd.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-3.log",
+      "kind": "ignored-evidence",
+      "sha256": "c88c034948f8086c160cb8ed6ee0f43ecae1dc846d9c328ce706e6658b85aafd",
+      "bytes": 12510,
+      "archiveObject": "objects/c8/c88c034948f8086c160cb8ed6ee0f43ecae1dc846d9c328ce706e6658b85aafd.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-4.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-4.json",
+      "kind": "untracked",
+      "sha256": "22029fae1a17fdab2800cee2607215e1808120222e0ed06ee727c21b10d6c0e2",
+      "bytes": 35247,
+      "archiveObject": "objects/22/22029fae1a17fdab2800cee2607215e1808120222e0ed06ee727c21b10d6c0e2.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-4.log",
+      "kind": "ignored-evidence",
+      "sha256": "84cb5960601b64fa0cb7b865030704c33b06a62dafea91dfe69324633a982c6c",
+      "bytes": 13233,
+      "archiveObject": "objects/84/84cb5960601b64fa0cb7b865030704c33b06a62dafea91dfe69324633a982c6c.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-5.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-5.json",
+      "kind": "untracked",
+      "sha256": "4f14717fbae401dc36c742c6ee80240cefa93e443d268e7a6e97e79f50458082",
+      "bytes": 30452,
+      "archiveObject": "objects/4f/4f14717fbae401dc36c742c6ee80240cefa93e443d268e7a6e97e79f50458082.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "8e4d0597e8b26548822a1955c02bb0553d5d31cb7df8203273d9f8a44bc61369",
+      "bytes": 12004,
+      "archiveObject": "objects/8e/8e4d0597e8b26548822a1955c02bb0553d5d31cb7df8203273d9f8a44bc61369.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-6.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-6.json",
+      "kind": "untracked",
+      "sha256": "8cb52b1b5506e7033fcbc5203fb53d116828601769c71936002c9276eecaa0c3",
+      "bytes": 27569,
+      "archiveObject": "objects/8c/8cb52b1b5506e7033fcbc5203fb53d116828601769c71936002c9276eecaa0c3.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-6.log",
+      "kind": "ignored-evidence",
+      "sha256": "d270b97f7b1a18bfea11d9488555915b74121fc121947c1f6feec5e44c86c6af",
+      "bytes": 10245,
+      "archiveObject": "objects/d2/d270b97f7b1a18bfea11d9488555915b74121fc121947c1f6feec5e44c86c6af.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-7.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-7.json",
+      "kind": "untracked",
+      "sha256": "7471c85936b00988dfed12b1f551ab76f60290d69005b71f154fdf5912cc971b",
+      "bytes": 38245,
+      "archiveObject": "objects/74/7471c85936b00988dfed12b1f551ab76f60290d69005b71f154fdf5912cc971b.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-7.log",
+      "kind": "ignored-evidence",
+      "sha256": "31861f7c046d68cc60767c279cc99368e784368ed95ac8e49bee90a6af407f25",
+      "bytes": 15613,
+      "archiveObject": "objects/31/31861f7c046d68cc60767c279cc99368e784368ed95ac8e49bee90a6af407f25.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-8.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-8.json",
+      "kind": "untracked",
+      "sha256": "b438686b233c81c2d10f0503e8c11f8c264f0373c96fdee554a8fa8815148ebd",
+      "bytes": 30513,
+      "archiveObject": "objects/b4/b438686b233c81c2d10f0503e8c11f8c264f0373c96fdee554a8fa8815148ebd.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-8.log",
+      "kind": "ignored-evidence",
+      "sha256": "2f8cdcb6c0bbefc9a417df2691cc6919586bd2119e623aabe92923391d8705a9",
+      "bytes": 12215,
+      "archiveObject": "objects/2f/2f8cdcb6c0bbefc9a417df2691cc6919586bd2119e623aabe92923391d8705a9.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-9.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_nov-9.json",
+      "kind": "untracked",
+      "sha256": "1f67915a3e7c25a9aa828ba1d88962d92a7eb0f5674e7d4eadc1906dd512197c",
+      "bytes": 28029,
+      "archiveObject": "objects/1f/1f67915a3e7c25a9aa828ba1d88962d92a7eb0f5674e7d4eadc1906dd512197c.gz"
+    },
+    {
+      "path": "tally_v34/control_nov-9.log",
+      "kind": "ignored-evidence",
+      "sha256": "8feaa5a22f7c23093fc5c85f6e9a39f310a3a7161c45ae562a1c765e67201b58",
+      "bytes": 11012,
+      "archiveObject": "objects/8f/8feaa5a22f7c23093fc5c85f6e9a39f310a3a7161c45ae562a1c765e67201b58.gz"
+    },
+    {
+      "path": "tally_v34/control_river.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/control_river.json",
+      "kind": "untracked",
+      "sha256": "0d5406ccaa0048d03951a0d77e39e546b1da7c3da442caafb763287b4a883f40",
+      "bytes": 39459,
+      "archiveObject": "objects/0d/0d5406ccaa0048d03951a0d77e39e546b1da7c3da442caafb763287b4a883f40.gz"
+    },
+    {
+      "path": "tally_v34/control_river.log",
+      "kind": "ignored-evidence",
+      "sha256": "631a9dd33723b18bbf1e4a1b1427fae679002a6eddce0b073da7933c7e7af47c",
+      "bytes": 15096,
+      "archiveObject": "objects/63/631a9dd33723b18bbf1e4a1b1427fae679002a6eddce0b073da7933c7e7af47c.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_aspen.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_aspen.json",
+      "kind": "untracked",
+      "sha256": "2bdb0d8c3242bc4f169401d203bf76e2057f2bf29203d908a3443b39e522afce",
+      "bytes": 35744,
+      "archiveObject": "objects/2b/2bdb0d8c3242bc4f169401d203bf76e2057f2bf29203d908a3443b39e522afce.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_aspen.log",
+      "kind": "ignored-evidence",
+      "sha256": "f393c25043a16a9b538ebfdaaef208c9c385bdfd89443234b776174bbe01c85f",
+      "bytes": 12506,
+      "archiveObject": "objects/f3/f393c25043a16a9b538ebfdaaef208c9c385bdfd89443234b776174bbe01c85f.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_birch.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_birch.json",
+      "kind": "untracked",
+      "sha256": "e180b15519f00d5e1450c9d7208c1652299ad99519836d27dcbeea44c69469f2",
+      "bytes": 25882,
+      "archiveObject": "objects/e1/e180b15519f00d5e1450c9d7208c1652299ad99519836d27dcbeea44c69469f2.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_birch.log",
+      "kind": "ignored-evidence",
+      "sha256": "7a8c69af66cc44f2e7614d8a7a07c1571618a0146f40b93e0b099fa082ec15d3",
+      "bytes": 9718,
+      "archiveObject": "objects/7a/7a8c69af66cc44f2e7614d8a7a07c1571618a0146f40b93e0b099fa082ec15d3.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_cedar.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_cedar.json",
+      "kind": "untracked",
+      "sha256": "ec30d41ceaa7f644532e857af5d8b5eab89c0944df624ccd24f8ad2334f8b40b",
+      "bytes": 32398,
+      "archiveObject": "objects/ec/ec30d41ceaa7f644532e857af5d8b5eab89c0944df624ccd24f8ad2334f8b40b.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_cedar.log",
+      "kind": "ignored-evidence",
+      "sha256": "d518c77a9a06ae5a21368d2d3640faf6cf1b7a0801809568013c74f284c89f78",
+      "bytes": 12131,
+      "archiveObject": "objects/d5/d518c77a9a06ae5a21368d2d3640faf6cf1b7a0801809568013c74f284c89f78.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_fern.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_fern.json",
+      "kind": "untracked",
+      "sha256": "bd1b76e6ea519f9ff5dec99ff4fb5826b5a81d01c62f93aef0ed1789398be779",
+      "bytes": 31478,
+      "archiveObject": "objects/bd/bd1b76e6ea519f9ff5dec99ff4fb5826b5a81d01c62f93aef0ed1789398be779.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_fern.log",
+      "kind": "ignored-evidence",
+      "sha256": "d3c950909dc3ee79b20af5f2a91cd7a5c905a258394a4dda9c39a286838e5245",
+      "bytes": 12311,
+      "archiveObject": "objects/d3/d3c950909dc3ee79b20af5f2a91cd7a5c905a258394a4dda9c39a286838e5245.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-1.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-1.json",
+      "kind": "untracked",
+      "sha256": "873854f2209c6d36433b892e03a13afc6faf4a160b38ff12d0b95abaf35fac76",
+      "bytes": 28246,
+      "archiveObject": "objects/87/873854f2209c6d36433b892e03a13afc6faf4a160b38ff12d0b95abaf35fac76.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-1.log",
+      "kind": "ignored-evidence",
+      "sha256": "4d3e1357dc07145ee8db5c00115c5c889fbb3b87f4a18705cc979c233e33bd51",
+      "bytes": 10241,
+      "archiveObject": "objects/4d/4d3e1357dc07145ee8db5c00115c5c889fbb3b87f4a18705cc979c233e33bd51.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-2.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-2.json",
+      "kind": "untracked",
+      "sha256": "b4fadfaa8cccbd46ad520914fdf7ae4a7daa6fa3d5cd1ceb59de7e448a403317",
+      "bytes": 36332,
+      "archiveObject": "objects/b4/b4fadfaa8cccbd46ad520914fdf7ae4a7daa6fa3d5cd1ceb59de7e448a403317.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-2.log",
+      "kind": "ignored-evidence",
+      "sha256": "c1c417dc1ac5aeec2372aed111bcf3095d7891a2a92dc99d977c2c626406a3fa",
+      "bytes": 13824,
+      "archiveObject": "objects/c1/c1c417dc1ac5aeec2372aed111bcf3095d7891a2a92dc99d977c2c626406a3fa.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-3.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-3.json",
+      "kind": "untracked",
+      "sha256": "02fcaef432da0397e72c929d33754a4ce70bea8f7a2fefeb3d8c0c303bc68351",
+      "bytes": 36881,
+      "archiveObject": "objects/02/02fcaef432da0397e72c929d33754a4ce70bea8f7a2fefeb3d8c0c303bc68351.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-3.log",
+      "kind": "ignored-evidence",
+      "sha256": "a16a8d6b2266f48c9c86a76c744ad15ef36f5716c8d5bf351284588d4317da5c",
+      "bytes": 12362,
+      "archiveObject": "objects/a1/a16a8d6b2266f48c9c86a76c744ad15ef36f5716c8d5bf351284588d4317da5c.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-4.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-4.json",
+      "kind": "untracked",
+      "sha256": "505d128432e2db9ec3b7c2542950bcdb9e12b54c9e83bf60c5ddc14cb2c561e6",
+      "bytes": 29784,
+      "archiveObject": "objects/50/505d128432e2db9ec3b7c2542950bcdb9e12b54c9e83bf60c5ddc14cb2c561e6.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-4.log",
+      "kind": "ignored-evidence",
+      "sha256": "ccfe826f84cebf72e2c06aa2598172550761d5f963aff7beaaef0c9c53d75564",
+      "bytes": 11509,
+      "archiveObject": "objects/cc/ccfe826f84cebf72e2c06aa2598172550761d5f963aff7beaaef0c9c53d75564.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-5.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-5.json",
+      "kind": "untracked",
+      "sha256": "cdf0b3783f8d71c29aa7cc4f1cbc120d7d611fd0a19c83f210de76d95cc26a89",
+      "bytes": 32437,
+      "archiveObject": "objects/cd/cdf0b3783f8d71c29aa7cc4f1cbc120d7d611fd0a19c83f210de76d95cc26a89.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "7497cbc276a73798960c3d49d1f694889adc2c3c0301b81f5cd509fee08e899a",
+      "bytes": 12692,
+      "archiveObject": "objects/74/7497cbc276a73798960c3d49d1f694889adc2c3c0301b81f5cd509fee08e899a.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-6.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-6.json",
+      "kind": "untracked",
+      "sha256": "fd4d554f0af6b68d16082bdea1396c39e4f1f72a640f3e8939d8578a8b44e569",
+      "bytes": 36219,
+      "archiveObject": "objects/fd/fd4d554f0af6b68d16082bdea1396c39e4f1f72a640f3e8939d8578a8b44e569.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_gen-6.log",
+      "kind": "ignored-evidence",
+      "sha256": "a859d168d665906d15525cf7dbb0caddb8d0b3c1ed6f26cbfe2708b6c1c293a7",
+      "bytes": 14800,
+      "archiveObject": "objects/a8/a859d168d665906d15525cf7dbb0caddb8d0b3c1ed6f26cbfe2708b6c1c293a7.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_meadow.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_meadow.json",
+      "kind": "untracked",
+      "sha256": "e2292d9ec31a2fe7582f455733265b511f8727562ebd1d7c3e066ebe17c46a6e",
+      "bytes": 28059,
+      "archiveObject": "objects/e2/e2292d9ec31a2fe7582f455733265b511f8727562ebd1d7c3e066ebe17c46a6e.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_meadow.log",
+      "kind": "ignored-evidence",
+      "sha256": "7c41e4b755c04982101bf406339eefb3e83b350c131e354f311a52130ffae8fc",
+      "bytes": 10695,
+      "archiveObject": "objects/7c/7c41e4b755c04982101bf406339eefb3e83b350c131e354f311a52130ffae8fc.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-1.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-1.json",
+      "kind": "untracked",
+      "sha256": "2a43a5dbf36471e050f19106d5087c2605166e36b3375770e4bcc07c3fc4a184",
+      "bytes": 31470,
+      "archiveObject": "objects/2a/2a43a5dbf36471e050f19106d5087c2605166e36b3375770e4bcc07c3fc4a184.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-1.log",
+      "kind": "ignored-evidence",
+      "sha256": "6cae3a676e314bea1389f75aaf1637c9eb2c4f31a372b3155f1dea9022f0e1c7",
+      "bytes": 11792,
+      "archiveObject": "objects/6c/6cae3a676e314bea1389f75aaf1637c9eb2c4f31a372b3155f1dea9022f0e1c7.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-10.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-10.json",
+      "kind": "untracked",
+      "sha256": "a6566a69a666332f1714914aa27bbea0fb247a686bfb4840af31ff88400ce5b4",
+      "bytes": 33356,
+      "archiveObject": "objects/a6/a6566a69a666332f1714914aa27bbea0fb247a686bfb4840af31ff88400ce5b4.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-10.log",
+      "kind": "ignored-evidence",
+      "sha256": "416e0a91a029d36d0a3822385b30a4ad2aff4ebe1bc1d475e576e1035a0979bf",
+      "bytes": 12705,
+      "archiveObject": "objects/41/416e0a91a029d36d0a3822385b30a4ad2aff4ebe1bc1d475e576e1035a0979bf.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-11.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-11.json",
+      "kind": "untracked",
+      "sha256": "4694c756fbd552641dc8d5f586600e03d8cf5add5bf2ee78315a76cb7b6e941b",
+      "bytes": 29521,
+      "archiveObject": "objects/46/4694c756fbd552641dc8d5f586600e03d8cf5add5bf2ee78315a76cb7b6e941b.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-11.log",
+      "kind": "ignored-evidence",
+      "sha256": "cf736fbf1d3044e89b04bb96bef48ebebcb96449ce38a60bb173c843986395f2",
+      "bytes": 11450,
+      "archiveObject": "objects/cf/cf736fbf1d3044e89b04bb96bef48ebebcb96449ce38a60bb173c843986395f2.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-12.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-12.json",
+      "kind": "untracked",
+      "sha256": "b89f7bfce382245a66a2e2c6e299c3a673c63999efa30b7d9f16b8d8ff7a21b9",
+      "bytes": 43379,
+      "archiveObject": "objects/b8/b89f7bfce382245a66a2e2c6e299c3a673c63999efa30b7d9f16b8d8ff7a21b9.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-12.log",
+      "kind": "ignored-evidence",
+      "sha256": "53145f325709fd0514adb4398903223b66576f91a97d7cbc9fe04822c90fa3d6",
+      "bytes": 17437,
+      "archiveObject": "objects/53/53145f325709fd0514adb4398903223b66576f91a97d7cbc9fe04822c90fa3d6.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-2.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-2.json",
+      "kind": "untracked",
+      "sha256": "19671f11476ae982d4b9182106630c0d5d38f14dc26df2997c613db77e578875",
+      "bytes": 32283,
+      "archiveObject": "objects/19/19671f11476ae982d4b9182106630c0d5d38f14dc26df2997c613db77e578875.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-2.log",
+      "kind": "ignored-evidence",
+      "sha256": "454b22e7e5ce24978d39d8fd31981452a3bd164303cad37fd2eb8a4f80f1a417",
+      "bytes": 12292,
+      "archiveObject": "objects/45/454b22e7e5ce24978d39d8fd31981452a3bd164303cad37fd2eb8a4f80f1a417.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-3.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-3.json",
+      "kind": "untracked",
+      "sha256": "ce4cf14c795d8a9477861733c80f12871da601e6a2589d60c0636f6aeefaed59",
+      "bytes": 30848,
+      "archiveObject": "objects/ce/ce4cf14c795d8a9477861733c80f12871da601e6a2589d60c0636f6aeefaed59.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-3.log",
+      "kind": "ignored-evidence",
+      "sha256": "b8e51e0525f05702c060486a7a75d8c8e976995bf70c9ad7001028c6faa5fe03",
+      "bytes": 11188,
+      "archiveObject": "objects/b8/b8e51e0525f05702c060486a7a75d8c8e976995bf70c9ad7001028c6faa5fe03.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-4.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-4.json",
+      "kind": "untracked",
+      "sha256": "4d5fe43fba6a5f4923cded84cf9c5d4372f4797fbb5dc39db462340f795951e3",
+      "bytes": 27177,
+      "archiveObject": "objects/4d/4d5fe43fba6a5f4923cded84cf9c5d4372f4797fbb5dc39db462340f795951e3.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-4.log",
+      "kind": "ignored-evidence",
+      "sha256": "8438cc8366cb741a4f4ffd8c2bb7e1c7c45171f7bf36256326a9f6cf8f620e6e",
+      "bytes": 10048,
+      "archiveObject": "objects/84/8438cc8366cb741a4f4ffd8c2bb7e1c7c45171f7bf36256326a9f6cf8f620e6e.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-5.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-5.json",
+      "kind": "untracked",
+      "sha256": "f3dd6b26830571884d5683b19d6dfaacc48840a8bffeee5de99d58137db8a568",
+      "bytes": 25115,
+      "archiveObject": "objects/f3/f3dd6b26830571884d5683b19d6dfaacc48840a8bffeee5de99d58137db8a568.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-5.log",
+      "kind": "ignored-evidence",
+      "sha256": "0be2f0c867375ee6d96a09d78861b94b1bd72fa3dfd87f7eaa12e807302305a8",
+      "bytes": 9213,
+      "archiveObject": "objects/0b/0be2f0c867375ee6d96a09d78861b94b1bd72fa3dfd87f7eaa12e807302305a8.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-6.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-6.json",
+      "kind": "untracked",
+      "sha256": "d5c3fa614d374d673682880a55bedfbc2bf453b0b24dadd3024cee6388412547",
+      "bytes": 28899,
+      "archiveObject": "objects/d5/d5c3fa614d374d673682880a55bedfbc2bf453b0b24dadd3024cee6388412547.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-6.log",
+      "kind": "ignored-evidence",
+      "sha256": "1e234293ee1421203b52a2f22af90942d29a4395173dd2eb384afeb89c02b1b6",
+      "bytes": 10058,
+      "archiveObject": "objects/1e/1e234293ee1421203b52a2f22af90942d29a4395173dd2eb384afeb89c02b1b6.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-7.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-7.json",
+      "kind": "untracked",
+      "sha256": "40d238285a9d97837c8aa0f17dc1c631ceb5ddcd8ea5c22bc8cec0b76f8db1a0",
+      "bytes": 36520,
+      "archiveObject": "objects/40/40d238285a9d97837c8aa0f17dc1c631ceb5ddcd8ea5c22bc8cec0b76f8db1a0.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-7.log",
+      "kind": "ignored-evidence",
+      "sha256": "5e49769cee1c5055dd37b7daf2b18d44fd8a1368d6b9cf20dbeb41a27e038d6b",
+      "bytes": 14234,
+      "archiveObject": "objects/5e/5e49769cee1c5055dd37b7daf2b18d44fd8a1368d6b9cf20dbeb41a27e038d6b.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-8.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-8.json",
+      "kind": "untracked",
+      "sha256": "f7179287c2fcb37f8ff6b030fd1f9267e06fd9fb8e09a5cc2d88480ba1677c7e",
+      "bytes": 31067,
+      "archiveObject": "objects/f7/f7179287c2fcb37f8ff6b030fd1f9267e06fd9fb8e09a5cc2d88480ba1677c7e.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-8.log",
+      "kind": "ignored-evidence",
+      "sha256": "084ec43da907a81f1faa512b13b8ec8ad3a795544883d285dc42f989c180a883",
+      "bytes": 11812,
+      "archiveObject": "objects/08/084ec43da907a81f1faa512b13b8ec8ad3a795544883d285dc42f989c180a883.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-9.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-9.json",
+      "kind": "untracked",
+      "sha256": "58c2392ee211d17daee8f2bd47ca82c57a12443f593cad79d28e1f063b459dbc",
+      "bytes": 30308,
+      "archiveObject": "objects/58/58c2392ee211d17daee8f2bd47ca82c57a12443f593cad79d28e1f063b459dbc.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_nov-9.log",
+      "kind": "ignored-evidence",
+      "sha256": "c2d1a9c083f49b36c2bd54e9a2802eb156fcc843ceb973a08dd86f6a7cbcca82",
+      "bytes": 11753,
+      "archiveObject": "objects/c2/c2d1a9c083f49b36c2bd54e9a2802eb156fcc843ceb973a08dd86f6a7cbcca82.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_river.err",
+      "kind": "untracked",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "repositoryPath": "autonomy-helper-receipt107-audit.err"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_river.json",
+      "kind": "untracked",
+      "sha256": "6355cd61828a0866538900ddad115daf18c9e4f32fb901120073d5d952987cea",
+      "bytes": 29538,
+      "archiveObject": "objects/63/6355cd61828a0866538900ddad115daf18c9e4f32fb901120073d5d952987cea.gz"
+    },
+    {
+      "path": "tally_v34/no-winter-shelter_river.log",
+      "kind": "ignored-evidence",
+      "sha256": "7d72e037637586eac034486a9c526d0315837522976db93eceded5ac5ea68f28",
+      "bytes": 10607,
+      "archiveObject": "objects/7d/7d72e037637586eac034486a9c526d0315837522976db93eceded5ac5ea68f28.gz"
+    },
+    {
+      "path": "tally_v34/provenance.txt",
+      "kind": "untracked",
+      "sha256": "12bfcd11d04acb0e9e514033045fe244a6355cfc73735440b242cfe1303befa5",
+      "bytes": 200,
+      "archiveObject": "objects/12/12bfcd11d04acb0e9e514033045fe244a6355cfc73735440b242cfe1303befa5.gz"
+    },
+    {
+      "path": "tally_v34/report.txt",
+      "kind": "untracked",
+      "sha256": "08d9a26382e0150b1e025f4125f62e3c66e8ae593fb3b59843f20b630f237e9a",
+      "bytes": 8310,
+      "archiveObject": "objects/08/08d9a26382e0150b1e025f4125f62e3c66e8ae593fb3b59843f20b630f237e9a.gz"
+    }
+  ],
+  "stagedFiles": []
+}

@@ -1,0 +1,2437 @@
+[
+ {
+  "kit": "staged helper kit: hammer+saw, yard 8 wood 2 handles",
+  "cart": 1,
+  "ticksToCart": 258,
+  "planStatus": "active",
+  "planReason": "proposed from outside",
+  "planStep": "work on cart for cart",
+  "deadline": 7200,
+  "tickAtEnd": 258,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 0,
+   "eatDrinkTicks": 0,
+   "travelTicks": 64,
+   "workTicks": 191,
+   "gatherTicks": 0,
+   "idleTicks": 3
+  },
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "yardJobAtEnd": null,
+  "inv": {
+   "bread": 3,
+   "water": 3,
+   "hammer": 1,
+   "saw": 1
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 180,
+    "step": "operate:cart"
+   }
+  ],
+  "startsByKind": {
+   "operate": 3
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start operate saw_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 106,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 107,
+    "ev": "start operate saw_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 149,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 150,
+    "ev": "start operate build_cart (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 257,
+    "ev": "end operate build_cart success done"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "hammer+saw, empty yard",
+  "cart": 1,
+  "ticksToCart": 3126,
+  "planStatus": "active",
+  "planReason": "proposed from outside",
+  "planStep": "work on cart for cart",
+  "deadline": 7200,
+  "tickAtEnd": 3126,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 505,
+   "eatDrinkTicks": 41,
+   "travelTicks": 1086,
+   "workTicks": 827,
+   "gatherTicks": 640,
+   "idleTicks": 27
+  },
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "yardJobAtEnd": null,
+  "inv": {
+   "bread": 1,
+   "hammer": 1,
+   "saw": 1,
+   "basket": 1
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 2,
+   "basket": 1,
+   "handles": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 120,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 240,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 300,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 420,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 480,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 540,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 600,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 720,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 780,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 900,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 960,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 1080,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 1140,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 1200,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2520,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2700,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2820,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2880,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3000,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3060,
+    "step": "operate:cart"
+   }
+  ],
+  "startsByKind": {
+   "gather": 11,
+   "deposit": 9,
+   "operate": 4,
+   "drink": 2,
+   "sleep": 1,
+   "eat": 1,
+   "rest": 1,
+   "craft": 1
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 101,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 102,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 183,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 184,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 291,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 292,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 360,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 361,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 467,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 468,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 536,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 537,
+    "ev": "start operate saw_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 579,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 580,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 686,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 687,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 754,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 755,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 860,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 861,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 927,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 928,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1032,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1033,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1099,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 1100,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 1107,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 1108,
+    "ev": "start operate saw_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1150,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 1151,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1249,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 1249,
+    "ev": "start sleep (to recover energy (45/100))"
+   },
+   {
+    "tick": 1754,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1755,
+    "ev": "start eat (to ease hunger (51/100))"
+   },
+   {
+    "tick": 1774,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1775,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 2244,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2244,
+    "ev": "start drink (to quench thirst (49/100))"
+   },
+   {
+    "tick": 2259,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2260,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2332,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2333,
+    "ev": "start gather 6 (to make a basket)"
+   },
+   {
+    "tick": 2479,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2480,
+    "ev": "start craft basket (to work faster)"
+   },
+   {
+    "tick": 2580,
+    "ev": "end craft basket success done"
+   },
+   {
+    "tick": 2581,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2671,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2672,
+    "ev": "start operate split_handles (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2697,
+    "ev": "end operate split_handles success done"
+   },
+   {
+    "tick": 2698,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2808,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 2808,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2865,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2866,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2960,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2961,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3017,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3018,
+    "ev": "start operate build_cart (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3125,
+    "ev": "end operate build_cart success done"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "hammer+axe (hew path), empty yard",
+  "cart": 1,
+  "ticksToCart": 5409,
+  "planStatus": "active",
+  "planReason": "proposed from outside",
+  "planStep": "work on cart for cart",
+  "deadline": 7200,
+  "tickAtEnd": 5409,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 1120,
+   "eatDrinkTicks": 318,
+   "travelTicks": 1945,
+   "workTicks": 1306,
+   "gatherTicks": 673,
+   "idleTicks": 47
+  },
+  "yardShelf": {
+   "offcuts": 8
+  },
+  "yardJobAtEnd": null,
+  "inv": {
+   "hammer": 1,
+   "axe": 1,
+   "basket": 1,
+   "grain": 1
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 8,
+   "basket": 1,
+   "handles": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 120,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 180,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 300,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 360,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 480,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 540,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 660,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 720,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 780,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 900,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 960,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 1020,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 1080,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2520,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2640,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2700,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2760,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2880,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2940,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3060,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3120,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3180,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3240,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3360,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3540,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 3600,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3660,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 4800,
+    "step": "operate:handles"
+   },
+   {
+    "tick": 4860,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 4920,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5160,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5280,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5340,
+    "step": "operate:cart"
+   }
+  ],
+  "startsByKind": {
+   "gather": 18,
+   "deposit": 16,
+   "operate": 6,
+   "drink": 4,
+   "wander": 2,
+   "rest": 3,
+   "sleep": 3,
+   "eat": 2,
+   "craft": 1,
+   "eat_store": 1
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 85,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 86,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 167,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 168,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 260,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 261,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 329,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 330,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 421,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 422,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 490,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 491,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 530,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 531,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 621,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 622,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 689,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 690,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 779,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 780,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 846,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 847,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 935,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 936,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1002,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 1003,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1042,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 1043,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1131,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1132,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 1147,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 1148,
+    "ev": "start gather 7 (to make a basket)"
+   },
+   {
+    "tick": 1181,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1182,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 1229,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1229,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 1336,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1336,
+    "ev": "start sleep (to recover energy (49/100))"
+   },
+   {
+    "tick": 1727,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1728,
+    "ev": "start eat (to ease hunger (51/100))"
+   },
+   {
+    "tick": 1747,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1748,
+    "ev": "start gather 6 (to make a basket)"
+   },
+   {
+    "tick": 1810,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1811,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 1857,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1857,
+    "ev": "start sleep (to recover energy (88/100))"
+   },
+   {
+    "tick": 1989,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1990,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 2253,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2253,
+    "ev": "start craft basket (to work faster)"
+   },
+   {
+    "tick": 2412,
+    "ev": "end craft basket success done"
+   },
+   {
+    "tick": 2413,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2510,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 2510,
+    "ev": "start drink (to quench thirst (50/100))"
+   },
+   {
+    "tick": 2517,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2518,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2591,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2592,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2690,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 2690,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2747,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2748,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2827,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2828,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2884,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2885,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2924,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 2925,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3019,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 3019,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3075,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3076,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3154,
+    "ev": "end gather success felled the tree"
+   },
+   {
+    "tick": 3155,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3211,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3212,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3302,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3303,
+    "ev": "start eat (to ease hunger (51/100))"
+   },
+   {
+    "tick": 3312,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3313,
+    "ev": "start drink (to quench thirst (51/100))"
+   },
+   {
+    "tick": 3437,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3438,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3515,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3516,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3555,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 3556,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3656,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3657,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3702,
+    "ev": "end deposit interrupted something better came up"
+   },
+   {
+    "tick": 3702,
+    "ev": "start sleep (to recover energy (36/100))"
+   },
+   {
+    "tick": 4299,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 4300,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 4680,
+    "ev": "end rest success daylight arrived"
+   },
+   {
+    "tick": 4681,
+    "ev": "start eat_store (to ease hunger (47/100))"
+   },
+   {
+    "tick": 4700,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4701,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 4790,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 4791,
+    "ev": "start operate split_handles (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 4809,
+    "ev": "end operate split_handles success done"
+   },
+   {
+    "tick": 4810,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 4931,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 4931,
+    "ev": "start drink (to quench thirst (48/100))"
+   },
+   {
+    "tick": 5056,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5057,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5135,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5136,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5233,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 5234,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5301,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5302,
+    "ev": "start operate build_cart (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5408,
+    "ev": "end operate build_cart success done"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "ordinary kit: axe only, empty yard, nothing carried",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire stone for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 1708,
+   "eatDrinkTicks": 419,
+   "travelTicks": 2999,
+   "workTicks": 1803,
+   "gatherTicks": 242,
+   "idleTicks": 31
+  },
+  "yardShelf": {},
+  "yardJobAtEnd": null,
+  "inv": {
+   "axe": 1,
+   "wood": 1,
+   "stone": 1,
+   "grain": 1
+  },
+  "ledgerCreated": {},
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 120,
+    "step": "acquire:stone"
+   }
+  ],
+  "startsByKind": {
+   "gather": 3,
+   "explore": 7,
+   "wander": 17,
+   "drink": 5,
+   "sleep": 3,
+   "rest": 4,
+   "eat": 3,
+   "eat_store": 2
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 81,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 82,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 309,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 310,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 471,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 472,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 617,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 618,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 765,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 766,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 887,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 887,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 1057,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 1057,
+    "ev": "start drink (to quench thirst (57/100))"
+   },
+   {
+    "tick": 1064,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 1065,
+    "ev": "start gather 8 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1231,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 1231,
+    "ev": "start sleep (to recover energy (50/100))"
+   },
+   {
+    "tick": 1729,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1730,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 1952,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1952,
+    "ev": "start eat (to ease hunger (46/100))"
+   },
+   {
+    "tick": 1971,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1972,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 2250,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2250,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 2265,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2266,
+    "ev": "start gather 8 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2494,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 2494,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 2791,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 2792,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3035,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3036,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3151,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3152,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3253,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 3253,
+    "ev": "start drink (to quench thirst (58/100))"
+   },
+   {
+    "tick": 3290,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3291,
+    "ev": "start eat (to ease hunger (59/100))"
+   },
+   {
+    "tick": 3300,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3301,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3357,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 3357,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 3479,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 3479,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3617,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3618,
+    "ev": "start sleep (to recover energy (43/100))"
+   },
+   {
+    "tick": 4085,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 4086,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 4680,
+    "ev": "end rest success daylight arrived"
+   },
+   {
+    "tick": 4681,
+    "ev": "start drink (to quench thirst (44/100))"
+   },
+   {
+    "tick": 4795,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 4796,
+    "ev": "start eat_store (to ease hunger (50/100))"
+   },
+   {
+    "tick": 4879,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4880,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 4936,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 4936,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 5073,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 5074,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5245,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5246,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5341,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5342,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5437,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5438,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5501,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5502,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5607,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5608,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5677,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5678,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5739,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 5739,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 5983,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 5984,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 6091,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 6092,
+    "ev": "start sleep (to recover energy (44/100))"
+   },
+   {
+    "tick": 6835,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6836,
+    "ev": "start eat (to ease hunger (40/100))"
+   },
+   {
+    "tick": 6845,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 6846,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 7060,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 7060,
+    "ev": "start eat_store (to ease hunger (55/100))"
+   },
+   {
+    "tick": 7079,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 7080,
+    "ev": "start explore (to look for food sources)"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "ordinary kit: axe only, empty yard, 2 stone carried (sidesteps the acquire double-count)",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire wood for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 1729,
+   "eatDrinkTicks": 539,
+   "travelTicks": 2680,
+   "workTicks": 1665,
+   "gatherTicks": 550,
+   "idleTicks": 39
+  },
+  "yardShelf": {
+   "planks": 3,
+   "offcuts": 6,
+   "wood": 2
+  },
+  "yardJobAtEnd": null,
+  "inv": {
+   "axe": 1,
+   "hammer": 1,
+   "basket": 1,
+   "grain": 1
+  },
+  "ledgerCreated": {
+   "hammer": 1,
+   "planks": 3,
+   "offcuts": 6,
+   "basket": 1
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2340,
+    "step": "craft:hammer"
+   },
+   {
+    "tick": 2520,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2580,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2940,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3060,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3120,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3240,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3300,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3360,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3420,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 4740,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5280,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 5340,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5400,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5520,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5580,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5700,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5760,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5880,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5940,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 7200,
+    "step": "acquire:wood"
+   }
+  ],
+  "startsByKind": {
+   "explore": 4,
+   "wander": 7,
+   "drink": 5,
+   "rest": 4,
+   "sleep": 4,
+   "eat": 2,
+   "gather": 12,
+   "craft": 3,
+   "deposit": 8,
+   "operate": 3,
+   "eat_store": 2
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 280,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 281,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 545,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 546,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 617,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 618,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 677,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 678,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 717,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 718,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 777,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 778,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 840,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 840,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 1072,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 1073,
+    "ev": "start drink (to quench thirst (57/100))"
+   },
+   {
+    "tick": 1080,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 1081,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 1248,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1248,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 1333,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1333,
+    "ev": "start sleep (to recover energy (49/100))"
+   },
+   {
+    "tick": 1727,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1728,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 1934,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1934,
+    "ev": "start eat (to ease hunger (47/100))"
+   },
+   {
+    "tick": 1953,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1954,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 2263,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2263,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 2278,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2279,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2337,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2338,
+    "ev": "start craft hammer (to begin build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2464,
+    "ev": "end craft hammer success done"
+   },
+   {
+    "tick": 2465,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2575,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 2575,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 2783,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 2784,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 2923,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2924,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3005,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3006,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3066,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3067,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3106,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 3107,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3208,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 3208,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3268,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3269,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 3380,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3381,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 3520,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3521,
+    "ev": "start eat (to ease hunger (50/100))"
+   },
+   {
+    "tick": 3530,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3531,
+    "ev": "start gather 6 (to make a basket)"
+   },
+   {
+    "tick": 3682,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3683,
+    "ev": "start sleep (to recover energy (38/100))"
+   },
+   {
+    "tick": 4226,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 4227,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 4668,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 4668,
+    "ev": "start gather 6 (to make a basket)"
+   },
+   {
+    "tick": 4755,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 4756,
+    "ev": "start craft basket (to work faster)"
+   },
+   {
+    "tick": 4864,
+    "ev": "end craft basket interrupted something better came up"
+   },
+   {
+    "tick": 4864,
+    "ev": "start eat_store (to ease hunger (46/100))"
+   },
+   {
+    "tick": 4883,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4884,
+    "ev": "start drink (to quench thirst (51/100))"
+   },
+   {
+    "tick": 5012,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5013,
+    "ev": "start craft basket (to work faster)"
+   },
+   {
+    "tick": 5169,
+    "ev": "end craft basket success done"
+   },
+   {
+    "tick": 5170,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5249,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5250,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5289,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 5290,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5414,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 5414,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5484,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5485,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5572,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 5573,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5641,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5642,
+    "ev": "start operate hew_planks (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5681,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 5682,
+    "ev": "start gather 7 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5789,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 5789,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5846,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5847,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 5952,
+    "ev": "end gather interrupted something better came up"
+   },
+   {
+    "tick": 5952,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 6107,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 6107,
+    "ev": "start sleep (to recover energy (37/100))"
+   },
+   {
+    "tick": 6769,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6770,
+    "ev": "start drink (to quench thirst (35/100))"
+   },
+   {
+    "tick": 6879,
+    "ev": "end drink interrupted something better came up"
+   },
+   {
+    "tick": 6879,
+    "ev": "start eat_store (to ease hunger (34/100))"
+   },
+   {
+    "tick": 6973,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6974,
+    "ev": "start sleep (to recover energy (86/100))"
+   },
+   {
+    "tick": 7104,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 7105,
+    "ev": "start deposit (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 7194,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 7195,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "ordinary kit: nothing at all, empty yard",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire stone for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "alive": true,
+  "budget": {
+   "sleepTicks": 1907,
+   "eatDrinkTicks": 687,
+   "travelTicks": 2697,
+   "workTicks": 1695,
+   "gatherTicks": 183,
+   "idleTicks": 33
+  },
+  "yardShelf": {},
+  "yardJobAtEnd": null,
+  "inv": {
+   "wood": 1,
+   "stone": 1,
+   "grain": 1
+  },
+  "ledgerCreated": {},
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 180,
+    "step": "acquire:stone"
+   }
+  ],
+  "startsByKind": {
+   "gather": 2,
+   "explore": 6,
+   "wander": 17,
+   "drink": 5,
+   "sleep": 4,
+   "rest": 4,
+   "eat": 2,
+   "eat_store": 2
+  },
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 149,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 150,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 395,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 396,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 669,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 670,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 741,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 742,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 889,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 890,
+    "ev": "start drink (to quench thirst (63/100))"
+   },
+   {
+    "tick": 897,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 898,
+    "ev": "start gather 8 (to build a handcart at the timber yard)"
+   },
+   {
+    "tick": 1093,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1094,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 1202,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 1203,
+    "ev": "start sleep (to recover energy (49/100))"
+   },
+   {
+    "tick": 1803,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1804,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 1919,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1919,
+    "ev": "start eat (to ease hunger (47/100))"
+   },
+   {
+    "tick": 1938,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1939,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 2254,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2254,
+    "ev": "start drink (to quench thirst (51/100))"
+   },
+   {
+    "tick": 2269,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2270,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 2516,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 2517,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 2737,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 2738,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 2833,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 2834,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 2983,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 2984,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3073,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3074,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 3271,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 3272,
+    "ev": "start eat (to ease hunger (60/100))"
+   },
+   {
+    "tick": 3281,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3282,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 3451,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 3451,
+    "ev": "start drink (to quench thirst (53/100))"
+   },
+   {
+    "tick": 3601,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3602,
+    "ev": "start sleep (to recover energy (46/100))"
+   },
+   {
+    "tick": 4159,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 4160,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 4641,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 4641,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 4862,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 4863,
+    "ev": "start eat_store (to ease hunger (48/100))"
+   },
+   {
+    "tick": 5100,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 5101,
+    "ev": "start drink (to quench thirst (47/100))"
+   },
+   {
+    "tick": 5213,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5214,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5275,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5276,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5377,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5378,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5434,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 5434,
+    "ev": "start explore (to look for food sources)"
+   },
+   {
+    "tick": 5603,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 5603,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5771,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5772,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5899,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5900,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 5971,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5972,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 6024,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 6024,
+    "ev": "start sleep (to recover energy (45/100))"
+   },
+   {
+    "tick": 6592,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6593,
+    "ev": "start drink (to quench thirst (52/100))"
+   },
+   {
+    "tick": 6712,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 6713,
+    "ev": "start sleep (to recover energy (89/100))"
+   },
+   {
+    "tick": 6895,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6896,
+    "ev": "start rest (waiting for the light)"
+   },
+   {
+    "tick": 7049,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 7049,
+    "ev": "start eat_store (to ease hunger (49/100))"
+   },
+   {
+    "tick": 7068,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 7069,
+    "ev": "start wander (nothing needs doing right now)"
+   },
+   {
+    "tick": 7147,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 7148,
+    "ev": "start wander (nothing needs doing right now)"
+   }
+  ],
+  "conservation": true
+ }
+]

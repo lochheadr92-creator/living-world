@@ -1,0 +1,46 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "rulesVersion": 44,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 74.344,
+  "alive": 28,
+  "deaths": 4,
+  "deathCauses": {
+    "wolf attack": 1,
+    "exposure": 2,
+    "hunger": 1
+  },
+  "foodRequests": 420,
+  "foodRequestOutcomes": {
+    "declined:no item": 344,
+    "partial": 14,
+    "fulfilled": 10,
+    "declined:disliked": 2,
+    "failed": 27,
+    "declined:unwilling": 19,
+    "declined:own need": 4
+  },
+  "fetchPromises": 0,
+  "promisedDelivered": 0,
+  "promisedDeliveredUnits": 0,
+  "giftsOnRequest": 25,
+  "promisedGives": 107,
+  "totals": {
+    "samples": 8518,
+    "foodAskOffers": 1767,
+    "foodAskBlocked": 18,
+    "hungryWithFood": 341,
+    "hungryWithFoodNoEatOption": 239,
+    "hungryWithFoodEatBlocked": 239
+  },
+  "deathsWithFoodInPack": 1,
+  "hungerDeathsWithSpareInHousehold": 0,
+  "hash": "fd1b6808",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

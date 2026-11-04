@@ -1,0 +1,30 @@
+{
+  "seed": "forest",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 49,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 38.242,
+  "alive": 8,
+  "deaths": 22,
+  "publicStorehouses": 1,
+  "projects": [
+    "completed"
+  ],
+  "witnessesWithBuilding": 1,
+  "publicMealStarts": 0,
+  "publicWithdrawals": 1,
+  "unitsFromPublic": {},
+  "mealsByWitness": 0,
+  "mealsTotal": 0,
+  "receipts": 0,
+  "receiptsByMeal": 0,
+  "receiptsByWithdrawal": 0,
+  "hash": "ea735868",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

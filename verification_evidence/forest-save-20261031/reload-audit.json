@@ -1,0 +1,27 @@
+[
+  {
+    "path": "verification_evidence/forest-save-20261031/rejected.json",
+    "sha256": "e6c8958a778f86d64e03f5144ec32a0912969c4ec0a68d6dd3182db8a87dc5c2",
+    "rules": 107,
+    "tick": 43326,
+    "continuedTicks": 1200,
+    "exactLoad": true,
+    "exactContinuation": true,
+    "exactReload": true,
+    "meat": {
+      "initial": 0,
+      "created": 4,
+      "consumed": 0,
+      "spoiled": 0,
+      "actual": 4
+    },
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuedConservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

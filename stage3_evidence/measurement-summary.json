@@ -1,0 +1,47 @@
+[
+  {
+    "seed": "forest",
+    "tick": 60000,
+    "alive": 21,
+    "deaths": 10,
+    "carts": 0,
+    "seconds": 238.94,
+    "head": "50f2f78a107718c7839a5265b041927d45545c55",
+    "dirty": false,
+    "modified": [],
+    "hashes": 255,
+    "hashMismatches": [],
+    "conserved": true,
+    "twin": true
+  },
+  {
+    "seed": "river",
+    "tick": 60000,
+    "alive": 23,
+    "deaths": 7,
+    "carts": 0,
+    "seconds": 277.02,
+    "head": "50f2f78a107718c7839a5265b041927d45545c55",
+    "dirty": false,
+    "modified": [],
+    "hashes": 255,
+    "hashMismatches": [],
+    "conserved": true,
+    "twin": true
+  },
+  {
+    "seed": "meadow",
+    "tick": 60000,
+    "alive": 26,
+    "deaths": 2,
+    "carts": 0,
+    "seconds": 235.52,
+    "head": "50f2f78a107718c7839a5265b041927d45545c55",
+    "dirty": false,
+    "modified": [],
+    "hashes": 255,
+    "hashMismatches": [],
+    "conserved": true,
+    "twin": true
+  }
+]

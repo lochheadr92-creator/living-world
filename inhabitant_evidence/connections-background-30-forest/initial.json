@@ -1,0 +1,676 @@
+[
+  {
+    "id": 899,
+    "name": "Petra",
+    "stage": "elder",
+    "background": {
+      "kind": "generalist",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.4525546358935537,
+      "fish": 0.9111326044015586,
+      "wood": 1.032963846899569,
+      "stone": 1.1213440146405589,
+      "build": 1.0325770926385966,
+      "farm": 1.8,
+      "craft": 0.9453529566526413,
+      "carpentry": 1.0550397249870003,
+      "kiln": 1.100334589369595,
+      "smith": 0.9989488313905894,
+      "bake": 0.8975890861824155
+    },
+    "techniques": {
+      "charcoal": {
+        "source": "initial",
+        "learned": 0,
+        "teacher": 0
+      }
+    }
+  },
+  {
+    "id": 902,
+    "name": "Bram",
+    "stage": "elder",
+    "background": {
+      "kind": "specialist",
+      "specialty": "stone"
+    },
+    "skills": {
+      "forage": 1.2234927633022892,
+      "fish": 0.9513944137627259,
+      "wood": 0.7548537116041407,
+      "stone": 1.7720743346042,
+      "build": 0.8760801232503654,
+      "farm": 0.5478099779970944,
+      "craft": 0.6062073423527181,
+      "carpentry": 0.5829555664677173,
+      "kiln": 0.783081948524341,
+      "smith": 0.5091260395711288,
+      "bake": 0.627186750760302
+    },
+    "techniques": {}
+  },
+  {
+    "id": 905,
+    "name": "Mira",
+    "stage": "adult",
+    "background": {
+      "kind": "generalist",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.1497056041769684,
+      "fish": 1.3315516127161682,
+      "wood": 0.9949321697130801,
+      "stone": 1.0199757351875305,
+      "build": 1.1938108390927047,
+      "farm": 1.3526353260204185,
+      "craft": 1.0263641012646258,
+      "carpentry": 1.0975972189000853,
+      "kiln": 1.1675267786718906,
+      "smith": 1.1220387660898268,
+      "bake": 1.0039075776934623
+    },
+    "techniques": {
+      "charcoal": {
+        "source": "initial",
+        "learned": 0,
+        "teacher": 0
+      }
+    }
+  },
+  {
+    "id": 908,
+    "name": "Lena",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "stone"
+    },
+    "skills": {
+      "forage": 1.2186505193598571,
+      "fish": 0.5662363544348628,
+      "wood": 0.9323614123202861,
+      "stone": 1.6663467367934064,
+      "build": 1.100312300472683,
+      "farm": 0.8971676391195507,
+      "craft": 0.6240277045499534,
+      "carpentry": 0.671767066931352,
+      "kiln": 0.8396053935866803,
+      "smith": 0.8107048174133524,
+      "bake": 0.6481202939758077
+    },
+    "techniques": {}
+  },
+  {
+    "id": 911,
+    "name": "Ada",
+    "stage": "adult",
+    "background": {
+      "kind": "experienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.507127142542042,
+      "fish": 1.5609443366350606,
+      "wood": 1.6360882681412623,
+      "stone": 1.7920387396859006,
+      "build": 1.8,
+      "farm": 1.2610959021141752,
+      "craft": 1.4126454057684168,
+      "carpentry": 1.6753953043136744,
+      "kiln": 1.5595082932151854,
+      "smith": 1.2403796072350814,
+      "bake": 1.3397094529820606
+    },
+    "techniques": {
+      "charcoal": {
+        "source": "initial",
+        "learned": 0,
+        "teacher": 0
+      }
+    }
+  },
+  {
+    "id": 914,
+    "name": "Edda",
+    "stage": "adult",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.1318995237872007,
+      "fish": 0.4199684289991856,
+      "wood": 0.6764486671090126,
+      "stone": 0.45115932933986186,
+      "build": 0.5538555135019123,
+      "farm": 0.4465036516077816,
+      "craft": 0.6481426632963121,
+      "carpentry": 0.471048603951931,
+      "kiln": 0.4770237607881427,
+      "smith": 0.3884148176759481,
+      "bake": 0.5516994748264551
+    },
+    "techniques": {}
+  },
+  {
+    "id": 915,
+    "name": "Tomas",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "kiln"
+    },
+    "skills": {
+      "forage": 0.8502532709902155,
+      "fish": 0.5748899685963988,
+      "wood": 0.8762727415636182,
+      "stone": 0.7701907641999424,
+      "build": 0.8705133403360779,
+      "farm": 0.9143415587022901,
+      "craft": 1.0192393455468118,
+      "carpentry": 0.7889479590812698,
+      "kiln": 1.7299019529134967,
+      "smith": 0.957568031270057,
+      "bake": 0.7071192824514583
+    },
+    "techniques": {
+      "charcoal": {
+        "source": "initial",
+        "learned": 0,
+        "teacher": 0
+      }
+    }
+  },
+  {
+    "id": 916,
+    "name": "Viktor",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "build"
+    },
+    "skills": {
+      "forage": 0.4484557467829214,
+      "fish": 0.2713956479397244,
+      "wood": 0.2808057617938114,
+      "stone": 0.2711537001122812,
+      "build": 0.3876483161257023,
+      "farm": 0.2609072221120844,
+      "craft": 0.2694572576008659,
+      "carpentry": 0.28963321883184734,
+      "kiln": 0.26143067845561274,
+      "smith": 0.2685437650281863,
+      "bake": 0.2453004416332329
+    },
+    "techniques": {}
+  },
+  {
+    "id": 917,
+    "name": "Hana",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "wood"
+    },
+    "skills": {
+      "forage": 0.9931699271794197,
+      "fish": 0.5155408064923549,
+      "wood": 1.2046793004491025,
+      "stone": 0.644392436490983,
+      "build": 0.5207573808264248,
+      "farm": 0.6736688800425783,
+      "craft": 0.48976133225519763,
+      "carpentry": 0.4761897389808344,
+      "kiln": 0.4978003142117171,
+      "smith": 0.6335996775129751,
+      "bake": 0.6902798193019895
+    },
+    "techniques": {}
+  },
+  {
+    "id": 920,
+    "name": "Yusuf",
+    "stage": "adult",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.9478773113042118,
+      "fish": 0.46496973920240997,
+      "wood": 0.7624803410954775,
+      "stone": 0.7424237621799111,
+      "build": 0.7718284135266897,
+      "farm": 0.7200125595554709,
+      "craft": 0.7254586059041321,
+      "carpentry": 0.492713513225317,
+      "kiln": 0.5606303769163787,
+      "smith": 0.42019496178254484,
+      "bake": 0.40485006887465713
+    },
+    "techniques": {}
+  },
+  {
+    "id": 923,
+    "name": "Faye",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "wood"
+    },
+    "skills": {
+      "forage": 1.3569400049075488,
+      "fish": 0.979547103682533,
+      "wood": 1.8,
+      "stone": 0.6673555217413232,
+      "build": 0.9975691269546565,
+      "farm": 0.7517227558949964,
+      "craft": 0.8259014753857628,
+      "carpentry": 0.5747337928041816,
+      "kiln": 0.8152381146792322,
+      "smith": 0.696680084685795,
+      "bake": 0.743731090798974
+    },
+    "techniques": {
+      "charcoal": {
+        "source": "initial",
+        "learned": 0,
+        "teacher": 0
+      }
+    }
+  },
+  {
+    "id": 924,
+    "name": "Hal",
+    "stage": "adult",
+    "background": {
+      "kind": "generalist",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.6754719994440679,
+      "fish": 1.2880047330334783,
+      "wood": 1.1801082973517478,
+      "stone": 0.8736836139857769,
+      "build": 1.2179503123752695,
+      "farm": 1.3153517942726614,
+      "craft": 1.2119467453472317,
+      "carpentry": 1.2151541206985712,
+      "kiln": 1.022956255543977,
+      "smith": 1.0587609780952334,
+      "bake": 0.9858417806215585
+    },
+    "techniques": {}
+  },
+  {
+    "id": 925,
+    "name": "Kaia",
+    "stage": "child",
+    "background": {
+      "kind": "generalist",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.4578438886738181,
+      "fish": 0.38413717351049265,
+      "wood": 0.31582171486105604,
+      "stone": 0.32956281411657906,
+      "build": 0.35824965596209934,
+      "farm": 0.30976930010610204,
+      "craft": 0.3280875739093732,
+      "carpentry": 0.3219410358822736,
+      "kiln": 0.3122287485555214,
+      "smith": 0.3470789243955881,
+      "bake": 0.35761132945816726
+    },
+    "techniques": {}
+  },
+  {
+    "id": 926,
+    "name": "Tessa",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "stone"
+    },
+    "skills": {
+      "forage": 0.3560793235646952,
+      "fish": 0.39005312511266604,
+      "wood": 0.28721479202065636,
+      "stone": 0.5625010051696744,
+      "build": 0.3484784303145515,
+      "farm": 0.3452575874548247,
+      "craft": 0.31995775620267175,
+      "carpentry": 0.33168377226095,
+      "kiln": 0.2856985691429492,
+      "smith": 0.35635657537507437,
+      "bake": 0.3324616325165557
+    },
+    "techniques": {}
+  },
+  {
+    "id": 928,
+    "name": "Jax",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "farm"
+    },
+    "skills": {
+      "forage": 1.2276899303421382,
+      "fish": 1.014628954892978,
+      "wood": 0.7222369960984216,
+      "stone": 0.5576467824801803,
+      "build": 1.2794969584405063,
+      "farm": 1.7217251083394511,
+      "craft": 0.9486830120859668,
+      "carpentry": 0.9750797138052824,
+      "kiln": 0.7498465130338445,
+      "smith": 0.7804868031525984,
+      "bake": 0.7949245236814022
+    },
+    "techniques": {}
+  },
+  {
+    "id": 929,
+    "name": "Isla",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "fish"
+    },
+    "skills": {
+      "forage": 0.7802257539099084,
+      "fish": 1.8,
+      "wood": 0.811538728577085,
+      "stone": 0.7037594372062013,
+      "build": 0.9140784889869099,
+      "farm": 1.0525466980831695,
+      "craft": 0.7067804134590552,
+      "carpentry": 0.9592428162235512,
+      "kiln": 0.7007151508005336,
+      "smith": 0.7752907398389652,
+      "bake": 0.9094946802360937
+    },
+    "techniques": {}
+  },
+  {
+    "id": 931,
+    "name": "Greta",
+    "stage": "adult",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.7595661693550648,
+      "fish": 0.43121740522980695,
+      "wood": 0.7476411870010198,
+      "stone": 0.38770580440759655,
+      "build": 0.6644539903007297,
+      "farm": 0.4040016601793468,
+      "craft": 0.46754632564261556,
+      "carpentry": 0.6668196039274334,
+      "kiln": 0.4136158265173435,
+      "smith": 0.4595089996233582,
+      "bake": 0.5165836335159838
+    },
+    "techniques": {}
+  },
+  {
+    "id": 932,
+    "name": "Silas",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "kiln"
+    },
+    "skills": {
+      "forage": 0.5000259871079574,
+      "fish": 0.5584688386366932,
+      "wood": 0.6237540599617222,
+      "stone": 0.4162177963958244,
+      "build": 0.455528244048795,
+      "farm": 0.5509479300121352,
+      "craft": 0.38743855573308894,
+      "carpentry": 0.37182645774550055,
+      "kiln": 1.0371656563363967,
+      "smith": 0.5850001177912203,
+      "bake": 0.6444418910331682
+    },
+    "techniques": {}
+  },
+  {
+    "id": 934,
+    "name": "Thea",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "wood"
+    },
+    "skills": {
+      "forage": 0.8364183645797896,
+      "fish": 0.9687088625011966,
+      "wood": 1.6667669256553055,
+      "stone": 0.9378060060981661,
+      "build": 0.7410598065055705,
+      "farm": 1.18258449051436,
+      "craft": 0.6326205406803638,
+      "carpentry": 0.5285830986686051,
+      "kiln": 0.5501110083423555,
+      "smith": 0.5436430296394974,
+      "bake": 0.5277869624551386
+    },
+    "techniques": {}
+  },
+  {
+    "id": 935,
+    "name": "Zeke",
+    "stage": "adult",
+    "background": {
+      "kind": "specialist",
+      "specialty": "wood"
+    },
+    "skills": {
+      "forage": 0.9432076248852539,
+      "fish": 0.8956366350539029,
+      "wood": 1.679903010192793,
+      "stone": 0.7816903463648632,
+      "build": 1.06935736237184,
+      "farm": 0.7215708496011795,
+      "craft": 0.947170824976638,
+      "carpentry": 0.83502015133854,
+      "kiln": 0.9600239914143458,
+      "smith": 0.7987630214774981,
+      "bake": 0.7822463130578399
+    },
+    "techniques": {}
+  },
+  {
+    "id": 936,
+    "name": "Cole",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "fish"
+    },
+    "skills": {
+      "forage": 0.6240596208577387,
+      "fish": 0.5761223113655451,
+      "wood": 0.2893065167553045,
+      "stone": 0.33579770981309953,
+      "build": 0.31024210770438143,
+      "farm": 0.32637844788539155,
+      "craft": 0.3523484593674182,
+      "carpentry": 0.39544115998955165,
+      "kiln": 0.3192872371662357,
+      "smith": 0.39588473194298335,
+      "bake": 0.39438830322791996
+    },
+    "techniques": {}
+  },
+  {
+    "id": 937,
+    "name": "Talia",
+    "stage": "child",
+    "background": {
+      "kind": "specialist",
+      "specialty": "smith"
+    },
+    "skills": {
+      "forage": 0.7199910087671477,
+      "fish": 0.43211814924162856,
+      "wood": 0.3956450371223197,
+      "stone": 0.39714071463968126,
+      "build": 0.4908030791172639,
+      "farm": 0.5297622136624922,
+      "craft": 0.5095617943568729,
+      "carpentry": 0.46413202587102015,
+      "kiln": 0.3743714823889641,
+      "smith": 0.9116649009615614,
+      "bake": 0.48372283635244845
+    },
+    "techniques": {}
+  },
+  {
+    "id": 939,
+    "name": "Maren",
+    "stage": "adult",
+    "background": {
+      "kind": "experienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.8,
+      "fish": 1.5215387317007407,
+      "wood": 1.8,
+      "stone": 1.4871133352955803,
+      "build": 1.7634637915778764,
+      "farm": 1.6877232649708163,
+      "craft": 1.395711002261378,
+      "carpentry": 1.3305174377257645,
+      "kiln": 1.3071442633401602,
+      "smith": 1.3421814969507977,
+      "bake": 1.3850944077596068
+    },
+    "techniques": {}
+  },
+  {
+    "id": 940,
+    "name": "Dov",
+    "stage": "adult",
+    "background": {
+      "kind": "generalist",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.3615569343641403,
+      "fish": 0.9063083490952849,
+      "wood": 1.112694353286177,
+      "stone": 0.9181096113137901,
+      "build": 1.3858796610228403,
+      "farm": 1.3384099421985445,
+      "craft": 1.082716678697616,
+      "carpentry": 0.9890214782188534,
+      "kiln": 1.134377982467413,
+      "smith": 0.903957179095596,
+      "bake": 1.122213560435921
+    },
+    "techniques": {}
+  },
+  {
+    "id": 942,
+    "name": "Delia",
+    "stage": "adult",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.8540893066301946,
+      "fish": 0.7452641646154226,
+      "wood": 0.8549446531236173,
+      "stone": 0.44440625531971456,
+      "build": 0.6160009085237915,
+      "farm": 0.7738861628435554,
+      "craft": 0.5810056565143168,
+      "carpentry": 0.3876782855950296,
+      "kiln": 0.7226635742001235,
+      "smith": 0.7229007541202008,
+      "bake": 0.7035437821410596
+    },
+    "techniques": {}
+  },
+  {
+    "id": 943,
+    "name": "Theo",
+    "stage": "adult",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 1.3562699141651398,
+      "fish": 0.7533994983136655,
+      "wood": 0.7455644758753479,
+      "stone": 0.7290304483181306,
+      "build": 0.760632450437522,
+      "farm": 0.9210264137052001,
+      "craft": 0.6979308284632861,
+      "carpentry": 0.5758818205446005,
+      "kiln": 0.6831169827841223,
+      "smith": 0.41951510785147544,
+      "bake": 0.7251735077239573
+    },
+    "techniques": {}
+  },
+  {
+    "id": 944,
+    "name": "Nico",
+    "stage": "child",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.5869319676340745,
+      "fish": 0.31347643115299667,
+      "wood": 0.4317982814399639,
+      "stone": 0.43797101894548013,
+      "build": 0.4099884802060456,
+      "farm": 0.4567624986214396,
+      "craft": 0.4796107065948308,
+      "carpentry": 0.36250488074282994,
+      "kiln": 0.3031372725224584,
+      "smith": 0.453500639429864,
+      "bake": 0.4396593271211604
+    },
+    "techniques": {}
+  },
+  {
+    "id": 945,
+    "name": "Arlo",
+    "stage": "child",
+    "background": {
+      "kind": "inexperienced",
+      "specialty": null
+    },
+    "skills": {
+      "forage": 0.5450630039146328,
+      "fish": 0.4664567341473458,
+      "wood": 0.3465419317855483,
+      "stone": 0.38461957185475315,
+      "build": 0.27781635694382284,
+      "farm": 0.3702224571732565,
+      "craft": 0.3593302079265104,
+      "carpentry": 0.3250159386899137,
+      "kiln": 0.2768231401378403,
+      "smith": 0.3067662160844082,
+      "bake": 0.4073202251258283
+    },
+    "techniques": {}
+  }
+]

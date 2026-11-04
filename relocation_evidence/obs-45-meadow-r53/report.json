@@ -1,0 +1,38 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 53,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 106.854,
+  "alive": 31,
+  "deaths": 1,
+  "exposure": {
+    "adultSamples": 7650,
+    "hardshipNow": 343,
+    "sustainedHardship": 20,
+    "withDestination": 20,
+    "withDestinationAndHouseholdTogether": 0,
+    "withDestinationAndNoRecentAgreement": 20
+  },
+  "peopleEverInHardship": 16,
+  "peopleEverWithDestination": 2,
+  "stepsStarted": {},
+  "agreements": 0,
+  "agreementsByPhase": {},
+  "agreementDetails": [],
+  "townships": [
+    {
+      "name": "Willowbank",
+      "founded": 0,
+      "origin": false
+    }
+  ],
+  "hash": "099ba1fd",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

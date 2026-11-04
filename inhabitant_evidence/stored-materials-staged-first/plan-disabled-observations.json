@@ -1,0 +1,1292 @@
+[
+  {
+    "version": 12,
+    "time": {
+      "tick": 700,
+      "day": 1,
+      "clock": "14:12",
+      "phase": "afternoon",
+      "light": "daylight",
+      "weather": "Clear",
+      "tempC": 19
+    },
+    "self": {
+      "name": "Ada",
+      "sex": "f",
+      "stage": "adult",
+      "ageYears": 30,
+      "character": "balanced",
+      "skills": {
+        "forage": 1.03,
+        "fish": 1.23,
+        "wood": 1.8,
+        "stone": 1.23,
+        "build": 0.91,
+        "farm": 0.96,
+        "craft": 1.2,
+        "carpentry": 1.11,
+        "kiln": 1.18,
+        "smith": 1.31,
+        "bake": 0.94
+      },
+      "health": 100,
+      "needs": {
+        "hunger": {
+          "value": 100,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 100,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 100,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 100,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 99,
+          "state": "ok"
+        },
+        "social": {
+          "value": 70,
+          "state": "ok"
+        }
+      },
+      "aspiration": null,
+      "carrying": {
+        "wood": 2
+      },
+      "load": {
+        "used": 4,
+        "cap": 12
+      },
+      "spokenFor": {},
+      "available": {
+        "wood": 2
+      },
+      "tools": [],
+      "pullingCart": false,
+      "position": {
+        "x": 40.5,
+        "y": 40.5
+      },
+      "trade": {
+        "kind": "wood",
+        "why": "quicker at it than at anything else"
+      },
+      "techniques": [
+        "charcoal firing"
+      ]
+    },
+    "household": {
+      "name": "Sedge",
+      "members": [],
+      "home": "lean-to 3 tiles north (100% sound when last seen)",
+      "partner": null,
+      "parents": [],
+      "children": []
+    },
+    "doing": {
+      "activity": null,
+      "suspended": null,
+      "conversation": null,
+      "lastResult": null,
+      "lastInteraction": null,
+      "lastChoice": null
+    },
+    "seen": {
+      "people": [],
+      "wolves": []
+    },
+    "remembered": {
+      "places": [
+        {
+          "id": 6,
+          "what": "lean-to",
+          "x": 38.5,
+          "y": 38.5,
+          "distance": 3,
+          "direction": "north",
+          "seen": "just now",
+          "source": "seen",
+          "stale": false,
+          "owner": "Sedge",
+          "items": {
+            "berries": 8
+          },
+          "condition": 100
+        },
+        {
+          "id": 7,
+          "what": "storehouse",
+          "x": 51,
+          "y": 41,
+          "distance": 11,
+          "direction": "south-east",
+          "seen": "just now",
+          "source": "seen",
+          "stale": false,
+          "items": {
+            "stone": 4
+          },
+          "condition": 100
+        },
+        {
+          "id": 8,
+          "what": "tree",
+          "x": 60.5,
+          "y": 44.5,
+          "distance": 20,
+          "direction": "south-east",
+          "seen": "7 world h ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 9,
+          "what": "tree",
+          "x": 62.5,
+          "y": 44.5,
+          "distance": 22,
+          "direction": "south-east",
+          "seen": "7 world h ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 10,
+          "what": "tree",
+          "x": 64.5,
+          "y": 44.5,
+          "distance": 24,
+          "direction": "south-east",
+          "seen": "7 world h ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        }
+      ],
+      "water": [],
+      "dangers": [],
+      "counts": {
+        "building": 2,
+        "tree": 3
+      }
+    },
+    "people": {
+      "relations": [],
+      "whereabouts": [],
+      "worries": [],
+      "requests": [],
+      "promises": []
+    },
+    "recent": {
+      "memory": [
+        {
+          "when": "just now",
+          "text": "Gave up on make an axe: no known source of stone with anything left.",
+          "kind": "work",
+          "t": 700
+        },
+        {
+          "when": "just now",
+          "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+          "kind": "work",
+          "t": 700
+        }
+      ],
+      "failures": []
+    },
+    "options": [
+      {
+        "key": "explore",
+        "kind": "explore",
+        "label": "Explore somewhere new",
+        "goal": "to look for food sources",
+        "need": null,
+        "eta": "2 world h 38 min",
+        "target": null
+      },
+      {
+        "key": "gather:8",
+        "kind": "gather",
+        "label": "Chopping wood to make an axe",
+        "goal": "to make an axe",
+        "need": null,
+        "eta": "2 world h 55 min",
+        "target": "tree 20 tiles south-east (seen 7 world h ago)"
+      },
+      {
+        "key": "gather:9",
+        "kind": "gather",
+        "label": "Chopping wood to make an axe",
+        "goal": "to make an axe",
+        "need": null,
+        "eta": "3 world h 7 min",
+        "target": "tree 22 tiles south-east (seen 7 world h ago)"
+      },
+      {
+        "key": "wander",
+        "kind": "wander",
+        "label": "Potter about near home",
+        "goal": "nothing needs doing right now",
+        "need": null,
+        "eta": "24 world min",
+        "target": null
+      }
+    ],
+    "setAside": [
+      {
+        "label": "Get stone to make an axe",
+        "reason": "does not know any rock outcrop worth visiting",
+        "target": null
+      },
+      {
+        "label": "Lay out a hut",
+        "reason": "does not know where to break stone",
+        "target": null
+      }
+    ],
+    "plans": [
+      {
+        "goal": "make an axe",
+        "kind": "tool",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "no known source of stone with anything left",
+        "since": "just now"
+      }
+    ]
+  },
+  {
+    "version": 12,
+    "time": {
+      "tick": 917,
+      "day": 1,
+      "clock": "16:22",
+      "phase": "evening",
+      "light": "daylight",
+      "weather": "Clear",
+      "tempC": 17
+    },
+    "self": {
+      "name": "Ada",
+      "sex": "f",
+      "stage": "adult",
+      "ageYears": 30,
+      "character": "balanced",
+      "skills": {
+        "forage": 1.03,
+        "fish": 1.23,
+        "wood": 1.8,
+        "stone": 1.23,
+        "build": 0.91,
+        "farm": 0.96,
+        "craft": 1.2,
+        "carpentry": 1.11,
+        "kiln": 1.18,
+        "smith": 1.31,
+        "bake": 0.94
+      },
+      "health": 100,
+      "needs": {
+        "hunger": {
+          "value": 93,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 91,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 91,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 100,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 66,
+          "state": "ok"
+        }
+      },
+      "aspiration": null,
+      "carrying": {
+        "wood": 2
+      },
+      "load": {
+        "used": 4,
+        "cap": 12
+      },
+      "spokenFor": {},
+      "available": {
+        "wood": 2
+      },
+      "tools": [],
+      "pullingCart": false,
+      "position": {
+        "x": 51.5,
+        "y": 18.5
+      },
+      "mood": 8,
+      "thoughts": [],
+      "trade": {
+        "kind": "wood",
+        "why": "quicker at it than at anything else"
+      },
+      "techniques": [
+        "charcoal firing"
+      ]
+    },
+    "household": {
+      "name": "Sedge",
+      "members": [],
+      "home": "lean-to 24 tiles west (100% sound when last seen)",
+      "partner": null,
+      "parents": [],
+      "children": []
+    },
+    "doing": {
+      "activity": null,
+      "suspended": null,
+      "conversation": null,
+      "lastResult": {
+        "label": "Exploring",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 916
+      },
+      "lastInteraction": null,
+      "lastChoice": {
+        "label": "Explore somewhere new",
+        "when": "2 world h 10 min ago",
+        "trigger": "free (external)"
+      }
+    },
+    "seen": {
+      "people": [],
+      "wolves": []
+    },
+    "remembered": {
+      "places": [
+        {
+          "id": 7,
+          "what": "storehouse",
+          "x": 51,
+          "y": 41,
+          "distance": 23,
+          "direction": "south-west",
+          "seen": "1 world h 31 min ago",
+          "source": "seen",
+          "stale": false,
+          "items": {
+            "stone": 4
+          },
+          "condition": 100
+        },
+        {
+          "id": 6,
+          "what": "lean-to",
+          "x": 38.5,
+          "y": 38.5,
+          "distance": 24,
+          "direction": "west",
+          "seen": "1 world h 20 min ago",
+          "source": "seen",
+          "stale": false,
+          "owner": "Sedge",
+          "items": {
+            "berries": 8
+          },
+          "condition": 100
+        },
+        {
+          "id": 8,
+          "what": "tree",
+          "x": 60.5,
+          "y": 44.5,
+          "distance": 28,
+          "direction": "south-west",
+          "seen": "9 world h 10 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 9,
+          "what": "tree",
+          "x": 62.5,
+          "y": 44.5,
+          "distance": 28,
+          "direction": "south",
+          "seen": "9 world h 10 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 10,
+          "what": "tree",
+          "x": 64.5,
+          "y": 44.5,
+          "distance": 29,
+          "direction": "south",
+          "seen": "9 world h 10 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        }
+      ],
+      "water": [
+        {
+          "id": 1000072,
+          "what": "water (shore)",
+          "x": 49.5,
+          "y": 13.5,
+          "distance": 5,
+          "direction": "north-east",
+          "seen": "1 world min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000073,
+          "what": "water (shore)",
+          "x": 53.5,
+          "y": 13.5,
+          "distance": 5,
+          "direction": "north-east",
+          "seen": "1 world min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000071,
+          "what": "water (shore)",
+          "x": 45.5,
+          "y": 13.5,
+          "distance": 8,
+          "direction": "north",
+          "seen": "1 world min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000074,
+          "what": "water (shore)",
+          "x": 57.5,
+          "y": 13.5,
+          "distance": 8,
+          "direction": "east",
+          "seen": "1 world min ago",
+          "source": "seen",
+          "stale": false
+        }
+      ],
+      "dangers": [],
+      "counts": {
+        "building": 2,
+        "tree": 3,
+        "water (shore)": 4
+      }
+    },
+    "people": {
+      "relations": [],
+      "whereabouts": [],
+      "worries": [],
+      "requests": [],
+      "promises": []
+    },
+    "recent": {
+      "memory": [
+        {
+          "when": "just now",
+          "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+          "kind": "need",
+          "t": 917
+        },
+        {
+          "when": "1 world min ago",
+          "text": "Explored the north-east country; nothing new turned up.",
+          "kind": "info",
+          "t": 916
+        },
+        {
+          "when": "2 world h 10 min ago",
+          "text": "Gave up on make an axe: no known source of stone with anything left.",
+          "kind": "work",
+          "t": 700
+        },
+        {
+          "when": "2 world h 10 min ago",
+          "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+          "kind": "work",
+          "t": 700
+        }
+      ],
+      "failures": []
+    },
+    "options": [
+      {
+        "key": "wander",
+        "kind": "wander",
+        "label": "Potter about near home",
+        "goal": "nothing needs doing right now",
+        "need": null,
+        "eta": "24 world min",
+        "target": null
+      }
+    ],
+    "setAside": [
+      {
+        "label": "Get stone to make an axe",
+        "reason": "does not know any rock outcrop worth visiting",
+        "target": null
+      },
+      {
+        "label": "Lay out a hut",
+        "reason": "does not know where to break stone",
+        "target": null
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "get to my lean-to",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "just now"
+      },
+      {
+        "goal": "make an axe",
+        "kind": "tool",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "no known source of stone with anything left",
+        "since": "2 world h 10 min ago"
+      }
+    ]
+  },
+  {
+    "version": 12,
+    "time": {
+      "tick": 1146,
+      "day": 1,
+      "clock": "18:39",
+      "phase": "dusk",
+      "light": "dim",
+      "weather": "Clear",
+      "tempC": 14
+    },
+    "self": {
+      "name": "Ada",
+      "sex": "f",
+      "stage": "adult",
+      "ageYears": 30,
+      "character": "balanced",
+      "skills": {
+        "forage": 1.03,
+        "fish": 1.23,
+        "wood": 1.8,
+        "stone": 1.23,
+        "build": 0.91,
+        "farm": 0.96,
+        "craft": 1.2,
+        "carpentry": 1.11,
+        "kiln": 1.18,
+        "smith": 1.31,
+        "bake": 0.94
+      },
+      "health": 100,
+      "needs": {
+        "hunger": {
+          "value": 87,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 82,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 82,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 91,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 62,
+          "state": "ok"
+        }
+      },
+      "aspiration": "hopes for a store that would see them through a lean season (67% there)",
+      "carrying": {
+        "wood": 2
+      },
+      "load": {
+        "used": 4,
+        "cap": 12
+      },
+      "spokenFor": {},
+      "available": {
+        "wood": 2
+      },
+      "tools": [],
+      "pullingCart": false,
+      "position": {
+        "x": 41.1,
+        "y": 39.9
+      },
+      "mood": 6,
+      "thoughts": [],
+      "trade": {
+        "kind": "wood",
+        "why": "quicker at it than at anything else"
+      },
+      "techniques": [
+        "charcoal firing"
+      ]
+    },
+    "household": {
+      "name": "Sedge",
+      "members": [],
+      "home": "lean-to 3 tiles north (99% sound when last seen)",
+      "partner": null,
+      "parents": [],
+      "children": []
+    },
+    "doing": {
+      "activity": null,
+      "suspended": null,
+      "conversation": null,
+      "lastResult": {
+        "label": "Pottering about",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 1145
+      },
+      "lastInteraction": null,
+      "lastChoice": {
+        "label": "Potter about near home",
+        "when": "2 world h 17 min ago",
+        "trigger": "free (external)"
+      }
+    },
+    "seen": {
+      "people": [],
+      "wolves": []
+    },
+    "remembered": {
+      "places": [
+        {
+          "id": 6,
+          "what": "lean-to",
+          "x": 38.5,
+          "y": 38.5,
+          "distance": 3,
+          "direction": "north",
+          "seen": "1 world min ago",
+          "source": "seen",
+          "stale": false,
+          "owner": "Sedge",
+          "items": {
+            "berries": 8
+          },
+          "condition": 99
+        },
+        {
+          "id": 7,
+          "what": "storehouse",
+          "x": 51,
+          "y": 41,
+          "distance": 10,
+          "direction": "south-east",
+          "seen": "3 world h 48 min ago",
+          "source": "seen",
+          "stale": false,
+          "items": {
+            "stone": 4
+          },
+          "condition": 100
+        },
+        {
+          "id": 8,
+          "what": "tree",
+          "x": 60.5,
+          "y": 44.5,
+          "distance": 20,
+          "direction": "south-east",
+          "seen": "11 world h 28 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 9,
+          "what": "tree",
+          "x": 62.5,
+          "y": 44.5,
+          "distance": 22,
+          "direction": "south-east",
+          "seen": "11 world h 28 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 10,
+          "what": "tree",
+          "x": 64.5,
+          "y": 44.5,
+          "distance": 24,
+          "direction": "south-east",
+          "seen": "11 world h 28 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        }
+      ],
+      "water": [
+        {
+          "id": 1000071,
+          "what": "water (shore)",
+          "x": 45.5,
+          "y": 13.5,
+          "distance": 27,
+          "direction": "north-east",
+          "seen": "2 world h 4 min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000072,
+          "what": "water (shore)",
+          "x": 49.5,
+          "y": 13.5,
+          "distance": 28,
+          "direction": "north-east",
+          "seen": "1 world h 56 min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000073,
+          "what": "water (shore)",
+          "x": 53.5,
+          "y": 13.5,
+          "distance": 29,
+          "direction": "east",
+          "seen": "2 world h ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000074,
+          "what": "water (shore)",
+          "x": 57.5,
+          "y": 13.5,
+          "distance": 31,
+          "direction": "east",
+          "seen": "2 world h 13 min ago",
+          "source": "seen",
+          "stale": false
+        }
+      ],
+      "dangers": [],
+      "counts": {
+        "building": 2,
+        "tree": 3,
+        "water (shore)": 4
+      }
+    },
+    "people": {
+      "relations": [],
+      "whereabouts": [],
+      "worries": [],
+      "requests": [],
+      "promises": []
+    },
+    "recent": {
+      "memory": [
+        {
+          "when": "31 world min ago",
+          "text": "What I hope for: a store that would see them through a lean season.",
+          "kind": "life",
+          "t": 1094
+        },
+        {
+          "when": "2 world h 17 min ago",
+          "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+          "kind": "need",
+          "t": 917
+        },
+        {
+          "when": "2 world h 18 min ago",
+          "text": "Explored the north-east country; nothing new turned up.",
+          "kind": "info",
+          "t": 916
+        },
+        {
+          "when": "4 world h 28 min ago",
+          "text": "Gave up on make an axe: no known source of stone with anything left.",
+          "kind": "work",
+          "t": 700
+        },
+        {
+          "when": "4 world h 28 min ago",
+          "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+          "kind": "work",
+          "t": 700
+        }
+      ],
+      "failures": []
+    },
+    "options": [
+      {
+        "key": "sleep:6",
+        "kind": "sleep",
+        "label": "Sleep at my lean-to",
+        "goal": "to recover energy",
+        "need": "energy",
+        "eta": "41 world min",
+        "target": "lean-to 3 tiles north (seen 1 world min ago)"
+      },
+      {
+        "key": "shelter:6",
+        "kind": "rest",
+        "label": "Stay at my lean-to until it is light",
+        "goal": "to let the night pass under shelter",
+        "need": "warmth",
+        "eta": "11 world h 20 min",
+        "target": "lean-to 3 tiles north (seen 1 world min ago)",
+        "limits": [
+          {
+            "field": "ticks",
+            "kind": "count",
+            "min": 30,
+            "max": 1134,
+            "note": "how long to stay, at most until it is light"
+          }
+        ]
+      },
+      {
+        "key": "wander",
+        "kind": "wander",
+        "label": "Potter about near home",
+        "goal": "nothing needs doing right now",
+        "need": null,
+        "eta": "24 world min",
+        "target": null
+      }
+    ],
+    "setAside": [
+      {
+        "label": "Get stone to make an axe",
+        "reason": "does not know any rock outcrop worth visiting",
+        "target": null
+      },
+      {
+        "label": "Lay out a hut",
+        "reason": "does not know where to break stone",
+        "target": null
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "get to my lean-to",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "2 world h 17 min ago"
+      },
+      {
+        "goal": "make an axe",
+        "kind": "tool",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "no known source of stone with anything left",
+        "since": "4 world h 28 min ago"
+      }
+    ]
+  },
+  {
+    "version": 12,
+    "time": {
+      "tick": 1294,
+      "day": 1,
+      "clock": "20:08",
+      "phase": "dusk",
+      "light": "dark",
+      "weather": "Clear",
+      "tempC": 11
+    },
+    "self": {
+      "name": "Ada",
+      "sex": "f",
+      "stage": "adult",
+      "ageYears": 30,
+      "character": "balanced",
+      "skills": {
+        "forage": 1.03,
+        "fish": 1.23,
+        "wood": 1.8,
+        "stone": 1.23,
+        "build": 0.91,
+        "farm": 0.96,
+        "craft": 1.2,
+        "carpentry": 1.11,
+        "kiln": 1.18,
+        "smith": 1.31,
+        "bake": 0.94
+      },
+      "health": 100,
+      "needs": {
+        "hunger": {
+          "value": 84,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 78,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 94,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 94,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 66,
+          "state": "ok"
+        },
+        "social": {
+          "value": 61,
+          "state": "ok"
+        }
+      },
+      "aspiration": "hopes for a store that would see them through a lean season (67% there)",
+      "carrying": {
+        "wood": 2
+      },
+      "load": {
+        "used": 4,
+        "cap": 12
+      },
+      "spokenFor": {},
+      "available": {
+        "wood": 2
+      },
+      "tools": [],
+      "pullingCart": false,
+      "position": {
+        "x": 38.6,
+        "y": 39.4
+      },
+      "mood": 2,
+      "thoughts": [],
+      "trade": {
+        "kind": "wood",
+        "why": "quicker at it than at anything else"
+      },
+      "techniques": [
+        "charcoal firing"
+      ]
+    },
+    "household": {
+      "name": "Sedge",
+      "members": [],
+      "home": "lean-to 1 tiles north-east (98% sound when last seen)",
+      "partner": null,
+      "parents": [],
+      "children": []
+    },
+    "doing": {
+      "activity": null,
+      "suspended": null,
+      "conversation": null,
+      "lastResult": {
+        "label": "Sleeping by my lean-to",
+        "outcome": "success",
+        "detail": "rested",
+        "when": "1 world min ago",
+        "t": 1293
+      },
+      "lastInteraction": null,
+      "lastChoice": {
+        "label": "Sleep at my lean-to",
+        "when": "1 world h 29 min ago",
+        "trigger": "free (external)"
+      }
+    },
+    "seen": {
+      "people": [],
+      "wolves": []
+    },
+    "remembered": {
+      "places": [
+        {
+          "id": 6,
+          "what": "lean-to",
+          "x": 38.5,
+          "y": 38.5,
+          "distance": 1,
+          "direction": "north-east",
+          "seen": "just now",
+          "source": "seen",
+          "stale": false,
+          "owner": "Sedge",
+          "items": {
+            "berries": 8
+          },
+          "condition": 98
+        },
+        {
+          "id": 7,
+          "what": "storehouse",
+          "x": 51,
+          "y": 41,
+          "distance": 12,
+          "direction": "south-east",
+          "seen": "5 world h 17 min ago",
+          "source": "seen",
+          "stale": false,
+          "items": {
+            "stone": 4
+          },
+          "condition": 100
+        },
+        {
+          "id": 8,
+          "what": "tree",
+          "x": 60.5,
+          "y": 44.5,
+          "distance": 22,
+          "direction": "south-east",
+          "seen": "12 world h 56 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 9,
+          "what": "tree",
+          "x": 62.5,
+          "y": 44.5,
+          "distance": 24,
+          "direction": "south-east",
+          "seen": "12 world h 56 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        },
+        {
+          "id": 10,
+          "what": "tree",
+          "x": 64.5,
+          "y": 44.5,
+          "distance": 26,
+          "direction": "south-east",
+          "seen": "12 world h 56 min ago",
+          "source": "seen",
+          "stale": false,
+          "amount": 9
+        }
+      ],
+      "water": [
+        {
+          "id": 1000071,
+          "what": "water (shore)",
+          "x": 45.5,
+          "y": 13.5,
+          "distance": 27,
+          "direction": "north-east",
+          "seen": "3 world h 32 min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000072,
+          "what": "water (shore)",
+          "x": 49.5,
+          "y": 13.5,
+          "distance": 28,
+          "direction": "east",
+          "seen": "3 world h 25 min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000073,
+          "what": "water (shore)",
+          "x": 53.5,
+          "y": 13.5,
+          "distance": 30,
+          "direction": "east",
+          "seen": "3 world h 29 min ago",
+          "source": "seen",
+          "stale": false
+        },
+        {
+          "id": 1000074,
+          "what": "water (shore)",
+          "x": 57.5,
+          "y": 13.5,
+          "distance": 32,
+          "direction": "east",
+          "seen": "3 world h 41 min ago",
+          "source": "seen",
+          "stale": false
+        }
+      ],
+      "dangers": [],
+      "counts": {
+        "building": 2,
+        "tree": 3,
+        "water (shore)": 4
+      }
+    },
+    "people": {
+      "relations": [],
+      "whereabouts": [],
+      "worries": [],
+      "requests": [],
+      "promises": []
+    },
+    "recent": {
+      "memory": [
+        {
+          "when": "1 world min ago",
+          "text": "Slept and recovered 13 energy.",
+          "kind": "need",
+          "t": 1293
+        },
+        {
+          "when": "2 world h ago",
+          "text": "What I hope for: a store that would see them through a lean season.",
+          "kind": "life",
+          "t": 1094
+        },
+        {
+          "when": "3 world h 46 min ago",
+          "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+          "kind": "need",
+          "t": 917
+        },
+        {
+          "when": "3 world h 47 min ago",
+          "text": "Explored the north-east country; nothing new turned up.",
+          "kind": "info",
+          "t": 916
+        },
+        {
+          "when": "5 world h 56 min ago",
+          "text": "Gave up on make an axe: no known source of stone with anything left.",
+          "kind": "work",
+          "t": 700
+        },
+        {
+          "when": "5 world h 56 min ago",
+          "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+          "kind": "work",
+          "t": 700
+        }
+      ],
+      "failures": []
+    },
+    "options": [
+      {
+        "key": "shelter:6",
+        "kind": "rest",
+        "label": "Stay at my lean-to until it is light",
+        "goal": "to let the night pass under shelter",
+        "need": "warmth",
+        "eta": "9 world h 52 min",
+        "target": "lean-to 1 tiles north-east (seen just now)",
+        "limits": [
+          {
+            "field": "ticks",
+            "kind": "count",
+            "min": 30,
+            "max": 986,
+            "note": "how long to stay, at most until it is light"
+          }
+        ]
+      },
+      {
+        "key": "wander",
+        "kind": "wander",
+        "label": "Potter about near home",
+        "goal": "nothing needs doing right now",
+        "need": null,
+        "eta": "24 world min",
+        "target": null
+      }
+    ],
+    "setAside": [
+      {
+        "label": "Get stone to make an axe",
+        "reason": "does not know any rock outcrop worth visiting",
+        "target": null
+      },
+      {
+        "label": "Lay out a hut",
+        "reason": "does not know where to break stone",
+        "target": null
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "stay at my lean-to until it is light",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "3 world h 46 min ago"
+      },
+      {
+        "goal": "make an axe",
+        "kind": "tool",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "no known source of stone with anything left",
+        "since": "5 world h 56 min ago"
+      }
+    ]
+  }
+]

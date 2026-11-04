@@ -1,0 +1,480 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "immigration": true,
+  "tick": 101280,
+  "stop": "budget",
+  "seconds": 180.214,
+  "totals": {
+    "samples": 15574,
+    "peopleWithoutCharcoal": 14273,
+    "adultOrYouthWithoutCharcoal": 9743,
+    "wantedTechnique": 508,
+    "learnerOffers": 8,
+    "teacherOffers": 1,
+    "materialRequestOffers": 2011,
+    "materialBlocked": 1794,
+    "knownNeedySites": 3493,
+    "nearbyPeople": 124418,
+    "nearbyWoodCarriers": 87085,
+    "nearbyStoneCarriers": 28047,
+    "nearbyPlankCarriers": 0,
+    "workshopOptions": 750
+  },
+  "selected": 1153,
+  "requests": 837,
+  "heardRequests": 63,
+  "demandTrades": 0,
+  "benefits": 0,
+  "learned": 1,
+  "newPeople": [
+    {
+      "id": 3470,
+      "name": "Zora",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 3471,
+      "name": "Silas",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "stone"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 5900,
+      "name": "Rhea",
+      "stage": "adult",
+      "background": {
+        "kind": "generalist",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 5901,
+      "name": "Ulric",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 5902,
+      "name": "Dara",
+      "stage": "child",
+      "background": {
+        "kind": "specialist",
+        "specialty": "farm"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 11507,
+      "name": "Sana",
+      "stage": "child",
+      "techniques": {}
+    },
+    {
+      "id": 12676,
+      "name": "Dov",
+      "stage": "child",
+      "techniques": {}
+    },
+    {
+      "id": 13558,
+      "name": "Zia",
+      "stage": "adult",
+      "background": {
+        "kind": "generalist",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 13559,
+      "name": "Cole",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 16766,
+      "name": "Hana",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {
+        "charcoal": {
+          "source": "initial",
+          "learned": 39011,
+          "teacher": 0
+        }
+      }
+    },
+    {
+      "id": 20081,
+      "name": "Yusuf",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "wood"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 27932,
+      "name": "Lars",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "wood"
+      },
+      "techniques": {
+        "charcoal": {
+          "source": "initial",
+          "learned": 63011,
+          "teacher": 0
+        }
+      }
+    },
+    {
+      "id": 35209,
+      "name": "Ben",
+      "stage": "adult",
+      "background": {
+        "kind": "inexperienced",
+        "specialty": null
+      },
+      "techniques": {}
+    },
+    {
+      "id": 37764,
+      "name": "Nora",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "carpentry"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 37765,
+      "name": "Corin",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "wood"
+      },
+      "techniques": {}
+    },
+    {
+      "id": 39607,
+      "name": "Odette",
+      "stage": "child",
+      "techniques": {}
+    },
+    {
+      "id": 46280,
+      "name": "Basil",
+      "stage": "adult",
+      "background": {
+        "kind": "specialist",
+        "specialty": "forage"
+      },
+      "techniques": {}
+    }
+  ],
+  "buildings": [
+    {
+      "id": 993,
+      "type": "fire",
+      "items": {}
+    },
+    {
+      "id": 996,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 999,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1003,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1012,
+      "type": "lean_to",
+      "items": {
+        "grain": 1,
+        "berries": 2
+      }
+    },
+    {
+      "id": 1017,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1021,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 1725,
+      "type": "lean_to",
+      "items": {
+        "grain": 9,
+        "berries": 1
+      }
+    },
+    {
+      "id": 2188,
+      "type": "lean_to",
+      "items": {
+        "grain": 1
+      }
+    },
+    {
+      "id": 2278,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 4091,
+      "type": "hut",
+      "items": {
+        "berries": 3
+      }
+    },
+    {
+      "id": 4165,
+      "type": "hut",
+      "items": {
+        "grain": 5,
+        "fruit": 7,
+        "berries": 5
+      }
+    },
+    {
+      "id": 4408,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 5885,
+      "type": "hut",
+      "items": {
+        "fish": 4
+      }
+    },
+    {
+      "id": 6609,
+      "type": "timber_yard",
+      "items": {}
+    },
+    {
+      "id": 8639,
+      "type": "lean_to",
+      "items": {
+        "berries": 2
+      }
+    },
+    {
+      "id": 8990,
+      "type": "quarry",
+      "items": {
+        "stone": 13
+      }
+    },
+    {
+      "id": 9846,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 13656,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 14761,
+      "type": "lean_to",
+      "items": {
+        "berries": 2
+      }
+    },
+    {
+      "id": 15266,
+      "type": "hut",
+      "items": {
+        "grain": 2
+      }
+    },
+    {
+      "id": 16996,
+      "type": "storehouse",
+      "items": {}
+    },
+    {
+      "id": 19452,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 26741,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 28706,
+      "type": "lean_to",
+      "items": {
+        "grain": 2,
+        "fish": 2,
+        "berries": 1
+      }
+    },
+    {
+      "id": 29352,
+      "type": "kiln",
+      "items": {
+        "bricks": 3
+      }
+    },
+    {
+      "id": 36866,
+      "type": "smithy",
+      "items": {}
+    },
+    {
+      "id": 37031,
+      "type": "hut",
+      "items": {}
+    },
+    {
+      "id": 38136,
+      "type": "lean_to",
+      "items": {}
+    },
+    {
+      "id": 42869,
+      "type": "hut",
+      "items": {
+        "grain": 4,
+        "fish": 1,
+        "berries": 3
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 13057,
+      "townshipId": 995,
+      "siteId": 13056,
+      "organiserId": 3470,
+      "proposed": 31403,
+      "reason": "a shared storehouse for the settlement",
+      "status": "completed",
+      "outcome": "materials supplied and construction completed",
+      "participants": [
+        {
+          "personId": 3470,
+          "requestId": 0,
+          "since": 31403,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {
+            "wood": 2
+          },
+          "work": 164.9259390881488,
+          "supports": 3470
+        },
+        {
+          "personId": 1032,
+          "requestId": 13874,
+          "since": 33430,
+          "status": "supporting",
+          "reason": "Jonas supports Zora coordinating and will help build",
+          "materials": {
+            "wood": 8,
+            "stone": 2
+          },
+          "work": 274.6613005725741,
+          "decisions": [
+            {
+              "candidateId": 3470,
+              "accepted": true,
+              "reason": "Jonas supports Zora coordinating and will help build",
+              "tick": 33430
+            }
+          ],
+          "supports": 3470
+        },
+        {
+          "personId": 1022,
+          "requestId": 16735,
+          "since": 38989,
+          "status": "supporting",
+          "reason": "Maren supports Zora coordinating and will help build",
+          "materials": {
+            "stone": 2
+          },
+          "work": 200.4127603392771,
+          "decisions": [
+            {
+              "candidateId": 3470,
+              "accepted": true,
+              "reason": "Maren supports Zora coordinating and will help build",
+              "tick": 38989
+            }
+          ],
+          "supports": 3470
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 3470,
+            "tick": 31403,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 3470,
+        "changes": [
+          {
+            "tick": 33430,
+            "from": 0,
+            "to": 3470,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "ended": 39347,
+      "buildingId": 16996
+    }
+  ],
+  "hash": "c93403a2",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

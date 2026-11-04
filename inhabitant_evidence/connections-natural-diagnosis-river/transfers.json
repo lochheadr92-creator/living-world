@@ -1,0 +1,34 @@
+[
+  {
+    "tick": 10,
+    "from": "building:1111",
+    "to": "person:1112",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 808,
+    "from": "building:1105",
+    "to": "person:1107",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 7273,
+    "from": "person:1113",
+    "to": "person:1147",
+    "item": "grain",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 10266,
+    "from": "person:1135",
+    "to": "person:1146",
+    "item": "berries",
+    "n": 1,
+    "reason": "gift on request"
+  }
+]

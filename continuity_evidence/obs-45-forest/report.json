@@ -1,0 +1,68 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 53,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 78.68,
+  "alive": 8,
+  "deaths": 22,
+  "unfinishedRecorded": 3,
+  "unfinishedByKind": {
+    "stock": 1,
+    "tool": 2
+  },
+  "takenUp": 0,
+  "takenUpByKindAndStatus": {},
+  "succeeded": [],
+  "cancelledUnfinished": 0,
+  "finishedWhatBegan": 0,
+  "unfinishedOpenAtEnd": 0,
+  "reservesLaid": 3,
+  "reserveLaidYears": [
+    3,
+    2,
+    2
+  ],
+  "peopleWithWinterMeals": 6,
+  "practiceHolders": 2,
+  "practiceByeSource": {
+    "laid": 1,
+    "family": 1
+  },
+  "practice": [
+    {
+      "person": "Lena",
+      "alive": true,
+      "learned": 86405,
+      "source": "laid",
+      "from": 0,
+      "year": 2,
+      "meals": 4,
+      "fromName": null
+    },
+    {
+      "person": "Kaia",
+      "alive": true,
+      "learned": 86405,
+      "source": "family",
+      "from": 924,
+      "year": 2,
+      "meals": 4,
+      "fromName": "Hal"
+    }
+  ],
+  "seasonStockPlans": 13,
+  "seasonStockPlansByHolder": {
+    "other": 10,
+    "holder": 3
+  },
+  "earlyCueAdoptions": 1,
+  "hash": "1190c977",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

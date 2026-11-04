@@ -1,0 +1,22 @@
+{
+  "name": "Lia",
+  "id": 4355,
+  "textLen": 16489,
+  "selectUpdateMs": 9.5,
+  "fullUpdateMs": 0.7000000029802322,
+  "pure": true,
+  "hashSame": true,
+  "relations": 54,
+  "intentions": [
+    {
+      "kind": "batch",
+      "goal": "see 13 bricks through at the kiln for the site",
+      "step": "collect bricks for bricks",
+      "blocked": "",
+      "since": 105750,
+      "until": 112950
+    }
+  ],
+  "commitments": 0,
+  "age": 46
+}

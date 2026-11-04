@@ -1,0 +1,110 @@
+[
+  {
+    "tick": 995,
+    "day": 0.41,
+    "kind": "home finished",
+    "text": "Edda finished a lean-to for the Fern household."
+  },
+  {
+    "tick": 2421,
+    "day": 1.01,
+    "kind": "home finished",
+    "text": "Jonas finished a lean-to for the Sedge household."
+  },
+  {
+    "tick": 2642,
+    "day": 1.1,
+    "kind": "home finished",
+    "text": "Quinn finished a lean-to for the Moss household."
+  },
+  {
+    "tick": 2788,
+    "day": 1.16,
+    "kind": "home finished",
+    "text": "Vik finished a lean-to for the Briar household."
+  },
+  {
+    "tick": 7693,
+    "day": 3.21,
+    "kind": "home finished",
+    "text": "Maren finished a hut for the Thistle household."
+  },
+  {
+    "tick": 8028,
+    "day": 3.35,
+    "kind": "home finished",
+    "text": "Ivo finished a hut for the Brook household."
+  },
+  {
+    "tick": 9732,
+    "day": 4.05,
+    "kind": "home finished",
+    "text": "Pia finished a hut for the Sorrel household."
+  },
+  {
+    "tick": 10774,
+    "day": 4.49,
+    "kind": "home finished",
+    "text": "Jax finished a hut for the Hazel household."
+  },
+  {
+    "tick": 13039,
+    "day": 5.43,
+    "kind": "home finished",
+    "text": "Quinn finished a hut for the Moss household."
+  },
+  {
+    "tick": 19352,
+    "day": 8.06,
+    "kind": "site abandoned",
+    "text": "The hut site was abandoned (nobody had worked on it for days)."
+  },
+  {
+    "tick": 19539,
+    "day": 8.14,
+    "kind": "home finished",
+    "text": "Bea finished a hut for the Juniper household."
+  },
+  {
+    "tick": 31808,
+    "day": 13.25,
+    "kind": "collapse",
+    "text": "A lean-to collapsed from neglect."
+  },
+  {
+    "tick": 37127,
+    "day": 15.47,
+    "kind": "home finished",
+    "text": "Vik finished a hut for the Briar household."
+  },
+  {
+    "tick": 41565,
+    "day": 17.32,
+    "kind": "home finished",
+    "text": "Pavel finished a hut for the Rowan household."
+  },
+  {
+    "tick": 43542,
+    "day": 18.14,
+    "kind": "home finished",
+    "text": "Edda finished a hut for the Fern household."
+  },
+  {
+    "tick": 43595,
+    "day": 18.16,
+    "kind": "repair",
+    "text": "Vik repaired a lean-to."
+  },
+  {
+    "tick": 45808,
+    "day": 19.09,
+    "kind": "repair",
+    "text": "Maren repaired a lean-to."
+  },
+  {
+    "tick": 46595,
+    "day": 19.41,
+    "kind": "repair",
+    "text": "Maren repaired a hut."
+  }
+]

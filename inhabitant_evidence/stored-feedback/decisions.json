@@ -1,0 +1,1095 @@
+[
+  {
+    "tick": 2281,
+    "choice": {
+      "key": "explore",
+      "kind": "explore",
+      "label": "Search for water",
+      "goal": "to find water",
+      "need": "thirst",
+      "eta": "2 world h 15 min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "15 world h 40 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "15 world h 49 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 2472,
+    "choice": {
+      "key": "drink:1000071",
+      "kind": "drink",
+      "label": "Go and drink at the water",
+      "goal": "to quench thirst",
+      "need": "thirst",
+      "eta": "46 world min",
+      "target": "water (shore) 5 tiles north-east (seen 1 world min ago)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "17 world h 35 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "17 world h 43 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 2538,
+    "choice": {
+      "key": "socialize:7:ask_info:food",
+      "kind": "socialize",
+      "label": "Ask Ben where to find food",
+      "goal": "to learn where food can be found",
+      "need": null,
+      "eta": "1 world h 54 min",
+      "target": "Ben (in sight, 8 tiles south-east)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "18 world h 14 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "18 world h 23 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 2650,
+    "choice": {
+      "key": "eat_store:10",
+      "kind": "eat_store",
+      "label": "Eat from the home store",
+      "goal": "to ease hunger",
+      "need": "hunger",
+      "eta": "2 world h 45 min",
+      "target": "lean-to 27 tiles west (seen 2 world h 53 min ago)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "37 world min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "19 world h 22 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "19 world h 30 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 2908,
+    "choice": {
+      "key": "socialize:5:ask_info:food",
+      "kind": "socialize",
+      "label": "Ask Cora where to find food",
+      "goal": "to learn where food can be found",
+      "need": null,
+      "eta": "1 world h 9 min",
+      "target": "Cora (in sight, 5 tiles south)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "3 world h 11 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "21 world h 56 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "just now"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "22 world h 5 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 2937,
+    "choice": {
+      "key": "collect:12:wood",
+      "kind": "withdraw",
+      "label": "Collect 3 wood from the storehouse",
+      "goal": "to make a basket",
+      "need": null,
+      "eta": "1 world h 14 min",
+      "target": "storehouse 11 tiles south-east (seen 20 world h 5 min ago)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "3 world h 29 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "22 world h 14 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "17 world min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "22 world h 22 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 3028,
+    "choice": {
+      "key": "craft:basket",
+      "kind": "craft",
+      "label": "Make a basket",
+      "goal": "to work faster",
+      "need": null,
+      "eta": "52 world min",
+      "target": "storehouse 2 tiles east (seen just now)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "4 world h 23 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "23 world h 8 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "1 world h 12 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "23 world h 17 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 3087,
+    "choice": {
+      "key": "explore",
+      "kind": "explore",
+      "label": "Explore somewhere new",
+      "goal": "to look for food sources",
+      "need": null,
+      "eta": "3 world h 10 min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "4 world h 59 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "23 world h 44 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "1 world h 47 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "23 world h 52 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 3354,
+    "choice": {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Potter about near home",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "7 world h 39 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "1 world day 2 h 24 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "get to my lean-to",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "just now"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "4 world h 28 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 2 h 32 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 3554,
+    "choice": {
+      "key": "sleep:10",
+      "kind": "sleep",
+      "label": "Sleep at my lean-to",
+      "goal": "to recover energy",
+      "need": "energy",
+      "eta": "35 world min",
+      "target": "lean-to 2 tiles south-east (seen 1 world min ago)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "9 world h 39 min ago"
+      },
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "2 stone",
+        "status": "fulfilled",
+        "note": "promise kept",
+        "when": "1 world day 4 h 24 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "stay at my lean-to until it is light",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "2 world h ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "6 world h 28 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 4 h 32 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 4036,
+    "choice": {
+      "key": "shelter:10",
+      "kind": "rest",
+      "label": "Stay at my lean-to until it is light",
+      "goal": "to let the night pass under shelter",
+      "need": "warmth",
+      "eta": "6 world h 26 min",
+      "target": "lean-to 1 tiles north-east (seen just now)",
+      "limits": [
+        {
+          "field": "ticks",
+          "kind": "count",
+          "min": 30,
+          "max": 644,
+          "note": "how long to stay, at most until it is light"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "14 world h 28 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "stay at my lean-to until it is light",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "6 world h 49 min ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "11 world h 17 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 9 h 22 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 4759,
+    "choice": {
+      "key": "explore",
+      "kind": "explore",
+      "label": "Explore somewhere new",
+      "goal": "to look for food sources",
+      "need": "hunger",
+      "eta": "5 world h 17 min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "21 world h 42 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "18 world h 31 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "14 world h 3 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 16 h 35 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5036,
+    "choice": {
+      "key": "eat_store:11",
+      "kind": "eat_store",
+      "label": "Take food from the Reed household's store",
+      "goal": "to ease hunger",
+      "need": "hunger",
+      "eta": "2 world h 38 min",
+      "target": "lean-to 25 tiles south-east (seen 13 world h 40 min ago)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "1 world day 28 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "21 world h 17 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "16 world h 49 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 19 h 22 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5235,
+    "choice": {
+      "key": "socialize:7:ask_info:food",
+      "kind": "socialize",
+      "label": "Ask Ben where to find food",
+      "goal": "to learn where food can be found",
+      "need": null,
+      "eta": "46 world min",
+      "target": "Ben (in sight, 1 tiles west)"
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "1 world day 2 h 28 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "23 world h 16 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "18 world h 49 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 21 h 21 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5240,
+    "choice": {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Potter about near home",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "1 world day 2 h 31 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "23 world h 19 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "18 world h 52 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 21 h 24 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5332,
+    "choice": {
+      "key": "explore",
+      "kind": "explore",
+      "label": "Explore somewhere new",
+      "goal": "to look for food sources",
+      "need": "hunger",
+      "eta": "2 world h 53 min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "1 world day 3 h 26 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "",
+        "reason": "there is next to nothing at home to fall back on",
+        "since": "1 world day 14 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "19 world h 47 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "1 world day 22 h 19 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5580,
+    "choice": {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Wander down to the square",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    "requests": [
+      {
+        "direction": "I asked",
+        "other": "Ben",
+        "what": "where to find food",
+        "status": "failed",
+        "note": "they did not know either",
+        "when": "1 world day 5 h 55 min ago"
+      }
+    ],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "eat before the night",
+        "wants": {},
+        "blocked": "",
+        "reason": "nowhere to shelter nearby for the night",
+        "since": "just now"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "1 world day 2 h 43 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "22 world h 16 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "2 world days 48 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 5816,
+    "choice": {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Wander down to the square",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    "requests": [],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "eat before the night",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "2 world h 22 min ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "1 world day 5 h 5 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "1 world day 37 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "2 world days 3 h 10 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 6035,
+    "choice": {
+      "key": "drink:1000067",
+      "kind": "drink",
+      "label": "Go and drink at the water",
+      "goal": "to quench thirst",
+      "need": "thirst",
+      "eta": "4 world h 30 min",
+      "target": "water (shore) 42 tiles north-east (seen 11 world h 55 min ago)"
+    },
+    "requests": [],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "eat before the night",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "4 world h 33 min ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "1 world day 7 h 16 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "1 world day 2 h 49 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "2 world days 5 h 21 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 6416,
+    "choice": {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Potter about near home",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    },
+    "requests": [],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "eat before the night",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "8 world h 22 min ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "1 world day 11 h 5 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "1 world day 6 h 37 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "2 world days 9 h 10 min ago"
+      }
+    ]
+  },
+  {
+    "tick": 6718,
+    "choice": {
+      "key": "rest:home:10",
+      "kind": "rest",
+      "label": "Shelter at the lean-to",
+      "goal": "to get warm",
+      "need": "warmth",
+      "eta": "25 world min",
+      "target": "lean-to 3 tiles north (seen just now)"
+    },
+    "requests": [],
+    "plans": [
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "active",
+        "step": "eat before the night",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "11 world h 23 min ago"
+      },
+      {
+        "goal": "put 4 units of food by for the household",
+        "kind": "stock",
+        "status": "active",
+        "step": "gather food to put by (4 more)",
+        "wants": {},
+        "blocked": "hunger comes first",
+        "reason": "set aside: hunger comes first",
+        "since": "1 world day 14 h 6 min ago"
+      },
+      {
+        "goal": "be fed, watered and under shelter before dark",
+        "kind": "night",
+        "status": "dropped",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "since": "1 world day 9 h 38 min ago"
+      },
+      {
+        "goal": "make a pick",
+        "kind": "tool",
+        "status": "done",
+        "step": "",
+        "wants": {},
+        "blocked": "",
+        "reason": "made the pick (Ben brought 2 of the stone)",
+        "since": "2 world days 12 h 11 min ago"
+      }
+    ]
+  }
+]

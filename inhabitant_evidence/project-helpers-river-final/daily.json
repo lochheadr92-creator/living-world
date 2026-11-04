@@ -1,0 +1,62 @@
+[
+  {
+    "day": 1,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 2,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 3,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 4,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 5,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "day": 6,
+    "alive": 28,
+    "comparisons": 2,
+    "changed": 1,
+    "ledger": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

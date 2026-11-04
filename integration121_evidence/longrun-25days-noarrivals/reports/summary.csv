@@ -1,0 +1,4 @@
+"Run","Complete","ExitCode","StopReason","DaysReached","Alive","Conserved","Failure"
+"production-forest","True","0","horizon","25","1","True",""
+"production-river","True","0","horizon","25","24","True",""
+"production-meadow","True","0","horizon","25","28","True",""

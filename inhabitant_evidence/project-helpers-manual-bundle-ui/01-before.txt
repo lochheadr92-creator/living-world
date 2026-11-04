@@ -1,0 +1,159 @@
+Browser tab: 1, Title: "Staged project helper verification", URL: "http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json".
+1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json
+	2 container app
+		3 image Description: The simulated world, ID: world
+		4 container ui
+			5 container
+				6 heading Living World, Value: 1
+					7 text Living World
+				8 pop up button (collapsed) Description: World menu. Current seed: project-helper-choice, Secondary Actions: Expand
+				9 button Copy seed
+				10 button Help and controls
+				11 checkbox Description: Fold the top bar, Value: 0
+				12 container World summary
+					13 text 14:27
+					14 text Day 1 · afternoon
+					15 text Clear
+					16 text 19 °C
+					17 container
+						18 text 4  people
+					19 text all grown
+					20 text 4 households
+					21 text 1 home
+				22 toolbar Time controls
+					23 button Play
+					24 button Step forward one tick
+					25 container Simulation speed
+						26 checkbox Description: Speed 0.5×, Value: 0
+						27 checkbox Description: Speed 1×, Value: 0
+						28 checkbox Description: Speed 2×, Value: 0
+						29 checkbox Description: Speed 4×, Value: 0
+						30 checkbox Description: Speed 8×, Value: 0
+						31 checkbox Description: Speed 16×, Value: 1
+				32 text PAUSED
+			33 container
+				34 container AI inhabitant
+					35 text AI inhabitant
+					36 text Ada · by hand thinking…
+					37 text day 1 14:27
+					38 text Your turn
+					39 text 14:27
+					40 text Ada is in no particular need. Last: Eating at home — success.
+					41 text Plans: make an axe; next: get 1 more stone for the axe · wood: 2 carried and reserved, 0 still missing (2 wanted) · stone: 0 carried and reserved, 1 still missing (1 wanted) · Unreserved: 2 wood · Promises and actions serving the plan may use reserved goods; each offered action has its own limits.
+					42 text Action estimates and memory ages use the world clock.
+					43 container
+						44 button Help: Ask Cora for stone — Cora (in sight, 2 tiles south-east) · about 57 world min, Ask Cora for stone I trust Cora; they may still need it themselves Cora (in sight, 2 tiles south-east) About 57 world min
+							45 text Ask Cora for stone
+							46 text I trust Cora; they may still need it themselves
+							47 text Cora (in sight, 2 tiles south-east)
+							48 text About 57 world min
+						49 button Ask Cora where to find food Cora (in sight, 2 tiles south-east) About 57 world min, Help: Ask Cora where to find food — Cora (in sight, 2 tiles south-east) · about 57 world min
+							50 text Ask Cora where to find food
+							51 text Cora (in sight, 2 tiles south-east)
+							52 text About 57 world min
+						53 button Ask Ben where to find food Ben (in sight, 3 tiles south-east) About 1 world h 1 min, Help: Ask Ben where to find food — Ben (in sight, 3 tiles south-east) · about 1 world h 1 min
+							54 text Ask Ben where to find food
+							55 text Ben (in sight, 3 tiles south-east)
+							56 text About 1 world h 1 min
+						57 button Offer Cora a swap: wood for berries Cora (in sight, 2 tiles south-east) About 57 world min, Help: Offer Cora a swap: wood for berries — Cora (in sight, 2 tiles south-east) · about 57 world min
+							58 text Offer Cora a swap: wood for berries
+							59 text Cora (in sight, 2 tiles south-east)
+							60 text About 57 world min
+						61 button Breaking stone to make an axe rock outcrop 21 tiles south-east (seen 7 world h 15 min ago) About 2 world h 50 min, Help: Breaking stone to make an axe — rock outcrop 21 tiles south-east (seen 7 world h 15 min ago) · about 2 world h 50 min
+							62 text Breaking stone to make an axe
+							63 text rock outcrop 21 tiles south-east (seen 7 world h 15 min ago)
+							64 text About 2 world h 50 min
+						65 button Potter about near home About 24 world min, Help: Potter about near home · about 24 world min
+							66 text Potter about near home
+							67 text About 24 world min
+					68 button Let the engine choose
+					69 button (collapsed) Answer from a chat, Secondary Actions: Expand
+						70 text Answer from a chat
+					71 text decisions 0, engine 0, refused 0
+					72 button Save transcript
+					73 button Stop
+				74 container Happenings feed
+					75 button (collapsed) Description: Happenings, Secondary Actions: Expand
+						76 text Happenings
+						77 text Cora gave 2 berries to Ada.
+			78 container
+				79 button (expanded) Description: Hide the inspector, Secondary Actions: Collapse
+				80 container Inspector
+					81 container
+						82 heading Ada, Value: 2
+							83 text Ada
+						84 checkbox Description: Follow this person with the camera, Value: 1
+						85 button Show on the map
+						86 button Close inspector
+						87 text Adult, 30
+						88 text Brook household Home: lean-to (98% sound) — too hungry to start a building Township: Willowbank
+					89 container
+						90 text MOOD Content HEALTH 100 ON THEIR MIND +5 Cora gave me 2 berries
+						91 container What are they up to?
+							92 heading What are they up to?, Value: 3, ID: lw-upto-h
+								93 text What are they up to?
+							94 button (collapsed) More, Secondary Actions: Expand
+							95 definition list lw-upto-qa
+								96 text Between tasks (last chose “Eat from the home store”).
+								97 container WHAT IS STOPPING THEM?
+									98 text WHAT IS STOPPING THEM?
+								99 text Lay out a hut: too hungry to start a building.
+								100 container WHAT ARE THEY SET ON?
+									101 text WHAT ARE THEY SET ON?
+								102 text Make an axe. Step: get 1 more stone for the axe — settled on, not started. Still needs 1 stone.
+						103 button (expanded) Township & shared work, Secondary Actions: Collapse
+							104 text Township & shared work
+						105 text Willowbank: 4 households. Membership belongs to the household and does not change with walking.
+						106 text Recent recorded production and resource flows:
+						107 text gathering: 2 wood; 1 recorded days. Last source #13 at tick 266.
+						108 text Too little repeated activity recorded to describe a specialisation.
+						109 text No transfers between township affiliations recorded.
+						110 text No repeated-support faction currently established.
+						111 text No shared project proposed yet.
+						112 button (collapsed) Household history, Secondary Actions: Expand
+							113 text Household history
+						114 button (collapsed) Relationship history, Secondary Actions: Expand
+							115 text Relationship history
+						116 text NEEDS
+						117 container Needs
+							118 level indicator Description: Food, Value: 76
+							119 level indicator Description: Water, Value: 74
+							120 level indicator Description: Energy, Value: 66
+							121 level indicator Description: Warmth, Value: 99
+							122 level indicator Description: Safety, Value: 84
+							123 level indicator Description: Company, Value: 76
+						124 text CARRYING
+						125 container 4 wood
+						126 text 8 / 12 TOOLS none
+						127 button (expanded) Conversation, Secondary Actions: Collapse
+						128 container Last conversation
+							129 text LAST CONVERSATION 55s ago
+							130 button Look at Cora
+							131 text came to Ada with an offer of help
+							132 definition list
+								133 container Outcome
+									134 text Outcome
+								135 text Friendly
+						136 container More about them
+							137 button (collapsed) Nearby, Secondary Actions: Expand
+							138 button (collapsed) People 1, Secondary Actions: Expand
+								139 text People
+								140 text 1
+							141 button (collapsed) Requests, Secondary Actions: Expand
+							142 button (collapsed) Recent 5, Secondary Actions: Expand
+								143 text Recent
+								144 text 5
+							145 button (collapsed) Knows 8, Secondary Actions: Expand
+								146 text Knows
+								147 text 8
+							148 button (collapsed) Family, Secondary Actions: Expand
+							149 button (collapsed) Traits, Secondary Actions: Expand
+			150 container Map overlays
+				151 checkbox Description: Perception overlay, Value: 0
+				152 checkbox Description: Paths overlay, Value: 0
+				153 checkbox Description: Intentions overlay, Value: 0
+				154 checkbox Description: Knowledge overlay, Value: 0
+				155 checkbox Description: Labels overlay, Value: 0
+	156 button Save verification bundle
+
+The focused UI element is 1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json

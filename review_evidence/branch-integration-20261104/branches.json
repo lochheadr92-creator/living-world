@@ -1,0 +1,1988 @@
+{
+  "main": "a916ec028b2e373226f1593602a9d2d748e1a27b",
+  "refs": [
+    {
+      "ref": "refs/heads/claude/awesome-dirac-07f8q1",
+      "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593"
+    },
+    {
+      "ref": "refs/heads/claude/civilisation-phase1",
+      "sha": "3f6ec66115320f4939f10158eefa2a990eb62918"
+    },
+    {
+      "ref": "refs/heads/claude/dreamy-brahmagupta-o1ttw1",
+      "sha": "3c60fb9055410938b88796676d26cb8d36b779ed"
+    },
+    {
+      "ref": "refs/heads/claude/epic-franklin-469omp",
+      "sha": "03dd8684a0275fa97a0c1808963437276901eee1"
+    },
+    {
+      "ref": "refs/heads/claude/friendly-planck-ccpkxf",
+      "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603"
+    },
+    {
+      "ref": "refs/heads/claude/household-preparation-v2",
+      "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe"
+    },
+    {
+      "ref": "refs/heads/claude/mood-ranking",
+      "sha": "4b063dca4d354684593e143886f2bbb152582c61"
+    },
+    {
+      "ref": "refs/heads/claude/record-2026-10-20",
+      "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9"
+    },
+    {
+      "ref": "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+      "sha": "d72e3666a1b9440438724196f6bd08706405672a"
+    },
+    {
+      "ref": "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+      "sha": "b542836587861b532da3e9b632988fcc6c94ab0e"
+    },
+    {
+      "ref": "refs/heads/claude/winter-shelter-v34",
+      "sha": "f33cd0bf4edce91bf06aec332325c6182022a771"
+    },
+    {
+      "ref": "refs/heads/claude/wolf-defence-v3",
+      "sha": "359bce916481473a4c939bfd46dd21a362a74589"
+    },
+    {
+      "ref": "refs/heads/claude/ws3-seasonal-prep",
+      "sha": "49655bb054660fa1c5b5b28eebbf8808a28a66ec"
+    },
+    {
+      "ref": "refs/heads/codex/autonomy-continuation",
+      "sha": "9db27b67fba881843c67edbbb09c9b60eeff6ca1"
+    },
+    {
+      "ref": "refs/heads/codex/autonomy-environment",
+      "sha": "3534da86dafd42c45d1303a55fbad8c182e6b5d7"
+    },
+    {
+      "ref": "refs/heads/codex/civilisation-programme",
+      "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967"
+    },
+    {
+      "ref": "refs/heads/codex/game-inspired-slices",
+      "sha": "e415b4b65ef006a09cb80e78777b1a6992462352"
+    },
+    {
+      "ref": "refs/heads/codex/home-habitation",
+      "sha": "9e4165312195df26999ff79866ef5809bb280b83"
+    },
+    {
+      "ref": "refs/heads/codex/household-continuity",
+      "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57"
+    },
+    {
+      "ref": "refs/heads/codex/hungry-harvest114",
+      "sha": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd"
+    },
+    {
+      "ref": "refs/heads/codex/inhabitant-fixes",
+      "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878"
+    },
+    {
+      "ref": "refs/heads/codex/occasion-recovery112",
+      "sha": "49a7255e58a72325325238004ae6316af64fcb7b"
+    },
+    {
+      "ref": "refs/heads/codex/project-inputs115",
+      "sha": "5ab3100523ec88b21e1d3c499453dcf8f3ea8d10"
+    },
+    {
+      "ref": "refs/heads/codex/project-revision",
+      "sha": "24bfc1dc0400ca001dc76cbbdfcc3f0450db3141"
+    },
+    {
+      "ref": "refs/heads/codex/site-completion109",
+      "sha": "64e5780c022d5cd935a10329a10c5572c83fc060"
+    },
+    {
+      "ref": "refs/heads/codex/survival-trap-report133",
+      "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60"
+    },
+    {
+      "ref": "refs/heads/codex/viewer-programme",
+      "sha": "7b2a6808bb1087bb8530b9e2e643c50aaebdb721"
+    },
+    {
+      "ref": "refs/heads/codex/wolf-defence-integration",
+      "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3"
+    },
+    {
+      "ref": "refs/heads/codex/wolf-habitation-integration",
+      "sha": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24"
+    },
+    {
+      "ref": "refs/heads/deepseek-b1",
+      "sha": "3d54edd4e28052f59329e6c647c8c676657f1603"
+    },
+    {
+      "ref": "refs/heads/deepseek-trial",
+      "sha": "03bad1aaebb7a2c263e403f2fc19febe2d275809"
+    },
+    {
+      "ref": "refs/heads/feature/pavel-lived-life",
+      "sha": "c3f1310709831d7e90be2bdcbc023f33c8a391a8"
+    },
+    {
+      "ref": "refs/heads/feature/talia-lived-childhood",
+      "sha": "57ffc48eecf6400bfe505ee5c01ef18aaa8111b3"
+    },
+    {
+      "ref": "refs/heads/fix/fatal-injury-hold",
+      "sha": "dda3d430e94eaf7951726342386dc2e248617527"
+    },
+    {
+      "ref": "refs/heads/integrate/pavel-talia-after-118",
+      "sha": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621"
+    },
+    {
+      "ref": "refs/heads/main",
+      "sha": "a916ec028b2e373226f1593602a9d2d748e1a27b"
+    },
+    {
+      "ref": "refs/heads/nova/inhabitant-perspective-audit",
+      "sha": "a69c30b9e065c4d817392e35538f8bd6e0b2189c"
+    },
+    {
+      "ref": "refs/heads/place-scar",
+      "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62"
+    },
+    {
+      "ref": "refs/heads/stage-1-integrity",
+      "sha": "c67be494d0e70f8a7081278a986e1e69a41838ef"
+    },
+    {
+      "ref": "refs/heads/stage-1-integrity-main",
+      "sha": "55f798c66bb251c12d4451c80636c9e9902e7836"
+    },
+    {
+      "ref": "refs/heads/stage-2-suspended-endings",
+      "sha": "dbe229e75e805adab83a25518921c7ab2626a7f1"
+    },
+    {
+      "ref": "refs/heads/stage-3-chain-fixes",
+      "sha": "320c521f1fa84658c77f73d2875a4c0858d5a10b"
+    },
+    {
+      "ref": "refs/remotes/origin/ccr-8527b59e-oatizp",
+      "sha": "be786a80865ba2e0d721ea672f7985f7e2d46599"
+    },
+    {
+      "ref": "refs/remotes/origin/ccr-ebf20163-236tsz",
+      "sha": "4e1f507c234fa891a3cb009ea76e9ad333061b62"
+    },
+    {
+      "ref": "refs/remotes/origin/ccr-edfcf732-o6gqh0",
+      "sha": "8bbf6c04ee552f8db2ce5be7bff1dddb7fd01e9e"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/adoring-hawking-fj66vw",
+      "sha": "df9acb9c0f5173555980d661384208477f4c313e"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/affectionate-archimedes-a2nb1q",
+      "sha": "1e1e2bc57d4abd472c03760e8dbee4ff4f5e3d93"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/awesome-dirac-07f8q1",
+      "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/courier-promise",
+      "sha": "9651cf0f3e74b380d10a13bdbcdb138368c23cac"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/dreamy-brahmagupta-o1ttw1",
+      "sha": "3c60fb9055410938b88796676d26cb8d36b779ed"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/eager-carson-p8jy0f",
+      "sha": "551b034e39f8d02381a7d5a148aab8e67edfc486"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/epic-franklin-469omp",
+      "sha": "c55926d4052992d088ab535f1057a3c1f2938f33"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/friendly-planck-ccpkxf",
+      "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/household-preparation-v2",
+      "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/inspiring-wozniak-yclwua",
+      "sha": "d81c0277904304fa07b79a948283c2bbef1a8938"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/leisure-rhythm-v27",
+      "sha": "007b9d52996a80b584459d2db40323b7280656c6"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/leisure-rhythm-v28",
+      "sha": "00137238353cedc98c657597a867a5406868a266"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/living-world-survival-legibility-xipvpo",
+      "sha": "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/mood-ranking",
+      "sha": "4b063dca4d354684593e143886f2bbb152582c61"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/record-2026-10-20",
+      "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/simulation-pressure-larger-maps-rg0hjn",
+      "sha": "182663db90076dcc711e0fb5116c11d78fb61e1f"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/snapshot-wolf-defence-v3-2026-10-20",
+      "sha": "d72e3666a1b9440438724196f6bd08706405672a"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/snapshot-wolf-habitation-integration-2026-10-20",
+      "sha": "b542836587861b532da3e9b632988fcc6c94ab0e"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/tests-current-rules",
+      "sha": "500bb2f299e8eaa4c8eba538726c46d6670c5b17"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/winter-shelter-v34",
+      "sha": "f33cd0bf4edce91bf06aec332325c6182022a771"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/wolf-defence-v3",
+      "sha": "359bce916481473a4c939bfd46dd21a362a74589"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/wonderful-hypatia-46pdde",
+      "sha": "3e62a2d7a79564064202c0c820da0d88e08f3b98"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/wonderful-mccarthy-xmbcng",
+      "sha": "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3"
+    },
+    {
+      "ref": "refs/remotes/origin/claude/wonderful-rubin-p9n961",
+      "sha": "5be609efc961f522ed8197a6d7ba15c0f92af26b"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/civilisation-programme",
+      "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/game-inspired-slices",
+      "sha": "e415b4b65ef006a09cb80e78777b1a6992462352"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/home-habitation",
+      "sha": "9e4165312195df26999ff79866ef5809bb280b83"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/household-continuity",
+      "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/inhabitant-fixes",
+      "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/survival-trap-report133",
+      "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/wolf-defence-integration",
+      "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3"
+    },
+    {
+      "ref": "refs/remotes/origin/main",
+      "sha": "a916ec028b2e373226f1593602a9d2d748e1a27b"
+    },
+    {
+      "ref": "refs/remotes/origin/nova/bounded-verification-2026-10-26",
+      "sha": "810d32fad7330167f3898f93b702d27f4d3812bb"
+    },
+    {
+      "ref": "refs/remotes/origin/nova/household-shelter-journey",
+      "sha": "c31ce120a91401b58f9ab8756b1d0bf4de1cb2c0"
+    },
+    {
+      "ref": "refs/remotes/origin/nova/inhabitant-perspective-audit",
+      "sha": "030d62d7fea592bdc620ba357012d1534edb20c5"
+    },
+    {
+      "ref": "refs/remotes/origin/nova/layout-claims-recovery",
+      "sha": "62fa4d1a73e6dcb46445aa79691a6f0ee8eb3fcd"
+    },
+    {
+      "ref": "refs/remotes/origin/place-scar",
+      "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62"
+    }
+  ],
+  "tips": [
+    {
+      "sha": "00137238353cedc98c657597a867a5406868a266",
+      "ancestor": true,
+      "counts": "337\t0"
+    },
+    {
+      "sha": "007b9d52996a80b584459d2db40323b7280656c6",
+      "ancestor": false,
+      "counts": "352\t2",
+      "base": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+      "commits": [
+        "007b9d52996a80b584459d2db40323b7280656c6 feat: rules version 27, varied spare time",
+        "b078b1953a9dc4640ba8a29610538dfa2000e11a test: pin rules 26 continuation before free time variety"
+      ],
+      "cherry": [
+        "+ b078b1953a9dc4640ba8a29610538dfa2000e11a",
+        "+ 007b9d52996a80b584459d2db40323b7280656c6"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md",
+        "M\tdocs/CIVILISATION_IMPLEMENTATION.md",
+        "M\tdocs/DEVELOPMENT_POLICY.md",
+        "M\tdocs/EMERGENCE.md",
+        "M\tdocs/RICH_WORLD.md",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/leisure_check.ts",
+        "A\tscripts/v26_reference.ts",
+        "M\tsrc/sim/act_misc.ts",
+        "A\tsrc/sim/leisure.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/world.ts",
+        "A\ttests/helpers/v26ref.ts",
+        "M\ttests/historical_retention.test.ts",
+        "A\ttests/leisure.test.ts",
+        "A\ttests/v26_continuation.expected.json",
+        "A\ttests/v26_continuation.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "93fd1264e69c3bb88fc9ac3876d06ac602c557d0\nAGENTS.md\nCLAUDE.md\ndocs/CIVILISATION_IMPLEMENTATION.md\ndocs/DEVELOPMENT_POLICY.md\ndocs/EMERGENCE.md\ndocs/RICH_WORLD.md\nscripts/lab/lab.ts\nscripts/leisure_check.ts\nscripts/v26_reference.ts\nsrc/sim/leisure.ts\nsrc/sim/options_work.ts\nsrc/sim/rulesversion.ts\nsrc/sim/types.ts\ntests/helpers/v26ref.ts\ntests/leisure.test.ts\ntests/v26_continuation.expected.json\ntests/v26_continuation.test.ts\n\nAuto-merging AGENTS.md\nCONFLICT (content): Merge conflict in AGENTS.md\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/CIVILISATION_IMPLEMENTATION.md\nCONFLICT (content): Merge conflict in docs/CIVILISATION_IMPLEMENTATION.md\nAuto-merging docs/DEVELOPMENT_POLICY.md\nCONFLICT (content): Merge conflict in docs/DEVELOPMENT_POLICY.md\nAuto-merging docs/EMERGENCE.md\nCONFLICT (content): Merge conflict in docs/EMERGENCE.md\nAuto-merging docs/RICH_WORLD.md\nCONFLICT (content): Merge conflict in docs/RICH_WORLD.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/leisure_check.ts\nCONFLICT (add/add): Merge conflict in scripts/leisure_check.ts\nAuto-merging scripts/v26_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v26_reference.ts\nAuto-merging src/sim/act_misc.ts\nAuto-merging src/sim/leisure.ts\nCONFLICT (add/add): Merge conflict in src/sim/leisure.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/world.ts\nAuto-merging tests/helpers/v26ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v26ref.ts\nAuto-merging tests/leisure.test.ts\nCONFLICT (add/add): Merge conflict in tests/leisure.test.ts\nAuto-merging tests/v26_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v26_continuation.expected.json\nAuto-merging tests/v26_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v26_continuation.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "030d62d7fea592bdc620ba357012d1534edb20c5",
+      "ancestor": false,
+      "counts": "382\t4",
+      "base": "054cf328927fe307752c718efe410b53dc79c1eb",
+      "commits": [
+        "030d62d7fea592bdc620ba357012d1534edb20c5 docs(audit): queue inhabitant findings after current implementation",
+        "fc04d7db45c034c5ea317086bb7533ae6e085f7f docs(audit): record manual Odette run and replayed shelter timeout",
+        "a69c30b9e065c4d817392e35538f8bd6e0b2189c feat(audit): add observer-only inhabitant decision trace runner",
+        "1374ecc99c74d2faa93e5f6a826394cee3278136 docs: establish independent inhabitant-perspective audit baseline"
+      ],
+      "cherry": [
+        "+ 1374ecc99c74d2faa93e5f6a826394cee3278136",
+        "+ a69c30b9e065c4d817392e35538f8bd6e0b2189c",
+        "+ fc04d7db45c034c5ea317086bb7533ae6e085f7f",
+        "+ 030d62d7fea592bdc620ba357012d1534edb20c5"
+      ],
+      "files": [
+        "A\tdocs/audits/2026-10-24-odette/NEXT_PRIORITIES.md",
+        "A\tdocs/audits/2026-10-24-odette/README.md",
+        "A\tdocs/audits/2026-10-24-odette/final.png",
+        "A\tdocs/audits/2026-10-24-odette/focused-tests.txt",
+        "A\tdocs/audits/2026-10-24-odette/observations.json",
+        "A\tdocs/audits/2026-10-24-odette/replay/replay.txt",
+        "A\tdocs/audits/2026-10-24-odette/shelter-replay-trace.json",
+        "A\tdocs/audits/2026-10-24-odette/shelter-timeout.png",
+        "A\tdocs/audits/2026-10-24-odette/sleep.png",
+        "A\tdocs/audits/2026-10-24-odette/trace-replay.ts",
+        "A\tdocs/audits/2026-10-24-odette/transcript.json",
+        "A\tdocs/audits/NOVA_INHABITANT_BASELINE.md",
+        "A\tscripts/inhabitant_trace.ts"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "0e055d097009a2a4a305c5073d09c890feab6b48",
+      "mergeError": ""
+    },
+    {
+      "sha": "03bad1aaebb7a2c263e403f2fc19febe2d275809",
+      "ancestor": false,
+      "counts": "335\t1",
+      "base": "ad4a2b75eb878e891bbb8a968b981b7555e8e5d5",
+      "commits": [
+        "03bad1aaebb7a2c263e403f2fc19febe2d275809 docs: add unfamiliar technical pieces guidance"
+      ],
+      "cherry": [
+        "+ 03bad1aaebb7a2c263e403f2fc19febe2d275809"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "a7691beb04e23463d8e9eaef830878773ac5cfe1",
+      "mergeError": ""
+    },
+    {
+      "sha": "03dd8684a0275fa97a0c1808963437276901eee1",
+      "ancestor": false,
+      "counts": "541\t10",
+      "base": "b6636b481d99b34d85114b0e939757871ad841b6",
+      "commits": [
+        "03dd8684a0275fa97a0c1808963437276901eee1 Building expansion: coverage table, chains, build order and evidence standard (design only)",
+        "c1db928845c0eb1a466c8ec88a584d90f0980e50 Make the stakes-only ablation clean (a break with mood effects off is counted and does nothing) and count deaths since the fork",
+        "0dfd221cf00fb2f0a83e5797acde32c54bd0772e Correct the attribution write-up: limits found on review, the direct comparison, and what was built since",
+        "86dacf00f5aa94047081facb236c1421adc957fa Fix a name clash in the lab runner introduced by the resume rule",
+        "41ac209bf9a62eb9279835f5aaeb4cc7b204d472 Count the decisions a mood changed (probe only; nothing the simulation reads)",
+        "cabb90dfd601c8d0e3d8750abc3c629271ad6a1d Lab: record what produced each file; resume only files made by this commit with these settings",
+        "c6210be739dd840b04df42174517688643f4c0de Lab: measure across the run, not only at the end; compare whole serialised worlds; direct a-minus-b comparison",
+        "8d8539758407d2d2f085a499247ca654b7739e05 Rich dynamics: thoughts differ by person (caution, sociability) and a person at the bottom reaches the end of their patience",
+        "82e744f2c780587152dcbc46d590c4e3f0b95267 Record the 24-seed attribution: the stakes do the work, the mood effects do not",
+        "5ab574fd28c300735a2183484c31a82df654118a CLAUDE.md: record that #6 and #7 are merged and when merging is allowed"
+      ],
+      "cherry": [
+        "+ 5ab574fd28c300735a2183484c31a82df654118a",
+        "+ 82e744f2c780587152dcbc46d590c4e3f0b95267",
+        "+ 8d8539758407d2d2f085a499247ca654b7739e05",
+        "+ c6210be739dd840b04df42174517688643f4c0de",
+        "+ cabb90dfd601c8d0e3d8750abc3c629271ad6a1d",
+        "+ 41ac209bf9a62eb9279835f5aaeb4cc7b204d472",
+        "+ 86dacf00f5aa94047081facb236c1421adc957fa",
+        "+ 0dfd221cf00fb2f0a83e5797acde32c54bd0772e",
+        "+ c1db928845c0eb1a466c8ec88a584d90f0980e50",
+        "+ 03dd8684a0275fa97a0c1808963437276901eee1"
+      ],
+      "files": [
+        "M\tCLAUDE.md",
+        "A\tdocs/BUILDINGS.md",
+        "M\tdocs/EMERGENCE.md",
+        "M\tscripts/activity_mix.ts",
+        "M\tscripts/lab.mjs",
+        "M\tscripts/lab/lab.ts",
+        "M\tscripts/lab_report.ts",
+        "M\tscripts/lab_seed.ts",
+        "M\tsrc/sim/decision.ts",
+        "M\tsrc/sim/mood.ts",
+        "M\tsrc/sim/probe.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/world.ts",
+        "M\ttests/lab.test.ts",
+        "M\ttests/rich.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "71ba2620c27dd47f9efb3ecc757901dd915c43c3\nCLAUDE.md\nscripts/activity_mix.ts\nscripts/lab.mjs\nscripts/lab/lab.ts\nscripts/lab_report.ts\nscripts/lab_seed.ts\nsrc/sim/decision.ts\nsrc/sim/world.ts\n\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/EMERGENCE.md\nAuto-merging scripts/activity_mix.ts\nCONFLICT (content): Merge conflict in scripts/activity_mix.ts\nAuto-merging scripts/lab.mjs\nCONFLICT (content): Merge conflict in scripts/lab.mjs\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/lab_report.ts\nCONFLICT (content): Merge conflict in scripts/lab_report.ts\nAuto-merging scripts/lab_seed.ts\nCONFLICT (content): Merge conflict in scripts/lab_seed.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/mood.ts\nAuto-merging src/sim/types.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging tests/lab.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "182663db90076dcc711e0fb5116c11d78fb61e1f",
+      "ancestor": true,
+      "counts": "582\t0"
+    },
+    {
+      "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+      "ancestor": true,
+      "counts": "429\t0"
+    },
+    {
+      "sha": "1e1e2bc57d4abd472c03760e8dbee4ff4f5e3d93",
+      "ancestor": true,
+      "counts": "495\t0"
+    },
+    {
+      "sha": "24bfc1dc0400ca001dc76cbbdfcc3f0450db3141",
+      "ancestor": true,
+      "counts": "76\t0"
+    },
+    {
+      "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60",
+      "ancestor": true,
+      "counts": "1\t0"
+    },
+    {
+      "sha": "320c521f1fa84658c77f73d2875a4c0858d5a10b",
+      "ancestor": true,
+      "counts": "41\t0"
+    },
+    {
+      "sha": "3534da86dafd42c45d1303a55fbad8c182e6b5d7",
+      "ancestor": true,
+      "counts": "146\t0"
+    },
+    {
+      "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+      "ancestor": false,
+      "counts": "429\t7",
+      "base": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+      "commits": [
+        "359bce916481473a4c939bfd46dd21a362a74589 The branch is closed as superseded, written into its own record",
+        "6360d2df6f806eff2141189350c74086c4f8f840 What rules version 3 means on this branch, and where main went, written down",
+        "a99fbfd73792a1e934229cd0f2089fe956bea1ed A wolf hesitates before somebody squared up to it, and the defender holds her ground",
+        "35b7236869431f15659c6cf142cf92977beb6cd5 Another test that wrote the current rules version down as a number",
+        "b204cb788071e0f39d55c904a925030acb3ad996 Rules version 3: an armed adult can stand and drive a wolf off",
+        "a5157f827180a93598db3d28db7d6e276f79fb73 A spear: an ordinary tool, wanted only by somebody who has met a wolf",
+        "b0dd7706aee0b0b398fa0981f442cf523c072d9f A version-2 continuation reference, recorded before version 3 exists"
+      ],
+      "cherry": [
+        "+ b0dd7706aee0b0b398fa0981f442cf523c072d9f",
+        "+ a5157f827180a93598db3d28db7d6e276f79fb73",
+        "+ b204cb788071e0f39d55c904a925030acb3ad996",
+        "+ 35b7236869431f15659c6cf142cf92977beb6cd5",
+        "+ a99fbfd73792a1e934229cd0f2089fe956bea1ed",
+        "+ 6360d2df6f806eff2141189350c74086c4f8f840",
+        "+ 359bce916481473a4c939bfd46dd21a362a74589"
+      ],
+      "files": [
+        "M\tHANDOFF.md",
+        "A\tdocs/WOLF_DEFENCE.md",
+        "A\tencounters_out/report.md",
+        "A\tencounters_out/rows.jsonl",
+        "A\tscripts/encounters.ts",
+        "M\tscripts/lab/lab.ts",
+        "M\tsrc/sim/act_build.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/decision.ts",
+        "A\tsrc/sim/defence.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/wildlife.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/icons.ts",
+        "M\ttests/helpers/v1ref.ts",
+        "M\ttests/household_preparation.test.ts",
+        "M\ttests/v1_continuation.expected.json",
+        "M\ttests/v1_continuation.test.ts",
+        "A\ttests/wolf_defence.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "32fb7f3c81ee42826b3bdee5946eb73c2ffc031e\nHANDOFF.md\ndocs/WOLF_DEFENCE.md\nscripts/encounters.ts\nscripts/lab/lab.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/decision.ts\nsrc/sim/defence.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/perception.ts\nsrc/sim/rulesversion.ts\nsrc/sim/toolreg.ts\nsrc/sim/types.ts\nsrc/sim/wildlife.ts\nsrc/sim/world.ts\ntests/household_preparation.test.ts\ntests/wolf_defence.test.ts\n\nAuto-merging HANDOFF.md\nCONFLICT (content): Merge conflict in HANDOFF.md\nAuto-merging docs/WOLF_DEFENCE.md\nCONFLICT (add/add): Merge conflict in docs/WOLF_DEFENCE.md\nAuto-merging scripts/encounters.ts\nCONFLICT (add/add): Merge conflict in scripts/encounters.ts\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging src/sim/act_build.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/defence.ts\nCONFLICT (add/add): Merge conflict in src/sim/defence.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/social.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/wildlife.ts\nCONFLICT (content): Merge conflict in src/sim/wildlife.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/ui/icons.ts\nAuto-merging tests/household_preparation.test.ts\nCONFLICT (content): Merge conflict in tests/household_preparation.test.ts\nAuto-merging tests/wolf_defence.test.ts\nCONFLICT (add/add): Merge conflict in tests/wolf_defence.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "3c60fb9055410938b88796676d26cb8d36b779ed",
+      "ancestor": true,
+      "counts": "495\t0"
+    },
+    {
+      "sha": "3d54edd4e28052f59329e6c647c8c676657f1603",
+      "ancestor": false,
+      "counts": "317\t1",
+      "base": "4d3f35b16fcbbe45a03d3ede6e1c6c2a6549fbc6",
+      "commits": [
+        "3d54edd4e28052f59329e6c647c8c676657f1603 docs: add unfamiliar technical pieces guidance"
+      ],
+      "cherry": [
+        "+ 3d54edd4e28052f59329e6c647c8c676657f1603"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "a7691beb04e23463d8e9eaef830878773ac5cfe1",
+      "mergeError": ""
+    },
+    {
+      "sha": "3e62a2d7a79564064202c0c820da0d88e08f3b98",
+      "ancestor": false,
+      "counts": "336\t4",
+      "base": "d84e5eaa828e86ea01b9847809875acd4259cf3a",
+      "commits": [
+        "3e62a2d7a79564064202c0c820da0d88e08f3b98 death_tally: ask the option planner (observer mode) why people lack a solid home",
+        "6b6ccceeffee4b4c3c97bfdaf3d1ffe0629a1100 death_tally: add shelter flow and why people without a solid home did not build",
+        "8a4839a5b3f7b56f02e9bea15dc88b573d8d4e72 death_tally: record the surroundings of each death and a settlement census",
+        "b08b006750b3cb652e0eef65eada71bb4a3eead6 Add death_tally: read-only probe of deaths, births and the conception gates"
+      ],
+      "cherry": [
+        "+ b08b006750b3cb652e0eef65eada71bb4a3eead6",
+        "+ 8a4839a5b3f7b56f02e9bea15dc88b573d8d4e72",
+        "+ 6b6ccceeffee4b4c3c97bfdaf3d1ffe0629a1100",
+        "+ 3e62a2d7a79564064202c0c820da0d88e08f3b98"
+      ],
+      "files": [
+        "A\tscripts/death_tally.ts"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "92df5d227c02ae7695e96296bb275211a35b129c",
+      "mergeError": ""
+    },
+    {
+      "sha": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+      "ancestor": true,
+      "counts": "26\t0"
+    },
+    {
+      "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+      "ancestor": false,
+      "counts": "396\t5",
+      "base": "3d931804db36838974bb904f9a9077d4c07c8cf9",
+      "commits": [
+        "3f6ec66115320f4939f10158eefa2a990eb62918 Civilisation audit: capability matrix, causal map, roadmap, observer design, defect register",
+        "d46cb46d21c56d9df3148095189c40c5d17a7650 Observer purity: looking at a person no longer lets their expired life change lapse",
+        "1995cc3db8cb925871a79cda6b3d9f6cb1512272 Read-only tools: the store-meal census and the whole household loop, with the evidence behind version 9",
+        "9f173a33c8ef1f6e5426bba29481d06079c970ee Rules version 9: a meal at a store no longer needs room in the pack",
+        "bfdd93634ee968fe508bb8bec972894e0478fe0e Pin version-8 save continuation before eating at a store with a full pack"
+      ],
+      "cherry": [
+        "+ bfdd93634ee968fe508bb8bec972894e0478fe0e",
+        "+ 9f173a33c8ef1f6e5426bba29481d06079c970ee",
+        "+ 1995cc3db8cb925871a79cda6b3d9f6cb1512272",
+        "+ d46cb46d21c56d9df3148095189c40c5d17a7650",
+        "+ 3f6ec66115320f4939f10158eefa2a990eb62918"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md",
+        "M\tHANDOFF.md",
+        "A\tdocs/CIVILISATION_AUDIT.md",
+        "M\tdocs/DEVELOPMENT_POLICY.md",
+        "A\tdocs/TABLE_EATING.md",
+        "A\tscripts/household_life.ts",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/store_meals.ts",
+        "A\tscripts/v8_reference.ts",
+        "M\tsrc/sim/act_resource.ts",
+        "M\tsrc/sim/inspect.ts",
+        "M\tsrc/sim/lifechanges.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "A\tsrc/sim/tableeating.ts",
+        "A\ttable_evidence/RUN.md",
+        "A\ttable_evidence/household_life_river_r8.json",
+        "A\ttable_evidence/household_life_river_r9.json",
+        "A\ttable_evidence/lab_normal_report.txt",
+        "A\ttable_evidence/lab_town_report.txt",
+        "A\ttable_evidence/paired_normal.txt",
+        "A\ttable_evidence/paired_town.txt",
+        "A\ttable_evidence/store_meals_normal_r8.json",
+        "A\ttable_evidence/store_meals_normal_r9.json",
+        "A\ttests/helpers/storewatch.ts",
+        "A\ttests/helpers/v8ref.ts",
+        "A\ttests/observer_lifeevent.test.ts",
+        "A\ttests/table_eating.test.ts",
+        "A\ttests/v8_continuation.expected.json",
+        "A\ttests/v8_continuation.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "b532e00e732f0deca80bedaabfa861ef98214ecd\nAGENTS.md\nCLAUDE.md\ndocs/CIVILISATION_AUDIT.md\ndocs/TABLE_EATING.md\nscripts/lab/lab.ts\nscripts/v8_reference.ts\nsrc/sim/act_resource.ts\nsrc/sim/rulesversion.ts\nsrc/sim/tableeating.ts\ntests/helpers/v8ref.ts\ntests/table_eating.test.ts\ntests/v8_continuation.expected.json\ntests/v8_continuation.test.ts\n\nAuto-merging AGENTS.md\nCONFLICT (content): Merge conflict in AGENTS.md\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging HANDOFF.md\nAuto-merging docs/CIVILISATION_AUDIT.md\nCONFLICT (add/add): Merge conflict in docs/CIVILISATION_AUDIT.md\nAuto-merging docs/DEVELOPMENT_POLICY.md\nAuto-merging docs/TABLE_EATING.md\nCONFLICT (add/add): Merge conflict in docs/TABLE_EATING.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/v8_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v8_reference.ts\nAuto-merging src/sim/act_resource.ts\nCONFLICT (content): Merge conflict in src/sim/act_resource.ts\nAuto-merging src/sim/inspect.ts\nAuto-merging src/sim/lifechanges.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/tableeating.ts\nCONFLICT (add/add): Merge conflict in src/sim/tableeating.ts\nAuto-merging tests/helpers/v8ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v8ref.ts\nAuto-merging tests/table_eating.test.ts\nCONFLICT (add/add): Merge conflict in tests/table_eating.test.ts\nAuto-merging tests/v8_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v8_continuation.expected.json\nAuto-merging tests/v8_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v8_continuation.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "49655bb054660fa1c5b5b28eebbf8808a28a66ec",
+      "ancestor": false,
+      "counts": "286\t2",
+      "base": "7625337ecc95f451b4a8a1529f319e622d5f1c75",
+      "commits": [
+        "49655bb054660fa1c5b5b28eebbf8808a28a66ec Add the seasonal-preparation flow diagnostic and record the first result",
+        "07a589f889f0d5ad9cff8dc6bcf45d931ee07551 Establish the seasonal-preparation (WS3) diagnosis and contract"
+      ],
+      "cherry": [
+        "+ 07a589f889f0d5ad9cff8dc6bcf45d931ee07551",
+        "+ 49655bb054660fa1c5b5b28eebbf8808a28a66ec"
+      ],
+      "files": [
+        "A\tdocs/SEASONAL_PREPARATION.md",
+        "A\tscripts/seasonal_prep_diagnostic.ts"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "da3c0cac63cd03168d34315829f4913bdae46dc5",
+      "mergeError": ""
+    },
+    {
+      "sha": "49a7255e58a72325325238004ae6316af64fcb7b",
+      "ancestor": true,
+      "counts": "87\t0"
+    },
+    {
+      "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+      "ancestor": false,
+      "counts": "495\t1",
+      "base": "3c60fb9055410938b88796676d26cb8d36b779ed",
+      "commits": [
+        "4b063dca4d354684593e143886f2bbb152582c61 Mood-based decision ranking (uncommitted work parked from the dreamy branch; not yet measured)"
+      ],
+      "cherry": [
+        "+ 4b063dca4d354684593e143886f2bbb152582c61"
+      ],
+      "files": [
+        "A\tlong2_out/lab_aspen.jsonl",
+        "A\tlong2_out/lab_birch.jsonl",
+        "A\tlong2_out/lab_cedar.jsonl",
+        "A\tlong2_out/lab_fern.jsonl",
+        "A\tlong2_out/lab_gen-1.jsonl",
+        "A\tlong2_out/lab_gen-2.jsonl",
+        "A\tlong2_out/lab_gen-3.jsonl",
+        "A\tlong2_out/lab_gen-4.jsonl",
+        "A\tlong2_out/lab_gen-5.jsonl",
+        "A\tlong2_out/lab_gen-6.jsonl",
+        "A\tlong2_out/lab_meadow.jsonl",
+        "A\tlong2_out/lab_river.jsonl",
+        "A\tlong_out/lab_aspen.jsonl",
+        "A\tlong_out/lab_birch.jsonl",
+        "A\tlong_out/lab_cedar.jsonl",
+        "A\tlong_out/lab_fern.jsonl",
+        "A\tlong_out/lab_gen-1.jsonl",
+        "A\tlong_out/lab_gen-2.jsonl",
+        "A\tlong_out/lab_gen-3.jsonl",
+        "A\tlong_out/lab_gen-4.jsonl",
+        "A\tlong_out/lab_gen-5.jsonl",
+        "A\tlong_out/lab_gen-6.jsonl",
+        "A\tlong_out/lab_meadow.jsonl",
+        "A\tlong_out/lab_river.jsonl",
+        "A\tlong_out/report.txt",
+        "M\tscripts/activity_mix.ts",
+        "M\tsrc/sim/decision.ts",
+        "M\tsrc/sim/probe.ts",
+        "A\ttests/mood_decision.test.ts",
+        "M\ttests/probe.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "ddf1d04538f1bef38d46af1235eccfb47cc8bcfd\nscripts/activity_mix.ts\nsrc/sim/decision.ts\n\nAuto-merging scripts/activity_mix.ts\nCONFLICT (content): Merge conflict in scripts/activity_mix.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "4e1f507c234fa891a3cb009ea76e9ad333061b62",
+      "ancestor": true,
+      "counts": "104\t0"
+    },
+    {
+      "sha": "500bb2f299e8eaa4c8eba538726c46d6670c5b17",
+      "ancestor": false,
+      "counts": "306\t1",
+      "base": "39c3027304d48ec3cd3d902b55ddc17db1edfd80",
+      "commits": [
+        "500bb2f299e8eaa4c8eba538726c46d6670c5b17 Run test worlds on the current rules by default"
+      ],
+      "cherry": [
+        "+ 500bb2f299e8eaa4c8eba538726c46d6670c5b17"
+      ],
+      "files": [
+        "M\tdocs/DEVELOPMENT_POLICY.md",
+        "M\ttests/cascade.test.ts",
+        "M\ttests/chains.test.ts",
+        "M\ttests/commitments.test.ts",
+        "M\ttests/contest-reservations.test.ts",
+        "M\ttests/death_knowledge.test.ts",
+        "M\ttests/helpers/inhabit.ts",
+        "M\ttests/helpers/kit.ts",
+        "M\ttests/helpers/technique.ts",
+        "M\ttests/helpers/util.ts",
+        "M\ttests/inhabitant_attribute.test.ts",
+        "M\ttests/inhabitant_memory.test.ts",
+        "M\ttests/iron_chain_stall.test.ts",
+        "M\ttests/knowledge.test.ts",
+        "M\ttests/lab.test.ts",
+        "M\ttests/lifecycle.test.ts",
+        "M\ttests/rich.test.ts",
+        "M\ttests/save_told.test.ts",
+        "M\ttests/social.test.ts",
+        "M\ttests/survival.test.ts",
+        "A\ttests/test_helpers.test.ts",
+        "M\ttests/world.test.ts"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "f9a68102c68bc72a2066a0b52026bff1d9385a52",
+      "mergeError": ""
+    },
+    {
+      "sha": "551b034e39f8d02381a7d5a148aab8e67edfc486",
+      "ancestor": false,
+      "counts": "594\t11",
+      "base": "7a7e0e48fd96adfd4749e5a7274b157596ffec54",
+      "commits": [
+        "551b034e39f8d02381a7d5a148aab8e67edfc486 Give shores ragged, surging foam and lighter shallows",
+        "19362f8bea366ffe332658b7559f7a69693df3bb Make eating readable: a mouthful you can follow",
+        "253292fa174e3e7f4e49432c77bb1ecb3b01e26c Vary trees, bushes and grass tufts so no stand is a stamp",
+        "fc230ca7ba2db2962cb33b90bb399e3d4adbf9d7 Roughen the borders between kinds of ground",
+        "931b8c68a82fbc4c0f328a67eef695862dadac4f Keep people and berries legible when zoomed out",
+        "344d4b5f96222d032ec25c5302c487f41913c712 Cast contact shadows to the lower right",
+        "5ce2f4ba94cbf2ec9a8daaea83a36a0f964ce467 Warm the low sun and make daytime rain read as rain",
+        "d8457752dee678b5706925bfa8f1ae4fc9343bf4 Tuck the empty inspector away in small windows",
+        "5e473cb8c6194264beb8b08f0118092f889fa3f6 Smooth the ground tint: finer land colour ramps, slightly calmer grass",
+        "5435012b2f88d9b269465b254937a89fc4d5f5a3 Draw worn earth as merged patches instead of a diamond lattice",
+        "208650925370c73e453010e112daa3256f96d1cc Show the selected or hovered person through scenery that hides them"
+      ],
+      "cherry": [
+        "+ 208650925370c73e453010e112daa3256f96d1cc",
+        "+ 5435012b2f88d9b269465b254937a89fc4d5f5a3",
+        "+ 5e473cb8c6194264beb8b08f0118092f889fa3f6",
+        "+ d8457752dee678b5706925bfa8f1ae4fc9343bf4",
+        "+ 5ce2f4ba94cbf2ec9a8daaea83a36a0f964ce467",
+        "+ 344d4b5f96222d032ec25c5302c487f41913c712",
+        "+ 931b8c68a82fbc4c0f328a67eef695862dadac4f",
+        "+ fc230ca7ba2db2962cb33b90bb399e3d4adbf9d7",
+        "+ 253292fa174e3e7f4e49432c77bb1ecb3b01e26c",
+        "+ 19362f8bea366ffe332658b7559f7a69693df3bb",
+        "+ 551b034e39f8d02381a7d5a148aab8e67edfc486"
+      ],
+      "files": [
+        "M\tsrc/render/camera.ts",
+        "M\tsrc/render/characters.ts",
+        "M\tsrc/render/effects.ts",
+        "M\tsrc/render/picking.ts",
+        "M\tsrc/render/renderer.ts",
+        "M\tsrc/render/scenery.ts",
+        "M\tsrc/render/sprites.ts",
+        "M\tsrc/render/terrain.ts",
+        "M\tsrc/ui/inspector.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "7368f3e62ebc8908526a1e754568d71f96cc3817\nsrc/render/camera.ts\nsrc/render/scenery.ts\nsrc/render/terrain.ts\n\nAuto-merging src/render/camera.ts\nCONFLICT (content): Merge conflict in src/render/camera.ts\nAuto-merging src/render/characters.ts\nAuto-merging src/render/picking.ts\nAuto-merging src/render/renderer.ts\nAuto-merging src/render/scenery.ts\nCONFLICT (content): Merge conflict in src/render/scenery.ts\nAuto-merging src/render/terrain.ts\nCONFLICT (content): Merge conflict in src/render/terrain.ts\nAuto-merging src/ui/inspector.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "55f798c66bb251c12d4451c80636c9e9902e7836",
+      "ancestor": true,
+      "counts": "56\t0"
+    },
+    {
+      "sha": "57ffc48eecf6400bfe505ee5c01ef18aaa8111b3",
+      "ancestor": true,
+      "counts": "42\t0"
+    },
+    {
+      "sha": "5ab3100523ec88b21e1d3c499453dcf8f3ea8d10",
+      "ancestor": true,
+      "counts": "66\t0"
+    },
+    {
+      "sha": "5be609efc961f522ed8197a6d7ba15c0f92af26b",
+      "ancestor": false,
+      "counts": "306\t1",
+      "base": "39c3027304d48ec3cd3d902b55ddc17db1edfd80",
+      "commits": [
+        "5be609efc961f522ed8197a6d7ba15c0f92af26b Add a floor plan of the app (docs/FLOORPLAN.html)"
+      ],
+      "cherry": [
+        "+ 5be609efc961f522ed8197a6d7ba15c0f92af26b"
+      ],
+      "files": [
+        "A\tdocs/FLOORPLAN.html"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "899376fe65f5aa6a85f2cebc9eeddb6781bcd66d",
+      "mergeError": ""
+    },
+    {
+      "sha": "62fa4d1a73e6dcb46445aa79691a6f0ee8eb3fcd",
+      "ancestor": true,
+      "counts": "324\t0"
+    },
+    {
+      "sha": "64e5780c022d5cd935a10329a10c5572c83fc060",
+      "ancestor": false,
+      "counts": "103\t1",
+      "base": "52b4ba3953685d99880087c4123a2d55e862d71d",
+      "commits": [
+        "64e5780c022d5cd935a10329a10c5572c83fc060 Measure a genuine day-45 Large rules 109 world and retain performance evidence"
+      ],
+      "cherry": [
+        "- 64e5780c022d5cd935a10329a10c5572c83fc060"
+      ],
+      "files": [
+        "A\tautonomy_evidence/mature109-large-meadow-45/provenance.json",
+        "A\tautonomy_evidence/mature109-large-meadow-45/report.json",
+        "A\tautonomy_evidence/perf109-large-mature/browser.json",
+        "A\tautonomy_evidence/perf109-large-mature/headless.json",
+        "A\tautonomy_evidence/perf109-large-mature/large-mature.png",
+        "A\tautonomy_evidence/perf109-large-mature/large-new.png",
+        "A\tautonomy_evidence/perf109-large-mature/normal-new.png",
+        "A\tdocs/MATURE_LARGE_109.md"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "16ce0502643fa1875fcc47591cb67a153d0b977c",
+      "mergeError": ""
+    },
+    {
+      "sha": "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66",
+      "ancestor": false,
+      "counts": "594\t16",
+      "base": "7a7e0e48fd96adfd4749e5a7274b157596ffec54",
+      "commits": [
+        "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66 A spear is a tool: kind, hand recipe, iron recipe, icon (nobody wants one yet)",
+        "851f6c01cd1e56ab22ed954518a59a952dca486b Stage 8e: asked again for water or food already promised, say so instead of promising it twice",
+        "0e8b3a242820d2a81d1e8351c59d0b499f1d6014 Stage 8b: ask the nearest person for a tool or a material, the friendliest among near-ties",
+        "ea76bc2c288e46225a3021c20ec7c22d907915b0 Stage 8c: a delayed promise is forgiven as an interruption only if its maker said why",
+        "dd64cd3c5c374695d2d533985b92c10d381685f4 Stage 8a: people are called in a freshly shuffled order each tick",
+        "deddcd5f191341e736fb76bfb68c096c76f51916 Observer purity: asking what someone could do no longer writes to them",
+        "ce23ff5d4dcb4b693ba8be2b5b29e060146a0777 Stage 8d: remove dead code (overdueLoans, Relation.debt)",
+        "06f7cc618e26e94327522e380089f8fdcf086452 Stage 6b + 6c: news of a death travels like news; mourners stand at the grave once",
+        "43245fa99c1b8a63f0b4e1f0bc9e3a06d5c1889d Stage 7: more safety nets (tests only)",
+        "6a58e5555a364e243a27e8de932ddf8aec259c88 Stage 6a: a death is remembered; the grave says what its person was about at the end",
+        "22a2724d52a8120960fbfedb964882071fcbf8fc Stage 5: a trip on hearsay says whose word it was; an empty place is remembered",
+        "e2c76f6b691f0635fad84df9615d247ac733e102 Stage 4: a stalled site or idle workshop says where the missing thing is",
+        "5b8625568f63e7651b6cdf556aae2d6cd4c48629 Stage 3: a new building never shuts its doorway in",
+        "62f53402e8c2dea8eabe1dcfa0b017ae3b598929 Stage 2: every logged effect is drawn; the person card keeps up at speed",
+        "9334fff5ad0a2b6feccc57e2ed9bb879dfc80f68 Stage 1: eating at a store needs no room in the pack; promised pickups make room",
+        "be1471afd7232e325a562c7911e6d2a2b6fb1c0b Stage 0: safety nets before any change (sweep, save-and-continue test)"
+      ],
+      "cherry": [
+        "+ be1471afd7232e325a562c7911e6d2a2b6fb1c0b",
+        "+ 9334fff5ad0a2b6feccc57e2ed9bb879dfc80f68",
+        "+ 62f53402e8c2dea8eabe1dcfa0b017ae3b598929",
+        "+ 5b8625568f63e7651b6cdf556aae2d6cd4c48629",
+        "+ e2c76f6b691f0635fad84df9615d247ac733e102",
+        "+ 22a2724d52a8120960fbfedb964882071fcbf8fc",
+        "+ 6a58e5555a364e243a27e8de932ddf8aec259c88",
+        "+ 43245fa99c1b8a63f0b4e1f0bc9e3a06d5c1889d",
+        "+ 06f7cc618e26e94327522e380089f8fdcf086452",
+        "+ ce23ff5d4dcb4b693ba8be2b5b29e060146a0777",
+        "+ deddcd5f191341e736fb76bfb68c096c76f51916",
+        "+ dd64cd3c5c374695d2d533985b92c10d381685f4",
+        "+ ea76bc2c288e46225a3021c20ec7c22d907915b0",
+        "+ 0e8b3a242820d2a81d1e8351c59d0b499f1d6014",
+        "+ 851f6c01cd1e56ab22ed954518a59a952dca486b",
+        "+ 70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66"
+      ],
+      "files": [
+        "M\tREADME.md",
+        "M\tdocs/BASELINE.md",
+        "M\tdocs/ECONOMY.md",
+        "M\tdocs/OBSERVED.md",
+        "A\tdocs/baseline-fixes-fern.json",
+        "A\tdocs/baseline-fixes-harsh-meadow.json",
+        "A\tdocs/baseline-fixes-harsh-river.json",
+        "A\tdocs/baseline-fixes-river.json",
+        "A\tdocs/baseline-fixes.json",
+        "M\tdocs/recipes.generated.md",
+        "A\tscripts/browser/presentation.mjs",
+        "M\tscripts/compare_baseline.ts",
+        "A\tscripts/death_news.ts",
+        "A\tscripts/sweep.ts",
+        "M\tsrc/render/effects.ts",
+        "M\tsrc/render/overlays.ts",
+        "M\tsrc/render/palette.ts",
+        "M\tsrc/render/renderer.ts",
+        "M\tsrc/render/scenery.ts",
+        "M\tsrc/sim/act_farm.ts",
+        "M\tsrc/sim/act_resource.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/decision.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "A\tsrc/sim/grief.ts",
+        "M\tsrc/sim/inspect.ts",
+        "M\tsrc/sim/inspect_work.ts",
+        "M\tsrc/sim/knowledge.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/lifecycle.ts",
+        "M\tsrc/sim/news.ts",
+        "M\tsrc/sim/options_social.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/recipes.ts",
+        "M\tsrc/sim/relations.ts",
+        "M\tsrc/sim/scenes.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "M\tsrc/sim/tools.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/welfare.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/icons.ts",
+        "M\tsrc/ui/inspector.ts",
+        "M\tsrc/ui/worldmenu.ts",
+        "A\ttests/carrying.test.ts",
+        "M\ttests/commitments.test.ts",
+        "A\ttests/continuation.test.ts",
+        "M\ttests/controller.test.ts",
+        "A\ttests/duplicate.test.ts",
+        "A\ttests/expectation.test.ts",
+        "A\ttests/fairness.test.ts",
+        "A\ttests/grief.test.ts",
+        "A\ttests/helpers/resume.ts",
+        "A\ttests/midstate.test.ts",
+        "A\ttests/observer.test.ts",
+        "M\ttests/ordinary.test.ts",
+        "M\ttests/presentation.test.ts",
+        "A\ttests/purity.test.ts",
+        "M\ttests/scenes.test.ts",
+        "A\ttests/siting.test.ts",
+        "M\ttests/social.test.ts",
+        "A\ttests/spears.test.ts",
+        "M\ttests/survival.test.ts",
+        "A\ttests/tiebreak.test.ts",
+        "M\ttests/world.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "76ece280495c9d6b0c9da5612ae7cdc10604652e\nREADME.md\ndocs/ECONOMY.md\nsrc/render/renderer.ts\nsrc/sim/act_resource.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/decision.ts\nsrc/sim/inspect.ts\nsrc/sim/inspect_work.ts\nsrc/sim/knowledge.ts\nsrc/sim/lifecycle.ts\nsrc/sim/news.ts\nsrc/sim/options_social.ts\nsrc/sim/options_work.ts\nsrc/sim/perception.ts\nsrc/sim/social.ts\nsrc/sim/toolreg.ts\nsrc/sim/types.ts\nsrc/ui/icons.ts\ntests/purity.test.ts\n\nAuto-merging README.md\nCONFLICT (content): Merge conflict in README.md\nAuto-merging docs/ECONOMY.md\nCONFLICT (content): Merge conflict in docs/ECONOMY.md\nAuto-merging src/render/overlays.ts\nAuto-merging src/render/renderer.ts\nCONFLICT (content): Merge conflict in src/render/renderer.ts\nAuto-merging src/render/scenery.ts\nAuto-merging src/sim/act_farm.ts\nAuto-merging src/sim/act_resource.ts\nCONFLICT (content): Merge conflict in src/sim/act_resource.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/inspect.ts\nCONFLICT (content): Merge conflict in src/sim/inspect.ts\nAuto-merging src/sim/inspect_work.ts\nCONFLICT (content): Merge conflict in src/sim/inspect_work.ts\nAuto-merging src/sim/knowledge.ts\nCONFLICT (content): Merge conflict in src/sim/knowledge.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/lifecycle.ts\nCONFLICT (content): Merge conflict in src/sim/lifecycle.ts\nAuto-merging src/sim/news.ts\nCONFLICT (content): Merge conflict in src/sim/news.ts\nAuto-merging src/sim/options_social.ts\nCONFLICT (content): Merge conflict in src/sim/options_social.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/recipes.ts\nAuto-merging src/sim/scenes.ts\nAuto-merging src/sim/social.ts\nCONFLICT (content): Merge conflict in src/sim/social.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging src/sim/tools.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/welfare.ts\nAuto-merging src/sim/world.ts\nAuto-merging src/ui/icons.ts\nCONFLICT (content): Merge conflict in src/ui/icons.ts\nAuto-merging src/ui/inspector.ts\nAuto-merging src/ui/worldmenu.ts\nAuto-merging tests/commitments.test.ts\nAuto-merging tests/controller.test.ts\nAuto-merging tests/presentation.test.ts\nAuto-merging tests/purity.test.ts\nCONFLICT (add/add): Merge conflict in tests/purity.test.ts\nAuto-merging tests/survival.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "7b2a6808bb1087bb8530b9e2e643c50aaebdb721",
+      "ancestor": true,
+      "counts": "250\t0"
+    },
+    {
+      "sha": "810d32fad7330167f3898f93b702d27f4d3812bb",
+      "ancestor": true,
+      "counts": "332\t0"
+    },
+    {
+      "sha": "8bbf6c04ee552f8db2ce5be7bff1dddb7fd01e9e",
+      "ancestor": true,
+      "counts": "397\t0"
+    },
+    {
+      "sha": "9651cf0f3e74b380d10a13bdbcdb138368c23cac",
+      "ancestor": false,
+      "counts": "594\t1",
+      "base": "7a7e0e48fd96adfd4749e5a7274b157596ffec54",
+      "commits": [
+        "9651cf0f3e74b380d10a13bdbcdb138368c23cac Carry goods to a site when the asker has no room to be handed them"
+      ],
+      "cherry": [
+        "+ 9651cf0f3e74b380d10a13bdbcdb138368c23cac"
+      ],
+      "files": [
+        "M\tdocs/ECONOMY.md",
+        "M\tsrc/sim/social.ts",
+        "M\ttests/commitments.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "b282cc595f38f0c166ea0b17602448b7b9ba4d29\ndocs/ECONOMY.md\nsrc/sim/social.ts\ntests/commitments.test.ts\n\nAuto-merging docs/ECONOMY.md\nCONFLICT (content): Merge conflict in docs/ECONOMY.md\nAuto-merging src/sim/social.ts\nCONFLICT (content): Merge conflict in src/sim/social.ts\nAuto-merging tests/commitments.test.ts\nCONFLICT (content): Merge conflict in tests/commitments.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+      "ancestor": false,
+      "counts": "419\t3",
+      "base": "2934cce6c782c15572aea4fbc247257f42b6c91f",
+      "commits": [
+        "9698236af0d73c92465be9f9958f47ee6fc935c9 Where every line of work stands, written down once",
+        "7a992b7ab8712a6f115c9ff58586333052dd6740 The read-first maps knew nothing of rules versions 3 and 4",
+        "fddc9f1610cae0c3d0b75e0560396a793f294589 The read-first notes sent readers to a folder and a branch that do not exist"
+      ],
+      "cherry": [
+        "+ fddc9f1610cae0c3d0b75e0560396a793f294589",
+        "+ 7a992b7ab8712a6f115c9ff58586333052dd6740",
+        "+ 9698236af0d73c92465be9f9958f47ee6fc935c9"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md",
+        "M\tHANDOFF.md"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "9bfe43a7fcdc3ef2c54dba70e9d2bf02d4171b93\nAGENTS.md\nCLAUDE.md\nHANDOFF.md\n\nAuto-merging AGENTS.md\nCONFLICT (content): Merge conflict in AGENTS.md\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging HANDOFF.md\nCONFLICT (content): Merge conflict in HANDOFF.md",
+      "mergeError": ""
+    },
+    {
+      "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3",
+      "ancestor": true,
+      "counts": "417\t0"
+    },
+    {
+      "sha": "9db27b67fba881843c67edbbb09c9b60eeff6ca1",
+      "ancestor": false,
+      "counts": "78\t2",
+      "base": "e64789d09d8056a4f28b5075cb9406e420d8fd83",
+      "commits": [
+        "9db27b67fba881843c67edbbb09c9b60eeff6ca1 Trace ordinary cart prerequisite loss before changing production behaviour",
+        "5016ac1ab82ede0065f032bd0685f6b6130dba2a Complete rules 113 day-45 observations through exact saved continuations"
+      ],
+      "cherry": [
+        "- 5016ac1ab82ede0065f032bd0685f6b6130dba2a",
+        "- 9db27b67fba881843c67edbbb09c9b60eeff6ca1"
+      ],
+      "files": [
+        "A\tautonomy_evidence/current113-45-combined.json",
+        "A\tautonomy_evidence/current113-forest-45/report.json",
+        "A\tautonomy_evidence/current113-meadow-45-tail/report.json",
+        "A\tautonomy_evidence/current113-meadow-45/report.json",
+        "A\tautonomy_evidence/current113-river-45-tail/report.json",
+        "A\tautonomy_evidence/current113-river-45/report.json",
+        "A\tautonomy_evidence/first-cart113-forest-final/report.json",
+        "M\tdocs/AUTONOMY_VALIDATION.md",
+        "A\tdocs/FIRST_CART_113.md",
+        "A\tscripts/first_cart_trace.ts",
+        "M\tscripts/ready_step_observe.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "a127336bdbaf5ed11c6dc66d2eb1e500624f995a\nscripts/first_cart_trace.ts\nscripts/ready_step_observe.ts\n\nAuto-merging scripts/first_cart_trace.ts\nCONFLICT (add/add): Merge conflict in scripts/first_cart_trace.ts\nAuto-merging scripts/ready_step_observe.ts\nCONFLICT (content): Merge conflict in scripts/ready_step_observe.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "9e4165312195df26999ff79866ef5809bb280b83",
+      "ancestor": true,
+      "counts": "426\t0"
+    },
+    {
+      "sha": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24",
+      "ancestor": true,
+      "counts": "423\t0"
+    },
+    {
+      "sha": "a69c30b9e065c4d817392e35538f8bd6e0b2189c",
+      "ancestor": false,
+      "counts": "382\t2",
+      "base": "054cf328927fe307752c718efe410b53dc79c1eb",
+      "commits": [
+        "a69c30b9e065c4d817392e35538f8bd6e0b2189c feat(audit): add observer-only inhabitant decision trace runner",
+        "1374ecc99c74d2faa93e5f6a826394cee3278136 docs: establish independent inhabitant-perspective audit baseline"
+      ],
+      "cherry": [
+        "+ 1374ecc99c74d2faa93e5f6a826394cee3278136",
+        "+ a69c30b9e065c4d817392e35538f8bd6e0b2189c"
+      ],
+      "files": [
+        "A\tdocs/audits/NOVA_INHABITANT_BASELINE.md",
+        "A\tscripts/inhabitant_trace.ts"
+      ],
+      "mergeExit": 0,
+      "mergeOutput": "99ec6abc38de231972c856f03c06c7b969d45317",
+      "mergeError": ""
+    },
+    {
+      "sha": "a916ec028b2e373226f1593602a9d2d748e1a27b",
+      "ancestor": true,
+      "counts": "0\t0"
+    },
+    {
+      "sha": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd",
+      "ancestor": false,
+      "counts": "73\t2",
+      "base": "cb9d26cb0b6c46530dbfb819f2a715d691306e9b",
+      "commits": [
+        "ae8f76b703ecb9c23529d0bf8eb463c117840ddd Preserve ordinary full-pack crop access trace and observed recovery",
+        "89b37159be5bacce74be6397564bdc695f46582b Retain adverse rules 114 forest survival result despite harvest activation"
+      ],
+      "cherry": [
+        "- 89b37159be5bacce74be6397564bdc695f46582b",
+        "- ae8f76b703ecb9c23529d0bf8eb463c117840ddd"
+      ],
+      "files": [
+        "A\tautonomy_evidence/full-pack-crop114-forest/report.json",
+        "A\tautonomy_evidence/harvest114-forest-45/report.json",
+        "M\tdocs/HUNGRY_HARVEST.md",
+        "A\tscripts/full_pack_crop_trace.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "3d6be3c8c7f6d1d8129057206ac679edadf7d7de\nscripts/full_pack_crop_trace.ts\n\nAuto-merging scripts/full_pack_crop_trace.ts\nCONFLICT (add/add): Merge conflict in scripts/full_pack_crop_trace.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+      "ancestor": false,
+      "counts": "423\t1",
+      "base": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24",
+      "commits": [
+        "b542836587861b532da3e9b632988fcc6c94ab0e Snapshot of the uncommitted version-5 candidate, taken for safekeeping"
+      ],
+      "cherry": [
+        "+ b542836587861b532da3e9b632988fcc6c94ab0e"
+      ],
+      "files": [
+        "M\tHANDOFF.md",
+        "A\tdocs/BASELINE_REFRESH.md",
+        "M\tdocs/DEVELOPMENT_POLICY.md",
+        "M\tdocs/EMERGENCE.md",
+        "A\tdocs/WOLF_INTEGRATION.md",
+        "A\tintegration_evidence/defence/defending.png",
+        "A\tintegration_evidence/defence/outcome.png",
+        "A\tintegration_evidence/defence/report.json",
+        "A\tintegration_evidence/encounters-fixed-timing/report.md",
+        "A\tintegration_evidence/encounters-fixed-timing/rows.jsonl",
+        "A\tintegration_evidence/encounters/report.md",
+        "A\tintegration_evidence/encounters/rows.jsonl",
+        "A\tintegration_evidence/habitation/autonomous-home.png",
+        "A\tintegration_evidence/habitation/home-occupants.png",
+        "A\tintegration_evidence/habitation/outside-again.png",
+        "A\tintegration_evidence/habitation/person-inside.png",
+        "A\tintegration_evidence/habitation/report.json",
+        "A\tintegration_evidence/review-fixes-browser-defence/defending.png",
+        "A\tintegration_evidence/review-fixes-browser-defence/outcome.png",
+        "A\tintegration_evidence/review-fixes-browser-defence/report.json",
+        "A\tintegration_evidence/review-fixes-natural-river/report.json",
+        "A\tintegration_evidence/review-fixes-natural/report.json",
+        "A\tscripts/browser/wolf_defence_check.mjs",
+        "A\tscripts/defence_story.ts",
+        "A\tscripts/encounters.ts",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/v3_reference.ts",
+        "A\tscripts/v4_reference.ts",
+        "M\tsrc/sim/act_build.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/decision.ts",
+        "A\tsrc/sim/defence.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "M\tsrc/sim/labels.ts",
+        "A\tsrc/sim/moodranking.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/wildlife.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/icons.ts",
+        "A\ttests/defence_lab.test.ts",
+        "A\ttests/defence_response.test.ts",
+        "A\ttests/helpers/v3ref.ts",
+        "A\ttests/helpers/v4ref.ts",
+        "M\ttests/household_preparation.test.ts",
+        "A\ttests/mood_survival.test.ts",
+        "A\ttests/v3_continuation.expected.json",
+        "A\ttests/v3_continuation.test.ts",
+        "A\ttests/v4_continuation.expected.json",
+        "A\ttests/v4_continuation.test.ts",
+        "A\ttests/wolf_defence.test.ts",
+        "A\ttests/wolf_habitation.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "53509e516ae140e31e532e9fd86b826f57d7b0d8\ndocs/DEVELOPMENT_POLICY.md\nscripts/lab/lab.ts\nscripts/v4_reference.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/decision.ts\nsrc/sim/defence.ts\nsrc/sim/options_work.ts\nsrc/sim/optutil.ts\nsrc/sim/perception.ts\nsrc/sim/rulesversion.ts\nsrc/sim/toolreg.ts\nsrc/sim/types.ts\nsrc/sim/wildlife.ts\nsrc/sim/world.ts\ntests/defence_response.test.ts\ntests/helpers/v4ref.ts\ntests/v4_continuation.expected.json\ntests/v4_continuation.test.ts\n\nAuto-merging HANDOFF.md\nAuto-merging docs/DEVELOPMENT_POLICY.md\nCONFLICT (content): Merge conflict in docs/DEVELOPMENT_POLICY.md\nAuto-merging docs/EMERGENCE.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/v4_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v4_reference.ts\nAuto-merging src/sim/act_build.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/defence.ts\nCONFLICT (add/add): Merge conflict in src/sim/defence.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nCONFLICT (content): Merge conflict in src/sim/optutil.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/social.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/wildlife.ts\nCONFLICT (content): Merge conflict in src/sim/wildlife.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/ui/icons.ts\nAuto-merging tests/defence_response.test.ts\nCONFLICT (add/add): Merge conflict in tests/defence_response.test.ts\nAuto-merging tests/helpers/v4ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v4ref.ts\nAuto-merging tests/household_preparation.test.ts\nAuto-merging tests/v4_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v4_continuation.expected.json\nAuto-merging tests/v4_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v4_continuation.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+      "ancestor": true,
+      "counts": "352\t0"
+    },
+    {
+      "sha": "be786a80865ba2e0d721ea672f7985f7e2d46599",
+      "ancestor": false,
+      "counts": "250\t7",
+      "base": "7b2a6808bb1087bb8530b9e2e643c50aaebdb721",
+      "commits": [
+        "be786a80865ba2e0d721ea672f7985f7e2d46599 Record the rules-60 slice, the \u00a74 measurement and the resume point in the register",
+        "c9c5dcf01f042d3e078e40fa3397d6b1240fb908 Keep a running activity's own source, water spot or store past the generators' top-k cuts (rules 60)",
+        "367471a01d983d5da2e48fffebbf88077027a55e Pin rules 59 ordinary river and meadow continuations before rules 60",
+        "d3561d16ef036b3f644809cf8139040b3a4f8298 Measure the living-person time budget and attribute interruptions in three ordinary worlds",
+        "78f01c9ffcb316b2969bb9978db0d8f2db614f3c Add the owner expansion capability map and the rules-59 cart-episode record to the register",
+        "c4ba75b80b9c97ac3a13a80f258e8424484c632b Name the required tool over a convenience in the planner's missing-tool fact (rules 59)",
+        "8dafc2caa08ea2a3d3a88a77d743618ad031dce4 Pin rules 58 ordinary and active tool crafting continuations before rules 59"
+      ],
+      "cherry": [
+        "+ 8dafc2caa08ea2a3d3a88a77d743618ad031dce4",
+        "+ c4ba75b80b9c97ac3a13a80f258e8424484c632b",
+        "+ 78f01c9ffcb316b2969bb9978db0d8f2db614f3c",
+        "+ d3561d16ef036b3f644809cf8139040b3a4f8298",
+        "+ 367471a01d983d5da2e48fffebbf88077027a55e",
+        "+ c9c5dcf01f042d3e078e40fa3397d6b1240fb908",
+        "+ be786a80865ba2e0d721ea672f7985f7e2d46599"
+      ],
+      "files": [
+        "M\t.gitignore",
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md",
+        "M\tdocs/DEPENDENCY_CHAIN_PROGRAMME.md",
+        "A\tdocs/KEPT_TARGET.md",
+        "A\tdocs/REQUIRED_TOOL_PRECEDENCE.md",
+        "A\tscripts/cart_trace.ts",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/time_budget.ts",
+        "A\tscripts/v58_reference.ts",
+        "A\tscripts/v59_reference.ts",
+        "A\tsrc/sim/kept_target.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/production.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "A\ttests/helpers/v58ref.ts",
+        "A\ttests/helpers/v59ref.ts",
+        "A\ttests/kept_target.test.ts",
+        "A\ttests/tool_precedence.test.ts",
+        "A\ttests/v58_continuation.expected.json",
+        "A\ttests/v58_continuation.test.ts",
+        "A\ttests/v59_continuation.expected.json",
+        "A\ttests/v59_continuation.test.ts",
+        "A\tviewer_evidence/time_budget/forest30-rules60/provenance.json",
+        "A\tviewer_evidence/time_budget/forest30-rules60/report.json",
+        "A\tviewer_evidence/time_budget/forest30/provenance.json",
+        "A\tviewer_evidence/time_budget/forest30/report.json",
+        "A\tviewer_evidence/time_budget/meadow30-rules60/provenance.json",
+        "A\tviewer_evidence/time_budget/meadow30-rules60/report.json",
+        "A\tviewer_evidence/time_budget/meadow30/provenance.json",
+        "A\tviewer_evidence/time_budget/meadow30/report.json",
+        "A\tviewer_evidence/time_budget/river30-rules60/provenance.json",
+        "A\tviewer_evidence/time_budget/river30-rules60/report.json",
+        "A\tviewer_evidence/time_budget/river30/provenance.json",
+        "A\tviewer_evidence/time_budget/river30/report.json",
+        "A\tviewer_evidence/tool58-river35-trace/demand_episodes.json",
+        "A\tviewer_evidence/tool58-river35-trace/provenance.json",
+        "A\tviewer_evidence/tool58-river35-trace/report.json",
+        "A\tviewer_evidence/tool59-river45/demand_episodes.json",
+        "A\tviewer_evidence/tool59-river45/provenance.json",
+        "A\tviewer_evidence/tool59-river45/report.json"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "733f4bde3efa1c423bc5a8740d092a8c59fa73ba\n.gitignore\nAGENTS.md\nCLAUDE.md\ndocs/DEPENDENCY_CHAIN_PROGRAMME.md\ndocs/KEPT_TARGET.md\nscripts/lab/lab.ts\nscripts/v58_reference.ts\nscripts/v59_reference.ts\nsrc/sim/kept_target.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/optutil.ts\nsrc/sim/production.ts\nsrc/sim/rulesversion.ts\ntests/helpers/v58ref.ts\ntests/helpers/v59ref.ts\ntests/kept_target.test.ts\ntests/tool_precedence.test.ts\ntests/v58_continuation.expected.json\ntests/v58_continuation.test.ts\ntests/v59_continuation.expected.json\ntests/v59_continuation.test.ts\n\nAuto-merging .gitignore\nCONFLICT (content): Merge conflict in .gitignore\nAuto-merging AGENTS.md\nCONFLICT (content): Merge conflict in AGENTS.md\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/DEPENDENCY_CHAIN_PROGRAMME.md\nCONFLICT (content): Merge conflict in docs/DEPENDENCY_CHAIN_PROGRAMME.md\nAuto-merging docs/KEPT_TARGET.md\nCONFLICT (add/add): Merge conflict in docs/KEPT_TARGET.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/v58_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v58_reference.ts\nAuto-merging scripts/v59_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v59_reference.ts\nAuto-merging src/sim/kept_target.ts\nCONFLICT (add/add): Merge conflict in src/sim/kept_target.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nCONFLICT (content): Merge conflict in src/sim/optutil.ts\nAuto-merging src/sim/production.ts\nCONFLICT (content): Merge conflict in src/sim/production.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging tests/helpers/v58ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v58ref.ts\nAuto-merging tests/helpers/v59ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v59ref.ts\nAuto-merging tests/kept_target.test.ts\nCONFLICT (add/add): Merge conflict in tests/kept_target.test.ts\nAuto-merging tests/tool_precedence.test.ts\nCONFLICT (add/add): Merge conflict in tests/tool_precedence.test.ts\nAuto-merging tests/v58_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v58_continuation.expected.json\nAuto-merging tests/v58_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v58_continuation.test.ts\nAuto-merging tests/v59_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v59_continuation.expected.json\nAuto-merging tests/v59_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v59_continuation.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "c31ce120a91401b58f9ab8756b1d0bf4de1cb2c0",
+      "ancestor": true,
+      "counts": "329\t0"
+    },
+    {
+      "sha": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+      "ancestor": true,
+      "counts": "46\t0"
+    },
+    {
+      "sha": "c55926d4052992d088ab535f1057a3c1f2938f33",
+      "ancestor": false,
+      "counts": "541\t26",
+      "base": "b6636b481d99b34d85114b0e939757871ad841b6",
+      "commits": [
+        "c55926d4052992d088ab535f1057a3c1f2938f33 Make the new chains run: tools, cheaper beds, reserved deliveries, momentum (rich dynamics only)",
+        "584e039cbd220668bbe39ff0efacfa16fe406091 Stage B evidence: two seeds over 45 days; most chains not yet observed working",
+        "d2b630a57d63b45537ae0c4fd7df529d91c3c4b0 Stage B docs; review test checks just past the refused deposit",
+        "6baf27d5ff7c1ad47e7cb9b7108c80a3cd23050b Stage B5: the bed: made at the timber yard, a warmer night in one's own home (rich dynamics only)",
+        "b5094f25f41f7c05a3850baa1927e4951c2d4b9d Stage B4: the brewery: beer poured at the hall's shared meals (rich dynamics only)",
+        "5edfa242ea0bc9313277704971850af15986d49a Stage B3: the smokehouse: smoked fish that keeps, the reserve eaten last (rich dynamics only)",
+        "3df8ea74e620da8691bc45f27ac2effdf573afa1 Stage B2: the windmill: flour ground by the wind, wanted by whoever found the bakery busy (rich dynamics only)",
+        "a184e4983622277c730a5a1b37693a5a241fcbb8 Stage B1: the iron chain runs: charcoal clamp, the smith's shelf, iron tools preferred (rich dynamics only)",
+        "68f51ad7b81640d18850a208837b3a36d7790275 Stage A evidence re-run on the reviewed code (f201d90); BUILDINGS.md numbers and traces updated",
+        "f201d902bb605cc6adb7c761f5b31d0bc762c015 Forester's lodge: sited at the wood's edge, so a grown tree is within its reach",
+        "face1347cf81d6948763796c2cb40bc4e2d06151 Stage A: what the critical review found, fixed",
+        "128ef5badb93fb2ed8df984d75a5a0d63c69d033 Stage A evidence: natural activation traces and browser records; BUILDINGS.md progress table",
+        "3a89016fc34d0cd7a12ae1090797a0f3fc4c5774 Expansion stage A: the mine, the forester's lodge and the stockyard (rich dynamics only)",
+        "c38697c269f7e9df529bda90e5fa09833a3f313f A belief passed on by word of mouth no longer carries undefined fields",
+        "c3d5ed0a148fc4453c9adf57d6c5a1e3b13ac736 Expansion stage A: the cellar and food-loss memory (rich dynamics only)",
+        "6d980c01f92430ce56713f80e320d37577a69a18 Expansion stage A: the well (rich dynamics only)",
+        "03dd8684a0275fa97a0c1808963437276901eee1 Building expansion: coverage table, chains, build order and evidence standard (design only)",
+        "c1db928845c0eb1a466c8ec88a584d90f0980e50 Make the stakes-only ablation clean (a break with mood effects off is counted and does nothing) and count deaths since the fork",
+        "0dfd221cf00fb2f0a83e5797acde32c54bd0772e Correct the attribution write-up: limits found on review, the direct comparison, and what was built since",
+        "86dacf00f5aa94047081facb236c1421adc957fa Fix a name clash in the lab runner introduced by the resume rule",
+        "41ac209bf9a62eb9279835f5aaeb4cc7b204d472 Count the decisions a mood changed (probe only; nothing the simulation reads)",
+        "cabb90dfd601c8d0e3d8750abc3c629271ad6a1d Lab: record what produced each file; resume only files made by this commit with these settings",
+        "c6210be739dd840b04df42174517688643f4c0de Lab: measure across the run, not only at the end; compare whole serialised worlds; direct a-minus-b comparison",
+        "8d8539758407d2d2f085a499247ca654b7739e05 Rich dynamics: thoughts differ by person (caution, sociability) and a person at the bottom reaches the end of their patience",
+        "82e744f2c780587152dcbc46d590c4e3f0b95267 Record the 24-seed attribution: the stakes do the work, the mood effects do not",
+        "5ab574fd28c300735a2183484c31a82df654118a CLAUDE.md: record that #6 and #7 are merged and when merging is allowed"
+      ],
+      "cherry": [
+        "+ 5ab574fd28c300735a2183484c31a82df654118a",
+        "+ 82e744f2c780587152dcbc46d590c4e3f0b95267",
+        "+ 8d8539758407d2d2f085a499247ca654b7739e05",
+        "+ c6210be739dd840b04df42174517688643f4c0de",
+        "+ cabb90dfd601c8d0e3d8750abc3c629271ad6a1d",
+        "+ 41ac209bf9a62eb9279835f5aaeb4cc7b204d472",
+        "+ 86dacf00f5aa94047081facb236c1421adc957fa",
+        "+ 0dfd221cf00fb2f0a83e5797acde32c54bd0772e",
+        "+ c1db928845c0eb1a466c8ec88a584d90f0980e50",
+        "+ 03dd8684a0275fa97a0c1808963437276901eee1",
+        "+ 6d980c01f92430ce56713f80e320d37577a69a18",
+        "+ c3d5ed0a148fc4453c9adf57d6c5a1e3b13ac736",
+        "+ c38697c269f7e9df529bda90e5fa09833a3f313f",
+        "+ 3a89016fc34d0cd7a12ae1090797a0f3fc4c5774",
+        "+ 128ef5badb93fb2ed8df984d75a5a0d63c69d033",
+        "+ face1347cf81d6948763796c2cb40bc4e2d06151",
+        "+ f201d902bb605cc6adb7c761f5b31d0bc762c015",
+        "+ 68f51ad7b81640d18850a208837b3a36d7790275",
+        "+ a184e4983622277c730a5a1b37693a5a241fcbb8",
+        "+ 3df8ea74e620da8691bc45f27ac2effdf573afa1",
+        "+ 5edfa242ea0bc9313277704971850af15986d49a",
+        "+ b5094f25f41f7c05a3850baa1927e4951c2d4b9d",
+        "+ 6baf27d5ff7c1ad47e7cb9b7108c80a3cd23050b",
+        "+ d2b630a57d63b45537ae0c4fd7df529d91c3c4b0",
+        "+ 584e039cbd220668bbe39ff0efacfa16fe406091",
+        "+ c55926d4052992d088ab535f1057a3c1f2938f33"
+      ],
+      "files": [
+        "M\tCLAUDE.md",
+        "A\tdocs/BUILDINGS.md",
+        "M\tdocs/EMERGENCE.md",
+        "A\tdocs/evidence/stage-a/cellar.jpg",
+        "A\tdocs/evidence/stage-a/chainwatch-aspen.json",
+        "A\tdocs/evidence/stage-a/chainwatch-fern.json",
+        "A\tdocs/evidence/stage-a/chainwatch-meadow.json",
+        "A\tdocs/evidence/stage-a/chainwatch-river.json",
+        "A\tdocs/evidence/stage-a/fern.json",
+        "A\tdocs/evidence/stage-a/forester.jpg",
+        "A\tdocs/evidence/stage-a/meadow.json",
+        "A\tdocs/evidence/stage-a/person-well.jpg",
+        "A\tdocs/evidence/stage-a/stockyard.jpg",
+        "A\tdocs/evidence/stage-a/well.jpg",
+        "A\tdocs/evidence/stage-b/chainwatch-aspen.json",
+        "A\tdocs/evidence/stage-b/chainwatch-meadow.json",
+        "M\tdocs/recipes.generated.md",
+        "M\tscripts/activity_mix.ts",
+        "M\tscripts/browser/cdp.mjs",
+        "A\tscripts/browser/stage_a.mjs",
+        "A\tscripts/chainwatch.ts",
+        "M\tscripts/docs.ts",
+        "M\tscripts/lab.mjs",
+        "M\tscripts/lab/lab.ts",
+        "M\tscripts/lab_report.ts",
+        "M\tscripts/lab_seed.ts",
+        "A\tsrc/render/bld_service.ts",
+        "M\tsrc/render/buildings.ts",
+        "M\tsrc/render/carts.ts",
+        "M\tsrc/render/construction.ts",
+        "M\tsrc/render/effects.ts",
+        "M\tsrc/render/overlays.ts",
+        "M\tsrc/render/scenery.ts",
+        "M\tsrc/render/structures.ts",
+        "M\tsrc/sim/act_build.ts",
+        "A\tsrc/sim/act_forestry.ts",
+        "M\tsrc/sim/act_misc.ts",
+        "M\tsrc/sim/act_production.ts",
+        "M\tsrc/sim/act_resource.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/decision.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "M\tsrc/sim/economy.ts",
+        "A\tsrc/sim/expansion.ts",
+        "M\tsrc/sim/facilities.ts",
+        "A\tsrc/sim/forestry.ts",
+        "M\tsrc/sim/inspect.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/meals.ts",
+        "M\tsrc/sim/mood.ts",
+        "M\tsrc/sim/needs.ts",
+        "M\tsrc/sim/news.ts",
+        "M\tsrc/sim/options_social.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/probe.ts",
+        "M\tsrc/sim/production.ts",
+        "M\tsrc/sim/recipes.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/sources.ts",
+        "A\tsrc/sim/stockyard.ts",
+        "A\tsrc/sim/storage.ts",
+        "M\tsrc/sim/types.ts",
+        "A\tsrc/sim/water.ts",
+        "M\tsrc/sim/welfare.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/entity.ts",
+        "A\ttests/expansion_bed.test.ts",
+        "A\ttests/expansion_brewery.test.ts",
+        "A\ttests/expansion_forestry.test.ts",
+        "A\ttests/expansion_metal.test.ts",
+        "A\ttests/expansion_mill.test.ts",
+        "A\ttests/expansion_mine.test.ts",
+        "A\ttests/expansion_review.test.ts",
+        "A\ttests/expansion_smoke.test.ts",
+        "A\ttests/expansion_stockyard.test.ts",
+        "A\ttests/expansion_storage.test.ts",
+        "A\ttests/expansion_water.test.ts",
+        "M\ttests/lab.test.ts",
+        "M\ttests/rich.test.ts",
+        "A\ttests/save_told.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "c8ce4c41c7b34c0619a3af3fc238c5b7f6eda099\nCLAUDE.md\nscripts/activity_mix.ts\nscripts/lab.mjs\nscripts/lab/lab.ts\nscripts/lab_report.ts\nscripts/lab_seed.ts\nsrc/sim/act_build.ts\nsrc/sim/act_misc.ts\nsrc/sim/act_production.ts\nsrc/sim/act_resource.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/decision.ts\nsrc/sim/economy.ts\nsrc/sim/facilities.ts\nsrc/sim/inspect.ts\nsrc/sim/meals.ts\nsrc/sim/needs.ts\nsrc/sim/news.ts\nsrc/sim/options_social.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/optutil.ts\nsrc/sim/perception.ts\nsrc/sim/production.ts\nsrc/sim/recipes.ts\nsrc/sim/social.ts\nsrc/sim/types.ts\nsrc/sim/welfare.ts\nsrc/sim/world.ts\ntests/save_told.test.ts\n\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/EMERGENCE.md\nAuto-merging scripts/activity_mix.ts\nCONFLICT (content): Merge conflict in scripts/activity_mix.ts\nAuto-merging scripts/browser/cdp.mjs\nAuto-merging scripts/lab.mjs\nCONFLICT (content): Merge conflict in scripts/lab.mjs\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/lab_report.ts\nCONFLICT (content): Merge conflict in scripts/lab_report.ts\nAuto-merging scripts/lab_seed.ts\nCONFLICT (content): Merge conflict in scripts/lab_seed.ts\nAuto-merging src/render/buildings.ts\nAuto-merging src/render/construction.ts\nAuto-merging src/render/overlays.ts\nAuto-merging src/render/scenery.ts\nAuto-merging src/render/structures.ts\nAuto-merging src/sim/act_build.ts\nCONFLICT (content): Merge conflict in src/sim/act_build.ts\nAuto-merging src/sim/act_misc.ts\nCONFLICT (content): Merge conflict in src/sim/act_misc.ts\nAuto-merging src/sim/act_production.ts\nCONFLICT (content): Merge conflict in src/sim/act_production.ts\nAuto-merging src/sim/act_resource.ts\nCONFLICT (content): Merge conflict in src/sim/act_resource.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/economy.ts\nCONFLICT (content): Merge conflict in src/sim/economy.ts\nAuto-merging src/sim/facilities.ts\nCONFLICT (content): Merge conflict in src/sim/facilities.ts\nAuto-merging src/sim/inspect.ts\nCONFLICT (content): Merge conflict in src/sim/inspect.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/meals.ts\nCONFLICT (content): Merge conflict in src/sim/meals.ts\nAuto-merging src/sim/mood.ts\nAuto-merging src/sim/needs.ts\nCONFLICT (content): Merge conflict in src/sim/needs.ts\nAuto-merging src/sim/news.ts\nCONFLICT (content): Merge conflict in src/sim/news.ts\nAuto-merging src/sim/options_social.ts\nCONFLICT (content): Merge conflict in src/sim/options_social.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nCONFLICT (content): Merge conflict in src/sim/optutil.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/production.ts\nCONFLICT (content): Merge conflict in src/sim/production.ts\nAuto-merging src/sim/recipes.ts\nCONFLICT (content): Merge conflict in src/sim/recipes.ts\nAuto-merging src/sim/social.ts\nCONFLICT (content): Merge conflict in src/sim/social.ts\nAuto-merging src/sim/sources.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/welfare.ts\nCONFLICT (content): Merge conflict in src/sim/welfare.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/ui/entity.ts\nAuto-merging tests/lab.test.ts\nAuto-merging tests/save_told.test.ts\nCONFLICT (add/add): Merge conflict in tests/save_told.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "c67be494d0e70f8a7081278a986e1e69a41838ef",
+      "ancestor": false,
+      "counts": "64\t10",
+      "base": "b2cf81227602861780dd5971a5786c4fb35995a5",
+      "commits": [
+        "c67be494d0e70f8a7081278a986e1e69a41838ef docs: require new mechanics to strengthen existing systems",
+        "27695391176e040df2f60f3054cc853fff7b69e1 A1-CART: todo test for tool records lost when a cart breaks",
+        "3df08d38784094e16822b4fb701cf27044c623fc A1 fixture: stage the salvage test's axe with a tool record",
+        "67c928ef66172ca2b7dd9003b1d122ba6c1a4093 Revert \"A1 follow-up: the transfer cap applies only where the registry holds records\"",
+        "cc89e974612ce98e82eab304c2b6ef002b067be5 A1 follow-up: the transfer cap applies only where the registry holds records",
+        "80a49e31d3b7989cbb866c19c22d4da7a190b896 B2: remove a cleared upgrade field instead of setting it undefined",
+        "524f1a475afdb1facc3dc6a38f0986b80e77e987 C2: observer reports record HEAD, a dirty flag and LF-normalised source hashes",
+        "8d317bdf970bf0e17dba06881f4e18e4997c87f6 C1: lab.mjs and lab_report.ts exit non-zero when a seed fails or nothing was measured",
+        "706fcb8f93613a5a03a952a82e4d0005d7a5c74e A1: cap a tool transfer at the records it can retag",
+        "ca392928468034a866195c169a9b8ef8485edc58 A2: splice tool records when the flood write-off spoils their counts"
+      ],
+      "cherry": [
+        "- ca392928468034a866195c169a9b8ef8485edc58",
+        "- 706fcb8f93613a5a03a952a82e4d0005d7a5c74e",
+        "- 8d317bdf970bf0e17dba06881f4e18e4997c87f6",
+        "- 524f1a475afdb1facc3dc6a38f0986b80e77e987",
+        "- 80a49e31d3b7989cbb866c19c22d4da7a190b896",
+        "+ cc89e974612ce98e82eab304c2b6ef002b067be5",
+        "+ 67c928ef66172ca2b7dd9003b1d122ba6c1a4093",
+        "- 3df08d38784094e16822b4fb701cf27044c623fc",
+        "- 27695391176e040df2f60f3054cc853fff7b69e1",
+        "- c67be494d0e70f8a7081278a986e1e69a41838ef"
+      ],
+      "files": [
+        "M\tAGENTS.md",
+        "M\tCLAUDE.md",
+        "M\tPRODUCT_VISION.md",
+        "M\tdocs/DEVELOPMENT_POLICY.md",
+        "M\tscripts/autonomy_observe.ts",
+        "M\tscripts/care_capacity_observe.ts",
+        "M\tscripts/care_handback_observe.ts",
+        "M\tscripts/care_supply_observe.ts",
+        "M\tscripts/care_water_diagnostic.ts",
+        "M\tscripts/care_water_observe.ts",
+        "M\tscripts/cart_episode_observe.ts",
+        "M\tscripts/chain_audit.ts",
+        "M\tscripts/checked_accounts_observe.ts",
+        "M\tscripts/civic_food_observe.ts",
+        "M\tscripts/civic_observe.ts",
+        "M\tscripts/construction_finish_observe.ts",
+        "M\tscripts/continuity_observe.ts",
+        "M\tscripts/customers_observe.ts",
+        "M\tscripts/ecology_observe.ts",
+        "M\tscripts/estate_custody_observe.ts",
+        "M\tscripts/experience_connections_observe.ts",
+        "M\tscripts/first_cart_trace.ts",
+        "M\tscripts/flood_observe.ts",
+        "M\tscripts/flood_story.ts",
+        "M\tscripts/food_help_observe.ts",
+        "M\tscripts/food_pressure_observe.ts",
+        "M\tscripts/full_pack_crop_trace.ts",
+        "M\tscripts/gather_contact_observe.ts",
+        "M\tscripts/helper_learning_observe.ts",
+        "M\tscripts/home_replacement_observe.ts",
+        "M\tscripts/household_rhythm_observe.ts",
+        "M\tscripts/household_supply_observe.ts",
+        "M\tscripts/hungry_harvest_observe.ts",
+        "M\tscripts/indoor_giving_observe.ts",
+        "M\tscripts/informed_continuity_observe.ts",
+        "M\tscripts/journey_observe.ts",
+        "M\tscripts/lab.mjs",
+        "M\tscripts/lab_report.ts",
+        "M\tscripts/mature_perf.ts",
+        "M\tscripts/meal_leftovers_observe.ts",
+        "M\tscripts/meeting_arrangements_observe.ts",
+        "A\tscripts/observers/provenance.ts",
+        "M\tscripts/occasion_observe.ts",
+        "M\tscripts/occasion_recovery_observe.ts",
+        "M\tscripts/offcuts_observe.ts",
+        "M\tscripts/practical_care_observe.ts",
+        "M\tscripts/programme_checkpoint.ts",
+        "M\tscripts/project_attempts_trace.ts",
+        "M\tscripts/project_hand_inputs_observe.ts",
+        "M\tscripts/project_helpers_inhabitant.ts",
+        "M\tscripts/project_helpers_observe.ts",
+        "M\tscripts/project_observe.ts",
+        "M\tscripts/promise_delays_observe.ts",
+        "M\tscripts/promise_expectations_observe.ts",
+        "M\tscripts/promise_knowledge_observe.ts",
+        "M\tscripts/promise_outcomes_observe.ts",
+        "M\tscripts/promise_targets_observe.ts",
+        "M\tscripts/promised_supply_observe.ts",
+        "M\tscripts/ready_step_observe.ts",
+        "M\tscripts/relocation_observe.ts",
+        "M\tscripts/remembered_need_observe.ts",
+        "M\tscripts/repair_duty_observe.ts",
+        "M\tscripts/request_cancellation_observe.ts",
+        "M\tscripts/resident_care_observe.ts",
+        "M\tscripts/route_learning_observe.ts",
+        "M\tscripts/routine_observe.ts",
+        "M\tscripts/scope_observe.ts",
+        "M\tscripts/seed_storage_observe.ts",
+        "M\tscripts/shelter_observe.ts",
+        "M\tscripts/source_learning_observe.ts",
+        "M\tscripts/stored_materials_inhabitant.ts",
+        "M\tscripts/stored_materials_observe.ts",
+        "M\tscripts/stored_water_observe.ts",
+        "M\tscripts/technique_observe.ts",
+        "M\tscripts/transport_observe.ts",
+        "M\tscripts/warmth_duty_observe.ts",
+        "M\tscripts/watch_learning_observe.ts",
+        "M\tscripts/water_observe.ts",
+        "M\tscripts/water_search_observe.ts",
+        "M\tscripts/water_story.ts",
+        "M\tscripts/wild_seed_observe.ts",
+        "M\tscripts/winter_reserve_observe.ts",
+        "M\tscripts/work_handover_observe.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/economy.ts",
+        "M\tsrc/sim/hardship.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "A\ttests/building_upgrading_key.test.ts",
+        "A\ttests/cart_break_tool_records.test.ts",
+        "A\ttests/flood_tool_records.test.ts",
+        "A\ttests/lab_exit_codes.test.ts",
+        "A\ttests/provenance.test.ts",
+        "M\ttests/survival.test.ts",
+        "A\ttests/tool_transfer_records.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "72e4a972cd86ea2f58d1ffc310c669ac7389d084\nAGENTS.md\nCLAUDE.md\nscripts/first_cart_trace.ts\nscripts/household_supply_observe.ts\nscripts/observers/provenance.ts\nscripts/promised_supply_observe.ts\nscripts/ready_step_observe.ts\nsrc/sim/economy.ts\nsrc/sim/toolreg.ts\ntests/cart_break_tool_records.test.ts\n\nAuto-merging AGENTS.md\nCONFLICT (content): Merge conflict in AGENTS.md\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging scripts/first_cart_trace.ts\nCONFLICT (content): Merge conflict in scripts/first_cart_trace.ts\nAuto-merging scripts/household_supply_observe.ts\nCONFLICT (content): Merge conflict in scripts/household_supply_observe.ts\nAuto-merging scripts/lab.mjs\nAuto-merging scripts/lab_report.ts\nAuto-merging scripts/observers/provenance.ts\nCONFLICT (add/add): Merge conflict in scripts/observers/provenance.ts\nAuto-merging scripts/promised_supply_observe.ts\nCONFLICT (content): Merge conflict in scripts/promised_supply_observe.ts\nAuto-merging scripts/ready_step_observe.ts\nCONFLICT (content): Merge conflict in scripts/ready_step_observe.ts\nAuto-merging src/sim/buildings.ts\nAuto-merging src/sim/economy.ts\nCONFLICT (content): Merge conflict in src/sim/economy.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging tests/cart_break_tool_records.test.ts\nCONFLICT (add/add): Merge conflict in tests/cart_break_tool_records.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3",
+      "ancestor": false,
+      "counts": "594\t14",
+      "base": "7a7e0e48fd96adfd4749e5a7274b157596ffec54",
+      "commits": [
+        "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3 Leisure: evenings at the fire, celebrations, play, contests, keepsakes, calls, jokes",
+        "5607d2e1e78c302e8fb50a2bb467da55ee8e1c0c Social stage 3: collective decisions (proposals, stances, quorum)",
+        "0a1cb225db0c5750a84b3da48ea175dbddcafc86 Social stage 2: teaching and mentoring",
+        "202dae8e7a30e853f3c1e015e4bb745cb0dbcb46 Life pace setting, illness as a recoverable episode, modern-style lifespans",
+        "94d1a31303f634701c617c7095388e2e0a444d38 Age model: fewer, less alike deaths",
+        "8a2789e38252adb387c8c89b14ba3ba7f7d546d2 docs: record the 90-day full-simulation results for the age model",
+        "9e0b219e3f5438e14a768030aaec10eb7601b46d Realistic age span: mortality curve, ageing, fertility, starting age mix",
+        "2bb2250367b956df41f5923c230a738762117cf9 Social stage 6: grief and remembrance",
+        "1575110d8edade995826490df080852f26463ea6 Mediation: step in sooner, and talk both sides round when both are close",
+        "14186f72ef869eb848e7ed72f7a7c5edee76d4f4 Terrain: draw footpath wear as soft blobs, not inset diamonds",
+        "833fe83805fc6b3ad9b29152667db8ae4786caaa Social stage 5: third parties in quarrels (sides, accounts, friends stepping in)",
+        "bc70c08c6f73a083f3b720f45016be47a1387c1a Terrain: stop the tile grid showing in the grass",
+        "53fd45b15a905c3803d67cda14bd5dfd4c1e8540 Social stage 1: hearsay about people (kept / broke / gave)",
+        "b0806d1e07738148f1af5864f80f801887f8cbb9 Add one-step launcher scripts (play.sh, Play.command, play.bat)"
+      ],
+      "cherry": [
+        "+ b0806d1e07738148f1af5864f80f801887f8cbb9",
+        "+ 53fd45b15a905c3803d67cda14bd5dfd4c1e8540",
+        "+ bc70c08c6f73a083f3b720f45016be47a1387c1a",
+        "+ 833fe83805fc6b3ad9b29152667db8ae4786caaa",
+        "+ 14186f72ef869eb848e7ed72f7a7c5edee76d4f4",
+        "+ 1575110d8edade995826490df080852f26463ea6",
+        "+ 2bb2250367b956df41f5923c230a738762117cf9",
+        "+ 9e0b219e3f5438e14a768030aaec10eb7601b46d",
+        "+ 8a2789e38252adb387c8c89b14ba3ba7f7d546d2",
+        "+ 94d1a31303f634701c617c7095388e2e0a444d38",
+        "+ 202dae8e7a30e853f3c1e015e4bb745cb0dbcb46",
+        "+ 0a1cb225db0c5750a84b3da48ea175dbddcafc86",
+        "+ 5607d2e1e78c302e8fb50a2bb467da55ee8e1c0c",
+        "+ d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3"
+      ],
+      "files": [
+        "A\tPlay.command",
+        "M\tREADME.md",
+        "M\tdocs/ECONOMY.md",
+        "A\tplay.bat",
+        "A\tplay.sh",
+        "A\tscripts/demography.ts",
+        "M\tsrc/app/prefs.ts",
+        "M\tsrc/app/save.ts",
+        "M\tsrc/main.ts",
+        "M\tsrc/render/overlays.ts",
+        "M\tsrc/render/terrain.ts",
+        "M\tsrc/sim/act_build.ts",
+        "M\tsrc/sim/act_misc.ts",
+        "M\tsrc/sim/act_resource.ts",
+        "M\tsrc/sim/activities.ts",
+        "A\tsrc/sim/ageing.ts",
+        "M\tsrc/sim/constants.ts",
+        "A\tsrc/sim/council.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "A\tsrc/sim/grief.ts",
+        "A\tsrc/sim/illness.ts",
+        "M\tsrc/sim/inspect.ts",
+        "M\tsrc/sim/inspect_work.ts",
+        "M\tsrc/sim/labels.ts",
+        "A\tsrc/sim/leisure.ts",
+        "M\tsrc/sim/lifecycle.ts",
+        "M\tsrc/sim/meals.ts",
+        "M\tsrc/sim/options_social.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/people.ts",
+        "M\tsrc/sim/production.ts",
+        "M\tsrc/sim/relations.ts",
+        "A\tsrc/sim/reputation.ts",
+        "M\tsrc/sim/social.ts",
+        "A\tsrc/sim/teaching.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/sim/worldgen.ts",
+        "M\tsrc/styles.css",
+        "M\tsrc/ui/index.ts",
+        "M\tsrc/ui/person.ts",
+        "M\tsrc/ui/person_social.ts",
+        "M\tsrc/ui/worldmenu.ts",
+        "A\ttests/ageing.test.ts",
+        "A\ttests/council.test.ts",
+        "A\ttests/grief.test.ts",
+        "A\ttests/illness.test.ts",
+        "A\ttests/leisure.test.ts",
+        "M\ttests/ordinary.test.ts",
+        "A\ttests/quarrels.test.ts",
+        "A\ttests/reputation.test.ts",
+        "A\ttests/teaching.test.ts",
+        "M\ttests/world.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "d8c9f152b0e62ca255efb833d1d1adcd64864f87\nREADME.md\nsrc/app/prefs.ts\nsrc/app/save.ts\nsrc/main.ts\nsrc/sim/act_misc.ts\nsrc/sim/act_resource.ts\nsrc/sim/illness.ts\nsrc/sim/inspect.ts\nsrc/sim/inspect_work.ts\nsrc/sim/leisure.ts\nsrc/sim/lifecycle.ts\nsrc/sim/meals.ts\nsrc/sim/options_social.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/people.ts\nsrc/sim/production.ts\nsrc/sim/reputation.ts\nsrc/sim/social.ts\nsrc/sim/types.ts\nsrc/sim/world.ts\nsrc/sim/worldgen.ts\nsrc/styles.css\nsrc/ui/index.ts\nsrc/ui/worldmenu.ts\ntests/illness.test.ts\ntests/leisure.test.ts\ntests/reputation.test.ts\n\nAuto-merging README.md\nCONFLICT (content): Merge conflict in README.md\nAuto-merging docs/ECONOMY.md\nAuto-merging src/app/prefs.ts\nCONFLICT (content): Merge conflict in src/app/prefs.ts\nAuto-merging src/app/save.ts\nCONFLICT (content): Merge conflict in src/app/save.ts\nAuto-merging src/main.ts\nCONFLICT (content): Merge conflict in src/main.ts\nAuto-merging src/render/overlays.ts\nAuto-merging src/render/terrain.ts\nAuto-merging src/sim/act_build.ts\nAuto-merging src/sim/act_misc.ts\nCONFLICT (content): Merge conflict in src/sim/act_misc.ts\nAuto-merging src/sim/act_resource.ts\nCONFLICT (content): Merge conflict in src/sim/act_resource.ts\nAuto-merging src/sim/activities.ts\nAuto-merging src/sim/constants.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/illness.ts\nCONFLICT (add/add): Merge conflict in src/sim/illness.ts\nAuto-merging src/sim/inspect.ts\nCONFLICT (content): Merge conflict in src/sim/inspect.ts\nAuto-merging src/sim/inspect_work.ts\nCONFLICT (content): Merge conflict in src/sim/inspect_work.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/leisure.ts\nCONFLICT (add/add): Merge conflict in src/sim/leisure.ts\nAuto-merging src/sim/lifecycle.ts\nCONFLICT (content): Merge conflict in src/sim/lifecycle.ts\nAuto-merging src/sim/meals.ts\nCONFLICT (content): Merge conflict in src/sim/meals.ts\nAuto-merging src/sim/options_social.ts\nCONFLICT (content): Merge conflict in src/sim/options_social.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nAuto-merging src/sim/people.ts\nCONFLICT (content): Merge conflict in src/sim/people.ts\nAuto-merging src/sim/production.ts\nCONFLICT (content): Merge conflict in src/sim/production.ts\nAuto-merging src/sim/reputation.ts\nCONFLICT (add/add): Merge conflict in src/sim/reputation.ts\nAuto-merging src/sim/social.ts\nCONFLICT (content): Merge conflict in src/sim/social.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/sim/worldgen.ts\nCONFLICT (content): Merge conflict in src/sim/worldgen.ts\nAuto-merging src/styles.css\nCONFLICT (content): Merge conflict in src/styles.css\nAuto-merging src/ui/index.ts\nCONFLICT (content): Merge conflict in src/ui/index.ts\nAuto-merging src/ui/person.ts\nAuto-merging src/ui/person_social.ts\nAuto-merging src/ui/worldmenu.ts\nCONFLICT (content): Merge conflict in src/ui/worldmenu.ts\nAuto-merging tests/illness.test.ts\nCONFLICT (add/add): Merge conflict in tests/illness.test.ts\nAuto-merging tests/leisure.test.ts\nCONFLICT (add/add): Merge conflict in tests/leisure.test.ts\nAuto-merging tests/reputation.test.ts\nCONFLICT (add/add): Merge conflict in tests/reputation.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+      "ancestor": false,
+      "counts": "429\t5",
+      "base": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+      "commits": [
+        "d72e3666a1b9440438724196f6bd08706405672a Snapshot of the unfinished wolf-defence edits in the owner's checkout, taken for safekeeping",
+        "35b7236869431f15659c6cf142cf92977beb6cd5 Another test that wrote the current rules version down as a number",
+        "b204cb788071e0f39d55c904a925030acb3ad996 Rules version 3: an armed adult can stand and drive a wolf off",
+        "a5157f827180a93598db3d28db7d6e276f79fb73 A spear: an ordinary tool, wanted only by somebody who has met a wolf",
+        "b0dd7706aee0b0b398fa0981f442cf523c072d9f A version-2 continuation reference, recorded before version 3 exists"
+      ],
+      "cherry": [
+        "+ b0dd7706aee0b0b398fa0981f442cf523c072d9f",
+        "+ a5157f827180a93598db3d28db7d6e276f79fb73",
+        "+ b204cb788071e0f39d55c904a925030acb3ad996",
+        "+ 35b7236869431f15659c6cf142cf92977beb6cd5",
+        "+ d72e3666a1b9440438724196f6bd08706405672a"
+      ],
+      "files": [
+        "A\tencounters_out/report.md",
+        "A\tencounters_out/rows.jsonl",
+        "A\tscripts/encounters.ts",
+        "M\tscripts/lab/lab.ts",
+        "M\tsrc/sim/act_build.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/decision.ts",
+        "A\tsrc/sim/defence.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/wildlife.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/icons.ts",
+        "M\ttests/helpers/v1ref.ts",
+        "M\ttests/household_preparation.test.ts",
+        "M\ttests/v1_continuation.expected.json",
+        "M\ttests/v1_continuation.test.ts",
+        "A\ttests/wolf_defence.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "667284afed4a322e53d40c0c45a9d3cf59416b91\nscripts/encounters.ts\nscripts/lab/lab.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/decision.ts\nsrc/sim/defence.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/perception.ts\nsrc/sim/rulesversion.ts\nsrc/sim/toolreg.ts\nsrc/sim/types.ts\nsrc/sim/wildlife.ts\nsrc/sim/world.ts\ntests/household_preparation.test.ts\ntests/wolf_defence.test.ts\n\nAuto-merging scripts/encounters.ts\nCONFLICT (add/add): Merge conflict in scripts/encounters.ts\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging src/sim/act_build.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/defence.ts\nCONFLICT (add/add): Merge conflict in src/sim/defence.ts\nAuto-merging src/sim/dialogue.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/social.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/wildlife.ts\nCONFLICT (content): Merge conflict in src/sim/wildlife.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/ui/icons.ts\nAuto-merging tests/household_preparation.test.ts\nCONFLICT (content): Merge conflict in tests/household_preparation.test.ts\nAuto-merging tests/wolf_defence.test.ts\nCONFLICT (add/add): Merge conflict in tests/wolf_defence.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "d81c0277904304fa07b79a948283c2bbef1a8938",
+      "ancestor": true,
+      "counts": "495\t0"
+    },
+    {
+      "sha": "dbe229e75e805adab83a25518921c7ab2626a7f1",
+      "ancestor": true,
+      "counts": "52\t0"
+    },
+    {
+      "sha": "dda3d430e94eaf7951726342386dc2e248617527",
+      "ancestor": true,
+      "counts": "413\t0"
+    },
+    {
+      "sha": "df9acb9c0f5173555980d661384208477f4c313e",
+      "ancestor": false,
+      "counts": "594\t7",
+      "base": "7a7e0e48fd96adfd4749e5a7274b157596ffec54",
+      "commits": [
+        "df9acb9c0f5173555980d661384208477f4c313e Correct two statements in docs/ECONOMY.md that the measurements did not support",
+        "387cd4437904c43cfb3dd02caaec2b892cdf2c6a Record what the additions did across sixteen ordinary and ten harsh worlds",
+        "809bd82a86a3fe2d4dd2aab1bb4a8890f9f7bd67 Add the spear: a grown person who carries one counts as two to a wolf",
+        "b736b49a58e308fb37105c0b75bfe1086a833a69 Let a person finish making a tool when the wood it is made from is what fills the pack",
+        "3c783be72469eefdf8597ad5cf8e431936f90ef7 Add a well: water in the middle of the village for people whose water is a long walk away",
+        "a6a1e3fc84d49ca2ded6bef336bf5a0d7d028eb9 Add a fishing rod, a smokehouse and smoked fish, so spare fish can be kept",
+        "d565227b6c11028efdf4362d47d1f316f8a97ce6 Hold workshop goods for the site they were ordered for, and let the planner see the claims"
+      ],
+      "cherry": [
+        "+ d565227b6c11028efdf4362d47d1f316f8a97ce6",
+        "+ a6a1e3fc84d49ca2ded6bef336bf5a0d7d028eb9",
+        "+ 3c783be72469eefdf8597ad5cf8e431936f90ef7",
+        "+ b736b49a58e308fb37105c0b75bfe1086a833a69",
+        "+ 809bd82a86a3fe2d4dd2aab1bb4a8890f9f7bd67",
+        "+ 387cd4437904c43cfb3dd02caaec2b892cdf2c6a",
+        "+ df9acb9c0f5173555980d661384208477f4c313e"
+      ],
+      "files": [
+        "M\tREADME.md",
+        "M\tdocs/BASELINE.md",
+        "M\tdocs/ECONOMY.md",
+        "M\tdocs/OBSERVED.md",
+        "M\tdocs/recipes.generated.md",
+        "A\tscripts/fishwaste.ts",
+        "M\tscripts/state.ts",
+        "A\tscripts/toolmaking.ts",
+        "A\tscripts/waterwalk.ts",
+        "A\tscripts/wellgeo.ts",
+        "A\tscripts/withdraws.ts",
+        "A\tscripts/wolfwatch.ts",
+        "M\tsrc/render/bld_food.ts",
+        "M\tsrc/render/bld_work.ts",
+        "M\tsrc/render/buildings.ts",
+        "M\tsrc/render/characters.ts",
+        "M\tsrc/render/construction.ts",
+        "M\tsrc/render/effects.ts",
+        "M\tsrc/render/goods.ts",
+        "M\tsrc/render/overlays.ts",
+        "M\tsrc/render/palette.ts",
+        "M\tsrc/render/scenery.ts",
+        "M\tsrc/render/structures.ts",
+        "M\tsrc/sim/act_build.ts",
+        "M\tsrc/sim/act_misc.ts",
+        "M\tsrc/sim/act_production.ts",
+        "M\tsrc/sim/act_resource.ts",
+        "M\tsrc/sim/buildings.ts",
+        "M\tsrc/sim/constants.ts",
+        "M\tsrc/sim/dialogue.ts",
+        "M\tsrc/sim/economy.ts",
+        "M\tsrc/sim/facilities.ts",
+        "M\tsrc/sim/inspect_work.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/meals.ts",
+        "M\tsrc/sim/options_social.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/optutil.ts",
+        "M\tsrc/sim/perception.ts",
+        "M\tsrc/sim/production.ts",
+        "M\tsrc/sim/recipes.ts",
+        "M\tsrc/sim/registry.ts",
+        "M\tsrc/sim/social.ts",
+        "M\tsrc/sim/toolreg.ts",
+        "M\tsrc/sim/tools.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/welfare.ts",
+        "M\tsrc/sim/wildlife.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/ui/entity.ts",
+        "M\tsrc/ui/feed.ts",
+        "M\tsrc/ui/help.ts",
+        "M\tsrc/ui/icons.ts",
+        "M\tsrc/ui/minimap.ts",
+        "A\ttests/claims.test.ts",
+        "A\ttests/crafting.test.ts",
+        "A\ttests/smoking.test.ts",
+        "A\ttests/spear.test.ts",
+        "A\ttests/well.test.ts",
+        "M\ttests/workshops.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "756095dbee7b72d2fdfcea90d54072a1893669e3\nREADME.md\ndocs/ECONOMY.md\nsrc/render/goods.ts\nsrc/render/structures.ts\nsrc/sim/act_build.ts\nsrc/sim/act_resource.ts\nsrc/sim/buildings.ts\nsrc/sim/constants.ts\nsrc/sim/dialogue.ts\nsrc/sim/economy.ts\nsrc/sim/facilities.ts\nsrc/sim/inspect_work.ts\nsrc/sim/labels.ts\nsrc/sim/meals.ts\nsrc/sim/options_social.ts\nsrc/sim/options_survival.ts\nsrc/sim/options_work.ts\nsrc/sim/optutil.ts\nsrc/sim/perception.ts\nsrc/sim/production.ts\nsrc/sim/recipes.ts\nsrc/sim/social.ts\nsrc/sim/toolreg.ts\nsrc/sim/types.ts\nsrc/sim/welfare.ts\nsrc/sim/wildlife.ts\n\nAuto-merging README.md\nCONFLICT (content): Merge conflict in README.md\nAuto-merging docs/ECONOMY.md\nCONFLICT (content): Merge conflict in docs/ECONOMY.md\nAuto-merging src/render/bld_food.ts\nAuto-merging src/render/buildings.ts\nAuto-merging src/render/characters.ts\nAuto-merging src/render/construction.ts\nAuto-merging src/render/goods.ts\nCONFLICT (content): Merge conflict in src/render/goods.ts\nAuto-merging src/render/overlays.ts\nAuto-merging src/render/scenery.ts\nAuto-merging src/render/structures.ts\nCONFLICT (content): Merge conflict in src/render/structures.ts\nAuto-merging src/sim/act_build.ts\nCONFLICT (content): Merge conflict in src/sim/act_build.ts\nAuto-merging src/sim/act_misc.ts\nAuto-merging src/sim/act_production.ts\nAuto-merging src/sim/act_resource.ts\nCONFLICT (content): Merge conflict in src/sim/act_resource.ts\nAuto-merging src/sim/buildings.ts\nCONFLICT (content): Merge conflict in src/sim/buildings.ts\nAuto-merging src/sim/constants.ts\nCONFLICT (content): Merge conflict in src/sim/constants.ts\nAuto-merging src/sim/dialogue.ts\nCONFLICT (content): Merge conflict in src/sim/dialogue.ts\nAuto-merging src/sim/economy.ts\nCONFLICT (content): Merge conflict in src/sim/economy.ts\nAuto-merging src/sim/facilities.ts\nCONFLICT (content): Merge conflict in src/sim/facilities.ts\nAuto-merging src/sim/inspect_work.ts\nCONFLICT (content): Merge conflict in src/sim/inspect_work.ts\nAuto-merging src/sim/labels.ts\nCONFLICT (content): Merge conflict in src/sim/labels.ts\nAuto-merging src/sim/meals.ts\nCONFLICT (content): Merge conflict in src/sim/meals.ts\nAuto-merging src/sim/options_social.ts\nCONFLICT (content): Merge conflict in src/sim/options_social.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/optutil.ts\nCONFLICT (content): Merge conflict in src/sim/optutil.ts\nAuto-merging src/sim/perception.ts\nCONFLICT (content): Merge conflict in src/sim/perception.ts\nAuto-merging src/sim/production.ts\nCONFLICT (content): Merge conflict in src/sim/production.ts\nAuto-merging src/sim/recipes.ts\nCONFLICT (content): Merge conflict in src/sim/recipes.ts\nAuto-merging src/sim/registry.ts\nAuto-merging src/sim/social.ts\nCONFLICT (content): Merge conflict in src/sim/social.ts\nAuto-merging src/sim/toolreg.ts\nCONFLICT (content): Merge conflict in src/sim/toolreg.ts\nAuto-merging src/sim/tools.ts\nAuto-merging src/sim/types.ts\nCONFLICT (content): Merge conflict in src/sim/types.ts\nAuto-merging src/sim/welfare.ts\nCONFLICT (content): Merge conflict in src/sim/welfare.ts\nAuto-merging src/sim/wildlife.ts\nCONFLICT (content): Merge conflict in src/sim/wildlife.ts\nAuto-merging src/sim/world.ts\nAuto-merging src/ui/entity.ts\nAuto-merging src/ui/feed.ts\nAuto-merging src/ui/help.ts\nAuto-merging src/ui/icons.ts\nAuto-merging src/ui/minimap.ts\nAuto-merging tests/workshops.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+      "ancestor": true,
+      "counts": "344\t0"
+    },
+    {
+      "sha": "e415b4b65ef006a09cb80e78777b1a6992462352",
+      "ancestor": true,
+      "counts": "334\t0"
+    },
+    {
+      "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+      "ancestor": false,
+      "counts": "537\t2",
+      "base": "305ba253776603fdd05e41a0c2371ddfc6b8a976",
+      "commits": [
+        "f133938dd8cbd91db71b2fdd9398f4c23967c603 Inspector: list the places a person remembers (rich worlds)",
+        "bef0863aaddec74a84a54b278c465df8219715f6 Rich dynamics: places that matter (where a wolf struck, a loved one's grave)"
+      ],
+      "cherry": [
+        "+ bef0863aaddec74a84a54b278c465df8219715f6",
+        "+ f133938dd8cbd91db71b2fdd9398f4c23967c603"
+      ],
+      "files": [
+        "M\tCLAUDE.md",
+        "M\tdocs/EMERGENCE.md",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/places_smoke.ts",
+        "M\tsrc/render/overlays.ts",
+        "M\tsrc/sim/act_misc.ts",
+        "M\tsrc/sim/decision.ts",
+        "M\tsrc/sim/inspect.ts",
+        "M\tsrc/sim/labels.ts",
+        "M\tsrc/sim/lifecycle.ts",
+        "A\tsrc/sim/options_places.ts",
+        "M\tsrc/sim/options_survival.ts",
+        "M\tsrc/sim/optutil.ts",
+        "A\tsrc/sim/places.ts",
+        "M\tsrc/sim/types.ts",
+        "M\tsrc/sim/wildlife.ts",
+        "M\tsrc/sim/world.ts",
+        "M\tsrc/styles.css",
+        "M\tsrc/ui/person.ts",
+        "A\ttests/places.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "ad1e2076893af4009bd6da9670a46c22045bc2f1\nCLAUDE.md\nscripts/lab/lab.ts\nsrc/sim/decision.ts\nsrc/sim/lifecycle.ts\nsrc/sim/options_survival.ts\nsrc/sim/optutil.ts\nsrc/sim/wildlife.ts\nsrc/sim/world.ts\nsrc/ui/person.ts\n\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/EMERGENCE.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging src/render/overlays.ts\nAuto-merging src/sim/act_misc.ts\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts\nAuto-merging src/sim/inspect.ts\nAuto-merging src/sim/labels.ts\nAuto-merging src/sim/lifecycle.ts\nCONFLICT (content): Merge conflict in src/sim/lifecycle.ts\nAuto-merging src/sim/options_survival.ts\nCONFLICT (content): Merge conflict in src/sim/options_survival.ts\nAuto-merging src/sim/optutil.ts\nCONFLICT (content): Merge conflict in src/sim/optutil.ts\nAuto-merging src/sim/types.ts\nAuto-merging src/sim/wildlife.ts\nCONFLICT (content): Merge conflict in src/sim/wildlife.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging src/styles.css\nAuto-merging src/ui/person.ts\nCONFLICT (content): Merge conflict in src/ui/person.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593",
+      "ancestor": true,
+      "counts": "448\t0"
+    },
+    {
+      "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57",
+      "ancestor": true,
+      "counts": "342\t0"
+    },
+    {
+      "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+      "ancestor": false,
+      "counts": "306\t3",
+      "base": "39c3027304d48ec3cd3d902b55ddc17db1edfd80",
+      "commits": [
+        "f33cd0bf4edce91bf06aec332325c6182022a771 Add winter shelter preparation as rules 34",
+        "fe32828bf4a6c15f5361f4d78807df5a15b2bcea Pin rules 33 continuation reference before winter shelter",
+        "99beb99ca45adfa8250a70e104400a64af4610d2 Restore the death_tally probe from claude/wonderful-hypatia-46pdde"
+      ],
+      "cherry": [
+        "+ 99beb99ca45adfa8250a70e104400a64af4610d2",
+        "+ fe32828bf4a6c15f5361f4d78807df5a15b2bcea",
+        "+ f33cd0bf4edce91bf06aec332325c6182022a771"
+      ],
+      "files": [
+        "M\tCLAUDE.md",
+        "A\tdocs/WINTER_SHELTER.md",
+        "A\tscripts/death_tally.ts",
+        "M\tscripts/lab/lab.ts",
+        "A\tscripts/v33_reference.ts",
+        "M\tsrc/sim/options_work.ts",
+        "M\tsrc/sim/rulesversion.ts",
+        "A\tsrc/sim/winter_shelter.ts",
+        "M\tsrc/sim/world.ts",
+        "A\ttests/helpers/v33ref.ts",
+        "A\ttests/v33_continuation.expected.json",
+        "A\ttests/v33_continuation.test.ts",
+        "A\ttests/winter_shelter.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "476039125c4a953f37785bec5784540a894c29af\nCLAUDE.md\ndocs/WINTER_SHELTER.md\nscripts/lab/lab.ts\nscripts/v33_reference.ts\nsrc/sim/options_work.ts\nsrc/sim/rulesversion.ts\nsrc/sim/winter_shelter.ts\nsrc/sim/world.ts\ntests/helpers/v33ref.ts\ntests/v33_continuation.expected.json\ntests/v33_continuation.test.ts\ntests/winter_shelter.test.ts\n\nAuto-merging CLAUDE.md\nCONFLICT (content): Merge conflict in CLAUDE.md\nAuto-merging docs/WINTER_SHELTER.md\nCONFLICT (add/add): Merge conflict in docs/WINTER_SHELTER.md\nAuto-merging scripts/lab/lab.ts\nCONFLICT (content): Merge conflict in scripts/lab/lab.ts\nAuto-merging scripts/v33_reference.ts\nCONFLICT (add/add): Merge conflict in scripts/v33_reference.ts\nAuto-merging src/sim/options_work.ts\nCONFLICT (content): Merge conflict in src/sim/options_work.ts\nAuto-merging src/sim/rulesversion.ts\nCONFLICT (content): Merge conflict in src/sim/rulesversion.ts\nAuto-merging src/sim/winter_shelter.ts\nCONFLICT (add/add): Merge conflict in src/sim/winter_shelter.ts\nAuto-merging src/sim/world.ts\nCONFLICT (content): Merge conflict in src/sim/world.ts\nAuto-merging tests/helpers/v33ref.ts\nCONFLICT (add/add): Merge conflict in tests/helpers/v33ref.ts\nAuto-merging tests/v33_continuation.expected.json\nCONFLICT (add/add): Merge conflict in tests/v33_continuation.expected.json\nAuto-merging tests/v33_continuation.test.ts\nCONFLICT (add/add): Merge conflict in tests/v33_continuation.test.ts\nAuto-merging tests/winter_shelter.test.ts\nCONFLICT (add/add): Merge conflict in tests/winter_shelter.test.ts",
+      "mergeError": ""
+    },
+    {
+      "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+      "ancestor": false,
+      "counts": "541\t1",
+      "base": "b6636b481d99b34d85114b0e939757871ad841b6",
+      "commits": [
+        "f82d42def7c975ef3b8193de27b12823e15a3c62 Demote a recently failed place in rich worlds, and say why."
+      ],
+      "cherry": [
+        "+ f82d42def7c975ef3b8193de27b12823e15a3c62"
+      ],
+      "files": [
+        "M\tsrc/sim/decision.ts",
+        "A\ttests/scar.test.ts"
+      ],
+      "mergeExit": 1,
+      "mergeOutput": "472d397f2c696601c72cfa58b27e0ee7ba809234\nsrc/sim/decision.ts\n\nAuto-merging src/sim/decision.ts\nCONFLICT (content): Merge conflict in src/sim/decision.ts",
+      "mergeError": ""
+    }
+  ]
+}

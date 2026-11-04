@@ -1,0 +1,70 @@
+{
+ "mature109_large_meadow_day45": {
+  "rules": 109,
+  "tick": 108000,
+  "alive": 110,
+  "tools": 263,
+  "toolReportOk": true,
+  "problems": [],
+  "conservationOk": true,
+  "diffs": []
+ },
+ "forest107_day18_first_invalid": {
+  "rules": 107,
+  "tick": 43440,
+  "alive": 29,
+  "tools": 24,
+  "toolReportOk": true,
+  "problems": [],
+  "conservationOk": true,
+  "diffs": []
+ },
+ "forest_batch_rejected_43326": {
+  "rules": 107,
+  "tick": 43326,
+  "alive": 29,
+  "tools": 24,
+  "toolReportOk": true,
+  "problems": [],
+  "conservationOk": true,
+  "diffs": []
+ },
+ "current113_river_45": {
+  "rules": 113,
+  "tick": 88200,
+  "alive": 19,
+  "tools": 55,
+  "toolReportOk": true,
+  "problems": [],
+  "conservationOk": true,
+  "diffs": []
+ },
+ "current113_meadow_45": {
+  "rules": 113,
+  "tick": 103440,
+  "alive": 25,
+  "tools": 51,
+  "toolReportOk": true,
+  "problems": [],
+  "conservationOk": true,
+  "diffs": []
+ },
+ "current113_forest_45": {
+  "rules": 113,
+  "tick": 108000,
+  "alive": 5,
+  "tools": 45,
+  "toolReportOk": false,
+  "problems": [
+   "tool 946 (axe) held by 19929, which holds nothing",
+   "tool 2451 (pick) held by 19929, which holds nothing",
+   "tool 3365 (basket) held by 19575, which holds nothing",
+   "tool 5451 (hoe) held by 19595, which holds nothing",
+   "tool 5562 (basket) held by 19587, which holds nothing",
+   "tool 15170 (basket) held by 19595, which holds nothing",
+   "tool 17756 (basket) held by 19929, which holds nothing"
+  ],
+  "conservationOk": true,
+  "diffs": []
+ }
+}

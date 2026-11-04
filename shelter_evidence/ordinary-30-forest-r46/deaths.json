@@ -1,0 +1,149 @@
+[
+  {
+    "tick": 26135,
+    "name": "Bram",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 30726,
+    "name": "Silas",
+    "cause": "injuries",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 53308,
+    "name": "Cole",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 53847,
+    "name": "Viktor",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 53914,
+    "name": "Uri",
+    "cause": "fever",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54021,
+    "name": "Dov",
+    "cause": "fever",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54023,
+    "name": "Zeke",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54145,
+    "name": "Nico",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54267,
+    "name": "Greta",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54284,
+    "name": "Kaia",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54389,
+    "name": "Thea",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54560,
+    "name": "Hal",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54815,
+    "name": "Ada",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54922,
+    "name": "Tomas",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 54963,
+    "name": "Hana",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55018,
+    "name": "Petra",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55111,
+    "name": "Edda",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55158,
+    "name": "Delia",
+    "cause": "exposure",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55492,
+    "name": "Arlo",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55498,
+    "name": "Lena",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  },
+  {
+    "tick": 55952,
+    "name": "Yusuf",
+    "cause": "hunger",
+    "home": null,
+    "cond": null
+  }
+]

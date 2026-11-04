@@ -1,0 +1,16 @@
+﻿{
+    "node":  "v24.19.0",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-integrate",
+    "secondsBudgetPerRun":  120,
+    "daysPerRun":  1,
+    "seeds":  [
+                  "forest"
+              ],
+    "commit":  "57f4ca2f1144ac4253ed629ec1f569886c0ab4f3",
+    "note":  "Observers repeat each seed; they are not independent seeds. Source hashes are in each successful report.",
+    "checks":  [
+                   "production",
+                   "households",
+                   "promises"
+               ]
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "tick": 782,
+    "person": 908,
+    "name": "Lena",
+    "item": "stone",
+    "chosen": 911,
+    "disabled": 911,
+    "changed": false,
+    "reason": "I trust Ada; they may still need it themselves · make a pick and the stone is short +17 · they are carrying more than one stone +4 · walking −3",
+    "trust": 21.95723769492068,
+    "history": [
+      {
+        "tick": 972,
+        "text": "Ada warned me about a wolf"
+      }
+    ]
+  },
+  {
+    "tick": 2015,
+    "person": 929,
+    "name": "Isla",
+    "item": "stone",
+    "chosen": 920,
+    "disabled": 911,
+    "changed": true,
+    "reason": "I trust Yusuf; they may still need it themselves · make an axe and the stone is short +21 · they have some and are not busy +4 · walking −2",
+    "trust": 32.2400492563084,
+    "history": [
+      {
+        "tick": 3188,
+        "text": "helped build our hut"
+      },
+      {
+        "tick": 10072,
+        "text": "saw Yusuf quarrel"
+      }
+    ]
+  },
+  {
+    "tick": 2034,
+    "person": 939,
+    "name": "Maren",
+    "item": "stone",
+    "chosen": 923,
+    "disabled": 923,
+    "changed": false,
+    "reason": "I trust Faye; they may still need it themselves · make a pick and the stone is short +20 · they have some and are not busy +4 · walking −1",
+    "trust": 29.30043390547136,
+    "history": [
+      {
+        "tick": 111,
+        "text": "worked alongside Faye"
+      },
+      {
+        "tick": 230,
+        "text": "saw Faye quarrel"
+      },
+      {
+        "tick": 12841,
+        "text": "saw Faye help Kaia"
+      }
+    ]
+  },
+  {
+    "tick": 2207,
+    "person": 940,
+    "name": "Dov",
+    "item": "stone",
+    "chosen": 923,
+    "disabled": 923,
+    "changed": false,
+    "reason": "I am wary of Faye, but can still ask · make a pick and the stone is short +19 · they have some and are not busy +4 · walking −1",
+    "trust": 3.6867089285540775,
+    "history": [
+      {
+        "tick": 12841,
+        "text": "saw Faye help Kaia"
+      }
+    ]
+  },
+  {
+    "tick": 12121,
+    "kind": "executed-transfer",
+    "from": "person:931",
+    "to": "person:937",
+    "item": "fish",
+    "n": 1,
+    "reason": "gift on request"
+  }
+]

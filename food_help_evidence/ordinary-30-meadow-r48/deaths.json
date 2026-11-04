@@ -1,0 +1,18 @@
+[
+  {
+    "tick": 69978,
+    "id": 1004,
+    "name": "Felix",
+    "cause": "old age",
+    "age": 77,
+    "packFoodBefore": 0,
+    "invBefore": {
+      "wood": 3
+    },
+    "hungerBefore": 18.669999999991756,
+    "activityBefore": "gather:Gathering wild grain",
+    "homeFood": null,
+    "membersWithSpare": 0,
+    "members": []
+  }
+]

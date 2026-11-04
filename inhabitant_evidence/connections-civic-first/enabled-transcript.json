@@ -1,0 +1,3059 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "stored-material-plan",
+    "settings": {
+      "seed": "stored-material-plan",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 42
+    },
+    "personId": 2,
+    "personName": "Ben",
+    "startTick": 700,
+    "startHash": "2aaa263b",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "restricted-beneficiary",
+      "kind": "stub",
+      "config": {}
+    },
+    "budget": {
+      "maxCallsPerDay": 400,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 60000,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {},
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 700,
+      "attempt": 0,
+      "observationHash": "39e7ed62",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 700,
+          "day": 1,
+          "clock": "14:12",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 100,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 100,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 100,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 99,
+              "state": "ok"
+            },
+            "social": {
+              "value": 70,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2
+          },
+          "load": {
+            "used": 4,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 50.5,
+            "y": 42.5
+          },
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 13 tiles north-west (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": null,
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 49,
+              "y": 43,
+              "distance": 2,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Friend"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 2,
+              "direction": "north-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 4
+              },
+              "condition": 100
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 8,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 12,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 13,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "7 world h ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "just now",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on a public project I support storehouse",
+            "need": null,
+            "eta": "1 world h 46 min",
+            "target": "storehouse site 8 tiles south (seen just now)"
+          },
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish a public project I support storehouse",
+            "need": null,
+            "eta": "58 world min",
+            "target": "storehouse site 8 tiles south (seen just now)"
+          },
+          {
+            "key": "collect:7:stone",
+            "kind": "withdraw",
+            "label": "Collect 2 stone from the storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "24 world min",
+            "target": "storehouse 2 tiles north-east (seen just now)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "2 world h 50 min",
+            "target": "tree 10 tiles south-east (seen 7 world h ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "3 world h 2 min",
+            "target": "tree 12 tiles south-east (seen 7 world h ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 36 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get stone for a public project I support storehouse",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "get 1 more stone for the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "just now"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"collect:7:stone\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "collect:7:stone",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 710,
+      "attempt": 0,
+      "observationHash": "e093633f",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 710,
+          "day": 1,
+          "clock": "14:18",
+          "phase": "afternoon",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 19
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 100,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 100,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 100,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 90,
+              "state": "ok"
+            },
+            "social": {
+              "value": 70,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 50.4,
+            "y": 42.6
+          },
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 13 tiles north-west (100% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Collecting 2 stone",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 709
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Collect 2 stone from the storehouse",
+            "when": "6 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 49,
+              "y": 43,
+              "distance": 1,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Friend"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 2,
+              "direction": "north-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 100
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 8,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 10,
+              "direction": "south-east",
+              "seen": "7 world h 6 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 12,
+              "direction": "south-east",
+              "seen": "7 world h 6 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 13,
+              "direction": "north-west",
+              "seen": "6 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 100
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 14,
+              "direction": "south-east",
+              "seen": "7 world h 6 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "1 world min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "6 world min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on a public project I support storehouse",
+            "need": null,
+            "eta": "1 world h 52 min",
+            "target": "storehouse site 8 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish a public project I support storehouse",
+            "need": null,
+            "eta": "1 world h 4 min",
+            "target": "storehouse site 8 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "1 world h 36 min",
+            "target": "tree 10 tiles south-east (seen 7 world h 6 min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "1 world h 49 min",
+            "target": "tree 12 tiles south-east (seen 7 world h 6 min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 5 min",
+            "target": "storehouse 2 tiles north-east (seen 1 world min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 56 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get stone for a public project I support storehouse",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "6 world min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 2,
+      "tick": 884,
+      "attempt": 0,
+      "observationHash": "56358562",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 884,
+          "day": 1,
+          "clock": "16:02",
+          "phase": "evening",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 18
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 94,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 93,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 93,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 100,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 66,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 36.4,
+            "y": 43.2
+          },
+          "mood": 8,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 5 tiles east (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 883
+          },
+          "lastInteraction": null,
+          "lastChoice": {
+            "label": "Potter about near home",
+            "when": "1 world h 44 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 5,
+              "direction": "east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 15,
+              "direction": "south-east",
+              "seen": "53 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 100
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "1 world h 27 min ago",
+              "source": "seen",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 24,
+              "direction": "south-east",
+              "seen": "8 world h 50 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 26,
+              "direction": "south-east",
+              "seen": "8 world h 50 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 28,
+              "direction": "south-east",
+              "seen": "8 world h 50 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 49,
+              "y": 43,
+              "when": "46 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world h 45 min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "1 world h 45 min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "1 world h 50 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on a public project I support storehouse",
+            "need": null,
+            "eta": "3 world h 14 min",
+            "target": "storehouse site 20 tiles south-east (seen 1 world h 27 min ago)"
+          },
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish a public project I support storehouse",
+            "need": null,
+            "eta": "2 world h 26 min",
+            "target": "storehouse site 20 tiles south-east (seen 1 world h 27 min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "3 world h 8 min",
+            "target": "tree 24 tiles south-east (seen 8 world h 50 min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 28 min",
+            "target": "lean-to 5 tiles east (seen 1 world min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for a public project I support storehouse",
+            "goal": "for a public project I support storehouse",
+            "need": null,
+            "eta": "3 world h 21 min",
+            "target": "tree 26 tiles south-east (seen 8 world h 50 min ago)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 20 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Wander down to the square",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get stone for a public project I support storehouse",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "1 world h 50 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 3,
+      "tick": 1078,
+      "attempt": 0,
+      "observationHash": "256c3a94",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1078,
+          "day": 1,
+          "clock": "17:58",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 15
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 89,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 85,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 85,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 95,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 85,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 45.2,
+            "y": 42.2
+          },
+          "mood": 8,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 8 tiles north (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Strolling about the square",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1077
+          },
+          "lastInteraction": {
+            "purpose": "recruit",
+            "outcome": "promised",
+            "detail": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+            "when": "24 world min ago",
+            "t": 1038
+          },
+          "lastChoice": {
+            "label": "Wander down to the square",
+            "when": "1 world h 56 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 49.9,
+              "y": 44.6,
+              "distance": 5,
+              "direction": "south",
+              "looks": [],
+              "doing": "building",
+              "carrying": [],
+              "talking": false,
+              "relation": "Friend"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 6,
+              "direction": "south-east",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 99
+            },
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 8,
+              "direction": "north",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 12,
+              "direction": "south",
+              "seen": "1 world h 14 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 16,
+              "direction": "south-east",
+              "seen": "10 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 17,
+              "direction": "south-east",
+              "seen": "10 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 19,
+              "direction": "south-east",
+              "seen": "10 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "label": "Friend",
+              "affinity": 42,
+              "trust": 11,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "24 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "help with building",
+              "status": "promised",
+              "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+              "when": "1 world h ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Help Ada build",
+              "status": "active",
+              "detail": "",
+              "due": "in 17 world h 13 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "47 world min ago",
+              "text": "Agreed to help Ada with the building.",
+              "kind": "social",
+              "t": 1000
+            },
+            {
+              "when": "47 world min ago",
+              "text": "Ada told me about a building site a short walk south-east of camp.",
+              "kind": "info",
+              "t": 1000
+            },
+            {
+              "when": "3 world h 41 min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "3 world h 41 min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "3 world h 47 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 21 min",
+            "target": "storehouse site 12 tiles south (seen 1 world h 14 min ago)"
+          },
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish the storehouse I promised to help with",
+            "need": null,
+            "eta": "1 world h 33 min",
+            "target": "storehouse site 12 tiles south (seen 1 world h 14 min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 9 min",
+            "target": "tree 16 tiles south-east (seen 10 world h 47 min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 22 min",
+            "target": "tree 17 tiles south-east (seen 10 world h 47 min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 33 min",
+            "target": "storehouse 6 tiles south-east (seen just now)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "3 world h 8 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get stone for the storehouse I promised to help with",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "3 world h 47 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 4,
+      "tick": 1126,
+      "attempt": 0,
+      "observationHash": "24483337",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1126,
+          "day": 1,
+          "clock": "18:27",
+          "phase": "dusk",
+          "light": "dim",
+          "weather": "Clear",
+          "tempC": 14
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 87,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 83,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 83,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 92,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 84,
+              "state": "ok"
+            }
+          },
+          "aspiration": "hopes for a store that would see them through a lean season (67% there)",
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.1,
+            "y": 40.4
+          },
+          "mood": 8,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 5 tiles north-west (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1125
+          },
+          "lastInteraction": {
+            "purpose": "recruit",
+            "outcome": "promised",
+            "detail": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+            "when": "53 world min ago",
+            "t": 1038
+          },
+          "lastChoice": {
+            "label": "Potter about near home",
+            "when": "29 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 5,
+              "direction": "north-west",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 8,
+              "direction": "south-east",
+              "seen": "4 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 99
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 15,
+              "direction": "south",
+              "seen": "1 world h 43 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 18,
+              "direction": "south-east",
+              "seen": "11 world h 16 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "11 world h 16 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "11 world h 16 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "label": "Friend",
+              "affinity": 42,
+              "trust": 11,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "53 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 51,
+              "y": 45,
+              "when": "23 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "help with building",
+              "status": "promised",
+              "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+              "when": "1 world h 29 min ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Help Ada build",
+              "status": "active",
+              "detail": "",
+              "due": "in 16 world h 44 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "19 world min ago",
+              "text": "What I hope for: a store that would see them through a lean season.",
+              "kind": "life",
+              "t": 1094
+            },
+            {
+              "when": "1 world h 16 min ago",
+              "text": "Agreed to help Ada with the building.",
+              "kind": "social",
+              "t": 1000
+            },
+            {
+              "when": "1 world h 16 min ago",
+              "text": "Ada told me about a building site a short walk south-east of camp.",
+              "kind": "info",
+              "t": 1000
+            },
+            {
+              "when": "4 world h 10 min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "4 world h 10 min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "4 world h 16 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 39 min",
+            "target": "storehouse site 15 tiles south (seen 1 world h 43 min ago)"
+          },
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish the storehouse I promised to help with",
+            "need": null,
+            "eta": "1 world h 51 min",
+            "target": "storehouse site 15 tiles south (seen 1 world h 43 min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 26 min",
+            "target": "tree 18 tiles south-east (seen 11 world h 16 min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 39 min",
+            "target": "tree 20 tiles south-east (seen 11 world h 16 min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 27 min",
+            "target": "lean-to 5 tiles north-west (seen just now)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "3 world h 1 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Get stone for the storehouse I promised to help with",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "4 world h 16 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 5,
+      "tick": 1178,
+      "attempt": 0,
+      "observationHash": "b56eb98e",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1178,
+          "day": 1,
+          "clock": "18:58",
+          "phase": "dusk",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 14
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 86,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 81,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 81,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 89,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 78,
+              "state": "ok"
+            },
+            "social": {
+              "value": 83,
+              "state": "ok"
+            }
+          },
+          "aspiration": "hopes for a store that would see them through a lean season (67% there)",
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.8,
+            "y": 42.5
+          },
+          "mood": 7,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 5 tiles north (99% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1177
+          },
+          "lastInteraction": {
+            "purpose": "recruit",
+            "outcome": "promised",
+            "detail": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+            "when": "1 world h 24 min ago",
+            "t": 1038
+          },
+          "lastChoice": {
+            "label": "Potter about near home",
+            "when": "31 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 5,
+              "direction": "north",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 99
+            },
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 9,
+              "direction": "south-east",
+              "seen": "35 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 99
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 15,
+              "direction": "south-east",
+              "seen": "2 world h 14 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 19,
+              "direction": "south-east",
+              "seen": "11 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 21,
+              "direction": "south-east",
+              "seen": "11 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 23,
+              "direction": "south-east",
+              "seen": "11 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "label": "Friend",
+              "affinity": 42,
+              "trust": 11,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "1 world h 24 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 51,
+              "y": 45,
+              "when": "55 world min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "help with building",
+              "status": "promised",
+              "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+              "when": "2 world h ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Help Ada build",
+              "status": "active",
+              "detail": "",
+              "due": "in 16 world h 13 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "50 world min ago",
+              "text": "What I hope for: a store that would see them through a lean season.",
+              "kind": "life",
+              "t": 1094
+            },
+            {
+              "when": "1 world h 47 min ago",
+              "text": "Agreed to help Ada with the building.",
+              "kind": "social",
+              "t": 1000
+            },
+            {
+              "when": "1 world h 47 min ago",
+              "text": "Ada told me about a building site a short walk south-east of camp.",
+              "kind": "info",
+              "t": 1000
+            },
+            {
+              "when": "4 world h 41 min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "4 world h 41 min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "4 world h 47 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h",
+            "target": "storehouse site 15 tiles south-east (seen 2 world h 14 min ago)"
+          },
+          {
+            "key": "sleep:6",
+            "kind": "sleep",
+            "label": "Sleep at my lean-to",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "1 world h 1 min",
+            "target": "lean-to 5 tiles north (seen 1 world min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 31 min",
+            "target": "lean-to 5 tiles north (seen 1 world min ago)"
+          },
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 48 min",
+            "target": "storehouse site 15 tiles south-east (seen 2 world h 14 min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 41 min",
+            "target": "tree 19 tiles south-east (seen 11 world h 47 min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 55 min",
+            "target": "tree 21 tiles south-east (seen 11 world h 47 min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Get stone for the storehouse I promised to help with",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "4 world h 47 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 6,
+      "tick": 1278,
+      "attempt": 0,
+      "observationHash": "bc7c0c57",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 1278,
+          "day": 1,
+          "clock": "19:58",
+          "phase": "dusk",
+          "light": "dark",
+          "weather": "Clear",
+          "tempC": 12
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "adult",
+          "ageYears": 30,
+          "character": "generous, sociable, diligent",
+          "skills": {
+            "forage": 1.03,
+            "fish": 1.23,
+            "wood": 1.8,
+            "stone": 1.23,
+            "build": 0.91,
+            "farm": 0.96,
+            "craft": 1.2,
+            "carpentry": 1.11,
+            "kiln": 1.18,
+            "smith": 1.31,
+            "bake": 0.94
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 83,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 77,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 77,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 82,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 66,
+              "state": "ok"
+            },
+            "social": {
+              "value": 80,
+              "state": "ok"
+            }
+          },
+          "aspiration": "hopes for a store that would see them through a lean season (67% there)",
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "load": {
+            "used": 10,
+            "cap": 12
+          },
+          "spokenFor": {
+            "wood": 2,
+            "stone": 1
+          },
+          "available": {
+            "stone": 1
+          },
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.8,
+            "y": 36.8
+          },
+          "mood": 2,
+          "thoughts": [],
+          "trade": {
+            "kind": "wood",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sedge",
+          "members": [],
+          "home": "lean-to 6 tiles north-west (98% sound when last seen)",
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Pottering about",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 1277
+          },
+          "lastInteraction": {
+            "purpose": "recruit",
+            "outcome": "promised",
+            "detail": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+            "when": "2 world h 24 min ago",
+            "t": 1038
+          },
+          "lastChoice": {
+            "label": "Potter about near home",
+            "when": "1 world h ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 6,
+              "what": "lean-to",
+              "x": 38.5,
+              "y": 38.5,
+              "distance": 6,
+              "direction": "north-west",
+              "seen": "25 world min ago",
+              "source": "seen",
+              "stale": false,
+              "owner": "Sedge",
+              "items": {
+                "berries": 8
+              },
+              "condition": 98
+            },
+            {
+              "id": 7,
+              "what": "storehouse",
+              "x": 51,
+              "y": 41,
+              "distance": 8,
+              "direction": "south",
+              "seen": "1 world h 35 min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "stone": 2
+              },
+              "condition": 99
+            },
+            {
+              "id": 15,
+              "what": "storehouse site",
+              "x": 56,
+              "y": 48,
+              "distance": 17,
+              "direction": "south",
+              "seen": "3 world h 14 min ago",
+              "source": "told by Ada",
+              "stale": false,
+              "missing": {
+                "wood": 10,
+                "stone": 4
+              },
+              "progress": 0
+            },
+            {
+              "id": 8,
+              "what": "tree",
+              "x": 60.5,
+              "y": 44.5,
+              "distance": 18,
+              "direction": "south",
+              "seen": "12 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 9,
+              "what": "tree",
+              "x": 62.5,
+              "y": 44.5,
+              "distance": 20,
+              "direction": "south-east",
+              "seen": "12 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            },
+            {
+              "id": 10,
+              "what": "tree",
+              "x": 64.5,
+              "y": 44.5,
+              "distance": 22,
+              "direction": "south-east",
+              "seen": "12 world h 47 min ago",
+              "source": "seen",
+              "stale": false,
+              "amount": 9
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2,
+            "tree": 3,
+            "building site": 1
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "label": "Friend",
+              "affinity": 42,
+              "trust": 11,
+              "familiarity": 2,
+              "kin": "",
+              "lastMet": "2 world h 24 min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [
+            {
+              "id": 5,
+              "name": "Ada",
+              "x": 51,
+              "y": 45,
+              "when": "1 world h 55 min ago"
+            }
+          ],
+          "worries": [],
+          "requests": [
+            {
+              "direction": "asked of me",
+              "other": "Ada",
+              "what": "help with building",
+              "status": "promised",
+              "note": "Ben supports Ada coordinating and will help build; remembers benefiting from their earlier shared storehouse",
+              "when": "3 world h ago"
+            }
+          ],
+          "promises": [
+            {
+              "text": "Help Ada build",
+              "status": "active",
+              "detail": "",
+              "due": "in 15 world h 13 min"
+            }
+          ]
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world h 50 min ago",
+              "text": "What I hope for: a store that would see them through a lean season.",
+              "kind": "life",
+              "t": 1094
+            },
+            {
+              "when": "2 world h 47 min ago",
+              "text": "Agreed to help Ada with the building.",
+              "kind": "social",
+              "t": 1000
+            },
+            {
+              "when": "2 world h 47 min ago",
+              "text": "Ada told me about a building site a short walk south-east of camp.",
+              "kind": "info",
+              "t": 1000
+            },
+            {
+              "when": "5 world h 41 min ago",
+              "text": "Took 2 items from storage.",
+              "kind": "work",
+              "t": 709
+            },
+            {
+              "when": "5 world h 41 min ago",
+              "text": "The shared storehouse from project #14 helped me: I collected 2 stone. I remember who coordinated it.",
+              "kind": "social",
+              "t": 709
+            },
+            {
+              "when": "5 world h 47 min ago",
+              "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+              "kind": "work",
+              "t": 700
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "haul:15",
+            "kind": "haul",
+            "label": "Deliver materials to the storehouse site",
+            "goal": "to help finish the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 11 min",
+            "target": "storehouse site 17 tiles south (seen 3 world h 14 min ago)"
+          },
+          {
+            "key": "sleep:6",
+            "kind": "sleep",
+            "label": "Sleep at my lean-to",
+            "goal": "to recover energy",
+            "need": "energy",
+            "eta": "1 world h 4 min",
+            "target": "lean-to 6 tiles north-west (seen 25 world min ago)"
+          },
+          {
+            "key": "craft:axe",
+            "kind": "craft",
+            "label": "Make an axe",
+            "goal": "to work faster",
+            "need": null,
+            "eta": "1 world h 34 min",
+            "target": "lean-to 6 tiles north-west (seen 25 world min ago)"
+          },
+          {
+            "key": "gather:8",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 39 min",
+            "target": "tree 18 tiles south (seen 12 world h 47 min ago)"
+          },
+          {
+            "key": "gather:9",
+            "kind": "gather",
+            "label": "Chopping wood for the storehouse I promised to help with",
+            "goal": "for the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 53 min",
+            "target": "tree 20 tiles south-east (seen 12 world h 47 min ago)"
+          },
+          {
+            "key": "build:15",
+            "kind": "build",
+            "label": "Build the storehouse",
+            "goal": "to work on the storehouse I promised to help with",
+            "need": null,
+            "eta": "2 world h 59 min",
+            "target": "storehouse site 17 tiles south (seen 3 world h 14 min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Stay in shelter until it is light",
+            "reason": "not at a shelter",
+            "target": null
+          },
+          {
+            "label": "Get stone for the storehouse I promised to help with",
+            "reason": "does not know any rock outcrop worth visiting",
+            "target": null
+          },
+          {
+            "label": "Lay out a hut",
+            "reason": "does not know where to break stone",
+            "target": null
+          }
+        ],
+        "plans": [
+          {
+            "goal": "make an axe",
+            "kind": "tool",
+            "status": "active",
+            "step": "make the axe",
+            "wants": {
+              "wood": 2,
+              "stone": 1
+            },
+            "blocked": "",
+            "reason": "it would make the work easier, and the makings are short",
+            "since": "5 world h 47 min ago"
+          }
+        ]
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"wander\",\"why\":\"Collect offered materials for my work, then take spare time while neighbours act.\"}",
+        "reason": null,
+        "latencyMs": 0
+      },
+      "proposal": {
+        "choose": "wander",
+        "why": "Collect offered materials for my work, then take spare time while neighbours act."
+      },
+      "problem": null,
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 700,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "39e7ed62",
+      "worldHash": "39d8c399",
+      "choice": {
+        "kind": "pick",
+        "key": "collect:7:stone"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "collect:7:stone",
+        "activityId": 18,
+        "label": "Collecting 2 stone"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 710,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "e093633f",
+      "worldHash": "f20e49e0",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 19,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 884,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "56358562",
+      "worldHash": "b977c621",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 20,
+        "label": "Strolling about the square"
+      }
+    },
+    {
+      "seq": 3,
+      "tick": 1078,
+      "attempt": 0,
+      "ask": 3,
+      "observationHash": "256c3a94",
+      "worldHash": "1d5010cc",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 30,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 4,
+      "tick": 1126,
+      "attempt": 0,
+      "ask": 4,
+      "observationHash": "24483337",
+      "worldHash": "0ecf41e1",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 32,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 5,
+      "tick": 1178,
+      "attempt": 0,
+      "ask": 5,
+      "observationHash": "b56eb98e",
+      "worldHash": "b13e8e73",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 33,
+        "label": "Pottering about"
+      }
+    },
+    {
+      "seq": 6,
+      "tick": 1278,
+      "attempt": 0,
+      "ask": 6,
+      "observationHash": "bc7c0c57",
+      "worldHash": "cbfc0c54",
+      "choice": {
+        "kind": "pick",
+        "key": "wander"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "wander",
+        "activityId": 36,
+        "label": "Pottering about"
+      }
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 18,
+      "label": "Collecting 2 stone",
+      "tick": 710,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 19,
+      "label": "Pottering about",
+      "tick": 884,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 20,
+      "label": "Strolling about the square",
+      "tick": 1078,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 3,
+      "activityId": 30,
+      "label": "Pottering about",
+      "tick": 1126,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 4,
+      "activityId": 32,
+      "label": "Pottering about",
+      "tick": 1178,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 5,
+      "activityId": 33,
+      "label": "Pottering about",
+      "tick": 1278,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 6,
+      "activityId": 36,
+      "label": "Pottering about",
+      "tick": 1350,
+      "outcome": "unfinished",
+      "detail": "the window ended while this was still under way"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 701,
+      "events": []
+    },
+    {
+      "call": 1,
+      "tick": 711,
+      "events": []
+    },
+    {
+      "call": 2,
+      "tick": 885,
+      "events": []
+    },
+    {
+      "call": 3,
+      "tick": 1079,
+      "events": [
+        {
+          "tick": 1000,
+          "kind": "social",
+          "text": "Ben agreed to help Ada build."
+        }
+      ]
+    },
+    {
+      "call": 4,
+      "tick": 1127,
+      "events": []
+    },
+    {
+      "call": 5,
+      "tick": 1179,
+      "events": []
+    },
+    {
+      "call": 6,
+      "tick": 1279,
+      "events": []
+    }
+  ],
+  "end": {
+    "tick": 1350,
+    "hash": "aba0ee4a",
+    "died": false,
+    "calls": 7,
+    "applied": 7,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 7,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 50165,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

@@ -1,0 +1,5319 @@
+[
+  {
+    "tick": 19200,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 35,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=43",
+      "Picking berries=34"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Abel"
+  },
+  {
+    "tick": 19200,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=47",
+      "Picking berries=47"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 19200,
+    "id": 1128,
+    "name": "Tomas",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=67",
+      "Go and drink at the water=62"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 19200,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 22,
+    "pack": 0,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Run to safety (away from it)=117",
+      "Fishing=49"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 19440,
+    "id": 1128,
+    "name": "Tomas",
+    "hunger": 24,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=52",
+      "Sit down and rest=49"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 19440,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 13,
+    "pack": 0,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Run to safety (away from it)=110",
+      "Picking berries=56"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 19680,
+    "id": 1128,
+    "name": "Tomas",
+    "hunger": 17,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=51",
+      "Sit down and rest=39"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 19680,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 17,
+    "pack": 1,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=85",
+      "Picking berries=63"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 21600,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=43",
+      "Picking berries=43"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 22080,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 34,
+    "pack": 4,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Picking fruit=45",
+      "Picking fruit=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Gathering wild grain:believes it is empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 22320,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 25,
+    "pack": 8,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=76",
+      "Picking fruit=52"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 23040,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 33,
+    "pack": 4,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=59",
+      "Go and drink at the water=57"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23280,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 33,
+    "pack": 1,
+    "homeFood": 4,
+    "home": "hut",
+    "top": [
+      "Warm up at the fire=80",
+      "Shelter at the hut=71"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23280,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 30,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=70",
+      "Go and drink at the water=48"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23280,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 31,
+    "pack": 4,
+    "homeFood": 6,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=65",
+      "Sleep at my hut=64"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23280,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 26,
+    "pack": 4,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=67",
+      "Eat from the home store=66"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 23280,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 34,
+    "pack": 2,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Warm up at the fire=71",
+      "Shelter at the hut=58"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 25,
+    "pack": 1,
+    "homeFood": 4,
+    "home": "hut",
+    "top": [
+      "Warm up at the fire=71",
+      "Shelter at the hut=63"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 23,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=63",
+      "Warm up at the fire=62"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 23520,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 33,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=87",
+      "Eat what I am carrying=67"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 2,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=65",
+      "Shelter at the hut=59"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23520,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 19,
+    "pack": 4,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=83",
+      "Eat from the home store=74"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23520,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 27,
+    "pack": 2,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=62",
+      "Warm up at the fire=62"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23520,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 32,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=66",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 18,
+    "pack": 1,
+    "homeFood": 4,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=84",
+      "Eat from the home store=74"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23760,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=63",
+      "Go and drink at the water=55"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 16,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=72",
+      "Go and drink at the water=71"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 26,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=75",
+      "Warm up at the fire=62"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 23760,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 21,
+    "pack": 2,
+    "homeFood": 15,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=72",
+      "Eat from the home store=71"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 23760,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 25,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=58",
+      "Fishing=51"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 35,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=49",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 32,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=59",
+      "Picking berries=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 27,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=65",
+      "Go and drink at the water=62"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24000,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 8,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=71",
+      "Go and drink at the water=69"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 24000,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 19,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=83",
+      "Fishing=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24240,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 27,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=55",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 24240,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 35,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=43",
+      "Picking berries=31"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 24240,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=52",
+      "Fishing=39"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 24240,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 28,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Chat with Petra=44",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 24480,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Gathering wild grain=42",
+      "Picking berries=36"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 24480,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 22,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=55",
+      "Picking berries=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 24480,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 21,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Gathering wild grain=58",
+      "Go and drink at the water=54"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 24720,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 27,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=50",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 24720,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 13,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=89",
+      "Fishing=67"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 24720,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 36,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Chat with Cole=55",
+      "Chat with Zora=51"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 24960,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 32,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=40",
+      "Picking berries=39"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Ben"
+  },
+  {
+    "tick": 24960,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 33,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=67",
+      "Sit down and rest=54"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 25200,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 26,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=43"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 25440,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 29,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Sleep at my lean-to=67",
+      "Bring berries to Viktor=60"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 25440,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 32,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=55",
+      "Go and drink at the water=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 25440,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 33,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Ask Alma for food=48",
+      "Ask Viktor for food=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 25680,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 25,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Bring berries to Viktor=66",
+      "Bring berries to Theo=64"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 25680,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 25,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=64",
+      "Go and drink at the water=59"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 25680,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=45",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 25920,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 21,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Take berries to Theo as promised=61",
+      "Take berries to Viktor as promised=61"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 25920,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 19,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=83",
+      "Warm up at the fire=74"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 25920,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=76",
+      "Gathering wild grain=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 25920,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 1,
+    "home": "lean_to",
+    "top": [
+      "Bring berries to Ivo=71",
+      "Warm up at the fire=65"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 25920,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Chat with Cole=74",
+      "Warm up at the fire=69"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 26160,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 17,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=85",
+      "Take berries to Viktor as promised=61"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 26160,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 35,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=75",
+      "Go and drink at the water=73"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by the fire"
+  },
+  {
+    "tick": 26160,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 26,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Chat with Cole=69",
+      "Chat with Petra=68"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 26160,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 32,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=68",
+      "Picking berries=50"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the lean-to"
+  },
+  {
+    "tick": 26160,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 31,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=47",
+      "Gathering wild grain=42"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 26400,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 24,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Warm up at the fire=58",
+      "Picking berries=48"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 26640,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 18,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=58"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 26880,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Sit down and rest=49",
+      "Gathering wild grain=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 26880,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 34,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=43",
+      "Picking berries=42"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 27120,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 35,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Ask Faye for food=45",
+      "Ask Eli for food=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Basil"
+  },
+  {
+    "tick": 27360,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 34,
+    "pack": 4,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Ask Eli for food=47",
+      "Ask Nico for food=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 27360,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Run to safety (other people)=115",
+      "Ask Mira for food=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Emre"
+  },
+  {
+    "tick": 27600,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 27,
+    "pack": 4,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Gathering wild grain=44",
+      "Fishing=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 27600,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 4,
+    "home": "lean_to",
+    "top": [
+      "Gathering wild grain=51",
+      "Gathering wild grain=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 27600,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Sleep at my lean-to=38",
+      "Picking berries=36"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Zora"
+  },
+  {
+    "tick": 27840,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 32,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Take fish to Theo as promised=62",
+      "Go and drink at the water=57"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 27840,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 22,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Sleep at my lean-to=60",
+      "Picking berries=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 27840,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Fishing=47",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 28080,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 28,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Go and drink at the water=63",
+      "Take fish to Theo as promised=62"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28080,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 18,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=83",
+      "Picking berries=58"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28080,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 24,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Sleep at my lean-to=72",
+      "Fishing=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28080,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=64",
+      "Sleep at my hut=60"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28320,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 32,
+    "pack": 5,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Take berries to Theo as promised=61",
+      "Take berries to Theo as promised=61"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28320,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 23,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Bring fish to Viktor=84",
+      "Take fish to Theo as promised=63"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 28320,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 15,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=87",
+      "Picking berries=61"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28320,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 19,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=83",
+      "Sleep at my lean-to=69"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28320,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 28,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=69",
+      "Go and drink at the water=63"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28560,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 15,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Eat what I am carrying=88",
+      "Bring berries to Ivo=71"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 28560,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 24,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=75",
+      "Go and drink at the water=69"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 48000,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 33,
+    "pack": 4,
+    "homeFood": 7,
+    "home": "hut",
+    "top": [
+      "Ask Faye for food=48",
+      "Ask Lena for food=48"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 48240,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 27,
+    "pack": 4,
+    "homeFood": 7,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=64",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "eat_store:Eating at home"
+  },
+  {
+    "tick": 48480,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 34,
+    "pack": 3,
+    "homeFood": 16,
+    "home": "hut",
+    "top": [
+      "Picking berries=47",
+      "Eat from the home store=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 415 ticks ago (nothing left)"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 48960,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 35,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=68",
+      "Eat from the granary=51"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 49200,
+    "id": 1112,
+    "name": "Ben",
+    "hunger": 28,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=66",
+      "Eat from the granary=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 49200,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 35,
+    "pack": 6,
+    "homeFood": 1,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=65",
+      "Eat from the home store=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 49200,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Fishing=51",
+      "Picking berries=48"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 344 ticks ago (nothing left)",
+      "Gathering wild grain:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 49200,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 32,
+    "pack": 2,
+    "homeFood": 20,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=60",
+      "Shelter at the hut=58"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 49200,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 32,
+    "pack": 3,
+    "homeFood": 14,
+    "home": "hut",
+    "top": [
+      "Go to the feast at the hall=63",
+      "Shelter at the hut=63"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 49440,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=69",
+      "Sleep at my lean-to=51"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 49440,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 21,
+    "pack": 1,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Run to safety (away from it)=123",
+      "Eat what I am carrying=81"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Gathering wild grain:believes it is empty"
+    ],
+    "activity": "flee:Running from the wolf toward away from it"
+  },
+  {
+    "tick": 49680,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 30,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=56",
+      "Picking berries=51"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 49680,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 36,
+    "pack": 3,
+    "homeFood": 2,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=64",
+      "Eat from the home store=56"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 49920,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Take berries to Zora as promised=51",
+      "Shelter at the hut=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 49920,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 34,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Take berries to Zora as promised=63",
+      "Bring berries to Theo=57"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 49920,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 26,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=57",
+      "Picking berries=55"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 50160,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 25,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=68",
+      "Take berries to Zora as promised=63"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 50160,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 27,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Take berries to Zora as promised=63",
+      "Bring berries to Theo=62"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 50160,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 21,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=71",
+      "Go and drink at the water=63"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 50160,
+    "id": 1122,
+    "name": "Eli",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=43",
+      "Picking berries=39"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 50400,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 17,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=85",
+      "Eat from the granary=73"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "eat_store:Eating from the granary"
+  },
+  {
+    "tick": 50400,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 20,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Warm up at the fire=65"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 50400,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 34,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Warm up at the fire=56",
+      "Shelter at the hut=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 50400,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 34,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Maren for food=48",
+      "Ask Emre for food=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Zora"
+  },
+  {
+    "tick": 50400,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 14,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat from the granary=68",
+      "Picking fruit=64"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "eat_store:Eating from the granary"
+  },
+  {
+    "tick": 50640,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 28,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=44",
+      "Picking berries=43"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 50640,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 28,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Maren for food=53",
+      "Ask Edda for food=51"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 50640,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 6,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=76",
+      "Fishing=71"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 50640,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 33,
+    "pack": 1,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Sit down and rest=70",
+      "Eat what I am carrying=67"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 50880,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 21,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Talia for food=57",
+      "Ask Ivy for food=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Talia for food"
+  },
+  {
+    "tick": 50880,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 22,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=50",
+      "Fishing=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Leo"
+  },
+  {
+    "tick": 50880,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 0,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=87",
+      "Fishing=81"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 50880,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 26,
+    "pack": 1,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=75",
+      "Sit down and rest=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 50880,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 36,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Ines for food=44",
+      "Ask Abel for food=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Alma"
+  },
+  {
+    "tick": 51120,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 35,
+    "pack": 6,
+    "homeFood": 7,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=47",
+      "Picking fruit=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 51120,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 30,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Zia for food=51",
+      "Ask Faye for food=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Maren"
+  },
+  {
+    "tick": 51360,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 33,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Zora for food=49",
+      "Ask Nico for food=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Abel"
+  },
+  {
+    "tick": 51360,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Chat with Emre=56",
+      "Chat with Zia=54"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 51360,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 23,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Emre for food=56",
+      "Ask Nico for food=55"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 51600,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 27,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Jax for food=54",
+      "Ask Alma for food=51"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 51600,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 26,
+    "pack": 1,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=75",
+      "Chat with Ben=54"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty",
+      "Picking berries:failed there 82 ticks ago (nothing left)"
+    ],
+    "activity": ""
+  },
+  {
+    "tick": 51600,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 17,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=85",
+      "Picking berries=52"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "converse:Talking with Emre"
+  },
+  {
+    "tick": 51840,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 32,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Theo=71",
+      "Bring berries to Zora=69"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 51840,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 21,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Warm up at the fire=63",
+      "Shelter at the hut=51"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 51840,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 30,
+    "pack": 4,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=70",
+      "Picking fruit=47"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 322 ticks ago (nothing left)",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 51840,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 23,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Kai for food=56",
+      "Ask Ben for food=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52080,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 28,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Theo=77",
+      "Take berries to Theo as promised=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 52080,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 15,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=88",
+      "Warm up at the fire=58"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52080,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 23,
+    "pack": 4,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=78",
+      "Warm up at the fire=78"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52320,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 24,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Theo=56",
+      "Take berries to Theo as promised=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 52320,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 35,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=59",
+      "Sleep at my hut=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52320,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 16,
+    "pack": 4,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Eat what I am carrying=86",
+      "Warm up at the fire=77"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52320,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 36,
+    "pack": 3,
+    "homeFood": 5,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=56",
+      "Shelter at the hut=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 18,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=59"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=53",
+      "Shelter at the hut=48"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Chat with Cole=58",
+      "Eat from the home store=49"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 30,
+    "pack": 3,
+    "homeFood": 5,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=62",
+      "Eat from the home store=58"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 52560,
+    "id": 18748,
+    "name": "Maren",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 5,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=53",
+      "Warm up at the fire=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "warm:Warming up by the fire"
+  },
+  {
+    "tick": 52800,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 22,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=51",
+      "Picking berries=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 52800,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 32,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=69",
+      "Eat from the home store=55"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53040,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 30,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Take berries to Theo as promised=57",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 53040,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 30,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=42",
+      "Fishing=41"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 53040,
+    "id": 1116,
+    "name": "Milo",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Chat with Ben=99",
+      "Chat with Yan=97"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 53040,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 26,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=46",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 53040,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 31,
+    "pack": 6,
+    "homeFood": 5,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=62",
+      "Eat from the home store=59"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 53280,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 23,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Theo=63",
+      "Take berries to Theo as promised=54"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 53280,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 32,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Theo=78",
+      "Take berries to Theo as promised=64"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "give:Bringing berries to Theo"
+  },
+  {
+    "tick": 53280,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=54",
+      "Picking fruit=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 53280,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 36,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Chat with Zia=63",
+      "Chat with Ben=61"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 53280,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 20,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Jax for food"
+  },
+  {
+    "tick": 53520,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 25,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Take berries to Theo as promised=63",
+      "Bring berries to Zora=61"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Viktor"
+  },
+  {
+    "tick": 53520,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Petra for food=52",
+      "Ask Alma for food=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Mira for food"
+  },
+  {
+    "tick": 53520,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 28,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=73",
+      "Fishing=53"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 53520,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 9,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=51",
+      "Fishing=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 53520,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=44",
+      "Fishing=34"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 53760,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Gathering wild grain=46",
+      "Gathering wild grain=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Nico"
+  },
+  {
+    "tick": 53760,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 28,
+    "pack": 4,
+    "homeFood": 8,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=53",
+      "Eat from the home store=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "converse:Talking with Zora"
+  },
+  {
+    "tick": 53760,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 26,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Alma for food=54",
+      "Ask Cole for food=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Alma"
+  },
+  {
+    "tick": 54000,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 28,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=59",
+      "Fishing=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 54000,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 20,
+    "pack": 4,
+    "homeFood": 6,
+    "home": "hut",
+    "top": [
+      "Eat from the home store=72",
+      "Eat from the home store=68"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Gathering wild grain"
+  },
+  {
+    "tick": 54000,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 20,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=43"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 54240,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 30,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=60",
+      "Fishing=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 54240,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 30,
+    "pack": 0,
+    "homeFood": 0,
+    "home": null,
+    "top": [
+      "Fishing=51",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty",
+      "Picking berries:failed there 178 ticks ago (nothing left)"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 54240,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 21,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=68",
+      "Shelter at the hut=61"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=74",
+      "Go and drink at the water=66"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=46",
+      "Go and drink at the water=43"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54480,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 14,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=89",
+      "Sleep at my hut=81"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 16,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=87",
+      "Go and drink at the water=75"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 35,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=42",
+      "Sleep at my hut=40"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 28,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=59",
+      "Ask Mira for food=54"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 32,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=59",
+      "Go and drink at the water=58"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54720,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 34,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=52",
+      "Ask Nico for food=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 35,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=59",
+      "Picking berries=43"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 30,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=58",
+      "Go and drink at the water=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 22,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=50",
+      "Picking berries=48"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 54960,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 28,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=65",
+      "Go and drink at the water=63"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 54960,
+    "id": 1131,
+    "name": "Kai",
+    "hunger": 32,
+    "pack": 5,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=79",
+      "Go and drink at the water=75"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 54960,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 28,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=59",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 27,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=46",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55200,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 23,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=54",
+      "Picking berries=48"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Sheltering at the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 16,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=56",
+      "Picking berries=55"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55200,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 29,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Shelter at the hut=46",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1120,
+    "name": "Abel",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=81",
+      "Go and drink at the water=76"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 55200,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 35,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=44",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 22,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=51",
+      "Picking berries=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55200,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 32,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Kai for food=49",
+      "Ask Viktor for food=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "eat_store:Eating at home"
+  },
+  {
+    "tick": 55200,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 31,
+    "pack": 6,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=48",
+      "Fishing=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55200,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 33,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=42",
+      "Picking fruit=41"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 55200,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 34,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=75",
+      "Sit down and rest=68"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 55200,
+    "id": 18748,
+    "name": "Maren",
+    "hunger": 36,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Ivy for food=33",
+      "Shelter at the hut=32"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Resting inside the hut"
+  },
+  {
+    "tick": 55440,
+    "id": 1107,
+    "name": "Emre",
+    "hunger": 20,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=59",
+      "Picking fruit=58"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 306 ticks ago (nothing left)"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 55440,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Basil for food=50",
+      "Picking berries=41"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55440,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 10,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=55",
+      "Fishing=55"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55440,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=54",
+      "Go and drink at the water=50"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55440,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 28,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=50",
+      "Picking fruit=47"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55440,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 26,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=46",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Thea"
+  },
+  {
+    "tick": 55440,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 27,
+    "pack": 2,
+    "homeFood": 1,
+    "home": "hut",
+    "top": [
+      "Ask Kai for food=52",
+      "Ask Ben for food=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55440,
+    "id": 1150,
+    "name": "Arlo",
+    "hunger": 30,
+    "pack": 7,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=71",
+      "Eat from the home store=58"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 55440,
+    "id": 18748,
+    "name": "Maren",
+    "hunger": 30,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Jax for food=51",
+      "Ask Basil for food=50"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Basil for food"
+  },
+  {
+    "tick": 55680,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 23,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Leo for food=56",
+      "Ask Maren for food=56"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "socialize:Ask Leo for food"
+  },
+  {
+    "tick": 55680,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 4,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=68",
+      "Fishing=66"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 55680,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 20,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=56",
+      "Picking berries=55"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55680,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 30,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=49",
+      "Fishing=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55680,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=40",
+      "Picking fruit=35"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Maren for food"
+  },
+  {
+    "tick": 55680,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 20,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Faye"
+  },
+  {
+    "tick": 55680,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 21,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=53",
+      "Picking berries=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Jax"
+  },
+  {
+    "tick": 55680,
+    "id": 1149,
+    "name": "Lena",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=50",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55680,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Basil for food=49",
+      "Fishing=28"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 55680,
+    "id": 18748,
+    "name": "Maren",
+    "hunger": 23,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Leo for food=54",
+      "Ask Thea for food=38"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Edda for food"
+  },
+  {
+    "tick": 55920,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 36,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=64",
+      "Go and drink at the water=48"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 472 ticks ago (nothing left)"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 55920,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=38",
+      "Picking fruit=38"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "socialize:Ask Zia for food"
+  },
+  {
+    "tick": 55920,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 0,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=75",
+      "Picking fruit=68"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:failed there 296 ticks ago (nothing left)"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 55920,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 12,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=58",
+      "Picking berries=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55920,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 23,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=64",
+      "Fishing=62"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Eli"
+  },
+  {
+    "tick": 55920,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 27,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=44",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 55920,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 27,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=49",
+      "Picking fruit=48"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 27,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Run to safety (home)=119",
+      "Sleep at my hut=64"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "flee:Running from the wolf toward home"
+  },
+  {
+    "tick": 56160,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 23,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=49",
+      "Picking fruit=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 0,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=74",
+      "Picking fruit=72"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking fruit:failed there 443 ticks ago (nothing left)"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 36,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Ivo for food=49",
+      "Gathering wild grain=36"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Ivo for food"
+  },
+  {
+    "tick": 56160,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Run to safety (home)=105",
+      "Ask Ivo for food=50"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "flee:Running from the wolf toward home"
+  },
+  {
+    "tick": 56160,
+    "id": 1137,
+    "name": "Ivy",
+    "hunger": 5,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sit down and rest=71",
+      "Picking fruit=70"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 21,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=51",
+      "Picking fruit=50"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 31,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Ben for food=49",
+      "Picking berries=37"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 56160,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 34,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=37",
+      "Picking fruit=37"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56160,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 32,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Alma for food=48",
+      "Picking fruit=38"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Kai"
+  },
+  {
+    "tick": 56160,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Ask Basil for food=41",
+      "Go and find Alma=21"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "socialize:Ask Zia for food"
+  },
+  {
+    "tick": 56160,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 35,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=42",
+      "Picking fruit=41"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56400,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 19,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=69",
+      "Picking berries=53"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "rest:Resting"
+  },
+  {
+    "tick": 56400,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 0,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=104",
+      "Picking fruit=76"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56400,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 28,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=48",
+      "Sleep at my hut=42"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56400,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 21,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=58",
+      "Picking fruit=51"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 56400,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 15,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=51",
+      "Picking fruit=46"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Jax"
+  },
+  {
+    "tick": 56400,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 25,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=49",
+      "Fishing=39"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56400,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 35,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Faye=49",
+      "Ask Basil for food=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Zia"
+  },
+  {
+    "tick": 56400,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 27,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=53",
+      "Gathering wild grain=53"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Thea"
+  },
+  {
+    "tick": 56400,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 26,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=45",
+      "Picking berries=40"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56400,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 29,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=48",
+      "Picking fruit=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56640,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 15,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=62",
+      "Picking berries=59"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 56640,
+    "id": 1132,
+    "name": "Petra",
+    "hunger": 14,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=68",
+      "Picking fruit=66"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56640,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 9,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=65",
+      "Picking fruit=64"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56640,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 29,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=64",
+      "Sleep at my lean-to=52"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 56640,
+    "id": 1145,
+    "name": "Jax",
+    "hunger": 20,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Fishing=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 56640,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 22,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=54",
+      "Sleep at my hut=49"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 56880,
+    "id": 1106,
+    "name": "Mira",
+    "hunger": 9,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking fruit=69",
+      "Picking fruit=67"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Picking fruit"
+  },
+  {
+    "tick": 56880,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 27,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Run to safety (home)=119",
+      "Go and drink at the water=67"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 56880,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 2,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=71",
+      "Picking berries=69"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 56880,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 25,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Bring berries to Edda=66",
+      "Picking berries=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 56880,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 18,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=84",
+      "Picking berries=57"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "eat:Eating"
+  },
+  {
+    "tick": 56880,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=57",
+      "Sleep at my lean-to=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 56880,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=73",
+      "Fishing=40"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 33,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=50",
+      "Fishing=41"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 33,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=49",
+      "Fishing=41"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 20,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=82",
+      "Sleep at my lean-to=73"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 57120,
+    "id": 1121,
+    "name": "Ivo",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=71",
+      "Eat what I am carrying=67"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "drink:Drinking at the water"
+  },
+  {
+    "tick": 57120,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Picking berries=43",
+      "Gathering wild grain=42"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "sleep:Sleeping by the fire"
+  },
+  {
+    "tick": 57120,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 36,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=69",
+      "Go and drink at the water=64"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 57120,
+    "id": 1138,
+    "name": "Basil",
+    "hunger": 33,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=50",
+      "Fishing=48"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 0,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=75",
+      "Picking berries=75"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Picking berries"
+  },
+  {
+    "tick": 57120,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 34,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=60",
+      "Sleep at my lean-to=47"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1144,
+    "name": "Alma",
+    "hunger": 21,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=61",
+      "Go and drink at the water=56"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 30,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=47",
+      "Picking berries=45"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57120,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 29,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=60",
+      "Fishing=43"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1108,
+    "name": "Viktor",
+    "hunger": 30,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=45",
+      "Picking berries=41"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1109,
+    "name": "Theo",
+    "hunger": 29,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=46",
+      "Picking berries=41"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 57360,
+    "id": 1119,
+    "name": "Cora",
+    "hunger": 13,
+    "pack": 2,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Eat what I am carrying=89",
+      "Sleep at my lean-to=80"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 57360,
+    "id": 1125,
+    "name": "Ines",
+    "hunger": 30,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "lean_to",
+    "top": [
+      "Gathering wild grain=47",
+      "Picking berries=46"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Picking berries:believes it is empty"
+    ],
+    "activity": "sleep:Sleeping by the fire"
+  },
+  {
+    "tick": 57360,
+    "id": 1134,
+    "name": "Yan",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Chat with Zia=56",
+      "Picking berries=43"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "gather:Fishing"
+  },
+  {
+    "tick": 57360,
+    "id": 1135,
+    "name": "Cole",
+    "hunger": 32,
+    "pack": 4,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and drink at the water=74",
+      "Go and drink at the water=70"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping by my lean-to"
+  },
+  {
+    "tick": 57360,
+    "id": 1139,
+    "name": "Thea",
+    "hunger": 31,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=51",
+      "Shelter at the hut=47"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1140,
+    "name": "Nico",
+    "hunger": 31,
+    "pack": 1,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Sleep at my hut=47",
+      "Picking berries=44"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 1146,
+    "name": "Edda",
+    "hunger": 34,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=42",
+      "Shelter at the hut=38"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "rest:Staying at my lean-to"
+  },
+  {
+    "tick": 57360,
+    "id": 1147,
+    "name": "Faye",
+    "hunger": 25,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Picking berries=42",
+      "Go and find Alma=39"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Maren"
+  },
+  {
+    "tick": 57360,
+    "id": 9084,
+    "name": "Zora",
+    "hunger": 26,
+    "pack": 3,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Fishing=47",
+      "Sleep at my hut=46"
+    ],
+    "blocked": [
+      "Eat carried food:saving the food for dependents",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "sleep:Sleeping inside the hut"
+  },
+  {
+    "tick": 57360,
+    "id": 18748,
+    "name": "Maren",
+    "hunger": 32,
+    "pack": 0,
+    "homeFood": 0,
+    "home": "hut",
+    "top": [
+      "Go and find Basil=37",
+      "Picking berries=34"
+    ],
+    "blocked": [
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty",
+      "Eat from the stores:remembers it being empty"
+    ],
+    "activity": "converse:Talking with Faye"
+  }
+]

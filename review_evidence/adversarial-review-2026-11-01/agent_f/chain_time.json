@@ -1,0 +1,1662 @@
+[
+ {
+  "kit": "staged helper kit: hammer+saw, yard 8 wood 2 handles",
+  "cart": 1,
+  "ticksToCart": 257,
+  "planStatus": "active",
+  "planReason": "proposed from outside",
+  "planStep": "work on cart for cart",
+  "deadline": 7200,
+  "tickAtEnd": 257,
+  "budget": {
+   "sleepTicks": 0,
+   "eatDrinkTicks": 0,
+   "travelTicks": 63,
+   "workTicks": 191,
+   "gatherTicks": 0,
+   "idleTicks": 3
+  },
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "inv": {
+   "bread": 3,
+   "water": 3,
+   "hammer": 1,
+   "saw": 1
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 180,
+    "step": "operate:cart"
+   }
+  ],
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start operate saw_planks"
+   },
+   {
+    "tick": 105,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 106,
+    "ev": "start operate saw_planks"
+   },
+   {
+    "tick": 148,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 149,
+    "ev": "start operate build_cart"
+   },
+   {
+    "tick": 256,
+    "ev": "end operate build_cart success done"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "hammer+saw, empty yard",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to work on cart for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "budget": {
+   "sleepTicks": 1982,
+   "eatDrinkTicks": 987,
+   "travelTicks": 2214,
+   "workTicks": 1395,
+   "gatherTicks": 586,
+   "idleTicks": 38
+  },
+  "yardShelf": {
+   "offcuts": 2
+  },
+  "inv": {
+   "hammer": 1,
+   "saw": 1,
+   "wood": 3
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 2,
+   "handles": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2400,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2520,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2640,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2760,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 2820,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2880,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3000,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 3060,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3180,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 4800,
+    "step": "operate:handles"
+   },
+   {
+    "tick": 4860,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5040,
+    "step": "operate:cart"
+   }
+  ],
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 100,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 101,
+    "ev": "start plan_site"
+   },
+   {
+    "tick": 214,
+    "ev": "end plan_site success done"
+   },
+   {
+    "tick": 215,
+    "ev": "start explore"
+   },
+   {
+    "tick": 461,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 462,
+    "ev": "start wander"
+   },
+   {
+    "tick": 727,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 728,
+    "ev": "start explore"
+   },
+   {
+    "tick": 905,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 906,
+    "ev": "start drink"
+   },
+   {
+    "tick": 913,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 914,
+    "ev": "start gather 8"
+   },
+   {
+    "tick": 1150,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1151,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1203,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 1204,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1259,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1259,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 1686,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1687,
+    "ev": "start rest"
+   },
+   {
+    "tick": 1926,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1926,
+    "ev": "start eat"
+   },
+   {
+    "tick": 1945,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1946,
+    "ev": "start rest"
+   },
+   {
+    "tick": 2256,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2256,
+    "ev": "start drink"
+   },
+   {
+    "tick": 2271,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2272,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 2399,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2400,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2496,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2497,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 2651,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2652,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2720,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2721,
+    "ev": "start operate saw_planks"
+   },
+   {
+    "tick": 2763,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 2764,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2772,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2773,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 2925,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2926,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2994,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2995,
+    "ev": "start operate saw_planks"
+   },
+   {
+    "tick": 3037,
+    "ev": "end operate saw_planks success done"
+   },
+   {
+    "tick": 3038,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 3189,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3190,
+    "ev": "start eat"
+   },
+   {
+    "tick": 3199,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3200,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 3248,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3249,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3303,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3304,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3387,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3388,
+    "ev": "start drink"
+   },
+   {
+    "tick": 3765,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3766,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 4692,
+    "ev": "end sleep success morning came"
+   },
+   {
+    "tick": 4693,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 4797,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 4798,
+    "ev": "start operate split_handles"
+   },
+   {
+    "tick": 4823,
+    "ev": "end operate split_handles success done"
+   },
+   {
+    "tick": 4824,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 4933,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4934,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 5031,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5032,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5088,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 5088,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 5158,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 5159,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5227,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5228,
+    "ev": "start drink"
+   },
+   {
+    "tick": 5524,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5525,
+    "ev": "start explore"
+   },
+   {
+    "tick": 5672,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 5673,
+    "ev": "start operate build_cart"
+   },
+   {
+    "tick": 5985,
+    "ev": "end operate build_cart partial completed the planned 20-tick work spell; unfinished work remains at the place"
+   },
+   {
+    "tick": 5986,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 6615,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6616,
+    "ev": "start rest"
+   },
+   {
+    "tick": 6718,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 6718,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 6747,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6748,
+    "ev": "start rest"
+   },
+   {
+    "tick": 7076,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 7076,
+    "ev": "start drink"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "hammer+axe (hew path), empty yard",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire wood for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "budget": {
+   "sleepTicks": 1972,
+   "eatDrinkTicks": 964,
+   "travelTicks": 2377,
+   "workTicks": 1382,
+   "gatherTicks": 466,
+   "idleTicks": 41
+  },
+  "yardShelf": {
+   "planks": 4,
+   "offcuts": 8,
+   "handles": 2,
+   "wood": 1
+  },
+  "inv": {
+   "hammer": 1,
+   "axe": 1
+  },
+  "ledgerCreated": {
+   "planks": 4,
+   "offcuts": 8,
+   "handles": 2
+  },
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2340,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2460,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2580,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2700,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2820,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 2940,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 3000,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3060,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 3180,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 3300,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 4800,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 4860,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5040,
+    "step": "operate:planks"
+   },
+   {
+    "tick": 5100,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 5220,
+    "step": "deposit:wood"
+   },
+   {
+    "tick": 5940,
+    "step": "operate:handles"
+   },
+   {
+    "tick": 6000,
+    "step": "acquire:wood"
+   }
+  ],
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 84,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 85,
+    "ev": "start plan_site"
+   },
+   {
+    "tick": 198,
+    "ev": "end plan_site success done"
+   },
+   {
+    "tick": 199,
+    "ev": "start explore"
+   },
+   {
+    "tick": 445,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 446,
+    "ev": "start wander"
+   },
+   {
+    "tick": 718,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 718,
+    "ev": "start explore"
+   },
+   {
+    "tick": 905,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 906,
+    "ev": "start drink"
+   },
+   {
+    "tick": 913,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 914,
+    "ev": "start gather 8"
+   },
+   {
+    "tick": 1117,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1118,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1251,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 1252,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1303,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1303,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 1759,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1760,
+    "ev": "start rest"
+   },
+   {
+    "tick": 1914,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1914,
+    "ev": "start eat"
+   },
+   {
+    "tick": 1933,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1934,
+    "ev": "start rest"
+   },
+   {
+    "tick": 2244,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2244,
+    "ev": "start drink"
+   },
+   {
+    "tick": 2259,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2260,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 2356,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2357,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2453,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2454,
+    "ev": "start gather 7"
+   },
+   {
+    "tick": 2576,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2577,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2645,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2646,
+    "ev": "start operate hew_planks"
+   },
+   {
+    "tick": 2685,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 2686,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2694,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2695,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 2826,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2827,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 2905,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 2906,
+    "ev": "start operate hew_planks"
+   },
+   {
+    "tick": 2945,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 2946,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 3075,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3076,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 3153,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 3154,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 3282,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 3283,
+    "ev": "start eat"
+   },
+   {
+    "tick": 3292,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3293,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3337,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3338,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3429,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3430,
+    "ev": "start drink"
+   },
+   {
+    "tick": 3813,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3814,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 4692,
+    "ev": "end sleep success morning came"
+   },
+   {
+    "tick": 4693,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 4793,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 4794,
+    "ev": "start operate hew_planks"
+   },
+   {
+    "tick": 4833,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 4834,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 4939,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4940,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 5035,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5036,
+    "ev": "start operate hew_planks"
+   },
+   {
+    "tick": 5075,
+    "ev": "end operate hew_planks success done"
+   },
+   {
+    "tick": 5076,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 5199,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 5200,
+    "ev": "start drink"
+   },
+   {
+    "tick": 5496,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5497,
+    "ev": "start explore"
+   },
+   {
+    "tick": 5641,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 5642,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 5921,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5922,
+    "ev": "start operate split_handles"
+   },
+   {
+    "tick": 5940,
+    "ev": "end operate split_handles success done"
+   },
+   {
+    "tick": 5941,
+    "ev": "start deposit"
+   },
+   {
+    "tick": 5949,
+    "ev": "end deposit success done"
+   },
+   {
+    "tick": 5950,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 6588,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6589,
+    "ev": "start eat"
+   },
+   {
+    "tick": 6598,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 6599,
+    "ev": "start rest"
+   },
+   {
+    "tick": 7080,
+    "ev": "end rest success daylight arrived"
+   },
+   {
+    "tick": 7081,
+    "ev": "start drink"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "ordinary kit: axe only, empty yard, nothing carried",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire stone for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "budget": {
+   "sleepTicks": 1749,
+   "eatDrinkTicks": 1258,
+   "travelTicks": 2554,
+   "workTicks": 1459,
+   "gatherTicks": 156,
+   "idleTicks": 26
+  },
+  "yardShelf": {},
+  "inv": {
+   "axe": 1,
+   "wood": 5
+  },
+  "ledgerCreated": {},
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 2340,
+    "step": "acquire:stone"
+   }
+  ],
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 80,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 81,
+    "ev": "start plan_site"
+   },
+   {
+    "tick": 192,
+    "ev": "end plan_site success done"
+   },
+   {
+    "tick": 193,
+    "ev": "start explore"
+   },
+   {
+    "tick": 434,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 435,
+    "ev": "start wander"
+   },
+   {
+    "tick": 716,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 716,
+    "ev": "start explore"
+   },
+   {
+    "tick": 888,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 889,
+    "ev": "start drink"
+   },
+   {
+    "tick": 896,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 897,
+    "ev": "start gather 8"
+   },
+   {
+    "tick": 1093,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1094,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1194,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1194,
+    "ev": "start rest"
+   },
+   {
+    "tick": 1267,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1267,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 1646,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1647,
+    "ev": "start rest"
+   },
+   {
+    "tick": 1946,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 1946,
+    "ev": "start eat"
+   },
+   {
+    "tick": 1965,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1966,
+    "ev": "start rest"
+   },
+   {
+    "tick": 2254,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2254,
+    "ev": "start drink"
+   },
+   {
+    "tick": 2269,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2270,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 2360,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2361,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 2392,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2393,
+    "ev": "start explore"
+   },
+   {
+    "tick": 2703,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 2704,
+    "ev": "start wander"
+   },
+   {
+    "tick": 2987,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 2988,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3121,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3122,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3213,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3214,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3287,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3288,
+    "ev": "start eat"
+   },
+   {
+    "tick": 3297,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3298,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3435,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3436,
+    "ev": "start drink"
+   },
+   {
+    "tick": 3709,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3710,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 4599,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 4600,
+    "ev": "start rest"
+   },
+   {
+    "tick": 4661,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 4661,
+    "ev": "start explore"
+   },
+   {
+    "tick": 4935,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 4936,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 5182,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 5183,
+    "ev": "start drink"
+   },
+   {
+    "tick": 5450,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5451,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5502,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 5502,
+    "ev": "start explore"
+   },
+   {
+    "tick": 5825,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 5825,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 6085,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6086,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 6567,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6568,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 6577,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6578,
+    "ev": "start rest"
+   },
+   {
+    "tick": 7049,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 7049,
+    "ev": "start drink"
+   }
+  ],
+  "conservation": true
+ },
+ {
+  "kit": "ordinary kit: nothing at all, empty yard",
+  "cart": 0,
+  "ticksToCart": null,
+  "planStatus": "dropped",
+  "planReason": "the time is up (was going to acquire stone for cart)",
+  "planStep": "",
+  "deadline": 7200,
+  "tickAtEnd": 7202,
+  "budget": {
+   "sleepTicks": 2026,
+   "eatDrinkTicks": 1071,
+   "travelTicks": 2258,
+   "workTicks": 1337,
+   "gatherTicks": 478,
+   "idleTicks": 32
+  },
+  "yardShelf": {},
+  "inv": {
+   "wood": 4,
+   "stone": 1
+  },
+  "ledgerCreated": {},
+  "steps": [
+   {
+    "tick": 60,
+    "step": "acquire:wood"
+   },
+   {
+    "tick": 1080,
+    "step": "acquire:stone"
+   }
+  ],
+  "events": [
+   {
+    "tick": 0,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 248,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 249,
+    "ev": "start plan_site"
+   },
+   {
+    "tick": 362,
+    "ev": "end plan_site success done"
+   },
+   {
+    "tick": 363,
+    "ev": "start explore"
+   },
+   {
+    "tick": 600,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 601,
+    "ev": "start wander"
+   },
+   {
+    "tick": 902,
+    "ev": "end wander failed took too long"
+   },
+   {
+    "tick": 903,
+    "ev": "start drink"
+   },
+   {
+    "tick": 910,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 911,
+    "ev": "start gather 6"
+   },
+   {
+    "tick": 1068,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 1069,
+    "ev": "start wander"
+   },
+   {
+    "tick": 1123,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 1123,
+    "ev": "start explore"
+   },
+   {
+    "tick": 1293,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 1293,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 1860,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 1861,
+    "ev": "start eat"
+   },
+   {
+    "tick": 1880,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 1881,
+    "ev": "start rest"
+   },
+   {
+    "tick": 2274,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 2274,
+    "ev": "start drink"
+   },
+   {
+    "tick": 2289,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 2290,
+    "ev": "start gather 9"
+   },
+   {
+    "tick": 2431,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2432,
+    "ev": "start explore"
+   },
+   {
+    "tick": 2681,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 2682,
+    "ev": "start gather 8"
+   },
+   {
+    "tick": 2946,
+    "ev": "end gather success done"
+   },
+   {
+    "tick": 2947,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3007,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3008,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3063,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3064,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3205,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3206,
+    "ev": "start eat"
+   },
+   {
+    "tick": 3215,
+    "ev": "end eat success done"
+   },
+   {
+    "tick": 3216,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3267,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3268,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3329,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3330,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3395,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3396,
+    "ev": "start wander"
+   },
+   {
+    "tick": 3463,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 3464,
+    "ev": "start drink"
+   },
+   {
+    "tick": 3779,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 3780,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 4692,
+    "ev": "end sleep success morning came"
+   },
+   {
+    "tick": 4693,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 4702,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 4703,
+    "ev": "start explore"
+   },
+   {
+    "tick": 4892,
+    "ev": "end explore success done"
+   },
+   {
+    "tick": 4893,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5069,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5070,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5143,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5144,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5251,
+    "ev": "end wander success done"
+   },
+   {
+    "tick": 5252,
+    "ev": "start drink"
+   },
+   {
+    "tick": 5570,
+    "ev": "end drink success done"
+   },
+   {
+    "tick": 5571,
+    "ev": "start wander"
+   },
+   {
+    "tick": 5625,
+    "ev": "end wander interrupted something better came up"
+   },
+   {
+    "tick": 5625,
+    "ev": "start explore"
+   },
+   {
+    "tick": 5789,
+    "ev": "end explore interrupted something better came up"
+   },
+   {
+    "tick": 5789,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 6015,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6016,
+    "ev": "start sleep"
+   },
+   {
+    "tick": 6563,
+    "ev": "end sleep success rested"
+   },
+   {
+    "tick": 6564,
+    "ev": "start rest"
+   },
+   {
+    "tick": 6673,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 6673,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 6682,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 6683,
+    "ev": "start rest"
+   },
+   {
+    "tick": 7057,
+    "ev": "end rest interrupted something better came up"
+   },
+   {
+    "tick": 7057,
+    "ev": "start eat_store"
+   },
+   {
+    "tick": 7066,
+    "ev": "end eat_store success done"
+   },
+   {
+    "tick": 7067,
+    "ev": "start drink"
+   }
+  ],
+  "conservation": true
+ }
+]

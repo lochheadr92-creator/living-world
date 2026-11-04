@@ -1,0 +1,11 @@
+[
+  {
+    "tick": 13219,
+    "kind": "executed-transfer",
+    "from": "person:1024",
+    "to": "person:997",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  }
+]

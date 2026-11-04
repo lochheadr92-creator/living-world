@@ -1,0 +1,955 @@
+{
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/21",
+    "mode": "live",
+    "seed": "learner-instruction",
+    "settings": {
+      "seed": "learner-instruction",
+      "population": 28,
+      "harsh": false,
+      "immigration": false,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 41
+    },
+    "personId": 4,
+    "personName": "Ben",
+    "startTick": 0,
+    "startHash": "99eda424",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "manual",
+      "kind": "manual",
+      "config": {
+        "by": "hand"
+      }
+    },
+    "budget": {
+      "maxCallsPerDay": 1048576,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 2147483647,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {
+      "showScores": false
+    },
+    "observationVersion": 12
+  },
+  "asks": [
+    {
+      "seq": 0,
+      "tick": 0,
+      "attempt": 0,
+      "observationHash": "f064dc4f",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 0,
+          "day": 1,
+          "clock": "07:11",
+          "phase": "dawn",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 11
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 98,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 98,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 98,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 95,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 94,
+              "state": "ok"
+            },
+            "social": {
+              "value": 70,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 42,
+            "y": 40.5
+          },
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": []
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": null,
+          "lastChoice": null
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 2,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 5,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south",
+              "seen": "just now",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 80,
+              "trust": 60,
+              "familiarity": 0,
+              "kin": "parent",
+              "lastMet": "never",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "socialize:2:ask_info:food",
+            "kind": "socialize",
+            "label": "Ask Ada where to find food",
+            "goal": "to learn where food can be found",
+            "need": null,
+            "eta": "50 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 41 min",
+            "target": null
+          },
+          {
+            "key": "socialize:2:learn_technique",
+            "kind": "socialize",
+            "label": "Ask Ada to teach charcoal firing",
+            "goal": "learn charcoal firing: the smithy burns charcoal to smelt and forge · I want to fire charcoal but have not learned how",
+            "need": null,
+            "eta": "50 world min",
+            "target": "Ada (in sight, 2 tiles north-west)",
+            "selectionReason": "I want to fire charcoal but have not learned how"
+          },
+          {
+            "key": "socialize:2:ask_info:wood",
+            "kind": "socialize",
+            "label": "Ask Ada where to find wood",
+            "goal": "to learn where wood can be found",
+            "need": null,
+            "eta": "50 world min",
+            "target": "Ada (in sight, 2 tiles north-west)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "has not learned charcoal firing",
+            "target": "kiln 5 tiles south (seen just now)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"socialize:2:learn_technique\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 5729
+      },
+      "proposal": {
+        "choose": "socialize:2:learn_technique",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 1,
+      "tick": 229,
+      "attempt": 0,
+      "observationHash": "eca8d6a9",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 229,
+          "day": 1,
+          "clock": "09:29",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 15
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 91,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 89,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 89,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 80,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 89,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 41.9,
+            "y": 40.5
+          },
+          "mood": 6,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": null,
+          "lastInteraction": {
+            "purpose": "learn_technique",
+            "outcome": "learned",
+            "detail": "learned charcoal firing after 180 ticks together",
+            "when": "1 world min ago",
+            "t": 228
+          },
+          "lastChoice": {
+            "label": "Ask Ada to teach charcoal firing",
+            "when": "2 world h 17 min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 1,
+              "direction": "north-west",
+              "looks": [],
+              "doing": "talking",
+              "carrying": [],
+              "talking": true,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 5,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "items": {
+                "wood": 6
+              },
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 8,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 83,
+              "trust": 61,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "1 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "10 world min ago",
+              "text": "Learned charcoal firing from Ada; kiln proficiency still comes from practice.",
+              "kind": "work",
+              "t": 212
+            },
+            {
+              "when": "1 world h 58 min ago",
+              "text": "Accepted charcoal firing instruction from Ada.",
+              "kind": "social",
+              "t": 32
+            },
+            {
+              "when": "2 world h 11 min ago",
+              "text": "Asked Ada to teach me charcoal firing for work I want to do.",
+              "kind": "social",
+              "t": 10
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "3 world h 4 min",
+            "target": null
+          },
+          {
+            "key": "operate:5:burn_charcoal",
+            "kind": "operate",
+            "label": "Burning charcoal",
+            "goal": "the smithy burns charcoal to smelt and forge",
+            "need": null,
+            "eta": "50 world min",
+            "target": "kiln 5 tiles south (seen 1 world min ago)"
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": true,
+        "text": "{\"choose\":\"operate:5:burn_charcoal\",\"why\":\"chosen by hand\"}",
+        "reason": null,
+        "latencyMs": 13954
+      },
+      "proposal": {
+        "choose": "operate:5:burn_charcoal",
+        "why": "chosen by hand"
+      },
+      "problem": null,
+      "notesProblem": null
+    },
+    {
+      "seq": 2,
+      "tick": 292,
+      "attempt": 0,
+      "observationHash": "4652c2f2",
+      "observation": {
+        "version": 12,
+        "time": {
+          "tick": 292,
+          "day": 1,
+          "clock": "10:07",
+          "phase": "morning",
+          "light": "daylight",
+          "weather": "Clear",
+          "tempC": 16
+        },
+        "self": {
+          "name": "Ben",
+          "sex": "f",
+          "stage": "youth",
+          "ageYears": 12,
+          "character": "sociable, curious",
+          "skills": {
+            "forage": 0.84,
+            "fish": 0.93,
+            "wood": 0.85,
+            "stone": 0.99,
+            "build": 0.68,
+            "farm": 0.68,
+            "craft": 0.85,
+            "carpentry": 0.8,
+            "kiln": 0.92,
+            "smith": 0.86,
+            "bake": 0.86
+          },
+          "health": 100,
+          "needs": {
+            "hunger": {
+              "value": 89,
+              "state": "ok"
+            },
+            "thirst": {
+              "value": 86,
+              "state": "ok"
+            },
+            "energy": {
+              "value": 86,
+              "state": "ok"
+            },
+            "warmth": {
+              "value": 82,
+              "state": "ok"
+            },
+            "safety": {
+              "value": 84,
+              "state": "ok"
+            },
+            "social": {
+              "value": 88,
+              "state": "ok"
+            }
+          },
+          "aspiration": null,
+          "carrying": {},
+          "load": {
+            "used": 0,
+            "cap": 9
+          },
+          "spokenFor": {},
+          "available": {},
+          "tools": [],
+          "pullingCart": false,
+          "position": {
+            "x": 43.4,
+            "y": 42.4
+          },
+          "mood": 7,
+          "thoughts": [],
+          "trade": {
+            "kind": "stone",
+            "why": "quicker at it than at anything else"
+          },
+          "techniques": [
+            "charcoal firing"
+          ]
+        },
+        "household": {
+          "name": "Sparrow",
+          "members": [
+            {
+              "name": "Ada",
+              "kin": "parent"
+            }
+          ],
+          "home": null,
+          "partner": null,
+          "parents": [],
+          "children": []
+        },
+        "doing": {
+          "activity": null,
+          "suspended": null,
+          "conversation": null,
+          "lastResult": {
+            "label": "Burning charcoal",
+            "outcome": "success",
+            "detail": "done",
+            "when": "1 world min ago",
+            "t": 291
+          },
+          "lastInteraction": {
+            "purpose": "learn_technique",
+            "outcome": "learned",
+            "detail": "learned charcoal firing after 180 ticks together",
+            "when": "38 world min ago",
+            "t": 228
+          },
+          "lastChoice": {
+            "label": "Burning charcoal",
+            "when": "38 world min ago",
+            "trigger": "free (external)"
+          }
+        },
+        "seen": {
+          "people": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "x": 40.5,
+              "y": 40.5,
+              "distance": 3,
+              "direction": "north",
+              "looks": [],
+              "doing": "",
+              "carrying": [],
+              "talking": false,
+              "relation": "Parent"
+            }
+          ],
+          "wolves": []
+        },
+        "remembered": {
+          "places": [
+            {
+              "id": 5,
+              "what": "kiln",
+              "x": 45,
+              "y": 44,
+              "distance": 2,
+              "direction": "south",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            },
+            {
+              "id": 6,
+              "what": "smithy",
+              "x": 49,
+              "y": 44,
+              "distance": 6,
+              "direction": "south-east",
+              "seen": "1 world min ago",
+              "source": "seen",
+              "stale": false,
+              "condition": 100
+            }
+          ],
+          "water": [],
+          "dangers": [],
+          "counts": {
+            "building": 2
+          }
+        },
+        "people": {
+          "relations": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "label": "Parent",
+              "affinity": 83,
+              "trust": 61,
+              "familiarity": 1,
+              "kin": "parent",
+              "lastMet": "38 world min ago",
+              "avoiding": false,
+              "owesMe": 0,
+              "lastNote": "",
+              "grievance": null
+            }
+          ],
+          "whereabouts": [],
+          "worries": [],
+          "requests": [],
+          "promises": []
+        },
+        "recent": {
+          "memory": [
+            {
+              "when": "1 world min ago",
+              "text": "Worked on charcoal at the kiln for a while (done).",
+              "kind": "work",
+              "t": 291
+            },
+            {
+              "when": "48 world min ago",
+              "text": "Learned charcoal firing from Ada; kiln proficiency still comes from practice.",
+              "kind": "work",
+              "t": 212
+            },
+            {
+              "when": "2 world h 36 min ago",
+              "text": "Accepted charcoal firing instruction from Ada.",
+              "kind": "social",
+              "t": 32
+            },
+            {
+              "when": "2 world h 49 min ago",
+              "text": "Asked Ada to teach me charcoal firing for work I want to do.",
+              "kind": "social",
+              "t": 10
+            }
+          ],
+          "failures": []
+        },
+        "options": [
+          {
+            "key": "explore",
+            "kind": "explore",
+            "label": "Explore somewhere new",
+            "goal": "to look for food sources",
+            "need": null,
+            "eta": "2 world h 38 min",
+            "target": null
+          },
+          {
+            "key": "wander",
+            "kind": "wander",
+            "label": "Potter about the camp",
+            "goal": "nothing needs doing right now",
+            "need": null,
+            "eta": "24 world min",
+            "target": null
+          }
+        ],
+        "setAside": [
+          {
+            "label": "Lay out a lean-to",
+            "reason": "does not know of three trees to cut",
+            "target": null
+          },
+          {
+            "label": "Burning charcoal",
+            "reason": "the kiln is busy with charcoal",
+            "target": "kiln 2 tiles south (seen 1 world min ago)"
+          }
+        ],
+        "plans": []
+      },
+      "notes": null,
+      "rejected": [],
+      "model": {
+        "ok": false,
+        "text": null,
+        "reason": "model call failed: control was handed back to the engine",
+        "latencyMs": 20671
+      },
+      "proposal": null,
+      "problem": "model call failed: control was handed back to the engine",
+      "notesProblem": null
+    }
+  ],
+  "calls": [
+    {
+      "seq": 0,
+      "tick": 0,
+      "attempt": 0,
+      "ask": 0,
+      "observationHash": "f064dc4f",
+      "worldHash": "39c1ed7b",
+      "choice": {
+        "kind": "pick",
+        "key": "socialize:2:learn_technique"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "socialize:2:learn_technique",
+        "activityId": 7,
+        "label": "Ask Ada to teach charcoal firing"
+      }
+    },
+    {
+      "seq": 1,
+      "tick": 229,
+      "attempt": 0,
+      "ask": 1,
+      "observationHash": "eca8d6a9",
+      "worldHash": "25a4fe59",
+      "choice": {
+        "kind": "pick",
+        "key": "operate:5:burn_charcoal"
+      },
+      "timing": "exact",
+      "result": {
+        "status": "applied",
+        "key": "operate:5:burn_charcoal",
+        "activityId": 11,
+        "label": "Burning charcoal"
+      }
+    },
+    {
+      "seq": 2,
+      "tick": 292,
+      "attempt": 0,
+      "ask": 2,
+      "observationHash": "4652c2f2",
+      "worldHash": "a912507f",
+      "choice": {
+        "kind": "defer"
+      },
+      "timing": "exact",
+      "result": null
+    }
+  ],
+  "overrides": [],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 7,
+      "label": "Ask Ada to teach charcoal firing",
+      "tick": 229,
+      "outcome": "partial",
+      "detail": "learned charcoal firing after 180 ticks together"
+    },
+    {
+      "call": 1,
+      "activityId": 11,
+      "label": "Burning charcoal",
+      "tick": 292,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "observer": [
+    {
+      "call": 0,
+      "tick": 1,
+      "events": []
+    },
+    {
+      "call": 1,
+      "tick": 230,
+      "events": [
+        {
+          "tick": 212,
+          "kind": "work",
+          "text": "Ben learned charcoal firing from Ada."
+        }
+      ]
+    }
+  ],
+  "end": {
+    "tick": 293,
+    "hash": "1b1b22c0",
+    "died": false,
+    "calls": 3,
+    "applied": 2,
+    "rejected": 0,
+    "fallbacks": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 3,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 14379,
+      "outputTokens": 0,
+      "givenUp": null
+    }
+  }
+}

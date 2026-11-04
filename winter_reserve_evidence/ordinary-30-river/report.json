@@ -1,0 +1,79 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 45,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 121.797,
+  "alive": 32,
+  "deaths": 1,
+  "deathsByDay": {
+    "27": [
+      {
+        "name": "Lena",
+        "cause": "hunger"
+      }
+    ]
+  },
+  "plans": {
+    "season": {
+      "adopted": 7,
+      "done": 4,
+      "dropped": 3,
+      "unitsWorked": 18,
+      "targets": [
+        4,
+        8,
+        12,
+        12,
+        8,
+        8,
+        4
+      ]
+    },
+    "hardship": {
+      "adopted": 130,
+      "done": 29,
+      "dropped": 91,
+      "unitsWorked": 396
+    }
+  },
+  "flows": {
+    "deposit:lean_to:deposit": 405,
+    "out:lean_to:eat from store": 120,
+    "ledger:xstored food spoiled": 512,
+    "ledger:-eaten": 2559,
+    "ledger:-eaten at the source": 486,
+    "ledger:-eaten at a shared meal": 2,
+    "deposit:hut:deposit": 671,
+    "out:hut:eat from store": 172,
+    "deposit:storehouse:deposit": 19,
+    "out:storehouse:eat from store": 1
+  },
+  "totals": {
+    "samples": 8837,
+    "winterSamples": 2353,
+    "winterHungry": 199,
+    "winterHungryWithHomeFood": 20,
+    "winterHungryNoEatStore": 108,
+    "eatStoreOffers": 3792,
+    "eatStoreBlockedEmpty": 9746,
+    "depositOffers": 3545,
+    "depositBlockedFull": 81
+  },
+  "buildings": [
+    {
+      "type": "storehouse",
+      "hh": 0,
+      "cond": 89,
+      "food": 0
+    }
+  ],
+  "hash": "03ac2aa4",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "staged": false,
+  "controlled": false,
+  "input": "inhabitant_evidence/connections-background-45-meadow/natural-lesson-start.json",
+  "inputSha256": "b68a50dccc23875efa04d8e660d261f6393e5acc80c6387386cec30f5e6e468d",
+  "person": 1013,
+  "name": "Pia",
+  "tick": 94476,
+  "techniques": {
+    "charcoal": {
+      "source": "taught",
+      "learned": 92530,
+      "teacher": 16766,
+      "lesson": 42441,
+      "started": 92350
+    }
+  },
+  "actions": [
+    {
+      "tick": 92308,
+      "id": 42436,
+      "label": "Ask Hana to teach charcoal firing",
+      "kind": "socialize",
+      "target": 16766,
+      "data": {
+        "purpose": "learn_technique",
+        "conv": {},
+        "optKey": "socialize:16766:learn_technique",
+        "why": "I want to fire charcoal but have not learned how · I need charcoal firing for wanted work +29 · walking −1"
+      }
+    },
+    {
+      "tick": 93693,
+      "id": 42903,
+      "label": "Burning charcoal",
+      "kind": "operate",
+      "target": 29352,
+      "data": {
+        "recipe": "burn_charcoal",
+        "client": 1013,
+        "purpose": "the smithy burns charcoal to smelt and forge",
+        "destSite": 0,
+        "optKey": "operate:29352:burn_charcoal",
+        "why": "the smithy burns charcoal to smelt and forge +27 · practised at it +6 · walking −5",
+        "running": "burn_charcoal",
+        "started": true
+      }
+    }
+  ],
+  "production": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "hash": "a70e80d1"
+}

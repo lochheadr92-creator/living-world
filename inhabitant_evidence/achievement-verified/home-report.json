@@ -1,0 +1,22 @@
+{
+  "staged": true,
+  "chapter": {
+    "kind": "family",
+    "since": 8294,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+      {
+        "kind": "home",
+        "done": 1094
+      }
+    ]
+  },
+  "observedNewHope": true,
+  "hash": "ffebd6ea",
+  "replayHash": "ffebd6ea",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

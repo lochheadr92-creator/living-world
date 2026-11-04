@@ -1,0 +1,48 @@
+AI inhabitant
+Pavel · by hand
+thinking…
+day 2 10:02
+09:56 · Deliver materials to the hut site → applied
+success: done
+chosen by hand
+Your turn
+10:01
+Pavel is in no particular need. Last: Delivering wood to the building site — success.
+hopes for a family (0% there) · Plans: get the household's hut built; next: get 4 wood for the hut (it wants 6 wood and 4 stone) · wood: 0 carried and reserved, 4 still missing (4 wanted) · Promises and actions serving the plan may use reserved goods; each offered action has its own limits.
+Action estimates and memory ages use the world clock.
+Chopping wood for my household’s hut
+tree 7 tiles south-west (seen 1 world min ago)
+About 2 world h 12 min
+Chopping wood for my household’s hut
+tree 8 tiles south-west (seen 1 world min ago)
+About 2 world h 17 min
+Build the hut
+hut site 2 tiles north-east (seen 1 world min ago)
+About 1 world h 11 min
+Breaking stone for my household’s hut
+rock outcrop 5 tiles east (seen 1 world min ago)
+About 1 world h 43 min
+Breaking stone for my household’s hut
+rock outcrop 5 tiles south-west (seen 1 world min ago)
+About 1 world h 48 min
+Picking fruit
+fruit tree 1 tiles south-east (seen 1 world min ago)
+About 1 world h 5 min
+Picking fruit
+fruit tree 2 tiles south-east (seen 1 world min ago)
+About 1 world h 12 min
+Picking fruit
+fruit tree 4 tiles east (seen 1 world min ago)
+About 1 world h 22 min
+Ask Dax to help with the hut
+Dax (in sight, 5 tiles north-east)
+About 1 world h 16 min
+Potter about near home
+About 24 world min
+Explore somewhere new
+About 2 world h 21 min
+Let the engine choose
+Answer from a chat
+decisions 3, engine 0, refused 0
+Save transcript
+Stop

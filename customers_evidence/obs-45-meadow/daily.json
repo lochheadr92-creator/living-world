@@ -1,0 +1,317 @@
+[
+  {
+    "day": 1,
+    "alive": 28,
+    "leadsLive": 4,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 2,
+    "alive": 28,
+    "leadsLive": 4,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 3,
+    "alive": 28,
+    "leadsLive": 4,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 4,
+    "alive": 28,
+    "leadsLive": 4,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 5,
+    "alive": 28,
+    "leadsLive": 5,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 6,
+    "alive": 28,
+    "leadsLive": 5,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 7,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 8,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 9,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 10,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 11,
+    "alive": 28,
+    "leadsLive": 0,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 12,
+    "alive": 28,
+    "leadsLive": 0,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 13,
+    "alive": 28,
+    "leadsLive": 0,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 14,
+    "alive": 28,
+    "leadsLive": 0,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 15,
+    "alive": 29,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 16,
+    "alive": 29,
+    "leadsLive": 3,
+    "supplied": 3,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 17,
+    "alive": 29,
+    "leadsLive": 3,
+    "supplied": 3,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 18,
+    "alive": 29,
+    "leadsLive": 6,
+    "supplied": 3,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 19,
+    "alive": 29,
+    "leadsLive": 10,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 20,
+    "alive": 29,
+    "leadsLive": 10,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 21,
+    "alive": 29,
+    "leadsLive": 9,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 22,
+    "alive": 29,
+    "leadsLive": 7,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 23,
+    "alive": 28,
+    "leadsLive": 7,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 24,
+    "alive": 27,
+    "leadsLive": 5,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 25,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 26,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 4,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 27,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 3,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 28,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 29,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 30,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 1,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 31,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 32,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 33,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 34,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 35,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 36,
+    "alive": 27,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 37,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 38,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 39,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 40,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 41,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 42,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 43,
+    "alive": 28,
+    "leadsLive": 1,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 44,
+    "alive": 28,
+    "leadsLive": 2,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  },
+  {
+    "day": 45,
+    "alive": 28,
+    "leadsLive": 2,
+    "supplied": 0,
+    "tradesFromDemand": 0
+  }
+]

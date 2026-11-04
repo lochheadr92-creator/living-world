@@ -1,0 +1,92 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-longruns-20261031-212947-395\\source",
+  "head": "056dbacce3e139c62a464afccae7b408cb418f16",
+  "branch": null,
+  "workingFiles": [
+    {
+      "path": "longrun-results/households-meadow/final.json",
+      "kind": "untracked",
+      "sha256": "6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110",
+      "bytes": 4534751,
+      "archiveObject": "objects/6b/6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110.gz"
+    },
+    {
+      "path": "longrun-results/households-meadow/report.json",
+      "kind": "untracked",
+      "sha256": "18d9ffac8b79477eead3927e6c67da8c664a6158661edf493d561c9ef1af9f3b",
+      "bytes": 557380,
+      "archiveObject": "objects/18/18d9ffac8b79477eead3927e6c67da8c664a6158661edf493d561c9ef1af9f3b.gz"
+    },
+    {
+      "path": "longrun-results/households-river/final.json",
+      "kind": "untracked",
+      "sha256": "617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e",
+      "bytes": 4357634,
+      "archiveObject": "objects/61/617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e.gz"
+    },
+    {
+      "path": "longrun-results/households-river/report.json",
+      "kind": "untracked",
+      "sha256": "55cfbd4b67c8eb8003b185ee300e7d9b9fc1170a656785f969c97800532b7ffa",
+      "bytes": 523551,
+      "archiveObject": "objects/55/55cfbd4b67c8eb8003b185ee300e7d9b9fc1170a656785f969c97800532b7ffa.gz"
+    },
+    {
+      "path": "longrun-results/production-meadow/final.json",
+      "kind": "untracked",
+      "sha256": "6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110",
+      "bytes": 4534751,
+      "archiveObject": "objects/6b/6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110.gz"
+    },
+    {
+      "path": "longrun-results/production-meadow/report.json",
+      "kind": "untracked",
+      "sha256": "ccf8c3700d315a9444749aae0d5e8f156214fb22821eb778c2a391a8c0ab4725",
+      "bytes": 554281,
+      "archiveObject": "objects/cc/ccf8c3700d315a9444749aae0d5e8f156214fb22821eb778c2a391a8c0ab4725.gz"
+    },
+    {
+      "path": "longrun-results/production-river/final.json",
+      "kind": "untracked",
+      "sha256": "617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e",
+      "bytes": 4357634,
+      "archiveObject": "objects/61/617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e.gz"
+    },
+    {
+      "path": "longrun-results/production-river/report.json",
+      "kind": "untracked",
+      "sha256": "bab0cb747761cecb85c48ed9a76f6c05928727b8c36b94a469c995ede881e13d",
+      "bytes": 523442,
+      "archiveObject": "objects/ba/bab0cb747761cecb85c48ed9a76f6c05928727b8c36b94a469c995ede881e13d.gz"
+    },
+    {
+      "path": "longrun-results/promises-meadow/final.json",
+      "kind": "untracked",
+      "sha256": "6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110",
+      "bytes": 4534751,
+      "archiveObject": "objects/6b/6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110.gz"
+    },
+    {
+      "path": "longrun-results/promises-meadow/report.json",
+      "kind": "untracked",
+      "sha256": "c624102bfaa67efb8b75f04014b99b94a8b64eca2101ca6cadacd84def89dcc0",
+      "bytes": 552384,
+      "archiveObject": "objects/c6/c624102bfaa67efb8b75f04014b99b94a8b64eca2101ca6cadacd84def89dcc0.gz"
+    },
+    {
+      "path": "longrun-results/promises-river/final.json",
+      "kind": "untracked",
+      "sha256": "617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e",
+      "bytes": 4357634,
+      "archiveObject": "objects/61/617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e.gz"
+    },
+    {
+      "path": "longrun-results/promises-river/report.json",
+      "kind": "untracked",
+      "sha256": "c62f4e664dba3876af92083974e3b4bac41e1b17a628b77afd14ea7e7d55ac9d",
+      "bytes": 521903,
+      "archiveObject": "objects/c6/c62f4e664dba3876af92083974e3b4bac41e1b17a628b77afd14ea7e7d55ac9d.gz"
+    }
+  ],
+  "stagedFiles": []
+}

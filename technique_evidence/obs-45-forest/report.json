@@ -1,0 +1,49 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 52,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 85.557,
+  "alive": 8,
+  "deaths": 22,
+  "holdersAtStart": {
+    "charcoal": 6,
+    "smelting": 3,
+    "forging": 2
+  },
+  "holdersAtEnd": {
+    "charcoal": 4,
+    "smelting": 2,
+    "forging": 1
+  },
+  "holdersDead": {
+    "charcoal": 2,
+    "smelting": 1,
+    "forging": 1
+  },
+  "lessonsByKind": {},
+  "lessonOffersStarted": 0,
+  "lessonRequestsStarted": 0,
+  "learned": [],
+  "trialBatchesStarted": 0,
+  "trialAttemptsLogged": 0,
+  "trialsWorkedOut": 0,
+  "trialsOpenAtEnd": [],
+  "optionSamples": 776,
+  "wantedKinds": {},
+  "blockedBy": {},
+  "smithies": 0,
+  "smithySites": 0,
+  "firstSmithyDay": null,
+  "ironMade": 0,
+  "charcoalMade": 0,
+  "oreTaken": 0,
+  "hash": "e80b59c0",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

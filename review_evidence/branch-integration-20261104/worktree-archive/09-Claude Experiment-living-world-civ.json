@@ -1,0 +1,29 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-civ",
+  "head": "3f6ec66115320f4939f10158eefa2a990eb62918",
+  "branch": "refs/heads/claude/civilisation-phase1",
+  "workingFiles": [
+    {
+      "path": ".gitignore",
+      "kind": "tracked-change",
+      "sha256": "f39cb23375a03ec770a8f4e934171320fb51b177db0409c41d77c8298427d944",
+      "bytes": 434,
+      "archiveObject": "objects/f3/f39cb23375a03ec770a8f4e934171320fb51b177db0409c41d77c8298427d944.gz"
+    },
+    {
+      "path": "scripts/inhabit/devserver.ts",
+      "kind": "tracked-change",
+      "sha256": "6be8a49db5ebb7affe0f7fc75ffc974d6b1007a60b5f57870646b0a6985d4f80",
+      "bytes": 4096,
+      "archiveObject": "objects/6b/6be8a49db5ebb7affe0f7fc75ffc974d6b1007a60b5f57870646b0a6985d4f80.gz"
+    },
+    {
+      "path": "vite.config.ts",
+      "kind": "tracked-change",
+      "sha256": "60787cfea774cf314b8795062bf04e0c18c72608793ea0975713c5afc8cbd088",
+      "bytes": 554,
+      "archiveObject": "objects/60/60787cfea774cf314b8795062bf04e0c18c72608793ea0975713c5afc8cbd088.gz"
+    }
+  ],
+  "stagedFiles": []
+}

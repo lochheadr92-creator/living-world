@@ -1,0 +1,10 @@
+﻿{
+    "Run":  "production-meadow",
+    "Complete":  true,
+    "ExitCode":  0,
+    "StopReason":  "horizon",
+    "DaysReached":  25,
+    "Alive":  28,
+    "Conserved":  true,
+    "Failure":  ""
+}

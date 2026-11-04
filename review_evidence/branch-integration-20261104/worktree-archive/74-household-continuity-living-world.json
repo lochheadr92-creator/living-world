@@ -1,0 +1,43 @@
+{
+  "worktree": "C:\\Users\\RJLoc\\.codex\\worktrees\\household-continuity\\living-world",
+  "head": "e415b4b65ef006a09cb80e78777b1a6992462352",
+  "branch": "refs/heads/codex/game-inspired-slices",
+  "workingFiles": [
+    {
+      "path": "civic_evidence/work-tastes-fern-off-save.json",
+      "kind": "ignored-evidence",
+      "sha256": "d69a3836df8fd80026f8f1ae7cf35cc5051e7fe0d044f061e349c0b4f151c494",
+      "bytes": 1482864,
+      "archiveObject": "objects/d6/d69a3836df8fd80026f8f1ae7cf35cc5051e7fe0d044f061e349c0b4f151c494.gz"
+    },
+    {
+      "path": "civic_evidence/work-tastes-fern-on-save.json",
+      "kind": "ignored-evidence",
+      "sha256": "19fe98b78766e7c0f0812ee14ee082ebd7bdc45cdd9218708b1ec71e0827b40f",
+      "bytes": 1489694,
+      "archiveObject": "objects/19/19fe98b78766e7c0f0812ee14ee082ebd7bdc45cdd9218708b1ec71e0827b40f.gz"
+    },
+    {
+      "path": "civic_evidence/work-tastes-meadow-off-save.json",
+      "kind": "ignored-evidence",
+      "sha256": "381a46bcf905a4f4cb147e9186626e1bcb6e5c8682779ddc3f65c7fff19406d5",
+      "bytes": 1105917,
+      "archiveObject": "objects/38/381a46bcf905a4f4cb147e9186626e1bcb6e5c8682779ddc3f65c7fff19406d5.gz"
+    },
+    {
+      "path": "civic_evidence/work-tastes-meadow-on-save.json",
+      "kind": "ignored-evidence",
+      "sha256": "5a411994ee4af33069943ff301c2d74757692362c53c2f8ee060e9d4d764a0e0",
+      "bytes": 1106101,
+      "archiveObject": "objects/5a/5a411994ee4af33069943ff301c2d74757692362c53c2f8ee060e9d4d764a0e0.gz"
+    },
+    {
+      "path": "civic_evidence/work-tastes-river-on-save.json",
+      "kind": "ignored-evidence",
+      "sha256": "359f5c36760a614f1aae05981f29404af012422d92f6ba553ad973ba859ec1f2",
+      "bytes": 1206386,
+      "archiveObject": "objects/35/359f5c36760a614f1aae05981f29404af012422d92f6ba553ad973ba859ec1f2.gz"
+    }
+  ],
+  "stagedFiles": []
+}

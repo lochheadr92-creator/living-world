@@ -1,0 +1,439 @@
+[
+  {
+    "tick": 0,
+    "person": 899,
+    "name": "Petra",
+    "activity": 963,
+    "item": "wood",
+    "store": 898,
+    "rememberedStore": {
+      "id": 898,
+      "kind": "building",
+      "x": 47.5,
+      "y": 41.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 896,
+      "cond": 74.38790724147111,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "fruit": 1,
+        "wood": 2
+      },
+      "origin": 899,
+      "hops": 0
+    },
+    "goal": "to make a hoe",
+    "kind": "plans",
+    "planId": 962,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 902,
+    "name": "Bram",
+    "activity": 965,
+    "item": "wood",
+    "store": 901,
+    "rememberedStore": {
+      "id": 901,
+      "kind": "building",
+      "x": 45.5,
+      "y": 45.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 900,
+      "cond": 84.7941128606908,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "fruit": 1,
+        "wood": 2
+      },
+      "origin": 902,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 964,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 964,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 0,
+    "person": 920,
+    "name": "Yusuf",
+    "activity": 978,
+    "item": "wood",
+    "store": 919,
+    "rememberedStore": {
+      "id": 919,
+      "kind": "building",
+      "x": 44.5,
+      "y": 36.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 0,
+      "src": "seen",
+      "from": 0,
+      "learned": 0,
+      "btype": "lean_to",
+      "hh": 918,
+      "cond": 89.57473177462816,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "fruit": 1,
+        "wood": 2
+      },
+      "origin": 920,
+      "hops": 0
+    },
+    "goal": "to make a pick",
+    "kind": "plans",
+    "planId": 977,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 977,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 138,
+    "person": 905,
+    "name": "Mira",
+    "activity": 1120,
+    "item": "wood",
+    "store": 904,
+    "rememberedStore": {
+      "id": 904,
+      "kind": "building",
+      "x": 41.5,
+      "y": 46.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 136,
+      "src": "seen",
+      "from": 0,
+      "learned": 136,
+      "btype": "lean_to",
+      "hh": 903,
+      "cond": 78.66504315272597,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "fruit": 1,
+        "wood": 2
+      },
+      "origin": 905,
+      "hops": 0
+    },
+    "goal": "for a friend’s lean-to",
+    "kind": "plans",
+    "planId": 966,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 966,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 232,
+    "person": 899,
+    "name": "Petra",
+    "activity": 1193,
+    "item": "wood",
+    "store": 898,
+    "rememberedStore": {
+      "id": 898,
+      "kind": "building",
+      "x": 47.5,
+      "y": 41.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 232,
+      "src": "seen",
+      "from": 0,
+      "learned": 232,
+      "btype": "lean_to",
+      "hh": 896,
+      "cond": 73.66560724147031,
+      "fuel": 0,
+      "items": {
+        "berries": 3,
+        "wood": 1
+      },
+      "origin": 899,
+      "hops": 0
+    },
+    "goal": "to make a hoe",
+    "kind": "plans",
+    "planId": 962,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 962,
+        "kind": "tool",
+        "goal": "make a hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 1
+        },
+        "makes": "hoe",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more wood for the hoe",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 987,
+    "person": 915,
+    "name": "Tomas",
+    "activity": 1590,
+    "item": "wood",
+    "store": 913,
+    "rememberedStore": {
+      "id": 913,
+      "kind": "building",
+      "x": 39.5,
+      "y": 37.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 987,
+      "src": "seen",
+      "from": 0,
+      "learned": 987,
+      "btype": "lean_to",
+      "hh": 912,
+      "cond": 70.1459780465338,
+      "fuel": 0,
+      "items": {
+        "berries": 5,
+        "fruit": 3,
+        "wood": 2
+      },
+      "origin": 915,
+      "hops": 0
+    },
+    "goal": "to keep the fire going",
+    "kind": "plans",
+    "planId": null,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 973,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 0,
+        "until": 4800,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more stone for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "stone",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "tick": 4761,
+    "person": 914,
+    "name": "Edda",
+    "activity": 2832,
+    "item": "wood",
+    "store": 913,
+    "rememberedStore": {
+      "id": 913,
+      "kind": "building",
+      "x": 39.5,
+      "y": 37.5,
+      "amount": 0,
+      "max": 0,
+      "seen": 4759,
+      "src": "seen",
+      "from": 0,
+      "learned": 4759,
+      "btype": "lean_to",
+      "hh": 912,
+      "cond": 57.348356546528706,
+      "fuel": 0,
+      "items": {
+        "wood": 1
+      },
+      "origin": 914,
+      "hops": 0
+    },
+    "goal": "for my household’s hut",
+    "kind": "plans",
+    "planId": 2213,
+    "offStillOffers": false,
+    "commitments": [],
+    "plans": [
+      {
+        "id": 2213,
+        "kind": "shelter",
+        "goal": "get the household's hut built",
+        "since": 2843,
+        "until": 10043,
+        "status": "active",
+        "reason": "the household is still in a lean-to, and their hut wants 8 wood and 4 stone",
+        "setAside": 0,
+        "aboutId": 2211,
+        "wants": {
+          "wood": 4
+        },
+        "makes": "",
+        "sheltered": 0,
+        "worked": 4,
+        "ended": 0,
+        "step": "get 2 wood for the hut (it wants 4 wood and 4 stone)",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ]
+  }
+]

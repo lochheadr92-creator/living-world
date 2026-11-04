@@ -1,0 +1,1711 @@
+{
+  "tick": 43440,
+  "seconds": 45.6633863,
+  "error": "Error: Invalid helper direct receipt",
+  "requests": [
+    {
+      "id": 5917,
+      "kind": "care",
+      "from": 916,
+      "to": 915,
+      "item": "water",
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 14691,
+      "expires": 15391,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 14775,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 916,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 5929,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "fruit",
+        "amount": 2,
+        "tick": 14775,
+        "eventKind": "activity",
+        "eventId": 5952
+      }
+    },
+    {
+      "id": 7845,
+      "kind": "food",
+      "from": 914,
+      "to": 902,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 20427,
+      "expires": 21127,
+      "status": "fulfilled",
+      "note": "received 2 berries",
+      "resolved": 20449,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 914,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "berries",
+        "amount": 2,
+        "tick": 20449,
+        "eventKind": "conversation",
+        "eventId": 7836
+      },
+      "offered": 2
+    },
+    {
+      "id": 8250,
+      "kind": "care",
+      "from": 926,
+      "to": 928,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 22098,
+      "expires": 22798,
+      "status": "partial",
+      "note": "asked for 2, given 1, received 1 fish",
+      "resolved": 22120,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 926,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "partial",
+      "delivered": 1,
+      "helperReceipt": {
+        "item": "fish",
+        "amount": 1,
+        "tick": 22120,
+        "eventKind": "conversation",
+        "eventId": 8245
+      },
+      "offered": 1
+    },
+    {
+      "id": 8399,
+      "kind": "care",
+      "from": 917,
+      "to": 911,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 22415,
+      "expires": 23115,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 24724,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 917,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 8408,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "berries",
+        "amount": 1,
+        "tick": 24214,
+        "eventKind": "activity",
+        "eventId": 8841
+      }
+    },
+    {
+      "id": 8431,
+      "kind": "care",
+      "from": 926,
+      "to": 924,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 22464,
+      "expires": 23164,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 24676,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 926,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 8442,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "berries",
+        "amount": 1,
+        "tick": 24676,
+        "eventKind": "activity",
+        "eventId": 9011
+      }
+    },
+    {
+      "id": 9100,
+      "kind": "food",
+      "from": 942,
+      "to": 943,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 24691,
+      "expires": 25391,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 28534,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 942,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 9114,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "grain",
+        "amount": 1,
+        "tick": 28534,
+        "eventKind": "activity",
+        "eventId": 10402
+      }
+    },
+    {
+      "id": 9228,
+      "kind": "food",
+      "from": 929,
+      "to": 928,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 24881,
+      "expires": 25581,
+      "status": "partial",
+      "note": "asked for 2, given 1, received 1 fruit",
+      "resolved": 24903,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 929,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "partial",
+      "delivered": 1,
+      "helperReceipt": {
+        "item": "fruit",
+        "amount": 1,
+        "tick": 24903,
+        "eventKind": "conversation",
+        "eventId": 9219
+      },
+      "offered": 1
+    },
+    {
+      "id": 9981,
+      "kind": "care",
+      "from": 925,
+      "to": 914,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 27049,
+      "expires": 27749,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 27132,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 925,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 9991,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "berries",
+        "amount": 2,
+        "tick": 27132,
+        "eventKind": "activity",
+        "eventId": 10011
+      }
+    },
+    {
+      "id": 13142,
+      "kind": "food",
+      "from": 942,
+      "to": 939,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 36044,
+      "expires": 36744,
+      "status": "fulfilled",
+      "note": "received 2 grain",
+      "resolved": 36066,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 942,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "grain",
+        "amount": 2,
+        "tick": 36066,
+        "eventKind": "conversation",
+        "eventId": 13132
+      },
+      "offered": 2
+    },
+    {
+      "id": 14128,
+      "kind": "care",
+      "from": 937,
+      "to": 934,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 38634,
+      "expires": 39334,
+      "status": "fulfilled",
+      "note": "promise kept",
+      "resolved": 38719,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 937,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "commitmentId": 14146,
+      "offered": 2,
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "grain",
+        "amount": 2,
+        "tick": 38719,
+        "eventKind": "activity",
+        "eventId": 14161
+      }
+    },
+    {
+      "id": 14838,
+      "kind": "food",
+      "from": 929,
+      "to": 934,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 40835,
+      "expires": 41535,
+      "status": "promised",
+      "note": "Thea will bring 2 berries (or leave it at Isla’s lean-to)",
+      "resolved": 0,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 929,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "",
+      "commitmentId": 14846,
+      "offered": 2,
+      "delivered": 1,
+      "helperReceipt": {
+        "item": "berries",
+        "amount": 1,
+        "tick": 41972,
+        "eventKind": "activity",
+        "eventId": 15395
+      }
+    },
+    {
+      "id": 15274,
+      "kind": "food",
+      "from": 914,
+      "to": 908,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 41680,
+      "expires": 42380,
+      "status": "partial",
+      "note": "asked for 2, given 1, received 1 fish",
+      "resolved": 41702,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 914,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "partial",
+      "delivered": 1,
+      "helperReceipt": {
+        "item": "fish",
+        "amount": 1,
+        "tick": 41702,
+        "eventKind": "conversation",
+        "eventId": 15268
+      },
+      "offered": 1
+    },
+    {
+      "id": 15310,
+      "kind": "food",
+      "from": 929,
+      "to": 911,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 41760,
+      "expires": 42460,
+      "status": "fulfilled",
+      "note": "received 2 fish",
+      "resolved": 41782,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 929,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "kept",
+      "delivered": 2,
+      "helperReceipt": {
+        "item": "fish",
+        "amount": 2,
+        "tick": 41782,
+        "eventKind": "conversation",
+        "eventId": 15306
+      },
+      "offered": 2
+    },
+    {
+      "id": 15700,
+      "kind": "care",
+      "from": 916,
+      "to": 911,
+      "item": null,
+      "amount": 2,
+      "offer": null,
+      "offerAmount": 0,
+      "siteId": 0,
+      "infoKind": "",
+      "created": 43303,
+      "expires": 44003,
+      "status": "partial",
+      "note": "asked for 2, given 2, received 1 meat",
+      "resolved": 43325,
+      "purpose": "",
+      "destKind": "person",
+      "destId": 916,
+      "deadline": 0,
+      "milestone": "",
+      "toolKind": null,
+      "outcome": "partial",
+      "delivered": 1,
+      "helperReceipt": {
+        "item": "meat",
+        "amount": 1,
+        "tick": 43325,
+        "eventKind": "conversation",
+        "eventId": 15695
+      },
+      "offered": 2
+    }
+  ],
+  "memories": [
+    {
+      "id": 899,
+      "name": "Petra",
+      "memories": [
+        {
+          "requestId": 4670,
+          "otherId": 920,
+          "siteId": 0,
+          "tick": 10820,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 10820,
+              "eventKind": "conversation",
+              "eventId": 4662
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 902,
+      "name": "Bram",
+      "memories": [
+        {
+          "requestId": 2326,
+          "otherId": 936,
+          "siteId": 0,
+          "tick": 3128,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 berries",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 3128,
+              "eventKind": "conversation",
+              "eventId": 2321
+            }
+          }
+        },
+        {
+          "requestId": 7845,
+          "otherId": 914,
+          "siteId": 0,
+          "tick": 20449,
+          "outcome": "fulfilled",
+          "reason": "received 2 berries",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 20449,
+              "eventKind": "conversation",
+              "eventId": 7836
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 905,
+      "name": "Mira",
+      "memories": [
+        {
+          "requestId": 3218,
+          "otherId": 931,
+          "siteId": 0,
+          "tick": 5994,
+          "outcome": "fulfilled",
+          "reason": "received 2 berries",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 5994,
+              "eventKind": "conversation",
+              "eventId": 3209
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 908,
+      "name": "Lena",
+      "memories": [
+        {
+          "requestId": 15274,
+          "otherId": 914,
+          "siteId": 0,
+          "tick": 41702,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fish",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fish",
+              "amount": 1,
+              "tick": 41702,
+              "eventKind": "conversation",
+              "eventId": 15268
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 911,
+      "name": "Ada",
+      "memories": [
+        {
+          "requestId": 2705,
+          "otherId": 929,
+          "siteId": 0,
+          "tick": 4798,
+          "outcome": "fulfilled",
+          "reason": "received 1 stone",
+          "role": "helper",
+          "task": {
+            "kind": "stone",
+            "item": "stone",
+            "asked": 1,
+            "offered": 1,
+            "receipt": {
+              "item": "stone",
+              "amount": 1,
+              "tick": 4798,
+              "eventKind": "conversation",
+              "eventId": 2695
+            }
+          }
+        },
+        {
+          "requestId": 8399,
+          "otherId": 917,
+          "siteId": 0,
+          "tick": 24724,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 24214,
+              "eventKind": "activity",
+              "eventId": 8841
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 24724,
+            "from": 911,
+            "completedAt": 24724,
+            "commitmentId": 8408,
+            "activityId": 9033,
+            "reportAfter": 33989
+          },
+          "cancellation": {
+            "source": "requester statement",
+            "tick": 33567,
+            "from": 917,
+            "commitmentId": 8408,
+            "target": {
+              "targetId": 913,
+              "kind": "building",
+              "tick": 32863,
+              "x": 39.5,
+              "y": 37.5,
+              "source": "observed absence"
+            },
+            "conversationId": 12080,
+            "response": "already ended"
+          }
+        },
+        {
+          "requestId": 15310,
+          "otherId": 929,
+          "siteId": 0,
+          "tick": 41782,
+          "outcome": "fulfilled",
+          "reason": "received 2 fish",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "fish",
+              "amount": 2,
+              "tick": 41782,
+              "eventKind": "conversation",
+              "eventId": 15306
+            }
+          }
+        },
+        {
+          "requestId": 15700,
+          "otherId": 916,
+          "siteId": 0,
+          "tick": 43325,
+          "outcome": "partial",
+          "reason": "asked for 2, given 2, received 1 meat",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "meat",
+              "amount": 1,
+              "tick": 43325,
+              "eventKind": "conversation",
+              "eventId": 15695
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 914,
+      "name": "Edda",
+      "memories": [
+        {
+          "requestId": 1357,
+          "otherId": 915,
+          "siteId": 0,
+          "tick": 2625,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "water",
+            "item": "water",
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "water",
+              "amount": 1,
+              "tick": 2321,
+              "eventKind": "activity",
+              "eventId": 1821
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 2625,
+            "from": 914,
+            "completedAt": 2625,
+            "commitmentId": 1374,
+            "activityId": 2011,
+            "acknowledgedAt": 3191
+          }
+        },
+        {
+          "requestId": 7845,
+          "otherId": 902,
+          "siteId": 0,
+          "tick": 20449,
+          "outcome": "fulfilled",
+          "reason": "received 2 berries",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 20449,
+              "eventKind": "conversation",
+              "eventId": 7836
+            }
+          }
+        },
+        {
+          "requestId": 9981,
+          "otherId": 925,
+          "siteId": 0,
+          "tick": 27132,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 27132,
+              "eventKind": "activity",
+              "eventId": 10011
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 27132,
+            "from": 914,
+            "completedAt": 27132,
+            "commitmentId": 9991,
+            "activityId": 10011,
+            "acknowledgedAt": 27132
+          }
+        },
+        {
+          "requestId": 15274,
+          "otherId": 908,
+          "siteId": 0,
+          "tick": 41702,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fish",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fish",
+              "amount": 1,
+              "tick": 41702,
+              "eventKind": "conversation",
+              "eventId": 15268
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 915,
+      "name": "Tomas",
+      "memories": [
+        {
+          "requestId": 1406,
+          "otherId": 916,
+          "siteId": 0,
+          "tick": 1195,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "asker",
+          "task": {
+            "kind": "water",
+            "item": "water",
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "water",
+              "amount": 2,
+              "tick": 1195,
+              "eventKind": "activity",
+              "eventId": 1641
+            }
+          },
+          "expectation": {
+            "commitmentId": 1415,
+            "conversationId": 1390,
+            "made": 641,
+            "deadline": 2441,
+            "amount": 2,
+            "item": "water",
+            "planId": 0,
+            "destId": 913,
+            "otherName": "Viktor",
+            "received": 2,
+            "endedAt": 1195,
+            "source": "observed completion"
+          },
+          "completion": {
+            "source": "observed completion",
+            "tick": 1195,
+            "from": 915,
+            "completedAt": 1195,
+            "commitmentId": 1415,
+            "activityId": 1641
+          }
+        },
+        {
+          "requestId": 5917,
+          "otherId": 916,
+          "siteId": 0,
+          "tick": 14775,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": "water",
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "fruit",
+              "amount": 2,
+              "tick": 14775,
+              "eventKind": "activity",
+              "eventId": 5952
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 14775,
+            "from": 915,
+            "completedAt": 14775,
+            "commitmentId": 5929,
+            "activityId": 5952,
+            "acknowledgedAt": 14775
+          }
+        }
+      ]
+    },
+    {
+      "id": 916,
+      "name": "Viktor",
+      "memories": [
+        {
+          "requestId": 15700,
+          "otherId": 911,
+          "siteId": 0,
+          "tick": 43325,
+          "outcome": "partial",
+          "reason": "asked for 2, given 2, received 1 meat",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "meat",
+              "amount": 1,
+              "tick": 43325,
+              "eventKind": "conversation",
+              "eventId": 15695
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 920,
+      "name": "Yusuf",
+      "memories": [
+        {
+          "requestId": 4670,
+          "otherId": 899,
+          "siteId": 0,
+          "tick": 10820,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 10820,
+              "eventKind": "conversation",
+              "eventId": 4662
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 924,
+      "name": "Hal",
+      "memories": [
+        {
+          "requestId": 8431,
+          "otherId": 926,
+          "siteId": 0,
+          "tick": 24676,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 24676,
+              "eventKind": "activity",
+              "eventId": 9011
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 24676,
+            "from": 924,
+            "completedAt": 24676,
+            "commitmentId": 8442,
+            "activityId": 9011,
+            "acknowledgedAt": 24676
+          }
+        }
+      ]
+    },
+    {
+      "id": 925,
+      "name": "Kaia",
+      "memories": [
+        {
+          "requestId": 9981,
+          "otherId": 914,
+          "siteId": 0,
+          "tick": 27132,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 27132,
+              "eventKind": "activity",
+              "eventId": 10011
+            }
+          },
+          "expectation": {
+            "commitmentId": 9991,
+            "conversationId": 9975,
+            "made": 27071,
+            "deadline": 28871,
+            "amount": 2,
+            "item": "berries",
+            "planId": 0,
+            "destId": 922,
+            "otherName": "Edda",
+            "received": 2,
+            "endedAt": 27132,
+            "source": "observed completion"
+          },
+          "completion": {
+            "source": "observed completion",
+            "tick": 27132,
+            "from": 925,
+            "completedAt": 27132,
+            "commitmentId": 9991,
+            "activityId": 10011
+          }
+        }
+      ]
+    },
+    {
+      "id": 926,
+      "name": "Tessa",
+      "memories": [
+        {
+          "requestId": 8250,
+          "otherId": 928,
+          "siteId": 0,
+          "tick": 22120,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fish",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fish",
+              "amount": 1,
+              "tick": 22120,
+              "eventKind": "conversation",
+              "eventId": 8245
+            }
+          }
+        },
+        {
+          "requestId": 8431,
+          "otherId": 924,
+          "siteId": 0,
+          "tick": 24676,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 24676,
+              "eventKind": "activity",
+              "eventId": 9011
+            }
+          },
+          "expectation": {
+            "commitmentId": 8442,
+            "conversationId": 8420,
+            "made": 22486,
+            "deadline": 24286,
+            "amount": 2,
+            "item": "berries",
+            "planId": 0,
+            "destId": 922,
+            "otherName": "Hal",
+            "received": 1,
+            "endedAt": 24676,
+            "source": "observed completion"
+          },
+          "completion": {
+            "source": "observed completion",
+            "tick": 24676,
+            "from": 926,
+            "completedAt": 24676,
+            "commitmentId": 8442,
+            "activityId": 9011
+          }
+        }
+      ]
+    },
+    {
+      "id": 928,
+      "name": "Jax",
+      "memories": [
+        {
+          "requestId": 8250,
+          "otherId": 926,
+          "siteId": 0,
+          "tick": 22120,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fish",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fish",
+              "amount": 1,
+              "tick": 22120,
+              "eventKind": "conversation",
+              "eventId": 8245
+            }
+          }
+        },
+        {
+          "requestId": 9228,
+          "otherId": 929,
+          "siteId": 0,
+          "tick": 24903,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fruit",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fruit",
+              "amount": 1,
+              "tick": 24903,
+              "eventKind": "conversation",
+              "eventId": 9219
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 929,
+      "name": "Isla",
+      "memories": [
+        {
+          "requestId": 2705,
+          "otherId": 911,
+          "siteId": 0,
+          "tick": 4798,
+          "outcome": "fulfilled",
+          "reason": "received 1 stone",
+          "role": "asker",
+          "task": {
+            "kind": "stone",
+            "item": "stone",
+            "asked": 1,
+            "offered": 1,
+            "receipt": {
+              "item": "stone",
+              "amount": 1,
+              "tick": 4798,
+              "eventKind": "conversation",
+              "eventId": 2695
+            }
+          }
+        },
+        {
+          "requestId": 9228,
+          "otherId": 928,
+          "siteId": 0,
+          "tick": 24903,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 fruit",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "fruit",
+              "amount": 1,
+              "tick": 24903,
+              "eventKind": "conversation",
+              "eventId": 9219
+            }
+          }
+        },
+        {
+          "requestId": 15310,
+          "otherId": 911,
+          "siteId": 0,
+          "tick": 41782,
+          "outcome": "fulfilled",
+          "reason": "received 2 fish",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "fish",
+              "amount": 2,
+              "tick": 41782,
+              "eventKind": "conversation",
+              "eventId": 15306
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 931,
+      "name": "Greta",
+      "memories": [
+        {
+          "requestId": 2097,
+          "otherId": 935,
+          "siteId": 0,
+          "tick": 2735,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 2735,
+              "eventKind": "conversation",
+              "eventId": 2091
+            }
+          }
+        },
+        {
+          "requestId": 3112,
+          "otherId": 932,
+          "siteId": 0,
+          "tick": 5768,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 berries",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 5768,
+              "eventKind": "conversation",
+              "eventId": 3109
+            }
+          }
+        },
+        {
+          "requestId": 3218,
+          "otherId": 905,
+          "siteId": 0,
+          "tick": 5994,
+          "outcome": "fulfilled",
+          "reason": "received 2 berries",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "berries",
+              "amount": 2,
+              "tick": 5994,
+              "eventKind": "conversation",
+              "eventId": 3209
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 934,
+      "name": "Thea",
+      "memories": [
+        {
+          "requestId": 14128,
+          "otherId": 937,
+          "siteId": 0,
+          "tick": 38719,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 2,
+              "tick": 38719,
+              "eventKind": "activity",
+              "eventId": 14161
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 38719,
+            "from": 934,
+            "completedAt": 38719,
+            "commitmentId": 14146,
+            "activityId": 14161,
+            "acknowledgedAt": 38719
+          }
+        }
+      ]
+    },
+    {
+      "id": 935,
+      "name": "Zeke",
+      "memories": [
+        {
+          "requestId": 2097,
+          "otherId": 931,
+          "siteId": 0,
+          "tick": 2735,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 2735,
+              "eventKind": "conversation",
+              "eventId": 2091
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 936,
+      "name": "Cole",
+      "memories": [
+        {
+          "requestId": 2326,
+          "otherId": 902,
+          "siteId": 0,
+          "tick": 3128,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 berries",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 3128,
+              "eventKind": "conversation",
+              "eventId": 2321
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 937,
+      "name": "Talia",
+      "memories": [
+        {
+          "requestId": 14128,
+          "otherId": 934,
+          "siteId": 0,
+          "tick": 38719,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 2,
+              "tick": 38719,
+              "eventKind": "activity",
+              "eventId": 14161
+            }
+          },
+          "expectation": {
+            "commitmentId": 14146,
+            "conversationId": 14125,
+            "made": 38656,
+            "deadline": 40456,
+            "amount": 2,
+            "item": "grain",
+            "planId": 0,
+            "destId": 2370,
+            "otherName": "Thea",
+            "received": 2,
+            "endedAt": 38719,
+            "source": "observed completion"
+          },
+          "completion": {
+            "source": "observed completion",
+            "tick": 38719,
+            "from": 937,
+            "completedAt": 38719,
+            "commitmentId": 14146,
+            "activityId": 14161
+          }
+        }
+      ]
+    },
+    {
+      "id": 939,
+      "name": "Maren",
+      "memories": [
+        {
+          "requestId": 13142,
+          "otherId": 942,
+          "siteId": 0,
+          "tick": 36066,
+          "outcome": "fulfilled",
+          "reason": "received 2 grain",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 2,
+              "tick": 36066,
+              "eventKind": "conversation",
+              "eventId": 13132
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 942,
+      "name": "Delia",
+      "memories": [
+        {
+          "requestId": 1549,
+          "otherId": 943,
+          "siteId": 0,
+          "tick": 967,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 967,
+              "eventKind": "conversation",
+              "eventId": 1544
+            }
+          }
+        },
+        {
+          "requestId": 9100,
+          "otherId": 943,
+          "siteId": 0,
+          "tick": 28534,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 28534,
+              "eventKind": "activity",
+              "eventId": 10402
+            }
+          },
+          "expectation": {
+            "commitmentId": 9114,
+            "conversationId": 9092,
+            "made": 24713,
+            "deadline": 26513,
+            "amount": 2,
+            "item": "grain",
+            "planId": 0,
+            "destId": 1710,
+            "otherName": "Theo",
+            "received": 2,
+            "endedAt": 28534,
+            "source": "observed completion"
+          },
+          "completion": {
+            "source": "observed completion",
+            "tick": 28534,
+            "from": 942,
+            "completedAt": 28534,
+            "commitmentId": 9114,
+            "activityId": 10402
+          }
+        },
+        {
+          "requestId": 13142,
+          "otherId": 939,
+          "siteId": 0,
+          "tick": 36066,
+          "outcome": "fulfilled",
+          "reason": "received 2 grain",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 2,
+              "tick": 36066,
+              "eventKind": "conversation",
+              "eventId": 13132
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 943,
+      "name": "Theo",
+      "memories": [
+        {
+          "requestId": 1549,
+          "otherId": 942,
+          "siteId": 0,
+          "tick": 967,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 grain",
+          "role": "asker",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 967,
+              "eventKind": "conversation",
+              "eventId": 1544
+            }
+          }
+        },
+        {
+          "requestId": 4224,
+          "otherId": 945,
+          "siteId": 0,
+          "tick": 9815,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 berries",
+          "role": "helper",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 9815,
+              "eventKind": "conversation",
+              "eventId": 4217
+            }
+          }
+        },
+        {
+          "requestId": 9100,
+          "otherId": 942,
+          "siteId": 0,
+          "tick": 28534,
+          "outcome": "fulfilled",
+          "reason": "promise kept",
+          "role": "helper",
+          "task": {
+            "kind": "food",
+            "item": null,
+            "asked": 2,
+            "offered": 2,
+            "receipt": {
+              "item": "grain",
+              "amount": 1,
+              "tick": 28534,
+              "eventKind": "activity",
+              "eventId": 10402
+            }
+          },
+          "completion": {
+            "source": "own completion",
+            "tick": 28534,
+            "from": 943,
+            "completedAt": 28534,
+            "commitmentId": 9114,
+            "activityId": 10402,
+            "acknowledgedAt": 28534
+          }
+        }
+      ]
+    },
+    {
+      "id": 945,
+      "name": "Arlo",
+      "memories": [
+        {
+          "requestId": 4224,
+          "otherId": 943,
+          "siteId": 0,
+          "tick": 9815,
+          "outcome": "partial",
+          "reason": "asked for 2, given 1, received 1 berries",
+          "role": "asker",
+          "task": {
+            "kind": "care",
+            "item": null,
+            "asked": 2,
+            "offered": 1,
+            "receipt": {
+              "item": "berries",
+              "amount": 1,
+              "tick": 9815,
+              "eventKind": "conversation",
+              "eventId": 4217
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

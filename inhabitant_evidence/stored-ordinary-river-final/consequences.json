@@ -1,0 +1,72 @@
+[
+  {
+    "tick": 983,
+    "stage": "linked-plan-ended",
+    "person": 1112,
+    "plan": {
+      "id": 1173,
+      "kind": "tool",
+      "goal": "make a hoe",
+      "since": 0,
+      "until": 4800,
+      "status": "done",
+      "reason": "made the hoe",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "hoe",
+      "sheltered": 0,
+      "worked": 1,
+      "ended": 982,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    }
+  },
+  {
+    "tick": 1038,
+    "stage": "later-tool-use",
+    "tool": {
+      "ent": "tool",
+      "id": 1839,
+      "kind": "hoe",
+      "tier": 0,
+      "wear": 1.036,
+      "ownerHh": 1110,
+      "holder": 1112,
+      "loan": null,
+      "madeTick": 981,
+      "maker": 1112
+    }
+  },
+  {
+    "tick": 4802,
+    "stage": "linked-plan-ended",
+    "person": 1107,
+    "plan": {
+      "id": 1169,
+      "kind": "tool",
+      "goal": "make a pick",
+      "since": 0,
+      "until": 4800,
+      "status": "dropped",
+      "reason": "never got round to the pick (still short 1 stone)",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "pick",
+      "sheltered": 0,
+      "worked": 0,
+      "ended": 4801,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": "stone",
+      "stepKey": null,
+      "blocked": ""
+    }
+  }
+]

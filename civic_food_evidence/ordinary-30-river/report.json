@@ -1,0 +1,30 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 49,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 52.446,
+  "alive": 30,
+  "deaths": 1,
+  "publicStorehouses": 1,
+  "projects": [
+    "completed"
+  ],
+  "witnessesWithBuilding": 4,
+  "publicMealStarts": 0,
+  "publicWithdrawals": 2,
+  "unitsFromPublic": {},
+  "mealsByWitness": 0,
+  "mealsTotal": 0,
+  "receipts": 0,
+  "receiptsByMeal": 0,
+  "receiptsByWithdrawal": 0,
+  "hash": "11cbe56f",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "arm": "enabled",
+    "staged": true,
+    "externalModel": false,
+    "hash": "2f4e6289",
+    "fullReplayEqual": true,
+    "learned": true,
+    "produced": true,
+    "knowledge": {
+      "charcoal": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      }
+    },
+    "milestones": [
+      {
+        "tick": 213,
+        "kind": "learned",
+        "knowledge": {
+          "source": "taught",
+          "learned": 212,
+          "teacher": 2,
+          "lesson": 8,
+          "started": 32
+        }
+      },
+      {
+        "tick": 992,
+        "kind": "produced",
+        "store": {
+          "charcoal": 3
+        }
+      }
+    ],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "arm": "disabled",
+    "staged": true,
+    "externalModel": false,
+    "hash": "8efe9518",
+    "fullReplayEqual": true,
+    "learned": false,
+    "produced": false,
+    "knowledge": {},
+    "milestones": [],
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

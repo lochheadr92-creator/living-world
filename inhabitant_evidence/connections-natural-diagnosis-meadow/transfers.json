@@ -1,0 +1,74 @@
+[
+  {
+    "tick": 12,
+    "from": "building:996",
+    "to": "person:997",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 12,
+    "from": "building:1006",
+    "to": "person:1007",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 16,
+    "from": "building:999",
+    "to": "person:1001",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 87,
+    "from": "building:1021",
+    "to": "person:1023",
+    "item": "wood",
+    "n": 2,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 601,
+    "from": "person:1007",
+    "to": "person:1010",
+    "item": "berries",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 763,
+    "from": "building:996",
+    "to": "person:997",
+    "item": "wood",
+    "n": 1,
+    "reason": "withdraw"
+  },
+  {
+    "tick": 794,
+    "from": "person:1007",
+    "to": "person:1009",
+    "item": "fruit",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 4645,
+    "from": "person:1007",
+    "to": "person:1008",
+    "item": "wood",
+    "n": 1,
+    "reason": "gift on request"
+  },
+  {
+    "tick": 8392,
+    "from": "person:1013",
+    "to": "person:1014",
+    "item": "wood",
+    "n": 2,
+    "reason": "gift on request"
+  }
+]

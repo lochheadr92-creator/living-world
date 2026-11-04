@@ -1,0 +1,8452 @@
+[
+  {
+    "tick": 0,
+    "person": 1112,
+    "activity": 1174,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 1111
+  },
+  {
+    "tick": 268,
+    "person": 1135,
+    "activity": 1417,
+    "kind": "socialize",
+    "label": "Ask Zia for wood",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 446,
+    "person": 1116,
+    "activity": 1528,
+    "kind": "socialize",
+    "label": "Ask Abel for water",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 457,
+    "person": 1134,
+    "activity": 1534,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 480,
+    "person": 1146,
+    "activity": 1545,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 609,
+    "person": 1139,
+    "activity": 1599,
+    "kind": "socialize",
+    "label": "Ask Zia for wood",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 613,
+    "person": 1139,
+    "activity": 1601,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 615,
+    "person": 1139,
+    "activity": 1604,
+    "kind": "socialize",
+    "label": "Ask Yan for wood",
+    "target": 1134,
+    "purpose": "request"
+  },
+  {
+    "tick": 635,
+    "person": 1137,
+    "activity": 1617,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 706,
+    "person": 1145,
+    "activity": 1667,
+    "kind": "socialize",
+    "label": "Ask Zia for wood",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 734,
+    "person": 1107,
+    "activity": 1683,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 1105
+  },
+  {
+    "tick": 771,
+    "person": 1145,
+    "activity": 1700,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 775,
+    "person": 1147,
+    "activity": 1705,
+    "kind": "socialize",
+    "label": "Ask Abel for wood",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 2155,
+    "person": 1120,
+    "activity": 2048,
+    "kind": "socialize",
+    "label": "Ask Lena for stone",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 2215,
+    "person": 1150,
+    "activity": 2059,
+    "kind": "socialize",
+    "label": "Ask Ivy to help with the lean-to",
+    "target": 1137,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 2220,
+    "person": 1150,
+    "activity": 2061,
+    "kind": "socialize",
+    "label": "Ask Ben to help with the lean-to",
+    "target": 1112,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 2369,
+    "person": 1113,
+    "activity": 2155,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 2410,
+    "person": 1144,
+    "activity": 2188,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 2415,
+    "person": 1144,
+    "activity": 2192,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 2419,
+    "person": 1144,
+    "activity": 2196,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 2431,
+    "person": 1144,
+    "activity": 2205,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 2611,
+    "person": 1121,
+    "activity": 2327,
+    "kind": "socialize",
+    "label": "Ask Abel for wood",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 2702,
+    "person": 1135,
+    "activity": 2375,
+    "kind": "socialize",
+    "label": "Ask Emre for wood",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 2754,
+    "person": 1122,
+    "activity": 2421,
+    "kind": "socialize",
+    "label": "Ask Cora for wood",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 2777,
+    "person": 1134,
+    "activity": 2435,
+    "kind": "socialize",
+    "label": "Ask Kai for wood",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 2857,
+    "person": 1122,
+    "activity": 2495,
+    "kind": "socialize",
+    "label": "Ask Petra for wood",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 3070,
+    "person": 1134,
+    "activity": 2595,
+    "kind": "socialize",
+    "label": "Ask Kai for stone",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 3364,
+    "person": 1146,
+    "activity": 2768,
+    "kind": "socialize",
+    "label": "Ask Basil for stone",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 3413,
+    "person": 1119,
+    "activity": 2795,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 4678,
+    "person": 1139,
+    "activity": 3026,
+    "kind": "socialize",
+    "label": "Ask Basil for stone",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 4756,
+    "person": 1147,
+    "activity": 3074,
+    "kind": "socialize",
+    "label": "Ask Basil for stone",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 4767,
+    "person": 1147,
+    "activity": 3080,
+    "kind": "socialize",
+    "label": "Ask Ivy for wood",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 4940,
+    "person": 1140,
+    "activity": 3200,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 4964,
+    "person": 1122,
+    "activity": 3216,
+    "kind": "socialize",
+    "label": "Ask Ivo for water",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 4994,
+    "person": 1147,
+    "activity": 3235,
+    "kind": "socialize",
+    "label": "Ask Arlo for wood",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 5113,
+    "person": 1146,
+    "activity": 3311,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 5343,
+    "person": 1122,
+    "activity": 3459,
+    "kind": "socialize",
+    "label": "Ask Abel for stone",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 5489,
+    "person": 1109,
+    "activity": 3551,
+    "kind": "socialize",
+    "label": "Ask Ivy for stone",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 5536,
+    "person": 1109,
+    "activity": 3576,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 5555,
+    "person": 1106,
+    "activity": 3586,
+    "kind": "socialize",
+    "label": "Ask Ivy for wood",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 5989,
+    "person": 1108,
+    "activity": 3816,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 6655,
+    "person": 1106,
+    "activity": 3876,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 7012,
+    "person": 1120,
+    "activity": 3964,
+    "kind": "socialize",
+    "label": "Ask Ben for wood",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 7027,
+    "person": 1120,
+    "activity": 3966,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 7122,
+    "person": 1147,
+    "activity": 4011,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 7150,
+    "person": 1147,
+    "activity": 4023,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 7224,
+    "person": 1147,
+    "activity": 4054,
+    "kind": "socialize",
+    "label": "Ask Zia for food",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 7321,
+    "person": 1109,
+    "activity": 4109,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 7550,
+    "person": 1131,
+    "activity": 4254,
+    "kind": "socialize",
+    "label": "Ask Talia to help with the storehouse",
+    "target": 1142,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 7756,
+    "person": 1108,
+    "activity": 4369,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 7835,
+    "person": 1131,
+    "activity": 4414,
+    "kind": "socialize",
+    "label": "Ask Talia to help with the storehouse",
+    "target": 1142,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 7861,
+    "person": 1147,
+    "activity": 4426,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 7913,
+    "person": 1131,
+    "activity": 4462,
+    "kind": "socialize",
+    "label": "Ask Milo to help with the storehouse",
+    "target": 1116,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 7938,
+    "person": 1147,
+    "activity": 4474,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 7945,
+    "person": 1147,
+    "activity": 4478,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 8035,
+    "person": 1147,
+    "activity": 4518,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 8434,
+    "person": 1144,
+    "activity": 4724,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 9207,
+    "person": 1131,
+    "activity": 4830,
+    "kind": "socialize",
+    "label": "Ask Petra to help with the storehouse",
+    "target": 1132,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 9232,
+    "person": 1125,
+    "activity": 4844,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 9282,
+    "person": 1131,
+    "activity": 4862,
+    "kind": "socialize",
+    "label": "Ask Ben to help with the storehouse",
+    "target": 1112,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 9517,
+    "person": 1121,
+    "activity": 4934,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 9647,
+    "person": 1121,
+    "activity": 5003,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 9715,
+    "person": 1146,
+    "activity": 5027,
+    "kind": "socialize",
+    "label": "Ask Milo for food",
+    "target": 1116,
+    "purpose": "request"
+  },
+  {
+    "tick": 9732,
+    "person": 1122,
+    "activity": 5035,
+    "kind": "socialize",
+    "label": "Ask Abel for water",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 9755,
+    "person": 1121,
+    "activity": 5044,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 9789,
+    "person": 1146,
+    "activity": 5064,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 9816,
+    "person": 1107,
+    "activity": 5078,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 9821,
+    "person": 1138,
+    "activity": 5083,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 9840,
+    "person": 1146,
+    "activity": 5093,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 9901,
+    "person": 1131,
+    "activity": 5113,
+    "kind": "socialize",
+    "label": "Ask Abel to help with the storehouse",
+    "target": 1120,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 9971,
+    "person": 1121,
+    "activity": 5136,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 10062,
+    "person": 1146,
+    "activity": 5182,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 10071,
+    "person": 1121,
+    "activity": 5184,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 10143,
+    "person": 1146,
+    "activity": 5227,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 10198,
+    "person": 1128,
+    "activity": 5253,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 10200,
+    "person": 1146,
+    "activity": 5254,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 10271,
+    "person": 1128,
+    "activity": 5292,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 10351,
+    "person": 1128,
+    "activity": 5320,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 10409,
+    "person": 1121,
+    "activity": 5341,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 10488,
+    "person": 1121,
+    "activity": 5387,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 10582,
+    "person": 1125,
+    "activity": 5435,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 10631,
+    "person": 1106,
+    "activity": 5462,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 11608,
+    "person": 1121,
+    "activity": 5626,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 11693,
+    "person": 1121,
+    "activity": 5649,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 11742,
+    "person": 1121,
+    "activity": 5662,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 11751,
+    "person": 1121,
+    "activity": 5664,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 11856,
+    "person": 1121,
+    "activity": 5694,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 11889,
+    "person": 1139,
+    "activity": 5723,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 11922,
+    "person": 1113,
+    "activity": 5742,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 11946,
+    "person": 1121,
+    "activity": 5756,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 11987,
+    "person": 1139,
+    "activity": 5771,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 12103,
+    "person": 1108,
+    "activity": 5833,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 12165,
+    "person": 1121,
+    "activity": 5858,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 12222,
+    "person": 1122,
+    "activity": 5879,
+    "kind": "socialize",
+    "label": "Ask Milo for food",
+    "target": 1116,
+    "purpose": "request"
+  },
+  {
+    "tick": 12242,
+    "person": 1108,
+    "activity": 5888,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 12242,
+    "person": 1109,
+    "activity": 5889,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 12294,
+    "person": 1139,
+    "activity": 5907,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 12299,
+    "person": 1107,
+    "activity": 5910,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 12378,
+    "person": 1109,
+    "activity": 5944,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 12401,
+    "person": 1108,
+    "activity": 5957,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 12403,
+    "person": 1142,
+    "activity": 5962,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 12415,
+    "person": 1122,
+    "activity": 5970,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 12418,
+    "person": 1125,
+    "activity": 5973,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 12428,
+    "person": 1139,
+    "activity": 5979,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 12454,
+    "person": 1122,
+    "activity": 5994,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 12486,
+    "person": 1108,
+    "activity": 6021,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 12486,
+    "person": 1140,
+    "activity": 6022,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 12549,
+    "person": 1125,
+    "activity": 6055,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 12556,
+    "person": 1140,
+    "activity": 6058,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 12563,
+    "person": 1108,
+    "activity": 6065,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 12569,
+    "person": 1107,
+    "activity": 6068,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 12600,
+    "person": 1109,
+    "activity": 6093,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 12621,
+    "person": 1125,
+    "activity": 6105,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 12659,
+    "person": 1140,
+    "activity": 6129,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 12711,
+    "person": 1139,
+    "activity": 6151,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 12713,
+    "person": 1109,
+    "activity": 6154,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 12822,
+    "person": 1139,
+    "activity": 6211,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 12846,
+    "person": 1140,
+    "activity": 6218,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 12958,
+    "person": 1140,
+    "activity": 6266,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 12982,
+    "person": 1122,
+    "activity": 6277,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 12994,
+    "person": 1125,
+    "activity": 6282,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 13058,
+    "person": 1139,
+    "activity": 6314,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 13087,
+    "person": 1122,
+    "activity": 6327,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 13174,
+    "person": 1108,
+    "activity": 6368,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 13264,
+    "person": 1122,
+    "activity": 6388,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 13285,
+    "person": 1139,
+    "activity": 6391,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 13856,
+    "person": 1147,
+    "activity": 6443,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 13912,
+    "person": 1108,
+    "activity": 6457,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 13996,
+    "person": 1108,
+    "activity": 6481,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 14199,
+    "person": 1140,
+    "activity": 6522,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14214,
+    "person": 1121,
+    "activity": 6527,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 14273,
+    "person": 1140,
+    "activity": 6555,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 14277,
+    "person": 1147,
+    "activity": 6556,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 14280,
+    "person": 1147,
+    "activity": 6561,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 14313,
+    "person": 1121,
+    "activity": 6581,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14326,
+    "person": 1139,
+    "activity": 6587,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 14347,
+    "person": 1140,
+    "activity": 6602,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 14350,
+    "person": 1147,
+    "activity": 6606,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 14398,
+    "person": 1139,
+    "activity": 6629,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 14432,
+    "person": 1140,
+    "activity": 6641,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 14452,
+    "person": 1108,
+    "activity": 6656,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14503,
+    "person": 1140,
+    "activity": 6672,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 14511,
+    "person": 1108,
+    "activity": 6676,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 14531,
+    "person": 1116,
+    "activity": 6686,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 14575,
+    "person": 1147,
+    "activity": 6704,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 14592,
+    "person": 1108,
+    "activity": 6714,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 14647,
+    "person": 1122,
+    "activity": 6738,
+    "kind": "socialize",
+    "label": "Ask Cora for water",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 14647,
+    "person": 1138,
+    "activity": 6740,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 14672,
+    "person": 1107,
+    "activity": 6757,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14695,
+    "person": 1116,
+    "activity": 6765,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 14696,
+    "person": 1139,
+    "activity": 6767,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 14702,
+    "person": 1147,
+    "activity": 6773,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 14739,
+    "person": 1113,
+    "activity": 6782,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 14740,
+    "person": 1108,
+    "activity": 6783,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 14759,
+    "person": 1107,
+    "activity": 6794,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 14764,
+    "person": 1138,
+    "activity": 6797,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 14785,
+    "person": 1108,
+    "activity": 6804,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 14802,
+    "person": 1109,
+    "activity": 6809,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14824,
+    "person": 1113,
+    "activity": 6821,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 14847,
+    "person": 1107,
+    "activity": 6829,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 14867,
+    "person": 1145,
+    "activity": 6838,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 14882,
+    "person": 1109,
+    "activity": 6847,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 14883,
+    "person": 1109,
+    "activity": 6848,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 14896,
+    "person": 1116,
+    "activity": 6855,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 14906,
+    "person": 1113,
+    "activity": 6858,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 14911,
+    "person": 1116,
+    "activity": 6866,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 14946,
+    "person": 1145,
+    "activity": 6878,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 14960,
+    "person": 1109,
+    "activity": 6890,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 14970,
+    "person": 1139,
+    "activity": 6896,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 14980,
+    "person": 1113,
+    "activity": 6899,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 15000,
+    "person": 1145,
+    "activity": 6917,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 15009,
+    "person": 1108,
+    "activity": 6922,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 15030,
+    "person": 1116,
+    "activity": 6934,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 15049,
+    "person": 1138,
+    "activity": 6942,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 15053,
+    "person": 1108,
+    "activity": 6947,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 15053,
+    "person": 1125,
+    "activity": 6948,
+    "kind": "withdraw",
+    "label": "Packing household provisions",
+    "target": 1124
+  },
+  {
+    "tick": 15059,
+    "person": 1139,
+    "activity": 6952,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 15087,
+    "person": 1109,
+    "activity": 6961,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 15119,
+    "person": 1139,
+    "activity": 6978,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 15143,
+    "person": 1108,
+    "activity": 6992,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 15157,
+    "person": 1145,
+    "activity": 7002,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 15172,
+    "person": 1106,
+    "activity": 7007,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 15244,
+    "person": 1106,
+    "activity": 7049,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 15244,
+    "person": 1108,
+    "activity": 7050,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 15248,
+    "person": 1139,
+    "activity": 7052,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 15248,
+    "person": 1140,
+    "activity": 7053,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 15254,
+    "person": 1139,
+    "activity": 7056,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 15265,
+    "person": 1108,
+    "activity": 7069,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 15322,
+    "person": 1140,
+    "activity": 7112,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 15350,
+    "person": 1140,
+    "activity": 7141,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 15381,
+    "person": 1125,
+    "activity": 7160,
+    "kind": "withdraw",
+    "label": "Packing household provisions",
+    "target": 1124
+  },
+  {
+    "tick": 15474,
+    "person": 1108,
+    "activity": 7209,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 15514,
+    "person": 1140,
+    "activity": 7240,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 15532,
+    "person": 1139,
+    "activity": 7248,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 15982,
+    "person": 1147,
+    "activity": 7326,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 16775,
+    "person": 1140,
+    "activity": 7449,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 17071,
+    "person": 1109,
+    "activity": 7547,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 17144,
+    "person": 1109,
+    "activity": 7591,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 17172,
+    "person": 1108,
+    "activity": 7613,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 17299,
+    "person": 1108,
+    "activity": 7698,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 17371,
+    "person": 1108,
+    "activity": 7745,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 17398,
+    "person": 1108,
+    "activity": 7756,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 17436,
+    "person": 1147,
+    "activity": 7784,
+    "kind": "socialize",
+    "label": "Ask Ivo for wood",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 17481,
+    "person": 1108,
+    "activity": 7811,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 17522,
+    "person": 1147,
+    "activity": 7840,
+    "kind": "socialize",
+    "label": "Ask Cora for wood",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 17616,
+    "person": 1108,
+    "activity": 7894,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 17637,
+    "person": 1108,
+    "activity": 7905,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 17722,
+    "person": 1108,
+    "activity": 7948,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 17723,
+    "person": 1149,
+    "activity": 7951,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared timber-yard",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 17732,
+    "person": 1132,
+    "activity": 7957,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for a public project I support storehouse",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 17746,
+    "person": 1146,
+    "activity": 7961,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 18718,
+    "person": 1146,
+    "activity": 8242,
+    "kind": "socialize",
+    "label": "Ask Lena for wood",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 18729,
+    "person": 1146,
+    "activity": 8247,
+    "kind": "socialize",
+    "label": "Ask Kai for wood",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 18867,
+    "person": 1119,
+    "activity": 8293,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 18935,
+    "person": 1147,
+    "activity": 8311,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 19108,
+    "person": 1113,
+    "activity": 8380,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 19207,
+    "person": 1112,
+    "activity": 8439,
+    "kind": "socialize",
+    "label": "Ask Talia for stone",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 19300,
+    "person": 1147,
+    "activity": 8506,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 19481,
+    "person": 1113,
+    "activity": 8626,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 19520,
+    "person": 1113,
+    "activity": 8646,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 19596,
+    "person": 1149,
+    "activity": 8686,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 19667,
+    "person": 1146,
+    "activity": 8725,
+    "kind": "socialize",
+    "label": "Ask Nico for wood",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 19680,
+    "person": 1113,
+    "activity": 8734,
+    "kind": "socialize",
+    "label": "Ask Petra for stone",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 19689,
+    "person": 1113,
+    "activity": 8740,
+    "kind": "socialize",
+    "label": "Ask Lena for stone",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 19932,
+    "person": 1116,
+    "activity": 8848,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 20306,
+    "person": 1106,
+    "activity": 9019,
+    "kind": "socialize",
+    "label": "Ask Lena for stone",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 20348,
+    "person": 1150,
+    "activity": 9039,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 20380,
+    "person": 1116,
+    "activity": 9048,
+    "kind": "socialize",
+    "label": "Ask Alma for wood",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 21654,
+    "person": 1132,
+    "activity": 9271,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 21662,
+    "person": 1107,
+    "activity": 9275,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 21756,
+    "person": 1146,
+    "activity": 9323,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 21927,
+    "person": 1132,
+    "activity": 9427,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 21994,
+    "person": 1142,
+    "activity": 9460,
+    "kind": "withdraw",
+    "label": "Collecting 3 stone",
+    "target": 6923
+  },
+  {
+    "tick": 21997,
+    "person": 1107,
+    "activity": 9462,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22022,
+    "person": 1132,
+    "activity": 9475,
+    "kind": "withdraw",
+    "label": "Collecting 3 stone",
+    "target": 6923
+  },
+  {
+    "tick": 22041,
+    "person": 1137,
+    "activity": 9481,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22102,
+    "person": 1134,
+    "activity": 9512,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22406,
+    "person": 1132,
+    "activity": 9672,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared granary",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22414,
+    "person": 1121,
+    "activity": 9675,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 22428,
+    "person": 9311,
+    "activity": 9685,
+    "kind": "socialize",
+    "label": "Ask Theo for water",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 22443,
+    "person": 1122,
+    "activity": 9697,
+    "kind": "socialize",
+    "label": "Ask Ivo for wood",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 22457,
+    "person": 1138,
+    "activity": 9704,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 22499,
+    "person": 9311,
+    "activity": 9736,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 22515,
+    "person": 1108,
+    "activity": 9744,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 22525,
+    "person": 1122,
+    "activity": 9752,
+    "kind": "socialize",
+    "label": "Ask Faye for wood",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 22609,
+    "person": 1107,
+    "activity": 9790,
+    "kind": "socialize",
+    "label": "Ask Alma for wood",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 22688,
+    "person": 1146,
+    "activity": 9836,
+    "kind": "socialize",
+    "label": "Ask Thea for wood",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 22689,
+    "person": 1142,
+    "activity": 9837,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22702,
+    "person": 1113,
+    "activity": 9842,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 22717,
+    "person": 9311,
+    "activity": 9848,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 23338,
+    "person": 9311,
+    "activity": 9956,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 23955,
+    "person": 1146,
+    "activity": 10066,
+    "kind": "socialize",
+    "label": "Ask Faye for wood",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 23992,
+    "person": 1147,
+    "activity": 10083,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 23993,
+    "person": 1147,
+    "activity": 10084,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 24105,
+    "person": 1146,
+    "activity": 10145,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 24129,
+    "person": 1107,
+    "activity": 10156,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 24144,
+    "person": 1121,
+    "activity": 10162,
+    "kind": "socialize",
+    "label": "Ask Tomas for stone",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 24151,
+    "person": 1146,
+    "activity": 10165,
+    "kind": "socialize",
+    "label": "Ask Arlo for wood",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 24179,
+    "person": 1146,
+    "activity": 10177,
+    "kind": "socialize",
+    "label": "Ask Alma for wood",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 24183,
+    "person": 1146,
+    "activity": 10183,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 24192,
+    "person": 1121,
+    "activity": 10190,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 24214,
+    "person": 1146,
+    "activity": 10205,
+    "kind": "socialize",
+    "label": "Ask Nico for wood",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 24242,
+    "person": 1120,
+    "activity": 10215,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 24249,
+    "person": 1108,
+    "activity": 10219,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 24309,
+    "person": 1107,
+    "activity": 10255,
+    "kind": "socialize",
+    "label": "Ask Alma for wood",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 24321,
+    "person": 1121,
+    "activity": 10264,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 24325,
+    "person": 1107,
+    "activity": 10265,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 24608,
+    "person": 1112,
+    "activity": 10429,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 24644,
+    "person": 1121,
+    "activity": 10446,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 24668,
+    "person": 1109,
+    "activity": 10457,
+    "kind": "socialize",
+    "label": "Ask Ivo for wood",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 24889,
+    "person": 1120,
+    "activity": 10562,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 24897,
+    "person": 1122,
+    "activity": 10564,
+    "kind": "socialize",
+    "label": "Ask Zia for stone",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 24982,
+    "person": 1119,
+    "activity": 10621,
+    "kind": "socialize",
+    "label": "Ask Jax for stone",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 25059,
+    "person": 1145,
+    "activity": 10653,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 25200,
+    "person": 1121,
+    "activity": 10716,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 26495,
+    "person": 1121,
+    "activity": 10991,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 26496,
+    "person": 1120,
+    "activity": 10992,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 26582,
+    "person": 1122,
+    "activity": 11036,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 26583,
+    "person": 1146,
+    "activity": 11037,
+    "kind": "socialize",
+    "label": "Ask Nico for wood",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 26584,
+    "person": 1121,
+    "activity": 11039,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 26586,
+    "person": 1138,
+    "activity": 11042,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 26595,
+    "person": 1149,
+    "activity": 11051,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 26596,
+    "person": 1107,
+    "activity": 11054,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 26600,
+    "person": 1132,
+    "activity": 11062,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 26614,
+    "person": 1128,
+    "activity": 11071,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 26657,
+    "person": 1121,
+    "activity": 11089,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 26688,
+    "person": 1122,
+    "activity": 11104,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 26706,
+    "person": 1107,
+    "activity": 11117,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 26728,
+    "person": 1138,
+    "activity": 11137,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 26786,
+    "person": 1122,
+    "activity": 11167,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 26836,
+    "person": 1150,
+    "activity": 11203,
+    "kind": "withdraw",
+    "label": "Collecting 1 stone",
+    "target": 6923
+  },
+  {
+    "tick": 26879,
+    "person": 1116,
+    "activity": 11232,
+    "kind": "socialize",
+    "label": "Ask Petra for stone",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 26880,
+    "person": 1116,
+    "activity": 11235,
+    "kind": "socialize",
+    "label": "Ask Arlo for stone",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 26894,
+    "person": 1122,
+    "activity": 11246,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 26902,
+    "person": 1121,
+    "activity": 11251,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 26926,
+    "person": 1134,
+    "activity": 11261,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 26930,
+    "person": 1138,
+    "activity": 11264,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 26942,
+    "person": 1122,
+    "activity": 11273,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 26956,
+    "person": 1113,
+    "activity": 11276,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 27019,
+    "person": 1150,
+    "activity": 11303,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 27054,
+    "person": 1116,
+    "activity": 11320,
+    "kind": "socialize",
+    "label": "Ask Edda for wood",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 27066,
+    "person": 1113,
+    "activity": 11328,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 27078,
+    "person": 1113,
+    "activity": 11336,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 27113,
+    "person": 1122,
+    "activity": 11354,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 27270,
+    "person": 1128,
+    "activity": 11412,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 27272,
+    "person": 1145,
+    "activity": 11415,
+    "kind": "socialize",
+    "label": "Ask Zia for wood",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 27320,
+    "person": 1107,
+    "activity": 11441,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for the shared kiln",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 27327,
+    "person": 1128,
+    "activity": 11444,
+    "kind": "withdraw",
+    "label": "Collecting 3 planks",
+    "target": 8473
+  },
+  {
+    "tick": 27490,
+    "person": 1122,
+    "activity": 11518,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 27492,
+    "person": 1128,
+    "activity": 11522,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 27560,
+    "person": 1122,
+    "activity": 11551,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 28614,
+    "person": 1122,
+    "activity": 11700,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 28670,
+    "person": 1121,
+    "activity": 11723,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 28681,
+    "person": 1131,
+    "activity": 11735,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 28736,
+    "person": 1122,
+    "activity": 11780,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 28753,
+    "person": 1121,
+    "activity": 11793,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 28774,
+    "person": 1138,
+    "activity": 11810,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 28825,
+    "person": 1121,
+    "activity": 11840,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 28828,
+    "person": 1122,
+    "activity": 11841,
+    "kind": "socialize",
+    "label": "Ask Cole for stone",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 28907,
+    "person": 1145,
+    "activity": 11894,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 28927,
+    "person": 1121,
+    "activity": 11908,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 28929,
+    "person": 1121,
+    "activity": 11909,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 29004,
+    "person": 1121,
+    "activity": 11949,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 29119,
+    "person": 1142,
+    "activity": 12011,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 8415
+  },
+  {
+    "tick": 29126,
+    "person": 1145,
+    "activity": 12014,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29129,
+    "person": 1137,
+    "activity": 12018,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29144,
+    "person": 1121,
+    "activity": 12029,
+    "kind": "socialize",
+    "label": "Ask Arlo for stone",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 29155,
+    "person": 1106,
+    "activity": 12037,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29160,
+    "person": 1116,
+    "activity": 12038,
+    "kind": "operate",
+    "label": "Cutting stone",
+    "target": 6923,
+    "purpose": "for my household’s hut",
+    "recipe": "quarry_stone"
+  },
+  {
+    "tick": 29198,
+    "person": 1137,
+    "activity": 12059,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29268,
+    "person": 1109,
+    "activity": 12095,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 29315,
+    "person": 1134,
+    "activity": 12132,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29339,
+    "person": 1109,
+    "activity": 12144,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 29339,
+    "person": 9311,
+    "activity": 12145,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 29387,
+    "person": 1109,
+    "activity": 12172,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 29419,
+    "person": 9311,
+    "activity": 12194,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 29443,
+    "person": 9311,
+    "activity": 12209,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 29448,
+    "person": 1116,
+    "activity": 12215,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29501,
+    "person": 1131,
+    "activity": 12245,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 8415
+  },
+  {
+    "tick": 29516,
+    "person": 9311,
+    "activity": 12252,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 29553,
+    "person": 1109,
+    "activity": 12269,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 29556,
+    "person": 1109,
+    "activity": 12271,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 29734,
+    "person": 1145,
+    "activity": 12351,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 29895,
+    "person": 1122,
+    "activity": 12440,
+    "kind": "socialize",
+    "label": "Ask Ben for stone",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 29913,
+    "person": 1122,
+    "activity": 12448,
+    "kind": "socialize",
+    "label": "Ask Ines for stone",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 31386,
+    "person": 1147,
+    "activity": 12783,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 31460,
+    "person": 1121,
+    "activity": 12830,
+    "kind": "socialize",
+    "label": "Ask Ivy for stone",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 31575,
+    "person": 1145,
+    "activity": 12903,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for my household’s house (lend a hand)",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 31744,
+    "person": 1122,
+    "activity": 13013,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 31749,
+    "person": 1122,
+    "activity": 13016,
+    "kind": "socialize",
+    "label": "Ask Ben for stone",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 32016,
+    "person": 1116,
+    "activity": 13171,
+    "kind": "socialize",
+    "label": "Ask Kai for stone",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 32162,
+    "person": 1106,
+    "activity": 13249,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 32215,
+    "person": 1106,
+    "activity": 13274,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 32225,
+    "person": 1119,
+    "activity": 13283,
+    "kind": "socialize",
+    "label": "Ask Zia for stone",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 32250,
+    "person": 1134,
+    "activity": 13296,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for the shared granary (lend a hand)",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 32327,
+    "person": 1116,
+    "activity": 13347,
+    "kind": "socialize",
+    "label": "Ask Arlo for stone",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 32419,
+    "person": 1116,
+    "activity": 13396,
+    "kind": "socialize",
+    "label": "Ask Tomas to lend a saw",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 33637,
+    "person": 1122,
+    "activity": 13579,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 33736,
+    "person": 1108,
+    "activity": 13650,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 33742,
+    "person": 1116,
+    "activity": 13660,
+    "kind": "socialize",
+    "label": "Ask Ines for stone",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 33752,
+    "person": 1121,
+    "activity": 13672,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 33810,
+    "person": 1108,
+    "activity": 13728,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 33872,
+    "person": 1120,
+    "activity": 13773,
+    "kind": "withdraw",
+    "label": "Collecting 2 stone",
+    "target": 6923
+  },
+  {
+    "tick": 33885,
+    "person": 1108,
+    "activity": 13786,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 33955,
+    "person": 1116,
+    "activity": 13836,
+    "kind": "socialize",
+    "label": "Ask Tomas to lend a saw",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 34089,
+    "person": 1138,
+    "activity": 13930,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 34169,
+    "person": 9311,
+    "activity": 13978,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 34266,
+    "person": 9311,
+    "activity": 14031,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 34355,
+    "person": 9311,
+    "activity": 14098,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 34357,
+    "person": 9311,
+    "activity": 14104,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 34483,
+    "person": 1138,
+    "activity": 14189,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 34553,
+    "person": 1108,
+    "activity": 14232,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 34759,
+    "person": 1122,
+    "activity": 14353,
+    "kind": "socialize",
+    "label": "Ask Abel for wood",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 35857,
+    "person": 1119,
+    "activity": 14607,
+    "kind": "withdraw",
+    "label": "Collecting 3 planks",
+    "target": 8473
+  },
+  {
+    "tick": 35860,
+    "person": 1125,
+    "activity": 14609,
+    "kind": "withdraw",
+    "label": "Collecting 6 planks",
+    "target": 8473
+  },
+  {
+    "tick": 35958,
+    "person": 1116,
+    "activity": 14681,
+    "kind": "socialize",
+    "label": "Ask Ben for stone",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 35959,
+    "person": 1122,
+    "activity": 14682,
+    "kind": "socialize",
+    "label": "Ask Petra for wood",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 35960,
+    "person": 1134,
+    "activity": 14683,
+    "kind": "socialize",
+    "label": "Offer Cole charcoal firing instruction",
+    "target": 1135,
+    "purpose": "teach_technique"
+  },
+  {
+    "tick": 35967,
+    "person": 1146,
+    "activity": 14686,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 35982,
+    "person": 1122,
+    "activity": 14696,
+    "kind": "socialize",
+    "label": "Ask Cora for planks",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 36009,
+    "person": 1138,
+    "activity": 14719,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 36103,
+    "person": 1147,
+    "activity": 14774,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36116,
+    "person": 1108,
+    "activity": 14786,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36140,
+    "person": 1116,
+    "activity": 14801,
+    "kind": "socialize",
+    "label": "Ask Lena for stone",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 36238,
+    "person": 1121,
+    "activity": 14859,
+    "kind": "socialize",
+    "label": "Ask Nico for wood",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 36291,
+    "person": 1139,
+    "activity": 14895,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36299,
+    "person": 1147,
+    "activity": 14900,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36319,
+    "person": 1132,
+    "activity": 14914,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 36391,
+    "person": 12113,
+    "activity": 14951,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36401,
+    "person": 1131,
+    "activity": 14958,
+    "kind": "withdraw",
+    "label": "Collecting 4 stone",
+    "target": 6923
+  },
+  {
+    "tick": 36437,
+    "person": 1140,
+    "activity": 14975,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36443,
+    "person": 1128,
+    "activity": 14981,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 36537,
+    "person": 1142,
+    "activity": 15031,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 36551,
+    "person": 1138,
+    "activity": 15038,
+    "kind": "socialize",
+    "label": "Ask Cora for wood",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 36566,
+    "person": 12113,
+    "activity": 15048,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 36590,
+    "person": 1120,
+    "activity": 15056,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the hall I promised to help with",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 36631,
+    "person": 1132,
+    "activity": 15079,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 36653,
+    "person": 9311,
+    "activity": 15091,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 36691,
+    "person": 1147,
+    "activity": 15119,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 36765,
+    "person": 1134,
+    "activity": 15165,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 36799,
+    "person": 1116,
+    "activity": 15180,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared granary",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 36830,
+    "person": 1112,
+    "activity": 15200,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 36885,
+    "person": 1134,
+    "activity": 15236,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 36900,
+    "person": 1120,
+    "activity": 15251,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for the hall I promised to help with (lend a hand)",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 36912,
+    "person": 9311,
+    "activity": 15255,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 36925,
+    "person": 1146,
+    "activity": 15268,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 37022,
+    "person": 1113,
+    "activity": 15328,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 37029,
+    "person": 1145,
+    "activity": 15331,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 37032,
+    "person": 1122,
+    "activity": 15332,
+    "kind": "socialize",
+    "label": "Ask Arlo for stone",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 37034,
+    "person": 1142,
+    "activity": 15333,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 37045,
+    "person": 1144,
+    "activity": 15336,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 37062,
+    "person": 1145,
+    "activity": 15342,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for my household’s house (lend a hand)",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 37068,
+    "person": 9311,
+    "activity": 15349,
+    "kind": "socialize",
+    "label": "Ask Ines for planks",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 37089,
+    "person": 1122,
+    "activity": 15360,
+    "kind": "socialize",
+    "label": "Ask Emre for stone",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 37104,
+    "person": 1116,
+    "activity": 15373,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 37122,
+    "person": 1145,
+    "activity": 15380,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 37134,
+    "person": 1119,
+    "activity": 15385,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 37160,
+    "person": 1142,
+    "activity": 15401,
+    "kind": "operate",
+    "label": "Sawing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 37185,
+    "person": 1138,
+    "activity": 15413,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 37203,
+    "person": 1112,
+    "activity": 15421,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for the shared hall (lend a hand)",
+    "recipe": "saw_planks"
+  },
+  {
+    "tick": 37964,
+    "person": 12113,
+    "activity": 15526,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38288,
+    "person": 12113,
+    "activity": 15618,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38317,
+    "person": 1138,
+    "activity": 15635,
+    "kind": "socialize",
+    "label": "Ask Faye for wood",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 38330,
+    "person": 1147,
+    "activity": 15643,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38425,
+    "person": 1122,
+    "activity": 15689,
+    "kind": "socialize",
+    "label": "Ask Arlo for stone",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 38426,
+    "person": 1122,
+    "activity": 15690,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38509,
+    "person": 1140,
+    "activity": 15729,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 38516,
+    "person": 1139,
+    "activity": 15732,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 38527,
+    "person": 1138,
+    "activity": 15740,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 38640,
+    "person": 1140,
+    "activity": 15813,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38655,
+    "person": 1138,
+    "activity": 15823,
+    "kind": "socialize",
+    "label": "Ask Nico for wood",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 38728,
+    "person": 1138,
+    "activity": 15870,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 38872,
+    "person": 1137,
+    "activity": 15949,
+    "kind": "withdraw",
+    "label": "Collecting 4 planks",
+    "target": 8473
+  },
+  {
+    "tick": 38912,
+    "person": 1120,
+    "activity": 15965,
+    "kind": "socialize",
+    "label": "Ask Ben for stone",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 38928,
+    "person": 1109,
+    "activity": 15972,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 38941,
+    "person": 1135,
+    "activity": 15979,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 38970,
+    "person": 1137,
+    "activity": 15993,
+    "kind": "withdraw",
+    "label": "Collecting 3 stone",
+    "target": 6923
+  },
+  {
+    "tick": 39010,
+    "person": 9311,
+    "activity": 16013,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 39037,
+    "person": 1139,
+    "activity": 16028,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 39061,
+    "person": 1145,
+    "activity": 16035,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 39084,
+    "person": 1106,
+    "activity": 16048,
+    "kind": "socialize",
+    "label": "Ask Tomas for wood",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 39181,
+    "person": 1108,
+    "activity": 16089,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 39297,
+    "person": 1109,
+    "activity": 16132,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 39334,
+    "person": 1121,
+    "activity": 16150,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 39507,
+    "person": 1122,
+    "activity": 16224,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 39507,
+    "person": 1147,
+    "activity": 16225,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 39511,
+    "person": 1146,
+    "activity": 16230,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 39512,
+    "person": 1139,
+    "activity": 16231,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 39630,
+    "person": 1116,
+    "activity": 16294,
+    "kind": "socialize",
+    "label": "Ask Ben for wood",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 39657,
+    "person": 1116,
+    "activity": 16304,
+    "kind": "socialize",
+    "label": "Ask Ines for wood",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 39665,
+    "person": 1116,
+    "activity": 16307,
+    "kind": "socialize",
+    "label": "Ask Basil for wood",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 40511,
+    "person": 1106,
+    "activity": 16441,
+    "kind": "socialize",
+    "label": "Ask Arlo to lend a saw",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 40660,
+    "person": 1138,
+    "activity": 16500,
+    "kind": "socialize",
+    "label": "Ask Ivy for stone",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 40703,
+    "person": 1109,
+    "activity": 16533,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40718,
+    "person": 1146,
+    "activity": 16544,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40753,
+    "person": 1113,
+    "activity": 16571,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 40809,
+    "person": 1121,
+    "activity": 16620,
+    "kind": "withdraw",
+    "label": "Collecting 2 wood",
+    "target": 15927
+  },
+  {
+    "tick": 40817,
+    "person": 1146,
+    "activity": 16633,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 40820,
+    "person": 9311,
+    "activity": 16634,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40837,
+    "person": 1140,
+    "activity": 16646,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40845,
+    "person": 9311,
+    "activity": 16652,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 40847,
+    "person": 1122,
+    "activity": 16654,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40868,
+    "person": 1116,
+    "activity": 16669,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 15927
+  },
+  {
+    "tick": 40892,
+    "person": 1120,
+    "activity": 16686,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 40893,
+    "person": 1122,
+    "activity": 16687,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 40904,
+    "person": 1119,
+    "activity": 16691,
+    "kind": "withdraw",
+    "label": "Collecting 3 stone",
+    "target": 6923
+  },
+  {
+    "tick": 40930,
+    "person": 1108,
+    "activity": 16708,
+    "kind": "socialize",
+    "label": "Ask Zia for planks",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40930,
+    "person": 1116,
+    "activity": 16709,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 40955,
+    "person": 1147,
+    "activity": 16725,
+    "kind": "socialize",
+    "label": "Ask Zia for planks",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40979,
+    "person": 12113,
+    "activity": 16736,
+    "kind": "socialize",
+    "label": "Ask Zia for planks",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40984,
+    "person": 9311,
+    "activity": 16741,
+    "kind": "socialize",
+    "label": "Ask Zia for planks",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 40986,
+    "person": 1120,
+    "activity": 16744,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 40996,
+    "person": 1146,
+    "activity": 16753,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 41006,
+    "person": 12113,
+    "activity": 16760,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 41022,
+    "person": 9311,
+    "activity": 16773,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 41080,
+    "person": 9311,
+    "activity": 16815,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 41130,
+    "person": 1138,
+    "activity": 16849,
+    "kind": "socialize",
+    "label": "Ask Zia to lend a saw",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 41174,
+    "person": 1134,
+    "activity": 16866,
+    "kind": "operate",
+    "label": "Firing bricks",
+    "target": 14038,
+    "purpose": "for the shared smithy",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 41191,
+    "person": 1137,
+    "activity": 16871,
+    "kind": "socialize",
+    "label": "Ask Cora for stone",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 41206,
+    "person": 1138,
+    "activity": 16874,
+    "kind": "socialize",
+    "label": "Ask Ivy for stone",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 41232,
+    "person": 1134,
+    "activity": 16893,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 15927
+  },
+  {
+    "tick": 41265,
+    "person": 1106,
+    "activity": 16907,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for my household’s house (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 41272,
+    "person": 1121,
+    "activity": 16913,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 41286,
+    "person": 1134,
+    "activity": 16924,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 41336,
+    "person": 1131,
+    "activity": 16948,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 41374,
+    "person": 1134,
+    "activity": 16971,
+    "kind": "operate",
+    "label": "Heading to help at the timber yard",
+    "target": 8473,
+    "purpose": "for the shared hall (lend a hand)",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 41422,
+    "person": 1116,
+    "activity": 17002,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 41499,
+    "person": 1134,
+    "activity": 17044,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 41582,
+    "person": 1137,
+    "activity": 17095,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 41583,
+    "person": 1137,
+    "activity": 17097,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for the shared hall",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 41858,
+    "person": 12113,
+    "activity": 17228,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 41919,
+    "person": 1140,
+    "activity": 17265,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 41931,
+    "person": 1142,
+    "activity": 17273,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 42060,
+    "person": 1140,
+    "activity": 17310,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 42215,
+    "person": 1147,
+    "activity": 17330,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 42242,
+    "person": 9311,
+    "activity": 17334,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 43329,
+    "person": 1140,
+    "activity": 17522,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 43517,
+    "person": 1146,
+    "activity": 17619,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 43558,
+    "person": 1134,
+    "activity": 17654,
+    "kind": "socialize",
+    "label": "Offer Cole charcoal firing instruction",
+    "target": 1135,
+    "purpose": "teach_technique"
+  },
+  {
+    "tick": 43560,
+    "person": 1122,
+    "activity": 17657,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 43908,
+    "person": 1108,
+    "activity": 17882,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 43945,
+    "person": 1145,
+    "activity": 17902,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 17322
+  },
+  {
+    "tick": 43999,
+    "person": 1108,
+    "activity": 17926,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 44036,
+    "person": 1137,
+    "activity": 17947,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 17322
+  },
+  {
+    "tick": 44157,
+    "person": 1145,
+    "activity": 18020,
+    "kind": "withdraw",
+    "label": "Collecting 1 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 44166,
+    "person": 1145,
+    "activity": 18026,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 44242,
+    "person": 1150,
+    "activity": 18056,
+    "kind": "withdraw",
+    "label": "Collecting 3 stone",
+    "target": 6923
+  },
+  {
+    "tick": 44243,
+    "person": 1139,
+    "activity": 18058,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 44277,
+    "person": 1140,
+    "activity": 18071,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 44412,
+    "person": 1140,
+    "activity": 18109,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 44504,
+    "person": 1139,
+    "activity": 18134,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45002,
+    "person": 1140,
+    "activity": 18209,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45461,
+    "person": 1140,
+    "activity": 18297,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 45490,
+    "person": 9311,
+    "activity": 18325,
+    "kind": "socialize",
+    "label": "Ask Jax for wood",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 45509,
+    "person": 9311,
+    "activity": 18336,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 45575,
+    "person": 1147,
+    "activity": 18374,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 45584,
+    "person": 1139,
+    "activity": 18382,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 45613,
+    "person": 1145,
+    "activity": 18405,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45621,
+    "person": 1147,
+    "activity": 18410,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45670,
+    "person": 1140,
+    "activity": 18442,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45684,
+    "person": 1109,
+    "activity": 18454,
+    "kind": "socialize",
+    "label": "Ask Mira for wood",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 45724,
+    "person": 1144,
+    "activity": 18493,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 45756,
+    "person": 1150,
+    "activity": 18509,
+    "kind": "socialize",
+    "label": "Ask Lena to help with the hut",
+    "target": 1149,
+    "purpose": "recruit"
+  },
+  {
+    "tick": 45778,
+    "person": 1120,
+    "activity": 18520,
+    "kind": "socialize",
+    "label": "Offer Ivo charcoal firing instruction",
+    "target": 1121,
+    "purpose": "teach_technique"
+  },
+  {
+    "tick": 45796,
+    "person": 1140,
+    "activity": 18531,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45856,
+    "person": 1108,
+    "activity": 18556,
+    "kind": "socialize",
+    "label": "Ask Eli for wood",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 45922,
+    "person": 1140,
+    "activity": 18590,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 45929,
+    "person": 1144,
+    "activity": 18596,
+    "kind": "withdraw",
+    "label": "Collecting 2 planks",
+    "target": 8473
+  },
+  {
+    "tick": 46002,
+    "person": 1149,
+    "activity": 18632,
+    "kind": "operate",
+    "label": "Firing bricks",
+    "target": 14038,
+    "purpose": "for the shared smithy",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 46075,
+    "person": 1147,
+    "activity": 18667,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 46083,
+    "person": 1149,
+    "activity": 18674,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 46108,
+    "person": 1112,
+    "activity": 18686,
+    "kind": "socialize",
+    "label": "Ask Lena for wood",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 46124,
+    "person": 1147,
+    "activity": 18696,
+    "kind": "socialize",
+    "label": "Ask Alma for planks",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 46135,
+    "person": 1146,
+    "activity": 18700,
+    "kind": "socialize",
+    "label": "Ask Alma for planks",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 46143,
+    "person": 1140,
+    "activity": 18704,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 46159,
+    "person": 1146,
+    "activity": 18715,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 46265,
+    "person": 1140,
+    "activity": 18765,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 46276,
+    "person": 1134,
+    "activity": 18775,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 46333,
+    "person": 1113,
+    "activity": 18801,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 46505,
+    "person": 9311,
+    "activity": 18898,
+    "kind": "socialize",
+    "label": "Ask Ben for wood",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 46511,
+    "person": 9311,
+    "activity": 18904,
+    "kind": "socialize",
+    "label": "Ask Petra for wood",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 46538,
+    "person": 1125,
+    "activity": 18926,
+    "kind": "withdraw",
+    "label": "Collecting 3 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 46580,
+    "person": 1139,
+    "activity": 18950,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 46603,
+    "person": 1145,
+    "activity": 18967,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 46631,
+    "person": 1109,
+    "activity": 18980,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 47816,
+    "person": 1146,
+    "activity": 19224,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 47854,
+    "person": 9311,
+    "activity": 19244,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 47872,
+    "person": 1109,
+    "activity": 19255,
+    "kind": "socialize",
+    "label": "Ask Viktor for wood",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 47888,
+    "person": 1146,
+    "activity": 19266,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 47904,
+    "person": 1140,
+    "activity": 19278,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 47922,
+    "person": 1108,
+    "activity": 19294,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 47928,
+    "person": 1109,
+    "activity": 19297,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 47979,
+    "person": 9311,
+    "activity": 19320,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 48002,
+    "person": 1108,
+    "activity": 19335,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48002,
+    "person": 1109,
+    "activity": 19336,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48058,
+    "person": 1108,
+    "activity": 19369,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 48082,
+    "person": 1147,
+    "activity": 19395,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 48130,
+    "person": 1108,
+    "activity": 19428,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 48150,
+    "person": 1139,
+    "activity": 19442,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48176,
+    "person": 1106,
+    "activity": 19459,
+    "kind": "withdraw",
+    "label": "Collecting 1 wood",
+    "target": 17322
+  },
+  {
+    "tick": 48198,
+    "person": 12113,
+    "activity": 19465,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48210,
+    "person": 1142,
+    "activity": 19473,
+    "kind": "withdraw",
+    "label": "Collecting 2 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 48253,
+    "person": 1113,
+    "activity": 19495,
+    "kind": "socialize",
+    "label": "Ask Basil for stone",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48273,
+    "person": 12113,
+    "activity": 19512,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 48356,
+    "person": 12113,
+    "activity": 19546,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 48372,
+    "person": 1108,
+    "activity": 19550,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 48389,
+    "person": 1137,
+    "activity": 19560,
+    "kind": "socialize",
+    "label": "Ask Nell for food",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 48462,
+    "person": 1137,
+    "activity": 19586,
+    "kind": "socialize",
+    "label": "Ask Tomas for food",
+    "target": 1128,
+    "purpose": "request"
+  },
+  {
+    "tick": 48476,
+    "person": 1108,
+    "activity": 19593,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 48577,
+    "person": 1145,
+    "activity": 19646,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 48629,
+    "person": 12113,
+    "activity": 19665,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 48645,
+    "person": 9311,
+    "activity": 19671,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 48684,
+    "person": 9311,
+    "activity": 19689,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 48728,
+    "person": 1146,
+    "activity": 19716,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 48756,
+    "person": 12113,
+    "activity": 19726,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 48825,
+    "person": 1146,
+    "activity": 19758,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 48829,
+    "person": 12113,
+    "activity": 19759,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 48840,
+    "person": 9311,
+    "activity": 19764,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 48874,
+    "person": 1142,
+    "activity": 19778,
+    "kind": "withdraw",
+    "label": "Collecting 3 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 48998,
+    "person": 9311,
+    "activity": 19831,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 49007,
+    "person": 1140,
+    "activity": 19836,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 49010,
+    "person": 1140,
+    "activity": 19840,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 49028,
+    "person": 1140,
+    "activity": 19850,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 49117,
+    "person": 1146,
+    "activity": 19882,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 49202,
+    "person": 1140,
+    "activity": 19915,
+    "kind": "socialize",
+    "label": "Ask Nell for planks",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 49273,
+    "person": 1140,
+    "activity": 19941,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 50539,
+    "person": 9311,
+    "activity": 20153,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 51697,
+    "person": 1147,
+    "activity": 20396,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 51698,
+    "person": 1147,
+    "activity": 20399,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 53841,
+    "person": 1119,
+    "activity": 21120,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 53977,
+    "person": 1122,
+    "activity": 21182,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 54504,
+    "person": 1122,
+    "activity": 21316,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 54577,
+    "person": 9311,
+    "activity": 21340,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 55252,
+    "person": 19083,
+    "activity": 21542,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 55343,
+    "person": 1112,
+    "activity": 21584,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 55404,
+    "person": 1122,
+    "activity": 21621,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 55415,
+    "person": 1147,
+    "activity": 21628,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 55560,
+    "person": 9311,
+    "activity": 21710,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 55712,
+    "person": 1146,
+    "activity": 21799,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 55805,
+    "person": 9311,
+    "activity": 21855,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 55826,
+    "person": 19083,
+    "activity": 21866,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 55826,
+    "person": 1140,
+    "activity": 21869,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 55828,
+    "person": 19083,
+    "activity": 21870,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 55829,
+    "person": 1122,
+    "activity": 21871,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 55841,
+    "person": 1139,
+    "activity": 21876,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 55844,
+    "person": 1147,
+    "activity": 21881,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 55853,
+    "person": 1140,
+    "activity": 21886,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 55862,
+    "person": 1108,
+    "activity": 21892,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 55943,
+    "person": 1108,
+    "activity": 21934,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 55943,
+    "person": 1109,
+    "activity": 21935,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 55960,
+    "person": 19083,
+    "activity": 21943,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 55990,
+    "person": 1145,
+    "activity": 21955,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 56026,
+    "person": 1134,
+    "activity": 21981,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 56061,
+    "person": 1146,
+    "activity": 21998,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 56065,
+    "person": 1140,
+    "activity": 22005,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 56080,
+    "person": 1139,
+    "activity": 22013,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 56083,
+    "person": 19083,
+    "activity": 22015,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 56087,
+    "person": 1139,
+    "activity": 22016,
+    "kind": "socialize",
+    "label": "Ask Arlo for food",
+    "target": 1150,
+    "purpose": "request"
+  },
+  {
+    "tick": 56131,
+    "person": 1134,
+    "activity": 22043,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 56141,
+    "person": 1140,
+    "activity": 22052,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 56187,
+    "person": 1139,
+    "activity": 22075,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 56197,
+    "person": 19083,
+    "activity": 22084,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 56200,
+    "person": 1139,
+    "activity": 22089,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 56203,
+    "person": 1109,
+    "activity": 22091,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 56261,
+    "person": 1116,
+    "activity": 22124,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 56283,
+    "person": 1109,
+    "activity": 22131,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 56357,
+    "person": 1109,
+    "activity": 22177,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 57679,
+    "person": 19083,
+    "activity": 22413,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 57994,
+    "person": 1107,
+    "activity": 22547,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 58002,
+    "person": 1122,
+    "activity": 22553,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 58033,
+    "person": 1142,
+    "activity": 22565,
+    "kind": "socialize",
+    "label": "Ask Zia for food",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 58111,
+    "person": 1122,
+    "activity": 22599,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 58184,
+    "person": 1140,
+    "activity": 22648,
+    "kind": "socialize",
+    "label": "Ask Nell for food",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 58184,
+    "person": 1122,
+    "activity": 22654,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 58250,
+    "person": 1146,
+    "activity": 22688,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 58259,
+    "person": 1146,
+    "activity": 22693,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 58291,
+    "person": 1140,
+    "activity": 22712,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 58319,
+    "person": 1146,
+    "activity": 22726,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 58361,
+    "person": 1109,
+    "activity": 22750,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 58378,
+    "person": 1122,
+    "activity": 22765,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 58430,
+    "person": 1140,
+    "activity": 22789,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 58431,
+    "person": 1122,
+    "activity": 22790,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 58447,
+    "person": 1109,
+    "activity": 22800,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 58455,
+    "person": 1140,
+    "activity": 22806,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 58460,
+    "person": 12113,
+    "activity": 22811,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 58483,
+    "person": 1140,
+    "activity": 22820,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 58514,
+    "person": 1108,
+    "activity": 22832,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 58518,
+    "person": 1146,
+    "activity": 22833,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 58541,
+    "person": 1108,
+    "activity": 22844,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 58541,
+    "person": 1121,
+    "activity": 22846,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 58541,
+    "person": 1122,
+    "activity": 22847,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 58548,
+    "person": 12113,
+    "activity": 22852,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 58552,
+    "person": 1122,
+    "activity": 22857,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 58559,
+    "person": 1147,
+    "activity": 22864,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 58579,
+    "person": 1140,
+    "activity": 22874,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 58619,
+    "person": 1146,
+    "activity": 22887,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 58627,
+    "person": 12113,
+    "activity": 22891,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 58657,
+    "person": 1139,
+    "activity": 22909,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 58671,
+    "person": 1121,
+    "activity": 22915,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 58683,
+    "person": 1122,
+    "activity": 22920,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 58791,
+    "person": 1125,
+    "activity": 22971,
+    "kind": "socialize",
+    "label": "Ask Nell for food",
+    "target": 12113,
+    "purpose": "request"
+  },
+  {
+    "tick": 58794,
+    "person": 12113,
+    "activity": 22972,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 58878,
+    "person": 1108,
+    "activity": 22999,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 59047,
+    "person": 19083,
+    "activity": 23039,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 59517,
+    "person": 1146,
+    "activity": 23115,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 59679,
+    "person": 1113,
+    "activity": 23150,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 59727,
+    "person": 1122,
+    "activity": 23168,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 59731,
+    "person": 1122,
+    "activity": 23170,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 59734,
+    "person": 12113,
+    "activity": 23172,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 59746,
+    "person": 12113,
+    "activity": 23177,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 59794,
+    "person": 1131,
+    "activity": 23194,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 59811,
+    "person": 1122,
+    "activity": 23204,
+    "kind": "socialize",
+    "label": "Ask Otto for food",
+    "target": 19083,
+    "purpose": "request"
+  },
+  {
+    "tick": 59824,
+    "person": 1122,
+    "activity": 23211,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 59874,
+    "person": 19083,
+    "activity": 23234,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 59920,
+    "person": 19083,
+    "activity": 23257,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 59940,
+    "person": 1147,
+    "activity": 23265,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 59951,
+    "person": 19083,
+    "activity": 23270,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 59968,
+    "person": 1108,
+    "activity": 23273,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 59979,
+    "person": 1122,
+    "activity": 23286,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 59987,
+    "person": 1139,
+    "activity": 23290,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 60037,
+    "person": 1150,
+    "activity": 23319,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 60038,
+    "person": 1108,
+    "activity": 23321,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 60053,
+    "person": 12113,
+    "activity": 23324,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 60105,
+    "person": 1116,
+    "activity": 23359,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 60113,
+    "person": 1116,
+    "activity": 23364,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 60128,
+    "person": 1108,
+    "activity": 23375,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 60163,
+    "person": 1108,
+    "activity": 23392,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 60190,
+    "person": 1146,
+    "activity": 23402,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60221,
+    "person": 1122,
+    "activity": 23426,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 60260,
+    "person": 1108,
+    "activity": 23446,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 60287,
+    "person": 1146,
+    "activity": 23457,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 60300,
+    "person": 1122,
+    "activity": 23465,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 60312,
+    "person": 12113,
+    "activity": 23476,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 60319,
+    "person": 1122,
+    "activity": 23481,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 60360,
+    "person": 1108,
+    "activity": 23501,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 60379,
+    "person": 1146,
+    "activity": 23510,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 60383,
+    "person": 1150,
+    "activity": 23512,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 60392,
+    "person": 1108,
+    "activity": 23517,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60414,
+    "person": 1146,
+    "activity": 23530,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 60430,
+    "person": 1121,
+    "activity": 23536,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 60458,
+    "person": 19083,
+    "activity": 23556,
+    "kind": "socialize",
+    "label": "Ask Kai for water",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 60501,
+    "person": 1116,
+    "activity": 23580,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 60527,
+    "person": 1150,
+    "activity": 23595,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 60576,
+    "person": 1116,
+    "activity": 23617,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 60576,
+    "person": 1145,
+    "activity": 23618,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 60590,
+    "person": 1144,
+    "activity": 23624,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 60591,
+    "person": 1119,
+    "activity": 23625,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 60599,
+    "person": 1122,
+    "activity": 23633,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 60667,
+    "person": 1119,
+    "activity": 23653,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 60668,
+    "person": 1145,
+    "activity": 23655,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60753,
+    "person": 1146,
+    "activity": 23697,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60774,
+    "person": 1116,
+    "activity": 23702,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60787,
+    "person": 1144,
+    "activity": 23706,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 60792,
+    "person": 1108,
+    "activity": 23710,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60802,
+    "person": 1147,
+    "activity": 23717,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 60803,
+    "person": 12113,
+    "activity": 23718,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 60832,
+    "person": 1108,
+    "activity": 23737,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 60877,
+    "person": 12113,
+    "activity": 23763,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 60897,
+    "person": 1112,
+    "activity": 23773,
+    "kind": "operate",
+    "label": "Firing bricks",
+    "target": 14038,
+    "purpose": "for my household’s bakery",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 60901,
+    "person": 1147,
+    "activity": 23777,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 60937,
+    "person": 1142,
+    "activity": 23787,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 60952,
+    "person": 12113,
+    "activity": 23795,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 60963,
+    "person": 1142,
+    "activity": 23802,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 60976,
+    "person": 1147,
+    "activity": 23811,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 60983,
+    "person": 1146,
+    "activity": 23815,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 61003,
+    "person": 1146,
+    "activity": 23825,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 61268,
+    "person": 1122,
+    "activity": 23910,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 61647,
+    "person": 1146,
+    "activity": 24016,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 61691,
+    "person": 1139,
+    "activity": 24032,
+    "kind": "socialize",
+    "label": "Ask Milo for food",
+    "target": 1116,
+    "purpose": "request"
+  },
+  {
+    "tick": 61723,
+    "person": 1146,
+    "activity": 24042,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 61793,
+    "person": 19083,
+    "activity": 24060,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 61917,
+    "person": 19083,
+    "activity": 24079,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 62053,
+    "person": 19083,
+    "activity": 24105,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 62326,
+    "person": 9311,
+    "activity": 24216,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 62342,
+    "person": 1146,
+    "activity": 24227,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 62449,
+    "person": 1147,
+    "activity": 24283,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 62469,
+    "person": 1108,
+    "activity": 24297,
+    "kind": "socialize",
+    "label": "Ask Cole for food",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 62496,
+    "person": 9311,
+    "activity": 24312,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 62519,
+    "person": 1147,
+    "activity": 24324,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 62544,
+    "person": 1108,
+    "activity": 24334,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 62578,
+    "person": 9311,
+    "activity": 24345,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 62586,
+    "person": 9311,
+    "activity": 24351,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 62591,
+    "person": 9311,
+    "activity": 24354,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 62600,
+    "person": 9311,
+    "activity": 24361,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 62623,
+    "person": 9311,
+    "activity": 24380,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 62671,
+    "person": 1108,
+    "activity": 24417,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 62738,
+    "person": 1119,
+    "activity": 24457,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 62741,
+    "person": 1108,
+    "activity": 24459,
+    "kind": "socialize",
+    "label": "Ask Petra for food",
+    "target": 1132,
+    "purpose": "request"
+  },
+  {
+    "tick": 62749,
+    "person": 1108,
+    "activity": 24464,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 62821,
+    "person": 9311,
+    "activity": 24500,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 62844,
+    "person": 1146,
+    "activity": 24516,
+    "kind": "socialize",
+    "label": "Ask Abel for planks",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 62844,
+    "person": 1108,
+    "activity": 24517,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 62885,
+    "person": 1112,
+    "activity": 24542,
+    "kind": "withdraw",
+    "label": "Gathering up what was left behind",
+    "target": 21323
+  },
+  {
+    "tick": 62904,
+    "person": 1135,
+    "activity": 24548,
+    "kind": "operate",
+    "label": "Firing bricks",
+    "target": 14038,
+    "purpose": "for the shared smithy",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 62920,
+    "person": 9311,
+    "activity": 24553,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 62940,
+    "person": 9311,
+    "activity": 24560,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 62947,
+    "person": 1108,
+    "activity": 24563,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 62948,
+    "person": 1135,
+    "activity": 24565,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for the shared smithy (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 62953,
+    "person": 1112,
+    "activity": 24571,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for my household’s bakery (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 63028,
+    "person": 1146,
+    "activity": 24610,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 63089,
+    "person": 1145,
+    "activity": 24639,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for my household’s house (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 63097,
+    "person": 1147,
+    "activity": 24644,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 63102,
+    "person": 1112,
+    "activity": 24646,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for my household’s bakery (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 63107,
+    "person": 1121,
+    "activity": 24652,
+    "kind": "socialize",
+    "label": "Ask Eli for food",
+    "target": 1122,
+    "purpose": "request"
+  },
+  {
+    "tick": 63132,
+    "person": 1145,
+    "activity": 24666,
+    "kind": "operate",
+    "label": "Hewing planks",
+    "target": 8473,
+    "purpose": "for my household’s house",
+    "recipe": "hew_planks"
+  },
+  {
+    "tick": 63139,
+    "person": 9311,
+    "activity": 24669,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 63159,
+    "person": 1107,
+    "activity": 24683,
+    "kind": "socialize",
+    "label": "Ask Basil for planks",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 63178,
+    "person": 1121,
+    "activity": 24694,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 63270,
+    "person": 1108,
+    "activity": 24747,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 63303,
+    "person": 1108,
+    "activity": 24757,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 63315,
+    "person": 1145,
+    "activity": 24768,
+    "kind": "withdraw",
+    "label": "Collecting 1 planks",
+    "target": 8473
+  },
+  {
+    "tick": 63324,
+    "person": 1145,
+    "activity": 24772,
+    "kind": "operate",
+    "label": "Heading to help at the kiln",
+    "target": 14038,
+    "purpose": "for my household’s house (lend a hand)",
+    "recipe": "fire_bricks"
+  },
+  {
+    "tick": 63331,
+    "person": 9311,
+    "activity": 24776,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 63398,
+    "person": 1135,
+    "activity": 24806,
+    "kind": "withdraw",
+    "label": "Collecting 2 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 64514,
+    "person": 1139,
+    "activity": 25017,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 64551,
+    "person": 1140,
+    "activity": 25027,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 64681,
+    "person": 1147,
+    "activity": 25065,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 64682,
+    "person": 1147,
+    "activity": 25068,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 64774,
+    "person": 1147,
+    "activity": 25103,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 64781,
+    "person": 1108,
+    "activity": 25106,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 64784,
+    "person": 1147,
+    "activity": 25107,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 64851,
+    "person": 1140,
+    "activity": 25141,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 64887,
+    "person": 1108,
+    "activity": 25157,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 64894,
+    "person": 1147,
+    "activity": 25166,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 64963,
+    "person": 1108,
+    "activity": 25199,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 64980,
+    "person": 1106,
+    "activity": 25206,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 65058,
+    "person": 1147,
+    "activity": 25228,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 65106,
+    "person": 1108,
+    "activity": 25251,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 65148,
+    "person": 1147,
+    "activity": 25274,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 65206,
+    "person": 1140,
+    "activity": 25301,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 65219,
+    "person": 1108,
+    "activity": 25306,
+    "kind": "socialize",
+    "label": "Ask Ines for food",
+    "target": 1125,
+    "purpose": "request"
+  },
+  {
+    "tick": 65446,
+    "person": 1147,
+    "activity": 25372,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 65529,
+    "person": 1147,
+    "activity": 25384,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 66020,
+    "person": 1147,
+    "activity": 25512,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 66134,
+    "person": 1146,
+    "activity": 25559,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 66610,
+    "person": 1139,
+    "activity": 25654,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 66614,
+    "person": 1139,
+    "activity": 25655,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 66926,
+    "person": 9311,
+    "activity": 25703,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 66960,
+    "person": 1139,
+    "activity": 25710,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67036,
+    "person": 25433,
+    "activity": 25733,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 67068,
+    "person": 9311,
+    "activity": 25744,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 67069,
+    "person": 9311,
+    "activity": 25746,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67083,
+    "person": 1146,
+    "activity": 25761,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 67128,
+    "person": 25433,
+    "activity": 25785,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67129,
+    "person": 1146,
+    "activity": 25788,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67138,
+    "person": 1139,
+    "activity": 25796,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 67140,
+    "person": 9311,
+    "activity": 25799,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 67146,
+    "person": 25433,
+    "activity": 25806,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67147,
+    "person": 1108,
+    "activity": 25809,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67151,
+    "person": 1108,
+    "activity": 25813,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67161,
+    "person": 25433,
+    "activity": 25820,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67175,
+    "person": 25433,
+    "activity": 25824,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67179,
+    "person": 9311,
+    "activity": 25827,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67181,
+    "person": 25433,
+    "activity": 25829,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67193,
+    "person": 25433,
+    "activity": 25836,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 67204,
+    "person": 1109,
+    "activity": 25843,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67215,
+    "person": 1146,
+    "activity": 25852,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67217,
+    "person": 1139,
+    "activity": 25857,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 67252,
+    "person": 1108,
+    "activity": 25867,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 67252,
+    "person": 9311,
+    "activity": 25868,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67258,
+    "person": 9311,
+    "activity": 25874,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67268,
+    "person": 1147,
+    "activity": 25881,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67276,
+    "person": 25433,
+    "activity": 25883,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 67296,
+    "person": 25433,
+    "activity": 25891,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 67309,
+    "person": 1140,
+    "activity": 25898,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 67323,
+    "person": 1147,
+    "activity": 25909,
+    "kind": "socialize",
+    "label": "Ask Mona for food",
+    "target": 25433,
+    "purpose": "request"
+  },
+  {
+    "tick": 67361,
+    "person": 1147,
+    "activity": 25925,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67373,
+    "person": 1132,
+    "activity": 25931,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 67401,
+    "person": 1140,
+    "activity": 25945,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67447,
+    "person": 1109,
+    "activity": 25976,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67451,
+    "person": 1132,
+    "activity": 25981,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67452,
+    "person": 1108,
+    "activity": 25984,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 67459,
+    "person": 1108,
+    "activity": 25988,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 67481,
+    "person": 1146,
+    "activity": 25995,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67483,
+    "person": 1139,
+    "activity": 25999,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67501,
+    "person": 19083,
+    "activity": 26006,
+    "kind": "socialize",
+    "label": "Ask Milo for food",
+    "target": 1116,
+    "purpose": "request"
+  },
+  {
+    "tick": 67515,
+    "person": 1109,
+    "activity": 26012,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67551,
+    "person": 1144,
+    "activity": 26032,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67551,
+    "person": 1146,
+    "activity": 26033,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67582,
+    "person": 1139,
+    "activity": 26043,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 67582,
+    "person": 1108,
+    "activity": 26044,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67589,
+    "person": 1109,
+    "activity": 26050,
+    "kind": "socialize",
+    "label": "Ask Quinn for food",
+    "target": 9311,
+    "purpose": "request"
+  },
+  {
+    "tick": 67594,
+    "person": 1108,
+    "activity": 26052,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 67600,
+    "person": 9311,
+    "activity": 26054,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 67615,
+    "person": 1146,
+    "activity": 26064,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 67634,
+    "person": 1108,
+    "activity": 26079,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67641,
+    "person": 1146,
+    "activity": 26080,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67646,
+    "person": 1140,
+    "activity": 26089,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 67675,
+    "person": 1109,
+    "activity": 26099,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67676,
+    "person": 1108,
+    "activity": 26101,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 67685,
+    "person": 9311,
+    "activity": 26105,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67688,
+    "person": 1122,
+    "activity": 26107,
+    "kind": "socialize",
+    "label": "Ask Cora for food",
+    "target": 1119,
+    "purpose": "request"
+  },
+  {
+    "tick": 67688,
+    "person": 1145,
+    "activity": 26108,
+    "kind": "socialize",
+    "label": "Ask Faye for water",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67688,
+    "person": 1147,
+    "activity": 26109,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67701,
+    "person": 9311,
+    "activity": 26114,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67704,
+    "person": 1139,
+    "activity": 26117,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67712,
+    "person": 1146,
+    "activity": 26121,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 67715,
+    "person": 1139,
+    "activity": 26124,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 67718,
+    "person": 9311,
+    "activity": 26128,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67722,
+    "person": 9311,
+    "activity": 26131,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 67762,
+    "person": 1108,
+    "activity": 26149,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67762,
+    "person": 1109,
+    "activity": 26150,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67786,
+    "person": 1139,
+    "activity": 26155,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 67804,
+    "person": 1109,
+    "activity": 26163,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 67863,
+    "person": 1139,
+    "activity": 26181,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 67900,
+    "person": 1109,
+    "activity": 26200,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 67953,
+    "person": 19083,
+    "activity": 26231,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 67956,
+    "person": 9311,
+    "activity": 26232,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 67988,
+    "person": 1140,
+    "activity": 26253,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 67989,
+    "person": 1139,
+    "activity": 26255,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 67998,
+    "person": 1108,
+    "activity": 26263,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 68049,
+    "person": 9311,
+    "activity": 26289,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 68049,
+    "person": 1109,
+    "activity": 26290,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 68051,
+    "person": 9311,
+    "activity": 26292,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 68072,
+    "person": 1108,
+    "activity": 26308,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 68121,
+    "person": 1147,
+    "activity": 26332,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 68146,
+    "person": 1139,
+    "activity": 26341,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  },
+  {
+    "tick": 68167,
+    "person": 1147,
+    "activity": 26351,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 68219,
+    "person": 1139,
+    "activity": 26360,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 68239,
+    "person": 1146,
+    "activity": 26369,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 68252,
+    "person": 1108,
+    "activity": 26377,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 68326,
+    "person": 1108,
+    "activity": 26409,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 68339,
+    "person": 1146,
+    "activity": 26418,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 68355,
+    "person": 1145,
+    "activity": 26424,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 68393,
+    "person": 19083,
+    "activity": 26449,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 68539,
+    "person": 1140,
+    "activity": 26481,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 68783,
+    "person": 1108,
+    "activity": 26508,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 69041,
+    "person": 25433,
+    "activity": 26548,
+    "kind": "socialize",
+    "label": "Ask Zia for food",
+    "target": 1113,
+    "purpose": "request"
+  },
+  {
+    "tick": 69425,
+    "person": 1139,
+    "activity": 26612,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 69481,
+    "person": 1147,
+    "activity": 26632,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 69484,
+    "person": 1113,
+    "activity": 26638,
+    "kind": "withdraw",
+    "label": "Collecting 1 bricks",
+    "target": 14038
+  },
+  {
+    "tick": 69553,
+    "person": 1147,
+    "activity": 26664,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 69580,
+    "person": 1109,
+    "activity": 26678,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 69598,
+    "person": 1140,
+    "activity": 26694,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 69650,
+    "person": 1109,
+    "activity": 26711,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 69663,
+    "person": 1116,
+    "activity": 26720,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 69671,
+    "person": 1140,
+    "activity": 26727,
+    "kind": "socialize",
+    "label": "Ask Cole for bricks",
+    "target": 1135,
+    "purpose": "request"
+  },
+  {
+    "tick": 69687,
+    "person": 19083,
+    "activity": 26732,
+    "kind": "socialize",
+    "label": "Ask Kai for food",
+    "target": 1131,
+    "purpose": "request"
+  },
+  {
+    "tick": 69698,
+    "person": 1147,
+    "activity": 26741,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 69708,
+    "person": 1140,
+    "activity": 26747,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 69720,
+    "person": 1109,
+    "activity": 26753,
+    "kind": "socialize",
+    "label": "Ask Viktor for food",
+    "target": 1108,
+    "purpose": "request"
+  },
+  {
+    "tick": 69722,
+    "person": 1116,
+    "activity": 26755,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 69728,
+    "person": 1139,
+    "activity": 26760,
+    "kind": "socialize",
+    "label": "Ask Basil for food",
+    "target": 1138,
+    "purpose": "request"
+  },
+  {
+    "tick": 69762,
+    "person": 1108,
+    "activity": 26776,
+    "kind": "socialize",
+    "label": "Ask Lena for food",
+    "target": 1149,
+    "purpose": "request"
+  },
+  {
+    "tick": 69778,
+    "person": 1140,
+    "activity": 26780,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 69778,
+    "person": 1147,
+    "activity": 26781,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 69794,
+    "person": 1116,
+    "activity": 26790,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 69796,
+    "person": 1109,
+    "activity": 26794,
+    "kind": "socialize",
+    "label": "Ask Ivo for food",
+    "target": 1121,
+    "purpose": "request"
+  },
+  {
+    "tick": 69801,
+    "person": 1108,
+    "activity": 26798,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 69807,
+    "person": 19083,
+    "activity": 26801,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 69865,
+    "person": 1147,
+    "activity": 26834,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 69895,
+    "person": 1113,
+    "activity": 26852,
+    "kind": "operate",
+    "label": "Burning charcoal",
+    "target": 14038,
+    "purpose": "the smithy burns charcoal to smelt and forge",
+    "recipe": "burn_charcoal"
+  },
+  {
+    "tick": 69897,
+    "person": 1108,
+    "activity": 26853,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 69905,
+    "person": 1108,
+    "activity": 26857,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 69952,
+    "person": 1109,
+    "activity": 26885,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 70017,
+    "person": 1108,
+    "activity": 26906,
+    "kind": "socialize",
+    "label": "Ask Emre for food",
+    "target": 1107,
+    "purpose": "request"
+  },
+  {
+    "tick": 70045,
+    "person": 1139,
+    "activity": 26914,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 70076,
+    "person": 25433,
+    "activity": 26930,
+    "kind": "socialize",
+    "label": "Ask Jax for food",
+    "target": 1145,
+    "purpose": "request"
+  },
+  {
+    "tick": 70079,
+    "person": 1140,
+    "activity": 26932,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 70143,
+    "person": 1106,
+    "activity": 26966,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 70158,
+    "person": 1109,
+    "activity": 26973,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 70184,
+    "person": 1147,
+    "activity": 26989,
+    "kind": "socialize",
+    "label": "Ask Abel for food",
+    "target": 1120,
+    "purpose": "request"
+  },
+  {
+    "tick": 70222,
+    "person": 1116,
+    "activity": 26996,
+    "kind": "socialize",
+    "label": "Ask Thea for food",
+    "target": 1139,
+    "purpose": "request"
+  },
+  {
+    "tick": 70244,
+    "person": 1109,
+    "activity": 27008,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 70356,
+    "person": 1139,
+    "activity": 27062,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 70391,
+    "person": 1116,
+    "activity": 27079,
+    "kind": "socialize",
+    "label": "Ask Mira for food",
+    "target": 1106,
+    "purpose": "request"
+  },
+  {
+    "tick": 70437,
+    "person": 1108,
+    "activity": 27099,
+    "kind": "socialize",
+    "label": "Ask Talia for food",
+    "target": 1142,
+    "purpose": "request"
+  },
+  {
+    "tick": 70457,
+    "person": 1139,
+    "activity": 27107,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 70478,
+    "person": 1108,
+    "activity": 27119,
+    "kind": "socialize",
+    "label": "Ask Theo for food",
+    "target": 1109,
+    "purpose": "request"
+  },
+  {
+    "tick": 70551,
+    "person": 1139,
+    "activity": 27157,
+    "kind": "socialize",
+    "label": "Ask Ivy for food",
+    "target": 1137,
+    "purpose": "request"
+  },
+  {
+    "tick": 70596,
+    "person": 1108,
+    "activity": 27177,
+    "kind": "socialize",
+    "label": "Ask Ben for food",
+    "target": 1112,
+    "purpose": "request"
+  },
+  {
+    "tick": 70624,
+    "person": 1147,
+    "activity": 27194,
+    "kind": "socialize",
+    "label": "Ask Alma for food",
+    "target": 1144,
+    "purpose": "request"
+  },
+  {
+    "tick": 70749,
+    "person": 1107,
+    "activity": 27243,
+    "kind": "socialize",
+    "label": "Ask Faye for food",
+    "target": 1147,
+    "purpose": "request"
+  },
+  {
+    "tick": 70939,
+    "person": 1138,
+    "activity": 27294,
+    "kind": "socialize",
+    "label": "Ask Nico for food",
+    "target": 1140,
+    "purpose": "request"
+  },
+  {
+    "tick": 71032,
+    "person": 1147,
+    "activity": 27315,
+    "kind": "socialize",
+    "label": "Ask Edda for food",
+    "target": 1146,
+    "purpose": "request"
+  }
+]

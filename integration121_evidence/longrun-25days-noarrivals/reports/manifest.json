@@ -1,0 +1,16 @@
+﻿{
+    "node":  "v24.19.0",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-pavel-talia-integration",
+    "secondsBudgetPerRun":  1800,
+    "daysPerRun":  25,
+    "seeds":  [
+                  "forest",
+                  "river",
+                  "meadow"
+              ],
+    "commit":  "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+    "note":  "Observers repeat each seed; they are not independent seeds. Source hashes are in each successful report.",
+    "checks":  [
+                   "production"
+               ]
+}

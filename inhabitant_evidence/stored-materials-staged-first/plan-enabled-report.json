@@ -1,0 +1,116 @@
+{
+  "scenario": "plan",
+  "arm": "enabled",
+  "firstChoice": "Collect 1 stone from the storehouse",
+  "requests": [],
+  "inventory": {
+    "axe": 1,
+    "wood": 3
+  },
+  "plans": [
+    {
+      "id": 11,
+      "kind": "tool",
+      "goal": "make an axe",
+      "since": 700,
+      "until": 5500,
+      "status": "done",
+      "reason": "made the axe",
+      "setAside": 0,
+      "aboutId": 0,
+      "wants": {},
+      "makes": "axe",
+      "sheltered": 0,
+      "worked": 1,
+      "ended": 868,
+      "step": "",
+      "stepKind": "none",
+      "stepTarget": 0,
+      "stepItem": null,
+      "stepKey": null,
+      "blocked": ""
+    },
+    {
+      "id": 17,
+      "kind": "night",
+      "goal": "be fed, watered and under shelter before dark",
+      "since": 1093,
+      "until": 2520,
+      "status": "active",
+      "step": "stay at my lean-to until it is light",
+      "stepKind": "stay",
+      "stepTarget": 6,
+      "stepItem": null,
+      "stepKey": "shelter:6",
+      "blocked": "",
+      "reason": "nowhere to shelter nearby for the night",
+      "setAside": 0,
+      "aboutId": 6,
+      "wants": {},
+      "makes": "",
+      "sheltered": 301,
+      "worked": 0,
+      "ended": 0
+    }
+  ],
+  "relations": {},
+  "socialMemory": [],
+  "tools": [
+    {
+      "ent": "tool",
+      "id": 14,
+      "kind": "axe",
+      "tier": 0,
+      "wear": 1.512,
+      "ownerHh": 1,
+      "holder": 2,
+      "loan": null,
+      "madeTick": 867,
+      "maker": 2
+    }
+  ],
+  "milestones": [
+    {
+      "tick": 793,
+      "stage": "store-stock-change",
+      "item": "stone",
+      "before": 4,
+      "after": 3
+    },
+    {
+      "tick": 869,
+      "stage": "crafted",
+      "plans": [
+        {
+          "id": 11,
+          "kind": "tool",
+          "goal": "make an axe",
+          "since": 700,
+          "until": 5500,
+          "status": "done",
+          "reason": "made the axe",
+          "setAside": 0,
+          "aboutId": 0,
+          "wants": {},
+          "makes": "axe",
+          "sheltered": 0,
+          "worked": 1,
+          "ended": 868,
+          "step": "",
+          "stepKind": "none",
+          "stepTarget": 0,
+          "stepItem": null,
+          "stepKey": null,
+          "blocked": ""
+        }
+      ]
+    }
+  ],
+  "hash": "016fba06",
+  "replayHash": "016fba06",
+  "fullReplayEqual": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

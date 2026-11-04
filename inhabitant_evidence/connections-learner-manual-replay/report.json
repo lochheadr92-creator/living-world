@@ -1,0 +1,87 @@
+{
+  "staged": true,
+  "externalModel": false,
+  "actor": "Ben",
+  "startPath": "/inhabitant_evidence/connections-learner-first/learner-start.json",
+  "protocol": "inhabitant/21",
+  "observationVersion": 12,
+  "tick": 293,
+  "browserHash": "1b1b22c0",
+  "replayHash": "1b1b22c0",
+  "fullSerializedEqual": true,
+  "applied": 2,
+  "rejected": 0,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 7,
+      "label": "Ask Ada to teach charcoal firing",
+      "tick": 229,
+      "outcome": "partial",
+      "detail": "learned charcoal firing after 180 ticks together"
+    },
+    {
+      "call": 1,
+      "activityId": 11,
+      "label": "Burning charcoal",
+      "tick": 292,
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "requests": [],
+  "techniques": {
+    "charcoal": {
+      "source": "taught",
+      "learned": 212,
+      "teacher": 2,
+      "lesson": 8,
+      "started": 32
+    }
+  },
+  "trade": {
+    "key": "stone",
+    "since": 0,
+    "why": "quicker at it than at anything else"
+  },
+  "inventory": {},
+  "plans": [],
+  "commitments": [],
+  "relations": {
+    "2": {
+      "affinity": 83.3267826984264,
+      "trust": 60.6,
+      "familiarity": 1.3,
+      "lastMet": 228,
+      "kin": "parent",
+      "avoidUntil": 0,
+      "debt": 0,
+      "history": [],
+      "grievance": null,
+      "settledAt": -99999
+    }
+  },
+  "buildings": [
+    {
+      "id": 5,
+      "type": "kiln",
+      "store": {
+        "items": {},
+        "cap": 50
+      }
+    },
+    {
+      "id": 6,
+      "type": "smithy",
+      "store": {
+        "items": {},
+        "cap": 40
+      }
+    }
+  ],
+  "tools": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

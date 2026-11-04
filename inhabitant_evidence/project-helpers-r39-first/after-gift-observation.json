@@ -1,0 +1,347 @@
+{
+  "version": 12,
+  "time": {
+    "tick": 178,
+    "day": 1,
+    "clock": "08:58",
+    "phase": "morning",
+    "light": "daylight",
+    "weather": "Clear",
+    "tempC": 14
+  },
+  "self": {
+    "name": "Ada",
+    "sex": "f",
+    "stage": "adult",
+    "ageYears": 30,
+    "character": "balanced",
+    "skills": {
+      "forage": 1.18,
+      "fish": 1.31,
+      "wood": 1.8,
+      "stone": 0.82,
+      "build": 1.1,
+      "farm": 1.01,
+      "craft": 1.23,
+      "carpentry": 1.17,
+      "kiln": 0.87,
+      "smith": 1.14,
+      "bake": 1.16
+    },
+    "health": 100,
+    "needs": {
+      "hunger": {
+        "value": 33,
+        "state": "low"
+      },
+      "thirst": {
+        "value": 97,
+        "state": "ok"
+      },
+      "energy": {
+        "value": 89,
+        "state": "ok"
+      },
+      "warmth": {
+        "value": 100,
+        "state": "ok"
+      },
+      "safety": {
+        "value": 84,
+        "state": "ok"
+      },
+      "social": {
+        "value": 84,
+        "state": "ok"
+      }
+    },
+    "aspiration": null,
+    "carrying": {
+      "wood": 2,
+      "berries": 2
+    },
+    "load": {
+      "used": 6,
+      "cap": 12
+    },
+    "spokenFor": {
+      "wood": 2,
+      "stone": 1
+    },
+    "available": {
+      "berries": 2
+    },
+    "tools": [],
+    "pullingCart": false,
+    "position": {
+      "x": 40.5,
+      "y": 40.5
+    },
+    "mood": 3,
+    "thoughts": [
+      "+8 Cora gave me 2 berries"
+    ],
+    "trade": null,
+    "techniques": [
+      "charcoal firing"
+    ]
+  },
+  "household": {
+    "name": "Brook",
+    "members": [],
+    "home": "lean-to 1 tiles north (100% sound when last seen)",
+    "partner": null,
+    "parents": [],
+    "children": []
+  },
+  "doing": {
+    "activity": null,
+    "suspended": null,
+    "conversation": null,
+    "lastResult": null,
+    "lastInteraction": {
+      "purpose": "offer",
+      "outcome": "friendly",
+      "detail": "",
+      "when": "1 world min ago",
+      "t": 177
+    },
+    "lastChoice": null
+  },
+  "seen": {
+    "people": [
+      {
+        "id": 7,
+        "name": "Cora",
+        "x": 41.7,
+        "y": 41.1,
+        "distance": 1,
+        "direction": "south",
+        "looks": [],
+        "doing": "",
+        "carrying": [
+          "berries",
+          "stone"
+        ],
+        "talking": false,
+        "relation": "Friendly"
+      },
+      {
+        "id": 5,
+        "name": "Ben",
+        "x": 42.5,
+        "y": 40.5,
+        "distance": 2,
+        "direction": "south-east",
+        "looks": [],
+        "doing": "",
+        "carrying": [
+          "stone"
+        ],
+        "talking": false,
+        "relation": "Stranger"
+      }
+    ],
+    "wolves": []
+  },
+  "remembered": {
+    "places": [
+      {
+        "id": 10,
+        "what": "lean-to",
+        "x": 39.5,
+        "y": 39.5,
+        "distance": 1,
+        "direction": "north",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "owner": "Brook",
+        "items": {
+          "berries": 6
+        },
+        "condition": 100
+      },
+      {
+        "id": 13,
+        "what": "tree",
+        "x": 43.5,
+        "y": 39.5,
+        "distance": 3,
+        "direction": "south-east",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      },
+      {
+        "id": 11,
+        "what": "tree",
+        "x": 44.5,
+        "y": 41.5,
+        "distance": 4,
+        "direction": "south-east",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      },
+      {
+        "id": 12,
+        "what": "tree",
+        "x": 45.5,
+        "y": 40.5,
+        "distance": 5,
+        "direction": "south-east",
+        "seen": "just now",
+        "source": "seen",
+        "stale": false,
+        "amount": 9
+      },
+      {
+        "id": 14,
+        "what": "rock outcrop",
+        "x": 60.5,
+        "y": 40.5,
+        "distance": 20,
+        "direction": "south-east",
+        "seen": "1 world h 47 min ago",
+        "source": "seen",
+        "stale": false,
+        "amount": 12,
+        "estimate": 10
+      }
+    ],
+    "water": [],
+    "dangers": [],
+    "counts": {
+      "building": 1,
+      "tree": 3,
+      "rock outcrop": 1
+    }
+  },
+  "people": {
+    "relations": [
+      {
+        "id": 7,
+        "name": "Cora",
+        "label": "Friendly",
+        "affinity": 11,
+        "trust": 14,
+        "familiarity": 2,
+        "kin": "",
+        "lastMet": "1 world min ago",
+        "avoiding": false,
+        "owesMe": 0,
+        "lastNote": "Cora gave me 2 berries",
+        "grievance": null
+      }
+    ],
+    "whereabouts": [],
+    "worries": [],
+    "requests": [],
+    "promises": []
+  },
+  "recent": {
+    "memory": [
+      {
+        "when": "23 world min ago",
+        "text": "Cora gave me 2 berries.",
+        "kind": "social",
+        "t": 139
+      },
+      {
+        "when": "47 world min ago",
+        "text": "Means to make an axe: it would make the work easier, and the makings are short.",
+        "kind": "work",
+        "t": 100
+      }
+    ],
+    "failures": []
+  },
+  "options": [
+    {
+      "key": "eat:0",
+      "kind": "eat",
+      "label": "Eat what I am carrying",
+      "goal": "to ease hunger",
+      "need": "hunger",
+      "eta": "7 world min",
+      "target": null,
+      "limits": [
+        {
+          "field": "portions",
+          "kind": "count",
+          "min": 1,
+          "max": 2,
+          "note": "how many portions to eat (default: until satisfied)"
+        },
+        {
+          "field": "untilHunger",
+          "kind": "until",
+          "min": 34,
+          "max": 100,
+          "note": "stop once hunger has risen to this"
+        }
+      ]
+    },
+    {
+      "key": "eat_store:10",
+      "kind": "eat_store",
+      "label": "Eat from the home store",
+      "goal": "to ease hunger",
+      "need": "hunger",
+      "eta": "27 world min",
+      "target": "lean-to 1 tiles north (seen just now)"
+    },
+    {
+      "key": "socialize:5:ask_info:food",
+      "kind": "socialize",
+      "label": "Ask Ben where to find food",
+      "goal": "to learn where food can be found",
+      "need": null,
+      "eta": "54 world min",
+      "target": "Ben (in sight, 2 tiles south-east)"
+    },
+    {
+      "key": "socialize:5:request:plan:stone",
+      "kind": "socialize",
+      "label": "Ask Ben for stone",
+      "goal": "make an axe",
+      "need": null,
+      "eta": "54 world min",
+      "target": "Ben (in sight, 2 tiles south-east)"
+    },
+    {
+      "key": "wander",
+      "kind": "wander",
+      "label": "Potter about near home",
+      "goal": "nothing needs doing right now",
+      "need": null,
+      "eta": "24 world min",
+      "target": null
+    }
+  ],
+  "setAside": [
+    {
+      "label": "Lay out a hut",
+      "reason": "too hungry to start a building",
+      "target": null
+    }
+  ],
+  "plans": [
+    {
+      "goal": "make an axe",
+      "kind": "tool",
+      "status": "active",
+      "step": "get 1 more stone for the axe",
+      "wants": {
+        "wood": 2,
+        "stone": 1
+      },
+      "blocked": "",
+      "reason": "it would make the work easier, and the makings are short",
+      "since": "47 world min ago"
+    }
+  ]
+}

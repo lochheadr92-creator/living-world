@@ -1,0 +1,56 @@
+Browser tab: 1, Title: "Staged project helper verification", URL: "http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 14, 191, 197-198, 209-216, 218-221
++					218 text 16:02
++					219 text Day 1 · evening
+~					23 button Play
++				220 text PAUSED
+~					36 text Ada · by hand thinking…
++					221 text day 1 16:02
++					222 text 15:13 · Make an axe → applied
++					223 text success: done
++					224 text chosen by hand
++					225 text 16:02
++					226 text Ada is in no particular need. Last: Making an axe — success.
++					227 text Unreserved: 2 wood, 1 axe
++					228 text Action estimates and memory ages use the world clock.
++					229 container
++						230 button Chopping wood to make a basket tree 4 tiles south-east (seen 1 world min ago) About 52 world min, Help: Chopping wood to make a basket — tree 4 tiles south-east (seen 1 world min ago) · about 52 world min
++							231 text Chopping wood to make a basket
++							232 text tree 4 tiles south-east (seen 1 world min ago)
++							233 text About 52 world min
++						234 button Ask Ben where to find food Ben (in sight, 3 tiles south-east) About 1 world h, Help: Ask Ben where to find food — Ben (in sight, 3 tiles south-east) · about 1 world h
++							235 text Ask Ben where to find food
++							236 text Ben (in sight, 3 tiles south-east)
++							237 text About 1 world h
++						238 button Chopping wood to make a basket tree 5 tiles south-east (seen 1 world min ago) About 58 world min, Help: Chopping wood to make a basket — tree 5 tiles south-east (seen 1 world min ago) · about 58 world min
++							239 text Chopping wood to make a basket
++							240 text tree 5 tiles south-east (seen 1 world min ago)
++							241 text About 58 world min
++						242 button Wander down to the square About 24 world min, Help: Wander down to the square · about 24 world min
++							243 text Wander down to the square
++							244 text About 24 world min
++					245 button Let the engine choose
++					246 button (collapsed) Answer from a chat, Secondary Actions: Expand
++						247 text Answer from a chat
++						248 text 2
++						249 text Ada made an axe.
+~						90 text MOOD Content HEALTH 100 ON THEIR MIND +7 Cora gave me 1 stone
++								250 text Between tasks (last chose “Make an axe”).
++								251 container WHAT IS STOPPING THEM?
++									252 text WHAT IS STOPPING THEM?
++								253 text Lay out a hut: the household has only 2 food to hand and wants 3 before starting a hut.
++								254 text Make an axe — done: made the axe (Cora brought 1 of the stone) (1.3 min ago).
+~							118 level indicator Description: Food, Value: 71
+~							119 level indicator Description: Water, Value: 67
+~							120 level indicator Description: Energy, Value: 59
+~							121 level indicator Description: Warmth, Value: 100
+~						125 container 2 wood
++						255 text 5 / 12 TOOLS
++						256 image axe, 0 percent worn
+~							200 text LAST CONVERSATION 8s ago
+~							142 button (collapsed) Recent 9, Secondary Actions: Expand
++								257 text 9
++			258 container Let the engine decide this one
++				259 text Let the engine decide this one
+The focused UI element is 1 AXWebArea Staged project helper verification, URL: 127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-r39-final/comparison-start.json

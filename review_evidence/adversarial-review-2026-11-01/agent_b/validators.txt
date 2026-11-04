@@ -1,0 +1,470 @@
+=================== townships.ts
+153:export function validateTownships(w: World): void {
+154- if (!w.townships && !w.civicProjects && !w.households.some(h => h.townshipId !== undefined)) return;
+155- if (!runsRulesVersion(w, 12)) throw new Error('Civic records require township rules');
+156- const towns = w.townships ?? [];
+157- if (new Set(towns.map(t => t.id)).size !== towns.length) throw new Error('Duplicate township identity');
+158- for (const h of w.households) if (!towns.some(t => t.id === h.townshipId)) throw new Error('Unknown household township');
+159- for (const q of w.civicProjects ?? []) {
+160-  if (!towns.some(t => t.id === q.townshipId)) throw new Error('Unknown project township');
+161-  if (new Set(q.participants.map(m => m.personId)).size !== q.participants.length || q.participants.length > 12) throw new Error('Invalid project participants');
+162-  if(q.council && (!runsRulesVersion(w,15)||q.council.candidates.length>4||new Set(q.council.candidates.map(c=>c.personId)).size!==q.council.candidates.length||q.participants.some(m=>m.supports&&!q.council!.candidates.some(c=>c.personId===m.supports))))throw new Error('Invalid civic choices');
+163-  if (q.status === 'active' && !w.sites.some(s => s.id === q.siteId)) throw new Error('Active project missing its physical site');
+164- }
+165-}
+=================== settlement_economy.ts
+72:export function validateEconomicObservations(w:World):void{
+73- const o=w.economicObservations;if(!o)return;
+74- const town=(id:number)=>w.townships?.some(t=>t.id===id);
+75- if(!runsRulesVersion(w,21)||o.production.length>512||o.flows.length>128||!Number.isFinite(o.since))throw new Error('Invalid settlement economic observations');
+76- for(const p of o.production)if(!town(p.townshipId)||!Number.isInteger(p.day)||!['gathering','harvest','workshop'].includes(p.kind)||Object.entries(p.items).some(([k,n])=>!ALL_ITEMS.includes(k as ItemKind)||!Number.isFinite(n)||n!<0))throw new Error('Invalid production observation');
+77- for(const f of o.flows)if(!town(f.fromTown)||!town(f.toTown)||f.fromTown===f.toTown||!Number.isFinite(f.amount)||f.amount<=0||!ALL_ITEMS.includes(f.item)||!Number.isFinite(f.tick))throw new Error('Invalid goods-flow observation');
+78-}
+=================== relocation.ts
+387:export function validateRelocations(w: World): void {
+388- for(const hh of w.households){
+389-  if(!hh.relocations)continue;
+390-  if(!runsRulesVersion(w,20)||hh.relocations.length>8||hh.relocations.filter(active).length>1)throw new Error('Invalid household relocation history');
+391-  for(const r of hh.relocations){
+392-   const ext=runsRulesVersion(w,54);
+393-   if((!ext&&(['returning','returned'].includes(r.phase)||r.successions||r.rescues||r.newHouseholdId!==undefined||r.members.some(m=>m.response==='stays')))||(r.successions&&!r.successions.every(s=>Number.isInteger(s.from)&&Number.isInteger(s.to)&&Number.isFinite(s.tick)))||(r.rescues&&(r.rescues.length>8||!r.rescues.every(x=>Number.isInteger(x.by)&&Number.isInteger(x.who)&&Number.isFinite(x.tick)&&Number.isFinite(x.x)&&Number.isFinite(x.y)&&typeof x.found==='boolean'))))throw new Error('Invalid relocation extension state');
+394-   if(!['asking','packing','travelling','building','settled','failed','returning','returned'].includes(r.phase)||!Number.isInteger(r.id)||!Number.isFinite(r.started)||!Number.isFinite(r.deadline)||r.deadline<r.started||!r.meeting||!Number.isFinite(r.meeting.x)||!Number.isFinite(r.meeting.y)||!Number.isFinite(r.destination.x)||!Number.isFinite(r.destination.y)||r.destination.x<0||r.destination.y<0||r.destination.x>=w.W||r.destination.y>=w.H||r.members.some(m=>!['pending','accepted','refused','dependent','stays'].includes(m.response))||r.members.length===0||new Set(r.members.map(m=>m.id)).size!==r.members.length||!r.members.some(m=>m.id===r.organiserId))throw new Error('Invalid relocation agreement');
+395-  }
+396- }
+397-}
+=================== exchange_journeys.ts
+108:export function validateExchangeJourneys(w:World):void {
+109- const finite=(n:number)=>Number.isFinite(n)&&n>=0;
+110- const lead=(l:TradeLead)=>l&&finite(l.personId)&&finite(l.tick)&&finite(l.x)&&finite(l.y)&&l.x<w.W&&l.y<w.H&&typeof l.name==='string'&&w.townships?.some(t=>t.id===l.townshipId)&&Object.entries(l.goods).every(([k,n])=>ALL_ITEMS.includes(k as ItemKind)&&finite(n)&&n>0);
+111- if(w.exchangeReceipts&&(!runsRulesVersion(w,22)||w.exchangeReceipts.length>128||w.exchangeReceipts.some(r=>!Number.isFinite(r.tick)||r.amount<=0||!Number.isFinite(r.amount)||r.offerAmount<=0||!Number.isFinite(r.offerAmount)||!ALL_ITEMS.includes(r.item)||!ALL_ITEMS.includes(r.offer)||!w.townships?.some(t=>t.id===r.fromTown)||!w.townships?.some(t=>t.id===r.toTown))))throw new Error('Invalid exchange receipts');
+112- for(const p of w.persons){
+113-  if(!p.tradeLeads&&!p.exchangeJourneys)continue;
+114-  if(!runsRulesVersion(w,22)||(p.tradeLeads?.length??0)>12||(p.exchangeJourneys?.length??0)>8||p.tradeLeads?.some(l=>!lead(l))||(p.exchangeJourneys??[]).filter(j=>j.status==='travelling'||j.status==='talking').length>1)throw new Error('Invalid exchange journey history');
+115-  for(const j of p.exchangeJourneys??[])if(!lead(j.lead)||!finite(j.id)||!finite(j.started)||!['travelling','talking','fulfilled','failed'].includes(j.status)||!ALL_ITEMS.includes(j.item)||!ALL_ITEMS.includes(j.offer)||!finite(j.amount)||j.amount<=0||!finite(j.offerAmount)||j.offerAmount<=0)throw new Error('Invalid exchange journey');
+116- }
+117-}
+=================== customers.ts
+284:export function validateCustomers(world: World): void {
+285-  for (const p of world.persons) {
+286-    if (!p.customers) continue;
+287-    if (!runsRulesVersion(world, 51) || p.customers.length > CUSTOMER_LIMIT) throw new Error('Invalid customer records');
+288-    for (const c of p.customers) if (!Number.isFinite(c.requestId) || !Number.isFinite(c.personId) || !Number.isFinite(c.heard) || !Number.isFinite(c.supplied) || !Number.isFinite(c.units) || !Number.isFinite(c.backUnits) || c.amount <= 0 || !demandSkill(c.item)) throw new Error('Invalid customer record');
+289-  }
+290-}
+=================== techniques.ts
+234:export function validateTechniques(w: World): void {
+235- for (const p of w.persons) {
+236-  for (const k of Object.keys(p.techniques ?? {})) if (!TECHNIQUE_KINDS.includes(k as TechniqueKind) || (k !== 'charcoal' && !runsRulesVersion(w, 52))) throw new Error('Invalid technique record');
+237-  for (const k of Object.keys(p.trials ?? {})) if (!TECHNIQUE_KINDS.includes(k as TechniqueKind) || !runsRulesVersion(w, 52) || !(p.trials![k as TechniqueKind]!.attempts >= 1)) throw new Error('Invalid trial record');
+238- }
+239-}
+=================== succession.ts
+190:export function validateSuccession(world: World): void {
+191-  validateContinuityKnowledge(world);
+192-  for (const hh of world.households) {
+193-    if (!hh.unfinished) continue;
+194-    if (!runsRulesVersion(world, 53) || hh.unfinished.length > UNFINISHED_LIMIT) throw new Error('Invalid unfinished records');
+195-    for (const u of hh.unfinished) if (!Number.isFinite(u.id) || !Number.isFinite(u.by) || !Number.isFinite(u.tick) || !['shelter', 'tool', 'stock', 'batch'].includes(u.kind)) throw new Error('Invalid unfinished record');
+196-    for(const u of hh.unfinished)if(u.planId!==undefined&&(!runsRulesVersion(world,92)||!Number.isSafeInteger(u.planId)||u.planId<=0))throw new Error('Invalid unfinished plan identity');
+197-  }
+198-  for (const p of world.persons) for (const i of p.intentions ?? []) if (i.succeeding && !runsRulesVersion(world, 53)) throw new Error('Invalid succession on a plan');
+199-}
+=================== winter_practice.ts
+123:export function validateWinterPractice(world: World): void {
+124-  for (const hh of world.households) if (hh.reserveLaid && (!runsRulesVersion(world, 53) || !Number.isFinite(hh.reserveLaid.year) || !Number.isFinite(hh.reserveLaid.by))) throw new Error('Invalid reserve record');
+125-  for (const p of world.persons) {
+126-    if (p.winterMeals && (!runsRulesVersion(world, 53) || !Number.isFinite(p.winterMeals.year) || !(p.winterMeals.meals >= 1))) throw new Error('Invalid winter meal count');
+127-    if (p.winterPractice && (!runsRulesVersion(world, 53) || !['laid', 'family'].includes(p.winterPractice.source) || !Number.isFinite(p.winterPractice.learned))) throw new Error('Invalid winter practice');
+128-  }
+129-}
+=================== transport.ts
+224:export function validateTransport(world: World): void {
+225-  for (const p of world.persons) {
+226-    if (!p.hauling) continue;
+227-    if (!runsRulesVersion(world, 55) || !(p.hauling.weight >= 0) || !Number.isInteger(p.hauling.trips) || !Number.isFinite(p.hauling.since)) throw new Error('Invalid hauling record');
+228-  }
+229-}
+=================== political_alignment.ts
+44:export function validateAlignments(w:World):void{
+45- for(const p of w.persons){const rs=p.civicAlignment;if(!rs)continue;
+46-  if(!runsRulesVersion(w,23)||rs.length>24||new Set(rs.map(r=>r.projectId)).size!==rs.length||rs.some(r=>!Number.isInteger(r.projectId)||!Number.isInteger(r.candidateId)||!Number.isFinite(r.tick)||!w.townships?.some(t=>t.id===r.townshipId)))throw new Error('Invalid political alignment history');
+47- }
+48-}
+=================== household_practices.ts
+72:export function validateHouseholdPractices(w:World):void{
+73- const valid=(n:number)=>Number.isInteger(n)&&n>=0;
+74- for(const p of w.persons){const s=p.sharedSupper;if(!s)continue;
+75-  if(!runsRulesVersion(w,24)||!Array.isArray(s.experiences)||s.experiences.length>4||new Set(s.experiences.map(e=>e.mealId)).size!==s.experiences.length||s.experiences.some(e=>!valid(e.mealId)||!valid(e.hostId)||!valid(e.tick)||!['host','family'].includes(e.role)||!valid(e.root)||!valid(e.generation)))throw new Error('Invalid household practice');
+76-  const k=s.learned;if(k&&(!['practice','family'].includes(k.source)||!valid(k.teacher)||!valid(k.root)||!valid(k.generation)||!valid(k.tick)||!Array.isArray(k.meals)||k.meals.length!==2||k.meals[0]===k.meals[1]||k.meals.some(id=>!valid(id))))throw new Error('Invalid household practice provenance');
+77- }
+78- for(const m of w.meals){const s=m.supperContact;if(s&&(!runsRulesVersion(w,24)||!Array.isArray(s.ate)||s.ate.length>5||s.ate.some(id=>!valid(id))||new Set(s.ate).size!==s.ate.length||!s.guests||Object.keys(s.guests).length>4||Object.entries(s.guests).some(([id,c])=>!valid(Number(id))||!c||!valid(c.ticks)||!valid(c.lastTick))))throw new Error('Invalid supper contact');}
+79-}
+=================== life.ts
+207:export function validateGoalHistory(w: World): void {
+208- for (const p of w.persons) {
+209-  const g=p.goal;if(!g || g.previous === undefined)continue;
+210-  if(!runsRulesVersion(w,38)||!Array.isArray(g.previous)||g.previous.length>4||
+211-    g.previous.some(q=>!q||!Object.hasOwn(GOAL_TEXT,q.kind)||!Number.isSafeInteger(q.done)||q.done<=0||q.done>w.tick||q.kind===g.kind)||
+212-    new Set(g.previous.map(q=>q.kind)).size!==g.previous.length)throw new Error('Invalid fulfilled-goal history');
+213- }
+214-}
+=================== project_graph.ts
+111:export function validateProjectGraphs(w:World):void{
+112- for(const p of w.persons??[])for(const i of p.intentions??[])if(i.project!==undefined){
+113-  if(!runsRulesVersion(w,69)||w.settings.dynamics!=='rich'||i.kind!=='batch')throw new Error('Invalid project rules or intention');
+114-  const why=projectGraphError(i.project);if(why)throw new Error('Invalid project: '+why);
+115-  if(i.makes!==i.project.goal.item)throw new Error('Invalid project goal identity');
+116- }
+117-}
+118-/** A viewer explanation of the saved intention, not a claim that its prerequisites have happened. */
+119-export function describeProject(g:ProjectGraph):string{
+120- const names:string[]=[];
+121- const visit=(id:number)=>{
+122-  const n=g.nodes.find(n=>n.id===id)!;
+123-  for(const c of n.dependencies)visit(c);
+124-  if(n.method==='recipe'){
+125-   const label=RECIPE_BY_ID[n.recipe].label;
+126-   if(!names.includes(label))names.push(label);
+127-  }else if(n.method==='hand'&&!names.includes(`Make ${n.item}`))names.push(`Make ${n.item}`);
+128- };
+129- visit(g.root);
+130- const root=g.nodes.find(n=>n.id===g.root)!;
+131- return `Planned production: ${names.join(' → ')||'collect known supplies'}. Estimated work and firing: ${Math.round(root.estimatedTicks)} ticks, plus travel and interruptions.`+
+132-  (g.retries?` Reconsidered ${g.retries} time${g.retries===1?'':'s'}.`:'')+
+133-  (g.history.length?` Last change: ${g.history.at(-1)!.reason}.`:'');
+134-}
+=================== daily_routines.ts
+102:export function validateRoutines(w:World):void{
+103- const integer=(x:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(x)&&Number(x)>=min&&Number(x)<=max;
+104- const context=(c:RoutineContext)=>c&&typeof c.winter==='boolean'&&integer(c.household)&&integer(c.home)&&['injury','family','contact','losses'].every(k=>typeof c[k as keyof RoutineContext]==='string'&&String(c[k as keyof RoutineContext]).length<=180);
+105- for(const p of w.persons){
+106-  const r=p.dailyRoutines;if(r&&(!runsRulesVersion(w,70)||w.settings.dynamics!=='rich'||!Array.isArray(r.entries)||r.entries.length>8))throw new Error('Invalid daily routine state');
+107-  for(const e of r?.entries??[]){
+108-   if(!e||typeof e.key!=='string'||e.key.length>160||typeof e.label!=='string'||e.label.length>120||!KINDS.includes(e.kind)||!integer(e.target)||!integer(e.phase,0,3)||!context(e.context)||!integer(e.last)||!integer(e.failures,0,3)||typeof e.outcome!=='string'||e.outcome.length>180||!Array.isArray(e.episodes)||e.episodes.length>4)throw new Error('Invalid daily preference');
+109-   if(e.episodes.some(x=>!x||!integer(x.id,1)||!integer(x.day,0,day(w.tick))||!integer(x.tick,0,w.tick)||!integer(x.took,1,DAY/2)||!Number.isFinite(x.eta)||x.eta<=0||x.eta>1e7)||new Set(e.episodes.map(x=>x.day)).size!==e.episodes.length||new Set(e.episodes.map(x=>x.id)).size!==e.episodes.length)throw new Error('Invalid daily preference evidence');
+110-  }
+111-  for(const a of [p.activity,p.suspended])if(a?.data.dailyRoutine){const s=a.data.dailyRoutine as RoutineStart;if(!runsRulesVersion(w,70)||typeof s.key!=='string'||s.key.length>160||typeof s.label!=='string'||s.label.length>120||s.kind!==a.kind||!KINDS.includes(s.kind)||!integer(s.target)||!integer(s.phase,0,3)||!context(s.context)||!Number.isFinite(s.eta)||s.eta<=0||s.eta>1e7||![s.energy,s.warmth].every(n=>Number.isFinite(n)&&n>=0&&n<=100)||(s.recorded!==undefined&&typeof s.recorded!=='boolean'))throw new Error('Invalid daily routine activity');}
+112- }
+113-}
+=================== action_scope.ts
+65:export function validateWorkScopes(w:World):void{
+66- const finite=(n:unknown,min:number,max:number)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
+67- for(const p of w.persons)for(const a of [p.activity,p.suspended]){
+68-  const s=a?.data.workScope;if(!s)continue;
+69-  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,71)||!['gather','fetch_water','build','operate'].includes(a!.kind)||typeof s.reason!=='string'||s.reason.length>400||!finite(s.expected,0,1e7)||!finite(s.returnTicks,0,1e7)||!Number.isSafeInteger(s.value)||!finite(s.value,1,1e7)||!['amount','ticks'].includes(s.field)||!finite(a!.data.limit?.[s.field],1,s.value))throw new Error('Invalid work scope');
+70- }
+71-}
+=================== journey_state.ts
+46:export function validateJourneys(w:World):void{
+47- const int=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+48- for(const p of w.persons){
+49-  if((p.intentions??[]).filter(i=>i.status==='active'&&i.kind==='journey').length>1)throw new Error('Too many live journeys');
+50-  for(const i of p.intentions??[]){const j=i.journey;if(i.kind==='journey'&&!j)throw new Error('Missing journey');if(!j)continue;
+51-   if(!int(i.since,0,w.tick)||!int(i.until,i.since,i.since+2*DAY)||(j.item!==null&&!ALL_ITEMS.includes(j.item)))throw new Error('Invalid journey bounds');
+52-   if(!runsRulesVersion(w,72)||w.settings.dynamics!=='rich'||i.kind!=='journey'||!['gather','build','operate'].includes(j.kind)||typeof j.key!=='string'||j.key.length>180||typeof j.label!=='string'||j.label.length>160||!int(j.target,1)||!int(j.quantity,1,24)||!int(j.water,0,2)||!int(j.food,0,2)||!Number.isFinite(j.expected)||j.expected<0||j.expected>1e7||!int(j.tries,0,3)||i.until-i.since>2*DAY||!Array.isArray(j.history)||j.history.length>8)throw new Error('Invalid journey');
+53-   if(j.completed!==undefined&&!int(j.completed,0,w.tick))throw new Error('Invalid journey completion');
+54-   const r=j.recovery;if(r){
+55-    if(!runsRulesVersion(w,73)||typeof r.tag!=='string'||r.tag.length>60||!int(r.site)||!Array.isArray(r.failures)||r.failures.length>3||!Array.isArray(r.changes)||r.changes.length>2)throw new Error('Invalid journey recovery');
+56-    if(r.failures.some(f=>!int(f.activity,1)||!int(f.target,1)||!int(f.tick,0,w.tick)||typeof f.detail!=='string'||f.detail.length>200)||new Set(r.failures.map(f=>f.activity)).size!==r.failures.length)throw new Error('Invalid journey failure');
+57-    if(r.changes.some(c=>!int(c.from,1)||!int(c.to,1)||c.from===c.to||!int(c.tick,0,w.tick)||typeof c.reason!=='string'||c.reason.length>400))throw new Error('Invalid journey replacement');
+58-   }
+59-   if(j.history.some(h=>!h||!int(h.activity,1)||!int(h.tick,0,w.tick)||!['fetch_water','withdraw','gather','build','operate','drink','eat'].includes(h.kind)||!['success','partial','failed','interrupted'].includes(h.outcome)||typeof h.detail!=='string'||h.detail.length>200)||new Set(j.history.map(h=>h.activity)).size!==j.history.length)throw new Error('Invalid journey evidence');
+60-  }
+61- }
+62-}
+=================== source_learning.ts
+53:export function validateSourceExperience(w:World):void{
+54- const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+55- const finite=(n:unknown,min:number,max:number)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
+56- for(const p of w.persons){
+57-  for(const [k,pay] of Object.entries(p.payoff??{}))if(pay.sources!==undefined){
+58-   if(!runsRulesVersion(w,74)||w.settings.dynamics!=='rich'||!Array.isArray(pay.sources)||pay.sources.length>8||new Set(pay.sources.map(e=>e.target)).size!==pay.sources.length)throw new Error('Invalid source experience list');
+59-   for(const e of pay.sources){
+60-    if(!integer(e.target,1)||SOURCE_SKILL[e.kind]!==k||!integer(e.n,0,1000000)||!finite(e.r,0.1,4)||!integer(e.last,0,w.tick)||!Array.isArray(e.events)||e.events.length>4)throw new Error('Invalid source experience');
+61-    if(e.events.some(h=>!integer(h.activity,1)||!integer(h.tick,0,w.tick)||!['yield','empty'].includes(h.outcome)||!integer(h.units,0,1000000)||!finite(h.took,1,1e7)||!finite(h.expected,0.001,1e7)||(h.outcome==='empty'&&h.units!==0)||(h.outcome==='yield'&&h.units<1))||new Set(e.events.map(h=>h.activity)).size!==e.events.length)throw new Error('Invalid source experience evidence');
+62-    const empty=e.empty;if(empty&&(!integer(empty.activity,1)||!integer(empty.tick,0,w.tick)||!integer(empty.count,1,3)||(empty.corrected!==undefined&&!integer(empty.corrected,empty.tick,w.tick))))throw new Error('Invalid empty source experience');
+63-   }
+64-  }
+65-  for(const a of [p.activity,p.suspended])if(a?.data.sourcePayRecorded!==undefined&&(!runsRulesVersion(w,74)||typeof a.data.sourcePayRecorded!=='boolean'))throw new Error('Invalid source experience marker');
+66- }
+67-}
+=================== route_learning.ts
+51:export function validateRouteExperience(w:World):void{
+52- const int=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+53- const coord=(n:unknown,max:number)=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=max;
+54- const attempt=(a:RouteAttempt)=>a&&int(a.target,1)&&typeof a.kind==='string'&&a.kind.length<40&&typeof a.cart==='boolean'&&coord(a.x,w.W)&&coord(a.y,w.H)&&coord(a.gx,w.W)&&coord(a.gy,w.H);
+55- for(const p of w.persons){const entries=Object.entries(p.failures).filter(([,f])=>f.route!==undefined);if(entries.length>8)throw new Error('Invalid route experience count');
+56-  for(const [key,f] of entries){const r=f.route!;if(!runsRulesVersion(w,76)||w.settings.dynamics!=='rich'||!attempt(r.approach)||r.approach.target!==Number(key)||!int(r.last,0,w.tick)||!int(r.streak,0,3)||!int(r.retryAt,0,w.tick+600)||!Array.isArray(r.events)||r.events.length<1||r.events.length>4)throw new Error('Invalid route experience');
+57-   if(r.events.some(e=>!int(e.activity,1)||!int(e.tick,0,w.tick)||!['failed','arrived'].includes(e.outcome)||typeof e.detail!=='string'||e.detail.length>120)||new Set(r.events.map(e=>e.activity)).size!==r.events.length)throw new Error('Invalid route experience event');
+58-   if(r.events.at(-1)!.tick!==r.last||r.events.some((e,i)=>i>0&&e.tick<r.events[i-1].tick)||(r.streak===0?(!r.corrected||r.retryAt!==0):(r.retryAt<r.last||r.retryAt>r.last+600)))throw new Error('Invalid route experience chronology');
+59-   if(r.corrected&&(!int(r.corrected.activity,1)||!int(r.corrected.tick,0,w.tick)||r.streak!==0||r.retryAt!==0))throw new Error('Invalid route experience correction');
+60-  }
+61-  for(const f of Object.values(p.failures))if(f.resolved!==undefined&&(!runsRulesVersion(w,76)||!f.route||f.resolved!==true))throw new Error('Invalid resolved route failure');
+62-  for(const a of [p.activity,p.suspended])if(a){if(a.data.routeAttempt!==undefined&&(!runsRulesVersion(w,76)||w.settings.dynamics!=='rich'||!attempt(a.data.routeAttempt)))throw new Error('Invalid route attempt');if(a.data.routeArrivalRecorded!==undefined&&(!runsRulesVersion(w,76)||w.settings.dynamics!=='rich'||a.data.routeArrivalRecorded!==true))throw new Error('Invalid route arrival');}
+63- }
+64-}
+=================== helper_learning.ts
+65:export function validateHelperLearning(w:World):void{
+66- const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+67- const amount=(n:unknown)=>typeof n==='number'&&Number.isFinite(n)&&n>=0;
+68- const allowed=()=>w.settings.dynamics==='rich'&&runsRulesVersion(w,78);
+69- const work=(r:HelperWork|WatchReceipt)=>{if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,79)||!r||r.kind!=='watch'||!integer(r.target,1)||!integer(r.eventId,1)||!integer(r.tick,0,w.tick))throw new Error('Invalid watch completion receipt');};
+70- const receipt=(r:HelperReceipt)=>{if(!allowed()||!r||!ALL_ITEMS.includes(r.item)||!amount(r.amount)||r.amount<=0||!integer(r.tick,0,w.tick)||!['conversation','activity'].includes(r.eventKind)||!integer(r.eventId,1))throw new Error('Invalid helper direct receipt');};
+71- for(const r of w.requests)if(r.helperReceipt!==undefined){receipt(r.helperReceipt);if(r.helperReceipt.amount>(r.delivered??0))throw new Error('Helper receipt exceeds actual delivery');}
+72- for(const r of w.requests)if(r.helperWork!==undefined){work(r.helperWork);if(r.kind!=='watch'||r.destKind!=='person'||r.destId!==r.helperWork.target||!integer(r.helperWork.witnessId)||![0,r.from].includes(r.helperWork.witnessId)||r.status!=='fulfilled')throw new Error('Invalid request watch completion');}
+73- for(const p of w.persons){const memories=p.socialMemory??[];if(memories.some(m=>m.task!==undefined)&&(memories.length>32||new Set(memories.map(m=>m.requestId)).size!==memories.length))throw new Error('Invalid helper task memory count');
+74-  for(const m of memories)if(m.task!==undefined){const t=m.task;if(!allowed()||!t||!KINDS.includes(t.kind)||(t.item!==null&&!ALL_ITEMS.includes(t.item))||!amount(t.asked)||(t.offered!==undefined&&!amount(t.offered))||!integer(m.tick,0,w.tick))throw new Error('Invalid helper task memory');if(t.receipt){receipt(t.receipt);if(t.receipt.tick>m.tick)throw new Error('Future helper task receipt');}if(t.workReceipt){work(t.workReceipt);if(t.kind!=='watch'||t.workReceipt.tick>m.tick||t.workReceipt.source!==(m.role==='helper'?'own work':'completion in sight')||m.outcome!=='fulfilled')throw new Error('Invalid personal watch completion');}}
+75- }
+76-}
+=================== promise_knowledge.ts
+75:export function validatePromiseKnowledge(w:World):void{
+76- const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+77- for(const p of w.persons){const memories=p.socialMemory??[];if(memories.some(m=>m.completion!==undefined)&&(memories.length>32||new Set(memories.map(m=>m.requestId)).size!==memories.length))throw new Error('Invalid completion memory count');
+78- for(const m of memories)if(m.completion!==undefined){const k=m.completion;
+79-  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,80)||!k||!['own completion','observed completion','helper report'].includes(k.source)||!integer(k.tick,0,w.tick)||!integer(k.completedAt,0,k.tick)||!integer(k.commitmentId,1)||!integer(k.activityId)||!['fulfilled','partial'].includes(m.outcome)||k.source==='own completion'&&m.role!=='helper'||k.source!=='own completion'&&m.role!=='asker'||k.from!==(k.source==='helper report'?m.otherId:p.id)||k.source==='helper report'&&!integer(k.conversationId,1)||k.acknowledgedAt!==undefined&&(k.source!=='own completion'||!integer(k.acknowledgedAt,k.tick,w.tick)))throw new Error('Invalid personal promise completion knowledge');
+80-  if(k.source==='helper report'&&(m.task?.receipt||m.task?.workReceipt))throw new Error('Reported completion is not firsthand task evidence');
+81-  if(!integer(m.tick,0,w.tick))throw new Error('Invalid completion memory timestamp');
+82-  if(k.reportAfter!==undefined&&(k.source!=='own completion'||!integer(k.reportAfter,k.tick,w.tick+400)))throw new Error('Invalid bounded report retry');
+83- }
+84- }
+85-}
+=================== decision_ledger.ts
+47:export function validateDecisionLedger(w:World):void{
+48- const allowed=carriesDecisionLedger(w),time=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>=0&&Number(n)<=w.tick;
+49- for(const p of w.persons){
+50-  if(p.decisions===undefined&&p.decisionsDropped===undefined)continue;
+51-  if(!allowed||!Array.isArray(p.decisions)||p.decisions.length>DECISION_LEDGER_CAP||!Number.isSafeInteger(p.decisionsDropped)||(p.decisionsDropped as number)<0)throw new Error('Invalid decision ledger');
+52-  let last=-1;
+53-  for(const e of p.decisions){
+54-   if(!e||!time(e.tick)||e.tick<last||typeof e.trigger!=='string'||typeof e.key!=='string'||typeof e.chosen!=='string'||typeof e.kind!=='string'||!Number.isSafeInteger(e.targetId)||!Number.isSafeInteger(e.forPlan)||!Number.isSafeInteger(e.activityId)||!Array.isArray(e.passedOver)||e.passedOver.length>3||!Array.isArray(e.setAside)||e.setAside.length>3)throw new Error('Invalid decision entry');
+55-   if(e.outcome!==undefined&&(!['success','failed','interrupted','partial'].includes(e.outcome)||!time(e.endedAt)||(e.endedAt as number)<e.tick||typeof e.detail!=='string'))throw new Error('Invalid decision outcome');
+56-   last=e.tick;
+57-  }
+58- }
+59-}
+=================== location_question.ts
+46:export function validateLocationQuestions(w:World):void{
+47- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,105);
+48- for(const r of w.requests)if(r.kind==='info'&&r.infoKind==='person'&&(!allowed||!Number.isSafeInteger(r.destId)))throw new Error('Invalid location question');
+49- for(const p of w.persons)for(const [id,n] of Object.entries(p.whereabouts))if(n.from!==undefined&&(!allowed||!Number.isSafeInteger(n.from)||n.from===p.id||!Number.isSafeInteger(Number(id))))throw new Error('Invalid told whereabouts');
+50- if(!allowed&&(w.conversations.some(c=>c.purpose==='ask_info'&&(c.data as {infoKind?:string}).infoKind==='person')||w.persons.some(p=>[p.activity,p.suspended].some(a=>a?.data.purpose==='ask_info'&&(a.data as {infoKind?:string}).infoKind==='person'))))throw new Error('Unsupported location question');
+51-}
+=================== remembered_need.ts
+40:export function validateRememberedSigns(w:World):void{
+41- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,106);
+42- for(const p of w.persons)for(const n of Object.values(p.whereabouts))if(n.seen!==undefined&&(!allowed||typeof n.seen.hungry!=='boolean'||typeof n.seen.thirsty!=='boolean'||typeof n.seen.cold!=='boolean'))throw new Error('Invalid remembered signs');
+43-}
+=================== checked_accounts.ts
+82:export function validateCheckedAccounts(w:World):void{
+83- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,107),int=(n:unknown,min:number,max:number)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+84- for(const p of w.persons)for(const [id,r] of Object.entries(p.relations)){
+85-  const a=r.accounts;if(a===undefined)continue;
+86-  const l=a.last;
+87-  if(!allowed||Number(id)===p.id||!int(a.checked,1,ACCOUNT_CAP)||!int(a.borneOut,0,a.checked)||!l||!int(l.tick,0,w.tick)||!int(l.id,1,Number.MAX_SAFE_INTEGER)||typeof l.kind!=='string'||!int(l.described,2,Number.MAX_SAFE_INTEGER)||typeof l.expected!=='number'||!Number.isFinite(l.expected)||l.expected<0||!int(l.found,0,Number.MAX_SAFE_INTEGER)||typeof l.borneOut!=='boolean'||!int(l.toldAt,0,l.tick))throw new Error('Invalid checked accounts');
+88- }
+89-}
+=================== promise_outcomes.ts
+84:export function validatePromiseOutcomes(w:World):void{
+85- const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+86- const allowed=()=>w.settings.dynamics==='rich'&&runsRulesVersion(w,81);
+87- const amount=(n:number)=>Number.isFinite(n)&&n>=0;
+88- const attempt=(a:PromiseAttempt,max=w.tick)=>{if(!allowed()||!a||!integer(a.activityId,1)||!['visit','give','repair','build','deposit','return_tool','haul'].includes(a.kind)||!integer(a.targetId)||!['travel','work'].includes(a.phase)||!integer(a.tick,0,max)||typeof a.reason!=='string'||a.reason.length>240||!amount(a.delivered)||!amount(a.contrib)||a.resolvedAt!==undefined&&!integer(a.resolvedAt,a.tick,w.tick))throw new Error('Invalid personal promise attempt');};
+89- for(const p of w.persons){for(const c of p.commitments)if(c.attempt!==undefined)attempt(c.attempt);
+90- const memories=p.socialMemory??[];if(memories.some(m=>m.resolution!==undefined)&&(memories.length>32||new Set(memories.map(m=>m.requestId)).size!==memories.length))throw new Error('Invalid outcome memory count');
+91- for(const m of memories)if(m.resolution!==undefined){const k=m.resolution;
+92-  if(!allowed()||!k||!['own outcome','helper report'].includes(k.source)||!integer(k.tick,0,w.tick)||!integer(k.resolvedAt,0,k.tick)||!integer(k.commitmentId,1)||!(unresolvedOutcome(m.outcome)||runsRulesVersion(w,83)&&m.outcome==='cancelled'&&!!k.targetEvidence)||m.completion!==undefined||k.source==='own outcome'&&m.role!=='helper'||k.source==='helper report'&&m.role!=='asker'||k.from!==(k.source==='helper report'?m.otherId:p.id)||k.source==='helper report'&&!integer(k.conversationId,1)||k.acknowledgedAt!==undefined&&(k.source!=='own outcome'||!integer(k.acknowledgedAt,k.tick,w.tick))||!integer(m.tick,0,w.tick))throw new Error('Invalid personal promise outcome knowledge');
+93-  if(k.source==='helper report'&&(m.task?.receipt||m.task?.workReceipt))throw new Error('Reported outcome is not firsthand task evidence');
+94-  if(k.reportAfter!==undefined&&(k.source!=='own outcome'||!integer(k.reportAfter,k.tick,w.tick+400)))throw new Error('Invalid bounded outcome report retry');
+95-  if(k.targetEvidence!==undefined){validateTargetEvidence(w,k.targetEvidence,k.resolvedAt);if(m.outcome!=='cancelled')throw new Error('Target cancellation requires a cancelled outcome');}
+96-  if(k.attempt!==undefined){attempt(k.attempt,k.resolvedAt);if(k.attempt.resolvedAt!==undefined)throw new Error('Resolved attempt cannot explain an unresolved outcome');}
+97- }
+98- }
+99-}
+=================== promise_expectations.ts
+86:export function validatePromiseExpectations(w:World):void{
+87- const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+88- for(const p of w.persons){const memories=p.socialMemory??[];if(memories.some(m=>m.expectation!==undefined)&&(memories.length>32||new Set(memories.map(m=>m.requestId)).size!==memories.length))throw new Error('Invalid expectation memory count');
+89- for(const m of memories)if(m.expectation!==undefined){const e=m.expectation;
+90-  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,82)||!e||m.role!=='asker'||!m.task||!integer(e.commitmentId,1)||!integer(e.conversationId,1)||!integer(e.made,0,w.tick)||!integer(e.deadline,e.made)||!Number.isFinite(e.amount)||e.amount<=0||e.item!==null&&!ALL_ITEMS.includes(e.item)||!integer(e.planId)||!integer(e.destId)||typeof e.otherName!=='string'||e.otherName.length>100||!Number.isFinite(e.received)||e.received<0||e.received>e.amount||e.endedAt!==undefined&&(!integer(e.endedAt,e.made,w.tick)||!['observed completion','helper report','known death','own timeout',...(runsRulesVersion(w,84)?['own cancellation']:[]),...(runsRulesVersion(w,97)?['agreed care return']:[])].includes(e.source??''))||!integer(m.tick,e.made,w.tick)||e.source==='own timeout'&&(m.outcome!=='expired'||Number(e.endedAt)<=e.deadline)||e.source==='known death'&&m.outcome!=='cancelled'||e.source==='own cancellation'&&(m.outcome!=='cancelled'||m.cancellation?.source!=='own target observation')||e.source==='observed completion'&&!['fulfilled','partial'].includes(m.outcome)||e.source==='agreed care return'&&(m.outcome!=='cancelled'||m.careHandback?.state!=='accepted')||e.source==='helper report'&&!m.completion&&!m.resolution&&!(runsRulesVersion(w,97)&&m.careHandback?.state==='already ended')||e.endedAt===undefined&&(e.source!==undefined||m.outcome!=='promised'))throw new Error('Invalid personal promise expectation');
+91- }
+92- }
+93-}
+=================== promise_targets.ts
+37:export function validateTargetEvidence(w:World,k:PromiseTargetEvidence,maxTick=w.tick):void{
+38- if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,83)||!k||!Number.isSafeInteger(k.targetId)||k.targetId<=0||!['building','site'].includes(k.kind)||!Number.isSafeInteger(k.tick)||k.tick<0||k.tick>maxTick||!Number.isFinite(k.x)||!Number.isFinite(k.y)||k.x<0||k.y<0||k.x>w.W||k.y>w.H||!['observed absence','completed here'].includes(k.source)||k.source==='completed here'&&k.kind!=='site')throw new Error('Invalid personal promise target evidence');
+39-}
+40:export function validatePromiseTargets(w:World):void{
+41- for(const p of w.persons)for(const c of p.commitments)if(c.targetEvidence!==undefined){const k=c.targetEvidence,t=promiseTarget(c);validateTargetEvidence(w,k);if(!t||t.id!==k.targetId||t.kind!==k.kind||k.tick<c.made)throw new Error('Target evidence does not match promise');}
+42-}
+=================== request_cancellation.ts
+54:export function validateRequestCancellation(w:World):void{
+55- const int=(n:unknown,min=0,max=w.tick)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max,allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,84);
+56- for(const p of w.persons){const ms=p.socialMemory??[];if(ms.some(m=>m.cancellation!==undefined)&&(ms.length>32||new Set(ms.map(m=>m.requestId)).size!==ms.length))throw new Error('Invalid cancellation memory count');
+57- for(const m of ms)if(m.cancellation!==undefined){const k=m.cancellation;
+58-  if(!allowed||!k||!['own target observation','requester statement'].includes(k.source)||!int(k.tick)||!int(k.commitmentId,1,Number.MAX_SAFE_INTEGER)||k.from!==(k.source==='own target observation'?p.id:m.otherId)||k.source==='own target observation'&&(m.role!=='asker'||m.expectation?.commitmentId!==k.commitmentId)||k.source==='requester statement'&&(m.role!=='helper'||!int(k.conversationId,1,Number.MAX_SAFE_INTEGER)||!['stopped','already ended'].includes(k.response??''))||k.acknowledgedAt!==undefined&&(k.source!=='own target observation'||!int(k.acknowledgedAt,k.tick))||k.reportAfter!==undefined&&(k.source!=='own target observation'||!int(k.reportAfter,k.tick,w.tick+400))||k.response!==undefined&&!['stopped','already ended'].includes(k.response))throw new Error('Invalid personal cancellation knowledge');
+59-  validateTargetEvidence(w,k.target,k.tick);
+60-  if(k.source==='own target observation'&&(k.target.targetId!==m.expectation!.destId&&k.target.targetId!==m.siteId||k.target.tick<m.expectation!.made||k.target.tick!==k.tick||k.conversationId!==undefined||k.response!==undefined&&k.acknowledgedAt===undefined))throw new Error('Cancellation does not match the heard agreement');
+61-  const c=p.commitments.find(c=>c.id===k.commitmentId&&c.requestId===m.requestId);if(k.source==='requester statement'&&c&&(c.to!==k.from||k.target.targetId!==(c.destId??c.siteId)&&k.target.targetId!==c.siteId))throw new Error('Cancellation does not match the accepted obligation');
+62- }
+63- for(const a of [p.activity,p.suspended])if(a?.data.purpose==='cancel_request'&&!allowed)throw new Error('Unsupported cancellation activity');
+64- }
+65- if(!allowed&&w.conversations.some(c=>c.purpose==='cancel_request'))throw new Error('Unsupported cancellation conversation');
+66-}
+=================== promise_delays.ts
+63:export function validatePromiseDelays(w:World):void{
+64- const int=(n:unknown,min=0,max=w.tick)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+65- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,85);
+66- const check=(d:PromiseDelay,source:PromiseDelay['source'],from:number,id:number,made:number)=>{
+67-  if(!allowed||!d||d.source!==source||d.from!==from||d.commitmentId!==id||!int(d.tick,made)||!int(d.conversationId,1,Number.MAX_SAFE_INTEGER)||!int(d.priorDeadline,made,Number.MAX_SAFE_INTEGER)||!int(d.proposedDeadline,d.priorDeadline,Number.MAX_SAFE_INTEGER)||d.proposedDeadline!==d.priorDeadline+DELAY_EXTENSION||!Number.isFinite(d.delivered)||d.delivered<0||!Number.isFinite(d.contrib)||d.contrib<0)throw new Error('Invalid promise delay proposal');
+68-  if(source==='own attempt'&&d.originalExpectedDeadline!==undefined||source==='helper statement'&&!int(d.originalExpectedDeadline,made,d.proposedDeadline))throw new Error('Invalid original heard deadline');
+69-  const a=d.attempt;if(!a||!int(a.activityId,1,Number.MAX_SAFE_INTEGER)||!int(a.targetId,0,Number.MAX_SAFE_INTEGER)||!int(a.tick,made,d.tick)||!['visit','give','repair','build','deposit','return_tool','haul'].includes(a.kind)||!['travel','work'].includes(a.phase)||typeof a.reason!=='string'||a.reason.length>240||!Number.isFinite(a.delivered)||a.delivered<0||!Number.isFinite(a.contrib)||a.contrib<0||a.resolvedAt!==undefined)throw new Error('Invalid reported delay attempt');
+70-  if(d.response!==undefined&&(!['accepted','refused'].includes(d.response)||!int(d.responseAt,d.tick)||typeof d.responseReason!=='string'||d.responseReason.length>240)||d.response===undefined&&(d.responseAt!==undefined||d.responseReason!==undefined)||d.retryAfter!==undefined&&(source!=='own attempt'||d.response!==undefined||!int(d.retryAfter,d.tick,w.tick+400)))throw new Error('Invalid promise delay answer');
+71- };
+72- for(const p of w.persons){for(const c of p.commitments)if(c.delay!==undefined){check(c.delay,'own attempt',p.id,c.id,c.made);if(c.deadline!==(c.delay.response==='accepted'?c.delay.proposedDeadline:c.delay.priorDeadline))throw new Error('Delay changed an unagreed deadline');}
+73-  for(const m of p.socialMemory??[])if(m.expectation?.delay!==undefined){const e=m.expectation;check(e.delay!,'helper statement',m.otherId,e.commitmentId,e.made);if(e.delay!.response==='accepted'&&e.deadline!==e.delay!.proposedDeadline)throw new Error('Heard delay deadline disagrees');}
+74-  for(const a of [p.activity,p.suspended])if(a?.data.purpose==='delay_request'&&!allowed)throw new Error('Unsupported delay activity');
+75- }
+76- if(!allowed&&w.conversations.some(c=>c.purpose==='delay_request'))throw new Error('Unsupported delay conversation');
+77-}
+=================== ecology.ts
+89:export function validateEcology(w: World): void {
+90-  const eligible = w.settings.dynamics === 'rich' && runsRulesVersion(w, 86);
+91-  const fail = (): never => { throw new Error('invalid saved ecological condition'); };
+92-  const tick = (x: unknown): x is number => Number.isInteger(x) && (x as number) >= 0 && (x as number) <= w.tick;
+93-  if (w.ecology !== undefined) {
+94-    if (!eligible || !w.ecology || typeof w.ecology !== 'object' || Array.isArray(w.ecology) || Object.keys(w.ecology).length > w.W * w.H) fail();
+95-    for (const [key, c] of Object.entries(w.ecology)) {
+96-      const i = Number(key);
+97-      if (!Number.isInteger(i) || String(i) !== key || i < 0 || i >= w.W * w.H || !c || Object.keys(c).some(k => !['condition','lastUse','lastTended'].includes(k)) || !Number.isFinite(c.condition) || c.condition < 0.15 || c.condition > 1 || !tick(c.lastUse) || (c.lastTended !== undefined && !tick(c.lastTended))) fail();
+98-    }
+99-  }
+100-  for (const pl of w.plots) if (pl.fallowUntil !== undefined && (!eligible || pl.state !== 'tilled' || !Number.isInteger(pl.fallowUntil) || pl.fallowUntil < 0 || pl.fallowUntil > w.tick + 3 * DAY)) fail();
+101-  for (const p of w.persons) for (const b of Object.values(p.beliefs)) {
+102-    if (b.ecology !== undefined && (!eligible || (!Number.isSafeInteger(b.seen) || b.seen > w.tick || !['vigorous','strained','worn'].includes(b.ecology)) || (b.kind !== 'plot' && !biological({ type: b.kind as Source['type'] })))) fail();
+103-    if (b.fallowUntil !== undefined && (!eligible || b.kind !== 'plot' || b.state !== 'tilled' || !Number.isInteger(b.fallowUntil) || b.fallowUntil < 0 || b.fallowUntil > b.seen + 3 * DAY)) fail();
+104-  }
+105-}
+=================== hydrology.ts
+108:export function validateWater(w: World): void {
+109-  const fail=():never=>{throw new Error('invalid saved natural water budget');};
+110-  for(const p of w.persons)for(const b of Object.values(p.beliefs))if(b.waterSupply!==undefined&&(!eligible(w)||b.kind!=='water'||!['wet','low','dry'].includes(b.waterSupply)||!Number.isSafeInteger(b.seen)||b.seen>w.tick))fail();
+111-  if (w.waterBodies === undefined) { if (eligible(w)) fail(); return; }
+112-  if (!eligible(w) || !Array.isArray(w.waterBodies) || w.waterBodies.length>w.W*w.H) fail();
+113-  const expected=components(w);
+114-  if (expected.length!==w.waterBodies.length) fail();
+115-  for (let i=0;i<expected.length;i++) {
+116-    const b=w.waterBodies[i], e=expected[i];
+117-    if (!b || Object.keys(b).some(k=>!['id','tiles','capacity','amount','rainAcc','evaporationAcc','drawn','replenished','evaporated','lastDraw'].includes(k)) || b.id!==e.tiles[0] || b.capacity!==e.capacity || JSON.stringify(b.tiles)!==JSON.stringify(e.tiles)) fail();
+118-    for (const n of [b.amount,b.drawn,b.replenished,b.evaporated]) if(!Number.isSafeInteger(n)||n<0)fail();
+119-    if(b.amount>b.capacity || b.capacity+b.replenished-b.drawn-b.evaporated!==b.amount)fail();
+120-    for(const n of [b.rainAcc,b.evaporationAcc])if(!Number.isFinite(n)||n<0||n>=1)fail();
+121-    if(b.lastDraw!==undefined&&(!Number.isSafeInteger(b.lastDraw)||b.lastDraw<0||b.lastDraw>w.tick))fail();
+122-  }
+123-}
+=================== flood.ts
+80:export function validateFlood(w:World):void {
+81- const fail=():never=>{throw new Error('invalid saved flood footprint or memory');};
+82- if(w.flood!==undefined){const f=w.flood;if(!eligible(w)||!f||Object.keys(f).some(k=>!['since','activeUntil','recoveryUntil','tiles'].includes(k))||!Number.isSafeInteger(f.since)||f.since<0||f.since>w.tick||f.activeUntil!==f.since+DAY/4||f.recoveryUntil!==f.since+DAY||!Array.isArray(f.tiles)||!f.tiles.length||f.tiles.length>w.W*w.H)fail();
+83-  let last=-1;for(const i of f.tiles){if(!Number.isSafeInteger(i)||i<=last||i>=w.W*w.H||w.terrain[i]===T.DEEP||w.terrain[i]===T.SHALLOW)fail();last=i;}
+84- }
+85- for(const p of w.persons){const bs=Object.values(p.beliefs).filter(b=>b.kind==='flood');if(bs.length>64||bs.length&&!eligible(w))fail();
+86-  for(const b of bs){const i=Math.floor(b.y)*w.W+Math.floor(b.x);if(b.id!==floodPlaceId(i)||b.x!==Math.floor(b.x)+0.5||b.y!==Math.floor(b.y)+0.5||b.x<0||b.y<0||b.x>=w.W||b.y>=w.H||!Number.isSafeInteger(b.seen)||b.seen<0||b.seen>w.tick||!Number.isSafeInteger(b.learned)||b.learned<0||b.learned>w.tick||b.src!=='seen'||b.from!==0||!['flooded','recovering','clear'].includes(b.state??''))fail();}
+87-  for(const a of [p.activity,p.suspended])if(a){const d=a.data;for(const key of ['floodWaitSince','floodObservedAt','floodInterruptedWorkAt'])if(d[key]!==undefined&&(!eligible(w)||!Number.isSafeInteger(d[key])||d[key]<0||d[key]>w.tick))fail();if(d.floodRetreat!==undefined&&(!eligible(w)||d.floodRetreat!==true))fail();}
+88- }
+89-}
+=================== offcuts.ts
+21:export function validateOffcuts(w:World):void{
+22- const eligible=w.settings.dynamics==='rich'&&runsRulesVersion(w,89);
+23- const check=(items:Items|undefined)=>{if(items?.offcuts!==undefined&&(!eligible||!Number.isFinite(items.offcuts)||items.offcuts<0||!Number.isInteger(items.offcuts)))throw new Error('Invalid offcut inventory');};
+24- for(const p of w.persons){check(p.inv);for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.yields);}
+25-  for(const a of [p.activity,p.suspended])if(a){check(a.data.items);if(a.data.fuelItem!==undefined&&(!eligible||a.kind!=='fuel_fire'||a.data.fuelItem!=='offcuts'))throw new Error('Invalid offcut fuel action');}}
+26- for(const b of w.buildings){check(b.store.items);check(b.ops?.job?.held);check(b.ops?.produced);check(b.ops?.consumed);}
+27- for(const p of w.piles)check(p.items);for(const c of w.carts)check(c.load);
+28- for(const s of w.sites){check(s.delivered);check(s.used);}for(const m of w.meals)check(m.table);
+29- check(w.ledger.initial);check(w.ledger.created);check(w.ledger.consumed);check(w.ledger.spoiled);
+30-}
+=================== meal_leftovers.ts
+24:export function validateMealLeftovers(w:World):void{
+25- const eligible=w.settings.dynamics==='rich'&&runsRulesVersion(w,90);
+26- const id=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>0;
+27- for(const m of w.meals){
+28-  if(m.tableOwnerHh!==undefined&&(!eligible||!id(m.tableOwnerHh)))throw new Error('Invalid meal food owner');
+29- }
+30- const seen=new Set<number>();
+31- for(const pile of w.piles){const c=pile.mealFood;if(c===undefined)continue;
+32-  if(!eligible||!c||!id(c.mealId)||!id(c.hostId)||!id(c.hhId)||seen.has(c.mealId))throw new Error('Invalid meal leftover ownership');
+33-  if(Object.entries(pile.items).some(([k,n])=>!NUTRITION[k as FoodKind]||!Number.isSafeInteger(n)||n<0))throw new Error('Invalid meal leftover food');
+34-  seen.add(c.mealId);
+35- }
+36-}
+=================== estate.ts
+29:export function validateEstateCustody(w:World):void{
+30- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,93),id=(n:unknown,min=1)=>Number.isSafeInteger(n)&&Number(n)>=min;
+31- for(const pile of w.piles){const e=pile.estate;if(e===undefined)continue;
+32-  if(!allowed||!e||pile.mealFood||!id(e.personId)||!id(e.hhId,0)||!id(e.deathTick,0)||e.deathTick>w.tick||e.deathTick!==pile.since)throw new Error('Invalid estate custody');
+33-  for(const t of toolsHeldBy(w,pile.id))if(t.ownerHh!==e.hhId)throw new Error('Estate tool owner mismatch');
+34- }
+35-}
+=================== work_handover.ts
+114:export function validateWorkHandovers(w:World):void{
+115- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,94),id=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>0,time=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>=0&&Number(n)<=w.tick;
+116- for(const p of w.persons){for(const [other,r] of Object.entries(p.relations))if(r.handovers!==undefined){
+117-  if(!allowed||!Array.isArray(r.handovers)||r.handovers.length>2||new Set(r.handovers.map(h=>h.id)).size!==r.handovers.length)throw new Error('Invalid work handover history');
+118-  for(const h of r.handovers){
+119-   if(!h||!id(h.id)||!id(h.from)||!id(h.to)||h.from===h.to||![h.from,h.to].includes(p.id)||![h.from,h.to].includes(Number(other))||!['incapacity','departure'].includes(h.cause)||!['proposed','accepted','declined','returned','finished','failed'].includes(h.state)||!time(h.proposedAt)||!h.work||h.work.from!==h.from||h.work.conversationId!==h.id||!id(h.work.planId)||typeof h.work.goal!=='string'||h.work.goal.length>240||!Number.isFinite(h.work.worked)||h.work.worked<0||typeof h.reason!=='string'||h.reason.length>400||h.answeredAt!==undefined&&(!time(h.answeredAt)||h.answeredAt<h.proposedAt)||h.endedAt!==undefined&&(!time(h.endedAt)||h.endedAt<(h.answeredAt??h.proposedAt))||h.reportAt!==undefined&&(!time(h.reportAt)||h.reportAt<h.proposedAt)||h.helperPlan!==undefined&&!id(h.helperPlan)||h.state==='accepted'&&(h.answeredAt===undefined||!id(h.helperPlan)))throw new Error('Invalid work handover');
+120-   const k=h.work;if(!id(k.householdId)||k.heardAt!==h.proposedAt||!['shelter','tool','stock','batch'].includes(k.kind)||!Number.isSafeInteger(k.aboutId)||k.aboutId<0||typeof k.makes!=='string'||typeof k.name!=='string'||k.forSite!==undefined&&!id(k.forSite)||k.recipe!==undefined&&typeof k.recipe!=='string')throw new Error('Invalid communicated handover work');
+121-  }
+122- }
+123- // Pre-intention saves are normalised later by the existing loader.
+124- for(const i of p.intentions??[])if(i.handoverId!==undefined&&(!allowed||!id(i.handoverId)))throw new Error('Invalid handed-over plan');
+125- }
+126- if(!allowed&&(w.conversations.some(c=>c.purpose==='handover_work')||w.persons.some(p=>[p.activity,p.suspended].some(a=>a?.data.purpose==='handover_work'))))throw new Error('Unsupported work handover');
+127-}
+128-import {runsRulesVersion} from './rulesversion';
+=================== care_supply.ts
+76:export function validateCareSupply(w:World):void{
+77- for(const p of w.persons){
+78-  const j=p.careJourney;
+79-  if(j&&(typeof j.name!=='string'||j.name.length>120||j.received!==undefined&&(!Number.isSafeInteger(j.received)||j.received<=0||j.received>12)||['delivered','deposited'].includes(j.phase)&&(j.ended===undefined||j.received===undefined)||j.phase==='failed'&&j.ended===undefined))throw new Error('Invalid care journey outcome');
+80-  if(j&&(w.settings.dynamics!=='rich'||!runsRulesVersion(w,95)||!Number.isSafeInteger(j.to)||j.to<=0||j.to===p.id||typeof j.name!=='string'||!Number.isSafeInteger(j.seen)||j.seen<0||j.seen>w.tick||!Number.isSafeInteger(j.since)||j.since<j.seen||j.since>w.tick||j.until!==j.seen+700||!Number.isSafeInteger(j.attempts)||j.attempts<1||j.attempts>2||!['water','berries','fruit','grain','fish'].includes(j.item)||!['acquire','return','delivered','deposited','failed'].includes(j.phase)||typeof j.reason!=='string'||j.reason.length>400||j.ended!==undefined&&(!Number.isSafeInteger(j.ended)||j.ended<j.since||j.ended>w.tick)))throw new Error('Invalid personal care journey');
+81- for(const a of [p.activity,p.suspended]){
+82-  const c=a?.data?.careSupply;if(c===undefined)continue;
+83-  const acquired=a!.data.careAcquired;
+84-  if(acquired!==undefined&&(!Number.isSafeInteger(acquired)||acquired<0||acquired>a!.cycle))throw new Error('Invalid care acquisition receipt');
+85-  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,95)||!['gather','fetch_water'].includes(a!.kind)||!c||!Number.isSafeInteger(c.to)||c.to<=0||c.to===p.id||!Number.isSafeInteger(c.seen)||c.seen<0||c.seen>w.tick)throw new Error('Invalid personal care supply purpose');
+86- }
+87- }
+88-}
+=================== care_handback.ts
+67:export function validateCareHandback(w:World):void{
+68- const ok=w.settings.dynamics==='rich'&&runsRulesVersion(w,97),int=(v:unknown,min:number,max:number)=>Number.isSafeInteger(v)&&Number(v)>=min&&Number(v)<=max;
+69- for(const p of w.persons){for(const m of p.socialMemory??[]){const h=m.careHandback;if(!h)continue;
+70-  if(!ok||m.task?.kind!=='watch'||!int(h.childId,1,Number.MAX_SAFE_INTEGER)||!int(h.commitmentId,1,Number.MAX_SAFE_INTEGER)||!int(h.conversationId,1,Number.MAX_SAFE_INTEGER)||!int(h.proposedAt,0,w.tick)||!['proposed','accepted','refused','already ended'].includes(h.state)||typeof h.reason!=='string'||h.reason.length>500||h.state==='proposed'&&h.answeredAt!==undefined||h.state!=='proposed'&&h.answeredAt===undefined||h.answeredAt!==undefined&&!int(h.answeredAt,h.proposedAt,w.tick)||h.watchedTicks!==undefined&&!int(h.watchedTicks,0,WATCH_TICKS)||m.role==='asker'&&(m.expectation?.commitmentId!==h.commitmentId||m.expectation?.destId!==h.childId))throw new Error('Invalid childcare return receipt');
+71-  const c=m.role==='helper'?p.commitments.find(c=>c.id===h.commitmentId):undefined;
+72-  if(c&&(c.requestId!==m.requestId||c.to!==m.otherId||c.destId!==h.childId||c.milestone!=='watched'))throw new Error('Mismatched childcare return obligation');
+73- }
+74- for(const a of [p.activity,p.suspended])if(a?.data.watchedTicks!==undefined&&(!ok||a.kind!=='visit'||!a.data.watch||!int(a.data.watchedTicks,0,WATCH_TICKS)))throw new Error('Invalid retained watch progress');
+75- if(!ok&&[p.activity,p.suspended].some(a=>a?.data.purpose==='return_care'))throw new Error('Unsupported childcare return activity');
+76- }
+77- if(!ok&&w.conversations.some(c=>c.purpose==='return_care'))throw new Error('Unsupported childcare return conversation');
+78-}
+=================== meeting_knowledge.ts
+103:export function validateMeetingKnowledge(w:World):void{
+104- const allowed=w.settings.dynamics==='rich'&&runsRulesVersion(w,91),int=(n:unknown,min=0,max=w.tick)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
+105- for(const m of w.meals){if(m.heard===undefined)continue;
+106-  if(!allowed||!m.heard||Object.keys(m.heard).length>5)throw new Error('Invalid heard meeting count');
+107-  for(const [id,k] of Object.entries(m.heard)){
+108-   if(!int(Number(id),1,Number.MAX_SAFE_INTEGER)||!k||k.from!==m.host||!int(k.heardAt,m.created)||!int(k.at,m.created,Number.MAX_SAFE_INTEGER)||!int(k.placeId,1,Number.MAX_SAFE_INTEGER)||![k.x,k.y].every(Number.isFinite)||typeof k.placeName!=='string'||typeof k.hostName!=='string'||!['hosting','pending','accepted','refused'].includes(k.reply)||!Array.isArray(k.invited)||!Array.isArray(k.accepted)||k.invited.length>4||k.accepted.length>4||k.accepted.some(id=>!k.invited.includes(id))||k.conversationId!==undefined&&!int(k.conversationId,1,Number.MAX_SAFE_INTEGER))throw new Error('Invalid heard meeting');
+109-   for(const end of [k.ended,k.laterExplanation])if(end&&(!int(end.tick,k.heardAt)||!['own choice','local experience','host statement','own timeout','known death'].includes(end.source)||typeof end.reason!=='string'||end.reason.length>300||end.source==='host statement'&&(end.from!==m.host||!int(end.conversationId,1,Number.MAX_SAFE_INTEGER))))throw new Error('Invalid meeting ending');
+110-   if(k.laterExplanation&&(!k.ended||k.laterExplanation.source!=='host statement'||k.laterExplanation.tick<k.ended.tick))throw new Error('Invalid later meeting explanation');
+111-   if(k.at!==m.at||k.at>m.created+760||k.placeId!==m.placeId||Number(id)===m.host&&k.reply!=='hosting'||Number(id)!==m.host&&(!m.invited.includes(Number(id))||k.reply==='hosting'||k.invited.length||k.accepted.length)||new Set(k.invited).size!==k.invited.length||new Set(k.accepted).size!==k.accepted.length||k.invited.some(id=>!int(id,1,Number.MAX_SAFE_INTEGER))||k.sawTable!==undefined&&typeof k.sawTable!=='boolean')throw new Error('Invalid personal meeting membership');
+112-   for(const n of [k.arrivedAt,k.ateAt])if(n!==undefined&&!int(n,k.heardAt))throw new Error('Invalid meeting experience time');
+113-   if(k.updates)for(const [guest,u] of Object.entries(k.updates))if(Number(id)!==m.host||!k.accepted.includes(Number(guest))||!int(u.heardAt,k.heardAt)||!int(u.retryAt,u.heardAt,w.tick+400)||u.acknowledgedAt!==undefined&&!int(u.acknowledgedAt,u.heardAt))throw new Error('Invalid meeting update');
+114-  }
+115-  if(m.replacesMealId!==undefined&&(!int(m.replacesMealId,1,m.id-1)||m.replacementId!==undefined)||m.replacementId!==undefined&&!int(m.replacementId,m.id+1,Number.MAX_SAFE_INTEGER))throw new Error('Invalid bounded meal replacement');
+116- }
+117- for(const p of w.persons)for(const [id,r] of Object.entries(p.relations)){const e=r.meeting;if(!e)continue;
+118-  if(!allowed||!int(Number(id),1,Number.MAX_SAFE_INTEGER)||!int(e.mealId,1,Number.MAX_SAFE_INTEGER)||!int(e.placeId,1,Number.MAX_SAFE_INTEGER)||!int(e.agreedAt,0,Number.MAX_SAFE_INTEGER)||!int(e.tick)||!['own choice','local experience','host statement','own timeout','known death'].includes(e.source)||!['ate','missed','cancelled'].includes(e.outcome)||!['experienced','reported','cause unknown'].includes(e.confidence)||typeof e.reason!=='string'||e.reason.length>240)throw new Error('Invalid retained meeting experience');
+119- }
+120- if(!allowed&&(w.conversations.some(c=>c.purpose==='cancel_meeting')||w.persons.some(p=>[p.activity,p.suspended].some(a=>a?.data.purpose==='cancel_meeting'))))throw new Error('Unsupported meeting update');
+121-}

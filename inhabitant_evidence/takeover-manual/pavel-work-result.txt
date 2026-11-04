@@ -1,0 +1,48 @@
+AI inhabitant
+Pavel · by hand
+thinking…
+day 2 10:53
+09:44 · Build the hut → applied
+partial: no materials to work with (8 wood, 4 stone)
+chosen by hand
+Your turn
+10:52
+Pavel is in no particular need. Last: Building the hut — partial.
+Plans: get the household's hut built; next: get 2 wood for the hut (it wants 8 wood and 4 stone) (a wolf about) · wood: 2 carried and reserved, 2 still missing (4 wanted) · Unreserved: 2 berries · Promises and actions serving the plan may use reserved goods; each offered action has its own limits.
+Action estimates and memory ages use the world clock.
+Eat what I am carrying
+About 7 world min
+Picking berries
+berry bush 6 tiles south-west (seen just now)
+About 1 world h 43 min
+Eat from the home store
+lean-to 9 tiles north (seen just now)
+About 1 world h 32 min
+Picking berries
+berry bush 7 tiles south-west (seen just now)
+About 1 world h 49 min
+Ask Maren for wood
+Maren (in sight, 4 tiles north)
+About 1 world h 13 min
+Picking fruit
+fruit tree 1 tiles south-east (seen just now)
+About 52 world min
+Ask Sven for stone
+Sven (in sight, 6 tiles north-west)
+About 1 world h 34 min
+Ask Sven for wood
+Sven (in sight, 6 tiles north-west)
+About 1 world h 34 min
+Warn Maren about the wolf
+Maren (in sight, 4 tiles north)
+About 1 world h 13 min
+Warn Sven about the wolf
+Sven (in sight, 6 tiles north-west)
+About 1 world h 34 min
+Potter about near home
+About 24 world min
+Let the engine choose
+Answer from a chat
+decisions 2, engine 0, refused 0
+Save transcript
+Stop

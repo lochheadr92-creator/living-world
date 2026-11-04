@@ -1,0 +1,88 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 55,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 67.544,
+  "alive": 8,
+  "deaths": 22,
+  "samples": {
+    "adults": 5185,
+    "withHauling": 2269,
+    "withExperience": 52,
+    "wantCartDeficit": 14,
+    "wantCartExperience": 42,
+    "cartBlocked": 23
+  },
+  "blockers": {
+    "needs a hammer and has none (and none is on the rack)": 23
+  },
+  "peopleEverExperienced": 2,
+  "peopleEverWantingCart": 3,
+  "starts": {
+    "footHaul": 168
+  },
+  "trips": [],
+  "carts": [],
+  "haulLogs": 4,
+  "cartHaulLogs": 0,
+  "leftLoaded": 0,
+  "hauling": [
+    {
+      "name": "Mira",
+      "alive": true,
+      "weight": 16,
+      "trips": 4,
+      "since": 94162,
+      "perTrip": 4
+    },
+    {
+      "name": "Lena",
+      "alive": true,
+      "weight": 21,
+      "trips": 4,
+      "since": 82392,
+      "perTrip": 5.3
+    },
+    {
+      "name": "Ada",
+      "alive": true,
+      "weight": 2,
+      "trips": 1,
+      "since": 106801,
+      "perTrip": 2
+    },
+    {
+      "name": "Faye",
+      "alive": true,
+      "weight": 6,
+      "trips": 3,
+      "since": 86749,
+      "perTrip": 2
+    },
+    {
+      "name": "Hal",
+      "alive": true,
+      "weight": 2,
+      "trips": 1,
+      "since": 65635,
+      "perTrip": 2
+    },
+    {
+      "name": "Maren",
+      "alive": true,
+      "weight": 2,
+      "trips": 1,
+      "since": 84873,
+      "perTrip": 2
+    }
+  ],
+  "hash": "3bca15d0",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

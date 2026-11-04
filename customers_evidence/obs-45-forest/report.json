@@ -1,0 +1,57 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 51,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 83.307,
+  "alive": 8,
+  "deaths": 22,
+  "materialAsksStarted": 48,
+  "materialAsksMade": 6,
+  "materialAsksByStatus": {
+    "failed": 2,
+    "declined": 3,
+    "cancelled": 1
+  },
+  "demandHeard": 1,
+  "leadsNotedInLogs": 0,
+  "leadsNow": 0,
+  "declinedMaterialAsksByNote": {
+    "unwilling": 1,
+    "enough": 1,
+    "own need": 1
+  },
+  "leadsByItem": {},
+  "supplyOffersStarted": 0,
+  "supplySwapsStarted": 0,
+  "supplyWalksStarted": 0,
+  "suppliedTotal": 0,
+  "suppliedByHand": 0,
+  "suppliedBySwap": 0,
+  "suppliedAtSite": 0,
+  "suppliedByItem": {},
+  "unitsSupplied": 0,
+  "returns": [],
+  "repeatCustomers": 0,
+  "lapsed": 0,
+  "localSwapsStarted": 159,
+  "localSwapAsks": 56,
+  "localSwapAsksByNote": {
+    "declined | no room to carry the swap": 26,
+    "declined | nothing to spare": 30
+  },
+  "swapEvents": 0,
+  "exchangeJourneys": 0,
+  "townships": 1,
+  "tradesNow": 6,
+  "tradesFromDemand": 0,
+  "tradesFromReturns": 0,
+  "hash": "084591ae",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

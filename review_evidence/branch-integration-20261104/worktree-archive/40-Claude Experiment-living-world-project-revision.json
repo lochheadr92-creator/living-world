@@ -1,0 +1,260 @@
+{
+  "worktree": "C:\\dev\\Claude Experiment\\living-world-project-revision",
+  "head": "24bfc1dc0400ca001dc76cbbdfcc3f0450db3141",
+  "branch": "refs/heads/codex/project-revision",
+  "workingFiles": [
+    {
+      "path": "autonomy-project-revision-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "66f05b69ac825cf5684c4d61e7e4f0e5f7d27cb85fc321247d2056f8319da5dc",
+      "bytes": 2474,
+      "archiveObject": "objects/66/66f05b69ac825cf5684c4d61e7e4f0e5f7d27cb85fc321247d2056f8319da5dc.gz"
+    },
+    {
+      "path": "autonomy-project-revision-build-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "c73ef42b44e74af64296b2123721209512c8d9d62754f3cd3965031617737bc3",
+      "bytes": 2200,
+      "archiveObject": "objects/c7/c73ef42b44e74af64296b2123721209512c8d9d62754f3cd3965031617737bc3.gz"
+    },
+    {
+      "path": "autonomy-project-revision-build.log",
+      "kind": "ignored-evidence",
+      "sha256": "5cc35a0658f8e3a1f14ad6d3440e6044ffa31238ca8b7a0e46f56857b1800fec",
+      "bytes": 2200,
+      "archiveObject": "objects/5c/5cc35a0658f8e3a1f14ad6d3440e6044ffa31238ca8b7a0e46f56857b1800fec.gz"
+    },
+    {
+      "path": "autonomy-project-revision-core.log",
+      "kind": "ignored-evidence",
+      "sha256": "25827a453b0d355412834f8561547cf437a76354ec3701cb95491575be293213",
+      "bytes": 3169,
+      "archiveObject": "objects/25/25827a453b0d355412834f8561547cf437a76354ec3701cb95491575be293213.gz"
+    },
+    {
+      "path": "autonomy-project-revision-deadline.log",
+      "kind": "ignored-evidence",
+      "sha256": "77a5f7a911c4c2262ebfc3ea2413ee7eef9b42effe8f1a7ce3c977ac26544fcd",
+      "bytes": 1672,
+      "archiveObject": "objects/77/77a5f7a911c4c2262ebfc3ea2413ee7eef9b42effe8f1a7ce3c977ac26544fcd.gz"
+    },
+    {
+      "path": "autonomy-project-revision-focused.log",
+      "kind": "ignored-evidence",
+      "sha256": "6a8425d76bd30a87deb91553cdf256fd2544ee3a18b7451c12969c0abb7ae80d",
+      "bytes": 2751,
+      "archiveObject": "objects/6a/6a8425d76bd30a87deb91553cdf256fd2544ee3a18b7451c12969c0abb7ae80d.gz"
+    },
+    {
+      "path": "autonomy-project-revision-full-final.exit",
+      "kind": "untracked",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3,
+      "archiveObject": "objects/f1/f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04.gz"
+    },
+    {
+      "path": "autonomy-project-revision-full-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "ba677036f5101221d7e5625e81a877945d3795d4c8f3ba5c62b13e43e5211377",
+      "bytes": 2694,
+      "archiveObject": "objects/ba/ba677036f5101221d7e5625e81a877945d3795d4c8f3ba5c62b13e43e5211377.gz"
+    },
+    {
+      "path": "autonomy-project-revision-full-tests.log",
+      "kind": "ignored-evidence",
+      "sha256": "4e70c53ebf1b04826b0fee7d3b63f9b891747ea7019af05698ce9ac9fd057478",
+      "bytes": 1702,
+      "archiveObject": "objects/4e/4e70c53ebf1b04826b0fee7d3b63f9b891747ea7019af05698ce9ac9fd057478.gz"
+    },
+    {
+      "path": "autonomy-project-revision-full-verified.exit",
+      "kind": "untracked",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "archiveObject": "objects/13/13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354.gz"
+    },
+    {
+      "path": "autonomy-project-revision-full-verified.log",
+      "kind": "ignored-evidence",
+      "sha256": "1861f221532cc96edbbe06f1d956fc3430c706e2e4beb064ffc1d9fc2cf5851e",
+      "bytes": 1852,
+      "archiveObject": "objects/18/1861f221532cc96edbbe06f1d956fc3430c706e2e4beb064ffc1d9fc2cf5851e.gz"
+    },
+    {
+      "path": "autonomy-project-revision-integration-final.log",
+      "kind": "ignored-evidence",
+      "sha256": "ac024bc0cf6d12336e1cd76a35912ccfd7f682bb454748efe8d62e514410f4d7",
+      "bytes": 2234,
+      "archiveObject": "objects/ac/ac024bc0cf6d12336e1cd76a35912ccfd7f682bb454748efe8d62e514410f4d7.gz"
+    },
+    {
+      "path": "autonomy-project-revision-integration.log",
+      "kind": "ignored-evidence",
+      "sha256": "9041d4315a3318fc8c8f03dcac4727b5dcad4ea981343817ca5588fa9c97cbc7",
+      "bytes": 3244,
+      "archiveObject": "objects/90/9041d4315a3318fc8c8f03dcac4727b5dcad4ea981343817ca5588fa9c97cbc7.gz"
+    },
+    {
+      "path": "autonomy-project-revision-retry-review-before.log",
+      "kind": "ignored-evidence",
+      "sha256": "8683e3b58d0027df0ff79e5884ce8166c4d4b2f985ecc5f1219f8968ee09be9b",
+      "bytes": 2297,
+      "archiveObject": "objects/86/8683e3b58d0027df0ff79e5884ce8166c4d4b2f985ecc5f1219f8968ee09be9b.gz"
+    },
+    {
+      "path": "autonomy-project-revision-review-fixed.log",
+      "kind": "ignored-evidence",
+      "sha256": "a4e000988385911d40f09bdf3a3a1351fc27f13efbd17ded69d2457c972fd61b",
+      "bytes": 2003,
+      "archiveObject": "objects/a4/a4e000988385911d40f09bdf3a3a1351fc27f13efbd17ded69d2457c972fd61b.gz"
+    },
+    {
+      "path": "autonomy-project-revision-trace.log",
+      "kind": "ignored-evidence",
+      "sha256": "39e30c418f072b72887b49e642a58f5e47d128337a13c34f562a3fad3cc52fac",
+      "bytes": 6381,
+      "archiveObject": "objects/39/39e30c418f072b72887b49e642a58f5e47d128337a13c34f562a3fad3cc52fac.gz"
+    },
+    {
+      "path": "autonomy-project-revision-types.log",
+      "kind": "ignored-evidence",
+      "sha256": "b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790",
+      "bytes": 52,
+      "archiveObject": "objects/b9/b97bc0e84b34075331534697b0fd9ebf8f559a7664b416517e1d9fd24f4ee790.gz"
+    },
+    {
+      "path": "autonomy-project-revision-version-pin.log",
+      "kind": "ignored-evidence",
+      "sha256": "c82e8661b98d6deed1c96f951ed65b50c4a094ca93976d272155cdf8ac0b7f36",
+      "bytes": 1999,
+      "archiveObject": "objects/c8/c82e8661b98d6deed1c96f951ed65b50c4a094ca93976d272155cdf8ac0b7f36.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-final-forest.log",
+      "kind": "ignored-evidence",
+      "sha256": "f882eb370d51bd6cd44f4dd98e4832f36a05be5f70c10489fdf7116508a0a31a",
+      "bytes": 934,
+      "archiveObject": "objects/f8/f882eb370d51bd6cd44f4dd98e4832f36a05be5f70c10489fdf7116508a0a31a.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-final-meadow.log",
+      "kind": "ignored-evidence",
+      "sha256": "208a377935cb9e60e26a1365571743df7f76769d10fda020d52cc54e52b6b48c",
+      "bytes": 941,
+      "archiveObject": "objects/20/208a377935cb9e60e26a1365571743df7f76769d10fda020d52cc54e52b6b48c.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-final-river.log",
+      "kind": "ignored-evidence",
+      "sha256": "63a162862f2b21ccd039fa86f109fdec39b3714ca4dd111539e8778c680a0320",
+      "bytes": 939,
+      "archiveObject": "objects/63/63a162862f2b21ccd039fa86f109fdec39b3714ca4dd111539e8778c680a0320.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-forest.log",
+      "kind": "ignored-evidence",
+      "sha256": "4a07ef4863c9769e49b2e9d9715a040a32086f1e789c02a1725fd8184d103d10",
+      "bytes": 933,
+      "archiveObject": "objects/4a/4a07ef4863c9769e49b2e9d9715a040a32086f1e789c02a1725fd8184d103d10.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-meadow.log",
+      "kind": "ignored-evidence",
+      "sha256": "f97efc7e01827f2bcf3d0444561f11b701a7d6bccf158be229188773b54d1280",
+      "bytes": 933,
+      "archiveObject": "objects/f9/f97efc7e01827f2bcf3d0444561f11b701a7d6bccf158be229188773b54d1280.gz"
+    },
+    {
+      "path": "autonomy-revision-uninstalled-river.log",
+      "kind": "ignored-evidence",
+      "sha256": "d7b94d94b5a86ea23910a1cf7ab2ff8c6eecef32ae3b437593e43d74fe535d8d",
+      "bytes": 931,
+      "archiveObject": "objects/d7/d7b94d94b5a86ea23910a1cf7ab2ff8c6eecef32ae3b437593e43d74fe535d8d.gz"
+    },
+    {
+      "path": "autonomy_evidence/project-revision-rendered/original-four-plank-plan.png",
+      "kind": "untracked",
+      "sha256": "34001bbfa7452bb6784415f43930f1d211e96cde962446ce38b225f02e2e55d1",
+      "bytes": 667031,
+      "archiveObject": "objects/34/34001bbfa7452bb6784415f43930f1d211e96cde962446ce38b225f02e2e55d1.gz"
+    },
+    {
+      "path": "autonomy_evidence/project-revision-rendered/report.json",
+      "kind": "untracked",
+      "sha256": "7d2d75ebfaa019983cd8d5c5634bdb527546a881004521bf6413103722b91027",
+      "bytes": 2501,
+      "archiveObject": "objects/7d/7d2d75ebfaa019983cd8d5c5634bdb527546a881004521bf6413103722b91027.gz"
+    },
+    {
+      "path": "autonomy_evidence/project-revision-rendered/revised-plan-completed.png",
+      "kind": "untracked",
+      "sha256": "557afa93e6c057c0ec15bc3d299c5ab69bbb2cda260626ce8084f475f0e121ee",
+      "bytes": 653889,
+      "archiveObject": "objects/55/557afa93e6c057c0ec15bc3d299c5ab69bbb2cda260626ce8084f475f0e121ee.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-final-forest-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5",
+      "bytes": 3015099,
+      "archiveObject": "objects/e0/e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-final-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb",
+      "bytes": 2642726,
+      "archiveObject": "objects/1a/1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-final-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82",
+      "bytes": 3386970,
+      "archiveObject": "objects/c0/c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-forest-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5",
+      "bytes": 3015099,
+      "archiveObject": "objects/e0/e09efaf3a40568aed98694a343e3c2124b6821898955a71ecfdf401a3cd780f5.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-forest-5/report.json",
+      "kind": "untracked",
+      "sha256": "e9fe9d3ff65d8cc89638482fac3d943fca5c862b7732e9994e09189e2464be5e",
+      "bytes": 27538,
+      "archiveObject": "objects/e9/e9fe9d3ff65d8cc89638482fac3d943fca5c862b7732e9994e09189e2464be5e.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-meadow-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb",
+      "bytes": 2642726,
+      "archiveObject": "objects/1a/1a85d06cc0aab7137e6912bb680cbcd19b62770e27153ee6e2165631ce1308eb.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-meadow-5/report.json",
+      "kind": "untracked",
+      "sha256": "8f534e899ef1ff84e1aedcc19f1d8398ade2ae4dceeaad7c134b97370750a57a",
+      "bytes": 27735,
+      "archiveObject": "objects/8f/8f534e899ef1ff84e1aedcc19f1d8398ade2ae4dceeaad7c134b97370750a57a.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-river-5/final.json",
+      "kind": "ignored-evidence",
+      "sha256": "c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82",
+      "bytes": 3386970,
+      "archiveObject": "objects/c0/c09f299c7045584ac2ceadd7913b64a019f9df6344bd33e3d4d8c31eb1fc6a82.gz"
+    },
+    {
+      "path": "autonomy_evidence/revision-uninstalled-river-5/report.json",
+      "kind": "untracked",
+      "sha256": "35e235f5bb554f7ba3dba3ff59a5e5f7747889c71f78a85e63339ffe70c87d00",
+      "bytes": 27067,
+      "archiveObject": "objects/35/35e235f5bb554f7ba3dba3ff59a5e5f7747889c71f78a85e63339ffe70c87d00.gz"
+    }
+  ],
+  "stagedFiles": []
+}

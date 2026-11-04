@@ -1,0 +1,154 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 55,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 112.804,
+  "alive": 22,
+  "deaths": 9,
+  "samples": {
+    "adults": 7617,
+    "withHauling": 3194,
+    "withExperience": 20,
+    "wantCartDeficit": 53,
+    "wantCartExperience": 20,
+    "cartBlocked": 42
+  },
+  "blockers": {
+    "needs a hammer and has none (and none is on the rack)": 38,
+    "the timber yard is busy with sawn planks": 2,
+    "the timber yard is busy with hewn planks": 2
+  },
+  "peopleEverExperienced": 1,
+  "peopleEverWantingCart": 6,
+  "starts": {
+    "footHaul": 228
+  },
+  "trips": [],
+  "carts": [],
+  "haulLogs": 2,
+  "cartHaulLogs": 0,
+  "leftLoaded": 0,
+  "hauling": [
+    {
+      "name": "Emre",
+      "alive": true,
+      "weight": 7,
+      "trips": 2,
+      "since": 34247,
+      "perTrip": 3.5
+    },
+    {
+      "name": "Cora",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 77052,
+      "perTrip": 3
+    },
+    {
+      "name": "Abel",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 22225,
+      "perTrip": 3
+    },
+    {
+      "name": "Tomas",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 80170,
+      "perTrip": 3
+    },
+    {
+      "name": "Kai",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 67949,
+      "perTrip": 3
+    },
+    {
+      "name": "Petra",
+      "alive": true,
+      "weight": 34,
+      "trips": 7,
+      "since": 34011,
+      "perTrip": 4.9
+    },
+    {
+      "name": "Cole",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 94313,
+      "perTrip": 3
+    },
+    {
+      "name": "Ivy",
+      "alive": true,
+      "weight": 9,
+      "trips": 2,
+      "since": 48368,
+      "perTrip": 4.5
+    },
+    {
+      "name": "Basil",
+      "alive": true,
+      "weight": 18,
+      "trips": 4,
+      "since": 1225,
+      "perTrip": 4.5
+    },
+    {
+      "name": "Talia",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 77005,
+      "perTrip": 3
+    },
+    {
+      "name": "Alma",
+      "alive": true,
+      "weight": 12,
+      "trips": 2,
+      "since": 104259,
+      "perTrip": 6
+    },
+    {
+      "name": "Jax",
+      "alive": true,
+      "weight": 13,
+      "trips": 2,
+      "since": 17934,
+      "perTrip": 6.5
+    },
+    {
+      "name": "Lena",
+      "alive": true,
+      "weight": 24,
+      "trips": 6,
+      "since": 67390,
+      "perTrip": 4
+    },
+    {
+      "name": "Arlo",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 68067,
+      "perTrip": 3
+    }
+  ],
+  "hash": "764780ed",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}
