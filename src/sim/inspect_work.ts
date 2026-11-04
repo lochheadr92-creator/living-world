@@ -1,4 +1,5 @@
 import {worldAge,worldDuration} from './time_text';
+import {PRESERVATION_MAX_AGE,preservationWorkers} from './preservation';
 import {runsRulesVersion} from './rulesversion';
 import {describeDelay} from './promise_delays';
 import {recoveredOffcuts} from './offcuts';
@@ -134,7 +135,7 @@ export function recipeBlockers(world: World, b: Building, r: Recipe): string[] {
   const ops = b.ops;
   if (!ops) return out;
   if (ops.job) {
-    out.push(ops.job.phase === 'burn' ? 'the fire is burning another batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room in the store' : 'another batch is under way');
+    out.push(ops.job.phase === 'burn' ? recipeOf(ops.job).preservation==='dry'?'another batch is drying':'the fire is burning another batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room in the store' : 'another batch is under way');
     return out;
   }
   if (b.condition < 12) out.push('the building is too run down to use');
@@ -158,7 +159,9 @@ export function recipeBlockers(world: World, b: Building, r: Recipe): string[] {
   }
   let outW = 0;
   for (const k of Object.keys(r.outputs) as ItemKind[]) outW += (r.outputs[k] ?? 0) * 1.5;
-  if (outW > 0 && b.store.cap - weightOf(b.store.items) < outW) out.push('no room in the store for the product');
+  if(r.preservation)outW=weightOf(r.outputs);
+  const room=b.store.cap-weightOf(b.store.items)+(r.preservation?weightOf(r.inputs)+weightOf(r.fuel):0);
+  if (outW > 0 && room < outW) out.push('no room in the store for the product');
   return out;
 }
 
@@ -178,7 +181,7 @@ export function describeFacility(world: World, b: Building): Section[] {
   const recs = recipesAt(b.type);
   const recoverable=recs.filter(r=>recoveredOffcuts(world,r)>0);
   if(recoverable.length)sections.push({title:'Recoverable timber fuel',notes:recoverable.map(r=>`${r.label}: ${recoveredOffcuts(world,r)} fuel bundle(s) from ${recoveredOffcuts(world,r)*0.5} wood units formerly discarded. Each bundle weighs 1 and fuels a fire half as long as a log. The rest remains waste. Collection takes a real trip and handling time; bundles use store space and belong to the batch client.`)});
-  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s burning` : ''}`] as [string, string]) });
+  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s ${r.preservation==='dry'?'drying in fair weather':'burning'}` : ''}`] as [string, string]) });
   sections.push({ title: 'Who may use it', notes: [accessText(world, b)] });
 
   const job = ops.job;
@@ -188,12 +191,13 @@ export function describeFacility(world: World, b: Building): Section[] {
       ['Making', r.label],
       ['Ordered by', job.client ? nameOf(world, job.client) : 'nobody in particular'],
       ['For', job.purpose || '—'],
-      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
+      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? r.preservation ? `${r.preservation==='dry'?'drying':'smoking'}: ${worldDuration(job.burnLeft)} of suitable conditions left` : `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
     ];
-    const here = Object.keys(ops.present).filter((k) => world.tick - ops.present[Number(k)] < 25).map((k) => nameOf(world, Number(k)));
+    const here = r.preservation?preservationWorkers(world,b).map(p=>p.name):Object.keys(ops.present).filter((k) => world.tick - ops.present[Number(k)] < 25).map((k) => nameOf(world, Number(k)));
     rows.push(['Working now', here.length ? here.join(', ') : 'nobody at the moment']);
     const bars: Bar[] = [{ label: 'Work done', value: Math.min(job.progress, job.total), max: job.total, tone: 'ok' }];
-    if (job.burnTotal > 0) bars.push({ label: 'Fire', value: job.burnTotal - Math.max(0, job.burnLeft), max: job.burnTotal, tone: 'warm' });
+    if (job.burnTotal > 0) bars.push({ label: r.preservation==='dry'?'Drying':'Fire', value: job.burnTotal - Math.max(0, job.burnLeft), max: job.burnTotal, tone: 'warm' });
+    if(r.preservation)rows.push(['Time before unfinished food spoils',worldDuration(Math.max(0,PRESERVATION_MAX_AGE-(world.tick-job.started)))]);
     const notes: string[] = [];
     if (job.blocked) notes.push(job.blocked);
     const contrib = Object.keys(job.workers).map((k) => `${nameOf(world, Number(k))} ${Math.round(job.workers[Number(k)] / 10)}s`);

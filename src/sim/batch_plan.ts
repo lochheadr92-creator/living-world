@@ -20,7 +20,8 @@ import {currentHandInputs} from './project_hand_inputs';
 // the site gone, nobody able to supply an input. One such plan at a time, after food, shelter, roof and tool plans.
 import type { Belief, ItemKind, Items, Person, World } from './types';
 import type { Ctx, Option } from './optutil';
-import { DAY } from './constants';
+import { DAY,PRESERVED_FOODS } from './constants';
+import {hasPreservation} from './preservation';
 import { isRich } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { RECIPE_BY_ID, recipesMaking } from './recipes';
@@ -44,7 +45,7 @@ export const BATCH_MIN_BASE = 8;
 /** how long a batch plan is given: two trips for the inputs, the work, a burn of up to 420 ticks and the collection do not fit in two days */
 export const BATCH_PATIENCE = DAY * 3;
 /** what a batch plan may be about: the workshop products the planner wants, plus the two things fired or built from them */
-export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart']);
+export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart',...PRESERVED_FOODS]);
 
 let enabled = true;
 export const batchPlansOn = (): boolean => enabled;
@@ -239,6 +240,7 @@ export function batchStep(ctx: Ctx, i: Intention): Step {
 
 /** How a batch plan ends: the goods reached their use, or a stated reason why not. */
 export function batchOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
+  if(i.recipe&&RECIPE_BY_ID[i.recipe]?.preservation&&!hasPreservation(world))return {status:'dropped',reason:'preservation planning is no longer available'};
   if(i.project?.failure)return {status:'dropped',reason:i.project.failure};
   if (!hasBatchPlans(world)) return { status: 'dropped', reason: 'seeing a batch through is no longer part of these rules' };
   const b = p.beliefs[i.aboutId];

@@ -19,11 +19,13 @@ export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
 export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
-export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts'];
+export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
   offcuts: 1,
   meat: 1.5,
   berries: 1,
@@ -56,13 +58,14 @@ export const WEIGHT: Record<ItemKind, number> = {
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
   offcuts: 'offcut fuel bundles',
   meat: 'meat',
   berries: 'berries',
@@ -92,7 +95,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   spear: 'spear',
 };
 export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
-export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k);
+export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k) || (PRESERVED_FOODS as string[]).includes(k);
 
 export const CARRY_CAP = { child: 5, youth: 9, adult: 12, elder: 8 } as const;
 export const BASKET_BONUS = 6;
@@ -284,6 +287,11 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'meet',
     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
   }),
+  food_rack: bd({
+    w:2, h:2, cost:{wood:4,stone:2}, work:180, cap:30, workers:2,
+    label:'drying and smoking rack', sleepers:0, protect:0, role:'work',
+    blurb:'An open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.',
+  }),
 };
 
 /** every kind of building a household can live in */
@@ -311,6 +319,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   granary: 0.0012,
   bakery: 0.0014,
   hall: 0.0012,
+  food_rack: 0.0015,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */

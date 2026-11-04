@@ -206,7 +206,7 @@ describe('the lab will not mix one generation of rules with another', () => {
   it('will not mix a pinned earlier version with current results, either way round', () => {
     const current = dir(rows('rich', CURRENT_RULES_VERSION, true));
     try {
-      expect(checkResumable(current, ['meadow'], 'rich', false, true, 118)).toMatch(/rules version 121.*requested rich, rules version 118/);
+      expect(checkResumable(current, ['meadow'], 'rich', false, true, 118)).toMatch(new RegExp(`rules version ${CURRENT_RULES_VERSION}.*requested rich, rules version 118`));
     } finally {
       rmSync(current, { recursive: true, force: true });
     }

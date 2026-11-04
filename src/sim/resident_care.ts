@@ -42,7 +42,7 @@ function residentCareOption(ctx:Ctx,q:Pick<Person,'id'|'name'>):boolean{
  if(blocked){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,blocked,'care');return true;}
  if(!room.hungry&&!room.thirsty)return true;
  const items:Items={};
- if(room.hungry){const k=(['berries','fruit','grain','fish','bread','meat'] as ItemKind[]).find(k=>available(world,p,q.id,k)>=1);if(k)items[k]=Math.min(2,available(world,p,q.id,k));}
+ if(room.hungry){const k=(['berries','fruit','grain','fish','bread','meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]).find(k=>available(world,p,q.id,k)>=1);if(k)items[k]=Math.min(2,available(world,p,q.id,k));}
  if(room.thirsty&&available(world,p,q.id,'water')>=1)items.water=1;
  if(!Object.keys(items).length){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,'must keep supplies for my own needs, others or promises','care');careSupplyOptions(ctx,q,room.hungry,room.thirsty,wh.tick);return true;}
  const kin=p.relations[q.id]?.kin,family=kin==='child'||kin==='parent'||kin==='partner',base=42*traitMods(p).give;

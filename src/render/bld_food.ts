@@ -8,6 +8,20 @@ import type { Roof } from './bld_common';
 import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
+/** Paid rack/pit structure only. Actual food and burning are drawn from state. */
+export function foodRackSprite(cache:SpriteCache):Sprite {
+  return cache.get('food_rack',160,130,80,88,ctx=>{
+    const p=mk(2,2);
+    groundShadow(ctx,55,22,0.25,4);
+    for(const x of [0.25,1.75])for(const y of [0.3,1.25])
+      line(ctx,p(x,y),p(x,y,30),'#76543c',4);
+    for(const y of [0.3,0.75,1.25])line(ctx,p(0.25,y,30),p(1.75,y,30),'#a28256',3);
+    const pit=p(1.05,1.6);
+    ellipse(ctx,pit[0],pit[1],18,7,'#77746c');
+    ellipse(ctx,pit[0],pit[1]-1,13,4,'#302b28');
+  });
+}
+
 // ───────────────────────────── granary (2 x 2) ─────────────────────────────
 export const GRANARY = { legs: 19, floor: 21, bin: 56, ridge: 96, x0: 0.15, x1: 1.85, y0: 0.15, y1: 1.85 } as const;
 

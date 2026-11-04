@@ -1,4 +1,6 @@
 import {hasProjectAcquire} from './project_acquire';
+import {hasPreservation} from './preservation';
+import {PRESERVED_FOODS} from './constants';
 import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
 import {foodUnits} from './economy';
 import {carryCap} from './people';
@@ -78,6 +80,8 @@ interface Fac {
 /** Could this person plausibly use that workplace? Judged from what they know of who it belongs to. */
 function mayUseBelief(ctx: Ctx, b: Belief): boolean {
   if (b.hh === 0 || b.hh === ctx.p.hhId) return true;
+  // New preservation decisions cannot read a remote workshop's current builder ledger.
+  if(b.btype==='food_rack')return friendlyTo(ctx,b.hh??-1)>=12;
   const real = ctx.world.byId.get(b.id);
   if (real && real.ent === 'building' && (real.ops?.builders[ctx.p.hhId] ?? 0) >= 0.2) return true;
   return friendlyTo(ctx, b.hh ?? -1) >= 12;
@@ -87,6 +91,8 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
   const out: Fac[] = [];
   for (const b of beliefsByKind(ctx.p, ['building'])) {
     if (b.btype !== type) continue;
+    // All preservation planners share the same limit on remembered food stock.
+    if(type==='food_rack'&&ctx.world.tick-b.seen>DAY)continue;
     if (!mayUseBelief(ctx, b)) continue;
     out.push({ b, type, e: eta(ctx, b.x, b.y) });
   }
@@ -314,6 +320,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
 function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
+  if(r.preservation&&!hasPreservation(ctx.world))return;
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
@@ -377,6 +384,11 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   const need: Items = {};
   for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
   for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
+  if(r.preservation){
+    const raw:ItemKind=r.inputs.fish?'fish':'meat';
+    const otherFood=foodUnits(p.inv)+foodUnits(b.items??{})-(b.items?.[raw]??0);
+    need[raw]=(need[raw]??0)+Math.max(0,2-otherFood);
+  }
   const short: Items = {};
   for (const k of Object.keys(need) as ItemKind[]) {
     const lack = unitsOf(need[k]) - stockAt(b, k);
@@ -469,27 +481,36 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
 function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null): number {
   if (item === 'cart') return 0;
   const { world, p } = ctx;
+  const rememberedOnly=dest?.btype==='food_rack';
   const found: { b: Belief; n: number; e: number }[] = [];
   for (const b of beliefsByKind(p, ['building', 'pile', 'cart'])) {
     if(!mayTakeKnownPile(p,b))continue;
     if (dest && b.id === dest.id) continue;
+    if(rememberedOnly&&world.tick-b.seen>DAY)continue;
     let n = stockAt(b, item);
     if (b.kind === 'building') {
       if (b.btype === 'granary') {
         // only the household's own share may be drawn out for its own purposes
-        const real = world.byId.get(b.id);
-        const share = real && real.ent === 'building' ? (real.ops?.shares[p.hhId]?.[item] ?? 0) : 0;
-        n = Math.min(n, share);
+        if(rememberedOnly){
+          if(b.hh!==0&&b.hh!==p.hhId)continue;
+        }else{
+          const real = world.byId.get(b.id);
+          const share = real && real.ent === 'building' ? (real.ops?.shares[p.hhId]?.[item] ?? 0) : 0;
+          n = Math.min(n, share);
+        }
       } else if (b.btype && isFacilityType(b.btype as BuildingType)) {
-        if (!mayUseBelief(ctx, b)) continue;
+        if (!(rememberedOnly?(b.hh===0||b.hh===p.hhId||friendlyTo(ctx,b.hh??-1)>=12):mayUseBelief(ctx, b))) continue;
         // a batch of mine that will be ready by the time I arrive counts
         const snap = b.ops;
         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
       } else if (b.btype === 'storehouse') {
         // everyone's
       } else if (b.hh !== p.hhId) continue;
-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries' || item === 'meat') {
+      else if (!rememberedOnly && (foodUnits({[item]:1})>0 || item === 'flour')) {
         // the household's own food is not to be spent making things unless there is plenty
+        // Preservation moves raw food into another edible form. Its own surplus
+        // and start checks retain two immediate meals, including those carried
+        // from this home; the general reserve floor would prevent that trip.
         const hs = hhState(ctx);
         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
       }
@@ -568,6 +589,17 @@ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && f
 export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
+  if(hasPreservation(world)){
+    const raw=preservationSurplus(ctx);
+    // A finite food job belongs to the same planner as other workshop batches.
+    // Adopt only with immediate meals already held or seen at the workbench;
+    // the compiler still has to find the actual recipe inputs and fuel.
+    const rack=facilitiesOf(ctx,'food_rack').find(f=>world.tick-f.b.seen<=DAY&&foodUnits(p.inv)+foodUnits(f.b.items??{})>=4);
+    if(raw&&rack){
+      const item=`${world.weather.rain>0.1?'smoked':'dried'}_${raw}` as ItemKind;
+      out.push({item,qty:2,have:p.inv[item]??0,base:27,why:'keep spare food for later meals',tag:'food'});
+    }
+  }
   const grouped: Record<string, { n: number; base: number; why: string; tag: string; siteId?: number }> = {};
   for (const n of materialNeeds(ctx)) {
     if (!PROCESSED.includes(n.item) && !quarryAware(ctx, n.item)) continue;
@@ -750,9 +782,9 @@ function optGranaryStore(ctx: Ctx): void {
   const keep = winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3;
   const items: Items = {};
   let n = 0;
-  for (const k of ['grain', 'flour', 'bread'] as ItemKind[]) {
+  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat'] as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
-    const give = k === 'grain' ? Math.max(0, have - keep) : have;
+    const give = k === 'grain'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
     if (give >= (winter ? 1 : 2)) {
       items[k] = give;
       n += give;
@@ -939,6 +971,8 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   const knowRocks = countBeliefsOfKind(p, 'rock') + countBeliefsOfKind(p, 'outcrop') >= 1;
   if (!knowTrees || !knowRocks) return out;
   const hs = hhState(ctx);
+  if(hasPreservation(world)&&!knowsEnough(ctx,'food_rack')&&preservationSurplus(ctx))
+    out.push({type:'food_rack',signal:0.9,why:'spare fish or meat could be kept for later meals'});
   const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
   const wish = upgradeWish(ctx);
   const haveYard = knowsOfAny(ctx, 'timber_yard');
@@ -1020,7 +1054,7 @@ function optPlanFacilities(ctx: Ctx): void {
   if (!hh || ctx.stage === 'child') return;
   if (world.settings.scene !== 'natural') return; // new projects are an ordinary-world decision; staged scenes stay as staged
   if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28 || ctx.drives.energy > 40) return;
-  if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // first things first: a proper roof, for this household and (as far as they know) for others
+  if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // establish shelter before adding a workplace
   if (beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length < 2) return;
   if (projectsUnderWay(world, false, settlementAnchor(ctx)) >= projectLimit(world)) return;
   if (beliefsByKind(p, ['site']).some((s) => s.hh === hh.id && s.btype && isFacilityType(s.btype as BuildingType))) return;
@@ -1147,6 +1181,46 @@ function optPlanUpgrade(ctx: Ctx): void {
   });
 }
 
+/** Only fresh personal sightings of accessible stocks justify preparation. */
+export function preservationSurplus(ctx:Ctx):'fish'|'meat'|null {
+  const stocks=[ctx.p.inv,...beliefsByKind(ctx.p,['building']).filter(b=>
+    ctx.world.tick-b.seen<=DAY && (b.hh===ctx.p.hhId||b.hh===0)).map(b=>b.items??{})];
+  const food=stocks.reduce((n,s)=>n+foodUnits(s),0);
+  if(food<4)return null;
+  for(const raw of ['fish','meat'] as const)if(stocks.reduce((n,s)=>n+(s[raw]??0),0)>=2)return raw;
+  return null;
+}
+
+function preservationOptions(ctx:Ctx):void {
+  if(!hasPreservation(ctx.world))return;
+  const first=ctx.options.length;
+  const racks=facilitiesOf(ctx,'food_rack');
+  for(const f of racks){
+    if(ctx.world.tick-f.b.seen>DAY)continue;
+    // Collection and resumption do not require another raw surplus.
+    const goods:Items={};
+    let room=carryCap(ctx.world,ctx.p)-weightOf(ctx.p.inv),waiting=0;
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const){
+      const stock=f.b.items?.[k]??0;waiting+=stock;
+      const n=Math.min(2,stock,Math.max(0,Math.floor(room/WEIGHT[k])));
+      if(n>0){goods[k]=n;room-=n*WEIGHT[k];}
+    }
+    if(foodUnits(goods)>0)collectLeaf(ctx,f.b,goods,28,'bring preserved food back for meals','food');
+    else if(waiting>0)addBlocked(ctx,'withdraw','Collect preserved food',f.b.id,'no room to carry the preserved food','food');
+    const running=f.b.ops?.job ? RECIPE_BY_ID[f.b.ops.job] : undefined;
+    if(running?.preservation&&f.b.ops!.progress<1){
+      planRecipe(ctx,f,running,Object.keys(running.outputs)[0] as ItemKind,2,27,'finish preserving the paid batch','food',0);
+      continue;
+    }
+    const raw=preservationSurplus(ctx);
+    if(!raw||waiting>0)continue;
+    const method=ctx.world.weather.rain>0.1?'smoke':'dry';
+    const r=RECIPE_BY_ID[`${method}_${raw}`];
+    planRecipe(ctx,f,r,Object.keys(r.outputs)[0] as ItemKind,2,27,'keep spare food for later meals','food',0);
+  }
+  for(let j=first;j<ctx.options.length;j++)ctx.options[j].preservesFood=true;
+}
+
 // ───────────────────────── entry point ─────────────────────────
 export function productionOptions(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -1154,12 +1228,13 @@ export function productionOptions(ctx: Ctx): void {
   if (!workRules(world.settings.scene)) return; // staged scenes stay exactly as staged
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
+  preservationOptions(ctx);
   if(hasMealLeftovers(world)){
     // Only personally seen/heard household holdings; no lookup of a remote meal table.
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
     for(const b of known.slice(0,2)){
       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
-      for(const k of ['bread','meat','fish','fruit','grain','berries'] as const){
+      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as const){
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }
@@ -1172,7 +1247,7 @@ export function productionOptions(ctx: Ctx): void {
     if(fires.length&&(!duty||fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1))collectOptions(ctx,'offcuts',(duty?1:4)-fuelAvailable(world,p,'offcuts'),duty?48:24+6*p.traits.generosity,duty?`reuse known offcuts for the fire I promised to keep (#${duty.id})`:'reuse known offcuts to keep a low fire burning','fire',null);
   }
   const demands = demandsOf(ctx);
-  for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+  for (const d of demands) if(!PRESERVED_FOODS.some(k=>k===d.item)) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
   projectOptions(ctx);
   optGranaryStore(ctx);
   optTendGranary(ctx);
@@ -1205,7 +1280,7 @@ function projectOptions(ctx:Ctx):void{
    if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0,0,undefined,ready);
   }
   if(step.phase==='craft')scratch.toolWanted={kind:item as ToolKind,for:i.goal,required:true};
-  if(step.phase==='wait')addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
+  if(step.phase==='wait'&&!RECIPE_BY_ID[n.recipe]?.preservation)addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
    make:()=>newActivity(ctx.world,ctx.p,{kind:'rest',label:'Waiting for my batch',goal:step.reason,targetId:step.target,here:true,amount:step.wait,utility:base,minCommit:10,maxTicks:step.wait+20,data:{projectWait:true,forPlan:i.id}})});
   if(step.phase==='blocked')addBlocked(scratch,'operate',i.goal,step.target,step.reason,tag);
   if(scratch.toolWanted)ctx.toolWanted=scratch.toolWanted;

@@ -31,6 +31,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** Derived preparation step that can serve an existing food-reserve intention. */
+  preservesFood?: boolean;
   /** Material work serving this particular known construction site, when applicable. */
   purposeSite?: number;
   /** A legal preparation for this personally known work option (derived, never saved as executable code). */
@@ -99,7 +101,7 @@ export interface Ctx {
   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
 }
 
-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain'];
+const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
 
 export function foodCount(inv: Person['inv']): number {
   let n = 0;

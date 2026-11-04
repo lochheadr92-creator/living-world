@@ -1,0 +1,32 @@
+{
+  "source": {
+    "head": "61cb6e5139adbedfd52f463fc635a90d4172327b",
+    "rules": 122,
+    "content": "ace298d81a94c3b05816c46cd6a0c4a5127965838e1bf03efbd58e8801225f12",
+    "note": "Recorded before any successor behaviour; paid preservation and ordinary continuation"
+  },
+  "ordinary": {
+    "saved": "94a74545cd67a8c38dd9e3d239b2bc8c20e37eb6df5e69adf3ac2d0c99d41d1a",
+    "uninterrupted": "6d4b02e93de414b57b768c2eaf985c0b75908612f0b360eab22a73f01cfaa876",
+    "continued": "6d4b02e93de414b57b768c2eaf985c0b75908612f0b360eab22a73f01cfaa876"
+  },
+  "work": {
+    "saved": "7dd689f694be25eef5c25c2af6e6a9464930d95bfb681bd68a9fd863e0e5e947",
+    "uninterrupted": "22958e7c1eba51a740bf77bf2a5da95040e4261df0bc3c22d023e87ed10cd3f1",
+    "continued": "22958e7c1eba51a740bf77bf2a5da95040e4261df0bc3c22d023e87ed10cd3f1"
+  },
+  "processing": {
+    "saved": "8899ca69e8b40a9c20a8e69975acbe0214ebc5f38c7ab6acc56e431a74d664f6",
+    "uninterrupted": "5aa451b546a9c5c5f7f870cbb05f6224db8cb636c0fae54c86f5879177643fdc",
+    "continued": "5aa451b546a9c5c5f7f870cbb05f6224db8cb636c0fae54c86f5879177643fdc"
+  },
+  "drying": {
+    "saved": "5aa451b546a9c5c5f7f870cbb05f6224db8cb636c0fae54c86f5879177643fdc",
+    "uninterrupted": "4d9f5964f2634d4f0eb700241587c5f71318ceea94ae4748183833a9e39c6ab0",
+    "continued": "4d9f5964f2634d4f0eb700241587c5f71318ceea94ae4748183833a9e39c6ab0"
+  },
+  "output": {
+    "driedFish": 2,
+    "smokedMeat": 2
+  }
+}

@@ -1,4 +1,5 @@
 import { constructionAftermath } from './achievement';
+import {losePreservationRack} from './preservation';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
@@ -235,6 +236,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
 }
 
 export function destroyBuilding(world: World, b: Building, why: string): void {
+  losePreservationRack(world,b);
   unregisterBuilding(world, b);
   evacuateHome(world, b);
   const scatter: Items = cloneItems(b.store.items);

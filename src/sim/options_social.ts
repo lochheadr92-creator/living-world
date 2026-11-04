@@ -27,7 +27,7 @@ import { companyPull } from './lifechanges';
 import { crewMates } from './crews';
 import { quarrelsFor } from './mediation';
 import { childrenNeedingWatch, laidUp } from './responsibilities';
-import { BUILD_DEF } from './constants';
+import { BUILD_DEF, PRESERVED_FOODS } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
 import type { Ctx, Option } from './optutil';
@@ -458,7 +458,7 @@ function optOffer(ctx: Ctx): void {
     const needFood = c.s.hungry;
     const needWater = c.s.thirsty;
     if (!needFood && !needWater) continue;
-    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain') && !c.s.child && !c.s.hurt) {
+    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain' || PRESERVED_FOODS.some(f=>f===k)) && !c.s.child && !c.s.hurt) {
       // they have food of their own; they just have not eaten yet
       if (needFood && !needWater) continue;
     }
@@ -615,7 +615,7 @@ function optTrade(ctx: Ctx): void {
   if (!want) return;
   // what can I spare?
   const spare: { item: ItemKind; n: number }[] = [];
-  for (const k of ['berries', 'fruit', 'fish', 'grain', 'wood', 'stone', 'water'] as ItemKind[]) {
+  for (const k of ['berries', 'fruit', 'fish', 'grain', 'wood', 'stone', 'water', ...PRESERVED_FOODS] as ItemKind[]) {
     if (k === want.item) continue;
     const s = surplusOf(world, p, k);
     if (s >= 2) spare.push({ item: k, n: s });

@@ -33,6 +33,7 @@ import {waterSearchOn,setWaterSearch} from '../../src/sim/water_search';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
+import {preservationOn,setPreservation} from '../../src/sim/preservation';
 import { waterBudgetEnabled, setWaterBudget } from '../../src/sim/hydrology';
 import { ecologyEnabled, setEcology } from '../../src/sim/ecology';
 import {buildPromiseSettlementOn,setBuildPromiseSettlement} from '../../src/sim/promise_knowledge';
@@ -127,7 +128,7 @@ import { SOURCE_SKILL } from '../../src/sim/constants';
 import type { FoodKind } from '../../src/sim/types';
 
 /** what counts as food when a store is weighed up; the same list provision.ts uses */
-const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
+const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
 import type { Activity, Person } from '../../src/sim/types';
 import { cartFirstOn, setCartFirst } from '../../src/sim/cart_priority';
 import { setMoodEffects } from '../../src/sim/mood';
@@ -404,6 +405,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-meeting-knowledge')return {spec:label,summary:'retain shared-status meal decisions; remove private heard appointments and replacement invitations',install(){const was=meetingKnowledgeOn();setMeetingKnowledge(false);return ()=>setMeetingKnowledge(was);}};
   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};
+  if(kind==='rich-no-preservation')return {spec:label,summary:'disable preservation decisions and new batches; keep food properties and existing paid contents',install(){const was=preservationOn();setPreservation(false);return ()=>setPreservation(was);}};
   if(kind==='rich-no-water-budget')return {spec:label,summary:'remove finite natural supply, weather accounting and personal dry-water responses',install(){const was=waterBudgetEnabled();setWaterBudget(false);return ()=>setWaterBudget(was);}};
   if(kind==='rich-no-ecology')return {spec:label,summary:'remove persistent productive condition, observation and field rest',install(){const was=ecologyEnabled();setEcology(false);return ()=>setEcology(was);}};
   if(kind==='rich-no-promise-delays')return {spec:label,summary:'remove active-promise delay explanations and one bounded deadline negotiation',install(){const was=promiseDelaysOn();setPromiseDelays(false);return ()=>setPromiseDelays(was);}};

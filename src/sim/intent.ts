@@ -1,4 +1,5 @@
 import {recordNightShelter} from './night_experience';
+import {stockPreservationOption,hasPreservation} from './preservation';
 import {hasLivedLife} from './lived_life';
 import {toolCapacityBlock} from './tool_feasibility';
 import {alreadyPreparingHandTool} from './project_hand_inputs';
@@ -549,7 +550,7 @@ function repairStep(ctx: Ctx, i: Intention): Step {
 }
 
 /**
- * A food reserve has two steps and no third: gather food, or take what is carried home. Which one it is depends only on what
+ * A food reserve gathers food or takes what is carried home; current rules can prepare known spare food first. Which step applies depends on what
  * the person is carrying, because the deposit option needs a surplus over what they keep back for themselves
  * (options_work.ts optDepositFood keeps 2 or 3) and offering a trip home with two berries in the pack would be a waste of an
  * afternoon.
@@ -572,6 +573,9 @@ function stockStep(ctx: Ctx, i: Intention): Step {
   if (g && (p.inv.grain ?? 0) >= GRANARY_TRIP) {
     return { kind: 'store', target: g.id, item: 'grain', step: `take the grain to the granary (${short} more to put by)`, key: `bring:${g.id}:grain`, blocked: '' };
   }
+  const preparation=stockPreservationOption(ctx);
+  if(preparation)return {kind:'make',target:preparation.targetId,item:null,
+    step:`${preparation.label.toLowerCase()} for the food reserve`,key:preparation.key,blocked:''};
   if (foodToStore(p) >= (hasLivedLife(world)?1:CARRY_TO_STORE)) {
     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
   }
@@ -900,7 +904,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
     // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
-    if (i.kind !== 'batch' && i.kind !== 'journey') {
+    if (i.kind !== 'batch' && i.kind !== 'journey' && !(i.kind==='stock'&&hasPreservation(world))) {
       if (i.aboutId && n.target && i.aboutId !== n.target) {
         // two quite different things: the old one stopped being a shelter they know of, or a better one turned up
         const stillKnown = shelters(ctx).some((s) => s.id === i.aboutId);

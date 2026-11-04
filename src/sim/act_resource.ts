@@ -1,4 +1,5 @@
 import {pileAccessBlocker} from './pile_access';
+import {runsPreservation} from './preservation';
 import {saveSeedFromGrain} from './wild_seed';
 import { harvestPressure } from './ecology';
 import { hasFloodAccess } from './flood';
@@ -255,7 +256,9 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   const from = table ?? p.inv;
   // rules 46: a bite taken at the granary's bins is a bite out of the household's share (or the ration), and stops at it
   const store = a.data.table ? world.byId.get(a.targetId) : undefined;
-  const bins = !!store && store.ent === 'building' && store.type === 'granary' && hasWinterReserve(world);
+  const rack = !!store&&store.ent==='building'&&store.type==='food_rack'&&runsPreservation(world);
+  const bins = !!store && store.ent === 'building' && (store.type === 'granary' && hasWinterReserve(world) || rack);
+  if(bins&&runsPreservation(world)&&withdrawAllowance(world,store,p,k,1)<1)return a.cycle>0?'done':'fail:the food is no longer ours to take';
   if (bins && ((a.data.ration as number) ?? 0) < 1) return a.cycle > 0 ? 'done' : 'fail:nothing of ours left in the bins';
   const eaten = consume(world, from, k, 1, 'eaten');
   if (bins && eaten > 0) {
@@ -275,7 +278,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
     if (lim.portions !== undefined && a.cycle >= lim.portions) return 'done';
     if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
   }
-  const next = pickFood(from, p.needs.hunger);
+  const next = pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger);
   const keepFood = (a.data.keep as number) ?? 0;
   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);
   if (!next || p.needs.hunger >= 88 || (keepFood > 0 && foodLeft <= keepFood && p.needs.hunger > 55)) return 'done';
@@ -312,14 +315,15 @@ registerHandler('eat_store', {
     let want = Math.ceil((92 - p.needs.hunger) / 18);
     // rules 46: at a granary the meal is bounded by the household's share or the emergency ration (facilities.ts), checked unit by
     // unit against the bins as they are now, and each unit taken is booked against the share
-    const bins = e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world);
+    const bins = e.ent === 'building' && (e.type === 'granary' && hasWinterReserve(world) || e.type==='food_rack'&&runsPreservation(world));
     // the allowance is asked once per kind, for the whole meal, and spent unit by unit: the emergency ration is a ration, not a
     // right renewed with every bite
     const budget: Partial<Record<ItemKind, number>> = {};
     const allowed = (k: ItemKind): number => (budget[k] ??= bins && e.ent === 'building' ? withdrawAllowance(world, e, p, k, want) : want);
+    const mealFood=(hunger:number)=>pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(items).filter(([key])=>allowed(key as ItemKind)>=1)):items,hunger);
     let tookAny = false;
     for (let guard = 0; guard < 12 && want > 0; guard++) {
-      const k = pickFood(items, p.needs.hunger + (a.cycle * 14));
+      const k = mealFood(p.needs.hunger + (a.cycle * 14));
       if (!k) break;
       if (bins && allowed(k) < 1) break;
       const got = transfer(world, items, p.inv, carryCap(world, p), k, 1, e.ent === 'building' ? 'building:' + e.id : 'pile:' + e.id, 'person:' + p.id, 'eat from store');
@@ -335,7 +339,7 @@ registerHandler('eat_store', {
     if (!tookAny) {
       // Version 9: nothing could be moved into the pack. If that is because the pack is full and the store DOES hold food, the
       // meal is eaten at the store (tableeating.ts); the store is not written off, because it is not empty.
-      const k = eatsAtTheStore(world) ? pickFood(items, p.needs.hunger) : null;
+      const k = eatsAtTheStore(world) ? mealFood(p.needs.hunger) : null;
       if (k && (!bins || allowed(k) >= 1)) {
         a.data.table = true;
         a.data.food = k;

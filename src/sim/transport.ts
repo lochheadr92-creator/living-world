@@ -27,7 +27,7 @@ import type { BuildingType, ItemKind } from './types';
 import { addOption, beliefsByKind } from './optutil';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 import { newActivity } from './activities';
-import { BUILD_DEF, CARRY_CAP, DAY, WEIGHT } from './constants';
+import { BUILD_DEF, CARRY_CAP, DAY, WEIGHT, PRESERVED_FOODS } from './constants';
 import { isRich } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { cartLoaded } from './carts';
@@ -49,7 +49,7 @@ export const HAUL_WINDOW = DAY * 6;
 export const HAUL_EXPERIENCE = 30;
 export const HAUL_TRIPS = 6;
 /** food the home store takes from a cart, the kinds a reserve is made of */
-const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'berries'];
+const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'berries', ...PRESERVED_FOODS];
 
 let enabled = true;
 export const transportOn = (): boolean => enabled;

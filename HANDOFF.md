@@ -1,3 +1,12 @@
+# Survival continuation — 4 November 2026
+
+Current work is in `living-world-integrate`, main, base `61cb6e5`.
+See [SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md) and the current
+entry in [CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
+Rules 122 preservation has bounded ordinary activation; all seven families
+are authorised, with body reserves last. Full-command baseline failures are
+retained and documented. Next is indoor heating; aggregate benefit is unmeasured.
+
 # Codex integration checkpoint (2026-10-27)
 
 Current integration is rules 31: individual work tastes from `codex/game-inspired-slices`

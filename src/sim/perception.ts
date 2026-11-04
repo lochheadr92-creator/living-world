@@ -38,7 +38,7 @@ export function senseRadius(world: World, p: Person): number {
   return r;
 }
 
-const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
+const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
 
 function describeSeenPerson(world: World, e: Person): SeenEntity {
   const carrying: ItemKind[] = [];

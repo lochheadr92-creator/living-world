@@ -8,6 +8,7 @@ import type { Section } from '../sim/inspect_work';
 import { agoText, secondsText } from '../sim/inspect';
 import { weightOf } from '../sim/economy';
 import { RECIPE_BY_ID, recipesAt } from '../sim/recipes';
+import {preservationWorkers} from '../sim/preservation';
 import type { Building, BuildingType, Cart, Entity, ItemKind, Person, Site, SourceType, World } from '../sim/types';
 import { ITEM_COLORS } from '../render/palette';
 import { cap, h, KeyedList, legible, round1, setHidden, setText, toggle } from './dom';
@@ -45,6 +46,7 @@ const SOURCE_ICON: Record<SourceType, IconName> = {
 };
 
 const BUILDING_ICON: Record<BuildingType, IconName> = {
+  food_rack: 'fish',
   lean_to: 'home',
   hut: 'home',
   house: 'house',
@@ -409,6 +411,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
 
   // ───────── workshop ─────────
   function recentWorkers(world: World, b: Building): string[] {
+    if(b.type==='food_rack')return preservationWorkers(world,b).map(p=>p.name);
     const ops = b.ops;
     if (!ops) return [];
     const names: string[] = [];
@@ -439,14 +442,20 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
         pctText = `${Math.round(frac * 100)}%`;
         barColor = 'var(--good)';
         if (!recentWorkers(world, b).length) notes.push('Nobody is working on it right now.');
-        if (r.burn > 0) notes.push(`When the work is done it burns for about ${secondsText(r.burn)} with nobody needed.`);
+        if (r.burn > 0) notes.push(r.preservation === 'dry'
+          ? `After preparation it needs about ${secondsText(r.burn)} of dry weather.`
+          : `When the work is done it burns for about ${secondsText(r.burn)} with nobody needed.`);
       } else if (job.phase === 'burn') {
         // the fire does the work now: the bar shows how far it has burned
         frac = job.burnTotal > 0 ? 1 - Math.max(0, job.burnLeft) / job.burnTotal : 1;
         pctText = `${Math.round(frac * 100)}%`;
-        barColor = TONE.fire;
-        state = `${r.doing} (burning)`;
-        notes.push(`The fire is burning on its own; about ${secondsText(Math.max(0, job.burnLeft))} to go. Nobody has to stand there.`);
+        barColor = r.preservation === 'dry' ? 'var(--good)' : TONE.fire;
+        state = `${r.doing} (${job.blocked ? 'paused' : r.preservation === 'dry' ? 'drying' : 'burning'})`;
+        if (job.blocked) notes.push(job.blocked+'.');
+        notes.push(r.preservation === 'dry'
+          ? `About ${secondsText(Math.max(0, job.burnLeft))} of dry weather remains. Nobody has to stand there.`
+          : r.preservation && job.blocked ? `About ${secondsText(Math.max(0, job.burnLeft))} of processing remains after the blockage is resolved.`
+          : `The fire is burning on its own; about ${secondsText(Math.max(0, job.burnLeft))} to go. Nobody has to stand there.`);
       } else {
         frac = 1;
         pctText = 'done';

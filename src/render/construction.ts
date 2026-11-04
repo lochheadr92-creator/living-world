@@ -38,6 +38,7 @@ interface Spec {
 }
 
 const SPEC: Record<BuildingType, Spec> = {
+  food_rack: {frame:'posts',gable:false,footing:'none',reveal:0.3},
   lean_to: { frame: 'poles', gable: false, footing: 'none', reveal: 0.3 },
   hut: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
   house: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.22 },

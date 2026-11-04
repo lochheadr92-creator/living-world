@@ -1,5 +1,14 @@
 # Dependency-chain programme register
 
+**Survival assignment, 4 November 2026 — in progress:** the active integration
+checkout was verified at main `61cb6e5`, rules 121. Candidate rules 122 implements
+the first stream, preservation. Scope, ownership, evidence and remaining work for
+all seven authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
+Rules 122 has bounded ordinary fish-preservation use in forest and null use in
+river; existing full-suite/typecheck failures remain reported. The revised owner
+attachment authorises body reserves last. Later streams and aggregate survival
+benefit remain pending. The historical branch notes below retain their original scope.
+
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
 recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
 repair checkpoint; it does not close the wider repair/autonomy programme. Rendered

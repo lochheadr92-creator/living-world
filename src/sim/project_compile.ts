@@ -33,7 +33,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:Math.max(0,(p.inv[item]??0)-reservedFor(world,p,item)+(ownPlan?.wants[item]??0));
   if(shelf+held>=quantity)return node.id;
   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.
-  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour'].includes(item)){
+  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'].includes(item)){
    const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&(b.items?.[item]??0)>=quantity&&
     (b.btype==='storehouse'||(b.hh===p.hhId&&isHomeType(b.btype))||!!b.btype&&facilitiesOf(ctx,b.btype as BuildingType).some(f=>f.b.id===b.id)));
    if(stored){node.method='supply';return node.id;}

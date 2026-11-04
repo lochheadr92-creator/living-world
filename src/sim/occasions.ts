@@ -1,4 +1,6 @@
 import { deceasedById } from './historical_index';
+import {runsPreservation} from './preservation';
+import {PRESERVED_FOODS} from './constants';
 import { continuingOccasion } from './occasion_participation';
 import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
@@ -288,7 +290,8 @@ const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood'
 export function marketSwap(world: World, p: Person, o: Occasion): boolean {
   if(hasLocalMarket(world)&&(o.kind!=='market'||!presentAt(world,p,o)))return false;
   // what I am short of, dearest first
-  const wants = BARTER.filter((k) => (p.inv[k] ?? 0) < 2)
+  const goods=runsPreservation(world)?[...BARTER,...PRESERVED_FOODS]:BARTER;
+  const wants = goods.filter((k) => (p.inv[k] ?? 0) < 2)
     .map((k) => ({ k, v: valueOf(world, p, k) }))
     .sort((a, b) => b.v - a.v)
     .slice(0, 4);
@@ -299,7 +302,7 @@ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
     // what of mine would they take for it? the thing they value most that I can spare
     let give: ItemKind | null = null;
     let gain = 0;
-    for (const k of BARTER) {
+    for (const k of goods) {
       if (k === want || surplusOf(world, p, k) < 1) continue;
       const g = valueOf(world, q, k) - valueOf(world, q, want);
       if (g > gain) {

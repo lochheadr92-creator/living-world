@@ -90,8 +90,11 @@ registerHandler('operate', {
   work(world, p, a): WorkResult {
     const b = buildingOf(world, a);
     if (!b || !b.ops) return 'fail:the workplace is gone';
+    if(!b.ops.job&&RECIPE_BY_ID[String(a.data.running)]?.preservation)
+      return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker||'the paid batch is no longer available'}`;
     faceToward(p, a.tx, a.ty);
     const res = workJob(world, b, p);
+    if(res==='preservation_failed')return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker}`;
     if (res === 'missing_tool') {
       const kind = recipeOf(b.ops.job!).tool!.kind;
       const why = `needs a ${kind === 'pick' ? 'pickaxe' : kind}; the unfinished batch keeps its materials and progress`;
@@ -115,7 +118,7 @@ registerHandler('operate', {
     const r: Recipe | undefined = RECIPE_BY_ID[(a.data.running as string) ?? ''];
     if (a.cycle > 0 && r) {
       const left = b.ops?.job;
-      addLog(world, p, 'work', left ? `Worked on ${r.label} at the ${b.type.replace('_', ' ')} for a while (${detail}).` : `Finished ${r.label} at the ${b.type.replace('_', ' ')}.`);
+      addLog(world, p, 'work', left || r.preservation&&outcome!=='success' ? `Worked on ${r.label} at the ${b.type.replace('_', ' ')} for a while (${detail}).` : `Finished ${r.label} at the ${b.type.replace('_', ' ')}.`);
     } else if (outcome === 'failed') {
       addLog(world, p, 'work', `Could not start work at the ${b.type.replace('_', ' ')}: ${detail}.`);
     }

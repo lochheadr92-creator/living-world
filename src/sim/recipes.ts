@@ -45,11 +45,23 @@ export interface Recipe {
   serves: string[];
   /** why anyone would want this: shown in the inspector and the docs */
   benefit: string;
+  /** Bounded preservation process; only available under preservation rules. */
+  preservation?: 'dry' | 'smoke';
 }
 
 const none: Items = {};
 
 export const RECIPES: Recipe[] = [
+  ...(['fish', 'meat'] as const).flatMap(raw => (['dry','smoke'] as const).map((method):Recipe => ({
+    id:`${method}_${raw}`, label:`${method==='dry'?'dried':'smoked'} ${raw}`,
+    doing:`${method==='dry'?'Drying':'Smoking'} ${raw}`, at:'food_rack',
+    inputs:{[raw]:2}, fuel:method==='smoke'?{wood:1}:{}, work:60,
+    burn:method==='dry'?720:360,
+    outputs:{[`${method==='dry'?'dried':'smoked'}_${raw}`]:2}, waste:{}, wasteWhy:'',
+    skill:null, workers:1, serves:[`${method==='dry'?'dried':'smoked'}_${raw}`],
+    benefit:method==='dry'?'Two portions keep longer after drying in fair weather, with a small nutrition loss.':'Two portions keep longer after smoking over one delivered wood.',
+    preservation:method,
+  }))),
   {
     id: 'hew_planks',
     label: 'hewn planks',
@@ -293,7 +305,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -339,12 +351,14 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('water');
   }
   if (type === 'granary') {
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
     set.add('grain');
     set.add('flour');
     set.add('bread');
     set.add('seeds');
   }
   if (type === 'hall') {
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
     set.add('bread');
     set.add('fish');
     set.add('fruit');

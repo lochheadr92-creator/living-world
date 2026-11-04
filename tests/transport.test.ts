@@ -7,7 +7,9 @@ import { setExternalController } from '../src/sim/external';
 import { generateOptions, rankOptions } from '../src/sim/decision';
 import { stepWorld, hashWorld } from '../src/sim/world';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
-import { conservationReport, ledgerCreate } from '../src/sim/economy';
+import { conservationReport, ledgerCreate, snapshotInitial } from '../src/sim/economy';
+import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
+import {DAY} from '../src/sim/constants';
 import { observe } from '../src/sim/knowledge';
 import { perceive } from '../src/sim/perception';
 import { newCart, cartLoaded } from '../src/sim/carts';
@@ -89,6 +91,21 @@ function provisionScene(version: number) {
   perceive(w, ann);
   return { w, ann, ben, cal, hut, store, cart };
 }
+
+it('the existing winter reserve cart trip can carry preserved provisions home',()=>{
+  const {w,ann,ben,cal,hut,store,cart}=provisionScene(CURRENT_RULES_VERSION);
+  w.tick=DAY*6;ann.inv={grain:6};store.store.items={dried_fish:30};
+  for(const p of [ann,ben,cal]){observe(w,p,hut);observe(w,p,store);observe(w,p,cart);}
+  snapshotInitial(w);
+  reviewIntentions(generateOptions(w,ann,true));
+  const plan=ann.intentions.find(i=>i.kind==='stock')!;
+  expect(plan.cue).toBe('season');expect(plan.reserve).toBe(20);
+  expect(keys(w,ann).some(k=>k.includes(`cart:${cart.id}:home:${hut.id}:${store.id}`))).toBe(true);
+  run(w,ann,':home:');
+  expect(hut.store.items.dried_fish).toBeGreaterThan(0);
+  expect(plan.worked).toBeGreaterThan(0);expect(cartLoaded(cart)).toBe(false);
+  expect(conservationReport(w).ok).toBe(true);
+});
 
 it('a cart brings the reserve plan its food from the storehouse in one trip, credited to the plan where the fish actually move; not below rules 55', () => {
   const old = provisionScene(54);

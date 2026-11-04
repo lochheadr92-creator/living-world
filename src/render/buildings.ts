@@ -7,7 +7,7 @@ import type { Building, ItemKind } from '../sim/types';
 import { GRANARY } from './bld_food';
 import { stackSprite } from './goods';
 import type { StackKind } from './goods';
-import { SpriteCache, blit } from './sprites';
+import { SpriteCache, blit, ellipse, line } from './sprites';
 import { STRUCT, buildingLayers } from './structures';
 import type { BuildKind } from './structures';
 
@@ -72,6 +72,24 @@ export class BuildingPainter {
     } else if (slots) this.stock(ctx, b, slots, -1);
 
     this.wear(ctx, b, kind, x, y);
+    if(kind==='food_rack'){
+      const job=b.ops?.job;
+      const hanging=(job?.held.fish??0)+(job?.held.meat??0);
+      for(let i=0;i<hanging;i++){
+        const [fx,fy]=iso(b.x+0.65+i*0.45,b.y+0.75);
+        line(ctx,[fx,fy-29],[fx,fy-18],'#c3aa79',1);
+        ellipse(ctx,fx,fy-14,3,7,job?.recipe.includes('meat')?'#965c45':'#8fa7a2');
+      }
+      const stored=Object.entries(b.store.items).filter(([k])=>k.startsWith('dried_')||k.startsWith('smoked_')).reduce((n,[,v])=>n+(v??0),0);
+      for(let i=0;i<Math.min(stored,10);i++){
+        const [fx,fy]=iso(b.x+0.25+(i%4)*0.16,b.y+1.65+Math.floor(i/4)*0.12);
+        ellipse(ctx,fx,fy-3,4,2,'#9b704e');
+      }
+      if(job?.phase==='burn'&&job.recipe.startsWith('smoke_')){
+        const [fx,fy]=iso(b.x+1.05,b.y+1.6);
+        ellipse(ctx,fx,fy-3,6,2,'#d7793d');
+      }
+    }
 
     if (kind === 'storehouse') {
       const crates = Math.min(6, Math.ceil(weightOf(b.store.items) / 22));

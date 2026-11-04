@@ -1,4 +1,6 @@
 import { updateEcology } from './ecology';
+import {runsPreservation} from './preservation';
+import {PRESERVED_FOODS} from './constants';
 import { updateFlood } from './flood';
 import { updateWater } from './hydrology';
 import { retainOperationalMemory } from './memory_retention';
@@ -253,6 +255,16 @@ function roadsTick(world: World): void {
 /** Perishable goods slowly go off: an explicit, recorded process (never silent). */
 function spoilGoods(world: World): void {
   const rate = 0.011;
+  // New provisions also deteriorate while carried. Historical pack semantics
+  // are untouched; an empty new-kind holding consumes no random draw.
+  if(runsPreservation(world)){
+    const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
+    for(const items of holdings)for(const k of PRESERVED_FOODS){
+      const n=items[k]??0;let lost=0;
+      for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*spoilStore(world))lost++;
+      if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,'carried preserved food spoiled');}
+    }
+  }
   for (const b of world.buildings) {
     if (b.store.cap <= 0) continue;
     const bad = (b.condition < 40 ? 2 : 1) * spoilMultiplier(world, b);

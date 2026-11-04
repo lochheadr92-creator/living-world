@@ -1,5 +1,31 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Active survival continuation, 4 November 2026:** use
+`C:\dev\Claude Experiment\living-world-integrate`, main, base `61cb6e5`.
+Rules-122 preservation has paid drying/smoking, known surplus supply, existing
+reserve/batch plans, transport and actual eating. Full evidence and all seven
+currently authorised streams: [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
+The revised owner attachment in chat `01a1a465-bf07-75e1-8c93-84c5b2ee3919`
+explicitly includes body reserves last; the older six-stream restriction is superseded.
+
+Frozen check11 matches the current source. Both Normal arrivals-on 25-day worlds
+finished with exact twins, save continuation, pure observers and conservation.
+Forest made/ate two dried and two smoked fish; river produced none after a failed
+rack footprint claim. This is bounded activation, not a survival-benefit claim.
+Fresh focused tests: 35/35, four files, exit 0. Check11 full suite: 2,500 passed,
+31 failed, three expected failures; all 31 retained review failures reproduced on
+base source. Fresh typecheck/build both exit 2 on the two unchanged nullable review
+errors. Preserve these files. Logs: `survival_evidence/resume-20261104/`; full and
+ordinary evidence: `survival_evidence/check11/`. No long-run processes remain.
+
+Immutable rules-122 reference is recorded and passes; never overwrite it for a
+successor. Next stream: paid indoor hearth, fuel delivery and actual occupant
+heat/cooling, using existing construction and fuel owners. Then clothing,
+carcasses and deferred meat/hide/fat routes, traps/nets, domestic animals/wool,
+and finite paid reserves. Keep one behaviour stream at a time.
+Six earlier unpublished local commits predate this assignment; do not publish
+those implicitly. Existing unrelated untracked evidence remains untouched.
+
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
 recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
 repair checkpoint; it does not close the wider repair/autonomy programme. Rendered

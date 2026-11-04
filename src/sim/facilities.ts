@@ -1,10 +1,11 @@
 import { recordWorkshopOutput } from './settlement_economy';
+import {preservationStartBlocker,preservationCanAdvance,preservationReady} from './preservation';
 import { recoveredOffcuts } from './offcuts';
 import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
 import { runsRulesVersion } from './rulesversion';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
-import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
+import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom, foodUnits } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { newCart } from './carts';
 import { RECIPE_BY_ID, acceptedAt, isFacilityType, newOps, recipesAt } from './recipes';
@@ -347,6 +348,9 @@ function depositOf(world: World, b: Building): Source | null {
 
 /** Why this person cannot start this recipe here right now ('' if they can). The text is what the inspector shows. */
 export function startBlocker(world: World, b: Building, p: Person, r: Recipe, trial = false): string {
+  const accessibleFood=r.preservation?foodUnits(Object.fromEntries(Object.keys(b.store.items).map(k=>[k,usableUnits(world,b,p,k as ItemKind)]))):0;
+  const preservationBlock=preservationStartBlocker(world,p,r,accessibleFood);
+  if(preservationBlock)return preservationBlock;
   const ops = opsOf(b);
   if (!ops) return 'not a workplace';
   if (r.at !== b.type) return 'wrong kind of workplace';
@@ -390,6 +394,7 @@ function weightOfList(items: Items): number {
 
 /** Start a batch. Inputs and fuel leave the shelves (they still exist: they are held by the batch). Returns an error text or null. */
 export function startJob(world: World, b: Building, p: Person, r: Recipe, client: number, purpose: string, destSite = 0, trial = false): string | null {
+  if(r.preservation&&(!Number.isSafeInteger(client)||client<=0))return 'a preservation batch needs an identified owner';
   // rules 50: getting back to a batch under way is not starting one; the job stands as it is
   if (resumableJob(world, b, p, r)) return null;
   const why = startBlocker(world, b, p, r, trial);
@@ -438,8 +443,8 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
 export function joinBlocker(world: World, b: Building, p: Person): string {
   const job = b.ops?.job;
   if (!job) return 'nothing is being made';
-  if (job.phase !== 'work') return job.phase === 'burn' ? 'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
   const r = recipeOf(job);
+  if (job.phase !== 'work') return job.phase === 'burn' ? r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
   const technique = techniqueBlocker(world,p,r.id);
   if(technique)return technique;
   if (!mayUse(world, p, b)) return 'not theirs to use';
@@ -450,11 +455,15 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
 }
 
 /** One tick of work on the running batch. Returns whether it is still going. */
-export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' {
+export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' | 'preservation_failed' {
   const ops = b.ops;
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
+  if(r.preservation){
+    if(!mayUse(world,p,b)){ops.lastBlocker='the rack is no longer theirs to use';return 'preservation_failed';}
+    if(!preservationCanAdvance(world,b))return 'preservation_failed';
+  }
   if(techniqueBlocker(world,p,r.id)&&job.trial!==p.id)return 'stopped';
   const { tool } = recipeTool(world, p, b, r);
   // The last tick a tool survives is valid work. Once absent, paid inputs/progress wait for a replacement.
@@ -491,7 +500,7 @@ function endWorkPhase(world: World, b: Building): void {
     }
     job.phase = 'burn';
     job.burnLeft = r.burn;
-    addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
+    if(r.preservation!=='dry')addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
     return;
   }
   finishJob(world, b);
@@ -502,13 +511,13 @@ export function facilityTick(world: World, b: Building): void {
   const ops = b.ops;
   if (!ops) return;
   const job = ops.job;
-  if (job) {
+  if (job && preservationCanAdvance(world,b)) {
     if (job.phase === 'burn') {
       job.burnLeft--;
       if (job.burnLeft <= 0) finishJob(world, b);
     } else if (job.phase === 'ready') {
       if ((world.tick + b.id) % 30 === 0) finishJob(world, b);
-    } else if (job.phase === 'work' && world.tick - job.lastWork > STALL_LIMIT) {
+    } else if (job.phase === 'work' && !recipeOf(job).preservation && world.tick - job.lastWork > STALL_LIMIT) {
       shelveJob(world, b, 'nobody came back to it');
     }
   }
@@ -525,6 +534,8 @@ export function shelveJob(world: World, b: Building, why: string): void {
   const job = ops?.job;
   if (!ops || !job) return;
   const r = recipeOf(job);
+  // Perishable paid work cannot become fresh raw stock by cancellation.
+  if(r.preservation){job.blocked=why+'; the paid batch remains on the rack';ops.lastBlocker=job.blocked;return;}
   for (const k of Object.keys(job.held) as ItemKind[]) {
     const n = job.held[k] ?? 0;
     if (n <= 0) continue;
@@ -544,6 +555,7 @@ export function finishJob(world: World, b: Building): boolean {
   const job = ops?.job;
   if (!ops || !job) return false;
   const r = recipeOf(job);
+  if(!preservationReady(world,job,r))return false;
   const offcuts = recoveredOffcuts(world,r);
   const out = outputWeight(r,world);
   const freed = weightOfList(job.held) - (r.fromDeposit ? 0 : 0);

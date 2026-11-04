@@ -121,7 +121,7 @@ function thingStatus(world: World, e: Entity): string {
       if (job) {
         const r = RECIPE_BY_ID[job.recipe];
         const doing = r ? r.doing.toLowerCase() : 'at work';
-        if (job.phase === 'burn') return `${doing}: the fire is burning`;
+        if (job.phase === 'burn') return `${doing}: ${job.blocked || (r?.preservation === 'dry' ? 'drying in the air' : 'the fire is burning')}`;
         if (job.phase === 'ready') return `${doing}: waiting for room`;
         return `${doing} (${Math.round((job.progress / Math.max(1, job.total)) * 100)}%)`;
       }
