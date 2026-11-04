@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "ce3ac8de1ee15ba6ff11fb8a8af2a7b61e1b4e95",
+    "rules": 161,
+    "content": "63562658641032b34e6c6b662b0963dcea17c61f224c9a15db6297563caddbbc",
+    "note": "Recorded before successor behavior; ordinary river world, 7200 ticks, then 120 more after a save and load; a gather left for an empty place names it"
+  },
+  "saved": "af771deaa2faf47817bf25280381663cf20fb8a0d89d630333043b21e2c00047",
+  "continued": "33ae138c5993b8ea6d8c9708c8669d8133ec91b51df090584b77843a5d51f9a8"
+}
