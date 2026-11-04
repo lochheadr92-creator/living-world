@@ -229,8 +229,31 @@ export interface PersonView {
   family: { label: string; names: string[] }[];
   requests: RequestView[];
   memories: { when: string; text: string; kind: string }[];
-  knowledge: { places: number; seen: number; hearsay: number; stale: number; byKind: { kind: string; n: number }[] };
+  /** `told`: the most recently learned hearsay, labelled from the belief's own source, age and the listener's checks of
+   * that teller (Relation.accounts). Display only: nothing is stored or decided from it. */
+  knowledge: { places: number; seen: number; hearsay: number; stale: number; byKind: { kind: string; n: number }[]; told: { key: string; text: string; doubt: boolean }[] };
   speech: string | null;
+}
+
+/** Where the six most recently learned hearsay places came from: "told by Kai 2 days ago", with "who has been wrong
+ * before" only when this person has checked Kai's accounts and found some not borne out, and "old news" past the same
+ * 1,800-tick threshold the knowledge counts use. A pure read of the person's own beliefs and relations. */
+function toldProvenance(world: World, p: Person): { key: string; text: string; doubt: boolean }[] {
+  const out: { key: string; text: string; doubt: boolean }[] = [];
+  const told = Object.values(p.beliefs).filter((b) => b.src === 'told').sort((a, b) => b.learned - a.learned || b.id - a.id).slice(0, 6);
+  for (const b of told) {
+    const teller = world.byId.get(b.from);
+    const name = teller?.ent === 'person' ? teller.name : 'someone';
+    const days = Math.floor((world.tick - b.learned) / DAY);
+    const a = p.relations[b.from]?.accounts;
+    const wrong = !!a && a.checked > a.borneOut;
+    const noun = BELIEF_NOUN[b.kind as keyof typeof BELIEF_NOUN] ?? b.kind;
+    let text = `${noun}: told by ${name} ${days < 1 ? 'today' : days === 1 ? 'a day ago' : `${days} days ago`}`;
+    if (wrong) text += `, who has been wrong before (${a!.borneOut} of ${a!.checked} accounts borne out)`;
+    if (world.tick - b.seen > 1800) text += ' · old news';
+    out.push({ key: `${b.id}`, text, doubt: wrong });
+  }
+  return out;
 }
 
 const NEED_LABEL: Record<NeedKey, string> = { hunger: 'Food', thirst: 'Water', energy: 'Energy', warmth: 'Warmth', safety: 'Safety', social: 'Company' };
@@ -624,6 +647,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     else hearsay++;
     if (world.tick - b.seen > 1800) stale++;
   }
+  const told = toldProvenance(world, p);
 
   const view: PersonView = {
     id: p.id,
@@ -711,7 +735,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
       .slice(-14)
       .reverse()
       .map((l) => ({ when: agoText(world, l.tick), text: l.text, kind: l.kind })),
-    knowledge: { places, seen, hearsay, stale, byKind: Object.entries(byKind).map(([kind, n]) => ({ kind: BELIEF_NOUN[kind as keyof typeof BELIEF_NOUN] ?? kind, n })).sort((x, y) => y.n - x.n) },
+    knowledge: { places, seen, hearsay, stale, byKind: Object.entries(byKind).map(([kind, n]) => ({ kind: BELIEF_NOUN[kind as keyof typeof BELIEF_NOUN] ?? kind, n })).sort((x, y) => y.n - x.n), told },
     speech: p.speech && p.speech.until > world.tick ? p.speech.text : null,
   };
   return view;

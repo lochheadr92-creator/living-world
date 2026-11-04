@@ -2196,6 +2196,14 @@ button.row:hover {
   font-size: calc(11.5px * var(--viewer-text-scale, 1));
   color: var(--muted);
 }
+.know-told {
+  margin: 6px 0;
+  padding-left: 16px;
+  font-size: calc(11.5px * var(--viewer-text-scale, 1));
+}
+.know-told-row.doubt {
+  color: var(--warn, var(--muted));
+}
 .chips {
   display: flex;
   flex-wrap: wrap;

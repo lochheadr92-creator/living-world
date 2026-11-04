@@ -1,0 +1,20 @@
+{
+  "staged": true,
+  "checks": {
+    "visibleRows": true,
+    "doubtedTeller": true,
+    "oldNews": true,
+    "pure": true,
+    "noExceptions": true
+  },
+  "rows": [
+    {
+      "text": "berry bush: told by Kai today, who has been wrong before (1 of 3 accounts borne out)",
+      "doubt": true
+    },
+    {
+      "text": "wild grain: told by Lin a day ago · old news",
+      "doubt": false
+    }
+  ]
+}

@@ -317,6 +317,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const knowSplit = h('div', { class: 'split', role: 'presentation' }, knowSeen, knowTold);
   const knowLegend = h('div', { class: 'know-legend' });
   const knowKinds = h('div', { class: 'chips' });
+  const knowHearsay = h('ul', { class: 'know-told', 'aria-label': 'Where recent hearsay came from' });
   const knowBtn = h(
     'button',
     {
@@ -328,7 +329,15 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
     icon('pin', 14),
     h('span', null, 'Show remembered places on the map'),
   );
-  knowSec.body.append(knowSum, knowSplit, knowLegend, knowKinds, knowBtn);
+  knowSec.body.append(knowSum, knowSplit, knowLegend, knowKinds, knowHearsay, knowBtn);
+  const toldList = new KeyedList<PersonView['knowledge']['told'][number], Simple>(
+    knowHearsay,
+    () => ({ el: h('li', { class: 'know-told-row' }) }),
+    (c, k) => {
+      setText(c.el, k.text);
+      c.el.classList.toggle('doubt', k.doubt);
+    },
+  );
   const kindList = new KeyedList<{ kind: string; n: number }, Simple>(
     knowKinds,
     () => ({ el: h('span', { class: 'chip' }, h('span', { class: 'k-n num' }), h('span', { class: 'k-l' })) }),
@@ -540,6 +549,8 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setHidden(knowSplit, k.places === 0);
         setText(knowLegend, k.places ? `${k.seen} seen first-hand · ${k.hearsay} heard from others · ${k.stale} possibly out of date` : '');
         kindList.sync(k.byKind, (x) => x.kind);
+        toldList.sync(k.told, (x) => x.key);
+        setHidden(knowHearsay, k.told.length === 0);
         setBool(knowBtn, 'aria-pressed', game.overlays.knowledge);
       }
 
