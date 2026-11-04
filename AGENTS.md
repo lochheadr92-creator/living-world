@@ -1,8 +1,8 @@
 # Living World: notes for Codex (read this first)
 
-**Active roadmap (4 November 2026):** the owner resumed sequential work after reconciliation. See the current ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md); start with project material allocation, then compact-save performance. Earlier stop checkpoints below remain historical, not the current instruction.
+**Active roadmap (4 November 2026): rules 148, product save format 5.** The owner resumed sequential work after reconciliation. Project material allocation and compact product saves are implemented; P0.6 state-budget documentation is complete. Full local verification passed: 480 files, 2,833 tests, zero failures (816.94s); typecheck/build pass. Both retained expected-failure contracts are now normal passing tests. Evidence is in `review_evidence/roadmap-20261104/`. Next is ordinary preserved-meat diagnosis, followed by trap-meat and lamb-birth evidence; mature Normal/Large performance measurement (P0.7) remains open. Follow the ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md). Earlier stop and recovery checkpoints below remain historical, not the current instruction.
 
-**Published main (4 November 2026): rules 147.** Survival capability development is stopped
+**Historical published main (4 November 2026): rules 147.** Survival capability development is stopped
 at the owner's request, with incomplete acceptance and adverse findings retained in
 [docs/SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md). Older-work preservation,
 the earlier all-branch review and preservation are recorded in

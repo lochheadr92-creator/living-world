@@ -1,6 +1,8 @@
-# Test maintenance verified — rules 147 on main
+# Roadmap execution handoff — rules 148
 
-**Active roadmap (4 November 2026):** the owner resumed sequential work after reconciliation. See the current ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md); start with project material allocation, then compact-save performance. Earlier stop checkpoints below remain historical, not the current instruction.
+**Active roadmap (4 November 2026): rules 148, product save format 5.** The owner resumed sequential work after reconciliation. Project material allocation and compact product saves are implemented; P0.6 state-budget documentation is complete. Full local verification passed: 480 files, 2,833 tests, zero failures (816.94s); typecheck/build pass. Both retained expected-failure contracts are now normal passing tests. Evidence is in `review_evidence/roadmap-20261104/`. Next is ordinary preserved-meat diagnosis, followed by trap-meat and lamb-birth evidence; mature Normal/Large performance measurement (P0.7) remains open. Follow the ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md). Earlier stop and recovery checkpoints below remain historical, not the current instruction.
+
+## Historical rules-147 test maintenance
 
 The owner-requested local full-suite rerun, all-on baseline and test maintenance are complete. On THEWEAPON, the final four-worker run passed all 477 files: **2,811 tests passed, zero unexpected failures and two documented expected failures** in 790.58 seconds. Typecheck/build pass. No simulation source, scripts or dependencies changed; the nine-seed, 25-day all-on baseline remains a measurement of the same runtime.
 

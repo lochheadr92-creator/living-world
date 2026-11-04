@@ -1,5 +1,7 @@
 # Survival capabilities
 
+**Resumed 4 November 2026:** the owner asked to reconcile the roadmap and proceed sequentially. The current execution order is in [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md). The stop/publication account below remains historical. The next survival slice is diagnosis of ordinary preserved-meat meals, followed by attributable trap-meat meals and final-source lamb birth; no new success or benefit is implied by resumption. `scripts/preservation_uptake_trace.ts` pins rules 132 and checks its original reference, so it cannot be silently reused as a current-rules acceptance run. Preserve that historical runner and preregister any current-source comparison separately.
+
 ## Inventory and implementation path
 
 Assignment: owner prompt, 4 November 2026. Starting checkout is
