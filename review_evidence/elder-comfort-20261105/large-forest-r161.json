@@ -1,0 +1,710 @@
+{
+ "seed": "forest",
+ "profile": "large",
+ "rules": 161,
+ "days": 25,
+ "elders": [
+  {
+   "name": "Milo",
+   "ageAtStart": 72.3,
+   "outcome": "died day 21.4 of hunger",
+   "samples": 428,
+   "minWarmth": 3,
+   "minHunger": 0,
+   "minHealth": 3,
+   "shareAlone": 1,
+   "shareSolidHome": 0,
+   "shareHunger25": 0.11,
+   "shareWarmth25": 0.06,
+   "shareSocial30": 0.03,
+   "shareWorking": 0.43,
+   "shareWarming": 0.15,
+   "homeTypes": {
+    "lean_to": 428
+   }
+  },
+  {
+   "name": "Hugo",
+   "ageAtStart": 66,
+   "outcome": "died day 21.9 of hunger",
+   "samples": 438,
+   "minWarmth": 0,
+   "minHunger": 0,
+   "minHealth": 2,
+   "shareAlone": 0,
+   "shareSolidHome": 0.76,
+   "shareHunger25": 0.15,
+   "shareWarmth25": 0.08,
+   "shareSocial30": 0.06,
+   "shareWorking": 0.44,
+   "shareWarming": 0.16,
+   "homeTypes": {
+    "none": 10,
+    "lean_to": 94,
+    "hut": 334
+   }
+  },
+  {
+   "name": "Lena",
+   "ageAtStart": 67.4,
+   "outcome": "died day 22.6 of exposure",
+   "samples": 452,
+   "minWarmth": 0,
+   "minHunger": 0,
+   "minHealth": 3,
+   "shareAlone": 1,
+   "shareSolidHome": 0,
+   "shareHunger25": 0.1,
+   "shareWarmth25": 0.11,
+   "shareSocial30": 0.04,
+   "shareWorking": 0.44,
+   "shareWarming": 0.13,
+   "homeTypes": {
+    "lean_to": 452
+   }
+  },
+  {
+   "name": "Pia",
+   "ageAtStart": 69.7,
+   "outcome": "died day 22.0 of hunger",
+   "samples": 440,
+   "minWarmth": 0,
+   "minHunger": 0,
+   "minHealth": 3,
+   "shareAlone": 1,
+   "shareSolidHome": 0.35,
+   "shareHunger25": 0.09,
+   "shareWarmth25": 0.07,
+   "shareSocial30": 0.01,
+   "shareWorking": 0.48,
+   "shareWarming": 0.13,
+   "homeTypes": {
+    "lean_to": 285,
+    "hut": 155
+   }
+  },
+  {
+   "name": "Yusuf",
+   "ageAtStart": 73.5,
+   "outcome": "died day 21.3 of hunger",
+   "samples": 425,
+   "minWarmth": 1,
+   "minHunger": 0,
+   "minHealth": 2,
+   "shareAlone": 1,
+   "shareSolidHome": 0,
+   "shareHunger25": 0.18,
+   "shareWarmth25": 0.08,
+   "shareSocial30": 0.1,
+   "shareWorking": 0.45,
+   "shareWarming": 0.12,
+   "homeTypes": {
+    "none": 39,
+    "lean_to": 386
+   }
+  },
+  {
+   "name": "Xavi",
+   "ageAtStart": 72.5,
+   "outcome": "died day 21.9 of exposure",
+   "samples": 438,
+   "minWarmth": 1,
+   "minHunger": 0,
+   "minHealth": 1,
+   "shareAlone": 0.42,
+   "shareSolidHome": 0,
+   "shareHunger25": 0.15,
+   "shareWarmth25": 0.09,
+   "shareSocial30": 0.02,
+   "shareWorking": 0.43,
+   "shareWarming": 0.12,
+   "homeTypes": {
+    "lean_to": 438
+   }
+  },
+  {
+   "name": "Emre II",
+   "ageAtStart": 72.9,
+   "outcome": "died day 22.0 of hunger",
+   "samples": 439,
+   "minWarmth": 0,
+   "minHunger": 0,
+   "minHealth": 2,
+   "shareAlone": 0.42,
+   "shareSolidHome": 0,
+   "shareHunger25": 0.12,
+   "shareWarmth25": 0.08,
+   "shareSocial30": 0,
+   "shareWorking": 0.44,
+   "shareWarming": 0.16,
+   "homeTypes": {
+    "lean_to": 439
+   }
+  }
+ ],
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 11,
+ "initialSurvival": {
+  "child": {
+   "start": 30,
+   "aliveAtEnd": 5
+  },
+  "youth": {
+   "start": 3,
+   "aliveAtEnd": 0
+  },
+  "adult": {
+   "start": 60,
+   "aliveAtEnd": 5
+  },
+  "elder": {
+   "start": 7,
+   "aliveAtEnd": 0
+  }
+ },
+ "deathCauses": {
+  "child": {
+   "exposure": 3,
+   "hunger": 24,
+   "fever": 2,
+   "wolf attack": 1
+  },
+  "adult": {
+   "wolf attack": 5,
+   "thirst": 6,
+   "hunger": 48,
+   "fever": 2,
+   "exposure": 6,
+   "injuries": 2
+  },
+  "elder": {
+   "hunger": 5,
+   "exposure": 2
+  }
+ },
+ "table": {
+  "adult": {
+   "n": 30862,
+   "warmth": 65.3,
+   "health": 96.8,
+   "hunger": 53.7,
+   "social": 75,
+   "energy": 63.3,
+   "shareWarmthLt25": 0.089,
+   "shareHealthLt60": 0.031,
+   "shareHungerLt25": 0.106,
+   "shareSocialLt30": 0.026,
+   "time": {
+    "warming": 0.175,
+    "resting": 0.258,
+    "working": 0.465,
+    "socialising": 0.097,
+    "idle": 0.005
+   }
+  },
+  "adult|alone": {
+   "n": 3445,
+   "warmth": 64.4,
+   "health": 95.2,
+   "hunger": 48.8,
+   "social": 68.3,
+   "energy": 61.4,
+   "shareWarmthLt25": 0.093,
+   "shareHealthLt60": 0.052,
+   "shareHungerLt25": 0.127,
+   "shareSocialLt30": 0.048,
+   "time": {
+    "warming": 0.166,
+    "resting": 0.26,
+    "working": 0.484,
+    "socialising": 0.084,
+    "idle": 0.006
+   }
+  },
+  "adult|home lean-to or other": {
+   "n": 18880,
+   "warmth": 66,
+   "health": 97.6,
+   "hunger": 55.6,
+   "social": 77.5,
+   "energy": 64.1,
+   "shareWarmthLt25": 0.075,
+   "shareHealthLt60": 0.021,
+   "shareHungerLt25": 0.083,
+   "shareSocialLt30": 0.013,
+   "time": {
+    "warming": 0.17,
+    "resting": 0.268,
+    "working": 0.454,
+    "socialising": 0.103,
+    "idle": 0.004
+   }
+  },
+  "adult|home none": {
+   "n": 1751,
+   "warmth": 69.6,
+   "health": 96.7,
+   "hunger": 47.7,
+   "social": 72.6,
+   "energy": 50.3,
+   "shareWarmthLt25": 0.077,
+   "shareHealthLt60": 0.025,
+   "shareHungerLt25": 0.132,
+   "shareSocialLt30": 0.017,
+   "time": {
+    "warming": 0.059,
+    "resting": 0.315,
+    "working": 0.524,
+    "socialising": 0.095,
+    "idle": 0.007
+   }
+  },
+  "adult|home solid": {
+   "n": 10231,
+   "warmth": 63.3,
+   "health": 95.4,
+   "hunger": 51.3,
+   "social": 70.8,
+   "energy": 64.2,
+   "shareWarmthLt25": 0.116,
+   "shareHealthLt60": 0.05,
+   "shareHungerLt25": 0.144,
+   "shareSocialLt30": 0.053,
+   "time": {
+    "warming": 0.205,
+    "resting": 0.23,
+    "working": 0.474,
+    "socialising": 0.087,
+    "idle": 0.005
+   }
+  },
+  "adult|with others": {
+   "n": 27417,
+   "warmth": 65.4,
+   "health": 97,
+   "hunger": 54.3,
+   "social": 75.8,
+   "energy": 63.6,
+   "shareWarmthLt25": 0.088,
+   "shareHealthLt60": 0.028,
+   "shareHungerLt25": 0.104,
+   "shareSocialLt30": 0.024,
+   "time": {
+    "warming": 0.176,
+    "resting": 0.258,
+    "working": 0.462,
+    "socialising": 0.099,
+    "idle": 0.005
+   }
+  },
+  "child": {
+   "n": 14450,
+   "warmth": 65.9,
+   "health": 97.2,
+   "hunger": 61.5,
+   "social": 86.3,
+   "energy": 75.1,
+   "shareWarmthLt25": 0.088,
+   "shareHealthLt60": 0.031,
+   "shareHungerLt25": 0.073,
+   "shareSocialLt30": 0.015,
+   "time": {
+    "warming": 0.259,
+    "resting": 0.183,
+    "working": 0.351,
+    "socialising": 0.201,
+    "idle": 0.005
+   }
+  },
+  "elder": {
+   "n": 3060,
+   "warmth": 65.4,
+   "health": 96.1,
+   "hunger": 49.8,
+   "social": 69.4,
+   "energy": 56,
+   "shareWarmthLt25": 0.082,
+   "shareHealthLt60": 0.026,
+   "shareHungerLt25": 0.127,
+   "shareSocialLt30": 0.036,
+   "time": {
+    "warming": 0.138,
+    "resting": 0.316,
+    "working": 0.446,
+    "socialising": 0.096,
+    "idle": 0.004
+   }
+  },
+  "elder|alone": {
+   "n": 2116,
+   "warmth": 67.3,
+   "health": 96.6,
+   "hunger": 51.4,
+   "social": 67.7,
+   "energy": 55.9,
+   "shareWarmthLt25": 0.069,
+   "shareHealthLt60": 0.018,
+   "shareHungerLt25": 0.103,
+   "shareSocialLt30": 0.035,
+   "time": {
+    "warming": 0.121,
+    "resting": 0.331,
+    "working": 0.444,
+    "socialising": 0.1,
+    "idle": 0.005
+   }
+  },
+  "elder|alone|home lean-to or other": {
+   "n": 1922,
+   "warmth": 67.1,
+   "health": 96.9,
+   "hunger": 51.7,
+   "social": 67.7,
+   "energy": 56.7,
+   "shareWarmthLt25": 0.067,
+   "shareHealthLt60": 0.016,
+   "shareHungerLt25": 0.094,
+   "shareSocialLt30": 0.037,
+   "time": {
+    "warming": 0.129,
+    "resting": 0.332,
+    "working": 0.431,
+    "socialising": 0.102,
+    "idle": 0.006
+   }
+  },
+  "elder|alone|home none": {
+   "n": 39,
+   "warmth": 81.2,
+   "health": 90.8,
+   "hunger": 53.2,
+   "social": 55.2,
+   "energy": 59.8,
+   "shareWarmthLt25": 0,
+   "shareHealthLt60": 0,
+   "shareHungerLt25": 0,
+   "shareSocialLt30": 0,
+   "time": {
+    "warming": 0.026,
+    "resting": 0.41,
+    "working": 0.462,
+    "socialising": 0.103,
+    "idle": 0
+   }
+  },
+  "elder|alone|home solid": {
+   "n": 155,
+   "warmth": 65.6,
+   "health": 93.8,
+   "hunger": 47.2,
+   "social": 71.6,
+   "energy": 44.6,
+   "shareWarmthLt25": 0.116,
+   "shareHealthLt60": 0.052,
+   "shareHungerLt25": 0.252,
+   "shareSocialLt30": 0.019,
+   "time": {
+    "warming": 0.045,
+    "resting": 0.297,
+    "working": 0.594,
+    "socialising": 0.065,
+    "idle": 0
+   }
+  },
+  "elder|home lean-to or other": {
+   "n": 2522,
+   "warmth": 65.4,
+   "health": 96.7,
+   "hunger": 49.7,
+   "social": 70.2,
+   "energy": 56.8,
+   "shareWarmthLt25": 0.08,
+   "shareHealthLt60": 0.021,
+   "shareHungerLt25": 0.114,
+   "shareSocialLt30": 0.031,
+   "time": {
+    "warming": 0.143,
+    "resting": 0.318,
+    "working": 0.436,
+    "socialising": 0.098,
+    "idle": 0.005
+   }
+  },
+  "elder|home none": {
+   "n": 49,
+   "warmth": 83.1,
+   "health": 89.1,
+   "hunger": 57.8,
+   "social": 62.5,
+   "energy": 60.6,
+   "shareWarmthLt25": 0,
+   "shareHealthLt60": 0,
+   "shareHungerLt25": 0,
+   "shareSocialLt30": 0,
+   "time": {
+    "warming": 0.02,
+    "resting": 0.327,
+    "working": 0.51,
+    "socialising": 0.143,
+    "idle": 0
+   }
+  },
+  "elder|home solid": {
+   "n": 489,
+   "warmth": 63.9,
+   "health": 93.6,
+   "hunger": 49.2,
+   "social": 65.7,
+   "energy": 51.4,
+   "shareWarmthLt25": 0.1,
+   "shareHealthLt60": 0.059,
+   "shareHungerLt25": 0.211,
+   "shareSocialLt30": 0.061,
+   "time": {
+    "warming": 0.127,
+    "resting": 0.301,
+    "working": 0.491,
+    "socialising": 0.082,
+    "idle": 0
+   }
+  },
+  "elder|with others": {
+   "n": 944,
+   "warmth": 61.3,
+   "health": 95.1,
+   "hunger": 46.1,
+   "social": 73.2,
+   "energy": 56.4,
+   "shareWarmthLt25": 0.11,
+   "shareHealthLt60": 0.044,
+   "shareHungerLt25": 0.181,
+   "shareSocialLt30": 0.036,
+   "time": {
+    "warming": 0.178,
+    "resting": 0.282,
+    "working": 0.45,
+    "socialising": 0.089,
+    "idle": 0.001
+   }
+  },
+  "elder|with others|home lean-to or other": {
+   "n": 600,
+   "warmth": 59.8,
+   "health": 96.2,
+   "hunger": 43.4,
+   "social": 78.5,
+   "energy": 57.2,
+   "shareWarmthLt25": 0.122,
+   "shareHealthLt60": 0.035,
+   "shareHungerLt25": 0.178,
+   "shareSocialLt30": 0.012,
+   "time": {
+    "warming": 0.188,
+    "resting": 0.275,
+    "working": 0.45,
+    "socialising": 0.085,
+    "idle": 0.002
+   }
+  },
+  "elder|with others|home none": {
+   "n": 10,
+   "warmth": 90.2,
+   "health": 82.5,
+   "hunger": 76,
+   "social": 91.3,
+   "energy": 63.7,
+   "shareWarmthLt25": 0,
+   "shareHealthLt60": 0,
+   "shareHungerLt25": 0,
+   "shareSocialLt30": 0,
+   "time": {
+    "warming": 0,
+    "resting": 0,
+    "working": 0.7,
+    "socialising": 0.3,
+    "idle": 0
+   }
+  },
+  "elder|with others|home solid": {
+   "n": 334,
+   "warmth": 63.2,
+   "health": 93.5,
+   "hunger": 50.1,
+   "social": 62.9,
+   "energy": 54.6,
+   "shareWarmthLt25": 0.093,
+   "shareHealthLt60": 0.063,
+   "shareHungerLt25": 0.192,
+   "shareSocialLt30": 0.081,
+   "time": {
+    "warming": 0.165,
+    "resting": 0.302,
+    "working": 0.443,
+    "socialising": 0.09,
+    "idle": 0
+   }
+  },
+  "youth": {
+   "n": 772,
+   "warmth": 70.6,
+   "health": 98.6,
+   "hunger": 53.4,
+   "social": 84.7,
+   "energy": 61.8,
+   "shareWarmthLt25": 0.065,
+   "shareHealthLt60": 0,
+   "shareHungerLt25": 0.082,
+   "shareSocialLt30": 0,
+   "time": {
+    "warming": 0.114,
+    "resting": 0.315,
+    "working": 0.47,
+    "socialising": 0.098,
+    "idle": 0.003
+   }
+  }
+ },
+ "deaths": [
+  {
+   "id": 4215,
+   "name": "Yusuf",
+   "tick": 51072,
+   "age": 75,
+   "cause": "hunger",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 72,
+    "warmth": 44,
+    "hunger": 0,
+    "thirst": 4,
+    "health": 2,
+    "alone": true,
+    "homeType": "lean_to",
+    "worn": true,
+    "doing": "drink:thirst"
+   }
+  },
+  {
+   "id": 4093,
+   "name": "Milo",
+   "tick": 51445,
+   "age": 74,
+   "cause": "hunger",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 85,
+    "warmth": 44,
+    "hunger": 0,
+    "thirst": 90,
+    "health": 3,
+    "alone": true,
+    "homeType": "lean_to",
+    "worn": true,
+    "doing": "gather:hunger"
+   }
+  },
+  {
+   "id": 4230,
+   "name": "Xavi",
+   "tick": 52584,
+   "age": 74,
+   "cause": "exposure",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 24,
+    "warmth": 1,
+    "hunger": 9,
+    "thirst": 63,
+    "health": 1,
+    "alone": false,
+    "homeType": "lean_to",
+    "worn": true,
+    "doing": "gather:hunger"
+   }
+  },
+  {
+   "id": 4115,
+   "name": "Hugo",
+   "tick": 52593,
+   "age": 67,
+   "cause": "hunger",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 33,
+    "warmth": 0,
+    "hunger": 0,
+    "thirst": 62,
+    "health": 2,
+    "alone": false,
+    "homeType": "hut",
+    "worn": true,
+    "doing": "gather:hunger"
+   }
+  },
+  {
+   "id": 4248,
+   "name": "Emre II",
+   "tick": 52703,
+   "age": 74,
+   "cause": "hunger",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 23,
+    "warmth": 0,
+    "hunger": 0,
+    "thirst": 36,
+    "health": 2,
+    "alone": true,
+    "homeType": "lean_to",
+    "worn": true,
+    "doing": "gather:hunger"
+   }
+  },
+  {
+   "id": 4139,
+   "name": "Pia",
+   "tick": 52843,
+   "age": 71,
+   "cause": "hunger",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 43,
+    "warmth": 0,
+    "hunger": 0,
+    "thirst": 58,
+    "health": 3,
+    "alone": true,
+    "homeType": "hut",
+    "worn": false,
+    "doing": "gather:hunger"
+   }
+  },
+  {
+   "id": 4136,
+   "name": "Lena",
+   "tick": 54295,
+   "age": 69,
+   "cause": "exposure",
+   "atFounding": true,
+   "stageAtDeath": "elder",
+   "lastSample": {
+    "ago": 55,
+    "warmth": 0,
+    "hunger": 0,
+    "thirst": 75,
+    "health": 3,
+    "alone": true,
+    "homeType": "lean_to",
+    "worn": true,
+    "doing": "gather:hunger"
+   }
+  }
+ ]
+}
