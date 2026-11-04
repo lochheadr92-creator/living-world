@@ -1,0 +1,2 @@
+# Preserve exact saved-world and evidence bytes across platform checkouts.
+/survival_evidence/** -text

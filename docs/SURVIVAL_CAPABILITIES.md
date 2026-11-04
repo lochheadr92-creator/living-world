@@ -961,6 +961,47 @@ The browser confirms exact saved state and conservation; the screenshot and
 DOM record are retained there. This illustrates distinct state and continued
 food-seeking, not attribution of his survival to reserves.
 
+## Trap catch reporting repair — rules133
+
+The ordinary132forest day2/nudge1 draw caught body17987 at50849 but had no
+recovered trap meat or attributable trap meal by day25. Its later check at
+58812 incorrectly claimed that a body needed butchering after that body was
+lost. The exact observer replay in `trap-food132-replay` reproduces the original
+final save and passes save120/conservation. This is a retained failed chain.
+
+The dedicated repair was verified in `living-world-trap-truth-fix` while the
+main132broad suite stayed on unchanged source. `carcass.ts` owns the pure
+remaining-parts/expiry predicate; `passive_gear.ts` uses it for the paid check's
+log under133, preserving132wording. The trap and carcass inspectors distinguish
+empty remains. It adds no products, demand, utility, catches or knowledge.
+Four regression contracts cover fresh, empty and vanished bodies, old-rule
+wording and exact mid-check continuation. The latter changes only the expected
+log text when compared with132.29tests in four files pass; the separately run
+actual `passive_gear.test.ts` adds20passing tests (the prior command named a
+nonexistent `gear.test.ts`, which Vitest did not collect). Six rendered checks
+pass in `trap-catch-truth-rendered1`, with both screenshots visually inspected.
+Isolated typecheck/build pass; that checkout excludes the unrelated untracked
+review files responsible for main's two known type errors.
+
+`trap-report133-replay` replays the same declared ordinary draw freshly under
+133. The corrected58812check reports no recoverable catch. The final saved
+world equals132after normalizing only the rules number and two specified
+trap-report phrases; all other saved state is byte-equivalent. Save120 and
+conservation pass. `report.settings` records the reference settings; `newRules`
+and the saved world's settings record133. The autonomous simulation reads
+person logs only for display (`events.ts` appends; `inspect.ts` reads), so this
+reporting repair does not change the physical/numerical132cohort conclusions.
+This equivalence does not claim unchanged responses from external controllers
+that may read those logs.
+
+Immutable133 is captured from source
+`86210bc6355cf48e0d5b5400eaa7b7527d2d1757ec0a967e424f5ee0687301d7`:
+ordinary forest3000+120 and a paid check saved halfway through after loss.
+Final reference/rules/save/inspector checks pass32tests in four files (45.30s).
+A subsequent direct empty-body wording correction is the only source change,
+recorded in `resume-20261104/trap-catch-truth-view-source-audit.json`; the final
+four contracts plus immutable133 pass5tests in17.08s. No reference was rewritten.
+
 ## Final measurement — pending
 
 Compare completed streams 1–7 with the verified starting baseline and reserves
@@ -995,3 +1036,52 @@ so retained results were validated directly. The replacement launcher
 (`ec9857a`, `scripts/survival_cohort.mjs`) validated those 61 results and completed
 14 remaining draws with explicit exit 0 records, then exited 0. Its status-file
 write is replaceable and nonfatal. No incomplete run was treated as a success.
+
+The forest subset is complete (all25declared draws per condition). Mean/median/
+range day25population: starting121=5.56/5/0-15; pre-reserve131=8.32/8/0-18;
+reserves132=5.68/5/2-18. This is an adverse reserve comparison in this forest
+sample, not a general benefit claim. Mean immediate-hunger-empty occupancy
+is44108.88/33822.44/47334.40 ticks respectively; mean exposure occupancy is
+50343.96/45233.44/46483.04. These raw occupancies have different alive-time
+denominators, and hunger-empty ticks under132 need not cause damage when
+reserves pay the deficit. Complete age-normalized/cost summaries await all
+three seeds. No parameter retuning was made in response to these results.
+
+Final-source131meadow60 (	rap-window-check2/meadow-60d) finishes23alive,
+2109.52s,1200pure checks, exact twins/save120 and conservation. Two nets
+produce27fish;10collected and7attributable direct meals, with2repairs and
+15full-pack check endings. No trap is made or deployed. Two sheep are acquired,
+5shearings and2feedings finish,1slaughter finishes, and there is no mating/birth.
+All8body meat,2hide and2fat are lost; no preserved-meat or rendered-fat output.
+This extension supplies no positive evidence for the remaining connections.
+
+## Owner-requested stop and publication checkpoint — 4 November 2026
+
+The owner requested stopping after the current section, committing and pushing
+all current work, then merging to main. The current section is the rules133
+trap-report repair, completed with four contracts,49affected tests across the
+separate runs,32reference/rules/save/inspector tests, six rendered checks and an
+exact ordinary replay modulo only the declared reporting/version differences.
+A final direct empty-body inspector correction passes the four contracts plus
+immutable133 (5tests,17.08s). Its only source difference from the captured
+reference is inspect.ts, audited in
+`resume-20261104/trap-catch-truth-view-source-audit.json`; original expectations
+remain untouched. Isolated final typecheck passes. Main's unrelated review
+files retain the previously recorded typecheck/build limitations.
+
+The longer measurements were stopped at the owner's requested boundary.
+`survival_evidence/owner-stop-20261104.json` validates all completed final-save
+hashes, settings, conservation and continuation flags: baseline75/75,
+pre-reserve13148/75, reserves13240/75. Partial draws remain clearly partial.
+The132fern60 extension and meat-preservation trace also stopped before their
+horizons. The first preservation trace was stopped because its observer kept
+mutable references; the replacement copies snapshots and was later interrupted
+by the owner stop. Neither partial trace establishes a new causal finding.
+The132broad regression was interrupted without a final count; its failures,
+timeouts and warning output are retained. It is not reported as passing.
+
+The whole seven-family assignment is not complete: ordinary preserved-meat
+meals, attributable trap-meat meals and final-source lamb birth remain open,
+as do the complete cross-seed cohort comparisons. The completed25draw forest
+subset has the adverse reserve result recorded above. Do not resume further
+capability work without a new owner request.

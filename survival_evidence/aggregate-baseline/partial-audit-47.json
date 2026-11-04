@@ -1,0 +1,427 @@
+{
+  "scope": "Completed reports only, not completion of the still-running cohort; validates saved output hashes and recorded integrity flags, not a new replay. Launcher process exitCode fields are null for most finished children, so original exit status is unavailable for those draws.",
+  "completed": 47,
+  "seeds": {
+    "forest": {
+      "n": 25,
+      "mean": 5.56,
+      "median": 5,
+      "range": [
+        0,
+        15
+      ]
+    },
+    "river": {
+      "n": 22,
+      "mean": 19.954545454545453,
+      "median": 19.5,
+      "range": [
+        11,
+        32
+      ]
+    }
+  },
+  "rows": [
+    {
+      "name": "forest-control",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 0,
+      "population": 4,
+      "finalHash": "ae96c7d7",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f2-n1",
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 1,
+      "population": 8,
+      "finalHash": "f9e39111",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f2-n2",
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 2,
+      "population": 6,
+      "finalHash": "6fd413e3",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f2-n3",
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 3,
+      "population": 9,
+      "finalHash": "beee79b0",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f2-n4",
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 4,
+      "population": 3,
+      "finalHash": "746d3586",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f3-n1",
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 1,
+      "population": 5,
+      "finalHash": "8113f8b0",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f3-n2",
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 2,
+      "population": 3,
+      "finalHash": "eb8f8b65",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f3-n3",
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 3,
+      "population": 2,
+      "finalHash": "0f8f7fc6",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f3-n4",
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 4,
+      "population": 3,
+      "finalHash": "eb8f8b65",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n1",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 1,
+      "population": 4,
+      "finalHash": "cc4329fd",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n2",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 2,
+      "population": 4,
+      "finalHash": "482350d8",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n3",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 3,
+      "population": 2,
+      "finalHash": "6cccb76e",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n4",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 4,
+      "population": 9,
+      "finalHash": "c3e065d2",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n5",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 5,
+      "population": 8,
+      "finalHash": "e1ad3bd9",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n6",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 6,
+      "population": 7,
+      "finalHash": "491004d2",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n7",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 7,
+      "population": 2,
+      "finalHash": "435c8072",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f4-n8",
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 8,
+      "population": 7,
+      "finalHash": "5c8e253b",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f5-n1",
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 1,
+      "population": 5,
+      "finalHash": "07fbed1e",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f5-n2",
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 2,
+      "population": 4,
+      "finalHash": "ae96c7d7",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f5-n3",
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 3,
+      "population": 0,
+      "finalHash": "0f0c262c",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f5-n4",
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 4,
+      "population": 6,
+      "finalHash": "a2eb744b",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f6-n1",
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 1,
+      "population": 5,
+      "finalHash": "71cf5724",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f6-n2",
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 2,
+      "population": 15,
+      "finalHash": "1dea4228",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f6-n3",
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 3,
+      "population": 3,
+      "finalHash": "f4b56634",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "forest-f6-n4",
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 4,
+      "population": 15,
+      "finalHash": "1dea4228",
+      "matchesHistoricalP01c": true
+    },
+    {
+      "name": "river-f2-n1",
+      "seed": "river",
+      "fork": 2,
+      "nudge": 1,
+      "population": 18,
+      "finalHash": "446de347"
+    },
+    {
+      "name": "river-f2-n2",
+      "seed": "river",
+      "fork": 2,
+      "nudge": 2,
+      "population": 13,
+      "finalHash": "bd8ef9d9"
+    },
+    {
+      "name": "river-f2-n3",
+      "seed": "river",
+      "fork": 2,
+      "nudge": 3,
+      "population": 17,
+      "finalHash": "4a38542b"
+    },
+    {
+      "name": "river-f2-n4",
+      "seed": "river",
+      "fork": 2,
+      "nudge": 4,
+      "population": 23,
+      "finalHash": "5e7d7475"
+    },
+    {
+      "name": "river-f3-n1",
+      "seed": "river",
+      "fork": 3,
+      "nudge": 1,
+      "population": 16,
+      "finalHash": "26c909cd"
+    },
+    {
+      "name": "river-f3-n2",
+      "seed": "river",
+      "fork": 3,
+      "nudge": 2,
+      "population": 12,
+      "finalHash": "348217dc"
+    },
+    {
+      "name": "river-f3-n3",
+      "seed": "river",
+      "fork": 3,
+      "nudge": 3,
+      "population": 26,
+      "finalHash": "b1ad2ebc"
+    },
+    {
+      "name": "river-f3-n4",
+      "seed": "river",
+      "fork": 3,
+      "nudge": 4,
+      "population": 12,
+      "finalHash": "348217dc"
+    },
+    {
+      "name": "river-f4-n0",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 0,
+      "population": 19,
+      "finalHash": "22dff20d"
+    },
+    {
+      "name": "river-f4-n1",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 1,
+      "population": 20,
+      "finalHash": "c1356272"
+    },
+    {
+      "name": "river-f4-n2",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 2,
+      "population": 19,
+      "finalHash": "224a952e"
+    },
+    {
+      "name": "river-f4-n3",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 3,
+      "population": 25,
+      "finalHash": "76c2cec1"
+    },
+    {
+      "name": "river-f4-n4",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 4,
+      "population": 19,
+      "finalHash": "224a952e"
+    },
+    {
+      "name": "river-f4-n5",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 5,
+      "population": 23,
+      "finalHash": "f5eb2ad6"
+    },
+    {
+      "name": "river-f4-n6",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 6,
+      "population": 14,
+      "finalHash": "29d4c587"
+    },
+    {
+      "name": "river-f4-n7",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 7,
+      "population": 20,
+      "finalHash": "e7166b92"
+    },
+    {
+      "name": "river-f4-n8",
+      "seed": "river",
+      "fork": 4,
+      "nudge": 8,
+      "population": 32,
+      "finalHash": "49af837c"
+    },
+    {
+      "name": "river-f5-n1",
+      "seed": "river",
+      "fork": 5,
+      "nudge": 1,
+      "population": 27,
+      "finalHash": "bf538e26"
+    },
+    {
+      "name": "river-f5-n2",
+      "seed": "river",
+      "fork": 5,
+      "nudge": 2,
+      "population": 24,
+      "finalHash": "000105b3"
+    },
+    {
+      "name": "river-f5-n3",
+      "seed": "river",
+      "fork": 5,
+      "nudge": 3,
+      "population": 28,
+      "finalHash": "459bffa8"
+    },
+    {
+      "name": "river-f5-n4",
+      "seed": "river",
+      "fork": 5,
+      "nudge": 4,
+      "population": 21,
+      "finalHash": "fca060d0"
+    },
+    {
+      "name": "river-f6-n3",
+      "seed": "river",
+      "fork": 6,
+      "nudge": 3,
+      "population": 11,
+      "finalHash": "1c88a95f"
+    }
+  ]
+}

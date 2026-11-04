@@ -1,0 +1,1807 @@
+[
+  {
+    "id": 1000,
+    "inventory": {
+      "basket": 1,
+      "axe": 1,
+      "hoe": 1,
+      "spear": 1,
+      "garment": 1,
+      "hammer": 1,
+      "seeds": 5,
+      "saw": 1,
+      "berries": 1
+    },
+    "needs": {
+      "hunger": 59.51649999999945,
+      "thirst": 50.30399999999566,
+      "energy": 95.23999999999926,
+      "warmth": 75.80392897871934,
+      "safety": 84.00053329022835,
+      "social": 43.72696286535236
+    },
+    "plans": [
+      {
+        "id": 33876,
+        "kind": "tool",
+        "goal": "make a pick",
+        "since": 118618,
+        "until": 123418,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "pick",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more wood for the pick",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "fibre",
+        "qty": 1,
+        "have": 0,
+        "base": 28,
+        "why": "mend worn insulation",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 4,
+        "have": 0,
+        "base": 26.646544301250884,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 20.36726563023876,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "stone",
+        "qty": 2,
+        "have": 0,
+        "base": 10.179915476420298,
+        "why": "to make a pick",
+        "tag": "craft"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 9.314445295401221,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "fibre",
+      "recipe": "strip_fibre",
+      "facilityId": 7591,
+      "qty": 1,
+      "forSite": 0,
+      "why": "mend worn insulation",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "fibre",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "fibre",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "strip_fibre",
+            "dependencies": [
+              2
+            ],
+            "alternatives": [],
+            "estimatedTicks": 60
+          },
+          {
+            "id": 2,
+            "item": "wood",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "drink:1000108",
+        "util": 30.443267015179877
+      },
+      {
+        "key": "drink:1000148",
+        "util": 27.07026400698176
+      },
+      {
+        "key": "gather:829",
+        "util": 25.332313148086655
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 1010,
+    "inventory": {
+      "seeds": 8,
+      "basket": 1,
+      "garment": 1,
+      "blanket": 1,
+      "spear": 1,
+      "axe": 1,
+      "berries": 2,
+      "grain": 1,
+      "wood": 1
+    },
+    "needs": {
+      "hunger": 60.344499999999755,
+      "thirst": 65.15999999999497,
+      "energy": 93.80799999999947,
+      "warmth": 78.41964326000199,
+      "safety": 84.0001803847972,
+      "social": 24.523559999883236
+    },
+    "plans": [
+      {
+        "id": 33758,
+        "kind": "repair",
+        "goal": "get the roof sound again",
+        "since": 118358,
+        "until": 123158,
+        "status": "active",
+        "reason": "the roof is going and there is nothing to mend it with",
+        "setAside": 0,
+        "aboutId": 1393,
+        "wants": {
+          "wood": 1
+        },
+        "makes": "",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "mend the lean-to",
+        "stepKind": "mend",
+        "stepTarget": 1393,
+        "stepItem": null,
+        "stepKey": "repair:1393",
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "fibre",
+        "qty": 1,
+        "have": 0,
+        "base": 28,
+        "why": "mend worn insulation",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 22.926684521274222,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 20.33755694516829,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "stone",
+        "qty": 1,
+        "have": 0,
+        "base": 6.222352035469709,
+        "why": "to make a hoe",
+        "tag": "craft"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 8.380052003720866,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "bedding",
+      "recipe": "weave_bedding",
+      "facilityId": 7591,
+      "qty": 1,
+      "forSite": 0,
+      "why": "personal insulation against the cold",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "bedding",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "bedding",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "weave_bedding",
+            "dependencies": [
+              2
+            ],
+            "alternatives": [],
+            "estimatedTicks": 220
+          },
+          {
+            "id": 2,
+            "item": "fibre",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 7591,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "strip_fibre",
+            "dependencies": [
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 120
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "repair:1393",
+        "util": 29.346245671888337
+      },
+      {
+        "key": "harvest:4981",
+        "util": 32.788801839405735
+      },
+      {
+        "key": "socialize:14708:chat",
+        "util": 28.89085808237096
+      }
+    ],
+    "offered": [
+      {
+        "key": "collect:7591:fibre",
+        "util": 20.77458078007668
+      }
+    ],
+    "blocked": []
+  },
+  {
+    "id": 1016,
+    "inventory": {
+      "axe": 1,
+      "hoe": 1,
+      "basket": 1,
+      "seeds": 3,
+      "hammer": 1,
+      "pick": 1,
+      "garment": 1,
+      "clay": 1
+    },
+    "needs": {
+      "hunger": 51.70349999999726,
+      "thirst": 99.63999999999994,
+      "energy": 92.95999999999864,
+      "warmth": 81.14360524762492,
+      "safety": 84.04590410824265,
+      "social": 46.42304802083357
+    },
+    "plans": [
+      {
+        "id": 33271,
+        "kind": "batch",
+        "goal": "see 4 bricks through at the kiln for the site",
+        "since": 117481,
+        "until": 124681,
+        "status": "active",
+        "reason": "taken up again",
+        "setAside": 1,
+        "aboutId": 28896,
+        "wants": {
+          "clay": 1
+        },
+        "makes": "bricks",
+        "sheltered": 0,
+        "worked": 3,
+        "ended": 0,
+        "reserve": 4,
+        "recipe": "fire_bricks",
+        "forSite": 32790,
+        "project": {
+          "version": 1,
+          "goal": {
+            "item": "bricks",
+            "quantity": 4,
+            "tier": 0
+          },
+          "root": 1,
+          "nodes": [
+            {
+              "id": 1,
+              "item": "bricks",
+              "quantity": 4,
+              "tier": 0,
+              "destination": 0,
+              "method": "recipe",
+              "place": 28896,
+              "recipe": "fire_bricks",
+              "dependencies": [
+                2,
+                3
+              ],
+              "alternatives": [],
+              "estimatedTicks": 940
+            },
+            {
+              "id": 2,
+              "item": "clay",
+              "quantity": 4,
+              "tier": 0,
+              "destination": 28896,
+              "method": "supply",
+              "place": 0,
+              "recipe": "",
+              "dependencies": [],
+              "alternatives": [],
+              "estimatedTicks": 0
+            },
+            {
+              "id": 3,
+              "item": "wood",
+              "quantity": 2,
+              "tier": 0,
+              "destination": 28896,
+              "method": "present",
+              "place": 0,
+              "recipe": "",
+              "dependencies": [],
+              "alternatives": [],
+              "estimatedTicks": 0
+            }
+          ],
+          "current": 2,
+          "completed": [],
+          "retries": 0,
+          "history": [
+            {
+              "tick": 117698,
+              "node": 2,
+              "reason": "deposit: clay"
+            },
+            {
+              "tick": 117750,
+              "node": 1,
+              "reason": "operate: bricks"
+            },
+            {
+              "tick": 118045,
+              "node": 1,
+              "reason": "wait: waiting for the batch I started"
+            },
+            {
+              "tick": 118480,
+              "node": 1,
+              "reason": "collect: bricks"
+            },
+            {
+              "tick": 118702,
+              "node": 2,
+              "reason": "deposit: clay"
+            }
+          ]
+        },
+        "step": "bring clay to the workshop for bricks",
+        "stepKind": "store",
+        "stepTarget": 28896,
+        "stepItem": "clay",
+        "stepKey": null,
+        "blocked": ""
+      },
+      {
+        "id": 34163,
+        "kind": "stock",
+        "goal": "put 8 units of food by for the household",
+        "since": 119881,
+        "until": 124681,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "setAside": 0,
+        "aboutId": 9404,
+        "wants": {},
+        "makes": "",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "reserve": 8,
+        "cue": "hardship",
+        "step": "collect 2 smoked fish from the food rack for the food reserve",
+        "stepKind": "make",
+        "stepTarget": 22345,
+        "stepItem": null,
+        "stepKey": "collect:22345:smoked_fish",
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 41.49471977416977,
+        "why": "for my household’s smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 23.99056896347117,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 10.91966309846573,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      },
+      {
+        "item": "cart",
+        "qty": 1,
+        "have": 0,
+        "base": 15.287528337852024,
+        "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 7 loads these last days",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "cart",
+      "recipe": "build_cart",
+      "facilityId": 7591,
+      "qty": 1,
+      "forSite": 0,
+      "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 7 loads these last days",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "cart",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "cart",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "build_cart",
+            "dependencies": [
+              2,
+              4,
+              6
+            ],
+            "alternatives": [],
+            "estimatedTicks": 586
+          },
+          {
+            "id": 2,
+            "item": "planks",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 7591,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "hew_planks",
+            "dependencies": [
+              3
+            ],
+            "alternatives": [
+              "saw_planks"
+            ],
+            "estimatedTicks": 360
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 3,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 4,
+            "item": "handles",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 7591,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "split_handles",
+            "dependencies": [
+              5
+            ],
+            "alternatives": [],
+            "estimatedTicks": 36
+          },
+          {
+            "id": 5,
+            "item": "wood",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 6,
+            "item": "wood",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "bring:28896:clay",
+        "util": 30.767370157508346
+      },
+      {
+        "key": "collect:22345:smoked_fish",
+        "util": 25.850161718460537
+      },
+      {
+        "key": "gather:1030",
+        "util": 33.25361302070034
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 14708,
+    "inventory": {
+      "garment": 1,
+      "basket": 1,
+      "seeds": 1,
+      "saw": 1,
+      "hammer": 1,
+      "wood": 1
+    },
+    "needs": {
+      "hunger": 87.98499999999427,
+      "thirst": 65.80799999999618,
+      "energy": 79.11841805681296,
+      "warmth": 53.17034289391638,
+      "safety": 83.43562936426711,
+      "social": 97.7146125197819
+    },
+    "plans": [
+      {
+        "id": 33576,
+        "kind": "stock",
+        "goal": "put 12 units of food by for the household",
+        "since": 117983,
+        "until": 122783,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "setAside": 0,
+        "aboutId": 4797,
+        "wants": {},
+        "makes": "",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "reserve": 12,
+        "cue": "hardship",
+        "step": "gather food to put by (12 more)",
+        "stepKind": "forage",
+        "stepTarget": 0,
+        "stepItem": null,
+        "stepKey": null,
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "fibre",
+        "qty": 1,
+        "have": 0,
+        "base": 28,
+        "why": "mend worn insulation",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 4,
+        "have": 0,
+        "base": 26.844748380633863,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 21.681436108267413,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 8.982196053745804,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "bricks",
+      "recipe": "fire_bricks",
+      "facilityId": 28896,
+      "qty": 4,
+      "forSite": 32790,
+      "why": "for the shared smithy",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "bricks",
+          "quantity": 4,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "bricks",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 28896,
+            "recipe": "fire_bricks",
+            "dependencies": [
+              2,
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 940
+          },
+          {
+            "id": 2,
+            "item": "clay",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 28896,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 28896,
+            "method": "present",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "gather:968",
+        "util": 34.94874346639439
+      },
+      {
+        "key": "gather:855",
+        "util": 33.53282178469472
+      },
+      {
+        "key": "gather:849",
+        "util": 31.830435178485818
+      }
+    ],
+    "offered": [
+      {
+        "key": "collect:7591:fibre",
+        "util": 17.15570973682228
+      }
+    ],
+    "blocked": []
+  },
+  {
+    "id": 14709,
+    "inventory": {
+      "garment": 1,
+      "seeds": 8,
+      "berries": 1
+    },
+    "needs": {
+      "hunger": 42.30449999999469,
+      "thirst": 96.87999999999951,
+      "energy": 89.75399999999858,
+      "warmth": 64.69029738808615,
+      "safety": 83.72568059528044,
+      "social": 73.76087997289345
+    },
+    "plans": [
+      {
+        "id": 34047,
+        "kind": "stock",
+        "goal": "put 12 units of food by for the household",
+        "since": 119454,
+        "until": 124254,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "setAside": 0,
+        "aboutId": 4797,
+        "wants": {},
+        "makes": "",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "reserve": 12,
+        "cue": "hardship",
+        "step": "take the food home (12 more to put by)",
+        "stepKind": "store",
+        "stepTarget": 4797,
+        "stepItem": null,
+        "stepKey": "deposit:4797:food",
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "garment",
+        "qty": 2,
+        "have": 1,
+        "base": 32,
+        "why": "insulation for me and the child in cold weather",
+        "tag": "craft"
+      },
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "fibre",
+        "qty": 1,
+        "have": 0,
+        "base": 28,
+        "why": "mend worn insulation",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 28.407206373732468,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 22.274771115825466,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 9.305411377119269,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "garment",
+      "recipe": "weave_garment",
+      "facilityId": 7591,
+      "qty": 2,
+      "forSite": 0,
+      "why": "insulation for me and the child in cold weather",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "garment",
+          "quantity": 2,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "garment",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "weave_garment",
+            "dependencies": [
+              2
+            ],
+            "alternatives": [],
+            "estimatedTicks": 320
+          },
+          {
+            "id": 2,
+            "item": "fibre",
+            "quantity": 3,
+            "tier": 0,
+            "destination": 7591,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "strip_fibre",
+            "dependencies": [
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 60
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "eat_store:22345",
+        "util": 34.06063516868691
+      },
+      {
+        "key": "gather:966",
+        "util": 29.964411907372426
+      },
+      {
+        "key": "gather:962",
+        "util": 29.29704043169294
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 20560,
+    "inventory": {
+      "garment": 1,
+      "berries": 2,
+      "grain": 1,
+      "fruit": 4,
+      "wood": 2
+    },
+    "needs": {
+      "hunger": 51.93299999999748,
+      "thirst": 82.01999999999234,
+      "energy": 93.61636489995492,
+      "warmth": 84.01356056948207,
+      "safety": 90.74085379861069,
+      "social": 32.221583616345626
+    },
+    "plans": [
+      {
+        "id": 33968,
+        "kind": "tool",
+        "goal": "make a basket",
+        "since": 118889,
+        "until": 123689,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 3,
+          "stone": 0
+        },
+        "makes": "basket",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 more wood for the basket",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "fibre",
+        "qty": 1,
+        "have": 0,
+        "base": 28,
+        "why": "mend worn insulation",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 27.750118834531307,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 21.24728027763138,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      }
+    ],
+    "batch": {
+      "item": "bricks",
+      "recipe": "fire_bricks",
+      "facilityId": 28896,
+      "qty": 1,
+      "forSite": 32790,
+      "why": "for the shared smithy",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "bricks",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "bricks",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 28896,
+            "recipe": "fire_bricks",
+            "dependencies": [
+              2,
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 470
+          },
+          {
+            "id": 2,
+            "item": "clay",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 28896,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 28896,
+            "method": "present",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "socialize:1010:chat",
+        "util": 37.85399272253318
+      },
+      {
+        "key": "socialize:28103:chat",
+        "util": 37.37698399941618
+      },
+      {
+        "key": "eat:0",
+        "util": 27.231538461544286
+      }
+    ],
+    "offered": [
+      {
+        "key": "collect:7591:fibre",
+        "util": 22.702730811667237
+      }
+    ],
+    "blocked": []
+  },
+  {
+    "id": 20561,
+    "inventory": {
+      "garment": 1,
+      "seeds": 3,
+      "basket": 1,
+      "berries": 2
+    },
+    "needs": {
+      "hunger": 52.45000000001865,
+      "thirst": 56.77599999999585,
+      "energy": 93.5999999999992,
+      "warmth": 75.43041972735912,
+      "safety": 78.29236171245202,
+      "social": 34.73999305759788
+    },
+    "plans": [
+      {
+        "id": 34025,
+        "kind": "repair",
+        "goal": "get the roof sound again",
+        "since": 119343,
+        "until": 124143,
+        "status": "active",
+        "reason": "the roof is going and there is nothing to mend it with",
+        "setAside": 0,
+        "aboutId": 22316,
+        "wants": {
+          "wood": 1
+        },
+        "makes": "",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 1 wood to mend the lean-to",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 23.851674973081376,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 18.758181509668773,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      }
+    ],
+    "batch": {
+      "item": "blanket",
+      "recipe": "weave_blanket",
+      "facilityId": 7591,
+      "qty": 1,
+      "forSite": 0,
+      "why": "personal insulation against the cold",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "blanket",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "blanket",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "weave_blanket",
+            "dependencies": [
+              2
+            ],
+            "alternatives": [],
+            "estimatedTicks": 160
+          },
+          {
+            "id": 2,
+            "item": "fibre",
+            "quantity": 3,
+            "tier": 0,
+            "destination": 7591,
+            "method": "recipe",
+            "place": 7591,
+            "recipe": "strip_fibre",
+            "dependencies": [
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 60
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 7591,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "gather:7559",
+        "util": 21.096675796639634
+      },
+      {
+        "key": "gather:567",
+        "util": 20.84890480927972
+      },
+      {
+        "key": "eat:0",
+        "util": 26.038461538418503
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 24196,
+    "inventory": {
+      "garment": 1,
+      "wood": 3,
+      "fish": 2
+    },
+    "needs": {
+      "hunger": 95.85250000000039,
+      "thirst": 90.11599999999856,
+      "energy": 82.92199999999782,
+      "warmth": 63.63603629095211,
+      "safety": 83.15223757978544,
+      "social": 36.588127431542155
+    },
+    "plans": [
+      {
+        "id": 32455,
+        "kind": "tool",
+        "goal": "make a saw",
+        "since": 115316,
+        "until": 120116,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "setAside": 0,
+        "aboutId": 0,
+        "wants": {
+          "wood": 2,
+          "stone": 2
+        },
+        "makes": "saw",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 2 more stone for the saw",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "stone",
+        "stepKey": null,
+        "blocked": ""
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 4,
+        "have": 0,
+        "base": 29.868343424622807,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 21.732124133948606,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      }
+    ],
+    "batch": {
+      "item": "bricks",
+      "recipe": "fire_bricks",
+      "facilityId": 28896,
+      "qty": 4,
+      "forSite": 32790,
+      "why": "for the shared smithy",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "bricks",
+          "quantity": 4,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "bricks",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 28896,
+            "recipe": "fire_bricks",
+            "dependencies": [
+              2,
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 940
+          },
+          {
+            "id": 2,
+            "item": "clay",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 28896,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 28896,
+            "method": "present",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "gather:12803",
+        "util": 34.06665019063583
+      },
+      {
+        "key": "gather:395",
+        "util": 32.622980700505636
+      },
+      {
+        "key": "socialize:980:chat",
+        "util": 25.33254534100611
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 28101,
+    "inventory": {
+      "berries": 2,
+      "garment": 1,
+      "fish": 6
+    },
+    "needs": {
+      "hunger": 49.939500000002596,
+      "thirst": 45.023999999996896,
+      "energy": 54.66816997713234,
+      "warmth": 82.99117241940849,
+      "safety": 93.95369069268357,
+      "social": 35.02513043706696
+    },
+    "plans": [
+      {
+        "id": 33167,
+        "kind": "tool",
+        "goal": "make a basket",
+        "since": 117149,
+        "until": 121949,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "setAside": 4,
+        "aboutId": 0,
+        "wants": {
+          "wood": 3,
+          "stone": 0
+        },
+        "makes": "basket",
+        "sheltered": 0,
+        "worked": 0,
+        "ended": 0,
+        "step": "get 3 more wood for the basket",
+        "stepKind": "get",
+        "stepTarget": 0,
+        "stepItem": "wood",
+        "stepKey": null,
+        "blocked": "a wolf about"
+      }
+    ],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "dried_fish",
+        "qty": 2,
+        "have": 0,
+        "base": 27,
+        "why": "keep spare food for later meals",
+        "tag": "food"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 31.844940381963553,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 22.3236545830538,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      },
+      {
+        "item": "jar",
+        "qty": 1,
+        "have": 0,
+        "base": 10.296488943854879,
+        "why": "to carry more water at a time",
+        "tag": "craft"
+      }
+    ],
+    "batch": {
+      "item": "bricks",
+      "recipe": "fire_bricks",
+      "facilityId": 28896,
+      "qty": 1,
+      "forSite": 32790,
+      "why": "for the shared smithy",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "bricks",
+          "quantity": 1,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "bricks",
+            "quantity": 1,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 28896,
+            "recipe": "fire_bricks",
+            "dependencies": [
+              2,
+              3
+            ],
+            "alternatives": [],
+            "estimatedTicks": 470
+          },
+          {
+            "id": 2,
+            "item": "clay",
+            "quantity": 4,
+            "tier": 0,
+            "destination": 28896,
+            "method": "supply",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          },
+          {
+            "id": 3,
+            "item": "wood",
+            "quantity": 2,
+            "tier": 0,
+            "destination": 28896,
+            "method": "present",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "top": [
+      {
+        "key": "drink:1000187",
+        "util": 40.371936438157306
+      },
+      {
+        "key": "drink:1000225",
+        "util": 37.44394036208393
+      },
+      {
+        "key": "socialize:17323:chat",
+        "util": 43.89147837151246
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  },
+  {
+    "id": 28103,
+    "inventory": {
+      "garment": 1
+    },
+    "needs": {
+      "hunger": 70.47185000002192,
+      "thirst": 52.073599999995615,
+      "energy": 92.82387084796818,
+      "warmth": 78.47578280379368,
+      "safety": 84.06865417560412,
+      "social": 97.33089080163666
+    },
+    "plans": [],
+    "demands": [
+      {
+        "item": "blanket",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bedding",
+        "qty": 1,
+        "have": 0,
+        "base": 25,
+        "why": "personal insulation against the cold",
+        "tag": "craft"
+      },
+      {
+        "item": "bricks",
+        "qty": 1,
+        "have": 0,
+        "base": 38.87839961923403,
+        "why": "for the shared smithy",
+        "tag": "site",
+        "siteId": 32790
+      },
+      {
+        "item": "planks",
+        "qty": 1,
+        "have": 0,
+        "base": 30.3376744165995,
+        "why": "to help keep a neighbour’s granary standing",
+        "tag": "repair"
+      }
+    ],
+    "batch": null,
+    "top": [
+      {
+        "key": "socialize:17324:play_together",
+        "util": 21.249672453742015
+      },
+      {
+        "key": "drink:1000276",
+        "util": 18.374130003046176
+      },
+      {
+        "key": "socialize:20560:learn_foraging",
+        "util": 18.526795686227633
+      }
+    ],
+    "offered": [],
+    "blocked": []
+  }
+]

@@ -1,0 +1,21 @@
+import {existsSync,writeFileSync} from 'node:fs';
+import {createWorld} from '../src/sim/factory';
+import {settingsFor} from '../tests/helpers/util';
+import {stepWorld} from '../src/sim/world';
+import {setPreservation} from '../src/sim/preservation';
+import {TimeBudget} from '../scripts/observers/time_budget';
+import {serializeWorld} from '../src/app/save';
+const mode=process.argv.filter(a=>a!=='--').at(-1)!;
+if(!['on','off','baseline'].includes(mode))throw new Error('mode required');
+const out=`survival_evidence/leisure-${mode}.json`;
+if(existsSync(out))throw new Error('preserve existing diagnostic');
+setPreservation(mode!=='off');
+const w=createWorld(settingsFor('l-places',{scene:'natural',dynamics:'rich',immigration:false,rulesVersion:mode==='baseline'?121:122}));
+const starts:Record<string,number>={},wanders:unknown[]=[],days:unknown[]=[];
+w.hooks={onActivityStart(p,a){starts[a.label]=(starts[a.label]??0)+1;if(a.kind==='wander')wanders.push({tick:w.tick,person:p.id,label:a.label,data:{...a.data}});}};
+const budget=new TimeBudget(),detach=budget.attach(w);
+while(w.tick<9600){budget.sampleTick(w);stepWorld(w);if(w.tick%2400===0)days.push({tick:w.tick,keys:[...new Set(w.persons.flatMap(p=>p.leisure?.recent.map(r=>r.key)??[]))]});}
+detach();delete w.hooks;
+const report={mode,days,wanders,starts,time:budget.report(),racks:w.buildings.filter(b=>b.type==='food_rack'),ledger:w.ledger};
+writeFileSync(out,JSON.stringify(report,null,2));writeFileSync(`survival_evidence/leisure-${mode}-final.json`,serializeWorld(w));
+console.log(JSON.stringify({mode,days,wanders:wanders.length,racks:report.racks.length}));

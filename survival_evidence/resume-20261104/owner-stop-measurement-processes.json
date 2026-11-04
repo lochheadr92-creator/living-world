@@ -1,0 +1,82 @@
+[
+  {
+    "ProcessId": 27252,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/survival_cohort.mjs \"C:\\dev\\Claude Experiment\\living-world-trap-window-check2\" \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\" 131 8"
+  },
+  {
+    "ProcessId": 7544,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/survival_cohort.mjs \"C:\\dev\\Claude Experiment\\living-world-nourishment-check1\" \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\" 132 8"
+  },
+  {
+    "ProcessId": 47308,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/ready_step_observe.ts fern \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\nourishment-check1\\fern-60d\" 60 7200 --clothing"
+  },
+  {
+    "ProcessId": 8956,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f3-n3\" 3 3 25"
+  },
+  {
+    "ProcessId": 53936,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f3-n4\" 3 4 25"
+  },
+  {
+    "ProcessId": 28084,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\river-f6-n3\" 6 3 25"
+  },
+  {
+    "ProcessId": 22768,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f5-n1\" 5 1 25"
+  },
+  {
+    "ProcessId": 35252,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f5-n2\" 5 2 25"
+  },
+  {
+    "ProcessId": 49496,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f5-n3\" 5 3 25"
+  },
+  {
+    "ProcessId": 24256,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f5-n4\" 5 4 25"
+  },
+  {
+    "ProcessId": 43508,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f6-n1\" 6 1 25"
+  },
+  {
+    "ProcessId": 45036,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-nourishment132\\river-f6-n2\" 6 2 25"
+  },
+  {
+    "ProcessId": 23440,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- river \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\river-f6-n4\" 6 4 25"
+  },
+  {
+    "ProcessId": 37088,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/preservation_uptake_trace.ts \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\nourishment-check1\\river-25d\" \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\preservation-uptake132-river2\""
+  },
+  {
+    "ProcessId": 36424,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n0\" 4 0 25"
+  },
+  {
+    "ProcessId": 12300,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n1\" 4 1 25"
+  },
+  {
+    "ProcessId": 4768,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n2\" 4 2 25"
+  },
+  {
+    "ProcessId": 19504,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n3\" 4 3 25"
+  },
+  {
+    "ProcessId": 53096,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n4\" 4 4 25"
+  },
+  {
+    "ProcessId": 29868,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite-node/dist/cli.mjs scripts/survival_ensemble.ts -- meadow \"C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\aggregate-pre-reserves131\\meadow-f4-n5\" 4 5 25"
+  }
+]

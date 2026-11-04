@@ -1,0 +1,1971 @@
+{
+  "tick": 24000,
+  "events": [
+    {
+      "tick": 19229,
+      "p": 3789,
+      "pack": {
+        "seeds": 1
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 3789,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 3787,
+            "home": 6338,
+            "injury": "well",
+            "family": "1:3790",
+            "contact": "2:3788,3790",
+            "losses": "0:"
+          },
+          "eta": 119.1168,
+          "energy": 90.9824,
+          "warmth": 42.9673,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · personal insulation against the cold +31 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 46.62013763850555,
+          "y": 50.366101094172336,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "wood": 2,
+        "fibre": 3
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          }
+        ],
+        "batches": 1,
+        "produced": {
+          "fibre": 3
+        },
+        "consumed": {
+          "wood": 1
+        },
+        "contributions": {
+          "923": 65
+        },
+        "lastRun": 19162,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "923": 19162
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {},
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 19229,
+        "src": "seen",
+        "from": 0,
+        "learned": 19229,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 96.0836524999928,
+        "fuel": 0,
+        "items": {
+          "wood": 2,
+          "fibre": 3
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3
+          },
+          "inputs": {
+            "wood": 2
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 3789,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 19826,
+      "p": 905,
+      "pack": {
+        "hoe": 1,
+        "stone": 1,
+        "fish": 2,
+        "garment": 1
+      },
+      "action": {
+        "recipe": "weave_blanket",
+        "client": 905,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_blanket",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_blanket",
+          "label": "Weaving a blanket",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 903,
+            "home": 904,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 115.6041,
+          "energy": 53.6919,
+          "warmth": 57.1221,
+          "recorded": true
+        },
+        "why": "personal insulation against the cold +24 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 45.53546834904701,
+          "y": 49.45265504952986,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "wood": 1,
+        "fibre": 3
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          }
+        ],
+        "batches": 3,
+        "produced": {
+          "fibre": 6,
+          "garment": 1
+        },
+        "consumed": {
+          "wood": 2,
+          "fibre": 3
+        },
+        "contributions": {
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 19796,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "905": 19796
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {},
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 19826,
+        "src": "seen",
+        "from": 0,
+        "learned": 19826,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 95.06308099999039,
+        "fuel": 0,
+        "items": {
+          "wood": 1,
+          "fibre": 3
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 905,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 19852,
+      "p": 924,
+      "pack": {
+        "basket": 1,
+        "axe": 1,
+        "grain": 8,
+        "seeds": 8,
+        "wood": 3
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 924,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 921,
+            "home": 922,
+            "injury": "well",
+            "family": "2:925,926",
+            "contact": "3:923,925,926",
+            "losses": "0:"
+          },
+          "eta": 132.6628,
+          "energy": 65.822,
+          "warmth": 62.5609,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · personal insulation against the cold +31 · walking −2",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 49.48658911795356,
+          "y": 46.51267592178192,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "wood": 1,
+        "fibre": 3
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          }
+        ],
+        "batches": 3,
+        "produced": {
+          "fibre": 6,
+          "garment": 1
+        },
+        "consumed": {
+          "wood": 2,
+          "fibre": 3
+        },
+        "contributions": {
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 19796,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "905": 19796
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {},
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 19852,
+        "src": "seen",
+        "from": 0,
+        "learned": 19852,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 95.01863399999029,
+        "fuel": 0,
+        "items": {
+          "wood": 1,
+          "fibre": 3
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 924,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 20056,
+      "p": 3789,
+      "pack": {
+        "seeds": 1,
+        "wood": 4
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 3789,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 3787,
+            "home": 6338,
+            "injury": "well",
+            "family": "1:3790",
+            "contact": "2:3788,3790",
+            "losses": "0:"
+          },
+          "eta": 306.9446,
+          "energy": 56.4004,
+          "warmth": 57.6905,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · personal insulation against the cold +31 · walking −14",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 60.493558725481854,
+          "y": 60.55948396504391,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "wood": 3,
+        "fibre": 3
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          }
+        ],
+        "batches": 3,
+        "produced": {
+          "fibre": 6,
+          "garment": 1
+        },
+        "consumed": {
+          "wood": 2,
+          "fibre": 3
+        },
+        "contributions": {
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 19796,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "905": 19796
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {},
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 20056,
+        "src": "seen",
+        "from": 0,
+        "learned": 20056,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 94.66989599998946,
+        "fuel": 0,
+        "items": {
+          "wood": 3,
+          "fibre": 3
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3
+          },
+          "inputs": {
+            "wood": 3
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 3789,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 21599,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "berries": 1,
+        "wood": 3,
+        "fruit": 3
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "insulation for me and the cold child",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 159.8034,
+          "energy": 94.2,
+          "warmth": 27.5524,
+          "recorded": true
+        },
+        "why": "a step toward “see 1 garment through at the timber yard”: work on garment for garment · to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −4",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 49.489271237212236,
+          "y": 42.59662506368477,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "wood": 1,
+        "planks": 1,
+        "offcuts": 2
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 4,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "consumed": {
+          "wood": 5,
+          "fibre": 3
+        },
+        "contributions": {
+          "902": 167,
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 20384,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {},
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 1
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 21599,
+        "src": "seen",
+        "from": 0,
+        "learned": 21599,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 92.23852549998541,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "wood": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 1,
+            "offcuts": 2
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 21651,
+      "p": 940,
+      "pack": {
+        "basket": 1,
+        "hoe": 1,
+        "hammer": 1,
+        "wood": 3,
+        "grain": 2,
+        "seeds": 3,
+        "berries": 1
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 940,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 938,
+            "home": 1518,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:939",
+            "losses": "0:"
+          },
+          "eta": 110.3748,
+          "energy": 92.44,
+          "warmth": 51.2382,
+          "recorded": true
+        },
+        "why": "personal insulation against the cold +31 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 46.573106522398575,
+          "y": 49.17058499650516,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "wood": 1,
+        "planks": 1,
+        "offcuts": 2
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 4,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "consumed": {
+          "wood": 5,
+          "fibre": 3
+        },
+        "contributions": {
+          "902": 167,
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 20384,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {},
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 1
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 21651,
+        "src": "seen",
+        "from": 0,
+        "learned": 21651,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 92.17092549998539,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "wood": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 1,
+            "offcuts": 2
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 940,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 21749,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "berries": 1,
+        "wood": 3,
+        "fruit": 3
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 168.3163,
+          "energy": 91.77,
+          "warmth": 43.4358,
+          "recorded": true
+        },
+        "why": "to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −5",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 43.480795345595105,
+          "y": 41.51036679665558,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "wood": 1,
+        "planks": 1,
+        "offcuts": 2
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 4,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "consumed": {
+          "wood": 5,
+          "fibre": 3
+        },
+        "contributions": {
+          "902": 167,
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 20384,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {},
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 1
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 21749,
+        "src": "seen",
+        "from": 0,
+        "learned": 21749,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 92.04352549998534,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "wood": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 1,
+            "offcuts": 2
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 21919,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "wood": 3,
+        "fruit": 3
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 169.204,
+          "energy": 84.062,
+          "warmth": 60.442,
+          "recorded": true
+        },
+        "why": "to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −5",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 41.44403426344506,
+          "y": 42.56783569196705,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "wood": 1,
+        "planks": 1,
+        "offcuts": 2
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 4,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "consumed": {
+          "wood": 5,
+          "fibre": 3
+        },
+        "contributions": {
+          "902": 167,
+          "905": 173,
+          "923": 65
+        },
+        "lastRun": 20384,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {},
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 1
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 21919,
+        "src": "seen",
+        "from": 0,
+        "learned": 21919,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 91.82252549998525,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "wood": 1,
+          "planks": 1,
+          "offcuts": 2
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 1,
+            "offcuts": 2
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 22064,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "wood": 3,
+        "fruit": 3
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 1,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 158.6589,
+          "energy": 76.85,
+          "warmth": 74.198,
+          "recorded": true
+        },
+        "why": "to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −4",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 43.42001952391583,
+          "y": 42.51542958421633,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "planks": 2,
+        "offcuts": 4
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          }
+        ],
+        "batches": 5,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 2,
+          "offcuts": 4
+        },
+        "consumed": {
+          "wood": 8,
+          "fibre": 3
+        },
+        "contributions": {
+          "902": 167,
+          "905": 173,
+          "923": 65,
+          "929": 96
+        },
+        "lastRun": 22023,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "929": 22023
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 2
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 22064,
+        "src": "seen",
+        "from": 0,
+        "learned": 22064,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 91.63402549998517,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "planks": 2,
+          "offcuts": 4
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 2,
+            "offcuts": 4
+          },
+          "inputs": {},
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 22238,
+      "p": 899,
+      "pack": {
+        "seeds": 4,
+        "fish": 1
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 899,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 896,
+            "home": 898,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 119.1207,
+          "energy": 34.4968,
+          "warmth": 46.3218,
+          "recorded": true
+        },
+        "why": "personal insulation against the cold +31 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 45.510091298725456,
+          "y": 49.582159658172166,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "planks": 3,
+        "offcuts": 6,
+        "wood": 1
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 6,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 3,
+          "offcuts": 6
+        },
+        "consumed": {
+          "wood": 11,
+          "fibre": 3
+        },
+        "contributions": {
+          "899": 18,
+          "902": 167,
+          "905": 173,
+          "923": 65,
+          "929": 96,
+          "939": 56
+        },
+        "lastRun": 22227,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "899": 22227,
+          "929": 22023,
+          "939": 22227
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 3
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 22238,
+        "src": "seen",
+        "from": 0,
+        "learned": 22238,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 91.40782549998508,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "planks": 3,
+          "offcuts": 6,
+          "wood": 1
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 3,
+            "offcuts": 6
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 899,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 22367,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "fruit": 3,
+        "basket": 1
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 236.4663,
+          "energy": 65.55,
+          "warmth": 84.6896,
+          "recorded": true
+        },
+        "why": "to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −10",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 37.28746264494076,
+          "y": 36.031639990230445,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "planks": 3,
+        "offcuts": 6,
+        "wood": 1
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 6,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 3,
+          "offcuts": 6
+        },
+        "consumed": {
+          "wood": 11,
+          "fibre": 3
+        },
+        "contributions": {
+          "899": 18,
+          "902": 167,
+          "905": 173,
+          "923": 65,
+          "929": 96,
+          "939": 56
+        },
+        "lastRun": 22227,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {
+          "899": 22227,
+          "929": 22023,
+          "939": 22227
+        },
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 3
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 22367,
+        "src": "seen",
+        "from": 0,
+        "learned": 22367,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 91.24012549998501,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "planks": 3,
+          "offcuts": 6,
+          "wood": 1
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 3,
+            "offcuts": 6
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    },
+    {
+      "tick": 22705,
+      "p": 934,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "fruit": 3,
+        "basket": 1
+      },
+      "action": {
+        "recipe": "weave_garment",
+        "client": 934,
+        "purpose": "personal insulation against the cold",
+        "destSite": 0,
+        "forPlan": 7763,
+        "optKey": "operate:7164:weave_garment",
+        "dailyRoutine": {
+          "key": "operate:7164:weave_garment",
+          "label": "Weaving a garment",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": true,
+            "household": 933,
+            "home": 2113,
+            "injury": "well",
+            "family": "2:936,937",
+            "contact": "3:935,936,937",
+            "losses": "0:"
+          },
+          "eta": 240.7465,
+          "energy": 52.11,
+          "warmth": 50.2754,
+          "recorded": true
+        },
+        "why": "a step toward “see 1 garment through at the timber yard”: work on garment for garment · to see 1 garment through at the timber yard +27 · everything for it is already at the timber yard +18 · walking −10",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 57.5,
+          "y": 57.5,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        }
+      },
+      "detail": "lacks 3 fibre",
+      "place": 7164,
+      "level": "communal",
+      "usable": 0,
+      "actual": {
+        "fibre": 3,
+        "planks": 2,
+        "offcuts": 6,
+        "wood": 1
+      },
+      "ops": {
+        "job": null,
+        "earmarks": [
+          {
+            "kind": "out",
+            "item": "fibre",
+            "n": 3,
+            "owner": 923,
+            "until": 22762,
+            "reason": "personal insulation against the cold (fibre garment)"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 902,
+            "until": 23984,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 929,
+            "until": 25623,
+            "reason": "for my household’s hall"
+          },
+          {
+            "kind": "out",
+            "item": "planks",
+            "n": 1,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          },
+          {
+            "kind": "out",
+            "item": "offcuts",
+            "n": 2,
+            "owner": 939,
+            "until": 25827,
+            "reason": "for the shared hall"
+          }
+        ],
+        "batches": 6,
+        "produced": {
+          "fibre": 6,
+          "garment": 1,
+          "planks": 3,
+          "offcuts": 6
+        },
+        "consumed": {
+          "wood": 11,
+          "fibre": 3
+        },
+        "contributions": {
+          "899": 18,
+          "902": 167,
+          "905": 173,
+          "923": 65,
+          "929": 96,
+          "939": 56
+        },
+        "lastRun": 22227,
+        "lastBlocker": "lacks 3 fibre",
+        "depositId": 0,
+        "shares": {},
+        "present": {},
+        "builders": {
+          "900": 0.02990430622009572,
+          "906": 0.05980861244019144,
+          "909": 0.2188995215311008,
+          "921": 0.2715311004784686,
+          "938": 0.1495215311004786,
+          "3787": 0.27033492822966476
+        },
+        "wasted": {
+          "chips and bark hewn away": 3
+        },
+        "tended": 16785
+      },
+      "remembered": {
+        "id": 7164,
+        "kind": "building",
+        "x": 46.5,
+        "y": 48,
+        "amount": 0,
+        "max": 0,
+        "seen": 22705,
+        "src": "seen",
+        "from": 0,
+        "learned": 22705,
+        "btype": "timber_yard",
+        "hh": 0,
+        "cond": 90.80072549998484,
+        "fuel": 0,
+        "items": {
+          "fibre": 3,
+          "planks": 2,
+          "offcuts": 6,
+          "wood": 1
+        },
+        "ops": {
+          "job": null,
+          "progress": 0,
+          "burn": 0,
+          "output": {
+            "fibre": 3,
+            "planks": 2,
+            "offcuts": 6
+          },
+          "inputs": {
+            "wood": 1
+          },
+          "blocked": "lacks 3 fibre",
+          "deposit": -1,
+          "yields": {},
+          "readyAt": 0,
+          "client": 0,
+          "tended": 16785
+        },
+        "origin": 934,
+        "hops": 0
+      }
+    }
+  ]
+}

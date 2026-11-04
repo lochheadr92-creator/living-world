@@ -1,0 +1,14 @@
+[
+  {
+    "seed": "forest",
+    "exactCurrentValidation": true,
+    "continuedTicks": 120,
+    "conserved": true
+  },
+  {
+    "seed": "river",
+    "exactCurrentValidation": true,
+    "continuedTicks": 120,
+    "conserved": true
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "log": "trap-ground-affected.log",
+  "accepted": false,
+  "reason": "Main source changed while this affected-suite session could still be active; use frozen-check2 repeat for stable-source evidence."
+}

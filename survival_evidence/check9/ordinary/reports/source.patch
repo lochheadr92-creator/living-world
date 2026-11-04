@@ -1,0 +1,1504 @@
+﻿diff --git a/docs/CLAUDE_AUTONOMY_HANDOFF.md b/docs/CLAUDE_AUTONOMY_HANDOFF.md
+index 6a3d9f0..bd32d10 100644
+--- a/docs/CLAUDE_AUTONOMY_HANDOFF.md
++++ b/docs/CLAUDE_AUTONOMY_HANDOFF.md
+@@ -1,5 +1,35 @@
+ # Autonomy programme handoff ΓÇö 31 October 2026 (Claude session, second checkpoint)
+ 
++**Active survival continuation, 4 November 2026:** use
++`C:\dev\Claude Experiment\living-world-integrate`, main HEAD
++`61cb6e5139adbedfd52f463fc635a90d4172327b`. Uncommitted candidate rules-122 preservation
++work and all pre-existing untracked files are preserved. No commit or push has
++been made for this assignment yet. [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md)
++is the single programme/evidence document for all six requested streams.
++
++Latest result: the early-construction exception and its leisure regression are
++resolved. `survival_evidence/check5/` completed both 25-day worlds, but neither
++made preserved food. Its full suite passed all tracked tests; 15 retained review
++files failed (see programme for isolated baseline/environment evidence).
++A demonstrated household-stock collection conflict is corrected; 71 affected
++tests passed. The subsequent missing batch-goal connection now uses the existing
++bounded project planner; 78 preservation/batch/project/predecessor tests passed.
++`check7` full suite exited 1, with all tracked tests passing and 14 retained review
++files failing (32 failed tests). Both check6 worlds completed with integrity
++checks but no preserved food, with final states identical to check5.
++Main additionally fixes the pure worker display during passive drying; all five
++rendered assertions pass. The latest candidate connects preservation to the
++existing food-reserve plan, keeping its home destination and food available for
++urgent eating. 82 affected tests passed, then 26 preservation/predecessor tests
++passed after the destination correction. `check8` is the frozen current candidate,
++running full tests and ordinary worlds (launch details in its `launch.json`).
++Next bounded action: read check7/check8 results, diagnose any remaining link, and prove ordinary consumption before
++starting indoor heating. Required npm
++typecheck/build still report two pre-existing untracked review-test type errors;
++do not exclude or silently fix those tests. Keep arrivals on and retain all nulls.
++
++This is a live checkpoint, not a completion claim. The older handoff follows.
++
+ **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+ recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+ repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
+diff --git a/docs/DEPENDENCY_CHAIN_PROGRAMME.md b/docs/DEPENDENCY_CHAIN_PROGRAMME.md
+index 20859e3..18cab24 100644
+--- a/docs/DEPENDENCY_CHAIN_PROGRAMME.md
++++ b/docs/DEPENDENCY_CHAIN_PROGRAMME.md
+@@ -1,5 +1,12 @@
+ # Dependency-chain programme register
+ 
++**Survival assignment, 4 November 2026 ΓÇö in progress:** the active integration
++checkout was verified at main `61cb6e5`, rules 121. Candidate rules 122 implements
++the first stream, preservation. Scope, ownership, evidence and remaining work for
++all six authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
++No stream is yet marked delivered; later streams and body reserves are not implied
++by the candidate. The historical branch notes below retain their original scope.
++
+ **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+ recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+ repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
+diff --git a/scripts/lab/lab.ts b/scripts/lab/lab.ts
+index 9101fa3..640f24a 100644
+--- a/scripts/lab/lab.ts
++++ b/scripts/lab/lab.ts
+@@ -33,6 +33,7 @@ import {waterSearchOn,setWaterSearch} from '../../src/sim/water_search';
+ import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
+ import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
+ import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
++import {preservationOn,setPreservation} from '../../src/sim/preservation';
+ import { waterBudgetEnabled, setWaterBudget } from '../../src/sim/hydrology';
+ import { ecologyEnabled, setEcology } from '../../src/sim/ecology';
+ import {buildPromiseSettlementOn,setBuildPromiseSettlement} from '../../src/sim/promise_knowledge';
+@@ -127,7 +128,7 @@ import { SOURCE_SKILL } from '../../src/sim/constants';
+ import type { FoodKind } from '../../src/sim/types';
+ 
+ /** what counts as food when a store is weighed up; the same list provision.ts uses */
+-const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
++const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ import type { Activity, Person } from '../../src/sim/types';
+ import { cartFirstOn, setCartFirst } from '../../src/sim/cart_priority';
+ import { setMoodEffects } from '../../src/sim/mood';
+@@ -404,6 +405,7 @@ export function parseIntervention(specIn: string): Intervention {
+   if(kind==='rich-no-meeting-knowledge')return {spec:label,summary:'retain shared-status meal decisions; remove private heard appointments and replacement invitations',install(){const was=meetingKnowledgeOn();setMeetingKnowledge(false);return ()=>setMeetingKnowledge(was);}};
+   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
+   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};
++  if(kind==='rich-no-preservation')return {spec:label,summary:'disable preservation decisions and new batches; keep food properties and existing paid contents',install(){const was=preservationOn();setPreservation(false);return ()=>setPreservation(was);}};
+   if(kind==='rich-no-water-budget')return {spec:label,summary:'remove finite natural supply, weather accounting and personal dry-water responses',install(){const was=waterBudgetEnabled();setWaterBudget(false);return ()=>setWaterBudget(was);}};
+   if(kind==='rich-no-ecology')return {spec:label,summary:'remove persistent productive condition, observation and field rest',install(){const was=ecologyEnabled();setEcology(false);return ()=>setEcology(was);}};
+   if(kind==='rich-no-promise-delays')return {spec:label,summary:'remove active-promise delay explanations and one bounded deadline negotiation',install(){const was=promiseDelaysOn();setPromiseDelays(false);return ()=>setPromiseDelays(was);}};
+diff --git a/scripts/ready_step_observe.ts b/scripts/ready_step_observe.ts
+index 649cc9d..73095ce 100644
+--- a/scripts/ready_step_observe.ts
++++ b/scripts/ready_step_observe.ts
+@@ -1,5 +1,5 @@
+ // Fixed ordinary project-step screen: no induced demand, supplies, plans or choices.
+-import {existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync} from 'node:fs';
++import {appendFileSync,existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync} from 'node:fs';
+ import {createHash} from 'node:crypto';
+ import {execFileSync} from 'node:child_process';
+ import {createWorld} from '../src/sim/factory';
+@@ -13,33 +13,41 @@ import {observeInhabitant} from '../src/agent/observe';
+ import {describePerson} from '../src/sim/inspect';
+ import {TimeBudget} from './observers/time_budget';
+ import {gitProvenance,sourceManifest} from './observers/provenance';
++import {survivalObserver} from './observers/survival';
+ const [seed,out,daysArg='5',budgetArg='170',input]=process.argv.slice(2).filter(a=>a!=='--'),days=Number(daysArg),budget=Number(budgetArg);
+ if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Number.isFinite(budget)||budget<=0)throw new Error('Seed, fresh output, integer days 1..365 and positive seconds budget required');
+-const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts').sort();
++const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts','scripts/observers/survival.ts').sort();
+ const manifest=()=>sourceManifest(files),source=manifest();
+ const inputRaw=input?readFileSync(input,'utf8'):undefined;
+ const w=inputRaw?deserializeWorld(inputRaw):createWorld(currentWorldSettings('normal',seed)),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
+ if(w.settings.seed!==seed||w.tick>=days*2400)throw new Error('Input seed must match and precede the target day');
+ const from=w.tick;
++mkdirSync(out,{recursive:true});
+ const counts:Record<string,number>={},stories:unknown[]=[],plansSeen=new Set<number>();let samples=0,pureChecks=0;
+ const count=(key:string,n=1)=>counts[key]=(counts[key]??0)+n,story=(event:unknown)=>{if(stories.length<160)stories.push(event);};
+ // Already-active plans at a continuation boundary are not new adoptions.
+ if(input)for(const p of w.persons)for(const i of p.intentions)if(i.status==='active'&&i.project){plansSeen.add(i.id);count('project plans already active at input:'+i.makes);}
+ const READY=/already at the/;
+ w.hooks={onActivityStart:(p,a)=>{if(a.kind==='operate'&&a.data.forPlan){count('start:project operate:'+String(a.data.recipe));story({event:'start',tick:w.tick,person:p.id,recipe:a.data.recipe,ready:READY.test(String(a.data.why??'')),goal:a.goal});}if(a.kind==='cart_haul')count('start:cart_haul');},onActivityEnd:(p,a,outcome,detail)=>{if(a.kind==='operate'&&a.data.forPlan){count('ending:project operate:'+outcome);story({event:'ending',tick:w.tick,person:p.id,recipe:a.data.recipe,outcome,detail});}}};
++const survival=survivalObserver(w);
+ const time=new TimeBudget(),detach=time.attach(w);let stop='horizon';
+ while(w.tick<days*2400){
+  time.sampleTick(w);
++ survival.tick();
+  if(w.tick%120===0){const before=serializeWorld(w);for(const p of w.persons){if(!p.alive)continue;samples++;
+   const ctx=generateOptions(w,p,true,true),ranked=rankOptions(ctx);
++  survival.sample(ctx,ranked);
+   for(const i of p.intentions){if(i.status!=='active'||!i.project)continue;if(!plansSeen.has(i.id)){plansSeen.add(i.id);count('project plans adopted:'+i.makes);story({event:'plan',tick:w.tick,person:p.id,makes:i.makes,goal:i.goal});}
+    const step=nextProjectStep(ctx,i.project,i);count('sampled project step:'+step.phase);
+    if(step.phase==='operate'){const o=ctx.options.find(o=>o.key===`operate:${step.target}:${step.node.recipe}`);const ready=!!o&&o.parts.some(p=>READY.test(String(p[0])));count(o?ready?'sampled operate step offered prepared':'sampled operate step offered unprepared':'sampled operate step not offered');if(o&&ranked[0]?.key===o.key)count(ready?'sampled prepared step ranked first':'sampled unprepared step ranked first');}}
+   observeInhabitant(w,p,ctx,ranked);describePerson(w,p.id);
+  }if(serializeWorld(w)!==before)throw new Error('Impure observer');pureChecks++;}
+- stepWorld(w);stepWorld(twin);if(w.tick%2400===0&&!conservationReport(w).ok)throw new Error('Conservation failed');if(w.tick%120===0&&performance.now()-began>budget*1000){stop='budget';break;}
++ stepWorld(w);stepWorld(twin);if(w.tick%2400===0){if(!conservationReport(w).ok)throw new Error('Conservation failed');appendFileSync(out+'/progress.jsonl',JSON.stringify({tick:w.tick,population:w.persons.filter(p=>p.alive).length,survival:survival.report()})+'\n');}if(w.tick%120===0&&performance.now()-began>budget*1000){stop='budget';break;}
+ }
+-detach();delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin))throw new Error('Unobserved twin changed');if(final!==serializeWorld(deserializeWorld(final)))throw new Error('Invalid final save');if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during observation');
++detach();delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin))throw new Error('Unobserved twin changed');const restored=deserializeWorld(final);if(final!==serializeWorld(restored))throw new Error('Invalid final save');
++for(let n=0;n<120;n++){stepWorld(twin);stepWorld(restored);}
++if(serializeWorld(twin)!==serializeWorld(restored))throw new Error('Saved continuation changed');
++if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during observation');
+ count('carts at end',w.carts.length);
+-const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
++const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,survival:survival.report(),timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
+ mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({seed,tick:w.tick,stop,seconds:report.seconds,samples,pureChecks,counts,deaths:w.deceased,conserved:report.conservation.ok}));if(stop!=='horizon')process.exitCode=1;
+diff --git a/src/app/save.ts b/src/app/save.ts
+index c98433b..fdea448 100644
+--- a/src/app/save.ts
++++ b/src/app/save.ts
+@@ -1,4 +1,5 @@
+ import {validateChildhood} from '../sim/childhood';
++import {validatePreservation} from '../sim/preservation';
+ import {validateCompany} from '../sim/companionship';
+ import {validateNightExperience} from '../sim/night_experience';
+ import { validateEcology } from '../sim/ecology';
+@@ -292,6 +293,7 @@ export function deserializeWorld(json: string): World {
+   validateWater(w);
+   validateFlood(w);
+   validateOffcuts(w);
++  validatePreservation(w);
+   validateMealLeftovers(w);
+   validateEstateCustody(w);
+   validateWorkHandovers(w);
+diff --git a/src/render/bld_food.ts b/src/render/bld_food.ts
+index 4d1e878..33a63b1 100644
+--- a/src/render/bld_food.ts
++++ b/src/render/bld_food.ts
+@@ -8,6 +8,20 @@ import type { Roof } from './bld_common';
+ import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
+ import type { Sprite } from './sprites';
+ 
++/** Paid rack/pit structure only. Actual food and burning are drawn from state. */
++export function foodRackSprite(cache:SpriteCache):Sprite {
++  return cache.get('food_rack',160,130,80,88,ctx=>{
++    const p=mk(2,2);
++    groundShadow(ctx,55,22,0.25,4);
++    for(const x of [0.25,1.75])for(const y of [0.3,1.25])
++      line(ctx,p(x,y),p(x,y,30),'#76543c',4);
++    for(const y of [0.3,0.75,1.25])line(ctx,p(0.25,y,30),p(1.75,y,30),'#a28256',3);
++    const pit=p(1.05,1.6);
++    ellipse(ctx,pit[0],pit[1],18,7,'#77746c');
++    ellipse(ctx,pit[0],pit[1]-1,13,4,'#302b28');
++  });
++}
++
+ // ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ granary (2 x 2) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ export const GRANARY = { legs: 19, floor: 21, bin: 56, ridge: 96, x0: 0.15, x1: 1.85, y0: 0.15, y1: 1.85 } as const;
+ 
+diff --git a/src/render/buildings.ts b/src/render/buildings.ts
+index 18fcb5e..f5ac09d 100644
+--- a/src/render/buildings.ts
++++ b/src/render/buildings.ts
+@@ -7,7 +7,7 @@ import type { Building, ItemKind } from '../sim/types';
+ import { GRANARY } from './bld_food';
+ import { stackSprite } from './goods';
+ import type { StackKind } from './goods';
+-import { SpriteCache, blit } from './sprites';
++import { SpriteCache, blit, ellipse, line } from './sprites';
+ import { STRUCT, buildingLayers } from './structures';
+ import type { BuildKind } from './structures';
+ 
+@@ -72,6 +72,24 @@ export class BuildingPainter {
+     } else if (slots) this.stock(ctx, b, slots, -1);
+ 
+     this.wear(ctx, b, kind, x, y);
++    if(kind==='food_rack'){
++      const job=b.ops?.job;
++      const hanging=(job?.held.fish??0)+(job?.held.meat??0);
++      for(let i=0;i<hanging;i++){
++        const [fx,fy]=iso(b.x+0.65+i*0.45,b.y+0.75);
++        line(ctx,[fx,fy-29],[fx,fy-18],'#c3aa79',1);
++        ellipse(ctx,fx,fy-14,3,7,job?.recipe.includes('meat')?'#965c45':'#8fa7a2');
++      }
++      const stored=Object.entries(b.store.items).filter(([k])=>k.startsWith('dried_')||k.startsWith('smoked_')).reduce((n,[,v])=>n+(v??0),0);
++      for(let i=0;i<Math.min(stored,10);i++){
++        const [fx,fy]=iso(b.x+0.25+(i%4)*0.16,b.y+1.65+Math.floor(i/4)*0.12);
++        ellipse(ctx,fx,fy-3,4,2,'#9b704e');
++      }
++      if(job?.phase==='burn'&&job.recipe.startsWith('smoke_')){
++        const [fx,fy]=iso(b.x+1.05,b.y+1.6);
++        ellipse(ctx,fx,fy-3,6,2,'#d7793d');
++      }
++    }
+ 
+     if (kind === 'storehouse') {
+       const crates = Math.min(6, Math.ceil(weightOf(b.store.items) / 22));
+diff --git a/src/render/construction.ts b/src/render/construction.ts
+index 37720e3..e7b81c8 100644
+--- a/src/render/construction.ts
++++ b/src/render/construction.ts
+@@ -38,6 +38,7 @@ interface Spec {
+ }
+ 
+ const SPEC: Record<BuildingType, Spec> = {
++  food_rack: {frame:'posts',gable:false,footing:'none',reveal:0.3},
+   lean_to: { frame: 'poles', gable: false, footing: 'none', reveal: 0.3 },
+   hut: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
+   house: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.22 },
+diff --git a/src/render/structures.ts b/src/render/structures.ts
+index 4d03251..300c42d 100644
+--- a/src/render/structures.ts
++++ b/src/render/structures.ts
+@@ -1,7 +1,7 @@
+ // Every building drawing in one place: which sprite(s) a building type uses, and the measurements the rest of the renderer needs
+ // (how tall each one stands for click targets, where its chimney is, the heights that construction stages are built to).
+ import type { BuildingType } from '../sim/types';
+-import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite } from './bld_food';
++import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite, foodRackSprite } from './bld_food';
+ import { HOUSE, houseSprite } from './bld_home';
+ import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
+ import { SpriteCache, classicBuildingSprite } from './sprites';
+@@ -15,6 +15,7 @@ export type BuildKind = Exclude<BuildingType, 'fire'>;
+  */
+ export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: number): Sprite[] {
+   switch (kind) {
++    case 'food_rack': return [foodRackSprite(cache)];
+     case 'lean_to':
+     case 'hut':
+     case 'storehouse':
+@@ -64,6 +65,7 @@ export interface StructMeta {
+ }
+ 
+ const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
++  food_rack: {plinth:0,wall:24,top:30,click:40},
+   lean_to: { plinth: 0, wall: 17, top: 41, click: 44 },
+   hut: { plinth: 6, wall: 28, top: 57, click: 66, chimney: { x: 1.65, y: 0.85, z: 66 } },
+   house: { plinth: HOUSE.plinth, wall: HOUSE.wall, top: HOUSE.chimneyTop + 4, click: 104, chimney: { x: HOUSE.chimney.x, y: HOUSE.chimney.y, z: HOUSE.chimneyTop + 4 } },
+diff --git a/src/sim/act_production.ts b/src/sim/act_production.ts
+index 3764f9f..14d52e0 100644
+--- a/src/sim/act_production.ts
++++ b/src/sim/act_production.ts
+@@ -90,8 +90,11 @@ registerHandler('operate', {
+   work(world, p, a): WorkResult {
+     const b = buildingOf(world, a);
+     if (!b || !b.ops) return 'fail:the workplace is gone';
++    if(!b.ops.job&&RECIPE_BY_ID[String(a.data.running)]?.preservation)
++      return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker||'the paid batch is no longer available'}`;
+     faceToward(p, a.tx, a.ty);
+     const res = workJob(world, b, p);
++    if(res==='preservation_failed')return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker}`;
+     if (res === 'missing_tool') {
+       const kind = recipeOf(b.ops.job!).tool!.kind;
+       const why = `needs a ${kind === 'pick' ? 'pickaxe' : kind}; the unfinished batch keeps its materials and progress`;
+@@ -115,7 +118,7 @@ registerHandler('operate', {
+     const r: Recipe | undefined = RECIPE_BY_ID[(a.data.running as string) ?? ''];
+     if (a.cycle > 0 && r) {
+       const left = b.ops?.job;
+-      addLog(world, p, 'work', left ? `Worked on ${r.label} at the ${b.type.replace('_', ' ')} for a while (${detail}).` : `Finished ${r.label} at the ${b.type.replace('_', ' ')}.`);
++      addLog(world, p, 'work', left || r.preservation&&outcome!=='success' ? `Worked on ${r.label} at the ${b.type.replace('_', ' ')} for a while (${detail}).` : `Finished ${r.label} at the ${b.type.replace('_', ' ')}.`);
+     } else if (outcome === 'failed') {
+       addLog(world, p, 'work', `Could not start work at the ${b.type.replace('_', ' ')}: ${detail}.`);
+     }
+diff --git a/src/sim/act_resource.ts b/src/sim/act_resource.ts
+index 16dc083..d5989bb 100644
+--- a/src/sim/act_resource.ts
++++ b/src/sim/act_resource.ts
+@@ -1,4 +1,5 @@
+ import {pileAccessBlocker} from './pile_access';
++import {runsPreservation} from './preservation';
+ import {saveSeedFromGrain} from './wild_seed';
+ import { harvestPressure } from './ecology';
+ import { hasFloodAccess } from './flood';
+@@ -255,7 +256,9 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
+   const from = table ?? p.inv;
+   // rules 46: a bite taken at the granary's bins is a bite out of the household's share (or the ration), and stops at it
+   const store = a.data.table ? world.byId.get(a.targetId) : undefined;
+-  const bins = !!store && store.ent === 'building' && store.type === 'granary' && hasWinterReserve(world);
++  const rack = !!store&&store.ent==='building'&&store.type==='food_rack'&&runsPreservation(world);
++  const bins = !!store && store.ent === 'building' && (store.type === 'granary' && hasWinterReserve(world) || rack);
++  if(bins&&runsPreservation(world)&&withdrawAllowance(world,store,p,k,1)<1)return a.cycle>0?'done':'fail:the food is no longer ours to take';
+   if (bins && ((a.data.ration as number) ?? 0) < 1) return a.cycle > 0 ? 'done' : 'fail:nothing of ours left in the bins';
+   const eaten = consume(world, from, k, 1, 'eaten');
+   if (bins && eaten > 0) {
+@@ -275,7 +278,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
+     if (lim.portions !== undefined && a.cycle >= lim.portions) return 'done';
+     if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
+   }
+-  const next = pickFood(from, p.needs.hunger);
++  const next = pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger);
+   const keepFood = (a.data.keep as number) ?? 0;
+   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);
+   if (!next || p.needs.hunger >= 88 || (keepFood > 0 && foodLeft <= keepFood && p.needs.hunger > 55)) return 'done';
+@@ -312,14 +315,15 @@ registerHandler('eat_store', {
+     let want = Math.ceil((92 - p.needs.hunger) / 18);
+     // rules 46: at a granary the meal is bounded by the household's share or the emergency ration (facilities.ts), checked unit by
+     // unit against the bins as they are now, and each unit taken is booked against the share
+-    const bins = e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world);
++    const bins = e.ent === 'building' && (e.type === 'granary' && hasWinterReserve(world) || e.type==='food_rack'&&runsPreservation(world));
+     // the allowance is asked once per kind, for the whole meal, and spent unit by unit: the emergency ration is a ration, not a
+     // right renewed with every bite
+     const budget: Partial<Record<ItemKind, number>> = {};
+     const allowed = (k: ItemKind): number => (budget[k] ??= bins && e.ent === 'building' ? withdrawAllowance(world, e, p, k, want) : want);
++    const mealFood=(hunger:number)=>pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(items).filter(([key])=>allowed(key as ItemKind)>=1)):items,hunger);
+     let tookAny = false;
+     for (let guard = 0; guard < 12 && want > 0; guard++) {
+-      const k = pickFood(items, p.needs.hunger + (a.cycle * 14));
++      const k = mealFood(p.needs.hunger + (a.cycle * 14));
+       if (!k) break;
+       if (bins && allowed(k) < 1) break;
+       const got = transfer(world, items, p.inv, carryCap(world, p), k, 1, e.ent === 'building' ? 'building:' + e.id : 'pile:' + e.id, 'person:' + p.id, 'eat from store');
+@@ -335,7 +339,7 @@ registerHandler('eat_store', {
+     if (!tookAny) {
+       // Version 9: nothing could be moved into the pack. If that is because the pack is full and the store DOES hold food, the
+       // meal is eaten at the store (tableeating.ts); the store is not written off, because it is not empty.
+-      const k = eatsAtTheStore(world) ? pickFood(items, p.needs.hunger) : null;
++      const k = eatsAtTheStore(world) ? mealFood(p.needs.hunger) : null;
+       if (k && (!bins || allowed(k) >= 1)) {
+         a.data.table = true;
+         a.data.food = k;
+diff --git a/src/sim/batch_plan.ts b/src/sim/batch_plan.ts
+index da09535..ca42143 100644
+--- a/src/sim/batch_plan.ts
++++ b/src/sim/batch_plan.ts
+@@ -20,7 +20,8 @@ import {currentHandInputs} from './project_hand_inputs';
+ // the site gone, nobody able to supply an input. One such plan at a time, after food, shelter, roof and tool plans.
+ import type { Belief, ItemKind, Items, Person, World } from './types';
+ import type { Ctx, Option } from './optutil';
+-import { DAY } from './constants';
++import { DAY,PRESERVED_FOODS } from './constants';
++import {hasPreservation} from './preservation';
+ import { isRich } from './mood';
+ import { runsRulesVersion } from './rulesversion';
+ import { RECIPE_BY_ID, recipesMaking } from './recipes';
+@@ -44,7 +45,7 @@ export const BATCH_MIN_BASE = 8;
+ /** how long a batch plan is given: two trips for the inputs, the work, a burn of up to 420 ticks and the collection do not fit in two days */
+ export const BATCH_PATIENCE = DAY * 3;
+ /** what a batch plan may be about: the workshop products the planner wants, plus the two things fired or built from them */
+-export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart']);
++export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart',...PRESERVED_FOODS]);
+ 
+ let enabled = true;
+ export const batchPlansOn = (): boolean => enabled;
+@@ -239,6 +240,7 @@ export function batchStep(ctx: Ctx, i: Intention): Step {
+ 
+ /** How a batch plan ends: the goods reached their use, or a stated reason why not. */
+ export function batchOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
++  if(i.recipe&&RECIPE_BY_ID[i.recipe]?.preservation&&!hasPreservation(world))return {status:'dropped',reason:'preservation planning is no longer available'};
+   if(i.project?.failure)return {status:'dropped',reason:i.project.failure};
+   if (!hasBatchPlans(world)) return { status: 'dropped', reason: 'seeing a batch through is no longer part of these rules' };
+   const b = p.beliefs[i.aboutId];
+diff --git a/src/sim/constants.ts b/src/sim/constants.ts
+index 2b4a830..7d1cd53 100644
+--- a/src/sim/constants.ts
++++ b/src/sim/constants.ts
+@@ -19,11 +19,13 @@ export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
+ export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
+ export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
+ // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
+-export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts'];
++export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
++export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS];
+ /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
+-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26 };
++export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26 };
+ export const WATER_VALUE = 36;
+ export const WEIGHT: Record<ItemKind, number> = {
++  dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
+   offcuts: 1,
+   meat: 1.5,
+   berries: 1,
+@@ -56,13 +58,14 @@ export const WEIGHT: Record<ItemKind, number> = {
+  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
+  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
+  */
+-export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4 };
++export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25 };
+ /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
+ export const GRANARY_SPOIL = 0.2;
+ /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
+ export const GRANARY_TEND_EVERY = DAY * 3;
+ export const GRANARY_NEGLECT_MULT = 2.2;
+ export const ITEM_LABEL: Record<ItemKind, string> = {
++  dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
+   offcuts: 'offcut fuel bundles',
+   meat: 'meat',
+   berries: 'berries',
+@@ -92,7 +95,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
+   spear: 'spear',
+ };
+ export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
+-export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k);
++export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k) || (PRESERVED_FOODS as string[]).includes(k);
+ 
+ export const CARRY_CAP = { child: 5, youth: 9, adult: 12, elder: 8 } as const;
+ export const BASKET_BONUS = 6;
+@@ -284,6 +287,11 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
+     role: 'meet',
+     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
+   }),
++  food_rack: bd({
++    w:2, h:2, cost:{wood:4,stone:2}, work:180, cap:30, workers:2,
++    label:'drying and smoking rack', sleepers:0, protect:0, role:'work',
++    blurb:'An open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.',
++  }),
+ };
+ 
+ /** every kind of building a household can live in */
+@@ -311,6 +319,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
+   granary: 0.0012,
+   bakery: 0.0014,
+   hall: 0.0012,
++  food_rack: 0.0015,
+ };
+ export const REPAIR_GAIN = 28;
+ /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
+diff --git a/src/sim/dialogue.ts b/src/sim/dialogue.ts
+index c7af261..48b7774 100644
+--- a/src/sim/dialogue.ts
++++ b/src/sim/dialogue.ts
+@@ -58,6 +58,7 @@ export function smallTalk(world: World, a: number, b: number, atFire: boolean, c
+ }
+ 
+ export const ITEM_PHRASE: Record<ItemKind, string> = {
++  dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
+   offcuts: 'offcut fuel',
+   meat: 'meat',
+   berries: 'berries',
+diff --git a/src/sim/economy.ts b/src/sim/economy.ts
+index 70e5b0c..11dddec 100644
+--- a/src/sim/economy.ts
++++ b/src/sim/economy.ts
+@@ -5,7 +5,7 @@ import { carryCap } from './people';
+ import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
+ import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
+ 
+-const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread'];
++const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ 
+ /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
+ export function pickFood(items: Items, hunger: number): FoodKind | null {
+diff --git a/src/sim/facilities.ts b/src/sim/facilities.ts
+index f444358..96c1733 100644
+--- a/src/sim/facilities.ts
++++ b/src/sim/facilities.ts
+@@ -1,10 +1,11 @@
+ import { recordWorkshopOutput } from './settlement_economy';
++import {preservationStartBlocker,preservationCanAdvance,preservationReady} from './preservation';
+ import { recoveredOffcuts } from './offcuts';
+ import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
+ import { runsRulesVersion } from './rulesversion';
+ import { notePractice, onSharedWork } from './apprentice';
+ import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
+-import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
++import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom, foodUnits } from './economy';
+ import { addEvent, addFx, addLog } from './events';
+ import { newCart } from './carts';
+ import { RECIPE_BY_ID, acceptedAt, isFacilityType, newOps, recipesAt } from './recipes';
+@@ -347,6 +348,9 @@ function depositOf(world: World, b: Building): Source | null {
+ 
+ /** Why this person cannot start this recipe here right now ('' if they can). The text is what the inspector shows. */
+ export function startBlocker(world: World, b: Building, p: Person, r: Recipe, trial = false): string {
++  const accessibleFood=r.preservation?foodUnits(Object.fromEntries(Object.keys(b.store.items).map(k=>[k,usableUnits(world,b,p,k as ItemKind)]))):0;
++  const preservationBlock=preservationStartBlocker(world,p,r,accessibleFood);
++  if(preservationBlock)return preservationBlock;
+   const ops = opsOf(b);
+   if (!ops) return 'not a workplace';
+   if (r.at !== b.type) return 'wrong kind of workplace';
+@@ -390,6 +394,7 @@ function weightOfList(items: Items): number {
+ 
+ /** Start a batch. Inputs and fuel leave the shelves (they still exist: they are held by the batch). Returns an error text or null. */
+ export function startJob(world: World, b: Building, p: Person, r: Recipe, client: number, purpose: string, destSite = 0, trial = false): string | null {
++  if(r.preservation&&(!Number.isSafeInteger(client)||client<=0))return 'a preservation batch needs an identified owner';
+   // rules 50: getting back to a batch under way is not starting one; the job stands as it is
+   if (resumableJob(world, b, p, r)) return null;
+   const why = startBlocker(world, b, p, r, trial);
+@@ -438,8 +443,8 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
+ export function joinBlocker(world: World, b: Building, p: Person): string {
+   const job = b.ops?.job;
+   if (!job) return 'nothing is being made';
+-  if (job.phase !== 'work') return job.phase === 'burn' ? 'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
+   const r = recipeOf(job);
++  if (job.phase !== 'work') return job.phase === 'burn' ? r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
+   const technique = techniqueBlocker(world,p,r.id);
+   if(technique)return technique;
+   if (!mayUse(world, p, b)) return 'not theirs to use';
+@@ -450,11 +455,15 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
+ }
+ 
+ /** One tick of work on the running batch. Returns whether it is still going. */
+-export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' {
++export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' | 'preservation_failed' {
+   const ops = b.ops;
+   const job = ops?.job;
+   if (!ops || !job || job.phase !== 'work') return 'stopped';
+   const r = recipeOf(job);
++  if(r.preservation){
++    if(!mayUse(world,p,b)){ops.lastBlocker='the rack is no longer theirs to use';return 'preservation_failed';}
++    if(!preservationCanAdvance(world,b))return 'preservation_failed';
++  }
+   if(techniqueBlocker(world,p,r.id)&&job.trial!==p.id)return 'stopped';
+   const { tool } = recipeTool(world, p, b, r);
+   // The last tick a tool survives is valid work. Once absent, paid inputs/progress wait for a replacement.
+@@ -491,7 +500,7 @@ function endWorkPhase(world: World, b: Building): void {
+     }
+     job.phase = 'burn';
+     job.burnLeft = r.burn;
+-    addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
++    if(r.preservation!=='dry')addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
+     return;
+   }
+   finishJob(world, b);
+@@ -502,13 +511,13 @@ export function facilityTick(world: World, b: Building): void {
+   const ops = b.ops;
+   if (!ops) return;
+   const job = ops.job;
+-  if (job) {
++  if (job && preservationCanAdvance(world,b)) {
+     if (job.phase === 'burn') {
+       job.burnLeft--;
+       if (job.burnLeft <= 0) finishJob(world, b);
+     } else if (job.phase === 'ready') {
+       if ((world.tick + b.id) % 30 === 0) finishJob(world, b);
+-    } else if (job.phase === 'work' && world.tick - job.lastWork > STALL_LIMIT) {
++    } else if (job.phase === 'work' && !recipeOf(job).preservation && world.tick - job.lastWork > STALL_LIMIT) {
+       shelveJob(world, b, 'nobody came back to it');
+     }
+   }
+@@ -525,6 +534,8 @@ export function shelveJob(world: World, b: Building, why: string): void {
+   const job = ops?.job;
+   if (!ops || !job) return;
+   const r = recipeOf(job);
++  // Perishable paid work cannot become fresh raw stock by cancellation.
++  if(r.preservation){job.blocked=why+'; the paid batch remains on the rack';ops.lastBlocker=job.blocked;return;}
+   for (const k of Object.keys(job.held) as ItemKind[]) {
+     const n = job.held[k] ?? 0;
+     if (n <= 0) continue;
+@@ -544,6 +555,7 @@ export function finishJob(world: World, b: Building): boolean {
+   const job = ops?.job;
+   if (!ops || !job) return false;
+   const r = recipeOf(job);
++  if(!preservationReady(world,job,r))return false;
+   const offcuts = recoveredOffcuts(world,r);
+   const out = outputWeight(r,world);
+   const freed = weightOfList(job.held) - (r.fromDeposit ? 0 : 0);
+diff --git a/src/sim/history.ts b/src/sim/history.ts
+index 6dd8119..ec486ff 100644
+--- a/src/sim/history.ts
++++ b/src/sim/history.ts
+@@ -63,7 +63,7 @@ export function householdHistory(w: World, p: Person): string[] {
+   ...(h.relocations??[]).slice(-3).flatMap(r=>[
+    `Relocation #${r.id}: ${r.phase}. Organiser: ${name(w,r.organiserId)}. Destination: ${r.destination.x.toFixed(0)}, ${r.destination.y.toFixed(0)}.`,
+    `Reason: ${r.reason}. ${r.outcome||'Membership remains with the original township until shelter is finished and the household arrives together.'}`,
+-   `Currently carried by household: ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?['berries','fruit','fish','grain'].reduce((n,k)=>n+((q.inv as Record<string,number>)[k]??0),0):0)},0)} food; ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?q.inv.water??0:0)},0)} water. Departure ${r.phase==='settled'||r.phase==='failed'?'required':'requires'} ${r.members.length*2} of each.`,
++   `Currently carried by household: ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?['berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat'].reduce((n,k)=>n+((q.inv as Record<string,number>)[k]??0),0):0)},0)} food; ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?q.inv.water??0:0)},0)} water. Departure ${r.phase==='settled'||r.phase==='failed'?'required':'requires'} ${r.members.length*2} of each.`,
+    ...r.members.map(m=>`${name(w,m.id)}: ${m.response} ΓÇö ${m.reason}.`),
+    ...(r.successions??[]).map(s=>`${name(w,s.to)} took over the journey from ${name(w,s.from)} at tick ${s.tick}: ${s.reason}.`),
+    ...(r.rescues??[]).map(x=>`${name(w,x.by)} looked for ${name(w,x.who)} at ${x.x.toFixed(0)}, ${x.y.toFixed(0)} (tick ${x.tick}): ${x.found?'found them':'found nobody'}.`),
+diff --git a/src/sim/inspect_work.ts b/src/sim/inspect_work.ts
+index b2df189..541df7c 100644
+--- a/src/sim/inspect_work.ts
++++ b/src/sim/inspect_work.ts
+@@ -1,4 +1,5 @@
+ import {worldAge,worldDuration} from './time_text';
++import {PRESERVATION_MAX_AGE,preservationWorkers} from './preservation';
+ import {runsRulesVersion} from './rulesversion';
+ import {describeDelay} from './promise_delays';
+ import {recoveredOffcuts} from './offcuts';
+@@ -134,7 +135,7 @@ export function recipeBlockers(world: World, b: Building, r: Recipe): string[] {
+   const ops = b.ops;
+   if (!ops) return out;
+   if (ops.job) {
+-    out.push(ops.job.phase === 'burn' ? 'the fire is burning another batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room in the store' : 'another batch is under way');
++    out.push(ops.job.phase === 'burn' ? recipeOf(ops.job).preservation==='dry'?'another batch is drying':'the fire is burning another batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room in the store' : 'another batch is under way');
+     return out;
+   }
+   if (b.condition < 12) out.push('the building is too run down to use');
+@@ -158,7 +159,9 @@ export function recipeBlockers(world: World, b: Building, r: Recipe): string[] {
+   }
+   let outW = 0;
+   for (const k of Object.keys(r.outputs) as ItemKind[]) outW += (r.outputs[k] ?? 0) * 1.5;
+-  if (outW > 0 && b.store.cap - weightOf(b.store.items) < outW) out.push('no room in the store for the product');
++  if(r.preservation)outW=weightOf(r.outputs);
++  const room=b.store.cap-weightOf(b.store.items)+(r.preservation?weightOf(r.inputs)+weightOf(r.fuel):0);
++  if (outW > 0 && room < outW) out.push('no room in the store for the product');
+   return out;
+ }
+ 
+@@ -178,7 +181,7 @@ export function describeFacility(world: World, b: Building): Section[] {
+   const recs = recipesAt(b.type);
+   const recoverable=recs.filter(r=>recoveredOffcuts(world,r)>0);
+   if(recoverable.length)sections.push({title:'Recoverable timber fuel',notes:recoverable.map(r=>`${r.label}: ${recoveredOffcuts(world,r)} fuel bundle(s) from ${recoveredOffcuts(world,r)*0.5} wood units formerly discarded. Each bundle weighs 1 and fuels a fire half as long as a log. The rest remains waste. Collection takes a real trip and handling time; bundles use store space and belong to the batch client.`)});
+-  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} ΓåÆ ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} ┬╖ ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s burning` : ''}`] as [string, string]) });
++  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} ΓåÆ ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} ┬╖ ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s ${r.preservation==='dry'?'drying in fair weather':'burning'}` : ''}`] as [string, string]) });
+   sections.push({ title: 'Who may use it', notes: [accessText(world, b)] });
+ 
+   const job = ops.job;
+@@ -188,12 +191,13 @@ export function describeFacility(world: World, b: Building): Section[] {
+       ['Making', r.label],
+       ['Ordered by', job.client ? nameOf(world, job.client) : 'nobody in particular'],
+       ['For', job.purpose || 'ΓÇö'],
+-      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
++      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? r.preservation ? `${r.preservation==='dry'?'drying':'smoking'}: ${worldDuration(job.burnLeft)} of suitable conditions left` : `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
+     ];
+-    const here = Object.keys(ops.present).filter((k) => world.tick - ops.present[Number(k)] < 25).map((k) => nameOf(world, Number(k)));
++    const here = r.preservation?preservationWorkers(world,b).map(p=>p.name):Object.keys(ops.present).filter((k) => world.tick - ops.present[Number(k)] < 25).map((k) => nameOf(world, Number(k)));
+     rows.push(['Working now', here.length ? here.join(', ') : 'nobody at the moment']);
+     const bars: Bar[] = [{ label: 'Work done', value: Math.min(job.progress, job.total), max: job.total, tone: 'ok' }];
+-    if (job.burnTotal > 0) bars.push({ label: 'Fire', value: job.burnTotal - Math.max(0, job.burnLeft), max: job.burnTotal, tone: 'warm' });
++    if (job.burnTotal > 0) bars.push({ label: r.preservation==='dry'?'Drying':'Fire', value: job.burnTotal - Math.max(0, job.burnLeft), max: job.burnTotal, tone: 'warm' });
++    if(r.preservation)rows.push(['Time before unfinished food spoils',worldDuration(Math.max(0,PRESERVATION_MAX_AGE-(world.tick-job.started)))]);
+     const notes: string[] = [];
+     if (job.blocked) notes.push(job.blocked);
+     const contrib = Object.keys(job.workers).map((k) => `${nameOf(world, Number(k))} ${Math.round(job.workers[Number(k)] / 10)}s`);
+diff --git a/src/sim/intent.ts b/src/sim/intent.ts
+index f85c8e7..8b09c3c 100644
+--- a/src/sim/intent.ts
++++ b/src/sim/intent.ts
+@@ -1,4 +1,5 @@
+ import {recordNightShelter} from './night_experience';
++import {stockPreservationOption,hasPreservation} from './preservation';
+ import {hasLivedLife} from './lived_life';
+ import {toolCapacityBlock} from './tool_feasibility';
+ import {alreadyPreparingHandTool} from './project_hand_inputs';
+@@ -549,7 +550,7 @@ function repairStep(ctx: Ctx, i: Intention): Step {
+ }
+ 
+ /**
+- * A food reserve has two steps and no third: gather food, or take what is carried home. Which one it is depends only on what
++ * A food reserve gathers food or takes what is carried home; current rules can prepare known spare food first. Which step applies depends on what
+  * the person is carrying, because the deposit option needs a surplus over what they keep back for themselves
+  * (options_work.ts optDepositFood keeps 2 or 3) and offering a trip home with two berries in the pack would be a waste of an
+  * afternoon.
+@@ -572,6 +573,9 @@ function stockStep(ctx: Ctx, i: Intention): Step {
+   if (g && (p.inv.grain ?? 0) >= GRANARY_TRIP) {
+     return { kind: 'store', target: g.id, item: 'grain', step: `take the grain to the granary (${short} more to put by)`, key: `bring:${g.id}:grain`, blocked: '' };
+   }
++  const preparation=stockPreservationOption(ctx);
++  if(preparation)return {kind:'make',target:preparation.targetId,item:null,
++    step:`${preparation.label.toLowerCase()} for the food reserve`,key:preparation.key,blocked:''};
+   if (foodToStore(p) >= (hasLivedLife(world)?1:CARRY_TO_STORE)) {
+     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
+   }
+@@ -900,7 +904,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
+     const n = stepFor(ctx, i);
+     if (i.blocked && !n.blocked) i.reason = 'taken up again';
+     // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
+-    if (i.kind !== 'batch' && i.kind !== 'journey') {
++    if (i.kind !== 'batch' && i.kind !== 'journey' && !(i.kind==='stock'&&hasPreservation(world))) {
+       if (i.aboutId && n.target && i.aboutId !== n.target) {
+         // two quite different things: the old one stopped being a shelter they know of, or a better one turned up
+         const stillKnown = shelters(ctx).some((s) => s.id === i.aboutId);
+diff --git a/src/sim/labels.ts b/src/sim/labels.ts
+index e6ff304..a58581b 100644
+--- a/src/sim/labels.ts
++++ b/src/sim/labels.ts
+@@ -95,6 +95,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
+ };
+ 
+ export const ITEM_ICON: Record<ItemKind, string> = {
++  dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',
+   offcuts: 'wood',
+   meat: 'meat',
+   berries: 'berries',
+diff --git a/src/sim/meals.ts b/src/sim/meals.ts
+index c1e2e69..04f1fef 100644
+--- a/src/sim/meals.ts
++++ b/src/sim/meals.ts
+@@ -667,7 +667,7 @@ registerHandler('host_meal', {
+         return 'not enough food to lay a table';
+       }
+       let left = need + Math.min(1, have - need);
+-      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries'];
++      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+       for (const k of order) {
+         const n = Math.min(left, p.inv[k] ?? 0);
+         if (n > 0) {
+diff --git a/src/sim/occasions.ts b/src/sim/occasions.ts
+index c6c8867..9f4b8b6 100644
+--- a/src/sim/occasions.ts
++++ b/src/sim/occasions.ts
+@@ -1,4 +1,6 @@
+ import { deceasedById } from './historical_index';
++import {runsPreservation} from './preservation';
++import {PRESERVED_FOODS} from './constants';
+ import { continuingOccasion } from './occasion_participation';
+ import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
+ import { hasLocalDeath, knowsDeath } from './death_knowledge';
+@@ -288,7 +290,8 @@ const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood'
+ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
+   if(hasLocalMarket(world)&&(o.kind!=='market'||!presentAt(world,p,o)))return false;
+   // what I am short of, dearest first
+-  const wants = BARTER.filter((k) => (p.inv[k] ?? 0) < 2)
++  const goods=runsPreservation(world)?[...BARTER,...PRESERVED_FOODS]:BARTER;
++  const wants = goods.filter((k) => (p.inv[k] ?? 0) < 2)
+     .map((k) => ({ k, v: valueOf(world, p, k) }))
+     .sort((a, b) => b.v - a.v)
+     .slice(0, 4);
+@@ -299,7 +302,7 @@ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
+     // what of mine would they take for it? the thing they value most that I can spare
+     let give: ItemKind | null = null;
+     let gain = 0;
+-    for (const k of BARTER) {
++    for (const k of goods) {
+       if (k === want || surplusOf(world, p, k) < 1) continue;
+       const g = valueOf(world, q, k) - valueOf(world, q, want);
+       if (g > gain) {
+diff --git a/src/sim/options_social.ts b/src/sim/options_social.ts
+index 28542a8..02a1e68 100644
+--- a/src/sim/options_social.ts
++++ b/src/sim/options_social.ts
+@@ -27,7 +27,7 @@ import { companyPull } from './lifechanges';
+ import { crewMates } from './crews';
+ import { quarrelsFor } from './mediation';
+ import { childrenNeedingWatch, laidUp } from './responsibilities';
+-import { BUILD_DEF } from './constants';
++import { BUILD_DEF, PRESERVED_FOODS } from './constants';
+ import { invRoom, pickFood } from './economy';
+ import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
+ import type { Ctx, Option } from './optutil';
+@@ -458,7 +458,7 @@ function optOffer(ctx: Ctx): void {
+     const needFood = c.s.hungry;
+     const needWater = c.s.thirsty;
+     if (!needFood && !needWater) continue;
+-    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain') && !c.s.child && !c.s.hurt) {
++    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain' || PRESERVED_FOODS.some(f=>f===k)) && !c.s.child && !c.s.hurt) {
+       // they have food of their own; they just have not eaten yet
+       if (needFood && !needWater) continue;
+     }
+@@ -615,7 +615,7 @@ function optTrade(ctx: Ctx): void {
+   if (!want) return;
+   // what can I spare?
+   const spare: { item: ItemKind; n: number }[] = [];
+-  for (const k of ['berries', 'fruit', 'fish', 'grain', 'wood', 'stone', 'water'] as ItemKind[]) {
++  for (const k of ['berries', 'fruit', 'fish', 'grain', 'wood', 'stone', 'water', ...PRESERVED_FOODS] as ItemKind[]) {
+     if (k === want.item) continue;
+     const s = surplusOf(world, p, k);
+     if (s >= 2) spare.push({ item: k, n: s });
+diff --git a/src/sim/options_survival.ts b/src/sim/options_survival.ts
+index a51e25c..16c711f 100644
+--- a/src/sim/options_survival.ts
++++ b/src/sim/options_survival.ts
+@@ -21,6 +21,7 @@ import { runsRulesVersion } from './rulesversion';
+ import { keepCurrent } from './kept_target';
+ import { delBelief, estimatedAmount, recentFailure } from './knowledge';
+ import { FOOD_VALUE, SOURCE_VERB } from './labels';
++import {runsPreservation} from './preservation';
+ import { hashUnit } from './rng';
+ import { dayFraction } from './environment';
+ import {
+@@ -254,6 +255,13 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
+ 
+ /** Units of grain, bread or flour-free food this person may take from a granary now: their household's share, or the emergency ration. */
+ function granaryRation(world: World, p: Person, id: number): number {
++  if(runsPreservation(world)){
++    const known=p.beliefs[id];
++    if(!known||world.tick-known.seen>2400||(known.hh!==0&&known.hh!==p.hhId))return 0;
++    // Remembered food at our/common bins justifies a visit, not a guaranteed ration.
++    // The actual share and emergency allowance are checked physically on arrival.
++    return foodUnits(known.items??{});
++  }
+   const b = world.byId.get(id);
+   if (!b || b.ent !== 'building' || b.type !== 'granary') return 0;
+   let n = 0;
+@@ -310,13 +318,14 @@ function optEat(ctx: Ctx): void {
+   for (const b of beliefsByKind(p, ['building', 'pile'])) {
+     const mine = b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype);
+     const comm = b.kind === 'building' && b.btype === 'storehouse';
++    const rack = runsPreservation(world)&&b.kind==='building'&&b.btype==='food_rack'&&(b.hh===p.hhId||b.hh===0);
+     const pile = b.kind === 'pile' && mayTakeKnownPile(p,b);
+     const theirs = tempted && b.kind === 'building' && !mine && b.hh !== undefined && b.hh !== p.hhId && isHomeType(b.btype);
+     // Rules 46: the granary's bins feed the households that filled them. What may be taken is the household's own share, or the
+     // emergency ration facilities.ts already grants the starving (withdrawAllowance); the share is the household's own record
+     // of what it put in, so reading it is reading their own books, not the bins of others. Below 46 a granary is not eaten from.
+     const bins = b.kind === 'building' && b.btype === 'granary' && hasWinterReserve(world) ? granaryRation(world, p, b.id) : 0;
+-    if (!mine && !comm && !pile && !theirs && !bins) continue;
++    if (!mine && !comm && !pile && !theirs && !bins && !rack) continue;
+     const fc = b.btype === 'granary' ? bins : hasCareCapacity(world) ? foodUnits(b.items ?? {}) : foodCount(b.items ?? {});
+     if (fc < 1) {
+       if (mine || comm) addBlocked(ctx, 'eat_store', 'Eat from the stores', b.id, 'remembers it being empty', 'food');
+@@ -327,13 +336,13 @@ function optEat(ctx: Ctx): void {
+       continue;
+     }
+     const e = eta(ctx, b.x, b.y);
+-    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : bins ? 'our share in the granary' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : bins ? 1 : theirs ? -18 : -1);
++    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : bins ? runsPreservation(world)?'remembered food at our granary':'our share in the granary' : rack ? 'remembered food on the rack' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : bins ? 1 : theirs ? -18 : -1);
+     if (theirs) sc.add('conscience', -(8 * p.traits.caution + 6 * p.traits.generosity));
+     if (theirs && sc.total < 8) continue;
+     const theirName = theirs ? `${householdById(world, b.hh!)?.name ?? 'another'} household` : '';
+     addOption(ctx, {
+       kind: 'eat_store',
+-      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : bins ? 'Eat from the granary' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
++      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : bins ? 'Eat from the granary' : rack ? 'Eat from the drying and smoking rack' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
+       goal: 'to ease hunger',
+       need: 'hunger',
+       util: sc.total,
+@@ -347,7 +356,7 @@ function optEat(ctx: Ctx): void {
+         if (!spot) return null;
+         return newActivity(world, p, {
+           kind: 'eat_store',
+-          label: mine ? 'Eating at home' : theirs ? `Taking food from the ${theirName}'s store` : bins ? 'Eating from the granary' : 'Eating from the stores',
++          label: mine ? 'Eating at home' : theirs ? `Taking food from the ${theirName}'s store` : bins ? 'Eating from the granary' : rack ? 'Eating from the drying and smoking rack' : 'Eating from the stores',
+           data: theirs ? { steal: b.hh } : bins ? { ration: bins } : {},
+           goal: `to ease hunger (${Math.round(p.needs.hunger)}/100)`,
+           need: 'hunger',
+diff --git a/src/sim/options_work.ts b/src/sim/options_work.ts
+index 937dece..1e4d757 100644
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -220,7 +220,7 @@ function optDepositFood(ctx: Ctx): void {
+   const { world, p } = ctx;
+   const smallPack = hasChildhood(world) && ctx.stage === 'child';
+   const keepSelf = ctx.drives.hunger > 0 ? 3 : 2;
+-  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries'];
++  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+   const unreserved = smallPack ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
+   const surplus = (smallPack ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
+   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
+@@ -247,7 +247,7 @@ function optDepositFood(ctx: Ctx): void {
+     const items: Record<string, number> = {};
+     // deposit the better-keeping foods and keep a little for myself
+     let toStore = surplus;
+-    for (const k of ['grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
++    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]) {
+       const have = unreserved[k] ?? 0;
+       const give = Math.min(have, toStore);
+       if (give > 0) {
+@@ -1263,7 +1263,7 @@ function optSalvage(ctx: Ctx): void {
+         value += 10;
+       }
+     }
+-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat'] as const) {
++    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as const) {
+       const n = unitsOf(items[k]);
+       if (n <= 0) continue;
+       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
+@@ -1529,7 +1529,7 @@ function optCare(ctx: Ctx): void {
+     if (hungry && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
+       // give what fits best
+       // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
+-      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat'] : ['berries', 'fruit', 'grain', 'fish'];
++      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] : ['berries', 'fruit', 'grain', 'fish'];
+       const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
+       if (k) {
+         give[k] = Math.min(p.inv[k] ?? 0, kn.hunger < 25 ? 3 : 2);
+diff --git a/src/sim/optutil.ts b/src/sim/optutil.ts
+index 9c44194..3daa31a 100644
+--- a/src/sim/optutil.ts
++++ b/src/sim/optutil.ts
+@@ -31,6 +31,8 @@ export interface OptionLimit {
+ }
+ 
+ export interface Option {
++  /** Derived preparation step that can serve an existing food-reserve intention. */
++  preservesFood?: boolean;
+   /** Material work serving this particular known construction site, when applicable. */
+   purposeSite?: number;
+   /** A legal preparation for this personally known work option (derived, never saved as executable code). */
+@@ -99,7 +101,7 @@ export interface Ctx {
+   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
+ }
+ 
+-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain'];
++const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ 
+ export function foodCount(inv: Person['inv']): number {
+   let n = 0;
+diff --git a/src/sim/perception.ts b/src/sim/perception.ts
+index be18c47..243af8d 100644
+--- a/src/sim/perception.ts
++++ b/src/sim/perception.ts
+@@ -38,7 +38,7 @@ export function senseRadius(world: World, p: Person): number {
+   return r;
+ }
+ 
+-const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
++const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ 
+ function describeSeenPerson(world: World, e: Person): SeenEntity {
+   const carrying: ItemKind[] = [];
+diff --git a/src/sim/production.ts b/src/sim/production.ts
+index 8107f0f..06d6941 100644
+--- a/src/sim/production.ts
++++ b/src/sim/production.ts
+@@ -1,4 +1,6 @@
+ import {hasProjectAcquire} from './project_acquire';
++import {hasPreservation} from './preservation';
++import {PRESERVED_FOODS} from './constants';
+ import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
+ import {foodUnits} from './economy';
+ import {carryCap} from './people';
+@@ -78,6 +80,8 @@ interface Fac {
+ /** Could this person plausibly use that workplace? Judged from what they know of who it belongs to. */
+ function mayUseBelief(ctx: Ctx, b: Belief): boolean {
+   if (b.hh === 0 || b.hh === ctx.p.hhId) return true;
++  // New preservation decisions cannot read a remote workshop's current builder ledger.
++  if(b.btype==='food_rack')return friendlyTo(ctx,b.hh??-1)>=12;
+   const real = ctx.world.byId.get(b.id);
+   if (real && real.ent === 'building' && (real.ops?.builders[ctx.p.hhId] ?? 0) >= 0.2) return true;
+   return friendlyTo(ctx, b.hh ?? -1) >= 12;
+@@ -314,6 +318,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
+  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
+  */
+ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
++  if(r.preservation&&!hasPreservation(ctx.world))return;
+   const { world, p } = ctx;
+   const b = f.b;
+   const technique = techniqueBlocker(world,p,r.id);
+@@ -377,6 +382,11 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
+   const need: Items = {};
+   for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
+   for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
++  if(r.preservation){
++    const raw:ItemKind=r.inputs.fish?'fish':'meat';
++    const otherFood=foodUnits(p.inv)+foodUnits(b.items??{})-(b.items?.[raw]??0);
++    need[raw]=(need[raw]??0)+Math.max(0,2-otherFood);
++  }
+   const short: Items = {};
+   for (const k of Object.keys(need) as ItemKind[]) {
+     const lack = unitsOf(need[k]) - stockAt(b, k);
+@@ -469,27 +479,36 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
+ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null): number {
+   if (item === 'cart') return 0;
+   const { world, p } = ctx;
++  const rememberedOnly=dest?.btype==='food_rack';
+   const found: { b: Belief; n: number; e: number }[] = [];
+   for (const b of beliefsByKind(p, ['building', 'pile', 'cart'])) {
+     if(!mayTakeKnownPile(p,b))continue;
+     if (dest && b.id === dest.id) continue;
++    if(rememberedOnly&&world.tick-b.seen>DAY)continue;
+     let n = stockAt(b, item);
+     if (b.kind === 'building') {
+       if (b.btype === 'granary') {
+         // only the household's own share may be drawn out for its own purposes
+-        const real = world.byId.get(b.id);
+-        const share = real && real.ent === 'building' ? (real.ops?.shares[p.hhId]?.[item] ?? 0) : 0;
+-        n = Math.min(n, share);
++        if(rememberedOnly){
++          if(b.hh!==0&&b.hh!==p.hhId)continue;
++        }else{
++          const real = world.byId.get(b.id);
++          const share = real && real.ent === 'building' ? (real.ops?.shares[p.hhId]?.[item] ?? 0) : 0;
++          n = Math.min(n, share);
++        }
+       } else if (b.btype && isFacilityType(b.btype as BuildingType)) {
+-        if (!mayUseBelief(ctx, b)) continue;
++        if (!(rememberedOnly?(b.hh===0||b.hh===p.hhId||friendlyTo(ctx,b.hh??-1)>=12):mayUseBelief(ctx, b))) continue;
+         // a batch of mine that will be ready by the time I arrive counts
+         const snap = b.ops;
+         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
+       } else if (b.btype === 'storehouse') {
+         // everyone's
+       } else if (b.hh !== p.hhId) continue;
+-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries' || item === 'meat') {
++      else if (!rememberedOnly && (foodUnits({[item]:1})>0 || item === 'flour')) {
+         // the household's own food is not to be spent making things unless there is plenty
++        // Preservation moves raw food into another edible form. Its own surplus
++        // and start checks retain two immediate meals, including those carried
++        // from this home; the general reserve floor would prevent that trip.
+         const hs = hhState(ctx);
+         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
+       }
+@@ -568,6 +587,17 @@ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && f
+ export function demandsOf(ctx: Ctx): Demand[] {
+   const { world, p } = ctx;
+   const out: Demand[] = [];
++  if(hasPreservation(world)){
++    const raw=preservationSurplus(ctx);
++    // A finite food job belongs to the same planner as other workshop batches.
++    // Adopt only with immediate meals already held or seen at the workbench;
++    // the compiler still has to find the actual recipe inputs and fuel.
++    const rack=facilitiesOf(ctx,'food_rack').find(f=>world.tick-f.b.seen<=DAY&&foodUnits(p.inv)+foodUnits(f.b.items??{})>=4);
++    if(raw&&rack){
++      const item=`${world.weather.rain>0.1?'smoked':'dried'}_${raw}` as ItemKind;
++      out.push({item,qty:2,have:p.inv[item]??0,base:27,why:'keep spare food for later meals',tag:'food'});
++    }
++  }
+   const grouped: Record<string, { n: number; base: number; why: string; tag: string; siteId?: number }> = {};
+   for (const n of materialNeeds(ctx)) {
+     if (!PROCESSED.includes(n.item) && !quarryAware(ctx, n.item)) continue;
+@@ -750,9 +780,9 @@ function optGranaryStore(ctx: Ctx): void {
+   const keep = winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3;
+   const items: Items = {};
+   let n = 0;
+-  for (const k of ['grain', 'flour', 'bread'] as ItemKind[]) {
++  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat'] as ItemKind[]) {
+     const have = unitsOf(p.inv[k]);
+-    const give = k === 'grain' ? Math.max(0, have - keep) : have;
++    const give = k === 'grain'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
+     if (give >= (winter ? 1 : 2)) {
+       items[k] = give;
+       n += give;
+@@ -939,6 +969,8 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
+   const knowRocks = countBeliefsOfKind(p, 'rock') + countBeliefsOfKind(p, 'outcrop') >= 1;
+   if (!knowTrees || !knowRocks) return out;
+   const hs = hhState(ctx);
++  if(hasPreservation(world)&&!knowsEnough(ctx,'food_rack')&&preservationSurplus(ctx))
++    out.push({type:'food_rack',signal:0.9,why:'spare fish or meat could be kept for later meals'});
+   const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
+   const wish = upgradeWish(ctx);
+   const haveYard = knowsOfAny(ctx, 'timber_yard');
+@@ -1020,7 +1052,7 @@ function optPlanFacilities(ctx: Ctx): void {
+   if (!hh || ctx.stage === 'child') return;
+   if (world.settings.scene !== 'natural') return; // new projects are an ordinary-world decision; staged scenes stay as staged
+   if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28 || ctx.drives.energy > 40) return;
+-  if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // first things first: a proper roof, for this household and (as far as they know) for others
++  if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // establish shelter before adding a workplace
+   if (beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length < 2) return;
+   if (projectsUnderWay(world, false, settlementAnchor(ctx)) >= projectLimit(world)) return;
+   if (beliefsByKind(p, ['site']).some((s) => s.hh === hh.id && s.btype && isFacilityType(s.btype as BuildingType))) return;
+@@ -1147,6 +1179,46 @@ function optPlanUpgrade(ctx: Ctx): void {
+   });
+ }
+ 
++/** Only fresh personal sightings of accessible stocks justify preparation. */
++export function preservationSurplus(ctx:Ctx):'fish'|'meat'|null {
++  const stocks=[ctx.p.inv,...beliefsByKind(ctx.p,['building']).filter(b=>
++    ctx.world.tick-b.seen<=DAY && (b.hh===ctx.p.hhId||b.hh===0)).map(b=>b.items??{})];
++  const food=stocks.reduce((n,s)=>n+foodUnits(s),0);
++  if(food<4)return null;
++  for(const raw of ['fish','meat'] as const)if(stocks.reduce((n,s)=>n+(s[raw]??0),0)>=2)return raw;
++  return null;
++}
++
++function preservationOptions(ctx:Ctx):void {
++  if(!hasPreservation(ctx.world))return;
++  const first=ctx.options.length;
++  const racks=facilitiesOf(ctx,'food_rack');
++  for(const f of racks){
++    if(ctx.world.tick-f.b.seen>DAY)continue;
++    // Collection and resumption do not require another raw surplus.
++    const goods:Items={};
++    let room=carryCap(ctx.world,ctx.p)-weightOf(ctx.p.inv),waiting=0;
++    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const){
++      const stock=f.b.items?.[k]??0;waiting+=stock;
++      const n=Math.min(2,stock,Math.max(0,Math.floor(room/WEIGHT[k])));
++      if(n>0){goods[k]=n;room-=n*WEIGHT[k];}
++    }
++    if(foodUnits(goods)>0)collectLeaf(ctx,f.b,goods,28,'bring preserved food back for meals','food');
++    else if(waiting>0)addBlocked(ctx,'withdraw','Collect preserved food',f.b.id,'no room to carry the preserved food','food');
++    const running=f.b.ops?.job ? RECIPE_BY_ID[f.b.ops.job] : undefined;
++    if(running?.preservation&&f.b.ops!.progress<1){
++      planRecipe(ctx,f,running,Object.keys(running.outputs)[0] as ItemKind,2,27,'finish preserving the paid batch','food',0);
++      continue;
++    }
++    const raw=preservationSurplus(ctx);
++    if(!raw||waiting>0)continue;
++    const method=ctx.world.weather.rain>0.1?'smoke':'dry';
++    const r=RECIPE_BY_ID[`${method}_${raw}`];
++    planRecipe(ctx,f,r,Object.keys(r.outputs)[0] as ItemKind,2,27,'keep spare food for later meals','food',0);
++  }
++  for(let j=first;j<ctx.options.length;j++)ctx.options[j].preservesFood=true;
++}
++
+ // ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ entry point ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ export function productionOptions(ctx: Ctx): void {
+   const { world, p } = ctx;
+@@ -1154,12 +1226,13 @@ export function productionOptions(ctx: Ctx): void {
+   if (!workRules(world.settings.scene)) return; // staged scenes stay exactly as staged
+   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
+   if (p.health < 45) return;
++  preservationOptions(ctx);
+   if(hasMealLeftovers(world)){
+     // Only personally seen/heard household holdings; no lookup of a remote meal table.
+     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
+     for(const b of known.slice(0,2)){
+       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
+-      for(const k of ['bread','meat','fish','fruit','grain','berries'] as const){
++      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as const){
+         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
+         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
+       }
+@@ -1172,7 +1245,7 @@ export function productionOptions(ctx: Ctx): void {
+     if(fires.length&&(!duty||fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1))collectOptions(ctx,'offcuts',(duty?1:4)-fuelAvailable(world,p,'offcuts'),duty?48:24+6*p.traits.generosity,duty?`reuse known offcuts for the fire I promised to keep (#${duty.id})`:'reuse known offcuts to keep a low fire burning','fire',null);
+   }
+   const demands = demandsOf(ctx);
+-  for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
++  for (const d of demands) if(!PRESERVED_FOODS.some(k=>k===d.item)) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+   projectOptions(ctx);
+   optGranaryStore(ctx);
+   optTendGranary(ctx);
+@@ -1205,7 +1278,7 @@ function projectOptions(ctx:Ctx):void{
+    if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0,0,undefined,ready);
+   }
+   if(step.phase==='craft')scratch.toolWanted={kind:item as ToolKind,for:i.goal,required:true};
+-  if(step.phase==='wait')addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
++  if(step.phase==='wait'&&!RECIPE_BY_ID[n.recipe]?.preservation)addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
+    make:()=>newActivity(ctx.world,ctx.p,{kind:'rest',label:'Waiting for my batch',goal:step.reason,targetId:step.target,here:true,amount:step.wait,utility:base,minCommit:10,maxTicks:step.wait+20,data:{projectWait:true,forPlan:i.id}})});
+   if(step.phase==='blocked')addBlocked(scratch,'operate',i.goal,step.target,step.reason,tag);
+   if(scratch.toolWanted)ctx.toolWanted=scratch.toolWanted;
+diff --git a/src/sim/project_compile.ts b/src/sim/project_compile.ts
+index eaddda8..6fdc532 100644
+--- a/src/sim/project_compile.ts
++++ b/src/sim/project_compile.ts
+@@ -33,7 +33,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
+   const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:Math.max(0,(p.inv[item]??0)-reservedFor(world,p,item)+(ownPlan?.wants[item]??0));
+   if(shelf+held>=quantity)return node.id;
+   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.
+-  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour'].includes(item)){
++  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'].includes(item)){
+    const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&(b.items?.[item]??0)>=quantity&&
+     (b.btype==='storehouse'||(b.hh===p.hhId&&isHomeType(b.btype))||!!b.btype&&facilitiesOf(ctx,b.btype as BuildingType).some(f=>f.b.id===b.id)));
+    if(stored){node.method='supply';return node.id;}
+diff --git a/src/sim/provision.ts b/src/sim/provision.ts
+index 78a3303..70eca13 100644
+--- a/src/sim/provision.ts
++++ b/src/sim/provision.ts
+@@ -177,7 +177,7 @@ export const foodPreparationOn = (): boolean => preparation;
+ export const preparesFood = (world: World): boolean => preparation && isRich(world) && runsRulesVersion(world, PREPARATION_FROM_VERSION);
+ 
+ /** Everything people eat. What a store HOLDS is counted with this: meat and bread in a home store are food like any other. */
+-const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
++const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ /** Is this something people eat? Used by the deposit that credits a reserve, and by every count of what a store holds. */
+ export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[]).includes(k);
+ 
+@@ -187,7 +187,7 @@ export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[
+  * five units of meat would settle on a step the engine never offers, so the step threshold reads this list and the question
+  * "has this household anything to hand" reads the full one.
+  */
+-const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries'];
++const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ 
+ /** units of food in a remembered container, from the person's own belief and nothing else */
+ export function foodInBelief(b: Belief): number {
+diff --git a/src/sim/recipes.ts b/src/sim/recipes.ts
+index 59119ab..364e2da 100644
+--- a/src/sim/recipes.ts
++++ b/src/sim/recipes.ts
+@@ -45,11 +45,23 @@ export interface Recipe {
+   serves: string[];
+   /** why anyone would want this: shown in the inspector and the docs */
+   benefit: string;
++  /** Bounded preservation process; only available under preservation rules. */
++  preservation?: 'dry' | 'smoke';
+ }
+ 
+ const none: Items = {};
+ 
+ export const RECIPES: Recipe[] = [
++  ...(['fish', 'meat'] as const).flatMap(raw => (['dry','smoke'] as const).map((method):Recipe => ({
++    id:`${method}_${raw}`, label:`${method==='dry'?'dried':'smoked'} ${raw}`,
++    doing:`${method==='dry'?'Drying':'Smoking'} ${raw}`, at:'food_rack',
++    inputs:{[raw]:2}, fuel:method==='smoke'?{wood:1}:{}, work:60,
++    burn:method==='dry'?720:360,
++    outputs:{[`${method==='dry'?'dried':'smoked'}_${raw}`]:2}, waste:{}, wasteWhy:'',
++    skill:null, workers:1, serves:[`${method==='dry'?'dried':'smoked'}_${raw}`],
++    benefit:method==='dry'?'Two portions keep longer after drying in fair weather, with a small nutrition loss.':'Two portions keep longer after smoking over one delivered wood.',
++    preservation:method,
++  }))),
+   {
+     id: 'hew_planks',
+     label: 'hewn planks',
+@@ -293,7 +305,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
+   return RECIPES.filter((r) => r.at === type);
+ }
+ 
+-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'];
++export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack'];
+ /** workplaces whose buildings keep a FacilityState */
+ export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
+ 
+@@ -339,12 +351,14 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
+     set.add('water');
+   }
+   if (type === 'granary') {
++    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
+     set.add('grain');
+     set.add('flour');
+     set.add('bread');
+     set.add('seeds');
+   }
+   if (type === 'hall') {
++    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
+     set.add('bread');
+     set.add('fish');
+     set.add('fruit');
+diff --git a/src/sim/relocation.ts b/src/sim/relocation.ts
+index 690a998..8d15f17 100644
+--- a/src/sim/relocation.ts
++++ b/src/sim/relocation.ts
+@@ -217,7 +217,7 @@ export function relocationOptions(ctx: Ctx): void {
+   const store=beliefsByKind(p,['building']).find(b=>b.hh===p.hhId&&b.id===r.oldHomeId);
+   const wanted:Items={};const going=ext?travellers(w,r).length:r.members.length;
+   if(store){
+-   for(const k of ['berries','fruit','fish','grain','water','wood'] as const){
++   for(const k of ['berries','fruit','fish','grain','water','wood','dried_fish','smoked_fish','dried_meat','smoked_meat'] as const){
+     const target=k==='wood'?BUILD_DEF.lean_to.cost.wood??3:k==='water'?2*going:Math.max(0,2*going-foodCount(p.inv));
+     const n=Math.min(store.items?.[k]??0,Math.max(0,target-(k==='water'||k==='wood'?(p.inv[k]??0):0)));
+     if(n>0&&roomFor(p.inv,carryCap(w,p),k)>0)wanted[k]=n;
+diff --git a/src/sim/resident_care.ts b/src/sim/resident_care.ts
+index 6c2ceef..b185cc2 100644
+--- a/src/sim/resident_care.ts
++++ b/src/sim/resident_care.ts
+@@ -42,7 +42,7 @@ function residentCareOption(ctx:Ctx,q:Pick<Person,'id'|'name'>):boolean{
+  if(blocked){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,blocked,'care');return true;}
+  if(!room.hungry&&!room.thirsty)return true;
+  const items:Items={};
+- if(room.hungry){const k=(['berries','fruit','grain','fish','bread','meat'] as ItemKind[]).find(k=>available(world,p,q.id,k)>=1);if(k)items[k]=Math.min(2,available(world,p,q.id,k));}
++ if(room.hungry){const k=(['berries','fruit','grain','fish','bread','meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]).find(k=>available(world,p,q.id,k)>=1);if(k)items[k]=Math.min(2,available(world,p,q.id,k));}
+  if(room.thirsty&&available(world,p,q.id,'water')>=1)items.water=1;
+  if(!Object.keys(items).length){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,'must keep supplies for my own needs, others or promises','care');careSupplyOptions(ctx,q,room.hungry,room.thirsty,wh.tick);return true;}
+  const kin=p.relations[q.id]?.kin,family=kin==='child'||kin==='parent'||kin==='partner',base=42*traitMods(p).give;
+diff --git a/src/sim/responsibilities.ts b/src/sim/responsibilities.ts
+index 650eb24..55f95b5 100644
+--- a/src/sim/responsibilities.ts
++++ b/src/sim/responsibilities.ts
+@@ -93,7 +93,7 @@ export function watchTick(world: World, p: Person, a: Activity, child: Person):
+   retainWatchTick(world,a);
+   if (a.progress % LOOK_EVERY === 0) {
+     const give: Items = {};
+-    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries'] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
++    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
+     if (child.needs.thirst < 55 && (p.inv.water ?? 0) > 0 && (!bounded || surplusOf(world, p, 'water') >= 1)) give.water = 1;
+     const got: Items = {};
+     let moved = 0;
+diff --git a/src/sim/rulesversion.ts b/src/sim/rulesversion.ts
+index 521c490..2ebce68 100644
+--- a/src/sim/rulesversion.ts
++++ b/src/sim/rulesversion.ts
+@@ -170,10 +170,11 @@ import type { Settings, World } from './types';
+ // Version 119: feasible personal intentions, truthful lived outcomes and continuing company (PAVEL_LIVED_LIFE.md; numbered 117 before integration).
+ // Version 120: childhood time, small-pack food returns and portable routine measurements (TALIA_LIVED_CHILDHOOD.md; numbered 119 before integration).
+ // Version 121: resumed gathering retains the outcome of already paid food acquisition (numbered 120 before integration).
+-export const CURRENT_RULES_VERSION = 121;
++// Version 122: bounded fish/meat drying and smoking through physical facility batches.
++export const CURRENT_RULES_VERSION = 122;
+ 
+ /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
+-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121];
++export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122];
+ 
+ /**
+  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
+diff --git a/src/sim/social.ts b/src/sim/social.ts
+index 1394e3b..fc60b8e 100644
+--- a/src/sim/social.ts
++++ b/src/sim/social.ts
+@@ -96,7 +96,7 @@ export function personOf(world: World, id: number): Person | null {
+   return e && e.ent === 'person' && e.alive ? e : null;
+ }
+ 
+-const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
++const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ 
+ export function isFood(k: ItemKind): boolean {
+   return FOODS.includes(k);
+@@ -187,6 +187,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
+ 
+ export function valueOf(world: World, p: Person, item: ItemKind): number {
+   const base: Record<ItemKind, number> = {
++    dried_fish:2.6, smoked_fish:2.8, dried_meat:2.6, smoked_meat:2.8,
+     offcuts: 0.7,
+     berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, meat: 2.2, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
+     flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5, spear: 6,
+@@ -1699,7 +1700,7 @@ export function flushDelayedBubbles(world: World): void {
+ function phaseNews(world: World, S: Person, L: Person): void {
+   if(hasExchangeJourneys(world)){
+     const goods:Items={};
+-    for(const k of ['wood','stone','berries','fruit','fish','grain'] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
++    for(const k of ['wood','stone','berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat'] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
+     tellTradeLead(world,S,L,goods);
+   }
+   shareConcerns(world, S, L);
+diff --git a/src/sim/transport.ts b/src/sim/transport.ts
+index 7fd3b34..754798c 100644
+--- a/src/sim/transport.ts
++++ b/src/sim/transport.ts
+@@ -27,7 +27,7 @@ import type { BuildingType, ItemKind } from './types';
+ import { addOption, beliefsByKind } from './optutil';
+ const unitsOf = (n: number | undefined): number => n ?? 0;
+ import { newActivity } from './activities';
+-import { BUILD_DEF, CARRY_CAP, DAY, WEIGHT } from './constants';
++import { BUILD_DEF, CARRY_CAP, DAY, WEIGHT, PRESERVED_FOODS } from './constants';
+ import { isRich } from './mood';
+ import { runsRulesVersion } from './rulesversion';
+ import { cartLoaded } from './carts';
+@@ -49,7 +49,7 @@ export const HAUL_WINDOW = DAY * 6;
+ export const HAUL_EXPERIENCE = 30;
+ export const HAUL_TRIPS = 6;
+ /** food the home store takes from a cart, the kinds a reserve is made of */
+-const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'berries'];
++const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'berries', ...PRESERVED_FOODS];
+ 
+ let enabled = true;
+ export const transportOn = (): boolean => enabled;
+diff --git a/src/sim/types.ts b/src/sim/types.ts
+index 4597627..c6f36d6 100644
+--- a/src/sim/types.ts
++++ b/src/sim/types.ts
+@@ -7,7 +7,7 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
+ export type TerrainType = (typeof T)[keyof typeof T];
+ 
+ // ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ items ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat';
++export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat';
+ /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
+ export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear';
+ /** Raw materials and the things made from them. */
+@@ -811,6 +811,7 @@ export type BuildingType =
+   | 'smithy'
+   | 'granary'
+   | 'bakery'
++  | 'food_rack'
+   | 'hall';
+ 
+ export interface Building {
+diff --git a/src/sim/welfare.ts b/src/sim/welfare.ts
+index 98166eb..6953702 100644
+--- a/src/sim/welfare.ts
++++ b/src/sim/welfare.ts
+@@ -95,7 +95,7 @@ export function shareConcerns(world: World, S: Person, L: Person): number {
+ function suppliesFor(world: World, p: Person, kind: Concern['kind']): Items | null {
+   const items: Items = {};
+   if (kind === 'hungry' || kind === 'hurt') {
+-    for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries'] as ItemKind[]) {
++    for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]) {
+       const sur = surplusOf(world, p, k);
+       if (sur >= 1) {
+         items[k] = Math.min(sur, 2);
+diff --git a/src/sim/world.ts b/src/sim/world.ts
+index 77f20db..881e723 100644
+--- a/src/sim/world.ts
++++ b/src/sim/world.ts
+@@ -1,4 +1,6 @@
+ import { updateEcology } from './ecology';
++import {runsPreservation} from './preservation';
++import {PRESERVED_FOODS} from './constants';
+ import { updateFlood } from './flood';
+ import { updateWater } from './hydrology';
+ import { retainOperationalMemory } from './memory_retention';
+@@ -253,6 +255,16 @@ function roadsTick(world: World): void {
+ /** Perishable goods slowly go off: an explicit, recorded process (never silent). */
+ function spoilGoods(world: World): void {
+   const rate = 0.011;
++  // New provisions also deteriorate while carried. Historical pack semantics
++  // are untouched; an empty new-kind holding consumes no random draw.
++  if(runsPreservation(world)){
++    const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
++    for(const items of holdings)for(const k of PRESERVED_FOODS){
++      const n=items[k]??0;let lost=0;
++      for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*spoilStore(world))lost++;
++      if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,'carried preserved food spoiled');}
++    }
++  }
+   for (const b of world.buildings) {
+     if (b.store.cap <= 0) continue;
+     const bad = (b.condition < 40 ? 2 : 1) * spoilMultiplier(world, b);
+diff --git a/src/ui/entity.ts b/src/ui/entity.ts
+index 5ed609f..b568236 100644
+--- a/src/ui/entity.ts
++++ b/src/ui/entity.ts
+@@ -8,6 +8,7 @@ import type { Section } from '../sim/inspect_work';
+ import { agoText, secondsText } from '../sim/inspect';
+ import { weightOf } from '../sim/economy';
+ import { RECIPE_BY_ID, recipesAt } from '../sim/recipes';
++import {preservationWorkers} from '../sim/preservation';
+ import type { Building, BuildingType, Cart, Entity, ItemKind, Person, Site, SourceType, World } from '../sim/types';
+ import { ITEM_COLORS } from '../render/palette';
+ import { cap, h, KeyedList, legible, round1, setHidden, setText, toggle } from './dom';
+@@ -45,6 +46,7 @@ const SOURCE_ICON: Record<SourceType, IconName> = {
+ };
+ 
+ const BUILDING_ICON: Record<BuildingType, IconName> = {
++  food_rack: 'fish',
+   lean_to: 'home',
+   hut: 'home',
+   house: 'house',
+@@ -409,6 +411,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
+ 
+   // ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ workshop ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+   function recentWorkers(world: World, b: Building): string[] {
++    if(b.type==='food_rack')return preservationWorkers(world,b).map(p=>p.name);
+     const ops = b.ops;
+     if (!ops) return [];
+     const names: string[] = [];
+@@ -439,14 +442,20 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
+         pctText = `${Math.round(frac * 100)}%`;
+         barColor = 'var(--good)';
+         if (!recentWorkers(world, b).length) notes.push('Nobody is working on it right now.');
+-        if (r.burn > 0) notes.push(`When the work is done it burns for about ${secondsText(r.burn)} with nobody needed.`);
++        if (r.burn > 0) notes.push(r.preservation === 'dry'
++          ? `After preparation it needs about ${secondsText(r.burn)} of dry weather.`
++          : `When the work is done it burns for about ${secondsText(r.burn)} with nobody needed.`);
+       } else if (job.phase === 'burn') {
+         // the fire does the work now: the bar shows how far it has burned
+         frac = job.burnTotal > 0 ? 1 - Math.max(0, job.burnLeft) / job.burnTotal : 1;
+         pctText = `${Math.round(frac * 100)}%`;
+-        barColor = TONE.fire;
+-        state = `${r.doing} (burning)`;
+-        notes.push(`The fire is burning on its own; about ${secondsText(Math.max(0, job.burnLeft))} to go. Nobody has to stand there.`);
++        barColor = r.preservation === 'dry' ? 'var(--good)' : TONE.fire;
++        state = `${r.doing} (${job.blocked ? 'paused' : r.preservation === 'dry' ? 'drying' : 'burning'})`;
++        if (job.blocked) notes.push(job.blocked+'.');
++        notes.push(r.preservation === 'dry'
++          ? `About ${secondsText(Math.max(0, job.burnLeft))} of dry weather remains. Nobody has to stand there.`
++          : r.preservation && job.blocked ? `About ${secondsText(Math.max(0, job.burnLeft))} of processing remains after the blockage is resolved.`
++          : `The fire is burning on its own; about ${secondsText(Math.max(0, job.burnLeft))} to go. Nobody has to stand there.`);
+       } else {
+         frac = 1;
+         pctText = 'done';
+diff --git a/src/ui/icons.ts b/src/ui/icons.ts
+index d7a7459..3aa45b1 100644
+--- a/src/ui/icons.ts
++++ b/src/ui/icons.ts
+@@ -124,6 +124,8 @@ export function needIconName(key: NeedKey): IconName {
+ 
+ /** Every kind of item has an icon of its own; anything unexpected shows as a stone. */
+ export function itemIconName(kind: ItemKind): IconName {
++  if(kind==='dried_fish'||kind==='smoked_fish')return 'fish';
++  if(kind==='dried_meat'||kind==='smoked_meat')return 'meat';
+   return (kind in ICONS ? kind : 'stone') as IconName;
+ }
+ 
+diff --git a/src/ui/tooltip.ts b/src/ui/tooltip.ts
+index c30c7a6..191d8dd 100644
+--- a/src/ui/tooltip.ts
++++ b/src/ui/tooltip.ts
+@@ -121,7 +121,7 @@ function thingStatus(world: World, e: Entity): string {
+       if (job) {
+         const r = RECIPE_BY_ID[job.recipe];
+         const doing = r ? r.doing.toLowerCase() : 'at work';
+-        if (job.phase === 'burn') return `${doing}: the fire is burning`;
++        if (job.phase === 'burn') return `${doing}: ${job.blocked || (r?.preservation === 'dry' ? 'drying in the air' : 'the fire is burning')}`;
+         if (job.phase === 'ready') return `${doing}: waiting for room`;
+         return `${doing} (${Math.round((job.progress / Math.max(1, job.total)) * 100)}%)`;
+       }
+diff --git a/tests/run_rules.test.ts b/tests/run_rules.test.ts
+index 8d2814b..2e895f5 100644
+--- a/tests/run_rules.test.ts
++++ b/tests/run_rules.test.ts
+@@ -206,7 +206,7 @@ describe('the lab will not mix one generation of rules with another', () => {
+   it('will not mix a pinned earlier version with current results, either way round', () => {
+     const current = dir(rows('rich', CURRENT_RULES_VERSION, true));
+     try {
+-      expect(checkResumable(current, ['meadow'], 'rich', false, true, 118)).toMatch(/rules version 121.*requested rich, rules version 118/);
++      expect(checkResumable(current, ['meadow'], 'rich', false, true, 118)).toMatch(new RegExp(`rules version ${CURRENT_RULES_VERSION}.*requested rich, rules version 118`));
+     } finally {
+       rmSync(current, { recursive: true, force: true });
+     }
+diff --git a/tests/transport.test.ts b/tests/transport.test.ts
+index 37c4390..6f64276 100644
+--- a/tests/transport.test.ts
++++ b/tests/transport.test.ts
+@@ -7,7 +7,9 @@ import { setExternalController } from '../src/sim/external';
+ import { generateOptions, rankOptions } from '../src/sim/decision';
+ import { stepWorld, hashWorld } from '../src/sim/world';
+ import { serializeWorld, deserializeWorld } from '../src/app/save';
+-import { conservationReport, ledgerCreate } from '../src/sim/economy';
++import { conservationReport, ledgerCreate, snapshotInitial } from '../src/sim/economy';
++import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
++import {DAY} from '../src/sim/constants';
+ import { observe } from '../src/sim/knowledge';
+ import { perceive } from '../src/sim/perception';
+ import { newCart, cartLoaded } from '../src/sim/carts';
+@@ -90,6 +92,21 @@ function provisionScene(version: number) {
+   return { w, ann, ben, cal, hut, store, cart };
+ }
+ 
++it('the existing winter reserve cart trip can carry preserved provisions home',()=>{
++  const {w,ann,ben,cal,hut,store,cart}=provisionScene(CURRENT_RULES_VERSION);
++  w.tick=DAY*6;ann.inv={grain:6};store.store.items={dried_fish:30};
++  for(const p of [ann,ben,cal]){observe(w,p,hut);observe(w,p,store);observe(w,p,cart);}
++  snapshotInitial(w);
++  reviewIntentions(generateOptions(w,ann,true));
++  const plan=ann.intentions.find(i=>i.kind==='stock')!;
++  expect(plan.cue).toBe('season');expect(plan.reserve).toBe(20);
++  expect(keys(w,ann).some(k=>k.includes(`cart:${cart.id}:home:${hut.id}:${store.id}`))).toBe(true);
++  run(w,ann,':home:');
++  expect(hut.store.items.dried_fish).toBeGreaterThan(0);
++  expect(plan.worked).toBeGreaterThan(0);expect(cartLoaded(cart)).toBe(false);
++  expect(conservationReport(w).ok).toBe(true);
++});
++
+ it('a cart brings the reserve plan its food from the storehouse in one trip, credited to the plan where the fish actually move; not below rules 55', () => {
+   const old = provisionScene(54);
+   reviewIntentions(generateOptions(old.w, old.ann, true)); expect(old.ann.intentions.find((i) => i.kind === 'stock')).toBeDefined();

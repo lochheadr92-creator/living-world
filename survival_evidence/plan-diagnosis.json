@@ -1,0 +1,101 @@
+[
+  {
+    "input": "survival_evidence/rack-diagnosis-v4-final.json",
+    "tick": 38400,
+    "id": 916,
+    "name": "Viktor",
+    "criticals": [],
+    "demands": [
+      {
+        "item": "dried_fish",
+        "qty": 2,
+        "have": 0,
+        "base": 27,
+        "why": "keep spare food for later meals",
+        "tag": "food"
+      }
+    ],
+    "want": null,
+    "plans": []
+  },
+  {
+    "input": "survival_evidence/rack-diagnosis-v4-final.json",
+    "tick": 38400,
+    "id": 942,
+    "name": "Delia",
+    "criticals": [],
+    "demands": [
+      {
+        "item": "dried_fish",
+        "qty": 2,
+        "have": 0,
+        "base": 27,
+        "why": "keep spare food for later meals",
+        "tag": "food"
+      }
+    ],
+    "want": {
+      "item": "planks",
+      "recipe": "hew_planks",
+      "facilityId": 8522,
+      "qty": 10,
+      "forSite": 14823,
+      "why": "for the shared hall",
+      "wants": {},
+      "project": {
+        "version": 1,
+        "goal": {
+          "item": "planks",
+          "quantity": 10,
+          "tier": 0
+        },
+        "root": 1,
+        "nodes": [
+          {
+            "id": 1,
+            "item": "planks",
+            "quantity": 10,
+            "tier": 0,
+            "destination": 0,
+            "method": "recipe",
+            "place": 8522,
+            "recipe": "hew_planks",
+            "dependencies": [
+              2
+            ],
+            "alternatives": [
+              "saw_planks"
+            ],
+            "estimatedTicks": 900
+          },
+          {
+            "id": 2,
+            "item": "wood",
+            "quantity": 3,
+            "tier": 0,
+            "destination": 8522,
+            "method": "present",
+            "place": 0,
+            "recipe": "",
+            "dependencies": [],
+            "alternatives": [],
+            "estimatedTicks": 0
+          }
+        ],
+        "current": 0,
+        "completed": [],
+        "retries": 0,
+        "history": []
+      }
+    },
+    "plans": [
+      {
+        "kind": "stock",
+        "makes": "",
+        "step": "take the food home (9 more to put by)",
+        "until": 39263,
+        "blocked": ""
+      }
+    ]
+  }
+]

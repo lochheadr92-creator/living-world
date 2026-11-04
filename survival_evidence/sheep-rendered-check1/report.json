@@ -1,0 +1,31 @@
+{
+  "evidence": "STAGED: one physical animal, finite grain/water and two initial wool at the yard. One grown fleece was delivered, woven and worn. Animal then died from neglect.",
+  "checks": [
+    {
+      "name": "paid growth and shearing",
+      "ok": true
+    },
+    {
+      "name": "owned wool gives actual insulation",
+      "ok": true
+    },
+    {
+      "name": "success conserves and saves exactly",
+      "ok": true
+    },
+    {
+      "name": "neglect removes animal and spoils body",
+      "ok": true
+    },
+    {
+      "name": "inspector shows actual lost contents",
+      "ok": true
+    },
+    {
+      "name": "failure conserves and saves exactly",
+      "ok": true
+    }
+  ],
+  "success": "- generic \"The simulated world\"\n- 'button \"World menu. Current seed: sheep-rendered\"':\n  - generic: sheep-rendered\n- button \"Unfold the top bar\" [pressed]:\n- group \"World summary\":\n  - generic: 12:08\n  - generic: 1 person\n- toolbar \"Time controls\":\n  - button \"Play\":\n  - button \"Step forward one tick\":\n  - generic: 1×\n- status:\n  - generic: Paused\n- generic: ▾\n- region \"Happenings feed\":\n  - button \"Happenings\":\n    - generic: Happenings\n- button \"Hide the inspector\" [expanded]:\n- complementary \"Inspector\":\n  - generic: A\n  - heading \"Ada\" [level=2]\n  - button \"Follow this person with the camera\":\n    - generic: Follow\n  - button \"Show on the map\":\n  - button \"Close inspector\":\n  - generic \"Age in years. A year of life takes 12 days here.\": Adult, 28\n  - generic: Linden household\n  - generic: No home yet\n  - generic: \"Township: Willowbank\"\n  - generic: Mood\n  - generic: Okay\n  - generic: Health\n  - generic: \"100\"\n  - generic: On their mind\n  - region \"What are they up to?\":\n    - heading \"What are they up to?\" [level=3]\n    - button \"More\":\n      - generic: More\n    - definition: Deciding what to do next.\n    - definition\n  - generic: Needs\n  - group \"Needs\":\n    - meter \"Food\":\n      - generic: Food\n      - generic: \"90\"\n    - meter \"Water\":\n      - generic: Water\n      - generic: \"90\"\n    - meter \"Energy\":\n      - generic: Energy\n      - generic: \"90\"\n    - meter \"Warmth\":\n      - generic: Warmth\n      - generic: \"30\"\n    - meter \"Safety\":\n      - generic: Safety\n      - generic: \"85\"\n    - meter \"Company\":\n      - generic: Company\n      - generic: \"70\"\n  - generic: Carrying\n  - img \"1 grain\":\n    - generic: ×1\n  - generic: 1.8 / 12\n  - generic: Tools\n  - img \"wool garment — worn, 0% wet, +6.0 degrees now, 0 percent worn\":\n  - generic: wool garment — worn, 0% wet, +6.0 degrees now; 100% condition\n  - generic \"Township & shared work\"\n  - generic \"Household history\"\n  - generic \"Relationship history\"\n  - generic \"Recent decisions\"\n  - group \"More about them\":\n    - button \"Nearby\":\n      - generic: Nearby\n    - button \"People\":\n      - generic: People\n    - button \"Requests\":\n      - generic: Requests\n    - button \"Recent 5\":\n      - generic: Recent\n      - generic: \"5\"\n    - button \"Knows 2\":\n      - generic: Knows\n      - generic: \"2\"\n    - button \"Family\":\n      - generic: Family\n    - button \"Traits\":\n      - generic: Traits\n- group \"Map overlays\":\n  - button \"Perception overlay\":\n  - button \"Paths overlay\":\n  - button \"Intentions overlay\":\n  - button \"Knowledge overlay\":\n  - button \"Labels overlay\":\n- generic \"View\"\n- option \"Automatic\" [selected]\n- option \"Selected person only\"\n- option \"Hidden\"\n- option \"Normal\" [selected]\n- option \"Large\"\n- option \"Standard\" [selected]\n- option \"High\"\n- status\n- strong: STAGED sheep contract\n- paragraph: One unowned sheep, finite carried supplies and two initial wool at the yard.\n- button \"Acquire, feed and shear\" [disabled]\n- button \"Weave and wear wool\" [disabled]\n- button \"Leave without food or water\"\n- status: \"One grown fleece and two staged wool became an owned worn garment through paid weaving. Wool created: 1; wool used: 3; clothing warmth: 6; conservation: true; pure: true; exact save: true\"",
+  "failure": "- generic \"The simulated world\"\n- 'button \"World menu. Current seed: sheep-rendered\"':\n  - generic: sheep-rendered\n- button \"Unfold the top bar\" [pressed]:\n- group \"World summary\":\n  - generic: 04:08\n  - generic: 1 person\n- toolbar \"Time controls\":\n  - button \"Play\":\n  - button \"Step forward one tick\":\n  - generic: 1×\n- status:\n  - generic: Paused\n- generic: ▾\n- region \"Happenings feed\":\n  - button \"Happenings\":\n    - generic: Happenings\n- button \"Hide the inspector\" [expanded]:\n- complementary \"Inspector\":\n  - heading \"Sheep carcass\" [level=2]\n  - generic: Finite body; parts need butchery\n  - button \"Show on the map\":\n  - button \"Close inspector\":\n  - term: Animal origin\n  - definition: \"4\"\n  - term: Belongs to\n  - definition: Linden\n  - term: Decay deadline\n  - definition: 4800 ticks remaining\n  - term: Current worker\n  - definition: Nobody\n  - term: Paid work\n  - definition: \"meat: 0/120, hide: 0/120, fat: 0/120\"\n  - paragraph:\n    - generic: These parts are still inside the body. Each unit takes 120 work ticks and room in a nearby worker’s pack.\n  - paragraph:\n    - generic: \"Recovered: nothing. Lost: 4 meat, 1 hide, 1 fat.\"\n- group \"Map overlays\":\n  - button \"Perception overlay\":\n  - button \"Paths overlay\":\n  - button \"Intentions overlay\":\n  - button \"Knowledge overlay\":\n  - button \"Labels overlay\":\n- generic \"View\"\n- option \"Automatic\" [selected]\n- option \"Selected person only\"\n- option \"Hidden\"\n- option \"Normal\" [selected]\n- option \"Large\"\n- option \"Standard\" [selected]\n- option \"High\"\n- status\n- strong: STAGED sheep contract\n- paragraph: One unowned sheep, finite carried supplies and two initial wool at the yard.\n- button \"Acquire, feed and shear\" [disabled]\n- button \"Weave and wear wool\" [disabled]\n- button \"Leave without food or water\" [disabled]\n- status: \"Neglect removed living sheep: true; edible meat left: 0; body meat lost: 4. Wool created: 1; wool used: 3; clothing warmth: 6; conservation: true; pure: true; exact save: true\""
+}

@@ -1,0 +1,10 @@
+{
+  "forest": {
+    "exact": true,
+    "observed": 3
+  },
+  "river": {
+    "exact": true,
+    "observed": 25
+  }
+}

@@ -1,0 +1,7 @@
+Add paid fibre clothing, blankets and child garment delivery
+
+Connect timber-yard fibre and textile production to personal supply plans, dated usable-stock knowledge, physical equipment ownership, warmth, wetness and repair. Save exact garment identity for child deliveries; preserve capacity and worn-slot rules across transfers, loans and death.
+
+Existing modules touched, and why: production/project readers use observed accessible textile stock; equipment/economy and save validation preserve physical records and paid work; needs and inspector/UI expose actual protection. Historical recipes and rules remain gated.
+
+Validation: 53 focused tests in four files, immutable 122/123/124 continuations, seven rendered assertions, and exact final-source replay of both 25-day arrivals-on checks. Broad check6: 2531 passed, 31 retained baseline failures. Typecheck/build retain two existing nullable review-test errors. Ordinary garment, child and blanket use is observed. Bedroll manufacture is observed but sleeping use and deferred hide/wool routes remain open; no aggregate survival claim.

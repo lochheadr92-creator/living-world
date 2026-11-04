@@ -1,0 +1,12 @@
+{
+  "immutableSource": "86210bc6355cf48e0d5b5400eaa7b7527d2d1757ec0a967e424f5ee0687301d7",
+  "sourceFiles": 270,
+  "changes": [
+    {
+      "path": "src/sim/inspect.ts",
+      "recorded": "2aa7eb4d74915514f63f346e3d7d50ce4e0074958d10e7cfece4832e5537216d",
+      "current": "14bc748e7838ce6e622e16c63009e731e263bf5a12d687428e4989251a2c850e"
+    }
+  ],
+  "scope": "Only direct empty-carcass viewer wording changed after the replay and immutable capture. No runtime, decision or persistence change. Original reference is retained."
+}

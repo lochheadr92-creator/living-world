@@ -1,0 +1,5 @@
+{
+  "command": "npx --no-install vitest run tests/lab_defaults.test.ts tests/zz_review_h_retention.test.ts",
+  "exitCode": 0,
+  "finished": "2026-11-04T02:20:09.4255510+10:00"
+}

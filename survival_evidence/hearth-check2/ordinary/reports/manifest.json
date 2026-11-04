@@ -1,0 +1,15 @@
+﻿{
+    "node":  "v24.19.0",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-hearth-check2",
+    "secondsBudgetPerRun":  1800,
+    "daysPerRun":  25,
+    "seeds":  [
+                  "forest",
+                  "river"
+              ],
+    "commit":  "de35037cc65ce39ff0f54f27803312252470b01f",
+    "note":  "Observers repeat each seed; they are not independent seeds. Source hashes are in each successful report.",
+    "checks":  [
+                   "production"
+               ]
+}

@@ -1,0 +1,3537 @@
+{
+  "seed": "fern",
+  "settings": {
+    "seed": "fern",
+    "population": 28,
+    "harsh": false,
+    "immigration": true,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 124
+  },
+  "source": {
+    "src/main.ts": "e7349172baf1eca9d83eac1e3970a7ac67f13be20467aaf094b258bb0f2c1424",
+    "src/agent\\attribute.ts": "9238c3266c22ab97469494487c70b997867cd439367d589662c19a777973f863",
+    "src/agent\\choice_keys.ts": "65214f8064649a86db50596e463febbb69f326b4c2252e8f628c4e3aef222c64",
+    "src/agent\\counterfactual.ts": "9c7909fa4113b774792676711d01ad484528a7c17f3c0f16451bc1dbbf27c61d",
+    "src/agent\\memory.ts": "6e7c01a2155a51acdeb069e3c65667dde46952569b0c1ace383ab882e7b3d562",
+    "src/agent\\model.ts": "c50c1124faff56c9081d00a04dbf2cc22ae211578293adcb291ace05b5c4a3c8",
+    "src/agent\\observe.ts": "05a96df63519f3302c87e267e379222ec37102c930ba1d6d0f97373a0f32dc50",
+    "src/agent\\protocol.ts": "b98f9216cb44eaca3c259af897cadf2df083b1bb97cb0ac319db1932c146e2b0",
+    "src/agent\\run.ts": "aebf582bfa0f9ab6e1027a852c8a07ba68a13f8bc7e108174a17ef3793b3a055",
+    "src/agent\\stubs.ts": "b4ed4ea3b5d0c92b28310bd308ef3fc16a49626b9d6ff0c1e4ccdde655edab22",
+    "src/agent\\time_text.ts": "b6ba61af33075415be29788fcf78839a433665cb6c2647d07abc01b2e63e3398",
+    "src/agent\\transcript.ts": "dee17174b7d8914f1cd2aa4869852631d22fb7524c8f8887641e37956cbbdfaa",
+    "src/app\\game.ts": "4819a6d7713d5ce0d87363a46b7d9426565f192eaa36f0bff19f1e2f1cc35216",
+    "src/app\\inhabit.ts": "e8cf868a1349c26679590c5c62d49a0a78701467e055d96d61cfee672fec1844",
+    "src/app\\prefs.ts": "2a477374f74ee985554e65791d22a17f0d9ea67737237cf0c4f00a0f3abfcbc2",
+    "src/app\\save.ts": "6bc19cca39ba289ab2116e9dd3a21b125aa20b4932ca3752e6d7a5e6ddb3f25e",
+    "src/app\\viewer.ts": "48f70bb371c88543f72526008c90b53ed8c1ecf54d560eca3cc7f90b9b1004da",
+    "src/render\\bld_common.ts": "08a0e8a60bfc901f8b32afd4a847f8d3d16e21c957a4c3912fb88e4b82bb2b6f",
+    "src/render\\bld_food.ts": "043a00b05d9aadfd40e91b6dbd10b15aadf1f981efe62e45c225967b0f92a8c0",
+    "src/render\\bld_home.ts": "5543a7d9f9de068a16e7e15483bbe42e247649e408a5bc6cde5cbc9169e74267",
+    "src/render\\bld_work.ts": "8a338588e07f98faca36e16c6c9c2b6b8a843df6661601ab45fccd715c231677",
+    "src/render\\buildings.ts": "be7a31d41cfd1ba2899b5d20a17dfb912b1f7c157ed51c7fcc4942d854f34496",
+    "src/render\\camera.ts": "73c415c878efe533386a9cd4952513551886f2bfdc16291c80d9c829492201d7",
+    "src/render\\carts.ts": "9297ee9453932c1f12dbc6750be2a085c7fe59a75f0ce027177f00caa7a7a627",
+    "src/render\\characters.ts": "9fd6c521af4db9363b678d82d465145f4e4de4bcccae5abc0233d726b9117abf",
+    "src/render\\construction.ts": "245a5687f14fcb3ff1694120a0250d0a90ce17f69af85c16fa3b4276607cd9a4",
+    "src/render\\deposits.ts": "4d2a039fa02928e372eda01269cd5554fc56eaf36ea984bfc3658eb340ee4643",
+    "src/render\\effects.ts": "aceb7fc19e83e1b773b6d0c2d1d9a4ec170eda68c08d07799afe52fe802d400c",
+    "src/render\\goods.ts": "7f7257cec61c0674323834cdc558081b153cd2def21d81da76531a79e16a5ac7",
+    "src/render\\input.ts": "74869e146e1f52bda708fc0e25cf24c5e5b497dbc214b376b1eb180001452847",
+    "src/render\\iso.ts": "95cdddded077c13d2adb73b1335cc46a69a3b38f5ed8099bd6abf9d1013d378b",
+    "src/render\\iso3d.ts": "8c2b5ed291cb1ad3489bbd7e89cf92caba194f1243ceaf6766f7156952a9895f",
+    "src/render\\overlays.ts": "0b57c034a89fc4e4acaf40701afebf3cb0eda31de2e77d44008c59893f85098c",
+    "src/render\\palette.ts": "0bd45e7f87102ee52a8802d1b60b2110bcc9238b7dec532a32c513a1e3806312",
+    "src/render\\picking.ts": "11262d442f4f2be5de077b3574e87f248bf2156acdcd76e69f7f6a6c778f82b4",
+    "src/render\\renderer.ts": "919ee574daa901e0120c81792f40282de45573f2d12ef9f5c4fbc200f42c43e2",
+    "src/render\\scenery.ts": "09ae650f405309f8296e4fbf27e525e12b5889583f06d1d3e77af683f5068c1b",
+    "src/render\\speech_layout.ts": "b2956e313362da9ab37f6adf8d2ab7c8833e6a5a1012e9038d58c773d7ca962d",
+    "src/render\\sprites.ts": "6c108b0624c4c022811fba5b047627080362602d9ba9a0d8cf39777d994d26a0",
+    "src/render\\structures.ts": "18391f966425b9dc7658f155ca2fcac3aca1a1b0dc97850990d91503031225f3",
+    "src/render\\terrain.ts": "aa50f47119a1fd71f3ba2af8816e39be06d7ac529239affd0a5a5860550dcba3",
+    "src/render\\workstate.ts": "8d7ac87707dc7fecde16b7ebf168d64dc6548dee08034a93dc5e17f8d6e69f0d",
+    "src/sim\\achievement.ts": "6657ebf15280c869eee1f016dcb9e5937f4146b8c055b1b8198e9973ea504677",
+    "src/sim\\action_scope.ts": "1ae7dc9fb6248a7f33aeeac395c95c0d4aa0d3b112c5cb3e0ce85c35f1e479a9",
+    "src/sim\\activities.ts": "38e84cc70a24209a7a8aa0c9fac696f77d29816511437b2e24114c6b835eb76a",
+    "src/sim\\act_build.ts": "2d094263e69e09274bd5a2526e530d31fd025df8b6a5bc0a0a2e0bd79c66559c",
+    "src/sim\\act_farm.ts": "584c410adb94779f846fd024a9eef272f79c1d56b44233e60a7cfa16c10ff953",
+    "src/sim\\act_misc.ts": "dfa3b7f45488615385689cc5bd29b28e961fb0a083b8f46c48e2d3dde9420be9",
+    "src/sim\\act_production.ts": "07886615acf27bba18602171f143c7d36b67e92457bc73067ac9e047b083f298",
+    "src/sim\\act_resource.ts": "a769503e55c272fbf661666f0de39bdcb17bc220161dc33e56d4b4c8878c6732",
+    "src/sim\\apprentice.ts": "3090d6ba37c45fc1e575bc0c035f2ffbeab605f2054939fa34a7077040e728a4",
+    "src/sim\\background.ts": "9b54d2fcd8e7681b792c29f8b1e42c86e0f22faeee7a8a607efb152a61579095",
+    "src/sim\\batch_plan.ts": "385f9b6a77d9cbd81dfb2a0479bed9e92597b3b2d93a4b7416fabd662ca74c0f",
+    "src/sim\\buildings.ts": "83527f21033a748b5ab65f967ef8a3deb139a4e718f3de05249f5765993c7b3f",
+    "src/sim\\care_capacity.ts": "19a0083201bd4155ed1b1e12f14162ae82b836d59999e94526b873c343b275f7",
+    "src/sim\\care_handback.ts": "64753a9f816d622208d2c3c12542d3b6c589c372aab4735e62dce39a7548427f",
+    "src/sim\\care_journey.ts": "9a72f84fb877fbf38661947208abe0d9bb29a3c93ba786684ff9676c8aa7a3f2",
+    "src/sim\\care_supply.ts": "f0621a17d741f0cf394ad94d14dc752950ecd65ec8f182f7724954a146a23add",
+    "src/sim\\carts.ts": "667ac0c5de45f7afb1943cc0a7449dd6e211616c931857dbe758d33d10cccfe2",
+    "src/sim\\cart_priority.ts": "fa9a338f12d6662e804a5436cef2a8cb9acd2856c9f281bb8c452e72fa4ad26f",
+    "src/sim\\checked_accounts.ts": "5d0aa2360a97c4a105491b5897fbb30663b39fce4c7477601f1c5a7815eef50f",
+    "src/sim\\childhood.ts": "11e2ed1d9eab7d3b7b643f9f1c4d261d754b6b42dd84695cc27d084908266fad",
+    "src/sim\\childhood_rules.ts": "8c17e245fccca5e92b376fabca6482861a8e067a6708449eb9e78bad552c3937",
+    "src/sim\\civic_benefit.ts": "d5942d8a667cc1ad2ec5c64ef3cf59251390e1f06d2088df6b3bbc196338d35b",
+    "src/sim\\civic_decision.ts": "177da433763cdd884031f5346ae0e067cf7a4e1edbbc040568caa5875f59d161",
+    "src/sim\\clothing.ts": "26166f966a9547571f51dbef7e831117d8437f92407e62f812157bdb57fd411e",
+    "src/sim\\cohortcapture.ts": "1d576a40f7db82f8d68f7953f7f6588c59d749034d4b6e887bd9a98b51d169dc",
+    "src/sim\\companionship.ts": "9cdc87c3e6356806c162a4f30044137253d87d3661f4009041c8e48d79d1222f",
+    "src/sim\\constants.ts": "14cf349a02a043ddccadbffc3142f7cddc6cd9debff174ac66beb27e77af52d9",
+    "src/sim\\construction_access.ts": "f93006e8a69dc77b59416eade26c91747be23a0f22ed2f9eaae668da3b3e9f17",
+    "src/sim\\construction_finish.ts": "2e50422b2d27eda2f301566373961921ca67465146e04909d0a6f85182660098",
+    "src/sim\\continuity_knowledge.ts": "ac3c6a01b3de63f40b9eee1e7574e1d5912c46c67feaed8bb053384f62338f1f",
+    "src/sim\\crews.ts": "da4bbf2fd451d2f5bb6e72bb04b49ed10e6aed97b0cbc57e2845f268c66a3b69",
+    "src/sim\\customers.ts": "7711e951a1ce070718f47a03c781bced96ca03c9913654f34f4a26dae94299b9",
+    "src/sim\\daily_routines.ts": "f20616115cbf4214616e7c3ff67a9c9a002f02423f53df4539d286cf248f933d",
+    "src/sim\\death_knowledge.ts": "2bfda79b9b1d4a6f180139e2fadc3560be4cdcce75837ec3d4af7056f6365ac9",
+    "src/sim\\decision.ts": "77af80ae0432be3af3887dac80db7dff454d115392ea199763875b04d6be7eaf",
+    "src/sim\\decision_ledger.ts": "8a2fe2319db9fc7bdb759f10f2cf45af9251c4c16fbe349c93c66180949c13f6",
+    "src/sim\\defence.ts": "2ae89d857ed9ad5bc911c89a68a85eed092bf5ec914c931f17ab038322b3f898",
+    "src/sim\\delivery_place.ts": "1fa49c4cfc0b4ab4975ad44372f7c39863b1eb658a3a6425775f44dd567b3c57",
+    "src/sim\\development.ts": "18512b8522d7e9bc0c202d3f25dded144bbcd27610bc276f1a2a204e18e99aff",
+    "src/sim\\dialogue.ts": "a228276158ac60abfafff21916b6f712f187093a33ed633642570d72fe176010",
+    "src/sim\\ecology.ts": "719822cd9ea56fca761ddcf7fff739706f03a031f14663fab4f6a63672e6e175",
+    "src/sim\\economy.ts": "4723becd988f4ee13203caee016dee262166f497ec65fc60fe5c02cbe2d4f4ad",
+    "src/sim\\environment.ts": "3f220448867e151d9e563adf9835a52e963df117c09463e78301d46dfb98bf0e",
+    "src/sim\\estate.ts": "fbf203ec0f69a050a4806193c1727010456418540d98ca81c737b19e7e3fd56c",
+    "src/sim\\events.ts": "4f11ef2eb54c1ec39b41e8c2c0e737c589905201c70090c80a18058c12015bae",
+    "src/sim\\exchange_journeys.ts": "5b96396b39a6b39fbb871e2a942f5dcbae4fd2918ff1c04192516181083fb307",
+    "src/sim\\external.ts": "e833255819dab4f8b7cb90f65b3b868b91f24cca64147dcfa2a2c4a46ba26cc7",
+    "src/sim\\facilities.ts": "03d5dd3e6f9f05486a855eaf859a8f7a4fffa7cffcfeea1f0a0af749e6acfcee",
+    "src/sim\\factory.ts": "30e52742dbe857042e8021252d314618969632cae641dcedc007d66f7d5263dc",
+    "src/sim\\farming.ts": "20657af4f88de029856b933e900bc58e3955a7e1c48092e18967a730937fef79",
+    "src/sim\\flood.ts": "3c12d332c3d0a1bc4e81e56a971b6aa737316c75a1982db82b8ea1ae744bc5fc",
+    "src/sim\\flood_access.ts": "5885ef767cded696b30c89f758093889217d58f290ea2546f4c5685bf7f07223",
+    "src/sim\\food_help.ts": "d6d0db4a8bf07e75002857c68faab7ee3a1dcc107d2470e01ce84e2a4cdd2532",
+    "src/sim\\geology.ts": "4d95f6bddca5c7b25547dfc8d11d1a02d63d882b0de39ddbe0f32ad343eb5876",
+    "src/sim\\grievance.ts": "05e843109200f1f67122ad221ea0275c87d8abbd2cf79496eac30fb92423a28a",
+    "src/sim\\habitation.ts": "3c52d8b55c4ba40f5fb55a0f536eccf38b15ab720b2b1eeaf6ba110cc961b8ac",
+    "src/sim\\handover_state.ts": "c6d4ca98ca7da267630739198909278e3a92eaa71209818653968bb451e6921c",
+    "src/sim\\hardship.ts": "034a730cec5ede2a97db64b1fc77c65f976cc36d66832d0af756ef5ad5f539be",
+    "src/sim\\hearth.ts": "783574357e13f86f2179921f2ddea0228eb4fbb558ca4276fd3af25f2fa75b39",
+    "src/sim\\helper_learning.ts": "0adaa3612dd37a061cca2c30fb84cf204c305f1743deb144fa56a9e5b107b7cd",
+    "src/sim\\historical_index.ts": "d8048a729fa2f480f0b907bc819c63e9837204a9063de66165cada5a1a4fe7da",
+    "src/sim\\history.ts": "9849d06734be31a77efd54b53e1537837a47910f67a743f1d37be1e9f61b58c4",
+    "src/sim\\home_replacement.ts": "52a65ca147d9dac44a31289fa86d2e685e373cc122d2182ccee6889a9ebf4d03",
+    "src/sim\\households.ts": "43f38d56708a4a76399fc76724ca6dd4fee64b6f7c178785f3789481551b89b7",
+    "src/sim\\household_practices.ts": "c94eb8229f7a87158b00c803a5fc4b81a308eb6b7dc138b68c114c54ed6ae262",
+    "src/sim\\household_supply.ts": "cd426b22108ba349ce56fb74be94fc5cb02f8879c7c814b0ddbe274c638ff4a6",
+    "src/sim\\hungry_harvest.ts": "8070fb7bfe67549a259210d822ec84c4a3c8bac50190d659abe8b47c917604e1",
+    "src/sim\\hunting.ts": "1a320f24ad3cffbdf7efc594a95169e6492dbfd9e9af614d24bfd2cd14ba47ec",
+    "src/sim\\hydrology.ts": "d33bee8c2ed584bf80cbae3181b5ea32e350793edfe6b50e6a3e722dacee696f",
+    "src/sim\\illness.ts": "b6ab47485f3b10cee2a2ce1f0af3e3a19cfe8dac027fc38b62b67d13880c7bc2",
+    "src/sim\\inspect.ts": "4ce1b8a5ad4c74100e635d2b050b5b425634fa6e36d87ccdf772dc1512994b07",
+    "src/sim\\inspect_flood.ts": "eea5f950f41f2c335e575f88c11ee665dcf4a7b375a1302261d312a9b90aef65",
+    "src/sim\\inspect_home_plan.ts": "17d99f80031c7a1ccbc12c2c7d8a7cdcbb54a1237dae0659c9d6a411be974d12",
+    "src/sim\\inspect_water.ts": "8b85281f9134eecd8aff233963ec22aaafa119d242fd287a8115351ed23cd4d4",
+    "src/sim\\inspect_work.ts": "b2e65502da694f076dc2e07e34088fd20e9a813a8d17cda57757ad5440012139",
+    "src/sim\\intent.ts": "0b90809b193bd4481357773798be3c2defffae43e2b4937202c119aeb4ac673f",
+    "src/sim\\journey.ts": "2e3ff55d43b283db2ce89ca8d2be6d657c9ca92ca77f8607c407357a0e90a4c2",
+    "src/sim\\journey_recovery.ts": "c631d776708c1800348e9879bb937eb53a16b53c7a698ad7f1617057c84675d0",
+    "src/sim\\journey_state.ts": "bead0ab186adbf014878ebd687de38d0427ce1fe59b23e0997a65a3cbc76463d",
+    "src/sim\\journey_supplies.ts": "46de079fc44fbddfb3d9228b0937f9d5044e253a15354b6ac91deda807353956",
+    "src/sim\\kept_target.ts": "68da7d813fe89b3a5246dc452dcaa0117f9f8cc39361a4f1c54af4d8032b6f04",
+    "src/sim\\knowledge.ts": "398142a73f04c48da54017c55f9ddcb003dec519fdf199f023536ed77e7f059f",
+    "src/sim\\labels.ts": "4715b50560fb3c4c36b0048f75fd0ff9240efda982dc601e000052f1c322fb3a",
+    "src/sim\\layout_claims.ts": "fa0317cc81fad604d3377e9e59b2ee59c7e7c7646b018b44e5e169a9999d55e1",
+    "src/sim\\learning.ts": "17394f7319660f7fe5f3abcac31fdb32a7c317381d114a0dcad4c9f5c1da1576",
+    "src/sim\\leave_heaviest.ts": "02f4c59d65a10a95c7202ee22d08d54f84c0b2067770fe87fccffe6dd5ac424b",
+    "src/sim\\leisure.ts": "33dfbe50e8ca56dce93d6f5e3af8a0467808a8afca4a260427eeb4f6dfa696f0",
+    "src/sim\\life.ts": "63fc411c02269a77ec431d720f53009929c2e0fd136b47c369dacf357269545a",
+    "src/sim\\lifechanges.ts": "9260cfbcc18a4748ea437c31be8a47fb72f43cca8a02032eafcec55530a3e982",
+    "src/sim\\lifecycle.ts": "9a36467a99d7a36eaa3dfbb371979dd34dc2a6915a833aabb299a3f7a200bd33",
+    "src/sim\\lived_life.ts": "d89291e0ea4d1005f504a8ec2485ebe7302e852c80a576419e86f2b7820ef8a9",
+    "src/sim\\local_demand.ts": "8062d5bddf4a3385d5279356ee105fd27e18010e001cec63eaf386fa90a026b4",
+    "src/sim\\local_giving.ts": "db4cb8a0184d56c6318e9b6599de388415e7c16706fa99984c77cea8ad8f90cf",
+    "src/sim\\location_question.ts": "82e05be47ff1e7593ea0918bc0a60b8e88f432f5f5549df11c91071cc832d8e3",
+    "src/sim\\market_contact.ts": "066a492f2a2593824c8c9b79ca20fde3590d3797eff0961a9ce95e26b492f21f",
+    "src/sim\\material_stock.ts": "42cdb1f26f5736446dd0299473dc5764f85a63bfdbeea51849d9493cca3fa25b",
+    "src/sim\\meals.ts": "b429643fdb7c55a372defb95800e27391072eb05d4dbe8aa7133dc1e261c2667",
+    "src/sim\\meal_leftovers.ts": "c93f484c2fbbef2fa26f4090a0a635b0c7cdcd1c9209f76a30ad83f9d67a73f9",
+    "src/sim\\mediation.ts": "933cc52c78d1a1a9361c93c8558ad2dc3e1bdc3245bea87c6ac08343cabd1292",
+    "src/sim\\meeting_knowledge.ts": "07550cf1c5b598ac2f4556365f3db56955d3837a364a6dd84db74d242674ec8d",
+    "src/sim\\memory_retention.ts": "f5d3f243134f780c0382218dfdb8312cf7e816f8d4d30ae20699f86207e09bf5",
+    "src/sim\\misdeeds.ts": "e5c7080324bf6562de9e56e5dbedff11417a537b1f8d8dfeca69ece4d0692f96",
+    "src/sim\\mood.ts": "cee2bfd8d8d88d7187f4de3b1240a04e62dc308a7738bd013c51c4f58e83b895",
+    "src/sim\\needs.ts": "0e38273d52f0586afbb1da756dd23f50d4fb8334edc77cfc70a589d6d35b185f",
+    "src/sim\\news.ts": "fd180d1679fb5cd138492abac00710cb5187a4d8cce687ddaac88a6754c62457",
+    "src/sim\\night_experience.ts": "73515d4002f7d62ad5824f00dc67c207b8bcfc136b627ab51138a01128759abb",
+    "src/sim\\night_wait.ts": "8e2e4ace15098036d858ef105c56f6ca792b31d612ffadba6859a306611ed3fa",
+    "src/sim\\occasions.ts": "a126e73bb896873f41afb4323969a0f15d1c382d44a436142a485028992eb8f5",
+    "src/sim\\occasion_participation.ts": "56691d1a069e918dd005fb83d199122125b6b56805a9e4af569c2d2f56652475",
+    "src/sim\\occasion_recovery.ts": "0fb0f6fcacbc2960613cb3049470b430e3fd2a51920cf005d59247a129be7625",
+    "src/sim\\offcuts.ts": "0cfec7e0ad6e88beffba6aa5bd2832d0961d10b8c65fda41dd4cbcd2f72132c6",
+    "src/sim\\options_social.ts": "a56512e149e2ab874cf75181b4d2c790a6ff3fcd44914a6d5b7514b79563ac73",
+    "src/sim\\options_survival.ts": "1c763e053e65fb260ba3fe29e1aee9ffb95486ade574dd565066bc3f364e0c9c",
+    "src/sim\\options_work.ts": "963e0818735ba21d90af8aaa6f7080fd25a6f1a57ccf9b58eaf8776d87b82e51",
+    "src/sim\\optutil.ts": "7c16a27615bad908088755ce40770558f9c2f53e940c6f69f46f7b7e4ee7383f",
+    "src/sim\\pathfinding.ts": "44ae0b09cb00d93df1b6e1352f65a132fbb121de8a1abfcb6ae79f8b57c95ca6",
+    "src/sim\\people.ts": "b93f992ed4e2ad1f9a5ad6828e7659c504a3fd3e7201afb38e0d4d6a5bea43d8",
+    "src/sim\\perception.ts": "537fd036eca7120a972b8a9ab8f3a5aaa6d4a7b279d316e2520cda35313331f3",
+    "src/sim\\pile_access.ts": "754dc258ad5b63e1711a6f6932dce579e51638372ac0f089094db6f274e1c720",
+    "src/sim\\political_alignment.ts": "5abcc767a6e6e5b05e75f712d3fc0d0508b44d4a207497fa007d204850caeaab",
+    "src/sim\\preservation.ts": "8c02d101cfb9d9370a320054efd44d4b5baeb07c8a796741ec87769446cf8aab",
+    "src/sim\\probe.ts": "2da5510297ff96c8bd5de5f7d465f74d56b52d534afbc7fdec6cea0cfcca5e7f",
+    "src/sim\\production.ts": "6bad9ac81b73c1f5ebb613ca02ddeecbe8516902137ff35199550f7c90397b53",
+    "src/sim\\profiles.ts": "e2218e828d5eb5494121b6df101bee79f3bf326a8b92a6e24eb54e647df50d70",
+    "src/sim\\project_acquire.ts": "2a3bc19ebde8b2361513804eb9ebd499a1a08202bd4ea353ec4eb9322dbb7b8d",
+    "src/sim\\project_compile.ts": "1eacd2aac7986a63fad97bf1da3fae69db2bf3da10a0035b3b816009a26ad8df",
+    "src/sim\\project_graph.ts": "d1d5fbe1e638bae6441364be6fbfc0382f1dbfc020a673e768763c4f0164c340",
+    "src/sim\\project_hand_inputs.ts": "f215c78ccf97fa1a9f5fddbd1f26eaa2e5139a634ac2d06ef437f40df923db6e",
+    "src/sim\\project_revision.ts": "4b46584ed647841a3a01d7ef9991954d8e0bb725f7c6b1d42d069eda1762a9d0",
+    "src/sim\\project_step.ts": "a46af6f9000089e0f384e8f9d7f51335a15257c3bdb0eb5317352566df5a9133",
+    "src/sim\\promised_supply.ts": "26cfabc1354df9fc6fd51c7fdf9dd4b64e2f46c45fa411f4eeeaf93654807c9d",
+    "src/sim\\promise_delays.ts": "85ca61c38ca1574a362bc794a69b4cc183dfb7694a81364177e6df1eaf53ffe6",
+    "src/sim\\promise_expectations.ts": "b5f53bd4da11bbd690409ad13d5ac41bf8f71fd8dbb9268ec6210c177be926ed",
+    "src/sim\\promise_knowledge.ts": "9176ddc180795c87cd958872cd9cec61c40e703d81573da702336f6935239687",
+    "src/sim\\promise_outcomes.ts": "77116a1b38acc51b33bbd14d14b28977bbe4d673bf951ca783de4e26f892250c",
+    "src/sim\\promise_targets.ts": "2aae4def52ff8242dd13babe3913f1dc9a4ae708df953005783b037d4a0b8b6b",
+    "src/sim\\proposals.ts": "994b8eefb204cbf93443c7a5e1a37f057e731733d023ea15fae0c2727307e42b",
+    "src/sim\\provision.ts": "ccdae2c35768d8a9ad13f7b555e3fd4e4fd13c85cbeff46560f406da1291f833",
+    "src/sim\\ready_step.ts": "3c407dc6e3710b38312a42d53c7f99624c32c43303ceab7d3f120fe1aaa6e923",
+    "src/sim\\recipes.ts": "82980961b78368cfa7bde490d62ffccac49c6f1894650c749a108afd1cc0cda8",
+    "src/sim\\registry.ts": "40f530a0d3140948a17c1e7d8343b30f1fb7a276a31187893cc84a0bb8fea1f2",
+    "src/sim\\relations.ts": "d6476bc14b51e237ae2670b64cc4042008fd59bfd0295a15a9f99341c2314fd4",
+    "src/sim\\relief.ts": "89df991611d51b0f6ed9dd24837651490eeb127b92433e1352fc8a8c20a48d8c",
+    "src/sim\\relocation.ts": "265dfdbe5407ba44e72f1e4d7b00b6d56a2e8f5a7f86ae26733c984568a75c12",
+    "src/sim\\remembered_need.ts": "7a99c1f79f775d3474a4a0615e142f6a8cfa65353a8dedf2b5eb7e94ddde9af1",
+    "src/sim\\repair_duty.ts": "cf36b26cda3317251f85098b3307cd1805063c18b061e12fe2d5c7f7b814c0e3",
+    "src/sim\\reputation.ts": "1f8a357af9c3c3dc9b6ea6d75a5e321a37732f9643e0e779c37a0d055c22af05",
+    "src/sim\\request_cancellation.ts": "26ed23b173aaa6b93bfc4b59f872b091d924252382967948d3e540bcea4b7719",
+    "src/sim\\reserved_goods.ts": "282c3525e78b8db4c1bb13c46b5ac6365c43552de10640c5fcb7d9ced934756e",
+    "src/sim\\resident_care.ts": "a7dab373720e4826cc09bc0a66013f4b21e59eb4aaa4d67badeb72addf76dce4",
+    "src/sim\\resident_contact.ts": "5098bf19a0ffa1d7d1e3a953c6202a561a7cdad7bdd1d39f750e7209d5060616",
+    "src/sim\\responsibilities.ts": "4ac75b00e3568907d6f9fc5a16709e839d191ce2b713db8584ef5dc77b7e65fa",
+    "src/sim\\rng.ts": "da506cd3fa7bc473d33b4d04e91f8563752dd3ff7027ad644737bf44063926d4",
+    "src/sim\\route_learning.ts": "5aa9edbc4cdea1859f0621f33d0872fa248294c46e8f466e94966528552b7803",
+    "src/sim\\rules.ts": "0ae7e1ad35117b925a2b9a3282af9e32993e9ed2f1c359ac2421617065895a99",
+    "src/sim\\rulesversion.ts": "b5c7723cf44412da957c0df1be033d405dfdc7f38e9a1a84b4b1029681027a8c",
+    "src/sim\\scenes.ts": "677afc03979cf2d68bb322437c7646950891237fd1510ee1e295e0807c99f509",
+    "src/sim\\seed_storage.ts": "bcd2b6748d1f882b4fc8c7b079e8a90e67788ad454b889e7f9bf4fe2e96d85f4",
+    "src/sim\\settlements.ts": "dc093a58f63f31855e3a4d5305094a4ef032f7319ad50eca6b8cc5256005b514",
+    "src/sim\\settlement_economy.ts": "4bf92bb7cd7f2d3ec41ca2513991e870898d2487adfb2478dfcd877f17f19cb8",
+    "src/sim\\shelter.ts": "7d1d3cc758c853c41d6bb91ef8bf6453176e2d70e1e3727039da26ad949972cc",
+    "src/sim\\social.ts": "c7712ffa094f4b919e86435d6826d8e888dec3a4e4a1d98a5fe0a93b54c02574",
+    "src/sim\\social_memory.ts": "8d79781f6ad8bc650f1cdc5c35dda51c5c0fd6667d96ffe757067b8ee8ad8d34",
+    "src/sim\\sources.ts": "eea764e47e49b77b0005df491e8c474c62b527a947ec95a617f03cc4c4f991a3",
+    "src/sim\\source_learning.ts": "5256feff50d6178dea25fa0e1c5275cf38a837f49b8df4da5ed7e89c06df4d27",
+    "src/sim\\stored_water.ts": "1a51abf161dbd3088c95df589bd808cac1c10aadc6b0a6240602f3e1d434a7e6",
+    "src/sim\\stored_water_access.ts": "91f77911b44d9dd08f3502fd5c8dcb4cb6f1cc86e9500019adb05730f20391fa",
+    "src/sim\\succession.ts": "ea76a68a1b6f6291ca04fba956b72ccfbf1abb757422fab233fe52ab76dcfbff",
+    "src/sim\\suspended_endings.ts": "0934933ac5993e1f32d35fa4ed3f20c9a09c01af4fb27c54813a15b0e4bb8a18",
+    "src/sim\\tableeating.ts": "41bc98c4d711799af118ea2c83704c89283705ed03a9c558161f8e6be544974f",
+    "src/sim\\techniques.ts": "1397079f589fab408640c87382272cb3fb63ebfe4411bc0e631d2a0bf2d86fc2",
+    "src/sim\\temperament.ts": "0dbc5c9949e5874ddd43304a2679c58b761b96b68905414466bb455dc497b756",
+    "src/sim\\textile_stock.ts": "f90d2c858bc31bca779aa727c35c9c6ac91682a1350ad688435a6bbbecb8da65",
+    "src/sim\\time_text.ts": "c7f0f815461f1f80dd201c686c2febdc0de50e39904725f0c84830f44a0ec9cf",
+    "src/sim\\toolreg.ts": "229fe0f8cee6e3beab81298699463b419e72d7e6b902a538540778feeaff4995",
+    "src/sim\\tools.ts": "478703d6b9d4832892b0f7e98261d50f9cc3a34f24abd1b01adec7e6f42c5d89",
+    "src/sim\\tool_feasibility.ts": "8a30159bcef79e5383f36be485acff5be22cd511a794dd044ed1ba2a7303ecfa",
+    "src/sim\\townships.ts": "813250aedf6b9ef19558de0b740f7c9286b854f06d98940486b5c0457aac794f",
+    "src/sim\\trade.ts": "f0e01780652cf0fea64023aeac81387293c19e3a32904648d3e3c68f7cc9d39c",
+    "src/sim\\traditions.ts": "0d0415d936eeca901f00e25fa0645e853a9be2e9f55e4ca1a813a24fce3ad69e",
+    "src/sim\\transmission.ts": "10184163064c7763529772f72d3613688f87c74f1a228403a2eb9f6497645b54",
+    "src/sim\\transport.ts": "2f12c567e241d65ad46a4bce6f946bceeb6ddc0ed9b6f3db7a3705a18eaf8afe",
+    "src/sim\\types.ts": "10a8ff19ba16539e842fa07460aab6ea3b026ada745ed969b10695e003e39c12",
+    "src/sim\\util.ts": "70a7e589d4feec6491a7d68fa996aea1cde2815590a69ed642b776496521c1df",
+    "src/sim\\warmth_duty.ts": "cddd4c7d8bcfa681c1fa339bd87e78534827ceb2889a26c5c376901e810e19ad",
+    "src/sim\\water_access.ts": "7779aa74119642ed0297d668b014cd9bc25a8072d58ab476f9fc3ed41fb7ac50",
+    "src/sim\\water_search.ts": "f25496c4e407ba53f95128d8ff9c0a011b24d814bbf6186ebd41bf7aad76a8e3",
+    "src/sim\\welfare.ts": "a73ae801e67c19701e9c3fc89e34cd830bb070eca7411b42251917b1d085cc3d",
+    "src/sim\\wildlife.ts": "7c9f0778810c695dbefa90579f13c0159ecc093deb81c7cc8c33e3f2fa7d3c86",
+    "src/sim\\wild_seed.ts": "59742e08a21ab3b274b767bb4fc4ac19df7bf09fb1d70bc852bcfa12f80741c9",
+    "src/sim\\winter_practice.ts": "d7776f4f29e6f348c6f07581a309bb667fe1ac29c8a7b605c3bbadba3c63b0f3",
+    "src/sim\\winter_shelter.ts": "edfc3cefcdefc8ce8e7f829db3b82710efba85ce1d7e71ebae89784b808d48d2",
+    "src/sim\\work_handover.ts": "c4290863c5d83595006f09fe3e22903069847b1feedc2a7fdf0f97fecb828f54",
+    "src/sim\\world.ts": "1880fb13e134feed12b494e785efcaa2d091a97345459e1caacb5cbd8f41e07d",
+    "src/sim\\worldgen.ts": "f5f87e638a7fd58f86c81899e3cc4667fe3936642fee6cb81fcdf69a8ad21f9a",
+    "src/ui\\context.ts": "509e1ebb6e4c0f850091c3f815620f463f026a86624906e61dd268ffed6936b1",
+    "src/ui\\debug.ts": "0ff3303dae32bd38e029456c753c9efe8a8fdf270e8ca00672980ca9a99c7fb7",
+    "src/ui\\dom.ts": "d10cb1562263bc0ab7483d8c0eedc17d68b05e7f0ffce519bf6910b5bb12f91b",
+    "src/ui\\entity.ts": "3543c795af1f31ddab91b56deb57adb15d8b5d7fcd795215624a7c5e368a0585",
+    "src/ui\\feed.ts": "19c7ac5b53f876e7239ed6e6cb089afafec41b0e72991ab6bb2a02ba9826ea6d",
+    "src/ui\\feed_rows.ts": "ce0d23593f19464bdc01d26f348b6494ec6c03082f783509bd41d47ef7f24609",
+    "src/ui\\help.ts": "899d983b93bfb8bba7dd34307096df7d11397b824626bf4b82865af19060cffe",
+    "src/ui\\icons.ts": "8395e8349886845a9e2d0d20376ad356601b4d176d36f56dd8011489e9b9a119",
+    "src/ui\\index.ts": "524554e290efae52dd8334b33ad800a3aef7bf11fb03ab75c2b8c8f8d4dc5d51",
+    "src/ui\\inhabit.ts": "e369e72413880215fc607d4f69170bddcbf05aca5d8ef1891fcae06a334206de",
+    "src/ui\\inhabit_summary.ts": "e9ade4310ea98d5c3359aa1e7d1b004392c72e997f53640537b4f1f0de415e35",
+    "src/ui\\inspector.ts": "44ddd4ca5af788148ecee2ab7f658e2b4ad870a5dcd5edc4c454c88ec4c0cd2c",
+    "src/ui\\layout.ts": "1e56aa17300cd2af5bc3a6d0cddc9b08968dc1e718983a281d471dd59150770e",
+    "src/ui\\minimap.ts": "1f4779b5522bd8f0de0b7c315003b2e2ecee815522acdccfd3e41c5c8beae2e3",
+    "src/ui\\minimapgeom.ts": "e9de5fe3fc4c39aad8882c46564f960a9d99fb9e89afdad9aa68db967992a858",
+    "src/ui\\overlays.ts": "e98f715ba0f6cfd8362c31a964602dd3b98343e2d4d62e3f9d5167ec8e794ffd",
+    "src/ui\\person.ts": "aad9daa45a72a426ea002722435ee503ddaea838c85c45a2f7982926ce997b52",
+    "src/ui\\person_sections.ts": "265dd89d695639f5069b126feda9abb375365f5033c832a0c1450573e47cde85",
+    "src/ui\\person_social.ts": "98f3d27bd26734a409a1633d392ff48ab1e7f12f32e6c2ee48baaa66dc204907",
+    "src/ui\\shortcuts.ts": "2230f1164f77440982eadc61fc13f58ee0cb2a952fecd880e1fbd893c4ca580c",
+    "src/ui\\toasts.ts": "dcdb47ec6b2a63cb4ac618101b872825abc1c41ac42442c6a8c0616a948f0d2a",
+    "src/ui\\tooltip.ts": "eafe6e769b5ef4f45d4bc00da525c0b8806a2a1b97ec11b4b9966fc6e42a4126",
+    "src/ui\\topbar.ts": "f1ca0331a39523eef8f1306a87878e35054240ad4166d2a4276800eaf09fef2f",
+    "src/ui\\transport.ts": "c62a17293da6d3daf5f9023b467452afbb7e4a9494607736fe525a8198c706a1",
+    "src/ui\\viewer.ts": "239497594e88a705df5021824ff76fe4ace5c3d784bc26ea3ddf503559a9d2e2",
+    "src/ui\\widgets.ts": "3c1931b00ac5db493e567d94bc43e69a9abb2d96dace7f360108ec68b1cc560c",
+    "src/ui\\worldmenu.ts": "24445238196d9b42a641c51ec2bd5108bf58571b87127917910124725c31ef76"
+  },
+  "tick": 240000,
+  "population": 27,
+  "survival": {
+    "counts": {
+      "fish delivered to buildings": 298,
+      "hearth starts:plan_site": 33,
+      "hearth person ticks:plan_site:travel": 1010,
+      "hearth ends:plan_site:interrupted:something better came up": 6,
+      "hearth person ticks:plan_site:work": 469,
+      "hearth ends:plan_site:success:done": 18,
+      "hearth ends:plan_site:failed:it is already being rebuilt": 1,
+      "hearth starts:build": 170,
+      "hearth person ticks:build:travel": 6063,
+      "hearth person ticks:build:work": 13062,
+      "hearth ends:build:partial:no materials to work with (1 wood, 2 stone)": 22,
+      "hearth ends:build:interrupted:something better came up": 19,
+      "hearth starts:haul": 47,
+      "hearth person ticks:haul:travel": 2454,
+      "hearth person ticks:haul:work": 345,
+      "hearth ends:haul:success:done": 41,
+      "hearth ends:build:partial:no materials to work with (2 stone)": 58,
+      "hearth ends:haul:interrupted:something better came up": 5,
+      "hearth ends:build:failed:not a home of this household": 11,
+      "hearth ends:build:success:done": 17,
+      "hearth ends:build:partial:no materials to work with (1 stone)": 19,
+      "hearth starts:fuel_fire": 260,
+      "hearth person ticks:fuel_fire:travel": 11603,
+      "hearth ends:plan_site:failed:enough improvement projects are under way already": 8,
+      "hearth person ticks:fuel_fire:work": 7770,
+      "hearth heated occupant ticks": 225269,
+      "hearth occupant degree-ticks": 667179.8000504506,
+      "hearth ends:fuel_fire:success:done": 198,
+      "textile person ticks:plan_site:travel": 306,
+      "hearth ends:build:partial:the building is complete; my contribution is the work I actually did": 4,
+      "starts:rack layout": 4,
+      "rack layout ends:failed:another layout already reserves this footprint or its access gap": 1,
+      "rack layout ends:interrupted:something better came up": 2,
+      "hearth ends:plan_site:failed:the household already has a home layout under way": 4,
+      "hearth ends:fuel_fire:interrupted:something better came up": 54,
+      "textile person ticks:plan_site:work": 6,
+      "hearth ends:build:failed:the site is already finished or gone": 1,
+      "hunting pursuits started": 10,
+      "hunting ends:success:done": 2,
+      "hunting actual strikes": 5,
+      "hunting kills": 2,
+      "hunting ends:interrupted:danger nearby": 2,
+      "textile person ticks:gather:travel": 712,
+      "exposure ticks:adult": 76597,
+      "textile person ticks:deposit:travel": 3964,
+      "textile person ticks:deposit:work": 394,
+      "textile starts:strip_fibre": 86,
+      "textile person ticks:operate:travel": 6950,
+      "textile person ticks:operate:work": 6608,
+      "textile ends:strip_fibre:interrupted:something better came up": 34,
+      "exposure ticks:child": 20287,
+      "exposure ticks:youth": 5851,
+      "exposure ticks:elder": 3189,
+      "hunting ends:failed:cannot reach them": 2,
+      "hearth ends:build:partial:no materials to work with (1 wood)": 10,
+      "hearth ends:build:partial:no materials to work with (1 wood, 1 stone)": 7,
+      "hearth ends:fuel_fire:failed:no unreserved fuel for the hearth": 3,
+      "textile ends:strip_fibre:success:done": 51,
+      "textile starts:weave_garment": 35,
+      "textile ends:weave_garment:success:done": 25,
+      "textile person ticks:withdraw:work": 816,
+      "textile starts:dress": 34,
+      "textile person ticks:tool_work:work": 3052,
+      "textile ends:dress:success:done": 34,
+      "textile protected ticks:adult": 1451786,
+      "textile degree-ticks:adult": 4218651.995828342,
+      "textile starts:weave_blanket": 8,
+      "textile ends:weave_blanket:success:done": 6,
+      "textile person ticks:withdraw:travel": 4467,
+      "hearth ends:fuel_fire:interrupted:danger nearby": 5,
+      "textile starts:repair": 39,
+      "textile ends:repair:success:done": 38,
+      "rack layout ends:success:done": 1,
+      "textile person ticks:gather:work": 197,
+      "chain starts:deposit": 63,
+      "chain person ticks:deposit:travel": 5159,
+      "chain person ticks:deposit:work": 332,
+      "delivered to rack:fish": 72,
+      "chain ends:deposit:success:done": 40,
+      "chain starts:operate": 32,
+      "starts:dry_fish": 28,
+      "chain person ticks:operate:work": 1434,
+      "batches:dry_fish:work": 20,
+      "chain ends:operate:success:done": 24,
+      "ends:success:done": 24,
+      "batches:dry_fish:burn": 20,
+      "chain starts:withdraw": 372,
+      "chain person ticks:withdraw:travel": 18831,
+      "chain person ticks:withdraw:work": 2302,
+      "chain ends:withdraw:failed:there was nothing to take": 245,
+      "chain ends:withdraw:interrupted:something better came up": 91,
+      "transfer:dried_fish:withdraw": 23,
+      "chain ends:withdraw:success:done": 34,
+      "delivered to rack:wood": 5,
+      "starts:smoke_fish": 4,
+      "batches:smoke_fish:work": 4,
+      "batches:smoke_fish:burn": 4,
+      "fuel paid:wood": 4,
+      "transfer:smoked_fish:eat from store": 3,
+      "hearth ends:build:failed:the site it was for was gone when the conversation ended": 1,
+      "chain person ticks:operate:travel": 1165,
+      "chain ends:deposit:interrupted:something better came up": 23,
+      "chain ends:operate:failed:as many people as can work on it are already at it": 3,
+      "ends:failed:as many people as can work on it are already at it": 3,
+      "chain ends:operate:interrupted:something better came up": 4,
+      "ends:interrupted:something better came up": 4,
+      "transfer:dried_fish:eat from store": 10,
+      "textile ends:weave_garment:interrupted:something better came up": 11,
+      "textile person ticks:give:travel": 41,
+      "textile person ticks:give:work": 26,
+      "textile garments given": 2,
+      "textile protected ticks:child": 66774,
+      "textile degree-ticks:child": 178793.18363961164,
+      "textile person ticks:tool_work:travel": 4,
+      "hunting ends:failed:it got away": 3,
+      "hunting failed strikes": 3,
+      "hunting ends:interrupted:something better came up": 1,
+      "chain ends:operate:failed:it is drying; there is nothing to do but wait": 1,
+      "ends:failed:it is drying; there is nothing to do but wait": 1,
+      "textile ends:strip_fibre:failed:as many people as can work on it are already at it": 4,
+      "transfer:smoked_fish:withdraw": 4,
+      "textile ends:strip_fibre:interrupted:danger nearby": 2,
+      "textile starts:weave_bedding": 6,
+      "textile ends:weave_bedding:interrupted:something better came up": 2,
+      "hearth ends:build:interrupted:danger nearby": 1,
+      "textile protected ticks:youth": 95761,
+      "textile degree-ticks:youth": 300687.48738945543,
+      "textile ends:weave_blanket:interrupted:something better came up": 1,
+      "hearth ends:haul:failed:the site no longer needs that": 1,
+      "rack layout ends:failed:there is already a drying and smoking rack": 1,
+      "textile ends:weave_bedding:success:done": 2,
+      "transfer:dried_fish:deposit": 1,
+      "textile ends:repair:interrupted:danger nearby": 1,
+      "transfer:smoked_fish:given": 1,
+      "chain ends:withdraw:interrupted:danger nearby": 2,
+      "textile ends:strip_fibre:failed:lacks 1 wood": 1,
+      "textile ends:weave_garment:failed:as many people as can work on it are already at it": 1
+    },
+    "decisions": [],
+    "chainDecisions": [],
+    "coldEpisodes": [
+      {
+        "tick": 23287,
+        "person": 1018,
+        "health": 99.965,
+        "needs": {
+          "hunger": 51.870925000014665,
+          "thirst": 58.20039999999491,
+          "energy": 42.02998834475622,
+          "warmth": 5.99364289599684,
+          "safety": 66.17080406836047,
+          "social": 70.38964633699626
+        },
+        "x": 42.538799455878326,
+        "y": 46.5230546732666,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 2026
+        },
+        "shelter": {
+          "bonus": 5,
+          "cover": 0.55,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 1016,
+            "stage": "adult",
+            "x": 51.9902682091488,
+            "y": 50.3677011568616,
+            "needs": {
+              "hunger": 37.50899999999074,
+              "thirst": 31.403999999995378,
+              "energy": 19.497387308088637,
+              "warmth": 2.3057930860921365,
+              "safety": 61.69350521614806,
+              "social": 77.54614670332381
+            },
+            "action": "rest",
+            "target": 2026
+          },
+          {
+            "id": 1017,
+            "stage": "adult",
+            "x": 40.4571461268235,
+            "y": 40.56032275117468,
+            "needs": {
+              "hunger": 39.99445317402303,
+              "thirst": 72.83999999999622,
+              "energy": 39.756506169441415,
+              "warmth": 19.593669209243867,
+              "safety": 90.23878177434649,
+              "social": 92.3603568602979
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 23358,
+        "person": 3121,
+        "health": 99.965,
+        "needs": {
+          "hunger": 49.18945000002501,
+          "thirst": 48.017399999994446,
+          "energy": 56.887661149121044,
+          "warmth": 5.977750249010218,
+          "safety": 65.64607067184699,
+          "social": 97.17105587551671
+        },
+        "x": 31.579523044545205,
+        "y": 41.58254072701093,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 5779
+        },
+        "shelter": {
+          "bonus": 5,
+          "cover": 0.55,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 3119,
+            "stage": "adult",
+            "x": 38.4807594178943,
+            "y": 40.48875370868482,
+            "needs": {
+              "hunger": 15.224499999998724,
+              "thirst": 39.671999999994895,
+              "energy": 26.955711453960035,
+              "warmth": 15.652365137668717,
+              "safety": 91.04230469913153,
+              "social": 45.02751800146399
+            },
+            "action": "warm",
+            "target": 970
+          },
+          {
+            "id": 3120,
+            "stage": "adult",
+            "x": 40.565294962003826,
+            "y": 38.477777216513644,
+            "needs": {
+              "hunger": 28.140999999996197,
+              "thirst": 68.35999999999505,
+              "energy": 28.89263664844983,
+              "warmth": 17.737341681895156,
+              "safety": 91.66068956242044,
+              "social": 99.48220866777045
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 23557,
+        "person": 976,
+        "health": 99.965,
+        "needs": {
+          "hunger": 10.846975000019972,
+          "thirst": 35.97799999999471,
+          "energy": 48.95400000000656,
+          "warmth": 5.985196906717745,
+          "safety": 63.97012069509056,
+          "social": 89.61769153830468
+        },
+        "x": 42.5,
+        "y": 57.09738863621027,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 849
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 974,
+            "stage": "adult",
+            "x": 43.5,
+            "y": 49.5,
+            "needs": {
+              "hunger": 59.687999999993,
+              "thirst": 74.00799999999637,
+              "energy": 39.077748587252,
+              "warmth": 21.93524021811817,
+              "safety": 93.99342317022702,
+              "social": 74.91684828131791
+            },
+            "action": "sleep",
+            "target": 2857
+          },
+          {
+            "id": 975,
+            "stage": "adult",
+            "x": 43.5,
+            "y": 49.5,
+            "needs": {
+              "hunger": 37.142551182418316,
+              "thirst": 45.40799999999523,
+              "energy": 21.07142295869477,
+              "warmth": 19.8663900432778,
+              "safety": 93.91445058815125,
+              "social": 86.27627007631945
+            },
+            "action": "rest",
+            "target": 2857
+          }
+        ]
+      },
+      {
+        "tick": 25687,
+        "person": 1018,
+        "health": 75.34100000000204,
+        "needs": {
+          "hunger": 18.53185000000022,
+          "thirst": 45.95519999999139,
+          "energy": 16.073188344761068,
+          "warmth": 3.1177066076155446,
+          "safety": 66.15882531186145,
+          "social": 68.96141050369368
+        },
+        "x": 47.111151730662954,
+        "y": 32.03911517830378,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 2026
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 1016,
+            "stage": "adult",
+            "x": 34.8053088762754,
+            "y": 34.370205917516934,
+            "needs": {
+              "hunger": 31.525999999988585,
+              "thirst": 34.63199999999395,
+              "energy": 76.31460429633468,
+              "warmth": 16.852447582693813,
+              "safety": 79.64234768048054,
+              "social": 72.09943499023825
+            },
+            "action": "drink",
+            "target": 1000168
+          },
+          {
+            "id": 1017,
+            "stage": "adult",
+            "x": 42.481308315135536,
+            "y": 46.39775716289878,
+            "needs": {
+              "hunger": 50.65195317402025,
+              "thirst": 37.0919999999952,
+              "energy": 35.82050616944333,
+              "warmth": 6.772794965791901,
+              "safety": 66.5167470591629,
+              "social": 66.43051070106915
+            },
+            "action": "rest",
+            "target": 2026
+          }
+        ]
+      },
+      {
+        "tick": 25957,
+        "person": 976,
+        "health": 50.16100000000156,
+        "needs": {
+          "hunger": 0,
+          "thirst": 40.43879999999452,
+          "energy": 0,
+          "warmth": 0.6328823293154403,
+          "safety": 73.46742267573606,
+          "social": 60.32743243471832
+        },
+        "x": 28.22504080992501,
+        "y": 38.774959190074995,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 960
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 974,
+            "stage": "adult",
+            "x": 39.45271300752647,
+            "y": 40.51923379744403,
+            "needs": {
+              "hunger": 37.606499999990795,
+              "thirst": 50.88799999999563,
+              "energy": 98.97748689181552,
+              "warmth": 37.94708814297409,
+              "safety": 91.97845373679901,
+              "social": 82.44453715028328
+            },
+            "action": "rest",
+            "target": 970
+          },
+          {
+            "id": 975,
+            "stage": "adult",
+            "x": 34.907375607990836,
+            "y": 38.79631219600459,
+            "needs": {
+              "hunger": 0,
+              "thirst": 19.599999999995404,
+              "energy": 0,
+              "warmth": 4.1802526050651165,
+              "safety": 75.99051811737438,
+              "social": 60.632021891722204
+            },
+            "action": "gather",
+            "target": 822
+          }
+        ]
+      },
+      {
+        "tick": 37768,
+        "person": 988,
+        "health": 69.03499999999714,
+        "needs": {
+          "hunger": 27.08842499999917,
+          "thirst": 72.58399999999598,
+          "energy": 14.328283297360487,
+          "warmth": 5.979828842336084,
+          "safety": 60.541036162001014,
+          "social": 12.289021616627068
+        },
+        "x": 33.60997571770567,
+        "y": 39.58178292850498,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 985
+        },
+        "shelter": {
+          "bonus": 2.5,
+          "cover": 0.275,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 34.51999085799325,
+            "y": 41.48265642377082,
+            "needs": {
+              "hunger": 39.82749999999886,
+              "thirst": 65.0879999999774,
+              "energy": 50.98281694195183,
+              "warmth": 6.728862679051838,
+              "safety": 50.122426377079066,
+              "social": 22.64398253863147
+            },
+            "action": "rest",
+            "target": 985
+          },
+          {
+            "id": 989,
+            "stage": "child",
+            "x": 35.47162570557557,
+            "y": 39.55724989462178,
+            "needs": {
+              "hunger": 58.269250000006444,
+              "thirst": 72.13779999999396,
+              "energy": 67.40685238705623,
+              "warmth": 6.632598971921615,
+              "safety": 51.76533284701484,
+              "social": 96.34740867402185
+            },
+            "action": "rest",
+            "target": 985
+          }
+        ]
+      },
+      {
+        "tick": 37785,
+        "person": 989,
+        "health": 99.965,
+        "needs": {
+          "hunger": 57.83575000000643,
+          "thirst": 71.55979999999386,
+          "energy": 67.91685238705625,
+          "warmth": 5.987593027981285,
+          "safety": 51.773661575722244,
+          "social": 96.23784812948321
+        },
+        "x": 35.47162570557557,
+        "y": 39.55724989462178,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 985
+        },
+        "shelter": {
+          "bonus": 2.5,
+          "cover": 0.275,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 34.51999085799325,
+            "y": 41.48265642377082,
+            "needs": {
+              "hunger": 39.31749999999884,
+              "thirst": 64.40799999997729,
+              "energy": 51.49281694195185,
+              "warmth": 6.0744952972275685,
+              "safety": 50.13050123485656,
+              "social": 22.397649396848355
+            },
+            "action": "rest",
+            "target": 985
+          },
+          {
+            "id": 988,
+            "stage": "child",
+            "x": 33.60997571770567,
+            "y": 39.58178292850498,
+            "needs": {
+              "hunger": 26.654924999999153,
+              "thirst": 72.00599999999588,
+              "energy": 14.838283297360476,
+              "warmth": 5.398303385515778,
+              "safety": 60.547108768753226,
+              "social": 12.108081975780772
+            },
+            "action": "rest",
+            "target": 985
+          }
+        ]
+      },
+      {
+        "tick": 52219,
+        "person": 989,
+        "health": 99.965,
+        "needs": {
+          "hunger": 30.02387500001833,
+          "thirst": 51.79559999998913,
+          "energy": 48.23947891133906,
+          "warmth": 5.974466141531681,
+          "safety": 71.16680786462419,
+          "social": 93.56839394361053
+        },
+        "x": 32.45247822839301,
+        "y": 37.53193946932443,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 1590
+        },
+        "shelter": {
+          "bonus": 5,
+          "cover": 0.55,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 33.5,
+            "y": 33.5,
+            "needs": {
+              "hunger": 12.456000000002993,
+              "thirst": 13.387999999995444,
+              "energy": 24.89756392535278,
+              "warmth": 3.5436309597216127,
+              "safety": 77.0314929993283,
+              "social": 85.81226324002927
+            },
+            "action": "drink",
+            "target": 1000168
+          },
+          {
+            "id": 988,
+            "stage": "child",
+            "x": 33.40765560904983,
+            "y": 37.644158187392165,
+            "needs": {
+              "hunger": 51.82590000001497,
+              "thirst": 78.13799999999945,
+              "energy": 99.27601576118325,
+              "warmth": 8.320192468987724,
+              "safety": 75.09193865128128,
+              "social": 92.94792237692678
+            },
+            "action": "rest",
+            "target": 1590
+          }
+        ]
+      },
+      {
+        "tick": 52278,
+        "person": 988,
+        "health": 99.965,
+        "needs": {
+          "hunger": 50.32140000001491,
+          "thirst": 76.1319999999991,
+          "energy": 100,
+          "warmth": 5.9724751419889195,
+          "safety": 72.91270885641217,
+          "social": 92.1764553881075
+        },
+        "x": 33.40765560904983,
+        "y": 37.644158187392165,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 1590
+        },
+        "shelter": {
+          "bonus": 5,
+          "cover": 0.55,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 33.395642569172196,
+            "y": 35.49311771765351,
+            "needs": {
+              "hunger": 94.68600000000296,
+              "thirst": 47.027999999995494,
+              "energy": 22.887563925352833,
+              "warmth": 2.506987568916695,
+              "safety": 77.16975683692962,
+              "social": 84.95734233619396
+            },
+            "action": "rest",
+            "target": 1590
+          },
+          {
+            "id": 989,
+            "stage": "child",
+            "x": 32.45247822839301,
+            "y": 37.53193946932443,
+            "needs": {
+              "hunger": 28.51937500001827,
+              "thirst": 49.78959999998919,
+              "energy": 50.00947891133913,
+              "warmth": 4.327823126250335,
+              "safety": 68.9403097144336,
+              "social": 93.04815440668222
+            },
+            "action": "rest",
+            "target": 1590
+          }
+        ]
+      },
+      {
+        "tick": 81062,
+        "person": 989,
+        "health": 99.965,
+        "needs": {
+          "hunger": 41.3308750000326,
+          "thirst": 93.70999999999889,
+          "energy": 95.54460555374435,
+          "warmth": 5.967909915821199,
+          "safety": 77.26555422489353,
+          "social": 96.85268092142324
+        },
+        "x": 32.43554162115324,
+        "y": 35.64899469164666,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "work",
+          "target": 1590
+        },
+        "shelter": {
+          "bonus": 5,
+          "cover": 0.55,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 33.5142851700075,
+            "y": 37.440762508381155,
+            "needs": {
+              "hunger": 63.49550000000299,
+              "thirst": 70.47999999999652,
+              "energy": 83.87351858684964,
+              "warmth": 6.491339510606997,
+              "safety": 77.23004114911954,
+              "social": 60.10400379690919
+            },
+            "action": "rest",
+            "target": 1590
+          },
+          {
+            "id": 988,
+            "stage": "youth",
+            "x": 32.446571368025616,
+            "y": 37.44186859773472,
+            "needs": {
+              "hunger": 52.58837500003329,
+              "thirst": 60.29599999999565,
+              "energy": 73.66267880058888,
+              "warmth": 6.508213057406446,
+              "safety": 79.3123854652679,
+              "social": 95.51481287371061
+            },
+            "action": "rest",
+            "target": 1590
+          }
+        ]
+      },
+      {
+        "tick": 83157,
+        "person": 980,
+        "health": 99.965,
+        "needs": {
+          "hunger": 59.148500000015495,
+          "thirst": 93.36999999999883,
+          "energy": 54.02892661172176,
+          "warmth": 5.990175570347696,
+          "safety": 63.029273603079446,
+          "social": 82.2857214631287
+        },
+        "x": 51.138426079784736,
+        "y": 44.138426079784736,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 7163
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 979,
+            "stage": "adult",
+            "x": 40.50597901695873,
+            "y": 38.49435045644641,
+            "needs": {
+              "hunger": 54.18249999999856,
+              "thirst": 82.43999999999784,
+              "energy": 51.936816538052504,
+              "warmth": 37.28998615698607,
+              "safety": 91.7135848020947,
+              "social": 46.63399508584205
+            },
+            "action": "sleep",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 108035,
+        "person": 980,
+        "health": 99.965,
+        "needs": {
+          "hunger": 60.36120000002513,
+          "thirst": 27.00199999999434,
+          "energy": 91.04000000000099,
+          "warmth": 5.999442236454443,
+          "safety": 83.69822192145756,
+          "social": 84.2347780104971
+        },
+        "x": 51.59104222474457,
+        "y": 43.41483097332575,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 7163
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 979,
+            "stage": "adult",
+            "x": 54.15334165456692,
+            "y": 44.53583697387307,
+            "needs": {
+              "hunger": 66.58649999999632,
+              "thirst": 95.87999999999936,
+              "energy": 83.41800194796981,
+              "warmth": 6.658513187128154,
+              "safety": 83.76620439735994,
+              "social": 80.90109592861313
+            },
+            "action": "rest",
+            "target": 7163
+          }
+        ]
+      },
+      {
+        "tick": 109554,
+        "person": 28103,
+        "health": 99.965,
+        "needs": {
+          "hunger": 73.80430000001196,
+          "thirst": 96.73599999999942,
+          "energy": 53.462620809692474,
+          "warmth": 5.979944036553403,
+          "safety": 69.17297897633682,
+          "social": 86.20277609587049
+        },
+        "x": 55.91394850775182,
+        "y": 45.718809716819194,
+        "indoors": null,
+        "activity": {
+          "kind": "wander",
+          "phase": "travel",
+          "target": 0
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 37.50316750730853,
+            "y": 45.36784482493531,
+            "needs": {
+              "hunger": 60.039999999998905,
+              "thirst": 60.11999999999462,
+              "energy": 64.52121404654281,
+              "warmth": 44.42628452189814,
+              "safety": 93.98676401687757,
+              "social": 72.57190323706178
+            },
+            "action": "sleep",
+            "target": 30193
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.41702732606791,
+            "y": 45.46023525216151,
+            "needs": {
+              "hunger": 44.9850000000019,
+              "thirst": 45.4719999999947,
+              "energy": 62.64335651280804,
+              "warmth": 33.55798700245347,
+              "safety": 93.75488472459338,
+              "social": 73.6820401074275
+            },
+            "action": "sleep",
+            "target": 30193
+          }
+        ]
+      },
+      {
+        "tick": 109924,
+        "person": 989,
+        "health": 99.965,
+        "needs": {
+          "hunger": 34.596100000007006,
+          "thirst": 46.60979999999355,
+          "energy": 79.19415028234877,
+          "warmth": 5.980191161234092,
+          "safety": 75.88172055838677,
+          "social": 99.40095774037731
+        },
+        "x": 32.97641985125623,
+        "y": 42.09352022587513,
+        "indoors": null,
+        "activity": {
+          "kind": "converse",
+          "phase": "work",
+          "target": 974
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 37.85727406458855,
+            "y": 40.078497783005936,
+            "needs": {
+              "hunger": 75.79349999999565,
+              "thirst": 85.71999999999777,
+              "energy": 0,
+              "warmth": 1.3169101960727736,
+              "safety": 72.8182466927385,
+              "social": 61.14302753852642
+            },
+            "action": "wander",
+            "target": 0
+          },
+          {
+            "id": 988,
+            "stage": "youth",
+            "x": 35.86471592976527,
+            "y": 28.40509493142228,
+            "needs": {
+              "hunger": 63.3810000000026,
+              "thirst": 98.0399999999997,
+              "energy": 35.94399999999551,
+              "warmth": 8.040759770301184,
+              "safety": 70.1257121351895,
+              "social": 98.50233480694898
+            }
+          }
+        ]
+      },
+      {
+        "tick": 135842,
+        "person": 19504,
+        "health": 99.965,
+        "needs": {
+          "hunger": 28.511250000022734,
+          "thirst": 47.44619999999456,
+          "energy": 48.715200000005225,
+          "warmth": 5.999926597025048,
+          "safety": 46.407142236145106,
+          "social": 91.05034390216684
+        },
+        "x": 41.161576114688266,
+        "y": 33.37448289769507,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 4797
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 14708,
+            "stage": "adult",
+            "x": 42.84259448538698,
+            "y": 33.72314606607428,
+            "needs": {
+              "hunger": 62.50349999999288,
+              "thirst": 51.68799999999541,
+              "energy": 33.13999999999653,
+              "warmth": 6.609882128439143,
+              "safety": 47.07894991123378,
+              "social": 87.49269416709966
+            },
+            "action": "fuel_fire",
+            "target": 970
+          },
+          {
+            "id": 14709,
+            "stage": "adult",
+            "x": 19.457253619261905,
+            "y": 48.21121700430207,
+            "needs": {
+              "hunger": 73.49699999999676,
+              "thirst": 59.535999999994864,
+              "energy": 23.533989999991842,
+              "warmth": 6.473730658652445,
+              "safety": 35.91426994320963,
+              "social": 93.53609222013603
+            },
+            "action": "rest",
+            "target": 4797
+          }
+        ]
+      },
+      {
+        "tick": 136003,
+        "person": 32714,
+        "health": 99.965,
+        "needs": {
+          "hunger": 55.063125000016704,
+          "thirst": 65.6393999999828,
+          "energy": 51.462400000005104,
+          "warmth": 5.9755914739313605,
+          "safety": 63.68678967321048,
+          "social": 89.13703693153394
+        },
+        "x": 40.3921138549922,
+        "y": 40.60227961633355,
+        "indoors": null,
+        "activity": {
+          "kind": "warm",
+          "phase": "work",
+          "target": 970
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 9.159427213071677,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 35.46782383704095,
+            "y": 35.98391191852048,
+            "needs": {
+              "hunger": 18.208500000001365,
+              "thirst": 32.82399999999507,
+              "energy": 45.55604889490373,
+              "warmth": 13.538056581983023,
+              "safety": 67.41649552342426,
+              "social": 96.96270818617681
+            },
+            "action": "drink",
+            "target": 1000168
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 39.54535995144397,
+            "y": 40.51675242099445,
+            "needs": {
+              "hunger": 41.067499999984065,
+              "thirst": 35.415999999995364,
+              "energy": 35.68999999999545,
+              "warmth": 10.605963752571629,
+              "safety": 65.18905094603504,
+              "social": 51.370165283526255
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 138156,
+        "person": 28103,
+        "health": 99.965,
+        "needs": {
+          "hunger": 49.127550000046945,
+          "thirst": 52.65499999999423,
+          "energy": 45.38824922872429,
+          "warmth": 5.96460892301993,
+          "safety": 69.17298278171987,
+          "social": 87.22905502136643
+        },
+        "x": 65.28781689011393,
+        "y": 44.77055834929388,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 30193
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 31.072157578992186,
+            "y": 37.5,
+            "needs": {
+              "hunger": 16.26949999999789,
+              "thirst": 15.271999999995643,
+              "energy": 65.16575249014791,
+              "warmth": 38.557109556459466,
+              "safety": 74.52200893095237,
+              "social": 38.993261999993955
+            },
+            "action": "drink",
+            "target": 1000187
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.41702732606791,
+            "y": 45.46023525216151,
+            "needs": {
+              "hunger": 42.67849999999139,
+              "thirst": 52.727999999994644,
+              "energy": 15.4740000000003,
+              "warmth": 17.039730899493126,
+              "safety": 86.89653365142861,
+              "social": 51.8362555403036
+            },
+            "action": "rest",
+            "target": 30193
+          }
+        ]
+      },
+      {
+        "tick": 138403,
+        "person": 32714,
+        "health": 76.81200000000302,
+        "needs": {
+          "hunger": 15.416875000014533,
+          "thirst": 46.58599999999439,
+          "energy": 23.29240000001029,
+          "warmth": 0.9347853820457764,
+          "safety": 89.21415746835076,
+          "social": 87.28620965666883
+        },
+        "x": 38.35740801955107,
+        "y": 40.578552483720706,
+        "indoors": null,
+        "activity": {
+          "kind": "warm",
+          "phase": "work",
+          "target": 970
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 8.74456112888095,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 33.58257758475374,
+            "y": 37.503174817794935,
+            "needs": {
+              "hunger": 32.84199999999907,
+              "thirst": 33.72799999999555,
+              "energy": 57.677807395728784,
+              "warmth": 2.5669947348791604,
+              "safety": 73.62029351097257,
+              "social": 89.8702327491167
+            },
+            "action": "rest",
+            "target": 34798
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 38.513469860469925,
+            "y": 38.610305835888724,
+            "needs": {
+              "hunger": 51.59199999998143,
+              "thirst": 31.8719999999948,
+              "energy": 47.97523673728458,
+              "warmth": 9.377651870216814,
+              "safety": 91.67185592200046,
+              "social": 64.11192419187194
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 138917,
+        "person": 19504,
+        "health": 99.6620000000001,
+        "needs": {
+          "hunger": 15.44212500002023,
+          "thirst": 85.84559999999306,
+          "energy": 48.85760000001148,
+          "warmth": 5.9974961615661035,
+          "safety": 68.11406079747309,
+          "social": 60.76660012142789
+        },
+        "x": 25.5,
+        "y": 42.01777292252499,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 4797
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 14708,
+            "stage": "adult",
+            "x": 29.5,
+            "y": 42.5,
+            "needs": {
+              "hunger": 25.795999999989363,
+              "thirst": 35.95599999999307,
+              "energy": 30.805999999999685,
+              "warmth": 8.927525031620238,
+              "safety": 93.96828121421213,
+              "social": 48.93838196383981
+            },
+            "action": "rest",
+            "target": 4797
+          },
+          {
+            "id": 14709,
+            "stage": "adult",
+            "x": 29.5,
+            "y": 42.5,
+            "needs": {
+              "hunger": 20.486499999994248,
+              "thirst": 91.83999999999872,
+              "energy": 3.8399999999999896,
+              "warmth": 5.41628659543566,
+              "safety": 91.92312143797632,
+              "social": 49.14937245312049
+            },
+            "action": "rest",
+            "target": 4797
+          }
+        ]
+      },
+      {
+        "tick": 138991,
+        "person": 17324,
+        "health": 99.965,
+        "needs": {
+          "hunger": 30.187950000012094,
+          "thirst": 16.52479999999167,
+          "energy": 91.34453459931052,
+          "warmth": 5.978686856214197,
+          "safety": 72.99410808982105,
+          "social": 36.81942586049354
+        },
+        "x": 31.94534169935516,
+        "y": 39.7267084967758,
+        "indoors": null,
+        "activity": {
+          "kind": "drink",
+          "phase": "travel",
+          "target": 1000187
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 32.314317437248974,
+            "y": 41.5715871862449,
+            "needs": {
+              "hunger": 27.20100000000143,
+              "thirst": 16.567999999996808,
+              "energy": 68.92317415309813,
+              "warmth": 7.704239804156875,
+              "safety": 79.64949682975055,
+              "social": 40.084346436714966
+            },
+            "action": "drink",
+            "target": 1000187
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 35.56237212140113,
+            "y": 43.41889953303617,
+            "needs": {
+              "hunger": 11.193499999991824,
+              "thirst": 57.69999999999448,
+              "energy": 36.810000000001736,
+              "warmth": 6.725029242537355,
+              "safety": 76.59442156673782,
+              "social": 5.092656618625509
+            },
+            "action": "gather",
+            "target": 814
+          }
+        ]
+      },
+      {
+        "tick": 139106,
+        "person": 989,
+        "health": 99.965,
+        "needs": {
+          "hunger": 10.579150000037735,
+          "thirst": 13.506399999992569,
+          "energy": 73.75576593207853,
+          "warmth": 5.9761749586018595,
+          "safety": 79.7431951532818,
+          "social": 67.71727299177165
+        },
+        "x": 30.389564133412204,
+        "y": 43.38029826935381,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "work",
+          "target": 815
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 986,
+            "stage": "adult",
+            "x": 40.457492790324615,
+            "y": 40.46117369409185,
+            "needs": {
+              "hunger": 53.87949999999607,
+              "thirst": 65.86399999999053,
+              "energy": 14.72800000000078,
+              "warmth": 4.340614813431091,
+              "safety": 91.99857714872121,
+              "social": 0
+            },
+            "action": "warm",
+            "target": 970
+          },
+          {
+            "id": 988,
+            "stage": "youth",
+            "x": 28.5,
+            "y": 47.5,
+            "needs": {
+              "hunger": 24.951499999994056,
+              "thirst": 73.91999999999592,
+              "energy": 46.752990894873044,
+              "warmth": 16.906595299508645,
+              "safety": 93.99982323534934,
+              "social": 26.39594279414162
+            },
+            "action": "rest",
+            "target": 37706
+          }
+        ]
+      },
+      {
+        "tick": 141315,
+        "person": 980,
+        "health": 99.965,
+        "needs": {
+          "hunger": 49.85245000001297,
+          "thirst": 93.61619999998594,
+          "energy": 77.19840000000552,
+          "warmth": 5.96557863966476,
+          "safety": 63.02927360319082,
+          "social": 17.49723895693555
+        },
+        "x": 53.976120242425395,
+        "y": 44.458302606061096,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 7163
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 979,
+            "stage": "adult",
+            "x": 49.5,
+            "y": 42.5,
+            "needs": {
+              "hunger": 55.59199999998805,
+              "thirst": 42.39999999999658,
+              "energy": 92.06495316167585,
+              "warmth": 34.892429631568056,
+              "safety": 93.92670094093513,
+              "social": 57.275695420690646
+            },
+            "action": "rest",
+            "target": 7163
+          }
+        ]
+      },
+      {
+        "tick": 166979,
+        "person": 28103,
+        "health": 99.965,
+        "needs": {
+          "hunger": 60.93912500008411,
+          "thirst": 62.531999999994355,
+          "energy": 48.2896000000045,
+          "warmth": 5.9686160083137025,
+          "safety": 69.18456995784678,
+          "social": 92.229539661971
+        },
+        "x": 29.5,
+        "y": 51.491580169653375,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 48828
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 53.24649999999908,
+              "thirst": 45.983999999994715,
+              "energy": 61.04878142429224,
+              "warmth": 59.83291563154838,
+              "safety": 93.98340643026887,
+              "social": 50.45847739999331
+            },
+            "action": "sleep",
+            "target": 48828
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 64.34349999999749,
+              "thirst": 73.13199999999584,
+              "energy": 43.02399999999502,
+              "warmth": 13.54396819217012,
+              "safety": 86.56866913069813,
+              "social": 73.80094388138319
+            },
+            "action": "rest",
+            "target": 48828
+          },
+          {
+            "id": 42694,
+            "stage": "child",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 50.02580000000987,
+              "thirst": 64.48699999999546,
+              "energy": 71.55686751406616,
+              "warmth": 37.8265839121037,
+              "safety": 93.70492595394097,
+              "social": 82.47348955840742
+            },
+            "action": "sleep",
+            "target": 48828
+          }
+        ]
+      },
+      {
+        "tick": 170292,
+        "person": 980,
+        "health": 99.965,
+        "needs": {
+          "hunger": 30.334000000007386,
+          "thirst": 19.003399999989483,
+          "energy": 90.27200000000107,
+          "warmth": 5.971378412134239,
+          "safety": 77.37020979110765,
+          "social": 49.83595681117427
+        },
+        "x": 56.318983042142705,
+        "y": 45.49562832539822,
+        "indoors": null,
+        "activity": {
+          "kind": "drink",
+          "phase": "travel",
+          "target": 1000256
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 979,
+            "stage": "adult",
+            "x": 37.40218572830781,
+            "y": 27.358814726839775,
+            "needs": {
+              "hunger": 30.130999999997186,
+              "thirst": 96.31999999999942,
+              "energy": 88.03999999999813,
+              "warmth": 11.63656921657332,
+              "safety": 78.00278656396934,
+              "social": 51.95024019762295
+            },
+            "action": "gather",
+            "target": 811
+          }
+        ]
+      },
+      {
+        "tick": 195687,
+        "person": 32714,
+        "health": 99.965,
+        "needs": {
+          "hunger": 70.61125000000558,
+          "thirst": 51.65199999999491,
+          "energy": 51.82400000000456,
+          "warmth": 5.995883131863406,
+          "safety": 76.94552850836355,
+          "social": 81.95177761613442
+        },
+        "x": 31.82474486547876,
+        "y": 24.82474486547876,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 47784
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 8.144039106431077,
+            "y": 46.33459119726641,
+            "needs": {
+              "hunger": 28.470999999999364,
+              "thirst": 90.95999999999859,
+              "energy": 48.35999999999471,
+              "warmth": 18.229076904033306,
+              "safety": 62.369478297183704,
+              "social": 73.18770522710363
+            },
+            "action": "gather",
+            "target": 883
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 48.76126495477828,
+            "y": 51.74025070520509,
+            "needs": {
+              "hunger": 79.03099999999547,
+              "thirst": 49.24399999999468,
+              "energy": 39.09799999999484,
+              "warmth": 8.054193864973858,
+              "safety": 67.35464276994134,
+              "social": 49.586820167816704
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 57001,
+            "stage": "child",
+            "x": 33.769804118810214,
+            "y": 26.76980411881022,
+            "needs": {
+              "hunger": 43.149700000018214,
+              "thirst": 86.63799999999763,
+              "energy": 51.151860114055495,
+              "warmth": 6.003566952156666,
+              "safety": 78.23897420649055,
+              "social": 85.07780727560748
+            },
+            "action": "rest",
+            "target": 47784
+          }
+        ]
+      },
+      {
+        "tick": 195688,
+        "person": 17324,
+        "health": 99.965,
+        "needs": {
+          "hunger": 70.94715000003734,
+          "thirst": 84.42799999999737,
+          "energy": 53.56960000000484,
+          "warmth": 5.993670031286357,
+          "safety": 64.0950605319083,
+          "social": 63.620635478612655
+        },
+        "x": 58.076146350834215,
+        "y": 50.70897019490789,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 20809
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 36.381619942362526,
+            "y": 43.02647976945014,
+            "needs": {
+              "hunger": 21.657499999999686,
+              "thirst": 30.51999999999512,
+              "energy": 35.951686286497534,
+              "warmth": 8.332578716892163,
+              "safety": 84.88843086217929,
+              "social": 76.90157407222185
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 37.5,
+            "y": 43.5,
+            "needs": {
+              "hunger": 75.62800000000084,
+              "thirst": 55.639999999995105,
+              "energy": 34.292878650106026,
+              "warmth": 42.70975234138972,
+              "safety": 89.54171100289606,
+              "social": 59.88212069679253
+            },
+            "action": "sleep",
+            "target": 20809
+          }
+        ]
+      },
+      {
+        "tick": 195688,
+        "person": 19504,
+        "health": 99.965,
+        "needs": {
+          "hunger": 56.85977500005723,
+          "thirst": 46.00459999999535,
+          "energy": 53.64906931573752,
+          "warmth": 5.99331047063669,
+          "safety": 63.39023290183205,
+          "social": 73.04149681129253
+        },
+        "x": 26.645363571989392,
+        "y": 45.5,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 4797
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 14708,
+            "stage": "adult",
+            "x": 32.506036694053094,
+            "y": 39.5,
+            "needs": {
+              "hunger": 72.01000000000008,
+              "thirst": 97.19999999999956,
+              "energy": 56.499999999996184,
+              "warmth": 27.299982899984254,
+              "safety": 67.99527535292378,
+              "social": 80.41174153624495
+            },
+            "action": "fuel_fire",
+            "target": 970
+          },
+          {
+            "id": 14709,
+            "stage": "adult",
+            "x": 44.85753314932449,
+            "y": 46.5,
+            "needs": {
+              "hunger": 61.630499999987336,
+              "thirst": 86.43999999999788,
+              "energy": 31.395369539093693,
+              "warmth": 11.2234245291107,
+              "safety": 66.44177257852628,
+              "social": 76.93177261072708
+            },
+            "action": "rest",
+            "target": 4797
+          }
+        ]
+      },
+      {
+        "tick": 195688,
+        "person": 57001,
+        "health": 99.965,
+        "needs": {
+          "hunger": 43.12420000001821,
+          "thirst": 86.60399999999763,
+          "energy": 51.1198601140555,
+          "warmth": 5.967545550443726,
+          "safety": 78.23893691159127,
+          "social": 85.07145541736647
+        },
+        "x": 33.85350858751956,
+        "y": 26.853508587519574,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 47784
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 8.072129189516222,
+            "y": 46.24140526639046,
+            "needs": {
+              "hunger": 28.440999999999363,
+              "thirst": 90.91999999999858,
+              "energy": 48.319999999994714,
+              "warmth": 18.119702442609107,
+              "safety": 62.36917768800604,
+              "social": 73.17170818834427
+            },
+            "action": "gather",
+            "target": 883
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 48.728643116029346,
+            "y": 51.647822162083116,
+            "needs": {
+              "hunger": 79.00099999999547,
+              "thirst": 49.20399999999468,
+              "energy": 39.05799999999484,
+              "warmth": 8.005868701784014,
+              "safety": 67.35453501362436,
+              "social": 49.567297561702524
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 32714,
+            "stage": "child",
+            "x": 31.867698474421715,
+            "y": 24.867698474421715,
+            "needs": {
+              "hunger": 70.58575000000559,
+              "thirst": 51.617999999994915,
+              "energy": 51.79200000000456,
+              "warmth": 5.959907833072225,
+              "safety": 76.94548284014174,
+              "social": 81.94570710145258
+            },
+            "action": "rest",
+            "target": 47784
+          }
+        ]
+      },
+      {
+        "tick": 195689,
+        "person": 42694,
+        "health": 99.965,
+        "needs": {
+          "hunger": 69.47742500002155,
+          "thirst": 47.98339999999615,
+          "energy": 46.267766272718845,
+          "warmth": 5.966449174380397,
+          "safety": 68.25824663414444,
+          "social": 64.9031135051719
+        },
+        "x": 45.249651608927024,
+        "y": 22.786908769393047,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 48828
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 39.38624531605747,
+            "y": 38.38191544022411,
+            "needs": {
+              "hunger": 76.54749999999967,
+              "thirst": 52.495999999994716,
+              "energy": 42.11199999999526,
+              "warmth": 23.897594119469783,
+              "safety": 81.58775369417208,
+              "social": 32.103961000014216
+            },
+            "action": "warm",
+            "target": 970
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 39.19550220105433,
+            "y": 53.5,
+            "needs": {
+              "hunger": 80.63299999999992,
+              "thirst": 46.37599999999494,
+              "energy": 37.412036111138924,
+              "warmth": 5.96771596823959,
+              "safety": 79.79803526220377,
+              "social": 81.4590893187322
+            },
+            "action": "rest",
+            "target": 48828
+          },
+          {
+            "id": 28103,
+            "stage": "child",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 56.040825000055285,
+              "thirst": 50.75259999998862,
+              "energy": 66.14900693001539,
+              "warmth": 43.329942185791275,
+              "safety": 93.87732597396823,
+              "social": 75.17862344285476
+            },
+            "action": "rest",
+            "target": 48828
+          }
+        ]
+      },
+      {
+        "tick": 195738,
+        "person": 56402,
+        "health": 99.965,
+        "needs": {
+          "hunger": 63.55427500001504,
+          "thirst": 82.14399999999326,
+          "energy": 56.280193321185365,
+          "warmth": 5.997419495924034,
+          "safety": 77.49160081579974,
+          "social": 94.45249353770333
+        },
+        "x": 34.5,
+        "y": 29.885086569625226,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 59606
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 56400,
+            "stage": "adult",
+            "x": 33.5,
+            "y": 47.68968405162687,
+            "needs": {
+              "hunger": 18.37750000000237,
+              "thirst": 45.56399999999481,
+              "energy": 37.650552851885976,
+              "warmth": 4.579744767698541,
+              "safety": 71.61622675214142,
+              "social": 59.48516176537014
+            },
+            "action": "rest",
+            "target": 59606
+          },
+          {
+            "id": 56401,
+            "stage": "adult",
+            "x": 36.68569205818928,
+            "y": 40.499316462995964,
+            "needs": {
+              "hunger": 30.596499999996283,
+              "thirst": 34.399999999990435,
+              "energy": 45.33358375266477,
+              "warmth": 9.125099926489291,
+              "safety": 71.60280821495702,
+              "social": 87.64060123413219
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 198333,
+        "person": 17324,
+        "health": 99.965,
+        "needs": {
+          "hunger": 59.43590000004378,
+          "thirst": 55.05199999999395,
+          "energy": 35.03360000001159,
+          "warmth": 5.995303273245565,
+          "safety": 77.36452622586503,
+          "social": 45.74711180303886
+        },
+        "x": 45.16537902351016,
+        "y": 32.91875908679598,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 20809
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 62.745040686780314,
+            "y": 53.30280038154463,
+            "needs": {
+              "hunger": 34.03749999999691,
+              "thirst": 65.96799999999473,
+              "energy": 11.267686286500144,
+              "warmth": 5.962734744759819,
+              "safety": 69.40915597500238,
+              "social": 41.73294877826301
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 17.243449405861135,
+            "y": 50.75655059413885,
+            "needs": {
+              "hunger": 14.383000000002173,
+              "thirst": 96.03999999999938,
+              "energy": 33.44599999999465,
+              "warmth": 25.235924928868016,
+              "safety": 72.82531205004084,
+              "social": 64.34601903391159
+            },
+            "action": "gather",
+            "target": 836
+          }
+        ]
+      },
+      {
+        "tick": 198333,
+        "person": 28103,
+        "health": 99.965,
+        "needs": {
+          "hunger": 72.52877500005746,
+          "thirst": 84.01999999999725,
+          "energy": 53.319600000004925,
+          "warmth": 5.987195563519252,
+          "safety": 69.17297897633338,
+          "social": 34.207504948190795
+        },
+        "x": 44.585211251522345,
+        "y": 51.5,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 48828
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 74.2885000000001,
+              "thirst": 39.4559999999952,
+              "energy": 36.934952128838866,
+              "warmth": 47.283503647304954,
+              "safety": 92.84244301913415,
+              "social": 69.24230560001394
+            },
+            "action": "sleep",
+            "target": 48828
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.41702732606791,
+            "y": 45.46023525216151,
+            "needs": {
+              "hunger": 50.505499999996964,
+              "thirst": 31.327999999994958,
+              "energy": 18.38541404470434,
+              "warmth": 38.88545093521678,
+              "safety": 94.00002005565702,
+              "social": 76.65775253447542
+            },
+            "action": "sleep",
+            "target": 30193
+          },
+          {
+            "id": 42694,
+            "stage": "child",
+            "x": 49.50462221527495,
+            "y": 26.236245927386214,
+            "needs": {
+              "hunger": 13.627025000020058,
+              "thirst": 65.32579999999219,
+              "energy": 14.64176627272386,
+              "warmth": 6.095865835511213,
+              "safety": 68.51333211534111,
+              "social": 29.045213354420348
+            },
+            "action": "rest",
+            "target": 48828
+          }
+        ]
+      },
+      {
+        "tick": 198336,
+        "person": 42694,
+        "health": 78.23000000000212,
+        "needs": {
+          "hunger": 13.55052500002006,
+          "thirst": 65.22379999999217,
+          "energy": 14.54576627272386,
+          "warmth": 5.986797287275227,
+          "safety": 68.50719024663879,
+          "social": 28.995798566049608
+        },
+        "x": 49.331429720205435,
+        "y": 26.4318265275972,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 48828
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 30.5,
+            "y": 51.5,
+            "needs": {
+              "hunger": 74.23900000000012,
+              "thirst": 39.3839999999952,
+              "energy": 37.25813421141304,
+              "warmth": 47.38558074112211,
+              "safety": 92.9105166300649,
+              "social": 69.22067140001393
+            },
+            "action": "sleep",
+            "target": 48828
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.41702732606791,
+            "y": 45.46023525216151,
+            "needs": {
+              "hunger": 50.45599999999696,
+              "thirst": 31.255999999994955,
+              "energy": 18.680976768646637,
+              "warmth": 38.83577707134823,
+              "safety": 94.00001561709945,
+              "social": 76.63922564347867
+            },
+            "action": "sleep",
+            "target": 30193
+          },
+          {
+            "id": 28103,
+            "stage": "child",
+            "x": 44.29315755332452,
+            "y": 51.5,
+            "needs": {
+              "hunger": 72.45227500005748,
+              "thirst": 83.91799999999724,
+              "energy": 53.223600000004936,
+              "warmth": 5.880071367262524,
+              "safety": 69.17297897633306,
+              "social": 34.157823492212614
+            },
+            "action": "rest",
+            "target": 48828
+          }
+        ]
+      },
+      {
+        "tick": 198344,
+        "person": 56402,
+        "health": 61.885000000003714,
+        "needs": {
+          "hunger": 9.10127500001303,
+          "thirst": 60.593999999993734,
+          "energy": 43.56819332119183,
+          "warmth": 5.980830730429437,
+          "safety": 64.47478066876127,
+          "social": 90.9715049806783
+        },
+        "x": 49.48187604611333,
+        "y": 43.46375209222666,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 866
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 56400,
+            "stage": "adult",
+            "x": 64.4774417690467,
+            "y": 51.47419442271348,
+            "needs": {
+              "hunger": 0,
+              "thirst": 26.883999999995133,
+              "energy": 3.858552851888305,
+              "warmth": 6.355873974731761,
+              "safety": 65.73743944383659,
+              "social": 46.73590303034718
+            },
+            "action": "eat",
+            "target": 0
+          },
+          {
+            "id": 56401,
+            "stage": "adult",
+            "x": 32.373322366946375,
+            "y": 44.44426180529408,
+            "needs": {
+              "hunger": 21.971499999993526,
+              "thirst": 66.27199999999596,
+              "energy": 12.529583752666607,
+              "warmth": 8.731957068063968,
+              "safety": 68.25854910452803,
+              "social": 70.42220790817076
+            },
+            "action": "rest",
+            "target": 59606
+          }
+        ]
+      },
+      {
+        "tick": 198348,
+        "person": 32714,
+        "health": 92.8250000000007,
+        "needs": {
+          "hunger": 18.596375000005505,
+          "thirst": 51.09099999999409,
+          "energy": 24.982000000010963,
+          "warmth": 5.965004467408855,
+          "safety": 74.0848308147029,
+          "social": 53.29963804778415
+        },
+        "x": 51.46582316826429,
+        "y": 27.08175368029576,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 47784
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 69.91183889499354,
+            "y": 56.1385273820537,
+            "needs": {
+              "hunger": 33.77249999999975,
+              "thirst": 18.575999999996,
+              "energy": 0,
+              "warmth": 11.908082266262213,
+              "safety": 62.36572068246354,
+              "social": 37.486585088430665
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 41.5,
+            "y": 35.55573043495264,
+            "needs": {
+              "hunger": 44.92349999999244,
+              "thirst": 32.51599999999505,
+              "energy": 19.079999999997476,
+              "warmth": 7.464148504650085,
+              "safety": 68.32930986702407,
+              "social": 65.35280812275757
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 57001,
+            "stage": "child",
+            "x": 14.330661105430174,
+            "y": 53.65066262414656,
+            "needs": {
+              "hunger": 0,
+              "thirst": 66.12739999999268,
+              "energy": 27.85906011406133,
+              "warmth": 6.045574399635185,
+              "safety": 39.78949032357688,
+              "social": 85.8341967729047
+            },
+            "action": "gather",
+            "target": 832
+          }
+        ]
+      },
+      {
+        "tick": 198350,
+        "person": 57001,
+        "health": 73.94699999999499,
+        "needs": {
+          "hunger": 0,
+          "thirst": 66.05939999999266,
+          "energy": 27.79506011406133,
+          "warmth": 5.973245147517949,
+          "safety": 40.471860270149435,
+          "social": 85.80749305642269
+        },
+        "x": 14.180724338991588,
+        "y": 53.80005768502985,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 832
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 69.7785276564707,
+            "y": 56.25553518043387,
+            "needs": {
+              "hunger": 33.71249999999975,
+              "thirst": 18.495999999996002,
+              "energy": 0,
+              "warmth": 11.769409604615548,
+              "safety": 62.36572068246345,
+              "social": 37.45459101091193
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 41.5,
+            "y": 35.751687102157085,
+            "needs": {
+              "hunger": 44.863499999992435,
+              "thirst": 32.435999999995055,
+              "energy": 18.999999999997478,
+              "warmth": 7.62538066089017,
+              "safety": 69.26666919628991,
+              "social": 65.32076291052921
+            },
+            "action": "rest",
+            "target": 47784
+          },
+          {
+            "id": 32714,
+            "stage": "child",
+            "x": 51.33228892677816,
+            "y": 27.166451088878926,
+            "needs": {
+              "hunger": 18.545375000005503,
+              "thirst": 51.02299999999409,
+              "energy": 24.918000000010963,
+              "warmth": 5.893639153960775,
+              "safety": 74.19809183760206,
+              "social": 53.28049701842048
+            },
+            "action": "rest",
+            "target": 47784
+          }
+        ]
+      },
+      {
+        "tick": 200510,
+        "person": 19504,
+        "health": 99.965,
+        "needs": {
+          "hunger": 73.24485000006055,
+          "thirst": 66.58479999999474,
+          "energy": 43.85420030855799,
+          "warmth": 5.978386700633271,
+          "safety": 46.40733377896102,
+          "social": 47.91673683339141
+        },
+        "x": 66.00866241289003,
+        "y": 48.5,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 4797
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 14708,
+            "stage": "adult",
+            "x": 67.89606647766433,
+            "y": 47.5,
+            "needs": {
+              "hunger": 40.54199999999643,
+              "thirst": 35.639999999995055,
+              "energy": 39.53822314206375,
+              "warmth": 5.987025915089444,
+              "safety": 47.17765503302161,
+              "social": 62.36239345962281
+            },
+            "action": "rest",
+            "target": 4797
+          },
+          {
+            "id": 14709,
+            "stage": "adult",
+            "x": 29.5,
+            "y": 42.5,
+            "needs": {
+              "hunger": 74.85499999998287,
+              "thirst": 42.51999999999001,
+              "energy": 20.710865134548904,
+              "warmth": 52.137653046131966,
+              "safety": 72.02933909751668,
+              "social": 38.128381929742005
+            },
+            "action": "sleep",
+            "target": 4797
+          }
+        ]
+      },
+      {
+        "tick": 200733,
+        "person": 17324,
+        "health": 92.19500000000076,
+        "needs": {
+          "hunger": 45.97452500004156,
+          "thirst": 45.03379999999083,
+          "energy": 16.36440000001583,
+          "warmth": 1.5714734368611536,
+          "safety": 38.899711201010234,
+          "social": 28.295154354491277
+        },
+        "x": 22.5,
+        "y": 41.325632138314596,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 20809
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 31.908387805278483,
+            "y": 33.35662639978288,
+            "needs": {
+              "hunger": 18.99999999999966,
+              "thirst": 56.82799999999462,
+              "energy": 0,
+              "warmth": 1.561185232528365,
+              "safety": 49.79522351887475,
+              "social": 10.55031902193357
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 74.5,
+            "y": 48.223475482342025,
+            "needs": {
+              "hunger": 26.992499999998792,
+              "thirst": 70.17999999999175,
+              "energy": 7.795999999995454,
+              "warmth": 4.317341511668274,
+              "safety": 39.56926992559552,
+              "social": 27.981790610126723
+            },
+            "action": "rest",
+            "target": 20809
+          }
+        ]
+      },
+      {
+        "tick": 200733,
+        "person": 28103,
+        "health": 93.28000000000065,
+        "needs": {
+          "hunger": 74.48265000006461,
+          "thirst": 63.551999999993726,
+          "energy": 24.60664909347163,
+          "warmth": 2.935162773006028,
+          "safety": 57.08435707776917,
+          "social": 42.885258358391944
+        },
+        "x": 37.91154761089349,
+        "y": 35.382678583659754,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 48828
+        },
+        "shelter": {
+          "bonus": 2.5,
+          "cover": 0.275,
+          "kind": "lean_to"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 72.97177196360995,
+            "y": 54.5,
+            "needs": {
+              "hunger": 64.26300000000137,
+              "thirst": 81.91999999999717,
+              "energy": 24.79788079174687,
+              "warmth": 2.8002165548146025,
+              "safety": 50.260100907391625,
+              "social": 54.29635680001243
+            },
+            "action": "rest",
+            "target": 30193
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.955556406481776,
+            "y": 36.816665390277336,
+            "needs": {
+              "hunger": 28.463499999994767,
+              "thirst": 28.52399999999559,
+              "energy": 14.216044299717517,
+              "warmth": 2.8562903949277025,
+              "safety": 62.98875809924228,
+              "social": 48.07882565270661
+            },
+            "action": "rest",
+            "target": 48828
+          },
+          {
+            "id": 42694,
+            "stage": "child",
+            "x": 10.48000344496686,
+            "y": 27.616184108657762,
+            "needs": {
+              "hunger": 0,
+              "thirst": 16.369999999994164,
+              "energy": 0,
+              "warmth": 1.5791337714432112,
+              "safety": 47.79968674820532,
+              "social": 10.698612646801474
+            },
+            "action": "drink",
+            "target": 1000122
+          }
+        ]
+      },
+      {
+        "tick": 200736,
+        "person": 42694,
+        "health": 9.023000000005855,
+        "needs": {
+          "hunger": 0,
+          "thirst": 16.267999999994167,
+          "energy": 0,
+          "warmth": 1.5508795689116546,
+          "safety": 47.79968674753861,
+          "social": 10.638697858430737
+        },
+        "x": 10.48000344496686,
+        "y": 27.616184108657762,
+        "indoors": null,
+        "activity": {
+          "kind": "drink",
+          "phase": "travel",
+          "target": 1000122
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 72.97177196360995,
+            "y": 54.5,
+            "needs": {
+              "hunger": 64.17300000000137,
+              "thirst": 81.79999999999715,
+              "energy": 24.677880791746873,
+              "warmth": 2.750114475369084,
+              "safety": 50.26009869879168,
+              "social": 54.22424280001244
+            },
+            "action": "rest",
+            "target": 30193
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 36.81891586812691,
+            "y": 37.02162619780964,
+            "needs": {
+              "hunger": 28.373499999994763,
+              "thirst": 28.40399999999559,
+              "energy": 14.09604429971752,
+              "warmth": 2.805185030222931,
+              "safety": 62.988753504789976,
+              "social": 48.04856934938412
+            },
+            "action": "rest",
+            "target": 48828
+          },
+          {
+            "id": 28103,
+            "stage": "child",
+            "x": 37.75047915505314,
+            "y": 35.62428126742028,
+            "needs": {
+              "hunger": 74.40615000006463,
+              "thirst": 63.44999999999373,
+              "energy": 24.51064909347163,
+              "warmth": 2.8826462066762453,
+              "safety": 57.213966452806595,
+              "social": 42.85657690241376
+            },
+            "action": "rest",
+            "target": 48828
+          }
+        ]
+      },
+      {
+        "tick": 200744,
+        "person": 56402,
+        "health": 44.070000000005344,
+        "needs": {
+          "hunger": 29.18674999999928,
+          "thirst": 63.69479999999417,
+          "energy": 14.747793321195616,
+          "warmth": 1.4615887811781332,
+          "safety": 38.44115527874968,
+          "social": 60.019795232029
+        },
+        "x": 33.697373997412114,
+        "y": 28.69737399741211,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 59606
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 56401,
+            "stage": "adult",
+            "x": 36.17892477011211,
+            "y": 37.5,
+            "needs": {
+              "hunger": 18.577499999999034,
+              "thirst": 56.887999999994705,
+              "energy": 0,
+              "warmth": 2.832686073408185,
+              "safety": 49.11649591818178,
+              "social": 56.675634537491234
+            },
+            "action": "rest",
+            "target": 59606
+          }
+        ]
+      },
+      {
+        "tick": 200748,
+        "person": 32714,
+        "health": 25.541000000003798,
+        "needs": {
+          "hunger": 16.1349999999998,
+          "thirst": 53.68859999999447,
+          "energy": 0,
+          "warmth": 1.440701109263352,
+          "safety": 11.368162766314668,
+          "social": 21.16740281138778
+        },
+        "x": 14.126012063068988,
+        "y": 47.75202412613797,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 47784
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 32712,
+            "stage": "adult",
+            "x": 31.441397463898497,
+            "y": 24.5,
+            "needs": {
+              "hunger": 21.99499999999939,
+              "thirst": 11.103999999996063,
+              "energy": 0,
+              "warmth": 2.646562322243951,
+              "safety": 33.520018627741386,
+              "social": 30.9447258427044
+            },
+            "action": "drink",
+            "target": 1000107
+          },
+          {
+            "id": 32713,
+            "stage": "adult",
+            "x": 28.5,
+            "y": 35.95819420345992,
+            "needs": {
+              "hunger": 20.9234999999897,
+              "thirst": 75.51999999999617,
+              "energy": 4.769999999999782,
+              "warmth": 1.8084274306531252,
+              "safety": 45.1576902372852,
+              "social": 43.299691831469424
+            },
+            "action": "rest",
+            "target": 47784
+          }
+        ]
+      },
+      {
+        "tick": 222670,
+        "person": 56402,
+        "health": 99.965,
+        "needs": {
+          "hunger": 7.431400000028876,
+          "thirst": 61.40999999999371,
+          "energy": 30.457612745537613,
+          "warmth": 5.982353826552529,
+          "safety": 64.47478021174933,
+          "social": 88.71882853126287
+        },
+        "x": 7.0188764232234995,
+        "y": 43.75943821161175,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 960
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 56401,
+            "stage": "adult",
+            "x": 41.5,
+            "y": 25.5,
+            "needs": {
+              "hunger": 76.63349999999953,
+              "thirst": 35.19999999999502,
+              "energy": 8.537027258474989,
+              "warmth": 5.984592344839301,
+              "safety": 0,
+              "social": 78.06089781293974
+            },
+            "action": "flee",
+            "target": 0
+          }
+        ]
+      },
+      {
+        "tick": 222842,
+        "person": 28103,
+        "health": 76.77699999999413,
+        "needs": {
+          "hunger": 0,
+          "thirst": 21.25259999999502,
+          "energy": 16.031000000022203,
+          "warmth": 5.971912895279806,
+          "safety": 69.34740361677677,
+          "social": 81.98682923372682
+        },
+        "x": 19.824863728422727,
+        "y": 49.95009084771818,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 836
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 28101,
+            "stage": "adult",
+            "x": 31.707150824420243,
+            "y": 44.39064972523902,
+            "needs": {
+              "hunger": 7.805500000001037,
+              "thirst": 74.35999999999599,
+              "energy": 4.368129999979343,
+              "warmth": 8.784084299733575,
+              "safety": 70.31104773817066,
+              "social": 74.67671599999319
+            },
+            "action": "eat_store",
+            "target": 59606
+          },
+          {
+            "id": 28102,
+            "stage": "adult",
+            "x": 23.59189273918191,
+            "y": 41.68250087143817,
+            "needs": {
+              "hunger": 26.832499999995044,
+              "thirst": 42.46399999999193,
+              "energy": 90.02447951419285,
+              "warmth": 27.69667011839549,
+              "safety": 78.49307802836738,
+              "social": 65.10078099203923
+            },
+            "action": "gather",
+            "target": 960
+          }
+        ]
+      },
+      {
+        "tick": 224728,
+        "person": 66752,
+        "health": 95.39399999999408,
+        "needs": {
+          "hunger": 18.044250000000318,
+          "thirst": 82.16699999999699,
+          "energy": 43.401600000005374,
+          "warmth": 5.99057188191871,
+          "safety": 64.78649129182635,
+          "social": 82.53126862483295
+        },
+        "x": 58.985052065345336,
+        "y": 51.24252603267266,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 20809
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 63.24952473261602,
+            "y": 44.78842497943201,
+            "needs": {
+              "hunger": 62.65249999999676,
+              "thirst": 80.03199999999697,
+              "energy": 19.831409945557645,
+              "warmth": 6.089034945269322,
+              "safety": 76.5376389389781,
+              "social": 69.35802336010904
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 27.605184025410562,
+            "y": 35.36750981961377,
+            "needs": {
+              "hunger": 0,
+              "thirst": 53.44799999999186,
+              "energy": 24.897682943720095,
+              "warmth": 8.96945108109995,
+              "safety": 61.49993143016901,
+              "social": 20.93628540921485
+            },
+            "action": "gather",
+            "target": 959
+          },
+          {
+            "id": 17324,
+            "stage": "youth",
+            "x": 61.50576267319231,
+            "y": 44.249653419339644,
+            "needs": {
+              "hunger": 25.85699999999285,
+              "thirst": 61.59199999999205,
+              "energy": 31.061649378961555,
+              "warmth": 6.112384008618892,
+              "safety": 75.32561784881854,
+              "social": 75.84641446655414
+            },
+            "action": "rest",
+            "target": 20809
+          }
+        ]
+      },
+      {
+        "tick": 224749,
+        "person": 19504,
+        "health": 99.965,
+        "needs": {
+          "hunger": 36.15552500000743,
+          "thirst": 78.82219999999246,
+          "energy": 49.081200000005154,
+          "warmth": 5.977722623475162,
+          "safety": 74.38889927782061,
+          "social": 77.9097778363961
+        },
+        "x": 30.343803950534827,
+        "y": 43.34380395053483,
+        "indoors": null,
+        "activity": {
+          "kind": "rest",
+          "phase": "travel",
+          "target": 4797
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 14708,
+            "stage": "adult",
+            "x": 68.46794584773015,
+            "y": 54.5332110207295,
+            "needs": {
+              "hunger": 7.374999999996975,
+              "thirst": 59.2639999999958,
+              "energy": 27.815356529485264,
+              "warmth": 5.26774108114588,
+              "safety": 71.64050639748079,
+              "social": 68.75805912455453
+            },
+            "action": "gather",
+            "target": 965
+          },
+          {
+            "id": 14709,
+            "stage": "adult",
+            "x": 32.09471299049417,
+            "y": 42.5,
+            "needs": {
+              "hunger": 16.62499999999904,
+              "thirst": 83.7359999999929,
+              "energy": 0,
+              "warmth": 15.796561621868808,
+              "safety": 75.06134853769346,
+              "social": 55.528373355147735
+            },
+            "action": "sleep",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 225070,
+        "person": 56402,
+        "health": 58.62499999999726,
+        "needs": {
+          "hunger": 11.199499999999853,
+          "thirst": 50.54519999999211,
+          "energy": 0,
+          "warmth": 3.117115773928676,
+          "safety": 87.70336343777191,
+          "social": 47.56111878261013
+        },
+        "x": 40.62427869028965,
+        "y": 39.483499961751946,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 813
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 9.954750644684571,
+        "hearth": null,
+        "household": [
+          {
+            "id": 56401,
+            "stage": "adult",
+            "x": 38.38212928010616,
+            "y": 40.47956061582081,
+            "needs": {
+              "hunger": 29.82599999999701,
+              "thirst": 63.51999999999439,
+              "energy": 2.070000000000001,
+              "warmth": 11.490203367852802,
+              "safety": 89.29379256787873,
+              "social": 76.7153645090717
+            },
+            "action": "warm",
+            "target": 970
+          }
+        ]
+      },
+      {
+        "tick": 227177,
+        "person": 66752,
+        "health": 50.78199999999609,
+        "needs": {
+          "hunger": 9.088750000000209,
+          "thirst": 67.72879999999284,
+          "energy": 0,
+          "warmth": 5.996091424339181,
+          "safety": 64.67015536331249,
+          "social": 65.62523559426427
+        },
+        "x": 24.059328355905713,
+        "y": 19.570746715390403,
+        "indoors": null,
+        "activity": {
+          "kind": "gather",
+          "phase": "travel",
+          "target": 962
+        },
+        "shelter": {
+          "bonus": 0,
+          "cover": 0,
+          "kind": "none"
+        },
+        "fire": 0,
+        "hearth": null,
+        "household": [
+          {
+            "id": 17322,
+            "stage": "adult",
+            "x": 32.41850523571871,
+            "y": 42.5,
+            "needs": {
+              "hunger": 36.41749999999463,
+              "thirst": 39.93599999999482,
+              "energy": 0.03340994555927652,
+              "warmth": 5.53466726250896,
+              "safety": 69.34080836289647,
+              "social": 51.35615569776323
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17323,
+            "stage": "adult",
+            "x": 57.34884100301353,
+            "y": 50.32565360606447,
+            "needs": {
+              "hunger": 23.79999999999984,
+              "thirst": 20.911999999995395,
+              "energy": 0,
+              "warmth": 7.822196519527371,
+              "safety": 61.23874936965716,
+              "social": 0
+            },
+            "action": "rest",
+            "target": 20809
+          },
+          {
+            "id": 17324,
+            "stage": "youth",
+            "x": 62.12872212021543,
+            "y": 44.70220939386272,
+            "needs": {
+              "hunger": 20.876999999998425,
+              "thirst": 47.887999999994875,
+              "energy": 8.540000000000393,
+              "warmth": 5.062521745429924,
+              "safety": 57.12863007135873,
+              "social": 34.236944814149396
+            },
+            "action": "rest",
+            "target": 20809
+          }
+        ]
+      }
+    ],
+    "racks": 1,
+    "textiles": {
+      "made": {
+        "fibre": 153,
+        "garment": 25,
+        "blanket": 6,
+        "bedding": 2
+      },
+      "remaining": 21,
+      "repairFibre": 38
+    },
+    "hearths": 14,
+    "hearthFuelConsumed": 326,
+    "made": {
+      "dried_fish": 40,
+      "smoked_fish": 8,
+      "dried_meat": 0,
+      "smoked_meat": 0
+    },
+    "consumed": {
+      "dried_fish": 30,
+      "smoked_fish": 7,
+      "dried_meat": 0,
+      "smoked_meat": 0
+    },
+    "spoiled": {
+      "dried_fish": 10,
+      "smoked_fish": 1,
+      "dried_meat": 0,
+      "smoked_meat": 0
+    },
+    "unfinishedSpoiled": 0,
+    "unfinishedDestroyed": 0,
+    "limits": "Offers and blocks are repeated samples; starts are activities, work/burn/ready are unique batch phases. Consumed preserved food is actual ledger consumption, not production or possession."
+  },
+  "clothing": {
+    "counts": {
+      "protected ticks:garment:adult": 1450711,
+      "degree ticks:garment:adult": 3989379.2936594873,
+      "protected ticks:blanket:adult": 63121,
+      "degree ticks:blanket:adult": 176120.5042076987,
+      "protected ticks:garment:child": 66774,
+      "degree ticks:garment:child": 178793.1836396116,
+      "protected ticks:garment:youth": 95761,
+      "degree ticks:garment:youth": 267833.8980621869,
+      "protected ticks:bedding:adult": 16384,
+      "degree ticks:bedding:adult": 53152.19796120003,
+      "protected ticks:blanket:youth": 10584,
+      "degree ticks:blanket:youth": 32853.5893272683
+    },
+    "stories": [],
+    "limits": "Repeated samples are not independent opportunities. Stories are bounded to 240 snapshots and one per person/day. Protection counts are actual positive item contributions."
+  },
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "limits": "Unstaged 100-day activation search; no decision sampling or every-tick twin. Not a survival comparison.",
+  "exactContinuation": true
+}

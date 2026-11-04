@@ -1,0 +1,26 @@
+{
+  "frozenSource": "C:\\dev\\Claude Experiment\\living-world-nourishment-check1",
+  "frozenHash": "bfb773f5e134dfcd4753d29628052626c3ee4e552a16ce0ad277157d74856f86",
+  "finalSourceHash": "3ca3215b073283f772eee4f553492ef825f56317af0f66186b8848eb1634abf3",
+  "different": [
+    "src/sim/inspect.ts"
+  ],
+  "diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -306,6 +306,12 @@\n",
+    "   if (p.pose === 'sleep') {",
+    "     doing = 'Asleep.';",
+    "     stopping = p.needs.energy >= 90 ? 'Almost rested.' : 'Nothing; sleeping recovers energy and health.';",
+    "+    if(hasNourishment(world)&&p.needs.energy<90){",
+    "+      stopping='Sleeping restores energy.';",
+    "+      if(p.health<100)stopping+=nourishmentOf(world,p)<=0?' Food is needed for health recovery.':",
+    "+        p.needs.hunger>40&&p.needs.thirst>40&&p.needs.warmth>35?' Stored nourishment pays for health recovery.':",
+    "+        ' Health recovery also needs enough food, water and warmth.';",
+    "+    }",
+    "   }",
+    "   if (a) {",
+    "     const tgt = targetText(world, a);"
+  ],
+  "scope": "Only the read-only sleeping QA text changed after measurement freeze; nutrition, decisions, lifecycle, persistence and all other source files are identical."
+}

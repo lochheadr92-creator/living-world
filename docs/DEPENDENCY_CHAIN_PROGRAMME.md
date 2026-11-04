@@ -1,5 +1,10 @@
 # Dependency-chain programme register
 
+**Owner stop,4 November2026:** current trap-report section (rules133) complete;
+publication/merge requested. The whole survival assignment remains incomplete.
+Follow-on runs stopped; baseline75,pre13148,final13240completed draws retained.
+No full-cohort benefit claim. See SURVIVAL_CAPABILITIES.md and root HANDOFF.md.
+
 **Rules132:** finite paid nourishment is now implemented after the six physical
 capability families. Ordinary forest/river25 finish18/28alive with exact twins,
 save120,500pure checks each and conservation.29new contracts, all ten
