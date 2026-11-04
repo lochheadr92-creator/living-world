@@ -1,3 +1,4 @@
+import {captureFinalAccount,trimFinalAccounts} from './final_account';
 import { hasLocalDeath, witnessDeath } from './death_knowledge';
 import { foundMembership } from './townships';
 import { fireNear, nearestHub } from './settlements';
@@ -222,6 +223,7 @@ export function deathCauseOf(p: Person): string {
 }
 
 export function killPerson(world: World, p: Person, cause: string): void {
+  const last=captureFinalAccount(world,p);
   if (p.alive && hasLocalDeath(world)) witnessDeath(world,p);
   if (hasHabitation(world)) delete p.indoors;
   if (!p.alive) return;
@@ -263,7 +265,8 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const idx = world.persons.indexOf(p);
   if (idx >= 0) world.persons.splice(idx, 1);
   world.byId.delete(p.id);
-  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age });
+  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age, ...(last?{last}:{}) });
+  if(last)trimFinalAccounts(world);
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);

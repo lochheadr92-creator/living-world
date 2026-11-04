@@ -1,0 +1,12 @@
+{
+  "source": {
+    "head": "69766fb1cb7a5578ad40e9c84c28ad54db5a3f9e",
+    "rules": 144,
+    "content": "915bfd23bd7696b0988b999bb29b8eae95a035c6c3d9f26ea3bf0c4706e194e4",
+    "note": "Recorded before successor behavior; ordinary world plus separately staged in-flight final account"
+  },
+  "saved": "2438310faf7208a66b5ef5df4f1a852bbed52c4dc5b5d160c1a6db306a2efca5",
+  "continued": "7ca955eaa58ce19024cd59aed3e9e79164b637c35055827061432214caf6f8fa",
+  "staged": "870c9bfb818b31a2d78fafcc1745c0c9892ba78cd91b9155dff6a33d7744e7c4",
+  "stagedContinued": "01671a4bebc5fb81857a1a2515b51c019baa012bb795a56983ff4c34c104610e"
+}

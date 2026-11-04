@@ -1383,7 +1383,7 @@ export interface World {
   stumps: { x: number; y: number; tick: number }[];
   nextId: number;
   persons: Person[];
-  deceased: { id: number; name: string; tick: number; cause: string; age: number }[];
+  deceased: { id: number; name: string; tick: number; cause: string; age: number; last?: import('./final_account').FinalAccount }[];
   sources: Source[];
   buildings: Building[];
   sites: Site[];

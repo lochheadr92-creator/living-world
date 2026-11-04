@@ -407,7 +407,7 @@ registerHandler('plan_site', {
     observe(world, p, site);
     const hh = householdOf(world, p);
     const verb = site.improvement==='hearth'?'marked out an indoor hearth for the':up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
-    addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);
+    addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${a.data.communal&&runsRulesVersion(world,144)?' for shared use':hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);
     addLog(world, p, 'work', site.improvement==='hearth'?'Marked out an indoor hearth for our home.':up ? `Marked out the ${buildingLabel(type)} that will replace our home.` : `Marked out a spot for a ${buildingLabel(type)}.`);
     addFx(world, 'built', site.x + site.w / 2, site.y + site.h / 2, 0);
     a.targetId = site.id;

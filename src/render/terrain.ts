@@ -1,3 +1,4 @@
+import {addShoreFoam,paintShoreFoam} from './shore_foam';
 import type { CameraState } from '../app/game';
 import { waterBodyAt, waterSign } from '../sim/hydrology';
 import { floodAt } from '../sim/flood';
@@ -190,6 +191,7 @@ export class TerrainPainter {
 
     // pass 2: wear (desire paths), shore foam, water glints, decor
     const detail = z >= 0.5;
+    const foam:(Path2D|undefined)[][]=[[],[]];
     ctx.lineCap = 'round';
     // batched strokes
     let tuftL = new Path2D();
@@ -221,13 +223,6 @@ export class TerrainPainter {
         const waterBody=waterBodyAt(world,x,y),dryWater=waterBody&&waterSign(waterBody)==='dry';
         if ((type === T.SHALLOW || type === T.DEEP) && !dryWater) {
           // foam where water meets land
-          const nb: [number, number, number, number, number][] = [
-            [1, 0, 32, 16, 0], // right-front edge
-            [0, 1, 0, 32, 0],
-            [-1, 0, 0, 0, 0],
-            [0, -1, 0, 0, 0],
-          ];
-          void nb;
           const edges: [number, number, number, number, number, number][] = [
             // neighbour dx, dy, edge from (x1,y1) to (x2,y2) in sprite px relative to tile top vertex
             [1, 0, 32, 16, 0, 32],
@@ -241,6 +236,7 @@ export class TerrainPainter {
             if (nx < 0 || ny < 0 || nx >= W || ny >= world.H) continue;
             const nt = world.terrain[ny * W + nx];
             if (nt === T.SHALLOW || nt === T.DEEP) continue;
+            if(z>=.8){addShoreFoam(foam,x,y,sx,sy,ex,ey,fx,fy);continue;}
             // draw a bright wavering line along the shared edge
             const a = 0.34 + 0.22 * Math.sin(t * 1.3 + x * 0.9 + y * 0.7);
             ctx.strokeStyle = `rgba(255,255,255,${a})`;
@@ -364,6 +360,7 @@ export class TerrainPainter {
         ctx.fillRect(rd.x + sway - 1, rd.y - rd.h - 3, 2.4, 5);
       }
     }
+    paintShoreFoam(ctx,foam,t);
     void tuftL;
     tuftL = new Path2D();
     tuftD = new Path2D();

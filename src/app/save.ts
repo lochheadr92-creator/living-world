@@ -1,3 +1,4 @@
+import {validateFinalAccounts} from '../sim/final_account';
 import {validateSharedProjects} from '../sim/shared_projects';
 import {validateCoaching} from '../sim/skill_coaching';
 import {validatePlaces} from '../sim/personal_places';
@@ -315,6 +316,7 @@ export function deserializeWorld(json: string): World {
   validatePlaces(w);
   validateCoaching(w);
   validateSharedProjects(w);
+  validateFinalAccounts(w);
   validateFlood(w);
   validateOffcuts(w);
   validatePreservation(w);
