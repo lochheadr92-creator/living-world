@@ -2,6 +2,7 @@ import {hasLivedLife} from './lived_life';
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
 import {hasOccasionRecovery,occasionResumeFailure} from './occasion_recovery';
 import {hasSuspendedEndings,ordinaryResumeFailure} from './suspended_endings';
+import {runsRulesVersion} from './rulesversion';
 import { closeDecision } from './decision_ledger';
 import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
 import { floodEscapePath, waitForFlood } from './flood_access';
@@ -445,7 +446,11 @@ export function abortActivity(world: World, p: Person, detail: string): void {
 export function cancelCareAcquisition(world:World,p:Person,to:number,seen:number,reason:string):void{
  const matches=(a:Activity|null)=>a?.data.careSupply?.to===to&&a.data.careSupply.seen===seen;
  if(matches(p.activity))endActivity(world,p,'interrupted',reason);
- if(matches(p.suspended)){releaseClaims(world,p.suspended!.claims);p.suspended=null;}
+ if(matches(p.suspended)){
+  const held=p.suspended!;releaseClaims(world,held.claims);p.suspended=null;
+  // Rules 155: a paused acquisition stopped this way ends through the common path (rules 116), like the request cancellation in social.ts.
+  if(runsRulesVersion(world,155)&&hasSuspendedEndings(world))endSuspended(world,p,held,'interrupted',reason);
+ }
 }
 
 export function stepActivity(world: World, p: Person): void {
