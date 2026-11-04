@@ -1,5 +1,5 @@
 // Recovered cool storage: physical private food, with no remote household loss oracle.
-import {NUTRITION,DAY,isHomeType} from './constants';
+import {NUTRITION,DAY,isHomeType,isSolidHome} from './constants';
 import {foodUnits} from './economy';
 import {beliefsByKind} from './optutil';
 import type {Ctx} from './optutil';
@@ -19,6 +19,9 @@ export function cellarDemand(ctx:Ctx):number{
  if(own.some(b=>b.btype==='cellar'))return 0;
  const home=own.find(b=>b.kind==='building'&&isHomeType(b.btype)&&(b.cond??0)>0);
  if(!home)return 0;
+ // Rules 152: shelter, then a proper hut, then improvements. A lean-to household's single site slot
+ // and scarce stone go to its hut first; an earlier cellar left those households in lean-tos.
+ if(runsRulesVersion(ctx.world,152)&&!own.some(b=>b.kind==='building'&&isSolidHome(b.btype)&&(b.cond??0)>0))return 0;
  const food=foodUnits(ctx.p.inv)+own.filter(b=>b.kind==='building'&&ctx.world.tick-b.seen<=DAY).reduce((n,b)=>n+foodUnits(b.items??{}),0);
  return food>=Math.max(5,2*ctx.members.length)?28+Math.min(12,food):0;
 }
