@@ -1,0 +1,19 @@
+{
+  "ordinary": true,
+  "world": "Normal meadow, arrivals on, rules 156",
+  "found": {
+    "tick": 767,
+    "heavy": 0,
+    "hit": {
+      "id": 1024,
+      "name": "Mona"
+    }
+  },
+  "checks": {
+    "ordinaryChildWithheld": true,
+    "noHeavyStarts": true,
+    "visibleInPanel": true,
+    "pure": true,
+    "noExceptions": true
+  }
+}
