@@ -83,6 +83,7 @@ import { clamp, hyp } from './util';
 import { hasLocalGiving } from './local_giving';
 import {noteHelperReceipt} from './helper_learning';
 import {hasPromiseKnowledge,recordPromiseCompletion,receiveCompletionReport,acknowledgeCompletionReport,completionContact} from './promise_knowledge';
+import { ALREADY_HAS_FOOD, GIVER_LACKS, emptyHandover, hasHandoverTruth, noteHadFood } from './handover_outcome';
 import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
@@ -1539,7 +1540,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       if(hasLivedLife(world)){
         const asked=Object.values(items).reduce((n:number,v)=>n+Number(v),0);
-        const detail=moved>0?`Received ${itemsToText(got)}${moved<asked?'; the rest could not be handed over':''}`:'No goods changed hands: the offered goods were unavailable or there was no room to receive them';
+        const empty=moved>0||!hasHandoverTruth(world)?null:emptyHandover(world,A,B,items as Items);
+        const detail=moved>0?`Received ${itemsToText(got)}${moved<asked?'; the rest could not be handed over':''}`:empty==='giver lacks'?'No goods changed hands: the giver no longer had the offered goods':empty?'No goods changed hands: there was no room to carry them':'No goods changed hands: the offered goods were unavailable or there was no room to receive them';
         c.data.giftReceipt={outcome:moved>0?'received gift':'nothing received',detail};
         addLog(world,A,'social',`${B.name}: ${detail}.`);addLog(world,B,'social',`${A.name} offered goods: ${detail}.`);
       }
@@ -2015,15 +2017,19 @@ registerHandler('give', {
     t.cooldowns.pause = 0;
     if ((!hasLocalGiving(world) || moved > 0)&&!(runsRulesVersion(world,124)&&a.data.textileDelivery)) t.cooldowns.fedUntil = world.tick + 120; // only actual food receipt gives them time to eat
     if (moved <= 0) {
-      if (a.data.mode === 'care') noteCarePackFailure(world, p, t, want);
+      // rules 157 (handover_outcome.ts): say what the giver now sees; only a real full pack is remembered as one
+      const why = hasHandoverTruth(world) ? emptyHandover(world, p, t, want) : 'no room';
+      const reason = why === 'giver lacks' ? GIVER_LACKS : why === 'already has food' && a.data.mode === 'care' ? ALREADY_HAS_FOOD : '';
+      if (!reason && a.data.mode === 'care') noteCarePackFailure(world, p, t, want);
+      if (reason === ALREADY_HAS_FOOD) noteHadFood(world, p, t);
       if (a.data.commitmentId) {
         const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
         if (cm) {
-          cm.blocked = `${t.name} had no room in their pack for it`;
+          cm.blocked = reason === GIVER_LACKS ? reason : `${t.name} had no room in their pack for it`;
           cm.blockedAt = world.tick;
         }
       }
-      return 'fail:they had no room to carry it';
+      return reason ? `fail:${reason}` : 'fail:they had no room to carry it';
     }
     a.cycle = moved;
     // being handed food or water wakes a sleeper

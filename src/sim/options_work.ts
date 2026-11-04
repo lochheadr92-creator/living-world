@@ -1,3 +1,4 @@
+import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
 import {addSharedProjectOption} from './shared_projects';
 import {hasRods} from './fishing_rods';
 import {hasCellars,cellarDemand} from './cellars';
@@ -1537,12 +1538,15 @@ function optCare(ctx: Ctx): void {
     // (rules 45: any food they carry counts, bread and meat included; before 45 only the four wild kinds were looked for)
     if (seenNow && !thirsty && seenNow.carrying.some((k) => (runsRulesVersion(world, 45) ? isFood(k) : k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain'))) continue;
     if ((d.cooldowns.fedUntil ?? 0) > world.tick) continue;
+    // rules 157 (handover_outcome.ts): food is not brought to a dependant seen holding food, thirsty or not, nor, out of sight,
+    // to one last reached holding food; water still is
+    const hadFood = hasHandoverTruth(world) && (seenNow ? seenNow.carrying.some((k) => isFood(k)) : recentlyHadFood(world, p, d.id));
     const px = seenNow ? seenNow.x : wh!.x;
     const py = seenNow ? seenNow.y : wh!.y;
     const e = eta(ctx, px, py);
     const give: Items = {};
     let what = '';
-    if (hungry && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
+    if (hungry && !hadFood && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
       // give what fits best
       // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
       const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] : ['berries', 'fruit', 'grain', 'fish'];
@@ -1556,7 +1560,10 @@ function optCare(ctx: Ctx): void {
       give.water = 1;
       what = what ? what + ' and water' : 'water';
     }
-    if (Object.keys(give).length === 0) continue;
+    if (Object.keys(give).length === 0) {
+      if (hadFood && hungry) addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, seenNow ? 'is carrying food already' : HAD_FOOD_REASON, 'care');
+      continue;
+    }
     const sev = Math.max(hungry ? (child ? 68 : 50) - kn.hunger : 0, thirsty ? (child ? 60 : 46) - kn.thirst : 0);
     let sc = new Scorer().add(`${d.name} needs ${what}${lookedSo}`, (26 + sev * 0.9) * tm.give).add('walking', -pen(e));
     const rel = p.relations[d.id];
