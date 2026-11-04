@@ -1,3 +1,4 @@
+import {hasCellars,cellarDemand} from './cellars';
 import {wellDemand,hasWells,wellFetchOptions} from './wells';
 import {knownColdHearth} from './hearth';
 import {hasLivedLife} from './lived_life';
@@ -86,6 +87,7 @@ export function hhState(ctx: Ctx): HhState {
   let homeSeeds = 0;
   let homeBelief: Belief | null = null;
   for (const b of beliefsByKind(p, ['building'])) {
+    if(hasCellars(world)&&b.hh===p.hhId&&b.btype==='cellar')homeFood+=foodCount(b.items??{});
     if (b.hh === p.hhId && isHomeType(b.btype)) {
       homeFood += foodCount(b.items ?? {});
       homeSeeds += unitsOf(b.items?.seeds);
@@ -231,7 +233,8 @@ function optDepositFood(ctx: Ctx): void {
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
-    const mine = b.hh === p.hhId && isHomeType(b.btype);
+    const cellar=hasCellars(world)&&b.btype==='cellar'&&b.hh===p.hhId;
+    const mine = b.hh === p.hhId && (isHomeType(b.btype)||cellar);
     const comm = b.btype === 'storehouse';
     if (!mine && !comm) continue;
     if(surplus<2&&!mine)continue;
@@ -246,6 +249,7 @@ function optDepositFood(ctx: Ctx): void {
       .add('surplus food', 10 + Math.min(surplus, 8) * 1.2)
       .add(mine ? 'for my household' : 'for everyone', mine ? 4 + ctx.dependents.length * 3 : 2 + 5 * p.traits.generosity)
       .add('walking', -pen(e));
+    if(cellar)sc.add('the cool cellar slows spoilage',7);
     if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
@@ -264,7 +268,7 @@ function optDepositFood(ctx: Ctx): void {
     if(smallPack&&mine&&sc.total<8)sc.add('return a small surplus home',8-sc.total);
     addOption(ctx, {
       kind: 'deposit',
-      label: mine ? 'Bring food home' : 'Add food to the storehouse',
+      label: cellar ? 'Store food in the cellar' : mine ? 'Bring food home' : 'Add food to the storehouse',
       goal: mine ? 'to feed the household' : 'to share with the community',
       need: null,
       util: (smallPack && mine ? Math.max(8,sc.total) : sc.total) * nightMult(ctx),
@@ -278,7 +282,7 @@ function optDepositFood(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'deposit',
-          label: mine ? 'Bringing food home' : 'Taking food to the storehouse',
+          label: cellar ? 'Carrying food into the cellar' : mine ? 'Bringing food home' : 'Taking food to the storehouse',
           goal: mine ? 'to feed the household' : 'to share with the community',
           targetId: b.id,
           targetType: 'building',
@@ -821,6 +825,7 @@ function optPlanBuild(ctx: Ctx): void {
       noteHousingBlock(ctx, 'hut', why);
     }
   }
+  const coolStore=cellarDemand(ctx);if(coolStore&&knowTrees&&knowRocks)tryPlan('cellar',coolStore,'keep our spare food cool for later meals');
   const waterJourney=home&&knowTrees&&knowRocks?wellDemand(ctx,home.x,home.y):0;
   if(waterJourney)tryPlan('well',waterJourney,'shorten the daily water journey from home');
   // shared storehouse, once the settlement has a few solid homes

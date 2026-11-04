@@ -1,3 +1,4 @@
+import {hasCellars} from './cellars';
 import {hasWells} from './wells';
 import { CRITICAL, DAY, HUNGER_RATE, SUNRISE, SUNSET, THIRST_RATE } from './constants';
 import { dayFraction } from './environment';
@@ -64,7 +65,7 @@ export function foodRelief(ctx: Ctx): Relief | null {
   };
   for (const k in p.beliefs) {
     const b = p.beliefs[k as unknown as number];
-    if (b.kind === 'building' && (isHomeType(b.btype) ? b.hh === p.hhId : b.btype === 'storehouse' || b.btype === 'granary') && holdsFood(b)) consider(b, world.tick - b.seen < 400, 'food in a store');
+    if (b.kind === 'building' && (isHomeType(b.btype) ? b.hh === p.hhId : b.btype === 'storehouse' || b.btype === 'granary' || hasCellars(world)&&b.btype==='cellar'&&b.hh===p.hhId) && holdsFood(b)) consider(b, world.tick - b.seen < 400, 'food in a store');
     else if ((b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot') && estimatedAmount(world, b) >= 2) consider(b, world.tick - b.seen < FRESH && b.amount >= 2, 'food growing');
   }
   return best;

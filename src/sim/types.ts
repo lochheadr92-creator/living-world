@@ -830,6 +830,7 @@ export type BuildingType =
   | 'bakery'
   | 'food_rack'
   | 'well'
+  | 'cellar'
   | 'hall';
 
 export interface Building {

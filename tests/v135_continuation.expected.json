@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "2623a0f1529879260126a5f62828f3626b226dcf",
+    "rules": 135,
+    "content": "61acc0e4eda73dd4acaba5c40c996e6112fda9c903d282662d9ab75dbd16e8a5",
+    "note": "Recorded before successor behavior; ordinary autonomous completed-cellar continuation"
+  },
+  "cellars": [
+    4216
+  ],
+  "saved": "43c85713f72de48cb550c1b2d274e23caf7159703260684a48e1f31aa8cf3d32",
+  "continued": "cf58f3e16a8960dcb7068426e594a98b86c36e507252a96344f477b536f67b7a"
+}

@@ -778,6 +778,10 @@ export function describeEntity(world: World, id: number): EntityView | null {
       }
       if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
+      if(b.type==='cellar'){
+        rows.push(['Cool storage',b.condition>0?'food spoils at 15% of ordinary storage rate':'ruined; no cooling protection']);
+        notes.push(BUILD_DEF.cellar.blurb);
+      }
       if(b.type==='well'){
         const body=wellBody(world,b.x+b.w/2,b.y+b.h/2);
         rows.push(['Water',`${b.store.items.water??0}/${WELL_CAP} units`]);

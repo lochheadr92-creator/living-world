@@ -1,3 +1,4 @@
+import {hasCellars} from './cellars';
 import {wellOptions} from './wells';
 import {livestockOptions} from './livestock';
 import {gearOptions} from './passive_gear';
@@ -321,7 +322,8 @@ function optEat(ctx: Ctx): void {
   // very hungry, nothing carried, nothing at home: another household's store is a temptation (rich only; weighed against conscience)
   const tempted = isRich(world) && dr > 50 && ctx.food < 1 && ctx.stage !== 'child';
   for (const b of beliefsByKind(p, ['building', 'pile'])) {
-    const mine = b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype);
+    const cellar=hasCellars(world)&&b.kind==='building'&&b.hh===p.hhId&&b.btype==='cellar';
+    const mine = b.kind === 'building' && b.hh === p.hhId && (isHomeType(b.btype)||cellar);
     const comm = b.kind === 'building' && b.btype === 'storehouse';
     const rack = runsPreservation(world)&&b.kind==='building'&&b.btype==='food_rack'&&(b.hh===p.hhId||b.hh===0);
     const pile = b.kind === 'pile' && mayTakeKnownPile(p,b);
@@ -341,13 +343,13 @@ function optEat(ctx: Ctx): void {
       continue;
     }
     const e = eta(ctx, b.x, b.y);
-    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : bins ? runsPreservation(world)?'remembered food at our granary':'our share in the granary' : rack ? 'remembered food on the rack' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : bins ? 1 : theirs ? -18 : -1);
+    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(cellar ? 'our cellar' : mine ? 'my own home' : comm ? 'communal store' : bins ? runsPreservation(world)?'remembered food at our granary':'our share in the granary' : rack ? 'remembered food on the rack' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : bins ? 1 : theirs ? -18 : -1);
     if (theirs) sc.add('conscience', -(8 * p.traits.caution + 6 * p.traits.generosity));
     if (theirs && sc.total < 8) continue;
     const theirName = theirs ? `${householdById(world, b.hh!)?.name ?? 'another'} household` : '';
     addOption(ctx, {
       kind: 'eat_store',
-      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : bins ? 'Eat from the granary' : rack ? 'Eat from the drying and smoking rack' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
+      label: cellar ? 'Eat from the cellar' : mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : bins ? 'Eat from the granary' : rack ? 'Eat from the drying and smoking rack' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
       goal: 'to ease hunger',
       need: 'hunger',
       util: sc.total,

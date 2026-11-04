@@ -1,3 +1,4 @@
+import {cellarSiteConflict} from './cellars';
 import {wellSiteConflict} from './wells';
 import {isTextile} from './clothing';
 import {hasLivedLife} from './lived_life';
@@ -310,6 +311,7 @@ export function openSitesNear(world: World, near?: Spot): number {
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  if(type==='cellar'){const why=cellarSiteConflict(world,hh);if(why)return why;}
   if(type==='well'){const why=wellSiteConflict(world,at?.x??NaN,at?.y??NaN);if(why)return why;}
   const housing=homeLayoutConflict(world,type,hh,upgradeOf);if(housing)return housing;
   const rules = rulesOf(world);

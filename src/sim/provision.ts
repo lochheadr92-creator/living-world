@@ -1,3 +1,4 @@
+import {hasCellars} from './cellars';
 // HOUSEHOLD FOOD PREPARATION (rules version 2, rich worlds only).
 //
 // One bounded behaviour: an adult may decide to put a modest food reserve into their own household's home store, and then do
@@ -144,7 +145,7 @@ export function granaryShare(world: World, p: Person): number {
 
 /** The reserve as the person counts it: the home store as they remember it, plus (rules 46) their household's granary share. */
 export function reserveHeld(world: World, p: Person, home: Belief): number {
-  return foodInBelief(home) + granaryShare(world, p);
+  return foodInBelief(home) + granaryShare(world, p) + (hasCellars(world)?beliefsByKind(p,['building']).filter(b=>b.btype==='cellar'&&b.hh===p.hhId&&b.id!==home.id).reduce((n,b)=>n+foodInBelief(b),0):0);
 }
 
 /** the household can see it is short: its visible food is under this fraction of a day's eating for its members */

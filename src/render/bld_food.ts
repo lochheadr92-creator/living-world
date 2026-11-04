@@ -8,6 +8,17 @@ import type { Roof } from './bld_common';
 import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
+/** An earth-covered chamber with one visible timber doorway. */
+export function cellarSprite(cache:SpriteCache):Sprite {
+ return cache.get('cellar',160,100,80,66,ctx=>{
+  const p=mk(2,1);groundShadow(ctx,54,20,0.25,3);
+  ellipse(ctx,0,-8,46,23,'#74815a');ellipse(ctx,0,-12,40,20,'#879368');
+  box(ctx,p,.1,1.1,.8,1.05,0,24,boxTones('#948c77','rgba(35,27,16,.6)'));
+  faceL(ctx,p,.25,.95,1.07,0,19,'#4d3827');
+  for(const x of [.38,.53,.68,.83])line(ctx,p(x,1.08,0),p(x,1.08,19),'#725337',1);
+ });
+}
+
 /** The dry shaft is static; the renderer adds only water actually held here. */
 export function wellSprite(cache:SpriteCache):Sprite {
   return cache.get('well',160,130,80,88,ctx=>{

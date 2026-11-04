@@ -298,6 +298,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     blurb:'An open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.',
   }),
   well: bd({w:2,h:2,cost:{wood:4,stone:8},work:260,cap:18,workers:2,label:'shallow well',sleepers:0,protect:0,role:'store',blurb:'A lined shaft draws slowly from a nearby finite water catchment. It may run dry; drawing and carrying still take work.'}),
+  cellar: bd({w:2,h:1,cost:{wood:6,stone:9},work:480,cap:90,workers:2,label:'cellar',sleepers:0,protect:0,role:'store',blurb:'A private stone-lined cool store. Food and flour keep longer here, but still spoil. Goods must be carried through the doorway.'}),
 };
 
 /** every kind of building a household can live in */
@@ -327,10 +328,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   hall: 0.0012,
   food_rack: 0.0015,
   well: 0.0012,
+  cellar: 0.0008,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { well: 'stone', house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { cellar: 'stone', well: 'stone', house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

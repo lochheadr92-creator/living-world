@@ -1,3 +1,4 @@
+import {cellarAccess} from './cellars';
 import {isWellAction,wellSource} from './wells';
 import {takeNutrition} from './nourishment';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
@@ -249,6 +250,7 @@ function tableItems(world: World, a: Activity): Items | null {
 }
 
 function eatTick(world: World, p: Person, a: Activity): WorkResult {
+  if(a.data.table){const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
   if(a.data.table){const blocked=pileAccessBlocker(p,world.byId.get(a.targetId));if(blocked)return `fail:${blocked}`;}
   a.progress++;
   if (a.progress < a.duration) return 'continue';
@@ -307,6 +309,7 @@ registerHandler('eat_store', {
   availability: 0.4,
   pose: () => 'eat',
   begin(world, p, a) {
+    {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return block;}
     const e = world.byId.get(a.targetId);
     if (!e || (e.ent !== 'building' && e.ent !== 'pile')) {
       delBelief(p, a.targetId);
@@ -583,6 +586,7 @@ registerHandler('deposit', {
   availability: 0.45,
   pose: () => 'store',
   begin(world, p, a) {
+    {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return block;}
     const careBlocked = careStoreBlocker(world, p, a);
     if (careBlocked) return careBlocked;
     const c = containerItems(world, a.targetId);
@@ -602,6 +606,7 @@ registerHandler('deposit', {
     a.ty = door.y;
   },
   work(world, p, a): WorkResult {
+    {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
     const careBlocked = careStoreBlocker(world, p, a);
     if (careBlocked) return `fail:${careBlocked}`;
     faceToward(p, a.tx, a.ty);
@@ -786,6 +791,7 @@ registerHandler('withdraw', {
   availability: 0.45,
   pose: () => 'store',
   begin(world, p, a) {
+    {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return block;}
     const blocked = relocationPackingBlocker(world,p,a); if (blocked) return blocked;
     const c = containerItems(world, a.targetId);
     if (!c) {
@@ -801,6 +807,7 @@ registerHandler('withdraw', {
     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
   },
   work(world, p, a): WorkResult {
+    {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
     const blocked = relocationPackingBlocker(world,p,a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;

@@ -1,3 +1,4 @@
+import {hasCellars,cellarAccepts} from './cellars';
 import {recipeAvailable} from './recipes';
 import { recordWorkshopOutput } from './settlement_economy';
 import {preservationStartBlocker,preservationCanAdvance,preservationReady} from './preservation';
@@ -168,6 +169,7 @@ function trimEarmarks(b: Building): void {
 // ───────────────────────── what goes in and out of a workplace's store ─────────────────────────
 /** May this person put this item into the building's store (the store is for the work done there)? */
 export function mayDeposit(b: Building, item: ItemKind): boolean {
+  if(b.type==='cellar')return cellarAccepts(item);
   if (!b.ops) return true;
   return acceptedAt(b.type).includes(item);
 }
@@ -258,6 +260,7 @@ export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKin
 // ───────────────────────── spoilage (called from the world's slow process) ─────────────────────────
 /** Multiplier on how fast perishable goods go off in this building. */
 export function spoilMultiplier(world: World, b: Building): number {
+  if(hasCellars(world)&&b.type==='cellar'&&b.condition>0)return 0.15;
   if (b.type === 'granary') {
     const ops = b.ops;
     const tended = ops ? world.tick - Math.max(ops.tended, b.builtTick) < GRANARY_TEND_EVERY : true;

@@ -6,7 +6,7 @@ at the owner's request, with incomplete acceptance and adverse findings retained
 all-branch review and the remaining historical tips are recorded in
 [docs/BRANCH_INTEGRATION_20261104.md](docs/BRANCH_INTEGRATION_20261104.md).
 
-**Recovery programme in progress:** the owner subsequently authorized implementing and verifying useful retired-branch features before deleting those branches. Rules 134 wells are being verified on `feat/recovered-capabilities`; see [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). This does not authorize unrelated survival tuning.
+**Recovery programme in progress:** the owner subsequently authorized implementing and verifying useful retired-branch features before deleting those branches. Rules 134 wells and rules 135 cellars have bounded verification on `feat/recovered-capabilities`; see [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). This does not authorize unrelated survival tuning.
 
 **Historical integration checkpoint (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
 ([docs/STAGE3_CHAIN_FIXES.md](docs/STAGE3_CHAIN_FIXES.md)). Pavel's lived life
