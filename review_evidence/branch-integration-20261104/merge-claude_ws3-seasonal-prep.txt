@@ -1,0 +1,6 @@
+Merge made by the 'ort' strategy.
+ docs/SEASONAL_PREPARATION.md        | 70 +++++++++++++++++++++++++++++++++++++
+ scripts/seasonal_prep_diagnostic.ts | 60 +++++++++++++++++++++++++++++++
+ 2 files changed, 130 insertions(+)
+ create mode 100644 docs/SEASONAL_PREPARATION.md
+ create mode 100644 scripts/seasonal_prep_diagnostic.ts

@@ -1,0 +1,21 @@
+death_tally: seed meadow, 28 founders (28 alive at tick 0), arrivals on, 1 days in rows of 24; a year is 12 days and its last 4 are winter
+
+day   pop  kids adlt eldr | born died | deaths by cause | died as (stage)
+   1   28     9   17    2 |    0    0 | -                                        | -
+
+conception gates, living women, first gate failed (snapshot at the end of each row)
+      day       hh   roofedpopulationCap outOfAgenoPartner pregnantpartnerNotHere   noHomethreeKids  spacing  lowFoodlowHealth eligible
+        1       11       10        0        5        0        0        0        0        0        0        3        0        4
+
+settlement census (snapshot at the end of each row)
+       buildings (all)                          | households by home           | open sites | warmth        | aged 17-44
+day    lean_to hut house fire(lit) other        | none lean_to hut house  full | (type:n)   | <26 <=6 inside| single M  single F  paired
+   1        10   0     0      1(1)     0        |    1      10   0     0     5 | lean_to:1  |   0   0      0 |        1        0      14
+
+shelter flow since the previous row, and why grown-ups without a solid home had not laid one out (their last decision)
+   1  built lean_to:3                  gone -                          starts haul:14 warm:12 build:10 plan_site:5 fuel_fire:3 no solid home 19: 6x lean-to only: blocked: too thirsty to start a building | 5x lean-to only: blocked: the household has only # food to hand and wants # before starting a hut | 4x lean-to only: blocked: too hungry to start a building | 1x lean-to only: on the list, ranked 2nd-5th by day, behind gather
+
+surroundings at death (0 of 0 deaths have a snapshot)
+
+totals: 28 at start + 0 born = 28; 0 dead + 28 alive = 28 (balanced)
+deaths by cause and the stage of the age they died at (child <12, youth <16, adult <62, elder):

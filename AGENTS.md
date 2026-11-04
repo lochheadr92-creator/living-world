@@ -1,6 +1,12 @@
 # Living World: notes for Codex (read this first)
 
-**Current main (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
+**Current main (4 November 2026): rules 133.** Survival capability development is stopped
+at the owner's request, with incomplete acceptance and adverse findings retained in
+[docs/SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md). Older-work preservation,
+all-branch review and the remaining historical tips are recorded in
+[docs/BRANCH_INTEGRATION_20261104.md](docs/BRANCH_INTEGRATION_20261104.md).
+
+**Historical integration checkpoint (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
 ([docs/STAGE3_CHAIN_FIXES.md](docs/STAGE3_CHAIN_FIXES.md)). Pavel's lived life
 ([docs/PAVEL_LIVED_LIFE.md](docs/PAVEL_LIVED_LIFE.md)) is rules **119**, Talia's childhood
 ([docs/TALIA_LIVED_CHILDHOOD.md](docs/TALIA_LIVED_CHILDHOOD.md)) is **120**, and resumed

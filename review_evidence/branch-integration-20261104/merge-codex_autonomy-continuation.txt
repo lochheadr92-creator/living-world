@@ -1,0 +1,7 @@
+Auto-merging scripts/first_cart_trace.ts
+CONFLICT (add/add): Merge conflict in scripts/first_cart_trace.ts
+Auto-merging scripts/ready_step_observe.ts
+CONFLICT (content): Merge conflict in scripts/ready_step_observe.ts
+Automatic merge failed; fix conflicts and then commit the result.
+
+Retained current implementations for reviewed conflicts: ['scripts/first_cart_trace.ts', 'scripts/ready_step_observe.ts']

@@ -1,0 +1,412 @@
+[
+  {
+    "ref": "refs/heads/claude/awesome-dirac-07f8q1",
+    "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/claude/civilisation-phase1",
+    "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/dreamy-brahmagupta-o1ttw1",
+    "sha": "3c60fb9055410938b88796676d26cb8d36b779ed",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/claude/epic-franklin-469omp",
+    "sha": "03dd8684a0275fa97a0c1808963437276901eee1",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/friendly-planck-ccpkxf",
+    "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/household-preparation-v2",
+    "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/claude/mood-ranking",
+    "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/record-2026-10-20",
+    "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+    "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/winter-shelter-v34",
+    "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/wolf-defence-v3",
+    "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/claude/ws3-seasonal-prep",
+    "sha": "49655bb054660fa1c5b5b28eebbf8808a28a66ec",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/autonomy-continuation",
+    "sha": "9db27b67fba881843c67edbbb09c9b60eeff6ca1",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/autonomy-environment",
+    "sha": "3534da86dafd42c45d1303a55fbad8c182e6b5d7",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/civilisation-programme",
+    "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/game-inspired-slices",
+    "sha": "e415b4b65ef006a09cb80e78777b1a6992462352",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/home-habitation",
+    "sha": "9e4165312195df26999ff79866ef5809bb280b83",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/household-continuity",
+    "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/hungry-harvest114",
+    "sha": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/inhabitant-fixes",
+    "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/occasion-recovery112",
+    "sha": "49a7255e58a72325325238004ae6316af64fcb7b",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/project-inputs115",
+    "sha": "5ab3100523ec88b21e1d3c499453dcf8f3ea8d10",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/project-revision",
+    "sha": "24bfc1dc0400ca001dc76cbbdfcc3f0450db3141",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/site-completion109",
+    "sha": "64e5780c022d5cd935a10329a10c5572c83fc060",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/survival-trap-report133",
+    "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/viewer-programme",
+    "sha": "7b2a6808bb1087bb8530b9e2e643c50aaebdb721",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/wolf-defence-integration",
+    "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/codex/wolf-habitation-integration",
+    "sha": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/deepseek-b1",
+    "sha": "3d54edd4e28052f59329e6c647c8c676657f1603",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/deepseek-trial",
+    "sha": "03bad1aaebb7a2c263e403f2fc19febe2d275809",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/feature/pavel-lived-life",
+    "sha": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/feature/talia-lived-childhood",
+    "sha": "57ffc48eecf6400bfe505ee5c01ef18aaa8111b3",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/fix/fatal-injury-hold",
+    "sha": "dda3d430e94eaf7951726342386dc2e248617527",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/integrate/pavel-talia-after-118",
+    "sha": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/main",
+    "sha": "a916ec028b2e373226f1593602a9d2d748e1a27b",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/nova/inhabitant-perspective-audit",
+    "sha": "a69c30b9e065c4d817392e35538f8bd6e0b2189c",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/place-scar",
+    "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/heads/stage-1-integrity",
+    "sha": "c67be494d0e70f8a7081278a986e1e69a41838ef",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/stage-1-integrity-main",
+    "sha": "55f798c66bb251c12d4451c80636c9e9902e7836",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/stage-2-suspended-endings",
+    "sha": "dbe229e75e805adab83a25518921c7ab2626a7f1",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/heads/stage-3-chain-fixes",
+    "sha": "320c521f1fa84658c77f73d2875a4c0858d5a10b",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/ccr-8527b59e-oatizp",
+    "sha": "be786a80865ba2e0d721ea672f7985f7e2d46599",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/ccr-ebf20163-236tsz",
+    "sha": "4e1f507c234fa891a3cb009ea76e9ad333061b62",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/ccr-edfcf732-o6gqh0",
+    "sha": "8bbf6c04ee552f8db2ce5be7bff1dddb7fd01e9e",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/adoring-hawking-fj66vw",
+    "sha": "df9acb9c0f5173555980d661384208477f4c313e",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/affectionate-archimedes-a2nb1q",
+    "sha": "1e1e2bc57d4abd472c03760e8dbee4ff4f5e3d93",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/awesome-dirac-07f8q1",
+    "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/courier-promise",
+    "sha": "9651cf0f3e74b380d10a13bdbcdb138368c23cac",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/dreamy-brahmagupta-o1ttw1",
+    "sha": "3c60fb9055410938b88796676d26cb8d36b779ed",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/eager-carson-p8jy0f",
+    "sha": "551b034e39f8d02381a7d5a148aab8e67edfc486",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/epic-franklin-469omp",
+    "sha": "c55926d4052992d088ab535f1057a3c1f2938f33",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/friendly-planck-ccpkxf",
+    "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/household-preparation-v2",
+    "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/inspiring-wozniak-yclwua",
+    "sha": "d81c0277904304fa07b79a948283c2bbef1a8938",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/leisure-rhythm-v27",
+    "sha": "007b9d52996a80b584459d2db40323b7280656c6",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/leisure-rhythm-v28",
+    "sha": "00137238353cedc98c657597a867a5406868a266",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/living-world-survival-legibility-xipvpo",
+    "sha": "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/mood-ranking",
+    "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/record-2026-10-20",
+    "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/simulation-pressure-larger-maps-rg0hjn",
+    "sha": "182663db90076dcc711e0fb5116c11d78fb61e1f",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/snapshot-wolf-defence-v3-2026-10-20",
+    "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/tests-current-rules",
+    "sha": "500bb2f299e8eaa4c8eba538726c46d6670c5b17",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/winter-shelter-v34",
+    "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/wolf-defence-v3",
+    "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/wonderful-hypatia-46pdde",
+    "sha": "3e62a2d7a79564064202c0c820da0d88e08f3b98",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/claude/wonderful-mccarthy-xmbcng",
+    "sha": "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3",
+    "includedAfterReview": false
+  },
+  {
+    "ref": "refs/remotes/origin/claude/wonderful-rubin-p9n961",
+    "sha": "5be609efc961f522ed8197a6d7ba15c0f92af26b",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/civilisation-programme",
+    "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/game-inspired-slices",
+    "sha": "e415b4b65ef006a09cb80e78777b1a6992462352",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/home-habitation",
+    "sha": "9e4165312195df26999ff79866ef5809bb280b83",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/household-continuity",
+    "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/inhabitant-fixes",
+    "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/survival-trap-report133",
+    "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/codex/wolf-defence-integration",
+    "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/main",
+    "sha": "a916ec028b2e373226f1593602a9d2d748e1a27b",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/nova/bounded-verification-2026-10-26",
+    "sha": "810d32fad7330167f3898f93b702d27f4d3812bb",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/nova/household-shelter-journey",
+    "sha": "c31ce120a91401b58f9ab8756b1d0bf4de1cb2c0",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/nova/inhabitant-perspective-audit",
+    "sha": "030d62d7fea592bdc620ba357012d1534edb20c5",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/nova/layout-claims-recovery",
+    "sha": "62fa4d1a73e6dcb46445aa79691a6f0ee8eb3fcd",
+    "includedAfterReview": true
+  },
+  {
+    "ref": "refs/remotes/origin/place-scar",
+    "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "includedAfterReview": false
+  }
+]

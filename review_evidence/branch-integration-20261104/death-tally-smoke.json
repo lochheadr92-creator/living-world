@@ -1,0 +1,96 @@
+{
+ "seed": "meadow",
+ "profile": "normal",
+ "settings": {
+  "seed": "meadow",
+  "population": 28,
+  "harsh": false,
+  "immigration": true,
+  "scene": "natural",
+  "dynamics": "rich",
+  "rulesVersion": 133
+ },
+ "arrivals": true,
+ "founders": 28,
+ "binDays": 24,
+ "rows": [
+  {
+   "day": 1,
+   "pop": 28,
+   "children": 9,
+   "adults": 17,
+   "elders": 2,
+   "births": 0,
+   "deaths": 0,
+   "causes": {},
+   "deathStage": {},
+   "households": 11,
+   "roofed": 10,
+   "funnel": {
+    "populationCap": 0,
+    "outOfAge": 5,
+    "noPartner": 0,
+    "pregnant": 0,
+    "partnerNotHere": 0,
+    "noHome": 0,
+    "threeKids": 0,
+    "spacing": 0,
+    "lowFood": 3,
+    "lowHealth": 0,
+    "eligible": 4
+   },
+   "census": {
+    "buildings": {
+     "fire": 1,
+     "lean_to": 10
+    },
+    "firesLit": 1,
+    "sites": {
+     "lean_to": 1
+    },
+    "householdHome": {
+     "none": 1,
+     "lean_to": 10,
+     "hut": 0,
+     "house": 0
+    },
+    "fullHomes": 5,
+    "coldBelow26": 0,
+    "coldAtOrBelow6": 0,
+    "indoors": 0,
+    "singleMen": 1,
+    "singleWomen": 0,
+    "partnered": 14
+   },
+   "flow": {
+    "built": {
+     "lean_to": 3
+    },
+    "gone": {},
+    "starts": {
+     "plan_site": 5,
+     "haul": 14,
+     "build": 10,
+     "fuel_fire": 3,
+     "warm": 12
+    },
+    "noSolidAdults": 19,
+    "reasons": {
+     "lean-to only: blocked: too hungry to start a building": 4,
+     "lean-to only: blocked: the household has only # food to hand and wants # before starting a hut": 5,
+     "lean-to only: blocked: too thirsty to start a building": 6,
+     "lean-to only: on the list, ranked 2nd-5th by day, behind gather": 1,
+     "lean-to only: on the list, ranked 1st by day, behind nothing": 1,
+     "lean-to only: blocked: the household has already laid out a lean-to": 1,
+     "no home: blocked: the household has already laid out a lean-to": 1
+    }
+   }
+  }
+ ],
+ "deathRecords": [],
+ "totalCauseByStage": {},
+ "everBorn": 0,
+ "dead": 0,
+ "aliveEnd": 28,
+ "twinEqual": true
+}

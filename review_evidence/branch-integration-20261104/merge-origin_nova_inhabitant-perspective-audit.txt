@@ -1,0 +1,28 @@
+Merge made by the 'ort' strategy.
+ docs/audits/2026-10-24-odette/NEXT_PRIORITIES.md   |  23 +
+ docs/audits/2026-10-24-odette/README.md            | 107 +++++
+ docs/audits/2026-10-24-odette/final.png            | Bin 0 -> 171736 bytes
+ docs/audits/2026-10-24-odette/focused-tests.txt    |  23 +
+ docs/audits/2026-10-24-odette/observations.json    |   1 +
+ docs/audits/2026-10-24-odette/replay/replay.txt    |   2 +
+ .../2026-10-24-odette/shelter-replay-trace.json    | 502 +++++++++++++++++++++
+ docs/audits/2026-10-24-odette/shelter-timeout.png  | Bin 0 -> 172953 bytes
+ docs/audits/2026-10-24-odette/sleep.png            | Bin 0 -> 137347 bytes
+ docs/audits/2026-10-24-odette/trace-replay.ts      |  31 ++
+ docs/audits/2026-10-24-odette/transcript.json      |   1 +
+ docs/audits/NOVA_INHABITANT_BASELINE.md            |  24 +
+ scripts/inhabitant_trace.ts                        |  53 +++
+ 13 files changed, 767 insertions(+)
+ create mode 100644 docs/audits/2026-10-24-odette/NEXT_PRIORITIES.md
+ create mode 100644 docs/audits/2026-10-24-odette/README.md
+ create mode 100644 docs/audits/2026-10-24-odette/final.png
+ create mode 100644 docs/audits/2026-10-24-odette/focused-tests.txt
+ create mode 100644 docs/audits/2026-10-24-odette/observations.json
+ create mode 100644 docs/audits/2026-10-24-odette/replay/replay.txt
+ create mode 100644 docs/audits/2026-10-24-odette/shelter-replay-trace.json
+ create mode 100644 docs/audits/2026-10-24-odette/shelter-timeout.png
+ create mode 100644 docs/audits/2026-10-24-odette/sleep.png
+ create mode 100644 docs/audits/2026-10-24-odette/trace-replay.ts
+ create mode 100644 docs/audits/2026-10-24-odette/transcript.json
+ create mode 100644 docs/audits/NOVA_INHABITANT_BASELINE.md
+ create mode 100644 scripts/inhabitant_trace.ts

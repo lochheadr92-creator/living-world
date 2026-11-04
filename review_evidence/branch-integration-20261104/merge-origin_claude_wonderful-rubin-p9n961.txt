@@ -1,0 +1,4 @@
+Merge made by the 'ort' strategy.
+ docs/FLOORPLAN.html | 589 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 589 insertions(+)
+ create mode 100644 docs/FLOORPLAN.html

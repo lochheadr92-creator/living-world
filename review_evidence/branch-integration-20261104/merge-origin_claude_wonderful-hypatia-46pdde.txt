@@ -1,0 +1,4 @@
+Merge made by the 'ort' strategy.
+ scripts/death_tally.ts | 386 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 386 insertions(+)
+ create mode 100644 scripts/death_tally.ts

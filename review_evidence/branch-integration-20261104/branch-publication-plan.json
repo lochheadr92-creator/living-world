@@ -1,0 +1,248 @@
+[
+  {
+    "branch": "claude/awesome-dirac-07f8q1",
+    "sha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593",
+    "remoteSha": "f1e93b29140c2b6d0022ed6b0cce21e3991cf593",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/civilisation-phase1",
+    "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "claude/dreamy-brahmagupta-o1ttw1",
+    "sha": "3c60fb9055410938b88796676d26cb8d36b779ed",
+    "remoteSha": "3c60fb9055410938b88796676d26cb8d36b779ed",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/epic-franklin-469omp",
+    "sha": "03dd8684a0275fa97a0c1808963437276901eee1",
+    "remoteSha": "c55926d4052992d088ab535f1057a3c1f2938f33",
+    "action": "remote-includes-local"
+  },
+  {
+    "branch": "claude/friendly-planck-ccpkxf",
+    "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "remoteSha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/household-preparation-v2",
+    "sha": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+    "remoteSha": "1a1340895dc9d0d2746390dd694b3264f324acbe",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/mood-ranking",
+    "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "remoteSha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/record-2026-10-20",
+    "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "remoteSha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/snapshot-wolf-defence-v3-2026-10-20",
+    "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "remoteSha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "remoteSha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/winter-shelter-v34",
+    "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "remoteSha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/wolf-defence-v3",
+    "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "remoteSha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "action": "already-published"
+  },
+  {
+    "branch": "claude/ws3-seasonal-prep",
+    "sha": "49655bb054660fa1c5b5b28eebbf8808a28a66ec",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/autonomy-continuation",
+    "sha": "9db27b67fba881843c67edbbb09c9b60eeff6ca1",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/autonomy-environment",
+    "sha": "3534da86dafd42c45d1303a55fbad8c182e6b5d7",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/civilisation-programme",
+    "sha": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+    "remoteSha": "bc9e3c863460d0456a2172ffa2e6ec1070052967",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/game-inspired-slices",
+    "sha": "e415b4b65ef006a09cb80e78777b1a6992462352",
+    "remoteSha": "e415b4b65ef006a09cb80e78777b1a6992462352",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/home-habitation",
+    "sha": "9e4165312195df26999ff79866ef5809bb280b83",
+    "remoteSha": "9e4165312195df26999ff79866ef5809bb280b83",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/household-continuity",
+    "sha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57",
+    "remoteSha": "f1efd8c3d7d0243f99430c7edc7f8827cdae7c57",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/hungry-harvest114",
+    "sha": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/inhabitant-fixes",
+    "sha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+    "remoteSha": "e3e1a93b285c46a6abe7f9d7a89e66f927032878",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/occasion-recovery112",
+    "sha": "49a7255e58a72325325238004ae6316af64fcb7b",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/project-inputs115",
+    "sha": "5ab3100523ec88b21e1d3c499453dcf8f3ea8d10",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/project-revision",
+    "sha": "24bfc1dc0400ca001dc76cbbdfcc3f0450db3141",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/site-completion109",
+    "sha": "64e5780c022d5cd935a10329a10c5572c83fc060",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/survival-trap-report133",
+    "sha": "278405edbc31dbd9a98c0c18e90e5787017cab60",
+    "remoteSha": "278405edbc31dbd9a98c0c18e90e5787017cab60",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/viewer-programme",
+    "sha": "7b2a6808bb1087bb8530b9e2e643c50aaebdb721",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "codex/wolf-defence-integration",
+    "sha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3",
+    "remoteSha": "9a082d6fea0c2fd95cbd4ec568dfc5bd40883ed3",
+    "action": "already-published"
+  },
+  {
+    "branch": "codex/wolf-habitation-integration",
+    "sha": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "deepseek-b1",
+    "sha": "3d54edd4e28052f59329e6c647c8c676657f1603",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "deepseek-trial",
+    "sha": "03bad1aaebb7a2c263e403f2fc19febe2d275809",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "feature/pavel-lived-life",
+    "sha": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "feature/talia-lived-childhood",
+    "sha": "57ffc48eecf6400bfe505ee5c01ef18aaa8111b3",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "fix/fatal-injury-hold",
+    "sha": "dda3d430e94eaf7951726342386dc2e248617527",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "integrate/pavel-talia-after-118",
+    "sha": "3f65f8c8bd67476c1f5dd3b0e85e0e59f16e8621",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "nova/inhabitant-perspective-audit",
+    "sha": "a69c30b9e065c4d817392e35538f8bd6e0b2189c",
+    "remoteSha": "030d62d7fea592bdc620ba357012d1534edb20c5",
+    "action": "remote-includes-local"
+  },
+  {
+    "branch": "place-scar",
+    "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "remoteSha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "action": "already-published"
+  },
+  {
+    "branch": "stage-1-integrity",
+    "sha": "c67be494d0e70f8a7081278a986e1e69a41838ef",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "stage-1-integrity-main",
+    "sha": "55f798c66bb251c12d4451c80636c9e9902e7836",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "stage-2-suspended-endings",
+    "sha": "dbe229e75e805adab83a25518921c7ab2626a7f1",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  },
+  {
+    "branch": "stage-3-chain-fixes",
+    "sha": "320c521f1fa84658c77f73d2875a4c0858d5a10b",
+    "remoteSha": null,
+    "action": "publish-original-name"
+  }
+]

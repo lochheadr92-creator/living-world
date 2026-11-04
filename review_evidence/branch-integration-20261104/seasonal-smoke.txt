@@ -1,0 +1,5 @@
+Historical aggregate diagnostic; rules 133; arrivals off. Eaten/spoiled totals do not trace reserve food.
+day  yearDay  storeFood  eaten(Δ)  spoiled(Δ)  winter?
+  1    1            21       93         30     
+
+total food eaten 93, spoiled 30 over 1 days; 28 alive, 0 dead

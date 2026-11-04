@@ -1,0 +1,340 @@
+[
+  {
+    "sha": "007b9d52996a80b584459d2db40323b7280656c6",
+    "refs": [
+      "refs/remotes/origin/claude/leisure-rhythm-v27"
+    ],
+    "reviewDisposition": "adapted",
+    "reason": "Varied leisure is already adapted as rules 28 (docs/CIVILISATION_IMPLEMENTATION.md); old rules 27 conflicts with main night-wait generation. Do not overwrite v26 reference or rules meanings.",
+    "counts": "352\t2",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "030d62d7fea592bdc620ba357012d1534edb20c5",
+    "refs": [
+      "refs/remotes/origin/nova/inhabitant-perspective-audit"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Additive historical Odette audit and legacy trace runner. Mark historical context; smoke-check observer output.",
+    "counts": "382\t4",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "03bad1aaebb7a2c263e403f2fc19febe2d275809",
+    "refs": [
+      "refs/heads/deepseek-trial"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Additive unfamiliar-technical-pieces guidance; identical resulting merge tree to deepseek-b1. No workflow approval change.",
+    "counts": "335\t1",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "03dd8684a0275fa97a0c1808963437276901eee1",
+    "refs": [
+      "refs/heads/claude/epic-franklin-469omp"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Ancestor of remote epic-franklin tip c55926d4. Preserve under that complete history; no separate runtime merge.",
+    "counts": "541\t10",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "refs": [
+      "refs/heads/claude/wolf-defence-v3",
+      "refs/remotes/origin/claude/wolf-defence-v3"
+    ],
+    "reviewDisposition": "adapted",
+    "reason": "Retired wolf-defence generation 3 conflicts with main habitation generation 3. Current defence and immutable history must remain; docs/WOLF_DEFENCE.md and BRANCH_LIFECYCLE.md record adaptation.",
+    "counts": "429\t7",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "3d54edd4e28052f59329e6c647c8c676657f1603",
+    "refs": [
+      "refs/heads/deepseek-b1"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Same additive guidance as deepseek-trial; both histories can be joined without duplicate text.",
+    "counts": "317\t1",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "3e62a2d7a79564064202c0c820da0d88e08f3b98",
+    "refs": [
+      "refs/remotes/origin/claude/wonderful-hypatia-46pdde"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Additive death_tally observer. Review found missing global conception-cap gate; fix before integration and check sampling does not mutate serialized state.",
+    "counts": "336\t4",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+    "refs": [
+      "refs/heads/claude/civilisation-phase1"
+    ],
+    "reviewDisposition": "adapted",
+    "reason": "Store eating adapted at main generation 11 (docs/TABLE_EATING.md); observer-lifecycle contract already present. Historical table evidence stays on the published branch; conflicting v8 reference cannot replace main history.",
+    "counts": "396\t5",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "49655bb054660fa1c5b5b28eebbf8808a28a66ec",
+    "refs": [
+      "refs/heads/claude/ws3-seasonal-prep"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Additive historical seasonal diagnostic. Aggregate eaten/spoiled totals do not establish reserve-specific flow or prove the proposed binding constraint. Preserve original text with prominent correction; current reserve implementation is separate.",
+    "counts": "286\t2",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "refs": [
+      "refs/heads/claude/mood-ranking",
+      "refs/remotes/origin/claude/mood-ranking"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Explicitly unmeasured old mood-ranking experiment. Changes utility ordering for rich worlds without current rules gating; importing it would change existing save continuations.",
+    "counts": "495\t1",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "500bb2f299e8eaa4c8eba538726c46d6670c5b17",
+    "refs": [
+      "refs/remotes/origin/claude/tests-current-rules"
+    ],
+    "reviewDisposition": "deferred",
+    "reason": "Shared test-default migration, not a runtime feature. Changes 22 files, reserves entity id 1000000 to retain outcomes, pins old scenarios and adds weaker current-generation claims. Requires its own contract/fixture migration and broad validation; not imported into the stop checkpoint.",
+    "counts": "306\t1",
+    "mergeTreeExit": 0,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "551b034e39f8d02381a7d5a148aab8e67edfc486",
+    "refs": [
+      "refs/remotes/origin/claude/eager-carson-p8jy0f"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Old renderer experiment: terrain, shore foam, foliage, mouthfuls and small-window UI. Conflicts with current styles and lacks current rendered validation. Review did not establish every visual effect already exists; retain proposal rather than declare it delivered.",
+    "counts": "594\t11",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "5be609efc961f522ed8197a6d7ba15c0f92af26b",
+    "refs": [
+      "refs/remotes/origin/claude/wonderful-rubin-p9n961"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Additive static FLOORPLAN.html, explicitly a rules-33 snapshot. Historical documentation only; counts and layout are not current architecture claims.",
+    "counts": "306\t1",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "64e5780c022d5cd935a10329a10c5572c83fc060",
+    "refs": [
+      "refs/heads/codex/site-completion109"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "All eight added performance report/image files are byte-identical on main. Join the branch history without altering contents.",
+    "counts": "103\t1",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66",
+    "refs": [
+      "refs/remotes/origin/claude/living-world-survival-legibility-xipvpo"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Unversioned old multi-feature line includes freshly shuffled actor order, grief, promise policies and observer changes. Several concepts have current implementations, but shuffled order would change deterministic RNG consumption and save history. No blanket feature-equivalence claim.",
+    "counts": "594\t16",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "9651cf0f3e74b380d10a13bdbcdb138368c23cac",
+    "refs": [
+      "refs/remotes/origin/claude/courier-promise"
+    ],
+    "reviewDisposition": "adapted",
+    "reason": "Courier recovery explicitly recovered on main (docs/COURIER_RECOVERY.md); later table-eating reconciliation records the renumbered lineage. Keep original branch provenance.",
+    "counts": "594\t1",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "refs": [
+      "refs/heads/claude/record-2026-10-20",
+      "refs/remotes/origin/claude/record-2026-10-20"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Old AGENTS/CLAUDE/HANDOFF route and branch-status text superseded by current repository and WORKFLOW.md. Do not restore stale authority pointers.",
+    "counts": "419\t3",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "9db27b67fba881843c67edbbb09c9b60eeff6ca1",
+    "refs": [
+      "refs/heads/codex/autonomy-continuation"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "All added reports/docs already identical; scripts retain newer source provenance, configurable pin and survival observations. Resolve only script conflicts to current implementations.",
+    "counts": "78\t2",
+    "mergeTreeExit": 1,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "a69c30b9e065c4d817392e35538f8bd6e0b2189c",
+    "refs": [
+      "refs/heads/nova/inhabitant-perspective-audit"
+    ],
+    "reviewDisposition": "included-by-tip",
+    "reason": "Contained in remote audit tip 030d62d7; integration of that tip includes this local branch.",
+    "counts": "382\t2",
+    "mergeTreeExit": 0,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "ae8f76b703ecb9c23529d0bf8eb463c117840ddd",
+    "refs": [
+      "refs/heads/codex/hungry-harvest114"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Both added adverse/activation reports already identical on main; current crop trace adds normalized source and dirty provenance. Resolve its script conflict to current implementation.",
+    "counts": "73\t2",
+    "mergeTreeExit": 1,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "refs": [
+      "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+      "refs/remotes/origin/claude/snapshot-wolf-habitation-integration-2026-10-20"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Frozen unfinished wolf/habitation generation-5 experiment, not an outstanding current product change. Conflicting version meanings and references retained with historical evidence.",
+    "counts": "423\t1",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "be786a80865ba2e0d721ea672f7985f7e2d46599",
+    "refs": [
+      "refs/remotes/origin/ccr-8527b59e-oatizp"
+    ],
+    "reviewDisposition": "adapted-partial",
+    "reason": "Old rules-59 required-tool and rules-60 kept-target line. Current optutil documents required-tool precedence; kept-target was diagnosed/adapted as rules 65 (docs/KEPT_TARGET.md). Unique historical tools and reports remain available on origin; do not replace generations 58/59 references or claim every old artifact integrated.",
+    "counts": "250\t7",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "c55926d4052992d088ab535f1057a3c1f2938f33",
+    "refs": [
+      "refs/remotes/origin/claude/epic-franklin-469omp"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Old rich-only expansion bundle: well, cellar, forestry, mine, stockyard, mill, brewery, bed and smokehouse, plus mood/lab changes. Some survival concepts now exist through different physical/versioned mechanisms; multiple unique expansion modules remain absent. Whole-branch merge would bypass current save/rules contracts and is not accepted merely because parts overlap.",
+    "counts": "541\t26",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "c67be494d0e70f8a7081278a986e1e69a41838ef",
+    "refs": [
+      "refs/heads/stage-1-integrity"
+    ],
+    "reviewDisposition": "candidate",
+    "reason": "Stage-1 fixes are present: flood tool records, transfer caps, lab failure exits, normalized observer provenance, deletion of absent upgrade field and vision policy. Main strengthens preferred-tool identity and activates former cart TODO with rules-117 regression. Resolve conflict files to their current implementations; verify no tree change.",
+    "counts": "64\t10",
+    "mergeTreeExit": 1,
+    "includedAfterReview": true
+  },
+  {
+    "sha": "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3",
+    "refs": [
+      "refs/remotes/origin/claude/wonderful-mccarthy-xmbcng"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Old ageing/fertility/life-pace, grief, council, teaching, reputation and leisure bundle. Several dedicated modules remain absent; changes are not gated for current historical saves. Preserve proposal, no blanket delivered claim.",
+    "counts": "594\t14",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "refs": [
+      "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+      "refs/remotes/origin/claude/snapshot-wolf-defence-v3-2026-10-20"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Unfinished wolf-defence generation-3 snapshot; keep provenance, not a replacement for current versioned defence.",
+    "counts": "429\t5",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "df9acb9c0f5173555980d661384208477f4c313e",
+    "refs": [
+      "refs/remotes/origin/claude/adoring-hawking-fj66vw"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Old workshop claims, fishing-rod/smokehouse, well and spear experiment changes rich rules without current save-version contract. Current fish preservation and gear differ; absence of old tests is not proof current system has their semantics.",
+    "counts": "594\t7",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "refs": [
+      "refs/heads/claude/friendly-planck-ccpkxf",
+      "refs/remotes/origin/claude/friendly-planck-ccpkxf"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Distinct place-memory/danger/grief model; current tree lacks places.ts and options_places.ts. It would add unversioned saved state and scoring effects. Requires a separately bounded current-generation adaptation.",
+    "counts": "537\t2",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "refs": [
+      "refs/heads/claude/winter-shelter-v34",
+      "refs/remotes/origin/claude/winter-shelter-v34"
+    ],
+    "reviewDisposition": "adapted",
+    "reason": "Winter shelter was explicitly adapted from this tip at main rules 47 (docs/WINTER_SHELTER.md). Candidate rules 34 is main plan reconsideration. Only independent death_tally observer is considered separately.",
+    "counts": "306\t3",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  },
+  {
+    "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "refs": [
+      "refs/heads/place-scar",
+      "refs/remotes/origin/place-scar"
+    ],
+    "reviewDisposition": "historical",
+    "reason": "Distinct old recently-failed-place scoring penalty. It changes ranking without a current version boundary; no new continuation/reliability evidence. Preserve rather than silently enable.",
+    "counts": "541\t1",
+    "mergeTreeExit": 1,
+    "includedAfterReview": false
+  }
+]

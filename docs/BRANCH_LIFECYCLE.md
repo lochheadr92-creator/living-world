@@ -1,5 +1,16 @@
 # Branch lifecycle record — 2026-10-23
 
+## All-branch review and preservation — 2026-11-04
+
+The owner requested stopping survival development, publishing older outstanding work,
+and reviewing every branch for integration. The [complete review](BRANCH_INTEGRATION_20261104.md)
+accounts for 82 original references and 78 worktrees: 11 of 30 previously non-ancestor
+tips are now included in main, while 19 remain historical or deferred with specific
+reasons. All 21 previously unpublished local branches and the older-work archive were
+pushed. This supersedes the publication status below, not the historical evidence.
+No simulation source or rules changed during this closeout; survival remains stopped
+at rules 133 with the limitations in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
+
 ## Codex integration follow-up — 2026-10-27
 
 Owner authorized checking previous Codex work and integrating outstanding changes.

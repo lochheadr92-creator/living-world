@@ -1,0 +1,26 @@
+Auto-merging AGENTS.md
+CONFLICT (content): Merge conflict in AGENTS.md
+Auto-merging CLAUDE.md
+CONFLICT (content): Merge conflict in CLAUDE.md
+Auto-merging scripts/first_cart_trace.ts
+CONFLICT (content): Merge conflict in scripts/first_cart_trace.ts
+Auto-merging scripts/household_supply_observe.ts
+CONFLICT (content): Merge conflict in scripts/household_supply_observe.ts
+Auto-merging scripts/lab.mjs
+Auto-merging scripts/lab_report.ts
+Auto-merging scripts/observers/provenance.ts
+CONFLICT (add/add): Merge conflict in scripts/observers/provenance.ts
+Auto-merging scripts/promised_supply_observe.ts
+CONFLICT (content): Merge conflict in scripts/promised_supply_observe.ts
+Auto-merging scripts/ready_step_observe.ts
+CONFLICT (content): Merge conflict in scripts/ready_step_observe.ts
+Auto-merging src/sim/buildings.ts
+Auto-merging src/sim/economy.ts
+CONFLICT (content): Merge conflict in src/sim/economy.ts
+Auto-merging src/sim/toolreg.ts
+CONFLICT (content): Merge conflict in src/sim/toolreg.ts
+Auto-merging tests/cart_break_tool_records.test.ts
+CONFLICT (add/add): Merge conflict in tests/cart_break_tool_records.test.ts
+Automatic merge failed; fix conflicts and then commit the result.
+
+Retained current implementations for reviewed conflicts: ['AGENTS.md', 'CLAUDE.md', 'scripts/first_cart_trace.ts', 'scripts/household_supply_observe.ts', 'scripts/observers/provenance.ts', 'scripts/promised_supply_observe.ts', 'scripts/ready_step_observe.ts', 'src/sim/economy.ts', 'src/sim/toolreg.ts', 'tests/cart_break_tool_records.test.ts']
