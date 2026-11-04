@@ -805,6 +805,63 @@ concrete support for checking encounters during the existing waiting window
 without re-rolling or increasing wildlife. Repair follows rules130; not yet
 implemented (`trap-encounter128-meadow/report.json`).
 
+### Trap encounter window — rules131 in verification
+
+The frozen128meadow trace above established a real missed eligible encounter.
+Rules131 checks the same first nearby live deer during the existing600tick
+armed window, retaining its fixed seed/gear/cycle/deer hash and55% threshold.
+A failed deer/cycle outcome never rerolls. Empty resolution ends the window;
+late arrival cannot catch until another paid reset. Success consumes one deer
+into the existing owned carcass, resolves the trap immediately and records
+its catch tick. A distant keeper learns nothing until ordinary observation.
+The inspector shows that an early resolved trap is ready now.
+
+No new saved field is added: the existing catchTick records trap resolution.
+Validation retains the600tick scheduled deadline and checks actual linked
+body ownership/species/time when the body remains. External body loss is
+allowed; checking and resetting still cost40work each. The cycle bound uses
+that paid reset duration for131traps because an early body may be lost before
+the original deadline. Old rules retain final-instant catch and old bounds.
+
+Eight new contracts cover early capture, exact save/continuation, one origin,
+empty/late windows, unchanged130, fixed failed outcomes, malformed early
+resolution, and paid reset after external loss. The initial expanded red run
+had3fail/3pass. First green found validation incorrectly consulting byId
+before reload rebuilt it; checking saved piles fixes that. Affected54tests/
+7files then passed; final36/4 pass includes130continuation. Typecheck/build
+exit1 only for the two baseline nullable review errors; standalone Vite passes.
+Rendered8checks pass; `trap-window-rendered2/failure-visible.png` was visually
+inspected and shows the retained body plus refused reset. The first page's
+success capture is `trap-window-rendered1/success-visible.png`.
+Immutable131 was captured from source
+`6b2436581d2a683934222612cb6b88506245288bd3188c080fb4fbe1860e8b70`;
+its standalone check passes (24.24s). Final Normal arrivals-on forest/river25
+in frozen `living-world-trap-window-check1` finish with11/27alive, respectively
+642.05/885.81s,500pure checks, exact unobserved twins, exact save plus120tick
+continuation and conservation. Neither deploys a trap. Meadow60 remains in
+check2 with identical runtime and an observer-only correction: trap catch ticks
+no longer emit a spurious zero-fish net story.
+
+Broad131:428files/2620tests pass,17files/37tests fail,2expected failures and
+3skips,461.47s. The37 comprise31baseline failures and six timeout failures;
+one additional retention suite hook timeout caused the three skips. Running
+those four timeout-affected files with unchanged time limits and maxWorkers2
+passes9tests plus1expected failure in55.45s. No failing assertion was weakened.
+The retained logs are `resume-20261104/trap-window-full1.log` and
+`trap-window-timeout-recheck.log`. The explicit128-to131 saved-encounter
+upgrade catches one deer into body43684 at130198, but no food is recovered
+in2400ticks; that diagnostic is not fresh ordinary-world activation.
+
+The130fern60 extension now completes:28alive,1106.33s,1200pure checks,
+exact twins/save120/conservation. Two bodies yield four meat meals and one
+hide garment; that garment supplies50001protection ticks and98774.817degree
+ticks. The other hide, both fats and four meat portions are lost. There are
+11dried-fish and2smoked-fish meals, no preserved meat or rendered fat.
+`carcass-supply-check2/fern-60d` closes the ordinary hide route, not reliability.
+The predeclared131forest nudge2 at day4 additionally records one fat rendered
+and its output consumed by day25 (`aggregate-pre-reserves131/forest-f4-n2`).
+The75draw131cohort is still running; these are bounded activation findings.
+
 ## 7. Body reserves — authorised, pending streams 1–6
 
 Pre-implementation parameter choice (implementing agent, 4 November; no runtime

@@ -1,5 +1,15 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Survival update, rules131:** the paid trap window now responds to actual
+encounters throughout its600ticks, retaining fixed outcomes.54/7affected and
+36/4final checks pass; immutable131 passes. Final forest/river25 finish11/27alive
+with exact twins/save120,500pure checks and conservation; neither deploys a
+trap. Broad131 retains31baseline failures plus timeouts; all four timeout-only
+files pass unchanged at maxWorkers2. The130fern60 extension closes ordinary
+hide use (50001worn protection ticks). Predeclared131forest nudge2 renders and
+eats one fat.75draw pre-reserve measurement and meadow60 are still running.
+See the single capability document for remaining gaps and exact provenance.
+
 **Current survival checkpoint, rules130:** known body parts now feed existing
 paid recipe supply. Final forest/river25:11/27alive, exact twins/save120,
 conservation/500pure checks each; hide/fat/preserved-meat ordinary use remains

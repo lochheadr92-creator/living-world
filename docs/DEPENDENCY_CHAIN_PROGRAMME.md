@@ -22,6 +22,11 @@ fat/meat/trap food routes remain open; reserves are next after those connections
 Rules130 connects personally known body parts to paid recipe supply. All
 nine122–130references pass; final forest/river25 remain null for hide/fat/meat
 processing. The concrete trap-window repair and bounded fern search follow.
+Rules131 checks real deer encounters throughout the existing paid trap window,
+with the same fixed catch hash and finite animal stock. Final forest/river25
+still deploy no trap. The130fern60 extension demonstrates a worn hide garment
+(50001protection ticks); predeclared131forest nudge2 renders and eats one fat.
+Meat preservation, fresh trap-to-food and final-source breeding remain open.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

@@ -1,3 +1,56 @@
+# Current survival checkpoint - rules131 ready to commit;132 separate working changes
+
+Task NOT complete. The owner authorised this checkout; no renewed approval,
+subagents or publishing unrelated commits. Preserve existing evidence/tests.
+131 runtime, tests, viewer and immutable reference are staged separately.
+Forest/river25 finish11/27alive,500pure checks each, exact twins/save120 and
+conservation. Broad131 has31baseline failures; timeout-only recheck passes.
+130fern60 closes ordinary hide use;131forest-f4-n2 closes bounded fat use.
+Details and all limits are in docs/SURVIVAL_CAPABILITIES.md.
+
+132 finite paid nourishment is implemented ONLY in the working tree, with
+28new contracts, ten predecessor references and eight rendered checks.
+Immutable132 captured from bfb773f5e134dfcd4753d29628052626c3ee4e552a16ce0ad277157d74856f86.
+Do not mix132 changes into the staged131 commit.
+
+Running:131meadow60 session84692;13175draw cohort24591 frozen
+../living-world-trap-window-check2 (DO NOT EDIT);132forest/river25 sessions
+6838/45599 and13275draw cohort4850 frozen../living-world-nourishment-check1
+(DO NOT EDIT);132full suite maxWorkers2 session86942 in main. Full suite was
+collected before nourishment_access.test.ts; that file passes2/2 separately.
+Both75draw comparisons, deferred meat preservation/trap-food/breeding evidence,
+132 final review/commit and concise Brain checkpoint remain outstanding.
+
+# Active survival continuation — main7f1895f, dirty rules131
+
+130committed7f1895f; details below. Task NOT complete. One behaviour stream,
+no subagents/reapproval/push. Preserve unrelated evidence and tests.
+131trap-window runtime implemented; immutable131 captured, NEVERoverwrite.
+Source hash6b2436581d2a683934222612cb6b88506245288bd3188c080fb4fbe1860e8b70.
+54/7 affected + final36/4 pass; type/build only2baseline errors; VitePASS.
+8browserchecksPASS. Cua browser2/tab1 variablecarcassSupplyTab now on
+/scripts/browser/trap_window_manual.html, server5296session81948.
+Finalfailure screenshot trap-window-rendered2/failure-visible.png inspected;
+firstsuccess trap-window-rendered1/success-visible.png inspected.
+Mainobservergear.ts corrected zero-fish story ontrap; runtimeunchanged.
+
+RUNNING:
+- 71225forest25,19178river25 frozen../living-world-trap-window-check1;
+  outputs survival_evidence/trap-window-check1.
+- 16546 npmtest frozencheck1, log resume-20261104/trap-window-full1.log;
+  original famine fixture copied byte-identical. Contains unrelated baseline tests.
+- 84692 meadow60 frozen../living-world-trap-window-check2 (correctedobserver).
+- 61524 standalone131reference test; 54276capture already wrote expected file.
+- 63699 older130fern60 frozen../living-world-carcass-supply-check2.
+Read only compact progress fields, never whole JSONL lines (huge).
+
+NEXT: check131reference result and ordinary/broad outputs; finish131review/
+commit/checkpoint. Ordinary hide/fat/preserved meat/trap-food remain open;
+no probability/deer/utility inflation. Reserves7 remainsLAST/alreadyauthorised;
+chosenbounds and allocation documented BEFORE code, no reserve runtime yet.
+Need immediate-predecessor75draw and final75draw against validated121baseline.
+Brain daily checksum a3360f479b398784dbb19e8701d9a46d602e4f16e0c7590f855519216dd14bdb.
+
 # Active survival continuation — rules130, ready for focused commit
 
 Owner authorised this checkout and all seven capability families. Task NOT

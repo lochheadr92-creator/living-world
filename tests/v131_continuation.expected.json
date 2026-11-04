@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "7f1895f7051bc4afc425b5f52dba6464a5bbeab0",
+    "rules": 131,
+    "content": "6b2436581d2a683934222612cb6b88506245288bd3188c080fb4fbe1860e8b70",
+    "note": "Recorded before successor behavior; ordinary and early trap-catch continuations"
+  },
+  "ordinary": {
+    "saved": "5076a64d3b39f70c25e0310168c484890215d2562f32f5f77200927e52a9ab49",
+    "uninterrupted": "373e267463ff95de67187626d2edfea59d4be14424d14f59237b353de19238aa",
+    "continued": "373e267463ff95de67187626d2edfea59d4be14424d14f59237b353de19238aa"
+  },
+  "caught": {
+    "saved": "fae0db24c326f34281f99d131eab9a92cae5d336b5b4214fb3fcff86773c8eae",
+    "uninterrupted": "517c44d3b1c5a075021090f9456f7109df5cf743f172ebf9ed103ebee485b28e",
+    "continued": "517c44d3b1c5a075021090f9456f7109df5cf743f172ebf9ed103ebee485b28e"
+  },
+  "checking": {
+    "saved": "d3ef87ad92a96c2f877bb215af4942e405565ac1ef7666ee80d1560336f53982",
+    "uninterrupted": "b87a6d16969b7987164ec6b6cf0107838838cbda2492d34b6bd1f7c839930280",
+    "continued": "b87a6d16969b7987164ec6b6cf0107838838cbda2492d34b6bd1f7c839930280"
+  },
+  "later": {
+    "saved": "b87a6d16969b7987164ec6b6cf0107838838cbda2492d34b6bd1f7c839930280",
+    "uninterrupted": "4cb0d8e0360dbd6f811225d35da4b78b31a8e8741d0ef6278ccd6018155d8257",
+    "continued": "4cb0d8e0360dbd6f811225d35da4b78b31a8e8741d0ef6278ccd6018155d8257"
+  },
+  "consumed": {
+    "meat": 2
+  },
+  "created": {
+    "meat": 4,
+    "hide": 1,
+    "fat": 1
+  }
+}

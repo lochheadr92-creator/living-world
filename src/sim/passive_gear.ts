@@ -73,15 +73,16 @@ export function gearTick(w:World):void{
  for(const b of w.piles.slice()){
   const g=b.gear;if(!g)continue;const t=toolById(w,g.toolId);if(!t){delete b.gear;if(!Object.keys(b.items).length)unregisterPile(w,b);continue;}
   if(w.tick-g.lastTended>=GEAR_ABANDON){const n=b.items.fish??0;if(n)ledgerSpoil(w,'fish',n,'abandoned gear catch');delete b.items.fish;breakTool(w,t,'abandoned gear lost');unregisterPile(w,b);continue;}
-  if(g.catchTick!==null&&w.tick-g.catchTick>=GEAR_CATCH_LIFE){const n=b.items.fish??0;if(n)ledgerSpoil(w,'fish',n,'neglected gear catch');delete b.items.fish;g.catchTick=null;}
-  if(g.state!=='armed'||w.tick<g.readyAt)continue;
-  g.state=t.wear>=100?'broken':'ready';
+  if(g.kind==='net'&&g.catchTick!==null&&w.tick-g.catchTick>=GEAR_CATCH_LIFE){const n=b.items.fish??0;if(n)ledgerSpoil(w,'fish',n,'neglected gear catch');delete b.items.fish;g.catchTick=null;}
+  const encounterWindow=g.kind==='trap'&&runsRulesVersion(w,131);
+  if(g.state!=='armed'||!encounterWindow&&w.tick<g.readyAt)continue;
+  if(!encounterWindow||w.tick>=g.readyAt)g.state=t.wear>=100?'broken':'ready';
   if(g.kind==='net'){
    const s=w.byId.get(g.sourceId);
    if(s?.ent==='source'&&s.type==='fish_spot'){const n=Math.max(0,Math.min(2,Math.floor(s.amount-s.reserved)));s.amount-=n;if(n){addItem(b.items,'fish',n);harvestPressure(w,s,n);g.catchTick=w.tick;}}
-  }else{
+  }else if(!encounterWindow||w.tick<=g.readyAt){
    const deer=w.animals.find(a=>a.type==='deer'&&a.health>0&&Math.hypot(a.x-b.x-.5,a.y-b.y-.5)<=4);
-   if(deer&&hashUnit(hashString(w.seed)^0x79ae,b.id+g.cycle,deer.id)<.55){const c=makeCarcass(w,deer,undefined,false,g.hhId);if(c)g.bodyId=c.id;}
+   if(deer&&hashUnit(hashString(w.seed)^0x79ae,b.id+g.cycle,deer.id)<.55){const c=makeCarcass(w,deer,undefined,false,g.hhId);if(c){g.bodyId=c.id;if(encounterWindow){g.catchTick=w.tick;g.state=t.wear>=100?'broken':'ready';}}}
   }
  }
 }
@@ -136,8 +137,13 @@ export function validateGear(w:World):void{
  const deployed=new Set<number>();
  for(const b of w.piles){const g=b.gear;if(!g)continue;const t=toolById(w,g.toolId);const bad=()=>{throw Error('invalid deployed gear');};
  if(!hasGear(w)||b.carcass||b.estate||b.mealFood||!['net','trap'].includes(g.kind)||!t||t.kind!==g.kind||t.holder!==b.id||deployed.has(g.toolId)||t.ownerHh!==g.hhId)bad();deployed.add(g.toolId);
- if([g.owner,g.hhId,g.sourceId,g.toolId,g.setAt,g.readyAt,g.cycle,g.lastTended].some(n=>!int(n))||g.owner<=0||g.sourceId<=0||g.cycle<1||g.lastTended>w.tick||g.setAt<b.since||g.setAt>g.lastTended||g.readyAt!==g.setAt+GEAR_WAIT||g.cycle>1+Math.floor((w.tick-b.since)/GEAR_WAIT)||typeof g.checked!=='boolean'||!['armed','ready','broken'].includes(g.state))bad();
- if(g.catchTick!==null&&(!int(g.catchTick)||g.catchTick>w.tick||g.catchTick<g.readyAt))bad();if((b.items.fish??0)>0&&g.catchTick===null)bad();if(g.state!=='armed'&&g.readyAt>w.tick)bad();if(g.bodyId!==null&&(!int(g.bodyId)||g.bodyId<=0))bad();
+ const minimumCycle=g.kind==='trap'&&runsRulesVersion(w,131)?durations.reset:GEAR_WAIT;
+ if([g.owner,g.hhId,g.sourceId,g.toolId,g.setAt,g.readyAt,g.cycle,g.lastTended].some(n=>!int(n))||g.owner<=0||g.sourceId<=0||g.cycle<1||g.lastTended>w.tick||g.setAt<b.since||g.setAt>g.lastTended||g.readyAt!==g.setAt+GEAR_WAIT||g.cycle>1+Math.floor((w.tick-b.since)/minimumCycle)||typeof g.checked!=='boolean'||!['armed','ready','broken'].includes(g.state))bad();
+ const earlyTrap=g.kind==='trap'&&runsRulesVersion(w,131),caught=g.bodyId?w.piles.find(c=>c.id===g.bodyId):undefined;
+ if(g.catchTick!==null&&(!int(g.catchTick)||g.catchTick>w.tick||g.catchTick<(earlyTrap?g.setAt:g.readyAt)||earlyTrap&&(g.catchTick>g.readyAt||g.bodyId===null)))bad();
+ if(earlyTrap&&g.bodyId!==null&&g.catchTick===null)bad();
+ if(earlyTrap&&caught&&(caught.ent!=='pile'||!caught.carcass||caught.carcass.species!=='deer'||caught.carcass.hhId!==g.hhId||caught.since!==g.catchTick))bad();
+ if((b.items.fish??0)>0&&g.catchTick===null)bad();if(g.state!=='armed'&&g.readyAt>w.tick&&!(earlyTrap&&g.catchTick!==null&&g.bodyId!==null))bad();if(g.bodyId!==null&&(!int(g.bodyId)||g.bodyId<=0))bad();
  if(b.items[g.kind]!==1||Object.keys(b.items).some(k=>k!==g.kind&&k!=='fish')||!int(b.items.fish??0)||(b.items.fish??0)>2||(g.kind==='trap'&&(b.items.fish??0)>0)||(g.state==='armed'&&(g.checked||g.catchTick!==null||g.bodyId!==null||(b.items.fish??0)>0)))bad();
  }
 }
