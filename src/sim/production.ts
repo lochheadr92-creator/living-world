@@ -677,7 +677,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'smithy').length) {
     let worst: { kind: ToolKind; wear: number } | null = null;
     for (const t of toolsHeldBy(world, p.id)) {
-      if (isTextile(t.kind) || t.kind === 'net' || t.kind === 'trap' || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
+      if (isTextile(t.kind) || t.kind === 'net' || t.kind === 'trap' || t.kind === 'rod' || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
     }

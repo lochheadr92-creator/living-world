@@ -1,0 +1,16 @@
+{
+  "source": {
+    "head": "1c3c5d32d23091da27791ee0331b1d8629e15d01",
+    "rules": 140,
+    "content": "3d211a64344d438b4661b4ff0071f2b095e540480a77c908e532881888739f90",
+    "note": "Recorded before successor behavior; ordinary autonomous crafted-rod continuation"
+  },
+  "rods": [
+    1640,
+    1652,
+    1735,
+    2953
+  ],
+  "saved": "1238daf6bfdec752495ee82ce6f6e1184701d67cbe14c6f927ed8ea799413c75",
+  "continued": "83c9a4ee9e5062aa38a1969515917f1dc7e1d1de32023598e3966496a2b4d10b"
+}

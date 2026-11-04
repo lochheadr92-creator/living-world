@@ -1,0 +1,55 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/fishing_rods.test.ts (5 tests | 3 failed) 66ms
+   × crafts from paid materials, speeds a finite catch, wears the actual tool and eats the caught fish 17ms
+   × does not grant rod speed from an inventory count or from someone else holding it 19ms
+   × keeps an in-flight rod catch through save/load and rejects rods under older rules 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/fishing_rods.test.ts > crafts from paid materials, speeds a finite catch, wears the actual tool and eats the caught fish
+TypeError: Cannot read properties of null (reading 'duration')
+ ❯ fish tests/fishing_rods.test.ts:14:366
+
+ ❯ tests/fishing_rods.test.ts:15:258
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/fishing_rods.test.ts > does not grant rod speed from an inventory count or from someone else holding it
+AssertionError: expected [Function] to throw error including 'inventory mismatch' but got 'Cannot read properties of undefined (…'
+
+Expected: "inventory mismatch"
+Received: "Cannot read properties of undefined (reading 'get')"
+
+ ❯ tests/fishing_rods.test.ts:17:526
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/fishing_rods.test.ts > keeps an in-flight rod catch through save/load and rejects rods under older rules
+TypeError: Cannot read properties of null (reading 'duration')
+ ❯ fish tests/fishing_rods.test.ts:14:366
+
+ ❯ tests/fishing_rods.test.ts:19:120
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  3 failed | 23 passed (26)
+   Start at  16:54:38
+   Duration  11.47s (tests 72%, transform 24%, import 4%)
+

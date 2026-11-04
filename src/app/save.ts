@@ -1,3 +1,4 @@
+import {validateRods} from '../sim/fishing_rods';
 import {validateBrewing} from '../sim/brewing';
 import {validateRecoveredWorkshops} from '../sim/recovered_workshops';
 import {validateForestry} from '../sim/forestry';
@@ -307,6 +308,7 @@ export function deserializeWorld(json: string): World {
   validateForestry(w);
   validateRecoveredWorkshops(w);
   validateBrewing(w);
+  validateRods(w);
   validateFlood(w);
   validateOffcuts(w);
   validatePreservation(w);

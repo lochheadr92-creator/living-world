@@ -1,3 +1,5 @@
+import {hasRods} from '../sim/fishing_rods';
+import {toolFor} from '../sim/tools';
 // People and wolves are drawn procedurally from a tiny rig (hips, shoulders, head, hands, feet) that is
 // projected into isometric space. Animation phases come from simulation state (distance walked, progress
 // through the current task), so they freeze when the world is paused and never affect the simulation.
@@ -769,7 +771,7 @@ export class CharacterRenderer {
     });
 
     // which tool is in hand follows the pose being shown (not the blended rig, which would flicker between kinds)
-    const toolKind = TOOL_OF[pose] ?? 0;
+    const toolKind = pose==='fish'&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[pose]??0;
 
     // carried goods on the back / hips
     drawCarried(ctx, p, parts, S, fx, fy, sc, lie, rig, toolKind, s.carry, s.jar, headC, burden, simT);

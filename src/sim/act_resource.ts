@@ -1,3 +1,4 @@
+import {hasRods} from './fishing_rods';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
 import {cellarAccess} from './cellars';
 import {isWellAction,wellSource} from './wells';
@@ -69,7 +70,8 @@ function skillOf(p: Person, s: Source): number {
   return p.skills[SOURCE_SKILL[s.type]];
 }
 
-function toolTask(s: Source): ToolTask | null {
+function toolTask(s: Source,world:World): ToolTask | null {
+  if(s.type==='fish_spot'&&hasRods(world))return 'fish';
   switch (s.type) {
     case 'tree':
       return 'chop';
@@ -88,7 +90,7 @@ function toolTask(s: Source): ToolTask | null {
 }
 
 function toolMult(world: World, p: Person, s: Source): number {
-  const t = toolTask(s);
+  const t = toolTask(s,world);
   return t ? taskMultiplier(world, p, t) : 1;
 }
 
@@ -189,7 +191,7 @@ registerHandler('gather', {
     s.lastTakeTick = world.tick;
     a.cycle++;
     p.stats.gathered++;
-    const task = toolTask(s);
+    const task = toolTask(s,world);
     if (task) wearFor(world, p, task, a.duration);
     const sk = SOURCE_SKILL[s.type];
     if (s.type === 'tree' || s.type === 'rock') riskOfHarm(world, p, s.type, 0.004);

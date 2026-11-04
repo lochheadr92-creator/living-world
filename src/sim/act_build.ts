@@ -1,3 +1,4 @@
+import {rodCraftBlock} from './fishing_rods';
 import {hasBrewing} from './brewing';
 import {workshopSiteProblem} from './recovered_workshops';
 import {cellarSiteConflict} from './cellars';
@@ -232,6 +233,7 @@ registerHandler('craft', {
   pose: () => 'craft',
   begin(world, p, a) {
     const tool = a.data.tool as ToolKind;
+    if(tool==='rod'){const block=rodCraftBlock(world,p,a);if(block)return block;}
     if(isTextile(tool))return 'textiles must be woven at a timber yard';
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'missing materials';
@@ -247,6 +249,7 @@ registerHandler('craft', {
     if (a.progress % 12 === 6) addFx(world, 'hammer', p.x, p.y, 0);
     if (a.progress < a.duration) return 'continue';
     const tool = a.data.tool as ToolKind;
+    if(tool==='rod'){const block=rodCraftBlock(world,p,a);if(block)return `fail:${block}`;}
     if(isTextile(tool))return 'fail:textiles must be woven at a timber yard';
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';

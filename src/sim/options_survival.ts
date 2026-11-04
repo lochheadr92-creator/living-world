@@ -1,3 +1,5 @@
+import {hasRods} from './fishing_rods';
+import {taskMultiplier} from './tools';
 import {hasCellars} from './cellars';
 import {wellOptions} from './wells';
 import {livestockOptions} from './livestock';
@@ -217,7 +219,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     const dng = dangerAt(ctx, b.x, b.y);
     if (dng > 0) sc.add('wolf nearby', -26 * dng * tm.caution);
     const purpose = o.supplyFor?`to obtain food for ${o.supplyFor.name}, last seen needing it at tick ${o.supplyFor.seen}`:o.mode === 'eat' ? 'to ease hunger' : 'to stock the household';
-    const expected = c.e + units * (WORK[type] ?? 25);
+    const work=(WORK[type]??25)*(type==='fish_spot'&&hasRods(world)?taskMultiplier(world,p,'fish'):1);
+    const expected = c.e + units * work;
     addOption(ctx, {
       kind: 'gather',
       label: o.supplyFor?`${SOURCE_VERB[type]} for ${o.supplyFor.name}`:`${SOURCE_VERB[type]}`,
@@ -226,7 +229,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       util: sc.total,
       parts: sc.parts,
       eta: expected,
-      scopeEstimate: {walk:c.e,work:WORK[type]??25,amount:units,item:SOURCE_FOOD[type]},
+      scopeEstimate: {walk:c.e,work,amount:units,item:SOURCE_FOOD[type]},
       ...(pay?.sourceReason?{selectionReason:pay.sourceReason}:{}),
       key: optionKey(b.id),
       targetId: b.id,

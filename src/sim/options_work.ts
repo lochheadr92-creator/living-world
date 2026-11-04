@@ -1,3 +1,4 @@
+import {hasRods} from './fishing_rods';
 import {hasCellars,cellarDemand} from './cellars';
 import {wellDemand,hasWells,wellFetchOptions} from './wells';
 import {knownColdHearth} from './hearth';
@@ -383,7 +384,7 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
 setToolWant((ctx) => wantedTool(ctx));
 
 /** every tool somebody can make by hand; the water jar is fired at a kiln, not whittled, so it is not one of them */
-export type HandTool = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'spear';
+export type HandTool = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'spear' | 'rod';
 
 let workshopTools = true;
 export const workshopToolsOn = (): boolean => workshopTools;
@@ -405,6 +406,7 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   const farming = world.plots.some((pl) => pl.hhId === p.hhId) || ctx.seeds > 0;
   const builds = p.stats.built > 0 || beliefsByKind(p, ['site']).some((s) => s.hh === p.hhId);
   const options: { t: HandTool; w: number }[] = [];
+  if(hasRods(world)&&!has('rod')&&beliefsByKind(p,['fish_spot']).some(b=>b.amount>0&&world.tick-b.seen<DAY))options.push({t:'rod',w:1.8*p.skills.fish});
   if (!has('basket') && p.stats.gathered > 6) options.push({ t: 'basket', w: 1 + p.skills.forage });
   if (!has('axe') && knowTrees && p.stats.gathered > 3) options.push({ t: 'axe', w: p.skills.wood * 1.4 });
   if (!has('hoe') && farming) options.push({ t: 'hoe', w: p.skills.farm * 1.3 });
@@ -415,7 +417,7 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   const planksWanted = beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.planks) > 0) && beliefsByKind(p, ['building']).some((b) => b.btype === 'timber_yard');
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
-  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
+  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.kind !== 'rod' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
   // A SPEAR, from rules version 4 (defence.ts). The reason has to be local and real: a wolf in sight now, or one this
   // person saw within the last day and remembers where. Somebody who has never met one does not want a spear, so a
   // quiet village arms nobody; and the weight is deliberately in the same band as the other wants (an axe reaches about

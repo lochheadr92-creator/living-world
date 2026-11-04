@@ -1,0 +1,11 @@
+{"event":"source","hash":"3d211a64344d438b4661b4ff0071f2b095e540480a77c908e532881888739f90"}
+{"day":1,"seed":"river","rules":140,"arrivals":true,"rodsMade":3,"rodsHeld":3,"rodCatches":5,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":2,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":10,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":3,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":10,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":4,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":29,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":5,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":37,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":6,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":46,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":7,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":51,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":8,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":56,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":9,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":67,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":10,"seed":"river","rules":140,"arrivals":true,"rodsMade":4,"rodsHeld":4,"rodCatches":72,"alive":29,"conservation":{"ok":true,"diffs":[]}}
