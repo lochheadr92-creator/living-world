@@ -64,7 +64,7 @@ registerHandler('gear_work',{
   const b=body(w,a)!,g=b.gear!,t=toolById(w,g.toolId)!;g.lastTended=w.tick;
   if(op==='check'){
    g.checked=true;const n=b.items.fish??0;
-   if(n){const got=transfer(w,b.items,p.inv,carryCap(w,p),'fish',n,'pile:'+b.id,'person:'+p.id,'collect net catch');observe(w,p,b);if(got<n)return 'partial:pack is full';}
+   if(n){const got=transfer(w,b.items,p.inv,carryCap(w,p),'fish',n,'pile:'+b.id,'person:'+p.id,'collect net catch');observe(w,p,b);if(got<n)return got===0&&runsRulesVersion(w,153)?'fail:pack is full':'partial:pack is full';}
    const caught=g.bodyId?w.byId.get(g.bodyId):undefined;
    const lost=g.bodyId&&runsRulesVersion(w,133)&&!(caught?.ent==='pile'&&hasRecoverableParts(w,caught));
    addLog(w,p,'work',n?'Collected the net catch.':lost?'Checked the trap: no recoverable catch remains.':g.bodyId?'Checked the trap: a body needs butchering.':'Checked the '+g.kind+': empty.');
@@ -131,7 +131,9 @@ export function gearOptions(ctx:Ctx):void{
     continue;
    }
   }
-  if(!g.checked||g.catch>0)offer('check',b.id,b.x,b.y,42);
+  // Rules 153: a remembered catch waits for room in the pack instead of repeated empty-handed checks.
+  if(runsRulesVersion(w,153)&&g.catch>0&&roomFor(p.inv,carryCap(w,p),'fish')<1)addBlocked(ctx,'gear_work','Check the gear',b.id,'no room in my pack for the catch','food');
+  else if(!g.checked||g.catch>0)offer('check',b.id,b.x,b.y,42);
   else if(g.wear>=60&&(p.inv.fibre??0)>0)offer('repair',b.id,b.x,b.y,35);
   else if(g.wear<100)offer('reset',b.id,b.x,b.y,28);
   if(g.state==='broken'&&(p.inv.fibre??0)<1)offer('retrieve',b.id,b.x,b.y,16);
