@@ -28,6 +28,7 @@ import {supperTellingOn,setSupperTelling} from '../../src/sim/household_practice
 import {locationQuestionsOn,setLocationQuestions} from '../../src/sim/location_question';
 import {rememberedNeedOn,setRememberedNeed} from '../../src/sim/remembered_need';
 import {checkedAccountsOn,setCheckedAccounts} from '../../src/sim/checked_accounts';
+import {tellerConfidenceOn,setTellerConfidence} from '../../src/sim/teller_confidence';
 import {homeReplacementOn,setHomeReplacement} from '../../src/sim/home_replacement';
 import {constructionFinishOn,setConstructionFinish} from '../../src/sim/construction_finish';
 import {waterSearchOn,setWaterSearch} from '../../src/sim/water_search';
@@ -383,6 +384,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
+  if(kind==='rich-no-confidence')return {spec:label,summary:'remove weighing food hearsay and passing it on by what the listener found when checking that teller, and by its age; accounts, beliefs and asks unchanged',install(){const was=tellerConfidenceOn();setTellerConfidence(false);return ()=>setTellerConfidence(was);}};
   if(kind==='rich-no-checked-accounts')return {spec:label,summary:'remove holding a first-hand account of a place to its teller once checked; beliefs, hearsay replacement and other asks unchanged',install(){const was=checkedAccountsOn();setCheckedAccounts(false);return ()=>setCheckedAccounts(was);}};
   if(kind==='rich-no-home-replacement-knowledge')return {spec:label,summary:'remove personal housing knowledge for layout and matching duplicate-home allocation checks',install(){const was=homeReplacementOn();setHomeReplacement(false);return ()=>setHomeReplacement(was);}};
   if(kind==='rich-no-construction-finish')return {spec:label,summary:'restore the historical last-two-percent exclusion for fully supplied construction',install(){const was=constructionFinishOn();setConstructionFinish(false);return ()=>setConstructionFinish(was);}};
