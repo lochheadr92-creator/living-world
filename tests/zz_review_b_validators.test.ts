@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW B (read-only audit): do the load-time validators ever reject a world the engine itself produced?
 import { describe, expect, it } from 'vitest';
 import { appendFileSync } from 'node:fs';
@@ -6,7 +7,7 @@ import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
-const REPORT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_b/validators_report.txt';
+const REPORT = reviewReportPath('validators_report.txt');
 
 function soak(w: World, days: number, every: number, label: string): string[] {
   const lines: string[] = [];
@@ -27,7 +28,7 @@ function soak(w: World, days: number, every: number, label: string): string[] {
   return lines;
 }
 
-describe('REVIEW B: validators against engine-produced rules-115 worlds', () => {
+describe('REVIEW B: validators against engine-produced current-rules worlds', () => {
   for (const seed of ['river', 'meadow', 'forest']) {
     it(`natural ${seed}, Normal, 8 days, save+load every 1200 ticks`, () => {
       const w = createWorld(currentWorldSettings('normal', seed, { immigration: false }));
@@ -37,7 +38,7 @@ describe('REVIEW B: validators against engine-produced rules-115 worlds', () => 
     }, 600_000);
   }
   for (const scene of ['meal', 'haul', 'care', 'workshop'] as const) {
-    it(`scene ${scene} at rules 115, 3 days, save+load every 600 ticks`, () => {
+    it(`scene ${scene} at current rules, 3 days, save+load every 600 ticks`, () => {
       const w = createWorld({ ...currentWorldSettings('normal', 'scene-' + scene, { immigration: false }), scene });
       const lines = [`scene:${scene} rulesVersion=${w.settings.rulesVersion} dynamics=${w.settings.dynamics} persons=${w.persons.length}`, ...soak(w, 3, 600, `scene:${scene}`)];
       appendFileSync(REPORT, lines.join('\n') + '\n');

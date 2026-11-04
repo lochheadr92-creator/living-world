@@ -6,7 +6,7 @@ at the owner's request, with incomplete acceptance and adverse findings retained
 the earlier all-branch review and preservation are recorded in
 [docs/BRANCH_INTEGRATION_20261104.md](docs/BRANCH_INTEGRATION_20261104.md).
 
-**Recovery integrated and retired branches removed:** rules 134-147 recover the selected missing capabilities, with bounded verification and ordinary-uptake limits in [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). All nineteen reviewed tips are published as annotated archive tags; ten local and eighteen remote retired refs were removed after integration. Existing full-suite failures are baseline-classified, not presented as a green suite. This does not resume unrelated survival tuning.
+**Recovery integrated and retired branches removed:** rules 134-147 recover the selected missing capabilities, with bounded verification and ordinary-uptake limits in [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). All nineteen reviewed tips are published as annotated archive tags; ten local and eighteen remote retired refs were removed after integration. Post-publication test maintenance passes all 477 files: 2,811 tests passed, zero unexpected failures and two retained expected failures; typecheck/build pass. The full triage and all-on baseline are in the recovery record. No simulation behavior changed. This does not resume unrelated survival tuning.
 
 **Historical integration checkpoint (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
 ([docs/STAGE3_CHAIN_FIXES.md](docs/STAGE3_CHAIN_FIXES.md)). Pavel's lived life

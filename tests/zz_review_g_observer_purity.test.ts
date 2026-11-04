@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW G (observer truth audit): every observer entry point, every tick, must leave the serialized world and the RNG
 // state byte-for-byte unchanged, and the looked-at world must continue exactly like an unwatched twin.
 // Broader than purity.test.ts (describePerson every 250 ticks) and inspect_work_purity.test.ts (sites/facilities):
@@ -24,7 +25,7 @@ import { hashWorld, stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
 import { fakeCanvas, installFakeDom } from './helpers/fakeDom';
 
-const OUT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_g/purity_sweep.txt';
+const OUT = reviewReportPath('purity_sweep.txt');
 
 function firstDifference(a: unknown, b: unknown, path = ''): string | null {
   if (Object.is(a, b)) return null;

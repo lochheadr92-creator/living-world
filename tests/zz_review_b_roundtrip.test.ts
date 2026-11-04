@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW B (read-only audit): exact save/load round trip of a natural rules-115 world at several ticks.
 // Not part of the project's contract suite; created by the reviewer. Delete after the review.
 import { describe, expect, it } from 'vitest';
@@ -7,7 +8,7 @@ import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
-const REPORT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_b/roundtrip_report.txt';
+const REPORT = reviewReportPath('roundtrip_report.txt');
 
 /** first differing path, key-order sensitive (as the JSON text is) */
 function firstDiff(a: unknown, b: unknown, path = ''): string | null {
@@ -101,7 +102,7 @@ const CONTINUE = 300;
 describe('REVIEW B: save/load round trip then continue, natural rules-115 world', () => {
   for (const seed of ['river', 'meadow', 'forest']) {
     it(`${seed}: byte-identical continuation after loading at ${CHECKPOINTS.join('/')}`, () => {
-      const w = createWorld(currentWorldSettings('normal', seed, { immigration: false }));
+      const w = createWorld({ ...currentWorldSettings('normal', seed, { immigration: false }), rulesVersion: 115 });
       expect(w.settings.rulesVersion).toBe(115);
       const report: string[] = [];
       let t = 0;

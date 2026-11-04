@@ -1,0 +1,419 @@
+{
+  "baselineHead": "56b034ed0bbd02c66b61bee581e572c2e658fe13",
+  "originalRun": "C:\\dev\\brain\\tools\\evidence\\living-world-recovery-20261104-191105",
+  "originalUnexpectedFailures": 36,
+  "retiredTestFiles": [
+    "zz_review_a_tools.test.ts",
+    "zz_review_a_flood_tools.test.ts",
+    "zz_review_f_acquire_double_count.test.ts",
+    "zz_review_main_site_fate.test.ts"
+  ],
+  "retiredTestCases": 14,
+  "newTestCases": 1,
+  "productionChanges": [],
+  "verification": {
+    "verdict": "TURN_INTEGRATION_VERIFIED",
+    "scope": "Test maintenance on published rules-147 main; no simulation behavior changes",
+    "filesPassed": 477,
+    "testsPassed": 2811,
+    "unexpectedFailures": 0,
+    "expectedFailures": 2,
+    "durationSeconds": 790.58,
+    "run": {
+      "finished": "2026-11-04T20:03:00.6173881+10:00",
+      "command": "npx vitest run --maxWorkers=4 --reporter=verbose",
+      "started": "2026-11-04T19:49:49.0750679+10:00",
+      "sourceManifest": "confirmed-source-manifest.json",
+      "baseHead": "56b034ed0bbd02c66b61bee581e572c2e658fe13",
+      "exitCode": 0
+    },
+    "manifestFiles": 1726,
+    "manifestChangesDuringRun": [],
+    "productionChanges": [],
+    "buildAndTypecheckExitCode": 0,
+    "review": "All changed test contracts and replacement coverage inspected; no skips or new expected-failure marks added. Four superseded review files and one duplicated assertion retired; actual consumption and in-flight/completed checkpoints now match tested contracts. Numeric report validation excludes only labelled source provenance. Existing expected failures remain unresolved."
+  },
+  "resolutions": [
+    {
+      "test": "tests/zz_review_b_observer_purity.test.ts > REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\observer_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_main_site_fate.test.ts > REVIEW: fate of a promised site versus what the helper says > forest, 6,000 ticks: site #2280 events, buildings on its footprint, helper commitment text",
+      "message": "→ expected null not to be null",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/promise_targets.test.ts",
+        "reason": "One-off observational probe requires historical site 2280 to recur in a changed current world. Maintained tests cover observed absence, partial hauling, actual completion and saved continuation."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_feed_caps.test.ts > feed/chronicle/log reach after two river days (immigration on, as the product world runs)",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\feed_caps.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_ledger_endings.test.ts > natural run: ledger entries whose activity was dropped without endActivity stay open (\"ending not recorded\"); real endings always close",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\ledger_endings.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_ledger_endings.test.ts > unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched)",
+      "message": "→ expected 'failed' to be undefined",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/suspended_endings.test.ts",
+        "reason": "Removed the duplicated silent-discard defect assertion; maintained tests verify common endings, legacy behavior and exact continuation."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_ledger_endings.test.ts > the listener in a conversation is shown \"Weighed up: <reasons of an unrelated earlier decision>\" as why they chose it",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\ledger_endings.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record",
+      "message": "→ expected false to be true // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/flood_tool_records.test.ts",
+        "reason": "Obsolete expectation that the registry keeps a spoiled tool. Current contract verifies count/record removal and cleanup."
+      }
+    },
+    {
+      "test": "tests/project_helpers.test.ts > keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay",
+      "message": "→ expected false to be true // Object.is equality",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/project_helpers.test.ts",
+        "reason": "TEST_BUG: scripted controller ignores eat_store and chooses an unrelated cellar while the trusted helper is on conversation cooldown. Handle direct store eating and use offered wandering during the wait, preserving request/delivery/crafting/replay assertions."
+      }
+    },
+    {
+      "test": "tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect: taking the rack saw while the yard worker has it on the bench strands the record on the building",
+      "message": "→ expected undefined to be 1 // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/tool_transfer_records.test.ts",
+        "reason": "Three obsolete defect expectations plus a duplicated control; current contracts cover blocked bench transfers, valid transfers, registry ownership, and balanced breakage."
+      }
+    },
+    {
+      "test": "tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation",
+      "message": "→ expected undefined to be 1 // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/tool_transfer_records.test.ts",
+        "reason": "Three obsolete defect expectations plus a duplicated control; current contracts cover blocked bench transfers, valid transfers, registry ownership, and balanced breakage."
+      }
+    },
+    {
+      "test": "tests/zz_review_a_tools.test.ts > review A: tool records and counts > the same strand happens through economy.transfer directly (the call the withdraw handler makes)",
+      "message": "→ expected +0 to be 1 // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/tool_transfer_records.test.ts",
+        "reason": "Three obsolete defect expectations plus a duplicated control; current contracts cover blocked bench transfers, valid transfers, registry ownership, and balanced breakage."
+      }
+    },
+    {
+      "test": "tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: one stone short of the hammer, beside a known rock, she never fetches it in a day",
+      "message": "→ expected [ …(2) ] to have a length of +0 but got 2",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/project_acquire_remaining.test.ts",
+        "reason": "Seven superseded cases include defect demonstrations, an unexpectedly passing expected-failure case, and a no-room fixture mislabelled as missing acquisition. Current contracts cover remaining quantity, capacity, completed crafting, legacy behavior and replay."
+      }
+    },
+    {
+      "test": "tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with an ordinary pack (room for one stone a trip) she fetches the first stone and then stalls for a day and a half",
+      "message": "→ expected 2 to be 1 // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/project_acquire_remaining.test.ts",
+        "reason": "Seven superseded cases include defect demonstrations, an unexpectedly passing expected-failure case, and a no-room fixture mislabelled as missing acquisition. Current contracts cover remaining quantity, capacity, completed crafting, legacy behavior and replay."
+      }
+    },
+    {
+      "test": "tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: even with room for both stones, the two-stone gather is interrupted after the first unit and never resumed",
+      "message": "→ expected 'success' to be 'interrupted' // Object.is equality",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/project_acquire_remaining.test.ts",
+        "reason": "Seven superseded cases include defect demonstrations, an unexpectedly passing expected-failure case, and a no-room fixture mislabelled as missing acquisition. Current contracts cover remaining quantity, capacity, completed crafting, legacy behavior and replay."
+      }
+    },
+    {
+      "test": "tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` with the same correction): with room for both stones she makes the hammer within a day and a half",
+      "message": "→ Expect test to fail",
+      "category": "retained old defect expectation",
+      "resolution": {
+        "kind": "retired obsolete test",
+        "replacement": "tests/project_acquire_remaining.test.ts",
+        "reason": "Seven superseded cases include defect demonstrations, an unexpectedly passing expected-failure case, and a no-room fixture mislabelled as missing acquisition. Current contracts cover remaining quantity, capacity, completed crafting, legacy behavior and replay."
+      }
+    },
+    {
+      "test": "tests/construction_finish.test.ts > the retained valid collapse fixture now completes its paid replacement and sleeps there across a save",
+      "message": "→ expected 0 to be greater than 0",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/construction_finish.test.ts",
+        "reason": "TEST_BUG: a 1000-tick deadline ends during rest, 93 ticks before actual sleep. Bound the next daily sleep cycle by DAY; explicitly assert sleep/work, home target, cover, energy recovery and exact continuation."
+      }
+    },
+    {
+      "test": "tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation",
+      "message": "→ expected false to be true // Object.is equality",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/home_replacement.test.ts",
+        "reason": "TEST_BUG: successful completion removes the site. Save at the real midpoint with nonzero material use, work, and hauling already begun; retain all original accounting and continuation assertions."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > river: byte-identical continuation after loading at 600/3000/6000",
+      "message": "→ expected 147 to be 115 // Object.is equality",
+      "category": "rules 115 expectation applied to current 147 world",
+      "resolution": {
+        "kind": "TEST_BUG",
+        "replacement": "tests/zz_review_b_roundtrip.test.ts",
+        "reason": "Explicitly pin the fixture to its declared historical rules 115 contract instead of creating a current world and asserting 115."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > meadow: byte-identical continuation after loading at 600/3000/6000",
+      "message": "→ expected 147 to be 115 // Object.is equality",
+      "category": "rules 115 expectation applied to current 147 world",
+      "resolution": {
+        "kind": "TEST_BUG",
+        "replacement": "tests/zz_review_b_roundtrip.test.ts",
+        "reason": "Explicitly pin the fixture to its declared historical rules 115 contract instead of creating a current world and asserting 115."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > forest: byte-identical continuation after loading at 600/3000/6000",
+      "message": "→ expected 147 to be 115 // Object.is equality",
+      "category": "rules 115 expectation applied to current 147 world",
+      "resolution": {
+        "kind": "TEST_BUG",
+        "replacement": "tests/zz_review_b_roundtrip.test.ts",
+        "reason": "Explicitly pin the fixture to its declared historical rules 115 contract instead of creating a current world and asserting 115."
+      }
+    },
+    {
+      "test": "tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > still lets a surviving bite take ordinary recovery",
+      "message": "→ expected +0 to be close to 0.009, received difference is 0.009, but expected 0.000005",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/fatal_injury.test.ts",
+        "reason": "TEST_BUG: current rules require paid nourishment for health recovery. Consume an actual finite berry portion before the staged bite; additionally verify uneaten carried food cannot revive a fatal bite with hold disabled."
+      }
+    },
+    {
+      "test": "tests/fatal_injury.test.ts > the lab can turn the correction off and nothing else > reproduces the old order on the fatal bite, and leaves a nonfatal bite unchanged",
+      "message": "→ expected false to be true // Object.is equality",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/fatal_injury.test.ts",
+        "reason": "TEST_BUG: current rules require paid nourishment for health recovery. Consume an actual finite berry portion before the staged bite; additionally verify uneaten carried food cannot revive a fatal bite with hold disabled."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_stale_blocked.test.ts > a one-tick blocked doorway leaves \"home exit is blocked\" on the activity for the whole walk",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\stale_blocked.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_undefined_keyorder.test.ts > REVIEW B: upgrading set, cleared with undefined, loaded, set again => text differs while state is equal",
+      "message": "→ expected false to be true // Object.is equality",
+      "category": "behaviour or serialization assertion requiring investigation",
+      "resolution": {
+        "kind": "test repaired",
+        "replacement": "tests/zz_review_b_undefined_keyorder.test.ts",
+        "reason": "TEST_BUG: completed upgrade now deletes the temporary key; assert its absence before and after load and retain structural/hash/exact text equality for the later upgrade."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh river, Normal, 10 days, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_harsh_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural river, Normal, 8 days, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural meadow, Normal, 8 days, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural forest, Normal, 8 days, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene meal at rules 115, 3 days, save+load every 600 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene haul at rules 115, 3 days, save+load every 600 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene care at rules 115, 3 days, save+load every 600 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene workshop at rules 115, 3 days, save+load every 600 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh forest, Normal, 10 days, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_harsh_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > meadow, Normal, 16 days through winter, save+load every 1200 ticks",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_b\\validators_harsh_report.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\purity_sweep.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    },
+    {
+      "test": "tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical",
+      "message": "→ ENOENT: no such file or directory, open 'C:\\Users\\RJLoc\\AppData\\Local\\Temp\\claude\\C--dev-Claude-Experiment\\3c06e039-d739-4179-9940-8bfc089f1edb\\scratchpad\\review\\agent_g\\purity_sweep.txt'",
+      "category": "missing historical report directory",
+      "resolution": {
+        "kind": "FIXTURE_OR_ENVIRONMENT_FAILURE",
+        "replacement": "tests/helpers/review_report.ts",
+        "reason": "Each retained review module gets a fresh existing local temporary report directory; simulation assertions are unchanged."
+      }
+    }
+  ],
+  "remainingExpectedFailures": [
+    "Competing sibling plans: older batch first claim on carried wood",
+    "Save format 4 column packing after an ordinary day"
+  ],
+  "additionalObservation": "The housing trace includes an interim rest at the home target with zero shelter coverage, followed by covered actual sleep. This repair validates the claimed sleep chain, not every shelter-choice behavior.",
+  "additionalTestBug": {
+    "test": "tests/lab_report.test.ts",
+    "reason": "Whole-output numeric check matched undefined in a source provenance filename. Restrict the check to report body, retaining provenance output and all metric assertions.",
+    "diagnostic": "lab-report-diagnostic.txt",
+    "focusedResult": "2 passed"
+  },
+  "firstPostRepairFullSuite": {
+    "files": 477,
+    "passedFiles": 476,
+    "failedFiles": 1,
+    "passedTests": 2810,
+    "unexpectedFailures": 1,
+    "expectedFailures": 2,
+    "durationSeconds": 802.07,
+    "log": "full-suite-final.txt"
+  }
+}

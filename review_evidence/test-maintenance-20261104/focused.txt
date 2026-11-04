@@ -1,0 +1,135 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > reaches zero health during the tick and dies through the ordinary death path 11ms
+ ✓ tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > still lets a surviving bite take ordinary recovery 15ms
+ ✓ tests/fatal_injury.test.ts > uneaten carried food cannot pay to revive a fatal bite when the hold is removed 3ms
+ ✓ tests/fatal_injury.test.ts > death from a fatal injury happens once > later ticks and a save/load continuation do not resurrect the person or repeat the death 22ms
+ ✓ tests/fatal_injury.test.ts > the ordinary death path still clears activity, claims and occupancy > does so when zero health is settled by a world tick, without a wolf biting indoors 3ms
+ ✓ tests/fatal_injury.test.ts > rules version 4 keeps the old order > a fatal bite with favourable needs is still undone by passive recovery 4ms
+ ✓ tests/fatal_injury.test.ts > the lab can turn the correction off and nothing else > reproduces the old order on the fatal bite, and leaves a nonfatal bite unchanged 14ms
+ ✓ tests/fatal_injury.test.ts > an experimental version-5 save is refused > is not loaded as version 4 or as the fatal-injury rules 7ms
+ ✓ tests/home_replacement.test.ts > an unseen collapse does not teach a household member that another home is needed 37ms
+ ✓ tests/home_replacement.test.ts > actual local observation of the missing home opens the existing replacement layout 6ms
+ ✓ tests/home_replacement.test.ts > rules 107 and the isolated removal retain the former live-home decision 10ms
+ ✓ tests/home_replacement.test.ts > a personally told home is enough to withhold replacement; its remembered location is retained 3ms
+ ✓ tests/home_replacement.test.ts > unknown physical housing does not suppress a personal offer but rejects its actual duplicate layout without teaching a location 4ms
+ ✓ tests/home_replacement.test.ts > the completion boundary rejects a home allocated while this layout was under way 26ms
+ ✓ tests/home_replacement.test.ts > a lean-to still permits a paid hut and explicit in-place upgrades retain their existing checks 3ms
+ × tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation 27ms
+   → expected [ 'gather', 'plan_site', 'build' ] to deeply equal ArrayContaining{…}
+ ✓ tests/construction_finish.test.ts > known fully supplied unfinished work remains offered inside the last two percent 23ms
+ ✓ tests/construction_finish.test.ts > a rested autonomous builder actually finishes the remaining work across a save with no new material 32ms
+ ✓ tests/construction_finish.test.ts > rules 108 retain the frozen last-two-percent exclusion 4ms
+ ✓ tests/construction_finish.test.ts > isolated removal restores that same exclusion 3ms
+ ✓ tests/construction_finish.test.ts > the exact completed boundary stays closed, and partial material headroom is unchanged 2ms
+ ✓ tests/construction_finish.test.ts > a completed physical supply cannot override the person’s remembered shortfall 9ms
+ ✓ tests/construction_finish.test.ts > urgent thirst still prevents a near-complete construction offer 2ms
+ ✓ tests/construction_finish.test.ts > the retained valid collapse fixture now completes its paid replacement and sleeps there across a save 147ms
+stdout | tests/zz_review_b_undefined_keyorder.test.ts > completed upgrade keys stay absent, and a later upgrade continues exactly across a load
+keys before: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built
+uninterrupted: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built,upgrading
+loaded:        ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,builtBy,built,upgrading
+hash equal: true; deepEqualState: true; text equal: true; diffs: 
+
+ ✓ tests/zz_review_b_undefined_keyorder.test.ts > completed upgrade keys stay absent, and a later upgrade continues exactly across a load 25ms
+ ✓ tests/promise_targets.test.ts > retains an uninformed accepted repair and offered remembered approach after a distant collapse 44ms
+ ✓ tests/promise_targets.test.ts > walks to discover the absent target, releases its promise and retains a report without informing the requester 21ms
+ ✓ tests/promise_targets.test.ts > preserves exact saved continuation through physical discovery 33ms
+ ✓ tests/promise_targets.test.ts > communicates a discovered cancellation in person and acknowledges it once 29ms
+ ✓ tests/promise_targets.test.ts > does not infer target loss from a forgotten belief, sleep or a different interior 3ms
+ ✓ tests/promise_targets.test.ts > keeps prior rules and isolated removal unchanged 5ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: future 9ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: target 8ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: kind 7ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: source 7ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: old rules 7ms
+ ✓ tests/promise_targets.test.ts > rejects malformed target evidence: null 9ms
+ ✓ tests/project_helpers.test.ts > uses personal trust when choosing between otherwise eligible project helpers 24ms
+ ✓ tests/project_helpers.test.ts > earns trust through an offered physical gift, without informing an absent neighbour or rewarding it twice 29ms
+ ✓ tests/project_helpers.test.ts > keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay 733ms
+ ✓ tests/project_helpers.test.ts > preserves first-feasible choice in legacy rules and the isolated lab ablation, including restore 16ms
+ ✓ tests/project_helpers.test.ts > an interrupted offered gift grants no help credit 4ms
+ ✓ tests/project_helpers.test.ts > the trusted helper can refuse goods reserved for another obligation 144ms
+ ✓ tests/project_helpers.test.ts > stale sight of a trusted helper does not guarantee contact or a transfer 3ms
+ ✓ tests/project_helpers.test.ts > trust never creates sight, supplies, eligibility or relief from a known refusal 11ms
+ ✓ tests/project_helpers.test.ts > does not promote a project ask over urgent needs or duplicate a covered request 2ms
+ ✓ tests/project_helpers.test.ts > uses bounded drifting relationships, with no inflation from repeated option generation 25ms
+ ✓ tests/project_helpers.test.ts > preserves observation 11 wording and protocol mappings while explaining the new choice in 12 4ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, expiry: the active control ends with every record 40ms
+ ✓ tests/flood_tool_records.test.ts > flood write-off and tool records > a flooded pile loses its axe count and its axe record together 714ms
+ ✓ tests/tool_transfer_records.test.ts > tool transfers keep counts and records together > control: the rack saw leaves with its record when nobody is at the bench 179ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: the project offers the remaining stone without subtracting carried inputs twice 29ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: ordinary staged decisions gather both stones and make the hammer 64ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: rules 116 and the lab removal preserve the old missing offer 9ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: the fix still refuses a second stone when the pack has no room 3ms
+ ✓ tests/tool_transfer_records.test.ts > tool transfers keep counts and records together > a saw on the bench stays with the building: count and record together, and a later break balances 98ms
+ ✓ tests/tool_transfer_records.test.ts > tool transfers keep counts and records together > economy.transfer itself moves no more tools than it can retag 21ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save 824ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, expiry: rules 115 keeps the historical silent discard 23ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, target loss: the active control ends with every record 16ms
+ ✓ tests/promise_targets.test.ts > does not call an unseen vanished site complete at the personal deadline 198ms
+ ✓ tests/promise_targets.test.ts > preserves real partial building work when the local site disappears, without claiming completion 13ms
+ ✓ tests/promise_targets.test.ts > recognizes a site actually completed by the promised worker as completed work, not missing goods 19ms
+ ✓ tests/promise_targets.test.ts > counts actually consumed firewood before target loss without losing the performed duty 6ms
+ ✓ tests/promise_targets.test.ts > keeps actual ordinary site completion distinct from a partially delivered hauling promise 1098ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save 600ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > gather, target loss: rules 115 keeps the historical silent discard 19ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, expiry: the active control ends with every record 15ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save 567ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, expiry: rules 115 keeps the historical silent discard 16ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, target loss: the active control ends with every record 15ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save 518ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > build, target loss: rules 115 keeps the historical silent discard 13ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > the lab switch restores the historical discard at rules 116 15ms
+ ✓ tests/suspended_endings.test.ts > LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) > a paused activity that is still valid resumes as before, with no ending 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation
+AssertionError: expected [ 'gather', 'plan_site', 'build' ] to deeply equal ArrayContaining{…}
+
+- Expected
++ Received
+
+- ArrayContaining [
+-   "plan_site",
++ [
+    "gather",
+-   "haul",
++   "plan_site",
+    "build",
+  ]
+
+ ❯ tests/home_replacement.test.ts:71:17
+     69|  for(let n=0;n<3500&&!paid;n++){stepWorld(f.w);if(f.p.activity?.kind==…
+     70|  expect(paid).toBe(true);
+     71|  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','…
+       |                 ^
+     72|  expect(f.w.ledger.consumed.wood).toBeGreaterThan(0);
+     73|  expect(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&s.used.wood!>0))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 9 passed (10)
+      Tests  1 failed | 74 passed (75)
+   Start at  19:32:22
+   Duration  4.33s (tests 54%, transform 34%, import 12%)
+
+  Transform  transforming modules took 4.27s · 34% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

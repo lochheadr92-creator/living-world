@@ -1,0 +1,8 @@
+{
+  "started": "2026-11-04T19:35:55.0513183+10:00",
+  "baseHead": "56b034ed0bbd02c66b61bee581e572c2e658fe13",
+  "exitCode": 1,
+  "sourceManifest": "final-source-manifest.json",
+  "command": "npx vitest run --maxWorkers=4 --reporter=verbose",
+  "finished": "2026-11-04T19:49:18.1047953+10:00"
+}

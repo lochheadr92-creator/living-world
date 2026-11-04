@@ -1,0 +1,29 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/home_replacement.test.ts > an unseen collapse does not teach a household member that another home is needed 33ms
+ ✓ tests/home_replacement.test.ts > actual local observation of the missing home opens the existing replacement layout 6ms
+ ✓ tests/home_replacement.test.ts > rules 107 and the isolated removal retain the former live-home decision 6ms
+ ✓ tests/home_replacement.test.ts > a personally told home is enough to withhold replacement; its remembered location is retained 3ms
+ ✓ tests/home_replacement.test.ts > unknown physical housing does not suppress a personal offer but rejects its actual duplicate layout without teaching a location 4ms
+ ✓ tests/home_replacement.test.ts > the completion boundary rejects a home allocated while this layout was under way 29ms
+ ✓ tests/home_replacement.test.ts > a lean-to still permits a paid hut and explicit in-place upgrades retain their existing checks 4ms
+ ✓ tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation 142ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  19:33:32
+   Duration  1.92s (transform 77%, tests 12%, import 10%)
+

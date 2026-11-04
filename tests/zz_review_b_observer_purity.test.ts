@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW B (read-only audit): observers not covered by a full-serialization purity test.
 import { expect, it } from 'vitest';
 import { appendFileSync } from 'node:fs';
@@ -10,7 +11,7 @@ import { describeCartSections, describeFacility, describeSiteSections, toolViews
 import { projectHistory, civicHistory, householdHistory, relationshipHistory, decisionHistory } from '../src/sim/history';
 import { selectedWater } from '../src/sim/inspect_water';
 import { selectedFlood } from '../src/sim/inspect_flood';
-const REPORT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_b/observer_report.txt';
+const REPORT = reviewReportPath('observer_report.txt');
 
 function firstDiff(a: unknown, b: unknown, path = ''): string | null {
   if (Object.is(a, b)) return null;

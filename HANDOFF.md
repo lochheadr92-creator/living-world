@@ -1,8 +1,14 @@
-# Recovery integrated and archived — rules 147 on main
+# Test maintenance verified — rules 147 on main
+
+The owner-requested local full-suite rerun, all-on baseline and test maintenance are complete. On THEWEAPON, the final four-worker run passed all 477 files: **2,811 tests passed, zero unexpected failures and two documented expected failures** in 790.58 seconds. Typecheck/build pass. No simulation source, scripts or dependencies changed; the nine-seed, 25-day all-on baseline remains a measurement of the same runtime.
+
+The 36 original unexpected failures were repaired or retired with maintained replacement coverage; the additional report-provenance false positive was repaired too. Two real expected-failure limits remain: competing-plan material claims and compact-save fallback. Full triage, retained failed attempts, final logs and source manifests: [recovery record](docs/RECOVERED_CAPABILITIES.md#post-publication-test-maintenance-and-all-on-baseline) and `review_evidence/test-maintenance-20261104/`. Brain's 4 November recovery/full-suite note retains the original suite, all nine baseline rows and final repair evidence. The separate survival programme remains stopped and incomplete.
+
+## Historical recovery publication — rules 147 on main
 
 Selected missing features from the retired branches are implemented, tested, committed and pushed. Main integrated at `f03a2593`; subsequent commits record cleanup only. All nineteen reviewed tips have verified remote annotated archive tags, and ten local / eighteen remote retired refs have been removed. The two occupied old worktrees were detached at their existing commits with unchanged file/index fingerprints. No test or measurement remains running.
 
-The full suite is not green: 2,784 passed / 39 failed / 3 expected failures; 36 failures reproduce on starting main, and the remaining three lab timeouts pass in isolation. Build and recovery/continuation contracts pass. Ordinary uptake is bounded and several industrial/social features remain staged-only evidence. See [the recovery programme](docs/RECOVERED_CAPABILITIES.md) and its linked raw evidence. The separate survival programme remains stopped and incomplete.
+Historical pre-maintenance result: the full suite was not green: 2,784 passed / 39 failed / 3 expected failures; 36 failures reproduce on starting main, and the remaining three lab timeouts pass in isolation. Build and recovery/continuation contracts pass. Ordinary uptake is bounded and several industrial/social features remain staged-only evidence. See [the recovery programme](docs/RECOVERED_CAPABILITIES.md) and its linked raw evidence. The separate survival programme remains stopped and incomplete.
 
 ## Historical stop checkpoint — rules 133
 

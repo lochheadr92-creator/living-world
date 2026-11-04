@@ -1,15 +1,15 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW G (observer truth audit): does every decision ledger entry close with the real ending, and does the
 // "Why did they choose it?" line describe THIS activity?
 import { expect, it } from 'vitest';
 import { writeFileSync } from 'node:fs';
-import { resumeSuspended, suspendActivity } from '../src/sim/activities';
 import { createWorld } from '../src/sim/factory';
 import { decisionHistory } from '../src/sim/history';
 import { describePerson } from '../src/sim/inspect';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
 
-const OUT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_g/ledger_endings.txt';
+const OUT = reviewReportPath('ledger_endings.txt');
 const river = () => createWorld(currentWorldSettings('normal', 'river', { immigration: false }));
 const report: string[] = [];
 
@@ -85,32 +85,7 @@ it('natural run: ledger entries whose activity was dropped without endActivity s
   expect(orphanSilent).toBeGreaterThanOrEqual(0);
 });
 
-it('unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched)', () => {
-  const w = river();
-  for (let n = 0; n < 200; n++) stepWorld(w);
-  const p = w.persons.find((q) => q.alive && q.activity && (q.decisions ?? []).some((e) => e.activityId === q.activity!.id))!;
-  expect(p).toBeDefined();
-  const act = p.activity!;
-  const entry = p.decisions!.find((e) => e.activityId === act.id)!;
-  const resultBefore = JSON.stringify(p.lastResult);
-  const logBefore = p.log.length;
-  suspendActivity(w, p);
-  expect(p.suspended).toBe(act);
-  act.expire = w.tick - 1; // the conversation outlasted the plan
-  const resumed = resumeSuspended(w, p);
-  expect(resumed).toBe(false);
-  expect(p.suspended).toBeNull();
-  expect(p.activity).toBeNull();
-  expect(entry.outcome).toBeUndefined();
-  expect(JSON.stringify(p.lastResult)).toBe(resultBefore);
-  expect(p.log.length).toBe(logBefore);
-  const row = decisionHistory(w, p).find((r) => r.includes(`chose “${entry.chosen}”`))!;
-  report.push(`unit drop: ${p.name} act#${act.id} "${act.label}" dropped at resume; ledger row: ${row}`);
-  expect(row).toContain('ending not recorded');
-  const view = describePerson(w, p.id, { opportunities: false })!;
-  report.push(`unit drop: qa.doing="${view.qa.doing}" qa.lastAttempt="${view.qa.lastAttempt}"`);
-  writeFileSync(OUT, report.join('\n'));
-});
+// Expired suspended activities are covered by suspended_endings.test.ts, including exact saved continuation.
 
 it('the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it', () => {
   const w = river();

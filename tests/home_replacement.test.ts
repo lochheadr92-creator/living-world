@@ -65,7 +65,8 @@ it('a lean-to still permits a paid hut and explicit in-place upgrades retain the
 it('an observed lost home starts real gathering, hauling and paid construction with exact saved continuation',()=>{
  const f=observedReplacementScene();destroyBuilding(f.w,f.home,'collapsed in sight');refreshBeliefs(f.w,f.p);
  let paid=false;const starts:string[]=[];f.w.hooks={onActivityStart:(p,a)=>{if(p.id===f.p.id)starts.push(a.kind);}};
- for(let n=0;n<3500&&!f.hh.homeId;n++){stepWorld(f.w);if(f.p.activity?.kind==='build'&&f.p.activity.progress>0)paid=true;}
+ // Capture the paid in-flight site after material hauling starts, before completion removes it.
+ for(let n=0;n<3500&&!(paid&&starts.includes('haul'));n++){stepWorld(f.w);if(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&(s.used.wood??0)>0))paid=true;}
  expect(paid).toBe(true);
  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','haul','build']));
  expect(f.w.ledger.consumed.wood).toBeGreaterThan(0);

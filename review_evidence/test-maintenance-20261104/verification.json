@@ -1,0 +1,22 @@
+{
+  "verdict": "TURN_INTEGRATION_VERIFIED",
+  "scope": "Test maintenance on published rules-147 main; no simulation behavior changes",
+  "filesPassed": 477,
+  "testsPassed": 2811,
+  "unexpectedFailures": 0,
+  "expectedFailures": 2,
+  "durationSeconds": 790.58,
+  "run": {
+    "finished": "2026-11-04T20:03:00.6173881+10:00",
+    "command": "npx vitest run --maxWorkers=4 --reporter=verbose",
+    "started": "2026-11-04T19:49:49.0750679+10:00",
+    "sourceManifest": "confirmed-source-manifest.json",
+    "baseHead": "56b034ed0bbd02c66b61bee581e572c2e658fe13",
+    "exitCode": 0
+  },
+  "manifestFiles": 1726,
+  "manifestChangesDuringRun": [],
+  "productionChanges": [],
+  "buildAndTypecheckExitCode": 0,
+  "review": "All changed test contracts and replacement coverage inspected; no skips or new expected-failure marks added. Four superseded review files and one duplicated assertion retired; actual consumption and in-flight/completed checkpoints now match tested contracts. Numeric report validation excludes only labelled source provenance. Existing expected failures remain unresolved."
+}

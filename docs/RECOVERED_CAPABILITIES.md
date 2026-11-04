@@ -208,3 +208,53 @@ Main was fast-forwarded and pushed to `f03a259381fadf0ba6fc485006c6178b1fc78a86`
 `cleanup-result.json` records exact targets, preserved fingerprints and deleted names; `cleanup-execution.txt` retains command output. Later documentation/cleanup commits do not change the verified simulation. The temporary recovery branch is removed after its complete history is on main.
 
 The final remote audit found `origin/claude/civilisation-phase1` still naming the exact archived `3f6ec661` tip; its counterpart was omitted from the initial map. It was verified and deleted too, bringing the remote total to eighteen. The mapping and cleanup result include that correction.
+
+
+## Post-publication test maintenance and all-on baseline
+
+Owner request, 4 November 2026: rerun the full suite, save to Brain, run a baseline with all capabilities on locally, then fix or remove failed tests. These measurements and repairs use local PowerShell on THEWEAPON. They do not resume the stopped survival programme or change simulation rules.
+
+The untouched published main `56b034ed` completed the four-worker full suite in 797.02 seconds: 481 files, 464 passed / 17 failed; 2,787 tests passed, 36 failed and 3 expected failures. The 36 failed names exactly match the retained pre-recovery reproduction list. All three prior lab subprocess timeouts passed. Raw pre-repair output and the exact comparison are preserved in `C:/dev/brain/tools/evidence/living-world-recovery-20261104-191105/`.
+
+A fresh control-only baseline then completed nine Normal worlds for 25 days each, current rich rules 147, arrivals on, no ablations, four local workers. Each row records its source manifest, settings, daily population and final hash; source and HEAD were unchanged throughout. The command for each seed was `node node_modules/vite-node/dist/cli.mjs scripts/lab_seed.ts -- --seed <seed> --profile normal --fork 0 --days 25 --branches none --dynamics rich --arrivals on`.
+
+| Seed | Alive at day 25 | Recorded deaths |
+|---|---:|---:|
+| forest | 5 | 23 |
+| meadow | 21 | 8 |
+| river | 26 | 4 |
+| fern | 14 | 14 |
+| aspen | 23 | 7 |
+| birch | 12 | 17 |
+| cedar | 22 | 11 |
+| gen-1 | 18 | 11 |
+| gen-2 | 25 | 4 |
+
+Mean final population is 18.44, range 5–26. With births and arrivals, these are not founder survival percentages. A single trajectory per seed without paired predecessor/nudge runs cannot establish improvement or causality. All-on settings do not prove every capability activated. This lab records outcomes and provenance; its rows do not add a new final save/twin or per-tick conservation audit. The earlier recovery integrity checks remain separate evidence.
+
+### Test triage and repairs
+
+The complete mapping of all 36 initial failures is in [triage.json](../review_evidence/test-maintenance-20261104/triage.json). No production source, dependency or immutable continuation reference changed.
+
+- Seventeen report-write failures were environment assumptions: eight retained review modules now create fresh local temporary report paths through `tests/helpers/review_report.ts`. Their simulation assertions remain intact.
+- Three round-trip cases created current worlds but asserted rules 115. Their fixture now explicitly pins the historical rules version named by their contract. Current validator labels were also corrected to describe the worlds they already ran.
+- The upgrade-key regression now expects the temporary key to be deleted, preserving its structural, hash and exact-serialization assertions.
+- Fatal-bite recovery fixtures now actually consume a finite food portion to pay for current-rule recovery. An additional contract proves that an uneaten carried portion cannot revive a fatal bite when the hold is disabled.
+- The home-replacement checkpoint now waits for actual material use and hauling while the site still exists. The completion test waits for the next daily sleep cycle and explicitly asserts working sleep, covered housing and energy recovery; the old 1000-tick check stopped during rest, 93 ticks before sleep.
+- The scripted helper test now handles direct eating from the home store and offered waiting/wandering during conversation cooldown, rather than accidentally choosing an unrelated cellar. The trusted request, real delivery, completed axe and exact replay assertions are retained.
+
+Four obsolete files and one duplicated silent-discard assertion were retired (14 cases total); one new bite/nourishment contract was added. Original contents remain in published `56b034ed` and the preservation history. Replacement coverage was inspected and rerun:
+
+| Retired review | Maintained coverage |
+|---|---|
+| `zz_review_a_tools.test.ts` | `tool_transfer_records.test.ts`: ordinary transfer, protected bench loan, direct transfer and balanced breakage |
+| `zz_review_a_flood_tools.test.ts` | `flood_tool_records.test.ts`: count and record loss together, cleanup and conservation |
+| `zz_review_f_acquire_double_count.test.ts` | `project_acquire_remaining.test.ts`: remaining quantity, no-room refusal, actual crafting, old rules and saved continuation |
+| `zz_review_main_site_fate.test.ts` | `promise_targets.test.ts`: local target evidence, partial hauling, actual completion and continuation; no dependence on an incidental historical entity ID |
+| Silent-discard unit case in `zz_review_g_ledger_endings.test.ts` | `suspended_endings.test.ts`: common endings, expiry/target loss, old rules and saved continuation |
+
+The first targeted run passed 74/75; its early home checkpoint was corrected. The review run passed all eight repaired review files but retained that intermediate home failure; the final home run passes 8/8. Those failed attempts and diagnostic traces remain in `review_evidence/test-maintenance-20261104/`. The first complete post-repair run passed 2,810 tests with one newly exposed test bug: the report numeric-validity regex matched `undefined` inside a filename on the labelled source-provenance line. The check now applies to the report body, with provenance output and all metric assertions retained; both focused report tests pass. That failed full attempt is retained as `full-suite-final.txt`.
+
+The final complete four-worker run (`full-suite-confirmed.txt`) passes all **477 files: 2,811 tests passed, zero unexpected failures, two expected failures**, in **790.58 seconds**, exit 0. `npm run build` (typecheck plus Vite build) also exits 0. All 1,726 normalized source/test manifest entries are unchanged during the run, and production source/scripts/dependencies have no diff from measured main `56b034ed`. The scoped verification verdict is **TURN_INTEGRATION_VERIFIED** for test maintenance, not a claim that the known limitations below or wider survival acceptance are resolved. `verification.json` retains the command/run metadata and audit.
+
+Two pre-existing expected-failure checks remain visible: competing plans' claims on carried materials and format-4 column-packing fallback. They are not silently removed. The housing diagnostic additionally observed an interim rest at the home target with zero shelter cover before later covered sleep; this test repair establishes the claimed sleep chain, not the correctness of every shelter-choice scenario.

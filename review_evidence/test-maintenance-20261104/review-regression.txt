@@ -1,0 +1,65 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/zz_review_b_observer_purity.test.ts > REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin 19858ms
+ ✓ tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh river, Normal, 10 days, save+load every 1200 ticks 26189ms
+ ✓ tests/zz_review_g_feed_caps.test.ts > feed/chronicle/log reach after two river days (immigration on, as the product world runs) 7726ms
+ ✓ tests/zz_review_g_ledger_endings.test.ts > natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close 2302ms
+ ✓ tests/zz_review_g_ledger_endings.test.ts > the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it 335ms
+ ✓ tests/home_replacement.test.ts > an unseen collapse does not teach a household member that another home is needed 36ms
+ ✓ tests/home_replacement.test.ts > actual local observation of the missing home opens the existing replacement layout 5ms
+ ✓ tests/home_replacement.test.ts > rules 107 and the isolated removal retain the former live-home decision 5ms
+ ✓ tests/home_replacement.test.ts > a personally told home is enough to withhold replacement; its remembered location is retained 3ms
+ ✓ tests/home_replacement.test.ts > unknown physical housing does not suppress a personal offer but rejects its actual duplicate layout without teaching a location 3ms
+ ✓ tests/home_replacement.test.ts > the completion boundary rejects a home allocated while this layout was under way 28ms
+ ✓ tests/home_replacement.test.ts > a lean-to still permits a paid hut and explicit in-place upgrades retain their existing checks 4ms
+ × tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation 68ms
+   → actual value must be number or bigint, received "undefined"
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural river, Normal, 8 days, save+load every 1200 ticks 42749ms
+ ✓ tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > river: byte-identical continuation after loading at 600/3000/6000 12696ms
+ ✓ tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh forest, Normal, 10 days, save+load every 1200 ticks 23963ms
+ ✓ tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > meadow: byte-identical continuation after loading at 600/3000/6000 11417ms
+ ✓ tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > forest: byte-identical continuation after loading at 600/3000/6000 10912ms
+ ✓ tests/zz_review_g_stale_blocked.test.ts > a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk 13ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural meadow, Normal, 8 days, save+load every 1200 ticks 31919ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural forest, Normal, 8 days, save+load every 1200 ticks 30704ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene meal at rules 115, 3 days, save+load every 600 ticks 420ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene haul at rules 115, 3 days, save+load every 600 ticks 242ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene care at rules 115, 3 days, save+load every 600 ticks 360ms
+ ✓ tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene workshop at rules 115, 3 days, save+load every 600 ticks 454ms
+ ✓ tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > meadow, Normal, 16 days through winter, save+load every 1200 ticks 76916ms
+ ✓ tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical 130987ms
+ ✓ tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical 59484ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ tests/home_replacement.test.ts:72:35
+     70|  expect(paid).toBe(true);
+     71|  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','…
+     72|  expect(f.w.ledger.consumed.wood).toBeGreaterThan(0);
+       |                                   ^
+     73|  expect(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&s.used.wood!>0))…
+     74|  delete f.w.hooks;const saved=serializeWorld(f.w),twin=deserializeWorl…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  1 failed | 27 passed (28)
+   Start at  19:32:35
+   Duration  192.06s (tests 99%, transform 1%)
+

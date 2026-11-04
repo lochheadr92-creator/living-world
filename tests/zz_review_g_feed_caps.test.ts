@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW G (observer truth audit): how far back the feed, the chronicle and a person's own log reach after two days.
 import { expect, it } from 'vitest';
 import { writeFileSync } from 'node:fs';
@@ -5,7 +6,7 @@ import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
 
-const OUT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_g/feed_caps.txt';
+const OUT = reviewReportPath('feed_caps.txt');
 
 it('feed/chronicle/log reach after two river days (immigration on, as the product world runs)', () => {
   const w = createWorld(currentWorldSettings('normal', 'river'));

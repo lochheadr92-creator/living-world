@@ -10,6 +10,7 @@ import {observedReplacementScene} from './helpers/home_replacement';
 import {destroyBuilding} from '../src/sim/buildings';
 import {refreshBeliefs} from '../src/sim/perception';
 import {shelterAt} from '../src/sim/needs';
+import {DAY} from '../src/sim/constants';
 afterEach(()=>setConstructionFinish(true));
 const offer=(f:ReturnType<typeof constructionFinishScene>)=>generateOptions(f.w,f.p,true,true).options.find(o=>o.key===`build:${f.target.id}`);
 it('known fully supplied unfinished work remains offered inside the last two percent',()=>{
@@ -53,7 +54,9 @@ it('the retained valid collapse fixture now completes its paid replacement and s
  expect(f.hh.homeId).not.toBe(0);expect(f.p.stats.built).toBe(1);expect(f.w.ledger.consumed.wood).toBe(4);
  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','haul','build']));
  delete f.w.hooks;const twin=deserializeWorld(serializeWorld(f.w));
- for(let n=0;n<1000&&!(f.p.activity?.kind==='sleep'&&f.p.activity.phase==='work');n++){stepWorld(f.w);stepWorld(twin);}
+ // Allow the next daily sleep cycle; a rest at the home is not yet sleeping there.
+ for(let n=0;n<DAY&&!(f.p.activity?.kind==='sleep'&&f.p.activity.phase==='work');n++){stepWorld(f.w);stepWorld(twin);}
+ expect(f.p.activity).toMatchObject({kind:'sleep',phase:'work',targetId:f.hh.homeId});
  expect(f.p.activity?.targetId).toBe(f.hh.homeId);expect(shelterAt(f.w,f.p.x,f.p.y,f.p).cover).toBeGreaterThan(0);
  const energy=f.p.needs.energy;for(let n=0;n<30;n++){stepWorld(f.w);stepWorld(twin);}expect(f.p.needs.energy).toBeGreaterThan(energy);
  expect(serializeWorld(f.w)).toBe(serializeWorld(twin));expect(conservationReport(f.w).ok).toBe(true);

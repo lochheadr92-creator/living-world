@@ -51,7 +51,9 @@ it('keeps trust choice, observation and the ordinary request/craft execution acr
   const observations: ReturnType<typeof observationFromPrompt>[] = [];
   const model = stubModel('offered-project-help', req => {
     const o = observationFromPrompt(req.user)!; observations.push(o);
-    const a = o.options.find(a => a.kind === 'eat') ?? o.options.find(a => a.label === 'Ask Cora for stone') ?? o.options.find(a => a.kind === 'craft' && /axe/i.test(a.label)) ?? o.options[0];
+    // Respect the conversation cooldown and eat from the actual home store before asking.
+    // The fallback must not select an unrelated construction project while Cora is unavailable.
+    const a = o.options.find(a => a.kind === 'eat' || a.kind === 'eat_store') ?? o.options.find(a => a.label === 'Ask Cora for stone' && a.key.endsWith(':plan:stone')) ?? o.options.find(a => a.kind === 'craft' && /axe/i.test(a.label)) ?? o.options.find(a => a.kind === 'wander') ?? o.options[0];
     return JSON.stringify({ choose: a.key, why: 'Eat if needed, then ask the offered helper for my axe material and make it.' });
   });
   const result = await runLive(deserializeWorld(start), f.ada.id, model, { until: f.w.tick + 1200 });

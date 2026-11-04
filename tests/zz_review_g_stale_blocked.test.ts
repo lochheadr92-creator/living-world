@@ -1,3 +1,4 @@
+import { reviewReportPath } from './helpers/review_report';
 // REVIEW G (observer truth audit): Activity.blocked text set by a blocked indoor exit is never cleared once the exit
 // succeeds, so the card says "What is stopping them? Home exit is blocked." while they are walking outside.
 import { expect, it } from 'vitest';
@@ -9,7 +10,7 @@ import { hasHabitation } from '../src/sim/habitation';
 import { isWalkable } from '../src/sim/registry';
 import { addPerson, building, done, stage } from './helpers/kit';
 
-const OUT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_g/stale_blocked.txt';
+const OUT = reviewReportPath('stale_blocked.txt');
 
 it('a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk', () => {
   const s = stage('stale-blocked');

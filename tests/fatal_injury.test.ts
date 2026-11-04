@@ -6,12 +6,13 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { parseIntervention } from '../scripts/lab/lab';
-import { newActivity, startActivity } from '../src/sim/activities';
+import { newActivity, startActivity, stepActivity } from '../src/sim/activities';
 import { createBuilding } from '../src/sim/buildings';
 import { defendsWolves } from '../src/sim/defence';
 import { claimUnits } from '../src/sim/economy';
 import { doorPoint, enterHome, hasHabitation, occupants } from '../src/sim/habitation';
 import { setFatalHold } from '../src/sim/lifecycle';
+import { hasNourishment } from '../src/sim/nourishment';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { preparesFood } from '../src/sim/provision';
 import { RNG } from '../src/sim/rng';
@@ -31,9 +32,9 @@ function worldAt(seed: string, rulesVersion?: number): World {
 }
 
 /** Ada outdoors, fed and warm, with a wolf already in bite range. Staged. */
-function biteScene(rulesVersion?: number) {
+function biteScene(rulesVersion?: number, fed = true) {
   const w = worldAt('fatal-bite', rulesVersion);
-  const p = testKit.addPerson(w, new RNG(71), { name: 'Ada', x: 40.5, y: 40.5, age: 25, hunger: 92, thirst: 92, energy: 92 });
+  const p = testKit.addPerson(w, new RNG(71), { name: 'Ada', x: 40.5, y: 40.5, age: 25, hunger: 92, thirst: 92, energy: 92, inv: { berries: 1 } });
   testKit.finish(w, 'natural');
   w.tick = 1000;
   p.needs.hunger = 92;
@@ -43,6 +44,15 @@ function biteScene(rulesVersion?: number) {
   p.immuneUntil = 1e9;
   p.pose = 'stand';
   p.activity = null;
+  // Current rules require a real consumed portion to pay for recovery; satiety alone is not nutrition.
+  if (fed && hasNourishment(w)) {
+    startActivity(w, p, newActivity(w, p, { kind: 'eat', label: 'Eat before the staged bite', goal: 'eat', here: true, data: { limit: { portions: 1 } } }));
+    for (let n = 0; n < 100 && p.activity; n++) { w.tick++; stepActivity(w, p); }
+    expect(w.ledger.consumed.berries).toBe(1);
+    expect(p.nourishment).toBeGreaterThan(0);
+    expect(p.activity).toBeNull();
+    p.pose = 'stand';
+  }
   const wolf = makeWolf(w, 40.8, 40.5);
   wolf.state = 'stalk';
   wolf.targetId = p.id;
@@ -88,6 +98,19 @@ describe('a fatal bite is death, not a wound that passive recovery undoes', () =
     expect(p.health).toBeGreaterThan(40 - 15);
     expect(p.health - Math.floor(p.health)).toBeCloseTo(0.009, 5);
   });
+});
+
+it('uneaten carried food cannot pay to revive a fatal bite when the hold is removed', () => {
+  const restore = parseIntervention('rich-no-fatal-hold').install!();
+  try {
+    const { w, p } = biteScene(undefined, false);
+    expect(p.inv.berries).toBe(1);
+    expect(p.nourishment).toBe(0);
+    p.health = 1;
+    stepWorld(w);
+    expect(p.alive).toBe(false);
+    expect(deathsOf(w, 'Ada')).toEqual([expect.objectContaining({ cause: 'wolf attack' })]);
+  } finally { restore(); }
 });
 
 describe('death from a fatal injury happens once', () => {

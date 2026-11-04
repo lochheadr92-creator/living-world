@@ -34,7 +34,12 @@ it('pairs only matching seeds, preserves contrast direction, and skips unrecorde
   expect(out).toMatch(/people\s+15\.0\s+10\.0\s+\+5\.0/);
   expect(out).toMatch(/people\s+10\.0\s+15\.0\s+-5\.0/);
   expect(out).toContain('not recorded by this run');
-  expect(out).not.toMatch(/NaN|undefined/);
+  // Source provenance can contain filenames such as undefined_keyorder.test.ts.
+  // Check reported results separately from that explicitly labelled metadata.
+  const reportBody = out.split('\n')
+    .filter((line) => !line.startsWith('Report-generation provenance (not measurement source): '))
+    .join('\n');
+  expect(reportBody).not.toMatch(/NaN|undefined/);
 }, 30000);
 
 it('reports an unavailable contrast without inventing a result and keeps story output', () => {

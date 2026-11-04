@@ -1,4 +1,5 @@
-// REVIEW B (read-only audit): validators against harsher engine-produced rules-115 worlds (deaths, winter, estates).
+import { reviewReportPath } from './helpers/review_report';
+// REVIEW B (read-only audit): validators against harsher engine-produced current-rules worlds (deaths, winter, estates).
 import { describe, expect, it } from 'vitest';
 import { appendFileSync } from 'node:fs';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
@@ -6,7 +7,7 @@ import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
-const REPORT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_b/validators_harsh_report.txt';
+const REPORT = reviewReportPath('validators_harsh_report.txt');
 
 function soak(w: World, days: number, every: number, label: string): string[] {
   const lines: string[] = [];
