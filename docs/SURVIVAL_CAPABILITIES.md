@@ -1089,3 +1089,10 @@ capability work without a new owner request.
 The combined delivery checkout passes `npm run build` (TypeScript plus Vite);
 log `resume-20261104/publication-build-isolated.log`. This tracked-checkout
 verification excludes the unrelated untracked review files in main.
+
+The pushed delivery branch was fast-forwarded into main. Final merged-main
+focused verification passes5tests in2files (5.74s), including immutable133.
+Main `npm run typecheck` exits2 with only the two existing nullable errors in
+untracked `zz_review_f_plank_diversion.test.ts` and
+`zz_review_main_mature_large.test.ts`. Logs are retained as
+`publication-main-focused.log` and `publication-main-typecheck.log`.

@@ -1,3 +1,19 @@
+# Stopped and integrated — rules133 on main
+
+Owner requested stop after the current section, commit/push the survival work,
+and merge it to main. The delivery branch has been pushed successfully and
+fast-forwarded into main. All survival-task code, scripts, tests, docs, raw
+results and execution logs are committed; older unrelated artifacts and retired
+branches remain preserved. Check live Git for the final publication SHA.
+
+Final merged-main focused verification:5tests in2files PASS (5.74s), including
+exact rules133 continuation. Main typecheck exits2 solely on the two existing
+nullable errors in untracked zz_review_f_plank_diversion and
+zz_review_main_mature_large. Combined tracked delivery build PASS. The unfinished
+full132regression was interrupted at the owner's stop boundary, not passed.
+No capability work or long-run measurements remain running. Do not resume the
+remaining programme without a new owner request. Detailed results/gaps follow.
+
 # Delivery checkpoint — rules133; stopped at owner request
 
 All survival-task source, tests, diagnostic scripts, documentation and retained
