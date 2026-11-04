@@ -16,6 +16,7 @@ export function validateFinalAccounts(w:World):void{
  const text=(s:unknown)=>typeof s==='string'&&s.length<=500;
  if(!hasFinalAccounts(w)||!a.needs||!a.pack||!['hunger','thirst','energy','warmth','safety','social'].every(k=>Number.isFinite(a.needs[k as keyof Needs]))||![a.doing,a.why,a.attempt].every(text)||!Array.isArray(a.blocked)||a.blocked.length>3||!a.blocked.every(text)||!Array.isArray(a.memories)||a.memories.length>3||!a.memories.every(text))throw Error('Invalid final account');
  for(const [k,v] of Object.entries(a.pack))if(!(ALL_ITEMS as readonly string[]).includes(k)||!Number.isFinite(v)||v<0)throw Error('Invalid final account pack');
- const b=a.water;if(b&&(!Number.isFinite(b.x)||!Number.isFinite(b.y)||b.x<0||b.y<0||b.x>=w.W||b.y>=w.H||!Number.isFinite(b.distance)||b.distance<0||!Number.isSafeInteger(b.seen)||b.seen<0||b.seen>d.tick))throw Error('Invalid final account water');
+ // A founder's water memory can predate the world (worldgen.ts dates pre-start knowledge before tick 0).
+ const b=a.water;if(b&&(!Number.isFinite(b.x)||!Number.isFinite(b.y)||b.x<0||b.y<0||b.x>=w.W||b.y>=w.H||!Number.isFinite(b.distance)||b.distance<0||!Number.isSafeInteger(b.seen)||b.seen>d.tick))throw Error('Invalid final account water');
  }if(n>40)throw Error('Too many final accounts');
 }

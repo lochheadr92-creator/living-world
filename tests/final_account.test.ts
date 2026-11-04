@@ -10,5 +10,12 @@ it('captures the actual final task and belongings before cleanup; observers do n
 it('retains only forty details, keeping older identities and causes truthful',()=>{const f=fixture();for(let i=0;i<41;i++){const p=addPerson(f,'Person '+i,20+i%15,30+Math.floor(i/15));killPerson(f.w,p,'old age');}expect(f.w.deceased.filter(d=>d.last)).toHaveLength(40);expect(f.w.deceased[0].last).toBeUndefined();expect(f.w.deceased[0].cause).toBe('old age');expect(describeEntity(f.w,f.w.graves[0].id)!.notes.join(' ')).toContain('No detailed final account');});
 it('keeps predecessor deaths unchanged and rejects malformed snapshot records',()=>{const old=fixture(143);killPerson(old.w,old.p,'thirst');expect(old.w.deceased[0].last).toBeUndefined();const f=fixture();killPerson(f.w,f.p,'thirst');f.w.deceased[0].last!.needs.thirst=NaN;expect(()=>deserializeWorld(serializeWorld(f.w))).toThrow('Invalid final account');});
 
+it('saves and reloads a final account whose remembered water predates the world, and rejects a future sighting',()=>{
+ // Ordinary origin: forest at rules 156, Nico (a founder) died at tick 54,675 nearest a worldgen water memory seen at -50.
+ const f=fixture();f.p.beliefs[9001]={id:9001,kind:'water',x:41.5,y:40.5,amount:0,max:0,seen:-50,src:'seen',from:0,learned:-50};
+ killPerson(f.w,f.p,'thirst');expect(f.w.deceased[0].last?.water?.seen).toBe(-50);
+ const raw=serializeWorld(f.w);expect(serializeWorld(deserializeWorld(raw))).toBe(raw);
+ f.w.deceased[0].last!.water!.seen=f.w.deceased[0].tick+1;expect(()=>deserializeWorld(serializeWorld(f.w))).toThrow('Invalid final account water');
+});
 import {sharedFixture} from './helpers/shared_projects';
 it('labels a new shared layout for shared use instead of claiming private ownership',()=>{const f=sharedFixture(true,144);expect(f.w.events.some(e=>e.text.includes('marked out a grain mill for shared use'))).toBe(true);});
