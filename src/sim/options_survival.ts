@@ -28,6 +28,7 @@ import { hasWinterReserve } from './provision';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
 import { delBelief, estimatedAmount, recentFailure } from './knowledge';
+import { hearsayTripCosts } from './teller_confidence';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import {runsPreservation} from './preservation';
 import { hashUnit } from './rng';
@@ -193,7 +194,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       if (s.act === 'gather' && hyp(s.x - b.x, s.y - b.y) < 3.5) crowd++;
     }
     const yieldF = Math.min(1, 0.45 + 0.18 * Math.min(u.est, 4));
-    const score = o.urgency * 0.85 * yieldF + 3 * (val / 28) - pen(e) - 26 * dng * tm.caution - Math.max(0, crowd - 1) * 5 - 0.5 * Math.max(0, 3 - u.est) * 2 - rememberedConditionCost(world, b);
+    const hearsay = hearsayTripCosts(world, p, b).reduce((n, [, v]) => n + v, 0);
+    const score = o.urgency * 0.85 * yieldF + 3 * (val / 28) - pen(e) - 26 * dng * tm.caution - Math.max(0, crowd - 1) * 5 - 0.5 * Math.max(0, 3 - u.est) * 2 - rememberedConditionCost(world, b) + hearsay;
     cands.push({ b, est: u.est, e, val, score });
   }
   cands.sort((a, b) => b.score - a.score);
@@ -212,6 +214,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     sc.add('walking', -pen(c.e));
     const conditionCost = rememberedConditionCost(world, b);
     if (conditionCost) sc.add(`remembered ${b.ecology} patch (observed at tick ${b.seen})`, -conditionCost);
+    // rules 154 (teller_confidence.ts): a doubted teller's word, or old hearsay, is weighed as such
+    for (const [why, v] of hearsayTripCosts(world, p, b)) sc.add(why, v);
     const skill = p.skills[type === 'fish_spot' ? 'fish' : 'forage'];
     sc.add('good at it', (skill - 1) * 5);
     const pay = payNudge(world, p, type,b.id);

@@ -2,6 +2,7 @@ import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
+import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
 import { BELIEF_NOUN } from './labels';
 import { isFacilityType } from './recipes';
@@ -58,6 +59,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     let score = wgt * (0.6 + fresh) + (dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;
     if (isFood && !depletedNews && estimatedAmount(world, b) < 2) score -= 2.5;
     if (depletedNews) score += 2.2;
+    score -= hearsayNewsCost(world, S, b); // rules 154: slower to pass on a place from a teller they have caught out
     if (hyp(b.x - L.x, b.y - L.y) < 6) score -= 3; // they can see it for themselves
     if (score > 1.2) scored.push({ b, score });
   }
