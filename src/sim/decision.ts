@@ -125,8 +125,27 @@ export function rankOptions(ctx: Ctx): Option[] {
     // the plan's nudge and the trade's are both bounded and both off when the lab is choosing at random
     s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
   }));
+  // Compare the same legal choices, plans and learned preferences without mood. Clone options
+  // because preference explanations belong to the actual ranking, not this counterfactual.
+  const neutral = chooser !== 'random' && moody && runsRulesVersion(world, 145)
+    && scored.some(x => (x.o.kind === 'rest' || x.o.kind === 'wander') && moodWeight(p, x.o.kind) > 1)
+    ? scored.map(x => ({ o: { ...x.o }, s: x.s - x.o.util * moodWeight(p, x.o.kind) + x.o.util })) : null;
+  if (neutral) {
+    tiltWorkChoices(world, p, neutral);
+    tiltRoutineChoices(ctx, neutral);
+  }
   if (chooser !== 'random') tiltWorkChoices(world, p, scored);
   if (chooser !== 'random') tiltRoutineChoices(ctx,scored);
+  if (neutral) {
+    const baseline = new Map(neutral.map(x => [x.o.key, x.s]));
+    const survival = scored.filter(x => x.o.need !== null && x.o.need !== 'social' && x.o.kind !== 'rest' && x.o.kind !== 'wander');
+    for (const idle of scored) {
+      if ((idle.o.kind !== 'rest' && idle.o.kind !== 'wander') || moodWeight(p, idle.o.kind) <= 1) continue;
+      for (const need of survival) {
+        if (baseline.get(need.o.key)! > baseline.get(idle.o.key)! && idle.s >= need.s) idle.s = need.s - 1e-6;
+      }
+    }
+  }
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }
