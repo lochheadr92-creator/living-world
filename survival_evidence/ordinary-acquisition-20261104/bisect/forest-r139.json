@@ -1,0 +1,219 @@
+{
+ "seed": "forest",
+ "rules": 139,
+ "settingsRules": 139,
+ "siteAt": null,
+ "builtAt": null,
+ "days": [
+  {
+   "day": 1,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 8
+   },
+   "sites": {
+    "cellar": 4
+   }
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 8
+   },
+   "sites": {
+    "cellar": 4
+   }
+  },
+  {
+   "day": 3,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 8,
+    "cellar": 1
+   },
+   "sites": {
+    "cellar": 3,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 4,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 9,
+    "cellar": 2
+   },
+   "sites": {
+    "cellar": 3,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 5,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 9,
+    "cellar": 3
+   },
+   "sites": {
+    "cellar": 2,
+    "lean_to": 2
+   }
+  },
+  {
+   "day": 6,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 9,
+    "cellar": 4
+   },
+   "sites": {
+    "cellar": 1,
+    "lean_to": 3
+   }
+  },
+  {
+   "day": 7,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5
+   },
+   "sites": {
+    "lean_to": 1,
+    "hut": 1,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 8,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5,
+    "hut": 1
+   },
+   "sites": {
+    "lean_to": 1,
+    "cellar": 1,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 9,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5,
+    "hut": 1
+   },
+   "sites": {
+    "lean_to": 1,
+    "cellar": 1,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 10,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5,
+    "hut": 1
+   },
+   "sites": {
+    "lean_to": 1,
+    "cellar": 1,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 11,
+   "alive": 27,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5,
+    "hut": 1
+   },
+   "sites": {
+    "lean_to": 1,
+    "cellar": 1,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 12,
+   "alive": 27,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "cellar": 5,
+    "hut": 1
+   },
+   "sites": {
+    "cellar": 1,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 13,
+   "alive": 26,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "cellar": 5,
+    "hut": 2
+   },
+   "sites": {
+    "cellar": 1,
+    "well": 1
+   }
+  },
+  {
+   "day": 14,
+   "alive": 26,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "cellar": 5,
+    "hut": 2
+   },
+   "sites": {
+    "cellar": 2,
+    "well": 1,
+    "hut": 1
+   }
+  },
+  {
+   "day": 15,
+   "alive": 26,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 10,
+    "cellar": 5,
+    "hut": 3,
+    "well": 1
+   },
+   "sites": {
+    "cellar": 2
+   }
+  }
+ ]
+}

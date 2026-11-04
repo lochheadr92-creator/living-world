@@ -55,6 +55,8 @@ The staged browser page constructs the cellar with paid materials, deposits six 
 
 Evidence is under `review_evidence/retired-recovery-20261104/`. Initial `cellars-{seed}.jsonl` runs precede the reserve-planning connection and are retained as prototype evidence. Final `cellars-{seed}-final.jsonl` files carry a source hash. A prematurely concurrent test invocation could not import the not-yet-written rules-135 reference; its log is retained, and the test is rerun only after recording finishes.
 
+**Rules 152 correction:** the rules-135 cellar outranked a lean-to household's hut and occupied its single site slot, so later ordinary worlds kept few huts and planned no timber yard. From rules 152 cellar demand waits for a known standing hut or house; earlier rules are unchanged. See `survival_evidence/ordinary-acquisition-20261104/README.md`.
+
 Final R2: the 12 focused cellar contracts and immutable rules-135 continuation pass (13 tests). Arrivals-on, 25-day final forest: six cellars, 24 units deposited, 15 units collected for meals, five alive. River: seven cellars, 82 units deposited, 54 units collected for meals, 27 alive. Every daily conservation check passed. Meal collection is a transfer count, not an assertion that every transferred unit was eaten. These observations establish bounded ordinary use, not improved survival or mature-world reliability.
 
 ## R3 design

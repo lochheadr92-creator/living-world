@@ -1,0 +1,1258 @@
+[
+ {
+  "variant": "no-well",
+  "version": 151,
+  "exactTwin": true,
+  "created": {
+   "meat": 4,
+   "hide": 1,
+   "fat": 1,
+   "rendered_fat": 1
+  },
+  "consumed": {
+   "wood": 1,
+   "fat": 1,
+   "rendered_fat": 1,
+   "berries": 2,
+   "water": 3,
+   "meat": 2
+  },
+  "conserved": true,
+  "finalInv": {
+   "berries": 1,
+   "hide": 1
+  },
+  "rack": {
+   "wood": 1,
+   "meat": 1
+  },
+  "alive": true,
+  "events": [
+   [
+    0,
+    "start",
+    "flee",
+    5,
+    "",
+    "danger close +127"
+   ],
+   [
+    16,
+    "end",
+    "flee",
+    "success",
+    "done"
+   ],
+   [
+    17,
+    "start",
+    "butcher",
+    7,
+    "fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: acquire fat for rendered_fat "
+   ],
+   [
+    165,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    166,
+    "start",
+    "deposit",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: bring fat to the workshop for"
+   ],
+   [
+    198,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    199,
+    "start",
+    "operate",
+    4,
+    "render_fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: work on rendered_fat for rend"
+   ],
+   [
+    258,
+    "end",
+    "operate",
+    "success",
+    "done"
+   ],
+   [
+    259,
+    "start",
+    "butcher",
+    7,
+    "hide",
+    "known recoverable body part +24 · walking −1"
+   ],
+   [
+    401,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    402,
+    "start",
+    "withdraw",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: collect rendered_fat for rend"
+   ],
+   [
+    446,
+    "end",
+    "withdraw",
+    "success",
+    "done"
+   ],
+   [
+    447,
+    "start",
+    "butcher",
+    7,
+    "meat",
+    "needed for keep spare food for later meals (dried meat) +23 · walking −1"
+   ],
+   [
+    710,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    711,
+    "start",
+    "deposit",
+    4,
+    "",
+    "keep spare food for later meals (dried meat) +25 · walking −1"
+   ],
+   [
+    744,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    745,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite "
+   ],
+   [
+    859,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    860,
+    "start",
+    "eat",
+    0,
+    "",
+    "food in pack +4 · hungry +4"
+   ],
+   [
+    889,
+    "end",
+    "eat",
+    "success",
+    "done"
+   ],
+   [
+    890,
+    "start",
+    "butcher",
+    7,
+    "meat",
+    "known recoverable body part +24 · walking −2"
+   ],
+   [
+    1056,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    1057,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +41 · walking −8 · daylight to spare +2"
+   ],
+   [
+    1220,
+    "end",
+    "explore",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    1220,
+    "start",
+    "sleep",
+    5,
+    "",
+    "bedtime +55 · walking −13"
+   ],
+   [
+    1866,
+    "end",
+    "sleep",
+    "success",
+    "rested"
+   ],
+   [
+    1867,
+    "start",
+    "butcher",
+    7,
+    "meat",
+    "known recoverable body part +24 · walking −1"
+   ],
+   [
+    2017,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    2018,
+    "start",
+    "sleep",
+    5,
+    "",
+    "bedtime +41 · walking −3"
+   ],
+   [
+    2130,
+    "end",
+    "sleep",
+    "success",
+    "rested"
+   ],
+   [
+    2131,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +1 · a favourite "
+   ],
+   [
+    2185,
+    "end",
+    "wander",
+    "interrupted",
+    "a more urgent need (thirst)"
+   ],
+   [
+    2185,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +61 · walking −8 · critical thirst after dark +2"
+   ],
+   [
+    2346,
+    "end",
+    "explore",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    2346,
+    "start",
+    "drink",
+    1000070,
+    "",
+    "thirsty +92 · walking −5"
+   ],
+   [
+    2429,
+    "end",
+    "drink",
+    "success",
+    "done"
+   ],
+   [
+    2430,
+    "start",
+    "eat",
+    0,
+    "",
+    "hungry +15 · food in pack +4"
+   ],
+   [
+    2449,
+    "end",
+    "eat",
+    "success",
+    "done"
+   ],
+   [
+    2450,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · been here lately −1 · a favourite spot +1"
+   ],
+   [
+    2691,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    2692,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · a change of scene +2 · the walk −2"
+   ],
+   [
+    2821,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    2822,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · been here lately −2 · a favourite spot +1 · spare time stays a fallb"
+   ],
+   [
+    2869,
+    "end",
+    "wander",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    2869,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +30 · walking −9 · daylight to spare +2"
+   ],
+   [
+    3108,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    3109,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · been here lately −1 · a favourite spot +1"
+   ],
+   [
+    3355,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    3356,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · been here lately −2 · spare time stays a fallback +1 · a favourite s"
+   ],
+   [
+    3449,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    3450,
+    "start",
+    "sleep",
+    5,
+    "",
+    "tired +11 · walking −2"
+   ]
+  ]
+ },
+ {
+  "variant": "well",
+  "version": 151,
+  "exactTwin": true,
+  "created": {
+   "meat": 4,
+   "hide": 1,
+   "fat": 1,
+   "rendered_fat": 1
+  },
+  "consumed": {
+   "wood": 1,
+   "fat": 1,
+   "rendered_fat": 1,
+   "berries": 2,
+   "meat": 2
+  },
+  "conserved": true,
+  "finalInv": {
+   "berries": 1,
+   "hide": 1
+  },
+  "rack": {
+   "wood": 1,
+   "meat": 1
+  },
+  "alive": true,
+  "events": [
+   [
+    0,
+    "start",
+    "flee",
+    5,
+    "",
+    "danger close +127"
+   ],
+   [
+    16,
+    "end",
+    "flee",
+    "success",
+    "done"
+   ],
+   [
+    17,
+    "start",
+    "butcher",
+    8,
+    "fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: acquire fat for rendered_fat "
+   ],
+   [
+    165,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    166,
+    "start",
+    "deposit",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: bring fat to the workshop for"
+   ],
+   [
+    198,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    199,
+    "start",
+    "operate",
+    4,
+    "render_fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: work on rendered_fat for rend"
+   ],
+   [
+    258,
+    "end",
+    "operate",
+    "success",
+    "done"
+   ],
+   [
+    259,
+    "start",
+    "butcher",
+    8,
+    "hide",
+    "known recoverable body part +24 · walking −1"
+   ],
+   [
+    401,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    402,
+    "start",
+    "withdraw",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: collect rendered_fat for rend"
+   ],
+   [
+    446,
+    "end",
+    "withdraw",
+    "success",
+    "done"
+   ],
+   [
+    447,
+    "start",
+    "butcher",
+    8,
+    "meat",
+    "needed for keep spare food for later meals (dried meat) +23 · walking −1"
+   ],
+   [
+    710,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    711,
+    "start",
+    "deposit",
+    4,
+    "",
+    "keep spare food for later meals (dried meat) +25 · walking −1"
+   ],
+   [
+    744,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    745,
+    "start",
+    "wander",
+    0,
+    "",
+    "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite "
+   ],
+   [
+    859,
+    "end",
+    "wander",
+    "success",
+    "done"
+   ],
+   [
+    860,
+    "start",
+    "eat",
+    0,
+    "",
+    "food in pack +4 · hungry +4"
+   ],
+   [
+    889,
+    "end",
+    "eat",
+    "success",
+    "done"
+   ],
+   [
+    890,
+    "start",
+    "butcher",
+    8,
+    "meat",
+    "known recoverable body part +24 · walking −2"
+   ],
+   [
+    1056,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    1057,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +41 · walking −8 · daylight to spare +2"
+   ],
+   [
+    1220,
+    "end",
+    "explore",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    1220,
+    "start",
+    "sleep",
+    5,
+    "",
+    "bedtime +55 · walking −13"
+   ],
+   [
+    1866,
+    "end",
+    "sleep",
+    "success",
+    "rested"
+   ],
+   [
+    1867,
+    "start",
+    "rest",
+    5,
+    "",
+    "the night to get through +16 · my own place +6"
+   ],
+   [
+    1928,
+    "end",
+    "rest",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    1928,
+    "start",
+    "butcher",
+    8,
+    "meat",
+    "known recoverable body part +24 · walking −1"
+   ],
+   [
+    2078,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    2079,
+    "start",
+    "sleep",
+    5,
+    "",
+    "bedtime +40 · walking −3"
+   ],
+   [
+    2141,
+    "end",
+    "sleep",
+    "interrupted",
+    "a more urgent need (thirst)"
+   ],
+   [
+    2141,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +61 · walking −8 · critical thirst after dark +2"
+   ],
+   [
+    2329,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2330,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +64 · walking −5 · daylight to spare +2"
+   ],
+   [
+    2471,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2472,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +66 · walking −6 · daylight to spare +2"
+   ],
+   [
+    2630,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2631,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +66 · walking −6 · daylight to spare +2"
+   ],
+   [
+    2794,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2795,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +66 · walking −5 · daylight to spare +2"
+   ],
+   [
+    2933,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2934,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +66 · walking −8 · daylight to spare +2"
+   ],
+   [
+    3112,
+    "end",
+    "explore",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    3112,
+    "start",
+    "eat",
+    0,
+    "",
+    "hungry +62 · food in pack +4"
+   ],
+   [
+    3139,
+    "end",
+    "eat",
+    "interrupted",
+    "a more urgent need (thirst)"
+   ],
+   [
+    3139,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +66 · walking −9 · daylight to spare +2"
+   ],
+   [
+    3374,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    3375,
+    "start",
+    "explore",
+    0,
+    "",
+    "a step toward “be fed, watered and under shelter before dark”: drink before the night · cu"
+   ],
+   [
+    3525,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    3526,
+    "start",
+    "explore",
+    0,
+    "",
+    "a step toward “be fed, watered and under shelter before dark”: drink before the night · cu"
+   ]
+  ]
+ },
+ {
+  "variant": "near-water",
+  "version": 151,
+  "exactTwin": true,
+  "created": {
+   "meat": 4,
+   "hide": 1,
+   "fat": 1,
+   "rendered_fat": 1,
+   "dried_meat": 2
+  },
+  "consumed": {
+   "wood": 1,
+   "fat": 1,
+   "rendered_fat": 1,
+   "berries": 3,
+   "meat": 2,
+   "water": 4,
+   "dried_meat": 2
+  },
+  "conserved": true,
+  "finalInv": {
+   "hide": 1
+  },
+  "rack": {
+   "wood": 1
+  },
+  "alive": true,
+  "events": [
+   [
+    0,
+    "start",
+    "flee",
+    5,
+    "",
+    "danger close +127"
+   ],
+   [
+    16,
+    "end",
+    "flee",
+    "success",
+    "done"
+   ],
+   [
+    17,
+    "start",
+    "butcher",
+    7,
+    "fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: acquire fat for rendered_fat "
+   ],
+   [
+    165,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    166,
+    "start",
+    "deposit",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: bring fat to the workshop for"
+   ],
+   [
+    198,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    199,
+    "start",
+    "operate",
+    4,
+    "render_fat",
+    "a step toward “see 1 rendered_fat through at the food rack”: work on rendered_fat for rend"
+   ],
+   [
+    258,
+    "end",
+    "operate",
+    "success",
+    "done"
+   ],
+   [
+    259,
+    "start",
+    "butcher",
+    7,
+    "hide",
+    "known recoverable body part +24 · walking −1"
+   ],
+   [
+    402,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    403,
+    "start",
+    "withdraw",
+    4,
+    "",
+    "a step toward “see 1 rendered_fat through at the food rack”: collect rendered_fat for rend"
+   ],
+   [
+    446,
+    "end",
+    "withdraw",
+    "success",
+    "done"
+   ],
+   [
+    447,
+    "start",
+    "butcher",
+    7,
+    "meat",
+    "needed for keep spare food for later meals (dried meat) +23 · walking −1"
+   ],
+   [
+    711,
+    "end",
+    "butcher",
+    "success",
+    "done"
+   ],
+   [
+    712,
+    "start",
+    "deposit",
+    4,
+    "",
+    "keep spare food for later meals (dried meat) +25 · walking −1"
+   ],
+   [
+    746,
+    "end",
+    "deposit",
+    "success",
+    "done"
+   ],
+   [
+    747,
+    "start",
+    "operate",
+    4,
+    "dry_meat",
+    "keep spare food for later meals +26 · walking −1"
+   ],
+   [
+    806,
+    "end",
+    "operate",
+    "success",
+    "done"
+   ],
+   [
+    807,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +27 · walking −6 · daylight to spare +2"
+   ],
+   [
+    984,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    985,
+    "start",
+    "eat",
+    0,
+    "",
+    "hungry +12 · food in pack +4"
+   ],
+   [
+    1014,
+    "end",
+    "eat",
+    "success",
+    "done"
+   ],
+   [
+    1015,
+    "start",
+    "butcher",
+    7,
+    "meat",
+    "known recoverable body part +24 · walking −7"
+   ],
+   [
+    1239,
+    "end",
+    "butcher",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    1239,
+    "start",
+    "sleep",
+    5,
+    "",
+    "bedtime +63 · walking −3"
+   ],
+   [
+    1726,
+    "end",
+    "sleep",
+    "success",
+    "rested"
+   ],
+   [
+    1727,
+    "start",
+    "drink",
+    1000069,
+    "",
+    "a step toward “be fed, watered and under shelter before dark”: drink before the night · th"
+   ],
+   [
+    1838,
+    "end",
+    "drink",
+    "success",
+    "done"
+   ],
+   [
+    1839,
+    "start",
+    "sleep",
+    5,
+    "",
+    "a step toward “be fed, watered and under shelter before dark”: get to my hut · bedtime +39"
+   ],
+   [
+    2008,
+    "end",
+    "sleep",
+    "success",
+    "rested"
+   ],
+   [
+    2009,
+    "start",
+    "rest",
+    5,
+    "",
+    "a step toward “be fed, watered and under shelter before dark”: stay at my hut until it is "
+   ],
+   [
+    2280,
+    "end",
+    "rest",
+    "success",
+    "daylight arrived"
+   ],
+   [
+    2281,
+    "start",
+    "withdraw",
+    4,
+    "",
+    "a step toward “put 4 units of food by for the household”: collect 2 dried meat from the fo"
+   ],
+   [
+    2314,
+    "end",
+    "withdraw",
+    "success",
+    "done"
+   ],
+   [
+    2315,
+    "start",
+    "plan_site",
+    0,
+    "",
+    "building is my trade · our home needs indoor heat +30 · walking −2"
+   ],
+   [
+    2366,
+    "end",
+    "plan_site",
+    "success",
+    "done"
+   ],
+   [
+    2367,
+    "start",
+    "build",
+    32,
+    "",
+    "building is my trade · building work to do +38 · good builder −2 · walking −1"
+   ],
+   [
+    2461,
+    "end",
+    "build",
+    "partial",
+    "no materials to work with (1 wood, 2 stone)"
+   ],
+   [
+    2462,
+    "start",
+    "build",
+    32,
+    "",
+    "building is my trade · building work to do +38 · good builder −1 · walking −1"
+   ],
+   [
+    2542,
+    "end",
+    "build",
+    "partial",
+    "no materials to work with (1 wood, 2 stone)"
+   ],
+   [
+    2543,
+    "start",
+    "eat",
+    0,
+    "",
+    "hungry +24 · food in pack +4"
+   ],
+   [
+    2572,
+    "end",
+    "eat",
+    "success",
+    "done"
+   ],
+   [
+    2573,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +32 · walking −8 · daylight to spare +2"
+   ],
+   [
+    2790,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    2791,
+    "start",
+    "build",
+    32,
+    "",
+    "building is my trade · building work to do +38 · walking −17 · good builder −1"
+   ],
+   [
+    3018,
+    "end",
+    "build",
+    "interrupted",
+    "something better came up"
+   ],
+   [
+    3018,
+    "start",
+    "drink",
+    1000069,
+    "",
+    "thirsty +35 · walking −6"
+   ],
+   [
+    3112,
+    "end",
+    "drink",
+    "success",
+    "done"
+   ],
+   [
+    3113,
+    "start",
+    "build",
+    32,
+    "",
+    "building is my trade · building work to do +38 · walking −9 · good builder −1"
+   ],
+   [
+    3251,
+    "end",
+    "build",
+    "partial",
+    "no materials to work with (1 wood, 2 stone)"
+   ],
+   [
+    3252,
+    "start",
+    "explore",
+    0,
+    "",
+    "curiosity +32 · walking −7 · daylight to spare +2"
+   ],
+   [
+    3437,
+    "end",
+    "explore",
+    "success",
+    "done"
+   ],
+   [
+    3438,
+    "start",
+    "build",
+    32,
+    "",
+    "building is my trade · building work to do +38 · walking −13 · good builder −1"
+   ]
+  ]
+ }
+]

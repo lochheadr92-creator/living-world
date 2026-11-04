@@ -1,0 +1,435 @@
+{
+ "seed": "meadow",
+ "rules": 134,
+ "settingsRules": 134,
+ "siteAt": 19136,
+ "builtAt": 21959,
+ "days": [
+  {
+   "day": 1,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 8
+   },
+   "sites": {
+    "well": 1,
+    "lean_to": 3
+   }
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11
+   },
+   "sites": {
+    "well": 1,
+    "hut": 3
+   }
+  },
+  {
+   "day": 3,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1
+   },
+   "sites": {
+    "hut": 3,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 4,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 2
+   },
+   "sites": {
+    "hut": 4,
+    "storehouse": 1
+   }
+  },
+  {
+   "day": 5,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 4
+   },
+   "sites": {
+    "storehouse": 1,
+    "hut": 3
+   }
+  },
+  {
+   "day": 6,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 4
+   },
+   "sites": {
+    "storehouse": 1,
+    "hut": 2
+   }
+  },
+  {
+   "day": 7,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 4,
+    "storehouse": 1
+   },
+   "sites": {
+    "hut": 2
+   }
+  },
+  {
+   "day": 8,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 4,
+    "storehouse": 1
+   },
+   "sites": {
+    "hut": 3,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 9,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 4,
+    "storehouse": 1
+   },
+   "sites": {
+    "hut": 3,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 10,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "storehouse": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2
+   }
+  },
+  {
+   "day": 11,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "storehouse": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 1,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 12,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "storehouse": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 13,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "storehouse": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 14,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "storehouse": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 3,
+    "kiln": 1,
+    "granary": 1
+   }
+  },
+  {
+   "day": 15,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 6,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "granary": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 16,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1
+   },
+   "sites": {
+    "granary": 1,
+    "hut": 3,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 17,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1
+   },
+   "sites": {
+    "granary": 1,
+    "hut": 1,
+    "quarry": 1
+   }
+  },
+  {
+   "day": 18,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 3
+   }
+  },
+  {
+   "day": 19,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "lean_to": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 20,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 4,
+    "smithy": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 21,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 2,
+    "smithy": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 22,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 2,
+    "smithy": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 23,
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 24,
+   "alive": 32,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "hall": 1
+   }
+  },
+  {
+   "day": 25,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "granary": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "hall": 1,
+    "hut": 2
+   }
+  }
+ ]
+}

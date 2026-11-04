@@ -1,0 +1,408 @@
+{
+ "seed": "river",
+ "rules": 134,
+ "settingsRules": 134,
+ "siteAt": 16927,
+ "builtAt": 19471,
+ "days": [
+  {
+   "day": 1,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 9
+   },
+   "sites": {
+    "well": 1,
+    "lean_to": 3
+   }
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1
+   },
+   "sites": {
+    "well": 1,
+    "hut": 3
+   }
+  },
+  {
+   "day": 3,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2
+   },
+   "sites": {
+    "hut": 4
+   }
+  },
+  {
+   "day": 4,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 3
+   },
+   "sites": {
+    "hut": 3
+   }
+  },
+  {
+   "day": 5,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 4
+   },
+   "sites": {
+    "hut": 2
+   }
+  },
+  {
+   "day": 6,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 4
+   },
+   "sites": {
+    "hut": 3
+   }
+  },
+  {
+   "day": 7,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 4
+   },
+   "sites": {
+    "hut": 3
+   }
+  },
+  {
+   "day": 8,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 4
+   },
+   "sites": {
+    "hut": 4,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 9,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 5,
+    "timber_yard": 1,
+    "food_rack": 1
+   },
+   "sites": {
+    "hut": 5,
+    "quarry": 1
+   }
+  },
+  {
+   "day": 10,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 5,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1
+   },
+   "sites": {
+    "hut": 5
+   }
+  },
+  {
+   "day": 11,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 6,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1
+   },
+   "sites": {
+    "hut": 4
+   }
+  },
+  {
+   "day": 12,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 6,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1
+   },
+   "sites": {
+    "hut": 4
+   }
+  },
+  {
+   "day": 13,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 7,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1
+   },
+   "sites": {
+    "hut": 3,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 14,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 7,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1
+   },
+   "sites": {
+    "hut": 3,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 15,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 8,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 2
+   }
+  },
+  {
+   "day": 16,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 8,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 2,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 17,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 8,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 18,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 8,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 19,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 8,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 4,
+    "smithy": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 20,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 21,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 22,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 23,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 24,
+   "alive": 26,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 2
+   }
+  },
+  {
+   "day": 25,
+   "alive": 25,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 9,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "quarry": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 2
+   }
+  }
+ ]
+}

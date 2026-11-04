@@ -1,0 +1,430 @@
+{
+ "seed": "meadow",
+ "rules": 152,
+ "settingsRules": 152,
+ "siteAt": 17497,
+ "builtAt": 26535,
+ "days": [
+  {
+   "day": 1,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 8
+   },
+   "sites": {
+    "well": 1,
+    "lean_to": 2
+   }
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11
+   },
+   "sites": {
+    "well": 1,
+    "hut": 2
+   }
+  },
+  {
+   "day": 3,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1
+   },
+   "sites": {
+    "hut": 4
+   }
+  },
+  {
+   "day": 4,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 1
+   },
+   "sites": {
+    "hut": 3,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 5,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 1
+   },
+   "sites": {
+    "hut": 3,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 6,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 2
+   },
+   "sites": {
+    "hut": 2,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 7,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 3,
+    "cellar": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 8,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 3,
+    "cellar": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 9,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 3,
+    "cellar": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 10,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 4,
+    "cellar": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 11,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 4,
+    "cellar": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1,
+    "timber_yard": 1
+   }
+  },
+  {
+   "day": 12,
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 4,
+    "cellar": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2,
+    "lean_to": 1,
+    "cellar": 1
+   }
+  },
+  {
+   "day": 13,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 4,
+    "cellar": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2,
+    "cellar": 1,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 14,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 4,
+    "cellar": 1,
+    "timber_yard": 1
+   },
+   "sites": {
+    "hut": 2,
+    "cellar": 1,
+    "kiln": 1
+   }
+  },
+  {
+   "day": 15,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 5,
+    "cellar": 2,
+    "timber_yard": 1
+   },
+   "sites": {
+    "kiln": 1,
+    "hut": 2,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 16,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 5,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1
+   }
+  },
+  {
+   "day": 17,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 6,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "hut": 3,
+    "smithy": 1,
+    "lean_to": 1,
+    "house": 1,
+    "mine": 1
+   }
+  },
+  {
+   "day": 18,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "hut": 2,
+    "house": 1,
+    "mine": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 19,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "hut": 1,
+    "house": 1,
+    "lean_to": 1
+   }
+  },
+  {
+   "day": 20,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "hut": 2,
+    "house": 1
+   }
+  },
+  {
+   "day": 21,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "hut": 2,
+    "house": 1
+   }
+  },
+  {
+   "day": 22,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 8,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "house": 1,
+    "hut": 2
+   }
+  },
+  {
+   "day": 23,
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 8,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "house": 1,
+    "hut": 2
+   }
+  },
+  {
+   "day": 24,
+   "alive": 30,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 8,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1
+   },
+   "sites": {
+    "smithy": 1,
+    "house": 1,
+    "hut": 2
+   }
+  },
+  {
+   "day": 25,
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 8,
+    "cellar": 2,
+    "timber_yard": 1,
+    "kiln": 1,
+    "mine": 1,
+    "smithy": 1
+   },
+   "sites": {
+    "house": 1,
+    "hut": 2
+   }
+  }
+ ]
+}
