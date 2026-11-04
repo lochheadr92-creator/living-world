@@ -1,0 +1,21 @@
+{
+ "seed": "river",
+ "arm": "rich-no-confidence",
+ "applied": null,
+ "rules": 154,
+ "forkDay": 5,
+ "days": 20,
+ "tick": 60000,
+ "alive": 25,
+ "conserved": true,
+ "counts": {
+  "foodTrips": 1954,
+  "toldTrips": 129,
+  "doubtedTrips": 30,
+  "oldToldTrips": 121,
+  "wastedTold": 12,
+  "wastedDoubted": 6,
+  "wastedFirstHand": 190
+ },
+ "G": 0.6141248720573184
+}

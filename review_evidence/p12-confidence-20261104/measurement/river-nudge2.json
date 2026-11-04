@@ -1,0 +1,21 @@
+{
+ "seed": "river",
+ "arm": "nudge:2",
+ "applied": "2 draws",
+ "rules": 154,
+ "forkDay": 5,
+ "days": 20,
+ "tick": 60000,
+ "alive": 25,
+ "conserved": true,
+ "counts": {
+  "foodTrips": 1852,
+  "toldTrips": 46,
+  "doubtedTrips": 2,
+  "oldToldTrips": 40,
+  "wastedTold": 4,
+  "wastedDoubted": 0,
+  "wastedFirstHand": 199
+ },
+ "G": 0.2159827213822894
+}

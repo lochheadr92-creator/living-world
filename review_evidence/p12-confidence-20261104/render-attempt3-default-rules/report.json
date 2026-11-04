@@ -1,0 +1,11 @@
+{
+  "staged": true,
+  "checks": {
+    "gathering": false,
+    "visibleInPanel": false,
+    "pure": true,
+    "noExceptions": true
+  },
+  "why": "foraging is my trade · hungry +43 · walking −10 · well-liked food +1 · good at it +1",
+  "visible": false
+}

@@ -1,0 +1,11 @@
+{
+  "staged": true,
+  "checks": {
+    "gathering": true,
+    "visibleInPanel": true,
+    "pure": true,
+    "noExceptions": true
+  },
+  "why": "hungry +43 · walking −10 · won't go on Kai's word alone (1 of 3 accounts borne out) −7 · good at it −2",
+  "visible": true
+}
