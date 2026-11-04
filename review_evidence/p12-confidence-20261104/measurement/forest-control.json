@@ -1,0 +1,21 @@
+{
+ "seed": "forest",
+ "arm": "control",
+ "applied": null,
+ "rules": 154,
+ "forkDay": 5,
+ "days": 20,
+ "tick": 60000,
+ "alive": 7,
+ "conserved": true,
+ "counts": {
+  "foodTrips": 2654,
+  "toldTrips": 59,
+  "doubtedTrips": 5,
+  "oldToldTrips": 35,
+  "wastedTold": 12,
+  "wastedDoubted": 1,
+  "wastedFirstHand": 551
+ },
+ "G": 0.45214770158251694
+}
