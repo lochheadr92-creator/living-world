@@ -1,0 +1,1 @@
+{"cases":24,"people":28,"permutedFieldOrder":true,"optionalFieldShapes":true,"continuationTicksPerCase":120,"identical":true}

@@ -1,5 +1,6 @@
 // Where a save is kept: IndexedDB when there is one, localStorage when there is not or it fails; and what happens to a save made before.
 import 'fake-indexeddb/auto';
+import {gunzipSync} from 'node:zlib';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { loadGame, saveGame, savedGameInfo, hasSavedGame, serializeWorld } from '../src/app/save';
 import { nightAuditWorld } from '../scripts/fixtures/night_audit_world';
@@ -277,4 +278,20 @@ describe('when IndexedDB does not work', () => {
     expect(await loadGame(t)).toBe(false);
     expect(t.restored).toBeNull();
   });
+});
+
+
+it('the actual product save writes format 5 and restores heterogeneous person fields exactly', async () => {
+  const {world,settings}=ordinary('product-format-five',300);
+  const p=world.persons[0] as unknown as Record<string,unknown>,stamp=p.stampX;
+  delete p.stampX;p.stampX=stamp;
+  const before=serializeWorld(world);
+  g.indexedDB=undefined; // inspect the real persisted fallback payload, then exercise the same loader
+  expect(await saveGame(target(world,settings))).toBe(true);
+  const saved=JSON.parse(store.getItem('living-world:save:v1')!);
+  const payload=JSON.parse(gunzipSync(Buffer.from(saved.data,'base64')).toString('utf8'));
+  expect(payload.version).toBe(5);expect(payload.world.persons.__cols).toBeDefined();
+  const restored=target(createWorld(defaultSettings('different')),defaultSettings('different'));
+  expect(await loadGame(restored)).toBe(true);
+  expect(serializeWorld(restored.restored!)).toBe(before);
 });

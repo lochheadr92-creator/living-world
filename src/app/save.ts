@@ -78,8 +78,9 @@ const DB_KEY = 'current';
 // 4: each person's explored mask is stored as run lengths, not one base64 byte per tile, and the people are stored field by field
 //    (all the beliefs together, all the relations together, …) because gzip only sees 32 KB back and similar data compresses far better
 //    side by side (version 3 saves are still read)
-const VERSION = 4;
-const READABLE = [3, 4];
+// 5: heterogeneous person columns retain per-person field presence and key order.
+const VERSION = 5;
+const READABLE = [3, 4, 5];
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';
@@ -171,6 +172,9 @@ interface PersonColumns {
   d: Record<string, unknown[]>;
   /** the distinct key lists of the beliefs, each belief being stored as [index into this, the values in that order] */
   shapes?: string[][];
+  /** Format 5 only: distinct field-index orders, and the order belonging to each person. */
+  orders?: number[][];
+  order?: number[];
 }
 
 /**
@@ -199,6 +203,40 @@ function packPersons(persons: World['persons']): PersonColumns | World['persons'
     });
   }
   return shapes.length > 0 ? { __cols: fields, n: persons.length, d, shapes } : { __cols: fields, n: persons.length, d };
+}
+
+/** Format 5 keeps columns even when optional fields or insertion order differ between people. */
+function packRaggedPersons(persons: World['persons']): PersonColumns | World['persons'] {
+  const uniform = packPersons(persons);
+  if (!Array.isArray(uniform) || persons.length === 0) return uniform;
+  const fields: string[] = [], fieldIndex = new Map<string, number>();
+  const orders: number[][] = [], order: number[] = [], orderIndex = new Map<string, number>();
+  for (const person of persons) {
+    const p = person as unknown as Record<string, unknown>;
+    // Match JSON object omission; null remains a real field value.
+    const keys = Object.keys(p).filter(k => p[k] !== undefined && typeof p[k] !== 'function' && typeof p[k] !== 'symbol');
+    const indices = keys.map(k => {
+      let index = fieldIndex.get(k);
+      if (index === undefined) { index = fields.length; fields.push(k); fieldIndex.set(k, index); }
+      return index;
+    });
+    const key = JSON.stringify(indices);
+    let index = orderIndex.get(key);
+    if (index === undefined) { index = orders.length; orders.push(indices); orderIndex.set(key, index); }
+    order.push(index);
+  }
+  const d: Record<string, unknown[]> = {}, shapes: string[][] = [], shapeOf = new Map<string, number>();
+  for (const f of fields) {
+    d[f] = persons.map(person => {
+      const p = person as unknown as Record<string, unknown>;
+      if (!Object.prototype.hasOwnProperty.call(p, f) || p[f] === undefined || typeof p[f] === 'function' || typeof p[f] === 'symbol') return null;
+      const v = p[f];
+      if (f === 'explored' && v instanceof Uint8Array) return replacer('explored', v);
+      if (f === 'beliefs') return packBeliefs(v as Record<string, Record<string, unknown>>, shapes, shapeOf);
+      return v;
+    });
+  }
+  return { __cols: fields, n: persons.length, d, shapes, orders, order };
 }
 
 /**
@@ -241,10 +279,20 @@ function unpackBeliefs(rows: unknown[][], shapes: string[][]): Record<string, un
 }
 
 function unpackPersons(c: PersonColumns): unknown[] {
+  const ragged = c.orders !== undefined || c.order !== undefined;
+  if (ragged) {
+    const bad = () => { throw new Error('invalid person columns'); };
+    if (!Number.isSafeInteger(c.n) || c.n < 0 || !Array.isArray(c.orders) || !Array.isArray(c.order) || c.order.length !== c.n) bad();
+    if (c.__cols.some(f => typeof f !== 'string' || ['__proto__', 'constructor', 'prototype'].includes(f)) || new Set(c.__cols).size !== c.__cols.length) bad();
+    if (c.__cols.some(f => !Object.prototype.hasOwnProperty.call(c.d, f) || !Array.isArray(c.d[f]) || c.d[f].length !== c.n)) bad();
+    if (c.orders!.some(row => !Array.isArray(row) || new Set(row).size !== row.length || row.some(i => !Number.isInteger(i) || i < 0 || i >= c.__cols.length))) bad();
+    if (c.order!.some(i => !Number.isInteger(i) || i < 0 || i >= c.orders!.length)) bad();
+  }
   const out: Record<string, unknown>[] = [];
   for (let i = 0; i < c.n; i++) {
     const p: Record<string, unknown> = {};
-    for (const f of c.__cols) {
+    const fields = ragged ? c.orders![c.order![i]].map(index => c.__cols[index]) : c.__cols;
+    for (const f of fields) {
       const v = c.d[f][i];
       p[f] = f === 'beliefs' && v && typeof v === 'object' && Array.isArray((v as { __bel?: unknown }).__bel) ? unpackBeliefs((v as { __bel: unknown[][] }).__bel, c.shapes ?? []) : v;
     }
@@ -253,14 +301,16 @@ function unpackPersons(c: PersonColumns): unknown[] {
   return out;
 }
 
-export function serializeWorld(world: World): string {
+/** Default 4 is the stable deterministic reference encoding; product saves explicitly use latest format 5. */
+export function serializeWorld(world: World, format: 4 | 5 = 4): string {
+  if (format !== 4 && format !== 5) throw new Error('unsupported save format');
   const body: Record<string, unknown> = {};
   for (const k of Object.keys(world)) {
     if (NOT_SAVED.has(k)) continue;
     const v = (world as unknown as Record<string, unknown>)[k];
-    body[k] = k === 'persons' ? packPersons(world.persons) : v;
+    body[k] = k === 'persons' ? (format === 5 ? packRaggedPersons(world.persons) : packPersons(world.persons)) : v;
   }
-  return JSON.stringify({ version: VERSION, rulesLineage: RULES_LINEAGE, rulesGeneration: saveRulesGeneration(world.settings.rulesVersion), world: body }, replacer);
+  return JSON.stringify({ version: format, rulesLineage: RULES_LINEAGE, rulesGeneration: saveRulesGeneration(world.settings.rulesVersion), world: body }, replacer);
 }
 
 export function deserializeWorld(json: string): World {
@@ -497,7 +547,7 @@ export async function saveGame(game: SaveTarget): Promise<boolean> {
     // never overwrite a good save with a world whose rules version this build would refuse to load back
     const verdict = validateRulesVersion(game.settings.rulesVersion);
     if (!verdict.ok) return false;
-    const bytes = await gzipBytes(serializeWorld(game.world));
+    const bytes = await gzipBytes(serializeWorld(game.world, VERSION));
     let where: SaveWhere | null = null;
     try {
       await dbPut({ settings: game.settings, gz: bytes });

@@ -1,0 +1,31 @@
+{
+  "host": "TheWeapon",
+  "head": "65ae5cbb80d7d1db4b91c472f42784e9e3e0f958",
+  "note": "Bounded size comparison on identical worlds, not a mature-world or speed benchmark. Working tree contains format-5 implementation.",
+  "result": [
+    {
+      "profile": "normal",
+      "ticks": 2400,
+      "people": 28,
+      "rules": 148,
+      "format4Text": 1852027,
+      "format5Text": 1458374,
+      "format4Gzip": 319694,
+      "format5Gzip": 173370,
+      "exactContinuation": true,
+      "sourceUnchanged": true
+    },
+    {
+      "profile": "large",
+      "ticks": 600,
+      "people": 100,
+      "rules": 148,
+      "format4Text": 5406168,
+      "format5Text": 4319312,
+      "format4Gzip": 873027,
+      "format5Gzip": 454979,
+      "exactContinuation": true,
+      "sourceUnchanged": true
+    }
+  ]
+}

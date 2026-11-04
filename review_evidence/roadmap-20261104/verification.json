@@ -1,0 +1,61 @@
+{
+  "verdict": "TURN_INTEGRATION_VERIFIED",
+  "scope": [
+    "rules-148 project material allocation repair",
+    "product save format 5",
+    "roadmap reconciliation and P0.6 source inventory"
+  ],
+  "host": "TheWeapon",
+  "fullSuite": {
+    "filesPassed": 480,
+    "testsPassed": 2833,
+    "failures": 0,
+    "expectedFailures": 0,
+    "seconds": 816.94,
+    "exitCode": 0,
+    "record": "full-suite-run.json"
+  },
+  "typecheckBuild": {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "save-columns-build.txt"
+  },
+  "sourceManifest": {
+    "file": "final-source-manifest.json",
+    "entries": 1733,
+    "unchanged": true,
+    "hashMethod": "SHA-256 of UTF-8 text with CRLF normalized to LF"
+  },
+  "review": {
+    "method": "Fresh direct source and final-diff review by implementing agent; not an independent review",
+    "findings": "No unresolved defect found in bounded allocation/save changes. Historical default encoding and pre-148 behavior are retained."
+  },
+  "limits": [
+    "No aggregate survival benefit claimed",
+    "Mature current all-on Normal/Large performance baseline remains open (P0.7)",
+    "Ordinary preserved-meat/trap-meat meals and final-source lamb birth remain open",
+    "State-budget alarm proposals are documentation only; no runtime cap changed"
+  ],
+  "evidenceSHA256": {
+    "allocation-before.txt": "38f13dba4794f82af0285377cc6afdbfae74e7e028965d30d7003c5b5d0c476e",
+    "allocation-build-exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "allocation-build.txt": "f6e32a5a54ab21b4c4d64eda7484596fff26ae4ffaa93677627d627f4b618a0b",
+    "allocation-focused.txt": "a3e0bbe38587e34ff1fb544065d77a1596695af9008c978052b93beed6c3bb1d",
+    "allocation-integration.txt": "3fc3f16aa18be01fc05cf81c494dc41ceebed96741463b5cb5e5e980ab44e4f1",
+    "allocation-regression.txt": "8c719749c4fb062a21262f0b2ff6e635c24565b039734e148ec835445a673011",
+    "final-source-manifest.json": "de6ba609ea2c42c44eac54ce15fd0031cc3a6704d16a2f093081877465a3507b",
+    "full-suite-run.json": "2d3a1fe66f0a79d7cd4488dd412374df2e31f0eb2c5b8e2b9e760b0c320f8fb1",
+    "full-suite.txt": "07ecffda6be9c1f4c76de210398a0f5c26eaf9f7acd51d7826a0283cdcd81580",
+    "predecessor-before.txt": "662238f289c84555996fe8760f163466c3c8bd8d3d39a7937f6774a9d0f3686d",
+    "save-columns-before.txt": "0c9298289d3767fab4c4af69a46fb5339223cbcbfa13dba0b9904bcd043aed34",
+    "save-columns-build-exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "save-columns-build.txt": "005fc34fdf9dadeb5278d6f75176796578ae866ae6b4cf6b62c4a78d0fdf7d96",
+    "save-columns-focused.txt": "3ae37d003bf438a3dc6956a1f1b4f3a32a08957da950a8c92b985c07decaf00c",
+    "save-columns-integration.txt": "cad2098f3d34ad72f20fb4f197753267a402f4afdf46466613ccf755e79f2a62",
+    "save-differential.ts": "910298a8bd5c76168f90c2070b7434521be05064e100accdc90f07af36191458",
+    "save-differential.txt": "6d74aba648ff41730fce79e4cb99bbd05e41c6e3544afc5c80ba232e2d9a4acb",
+    "save-size-check.json": "a337210f5daf18ddd4d21e156a8cedbcafc24fce40f77167406dc4f60da7fcf3",
+    "save-size-check.ts": "f020a8a43ee9cf25d4c8520aaa8fbb69493735b0dc8f15da1fa9d4830e67c123",
+    "v148-record.txt": "4ab3b6d34494e1fa36257908b9d478c2c90aa8cfe1695366d94337bfdd04d7ec"
+  }
+}

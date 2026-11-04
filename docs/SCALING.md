@@ -6,6 +6,23 @@ It records the tools, the measurements taken so far, and the places where the cu
 
 Nothing here changes how the simulation behaves.
 
+## Product save format 5 — 4 November 2026
+
+Format 4's column writer deliberately falls back to one object per person when optional fields or key insertion order differ. That fallback preserves state but loses the compression advantage during ordinary play. This is a performance limitation, not established save corruption.
+
+Product `saveGame` now explicitly writes format 5. `serializeWorld(world, 5)` uses the same column values and belief encoding, adding a table of distinct field-index orders and one order index per person only when the format-4 writer would fall back. A field absent from that person's order is absent after loading, even though the shared column contains a null placeholder. Real null values stay real nulls. Undefined/function/symbol values follow JSON object omission. Explored masks and packed beliefs retain their existing special handling.
+
+The loader accepts formats 3, 4 and 5. `serializeWorld(world)` still defaults to the existing format-4 reference representation: immutable replay/continuation fingerprints do not silently change due to a storage optimization. This is a deliberate separation of product persistence from stable diagnostic encoding, not a new simulation option or rules version. New-format shape indices, duplicate fields, counts, column lengths and unsafe property names are validated before a world is accepted. Existing save failure and fallback behavior remains covered.
+
+Initial tests reproduced the missing representation (eight failing new cases). After implementation, all 32 focused save tests passed; the final five-file run passed 29 tests including the actual persisted product payload, restored exact state, retained review contract, and immutable rules-147/148 continuations. Typecheck/build pass. The full combined suite passed all 480 files and 2,833 tests, with zero failures and no expected-failure cases, in 816.94 seconds on THEWEAPON. The 1,733-entry source/config manifest was unchanged through the run; `review_evidence/roadmap-20261104/full-suite-run.json` records the command and exit 0.
+
+| Identical source snapshot | People / elapsed ticks | Format 4 text bytes | Format 5 text bytes | Format 4 gzip bytes | Format 5 gzip bytes |
+|---|---|---:|---:|---:|---:|
+| Normal meadow, rules 148, arrivals on | 28 / 2,400 | 1,852,027 | 1,458,374 | 319,694 | 173,370 |
+| Large meadow, rules 148, arrivals on | 100 / 600 | 5,406,168 | 4,319,312 | 873,027 | 454,979 |
+
+These two same-state comparisons reduce gzip bytes by about 46% and 48%. Both decodings match the stable serialized state, and both continue exactly for 120 ticks. A separate 24-case differential check permutes field order and optional field shapes across 28 people; every format-5 round trip and 120-tick continuation matches format 4 (`save-differential.ts` / `.txt`). This is bounded size and compatibility evidence; it establishes neither mature-world memory/latency limits nor general compression ratios. The script and raw output are `review_evidence/roadmap-20261104/save-size-check.ts` and `save-size-check.json`; focused, failed-before and build logs are beside them. Earlier benchmarks below retain their original source, settings and limitations.
+
 ## Current version 19 follow-up — 2026-10-24
 
 Repeated after extending construction safety to all sites (a new potential cost):

@@ -1,0 +1,56 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/save_storage.test.ts > an ambiguous version-27 load preserves the stored original and running world 34ms
+ ✓ tests/save_storage.test.ts > an ambiguous version-29 load preserves the stored original and running world 13ms
+ ✓ tests/save_storage.test.ts > where a save is kept > puts the world in IndexedDB and only a short description in localStorage 407ms
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > a running world stores its people as columns in product save format 5
+review H heterogeneous fields retained in columns: dailyRoutines:25/28 leisure:1/28 goal:19/28 crowd:26/28 skillExperience:9/28 socialMemory:12/28 hauling:8/28 heardDemand:5/28 injury:1/28 customers:3/28 relocationHardship:1/28
+
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > measures the uncapped per-person records (always passes; numbers for the review)
+review H day-1 uncapped records: {"persons":28,"bytes":1851242,"told":160,"cooldowns":548,"cooldownsExpired":318,"optCooldowns":41,"greetCooldowns":382,"failures":13,"failuresStaleTarget":1,"beliefs":3991,"staleBeliefs":128,"nextId":1927,"idsPerPersonDay":69}
+
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > a running world stores its people as columns in product save format 5 23ms
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > documented caps hold 7ms
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > measures the uncapped per-person records (always passes; numbers for the review) 2ms
+ ✓ tests/save_storage.test.ts > where a save is kept > saves and loads a Huge world that is larger than localStorage would take 3326ms
+ ✓ tests/save_storage.test.ts > where a save is kept > hands the settings back with the world 118ms
+ ✓ tests/save_storage.test.ts > where a save is kept > replaces the previous save in place 270ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > still loads 369ms
+ ✓ tests/save_columns.test.ts > format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics 519ms
+ ✓ tests/save_columns.test.ts > retains the format-4 reference encoding by default and reduces real text and compressed save size 47ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 count before accepting a world 40ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 order count before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 shape index before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 duplicate field before accepting a world 40ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 column length before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 unsafe key before accepting a world 37ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > is replaced by the next save, which frees its space in localStorage 697ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > is replaced by a save even when localStorage is too full to describe the new one until it is removed 595ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > falls back to localStorage when there is no IndexedDB 194ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > falls back to localStorage when the write into IndexedDB fails 176ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false, without throwing, when nothing will take the save, and leaves the previous save as it was 355ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false for a first save that nothing will take 85ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > loads from localStorage when the description points at IndexedDB but the record is not there 200ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false when there is no save at all, or it cannot be read 16ms
+ ✓ tests/save_storage.test.ts > the actual product save writes format 5 and restores heterogeneous person fields exactly 233ms
+ ✓ tests/v148_continuation.test.ts > preserves rules-148 ordinary and paid sibling-plan crafting continuations 11267ms
+ ✓ tests/v147_continuation.test.ts > preserves the recorded ordinary and staged rules-147 final account continuation 11639ms
+
+ Test Files  5 passed (5)
+      Tests  29 passed (29)
+   Start at  20:30:27
+   Duration  13.05s (tests 87%, transform 11%, import 2%)
+

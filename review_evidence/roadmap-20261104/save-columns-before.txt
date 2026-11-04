@@ -1,0 +1,150 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ × tests/save_columns.test.ts > format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics 30ms
+   → expected 4 to be 5 // Object.is equality
+ × tests/save_columns.test.ts > retains the format-4 reference encoding by default and reduces real text and compressed save size 26ms
+   → expected 1298095 to be less than 1298095
+ × tests/save_columns.test.ts > rejects malformed format-5 count before accepting a world 61ms
+   → expected [Function] to throw an error
+ × tests/save_columns.test.ts > rejects malformed format-5 order count before accepting a world 14ms
+   → Cannot read properties of undefined (reading 'pop')
+ × tests/save_columns.test.ts > rejects malformed format-5 shape index before accepting a world 13ms
+   → Cannot read properties of undefined (reading 'length')
+ × tests/save_columns.test.ts > rejects malformed format-5 duplicate field before accepting a world 15ms
+   → Cannot read properties of undefined (reading '0')
+ × tests/save_columns.test.ts > rejects malformed format-5 column length before accepting a world 13ms
+   → Cannot read properties of undefined (reading '0')
+ × tests/save_columns.test.ts > rejects malformed format-5 unsafe key before accepting a world 13ms
+   → Cannot read properties of undefined (reading 'push')
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/save_columns.test.ts > format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics
+AssertionError: expected 4 to be 5 // Object.is equality
+
+- Expected
++ Received
+
+- 5
++ 4
+
+ ❯ tests/save_columns.test.ts:19:22
+     17| it('format 5 packs heterogeneous people, preserving field order and ab…
+     18|  const old=serializeWorld(world),text=serializeWorld(world,5),raw=JSON…
+     19|  expect(raw.version).toBe(5);expect(raw.world.persons.__cols).toBeDefi…
+       |                      ^
+     20|  expect(raw.world.persons.orders.length).toBeGreaterThan(1);
+     21|  const oldCopy=deserializeWorld(old),copy=deserializeWorld(text);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/save_columns.test.ts > retains the format-4 reference encoding by default and reduces real text and compressed save size
+AssertionError: expected 1298095 to be less than 1298095
+ ❯ tests/save_columns.test.ts:30:22
+     28|  const old=serializeWorld(world),text=serializeWorld(world,5);
+     29|  expect(JSON.parse(old).version).toBe(4);expect(Array.isArray(JSON.par…
+     30|  expect(text.length).toBeLessThan(old.length);expect(gzipSync(text).le…
+       |                      ^
+     31| });
+     32| it.each(['count','order count','shape index','duplicate field','column…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 count before accepting a world
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ tests/save_columns.test.ts:40:52
+     38|  if(kind==='column length')c.d[c.__cols[0]].pop();
+     39|  if(kind==='unsafe key'){c.__cols.push('__proto__');c.orders[0].push(c…
+     40|  expect(()=>deserializeWorld(JSON.stringify(raw))).toThrow(/columns/i);
+       |                                                    ^
+     41| });
+     42|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 order count before accepting a world
+TypeError: Cannot read properties of undefined (reading 'pop')
+ ❯ tests/save_columns.test.ts:35:34
+     33|  const raw=JSON.parse(serializeWorld(world,5)),c=raw.world.persons;
+     34|  if(kind==='count')c.n=-1;
+     35|  if(kind==='order count')c.order.pop();
+       |                                  ^
+     36|  if(kind==='shape index')c.order[0]=c.orders.length;
+     37|  if(kind==='duplicate field')c.orders[0].push(c.orders[0][0]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 shape index before accepting a world
+TypeError: Cannot read properties of undefined (reading 'length')
+ ❯ tests/save_columns.test.ts:36:46
+     34|  if(kind==='count')c.n=-1;
+     35|  if(kind==='order count')c.order.pop();
+     36|  if(kind==='shape index')c.order[0]=c.orders.length;
+       |                                              ^
+     37|  if(kind==='duplicate field')c.orders[0].push(c.orders[0][0]);
+     38|  if(kind==='column length')c.d[c.__cols[0]].pop();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 duplicate field before accepting a world
+TypeError: Cannot read properties of undefined (reading '0')
+ ❯ tests/save_columns.test.ts:37:32
+     35|  if(kind==='order count')c.order.pop();
+     36|  if(kind==='shape index')c.order[0]=c.orders.length;
+     37|  if(kind==='duplicate field')c.orders[0].push(c.orders[0][0]);
+       |                                ^
+     38|  if(kind==='column length')c.d[c.__cols[0]].pop();
+     39|  if(kind==='unsafe key'){c.__cols.push('__proto__');c.orders[0].push(c…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 column length before accepting a world
+TypeError: Cannot read properties of undefined (reading '0')
+ ❯ tests/save_columns.test.ts:38:34
+     36|  if(kind==='shape index')c.order[0]=c.orders.length;
+     37|  if(kind==='duplicate field')c.orders[0].push(c.orders[0][0]);
+     38|  if(kind==='column length')c.d[c.__cols[0]].pop();
+       |                                  ^
+     39|  if(kind==='unsafe key'){c.__cols.push('__proto__');c.orders[0].push(c…
+     40|  expect(()=>deserializeWorld(JSON.stringify(raw))).toThrow(/columns/i);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/save_columns.test.ts > rejects malformed format-5 unsafe key before accepting a world
+TypeError: Cannot read properties of undefined (reading 'push')
+ ❯ tests/save_columns.test.ts:39:35
+     37|  if(kind==='duplicate field')c.orders[0].push(c.orders[0][0]);
+     38|  if(kind==='column length')c.d[c.__cols[0]].pop();
+     39|  if(kind==='unsafe key'){c.__cols.push('__proto__');c.orders[0].push(c…
+       |                                   ^
+     40|  expect(()=>deserializeWorld(JSON.stringify(raw))).toThrow(/columns/i);
+     41| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  20:29:48
+   Duration  2.22s (transform 58%, tests 34%, import 7%)
+

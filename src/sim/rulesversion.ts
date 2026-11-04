@@ -2,7 +2,7 @@
 //
 // Three different version numbers live in this repository and they are not interchangeable:
 //
-//   * the SAVE FORMAT version (`src/app/save.ts`, currently 4) says how the bytes are written. It changes when the storage
+//   * the SAVE FORMAT version (`src/app/save.ts`, currently 5) says how the bytes are written. It changes when the storage
 //     changes and says nothing about how anybody behaves.
 //   * `settings.dynamics` ('rich' | 'authored' | absent) is a compatibility and configuration distinction: which family of
 //     rules a world belongs to. It is not a generation: every rich world since the first has carried the same label while the

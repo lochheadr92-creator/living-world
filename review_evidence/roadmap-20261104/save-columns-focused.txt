@@ -1,0 +1,53 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/save_storage.test.ts > an ambiguous version-27 load preserves the stored original and running world 33ms
+ ✓ tests/save_storage.test.ts > an ambiguous version-29 load preserves the stored original and running world 12ms
+ ✓ tests/save.test.ts > saving and loading a world > round-trips an ordinary world after a while 665ms
+ ✓ tests/save_columns.test.ts > format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics 508ms
+ ✓ tests/save_columns.test.ts > retains the format-4 reference encoding by default and reduces real text and compressed save size 48ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 count before accepting a world 42ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 order count before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 shape index before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 duplicate field before accepting a world 39ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 column length before accepting a world 36ms
+ ✓ tests/save_columns.test.ts > rejects malformed format-5 unsafe key before accepting a world 36ms
+ ✓ tests/save_storage.test.ts > where a save is kept > puts the world in IndexedDB and only a short description in localStorage 382ms
+ ✓ tests/save.test.ts > saving and loading a world > round-trips a Large world 1880ms
+ ✓ tests/save_storage.test.ts > where a save is kept > saves and loads a Huge world that is larger than localStorage would take 3060ms
+ ✓ tests/save_storage.test.ts > where a save is kept > hands the settings back with the world 128ms
+ ✓ tests/save_storage.test.ts > where a save is kept > replaces the previous save in place 283ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > still loads 348ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > is replaced by the next save, which frees its space in localStorage 662ms
+ ✓ tests/save_storage.test.ts > a save made before IndexedDB was used > is replaced by a save even when localStorage is too full to describe the new one until it is removed 607ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > falls back to localStorage when there is no IndexedDB 199ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > falls back to localStorage when the write into IndexedDB fails 158ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false, without throwing, when nothing will take the save, and leaves the previous save as it was 342ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false for a first save that nothing will take 91ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > loads from localStorage when the description points at IndexedDB but the record is not there 198ms
+ ✓ tests/save_storage.test.ts > when IndexedDB does not work > returns false when there is no save at all, or it cannot be read 20ms
+ ✓ tests/save.test.ts > saving and loading a world > round-trips a Huge world 7486ms
+ ✓ tests/save.test.ts > saving and loading a world > still reads a save written in the previous format (3: byte-per-tile masks, people one by one) 636ms
+ ✓ tests/save.test.ts > saving and loading a world > refuses a save from a format it does not know 82ms
+ ✓ tests/save.test.ts > saving and loading a world > writes a Huge world in well under half the text the previous format needed 1221ms
+ ✓ tests/save.test.ts > saving and loading a world > keeps people in the old per-person form when they do not share the same fields, and still round-trips 420ms
+ ✓ tests/save.test.ts > saving and loading a world > keeps one person's beliefs as they were when a belief has an undefined value or an id that is not its key 477ms
+ ✓ tests/save.test.ts > saving and loading a world > packs an explored mask that holds more than 0 and 1 without losing it 101ms
+
+ Test Files  3 passed (3)
+      Tests  32 passed (32)
+   Start at  20:30:02
+   Duration  14.25s (tests 85%, transform 13%, import 2%)
+

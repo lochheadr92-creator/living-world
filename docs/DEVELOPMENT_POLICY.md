@@ -114,7 +114,7 @@ Four version-like things exist here and they are not interchangeable:
 | | what it says | where |
 |---|---|---|
 | **rules version** | which generation of behaviour a world runs | `settings.rulesVersion`, `src/sim/rulesversion.ts` |
-| **save format** | how the bytes are written | `VERSION` in `src/app/save.ts` (currently 4) |
+| **save format** | how the bytes are written | `VERSION` in `src/app/save.ts` (product format 5; stable diagnostic encoding 4) |
 | **dynamics** | which family of rules: current (`rich`) or legacy (`authored`/absent) | `settings.dynamics` |
 | **replay fingerprint / lab intervention** | that one run reproduced another; a deliberate experimental change | `scripts/statediff.ts`, `scripts/lab/lab.ts` |
 

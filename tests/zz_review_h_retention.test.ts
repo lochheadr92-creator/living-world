@@ -1,9 +1,6 @@
 // Review H (long-run accumulation and cost): a one-day ordinary current-rules world, measured for what grows and what is capped.
 //
-// - `it.fails` documents a defect found by the review: from the first day on, `packPersons` (src/app/save.ts) silently falls back to
-//   the person-by-person save format because optional per-person fields (crowd, goal, hauling, socialMemory, leisure, …) are present on
-//   only some people and in differing key orders. When the format is repaired this case starts failing, which is the signal to turn
-//   it into a plain `it`.
+// - Format 5 retains columns for heterogeneous people; format 4 fallback remains a compatibility contract in save.test.ts.
 // - The cap case holds the documented caps. The measurement case always passes and prints the uncapped records' sizes.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { serializeWorld } from '../src/app/save';
@@ -28,14 +25,14 @@ beforeAll(() => {
 });
 
 describe('review H: retention after one ordinary day', () => {
-  it.fails('a running world still stores its people as columns (save format 4 packPersons)', () => {
+  it('a running world stores its people as columns in product save format 5', () => {
     const persons = world.persons as unknown as Record<string, unknown>[];
     const present: Record<string, number> = {};
     for (const p of persons) for (const k of Object.keys(p)) present[k] = (present[k] ?? 0) + 1;
     const partial = Object.entries(present).filter(([, n]) => n !== persons.length).map(([k, n]) => `${k}:${n}/${persons.length}`);
     // printed so the cause is visible beside the failure
-    console.log('review H pack fallback; keys present on only some people:', partial.join(' '));
-    expect(text, 'format 4 columns are only written when every person has the same keys in the same order').toContain('"__cols"');
+    console.log('review H heterogeneous fields retained in columns:', partial.join(' '));
+    expect(serializeWorld(world,5), 'format 5 preserves each person field presence and order').toContain('"__cols"');
   });
 
   it('documented caps hold', () => {
