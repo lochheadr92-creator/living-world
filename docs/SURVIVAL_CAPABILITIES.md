@@ -1085,3 +1085,7 @@ meals, attributable trap-meat meals and final-source lamb birth remain open,
 as do the complete cross-seed cohort comparisons. The completed25draw forest
 subset has the adverse reserve result recorded above. Do not resume further
 capability work without a new owner request.
+
+The combined delivery checkout passes `npm run build` (TypeScript plus Vite);
+log `resume-20261104/publication-build-isolated.log`. This tracked-checkout
+verification excludes the unrelated untracked review files in main.

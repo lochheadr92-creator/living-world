@@ -1,3 +1,18 @@
+# Delivery checkpoint — rules133; stopped at owner request
+
+All survival-task source, tests, diagnostic scripts, documentation and retained
+evidence are committed on the delivery line for integration into main. The
+rules133 repair and rules132 nourishment implementation are included. The
+combined tracked checkout passes npm run build, including TypeScript checking
+(publication-build-isolated.log). This does not include main's pre-existing
+untracked review tests, whose two type errors are documented separately.
+
+The current section is complete. The whole seven-family programme remains
+incomplete and no further work should resume without a new owner request.
+Completed/partial measurements and remaining gaps are in the stop checkpoint
+below and docs/SURVIVAL_CAPABILITIES.md. Verify live Git for publication status;
+older working notes below are historical, not instructions to keep running.
+
 # Owner-requested stop — current section complete; publishing to main
 
 Owner asked to stop after the current section, commit/push current work, merge
