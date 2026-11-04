@@ -1,0 +1,49 @@
+{"event":"source","hash":"01fff81de0d1166dfe62305b91d0e0797147dbb4ac027e9a7c956f0cba8e6574"}
+{"event":"tree_work","tick":697,"person":908,"op":"cut","outcome":"success","detail":"done"}
+{"event":"tree_work","tick":991,"person":908,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":1,"seed":"forest","rules":137,"arrivals":true,"cuttings":1,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":2,"seed":"forest","rules":137,"arrivals":true,"cuttings":1,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":3,"seed":"forest","rules":137,"arrivals":true,"cuttings":1,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":7630,"person":905,"op":"cut","outcome":"failed","detail":"no unclaimed living branch on this tree"}
+{"event":"tree_work","tick":7720,"person":905,"op":"cut","outcome":"success","detail":"done"}
+{"event":"tree_work","tick":7887,"person":905,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":8079,"person":905,"op":"plant","outcome":"failed","detail":"planting too far from our home"}
+{"event":"tree_work","tick":8241,"person":905,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":4,"seed":"forest","rules":137,"arrivals":true,"cuttings":2,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":5,"seed":"forest","rules":137,"arrivals":true,"cuttings":2,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":12056,"person":908,"op":"plant","outcome":"failed","detail":"planting ground is occupied or obstructs access"}
+{"event":"tree_work","tick":12156,"person":908,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":13093,"person":908,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":13210,"person":908,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":6,"seed":"forest","rules":137,"arrivals":true,"cuttings":2,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":14927,"person":905,"op":"plant","outcome":"success","detail":"done","planted":6259}
+{"event":"tree_work","tick":15177,"person":902,"op":"cut","outcome":"success","detail":"done"}
+{"event":"tree_work","tick":15283,"person":902,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":15398,"person":908,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":7,"seed":"forest","rules":137,"arrivals":true,"cuttings":3,"planted":[6259],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":17966,"person":905,"op":"cut","outcome":"interrupted","detail":"something better came up"}
+{"day":8,"seed":"forest","rules":137,"arrivals":true,"cuttings":3,"planted":[6259],"harvested":4,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":19923,"person":908,"op":"plant","outcome":"success","detail":"done","planted":8037}
+{"event":"tree_work","tick":20170,"person":939,"op":"cut","outcome":"success","detail":"done"}
+{"day":9,"seed":"forest","rules":137,"arrivals":true,"cuttings":4,"planted":[6259,8037],"harvested":4,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":22432,"person":939,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":22625,"person":939,"op":"plant","outcome":"success","detail":"done","planted":8937}
+{"day":10,"seed":"forest","rules":137,"arrivals":true,"cuttings":4,"planted":[6259,8037,8937],"harvested":4,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":11,"seed":"forest","rules":137,"arrivals":true,"cuttings":4,"planted":[6259,8037,8937],"harvested":4,"alive":25,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":27225,"person":905,"op":"cut","outcome":"success","detail":"done"}
+{"day":12,"seed":"forest","rules":137,"arrivals":true,"cuttings":5,"planted":[6259,8037,8937],"harvested":13,"alive":24,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":29197,"person":908,"op":"cut","outcome":"success","detail":"done"}
+{"day":13,"seed":"forest","rules":137,"arrivals":true,"cuttings":6,"planted":[6259,8037,8937],"harvested":20,"alive":24,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":31460,"person":908,"op":"plant","outcome":"success","detail":"done","planted":11479}
+{"event":"tree_work","tick":31666,"person":908,"op":"cut","outcome":"interrupted","detail":"danger nearby"}
+{"event":"tree_work","tick":31686,"person":911,"op":"cut","outcome":"success","detail":"done"}
+{"event":"tree_work","tick":31732,"person":908,"op":"cut","outcome":"interrupted","detail":"danger nearby"}
+{"event":"tree_work","tick":31795,"person":908,"op":"cut","outcome":"interrupted","detail":"danger nearby"}
+{"event":"tree_work","tick":32321,"person":905,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":14,"seed":"forest","rules":137,"arrivals":true,"cuttings":7,"planted":[6259,8037,8937,11479],"harvested":22,"alive":24,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":33977,"person":905,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":34296,"person":902,"op":"plant","outcome":"success","detail":"done","planted":12374}
+{"event":"tree_work","tick":34560,"person":899,"op":"cut","outcome":"failed","detail":"no unclaimed living branch on this tree"}
+{"event":"tree_work","tick":34675,"person":899,"op":"cut","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":34725,"person":905,"op":"plant","outcome":"success","detail":"done","planted":12535}
+{"day":15,"seed":"forest","rules":137,"arrivals":true,"cuttings":7,"planted":[6259,8037,8937,11479,12374,12535],"harvested":27,"alive":24,"conservation":{"ok":true,"diffs":[]}}

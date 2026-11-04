@@ -1,0 +1,6 @@
+
+> living-world@1.0.0 typecheck
+> tsc --noEmit
+
+src/sim/labels.ts(52,14): error TS2741: Property 'tree_work' is missing in type '{ relocate: string; exchange_journey: string; wander: string; attend: string; hunt: string; animal_work: string; gear_work: string; butcher: string; alone: string; eat: string; eat_store: string; ... 35 more ...; return_tool: string; }' but required in type 'Record<ActivityKind, string>'.
+src/ui/icons.ts(133,23): error TS2322: Type '"tree"' is not assignable to type '"info" | "fish" | "wood" | "stone" | "kiln" | "charcoal" | "berries" | "fruit" | "grain" | "bread" | "meat" | "axe" | "pick" | "hoe" | "basket" | "hammer" | "saw" | "jar" | "spear" | ... 72 more ... | "cog"'.

@@ -1,0 +1,46 @@
+{"event":"source","hash":"83a17c9f808f4fc40bd23f7b65ed14d6e3704c1b766ed732b6e503ea19a7c779"}
+{"event":"tree_work","tick":161,"person":1113,"op":"cut","outcome":"failed","detail":"no unclaimed living branch on this tree"}
+{"day":1,"seed":"river","rules":137,"arrivals":true,"cuttings":0,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"day":2,"seed":"river","rules":137,"arrivals":true,"cuttings":0,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":5856,"person":1112,"op":"cut","outcome":"success","detail":"done"}
+{"day":3,"seed":"river","rules":137,"arrivals":true,"cuttings":1,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":7733,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":7861,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":7988,"person":1145,"op":"cut","outcome":"success","detail":"done"}
+{"day":4,"seed":"river","rules":137,"arrivals":true,"cuttings":2,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":10081,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":10127,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":10180,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":10296,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":10607,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":10615,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":5,"seed":"river","rules":137,"arrivals":true,"cuttings":2,"planted":[],"harvested":0,"alive":27,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":12594,"person":1144,"op":"cut","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":12624,"person":1113,"op":"cut","outcome":"success","detail":"done"}
+{"day":6,"seed":"river","rules":137,"arrivals":true,"cuttings":3,"planted":[],"harvested":0,"alive":27,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":14897,"person":1144,"op":"cut","outcome":"success","detail":"done"}
+{"day":7,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":27,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":17715,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":17912,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":17970,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":8,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":27,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":19854,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":19910,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":9,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":27,"conservation":{"ok":true,"diffs":[]}}
+{"day":10,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":25098,"person":1142,"op":"cut","outcome":"interrupted","detail":"something better came up"}
+{"day":11,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":27306,"person":1113,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":12,"seed":"river","rules":137,"arrivals":true,"cuttings":4,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":29545,"person":1106,"op":"cut","outcome":"success","detail":"done"}
+{"day":13,"seed":"river","rules":137,"arrivals":true,"cuttings":5,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":32064,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":32109,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":32141,"person":1145,"op":"plant","outcome":"failed","detail":"planting ground is occupied or obstructs access"}
+{"event":"tree_work","tick":32170,"person":1142,"op":"cut","outcome":"success","detail":"done"}
+{"event":"tree_work","tick":32316,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":32377,"person":1145,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"event":"tree_work","tick":33529,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":14,"seed":"river","rules":137,"arrivals":true,"cuttings":6,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}
+{"event":"tree_work","tick":33731,"person":1112,"op":"plant","outcome":"interrupted","detail":"something better came up"}
+{"day":15,"seed":"river","rules":137,"arrivals":true,"cuttings":6,"planted":[],"harvested":0,"alive":28,"conservation":{"ok":true,"diffs":[]}}

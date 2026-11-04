@@ -1,0 +1,38 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/forestry.test.ts > uses a real living branch, paid planting and delayed growth before ordinary woodcutting 14ms
+ ✓ tests/forestry.test.ts > cannot plant ordinary timber and refuses unavailable or reserved living branches 4ms
+ ✓ tests/forestry.test.ts > rechecks the ground and ownership without consuming a cutting on failure 3ms
+ ✓ tests/forestry.test.ts > keeps doorways, fields, paths and existing sources clear 3ms
+ ✓ tests/forestry.test.ts > offers tree work from personal knowledge and cannot infer unseen trees 22ms
+ × tests/forestry.test.ts > continues a carried cutting and planting work exactly and rejects predecessor or malformed state 49ms
+   → Cannot read properties of undefined (reading 'inv')
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/forestry.test.ts > continues a carried cutting and planting work exactly and rejects predecessor or malformed state
+TypeError: Cannot read properties of undefined (reading 'inv')
+ ❯ tests/forestry.test.ts:23:534
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  16:41:54
+   Duration  1.84s (transform 84%, import 11%, tests 5%)
+
