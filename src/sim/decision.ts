@@ -40,6 +40,7 @@ import { hyp } from './util';
 import {prepareRoutine,tiltRoutineChoices} from './daily_routines';
 import {scopeWorkOptions} from './action_scope';
 import {journeyOptions} from './journey';
+import {EAT_IN_HAND_REASON,eatInHand} from './eat_in_hand';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
@@ -393,6 +394,21 @@ export function reviewActivity(world: World, p: Person): void {
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 5) * 20);
   if (!best) return;
   const key = a.data.optKey as string | undefined;
+  // rules 158 (eat_in_hand.ts): food in the pack that would ease hunger better than this way of easing it is eaten first
+  const inHand = eatInHand(world, a, ctx, ranked);
+  if (inHand) {
+    const act = inHand.make!();
+    if (act) {
+      act.data.optKey = inHand.key;
+      prepareRoutine(world, p, act, inHand);
+      act.data.why = because(inHand, null, tradeReason(world, p, inHand));
+      record(world, p, ctx, ranked, inHand, 'urgent need', undefined, act);
+      markSetAside(world, p);
+      endActivity(world, p, 'interrupted', EAT_IN_HAND_REASON);
+      startActivity(world, p, act);
+      return;
+    }
+  }
   if (best.key === key) return;
   // Standing and facing a wolf is the one activity fleeing must not simply out-score. The two answer the same
   // situation and are scored to sit close together on purpose, so a defender re-ranked mid-attempt is pulled away

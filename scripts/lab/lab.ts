@@ -31,6 +31,7 @@ import {checkedAccountsOn,setCheckedAccounts} from '../../src/sim/checked_accoun
 import {tellerConfidenceOn,setTellerConfidence} from '../../src/sim/teller_confidence';
 import {childTasksOn,setChildTasks} from '../../src/sim/child_tasks';
 import {handoverTruthOn,setHandoverTruth} from '../../src/sim/handover_outcome';
+import {eatInHandOn,setEatInHand} from '../../src/sim/eat_in_hand';
 import {homeReplacementOn,setHomeReplacement} from '../../src/sim/home_replacement';
 import {constructionFinishOn,setConstructionFinish} from '../../src/sim/construction_finish';
 import {waterSearchOn,setWaterSearch} from '../../src/sim/water_search';
@@ -386,6 +387,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
+  if(kind==='rich-no-eat-in-hand')return {spec:label,summary:'let hunger gathering outlast critical hunger with food in the pack again (rules 158 removal)',install(){const was=eatInHandOn();setEatInHand(false);return ()=>setEatInHand(was);}};
   if(kind==='rich-no-handover-truth')return {spec:label,summary:'report every empty hand-over as a full pack again (rules 157 removal)',install(){const was=handoverTruthOn();setHandoverTruth(false);return ()=>setHandoverTruth(was);}};
   if(kind==='rich-no-child-tasks')return {spec:label,summary:'let children gather wood and stone again (rules 156 removal); other child limits unchanged',install(){const was=childTasksOn();setChildTasks(false);return ()=>setChildTasks(was);}};
   if(kind==='rich-no-confidence')return {spec:label,summary:'remove weighing food hearsay and passing it on by what the listener found when checking that teller, and by its age; accounts, beliefs and asks unchanged',install(){const was=tellerConfidenceOn();setTellerConfidence(false);return ()=>setTellerConfidence(was);}};
