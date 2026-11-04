@@ -67,4 +67,4 @@ One fruit bought about 500 ticks. **It does not save him.** The famine, the empt
 
 1. **A carer's memory of a dependant loses severity.** `remembered_need.ts` keeps only hungry/thirsty/cold flags, so a child last seen at hunger 0 is remembered as 41 and weighed against the carer's own mild hunger.
 2. **The jammed pack itself.** Fenn carried two wood he did not need for more than 6,000 ticks. At rules 156 children no longer chop wood, but adults carry it (Leo, Felix, Xavi). Putting surplus down at a known home or store when hungry needs a custody design for goods set down; deferred.
-3. The Large River exact-twin discrepancy (`../bykind-order-20261105/`) is a separate load-order determinism fix.
+3. The Large River exact-twin discrepancy (`../bykind-order-20261105/`): a candidate cause only (loaded grid order differs from live), not reproduced. A 30-day Large river twin run at rules 159 matched exactly every day with no fix; see `../load-order-20261105/` once recorded.
