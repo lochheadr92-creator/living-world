@@ -13,7 +13,8 @@ import {observe,noteFailure,recentFailure,estimatedAmount} from './knowledge';
 import {reservedFor} from './reserved_goods';
 import {makeCarcass} from './carcass';
 import {addEvent,addLog} from './events';
-import {addOption,pen} from './optutil';
+import {addOption,addBlocked,pen} from './optutil';
+import {earlierFoodRoute} from './livestock_food';
 import type {Ctx} from './optutil';
 export interface SheepState {
  origin:'founder'|'birth';parents:number[];born:number;sex:'f'|'m';hhId:number;
@@ -136,7 +137,11 @@ export function livestockOptions(ctx:Ctx):void{
   if(s.thirsty&&free(w,p,'water')>=1)offer('water',b,43);
   if(s.wool>=1&&roomFor(p.inv,carryCap(w,p),'wool')>=1)offer('shear',b,38);
   if(s.tether<50&&free(w,p,'fibre')>=1)offer('repair',b,40);
-  if(p.needs.hunger<45&&s.adult&&foodUnits(p.inv)<2)offer('slaughter',b,45+ctx.drives.hunger*.3);
+  if(p.needs.hunger<45&&s.adult&&foodUnits(p.inv)<2){
+   const alternative=runsRulesVersion(w,151)?earlierFoodRoute(ctx,Math.hypot(p.x-b.x,p.y-b.y)/Math.max(.03,ctx.speed),duration.slaughter):undefined;
+   if(alternative)addBlocked(ctx,'animal_work','slaughter sheep',b.id,`known food is available sooner: ${alternative.label}`,'animals');
+   else offer('slaughter',b,45+ctx.drives.hunger*.3);
+  }
   if(s.adult&&s.sex==='f'&&!s.pregnant&&w.tick>=s.breedAfter&&!s.hungry&&!s.thirsty&&ours.length<4){const mate=ours.find(c=>c.sheep!.sex==='m'&&c.sheep!.adult&&c.sheep!.tether>0&&!c.sheep!.hungry&&!c.sheep!.thirsty&&Math.hypot(c.x-b.x,c.y-b.y)<=4);if(mate)offer('mate',b,26,mate.id);}
  }
 }
