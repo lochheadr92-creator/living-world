@@ -32,6 +32,7 @@ import {tellerConfidenceOn,setTellerConfidence} from '../../src/sim/teller_confi
 import {childTasksOn,setChildTasks} from '../../src/sim/child_tasks';
 import {handoverTruthOn,setHandoverTruth} from '../../src/sim/handover_outcome';
 import {eatInHandOn,setEatInHand} from '../../src/sim/eat_in_hand';
+import {foundEmptyOn,setFoundEmpty} from '../../src/sim/found_empty';
 import {handFeedingOn,setHandFeeding} from '../../src/sim/hand_feeding';
 import {homeReplacementOn,setHomeReplacement} from '../../src/sim/home_replacement';
 import {constructionFinishOn,setConstructionFinish} from '../../src/sim/construction_finish';
@@ -389,6 +390,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
   if(kind==='rich-no-hand-feeding')return {spec:label,summary:'a hand-over to a hungry person with no pack room fails again instead of feeding them (rules 159 removal)',install(){const was=handFeedingOn();setHandFeeding(false);return ()=>setHandFeeding(was);}};
+  if(kind==='rich-no-found-empty')return {spec:label,summary:'name every gather left for an empty place "something better came up" again (rules 161 removal)',install(){const was=foundEmptyOn();setFoundEmpty(false);return ()=>setFoundEmpty(was);}};
   if(kind==='rich-no-eat-in-hand')return {spec:label,summary:'let hunger gathering outlast critical hunger with food in the pack again (rules 158 removal)',install(){const was=eatInHandOn();setEatInHand(false);return ()=>setEatInHand(was);}};
   if(kind==='rich-no-handover-truth')return {spec:label,summary:'report every empty hand-over as a full pack again (rules 157 removal)',install(){const was=handoverTruthOn();setHandoverTruth(false);return ()=>setHandoverTruth(was);}};
   if(kind==='rich-no-child-tasks')return {spec:label,summary:'let children gather wood and stone again (rules 156 removal); other child limits unchanged',install(){const was=childTasksOn();setChildTasks(false);return ()=>setChildTasks(was);}};

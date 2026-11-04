@@ -41,6 +41,7 @@ import {prepareRoutine,tiltRoutineChoices} from './daily_routines';
 import {scopeWorkOptions} from './action_scope';
 import {journeyOptions} from './journey';
 import {EAT_IN_HAND_REASON,eatInHand} from './eat_in_hand';
+import {FOUND_EMPTY_REASON,foundEmpty} from './found_empty';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
@@ -440,7 +441,7 @@ export function reviewActivity(world: World, p: Person): void {
   if (danger || criticalMismatch || (!committed && better)) {
     const act = best.make!();
     if (!act) return;
-    const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
+    const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : foundEmpty(world, a, ctx) ? FOUND_EMPTY_REASON : 'something better came up'; // rules 161 (found_empty.ts)
     act.data.optKey = best.key;
     prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));
