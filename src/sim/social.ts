@@ -83,6 +83,7 @@ import { clamp, hyp } from './util';
 import { hasLocalGiving } from './local_giving';
 import {noteHelperReceipt} from './helper_learning';
 import {hasPromiseKnowledge,recordPromiseCompletion,receiveCompletionReport,acknowledgeCompletionReport,completionContact} from './promise_knowledge';
+import { applyHandFeeding, planHandFeeding } from './hand_feeding';
 import { ALREADY_HAS_FOOD, GIVER_LACKS, emptyHandover, hasHandoverTruth, noteHadFood } from './handover_outcome';
 import { noteCarePackFailure } from './care_capacity';
 
@@ -2014,6 +2015,12 @@ registerHandler('give', {
       if (m > 0) got[k as ItemKind] = m;
       moved += m;
     }
+    // rules 159 (hand_feeding.ts): nothing moved because the pack has no room, but they are hungry: feed them by hand
+    const feeding = moved <= 0 && (a.data.mode === 'care' || a.data.mode === 'promise') ? planHandFeeding(world, p, t, want) : null;
+    if (feeding) for (const k of Object.keys(feeding) as ItemKind[]) {
+      got[k] = feeding[k];
+      moved += feeding[k] ?? 0;
+    }
     t.cooldowns.pause = 0;
     if ((!hasLocalGiving(world) || moved > 0)&&!(runsRulesVersion(world,124)&&a.data.textileDelivery)) t.cooldowns.fedUntil = world.tick + 120; // only actual food receipt gives them time to eat
     if (moved <= 0) {
@@ -2036,6 +2043,10 @@ registerHandler('give', {
     if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', runsRulesVersion(world,124)&&a.data.textileDelivery?'woken to receive a garment':'woken to be fed');
     const mode = (a.data.mode as string) ?? 'give';
     onGift(world, p, t, got, mode);
+    if (feeding && applyHandFeeding(world, p, t, feeding) > 0) {
+      addLog(world, p, 'social', `Fed ${t.name} ${itemsToText(got)} by hand: their pack had no room for it.`);
+      addLog(world, t, 'social', `${p.name} fed me ${itemsToText(got)} by hand: my pack had no room for it.`);
+    }
     bubble(world, p, mode==='care'&&runsRulesVersion(world,95)?`Here is ${itemsToText(got)}, ${t.name}.`:D.saying(mode === 'care' ? D.CARE_LINES : D.OFFER_LINES, p.id, t.id, world.tick >> 5, { n: t.name, what: Object.keys(got)[0] }), 'say', 56);
     bubbleLater(world, t, D.saying(D.THANKS, t.id, p.id, world.tick >> 5, { n: p.name }), 14);
     if (mode === 'promise' && a.data.commitmentId) {
