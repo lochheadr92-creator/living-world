@@ -86,3 +86,27 @@ River person 1132, pack full (axe, rod, basket, seeds, 4 wood, stone), starts se
 from tick 48,861 to 49,475; each ends `partial: pack is full` with no fish moved. A partial
 outcome records no failure, so `gearOptions` re-offers the same trip at once
 (`src/sim/passive_gear.ts`: check offered without pack room; zero-transfer check is partial).
+
+## Rules 153 — empty-handed net checks (repaired)
+
+Commit `fb749252`. Staged reproduction (`tests/net_full_pack.test.ts`): with a full pack the
+remembered catch kept the check on offer and the zero-transfer check returned `partial`, so the
+loop never ended. Rules 153 blocks collecting a remembered catch without room ("no room in my pack
+for the catch") and fails a check that moves no fish. No utility change. Immutable 153 reference
+(river) recorded; 152 and earlier unchanged.
+
+Verification (`review_evidence/agent-20261104-153/`): full suite exit 0, 492 files, 2,869 tests,
+545.0 s; typecheck/build pass. 25-day screens pass integrity (500 pure checks, exact
+continuation, conservation). Forest and meadow match their 152 counts. River: 3 checks, 2
+successful, none empty-handed (152: 7 empty-handed); 3 sheep acquired, 1 pregnancy, 1 lamb born;
+26 alive (152: 30; single trajectories, no effect claim).
+
+## Uncollected meadow trap: rational competition, no change
+
+`trap-collect-probe.ts` (meadow, rules 153, 98 samples after the trap is made at tick 48,281):
+the maker always has the trap demand and is offered "collect" 31 times (utility 18-25, rank
+4-32), losing to smithy building, hearth tending, winter warmth and gathering. Pack full in only
+3 samples, so the pack-room hypothesis is rejected. No score tuning. Noted, not acted on: the
+maker's only trap ground rests on a deer sighting about 45,000 ticks old (sightings are capped at
+four, not by age). Longer frozen 50-day screens of 153 run from
+`living-world-survival-check153` (`review_evidence/long-20261104-153/` there).
