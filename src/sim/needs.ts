@@ -77,7 +77,7 @@ export function fireWarmth(world: World, x: number, y: number): number {
 }
 
 function isHeavyWork(kind: string): boolean {
-  return kind === 'gather' || kind === 'build' || kind === 'till' || kind === 'harvest' || kind === 'repair' || kind === 'haul' || kind === 'craft';
+  return kind === 'butcher' || kind === 'gather' || kind === 'build' || kind === 'till' || kind === 'harvest' || kind === 'repair' || kind === 'haul' || kind === 'craft';
 }
 
 export function updateNeeds(world: World, p: Person): void {

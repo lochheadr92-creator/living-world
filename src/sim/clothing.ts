@@ -113,7 +113,7 @@ export function validateClothing(w:World):void{
  }
  for(const b of w.buildings){
   check(b.ops?.produced);check(b.ops?.consumed);check(b.ops?.wasted);check(b.ops?.job?.held);
-  const j=b.ops?.job;if(!j||!/^(strip_fibre|weave_)/.test(j.recipe))continue;
+  const j=b.ops?.job;if(!j||!/^(strip_fibre|weave_|sew_hide_)/.test(j.recipe))continue;
   const r=RECIPE_BY_ID[j.recipe];
   if(!hasClothing(w)||!r||b.type!==r.at||!j.held||!j.workers||Array.isArray(j.workers)||
    !Number.isSafeInteger(j.client)||j.client<0||!Number.isSafeInteger(j.destSite)||j.destSite<0||typeof j.purpose!=='string'||typeof j.blocked!=='string'||
@@ -132,6 +132,7 @@ export function validateClothing(w:World):void{
  for(const t of w.tools){
   if(!isTextile(t.kind)){if(t.textile)throw new Error('textile state on non-textile');continue;}
   const s=t.textile;
+  if(s?.material!==undefined&&(s.material!=='hide'||!runsRulesVersion(w,125)||t.kind!=='garment'))throw Error('invalid textile material');
   if(!hasClothing(w)||!s||!Number.isFinite(s.wet)||s.wet<0||s.wet>1||typeof s.equipped!=='boolean'||!Number.isFinite(t.wear)||t.wear<0||t.wear>=100||t.tier!==0||!containers.some(c=>c.id===t.holder))throw new Error('invalid textile state');
   if(s.equipped){const key=`${t.holder}:${t.kind}`;if(!w.persons.some(p=>p.id===t.holder&&p.alive)||slots.has(key))throw new Error('invalid textile slot');slots.add(key);}
  }

@@ -1,3 +1,4 @@
+import {carcassTick,hasCarcasses} from './carcass';
 import {clothingTick} from './clothing';
 import { updateEcology } from './ecology';
 import {hearthTick} from './hearth';
@@ -94,6 +95,7 @@ export function stepWorld(world: World): void {
   roadsTick(world);
 
   clothingTick(world);
+  carcassTick(world);
   updateWildlife(world);
   rebuildMobileGrid(world);
 
@@ -263,7 +265,7 @@ function spoilGoods(world: World): void {
   // are untouched; an empty new-kind holding consumes no random draw.
   if(runsPreservation(world)){
     const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
-    for(const items of holdings)for(const k of PRESERVED_FOODS){
+    for(const items of holdings)for(const k of [...PRESERVED_FOODS,...(hasCarcasses(world)?['hide','fat'] as const:[])]){
       const n=items[k]??0;let lost=0;
       for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*spoilStore(world))lost++;
       if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,'carried preserved food spoiled');}
@@ -297,7 +299,7 @@ function spoilGoods(world: World): void {
         ledgerSpoil(world, k, lost, 'left-out food spoiled');
       }
     }
-    if (Object.keys(pile.items).length === 0) {
+    if (!pile.carcass && Object.keys(pile.items).length === 0) {
       const i = world.piles.indexOf(pile);
       if (i >= 0) world.piles.splice(i, 1);
       world.byId.delete(pile.id);
@@ -370,7 +372,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.hearth)push('HearthMemory'+p.id+':'+b.id+JSON.stringify(b.hearth));
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);
   for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
-  for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}
+  for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.carcass)push(`Carcass:${pile.id}:${pile.since}:${JSON.stringify(pile.carcass)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}
   // A wolf that was driven off keeps clear of one person for a while, which changes who it hunts next: that is part of
   // what the world is. Absent on every wolf that was never driven off, so an older world hashes exactly as it did.
   for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}`);

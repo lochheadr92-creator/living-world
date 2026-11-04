@@ -1,3 +1,4 @@
+import {hasCarcasses} from './carcass';
 import {recipeAvailable} from './recipes';
 import {knownTextileStock} from './textile_stock';
 import {hasClothing,isTextile,TEXTILES,visibleChildNeedsGarment} from './clothing';
@@ -137,9 +138,9 @@ function belief(ctx: Ctx, id: number): Belief | undefined {
 }
 
 // ───────────────────────── leaves: single things a person can go and do ─────────────────────────
-function itemPhrase(items: Items): string {
+function itemPhrase(items: Items, world:World): string {
   return Object.keys(items)
-    .map((k) => `${items[k as ItemKind]} ${ITEM_LABEL[k as ItemKind]}`)
+    .map((k) => `${items[k as ItemKind]} ${k==='garment'&&hasCarcasses(world)?'garment':ITEM_LABEL[k as ItemKind]}`)
     .join(' and ');
 }
 
@@ -151,7 +152,7 @@ function nameOf(b: Belief): string {
 export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
-    addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items)}`, b.id, `tried recently and found none to take`, tag);
+    addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items, world)}`, b.id, `tried recently and found none to take`, tag);
     return;
   }
   const e = eta(ctx, b.x, b.y);
@@ -163,7 +164,7 @@ export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, wh
   const place = b.kind === 'pile' ? 'the heap' : b.kind === 'cart' ? 'the parked cart' : `the ${nameOf(b)}`;
   addOption(ctx, {
     kind: 'withdraw',
-    label: `Collect ${itemPhrase(items)} from ${place}`,
+    label: `Collect ${itemPhrase(items, world)} from ${place}`,
     goal: why,
     need: null,
     util,
@@ -178,7 +179,7 @@ export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, wh
       if (!spot) return null;
       return newActivity(world, p, {
         kind: 'withdraw',
-        label: `Collecting ${itemPhrase(items)}`,
+        label: `Collecting ${itemPhrase(items, world)}`,
         goal: why,
         targetId: b.id,
         targetType: b.kind === 'pile' ? 'pile' : 'building',
@@ -215,7 +216,7 @@ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
     kind: 'deposit',
-    label: `Bring ${itemPhrase(take)} to the ${nameOf(b)}`,
+    label: `Bring ${itemPhrase(take, world)} to the ${nameOf(b)}`,
     goal: why,
     need: null,
     util,
@@ -229,7 +230,7 @@ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
       if (!spot) return null;
       return newActivity(world, p, {
         kind: 'deposit',
-        label: `Bringing ${itemPhrase(take)} to the ${nameOf(b)}`,
+        label: `Bringing ${itemPhrase(take, world)} to the ${nameOf(b)}`,
         goal: why,
         targetId: b.id,
         targetType: 'building',
@@ -388,7 +389,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   const need: Items = {};
   for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
   for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
-  if(r.preservation){
+  if(r.preservation&&r.preservation!=='render'){
     const raw:ItemKind=r.inputs.fish?'fish':'meat';
     const otherFood=foodUnits(p.inv)+foodUnits(b.items??{})-(b.items?.[raw]??0);
     need[raw]=(need[raw]??0)+Math.max(0,2-otherFood);
@@ -560,6 +561,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   const toolRequired = toolRequiredFor(ctx, recipes);
   const seen = new Set<string>();
   for (const r of recipes) {
+    if(!recipeAvailable(ctx.world,r))continue;
     const fac = facilitiesOf(ctx, r.at)[0];
     if (!fac) {
       if (!seen.has(r.at)) {
@@ -578,6 +580,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
 function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
   if (!hasToolPrecedence(ctx.world)) return undefined;
   for (const r of recipes) {
+    if(!recipeAvailable(ctx.world,r))continue;
     const fac = facilitiesOf(ctx, r.at)[0];
     if (!fac || techniqueBlocker(ctx.world, ctx.p, r.id)) continue;
     if (toolAvailable(ctx, fac, r)) return false;
@@ -603,6 +606,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     }
     if(toolsHeldBy(world,p.id).some(t=>isTextile(t.kind)&&t.wear>=45)&&(p.inv.fibre??0)<1)out.push({item:'fibre',qty:1,have:0,base:28,why:'mend worn insulation',tag:'craft'});
   }
+  if(hasCarcasses(world)&&(p.inv.fat??0)>0)out.push({item:'rendered_fat',qty:1,have:p.inv.rendered_fat??0,base:30,why:'prepare recovered animal fat for food',tag:'food'});
   if(hasPreservation(world)){
     const raw=preservationSurplus(ctx);
     // A finite food job belongs to the same planner as other workshop batches.
@@ -796,9 +800,9 @@ function optGranaryStore(ctx: Ctx): void {
   const keep = winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3;
   const items: Items = {};
   let n = 0;
-  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat'] as ItemKind[]) {
+  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
-    const give = k === 'grain'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
+    const give = k === 'grain'||k==='rendered_fat'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
     if (give >= (winter ? 1 : 2)) {
       items[k] = give;
       n += give;
@@ -910,7 +914,7 @@ function optCartHaul(ctx: Ctx): void {
     const src = best.src;
     addOption(ctx, {
       kind: 'cart_haul',
-      label: `Cart ${itemPhrase(load)} to the ${(site.btype ?? 'building').replace('_', ' ')} site`,
+      label: `Cart ${itemPhrase(load, world)} to the ${(site.btype ?? 'building').replace('_', ' ')} site`,
       goal: 'to bring the materials in one trip',
       need: null,
       util,
@@ -985,7 +989,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   const knowRocks = countBeliefsOfKind(p, 'rock') + countBeliefsOfKind(p, 'outcrop') >= 1;
   if (!knowTrees || !knowRocks) return out;
   const hs = hhState(ctx);
-  if(hasPreservation(world)&&!knowsEnough(ctx,'food_rack')&&preservationSurplus(ctx))
+  if(hasPreservation(world)&&!knowsEnough(ctx,'food_rack')&&(preservationSurplus(ctx)||(hasCarcasses(world)&&(p.inv.fat??0)>0)))
     out.push({type:'food_rack',signal:0.9,why:'spare fish or meat could be kept for later meals'});
   const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
   const wish = upgradeWish(ctx);
@@ -1216,7 +1220,7 @@ function preservationOptions(ctx:Ctx):void {
     // Collection and resumption do not require another raw surplus.
     const goods:Items={};
     let room=carryCap(ctx.world,ctx.p)-weightOf(ctx.p.inv),waiting=0;
-    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const){
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const){
       const stock=f.b.items?.[k]??0;waiting+=stock;
       const n=Math.min(2,stock,Math.max(0,Math.floor(room/WEIGHT[k])));
       if(n>0){goods[k]=n;room-=n*WEIGHT[k];}
@@ -1228,6 +1232,7 @@ function preservationOptions(ctx:Ctx):void {
       planRecipe(ctx,f,running,Object.keys(running.outputs)[0] as ItemKind,2,27,'finish preserving the paid batch','food',0);
       continue;
     }
+    if(hasCarcasses(ctx.world)&&waiting===0&&((ctx.p.inv.fat??0)+(f.b.items?.fat??0)>0))planRecipe(ctx,f,RECIPE_BY_ID.render_fat,'rendered_fat',1,30,'prepare recovered fat for food','food',0);
     const raw=preservationSurplus(ctx);
     if(!raw||waiting>0)continue;
     const method=ctx.world.weather.rain>0.1?'smoke':'dry';
@@ -1253,7 +1258,7 @@ export function productionOptions(ctx: Ctx): void {
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
     for(const b of known.slice(0,2)){
       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
-      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as const){
+      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const){
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }

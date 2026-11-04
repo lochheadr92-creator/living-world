@@ -101,7 +101,7 @@ export interface Ctx {
   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
 }
 
-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
 export function foodCount(inv: Person['inv']): number {
   let n = 0;

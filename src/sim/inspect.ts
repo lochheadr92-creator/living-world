@@ -256,7 +256,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'plot':
       return 'Field plot';
     case 'pile':
-      return 'Pile of goods';
+      return e.carcass?'Deer carcass':'Pile of goods';
     case 'grave':
       return `Grave of ${e.name}`;
     case 'cart':
@@ -815,6 +815,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
       return { kind: 'plot', ...base, title: 'Field plot', subtitle: 'Farmland', rows, bars, notes: ecologyNotes(world,pl.x,pl.y), position: { x: pl.x + 0.5, y: pl.y + 0.5 } };
     }
     case 'pile':
+      if(e.carcass){const c=e.carcass;return {kind:'pile',...base,title:'Deer carcass',subtitle:'Finite body; parts need butchery',rows:[['Animal origin',String(c.animalId)],['Belongs to',householdById(world,c.hhId)?.name??(c.hhId?`household #${c.hhId}`:'Shared')],['Decay deadline',`${Math.max(0,4800-(world.tick-e.since))} ticks remaining`],['Current worker',c.claim&&c.claim.until>world.tick?nameOf(world,c.claim.person):'Nobody'],['Paid work',Object.entries(c.work).map(([k,n])=>`${k}: ${n}/120`).join(', ')]],bars:[],items:itemList(c.remaining),notes:['These parts are still inside the body. Each unit takes 120 work ticks and room in a nearby worker’s pack.',`Recovered: ${itemsToText(c.recovered)}. Lost: ${itemsToText(c.lost)}.`],position:{x:e.x+.5,y:e.y+.5}};}
       return { kind: 'pile', ...base, title: e.estate?'Belongings after a death':e.mealFood?'Leftover meal food':'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)],...(e.mealFood?[["Belongs to",householdById(world,e.mealFood.hhId)?.name??`household #${e.mealFood.hhId}`] as [string,string]]:[]),...(e.estate?[["Belongs to",e.estate.hhId===0?'Shared property':householdById(world,e.estate.hhId)?.name??`household #${e.estate.hhId}`] as [string,string]]:[])], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.',...(e.mealFood?['Food remains at the gathering place. A household member must reach it and spend time collecting it, with room in their pack.']:[]),...(e.estate?['These goods remain here. Collection takes time and pack space; borrowed equipment remains with its existing owner. Knowing about a death does not reveal these belongings to distant people.']:[])], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'grave':
       return { kind: 'grave', ...base, title: `Grave of ${e.name}`, subtitle: `Died ${agoText(world, e.died)}, aged ${e.age}`, rows: [], bars: [], notes: [], position: { x: e.x + 0.5, y: e.y + 0.5 } };

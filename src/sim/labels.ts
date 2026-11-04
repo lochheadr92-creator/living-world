@@ -53,6 +53,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   wander: 'wandering',
   attend: 'at a gathering',
   hunt: 'hunting',
+  butcher: 'butchering',
   alone: 'taking some time alone',
   eat: 'eating',
   eat_store: 'eating from stores',
@@ -95,6 +96,8 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 };
 
 export const ITEM_ICON: Record<ItemKind, string> = {
+  rendered_fat:'rendered fat',
+  hide:'raw hide', fat:'raw fat',
   fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',
   dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',
   offcuts: 'wood',

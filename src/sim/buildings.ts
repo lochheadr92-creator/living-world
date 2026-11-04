@@ -114,7 +114,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
   let target: Pile | null = null;
   // merge into an existing pile on the tile if present
   for (const pile of world.piles) {
-    if (!mealFood && !pile.mealFood && !estate && !pile.estate && pile.x === x && pile.y === y) {
+    if (!pile.carcass && !mealFood && !pile.mealFood && !estate && !pile.estate && pile.x === x && pile.y === y) {
       for (const k in items) addItem(pile.items, k as keyof Items, items[k as keyof Items] ?? 0);
       target = pile;
       break;

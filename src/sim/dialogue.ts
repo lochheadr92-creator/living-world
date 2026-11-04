@@ -58,6 +58,8 @@ export function smallTalk(world: World, a: number, b: number, atFire: boolean, c
 }
 
 export const ITEM_PHRASE: Record<ItemKind, string> = {
+  rendered_fat:'rendered fat',
+  hide:'raw hide', fat:'raw fat',
   fibre:'bast fibre',garment:'garment',blanket:'blanket',bedding:'bedroll',
   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
   offcuts: 'offcut fuel',

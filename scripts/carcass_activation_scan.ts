@@ -1,0 +1,21 @@
+import {mkdirSync,writeFileSync,readdirSync,appendFileSync} from 'node:fs';
+import {createWorld} from '../src/sim/factory';
+import {currentWorldSettings} from '../src/sim/profiles';
+import {stepWorld} from '../src/sim/world';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {conservationReport} from '../src/sim/economy';
+import {survivalObserver} from './observers/survival';
+import {clothingObserver} from './observers/clothing';
+import {carcassObserver} from './observers/carcass';
+import {textileProtection} from '../src/sim/clothing';
+import {sourceManifest} from './observers/provenance';
+const [seed,out]=process.argv.slice(2).filter(x=>x!=='--');
+const files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/carcass_activation_scan.ts','scripts/observers/carcass.ts','scripts/observers/survival.ts','scripts/observers/clothing.ts'),source=sourceManifest(files);
+mkdirSync(out);
+const w=createWorld(currentWorldSettings('normal',seed)),survival=survivalObserver(w),clothing=clothingObserver(w),carcass=carcassObserver(w);let hideProtectionTicks=0;
+for(let n=0;n<240000;n++){survival.tick();clothing.tick();carcass.tick();for(const t of w.tools)if(t.textile?.material==='hide'){const p=w.persons.find(p=>p.id===t.holder&&p.alive);if(p&&textileProtection(p,t)>0)hideProtectionTicks++;}stepWorld(w);if(w.tick%2400===0){if(!conservationReport(w).ok)throw Error('Conservation');appendFileSync(out+'/progress.jsonl',JSON.stringify({tick:w.tick,population:w.persons.filter(p=>p.alive).length,hideProtectionTicks,parts:carcass.report().parts})+'\n');}}
+delete w.hooks;const final=serializeWorld(w),copy=deserializeWorld(final);if(serializeWorld(copy)!==final)throw Error('Save changed');
+const report={seed,settings:w.settings,source,tick:w.tick,population:w.persons.filter(p=>p.alive).length,survival:survival.report(),clothing:clothing.report(),carcass:carcass.report(),hideProtectionTicks,conservation:conservationReport(w),limits:'Unstaged 100-day activation search; no decision sampling or every-tick twin. Not a survival comparison.'};
+for(let n=0;n<120;n++){stepWorld(w);stepWorld(copy);}if(serializeWorld(w)!==serializeWorld(copy))throw Error('Continuation changed');
+if(JSON.stringify(source)!==JSON.stringify(sourceManifest(files)))throw Error('Source changed');
+writeFileSync(out+'/final.json',final);writeFileSync(out+'/report.json',JSON.stringify({...report,exactContinuation:true},null,2));console.log(JSON.stringify({seed,population:report.population,carcass:report.carcass,hideProtectionTicks}));

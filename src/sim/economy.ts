@@ -5,7 +5,7 @@ import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
 import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
 
-const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
 export function pickFood(items: Items, hunger: number): FoodKind | null {
@@ -219,7 +219,7 @@ export function totalItems(world: World): Items {
     if (b.ops?.job) add(b.ops.job.held);
   }
   for (const s of world.sites) add(s.delivered);
-  for (const pile of world.piles) add(pile.items);
+  for (const pile of world.piles) { add(pile.items); if(pile.carcass)add(pile.carcass.remaining); }
   for (const c of world.carts) add(c.load);
   for (const m of world.meals) if (m.status !== 'done' && m.status !== 'cancelled') add(m.table);
   for (const s of world.sources) if (s.amount > 0) addItem(t, s.item, s.amount);

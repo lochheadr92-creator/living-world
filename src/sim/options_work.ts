@@ -221,7 +221,7 @@ function optDepositFood(ctx: Ctx): void {
   const { world, p } = ctx;
   const smallPack = hasChildhood(world) && ctx.stage === 'child';
   const keepSelf = ctx.drives.hunger > 0 ? 3 : 2;
-  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
   const unreserved = smallPack ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
   const surplus = (smallPack ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
@@ -248,7 +248,7 @@ function optDepositFood(ctx: Ctx): void {
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]) {
+    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) {
       const have = unreserved[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
@@ -1265,7 +1265,7 @@ function optSalvage(ctx: Ctx): void {
         value += 10;
       }
     }
-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as const) {
+    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const) {
       const n = unitsOf(items[k]);
       if (n <= 0) continue;
       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
@@ -1531,7 +1531,7 @@ function optCare(ctx: Ctx): void {
     if (hungry && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
       // give what fits best
       // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
-      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] : ['berries', 'fruit', 'grain', 'fish'];
+      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] : ['berries', 'fruit', 'grain', 'fish'];
       const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, kn.hunger < 25 ? 3 : 2);

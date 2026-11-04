@@ -7,11 +7,11 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding';
 /** Raw materials and the things made from them. */
-export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre';
+export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
 export type Items = Partial<Record<ItemKind, number>>;
 
@@ -105,6 +105,8 @@ export interface Belief {
   items?: Items;
   need?: Items;
   state?: string;
+  /** Dated observation of parts still inside a carcass, not withdrawable goods. */
+  carcassParts?:Partial<Record<CarcassPart,number>>;
   progress?: number;
   fuel?: number;
   /** Visible fitting, with thermal state only when actually observed indoors. */
@@ -223,6 +225,7 @@ export type ActivityKind =
   | 'exchange_journey'
   | 'attend'
   | 'hunt'
+  | 'butcher'
   | 'alone'
   | 'wander'
   | 'eat'
@@ -907,7 +910,7 @@ export interface FacilityState {
 
 // ───────────────────────────── tools and carts ─────────────────────────────
 export interface Tool {
-  textile?: {wet:number;equipped:boolean};
+  textile?: {wet:number;equipped:boolean;material?:'hide'};
   ent: 'tool';
   id: number;
   kind: ToolKind;
@@ -996,7 +999,15 @@ export interface Plot {
   variant: number;
 }
 
+export type CarcassPart = 'meat' | 'hide' | 'fat';
+export interface Carcass {
+  animalId:number; species:'deer'; hhId:number;
+  initial:Record<CarcassPart,number>; remaining:Record<CarcassPart,number>;
+  recovered:Record<CarcassPart,number>; lost:Record<CarcassPart,number>; work:Record<CarcassPart,number>;
+  claim:{person:number;until:number}|null; emptySince:number|null;
+}
 export interface Pile {
+  carcass?:Carcass;
   /** Rules 90: one physical leftover holding per meal; never merged with unrelated goods. */
   mealFood?: {mealId:number;hostId:number;hhId:number};
   /** Rules 93: one physical parcel per existing owner; borrowed tools keep their owner. */

@@ -4,6 +4,7 @@
 // spawns a deer now and then up to what the ground holds). Every chance is a hash of the seed, the hunter and the tick.
 //
 // An authored world has no deer, so no hunt is ever on offer there and its fingerprints are untouched.
+import {hasCarcasses,makeCarcass} from './carcass';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY } from './constants';
@@ -110,6 +111,15 @@ function strike(world: World, p: Person, a: Animal, act: { data: Record<string, 
     p.cooldowns['hunt'] = world.tick + 200;
     addFx(world, 'splash', a.x, a.y, 0);
     return 'fail:it got away';
+  }
+  if(hasCarcasses(world)){
+    if(!makeCarcass(world,a,p))return 'fail:the animal is gone';
+    p.skills.forage=Math.min(1.8,p.skills.forage+.01);
+    p.stats.gathered++;
+    addEvent(world,'work',`${p.name} brought down a deer; its body needs butchering.`,[p.id,...party.map(q=>q.id)],a.x,a.y);
+    addLog(world,p,'work','Brought down a deer. Its meat, hide and fat remain in the body.');
+    think(world,p,'hunt',8,DAY,'brought down a deer');
+    return 'done';
   }
   removeAnimal(world, a);
   p.skills.forage = Math.min(1.8, p.skills.forage + 0.01);

@@ -1,3 +1,4 @@
+import {carcassOptions} from './carcass';
 import {clothingOptions} from './clothing';
 import {hasChildhood} from './childhood_rules';
 import {hasLivedLife} from './lived_life';
@@ -740,6 +741,7 @@ export function survivalOptions(ctx: Ctx): void {
   defenceOptions(ctx);
   optEat(ctx);
   huntOptions(ctx);
+  carcassOptions(ctx);
   optDrink(ctx);
   optSleep(ctx);
   optWarmth(ctx);

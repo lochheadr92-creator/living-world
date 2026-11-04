@@ -3,6 +3,7 @@ import {mealPileBlocker} from './meal_leftovers';
 import type {Entity,Person} from './types';
 export {mayTakeKnownPile} from './meal_leftovers';
 export function pileAccessBlocker(p:Person,e:Entity|undefined):string|null{
+ if(e?.ent==='pile'&&e.carcass)return 'the body must be butchered before taking its parts';
  const meal=mealPileBlocker(p,e);if(meal)return meal;
  if(!e||e.ent!=='pile'||!e.estate)return null;
  if(p.indoors||Math.hypot(p.x-e.x-.5,p.y-e.y-.5)>2)return 'must reach the belongings outdoors';

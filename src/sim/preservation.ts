@@ -2,7 +2,7 @@
 // fields are authoritative: neither inspection nor loading advances the process.
 import {DAY, PRESERVED_FOODS} from './constants';
 import {foodUnits, ledgerSpoil, takeFrom, transfer} from './economy';
-import {RECIPE_BY_ID} from './recipes';
+import {recipeAvailable,RECIPE_BY_ID} from './recipes';
 import type {Recipe} from './recipes';
 import {runsRulesVersion} from './rulesversion';
 import type {Building, Items, ItemKind, Job, Person, World} from './types';
@@ -32,6 +32,8 @@ export function preservationWorkers(w:World,b:Building):Person[]{
 export function preservationStartBlocker(w:World,p:Person,r:Recipe,accessibleStoreFood:number):string {
   if(!r.preservation)return '';
   if(!hasPreservation(w))return 'preservation is not available under these rules';
+  if(!recipeAvailable(w,r))return 'this preparation is unavailable under these rules';
+  if(r.preservation==='render')return '';
   if(p.needs.hunger<45)return 'eat before preparing food for later';
   if(accessibleStoreFood+foodUnits(p.inv)<4)return 'leave at least two portions for immediate eating';
   return '';
@@ -44,8 +46,8 @@ export function preservationCanAdvance(w:World,b:Building):boolean {
   if(!job)return false;
   const r=RECIPE_BY_ID[job.recipe];
   if(!r?.preservation)return true;
-  const raw=r.inputs.fish?'fish':'meat';
-  if(w.tick-job.started>=PRESERVATION_MAX_AGE || (job.held[raw]??0)<2){
+  const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat',quantity=r.inputs[raw]??0;
+  if(w.tick-job.started>=PRESERVATION_MAX_AGE || (job.held[raw]??0)<quantity){
     const lost=takeFrom(job.held,raw,job.held[raw]??0);
     if(lost)ledgerSpoil(w,raw,lost,'unfinished preservation spoiled');
     for(const k of Object.keys(job.held) as ItemKind[]) transfer(w,job.held,b.store.items,b.store.cap,k,job.held[k]??0,`batch:${b.id}`,`building:${b.id}`,'recover fuel from spoiled batch');
@@ -63,9 +65,9 @@ export function preservationCanAdvance(w:World,b:Building):boolean {
 
 export function preservationReady(w:World,job:Job,r:Recipe):boolean {
   if(!r.preservation)return true;
-  const raw=r.inputs.fish?'fish':'meat';
-  return runsPreservation(w)&&job.progress>=job.total&&job.phase!=='work'&&job.burnLeft<=0&&
-    w.tick-job.started<PRESERVATION_MAX_AGE&&(job.held[raw]??0)===2;
+  const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat',quantity=r.inputs[raw]??0;
+  return runsPreservation(w)&&recipeAvailable(w,r)&&job.progress>=job.total&&job.phase!=='work'&&job.burnLeft<=0&&
+    w.tick-job.started<PRESERVATION_MAX_AGE&&(job.held[raw]??0)===quantity;
 }
 
 /** A collapsed rack ruins its exposed unfinished food; intact fuel can scatter
@@ -73,7 +75,7 @@ export function preservationReady(w:World,job:Job,r:Recipe):boolean {
 export function losePreservationRack(w:World,b:Building):void {
   const j=b.ops?.job,r=j&&RECIPE_BY_ID[j.recipe];
   if(!j||!r?.preservation)return;
-  const raw=r.inputs.fish?'fish':'meat';
+  const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat',quantity=r.inputs[raw]??0;
   const lost=takeFrom(j.held,raw,j.held[raw]??0);
   if(lost)ledgerSpoil(w,raw,lost,'unfinished preservation destroyed with rack');
 }
@@ -81,7 +83,7 @@ export function losePreservationRack(w:World,b:Building):void {
 export function validatePreservation(w:World):void {
   const eligible=w.settings.dynamics==='rich'&&runsRulesVersion(w,PRESERVATION_FROM_VERSION);
   const check=(items:Items|undefined)=>{
-    for(const k of PRESERVED_FOODS)if(items?.[k]!==undefined&&(!eligible||!Number.isSafeInteger(items[k])||items[k]!<0))throw new Error('Invalid preserved food inventory');
+    for(const k of PRESERVED_FOODS)if(items?.[k]!==undefined&&(!eligible||(k==='rendered_fat'&&!runsRulesVersion(w,125))||!Number.isSafeInteger(items[k])||items[k]!<0))throw new Error('Invalid preserved food inventory');
   };
   for(const p of w.persons){check(p.inv);for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);}}
   for(const b of w.buildings){
@@ -92,7 +94,7 @@ export function validatePreservation(w:World):void {
     const j=b.ops?.job,r=j&&RECIPE_BY_ID[j.recipe];
     if(b.type==='food_rack'&&j&&!r?.preservation)throw new Error('Invalid preservation recipe');
     if(!r?.preservation)continue;
-    if(!eligible||b.type!=='food_rack'||!j||!j.held||!j.workers||Array.isArray(j.workers)||
+    if(!eligible||!recipeAvailable(w,r)||b.type!=='food_rack'||!j||!j.held||!j.workers||Array.isArray(j.workers)||
       !Number.isSafeInteger(j.client)||j.client<=0||!Number.isSafeInteger(j.destSite)||j.destSite<0||
       typeof j.purpose!=='string'||typeof j.blocked!=='string'||
       !['work','burn','ready'].includes(j.phase)||
@@ -103,9 +105,9 @@ export function validatePreservation(w:World):void {
       (j.phase==='work'&&j.progress>=j.total)||
       (j.phase!=='work'&&j.progress<j.total))throw new Error('Invalid preservation batch state');
     for(const [id,n] of Object.entries(j.workers))if(!Number.isSafeInteger(Number(id))||Number(id)<=0||!Number.isSafeInteger(n)||n<0)throw new Error('Invalid preservation worker record');
-    const raw=r.inputs.fish?'fish':'meat';
-    if(![0,2].includes(j.held[raw]??0)||((j.held[raw]??0)===0&&w.tick-j.started<PRESERVATION_MAX_AGE))throw new Error('Invalid preservation batch contents');
-    for(const [k,n] of Object.entries(j.held))if(!['fish','meat','wood'].includes(k)||!Number.isInteger(n)||n<0||n>(r.inputs[k as ItemKind]??r.fuel[k as ItemKind]??0))throw new Error('Invalid preservation batch contents');
+    const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat',quantity=r.inputs[raw]??0;
+    if(![0,quantity].includes(j.held[raw]??0)||((j.held[raw]??0)===0&&w.tick-j.started<PRESERVATION_MAX_AGE))throw new Error('Invalid preservation batch contents');
+    for(const [k,n] of Object.entries(j.held))if(![raw,'wood'].includes(k)||!Number.isInteger(n)||n<0||n>(r.inputs[k as ItemKind]??r.fuel[k as ItemKind]??0))throw new Error('Invalid preservation batch contents');
     if(j.phase!=='work'&&(j.held.wood??0)>0)throw new Error('Invalid preservation fuel state');
     if(j.phase==='work'&&w.tick-j.started<PRESERVATION_MAX_AGE&&(j.held.wood??0)!==(r.fuel.wood??0))throw new Error('Invalid preservation fuel state');
   }

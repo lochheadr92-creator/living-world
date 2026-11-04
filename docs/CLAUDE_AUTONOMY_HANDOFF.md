@@ -1,5 +1,16 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Current survival checkpoint, 4 November 2026:** rules125 adds finite carcasses
+and paid butchery with hide/fat processing. Ordinary fern60 shows recovered
+meat eaten, a recovered hide later lost, and a contested claim; the material
+processing routes still need ordinary uptake evidence. Final forest/river25
+replays match their observed saves. Immutable125 is captured; fibre bedroll
+sleeping use is now proven in a fresh same-source meadow run. Continue
+traps/nets, domestic animals, reserves last, deferred connections and final
+comparisons. The programme remains incomplete; full suite retains 31 baseline
+failures and full typecheck/build the two existing nullable review errors.
+See `SURVIVAL_CAPABILITIES.md` and the current `HANDOFF.md` before older notes.
+
 **Survival continuation, 4 November 2026:** integration main now has the rules-124
 fibre-clothing increment. Exact current-source replay matches check6 forest/
 river 25-day saves; forest includes child garment use, river blanket sleep use.

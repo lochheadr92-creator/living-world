@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged carcass verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:70px;left:10px;width:205px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED carcass contract</strong><p>A staged deer was killed here. Its parts remain in one body.</p><button id="cut">Butcher one portion</button><button id="decay">Let remaining body decay</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';
+import {stage,addPerson,done} from '/tests/helpers/kit.ts';import {makeWolf} from '/src/sim/wildlife.ts';import {makeCarcass,carcassTick,CARCASS_LIFETIME} from '/src/sim/carcass.ts';
+import {generateOptions} from '/src/sim/decision.ts';import {startActivity,stepActivity,newActivity} from '/src/sim/activities.ts';
+import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';
+const s=stage('carcass-rendered'),w=s.w;w.settings={...w.settings,dynamics:'rich',rulesVersion:125};
+const p=addPerson(s,'Ada',40.5,40.5,{hunger:65,thirst:90,energy:90}),deer=makeWolf(w,41.5,40.5,'deer');done(s);const body=makeCarcass(w,deer,p);
+const g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(body.id);
+const pt=project(41,40);g.camera={x:pt.sx+20,y:pt.sy,zoom:2};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui')),result=document.getElementById('result');
+function finish(){for(let i=0;i<700&&p.activity;i++){w.tick++;stepActivity(w,p);}if(p.activity)throw Error('Activity did not finish');}
+function verify(){const before=serializeWorld(w);ui.update(1);result.textContent=` Carried meat: ${p.inv.meat??0}; body meat: ${body.carcass.remaining.meat}; lost meat: ${body.carcass.lost.meat}; result: ${p.lastResult?.detail??'no butchery yet'}; conservation: ${conservationReport(w).ok}; pure: ${before===serializeWorld(w)}; exact save: ${before===serializeWorld(deserializeWorld(before))}`;}
+document.getElementById('cut').onclick=()=>{const o=generateOptions(w,p,true,true).options.find(o=>o.key===`butcher:${body.id}:meat`);if(!o)throw Error('Butchery not offered');startActivity(w,p,o.make());finish();g.select(body.id);verify();};
+document.getElementById('decay').onclick=()=>{w.tick=body.since+CARCASS_LIFETIME;carcassTick(w);startActivity(w,p,newActivity(w,p,{kind:'butcher',label:'Butcher the old body',goal:'recover meat',targetId:body.id,targetType:'pile',tx:41.5,ty:40.5,spotX:41.5,spotY:40.5,data:{part:'meat'}}));finish();g.select(body.id);verify();};
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

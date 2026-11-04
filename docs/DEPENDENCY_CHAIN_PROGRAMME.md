@@ -8,8 +8,11 @@ all seven authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILI
 Rules 122 has bounded ordinary fish-preservation use in forest and null use in
 river; existing full-suite/typecheck failures remain reported. The revised owner
 attachment authorises body reserves last. Rules-124 fibre clothing has ordinary garment, child-delivery and blanket use;
-bedroll use and deferred hide/wool routes remain open (see the same capability
-document). Carcasses are next; traps/nets, domestic animals and reserves remain pending.
+bedroll sleeping use is now observed in a fresh final-source meadow run.
+Rules125 adds finite carcasses and paid butchery: ordinary recovered meat is
+eaten, while ordinary hide/fat processing remains open despite complete staged
+paths. The later hide/wool links remain in the same capability document.
+Traps/nets, domestic animals and reserves remain pending.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

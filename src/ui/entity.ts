@@ -96,7 +96,7 @@ function iconFor(e: Entity | undefined): IconName {
 
 /** "1 plank", "4 planks": the simulation's item words are plural, so a lone one loses its s */
 function countNoun(kind: string, n: number): string {
-  const word = (ITEM_LABEL as Record<string, string>)[kind] ?? kind;
+  const word = kind==='garment'?'garment':(ITEM_LABEL as Record<string, string>)[kind] ?? kind;
   return `${n} ${n === 1 && /s$/.test(word) ? word.slice(0, -1) : word}`;
 }
 
@@ -214,7 +214,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
       const kind = b.label.replace(/ supplied$/, '') as ItemKind;
       const ico = icon(ITEM_LABEL[kind] ? itemIconName(kind) : 'cube', 15, 'mat-ico');
       ico.style.color = legible(ITEM_COLORS[kind] ?? '#b98a4f', 0.28);
-      const name = h('span', { class: 'mat-n' }, cap(ITEM_LABEL[kind] ?? kind));
+      const name = h('span', { class: 'mat-n' }, cap(kind==='garment'?'garment':ITEM_LABEL[kind] ?? kind));
       const val = h('span', { class: 'mat-v num' });
       const bar = makeBar('thin');
       return { el: h('div', { class: 'mat' }, ico, h('div', { class: 'mat-main' }, h('div', { class: 'mat-top' }, name, val), bar.el)), ico, name, val, bar };

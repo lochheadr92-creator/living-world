@@ -82,6 +82,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
     case 'pile': {
       const b = blank(e.id, 'pile', e.x + 0.5, e.y + 0.5, tick);
       b.items = cloneItems(e.items);
+      if(e.carcass){b.state='carcass';b.hh=e.carcass.hhId;b.carcassParts={...e.carcass.remaining};}
       if(e.mealFood)b.hh=e.mealFood.hhId;
       if(e.estate)b.hh=e.estate.hhId;
       return b;

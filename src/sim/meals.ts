@@ -667,7 +667,7 @@ registerHandler('host_meal', {
         return 'not enough food to lay a table';
       }
       let left = need + Math.min(1, have - need);
-      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
       for (const k of order) {
         const n = Math.min(left, p.inv[k] ?? 0);
         if (n > 0) {

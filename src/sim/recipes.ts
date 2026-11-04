@@ -36,7 +36,7 @@ export interface Recipe {
   /** stone is cut out of an outcrop: moved from the deposit into the batch, so nothing is created */
   fromDeposit?: { item: ItemKind; n: number };
   /** the product is a piece of equipment, not a stack of goods */
-  toolOut?: { kind: ToolKind; tier: 0 | 1 };
+  toolOut?: { kind: ToolKind; tier: 0 | 1; textileMaterial?:'hide' };
   /** the product is a handcart */
   cartOut?: boolean;
   skill: SkillKey | null;
@@ -49,13 +49,15 @@ export interface Recipe {
   /** why anyone would want this: shown in the inspector and the docs */
   benefit: string;
   /** Bounded preservation process; only available under preservation rules. */
-  preservation?: 'dry' | 'smoke';
+  preservation?: 'dry' | 'smoke' | 'render';
 }
 
 const none: Items = {};
 
 export const recipeAvailable=(w:World,r:Recipe):boolean=>!r.minRules||w.settings.dynamics==='rich'&&runsRulesVersion(w,r.minRules);
 export const RECIPES: Recipe[] = [
+  {id:'sew_hide_garment',label:'hide garment',doing:'Scraping and sewing a hide garment',at:'timber_yard',inputs:{hide:1,fibre:1},fuel:{},work:160,burn:0,outputs:{},toolOut:{kind:'garment',tier:0,textileMaterial:'hide'},waste:{},wasteWhy:'',skill:null,workers:1,serves:['garment'],benefit:'A recovered hide sewn with fibre into personal insulation.',minRules:125},
+  {id:'render_fat',label:'rendered fat',doing:'Rendering animal fat',at:'food_rack',inputs:{fat:1},fuel:{wood:1},work:60,burn:180,outputs:{rendered_fat:1},waste:{},wasteWhy:'',skill:null,workers:1,serves:['rendered_fat'],benefit:'One inedible raw fat portion becomes food after paid work and fuel.',preservation:'render',minRules:125},
   {id:'strip_fibre',label:'bast fibre',doing:'Separating and twisting bast fibre',at:'timber_yard',inputs:{wood:1},fuel:{},work:60,burn:0,outputs:{fibre:3},waste:{},wasteWhy:'',skill:null,workers:1,serves:['fibre'],benefit:'Three fibre bundles separated from gathered wood.',minRules:124},
   ...(['garment','blanket','bedding'] as const).map((kind):Recipe=>({id:`weave_${kind}`,label:`fibre ${kind}`,doing:`Weaving a ${kind}`,at:'timber_yard',inputs:{fibre:kind==='bedding'?4:3},fuel:{},work:100,burn:0,outputs:{},toolOut:{kind,tier:0},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Paid personal insulation with finite wear and wetness.',minRules:124})),
   ...(['fish', 'meat'] as const).flatMap(raw => (['dry','smoke'] as const).map((method):Recipe => ({
@@ -358,14 +360,14 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('water');
   }
   if (type === 'granary') {
-    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const)set.add(k);
     set.add('grain');
     set.add('flour');
     set.add('bread');
     set.add('seeds');
   }
   if (type === 'hall') {
-    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat'] as const)set.add(k);
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const)set.add(k);
     set.add('bread');
     set.add('fish');
     set.add('fruit');

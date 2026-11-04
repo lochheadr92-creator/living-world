@@ -385,6 +385,14 @@ export class Scenery {
     ctx.beginPath();
     ctx.ellipse(x, y + 2, 14, 5.5, 0, 0, Math.PI * 2);
     ctx.fill();
+    if(p.carcass){
+      const full=p.carcass.emptySince===null;
+      ellipse(ctx,x,y-2,12,5,full?'#83634a':'#aaa38b');
+      ellipse(ctx,x+11,y-5,4,3,full?'#96765a':'#c1bba7');
+      ctx.strokeStyle=full?'#5b4636':'#d4cbb0';ctx.lineWidth=2;
+      for(const dx of [-7,-3,5,8]){ctx.beginPath();ctx.moveTo(x+dx,y);ctx.lineTo(x+dx+3,y+5);ctx.stroke();}
+      return;
+    }
     let slot = 0;
     const place = () => {
       const ox = [-6, 6, 0, -9, 9][slot % 5];

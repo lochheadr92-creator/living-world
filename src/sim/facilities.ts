@@ -649,7 +649,8 @@ export function finishJob(world: World, b: Building): boolean {
   if (r.toolOut) {
     const ownerHh = clientP ? clientP.hhId : b.hhId;
     const maker = Object.keys(job.workers).map(Number).sort((x, y) => (job.workers[y] ?? 0) - (job.workers[x] ?? 0))[0] ?? 0;
-    mintTool(world, r.toolOut.kind, r.toolOut.tier, ownerHh, b.id, b.store.items, maker, `made ${r.label}`);
+    const made=mintTool(world, r.toolOut.kind, r.toolOut.tier, ownerHh, b.id, b.store.items, maker, `made ${r.label}`);
+    if(made.textile&&r.toolOut.textileMaterial)made.textile.material=r.toolOut.textileMaterial;
     bump(ops.produced, r.toolOut.kind, 1);
     recordWorkshopOutput(world,b,r.toolOut.kind,1);
     if (client) addEarmark(world, b, { kind: 'out', item: r.toolOut.kind, n: 1, owner: client, reason: job.purpose });

@@ -1,25 +1,39 @@
 # Survival continuation — 4 November 2026
 
-Active integration: `main`, rules 124. Preservation 122 (`de35037`) and hearth
-123 (`62100b9`) are committed; the fibre-clothing increment is being committed.
-Current source exactly reproduces both check6 25-day final saves, with twins,
-continuation, conservation and pure observers. Child garment use is observed
-in forest; blanket sleeping use in river. Latest focused checks: 53/4 plus
-122/123 references; broad check6: 2,531 pass, 31 retained baseline failures.
-Typecheck/build retain only the two existing nullable review-test errors.
+Active integration: main, rules 125. Prior committed increments: preservation
+122 (`de35037`), hearth123 (`62100b9`), fibre clothing124 (`eb0feb1`). Current
+focused increment adds finite carcasses, paid partial butchery, hide garments
+and rendered fat. The core body-to-eaten-meat route is observed ordinarily;
+hide garments/rendered fat/preserved meat are complete through staged actual
+paths but ordinary uptake remains open. Do not call all seven families done.
 
-Rules-124 immutable continuation is recorded and passes; never regenerate.
-The new carcass increment is next. Family 3 remains open for ordinary bedroll
-use (made in meadow, still awaiting collection at day 50) and deferred hide/
-wool routes. Frozen current-source meadow day-50–60 continuation and check6
-fern 100-day search are running. Evidence and exact scope:
-`docs/SURVIVAL_CAPABILITIES.md`, `survival_evidence/clothing-check*/`,
-`survival_evidence/clothing-final-replay/audit.json`.
+Immutable 122–125 continuations pass; never regenerate them. Final focused
+carcass/old-reference checks pass 19/19 plus the new125 reference and affected
+estate/leftover tests. Stable frozen broad check2: 2,549 passes, 31 failures,
+three expected failures, 421 passing/13 failing files; all failures match the
+predecessor. Later label/deposit guards have focused coverage. Full typecheck
+and build still fail on the two retained nullable review-test errors.
 
-All seven families remain authorised, reserves last. Traps/nets, one domestic
-species, reserves, deferred connections and final comparisons remain pending.
-All 75 rules-121 baseline draws pass the retained final data audit. Do not push
-unrelated older local commits; preserve all untracked evidence/review tests.
+Final-source check4 reproduces observed check3 forest/river25 saves exactly.
+Both Normal arrivals-on worlds record no kills (seven/27 alive). Fern60 records
+one body, one hide recovered, one meat recovered and eaten, one competing
+claim failure; unused parts and hide spoil. Exact twins/save/conservation/purity
+pass. Current-source fern60 replay and meadow/aspen100 activation scans remain
+running in frozen check4/check3. Inspect their reports before claiming results.
+All commands/logs are in `survival_evidence/resume-20261104/`; programme details
+and provenance limits remain in `docs/SURVIVAL_CAPABILITIES.md`.
+
+Fresh final124-source meadow0–60 completed in two same-source save segments,
+with 1,958 adult bedroll protection ticks. All fibre forms now have ordinary
+use evidence; later material connections remain open.
+
+Next: traps and nets through existing equipment, sources and activities, then
+one domestic species and paid reserves LAST. Revisit ordinary hide/fat/meat
+and wool connections as inputs become available. Complete all seven families
+and the final control+nudge comparisons. The 75 rules121 baseline draws are
+audited. Preserve unrelated evidence/review tests; never push the unrelated
+older unpublished commits. One behaviour stream at a time; no renewed approval
+needed for authorised work.
 
 # Codex integration checkpoint (2026-10-27)
 

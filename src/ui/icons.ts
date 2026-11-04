@@ -128,6 +128,8 @@ export function needIconName(key: NeedKey): IconName {
 
 /** Every kind of item has an icon of its own; anything unexpected shows as a stone. */
 export function itemIconName(kind: ItemKind): IconName {
+  if(kind==='hide')return 'garment';
+  if(kind==='fat'||kind==='rendered_fat')return 'meat';
   if(kind==='dried_fish'||kind==='smoked_fish')return 'fish';
   if(kind==='dried_meat'||kind==='smoked_meat')return 'meat';
   return (kind in ICONS ? kind : 'stone') as IconName;

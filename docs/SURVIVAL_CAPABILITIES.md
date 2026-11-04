@@ -280,7 +280,7 @@ rerun; the other 31 are the previously reproduced review failures. No full-green
 claim is made. Verdict: **TURN_INTEGRATION_VERIFIED** for the bounded hearth chain;
 aggregate benefit and the remaining five families are unverified.
 
-## 3. Fibre clothing — rules 124; ordinary bedroll use and later materials remain open
+## 3. Fibre clothing — rules 124; ordinary use observed, later materials remain open
 
 New capability: inhabitants make, carry, ready, dry and mend owned insulation;
 carers can physically deliver a spare garment to a visible dependent. The same
@@ -384,34 +384,87 @@ operation-travel ticks. Collection, gathering, giving and interrupted attempts
 are separately retained in the reports; these are not total lifecycle costs.
 
 Expanded check5 searches retained nulls: fern 50 days made 10 garments and one
-blanket, with seven fibre repairs and child use; aspen made 10 garments with
-three repairs and child use. Neither made bedding. Meadow 50 days made 13
-garments, one blanket and one bedroll, but the latter two still waited at the
-yard. A current-source day-50–60 continuation retains that input's provenance;
-a 100-day fern search is also running. No completed ordinary bedroll-use claim
-is made yet. This does not block the independent carcass input work. Family 3
-remains open for this evidence and the explicitly deferred hide/wool routes.
+blanket; aspen made 10 garments. Neither made bedding. Meadow made a bedroll
+but it still waited at the yard at day 50. The later mixed-candidate meadow
+continuation recorded 1,958 adult bedroll protection ticks (6,622.278
+degree-ticks); the check6 fern 100-day light scan recorded 16,384 adult bedroll
+ticks (53,152.198 degree-ticks), without the full observer's twin/purity sampling.
 
-## 4. Carcass recovery — pending
+The fresh final-124-source meadow run now closes that provenance gap:
+`clothing-check7/meadow-60d-fresh` ran from birth to tick 135,480 before its
+1,200-second wall budget, and `meadow-60d-fresh-continuation` continued that
+exact save to tick 144,000 on the same frozen source. Both pass exact twins,
+save continuation, conservation and sampled purity. The two segments record
+568 + 1,390 = 1,958 adult bedroll protection ticks and 6,622.278 degree-ticks.
+This establishes ordinary sleeping use, not survival benefit. The obtainable
+fibre routes now have observed garment, child-delivery, blanket and bedroll use;
+ordinary hide/wool routes remain open below.
 
-Hunting is traced before any change: rules-123 forest had five pursuits and
-three failed strikes; later clothing candidates also recorded successful kills.
-Keep the existing deer population, pursuit choices and strike chance. The old
-success path currently creates four meat plus one per party member, carries
-what fits and spoils the rest immediately.
+## 4. Carcass recovery — rules 125; core use observed, hide/fat uptake open
 
-Planned implementation choice (agent design, not a new owner decision): one
-existing `Pile` with a carcass payload stores the removed animal's identity,
-household access, finite remaining contents, claim and paid partial work.
-The kill creates that body once instead of the instant reward. `economy.ts`
-counts its unprocessed contents; `world.ts` expires/cleans it; `knowledge.ts`
-records the location/access sign, not live distant contents. `carcass.ts` owns
-basic paid butchery with real reach/capacity and per-unit progress. Start with
-four meat, one hide and one fat, independent of party size, a 4,800-tick lifetime
-and 120 work per recovered unit; tests and ordinary evidence must establish the
-resulting costs. Connect hide to the existing garment recipe/registry and raw
-fat through fuelled rendering into a fully recognised finite-life food. Preserve
-old rules and rerun preservation/clothing integration.
+Hunting was traced before changes: rules-123 forest recorded five pursuits,
+three failed strikes and two interruptions; river recorded no starts despite
+59 visible-deer samples and eight eligible offers. Neither deer supply, hunt
+utility nor strike probability changes. The prior instant reward (four meat
+plus party additions) is replaced by exactly one physical body.
+
+Agent-selected parameters: four meat, one hide and one fat per deer regardless
+of party; 120 paid work per recovered unit; 4,800-tick decay deadline and
+120-tick cleanup of empty remains. `carcass.ts` owns partial work and live
+claims. `Pile` holds origin, access, remaining/recovered/lost parts; `economy`
+counts them once. Dated observations expose remembered parts, never loose food
+or remotely refreshed inventory. Actual recovery checks reach, household,
+claim and capacity. Interrupted work remains paid; two workers cannot take the
+same last unit. Ordinary deposits into bodies and loose withdrawal are refused.
+
+Hide plus one fibre takes 160 work at a timber yard to make an owned garment
+with saved hide provenance and the same bounded insulation. Raw fat is
+inedible; one fat and one wood take 60 work plus 180 elapsed processing ticks
+at a food rack to produce one rendered fat (24 hunger, weight 0.5, spoil
+multiplier 0.25). Hide/fat spoil in packs and stores. Rendered fat enters the
+existing food, sharing, granary, care, carrying and provision paths.
+
+The actual offered-action tests cover hide recovery → delivery → sewing →
+collection → wearing and fat recovery → delivery → rendering → collection →
+eating, plus interruption, last-unit contention, capacity, ownership, expiry,
+observer purity and malformed saves. Final focused carcass + immutable
+122/123/124 checks pass 19/19; affected estate/leftover tests pass. The new
+immutable 125 reference is captured before successor behaviour and passes.
+
+Fresh review repaired four concrete gaps: heavy-work needs costs; remote
+refresh on interrupted travel; unavailable new recipes contaminating older
+rules' blocked options; generic deposits making mixed body/loose storage.
+The deposit defect has retained red/green evidence. No historical reference
+was regenerated. Stable broad check2: 421 files pass, 13 fail; 2,549 tests pass,
+31 fail, three expected failures. All 31 failing test names match the prior
+clothing run (`carcass-failure-comparison.json`). The broad run predates final
+labels/deposit guards; focused checks cover those changes. Full typecheck and
+build still fail only on the two existing untracked nullable review tests.
+
+Staged rendered checks pass eight assertions; visually inspected
+`carcass-rendered-check1/carcass-success-visible.png` and
+`carcass-failure-visible.png` show paid recovery and real expired-body refusal.
+Initial stale-painted captures and the stopped check1/mixed-source broad run
+remain preserved, explicitly superseded rather than counted as acceptance.
+
+Normal arrivals-on observed runs (`carcass-check3`): forest25 has three failed
+strikes and no body; river25 has no hunt starts and no body. They finish with
+seven and 27 alive respectively, descriptively. Final deposit-guard source in
+check4 reproduces both final saves byte-for-byte (`replay-audit.json`). Fern60
+records one body: Wilma recovers hide at 17,930, Juno recovers meat at 22,383
+and eats it, Cass loses a live-claim race. Three meat and one fat decay; the
+recovered hide also eventually spoils. Wilma had not discovered the existing
+yard at day 10 and died of thirst at 28,589. Observer counts: three butchery
+starts, two successes, one claim failure; 151 sampled travel and 238 sampled
+work ticks. Boundary sampling is not an exact labour invoice. All three runs
+pass twins, final +120 continuation, daily conservation and sampled purity.
+
+The diagnostic `carcass-fern-first-body-trace` retains competing choices.
+Current-source fern replay and meadow/aspen 100-day activation scans continue
+in frozen checkouts. The scans check source stability, conservation and final
+continuation but lack decision samples/every-tick twins. Ordinary hide garment,
+rendered-fat and preserved-meat use remain explicit gaps, to revisit as the
+following input routes develop. No survival improvement is claimed.
 
 ## 5. Traps and nets — pending
 

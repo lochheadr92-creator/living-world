@@ -565,6 +565,7 @@ registerHandler('deposit', {
       return 'the place is gone';
     }
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.carcass)return 'keep loose goods separate from the body';
     if(e.ent==='pile'&&e.mealFood)return 'keep other goods separate from the leftover meal food';
     if(e.ent==='pile'&&e.estate)return 'keep new goods separate from these belongings';
     observe(world, p, e);
@@ -585,6 +586,7 @@ registerHandler('deposit', {
     let moved = 0;
     let partial = false;
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.carcass)return 'fail:keep loose goods separate from the body';
     if(e.ent==='pile'&&e.mealFood)return 'fail:keep other goods separate from the leftover meal food';
     if(e.ent==='pile'&&e.estate)return 'fail:keep new goods separate from these belongings';
     for (const k of Object.keys(want)) {

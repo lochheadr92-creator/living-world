@@ -1,5 +1,6 @@
 import {validateChildhood} from '../sim/childhood';
 import {validatePreservation} from '../sim/preservation';
+import {validateCarcasses} from '../sim/carcass';
 import {validateClothing} from '../sim/clothing';
 import {validateHearth} from '../sim/hearth';
 import {validateCompany} from '../sim/companionship';
@@ -298,6 +299,7 @@ export function deserializeWorld(json: string): World {
   validatePreservation(w);
   validateHearth(w);
   validateClothing(w);
+  validateCarcasses(w);
   validateMealLeftovers(w);
   validateEstateCustody(w);
   validateWorkHandovers(w);

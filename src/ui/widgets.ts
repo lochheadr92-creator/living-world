@@ -57,14 +57,15 @@ export interface ItemChipHandle {
 
 /** icon + count chip for an item kind */
 export function itemChip(kind: ItemKind, n: number): ItemChipHandle {
+  const label=kind==='garment'?'garment':ITEM_LABEL[kind];
   const count = h('span', { class: 'ic-n num' });
-  const el = h('span', { class: 'chip item-chip', 'data-tip': ITEM_LABEL[kind], title: undefined, role: 'img', 'aria-label': `${ITEM_LABEL[kind]}` }, icon(itemIconName(kind), 15), count);
+  const el = h('span', { class: 'chip item-chip', 'data-tip': label, title: undefined, role: 'img', 'aria-label': `${label}` }, icon(itemIconName(kind), 15), count);
   el.style.setProperty('--ic', legible(ITEM_COLORS[kind] ?? '#cccccc', 0.28));
   const handle: ItemChipHandle = {
     el,
     set(v) {
       setText(count, `×${v}`);
-      el.setAttribute('aria-label', `${v} ${ITEM_LABEL[kind]}`);
+      el.setAttribute('aria-label', `${v} ${label}`);
     },
   };
   handle.set(n);

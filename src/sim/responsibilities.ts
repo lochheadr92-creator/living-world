@@ -93,7 +93,7 @@ export function watchTick(world: World, p: Person, a: Activity, child: Person): 
   retainWatchTick(world,a);
   if (a.progress % LOOK_EVERY === 0) {
     const give: Items = {};
-    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
+    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
     if (child.needs.thirst < 55 && (p.inv.water ?? 0) > 0 && (!bounded || surplusOf(world, p, 'water') >= 1)) give.water = 1;
     const got: Items = {};
     let moved = 0;
