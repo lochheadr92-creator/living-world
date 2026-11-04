@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "ab10dcf5f41c75e6d145a48b5632788e26440655",
+    "rules": 137,
+    "content": "8a947103774efd7e90e2f609c69f3c0f56b657940803187797ba970b6a3ae1c9",
+    "note": "Recorded before successor behavior; ordinary autonomous planted-tree continuation"
+  },
+  "trees": [
+    3990
+  ],
+  "saved": "5818684f9766e8b27baae74319daae553b2e02c82817983a53b1969c92cd631b",
+  "continued": "688329e0cc91db2dea2ea86271cbda594fd6293a56248019aec24f17fc9a0085"
+}

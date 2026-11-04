@@ -1,3 +1,4 @@
+import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
 import {wellFetchOptions} from './wells';
 import {hasLivestock,livestockMaterials} from './livestock';
@@ -1298,6 +1299,7 @@ export function productionOptions(ctx: Ctx): void {
   const demands = demandsOf(ctx);
   for (const d of demands) if(!PRESERVED_FOODS.some(k=>k===d.item)) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
   communalStockOptions(ctx);
+  forestryOptions(ctx);
   projectOptions(ctx);
   optGranaryStore(ctx);
   optTendGranary(ctx);

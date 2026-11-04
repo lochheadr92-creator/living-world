@@ -743,6 +743,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         notes.push(...ecologyNotes(world,s.x,s.y));
       }
       if (s.type === 'tree') {
+        if(s.planted)rows.push(['Planted by',`${nameOf(world,s.planted.by)} (${agoText(world,s.planted.at)})`]);
         rows.push(['Growth', s.growth >= 1 ? 'full-grown' : `${Math.round(s.growth * 100)}% grown`]);
         notes.push(s.growth < 0.55 ? 'Too young to harvest.' : 'Chopping all the wood fells the tree; saplings grow slowly from mature trees.');
       } else if (hasEcology(world) && biological(s)) {

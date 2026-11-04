@@ -50,6 +50,7 @@ export const BELIEF_NOUN: Record<BeliefKind, string> = {
 };
 
 export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
+  tree_work:'tree work',
   relocate: 'household relocation',
   exchange_journey: 'exchange journey',
   wander: 'wandering',
@@ -100,6 +101,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 };
 
 export const ITEM_ICON: Record<ItemKind, string> = {
+  cutting:'tree',
   wool:'wool', rendered_fat:'rendered fat',
   hide:'raw hide', fat:'raw fat',
   net:'net',trap:'trap',fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',

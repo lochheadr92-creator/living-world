@@ -12,7 +12,7 @@ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat'
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat' | 'wool';
-export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
+export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts' | 'cutting';
 export type Items = Partial<Record<ItemKind, number>>;
 
 export interface Store {
@@ -227,6 +227,7 @@ export interface SeenEntity {
 }
 
 export type ActivityKind =
+  | 'tree_work'
   | 'relocate'
   | 'exchange_journey'
   | 'attend'
@@ -797,6 +798,7 @@ export interface Concern {
 export type SourceType = 'berry_bush' | 'fruit_tree' | 'tree' | 'rock' | 'fish_spot' | 'wild_grain' | 'clay_pit' | 'ore_vein' | 'outcrop';
 
 export interface Source {
+  planted?: {by:number;at:number;home:number};
   ent: 'source';
   id: number;
   type: SourceType;

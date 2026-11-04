@@ -1,0 +1,30 @@
+import {it,expect} from 'vitest';
+import {stage,addPerson,building,done,learn} from './helpers/kit';
+import {CUT_WORK,PLANT_TREE_WORK,treeGround,forestryOptions} from '../src/sim/forestry';
+import {makeSource,updateSources} from '../src/sim/sources';
+import {newActivity,startActivity,stepActivity} from '../src/sim/activities';
+import {generateOptions} from '../src/sim/decision';
+import {snapshotInitial,conservationReport} from '../src/sim/economy';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {stepWorld} from '../src/sim/world';
+import {delBelief} from '../src/sim/knowledge';
+import {SAPLING_TICKS} from '../src/sim/constants';
+function fixture(){const s=stage('replanting');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:137};const p=addPerson(s,'Ada',46.5,30.5,{hunger:95,thirst:95,energy:95});const home=building(s,'hut',40,24,p.hhId),tree=makeSource(s.w,'tree',46,29,5);done(s);return {s,w:s.w,p,home,tree};}
+function finish(f:ReturnType<typeof fixture>){for(let i=0;i<1800&&f.p.activity;i++){f.w.tick++;stepActivity(f.w,f.p);}expect(f.p.activity).toBeNull();}
+function cut(f:ReturnType<typeof fixture>){return newActivity(f.w,f.p,{kind:'tree_work',label:'Take cutting',goal:'plant near home',targetId:f.tree.id,targetType:'source',tx:46.5,ty:29.5,spotX:46.5,spotY:30.5,data:{op:'cut'}});}
+function plant(f:ReturnType<typeof fixture>){return newActivity(f.w,f.p,{kind:'tree_work',label:'Plant cutting',goal:'future timber',targetId:f.home.id,targetType:'building',tx:50.5,ty:28.5,spotX:50.5,spotY:29.5,data:{op:'plant',px:50,py:28}});}
+it('uses a real living branch, paid planting and delayed growth before ordinary woodcutting',()=>{const f=fixture();const before=f.w.tick;startActivity(f.w,f.p,cut(f));finish(f);expect(f.w.tick-before).toBeGreaterThanOrEqual(CUT_WORK);expect(f.tree.amount).toBe(4);expect(f.p.inv.cutting).toBe(1);startActivity(f.w,f.p,plant(f));finish(f);const young=f.w.sources.find(t=>t.planted?.by===f.p.id)!;expect(young.amount).toBe(0);expect(young.growth).toBe(.02);expect(f.p.inv.cutting??0).toBe(0);expect(conservationReport(f.w).ok).toBe(true);
+ for(let i=0;i<SAPLING_TICKS;i++){f.w.tick++;updateSources(f.w);}expect(young.growth).toBe(1);expect(young.amount).toBeGreaterThan(0);const stock=young.amount;startActivity(f.w,f.p,newActivity(f.w,f.p,{kind:'gather',label:'Cut planted tree',goal:'use grown timber',targetId:young.id,targetType:'source',tx:50.5,ty:28.5,spotX:50.5,spotY:29.5,amount:1,data:{stype:'tree',purpose:'work'}}));finish(f);expect(young.amount).toBe(stock-1);expect(f.p.inv.wood).toBe(1);expect(conservationReport(f.w).ok).toBe(true);
+});
+it('cannot plant ordinary timber and refuses unavailable or reserved living branches',()=>{const f=fixture();f.p.inv.wood=1;snapshotInitial(f.w);startActivity(f.w,f.p,plant(f));finish(f);expect(f.w.sources.some(t=>t.planted)).toBe(false);f.tree.reserved=4;startActivity(f.w,f.p,cut(f));finish(f);expect(f.p.inv.cutting??0).toBe(0);expect(f.tree.amount).toBe(5);});
+it('rechecks the ground and ownership without consuming a cutting on failure',()=>{const f=fixture();startActivity(f.w,f.p,cut(f));finish(f);const a=plant(f);startActivity(f.w,f.p,a);for(let i=0;i<400&&f.p.activity?.phase!=='work';i++){f.w.tick++;stepActivity(f.w,f.p);}expect(f.p.activity?.phase).toBe('work');makeSource(f.w,'rock',50,28,0);finish(f);expect(f.p.inv.cutting).toBe(1);expect(f.w.sources.some(t=>t.planted)).toBe(false);});
+it('keeps doorways, fields, paths and existing sources clear',()=>{const f=fixture();expect(treeGround(f.w,40,27)).toBe(false);expect(treeGround(f.w,46,29)).toBe(false);expect(treeGround(f.w,50,28)).toBe(true);f.w.wear[28*f.w.W+50]=.5;expect(treeGround(f.w,50,28)).toBe(false);});
+it('offers tree work from personal knowledge and cannot infer unseen trees',()=>{const f=fixture();const before=serializeWorld(f.w);expect(generateOptions(f.w,f.p,true,true).options.some(o=>o.kind==='tree_work')).toBe(true);expect(serializeWorld(f.w)).toBe(before);delBelief(f.p,f.tree.id);const ctx=generateOptions(f.w,f.p,true,true);ctx.options=[];forestryOptions(ctx);expect(ctx.options).toHaveLength(0);});
+it('continues a carried cutting and planting work exactly and rejects predecessor or malformed state',()=>{const f=fixture();startActivity(f.w,f.p,cut(f));finish(f);startActivity(f.w,f.p,plant(f));const raw=serializeWorld(f.w),copy=deserializeWorld(raw);for(let i=0;i<300;i++){stepWorld(f.w);stepWorld(copy);}expect(serializeWorld(f.w)).toBe(serializeWorld(copy));const j=JSON.parse(raw);j.world.settings.rulesVersion=136;expect(()=>deserializeWorld(JSON.stringify(j))).toThrow();const bad=deserializeWorld(raw);bad.persons[0].inv.cutting=-1;expect(()=>deserializeWorld(serializeWorld(bad))).toThrow('Invalid living cutting');});
+
+it('does not consume a carried cutting after household ownership changes',()=>{const f=fixture();startActivity(f.w,f.p,cut(f));finish(f);const a=plant(f);f.home.hhId=999;startActivity(f.w,f.p,a);finish(f);expect(f.p.inv.cutting).toBe(1);expect(f.w.sources.some(t=>t.planted)).toBe(false);});
+it('rejects malformed planted-tree provenance',()=>{const f=fixture();f.tree.planted={by:f.p.id,at:f.w.tick+1,home:f.home.id};expect(()=>deserializeWorld(serializeWorld(f.w))).toThrow('Invalid planted tree');});
+
+it('keeps the same planting site while approaching instead of restarting for a newly nearer tile',()=>{const f=fixture();f.p.inv.cutting=1;snapshotInitial(f.w);const o=generateOptions(f.w,f.p,true,true).options.find(o=>o.kind==='tree_work')!;expect(o.label).toContain('Plant');startActivity(f.w,f.p,o.make!()!);for(let i=0;i<20;i++){f.w.tick++;stepActivity(f.w,f.p);}const next=generateOptions(f.w,f.p,true,true).options.find(o=>o.kind==='tree_work');expect(next?.key).toBe(o.key);});
+
+it('uses the same home centre for planning and execution at the planting radius',()=>{const f=fixture();startActivity(f.w,f.p,cut(f));finish(f);const a=plant(f);a.data.px=52;a.data.py=28;a.tx=52.5;a.ty=28.5;a.spotX=52.5;a.spotY=29.5;startActivity(f.w,f.p,a);finish(f);expect(f.w.sources.some(t=>t.planted&&t.x===52&&t.y===28)).toBe(true);});
