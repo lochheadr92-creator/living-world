@@ -110,7 +110,10 @@ it('the trusted helper can refuse goods reserved for another obligation', async 
   f.cora.commitments.push({ id: other.commitmentId, requestId: other.id, kind: 'deliver', to: f.ben.id, item: 'wood', amount: 1, siteId: 0, made: f.w.tick, deadline: f.w.tick + 3000, status: 'active', delivered: 0 });
   const model = stubModel('offered-refusal', req => {
     const o = observationFromPrompt(req.user)!;
-    const a = o.options.find(a => a.kind === 'eat') ?? o.options.find(a => a.label === 'Ask Cora for stone') ?? o.options[0];
+    // Until the trusted helper can be asked, do anything except ask somebody else for the same stone; otherwise a
+    // single-stone plan (rules 152 no longer lays out a lean-to cellar here) is met before Cora is ever asked.
+    const a = o.options.find(a => a.kind === 'eat') ?? o.options.find(a => a.label === 'Ask Cora for stone')
+      ?? o.options.find(a => !/^Ask .* for stone$/.test(a.label)) ?? o.options[0];
     return JSON.stringify({ choose: a.key, why: 'Ask the helper I trust when that option becomes available.' });
   });
   const result = await runLive(f.w, f.ada.id, model, { until: f.w.tick + 900 });

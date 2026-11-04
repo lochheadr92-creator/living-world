@@ -53,7 +53,9 @@ describe('varied spare time', () => {
 
   it('sends people to more than one kind of place', () => {
     const w = make('l-places');
-    run(w, 4 * DAY);
+    // Rules 152 (cellars after proper homes) keeps this settlement building through its first week instead of stalling
+    // behind four cellar sites; the first non-home outing is on day 8. The old four-day pass rested on one visit.
+    run(w, 9 * DAY);
     const keys = new Set(w.persons.flatMap((p) => (p.leisure ? p.leisure.recent.map((r) => r.key) : [])));
     expect(keys.size).toBeGreaterThan(1);
   });
