@@ -1,3 +1,4 @@
+import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
 import {hasRods} from './fishing_rods';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
 import {cellarAccess} from './cellars';
@@ -145,6 +146,7 @@ registerHandler('gather', {
     }
     a.data.stype = s.type;
     observe(world, p, s); // arriving, they see its real state
+    if (childHeavyTask(world, p, s.type)) return CHILD_HEAVY_REASON; // rules 156: refused on arrival and on resumption
     faceToward(p, s.x + 0.5, s.y + 0.5, 3);
     const err = startCycle(world, p, a, s);
     if (err) {
