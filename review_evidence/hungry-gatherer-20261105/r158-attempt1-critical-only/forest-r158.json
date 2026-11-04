@@ -1,0 +1,531 @@
+{
+ "seed": "forest",
+ "rules": 158,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 28,
+ "criticalSamples": 415,
+ "by": {
+  "critical, holds food | sleep:energy": 16,
+  "critical, holds food | converse": 7,
+  "critical, holds food | gather:hunger": 102,
+  "critical, holds food | eat:hunger": 9,
+  "critical, holds food | idle": 1,
+  "critical, no food in pack": 238,
+  "critical, holds food | flee:safety": 6,
+  "critical, holds food | eat_store:hunger": 3,
+  "critical, holds food | drink:thirst": 7,
+  "critical, holds food | converse:hunger": 5,
+  "critical, holds food | give": 1,
+  "critical, holds food | rest:energy": 8,
+  "critical, holds food | socialize:hunger": 5,
+  "critical, holds food | warm:warmth": 7
+ },
+ "rows": [
+  {
+   "tick": 2160,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Sleeping by the fire",
+   "need": "energy",
+   "committedUntil": 1541
+  },
+  {
+   "tick": 2220,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Sleeping by the fire",
+   "need": "energy",
+   "committedUntil": 1541
+  },
+  {
+   "tick": 2280,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Sleeping by the fire",
+   "need": "energy",
+   "committedUntil": 1541
+  },
+  {
+   "tick": 2340,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Talking with Isla",
+   "need": null,
+   "committedUntil": 2696
+  },
+  {
+   "tick": 2400,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 2353
+  },
+  {
+   "tick": 2460,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "grain": 2,
+    "berries": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 2353
+  },
+  {
+   "tick": 2520,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 15,
+   "food": {
+    "grain": 3,
+    "berries": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 2353
+  },
+  {
+   "tick": 4500,
+   "name": "Hal",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "grain": 3
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 4518
+  },
+  {
+   "tick": 4560,
+   "name": "Hal",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 3
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 4518
+  },
+  {
+   "tick": 4980,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "grain": 1,
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 4847
+  },
+  {
+   "tick": 5040,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "grain": 1,
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 4847
+  },
+  {
+   "tick": 5100,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "grain": 1,
+    "fish": 3
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 5146
+  },
+  {
+   "tick": 5700,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 5626
+  },
+  {
+   "tick": 5760,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 5626
+  },
+  {
+   "tick": 5820,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 1,
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 5626
+  },
+  {
+   "tick": 5880,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 16,
+   "food": {
+    "berries": 1,
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 5626
+  },
+  {
+   "tick": 6960,
+   "name": "Thea",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 1,
+    "fish": 2,
+    "fruit": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 6930
+  },
+  {
+   "tick": 7020,
+   "name": "Thea",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 1,
+    "fish": 2,
+    "fruit": 1
+   },
+   "doing": null,
+   "need": null,
+   "committedUntil": null
+  },
+  {
+   "tick": 7080,
+   "name": "Thea",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 1,
+    "fish": 2,
+    "fruit": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 7080
+  },
+  {
+   "tick": 7380,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Running from the wolf toward the fire",
+   "need": "safety",
+   "committedUntil": 7381
+  },
+  {
+   "tick": 7440,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Eating at home",
+   "need": "hunger",
+   "committedUntil": 7449
+  },
+  {
+   "tick": 7440,
+   "name": "Arlo",
+   "stage": "child",
+   "hunger": 16,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 7250
+  },
+  {
+   "tick": 7500,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 7527
+  },
+  {
+   "tick": 7500,
+   "name": "Arlo",
+   "stage": "child",
+   "hunger": 14,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 7250
+  },
+  {
+   "tick": 7560,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 7527
+  },
+  {
+   "tick": 7620,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 17,
+   "food": {
+    "berries": 2,
+    "fruit": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 7527
+  },
+  {
+   "tick": 7680,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 14,
+   "food": {
+    "berries": 2,
+    "fruit": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 7527
+  },
+  {
+   "tick": 7980,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 7946
+  },
+  {
+   "tick": 8040,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 8059
+  },
+  {
+   "tick": 8100,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 8152
+  },
+  {
+   "tick": 8160,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 8152
+  },
+  {
+   "tick": 8400,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 8405
+  },
+  {
+   "tick": 8460,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 8405
+  },
+  {
+   "tick": 8520,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Talking with Hal",
+   "need": "hunger",
+   "committedUntil": 8551
+  },
+  {
+   "tick": 8580,
+   "name": "Greta",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Talking with Hal",
+   "need": "hunger",
+   "committedUntil": 8551
+  },
+  {
+   "tick": 9480,
+   "name": "Faye",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 3,
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9515
+  },
+  {
+   "tick": 9540,
+   "name": "Faye",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fish": 3,
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9515
+  },
+  {
+   "tick": 9600,
+   "name": "Faye",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fish": 3,
+    "berries": 1
+   },
+   "doing": "Running from the wolf toward other people",
+   "need": "safety",
+   "committedUntil": 9610
+  },
+  {
+   "tick": 9660,
+   "name": "Faye",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "fish": 3,
+    "berries": 1
+   },
+   "doing": "Running from the wolf toward other people",
+   "need": "safety",
+   "committedUntil": 9610
+  },
+  {
+   "tick": 9660,
+   "name": "Delia",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9674
+  }
+ ]
+}

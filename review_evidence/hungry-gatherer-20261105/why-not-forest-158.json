@@ -1,0 +1,237 @@
+{
+ "seed": "forest",
+ "rules": "158",
+ "impure": 0,
+ "by": {
+  "not critical | eat absent | deps 2": 26,
+  "not critical | eat offered | deps 2": 8,
+  "not critical | eat absent | deps 1": 9,
+  "not critical | eat offered | deps 0": 2,
+  "not critical | eat offered | deps 1": 2,
+  "critical | eat offered | deps 0": 2
+ },
+ "rows": [
+  {
+   "tick": 2340,
+   "name": "Delia",
+   "hunger": 21,
+   "drive": 76,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 2,
+    "basket": 1,
+    "berries": 2,
+    "seeds": 1,
+    "wood": 4
+   },
+   "nextThink": 5
+  },
+  {
+   "tick": 2400,
+   "name": "Delia",
+   "hunger": 19,
+   "drive": 79,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 2,
+    "basket": 1,
+    "berries": 2,
+    "seeds": 1,
+    "wood": 4
+   },
+   "eat": 82.650434199935,
+   "nextThink": 3
+  },
+  {
+   "tick": 2460,
+   "name": "Greta",
+   "hunger": 24,
+   "drive": 74,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "berries": 2,
+    "wood": 5
+   },
+   "nextThink": 36
+  },
+  {
+   "tick": 2520,
+   "name": "Greta",
+   "hunger": 22,
+   "drive": 76,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "berries": 2,
+    "wood": 5
+   },
+   "nextThink": 40
+  },
+  {
+   "tick": 2580,
+   "name": "Greta",
+   "hunger": 20,
+   "drive": 78,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "berries": 2,
+    "wood": 5
+   },
+   "nextThink": 16
+  },
+  {
+   "tick": 5520,
+   "name": "Theo",
+   "hunger": 24,
+   "drive": 74,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "berries": 1,
+    "seeds": 2,
+    "grain": 1,
+    "wood": 3,
+    "fish": 1
+   },
+   "nextThink": 4
+  },
+  {
+   "tick": 5580,
+   "name": "Theo",
+   "hunger": 22,
+   "drive": 76,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "berries": 1,
+    "seeds": 2,
+    "grain": 1,
+    "wood": 3,
+    "fish": 2
+   },
+   "nextThink": 0
+  },
+  {
+   "tick": 5640,
+   "name": "Theo",
+   "hunger": 20,
+   "drive": 78,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "berries": 1,
+    "seeds": 2,
+    "grain": 1,
+    "wood": 3,
+    "fish": 2
+   },
+   "eat": 81.86700973253596,
+   "nextThink": 40
+  },
+  {
+   "tick": 6120,
+   "name": "Greta",
+   "hunger": 20,
+   "drive": 78,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 5,
+    "fruit": 2
+   },
+   "nextThink": 8
+  },
+  {
+   "tick": 7440,
+   "name": "Greta",
+   "hunger": 20,
+   "drive": 78,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 5,
+    "fish": 1
+   },
+   "nextThink": 49
+  },
+  {
+   "tick": 7560,
+   "name": "Tomas",
+   "hunger": 25,
+   "drive": 73,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "wood": 3,
+    "stone": 1,
+    "berries": 1,
+    "fruit": 2
+   },
+   "nextThink": 51
+  },
+  {
+   "tick": 7620,
+   "name": "Tomas",
+   "hunger": 23,
+   "drive": 75,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "wood": 3,
+    "stone": 1,
+    "berries": 1,
+    "fruit": 2
+   },
+   "nextThink": 15
+  },
+  {
+   "tick": 7920,
+   "name": "Delia",
+   "hunger": 19,
+   "drive": 79,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "basket": 1,
+    "wood": 3,
+    "fish": 3,
+    "berries": 1
+   },
+   "eat": 82.84043419993834,
+   "nextThink": 15
+  },
+  {
+   "tick": 7980,
+   "name": "Delia",
+   "hunger": 17,
+   "drive": 81,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "basket": 1,
+    "wood": 3,
+    "fish": 3,
+    "berries": 1
+   },
+   "eat": 84.84043419993843,
+   "nextThink": 2
+  },
+  {
+   "tick": 8280,
+   "name": "Theo",
+   "hunger": 22,
+   "drive": 76,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "seeds": 2,
+    "fish": 1
+   },
+   "nextThink": 35
+  }
+ ]
+}

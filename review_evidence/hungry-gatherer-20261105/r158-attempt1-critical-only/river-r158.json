@@ -1,0 +1,509 @@
+{
+ "seed": "river",
+ "rules": 158,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 29,
+ "criticalSamples": 191,
+ "by": {
+  "critical, holds food | gather:hunger": 36,
+  "critical, holds food | flee:safety": 2,
+  "critical, no food in pack": 117,
+  "critical, holds food | warm:warmth": 6,
+  "critical, holds food | converse": 3,
+  "critical, holds food | eat:hunger": 3,
+  "critical, holds food | sleep:energy": 19,
+  "critical, holds food | socialize:hunger": 2,
+  "critical, holds food | converse:hunger": 1,
+  "critical, holds food | eat_store:hunger": 2
+ },
+ "rows": [
+  {
+   "tick": 6660,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 4
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 6697
+  },
+  {
+   "tick": 6720,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 4
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 6697
+  },
+  {
+   "tick": 6780,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "berries": 4
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 6697
+  },
+  {
+   "tick": 6840,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "berries": 4
+   },
+   "doing": "Running from the wolf toward home",
+   "need": "safety",
+   "committedUntil": 6830
+  },
+  {
+   "tick": 6900,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 16,
+   "food": {
+    "berries": 4
+   },
+   "doing": "Running from the wolf toward home",
+   "need": "safety",
+   "committedUntil": 6830
+  },
+  {
+   "tick": 9240,
+   "name": "Eli",
+   "stage": "child",
+   "hunger": 8,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9099
+  },
+  {
+   "tick": 9360,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 9312
+  },
+  {
+   "tick": 9420,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 9312
+  },
+  {
+   "tick": 9480,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Talking with Thea",
+   "need": null,
+   "committedUntil": 9874
+  },
+  {
+   "tick": 9540,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Talking with Thea",
+   "need": null,
+   "committedUntil": 9874
+  },
+  {
+   "tick": 9660,
+   "name": "Eli",
+   "stage": "child",
+   "hunger": 25,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Talking with Abel",
+   "need": null,
+   "committedUntil": 10007
+  },
+  {
+   "tick": 10080,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 2,
+    "fruit": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 9809
+  },
+  {
+   "tick": 10140,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 2,
+    "fruit": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10162
+  },
+  {
+   "tick": 10200,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2,
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9936
+  },
+  {
+   "tick": 10200,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fish": 2,
+    "fruit": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10162
+  },
+  {
+   "tick": 10200,
+   "name": "Thea",
+   "stage": "child",
+   "hunger": 19,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10017
+  },
+  {
+   "tick": 10260,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2,
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 9936
+  },
+  {
+   "tick": 10260,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fish": 2,
+    "fruit": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10162
+  },
+  {
+   "tick": 10440,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 10281
+  },
+  {
+   "tick": 10500,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 4
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 10458
+  },
+  {
+   "tick": 10620,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 3
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 10587
+  },
+  {
+   "tick": 10680,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 5
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 10587
+  },
+  {
+   "tick": 10740,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 8
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 10587
+  },
+  {
+   "tick": 11580,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 11511
+  },
+  {
+   "tick": 11640,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 11511
+  },
+  {
+   "tick": 11700,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 11757
+  },
+  {
+   "tick": 11760,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 11757
+  },
+  {
+   "tick": 11820,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 11880,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 11940,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 11930
+  },
+  {
+   "tick": 11940,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12000,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Ask Ivo for food",
+   "need": "hunger",
+   "committedUntil": 12030
+  },
+  {
+   "tick": 12000,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12060,
+   "name": "Cora",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Ask Cole for food",
+   "need": "hunger",
+   "committedUntil": 12083
+  },
+  {
+   "tick": 12060,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12120,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12180,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12240,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "fruit": 6
+   },
+   "doing": "Sleeping inside the hut",
+   "need": "energy",
+   "committedUntil": 12027
+  },
+  {
+   "tick": 12660,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 12594
+  },
+  {
+   "tick": 12720,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 12594
+  }
+ ]
+}

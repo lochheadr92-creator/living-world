@@ -1,0 +1,244 @@
+{
+ "seed": "forest",
+ "rules": "158",
+ "impure": 0,
+ "by": {
+  "not critical | eat offered | deps 2": 21,
+  "not critical | eat absent | deps 2": 44,
+  "not critical | eat absent | deps 1": 14,
+  "not critical | eat offered | deps 1": 13,
+  "critical | eat offered | deps 0": 2,
+  "not critical | eat offered | deps 0": 7,
+  "critical | eat offered | deps 1": 1
+ },
+ "rows": [
+  {
+   "tick": 2400,
+   "name": "Delia",
+   "hunger": 19,
+   "drive": 78,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 2,
+    "basket": 1,
+    "berries": 2,
+    "seeds": 1,
+    "wood": 4
+   },
+   "eat": 82.41543419993499,
+   "nextThink": 30
+  },
+  {
+   "tick": 2460,
+   "name": "Delia",
+   "hunger": 18,
+   "drive": 81,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 2,
+    "basket": 1,
+    "berries": 2,
+    "seeds": 1,
+    "wood": 4
+   },
+   "eat": 84.5487675332684,
+   "nextThink": 20
+  },
+  {
+   "tick": 2520,
+   "name": "Delia",
+   "hunger": 15,
+   "drive": 83,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 3,
+    "basket": 1,
+    "berries": 2,
+    "seeds": 1,
+    "wood": 4
+   },
+   "eat": 87.04876753326846,
+   "nextThink": 13
+  },
+  {
+   "tick": 4500,
+   "name": "Hal",
+   "hunger": 25,
+   "drive": 73,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 3,
+    "wood": 4
+   },
+   "nextThink": 5
+  },
+  {
+   "tick": 4560,
+   "name": "Hal",
+   "hunger": 23,
+   "drive": 75,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "grain": 3,
+    "wood": 4
+   },
+   "nextThink": 7
+  },
+  {
+   "tick": 4980,
+   "name": "Delia",
+   "hunger": 24,
+   "drive": 73,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "basket": 1,
+    "seeds": 1,
+    "grain": 1,
+    "fish": 1
+   },
+   "nextThink": 36
+  },
+  {
+   "tick": 5040,
+   "name": "Delia",
+   "hunger": 22,
+   "drive": 75,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "basket": 1,
+    "seeds": 1,
+    "grain": 1,
+    "fish": 2
+   },
+   "nextThink": 21
+  },
+  {
+   "tick": 5100,
+   "name": "Delia",
+   "hunger": 20,
+   "drive": 78,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "basket": 1,
+    "seeds": 1,
+    "grain": 1,
+    "fish": 3
+   },
+   "eat": 81.82321197771479,
+   "nextThink": 37
+  },
+  {
+   "tick": 5700,
+   "name": "Greta",
+   "hunger": 23,
+   "drive": 74,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 1,
+    "berries": 1
+   },
+   "nextThink": 21
+  },
+  {
+   "tick": 5760,
+   "name": "Greta",
+   "hunger": 21,
+   "drive": 77,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 1,
+    "berries": 1
+   },
+   "nextThink": 9
+  },
+  {
+   "tick": 5820,
+   "name": "Greta",
+   "hunger": 19,
+   "drive": 79,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 1,
+    "berries": 1,
+    "fish": 1
+   },
+   "eat": 83.26003145296028,
+   "nextThink": 54
+  },
+  {
+   "tick": 5880,
+   "name": "Greta",
+   "hunger": 16,
+   "drive": 82,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "wood": 1,
+    "berries": 1,
+    "fish": 1
+   },
+   "eat": 85.76003145296038,
+   "nextThink": 41
+  },
+  {
+   "tick": 6960,
+   "name": "Thea",
+   "hunger": 25,
+   "drive": 73,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "axe": 1,
+    "hoe": 1,
+    "seeds": 3,
+    "berries": 1,
+    "wood": 2,
+    "fish": 2,
+    "fruit": 1
+   },
+   "nextThink": 17
+  },
+  {
+   "tick": 7080,
+   "name": "Thea",
+   "hunger": 21,
+   "drive": 77,
+   "criticals": [],
+   "deps": 2,
+   "inv": {
+    "axe": 1,
+    "hoe": 1,
+    "seeds": 3,
+    "berries": 1,
+    "wood": 2,
+    "fish": 2,
+    "fruit": 1
+   },
+   "nextThink": 46
+  },
+  {
+   "tick": 7440,
+   "name": "Arlo",
+   "hunger": 16,
+   "drive": 82,
+   "criticals": [],
+   "deps": 1,
+   "inv": {
+    "fish": 1
+   },
+   "eat": 86.10249750989259,
+   "nextThink": 20
+  }
+ ]
+}

@@ -1,0 +1,519 @@
+{
+ "seed": "river",
+ "rules": 158,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 29,
+ "criticalSamples": 302,
+ "by": {
+  "critical, no food in pack": 224,
+  "critical, holds food | converse:hunger": 4,
+  "critical, holds food | gather:hunger": 38,
+  "critical, holds food | sleep:energy": 8,
+  "critical, holds food | flee:safety": 2,
+  "critical, holds food | eat:hunger": 3,
+  "critical, holds food | socialize:hunger": 2,
+  "critical, holds food | drink:thirst": 3,
+  "critical, holds food | converse": 2,
+  "critical, holds food | give": 1,
+  "critical, holds food | idle": 1,
+  "critical, holds food | warm:warmth": 14
+ },
+ "rows": [
+  {
+   "tick": 7800,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 12,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Talking with Ivo",
+   "need": "hunger",
+   "committedUntil": 7744
+  },
+  {
+   "tick": 8040,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2,
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 7824
+  },
+  {
+   "tick": 8100,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2,
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 7824
+  },
+  {
+   "tick": 9060,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 24,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9120,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 23,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9180,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 22,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9240,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 21,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9300,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 20,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9360,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 19,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9420,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 18,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 9480,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 17,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Sleeping on the ground",
+   "need": "energy",
+   "committedUntil": 8757
+  },
+  {
+   "tick": 10140,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2,
+    "fish": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10135
+  },
+  {
+   "tick": 10200,
+   "name": "Abel",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2,
+    "fish": 2,
+    "grain": 1
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 10135
+  },
+  {
+   "tick": 11640,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Running from the wolf toward the fire",
+   "need": "safety",
+   "committedUntil": 11629
+  },
+  {
+   "tick": 11640,
+   "name": "Yan",
+   "stage": "elder",
+   "hunger": 25,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 11553
+  },
+  {
+   "tick": 11700,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 11721
+  },
+  {
+   "tick": 11760,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Running from the wolf toward the fire",
+   "need": "safety",
+   "committedUntil": 11746
+  },
+  {
+   "tick": 12600,
+   "name": "Alma",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fruit": 3
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12647
+  },
+  {
+   "tick": 12660,
+   "name": "Alma",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 3
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12647
+  },
+  {
+   "tick": 12720,
+   "name": "Alma",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fruit": 3
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12647
+  },
+  {
+   "tick": 12840,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 2,
+    "fish": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12824
+  },
+  {
+   "tick": 12900,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 2,
+    "fish": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12824
+  },
+  {
+   "tick": 12960,
+   "name": "Mira",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fruit": 4,
+    "fish": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 12824
+  },
+  {
+   "tick": 13200,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Ask Ivy for food",
+   "need": "hunger",
+   "committedUntil": 13228
+  },
+  {
+   "tick": 13260,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 13280
+  },
+  {
+   "tick": 13320,
+   "name": "Emre",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fish": 3
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 13372
+  },
+  {
+   "tick": 14160,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 14190
+  },
+  {
+   "tick": 14220,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14241
+  },
+  {
+   "tick": 14220,
+   "name": "Jax",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 14209
+  },
+  {
+   "tick": 14280,
+   "name": "Basil",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14241
+  },
+  {
+   "tick": 14280,
+   "name": "Jax",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 14317
+  },
+  {
+   "tick": 14340,
+   "name": "Jax",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14377
+  },
+  {
+   "tick": 14580,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fish": 1,
+    "berries": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 14551
+  },
+  {
+   "tick": 14640,
+   "name": "Ines",
+   "stage": "adult",
+   "hunger": 1,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14505
+  },
+  {
+   "tick": 14640,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fish": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 14615
+  },
+  {
+   "tick": 14700,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fish": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 14615
+  },
+  {
+   "tick": 14760,
+   "name": "Ivy",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "fish": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 14615
+  },
+  {
+   "tick": 14760,
+   "name": "Jax",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 14814
+  },
+  {
+   "tick": 14940,
+   "name": "Alma",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 2,
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14980
+  },
+  {
+   "tick": 15000,
+   "name": "Alma",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 2,
+    "berries": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 14980
+  }
+ ]
+}

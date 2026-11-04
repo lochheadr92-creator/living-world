@@ -1,0 +1,512 @@
+{
+ "seed": "meadow",
+ "rules": 158,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 32,
+ "criticalSamples": 307,
+ "by": {
+  "critical, holds food | eat:hunger": 7,
+  "critical, no food in pack": 207,
+  "critical, holds food | gather:hunger": 51,
+  "critical, holds food | idle": 1,
+  "critical, holds food | flee:safety": 2,
+  "critical, holds food | drink:thirst": 4,
+  "critical, holds food | converse:hunger": 1,
+  "critical, holds food | socialize:hunger": 1,
+  "critical, holds food | sleep:energy": 12,
+  "critical, holds food | rest:energy": 6,
+  "critical, holds food | rest:warmth": 7,
+  "critical, holds food | warm:warmth": 8
+ },
+ "rows": [
+  {
+   "tick": 12000,
+   "name": "Pavel",
+   "stage": "elder",
+   "hunger": 22,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 11980
+  },
+  {
+   "tick": 12240,
+   "name": "Quinn",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 2
+   },
+   "doing": null,
+   "need": null,
+   "committedUntil": null
+  },
+  {
+   "tick": 12300,
+   "name": "Quinn",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "grain": 2,
+    "berries": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 12300
+  },
+  {
+   "tick": 13980,
+   "name": "Maren",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 14038
+  },
+  {
+   "tick": 14040,
+   "name": "Maren",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 14038
+  },
+  {
+   "tick": 14460,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Running from the wolf toward home",
+   "need": "safety",
+   "committedUntil": 14472
+  },
+  {
+   "tick": 14520,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Running from the wolf toward home",
+   "need": "safety",
+   "committedUntil": 14547
+  },
+  {
+   "tick": 15180,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 15082
+  },
+  {
+   "tick": 15240,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 15238
+  },
+  {
+   "tick": 15300,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 15314
+  },
+  {
+   "tick": 16860,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 16820
+  },
+  {
+   "tick": 16920,
+   "name": "Hal",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 16917
+  },
+  {
+   "tick": 16920,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "grain": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 16907
+  },
+  {
+   "tick": 16980,
+   "name": "Hal",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 16917
+  },
+  {
+   "tick": 16980,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "grain": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 16907
+  },
+  {
+   "tick": 17040,
+   "name": "Hal",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 17062
+  },
+  {
+   "tick": 17040,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "grain": 1,
+    "berries": 1
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 16907
+  },
+  {
+   "tick": 17280,
+   "name": "Maren",
+   "stage": "adult",
+   "hunger": 17,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 17119
+  },
+  {
+   "tick": 17340,
+   "name": "Isla",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 17214
+  },
+  {
+   "tick": 17400,
+   "name": "Isla",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 17214
+  },
+  {
+   "tick": 17520,
+   "name": "Kaia",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 17493
+  },
+  {
+   "tick": 17580,
+   "name": "Kaia",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 17607
+  },
+  {
+   "tick": 17640,
+   "name": "Kaia",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "grain": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 17607
+  },
+  {
+   "tick": 17880,
+   "name": "Jonas",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 2
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 17862
+  },
+  {
+   "tick": 17940,
+   "name": "Jonas",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fruit": 5
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 17862
+  },
+  {
+   "tick": 18180,
+   "name": "Kaia",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "grain": 1,
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 18047
+  },
+  {
+   "tick": 18240,
+   "name": "Kaia",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 1,
+    "berries": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 18047
+  },
+  {
+   "tick": 19140,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "grain": 3
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 19192
+  },
+  {
+   "tick": 19140,
+   "name": "Quinn",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Talking with Vik",
+   "need": "hunger",
+   "committedUntil": 19160
+  },
+  {
+   "tick": 19200,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "grain": 3
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 19192
+  },
+  {
+   "tick": 19200,
+   "name": "Quinn",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Ask Mona for food",
+   "need": "hunger",
+   "committedUntil": 19238
+  },
+  {
+   "tick": 19260,
+   "name": "Sofia",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fish": 4
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 19228
+  },
+  {
+   "tick": 19260,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "grain": 3
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 19308
+  },
+  {
+   "tick": 19260,
+   "name": "Quinn",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19274
+  },
+  {
+   "tick": 19320,
+   "name": "Sofia",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fish": 5
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 19228
+  },
+  {
+   "tick": 19380,
+   "name": "Vik",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19383
+  },
+  {
+   "tick": 19380,
+   "name": "Viktor",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19291
+  },
+  {
+   "tick": 19440,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19439
+  },
+  {
+   "tick": 19440,
+   "name": "Vik",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fruit": 1,
+    "berries": 1
+   },
+   "doing": "Picking fruit",
+   "need": "hunger",
+   "committedUntil": 19489
+  },
+  {
+   "tick": 19500,
+   "name": "Dax",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "fruit": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19439
+  }
+ ]
+}

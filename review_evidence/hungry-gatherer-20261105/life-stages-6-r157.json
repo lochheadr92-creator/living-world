@@ -1,0 +1,504 @@
+{
+ "seed": "life-stages-6",
+ "rules": 157,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 31,
+ "criticalSamples": 145,
+ "by": {
+  "critical, holds food | gather:hunger": 8,
+  "critical, holds food | drink:thirst": 6,
+  "critical, holds food | eat_store:hunger": 3,
+  "critical, no food in pack": 101,
+  "critical, holds food | eat:hunger": 1,
+  "critical, holds food | warm:warmth": 21,
+  "critical, holds food | rest:warmth": 5
+ },
+ "rows": [
+  {
+   "tick": 9360,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "grain": 1,
+    "fruit": 1,
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 9281
+  },
+  {
+   "tick": 11700,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 2,
+    "grain": 2
+   },
+   "doing": "Gathering wild grain",
+   "need": "hunger",
+   "committedUntil": 11555
+  },
+  {
+   "tick": 14400,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 14382
+  },
+  {
+   "tick": 14460,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Drinking at the water",
+   "need": "thirst",
+   "committedUntil": 14382
+  },
+  {
+   "tick": 14520,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Eating at home",
+   "need": "hunger",
+   "committedUntil": 14511
+  },
+  {
+   "tick": 14580,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 2,
+    "grain": 2
+   },
+   "doing": "Eating at home",
+   "need": "hunger",
+   "committedUntil": 14511
+  },
+  {
+   "tick": 19620,
+   "name": "Rolf",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 3
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 19560
+  },
+  {
+   "tick": 21960,
+   "name": "Rolf",
+   "stage": "adult",
+   "hunger": 3,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 21696
+  },
+  {
+   "tick": 22080,
+   "name": "Kai",
+   "stage": "elder",
+   "hunger": 10,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Picking berries",
+   "need": "hunger",
+   "committedUntil": 21910
+  },
+  {
+   "tick": 22380,
+   "name": "Kai",
+   "stage": "elder",
+   "hunger": 23,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 22237
+  },
+  {
+   "tick": 22440,
+   "name": "Kai",
+   "stage": "elder",
+   "hunger": 21,
+   "food": {
+    "fish": 2
+   },
+   "doing": "Fishing",
+   "need": "hunger",
+   "committedUntil": 22237
+  },
+  {
+   "tick": 23100,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23124
+  },
+  {
+   "tick": 23160,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23124
+  },
+  {
+   "tick": 23220,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23124
+  },
+  {
+   "tick": 23280,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 18,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23124
+  },
+  {
+   "tick": 23340,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 16,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23415
+  },
+  {
+   "tick": 23400,
+   "name": "Edda",
+   "stage": "adult",
+   "hunger": 15,
+   "food": {
+    "fish": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23415
+  },
+  {
+   "tick": 23520,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Resting inside the hut",
+   "need": "warmth",
+   "committedUntil": 23412
+  },
+  {
+   "tick": 23580,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Resting inside the hut",
+   "need": "warmth",
+   "committedUntil": 23672
+  },
+  {
+   "tick": 23640,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Resting inside the hut",
+   "need": "warmth",
+   "committedUntil": 23672
+  },
+  {
+   "tick": 23700,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Resting inside the hut",
+   "need": "warmth",
+   "committedUntil": 23672
+  },
+  {
+   "tick": 23760,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 17,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Resting inside the hut",
+   "need": "warmth",
+   "committedUntil": 23672
+  },
+  {
+   "tick": 23820,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 23825
+  },
+  {
+   "tick": 23820,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 16,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 23832
+  },
+  {
+   "tick": 23820,
+   "name": "Oren",
+   "stage": "adult",
+   "hunger": 3,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Taking food from the Thistle household's store",
+   "need": "hunger",
+   "committedUntil": 23685
+  },
+  {
+   "tick": 23880,
+   "name": "Yan",
+   "stage": "adult",
+   "hunger": 24,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23831
+  },
+  {
+   "tick": 23880,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23929
+  },
+  {
+   "tick": 23880,
+   "name": "Juno",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23887
+  },
+  {
+   "tick": 23880,
+   "name": "Zora",
+   "stage": "adult",
+   "hunger": 25,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23883
+  },
+  {
+   "tick": 23880,
+   "name": "Isla",
+   "stage": "child",
+   "hunger": 24,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23849
+  },
+  {
+   "tick": 23880,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 14,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23956
+  },
+  {
+   "tick": 23940,
+   "name": "Yan",
+   "stage": "adult",
+   "hunger": 22,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23831
+  },
+  {
+   "tick": 23940,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23929
+  },
+  {
+   "tick": 23940,
+   "name": "Juno",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23887
+  },
+  {
+   "tick": 23940,
+   "name": "Zora",
+   "stage": "adult",
+   "hunger": 23,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 23923
+  },
+  {
+   "tick": 23940,
+   "name": "Isla",
+   "stage": "child",
+   "hunger": 23,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23849
+  },
+  {
+   "tick": 23940,
+   "name": "Lia",
+   "stage": "adult",
+   "hunger": 12,
+   "food": {
+    "berries": 1
+   },
+   "doing": "Drinking at the well",
+   "need": "thirst",
+   "committedUntil": 23926
+  },
+  {
+   "tick": 24000,
+   "name": "Yan",
+   "stage": "adult",
+   "hunger": 20,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 24071
+  },
+  {
+   "tick": 24000,
+   "name": "Yara",
+   "stage": "adult",
+   "hunger": 19,
+   "food": {
+    "grain": 1
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23929
+  },
+  {
+   "tick": 24000,
+   "name": "Juno",
+   "stage": "adult",
+   "hunger": 21,
+   "food": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "need": "warmth",
+   "committedUntil": 23887
+  }
+ ]
+}

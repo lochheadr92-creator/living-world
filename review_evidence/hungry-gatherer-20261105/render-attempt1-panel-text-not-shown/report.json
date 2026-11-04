@@ -1,0 +1,19 @@
+{
+  "ordinary": true,
+  "world": "Normal meadow, arrivals on, rules 157",
+  "found": {
+    "tick": 2099,
+    "reason": "Picking berries: food in my pack would ease my hunger sooner",
+    "hit": {
+      "id": 1112,
+      "name": "Ben",
+      "stage": "adult"
+    }
+  },
+  "checks": {
+    "ordinaryYieldedToMeal": true,
+    "visibleInPanel": false,
+    "pure": true,
+    "noExceptions": true
+  }
+}
