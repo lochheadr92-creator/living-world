@@ -13,7 +13,7 @@ import {recipesMaking} from './recipes';
 import type {Recipe} from './recipes';
 import {techniqueBlocker} from './techniques';
 import {toolsHeldBy} from './toolreg';
-import {reservedFor} from './social';
+import {availableForProject} from './reserved_goods';
 import type {BuildingType,Intention,ItemKind,Items,ToolKind} from './types';
 import {PROJECT_LIMITS,projectGoalError,projectGraphError} from './project_graph';
 import type {ProjectGoal,ProjectGraph,ProjectNode} from './project_graph';
@@ -34,7 +34,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   const chain=new Set(path);chain.add(key);
   const node:ProjectNode={id:nodes.length+1,item,quantity,tier,destination,method:'present',place:0,recipe:'',dependencies:[],alternatives:[],estimatedTicks:0};nodes.push(node);
   const shelf=destination?knownTextileStock(world,p,p.beliefs[destination],item as ItemKind):0;
-  const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:Math.max(0,(p.inv[item]??0)-reservedFor(world,p,item)+(ownPlan?.wants[item]??0));
+  const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:availableForProject(world,p,ownPlan,item);
   if(shelf+held>=quantity)return node.id;
   if(item!=='cart'&&isBodyPart(item)&&knownCarcassUnits(ctx,item)>=quantity-shelf-held){node.method='supply';node.estimatedTicks=CARCASS_WORK*(quantity-shelf-held);return node.id;}
   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.

@@ -1,0 +1,62 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/project_revision.test.ts > revises the existing quantity with the same identity, deadline and paid work, without granting goods 38ms
+ ✓ tests/project_revision.test.ts > refuses unchanged, malformed, missing, expired, failed, committed and unknown-feasibility revisions without mutation 71ms
+ ✓ tests/project_recovery.test.ts > does not adopt prerequisite graphs with old rules 30ms
+ ✓ tests/project_recovery.test.ts > does not adopt prerequisite graphs with removed rules 8ms
+ ✓ tests/project_recovery.test.ts > observation and repeated prerequisite offers do not mutate the saved project 34ms
+ ✓ tests/project_recovery.test.ts > rejects cycle in persisted graph data 8ms
+ ✓ tests/project_recovery.test.ts > rejects wrong output in persisted graph data 5ms
+ ✓ tests/project_recovery.test.ts > rejects wrong input in persisted graph data 5ms
+ ✓ tests/project_recovery.test.ts > rejects oversized history in persisted graph data 5ms
+ ✓ tests/project_recovery.test.ts > rejects old rules in persisted graph data 6ms
+ ✓ tests/project_recovery.test.ts > recompiles lost stocked input into a known raw source, without changing goods or accepting unseen stock 9ms
+ ✓ tests/project_recovery.test.ts > bounds unsuccessful reconsideration and records an honest abandoned result 4ms
+ ✓ tests/project_recovery.test.ts > revalidates cancelled during an actual prerequisite delivery 45ms
+ ✓ tests/project_recovery.test.ts > revalidates promised during an actual prerequisite delivery 32ms
+ ✓ tests/project_recovery.test.ts > revalidates lost goods during an actual prerequisite delivery 26ms
+ ✓ tests/project_recovery.test.ts > waits for a personally started firing even at full energy, and ends when the goal is cancelled 14ms
+ ✓ tests/project_recovery.test.ts > revalidates a compiled hand-tool prerequisite before consuming inputs (competing promise: false) 18ms
+ ✓ tests/project_recovery.test.ts > revalidates a compiled hand-tool prerequisite before consuming inputs (competing promise: true) 12ms
+ ✓ tests/project_production.test.ts > autonomously adopts a forged-tool project and executes charcoal, smelting and forging with exact saved continuation 186ms
+ ✓ tests/project_revision.test.ts > shares the existing bounded reconsideration budget and cannot reset a pending retry 11ms
+ ✓ tests/project_revision.test.ts > does not revise around paid/current physical work, suspended=false 6ms
+ ✓ tests/project_revision.test.ts > does not revise around paid/current physical work, suspended=true 6ms
+ ✓ tests/project_revision.test.ts > exposes only own saved plans, keeps old observation shapes, and rejects mixed or malformed answers 11ms
+ ✓ tests/project_revision.test.ts > replays a revised plan through paid production, including memory=false, and detects tampering 938ms
+ ✓ tests/project_allocation.test.ts > the older project keeps its carried ingredient despite a younger claim, without observer mutation 30ms
+ ✓ tests/project_allocation.test.ts > an earlier active claim wins; ended claims do not block the project 4ms
+ ✓ tests/project_allocation.test.ts > only unclaimed surplus is shared, and an unadopted object cannot reclaim another plan allocation 3ms
+ ✓ tests/project_allocation.test.ts > outstanding delivery promises precede project claims, counting only undelivered amounts 2ms
+ ✓ tests/project_allocation.test.ts > recompilation and step selection agree about the adopted project own ingredients 3ms
+ ✓ tests/project_allocation.test.ts > current ordinary crafting pays once and continues exactly across a mid-work save with a younger plan 40ms
+ ✓ tests/project_allocation.test.ts > rules 147 preserves the former collision rather than silently changing old worlds 4ms
+ ✓ tests/project_allocation.test.ts > the lab removal restores the historical collision and restores its previous switch state 5ms
+ ✓ tests/project_allocation.test.ts > rechecks a late promise before physical craft consumption 5ms
+ ✓ tests/project_allocation.test.ts > rechecks a late cancel before physical craft consumption 5ms
+ ✓ tests/inhabit_proposals.test.ts > a valid proposal is adopted through the ordinary gates as the ordinary plan, and nothing is made or written by the proposal itself 40ms
+ ✓ tests/inhabit_proposals.test.ts > through the controller seam: adoption is notified, this moment is the engine's own choice, the plan's steps are offered next, and a refusal counts as a retry 26ms
+ ✓ tests/inhabit_proposals.test.ts > the inhabitant protocol carries it: the scripted proposer records a replayable run in which the cart is built from the proposed plan 1052ms
+ ✓ tests/inhabit_proposals.test.ts > a proposal under an older protocol falls back; the answer shape is strict; the prompt names proposing only when the observation carries it 13ms
+ ✓ tests/project_revision.test.ts > replays a revised plan through paid production, including memory=true, and detects tampering 540ms
+ ✓ tests/v147_continuation.test.ts > preserves the recorded ordinary and staged rules-147 final account continuation 11472ms
+ ✓ tests/v148_continuation.test.ts > preserves rules-148 ordinary and paid sibling-plan crafting continuations 11047ms
+
+ Test Files  7 passed (7)
+      Tests  41 passed (41)
+   Start at  20:29:10
+   Duration  13.90s (tests 81%, transform 15%, import 4%)
+

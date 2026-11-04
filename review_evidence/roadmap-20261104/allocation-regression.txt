@@ -1,0 +1,116 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/commitments.test.ts > a request says who wants what, where, and until when > carries the asker, the answerer, the thing, how much, where it is to go, why, and when it lapses 6ms
+ ✓ tests/commitments.test.ts > how a promise ends > kept: done, request fulfilled, warmth and trust go up 3ms
+ ✓ tests/commitments.test.ts > how a promise ends > partly kept: expired with credit in proportion — not a broken promise 1ms
+ ✓ tests/commitments.test.ts > how a promise ends > put aside for their own survival: interrupted, a very small mark, no grievance 1ms
+ ✓ tests/commitments.test.ts > how a promise ends > turned out to be impossible: failed, a small mark, the reason on record 1ms
+ ✓ tests/commitments.test.ts > how a promise ends > neglected while free to act: broken — the real penalty, and a grievance with its cause 1ms
+ ✓ tests/commitments.test.ts > how a promise ends > a refusal costs far less than a broken promise (the asker asked once and heard no) 24ms
+ ✓ tests/commitments.test.ts > how a promise ends > moot: the building was finished or given up, nobody is blamed 2ms
+ ✓ tests/commitments.test.ts > how a promise ends > the maker dying releases the promise and withdraws the request; the asker dying does too 4ms
+ ✓ tests/commitments.test.ts > how a promise ends > time asleep or seeing to their own needs does not count against the deadline 1ms
+ ✓ tests/commitments.test.ts > no promise is made twice over, and promised goods are not given away > goods promised to someone are reserved from the maker’s own spare — only while the promise is open 2ms
+ ✓ tests/commitments.test.ts > no promise is made twice over, and promised goods are not given away > a request already covered by what others have promised is answered “that has been seen to”, not promised again 3ms
+ ✓ tests/commitments.test.ts > no promise is made twice over, and promised goods are not given away > only so many people can be committed to one building: the rest are told there are hands enough 2ms
+ ✓ tests/commitments.test.ts > promises turn into real work and real deliveries > a promise to bring wood to a building site is carried out: the wood really arrives at the site, once, and the promise is kept 28ms
+ ✓ tests/commitments.test.ts > recovered site courier > goods wanted at a site by someone whose pack is full are carried to the site by the giver, not refused for want of room 29ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version undefined 2ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 1 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 2 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 3 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 4 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 6 2ms
+ ✓ tests/commitments.test.ts > recovered site courier > keeps the original gift response at rules version 7 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when authored 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when room 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when unknown 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when no remembered need 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when other destination 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when busy 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not create a courier promise when urgent 1ms
+ ✓ tests/commitments.test.ts > recovered site courier > does not consult unseen site existence in the new courier decision 1ms
+ ✓ tests/commitments.test.ts > borrowing a tool > a friend lends it, the borrower promises to bring it back, and nobody else can use it meanwhile 5ms
+ ✓ tests/commitments.test.ts > borrowing a tool > it comes back to the lender’s own hands, and the promise is kept — not just any hammer of that kind 5ms
+ ✓ tests/commitments.test.ts > borrowing a tool > an unwilling owner says no, and says why: it is not on loan, it is in use, or they are not close enough 3ms
+ ✓ tests/commitments.test.ts > asking a neighbour to mend a failing roof > an old person with nobody able to mend their hut asks; the neighbour promises, really mends it with wood from their own pack, and the promise is kept 8ms
+ ✓ tests/project_revision.test.ts > revises the existing quantity with the same identity, deadline and paid work, without granting goods 37ms
+ ✓ tests/project_revision.test.ts > refuses unchanged, malformed, missing, expired, failed, committed and unknown-feasibility revisions without mutation 74ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps the current version on a new normal world 1ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps the current version on a new town world 0ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps the current version on a new large world 0ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps the current version on a new huge world 0ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps it through the app, on the first world and on every restart 66ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > stamps an inhabitant link, and leaves an explicitly legacy one unversioned 0ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > leaves the low-level helpers unversioned, because fixtures and diagnostics make legacy worlds with them 0ms
+ ✓ tests/rules_version.test.ts > the version a new world is made with > does not turn an authored world into a rich one, or the other way about 0ms
+ ✓ tests/project_allocation.test.ts > the older project keeps its carried ingredient despite a younger claim, without observer mutation 29ms
+ ✓ tests/project_allocation.test.ts > an earlier active claim wins; ended claims do not block the project 4ms
+ ✓ tests/project_allocation.test.ts > only unclaimed surplus is shared, and an unadopted object cannot reclaim another plan allocation 3ms
+ ✓ tests/project_allocation.test.ts > outstanding delivery promises precede project claims, counting only undelivered amounts 2ms
+ ✓ tests/project_allocation.test.ts > recompilation and step selection agree about the adopted project own ingredients 3ms
+ ✓ tests/project_allocation.test.ts > current ordinary crafting pays once and continues exactly across a mid-work save with a younger plan 40ms
+ ✓ tests/project_allocation.test.ts > rules 147 preserves the former collision rather than silently changing old worlds 4ms
+ ✓ tests/project_allocation.test.ts > the lab removal restores the historical collision and restores its previous switch state 5ms
+ ✓ tests/project_allocation.test.ts > rechecks a late promise before physical craft consumption 5ms
+ ✓ tests/project_allocation.test.ts > rechecks a late cancel before physical craft consumption 4ms
+ ✓ tests/project_compile.test.ts > compiles a personal charcoal → iron → forged-tool prerequisite tree without changing world state 25ms
+ ✓ tests/project_compile.test.ts > rejects a production goal with unheard kiln 7ms
+ ✓ tests/project_compile.test.ts > rejects a production goal with unknown procedure 7ms
+ ✓ tests/project_compile.test.ts > rejects a production goal with unavailable input 6ms
+ ✓ tests/project_compile.test.ts > does not learn an unseen workshop or its stock through compilation 2ms
+ ✓ tests/project_compile.test.ts > reuses known finished inputs instead of prescribing their production again 2ms
+ ✓ tests/project_compile.test.ts > rejects cycle graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects unreachable graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects unknown prerequisite graph data before persistence 2ms
+ ✓ tests/project_compile.test.ts > rejects size graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects depth graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects bad quantity graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects bad recipe graph data before persistence 1ms
+ ✓ tests/project_compile.test.ts > rejects progress graph data before persistence 1ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > a save and a load keep it, and keep the whole world with it 308ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > a save, a load and then carrying on is the same world as never having stopped 402ms
+ ✓ tests/project_revision.test.ts > shares the existing bounded reconsideration budget and cannot reset a pending retry 10ms
+ ✓ tests/project_revision.test.ts > does not revise around paid/current physical work, suspended=false 8ms
+ ✓ tests/project_revision.test.ts > does not revise around paid/current physical work, suspended=true 6ms
+ ✓ tests/project_revision.test.ts > exposes only own saved plans, keeps old observation shapes, and rejects mixed or malformed answers 9ms
+ ✓ tests/project_revision.test.ts > replays a revised plan through paid production, including memory=false, and detects tampering 935ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > restoring into the app keeps the version the save had, and does not overwrite it with the current one 133ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > a lab fork of a saved world runs the version the world was saved with 171ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > is part of what makes a world that world 154ms
+ ✓ tests/rules_version.test.ts > the version survives everything that carries a world > a world with no version hashes exactly as it did before versioning existed 59ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is from the future 147ms
+ ✓ tests/project_revision.test.ts > replays a revised plan through paid production, including memory=true, and detects tampering 524ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is far in the future 138ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is not a whole number 163ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is zero 167ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is negative 163ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses a save whose rules version is a word 156ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > says plainly when a world came from a newer build, rather than running it under today's rules 0ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > leaves the running world untouched when a load is refused 223ms
+ ✓ tests/rules_version.test.ts > a world this build cannot run is refused, not reinterpreted > refuses to overwrite a save with a world whose version it could not load back 23ms
+ ✓ tests/rules_version.test.ts > the unversioned past > is accepted, kept unversioned through a save and a load, and never guessed at 132ms
+ ✓ tests/rules_version.test.ts > the unversioned past > is never eligible for behaviour introduced at a later version 36ms
+ ✓ tests/rules_version.test.ts > the unversioned past > says what it is, without pretending to know more 0ms
+ ✓ tests/rules_version.test.ts > the module is the only owner of the question > knows what it supports 0ms
+ ✓ tests/rules_version.test.ts > the module is the only owner of the question > nobody else compares a rules version to a literal 23ms
+ ✓ tests/v147_continuation.test.ts > preserves the recorded ordinary and staged rules-147 final account continuation 10937ms
+
+ Test Files  6 passed (6)
+      Tests  95 passed (95)
+   Start at  20:28:23
+   Duration  12.22s (tests 74%, transform 21%, import 5%)
+

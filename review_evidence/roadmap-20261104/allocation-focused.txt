@@ -1,0 +1,52 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/zz_review_f_sibling_claim.test.ts > baseline: with the hammer inputs in hand the batch step is craft 22ms
+ ✓ tests/zz_review_f_sibling_claim.test.ts > Historical rules-147 defect: a younger tool plan wanting wood turns the ready hammer step into "supplies no longer available" although the wood is still in the pack 15ms
+ ✓ tests/zz_review_f_sibling_claim.test.ts > Historical rules-147 defect: the review then reconsiders the graph and sends her to acquire wood she is holding 13ms
+ ✓ tests/zz_review_f_sibling_claim.test.ts > a sibling plan wanting only stone the batch does not hold leaves the hammer step alone (the collision is per raw kind) 10ms
+ ✓ tests/zz_review_f_sibling_claim.test.ts > current rules: the older batch keeps first call on its carried wood 7ms
+ ✓ tests/project_allocation.test.ts > the older project keeps its carried ingredient despite a younger claim, without observer mutation 28ms
+ ✓ tests/project_allocation.test.ts > an earlier active claim wins; ended claims do not block the project 6ms
+ ✓ tests/project_allocation.test.ts > only unclaimed surplus is shared, and an unadopted object cannot reclaim another plan allocation 3ms
+ ✓ tests/project_allocation.test.ts > outstanding delivery promises precede project claims, counting only undelivered amounts 2ms
+ ✓ tests/project_allocation.test.ts > recompilation and step selection agree about the adopted project own ingredients 3ms
+ ✓ tests/project_allocation.test.ts > current ordinary crafting pays once and continues exactly across a mid-work save with a younger plan 39ms
+ ✓ tests/project_allocation.test.ts > rules 147 preserves the former collision rather than silently changing old worlds 5ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: the project offers the remaining stone without subtracting carried inputs twice 28ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: ordinary staged decisions gather both stones and make the hammer 64ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: rules 116 and the lab removal preserve the old missing offer 9ms
+ ✓ tests/project_acquire_remaining.test.ts > F1: the fix still refuses a second stone when the pack has no room 3ms
+ ✓ tests/project_inputs.test.ts > retains the current hammer inputs on cart adoption instead of offering them to a different site 20ms
+ ✓ tests/project_inputs.test.ts > retains the other hand-tool input while acquiring missing stone 6ms
+ ✓ tests/project_inputs.test.ts > preserves unclaimed hand inputs under old behaviour 3ms
+ ✓ tests/project_inputs.test.ts > preserves unclaimed hand inputs under removed behaviour 3ms
+ ✓ tests/project_inputs.test.ts > does not reserve workshop stock or future recipe inputs and inspection remains pure 20ms
+ ✓ tests/project_inputs.test.ts > an earlier delivery promise still makes its stone unavailable to the hand-tool step 12ms
+ ✓ tests/project_inputs.test.ts > releases the allocation on the original deadline with no goods changed 3ms
+ ✓ tests/project_inputs.test.ts > death ends the personal claim while its real goods remain accounted for 4ms
+ ✓ tests/project_inputs.test.ts > crafts through the physical handler, saves mid-work, pays inputs once and releases them for the next step 41ms
+ ✓ tests/project_inputs.test.ts > leaves the adoption history of non-hand workshop steps unchanged 4ms
+ ✓ tests/project_inputs.test.ts > autonomous adoption does not create a second tool claim for the same active project prerequisite 10ms
+
+ Test Files  4 passed (4)
+      Tests  27 passed (27)
+   Start at  20:28:11
+   Duration  1.69s (transform 83%, import 11%, tests 6%)
+
+  Transform  transforming modules took 5.18s · 83% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

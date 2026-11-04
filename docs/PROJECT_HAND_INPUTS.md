@@ -89,3 +89,14 @@ Reports: `autonomy_evidence/inputs{114,115}-forest-15/report.json` and
 `inputs{114,115}-{river,meadow}-5/report.json`. Full saves remain local. Staged
 retention, autonomous physical hammer completion and release are established;
 ordinary activation, cart usefulness and aggregate benefit remain unproven.
+
+
+## Rules 148 — adoption-order availability
+
+The surviving sibling-plan review exposed a distinct mismatch: `projectAvailable` and recompilation subtracted every plan's demand before adding the current plan's whole demand back. A younger basket intention could therefore make a ready older hammer prerequisite appear to have lost its carried wood. Five new assertions reproduced the problem, including the missing real craft offer.
+
+`reserved_goods.ts` now owns the shared project availability calculation. At rich rules 148 it first protects outstanding undelivered delivery/haul promises, then allocates carried goods to active intentions in list/adoption order. A project may use its own allocated share plus genuinely unclaimed surplus. An unadopted or copied proposal has no private share. Planning, recompilation and existing physical craft/deposit rechecks call the same calculation. No new inventory, reservation record, scheduling priority, free material or score is introduced. Rules 147 and earlier, and `rich-no-project-allocation`, retain the old calculation.
+
+Ten new contracts cover older/younger order, ended plans, surplus, fabricated claims, partially fulfilled promises, recompilation, paid crafting with exact mid-work continuation, late cancellation/promise refusal and lab removal. Focused regression passes 27 tests across four files before the three additional boundary cases; broader regression passes 95 tests across six files; final proposal/production/recovery/revision and rules-147/148 continuation run passes 41 tests across seven files. Typecheck/build pass. The old review's defect examples are pinned to historical 147 and its current contract is now a normal passing test. No immutable predecessor expectation was changed. The new immutable 148 sample includes an ordinary river world and the explicitly staged paid sibling-plan craft.
+
+Evidence: `review_evidence/roadmap-20261104/allocation-*.txt`, `predecessor-before.txt`, `v148-record.txt`. Full combined suite remains to run before publication. This verifies the bounded repair and its execution path; ordinary cart reliability and aggregate benefit remain unproven.

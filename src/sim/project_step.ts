@@ -2,7 +2,7 @@ import {currentHandInputs} from './project_hand_inputs';
 import {knownTextileStock} from './textile_stock';
 // Pure interpretation of a saved prerequisite graph. It describes a next ordinary action; it never executes one.
 import {runsRulesVersion} from './rulesversion';
-import {reservedFor} from './social';
+import {availableForProject} from './reserved_goods';
 import {toolsHeldBy} from './toolreg';
 import type {Ctx} from './optutil';
 import {eta} from './optutil';
@@ -15,7 +15,7 @@ export const projectPlansOn=()=>enabled;
 export function setProjectPlans(on:boolean):void{enabled=on;}
 export const hasProjectPlans=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,69);
 export function projectAvailable(w:World,p:Person,i:Pick<Intention,'wants'>,item:ItemKind):number{
- return Math.max(0,(p.inv[item]??0)-reservedFor(w,p,item)+(i.wants[item]??0));
+ return availableForProject(w,p,i,item);
 }
 export function projectCraftPlan(ctx:Ctx,tool:ToolKind):Intention|undefined{
  if(!hasProjectPlans(ctx.world))return;

@@ -1,0 +1,121 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ × tests/project_allocation.test.ts > the older project keeps its carried ingredient despite a younger claim, without observer mutation 27ms
+   → expected +0 to be 1 // Object.is equality
+ ✓ tests/project_allocation.test.ts > an earlier active claim wins; ended claims do not block the project 4ms
+ × tests/project_allocation.test.ts > only unclaimed surplus is shared, and an unadopted object cannot reclaim another plan allocation 4ms
+   → expected 96 to be +0 // Object.is equality
+ × tests/project_allocation.test.ts > outstanding delivery promises precede project claims, counting only undelivered amounts 4ms
+   → expected +0 to be 1 // Object.is equality
+ × tests/project_allocation.test.ts > recompilation and step selection agree about the adopted project own ingredients 5ms
+   → expected 'supply' to be 'present' // Object.is equality
+ × tests/project_allocation.test.ts > current ordinary crafting pays once and continues exactly across a mid-work save with a younger plan 4ms
+   → expected undefined to be defined
+ ✓ tests/project_allocation.test.ts > rules 147 preserves the former collision rather than silently changing old worlds 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/project_allocation.test.ts > the older project keeps its carried ingredient despite a younger claim, without observer mutation
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/project_allocation.test.ts:20:44
+     18| it('the older project keeps its carried ingredient despite a younger c…
+     19|  const {w,p,plan,sibling}=scene(),raw=serializeWorld(w);
+     20|  expect(projectAvailable(w,p,plan,'wood')).toBe(1);
+       |                                            ^
+     21|  expect(projectAvailable(w,p,sibling,'wood')).toBe(0);
+     22|  expect(nextProjectStep(generateOptions(w,p,true,true),plan.project!,p…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/project_allocation.test.ts > only unclaimed surplus is shared, and an unadopted object cannot reclaim another plan allocation
+AssertionError: expected 96 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 96
+
+ ❯ tests/project_allocation.test.ts:32:57
+     30| it('only unclaimed surplus is shared, and an unadopted object cannot r…
+     31|  const {w,p,plan,sibling}=scene();
+     32|  expect(projectAvailable(w,p,{wants:{wood:99}},'wood')).toBe(0);
+       |                                                         ^
+     33|  p.inv.wood=8;
+     34|  expect(projectAvailable(w,p,plan,'wood')).toBe(5);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/project_allocation.test.ts > outstanding delivery promises precede project claims, counting only undelivered amounts
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/project_allocation.test.ts:42:73
+     40|  p.commitments.push({id:w.nextId++,requestId:0,kind:'deliver',to:999,i…
+     41|  expect(projectAvailable(w,p,plan,'wood')).toBe(0);
+     42|  p.commitments[0].delivered=2;expect(projectAvailable(w,p,plan,'wood')…
+       |                                                                         ^
+     43| });
+     44| it('recompilation and step selection agree about the adopted project o…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/project_allocation.test.ts > recompilation and step selection agree about the adopted project own ingredients
+AssertionError: expected 'supply' to be 'present' // Object.is equality
+
+Expected: "present"
+Received: "supply"
+
+ ❯ tests/project_allocation.test.ts:47:76
+     45|  const {w,p,plan}=scene(),r=compileProject(generateOptions(w,p,true,tr…
+     46|  expect(r.ok).toBe(true);if(!r.ok)throw Error(r.reason);
+     47|  expect(r.graph.nodes.find(n=>n.item==='wood'&&n.destination===0)?.met…
+       |                                                                            ^
+     48| });
+     49| it('current ordinary crafting pays once and continues exactly across a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/project_allocation.test.ts > current ordinary crafting pays once and continues exactly across a mid-work save with a younger plan
+AssertionError: expected undefined to be defined
+ ❯ tests/project_allocation.test.ts:51:14
+     49| it('current ordinary crafting pays once and continues exactly across a…
+     50|  const {w,p,plan}=scene(),opt=generateOptions(w,p,true,true).options.f…
+     51|  expect(opt).toBeDefined();startActivity(w,p,opt!.make!()!);
+       |              ^
+     52|  for(let n=0;n<150&&!(p.activity?.kind==='craft'&&p.activity.progress>…
+     53|  expect(p.activity?.kind).toBe('craft');expect(p.activity!.progress).t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+   Start at  20:27:47
+   Duration  1.55s (transform 86%, import 11%, tests 4%)
+
