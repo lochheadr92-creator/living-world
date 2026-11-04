@@ -1,0 +1,14 @@
+C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment-living-world-carry\c3792e5b-bee3-4a95-87d2-3653cdd5c1c9\scratchpad\frozen-A\repro.ts:89
+    throw Error("Twin mismatch captured at " + w.tick);
+          ^
+
+Error: Twin mismatch captured at 45600
+    at snapshot (C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment-living-world-carry\c3792e5b-bee3-4a95-87d2-3653cdd5c1c9\scratchpad\frozen-A\repro.ts:52:248)
+    at C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment-living-world-carry\c3792e5b-bee3-4a95-87d2-3653cdd5c1c9\scratchpad\frozen-A\repro.ts:71:20
+    at ViteNodeRunner.runModule (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:369:4)
+    at ViteNodeRunner.directRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:349:3)
+    at ViteNodeRunner.cachedRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:182:11)
+    at ViteNodeRunner.executeFile (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:157:10)
+    at CAC.run (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/cli.mjs:95:28)
+
+Node.js v24.19.0

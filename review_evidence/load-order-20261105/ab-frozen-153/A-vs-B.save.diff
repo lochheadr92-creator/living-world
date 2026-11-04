@@ -1,0 +1,3 @@
+423a424,425
+>   // EXPERIMENT (review_evidence/load-order-20261105): the only change in this copy of the frozen rules-153 source
+>   for (const cell of w.grid.cells) cell.sort((a, b) => a.id - b.id);
