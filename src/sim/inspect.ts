@@ -1,3 +1,4 @@
+import {hasNourishment,nourishmentCapacity,nourishmentOf} from './nourishment';
 import {worldAge} from './time_text';
 import {runsRulesVersion} from './rulesversion';
 import { biological, conditionAt, ecologyNotes, fieldResting, hasEcology } from './ecology';
@@ -138,6 +139,7 @@ export interface PlanView {
   outcome: string;
 }
 export interface PersonView {
+  nourishment?: {stored:number;capacity:number};
   id: number;
   name: string;
   sex: 'f' | 'm';
@@ -304,6 +306,12 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   if (p.pose === 'sleep') {
     doing = 'Asleep.';
     stopping = p.needs.energy >= 90 ? 'Almost rested.' : 'Nothing; sleeping recovers energy and health.';
+    if(hasNourishment(world)&&p.needs.energy<90){
+      stopping='Sleeping restores energy.';
+      if(p.health<100)stopping+=nourishmentOf(world,p)<=0?' Food is needed for health recovery.':
+        p.needs.hunger>40&&p.needs.thirst>40&&p.needs.warmth>35?' Stored nourishment pays for health recovery.':
+        ' Health recovery also needs enough food, water and warmth.';
+    }
   }
   if (a) {
     const tgt = targetText(world, a);
@@ -624,6 +632,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     householdColor: hh ? hh.color : 0,
     home: homeLine(world, p, homeB && homeB.ent === 'building' ? homeB : null),
     health: p.health,
+    ...(hasNourishment(world)?{nourishment:{stored:nourishmentOf(world,p),capacity:nourishmentCapacity(world,p)}}:{}),
     illness: describeIllness(world, p),
     // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is
     mood: isRich(world) && p.mood ? Math.max(0, Math.min(100, Math.round(70 + p.mood.level * 0.7))) : moodOf(p),

@@ -1,3 +1,4 @@
+import {hasNourishment} from './nourishment';
 import { initialiseTechniques } from './techniques';
 import { carriesDecisionLedger } from './decision_ledger';
 import { initialSkills } from './development';
@@ -177,6 +178,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     birthTick: world.tick - Math.round(o.age * TICKS_PER_YEAR),
     alive: true,
     health: 100,
+    ...(hasNourishment(world)?{nourishment:0}:{}),
     needs: {
       hunger: 62 + rng.next() * 30,
       thirst: 62 + rng.next() * 30,

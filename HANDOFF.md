@@ -1,3 +1,66 @@
+# Rules132 implementation checkpoint; overall task NOT complete
+
+Rules132 runtime/tests are ready for focused commit. Forest/river25 are now
+complete:18/28alive,500pure checks each,exacttwins/save120/conservation.
+Forest is byte-equal to its independently observed cohort control. Docs updated.
+Full suite86942 still running; cohorts24591/4850 running. Trap replay42686
+lastday19. New tests/trap_catch_truth.test.ts is UNTRACKED and deliberately
+red:2fail1pass reproducing stale/empty catch claims; leave it out of132commit.
+No133runtime edits yet. Do not modify frozen measurements. Earlier detailed
+paths/provenance below remain applicable.
+
+# Current survival continuation - main c75fe2d;132 staged, NOT complete
+
+131 is committed c75fe2d.132 runtime/tests/observers/browser/reference are
+staged (24files); docs/SURVIVAL_CAPABILITIES.md is separately dirty. Preserve
+all unrelated evidence and tests. No push, no agents, no approval needed.
+
+132:29new contracts pass (26nutrition+2access+1view), ten122-131 references
+pass; immutable132 captured bfb773f5e134dfcd4753d29628052626c3ee4e552a16ce0ad277157d74856f86
+and passes. Final browser10checks pass nourishment-rendered3, visible fed/unfed
+sleep captures in rendered2, actual forest Yusuf view in nourishment-ordinary-view.
+Only read-only sleep QA differs from frozen132 source; exact audit retained in
+resume-20261104/nourishment-view-source-audit.json. Typecheck/build retain only
+two baseline nullable errors; final standalone Vite passes.
+
+RUNNING (never edit frozen source worktrees):
+-24591 pre-reserve13175draws ../living-world-trap-window-check2,
+ aggregate-pre-reserves131 (last24complete, nofailed).
+-4850 nourishment13275draws ../living-world-nourishment-check1,
+ aggregate-nourishment132 (last22complete, nofailed).
+-6838/45599 ordinary132forest/river25, nourishment-check1,
+ lastforest~day22/river~day19. Exact twins, save120, pure/conservation runner.
+-84692 older131meadow60, trap-window-check2, lastday40.
+-86942 npmtest maxWorkers2 on main, nourishment-full1.log. Has baseline
+ review failures plus likely four timeout failures (toolreport+lab_defaults),
+ wait for full detailed summary; recheck timeouts after machine load eases.
+ Collection predates new nourishment_access/view files; those passed separately.
+-42686 trap_food_replay in ../living-world-trap-food132. Reference is the
+ completed132forest-f2-n1 cohort draw. Output trap-food132-replay. Observer
+ conservatively tracks direct trap-meat recovery and meals; exact final save
+ must match the original draw. Main script is untracked scripts/trap_food_replay.ts.
+
+NEW finding awaiting replay/repair:132forest-f2-n1 has trap catch body17987 at
+50849, original deadline51280. Final body is gone; p905 log at58812 still says
+'Checked the trap: a body needs butchering.' passive_gear check uses non-null
+historical bodyId without testing current recoverable remains. This is a real
+misleading failure log; no repair yet. Respect version/reference rules when
+fixing. Trap food not yet attributable:20meat made/12eaten but multiple bodies.
+
+Ordinary hide route CLOSED:130fern60 garment50001protected ticks. Fat route
+CLOSED as bounded activation:131forest-f4-n2 and f5-n3 each rendered/ate1fat.
+Meat preservation, attributable trap meal and final-source sheep birth remain
+open. Check completed cohort saves' chronicle for lamb births; absence in a
+bounded chronicle does not prove none. No added hunting utility/deer.
+
+NEXT: finish pending outputs, source-attributed trap replay, remaining uptake/
+truthful failure repair,132focused commit once verified, full cohort comparison
+against131 and121. scripts/survival_compare.mjs untracked, selfcheck4passes;
+validates full settings, hashes and75draws; nutrition missing means null notzero.
+Brain daily latest checksum bbcf015fa061d6c2ec5e2698022b1cf594e74785acc6cfa7dd088b71371e7d8a.
+Do not end with partial work; owner requested all seven. Archive refresh at
+actual end remains due. Use python -X utf8 for reads to avoid CP1252 corruption.
+
 # Current survival checkpoint - rules131 ready to commit;132 separate working changes
 
 Task NOT complete. The owner authorised this checkout; no renewed approval,

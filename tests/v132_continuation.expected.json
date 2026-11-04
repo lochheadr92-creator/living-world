@@ -1,0 +1,33 @@
+{
+  "source": {
+    "head": "7f1895f7051bc4afc425b5f52dba6464a5bbeab0",
+    "rules": 132,
+    "content": "bfb773f5e134dfcd4753d29628052626c3ee4e552a16ce0ad277157d74856f86",
+    "note": "Recorded before successor behavior; ordinary, paid meal and finite nourishment continuations"
+  },
+  "ordinary": {
+    "saved": "6641b0e5f4c90a1919008c21278f354a10970f0ec86e82386b3ef8be9d0e690b",
+    "uninterrupted": "700c2d6a8ef925c4e198578b41d227b48ad3e3b222dfc08cc44ac6fd60aa30f0",
+    "continued": "700c2d6a8ef925c4e198578b41d227b48ad3e3b222dfc08cc44ac6fd60aa30f0"
+  },
+  "midMeal": {
+    "saved": "3b7646dd277109d8e26c38aa60a8d5207358f0e1d76c676465f1e5fc827792e3",
+    "uninterrupted": "b1c23d687b33edea27420042bc2515786558c614afb41ea2bbf0689130df5069",
+    "continued": "b1c23d687b33edea27420042bc2515786558c614afb41ea2bbf0689130df5069"
+  },
+  "recovery": {
+    "saved": "ed2488b29411f6bcfec9d641bf47671b8425db3b71b3d41209ac0060e6a9aa0a",
+    "uninterrupted": "45430235df48fe0f602b05af74527702724cfb1b23b52f4abc184ce46956951f",
+    "continued": "45430235df48fe0f602b05af74527702724cfb1b23b52f4abc184ce46956951f"
+  },
+  "shortage": {
+    "saved": "8d0ad73d59ef83d5cc22fb44b13202faf3c53f574d05bfe6c3f6caaee3a56087",
+    "uninterrupted": "dbae07190a1f318cf0f3239c423289d619092c001c5e6bdbf94c3447e5e5e3b1",
+    "continued": "dbae07190a1f318cf0f3239c423289d619092c001c5e6bdbf94c3447e5e5e3b1"
+  },
+  "nourishment": 1.089000000000003,
+  "health": 51.01100000000004,
+  "consumed": {
+    "berries": 2
+  }
+}

@@ -660,6 +660,8 @@ export interface Person {
   alive: boolean;
   health: number;
   needs: Needs;
+  /** Rules132: finite nutrition from food actually consumed; absence means zero. */
+  nourishment?: number;
   traits: Traits;
   skills: Skills;
   /** Version 18: held technique and its actual source; proficiency is separate. */
@@ -1425,6 +1427,7 @@ export interface World {
   inhabitants?: Record<number, InhabitantState>;
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
+    onNourishment?: (p:Person,event:import('./nourishment').NourishmentEvent)=>void;
     onActivityStart?: (p: Person, a: Activity) => void;
     /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */
     onActivityEnd?: (p: Person, a: Activity, outcome: 'success' | 'failed' | 'interrupted' | 'partial', detail: string) => void;

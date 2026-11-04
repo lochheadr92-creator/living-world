@@ -1,3 +1,4 @@
+import {takeNutrition} from './nourishment';
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import {hasMealLeftovers} from './meal_leftovers';
 import {hasMeetingKnowledge,hearInvitation,hearReply,personalMeal,endMeetingKnowledge,updateMeetingKnowledge,canForgetMeeting,atMeeting,receiveMeetingCancellation,acknowledgeMeetingCancellation} from './meeting_knowledge';
@@ -637,7 +638,7 @@ function eatServing(world: World, m: Meal, p: Person): boolean {
   const k = pickFood(m.table, p.needs.hunger) as FoodKind | null;
   if (!k) return false;
   if (consume(world, m.table, k, 1, 'eaten at a shared meal') < 1) return false;
-  p.needs.hunger = Math.min(100, p.needs.hunger + NUTRITION[k]);
+  takeNutrition(world,p,NUTRITION[k]);
   p.lastAteTick = world.tick;
   noteSupperPortion(world,m,p);
   addFx(world, 'eat', p.x, p.y, 0);

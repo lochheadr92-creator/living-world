@@ -1,3 +1,4 @@
+import {hasNourishment} from './nourishment';
 import {livestockTick} from './livestock';
 import {gearTick} from './passive_gear';
 import {carcassTick,hasCarcasses} from './carcass';
@@ -353,6 +354,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
       `P${p.id}:${r4(p.x)},${r4(p.y)},${r4(p.heading)}|${r4(p.health)}|${NEED_KEYS_STR.map((k) => r4(p.needs[k as keyof Person['needs']])).join(',')}|${JSON.stringify(p.inv)}|${p.hhId}|${p.activity ? p.activity.kind + ':' + p.activity.targetId + ':' + r4(p.activity.progress) + ':' + p.activity.phase : '-'}|${p.commitments.length}`,
     );
     if (hasHabitation(world)) push('IN' + (p.indoors ?? 0));
+    if(hasNourishment(world))push('Nourishment'+(p.nourishment??0));
     let aff = 0;
     let fam = 0;
     for (const k in p.relations) {

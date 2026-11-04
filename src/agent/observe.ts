@@ -1,3 +1,4 @@
+import {hasNourishment,nourishmentCapacity,nourishmentOf} from '../sim/nourishment';
 import {personalRequests} from '../sim/promise_expectations';
 import { describeGoal } from '../sim/life';
 import { deceasedById } from '../sim/historical_index';
@@ -129,6 +130,7 @@ export interface InhabitantObservation {
     character: string;
     skills: Record<string, number>;
     health: number;
+    nourishment?: {stored:number;capacity:number};
     needs: Record<NeedKey, { value: number; state: 'ok' | 'low' | 'critical' }>;
     carrying: Items;
     load: { used: number; cap: number };
@@ -414,6 +416,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     character: traitSummary(p.traits),
     skills,
     health: Math.round(p.health),
+    ...(version>=18&&hasNourishment(world)?{nourishment:{stored:nourishmentOf(world,p),capacity:nourishmentCapacity(world,p)}}:{}),
     needs,
     ...(version >= 11 ? { aspiration: describeGoal(world, p) } : {}),
     carrying: { ...p.inv },

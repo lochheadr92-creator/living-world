@@ -862,10 +862,10 @@ The predeclared131forest nudge2 at day4 additionally records one fat rendered
 and its output consumed by day25 (`aggregate-pre-reserves131/forest-f4-n2`).
 The75draw131cohort is still running; these are bounded activation findings.
 
-## 7. Body reserves — authorised, pending streams 1–6
+## 7. Body reserves — rules132 implemented, ordinary/comparison checks running
 
-Pre-implementation parameter choice (implementing agent, 4 November; no runtime
-change yet): nourishment uses the existing food nutrition unit. Capacity is 24
+Pre-implementation parameter choice (implementing agent, 4 November, recorded
+before the following implementation): nourishment uses the existing food nutrition unit. Capacity is 24
 for children, 36 for youths/adults and 30 for elders. All births, arrivals and
 new worlds start at zero; a missing historical field supplies zero benefit.
 A paid portion first allocates its nutrition once: below hunger 40, immediate
@@ -894,7 +894,72 @@ never charging for health above 100. Existing rest/sleep increases the rate;
 no new healing item or injury/illness redesign is introduced. Reserve capacity
 changes never create nutrition. Test actual paid meal routes, initialisation,
 different feeding histories, bounds, other harms and exact persistence. Rules
-number is allocated only after the remaining capability connections are frozen.
+number132 was allocated after the predecessor connections were frozen.
+
+Implementation: `nourishment.ts` owns the finite state, meal allocation,
+capacity settlement and debits. The three existing paid eating boundaries
+(pack/store, source eating, shared meals) call it only after consumption.
+`needs.ts` retains hunger expenditure and gates only shortage damage and
+positive recovery; `people.ts` initialises zero; save validation rejects
+malformed/out-of-bounds state. World fingerprints include the stored number.
+Personal observations and the inspector expose immediate food need separately
+from stored nourishment. No new scheduler, inventory or action priority exists.
+
+Verification so far:26focused nutrition contracts plus2access/interrupt
+contracts pass. The ten immutable122–131 continuations pass unchanged
+(36tests/11files including the26nutrition contracts,15.96s). Immutable132 is
+captured from source
+`bfb773f5e134dfcd4753d29628052626c3ee4e552a16ce0ad277157d74856f86`
+and separately passes. New tests cover six reference age/sleep bounds, partial
+last-deficit damage, paid recovery, all eating routes, actual birth/immigration,
+full pack, last-portion competition, interruption, age transition, malformed
+save, exact mid-meal continuation, pure views and observer balance including
+death loss. Initial fixture failures are retained: eating resets sleep pose;
+and a ten-tick store bite had already finished before the purported interruption.
+The corrected interruption is inside the actual bite and uses a full pack to
+leave the portion at its store. No runtime or valid expectation was weakened.
+
+Eight rendered checks pass in `nourishment-rendered1/report.json`. One actual
+berry raises immediate hunger by9 and stores2.4;60sleeping recovery ticks
+restore1.8health and leave0.6. Continued food-free reference time exhausts
+reserves and health falls to6.926. `success-visible2.png` and
+`failure-visible.png` were visually inspected. These are labelled staged
+reference scenes, not ordinary activation. Typecheck and `npm run build`
+remain exit1 only at the two pre-existing nullable review errors; standalone
+Vite build passes. Broader `npm test -- --maxWorkers 2` is running.
+
+Fresh review found the old sleeping QA promised health recovery without paid
+reserves. A read-only inspector correction now names the missing food or paid
+recovery, and preserves old-rule wording. One added view contract and the
+immutable132 continuation pass (2/2,17.79s); ten rendered checks pass in
+`nourishment-rendered3`, with visually inspected fed/unfed sleep text retained
+in `nourishment-rendered2`.
+`nourishment-view-source-audit.json` records that `src/sim/inspect.ts` is the
+only source difference from the frozen measurement build; all simulation,
+decision, lifecycle and persistence source is identical. The original immutable
+reference is retained, never rewritten. This brings new132contracts to29.
+
+Frozen `living-world-nourishment-check1` runs the final132forest/river25
+ordinary screens and the75draw matched cohort. The nutrition-flow observer
+counts only actual paid meals and debits, separates conversion/capacity loss,
+and reconciles stored/shortage/recovery/death/remaining nutrition. The forest screen is complete:18alive at day25,856.03s,500pure checks,
+exact unobserved twin and120tick saved continuation, with conservation. Its
+final save is byte-identical to the separately observed cohort control
+(SHA256 0e54c80f2298339c52113831c9e52c57771a72c15777fdd0ac8a4de8aa2e5d5a).
+From zero initial reserves,2433paid portions supplied42702nutrition:1607.53
+was stored,521.14spent covering shortage and790.10spent on recovery;54.34was
+lost at death and241.96remained. The balance error is1.64e-10. These are flow
+measurements, not proof of aggregate survival benefit. River also completes:28alive,1011.37s,500pure checks, exact twins/save120
+and conservation. Its2699portions supplied47306nutrition;2616.94stored,
+310.04spent on shortages,1733.88on recovery,36lost at death and537.03left
+(balance error -4.29e-10). It has one completed mating but no birth before
+slaughter. The full matched cohort remains pending.
+The completed ordinary forest control from the cohort is also loaded unchanged
+in `survival_evidence/nourishment-ordinary-view/view.html`: Yusuf has immediate
+food28.028, stored nourishment36/36 and health100 while gathering fruit.
+The browser confirms exact saved state and conservation; the screenshot and
+DOM record are retained there. This illustrates distinct state and continued
+food-seeking, not attribution of his survival to reserves.
 
 ## Final measurement — pending
 

@@ -1,3 +1,4 @@
+import {takeNutrition} from './nourishment';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
 import {pileAccessBlocker} from './pile_access';
 import {runsPreservation} from './preservation';
@@ -170,7 +171,7 @@ registerHandler('gather', {
       s.amount -= 1;
       harvestPressure(world, s, 1);
       ledgerConsume(world, s.item, 1, 'eaten at the source');
-      p.needs.hunger = clamp(p.needs.hunger + NUTRITION[s.item as FoodKind], 0, 100);
+      takeNutrition(world,p,NUTRITION[s.item as FoodKind]);
       p.lastAteTick = world.tick;
       addFx(world, 'eat', p.x, p.y, 0);
       got = 1;
@@ -268,7 +269,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   }
   if (a.data.table && eaten === 0 && a.cycle === 0) return 'fail:somebody else had finished the food';
   if (eaten > 0) {
-    p.needs.hunger = clamp(p.needs.hunger + NUTRITION[k], 0, 100);
+    takeNutrition(world,p,NUTRITION[k]);
     p.lastAteTick = world.tick;
     a.cycle++;
     addFx(world, 'eat', p.x, p.y, 0);

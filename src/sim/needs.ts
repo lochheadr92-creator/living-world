@@ -1,3 +1,4 @@
+import {hasNourishment,spendNourishment} from './nourishment';
 import {clothingWarmth} from './clothing';
 import {hearthWarmth} from './hearth';
 import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
@@ -93,6 +94,8 @@ export function updateNeeds(world: World, p: Person): void {
   // hunger / thirst
   const kidMul = (stage === 'child' ? 0.85 : 1) * (world.settings.harsh ? 1.18 : 1);
   n.hunger -= HUNGER_RATE * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1);
+  let starvationFraction=1;
+  if(hasNourishment(world)){const deficit=Math.max(0,-n.hunger),covered=spendNourishment(world,p,deficit,'shortage');if(deficit>0)starvationFraction=1-covered/deficit;}
   const heat = Math.max(0, w.temp - 19) * 0.04;
   n.thirst -= THIRST_RATE * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
 
@@ -159,13 +162,14 @@ export function updateNeeds(world: World, p: Person): void {
 
   // health
   let dh = 0;
-  if (n.hunger <= 0) dh -= 0.022;
+  if (n.hunger <= 0) dh -= 0.022*starvationFraction;
   if (n.thirst <= 0) dh -= 0.05;
   if (n.warmth <= 6) dh -= 0.035;
   if (n.energy <= 0) dh -= 0.01;
   if (dh === 0 && n.hunger > 40 && n.thirst > 40 && n.warmth > 35) dh = sleeping ? 0.03 : resting ? 0.02 : 0.009;
   // an elder mends slower (rich only; 1 otherwise)
   if (dh > 0 && stage === 'elder') dh *= elderFactor(world, p);
+  if(dh>0&&hasNourishment(world))dh=spendNourishment(world,p,Math.max(0,Math.min(dh,100-p.health)),'recovery');
   p.health = clamp(p.health + dh, 0, 100);
 }
 

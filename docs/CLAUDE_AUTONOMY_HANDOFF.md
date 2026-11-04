@@ -1,5 +1,15 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Rules132 implementation checkpoint:** paid finite nourishment connects actual
+consumption to bounded shortage protection and paid health recovery. Newborns,
+arrivals and missing old fields gain no free reserves.29new contracts and
+ten predecessor references pass; forest/river25 finish18/28alive, exact twins,
+save120/conservation,500pure checks each. Rendered10checks pass. Broad suite
+and both75draw cohorts remain running; no aggregate benefit claim yet.
+A reproduced stale trap-catch log is queued as a separately versioned repair.
+Ordinary preserved-meat meals, attributable trap meals and lamb birth remain
+open. Details and frozen sources: SURVIVAL_CAPABILITIES.md and HANDOFF.md.
+
 **Survival update, rules131:** the paid trap window now responds to actual
 encounters throughout its600ticks, retaining fixed outcomes.54/7affected and
 36/4final checks pass; immutable131 passes. Final forest/river25 finish11/27alive

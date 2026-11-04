@@ -1,3 +1,4 @@
+import {nourishmentObserver} from './observers/nourishment';
 import {livestockObserver} from './observers/livestock';
 import {gearObserver} from './observers/gear';
 import {carcassObserver} from './observers/carcass';
@@ -21,7 +22,7 @@ import {clothingObserver} from './observers/clothing';
 const traceClothing=process.argv.includes('--clothing');
 const [seed,out,daysArg='5',budgetArg='170',input]=process.argv.slice(2).filter(a=>a!=='--'&&a!=='--clothing'),days=Number(daysArg),budget=Number(budgetArg);
 if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Number.isFinite(budget)||budget<=0)throw new Error('Seed, fresh output, integer days 1..365 and positive seconds budget required');
-const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts','scripts/observers/survival.ts','scripts/observers/clothing.ts','scripts/observers/carcass.ts','scripts/observers/gear.ts','scripts/observers/livestock.ts').sort();
+const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts','scripts/observers/survival.ts','scripts/observers/clothing.ts','scripts/observers/carcass.ts','scripts/observers/gear.ts','scripts/observers/livestock.ts','scripts/observers/nourishment.ts').sort();
 const manifest=()=>sourceManifest(files),source=manifest();
 const inputRaw=input?readFileSync(input,'utf8'):undefined;
 const w=inputRaw?deserializeWorld(inputRaw):createWorld(currentWorldSettings('normal',seed)),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
@@ -38,6 +39,7 @@ const survival=survivalObserver(w);
 const carcass=carcassObserver(w);
 const gear=gearObserver(w);
 const livestock=livestockObserver(w);
+const nourishment=nourishmentObserver(w);
 const clothing=traceClothing?clothingObserver(w):null;
 const time=new TimeBudget(),detach=time.attach(w);let stop='horizon';
 while(w.tick<days*2400){
@@ -46,6 +48,7 @@ while(w.tick<days*2400){
  carcass.tick();
  gear.tick();
  livestock.tick();
+ nourishment.tick();
  clothing?.tick();
  if(w.tick%120===0){const before=serializeWorld(w);for(const p of w.persons){if(!p.alive)continue;samples++;
   const ctx=generateOptions(w,p,true,true),ranked=rankOptions(ctx);
@@ -66,5 +69,5 @@ for(let n=0;n<120;n++){stepWorld(twin);stepWorld(restored);}
 if(serializeWorld(twin)!==serializeWorld(restored))throw new Error('Saved continuation changed');
 if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during observation');
 count('carts at end',w.carts.length);
-const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,survival:survival.report(),carcass:carcass.report(),gear:gear.report(),livestock:livestock.report(),clothing:clothing?.report(),timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
+const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,survival:survival.report(),carcass:carcass.report(),gear:gear.report(),livestock:livestock.report(),nourishment:nourishment.report(),clothing:clothing?.report(),timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
 mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({seed,tick:w.tick,stop,seconds:report.seconds,samples,pureChecks,counts,deaths:w.deceased,conserved:report.conservation.ok}));if(stop!=='horizon')process.exitCode=1;

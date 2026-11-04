@@ -1,5 +1,12 @@
 # Dependency-chain programme register
 
+**Rules132:** finite paid nourishment is now implemented after the six physical
+capability families. Ordinary forest/river25 finish18/28alive with exact twins,
+save120,500pure checks each and conservation.29new contracts, all ten
+predecessor references and rendered10checks pass. Full regression and both
+75draw comparisons remain open, as do ordinary preserved meat, attributable
+trap meals and final-source lamb birth. See the single survival document.
+
 **Survival assignment, 4 November 2026 — in progress:** the active integration
 checkout started from main `61cb6e5`, rules 121. Rules 122 implements
 preservation; rules 123 implements paid indoor hearths, fuel supply and occupied

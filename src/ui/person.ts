@@ -188,6 +188,8 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   // ───────── needs ─────────
   const needCells = NEED_KEYS.map((k) => ({ key: k, cell: makeNeedCell(k, NEED_LABELS[k]) }));
   const needsEl = h('div', { class: 'needs', role: 'group', 'aria-label': 'Needs' }, needCells.map((n) => n.cell.el));
+  const nourishmentText=h('span',{class:'num'}),nourishmentBar=makeBar('thin');
+  const nourishmentEl=h('div',{class:'p-home',role:'meter','aria-label':'Stored nourishment','aria-valuemin':'0',title:'From food already eaten. Pays for brief food shortages and health recovery.'},h('div',null,'Stored nourishment ',nourishmentText),nourishmentBar.el);
 
   // ───────── inventory ─────────
   const invChips = h('div', { class: 'inv-chips' });
@@ -290,7 +292,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, civicPanel, historyPanel, relationshipPanel, decisionPanel, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, nourishmentEl, inv, civicPanel, historyPanel, relationshipPanel, decisionPanel, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -355,6 +357,9 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
       const nv = v.needs.find((x) => x.key === n.key);
       if (nv) n.cell.set(nv);
     }
+
+    setHidden(nourishmentEl,!v.nourishment);
+    if(v.nourishment){const n=v.nourishment;setText(nourishmentText,`${n.stored.toFixed(1)} / ${n.capacity}`);nourishmentBar.set(n.stored/n.capacity,n.stored>0?'var(--good)':'var(--warn)');nourishmentEl.setAttribute('aria-valuenow',String(n.stored));nourishmentEl.setAttribute('aria-valuemax',String(n.capacity));}
 
     // inventory
     // equipment has its own row below (with its wear); the chips here are goods

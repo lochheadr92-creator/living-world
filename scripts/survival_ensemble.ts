@@ -1,3 +1,4 @@
+import {nourishmentObserver} from './observers/nourishment';
 // A whole-life cost observation using the existing lab's control/nudge operation.
 // One process = one declared draw. This never assigns jobs or supplies resources.
 import {existsSync,mkdirSync,readdirSync,writeFileSync} from 'node:fs';
@@ -20,15 +21,17 @@ const source=sourceManifest(files),provenance=gitProvenance();
 const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
 let w=createWorld(currentWorldSettings('normal',seed,{immigration:true}));
 const initialHash=sha(serializeWorld(w)),began=performance.now(),time=new TimeBudget();
-let detach=time.attach(w),forked=false;
+let nourishment=nourishmentObserver(w),detach=time.attach(w),forked=false;
+const nourishmentSegments:ReturnType<typeof nourishment.report>[]=[];
 const ageTicks:Record<string,number>={},popByDay:number[]=[],inc=(k:string)=>ageTicks[k]=(ageTicks[k]??0)+1;
 mkdirSync(out,{recursive:true});
 while(w.tick<days*DAY){
   if(!forked&&w.tick===fork*DAY){
-    detach();w=deserializeWorld(serializeWorld(w));detach=time.attach(w);
+    nourishmentSegments.push(nourishment.report());detach();w=deserializeWorld(serializeWorld(w));nourishment=nourishmentObserver(w);detach=time.attach(w);
     parseIntervention(nudge?`nudge:${nudge}`:'control').apply?.(w);forked=true;
   }
   time.sampleTick(w);
+  nourishment.tick();
   for(const p of w.persons)if(p.alive){
     const age=stageOf(w,p);inc('alive:'+age);
     if(p.needs.hunger<=0)inc('empty immediate hunger:'+age);
@@ -48,10 +51,11 @@ const final=serializeWorld(w),restored=deserializeWorld(final);
 if(final!==serializeWorld(restored))throw Error('Final save is not exact');
 if(JSON.stringify(source)!==JSON.stringify(sourceManifest(files)))throw Error('Source changed');
 const report={...provenance,source,seed,fork,nudge,days,settings:w.settings,initialHash,finalHash:hashWorld(w),finalSaveHash:sha(final),tick:w.tick,popByDay,
+  nourishment:[...nourishmentSegments,nourishment.report()],
   population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,ageTicks,ledger:w.ledger,timeBudget:time.report(),
   unfinishedSites:w.sites.map(s=>({id:s.id,type:s.type,work:s.work,total:s.workTotal,delivered:s.delivered,used:s.used})),
   unfinishedBatches:w.buildings.filter(b=>b.ops?.job).map(b=>({id:b.id,type:b.type,job:b.ops!.job})),
-  materialOnGround:w.piles.map(p=>({id:p.id,items:p.items})),conservation:conservationReport(w),exactSave:true,continuationEqual:true,
+  materialOnGround:w.piles.map(p=>({id:p.id,items:p.items,...(p.carcass?{carcass:{remaining:p.carcass.remaining,recovered:p.carcass.recovered,lost:p.carcass.lost}}:{})})),conservation:conservationReport(w),exactSave:true,continuationEqual:true,
   seconds:(performance.now()-began)/1000,limits:'One seeded control/nudge draw; occupancy is not causal attribution. Fork dates share a prefix and draws are not independent worlds. No universal survival inference.'};
 const recorded=JSON.stringify(report,null,2);
 for(let n=0;n<120;n++){stepWorld(w);stepWorld(restored);}
