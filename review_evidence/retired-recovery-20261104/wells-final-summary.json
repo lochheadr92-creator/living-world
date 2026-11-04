@@ -1,0 +1,111 @@
+{
+  "forest": {
+    "seed": "forest",
+    "rules": 134,
+    "arrivals": true,
+    "day": 25,
+    "alive": 8,
+    "started": [
+      1048,
+      6168
+    ],
+    "built": [
+      1626,
+      6689
+    ],
+    "users": [
+      940,
+      905,
+      911,
+      914,
+      945,
+      920,
+      944,
+      937,
+      929,
+      932,
+      935,
+      908,
+      924,
+      923,
+      934,
+      917,
+      916,
+      926,
+      942,
+      931,
+      902,
+      943,
+      899,
+      928,
+      925,
+      939,
+      915,
+      936
+    ],
+    "drawn": 2,
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "allDailyConserved": true,
+    "successfulDrinkEndRecords": 560,
+    "note": "Users count physical work arrivals, not unique confirmed drink recipients; end records are not a deduplicated unit-flow ledger."
+  },
+  "river": {
+    "seed": "river",
+    "rules": 134,
+    "arrivals": true,
+    "day": 25,
+    "alive": 25,
+    "started": [
+      1269,
+      2395
+    ],
+    "built": [
+      2316,
+      3220
+    ],
+    "users": [
+      1131,
+      1142,
+      1149,
+      1107,
+      1119,
+      1137,
+      1134,
+      1106,
+      1139,
+      1146,
+      1109,
+      1121,
+      1128,
+      1113,
+      1150,
+      1147,
+      1138,
+      1140,
+      1132,
+      1120,
+      1122,
+      1125,
+      1135,
+      1108,
+      1116,
+      1112,
+      1145,
+      1144,
+      8856,
+      10234,
+      16545
+    ],
+    "drawn": 0,
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "allDailyConserved": true,
+    "successfulDrinkEndRecords": 765,
+    "note": "Users count physical work arrivals, not unique confirmed drink recipients; end records are not a deduplicated unit-flow ledger."
+  }
+}
