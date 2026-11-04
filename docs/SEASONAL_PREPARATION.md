@@ -1,4 +1,14 @@
-# Seasonal preparation (workstream 3): diagnosis and contract
+# Seasonal preparation (workstream 3): historical diagnosis and contract
+
+> Integration review, 4 November 2026: this is the original rules-44-era proposal,
+> retained for provenance. Its claim below that reserve size is the binding constraint
+> is **not established by its diagnostic**: that script counts aggregate food eaten
+> and spoiled, not the fate of the particular food deposited in household reserves.
+> A falling home-store total plus world-wide consumption cannot distinguish every
+> withdrawal, consumption, spoilage or loss of the reserve itself. The old proposed
+> rules-46 contract is historical, not an instruction to change today's simulation.
+> See `WINTER_RESERVE.md` and the current programme for subsequent implementation
+> and evidence. No new causal or welfare claim is made by importing this record.
 
 Rules-2 household food preparation (`src/sim/provision.ts`) is the only seasonal-preparation behaviour. This note
 establishes what it does, what it has been shown to do, and the contract the WS3 improvement must meet before its

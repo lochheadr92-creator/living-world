@@ -5,6 +5,7 @@
 //   --bin D     days per row (default 24)
 //   --current   the world settings a product world gets (as bench.ts --current)
 //   --out FILE  write the rows, the death records and the totals as JSON
+//   --verify    compare the final serialized world with an unobserved twin (extra runtime)
 // The run stops after the first row with nobody alive (the rest would be zeros).
 // The conception funnel mirrors conceptionTick (src/sim/lifecycle.ts) at the moment a row is taken. It is a snapshot of the
 // living women, not a count over the row, and a mirror: each woman is put under the FIRST gate she fails, in the order listed
@@ -26,6 +27,8 @@ import type { ProfileName } from '../src/sim/profiles';
 import { personOf } from '../src/sim/social';
 import type { Person, World } from '../src/sim/types';
 import { stepWorld } from '../src/sim/world';
+import { rulesOf } from '../src/sim/rules';
+import { serializeWorld } from '../src/app/save';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -39,15 +42,17 @@ const days = Number(opt('days', '480'));
 const binDays = Math.max(1, Number(opt('bin', '24')));
 const out = opt('out', '');
 const profile = opt('profile', 'normal') as ProfileName;
+if (!Number.isFinite(days) || days <= 0 || !Number.isFinite(binDays)) throw new Error('Positive finite --days and finite --bin required');
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off' });
 if (flag('current')) Object.assign(settings, currentWorldSettings(profile, seed, { harsh: settings.harsh, immigration: settings.immigration }));
 
 const SNAP_EVERY = 6;
-const GATES = ['outOfAge', 'noPartner', 'pregnant', 'partnerNotHere', 'noHome', 'threeKids', 'spacing', 'lowFood', 'lowHealth', 'eligible'] as const;
+const GATES = ['populationCap', 'outOfAge', 'noPartner', 'pregnant', 'partnerNotHere', 'noHome', 'threeKids', 'spacing', 'lowFood', 'lowHealth', 'eligible'] as const;
 type Gate = (typeof GATES)[number];
 
 /** the first gate this woman fails; the same tests as conceptionTick, in a fixed order */
 function gateOf(world: World, p: Person): Gate {
+  if (world.persons.filter((q) => q.alive).length > rulesOf(world).conceptionCap) return 'populationCap';
   const age = ageYears(world, p);
   if (age < 17 || age > 44) return 'outOfAge';
   if (p.partnerId === 0) return 'noPartner';
@@ -240,6 +245,7 @@ function reasonsOf(world: World, adults: Person[]): { noSolidAdults: number; rea
 }
 
 const world: World = createWorld(settings);
+const twin = flag('verify') ? createWorld(settings) : null;
 const founders = world.persons.filter((p) => p.alive).length;
 const total = Math.round(days * DAY);
 const binTicks = Math.round(binDays * DAY);
@@ -262,6 +268,7 @@ let rowDeaths = 0;
 let seenBirths = 0;
 for (let i = 1; i <= total; i++) {
   stepWorld(world);
+  if (twin) stepWorld(twin);
   // a death removes the person from the world this tick, so what they were standing in is the last snapshot taken before it
   for (; seenDeaths < world.deceased.length; seenDeaths++) {
     const d = world.deceased[seenDeaths];
@@ -383,4 +390,7 @@ console.log(`\ntotals: ${founders} at start + ${everBorn} born = ${founders + ev
 console.log('deaths by cause and the stage of the age they died at (child <12, youth <16, adult <62, elder):');
 for (const [c, byStage] of Object.entries(totalCauseByStage).sort((a, b) => Object.values(b[1]).reduce((x, y) => x + y, 0) - Object.values(a[1]).reduce((x, y) => x + y, 0))) console.log(`  ${c.padEnd(14)} ${fmt(byStage)}`);
 
-if (out) writeFileSync(out, JSON.stringify({ seed, profile, arrivals: settings.immigration, founders, binDays, rows, deathRecords, totalCauseByStage, everBorn, dead, aliveEnd }, null, 1));
+delete world.hooks;
+const twinEqual = twin ? serializeWorld(world) === serializeWorld(twin) : null;
+if (twinEqual === false) throw new Error('Death-tally observation changed the serialized world');
+if (out) writeFileSync(out, JSON.stringify({ seed, profile, settings, arrivals: settings.immigration, founders, binDays, rows, deathRecords, totalCauseByStage, everBorn, dead, aliveEnd, twinEqual }, null, 1));

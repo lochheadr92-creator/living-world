@@ -1,9 +1,8 @@
-// Read-only seasonal-preparation diagnostic: where a household's stored food actually goes across a winter.
+// Historical aggregate seasonal diagnostic: home-store levels alongside world-wide food totals.
+// These are not reserve-specific flows and cannot by themselves identify a reserve's binding constraint.
 //
-// It steps an ordinary world and, per day, records the food held in home stores, how much has been eaten and how much
-// has spoiled (from the ordinary ledger reasons), so the WS3 question "is the one-day reserve eaten, spoiled, or left
-// unused?" can be answered with denominators instead of guessed. It changes nothing: no person is controlled, no state
-// is written, and the run is identical with the sampling on or off.
+// It steps an ordinary world and records home-store food alongside aggregate consumption and spoilage. It does not
+// follow deposited batches through withdrawals, meals and losses. No person is controlled or supplied with observer data.
 //
 //   npx vite-node scripts/seasonal_prep_diagnostic.ts -- --seed meadow --days 60
 //
@@ -20,6 +19,7 @@ const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (n: string, d: string): string => { const i = args.indexOf('--' + n); return i >= 0 && i + 1 < args.length ? args[i + 1] : d; };
 const seed = opt('seed', 'meadow');
 const days = Number(opt('days', '60'));
+if (!Number.isInteger(days) || days < 1) throw new Error('Positive integer --days required');
 
 const world = createWorld(currentWorldSettings('normal', seed, { immigration: false }));
 const total = days * DAY;
@@ -39,6 +39,7 @@ const storeFoodNow = (): number => {
 const eatenNow = (): number => (world.ledger.reasons[eatKey('eaten')] ?? 0) + (world.ledger.reasons[eatKey('eaten at the source')] ?? 0);
 const spoiledNow = (): number => (world.ledger.reasons[spoilKey('stored food spoiled')] ?? 0) + (world.ledger.reasons[spoilKey('left-out food spoiled')] ?? 0);
 
+console.log(`Historical aggregate diagnostic; rules ${world.settings.rulesVersion}; arrivals off. Eaten/spoiled totals do not trace reserve food.`);
 console.log(`day  yearDay  storeFood  eaten(Δ)  spoiled(Δ)  winter?`);
 let prevEaten = 0;
 let prevSpoiled = 0;

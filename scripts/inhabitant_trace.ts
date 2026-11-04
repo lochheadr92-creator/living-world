@@ -3,6 +3,8 @@
  * Run: npx vite-node scripts/inhabitant_trace.ts meadow 2
  * Optional third argument: person ID (otherwise first living inhabitant).
  * JSONL on stdout; no world mutation beyond stepWorld.
+ * Historical legacy-world runner: defaultSettings is intentionally unversioned.
+ * Its output is not evidence about current rich product worlds.
  */
 import { defaultSettings, createWorld } from '../src/sim/factory';
 import { hashWorld, stepWorld } from '../src/sim/world';
@@ -31,7 +33,7 @@ const snapshot = () => ({
   memories: person.log,
   lastResult: person.lastResult,
 });
-emit('header', { seed, days, name: person.name, initialHash: hashWorld(world) });
+emit('header', { seed, days, settings: world.settings, name: person.name, initialHash: hashWorld(world) });
 let lastDecision = JSON.stringify(person.lastDecision);
 let lastResult = JSON.stringify(person.lastResult);
 let lastLog = JSON.stringify(person.log);
