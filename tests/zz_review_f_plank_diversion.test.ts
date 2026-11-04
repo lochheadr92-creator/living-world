@@ -24,7 +24,8 @@ for(const variant of VARIANTS)it(`plank diversion: ${variant}`,()=>{
  let benId=0,ben:ReturnType<typeof addPerson>|null=null;
  if(variant.endsWith('another villager wants planks for the site')){
   ben=addPerson(f.s,'Ben',44,38,{age:30,inv:{bread:3,water:3},hunger:100,thirst:100,energy:100,traits:{diligence:1,generosity:0.8}});ben.needs.warmth=95;ben.needs.safety=95;benId=ben.id;
-  const home2=building(f.s,'hut',44,33,ben.hhId,{grain:12});w.households.find(h=>h.id===ben.hhId)!.homeId=home2.id;
+  const benHouseholdId=ben.hhId;
+  const home2=building(f.s,'hut',44,33,benHouseholdId,{grain:12});w.households.find(h=>h.id===benHouseholdId)!.homeId=home2.id;
   done(f.s);
   for(const e of [home2,yard,plankSite!,f.tree,f.rock,f.stock])observe(w,ben,e);perceive(w,ben);
  }

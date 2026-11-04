@@ -20,7 +20,7 @@ describe('REVIEW: retained mature Large save under current code', () => {
     const before = serializeWorld(w); const h0 = hashWorld(w);
     const insp: number[] = []; let longest = { name: '', chars: 0, decisions: 0, relationshipLines: 0, logLines: 0 };
     const i0 = performance.now();
-    for (const p of alive) { const a = performance.now(); const v = describePerson(w, p.id, { opportunities: true }); const d = performance.now() - a; insp.push(d); const chars = JSON.stringify(v).length; if (chars > longest.chars) longest = { name: p.name, chars, decisions: v.decisionHistory.length, relationshipLines: (v as any).relationshipHistory?.length ?? -1, logLines: p.log.length }; }
+    for (const p of alive) { const a = performance.now(); const v = describePerson(w, p.id, { opportunities: true }); if (!v) throw new Error(`Missing inspector view for living person ${p.id}`); const d = performance.now() - a; insp.push(d); const chars = JSON.stringify(v).length; if (chars > longest.chars) longest = { name: p.name, chars, decisions: v.decisionHistory.length, relationshipLines: (v as any).relationshipHistory?.length ?? -1, logLines: p.log.length }; }
     const inspectAllMs = performance.now() - i0;
     const ent: number[] = []; for (const b of w.buildings) { const a = performance.now(); describeEntity(w, b.id); ent.push(performance.now() - a); }
     const after = serializeWorld(w); const h1 = hashWorld(w);
