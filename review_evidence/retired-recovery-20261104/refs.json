@@ -34,7 +34,8 @@
     "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
     "archiveTag": "archive/retired-20261104/3f6ec661",
     "originalRefs": [
-      "refs/heads/claude/civilisation-phase1"
+      "refs/heads/claude/civilisation-phase1",
+      "refs/remotes/origin/claude/civilisation-phase1"
     ],
     "review": "Store eating adapted at main generation 11 (docs/TABLE_EATING.md); observer-lifecycle contract already present. Historical table evidence stays on the published branch; conflicting v8 reference cannot replace main history.",
     "recoveryDisposition": "covered",

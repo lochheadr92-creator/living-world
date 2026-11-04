@@ -109,3 +109,5 @@ git fetch origin --prune
   ],
   "remainingReviewedRefs": []
 }
+
+Final remote audit: origin/claude/civilisation-phase1 also pointed to archived 3f6ec66115320f4939f10158eefa2a990eb62918. git push origin --delete claude/civilisation-phase1 succeeded. Total deleted remote refs: 18.

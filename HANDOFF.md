@@ -1,6 +1,6 @@
 # Recovery integrated and archived — rules 147 on main
 
-Selected missing features from the retired branches are implemented, tested, committed and pushed. Main integrated at `f03a2593`; subsequent commits record cleanup only. All nineteen reviewed tips have verified remote annotated archive tags, and ten local / seventeen remote retired refs have been removed. The two occupied old worktrees were detached at their existing commits with unchanged file/index fingerprints. No test or measurement remains running.
+Selected missing features from the retired branches are implemented, tested, committed and pushed. Main integrated at `f03a2593`; subsequent commits record cleanup only. All nineteen reviewed tips have verified remote annotated archive tags, and ten local / eighteen remote retired refs have been removed. The two occupied old worktrees were detached at their existing commits with unchanged file/index fingerprints. No test or measurement remains running.
 
 The full suite is not green: 2,784 passed / 39 failed / 3 expected failures; 36 failures reproduce on starting main, and the remaining three lab timeouts pass in isolation. Build and recovery/continuation contracts pass. Ordinary uptake is bounded and several industrial/social features remain staged-only evidence. See [the recovery programme](docs/RECOVERED_CAPABILITIES.md) and its linked raw evidence. The separate survival programme remains stopped and incomplete.
 

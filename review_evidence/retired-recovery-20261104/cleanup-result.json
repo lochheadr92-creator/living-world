@@ -34,7 +34,8 @@
     "claude/adoring-hawking-fj66vw",
     "claude/friendly-planck-ccpkxf",
     "claude/winter-shelter-v34",
-    "place-scar"
+    "place-scar",
+    "claude/civilisation-phase1"
   ],
   "deletedLocal": [
     "refs/heads/claude/epic-franklin-469omp",
@@ -48,5 +49,10 @@
     "refs/heads/claude/winter-shelter-v34",
     "refs/heads/place-scar"
   ],
-  "remainingReviewedRefs": []
+  "remainingReviewedRefs": [],
+  "finalRemoteAudit": {
+    "additionalRef": "refs/remotes/origin/claude/civilisation-phase1",
+    "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+    "reason": "Remote counterpart omitted from initial local-tip mapping; exact archived target confirmed before deletion."
+  }
 }
