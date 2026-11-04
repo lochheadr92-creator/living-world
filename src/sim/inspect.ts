@@ -1,3 +1,4 @@
+import {describeCoaching,coachingProgress} from './skill_coaching';
 import {describePlaces} from './personal_places';
 import {wellBody,WELL_CAP} from './wells';
 import {hasNourishment,nourishmentCapacity,nourishmentOf} from './nourishment';
@@ -181,6 +182,7 @@ export interface PersonView {
   sourceExperience?:string[];
   routeExperience?:string[];
   personalPlaces?:string[];
+  skillExperience?:string[];
   /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
   heard: HeardView[];
   /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
@@ -654,6 +656,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
     ...(Object.values(p.payoff??{}).some(e=>e.sources?.length)?{sourceExperience:describeSourceExperience(p)}:{}),
+    ...(p.skillExperience?.length?{skillExperience:describeCoaching(p)}:{}),
     ...(p.placeMemories?.length?{personalPlaces:describePlaces(world,p)}:{}),
     ...(Object.values(p.failures).some(f=>f.route)?{routeExperience:describeRouteExperience(world,p)}:{}),
     heard: describeHeard(world, p),
@@ -671,7 +674,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
           label: a.label,
           goal: a.goal,
           phase: a.phase,
-          progress: lessonProgress(world,p) ?? workshopProgress(world,p) ?? (a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0),
+          progress: coachingProgress(world,p) ?? lessonProgress(world,p) ?? workshopProgress(world,p) ?? (a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0),
           target: targetText(world, a),
           blocked: a.blocked,
           kind: a.kind,

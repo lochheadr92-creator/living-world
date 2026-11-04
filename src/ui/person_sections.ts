@@ -361,6 +361,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const skillExplanation = h('p', { class: 'trait-sum skill-explanation' });
   const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
   const sourceExperienceLine=h('p',{class:'source-experience-line'});
+  const skillExperienceLine=h('p',{class:'skill-experience-line'});
   const personalPlacesLine=h('p',{class:'personal-places-line'});
   const routeExperienceLine=h('p',{class:'route-experience-line'});
   const payBox = h('div', { class: 'skills' });
@@ -377,7 +378,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const haulingLine = h('p', { class: 'trait-sum hauling' });
   const customerHead = h('div', { class: 'sub-h cap' }, 'Their customers');
   const customerBox = h('div', { class: 'list customers' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, routineLine, haulingLine, customerHead, customerBox, payHead, payBox,sourceExperienceLine,routeExperienceLine,personalPlacesLine, heardHead, heardBox);
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, routineLine, haulingLine, customerHead, customerBox, payHead, payBox,sourceExperienceLine,routeExperienceLine,personalPlacesLine,skillExperienceLine, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -570,6 +571,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setHidden(payHead, v.payoffs.length === 0);
         payList.sync(v.payoffs, (s) => s.key);
         setText(sourceExperienceLine,(v.sourceExperience??[]).join(' '));setHidden(sourceExperienceLine,!v.sourceExperience?.length);
+        setText(skillExperienceLine,(v.skillExperience??[]).join(' '));setHidden(skillExperienceLine,!v.skillExperience?.length);
         setText(personalPlacesLine,(v.personalPlaces??[]).join(' '));setHidden(personalPlacesLine,!v.personalPlaces?.length);
         setText(routeExperienceLine,(v.routeExperience??[]).join(' '));setHidden(routeExperienceLine,!v.routeExperience?.length);
         setHidden(heardHead, v.heard.length === 0);

@@ -406,6 +406,7 @@ const PURPOSE_TEXT: Record<string, string> = {
   family_time: 'asking for family time',
   play_together: 'inviting them to a guessing game',
   learn_foraging: 'asking to practise recognising food plants',
+  learn_skill: 'asking for skill coaching',
   learn_technique: 'asking to learn charcoal firing',
   teach_technique: 'charcoal firing instruction',
   chat: 'a chat',
@@ -433,6 +434,7 @@ const PURPOSE_THEIRS: Record<string, string> = {
   family_time: 'to spend family time together',
   play_together: 'to invite them to a guessing game',
   learn_foraging: 'to ask for foraging practice',
+  learn_skill: 'to ask for skill coaching',
   learn_technique: 'to ask for charcoal firing instruction',
   teach_technique: 'to offer charcoal firing instruction',
   chat: 'for a chat',
@@ -465,8 +467,8 @@ export function interactionViews(world: World, p: Person): { current: Interactio
     current = {
       partner: nameOf(world, other),
       purpose: mine ? PURPOSE_TEXT[c.purpose] ?? c.purpose : `${nameOf(world, other)} came over ${PURPOSE_THEIRS[c.purpose] ?? 'to talk'}`,
-      step: c.childhood?.outcome==='sharing'?`time together: ${Math.min(world.tick-c.childhood.since,c.childhood.until-c.childhood.since)} / ${c.childhood.until-c.childhood.since} ticks`:c.lesson?.outcome==='learning' ? `instruction: ${Math.min(world.tick-c.lesson.since,c.lesson.until-c.lesson.since)} / ${c.lesson.until-c.lesson.since} ticks together` : STEP[Math.min(c.phase, STEP.length - 1)],
-      outcome: c.childhood?`${c.childhood.outcome}: ${c.childhood.reason}`:req ? (req.status === 'pending' ? 'not answered yet' : req.outcome || req.status) : 'under way',
+      step: c.skillLesson?.outcome==='learning'?`skill practice: ${Math.min(world.tick-c.skillLesson.since,180)} / 180 ticks together`:c.childhood?.outcome==='sharing'?`time together: ${Math.min(world.tick-c.childhood.since,c.childhood.until-c.childhood.since)} / ${c.childhood.until-c.childhood.since} ticks`:c.lesson?.outcome==='learning' ? `instruction: ${Math.min(world.tick-c.lesson.since,c.lesson.until-c.lesson.since)} / ${c.lesson.until-c.lesson.since} ticks together` : STEP[Math.min(c.phase, STEP.length - 1)],
+      outcome: c.skillLesson?`${c.skillLesson.outcome}: ${c.skillLesson.reason}`:c.childhood?`${c.childhood.outcome}: ${c.childhood.reason}`:req ? (req.status === 'pending' ? 'not answered yet' : req.outcome || req.status) : 'under way',
       when: 'now',
     };
   } else if (p.activity && p.activity.kind === 'argue') {

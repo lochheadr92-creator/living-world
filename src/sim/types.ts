@@ -627,6 +627,7 @@ export interface Trade {
 }
 
 export interface Person {
+  skillExperience?: import('./skill_coaching').SkillExperience[];
   placeMemories?: import('./personal_places').PlaceMemory[];
   background?: import('./background').Background;
   /** Version 27: the last few places spare time was spent at (leisure.ts); absent in any world below version 27. */
@@ -1207,9 +1208,11 @@ export type ConvPurpose =
   | 'return_care'
   | 'mediate'
   | 'teach_technique'
-  | 'learn_technique';
+  | 'learn_technique'
+  | 'learn_skill';
 
 export interface Conversation {
+  skillLesson?: import('./skill_coaching').SkillLesson;
   childhood?: import('./childhood').ChildhoodSession;
   /** Version 18: current lesson only; completed knowledge belongs to the learner. */
   lesson?: {since:number;until:number;outcome:'learning'|'learned'|'declined'|'interrupted';reason:string;kind?:import('./techniques').TechniqueKind};

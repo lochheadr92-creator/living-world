@@ -1,3 +1,4 @@
+import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
 import {isChildTime,childQuestion,childTimeName,beginChildTime,childTimeProblem,childTurn,finishChildTime,childTimeReport} from './childhood';
 import {textileGiftProblem} from './clothing';
 import {recordCompany} from './companionship';
@@ -848,6 +849,7 @@ export const MAKING_NOTE = 'making:';
 export const MAKING_MEMORY = DAY / 2;
 
 export interface ConvData {
+  skill?: import('./types').SkillKey;
   exchangeJourney?: number;
   reqKind?: RequestKind;
   item?: ItemKind | null;
@@ -912,6 +914,7 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 }
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
+  if(purpose==='learn_skill')return `to ask ${name} for skill coaching`;
   if(isChildTime(purpose))return `${childTimeName(purpose)} with ${name}`;
   switch (purpose) {
     case 'return_care': return `to agree with ${name} about taking childcare back`;
@@ -983,11 +986,11 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
   const report=hasCareHandback(world)&&c.purpose==='return_care'?{text:c.data.careReturnAnswered?'childcare return answered':c.data.careReturnHeard?'childcare return heard without answer':'childcare return not proposed',detail:c.data.careReturnReply??c.data.careReturnText??'No childcare responsibility changed.'}:hasWorkHandover(world)&&c.purpose==='handover_work'?{text:c.data.handoverAnswered?'handover answered':c.data.handoverDelivered?'handover heard without answer':'handover not conveyed',detail:c.data.handoverReply??c.data.handoverText??'No responsibility changed.'}:hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
-  if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
+  if(outcome==='interrupted'){interruptLesson(c,'the lesson was cut short');interruptCoaching(c);}
   const gift=hasLivedLife(world)&&c.purpose==='offer'?c.data.giftReceipt:null;
   const childhood=childTimeReport(c,outcome==='interrupted');
-  const resultText = childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
-  const detailText = childhood?childhood.detail:gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
+  const resultText = c.skillLesson?c.skillLesson.outcome:childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const detailText = c.skillLesson?c.skillLesson.reason:childhood?childhood.detail:gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
   // a fever passes in talk (rich only; nothing in an authored world)
@@ -1047,6 +1050,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
+    if(c.purpose==='learn_skill'&&c.skillLesson?.outcome==='learning'&&coachingProblem(world,c,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(isChildTime(c.purpose)){
       if(!completionContact(world,A,B)||(c.childhood?.outcome==='sharing'&&childTimeProblem(world,c,A,B))){finishConversation(world,c,'interrupted');continue;}
       const turn=childTurn(world,c,A,B);if(turn)bubble(world,turn.p,turn.text,'happy',24);
@@ -1091,10 +1095,11 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
       phaseRespond(world, c, A, B, d);
       recordProjectResponse(world, A, B, reqOf(world, c));
       c.phase = 3;
-      c.nextAt = c.childhood?.outcome==='sharing'?c.childhood.until:world.tick + (c.lesson?.outcome==='learning'?LESSON_TICKS:22);
+      c.nextAt = c.skillLesson?.outcome==='learning'?c.skillLesson.until:c.childhood?.outcome==='sharing'?c.childhood.until:world.tick + (c.lesson?.outcome==='learning'?LESSON_TICKS:22);
       break;
     }
     case 3: {
+      if(c.purpose==='learn_skill'){if(finishCoaching(world,c,A,B))bubble(world,A,'Thank you. I can put that practice to use.','happy',60);c.phase=4;c.nextAt=world.tick+16;break;}
       if(isChildTime(c.purpose))finishChildTime(world,c,A,B);
       if(c.purpose==='learn_technique'){
         if(finishLesson(world,c,B,A))bubble(world,A,`I can ${TECHNIQUES[lessonKind(c)].doing} for my work now.`,'happy',72);
@@ -1159,6 +1164,8 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       const text=receiveCompletionReport(world,A,B,d.requestId??0,c.id)??receiveOutcomeReport(world,A,B,d.requestId??0,c.id);c.data.reportDelivered=!!text;c.data.reportText=text??'No personally retained completion could be reported.';
       if(text)bubble(world,A,text,'say',70);break;
     }
+    case 'learn_skill':
+      A.cooldowns.coachAsk=world.tick+DAY/4;bubble(world,A,`Could you help me practise ${c.data.skill}?`,'ask',64);break;
     case 'learn_technique':
       A.cooldowns['learn:'+B.id]=world.tick+2*DAY;
       addLog(world,A,'social',`Asked ${B.name} to teach me ${TECHNIQUES[lessonKind(c)].name} for work I want to do.`);
@@ -1300,6 +1307,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       c.data.reportAcknowledged=!!c.data.reportDelivered&&(acknowledgeCompletionReport(world,A,B,d.requestId??0)||acknowledgeOutcomeReport(world,A,B,d.requestId??0));
       if(c.data.reportAcknowledged)bubble(world,B,'I have heard your report. Thank you for telling me.','say',65);break;
     }
+    case 'learn_skill': {const why=beginCoaching(world,c,A,B);bubble(world,B,why?`Not now: ${why}.`:'Yes. Let us work through the technique together.','say',72);break;}
     case 'learn_technique': {
       const why=answerRequestedLesson(world,c,B,A);
       bubble(world,B,why?`Not now: ${why}.`:`Yes, I can teach you ${TECHNIQUES[lessonKind(c)].name}.`,'say',72);

@@ -1,3 +1,4 @@
+import {hasCoaching} from './skill_coaching';
 import {CHILD_TIMES,wantsChildTime,childTimeName,childTimeTicks} from './childhood';
 import {companyReason} from './companionship';
 import {hasLivedLife} from './lived_life';
@@ -708,6 +709,12 @@ function optRequestTechnique(ctx: Ctx): void {
 }
 
 export function socialOptions(ctx: Ctx): void {
+  if(hasCoaching(ctx.world)&&ctx.stage!=='child'&&!ctx.critical&&!ctx.night&&Math.min(ctx.p.needs.hunger,ctx.p.needs.thirst,ctx.p.needs.energy)>65&&(ctx.p.cooldowns.coached??0)<=ctx.world.tick&&(ctx.p.cooldowns.coachAsk??0)<=ctx.world.tick){
+    for(const c of candidates(ctx)){const k=c.s.work;if(!k||c.s.child||c.d>6||ctx.p.skills[k]>=1.2)continue;
+      const sc=new Scorer().add('practise a skill seen in use',14+8*ctx.p.traits.curiosity).add('walking',-pen(c.d*6));
+      mkSocial(ctx,c,'learn_skill',{skill:k},`Ask ${c.q.name} for ${k} coaching`,'practise together if they agree',null,sc,'learn');break;
+    }
+  }
   if(ctx.stage==='child'&&!ctx.critical&&!ctx.night&&!ctx.dangers.some(b=>hyp(b.x-ctx.p.x,b.y-ctx.p.y)<10)&&Math.min(ctx.p.needs.hunger,ctx.p.needs.thirst,ctx.p.needs.energy)>42){
     for(const c of candidates(ctx))for(const kind of CHILD_TIMES){
       if(!wantsChildTime(ctx.world,ctx.p,c.q,kind))continue;

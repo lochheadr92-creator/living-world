@@ -1,3 +1,4 @@
+import {learnAlongside} from './skill_coaching';
 // Apprenticeship (rich worlds only), on top of the trade a person settles on for themselves (trade.ts). A tradesperson who has
 // just finished a job alongside someone plainly less skilled at it may offer to take them on; the learner may accept or refuse
 // by their own nature and needs, and lets it lapse by not practising, because other things pressed. While it lasts, practice
@@ -28,6 +29,7 @@ const active = (world: World): boolean => tradesOn() && isRich(world);
 
 /** Practice happened: `gain` was just added to the skill. Records it for the apprenticeship, and teaches more within reach of the master. */
 export function notePractice(world: World, p: Person, skill: SkillKey, gain: number): void {
+  learnAlongside(world,p,skill,gain);
   const a = p.apprentice;
   if (!a || a.key !== skill || !active(world)) return;
   a.practised = world.tick;
