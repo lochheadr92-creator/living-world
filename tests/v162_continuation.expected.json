@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "0c73f0f31698aa17c23c7a8eed1d22ee867e78a3",
+    "rules": 162,
+    "content": "08fb1697851e0c9328e1ebcd0d921eb64631d70d431167a3e87fcc1260b01fa7",
+    "note": "Recorded before successor behavior; ordinary river world, 13200 ticks, then 120 more after a save and load; the first storehouse is laid out and finished"
+  },
+  "saved": "c7cec897899d8a6d1d1c7d10b7cb2d0d45af8e3fedf238e30a6d406ea84c30ff",
+  "continued": "5dc88d1fd76896c6ff838a137b03c63fbb78c8d2c6237be52cd9bead0e145cfd"
+}
