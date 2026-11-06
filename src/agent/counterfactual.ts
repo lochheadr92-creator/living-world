@@ -85,7 +85,7 @@ export async function counterfactual(t: Transcript, seqs: number[], model: Model
   const results: CounterfactualAsk[] = [];
   for (const ask of asks) {
     const arm = async (notes: boolean): Promise<Arm> => {
-      const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: notes && hasNotes(ask.notes) ? notesForPrompt(ask.notes) : null, memory: notes });
+      const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: notes && hasNotes(ask.notes) ? notesForPrompt(ask.notes) : null, memory: notes, protocol: t.header.protocol });
       const out: Arm = { notes, choices: [], whys: [], problems: [], outputTokens: 0, latencyMs: 0 };
       for (let i = 0; i < repeats; i++) {
         const r = await gate.call(prompt, Math.floor(ask.tick / DAY));

@@ -63,10 +63,13 @@ export const PROTOCOL_V32 = 'inhabitant/32';
 /** 33/34 add revision of an existing personal production quantity (observation 18). */
 export const PROTOCOL_V33 = 'inhabitant/33';
 export const PROTOCOL_V34 = 'inhabitant/34';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30, PROTOCOL_V31, PROTOCOL_V32, PROTOCOL_V33, PROTOCOL_V34];
+/** 35/36 are 33/34 with one addition to the prompt: when an option lists "limits", the prompt names the answer's "limit" key (observation 18, unchanged). Before, no prompt named it, and a differently spelled key was ignored without a word. */
+export const PROTOCOL_V35 = 'inhabitant/35';
+export const PROTOCOL_V36 = 'inhabitant/36';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30, PROTOCOL_V31, PROTOCOL_V32, PROTOCOL_V33, PROTOCOL_V34, PROTOCOL_V35, PROTOCOL_V36];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V34 : PROTOCOL_V33;
+  return memory ? PROTOCOL_V36 : PROTOCOL_V35;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -86,11 +89,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V27 || protocol === PROTOCOL_V28) return 15;
   if (protocol === PROTOCOL_V29 || protocol === PROTOCOL_V30) return 16;
   if (protocol === PROTOCOL_V31 || protocol === PROTOCOL_V32) return 17;
-  if (protocol === PROTOCOL_V33 || protocol === PROTOCOL_V34) return 18;
+  if (protocol === PROTOCOL_V33 || protocol === PROTOCOL_V34 || protocol === PROTOCOL_V35 || protocol === PROTOCOL_V36) return 18;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30 || protocol === PROTOCOL_V32 || protocol === PROTOCOL_V34;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30 || protocol === PROTOCOL_V32 || protocol === PROTOCOL_V34 || protocol === PROTOCOL_V36;
 }
 
 export interface ProposedGoal { item: string; quantity: number; tier: 0 | 1 }
@@ -116,7 +119,12 @@ export interface PromptInput {
   /** with memory: the notes as they stand (the prompt shows the last few journal entries only) */
   notes?: InhabitantNotes | null;
   memory?: boolean;
+  /** the protocol the prompt is for; 35/36 name the "limit" key (absent = the prompt as 33/34 made it) */
+  protocol?: string;
 }
+
+/** does this protocol's prompt tell the model how to set an option's limits? */
+export const protocolNamesLimit = (protocol: string | undefined): boolean => protocol === PROTOCOL_V35 || protocol === PROTOCOL_V36;
 
 export const SYSTEM_PROMPT = `You are one inhabitant of a small village in a simulated world, living your life from the inside.
 
@@ -177,6 +185,11 @@ export function buildPrompt(input: PromptInput): { system: string; user: string 
   // older prompt stays as it was recorded
   if(input.observation.canRevise?.length){
     lines.push('You may instead revise the quantity of one of your own production plans listed in canRevise: {"revise":{"planId":<listed id>,"quantity":<whole number from 1 to 24>},"why":"..."}. This keeps the same item, quality, paid work and original deadline and spends one of its remaining reconsiderations. The engine checks your present knowledge and may refuse. It creates no goods, restarts no work and does not revise a site commitment. This moment\'s action is then the engine\'s choice.');
+  }
+  // protocol 35/36: the answer's "limit" key, said only when an option on offer lists limits, so every older prompt stays as it was recorded
+  if (protocolNamesLimit(input.protocol) && input.observation.options.some((o) => o.limits && o.limits.length)) {
+    lines.push('');
+    lines.push('Some options list "limits": ways to narrow that action, each with a "field", a "kind" ("count" is a whole number, "until" a level) and the "min" and "max" the world will honour. To use one, add a "limit" object to your answer that names the field and gives a number in range: {"choose": "<the key>", "limit": {"<field>": <number>}, "why": "..."}. Use the key "limit" exactly, and only fields that the chosen option lists: a limit the option does not list is refused and you are asked again, and any other spelling of the key is ignored, so the action runs unnarrowed. Leave "limit" out to take the action as it is.');
   }
   if (input.observation.canPropose) {
     lines.push('');

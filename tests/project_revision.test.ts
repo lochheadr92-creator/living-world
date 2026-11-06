@@ -59,7 +59,7 @@ it.each([false,true])('replays a revised plan through paid production, including
  });
  let completed:{tick:number;reserve:number|undefined;until:number}|undefined;
  const r=await runLive(f.w,f.p.id,model,{until:f.plan.until,memory,onTick:w=>{const i=w.persons.find(p=>p.id===f.p.id)?.intentions.find(i=>i.id===f.plan.id);if(!completed&&i?.status==='done')completed={tick:w.tick,reserve:i.reserve,until:i.until};}}),t=r.transcript;
- expect(t.header.protocol).toBe(memory?'inhabitant/34':'inhabitant/33');expect(t.header.observationVersion).toBe(18);expect(t.end?.revised).toBe(1);expect(t.calls.filter(c=>c.result?.status==='revised')).toHaveLength(1);
+ expect(t.header.protocol).toBe(memory?'inhabitant/36':'inhabitant/35');expect(t.header.observationVersion).toBe(18);expect(t.end?.revised).toBe(1);expect(t.calls.filter(c=>c.result?.status==='revised')).toHaveLength(1);
  expect(completed).toMatchObject({reserve:2,until:f.plan.until});expect(completed!.tick).toBeLessThanOrEqual(f.plan.until);expect(r.world.ledger.consumed.wood).toBeGreaterThan(0);expect(conservationReport(r.world).ok).toBe(true);
  expect(hashWorld(runReplay(deserializeWorld(initial),t).world)).toBe(hashWorld(r.world));
  const bad=JSON.parse(JSON.stringify(t)) as Transcript;const choice=bad.calls.find(c=>c.choice.kind==='revise')!.choice;if(choice.kind==='revise')choice.revision.quantity=3;

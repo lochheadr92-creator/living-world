@@ -456,6 +456,17 @@ weak tier is 71 asks' worth.
 arm that answered differently every time. A plurality of one in three is printed as a majority and counted as a shift or a
 non-shift accordingly. Until that is fixed, a shift count from this tool is an upper bound, and the per-ask table is the result.
 
+## 2026-11-06 the "limit" key is named (protocols 35/36)
+
+An option that lists `limits` (how many to eat, how much to take, how long to stay) is narrowed by a `"limit"` object in the
+answer, `{"choose": "...", "limit": {"<field>": <number>}}`, checked against the option's own range (`decision.ts checkLimits`).
+Protocols 3 to 34 advertised the limits but no prompt named the key, and a differently spelled key (`"limits"`, `"args"`) was
+ignored without a word: a manually lived elder (review_evidence/lives-20261106) tried both and so always ate to full. Protocols
+35/36 (35 without notes, 36 with; observation 18 unchanged) add one line to the user prompt, said only when an option on offer
+lists limits, that names the key, the fields' meaning and what happens to a wrong limit (refused and asked again) or a wrong
+spelling (ignored). The parser is unchanged; older recordings replay by their own protocol, unchanged. Test:
+`tests/inhabit_limit_prompt.test.ts`. Not repaired: a misspelt key is still ignored by the parser; the prompt now says so.
+
 ## 2026-10-31 proposed projects
 
 Protocol inhabitant/31 and /32 (observation 17) let the inhabitant propose one bounded production goal instead of picking an

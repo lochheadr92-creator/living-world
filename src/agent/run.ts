@@ -144,7 +144,7 @@ export class LiveSession {
 
   /** ask the model (through the gate) and keep its answer, or why there is none, on the ask */
   async answer(ask: Ask): Promise<void> {
-    const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: ask.notes ? notesForPrompt(ask.notes) : null, memory: this.memory });
+    const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: ask.notes ? notesForPrompt(ask.notes) : null, memory: this.memory, protocol: protocolFor(this.memory) });
     const r = await this.gate.call(prompt, Math.floor(ask.tick / DAY));
     if (!r.ok) {
       ask.model = { ok: false, text: null, reason: r.reason, latencyMs: r.latencyMs, ...(r.retries ? { retries: r.retries } : {}) };
