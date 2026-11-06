@@ -812,7 +812,7 @@ registerHandler('withdraw', {
     const e = world.byId.get(a.targetId)!;
     {const blocked=pileAccessBlocker(p,e);if(blocked)return blocked;}
     observe(world, p, e);
-    if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e))) return 'this material store is no longer shared or ours';
+    if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e, world, a.data.materialStock))) return 'this material store is no longer shared or ours';
     a.duration = transferDuration(a.data.items ?? {});
     a.tx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : p.x;
     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
@@ -839,7 +839,7 @@ registerHandler('withdraw', {
     let moved = 0;
     const e = world.byId.get(a.targetId);
     {const blocked=pileAccessBlocker(p,e);if(blocked)return `fail:${blocked}`;}
-    if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e))) {
+    if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e, world, a.data.materialStock))) {
       if (e) observe(world, p, e);
       return 'fail:this material store is no longer shared or ours';
     }

@@ -2,6 +2,7 @@ import {brewDemand,hasBrewing} from './brewing';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
+import {STORED_STONE_SIGNAL,hasQuarryStock,hasStoredStoneCue,knownStoreHoldsStone} from './shared_stone';
 import {wellFetchOptions} from './wells';
 import {hasLivestock,livestockMaterials} from './livestock';
 import {hasCarcassSupply,isBodyPart,knownCarcassUnits,supplyFromCarcass} from './carcass_supply';
@@ -211,7 +212,9 @@ export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, wh
 export function collectMaterialStock(ctx: Ctx, b: Belief, item: ItemKind, want: number, base: number, why: string, tag: string): void {
   const take = Math.min(b.items?.[item] ?? 0, Math.max(1, Math.ceil(want)), invRoom(ctx.world, ctx.p, item));
   if (take < 1) return;
-  collectLeaf(ctx, b, { [item]: take }, base * 0.95, why, tag, [], item);
+  // rules 162: stone already cut and stacked at a quarry yard costs no breaking, so it is not marked down against a rock
+  const yard = b.btype === 'quarry' && hasQuarryStock(ctx.world);
+  collectLeaf(ctx, b, { [item]: take }, yard ? base : base * 0.95, why, tag, yard ? [['cut stone is waiting', 3]] : [], item);
 }
 
 /** Carry goods to a workplace so that a batch can be started there. */
@@ -1029,6 +1032,8 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   const outcrops = beliefsByKind(p, ['outcrop']).filter((b) => b.amount >= 10);
   const stonePoor = countBeliefsOfKind(p, 'rock') < 4;
   const stoneNeeded = beliefsByKind(p, ['site']).reduce((n, s) => n + unitsOf(s.need?.stone), 0);
+  // rules 162: a storehouse known to hold the stone a building costs makes it a little more attractive, once there is some other reason for it
+  const storedStone = (type: BuildingType): number => (hasStoredStoneCue(world) && knownStoreHoldsStone(ctx, BUILD_DEF[type].stone) ? STORED_STONE_SIGNAL : 0);
   const solidHomes = beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length;
   const grainKnown = unitsOf(p.inv.grain) + beliefsByKind(p, ['building']).filter((b) => b.hh === p.hhId).reduce((n, b) => n + unitsOf(b.items?.grain), 0);
   const plots = world.plots.filter((pl) => pl.hhId === p.hhId).length;
@@ -1055,6 +1060,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (bricksWanted(ctx) > 0) s += 0.9;
     if (wish > 0.5 && haveYard) s += 0.5;
     if (knowsOfAny(ctx, 'smithy') || (oreKnown && haveYard && init > 0.55)) s += 0.45;
+    if (s > 0) s += storedStone('kiln');
     if (s >= 0.55) out.push({ type: 'kiln', signal: Math.min(1, s), why: bricks_or_charcoal(ctx) });
   }
   if (!knowsEnough(ctx, 'smithy') && oreKnown && haveKiln) {
@@ -1063,6 +1069,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (worn) s += 0.5;
     if (!(unitsOf(p.inv.axe) > 0 && unitsOf(p.inv.pick) > 0)) s += 0.2;
     if (init > 0.5) s += 0.25;
+    if (s > 0) s += storedStone('smithy');
     if (s >= 0.6 || (oreKnown && init > 0.5 && world.tick > DAY * 14)) out.push({ type: 'smithy', signal: Math.min(1, s), why: 'tools are wearing out and there is ore to be smelted' });
   }
   if (!knowsEnough(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
@@ -1070,6 +1077,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (grainKnown >= 6) s += 0.5;
     if (plots >= 2) s += 0.4;
     if (init > 0.45) s += 0.15;
+    if (s > 0) s += storedStone('granary');
     if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: 'the grain keeps going off in the stores' });
   }
   if (!knowsEnough(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
@@ -1078,6 +1086,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (plots >= 2) s += 0.3;
     if (knowsOfAny(ctx, 'granary')) s += 0.2;
     if (p.traits.generosity > 0.5) s += 0.1;
+    if (s > 0) s += storedStone('bakery');
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
   // a crowd wants a hall (rich only): once two dozen live here, somewhere to gather is wanted whether or not a yard stands
@@ -1088,6 +1097,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
     if (crowd) s += 0.3;
+    if (s > 0) s += storedStone('hall');
     if (s >= 0.6) out.push({ type: 'hall', signal: Math.min(1, s), why: 'we need somewhere to eat and talk together out of the weather' });
   }
   return out;

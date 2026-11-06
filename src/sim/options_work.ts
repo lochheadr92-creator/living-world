@@ -41,6 +41,7 @@ import {knownNeeds} from './remembered_need';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
+import { STORED_STONE_UTILITY, hasFirstStorehouse, hasStoredStoneCue, knownStoreHoldsStone, noStorehouseNear } from './shared_stone';
 import { seedStorageOption } from './seed_storage';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -711,6 +712,21 @@ function noteHousingBlock(ctx: Ctx, type: BuildingType, reason: string): void {
   addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, reason, 'build');
 }
 
+/**
+ * Rules 162: this settlement has a solid home and no storehouse standing or being built, and this person knows enough of the land to lay
+ * the first one out. It then does not wait on the household's own open site, the open-site cap, the household's food or a generous
+ * temperament: a store for everyone is what a group that has gathered does (review_evidence/stone-haul-20261106).
+ */
+function firstStorehouseWanted(ctx: Ctx): boolean {
+  const { world, p } = ctx;
+  if (!hasFirstStorehouse(world)) return false;
+  const anchor = settlementAnchor(ctx);
+  if (!noStorehouseNear(world, anchor.x, anchor.y)) return false;
+  const radius = rulesOf(world).facilityRadius;
+  if (!world.buildings.some((b) => isSolidHome(b.type) && within(radius, anchor.x, anchor.y, b.x + b.w / 2, b.y + b.h / 2))) return false;
+  return countBeliefsOfKind(p, 'tree') >= 3 && countBeliefsOfKind(p, 'rock') >= 1;
+}
+
 /** Decide to start a new building: shelter first, then a proper hut, then shared structures. */
 function optPlanBuild(ctx: Ctx): void {
   const { world, p, hh } = ctx;
@@ -723,6 +739,8 @@ function optPlanBuild(ctx: Ctx): void {
     return;
   }
   const tm = traitMods(p);
+  const firstStore = firstStorehouseWanted(ctx);
+  let storeOnly = false; // rules 162: a gate that would have stopped every layout lets only the first storehouse through
   // Rules 47: while the winter window is open, a household's own home is not blocked from being laid out by its own
   // workshop site, so only a home the household has already started counts against starting one. Below 47 (and outside the
   // window) a workshop occupies the household's site slot exactly as it always did.
@@ -732,14 +750,19 @@ function optPlanBuild(ctx: Ctx): void {
     // Not a dead end: the household has already started something, and the site's own card, the build and haul options and
     // (from rules version 7) the shelter plan are where a viewer follows it from here.
     if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
-    return;
+    if (!firstStore) return;
+    storeOnly = true;
   }
-  if (world.sites.filter((s) => s.hhId === hh.id && (!ownHomeOnly || isHomeType(s.type))).length > 0) return; // someone in my household already started one
+  if (world.sites.filter((s) => s.hhId === hh.id && (!ownHomeOnly || isHomeType(s.type))).length > 0) { // someone in my household already started one
+    if (!firstStore) return;
+    storeOnly = true;
+  }
   const rules = rulesOf(world);
   const anchor = settlementAnchor(ctx);
   if (!ownHomeOnly && openSitesNear(world, anchor) >= rules.maxOpenSites) {
     if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', 'too much already being built here at once');
-    return;
+    if (!firstStore) return;
+    storeOnly = true;
   }
   const hs = hhState(ctx);
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
@@ -748,7 +771,9 @@ function optPlanBuild(ctx: Ctx): void {
   const frac = dayFraction(world.tick);
   const duskish = frac > 0.62 || frac < 0.28;
 
+  const stoneCue = (type: BuildingType): number => (hasStoredStoneCue(world) && knownStoreHoldsStone(ctx, BUILD_DEF[type].stone) ? STORED_STONE_UTILITY : 0);
   const tryPlan = (type: BuildingType, base: number, why: string): void => {
+    if (storeOnly && type !== 'storehouse') return;
     const key = -1000 - Object.keys(BUILD_DEF).indexOf(type);
     if (recentFailure(world, p, key, 700)) {
       addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, 'could not find a good spot recently', 'build');
@@ -816,7 +841,7 @@ function optPlanBuild(ctx: Ctx): void {
     // did. Each one still says when it is the one holding things up, instead of the whole question disappearing.
     const secure = hs.foodStock >= 3 * members;
     if (secure && knowTrees && knowRocks && (members >= 2 || runsRulesVersion(world, 9)) && world.tick > 1500) {
-      tryPlan('hut', 11 + 4 * Math.min(members, 4) + 6 * (hs.shortage < 0.3 ? 1 : 0), 'to build a proper hut');
+      tryPlan('hut', 11 + 4 * Math.min(members, 4) + 6 * (hs.shortage < 0.3 ? 1 : 0) + stoneCue('hut'), 'to build a proper hut');
     } else if (!secure) {
       noteHousingBlock(ctx, 'hut', `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${3 * members} before starting a hut`);
     } else if (members < 2 && !runsRulesVersion(world, 9)) {
@@ -830,9 +855,9 @@ function optPlanBuild(ctx: Ctx): void {
       noteHousingBlock(ctx, 'hut', why);
     }
   }
-  const coolStore=cellarDemand(ctx);if(coolStore&&knowTrees&&knowRocks)tryPlan('cellar',coolStore,'keep our spare food cool for later meals');
+  const coolStore=cellarDemand(ctx);if(coolStore&&knowTrees&&knowRocks)tryPlan('cellar',coolStore+stoneCue('cellar'),'keep our spare food cool for later meals');
   const waterJourney=home&&knowTrees&&knowRocks?wellDemand(ctx,home.x,home.y):0;
-  if(waterJourney)tryPlan('well',waterJourney,'shorten the daily water journey from home');
+  if(waterJourney)tryPlan('well',waterJourney+stoneCue('well'),'shorten the daily water journey from home');
   // shared storehouse, once the settlement has a few solid homes
   // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
   const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
@@ -843,7 +868,10 @@ function optPlanBuild(ctx: Ctx): void {
   // rule it always had; a town may come to want another, and does so once the settlement has a solid home for each store it has
   // (a hundred people carrying everything to one hut is what the single allowance did to them).
   const stores = beliefsByKind(p, ['building', 'site']).filter((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)).length;
-  if (stores < rules.facilityAllowance && huts >= stores + 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
+  if (firstStore) {
+    const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
+    tryPlan('storehouse', 30 + 10 * spirit, 'the first shared storehouse, a place to keep stone, wood and tools for everyone');
+  } else if (stores < rules.facilityAllowance && huts >= stores + 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
     if (hs.shortage < 0.5 && spirit > 0.46) tryPlan('storehouse', 8 + 22 * spirit, 'a shared storehouse for the settlement');
   }
