@@ -1,0 +1,66 @@
+{
+ "seed": "meadow",
+ "rules": 161,
+ "at": {
+  "day5": {
+   "alive": 31,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 1,
+    "hut": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day10": {
+   "alive": 32,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 3,
+    "quarry": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day15": {
+   "alive": 33,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 13,
+    "well": 1,
+    "hut": 5,
+    "quarry": 1,
+    "timber_yard": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day25": {
+   "alive": 35,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 15,
+    "well": 1,
+    "hut": 8,
+    "quarry": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "cellar": 2,
+    "food_rack": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  }
+ }
+}

@@ -1,0 +1,58 @@
+{
+ "seed": "river",
+ "profile": "normal",
+ "rules": 161,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 20,
+ "pairs": 563,
+ "chain": {
+  "6 stone-collect was weighed but outranked": 14,
+  "5 believes stone is there; no stone-collect option was weighed": 456,
+  "1 does not know the quarry": 92,
+  "3 knows it, believes stone, belief older than 3 days": 80,
+  "7 stone-collect was chosen": 1
+ },
+ "believedStockOfQuarry": {
+  "6": 471
+ },
+ "chosenInsteadKind": {
+  "operate": 3,
+  "socialize": 29,
+  "eat_store": 10,
+  "gather": 159,
+  "build": 4,
+  "sleep": 96,
+  "rest": 80,
+  "drink": 37,
+  "deposit": 2,
+  "haul": 3,
+  "explore": 3,
+  "flee": 13,
+  "eat": 2,
+  "repair": 4,
+  "attend": 11,
+  "harvest": 1,
+  "fetch_water": 1,
+  "warm": 7,
+  "animal_work": 1,
+  "withdraw": 1,
+  "fuel_fire": 1,
+  "give": 2
+ },
+ "chosenInsteadLabel": {
+  "Fishing": 56,
+  "Sleep at my hut": 50,
+  "Sleep at my lean-to": 46,
+  "Picking fruit": 41,
+  "Picking berries": 36,
+  "Shelter at the hut": 36,
+  "Drink at the well": 24,
+  "Sit down and rest": 18,
+  "Gathering wild grain": 14,
+  "Stay at my hut until it is light": 13,
+  "Go and drink at the water": 13,
+  "Run to safety (other people)": 8
+ }
+}

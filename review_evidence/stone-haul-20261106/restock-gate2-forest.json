@@ -1,0 +1,34 @@
+{
+ "seed": "forest",
+ "rules": 162,
+ "days": 14,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 27,
+ "samples": 3243,
+ "firstGateStopping": {
+  "2 hungry, thirsty or tired": 1006,
+  "3 does not know a public store seen within a day": 57,
+  "4 has a need for stone of their own": 546,
+  "1 night": 1519,
+  "5 has an active plan": 109,
+  "6 has an active promise": 2,
+  "8 passes every gate": 4
+ },
+ "materialNeedsOfThoseStoppedThere": {
+  "repair:wood": 245,
+  "fire:wood": 257,
+  "craft:wood": 546,
+  "craft:stone": 449,
+  "site:stone": 330,
+  "plan:tool": 21,
+  "plan:stock": 86,
+  "plan:shelter": 1,
+  "plan:night": 23,
+  "site:wood": 84,
+  "plan:repair": 1
+ },
+ "whenAllPassed": {
+  "none offered although every gate passed": 4
+ }
+}

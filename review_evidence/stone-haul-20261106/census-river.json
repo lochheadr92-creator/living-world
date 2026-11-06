@@ -1,0 +1,69 @@
+{
+ "seed": "river",
+ "rules": 161,
+ "at": {
+  "day5": {
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 4
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day10": {
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 5,
+    "cellar": 2,
+    "timber_yard": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day15": {
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 11,
+    "well": 2,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "kiln": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day25": {
+   "alive": 20,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 2,
+    "hut": 7,
+    "cellar": 2,
+    "timber_yard": 1,
+    "food_rack": 1,
+    "kiln": 1,
+    "quarry": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  }
+ }
+}

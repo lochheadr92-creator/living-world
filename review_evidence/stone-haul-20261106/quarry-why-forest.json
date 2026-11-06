@@ -1,0 +1,47 @@
+{
+ "seed": "forest",
+ "profile": "normal",
+ "rules": 161,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 12,
+ "pairs": 68,
+ "chain": {
+  "5 believes stone is there; no stone-collect option was weighed": 65,
+  "6 stone-collect was weighed but outranked": 3,
+  "3 knows it, believes stone, belief older than 3 days": 16
+ },
+ "believedStockOfQuarry": {
+  "3": 56,
+  "6": 12
+ },
+ "chosenInsteadKind": {
+  "repair": 4,
+  "haul": 1,
+  "rest": 14,
+  "sleep": 14,
+  "drink": 4,
+  "give": 3,
+  "gather": 17,
+  "fuel_fire": 1,
+  "socialize": 4,
+  "till": 4,
+  "deposit": 1,
+  "warm": 1
+ },
+ "chosenInsteadLabel": {
+  "Sleep at my hut": 14,
+  "Shelter at the hut": 9,
+  "Fishing": 6,
+  "Drink at the well": 4,
+  "Break ground for a new plot": 4,
+  "Stay at my hut until it is light": 3,
+  "Picking berries": 3,
+  "Repair the lean-to": 2,
+  "Bring fish to Silas": 2,
+  "Chopping wood to keep the fire going": 2,
+  "Gathering wild grain": 2,
+  "Sit down and rest": 1
+ }
+}

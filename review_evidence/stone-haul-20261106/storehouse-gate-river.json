@@ -1,0 +1,28 @@
+{
+ "seed": "river",
+ "profile": "normal",
+ "rules": 161,
+ "days": 12,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 29,
+ "storehousesBuilt": 0,
+ "storehouseSites": 0,
+ "solidHomes": 6,
+ "samples": 240,
+ "decisions": 4159,
+ "withStorehouseOption": 4,
+ "storehouseChosen": 0,
+ "rankOfStorehouse": {
+  "1": 1,
+  "2": 2,
+  "3": 1
+ },
+ "medianGapToChosen": 6.4,
+ "firstGateStopping": {
+  "no solid home in the world yet": 940,
+  "would reach the food-shortage and temperament gates": 501,
+  "own household already has a site open": 1393,
+  "four or more sites open (maxOpenSites is 4)": 1966
+ }
+}

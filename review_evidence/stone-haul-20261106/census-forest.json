@@ -1,0 +1,68 @@
+{
+ "seed": "forest",
+ "rules": 161,
+ "at": {
+  "day5": {
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 2,
+    "cellar": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day10": {
+   "alive": 28,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 3,
+    "cellar": 1,
+    "quarry": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day15": {
+   "alive": 26,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 12,
+    "well": 1,
+    "hut": 5,
+    "cellar": 1,
+    "quarry": 1,
+    "timber_yard": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  },
+  "day25": {
+   "alive": 12,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 10,
+    "well": 1,
+    "hut": 5,
+    "cellar": 1,
+    "quarry": 1,
+    "timber_yard": 1,
+    "food_rack": 1
+   },
+   "storehouses": 0,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 0,
+   "stoneInStorehouses": 0
+  }
+ }
+}

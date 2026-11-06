@@ -1,0 +1,24 @@
+{
+ "seed": "life-stages-6",
+ "rules": 162,
+ "days": 14,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 30,
+ "samples": 3628,
+ "firstGateStopping": {
+  "2 hungry, thirsty or tired": 1034,
+  "4 has a material need of their own": 871,
+  "3 does not know a public store seen within a day": 39,
+  "1 night": 1684
+ },
+ "materialNeedsOfThoseStoppedThere": {
+  "site:stone": 450,
+  "site:wood": 149,
+  "fire:wood": 429,
+  "craft:wood": 871,
+  "craft:stone": 637,
+  "repair:wood": 417
+ },
+ "whenAllPassed": {}
+}

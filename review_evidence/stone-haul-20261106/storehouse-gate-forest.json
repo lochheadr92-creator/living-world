@@ -1,0 +1,30 @@
+{
+ "seed": "forest",
+ "profile": "normal",
+ "rules": 161,
+ "days": 12,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 26,
+ "storehousesBuilt": 0,
+ "storehouseSites": 0,
+ "solidHomes": 3,
+ "samples": 240,
+ "decisions": 4038,
+ "withStorehouseOption": 23,
+ "storehouseChosen": 2,
+ "rankOfStorehouse": {
+  "0": 2,
+  "1": 7,
+  "2": 4,
+  "3": 7,
+  "4": 3
+ },
+ "medianGapToChosen": 6.2,
+ "firstGateStopping": {
+  "no solid home in the world yet": 950,
+  "own household already has a site open": 1163,
+  "would reach the food-shortage and temperament gates": 563,
+  "four or more sites open (maxOpenSites is 4)": 1846
+ }
+}

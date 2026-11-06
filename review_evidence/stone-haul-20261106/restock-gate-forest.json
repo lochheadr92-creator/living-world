@@ -1,0 +1,24 @@
+{
+ "seed": "forest",
+ "rules": 162,
+ "days": 14,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 27,
+ "samples": 3243,
+ "firstGateStopping": {
+  "2 hungry, thirsty or tired": 1006,
+  "3 does not know a public store seen within a day": 57,
+  "4 has a material need of their own": 661,
+  "1 night": 1519
+ },
+ "materialNeedsOfThoseStoppedThere": {
+  "repair:wood": 290,
+  "fire:wood": 314,
+  "craft:wood": 661,
+  "craft:stone": 449,
+  "site:stone": 330,
+  "site:wood": 85
+ },
+ "whenAllPassed": {}
+}

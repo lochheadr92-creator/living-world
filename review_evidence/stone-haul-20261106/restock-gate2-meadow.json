@@ -1,0 +1,41 @@
+{
+ "seed": "meadow",
+ "rules": 162,
+ "days": 14,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 33,
+ "samples": 3476,
+ "firstGateStopping": {
+  "2 hungry, thirsty or tired": 1134,
+  "3 does not know a public store seen within a day": 46,
+  "4 has a need for stone of their own": 627,
+  "1 night": 1584,
+  "5 has an active plan": 78,
+  "8 passes every gate": 6,
+  "6 has an active promise": 1
+ },
+ "materialNeedsOfThoseStoppedThere": {
+  "site:stone": 457,
+  "craft:wood": 627,
+  "craft:stone": 449,
+  "site:wood": 203,
+  "fire:wood": 255,
+  "repair:wood": 388,
+  "plan:stock": 46,
+  "plan:repair": 6,
+  "plan:tool": 24,
+  "plan:night": 6,
+  "plan:batch": 3,
+  "plan:shelter": 2
+ },
+ "whenAllPassed": {
+  "none offered although every gate passed": 3,
+  "a store-restock option was offered": 3,
+  "  but it ranked below the top by 25+": 1,
+  "  kinds: gather:stone": 1,
+  "  but it ranked below the top by 35+": 1,
+  "  kinds: withdraw:stone+gather:stone": 2,
+  "  but it ranked below the top by 15+": 1
+ }
+}

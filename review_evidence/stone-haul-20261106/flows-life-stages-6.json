@@ -1,0 +1,110 @@
+{
+ "seed": "life-stages-6",
+ "profile": "normal",
+ "rules": 161,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 34,
+ "totalGained": 212,
+ "totalLost": 201,
+ "gains": [
+  {
+   "where": "gather -> source:rock",
+   "stone": 110,
+   "events": 110
+  },
+  {
+   "where": "gather -> source:outcrop",
+   "stone": 99,
+   "events": 99
+  },
+  {
+   "where": "converse -> person",
+   "stone": 1,
+   "events": 1
+  },
+  {
+   "where": "withdraw -> building:storehouse(public)",
+   "stone": 1,
+   "events": 1
+  },
+  {
+   "where": "withdraw -> building:quarry(other hh)",
+   "stone": 1,
+   "events": 1
+  }
+ ],
+ "losses": [
+  {
+   "where": "haul -> site:hut(own hh)",
+   "stone": 46,
+   "events": 31
+  },
+  {
+   "where": "haul -> site:cellar(own hh)",
+   "stone": 39,
+   "events": 24
+  },
+  {
+   "where": "craft -> building:lean_to(own hh)",
+   "stone": 18,
+   "events": 16
+  },
+  {
+   "where": "craft -> building:hut(own hh)",
+   "stone": 13,
+   "events": 10
+  },
+  {
+   "where": "craft -> building:fire(public)",
+   "stone": 12,
+   "events": 8
+  },
+  {
+   "where": "haul -> site:hut(other hh)",
+   "stone": 10,
+   "events": 6
+  },
+  {
+   "where": "haul -> site:well(other hh)",
+   "stone": 8,
+   "events": 5
+  },
+  {
+   "where": "haul -> site:cellar(other hh)",
+   "stone": 8,
+   "events": 6
+  },
+  {
+   "where": "haul -> site:smithy(other hh)",
+   "stone": 8,
+   "events": 5
+  },
+  {
+   "where": "haul -> site:kiln(own hh)",
+   "stone": 6,
+   "events": 3
+  },
+  {
+   "where": "haul -> site:kiln(other hh)",
+   "stone": 6,
+   "events": 2
+  },
+  {
+   "where": "craft -> building:cellar(own hh)",
+   "stone": 5,
+   "events": 4
+  },
+  {
+   "where": "haul -> site:storehouse(other hh)",
+   "stone": 4,
+   "events": 2
+  },
+  {
+   "where": "haul -> site:timber_yard(other hh)",
+   "stone": 4,
+   "events": 2
+  }
+ ]
+}

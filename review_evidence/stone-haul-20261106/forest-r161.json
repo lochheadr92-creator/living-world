@@ -1,0 +1,294 @@
+{
+ "seed": "forest",
+ "profile": "normal",
+ "rules": 161,
+ "days": 25,
+ "weights": {
+  "stone": 3,
+  "wood": 2
+ },
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 12,
+ "capSeen": {
+  "child": {
+   "5": 4329
+  },
+  "youth": {
+   "9": 23
+  },
+  "adult": {
+   "12": 4936,
+   "18": 2573
+  },
+  "elder": {
+   "6": 507,
+   "12": 413
+  }
+ },
+ "basketShareOfSamples": {
+  "elder": {
+   "samples": 920,
+   "withBasket": 413,
+   "share": 0.449
+  },
+  "adult": {
+   "samples": 7509,
+   "withBasket": 2573,
+   "share": 0.343
+  },
+  "youth": {
+   "samples": 23,
+   "withBasket": 0,
+   "share": 0
+  }
+ },
+ "stoneGainedPerTickWhenGained": {
+  "child": {
+   "hist": {},
+   "mean": null
+  },
+  "youth": {
+   "hist": {},
+   "mean": null
+  },
+  "adult": {
+   "hist": {
+    "1": 80
+   },
+   "mean": 1
+  },
+  "elder": {
+   "hist": {
+    "1": 15
+   },
+   "mean": 1
+  }
+ },
+ "stoneCarriedAtStartOfADelivery": {
+  "child": {
+   "trips": 0,
+   "shareAtPackLimit": null,
+   "hist": {},
+   "mean": null
+  },
+  "youth": {
+   "trips": 0,
+   "shareAtPackLimit": null,
+   "hist": {},
+   "mean": null
+  },
+  "adult": {
+   "trips": 44,
+   "shareAtPackLimit": 0,
+   "hist": {
+    "1": 16,
+    "2": 18,
+    "3": 6,
+    "4": 4
+   },
+   "mean": 1.95
+  },
+  "elder": {
+   "trips": 9,
+   "shareAtPackLimit": 0,
+   "hist": {
+    "1": 8,
+    "3": 1
+   },
+   "mean": 1.22
+  }
+ },
+ "stoneSites": {
+  "total": 16,
+  "finished": 14,
+  "openAtEnd": 2,
+  "byType": {
+   "well": 1,
+   "hut": 10,
+   "cellar": 1,
+   "quarry": 1,
+   "hall": 1,
+   "timber_yard": 1,
+   "food_rack": 1
+  }
+ },
+ "rows": [
+  {
+   "id": 1048,
+   "type": "well",
+   "stoneNeed": 8,
+   "createdDay": 0.03,
+   "firstStoneAfterH": 3.7,
+   "stoneCompleteAfterH": 10.8,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 1813,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 1.01,
+   "firstStoneAfterH": 1.9,
+   "stoneCompleteAfterH": 3.8,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 2462,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 1.44,
+   "firstStoneAfterH": 0.1,
+   "stoneCompleteAfterH": 24.9,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 2559,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 1.51,
+   "firstStoneAfterH": 117.7,
+   "stoneCompleteAfterH": 185.3,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 3017,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 2.13,
+   "firstStoneAfterH": null,
+   "stoneCompleteAfterH": null,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 3532,
+   "type": "hut",
+   "stoneNeed": 2,
+   "createdDay": 2.78,
+   "firstStoneAfterH": 0.1,
+   "stoneCompleteAfterH": 3.6,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 3868,
+   "type": "cellar",
+   "stoneNeed": 9,
+   "createdDay": 3.15,
+   "firstStoneAfterH": 8,
+   "stoneCompleteAfterH": 26.4,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 4565,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 4,
+   "firstStoneAfterH": 6.2,
+   "stoneCompleteAfterH": 29.7,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 5787,
+   "type": "hut",
+   "stoneNeed": 4,
+   "createdDay": 5.33,
+   "firstStoneAfterH": 18.2,
+   "stoneCompleteAfterH": 24.4,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 6031,
+   "type": "hut",
+   "stoneNeed": 2,
+   "createdDay": 5.73,
+   "firstStoneAfterH": 24.5,
+   "stoneCompleteAfterH": 39.6,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 7387,
+   "type": "quarry",
+   "stoneNeed": 2,
+   "createdDay": 7.25,
+   "firstStoneAfterH": 0.9,
+   "stoneCompleteAfterH": 6.5,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 7741,
+   "type": "hut",
+   "stoneNeed": 2,
+   "createdDay": 7.78,
+   "firstStoneAfterH": 16.1,
+   "stoneCompleteAfterH": 16.1,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 8262,
+   "type": "hall",
+   "stoneNeed": 8,
+   "createdDay": 8.35,
+   "firstStoneAfterH": 23.2,
+   "stoneCompleteAfterH": 51.1,
+   "finished": false,
+   "stillOpenAtEnd": true,
+   "openDaysAtEnd": 16.65
+  },
+  {
+   "id": 11564,
+   "type": "timber_yard",
+   "stoneNeed": 4,
+   "createdDay": 12.35,
+   "firstStoneAfterH": 14.3,
+   "stoneCompleteAfterH": 14.3,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 13107,
+   "type": "food_rack",
+   "stoneNeed": 2,
+   "createdDay": 14.28,
+   "firstStoneAfterH": 4.6,
+   "stoneCompleteAfterH": 67,
+   "finished": true,
+   "stillOpenAtEnd": false,
+   "openDaysAtEnd": null
+  },
+  {
+   "id": 13456,
+   "type": "hut",
+   "stoneNeed": 2,
+   "createdDay": 14.95,
+   "firstStoneAfterH": 150.8,
+   "stoneCompleteAfterH": 150.8,
+   "finished": false,
+   "stillOpenAtEnd": true,
+   "openDaysAtEnd": 10.05
+  }
+ ]
+}

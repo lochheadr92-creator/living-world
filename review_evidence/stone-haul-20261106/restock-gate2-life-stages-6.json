@@ -1,0 +1,33 @@
+{
+ "seed": "life-stages-6",
+ "rules": 162,
+ "days": 14,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 30,
+ "samples": 3628,
+ "firstGateStopping": {
+  "2 hungry, thirsty or tired": 1034,
+  "4 has a need for stone of their own": 778,
+  "5 has an active plan": 88,
+  "3 does not know a public store seen within a day": 39,
+  "1 night": 1684,
+  "8 passes every gate": 5
+ },
+ "materialNeedsOfThoseStoppedThere": {
+  "site:stone": 450,
+  "site:wood": 149,
+  "fire:wood": 387,
+  "craft:wood": 778,
+  "craft:stone": 637,
+  "plan:stock": 43,
+  "plan:repair": 13,
+  "repair:wood": 377,
+  "plan:night": 17,
+  "plan:tool": 31,
+  "plan:batch": 3
+ },
+ "whenAllPassed": {
+  "none offered although every gate passed": 5
+ }
+}

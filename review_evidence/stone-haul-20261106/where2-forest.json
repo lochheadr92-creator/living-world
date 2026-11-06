@@ -1,0 +1,177 @@
+{
+ "seed": "forest",
+ "profile": "normal",
+ "rules": 161,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 12,
+ "samples": 500,
+ "meanStoneAcrossAllSamples": {
+  "inPacks": 10.31,
+  "inHomeStores": 0,
+  "inStorehouses": 0,
+  "inOtherStores": 2.24,
+  "inGroundPiles": 0.56,
+  "deliveredToOpenSites": 5.33,
+  "leftInRockSources": 746.56,
+  "stillLackedByOpenSites": 4.88
+ },
+ "samplesWithAStoneShortSite": 376,
+ "meanStoneWhileASiteLacksStone": {
+  "inPacks": 10.06,
+  "inHomeStores": 0,
+  "inStorehouses": 0,
+  "inOtherStores": 1.61,
+  "inGroundPiles": 0.01,
+  "leftInRockSources": 751.44,
+  "lacked": 6.49
+ },
+ "storeStoneByBuildingType": {
+  "quarry": {
+   "maxSeen": 6,
+   "meanWhenHeld": 4.77,
+   "samplesHeld": 235
+  }
+ },
+ "maxStoneEverInAStorehouse": 0,
+ "holders": {
+  "dwellH": {
+   "0": 37,
+   "1": 34,
+   "2": 24,
+   "3": 28,
+   "4": 24,
+   "5": 23,
+   "6": 24,
+   "7": 28,
+   "8": 21,
+   "9": 24,
+   "10": 20,
+   "11": 21,
+   "12": 23,
+   "13": 25,
+   "14": 18,
+   "15": 23,
+   "16": 20,
+   "17": 20,
+   "18": 22,
+   "19": 24,
+   "20": 18,
+   "21": 21,
+   "22": 18,
+   "23": 18,
+   "24": 20,
+   "25": 22,
+   "26": 17,
+   "27": 18,
+   "28": 17,
+   "29": 16,
+   "30": 18,
+   "31": 18,
+   "32": 15,
+   "33": 16,
+   "34": 15,
+   "35": 14,
+   "36": 17,
+   "37": 18,
+   "38": 15,
+   "39": 16,
+   "40": 15,
+   "41": 14,
+   "42": 17,
+   "43": 18,
+   "44": 15,
+   "45": 16,
+   "46": 15,
+   "47": 14,
+   "48": 2179
+  },
+  "doing": {
+   "gather": 836,
+   "haul": 38,
+   "craft": 31,
+   "explore": 30,
+   "build": 33,
+   "socialize": 86,
+   "eat": 27,
+   "converse": 209,
+   "wander": 8,
+   "drink": 226,
+   "rest": 306,
+   "eat_store": 12,
+   "sleep": 875,
+   "idle": 15,
+   "flee": 56,
+   "fuel_fire": 28,
+   "deposit": 16,
+   "plan_site": 11,
+   "give": 17,
+   "visit": 7,
+   "till": 14,
+   "repair": 52,
+   "tend": 3,
+   "defend": 1,
+   "warm": 123,
+   "harvest": 20,
+   "attend": 20,
+   "plant": 7,
+   "butcher": 4,
+   "tree_work": 1,
+   "hunt": 1,
+   "operate": 13,
+   "animal_work": 4,
+   "withdraw": 2,
+   "fetch_water": 1
+  },
+  "haveOpenSiteLackingStone": {
+   "no own-household site lacks stone": 2845,
+   "own household site lacks stone": 288
+  },
+  "withBasket": {
+   "no basket": 1543,
+   "basket": 1590
+  },
+  "stage": {
+   "elder": 472,
+   "adult": 2661
+  },
+  "holdersTotal": 3133
+ },
+ "why": {
+  "spareOfHeld": {
+   "0": 601,
+   "1": 1668,
+   "2": 329,
+   "3": 485,
+   "4": 50
+  },
+  "reservedOfHeld": {
+   "0": 2284,
+   "1": 286,
+   "2": 550,
+   "3": 13
+  },
+  "activePlanKinds": {
+   "(no active plan)": 188,
+   "tool": 931,
+   "night": 1340,
+   "stock": 1334,
+   "shelter": 129,
+   "repair": 328,
+   "batch": 25
+  },
+  "hasActiveCommitment": {
+   "no": 2855,
+   "yes": 278
+  },
+  "errandForStone": {
+   "no": 3133
+  },
+  "heldBySpareAndPlan": {
+   "spare>0 / no active plan": 188,
+   "nothing spare / has active plan": 601,
+   "spare>0 / has active plan": 2344
+  }
+ }
+}

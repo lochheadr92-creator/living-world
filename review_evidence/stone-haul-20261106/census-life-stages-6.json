@@ -1,0 +1,70 @@
+{
+ "seed": "life-stages-6",
+ "rules": 161,
+ "at": {
+  "day5": {
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 3,
+    "storehouse": 1
+   },
+   "storehouses": 1,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 29,
+   "stoneInStorehouses": 0
+  },
+  "day10": {
+   "alive": 29,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "cellar": 2
+   },
+   "storehouses": 1,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 29,
+   "stoneInStorehouses": 0
+  },
+  "day15": {
+   "alive": 33,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 14,
+    "well": 1,
+    "hut": 7,
+    "storehouse": 1,
+    "cellar": 2,
+    "food_rack": 1
+   },
+   "storehouses": 1,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 33,
+   "stoneInStorehouses": 1
+  },
+  "day25": {
+   "alive": 34,
+   "buildings": {
+    "fire": 1,
+    "lean_to": 15,
+    "well": 1,
+    "hut": 9,
+    "storehouse": 1,
+    "cellar": 4,
+    "food_rack": 1,
+    "timber_yard": 1,
+    "kiln": 1,
+    "quarry": 1
+   },
+   "storehouses": 1,
+   "storehouseSitesOpen": 0,
+   "peopleWhoBelieveInAStorehouse": 34,
+   "stoneInStorehouses": 0
+  }
+ }
+}
