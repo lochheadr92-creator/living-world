@@ -47,6 +47,7 @@ import { spark, trustOf } from './relations';
 import { runsRulesVersion } from './rulesversion';
 import { hasProposalBelief } from './proposal_belief';
 import { hasFeverSign } from './fever_sign';
+import { hasVisibleNeed, visibleHunger, visibleThirst } from './visible_need';
 import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -460,6 +461,10 @@ function optOffer(ctx: Ctx): void {
     if (c.d > 12) continue;
     const q = c.q;
     const kin = p.relations[q.id]?.kin;
+    // rules 166 (visible_need.ts): how hungry or thirsty they are is what the signs show (hungry, starving; thirsty, parched), not their exact figure
+    const seenNeed = hasVisibleNeed(world);
+    const hungerNow = seenNeed ? visibleHunger(c.s) : q.needs.hunger;
+    const thirstNow = seenNeed ? visibleThirst(c.s) : q.needs.thirst;
     const needFood = c.s.hungry;
     const needWater = c.s.thirsty;
     if (!needFood && !needWater) continue;
@@ -470,9 +475,9 @@ function optOffer(ctx: Ctx): void {
     const items: Items = {};
     let label = '';
     if (needFood) {
-      const k = pickFood(p.inv, q.needs.hunger) as ItemKind | null;
+      const k = pickFood(p.inv, hungerNow) as ItemKind | null;
       if (k && surplusOf(world, p, k) >= 1) {
-        items[k] = Math.min(surplusOf(world, p, k), q.needs.hunger < 25 ? 3 : 2);
+        items[k] = Math.min(surplusOf(world, p, k), hungerNow < 25 ? 3 : 2);
         label = k;
       }
     }
@@ -484,7 +489,7 @@ function optOffer(ctx: Ctx): void {
     const rel = p.relations[q.id];
     const angry = rel && rel.avoidUntil > world.tick;
     if (angry && p.traits.generosity < 0.55) continue; // only the big-hearted offer to someone they have quarrelled with
-    const sev = needFood ? clamp((50 - q.needs.hunger) / 50, 0, 1) : clamp((50 - q.needs.thirst) / 50, 0, 1);
+    const sev = needFood ? clamp((50 - hungerNow) / 50, 0, 1) : clamp((50 - thirstNow) / 50, 0, 1);
     const sc = new Scorer().add(`${q.name} looks ${needFood ? 'hungry' : 'thirsty'}`, (14 + 26 * sev) * tm.give);
     if (c.s.child) sc.add('a child', 10);
     if (kin) sc.add('family', 7);

@@ -2,6 +2,7 @@ import {runsRulesVersion} from './rulesversion';
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import { rememberSigns } from './remembered_need';
 import { hasFeverSign, looksFeverish } from './fever_sign';
+import { hasVisibleNeed, STARVING_BELOW, PARCHED_BELOW } from './visible_need';
 import { waterSupplyNear } from './water_access';
 import { observeFlood } from './flood';
 import { SENSE_RADIUS } from './constants';
@@ -65,6 +66,8 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     cold: e.needs.warmth < 35,
     hurt: e.health < 60,
     ...(hasFeverSign(world) && looksFeverish(e) ? { feverish: true } : {}),
+    ...(hasVisibleNeed(world) && e.needs.hunger < STARVING_BELOW ? { starving: true } : {}),
+    ...(hasVisibleNeed(world) && e.needs.thirst < PARCHED_BELOW ? { parched: true } : {}),
     child: stageOf(world, e) === 'child',
     carrying,
     ...(plenty && plenty.length ? { plenty } : {}),

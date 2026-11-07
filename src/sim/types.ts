@@ -206,6 +206,9 @@ export interface SeenEntity {
   tired: boolean;
   cold: boolean;
   hurt: boolean;
+  /** Rules 166 (visible_need.ts): visibly starving (hunger under 20) or parched (thirst under 20), beyond hungry and thirsty. Rich worlds at 166 or later only, absent when not set. */
+  starving?: boolean;
+  parched?: boolean;
   /** Rules 165 (fever_sign.ts): visibly feverish, the point the cautious keep their distance from. Rich worlds at 165 or later only, and absent when not set. */
   feverish?: boolean;
   child: boolean;
