@@ -9,6 +9,7 @@ import { isFreeLand, isWalkable } from '../src/sim/registry';
 import { findPath } from '../src/sim/pathfinding';
 import { findPlotSpot } from '../src/sim/farming';
 import { T } from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
 describe('REVIEW: why the chosen field tile cannot be reached', () => {
   it('forest, Isla at tick 3204', () => {
@@ -24,7 +25,7 @@ describe('REVIEW: why the chosen field tile cannot be reached', () => {
     const pathExact = findPath(w, p.x, p.y, sx, sy, { exact: { x: sx, y: sy }, cart: false, caller: 'review' } as any);
     const pathLoose = findPath(w, p.x, p.y, sx, sy, { cart: false, caller: 'review' } as any);
     const out = { tick: w.tick, isla: { x: p.x, y: p.y, indoors: p.indoors, activity: p.activity?.label }, spot, standing: { x: sx, y: sy }, pathExactLen: pathExact ? pathExact.length / 2 : null, pathLooseLen: pathLoose ? pathLoose.length / 2 : null, around, homeTile: (() => { const hh = w.households.find((h) => h.id === p.hhId); const b = hh?.homeId ? w.byId.get(hh.homeId) as any : null; return b && { type: b.type, x: b.x, y: b.y, w: b.w, h: b.h }; })() };
-    writeFileSync('C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/till-root.json', JSON.stringify(out, null, 1));
+    writeFileSync(reviewOut() + '/till-root.json', JSON.stringify(out, null, 1));
     expect(spot).not.toBeNull();
   });
 });

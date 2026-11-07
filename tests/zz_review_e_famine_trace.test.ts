@@ -13,9 +13,10 @@ import { SOURCE_FOOD } from '../src/sim/food_help';
 import { CRITICAL } from '../src/sim/constants';
 import { regrowRate, winterDepth } from '../src/sim/hardship';
 import type { Activity, Person, World } from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
 const SAVE = 'autonomy_evidence/helper-receipt107-first-invalid/final.json';
-const OUT = 'C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_e';
+const OUT = reviewOut('agent_e');
 const TICKS = 2400;
 
 const foodSource = (w: World, id: number) => {

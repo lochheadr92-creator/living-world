@@ -3,17 +3,19 @@
 // (it keeps running rules 109 by design), then measures: load time, 240-tick continuation cost, inspector cost over all
 // living people, full-serialization purity of inspection, serialized size, and the size of the longest person panel.
 import { describe, expect, it } from 'vitest';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { stepWorld, hashWorld } from '../src/sim/world';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { describePerson, describeEntity } from '../src/sim/inspect';
 import { conservationReport } from '../src/sim/economy';
+import { reviewOut } from './helpers/review_out';
 
 const SAVE = 'C:/dev/Claude Experiment/living-world-completion/autonomy_evidence/mature109-large-meadow-45/final-save.json';
 const q = (a: number[], f: number) => { const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(f * s.length))]; };
 
 describe('REVIEW: retained mature Large save under current code', () => {
-  it('load, continue 240 ticks, inspect everyone, purity, size', () => {
+  // the save lives in a sibling worktree on the reviewer's machine; elsewhere there is nothing to measure, and that is said, not failed
+  it.skipIf(!existsSync(SAVE))('load, continue 240 ticks, inspect everyone, purity, size', () => {
     const text = readFileSync(SAVE, 'utf8');
     const l0 = performance.now(); const w = deserializeWorld(text); const loadMs = performance.now() - l0;
     const alive = w.persons.filter((p) => p.alive);
@@ -31,7 +33,7 @@ describe('REVIEW: retained mature Large save under current code', () => {
     const cons = conservationReport(w);
     const counts = { persons: w.persons.length, alive: alive.length, deceased: w.deceased.length, buildings: w.buildings.length, sites: w.sites.length, piles: w.piles.length, graves: w.graves.length, events: w.events.length, chronicle: (w as any).chronicle?.length, requests: w.requests.length, reservations: w.reservations.size, conversations: w.conversations.length, meals: w.meals.length, occasions: (w as any).occasions?.length, tools: w.tools.length, carts: w.carts.length, sumLog: alive.reduce((n, p) => n + p.log.length, 0), sumBeliefs: alive.reduce((n, p) => n + Object.keys(p.beliefs).length, 0), sumCommitments: alive.reduce((n, p) => n + p.commitments.length, 0), sumHeard: alive.reduce((n, p) => n + (p.heard?.length ?? 0), 0), sumSocialMemory: alive.reduce((n, p) => n + (p.socialMemory?.length ?? 0), 0), sumWhereabouts: alive.reduce((n, p) => n + Object.keys(p.whereabouts).length, 0), sumRelations: alive.reduce((n, p) => n + Object.keys(p.relations).length, 0), sumCooldownKeys: alive.reduce((n, p) => n + Object.keys(p.cooldowns).length, 0), sumFailures: alive.reduce((n, p) => n + Object.keys(p.failures).length, 0) };
     const out = { rules: w.settings.rulesVersion, tick: w.tick, day: w.tick / 2400, loadMs, inputBytes: text.length, serializedBytes: json.length, saveMs, inspectMs: { p50: q(insp, 0.5), p95: q(insp, 0.95), max: Math.max(...insp), all: inspectAllMs }, entityInspectMs: { p95: q(ent, 0.95), n: ent.length }, pureSerialized: before === after, pureHash: h0 === h1, tickMs: { p50: q(ticks, 0.5), p95: q(ticks, 0.95), max: Math.max(...ticks), mean: contMs / 240 }, conservationOk: cons.ok, counts, longestPanel: longest };
-    writeFileSync('C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/mature-large.json', JSON.stringify(out, null, 1));
+    writeFileSync(reviewOut() + '/mature-large.json', JSON.stringify(out, null, 1));
     expect(alive.length).toBeGreaterThan(50);
   });
 });

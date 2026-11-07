@@ -35,17 +35,21 @@ export function paired(diffs: number[], resamples = 4000): PairedStat {
   return { n, meanDiff: m, lo: means[Math.floor(0.025 * resamples)], hi: means[Math.floor(0.975 * resamples)], higher, lower };
 }
 
-export type Verdict = 'identical' | 'too few seeds to say' | 'larger than chance' | 'systematic, within the noise floor' | 'not distinguishable from chance';
+export type Verdict = 'identical' | 'too few seeds to say' | 'no noise floor to judge against' | 'larger than chance' | 'systematic, within the noise floor' | 'not distinguishable from chance';
 
 /**
  * `noiseSd` is the spread of a one-draw nudge's differences from the control (what chance alone does to one seed). An effect is
  * "larger than chance" when the interval excludes 0 and the mean difference is at least that spread. A bootstrap over fewer than
- * `minSeeds` seeds is too optimistic to be trusted, so no verdict is given.
+ * `minSeeds` seeds is too optimistic to be trusted, so no verdict is given. Nor is one without a noise floor: with no nudge branches,
+ * or nudges that never parted from the control, the spread is 0 (or not a number) and every difference would have beaten it.
+ * By this rule an effect smaller than the noise floor is never "larger than chance", so "not distinguishable from chance" over a
+ * dozen seeds is weak evidence of no effect.
  */
 export function verdict(st: PairedStat, noiseSd: number, identical: boolean, minSeeds = 6): Verdict {
   if (identical) return 'identical';
   if (st.n < minSeeds) return 'too few seeds to say';
   const excludesZero = st.lo > 0 || st.hi < 0;
+  if (!(noiseSd > 0)) return excludesZero ? 'no noise floor to judge against' : 'not distinguishable from chance';
   if (!excludesZero) return 'not distinguishable from chance';
   return Math.abs(st.meanDiff) >= noiseSd ? 'larger than chance' : 'systematic, within the noise floor';
 }

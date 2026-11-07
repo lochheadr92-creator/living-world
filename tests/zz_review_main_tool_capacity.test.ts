@@ -10,6 +10,7 @@ import { carryCap, stageOf } from '../src/sim/people';
 import { TOOL_RECIPE, WEIGHT } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
 import type { Intention, Person, ToolKind, World } from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
 interface Life { id: number; who: string; stage: string; cap: number; tool: string; need: number; feasible: boolean; since: number; until: number; status: string; reason: string; wantsHeld: string }
 
@@ -67,7 +68,7 @@ describe('REVIEW: hand-tool plans whose inputs cannot fit the planner’s pack',
   for (const seed of ['forest', 'river', 'meadow']) {
     it(`ordinary Normal ${seed} at current rules, 12,000 ticks`, () => {
       const s = measure(seed, 12_000);
-      writeFileSync(`C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/tool_capacity-${seed}.json`, JSON.stringify(s, null, 1));
+      writeFileSync(`${reviewOut()}/tool_capacity-${seed}.json`, JSON.stringify(s, null, 1));
       expect(s.toolPlans).toBeGreaterThanOrEqual(0);
     });
   }

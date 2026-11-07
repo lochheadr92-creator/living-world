@@ -77,6 +77,9 @@ const nd = nudgeSpecs.flatMap((n) => seeds.map((s) => bySeed.get(s)!.get(n)?.div
 const parted = nd.filter((x): x is number => x !== null);
 console.log(`  nudge branches parted from the control in ${parted.length}/${nd.length} runs, median ${parted.length ? (parted.sort((a, b) => a - b)[parted.length >> 1] / 2400).toFixed(2) : '-'} days after the fork`);
 console.log('  ' + metrics.map((m) => `${m} ±${noise[m].toFixed(1)}`).join('   '));
+const flat = metrics.filter((m) => !(noise[m] > 0));
+if (flat.length) console.log(`  no noise floor for ${flat.join(', ')} (no nudge branch moved it): no effect on these is called larger than chance`);
+console.log(`  an effect smaller than its noise floor is never called larger than chance, so "not distinguishable from chance" over ${seeds.length} seeds is weak evidence of no effect`);
 
 for (const spec of specs) {
   const rows = seeds.map((s) => bySeed.get(s)!.get(spec)).filter((r): r is Row => !!r);

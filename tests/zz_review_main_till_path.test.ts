@@ -9,6 +9,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
 import { isWalkable } from '../src/sim/registry';
 import { T } from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
 describe('REVIEW: new-field tilling that cannot be reached', () => {
   for (const seed of ['forest', 'river']) {
@@ -39,7 +40,7 @@ describe('REVIEW: new-field tilling that cannot be reached', () => {
       const byWho: Record<string, number> = {};
       for (const r of rows) if (r.outcome === 'failed') byWho[`${r.who}@${r.px},${r.py}`] = (byWho[`${r.who}@${r.px},${r.py}`] ?? 0) + 1;
       const out = { seed, failures: rows.filter((r) => r.outcome === 'failed').length, successes: rows.filter((r) => r.outcome === 'success').length, failedWithUnwalkableSouth: rows.filter((r) => r.outcome === 'failed' && !r.southWalkable).length, repeatsSamePersonSameTile: Object.entries(byWho).filter(([, n]) => n > 1), rows: rows.slice(0, 60), T };
-      writeFileSync(`C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/till-${seed}.json`, JSON.stringify(out, null, 1));
+      writeFileSync(`${reviewOut()}/till-${seed}.json`, JSON.stringify(out, null, 1));
       expect(rows.length).toBeGreaterThan(0);
     });
   }

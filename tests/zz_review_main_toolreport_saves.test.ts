@@ -9,6 +9,7 @@ import { conservationReport } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
+import { reviewOut } from './helpers/review_out';
 
 const SAVES: Record<string, string> = {
   mature109_large_meadow_day45: 'C:/dev/Claude Experiment/living-world-completion/autonomy_evidence/mature109-large-meadow-45/final-save.json',
@@ -30,7 +31,7 @@ describe('REVIEW: tool registry consistency in retained and fresh worlds', () =>
         out[name] = { rules: w.settings.rulesVersion, tick: w.tick, alive: w.persons.filter((p) => p.alive).length, tools: w.tools.length, toolReportOk: tr.ok, problems: tr.problems.slice(0, 8), conservationOk: cr.ok, diffs: cr.diffs };
       } catch (e) { out[name] = 'load error: ' + (e as Error).message; }
     }
-    writeFileSync('C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/toolreport-saves.json', JSON.stringify(out, null, 1));
+    writeFileSync(reviewOut() + '/toolreport-saves.json', JSON.stringify(out, null, 1));
     expect(Object.keys(out).length).toBeGreaterThan(0);
   });
   it('fresh current-rules worlds, 12,000 ticks, checked every 600 ticks', () => {
@@ -41,7 +42,7 @@ describe('REVIEW: tool registry consistency in retained and fresh worlds', () =>
       for (let t = 1; t <= 12_000; t++) { stepWorld(w); if (t % 600 === 0) { const tr = toolReport(w); const cr = conservationReport(w); if ((!tr.ok || !cr.ok) && !first) first = { tick: t, problems: tr.problems.slice(0, 6), diffs: cr.diffs }; } }
       out[seed] = { tools: w.tools.length, firstProblem: first };
     }
-    writeFileSync('C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/toolreport-fresh.json', JSON.stringify(out, null, 1));
+    writeFileSync(reviewOut() + '/toolreport-fresh.json', JSON.stringify(out, null, 1));
     expect(Object.keys(out).length).toBe(3);
   });
 });

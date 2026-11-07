@@ -1,15 +1,26 @@
 // Record or check the golden fingerprints of the ordinary world.
 //   npx vite-node scripts/golden.ts            compare the current code with tests/golden.expected.json
 //   npx vite-node scripts/golden.ts --write    record the current code as the new golden state
-import { readFileSync, writeFileSync } from 'node:fs';
+//
+// The fingerprints are re-recorded in the commit that changes the rules (CLAUDE.md), so --write records the rules version and refuses
+// while the file already holds that version's fingerprints (or does not say which version it holds): a change that alters them under
+// the same rules version is a failure to explain, not a file to refresh. --write --force records anyway, on purpose.
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 import { GOLDEN_CASES, GOLDEN_SEEDS, computeCase, computeGeneration } from '../tests/helpers/golden';
 import type { GoldenFile } from '../tests/helpers/golden';
 
 const FILE = new URL('../tests/golden.expected.json', import.meta.url);
 const write = process.argv.includes('--write');
+if (write && existsSync(FILE) && !process.argv.includes('--force')) {
+  const held = (JSON.parse(readFileSync(FILE, 'utf8')) as GoldenFile).rules;
+  if (held === undefined || held === Number(CURRENT_RULES_VERSION))
+    throw new Error(`tests/golden.expected.json already holds ${held === undefined ? 'fingerprints of an unrecorded rules version' : `the rules-${held} fingerprints`}; re-record only with a new rules version, or pass --force on purpose`);
+}
 
 const out: GoldenFile = {
   note: 'Fingerprints of the ordinary world. Regenerate only when behaviour is meant to change: npx vite-node scripts/golden.ts --write',
+  rules: Number(CURRENT_RULES_VERSION),
   cases: {},
   generation: {},
 };

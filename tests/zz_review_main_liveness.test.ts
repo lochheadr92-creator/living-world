@@ -8,6 +8,7 @@ import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
 function probe(seed: string, ticks: number) {
   const w: World = createWorld(currentWorldSettings('normal', seed, { immigration: false }));
@@ -57,7 +58,7 @@ describe('REVIEW: liveness of conversations, suspensions and activity endings', 
   for (const seed of ['forest', 'river']) {
     it(`ordinary Normal ${seed}, 12,000 ticks`, () => {
       const s = probe(seed, 12_000);
-      writeFileSync(`C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/liveness-${seed}.json`, JSON.stringify(s, null, 1));
+      writeFileSync(`${reviewOut()}/liveness-${seed}.json`, JSON.stringify(s, null, 1));
       expect(s.alive).toBeGreaterThan(0);
     });
   }

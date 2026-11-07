@@ -14,8 +14,9 @@ import {serializeWorld} from '../src/app/save';
 import {hasKnownResource} from '../src/sim/intent';
 import {mayUse,accessLevel} from '../src/sim/facilities';
 import type {Intention} from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
-const OUT='C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_f';
+const OUT=reviewOut('agent_f');
 const seed=process.env.REVIEW_SEED??'forest';
 const ticks=Number(process.env.REVIEW_TICKS??12000);
 const sampleEvery=Number(process.env.REVIEW_SAMPLE??600);

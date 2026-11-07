@@ -9,6 +9,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { describePerson } from '../src/sim/inspect';
+import { reviewOut } from './helpers/review_out';
 
 const q = (a: number[], f: number) => { const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(f * s.length))]; };
 
@@ -27,7 +28,7 @@ describe('REVIEW: current-rules Large cost sample', () => {
       tickMs: { p50: q(ticks, 0.5), p95: q(ticks, 0.95), max: Math.max(...ticks), mean: total / 2400, totalSec: total / 1000 },
       inspectMs: { p50: q(insp, 0.5), p95: q(insp, 0.95), max: Math.max(...insp), n: insp.length },
       serializedBytes: json.length, saveMs, loadMs, reloadSame: serializeWorld(w2) === json };
-    writeFileSync('C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/large-cost.json', JSON.stringify(out, null, 1));
+    writeFileSync(reviewOut() + '/large-cost.json', JSON.stringify(out, null, 1));
     expect(out.alive).toBeGreaterThan(50);
   });
 });

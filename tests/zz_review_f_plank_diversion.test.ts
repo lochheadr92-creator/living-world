@@ -11,8 +11,9 @@ import {stepWorld} from '../src/sim/world';
 import {conservationReport} from '../src/sim/economy';
 import {BATCH_PATIENCE} from '../src/sim/batch_plan';
 import type {Intention} from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
-const OUT='C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_f';
+const OUT=reviewOut('agent_f');
 const results:unknown[]=[];
 const VARIANTS=['no plank site (baseline)','communal granary site wants 8 planks','own-household granary site wants 8 planks','HEW PATH (no saw, yard 8 wood): no plank site','HEW PATH (no saw, yard 8 wood): communal granary site wants 8 planks','HEW PATH (no saw, yard 8 wood): another villager wants planks for the site'] as const;
 for(const variant of VARIANTS)it(`plank diversion: ${variant}`,()=>{

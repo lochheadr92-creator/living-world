@@ -109,6 +109,8 @@ export function computeGeneration(seed: string): GoldenPoint {
 
 export interface GoldenFile {
   note: string;
+  /** the rules version the fingerprints were recorded under (absent in files recorded before scripts/golden.ts kept it) */
+  rules?: number;
   cases: Record<string, Record<string, GoldenPoint>>;
   generation: Record<string, GoldenPoint>;
 }

@@ -15,8 +15,9 @@ import {BATCH_PATIENCE} from '../src/sim/batch_plan';
 import {conservationReport} from '../src/sim/economy';
 import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
 import type {ToolKind} from '../src/sim/types';
+import { reviewOut } from './helpers/review_out';
 
-const OUT='C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment/3c06e039-d739-4179-9940-8bfc089f1edb/scratchpad/review/agent_f';
+const OUT=reviewOut('agent_f');
 type Kit={name:string;tools:ToolKind[];yard:Record<string,number>;inv?:Record<string,number>};
 const KITS:Kit[]=[
  {name:'staged helper kit: hammer+saw, yard 8 wood 2 handles',tools:['hammer','saw'],yard:{wood:8,handles:2}},

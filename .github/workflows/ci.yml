@@ -1,0 +1,41 @@
+# Adversarial review 2026-11-07, item 4: there was no CI. Every push and pull request is typechecked and built (a few minutes).
+# The full suite is long (thousands of tests, many simulated days), so it runs when started by hand: Actions > ci > Run workflow.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Run the full test suite too
+        type: boolean
+        default: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npx vite build
+
+  suite:
+    if: github.event_name == 'workflow_dispatch' && inputs.suite
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx vitest run

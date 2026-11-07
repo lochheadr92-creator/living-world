@@ -4,12 +4,14 @@
 //
 // Recording is NOT a way to make a failure go away. The reference is taken from the revision at which version 1 was the whole
 // of the behaviour; after that, a difference means behaviour written for a later version reached a version-1 world.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { V1_CASES, computeV1Case } from '../tests/helpers/v1ref';
 import type { V1File } from '../tests/helpers/v1ref';
 
 const FILE = new URL('../tests/v1_continuation.expected.json', import.meta.url);
 const write = process.argv.includes('--write');
+// recorded once, before version 2 existed; like every later pin it is never written over
+if (write && existsSync(FILE)) throw new Error('tests/v1_continuation.expected.json is recorded; it is never overwritten');
 
 const out: V1File = {
   note: 'A version-1 world, saved, loaded and continued. Recorded before rules version 2 existed; a difference means later behaviour reached a version-1 world.',
