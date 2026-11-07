@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "87a97b0b573876eea193e50a9f4ab588b4015ed7",
+    "rules": 163,
+    "content": "5d0586cb783cda709bbb8f167f3f14f455a04c5a71a40a7263046c7e5f68c1cb",
+    "note": "Recorded before successor behavior; ordinary econ-cc3 world, 27120 ticks, then 120 more after a save and load; three households dissolve with estate parcels (two deaths, one child taken in)"
+  },
+  "saved": "225dd2577b3390bf9a2180ff10808df1703c17d4fa526d7a6a126761b34f3389",
+  "continued": "deb429a32f9a908b1d092f4bccde71ec1b86e9b8cd8fe8fcab9a120a023ff894"
+}
