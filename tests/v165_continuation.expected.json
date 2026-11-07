@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "70367c85d951adb53863d88bd6311b7e0a9a4f90",
+    "rules": 165,
+    "content": "0c61ced12df25e1f0f73b8854f68d1a2e83392b69313abe0a7488ec2f6a2e903",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-6 world (arrivals on), 49500 ticks including the first fever sign seen (tick 49020), then 120 more after a save and load"
+  },
+  "saved": "e9259f177f889d5941701214035a7656339b204c54cf7c5a90dd96c524742ade",
+  "continued": "9368dfd8f37153e258b980ef0360f9e1750695456663bebac7cee013d0c31875"
+}
