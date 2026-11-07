@@ -1,0 +1,511 @@
+{
+ "seed": "forest",
+ "days": 14,
+ "rules": 162,
+ "conserved": true,
+ "tools": true,
+ "alive": 27,
+ "deaths": 1,
+ "households": 12,
+ "parcelsEverSeen": 1,
+ "parcelsGone": 0,
+ "parcelsAtEnd": 1,
+ "orphanedAtEnd": 1,
+ "orphanedItemsAtEnd": {
+  "seeds": 3
+ },
+ "orphanedToolsAtEnd": {},
+ "sharedAtEnd": 0,
+ "sharedItemsAtEnd": {},
+ "releaseEvents": 0,
+ "releaseTexts": [],
+ "allToolsInWorld": {
+  "axe": 4,
+  "pick": 4,
+  "hoe": 3,
+  "basket": 9,
+  "hammer": 1,
+  "spear": 2,
+  "rod": 3
+ },
+ "toolsInOrphanedParcels": 0,
+ "toolsInSharedParcels": 0,
+ "toolsHeldByPeople": 26,
+ "survivors": [
+  {
+   "name": "Petra",
+   "age": 67,
+   "hunger": 81,
+   "thirst": 84,
+   "hh": 896,
+   "activity": "build",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Bram",
+   "age": 76,
+   "hunger": 95,
+   "thirst": 46,
+   "hh": 900,
+   "activity": "drink",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Mira",
+   "age": 25,
+   "hunger": 64,
+   "thirst": 70,
+   "hh": 903,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Lena",
+   "age": 33,
+   "hunger": 69,
+   "thirst": 92,
+   "hh": 906,
+   "activity": "repair",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Ada",
+   "age": 49,
+   "hunger": 81,
+   "thirst": 89,
+   "hh": 909,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Edda",
+   "age": 36,
+   "hunger": 44,
+   "thirst": 60,
+   "hh": 912,
+   "activity": "socialize",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Tomas",
+   "age": 36,
+   "hunger": 27,
+   "thirst": 70,
+   "hh": 912,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Viktor",
+   "age": 3,
+   "hunger": 42,
+   "thirst": 78,
+   "hh": 912,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Hana",
+   "age": 11,
+   "hunger": 63,
+   "thirst": 74,
+   "hh": 912,
+   "activity": "drink",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Yusuf",
+   "age": 30,
+   "hunger": 33,
+   "thirst": 96,
+   "hh": 918,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Faye",
+   "age": 32,
+   "hunger": 47,
+   "thirst": 83,
+   "hh": 921,
+   "activity": "socialize",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Hal",
+   "age": 33,
+   "hunger": 57,
+   "thirst": 60,
+   "hh": 921,
+   "activity": "withdraw",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Kaia",
+   "age": 3,
+   "hunger": 50,
+   "thirst": 45,
+   "hh": 921,
+   "activity": "drink",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Tessa",
+   "age": 4,
+   "hunger": 86,
+   "thirst": 79,
+   "hh": 921,
+   "activity": "drink",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Jax",
+   "age": 48,
+   "hunger": 60,
+   "thirst": 99,
+   "hh": 927,
+   "activity": "eat",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Isla",
+   "age": 50,
+   "hunger": 84,
+   "thirst": 96,
+   "hh": 927,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Silas",
+   "age": 10,
+   "hunger": 70,
+   "thirst": 89,
+   "hh": 909,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Thea",
+   "age": 43,
+   "hunger": 43,
+   "thirst": 70,
+   "hh": 933,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Zeke",
+   "age": 43,
+   "hunger": 29,
+   "thirst": 89,
+   "hh": 933,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Cole",
+   "age": 5,
+   "hunger": 66,
+   "thirst": 54,
+   "hh": 933,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Talia",
+   "age": 8,
+   "hunger": 56,
+   "thirst": 55,
+   "hh": 933,
+   "activity": "converse",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Maren",
+   "age": 26,
+   "hunger": 58,
+   "thirst": 92,
+   "hh": 938,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Dov",
+   "age": 32,
+   "hunger": 94,
+   "thirst": 67,
+   "hh": 938,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Delia",
+   "age": 40,
+   "hunger": 39,
+   "thirst": 87,
+   "hh": 941,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Theo",
+   "age": 37,
+   "hunger": 72,
+   "thirst": 96,
+   "hh": 941,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Nico",
+   "age": 9,
+   "hunger": 91,
+   "thirst": 56,
+   "hh": 941,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  },
+  {
+   "name": "Arlo",
+   "age": 7,
+   "hunger": 71,
+   "thirst": 55,
+   "hh": 941,
+   "activity": "gather",
+   "knowsReleased": 0,
+   "knowsStale": 0
+  }
+ ],
+ "daily": [
+  {
+   "day": 1,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 3,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 4,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 5,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 6,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 7,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 8,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 9,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 10,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 11,
+   "alive": 28,
+   "deaths": 0,
+   "households": 13,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 12,
+   "alive": 27,
+   "deaths": 1,
+   "households": 12,
+   "estateParcels": 1,
+   "orphaned": 1,
+   "orphanedItems": {
+    "seeds": 3
+   },
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 13,
+   "alive": 27,
+   "deaths": 1,
+   "households": 12,
+   "estateParcels": 1,
+   "orphaned": 1,
+   "orphanedItems": {
+    "seeds": 3
+   },
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 14,
+   "alive": 27,
+   "deaths": 1,
+   "households": 12,
+   "estateParcels": 1,
+   "orphaned": 1,
+   "orphanedItems": {
+    "seeds": 3
+   },
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  }
+ ],
+ "parcels": [
+  {
+   "id": 11090,
+   "created": 28410,
+   "owner": 930,
+   "personId": 931,
+   "last": {
+    "seeds": 3
+   },
+   "lastTick": 33600,
+   "personName": "Greta",
+   "ownerAlive": false,
+   "finalOwner": 930
+  }
+ ]
+}

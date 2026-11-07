@@ -1,0 +1,146 @@
+﻿ RUN  v5.0.3 C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment-living-world-integrate/17904f90-8d60-4fe6-a0aa-5318949c653c/scratchpad/before163
+
+ ❯ tests/estate_release.test.ts (6 tests | 6 failed) 136ms
+   ❯ rules 163 is registered (1)
+     × is the current version and a supported one 4ms
+   ❯ the last member of a household dies (3)
+     × rules 163 makes the parcel shared property, tools included, and a neighbour can collect it; rules 162 leaves it locked to a household nobody belongs to 58ms
+     × a neighbour who sees the released parcel is offered it; at rules 162 nobody is 6ms
+     × the inspector and the feed say what became of the belongings 4ms
+   ❯ the last member of a household is taken into another (1)
+     × rules 163 passes the parcel to the household that took the child in; rules 162 locks the child and the carers out of it 56ms
+   ❯ the lab removal (1)
+     × restores the rules-162 behaviour inside a rules-163 world and nothing else 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/estate_release.test.ts > rules 163 is registered > is the current version and a supported one
+AssertionError: expected 162 to be 163 // Object.is equality
+
+- Expected
++ Received
+
+- 163
++ 162
+
+ ❯ tests/estate_release.test.ts:38:85
+     36|
+     37| describe('rules 163 is registered',()=>{
+     38|  it('is the current version and a supported one',()=>{expect(CURRENT_R…
+       |                                                                                     ^
+     39| });
+     40|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/estate_release.test.ts > the last member of a household dies > rules 163 makes the parcel shared 
+property, tools included, and a neighbour can collect it; rules 162 leaves it locked to a household nobody belongs to
+AssertionError: owner at rules 163: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/estate_release.test.ts:47:58
+     45|    expect(householdById(f.w,hhA),'the household is gone').toBeUndefine…
+     46|    const pile=parcelOf(f.w);expect(pile.items).toMatchObject({wood:3,b…
+     47|    expect(pile.estate!.hhId,`owner at rules ${version}`).toBe(version>…
+       |                                                          ^
+     48|    expect(f.axe.holder).toBe(pile.id);expect(f.axe.ownerHh,`axe owner …
+     49|    collect(f.w,f.oren,pile,{wood:2});advance(f.w);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/estate_release.test.ts > the last member of a household dies > a neighbour who sees the released parcel 
+is offered it; at rules 162 nobody is
+AssertionError: offered at rules 163: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/estate_release.test.ts:59:50
+     57|    const f=scene(version);killPerson(f.w,f.ada,'declared staged loss')…
+     58|    const offered=generateOptions(f.w,f.oren,true,true).options.some(o=…
+     59|    expect(offered,`offered at rules ${version}`).toBe(version>=163);
+       |                                                  ^
+     60|   }
+     61|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/estate_release.test.ts > the last member of a household dies > the inspector and the feed say what became 
+of the belongings
+AssertionError: expected [ …(2) ] to deep equally contain [ 'Belongs to', 'Shared property' ]
+
+- Expected
++ Received
+
+  [
++   [
++     "Lying here since",
++     "just now",
++   ],
++   [
+      "Belongs to",
+-   "Shared property",
++     "household #1",
++   ],
+  ]
+
+ ❯ tests/estate_release.test.ts:64:45
+     62|  it('the inspector and the feed say what became of the belongings',()=…
+     63|   const f=scene(163);killPerson(f.w,f.ada,'declared staged loss');cons…
+     64|   expect(describeEntity(f.w,pile.id)!.rows).toContainEqual(['Belongs t…
+       |                                             ^
+     65|   expect(f.w.events.some(e=>e.kind==='life'&&e.text.includes("anyone's…
+     66|   const g=scene(162);killPerson(g.w,g.ada,'declared staged loss');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/estate_release.test.ts > the last member of a household is taken into another > rules 163 passes the 
+parcel to the household that took the child in; rules 162 locks the child and the carers out of it
+AssertionError: owner at rules 163: expected 1 to be 5 // Object.is equality
+
+- Expected
++ Received
+
+- 5
++ 1
+
+ ❯ tests/estate_release.test.ts:78:58
+     76|    adoptOrphans(f.w);
+     77|    expect(f.tam!.hhId,'Oren took Tam in').toBe(f.oren.hhId);expect(hou…
+     78|    expect(pile.estate!.hhId,`owner at rules ${version}`).toBe(version>…
+       |                                                          ^
+     79|    expect(f.axe.ownerHh,`axe owner at rules ${version}`).toBe(version>…
+     80|    collect(f.w,f.oren,pile,{wood:2});advance(f.w);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/estate_release.test.ts > the lab removal > restores the rules-162 behaviour inside a rules-163 world and 
+nothing else
+Error: Cannot find module '/src/sim/estate_release' imported from C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claud
+e-Experiment-living-world-integrate/17904f90-8d60-4fe6-a0aa-5318949c653c/scratchpad/before163/tests/estate_release.test
+.ts
+ ❯ tests/estate_release.test.ts:95:44
+     93| describe('the lab removal',()=>{
+     94|  it('restores the rules-162 behaviour inside a rules-163 world and not…
+     95|   const {setEstateRelease,estateReleaseOn}=await import('../src/sim/es…
+       |                                            ^
+     96|   expect(estateReleaseOn()).toBe(true);setEstateRelease(false);
+     97|   try{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed (6)
+   Start at  13:36:18
+   Duration  1.84s (transform 82%, import 10%, tests 8%)
+
+

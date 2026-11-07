@@ -1,0 +1,615 @@
+{
+ "seed": "econ-cc3",
+ "days": 14,
+ "rules": 163,
+ "conserved": true,
+ "tools": true,
+ "alive": 6,
+ "deaths": 22,
+ "households": 3,
+ "parcelsEverSeen": 20,
+ "parcelsGone": 0,
+ "parcelsAtEnd": 20,
+ "orphanedAtEnd": 0,
+ "orphanedItemsAtEnd": {},
+ "orphanedToolsAtEnd": {},
+ "sharedAtEnd": 9,
+ "sharedItemsAtEnd": {
+  "hoe": 1,
+  "wood": 28,
+  "axe": 1,
+  "seeds": 10,
+  "basket": 5,
+  "stone": 6,
+  "rod": 3
+ },
+ "releaseEvents": 8,
+ "releaseTexts": [
+  "t26275: No one of the Juniper household is left; what they left behind is anyone's to take.",
+  "t26969: No one of the Fern household is left; what they left behind is anyone's to take.",
+  "t27043: What the Hazel household left behind passed to the Reed household with Dax.",
+  "t28182: No one of the Moss household is left; what they left behind is anyone's to take.",
+  "t28274: No one of the Rowan household is left; what they left behind is anyone's to take.",
+  "t28543: What the Clover household left behind passed to the Reed household with Yan.",
+  "t29397: No one of the Finch household is left; what they left behind is anyone's to take.",
+  "t30043: What the Reed household left behind passed to the Briar household with Yan."
+ ],
+ "allToolsInWorld": {
+  "axe": 2,
+  "pick": 2,
+  "hoe": 1,
+  "basket": 5,
+  "spear": 1,
+  "rod": 6
+ },
+ "toolsInOrphanedParcels": 0,
+ "toolsInSharedParcels": 10,
+ "toolsHeldByPeople": 1,
+ "survivors": [
+  {
+   "name": "Ivy",
+   "age": 27,
+   "hunger": 97,
+   "thirst": 83,
+   "hh": 1012,
+   "activity": "gather",
+   "knowsReleased": 4,
+   "knowsStale": 0
+  },
+  {
+   "name": "Abel",
+   "age": 10,
+   "hunger": 87,
+   "thirst": 65,
+   "hh": 1012,
+   "activity": "gather",
+   "knowsReleased": 4,
+   "knowsStale": 2
+  },
+  {
+   "name": "Zia",
+   "age": 43,
+   "hunger": 68,
+   "thirst": 63,
+   "hh": 1016,
+   "activity": "repair",
+   "knowsReleased": 6,
+   "knowsStale": 1
+  },
+  {
+   "name": "Kai",
+   "age": 23,
+   "hunger": 56,
+   "thirst": 43,
+   "hh": 1016,
+   "activity": "drink",
+   "knowsReleased": 4,
+   "knowsStale": 2
+  },
+  {
+   "name": "Zeke",
+   "age": 11,
+   "hunger": 88,
+   "thirst": 83,
+   "hh": 1016,
+   "activity": "gather",
+   "knowsReleased": 8,
+   "knowsStale": 1
+  },
+  {
+   "name": "Arlo",
+   "age": 29,
+   "hunger": 37,
+   "thirst": 55,
+   "hh": 1024,
+   "activity": "sleep",
+   "knowsReleased": 12,
+   "knowsStale": 1
+  }
+ ],
+ "daily": [
+  {
+   "day": 1,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 3,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 4,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 5,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 6,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 7,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 8,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 9,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 10,
+   "alive": 28,
+   "deaths": 0,
+   "households": 12,
+   "estateParcels": 0,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 0,
+   "sharedItems": {},
+   "ownedByLiving": 0
+  },
+  {
+   "day": 11,
+   "alive": 26,
+   "deaths": 2,
+   "households": 10,
+   "estateParcels": 1,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 1,
+   "sharedItems": {
+    "hoe": 1,
+    "wood": 2,
+    "cutting": 1
+   },
+   "ownedByLiving": 0
+  },
+  {
+   "day": 12,
+   "alive": 9,
+   "deaths": 19,
+   "households": 5,
+   "estateParcels": 17,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 7,
+   "sharedItems": {
+    "hoe": 1,
+    "wood": 20,
+    "axe": 1,
+    "seeds": 7,
+    "stone": 2,
+    "rod": 2,
+    "basket": 3
+   },
+   "ownedByLiving": 10
+  },
+  {
+   "day": 13,
+   "alive": 6,
+   "deaths": 22,
+   "households": 3,
+   "estateParcels": 20,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 9,
+   "sharedItems": {
+    "hoe": 1,
+    "wood": 28,
+    "axe": 1,
+    "seeds": 10,
+    "basket": 5,
+    "stone": 6,
+    "rod": 3
+   },
+   "ownedByLiving": 11
+  },
+  {
+   "day": 14,
+   "alive": 6,
+   "deaths": 22,
+   "households": 3,
+   "estateParcels": 20,
+   "orphaned": 0,
+   "orphanedItems": {},
+   "orphanedTools": {},
+   "shared": 9,
+   "sharedItems": {
+    "hoe": 1,
+    "wood": 28,
+    "axe": 1,
+    "seeds": 10,
+    "basket": 5,
+    "stone": 6,
+    "rod": 3
+   },
+   "ownedByLiving": 11
+  }
+ ],
+ "parcels": [
+  {
+   "id": 10135,
+   "created": 26276,
+   "owner": 0,
+   "personId": 994,
+   "last": {
+    "hoe": 1,
+    "wood": 2
+   },
+   "lastTick": 33600,
+   "personName": "Lia",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10167,
+   "created": 26440,
+   "owner": 995,
+   "personId": 999,
+   "last": {
+    "rod": 1,
+    "spear": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "lastTick": 33600,
+   "personName": "Wen",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10196,
+   "created": 26555,
+   "owner": 1028,
+   "personId": 1029,
+   "last": {
+    "seeds": 1,
+    "wood": 3
+   },
+   "lastTick": 33600,
+   "personName": "Esme",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10213,
+   "created": 26607,
+   "owner": 987,
+   "personId": 990,
+   "last": {
+    "axe": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "lastTick": 33600,
+   "personName": "Emre",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10234,
+   "created": 26686,
+   "owner": 1021,
+   "personId": 1022,
+   "last": {
+    "basket": 1,
+    "stone": 3,
+    "seeds": 1,
+    "wood": 2
+   },
+   "lastTick": 33600,
+   "personName": "Ivo",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10265,
+   "created": 26795,
+   "owner": 1000,
+   "personId": 1002,
+   "last": {
+    "wood": 2,
+    "seeds": 3
+   },
+   "lastTick": 33600,
+   "personName": "Milo",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10303,
+   "created": 26970,
+   "owner": 0,
+   "personId": 991,
+   "last": {
+    "wood": 3,
+    "seeds": 1,
+    "stone": 1
+   },
+   "lastTick": 33600,
+   "personName": "Petra",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10311,
+   "created": 26990,
+   "owner": 1007,
+   "personId": 1011,
+   "last": {
+    "wood": 4
+   },
+   "lastTick": 33600,
+   "personName": "Viktor",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10495,
+   "created": 27530,
+   "owner": 995,
+   "personId": 997,
+   "last": {
+    "axe": 1,
+    "pick": 1,
+    "wood": 3,
+    "cutting": 1,
+    "seeds": 2
+   },
+   "lastTick": 33600,
+   "personName": "Corin",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10505,
+   "created": 27548,
+   "owner": 1024,
+   "personId": 1025,
+   "last": {
+    "pick": 1,
+    "wood": 3
+   },
+   "lastTick": 33600,
+   "personName": "Mona",
+   "ownerAlive": true,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10531,
+   "created": 27628,
+   "owner": 995,
+   "personId": 1003,
+   "last": {
+    "seeds": 2
+   },
+   "lastTick": 33600,
+   "personName": "Dax",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10617,
+   "created": 28143,
+   "owner": 1024,
+   "personId": 1027,
+   "last": {
+    "wood": 2
+   },
+   "lastTick": 33600,
+   "personName": "Oren",
+   "ownerAlive": true,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10623,
+   "created": 28169,
+   "owner": 1007,
+   "personId": 1010,
+   "last": {
+    "rod": 1,
+    "basket": 1,
+    "wood": 1
+   },
+   "lastTick": 33600,
+   "personName": "Sofia",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10630,
+   "created": 28183,
+   "owner": 0,
+   "personId": 1009,
+   "last": {
+    "basket": 1,
+    "rod": 1,
+    "seeds": 4,
+    "wood": 5,
+    "stone": 1
+   },
+   "lastTick": 33600,
+   "personName": "Gus",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10644,
+   "created": 28237,
+   "owner": 1016,
+   "personId": 1019,
+   "last": {
+    "seeds": 1
+   },
+   "lastTick": 33600,
+   "personName": "Edda",
+   "ownerAlive": true,
+   "finalOwner": 1016
+  },
+  {
+   "id": 10653,
+   "created": 28275,
+   "owner": 0,
+   "personId": 1034,
+   "last": {
+    "basket": 1,
+    "wood": 4
+   },
+   "lastTick": 33600,
+   "personName": "Hana",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10663,
+   "created": 28409,
+   "owner": 1028,
+   "personId": 1030,
+   "last": {
+    "seeds": 2
+   },
+   "lastTick": 33600,
+   "personName": "Rafe",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10809,
+   "created": 29398,
+   "owner": 0,
+   "personId": 1023,
+   "last": {
+    "rod": 1,
+    "seeds": 2,
+    "basket": 1,
+    "stone": 1,
+    "wood": 6
+   },
+   "lastTick": 33600,
+   "personName": "Mira",
+   "ownerAlive": false,
+   "finalOwner": 0
+  },
+  {
+   "id": 10879,
+   "created": 29924,
+   "owner": 995,
+   "personId": 998,
+   "last": {
+    "rod": 1,
+    "seeds": 2,
+    "stone": 1
+   },
+   "lastTick": 33600,
+   "personName": "Wren",
+   "ownerAlive": false,
+   "finalOwner": 1024
+  },
+  {
+   "id": 10925,
+   "created": 30651,
+   "owner": 1024,
+   "personId": 1032,
+   "last": {
+    "seeds": 2
+   },
+   "lastTick": 33600,
+   "personName": "Yan",
+   "ownerAlive": true,
+   "finalOwner": 1024
+  }
+ ]
+}

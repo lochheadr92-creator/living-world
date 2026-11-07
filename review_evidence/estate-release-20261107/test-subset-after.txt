@@ -1,0 +1,145 @@
+﻿node.exe : (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to 
+become the default in a future major version of Vite:
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((!) Your Vite c...ersion of Vite::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file 
+extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+(node:37252) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/lab_defaults.test.ts (3 tests | 3 failed) 30229ms
+   ❯ current lab defaults cannot silently reuse legacy results (2)
+     × rejects existing undefined rows before starting workers or touching outputs 10131ms
+     × rejects existing authored rows before starting workers or touching outputs 10064ms
+   × refuses to resume ordinary lab rows as a geology generation comparison 10032ms
+ ❯ tests/lab_report.test.ts (2 tests | 1 failed) 35647ms
+   × pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics 20596ms
+ ❯ tests/lab_provenance.test.ts (2 tests | 1 failed) 60708ms
+   × retains runner and measurement source, reports it, resumes only the same content, and refuses changed content 60022ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing 
+undefined rows before starting workers or touching outputs
+ FAIL  tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing 
+authored rows before starting workers or touching outputs
+AssertionError: expected null to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+null
+
+ ❯ tests/lab_defaults.test.ts:16:29
+     14|       writeFileSync(file, original);
+     15|       const result = spawnSync(process.execPath, ['scripts/lab.mjs', '…
+     16|       expect(result.status).toBe(1);
+       |                             ^
+     17|       expect(result.stderr).toContain('requested rich');
+     18|       expect(result.stderr).toContain('Use a new output directory');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/lab_defaults.test.ts > refuses to resume ordinary lab rows as a geology generation comparison
+AssertionError: expected null to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+null
+
+ ❯ tests/lab_defaults.test.ts:31:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/lab_provenance.test.ts > retains runner and measurement source, reports it, resumes only the same 
+content, and refuses changed content
+AssertionError: expected null to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+null
+
+ ❯ tests/lab_provenance.test.ts:13:38
+     11|   const run = () => spawnSync(process.execPath, args, { encoding: 'utf…
+     12|   const first = run();
+     13|   expect(first.status, first.stderr).toBe(0);
+       |                                      ^
+     14|   const provenance = JSON.parse(readFileSync(join(out, 'provenance.jso…
+     15|   expect(provenance.head).toMatch(/^[a-f0-9]{40}$/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/lab_report.test.ts > pairs only matching seeds, preserves contrast direction, and skips unrecorded 
+historical metrics
+Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+ ❯ report tests/lab_report.test.ts:27:10
+     25|
+     26| function report(dir: string, ...args: string[]) {
+     27|   return execFileSync(process.execPath, [resolve('node_modules/vite-no…
+       |          ^
+     28|     'scripts/lab_report.ts', '--', dir, ...args], { encoding: 'utf8', …
+     29| }
+ ❯ tests/lab_report.test.ts:32:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  3 failed | 47 passed (50)
+      Tests  5 failed | 385 passed (390)
+   Start at  13:37:07
+   Duration  174.97s (tests 80%, import 17%, transform 3%)
+
+
+node.exe : (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to 
+become the default in a future major version of Vite:
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((!) Your Vite c...ersion of Vite::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file 
+extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  13:42:26
+   Duration  52.64s (tests 100%)
+
+
