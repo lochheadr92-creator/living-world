@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+
+ Test Files  18 passed (18)
+      Tests  111 passed (111)
+   Start at  19:26:08
+   Duration  117.52s (tests 91%, transform 7%, import 2%)
+

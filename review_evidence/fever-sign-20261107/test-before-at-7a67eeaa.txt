@@ -1,0 +1,81 @@
+﻿head exported: 7a67eeaa
+node.exe : (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to 
+become the default in a future major version of Vite:
+At C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment-living-world-integrate\17904f90-8d60-4fe6-a0aa-531
+8949c653c\scratchpad\failbefore.ps1:18 char:4
++ $o=& node node_modules\vitest\vitest.mjs run $Test 2>&1 | Out-String
++    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((!) Your Vite c...ersion of Vite::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file 
+extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment-living-world-integrate/17904f90-8d60-4fe6-a0aa-5318949c653c/scratchpad/before165
+
+ ❯ tests/fever_sign.test.ts (3 tests | 2 failed) 62ms
+   ❯ a fever that nobody has seen (3)
+     × rules 164 avoids Ben the moment his live record says feverish; rules 165 keeps the options as they were until Ada looks again 43ms
+     × the sign appears at 165 only, at the old threshold, and is absent from a record that has none 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/fever_sign.test.ts > a fever that nobody has seen > rules 164 avoids Ben the moment his live record says 
+feverish; rules 165 keeps the options as they were until Ada looks again
+Error: cannot load this world: this world was made by a newer build (rules version 165); this build runs 1, 2, 3, 4, 
+6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 
+36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 
+65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 
+119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 
+142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164. It 
+is not loaded, rather than being run under older rules.
+ ❯ deserializeWorld src/app/save.ts:330:26
+    328|   // refused load leaves the running world exactly as it was. An absen…
+    329|   const verdict = validateRulesVersion((parsed.world as World).setting…
+    330|   if (!verdict.ok) throw new Error(`cannot load this world: ${verdict.…
+       |                          ^
+    331|   validateSaveLineage(parsed.world.settings?.rulesVersion, parsed.rule…
+    332|   const w = parsed.world as World;
+ ❯ sound tests/fever_sign.test.ts:29:119
+ ❯ tests/fever_sign.test.ts:42:4
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/fever_sign.test.ts > a fever that nobody has seen > the sign appears at 165 only, at the old threshold, 
+and is absent from a record that has none
+AssertionError: 0.5 is: expected undefined to be true // Object.is equality
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ tests/fever_sign.test.ts:54:66
+     52|   expect(asked(f.w,f.ada,f.ben)).toBe(true);
+     53|   fever(f.w,f.ben,0.5);look(f.w,f.ada);
+     54|   expect(f.ada.seen.find(x=>x.id===f.ben.id)!.feverish,'0.5 is').toBe(…
+       |                                                                  ^
+     55|   expect(asked(f.w,f.ada,f.ben)).toBe(false);
+     56|   f.ben.illness=undefined;look(f.w,f.ada);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  19:05:15
+   Duration  1.71s (transform 86%, import 10%, tests 4%)
+
+

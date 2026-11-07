@@ -1,0 +1,1 @@
+﻿{"seed":"gen-6","before":164,"after":165,"firstDifferentAtTick":49020,"day":20.43,"illBefore":["Zed:0.5"],"illAfter":["Zed:0.5"]}

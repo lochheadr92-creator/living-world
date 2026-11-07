@@ -1,0 +1,15 @@
+A/B at rules 165 and 166, 12 seeds (review_evidence/visible-need-20261107/twelve)
+seed     identical   alive  deaths  households  coupled  hunger   mood   ill   (before -> after)
+aspen    NO          26->17 7->21   10->7       4.5->1   51.9->50.1 -8.1->-22.2 0->1
+birch    NO          7->9   22->19  4->5        1->0     48.2->62.9 -32->-29 0
+cedar    NO          18->24 17->7   9->11       2->5     45.6->30 -27.7->-34.8 0
+fern     NO          17->9  12->19  8->5        3->1     65.5->72.1 -8.4->-2.6 0
+gen-1    NO          15->19 13->9   7           3->5     41.1->37 -26.3->-30.4 0->1
+gen-2    NO          26->27 2       10          6        66.7->49.8 -5.6->-19.7 0
+gen-3    NO          25->21 3->7    10->7       4        61.2->63.7 -4.2->-10.6 0
+gen-4    NO          23->25 11->8   12          4.5->5   64->55.6 -5.6->-19.8 0
+gen-5    NO          33->39 2       15->16      6.5->9   47.3->40.4 -13->-15.9 0->2
+gen-6    NO          32     0       10          8        67.4->58 -0.4->-12.4 3->4
+meadow   NO          19->23 17->11  8           3->6     48.7->34.2 -27.4->-31.4 0->1
+river    NO          30->25 0->5    12->9       7->5     27.1->20.8 -43.5->-55.2 0
+identical in 0 of 12 seeds; conservation and the tool registry hold in 12 of 12 pairs
