@@ -79,6 +79,6 @@ use occurred. The placement correction was followed by these complete repeated
 screens; earlier screen roots and logs remain available.
 
 No survival, household viability, production or population benefit is established.
-Household extinction does not automatically make an estate public. Broader estate
+Household extinction did not make an estate public under rules 93 to 162; from rules 163 a dissolved household's parcels pass to the household its last member joined or become shared property (`docs/ESTATE_RELEASE.md`). Broader estate
 administration and informed incapacity/departure handover are distinct from this
 physical custody contract. The entire owner programme remains incomplete.

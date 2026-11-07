@@ -1,3 +1,4 @@
+import { releaseEstate } from './estate_release';
 import { foundMembership, hasTownships } from './townships';
 import type { RNG } from './rng';
 import type { Building, Household, Person, World } from './types';
@@ -32,13 +33,17 @@ export function householdById(world: World, id: number): Household | undefined {
   return world.households.find((h) => h.id === id);
 }
 
-/** Dissolve an empty household; its buildings become vacant (anyone may claim them). */
-export function dissolveHousehold(world: World, hh: Household): void {
+/**
+ * Dissolve an empty household; its buildings become vacant (anyone may claim them). From rules 163 its estate parcels pass to `heir`,
+ * the household its last member (`via`) joined, or become shared property when the last member died (estate_release.ts).
+ */
+export function dissolveHousehold(world: World, hh: Household, heir?: Household, via?: Person): void {
   const i = world.households.indexOf(hh);
   if (i >= 0) world.households.splice(i, 1);
   for (const b of world.buildings) if (b.hhId === hh.id) b.hhId = 0;
   for (const s of world.sites) if (s.hhId === hh.id) s.hhId = 0;
   for (const pl of world.plots) if (pl.hhId === hh.id) pl.hhId = 0;
+  releaseEstate(world, hh, heir, via);
 }
 
 export function addToHousehold(world: World, p: Person, hh: Household): void {
@@ -46,7 +51,7 @@ export function addToHousehold(world: World, p: Person, hh: Household): void {
   if (old && old !== hh) {
     old.members = old.members.filter((m) => m !== p.id);
     if (old.headId === p.id) old.headId = old.members[0] ?? 0;
-    if (old.members.length === 0) dissolveHousehold(world, old);
+    if (old.members.length === 0) dissolveHousehold(world, old, hh, p);
   }
   if (hasTownships(world) && hh.townshipId === undefined) {
     if (old?.townshipId !== undefined) hh.townshipId = old.townshipId;
