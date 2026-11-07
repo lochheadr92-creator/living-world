@@ -81,7 +81,23 @@ and tools a dissolved household had lent out (`Tool.ownerHh` of tools held elsew
   often a released parcel is then put to use is not established here. Alive at day 14: 7 at 162,
   6 at 163, one seed, not an estimate of anything.
 
-No survival, household or production benefit is claimed. The 12-seed paired lab against a nudge
-floor (`review_evidence/estate-release-20261107/owner_runs.ps1`, run detached from a clean checkout of
-the commit, since the integrate tree held another session's uncommitted simulation edits) is recorded
-in its `lab163/report.txt` when it finishes, together with the full suite.
+No survival, household or production benefit is claimed.
+
+- **Full suite**, from a clean checkout of `2b18185c` (`owner_runs.ps1`; the integrate tree held another
+  session's uncommitted simulation edits): 513 of 518 files, 2,972 of 2,980 tests with 3 skipped, in one
+  parallel run of about 406 s (`suite-run.txt`). The five files that failed were four load timeouts
+  (`lab_defaults` killed its child, `zz_review_h_retention` hook 10 s, `zz_review_g_observer_purity` river
+  and `zz_review_main_toolreport_saves` over 120 s) and one test reading a gitignored fixture
+  (`autonomy_evidence/helper-receipt107-first-invalid/final.json`) that a clean checkout does not carry.
+  Re-run one file at a time on an idle machine with the fixture copied in
+  (`rerun_failed_alone.ps1`, `suite-failed-rerun-alone.txt`), all five pass: 12 of 12 tests in 231 s.
+- **12-seed paired lab** (Normal, 25 days, fork 0; control, `nudge:1`, `nudge:2`, `rich-no-estate-release`;
+  `lab163/report.txt`, measured source head `2b18185c`, not dirty). Removing the release parts the world
+  from the control in 9 of 12 seeds, median 11.7 days after the fork; the other 3 end identical (the
+  report does not say what first differed, so that day is not claimed to be a release). Branch minus the mean of the others, with 95% intervals: people -0.3 [-1.9, +1.4], deaths
+  +0.6 [-1.2, +2.3], belowCritical +0.1 [-1.1, +1.1], meanHunger -0.7 [-5.5, +3.7], meanMood +0.4
+  [-4.8, +5.9], solidHomes +0.4 [-0.1, +0.9], buildings +0.8 [-0.4, +2.2], tools -1.1 [-5.0, +2.6],
+  projectsDone +1.1 [-1.5, +4.1]. None is distinguishable from chance, and the noise floor is wide (people
+  and deaths +-3.8), so twelve seeds would miss anything small: this is absence of evidence, not evidence of absence.
+  The lock removal is justified by the ordinary-world diagnosis above (15 tools sitting in parcels nobody
+  could take), not by a measured outcome.

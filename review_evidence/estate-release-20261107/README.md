@@ -37,5 +37,14 @@ the four rightful households' parcels at 162): the salvage option needs a fed no
 weighs 8 to 22 against everything else. Survivors at day 14 (163): Ivy, Abel, Zia, Kai, Zeke, Arlo, knowing 4 to 12 released parcels each.
 Alive 7 (162) against 6 (163) is one seed's divergence after the first release changed the id sequence, not a measurement.
 
-Not run here (over three minutes; owner's machine): the full suite and the 12-seed paired lab, which needs the `rich-no-estate-release`
-branch registered in `scripts/lab/lab.ts` (another session's uncommitted file at the time).
+## Long runs (from a clean checkout of `2b18185c`, detached)
+
+- `owner_runs.ps1` / `owner_runs.status` — the full suite, then the 12-seed lab, then the report; `suite-run.txt` (a copy of `suite.log`, which the
+  repository's `*.log` ignore rule keeps out of git), `lab163/` (`report.txt` and `provenance.json` are tracked; the twelve raw
+  `lab_*.jsonl` seed files stay untracked, as in `stone-haul-20261106/lab162`). The registration of `rich-no-estate-release` was committed in
+  `2b18185c` as its own hunk beside another session's uncommitted edits.
+- Suite: 513 of 518 files, 2,972 of 2,980 tests (3 skipped) in the parallel run; five files failed (four load timeouts, one gitignored
+  fixture missing from a clean checkout); `rerun_failed_alone.ps1` / `suite-failed-rerun-alone.txt` re-ran those five one at a time with the
+  fixture copied in: 12 of 12 pass.
+- Lab: removal parts 9 of 12 worlds from the control (median 11.7 days); nothing is distinguishable from the noise floor
+  (`docs/ESTATE_RELEASE.md`, "Evidence"). No benefit claim.
