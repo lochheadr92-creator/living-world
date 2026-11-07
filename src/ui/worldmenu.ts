@@ -280,6 +280,10 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
   }
 
   async function doSave(): Promise<void> {
+    if (game.worldFaulted) {
+      ctx.toast('Not saved: this world stopped with an error and may be part-way through a moment, so it would replace your save with one that cannot run.', 'warn', 6000);
+      return;
+    }
     saveBtn.disabled = true;
     const ok = await saveGame(game);
     saveBtn.disabled = false;

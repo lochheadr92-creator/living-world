@@ -306,6 +306,120 @@ describe('a saved world is run for one tick before it replaces the running one',
   });
 });
 
+describe('a save never loses the one it replaces', () => {
+  const proto = () => (globalThis as unknown as { IDBObjectStore: { prototype: { put: (...a: unknown[]) => unknown } } }).IDBObjectStore.prototype;
+
+  it('describes the world as it was when Save was pressed, not the one started while it was compressed', async () => {
+    const { world, settings } = ordinary('save-moment', 120);
+    const t = target(world, settings);
+    const tick = world.tick;
+    const pending = saveGame(t);
+    // what New World does to the game while the copy is being compressed
+    const fresh = ordinary('new-world-meanwhile', 10);
+    t.world = fresh.world;
+    t.settings = fresh.settings;
+    expect(await pending).toBe(true);
+    expect(savedGameInfo()).toMatchObject({ seed: 'save-moment', tick });
+    const got: { w?: World; s?: Settings } = {};
+    const restoreWorld = (w: World, s: Settings) => {
+      got.w = w;
+      got.s = s;
+    };
+    expect(await loadGame({ world: fresh.world, settings: fresh.settings, restoreWorld })).toBe(true);
+    expect(got.s?.seed).toBe('save-moment'); // the settings stored with the world are that world's
+    expect(got.w?.tick).toBe(tick);
+  });
+
+  it('when the description cannot be written after the world is stored, the old save is still there and still described', async () => {
+    const a = ordinary('kept-a', 100);
+    expect(await saveGame(target(a.world, a.settings))).toBe(true);
+    const metaBefore = store.getItem('living-world:save-meta:v1');
+    const realSet = store.setItem.bind(store);
+    store.setItem = (k: string, v: string) => {
+      if (k === 'living-world:save-meta:v1') throw new DOMException('blocked', 'SecurityError');
+      realSet(k, v);
+    };
+    const b = ordinary('lost-b', 200);
+    try {
+      expect(await saveGame(target(b.world, b.settings))).toBe(false);
+    } finally {
+      store.setItem = realSet;
+    }
+    expect(store.getItem('living-world:save-meta:v1')).toBe(metaBefore);
+    const t = target(b.world, b.settings);
+    expect(await loadGame(t)).toBe(true);
+    expect(hashWorld(t.restored!)).toBe(hashWorld(a.world));
+  });
+
+  it('a stored copy that does not read back is not described, and the old save stays', async () => {
+    const a = ordinary('readback-a', 100);
+    expect(await saveGame(target(a.world, a.settings))).toBe(true);
+    const metaBefore = store.getItem('living-world:save-meta:v1');
+    g.indexedDB = realIndexedDB;
+    const p = proto();
+    const real = p.put;
+    p.put = function (this: unknown, rec: unknown, key: unknown) {
+      const r = rec as { gz: Uint8Array };
+      const damaged = r.gz.slice();
+      damaged[damaged.length >> 1] ^= 0xff; // the database keeps different bytes from those handed to it
+      return real.call(this, { ...r, gz: damaged }, key);
+    };
+    store.quota = 5_000; // and localStorage has no room for a fallback copy
+    try {
+      expect(await saveGame(target(ordinary('readback-b', 150).world, a.settings))).toBe(false);
+    } finally {
+      p.put = real;
+      store.quota = Infinity;
+    }
+    expect(store.getItem('living-world:save-meta:v1')).toBe(metaBefore);
+    const t = target(a.world, a.settings);
+    expect(await loadGame(t)).toBe(true);
+    expect(hashWorld(t.restored!)).toBe(hashWorld(a.world));
+  });
+
+  it('alternates between two records, so each save leaves the one before it whole', async () => {
+    const worlds = [ordinary('alt-1', 60), ordinary('alt-2', 90), ordinary('alt-3', 120)];
+    const keys: (string | undefined)[] = [];
+    for (const w of worlds) {
+      expect(await saveGame(target(w.world, w.settings))).toBe(true);
+      keys.push(savedGameInfo()!.key);
+      const t = target(w.world, w.settings);
+      expect(await loadGame(t)).toBe(true);
+      expect(hashWorld(t.restored!)).toBe(hashWorld(w.world));
+    }
+    expect(keys).toEqual(['current', 'alternate', 'current']);
+  });
+
+  it('in localStorage alone, a description that will not fit puts the old copy back', async () => {
+    g.indexedDB = undefined;
+    const a = ordinary('ls-a', 100);
+    expect(await saveGame(target(a.world, a.settings))).toBe(true);
+    const copyBefore = store.getItem('living-world:save:v1');
+    const metaBefore = store.getItem('living-world:save-meta:v1');
+    const realSet = store.setItem.bind(store);
+    store.setItem = (k: string, v: string) => {
+      if (k === 'living-world:save-meta:v1') throw new DOMException('quota', 'QuotaExceededError');
+      realSet(k, v);
+    };
+    try {
+      expect(await saveGame(target(ordinary('ls-b', 150).world, a.settings))).toBe(false);
+    } finally {
+      store.setItem = realSet;
+    }
+    expect(store.getItem('living-world:save:v1')).toBe(copyBefore);
+    expect(store.getItem('living-world:save-meta:v1')).toBe(metaBefore);
+  });
+
+  it('a world whose own clock threw is not saved over a good one', async () => {
+    const a = ordinary('faulted-a', 100);
+    expect(await saveGame(target(a.world, a.settings))).toBe(true);
+    const metaBefore = store.getItem('living-world:save-meta:v1');
+    const broken = { ...target(ordinary('faulted-b', 150).world, a.settings), worldFaulted: true };
+    expect(await saveGame(broken)).toBe(false);
+    expect(store.getItem('living-world:save-meta:v1')).toBe(metaBefore);
+  });
+});
+
 describe('the autosave', () => {
   it('is its own record: the hand-made save and its description are left alone, and it loads back exactly', async () => {
     const mine = ordinary('hand-made', 100);

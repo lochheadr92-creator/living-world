@@ -75,6 +75,8 @@ const META = 'living-world:save-meta:v1';
 const DB_NAME = 'living-world';
 const DB_STORE = 'saves';
 const DB_KEY = 'current';
+// a save alternates between two records, so the one it replaces is still whole until the description points at the new one
+const DB_ALT_KEY = 'alternate';
 // the autosave is a second record beside the save, in IndexedDB only, so it never replaces a world saved by hand or takes its room
 const AUTO_META = 'living-world:autosave-meta:v1';
 const DB_AUTO_KEY = 'autosave';
@@ -474,12 +476,16 @@ export interface SaveInfo {
   where?: SaveWhere;
   /** size of the compressed world in bytes */
   bytes?: number;
+  /** which IndexedDB record holds the world; absent means 'current', the only one there was before saves alternated between two */
+  key?: string;
 }
 
 /** what a save is, as far as the code that writes and reads it is concerned */
 export interface SaveTarget {
   world: World;
   settings: Settings;
+  /** the world's own clock threw (Game.reportFault): it is not saved */
+  worldFaulted?: boolean;
   restoreWorld(world: World, settings: Settings): void;
 }
 
@@ -547,47 +553,87 @@ async function dbGet(key = DB_KEY): Promise<DbRecord | null> {
   }
 }
 
+/** compressed bytes known to read back: decompressed they are the same text, and this build loads that text */
+async function verifiedBytes(text: string): Promise<Uint8Array> {
+  const bytes = await gzipBytes(text);
+  if ((await gunzipBytes(bytes)) !== text) throw new Error('the compressed world does not read back');
+  deserializeWorld(text);
+  return bytes;
+}
+
+function sameBytes(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+  return true;
+}
+
 /**
- * Save the current world. Resolves false (never throws) if neither IndexedDB nor localStorage will take it; the previous save, if any, is then still there.
- * The world goes to IndexedDB when that works; if it does not, to localStorage, as every save used to. The description is written last,
- * so a save that did not complete is never described; once it is, the older localStorage copy is dropped to give its space back.
+ * Save the current world. Resolves false (never throws) if neither IndexedDB nor localStorage will take it; the previous save, if any, is then still there
+ * and still described. Everything the save records is taken before the first await, so a world started (or changed) while the copy is compressed
+ * is not mixed into it, and the bytes are checked to read back and load before anything is stored.
+ * The world goes to IndexedDB when that works: into the one of its two records that the description does not point at, read back before it is
+ * described, so the save it replaces stays whole until the description moves. If IndexedDB does not work, to localStorage, as every save used to.
+ * The description is written last, so a save that did not complete is never described; once it is, the older localStorage copy is dropped.
  */
 export async function saveGame(game: SaveTarget): Promise<boolean> {
   try {
+    // a world whose own clock threw may be part-way through a tick: it is not put in place of a save that can run
+    if (game.worldFaulted) return false;
+    const settings = { ...game.settings };
     // never overwrite a good save with a world whose rules version this build would refuse to load back
-    const verdict = validateRulesVersion(game.settings.rulesVersion);
+    const verdict = validateRulesVersion(settings.rulesVersion);
     if (!verdict.ok) return false;
-    const bytes = await gzipBytes(serializeWorld(game.world, VERSION));
+    const text = serializeWorld(game.world, VERSION);
+    const tick = game.world.tick;
+    const population = game.world.persons.length;
+    const bytes = await verifiedBytes(text);
+    const previous = savedGameInfo();
+    const key = previous?.where === 'indexeddb' && (previous.key ?? DB_KEY) === DB_KEY ? DB_ALT_KEY : DB_KEY;
     let where: SaveWhere | null = null;
     try {
-      await dbPut({ settings: game.settings, gz: bytes });
+      await dbPut({ settings, gz: bytes }, key);
+      const back = await dbGet(key);
+      if (!back || !sameBytes(back.gz, bytes)) throw new Error('the stored world does not read back');
       where = 'indexeddb';
     } catch {
       where = null;
     }
-    if (!where) {
-      localStorage.setItem(KEY, JSON.stringify({ settings: game.settings, data: bytesToB64(bytes) }));
-      where = 'localstorage';
-    }
     const info: SaveInfo = {
-      seed: game.settings.seed,
-      day: Math.floor(game.world.tick / 2400) + 1,
-      tick: game.world.tick,
-      population: game.world.persons.length,
+      seed: settings.seed,
+      day: Math.floor(tick / 2400) + 1,
+      tick,
+      population,
       savedAt: Date.now(),
-      scene: game.settings.scene,
-      where,
+      scene: settings.scene,
+      where: where ?? 'localstorage',
       bytes: bytes.length,
     };
+    if (where === 'indexeddb') info.key = key;
     const describe = JSON.stringify(info);
+    // from here to the description nothing waits, so localStorage is exactly as it was read: an old value put back always fits again
+    const oldCopy = localStorage.getItem(KEY);
+    const putBack = () => {
+      if (oldCopy === null) localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, oldCopy);
+    };
+    if (!where) localStorage.setItem(KEY, JSON.stringify({ settings, data: bytesToB64(bytes) }));
     try {
       localStorage.setItem(META, describe);
     } catch (e) {
+      if (where !== 'indexeddb') {
+        // the new world took the room its description needed: the old copy goes back, still described
+        putBack();
+        throw e;
+      }
       // localStorage may be full precisely because an older save still sits in it. The new world is safely in IndexedDB, so that copy is
-      // what to give up; without it there is no honest way to describe the save, and the old one stays.
-      if (where !== 'indexeddb') throw e;
+      // what to give up; if even then the description will not fit, the old copy goes back and is still the save.
       localStorage.removeItem(KEY);
-      localStorage.setItem(META, describe);
+      try {
+        localStorage.setItem(META, describe);
+      } catch (again) {
+        putBack();
+        throw again;
+      }
     }
     if (where === 'indexeddb') {
       try {
@@ -605,7 +651,7 @@ export async function saveGame(game: SaveTarget): Promise<boolean> {
 /** the settings and world text of whichever copy the description points at, then the other one */
 async function readSaved(info: SaveInfo | null): Promise<{ settings: Settings; text: string } | null> {
   const fromDb = async () => {
-    const rec = await dbGet();
+    const rec = await dbGet(info?.key ?? DB_KEY);
     return rec ? { settings: rec.settings, text: await gunzipBytes(rec.gz) } : null;
   };
   const fromLocal = async () => {
@@ -679,6 +725,7 @@ export function autosaveInfo(): SaveInfo | null {
  */
 export async function autosaveGame(game: SaveTarget): Promise<boolean> {
   try {
+    if (game.worldFaulted) return false;
     const settings = { ...game.settings };
     if (!validateRulesVersion(settings.rulesVersion).ok) return false;
     const text = serializeWorld(game.world, VERSION);
@@ -692,7 +739,7 @@ export async function autosaveGame(game: SaveTarget): Promise<boolean> {
       where: 'indexeddb',
       bytes: 0,
     };
-    const bytes = await gzipBytes(text);
+    const bytes = await verifiedBytes(text);
     info.bytes = bytes.length;
     try {
       await dbPut({ settings, gz: bytes }, DB_AUTO_KEY);
