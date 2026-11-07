@@ -206,6 +206,8 @@ export interface SeenEntity {
   tired: boolean;
   cold: boolean;
   hurt: boolean;
+  /** Rules 165 (fever_sign.ts): visibly feverish, the point the cautious keep their distance from. Rich worlds at 165 or later only, and absent when not set. */
+  feverish?: boolean;
   child: boolean;
   carrying: ItemKind[];
   /**

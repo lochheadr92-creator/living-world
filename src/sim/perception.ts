@@ -1,6 +1,7 @@
 import {runsRulesVersion} from './rulesversion';
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import { rememberSigns } from './remembered_need';
+import { hasFeverSign, looksFeverish } from './fever_sign';
 import { waterSupplyNear } from './water_access';
 import { observeFlood } from './flood';
 import { SENSE_RADIUS } from './constants';
@@ -63,6 +64,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     tired: e.needs.energy < 25,
     cold: e.needs.warmth < 35,
     hurt: e.health < 60,
+    ...(hasFeverSign(world) && looksFeverish(e) ? { feverish: true } : {}),
     child: stageOf(world, e) === 'child',
     carrying,
     ...(plenty && plenty.length ? { plenty } : {}),
