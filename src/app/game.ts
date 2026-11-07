@@ -9,6 +9,7 @@ import { hashWorld, stepWorld } from '../sim/world';
 import { project } from '../render/iso';
 import type { SceneId, Settings, World } from '../sim/types';
 import { viewerPreferences, type ViewerPreferences, type ViewRect } from './viewer';
+import type { FrameFault, FrameStage } from './frameloop';
 
 export const SPEEDS = [0.5, 1, 2, 4, 8, 16] as const;
 export const MAX_STEPS_PER_FRAME = 40;
@@ -55,7 +56,7 @@ export interface CameraState {
   zoom: number;
 }
 
-export type GameEvent = 'beforeWorldChange' | 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'viewer' | 'follow' | 'scene' | 'debug' | 'step';
+export type GameEvent = 'beforeWorldChange' | 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'viewer' | 'follow' | 'scene' | 'debug' | 'step' | 'fault';
 
 /** around each tick the clock runs (an outside driver's hooks, src/app/inhabit.ts); `afterTick` returning false ends the frame's stepping */
 export interface TickHooks {
@@ -94,6 +95,11 @@ export class Game {
   droppedTicks = 0;
   /** hooks around each tick run by the clock (play and single step); none unless a driver installs them */
   tickHooks: TickHooks | null = null;
+  /** the latest frame stage that threw since this world began (src/app/frameloop.ts); a world fault also stops the autosave. Never saved */
+  fault: FrameFault | null = null;
+  /** true once the world's own clock has thrown in this world: its state may be part-way through a tick */
+  worldFaulted = false;
+  private faultsLogged = new Set<string>();
   private recent: { dt: number; ticks: number; asked: number }[] = [];
   /** real seconds spent playing, and when (on that clock) ticks were given up, for the "recent" part of the report */
   private playClock = 0;
@@ -164,6 +170,34 @@ export class Game {
       }
     }
     return n;
+  }
+
+  /** A frame stage threw (src/app/frameloop.ts): pause, keep what happened for the interface, and log each distinct fault once. */
+  reportFault(stage: FrameStage, error: unknown): void {
+    const message = error instanceof Error ? error.message || error.name : String(error);
+    // the world's own fault is the one that matters: a picture that then fails to draw that world does not replace it
+    if (!(this.fault?.stage === 'world' && stage !== 'world')) this.fault = { stage, message, tick: this.world.tick };
+    if (stage === 'world') this.worldFaulted = true;
+    const key = `${stage}:${message}`;
+    if (!this.faultsLogged.has(key)) {
+      this.faultsLogged.add(key);
+      console.error(`[loop] the ${stage} stage threw at tick ${this.world.tick}; the world is paused`, error);
+    }
+    this.setPlaying(false);
+    this.emit('fault');
+  }
+
+  /** the interface has shown the fault and the viewer dismissed it; a world fault still keeps the autosave off */
+  clearFault(): void {
+    if (!this.fault) return;
+    this.fault = null;
+    this.emit('fault');
+  }
+
+  private forgetFault(): void {
+    this.fault = null;
+    this.worldFaulted = false;
+    this.faultsLogged.clear();
   }
 
   private giveUp(ticks: number): void {
@@ -265,6 +299,7 @@ export class Game {
     // a restart makes a NEW world: the current rules generation, whatever the world being left was running
     this.settings = { ...this.settings, dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION, ...opts };
     this.world = createWorld(this.settings);
+    this.forgetFault();
     this.acc = 0;
     this.alpha = 0;
     this.stepEase = 1;
@@ -280,6 +315,7 @@ export class Game {
     this.emit('beforeWorldChange');
     this.settings = { ...settings };
     this.world = world;
+    this.forgetFault();
     this.acc = 0;
     this.alpha = 0;
     this.stepEase = 1;

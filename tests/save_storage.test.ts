@@ -2,7 +2,7 @@
 import 'fake-indexeddb/auto';
 import {gunzipSync} from 'node:zlib';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { loadGame, saveGame, savedGameInfo, hasSavedGame, serializeWorld } from '../src/app/save';
+import { autosaveGame, autosaveInfo, loadAutosave, loadGame, saveGame, savedGameInfo, hasSavedGame, serializeWorld } from '../src/app/save';
 import { nightAuditWorld } from '../scripts/fixtures/night_audit_world';
 import type { SaveTarget } from '../src/app/save';
 import { createWorld, defaultSettings } from '../src/sim/factory';
@@ -280,6 +280,68 @@ describe('when IndexedDB does not work', () => {
   });
 });
 
+
+describe('a saved world is run for one tick before it replaces the running one', () => {
+  it('refuses a save that reads back but cannot run, and keeps the running world', async () => {
+    const { world, settings } = ordinary('cannot-run', 100);
+    const raw = JSON.parse(serializeWorld(world));
+    raw.world.weather = null; // deserialises without complaint, then throws on its first tick
+    store.setItem('living-world:save:v1', JSON.stringify({ settings, data: await gzipB64(JSON.stringify(raw)) }));
+    store.setItem('living-world:save-meta:v1', JSON.stringify({ seed: settings.seed, day: 1, tick: world.tick, population: world.persons.length, savedAt: 1, scene: 'natural' }));
+    const running = ordinary('still-running', 50);
+    const t = target(running.world, running.settings);
+    const before = serializeWorld(running.world);
+    expect(await loadGame(t)).toBe(false);
+    expect(t.restored).toBeNull();
+    expect(serializeWorld(t.world)).toBe(before);
+  });
+
+  it('the world swapped in has not been ticked by the check', async () => {
+    const { world, settings } = ordinary('checked-exact', 150);
+    expect(await saveGame(target(world, settings))).toBe(true);
+    const t = target(createWorld(defaultSettings('other')), defaultSettings('other'));
+    expect(await loadGame(t)).toBe(true);
+    expect(t.restored!.tick).toBe(world.tick);
+    expect(serializeWorld(t.restored!)).toBe(serializeWorld(world));
+  });
+});
+
+describe('the autosave', () => {
+  it('is its own record: the hand-made save and its description are left alone, and it loads back exactly', async () => {
+    const mine = ordinary('hand-made', 100);
+    expect(await saveGame(target(mine.world, mine.settings))).toBe(true);
+    const metaBefore = store.getItem('living-world:save-meta:v1');
+    const later = ordinary('autosaved', 250);
+    expect(await autosaveGame(target(later.world, later.settings))).toBe(true);
+    expect(store.getItem('living-world:save-meta:v1')).toBe(metaBefore);
+    expect(autosaveInfo()).toMatchObject({ seed: 'autosaved', tick: later.world.tick, where: 'indexeddb' });
+    const a = target(createWorld(defaultSettings('x')), defaultSettings('x'));
+    expect(await loadAutosave(a)).toBe(true);
+    expect(deepHash(a.restored!)).toBe(deepHash(later.world));
+    const m = target(createWorld(defaultSettings('y')), defaultSettings('y'));
+    expect(await loadGame(m)).toBe(true);
+    expect(deepHash(m.restored!)).toBe(deepHash(mine.world));
+  });
+
+  it('describes the world as it was when asked, not as it is after the copy is compressed', async () => {
+    const { world, settings } = ordinary('auto-moment', 100);
+    const t = target(world, settings);
+    const tick = world.tick;
+    const pending = autosaveGame(t);
+    t.settings = defaultSettings('switched-meanwhile');
+    for (let i = 0; i < 20; i++) stepWorld(world);
+    expect(await pending).toBe(true);
+    expect(autosaveInfo()).toMatchObject({ seed: 'auto-moment', tick });
+  });
+
+  it('is never written to localStorage: without IndexedDB it is simply not kept', async () => {
+    g.indexedDB = undefined;
+    const { world, settings } = ordinary('auto-none', 50);
+    expect(await autosaveGame(target(world, settings))).toBe(false);
+    expect(autosaveInfo()).toBeNull();
+    expect(store.getItem('living-world:save:v1')).toBeNull();
+  });
+});
 
 it('the actual product save writes format 5 and restores heterogeneous person fields exactly', async () => {
   const {world,settings}=ordinary('product-format-five',300);

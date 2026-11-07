@@ -1,5 +1,5 @@
 // The world menu: seed, new world, random seed, difficulty toggles, test scenes, save and load.
-import { hasSavedGame, loadGame, saveGame, savedGameInfo } from '../app/save';
+import { autosaveInfo, hasSavedGame, loadAutosave, loadGame, saveGame, savedGameInfo } from '../app/save';
 import { currentWorldSettings, profileFacts } from '../sim/profiles';
 import type { ProfileName } from '../sim/profiles';
 import { SCENE_LABELS } from '../sim/scenes';
@@ -212,6 +212,8 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
   const saveWrap = h('span', { class: 'tipwrap', 'data-tip': 'Save this world in this browser (one save slot; it replaces the previous save)' }, saveBtn);
   const loadBtn = h('button', { type: 'button', class: 'btn', onClick: () => void doLoad() }, icon('folder', 15), 'Load');
   const loadWrap = h('span', { class: 'tipwrap', 'data-tip': 'No saved world yet' }, loadBtn);
+  const autoBtn = h('button', { type: 'button', class: 'btn', onClick: () => void doLoadAutosave() }, icon('folder', 15), 'Autosave');
+  const autoWrap = h('span', { class: 'tipwrap', 'data-tip': 'No autosave yet', hidden: true }, autoBtn);
 
   const menu = h(
     'div',
@@ -235,7 +237,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       arrivals.el,
     ),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
-    h('section', { class: 'wm-sec wm-io' }, saveWrap, loadWrap, debugBtn),
+    h('section', { class: 'wm-sec wm-io' }, saveWrap, loadWrap, autoWrap, debugBtn),
   );
   slots.topLeft.appendChild(menu);
 
@@ -298,7 +300,20 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     if (ok) {
       ctx.toast(`Loaded the saved world (seed ${info.seed}, day ${info.day})`, 'good');
       close();
-    } else ctx.toast('Could not read the saved world.', 'error');
+    } else ctx.toast('Could not read the saved world, or it could not run a moment, so the world you are watching was kept.', 'error');
+  }
+
+  async function doLoadAutosave(): Promise<void> {
+    const info = autosaveInfo();
+    if (!info) return;
+    autoBtn.disabled = true;
+    const ok = await loadAutosave(game);
+    autoBtn.disabled = false;
+    refreshIO();
+    if (ok) {
+      ctx.toast(`Loaded the autosave (seed ${info.seed}, day ${info.day})`, 'good');
+      close();
+    } else ctx.toast('Could not read the autosave, or it could not run a moment, so the world you are watching was kept.', 'error');
   }
 
   function refreshIO(): void {
@@ -310,6 +325,12 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       : 'No saved world yet';
     setAttr(loadWrap, 'data-tip', tip);
     setAttr(loadBtn, 'aria-label', info ? `Load the saved world: seed ${info.seed}, day ${info.day}` : 'Load (no saved world yet)');
+    const auto = autosaveInfo();
+    autoWrap.hidden = !auto;
+    if (auto) {
+      setAttr(autoWrap, 'data-tip', `Load the autosave, kept every few minutes of play apart from your own save\nSeed ${auto.seed} · day ${auto.day} · ${auto.population} people\nKept ${wallAgo(auto.savedAt)}. Replaces the world you are watching.`);
+      setAttr(autoBtn, 'aria-label', `Load the autosave: seed ${auto.seed}, day ${auto.day}`);
+    }
   }
 
   function syncFromGame(): void {

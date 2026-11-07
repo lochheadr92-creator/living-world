@@ -65,6 +65,8 @@ import { hashString, RNG } from '../sim/rng';
 import { validateRulesVersion, runsRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
 import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
+import { setExternalController } from '../sim/external';
+import { stepWorld } from '../sim/world';
 import type { Settings, World } from '../sim/types';
 import type { Game } from './game';
 
@@ -73,6 +75,9 @@ const META = 'living-world:save-meta:v1';
 const DB_NAME = 'living-world';
 const DB_STORE = 'saves';
 const DB_KEY = 'current';
+// the autosave is a second record beside the save, in IndexedDB only, so it never replaces a world saved by hand or takes its room
+const AUTO_META = 'living-world:autosave-meta:v1';
+const DB_AUTO_KEY = 'autosave';
 // 2: a year of age is now twelve days long (saves from before measured it in single days)
 // 3: workshops, tools, carts, shared meals, worries and grievances are part of the world (older saves lack them and are refused)
 // 4: each person's explored mask is stored as run lengths, not one base64 byte per tile, and the people are stored field by field
@@ -514,7 +519,7 @@ function openDb(): Promise<IDBDatabase> {
 }
 
 /** resolves when the transaction has committed (not merely when the request succeeded): only then is the record safely stored */
-async function dbPut(rec: DbRecord): Promise<void> {
+async function dbPut(rec: DbRecord, key = DB_KEY): Promise<void> {
   const db = await openDb();
   try {
     await new Promise<void>((resolve, reject) => {
@@ -522,18 +527,18 @@ async function dbPut(rec: DbRecord): Promise<void> {
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error ?? new Error('IndexedDB write failed'));
       tx.onabort = () => reject(tx.error ?? new Error('IndexedDB write aborted'));
-      tx.objectStore(DB_STORE).put(rec, DB_KEY);
+      tx.objectStore(DB_STORE).put(rec, key);
     });
   } finally {
     db.close();
   }
 }
 
-async function dbGet(): Promise<DbRecord | null> {
+async function dbGet(key = DB_KEY): Promise<DbRecord | null> {
   const db = await openDb();
   try {
     return await new Promise<DbRecord | null>((resolve, reject) => {
-      const req = db.transaction(DB_STORE, 'readonly').objectStore(DB_STORE).get(DB_KEY);
+      const req = db.transaction(DB_STORE, 'readonly').objectStore(DB_STORE).get(key);
       req.onsuccess = () => resolve((req.result as DbRecord | undefined) ?? null);
       req.onerror = () => reject(req.error ?? new Error('IndexedDB read failed'));
     });
@@ -622,14 +627,100 @@ async function readSaved(info: SaveInfo | null): Promise<{ settings: Settings; t
   return null;
 }
 
-/** Replace the running world with the saved one. Resolves false if there is none or it cannot be read. */
+/**
+ * A save can read back cleanly and still hold a world the rules cannot run (it then throws on its first tick, after the running world
+ * is gone). One tick of a spare copy finds that out first. The spare copy is nobody's to drive, so an outside controller is set aside.
+ */
+function runsOneTick(text: string): boolean {
+  const restore = setExternalController(null);
+  try {
+    stepWorld(deserializeWorld(text));
+    return true;
+  } catch {
+    return false;
+  } finally {
+    restore();
+  }
+}
+
+/** swap in a world read from a save, once it has been checked; false leaves the running world as it was */
+function restoreChecked(game: SaveTarget, got: { settings: Settings; text: string }): boolean {
+  const world = deserializeWorld(got.text);
+  if (!runsOneTick(got.text)) return false;
+  game.restoreWorld(world, got.settings);
+  return true;
+}
+
+/** Replace the running world with the saved one. Resolves false if there is none, it cannot be read, or it cannot run a tick. */
 export async function loadGame(game: SaveTarget): Promise<boolean> {
   try {
     const got = await readSaved(savedGameInfo());
     if (!got) return false;
-    const world = deserializeWorld(got.text);
-    game.restoreWorld(world, got.settings);
-    return true;
+    return restoreChecked(game, got);
+  } catch {
+    return false;
+  }
+}
+
+/** the autosave's description, or null when there is none */
+export function autosaveInfo(): SaveInfo | null {
+  try {
+    const raw = localStorage.getItem(AUTO_META);
+    return raw ? (JSON.parse(raw) as SaveInfo) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Keep a copy of the running world in the autosave record. Everything it describes is taken before the first await, so a world
+ * changed while the copy is compressed is not mixed into it. Resolves false (never throws) when IndexedDB will not take it; the
+ * older autosave is then still there. There is no localStorage fallback: that small space is the hand-made save's.
+ */
+export async function autosaveGame(game: SaveTarget): Promise<boolean> {
+  try {
+    const settings = { ...game.settings };
+    if (!validateRulesVersion(settings.rulesVersion).ok) return false;
+    const text = serializeWorld(game.world, VERSION);
+    const info: SaveInfo = {
+      seed: settings.seed,
+      day: Math.floor(game.world.tick / 2400) + 1,
+      tick: game.world.tick,
+      population: game.world.persons.length,
+      savedAt: Date.now(),
+      scene: settings.scene,
+      where: 'indexeddb',
+      bytes: 0,
+    };
+    const bytes = await gzipBytes(text);
+    info.bytes = bytes.length;
+    try {
+      await dbPut({ settings, gz: bytes }, DB_AUTO_KEY);
+    } catch {
+      return false; // a put that did not commit leaves the older autosave, and its description, as they were
+    }
+    try {
+      localStorage.setItem(AUTO_META, JSON.stringify(info));
+      return true;
+    } catch {
+      try {
+        localStorage.removeItem(AUTO_META); // it would describe the copy just replaced
+      } catch {
+        // storage is blocked: there is no description to correct
+      }
+      return false;
+    }
+  } catch {
+    return false;
+  }
+}
+
+/** Replace the running world with the autosaved one, checked the same way as a save. */
+export async function loadAutosave(game: SaveTarget): Promise<boolean> {
+  try {
+    const rec = await dbGet(DB_AUTO_KEY);
+    if (!rec) return false;
+    return restoreChecked(game, { settings: rec.settings, text: await gunzipBytes(rec.gz) });
   } catch {
     return false;
   }

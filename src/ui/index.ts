@@ -8,12 +8,14 @@
 //   overlays   bottom chip group                             minimap    isometric overview, click or drag to pan
 //   debug      optional diagnostics                          help       controls and how to read the inspector
 //   tooltip    data-tip labels + hover label over the map    toasts     short messages
+//   faultbanner  a frame stage threw: what, when, and that the world is paused
 //   shortcuts  keyboard                                      dom / icons / widgets / context   shared helpers
 import type { Game, GameEvent } from '../app/game';
 import { loadPrefs } from '../app/prefs';
 import { loadUIState, makePersistence, type Part, type ToastKind, type UICtx } from './context';
 import { buildLayout } from './layout';
 import { createDebug } from './debug';
+import { createFaultBanner } from './faultbanner';
 import { createFeed } from './feed';
 import { createHelp } from './help';
 import { createInspector } from './inspector';
@@ -94,8 +96,10 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
   const overlays = createOverlays(ctx, slots);
   const viewer = createViewerControls(ctx, slots);
   const shortcuts = createShortcuts(ctx, menu, help);
+  const fault = createFaultBanner(ctx, slots);
   const named: [string, Part][] = [
     ['toasts', toasts],
+    ['fault', fault],
     ['tooltips', tips],
     ['hover', hover],
     ['worldmenu', menu],

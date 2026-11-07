@@ -1,5 +1,8 @@
 import './styles.css';
+import { Autosaver } from './app/autosave';
+import { startFrameLoop } from './app/frameloop';
 import { Game } from './app/game';
+import { autosaveGame } from './app/save';
 import { InhabitDriver, inhabitConfigFromUrl, settingsFromConfig } from './app/inhabit';
 import { loadPrefs } from './app/prefs';
 import { project } from './render/iso';
@@ -32,16 +35,7 @@ if (driver) void driver.start();
 (window as unknown as Record<string, unknown>).__game = game;
 (window as unknown as Record<string, unknown>).__renderer = renderer;
 
-let last = performance.now();
-function loop(now: number): void {
-  const raw = (now - last) / 1000;
-  last = now;
-  // the clock is told how long the frame really was, so it can tell a stall from a busy moment and count what it gives up;
-  // animation, camera easing and the interface never take a leap longer than a quarter of a second
-  game.advance(raw);
-  const dt = Math.min(0.25, Math.max(0, raw));
-  renderer.frame(dt);
-  ui.update(dt);
-  requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
+// a throw in the world's clock, the picture or the interface pauses the world and is shown; it never ends the loop (src/app/frameloop.ts).
+// An outside model's run is its own record, so only an ordinary viewer's world is autosaved.
+const autosaver = driver ? null : new Autosaver(game, autosaveGame);
+startFrameLoop(game, { frame: (dt) => renderer.frame(dt), update: (dt) => ui.update(dt) }, requestAnimationFrame, performance.now(), autosaver ? (dt) => autosaver.frame(dt) : undefined);
