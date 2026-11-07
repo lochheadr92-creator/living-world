@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "260a961afdb37790502bb6881a9c242585dab724",
+    "rules": 166,
+    "content": "946ad46faf9185eb7f0119771e2acb16da85e8455c9f0811fcc5f03305987fec",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 6000 ticks including several spontaneous offers (the first at tick 959) and the need signs being seen, then 120 more after a save and load"
+  },
+  "saved": "0b09dc3cec7c60f847ccd32cf887f214b74d50137c777b82df81644677955f5e",
+  "continued": "0e191693d67d33d66aa5fb75184304cf06f4a15f5237e26b3d5d0187b25035da"
+}
