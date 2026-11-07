@@ -36,6 +36,7 @@ import {foundEmptyOn,setFoundEmpty} from '../../src/sim/found_empty';
 import {sharedStonePartOn,setSharedStone} from '../../src/sim/shared_stone';
 import type {SharedStonePart} from '../../src/sim/shared_stone';
 import {handFeedingOn,setHandFeeding} from '../../src/sim/hand_feeding';
+import {estateReleaseOn,setEstateRelease} from '../../src/sim/estate_release';
 import {homeReplacementOn,setHomeReplacement} from '../../src/sim/home_replacement';
 import {constructionFinishOn,setConstructionFinish} from '../../src/sim/construction_finish';
 import {waterSearchOn,setWaterSearch} from '../../src/sim/water_search';
@@ -387,6 +388,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-flood-access')return {spec:label,summary:'remove durable flood footprints and personal access responses; retain historical onset damage',install(){const was=floodAccessEnabled();setFloodAccess(false);return ()=>setFloodAccess(was);}};
   if(kind==='rich-no-continuity-knowledge')return {spec:label,summary:'retain historical shared unfinished work knowledge without personal communication',install(){const was=continuityKnowledgeOn();setContinuityKnowledge(false);return ()=>setContinuityKnowledge(was);}};
   if(kind==='rich-no-estate-custody')return {spec:label,summary:'new deaths leave historical public heaps; existing physical ownership remains',install(){const was=estateCustodyOn();setEstateCustody(false);return ()=>setEstateCustody(was);}};
+  if(kind==='rich-no-estate-release')return {spec:label,summary:'a dissolved household keeps its estate parcels stamped for it, as before rules 163; no effect below 163',install(){const was=estateReleaseOn();setEstateRelease(false);return ()=>setEstateRelease(was);}};
   if(kind==='rich-no-work-handover')return {spec:label,summary:'remove informed living-worker handover and handback conversations',install(){const was=workHandoverOn();setWorkHandover(false);return ()=>setWorkHandover(was);}};
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};

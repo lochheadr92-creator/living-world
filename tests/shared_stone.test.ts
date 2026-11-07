@@ -34,7 +34,7 @@ function yardScene(v:number,quarryHh=0){
 const collect=(w:World,p:Person,id:number)=>generateOptions(w,p,true,true).options.find(o=>o.kind==='withdraw'&&o.targetId===id&&o.yields==='stone');
 
 describe('rules 162 is registered',()=>{
- it('is the current version and a supported one',()=>{expect(CURRENT_RULES_VERSION).toBe(162);expect(SUPPORTED_RULES_VERSIONS).toContain(162);});
+ it('is registered and supported (the current version may be later)',()=>{expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(162);expect(SUPPORTED_RULES_VERSIONS).toContain(162);});
 });
 
 describe('a quarry yard is a place to collect stone',()=>{

@@ -37,9 +37,9 @@ Nothing is moved, created or lost: a parcel still has to be reached and collecte
 people learn the new owner when they next see the parcel (`knowledge.ts` copies the stamp on
 sight), so a stale belief keeps hiding it until then. Rules 162 and earlier keep their recorded
 behaviour; a save made before 163 keeps its locked parcels. The module switch `setEstateRelease`
-(`estateReleaseOn`) restores the rules-162 behaviour inside a rules-163 world for the lab; its
-branch name is `rich-no-estate-release`, to be registered in `scripts/lab/lab.ts` (that file held
-another session's uncommitted work when this was written, so the registration waits for the owner).
+(`estateReleaseOn`) restores the rules-162 behaviour inside a rules-163 world; the lab branch is
+`rich-no-estate-release` (`scripts/lab/lab.ts`; the registration was committed as its own hunk beside
+another session's uncommitted edits in that file, at the owner's prompting).
 
 Not touched: meal leftovers stamped for a dissolved household (`mealFood.hhId`, food that spoils),
 and tools a dissolved household had lent out (`Tool.ownerHh` of tools held elsewhere).
@@ -82,4 +82,6 @@ and tools a dissolved household had lent out (`Tool.ownerHh` of tools held elsew
   6 at 163, one seed, not an estimate of anything.
 
 No survival, household or production benefit is claimed. The 12-seed paired lab against a nudge
-floor is the owner's run once the lab branch is registered.
+floor (`review_evidence/estate-release-20261107/owner_runs.ps1`, run detached from a clean checkout of
+the commit, since the integrate tree held another session's uncommitted simulation edits) is recorded
+in its `lab163/report.txt` when it finishes, together with the full suite.

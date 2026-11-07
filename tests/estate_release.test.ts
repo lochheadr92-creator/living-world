@@ -15,6 +15,7 @@ import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {describeEntity} from '../src/sim/inspect';
 import {toolReport} from '../src/sim/toolreg';
 import {CURRENT_RULES_VERSION,SUPPORTED_RULES_VERSIONS} from '../src/sim/rulesversion';
+import {parseIntervention} from '../scripts/lab/lab';
 import type {World,Person,Pile,Items} from '../src/sim/types';
 
 /** Ada (and, when asked, her child Tam) in one household; Oren, a generous neighbour, and Pia, a distant stranger, each in their own. */
@@ -99,6 +100,13 @@ describe('the lab removal',()=>{
    expect(pile.estate!.hhId).toBe(hhA);expect(f.axe.ownerHh).toBe(hhA);
    collect(f.w,f.oren,pile,{wood:2});advance(f.w);expect(f.oren.inv.wood??0).toBe(0);sound(f.w);
   }finally{setEstateRelease(true);}
+  expect(estateReleaseOn()).toBe(true);
+ });
+ it('is registered as the lab branch rich-no-estate-release, which installs and uninstalls the switch',async()=>{
+  const {estateReleaseOn}=await import('../src/sim/estate_release');
+  const off=parseIntervention('rich-no-estate-release').install!();
+  try{expect(estateReleaseOn()).toBe(false);const f=scene(163),hhA=f.ada.hhId;killPerson(f.w,f.ada,'declared staged loss');expect(parcelOf(f.w).estate!.hhId).toBe(hhA);}
+  finally{off();}
   expect(estateReleaseOn()).toBe(true);
  });
 });
