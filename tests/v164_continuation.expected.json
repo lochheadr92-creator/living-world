@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "6737465b9d64838affce97bf60a99527e9047a57",
+    "rules": 164,
+    "content": "825aa0f769374942d36c3ca43c105608982dc7b222f1a611784991cc18547e13",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 18000 ticks including one proposal conversation (tick 16251), then 120 more after a save and load"
+  },
+  "saved": "bcf99ba0facb9aa207ee4d6d105e9984567e92e3cec485361fcf46ec713cdf4e",
+  "continued": "05b2966aaa7ab7054ea964c396a3f7f99697afbeff37c0a0759a6f5412bc3b17"
+}
