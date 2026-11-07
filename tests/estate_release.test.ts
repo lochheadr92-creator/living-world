@@ -36,7 +36,7 @@ const parcelOf=(w:World)=>w.piles.find(p=>p.estate)!;
 function sound(w:World){expect(conservationReport(w).ok).toBe(true);expect(toolReport(w).ok).toBe(true);const raw=serializeWorld(w);expect(serializeWorld(deserializeWorld(raw))).toBe(raw);}
 
 describe('rules 163 is registered',()=>{
- it('is the current version and a supported one',()=>{expect(CURRENT_RULES_VERSION).toBe(163);expect(SUPPORTED_RULES_VERSIONS).toContain(163);});
+ it('is registered and supported (the current version may be later)',()=>{expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(163);expect(SUPPORTED_RULES_VERSIONS).toContain(163);});
 });
 
 describe('the last member of a household dies',()=>{

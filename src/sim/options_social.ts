@@ -45,6 +45,7 @@ import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark, trustOf } from './relations';
 import { runsRulesVersion } from './rulesversion';
+import { hasProposalBelief } from './proposal_belief';
 import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -565,6 +566,16 @@ function optRecruit(ctx: Ctx): void {
 }
 
 // ───────────────────────── moving in together ─────────────────────────
+/** rules 164: a place to sleep belonging to that household which this person believes in (seen or told), never the true household home */
+function believedHomeOf(p: Person, hhId: number): { type: keyof typeof BUILD_DEF } | undefined {
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (b.hh !== hhId || !b.btype) continue;
+    const type = b.btype as keyof typeof BUILD_DEF;
+    if (BUILD_DEF[type]?.sleepers > 0) return { type };
+  }
+  return undefined;
+}
+
 function optPropose(ctx: Ctx): void {
   const { world, p } = ctx;
   if (world.settings.scene !== 'natural') return; // staged test scenes stay focused on what they are testing
@@ -580,17 +591,19 @@ function optPropose(ctx: Ctx): void {
     // housemates who are not family can still become a couple
     const sameHome = q.hhId === p.hhId;
     if (sameHome && (rel.kin || p.partnerId !== 0 || q.partnerId !== 0)) continue;
-    const back = q.relations[p.id];
-    if (!back) continue;
+    // rules 164 (proposal_belief.ts): the other's private regard for me is not something I can read; I ask on my own feelings and find out by asking
+    const believed = hasProposalBelief(world);
+    const back = believed ? undefined : q.relations[p.id];
+    if (!believed && !back) continue;
     let kind: 'partner' | 'roommate' | null = null;
-    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && back.affinity >= 26 && spark(p, q) && !rel.kin) kind = 'partner';
+    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && (!back || back.affinity >= 26) && spark(p, q) && !rel.kin) kind = 'partner';
     else if (sameHome) continue;
-    else if (rel.affinity >= 38 && rel.trust >= 26 && back.affinity >= 32) {
+    else if (rel.affinity >= 38 && rel.trust >= 26 && (!back || back.affinity >= 32)) {
       // roommates: one of us has no real home and the other has room
       const hhP = ctx.members.length;
       const homeless = !ctx.home;
-      const qHome = world.households.find((h) => h.id === q.hhId)?.homeId;
-      const room = qHome ? (world.byId.get(qHome) as { type?: keyof typeof BUILD_DEF } | undefined) : undefined;
+      const qHome = believed ? undefined : world.households.find((h) => h.id === q.hhId)?.homeId;
+      const room = believed ? believedHomeOf(p, q.hhId) : qHome ? (world.byId.get(qHome) as { type?: keyof typeof BUILD_DEF } | undefined) : undefined;
       if (homeless && room?.type && BUILD_DEF[room.type].sleepers > 0 && hhP <= 2) kind = 'roommate';
     }
     if (!kind) continue;
