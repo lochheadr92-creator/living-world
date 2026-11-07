@@ -1,0 +1,8 @@
+econ-cc3 r163: asks 0p/0r/0o refused 0 noRoom 0 coupled 2 alive 9 deaths 23 offers: 0 pairs (0 also at 163) in 0/5797 samples conserved true tools true
+econ-cc3 r164: asks 0p/0r/0o refused 0 noRoom 0 coupled 2 alive 9 deaths 23 offers: 0 pairs (0 also at 163) in 0/5797 samples conserved true tools true
+forest r163: asks 0p/0r/0o refused 0 noRoom 0 coupled 1 alive 11 deaths 17 offers: 1 pairs (1 also at 163) in 5/8752 samples conserved true tools true
+forest r164: asks 0p/0r/0o refused 0 noRoom 0 coupled 1 alive 11 deaths 17 offers: 1 pairs (1 also at 163) in 5/8752 samples conserved true tools true
+meadow r163: asks 0p/0r/0o refused 0 noRoom 0 coupled 3 alive 19 deaths 17 offers: 0 pairs (0 also at 163) in 0/10733 samples conserved true tools true
+meadow r164: asks 0p/0r/0o refused 0 noRoom 0 coupled 3 alive 19 deaths 17 offers: 0 pairs (0 also at 163) in 0/10733 samples conserved true tools true
+river r163: asks 0p/0r/0o refused 0 noRoom 0 coupled 7 alive 30 deaths 0 offers: 0 pairs (0 also at 163) in 0/10000 samples conserved true tools true
+river r164: asks 0p/0r/0o refused 0 noRoom 0 coupled 7 alive 30 deaths 0 offers: 0 pairs (0 also at 163) in 0/10000 samples conserved true tools true

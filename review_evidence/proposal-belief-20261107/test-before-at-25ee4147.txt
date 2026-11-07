@@ -1,0 +1,119 @@
+﻿node.exe : (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to 
+become the default in a future major version of Vite:
+At line:14 char:11
++ cd $b; $o=& node node_modules\vitest\vitest.mjs run tests/proposal_be ...
++           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((!) Your Vite c...ersion of Vite::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file 
+extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment-living-world-integrate/17904f90-8d60-4fe6-a0aa-5318949c653c/scratchpad/before164
+
+ ❯ tests/proposal_belief.test.ts (6 tests | 4 failed) 47ms
+   ❯ the other person's private regard for the proposer (3)
+     × rules 163 offers to ask on it; rules 164 does not read it, so Ada's options are the same whatever Ben privately feels 25ms
+     × with no relationship of his own toward her at all Ben is still asked at 164, and not at 163 5ms
+   ❯ the room in the other's household home (2)
+     × rules 163 offers to share a home Ada has never seen; rules 164 asks only once she believes in a home of his household 6ms
+   ❯ an unwelcome proposal is found out by asking (1)
+     × at 164 a proposal to a lukewarm neighbour is made, refused, and not repeated for a while; the world stays sound 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/proposal_belief.test.ts > the other person's private regard for the proposer > rules 163 offers to ask on 
+it; rules 164 does not read it, so Ada's options are the same whatever Ben privately feels
+AssertionError: 164 does not: expected [ false, true, false ] to deeply equal [ true, true, true ]
+
+- Expected
++ Received
+
+  [
+-   true,
+-   true,
++   false,
+    true,
++   false,
+  ]
+
+ ❯ tests/proposal_belief.test.ts:50:40
+     48|    const offered=runs.map(r=>r.some(x=>x.startsWith(key)));
+     49|    if(version===163)expect(offered,'163 follows his private figure').t…
+     50|    else{expect(offered,'164 does not').toEqual([true,true,true]);expec…
+       |                                        ^
+     51|   }
+     52|   expect(seen[163][0]).not.toEqual(seen[163][1]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/proposal_belief.test.ts > the other person's private regard for the proposer > with no relationship of 
+his own toward her at all Ben is still asked at 164, and not at 163
+AssertionError: rules 164: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/proposal_belief.test.ts:63:90
+     61|   for(const version of [163,164]){
+     62|    const f=scene(version);Object.assign(relOf(f.ada,f.ben.id),{affinit…
+     63|    expect(!!proposeOption(f.w,f.ada,`socialize:${f.ben.id}:propose`),`…
+       |                                                                                          ^
+     64|   }
+     65|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/proposal_belief.test.ts > the room in the other's household home > rules 163 offers to share a home Ada 
+has never seen; rules 164 asks only once she believes in a home of his household
+AssertionError: before she has seen it, rules 164: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/proposal_belief.test.ts:76:64
+     74|    expect(f.ada.beliefs[f.hut!.id],'Ada has not seen the hut').toBeUnd…
+     75|    const key=`socialize:${f.ben.id}:propose`,before=proposeOption(f.w,…
+     76|    expect(!!before,`before she has seen it, rules ${version}`).toBe(ve…
+       |                                                                ^
+     77|    observe(f.w,f.ada,f.hut!);
+     78|    expect(proposeOption(f.w,f.ada,key)?.label,`after seeing the hut, r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/proposal_belief.test.ts > an unwelcome proposal is found out by asking > at 164 a proposal to a lukewarm 
+neighbour is made, refused, and not repeated for a while; the world stays sound
+AssertionError: expected undefined to be defined
+ ❯ tests/proposal_belief.test.ts:92:40
+     90|   const f=scene(164);Object.assign(relOf(f.ada,f.ben.id),{affinity:40,…
+     91|   const key=`socialize:${f.ben.id}:propose`;
+     92|   expect(proposeOption(f.w,f.ada,key)).toBeDefined();
+       |                                        ^
+     93|   f.ada.cooldowns.pause=0;f.ben.cooldowns.pause=0;f.ben.nextThink=f.w.…
+     94|   let asked=false;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 2 passed (6)
+   Start at  17:51:01
+   Duration  1.66s (transform 86%, import 11%, tests 3%)
+
+

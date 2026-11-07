@@ -1,0 +1,113 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/Users/RJLoc/AppData/Local/Temp/claude/C--dev-Claude-Experiment-living-world-integrate/17904f90-8d60-4fe6-a0aa-5318949c653c/scratchpad/clean163
+
+ ❯ tests/zz_review_main_toolreport_saves.test.ts (2 tests | 1 failed) 135420ms
+   ❯ REVIEW: tool registry consistency in retained and fresh worlds (2)
+     × fresh current-rules worlds, 12,000 ticks, checked every 600 ticks 132702ms
+(node:47368) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/lab_defaults.test.ts (3 tests | 2 failed) 28670ms
+   ❯ current lab defaults cannot silently reuse legacy results (2)
+     × rejects existing undefined rows before starting workers or touching outputs 10087ms
+   × refuses to resume ordinary lab rows as a geology generation comparison 10068ms
+ ❯ tests/zz_review_h_retention.test.ts (3 tests | 3 skipped) 10369ms
+ ❯ tests/zz_review_g_observer_purity.test.ts (2 tests | 1 failed) 400196ms
+   ❯ REVIEW G: observation leaves the world exactly as it was, every tick (2)
+     × river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical 272847ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/zz_review_h_retention.test.ts [ tests/zz_review_h_retention.test.ts ]
+Error: Hook timed out in 10000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/zz_review_h_retention.test.ts:21:1
+     19| let text: string;
+     20|
+     21| beforeAll(() => {
+       | ^
+     22|   world = natural('meadow', { dynamics: 'rich', rulesVersion: CURRENT_…
+     23|   run(world, DAY);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing undefined rows before starting workers or touching outputs
+AssertionError: expected null to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+null
+
+ ❯ tests/lab_defaults.test.ts:16:29
+     14|       writeFileSync(file, original);
+     15|       const result = spawnSync(process.execPath, ['scripts/lab.mjs', '…
+     16|       expect(result.status).toBe(1);
+       |                             ^
+     17|       expect(result.stderr).toContain('requested rich');
+     18|       expect(result.stderr).toContain('Use a new output directory');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/lab_defaults.test.ts > refuses to resume ordinary lab rows as a geology generation comparison
+AssertionError: expected null to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+null
+
+ ❯ tests/lab_defaults.test.ts:31:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical
+Error: Test timed out in 170000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/zz_review_g_observer_purity.test.ts:105:5
+    103|   const report: string[] = [];
+    104|   for (const [seed, ticks, every] of [['river', 1000, 1], ['meadow', 2…
+    105|     it(`${seed}: all entry points every ${every} tick(s) for ${ticks} …
+       |     ^
+    106|       installFakeDom();
+    107|       const settings = currentWorldSettings('normal', seed, { immigrat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/zz_review_main_toolreport_saves.test.ts > REVIEW: tool registry consistency in retained and fresh worlds > fresh current-rules worlds, 12,000 ticks, checked every 600 ticks
+Error: Test timed out in 120000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/zz_review_main_toolreport_saves.test.ts:37:3
+     35|     expect(Object.keys(out).length).toBeGreaterThan(0);
+     36|   });
+     37|   it('fresh current-rules worlds, 12,000 ticks, checked every 600 tick…
+       |   ^
+     38|     const out: Record<string, unknown> = {};
+     39|     for (const seed of ['forest', 'river', 'meadow']) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  4 failed | 516 passed (520)
+      Tests  4 failed | 2982 passed | 3 skipped (2989)
+   Start at  18:11:40
+   Duration  403.02s (tests 95%, import 5%, transform 1%)
+

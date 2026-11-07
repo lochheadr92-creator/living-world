@@ -1,0 +1,328 @@
+{
+ "seed": "gen-3",
+ "days": 25,
+ "rules": 163,
+ "conserved": true,
+ "tools": true,
+ "finalHash": "b11f2981fe8c4058",
+ "alive": 25,
+ "deaths": 3,
+ "households": 10,
+ "coupledAtEnd": 4,
+ "asks": {
+  "partner": 2,
+  "roommate": 0,
+  "other": 0
+ },
+ "refused": 1,
+ "noRoom": 0,
+ "askList": [
+  {
+   "tick": 46699,
+   "a": 1091,
+   "b": 1102,
+   "kind": "partner"
+  },
+  {
+   "tick": 51578,
+   "a": 1077,
+   "b": 1094,
+   "kind": "partner"
+  }
+ ],
+ "sampling": {
+  "every": 120,
+  "adultSamples": 7787,
+  "samplesWithAnOffer": 12,
+  "pairsOffered": 4,
+  "pairsOfferedAlsoAt163": 4,
+  "pairsOfferedOnlyWithoutTheGate": 0,
+  "byKind": {
+   "couple": 4,
+   "couple at home": 0,
+   "roommate": 0
+  },
+  "firstOffers": [
+   {
+    "pair": "1094->1077",
+    "kind": "couple",
+    "from163": true,
+    "samples": 6,
+    "firstTick": 21120
+   },
+   {
+    "pair": "1077->1094",
+    "kind": "couple",
+    "from163": true,
+    "samples": 2,
+    "firstTick": 30600
+   },
+   {
+    "pair": "1102->1091",
+    "kind": "couple",
+    "from163": true,
+    "samples": 2,
+    "firstTick": 43320
+   },
+   {
+    "pair": "1091->1102",
+    "kind": "couple",
+    "from163": true,
+    "samples": 2,
+    "firstTick": 46320
+   }
+  ]
+ },
+ "daily": [
+  {
+   "day": 1,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 3,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 4,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 5,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 6,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 7,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 8,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 9,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 10,
+   "alive": 28,
+   "coupled": 5,
+   "households": 11,
+   "meanHouseholdSize": 2.55,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 11,
+   "alive": 26,
+   "coupled": 4,
+   "households": 11,
+   "meanHouseholdSize": 2.36,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 12,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 13,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 14,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 15,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 16,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 17,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 18,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 19,
+   "alive": 25,
+   "coupled": 3.5,
+   "households": 11,
+   "meanHouseholdSize": 2.27,
+   "asks": 0,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 20,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 1,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 21,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 1,
+   "refused": 0,
+   "noRoom": 0
+  },
+  {
+   "day": 22,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 2,
+   "refused": 1,
+   "noRoom": 0
+  },
+  {
+   "day": 23,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 2,
+   "refused": 1,
+   "noRoom": 0
+  },
+  {
+   "day": 24,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 2,
+   "refused": 1,
+   "noRoom": 0
+  },
+  {
+   "day": 25,
+   "alive": 25,
+   "coupled": 4,
+   "households": 10,
+   "meanHouseholdSize": 2.5,
+   "asks": 2,
+   "refused": 1,
+   "noRoom": 0
+  }
+ ]
+}
