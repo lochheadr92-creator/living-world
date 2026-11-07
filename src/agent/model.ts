@@ -4,7 +4,8 @@
 //
 // Two kinds of failure are told apart. A failed call is the model's: no text, not the JSON asked for, a decline, a cut-off answer, a
 // timeout; it counts toward the breaker. A RetryableModelError is the provider's: a rate limit, an outage, a dropped connection; the
-// gate waits it out with backoff inside one call's retry budget (honouring the wait the provider names) and counts nothing against the
+// gate waits it out with backoff inside one call's retry budget (honouring the wait the provider names, at most MAX_RETRIES_PER_CALL
+// times, so a provider naming a tiny wait cannot turn one call into thousands of requests) and counts nothing against the
 // model unless that budget runs out. The breaker is half-open: once the model is given up on, every probeEvery-th ask is tried anyway,
 // and one success puts the model back in play, so a rate limit that lasted minutes does not turn the rest of a long run into an
 // engine run. Retries happen outside the transcript: a replay sees only the answer that was finally used, or the reason there was none.
@@ -78,6 +79,31 @@ export const DEFAULT_BUDGET: Readonly<Budget> = Object.freeze({
   probeEvery: 10,
 });
 
+/**
+ * Refuse a budget that would switch a cap off. Every comparison with NaN is false, so a cap read from a flag such as `50k` (NaN) or
+ * `Infinity` was simply never reached; such a budget is an error before any call is made, naming the field.
+ */
+export function checkBudget(b: Budget): void {
+  const whole = (k: keyof Budget, min: number): void => {
+    const v = b[k];
+    if (!Number.isInteger(v) || v < min) throw new Error(`budget: ${k} must be a whole number of at least ${min}, not ${String(v)}`);
+  };
+  const finite = (k: keyof Budget, min: number, above: boolean): void => {
+    const v = b[k];
+    if (!Number.isFinite(v) || (above ? v <= min : v < min)) throw new Error(`budget: ${k} must be a number ${above ? 'above' : 'of at least'} ${min}, not ${String(v)}`);
+  };
+  whole('maxCallsPerDay', 0);
+  whole('maxInputChars', 1);
+  whole('maxOutputTokens', 1);
+  finite('timeoutMs', 0, true);
+  whole('maxConsecutiveFailures', 1);
+  finite('maxRetryMs', 0, false);
+  whole('probeEvery', 1);
+}
+
+/** however short the waits the provider names, one call is attempted again at most this many times */
+export const MAX_RETRIES_PER_CALL = 10;
+
 /** a scripted model for tests and smoke runs: deterministic, no network */
 export function stubModel(id: string, answer: (req: ModelRequest, call: number) => string | Promise<string>, config: Record<string, unknown> = {}): ModelClient {
   let n = 0;
@@ -127,6 +153,7 @@ export class ModelGate {
     readonly budget: Budget = DEFAULT_BUDGET,
     deps: GateDeps = {},
   ) {
+    checkBudget(budget);
     this.sleep = deps.sleep ?? ((ms) => new Promise((r) => setTimeout(r, ms)));
     this.now = deps.now ?? (() => Date.now());
   }
@@ -160,8 +187,9 @@ export class ModelGate {
         return { ok: true, reply, latencyMs: this.now() - t0, retries };
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        if (isRetryable(e)) {
-          const wait = e.retryAfterMs !== undefined && e.retryAfterMs > 0 ? e.retryAfterMs : defaultWait(retries);
+        if (isRetryable(e) && retries < MAX_RETRIES_PER_CALL) {
+          const named = e.retryAfterMs;
+          const wait = named !== undefined && Number.isFinite(named) && named > 0 ? named : defaultWait(retries);
           if (waited + wait <= this.budget.maxRetryMs) {
             retries++;
             this.retries++;

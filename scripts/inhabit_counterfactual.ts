@@ -9,7 +9,8 @@
 // the weak ones (reason words only in the notes, pursuit by shared words); --asks all, every decision. A run in which no call was
 // answered writes counterfactual.failed.txt instead and exits 1: it is no result, never a null result. --no-both skips the with-notes arm (cheaper; then a difference cannot be read against the model's own variance). Writes
 // counterfactual.json and counterfactual.txt beside the transcript (--out to put them elsewhere); an existing counterfactual.json is kept
-// unless --overwrite. Keys: OPENAI_API_KEY / ANTHROPIC_API_KEY, as for scripts/inhabit.ts.
+// unless --overwrite. Keys: OPENAI_API_KEY / ANTHROPIC_API_KEY, as for scripts/inhabit.ts. --max-calls (default 300) caps the whole run:
+// one that would need more is refused before the first call, and a cap, repeat count or budget value that is not a number is an error.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { candidateAsks } from '../src/agent/attribute';
@@ -71,11 +72,14 @@ const budget = {
   timeoutMs: Number(opt('timeout-ms', String(DEFAULT_BUDGET.timeoutMs))),
   maxOutputTokens: Number(opt('max-output-tokens', String(DEFAULT_BUDGET.maxOutputTokens))),
 };
+// the run's whole cost is capped (the per-day cap above means nothing here: nothing runs in the world); a bad value is refused
+const maxCalls = Number(opt('max-calls', '300'));
 void (async () => {
   const c = await counterfactual(t, seqs, model, {
     repeats,
     both,
     budget,
+    maxCalls,
     onCall: (done, total) => process.stdout.write(`\r${done}/${total} calls`),
   });
   process.stdout.write('\n');

@@ -69,10 +69,16 @@ export interface CounterfactualOptions {
   deps?: GateDeps;
   /** called after each model call (progress) */
   onCall?: (done: number, total: number) => void;
+  /** the most model calls the whole run may make; a run that would need more is refused before the first call */
+  maxCalls?: number;
 }
 
 export async function counterfactual(t: Transcript, seqs: number[], model: ModelClient, opts: CounterfactualOptions = {}): Promise<Counterfactual> {
-  const repeats = Math.max(1, Math.round(opts.repeats ?? 3));
+  // a repeat count that is not a number (a flag such as `3x`) used to mean no calls at all, and a huge one meant that many calls
+  const asked = opts.repeats ?? 3;
+  if (!Number.isFinite(asked) || asked < 1) throw new Error(`repeats must be a number of at least 1, not ${String(asked)}`);
+  if (opts.maxCalls !== undefined && (!Number.isInteger(opts.maxCalls) || opts.maxCalls < 1)) throw new Error(`the call cap must be a whole number of at least 1, not ${String(opts.maxCalls)}`);
+  const repeats = Math.round(asked);
   const both = opts.both ?? true;
   const gate = new ModelGate(model, opts.budget, opts.deps);
   const asks = seqs.map((s) => {
@@ -81,6 +87,7 @@ export async function counterfactual(t: Transcript, seqs: number[], model: Model
     return a;
   });
   const total = asks.reduce((n, a) => n + repeats * (both && hasNotes(a.notes) ? 2 : 1), 0);
+  if (opts.maxCalls !== undefined && total > opts.maxCalls) throw new Error(`this would make ${total} model calls, more than the cap of ${opts.maxCalls}; ask for fewer, or raise the cap (--max-calls)`);
   let done = 0;
   const results: CounterfactualAsk[] = [];
   for (const ask of asks) {
