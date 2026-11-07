@@ -2,7 +2,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { AUTOSAVE_EVERY, Autosaver } from '../src/app/autosave';
 import { runFrame, startFrameLoop } from '../src/app/frameloop';
-import { Game } from '../src/app/game';
+import { Game, MAX_FRAME_DT, MAX_STEP_MS } from '../src/app/game';
+import { TPS } from '../src/sim/constants';
 import { defaultSettings } from '../src/sim/factory';
 import type { World } from '../src/sim/types';
 
@@ -83,6 +84,47 @@ describe('a frame that throws', () => {
     g.restart({ seed: 'loop-forget-2' });
     expect(g.worldFaulted).toBe(false);
     err.mockRestore();
+  });
+});
+
+describe('a frame has a stepping budget in time, not only in ticks', () => {
+  /** a world whose every tick takes `ms` of the frame */
+  const heavy = (seed: string, ms: number) => {
+    const g = playing(seed);
+    let now = 0;
+    g.clock = () => now;
+    g.tickHooks = { afterTick: () => ((now += ms), true) };
+    return g;
+  };
+
+  it('a heavy world at 16x stops stepping once the frame has spent its budget, and counts the rest as given up', () => {
+    const g = heavy('budget-heavy', 10);
+    g.setSpeed(16);
+    const dropped = g.playbackStats().dropped;
+    const ran = g.advance(MAX_FRAME_DT); // owes 40 ticks
+    const smooth = Math.ceil((16 * TPS) / 60) + 1;
+    expect(ran).toBe(smooth); // its smooth share already took longer than MAX_STEP_MS
+    expect(g.playbackStats().dropped - dropped).toBe(40 - smooth);
+    expect(g.world.tick).toBe(ran);
+  });
+
+  it('a light world is not held back: what is owed within the budget is all run', () => {
+    const g = heavy('budget-light', 0.1);
+    g.setSpeed(16);
+    expect(g.advance(MAX_FRAME_DT)).toBe(40);
+    const slow = heavy('budget-mid', 2); // 2 ms a tick: the budget allows a few past the smooth share
+    slow.setSpeed(16);
+    const ran = slow.advance(MAX_FRAME_DT);
+    expect(ran).toBeGreaterThan(Math.ceil((16 * TPS) / 60) + 1);
+    expect(ran).toBeLessThanOrEqual(Math.ceil((16 * TPS) / 60) + 1 + Math.ceil(MAX_STEP_MS / 2));
+  });
+
+  it('a smooth 60 fps frame always gets its share, however slow its ticks', () => {
+    const g = heavy('budget-smooth', 50);
+    g.setSpeed(4);
+    let ticks = 0;
+    for (let i = 0; i < 60; i++) ticks += g.advance(1 / 60);
+    expect(Math.abs(ticks - 4 * TPS)).toBeLessThanOrEqual(2);
   });
 });
 

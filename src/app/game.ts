@@ -13,6 +13,12 @@ import type { FrameFault, FrameStage } from './frameloop';
 
 export const SPEEDS = [0.5, 1, 2, 4, 8, 16] as const;
 export const MAX_STEPS_PER_FRAME = 40;
+/**
+ * Real milliseconds a frame may spend running ticks beyond what a smooth 60 fps frame owes at the speed asked for. Counting ticks alone
+ * let a heavy world (Huge at 16x) spend 40 ticks, over a third of a second, in every frame, so the page answered three times a second.
+ * What is owed past this is given up and counted, like a stall: the world slows down instead of the page freezing.
+ */
+export const MAX_STEP_MS = 12;
 /** the longest stretch of real time one frame may account for; a longer gap (hidden tab, a stalled frame) is a stall, not a debt */
 export const MAX_FRAME_DT = 0.25;
 /** real seconds over which the achieved playback rate is measured */
@@ -95,6 +101,8 @@ export class Game {
   droppedTicks = 0;
   /** hooks around each tick run by the clock (play and single step); none unless a driver installs them */
   tickHooks: TickHooks | null = null;
+  /** real time in milliseconds, for the per-frame stepping budget only (tests replace it); the world never reads it */
+  clock: () => number = () => performance.now();
   /** the latest frame stage that threw since this world began (src/app/frameloop.ts); a world fault also stops the autosave. Never saved */
   fault: FrameFault | null = null;
   /** true once the world's own clock has thrown in this world: its state may be part-way through a tick */
@@ -143,7 +151,14 @@ export class Game {
       this.acc = this.acc % 1; // too far behind: skip the backlog rather than spiral
     } else this.acc -= n;
     let ran = 0;
+    // a smooth frame's share is always run; past it, the frame stops once it has spent MAX_STEP_MS stepping
+    const smooth = Math.ceil((this.speed * TPS) / 60) + 1;
+    const started = n > smooth ? this.clock() : 0;
     for (let i = 0; i < n; i++) {
+      if (ran >= smooth && this.clock() - started >= MAX_STEP_MS) {
+        this.giveUp(n - ran);
+        break;
+      }
       if (this.tickHooks?.beforeTick?.() === false) {
         // a driver is holding the clock: not one tick runs, however fast the speed is set or how often play is pressed
         this.acc = 0;
