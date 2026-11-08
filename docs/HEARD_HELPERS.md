@@ -50,7 +50,7 @@ follow-up on `228d62dc` skips children by `stageOf`, because `Person` has no chi
 still differs at tick 3,001 and the digests are unchanged. That follow-up is what `npm run
 typecheck` passed against.
 
-The paired lab is not run. No benefit or harm is claimed.
+Paired lab, clean checkout of `87d6a315`, 9 November 2026: 12 seeds (aspen, birch, cedar, fern, gen-1 through gen-6, meadow, river), Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`. Rules 171 pinned with `--rules 171` against current rules 172. Both arms finished 12 of 12 seeds, three arms each. Provenance head `87d6a315`, `dirty` false, `modified` empty. Reports written 03:29:28 (rules 172) and 03:29:46 (rules 171). `scripts/lab_versions.ts` exited 0 at 03:30:27 and ends: nothing moved by more than a single draw moves it. Every listed metric is not distinguishable from chance. The largest printed difference is prepUnits -1.3, inside a noise floor of ±52.3. The suite was not rerun. No benefit or harm is claimed. Evidence: `review_evidence/heard-helpers-20261109/`. The 8,000-tick aspen pin and the `stageOf` follow-up are not this result.
 
 ## Not touched
 
