@@ -53,7 +53,7 @@ that checkout, 1 of 1 in 87.1s. The same probe on birch, forest, meadow, river, 
 cedar for 24,000 ticks saw no deaths and no kept worry, which is why the pin is 32,000 ticks
 and not 12,000. The reference script refuses to overwrite.
 
-The paired lab is not run. No benefit or harm is claimed.
+Paired lab, clean checkout of `ba3c549f`, 9 November 2026: 12 seeds (aspen, birch, cedar, fern, gen-1 through gen-6, meadow, river), Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`. Rules 169 pinned with `--rules 169` against current rules 170. Both arms finished 12 of 12 seeds, three arms each. Provenance head `ba3c549f`, `dirty` false, `modified` empty. Reports written 02:46:33 and 02:46:36. `scripts/lab_versions.ts` exited 0 at 02:47:13 and ends: nothing moved by more than a single draw moves it. Every listed metric differs by 0. The suite was not rerun. No benefit or harm is claimed. Evidence: `review_evidence/known-worry-20261109/`. The six-seed probe and the 32,000-tick pin are not this result.
 
 ## Not touched
 
