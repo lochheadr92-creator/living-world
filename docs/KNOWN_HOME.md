@@ -55,5 +55,5 @@ The paired lab is not run. No benefit or harm is claimed.
 
 ## Not touched
 
-The recruit cap is rules 172 (`docs/HEARD_HELPERS.md`). `knownNeeds` for a dependant in sight. The leaks that
+The recruit cap is rules 172 (`docs/HEARD_HELPERS.md`). `knownNeeds` for a dependant in sight is rules 173 (`docs/SEEN_DEPENDANT.md`). The leaks that
 sit in another session's uncommitted files.

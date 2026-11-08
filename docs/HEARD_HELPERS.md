@@ -54,5 +54,5 @@ The paired lab is not run. No benefit or harm is claimed.
 
 ## Not touched
 
-`knownNeeds` for a dependant in sight. The recruit accept path. The leaks that sit in another
+`knownNeeds` for a dependant in sight is rules 173 (`docs/SEEN_DEPENDANT.md`). The recruit accept path. The leaks that sit in another
 session's uncommitted files.
