@@ -1,6 +1,6 @@
 # Roadmap execution handoff — rules 161
 
-**Live checkpoint is `AGENTS.md`: rules 169, product save format 5 (9 November 2026).** This file still opens on the rules 161 paragraph below. That paragraph is historical.
+**Live checkpoint is `AGENTS.md`: rules 170, product save format 5 (9 November 2026).** This file still opens on the rules 161 paragraph below. That paragraph is historical.
 
 
 
