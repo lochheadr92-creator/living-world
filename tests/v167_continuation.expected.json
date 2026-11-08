@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "4be83435b5a28a7604376f8c9a14fe5174ba6ff7",
+    "rules": 167,
+    "content": "c18963ab76fb6676cc17576ff3f00d8f4b82739fcc5ff196eacd889da18a66e9",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal forest world (arrivals on), 33000 ticks including an adoption (a probe of this checkout recorded the first at tick 30643), then 120 more after a save and load"
+  },
+  "saved": "be19549ec76e6ff0ac748329f1fe24c4883346097e35449b2d4db1db35fdf48c",
+  "continued": "3eced2308fd4b5a51bf2314c573cb84cb5f34906c1e6225fda926c653f2a610a"
+}
