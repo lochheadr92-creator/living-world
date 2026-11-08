@@ -51,6 +51,6 @@ The status file never received `labs exit` or `compare exit`. The scheduler wrap
 
 ## Not touched
 
-`knownNeeds` for a dependant in sight. Store contents copied at sight. A worry about a dead subject
+`knownNeeds` for a dependant in sight. Store contents copied at sight are rules 169 (`docs/SEEN_STOCK.md`). A worry about a dead subject
 the worrier has not heard of. `whereIs` reading household ids. The recruit cap's global helper count.
 The leaks that sit in another session's uncommitted files.
