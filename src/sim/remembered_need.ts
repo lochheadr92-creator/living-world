@@ -8,6 +8,8 @@
 // sight is judged as before, from what the carer can see up close. A note from before these rules carries no signs, and
 // then the carer simply does not know how the dependant is.
 import {runsRulesVersion} from './rulesversion';
+import {hasSeenDependant} from './seen_dependant';
+import {visibleHunger,visibleThirst} from './visible_need';
 import type {Person,SeenEntity,World} from './types';
 export interface RememberedSigns {hungry:boolean;thirsty:boolean;cold:boolean}
 let enabled=true;
@@ -28,11 +30,17 @@ export function needsFromSigns(s:RememberedSigns):{hunger:number;thirst:number;w
  return {hunger:s.hungry?41:100,thirst:s.thirsty?39:100,warmth:s.cold?34:100};
 }
 /**
- * Pure. What a carer can honestly take a household dependant's needs to be: the live figures when the dependant is in
- * sight (and, below rules 106, always, as before), the needs implied by how they looked when last seen otherwise, and
- * null when they are out of sight and the carer never noted how they looked. `lookedAt` is the tick of that last sight.
+ * Pure. What a carer can honestly take a household dependant's needs to be. From rules 173 a dependant in sight is the
+ * signs on that sight (starving, hungry, parched, thirsty, cold), not the live figures. Before that, in sight (and,
+ * below rules 106, always) the live figures are used. Out of sight, the needs implied by how they looked when last
+ * seen, or null when the carer never noted how they looked. `lookedAt` is the tick of that last sight.
  */
 export function knownNeeds(w:World,p:Person,d:Person,seenNow:boolean):{hunger:number;thirst:number;warmth:number;lookedAt?:number}|null{
+ if(seenNow&&hasSeenDependant(w)){
+  const seen=p.seen.find(s=>s.ent==='person'&&s.id===d.id);
+  if(!seen)return null;
+  return {hunger:visibleHunger(seen),thirst:visibleThirst(seen),warmth:seen.cold?34:100};
+ }
  if(seenNow||!hasRememberedNeed(w))return d.needs;
  const r=rememberedSigns(p,d.id);if(!r)return null;
  return {...needsFromSigns(r),lookedAt:r.tick};
