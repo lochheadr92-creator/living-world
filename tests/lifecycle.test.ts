@@ -70,6 +70,9 @@ describe('life stages, birth and death', () => {
       const m = w.byId.get(id);
       if (m && m.ent === 'person' && m.id !== kid.id) killPerson(w, m, 'test');
     }
+    const survivor = w.persons.find((p) => p.alive && p.id !== kid.id && stageOf(w, p) !== 'child' && stageOf(w, p) !== 'youth');
+    expect(survivor).toBeTruthy();
+    survivor!.whereabouts[kid.id] = { x: kid.x, y: kid.y, tick: w.tick };
     adoptOrphans(w);
     const newHh = w.households.find((h) => h.id === kid.hhId)!;
     expect(newHh.members.length).toBeGreaterThan(1);

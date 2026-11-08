@@ -7,6 +7,7 @@ import { mourn, think } from './mood';
 import { noteBirth, noteDeath } from './occasions';
 import { noteDeedNear } from './reputation';
 import { onBecameParent, onOrphanTaken, onPartnerLost } from './lifechanges';
+import { hasKnownAdoption, knownPlace } from './known_adoption';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -306,9 +307,15 @@ export function adoptOrphans(world: World): void {
       if (!q.alive || q === child) continue;
       const st = stageOf(world, q);
       if (st === 'child' || st === 'youth') continue;
+      let place = { x: child.x, y: child.y };
+      if (hasKnownAdoption(world)) {
+        const known = knownPlace(q, child);
+        if (!known) continue;
+        place = known;
+      }
       const kin = q.relations[child.id]?.kin ? 3 : 0;
       const kids = membersOf(world, householdById(world, q.hhId)).filter((m) => stageOf(world, m) === 'child').length;
-      const score = q.traits.generosity * 3 + kin - kids * 0.8 - hyp(q.x - child.x, q.y - child.y) * 0.05;
+      const score = q.traits.generosity * 3 + kin - kids * 0.8 - hyp(q.x - place.x, q.y - place.y) * 0.05;
       if (score > bs) {
         bs = score;
         best = q;

@@ -18,6 +18,7 @@ import type { World, Person, Items } from './types';
 import type { CivicProject } from './townships';
 import { townshipOf } from './townships';
 import {describeAccounts} from './checked_accounts';
+import { adoptionWaitLine } from './known_adoption';
 const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? deceasedById(w,id)?.name ?? `person #${id}`;
 const items = (i: Items) => Object.entries(i).map(([k,n]) => `${n} ${k}`).join(', ') || 'no materials';
 export function projectHistory(w: World, q: CivicProject): string[] {
@@ -55,6 +56,7 @@ export function householdHistory(w: World, p: Person): string[] {
  const h = w.households.find(h => h.id === p.hhId);
  if (!h) return ['No current household record. Earlier cause unknown.'];
  const home = w.byId.get(h.homeId);
+ const waiting = adoptionWaitLine(w, p);
  return [ `${h.name} household formed at tick ${h.formed}; formation cause is not recorded.`,
   `Members: ${h.members.map(id => name(w,id)).join(', ')}.`,
   ...supperHistory(w,p),
@@ -72,6 +74,7 @@ export function householdHistory(w: World, p: Person): string[] {
   ]),
   ...w.sites.filter(s => s.hhId === h.id).map(s => `Site #${s.id} (${s.type}), proposed by ${name(w,s.creatorId)}; ${s.status}.`),
   ...w.requests.filter(r => h.members.includes(r.from) || h.members.includes(r.to)).slice(-6).map(r => `Request #${r.id}: ${name(w,r.from)} asked ${name(w,r.to)}; ${r.status}: ${r.note || 'reason unknown'}${r.commitmentId ? `; promise #${r.commitmentId}` : ''}${r.siteId ? `; site #${r.siteId}` : ''}.`),
+  ...(waiting ? [waiting] : []),
  ];
 }
 
