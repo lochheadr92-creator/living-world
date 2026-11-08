@@ -5,7 +5,7 @@ import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
 import {correctSourceExperience} from './source_learning';
 import { checkAccount } from './checked_accounts';
-import { cloneItems } from './economy';
+import { glancedItems } from './seen_stock';
 import { facilitySnapshot,usableUnits } from './facilities';
 import {textileGoods} from './textile_stock';
 import { toolsHeldBy } from './toolreg';
@@ -48,7 +48,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       b.cond = e.condition;
       b.fuel = e.fuel;
       if(e.hearth)b.hearth={fuel:null,heat:null,seen:tick};
-      b.items = cloneItems(e.store.items);
+      b.items = glancedItems(world, e.store.items, e.store.cap);
       if (e.ops) b.ops = facilitySnapshot(world, e);
       const racked = toolsHeldBy(world, e.id);
       if (racked.length) b.tools = racked.map((t) => t.kind);
@@ -56,7 +56,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
     }
     case 'cart': {
       const b = blank(e.id, 'cart', e.x, e.y, tick);
-      b.items = cloneItems(e.load);
+      b.items = glancedItems(world, e.load, e.cap);
       b.state = e.puller ? 'pulled' : 'parked';
       b.hh = e.ownerHh;
       return b;
@@ -83,7 +83,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
     }
     case 'pile': {
       const b = blank(e.id, 'pile', e.x + 0.5, e.y + 0.5, tick);
-      b.items = cloneItems(e.items);
+      b.items = glancedItems(world, e.items, 9999);
       if(e.gear){const g=e.gear,t=world.tools.find(t=>t.id===g.toolId);b.items={};b.hh=g.hhId;b.state='gear';b.gear={kind:g.kind,toolId:g.toolId,hhId:g.hhId,readyAt:g.readyAt,state:g.state,checked:g.checked,bodyId:g.bodyId,wear:t?.wear??100,catch:e.items.fish??0};}
       if(e.carcass){b.state='carcass';b.hh=e.carcass.hhId;b.carcassParts={...e.carcass.remaining};}
       if(e.mealFood)b.hh=e.mealFood.hhId;
