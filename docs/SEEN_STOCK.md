@@ -59,6 +59,6 @@ The paired lab is not run. No benefit or harm is claimed.
 
 ## Not touched
 
-A worry about someone gone is rules 170 (`docs/KNOWN_WORRY.md`). `whereIs` reading household ids. The
+A worry about someone gone is rules 170 (`docs/KNOWN_WORRY.md`). Looking for someone at a home is rules 171 (`docs/KNOWN_HOME.md`). The
 recruit cap's global helper count. `knownNeeds` for a dependant in sight. Facility operation
 counts and hearth fuel. The leaks that sit in another session's uncommitted files.
