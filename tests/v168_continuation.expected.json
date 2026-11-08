@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "c4f31c1533523569f5f255e9a86b3d099b63d11a",
+    "rules": 168,
+    "content": "a16f94ad546b788bdf0be332a00fa3598826e80a61bd19117c5c1c7169a0542b",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 12000 ticks including a generated watch ask (a probe of this checkout, sampling every 200 ticks, recorded the first at tick 8600), then 120 more after a save and load. The same probe ran forest, birch, meadow, river, aspen and cedar to 72000 ticks and made no watch request: every nearby adult had already seen the child."
+  },
+  "saved": "7aac1b95705569a06150c6fa592373608676ac03c79c20372352dd215edf50c7",
+  "continued": "ff6da94a8adff21c57e26c622d1fa677eca019ddcb1f2cb84555af1e0637d246"
+}
