@@ -51,7 +51,7 @@ that checkout, 1 of 1 in 17.8s. Birch, meadow, river, aspen and cedar still matc
 household inside 12,000 ticks, which is why the pin is forest. The reference script refuses
 to overwrite.
 
-The paired lab is not run. No benefit or harm is claimed.
+Paired lab, clean checkout of `611a06fc`, 9 November 2026: 12 seeds (aspen, birch, cedar, fern, gen-1 through gen-6, meadow, river), Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`. Rules 170 pinned with `--rules 170` against current rules 171. Both arms finished 12 of 12 seeds, three arms each. Provenance head `611a06fc`, `dirty` false, `modified` empty. Reports written 03:06:32 and 03:06:52. `scripts/lab_versions.ts` exited 0 at 03:07:37 and ends: nothing moved by more than a single draw moves it. Plots differ by +0.6 and stay inside the noise floor (±4.0; interval [+0.2, +1.1]; up/down 8/1). That row is systematic and is not called larger than chance. Every other listed metric is not distinguishable from chance. The suite was not rerun. No benefit or harm is claimed. Evidence: `review_evidence/known-home-20261109/`. The 12,000-tick pin is not this result.
 
 ## Not touched
 
