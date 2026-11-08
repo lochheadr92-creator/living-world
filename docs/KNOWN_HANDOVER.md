@@ -45,7 +45,9 @@ was requested. At every sampled watch moment, every nearby adult had already see
 worlds do not exercise the refusal. The option, when it was generated, lost to sleep, rest or eating
 (about 20 against 75 to 100 on the forest samples). This is not a measurement of benefit or harm.
 
-The 12-seed paired lab is not run. No benefit or harm is claimed.
+Paired lab, clean checkout of `cd7334e4`, 9 November 2026: 12 seeds (aspen, birch, cedar, fern, gen-1 through gen-6, meadow, river), Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`. Rules 167 pinned with `--rules 167` against current rules 168. Both arms finished 12 of 12 seeds, three arms each. Provenance head `cd7334e4`, `dirty` false, `modified` empty. `scripts/lab_versions.ts` ends: nothing moved by more than a single draw moves it. Every listed metric differs by 0. The suite was not rerun. No benefit or harm is claimed. Evidence: `review_evidence/known-handover-20261109/`.
+
+The status file never received `labs exit` or `compare exit`. The scheduler wrapper died after it had started the two lab processes. Both arms still finished (reports written 01:18:41), and the comparison was run afterwards from the same clean checkout and exited 0. That comparison is the result. The within-arm nudge reports are a different sentence and are not this comparison.
 
 ## Not touched
 
