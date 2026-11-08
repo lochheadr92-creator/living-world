@@ -55,7 +55,7 @@ a save and load, recorded from a clean checkout of `f347ca5f`. The saved world h
 1 for a kind the container really holds more of, sampled every 200 ticks. The pin test passed on
 that checkout, 1 of 1 in 20.1s. The reference script refuses to overwrite.
 
-The paired lab is not run. No benefit or harm is claimed.
+Paired lab, clean checkout of `c9949b86`, 9 November 2026: 12 seeds (aspen, birch, cedar, fern, gen-1 through gen-6, meadow, river), Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`. Rules 168 pinned with `--rules 168` against current rules 169. Both arms finished 12 of 12 seeds, three arms each. Provenance head `c9949b86`, `dirty` false, `modified` empty. Reports written 02:17:51 and 02:18:06. `scripts/lab_versions.ts` exited 0 at 02:21:35 and ends: nothing moved by more than a single draw moves it. Eight rows are systematic and stay inside the noise floor: prepAdopted +7.7 (floor +/-12.7), prepSeason -1.6 (+/-2.5), prepHardship +9.3 (+/-12.2), prepDone +3.4 (+/-3.7), prepDropped +4.1 (+/-13.1), prepUnits +39.3 (+/-47.8), prepDays +1.1 (+/-3.5), bitesTaken +3.3 (+/-8.9). An effect smaller than the noise floor is never called larger than chance. The suite was not rerun. No benefit or harm is claimed. Evidence: `review_evidence/seen-stock-20261109/`.
 
 ## Not touched
 
