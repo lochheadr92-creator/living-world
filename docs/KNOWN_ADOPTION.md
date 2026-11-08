@@ -4,7 +4,7 @@ Predecessor rules 166 is pinned by `tests/v166_continuation.expected.json`, reco
 behaviour existed. Origin: owner decision D6(b), 2 November 2026 (`decisions/manual/claude-living-world/2026-11-02-knowledge-gated-adoption`
 in the brain vault): `adoptOrphans` may take a child only if a carer knows of them. The 2 November
 message approved the choice, not the code. This step is the adoption half of that decision, on the
-omniscience sweep, in its own rules version (decision D2). Carer handover is not included.
+omniscience sweep, in its own rules version (decision D2). Carer handover is not included; it is rules 168 (`docs/KNOWN_HANDOVER.md`).
 
 ## The defect (every version up to 166)
 
@@ -67,6 +67,6 @@ No benefit or harm is claimed. Evidence: `review_evidence/known-adoption-2026110
 
 ## Not touched
 
-Carer handover. `knownNeeds` for a dependant in sight. Store contents copied at sight. A worry about
+Carer handover (done later as rules 168). `knownNeeds` for a dependant in sight. Store contents copied at sight. A worry about
 a dead subject the worrier has not heard of. `whereIs` reading household ids. The recruit cap's
 global helper count. The five leaks that sit in another session's uncommitted files.
