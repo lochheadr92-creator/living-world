@@ -35,6 +35,7 @@ import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, 
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
+import { hasHeardHelpers, heardHelpers } from './heard_helpers';
 import { MAKING_NOTE, MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { outstandingForPlan, projectAsksOn } from './intent';
 import { attendOptions } from './occasions';
@@ -565,7 +566,7 @@ function optRecruit(ctx: Ctx): void {
   // no use asking for hands where there is nothing to do with them yet: the site is waiting on materials
   if (!projectAt(world, site.id) && (site.progress ?? 0) >= Math.min(1, 0.06 + fractionAvailable(site)) - 0.02) return;
   const cap = (siteEnt && siteEnt.ent === 'site' ? siteEnt.maxWorkers : 3) + 1;
-  const committedNow = helpersOn(world, site.id);
+  const committedNow = hasHeardHelpers(world) ? heardHelpers(world, p, site.id) : helpersOn(world, site.id);
   if (!council && committedNow >= Math.min(2, cap)) return;
   for (const c of candidates(ctx)) {
     if (c.d > 12 || c.s.child) continue;
