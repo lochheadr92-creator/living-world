@@ -904,6 +904,8 @@ export interface BranchResult {
   milestones: Record<string, number>;
   /** people alive by day after the fork, one per day (to tell a story of when branches part) */
   popByDay: number[];
+  /** Candidate-only empty-food news counts. Not an outcome metric and not compared as a population effect. */
+  emptyNews?: { directEmpty: number; accepted: number; rejected: number; relays: number; skippedStale: number; skippedHeld: number; skippedCooldown: number; receiptAge: number; receipts: number };
 }
 
 export interface ForkRun {
@@ -936,8 +938,24 @@ export function runBranch(
     // the defence counters are the module's own, off by default; this branch owns them for its run
     defReset();
     defProbe.on = true;
-    // a deserialized world has no hooks of its own; the tally is the only listener, and it reads, never writes
-    w.hooks = { onActivityStart: (p, a) => gathers.start(p, a), onWolfBite: () => defence.bitten() };
+    // a deserialized world has no hooks of its own; the tallies only read. emptyNews is not part of outcome.
+    const emptyNews = { directEmpty: 0, accepted: 0, rejected: 0, relays: 0, skippedStale: 0, skippedHeld: 0, skippedCooldown: 0, receiptAge: 0, receipts: 0 };
+    w.hooks = {
+      onActivityStart: (p, a) => gathers.start(p, a),
+      onWolfBite: () => defence.bitten(),
+      onNews: (e) => {
+        if (e.kind === 'direct-empty') emptyNews.directEmpty++;
+        else if (e.kind === 'accepted') {
+          emptyNews.accepted++;
+          emptyNews.receipts++;
+          emptyNews.receiptAge += e.age;
+          if (e.hops >= 2) emptyNews.relays++;
+        } else if (e.kind === 'rejected') emptyNews.rejected++;
+        else if (e.reason === 'stale') emptyNews.skippedStale++;
+        else if (e.reason === 'held') emptyNews.skippedHeld++;
+        else emptyNews.skippedCooldown++;
+      },
+    };
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
       projects.tick(w);
@@ -960,6 +978,7 @@ export function runBranch(
       milestones,
       popByDay,
       hashes,
+      emptyNews,
     };
   } finally {
     Object.assign(defProbe, previousDefenceProbe);

@@ -1457,6 +1457,8 @@ export interface World {
     /** Observation only, including a fatal bite before the person leaves the live registry. */
     onWolfBite?: (p: Person, wolf: Animal) => void;
     onTransfer?: (info: { from: string; to: string; item: ItemKind; n: number; reason: string }) => void;
+    /** Observation only. Never saved, never read by a decision. Absent unless a run is counting news. */
+    onNews?: (event: { kind: 'direct-empty' | 'accepted' | 'rejected' | 'skipped'; reason?: string; beliefId: number; seen: number; age: number; origin?: number; from: number; hops: number; listener?: number }) => void;
   };
 }
 

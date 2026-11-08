@@ -49,9 +49,18 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     const isFood = isFoodKind(b.kind);
     // rules 176: a fresh empty sight, including one only heard, uses the same 1,100-tick horizon. Before that, a personal failure.
     const shareableEmpty = emptyFoodShareable(world, b, currentFailure(world, S, b.id));
-    if (isFood && b.amount <= 0 && !shareableEmpty) continue; // an old, stale 'empty' is not news
+    if (isFood && b.amount <= 0 && !shareableEmpty) {
+      if (world.hooks?.onNews) world.hooks.onNews({ kind: 'skipped', reason: 'stale', beliefId: b.id, seen: b.seen, age: world.tick - b.seen, origin: b.origin, from: S.id, hops: b.hops ?? 0, listener: L.id });
+      continue; // an old, stale 'empty' is not news
+    }
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
-    if (tellingSuppressed(world, S, L.id, b)) continue;
+    if (tellingSuppressed(world, S, L.id, b)) {
+      if (world.hooks?.onNews && isEmptyFood(b)) {
+        const held = S.newsHeld?.[toldKey(L.id, b.id)];
+        world.hooks.onNews({ kind: 'skipped', reason: held && held.seen === b.seen ? 'held' : 'cooldown', beliefId: b.id, seen: b.seen, age: world.tick - b.seen, origin: b.origin, from: S.id, hops: b.hops ?? 0, listener: L.id });
+      }
+      continue;
+    }
     const hub = nearestHub(world, b.x, b.y);
     const dCamp = hyp(b.x - hub.x, b.y - hub.y);
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
@@ -78,6 +87,10 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   const isNew = !old || acceptsToldReport(world, b, old);
   if (!isNew) {
     noteEmptyRejected(world, S, L.id, b);
+    if (world.hooks?.onNews && isEmptyFood(b)) {
+      const reason = old === undefined ? 'missing' : b.seen === old.seen ? 'equal' : b.seen < old.seen ? 'older' : 'gap';
+      world.hooks.onNews({ kind: 'rejected', reason, beliefId: b.id, seen: b.seen, age: world.tick - b.seen, origin: b.origin, from: S.id, hops: b.hops ?? 0, listener: L.id });
+    }
     return false;
   }
   if (old) noteDisagreement(world, S, L, old, b); // rules 107: a differing newer account of a place seen oneself is logged
@@ -89,6 +102,7 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   else delete copy.need;
   learn(L, copy);
   noteFoodAccepted(world, S, L.id, b);
+  if (world.hooks?.onNews && isEmptyFood(b)) world.hooks.onNews({ kind: 'accepted', beliefId: b.id, seen: b.seen, age: world.tick - copy.seen, origin: copy.origin, from: S.id, hops: copy.hops ?? 0, listener: L.id });
   const noun = BELIEF_NOUN[b.kind];
   if (b.kind === 'danger') {
     L.needs.safety = Math.max(0, L.needs.safety - 8);

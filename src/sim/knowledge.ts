@@ -12,6 +12,7 @@ import { toolsHeldBy } from './toolreg';
 import { noteBeliefWrite } from './transmission';
 import { addLog } from './events';
 import { SOURCE_NOUN } from './labels';
+import { isEmptyFood } from './empty_news';
 import { runsRulesVersion } from './rulesversion';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
@@ -194,7 +195,9 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   // rules 107 (checked_accounts.ts): a told account of this place, now seen in person, is held to its teller on grounds
   if (e.ent === 'source') { const told = p.beliefs[e.id]; if (told && told.src === 'told') checkAccount(world, p, told, e.amount, estimatedAmount(world, told)); }
   if (runsRulesVersion(world, 32) && e.ent === 'source') noteDepletedSource(world, p, e, b);
-  return learn(p, b);
+  const learned = learn(p, b);
+  if (world.hooks?.onNews && e.ent === 'source' && isEmptyFood(b)) world.hooks.onNews({ kind: 'direct-empty', beliefId: b.id, seen: b.seen, age: 0, origin: p.id, from: p.id, hops: 0 });
+  return learned;
 }
 
 /** People understand roughly how fast things regrow, so a stale "empty" memory slowly turns hopeful. */
