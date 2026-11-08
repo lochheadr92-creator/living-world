@@ -1,0 +1,63 @@
+Version comparison: rules 166 (pinned) against rules 167; 12 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, river); normal profile, 25 days; arms per version: control, nudge:1, nudge:2.
+Noise floor (sd of one arm against the mean of the other arms of its own run): workplaces ±1.1   solidHomes ±1.4   buildings ±3.7   plots ±4.0   people ±4.3   deaths ±4.3   homeless ±2.1   belowCritical ±2.4   meanHunger ±8.2   firstYardDay ±6.1   firstHallDay ±1.9   meanMood ±10.0   lowMood ±3.9   tools ±9.3   meanCondition ±10.0   projectsAdopted ±13.3   projectsDone ±8.4   projectAsks ±1.4   askUnitsDelivered ±1.6   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±13.7   prepSeason ±2.2   prepHardship ±13.2   prepDone ±3.4   prepDropped ±14.0   prepUnits ±47.1   prepDays ±4.2   hungerExposure ±0.0   homeFoodPerPerson ±0.3   storeFoodPerPerson ±0.4   spears ±2.0   armedAtEnd ±1.9   defenceOffered ±8.3   defenceSetOut ±4.2   defenceTried ±2.3   defenceDroveOff ±1.6   defenceFailed ±1.1   defenceLeftOnItsOwn ±2.4   wolvesWary ±0.2   bitesTaken ±10.3   retainedSharedCompleted ±0.4   retainedSharedFailed ±1.2   retainedRelocationsSettled ±0.0   retainedRelocationsFailed ±0.6   retainedExchangePairs ±0.0   retainedExchangeReceipts ±0.0   alignedResidentsAtEnd ±0.5   factionsAtEnd ±0.2   charcoalHoldersAtEnd ±1.8   taughtCharcoalAtEnd ±0.4   supperHoldersAtEnd ±0.0   familySupperAtEnd ±0.0   secondTransmissionAtEnd ±0.0   newbornSupperAtEnd ±0.0   townsWithRepeatedProduction ±0.0   townProductionDistance ±0.0
+
+metric                            166      167    diff   95% interval    up/down  verdict
+workplaces                        3.1      3.1    -0.1   [-0.3, +0.1]        1/2  not distinguishable from chance
+solidHomes                        6.6      6.6       0   [0, 0]              0/0  not distinguishable from chance
+buildings                        23.9     23.9    -0.1   [-0.2, +0.1]        1/1  not distinguishable from chance
+plots                            27.6     27.5    -0.1   [-0.3, 0]           1/3  not distinguishable from chance
+people                           22.2     22.3    +0.1   [-0.3, +0.5]        1/2  not distinguishable from chance
+deaths                            9.1      9.0    -0.1   [-0.4, +0.2]        1/1  not distinguishable from chance
+homeless                          1.1      1.1    +0.1   [-0.1, +0.3]        1/1  not distinguishable from chance
+belowCritical                     2.0      2.1       0   [0, +0.1]           1/0  not distinguishable from chance
+meanHunger                       51.4     51.4    -0.1   [-0.7, +0.3]        3/1  not distinguishable from chance
+firstYardDay                     15.2     15.7    +0.5   [0, +1.0]           3/0  not distinguishable from chance
+firstHallDay                     24.7     24.7       0   [0, 0]              0/0  not distinguishable from chance
+meanMood                        -19.6    -18.7    +0.9   [0, +2.2]           4/0  systematic, within the noise floor
+lowMood                           5.8      5.6    -0.3   [-0.6, 0]           1/3  not distinguishable from chance
+tools                            30.9     30.9    +0.1   [-0.2, +0.3]        2/1  not distinguishable from chance
+meanCondition                    50.6     51.3    +0.6   [0, +1.3]           4/0  systematic, within the noise floor
+projectsAdopted                 143.1    142.8    -0.3   [-1.1, +0.2]        1/2  not distinguishable from chance
+projectsDone                     46.5     46.3    -0.2   [-0.7, +0.2]        1/1  not distinguishable from chance
+projectAsks                       1.9      1.8       0   [-0.1, 0]           0/1  not distinguishable from chance
+askUnitsDelivered                 1.0      1.0       0   [0, 0]              0/0  not distinguishable from chance
+specialisation                    0.5      0.5       0   [0, 0]              3/1  not distinguishable from chance
+topKindShare                      0.7      0.7       0   [0, 0]              3/1  not distinguishable from chance
+prepAdopted                     107.8    107.8    -0.1   [-0.4, +0.2]        2/2  not distinguishable from chance
+prepSeason                        5.9      6.1    +0.1   [0, +0.4]           1/0  not distinguishable from chance
+prepHardship                    101.9    101.7    -0.2   [-0.5, 0]           1/3  not distinguishable from chance
+prepDone                          5.9      5.8    -0.1   [-0.3, +0.1]        1/1  not distinguishable from chance
+prepDropped                      93.2     92.9    -0.3   [-0.8, +0.1]        1/2  not distinguishable from chance
+prepUnits                       213.0    212.4    -0.6   [-1.4, 0]           1/3  not distinguishable from chance
+prepDays                         18.1     18.0    -0.1   [-0.2, 0]           1/3  not distinguishable from chance
+hungerExposure                    0.0      0.0       0   [0, 0]              1/3  not distinguishable from chance
+homeFoodPerPerson                 0.2      0.2       0   [0, 0]              3/1  not distinguishable from chance
+storeFoodPerPerson                0.3      0.3       0   [0, 0]              2/2  not distinguishable from chance
+spears                            3.8      3.9    +0.1   [0, +0.1]           2/0  not distinguishable from chance
+armedAtEnd                        2.9      3.0    +0.1   [0, +0.1]           2/0  not distinguishable from chance
+defenceOffered                    9.9      9.6    -0.3   [-0.7, 0]           0/2  not distinguishable from chance
+defenceSetOut                     3.6      3.6       0   [-0.1, +0.1]        1/1  not distinguishable from chance
+defenceTried                      1.3      1.3       0   [0, 0]              0/0  not distinguishable from chance
+defenceDroveOff                   0.8      0.8       0   [0, +0.1]           1/0  not distinguishable from chance
+defenceFailed                     0.6      0.5       0   [-0.1, 0]           0/1  not distinguishable from chance
+defenceLeftOnItsOwn               2.0      2.0       0   [-0.1, +0.1]        2/1  not distinguishable from chance
+wolvesWary                        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+bitesTaken                       24.1     24.3    +0.2   [-0.5, +1.0]        2/2  not distinguishable from chance
+retainedSharedCompleted           0.9      0.9       0   [-0.1, +0.1]        1/1  not distinguishable from chance
+retainedSharedFailed              0.6      0.5       0   [-0.1, 0]           0/1  not distinguishable from chance
+retainedRelocationsSettled        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedRelocationsFailed         0.2      0.3       0   [0, +0.1]           1/0  not distinguishable from chance
+retainedExchangePairs             0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedExchangeReceipts          0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+alignedResidentsAtEnd             0.1      0.1       0   [0, +0.1]           1/0  not distinguishable from chance
+factionsAtEnd                     0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+charcoalHoldersAtEnd              4.9      4.8       0   [-0.2, +0.1]        1/1  not distinguishable from chance
+taughtCharcoalAtEnd               0.1      0.1       0   [0, 0]              0/0  not distinguishable from chance
+supperHoldersAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+familySupperAtEnd                 0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+secondTransmissionAtEnd           0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+newbornSupperAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+townsWithRepeatedProduction       1.0      1.0       0   [0, 0]              0/0  not distinguishable from chance
+townProductionDistance            0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+
+In words: nothing moved by more than a single draw moves it.

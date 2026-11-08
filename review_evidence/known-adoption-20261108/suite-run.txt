@@ -1,0 +1,1518 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90mC:/dev/Claude Experiment/living-world-v167-pin[39m
+
+ [32m✓[39m tests/table_eating.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 51680[2mms[22m[39m
+   [32m✓[39m an ordinary world, not a staged one [2m(1)[22m
+     [33m[2m✓[22m[39m version 8 fails at full stores; version 11 never fails for want of room, and its books balance[33m 51090[2mms[22m[39m
+ [32m✓[39m tests/suspended_scan.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 53288[2mms[22m[39m
+   [33m[2m✓[22m[39m no paused activity is lost silently in five ordinary river days at the current rules[33m 53287[2mms[22m[39m
+ [32m✓[39m tests/lab_exit_codes.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 57644[2mms[22m[39m
+   [33m[2m✓[22m[39m lab.mjs exits non-zero when a seed worker fails[33m 44267[2mms[22m[39m
+   [33m[2m✓[22m[39m lab_report.ts exits non-zero when there are no results[33m 13376[2mms[22m[39m
+ [32m✓[39m tests/v162_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 61733[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-162 ordinary river continuation[33m 61732[2mms[22m[39m
+ [32m✓[39m tests/v164_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 81163[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-164 ordinary birch continuation[33m 81162[2mms[22m[39m
+ [32m✓[39m tests/lab_provenance.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 84466[2mms[22m[39m
+   [33m[2m✓[22m[39m retains runner and measurement source, reports it, resumes only the same content, and refuses changed content[33m 83430[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects a source change against the start snapshot[33m 1034[2mms[22m[39m
+ [32m✓[39m tests/ordinary.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 85664[2mms[22m[39m
+   [32m✓[39m the ordinary world over days of play [2m(2)[22m
+     [33m[2m✓[22m[39m is deterministic: the same seed and settings give the same world, tick for tick, however much was built, made, promised and eaten[33m 15872[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps honest books for two weeks: every item accounted for, every tool record matching a pack or shelf, nobody lost, and the settlement doing real work[33m 69790[2mms[22m[39m
+ [32m✓[39m tests/zz_review_b_roundtrip.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 92324[2mms[22m[39m
+   [32m✓[39m REVIEW B: save/load round trip then continue, natural rules-115 world [2m(3)[22m
+     [33m[2m✓[22m[39m river: byte-identical continuation after loading at 600/3000/6000[33m 34201[2mms[22m[39m
+     [33m[2m✓[22m[39m meadow: byte-identical continuation after loading at 600/3000/6000[33m 28868[2mms[22m[39m
+     [33m[2m✓[22m[39m forest: byte-identical continuation after loading at 600/3000/6000[33m 29253[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_f_ordinary_probe.test.ts[2m > [22m[2mordinary forest probe for 12000 ticks
+[22m[39m{"seed":"forest","tick":12000,"stop":"horizon","seconds":51.4645273,"alive":28,"deaths":0,"buildings":{"fire":1,"lean_to":12,"well":1},"sites":{"hut":3,"lean_to":1},"tools":{"axe":3,"basket":7,"pick":4,"hoe":2,"rod":1},"carts":0,"counts":{"adult samples":380,"plan_site start:well":4,"plan_site start:lean_to":6,"rock gather end:success:done":19,"haul start":44,"craft start:hoe":1,"haul success":37,"craft end:hoe:success":1,"rock gather end:interrupted:something better came up":5,"craft start:pick":6,"craft end:pick:interrupted":3,"craft start:axe":1,"craft end:axe:success":1,"craft end:pick:success":3,"plan_site start:hut":7,"craft start:basket":8,"craft end:basket:success":5,"craft end:basket:interrupted":3,"craft start:rod":1,"craft end:rod:success":1},"planSummary":{"tool:hoe:done":1,"tool:pick:dropped":8,"tool:rod:dropped":2,"tool:pick:done":3,"tool:hoe:dropped":1,"tool:axe:dropped":1,"tool:axe:done":1,"stock:-:dropped":16,"shelter:-:dropped":4,"stock:-:done":2,"shelter:-:active":4,"tool:basket:dropped":1,"tool:spear:active":3,"tool:axe:active":3,"tool:basket:done":3,"tool:rod:active":2,"tool:pick:active":1,"stock:-:active":4,"journey:-:active":1},"topHauling":[{"name":"Mira","maxWeight":28,"maxTrips":5,"everEnough":0},{"name":"Lena","maxWeight":28,"maxTrips":5,"everEnough":0},{"name":"Petra","maxWeight":23,"maxTrips":10,"everEnough":0}]}
+
+ [32m✓[39m tests/zz_review_f_ordinary_probe.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 51470[2mms[22m[39m
+   [33m[2m✓[22m[39m ordinary forest probe for 12000 ticks[33m 51469[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_till_path.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 104878[2mms[22m[39m
+   [32m✓[39m REVIEW: new-field tilling that cannot be reached [2m(2)[22m
+     [33m[2m✓[22m[39m forest: who fails, which tile, is the standing tile walkable[33m 48597[2mms[22m[39m
+     [33m[2m✓[22m[39m river: who fails, which tile, is the standing tile walkable[33m 56280[2mms[22m[39m
+ [32m✓[39m tests/v1_continuation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 54918[2mms[22m[39m
+   [32m✓[39m a version-1 world continues as version 1 [2m(3)[22m
+     [33m[2m✓[22m[39m short: saved at 1200, read back and run on, is unchanged[33m 9520[2mms[22m[39m
+     [33m[2m✓[22m[39m prewinter: saved at 14400, read back and run on, is unchanged[33m 45396[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_liveness.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 109312[2mms[22m[39m
+   [32m✓[39m REVIEW: liveness of conversations, suspensions and activity endings [2m(2)[22m
+     [33m[2m✓[22m[39m ordinary Normal forest, 12,000 ticks[33m 49566[2mms[22m[39m
+     [33m[2m✓[22m[39m ordinary Normal river, 12,000 ticks[33m 59744[2mms[22m[39m
+ [32m✓[39m tests/v32_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 52617[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 32 full saved-state continuation, before leave-heaviest[33m 52615[2mms[22m[39m
+ [32m✓[39m tests/v163_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 122863[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-163 ordinary econ-cc3 continuation[33m 122862[2mms[22m[39m
+ [32m✓[39m tests/purity.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 123715[2mms[22m[39m
+   [32m✓[39m asking what a person could do changes nothing in the world [2m(2)[22m
+     [33m[2m✓[22m[39m river: every person looked at every 250 ticks leaves them, and the world, exactly as an unwatched twin[33m 66142[2mms[22m[39m
+     [33m[2m✓[22m[39m meadow: every person looked at every 250 ticks leaves them, and the world, exactly as an unwatched twin[33m 57571[2mms[22m[39m
+ [32m✓[39m tests/zz_review_b_observer_purity.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 50979[2mms[22m[39m
+   [33m[2m✓[22m[39m REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin[33m 50976[2mms[22m[39m
+ [32m✓[39m tests/wolf_defence.test.ts [2m([22m[2m55 tests[22m[2m)[22m[33m 51018[2mms[22m[39m
+   [32m✓[39m 8. an encounter survives a save and runs the same twice [2m(4)[22m
+     [33m[2m✓[22m[39m two runs of the same world are the same run[33m 17509[2mms[22m[39m
+     [33m[2m✓[22m[39m the observation counters change nothing[33m 17813[2mms[22m[39m
+   [32m✓[39m 9. versions below 4 have none of it [2m(7)[22m
+     [33m[2m✓[22m[39m a whole version-2 run makes no spear and drives nothing off[33m 15261[2mms[22m[39m
+ [32m✓[39m tests/v135_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 51351[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded autonomous rules-135 cellar continuation[33m 51350[2mms[22m[39m
+ [32m✓[39m tests/run_rules.test.ts [2m([22m[2m29 tests[22m[2m)[22m[33m 153401[2mms[22m[39m
+   [32m✓[39m a fresh run from the command line [2m(9)[22m
+     [33m[2m✓[22m[39m is the current simulation, version and all, for huge[33m 644[2mms[22m[39m
+   [32m✓[39m the scripts themselves, run as a person would run them [2m(8)[22m
+     [33m[2m✓[22m[39m a default lab seed run records the current rules version, with arrivals on, on every row[33m 18079[2mms[22m[39m
+     [33m[2m✓[22m[39m a pinned lab seed run records the version it ran and says it was pinned; --arrivals off is recorded too[33m 14791[2mms[22m[39m
+     [33m[2m✓[22m[39m an explicitly legacy lab run records no version, rather than the current one[33m 14531[2mms[22m[39m
+     [33m[2m✓[22m[39m the activity mix records the version of the world it actually ran[33m 13858[2mms[22m[39m
+     [33m[2m✓[22m[39m the cascade tracer records the rules of the world it traced[33m 13693[2mms[22m[39m
+     [33m[2m✓[22m[39m the replay check says which rules its fresh world ran[33m 20085[2mms[22m[39m
+     [33m[2m✓[22m[39m an explicitly legacy cascade run says unversioned instead[33m 15911[2mms[22m[39m
+   [32m✓[39m the lab will not mix one generation of rules with another [2m(12)[22m
+     [33m[2m✓[22m[39m refuses a legacy rich row for a current run, before any worker starts or any file is touched[33m 10596[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a row from an older generation for a current run, before any worker starts or any file is touched[33m 10034[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses an authored row for a current run, before any worker starts or any file is touched[33m 10115[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a row from before any of it was recorded for a current run, before any worker starts or any file is touched[33m 10710[2mms[22m[39m
+ [32m✓[39m tests/v137_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 49096[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded autonomous rules-137 planted-tree continuation[33m 49095[2mms[22m[39m
+ [32m✓[39m tests/inspect_work_purity.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 48021[2mms[22m[39m
+   [33m[2m✓[22m[39m reading the observer material note for every site and workplace every tick changes nothing[33m 48020[2mms[22m[39m
+ [32m✓[39m tests/regions.test.ts [2m([22m[2m37 tests[22m[2m)[22m[33m 47196[2mms[22m[39m
+   [32m✓[39m large world [2m(7)[22m
+     [33m[2m✓[22m[39m runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range[33m 3105[2mms[22m[39m
+     [33m[2m✓[22m[39m is repeatable for a seed and different for another[33m 1363[2mms[22m[39m
+   [32m✓[39m huge world [2m(7)[22m
+     [33m[2m✓[22m[39m has the size, camps and people it says it has[33m 737[2mms[22m[39m
+     [33m[2m✓[22m[39m runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range[33m 9771[2mms[22m[39m
+     [33m[2m✓[22m[39m is repeatable for a seed and different for another[33m 6386[2mms[22m[39m
+   [32m✓[39m town world: the Large population in one camp on the ordinary map [2m(6)[22m
+     [33m[2m✓[22m[39m runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range[33m 5003[2mms[22m[39m
+     [33m[2m✓[22m[39m is repeatable for a seed and different for another[33m 555[2mms[22m[39m
+   [32m✓[39m authored profiled worlds are still the worlds they were before the town rules [2m(8)[22m
+     [33m[2m✓[22m[39m normal/meadow: generated and stepped exactly as it was[33m 908[2mms[22m[39m
+     [33m[2m✓[22m[39m normal/fern: generated and stepped exactly as it was[33m 632[2mms[22m[39m
+     [33m[2m✓[22m[39m large/meadow: generated and stepped exactly as it was[33m 3062[2mms[22m[39m
+     [33m[2m✓[22m[39m large/fern: generated and stepped exactly as it was[33m 3211[2mms[22m[39m
+     [33m[2m✓[22m[39m town/meadow: generated and stepped exactly as it was[33m 4818[2mms[22m[39m
+     [33m[2m✓[22m[39m town/fern: generated and stepped exactly as it was[33m 5155[2mms[22m[39m
+     [33m[2m✓[22m[39m huge/meadow: generated exactly as it was (28 dens over six camps)[33m 753[2mms[22m[39m
+     [33m[2m✓[22m[39m huge/fern: generated exactly as it was (28 dens over six camps)[33m 707[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_tool_capacity.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 156901[2mms[22m[39m
+   [32m✓[39m REVIEW: hand-tool plans whose inputs cannot fit the planner’s pack [2m(3)[22m
+     [33m[2m✓[22m[39m ordinary Normal forest at current rules, 12,000 ticks[33m 48112[2mms[22m[39m
+     [33m[2m✓[22m[39m ordinary Normal river at current rules, 12,000 ticks[33m 55916[2mms[22m[39m
+     [33m[2m✓[22m[39m ordinary Normal meadow at current rules, 12,000 ticks[33m 52871[2mms[22m[39m
+ [32m✓[39m tests/load_order.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 48033[2mms[22m[39m
+   [33m[2m✓[22m[39m an ordinary generated world loads to the same cells it had live, and an exact twin stays exact for two days[33m 47994[2mms[22m[39m
+ [32m✓[39m tests/inhabitant.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 48307[2mms[22m[39m
+   [32m✓[39m with nothing installed [2m(2)[22m
+     [33m[2m✓[22m[39m a controller that claims nobody leaves the world exactly as it was, and so does installing and removing one[33m 3683[2mms[22m[39m
+     [33m[2m✓[22m[39m building observations for everyone, all the time, changes nothing[33m 2769[2mms[22m[39m
+   [32m✓[39m the information boundary [2m(3)[22m
+     [33m[2m✓[22m[39m across a natural run, every option and set-aside entry the engine generates targets something the person knows[33m 3653[2mms[22m[39m
+   [32m✓[39m an outside controller [2m(3)[22m
+     [33m[2m✓[22m[39m chooses only among what is offered, at the very tick it was asked, and changes the world[33m 6390[2mms[22m[39m
+     [33m[2m✓[22m[39m cannot do anything that was not offered: a made-up action is refused, then the engine chooses[33m 4440[2mms[22m[39m
+   [32m✓[39m the transcript [2m(3)[22m
+     [33m[2m✓[22m[39m replays without a model to the same world, verifying every decision against the state it was made in[33m 4991[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a transcript that does not fit: another simulation, another world, a missing, altered or extra decision[33m 4908[2mms[22m[39m
+     [33m[2m✓[22m[39m survives a save: the mark and the counters come back, the hash agrees, and the world carries on the same[33m 2846[2mms[22m[39m
+   [32m✓[39m a failing model [2m(2)[22m
+     [33m[2m✓[22m[39m that throws, answers nothing, or hangs leaves the engine to choose, the world consistent, and the run repeatable[33m 14569[2mms[22m[39m
+ [32m✓[39m tests/v50_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44226[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 50 full saved-state continuation before batch plans[33m 44225[2mms[22m[39m
+ [32m✓[39m tests/v48_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44556[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 48 full saved-state continuation before the next slice[33m 44555[2mms[22m[39m
+ [32m✓[39m tests/leave_heaviest.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 175194[2mms[22m[39m
+   [32m✓[39m a real stall in an ordinary world [2m(7)[22m
+     [33m[2m✓[22m[39m moves exactly that many units out of the pack and into the place, through the ordinary ledgered deposit[33m 496[2mms[22m[39m
+     [33m[2m✓[22m[39m is offered as an ordinary deposit option, and only to a rich world running 33 with the switch on[33m 730[2mms[22m[39m
+     [33m[2m✓[22m[39m continues identically after a save and load in the middle of the trip[33m 10382[2mms[22m[39m
+     [33m[2m✓[22m[39m loses nothing if the person dies on the way: what was not put down is still counted[33m 535[2mms[22m[39m
+     [33m[2m✓[22m[39m is interrupted without loss when the person turns to something else first[33m 352[2mms[22m[39m
+   [32m✓[39m below rules 33, and with the lab arm, nothing happens [2m(2)[22m
+     [33m[2m✓[22m[39m a rules-32 world starts none in the span where rules 33 does[33m 31479[2mms[22m[39m
+     [33m[2m✓[22m[39m a rules-33 world with the lab arm installed starts none, and the arm restores the switch[33m 34319[2mms[22m[39m
+   [32m✓[39m what the rule changes is behaviour, not bookkeeping [2m(2)[22m
+     [33m[2m✓[22m[39m with the lab arm installed, rules 33 is byte-identical to the recorded rules-32 world apart from its stamp[33m 30901[2mms[22m[39m
+     [33m[2m✓[22m[39m with it on, the same world differs: the recorded reference passes through the situation the rule acts on[33m 30665[2mms[22m[39m
+ [32m✓[39m tests/settlement_record.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 45566[2mms[22m[39m
+   [32m✓[39m the chronicle [2m(1)[22m
+     [33m[2m✓[22m[39m keeps what is worth remembering in a rich world, bounded, and nothing in an authored one[33m 2966[2mms[22m[39m
+   [32m✓[39m roads [2m(1)[22m
+     [33m[2m✓[22m[39m harden where the wear stays high for two days, stay worn, and never form in an authored world[33m 21141[2mms[22m[39m
+   [32m✓[39m a building remembers [2m(1)[22m
+     [33m[2m✓[22m[39m who finished it, in a rich world only[33m 21457[2mms[22m[39m
+ [32m✓[39m tests/v49_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43859[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 49 full saved-state continuation before batch plans[33m 43858[2mms[22m[39m
+ [32m✓[39m tests/save_told.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 184765[2mms[22m[39m
+   [32m✓[39m beliefs passed on by word of mouth (default world) [2m(2)[22m
+     [33m[2m✓[22m[39m carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically[33m 25379[2mms[22m[39m
+     [33m[2m✓[22m[39m a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does[33m 24866[2mms[22m[39m
+   [32m✓[39m beliefs passed on by word of mouth (product world) [2m(2)[22m
+     [33m[2m✓[22m[39m carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically[33m 67756[2mms[22m[39m
+     [33m[2m✓[22m[39m a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does[33m 66761[2mms[22m[39m
+ [32m✓[39m tests/v33_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43238[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 33 full saved-state continuation, before plan reconsideration[33m 43236[2mms[22m[39m
+ [32m✓[39m tests/v161_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 35638[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-161 ordinary river continuation[33m 35637[2mms[22m[39m
+ [32m✓[39m tests/v53_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43799[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 53 full saved-state continuation before rules 54[33m 43798[2mms[22m[39m
+ [32m✓[39m tests/v51_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44226[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 51 full saved-state continuation before batch plans[33m 44222[2mms[22m[39m
+ [32m✓[39m tests/v59_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 45550[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-59 ordinary and active-cart full serialized continuations[33m 45549[2mms[22m[39m
+ [32m✓[39m tests/v31_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43826[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 31 full saved-state continuation, before observer-facing truth[33m 43825[2mms[22m[39m
+ [32m✓[39m tests/v52_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43562[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 52 full saved-state continuation before batch plans[33m 43561[2mms[22m[39m
+ [32m✓[39m tests/world.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 41868[2mms[22m[39m
+   [32m✓[39m saving and loading [2m(5)[22m
+     [33m[2m✓[22m[39m a saved world resumes exactly where it left off: continuing from the copy equals continuing the original[33m 3152[2mms[22m[39m
+     [33m[2m✓[22m[39m so does a world in the middle of making things: workshops, batches, tools on racks, a meal under way, a cart on the road[33m 894[2mms[22m[39m
+     [33m[2m✓[22m[39m an ordinary world a few days in, with a yard and a kiln at work, saves and resumes exactly[33m 37343[2mms[22m[39m
+ [32m✓[39m tests/v43_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41995[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 43 full saved-state continuation before varied starting backgrounds[33m 41994[2mms[22m[39m
+ [32m✓[39m tests/household_preparation.test.ts [2m([22m[2m43 tests[22m[2m)[22m[33m 209965[2mms[22m[39m
+   [32m✓[39m 6. the new state is deterministic and survives a save [2m(4)[22m
+     [33m[2m✓[22m[39m two runs of the same world are the same run[33m 20640[2mms[22m[39m
+     [33m[2m✓[22m[39m a save in the middle of a preparation reads back and carries on identically[33m 30675[2mms[22m[39m
+     [33m[2m✓[22m[39m the observation counters change nothing: a run with them on is the same run[33m 57552[2mms[22m[39m
+   [32m✓[39m 7. version-1 and unversioned worlds do not acquire this behaviour [2m(4)[22m
+     [33m[2m✓[22m[39m a whole version-1 run carries no preparation at all[33m 16681[2mms[22m[39m
+     [33m[2m✓[22m[39m a version-1 save keeps its version through a round trip and stays version 1[33m 6108[2mms[22m[39m
+   [32m✓[39m 8. the lab off-switch removes this and only this [2m(4)[22m
+     [33m[2m✓[22m[39m with it off, ordinary food work carries on: food is still gathered and still put into stores[33m 25652[2mms[22m[39m
+   [32m✓[39m 9. a fresh world is the same generation of rules wherever it is made [2m(2)[22m
+     [33m[2m✓[22m[39m and both of them really run the new behaviour[33m 52243[2mms[22m[39m
+ [32m✓[39m tests/v29_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44120[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 29 full saved-state continuation, before layout claims[33m 44119[2mms[22m[39m
+ [31m❯[39m tests/zz_review_main_toolreport_saves.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 160741[2mms[22m[39m
+   [31m❯[39m REVIEW: tool registry consistency in retained and fresh worlds [2m(2)[22m
+     [33m[2m✓[22m[39m retained saves[33m 3000[2mms[22m[39m
+[31m     [31m×[31m fresh current-rules worlds, 12,000 ticks, checked every 600 ticks[39m[33m 157739[2mms[22m[39m
+ [32m✓[39m tests/v34_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43848[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 34 full saved-state continuation, before crew re-entry consistency[33m 43847[2mms[22m[39m
+ [32m✓[39m tests/v56_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43014[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 56 ordinary and childcare full saved-state continuations before rules 57[33m 43012[2mms[22m[39m
+ [32m✓[39m tests/v54_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42904[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 54 full saved-state continuation before rules 55[33m 42902[2mms[22m[39m
+ [32m✓[39m tests/v35_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42047[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 35 full saved-state continuation, integration baseline 9871662 before further changes[33m 42046[2mms[22m[39m
+ [32m✓[39m tests/controller.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 41945[2mms[22m[39m
+   [32m✓[39m the clock: simulation results do not depend on frame rate [2m(3)[22m
+     [33m[2m✓[22m[39m 30 fps, 144 fps and an irregular stutter all reach the identical world at the same tick[33m 19324[2mms[22m[39m
+     [33m[2m✓[22m[39m playback speed changes how fast time passes, not what happens in it[33m 6863[2mms[22m[39m
+     [33m[2m✓[22m[39m one second of real time at speed s runs about s x TPS ticks, capped per frame[33m 1971[2mms[22m[39m
+   [32m✓[39m selection, follow, restart [2m(4)[22m
+     [33m[2m✓[22m[39m restart builds a new world from the chosen seed and clears view state[33m 1526[2mms[22m[39m
+   [32m✓[39m rendering never changes the simulation [2m(2)[22m
+     [33m[2m✓[22m[39m drawing a world every tick (with camera moves, zoom, overlays) gives exactly the same result as never drawing it[33m 4293[2mms[22m[39m
+     [33m[2m✓[22m[39m a long stretch of drawing at several playback speeds still matches an undrawn run[33m 7336[2mms[22m[39m
+ [32m✓[39m tests/v40_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42801[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 40 full saved-state continuation before learner-initiated instruction[33m 42800[2mms[22m[39m
+ [32m✓[39m tests/v74_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44258[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-74 ordinary and source-experience continuations exactly[33m 44256[2mms[22m[39m
+ [32m✓[39m tests/v58_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44303[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 58 ordinary and seed storage continuations before rules 59[33m 44301[2mms[22m[39m
+ [32m✓[39m tests/v44_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42118[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 44 full saved-state continuation before food fetch promises[33m 42117[2mms[22m[39m
+ [32m✓[39m tests/v55_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 44044[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 55 full saved-state continuation before rules 56[33m 44042[2mms[22m[39m
+ [32m✓[39m tests/v37_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43327[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 37 full saved-state continuation, rules 37 before achievement aftermath[33m 43326[2mms[22m[39m
+ [32m✓[39m tests/v30_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41073[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 30 full saved-state continuation, before integrated work tastes[33m 41072[2mms[22m[39m
+ [32m✓[39m tests/v167_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 166197[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-167 ordinary forest continuation[33m 166196[2mms[22m[39m
+ [32m✓[39m tests/v75_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40587[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-75 ordinary and failed-contact continuations exactly[33m 40586[2mms[22m[39m
+ [32m✓[39m tests/v38_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41986[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 38 full saved-state continuation before project-helper choice[33m 41984[2mms[22m[39m
+ [32m✓[39m tests/v41_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40819[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 41 full saved-state continuation before learner-initiated instruction[33m 40818[2mms[22m[39m
+ [32m✓[39m tests/v42_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41967[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 42 full saved-state continuation before learner-initiated instruction[33m 41965[2mms[22m[39m
+ [32m✓[39m tests/v46_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42287[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 46 full saved-state continuation before winter shelter preparation[33m 42286[2mms[22m[39m
+ [32m✓[39m tests/v47_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42167[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 47 full saved-state continuation before the agreed delivery place[33m 42166[2mms[22m[39m
+ [32m✓[39m tests/v62_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40296[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-62 ordinary, indoor hand-over and full-pack continuations[33m 40294[2mms[22m[39m
+ [32m✓[39m tests/v57_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43620[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 57 ordinary and active tool crafting continuations before rules 58[33m 43615[2mms[22m[39m
+ [32m✓[39m tests/v76_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40683[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-76 ordinary and personal-route continuations exactly[33m 40682[2mms[22m[39m
+ [32m✓[39m tests/zz_review_b_validators.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 274736[2mms[22m[39m
+   [32m✓[39m REVIEW B: validators against engine-produced current-rules worlds [2m(7)[22m
+     [33m[2m✓[22m[39m natural river, Normal, 8 days, save+load every 1200 ticks[33m 96139[2mms[22m[39m
+     [33m[2m✓[22m[39m natural meadow, Normal, 8 days, save+load every 1200 ticks[33m 89886[2mms[22m[39m
+     [33m[2m✓[22m[39m natural forest, Normal, 8 days, save+load every 1200 ticks[33m 85496[2mms[22m[39m
+     [33m[2m✓[22m[39m scene meal at current rules, 3 days, save+load every 600 ticks[33m 1002[2mms[22m[39m
+     [33m[2m✓[22m[39m scene haul at current rules, 3 days, save+load every 600 ticks[33m 453[2mms[22m[39m
+     [33m[2m✓[22m[39m scene care at current rules, 3 days, save+load every 600 ticks[33m 768[2mms[22m[39m
+     [33m[2m✓[22m[39m scene workshop at current rules, 3 days, save+load every 600 ticks[33m 988[2mms[22m[39m
+ [32m✓[39m tests/v81_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42475[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-81 ordinary partial outcomes and private failure continuations exactly[33m 42474[2mms[22m[39m
+ [32m✓[39m tests/v165_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 279863[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-165 ordinary gen-6 continuation[33m 279862[2mms[22m[39m
+ [32m✓[39m tests/v77_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42276[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-77 ordinary, corrected route and helper-receipt continuations exactly[33m 42275[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_large_cost.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41185[2mms[22m[39m
+   [32m✓[39m REVIEW: current-rules Large cost sample [2m(1)[22m
+     [33m[2m✓[22m[39m large meadow, 2,400 ticks[33m 41183[2mms[22m[39m
+ [32m✓[39m tests/v45_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 43088[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 45 full saved-state continuation before the winter reserve[33m 43087[2mms[22m[39m
+ [32m✓[39m tests/v36_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42015[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 36 full saved-state continuation, rules 36 before achievement aftermath[33m 42013[2mms[22m[39m
+ [32m✓[39m tests/v79_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40388[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-79 ordinary and witnessed childcare continuations exactly[33m 40387[2mms[22m[39m
+ [32m✓[39m tests/v78_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42838[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-78 ordinary and task-specific helper continuations exactly[33m 42837[2mms[22m[39m
+ [32m✓[39m tests/v39_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 42202[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 39 full saved-state continuation before stored material supply[33m 42200[2mms[22m[39m
+ [32m✓[39m tests/v73_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40962[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-73 ordinary and source-recovery continuations exactly[33m 40960[2mms[22m[39m
+ [32m✓[39m tests/v160_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37397[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-160 ordinary meadow continuation[33m 37396[2mms[22m[39m
+ [32m✓[39m tests/v72_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 40427[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-72 ordinary, provisioning, need-break, travel and lost-source continuations exactly[33m 40426[2mms[22m[39m
+ [32m✓[39m tests/lab_report.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 35720[2mms[22m[39m
+   [33m[2m✓[22m[39m pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics[33m 17067[2mms[22m[39m
+   [33m[2m✓[22m[39m reports an unavailable contrast without inventing a result and keeps story output[33m 18653[2mms[22m[39m
+ [32m✓[39m tests/inhabit_manual_reliability.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 37874[2mms[22m[39m
+   [32m✓[39m the observed failure: a decision that answered itself [2m(3)[22m
+     [33m[2m✓[22m[39m the cap the app actually uses leaves a decision waiting[33m 1211[2mms[22m[39m
+   [32m✓[39m the clock cannot be driven past an unanswered decision [2m(1)[22m
+     [33m[2m✓[22m[39m play, speed changes and many frames do not advance a tick while a decision waits[33m 4523[2mms[22m[39m
+   [32m✓[39m handing the decision or the person back [2m(3)[22m
+     [33m[2m✓[22m[39m declining records an explicit handoff: the engine chooses and the transcript says who let it[33m 4046[2mms[22m[39m
+     [33m[2m✓[22m[39m Stop cancels a waiting decision, and an answer that arrives afterwards cannot restart anything[33m 5372[2mms[22m[39m
+     [33m[2m✓[22m[39m a bounded visit that ends leaves no pending decision and a transcript that can be kept[33m 4465[2mms[22m[39m
+   [32m✓[39m an accepted choice is not a finished one [2m(1)[22m
+     [33m[2m✓[22m[39m a window that closes on an unfinished action records it as unfinished, not as a bare "applied"[33m 4726[2mms[22m[39m
+   [32m✓[39m control is really let go of, at every owner that holds it [2m(3)[22m
+     [33m[2m✓[22m[39m Stop releases the pending request, the tick hooks and the controller seam[33m 4807[2mms[22m[39m
+     [33m[2m✓[22m[39m a window that ends of its own accord releases the same things[33m 4472[2mms[22m[39m
+     [33m[2m✓[22m[39m a completion that arrives after Stop changes nothing anywhere[33m 4067[2mms[22m[39m
+ [32m✓[39m tests/v155_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37490[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-155 ordinary river continuation[33m 37489[2mms[22m[39m
+ [32m✓[39m tests/v64_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37759[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-64 ordinary, care, competing tools and actual travelling-source continuations[33m 37758[2mms[22m[39m
+ [32m✓[39m tests/v71_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 41568[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-71 ordinary and scoped-work continuations exactly[33m 41567[2mms[22m[39m
+ [32m✓[39m tests/v60_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 39917[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-60 ordinary and active required-tool-loss full saved continuations[33m 39916[2mms[22m[39m
+ [32m✓[39m tests/golden.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 33781[2mms[22m[39m
+   [32m✓[39m golden fingerprints of the ordinary world [2m(9)[22m
+     [33m[2m✓[22m[39m generates the same terrain, resources, founders and knowledge for each seed[33m 514[2mms[22m[39m
+     [33m[2m✓[22m[39m steps meadow to the recorded state at 0, 600, 2400, 12000 ticks[33m 19005[2mms[22m[39m
+     [33m[2m✓[22m[39m steps river to the recorded state at 0, 2400 ticks[33m 3549[2mms[22m[39m
+     [33m[2m✓[22m[39m steps fern to the recorded state at 0, 2400 ticks[33m 2952[2mms[22m[39m
+     [33m[2m✓[22m[39m steps aspen-harsh to the recorded state at 0, 2400 ticks[33m 3155[2mms[22m[39m
+     [33m[2m✓[22m[39m steps meadow-pop60 to the recorded state at 0, 1200 ticks[33m 4442[2mms[22m[39m
+ [32m✓[39m tests/v159_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 39203[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-159 ordinary meadow continuation[33m 39202[2mms[22m[39m
+ [32m✓[39m tests/v158_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37678[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-158 ordinary meadow continuation[33m 37677[2mms[22m[39m
+ [32m✓[39m tests/v69_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 35998[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-69 ordinary and production continuations exactly[33m 35996[2mms[22m[39m
+ [32m✓[39m tests/v65_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 35300[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-65 ordinary, source, stock, water and outside-resident continuations[33m 35299[2mms[22m[39m
+ [32m✓[39m tests/v63_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37556[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-63 ordinary, care capacity recovery and competing-tool continuations[33m 37554[2mms[22m[39m
+ [32m✓[39m tests/v153_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 36727[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-153 ordinary river continuation[33m 36726[2mms[22m[39m
+ [32m✓[39m tests/v156_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 32675[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-156 ordinary meadow continuation[33m 32674[2mms[22m[39m
+ [32m✓[39m tests/v68_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37449[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-68 ordinary, water provision, full store, mixed supply and suspended return continuations[33m 37447[2mms[22m[39m
+ [32m✓[39m tests/v67_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 36740[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-67 ordinary, stored drinking, empty stock, return and blocked entrance continuations[33m 36739[2mms[22m[39m
+ [32m✓[39m tests/v61_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 38623[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-61 ordinary, tool-loss and indoor-care saved continuations[33m 38622[2mms[22m[39m
+ [32m✓[39m tests/v66_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 35438[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-66 ordinary, resident travel, hand-over, full water pack and unseen death continuations[33m 35436[2mms[22m[39m
+ [32m✓[39m tests/inhabitant_memory.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 33464[2mms[22m[39m
+   [32m✓[39m the goal keeper experiment (seed meadow, Pavel, the baseline window) [2m(1)[22m
+     [33m[2m✓[22m[39m pursues a site from its notes where the same offer, without notes read, is left on the table[33m 9805[2mms[22m[39m
+   [32m✓[39m persistent notes [2m(11)[22m
+     [33m[2m✓[22m[39m 1. carry from one decision to the next: each ask is shown what the one before wrote[33m 2468[2mms[22m[39m
+     [33m[2m✓[22m[39m 2. survive a save: the notes come back untouched and the hashes agree[33m 3165[2mms[22m[39m
+     [33m[2m✓[22m[39m 3. replay without a model to the same world and the same notes[33m 3068[2mms[22m[39m
+     [33m[2m✓[22m[39m 4. refuse a tampered, missing or reordered memory update[33m 2983[2mms[22m[39m
+     [33m[2m✓[22m[39m 5. cannot be corrupted by invalid, oversized or malformed updates[33m 5577[2mms[22m[39m
+     [33m[2m✓[22m[39m 6. one inhabitant cannot see another's notes[33m 1846[2mms[22m[39m
+     [33m[2m✓[22m[39m 9. a failing model leaves the notes exactly as they were[33m 3157[2mms[22m[39m
+     [33m[2m✓[22m[39m 12. notes change nothing in the engine: the same options, with or without them, and no reads in src/sim[33m 1271[2mms[22m[39m
+ [32m✓[39m tests/zz_review_b_validators_harsh.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 330425[2mms[22m[39m
+   [32m✓[39m REVIEW B: validators, harsher worlds [2m(3)[22m
+     [33m[2m✓[22m[39m harsh river, Normal, 10 days, save+load every 1200 ticks[33m 65050[2mms[22m[39m
+     [33m[2m✓[22m[39m harsh forest, Normal, 10 days, save+load every 1200 ticks[33m 55780[2mms[22m[39m
+     [33m[2m✓[22m[39m meadow, Normal, 16 days through winter, save+load every 1200 ticks[33m 209594[2mms[22m[39m
+ [32m✓[39m tests/v154_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 37488[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-154 ordinary river continuation[33m 37486[2mms[22m[39m
+ [32m✓[39m tests/v166_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 29403[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-166 ordinary birch continuation[33m 29401[2mms[22m[39m
+ [32m✓[39m tests/v70_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 36789[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-70 ordinary and learned-preference continuations exactly[33m 36787[2mms[22m[39m
+ [32m✓[39m tests/v144_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30287[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-144 final account continuation[33m 30286[2mms[22m[39m
+ [32m✓[39m tests/save_storage.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 28945[2mms[22m[39m
+   [32m✓[39m where a save is kept [2m(4)[22m
+     [33m[2m✓[22m[39m puts the world in IndexedDB and only a short description in localStorage[33m 805[2mms[22m[39m
+     [33m[2m✓[22m[39m saves and loads a Huge world that is larger than localStorage would take[33m 8092[2mms[22m[39m
+     [33m[2m✓[22m[39m hands the settings back with the world[33m 487[2mms[22m[39m
+     [33m[2m✓[22m[39m replaces the previous save in place[33m 1079[2mms[22m[39m
+   [32m✓[39m a save made before IndexedDB was used [2m(3)[22m
+     [33m[2m✓[22m[39m still loads[33m 1271[2mms[22m[39m
+     [33m[2m✓[22m[39m is replaced by the next save, which frees its space in localStorage[33m 2551[2mms[22m[39m
+     [33m[2m✓[22m[39m is replaced by a save even when localStorage is too full to describe the new one until it is removed[33m 2438[2mms[22m[39m
+   [32m✓[39m when IndexedDB does not work [2m(6)[22m
+     [33m[2m✓[22m[39m falls back to localStorage when there is no IndexedDB[33m 722[2mms[22m[39m
+     [33m[2m✓[22m[39m falls back to localStorage when the write into IndexedDB fails[33m 620[2mms[22m[39m
+     [33m[2m✓[22m[39m returns false, without throwing, when nothing will take the save, and leaves the previous save as it was[33m 1426[2mms[22m[39m
+     [33m[2m✓[22m[39m loads from localStorage when the description points at IndexedDB but the record is not there[33m 727[2mms[22m[39m
+   [32m✓[39m a saved world is run for one tick before it replaces the running one [2m(2)[22m
+     [33m[2m✓[22m[39m refuses a save that reads back but cannot run, and keeps the running world[33m 479[2mms[22m[39m
+     [33m[2m✓[22m[39m the world swapped in has not been ticked by the check[33m 538[2mms[22m[39m
+   [32m✓[39m a save never loses the one it replaces [2m(6)[22m
+     [33m[2m✓[22m[39m describes the world as it was when Save was pressed, not the one started while it was compressed[33m 442[2mms[22m[39m
+     [33m[2m✓[22m[39m when the description cannot be written after the world is stored, the old save is still there and still described[33m 938[2mms[22m[39m
+     [33m[2m✓[22m[39m a stored copy that does not read back is not described, and the old save stays[33m 767[2mms[22m[39m
+     [33m[2m✓[22m[39m alternates between two records, so each save leaves the one before it whole[33m 1128[2mms[22m[39m
+     [33m[2m✓[22m[39m in localStorage alone, a description that will not fit puts the old copy back[33m 618[2mms[22m[39m
+     [33m[2m✓[22m[39m a world whose own clock threw is not saved over a good one[33m 734[2mms[22m[39m
+   [32m✓[39m the autosave [2m(3)[22m
+     [33m[2m✓[22m[39m is its own record: the hand-made save and its description are left alone, and it loads back exactly[33m 1510[2mms[22m[39m
+     [33m[2m✓[22m[39m describes the world as it was when asked, not as it is after the copy is compressed[33m 358[2mms[22m[39m
+   [33m[2m✓[22m[39m the actual product save writes format 5 and restores heterogeneous person fields exactly[33m 647[2mms[22m[39m
+ [32m✓[39m tests/v146_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30924[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-146 final account continuation[33m 30923[2mms[22m[39m
+ [32m✓[39m tests/v152_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 31371[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-152 ordinary forest continuation[33m 31370[2mms[22m[39m
+ [32m✓[39m tests/v157_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 33179[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-157 ordinary meadow continuation[33m 33177[2mms[22m[39m
+ [32m✓[39m tests/occasions.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 32828[2mms[22m[39m
+   [32m✓[39m a death calls a funeral, and people come [2m(2)[22m
+     [33m[2m✓[22m[39m opens, is attended, and those who came met each other and felt it[33m 6250[2mms[22m[39m
+   [32m✓[39m market day [2m(1)[22m
+     [33m[2m✓[22m[39m comes round on its day once a hall stands, and food moves from those with spare to those short of it[33m 13721[2mms[22m[39m
+   [32m✓[39m an authored world calls nothing [2m(1)[22m
+     [33m[2m✓[22m[39m has no occasions field after a death, a harvest or three days[33m 12853[2mms[22m[39m
+ [32m✓[39m tests/v142_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30623[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-142 skill lesson continuation[33m 30622[2mms[22m[39m
+ [32m✓[39m tests/v147_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30631[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-147 final account continuation[33m 30630[2mms[22m[39m
+ [32m✓[39m tests/v148_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 31515[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-148 ordinary and paid sibling-plan crafting continuations[33m 31514[2mms[22m[39m
+ [32m✓[39m tests/reputation.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 28945[2mms[22m[39m
+   [32m✓[39m in a running world [2m(1)[22m
+     [33m[2m✓[22m[39m stories arise from what people do and spread beyond those who saw it (rich); an authored world holds none[33m 28939[2mms[22m[39m
+ [32m✓[39m tests/v143_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 32133[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-143 shared project continuation[33m 32132[2mms[22m[39m
+ [32m✓[39m tests/v140_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 29040[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded autonomous rules-140 crafted-rod continuation[33m 29039[2mms[22m[39m
+ [31m❯[39m tests/zz_review_e_famine_trace.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 10[2mms[22m[39m
+[31m   [31m×[31m traces one day of the retained rules-107 forest famine (diagnostic, writes a report)[39m[32m 8[2mms[22m[39m
+[31m   [31m×[31m CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed[39m[32m 1[2mms[22m[39m
+ [32m✓[39m tests/v80_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30316[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-80 ordinary reporting and private completion continuations exactly[33m 30315[2mms[22m[39m
+ [32m✓[39m tests/presentation.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 30082[2mms[22m[39m
+   [32m✓[39m the clock under stalls and overload [2m(6)[22m
+     [33m[2m✓[22m[39m a stall is told as recent for a while and then goes quiet, while the running total stays[33m 3139[2mms[22m[39m
+     [33m[2m✓[22m[39m pausing and resuming never steps the picture backwards: the first frame after resuming carries on from the one that was on screen[33m 2064[2mms[22m[39m
+     [33m[2m✓[22m[39m requested and achieved speed are told apart: keeping up reads as equal, falling behind reads as behind[33m 714[2mms[22m[39m
+     [33m[2m✓[22m[39m stalls and speed changes in the middle of a run do not change what happens: same seed, same tick, same world[33m 17130[2mms[22m[39m
+   [32m✓[39m what is drawn and listed is what is there [2m(3)[22m
+     [33m[2m✓[22m[39m inspecting workshops, sites, carts and people never perturbs the simulation[33m 6671[2mms[22m[39m
+ [32m✓[39m tests/v134_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 27943[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded autonomous rules-134 well continuation[33m 27941[2mms[22m[39m
+ [32m✓[39m tests/v141_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 30396[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-141 grave visit continuation[33m 30395[2mms[22m[39m
+ [32m✓[39m tests/lab_no_ask.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 86004[2mms[22m[39m
+   [32m✓[39m the rich-no-ask branch removes the project ask and nothing else [2m(6)[22m
+     [33m[2m✓[22m[39m the lab's project tallies agree with this independent count, and the branch's asks and deliveries are zero[33m 41423[2mms[22m[39m
+     [33m[2m✓[22m[39m an authored world, which makes no such ask, is untouched by the switch[33m 44573[2mms[22m[39m
+ [32m✓[39m tests/save.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 30663[2mms[22m[39m
+   [32m✓[39m saving and loading a world [2m(9)[22m
+     [33m[2m✓[22m[39m round-trips an ordinary world after a while[33m 1636[2mms[22m[39m
+     [33m[2m✓[22m[39m round-trips a Large world[33m 4723[2mms[22m[39m
+     [33m[2m✓[22m[39m round-trips a Huge world[33m 17529[2mms[22m[39m
+     [33m[2m✓[22m[39m still reads a save written in the previous format (3: byte-per-tile masks, people one by one)[33m 1780[2mms[22m[39m
+     [33m[2m✓[22m[39m writes a Huge world in well under half the text the previous format needed[33m 2201[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps people in the old per-person form when they do not share the same fields, and still round-trips[33m 1231[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps one person's beliefs as they were when a belief has an undefined value or an id that is not its key[33m 1236[2mms[22m[39m
+ [32m✓[39m tests/v145_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 31784[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded ordinary and staged rules-145 final account continuation[33m 31783[2mms[22m[39m
+ [32m✓[39m tests/v139_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 26669[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-139 ordinary and staged brewing continuation[33m 26668[2mms[22m[39m
+ [32m✓[39m tests/v149_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 25871[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-149 ordinary and paid preservation collection continuations[33m 25870[2mms[22m[39m
+ [32m✓[39m tests/pathfail.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 28275[2mms[22m[39m
+   [32m✓[39m remembering failed wolf searches changes nothing a world does [2m(2)[22m
+     [33m[2m✓[22m[39m an ordinary world, 3,000 ticks[33m 8066[2mms[22m[39m
+     [33m[2m✓[22m[39m a Large world, 1,200 ticks[33m 19829[2mms[22m[39m
+ [32m✓[39m tests/v138_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 26803[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-138 ordinary and staged workshop continuation[33m 26802[2mms[22m[39m
+ [32m✓[39m tests/v8_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 26194[2mms[22m[39m
+   [32m✓[39m the version-8 world continues as version 8 [2m(1)[22m
+     [33m[2m✓[22m[39m matches the reference recorded before version 9 existed[33m 26192[2mms[22m[39m
+ [32m✓[39m tests/v136_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 26592[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-136 ordinary and staged stock continuation[33m 26591[2mms[22m[39m
+ [32m✓[39m tests/v3_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 25764[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves habitation version-3 save continuation from before wolf defence[33m 25763[2mms[22m[39m
+ [32m✓[39m tests/v7_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 25782[2mms[22m[39m
+   [32m✓[39m version-7 continuation reference [2m(1)[22m
+     [33m[2m✓[22m[39m still runs the version-7 world exactly as recorded[33m 25781[2mms[22m[39m
+ [32m✓[39m tests/v28_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 18775[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules 28 full saved-state continuation, including its historical event alias[33m 18774[2mms[22m[39m
+ [32m✓[39m tests/inhabit_manual.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 17900[2mms[22m[39m
+   [32m✓[39m a person can be answered by hand [2m(5)[22m
+     [33m[2m✓[22m[39m is asked for several decisions in a row, each applied at the moment it was asked, and the record replays[33m 7822[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a stale or repeated answer, and survives nonsense without applying it[33m 4977[2mms[22m[39m
+     [33m[2m✓[22m[39m hands the person back to the engine when stopped, and the world goes on without being asked[33m 5098[2mms[22m[39m
+ [32m✓[39m tests/livestock.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 17786[2mms[22m[39m
+   [33m[2m✓[22m[39m creates two ordinary founders with zero stores and exact conserved continuation[33m 3248[2mms[22m[39m
+   [33m[2m✓[22m[39m walks onto a real shore before spending time drinking instead of stopping short[33m 2992[2mms[22m[39m
+   [33m[2m✓[22m[39m retains one personally found water place and saves the return journey exactly[33m 10964[2mms[22m[39m
+ [32m✓[39m tests/v85_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 27029[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-85 completed building shares and heard-before-answer negotiation continuations exactly[33m 27028[2mms[22m[39m
+ [32m✓[39m tests/v6_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 24434[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves version-6 save continuation from before household shelter plans[33m 24433[2mms[22m[39m
+ [32m✓[39m tests/transmission.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 21783[2mms[22m[39m
+   [32m✓[39m the diagnostics change nothing by looking [2m(4)[22m
+     [33m[2m✓[22m[39m a world runs identically with them on and off, to the last field and the generator state[33m 21670[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 21887[2mms[22m[39m
+   [32m✓[39m resource accounting [2m(8)[22m
+     [33m[2m✓[22m[39m conserves every item over long natural runs: initial + created - consumed - spoiled = what exists[33m 21772[2mms[22m[39m
+ [32m✓[39m tests/v83_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14367[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-83 ordinary cancellation, discovered target and late report continuations exactly[33m 14366[2mms[22m[39m
+ [32m✓[39m tests/inhabit_choice_identity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 18016[2mms[22m[39m
+   [33m[2m✓[22m[39m reproduces differing household/hunger offers and preserves the historical first-match interpretation[33m 3518[2mms[22m[39m
+   [33m[2m✓[22m[39m rules 43 public identities select the actual hunger alternative with its own amount and replay exactly[33m 5784[2mms[22m[39m
+   [33m[2m✓[22m[39m rules 44 public identities select the actual hunger alternative with its own amount and replay exactly[33m 4647[2mms[22m[39m
+   [33m[2m✓[22m[39m the engine rejects an index/key mismatch rather than selecting another offer[33m 4064[2mms[22m[39m
+ [32m✓[39m tests/v82_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 23521[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-82 ordinary heard agreements, remote death and late report continuations exactly[33m 23520[2mms[22m[39m
+ [32m✓[39m tests/zz_review_g_feed_caps.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 23681[2mms[22m[39m
+   [33m[2m✓[22m[39m feed/chronicle/log reach after two river days (immigration on, as the product world runs)[33m 23680[2mms[22m[39m
+ [32m✓[39m tests/work_tastes.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 25364[2mms[22m[39m
+   [33m[2m✓[22m[39m leaves versions 28 to 30 and authored worlds exactly unchanged with the ablation[33m 12116[2mms[22m[39m
+   [33m[2m✓[22m[39m continues deterministically through saving during ordinary work and observers are pure[33m 12304[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-39 Sven choice and taste explanation[33m 628[2mms[22m[39m
+ [32m✓[39m tests/rich.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 17141[2mms[22m[39m
+   [32m✓[39m rich dynamics [2m(13)[22m
+     [33m[2m✓[22m[39m leave an ordinary world without a mood or a season[33m 1587[2mms[22m[39m
+     [33m[2m✓[22m[39m give every person a mood, the same way every time[33m 6694[2mms[22m[39m
+     [33m[2m✓[22m[39m save and load a rich world exactly[33m 2998[2mms[22m[39m
+     [33m[2m✓[22m[39m shows a person's thoughts in the inspector, and only in a rich world[33m 1157[2mms[22m[39m
+     [33m[2m✓[22m[39m inspecting a rich world never perturbs it[33m 4406[2mms[22m[39m
+ [32m✓[39m tests/v4_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 26540[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves wolf-defence version-4 save continuation from before fatal-injury finality[33m 26539[2mms[22m[39m
+ [32m✓[39m tests/traditions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 14519[2mms[22m[39m
+   [32m✓[39m traditions [2m(3)[22m
+     [33m[2m✓[22m[39m form from a well-attended harvest feast, are called again on their day, and lapse when nobody comes twice[33m 9515[2mms[22m[39m
+     [33m[2m✓[22m[39m a well-attended funeral becomes a remembrance of the dead, and a winter survived a midwinter fire; nothing authored[33m 4976[2mms[22m[39m
+ [31m❯[39m tests/lab_defaults.test.ts [2m([22m[2m3 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 30127[2mms[22m[39m
+   [31m❯[39m current lab defaults cannot silently reuse legacy results [2m(2)[22m
+[31m     [31m×[31m rejects existing undefined rows before starting workers or touching outputs[39m[33m 10026[2mms[22m[39m
+[31m     [31m×[31m rejects existing authored rows before starting workers or touching outputs[39m[33m 10034[2mms[22m[39m
+[31m   [31m×[31m refuses to resume ordinary lab rows as a geology generation comparison[39m[33m 10064[2mms[22m[39m
+ [32m✓[39m tests/learning.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 16561[2mms[22m[39m
+   [32m✓[39m what has paid: in a running world [2m(4)[22m
+     [33m[2m✓[22m[39m an authored world records none, for anyone, ever[33m 4260[2mms[22m[39m
+     [33m[2m✓[22m[39m the lab branch without learning parts from the control, and both report how concentrated the gathering was[33m 11952[2mms[22m[39m
+ [32m✓[39m tests/v131_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14647[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-131 ordinary and known-carcass supply continuations[33m 14646[2mms[22m[39m
+ [32m✓[39m tests/v129_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15967[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-129 ordinary sheep and paid capture, shearing and slaughter continuations[33m 15966[2mms[22m[39m
+ [32m✓[39m tests/v26_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13391[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 26 continuation[33m 13389[2mms[22m[39m
+ [32m✓[39m tests/v10_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13470[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 10 continuation[33m 13469[2mms[22m[39m
+ [32m✓[39m tests/survival.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 16627[2mms[22m[39m
+   [32m✓[39m a living population: couples, children and newcomers [2m(5)[22m
+     [33m[2m✓[22m[39m a settlement that is doing well draws newcomers, who can reach the camp even when its centre has been built over[33m 8704[2mms[22m[39m
+     [33m[2m✓[22m[39m couples and families can arrive together, already bound to each other[33m 7334[2mms[22m[39m
+ [32m✓[39m tests/v20_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14355[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 20 continuation[33m 14354[2mms[22m[39m
+ [32m✓[39m tests/v151_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14476[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-151 ordinary and autonomous lamb-birth continuations[33m 14475[2mms[22m[39m
+ [32m✓[39m tests/v130_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15193[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-130 ordinary and known-carcass supply continuations[33m 15192[2mms[22m[39m
+ [32m✓[39m tests/v19_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13320[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 19 continuation[33m 13319[2mms[22m[39m
+ [32m✓[39m tests/v126_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15265[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-126 ordinary and paid gear manufacture/placement/waiting continuations[33m 15264[2mms[22m[39m
+ [32m✓[39m tests/iron_chain_stall.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 17197[2mms[22m[39m
+   [32m✓[39m the ore hunt reaches ore (rules version 8) [2m(2)[22m
+     [33m[2m✓[22m[39m adults who know a kiln and hold a worn tool come home with an ore belief[33m 506[2mms[22m[39m
+     [33m[2m✓[22m[39m without a kiln belief and without a worn tool there is no ore hunt, and no ore is met[33m 661[2mms[22m[39m
+   [32m✓[39m the smithy's fuel comes to the kiln (rules version 10) [2m(1)[22m
+     [33m[2m✓[22m[39m adults who know a standing smithy and a kiln see charcoal made, with no worn tool and no iron plan[33m 16028[2mms[22m[39m
+ [32m✓[39m tests/v23_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14096[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 23 continuation[33m 14095[2mms[22m[39m
+ [32m✓[39m tests/v132_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15214[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-132 ordinary and paid nourishment continuations[33m 15212[2mms[22m[39m
+ [32m✓[39m tests/v122_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13535[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-122 ordinary and paid preservation continuations[33m 13534[2mms[22m[39m
+ [32m✓[39m tests/v128_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15442[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-128 ordinary and paid gear manufacture/placement/waiting continuations[33m 15441[2mms[22m[39m
+ [32m✓[39m tests/v28_work_tastes_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15320[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves main version 28 continuation[33m 15319[2mms[22m[39m
+ [32m✓[39m tests/v133_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15496[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-133 ordinary and paid nourishment continuations[33m 15495[2mms[22m[39m
+ [32m✓[39m tests/v15_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15735[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 15 continuation[33m 15734[2mms[22m[39m
+ [32m✓[39m tests/v124_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13704[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-124 ordinary and paid textile continuations[33m 13703[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_till_root.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14447[2mms[22m[39m
+   [32m✓[39m REVIEW: why the chosen field tile cannot be reached [2m(1)[22m
+     [33m[2m✓[22m[39m forest, Isla at tick 3204[33m 14446[2mms[22m[39m
+ [32m✓[39m tests/v14_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13919[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 14 continuation[33m 13918[2mms[22m[39m
+ [32m✓[39m tests/v27_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13169[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves main version 27 continuation[33m 13167[2mms[22m[39m
+ [32m✓[39m tests/v21_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13599[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 21 continuation[33m 13598[2mms[22m[39m
+ [32m✓[39m tests/v120_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 12970[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-120 Talia childhood continuation[33m 12969[2mms[22m[39m
+ [32m✓[39m tests/v17_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13647[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 17 continuation[33m 13646[2mms[22m[39m
+ [32m✓[39m tests/v12_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13477[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 12 continuation[33m 13474[2mms[22m[39m
+ [32m✓[39m tests/v24_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13980[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 24 continuation[33m 13979[2mms[22m[39m
+ [32m✓[39m tests/illness.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 14614[2mms[22m[39m
+   [32m✓[39m a fever [2m(3)[22m
+     [33m[2m✓[22m[39m never happens in an authored world, and in a rich one the ill rest[33m 14524[2mms[22m[39m
+ [32m✓[39m tests/current_recovery.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 12750[2mms[22m[39m
+   [33m[2m✓[22m[39m current product worlds continue exactly through ordinary decisions and pure observation[33m 12675[2mms[22m[39m
+ [32m✓[39m tests/v13_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14170[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 13 continuation[33m 14169[2mms[22m[39m
+ [32m✓[39m tests/determinism.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 14516[2mms[22m[39m
+   [32m✓[39m determinism [2m(4)[22m
+     [33m[2m✓[22m[39m the same seed and settings give the same world after the same number of ticks[33m 7126[2mms[22m[39m
+     [33m[2m✓[22m[39m different seeds give different worlds, and harsh settings change the outcome[33m 2004[2mms[22m[39m
+     [33m[2m✓[22m[39m inspecting people (view-models, opportunity audits) never changes what happens next[33m 5125[2mms[22m[39m
+ [32m✓[39m tests/v119_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13239[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-119 Pavel lived-life company and shelter continuation[33m 13238[2mms[22m[39m
+ [32m✓[39m tests/inhabit_app.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 15169[2mms[22m[39m
+   [32m✓[39m the in-app driver [2m(3)[22m
+     [33m[2m✓[22m[39m pauses while the model thinks, applies the answer at the asked tick, and records a transcript that replays headlessly[33m 14648[2mms[22m[39m
+ [32m✓[39m tests/inhabitant_attribute.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 13985[2mms[22m[39m
+   [32m✓[39m attribution [2m(5)[22m
+     [33m[2m✓[22m[39m on the goal keeper: every pursued choice is attributed to the goal, by its place reference[33m 13762[2mms[22m[39m
+ [32m✓[39m tests/v16_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13676[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 16 continuation[33m 13675[2mms[22m[39m
+ [32m✓[39m tests/zz_review_main_mature_large.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13426[2mms[22m[39m
+   [32m✓[39m REVIEW: retained mature Large save under current code [2m(1)[22m
+     [33m[2m✓[22m[39m load, continue 240 ticks, inspect everyone, purity, size[33m 13424[2mms[22m[39m
+ [32m✓[39m tests/v22_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14073[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 22 continuation[33m 14072[2mms[22m[39m
+ [32m✓[39m tests/v11_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13476[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 11 continuation[33m 13474[2mms[22m[39m
+ [32m✓[39m tests/v123_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13289[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-123 ordinary and paid hearth continuations[33m 13288[2mms[22m[39m
+ [32m✓[39m tests/v25_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14285[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 25 continuation[33m 14284[2mms[22m[39m
+ [32m✓[39m tests/v127_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15298[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-127 ordinary and paid gear manufacture/placement/waiting continuations[33m 15297[2mms[22m[39m
+ [32m✓[39m tests/v18_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 15751[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves local-main version 18 continuation[33m 15750[2mms[22m[39m
+ [32m✓[39m tests/v125_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13529[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves recorded rules-125 ordinary and paid carcass/product continuations[33m 13528[2mms[22m[39m
+ [32m✓[39m tests/v121_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 12395[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the recorded rules-121 resumed gathering credit continuation[33m 12394[2mms[22m[39m
+ [32m✓[39m tests/v116_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13006[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the rules-116 ordinary continuation through paused-activity endings exactly[33m 13005[2mms[22m[39m
+ [32m✓[39m tests/rules_version.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 6065[2mms[22m[39m
+   [32m✓[39m the version survives everything that carries a world [2m(6)[22m
+     [33m[2m✓[22m[39m a save and a load keep it, and keep the whole world with it[33m 717[2mms[22m[39m
+     [33m[2m✓[22m[39m a save, a load and then carrying on is the same world as never having stopped[33m 1062[2mms[22m[39m
+     [33m[2m✓[22m[39m a lab fork of a saved world runs the version the world was saved with[33m 425[2mms[22m[39m
+     [33m[2m✓[22m[39m is part of what makes a world that world[33m 410[2mms[22m[39m
+   [32m✓[39m a world this build cannot run is refused, not reinterpreted [2m(9)[22m
+     [33m[2m✓[22m[39m refuses a save whose rules version is from the future[33m 401[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a save whose rules version is far in the future[33m 313[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a save whose rules version is not a whole number[33m 413[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a save whose rules version is zero[33m 338[2mms[22m[39m
+     [33m[2m✓[22m[39m refuses a save whose rules version is a word[33m 313[2mms[22m[39m
+     [33m[2m✓[22m[39m leaves the running world untouched when a load is refused[33m 521[2mms[22m[39m
+ [32m✓[39m tests/chooser.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 5588[2mms[22m[39m
+   [32m✓[39m the option chooser [2m(2)[22m
+     [33m[2m✓[22m[39m ranks by utility unless asked otherwise, deterministically[33m 2267[2mms[22m[39m
+     [33m[2m✓[22m[39m changes what people do when set to random, the same way every time, and goes back[33m 3320[2mms[22m[39m
+ [32m✓[39m tests/v86_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 6671[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-86 ordinary ecology, actual sowing, partial field rest and recovery continuations exactly[33m 6670[2mms[22m[39m
+ [32m✓[39m tests/geology.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 7570[2mms[22m[39m
+   [33m[2m✓[22m[39m varies finite geology without moving deposits, changing food/water or drawing simulation RNG[33m 965[2mms[22m[39m
+   [33m[2m✓[22m[39m does not teach undiscovered deposits or impose occupations and survives save/load[33m 5945[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps historical generation exactly equal with or without the generation-only ablation[33m 659[2mms[22m[39m
+ [32m✓[39m tests/zz_review_g_ledger_endings.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 7768[2mms[22m[39m
+   [33m[2m✓[22m[39m natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close[33m 7449[2mms[22m[39m
+   [33m[2m✓[22m[39m the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it[33m 317[2mms[22m[39m
+ [32m✓[39m tests/knowledge.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 7679[2mms[22m[39m
+   [32m✓[39m knowledge is local [2m(5)[22m
+     [33m[2m✓[22m[39m across a whole natural run, every activity aimed at a place or thing starts from something the person knew[33m 7553[2mms[22m[39m
+ [32m✓[39m tests/social.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 10786[2mms[22m[39m
+   [32m✓[39m ordinary social life in the natural world [2m(1)[22m
+     [33m[2m✓[22m[39m over several days people greet, talk, ask, share and sometimes disagree, and relationships form from those encounters[33m 10679[2mms[22m[39m
+ [32m✓[39m tests/decision_ledger.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 7514[2mms[22m[39m
+   [33m[2m✓[22m[39m every ordinary decision is kept with the activity it launched and how that activity ended, bounded and counted[33m 3601[2mms[22m[39m
+   [33m[2m✓[22m[39m the ledger is saved and reloaded exactly, never fingerprinted, and never written below rules 103 or with the switch off[33m 3799[2mms[22m[39m
+ [32m✓[39m tests/environment.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 7242[2mms[22m[39m
+   [32m✓[39m a dry spell and a flood [2m(2)[22m
+     [33m[2m✓[22m[39m a storm at its height floods the shore: goods lying by the water are lost and recorded, shelters there are damaged[33m 594[2mms[22m[39m
+   [32m✓[39m deer and the hunt [2m(2)[22m
+     [33m[2m✓[22m[39m deer come to a rich world and none to an authored one[33m 5852[2mms[22m[39m
+     [33m[2m✓[22m[39m a hungry hunter with a deer in sight may stalk it, and a kill puts meat in the pack that the ledger accounts for[33m 657[2mms[22m[39m
+ [32m✓[39m tests/cooperation.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 9205[2mms[22m[39m
+   [32m✓[39m actions happen in space and take time [2m(2)[22m
+     [33m[2m✓[22m[39m nobody teleports during ordinary travel (speed is bounded every single tick)[33m 5386[2mms[22m[39m
+     [33m[2m✓[22m[39m gathering, drinking and farming are only done at the thing itself[33m 3598[2mms[22m[39m
+ [32m✓[39m tests/rules.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 10812[2mms[22m[39m
+   [32m✓[39m rule sets [2m(8)[22m
+     [33m[2m✓[22m[39m keeps the larger workplace allowance behind rich dynamics, including for Huge profiles[33m 320[2mms[22m[39m
+   [32m✓[39m the ordinary world does not notice [2m(2)[22m
+     [33m[2m✓[22m[39m naming the ordinary rules explicitly changes nothing[33m 4265[2mms[22m[39m
+     [33m[2m✓[22m[39m a scaled world runs, keeps its books, and is not the ordinary world[33m 6041[2mms[22m[39m
+ [32m✓[39m tests/contest-reservations.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 5761[2mms[22m[39m
+   [32m✓[39m reservations are released [2m(4)[22m
+     [33m[2m✓[22m[39m in a long natural run every reservation belongs to a living person with a matching activity, and source counters add up[33m 5646[2mms[22m[39m
+ [32m✓[39m tests/suspended_endings.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 9714[2mms[22m[39m
+   [32m✓[39m LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) [2m(14)[22m
+     [33m[2m✓[22m[39m gather, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save[33m 2446[2mms[22m[39m
+     [33m[2m✓[22m[39m gather, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save[33m 2300[2mms[22m[39m
+     [33m[2m✓[22m[39m build, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save[33m 2228[2mms[22m[39m
+     [33m[2m✓[22m[39m build, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save[33m 2317[2mms[22m[39m
+ [32m✓[39m tests/v84_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 9773[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-84 ordinary reconciliation, private withdrawal and heard cancellation continuations exactly[33m 9772[2mms[22m[39m
+ [32m✓[39m tests/probe.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 12354[2mms[22m[39m
+   [32m✓[39m work counters [2m(3)[22m
+     [33m[2m✓[22m[39m leave the world exactly as it would have been without them[33m 5259[2mms[22m[39m
+     [33m[2m✓[22m[39m stay at zero while switched off[33m 793[2mms[22m[39m
+     [33m[2m✓[22m[39m count real work when switched on, and count it the same way every time[33m 2656[2mms[22m[39m
+   [32m✓[39m why people wander (diagnostic) [2m(1)[22m
+     [33m[2m✓[22m[39m counts a cause for every wander that was chosen, and changes nothing[33m 3500[2mms[22m[39m
+ [32m✓[39m tests/v2_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 13763[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves version-2 saved-state continuation from before habitation[33m 13762[2mms[22m[39m
+ [32m✓[39m tests/inhabit_limit_prompt.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 5945[2mms[22m[39m
+   [32m✓[39m the "limit" key in the prompt [2m(2)[22m
+     [33m[2m✓[22m[39m is said under protocols 35 and 36, when an option lists limits, and never before[33m 5942[2mms[22m[39m
+ [32m✓[39m tests/historical_retention.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 12649[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves full natural continuation against the retention ablation apart from expired storage[33m 12533[2mms[22m[39m
+ [32m✓[39m tests/v150_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 14027[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-150 ordinary and autonomous trap-meat continuations[33m 14026[2mms[22m[39m
+ [32m✓[39m tests/cascade.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 11746[2mms[22m[39m
+   [32m✓[39m the cascade tracer [2m(3)[22m
+     [33m[2m✓[22m[39m leaves the world exactly where it would have been[33m 4793[2mms[22m[39m
+     [33m[2m✓[22m[39m links happenings that share a person within a day, across systems, and not otherwise[33m 1979[2mms[22m[39m
+     [33m[2m✓[22m[39m does not link across more than a day[33m 4972[2mms[22m[39m
+ [32m✓[39m tests/v91_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5307[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-91 ordinary, private waiting, heard cancellation, replacement and shared food continuations exactly[33m 5305[2mms[22m[39m
+ [32m✓[39m tests/worldsize.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 5023[2mms[22m[39m
+   [32m✓[39m moving between sizes [2m(3)[22m
+     [33m[2m✓[22m[39m goes from the village to Large, to Huge, and back to the village, leaving nothing of the larger world behind[33m 914[2mms[22m[39m
+     [33m[2m✓[22m[39m a village started this way is the same village the ordinary settings make[33m 3796[2mms[22m[39m
+     [33m[2m✓[22m[39m a test scene started from a larger world is run by the ordinary rules, as it always was[33m 303[2mms[22m[39m
+ [32m✓[39m tests/v98_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5585[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-98 ordinary, heard, fulfilled, sheltered, paid and interrupted roof-duty continuations exactly[33m 5584[2mms[22m[39m
+ [32m✓[39m tests/v108_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5264[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-108 ordinary, unseen/seen home loss and interrupted construction exactly[33m 5263[2mms[22m[39m
+ [32m✓[39m tests/v105_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5128[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-105 ordinary, set-aside, told and delivered continuations exactly[33m 5126[2mms[22m[39m
+ [32m✓[39m tests/v93_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5715[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-93 ordinary, owned parcels, paid collection and recovered-tool use exactly[33m 5714[2mms[22m[39m
+ [32m✓[39m tests/v94_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5534[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-94 ordinary, heard handover, paid cover work and agreed return exactly[33m 5533[2mms[22m[39m
+ [32m✓[39m tests/shared_stone.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 5079[2mms[22m[39m
+   [32m✓[39m an ordinary world [2m(1)[22m
+     [33m[2m✓[22m[39m continues exactly through save and load, and conserves goods[33m 4861[2mms[22m[39m
+ [32m✓[39m tests/v109_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5623[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-109 ordinary, final construction and replacement use exactly[33m 5621[2mms[22m[39m
+ [32m✓[39m tests/v114_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4627[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-114 ordinary and accepted hungry-harvest/eating continuations exactly[33m 4626[2mms[22m[39m
+ [32m✓[39m tests/v97_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5378[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-97 ordinary, proposed and answered care return, resumed watch and competing conversation exactly[33m 5377[2mms[22m[39m
+ [32m✓[39m tests/v103_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5038[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-103 ordinary and staged ledger continuations exactly[33m 5037[2mms[22m[39m
+ [32m✓[39m tests/v90_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5018[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-90 ordinary, shared table, recovery travel and limited handling continuations exactly[33m 5017[2mms[22m[39m
+ [32m✓[39m tests/leisure.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 427457[2mms[22m[39m
+   [32m✓[39m varied spare time [2m(5)[22m
+     [33m[2m✓[22m[39m changes nothing below version 28: the switch makes no difference to a version 27 world[33m 11429[2mms[22m[39m
+     [33m[2m✓[22m[39m is deterministic, remembers where people spent spare time, and survives a save[33m 48034[2mms[22m[39m
+     [33m[2m✓[22m[39m sends people to more than one kind of place[33m 297350[2mms[22m[39m
+     [33m[2m✓[22m[39m does not cost lives: nobody starves in a short run that did not already have deaths[33m 70441[2mms[22m[39m
+ [32m✓[39m tests/v104_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5303[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-104 ordinary and told-at-supper continuations exactly[33m 5302[2mms[22m[39m
+ [32m✓[39m tests/promise_targets.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 5181[2mms[22m[39m
+   [33m[2m✓[22m[39m does not call an unseen vanished site complete at the personal deadline[33m 475[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps actual ordinary site completion distinct from a partially delivered hauling promise[33m 4121[2mms[22m[39m
+ [32m✓[39m tests/v112_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5079[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-112 ordinary, paused and resumed occasion and closed refusal exactly[33m 5078[2mms[22m[39m
+ [32m✓[39m tests/v106_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4988[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-106 ordinary, unseen, seen, set-out and after-care continuations exactly[33m 4986[2mms[22m[39m
+ [32m✓[39m tests/v96_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4797[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-96 ordinary, heard fire, paid acquisition and personally observed target loss exactly[33m 4796[2mms[22m[39m
+ [32m✓[39m tests/v99_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5017[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-99 ordinary, prepared, built, used and lost-component continuations exactly[33m 5016[2mms[22m[39m
+ [32m✓[39m tests/v100_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5266[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-100 ordinary, told, deferred, stale and complementary continuations exactly[33m 5265[2mms[22m[39m
+ [32m✓[39m tests/v101_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4894[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-101 ordinary, covered, delivered and expired promise continuations exactly[33m 4893[2mms[22m[39m
+ [32m✓[39m tests/v102_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4381[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-102 ordinary, declined-second-ask and single-patch continuations exactly[33m 4379[2mms[22m[39m
+ [32m✓[39m tests/v111_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4913[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-111 ordinary, ongoing occasion and urgent interruption exactly[33m 4912[2mms[22m[39m
+ [32m✓[39m tests/longrun_runner.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2848[2mms[22m[39m
+   [33m[2m✓[22m[39m captures real redirected Windows exit codes and fails closed on incomplete reports[33m 2847[2mms[22m[39m
+ [32m✓[39m tests/v110_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5194[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-110 ordinary, water search and real drinking exactly[33m 5189[2mms[22m[39m
+ [32m✓[39m tests/v89_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5157[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-89 ordinary, paid offcut production, collection and partial fuel continuations exactly[33m 5156[2mms[22m[39m
+ [32m✓[39m tests/v113_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4991[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-113 ordinary and paid/unpaid grain-to-seed boundaries exactly[33m 4989[2mms[22m[39m
+ [32m✓[39m tests/time_budget.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 5037[2mms[22m[39m
+   [33m[2m✓[22m[39m partitions start-of-tick living time and leaves the full ordinary continuation and RNG unchanged[33m 5027[2mms[22m[39m
+ [32m✓[39m tests/life.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 4667[2mms[22m[39m
+   [32m✓[39m age [2m(2)[22m
+     [33m[2m✓[22m[39m an authored world runs a day with none of this[33m 4495[2mms[22m[39m
+ [32m✓[39m tests/stage4_cohort.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 3379[2mms[22m[39m
+   [32m✓[39m the founding-camp capture (option A) [2m(6)[22m
+     [33m[2m✓[22m[39m changes nothing by looking: a world runs identically with the capture on and off, to the last field[33m 2849[2mms[22m[39m
+ [32m✓[39m tests/v115_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5208[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-115 ordinary and accepted project-handcraft/input-release continuations exactly[33m 5207[2mms[22m[39m
+ [32m✓[39m tests/temperament.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 3322[2mms[22m[39m
+   [32m✓[39m company and the reserved [2m(2)[22m
+     [33m[2m✓[22m[39m counts up in a crowd and down alone, weighs on the reserved, and never exists in an authored world[33m 1481[2mms[22m[39m
+     [33m[2m✓[22m[39m offers the crowded reserved person time alone, which clears the count and leaves them the quiet[33m 1823[2mms[22m[39m
+ [32m✓[39m tests/save_columns.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 4063[2mms[22m[39m
+   [33m[2m✓[22m[39m format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics[33m 1696[2mms[22m[39m
+ [32m✓[39m tests/v95_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5142[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-95 ordinary, paid care acquisition, receipt and informed cancellation exactly[33m 5140[2mms[22m[39m
+ [32m✓[39m tests/v88_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4539[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-88 ordinary, flood discovery, physical retreat and waiting recovery continuations exactly[33m 4538[2mms[22m[39m
+ [32m✓[39m tests/project_revision.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 5327[2mms[22m[39m
+   [33m[2m✓[22m[39m replays a revised plan through paid production, including memory=false, and detects tampering[33m 3122[2mms[22m[39m
+   [33m[2m✓[22m[39m replays a revised plan through paid production, including memory=true, and detects tampering[33m 1887[2mms[22m[39m
+ [32m✓[39m tests/observer_lifeevent.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 3655[2mms[22m[39m
+   [32m✓[39m asking about a life change that has run its course [2m(3)[22m
+     [33m[2m✓[22m[39m says there is none, and deletes nothing from the person or the world[33m 1577[2mms[22m[39m
+     [33m[2m✓[22m[39m still lapses when the SIMULATION asks: behaviour is unchanged[33m 986[2mms[22m[39m
+     [33m[2m✓[22m[39m describes a change that is still running, and leaves it alone[33m 1087[2mms[22m[39m
+ [32m✓[39m tests/inhabit_proposals.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 3480[2mms[22m[39m
+   [33m[2m✓[22m[39m the inhabitant protocol carries it: the scripted proposer records a replayable run in which the cart is built from the proposed plan[33m 3325[2mms[22m[39m
+ [32m✓[39m tests/mediation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 3549[2mms[22m[39m
+   [32m✓[39m stepping into a quarrel [2m(2)[22m
+     [33m[2m✓[22m[39m is open to a friend of both who knows of it, in a rich world only[33m 824[2mms[22m[39m
+     [33m[2m✓[22m[39m comes to peace, a softening, a rebuff or a turning away, each with its mark; and the unliked are not heard[33m 2724[2mms[22m[39m
+ [32m✓[39m tests/v92_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4498[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-92 ordinary, actual heard work, informed succession and private-work continuations exactly[33m 4497[2mms[22m[39m
+ [32m✓[39m tests/v107_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5710[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-107 ordinary, told, asked and retold continuations exactly[33m 5708[2mms[22m[39m
+ [32m✓[39m tests/project_helpers.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 2572[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay[33m 1881[2mms[22m[39m
+   [33m[2m✓[22m[39m the trusted helper can refuse goods reserved for another obligation[33m 375[2mms[22m[39m
+ [32m✓[39m tests/helper_learning.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 4581[2mms[22m[39m
+   [33m[2m✓[22m[39m retains actual task, direct receipt and useful work without informing an uninvolved person[33m 1436[2mms[22m[39m
+   [33m[2m✓[22m[39m changes an eligible later helper choice across a save, while preserving the helper’s valid refusal[33m 651[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps unavailable tasks unknown and preserves rules 77 and the isolated removal[33m 971[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects malformed helper receipt saves: future[33m 372[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects malformed helper receipt saves: wrong item[33m 430[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects malformed helper receipt saves: old rules[33m 366[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects malformed helper receipt saves: unreceived[33m 346[2mms[22m[39m
+ [32m✓[39m tests/viewer_purity.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2771[2mms[22m[39m
+   [33m[2m✓[22m[39m speech layouts, panels, camera and persisted viewer modes cannot change saved state, RNG or continuation[33m 2769[2mms[22m[39m
+ [32m✓[39m tests/project_cooperation.test.ts [2m([22m[2m36 tests[22m[2m)[22m[33m 2597[2mms[22m[39m
+   [32m✓[39m F: an outstanding promise survives a save [2m(1)[22m
+     [33m[2m✓[22m[39m a world saved mid-promise resolves to exactly the same state as one that was never saved[33m 518[2mms[22m[39m
+   [32m✓[39m F5: a promise kept is reported as kept [2m(2)[22m
+     [33m[2m✓[22m[39m the gift settles the request, the record says “kept”, and the transcript calls it a success[33m 827[2mms[22m[39m
+ [32m✓[39m tests/v87_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2357[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves rules-87 ordinary sipping, physical depletion, changed access and rain continuations exactly[33m 2356[2mms[22m[39m
+ [32m✓[39m tests/inhabit_world_change.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 2889[2mms[22m[39m
+   [33m[2m✓[22m[39m load ends a pending inhabitant session before replacing its world[33m 1637[2mms[22m[39m
+   [33m[2m✓[22m[39m restart ends a pending inhabitant session before replacing its world[33m 407[2mms[22m[39m
+   [33m[2m✓[22m[39m loading during initial fast-forward cancels preparation without attaching to the loaded world[33m 843[2mms[22m[39m
+ [32m✓[39m tests/inhabit_eta.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 2494[2mms[22m[39m
+   [33m[2m✓[22m[39m the plan-site estimate says the walk there is not counted (observation 8), and version 7 keeps the bare estimate[33m 2488[2mms[22m[39m
+ [32m✓[39m tests/zz_review_f_chain_time.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 2649[2mms[22m[39m
+   [33m[2m✓[22m[39m chain time: hammer+saw, empty yard[33m 615[2mms[22m[39m
+   [33m[2m✓[22m[39m chain time: hammer+axe (hew path), empty yard[33m 425[2mms[22m[39m
+   [33m[2m✓[22m[39m chain time: ordinary kit: axe only, empty yard, nothing carried[33m 549[2mms[22m[39m
+   [33m[2m✓[22m[39m chain time: ordinary kit: axe only, empty yard, 2 stone carried (sidesteps the acquire double-count)[33m 459[2mms[22m[39m
+   [33m[2m✓[22m[39m chain time: ordinary kit: nothing at all, empty yard[33m 485[2mms[22m[39m
+ [32m✓[39m tests/lab_deaths.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 2719[2mms[22m[39m
+   [32m✓[39m the lab counts deaths since the fork [2m(2)[22m
+     [33m[2m✓[22m[39m a branch forked from a world that already had deaths reports none of them as its own[33m 2663[2mms[22m[39m
+ [32m✓[39m tests/crews.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2966[2mms[22m[39m
+   [32m✓[39m crews [2m(1)[22m
+     [33m[2m✓[22m[39m form among mutual friends, pull members toward each other, and drift apart; never in an authored world[33m 2964[2mms[22m[39m
+ [32m✓[39m tests/promise_delays.test.ts [2m([22m[2m20 tests[22m[2m)[22m[33m 2609[2mms[22m[39m
+   [33m[2m✓[22m[39m declines another six-hour wait for childcare without cancelling the existing obligation or inventing care[33m 343[2mms[22m[39m
+ [32m✓[39m tests/repair_duty_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 2017[2mms[22m[39m
+   [33m[2m✓[22m[39m legal roof patch acquires real material, repairs and replays exactly (notes false)[33m 1560[2mms[22m[39m
+   [33m[2m✓[22m[39m legal roof patch acquires real material, repairs and replays exactly (notes true)[33m 455[2mms[22m[39m
+ [32m✓[39m tests/flood_tool_records.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2208[2mms[22m[39m
+   [32m✓[39m flood write-off and tool records [2m(1)[22m
+     [33m[2m✓[22m[39m a flooded pile loses its axe count and its axe record together[33m 2206[2mms[22m[39m
+ [32m✓[39m tests/stored_materials.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 2110[2mms[22m[39m
+   [33m[2m✓[22m[39m uses real withdrawal, crafting and later tool work with full-state save/replay equality[33m 1168[2mms[22m[39m
+   [33m[2m✓[22m[39m an offered request creates a voluntary promise, collects stock, delivers, credits use and retains personal feedback[33m 646[2mms[22m[39m
+ [32m✓[39m tests/care_handback.test.ts [2m([22m[2m21 tests[22m[2m)[22m[33m 1915[2mms[22m[39m
+   [33m[2m✓[22m[39m a naturally recovered parent autonomously agrees a safe return without claiming a complete watch[33m 323[2mms[22m[39m
+ [32m✓[39m tests/ready_step_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 2452[2mms[22m[39m
+   [33m[2m✓[22m[39m legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes false)[33m 1666[2mms[22m[39m
+   [33m[2m✓[22m[39m legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes true)[33m 785[2mms[22m[39m
+ [32m✓[39m tests/background.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 2813[2mms[22m[39m
+   [33m[2m✓[22m[39m real births remain novices, get no adult technique, and waiting supplies no background skills[33m 495[2mms[22m[39m
+   [33m[2m✓[22m[39m save/load and observers preserve the background; ablation changes only future creation[33m 2080[2mms[22m[39m
+ [32m✓[39m tests/meat_item_validation.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 2280[2mms[22m[39m
+   [33m[2m✓[22m[39m a positive meat delivery receipt survives exact save/load while invalid items are still rejected[33m 1725[2mms[22m[39m
+   [33m[2m✓[22m[39m unaccounted meat is detected by conservation and accounted meat is balanced[33m 375[2mms[22m[39m
+ [32m✓[39m tests/daily_routines.test.ts [2m([22m[2m25 tests[22m[2m)[22m[33m 1806[2mms[22m[39m
+ [32m✓[39m tests/passive_gear.test.ts [2m([22m[2m20 tests[22m[2m)[22m[33m 2508[2mms[22m[39m
+   [33m[2m✓[22m[39m flood loss removes deployed equipment and leaves a valid conserved save[33m 2168[2mms[22m[39m
+ [32m✓[39m tests/work_handover.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 2756[2mms[22m[39m
+   [33m[2m✓[22m[39m without nearby relief, accepted work retains its progress but can fail to reach delivery[33m 1654[2mms[22m[39m
+   [33m[2m✓[22m[39m actual accepted cover with known physical relief leads to paid delivery under the retained undertaking[33m 691[2mms[22m[39m
+ [32m✓[39m tests/promise_expectations.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 2906[2mms[22m[39m
+   [33m[2m✓[22m[39m actual material receipt closes the heard expectation and still feeds useful crafting and replay[33m 1505[2mms[22m[39m
+   [33m[2m✓[22m[39m a late spoken failure explanation revises an expired personal expectation through exact saved continuation[33m 566[2mms[22m[39m
+ [32m✓[39m tests/responsibilities.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 2820[2mms[22m[39m
+   [32m✓[39m asking a neighbour to keep an eye on a child [2m(2)[22m
+     [33m[2m✓[22m[39m is offered to a laid-up parent with no able adult at home, in a rich world only[33m 991[2mms[22m[39m
+     [33m[2m✓[22m[39m is answered by the neighbour's own circumstances, and a promise is kept by staying with the child[33m 1348[2mms[22m[39m
+   [32m✓[39m keeping the fire [2m(1)[22m
+     [33m[2m✓[22m[39m a promise to keep it going is kept by feeding it[33m 479[2mms[22m[39m
+ [32m✓[39m tests/current_world.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1982[2mms[22m[39m
+   [32m✓[39m saved worlds retain their recorded rules [2m(3)[22m
+     [33m[2m✓[22m[39m loads undefined without silently enabling or disabling systems[33m 711[2mms[22m[39m
+     [33m[2m✓[22m[39m loads authored without silently enabling or disabling systems[33m 546[2mms[22m[39m
+     [33m[2m✓[22m[39m loads rich without silently enabling or disabling systems[33m 613[2mms[22m[39m
+ [32m✓[39m tests/misdeeds.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1878[2mms[22m[39m
+   [32m✓[39m theft [2m(2)[22m
+     [33m[2m✓[22m[39m is an option for the starving with nothing of their own in a rich world, and never in an authored one[33m 1203[2mms[22m[39m
+     [33m[2m✓[22m[39m costs by who saw: a household member who catches it holds a grievance, witnesses hold the story, nobody seen means only the log[33m 377[2mms[22m[39m
+ [32m✓[39m tests/household_practices.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 1975[2mms[22m[39m
+   [33m[2m✓[22m[39m forms a practice from actual hosting, then transmits it through two parent-child meals with time and food costs[33m 623[2mms[22m[39m
+   [33m[2m✓[22m[39m the acquired practice changes a later offered invitation score without bypassing food or timing[33m 315[2mms[22m[39m
+ [32m✓[39m tests/promise_outcomes.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 1870[2mms[22m[39m
+   [33m[2m✓[22m[39m walks to report a saved failed attempt and acknowledges hearing it without creating firsthand proof[33m 481[2mms[22m[39m
+   [33m[2m✓[22m[39m requires actual contact, preserves a heard explanation across interruption, and deduplicates a retry[33m 309[2mms[22m[39m
+ [32m✓[39m tests/pathshortcut.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1383[2mms[22m[39m
+   [32m✓[39m a search for a tile that cannot be entered [2m(2)[22m
+     [33m[2m✓[22m[39m gives the answer the full search gives, for every kind of start and goal on real maps[33m 1349[2mms[22m[39m
+ [32m✓[39m tests/promise_knowledge.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 2395[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves actual direct material delivery, acknowledgement and useful crafting under current rules[33m 1630[2mms[22m[39m
+ [32m✓[39m tests/care_handback_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1535[2mms[22m[39m
+   [33m[2m✓[22m[39m legal childcare return is answered and replayed exactly (notes false)[33m 1285[2mms[22m[39m
+ [32m✓[39m tests/zz_review_f_plank_diversion.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1447[2mms[22m[39m
+   [33m[2m✓[22m[39m plank diversion: HEW PATH (no saw, yard 8 wood): communal granary site wants 8 planks[33m 417[2mms[22m[39m
+   [33m[2m✓[22m[39m plank diversion: HEW PATH (no saw, yard 8 wood): another villager wants planks for the site[33m 576[2mms[22m[39m
+ [32m✓[39m tests/scenes.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1280[2mms[22m[39m
+   [32m✓[39m the staged test scenes [2m(6)[22m
+     [33m[2m✓[22m[39m workshop: a house waiting for planks gets them from logs sawn at the yard, carried to the site, and is finished[33m 614[2mms[22m[39m
+     [33m[2m✓[22m[39m are deterministic: the same scene twice gives the same world[33m 329[2mms[22m[39m
+ [32m✓[39m tests/informed_continuity_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1126[2mms[22m[39m
+   [33m[2m✓[22m[39m executes only an offered work-sharing conversation and replays heard knowledge (memory false)[33m 994[2mms[22m[39m
+ [32m✓[39m tests/warmth_duty_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1664[2mms[22m[39m
+   [33m[2m✓[22m[39m legal fire-duty offers physically fulfil and replay exactly (notes false)[33m 1329[2mms[22m[39m
+   [33m[2m✓[22m[39m legal fire-duty offers physically fulfil and replay exactly (notes true)[33m 332[2mms[22m[39m
+ [32m✓[39m tests/lamb_birth.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1741[2mms[22m[39m
+   [33m[2m✓[22m[39m autonomously acquires, tends and breeds finite sheep; continues exactly through pregnancy and birth[33m 1457[2mms[22m[39m
+ [32m✓[39m tests/offcuts_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1578[2mms[22m[39m
+   [33m[2m✓[22m[39m exposes real collection/fuel through legal offers and replays the transcript (memory false)[33m 1386[2mms[22m[39m
+ [32m✓[39m tests/flood_protocol.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1411[2mms[22m[39m
+   [33m[2m✓[22m[39m replays actual legal food travel with dated flood observations (memory false)[33m 1242[2mms[22m[39m
+ [32m✓[39m tests/frame_loop.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1862[2mms[22m[39m
+   [32m✓[39m a frame has a stepping budget in time, not only in ticks [2m(3)[22m
+     [33m[2m✓[22m[39m a light world is not held back: what is owed within the budget is all run[33m 630[2mms[22m[39m
+     [33m[2m✓[22m[39m a smooth 60 fps frame always gets its share, however slow its ticks[33m 306[2mms[22m[39m
+ [32m✓[39m tests/warmth_duty.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 1810[2mms[22m[39m
+   [33m[2m✓[22m[39m actual acceptance communicates the dated fire and motivates acquisition without observer mutation[33m 308[2mms[22m[39m
+ [32m✓[39m tests/route_learning.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1666[2mms[22m[39m
+   [33m[2m✓[22m[39m corrects a reopened route on actual arrival but preserves the missing-stone construction failure[33m 524[2mms[22m[39m
+   [33m[2m✓[22m[39m uses another reachable material while reconsidering and later turns recovered wood into real tools[33m 822[2mms[22m[39m
+ [32m✓[39m tests/v119_120_save_provenance.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1323[2mms[22m[39m
+   [33m[2m✓[22m[39m marks integrated rules 119 and 120 and roundtrips them[33m 446[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects unmarked and foreign 119/120 saves without modifying the input or live world[33m 522[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps Stage 3 rules 117 and 118 and current 121 unmarked[33m 353[2mms[22m[39m
+ [32m✓[39m tests/care_supply_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1250[2mms[22m[39m
+   [33m[2m✓[22m[39m uses offered care acquisition and exactly replays a paid receipt (memory false)[33m 1133[2mms[22m[39m
+ [32m✓[39m tests/townships.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 1657[2mms[22m[39m
+   [33m[2m✓[22m[39m assigns every founder to a stable township without using position as membership[33m 743[2mms[22m[39m
+ [32m✓[39m tests/household_home.test.ts [2m([22m[2m51 tests[22m[2m)[22m[33m 1270[2mms[22m[39m
+   [32m✓[39m 11. the chain end to end [2m(1)[22m
+     [33m[2m✓[22m[39m a household in a lean-to reaches a hut and sleeps in it, by its own decisions[33m 625[2mms[22m[39m
+ [32m✓[39m tests/night_wait_interruption.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 959[2mms[22m[39m
+ [32m✓[39m tests/work_handover_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1039[2mms[22m[39m
+   [33m[2m✓[22m[39m uses only an offered handover and exactly replays the actual answer (memory false)[33m 917[2mms[22m[39m
+ [32m✓[39m tests/project_revision_legacy.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 917[2mms[22m[39m
+   [33m[2m✓[22m[39m replays immutable pre-revision protocol 31/32 recordings with their exact old observations[33m 915[2mms[22m[39m
+ [32m✓[39m tests/inhabitant_versions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1228[2mms[22m[39m
+   [32m✓[39m the observation version in the header [2m(3)[22m
+     [33m[2m✓[22m[39m a run records the version its protocol implies, and a replay reads it[33m 1063[2mms[22m[39m
+ [32m✓[39m tests/water_protocol.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1089[2mms[22m[39m
+   [33m[2m✓[22m[39m uses current protocol coarse water observations and replays actual shore drinking (memory false)[33m 1028[2mms[22m[39m
+ [32m✓[39m tests/repair_duty.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 1492[2mms[22m[39m
+   [33m[2m✓[22m[39m acceptance conveys the dated home and a real fallback patch is acquired and worked autonomously[33m 305[2mms[22m[39m
+ [32m✓[39m tests/shared_projects.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 912[2mms[22m[39m
+   [33m[2m✓[22m[39m pays the full materials and labour and preserves exact continuation through supported construction[33m 413[2mms[22m[39m
+ [32m✓[39m tests/social_warning.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 1162[2mms[22m[39m
+   [32m✓[39m a warning says what it came to [2m(4)[22m
+     [33m[2m✓[22m[39m a delivered warning is reported as a success, not as unknown, and the listener keeps the provenance[33m 887[2mms[22m[39m
+ [32m✓[39m tests/ecology.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1225[2mms[22m[39m
+   [33m[2m✓[22m[39m runs a whole crop through the physical world, harvests its actual output and resows without restoring soil[33m 322[2mms[22m[39m
+ [32m✓[39m tests/source_learning.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 746[2mms[22m[39m
+   [33m[2m✓[22m[39m records a real empty-source visit without penalising every never-tried wood source, with exact continuation and useful work[33m 442[2mms[22m[39m
+ [32m✓[39m tests/preservation.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 996[2mms[22m[39m
+ [32m✓[39m tests/ecology_protocol.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1028[2mms[22m[39m
+   [33m[2m✓[22m[39m exposes coarse ecology through the actual live/stub protocol and replays the physical rest action (memory false)[33m 949[2mms[22m[39m
+ [32m✓[39m tests/apprentice.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1211[2mms[22m[39m
+   [32m✓[39m switched off, and in an authored world [2m(1)[22m
+     [33m[2m✓[22m[39m nobody is taken on[33m 1206[2mms[22m[39m
+ [32m✓[39m tests/action_bounds.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1220[2mms[22m[39m
+   [32m✓[39m a bounded choice is recorded and replays [2m(2)[22m
+     [33m[2m✓[22m[39m a model may ask for a limit; it is recorded, honoured, and reproduced by a replay with no model[33m 928[2mms[22m[39m
+ [32m✓[39m tests/request_cancellation.test.ts [2m([22m[2m21 tests[22m[2m)[22m[33m 1442[2mms[22m[39m
+   [33m[2m✓[22m[39m hears cancellation before acknowledgement, releases suspended work, and continues exactly from save[33m 500[2mms[22m[39m
+ [32m✓[39m tests/plan_reconsider.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1107[2mms[22m[39m
+ [32m✓[39m tests/meal_leftovers_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1208[2mms[22m[39m
+   [33m[2m✓[22m[39m offers actual leftover recovery to the AI and exactly replays its ordinary action (memory false)[33m 1122[2mms[22m[39m
+ [32m✓[39m tests/meeting_arrangements_protocol.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 1340[2mms[22m[39m
+   [33m[2m✓[22m[39m exposes only the AI guest's heard appointment and replays actual uninformed waiting (memory false)[33m 1255[2mms[22m[39m
+ [32m✓[39m tests/inhabit_craft_explanation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1154[2mms[22m[39m
+   [33m[2m✓[22m[39m real eating restores the offered craft; real crafting spends its materials, and replay matches[33m 1012[2mms[22m[39m
+ [32m✓[39m tests/care_supply.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 687[2mms[22m[39m
+ [32m✓[39m tests/meeting_arrangements.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 925[2mms[22m[39m
+ [32m✓[39m tests/journey_recovery.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 835[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps prepared progress across a real drink and source failure, then uses a known same-purpose alternative for construction[33m 477[2mms[22m[39m
+ [32m✓[39m tests/project_recovery.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 585[2mms[22m[39m
+ [32m✓[39m tests/location_question.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 552[2mms[22m[39m
+   [33m[2m✓[22m[39m after a failed hand-over the helper asks a present neighbour, keeps her dated answer with the teller, and delivers[33m 303[2mms[22m[39m
+ [32m✓[39m tests/chains.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 722[2mms[22m[39m
+   [32m✓[39m production follows need [2m(3)[22m
+     [33m[2m✓[22m[39m the iron chain can be completed by one person’s ordinary decisions: a worn axe, a smithy with ore on its shelf, a kiln and trees end in charcoal, iron and an iron axe[33m 306[2mms[22m[39m
+ [32m✓[39m tests/v29_save_provenance.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 715[2mms[22m[39m
+ [32m✓[39m tests/batch_plan.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 818[2mms[22m[39m
+   [33m[2m✓[22m[39m rules 50: the plan carries the chain through: dig clay, bring it to the kiln, fire bricks, collect them, haul them to the site[33m 336[2mms[22m[39m
+ [32m✓[39m tests/ready_step.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 852[2mms[22m[39m
+ [32m✓[39m tests/resident_care.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 641[2mms[22m[39m
+ [32m✓[39m tests/technique_tree.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 627[2mms[22m[39m
+ [32m✓[39m tests/journey.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 849[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the purpose through autonomous drinking, physical collection and useful construction, saving during the break and travel[33m 568[2mms[22m[39m
+ [32m✓[39m tests/supper_telling.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 839[2mms[22m[39m
+   [33m[2m✓[22m[39m a household supper tells what the host is working on once the guest has really sat with them, carrying the meal id[33m 595[2mms[22m[39m
+ [32m✓[39m tests/inhabit_plans.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 887[2mms[22m[39m
+   [33m[2m✓[22m[39m exposes the active plan and the carried/spoken-for/available split of the pack[33m 377[2mms[22m[39m
+ [32m✓[39m tests/watch_learning.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 1022[2mms[22m[39m
+   [33m[2m✓[22m[39m changes a later eligible childcare choice across a delay and save, followed by voluntary acceptance and real work[33m 301[2mms[22m[39m
+ [32m✓[39m tests/home_replacement.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 712[2mms[22m[39m
+   [33m[2m✓[22m[39m an observed lost home starts real gathering, hauling and paid construction with exact saved continuation[33m 485[2mms[22m[39m
+ [32m✓[39m tests/care_water.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 473[2mms[22m[39m
+ [32m✓[39m tests/tool_transfer_records.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1035[2mms[22m[39m
+   [32m✓[39m tool transfers keep counts and records together [2m(3)[22m
+     [33m[2m✓[22m[39m control: the rack saw leaves with its record when nobody is at the bench[33m 687[2mms[22m[39m
+     [33m[2m✓[22m[39m a saw on the bench stays with the building: count and record together, and a later break balances[33m 305[2mms[22m[39m
+ [32m✓[39m tests/estate_custody.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 745[2mms[22m[39m
+ [32m✓[39m tests/construction_finish.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 610[2mms[22m[39m
+   [33m[2m✓[22m[39m the retained valid collapse fixture now completes its paid replacement and sleeps there across a save[33m 413[2mms[22m[39m
+ [32m✓[39m tests/lab_civilisation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 427[2mms[22m[39m
+   [33m[2m✓[22m[39m reads actual acquired practice and preserves the full world[33m 419[2mms[22m[39m
+ [32m✓[39m tests/lab.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 4351[2mms[22m[39m
+   [32m✓[39m the counterfactual lab [2m(6)[22m
+     [33m[2m✓[22m[39m forks exactly: the control ends in the state the unforked world reaches[33m 1966[2mms[22m[39m
+     [33m[2m✓[22m[39m random choice changes the world, and the switch is back afterwards[33m 2375[2mms[22m[39m
+ [32m✓[39m tests/project_production.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 373[2mms[22m[39m
+   [33m[2m✓[22m[39m autonomously adopts a forged-tool project and executes charcoal, smelting and forging with exact saved continuation[33m 372[2mms[22m[39m
+ [32m✓[39m tests/source_contact.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 438[2mms[22m[39m
+ [32m✓[39m tests/checked_accounts.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 340[2mms[22m[39m
+ [32m✓[39m tests/provenance.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 568[2mms[22m[39m
+   [33m[2m✓[22m[39m records the checked-out commit and whether tracked files differ from it[33m 564[2mms[22m[39m
+ [32m✓[39m tests/informed_continuity.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 327[2mms[22m[39m
+ [31m❯[39m tests/zz_review_h_retention.test.ts [2m([22m[2m3 tests[22m[2m | [22m[33m3 skipped[39m[2m)[22m[33m 11833[2mms[22m[39m
+   [2m[90m↓[39m[22m review H: retention after one ordinary day [2m(3)[22m
+     [2m[90m↓[39m[22m a running world stores its people as columns in product save format 5
+     [2m[90m↓[39m[22m documented caps hold
+     [2m[90m↓[39m[22m measures the uncapped per-person records (always passes; numbers for the review)
+ [32m✓[39m tests/event_history.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 469[2mms[22m[39m
+ [32m✓[39m tests/food_help.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 509[2mms[22m[39m
+ [32m✓[39m tests/cooperation_trade.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 543[2mms[22m[39m
+ [32m✓[39m tests/relocation.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 575[2mms[22m[39m
+ [32m✓[39m tests/techniques.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 520[2mms[22m[39m
+ [32m✓[39m tests/flood_access.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 495[2mms[22m[39m
+ [32m✓[39m tests/relocation_extensions.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 570[2mms[22m[39m
+ [32m✓[39m tests/night_plan.test.ts [2m([22m[2m41 tests[22m[2m)[22m[33m 615[2mms[22m[39m
+ [32m✓[39m tests/single_roof_duty.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 572[2mms[22m[39m
+   [33m[2m✓[22m[39m a roof already promised is declined to a second asker in so many words; one real patch keeps the one promise[33m 304[2mms[22m[39m
+ [32m✓[39m tests/offcuts.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 527[2mms[22m[39m
+ [32m✓[39m tests/workshop_tool_loss.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 647[2mms[22m[39m
+ [32m✓[39m tests/projects.test.ts [2m([22m[2m42 tests[22m[2m)[22m[33m 695[2mms[22m[39m
+ [32m✓[39m tests/exchange_journeys.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 569[2mms[22m[39m
+ [32m✓[39m tests/save_lineage.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 378[2mms[22m[39m
+ [32m✓[39m tests/practical_care_upkeep.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 369[2mms[22m[39m
+ [32m✓[39m tests/lifecycle.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1366[2mms[22m[39m
+   [32m✓[39m life stages, birth and death [2m(5)[22m
+     [33m[2m✓[22m[39m people grow up: a child crossing the age threshold is noticed[33m 1000[2mms[22m[39m
+ [32m✓[39m tests/action_scope.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 354[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_granary.test.ts[2m > [22m[2mQ4a: shares stay consistent with the bins through heavy real spoilage (all grain owned)
+[22m[39mQ4a start items [33m40[39m shares {"1":{"grain":20},"4":{"grain":20}} commons [33m0[39m
+Q4a end items [33m3[39m shares {"1":{},"4":{"grain":3}} sum [33m3[39m commons [33m0[39m spoiled ledger [33m37[39m violations [33m0[39m
+
+ [32m✓[39m tests/inhabit_devserver.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 345[2mms[22m[39m
+ [32m✓[39m tests/water_budget.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 421[2mms[22m[39m
+ [32m✓[39m tests/clothing.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 419[2mms[22m[39m
+ [32m✓[39m tests/teller_confidence.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 409[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps rules 153 and the lab removal identical to no doubt, and continues exactly after saving[33m 320[2mms[22m[39m
+ [32m✓[39m tests/cellar_home_order.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 275[2mms[22m[39m
+ [32m✓[39m tests/hungry_harvest.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 311[2mms[22m[39m
+ [32m✓[39m tests/childhood.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 375[2mms[22m[39m
+ [32m✓[39m tests/household_continuity_view.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 297[2mms[22m[39m
+ [32m✓[39m tests/kept_target.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 491[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_granary.test.ts[2m > [22m[2mQ4b: with unowned (commons) grain in the bins, whose grain spoils?
+[22m[39mQ4b start items [33m40[39m shares {"1":{"grain":20}} commons [33m20[39m
+Q4b end items [33m9[39m shares {"1":{}} sum [33m0[39m commons [33m9[39m spoiled [33m31[39m violations [33m0[39m
+
+ [32m✓[39m tests/nourishment.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 350[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_granary.test.ts[2m > [22m[2mQ4c: eating from a granary one did not fill: share 0, ration only when starving
+[22m[39mQ4c Bob hunger 60 allowance [33m0[39m
+Q4c Bob hunger 20 allowance [33m3[39m
+Q4c Cid hunger 10 allowance [33m3[39m
+
+ [32m✓[39m tests/winter_shelter.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 337[2mms[22m[39m
+ [32m✓[39m tests/care_capacity.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 409[2mms[22m[39m
+ [32m✓[39m tests/delivery_place.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 425[2mms[22m[39m
+ [32m✓[39m tests/zz_review_e_granary.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 439[2mms[22m[39m
+ [32m✓[39m tests/transport.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 395[2mms[22m[39m
+ [32m✓[39m tests/community.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 604[2mms[22m[39m
+ [32m✓[39m tests/learner_instruction.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 455[2mms[22m[39m
+ [32m✓[39m tests/net_full_pack.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 308[2mms[22m[39m
+ [32m✓[39m tests/resolved_route.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 382[2mms[22m[39m
+ [32m✓[39m tests/wells.test.ts [2m([22m[2m23 tests[22m[2m)[22m[32m 250[2mms[22m[39m
+ [32m✓[39m tests/lifechanges.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 981[2mms[22m[39m
+   [32m✓[39m losing a partner [2m(1)[22m
+     [33m[2m✓[22m[39m leaves the bereaved leaning on those close, who come to look in and help more readily; nothing of it authored[33m 746[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_fullpack_care.test.ts[2m > [22m[2mQ1a: full pack of tools+wood+stone, hunger 30: which food options exist, and does she eat at the source?
+[22m[39mcap [33m18[39m weight [33m18[39m room [33m0[39m
+Q1a options {
+ "criticals": [],
+ "drives": 66.66666666666667,
+ "food": [
+  "gather \"Picking berries\" util=53.6 eta=135 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 53.6",
+  "wander wander 6.0"
+ ]
+}
+Q1a trace t145 gather|work|interrupted|something better came up cycle=3 hunger=57.7
+t244 till|work|interrupted|something better came up cycle=0 hunger=54.4
+t323 till|work|success|done cycle=0 hunger=51.4
+t356 plant|work|success|done cycle=0 hunger=50.4
+t424 harvest|work|success|done cycle=1 hunger=48.0
+t594 explore|travel|interrupted|something better came up cycle=0 hunger=42.9
+Q1a after: hunger 42.7 weight [33m18[39m bush [33m5[39m plot [33m4[39m eaten at source ["-eaten at the source"]
+
+[90mstdout[2m | tests/zz_review_e_fullpack_care.test.ts[2m > [22m[2mQ1b: full pack of seeds+tools only (no wood/stone): food options and leave-heaviest
+[22m[39mcap [33m18[39m weight [33m18[39m
+Q1b options {
+ "criticals": [],
+ "drives": 66.66666666666667,
+ "food": [
+  "gather \"Picking berries\" util=54.4 eta=135 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 54.4",
+  "wander wander 6.0"
+ ]
+}
+Q1b trace t100 gather|work|interrupted|something better came up cycle=3 hunger=59.4
+t190 till|work|interrupted|something better came up cycle=0 hunger=56.4
+t253 till|work|success|done cycle=0 hunger=54.0
+t280 plant|work|success|done cycle=0 hunger=53.2
+t337 harvest|work|success|done cycle=1 hunger=51.2
+t377 tend|work|success|done cycle=0 hunger=50.0
+t599 explore|travel|interrupted|something better came up cycle=0 hunger=43.3
+Q1b after: hunger 43.3 bush [33m5[39m
+
+[90mstdout[2m | tests/zz_review_e_fullpack_care.test.ts[2m > [22m[2mQ1c: full pack and hunger already critical (10): the same, under critical filtering
+[22m[39mQ1c options {
+ "criticals": [
+  "hunger"
+ ],
+ "drives": 88.88888888888889,
+ "food": [
+  "gather \"Picking berries\" util=71.2 eta=155 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 71.2"
+ ]
+}
+Q1c trace t298 gather|work|interrupted|something better came up cycle=5 hunger=55.9
+Q1c after: hunger 52.5 bush [33m2[39m
+
+ [32m✓[39m tests/seed_storage.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 297[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_fullpack_care.test.ts[2m > [22m[2mQ6: a starving child dependant beside a household adult carrying fruit is fed
+[22m[39mQ6 adult sees dependant? [33mtrue[39m dependents [ [32m'Eli'[39m ]
+Q6 care options ["give \"Bring fruit to Eli\" util=86.4 key=give:4"] blocked [] top [
+  [32m'give give:4 86.4'[39m,
+  [32m'socialize socialize:4:offer 39.7'[39m,
+  [32m'socialize socialize:4:ask_info:food 22.0'[39m
+]
+Q6 dependant options [
+  [32m'wander wander 6.0'[39m,
+  [32m'socialize socialize:2:request:food 75.6'[39m,
+  [32m'socialize socialize:2:ask_info:food 63.6'[39m
+] criticals [ [32m'hunger'[39m ]
+Q6 trace t34 transfer person:2->person:4 3 fruit (gift on request)
+t72 Eli converse|work|success|finished a conversation cycle=0
+t72 Hilda converse|work|success|finished a conversation cycle=0
+t73 Hilda give|travel|interrupted|something better came up cycle=0
+t102 Eli eat|work|success|done cycle=3
+t185 Eli wander|work|success|done cycle=0
+t231 Eli wander|work|interrupted|something better came up cycle=0
+t303 Hilda explore|work|success|done cycle=0
+t319 Eli visit|work|failed|Hilda was not where I expected cycle=0
+t389 Eli wander|work|success|done cycle=0
+Q6 after: dep hunger 39.9 dep inv {} adult inv {"fruit":3,"water":2} fedTick [33m35[39m fedUntil [90mundefined[39m
+
+ [32m✓[39m tests/winter_reserve.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 259[2mms[22m[39m
+ [32m✓[39m tests/practical_care.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 279[2mms[22m[39m
+ [32m✓[39m tests/project_inputs.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 318[2mms[22m[39m
+ [32m✓[39m tests/forestry.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 221[2mms[22m[39m
+ [32m✓[39m tests/local_demand.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 279[2mms[22m[39m
+ [32m✓[39m tests/household_supply.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 262[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_fullpack_care.test.ts[2m > [22m[2mQ6: a starving injured adult dependant beside a household adult carrying fruit is fed
+[22m[39mQ6 adult sees dependant? [33mtrue[39m dependents [ [32m'Eli'[39m ]
+Q6 care options ["give \"Bring fruit to Eli\" util=70.2 key=give:4"] blocked [] top [
+  [32m'give give:4 70.2'[39m,
+  [32m'socialize socialize:4:offer 29.7'[39m,
+  [32m'socialize socialize:4:ask_info:food 22.0'[39m
+]
+Q6 dependant options [
+  [32m'explore explore 41.5'[39m,
+  [32m'wander wander 6.0'[39m,
+  [32m'socialize socialize:2:request:food 75.5'[39m,
+  [32m'socialize socialize:2:ask_info:food 63.5'[39m,
+  [32m'socialize socialize:2:ask_info:wood 15.1'[39m
+] criticals [ [32m'hunger'[39m ]
+Q6 trace t34 transfer person:2->person:4 3 fruit (gift on request)
+t72 Eli converse|work|success|finished a conversation cycle=0
+t72 Hilda converse|work|success|finished a conversation cycle=0
+t73 Hilda give|travel|interrupted|something better came up cycle=0
+t102 Eli eat|work|success|done cycle=3
+t193 Hilda explore|travel|interrupted|something better came up cycle=0
+t327 Hilda visit|work|failed|Eli was not where I expected cycle=0
+t378 Eli explore|work|success|done cycle=0
+Q6 after: dep hunger 38.5 dep inv {} adult inv {"fruit":3,"water":2} fedTick [33m35[39m fedUntil [90mundefined[39m
+
+ [32m✓[39m tests/cellars.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 289[2mms[22m[39m
+ [32m✓[39m tests/commitments.test.ts [2m([22m[2m34 tests[22m[2m)[22m[33m 392[2mms[22m[39m
+ [32m✓[39m tests/carcass.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 318[2mms[22m[39m
+ [32m✓[39m tests/promised_supply.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 302[2mms[22m[39m
+ [32m✓[39m tests/suspended_cancellation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 300[2mms[22m[39m
+ [32m✓[39m tests/zz_review_e_fullpack_care.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 323[2mms[22m[39m
+ [32m✓[39m tests/tool_prerequisite.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 297[2mms[22m[39m
+ [32m✓[39m tests/customers.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 355[2mms[22m[39m
+ [32m✓[39m tests/crews_rejoin.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 350[2mms[22m[39m
+ [32m✓[39m tests/found_empty.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 336[2mms[22m[39m
+ [32m✓[39m tests/tool_precedence.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 333[2mms[22m[39m
+ [32m✓[39m tests/civic_benefit.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 249[2mms[22m[39m
+ [32m✓[39m tests/hand_feeding.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 406[2mms[22m[39m
+ [32m✓[39m tests/pavel_intentions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 242[2mms[22m[39m
+ [32m✓[39m tests/meal_leftovers.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 219[2mms[22m[39m
+ [32m✓[39m tests/suite_assurance.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 202[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_night_water.test.ts[2m > [22m[2mQ5a: indoors at night, thirst 10, no stored water, shore known ~15 tiles north: drink is eligible and happens
+[22m[39mQ5a {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 13,
+ "water": [
+  "drink \"Go and drink at the water\" util=74.5 eta=225 key=drink:1000070",
+  "drink \"Go and drink at the water\" util=73.7 eta=237 key=drink:1000068"
+ ],
+ "eligible": [
+  "drink:1000070",
+  "drink:1000068"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "drink drink:1000070 need=thirst 74.5",
+  "drink drink:1000068 need=thirst 73.7"
+ ]
+}
+Q5a starts t30 start drink "Drinking at the water" -> (42,14) thirst=8.8
+t230 start sleep "Sleeping by my hut" -> (41,34) thirst=100.0
+Q5a ends t229 end drink|work|success|done thirst=100.0 health=100 at (42,14) indoors=0 waterBeliefs=13
+Q5a firstDrinkStart [33m30[39m thirst now 93.2 alive [33mtrue[39m
+
+ [32m✓[39m tests/eat_in_hand.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 204[2mms[22m[39m
+ [32m✓[39m tests/belief_outcome.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 222[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_night_water.test.ts[2m > [22m[2mQ5b: the same with 2 water in the hut store: stored water is drunk
+[22m[39mQ5b {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 13,
+ "water": [
+  "drink \"Drink water stored at home\" util=94.8 eta=8 key=drink:store:4",
+  "drink \"Go and drink at the water\" util=74.5 eta=225 key=drink:1000070",
+  "drink \"Go and drink at the water\" util=73.7 eta=237 key=drink:1000068"
+ ],
+ "eligible": [
+  "drink:store:4",
+  "drink:1000070",
+  "drink:1000068"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "drink drink:store:4 need=thirst 94.8",
+  "drink drink:1000070 need=thirst 74.5",
+  "drink drink:1000068 need=thirst 73.7"
+ ]
+}
+Q5b ends t45 end drink|work|success|done thirst=80.2 health=100 at (41,34) indoors=4 waterBeliefs=13
+t141 end sleep|work|success|rested thirst=77.8 health=100 at (41,34) indoors=4 waterBeliefs=13
+t167 end plan_site|work|success|done thirst=76.8 health=100 at (41,34) indoors=0 waterBeliefs=13
+Q5b thirst now 75.5 indoors [33m4[39m
+
+ [32m✓[39m tests/wild_seed.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 213[2mms[22m[39m
+ [32m✓[39m tests/civic_food_benefit.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 207[2mms[22m[39m
+ [32m✓[39m tests/settlement_economy.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 233[2mms[22m[39m
+ [32m✓[39m tests/occasion_recovery.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 241[2mms[22m[39m
+ [32m✓[39m tests/batch_recipe_choice.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 267[2mms[22m[39m
+ [32m✓[39m tests/project_acquire_remaining.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 228[2mms[22m[39m
+ [32m✓[39m tests/tool_demand_observer.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 213[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_e_night_water.test.ts[2m > [22m[2mQ5c: indoors at night, thirst 10, NO known water (as the retained collapsed-home fixture): what does the search do in 2,000 ticks?
+[22m[39mQ5c {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 0,
+ "water": [
+  "explore \"Search for water\" util=59.2 eta=162 key=explore"
+ ],
+ "eligible": [
+  "explore"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "explore explore need=thirst 59.2"
+ ]
+}
+Q5c starts t30 start explore "Searching for water" -> (32,19) thirst=8.8
+t192 start explore "Searching for water" -> (18,16) thirst=2.3
+t324 start drink "Drinking at the water" -> (18,14) thirst=0.0
+t366 start sleep "Sleeping by my hut" -> (41,34) thirst=100.0
+t805 start plan_site "Laying out an indoor hearth" -> (41,34) thirst=85.3
+t831 start wander "Pottering about" -> (39,37) thirst=84.3
+t892 start wander "Strolling about the square" -> (45,43) thirst=81.8
+t992 start wander "Pottering about" -> (38,31) thirst=77.8
+t1042 start explore "Exploring" -> (21,32) thirst=75.8
+t1220 start wander "Pottering about" -> (39,33) thirst=68.7
+t1412 start wander "Pottering about" -> (41,37) thirst=61.0
+t1506 start explore "Exploring" -> (53,20) thirst=57.3
+t1680 start drink "Drinking at the water" -> (54,14) thirst=50.3
+t1745 start rest "Resting" -> (54,14) thirst=100.0
+t1843 start wander "Pottering about" -> (38,32) thirst=96.0
+t1960 start explore "Exploring" -> (22,43) thirst=91.4
+Q5c ends t191 end explore|work|success|done thirst=2.3 health=100 at (32,19) indoors=0 waterBeliefs=0
+t323 end explore|work|success|done thirst=0.0 health=96 at (18,16) indoors=0 waterBeliefs=5
+t365 end drink|work|success|done thirst=100.0 health=95 at (18,14) indoors=0 waterBeliefs=5
+t804 end sleep|work|success|morning came thirst=85.3 health=95 at (41,34) indoors=4 waterBeliefs=5
+t830 end plan_site|work|success|done thirst=84.3 health=95 at (41,34) indoors=0 waterBeliefs=5
+t891 end wander|work|success|done thirst=81.9 health=95 at (39,37) indoors=0 waterBeliefs=5
+t991 end wander|work|success|done thirst=77.9 health=95 at (45,43) indoors=0 waterBeliefs=5
+t1042 end wander|travel|interrupted|something better came up thirst=75.8 health=95 at (41,37) indoors=0 waterBeliefs=5
+t1219 end explore|work|success|done thirst=68.7 health=95 at (21,32) indoors=0 waterBeliefs=5
+t1411 end wander|work|success|done thirst=61.1 health=95 at (39,33) indoors=0 waterBeliefs=5
+t1505 end wander|work|success|done thirst=57.3 health=95 at (41,37) indoors=0 waterBeliefs=5
+t1679 end explore|work|success|done thirst=50.3 health=95 at (53,20) indoors=0 waterBeliefs=8
+t1744 end drink|work|success|done thirst=100.0 health=95 at (54,14) indoors=0 waterBeliefs=10
+t1843 end rest|work|interrupted|something better came up thirst=96.0 health=95 at (54,14) indoors=0 waterBeliefs=10
+t1960 end wander|travel|interrupted|something better came up thirst=91.4 health=95 at (44,25) indoors=0 waterBeliefs=10
+Q5c explores [33m5[39m wanders [33m6[39m firstDrinkStart [33m324[39m alive [33mtrue[39m health 95.0 thirst 89.8 waterBeliefs now [33m10[39m elapsed [33m2000[39m deaths []
+
+ [32m✓[39m tests/hearth.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 303[2mms[22m[39m
+ [32m✓[39m tests/zz_review_e_night_water.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 272[2mms[22m[39m
+ [32m✓[39m tests/skill_coaching.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 245[2mms[22m[39m
+ [32m✓[39m tests/brewing.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 346[2mms[22m[39m
+ [32m✓[39m tests/stored_water.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 324[2mms[22m[39m
+ [32m✓[39m tests/political_alignment.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 328[2mms[22m[39m
+ [32m✓[39m tests/handover_outcome.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 355[2mms[22m[39m
+ [32m✓[39m tests/observer_planning_mode.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 281[2mms[22m[39m
+ [32m✓[39m tests/civic_choice.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 210[2mms[22m[39m
+ [32m✓[39m tests/cart_priority.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m tests/estate_release.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 455[2mms[22m[39m
+ [32m✓[39m tests/project_allocation.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 155[2mms[22m[39m
+ [32m✓[39m tests/child_tasks.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 163[2mms[22m[39m
+ [32m✓[39m tests/hypot.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 151[2mms[22m[39m
+ [32m✓[39m tests/water_search.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 155[2mms[22m[39m
+ [32m✓[39m tests/habitation.test.ts [2m([22m[2m24 tests[22m[2m)[22m[32m 143[2mms[22m[39m
+ [32m✓[39m tests/fishing_rods.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 192[2mms[22m[39m
+ [32m✓[39m tests/death_knowledge.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 186[2mms[22m[39m
+ [32m✓[39m tests/recovered_workshops.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 221[2mms[22m[39m
+ [32m✓[39m tests/visible_need.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 196[2mms[22m[39m
+ [32m✓[39m tests/layout_claims.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 227[2mms[22m[39m
+ [32m✓[39m tests/trap_ground.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 171[2mms[22m[39m
+ [32m✓[39m tests/care_acquisition_ending.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+ [32m✓[39m tests/trade.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 177[2mms[22m[39m
+ [32m✓[39m tests/carcass_supply.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 231[2mms[22m[39m
+ [32m✓[39m tests/occasion_participation.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 212[2mms[22m[39m
+ [32m✓[39m tests/indoor_giving.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 203[2mms[22m[39m
+ [32m✓[39m tests/pavel_company.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 226[2mms[22m[39m
+ [32m✓[39m tests/kept_target_observer.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 198[2mms[22m[39m
+ [32m✓[39m tests/succession.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 217[2mms[22m[39m
+ [32m✓[39m tests/trap_window.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+ [32m✓[39m tests/warmth_v9.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 100[2mms[22m[39m
+ [32m✓[39m tests/observer_life_event.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 115[2mms[22m[39m
+ [32m✓[39m tests/remembered_need.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 116[2mms[22m[39m
+ [32m✓[39m tests/personal_places.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 135[2mms[22m[39m
+ [32m✓[39m tests/cart_break_tool_records.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 159[2mms[22m[39m
+ [32m✓[39m tests/winter_practice.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 215[2mms[22m[39m
+ [32m✓[39m tests/project_compile.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 117[2mms[22m[39m
+ [32m✓[39m tests/settlements.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 103[2mms[22m[39m
+ [32m✓[39m tests/carried_cuttings.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 216[2mms[22m[39m
+ [32m✓[39m tests/recovery.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 174[2mms[22m[39m
+ [32m✓[39m tests/fatal_injury.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 154[2mms[22m[39m
+ [32m✓[39m tests/pavel_acquisition.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 141[2mms[22m[39m
+ [32m✓[39m tests/final_account.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 127[2mms[22m[39m
+ [32m✓[39m tests/communal_stock.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 178[2mms[22m[39m
+ [32m✓[39m tests/field_standing.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 174[2mms[22m[39m
+ [32m✓[39m tests/critical_search_cooldown.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 95[2mms[22m[39m
+ [32m✓[39m tests/zz_review_f_sibling_claim.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 115[2mms[22m[39m
+ [32m✓[39m tests/construction_access.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 136[2mms[22m[39m
+ [32m✓[39m tests/trap_recovery.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m tests/promise_delay_partial.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 108[2mms[22m[39m
+ [32m✓[39m tests/pavel_outcomes.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m tests/pavel_resume.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 173[2mms[22m[39m
+ [32m✓[39m tests/trap_catch_truth.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 115[2mms[22m[39m
+ [32m✓[39m tests/market_locality.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 105[2mms[22m[39m
+ [32m✓[39m tests/defence_response.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m tests/v117_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 124[2mms[22m[39m
+ [32m✓[39m tests/talia_food.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 90[2mms[22m[39m
+ [32m✓[39m tests/development.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 113[2mms[22m[39m
+ [32m✓[39m tests/fever_sign.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 134[2mms[22m[39m
+ [32m✓[39m tests/social_memory.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 99[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_c_v115gate.test.ts[2m > [22m[2mreview: compare the v115ref scene assertions at rules 114 and 115
+[22m[39mRULES114 {"version":114,"wantsAtAdoption":{},"began":true,"wantsAtCraft":{},"saved":"4454e7aaa8f7ff45e49f538853aa674af5a8a7c18667f91c7a05d7155a730345","hammer":1,"ledger":3,"wantsStoneAfter":0,"otherToolIntentions":0}
+RULES115 {"version":115,"wantsAtAdoption":{"wood":1,"stone":2},"began":true,"wantsAtCraft":{"wood":1,"stone":2},"saved":"a678791866350f042b3cddbb809d921a210e790b801cda06b826237409039f60","hammer":1,"ledger":3,"wantsStoneAfter":0,"otherToolIntentions":0}
+recorded projectHandcraft.saved=a678791866350f042b3cddbb809d921a210e790b801cda06b826237409039f60 matches115=true matches114=false
+v115ref explicit assertions would pass at rules 114: true
+
+ [32m✓[39m tests/recovered_tool_spill.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 130[2mms[22m[39m
+ [32m✓[39m tests/carcass_batch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m tests/shelter.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 85[2mms[22m[39m
+ [32m✓[39m tests/building_upgrading_key.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 88[2mms[22m[39m
+ [32m✓[39m tests/proposal_belief.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 218[2mms[22m[39m
+ [32m✓[39m tests/preservation_collection.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 86[2mms[22m[39m
+ [32m✓[39m tests/achievement.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 143[2mms[22m[39m
+ [32m✓[39m tests/tool_plan_capacity.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 159[2mms[22m[39m
+ [32m✓[39m tests/workshop_progress_view.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 106[2mms[22m[39m
+ [32m✓[39m tests/stall_text.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 101[2mms[22m[39m
+ [32m✓[39m tests/zz_review_c_v115gate.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 129[2mms[22m[39m
+ [32m✓[39m tests/resumed_gather_credit.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+ [32m✓[39m tests/inhabit_proposal_boundary.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 85[2mms[22m[39m
+ [32m✓[39m tests/defence_lab.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 67[2mms[22m[39m
+ [32m✓[39m tests/intentions.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+ [32m✓[39m tests/project_ask.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 61[2mms[22m[39m
+ [32m✓[39m tests/chains_consequence.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 49[2mms[22m[39m
+ [32m✓[39m tests/v118_continuation.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 103[2mms[22m[39m
+ [32m✓[39m tests/v27_save_provenance.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m tests/nourishment_access.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 59[2mms[22m[39m
+ [32m✓[39m tests/livestock_food_choice.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 54[2mms[22m[39m
+ [32m✓[39m tests/wolf_habitation.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m tests/prefs_validation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m tests/harvest_capacity_offer.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+ [32m✓[39m tests/survival_guard.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+ [32m✓[39m tests/recovered_mood_guard.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_welfare_truth.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m tests/care_capacity_scoring.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m tests/stage4_metrics.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 35[2mms[22m[39m
+ [32m✓[39m tests/nourishment_view.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 42[2mms[22m[39m
+ [32m✓[39m tests/belief_provenance.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m tests/inspector_blocker_age.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m tests/workshops.test.ts [2m([22m[2m27 tests[22m[2m)[22m[32m 94[2mms[22m[39m
+ [32m✓[39m tests/known_adoption.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 68[2mms[22m[39m
+[90mstdout[2m | tests/zz_review_b_undefined_keyorder.test.ts[2m > [22m[2mcompleted upgrade keys stay absent, and a later upgrade continues exactly across a load
+[22m[39mkeys before: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built
+uninterrupted: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built,upgrading
+loaded:        ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,builtBy,built,upgrading
+hash equal: true; deepEqualState: true; text equal: true; diffs: 
+
+ [32m✓[39m tests/zz_review_b_undefined_keyorder.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 31[2mms[22m[39m
+ [32m✓[39m tests/inhabit_time_text.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_claim_home_truth.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_propose_truth.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_dependents_truth.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m tests/statediff.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/speech_layout.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m tests/viewsize.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/inhabit_summary.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/feed_rows.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/estate_picking.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m tests/model_gate.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/zz_review_g_stale_blocked.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m tests/meal_leftovers_picking.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_request_site_truth.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/zz_review_d_perceive_store.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 8[2mms[22m[39m
+ [31m❯[39m tests/zz_review_g_observer_purity.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 452000[2mms[22m[39m
+   [31m❯[39m REVIEW G: observation leaves the world exactly as it was, every tick [2m(2)[22m
+[31m     [31m×[31m river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical[39m[33m 299244[2mms[22m[39m
+     [33m[2m✓[22m[39m meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical[33m 152754[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m5 failed[39m[22m[2m | [22m[1m[32m521 passed[39m[22m[90m (526)[39m
+[2m      Tests [22m [1m[31m7 failed[39m[22m[2m | [22m[1m[32m3000 passed[39m[22m[2m | [22m[33m3 skipped[39m[90m (3010)[39m
+[2m   Start at [22m 20:07:23
+[2m   Duration [22m 454.65s[2m (tests 95%, import 4%, transform 1%)[22m
+

@@ -49,9 +49,21 @@ first adoption at tick 30,643. The pin test passed on that checkout, 1 of 1 in 4
 A one-seed forest probe at 25 days is not a measurement. Both rules 166 and rules 167 recorded
 adoptions. Alive counts were 15 at 166 and 7 at 167. One seed cannot say the gate caused that.
 
-The full suite and the 12-seed paired lab (Normal, 25 days, control plus `nudge:1` and `nudge:2`,
-rules 166 against 167) were started detached from a clean checkout of `4cdc01e9`. Their results are
-not in this note. No benefit or harm is claimed.
+Full suite from a clean checkout of `4cdc01e9` (20:07–20:15, 8 November 2026): 521 of 526 files,
+3,000 of 3,010 tests (3 skipped), 454.65s. `known_adoption` (7) and the rules-167 continuation
+passed in that run. Five files failed. Four passed alone at 20:16 (10 tests, 176s): `lab_defaults`
+(a 10-second `spawnSync` returned a null status under load), `zz_review_h_retention` (hook timeout),
+`zz_review_main_toolreport_saves` and `zz_review_g_observer_purity` (test timeouts).
+`zz_review_e_famine_trace` was not rerun: it opens `autonomy_evidence/helper-receipt107-first-invalid/final.json`,
+and `.gitignore` ignores `autonomy_evidence/**/final.json`.
+
+Paired lab, same checkout, 12 seeds, Normal, 25 days, control plus `nudge:1` and `nudge:2`, rules
+166 pinned with `--rules 166` against 167. Both arms finished 12 of 12 seeds. Provenance head
+`4cdc01e9`, dirty false. `scripts/lab_versions.ts`: nothing moved by more than a single draw moves
+it. People +0.1 [-0.3, +0.5] against a floor of ±4.3. Deaths -0.1 [-0.4, +0.2] against ±4.3. Mean
+mood +0.9 [0, +2.2] and mean condition +0.6 [0, +1.3] lean the same way on 4 of 4 draws and stay
+inside floors of ±10.0. The one-seed forest alive counts (15 at 166, 7 at 167) are not this result.
+No benefit or harm is claimed. Evidence: `review_evidence/known-adoption-20261108/`.
 
 ## Not touched
 

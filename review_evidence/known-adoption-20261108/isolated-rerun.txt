@@ -1,0 +1,13 @@
+Isolated rerun, 8 November 2026, clean checkout 4cdc01e9.
+Started 20:16:28, after the parallel suite in suite-run.txt.
+Four files, one vitest process: tests/lab_defaults.test.ts, tests/zz_review_h_retention.test.ts, tests/zz_review_main_toolreport_saves.test.ts, tests/zz_review_g_observer_purity.test.ts.
+
+Result, exit 0:
+ Test Files  4 passed (4)
+      Tests  10 passed (10)
+   Start at  20:16:28
+   Duration  176.03s (tests 98%, transform 1%)
+
+Not rerun: tests/zz_review_e_famine_trace.test.ts. It opens autonomy_evidence/helper-receipt107-first-invalid/final.json, and .gitignore ignores autonomy_evidence/**/final.json, so a clean checkout does not have that file.
+
+The parallel suite failed the four files above on timeouts and a null spawnSync status under load. Passing alone does not change those parallel-run failures; it shows they are load-sensitive.

@@ -1,0 +1,11 @@
+﻿start 2026-11-08T20:07:23.0040951+10:00 head 4cdc01e9 wrapper 54820
+suite pid 14292 at 2026-11-08T20:07:23.0863436+10:00
+suite exit  at 2026-11-08T20:15:08.4703325+10:00
+labs not started; done
+suite summary 521 files passed, 5 failed (526); 3000 tests passed, 7 failed, 3 skipped; 454.65s. Wrapper ExitCode blank, so the suite script skipped the labs. Isolated rerun 2026-11-08: lab_defaults, zz_review_h_retention, zz_review_main_toolreport_saves, zz_review_g_observer_purity: 4 files, 10 tests passed. zz_review_e_famine_trace not rerun: clean tree lacks gitignored autonomy_evidence/**/final.json.
+labs launch 2026-11-08T20:19:57.0794905+10:00 wrapper 412
+labs 26116 40216 at 2026-11-08T20:19:57.1851804+10:00
+labs launch 2026-11-08T20:21:34.6129999+10:00 wrapper 51220 outs C:\Users\RJLoc\AppData\Local\Temp\lw167-lab166 C:\Users\RJLoc\AppData\Local\Temp\lw167-lab167
+labs 35520 15464 at 2026-11-08T20:21:34.7143962+10:00
+labs exit   at 2026-11-08T20:39:05.6263793+10:00
+compare exit  at 2026-11-08T20:39:11.6117017+10:00; done
