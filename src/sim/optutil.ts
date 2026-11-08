@@ -13,6 +13,7 @@ import { isDependent, stageOf } from './people';
 import { dayFraction } from './environment';
 import type { Activity, ActivityKind, Belief, Building, Household, ItemKind, NeedKey, Person, SeenEntity, Stage, ToolKind, World } from './types';
 import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
+import { hasKnownHome } from './known_home';
 import type { BeliefKind } from './types';
 
 import { hyp } from './util';
@@ -326,10 +327,27 @@ export function spotNear(world: World, p: Person, b: Belief): { x: number; y: nu
   return null;
 }
 
+/** A home the searcher can name without the target's live household id: the room they were told, or their own household when the target is their child, partner, parent, or the room said they share a household. */
+function rememberedHome(p: Person, personId: number): { x: number; y: number } | null {
+  const room = p.whereabouts[personId]?.room;
+  if (room) {
+    const named = p.beliefs[room.homeId];
+    if (named && named.kind === 'building' && isHomeType(named.btype)) return { x: named.x, y: named.y };
+  }
+  const own = p.children.includes(personId) || p.partnerId === personId || p.parents.includes(personId) || !!room?.household;
+  if (!own) return null;
+  for (const k in p.beliefs) {
+    const b = p.beliefs[k as unknown as number];
+    if (b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype)) return { x: b.x, y: b.y };
+  }
+  return null;
+}
+
 /**
  * Where would this person look for someone? Where they are in sight, where they were last seen,
- * or (failing that) the home of their household or the building site they are working on.
- * Only uses what the searcher has seen or been told.
+ * or (failing that) a home they can account for or the building site they are working on.
+ * Only uses what the searcher has seen or been told. From rules 171 the home is a room they were
+ * told, or their own household when the person is family, not the target's live household id.
  */
 export function whereIs(ctx: Ctx, personId: number, siteId = 0): { x: number; y: number; how: string } | null {
   const { world, p } = ctx;
@@ -337,6 +355,13 @@ export function whereIs(ctx: Ctx, personId: number, siteId = 0): { x: number; y:
   if (s) return { x: s.x, y: s.y, how: 'in sight' };
   const wh = p.whereabouts[personId];
   if (wh && world.tick - wh.tick < 900) return { x: wh.x, y: wh.y, how: wh.from !== undefined ? 'where I was told they were last seen' : 'last seen' };
+  if (hasKnownHome(world)) {
+    if (siteId && p.beliefs[siteId]) return { x: p.beliefs[siteId].x, y: p.beliefs[siteId].y, how: 'at their building site' };
+    const home = rememberedHome(p, personId);
+    if (home) return { x: home.x, y: home.y, how: 'at their home' };
+    if (wh) return { x: wh.x, y: wh.y, how: 'last seen long ago' };
+    return null;
+  }
   const q = world.byId.get(personId);
   if (q && q.ent === 'person') {
     if (siteId && p.beliefs[siteId]) return { x: p.beliefs[siteId].x, y: p.beliefs[siteId].y, how: 'at their building site' };
