@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "93aeb5e9128c813606b0b855e91bc585490af923",
+    "rules": 171,
+    "content": "3966956f6701dbd9ffc394734d13a231fb6b932051c86f5fe6324890ea2ea50d",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal forest world (arrivals on), 12000 ticks including a searcher looking someone up at a told room that is not the home the target's live household id would select (first seen at tick 11951, sampled every 50 ticks), then 120 more after a save and load."
+  },
+  "saved": "3037f3d1592be5bc2ba0c295d91b4d095796af298d1e0b01d90b3443d8d16f09",
+  "continued": "5c8a6c93ff5247f69eeb581a1815c45cf1a7324af0c11d4da48d1e04f43d952e"
+}
