@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "aa01408dea89e89f8734bf133a78561dd62c448a",
+    "rules": 172,
+    "content": "b8c2eef032d4409bff55d07e5fba5b2af6fff128214e775c0c5ac98ee7357c71",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen world (arrivals on), 8000 ticks including a recruit cap the heard count would decide differently from the live helper count (first seen at tick 3001, sampled every 50 ticks), then 120 more after a save and load."
+  },
+  "saved": "08b657e7ed7165b8c1f2f3753c6b89c7b18e9e730226961e3a93c39f21bc47ec",
+  "continued": "964d66f0448a893fdf8078cc8bc8bf3a85ae9241817c27e87052ee3324b44db4"
+}
