@@ -67,10 +67,9 @@ branch name would be `rich-no-visible-need`.
 
 ## Not touched
 
-- `knownNeeds` (`remembered_need.ts`) still returns a dependant's live needs when they are in sight.
-  That was rules 106's own decision ("somebody in sight is judged as before, from what the carer can see
-  up close") and it drives care of children and elders, where blunting urgency could cost lives. The two
-  graded signs added here could serve it in a later step, judged by the lab.
+- `knownNeeds` for a dependant in sight is rules 173 (`docs/SEEN_DEPENDANT.md`). Rules 166 left the live
+  figures, because blunting urgency could cost lives. The later rule uses these signs and claims no benefit.
+  The paired lab for that rule is not run.
 - `responsibilities.ts` reads a watched child's exact hunger within 3.2 tiles; `facilities.ts` reads a
   housemate's hunger when a granary adjudicates an emergency ration; `meals.ts` reads the responder's own
   needs. None is a bystander's choice about a stranger.

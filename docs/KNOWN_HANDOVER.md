@@ -51,5 +51,5 @@ The status file never received `labs exit` or `compare exit`. The scheduler wrap
 
 ## Not touched
 
-`knownNeeds` for a dependant in sight. Store contents copied at sight are rules 169 (`docs/SEEN_STOCK.md`). A worry about someone gone is rules 170 (`docs/KNOWN_WORRY.md`). Looking for someone at a home is rules 171 (`docs/KNOWN_HOME.md`). The recruit cap is rules 172 (`docs/HEARD_HELPERS.md`).
+`knownNeeds` for a dependant in sight is rules 173 (`docs/SEEN_DEPENDANT.md`). Store contents copied at sight are rules 169 (`docs/SEEN_STOCK.md`). A worry about someone gone is rules 170 (`docs/KNOWN_WORRY.md`). Looking for someone at a home is rules 171 (`docs/KNOWN_HOME.md`). The recruit cap is rules 172 (`docs/HEARD_HELPERS.md`).
 The leaks that sit in another session's uncommitted files.

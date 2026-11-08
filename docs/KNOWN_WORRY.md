@@ -58,5 +58,5 @@ The paired lab is not run. No benefit or harm is claimed.
 ## Not touched
 
 Looking for someone at a home is rules 171 (`docs/KNOWN_HOME.md`). The recruit cap is rules 172 (`docs/HEARD_HELPERS.md`). `knownNeeds` for a
-dependant in sight. The living-bereaved life-event read. The leaks that sit in another
+dependant in sight is rules 173 (`docs/SEEN_DEPENDANT.md`). The living-bereaved life-event read. The leaks that sit in another
 session's uncommitted files.
