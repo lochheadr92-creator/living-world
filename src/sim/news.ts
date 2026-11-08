@@ -1,7 +1,7 @@
 import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
-import { acceptsToldReport, isEmptyFood, noteEmptyRejected, noteFoodAccepted, tellingSuppressed, tracksFoodDelivery, toldKey } from './empty_news';
+import { acceptsToldReport, emptyFoodShareable, isEmptyFood, isFoodKind, noteEmptyRejected, noteFoodAccepted, tellingSuppressed, tracksFoodDelivery, toldKey } from './empty_news';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
 import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
@@ -46,10 +46,10 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'cart' && b.hh !== S.hhId) continue;
     if (b.kind === 'danger' && (b.amount <= 0 || world.tick - b.seen > 900)) continue;
     if (b.kind === 'water') continue;
-    const isFood = b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot';
-    const failure = currentFailure(world, S, b.id);
-    const depletedNews = isFood && b.amount <= 0 && failure !== undefined && world.tick - failure.tick < 1100 && b.seen >= failure.tick - 60;
-    if (isFood && b.amount <= 0 && !depletedNews) continue; // an old, stale 'empty' is not news
+    const isFood = isFoodKind(b.kind);
+    // rules 176: a fresh empty sight, including one only heard, uses the same 1,100-tick horizon. Before that, a personal failure.
+    const shareableEmpty = emptyFoodShareable(world, b, currentFailure(world, S, b.id));
+    if (isFood && b.amount <= 0 && !shareableEmpty) continue; // an old, stale 'empty' is not news
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
     if (tellingSuppressed(world, S, L.id, b)) continue;
     const hub = nearestHub(world, b.x, b.y);
@@ -57,8 +57,8 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
     // the speaker cannot see the listener's mind; far places are likelier to be news
     let score = wgt * (0.6 + fresh) + (dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;
-    if (isFood && !depletedNews && estimatedAmount(world, b) < 2) score -= 2.5;
-    if (depletedNews) score += 2.2;
+    if (isFood && !shareableEmpty && estimatedAmount(world, b) < 2) score -= 2.5;
+    if (shareableEmpty) score += 2.2;
     score -= hearsayNewsCost(world, S, b); // rules 154: slower to pass on a place from a teller they have caught out
     if (hyp(b.x - L.x, b.y - L.y) < 6) score -= 3; // they can see it for themselves
     if (score > 1.2) scored.push({ b, score });

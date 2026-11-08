@@ -19,6 +19,26 @@ export function isEmptyFood(b: Belief): boolean {
   return isFoodKind(b.kind) && b.amount <= 0;
 }
 
+/** How long an empty food sighting stays worth telling. The same window the personal-failure gate already used. */
+export const EMPTY_NEWS_HORIZON = 1100;
+
+let travelEnabled = true;
+/** Lab switch (never saved or hashed). Off restores the personal-failure gate inside a rules-176 rich world. */
+export const emptyTravelOn = (): boolean => travelEnabled;
+export function setEmptyTravel(on: boolean): void { travelEnabled = on; }
+export const hasEmptyTravel = (w: World): boolean => travelEnabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 176);
+
+/**
+ * Whether this empty food belief may be said. Rules 176: the original sighting is younger than the existing horizon,
+ * with no personal failure required. Earlier rules: a recent failure of the speaker's own, tied to that sighting.
+ * Passing the report on does not make the sighting newer.
+ */
+export function emptyFoodShareable(world: World, b: Belief, failure: { tick: number } | undefined): boolean {
+  if (!isEmptyFood(b)) return false;
+  if (hasEmptyTravel(world)) return world.tick - b.seen < EMPTY_NEWS_HORIZON;
+  return failure !== undefined && world.tick - failure.tick < EMPTY_NEWS_HORIZON && b.seen >= failure.tick - 60;
+}
+
 /** Whether a report should replace an existing belief. The comparison is the original observation time, not when it was received. */
 export function acceptsToldReport(world: World, incoming: Belief, old: Belief): boolean {
   if (hasEmptyCorrection(world) && isEmptyFood(incoming) && old.amount > 0 && incoming.seen > old.seen) return true;
