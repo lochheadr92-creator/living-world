@@ -748,6 +748,10 @@ export interface Person {
   chrono: number;
   asked: Record<number, number>;
   told: Record<number, number>;
+  /** Rules 175. Observation time of the last food report successfully given to that listener. Absent until one is accepted. */
+  newsTold?: Record<number, number>;
+  /** Rules 175. One rejected empty report, so the same refusal is not selected again inside the telling cooldown. */
+  newsHeld?: Record<number, { tick: number; seen: number }>;
   lastExploreTick: number;
   stats: { gathered: number; given: number; received: number; built: number; talked: number; farmed: number; crafted: number };
   lastAteTick: number;

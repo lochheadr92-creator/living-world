@@ -1,7 +1,7 @@
 import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
-import { acceptsToldReport } from './empty_news';
+import { acceptsToldReport, isEmptyFood, noteEmptyRejected, noteFoodAccepted, tellingSuppressed, tracksFoodDelivery, toldKey } from './empty_news';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
 import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
@@ -12,7 +12,6 @@ import { hashUnit } from './rng';
 import type { Belief, BuildingType, Person, World } from './types';
 
 import { hyp } from './util';
-const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
 
 // ───────────────────────── information ─────────────────────────
 const NEWS_WEIGHT: Partial<Record<Belief['kind'], number>> = {
@@ -52,7 +51,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     const depletedNews = isFood && b.amount <= 0 && failure !== undefined && world.tick - failure.tick < 1100 && b.seen >= failure.tick - 60;
     if (isFood && b.amount <= 0 && !depletedNews) continue; // an old, stale 'empty' is not news
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
-    if (S.told[toldKey(L.id, b.id)] !== undefined && world.tick - S.told[toldKey(L.id, b.id)] < 3500) continue;
+    if (tellingSuppressed(world, S, L.id, b)) continue;
     const hub = nearestHub(world, b.x, b.y);
     const dCamp = hyp(b.x - hub.x, b.y - hub.y);
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
@@ -70,12 +69,17 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
 
 /** The listener learns it as hearsay; returns true if it was actually new or fresher for them. */
 export function tellBelief(world: World, S: Person, L: Person, b: Belief): boolean {
-  S.told[toldKey(L.id, b.id)] = world.tick;
+  // Rules 175 records an empty correction only when the listener's belief changes. A positive food report and every
+  // other telling still mark the attempt first, so a wolf warning keeps the cooldown it had.
+  if (!tracksFoodDelivery(world, b) || !isEmptyFood(b)) S.told[toldKey(L.id, b.id)] = world.tick;
   const old = L.beliefs[b.id];
   // rules 174: a strictly newer empty food sighting can correct a positive memory inside the ordinary 200-tick gap.
   // learn() would also refresh an equal-time snapshot and then return false, so a refused report is not passed to it.
   const isNew = !old || acceptsToldReport(world, b, old);
-  if (!isNew) return false;
+  if (!isNew) {
+    noteEmptyRejected(world, S, L.id, b);
+    return false;
+  }
   if (old) noteDisagreement(world, S, L, old, b); // rules 107: a differing newer account of a place seen oneself is logged
   const copy: Belief = { ...b, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
   // (a field that is absent stays absent: a key set to undefined is dropped by a save, so the saved and the live record would differ)
@@ -84,6 +88,7 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   if (b.need) copy.need = { ...b.need };
   else delete copy.need;
   learn(L, copy);
+  noteFoodAccepted(world, S, L.id, b);
   const noun = BELIEF_NOUN[b.kind];
   if (b.kind === 'danger') {
     L.needs.safety = Math.max(0, L.needs.safety - 8);
