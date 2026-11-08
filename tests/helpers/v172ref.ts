@@ -5,6 +5,7 @@ import {conservationReport} from '../../src/sim/economy';
 import {createWorld} from '../../src/sim/factory';
 import {heardHelpers} from '../../src/sim/heard_helpers';
 import {beliefsByKind} from '../../src/sim/optutil';
+import {stageOf} from '../../src/sim/people';
 import {currentWorldSettings} from '../../src/sim/profiles';
 import {helpersOn} from '../../src/sim/social';
 import {projectAt} from '../../src/sim/townships';
@@ -14,7 +15,7 @@ const digest=(s:string)=>createHash('sha256').update(s).digest('hex');
 /** The live helper count and the heard count sit on opposite sides of the recruit cap. */
 export function capWouldDiffer(w:World):boolean{
  for(const p of w.persons){
-  if(!p.alive||p.child)continue;
+  if(!p.alive||stageOf(w,p)==='child')continue;
   for(const b of beliefsByKind(p,['site'])){
    const project=projectAt(w,b.id);
    if(project&&councilFor(w,project))continue;
