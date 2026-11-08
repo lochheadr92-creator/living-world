@@ -1,6 +1,7 @@
 import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
+import { acceptsToldReport } from './empty_news';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
 import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
@@ -71,7 +72,9 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
 export function tellBelief(world: World, S: Person, L: Person, b: Belief): boolean {
   S.told[toldKey(L.id, b.id)] = world.tick;
   const old = L.beliefs[b.id];
-  const isNew = !old || b.seen > old.seen + 200;
+  // rules 174: a strictly newer empty food sighting can correct a positive memory inside the ordinary 200-tick gap.
+  // learn() would also refresh an equal-time snapshot and then return false, so a refused report is not passed to it.
+  const isNew = !old || acceptsToldReport(world, b, old);
   if (!isNew) return false;
   if (old) noteDisagreement(world, S, L, old, b); // rules 107: a differing newer account of a place seen oneself is logged
   const copy: Belief = { ...b, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
