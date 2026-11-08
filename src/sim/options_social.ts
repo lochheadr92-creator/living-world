@@ -28,6 +28,7 @@ import { companyPull } from './lifechanges';
 import { crewMates } from './crews';
 import { quarrelsFor } from './mediation';
 import { childrenNeedingWatch, laidUp } from './responsibilities';
+import { hasKnownHandover, neighbourKnowsChild } from './known_handover';
 import { BUILD_DEF, PRESERVED_FOODS } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -233,6 +234,10 @@ function optRequest(ctx: Ctx): void {
       for (const c of cands) {
         if (c.d > 14 || c.s.child || c.q.hhId === p.hhId || stageOf(world, c.q) === 'child' || stageOf(world, c.q) === 'youth') continue;
         if ((p.cooldowns['askduty' + c.q.id] ?? 0) > world.tick || c.aff < -10) continue;
+        if (kids.length && hasKnownHandover(world) && !neighbourKnowsChild(c.q, kids[0])) {
+          addBlocked(ctx, 'socialize', `Ask ${c.q.name} to keep an eye on ${kids[0].name}`, c.q.id, `has not seen ${kids[0].name} and has not been told where they are`, 'request');
+          continue;
+        }
         const sc = new Scorer()
           .add(kids.length ? `laid up, and ${kids[0].name} needs seeing to` : 'laid up, and the fire is getting low', 18 + 8 * (p.illness?.severity ?? 0.5))
           .add(c.aff >= 25 ? 'a friend' : c.fam >= 4 ? 'a neighbour' : 'worth a try', c.aff >= 25 ? 5 : 2)

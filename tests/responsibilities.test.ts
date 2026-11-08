@@ -45,6 +45,8 @@ describe('asking a neighbour to keep an eye on a child', () => {
     expect(laidUp(r, parent)).toBe(true);
     expect(childrenNeedingWatch(r, parent).map((c) => c.id)).toContain(child.id);
     parent.seen = [{ id: neighbour.id, ent: 'person', x: neighbour.x, y: neighbour.y, hungry: false, thirsty: false, tired: false, cold: false, hurt: false, child: false, carrying: [], asleep: false, act: '', busyTalking: false }];
+    // Rules 168: the neighbour is asked only once they have seen the child. Standing nearby is not that sight.
+    neighbour.seen = [{ id: child.id, ent: 'person', x: child.x, y: child.y, hungry: false, thirsty: false, tired: false, cold: false, hurt: false, child: true, carrying: [], asleep: false, act: '', busyTalking: false }];
     const ctx = generateOptions(r, parent, true);
     expect(ctx.options.some((o) => o.kind === 'socialize' && o.label.startsWith('Ask ') && o.label.includes('keep an eye on'))).toBe(true);
     const a = world('authored');
