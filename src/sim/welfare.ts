@@ -12,6 +12,8 @@ import { addEvent, addLog } from './events';
 import { transfer } from './economy';
 import { Scorer, addBlocked, addOption, eta, pen, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
+import { knowsDeath } from './death_knowledge';
+import { hasKnownWorry } from './known_worry';
 import { personById } from './registry';
 import { onGift, surplusOf } from './social';
 import type { Concern, ItemKind, Items, Person, World } from './types';
@@ -35,7 +37,11 @@ export const SELF_FIX_WINDOW = 480;
 const KIND_WORD: Record<Concern['kind'], string> = { hungry: 'hungry', thirsty: 'thirsty', cold: 'cold', hurt: 'hurt', tired: 'worn out', missing: 'out of sight', bereaved: 'bereaved' };
 
 /** a worry about someone who can look after themselves, over a need they will have met by now */
-function outOfDate(world: World, c: Concern, subject: Person | undefined): boolean {
+function outOfDate(world: World, c: Concern, subject: Person | undefined, knower?: Person): boolean {
+  if (knower && hasKnownWorry(world) && (!subject || !subject.alive)) {
+    if (world.tick - c.seen >= CONCERN_LIFE) return true;
+    return knowsDeath(knower, c.about);
+  }
   if (!subject) return true;
   const age = world.tick - c.seen;
   if (age >= CONCERN_LIFE) return true;
@@ -46,7 +52,7 @@ function outOfDate(world: World, c: Concern, subject: Person | undefined): boole
 /** Called now and then for each person: note anyone in view who looks to be in a bad way, and let go of worries that are out of date. */
 export function noteConcerns(world: World, p: Person): void {
   const tick = world.tick;
-  p.concerns = p.concerns.filter((c) => !outOfDate(world, c, personById(world, c.about)));
+  p.concerns = p.concerns.filter((c) => !outOfDate(world, c, personById(world, c.about), p));
   for (const s of p.seen) {
     if (s.ent !== 'person') continue;
     const have = p.concerns.find((c) => c.about === s.id);
@@ -77,15 +83,21 @@ export function shareConcerns(world: World, S: Person, L: Person): number {
     if (world.tick - c.seen > CONCERN_LIFE * 0.7) continue;
     // worth saying only if the listener would care: family, housemate, or a friend of the person
     const subject = personById(world, c.about);
-    if (!subject || outOfDate(world, c, subject)) continue;
+    if (!hasKnownWorry(world)) {
+      if (!subject || outOfDate(world, c, subject)) continue;
+    } else if (outOfDate(world, c, subject, L)) continue;
+    const living = subject && subject.alive ? subject : undefined;
+    const name = hasKnownWorry(world) ? (living?.name ?? world.deceased.find((d) => d.id === c.about)?.name) : subject!.name;
+    if (!name) continue;
     const rel = L.relations[c.about];
-    const cares = subject.hhId === L.hhId || !!rel?.kin || (rel?.affinity ?? 0) >= 15;
+    const sameHouse = hasKnownWorry(world) ? (!!living && living.hhId === L.hhId) : subject!.hhId === L.hhId;
+    const cares = sameHouse || !!rel?.kin || (rel?.affinity ?? 0) >= 15;
     if (!cares) continue;
     if (L.concerns.some((x) => x.about === c.about && x.seen >= c.seen)) continue;
     L.concerns = L.concerns.filter((x) => x.about !== c.about);
     L.concerns.push({ about: c.about, kind: c.kind, seen: c.seen, src: 'told', from: S.id, checked: -99999 });
     if (L.concerns.length > MAX_CONCERNS) L.concerns.sort((a, b) => b.seen - a.seen), (L.concerns.length = MAX_CONCERNS);
-    addLog(world, L, 'social', `${S.name} told me ${subject.name} looked ${KIND_WORD[c.kind]} not long ago.`);
+    addLog(world, L, 'social', `${S.name} told me ${name} looked ${KIND_WORD[c.kind]} not long ago.`);
     n++;
     break;
   }
@@ -126,30 +138,34 @@ export function welfareOptions(ctx: Ctx): void {
   if (concerns.length > MAX_CONCERNS) concerns.length = MAX_CONCERNS;
   for (const c of concerns) {
     const subject = personById(world, c.about);
-    if (!subject || !subject.alive) continue;
+    const living = subject && subject.alive ? subject : undefined;
+    if (!living && !hasKnownWorry(world)) continue;
+    if (hasKnownWorry(world) && knowsDeath(p, c.about)) continue;
+    const name = living?.name ?? world.deceased.find((d) => d.id === c.about)?.name;
+    if (!name) continue;
     if ((p.cooldowns['check' + c.about] ?? 0) > world.tick) {
       continue;
     }
-    if (outOfDate(world, c, subject)) continue;
+    if (outOfDate(world, c, subject, p)) continue;
     // already in sight: the ordinary offering and caring options deal with it
     if (ctx.seenPersons.some((s) => s.id === c.about)) continue;
     const rel = p.relations[c.about];
-    const kin = !!rel?.kin || subject.hhId === p.hhId;
-    const dependent = isDependent(world, subject);
+    const kin = !!rel?.kin || (!!living && living.hhId === p.hhId);
+    const dependent = !!living && isDependent(world, living);
     const aff = rel?.affinity ?? 0;
     const cares = kin || aff >= 15 || (dependent && p.traits.generosity > 0.6);
     if (!cares) {
-      addBlocked(ctx, 'visit', `Check on ${subject.name}`, subject.id, 'they are not close enough to go looking', 'care');
+      addBlocked(ctx, 'visit', `Check on ${name}`, c.about, 'they are not close enough to go looking', 'care');
       continue;
     }
     const supplies = c.kind === 'missing' || c.kind === 'bereaved' ? null : suppliesFor(world, p, c.kind);
     if (c.kind !== 'missing' && c.kind !== 'bereaved' && !supplies) {
-      addBlocked(ctx, 'visit', `Bring something to ${subject.name}`, subject.id, `has nothing to spare for someone ${KIND_WORD[c.kind]}`, 'care');
+      addBlocked(ctx, 'visit', `Bring something to ${name}`, c.about, `has nothing to spare for someone ${KIND_WORD[c.kind]}`, 'care');
       continue;
     }
     const loc = whereIs(ctx, c.about, 0);
     if (!loc) {
-      addBlocked(ctx, 'visit', `Check on ${subject.name}`, subject.id, 'does not know where they are', 'care');
+      addBlocked(ctx, 'visit', `Check on ${name}`, c.about, 'does not know where they are', 'care');
       continue;
     }
     const age = world.tick - c.seen;
@@ -157,16 +173,16 @@ export function welfareOptions(ctx: Ctx): void {
     const fresh = Math.max(0.25, 1 - age / CONCERN_LIFE);
     const e = eta(ctx, loc.x, loc.y);
     const sc = new Scorer()
-      .add(c.kind === 'missing' ? `has not seen ${subject.name} for a while` : c.kind === 'bereaved' ? `${subject.name} has lost someone` : `${subject.name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
+      .add(c.kind === 'missing' ? `has not seen ${name} for a while` : c.kind === 'bereaved' ? `${name} has lost someone` : `${name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
       .add('walking', -pen(e));
     if (kin) sc.add('family', 7);
     if (dependent) sc.add('someone who cannot manage alone', 6);
     if (ctx.night && !kin) sc.add('night', -8);
     if (sc.total < 8) continue;
-    const goal = supplies ? `to bring ${Object.keys(supplies).join(' and ')} to ${subject.name}` : `to see how ${subject.name} is`;
+    const goal = supplies ? `to bring ${Object.keys(supplies).join(' and ')} to ${name}` : `to see how ${name} is`;
     addOption(ctx, {
       kind: 'visit',
-      label: supplies ? `Bring ${Object.keys(supplies).join(' and ')} to ${subject.name}` : `Look in on ${subject.name}`,
+      label: supplies ? `Bring ${Object.keys(supplies).join(' and ')} to ${name}` : `Look in on ${name}`,
       goal,
       need: null,
       util: sc.total,
@@ -178,7 +194,7 @@ export function welfareOptions(ctx: Ctx): void {
       make: () =>
         newActivity(world, p, {
           kind: 'visit',
-          label: supplies ? `Taking ${Object.keys(supplies).join(' and ')} to ${subject.name}` : `Looking in on ${subject.name}`,
+          label: supplies ? `Taking ${Object.keys(supplies).join(' and ')} to ${name}` : `Looking in on ${name}`,
           goal,
           targetId: c.about,
           targetType: 'person',
