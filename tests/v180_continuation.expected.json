@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "e80c291c9820d8bd7d7e14a89f3da6a84c07e7ce",
+    "rules": 180,
+    "content": "b352d4611733883dfae9be8b615fed7e2b64020e7bf266d455407793cc14fe5b",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river world (arrivals on), 2400 ticks including a laid-up person (first at tick 201, sampled every 50 ticks; no laid-up person lives with a child in 12000 ticks in birch, forest or river, so the changed branch is covered by tests/known_able.test.ts), then 120 more after a save and load."
+  },
+  "saved": "30b06d22256ab6c5bd04aacb51ca995bf688989fe2a41fb5de6fd34d3773097f",
+  "continued": "f7d38751673e35c1c82a8b8165eb88519cb2d91909c6a901edba4a4a26081084"
+}
