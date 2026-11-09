@@ -53,6 +53,7 @@ import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
 import {hasProjectPlans,nextProjectStep} from './project_step';
+import {feelsCrowd} from './known_crowd';
 import {hasReadyStep,stepPrepared,READY_STEP_BONUS} from './ready_step';
 
 import { hyp } from './util';
@@ -1090,9 +1091,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
   // a crowd wants a hall (rich only): once two dozen live here, somewhere to gather is wanted whether or not a yard stands
-  let alive = 0;
-  if (isRich(world)) for (const q of world.persons) if (q.alive) alive++;
-  const crowd = alive >= 24;
+  const crowd = feelsCrowd(world, p); // rules 181: the people one knows of, not the world's live count
   if (!knowsEnough(ctx, 'hall') && (haveYard || crowd) && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
