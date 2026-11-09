@@ -16,7 +16,10 @@ function scene(version=CURRENT_RULES_VERSION,basket=false){
  const p=addPerson(s,'Ada',40.5,40.5,{age:75,hunger:95,thirst:95,energy:95,inv:{bread:1,water:1}});
  const home=building(s,'hut',36,40,p.hhId,{bread:30,water:20});w.households.find(h=>h.id===p.hhId)!.homeId=home.id;
  const trees=[makeSource(w,'tree',44,40,10),makeSource(w,'tree',46,40,10),makeSource(w,'tree',48,40,10)];
- if(basket)give(w,p,'basket');done(s);for(const e of [home,...trees])observe(w,p,e);p.stats.gathered=4;p.skills.wood=1.5;
+ if(basket)give(w,p,'basket');done(s);
+ // rules 184: the contents of a home are learned from inside or at the door, so she looks at her own home from its door and then comes back
+ const at={x:p.x,y:p.y};p.x=home.x+home.w+1;p.y=home.y+home.h/2;observe(w,p,home);p.x=at.x;p.y=at.y;
+ for(const e of trees)observe(w,p,e);p.stats.gathered=4;p.skills.wood=1.5;
  return {w,p};
 }
 it('M1: does not adopt a tool whose complete carried recipe exceeds capacity',()=>{
