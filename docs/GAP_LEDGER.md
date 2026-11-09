@@ -90,10 +90,10 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 
 | status | rows |
 |---|---|
-| CLOSED | 4 |
+| CLOSED | 5 |
 | DEFERRED | 3 |
 | GATED | 23 |
-| OPEN-VERIFIED | 186 |
+| OPEN-VERIFIED | 185 |
 | PARTLY-CLOSED | 9 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
@@ -256,7 +256,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G151 | Settlement | Township identity is a founding stamp | OPEN-VERIFIED | exists: src/sim/townships.ts:14 (Township = id, name, x, y, founded, origin), :35-45 foundMembership stamps hh.townshipId once, relocation.ts:362 the only other creator; terms: township, founded, townshipId, addSettlement, extraSettlements, w.townships; nothing after creation changes a township's name or character, and founded is never read; no rules 163-176 file touches this | - |
 | G152 | Settlement | New settlements arise only from acute hunger | OPEN-VERIFIED | exists: src/sim/relocation.ts:79-83 (hardship is hunger<45 with under 2 food), :267-272 proposal needs a day of it plus fresh remembered distant water and food, :362 the only runtime addSettlement (worldgen.ts:312 only founds hubs); terms: relocationHardship, addSettlement, crowd, flood, wolf, extraSettlements; no other trigger; rules-163 12-seed lab retainedRelocationsSettled 0.0 | - |
 | G153 | Settlement | No per-township aggregate state or population history | OPEN-VERIFIED | exists: src/sim/settlement_economy.ts:16-29,41-48 (8-day production rows and 128 gross flows per township, observer only), history.ts:38-54 civicHistory counts live households, inspect.ts:931 summarizeWorld is world-wide and current only; terms: census, populationHistory, headcount, population, demograph, chart, trend; no stored per-township state and no population series | - |
-| G154 | Settlement | Hall want counts the live population of the whole world | OPEN-VERIFIED | exists: src/sim/production.ts:1093-1095 loops every world.persons for alive>=24 (crowd) and :1096-1101 lets crowd alone open the hall want; terms: hall, crowd, alive, two dozen, world.persons; the count is the whole world's live population, not the settlement or what the person knows; file unchanged by rules 163-176 (last commit rules 162), no knowledge rule reaches it | - |
+| G154 | Settlement | Hall want counts the live population of the whole world | CLOSED | exists: src/sim/production.ts:1093-1095 loops every world.persons for alive>=24 (crowd) and :1096-1101 lets crowd alone open the hall want; terms: hall, crowd, alive, two dozen, world.persons; the count is the whole world's live population, not the settlement or what the person knows; file unchanged by rules 163-176 (last commit rules 162), no knowledge rule reaches it [closed at rules 181 on 2026-11-09: facilityWants asks feelsCrowd (known_crowd.ts), the people the person knows of, not the live count; twin identical in 12 of 12 seeds (a null and a bound; the branch is reachable from day 16 in birch but did not change a final world); see docs/KNOWN_CROWD.md] | rules 181 commit e05d939c |
 | G155 | Settlement | Hall, granary, bakery, smithy, brewery rarely built ordinarily | OPEN-VERIFIED | exists: src/sim/production.ts:1066-1102 wants for smithy, granary, bakery, hall (brewery :1019); terms: facilityWants, firstHallDay, workplaces, day() in scripts/lab/lab.ts:844, granary, bakery; hall measured only: rules-163 12-seed 25-day lab (review_evidence/estate-release-20261107/lab163/report.txt:38) firstHallDay 24.7-25.0 means no hall built; per-kind granary, bakery, smithy, brewery counts not recorded | - |
 | G156 | Settlement | Shared-workshop proposal rides on private layouts that never happen | GATED | exists: src/sim/shared_projects.ts:10-14 addSharedProjectOption only clones an already offered plan_site:<type> option (generosity>=0.55, a person within 10, not night), act_build.ts:405-407 proposeProject; terms: plan_shared, SHARED_TYPES, communal, civicProjects, mayShareType; docs/RECOVERED_CAPABILITIES.md:160,202 record no proposals in ten-day screens (rules 143, 147), not re-measured at 176; fix would touch act_build.ts (held) [lead review: fix touches act_build.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
 | G157 | Settlement | Settlement limits follow founders, not residents | GATED | exists: src/sim/rules.ts:76-92 scaledRules and :114 rulesOf read settings.population and settlementFounders, fixed at profiles.ts:53; act_build.ts:291-294 projectLimit, :341 facilityAllowance; terms: rulesOf, scaledRules, settlementFounders, facilityAllowance, projectLimit, siteRadius; only projectsRaisedAt compares live world.persons.length; residents never move the limits; fix would touch act_build.ts and options_work.ts (held) [lead review: fix touches act_build.ts and options_work.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
@@ -466,6 +466,10 @@ Each row taken gets a contract here before its code, and its row above is update
 - **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 180 and
   181 from a clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`,
   `scripts/lab_versions.ts`, rules 180 pinned) reports halls built (`firstHallDay`), people and deaths against the noise floor. Else a null and a bound.
+- **Result, 2026-11-09:** committed `e05d939c` (rules), `1a00afc3` (pin of 181). Twin from a clean checkout of `f26cadcb`, 12 seeds, Normal, 25 days: identical final world at 180 and
+  181 in 12 of 12, conservation and tools hold in 24 of 24. A null and a bound, not a benefit: the live and the known count part from day 16 in birch, yet no final world differed (why
+  was not traced). Suite: the same 65 tests fail as at the previous commit; the observer-purity and `lab_defaults` tests timed out under load and pass alone. Row G154 is CLOSED.
+  Evidence: `review_evidence/known-crowd-20261109/`, `docs/KNOWN_CROWD.md`.
 
 ### G01 first slice (rules 182): a grievance remembers the event that caused it
 

@@ -1,0 +1,15 @@
+A/B at rules 180 and 181, 12 seeds (C:\Users\RJLoc\AppData\Local\Temp\claude\c237366b8a8ea80b\cb3b5497-b4e9-4022-9366-6a0702500a20\scratchpad\twin181/r180-r181)
+seed     identical   alive  deaths  households  coupled  hunger   mood   ill   (before -> after)
+aspen    yes         18     14      6           4        55.8     -30.6  0
+birch    yes         22     7       9           5.5      45.6     -21.8  1
+cedar    yes         23     12      12          5        23.3     -40.5  0
+fern     yes         15     16      8           3        59.6     -4     0
+gen-1    yes         24     6       9           6.5      19.8     -52.7  0
+gen-2    yes         25     5       9           5        51.4     -19.3  1
+gen-3    yes         24     5       8           4        56.3     -12.1  0
+gen-4    yes         23     8       12          5.5      62.3     -8.5   0
+gen-5    yes         38     0       15          9        41.9     -13.9  0
+gen-6    yes         33     0       10          8        68.3     -4.1   2
+meadow   yes         20     14      10          5        50.6     -24.8  1
+river    yes         28     3       11          6.5      18.6     -41.6  0
+identical in 12 of 12 seeds; conservation and the tool registry hold in 12 of 12 pairs
