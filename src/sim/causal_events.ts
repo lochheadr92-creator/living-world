@@ -20,16 +20,16 @@ export const hasCausalEvents = (w: World): boolean => enabled && w.settings.dyna
  * Tie what `holder` just wrote about `otherId` to the event that was recorded for the same incident: the history notes with exactly these
  * texts written this tick, and the grievance whose detail is `detail`. Does nothing below 182 or when the switch is off.
  */
-export function linkCause(world: World, holder: Person, otherId: number, eventId: number, what: { notes?: string[]; detail?: string }): void {
+export function linkCause(world: World, holder: Person, otherId: number, eventId: number, what: { texts?: string[]; detail?: string }): void {
   if (!hasCausalEvents(world)) return;
   const r = holder.relations[otherId];
   if (!r) return;
-  const notes = what.notes ?? [];
+  const texts = what.texts ?? [];
   const soreText = what.detail === undefined ? undefined : `sore: ${what.detail}`;
   for (let i = r.history.length - 1; i >= 0; i--) {
     const h = r.history[i];
     if (h.tick !== world.tick) break;
-    if (h.eventId === undefined && (notes.includes(h.text) || h.text === soreText)) h.eventId = eventId;
+    if (h.eventId === undefined && (texts.includes(h.text) || h.text === soreText)) h.eventId = eventId;
   }
   if (what.detail !== undefined && r.grievance && r.grievance.detail === what.detail) r.grievance.eventId = eventId;
 }

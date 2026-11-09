@@ -70,7 +70,7 @@ describe('rules 182: a grievance remembers the event that caused it', () => {
     adjustRel(ann, bob.id, w.tick - 10, { note: 'an older note' });
     adjustRel(ann, bob.id, w.tick, { note: 'the note for this incident' });
     adjustRel(ann, bob.id, w.tick, { note: 'an unrelated note the same tick' });
-    linkCause(w, ann, bob.id, 4242, { notes: ['the note for this incident', 'an older note'] });
+    linkCause(w, ann, bob.id, 4242, { texts: ['the note for this incident', 'an older note'] });
     const byText = (t: string) => ann.relations[bob.id].history.find((h) => h.text === t)!;
     expect(byText('the note for this incident').eventId).toBe(4242);
     expect(byText('an unrelated note the same tick').eventId).toBeUndefined();
