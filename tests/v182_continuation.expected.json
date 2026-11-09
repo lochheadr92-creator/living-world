@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "adbc4e0a5304f7da30e73d6d11527d295500fb5c",
+    "rules": 182,
+    "content": "cd93770283d002907ea75b132126d606939dbf49ece6cb1e4b90e2ffeeb1e5de",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 2400 ticks including a grievance and a history note that name the event which caused them (first at tick 76, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "77d44ca740ba5e4cd65e35977638551eed6c8c10be9cc14c21bfefb4206a709a",
+  "continued": "16e1cf232458816059e0d178b105f4219e278d21f89442c7a9152899a8ca7758"
+}
