@@ -34,7 +34,7 @@ Death witnessing (rules 14), `perceive`, the actors' own records, accounting.
 - Full suite from a clean checkout of `44e8af3b`, the head of the 182 to 184 series (three shards, 12 workers): the 65 baseline tests in ten files fail as before
   (`review_evidence/empty-food-landing-20261109/failing-tests-10d3adf2.txt`) plus three more: the observer-purity test timed out under load and passes alone; `inhabitant_memory` item 12 (a
   repo-wide source guard met a `.notes` property in the rules-182 code) and `tool_plan_capacity` M1 (a staged scene that observed a hut's contents from 2.5 tiles, which rules 184 hides). The last two
-  were fixed in `151657f7` and `e4d4f431` and pass; the suite was not rerun in full after the fixes.
+  were fixed in `151657f7` and `e4d4f431`. A full rerun from a clean checkout of `45a0a8df` (after the fixes and the rules-183 docs): the same 65 baseline tests fail and no other, apart from the observer-purity timeout, which passes alone with `lab_defaults` and the pins for rules 182, 183 and 184 (5 files, 8 tests, 196 s).
 - Twin, 12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 182 and at 183 from a clean checkout of `44e8af3b`, two processes at a time: the final world is identical in 0 of
   12 seeds; conservation and the tool registry hold in all 24 runs.
 - Paired lab, same checkout, 10 November 2026: 12 seeds, Normal, fork 0, 25 days, arrivals on, control plus `nudge:1` and `nudge:2`, rules 182 and rules 183 both pinned with `--rules`,
