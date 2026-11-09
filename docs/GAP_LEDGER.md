@@ -508,3 +508,25 @@ Each row taken gets a contract here before its code, and its row above is update
 - **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 182 and 183 from a
   clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`, `scripts/lab_versions.ts`, rules 182 pinned)
   reports people, deaths, mean mood and the count of stories heard against the noise floor. Else a null and a bound.
+
+### G19 (rules 184): the contents of a home are learned from inside or at the door
+
+- **Verified absent at rules 183, 2026-11-09:** `observe` (`knowledge.ts:177`) copies a building's store into the observer's belief through `snapshotEntity`
+  (`knowledge.ts:52`, `glancedItems` since rules 169, so kinds and a full flag, not counts), plus the racked tools (`:54-55`), the textile stock (`:182-184`) and the
+  gear stock (`:189-191`), from anywhere inside sense radius. Only the hearth is held back until the observer is indoors (`:185-188`). So a person nine tiles from another
+  household's hut learns that it holds grain and a net. Terms: `snapshotEntity`, `glancedItems`, `observe`, `indoors`, `isSolidHome`, `textileStock`, `gearStock`,
+  `b.items`, `b.tools`. The inside of a home is not seen from the yard; workplaces and stores (storehouse, granary, kiln and the like) are open sheds and are not touched.
+- **Changes:** at rules 184 in a rich world, when the building is a solid home (`hut` or `house`) and the observer is neither inside it nor within two tiles of its
+  footprint (at the door), the sight keeps what they already believed of its contents (items, racked tools, textile stock, gear stock; nothing if they believed nothing)
+  instead of copying the true store. The building's existence, type, owner household and condition are still learned from outside. Sight from inside or at the door copies
+  as before.
+- **Can change decisions:** a thief, a borrower or a carer no longer learns what is in another household's home from across the yard, so fewer thefts and fewer "ask them for X"
+  options based on a glimpse; a household member learns their own home's stock only when inside or at the door, so they may act on older figures. No benefit is claimed.
+- **Must not change:** rules 183 and earlier, authored worlds and `setHomeInterior(false)`; stores and workplaces; telling (hearsay) of contents; the rules-169 glance
+  (kinds and full flag); the hearth rule; accounting.
+- **Tests:** `tests/home_interior.test.ts`: a hut with grain and a net seen from eight tiles shows the grain at 183 and not at 184; the same hut seen from the door or from
+  inside shows it at 184; an earlier belief is kept, not erased, when seen again from outside; a storehouse seen from outside still shows its kinds at 184; the switch and authored
+  gates. Fails on behaviour at 183, passes at 184. Previous-version pin: `tests/v183_continuation.*` (`ee567e1f`); the rules-184 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 183 and 184 from a
+  clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`, `scripts/lab_versions.ts`, rules 183 pinned)
+  reports people, deaths, mean hunger and thefts against the noise floor. Else a null and a bound.

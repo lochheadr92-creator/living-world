@@ -14,6 +14,7 @@ import { addLog } from './events';
 import { SOURCE_NOUN } from './labels';
 import { isEmptyFood } from './empty_news';
 import { runsRulesVersion } from './rulesversion';
+import { keepUnseenInterior } from './home_interior';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
 /** synthetic belief ids for coarse water-access cells (ids below 1e6 are real entities) */
@@ -189,6 +190,7 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if(ownedGearRules(world,'net')&&(e.ent==='building'||e.ent==='cart'||e.ent==='pile')&&!(e.ent==='pile'&&e.gear)){
     b.gearStock={observer:p.id,items:Object.fromEntries((['net','trap'] as const).map(k=>[k,Math.min(ownedGearAt(world,p,e.id,k).length,e.ent==='building'?usableUnits(world,e,p,k):Infinity)]))};
   }
+  if (e.ent === 'building') keepUnseenInterior(world, p, e, b); // rules 184: a home's contents are not seen from the yard
   b.origin = p.id;
   b.hops = 0;
   if(e.ent==='source')correctSourceExperience(world,p,e.id,e.amount);
