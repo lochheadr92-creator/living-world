@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "79b35d6d3088eea7282c03a033fa01ba1d997f2c",
+    "rules": 178,
+    "content": "b29407b58f02b4111920b035eaf4d2e67d3810303690e6cdead22a3b76ba6574",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river world (arrivals on), 2400 ticks including a site where someone knows of a different number of helpers than the register holds (first at tick 801, sampled every 50 ticks; no ordinary world reaches the cap in 12000 ticks, so the refusal itself is covered by tests/known_hands.test.ts), then 120 more after a save and load."
+  },
+  "saved": "27b5d870a3e8ab3e4fed5070da7c1a1d59a83edf26d69c30e28a87e051655fb2",
+  "continued": "b9414c66e736e0f75a473417d925bc328ea2aab6d93f8769ae43eaec893e2273"
+}
