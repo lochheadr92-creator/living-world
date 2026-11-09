@@ -129,7 +129,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G28 | Knowledge | Checked accounts grade told source amounts only; told stores, sites, water, whereabouts, concerns and leads are never held to their teller | OPEN-VERIFIED | exists: src/sim/checked_accounts.ts:39-41 checkableAccount needs a told belief with hops 1 and amount>=2; knowledge.ts:196 calls checkAccount only for e.ent source; news.ts:96 noteDisagreement only logs; tally on Relation.accounts (types.ts:167); terms: checkAccount, noteDisagreement, checkableAccount, borneOut, accounts; rules 174-176 add empty correction, not teller grading | - |
 | G29 | Knowledge | Granary emergency ration's housemate branch reads live hunger instead of remembered signs | CLOSED | exists: src/sim/facilities.ts:200-201 emergency ration if p.needs.hunger<25 or hasHungryDependent (:210-212) reading live q.needs.hunger<30 of housemates; options_survival.ts:270-283 granaryRation sizes the plan from beliefs but the physical allowance stays live; rules 173 knownNeeds (remembered_need.ts:38) never reaches facilities.ts; terms: hasHungryDependent, withdrawAllowance, emergency, knownNeeds; sits beside rationing decision (a) [closed at rules 177 on 2026-11-09: hasHungryDependent reads knownNeeds via known_ration.ts; twin identical in 12 of 12 seeds; see docs/KNOWN_RATION.md] | rules 177 commit 9ad63f96 |
 | G30 | Knowledge | Recruit cap and 'enough hands' refusal read the global helpersOn instead of the asker's own heard promises | CLOSED | exists: src/sim/heard_helpers.ts:17-28 heardHelpers (asker's own help plus remembered promises) used by options_social.ts:569 recruit cap since rules 172; remains: social.ts:1569-1572 'enough hands already' refusal still tests helpersOn (social.ts:173-177, every living person's commitments); AGENTS.md rules 172 says accepting keeps the true count; terms: helpersOn, heardHelpers, enough hands, maxWorkers [closed at rules 178 on 2026-11-09: the enough-hands refusal reads knownHands (known_hands.ts); the only helpersOn callers left are the version-gated fallbacks at options_social.ts:569 and social.ts:1570; twin identical in 12 of 12 seeds; see docs/KNOWN_HANDS.md] | rules 172 commit aa01408d; rules 178 commit 79b35d6d |
-| G31 | Knowledge | Welfare worry upkeep and the visit offer read the out-of-sight subject's live state (adversarial review D1) | PARTLY-CLOSED | exists: known_worry.ts:12, welfare.ts:41-44,86-93,142-144 (rules 170 keeps a worry about a dead or missing subject until the death is known); terms: hasKnownWorry, knowsDeath, outOfDate, personById, hhId, isDependent, lifeEvent; live reads remain after 170-173: welfare.ts:48 lifeEvent, :49 and :154 isDependent(health), :93 and :153 hhId, optutil.ts:160 ctx.dependents; KNOWN_WORRY.md lists lifeEvent as untouched | rules 170 commit 1b59cebe |
+| G31 | Knowledge | Welfare worry upkeep and the visit offer read the out-of-sight subject's live state (adversarial review D1) | PARTLY-CLOSED | exists: known_worry.ts:12, welfare.ts:41-44,86-93,142-144 (rules 170 keeps a worry about a dead or missing subject until the death is known); terms: hasKnownWorry, knowsDeath, outOfDate, personById, hhId, isDependent, lifeEvent; live reads remain after 170-173: welfare.ts:48 lifeEvent, :49 and :154 isDependent(health), :93 and :153 hhId, optutil.ts:160 ctx.dependents; KNOWN_WORRY.md lists lifeEvent as untouched [rules 179 on 2026-11-09: outOfDate (lifeEvent, isDependent) and the welfareOptions dependent read now use age and the worry kind (known_welfare.ts); twin parts in 11 of 12 seeds; paired lab null (people 23.5 against 23.5, deaths 8.5 against 8.3); still open: optutil.ts:160 ctx.dependents (live health, shared with G94) and welfare.ts:93,153 same-household tests (G26); see docs/KNOWN_WELFARE.md] | rules 170 commit 1b59cebe; rules 179 commit eca3bb0a |
 | G32 | Knowledge | Layout planning's storehouse, own-site, open-site-cap tests read world truth where building and site beliefs exist | GATED | exists: options_work.ts:726 world.buildings, :756 world.sites own-site, :762 openSitesNear (act_build.ts:310), :866/:874 world truth, shared_stone.ts:41 noStorehouseNear (reads the world); terms: noStorehouseNear, openSitesNear, world.sites, world.buildings, beliefsByKind, hasTownships; belief-based only at :748, :864 township huts, :871; rules 171-173 did not touch; fix sits in held files options_work.ts, act_build.ts, shared_stone.ts [lead review: fix touches options_work.ts, act_build.ts and shared_stone.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
 | G33 | Knowledge | Viewer names the last teller only; Belief.origin and Belief.hops shown nowhere | OPEN-VERIFIED | exists: inspect.ts:238-256 toldProvenance names last teller, age, doubt; agent/observe.ts:270 shows 'N mouths' (hops) to the external inhabitant only; terms: Belief.hops, Belief.origin, toldProvenance, mouths, src/ui grep; viewer shows neither, origin is shown nowhere (written knowledge.ts:192, news.ts:97), so 'nowhere' is slightly wrong for hops; inspect.ts and src/ui untouched by rules 163-176 | - |
 | G34 | Knowledge | Told/asked maps and cooldown keys outside the rules-25 prefix list never expire | OPEN-VERIFIED | exists: memory_retention.ts:12 prunes only talk/invite/sorry/propose/making: keys; types.ts:749-750 told/asked, written news.ts:83, options_social.ts asked; terms: retainOperationalMemory, delete told, delete asked, newsTold, newsHeld, STATE_BUDGET; no code deletes told/asked entries; rules 175 newsTold/newsHeld (empty_news.ts:90-99) also unpruned; STATE_BUDGET.md:48 records it open | - |
@@ -391,4 +391,53 @@ Each row taken gets a contract here before its code, and its row above is update
   benefit: no ordinary world holds enough helpers to reach the cap in 12,000 ticks (at most 2 against about 4), so the refusal is unreachable there.
   Suite: the same 65 tests fail as at the previous commit, no new failure. Row G30 is CLOSED (rules 172 and 178).
   Evidence: `review_evidence/known-hands-20261109/`, `docs/KNOWN_HANDS.md`.
+
+### G31 (rules 179): a worry about someone out of sight is kept or dropped on what the worrier knows
+
+- **Verified absent at rules 178, 2026-11-09:** after rules 170 (dead or missing subject), `welfare.ts` still reads a remote subject's live state in
+  three places: `outOfDate` line 48 (a bereaved worry is dropped when the subject's live `lifeEvent` is no longer bereaved) and line 49 (a hungry,
+  thirsty or cold worry about a grown person survives past `SELF_FIX_WINDOW` only if `isDependent(world, subject)`, which reads live `health`), and
+  `welfareOptions` line 154 (`dependent` from live `isDependent`, which adds "someone who cannot manage alone" and widens who cares).
+  Terms: `isDependent`, `lifeEvent`, `outOfDate`, `hasKnownWorry`, `SELF_FIX_WINDOW`, `health`. Documented as a leak by the adversarial review at rules 115
+  (`tests/zz_review_d_welfare_truth.test.ts`, which pins rules 115 and is unaffected). What exists to build on: a child is known by age (`stageOf`),
+  the worry itself says what the worrier saw (`Concern.kind`).
+- **Changes:** at rules 179 in a rich world those three reads use what the worrier knows. Dependent means a child by age or a worry whose kind is
+  `hurt` (the worrier saw them hurt). A bereaved worry ends by age alone (it already ends at `CONCERN_LIFE`; the live life-event check can only end
+  it sooner). The arrival check in the `visit` handler (`work`, reading the person they stand next to) is first-hand and is not touched.
+- **Can blunt care:** a frail adult or elder the worrier last saw hungry, who has since been hurt out of sight, is no longer kept as a worry past
+  `SELF_FIX_WINDOW`; age stands in for dependency and frailty is not guessed. No benefit is claimed.
+- **Must not change:** rules 178 and earlier, authored worlds and `setKnownWelfare(false)`; `ctx.dependents` (`optutil.ts:160`, the household's
+  live-health dependants, shared with G94 and left for that row); the same-household tests (`welfare.ts:93,153`, G26); the dead-or-missing path (rules 170);
+  `whereIs`; the arrival check; accounting.
+- **Tests:** `tests/known_welfare.test.ts`, staged as the review test is (rules 115 scene, parameterised by version); fails on behaviour at 178 (a
+  hurt adult out of sight is kept and offered a visit) and passes at 179. Previous-version pin: `tests/v178_continuation.*` (`df14f8cf`); the
+  rules-179 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts`
+  at 178 and 179 from a clean worktree pinned to the commit, two processes at a time). If any seed parts, the lab (control plus `nudge:1`,
+  `nudge:2`, `scripts/lab_versions.ts`, rules 178 pinned) reports people, deaths and hunger against the noise floor. Else a null and a bound.
+- **Result, 2026-11-09:** committed `eca3bb0a` (rules), `472e1ebb` (pin of 179). Twin from a clean checkout of `472e1ebb`, 12 seeds, Normal, 25 days: the
+  final world differs in 11 of 12 seeds (gen-6 identical), conservation and tools hold. Paired lab, same checkout, 12 seeds, control plus two nudges, rules 178
+  pinned: nothing moved by more than a single draw moves it; people 23.5 against 23.5, deaths 8.5 against 8.3 (interval [-1.3, +0.8], floor ±4.4), mean
+  hunger 50.7 against 49.3 (floor ±8.0); buildings -0.8 is systematic and inside its floor. No benefit or harm is claimed. Suite: the same 65 tests fail as at
+  the previous commit; the observer-purity test timed out under shard load and passes alone. Row G31 is PARTLY-CLOSED: `ctx.dependents` (`optutil.ts:160`)
+  and the same-household tests (G26) remain. Evidence: `review_evidence/known-welfare-20261109/`, `docs/KNOWN_WELFARE.md`.
+
+### G94 (rules 180): a laid-up person counts an able adult at home only if they can see one
+
+- **Verified absent at rules 179, 2026-11-09:** `childrenNeedingWatch` (`src/sim/responsibilities.ts:51-58`) decides whether any other adult at home
+  can see to the children by reading every housemate's live `laidUp` (injury, illness severity) and live `health >= 50`, whether or not the laid-up
+  person can see them. Terms: `childrenNeedingWatch`, `laidUp`, `ableAdult`, `health`, `membersOf`, `hurt`, `feverish`. Rules 168 gated only which neighbour
+  is asked (`known_handover.ts`, `options_social.ts:231-238`). What exists to build on: every sight carries `hurt` (health under 60) and, from rules 165,
+  `feverish` (`perception.ts:67-68`, `fever_sign.ts`); the children and adults are told apart by age (`stageOf`); `membersOf` already lists living members.
+- **Changes:** at rules 180 in a rich world, an adult housemate counts as able to see to the children only if the laid-up person currently sees them
+  (an adult or elder by age, in `p.seen`) and the sight shows neither `hurt` nor `feverish`. Out of sight means not counted. The list of children is unchanged.
+- **Can change decisions:** a laid-up person whose other adult is out of sight now lists the children as needing a watch (and may ask a neighbour, subject to
+  the rules-168 gate); before, an unseen able adult suppressed it. A housemate seen with health 50 to 59 now reads as not able (the sign is health under 60). No benefit is claimed.
+- **Must not change:** rules 179 and earlier, authored worlds and `setKnownAble(false)`; `laidUp(p)` for the person themselves (first-hand); `ctx.dependents`
+  and other live-health reads (separate rows); the rules-168 ask gating; accounting.
+- **Tests:** `tests/known_able.test.ts`; fails on behaviour at 179 (an able adult out of sight suppresses the list) and passes at 180.
+  Previous-version pin: `tests/v179_continuation.*` (`472e1ebb`); the rules-180 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 179 and
+  180 from a clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`, rules 179 pinned).
+  Else a null and a bound. Rules 168 saw no watch ask in 72,000 ticks on six seeds, so a null is expected.
 
