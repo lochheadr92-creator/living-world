@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "10d3adf2c59c0152df652b2567ae5500951fc2e2",
+    "rules": 176,
+    "content": "f4acb421b04bef7135fd94aefe4de096b2aedd572448cfae6f59047e3fe69a5e",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 2400 ticks including a fresh empty food sighting held (from tick 51, sampled every 50 ticks) and an accepted empty report (first at tick 422), then 120 more after a save and load."
+  },
+  "saved": "d6d15ec12b526505b015b92c4883429aa9d39e1f01ef1a138043feb148b1db17",
+  "continued": "73b2acc80d763f454d8cb4c2af6ccf2c9871b5b2c54af7b9ddf981956fb7e055"
+}
