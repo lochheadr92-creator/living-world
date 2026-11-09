@@ -41,6 +41,7 @@ import { hearDemand } from './local_demand';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
+import { hasKnownHands, knownHands } from './known_hands';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
@@ -1566,7 +1567,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       const site0 = world.byId.get(d.siteId ?? 0);
       const cap = (site0 && site0.ent === 'site' ? site0.maxWorkers : 3) + 1;
       const council=project&&councilFor(world,project);
-      if ((!council && helpersOn(world, d.siteId ?? 0) >= cap) || activeCommitments(B).filter(c=>!council||c.siteId!==project!.siteId).length >= MAX_ACTIVE_COMMITMENTS) {
+      if ((!council && (hasKnownHands(world) ? knownHands(world, B, d.siteId ?? 0) : helpersOn(world, d.siteId ?? 0)) >= cap) || activeCommitments(B).filter(c=>!council||c.siteId!==project!.siteId).length >= MAX_ACTIVE_COMMITMENTS) {
         bubble(world, B, 'There are hands enough there already.', 'say', 52);
         settle(world, req, 'declined', 'enough hands already');
         A.asked[B.id] = world.tick - 400;
