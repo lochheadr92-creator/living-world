@@ -1,0 +1,1 @@
+birch: day 45 alive 8 deaths 20 households 3 buildings 17 projects 1 events 831 conserved true

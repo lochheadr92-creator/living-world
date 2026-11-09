@@ -1,0 +1,1 @@
+gen-2: day 45 alive 20 deaths 10 households 8 buildings 27 projects 1 events 1026 conserved true

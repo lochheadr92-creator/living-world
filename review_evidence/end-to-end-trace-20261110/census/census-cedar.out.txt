@@ -1,0 +1,1 @@
+cedar: day 45 alive 25 deaths 17 households 13 buildings 26 projects 1 events 1141 conserved true

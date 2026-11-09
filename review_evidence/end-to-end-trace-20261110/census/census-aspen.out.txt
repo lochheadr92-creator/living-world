@@ -1,0 +1,1 @@
+aspen: day 45 alive 20 deaths 20 households 10 buildings 19 projects 5 events 780 conserved true

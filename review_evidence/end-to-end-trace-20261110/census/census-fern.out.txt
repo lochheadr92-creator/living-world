@@ -1,0 +1,1 @@
+fern: day 45 alive 20 deaths 19 households 11 buildings 25 projects 1 events 788 conserved true

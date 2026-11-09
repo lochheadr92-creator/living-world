@@ -1,0 +1,1 @@
+gen-4: day 45 alive 17 deaths 16 households 9 buildings 27 projects 1 events 999 conserved true

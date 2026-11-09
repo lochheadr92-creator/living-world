@@ -1,0 +1,1 @@
+river: day 45 alive 18 deaths 14 households 10 buildings 22 projects 1 events 918 conserved true

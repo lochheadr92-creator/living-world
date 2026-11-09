@@ -1,0 +1,1 @@
+meadow: day 45 alive 19 deaths 28 households 10 buildings 23 projects 1 events 910 conserved true

@@ -1,0 +1,1 @@
+gen-3: day 45 alive 23 deaths 5 households 8 buildings 26 projects 1 events 995 conserved true

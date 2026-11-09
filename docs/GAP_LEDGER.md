@@ -77,6 +77,9 @@ decision line in `loops.md`); row 7, G26's remainder, skipped (needs the who-liv
 decision-neutral); row 9, G16, GATED (what blocks sight is an owner decision); row 10, G17, closed by rules 183 (`ee567e1f`); row 11, G18, GATED (overhearing is a new channel; owner decision
 line); row 12, G19, closed by rules 184 (`e137f697`). row 13, G150 first slice, partly closed by rules 185 (`5405624c`, a record, decision-neutral). Next: G133 and G163 (design checks recorded), then the rows after the queue.
 
+Evidence-ranked alternative to the map order (a proposal, 2026-11-10): `docs/END_TO_END_TRACE.md` traces one 28 day outcome in ordinary aspen and ranks the rows and new
+items by how many of its 20 unexplained links each would close (G32, an answer-to-an-ask cause, G09, G133, two wrong records, G74, G05 and G08). No status below was changed by it.
+
 Rows 1 to 7 are ungated on current evidence. G32 (live buildings in layout planning) is also a verified leak, but its fix sits in
 held files and it is GATED.
 
