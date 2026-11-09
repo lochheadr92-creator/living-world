@@ -1,9 +1,9 @@
 # Living World: product direction
 
-Owner decision, 2026-10-22. This is the single authoritative product brief for everyone working
+Decision, 2026-10-22. This is the single authoritative product brief for all work
 on this repository, Codex and Claude included. Delivery rules live in
 [WORKFLOW.md](WORKFLOW.md) and are unchanged by this file: read that first. This file says what
-we are building and how to judge whether a change delivered it — not how to get it committed.
+is being built and how to judge whether a change delivered it — not how to get it committed.
 
 ## Product identity
 

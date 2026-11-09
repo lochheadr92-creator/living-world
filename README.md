@@ -14,7 +14,7 @@ as fast as wood and stone arrive, a plank exists because somebody sawed a log in
 wood” exists because that person has actually promised it. There are no scores, no quests and no win condition; what there
 is to follow is people and the consequences of what they did.
 
-The product direction everyone working on this repository builds to is [PRODUCT_VISION.md](PRODUCT_VISION.md); the delivery
+The product direction for this repository is [PRODUCT_VISION.md](PRODUCT_VISION.md); the delivery
 rules are in [WORKFLOW.md](WORKFLOW.md).
 
 ```bash

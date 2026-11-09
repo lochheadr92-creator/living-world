@@ -110,7 +110,7 @@ The full suite (`node node_modules/vitest/vitest.mjs run --maxWorkers=2`) finish
 
 ## Ordinary-world comparison, 9 November 2026
 
-Procedure note (2026-11-10): this matrix was produced under the foreground procedure (at most two `lab_seed` workers, no hidden launch) that the owner withdrew on 2026-11-10 (decision D-1 in `AGENTS.md`); it remains valid as measured, but later runs follow the current `AGENTS.md` lab procedure.
+Procedure note (2026-11-10): this matrix was produced under the foreground procedure (at most two `lab_seed` workers, no hidden launch) that was withdrawn on 2026-11-10 (decision D-1 in `AGENTS.md`); it remains valid as measured, but later runs follow the current `AGENTS.md` lab procedure.
 
 The matrix ran once, after the measurement commit `d2f95ee8`. Baseline worktree `C:\dev\Claude Experiment\living-world-empty-food-baseline` at `e019cb33` (rules 173). Fixed worktree `C:\dev\Claude Experiment\living-world-empty-food` at `d2f95ee8` (rules 176). Command, per seed, at most two processes:
 

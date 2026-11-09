@@ -71,7 +71,7 @@ Two files govern how work happens here, and both come before the technical map b
 - **[WORKFLOW.md](WORKFLOW.md) — delivery rules.** The owner's standing workflow: no mandatory
   PR, second reviewer or repeat-approval loop. It supersedes older workflow instructions and must
   not be changed without an explicit owner instruction.
-- **[PRODUCT_VISION.md](PRODUCT_VISION.md) — product direction.** What we are building and how to
+- **[PRODUCT_VISION.md](PRODUCT_VISION.md) — product direction.** What is being built and how to
   judge whether a change delivered it. Read it before planning any behavioural feature.
 
 **What Living World is.** An autonomous world game with few direct controls, supported by a
