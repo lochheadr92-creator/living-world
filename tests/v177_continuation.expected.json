@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "9ad63f96532712a8adb9ebcd5e12fedb0251c543",
+    "rules": 177,
+    "content": "34314381e20bb18f7bd75238862594e6009f80bd6937c5966176173741ddb619",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 8000 ticks including a state where a housemate test from what the person knows disagrees with the live one (first at tick 7601, sampled every 50 ticks; no granary is built in this world, so the ration branch itself is covered by tests/known_ration.test.ts), then 120 more after a save and load."
+  },
+  "saved": "ea751c2c5be3c049d0e6a2c823d48fac00b716484a25cf67628f0470047faa51",
+  "continued": "0d9cc0a583ba90cc854a211b622ae1411dff817f5032cd58e2fa61129ca26ad7"
+}
