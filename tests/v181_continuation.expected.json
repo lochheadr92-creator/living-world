@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "e05d939c6334ea5ced087f48b102e8ab126298e1",
+    "rules": 181,
+    "content": "e04f6b0169c81095611b0eb3e0c306d64b732fd0e880abf870481e69e2c449b4",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 40000 ticks including somebody who knows of fewer than two dozen people while the world holds two dozen or more (first at tick 38,551, sampled every 50 ticks), then 120 more after a save and load."
+  },
+  "saved": "5f1c4c9cfc1444c2be5c187e2e2580ca07faf93c621f85fd94910e477fe488cc",
+  "continued": "cf59c9e842e6dda4de7efdee2f9041940959cc5e80662b80ab611b17dbab2927"
+}
