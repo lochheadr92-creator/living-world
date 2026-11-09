@@ -71,7 +71,7 @@ lab question first; (7) Tier 4 display-only items with replay hashes unchanged.
 | 14 | G133 | no per-transfer record with carrier, route or ownership | economy |
 | 15 | G163 | commons deposits are unattributed (storehouse and hall; granary shares exist) | economy |
 
-Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`). Next: row 2, G30.
+Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`); row 2, G30, closed by rules 178 (`79b35d6d`). Next: row 3, G31.
 
 Rows 1 to 7 are ungated on current evidence. G32 (live buildings in layout planning) is also a verified leak, but its fix sits in
 held files and it is GATED.
@@ -86,11 +86,11 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 
 | status | rows |
 |---|---|
-| CLOSED | 3 |
+| CLOSED | 4 |
 | DEFERRED | 3 |
 | GATED | 21 |
 | OPEN-VERIFIED | 188 |
-| PARTLY-CLOSED | 10 |
+| PARTLY-CLOSED | 9 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
 | total | 233 |
@@ -128,7 +128,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G27 | Knowledge | Depletion news gated to the teller's own recent failed gather; sight-only, relayed and stale emptiness and dry shores never travel | PARTLY-CLOSED | exists: src/sim/empty_news.ts:36-40 emptyFoodShareable (rules 176: fresh direct or relayed empty sight under EMPTY_NEWS_HORIZON 1100 needs no own failure), news.ts:51-56; 174 acceptsToldReport :43-46, 175 tellingSuppressed :71; closed: sight-only and relayed emptiness; open: emptiness older than 1100 ticks and dry shores (news.ts:48 skips water; isFoodKind :14 is berry/fruit/grain/fish only); 174 60fd4b4d, 175 c0198efb | rules 176 commit b3f74019 |
 | G28 | Knowledge | Checked accounts grade told source amounts only; told stores, sites, water, whereabouts, concerns and leads are never held to their teller | OPEN-VERIFIED | exists: src/sim/checked_accounts.ts:39-41 checkableAccount needs a told belief with hops 1 and amount>=2; knowledge.ts:196 calls checkAccount only for e.ent source; news.ts:96 noteDisagreement only logs; tally on Relation.accounts (types.ts:167); terms: checkAccount, noteDisagreement, checkableAccount, borneOut, accounts; rules 174-176 add empty correction, not teller grading | - |
 | G29 | Knowledge | Granary emergency ration's housemate branch reads live hunger instead of remembered signs | CLOSED | exists: src/sim/facilities.ts:200-201 emergency ration if p.needs.hunger<25 or hasHungryDependent (:210-212) reading live q.needs.hunger<30 of housemates; options_survival.ts:270-283 granaryRation sizes the plan from beliefs but the physical allowance stays live; rules 173 knownNeeds (remembered_need.ts:38) never reaches facilities.ts; terms: hasHungryDependent, withdrawAllowance, emergency, knownNeeds; sits beside rationing decision (a) [closed at rules 177 on 2026-11-09: hasHungryDependent reads knownNeeds via known_ration.ts; twin identical in 12 of 12 seeds; see docs/KNOWN_RATION.md] | rules 177 commit 9ad63f96 |
-| G30 | Knowledge | Recruit cap and 'enough hands' refusal read the global helpersOn instead of the asker's own heard promises | PARTLY-CLOSED | exists: src/sim/heard_helpers.ts:17-28 heardHelpers (asker's own help plus remembered promises) used by options_social.ts:569 recruit cap since rules 172; remains: social.ts:1569-1572 'enough hands already' refusal still tests helpersOn (social.ts:173-177, every living person's commitments); AGENTS.md rules 172 says accepting keeps the true count; terms: helpersOn, heardHelpers, enough hands, maxWorkers | rules 172 commit aa01408d |
+| G30 | Knowledge | Recruit cap and 'enough hands' refusal read the global helpersOn instead of the asker's own heard promises | CLOSED | exists: src/sim/heard_helpers.ts:17-28 heardHelpers (asker's own help plus remembered promises) used by options_social.ts:569 recruit cap since rules 172; remains: social.ts:1569-1572 'enough hands already' refusal still tests helpersOn (social.ts:173-177, every living person's commitments); AGENTS.md rules 172 says accepting keeps the true count; terms: helpersOn, heardHelpers, enough hands, maxWorkers [closed at rules 178 on 2026-11-09: the enough-hands refusal reads knownHands (known_hands.ts); the only helpersOn callers left are the version-gated fallbacks at options_social.ts:569 and social.ts:1570; twin identical in 12 of 12 seeds; see docs/KNOWN_HANDS.md] | rules 172 commit aa01408d; rules 178 commit 79b35d6d |
 | G31 | Knowledge | Welfare worry upkeep and the visit offer read the out-of-sight subject's live state (adversarial review D1) | PARTLY-CLOSED | exists: known_worry.ts:12, welfare.ts:41-44,86-93,142-144 (rules 170 keeps a worry about a dead or missing subject until the death is known); terms: hasKnownWorry, knowsDeath, outOfDate, personById, hhId, isDependent, lifeEvent; live reads remain after 170-173: welfare.ts:48 lifeEvent, :49 and :154 isDependent(health), :93 and :153 hhId, optutil.ts:160 ctx.dependents; KNOWN_WORRY.md lists lifeEvent as untouched | rules 170 commit 1b59cebe |
 | G32 | Knowledge | Layout planning's storehouse, own-site, open-site-cap tests read world truth where building and site beliefs exist | GATED | exists: options_work.ts:726 world.buildings, :756 world.sites own-site, :762 openSitesNear (act_build.ts:310), :866/:874 world truth, shared_stone.ts:41 noStorehouseNear (reads the world); terms: noStorehouseNear, openSitesNear, world.sites, world.buildings, beliefsByKind, hasTownships; belief-based only at :748, :864 township huts, :871; rules 171-173 did not touch; fix sits in held files options_work.ts, act_build.ts, shared_stone.ts [lead review: fix touches options_work.ts, act_build.ts and shared_stone.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
 | G33 | Knowledge | Viewer names the last teller only; Belief.origin and Belief.hops shown nowhere | OPEN-VERIFIED | exists: inspect.ts:238-256 toldProvenance names last teller, age, doubt; agent/observe.ts:270 shows 'N mouths' (hops) to the external inhabitant only; terms: Belief.hops, Belief.origin, toldProvenance, mouths, src/ui grep; viewer shows neither, origin is shown nowhere (written knowledge.ts:192, news.ts:97), so 'nowhere' is slightly wrong for hops; inspect.ts and src/ui untouched by rules 163-176 | - |
@@ -365,4 +365,30 @@ Each row taken gets a contract here before its code, and its row above is update
   `fcfedf91`, 12 seeds, Normal, 25 days: identical final world at 176 and 177 in 12 of 12, conservation and tools hold in 24 of 24.
   A null and a bound, not a benefit. Suite: the same 65 tests fail as at the previous commit, no new failure. Row G29 is CLOSED.
   Evidence: `review_evidence/granary-ration-20261109/`, `docs/KNOWN_RATION.md`.
+
+### G30 (rules 178): the candidate's "enough hands already" refusal counts the hands they know of
+
+- **Verified absent at rules 177, 2026-11-09:** `social.ts:1569` (`case 'recruit'`) refuses with "enough hands already" when `helpersOn(world, siteId)`
+  (`social.ts:173-177`, every living person's active help_build, haul or work commitment to the site) reaches the site's `maxWorkers + 1`. Rules 172
+  (`heard_helpers.ts`) closed the asker's side only, and its note says accepting "still uses that true count". Terms: `helpersOn`, `heardHelpers`,
+  `enough hands`, `maxWorkers`, `MAX_ACTIVE_COMMITMENTS`. What exists to build on: `SeenEntity.act` and position on every sight (`types.ts:199-231`),
+  the candidate's own commitments and `socialMemory` (`heard_helpers.ts`). No existing test drives the refusal; `commitments.test.ts:270` calls
+  `helpersOn` directly and is unaffected.
+- **Changes:** at rules 178 in a rich world, in the non-council branch, the candidate counts distinct hands they know of: their own active help on
+  the site, people they remember as having promised them help there (the rules-172 reading), and people they currently see building or hauling
+  within 4 tiles of the site. That count replaces `helpersOn` in the refusal only.
+- **Can change decisions:** a candidate who knows of none no longer refuses an ask the true count would have refused, so a site can collect more
+  helpers than `maxWorkers + 1`; a candidate at the site who sees a full crew still refuses. No benefit is claimed.
+- **Must not change:** rules 177 and earlier, authored worlds and `setKnownHands(false)`; `helpersOn` itself and its other callers; the asker's
+  side (rules 172); the council branch; the active-commitment cap; acceptance, commitment and accounting after the refusal test.
+- **Tests:** `tests/known_hands.test.ts`; fails on behaviour at 177 (a candidate who knows of no one is still refused on the true count) and passes at 178.
+  Previous-version pin: `tests/v177_continuation.*` (`fcfedf91`); the rules-178 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 177
+  and 178 from a clean worktree pinned to the commit, two processes at a time). If any seed parts, the lab (control plus `nudge:1` and `nudge:2`,
+  `scripts/lab_versions.ts`, rules 177 pinned) reports people, deaths and shared projects completed against the noise floor. Else a null and a bound.
+- **Result, 2026-11-09:** committed `79b35d6d` (rules), `df14f8cf` (pin of 178; pin of 177 is `fcfedf91`). Twin from a clean checkout of `df14f8cf`,
+  12 seeds, Normal, 25 days: identical final world at 177 and 178 in 12 of 12, conservation and tools hold in 24 of 24. A null and a bound, not a
+  benefit: no ordinary world holds enough helpers to reach the cap in 12,000 ticks (at most 2 against about 4), so the refusal is unreachable there.
+  Suite: the same 65 tests fail as at the previous commit, no new failure. Row G30 is CLOSED (rules 172 and 178).
+  Evidence: `review_evidence/known-hands-20261109/`, `docs/KNOWN_HANDS.md`.
 
