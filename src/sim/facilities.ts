@@ -6,6 +6,7 @@ import {preservationStartBlocker,preservationCanAdvance,preservationReady} from 
 import { recoveredOffcuts } from './offcuts';
 import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
 import { runsRulesVersion } from './rulesversion';
+import { hasKnownRation, knownHungryDependant } from './known_ration';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom, foodUnits } from './economy';
@@ -208,6 +209,7 @@ export function withdrawAllowance(world: World, b: Building, p: Person, item: It
 }
 
 function hasHungryDependent(world: World, p: Person): boolean {
+  if (hasKnownRation(world)) return knownHungryDependant(world, p); // rules 177: what the person knows of a housemate, not their live state
   return world.persons.some((q) => q.alive && q.hhId === p.hhId && q.id !== p.id && q.needs.hunger < 30 && (q.birthTick > world.tick - 12 * 2400 * 16 || q.health < 60));
 }
 
