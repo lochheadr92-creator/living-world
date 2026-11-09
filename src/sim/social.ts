@@ -42,6 +42,7 @@ import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { linkCause } from './causal_events';
+import { couldWitness, hasWitnessSight } from './witness_sight';
 import { hasKnownHands, knownHands } from './known_hands';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { noteWedding } from './occasions';
@@ -234,6 +235,7 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
   for (const w of world.persons) {
     if (!w.alive || w === actor || w === other || w.pose === 'sleep') continue;
     if (hyp(w.x - x, w.y - y) > 7.5) continue;
+    if (hasWitnessSight(world) && !couldWitness(world, w, actor, x, y, 7.5)) continue; // rules 183
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
       noteDeed(world, w, actor, 'generous', `${actor.name} helped ${other.name}`, true);

@@ -15,6 +15,7 @@ import { isRich, think } from './mood';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import { pickStory } from './traditions';
+import { couldWitness, hasWitnessSight } from './witness_sight';
 import type { DeathNotice, Person, Rumour, RumourKind, World } from './types';
 
 // Lab-only ablation of the single-counting repair, not a product mode.
@@ -69,6 +70,7 @@ export function noteDeedNear(world: World, about: Person, kind: RumourKind, text
     const dx = w.x - x;
     const dy = w.y - y;
     if (dx * dx + dy * dy > radius * radius) continue;
+    if (hasWitnessSight(world) && !couldWitness(world, w, about, x, y, radius)) continue; // rules 183
     noteDeed(world, w, about, kind, text);
   }
 }

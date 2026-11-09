@@ -18,6 +18,7 @@ import { adjustRel } from './relations';
 import { noteDeed } from './reputation';
 import type { Building, Person, World } from './types';
 import { hyp } from './util';
+import { couldWitness, hasWitnessSight } from './witness_sight';
 
 /** how far away a theft is still seen */
 const SEEN_FROM = 8;
@@ -34,6 +35,7 @@ export function onTheft(world: World, thief: Person, b: Building, units: number)
   for (const w of world.persons) {
     if (!w.alive || w === thief || w.pose === 'sleep') continue;
     if (hyp(w.x - b.x - b.w / 2, w.y - b.y - b.h / 2) > SEEN_FROM) continue;
+    if (hasWitnessSight(world) && !couldWitness(world, w, thief, b.x + b.w / 2, b.y + b.h / 2, SEEN_FROM)) continue; // rules 183
     seen++;
     noteDeed(world, w, thief, 'thief', story, true);
     const owner = owners.includes(w);

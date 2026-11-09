@@ -92,8 +92,8 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 |---|---|
 | CLOSED | 4 |
 | DEFERRED | 3 |
-| GATED | 22 |
-| OPEN-VERIFIED | 187 |
+| GATED | 23 |
+| OPEN-VERIFIED | 186 |
 | PARTLY-CLOSED | 9 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
@@ -118,7 +118,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G13 | Lifecycle | No infant sub-stage: a newborn decides, walks, forages and asks from its first tick | OPEN-VERIFIED | exists: src/sim/types.ts:44 Stage is child/youth/adult/elder; constants.ts:472 AGE_CHILD 12; people.ts:59-60 stageOfAge; lifecycle.ts:141-151 birth creates an age-0 person with ordinary needs; child_tasks.ts (rules 156) limits under-12 heavy gathering only; terms: infant, newborn, toddler, baby, swaddl, nursing, weaning: no infant sub-stage | - |
 | G14 | Lifecycle | 'injuries' death label is the unlabelled exhaustion residual | OPEN-VERIFIED | exists: src/sim/lifecycle.ts:221-224 deathCauseOf falls through thirst, hunger, warmth<=6 to 'injuries'; needs.ts:168 energy<=0 drains health with no cause of its own; named causes set at wildlife.ts:270 and illness.ts:95; terms: deathCause, exhaustion, injuries, deathCauseOf, killPerson: residual label unchanged at rules 176 | - |
 | G15 | Lifecycle | Observation self block exposes fever and injury only as thoughts, clothing as tools, pregnancy not at all | OPEN-VERIFIED | exists: src/agent/observe.ts:125-150 self type and :411-441 builder carry name, health, needs, tools, mood and thoughts text; terms: illness, injury, pregnan, feverish, clothing, fever: no field in src/agent; rules 165 left the self block unchanged (docs/FEVER_SIGN.md Not touched); fever and injury reach the agent only inside thoughts (observe.ts:436) | - |
-| G16 | Perception | Line of sight is a missing link: pathfinding's lineClear exists, perception and witnesses never use it | OPEN-VERIFIED | exists: src/sim/pathfinding.ts:62 lineClear used only at :239 (path smoothing); perception.ts:125-214 perceive uses senseRadius and sameSpace only; terms: lineClear, lineOfSight, line of sight, occlu, blocksSight, opaque: no perception or witness use; rules 163-176 do not touch sight geometry | - |
+| G16 | Perception | Line of sight is a missing link: pathfinding's lineClear exists, perception and witnesses never use it | GATED | exists: src/sim/pathfinding.ts:62 lineClear used only at :239 (path smoothing); perception.ts:125-214 perceive uses senseRadius and sameSpace only; terms: lineClear, lineOfSight, line of sight, occlu, blocksSight, opaque: no perception or witness use; rules 163-176 do not touch sight geometry [design check 2026-11-09, rules 182: pathfinding lineClear (pathfinding.ts:62) tests walkable terrain cost (tileCost 0 or above 1.16), not visibility, so using it for sight would make lakes and rough ground block the view; the world has no model of what is opaque (forest, hills, walls from outside). What blocks sight is a world-model decision with a large behaviour effect on every perception-driven option, so it is an owner decision (loops.md, Living World, 2026-11-09, G16); indoors-versus-outdoors sight already exists as sameSpace] | - |
 | G17 | Perception | Theft, gift/quarrel and news witnesses use a fixed awake-only radius, never the indoors rule or night-shrunk senseRadius other witnesses use | OPEN-VERIFIED | exists: src/sim/misdeeds.ts:23,36 SEEN_FROM 8; social.ts:231-234 witness 7.5; reputation.ts:65-73 noteDeedNear radius and not asleep; none uses sameSpace (habitation.ts:98) or senseRadius (perception.ts:35); only death witnessing has an indoors test (death_knowledge.ts:16,39); terms: sameSpace, senseRadius, indoors, withinHearing, pose sleep | - |
 | G18 | Perception | Talk is never overheard: told content reaches only its addressee | OPEN-VERIFIED | exists: src/sim/types.ts:1223-1238 Conversation holds only a and b; reputation.ts shareRumour passes to one listener; news.ts tellBelief and location_question.ts tellWhereabouts likewise; terms: overhear, eavesdrop, overheard, earshot, listeners, audience: no hits (bystander hits are rules 166/173 wording only) | - |
 | G19 | Perception | Building contents are snapshotted from outside at full sense radius; the indoors-only gate used for hearth state is not applied to them | PARTLY-CLOSED | exists: src/sim/knowledge.ts:52 snapshotEntity still takes the store at sight with no indoors test, hearth is gated at :185-187; rules 169 seen_stock.ts:25-38 glancedItems coarsens it to kinds plus a full flag, not counts; :53 ops snapshot unchanged; terms: glancedItems, indoors, snapshotEntity, sameSpace, seen stock; closed: exact counts; open: sight from outside at full radius [lead review: citation seen_stock.ts:38 (file has 37 lines); read the file] | rules 169 commit f347ca5f |
@@ -487,3 +487,24 @@ Each row taken gets a contract here before its code, and its row above is update
   final world must be identical at 181 and 182 in 12 of 12 seeds, and the alive, deaths, households, hunger and mood columns must match. If any seed parts, the lab runs and the
   change is not decision-neutral. A null is the expected and the desired result: this is a record, not a behaviour.
 
+
+### G17 (rules 183): a witness has to be able to see
+
+- **Verified absent at rules 182, 2026-11-09:** three places decide who saw an act with a fixed radius and "not asleep" only. `onTheft` (`misdeeds.ts:34-38`, `SEEN_FROM`
+  8 tiles from the store), `witness` for a gift, help or quarrel (`social.ts:233-235`, 7.5 tiles of the act) and `noteDeedNear` for a birth, a death, a partnership or a
+  taking-in (`reputation.ts:65-73`, 8 to 14 tiles). None asks `sameSpace` (`habitation.ts:98`) or `senseRadius` (`perception.ts:35`), which `perceive` itself uses
+  (`perception.ts:134,154`). So a person indoors "saw" a theft in the yard and a person in the dark "saw" a quarrel at the edge of the radius. Terms: `sameSpace`,
+  `senseRadius`, `indoors`, `pose === 'sleep'`, `noteDeedNear`, `SEEN_FROM`. Only death witnessing (`death_knowledge.ts:16,39`) has an indoors test.
+- **Changes:** at rules 183 in a rich world a person counts as a witness at these three places only if they are in the same space as the one who acted (both outdoors,
+  or both in the same building) and within the smaller of the old radius and their own `senseRadius` (which shrinks in the dark and in rain). Awake and alive are
+  unchanged. The old radius test stays and is applied first.
+- **Can change decisions:** fewer witnesses at night and through walls, so fewer thefts, helpings and quarrels are seen, fewer rumours start, and fewer relation notes
+  are made. A birth indoors is no longer news to the whole yard. No benefit is claimed; this can slow the spread of good news as well as bad.
+- **Must not change:** rules 182 and earlier, authored worlds and `setWitnessSight(false)`; the actors' own records, the thief's log, the household wronged (owners are
+  witnesses by the same test); death witnessing (rules 14); `perceive`; accounting.
+- **Tests:** `tests/witness_sight.test.ts`: a theft seen from the yard is seen from indoors at 182 and not at 183; a witness at 7 tiles in the dark is a witness at 182 and
+  not at 183; the same for a gift (`witness`) and a birth (`noteDeedNear`); a witness in the same building as the actor still sees; the switch and authored gate.
+  Fails on behaviour at 182, passes at 183. Previous-version pin: `tests/v182_continuation.*` (`adbc4e0a`); the rules-183 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 182 and 183 from a
+  clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`, `scripts/lab_versions.ts`, rules 182 pinned)
+  reports people, deaths, mean mood and the count of stories heard against the noise floor. Else a null and a bound.
