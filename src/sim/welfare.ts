@@ -14,6 +14,7 @@ import { Scorer, addBlocked, addOption, eta, pen, traitMods, whereIs } from './o
 import type { Ctx } from './optutil';
 import { knowsDeath } from './death_knowledge';
 import { hasKnownWorry } from './known_worry';
+import { hasKnownWelfare, knownDependent } from './known_welfare';
 import { personById } from './registry';
 import { onGift, surplusOf } from './social';
 import type { Concern, ItemKind, Items, Person, World } from './types';
@@ -45,8 +46,9 @@ function outOfDate(world: World, c: Concern, subject: Person | undefined, knower
   if (!subject) return true;
   const age = world.tick - c.seen;
   if (age >= CONCERN_LIFE) return true;
-  if (c.kind === 'bereaved') return age >= 2 * DAY || !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
-  return c.kind !== 'hurt' && c.kind !== 'missing' && age > SELF_FIX_WINDOW && !isDependent(world, subject);
+  const known = hasKnownWelfare(world); // rules 179: what the worrier knows of someone out of sight, not their live life event or health
+  if (c.kind === 'bereaved') return known ? false : age >= 2 * DAY || !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
+  return c.kind !== 'hurt' && c.kind !== 'missing' && age > SELF_FIX_WINDOW && !(known ? knownDependent(world, subject, c) : isDependent(world, subject));
 }
 
 /** Called now and then for each person: note anyone in view who looks to be in a bad way, and let go of worries that are out of date. */
@@ -151,7 +153,7 @@ export function welfareOptions(ctx: Ctx): void {
     if (ctx.seenPersons.some((s) => s.id === c.about)) continue;
     const rel = p.relations[c.about];
     const kin = !!rel?.kin || (!!living && living.hhId === p.hhId);
-    const dependent = !!living && isDependent(world, living);
+    const dependent = !!living && (hasKnownWelfare(world) ? knownDependent(world, living, c) : isDependent(world, living));
     const aff = rel?.affinity ?? 0;
     const cares = kin || aff >= 15 || (dependent && p.traits.generosity > 0.6);
     if (!cares) {
