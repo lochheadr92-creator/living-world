@@ -93,8 +93,8 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | CLOSED | 5 |
 | DEFERRED | 3 |
 | GATED | 23 |
-| OPEN-VERIFIED | 185 |
-| PARTLY-CLOSED | 9 |
+| OPEN-VERIFIED | 184 |
+| PARTLY-CLOSED | 10 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
 | total | 233 |
@@ -103,7 +103,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 
 | id | theme | claim | status | evidence | closed-by |
 |---|---|---|---|---|---|
-| G01 | History | Relation notes, grievances, rumours, thoughts, life events and the personal log store no id of the causing event or activity; causal ids exist only on request, promise, meal, decision-ledger and journey receipts | OPEN-VERIFIED | exists: src/sim/types.ts:160 Relation.history tick+text, :175 Grievance cause+detail, :575 Rumour from/origin/hops, :773 Thought why, :548 LifeEvent, :193 LogEntry; events.ts:37 events do carry an id; terms: causeId, causedBy, eventId, sourceEvent, becauseOf, provenance; none of those records holds an event id and no rules 163-176 doc adds one | - |
+| G01 | History | Relation notes, grievances, rumours, thoughts, life events and the personal log store no id of the causing event or activity; causal ids exist only on request, promise, meal, decision-ledger and journey receipts | PARTLY-CLOSED | exists: src/sim/types.ts:160 Relation.history tick+text, :175 Grievance cause+detail, :575 Rumour from/origin/hops, :773 Thought why, :548 LifeEvent, :193 LogEntry; events.ts:37 events do carry an id; terms: causeId, causedBy, eventId, sourceEvent, becauseOf, provenance; none of those records holds an event id and no rules 163-176 doc adds one [first slice at rules 182 on 2026-11-09: a grievance and the history notes written beside it keep the id of the event recorded for the same incident (causal_events.ts; broken promise, refusal that makes the feed, contest on a feed day, argument); twin with ids stripped identical in 12 of 12 seeds; still open: thoughts, life events, rumours and the personal log (G07, G08, G09, G36), theft, a reader; see docs/CAUSAL_EVENTS.md] | rules 182 commit adbc4e0a |
 | G02 | History | Per-person 'life' milestone lines share the 60-line FIFO with routine lines, are read by no decision, and die with the person except three lines and a kinless death row | OPEN-VERIFIED | exists: src/sim/events.ts:6,49-52 addLog drops oldest at 60; types.ts:737 Person.log; read only by inspect.ts:734 (last 14, display) and final_account.ts:11 (last 3 lines at death, kept for 40 deaths); lifecycle.ts:269 deceased row; terms: milestone, lifeLog, lifeLines, kind life, p.log; no decision reads kind life and no separate milestone store exists | - |
 | G03 | History | Household origin and dissolution are not recorded on the household: only a formation tick; the relocation split sits on the old household; rules 163 adds one estate-release line | OPEN-VERIFIED | exists: src/sim/types.ts:1105-1119 Household holds formed (tick), members, homeId, headId, relocations (:1106); households.ts:26 formed, :40-47 dissolveHousehold splices the household out of world.households and keeps nothing; rules 163 estate_release.ts adds one life feed event per dissolution, not a household record; terms: dissolvedAt, splitFrom, foundedBy, origin, formed; townships keep origin (relocation.ts:362), households do not | - |
 | G04 | History | Structures keep completion provenance but no dated per-structure record of owner changes, repairs, occupancy or rebuilds; events carry no entity id, so no place history can be shown | GATED | exists: src/sim/types.ts:876-877 Building.builtBy/built (completion only), set at buildings.ts:213,237, shown at inspect.ts:811; WorldEvent types.ts:1278-1286 has person ids plus x,y, no entity id; terms: placeHistory, buildingHistory, ownerHistory, occupancyHistory, repairLog, repairedBy: no hits; a repair record would touch act_build.ts:189-217 (held by another session) [lead review: fix touches act_build.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
@@ -490,6 +490,10 @@ Each row taken gets a contract here before its code, and its row above is update
 - **Metric and comparison (pre-stated):** the version twin on the 12 seeds (Normal, 25 days, arrivals on, control arm) with the new fields stripped before hashing: the
   final world must be identical at 181 and 182 in 12 of 12 seeds, and the alive, deaths, households, hunger and mood columns must match. If any seed parts, the lab runs and the
   change is not decision-neutral. A null is the expected and the desired result: this is a record, not a behaviour.
+- **Result, 2026-11-10:** committed `adbc4e0a` (rules), `7ae916f3` (pin of 182), `f26cadcb` (the `--strip-cause` option). Twin with the ids stripped, from a clean checkout of `f26cadcb`,
+  12 seeds, Normal, 25 days: identical final world at 181 and 182 in 12 of 12, conservation and tools hold in 24 of 24. Decision-neutral on this evidence; in ordinary birch the first linked grievance
+  appears at tick 76. The suite was not rerun for this step alone. Row G01 is PARTLY-CLOSED (thoughts, life events, rumours, the personal log, theft and a reader remain).
+  Evidence: `review_evidence/causal-events-20261109/`, `docs/CAUSAL_EVENTS.md`.
 
 
 ### G17 (rules 183): a witness has to be able to see
