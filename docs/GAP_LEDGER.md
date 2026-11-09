@@ -71,6 +71,8 @@ lab question first; (7) Tier 4 display-only items with replay hashes unchanged.
 | 14 | G133 | no per-transfer record with carrier, route or ownership | economy |
 | 15 | G163 | commons deposits are unattributed (storehouse and hall; granary shares exist) | economy |
 
+Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`). Next: row 2, G30.
+
 Rows 1 to 7 are ungated on current evidence. G32 (live buildings in layout planning) is also a verified leak, but its fix sits in
 held files and it is GATED.
 
@@ -84,10 +86,10 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 
 | status | rows |
 |---|---|
-| CLOSED | 2 |
+| CLOSED | 3 |
 | DEFERRED | 3 |
 | GATED | 21 |
-| OPEN-VERIFIED | 189 |
+| OPEN-VERIFIED | 188 |
 | PARTLY-CLOSED | 10 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
@@ -125,7 +127,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G26 | Knowledge | whereIs and same-household tests read another person's live household id | PARTLY-CLOSED | exists: src/sim/optutil.ts:331-372 whereIs/rememberedHome use a told room or the searcher's own household since rules 171 (known_home.ts:12); remains: live household reads at options_work.ts:132,167 (held by another session), facilities.ts:72,211, welfare.ts:93,153, options_social.ts:199,236,606,769, households.ts:91; terms: hhId, whereIs, sameHousehold, rememberedHome, hasKnownHome; closed: whereIs; open: same-household tests [lead review: citation known_home.ts:12 (file has 11 lines); read the file] | rules 171 commit 93aeb5e9 |
 | G27 | Knowledge | Depletion news gated to the teller's own recent failed gather; sight-only, relayed and stale emptiness and dry shores never travel | PARTLY-CLOSED | exists: src/sim/empty_news.ts:36-40 emptyFoodShareable (rules 176: fresh direct or relayed empty sight under EMPTY_NEWS_HORIZON 1100 needs no own failure), news.ts:51-56; 174 acceptsToldReport :43-46, 175 tellingSuppressed :71; closed: sight-only and relayed emptiness; open: emptiness older than 1100 ticks and dry shores (news.ts:48 skips water; isFoodKind :14 is berry/fruit/grain/fish only); 174 60fd4b4d, 175 c0198efb | rules 176 commit b3f74019 |
 | G28 | Knowledge | Checked accounts grade told source amounts only; told stores, sites, water, whereabouts, concerns and leads are never held to their teller | OPEN-VERIFIED | exists: src/sim/checked_accounts.ts:39-41 checkableAccount needs a told belief with hops 1 and amount>=2; knowledge.ts:196 calls checkAccount only for e.ent source; news.ts:96 noteDisagreement only logs; tally on Relation.accounts (types.ts:167); terms: checkAccount, noteDisagreement, checkableAccount, borneOut, accounts; rules 174-176 add empty correction, not teller grading | - |
-| G29 | Knowledge | Granary emergency ration's housemate branch reads live hunger instead of remembered signs | OPEN-VERIFIED | exists: src/sim/facilities.ts:200-201 emergency ration if p.needs.hunger<25 or hasHungryDependent (:210-212) reading live q.needs.hunger<30 of housemates; options_survival.ts:270-283 granaryRation sizes the plan from beliefs but the physical allowance stays live; rules 173 knownNeeds (remembered_need.ts:38) never reaches facilities.ts; terms: hasHungryDependent, withdrawAllowance, emergency, knownNeeds; sits beside rationing decision (a) | - |
+| G29 | Knowledge | Granary emergency ration's housemate branch reads live hunger instead of remembered signs | CLOSED | exists: src/sim/facilities.ts:200-201 emergency ration if p.needs.hunger<25 or hasHungryDependent (:210-212) reading live q.needs.hunger<30 of housemates; options_survival.ts:270-283 granaryRation sizes the plan from beliefs but the physical allowance stays live; rules 173 knownNeeds (remembered_need.ts:38) never reaches facilities.ts; terms: hasHungryDependent, withdrawAllowance, emergency, knownNeeds; sits beside rationing decision (a) [closed at rules 177 on 2026-11-09: hasHungryDependent reads knownNeeds via known_ration.ts; twin identical in 12 of 12 seeds; see docs/KNOWN_RATION.md] | rules 177 commit 9ad63f96 |
 | G30 | Knowledge | Recruit cap and 'enough hands' refusal read the global helpersOn instead of the asker's own heard promises | PARTLY-CLOSED | exists: src/sim/heard_helpers.ts:17-28 heardHelpers (asker's own help plus remembered promises) used by options_social.ts:569 recruit cap since rules 172; remains: social.ts:1569-1572 'enough hands already' refusal still tests helpersOn (social.ts:173-177, every living person's commitments); AGENTS.md rules 172 says accepting keeps the true count; terms: helpersOn, heardHelpers, enough hands, maxWorkers | rules 172 commit aa01408d |
 | G31 | Knowledge | Welfare worry upkeep and the visit offer read the out-of-sight subject's live state (adversarial review D1) | PARTLY-CLOSED | exists: known_worry.ts:12, welfare.ts:41-44,86-93,142-144 (rules 170 keeps a worry about a dead or missing subject until the death is known); terms: hasKnownWorry, knowsDeath, outOfDate, personById, hhId, isDependent, lifeEvent; live reads remain after 170-173: welfare.ts:48 lifeEvent, :49 and :154 isDependent(health), :93 and :153 hhId, optutil.ts:160 ctx.dependents; KNOWN_WORRY.md lists lifeEvent as untouched | rules 170 commit 1b59cebe |
 | G32 | Knowledge | Layout planning's storehouse, own-site, open-site-cap tests read world truth where building and site beliefs exist | GATED | exists: options_work.ts:726 world.buildings, :756 world.sites own-site, :762 openSitesNear (act_build.ts:310), :866/:874 world truth, shared_stone.ts:41 noStorehouseNear (reads the world); terms: noStorehouseNear, openSitesNear, world.sites, world.buildings, beliefsByKind, hasTownships; belief-based only at :748, :864 township huts, :871; rules 171-173 did not touch; fix sits in held files options_work.ts, act_build.ts, shared_stone.ts [lead review: fix touches options_work.ts, act_build.ts and shared_stone.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
@@ -333,5 +335,34 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 
 ## Contracts
 
-None written yet. Each row taken gets a contract here before its code, and its row above is updated when it lands.
+Each row taken gets a contract here before its code, and its row above is updated when it lands.
+
+### G29 (rules 177): the granary emergency ration for a housemate reads what the person knows
+
+- **Verified absent at rules 176, 2026-11-09:** `hasHungryDependent` (`src/sim/facilities.ts:210-212`) reads every housemate's live `needs.hunger`,
+  live `health` and birth tick. Terms tried: `hasHungryDependent`, `withdrawAllowance`, `emergency`, `knownNeeds`, `needs.hunger`; `knownNeeds`
+  (`remembered_need.ts:38`, rules 106 and 173) exists and is not called from `facilities.ts`. Adjacent to the 2a-S rationing decision but not
+  inside it: this changes what an existing ration reads, not how the commons is allocated (no new allocation rule, no free resource).
+- **Changes:** in a rich world at rules 177 or later, a person at a granary has a hungry dependant in the house only if they know it.
+  A housemate counts when they are a child by age (age is no secret) or are in sight and visibly hurt, and the person's knowledge of their
+  hunger (`knownNeeds`: the signs on a current sight, else the note from the last sight) is under 30. In practice that means a housemate in
+  sight and visibly starving. A remembered "hungry" note reads 41 and does not qualify; no note means unknown. The person's own hunger
+  (under 25) is first-hand and unchanged.
+- **Can blunt care:** a starving child at home, out of sight of the parent at the granary, no longer qualifies the parent for the
+  extra ration. That is the consequence of removing the omniscient read; rules 173 accepted the same trade. No benefit is claimed.
+- **Must not change:** rules 176 and earlier, authored worlds and `setKnownRation(false)` keep the live read; the amount (at most 3), the
+  access check, share arithmetic and the owed-back accounting in `noteWithdraw`; any other reader of `isDependent` or `knownNeeds`.
+- **Tests:** `tests/known_ration.test.ts`; fails on behaviour at 176 (a starving child out of sight qualifies the parent) and passes at 177.
+  Immutable pin of the previous version: `tests/v176_continuation.*` (`41f3f0bc`); the rules-177 pin follows.
+- **Metric and comparison (pre-stated):** one paired lab, 12 seeds (aspen, birch, cedar, fern, gen-1 to gen-6, meadow, river), Normal, fork 0,
+  25 days, arrivals on, control plus `nudge:1` and `nudge:2`, rules 176 pinned with `--rules 176` against rules 177, `scripts/lab_versions.ts`,
+  two foreground workers at most, from a clean worktree pinned to the commit. Reported metrics: people, deaths, hunger. Expected null
+  (granaries are rarely built); a granary count is reported beside it. If the lab cannot run: EVALUATION_INCOMPLETE.
+- **Amendment, made before any run:** the version-twin probe (`scripts/ab_probe.ts`, rules number masked in the hash) is run first, two at a
+  time, because the change acts only at a granary withdrawal and a twin that is identical bounds the effect more tightly than a noisy
+  lab. The lab (control plus nudges, noise floor) runs only if a seed parts. The granary count was dropped: not measured.
+- **Result, 2026-11-09:** committed `9ad63f96` (rules), `fcfedf91` (pin of 177; pin of 176 is `41f3f0bc`). Twin from a clean checkout of
+  `fcfedf91`, 12 seeds, Normal, 25 days: identical final world at 176 and 177 in 12 of 12, conservation and tools hold in 24 of 24.
+  A null and a bound, not a benefit. Suite: the same 65 tests fail as at the previous commit, no new failure. Row G29 is CLOSED.
+  Evidence: `review_evidence/granary-ration-20261109/`, `docs/KNOWN_RATION.md`.
 
