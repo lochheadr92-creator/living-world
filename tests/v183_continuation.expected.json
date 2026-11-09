@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "ee567e1fba1b00e095f614e29f53677ad47d45e8",
+    "rules": 183,
+    "content": "753588a4d8e19a501209ae811a2184b1d97ed7d2b9dce736f7d211a1b1fd1b36",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 2400 ticks including somebody awake who is inside the old witness radius of another person and cannot see them (indoors or in the dark, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "6ddc526c2f8dfc96a6f20aa8e1dd4d0b61a2d6582c0f64362cde5ea351fda064",
+  "continued": "06257bced0ac5b48de26c1726a1f0ddeed4a0921d9e0b7e5f5d465b41fd38924"
+}
