@@ -21,6 +21,7 @@ import type { Activity, Commitment, Items, ItemKind, Person, World } from './typ
 import { hyp } from './util';
 import {hasWatchLearning} from './helper_learning';
 import {retainWatchTick} from './care_handback';
+import {hasKnownAble,seesAbleAdultAtHome} from './known_able';
 
 /** how long a watch lasts, and how often the watcher looks at the child's needs */
 export const WATCH_TICKS = 300;
@@ -52,7 +53,9 @@ export function childrenNeedingWatch(world: World, p: Person): Person[] {
   if (!laidUp(world, p) || stageOf(world, p) === 'child') return [];
   const hh = householdById(world, p.hhId);
   const members = membersOf(world, hh);
-  const ableAdult = members.some((m) => m !== p && m.alive && stageOf(world, m) !== 'child' && stageOf(world, m) !== 'youth' && !laidUp(world, m) && m.health >= 50);
+  const ableAdult = hasKnownAble(world) // rules 180: an adult the laid-up person can see and who shows no sign of being hurt or feverish, not every housemate's live condition
+    ? seesAbleAdultAtHome(world, p, members)
+    : members.some((m) => m !== p && m.alive && stageOf(world, m) !== 'child' && stageOf(world, m) !== 'youth' && !laidUp(world, m) && m.health >= 50);
   if (ableAdult) return [];
   return members.filter((m) => m !== p && m.alive && stageOf(world, m) === 'child');
 }
