@@ -157,7 +157,7 @@ export interface Relation {
   avoidUntil: number;
   /** favours: >0 they owe me, <0 I owe them */
   debt: number;
-  history: { tick: number; text: string }[];
+  history: { tick: number; text: string; /** rules 182 (causal_events.ts): the event this note is about, when one was recorded */ eventId?: number }[];
   /** Latest personally sourced attendance experience; no ability or bad-faith inference. */
   meeting?: import('./meeting_knowledge').MeetingExperience;
   workHeard?: import('./continuity_knowledge').HeardUndertaking[];
@@ -180,6 +180,8 @@ export interface Grievance {
   weight: number;
   apologies: number;
   lastAmends: number;
+  /** rules 182 (causal_events.ts): the event that caused it, when the incident recorded one; the id can outlive the event in the feed */
+  eventId?: number;
 }
 
 export interface Failure {

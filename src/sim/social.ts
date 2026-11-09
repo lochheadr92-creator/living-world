@@ -41,6 +41,7 @@ import { hearDemand } from './local_demand';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
+import { linkCause } from './causal_events';
 import { hasKnownHands, knownHands } from './known_hands';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { noteWedding } from './occasions';
@@ -771,7 +772,8 @@ export function checkCommitments(world: World, p: Person): void {
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);
-      addEvent(world, 'conflict', `${p.name} did not keep a promise to ${A.name}.`, [p.id, A.id], A.x, A.y);
+      const brokenEvent = addEvent(world, 'conflict', `${p.name} did not keep a promise to ${A.name}.`, [p.id, A.id], A.x, A.y);
+      linkCause(world, A, p.id, brokenEvent, { notes: [`${p.name} did not keep a promise`], detail: `${p.name} did not do what they promised` }); // rules 182
     }
   }
   if (p.commitments.length > 10) p.commitments = p.commitments.filter((c) => c.status === 'active' || world.tick - c.made < 4000);
@@ -1457,7 +1459,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           if (sev > 0.45) openGrievance(world, A, B, 'refusal', `${B.name} would not help when I really needed it`, 20 + 30 * sev);
           // only a refusal that matters (someone really needs it) makes the feed
           if (sev > 0.45 && (req.kind === 'food' || req.kind === 'water' || req.kind === 'care')) {
-            addEvent(world, 'conflict', `${B.name} refused ${A.name}'s plea for ${req.kind === 'water' ? 'water' : 'food'}.`, [A.id, B.id], A.x, A.y);
+            const refusedEvent = addEvent(world, 'conflict', `${B.name} refused ${A.name}'s plea for ${req.kind === 'water' ? 'water' : 'food'}.`, [A.id, B.id], A.x, A.y);
+            linkCause(world, A, B.id, refusedEvent, { notes: [`${B.name} refused to help me`], detail: `${B.name} would not help when I really needed it` }); // rules 182
           }
           c.data.sour = true;
         } else if (resp.reason === 'own_need') {
@@ -1807,14 +1810,16 @@ export function contestLost(world: World, loser: Person, winnerId: number, src: 
   addLog(world, loser, 'social', `${w.name} got to the last ${src.item} before me.`);
   // worth a line in the feed now and then (not for every missed berry)
   const isFood = src.item === 'berries' || src.item === 'fruit' || src.item === 'fish' || src.item === 'grain';
+  let contestEvent: number | undefined;
   if (isFood && loser.needs.hunger < 55 && world.tick - (loser.cooldowns.contestEvt ?? -9999) > 1200 && world.tick - (world.stats.lastContestEvt ?? -9999) > 450) {
     loser.cooldowns.contestEvt = world.tick;
     world.stats.lastContestEvt = world.tick;
     const one = src.item === 'berries' ? 'berry' : src.item;
-    addEvent(world, 'conflict', `${w.name} reached the last ${one} a moment before ${loser.name}.`, [loser.id, w.id], loser.x, loser.y);
+    contestEvent = addEvent(world, 'conflict', `${w.name} reached the last ${one} a moment before ${loser.name}.`, [loser.id, w.id], loser.x, loser.y);
   }
   const p = clamp(0.08 + 0.4 * (1 - loser.traits.generosity) + (desperate ? 0.25 : 0) - 0.3 * Math.max(0, (rel?.affinity ?? 0)) / 100 - (sameHh ? 0.3 : 0), 0, 0.8);
   openGrievance(world, loser, w, desperate && isFood ? 'scarcity' : 'competition', `${w.name} got the last ${src.item} before me`, desperate ? 26 : 14);
+  if (contestEvent !== undefined) linkCause(world, loser, w.id, contestEvent, { notes: [`${w.name} got the last ${src.item} before me`], detail: `${w.name} got the last ${src.item} before me` }); // rules 182
   if (loser.cooldowns.argue > world.tick || loser.convId || w.convId) return;
   if (hashUnit(loser.id, w.id, world.tick >> 3) < p * quarrelDamper(world, loser, w)) startArgument(world, loser, w, `the last ${src.item}`, desperate && isFood ? 'scarcity' : 'competition');
 }
@@ -1839,7 +1844,9 @@ export function startArgument(world: World, a: Person, b: Person, why: string, c
   relOf(b, a.id).avoidUntil = world.tick + 600 + Math.floor(hashUnit(b.id, a.id, 4) * 500);
   openGrievance(world, a, b, cause, `we argued over ${why}`, 46);
   openGrievance(world, b, a, cause, `we argued over ${why}`, 40);
-  addEvent(world, 'conflict', `${a.name} and ${b.name} argued over ${why}.`, [a.id, b.id], a.x, a.y);
+  const argumentEvent = addEvent(world, 'conflict', `${a.name} and ${b.name} argued over ${why}.`, [a.id, b.id], a.x, a.y);
+  linkCause(world, a, b.id, argumentEvent, { notes: [`argued over ${why}`], detail: `we argued over ${why}` }); // rules 182
+  linkCause(world, b, a.id, argumentEvent, { notes: [`argued over ${why}`], detail: `we argued over ${why}` });
   addLog(world, a, 'social', `Argued with ${b.name} over ${why}.`);
   addLog(world, b, 'social', `Argued with ${a.name} over ${why}.`);
   addFx(world, 'anger', (a.x + b.x) / 2, (a.y + b.y) / 2, 0);

@@ -31,7 +31,7 @@ export function chronicleWorthy(kind: EventKind, text: string): boolean {
 }
 
 /** Meaningful happenings for the feed. */
-export function addEvent(world: World, kind: EventKind, text: string, ids: number[] = [], x = 0, y = 0): void {
+export function addEvent(world: World, kind: EventKind, text: string, ids: number[] = [], x = 0, y = 0): number {
   // An event records who was involved then, not a live group's future membership.
   // Older generations retain their recorded alias semantics for replay compatibility.
   const ev = { id: world.nextId++, tick: world.tick, kind, text, ids: runsRulesVersion(world, 29) ? [...ids] : ids, x, y };
@@ -43,6 +43,7 @@ export function addEvent(world: World, kind: EventKind, text: string, ids: numbe
     c.push(ev);
     if (c.length > CHRONICLE_MAX) c.splice(0, c.length - CHRONICLE_MAX);
   }
+  return ev.id;
 }
 
 /** A person's own memory of what happened to them. */
