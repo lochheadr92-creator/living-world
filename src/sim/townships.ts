@@ -11,7 +11,8 @@ import { stageOf } from './people';
 import { hyp } from './util';
 import { civicExperience, hasCivicBenefit } from './civic_benefit';
 
-export interface Township { origin?: { householdId:number; relocationId:number; fromTownship:number; shelterId:number; organiserId:number }; id: number; name: string; x: number; y: number; founded: number }
+/** `extent` (rules 185, township_extent.ts): the tiles covered by buildings finished for this township since the record began; inclusive bounds. */
+export interface Township { extent?: { x0: number; y0: number; x1: number; y1: number; finished: number; updated: number }; origin?: { householdId:number; relocationId:number; fromTownship:number; shelterId:number; organiserId:number }; id: number; name: string; x: number; y: number; founded: number }
 export interface Participation {
  supports?: number;
  decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number}[];

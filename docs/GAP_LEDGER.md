@@ -553,3 +553,23 @@ Each row taken gets a contract here before its code, and its row above is update
   moved by more than a single draw moves it; people 23.6 against 22.8 (floor ±5.5), deaths 8.4 against 9.2 (±5.2), mean hunger 46.2 against 48.7 (±6.2); seven rows systematic and inside their floors. No benefit
   or harm is claimed (thefts were not counted). The full suite found one real regression, a staged scene fixed in `e4d4f431`; a rerun at `45a0a8df` fails only the baseline plus the purity timeout. Row G19 is CLOSED.
   Evidence: `review_evidence/home-interior-20261109/`, `docs/HOME_INTERIOR.md`.
+
+### G150 first slice (rules 185): a township records how far its building has reached
+
+- **Verified absent at rules 184, 2026-11-10:** `Township` (`townships.ts:14`) holds `id`, `name`, `x`, `y`, `founded` and an optional relocation `origin`. Membership is the household's
+  `townshipId`. `townAt` (`settlement_economy.ts:11`) guesses a township from a hard-coded 20 tiles of its centre, and `hubWithin` (`settlements.ts`) is a radius query. Terms: `extent`,
+  `boundary`, `territory`, `bounds`, `radius`: no stored extent on any township record (`extent` had no hit in `src/sim` or `src/app`).
+- **Changes:** at rules 185 in a rich world, when `completeSite` (`buildings.ts`) finishes a new building or rebuilds a home in place, `noteBuilt` (`township_extent.ts`) grows
+  `Township.extent` (`x0`, `y0`, `x1`, `y1` inclusive tiles, `finished` count, `updated` tick) to cover the footprint. The township is the owning household's, or, for a public building,
+  the township of the shared project behind the site. The civic history shows one line. It allocates no id and draws no random number.
+- **Limits, by design:** a high-water record. Buildings a world started with, buildings finished before 185, and destroyed buildings are not reconciled; a fitted hearth is not a completion; a
+  public building with no project is not attributed (nearness is not membership). It is not a border and grants or refuses nothing (D5 keeps territory and exclusion out of scope). `townAt`
+  still uses its 20 tiles.
+- **Must not change:** rules 184 and earlier, authored worlds and `setTownshipExtent(false)`; any decision, option weight, id allocation, accounting; the dynamics hash (alive, deaths,
+  households, hunger, mood).
+- **Tests:** `tests/township_extent.test.ts` (8): no extent at 184; the footprint at 185; two buildings cover both and count two; an unprojected public building is not attributed; the civic
+  line at 185 and not at 184; save and load; the switch and the authored gate. Previous-version pin: `tests/v184_continuation.*` (`44e8af3b`); the rules-185 pin follows.
+- **Metric and comparison (pre-stated):** the version twin on the 12 seeds (Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 184 and 185 from a clean worktree pinned to the
+  commit) with the new key stripped before hashing (`--strip-extent`): the final world must be identical in 12 of 12 seeds. If any seed parts, the change is not decision-neutral and the lab
+  runs. A null is the expected and desired result: this is a record, not a behaviour.
+- **Order note:** this contract was written after the code and before the commit, in the same session. The code was not changed after it.

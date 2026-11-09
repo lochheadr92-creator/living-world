@@ -17,6 +17,7 @@ import { mandate } from './civic_decision';
 import type { World, Person, Items } from './types';
 import type { CivicProject } from './townships';
 import { townshipOf } from './townships';
+import { extentLine } from './township_extent';
 import {describeAccounts} from './checked_accounts';
 import { adoptionWaitLine } from './known_adoption';
 const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? deceasedById(w,id)?.name ?? `person #${id}`;
@@ -43,6 +44,7 @@ export function civicHistory(w: World, p: Person): { township: string; lines: st
  return { township: t.name, lines: [
   `${t.name}: ${households.length} households. Membership belongs to the household and does not change with walking.`,
   ...(t.origin?[`Founded by household #${t.origin.householdId} through relocation #${t.origin.relocationId}, from township #${t.origin.fromTownship}, after shelter #${t.origin.shelterId} was completed.`]:[]),
+  ...extentLine(t.name,t.extent),
   ...economicHistory(w,t.id),
   ...exchangeHistory(w,p),
   ...exchangeTownHistory(w,t.id),
