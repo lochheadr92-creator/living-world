@@ -71,7 +71,11 @@ lab question first; (7) Tier 4 display-only items with replay hashes unchanged.
 | 14 | G133 | no per-transfer record with carrier, route or ownership | economy |
 | 15 | G163 | commons deposits are unattributed (storehouse and hall; granary shares exist) | economy |
 
-Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`); row 2, G30, closed by rules 178 (`79b35d6d`). Next: row 3, G31.
+Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`); row 2, G30, closed by rules 178 (`79b35d6d`); row 3, G31, partly closed by rules 179
+(`eca3bb0a`); row 4, G94, rules 180 (`e80c291c`, evidence in progress); row 5, G154, rules 181 (`e05d939c`, evidence in progress); row 6, G167,
+GATED (design check: needs a way to learn an owner's consent, owner decision line in `loops.md`); row 7, G26's remainder, skipped (needs the
+who-lives-with-whom primitive the owner said not to invent); row 8, G01 first slice (a grievance remembers its event), rules 182 (`adbc4e0a`,
+evidence in progress). Next: row 9, G16.
 
 Rows 1 to 7 are ungated on current evidence. G32 (live buildings in layout planning) is also a verified leak, but its fix sits in
 held files and it is GATED.
@@ -88,8 +92,8 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 |---|---|
 | CLOSED | 4 |
 | DEFERRED | 3 |
-| GATED | 21 |
-| OPEN-VERIFIED | 188 |
+| GATED | 22 |
+| OPEN-VERIFIED | 187 |
 | PARTLY-CLOSED | 9 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
@@ -124,7 +128,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G23 | Knowledge | Whereabouts memory is one overwritten dated note per person; no sighting history, no "who did you see near X around T" | OPEN-VERIFIED | exists: src/sim/types.ts:691 Person.whereabouts is one note per person id; perception.ts:158 overwrites it each sight; location_question.ts:22-26 answers only from sight or a note under a day old; terms: sightings, sightingHistory, seenNear, whoSaw, seenAt: only animals keep dated sightings (knowledge.ts:132-134); map plans P5.2 gated on P5.0, not one of owner decisions a to e | - |
 | G24 | Knowledge | Told whereabouts keep teller and tick but no origin or hop count; relayed as the answerer's own sight; positions never volunteered | OPEN-VERIFIED | exists: src/sim/types.ts:691 note has from and tick only; location_question.ts:28-34 stores x,y,tick,from:B.id and :22-26 B relays its own note, even a told one, as its own; asked only (social.ts:1482), never volunteered; terms: origin, hops, tellWhereabouts, knownWhereabouts, volunteer: beliefs carry origin/hops, whereabouts do not | - |
 | G25 | Knowledge | Inspector and map show no list or marker of who the selected person last saw where | OPEN-VERIFIED | exists: src/sim/inspect.ts:108-117 RelationView and :579-597 carry name, label, affinity, trust, familiarity, recent, avoiding, no position or time; ui/person_social.ts:335 shows 'Seen N' for concerns only; terms: whereabouts, lastSeen, last saw, lastMet, marker: zero hits for whereabouts in src/ui, src/render, inspect.ts | - |
-| G26 | Knowledge | whereIs and same-household tests read another person's live household id | PARTLY-CLOSED | exists: src/sim/optutil.ts:331-372 whereIs/rememberedHome use a told room or the searcher's own household since rules 171 (known_home.ts:12); remains: live household reads at options_work.ts:132,167 (held by another session), facilities.ts:72,211, welfare.ts:93,153, options_social.ts:199,236,606,769, households.ts:91; terms: hhId, whereIs, sameHousehold, rememberedHome, hasKnownHome; closed: whereIs; open: same-household tests [lead review: citation known_home.ts:12 (file has 11 lines); read the file] | rules 171 commit 93aeb5e9 |
+| G26 | Knowledge | whereIs and same-household tests read another person's live household id | PARTLY-CLOSED | exists: src/sim/optutil.ts:331-372 whereIs/rememberedHome use a told room or the searcher's own household since rules 171 (known_home.ts:12); remains: live household reads at options_work.ts:132,167 (held by another session), facilities.ts:72,211, welfare.ts:93,153, options_social.ts:199,236,606,769, households.ts:91; terms: hhId, whereIs, sameHousehold, rememberedHome, hasKnownHome; closed: whereIs; open: same-household tests [lead review: citation known_home.ts:12 (file has 11 lines); read the file] [design check 2026-11-09: the remaining live household-id reads (facilities.ts:72,211, welfare.ts:93,153, options_social.ts:199,236,606,769, households.ts:91) need a who-lives-with-whom knowledge primitive; the owner line closed 2026-11-09 says not to invent it, so the remainder is skipped by the stream; options_work.ts:132,167 are also held] | rules 171 commit 93aeb5e9 |
 | G27 | Knowledge | Depletion news gated to the teller's own recent failed gather; sight-only, relayed and stale emptiness and dry shores never travel | PARTLY-CLOSED | exists: src/sim/empty_news.ts:36-40 emptyFoodShareable (rules 176: fresh direct or relayed empty sight under EMPTY_NEWS_HORIZON 1100 needs no own failure), news.ts:51-56; 174 acceptsToldReport :43-46, 175 tellingSuppressed :71; closed: sight-only and relayed emptiness; open: emptiness older than 1100 ticks and dry shores (news.ts:48 skips water; isFoodKind :14 is berry/fruit/grain/fish only); 174 60fd4b4d, 175 c0198efb | rules 176 commit b3f74019 |
 | G28 | Knowledge | Checked accounts grade told source amounts only; told stores, sites, water, whereabouts, concerns and leads are never held to their teller | OPEN-VERIFIED | exists: src/sim/checked_accounts.ts:39-41 checkableAccount needs a told belief with hops 1 and amount>=2; knowledge.ts:196 calls checkAccount only for e.ent source; news.ts:96 noteDisagreement only logs; tally on Relation.accounts (types.ts:167); terms: checkAccount, noteDisagreement, checkableAccount, borneOut, accounts; rules 174-176 add empty correction, not teller grading | - |
 | G29 | Knowledge | Granary emergency ration's housemate branch reads live hunger instead of remembered signs | CLOSED | exists: src/sim/facilities.ts:200-201 emergency ration if p.needs.hunger<25 or hasHungryDependent (:210-212) reading live q.needs.hunger<30 of housemates; options_survival.ts:270-283 granaryRation sizes the plan from beliefs but the physical allowance stays live; rules 173 knownNeeds (remembered_need.ts:38) never reaches facilities.ts; terms: hasHungryDependent, withdrawAllowance, emergency, knownNeeds; sits beside rationing decision (a) [closed at rules 177 on 2026-11-09: hasHungryDependent reads knownNeeds via known_ration.ts; twin identical in 12 of 12 seeds; see docs/KNOWN_RATION.md] | rules 177 commit 9ad63f96 |
@@ -265,7 +269,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G164 | Economy | Public buildings belong to nobody, not to a township | OPEN-VERIFIED | exists: src/sim/types.ts:855-863 Building has hhId (0 = public) and no township field; townships.ts:65 sets site.hhId=0 and :73-74 prunes ended CivicProject links (townshipId, buildingId) to the latest 24; terms: hhId, townshipId, CivicProject, buildingId, estate_release; a public building ties to a township only by a prunable project record; rules 163 shared parcels are owner 0, not township-owned | - |
 | G165 | Economy | Journeys and customer supplies never reach the feed or chronicle | OPEN-VERIFIED | exists: src/sim/customers.ts:107,139,164,165,189 and exchange_journeys.ts:35,46 write only addLog (personal log); a finished swap does reach the feed as the generic trade line (social.ts:1683) without journey or customer context, and events.ts:12-31 chronicleWorthy keeps trade only at the market; terms: addEvent, addLog, chronicleWorthy, customerSupplied, feed; narrowed | - |
 | G166 | Economy | Trade leads expire in two days and name a person, not a township | OPEN-VERIFIED | exists: src/sim/exchange_journeys.ts:13 TradeLead (personId, x, y, townshipId, goods), :63 skips leads older than DAY*2, :84 fails if that person is not at the remembered spot, :34 cap 12; terms: tradeLeads, DAY*2, personId, townshipId, tellTradeLead, cooldowns; a lead is a person's last position, not a township source; file unchanged since 9250a3f7 (rules 22) | - |
-| G167 | Economy | Workplace access decided by owners' private affinity | OPEN-VERIFIED | exists: src/sim/facilities.ts:67-74 accessLevel: line 72 loops all alive owners and tests affinityOf(p, q.id)>=12 and affinityOf(q, p.id)>=6, the owner's private regard read live; terms: accessLevel, mayUse, affinityOf, friend, mayDeposit; omniscience-type, same shape as the rules-164 leak; untouched by rules 164-176 (only first commit 7a7e0e48 in git log -S); communal hhId 0 skips it | - |
+| G167 | Economy | Workplace access decided by owners' private affinity | GATED | exists: src/sim/facilities.ts:67-74 accessLevel: line 72 loops all alive owners and tests affinityOf(p, q.id)>=12 and affinityOf(q, p.id)>=6, the owner's private regard read live; terms: accessLevel, mayUse, affinityOf, friend, mayDeposit; omniscience-type, same shape as the rules-164 leak; untouched by rules 164-176 (only first commit 7a7e0e48 in git log -S); communal hhId 0 skips it [design check 2026-11-09, rules 181: accessLevel line 72 is the owner's consent (affinityOf(q, p.id) >= 6), enforced at start by startBlocker (facilities.ts:369, :409) and joinBlocker (:460), but the same functions also feed option generation, usableUnits (also read by perception snapshots, knowledge.ts:183,190) and mayDeposit; a person has no way to learn an owner's consent except by being refused. Making planning use only the person's own regard needs a consent-learning mechanic (an ask and an answer, or a remembered refusal), which is a new primitive, not a read substitution; GATED on the owner decision line in loops.md (Living World, 2026-11-09, G167)] | - |
 | G168 | Government | No standing township authority outside a live civic project | OPEN-VERIFIED | exists: src/sim/civic_decision.ts:9-12,104 Council and councilAllowsWork per CivicProject (a coordinator exists only while that project is active), political_alignment.ts faction view from past project choices; terms: mayor, chief, authority, leader, steward, council, mandate; no standing township office, nothing outside a live project; Township type (townships.ts:14) has no authority field | - |
 | G169 | Government | Enforcement is one site's work permission; no response to wrongs | OPEN-VERIFIED | exists: src/sim/townships.ts:56-59 mayWorkProject and civic_decision.ts:104 councilAllowsWork gate who may work one site; wrongs get only personal answers: misdeeds.ts:26-60 grievance, rumour, relation loss, grievance.ts, mediation.ts; terms: punish, sanction, banish, enforce, restitution, accuse; no township or collective response; narrowed; D5 allows only restitution and public account | - |
 | G170 | Government | Projects proposed by laying out a site, never by asking | GATED | exists: src/sim/act_build.ts:405-407 createSite then proposeProject; shared_projects.ts:10-14 plan_shared is the same plan_site activity with data.communal; townships.ts:61-76 proposeProject; asking (optRecruit, options_social.ts:552) only follows the layout; terms: proposeProject, plan_shared, plan_site, help_build, mayAskSupport; no ask-first step; fix would touch act_build.ts (held) [lead review: fix touches act_build.ts, which another session holds with uncommitted edits (loops: the item-6 leaks in another session's uncommitted files; the six modified tracked files line). Not edited. Re-check when that session commits.] | - |
@@ -440,4 +444,46 @@ Each row taken gets a contract here before its code, and its row above is update
 - **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 179 and
   180 from a clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`, rules 179 pinned).
   Else a null and a bound. Rules 168 saw no watch ask in 72,000 ticks on six seeds, so a null is expected.
+
+### G154 (rules 181): a crowd is the people one knows of, not the world's live count
+
+- **Verified absent at rules 180, 2026-11-09:** `facilityWants` (`src/sim/production.ts:1093-1095`) counts every living person in the world
+  (`for (const q of world.persons) if (q.alive) alive++`) and `crowd = alive >= 24` opens the hall want on its own (`:1096`, `+0.3` at `:1099`)
+  even when no yard stands. The count is the whole world's register, not what the person knows. Terms: `crowd`, `alive`, `world.persons`, `hall`,
+  `knowsEnough`, `relations`, `knowsDeath`. `git log -S` on those lines: untouched since rules 162; no knowledge rule from 163 on reaches it.
+  What exists to build on: `p.relations` holds an entry for each person the person has met or is kin to (founders all know each other at worldgen,
+  `worldgen.ts:886-906`; others from `social.ts`, `lifecycle.ts`), and `knowsDeath(p, id)` (`death_knowledge.ts:17`) says whether they know that one has died.
+- **Changes:** at rules 181 in a rich world the person feels a crowd when they know of at least 24 people, counting themselves and every person in
+  `p.relations` they do not know to have died. The threshold, the other conditions (`solidHomes >= 3`, `hs.shortage < 0.5`, a yard or a crowd) and the `+0.3`
+  are unchanged. The old count runs for rules 180 and earlier.
+- **Can change decisions:** a newcomer who has met few people, or a person in a world of 24 or more who has met fewer than 23 others, no longer counts
+  a crowd, so the hall want comes later or only through a yard; a person who has not learned a death still counts the dead. No benefit is claimed.
+- **Must not change:** rules 180 and earlier, authored worlds and `setKnownCrowd(false)`; `knowsEnough(ctx, 'hall')`; the other facility wants; project
+  limits, the hall's cost or siting; accounting.
+- **Tests:** `tests/known_crowd.test.ts` (staged: a person who knows 5 people in a world of 30 has no crowd at 181 and does at 180; a person who knows
+  23 others has one; a known death is not counted); fails on behaviour at 180, passes at 181. Previous-version pin: `tests/v180_continuation.*`
+  (`38e0db58`); the rules-181 pin follows.
+- **Metric and comparison (pre-stated):** the version-twin probe first (12 seeds, Normal, 25 days, arrivals on, control arm, `scripts/ab_probe.ts` at 180 and
+  181 from a clean worktree pinned to the commit, two processes at a time); if any seed parts, the lab (control plus `nudge:1`, `nudge:2`,
+  `scripts/lab_versions.ts`, rules 180 pinned) reports halls built (`firstHallDay`), people and deaths against the noise floor. Else a null and a bound.
+
+### G01 first slice (rules 182): a grievance remembers the event that caused it
+
+- **Verified absent at rules 181, 2026-11-09:** `Relation.history` is `{ tick, text }[]` (`types.ts:160`), `Grievance` holds `cause`, `detail`, `since`, `weight`
+  (`types.ts:173-183`), and `addEvent` (`events.ts:34`) allocates an event id (`world.nextId++`) and returns nothing, so no caller can keep it. The five
+  `openGrievance` callers (`social.ts:771,1457,1817,1840-1841`, `misdeeds.ts:42`) and the `adjustRel` notes beside them record a sentence, not the event. Terms: `causeId`,
+  `causedBy`, `eventId`, `sourceEvent`, `becauseOf`: none exist on those stores. Scope of this slice only: grievances and the history notes written beside them;
+  thoughts, life events, rumours and the personal log are later slices (G07, G08, G09, G36).
+- **Changes:** at rules 182 in a rich world `addEvent` returns the new event's id (all versions; the value is unused below 182). Where the incident also records
+  an event (a broken promise, a refusal that makes the feed, a contest lost on a feed day, an argument), that id is stored as `Grievance.eventId` and as
+  `eventId` on the `Relation.history` note written for it. Events are rolled out of the feed after a while, so an id can outlive its event; the chronicle keeps the worthy ones.
+  A theft has no event at that point and is not linked. Nothing reads the id yet, so no decision changes.
+- **Must not change:** rules 181 and earlier, authored worlds and `setCausalEvents(false)`; any decision, option weight, hash of the dynamics (alive, deaths,
+  households, hunger, mood), the order in which event ids are allocated (the events are only recorded a few lines earlier, with nothing else allocating ids between), accounting.
+- **Tests:** `tests/causal_events.test.ts`: an argument at 182 gives both grievances and both history notes the id of the 'argued over' event; the same at 181 gives none;
+  a refusal that makes the feed links; one that does not make the feed (below the severity line) does not; the id survives save and load; the switch off restores none.
+  Fails on behaviour at 181, passes at 182. Previous-version pin: `tests/v181_continuation.*` (`1a00afc3`); the rules-182 pin follows.
+- **Metric and comparison (pre-stated):** the version twin on the 12 seeds (Normal, 25 days, arrivals on, control arm) with the new fields stripped before hashing: the
+  final world must be identical at 181 and 182 in 12 of 12 seeds, and the alive, deaths, households, hunger and mood columns must match. If any seed parts, the lab runs and the
+  change is not decision-neutral. A null is the expected and the desired result: this is a record, not a behaviour.
 
