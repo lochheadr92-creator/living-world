@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "2914bf59ba5b29502deca41383a1ab8d9e0fb422",
+    "rules": 185,
+    "content": "c85d8256da44656daae7f6b63a66ce580054da8f006514178a40b51dbc425ad8",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river world (arrivals on), 2400 ticks including a township that holds a record of how far its building has reached (first at tick 924, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "5841c70d0521a889f6b44f86826bc65f51a1d32248fb3d3c0516da5ffcf28670",
+  "continued": "5dc1cc81d39db7395407c7ff55027f7ff8025a997c58f0e0d0cafeabc1ec0cb6"
+}
