@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "e137f697e782c1f68fecab254acb4f240ad8b131",
+    "rules": 184,
+    "content": "6d00e7ab940192cd7ddbaa5f046eee0c4f0c5c04a2b5259901a7f98fdff0b429",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 14000 ticks including somebody outdoors in sight of a stocked hut or house and not at its door (first at tick 12,176, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "c7cb4974ced128af92f2bc09895a074f24d03f835e7697851bcc35285ab22bb8",
+  "continued": "8d124844c91e90d657e9a02a4fe836d0631144c7ec4315f175a8fb02189f3954"
+}
