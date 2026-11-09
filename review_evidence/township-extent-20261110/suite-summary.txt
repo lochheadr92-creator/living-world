@@ -1,0 +1,6 @@
+Full suite, 2026-11-10 08:10, clean worktree living-world-v183-pin at f7507b76 (rules 185), `npx vitest run`, default worker pool.
+Test Files 15 failed | 546 passed (561). Tests 71 failed | 3095 passed | 3 skipped (3169). Duration 487.20s.
+Failing files: carcass_supply 1, household_continuity_view 8, household_home 20, household_preparation 10, preservation 10, project_helpers 7, project_inputs 1, stored_materials 5, transport 1, zz_review_e_famine_trace 2 (the 65 baseline names, all present, none missing);
+plus under load: lab_defaults 3, lab_report 1 (spawnSync ETIMEDOUT), zz_review_g_observer_purity 1, zz_review_main_toolreport_saves 1 (120 s timeout), zz_review_h_retention (hook timed out in 10 s).
+Rerun alone, same commit: those five files, Test Files 5 passed (5), Tests 12 passed (12), 175.94s.
+Raw logs were written to C:\dev\_claude_scratch\suite185 and are not committed.

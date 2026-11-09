@@ -1,0 +1,3 @@
+started 2026-11-10T08:02:01 head c5c41313 days 25 before 184 after 185 extra '--strip-extent' stream gap dirty=false
+runs done 2026-11-10T08:09:12
+finished 2026-11-10T08:09:12 compare exit 1

@@ -75,7 +75,7 @@ Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`); row 2, G30, closed b
 row 4, G94, partly closed by rules 180 (`e80c291c`); row 5, G154, closed by rules 181 (`e05d939c`, a null in 25-day worlds); row 6, G167, GATED (needs a way to learn an owner's consent; owner
 decision line in `loops.md`); row 7, G26's remainder, skipped (needs the who-lives-with-whom primitive the owner said not to invent); row 8, G01 first slice, rules 182 (`adbc4e0a`,
 decision-neutral); row 9, G16, GATED (what blocks sight is an owner decision); row 10, G17, closed by rules 183 (`ee567e1f`); row 11, G18, GATED (overhearing is a new channel; owner decision
-line); row 12, G19, closed by rules 184 (`e137f697`). Next: row 13, G150, then G133 and G163 (design checks recorded), then the rows after the queue.
+line); row 12, G19, closed by rules 184 (`e137f697`). row 13, G150 first slice, partly closed by rules 185 (`5405624c`, a record, decision-neutral). Next: G133 and G163 (design checks recorded), then the rows after the queue.
 
 Rows 1 to 7 are ungated on current evidence. G32 (live buildings in layout planning) is also a verified leak, but its fix sits in
 held files and it is GATED.
@@ -93,8 +93,8 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | CLOSED | 7 |
 | DEFERRED | 3 |
 | GATED | 24 |
-| OPEN-VERIFIED | 181 |
-| PARTLY-CLOSED | 10 |
+| OPEN-VERIFIED | 180 |
+| PARTLY-CLOSED | 11 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
 | total | 233 |
@@ -252,7 +252,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G147 | Planning | No goal composition or non-production goal families | OPEN-VERIFIED | exists: src/sim/types.ts:501-511 GoalKind (5 hopes, one p.goal at a time, only nudge scores via life.ts:145), src/sim/project_graph.ts:10 ProjectGoal (one item, quantity, tier), types.ts:355 plan kinds; terms: goal composition, GoalKind, ProjectGoal, subgoal, goal family. No composed or non-production planned goals | - |
 | G148 | Planning | A dropped plan's reason never conditions its re-adoption | OPEN-VERIFIED | exists: src/sim/intent.ts:788-945 (a drop writes i.reason as log text only), :979 (only the night plan has a re-adopt gate), src/sim/knowledge.ts:231 recentFailure (target level, 600-900 ticks), src/sim/batch_plan.ts:275-285 (retry recompiles, reason only in history); terms: dropped, retry, droppedReason, cooldown, recentFailure. Plan drop reason is never read on adoption | - |
 | G149 | Planning | No contingency or conditional step at plan adoption | OPEN-VERIFIED | exists: src/sim/project_graph.ts:18,23 (methods present/supply/recipe/hand; alternatives recorded), src/sim/project_compile.ts:71 (fills alternatives), src/sim/batch_plan.ts:275-285 (retry recompiles, alternatives unread); terms: alternatives, contingen, fallback, conditional, plan b. No if-then step; recorded alternatives are never consulted | - |
-| G150 | Settlement | No township extent, boundary or territory record | OPEN-VERIFIED | exists: src/sim/townships.ts:14 Township (id, name, x, y, founded; membership by household), src/sim/settlements.ts:13,47 Hub centre points and hubWithin radius query, src/sim/settlement_economy.ts:11 townAt (hard-coded 20-tile nearest centre); terms: radius, extent, boundary, territory, bounds, hub. No stored extent or border; a territory or exclusion use sits near decision D5 | - |
+| G150 | Settlement | No township extent, boundary or territory record | PARTLY-CLOSED | exists: src/sim/townships.ts:14 Township (id, name, x, y, founded; membership by household), src/sim/settlements.ts:13,47 Hub centre points and hubWithin radius query, src/sim/settlement_economy.ts:11 townAt (hard-coded 20-tile nearest centre); terms: radius, extent, boundary, territory, bounds, hub. No stored extent or border; a territory or exclusion use sits near decision D5 [first slice at rules 185 on 2026-11-10: a township records the tiles covered by buildings finished for it (township_extent.ts); twin with the key stripped identical in 12 of 12 seeds; still open: earlier and destroyed buildings, plots and wells, any reader beyond the civic history, townAt's fixed 20 tiles] | rules 185 (`5405624c`) |
 | G151 | Settlement | Township identity is a founding stamp | OPEN-VERIFIED | exists: src/sim/townships.ts:14 (Township = id, name, x, y, founded, origin), :35-45 foundMembership stamps hh.townshipId once, relocation.ts:362 the only other creator; terms: township, founded, townshipId, addSettlement, extraSettlements, w.townships; nothing after creation changes a township's name or character, and founded is never read; no rules 163-176 file touches this | - |
 | G152 | Settlement | New settlements arise only from acute hunger | OPEN-VERIFIED | exists: src/sim/relocation.ts:79-83 (hardship is hunger<45 with under 2 food), :267-272 proposal needs a day of it plus fresh remembered distant water and food, :362 the only runtime addSettlement (worldgen.ts:312 only founds hubs); terms: relocationHardship, addSettlement, crowd, flood, wolf, extraSettlements; no other trigger; rules-163 12-seed lab retainedRelocationsSettled 0.0 | - |
 | G153 | Settlement | No per-township aggregate state or population history | OPEN-VERIFIED | exists: src/sim/settlement_economy.ts:16-29,41-48 (8-day production rows and 128 gross flows per township, observer only), history.ts:38-54 civicHistory counts live households, inspect.ts:931 summarizeWorld is world-wide and current only; terms: census, populationHistory, headcount, population, demograph, chart, trend; no stored per-township state and no population series | - |
@@ -573,3 +573,7 @@ Each row taken gets a contract here before its code, and its row above is update
   commit) with the new key stripped before hashing (`--strip-extent`): the final world must be identical in 12 of 12 seeds. If any seed parts, the change is not decision-neutral and the lab
   runs. A null is the expected and desired result: this is a record, not a behaviour.
 - **Order note:** this contract was written after the code and before the commit, in the same session. The code was not changed after it.
+- **Result, 2026-11-10:** committed `5405624c` (rules), `c5c41313` (the `--strip-extent` option), `f7507b76` (pin of 185). Twin with the key stripped, from a clean checkout of `c5c41313`, 12 seeds,
+  Normal, 25 days: identical final world at 184 and 185 in 12 of 12, conservation and tools hold in 24 of 24; birch without the strip differs. Decision-neutral on this evidence. The run script
+  dropped its JSON files through an unquoted path; the comparison was rebuilt from the logs (evidence README). Suite: clean checkout of `f7507b76`, default worker pool, 487 s: 561 files, 3,169 tests, 71 failed. The 65 baseline failures are all present by name and none is missing (`review_evidence/empty-food-landing-20261109/failing-tests-e019cb33.txt`). The other six tests and one file hook are timeouts under load (`lab_defaults` 3, `lab_report` 1, observer purity 1, tool-report saves 1, the `zz_review_h_retention` hook); those five files pass alone at the same commit, 12 of 12 tests in 176 s. No regression. Row G150 is PARTLY-CLOSED.
+  Evidence: `review_evidence/township-extent-20261110/`, `docs/TOWNSHIP_EXTENT.md`.
