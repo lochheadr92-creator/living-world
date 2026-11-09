@@ -1,5 +1,33 @@
 # Roadmap execution handoff — rules 161
 
+**Stop, 9 November 2026, before any commit or push.** The preserve-and-push task stopped at Stage 0 step 4. Two simulation workers were running, so Stages A–E were not started. Nothing was committed or pushed. `origin/main` is still `449a5f336930f035f6071df0946032db68f85f44`. Local `main` is still `e019cb33c0a94c8aadec96d17648255cac6c1d56`, 25 commits ahead, and `git merge-base --is-ancestor origin/main main` exited 0. This HANDOFF edit is uncommitted. It was not part of the dirty set found at the start.
+
+Workers at 06:46:59, both via `vite-node` `scripts/lab_seed.ts`, profile normal, fork 0, 25 days, branches `nudge:1,nudge:2`, dynamics rich, arrivals on, in `C:\dev\Claude Experiment\living-world-empty-food`:
+
+- PID 46496, seed meadow
+- PID 2588, seed river
+
+Dispatcher PID 20400, `empty-food-matrix.ps1 -FixedHead d2f95ee8b688a4024bfb9d565dad4a95fbaea419`. Watcher PID 45992. Do not kill them, do not resume a suspended thread, and do not start another lab. The named integrate files had not changed in the previous 15 minutes (391 status paths, 0 recent).
+
+Questions, unanswered:
+
+1. AGENTS.md "Expensive runs" says not to run a long lab in this session and to launch `scripts/lab.mjs` on all cores with `Start-Process -WindowStyle Hidden`. Stage C is governed by the empty-food prompt, which requires a foreground run of at most two `lab_seed` workers and forbids a scheduled task, a Hidden launch, and `lab.mjs`'s full pool. This prompt says a repo conflict stops the run unless it names the waiver. Stage D names a paired-lab waiver. Stage C does not. Which procedure wins?
+2. This prompt says not to touch any worktree except integrate. Its own invariant says measurements run only from a frozen separate worktree, and Stage C says to execute the empty-food prompt, which uses an isolated worktree. Which checkout is allowed to run the measurement?
+3. Rules 174, 175 and 176 already exist on branch `empty-food-corrections` at `d2f95ee8` in `C:\dev\Claude Experiment\living-world-empty-food`, with a 72-cell matrix in `C:\Users\RJLoc\AppData\Local\Temp\empty-food-20261109` whose last pair was meadow and river. Stage C says to execute that prompt again from integrate. One rules stream is allowed. Should Stage C adopt that branch after the matrix is validated, or reimplement on integrate `main`?
+4. Stage B acceptance requires a full suite with zero failures. AGENTS.md records that a clean checkout fails `zz_review_e_famine_trace` because gitignored `autonomy_evidence/**/final.json` is absent. The commit rule allows a failure only when the same command fails at the previous commit. Does that known absence satisfy Stage B, or is a zero-failure suite required first?
+
+Update, 06:56: both workers and dispatcher PID 20400 have exited. The dispatcher log ends `MATRIX complete=72 failed=0 of 72`. The paired comparison is recorded on `empty-food-corrections` and is a null population result. That does not answer the four questions above. Stage A is still not started. Repeat Stage 0 only after those questions have an owner answer. Do not treat this stop note as one of the original uncommitted paths unless it is still dirty.
+
+**D-1 (10 November 2026, answers Q1).** The foreground lab rule is withdrawn. The empty-food prompt's requirement of a foreground run, at most two `lab_seed` workers and no hidden launch no longer applies. The lab procedure in `AGENTS.md` governs: long labs may run hidden, on all cores, through `scripts/lab.mjs`. The ground rules in section 11 of the 9 November 2026 review packet (a chat deliverable, not stored in the repo: ask before running, two-worker cap, no scheduled tasks, no resuming suspended threads, no deleting worktrees) are withdrawn as coordination rules, because the owner is the sole operator, and labs and suites may be run as the agent sees fit. The 72-cell empty-food matrix was produced under the withdrawn procedure and remains valid as measured (see `docs/EMPTY_FOOD_CORRECTIONS.md`).
+
+**D-2 (10 November 2026, answers Q2).** Measurement from a frozen separate worktree is permitted, and "touch no worktree but integrate" no longer forbids measurement checkouts. Decision D2 (2026-11-02, one rules-changing stream at a time) is withdrawn. The 2026-11-02 entry stays, and the brain record `decisions/manual/claude-living-world/2026-11-10-parallel-streams-supersede-d2` supersedes it and states how parallel streams avoid colliding on `CURRENT_RULES_VERSION` (claimed ranges), immutable continuation pins (a per-stream "record the pin before the successor", with unlanded pins re-recorded after a lower range lands) and lab baselines (named by stream). This unblocks the throwaway-worktree-per-commit bisect of the nine failing test files (review packet H1). It does not authorise running it.
+
+**D-3 (10 November 2026, answers Q4).** The Stage B zero-failure full-suite requirement is withdrawn. The known `zz_review_e_famine_trace` gitignored-fixture failure and the nine assertion files failing at `e019cb33` no longer block Stage B on their own. A stage passes when (1) the full suite was run and its result is recorded (count, duration, workers); (2) every failure is listed and classified as known fixture, timeout under load, or regression; (3) no failure is new relative to the previous accepted baseline unless it has a first-bad commit and a named owner; (4) the fixture test is either skipped explicitly or a tiny fixture is committed, so "known" does not mean machine-specific. The owner's prompt marks this criterion "adopt unless the owner objects". The per-commit rule (a failing test is allowed only if it also fails at the previous commit) is unchanged and is not the Stage B rule.
+
+**D-4 (10 November 2026).** The section 11 ground rules of the 9 November 2026 review packet are withdrawn, per D-1. The owner is the only operator. Do not treat the packet's ground rules as constraints.
+
+**Q3 (10 November 2026).** The owner confirms that adopting `empty-food-corrections` stands, and Q3 is closed. Rules 174 to 176 were fast-forwarded into main at `a9e6b98d` (`e019cb33..10d3adf2`) under the 9 November gap-stream prompt, and rules 177 to 184 were built on them, so reimplementation on main is not pursued. The branch `empty-food-corrections` is kept.
+
 **Live checkpoint is `AGENTS.md`: rules 173, product save format 5 (9 November 2026).** This file still opens on the rules 161 paragraph below. That paragraph is historical.
 
 
