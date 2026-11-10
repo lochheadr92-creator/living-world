@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "bc9ab7f23a9c97ecc455732ea95e6879e7cd1fab",
+    "rules": 191,
+    "content": "8e2bd0087684e65559dc7c292143c03df1894e5b143be39e8949361afb5907bf",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 6100 ticks including a storehouse marked out through the ordinary option and worded for shared use (by tick 6,025, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "5d3c6b2a3e18f2322b8f1b08b0f258cde58f5224dc803de62a578f693c3da335",
+  "continued": "eb9ef946629a39855f36df7acde7ae000cb7e56c005042e3cb5f3715d73c69e6"
+}
