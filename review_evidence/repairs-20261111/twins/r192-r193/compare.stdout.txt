@@ -1,0 +1,16 @@
+A/B at rules 192 and 193, 12 seeds (C:/dev/_claude_scratch/twins-193/r192-r193)
+seed     identical   alive  deaths  households  coupled  hunger   mood   ill   (before -> after)
+aspen    NO          24->22 8->11   12->9       2->4     54.4->54.1 -12.1->-22.9 0
+birch    NO          12->10 16->20  6->4        3.5->2   56.1->58 -21.9->-30.2 0
+cedar    NO          21->14 16->22  9->7        2.5->1   32.4->53.6 -29.4->-13 1
+fern     NO          13->19 18->13  7           1->4     59->64.1 -12.3->-10 0
+gen-1    NO          22->14 8->16   10->8       3.5->2.5 31->26.4 -47.5->-68 2
+gen-2    NO          24     4->5    10          4.5->5   61.5->51.6 -11.6->-23.8 0
+gen-3    NO          23->20 5->9    8           4->3     61.3->57.7 -10.1->-19 0
+gen-4    NO          26->28 5->8    13          5.5->9   50.7->61.3 -15.2->-9.3 0
+gen-5    NO          39->33 3->5    14->12      10->6    30.7->47.3 -34.6->-15.5 2
+gen-6    NO          31->29 0       10          8        67.5     -3.9->-4.8 1->2
+meadow   NO          28->30 10->4   14          5.5->8   37.9->39.3 -31.2->-33.1 1->2
+river    NO          27->18 4->14   12->8       5->4     25.2->29.7 -32.5->-53.9 0
+identical in 0 of 12 seeds; conservation and the tool registry hold in 12 of 12 pairs
+DONE

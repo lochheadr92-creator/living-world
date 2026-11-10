@@ -115,6 +115,10 @@ makes the same exception for a plan's own delivery step that it already made for
 
 ### Food comes before a house, deliberately
 
+> **Revised at rules 193 (11 November 2026, owner instruction in chat):** the larder test on laying out a hut (three food per member to hand) is
+> removed; see `docs/HUT_BEFORE_LARDER.md`. The plan order described here (a food reserve before a shelter plan when the household can see it has
+> next to nothing) is unchanged. The text below is kept as the rules-7 record.
+
 `adoptProject` reaches household food preparation (version 2) before a shelter plan, and one person carries one project at
 a time. A household that can *see* it has next to nothing puts food by instead, and takes the shelter plan on once that is
 seen to. This precedence is deliberate, it leaves `provision.ts` untouched, and it is pinned by its own test. The practical
