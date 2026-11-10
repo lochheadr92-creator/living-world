@@ -877,6 +877,8 @@ export interface Building {
   /** who finished it and when (rich only; absent in an authored world and on anything built before this was recorded) */
   builtBy?: number[];
   built?: number;
+  /** rules 186 (shared_builders.ts): `builtBy` lists everyone who gave work or materials, not only the finisher */
+  builtAll?: true;
   /** set while a home upgrade is under way (the site id) */
   upgrading?: number;
 }

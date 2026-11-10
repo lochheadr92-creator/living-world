@@ -808,7 +808,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         rows.push(['Room heat',`+${b.hearth.heat.toFixed(1)} degrees for occupants only`]);
         rows.push(['Hearth fuel',`${b.hearth.fuel.toFixed(0)} ticks of paid fuel remaining`]);
       }
-      if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
+      if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push([b.builtAll ? 'Built by' : 'Finished by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
       if(b.type==='cellar'){
         rows.push(['Cool storage',b.condition>0?'food spoils at 15% of ordinary storage rate':'ruined; no cooling protection']);

@@ -6,6 +6,7 @@ import {losePreservationRack} from './preservation';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships, projectAt } from './townships';
 import { noteBuilt } from './township_extent';
+import { noteSharedBuilders } from './shared_builders';
 import { TOOLS, BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
 import { addItem, addCapped, isEmptyItems, cloneItems } from './economy';
@@ -256,6 +257,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
   noteBuilt(world, site, b);
   finishProject(world, site, b, 'materials supplied and construction completed');
   constructionAftermath(world, b);
+  noteSharedBuilders(world, site, b);
   return b;
 }
 

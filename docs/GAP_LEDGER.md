@@ -580,3 +580,23 @@ Each row taken gets a contract here before its code, and its row above is update
   Normal, 25 days: identical final world at 184 and 185 in 12 of 12, conservation and tools hold in 24 of 24; birch without the strip differs. Decision-neutral on this evidence. The run script
   dropped its JSON files through an unquoted path; the comparison was rebuilt from the logs (evidence README). Suite: clean checkout of `f7507b76`, default worker pool, 487 s: 561 files, 3,169 tests, 71 failed. The 65 baseline failures are all present by name and none is missing (`review_evidence/empty-food-landing-20261109/failing-tests-e019cb33.txt`). The other six tests and one file hook are timeouts under load (`lab_defaults` 3, `lab_report` 1, observer purity 1, tool-report saves 1, the `zz_review_h_retention` hook); those five files pass alone at the same commit, 12 of 12 tests in 176 s. No regression. Row G150 is PARTLY-CLOSED.
   Evidence: `review_evidence/township-extent-20261110/`, `docs/TOWNSHIP_EXTENT.md`.
+
+### Trace link 36 (rules 186): a shared building remembers everyone who built it
+
+Not a row of the gap map. Found by the end-to-end trace (`docs/END_TO_END_TRACE.md`, link 36; nearest row G04) and taken first in the trace's evidence order, which was
+approved in chat on 2026-11-10 ("go with recommended steps").
+
+- **Verified at rules 185, 2026-11-10:** `completeSite` fills `Building.builtBy` from `builderShares(site)` (`buildings.ts`), whose keys are household ids (`site.contrib`), and keeps
+  only ids that are people, so no share ever matches and the list is the finisher alone. Ordinary aspen: the storehouse card said "Built by: Mona" where the project record held
+  Mona 330 work, Dax 223, Petra 85. Readers of `builtBy`: `achievement.ts` (who is pleased at the finish), `history.ts:67`, `inspect.ts:811`.
+- **Changes:** at rules 186 in a rich world, a new building finished as a township's shared project gets `builtBy` = every participant with work or materials, in joining order,
+  then the finisher if absent, and `builtAll: true` (`src/sim/shared_builders.ts`). It is written after `constructionAftermath`. The inspector row reads "Built by" when
+  `builtAll` is set and "Finished by" otherwise, at every rules version (display only).
+- **Must not change:** rules 185 and earlier, authored worlds and `setSharedBuilders(false)`; who receives the achievement thought and in what order (the set was already the finisher
+  plus contributing participants); any decision, id allocation or accounting; buildings with no project (still the finisher only, because site work is credited to a household in
+  `act_build.ts`, a held file).
+- **Tests:** `tests/shared_builders.test.ts` (8). Previous-version pin: `tests/v185_continuation.*` (`f7507b76`); the rules-186 pin follows (ordinary cedar, whose storehouse is
+  finished by two people at tick 12,908).
+- **Metric and comparison (pre-stated):** the version twin on the 12 seeds (Normal, 25 days, arrivals on, control arm) at 185 and 186 with every `builtBy` list emptied and
+  `builtAll` dropped before hashing (`--strip-builders`): identical in 12 of 12, else the lab runs.
+- **Order note:** written after the code and before the commit.
