@@ -19,14 +19,16 @@ const profile=(args.includes('--profile')?args[args.indexOf('--profile')+1]:'nor
 const strip=args.includes('--strip-cause');
 // --strip-extent: leave out the township extent record of rules 185 (the `"extent":{...}` key) before hashing, for the same reason
 const stripExtent=args.includes('--strip-extent');
-const [seed='aspen',days='25',rules='0',out='ab.json']=args.filter((a,i)=>a!=='--profile'&&a!=='--strip-cause'&&a!=='--strip-extent'&&args[i-1]!=='--profile');
+// --strip-builders: empty every `builtBy` list and drop the rules-186 `builtAll` mark before hashing, for the same reason
+const stripBuilders=args.includes('--strip-builders');
+const [seed='aspen',days='25',rules='0',out='ab.json']=args.filter((a,i)=>a!=='--profile'&&a!=='--strip-cause'&&a!=='--strip-extent'&&a!=='--strip-builders'&&args[i-1]!=='--profile');
 const w=createWorld({...currentWorldSettings(profile,seed,{immigration:true}),rulesVersion:Number(rules)});
 const popByDay:number[]=[];
 while(w.tick<Number(days)*DAY){stepWorld(w);if(w.tick%DAY===0)popByDay.push(w.persons.filter(p=>p.alive).length);}
 const alive=w.persons.filter(p=>p.alive);
 const res={
  seed,profile,days:Number(days),rules:Number(rules),
- finalHash:createHash('sha256').update((s=>stripExtent?s.replace(/,?"extent":\{[^{}]*\}/g,''):s)((s=>strip?s.replace(/,"eventId":\d+/g,''):s)(serializeWorld(w).replace(/"rulesVersion":\d+/g,'"rulesVersion":0')))).digest('hex').slice(0,16),
+ finalHash:createHash('sha256').update((s=>stripBuilders?s.replace(/"builtBy":\[[\d,]*\]/g,'"builtBy":[]').replace(/,"builtAll":true/g,''):s)((s=>stripExtent?s.replace(/,?"extent":\{[^{}]*\}/g,''):s)((s=>strip?s.replace(/,"eventId":\d+/g,''):s)(serializeWorld(w).replace(/"rulesVersion":\d+/g,'"rulesVersion":0'))))).digest('hex').slice(0,16),
  conserved:conservationReport(w).ok,tools:toolReport(w).ok,
  alive:alive.length,deaths:w.deceased.length,households:w.households.length,coupled:alive.filter(p=>p.partnerId!==0).length/2,
  meanHunger:Number((alive.reduce((a,p)=>a+p.needs.hunger,0)/Math.max(1,alive.length)).toFixed(1)),
