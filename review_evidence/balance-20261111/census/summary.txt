@@ -1,0 +1,362 @@
+12 seeds, rules 196, 25 days; per settlement means
+people 2.2 deaths; births 1.83 ; households 12.3 ; traditions 2.0 ; crews 6.0 ; exchangeReceipts 0.0 ; sheep 0.0 ; carts 0.0
+persons {'alive': 31.25, 'children': 9.33, 'elders': 1.67, 'withTrade': 21.92, 'apprentices': 0.33, 'partnered': 14.75, 'withGoal': 20.83, 'ill': 0.33, 'injured': 0.25, 'heardStories': 919.5, 'techniques': 11.33}
+civic {'active': 0.0, 'completed': 1.0, 'failed': 0.16666666666666666}
+buildings {'lean_to': 11.5, 'hut': 10.25, 'cellar': 2.92, 'well': 1.67, 'quarry': 1.25, 'fire': 1.0, 'timber_yard': 1.0, 'kiln': 1.0, 'storehouse': 1.0, 'food_rack': 0.75, 'mine': 0.25}
+occasions {'harvest:done': 3.5, 'feast:done': 2.58, 'funeral:done': 0.92, 'wedding:done': 0.33, 'funeral:called': 0.25}
+chronicle {'nature': 39.2, 'life': 36.6, 'build': 25.8, 'social': 23.7, 'conflict': 23.3, 'danger': 3.9, 'work': 0.8}
+events {'social': 234.8, 'build': 111.1, 'danger': 52.1, 'farm': 47.2, 'survival': 46.9, 'nature': 39.2, 'work': 37.0, 'life': 36.6, 'conflict': 23.3, 'trade': 0.1}
+conversations by purpose {'warn': 258.0, 'request': 254.8, 'learn_foraging': 122.5, 'chat': 108.3, 'family_time': 85.4, 'play_together': 73.2, 'cancel_request': 16.8, 'offer': 10.4, 'recruit': 10.4, 'share_work': 9.2, 'trade': 6.2, 'handover_work': 5.7, 'report': 4.8, 'ask_info': 3.8, 'learn_skill': 2.0, 'teach_technique': 1.2, 'delay_request': 1.0, 'apologize': 0.8, 'propose': 0.5, 'invite': 0.3, 'mediate': 0.3}
+activity ends (success/all) by kind:
+  gather             1052.2 /   3319.4
+  converse           1780.2 /   1957.5
+  rest                384.8 /   1084.6
+  drink               928.7 /   1081.2
+  eat                 933.2 /    947.8
+  sleep               801.0 /    944.0
+  socialize             0.0 /    923.8
+  deposit             362.1 /    521.2
+  warm                225.2 /    392.9
+  flee                125.8 /    353.0
+  build                33.9 /    271.2
+  haul                198.9 /    245.7
+  plan_site            40.8 /    227.4
+  eat_store           148.8 /    180.0
+  fuel_fire            94.1 /    162.3
+  explore              46.9 /    132.8
+  withdraw             98.0 /    127.8
+  harvest              80.9 /    120.8
+  wander               19.0 /    117.5
+  repair                4.5 /    106.8
+  tree_work            58.7 /    100.1
+  attend               62.8 /     97.5
+  operate              36.1 /     97.1
+  plant                77.2 /     91.6
+  till                 31.9 /     77.0
+  craft                41.0 /     69.8
+  give                 37.9 /     69.5
+  visit                18.6 /     57.4
+  tend                 40.8 /     45.3
+  animal_work           9.9 /     14.9
+  argue                13.3 /     13.3
+  fetch_water           5.0 /      9.8
+  tool_work             9.0 /      9.1
+  defend                2.1 /      7.1
+  alone                 0.8 /      5.7
+  relocate              2.6 /      4.1
+  hunt                  0.1 /      0.9
+  butcher               0.4 /      0.4
+  attend_meal           0.3 /      0.3
+  host_meal             0.3 /      0.3
+  claim_home            0.1 /      0.1
+  pay_respects          0.1 /      0.1
+
+OFFERED (option kind: label) per settlement over 25 days, sampled every 50 ticks:
+   15603.7 offered   2255.0 chosen  gather: Picking berries
+    9126.3 offered   3577.8 chosen  sleep: Sleep at my lean-to
+    8222.5 offered    536.8 chosen  drink: Go and drink at the water
+    7555.5 offered   1710.5 chosen  gather: Fishing
+    7263.8 offered   1115.8 chosen  gather: Gathering wild grain
+    7223.4 offered    153.7 chosen  wander: Potter about near home
+    7145.2 offered   1392.8 chosen  drink: Drink at the well
+    6308.8 offered   4606.8 chosen  sleep: Sleep at my hut
+    5357.0 offered   1940.7 chosen  rest: Shelter at the hut
+    4928.2 offered    829.6 chosen  gather: Picking fruit
+    4733.3 offered    454.8 chosen  deposit: Bring food home
+    4342.7 offered    668.9 chosen  socialize: Warn <name> about the wolf
+    4187.3 offered   1908.5 chosen  warm: Warm up at the fire
+    4039.3 offered    183.8 chosen  rest: Shelter at the lean-to
+    3636.8 offered    403.3 chosen  eat: Eat what I am carrying
+    3386.3 offered    623.9 chosen  socialize: Foraging practice with <name>
+    3070.8 offered   1733.7 chosen  rest: Stay at my hut until it is light
+    2787.8 offered    505.4 chosen  socialize: Ask <name> for food
+    2655.6 offered    188.2 chosen  fuel_fire: Add wood to the fire
+    2257.3 offered    613.2 chosen  sleep: Sleep at the fire
+    2156.8 offered   1233.6 chosen  rest: Stay at my lean-to until it is light
+    1972.0 offered    200.0 chosen  eat_store: Eat from the home store
+    1886.3 offered    285.2 chosen  socialize: Chat with <name>
+    1754.6 offered    283.1 chosen  explore: Explore somewhere new
+    1633.5 offered    329.0 chosen  socialize: A guessing game with <name>
+    1479.3 offered     36.7 chosen  tend: Tend the crops
+    1459.3 offered    247.8 chosen  gather: Chopping wood to fuel our cold home hearth
+    1395.8 offered    212.8 chosen  gather: Chopping wood to keep the fire going
+    1372.2 offered    450.0 chosen  rest: Sit down and rest
+    1182.2 offered    359.3 chosen  socialize: Family time with <name>
+    1169.5 offered     66.2 chosen  deposit: Bring N wood to the timber yard
+    1135.6 offered    466.9 chosen  build: Build the hut
+    1117.8 offered    122.9 chosen  socialize: Ask <name> for stone
+    1026.7 offered    108.7 chosen  tree_work: Take a living tree cutting
+    1005.6 offered    105.2 chosen  fuel_fire: Feed our hearth with wood
+     926.4 offered    262.9 chosen  repair: Repair the lean-to
+     924.2 offered    204.8 chosen  rest: Stay at the fire until it is light
+     906.6 offered    131.6 chosen  gather: Breaking stone for my household’s hut
+     803.6 offered    199.1 chosen  explore: Look for timber
+     790.8 offered     16.2 chosen  eat_store: Take food from the <name> household's store
+     776.1 offered     61.0 chosen  socialize: Ask <name> for wood
+     761.0 offered    117.1 chosen  gather: Chopping wood to repair the lean-to
+     711.6 offered    150.2 chosen  gather: Chopping wood for my household’s hut
+     655.7 offered    169.0 chosen  plan_site: Lay out a hut
+     652.7 offered     63.2 chosen  till: Finish preparing the field
+     650.0 offered     49.3 chosen  operate: Separating and twisting bast fibre
+     633.4 offered    247.6 chosen  attend: Go to the harvest feast at the fire
+     626.7 offered    156.3 chosen  haul: Deliver materials to the hut site
+     600.8 offered    136.8 chosen  till: Break ground for a new plot
+     527.8 offered    146.3 chosen  sleep: Sleep right here
+     527.8 offered     49.9 chosen  withdraw: Collect N stone from the quarry
+     499.7 offered     89.7 chosen  gather: Gather grain for sheep
+     495.5 offered     99.7 chosen  plant: Plant seed
+     443.4 offered    176.0 chosen  harvest: Harvest the crop
+     440.2 offered     25.0 chosen  wander: Potter about the camp
+     439.9 offered    179.8 chosen  attend: Go to the feast at the fire
+     436.7 offered      6.8 chosen  socialize: Tell <name> my promised work is complete
+     430.2 offered     95.5 chosen  operate: Cutting stone
+     411.4 offered     78.7 chosen  gather: Breaking stone for the shared well
+     402.2 offered     10.3 chosen  socialize: Tell <name> about my stock work
+     381.1 offered     11.4 chosen  socialize: Tell <name> about my tool work
+     369.8 offered     16.0 chosen  visit: Look in on <name>
+     366.4 offered      6.6 chosen  socialize: Ask <name> to help with the hut
+     361.0 offered     49.8 chosen  gather: Breaking stone for my household’s cellar
+     345.4 offered     29.3 chosen  plan_site: Fit a hearth in our home
+     341.6 offered     47.0 chosen  deposit: Store food in the cellar
+     306.7 offered     53.2 chosen  socialize: Tell <name> to stop my obsolete request
+     285.7 offered     35.8 chosen  deposit: Bring N wood to the kiln
+     267.5 offered      8.2 chosen  socialize: Offer <name> a swap: wood for berries
+     245.8 offered    114.5 chosen  tree_work: Plant a young tree near home
+
+LIFE options offered/chosen (socialize, attend, visit, wander, host, mediate):
+    7223.4 offered    153.7 chosen  wander: Potter about near home
+    4342.7 offered    668.9 chosen  socialize: Warn <name> about the wolf
+    3386.3 offered    623.9 chosen  socialize: Foraging practice with <name>
+    2787.8 offered    505.4 chosen  socialize: Ask <name> for food
+    1886.3 offered    285.2 chosen  socialize: Chat with <name>
+    1633.5 offered    329.0 chosen  socialize: A guessing game with <name>
+    1182.2 offered    359.3 chosen  socialize: Family time with <name>
+    1117.8 offered    122.9 chosen  socialize: Ask <name> for stone
+     776.1 offered     61.0 chosen  socialize: Ask <name> for wood
+     633.4 offered    247.6 chosen  attend: Go to the harvest feast at the fire
+     440.2 offered     25.0 chosen  wander: Potter about the camp
+     439.9 offered    179.8 chosen  attend: Go to the feast at the fire
+     436.7 offered      6.8 chosen  socialize: Tell <name> my promised work is complete
+     402.2 offered     10.3 chosen  socialize: Tell <name> about my stock work
+     381.1 offered     11.4 chosen  socialize: Tell <name> about my tool work
+     369.8 offered     16.0 chosen  visit: Look in on <name>
+     366.4 offered      6.6 chosen  socialize: Ask <name> to help with the hut
+     306.7 offered     53.2 chosen  socialize: Tell <name> to stop my obsolete request
+     267.5 offered      8.2 chosen  socialize: Offer <name> a swap: wood for berries
+     172.6 offered     17.8 chosen  socialize: Ask <name> to help with the storehouse
+     153.7 offered     17.7 chosen  alone: Take some time alone
+     143.0 offered      6.0 chosen  wander: Wander out to the trees
+     138.2 offered      3.2 chosen  socialize: Explain to <name> why my promised work ended
+     130.7 offered      6.1 chosen  wander: Stroll to the water's edge
+     130.2 offered     10.2 chosen  visit: Go and find <name>
+     119.1 offered     14.5 chosen  socialize: Offer grain to <name>
+     101.2 offered     16.8 chosen  socialize: Offer berries to <name>
+      97.2 offered     18.6 chosen  visit: Bring grain to <name>
+      94.7 offered      3.6 chosen  wander: Wander down to the square
+      86.7 offered      0.9 chosen  socialize: Ask <name> to help with the lean-to
+      82.8 offered     18.8 chosen  visit: Bring berries to <name>
+      79.8 offered      3.1 chosen  socialize: Offer <name> a swap: berries for stone
+      78.4 offered     14.5 chosen  visit: Bring fish to <name>
+      78.0 offered     11.8 chosen  socialize: Offer fish to <name>
+      67.8 offered     10.6 chosen  socialize: Offer fruit to <name>
+      67.1 offered      0.4 chosen  socialize: Offer <name> a swap: stone for berries
+      65.7 offered      2.8 chosen  socialize: Ask <name> to lend a saw
+      59.8 offered     16.8 chosen  socialize: Ask for work cover from <name>
+      53.1 offered      0.9 chosen  socialize: Ask <name> to help with the cellar
+      52.2 offered     10.6 chosen  visit: Bring fruit to <name>
+      52.1 offered      2.2 chosen  socialize: Offer <name> a swap: wood for fish
+      51.2 offered      1.1 chosen  socialize: Offer <name> a swap: wood for grain
+      48.4 offered      7.2 chosen  socialize: Ask <name> for water
+      47.9 offered      2.8 chosen  socialize: Ask <name> for forage coaching
+      46.6 offered     28.8 chosen  attend: Go to the wedding feast at the fire
+      39.2 offered      9.6 chosen  socialize: Ask <name> where to find food
+      38.9 offered      0.3 chosen  socialize: Tell <name> about my shelter work
+      38.0 offered      1.7 chosen  socialize: Make peace with <name>
+      37.8 offered      0.0 chosen  socialize: Offer <name> a swap: wood for stone
+      35.8 offered      1.9 chosen  socialize: Offer <name> a swap: berries for wood
+      33.2 offered      0.6 chosen  socialize: Offer <name> a swap: wood for fruit
+      30.9 offered      0.6 chosen  socialize: Ask <name> where <name> is
+      30.2 offered      6.7 chosen  socialize: Offer <name> charcoal firing instruction
+      29.3 offered      2.7 chosen  socialize: Ask <name> for build coaching
+      26.2 offered      0.2 chosen  socialize: Ask <name> to keep an eye on <name>
+      25.1 offered      0.8 chosen  socialize: Ask <name> for fish coaching
+      23.7 offered      0.5 chosen  socialize: Ask <name> for wood coaching
+      21.8 offered      1.4 chosen  socialize: Invite <name> to eat together at the fire
+      21.1 offered      1.8 chosen  socialize: Explain my delay to <name>
+      20.9 offered      0.0 chosen  socialize: Offer <name> a swap: stone for fish
+      19.4 offered      0.6 chosen  socialize: Offer <name> a swap: grain for stone
+      17.8 offered      0.4 chosen  socialize: Offer <name> a swap: fruit for stone
+      17.1 offered      0.7 chosen  socialize: Ask <name> to keep the fire going
+      16.4 offered      0.8 chosen  socialize: Talk <name> round about <name>
+      16.3 offered      0.0 chosen  socialize: Offer <name> a swap: stone for grain
+      15.2 offered      6.4 chosen  attend: Go to the funeral at the fire
+      14.8 offered      0.0 chosen  attend: Stay at the harvest feast at the fire
+      14.2 offered      0.6 chosen  socialize: Ask <name> for farm coaching
+      11.8 offered      0.2 chosen  socialize: Offer <name> a swap: stone for fruit
+      11.6 offered      1.1 chosen  visit: Take wood to <name>
+      11.3 offered      0.2 chosen  socialize: Ask <name> for stone coaching
+      10.2 offered      0.6 chosen  socialize: Offer <name> a swap: fish for stone
+       9.2 offered      0.2 chosen  socialize: Ask <name> to help with the kiln
+       9.0 offered      2.1 chosen  socialize: Ask <name> to move in together
+       8.7 offered      0.2 chosen  socialize: Ask <name> to help with the quarry
+       7.7 offered      0.0 chosen  socialize: Ask <name> to help with the food-rack
+       7.3 offered      0.5 chosen  visit: Bring water to <name>
+       7.0 offered      0.6 chosen  socialize: Ask <name> for craft coaching
+       6.7 offered      0.5 chosen  socialize: Ask <name> where to find water
+       5.7 offered      0.0 chosen  visit: Take stone to <name>
+       5.2 offered      0.4 chosen  socialize: Offer <name> a swap: grain for wood
+       4.5 offered      0.1 chosen  socialize: Offer <name> a swap: water for berries
+       4.4 offered      0.2 chosen  pay_respects: Visit <name>'s grave
+       4.2 offered      0.0 chosen  socialize: Tell <name> about my batch work
+       4.2 offered      0.2 chosen  socialize: Ask <name> to mend the roof
+       3.8 offered      0.1 chosen  socialize: Ask <name> to lend a hammer
+       3.6 offered      0.0 chosen  socialize: Offer <name> a swap: stone for wood
+       3.5 offered      0.5 chosen  socialize: Ask <name> where to find stone
+       3.5 offered      0.4 chosen  socialize: Report the work outcome to <name>
+       3.3 offered      0.0 chosen  socialize: Ask <name> to help with the timber-yard
+       3.2 offered      0.3 chosen  socialize: Ask <name> to help with the mine
+       3.1 offered      0.0 chosen  attend: Stay at the feast at the fire
+       2.6 offered      0.2 chosen  socialize: Bring <name> the wood they asked for
+       2.1 offered      0.5 chosen  socialize: Discuss taking work back with <name>
+       2.1 offered      1.6 chosen  visit: Keep an eye on <name> as promised
+       2.0 offered      1.1 chosen  socialize: Offer water to <name>
+       1.8 offered      0.0 chosen  socialize: Ask <name> to help with the smithy
+       1.8 offered      0.0 chosen  socialize: Ask <name> for carpentry coaching
+       1.7 offered      1.7 chosen  host_meal: Lay out the meal at the fire
+       1.7 offered      0.2 chosen  socialize: Offer <name> a swap: fruit for wood
+       1.6 offered      0.0 chosen  socialize: Offer <name> a swap: fish for wood
+       1.2 offered      1.2 chosen  attend_meal: Go to the shared meal at the fire
+       1.1 offered      0.1 chosen  socialize: Invite <name> to the meal
+       0.8 offered      0.0 chosen  socialize: Offer <name> a swap: water for fish
+       0.8 offered      0.0 chosen  socialize: Bring <name> the stone they asked for
+       0.7 offered      0.0 chosen  socialize: Bring <name> the stone they asked for, for seeds
+       0.5 offered      0.2 chosen  socialize: Ask <name> where to find wood
+       0.3 offered      0.0 chosen  socialize: Bring <name> the wood they asked for, for seeds
+       0.2 offered      0.0 chosen  attend: Stay at the wedding feast at the fire
+       0.1 offered      0.0 chosen  socialize: Bring <name> the stone they asked for, for fish
+       0.1 offered      0.0 chosen  socialize: Bring <name> the stone they asked for, for spear
+       0.1 offered      0.1 chosen  socialize: Ask <name> for planks
+
+BLOCKED (top 60):
+   40275.1  gather: Picking berries | believes it is empty
+   21632.8  eat_store: Eat from the stores | remembers it being empty
+   10778.3  gather: Gathering wild grain | believes it is empty
+    5372.4  build: Work on the building site | site is waiting for materials (N stone)
+    3507.4  gather: Picking fruit | believes it is empty
+    3346.6  warm: Warm up at the fire | thinks the fire has gone out
+    3066.8  rest: Stay in shelter until it is light | not at a shelter
+    2812.3  operate: Separating and twisting bast fibre | does not know of a timber yard they may use
+    2596.7  eat: Eat carried food | saving the food for dependents
+    2573.5  operate: Making a net | does not know of a timber yard they may use
+    2555.6  build: Work on the building site | site is waiting for materials (N planks)
+    2193.4  gather: Fishing | believes it is empty
+    1558.9  plan_site: Lay out a hut | too much already being built here at once
+    1441.3  build: Work on the building site | site is waiting for materials (N wood, N stone)
+    1374.4  build: Work on the building site | site is waiting for materials (N bricks)
+    1299.4  plan_site: Lay out a hut | the household has already laid out a hut
+    1263.0  operate: Weaving a wool garment | does not know of a timber yard they may use
+    1040.7  visit: Check on <name> | they are not close enough to go looking
+    1014.6  gather: Chopping wood to fuel our cold home hearth | too young to chop wood or break stone
+     924.8  gather: Get stone for the shared well | no room in my pack for one stone
+     922.7  plan_site: Lay out a hut | too hungry to start a building
+     907.7  gather: Get wood to fuel our cold home hearth | no room in my pack for one wood
+     898.0  gather: Get wood to keep the fire going | no room in my pack for one wood
+     841.1  operate: Weaving a wool blanket | does not know of a timber yard they may use
+     779.4  plant: Plant seed | remembers this field was prepared to rest before another crop
+     709.2  operate: Sawing planks | needs a saw and has none (and none is on the rack)
+     699.5  gather: Chopping wood to keep the fire going | too young to chop wood or break stone
+     669.9  gather: Get stone for my household’s hut | no room in my pack for one stone
+     652.0  gather: Picking berries | failed there N ticks ago (nothing left)
+     575.7  build: Work on the building site | site is waiting for materials (N wood)
+     570.0  gather: Get wood to repair the lean-to | no room in my pack for one wood
+     522.9  gather: Chopping wood to repair the lean-to | too young to chop wood or break stone
+     472.8  plan_site: Lay out a hut | too thirsty to start a building
+     438.2  operate: Weaving a wool bedding | does not know of a timber yard they may use
+     432.2  gather: Get stone for a friend’s hut | no room in my pack for one stone
+     416.9  gather: Get stone for the shared kiln | no room in my pack for one stone
+     394.9  build: Work on the building site | site is waiting for materials (N stone, N bricks)
+     383.2  gather: Get stone for my household’s cellar | no room in my pack for one stone
+     338.3  gather: Get stone to help keep a neighbour’s well standing | no room in my pack for one stone
+     333.0  build: Work on the building site | site is waiting for materials (N planks, N stone)
+     316.9  operate: Cutting stone | the outcrop is worked out
+     275.2  gather: Picking berries | not enough estimated time for the trip and return: energy for the return
+     273.4  plan_site: Lay out a lean-to | too hungry to start a building
+     252.2  rest: Stay in shelter until it is light | something more pressing comes first
+     225.8  fetch_water: Fetch water | no room in my pack for one water
+     225.2  build: Work on the building site | site is waiting for materials (unknown)
+     221.5  gather: Get wood for my household’s hut | no room in my pack for one wood
+     212.7  plan_site: Lay out a lean-to | the household has already laid out a lean-to
+     202.8  operate: Making a trap | does not know of a timber yard they may use
+     202.5  gather: Fishing | not enough estimated time for the trip and return: energy for the return
+     201.8  visit: Bring something to <name> | has nothing to spare for someone hungry
+     199.8  socialize: Ask someone for stone | no room in my pack for it
+     186.7  visit: Bring something to <name> | has nothing to spare for someone thirsty
+     184.8  deposit: Store food | remembers it being full
+     165.7  gather: Gathering wild grain | not enough estimated time for the trip and return: energy for the return
+     162.6  gather: Get stone for the shared hall | no room in my pack for one stone
+     158.0  plan_site: Lay out a lean-to | too much already being built here at once
+     154.3  gather: Get stone for the shared smithy | no room in my pack for one stone
+     146.9  gather: Picking berries | failed there N ticks ago (someone else is already taking it)
+     146.2  gather: Get wood to repair the hut | no room in my pack for one wood
+
+EVENT TEXTS (top 60):
+     23.4  survival: The fire has gone out.
+     19.8  farm: Crops are ripening in the <name> field.
+     14.8  danger: A wolf bit <name>.
+     11.5  nature: Clouds gather overhead.
+      6.9  nature: Rain begins to fall.
+      6.1  nature: The sky clears.
+      3.9  build: The paths most walked have hardened into roads: N tiles of road now run through the settle
+      3.5  social: The harvest feast at the fire begins.
+      3.5  social: The harvest feast at the fire is over: N came.
+      3.2  farm: A ripe crop was left too long and rotted.
+      2.7  social: A harvest feast is called at the fire today.
+      2.6  social: The feast at the fire begins.
+      2.6  social: The feast at the fire is over: N came.
+      2.5  nature: A lean season begins: wild food and crops come slowly.
+      2.3  nature: A storm rolls in.
+      2.0  nature: Winter sets in: the cold deepens and the land gives less.
+      2.0  nature: Winter loosens its grip.
+      1.9  nature: The lean season is over: the land is giving again.
+      1.4  nature: The storm brings the water up over the shore.
+      1.2  life: A traveller, <name>, arrives at the settlement.
+      1.2  nature: A lean-to collapsed from neglect.
+      1.2  social: Yusuf and <name> are on good terms again (it faded with time).
+      1.2  danger: Milo warned <name> about a wolf.
+      1.2  danger: Sven warned <name> about a wolf.
+      1.2  survival: Pavel relit the fire.
+      1.1  social: Ivy and <name> are on good terms again (it faded with time).
+      1.1  social: Nico and <name> are on good terms again (it faded with time).
+      1.0  social: Wen and <name> are on good terms again (it faded with time).
+      1.0  social: The midwinter fire has become a tradition here: to be held each year on this day.
+      1.0  social: The harvest feast has become a tradition here: to be held each year on this day.
+      1.0  social: A feast is called at the fire today.
+      1.0  social: Vera and <name> are on good terms again (it faded with time).
+      0.9  danger: Yusuf warned <name> about a wolf.
+      0.9  social: The funeral at the fire begins.
+      0.9  social: Milo promised <name> berries.
+      0.9  social: A feast for <name> and <name> is called at the fire today.
+      0.9  danger: Pavel warned <name> about a wolf.
+      0.9  social: Ivy promised <name> berries.
+      0.9  work: Yan finished cut stone at the quarry.
+      0.9  social: Ulric and <name> are on good terms again (it faded with time).
+      0.9  social: Yan and <name> are on good terms again (it faded with time).
+      0.9  social: Jax and <name> are on good terms again (it faded with time).
+      0.8  survival: Zia relit the fire.
+      0.8  danger: Isla warned <name> about a wolf.
+      0.8  build: The hut site was abandoned (nobody had worked on it for days).
+      0.8  social: A harvest feast is called at the fire tomorrow.
+      0.8  social: Isla promised <name> berries.
+      0.8  social: Sven and <name> are on good terms again (it faded with time).
+      0.8  social: Viktor and <name> are on good terms again (it faded with time).
+      0.8  social: Fenn and <name> are on good terms again (it faded with time).
+      0.8  danger: Viktor warned <name> about a wolf.
+      0.8  build: The cellar site was abandoned (nobody had worked on it for days).
+      0.8  social: Jess and <name> are on good terms again (it faded with time).
+      0.8  social: Milo and <name> are on good terms again (it faded with time).
+      0.8  social: Faye and <name> are on good terms again (it faded with time).
+      0.8  danger: Jax warned <name> about a wolf.
+      0.8  social: Eli and <name> are on good terms again (it faded with time).
+      0.8  social: Zeke and <name> are on good terms again (it faded with time).
+      0.8  social: Edda and <name> are on good terms again (it faded with time).
+      0.8  social: Mona and <name> are on good terms again (it faded with time).

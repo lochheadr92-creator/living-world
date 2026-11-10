@@ -15,6 +15,7 @@ the proposed 0.020/0.025 drains are a hypothesis. Records: `docs/ORDINARY_METABO
 - `pin195.log`, `pin196.log`: the `--write` runs of the immutable continuations from the clean worktree.
 - `suite-head-195.log` (gitignored as a log; the summary is in the record): the full suite from the clean checkout of `09880f79`.
 - `final196/`: the 195-196 twin and paired lab (195 pinned against 196), clean `d254d424`.
+- `census/`: the mechanism census of the same day (`census.ts`, twelve rows at rules 196, `approach_probe.ts` four rows, `census_sum.py`, `summary.txt`), the evidence of `docs/MECHANISM_CENSUS_20261111.md`.
 
 Not here: the three inhabited lives of the same day (Mona, Alma, Pavel in meadow at rules 193), which were stopped on the owner's word before day 5 and whose
 transcripts live only in the session's scratchpad.
