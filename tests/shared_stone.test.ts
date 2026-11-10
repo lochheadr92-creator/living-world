@@ -10,7 +10,7 @@ import {makeSource} from '../src/sim/sources';
 import {siteConflict} from '../src/sim/act_build';
 import {communalRoom} from '../src/sim/communal_stock';
 import {rememberedMaterialStores} from '../src/sim/material_stock';
-import {knownStoreHoldsStone,noStorehouseNear,setSharedStone} from '../src/sim/shared_stone';
+import {knownStoreHoldsStone,noFirstStorehouse,noStorehouseNear,setSharedStone} from '../src/sim/shared_stone';
 import {conservationReport,snapshotInitial} from '../src/sim/economy';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {stepWorld} from '../src/sim/world';
@@ -178,4 +178,26 @@ describe('an ordinary world',()=>{
   for(let i=0;i<300;i++){stepWorld(w);stepWorld(copy);}
   expect(serializeWorld(w)).toBe(serializeWorld(copy));expect(conservationReport(w).ok).toBe(true);
  },300_000);
+});
+
+describe('a world of several settlements',()=>{
+ // Large worlds: ordinary limits apply per settlement (radius 40). The first review of rules 162 found each of four settlements laying out its own first
+ // storehouse (1 against 4 in a Large river, 16 stone for stores that held none), so a lab switch keeps only the world's first.
+ const several=()=>{const s=stage('shared-stone-each');rules(s.w,162);s.w.settings={...s.w.settings,ruleSet:'scaled',population:100,settlementFounders:25};building(s,'storehouse',4,4,0,{});return s.w;};
+ it('lets every separate settlement lay out its own first storehouse, and only the world first without the each part',()=>{
+  const w=several();
+  expect(noFirstStorehouse(w,6,6)).toBe(false);expect(noFirstStorehouse(w,52,4)).toBe(true);
+  const off=parseIntervention('rich-first-storehouse-once').install!();
+  expect(noFirstStorehouse(w,6,6)).toBe(false);expect(noFirstStorehouse(w,52,4)).toBe(false);
+  off?.();expect(noFirstStorehouse(w,52,4)).toBe(true);
+ });
+ it('agrees with the settlement test in an ordinary single-radius world either way',()=>{
+  const s=stage('shared-stone-one');rules(s.w,162);building(s,'storehouse',4,4,0,{});
+  expect(noFirstStorehouse(s.w,52,4)).toBe(noStorehouseNear(s.w,52,4));
+  const off=parseIntervention('rich-first-storehouse-once').install!();expect(noFirstStorehouse(s.w,52,4)).toBe(noStorehouseNear(s.w,52,4));off?.();
+ });
+ it('is restored by the whole removal, which also leaves the each part on afterwards',()=>{
+  const w=several();const off=parseIntervention('rich-no-shared-stone').install!();off?.();
+  expect(noFirstStorehouse(w,52,4)).toBe(true);
+ });
 });

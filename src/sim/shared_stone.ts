@@ -6,6 +6,8 @@
 // looked only at one's own home and storehouses). Four parts, each removable in the lab:
 //   first    a settlement with a solid home and no storehouse lays out its first one: no food or temperament gate, a place of its own
 //            among the open sites, and a stronger pull (options_work.ts optPlanBuild, act_build.ts siteConflict);
+//   each     (a refinement of `first`) in a world of several separate settlements each one lays out its own first storehouse; without it
+//            only the world's first is laid out this way and the other settlements keep the older gates (Large worlds: 1 vs 3-4 storehouses);
 //   quarry   a quarry yard one may draw from (a public one, or one's own household's) is a place to collect stone for a site, a promise
 //            or a tool (material_stock.ts);
 //   restock  people with nothing of their own to do carry cut stone from such a yard to the public storehouse, which now aims at 16 stone
@@ -19,7 +21,7 @@ import {runsRulesVersion} from './rulesversion';
 import type {Ctx} from './optutil';
 import type {World} from './types';
 
-const on={first:true,quarry:true,restock:true,cue:true};
+const on={first:true,each:true,quarry:true,restock:true,cue:true};
 export type SharedStonePart=keyof typeof on;
 export const sharedStonePartOn=(part:SharedStonePart):boolean=>on[part];
 export function setSharedStone(enabled:boolean,part?:SharedStonePart):void{
@@ -42,6 +44,15 @@ export function noStorehouseNear(w:World,x:number,y:number):boolean{
  const radius=rulesOf(w).facilityRadius;
  const near=(bx:number,by:number)=>radius===Infinity||within(radius,x,y,bx,by);
  return !w.buildings.some(b=>b.type==='storehouse'&&near(b.x+b.w/2,b.y+b.h/2))&&!w.sites.some(s=>s.type==='storehouse'&&near(s.x+s.w/2,s.y+s.h/2));
+}
+
+/**
+ * The first storehouse's own test. With the `each` part, none stands or is being laid out within the settlement radius of (x, y), so every separate
+ * settlement of a Large world gets one (the same as `noStorehouseNear`); without it, none stands or is being laid out anywhere in the world.
+ * An ordinary Normal world has one settlement-wide radius, so the two agree there.
+ */
+export function noFirstStorehouse(w:World,x:number,y:number):boolean{
+ return on.each?noStorehouseNear(w,x,y):!w.buildings.some(b=>b.type==='storehouse')&&!w.sites.some(s=>s.type==='storehouse');
 }
 
 /** Does a storehouse this person knows of, seen within a day, hold at least `stone`? A belief, never a look at the real store. */

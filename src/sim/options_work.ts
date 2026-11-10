@@ -41,7 +41,7 @@ import {knownNeeds} from './remembered_need';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
-import { STORED_STONE_UTILITY, hasFirstStorehouse, hasStoredStoneCue, knownStoreHoldsStone, noStorehouseNear } from './shared_stone';
+import { STORED_STONE_UTILITY, hasFirstStorehouse, hasStoredStoneCue, knownStoreHoldsStone, noFirstStorehouse } from './shared_stone';
 import { seedStorageOption } from './seed_storage';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -721,7 +721,7 @@ function firstStorehouseWanted(ctx: Ctx): boolean {
   const { world, p } = ctx;
   if (!hasFirstStorehouse(world)) return false;
   const anchor = settlementAnchor(ctx);
-  if (!noStorehouseNear(world, anchor.x, anchor.y)) return false;
+  if (!noFirstStorehouse(world, anchor.x, anchor.y)) return false;
   const radius = rulesOf(world).facilityRadius;
   if (!world.buildings.some((b) => isSolidHome(b.type) && within(radius, anchor.x, anchor.y, b.x + b.w / 2, b.y + b.h / 2))) return false;
   return countBeliefsOfKind(p, 'tree') >= 3 && countBeliefsOfKind(p, 'rock') >= 1;
