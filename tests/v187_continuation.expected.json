@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "717420fd6b6f1f8d8a14a691ce74067567bee551",
+    "rules": 187,
+    "content": "56f72666303f6a9bc5d09dce5ebc599f757364a2af2f37b2547954003a0501b4",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 7400 ticks including an answer to a help-build ask kept with the term that decided it (first at tick 7135, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "08270e31aa86ccdc9a32676ecf850e23c6afcb73fcb83309664ab5f912b15532",
+  "continued": "0b0ab4c300a01b4ddbb974cf1a6122bbcb2c5ba3c4a4c85f9474e43bfe2a50f9"
+}
