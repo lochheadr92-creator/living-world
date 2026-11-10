@@ -33,7 +33,7 @@ export function projectHistory(w: World, q: CivicProject): string[] {
   `Proposed: ${q.reason}. Voluntary support: ${supported}.`,
   ...(q.council ? [`Coordinator: ${coordinator?name(w,coordinator):'none; insufficient or tied support'}. Construction requires two people and a clear lead in support.`,...q.council.candidates.map(c=>`${name(w,c.personId)} proposes to coordinate: ${c.reason}; ${q.participants.filter(m=>m.status==='supporting'&&m.supports===c.personId).length} supporting.`),...q.participants.flatMap(m=>(m.decisions??[]).map(d=>`${name(w,m.personId)} ${d.accepted?'supported':'refused'} ${name(w,d.candidateId)}: ${d.reason}${d.answerWhy?` (${d.answerWhy})`:''}.`))] : []),
   q.status === 'active' ? `Still needed: ${missing || 'materials supplied'}${site?.ent === 'site' ? `; ${Math.ceil(site.workTotal - site.work)} work` : '; site unavailable'}.` : `Outcome: ${q.outcome}.`,
-  ...q.participants.map(m => `${name(w,m.personId)}: ${m.status} — ${m.reason}${m.answerWhy?` (${m.answerWhy})`:''}; supplied ${items(m.materials)}; ${Math.floor(m.work)} work.`),
+  ...q.participants.map(m => `${name(w,m.personId)}: ${m.status} — ${m.reason}${m.answerWhy?` (${m.answerWhy})`:''}; supplied ${items(m.materials)}${m.salvaged?.length?` (${m.salvaged.join('; ')})`:''}; ${Math.floor(m.work)} work.`),
  ];
 }
 export function civicHistory(w: World, p: Person): { township: string; lines: string[] } {

@@ -44,6 +44,7 @@ import {
   transfer,
 } from './economy';
 import { addFx, addLog } from './events';
+import { noteSalvageDelivered, noteTaken, takenLine } from './taken_from';
 import { clearFailure, noteFailure, observe, delBelief, isWaterBeliefId } from './knowledge';
 import { mayDeposit, noteDeposit, noteWithdraw, withdrawAllowance } from './facilities';
 import { hasCivicFoodBenefit, recordCivicBenefit, recordCivicFoodBenefit } from './civic_benefit';
@@ -754,6 +755,7 @@ registerHandler('haul', {
       const m = transfer(world, p.inv, site.delivered, 9999, k as ItemKind, n, 'person:' + p.id, 'site:' + site.id, 'delivery');
       moved += m;
       if (m > 0) creditProject(world, p, site.id, k as ItemKind, m);
+      if (m > 0) noteSalvageDelivered(world, p, site.id, k as ItemKind, m);
       if (m > 0 && site.contrib) site.contrib[p.hhId] = (site.contrib[p.hhId] ?? 0) + m;
       if (m > 0) a.data.moved = { ...(a.data.moved ?? {}), [k]: ((a.data.moved ?? {})[k] ?? 0) + m };
     }
@@ -837,6 +839,7 @@ registerHandler('withdraw', {
     if (!c) return 'fail:the place is gone';
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
+    const took: Record<string, number> = {};
     const e = world.byId.get(a.targetId);
     {const blocked=pileAccessBlocker(p,e);if(blocked)return `fail:${blocked}`;}
     if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e, world, a.data.materialStock))) {
@@ -851,6 +854,7 @@ registerHandler('withdraw', {
       if(gear&&!record)continue;
       const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, gear?Math.min(n,1):n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw',record?.id);
       moved += m;
+      if (m > 0) took[k] = (took[k] ?? 0) + m;
       if (m > 0 && e && e.ent === 'building') {
         noteWithdraw(world, e, p, k as ItemKind, m);
         recordCivicBenefit(world, p, e, k as ItemKind, m);
@@ -863,10 +867,11 @@ registerHandler('withdraw', {
       return 'fail:there was nothing to take';
     }
     a.cycle = moved;
+    noteTaken(world, p, e, took, a.id);
     return 'done';
   },
   onEnd(world, p, a) {
-    if (a.cycle > 0) addLog(world, p, 'work', `Took ${a.cycle} item${a.cycle > 1 ? 's' : ''} from storage.`);
+    if (a.cycle > 0) addLog(world, p, 'work', takenLine(world, p, a.id) ?? `Took ${a.cycle} item${a.cycle > 1 ? 's' : ''} from storage.`);
   },
 });
 

@@ -622,3 +622,22 @@ Not a row of the gap map (nearest: G74, G09). Second in the trace's evidence ord
 - **Metric and comparison (pre-stated):** the version twin on the 12 seeds at 186 and 187 with `answerWhy` dropped before hashing (`--strip-answers`): identical in 12 of 12,
   else the lab runs.
 - **Order note:** written after the code and before the commit.
+
+### G133 first slice (rules 188): what was taken, from where, and where salvage for a shared building came from
+
+Third in the trace's evidence order (`docs/END_TO_END_TRACE.md`, links 17 and 32).
+
+- **Verified absent at rules 187, 2026-11-10:** the taking action (`act_resource.ts`, `withdraw`) logs "Took N item(s) from storage." and keeps only a count (`a.cycle`). `GoodsFlow`
+  (`settlement_economy.ts`) records transfers between townships only. A pile keeps `note` and `since` (`types.ts`, `Pile`), and nothing copies them when goods leave it. Ordinary
+  aspen: Mona's two stones for the storehouse came from piles left by abandoned hut sites, and her log said "Took 1 item from storage."
+- **Changes:** at rules 188 in a rich world (`src/sim/taken_from.ts`): the log line names the goods and the place ("Took 1 stone from a pile of abandoned building materials, there
+  since day 24."); the person keeps `lastTaken` (tick, activity, goods, place, whether from a pile); when goods of a kind taken from a pile within half a day are delivered to a
+  township's shared project, the participation record keeps a `salvaged` line (at most six), printed in the project history after what they supplied.
+- **Must not change:** rules 187 and earlier, authored worlds and `setTakenFrom(false)`; what is taken or delivered, any decision, id allocation or accounting.
+- **Limits:** not a transfer ledger. No route, no ownership, one remembered taking per person. A stone from a pile and a stone already in the pack are not told apart at
+  delivery. Deliveries to sites that are not shared projects keep nothing. The pile's note does not say which building the materials were for. The log line still rolls off.
+- **Tests:** `tests/taken_from.test.ts` (7): place words; a staged taking logs the old line at 187 and the new one at 188; the switch; a salvage line for the right kind, once,
+  shown in the project history; none for a building, an old taking or a 187 world. Previous-version pin: `tests/v187_continuation.*` (`af15790c`); the rules-188 pin follows.
+- **Metric and comparison (pre-stated):** the version twin on the 12 seeds at 187 and 188 with `lastTaken` and `salvaged` dropped and every text starting "Took " cut to that
+  word before hashing (`--strip-taken`): identical in 12 of 12, else the lab runs. The cut also hides "Took <name> into my household" lines, equally at both versions.
+- **Order note:** written after the code and before the commit.

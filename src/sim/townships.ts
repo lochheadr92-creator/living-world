@@ -18,6 +18,8 @@ export interface Participation {
  decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number;answerWhy?:string}[];
  /** rules 187 (answer_cause.ts): the term that decided this person's answer */
  answerWhy?: string;
+ /** rules 188 (taken_from.ts): where goods they delivered had been salvaged from, at most six lines */
+ salvaged?: string[];
  personId: number; requestId: number; since: number;
  status: 'supporting' | 'refused' | 'withdrawn'; reason: string;
  materials: Items; work: number;

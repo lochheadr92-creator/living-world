@@ -655,6 +655,8 @@ export interface Person {
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
   socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper'; task?: import('./helper_learning').HelperTask; completion?: import('./promise_knowledge').CompletionKnowledge; resolution?: import('./promise_outcomes').PromiseResolution; expectation?: import('./promise_expectations').PromiseExpectation; cancellation?: import('./request_cancellation').CancellationKnowledge; careHandback?: import('./care_handback').CareHandback }[];
+  /** rules 188 (taken_from.ts): the last goods this person took out of a store, a cart or a pile */
+  lastTaken?: { tick: number; activityId: number; what: string; kinds: string; place: string; pile: boolean };
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number; buildingId?: number; benefit?: {tick:number;item:ItemKind;amount:number} }[];
   ent: 'person';
   id: number;
