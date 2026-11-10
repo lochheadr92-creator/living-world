@@ -4,6 +4,8 @@
 //   npx vite-node scripts/inhabit.ts -- --mode live --seed meadow --person Mira --from-day 1 --days 1 --model claude-opus-5-5 --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode live --api openai --model gpt-5 --seed meadow --from-day 1 --days 1 --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode live --stub last --seed meadow --from-day 1 --days 0.5 --out inhabit_out     (no key: a scripted model)
+//   npx vite-node scripts/inhabit.ts -- --mode live --manual inhabit_out/bridge --model claude-sonnet-5-5 --memory --timeout-ms 3600000 --seed river --person Milo --from-day 1 --days 5 --out inhabit_out
+//                                       (a person at a keyboard answers each ask: node scripts/inhabit/live.mjs inhabit_out/bridge next|say)
 //   npx vite-node scripts/inhabit.ts -- --mode replay --transcript inhabit_out/transcript.json --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode standard --seed meadow --person Mira --from-day 1 --days 1 --out inhabit_out
 //
@@ -30,6 +32,7 @@ import { hashString } from '../src/sim/rng';
 import type { Settings, World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { anthropicModel } from './inhabit/anthropic';
+import { manualModel } from './inhabit/manual';
 import { sourcesFingerprint } from './inhabit/sources';
 import { openaiModel } from './inhabit/openai';
 
@@ -62,6 +65,8 @@ function pickPerson(w: World, name: string): number {
 }
 
 function modelFrom(): ModelClient {
+  const manual = opt('manual', '');
+  if (manual) return manualModel(manual, opt('model', 'manual'));
   const stub = opt('stub', '');
   if (stub === 'goal') return goalKeeperModel();
   if (stub === 'goal-blind') return goalKeeperModel({ readNotes: false });
