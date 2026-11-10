@@ -24,6 +24,7 @@ import {hasHomeReplacement,layoutHome} from './home_replacement';
 import {knownConstructionWork} from './construction_finish';
 import {waterSearchPurpose} from './water_search';
 import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
+import { LARDER_PER_MEMBER, larderHoldsHut } from './hut_before_larder';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
@@ -854,11 +855,11 @@ function optPlanBuild(ctx: Ctx): void {
     // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED except that, from rules
     // version 9, a household of one may build one too: the labour and the materials never needed a crew, only the rule
     // did. Each one still says when it is the one holding things up, instead of the whole question disappearing.
-    const secure = hs.foodStock >= 3 * members;
+    const secure = !larderHoldsHut(world, hs.foodStock, members); // rules 193: no larder test at all
     if (secure && knowTrees && knowRocks && (members >= 2 || runsRulesVersion(world, 9)) && world.tick > 1500) {
       tryPlan('hut', 11 + 4 * Math.min(members, 4) + 6 * (hs.shortage < 0.3 ? 1 : 0) + stoneCue('hut'), 'to build a proper hut');
     } else if (!secure) {
-      noteHousingBlock(ctx, 'hut', `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${3 * members} before starting a hut`);
+      noteHousingBlock(ctx, 'hut', `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${LARDER_PER_MEMBER * members} before starting a hut`);
     } else if (members < 2 && !runsRulesVersion(world, 9)) {
       noteHousingBlock(ctx, 'hut', 'a hut is a job for a household of two or more');
     } else {
