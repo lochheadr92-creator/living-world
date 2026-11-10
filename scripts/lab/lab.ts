@@ -123,6 +123,7 @@ import { setTownships, townshipsOn } from '../../src/sim/townships';
 // saved or hashed (the option chooser, the wolf search memory).
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
+import { stageOf } from '../../src/sim/people';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks, reconsiderOn, setReconsider } from '../../src/sim/intent';
@@ -140,7 +141,7 @@ import type { FoodKind } from '../../src/sim/types';
 
 /** what counts as food when a store is weighed up; the same list provision.ts uses */
 const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
-import type { Activity, Person } from '../../src/sim/types';
+import type { Activity, Person, Stage } from '../../src/sim/types';
 import { cartFirstOn, setCartFirst } from '../../src/sim/cart_priority';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
@@ -619,6 +620,15 @@ export const METRICS = [
   'defenceLeftOnItsOwn',
   'wolvesWary',
   'bitesTaken',
+  // What ordinary life is for, counted over the whole branch (11 November 2026, the survival-pressure rebalance): the conversations
+  // that happen (one count per conversation, by purpose; a conversation that never opened is not counted), the meals sat down to, the
+  // visits paid, the spare-time outings, and where the ended-activity time went: survival (eating, drinking, fetching water, sleeping,
+  // resting, warming, fleeing, defending, hunting, butchering, gathering food, fuelling a fire), work (every other job) and life
+  // (company, childhood, learning, meals, visits, respects, spare time). Shares are of ended-activity ticks, 0 to 1, over everyone and
+  // by stage at the end of the activity. Deaths by cause since the fork, and person-time below critical thirst and warmth beside hunger.
+  'chats', 'familyTime', 'childPlay', 'foragingPractice', 'coaching', 'otherTalk', 'mealsSat', 'visits', 'spareTime',
+  'lifeShare', 'survivalShare', 'workShare', 'lifeShareChild', 'lifeShareAdult', 'lifeShareElder',
+  'deathsHunger', 'deathsThirst', 'deathsExposure', 'thirstExposure', 'coldExposure',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -786,6 +796,64 @@ export class GatherTally {
   }
 }
 
+/**
+ * Ordinary life over a branch, read from the activity-end hook and a tick scan of the conversations on the record. Observation
+ * only: nothing here is read by the simulation. Conversations are counted once each by purpose when first seen on `w.conversations`
+ * (the pair, not the two people). Ended-activity ticks are summed by category and by the person's stage when the activity ended;
+ * an activity's time is `world.tick - a.start` at its end, whatever its outcome, because the time was spent either way.
+ */
+export class LifeTally {
+  private convs = new Set<number>();
+  chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
+  mealsSat = 0; visits = 0; spareTime = 0;
+  private time = { life: 0, survival: 0, work: 0 };
+  private byStage: Record<Stage, { life: number; all: number }> = { child: { life: 0, all: 0 }, youth: { life: 0, all: 0 }, adult: { life: 0, all: 0 }, elder: { life: 0, all: 0 } };
+  personTicks = 0; thirstyTicks = 0; coldTicks = 0;
+  static readonly SURVIVAL = new Set<string>(['eat', 'eat_store', 'drink', 'fetch_water', 'sleep', 'rest', 'warm', 'flee', 'defend', 'hunt', 'butcher', 'fuel_fire', 'search']);
+  static readonly LIFE = new Set<string>(['socialize', 'converse', 'attend', 'attend_meal', 'host_meal', 'visit', 'pay_respects', 'wander', 'alone', 'argue']);
+  static readonly FOOD_SOURCES = new Set<string>(['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot']);
+  end(w: World, p: Person, a: Activity, outcome: 'success' | 'failed' | 'interrupted' | 'partial'): void {
+    const ticks = Math.max(0, w.tick - a.start);
+    const food = a.kind === 'gather' && LifeTally.FOOD_SOURCES.has(String(a.data.stype));
+    const cat = LifeTally.SURVIVAL.has(a.kind) || food ? 'survival' : LifeTally.LIFE.has(a.kind) ? 'life' : 'work';
+    this.time[cat] += ticks;
+    const st = this.byStage[stageOf(w, p)];
+    st.all += ticks;
+    if (cat === 'life') st.life += ticks;
+    if (outcome !== 'success') return;
+    if (a.kind === 'attend_meal' || a.kind === 'host_meal') this.mealsSat++;
+    else if (a.kind === 'visit') this.visits++;
+    else if (a.kind === 'wander') this.spareTime++;
+  }
+  tick(w: World): void {
+    for (const c of w.conversations) {
+      if (this.convs.has(c.id)) continue;
+      this.convs.add(c.id);
+      switch (c.purpose) {
+        case 'chat': this.chats++; break;
+        case 'family_time': this.familyTime++; break;
+        case 'play_together': this.childPlay++; break;
+        case 'learn_foraging': this.foragingPractice++; break;
+        case 'learn_skill': case 'teach_technique': case 'learn_technique': this.coaching++; break;
+        default: this.otherTalk++;
+      }
+    }
+    for (const p of w.persons) {
+      if (!p.alive) continue;
+      this.personTicks++;
+      if (p.needs.thirst < CRITICAL.thirst) this.thirstyTicks++;
+      if (p.needs.warmth < CRITICAL.warmth) this.coldTicks++;
+    }
+  }
+  private share(n: number, d: number): number { return d ? Math.round((n / d) * 10000) / 10000 : 0; }
+  get lifeShare(): number { const t = this.time; return this.share(t.life, t.life + t.survival + t.work); }
+  get survivalShare(): number { const t = this.time; return this.share(t.survival, t.life + t.survival + t.work); }
+  get workShare(): number { const t = this.time; return this.share(t.work, t.life + t.survival + t.work); }
+  stageShare(s: Stage): number { return this.share(this.byStage[s].life, this.byStage[s].all); }
+  get thirstExposure(): number { return this.share(this.thirstyTicks, this.personTicks); }
+  get coldExposure(): number { return this.share(this.coldTicks, this.personTicks); }
+}
+
 /** What a branch ends with. `from` is the tick of the fork: deaths are those since then, first-build days are counted from the fork's day 0. */
 export function outcomeOf(
   w: World,
@@ -795,6 +863,7 @@ export function outcomeOf(
   gathers = new GatherTally(),
   prep = new PrepTally(),
   defence = new DefenceTally(),
+  life = new LifeTally(),
 ): { outcome: Outcome; milestones: Record<string, number> } {
   const count = (types: string[]) => w.buildings.filter((b) => types.includes(b.type)).length;
   const alive = w.persons.filter((p) => p.alive);
@@ -888,6 +957,26 @@ export function outcomeOf(
       defenceLeftOnItsOwn: d.leftOnItsOwn,
       wolvesWary,
       bitesTaken: defence.bites,
+      chats: life.chats,
+      familyTime: life.familyTime,
+      childPlay: life.childPlay,
+      foragingPractice: life.foragingPractice,
+      coaching: life.coaching,
+      otherTalk: life.otherTalk,
+      mealsSat: life.mealsSat,
+      visits: life.visits,
+      spareTime: life.spareTime,
+      lifeShare: life.lifeShare,
+      survivalShare: life.survivalShare,
+      workShare: life.workShare,
+      lifeShareChild: life.stageShare('child'),
+      lifeShareAdult: life.stageShare('adult'),
+      lifeShareElder: life.stageShare('elder'),
+      deathsHunger: w.deceased.filter((d) => d.tick >= from && d.cause === 'hunger').length,
+      deathsThirst: w.deceased.filter((d) => d.tick >= from && d.cause === 'thirst').length,
+      deathsExposure: w.deceased.filter((d) => d.tick >= from && d.cause === 'exposure').length,
+      thirstExposure: life.thirstExposure,
+      coldExposure: life.coldExposure,
     },
     milestones,
   };
@@ -935,6 +1024,7 @@ export function runBranch(
     const gathers = new GatherTally();
     const prep = new PrepTally();
     const defence = new DefenceTally();
+    const life = new LifeTally();
     // the defence counters are the module's own, off by default; this branch owns them for its run
     defReset();
     defProbe.on = true;
@@ -942,6 +1032,7 @@ export function runBranch(
     const emptyNews = { directEmpty: 0, accepted: 0, rejected: 0, relays: 0, skippedStale: 0, skippedHeld: 0, skippedCooldown: 0, receiptAge: 0, receipts: 0 };
     w.hooks = {
       onActivityStart: (p, a) => gathers.start(p, a),
+      onActivityEnd: (p, a, outcome) => life.end(w, p, a, outcome),
       onWolfBite: () => defence.bitten(),
       onNews: (e) => {
         if (e.kind === 'direct-empty') emptyNews.directEmpty++;
@@ -960,6 +1051,7 @@ export function runBranch(
       stepWorld(w);
       projects.tick(w);
       prep.tick(w);
+      life.tick(w);
       if (i % sampleEvery === 0) {
         const h = hashWorld(w);
         hashes.push(h);
@@ -967,7 +1059,7 @@ export function runBranch(
       }
       if (i % DAY === 0) popByDay.push(w.persons.filter((p) => p.alive).length);
     }
-    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers, prep, defence);
+    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers, prep, defence, life);
     return {
       spec: iv.spec,
       summary: iv.summary,

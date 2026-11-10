@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "03b430b60b4d64af4bb098336ab0305e5d10d928",
+    "rules": 194,
+    "content": "a1ac1341ed8a8d0d8a89ad77e6e1daf5b7cf7f7a3e409f3b783b7edfb2b590af",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 2,400 ticks checked every tick for an argument paused under another argument (which rules 194 never allows; rules 193 reaches it at tick 252 in this world), then 120 more after a save and load."
+  },
+  "saved": "9edfa271b782a5bfd7fc7752bd6e3159326af0a713766968e3ea8b0327b5300f",
+  "continued": "e142100919091380d8a5aad3ec329f3bf5c55be6c5ebad7a88518d76a760f767"
+}
