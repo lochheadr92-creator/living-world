@@ -1,4 +1,5 @@
 import {mayShareType} from './shared_projects';
+import { projectHasRoom } from './project_room';
 import {BUILD_DEF} from './constants';
 import { initialiseCouncil, councilFor, councilAllowsWork, mayAskSupport, recordChoice, recount, type Council } from './civic_decision';
 // Civic identity and collective work. This module owns saved civic records, not inventories,
@@ -90,6 +91,7 @@ export function recordProjectResponse(w: World, asker: Person, responder: Person
  if (hyp(asker.x - responder.x, asker.y - responder.y) > 3 || asker.indoors !== responder.indoors) return;
  if (req.status !== 'promised' && req.status !== 'declined') return;
  if(council&&!council.candidates.some(c=>c.personId===asker.id))return;
+ if(!existing&&!projectHasRoom(w,project,responder.id))return; // rules 196: never a thirteenth participant (project_room.ts)
  const m=existing??{ personId: responder.id, requestId: req.id, since: w.tick,
   status: req.status === 'promised' ? 'supporting' as const : 'refused' as const, reason: req.note || req.status, materials: {}, work: 0 };
  if(!existing)project.participants.push(m);
