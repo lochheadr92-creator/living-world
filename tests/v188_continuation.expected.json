@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "f87b4616e8e37bf0d158cf0b22f53d0283ecd0a3",
+    "rules": 188,
+    "content": "a94a0f53299baeb9e274a1bb0a0cd0d7754c92a45cd8ca6a80335a69601024b2",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river world (arrivals on), 2400 ticks including people who remember what they last took and from where (first at tick 13, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "60642cc96a33c23508816de78b082c19cde430d3c94ba7995cdd437e011073c3",
+  "continued": "6615ca6cb64a46d6788833e34924f6f9e94ba55f4632558a65f1212f75704fbe"
+}
