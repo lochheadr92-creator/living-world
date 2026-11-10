@@ -632,11 +632,15 @@ export const METRICS = [
   // that happen (one count per conversation, by purpose; a conversation that never opened is not counted), the meals sat down to, the
   // visits paid, the spare-time outings, and where the ended-activity time went: survival (eating, drinking, fetching water, sleeping,
   // resting, warming, fleeing, defending, hunting, butchering, gathering food, fuelling a fire), work (every other job) and life
-  // (company, childhood, learning, meals, visits, respects, spare time). Shares are of ended-activity ticks, 0 to 1, over everyone and
-  // by stage at the end of the activity. Deaths by cause since the fork, and person-time below critical thirst and warmth beside hunger.
+  // (company, childhood, learning, meals, visits, respects, spare time) and sleep (sleep and rest, its own bucket). Shares are of
+  // ended-activity ticks, 0 to 1, over everyone and by stage at the end of the activity. Deaths by cause since the fork, and person-time
+  // below critical thirst and warmth beside hunger.
   'chats', 'familyTime', 'childPlay', 'foragingPractice', 'coaching', 'otherTalk', 'mealsSat', 'visits', 'spareTime',
-  'lifeShare', 'survivalShare', 'workShare', 'lifeShareChild', 'lifeShareAdult', 'lifeShareElder',
+  'lifeShare', 'survivalShare', 'workShare', 'sleepShare', 'lifeShareChild', 'lifeShareAdult', 'lifeShareElder',
   'deathsHunger', 'deathsThirst', 'deathsExposure', 'thirstExposure', 'coldExposure',
+  // the burden itself, as person-time: awake and hungry (hunger below the drive's start, 62), awake and thirsty (thirst below 66),
+  // and the fed window (awake with hunger, thirst and energy all above 65, the level coaching and foraging practice ask for)
+  'hungryShare', 'thirstyShare', 'fedWindowShare',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -814,16 +818,18 @@ export class LifeTally {
   private convs = new Set<number>();
   chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
   mealsSat = 0; visits = 0; spareTime = 0;
-  private time = { life: 0, survival: 0, work: 0 };
+  private time = { life: 0, survival: 0, work: 0, sleep: 0 };
+  awakeTicks = 0; hungryTicks = 0; thirstyTicks = 0; fedTicks = 0;
   private byStage: Record<Stage, { life: number; all: number }> = { child: { life: 0, all: 0 }, youth: { life: 0, all: 0 }, adult: { life: 0, all: 0 }, elder: { life: 0, all: 0 } };
-  personTicks = 0; thirstyTicks = 0; coldTicks = 0;
-  static readonly SURVIVAL = new Set<string>(['eat', 'eat_store', 'drink', 'fetch_water', 'sleep', 'rest', 'warm', 'flee', 'defend', 'hunt', 'butcher', 'fuel_fire', 'search']);
+  personTicks = 0; parchedTicks = 0; coldTicks = 0;
+  static readonly SURVIVAL = new Set<string>(['eat', 'eat_store', 'drink', 'fetch_water', 'warm', 'flee', 'defend', 'hunt', 'butcher', 'fuel_fire', 'search']);
+  static readonly SLEEP = new Set<string>(['sleep', 'rest']);
   static readonly LIFE = new Set<string>(['socialize', 'converse', 'attend', 'attend_meal', 'host_meal', 'visit', 'pay_respects', 'wander', 'alone', 'argue']);
   static readonly FOOD_SOURCES = new Set<string>(['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot']);
   end(w: World, p: Person, a: Activity, outcome: 'success' | 'failed' | 'interrupted' | 'partial'): void {
     const ticks = Math.max(0, w.tick - a.start);
     const food = a.kind === 'gather' && LifeTally.FOOD_SOURCES.has(String(a.data.stype));
-    const cat = LifeTally.SURVIVAL.has(a.kind) || food ? 'survival' : LifeTally.LIFE.has(a.kind) ? 'life' : 'work';
+    const cat = LifeTally.SURVIVAL.has(a.kind) || food ? 'survival' : LifeTally.SLEEP.has(a.kind) ? 'sleep' : LifeTally.LIFE.has(a.kind) ? 'life' : 'work';
     this.time[cat] += ticks;
     const st = this.byStage[stageOf(w, p)];
     st.all += ticks;
@@ -849,16 +855,26 @@ export class LifeTally {
     for (const p of w.persons) {
       if (!p.alive) continue;
       this.personTicks++;
-      if (p.needs.thirst < CRITICAL.thirst) this.thirstyTicks++;
+      if (p.needs.thirst < CRITICAL.thirst) this.parchedTicks++;
       if (p.needs.warmth < CRITICAL.warmth) this.coldTicks++;
+      if (p.pose === 'sleep') continue;
+      this.awakeTicks++;
+      if (p.needs.hunger < 62) this.hungryTicks++;
+      if (p.needs.thirst < 66) this.thirstyTicks++;
+      if (Math.min(p.needs.hunger, p.needs.thirst, p.needs.energy) > 65) this.fedTicks++;
     }
   }
   private share(n: number, d: number): number { return d ? Math.round((n / d) * 10000) / 10000 : 0; }
-  get lifeShare(): number { const t = this.time; return this.share(t.life, t.life + t.survival + t.work); }
-  get survivalShare(): number { const t = this.time; return this.share(t.survival, t.life + t.survival + t.work); }
-  get workShare(): number { const t = this.time; return this.share(t.work, t.life + t.survival + t.work); }
+  private get all(): number { const t = this.time; return t.life + t.survival + t.work + t.sleep; }
+  get lifeShare(): number { return this.share(this.time.life, this.all); }
+  get survivalShare(): number { return this.share(this.time.survival, this.all); }
+  get workShare(): number { return this.share(this.time.work, this.all); }
+  get sleepShare(): number { return this.share(this.time.sleep, this.all); }
+  get hungryShare(): number { return this.share(this.hungryTicks, this.awakeTicks); }
+  get thirstyShare(): number { return this.share(this.thirstyTicks, this.awakeTicks); }
+  get fedWindowShare(): number { return this.share(this.fedTicks, this.awakeTicks); }
   stageShare(s: Stage): number { return this.share(this.byStage[s].life, this.byStage[s].all); }
-  get thirstExposure(): number { return this.share(this.thirstyTicks, this.personTicks); }
+  get thirstExposure(): number { return this.share(this.parchedTicks, this.personTicks); }
   get coldExposure(): number { return this.share(this.coldTicks, this.personTicks); }
 }
 
@@ -977,6 +993,7 @@ export function outcomeOf(
       lifeShare: life.lifeShare,
       survivalShare: life.survivalShare,
       workShare: life.workShare,
+      sleepShare: life.sleepShare,
       lifeShareChild: life.stageShare('child'),
       lifeShareAdult: life.stageShare('adult'),
       lifeShareElder: life.stageShare('elder'),
@@ -985,6 +1002,9 @@ export function outcomeOf(
       deathsExposure: w.deceased.filter((d) => d.tick >= from && d.cause === 'exposure').length,
       thirstExposure: life.thirstExposure,
       coldExposure: life.coldExposure,
+      hungryShare: life.hungryShare,
+      thirstyShare: life.thirstyShare,
+      fedWindowShare: life.fedWindowShare,
     },
     milestones,
   };
