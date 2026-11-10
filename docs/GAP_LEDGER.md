@@ -36,6 +36,11 @@ Terminal for queue purposes: CLOSED, PRESENT, DEFERRED, GATED (until its gate li
 
 ## Held files and gates
 
+**Released 2026-11-10.** The six files below are no longer held. Asked in chat to read the uncommitted edits and keep or drop them, the session that works this ledger read
+them and committed both pieces: a lab switch `rich-first-storehouse-once` (the `each` part of rules 162, on by default, so default behaviour is unchanged; five files) and a
+keyboard mode for the inhabitant runner (`scripts/inhabit.ts` with `scripts/inhabit/manual.ts` and `live.mjs`). Nothing was dropped. The 16 rows marked GATED for a held file have
+not been re-read: each needs its own check before it is taken, and the statuses below are unchanged. The rest of this section is kept as written on 9 November.
+
 - Held by another session (uncommitted edits in the integrate checkout, not to be edited): `scripts/inhabit.ts`, `scripts/lab/lab.ts`,
   `src/sim/act_build.ts`, `src/sim/options_work.ts`, `src/sim/shared_stone.ts`, `tests/shared_stone.test.ts`.
   Loops lines: the six modified tracked files (first-storehouse `each` refinement and lab switches); the item-6 leaks in another
