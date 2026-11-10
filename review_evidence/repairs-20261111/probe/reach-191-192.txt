@@ -1,0 +1,7 @@
+birch: first shared-use storehouse line at tick 12050 (household-named storehouse line at -1)
+cedar: first shared-use storehouse line at tick 8400 (household-named storehouse line at -1)
+gen-2: first shared-use storehouse line at tick 6025 (household-named storehouse line at -1)
+river: first shared-use storehouse line at tick 9725 (household-named storehouse line at -1)
+cedar: first why-now reason at tick 8325; first storehouse site at 8400
+gen-2: first why-now reason at tick 7100; first storehouse site at 7175
+river: first why-now reason at tick 9575; first storehouse site at 9725

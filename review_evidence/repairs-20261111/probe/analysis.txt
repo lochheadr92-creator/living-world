@@ -1,0 +1,615 @@
+deaths 187 {
+  fever: 21,
+  hunger: 63,
+  'wolf attack': 31,
+  exposure: 43,
+  thirst: 17,
+  injuries: 12
+}
+
+=== exposure
+aspen d21.65 Pia(adult,30) hh14698/2 home=none@undefined inundefined/undefined foodundefined indoors=false H62 T100 W1 E2 hp0 invFood=0 inv={"wood":2} wx=storm/-12.680576328307215 ill= inj=
+   act=drink:Drinking at the well [work] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · remembered water in well +3
+   ownHome=[] nearest=[{"id":7767,"btype":"well","hh":0,"dist":1.6,"seenAgo":1,"realType":"well","realHh":0,"inside":0,"cap":4,"occ":0,"cond":54.090316000078346},{"id":3046,"btype":"lean_to","hh":1119,"dist":5.4,"seenAgo":382,"realType":"lean_to","realHh":1119,"inside":0,"cap":4,"occ":0,"cond":64.61308249996928}]
+   log=["51240: Ate a meal from the stores.","51241: Means to be ready for the night: nowhere to shelter nearby for the night.","51418: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+aspen d22.51 Wen(adult,35) hh1102/3 home=lean_to@9.6 in0/4 food0 indoors=false H13 T41 W3 E0 hp0 invFood=0 inv={"seeds":3,"basket":1,"wood":4} wx=rain/-1.9899806085596552 ill= inj=
+   act=gather:Picking berries [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +72 · walking −11 · remembered strained patch (observed at tick 53981) −2 · good at it −2
+   ownHome=[{"id":1103,"btype":"lean_to","hh":1102,"dist":9.6,"seenAgo":285,"realType":"lean_to","realHh":1102,"inside":0,"cap":4,"occ":0,"cond":21.64854516111121}] nearest=[{"id":2278,"btype":"lean_to","hh":1113,"dist":8.7,"seenAgo":300,"realType":"lean_to","realHh":1113,"inside":0,"cap":4,"occ":0,"cond":46.58084749996768},{"id":1103,"btype":"lean_to","hh":1102,"dist":9.6,"seenAgo":285,"realType":"lean_to","realHh":1102,"inside":0,"cap":4,"occ":0,"cond":21.64854516111121}]
+   log=["53721: Means to be ready for the night: hungry enough that the night would be hard.","53744: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","53897: Gathered 1 berries from the berry bush."]
+aspen d22.61 Kira(adult,42) hh1086/3 home=lean_to@19.8 in0/4 food0 indoors=false H56 T91 W1 E0 hp0 invFood=0 inv={"seeds":1,"basket":1,"rod":1,"stone":4} wx=rain/-6.106290070363862 ill= inj=
+   act=rest:Sheltering at the lean-to [travel] | because=cold +57 · walking −35
+   ownHome=[] nearest=[{"id":7767,"btype":"well","hh":0,"dist":5.4,"seenAgo":282,"realType":"well","realHh":0,"inside":0,"cap":4,"occ":0,"cond":49.450150000076306},{"id":3046,"btype":"lean_to","hh":1119,"dist":9.9,"seenAgo":357,"realType":"lean_to","realHh":1119,"inside":0,"cap":4,"occ":0,"cond":52.62598699997477}]
+   log=["53716: Gave up “Drinking at the well”: no way to get there.","53821: Gave up “Drinking at the well”: no way to get there.","54177: Gathered 2 fish from the fish spot."]
+aspen d22.62 Isla(adult,25) hh1113/4 home=lean_to@1.1 in0/4 food0 indoors=false H20 T19 W1 E2 hp0 invFood=0 inv={"seeds":1} wx=rain/-6.437301514475376 ill= inj=
+   act=rest:Sheltering at the lean-to [work] | because=cold +53 · walking −35
+   ownHome=[{"id":2278,"btype":"lean_to","hh":1113,"dist":1.1,"seenAgo":2,"realType":"lean_to","realHh":1113,"inside":0,"cap":4,"occ":0,"cond":45.43535099996867}] nearest=[{"id":2278,"btype":"lean_to","hh":1113,"dist":1.1,"seenAgo":2,"realType":"lean_to","realHh":1113,"inside":0,"cap":4,"occ":0,"cond":45.43535099996867},{"id":15837,"btype":"hut","hh":1091,"dist":4.4,"seenAgo":2,"realType":"hut","realHh":1091,"inside":0,"cap":4,"occ":2,"cond":77.90380800001742}]
+   log=["53920: Means to be ready for the night: nowhere to shelter nearby for the night.","53966: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","54043: Took Dov into my household."]
+aspen d22.68 Esme(adult,19) hh13058/1 home=lean_to@13.4 in0/4 food0 indoors=false H43 T50 W0 E0 hp0 invFood=0 inv={"seeds":1} wx=clear/-5.698898089144524 ill= inj=
+   act=drink:Drinking at the water [work] | because=thirsty +81 · walking −6
+   ownHome=[{"id":14323,"btype":"lean_to","hh":13058,"dist":4.2,"seenAgo":2,"realType":"lean_to","realHh":13058,"inside":0,"cap":4,"occ":0,"cond":41.18220828002455}] nearest=[{"id":2145,"btype":"lean_to","hh":7222,"dist":3.2,"seenAgo":2,"realType":"lean_to","realHh":7222,"inside":0,"cap":4,"occ":0,"cond":44.10033227997503},{"id":1083,"btype":"lean_to","hh":1081,"dist":3.6,"seenAgo":2,"realType":"lean_to","realHh":1081,"inside":0,"cap":4,"occ":0,"cond":26.81239520717828}]
+   log=["53997: The fish spot has been picked clean.","53998: Means to be ready for the night: nowhere to shelter nearby for the night.","54295: Saw that Isla died."]
+aspen d22.84 Ben(adult,36) hh1086/2 home=lean_to@6.5 in0/4 food0 indoors=false H14 T83 W0 E0 hp0 invFood=0 inv={"seeds":3,"stone":2} wx=clear/-4.128510471142318 ill= inj=
+   act=warm:Warming up by the fire [travel] | because=cold +92 · walking −11 · company at the fire +2
+   ownHome=[] nearest=[{"id":1083,"btype":"lean_to","hh":1081,"dist":2,"seenAgo":2,"realType":"lean_to","realHh":1081,"inside":0,"cap":4,"occ":0,"cond":25.61074592717832},{"id":15837,"btype":"hut","hh":1091,"dist":3.8,"seenAgo":2,"realType":"hut","realHh":1091,"inside":0,"cap":4,"occ":0,"cond":76.95983200001763}]
+   log=["54325: Gathered 1 fish from the fish spot.","54636: Read at the grave that Isla died.","54654: Read at the grave that Esme died."]
+aspen d34.8 Silas(adult,19) hh22965/1 home=none@undefined inundefined/undefined foodundefined indoors=false H27 T77 W0 E0 hp0 invFood=1 inv={"wood":2,"berries":1} wx=cloudy/-5.434593301483499 ill= inj=
+   act=flee:Running from the wolf toward away from it [travel] | because=danger close +122
+   ownHome=[] nearest=[{"id":2278,"btype":"lean_to","hh":1113,"dist":10.9,"seenAgo":413,"realType":"lean_to","realHh":1113,"inside":0,"cap":4,"occ":0,"cond":44.66713149997853},{"id":15837,"btype":"hut","hh":1091,"dist":14.7,"seenAgo":1382,"realType":"hut","realHh":1091,"inside":0,"cap":4,"occ":1,"cond":44.06317150005439}]
+   log=["83379: Gathered 1 berries from the berry bush.","83441: Gathered 1 berries from the berry bush.","83501: A wolf attacked me near (49, 19)."]
+birch d22.71 Milo(adult,32) hh1025/1 home=hut@3.2 in0/4 food0 indoors=false H19 T25 W2 E0 hp0 invFood=0 inv={"basket":1,"seeds":3,"spear":1,"rod":1,"axe":1,"wood":6} wx=cloudy/-5.363454297777135 ill= inj=
+   act=rest:Sheltering at the hut [travel] | because=cold +71 · walking −40
+   ownHome=[{"id":8781,"btype":"hut","hh":1025,"dist":3.2,"seenAgo":2,"realType":"hut","realHh":1025,"inside":0,"cap":4,"occ":0,"cond":52.419698300040096}] nearest=[{"id":8781,"btype":"hut","hh":1025,"dist":3.2,"seenAgo":2,"realType":"hut","realHh":1025,"inside":0,"cap":4,"occ":0,"cond":52.419698300040096},{"id":6130,"btype":"hut","hh":1020,"dist":3.5,"seenAgo":2,"realType":"hut","realHh":1020,"inside":0,"cap":4,"occ":2,"cond":38.47508450004991}]
+   log=["53584: Means to be ready for the night: thirsty enough that the night would be hard.","54193: Gathered 1 fish from the fish spot.","54193: The fish spot has been picked clean."]
+birch d22.87 Pia(adult,24) hh1004/3 home=hut@3.2 in0/4 food0 indoors=false H52 T61 W0 E0 hp0 invFood=0 inv={"basket":1,"seeds":8,"axe":1,"spear":1,"pick":1,"rod":1,"wood":3} wx=cloudy/-4.102218459732465 ill= inj=
+   act=rest:Sheltering at the hut [travel] | because=cold +89 · walking −15
+   ownHome=[{"id":5552,"btype":"hut","hh":1004,"dist":3.2,"seenAgo":3,"realType":"hut","realHh":1004,"inside":0,"cap":4,"occ":2,"cond":36.06448450005046}] nearest=[{"id":14179,"btype":"quarry","hh":1004,"dist":2.3,"seenAgo":3,"realType":"quarry","realHh":1004,"inside":0,"cap":4,"occ":0,"cond":74.53801400008676},{"id":5552,"btype":"hut","hh":1004,"dist":3.2,"seenAgo":3,"realType":"hut","realHh":1004,"inside":0,"cap":4,"occ":2,"cond":36.06448450005046}]
+   log=["54698: The fruit tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","54712: Gathered 3 fruit from the fruit tree.","54712: The fruit tree has been picked clean."]
+birch d22.93 Hugo(adult,29) hh1034/1 home=lean_to@4.2 in0/4 food0 indoors=false H12 T43 W0 E0 hp0 invFood=0 inv={"seeds":7} wx=cloudy/-1.9823731390746566 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +71 · walking −11 · has paid me poorly before (0.4×) −6 · remembered worn patch (observed at tick 52997) −4
+   ownHome=[{"id":3117,"btype":"lean_to","hh":1034,"dist":4.2,"seenAgo":2,"realType":"lean_to","realHh":1034,"inside":0,"cap":4,"occ":0,"cond":14.308411999999592}] nearest=[{"id":5552,"btype":"hut","hh":1004,"dist":1.4,"seenAgo":2,"realType":"hut","realHh":1004,"inside":0,"cap":4,"occ":1,"cond":35.82138450005052},{"id":14179,"btype":"quarry","hh":1004,"dist":2.6,"seenAgo":2,"realType":"quarry","realHh":1004,"inside":0,"cap":4,"occ":0,"cond":74.38071400008764}]
+   log=["54689: The berry bush I had remembered (about 2, 1.5 min old) was bare when I got close.","54741: Made it to safety.","54884: Saw that Pia died."]
+birch d33.5 Mira(adult,45) hh996/1 home=lean_to@7.8 in0/4 food0 indoors=false H31 T31 W5 E0 hp0 invFood=0 inv={"seeds":14,"basket":1,"fibre":1,"blanket":1,"cutting":1,"wood":1} wx=rain/-1.9702961947908495 ill= inj=
+   act=warm:Warming up by the fire [travel] | because=cold +84 · walking −8 · company at the fire +2
+   ownHome=[{"id":3117,"btype":"lean_to","hh":996,"dist":7.8,"seenAgo":1,"realType":"lean_to","realHh":996,"inside":0,"cap":4,"occ":0,"cond":16.14069549995923}] nearest=[{"id":990,"btype":"fire","hh":0,"dist":3.4,"seenAgo":1,"realType":"fire","realHh":0,"inside":0,"cap":4,"occ":0,"cond":100},{"id":7663,"btype":"storehouse","hh":0,"dist":5.8,"seenAgo":1,"realType":"storehouse","realHh":0,"inside":0,"cap":4,"occ":0,"cond":64.98083199994491}]
+   log=["79615: Made it to safety.","80005: Means to be ready for the night: nowhere to shelter nearby for the night.","80317: The tree I had remembered (about 5, 2.8 min old) was down to 1 when I got close."]
+cedar d10.73 Leo(elder,75) hh991/1 home=lean_to@13.8 in0/4 food0 indoors=false H22 T89 W2 E0 hp0 invFood=0 inv={"axe":1,"wood":2,"seeds":1} wx=cloudy/-4.9598733480472 ill= inj=
+   act=rest:Sheltering at the lean-to [travel] | because=cold +51 · walking −50
+   ownHome=[{"id":992,"btype":"lean_to","hh":991,"dist":13.8,"seenAgo":1522,"realType":"lean_to","realHh":991,"inside":0,"cap":4,"occ":0,"cond":44.81843043682265}] nearest=[{"id":5192,"btype":"lean_to","hh":3094,"dist":10.7,"seenAgo":1456,"realType":"lean_to","realHh":3094,"inside":0,"cap":4,"occ":0,"cond":50.84819799996377},{"id":988,"btype":"lean_to","hh":986,"dist":11.5,"seenAgo":1474,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":17.11186714149569}]
+   log=["25343: Slept and recovered 11 energy.","25412: Made it to safety.","25753: Saw that Petra died."]
+cedar d10.82 Uri(adult,37) hh3094/2 home=lean_to@18.3 in0/4 food0 indoors=false H30 T59 W1 E0 hp0 invFood=0 inv={"wood":3} wx=cloudy/-5.137140364348444 ill= inj=
+   act=rest:Sheltering at the lean-to [travel] | because=cold +57 · walking −35
+   ownHome=[{"id":5192,"btype":"lean_to","hh":3094,"dist":18.3,"seenAgo":4219,"realType":"lean_to","realHh":3094,"inside":0,"cap":4,"occ":0,"cond":50.16929799996302}] nearest=[{"id":5192,"btype":"lean_to","hh":3094,"dist":18.3,"seenAgo":4219,"realType":"lean_to","realHh":3094,"inside":0,"cap":4,"occ":0,"cond":50.16929799996302},{"id":988,"btype":"lean_to","hh":986,"dist":19.8,"seenAgo":4246,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":16.432967141495716}]
+   log=["25276: Gathered 1 berries from the berry bush.","25380: Gathered 1 berries from the berry bush.","25854: Gathered 1 fish from the fish spot."]
+cedar d11.81 Basil(adult,21) hh5435/2 home=none@undefined inundefined/undefined foodundefined indoors=false H58 T34 W1 E0 hp0 invFood=2 inv={"wood":2,"seeds":1,"berries":2} wx=rain/-0.6600799618638828 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +61 · walking −21 · remembered water in well +3
+   ownHome=[] nearest=[{"id":6817,"btype":"hut","hh":994,"dist":2.5,"seenAgo":1,"realType":"hut","realHh":994,"inside":0,"cap":4,"occ":2,"cond":75.94448150001129},{"id":2957,"btype":"well","hh":0,"dist":7.1,"seenAgo":3298,"realType":"well","realHh":0,"inside":0,"cap":4,"occ":0,"cond":70.22504200007364}]
+   log=["28142: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","28163: Gathered 4 berries from the berry bush.","28163: The berry bush has been picked clean."]
+cedar d11.93 Talia(child,10) hh1018/4 home=lean_to@5.5 in0/4 food0 indoors=false H23 T84 W6 E0 hp0 invFood=0 inv={"seeds":1} wx=rain/3.3201876723335753 ill= inj=
+   act=flee:Running from the wolf toward the fire [travel] | because=danger close +108
+   ownHome=[{"id":5706,"btype":"lean_to","hh":1018,"dist":5.5,"seenAgo":2,"realType":"lean_to","realHh":1018,"inside":0,"cap":4,"occ":0,"cond":45.70473999996909}] nearest=[{"id":995,"btype":"lean_to","hh":994,"dist":2.4,"seenAgo":2,"realType":"lean_to","realHh":994,"inside":0,"cap":4,"occ":0,"cond":72.43277349451587},{"id":2957,"btype":"well","hh":0,"dist":2.4,"seenAgo":2,"realType":"well","realHh":0,"inside":0,"cap":4,"occ":0,"cond":69.76268800007512}]
+   log=["28361: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","28389: Gathered 2 berries from the berry bush.","28389: The berry bush has been picked clean."]
+cedar d12.84 Faye(adult,26) hh3094/1 home=lean_to@28.7 in0/4 food0 indoors=false H34 T45 W5 E0 hp0 invFood=0 inv={"seeds":1,"wood":4} wx=rain/1.4649370145195935 ill= inj=
+   act=relocate:Prepare the journey with those who will go [work] | because=household relocation +48
+   ownHome=[{"id":5192,"btype":"lean_to","hh":3094,"dist":28.7,"seenAgo":1871,"realType":"lean_to","realHh":3094,"inside":0,"cap":4,"occ":0,"cond":28.3097874999634}] nearest=[{"id":5192,"btype":"lean_to","hh":3094,"dist":28.7,"seenAgo":1871,"realType":"lean_to","realHh":3094,"inside":0,"cap":4,"occ":0,"cond":28.3097874999634},{"id":1013,"btype":"lean_to","hh":1012,"dist":28.8,"seenAgo":1895,"realType":"lean_to","realHh":1012,"inside":0,"cap":4,"occ":0,"cond":31.337553021226615}]
+   log=["30267: Made it to safety.","30442: Slept and recovered 12 energy.","30723: Gathered 1 fish from the fish spot."]
+fern d10.96 Yusuf(adult,26) hh1019/1 home=hut@5.9 in0/4 food0 indoors=false H1 T53 W4 E0 hp0 invFood=0 inv={"seeds":2,"wood":4,"cutting":1} wx=rain/-3.67017284691374 ill= inj=
+   act=gather:Picking fruit [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +83 · walking −25 · remembered worn patch (observed at tick 22014) −3 · my work at this source paid 0.4× of its estimate (1 outcome) −2
+   ownHome=[] nearest=[{"id":3005,"btype":"lean_to","hh":1005,"dist":1.2,"seenAgo":1,"realType":"lean_to","realHh":1005,"inside":0,"cap":4,"occ":0,"cond":25.62087849995491},{"id":7193,"btype":"timber_yard","hh":0,"dist":1.5,"seenAgo":1,"realType":"timber_yard","realHh":0,"inside":0,"cap":4,"occ":0,"cond":86.26138549998288}]
+   log=["26195: Made it to safety.","26227: Gave up on: put 4 units of food by for the household - never got any food put by (the store is at 0 of 4).","26280: Getting ready for the night came to little: only 149 ticks under shelter; the night mostly passed without it."]
+fern d11.05 Dara(adult,35) hh984/4 home=lean_to@40.5 in0/4 food0 indoors=false H31 T67 W0 E3 hp0 invFood=0 inv={"basket":1,"wood":4,"fibre":1,"seeds":1} wx=rain/0.8790465062246664 ill= inj=
+   act=converse:Talking with Orla [work] | because=hungry +45 · they are carrying some +4 · walking −3 · they came through before +1
+   ownHome=[] nearest=[{"id":7356,"btype":"cellar","hh":1001,"dist":27.2,"seenAgo":1279,"realType":"cellar","realHh":1001,"inside":0,"cap":4,"occ":0,"cond":91.59562800000492},{"id":3247,"btype":"hut","hh":971,"dist":29.1,"seenAgo":1360,"realType":"hut","realHh":971,"inside":0,"cap":4,"occ":0,"cond":59.414939500017255}]
+   log=["26437: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","26487: Asked Orla for food.","26509: Orla said no (own need)."]
+fern d11.11 Hilde(adult,32) hh990/1 home=hut@31.4 in0/4 food0 indoors=false H8 T36 W5 E0 hp0 invFood=0 inv={"cutting":1,"wood":4,"stone":1} wx=rain/3.4204502047986747 ill= inj=
+   act=gather:Picking fruit [travel] | because=hungry +76 · walking −7 · has paid me poorly before (0.2×) −6 · well-liked food +2
+   ownHome=[] nearest=[{"id":8447,"btype":"quarry","hh":0,"dist":15.6,"seenAgo":594,"realType":"quarry","realHh":0,"inside":0,"cap":4,"occ":0,"cond":91.40807600001509},{"id":7133,"btype":"hut","hh":997,"dist":15.7,"seenAgo":492,"realType":"hut","realHh":997,"inside":0,"cap":4,"occ":0,"cond":81.0996720000116}]
+   log=["26376: The fruit tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","26397: Gathered 1 fruit from the fruit tree.","26506: The fruit tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+fern d11.87 Wes(youth,15) hh1011/3 home=lean_to@5.1 in0/4 food0 indoors=false H14 T94 W0 E0 hp0 invFood=0 inv={"rod":1,"wood":2,"fibre":1,"seeds":1,"cutting":1} wx=rain/0.7715280140381928 ill= inj=
+   act=rest:Sheltering at the lean-to [travel] | because=cold +57 · walking −32
+   ownHome=[{"id":2137,"btype":"lean_to","hh":1011,"dist":5.1,"seenAgo":2055,"realType":"lean_to","realHh":1011,"inside":0,"cap":4,"occ":0,"cond":37.476667499960044}] nearest=[{"id":991,"btype":"lean_to","hh":0,"dist":3.2,"seenAgo":3,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":19.184999581377696},{"id":1728,"btype":"lean_to","hh":0,"dist":3.2,"seenAgo":3,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":32.724367499954155}]
+   log=["28179: The berry bush I had remembered (about 2, 0.5 min old) was bare when I got close.","28290: The berry bush I had remembered (about 2, 1.0 min old) was down to 1 when I got close.","28388: Saw that Cole died."]
+fern d11.88 Ulric(elder,67) hh981/1 home=lean_to@15.7 in0/4 food0 indoors=false H16 T14 W1 E0 hp0 invFood=0 inv={"basket":1,"pick":1,"rod":1,"axe":1,"wood":1,"seeds":1} wx=rain/1.1057703829958743 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +82 · walking −5
+   ownHome=[] nearest=[{"id":994,"btype":"lean_to","hh":993,"dist":6.8,"seenAgo":545,"realType":"lean_to","realHh":993,"inside":0,"cap":4,"occ":0,"cond":27.203859990800265},{"id":1728,"btype":"lean_to","hh":0,"dist":7,"seenAgo":557,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":32.62653149995424}]
+   log=["28226: The berry bush has been picked clean.","28388: Saw that Cole died.","28482: Saw that Wes died."]
+fern d11.89 Otto(adult,20) hh993/1 home=lean_to@1.7 in0/4 food0 indoors=false H15 T66 W5 E0 hp0 invFood=0 inv={"wood":2,"seeds":3,"fibre":1,"basket":1} wx=rain/1.6336416710882595 ill= inj=
+   act=warm:Warming up by the fire [travel] | because=cold +88 · walking −8 · company at the fire +2
+   ownHome=[{"id":994,"btype":"lean_to","hh":993,"dist":1.7,"seenAgo":2,"realType":"lean_to","realHh":993,"inside":0,"cap":4,"occ":0,"cond":27.061182490800263}] nearest=[{"id":994,"btype":"lean_to","hh":993,"dist":1.7,"seenAgo":2,"realType":"lean_to","realHh":993,"inside":0,"cap":4,"occ":0,"cond":27.061182490800263},{"id":991,"btype":"lean_to","hh":0,"dist":2.2,"seenAgo":2,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":18.944486081377693}]
+   log=["28482: Saw that Wes died.","28506: Saw that Ulric died.","28512: Read at the grave that Zed died."]
+fern d12.83 Rolf(adult,25) hh1015/2 home=lean_to@20.3 in0/4 food0 indoors=false H5 T15 W5 E0 hp0 invFood=1 inv={"seeds":3,"wood":3,"cutting":1,"berries":1} wx=rain/1.3203177003860693 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +82 · walking −6
+   ownHome=[] nearest=[{"id":994,"btype":"lean_to","hh":0,"dist":8.7,"seenAgo":1443,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":17.897210490800177},{"id":991,"btype":"lean_to","hh":0,"dist":10.5,"seenAgo":1398,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":9.780514081377607}]
+   log=["30657: Read at the grave that Ulric died.","30766: Gathered 1 berries from the berry bush.","30766: The berry bush has been picked clean."]
+gen-1 d22.98 Wes(adult,23) hh939/1 home=lean_to@21.7 in0/4 food0 indoors=false H38 T66 W3 E0 hp0 invFood=0 inv={"basket":1,"spear":1,"axe":1,"seeds":4,"hoe":1,"wood":6} wx=cloudy/0.2135610308149829 ill= inj=
+   act=rest:Sheltering at the lean-to [travel] | because=cold +58 · walking −49
+   ownHome=[] nearest=[{"id":7516,"btype":"hut","hh":928,"dist":7.4,"seenAgo":3,"realType":"hut","realHh":928,"inside":0,"cap":4,"occ":0,"cond":50.2341800000394},{"id":13844,"btype":"cellar","hh":928,"dist":8.1,"seenAgo":3,"realType":"cellar","realHh":928,"inside":0,"cap":4,"occ":0,"cond":80.09476800002844}]
+   log=["54930: Made it to safety.","54930: Gave up “Running from the wolf toward away from it”: no way to get there.","55080: Getting ready for the night came to little: the night passed without shelter."]
+gen-1 d24.95 Corin(child,11) hh916/2 home=lean_to@31.5 in0/4 food0 indoors=false H6 T46 W0 E0 hp0 invFood=0 inv={"seeds":7} wx=storm/0.1277242812879944 ill= inj=
+   act=gather:Picking fruit [travel] | because=hungry +80 · walking −11 · wolf nearby −8 · has paid me poorly before (0.2×) −6
+   ownHome=[] nearest=[{"id":13844,"btype":"cellar","hh":928,"dist":18.3,"seenAgo":4320,"realType":"cellar","realHh":928,"inside":0,"cap":4,"occ":0,"cond":74.88470000003078},{"id":7516,"btype":"hut","hh":928,"dist":21.1,"seenAgo":2691,"realType":"hut","realHh":928,"inside":0,"cap":4,"occ":1,"cond":39.16278550004645}]
+   log=["59661: Made it to safety.","59744: A wolf attacked me near (47, 14).","59867: Made it to safety."]
+gen-1 d34.63 Cora(adult,42) hh904/2 home=none@undefined inundefined/undefined foodundefined indoors=false H14 T83 W2 E0 hp0 invFood=0 inv={"pick":1,"seeds":7,"basket":1,"wool":3,"bedding":1,"blanket":1,"stone":1} wx=rain/-6.557429516117077 ill= inj=
+   act=gather:Fishing [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +71 · well-liked food +3 · walking −3 · good at it −2
+   ownHome=[] nearest=[{"id":7516,"btype":"hut","hh":928,"dist":29.7,"seenAgo":2828,"realType":"hut","realHh":928,"inside":0,"cap":4,"occ":1,"cond":65.86288650001663},{"id":13844,"btype":"cellar","hh":928,"dist":31.1,"seenAgo":2825,"realType":"cellar","realHh":928,"inside":0,"cap":4,"occ":0,"cond":53.224876000052305}]
+   log=["82970: Odette told me Zeke helped Fenn.","82970: Odette told me about a fruit tree a long way east of camp.","82970: Odette told me about a fruit tree a fair way south-east of camp."]
+gen-1 d34.74 Arlo(adult,22) hh911/3 home=hut@24.7 in0/4 food0 indoors=false H17 T43 W0 E0 hp0 invFood=1 inv={"axe":1,"basket":1,"seeds":2,"wool":1,"wood":7,"grain":1} wx=rain/-8.80977046431964 ill= inj=
+   act=flee:Running from the wolf toward home [travel] | because=danger close +124
+   ownHome=[] nearest=[{"id":6718,"btype":"hut","hh":932,"dist":12,"seenAgo":1067,"realType":"hut","realHh":932,"inside":0,"cap":5,"occ":4,"cond":44.69356800006788},{"id":8365,"btype":"timber_yard","hh":0,"dist":17.8,"seenAgo":1145,"realType":"timber_yard","realHh":0,"inside":0,"cap":4,"occ":0,"cond":27.430751999968837}]
+   log=["83252: Gathered 2 grain from the wild grain.","83274: A wolf attacked me near (54, 63).","83357: The rock outcrop I had remembered (about 7, 105.1 min old) was bare when I got close."]
+gen-1 d34.84 Bram(child,0) hh921/2 home=none@undefined inundefined/undefined foodundefined indoors=false H14 T68 W0 E0 hp0 invFood=0 inv={} wx=rain/-7.953318599987769 ill= inj=
+   act=gather:Picking fruit [travel] | because=hungry +70 · walking −9 · has paid me poorly before (0.1×) −6 · good at it −3
+   ownHome=[] nearest=[{"id":7516,"btype":"hut","hh":928,"dist":19.6,"seenAgo":696,"realType":"hut","realHh":928,"inside":0,"cap":4,"occ":3,"cond":64.70713300001786},{"id":13844,"btype":"cellar","hh":928,"dist":22.4,"seenAgo":696,"realType":"cellar","realHh":928,"inside":0,"cap":4,"occ":0,"cond":52.68099200005159}]
+   log=["83258: Made it to safety.","83485: The fruit tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","83536: Gathered 1 fruit from the fruit tree."]
+gen-1 d35.04 Abel(adult,22) hh921/1 home=none@undefined inundefined/undefined foodundefined indoors=false H47 T32 W0 E0 hp0 invFood=0 inv={"seeds":5,"basket":1,"fibre":1,"axe":1,"hoe":1,"clay":2} wx=rain/0.3941089817229084 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +63 · walking −32
+   ownHome=[] nearest=[{"id":13917,"btype":"quarry","hh":0,"dist":7.1,"seenAgo":2,"realType":"quarry","realHh":0,"inside":0,"cap":4,"occ":0,"cond":34.44400290008884},{"id":28028,"btype":"hut","hh":916,"dist":16.5,"seenAgo":986,"realType":"hut","realHh":916,"inside":0,"cap":4,"occ":0,"cond":96.12789300000335}]
+   log=["83956: The wild grain I had remembered (about 2, 0.9 min old) was down to 1 when I got close.","83977: Saw that Vera died.","84017: Made it to safety."]
+gen-2 d12.71 Vik(adult,27) hh826/2 home=none@undefined inundefined/undefined foodundefined indoors=false H42 T31 W5 E0 hp0 invFood=0 inv={"basket":1,"stone":2,"seeds":1} wx=rain/1.5312955056267796 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +68 · walking −13 · remembered water in well +3
+   ownHome=[] nearest=[{"id":823,"btype":"lean_to","hh":821,"dist":3.8,"seenAgo":3,"realType":"lean_to","realHh":821,"inside":0,"cap":4,"occ":0,"cond":43.18398911416155},{"id":1524,"btype":"well","hh":0,"dist":4.6,"seenAgo":3,"realType":"well","realHh":0,"inside":0,"cap":4,"occ":0,"cond":57.08663800007307}]
+   log=["30374: Ivo said no (no item).","30396: Ivo told me Mona looked thirsty not long ago.","30396: Ivo told me Pavel helped Hugo."]
+gen-2 d33.24 Ben(adult,22) hh846/3 home=lean_to@6.1 in0/4 food0 indoors=false H18 T88 W2 E62 hp0 invFood=0 inv={"rod":1,"seeds":2,"wood":2} wx=cloudy/1.1211979389060591 ill= inj=
+   act=socialize:Ask Pavel for food [travel] | because=hungry +56 · they are carrying some +4 · walking −4 · they came through before +1
+   ownHome=[] nearest=[{"id":820,"btype":"fire","hh":0,"dist":1.2,"seenAgo":1,"realType":"fire","realHh":0,"inside":0,"cap":4,"occ":0,"cond":100},{"id":823,"btype":"lean_to","hh":821,"dist":4.1,"seenAgo":1,"realType":"lean_to","realHh":821,"inside":0,"cap":4,"occ":0,"cond":45.58757888994172}]
+   log=["79597: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","79625: Gathered 2 grain from the wild grain.","79680: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+gen-3 d22.02 Basil(adult,32) hh1074/2 home=lean_to@20 in0/4 food0 indoors=false H2 T37 W2 E0 hp0 invFood=0 inv={"basket":1,"wood":3} wx=clear/-0.5396996211021463 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +64 · walking −24 · remembered water in well +3
+   ownHome=[] nearest=[{"id":6382,"btype":"hut","hh":1078,"dist":8.5,"seenAgo":2,"realType":"hut","realHh":1078,"inside":0,"cap":4,"occ":0,"cond":28.91055600002722},{"id":15088,"btype":"quarry","hh":0,"dist":9.5,"seenAgo":2,"realType":"quarry","realHh":0,"inside":0,"cap":4,"occ":0,"cond":84.04698600007461}]
+   log=["52764: A wolf attacked me near (27, 23).","52794: A wolf attacked me near (27, 23).","52845: Made it to safety."]
+gen-4 d34.95 Faye(adult,23) hh15970/1 home=none@undefined inundefined/undefined foodundefined indoors=false H41 T54 W0 E0 hp0 invFood=0 inv={"seeds":4,"wood":3} wx=cloudy/-7.7275471770382325 ill= inj=
+   act=warm:Warming up by the fire [travel] | because=cold +92 · walking −12 · company at the fire +2
+   ownHome=[] nearest=[{"id":17209,"btype":"cellar","hh":1116,"dist":1,"seenAgo":1,"realType":"cellar","realHh":1116,"inside":0,"cap":4,"occ":0,"cond":65.65262304004968},{"id":3502,"btype":"hut","hh":1132,"dist":1.5,"seenAgo":1,"realType":"hut","realHh":1132,"inside":0,"cap":4,"occ":0,"cond":59.56513746005837}]
+   log=["83497: A wolf attacked me near (29, 36).","83643: Made it to safety.","83803: The berry bush I had remembered (about 4, 18.8 min old) was bare when I got close."]
+gen-5 d21.95 Gus(elder,74) hh925/1 home=hut@1.6 in0/4 food0 indoors=true H25 T24 W0 E56 hp0 invFood=0 inv={} wx=rain/-7.442241827069472 ill= inj=
+   act=rest:Resting inside the hut [work] | because=cold +90 · walking −2
+   ownHome=[{"id":5719,"btype":"hut","hh":925,"dist":1.6,"seenAgo":2,"realType":"hut","realHh":925,"inside":0,"cap":4,"occ":1,"cond":20.37569750003378}] nearest=[{"id":5719,"btype":"hut","hh":925,"dist":1.6,"seenAgo":2,"realType":"hut","realHh":925,"inside":0,"cap":4,"occ":1,"cond":20.37569750003378},{"id":8883,"btype":"timber_yard","hh":0,"dist":1.8,"seenAgo":269,"realType":"timber_yard","realHh":0,"inside":0,"cap":4,"occ":0,"cond":50.70357749995745}]
+   log=["51486: The berry bush I had remembered (about 2, 1.0 min old) was down to 1 when I got close.","52053: The fishing spot I had remembered (about 3, 1.7 min old) was down to 1 when I got close.","52066: Took 3 food from the Tansy household's store; Elin caught me at it."]
+gen-5 d22.88 Ada(adult,32) hh9374/1 home=none@undefined inundefined/undefined foodundefined indoors=false H48 T53 W0 E0 hp0 invFood=1 inv={"garment":1,"basket":1,"axe":1,"wood":3,"berries":1} wx=clear/-3.1082080511415002 ill= inj=
+   act=gather:Picking berries [work] | because=a step toward “be fed, watered and under shelter before dark”: eat before the night · This estimate comes from my own completed gathering at this particular source. · hungry +19 · my work at this source paid 0.5× of its estimate (2 outcomes) −3 · walking −2 · good at it −2
+   ownHome=[] nearest=[{"id":15939,"btype":"cellar","hh":948,"dist":14.6,"seenAgo":913,"realType":"cellar","realHh":948,"inside":0,"cap":4,"occ":0,"cond":85.27224000001098},{"id":8288,"btype":"hut","hh":948,"dist":15.5,"seenAgo":925,"realType":"hut","realHh":948,"inside":0,"cap":4,"occ":1,"cond":56.05592350004416}]
+   log=["54678: Gathered 1 berries from the berry bush.","54796: Gathered 1 berries from the berry bush.","54889: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+gen-5 d33.91 Nico(adult,32) hh3819/1 home=lean_to@1.1 in0/4 food0 indoors=false H24 T70 W0 E49 hp0 invFood=0 inv={"rod":1,"basket":1,"saw":1,"hoe":1,"seeds":4,"wood":3} wx=rain/-8.70926449539469 ill= inj=
+   act=rest:Sheltering at the lean-to [work] | because=a step toward “be fed, watered and under shelter before dark”: get to my lean-to · cold +58 · walking −1
+   ownHome=[{"id":929,"btype":"lean_to","hh":3819,"dist":1.1,"seenAgo":1,"realType":"lean_to","realHh":3819,"inside":0,"cap":4,"occ":0,"cond":57.81279702304406}] nearest=[{"id":929,"btype":"lean_to","hh":3819,"dist":1.1,"seenAgo":1,"realType":"lean_to","realHh":3819,"inside":0,"cap":4,"occ":0,"cond":57.81279702304406},{"id":7129,"btype":"storehouse","hh":0,"dist":3.6,"seenAgo":1,"realType":"storehouse","realHh":0,"inside":0,"cap":4,"occ":0,"cond":67.75965599994245}]
+   log=["80149: Wanted a word with Emre, who was too busy to stop.","80149: Gave up “Chat with Emre”: Emre was too busy to stop.","80882: Gave up on: make a spear - never got round to the spear (still short 1 stone)."]
+gen-5 d34.55 Vik(child,5) hh919/3 home=none@undefined inundefined/undefined foodundefined indoors=false H81 T82 W5 E36 hp0 invFood=0 inv={"seeds":5} wx=rain/-3.9564999046765346 ill= inj=
+   act=warm:Warming up by the fire [travel] | because=cold +89 · walking −9 · company at the fire +2
+   ownHome=[] nearest=[{"id":903,"btype":"fire","hh":0,"dist":1.1,"seenAgo":3,"realType":"fire","realHh":0,"inside":0,"cap":4,"occ":0,"cond":100},{"id":929,"btype":"lean_to","hh":0,"dist":5.3,"seenAgo":3,"realType":"lean_to","realHh":0,"inside":0,"cap":4,"occ":0,"cond":51.522757523049485}]
+   log=["82738: Heard that Wes died.","82738: Finn told me about a fishing spot by the water, a fair way west of camp.","82738: Finn told me about a fishing spot by the water, a short walk north-west of camp."]
+gen-5 d34.65 Jax(child,7) hh913/2 home=hut@1.6 in0/4 food0 indoors=true H18 T62 W3 E82 hp0 invFood=0 inv={"seeds":5} wx=rain/-7.215750144984839 ill= inj=
+   act=rest:Resting inside the hut [work] | because=cold +84 · walking −2
+   ownHome=[{"id":5846,"btype":"hut","hh":913,"dist":1.6,"seenAgo":2,"realType":"hut","realHh":913,"inside":0,"cap":4,"occ":2,"cond":21.96474100005328}] nearest=[{"id":5846,"btype":"hut","hh":913,"dist":1.6,"seenAgo":2,"realType":"hut","realHh":913,"inside":0,"cap":4,"occ":2,"cond":21.96474100005328},{"id":8288,"btype":"hut","hh":948,"dist":2.5,"seenAgo":335,"realType":"hut","realHh":948,"inside":0,"cap":4,"occ":0,"cond":61.30737050005996}]
+   log=["79945: Otto left 2 fish at our door, as promised.","82137: Gathered 1 berries from the berry bush.","82631: Gathered 2 berries from the berry bush."]
+meadow d22.89 Pia(adult,35) hh1011/4 home=hut@13.7 in0/4 food0 indoors=false H56 T5 W0 E19 hp0 invFood=0 inv={"basket":1,"seeds":5,"rod":1,"stone":1} wx=storm/-11.191836023064452 ill= inj=
+   act=flee:Running from the wolf toward home [travel BLOCKED Waiting for a safe route past remembered flood ground] | because=danger close +118
+   ownHome=[{"id":3859,"btype":"hut","hh":1011,"dist":13.7,"seenAgo":1027,"realType":"hut","realHh":1011,"inside":0,"cap":4,"occ":1,"cond":67.30821800002253}] nearest=[{"id":3859,"btype":"hut","hh":1011,"dist":13.7,"seenAgo":1027,"realType":"hut","realHh":1011,"inside":0,"cap":4,"occ":1,"cond":67.30821800002253},{"id":17333,"btype":"kiln","hh":0,"dist":15.6,"seenAgo":1039,"realType":"kiln","realHh":0,"inside":0,"cap":4,"occ":0,"cond":81.35636200002234}]
+   log=["54796: Made it to safety.","54796: Gave up “Running from the wolf toward home”: flood route stayed blocked after waiting.","54914: Made it to safety."]
+meadow d22.91 Jax(adult,49) hh1016/2 home=none@undefined inundefined/undefined foodundefined indoors=false H3 T38 W0 E0 hp0 invFood=0 inv={"pick":1,"seeds":5,"stone":1,"wood":3} wx=storm/-10.355211488922995 ill= inj=
+   act=gather:Picking berries [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +77 · walking −25 · good at it +2 · well-liked food +1
+   ownHome=[] nearest=[{"id":17478,"btype":"hut","hh":1005,"dist":3.2,"seenAgo":3,"realType":"hut","realHh":1005,"inside":0,"cap":5,"occ":3,"cond":74.0496020000195},{"id":16481,"btype":"hut","hh":998,"dist":4.7,"seenAgo":3,"realType":"hut","realHh":998,"inside":0,"cap":4,"occ":1,"cond":69.0153580000222}]
+   log=["54226: The fishing spot I had remembered (about 6, 8.6 min old) was down to 1 when I got close.","54400: The berry bush I had remembered (about 2, 3.7 min old) was bare when I got close.","54412: The berry bush I had remembered (about 2, 3.7 min old) was down to 1 when I got close."]
+meadow d22.94 Yusuf(adult,26) hh14410/1 home=none@undefined inundefined/undefined foodundefined indoors=false H71 T86 W0 E0 hp0 invFood=0 inv={"stone":1,"fibre":1} wx=storm/-9.162539309623318 ill= inj=
+   act=rest:Resting [work] | because=tired +90
+   ownHome=[] nearest=[{"id":14949,"btype":"cellar","hh":1025,"dist":18.3,"seenAgo":1192,"realType":"cellar","realHh":1025,"inside":0,"cap":4,"occ":0,"cond":81.855392000014},{"id":17478,"btype":"hut","hh":1005,"dist":21.5,"seenAgo":1429,"realType":"hut","realHh":1005,"inside":0,"cap":5,"occ":3,"cond":73.74615200001968}]
+   log=["54672: Gathered 1 fish from the fish spot.","54876: Gathered 1 fish from the fish spot.","54974: Saw flood-affected ground ahead during “Pottering about”; looking for a safe route."]
+meadow d22.96 Ivy(adult,26) hh18875/1 home=none@undefined inundefined/undefined foodundefined indoors=false H42 T66 W0 E2 hp0 invFood=0 inv={"wood":2} wx=storm/-8.457748017119975 ill= inj=
+   act=rest:Resting [work] | because=tired +90
+   ownHome=[] nearest=[{"id":14949,"btype":"cellar","hh":1025,"dist":4.5,"seenAgo":1,"realType":"cellar","realHh":1025,"inside":0,"cap":4,"occ":0,"cond":81.77787200001424},{"id":17478,"btype":"hut","hh":1005,"dist":8.8,"seenAgo":1189,"realType":"hut","realHh":1005,"inside":0,"cap":5,"occ":3,"cond":73.58142200001977}]
+   log=["54573: Saw flood-affected ground ahead during “Fishing”; looking for a safe route.","54985: Saw that Jax died.","55080: Getting ready for the night came to little: the night passed without shelter."]
+meadow d22.98 Alma(adult,45) hh1016/1 home=none@undefined inundefined/undefined foodundefined indoors=false H21 T54 W0 E3 hp0 invFood=0 inv={"axe":1,"pick":1,"seeds":3,"basket":1,"fibre":1,"stone":3,"spear":1} wx=storm/-7.401317937369379 ill= inj=
+   act=rest:Resting [work] | because=tired +90
+   ownHome=[] nearest=[{"id":1021,"btype":"lean_to","hh":1020,"dist":3.6,"seenAgo":2,"realType":"lean_to","realHh":1020,"inside":0,"cap":4,"occ":0,"cond":23.178817342159157},{"id":15659,"btype":"lean_to","hh":12167,"dist":3.8,"seenAgo":2,"realType":"lean_to","realHh":12167,"inside":0,"cap":4,"occ":0,"cond":35.35768400001353}]
+   log=["54980: Mona told me Vik helped Lena.","54980: Mona told me about a fruit tree a long way west of camp.","55080: Getting ready for the night came to little: the night passed without shelter."]
+
+=== hunger
+aspen d11.8 Ivo(adult,44) hh1113/3 home=lean_to@23 in0/4 food0 indoors=false H0 T37 W23 E0 hp0 invFood=0 inv={"wood":3,"stone":1,"seeds":1} wx=cloudy/2.371725019872869 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −25 · has paid me poorly before (0.1×) −6 · good at it −2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["26380: The rock outcrop I had remembered (about 4, 39.6 min old) was bare when I got close.","26722: The berry bush I had remembered (about 2, 4.6 min old) was bare when I got close.","26959: The berry bush I had remembered (about 3, 10.8 min old) was down to 1 when I got close."]
+aspen d11.83 Hana(adult,24) hh1102/4 home=lean_to@18.3 in0/4 food0 indoors=false H0 T26 W23 E0 hp0 invFood=0 inv={"axe":1,"seeds":4,"wood":2,"stone":1} wx=cloudy/2.8178219540713503 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +63 · walking −30
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["27550: Means to be ready for the night: nowhere to shelter nearby for the night.","28063: A wolf attacked me near (52, 9).","28121: Made it to safety."]
+aspen d12.78 Quinn(adult,34) hh1091/3 home=lean_to@15.8 in0/4 food0 indoors=false H0 T50 W36 E0 hp0 invFood=0 inv={"rod":1} wx=cloudy/4.175023988608106 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −19 · has paid me poorly before (0.2×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["29894: Could not use the berry bush: someone else is already taking it.","29895: Means to be ready for the night: nowhere to shelter nearby for the night.","30427: Read at the grave that Mira died."]
+aspen d12.95 Basil(adult,28) hh3422/1 home=lean_to@10.4 in0/4 food0 indoors=false H0 T32 W40 E0 hp0 invFood=0 inv={"seeds":7} wx=cloudy/7.770652337035597 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +85 · walking −11 · has paid me poorly before (0.1×) −6 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["29804: Made it to safety.","30627: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","30672: Saw that Quinn died."]
+aspen d13.04 Zia(adult,23) hh1123/2 home=lean_to@25.9 in0/4 food0 indoors=false H0 T17 W55 E0 hp0 invFood=0 inv={"axe":1,"wood":4,"seeds":2} wx=cloudy/11.724213670094967 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +84 · walking −17 · has paid me poorly before (0.2×) −6 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["30947: Made it to safety.","31125: A wolf attacked me near (22, 42).","31184: Made it to safety."]
+aspen d13.19 Ada(adult,26) hh1096/4 home=lean_to@11.1 in0/4 food0 indoors=false H0 T48 W84 E0 hp0 invFood=0 inv={"seeds":1,"wood":2,"stone":1} wx=cloudy/17.085295478514112 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +84 · walking −20 · has paid me poorly before (0.2×) −6 · wolf nearby −3
+   food beliefs=[]
+   stores=[] commitments=["deliver fish to 1104","deliver berries to 1100"]
+   blocked=["Lay out a hut: ","Eat from the stores: ","Picking berries: ","Picking fruit: ","Sleep: "]
+   log=["31557: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","31617: Wanted a word with Mona, who was too busy to stop.","31617: Gave up “Ask Mona for food”: Mona was too busy to stop."]
+birch d21.53 Xavi(elder,71) hh1000/2 home=hut@7.3 in0/4 food0 indoors=false H0 T21 W3 E0 hp0 invFood=0 inv={"basket":1,"wood":3,"fibre":1,"spear":1,"seeds":4} wx=storm/-7.3142901795493245 ill= inj=
+   act=gather:Picking fruit [travel] | because=hungry +84 · walking −48 · has paid me poorly before (0.1×) −6 · remembered worn patch (observed at tick 50163) −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=["Eat from the stores: ","Eat from the stores: ","Eat from the stores: ","Picking berries: ","Picking berries: "]
+   log=["50469: The tree I had remembered (about 5, 14.5 min old) was down to 1 when I got close.","50841: The rock outcrop I had remembered (about 3, 47.7 min old) was bare when I got close.","51162: Gave up “Ask Viktor for food”: they are inside a different space."]
+birch d21.71 Cole(child,9) hh996/2 home=lean_to@19.2 in0/4 food0 indoors=false H0 T84 W0 E0 hp0.1 invFood=0 inv={"seeds":6} wx=storm/-14.497600671730526 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −29 · has paid me poorly before (0.2×) −6 · remembered worn patch (observed at tick 49752) −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["51682: Saw that Xavi died.","51882: The berry bush I had remembered (about 2, 1.7 min old) was bare when I got close.","51962: Made it to safety."]
+birch d22.68 Yusuf(adult,31) hh991/1 home=none@undefined inundefined/undefined foodundefined indoors=false H0 T59 W3 E0 hp0 invFood=0 inv={"seeds":9,"spear":1,"wood":2} wx=cloudy/-4.860386383020827 ill= inj=
+   act=gather:Fishing [work] | because=hungry +85 · walking −25 · has paid me poorly before (0.4×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["53909: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","54094: The wild grain I had remembered (about 2, 0.5 min old) was bare when I got close.","54124: The wild grain I had remembered (about 2, 0.5 min old) was bare when I got close."]
+cedar d10.34 Clara(adult,42) hh986/2 home=lean_to@17.3 in0/4 food0 indoors=false H0 T67 W43 E0 hp0 invFood=0 inv={"seeds":3,"wood":4} wx=clear/6.825079596779609 ill= inj=
+   act=gather:Picking fruit [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −26 · well-liked food +2 · remembered strained patch (observed at tick 22069) −1
+   food beliefs=[]
+   stores=[] commitments=["haul stone to 996"]
+   blocked=[]
+   log=["23767: A wolf attacked me near (64, 68).","23821: Made it to safety.","23880: Getting ready for the night came to little: the night passed without shelter."]
+cedar d22.95 Ulric(adult,23) hh17240/2 home=lean_to@22.9 in0/4 food0 indoors=false H0 T28 W1 E0 hp0 invFood=0 inv={"wood":6} wx=cloudy/-0.8074090189322352 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −27 · has paid me poorly before (0.2×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[{"id":5056,"type":"hut","hh":998,"food":1,"dist":33.6,"known":true,"believedFood":0},{"id":13138,"type":"cellar","hh":998,"food":7,"dist":39.4,"known":true,"believedFood":1}] commitments=[]
+   blocked=[]
+   log=["54576: Made it to safety.","54620: The fishing spot I had remembered (about 5, 4.7 min old) was down to 1 when I got close.","54775: The berry bush was empty when I got there."]
+cedar d24.37 Dara(adult,47) hh1008/2 home=hut@26.3 in0/4 food0 indoors=false H0 T25 W99 E0 hp0 invFood=0 inv={"rod":1,"seeds":2,"stone":2,"wood":2} wx=clear/17.690085995667534 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +65 · walking −32 · remembered water in well +3
+   food beliefs=[]
+   stores=[{"id":16233,"type":"lean_to","hh":15075,"food":1,"dist":14,"known":true,"believedFood":0}] commitments=[]
+   blocked=[]
+   log=["57723: The tree I had remembered (about 3, 6.8 min old) was down to 1 when I got close.","57895: Gave up on: put 8 units of food by for the household - never got any food put by (the store is at 0 of 8).","58479: The tree I had remembered (about 4, 8.7 min old) was down to 2 when I got close."]
+cedar d36.08 Corin(adult,25) hh1023/3 home=hut@33.4 in0/4 food0 indoors=false H0 T40 W34 E0 hp0 invFood=0 inv={"seeds":8,"pick":1,"basket":1,"rod":1,"hoe":1,"hammer":1,"stone":3} wx=rain/10.319365219237962 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +59 · walking −42 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=["deliver grain to 17241","deliver grain to 1025"]
+   blocked=[]
+   log=["86301: A wolf attacked me near (20, 65).","86358: Made it to safety.","86414: The fruit tree I had remembered (about 5, 6.4 min old) was down to 2 when I got close."]
+cedar d36.72 Tariq(adult,25) hh13315/1 home=none@undefined inundefined/undefined foodundefined indoors=false H0 T25 W15 E0 hp0 invFood=0 inv={"wood":2,"seeds":1} wx=rain/1.546957938880512 ill= inj=
+   act=gather:Fishing [work] | because=hungry +85 · walking −9 · has paid me poorly before (0.3×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["87646: The fishing spot Hal had described (about 10, 20.0 min old) was bare when I got close.","87724: The fishing spot I had remembered (about 10, 30.2 min old) was down to 1 when I got close.","87859: The fishing spot I had remembered (about 10, 30.5 min old) was bare when I got close."]
+fern d11.3 Juno(elder,75) hh997/2 home=hut@28.9 in0/4 food0 indoors=false H0 T27 W34 E0 hp0 invFood=0 inv={"basket":1,"wood":4,"stone":1} wx=rain/8.664905527700167 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −31 · has paid me poorly before (0.3×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["25855: The fish spot has been picked clean.","26280: Getting ready for the night came to little: the night passed without shelter.","26583: The rock outcrop I had remembered (about 3, 8.1 min old) was down to 1 when I got close."]
+fern d11.53 Zed(adult,22) hh1007/3 home=hut@18.1 in0/4 food0 indoors=false H0 T50 W37 E0 hp0 invFood=0 inv={"rod":1,"basket":1,"spear":1,"stone":4,"wood":1} wx=rain/3.7582548744062594 ill= inj=
+   act=gather:Fishing [travel] | because=I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −19 · work estimate 1×; my visit here found no stock (2 recorded empty visits) −4 · remembered worn patch (observed at tick 24981) −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["27003: Orla told me a story: they still tell how Nora reached the last grain a moment before Fenn.","27113: Saw that Juno died.","27450: Read at the grave that Yusuf died."]
+fern d11.96 Maren(child,3) hh1015/3 home=lean_to@9.3 in0/4 food0 indoors=false H0 T30 W14 E0 hp0 invFood=0 inv={} wx=rain/4.519947125288767 ill= inj=
+   act=gather:Fishing [travel] | because=I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −15 · work estimate 0.1×; my visit here found no stock (1 recorded empty visit) −6 · remembered worn patch (observed at tick 26447) −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["27709: Gathered 1 berries from the berry bush.","27884: Read at the grave that Zed died.","28601: Read at the grave that Yusuf died."]
+fern d13.55 Fenn(adult,41) hh971/3 home=hut@16.5 in0/4 food0 indoors=false H0 T84 W76 E0 hp0 invFood=0 inv={"basket":1,"seeds":6,"stone":1,"wood":3} wx=cloudy/10.098062810890434 ill= inj=
+   act=gather:Fishing [travel] | because=I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −13 · work estimate 0.1×; my visit here found no stock (1 recorded empty visit) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["31432: Nora gave me 1 grain.","31795: Slept and recovered 21 energy.","32333: Means to be ready for the night: hungry enough that the night would be hard."]
+fern d13.67 Yara(adult,38) hh1015/1 home=lean_to@20.6 in0/4 food0 indoors=false H0 T35 W50 E0 hp0 invFood=0 inv={"axe":1,"hoe":1,"wood":3,"seeds":2,"fibre":1} wx=cloudy/5.677781483834764 ill= inj=
+   act=eat_store:Eating from the stores [travel] | because=hungry +92 · walking −23 · goods lying about −1
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["32257: Read at the grave that Dax died.","32314: The berry bush I had remembered (about 2, 9.1 min old) was bare when I got close.","32443: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+gen-2 d7.72 Lena(elder,71) hh821/2 home=hut@19.2 in0/4 food0 indoors=false H0 T30 W39 E0 hp0 invFood=0 inv={"wood":2} wx=cloudy/4.653161406901146 ill= inj=
+   act=gather:Fishing [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −21 · good at it −3 · well-liked food +3
+   food beliefs=[]
+   stores=[{"id":837,"type":"lean_to","hh":836,"food":3,"dist":18.6,"known":true,"believedFood":0}] commitments=[]
+   blocked=[]
+   log=["17449: Kira gave me 1 berries.","17749: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","18004: The tree I had remembered (about 2, 5.0 min old) was down to 1 when I got close."]
+gen-2 d29.36 Ivo(child,10) hh821/2 home=hut@16.4 in0/4 food10 indoors=false H0 T79 W98 E0 hp0 invFood=0 inv={"seeds":3,"stone":1} wx=cloudy/17.420344096251263 ill= inj=
+   act=gather:Fishing [travel] | because=I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −17 · well-liked food +3 · remembered worn patch (observed at tick 65900) −3
+   food beliefs=[]
+   stores=[{"id":3352,"type":"hut","hh":821,"food":10,"dist":16.4,"known":true,"believedFood":0},{"id":842,"type":"lean_to","hh":841,"food":4,"dist":20.4,"known":true,"believedFood":0},{"id":847,"type":"lean_to","hh":846,"food":1,"dist":20.4,"known":true,"believedFood":1}] commitments=[]
+   blocked=[]
+   log=["69638: The tree I had remembered (about 4, 10.2 min old) was down to 2 when I got close.","69749: The fruit tree I had remembered (about 2, 1.2 min old) was bare when I got close.","70139: The berry bush I had remembered (about 2, 7.0 min old) was bare when I got close."]
+gen-2 d29.38 Leo(adult,36) hh863/1 home=hut@13.4 in0/4 food0 indoors=false H0 T37 W99 E0 hp0 invFood=0 inv={"axe":1,"basket":1,"wood":7,"seeds":1,"blanket":1,"fibre":1} wx=cloudy/16.964564019921916 ill= inj=
+   act=socialize:Ask Pavel for food [travel] | because=hungry +72 · walking −5 · they are carrying some +4 · they came through before +1
+   food beliefs=[]
+   stores=[{"id":842,"type":"lean_to","hh":841,"food":3,"dist":4.8,"known":true,"believedFood":1},{"id":847,"type":"lean_to","hh":846,"food":1,"dist":5.8,"known":true,"believedFood":1},{"id":4163,"type":"hut","hh":851,"food":2,"dist":9.6,"known":true,"believedFood":0}] commitments=[]
+   blocked=[]
+   log=["69503: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","69704: Slept and recovered 10 energy.","69875: The berry bush I had remembered (about 2, 10.9 min old) was bare when I got close."]
+gen-2 d31.08 Pia(adult,38) hh857/3 home=lean_to@30.7 in0/4 food0 indoors=false H0 T18 W82 E0 hp0 invFood=0 inv={"seeds":6,"wool":3,"garment":2,"wood":2,"stone":1} wx=cloudy/13.407715165086536 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +78 · walking −9
+   food beliefs=[]
+   stores=[{"id":3352,"type":"hut","hh":821,"food":2,"dist":40.4,"known":true,"believedFood":1}] commitments=[]
+   blocked=[]
+   log=["74208: The tree I had remembered (about 2, 7.3 min old) was down to 1 when I got close.","74238: Read at the grave that Tariq died.","74280: Getting ready for the night came to little: the night passed without shelter."]
+gen-2 d32.45 Mona(adult,21) hh836/2 home=lean_to@19.4 in0/4 food0 indoors=false H0 T26 W90 E0 hp0 invFood=0 inv={"axe":1,"garment":1,"wood":4,"seeds":2} wx=cloudy/10.847617996089859 ill= inj=
+   act=converse:Talking with Wes [work] | because=hungry +85 · walking −15 · has paid me poorly before (0.1×) −6 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["77821: Hugo told me Theo looked hungry not long ago.","77821: Hugo told me Talia helped Ada.","77821: Hugo told me about a fruit tree a long way north-west of camp."]
+gen-4 d12.44 Finn(elder,74) hh1121/1 home=hut@13.7 in0/4 food0 indoors=false H0 T85 W49 E14 hp0 invFood=0 inv={"seeds":2,"wood":1} wx=storm/7.31247324510519 ill= inj=
+   act=gather:Picking fruit [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −14 · good at it +4 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["29147: The berry bush I had remembered (about 5, 6.5 min old) was bare when I got close.","29165: The fruit tree I had remembered (about 8, 7.0 min old) was down to 2 when I got close.","29525: The berry bush I had remembered (about 2, 0.9 min old) was bare when I got close."]
+gen-4 d13.42 Silas(child,6) hh1138/2 home=lean_to@21.9 in0/4 food0 indoors=false H0 T5 W94 E0 hp0 invFood=0 inv={"seeds":1} wx=cloudy/15.537381477786099 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +94 · walking −45 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["32070: A wolf attacked me near (69, 32).","32121: Made it to safety.","32151: The wild grain I had remembered (about 2, 23.9 min old) was bare when I got close."]
+gen-4 d13.84 Bea(adult,32) hh1112/2 home=lean_to@34.3 in0/4 food0 indoors=false H0 T17 W37 E0 hp0 invFood=0 inv={"pick":1,"rod":1,"wood":1} wx=clear/5.3581614069011785 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −36 · has paid me poorly before (0.2×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["32102: The berry bush I had remembered (about 6, 29.1 min old) was bare when I got close.","32111: The rock outcrop I had remembered (about 4, 25.1 min old) was down to 2 when I got close.","32174: The tree I had remembered (about 5, 2.7 min old) was down to 1 when I got close."]
+gen-4 d14.07 Wilma(adult,44) hh1141/2 home=lean_to@4.6 in0/4 food0 indoors=false H0 T74 W65 E0 hp0 invFood=0 inv={"axe":1,"wood":4} wx=clear/13.815332768837884 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −18 · has paid me poorly before (0.2×) −6 · remembered strained patch (observed at tick 31396) −1
+   food beliefs=[]
+   stores=[] commitments=["deliver berries to 1143"]
+   blocked=[]
+   log=["33508: The tree I had remembered (about 5, 3.9 min old) was down to 1 when I got close.","33692: Gave up on: put 8 units of food by for the household - never got any food put by (the store is at 0 of 8).","33712: The berry bush I had remembered (about 2, 3.6 min old) was bare when I got close."]
+gen-4 d14.42 Rafe(adult,41) hh1132/3 home=hut@23.5 in0/4 food0 indoors=false H0 T63 W97 E43 hp0 invFood=0 inv={"wood":1,"hammer":1,"stone":2} wx=clear/16.2994695681456 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −15 · has paid me poorly before (0.1×) −6 · good at it −2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["33260: The fish spot has been picked clean.","34124: Slept and recovered 60 energy.","34314: Read at the grave that Bea died."]
+gen-4 d15.5 Pia(adult,39) hh1135/2 home=lean_to@4 in0/4 food0 indoors=false H0 T22 W66 E0 hp0 invFood=1 inv={"basket":1,"wood":8,"grain":1} wx=rain/9.401561028145874 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +67 · walking −31 · remembered water in well +3
+   food beliefs=[]
+   stores=[{"id":1117,"type":"lean_to","hh":1116,"food":1,"dist":9.8,"known":true,"believedFood":0}] commitments=[]
+   blocked=[]
+   log=["36727: The berry bush was empty when I got there.","36899: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","36903: Gathered 1 grain from the wild grain."]
+gen-4 d28.18 Milo(adult,44) hh1112/1 home=lean_to@22.3 in0/4 food0 indoors=false H0 T45 W93 E0 hp0 invFood=0 inv={"rod":1,"basket":1,"hoe":1,"hammer":1,"garment":1,"spear":1,"axe":1,"wood":5} wx=clear/17.543118960624643 ill= inj=
+   act=gather:Fishing [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +69 · walking −29 · remembered worn patch (observed at tick 66283) −4 · good at it +4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["67315: The berry bush I had remembered (about 6, 7.8 min old) was bare when I got close.","67387: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","67438: The tree I had remembered (about 4, 59.7 min old) was down to 2 when I got close."]
+gen-4 d34.94 Hal(adult,42) hh1138/1 home=hut@26.5 in0/4 food0 indoors=false H0 T12 W0 E0 hp0.1 invFood=0 inv={"spear":1,"seeds":3,"wood":2} wx=cloudy/-9.18110542566186 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +85 · walking −6
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["82382: The fish spot has been picked clean.","82383: Means to be ready for the night: nowhere to shelter nearby for the night.","83466: Saw flood-affected ground ahead during “Picking fruit”; looking for a safe route."]
+gen-5 d24.96 Rolf(adult,31) hh6839/2 home=lean_to@27.7 in0/4 food0 indoors=false H0 T40 W46 E0 hp0 invFood=0 inv={"wood":2,"fibre":1,"stone":2,"seeds":3} wx=clear/9.049594831298856 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −19 · has paid me poorly before (0.1×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["59738: The fruit tree I had remembered (about 4, 22.5 min old) was down to 1 when I got close.","59880: Getting ready for the night came to little: the night passed without shelter.","59882: The tree I had remembered (about 5, 9.2 min old) was down to 1 when I got close."]
+gen-5 d25.61 Wen(child,1) hh942/4 home=lean_to@11.6 in0/4 food0 indoors=false H0 T40 W72 E0 hp0 invFood=0 inv={} wx=clear/8.702066501823127 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −22 · has paid me poorly before (0.1×) −6 · good at it −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["60785: Zeke told me Elin helped Lia.","60951: Went to see Yan: Yan was not where I expected.","60951: Gave up “Going to find Yan”: Yan was not where I expected."]
+gen-5 d26.11 Una(adult,39) hh948/2 home=hut@17.2 in0/4 food0 indoors=false H0 T93 W73 E0 hp0 invFood=0 inv={"seeds":9,"basket":1,"hoe":1,"saw":1} wx=clear/15.33228030793783 ill= inj=
+   act=gather:Picking berries [travel] | because=foraging is my trade · hungry +85 · walking −19 · has paid me poorly before (0.1×) −6 · good at it +4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["62495: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","62496: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","62497: Could not use the berry bush: no way to get there. I did not reach it; its current stock is unknown."]
+gen-5 d26.31 Kaia(elder,76) hh904/2 home=hut@18.4 in0/4 food0 indoors=false H0 T91 W98 E0 hp0 invFood=0 inv={"basket":1,"seeds":1,"wood":3} wx=clear/18.772590889957144 ill= inj=
+   act=animal_work:slaughter sheep [work] | because=known sheep care +75 · walking −2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=["Eat from the stores: ","Eat from the stores: ","Eat from the stores: ","Picking berries: ","Picking berries: "]
+   log=["61715: The berry bush was empty when I got there.","62155: The berry bush was empty when I got there.","62250: The fish spot was empty when I got there."]
+gen-5 d26.42 Orla(adult,21) hh20791/1 home=none@undefined inundefined/undefined foodundefined indoors=false H0 T26 W97 E0 hp0 invFood=0 inv={"wood":1} wx=clear/16.440055910177268 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +84 · walking −13 · has paid me poorly before (0.4×) −6 · remembered worn patch (observed at tick 61183) −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["62413: Read at the grave that Rolf died.","62906: Gathered 1 berries from the berry bush.","62906: The berry bush has been picked clean."]
+gen-5 d26.71 Viktor(adult,54) hh946/1 home=lean_to@16.1 in0/4 food0 indoors=false H0 T99 W45 E0 hp0 invFood=0 inv={"seeds":5,"pick":1,"fibre":1,"stone":3} wx=cloudy/4.833429534141826 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −15 · has paid me poorly before (0.1×) −6 · well-liked food +1
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=["Lay out a hut: ","Eat from the stores: ","Eat from the stores: ","Picking berries: ","Picking berries: "]
+   log=["62670: Saw that Una died.","62792: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","63574: Read at the grave that Kaia died."]
+gen-5 d27.59 Corin(adult,24) hh937/4 home=hut@3.5 in0/4 food0 indoors=false H0 T73 W67 E0 hp0 invFood=0 inv={"seeds":7,"basket":1,"wood":1} wx=cloudy/8.632241386689097 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −13 · has paid me poorly before (0.2×) −6 · remembered worn patch (observed at tick 62979) −3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["65349: The fishing spot I had remembered (about 2, 0.1 min old) was down to 1 when I got close.","65538: Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.","66213: Read at the grave that Yan died."]
+gen-5 d27.82 Jonas(youth,12) hh937/3 home=hut@41.3 in0/4 food0 indoors=false H0 T29 W58 E0 hp0 invFood=0 inv={"seeds":2,"wood":3,"garment":1,"cutting":1} wx=cloudy/4.385895893006792 ill= inj=
+   act=gather:Picking fruit [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +84 · walking −43 · good at it +2 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=["deliver fish to 939"]
+   blocked=[]
+   log=["65850: Means to put 12 units of food by for the household: went hungry lately and there is next to nothing at home.","66278: The fruit tree I had remembered (about 2, 1.7 min old) was down to 1 when I got close.","66446: The fruit tree I had remembered (about 4, 2.0 min old) was bare when I got close."]
+gen-5 d27.87 Elin(adult,32) hh3819/3 home=lean_to@27.2 in0/4 food0 indoors=false H0 T16 W41 E0 hp0 invFood=0 inv={"garment":1,"basket":1,"rod":1} wx=cloudy/5.216114578539924 ill= inj=
+   act=flee:Running from the wolf toward away from it [travel] | because=danger close +112
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["66175: Made it to safety.","66278: The berry bush I had remembered (about 3, 0.4 min old) was bare when I got close.","66827: A wolf attacked me near (20, 68)."]
+gen-5 d28.5 Lia(child,1) hh3819/2 home=lean_to@18.1 in0/4 food0 indoors=false H0 T23 W83 E30 hp0 invFood=0 inv={"seeds":2,"stone":1} wx=cloudy/12.360446526943102 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +75 · walking −21 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["67468: Slept and recovered 44 energy.","67830: Read at the grave that Corin died.","67887: Read at the grave that Yan died."]
+gen-5 d28.6 Faye(adult,26) hh919/4 home=lean_to@34.8 in0/4 food0 indoors=false H0 T47 W64 E0 hp0 invFood=0 inv={"basket":1,"pick":1,"fibre":1,"seeds":2,"hammer":1,"stone":3,"wood":2} wx=cloudy/8.029767009688648 ill= inj=
+   act=drink:Drinking at the water [work] | because=thirsty +83 · walking −8
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["67833: Gathered 2 berries from the berry bush.","67833: The berry bush has been picked clean.","68024: Means to be ready for the night: nowhere to shelter nearby for the night."]
+gen-5 d28.91 Silas(adult,34) hh13785/3 home=lean_to@1 in0/4 food0 indoors=false H0 T6 W41 E0 hp0 invFood=0 inv={"seeds":4,"wood":3,"stone":1} wx=cloudy/6.5183875174194945 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +90 · walking −17 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["68804: Made it to safety.","68914: Made it to safety.","69251: Made it to safety."]
+gen-5 d29.14 Ana(child,4) hh13785/2 home=lean_to@16 in0/4 food0 indoors=false H0 T57 W79 E0 hp0 invFood=0 inv={"seeds":1} wx=cloudy/15.60866610839292 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +85 · walking −14 · has paid me poorly before (0.1×) −6 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["69395: Saw that Silas died.","69537: The fish spot was empty when I got there.","69772: My agreed waiting period ended without a known completion; the cause is unknown."]
+gen-5 d29.57 Dax(adult,41) hh904/1 home=hut@20.4 in0/4 food0 indoors=false H0 T30 W82 E0 hp0 invFood=0 inv={"axe":1,"rod":1,"basket":1,"seeds":4,"hammer":1,"garment":1,"wool":4,"hoe":1,"wood":3} wx=cloudy/9.434170789845973 ill= inj=
+   act=gather:Picking fruit [travel] | because=hungry +85 · walking −16 · has paid me poorly before (0.1×) −6 · remembered worn patch (observed at tick 67903) −3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["70150: Read at the grave that Silas died.","70291: Read at the grave that Lia died.","70405: Read at the grave that Viktor died."]
+gen-5 d29.63 Quinn(child,7) hh913/4 home=hut@4 in0/4 food0 indoors=false H0 T58 W58 E0 hp0 invFood=0 inv={"seeds":3} wx=cloudy/6.913669996938972 ill= inj=
+   act=gather:Fishing [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −36 · remembered worn patch (observed at tick 67383) −3 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["70011: Read at the grave that Corin died.","70023: Read at the grave that Lia died.","70662: Read at the grave that Viktor died."]
+gen-5 d29.64 Petra(adult,32) hh13785/1 home=lean_to@28.9 in0/4 food0 indoors=false H0 T16 W57 E0 hp0 invFood=0 inv={"wool":3,"wood":1} wx=cloudy/6.784014286488401 ill= inj=
+   act=gather:Fishing [travel] | because=This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −12 · well-liked food +3 · good at it −1
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["70541: Read at the grave that Lia died.","70969: Saw that Dax died.","71060: Read at the grave that Faye died."]
+gen-5 d29.86 Bram(adult,31) hh928/3 home=hut@45.6 in0/4 food0 indoors=false H0 T45 W34 E0 hp0 invFood=1 inv={"seeds":3,"rod":1,"wood":4,"grain":1} wx=cloudy/4.971574945381491 ill= inj=
+   act=flee:Running from the wolf toward home [travel] | because=danger close +126
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["71610: Gathered 1 grain from the wild grain.","71610: The wild grain has been picked clean.","71623: A wolf attacked me near (28, 74)."]
+gen-5 d30.08 Mira(adult,29) hh928/2 home=hut@23.1 in0/4 food0 indoors=false H0 T75 W76 E0 hp0 invFood=0 inv={"pick":1,"seeds":4,"basket":1,"clay":2,"garment":1,"stone":1} wx=cloudy/13.215759421187073 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +84 · walking −14 · has paid me poorly before (0.1×) −6 · well-liked food +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["71538: Read at the grave that Dax died.","71625: The fruit tree was empty when I got there.","71880: Getting ready for the night came to little: the night passed without shelter."]
+gen-5 d30.31 Tessa(adult,31) hh6839/1 home=lean_to@12.1 in0/4 food0 indoors=false H0 T21 W97 E0 hp0 invFood=0 inv={"seeds":3,"fibre":1,"wood":5} wx=cloudy/18.014319021046855 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +80 · walking −17 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["71880: Getting ready for the night came to little: the night passed without shelter.","72225: Read at the grave that Jonas died.","72459: The berry bush I had remembered (about 2, 4.8 min old) was bare when I got close."]
+gen-5 d30.32 Pia(adult,44) hh909/2 home=none@undefined inundefined/undefined foodundefined indoors=false H0 T20 W97 E0 hp0 invFood=0 inv={"hoe":1,"basket":1,"rod":1,"seeds":6,"hammer":1} wx=cloudy/17.902145536842674 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +78 · walking −20 · wolf nearby −4
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["72528: Made it to safety.","72613: The fruit tree I had remembered (about 3, 13.4 min old) was down to 1 when I got close.","72616: The berry bush I had remembered (about 2, 13.4 min old) was bare when I got close."]
+gen-5 d30.76 Jess(child,9) hh948/2 home=hut@37.7 in0/4 food0 indoors=false H0 T17 W38 E0 hp0 invFood=0 inv={"seeds":7} wx=cloudy/4.2152861715682635 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +80 · walking −5
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["72481: Read at the grave that Quinn died.","72829: The wild grain I had remembered (about 2, 5.0 min old) was bare when I got close.","73342: Read at the grave that Dax died."]
+gen-5 d30.79 Bea(adult,34) hh942/2 home=none@undefined inundefined/undefined foodundefined indoors=false H0 T34 W36 E0 hp0 invFood=0 inv={"rod":1,"seeds":7,"fibre":1,"stone":2} wx=cloudy/4.185576317846237 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +85 · walking −13 · has paid me poorly before (0.1×) −6 · well-liked food +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["72943: Took Dara into my household.","73067: Read at the grave that Quinn died.","73413: The fruit tree was empty when I got there."]
+gen-6 d40.84 Lia(adult,41) hh1072/4 home=hut@26.5 in0/4 food0 indoors=false H0 T60 W46 E0 hp0 invFood=0 inv={"axe":1,"basket":1,"rod":1,"hoe":1,"hammer":1,"garment":1,"wood":5,"seeds":1,"wool":1} wx=clear/5.331891784190864 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +85 · walking −10 · has paid me poorly before (0.1×) −6 · remembered worn patch (observed at tick 94780) −3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["96908: Gathered 1 berries from the berry bush.","96908: The berry bush has been picked clean.","96909: Means to be ready for the night: nowhere to shelter nearby for the night."]
+meadow d10.38 Jonas(adult,25) hh1030/4 home=lean_to@2 in0/4 food0 indoors=false H0 T40 W55 E0 hp0 invFood=0 inv={"wood":2,"seeds":3} wx=cloudy/5.290470092683128 ill= inj=
+   act=gather:Gathering wild grain [travel] | because=hungry +83 · walking −23 · has paid me poorly before (0.3×) −6 · remembered worn patch (observed at tick 24585) −5
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["24624: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","24717: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","24756: The berry bush I had remembered (about 4, 0.1 min old) was down to 1 when I got close."]
+meadow d11.44 Dax(adult,34) hh1020/3 home=lean_to@10 in0/4 food0 indoors=false H0 T99 W44 E0 hp0 invFood=0 inv={"wood":2,"seeds":2} wx=cloudy/9.340503633676473 ill= inj=
+   act=gather:Picking berries [travel] | because=a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +85 · walking −24 · has paid me poorly before (0.2×) −6 · well-liked food +1
+   food beliefs=[]
+   stores=[{"id":5734,"type":"hut","hh":1025,"food":1,"dist":26.6,"known":true}] commitments=[]
+   blocked=["Lay out a hut: ","Eat from the stores: ","Eat from the stores: ","Fishing: ","Sleep: "]
+   log=["26877: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","27078: The wild grain I had remembered (about 2, 3.3 min old) was down to 1 when I got close.","27445: Means to be ready for the night: hungry enough that the night would be hard."]
+meadow d23.11 Lena(child,5) hh1030/3 home=lean_to@19.7 in0/4 food0 indoors=false H0 T29 W6 E15 hp0 invFood=0 inv={"seeds":10} wx=rain/3.8026044211701304 ill= inj=
+   act=flee:Running from the wolf toward away from it [travel] | because=danger close +132
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["55147: Saw that Alma died.","55345: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","55346: Gathered 3 grain from the wild grain."]
+meadow d23.8 Rafe(child,8) hh1035/2 home=hut@20.9 in0/4 food0 indoors=false H0 T55 W22 E0 hp0 invFood=0 inv={"wood":2,"seeds":1} wx=cloudy/2.310927038873297 ill= inj=
+   act=gather:Fishing [travel] | because=hungry +69 · walking −14 · has paid me poorly before (0.2×) −6 · good at it −3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["55996: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","56143: Over the fever at last.","56513: Saw that Quinn died."]
+meadow d23.93 Mona(child,11) hh1020/1 home=lean_to@19 in0/4 food0 indoors=false H0 T25 W32 E25 hp0 invFood=0 inv={"seeds":5} wx=cloudy/6.476314425172937 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −21 · has paid me poorly before (0.1×) −6 · good at it +2
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["57278: The rock outcrop I had remembered (about 3, 69.9 min old) was bare when I got close.","57299: The rock outcrop I had remembered (about 5, 69.9 min old) was bare when I got close.","57326: Read at the grave that Jax died."]
+meadow d24.11 Tomas(child,0) hh1011/3 home=hut@12.7 in0/4 food0 indoors=false H0 T18 W73 E0 hp0 invFood=0 inv={} wx=cloudy/14.706693366705133 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +73 · walking −28 · remembered water in well +3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["57440: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","57465: A wolf attacked me near (56, 34).","57518: Made it to safety."]
+meadow d24.42 Bea(adult,34) hh998/2 home=hut@7.6 in0/4 food0 indoors=false H0 T74 W99 E0 hp0 invFood=0 inv={"seeds":8,"basket":1,"fibre":1,"wood":1,"wool":1} wx=clear/16.341967928240745 ill= inj=
+   act=gather:Picking berries [travel] | because=hungry +85 · walking −13 · has paid me poorly before (0.2×) −6 · remembered worn patch (observed at tick 54376) −3
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["58117: Read at the grave that Alma died.","58234: Read at the grave that Tariq died.","58498: Read at the grave that Zeke died."]
+meadow d24.51 Hal(adult,42) hh1011/2 home=hut@25.6 in0/4 food0 indoors=false H0 T15 W86 E0 hp0 invFood=0 inv={"seeds":3,"fibre":1,"basket":1} wx=clear/12.902581199936805 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +83 · walking −7
+   food beliefs=[]
+   stores=[] commitments=[]
+   blocked=[]
+   log=["58419: Read at the grave that Mona died.","58434: Read at the grave that Zeke died.","58575: Read at the grave that Maren died."]
+
+=== thirst
+aspen d30.65 Ines(adult,36) hh1091/2 home=hut@4.9 in0/4 food8 indoors=false H0 T0 W39 E0 hp0 invFood=0 inv={"basket":1,"rod":1,"pick":1,"hoe":1,"seeds":5,"axe":1,"wood":2,"stone":1} wx=rain/3.329720631667829 ill= inj=
+   act=drink:Drinking at the water [travel] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +98 · walking −9
+   log=["72912: Means to be ready for the night: thirsty enough that the night would be hard.","73092: Gave up “Drinking at the water”: flood route stayed blocked after waiting.","73273: Gave up “Drinking at the well”: flood route stayed blocked after waiting."]
+birch d11.3 Cora(elder,69) hh1016/2 home=lean_to@5.6 in0/4 food0 indoors=false H0 T0 W25 E0 hp0 invFood=0 inv={"seeds":3,"wood":2} wx=rain/7.37365071498863 ill= inj=
+   act=drink:Drinking at the well [travel] | because=thirsty +100 · walking −22 · remembered water in well +3
+   log=["26868: Gave up on: put 8 units of food by for the household - never got any food put by (the store is at 0 of 8).","26896: Gave up “Drinking at the water”: flood route stayed blocked after waiting.","26945: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close."]
+birch d21.08 Kaia(child,6) hh1009/2 home=lean_to@38 in0/4 food0 indoors=false H0 T0 W0 E0 hp0.1 invFood=0 inv={"seeds":3} wx=rain/1.1914223532751436 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +96 · walking −12 · wolf nearby −9
+   log=["50465: A wolf attacked me near (66, 37).","50514: Made it to safety.","50528: Read at the grave that Rolf died."]
+birch d24.58 Gus(adult,37) hh1004/1 home=hut@1.6 in0/4 food0 indoors=true H0 T0 W73 E0 hp0 invFood=1 inv={"basket":1,"seeds":5,"fibre":1,"wood":3,"berries":1} wx=rain/6.047062257725394 ill= inj=
+   act=drink:Drinking at the well [travel BLOCKED home exit is blocked] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +102 · walking −18 · remembered water in well +3
+   log=["57825: Gave up “Drinking at the well”: took too long.","58627: Gave up “Drinking at the well”: took too long.","58628: Means to be ready for the night: thirsty enough that the night would be hard."]
+fern d13.52 Jess(adult,28) hh1011/2 home=lean_to@21.8 in0/4 food0 indoors=false H0 T0 W77 E0 hp0 invFood=0 inv={"basket":1,"garment":1,"fibre":1,"seeds":4} wx=cloudy/11.815511330643776 ill= inj=
+   act=drink:Drinking at the water [travel] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +91 · walking −7
+   log=["32014: Gave up “Drinking at the water”: flood route stayed blocked after waiting.","32015: Means to be ready for the night: nowhere to shelter nearby for the night.","32065: Saw flood-affected ground ahead during “Drinking at the water”; looking for a safe route."]
+gen-1 d12.7 Ana(elder,68) hh908/1 home=lean_to@49.2 in0/4 food0 indoors=false H0 T0 W36 E0 hp0 invFood=0 inv={"pick":1,"wood":1} wx=cloudy/5.032045673969004 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +98 · walking −15
+   log=["29473: Reached the destination of “Picking fruit” after earlier route failures (activity #12187).","29591: Saw flood-affected ground ahead during “Drinking at the water”; looking for a safe route.","30284: Gave up “Drinking at the water”: took too long."]
+gen-1 d15.94 Una(adult,33) hh916/4 home=lean_to@35.3 in0/4 food0 indoors=false H32 T0 W6 E14 hp0 invFood=2 inv={"axe":1,"fibre":1,"seeds":3,"wood":2,"berries":2,"stone":1} wx=rain/4.172170396696208 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +98 · walking −18 · wolf nearby −13
+   log=["37937: Ada was born.","37992: Made it to safety.","38172: Gave up “Drinking at the water”: flood route stayed blocked after waiting."]
+gen-1 d21.66 Delia(adult,35) hh939/2 home=lean_to@26.4 in0/4 food0 indoors=false H0 T0 W4 E0 hp0.1 invFood=0 inv={"hoe":1,"basket":1,"axe":1,"pick":1,"wood":1,"stone":2,"seeds":3} wx=cloudy/-5.63645657162651 ill= inj=
+   act=flee:Running from the wolf toward other people [work] | because=danger close +121
+   log=["51905: Made it to safety.","51905: Gave up “Running from the wolf toward other people”: took too long.","51930: A wolf attacked me near (46, 19)."]
+gen-1 d23.08 Ada(child,0) hh916/3 home=none@undefined inundefined/undefined foodundefined indoors=false H2 T0 W23 E0 hp0 invFood=0 inv={} wx=cloudy/5.585168329668457 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +98 · walking −16 · wolf nearby −9
+   log=["55154: A wolf attacked me near (64, 22).","55184: A wolf attacked me near (64, 22).","55231: Made it to safety."]
+gen-4 d28.66 Ivo(elder,68) hh1135/1 home=lean_to@34.3 in0/4 food0 indoors=false H9 T0 W57 E0 hp0 invFood=0 inv={"seeds":2,"wood":2} wx=rain/6.605282061590114 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +97 · walking −64 · was driven off near here −11 · wolf nearby −3
+   log=["68442: Made it to safety.","68535: A wolf attacked me near (9, 59).","68585: Made it to safety."]
+gen-4 d30.08 Una(adult,45) hh1127/4 home=lean_to@9.5 in0/4 food0 indoors=false H0 T0 W53 E0 hp0.1 invFood=0 inv={"hoe":1,"basket":1,"seeds":10,"axe":1,"garment":1,"wood":4} wx=rain/10.040759421187072 ill= inj=
+   act=drink:Drinking at the water [travel BLOCKED Waiting for a safe route past remembered flood ground] | because=thirsty +98 · walking −5
+   log=["72051: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","72054: The fishing spot I had remembered (about 2, 0.0 min old) was down to 1 when I got close.","72165: Gave up “Drinking at the well”: flood route stayed blocked after waiting."]
+gen-4 d35.12 Eli(adult,31) hh1099/1 home=lean_to@26.2 in0/4 food0 indoors=false H0 T0 W32 E0 hp0 invFood=0 inv={"rod":1,"blanket":1,"garment":1,"basket":1,"seeds":2,"wood":3} wx=cloudy/7.423885540493682 ill= inj=
+   act=drink:Drinking at the water [travel] | because=thirsty +98 · walking −22
+   log=["84099: A wolf attacked me near (38, 70).","84129: A wolf attacked me near (38, 70).","84189: Made it to safety."]
+gen-4 d35.63 Lia(adult,44) hh1132/2 home=hut@3.6 in0/4 food0 indoors=false H0 T0 W39 E0 hp0 invFood=1 inv={"seeds":7,"basket":1,"berries":1,"wood":4} wx=cloudy/3.655527705369484 ill= inj=
+   act=drink:Drinking at the well [travel BLOCKED Waiting for a safe route past remembered flood ground] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +102 · walking −9 · remembered water in well +3
+   log=["85030: Gave up “Drinking at the water”: flood route stayed blocked after waiting.","85211: Gave up “Drinking at the well”: flood route stayed blocked after waiting.","85392: Gave up “Drinking at the water”: flood route stayed blocked after waiting."]
+gen-5 d35.4 Otto(adult,37) hh913/1 home=hut@1.6 in0/4 food0 indoors=true H0 T0 W73 E61 hp0 invFood=0 inv={"hoe":1,"basket":1,"seeds":1,"wood":5} wx=rain/7.743620768432722 ill= inj=
+   act=drink:Drinking at the water [travel BLOCKED home exit is blocked] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +98 · walking −6
+   log=["84024: Gave up on: make an axe - never got round to the axe (still short 1 stone).","84832: Gave up “Drinking at the well”: took too long.","84833: Means to be ready for the night: thirsty enough that the night would be hard."]
+meadow d23.03 Edda(adult,48) hh1038/2 home=lean_to@28 in0/4 food0 indoors=false H2 T0 W0 E0 hp0.1 invFood=0 inv={"hoe":1,"seeds":3,"stone":1,"axe":1,"wood":2,"fibre":1} wx=rain/-1.5571693726999687 ill= inj=
+   act=drink:Drinking at the water [travel] | because=a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +92 · walking −20
+   log=["55080: Getting ready for the night came to little: the night passed without shelter.","55087: Saw that Uri died.","55093: Saw that Ivy died."]
+meadow d24.62 Kai(child,5) hh1005/3 home=hut@1.6 in0/4 food0 indoors=true H0 T0 W100 E42 hp0 invFood=0 inv={"seeds":2} wx=clear/7.975784237142116 ill= inj=
+   act=drink:Drinking at the well [travel BLOCKED home exit is blocked] | because=thirsty +102 · walking −13 · remembered water in well +3
+   log=["57464: Slept and recovered 65 energy.","58266: Gave up “Drinking at the well”: took too long.","59068: Gave up “Drinking at the water”: took too long."]
+meadow d25.26 Sofia(adult,42) hh1005/2 home=hut@1.6 in0/4 food0 indoors=true H0 T0 W100 E0 hp0 invFood=0 inv={"seeds":4,"rod":1,"fibre":1,"wood":3} wx=cloudy/18.094457207660778 ill= inj=
+   act=drink:Drinking at the water [travel BLOCKED home exit is blocked] | because=thirsty +98 · walking −12
+   log=["59880: Getting ready for the night came to little: the night passed without shelter.","59990: Gave up “Drinking at the water”: took too long.","60577: Gave up on: put 12 units of food by for the household - never got any food put by (the store is at 0 of 12)."]

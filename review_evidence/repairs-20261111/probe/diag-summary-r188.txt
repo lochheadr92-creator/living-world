@@ -1,0 +1,14 @@
+aspen: alive 20 deaths 20 {"fever":2,"hunger":6,"wolf attack":4,"exposure":7,"thirst":1} conserved true problems {"promise-to-gone":33,"indoors-not-listed":310,"blocked-over-half-day":1}
+birch: alive 8 deaths 20 {"thirst":3,"wolf attack":4,"injuries":3,"fever":3,"hunger":3,"exposure":4} conserved true problems {"indoors-not-listed":826,"promise-to-gone":19,"blocked-over-half-day":2}
+cedar: alive 25 deaths 17 {"hunger":5,"fever":3,"exposure":5,"wolf attack":2,"injuries":2} conserved true problems {"indoors-not-listed":1144,"promise-to-gone":25,"promise-duplicate":1}
+fern: alive 20 deaths 19 {"fever":2,"exposure":7,"hunger":5,"wolf attack":4,"thirst":1} conserved true problems {"indoors-not-listed":851,"promise-to-gone":55}
+gen-1: alive 16 deaths 18 {"fever":2,"thirst":4,"injuries":3,"wolf attack":3,"exposure":6} conserved true problems {"indoors-not-listed":1165,"promise-duplicate":13,"promise-to-gone":22}
+gen-2: alive 20 deaths 10 {"hunger":5,"wolf attack":3,"exposure":2} conserved true problems {"indoors-not-listed":986,"promise-to-gone":6,"promise-duplicate":4}
+done
+gen-3: alive 23 deaths 5 {"fever":3,"exposure":1,"wolf attack":1} conserved true problems {"indoors-not-listed":1390}
+gen-4: alive 17 deaths 16 {"hunger":8,"wolf attack":2,"thirst":4,"fever":1,"exposure":1} conserved true problems {"indoors-not-listed":814,"promise-duplicate":21,"promise-to-gone":9,"blocked-over-half-day":3}
+gen-5: alive 9 deaths 32 {"exposure":5,"hunger":22,"injuries":1,"wolf attack":3,"thirst":1} conserved true problems {"indoors-not-listed":1076,"promise-to-gone":38}
+gen-6: alive 32 deaths 2 {"hunger":1,"injuries":1} conserved true problems {"indoors-not-listed":2149}
+meadow: alive 19 deaths 28 {"fever":5,"hunger":8,"exposure":5,"thirst":3,"wolf attack":5,"injuries":2} conserved true problems {"indoors-not-listed":1168,"promise-to-gone":6,"blocked-over-half-day":2}
+river: alive 18 deaths 14 {"wolf attack":2,"hunger":9,"exposure":1,"fever":1,"injuries":1} conserved true problems {"indoors-not-listed":937,"promise-to-gone":3}
+done

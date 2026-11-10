@@ -1,0 +1,1624 @@
+{
+ "seed": "gen-2",
+ "days": 45,
+ "rules": 188,
+ "alive": 20,
+ "deaths": 10,
+ "conserved": true,
+ "problems": {
+  "indoors-not-listed": {
+   "n": 986,
+   "first": "t6000 Kira in hut 3352",
+   "last": "t108000 Ada in hut 4163"
+  },
+  "promise-to-gone": {
+   "n": 6,
+   "first": "t76200 Mona -> 839",
+   "last": "t77700 Mona -> 839"
+  },
+  "promise-duplicate": {
+   "n": 4,
+   "first": "t81900 Pavel deliver|10832|fish|0|842|",
+   "last": "t85800 Isla deliver|859|berries|0|859|"
+  }
+ },
+ "hashes": {
+  "1": "0d0e5c52",
+  "2": "62e44fa9",
+  "3": "5c6cc400",
+  "4": "436a8729",
+  "5": "16a3d79f",
+  "6": "ab4e0059",
+  "7": "90ec4e47",
+  "8": "0a5724ac",
+  "9": "f46244aa",
+  "10": "c730ceff",
+  "11": "d663e541",
+  "12": "528f7165",
+  "13": "0e166daf",
+  "14": "4c68a739",
+  "15": "4957cfb9",
+  "16": "418ad029",
+  "17": "ab41658d",
+  "18": "0a53b8da",
+  "19": "9837fd9f",
+  "20": "b3d5ed33",
+  "21": "f329c7ff",
+  "22": "948dd164",
+  "23": "0148530e",
+  "24": "5863d88f",
+  "25": "43dcea2f",
+  "26": "63733811",
+  "27": "f80ba82c",
+  "28": "be1cf618",
+  "29": "fc4e4202",
+  "30": "ed8235a8",
+  "31": "9d124d16",
+  "32": "1e873c19",
+  "33": "9126205e",
+  "34": "4a897518",
+  "35": "333b9fb9",
+  "36": "f3ffacf9",
+  "37": "47480430",
+  "38": "7a576939",
+  "39": "7e663cbf",
+  "40": "02f0f973",
+  "41": "135ef97a",
+  "42": "a9f7c24f",
+  "43": "7a51d156",
+  "44": "41bac80e",
+  "45": "b8ce448a"
+ },
+ "deathList": [
+  {
+   "name": "Lena",
+   "cause": "hunger",
+   "tick": 18531,
+   "day": 7.72,
+   "age": 71,
+   "before": {
+    "tick": 18531,
+    "day": 7.72,
+    "name": "Lena",
+    "id": 824,
+    "age": 0,
+    "stage": "elder",
+    "hh": 821,
+    "hhMembers": 2,
+    "homeType": "hut",
+    "homeDist": 19.2,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 52.3,
+    "y": 57.9,
+    "health": 0,
+    "needs": {
+     "hunger": 0,
+     "thirst": 30.267999999992824,
+     "energy": 0,
+     "warmth": 38.752252651957065,
+     "safety": 60.243204990177844,
+     "social": 0
+    },
+    "inv": {
+     "wood": 2
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 4.653161406901146,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "gather",
+     "label": "Fishing",
+     "phase": "travel",
+     "blocked": "",
+     "target": 812,
+     "goal": "to ease hunger (0/100)"
+    },
+    "suspended": null,
+    "because": "This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −21 · good at it −3 · well-liked food +3",
+    "chosen": "Fishing",
+    "alts": [
+     "Fishing undefined",
+     "Picking berries undefined",
+     "Go and find Kira undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 1524,
+      "btype": "well",
+      "hh": 0,
+      "dist": 9,
+      "seenAgo": 137,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 74.45641600004225
+     },
+     {
+      "id": 827,
+      "btype": "lean_to",
+      "hh": 826,
+      "dist": 12.4,
+      "seenAgo": 3215,
+      "realType": "lean_to",
+      "realHh": 826,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 29.56060337745919
+     },
+     {
+      "id": 831,
+      "btype": "lean_to",
+      "hh": 830,
+      "dist": 14.3,
+      "seenAgo": 3227,
+      "realType": "lean_to",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 30.609312359760118
+     },
+     {
+      "id": 823,
+      "btype": "lean_to",
+      "hh": 821,
+      "dist": 14.7,
+      "seenAgo": 3191,
+      "realType": "lean_to",
+      "realHh": 821,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 32.05591561417444
+     },
+     {
+      "id": 820,
+      "btype": "fire",
+      "hh": 0,
+      "dist": 17.3,
+      "seenAgo": 1631,
+      "realType": "fire",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 100
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 837,
+      "type": "lean_to",
+      "hh": 836,
+      "food": 3,
+      "dist": 18.6,
+      "known": true,
+      "believedFood": 0
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "16694: Gave up on: put 8 units of food by for the household - never got any food put by (the store is at 0 of 8).",
+     "17259: Gathered 1 berries from the berry bush.",
+     "17259: The berry bush has been picked clean.",
+     "17449: Kira gave me 1 berries.",
+     "17749: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "18004: The tree I had remembered (about 2, 5.0 min old) was down to 1 when I got close."
+    ]
+   }
+  },
+  {
+   "name": "Oren",
+   "cause": "wolf attack",
+   "tick": 22881,
+   "day": 9.53,
+   "age": 75,
+   "before": {
+    "tick": 22881,
+    "day": 9.53,
+    "name": "Oren",
+    "id": 864,
+    "age": 0,
+    "stage": "elder",
+    "hh": 863,
+    "hhMembers": 2,
+    "homeType": "lean_to",
+    "homeDist": 31.4,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 19.5,
+    "y": 45.6,
+    "health": 3.3,
+    "needs": {
+     "hunger": 51.81299999999877,
+     "thirst": 61.87999999999533,
+     "energy": 0,
+     "warmth": 3.1347939067517805,
+     "safety": 3.924994592514027,
+     "social": 0
+    },
+    "inv": {
+     "basket": 1,
+     "wood": 1,
+     "seeds": 1,
+     "fruit": 1
+    },
+    "invFood": 1,
+    "weather": {
+     "kind": "rain",
+     "temp": -3.3495620571499485,
+     "rain": 0.7
+    },
+    "activity": {
+     "kind": "flee",
+     "label": "Running from the wolf toward away from it",
+     "phase": "travel",
+     "blocked": "",
+     "target": 0,
+     "goal": "to reach safety"
+    },
+    "suspended": null,
+    "because": "danger close +123",
+    "chosen": "Run to safety (away from it)",
+    "alts": [],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 5020,
+      "btype": "lean_to",
+      "hh": 866,
+      "dist": 18,
+      "seenAgo": 6840,
+      "realType": "lean_to",
+      "realHh": 866,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 50.91876949999278
+     },
+     {
+      "id": 837,
+      "btype": "lean_to",
+      "hh": 836,
+      "dist": 20,
+      "seenAgo": 5865,
+      "realType": "lean_to",
+      "realHh": 836,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 58.35543826949734
+     },
+     {
+      "id": 842,
+      "btype": "lean_to",
+      "hh": 841,
+      "dist": 20.7,
+      "seenAgo": 5898,
+      "realType": "lean_to",
+      "realHh": 841,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 62.49400976375628
+     },
+     {
+      "id": 2329,
+      "btype": "well",
+      "hh": 0,
+      "dist": 20.9,
+      "seenAgo": 5133,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 71.5295860000495
+     },
+     {
+      "id": 3383,
+      "btype": "lean_to",
+      "hh": 861,
+      "dist": 22.5,
+      "seenAgo": 5205,
+      "realType": "lean_to",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 64.2884279999755
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 4163,
+      "type": "hut",
+      "hh": 851,
+      "food": 1,
+      "dist": 24.5,
+      "known": true
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "22453: Gathered 1 fruit from the fruit tree.",
+     "22463: Means to be ready for the night: nowhere to shelter nearby for the night.",
+     "22551: The berry bush I had remembered (about 2, 1.3 min old) was down to 1 when I got close.",
+     "22555: Made it to safety.",
+     "22761: Gathered 2 fruit from the fruit tree.",
+     "22829: Gathered 2 fruit from the fruit tree."
+    ]
+   }
+  },
+  {
+   "name": "Tariq",
+   "cause": "wolf attack",
+   "tick": 30044,
+   "day": 12.52,
+   "age": 22,
+   "before": {
+    "tick": 30044,
+    "day": 12.52,
+    "name": "Tariq",
+    "id": 867,
+    "age": 0,
+    "stage": "adult",
+    "hh": 866,
+    "hhMembers": 1,
+    "homeType": "lean_to",
+    "homeDist": 25.8,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 15.5,
+    "y": 31,
+    "health": 11.6,
+    "needs": {
+     "hunger": 32.03299999999807,
+     "thirst": 64.37199999998947,
+     "energy": 22.73125639967282,
+     "warmth": 25.42151928871523,
+     "safety": 5.748546917436691,
+     "social": 5.480147895677925
+    },
+    "inv": {
+     "seeds": 5,
+     "hoe": 1
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "storm",
+     "temp": 4.03094234450384,
+     "rain": 1
+    },
+    "activity": {
+     "kind": "flee",
+     "label": "Running from the wolf toward the fire",
+     "phase": "travel",
+     "blocked": "Waiting for a safe route past remembered flood ground",
+     "target": 0,
+     "goal": "to reach safety"
+    },
+    "suspended": null,
+    "because": "danger close +119",
+    "chosen": "Run to safety (the fire)",
+    "alts": [],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 7944,
+      "btype": "hut",
+      "hh": 861,
+      "dist": 22.1,
+      "seenAgo": 929,
+      "realType": "hut",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 79.78552100001026
+     },
+     {
+      "id": 2329,
+      "btype": "well",
+      "hh": 0,
+      "dist": 23.1,
+      "seenAgo": 1043,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 60.93017200006645
+     },
+     {
+      "id": 4163,
+      "btype": "hut",
+      "hh": 851,
+      "dist": 25.7,
+      "seenAgo": 3773,
+      "realType": "hut",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 4,
+      "occ": 2,
+      "cond": 53.9988500000209
+     },
+     {
+      "id": 842,
+      "btype": "lean_to",
+      "hh": 841,
+      "dist": 25.8,
+      "seenAgo": 1007,
+      "realType": "lean_to",
+      "realHh": 841,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 35.11219026375065
+     },
+     {
+      "id": 3383,
+      "btype": "lean_to",
+      "hh": 861,
+      "dist": 25.8,
+      "seenAgo": 1058,
+      "realType": "lean_to",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 64.90660849997306
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 4163,
+      "type": "hut",
+      "hh": 851,
+      "food": 6,
+      "dist": 25.7,
+      "known": true,
+      "believedFood": 0
+     },
+     {
+      "id": 842,
+      "type": "lean_to",
+      "hh": 841,
+      "food": 8,
+      "dist": 25.8,
+      "known": true,
+      "believedFood": 0
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "29379: The tree I had remembered (about 5, 23.6 min old) was down to 1 when I got close.",
+     "29571: Gathered 1 fish from the fish spot.",
+     "29581: Means to be ready for the night: nowhere to shelter nearby for the night.",
+     "29627: Saw flood-affected ground ahead during “Running from the wolf toward the fire”; looking for a safe route.",
+     "29672: A wolf attacked me near (19, 34).",
+     "29848: Made it to safety."
+    ]
+   }
+  },
+  {
+   "name": "Vik",
+   "cause": "exposure",
+   "tick": 30492,
+   "day": 12.71,
+   "age": 27,
+   "before": {
+    "tick": 30492,
+    "day": 12.71,
+    "name": "Vik",
+    "id": 828,
+    "age": 0,
+    "stage": "adult",
+    "hh": 826,
+    "hhMembers": 2,
+    "x": 47.2,
+    "y": 46.6,
+    "health": 0,
+    "needs": {
+     "hunger": 41.65249999999462,
+     "thirst": 31.451999999995373,
+     "energy": 0,
+     "warmth": 4.775163078060032,
+     "safety": 38.54424431852081,
+     "social": 16.80653307795123
+    },
+    "inv": {
+     "basket": 1,
+     "stone": 2,
+     "seeds": 1
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "rain",
+     "temp": 1.5312955056267796,
+     "rain": 0.7
+    },
+    "activity": {
+     "kind": "drink",
+     "label": "Drinking at the well",
+     "phase": "travel",
+     "blocked": "",
+     "target": 1524,
+     "goal": "quench thirst at the well"
+    },
+    "suspended": null,
+    "because": "thirsty +68 · walking −13 · remembered water in well +3",
+    "chosen": "Drink at the well",
+    "alts": [
+     "Drink at the well undefined",
+     "Go and drink at the water undefined",
+     "Sleep right here undefined",
+     "Go and drink at the water undefined"
+    ],
+    "blockedOpts": [
+     "Lay out a lean-to: ",
+     "Eat from the stores: ",
+     "Warm up at the fire: ",
+     "Stay in shelter until it is light: "
+    ],
+    "shelters": [
+     {
+      "id": 823,
+      "btype": "lean_to",
+      "hh": 821,
+      "dist": 3.8,
+      "seenAgo": 3,
+      "realType": "lean_to",
+      "realHh": 821,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 43.18398911416155
+     },
+     {
+      "id": 1524,
+      "btype": "well",
+      "hh": 0,
+      "dist": 4.6,
+      "seenAgo": 3,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 57.08663800007307
+     },
+     {
+      "id": 831,
+      "btype": "lean_to",
+      "hh": 830,
+      "dist": 4.8,
+      "seenAgo": 12,
+      "realType": "lean_to",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 13.73738585976094
+     },
+     {
+      "id": 820,
+      "btype": "fire",
+      "hh": 0,
+      "dist": 4.9,
+      "seenAgo": 6,
+      "realType": "fire",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 100
+     },
+     {
+      "id": 1479,
+      "btype": "lean_to",
+      "hh": 863,
+      "dist": 6.9,
+      "seenAgo": 180,
+      "realType": "lean_to",
+      "realHh": 863,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 44.83668149995809
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 842,
+      "type": "lean_to",
+      "hh": 841,
+      "food": 3,
+      "dist": 9.8,
+      "known": true,
+      "believedFood": 0
+     },
+     {
+      "id": 4163,
+      "type": "hut",
+      "hh": 851,
+      "food": 1,
+      "dist": 14,
+      "known": true,
+      "believedFood": 0
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "30182: A wolf attacked me near (50, 51).",
+     "30241: Made it to safety.",
+     "30352: Asked Ivo for food.",
+     "30374: Ivo said no (no item).",
+     "30396: Ivo told me Mona looked thirsty not long ago.",
+     "30396: Ivo told me Pavel helped Hugo."
+    ]
+   }
+  },
+  {
+   "name": "Ivo",
+   "cause": "hunger",
+   "tick": 70452,
+   "day": 29.36,
+   "age": 10,
+   "before": {
+    "tick": 70452,
+    "day": 29.36,
+    "name": "Ivo",
+    "id": 829,
+    "age": 0,
+    "stage": "child",
+    "hh": 821,
+    "hhMembers": 2,
+    "homeType": "hut",
+    "homeDist": 16.4,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 10,
+    "x": 53.6,
+    "y": 55.3,
+    "health": 0,
+    "needs": {
+     "hunger": 0,
+     "thirst": 79.47739999999229,
+     "energy": 0,
+     "warmth": 98.05482978376129,
+     "safety": 83.99999978928726,
+     "social": 10.423636325481375
+    },
+    "inv": {
+     "seeds": 3,
+     "stone": 1
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 17.420344096251263,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "gather",
+     "label": "Fishing",
+     "phase": "travel",
+     "blocked": "",
+     "target": 812,
+     "goal": "to ease hunger (0/100)"
+    },
+    "suspended": null,
+    "because": "I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −17 · well-liked food +3 · remembered worn patch (observed at tick 65900) −3",
+    "chosen": "Fishing",
+    "alts": [
+     "Picking fruit undefined",
+     "Picking fruit undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 7859,
+      "btype": "quarry",
+      "hh": 0,
+      "dist": 3.8,
+      "seenAgo": 1,
+      "realType": "quarry",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 32.884149000052
+     },
+     {
+      "id": 1524,
+      "btype": "well",
+      "hh": 0,
+      "dist": 6.8,
+      "seenAgo": 1,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 35.53152400011107
+     },
+     {
+      "id": 823,
+      "btype": "lean_to",
+      "hh": 821,
+      "dist": 12.5,
+      "seenAgo": 103,
+      "realType": "lean_to",
+      "realHh": 821,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 76.90324599997193
+     },
+     {
+      "id": 831,
+      "btype": "lean_to",
+      "hh": 830,
+      "dist": 13.6,
+      "seenAgo": 139,
+      "realType": "lean_to",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 61.05334135972589
+     },
+     {
+      "id": 820,
+      "btype": "fire",
+      "hh": 0,
+      "dist": 15.7,
+      "seenAgo": 193,
+      "realType": "fire",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 100
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 3352,
+      "type": "hut",
+      "hh": 821,
+      "food": 10,
+      "dist": 16.4,
+      "known": true,
+      "believedFood": 0
+     },
+     {
+      "id": 842,
+      "type": "lean_to",
+      "hh": 841,
+      "food": 4,
+      "dist": 20.4,
+      "known": true,
+      "believedFood": 0
+     },
+     {
+      "id": 847,
+      "type": "lean_to",
+      "hh": 846,
+      "food": 1,
+      "dist": 20.4,
+      "known": true,
+      "believedFood": 1
+     },
+     {
+      "id": 4163,
+      "type": "hut",
+      "hh": 851,
+      "food": 2,
+      "dist": 24.7,
+      "known": true,
+      "believedFood": 0
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "68947: Made it to safety.",
+     "69493: Gathered 1 berries from the berry bush.",
+     "69493: The berry bush has been picked clean.",
+     "69638: The tree I had remembered (about 4, 10.2 min old) was down to 2 when I got close.",
+     "69749: The fruit tree I had remembered (about 2, 1.2 min old) was bare when I got close.",
+     "70139: The berry bush I had remembered (about 2, 7.0 min old) was bare when I got close."
+    ]
+   }
+  },
+  {
+   "name": "Leo",
+   "cause": "hunger",
+   "tick": 70501,
+   "day": 29.38,
+   "age": 36,
+   "before": {
+    "tick": 70501,
+    "day": 29.38,
+    "name": "Leo",
+    "id": 865,
+    "age": 0,
+    "stage": "adult",
+    "hh": 863,
+    "hhMembers": 1,
+    "homeType": "hut",
+    "homeDist": 13.4,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 43.4,
+    "y": 43.3,
+    "health": 0,
+    "needs": {
+     "hunger": 0,
+     "thirst": 36.66399999999041,
+     "energy": 0,
+     "warmth": 99.05226053017316,
+     "safety": 90.01532586532522,
+     "social": 0
+    },
+    "inv": {
+     "axe": 1,
+     "basket": 1,
+     "wood": 7,
+     "seeds": 1,
+     "blanket": 1,
+     "fibre": 1
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 16.964564019921916,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "socialize",
+     "label": "Ask Pavel for food",
+     "phase": "travel",
+     "blocked": "",
+     "target": 844,
+     "goal": "to get food"
+    },
+    "suspended": null,
+    "because": "hungry +72 · walking −5 · they are carrying some +4 · they came through before +1",
+    "chosen": "Ask Pavel for food",
+    "alts": [
+     "Picking berries undefined",
+     "Picking berries undefined",
+     "Picking berries undefined",
+     "Ask Theo for food undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 820,
+      "btype": "fire",
+      "hh": 0,
+      "dist": 1.3,
+      "seenAgo": 2,
+      "realType": "fire",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 100
+     },
+     {
+      "id": 837,
+      "btype": "lean_to",
+      "hh": 836,
+      "dist": 4.1,
+      "seenAgo": 2,
+      "realType": "lean_to",
+      "realHh": 836,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 46.947944769464605
+     },
+     {
+      "id": 831,
+      "btype": "lean_to",
+      "hh": 830,
+      "dist": 4.3,
+      "seenAgo": 2,
+      "realType": "lean_to",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 60.90144135972572
+     },
+     {
+      "id": 842,
+      "btype": "lean_to",
+      "hh": 841,
+      "dist": 4.8,
+      "seenAgo": 2,
+      "realType": "lean_to",
+      "realHh": 841,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 51.08651626372127
+     },
+     {
+      "id": 847,
+      "btype": "lean_to",
+      "hh": 846,
+      "dist": 5.8,
+      "seenAgo": 2,
+      "realType": "lean_to",
+      "realHh": 846,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 78.95880351011506
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 842,
+      "type": "lean_to",
+      "hh": 841,
+      "food": 3,
+      "dist": 4.8,
+      "known": true,
+      "believedFood": 1
+     },
+     {
+      "id": 847,
+      "type": "lean_to",
+      "hh": 846,
+      "food": 1,
+      "dist": 5.8,
+      "known": true,
+      "believedFood": 1
+     },
+     {
+      "id": 4163,
+      "type": "hut",
+      "hh": 851,
+      "food": 2,
+      "dist": 9.6,
+      "known": true,
+      "believedFood": 0
+     },
+     {
+      "id": 3352,
+      "type": "hut",
+      "hh": 821,
+      "food": 10,
+      "dist": 13.3,
+      "known": true,
+      "believedFood": 0
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "69477: The berry bush has been picked clean.",
+     "69479: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "69480: Getting ready for the night came to little: the night passed without shelter.",
+     "69503: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "69704: Slept and recovered 10 energy.",
+     "69875: The berry bush I had remembered (about 2, 10.9 min old) was bare when I got close."
+    ]
+   }
+  },
+  {
+   "name": "Pia",
+   "cause": "hunger",
+   "tick": 74597,
+   "day": 31.08,
+   "age": 38,
+   "before": {
+    "tick": 74597,
+    "day": 31.08,
+    "name": "Pia",
+    "id": 858,
+    "age": 0,
+    "stage": "adult",
+    "hh": 857,
+    "hhMembers": 3,
+    "homeType": "lean_to",
+    "homeDist": 30.7,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 18.5,
+    "y": 24,
+    "health": 0,
+    "needs": {
+     "hunger": 0,
+     "thirst": 17.859999999987835,
+     "energy": 0,
+     "warmth": 82.03327031499886,
+     "safety": 37.4654990678779,
+     "social": 0
+    },
+    "inv": {
+     "seeds": 6,
+     "wool": 3,
+     "garment": 2,
+     "wood": 2,
+     "stone": 1
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 13.407715165086536,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "drink",
+     "label": "Drinking at the water",
+     "phase": "travel",
+     "blocked": "",
+     "target": 1000125,
+     "goal": "to quench thirst (20/100)"
+    },
+    "suspended": null,
+    "because": "thirsty +78 · walking −9",
+    "chosen": "Go and drink at the water",
+    "alts": [
+     "Go and drink at the water undefined",
+     "Drink at the well undefined",
+     "Drink at the well undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 16969,
+      "btype": "cellar",
+      "hh": 851,
+      "dist": 19,
+      "seenAgo": 3245,
+      "realType": "cellar",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 5,
+      "occ": 0,
+      "cond": 76.75046400003014
+     },
+     {
+      "id": 15574,
+      "btype": "kiln",
+      "hh": 830,
+      "dist": 21,
+      "seenAgo": 3245,
+      "realType": "kiln",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 58.24184800008378
+     },
+     {
+      "id": 2329,
+      "btype": "well",
+      "hh": 0,
+      "dist": 22.9,
+      "seenAgo": 3191,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 33.16632400012657
+     },
+     {
+      "id": 11057,
+      "btype": "hut",
+      "hh": 830,
+      "dist": 23.7,
+      "seenAgo": 6641,
+      "realType": "hut",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 1,
+      "cond": 63.70847135003169
+     },
+     {
+      "id": 7944,
+      "btype": "hut",
+      "hh": 861,
+      "dist": 24.5,
+      "seenAgo": 1196,
+      "realType": "hut",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 45.4534030000543
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 3352,
+      "type": "hut",
+      "hh": 821,
+      "food": 2,
+      "dist": 40.4,
+      "known": true,
+      "believedFood": 1
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "73959: The wild grain has been picked clean.",
+     "74004: The tree I had remembered (about 4, 25.5 min old) was down to 2 when I got close.",
+     "74031: The rock outcrop I had remembered (about 6, 25.6 min old) was down to 3 when I got close.",
+     "74208: The tree I had remembered (about 2, 7.3 min old) was down to 1 when I got close.",
+     "74238: Read at the grave that Tariq died.",
+     "74280: Getting ready for the night came to little: the night passed without shelter."
+    ]
+   }
+  },
+  {
+   "name": "Tomas",
+   "cause": "wolf attack",
+   "tick": 76120,
+   "day": 31.72,
+   "age": 25,
+   "before": {
+    "tick": 76120,
+    "day": 31.72,
+    "name": "Tomas",
+    "id": 839,
+    "age": 0,
+    "stage": "adult",
+    "hh": 836,
+    "hhMembers": 3,
+    "homeType": "lean_to",
+    "homeDist": 16.9,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 40.4,
+    "y": 27.6,
+    "health": 9.9,
+    "needs": {
+     "hunger": 13.543000000000024,
+     "thirst": 61.403999999994625,
+     "energy": 6.708556436851316,
+     "warmth": 58.03916895820995,
+     "safety": 0.8203046367879977,
+     "social": 0
+    },
+    "inv": {
+     "spear": 1,
+     "seeds": 2,
+     "basket": 1,
+     "stone": 2,
+     "garment": 1,
+     "axe": 1,
+     "wood": 3
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "clear",
+     "temp": 5.434081639012825,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "flee",
+     "label": "Running from the wolf toward away from it",
+     "phase": "travel",
+     "blocked": "",
+     "target": 0,
+     "goal": "to reach safety"
+    },
+    "suspended": null,
+    "because": "danger close +117",
+    "chosen": "Run to safety (away from it)",
+    "alts": [],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 4163,
+      "btype": "hut",
+      "hh": 851,
+      "dist": 6.4,
+      "seenAgo": 3939,
+      "realType": "hut",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 5,
+      "occ": 2,
+      "cond": 45.07763200005976
+     },
+     {
+      "id": 16969,
+      "btype": "cellar",
+      "hh": 851,
+      "dist": 8,
+      "seenAgo": 57,
+      "realType": "cellar",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 5,
+      "occ": 0,
+      "cond": 75.53206400003297
+     },
+     {
+      "id": 2329,
+      "btype": "well",
+      "hh": 0,
+      "dist": 8.7,
+      "seenAgo": 3915,
+      "realType": "well",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 31.33872400012887
+     },
+     {
+      "id": 7701,
+      "btype": "timber_yard",
+      "hh": 0,
+      "dist": 8.9,
+      "seenAgo": 4665,
+      "realType": "timber_yard",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 68.8448669999597
+     },
+     {
+      "id": 3383,
+      "btype": "lean_to",
+      "hh": 861,
+      "dist": 9.9,
+      "seenAgo": 3891,
+      "realType": "lean_to",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 63.46203449991813
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [
+     {
+      "id": 16969,
+      "type": "cellar",
+      "hh": 851,
+      "food": 6,
+      "dist": 8,
+      "known": true,
+      "believedFood": 1
+     },
+     {
+      "id": 3352,
+      "type": "hut",
+      "hh": 821,
+      "food": 2,
+      "dist": 19.3,
+      "known": true,
+      "believedFood": 1
+     }
+    ],
+    "commitments": [],
+    "log": [
+     "75325: The berry bush I had remembered (about 3, 14.8 min old) was bare when I got close.",
+     "75359: Gathered 1 berries from the berry bush.",
+     "75359: The berry bush has been picked clean.",
+     "75475: The wild grain I had remembered (about 2, 15.1 min old) was bare when I got close.",
+     "76043: Gathered 1 fruit from the fruit tree.",
+     "76043: The fruit tree has been picked clean."
+    ]
+   }
+  },
+  {
+   "name": "Mona",
+   "cause": "hunger",
+   "tick": 77888,
+   "day": 32.45,
+   "age": 21,
+   "before": {
+    "tick": 77888,
+    "day": 32.45,
+    "name": "Mona",
+    "id": 838,
+    "age": 0,
+    "stage": "adult",
+    "hh": 836,
+    "hhMembers": 2,
+    "homeType": "lean_to",
+    "homeDist": 19.4,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 20.2,
+    "y": 42.7,
+    "health": 0,
+    "needs": {
+     "hunger": 0,
+     "thirst": 25.787999999996174,
+     "energy": 0,
+     "warmth": 89.97053921680566,
+     "safety": 80.41925563941348,
+     "social": 15.537684666823333
+    },
+    "inv": {
+     "axe": 1,
+     "garment": 1,
+     "wood": 4,
+     "seeds": 2
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 10.847617996089859,
+     "rain": 0
+    },
+    "activity": {
+     "kind": "converse",
+     "label": "Talking with Wes",
+     "phase": "work",
+     "blocked": "",
+     "target": 0,
+     "goal": "a chat"
+    },
+    "suspended": {
+     "kind": "gather",
+     "label": "Picking fruit"
+    },
+    "because": "hungry +85 · walking −15 · has paid me poorly before (0.1×) −6 · well-liked food +2",
+    "chosen": "Picking fruit",
+    "alts": [
+     "Picking fruit undefined",
+     "Gathering wild grain undefined",
+     "Picking fruit undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 7944,
+      "btype": "hut",
+      "hh": 861,
+      "dist": 13.8,
+      "seenAgo": 2406,
+      "realType": "hut",
+      "realHh": 861,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 67.85870300005564
+     },
+     {
+      "id": 15574,
+      "btype": "kiln",
+      "hh": 830,
+      "dist": 15.8,
+      "seenAgo": 456,
+      "realType": "kiln",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 54.29264800009298
+     },
+     {
+      "id": 11057,
+      "btype": "hut",
+      "hh": 830,
+      "dist": 16,
+      "seenAgo": 2451,
+      "realType": "hut",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 58.11377135003303
+     },
+     {
+      "id": 14053,
+      "btype": "food_rack",
+      "hh": 830,
+      "dist": 16.9,
+      "seenAgo": 2460,
+      "realType": "food_rack",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 34.21549000013122
+     },
+     {
+      "id": 16969,
+      "btype": "cellar",
+      "hh": 851,
+      "dist": 17.4,
+      "seenAgo": 447,
+      "realType": "cellar",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 5,
+      "occ": 0,
+      "cond": 74.11766400003627
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [],
+    "commitments": [],
+    "log": [
+     "77612: Made it to safety.",
+     "77690: The berry bush I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "77802: My promise ended: only 50% was done in time. I have not yet explained the outcome to the requester.",
+     "77821: Hugo told me Theo looked hungry not long ago.",
+     "77821: Hugo told me Talia helped Ada.",
+     "77821: Hugo told me about a fruit tree a long way north-west of camp."
+    ]
+   }
+  },
+  {
+   "name": "Ben",
+   "cause": "exposure",
+   "tick": 79771,
+   "day": 33.24,
+   "age": 22,
+   "before": {
+    "tick": 79771,
+    "day": 33.24,
+    "name": "Ben",
+    "id": 849,
+    "age": 0,
+    "stage": "adult",
+    "hh": 846,
+    "hhMembers": 3,
+    "homeType": "lean_to",
+    "homeDist": 6.1,
+    "homeInside": 0,
+    "homeCap": 4,
+    "homeFood": 0,
+    "x": 45.4,
+    "y": 43.3,
+    "health": 0,
+    "needs": {
+     "hunger": 18.419499999997566,
+     "thirst": 88.33599999999832,
+     "energy": 61.73356617952248,
+     "warmth": 1.8049787782998519,
+     "safety": 67.14328327627231,
+     "social": 0
+    },
+    "inv": {
+     "rod": 1,
+     "seeds": 2,
+     "wood": 2
+    },
+    "invFood": 0,
+    "weather": {
+     "kind": "cloudy",
+     "temp": 1.1211979389060591,
+     "rain": 0.9119999999999999
+    },
+    "activity": {
+     "kind": "socialize",
+     "label": "Ask Pavel for food",
+     "phase": "travel",
+     "blocked": "",
+     "target": 844,
+     "goal": "to get food"
+    },
+    "suspended": null,
+    "because": "hungry +56 · they are carrying some +4 · walking −4 · they came through before +1",
+    "chosen": "Ask Pavel for food",
+    "alts": [
+     "Ask Theo for food undefined",
+     "Shelter at the lean-to undefined",
+     "Ask Zia for food undefined",
+     "Ask Felix for food undefined"
+    ],
+    "blockedOpts": [],
+    "shelters": [
+     {
+      "id": 820,
+      "btype": "fire",
+      "hh": 0,
+      "dist": 1.2,
+      "seenAgo": 1,
+      "realType": "fire",
+      "realHh": 0,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 100
+     },
+     {
+      "id": 823,
+      "btype": "lean_to",
+      "hh": 821,
+      "dist": 4.1,
+      "seenAgo": 1,
+      "realType": "lean_to",
+      "realHh": 821,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 45.58757888994172
+     },
+     {
+      "id": 831,
+      "btype": "lean_to",
+      "hh": 830,
+      "dist": 5.1,
+      "seenAgo": 1,
+      "realType": "lean_to",
+      "realHh": 830,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 29.73767424969569
+     },
+     {
+      "id": 852,
+      "btype": "lean_to",
+      "hh": 851,
+      "dist": 5.3,
+      "seenAgo": 1,
+      "realType": "lean_to",
+      "realHh": 851,
+      "inside": 0,
+      "cap": 5,
+      "occ": 0,
+      "cond": 44.49876108428878
+     },
+     {
+      "id": 837,
+      "btype": "lean_to",
+      "hh": 836,
+      "dist": 6,
+      "seenAgo": 1,
+      "realType": "lean_to",
+      "realHh": 836,
+      "inside": 0,
+      "cap": 4,
+      "occ": 0,
+      "cond": 15.78417765944818
+     }
+    ],
+    "foodBeliefs": [],
+    "storesWithFood": [],
+    "commitments": [],
+    "log": [
+     "79172: Gave up “Drinking at the well”: no water left.",
+     "79373: Saw flood-affected ground ahead during “Gathering wild grain”; looking for a safe route.",
+     "79398: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "79597: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+     "79625: Gathered 2 grain from the wild grain.",
+     "79680: The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close."
+    ]
+   }
+  }
+ ]
+}

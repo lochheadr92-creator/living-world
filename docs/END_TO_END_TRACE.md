@@ -184,3 +184,12 @@ feed line, the failures nobody remembers, and the two log roll-offs.
 
 One thing reads oddly and is true: "Yusuf refused Dax: own needs take priority (it is not in their nature to take on shared work)". The label is set by his drives being up.
 The cause says his drives alone did not turn the answer. Dax's change from "too busy to stop" three times to yes on day 43 is still not explained: nature does not say why now.
+
+## Since this trace (11 November 2026, the repair stream)
+
+Two more of the seven items were taken, each as its own rules version (`docs/REPAIRS_20261111.md`).
+
+- Item 5, the other half: rules 191, `docs/LAYOUT_WORDS.md`. The feed line of a laid-out site follows the site, so link 4 reads "Dax marked out a storehouse for shared use" beside "Dax proposed a shared storehouse for Willowbank".
+- Item 1: rules 192, `docs/KNOWN_FIRST_STOREHOUSE.md`. The first storehouse is wanted from what the person knows (a believed solid home, no believed store) and the reason says why now: "now that a hut stands here and I know of no store". Links 2, 9, 18, 21 and 24 would each carry the trigger, and only people who have seen the hut, and do not know of a store, want one. A site someone still believes in that is gone holds them back until they see the spot.
+
+Of the 20 holes, 13 are now recorded or repaired (links 2, 4, 6, 9, 10, 18, 21, 24, 28, 32, 33, 34, 36). Seven remain: the three kinds of inaction (19, 22, 30), the wood pile (17), the failures nobody remembers (38) and the two log roll-offs (3, 25).

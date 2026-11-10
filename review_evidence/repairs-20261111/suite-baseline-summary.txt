@@ -1,0 +1,4 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 72 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  15 failed | 554 passed (569)
+      Tests  72 failed | 3127 passed | 3 skipped (3202)
+   Duration  574.57s (tests 95%, import 4%, transform 1%)

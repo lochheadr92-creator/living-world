@@ -1,0 +1,13 @@
+{"seed":"aspen","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":20,"alive":20}
+{"seed":"birch","doorGraves":[{"tick":55027,"day":22.93,"who":"Hugo","building":5552,"type":"hut","hh":1004,"members":2,"inside":[{"id":1007,"name":"Gus"}],"fate":["Gus: died t58981 (thirst)"]}],"peopleRefusedExit":1,"peopleRefusedEntry":0,"deaths":20,"alive":8}
+{"seed":"cedar","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":17,"alive":25}
+{"seed":"fern","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":19,"alive":20}
+{"seed":"gen-1","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":18,"alive":16}
+{"seed":"gen-2","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":10,"alive":20}
+{"seed":"gen-3","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":5,"alive":23}
+{"seed":"gen-4","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":16,"alive":17}
+{"seed":"gen-5","doorGraves":[{"tick":64498,"day":26.87,"who":"Yan","building":20153,"type":"hut","hh":933,"members":2,"inside":[],"fate":[]},{"tick":83157,"day":34.65,"who":"Jax","building":5846,"type":"hut","hh":913,"members":1,"inside":[{"id":916,"name":"Otto"}],"fate":["Otto: died t84951 (thirst)"]}],"peopleRefusedExit":1,"peopleRefusedEntry":0,"deaths":32,"alive":9}
+{"seed":"gen-6","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":2,"alive":32}
+{"seed":"meadow","doorGraves":[{"tick":57437,"day":23.93,"who":"Mona","building":17478,"type":"hut","hh":1005,"members":4,"inside":[{"id":1007,"name":"Sofia"},{"id":1009,"name":"Kai"}],"fate":["Sofia: died t60615 (thirst)","Kai: died t59099 (thirst)"]}],"peopleRefusedExit":2,"peopleRefusedEntry":0,"deaths":28,"alive":19}
+{"seed":"river","doorGraves":[],"peopleRefusedExit":0,"peopleRefusedEntry":0,"deaths":14,"alive":18}
+DONE
