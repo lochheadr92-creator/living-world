@@ -8,6 +8,7 @@ import { noteBirth, noteDeath } from './occasions';
 import { noteDeedNear } from './reputation';
 import { onBecameParent, onOrphanTaken, onPartnerLost } from './lifechanges';
 import { hasKnownAdoption, knownPlace } from './known_adoption';
+import { graveMayTake } from './grave_site';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -255,7 +256,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
     for (let dy = -r; dy <= r && !placed; dy++) {
       for (let dx = -r; dx <= r && !placed; dx++) {
         if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
-        if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
+        if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND && graveMayTake(world, gx + dx, gy + dy)) { // rules 190: never in a doorway
           const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age, ...(hasLocalDeath(world) ? {death:{id:p.id,name:p.name,hhId:p.hhId,tick:world.tick}} : {}) };
           registerGeneric(world, g);
           placed = true;
