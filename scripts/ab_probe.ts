@@ -21,14 +21,16 @@ const strip=args.includes('--strip-cause');
 const stripExtent=args.includes('--strip-extent');
 // --strip-builders: empty every `builtBy` list and drop the rules-186 `builtAll` mark before hashing, for the same reason
 const stripBuilders=args.includes('--strip-builders');
-const [seed='aspen',days='25',rules='0',out='ab.json']=args.filter((a,i)=>a!=='--profile'&&a!=='--strip-cause'&&a!=='--strip-extent'&&a!=='--strip-builders'&&args[i-1]!=='--profile');
+// --strip-answers: drop the rules-187 `answerWhy` texts before hashing, for the same reason
+const stripAnswers=args.includes('--strip-answers');
+const [seed='aspen',days='25',rules='0',out='ab.json']=args.filter((a,i)=>a!=='--profile'&&a!=='--strip-cause'&&a!=='--strip-extent'&&a!=='--strip-builders'&&a!=='--strip-answers'&&args[i-1]!=='--profile');
 const w=createWorld({...currentWorldSettings(profile,seed,{immigration:true}),rulesVersion:Number(rules)});
 const popByDay:number[]=[];
 while(w.tick<Number(days)*DAY){stepWorld(w);if(w.tick%DAY===0)popByDay.push(w.persons.filter(p=>p.alive).length);}
 const alive=w.persons.filter(p=>p.alive);
 const res={
  seed,profile,days:Number(days),rules:Number(rules),
- finalHash:createHash('sha256').update((s=>stripBuilders?s.replace(/"builtBy":\[[\d,]*\]/g,'"builtBy":[]').replace(/,"builtAll":true/g,''):s)((s=>stripExtent?s.replace(/,?"extent":\{[^{}]*\}/g,''):s)((s=>strip?s.replace(/,"eventId":\d+/g,''):s)(serializeWorld(w).replace(/"rulesVersion":\d+/g,'"rulesVersion":0'))))).digest('hex').slice(0,16),
+ finalHash:createHash('sha256').update((s=>stripAnswers?s.replace(/,"answerWhy":"[^"]*"/g,''):s)((s=>stripBuilders?s.replace(/"builtBy":\[[\d,]*\]/g,'"builtBy":[]').replace(/,"builtAll":true/g,''):s)((s=>stripExtent?s.replace(/,?"extent":\{[^{}]*\}/g,''):s)((s=>strip?s.replace(/,"eventId":\d+/g,''):s)(serializeWorld(w).replace(/"rulesVersion":\d+/g,'"rulesVersion":0')))))).digest('hex').slice(0,16),
  conserved:conservationReport(w).ok,tools:toolReport(w).ok,
  alive:alive.length,deaths:w.deceased.length,households:w.households.length,coupled:alive.filter(p=>p.partnerId!==0).length/2,
  meanHunger:Number((alive.reduce((a,p)=>a+p.needs.hunger,0)/Math.max(1,alive.length)).toFixed(1)),
