@@ -18,8 +18,10 @@
 import {DAY} from './constants';
 import {rulesOf,within} from './rules';
 import {runsRulesVersion} from './rulesversion';
+import {beliefsByKind} from './optutil';
 import type {Ctx} from './optutil';
-import type {World} from './types';
+import {isSolidHome} from './constants';
+import type {Belief,World} from './types';
 
 const on={first:true,each:true,quarry:true,restock:true,cue:true};
 export type SharedStonePart=keyof typeof on;
@@ -64,4 +66,43 @@ export function knownStoreHoldsStone(ctx:Ctx,stone:number):boolean{
   if(b?.kind==='building'&&b.btype==='storehouse'&&b.hh===0&&(b.cond??0)>0&&world.tick-b.seen<=DAY&&(b.items?.stone??0)>=stone)return true;
  }
  return false;
+}
+
+/**
+ * Rules 192 (gap G32, end-to-end trace links 2, 9, 18, 21 and 24): the first storehouse is wanted from what the person knows, not from the world.
+ * `firstStorehouseWanted` read `world.buildings` for the solid home and `noFirstStorehouse` read the world's buildings and sites for the
+ * store, so eight people in ordinary aspen chose "Lay out a storehouse" within a tenth of a day of a hut being finished whether or not they had
+ * seen it, and the want reopened for everyone the moment a site was cancelled, whether or not they knew. At 192 the cue is a solid home the
+ * person believes stands in the settlement and no storehouse, standing or laid out, that they believe in; a site they still believe in that
+ * is in fact gone holds them back until they see the spot again (perception.ts refreshBeliefs), and a site they have not seen lets them try,
+ * which the world refuses at the spot ("a storehouse is already being built", act_build.ts siteConflict). The reason names the home.
+ * Rules 191 and earlier, authored worlds and `setKnownFirstStorehouse(false)` read the world as before.
+ */
+let knownFirst=true;
+export const knownFirstStorehouseOn=():boolean=>knownFirst;
+export function setKnownFirstStorehouse(on:boolean):void{knownFirst=on;}
+export const hasKnownFirstStorehouse=(w:World):boolean=>knownFirst&&hasFirstStorehouse(w)&&runsRulesVersion(w,192);
+
+/** A solid home the person believes stands within the settlement radius of (x, y), the nearest first; nothing is read from the world. */
+export function knownSolidHomeNear(ctx:Ctx,x:number,y:number):Belief|undefined{
+ const radius=rulesOf(ctx.world).facilityRadius;
+ let best:Belief|undefined,bestD=Infinity;
+ for(const b of beliefsByKind(ctx.p,['building'])){
+  if(!isSolidHome(b.btype)||(b.cond??1)<=0)continue;
+  if(radius!==Infinity&&!within(radius,x,y,b.x,b.y))continue;
+  const d=(b.x-x)*(b.x-x)+(b.y-y)*(b.y-y);
+  if(d<bestD){best=b;bestD=d;}
+ }
+ return best;
+}
+
+/** The person believes in no storehouse, standing or laid out, within the settlement radius of (x, y) (anywhere, without the `each` part). */
+export function noKnownStorehouseNear(ctx:Ctx,x:number,y:number):boolean{
+ const radius=rulesOf(ctx.world).facilityRadius;
+ for(const b of beliefsByKind(ctx.p,['building','site'])){
+  if(b.btype!=='storehouse'||(b.kind==='building'&&(b.cond??1)<=0))continue;
+  if(on.each&&radius!==Infinity&&!within(radius,x,y,b.x,b.y))continue;
+  return false;
+ }
+ return true;
 }

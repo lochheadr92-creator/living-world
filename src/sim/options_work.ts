@@ -41,7 +41,7 @@ import {knownNeeds} from './remembered_need';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
-import { STORED_STONE_UTILITY, hasFirstStorehouse, hasStoredStoneCue, knownStoreHoldsStone, noFirstStorehouse } from './shared_stone';
+import { STORED_STONE_UTILITY, hasFirstStorehouse, hasKnownFirstStorehouse, hasStoredStoneCue, knownSolidHomeNear, knownStoreHoldsStone, noFirstStorehouse, noKnownStorehouseNear } from './shared_stone';
 import { seedStorageOption } from './seed_storage';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -721,10 +721,25 @@ function firstStorehouseWanted(ctx: Ctx): boolean {
   const { world, p } = ctx;
   if (!hasFirstStorehouse(world)) return false;
   const anchor = settlementAnchor(ctx);
-  if (!noFirstStorehouse(world, anchor.x, anchor.y)) return false;
-  const radius = rulesOf(world).facilityRadius;
-  if (!world.buildings.some((b) => isSolidHome(b.type) && within(radius, anchor.x, anchor.y, b.x + b.w / 2, b.y + b.h / 2))) return false;
+  if (hasKnownFirstStorehouse(world)) {
+    // rules 192: judged from what this person believes of the settlement, never from the world's register (gap G32)
+    if (!noKnownStorehouseNear(ctx, anchor.x, anchor.y)) return false;
+    if (!knownSolidHomeNear(ctx, anchor.x, anchor.y)) return false;
+  } else {
+    if (!noFirstStorehouse(world, anchor.x, anchor.y)) return false;
+    const radius = rulesOf(world).facilityRadius;
+    if (!world.buildings.some((b) => isSolidHome(b.type) && within(radius, anchor.x, anchor.y, b.x + b.w / 2, b.y + b.h / 2))) return false;
+  }
   return countBeliefsOfKind(p, 'tree') >= 3 && countBeliefsOfKind(p, 'rock') >= 1;
+}
+
+/** The first storehouse's reason; at 192 it says why now: the home the person knows of, and that they know of no store. */
+function firstStorehouseWhy(ctx: Ctx): string {
+  const why = 'the first shared storehouse, a place to keep stone, wood and tools for everyone';
+  if (!hasKnownFirstStorehouse(ctx.world)) return why;
+  const anchor = settlementAnchor(ctx);
+  const home = knownSolidHomeNear(ctx, anchor.x, anchor.y);
+  return `${why}, now that a ${homeNoun(home?.btype)} stands here and I know of no store`;
 }
 
 /** Decide to start a new building: shelter first, then a proper hut, then shared structures. */
@@ -870,7 +885,7 @@ function optPlanBuild(ctx: Ctx): void {
   const stores = beliefsByKind(p, ['building', 'site']).filter((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)).length;
   if (firstStore) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
-    tryPlan('storehouse', 30 + 10 * spirit, 'the first shared storehouse, a place to keep stone, wood and tools for everyone');
+    tryPlan('storehouse', 30 + 10 * spirit, firstStorehouseWhy(ctx));
   } else if (stores < rules.facilityAllowance && huts >= stores + 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
     if (hs.shortage < 0.5 && spirit > 0.46) tryPlan('storehouse', 8 + 22 * spirit, 'a shared storehouse for the settlement');
