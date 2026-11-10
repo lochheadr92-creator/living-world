@@ -1,7 +1,8 @@
 import {hasNourishment,spendNourishment} from './nourishment';
 import {clothingWarmth} from './clothing';
 import {hearthWarmth} from './hearth';
-import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
+import { DRIVE_BANDS, ENERGY_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE } from './constants';
+import { hungerRate, thirstRate } from './metabolism';
 import { nearLitFire } from './perception';
 import { stageOf } from './people';
 import { elderFactor } from './life';
@@ -93,11 +94,11 @@ export function updateNeeds(world: World, p: Person): void {
 
   // hunger / thirst
   const kidMul = (stage === 'child' ? 0.85 : 1) * (world.settings.harsh ? 1.18 : 1);
-  n.hunger -= HUNGER_RATE * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1);
+  n.hunger -= hungerRate(world) * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1); // rules 195: the base rate is the world's (metabolism.ts)
   let starvationFraction=1;
   if(hasNourishment(world)){const deficit=Math.max(0,-n.hunger),covered=spendNourishment(world,p,deficit,'shortage');if(deficit>0)starvationFraction=1-covered/deficit;}
   const heat = Math.max(0, w.temp - 19) * 0.04;
-  n.thirst -= THIRST_RATE * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
+  n.thirst -= thirstRate(world) * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
 
   // warmth
   const sh = shelterAt(world, p.x, p.y, p);

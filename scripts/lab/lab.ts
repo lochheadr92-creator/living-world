@@ -124,6 +124,7 @@ import { setTownships, townshipsOn } from '../../src/sim/townships';
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
 import { stageOf } from '../../src/sim/people';
+import { metabolismOn, setLabRates, setMetabolism } from '../../src/sim/metabolism';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks, reconsiderOn, setReconsider } from '../../src/sim/intent';
@@ -217,6 +218,13 @@ export function parseIntervention(specIn: string): Intervention {
   const [kind, a, b] = spec.split(':');
   const label = specIn;
   if (kind === 'control') return { spec: label, summary: 'nothing changes' };
+  if (kind === 'rates') {
+    // rules 195 screening: the base hunger and thirst drains a rich world runs under for this branch (metabolism.ts); no effect below 195
+    const hunger = Number(a), thirst = Number(b);
+    if (!(hunger > 0 && thirst > 0)) throw new Error(`rates:<hunger>:<thirst> wants two positive numbers, not ${spec}`);
+    return { spec: label, summary: `base hunger ${hunger} and thirst ${thirst} a tick instead of the rules-195 constants; no effect below rules 195`, install() { setLabRates({ hunger, thirst }); return () => setLabRates(null); } };
+  }
+  if (kind === 'rich-no-metabolism') return { spec: label, summary: 'restore the base drains of 0.03 hunger and 0.04 thirst a tick (rules 194 and earlier) and nothing else; no effect below rules 195', install() { const was = metabolismOn(); setMetabolism(false); return () => setMetabolism(was); } };
   if (kind === 'nudge') {
     const n = Number(a ?? 1);
     return {

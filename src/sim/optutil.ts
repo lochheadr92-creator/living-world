@@ -12,7 +12,8 @@ import { currentFailure, estimatedAmount, isWaterBeliefId, recentFailure } from 
 import { isDependent, stageOf } from './people';
 import { dayFraction } from './environment';
 import type { Activity, ActivityKind, Belief, Building, Household, ItemKind, NeedKey, Person, SeenEntity, Stage, ToolKind, World } from './types';
-import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
+import { NEED_KEYS, CRITICAL, isHomeType } from './constants';
+import { thirstRate } from './metabolism';
 import { hasKnownHome } from './known_home';
 import type { BeliefKind } from './types';
 
@@ -128,7 +129,7 @@ export function makeCtx(world: World, p: Person, collect: boolean, observer = fa
       const d = hyp(b.x - p.x, b.y - p.y);
       if (d < nearest) nearest = d;
     }
-    if (nearest < 1e8) waterLead = Math.min(34, THIRST_RATE * 1.3 * ((nearest * 1.18) / Math.max(0.03, speed)));
+    if (nearest < 1e8) waterLead = Math.min(34, thirstRate(world) * 1.3 * ((nearest * 1.18) / Math.max(0.03, speed))); // rules 195
   }
   for (const k of NEED_KEYS) {
     drives[k] = drive(p.needs[k], k, world);

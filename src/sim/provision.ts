@@ -50,6 +50,8 @@ export const PREPARATION_FROM_VERSION = 2;
 
 /**
  * HOW MUCH A PERSON EATS IN A DAY, in units of food. Hunger falls by HUNGER_RATE (0.03) a tick and a day is DAY (2400)
+ * (at rules 195 the rich world's base rate is 0.02, metabolism.ts, so 4 units are about a day and a half; the reserve keeps
+ * this figure deliberately, erring on the safe side, and the lab of docs/ORDINARY_METABOLISM.md measured it so)
  * ticks, so a person loses 72 hunger a day. The foods people actually eat are worth between 12 and 28 (NUTRITION: berries
  * 12, fruit 16, grain 22, fish 28), averaging about 18 across a typical mix, and 72 / 18 = 4. A measured Large run gave 3.8
  * units eaten per person per day, which is the same number. 4 is used because it is the honest round figure and erring high

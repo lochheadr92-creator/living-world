@@ -1,6 +1,7 @@
 import {hasCellars} from './cellars';
 import {hasWells} from './wells';
-import { CRITICAL, DAY, HUNGER_RATE, SUNRISE, SUNSET, THIRST_RATE } from './constants';
+import { CRITICAL, DAY, SUNRISE, SUNSET } from './constants';
+import { hungerRate, thirstRate } from './metabolism';
 import { dayFraction } from './environment';
 import { foodUnits } from './economy';
 import { estimatedAmount } from './knowledge';
@@ -71,14 +72,15 @@ export function foodRelief(ctx: Ctx): Relief | null {
   return best;
 }
 
-const RATE: Record<'thirst' | 'hunger', number> = { thirst: THIRST_RATE, hunger: HUNGER_RATE };
+/** the world's base drain for the need (rules 195: metabolism.ts; the old constants below it) */
+const rateOf = (ctx: Ctx, need: 'thirst' | 'hunger'): number => (need === 'thirst' ? thirstRate(ctx.world) : hungerRate(ctx.world));
 
 /** The need level this person would have, at the worst, once the job is done and they have walked to relief. Larger is safer. */
 export function projected(ctx: Ctx, need: 'thirst' | 'hunger', jobTicks: number, relief: Relief | null): { level: number; margin: number } {
   const level = ctx.p.needs[need];
   const away = relief ? relief.eta * 1.15 : 600; // no known relief at all: assume a long way
   const ticks = Math.min(jobTicks, HORIZON) + away;
-  const after = level - RATE[need] * ticks;
+  const after = level - rateOf(ctx, need) * ticks;
   const margin = relief && relief.confirmed ? CONFIRMED_MARGIN : POSSIBLE_MARGIN;
   return { level: after, margin: CRITICAL[need] + margin };
 }
