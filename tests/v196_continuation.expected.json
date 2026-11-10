@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "d254d424376a72b95a18f6ab675e9fff462a2321",
+    "rules": 196,
+    "content": "34a152048472d38f7e57b4f3860c9bcba82c2452a9a6f89fa998e49ed244ea64",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal told-beliefs-legacy world (arrivals off), 12,100 ticks checked every tick for a shared project over the cap of twelve (rules 195 reaches thirteen at tick 12,031 in this world), then 120 more after a save and load."
+  },
+  "saved": "8460633315dd9a034cc3171b68bf1f22f98ddce235b01896b95f6b17f01679d8",
+  "continued": "4a59410252239c9017b0f1842405577e638b57152b30f0bc1ec0136db69466d9"
+}

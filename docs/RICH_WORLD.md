@@ -60,7 +60,7 @@ actually emptied or they have actually gone hungry. Hardship is tested first, so
 visibly wrong, and winter close. The cue is recorded on the plan (`Intention.cue`) so a measurement can tell anticipation
 from reaction.
 
-**The size of it, with the arithmetic.** Hunger falls by `HUNGER_RATE` (0.03) a tick and a day is 2400 ticks, so a person
+**The size of it, with the arithmetic.** (Rules 195 reads the rich world's base rate from `metabolism.ts`, 0.024; the figures below are the ones this reserve was sized on and `DAY_FOOD` keeps them, `docs/ORDINARY_METABOLISM.md`.) Hunger falls by `HUNGER_RATE` (0.03) a tick and a day is 2400 ticks, so a person
 loses 72 hunger a day; the foods people eat are worth 12 to 28 (`NUTRITION`) and average about 18, so 72/18 = 4 units a
 person a day - and a measured Large run gave 3.8. The target is therefore one day's eating per member (`DAY_FOOD` 4 x
 `RESERVE_DAYS` 1 x members), capped at `RESERVE_CAP` 12 (three members' worth, and exactly a lean-to's capacity, so the
