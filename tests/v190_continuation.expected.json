@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "7e9846345b31d758cc33e266cb314a94625ece65",
+    "rules": 190,
+    "content": "b43e99aa344acb4c3541d9cffe615d1f080e5ecf6c5abbe4b647e5ea9b3afe7f",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch world (arrivals on), 55200 ticks including a death on a doorstep buried beside the door rather than in it (at tick 55,027, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "61efc6ebfb8f0edb701873b4f742e3dd366e76fe4357ff952a7248926b9fdce8",
+  "continued": "8886d7ee928e2a946992e2dccfb3e31ac463d0e6fe4791698ce8b3cfd682180c"
+}
