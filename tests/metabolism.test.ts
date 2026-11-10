@@ -40,21 +40,21 @@ describe('rules 195 is registered', () => {
   it('is registered and supported (the current version may be later), with the two new constants', () => {
     expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(195);
     expect(SUPPORTED_RULES_VERSIONS).toContain(195);
-    expect(HUNGER_RATE_195).toBe(0.02);
-    expect(THIRST_RATE_195).toBe(0.025);
+    expect(HUNGER_RATE_195).toBe(0.024);
+    expect(THIRST_RATE_195).toBe(0.032);
     expect(HUNGER_RATE).toBe(0.03);
     expect(THIRST_RATE).toBe(0.04);
   });
 });
 
 describe('the base drains', () => {
-  it('at 194 an adult standing still loses 0.03 hunger and 0.04 thirst a tick; at 195 it is 0.02 and 0.025', () => {
+  it('at 194 an adult standing still loses 0.03 hunger and 0.04 thirst a tick; at 195 it is 0.024 and 0.032', () => {
     const old = drain(194);
     expect(old.hunger).toBeCloseTo(0.03, 10);
     expect(old.thirst).toBeCloseTo(0.04, 10);
     const now = drain(195);
-    expect(now.hunger).toBeCloseTo(0.02, 10);
-    expect(now.thirst).toBeCloseTo(0.025, 10);
+    expect(now.hunger).toBeCloseTo(0.024, 10);
+    expect(now.thirst).toBeCloseTo(0.032, 10);
   });
 
   it('the multipliers are untouched: asleep, heavy work and a child drain in the same proportion at 195 as at 194', () => {
@@ -79,9 +79,9 @@ describe('the base drains', () => {
     expect(drain(195).hunger).toBeCloseTo(0.03, 10);
     expect(drain(195).thirst).toBeCloseTo(0.04, 10);
     setMetabolism(true);
-    setLabRates({ hunger: 0.024, thirst: 0.032 });
-    expect(drain(195).hunger).toBeCloseTo(0.024, 10);
-    expect(drain(195).thirst).toBeCloseTo(0.032, 10);
+    setLabRates({ hunger: 0.02, thirst: 0.025 });
+    expect(drain(195).hunger).toBeCloseTo(0.02, 10);
+    expect(drain(195).thirst).toBeCloseTo(0.025, 10);
     expect(drain(194).hunger).toBeCloseTo(0.03, 10);
     const { w } = scene(194);
     expect(hungerRate(w)).toBe(0.03);

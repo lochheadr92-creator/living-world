@@ -8,6 +8,11 @@
 // to talk, teach, play, visit and rest, and to measure before changing anything: `docs/ORDINARY_METABOLISM.md` records the
 // measurement (the paired lab at rules 194 against 195, twelve ordinary seeds, with the life metrics of scripts/lab/lab.ts).
 //
+// The screening lab (twelve seeds, 25 days, one run at 195 with the old drains, the brief's 0.020/0.025 and a moderate 0.024/0.032 as
+// arms) found the moderate correction sufficient: family time 58 to 85 against 97, child play 51 to 73 against 81, foraging practice 92
+// to 123 against 142, coaching 1.6 to 3.2 against 5.3 per settlement, with deaths 10.4 to 2.2 where 0.020/0.025 left 0.25 and no
+// hunger death at all in the window. The smaller correction is the one taken, so that scarcity stays visible.
+//
 // At 195 the two base rates are read here: HUNGER_RATE_195 and THIRST_RATE_195 in a rich world, the old constants everywhere else.
 // Every multiplier (child, harsh profile, sleep, heavy work, running, heat), every threshold (DRIVE_BANDS, CRITICAL, the eat and
 // drink options' own levels), the critical-need filter of decision.ts, the relief guard, starvation, dehydration, exposure and
@@ -18,10 +23,10 @@ import { HUNGER_RATE, THIRST_RATE } from './constants';
 import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
-/** Hunger lost a tick by an awake adult at rest, rules 195. */
-export const HUNGER_RATE_195 = 0.02;
-/** Thirst lost a tick by an awake adult at rest, rules 195. */
-export const THIRST_RATE_195 = 0.025;
+/** Hunger lost a tick by an awake adult at rest, rules 195 (58 a day awake, against 72). */
+export const HUNGER_RATE_195 = 0.024;
+/** Thirst lost a tick by an awake adult at rest, rules 195 (77 a day awake, against 96). */
+export const THIRST_RATE_195 = 0.032;
 
 let enabled = true;
 let labRates: { hunger: number; thirst: number } | null = null;
