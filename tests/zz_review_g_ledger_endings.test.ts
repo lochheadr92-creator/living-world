@@ -87,9 +87,14 @@ it('natural run: ledger entries whose activity was dropped without endActivity s
 
 // Expired suspended activities are covered by suspended_endings.test.ts, including exact saved continuation.
 
-it('the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it', () => {
+// Finding REPAIRED on 11 November 2026 (docs/OBSERVER_VIEWER.md): buildQA quotes the last decision's reason only for the activity
+// that decision launched (the ledger's activityId) or one carrying its own why. The same scan now counts misattributions, expects
+// none, and records that such listeners read "Not a weighed choice" instead. Kept as a review test so a regression shows up by name.
+it('the listener in a conversation is no longer shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it', () => {
   const w = river();
   let found = 0;
+  let listeners = 0;
+  let honest = 0;
   const ex: string[] = [];
   for (let n = 0; n < 2400 && found < 5; n++) {
     stepWorld(w);
@@ -97,6 +102,8 @@ it('the listener in a conversation is shown "Weighed up: <reasons of an unrelate
       const a = p.activity;
       if (!a || a.kind !== 'converse' || a.data.role !== 'b' || a.data.why || !p.lastDecision?.because) continue;
       const v = describePerson(w, p.id, { opportunities: false })!;
+      listeners++;
+      if (v.qa.why.startsWith('Not a weighed choice')) honest++;
       if (v.qa.why === `Weighed up: ${p.lastDecision.because}`) {
         found++;
         ex.push(`tick ${w.tick} ${p.name}: doing="${v.qa.doing}" why="${v.qa.why}" (last decision chose "${p.lastDecision.chosen?.label ?? '—'}" at tick ${p.lastDecision.tick})`);
@@ -104,7 +111,9 @@ it('the listener in a conversation is shown "Weighed up: <reasons of an unrelate
       if (found >= 5) break;
     }
   }
-  report.push(`converse listener why-misattribution: ${found} cases in <=2400 ticks`, ...ex.map((e) => '  ' + e));
+  report.push(`converse listener why-misattribution: ${found} cases in <=2400 ticks (${listeners} listener reads, ${honest} read "Not a weighed choice")`, ...ex.map((e) => '  ' + e));
   writeFileSync(OUT, report.join('\n'));
-  expect(found).toBeGreaterThan(0);
+  expect(listeners).toBeGreaterThan(0);
+  expect(found).toBe(0);
+  expect(honest).toBe(listeners);
 });

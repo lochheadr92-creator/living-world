@@ -1,6 +1,16 @@
-// The person view of the inspector. The "What are they up to?" card is the heart of it; needs and belongings are
-// quick glances; everything else lives in the collapsible sections (person_sections.ts), which are only filled in
-// while they are open. All content comes from describePerson() view-models; the DOM is built once and updated in place.
+// The person view of the inspector, at two depths.
+//
+// The COMPACT CARD is the normal surface: it answers "what are they doing and why?" at a glance: name, life stage and household;
+// a one-line status; the current action with its progress; why it was chosen; where they are going or what comes next; the
+// knowledge that choice rests on, when that is hearsay or old; the needs that are pressing; the carried goods that matter to the
+// action; and how the last attempt ended. Follow, centre and "Full view" are its actions.
+//
+// The FULL CHARACTER VIEWER opens from the card and is organised into six collapsible sections: Now, Plans and choices, What they
+// know, People and relationships, Recent history, Household and character (person_sections.ts builds their blocks). A section's
+// body is only filled while it is open, and long lists collapse behind "Show all".
+//
+// All content comes from describePerson() view-models (sim/inspect.ts, sim/inspect_observer.ts); the DOM is built once and updated
+// in place. Nothing here mutates the world.
 import { DAYS_PER_YEAR, ITEM_LABEL, NEED_KEYS, isToolKind } from '../sim/constants';
 import type { ItemKind, NeedKey } from '../sim/types';
 import type { NeedView, PersonView } from '../sim/inspect';
@@ -8,18 +18,23 @@ import type { ToolView } from '../sim/inspect_work';
 import { HOUSEHOLD_COLORS, ITEM_COLORS, NEED_COLORS } from '../render/palette';
 import { cap, h, KeyedList, legible, round1, setBool, setHidden, setState, setText, setVar, toggle } from './dom';
 import { icon, itemIconName, needIconName, type IconName } from './icons';
-import { iconButton, itemChip, makeBar, type BarHandle, type ItemChipHandle } from './widgets';
-import { createPersonSections } from './person_sections';
+import { iconButton, itemChip, makeBar, makeSection, type BarHandle, type ItemChipHandle, type SectionHandle } from './widgets';
+import { createCharacterBlock, createDebugBlock, createHistoryBlock, createKnowledgeBlock, createPeopleBlock, createPlansBlock } from './person_sections';
+import { createPersonSocial } from './person_social';
 import type { UICtx } from './context';
+
+export type PersonDepth = 'card' | 'full';
 
 export interface PersonPanel {
   el: HTMLElement;
   update(v: PersonView): void;
-  /** the opportunities audit is the costly part of describePerson, so it is only requested while that section is open */
+  /** the opportunities audit is the costly part of describePerson, so it is only requested while that disclosure is open */
   wantsOpportunities(): boolean;
   syncFollow(): void;
   /** called when a different person is selected: snap bars instead of animating from the previous person */
   reset(): void;
+  depth(): PersonDepth;
+  setDepth(d: PersonDepth): void;
 }
 
 export interface PersonHooks {
@@ -28,6 +43,8 @@ export interface PersonHooks {
   onSectionToggle(): void;
   /** the user followed a link inside the panel to another person (the shell keeps a way back) */
   onNavigate(id: number): void;
+  /** the depth changed (the shell resizes the inspector) */
+  onDepth(depth: PersonDepth): void;
 }
 
 function moodWord(m: number): string {
@@ -64,10 +81,6 @@ const NEED_LABELS: Record<NeedKey, string> = { hunger: 'Food', thirst: 'Water', 
 interface ToolComp {
   el: HTMLElement;
   wear: HTMLElement;
-}
-
-function itemIconNameOf(kind: ItemKind): IconName {
-  return itemIconName(kind);
 }
 
 /** how worn a tool is, in words */
@@ -114,10 +127,13 @@ function makeNeedCell(key: NeedKey, label: string): NeedCell {
   };
 }
 
+const SECTION_DEFAULT: Record<string, boolean> = { now: true, plans: false, know: false, people: false, history: false, character: false, debug: true };
+
 export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const { game } = ctx;
   let last: PersonView | null = null;
   let snapTimer: number | undefined;
+  let depth: PersonDepth = ctx.state.personDepth === 'full' ? 'full' : 'card';
 
   // ───────── header ─────────
   const avatar = h('div', { class: 'avatar', 'aria-hidden': 'true' });
@@ -127,48 +143,79 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const hhDot = h('i', { class: 'hh-dot' });
   const hhName = h('span', { class: 'hh-name' });
   const hhChip = h('span', { class: 'hh-chip', 'data-tip': 'Their household. People of one household share a home and look after each other first.' }, hhDot, hhName);
-  const homeEl = h('div', { class: 'p-home' });
-  const townEl = h('div', { class: 'p-township' });
-  const civicLines = h('div', { class: 'civic-lines' });
-  const civicPanel = h('details', { class: 'civic-panel', open: ctx.state.sections.civic ?? false }, h('summary', null, 'Township & shared work'), civicLines);
-  civicPanel.addEventListener('toggle', () => { ctx.state.sections.civic = civicPanel.open; ctx.saveState(); });
-  const relationshipLines = h('div');
-  const relationshipPanel = h('details', { class: 'civic-panel relationship-history' }, h('summary', null, 'Relationship history'), relationshipLines);
-  const historyLines = h('div');
-  const historyPanel = h('details', { class: 'civic-panel' }, h('summary', null, 'Household history'), historyLines);
-  // rules 103 (decision_ledger.ts): what they chose, over what, and how it ended, as recorded at the time
-  const decisionLines = h('div');
-  const decisionPanel = h('details', { class: 'civic-panel decision-history' }, h('summary', null, 'Recent decisions'), decisionLines);
   const followLabel = h('span', null, 'Follow');
   const followBtn = h(
     'button',
-    {
-      type: 'button',
-      class: 'btn follow',
-      'aria-pressed': 'false',
-      'aria-label': 'Follow this person with the camera',
-      'data-tip': 'Keep the camera on them (F)',
-      onClick: () => game.setFollow(!game.following),
-    },
+    { type: 'button', class: 'btn follow', 'aria-pressed': 'false', 'aria-label': 'Follow this person with the camera', 'data-tip': 'Keep the camera on them (F)', onClick: () => game.setFollow(!game.following) },
     icon('target', 14),
     followLabel,
   );
-  const locateBtn = iconButton('pin', 'Show on the map', 'Fly the camera to them', () => {
+  const locateBtn = iconButton('pin', 'Centre on them', 'Centre the map on them', () => {
     if (last) game.flyTo(last.position.x, last.position.y);
   });
+  const depthBtn = iconButton('users', 'Open the full character view', 'Full view: plans, knowledge, people, history', () => setDepth(depth === 'card' ? 'full' : 'card'), { cls: 'depth-btn' });
   const closeBtn = iconButton('close', 'Close inspector', 'Deselect (Esc)', () => hooks.onClose());
   const head = h(
     'header',
     { class: 'p-head' },
     avatar,
     h('div', { class: 'p-nameline' }, nameEl, expecting),
-    h('div', { class: 'p-actions' }, followBtn, locateBtn, closeBtn),
+    h('div', { class: 'p-actions' }, followBtn, locateBtn, depthBtn, closeBtn),
     h('div', { class: 'p-meta' }, stageEl, hhChip),
-    homeEl,
-    townEl,
   );
 
-  // ───────── vitals ─────────
+  // ───────── the status line ─────────
+  const statusText = h('span', { class: 'status-t' });
+  const statusEl = h('div', { class: 'status', role: 'status' }, h('i', { class: 'status-dot' }), statusText);
+
+  // ───────── what are they up to? (one block, shown on the card and inside Now) ─────────
+  const speechTxt = h('span', { class: 'speech-t' });
+  const speech = h('blockquote', { class: 'speech', hidden: true }, icon('thought', 14, 'speech-ico'), speechTxt);
+  const makeQA = (name: IconName, question: string, cls: string) => {
+    const a = h('dd', { class: 'qa-a' });
+    const q = h('span', null, question);
+    const el = h('div', { class: `qa-row ${cls}` }, h('dt', { class: 'qa-q' }, icon(name, 15, 'qa-ico'), q), a);
+    return { el, a, q };
+  };
+  const qDoing = makeQA('q_doing', 'What are they doing?', 'q-doing');
+  const qWhy = makeQA('q_why', 'Why did they choose it?', 'q-why');
+  const qIntent = makeQA('route', 'Where to, or what next?', 'q-intent');
+  const intentCentre = iconButton('pin', 'Centre the map on that place', 'Show the place on the map', () => {
+    if (last?.intent) game.flyTo(last.intent.x, last.intent.y);
+  }, { size: 13, cls: 'sm intent-centre' });
+  qIntent.el.appendChild(h('dd', { class: 'qa-prov' }, intentCentre));
+  const provEl = h('dd', { class: 'qa-a prov-cue', hidden: true });
+  qIntent.el.appendChild(provEl);
+  const qTrying = makeQA('q_goal', 'What are they trying to achieve?', 'q-trying');
+  const qStopping = makeQA('q_block', 'What is stopping them?', 'q-stopping');
+  const qLast = makeQA('q_last', 'How did the last attempt end?', 'q-last');
+  const taskBar = makeBar('thin task');
+  const taskTxt = h('span', { class: 'task-txt num' });
+  const taskRow = h('div', { class: 'task' }, taskBar.el, taskTxt);
+  qDoing.el.appendChild(h('dd', { class: 'qa-task' }, taskRow));
+  const uptoH = h('h3', { class: 'upto-h', id: 'lw-upto-h' }, 'What are they up to?');
+  const upto = h('section', { class: 'upto', 'aria-labelledby': 'lw-upto-h' }, h('div', { class: 'upto-top' }, uptoH), speech, h('dl', { class: 'qa', id: 'lw-upto-qa' }, qDoing.el, qWhy.el, qIntent.el, qTrying.el, qStopping.el, qLast.el));
+
+  // ───────── the card's own rows: pressing needs, goods that matter ─────────
+  const urgentChips = h('div', { class: 'chips urgent-chips' });
+  const urgentList = new KeyedList<NeedView, { el: HTMLElement; v: HTMLElement }>(
+    urgentChips,
+    (n) => {
+      const v = h('span', { class: 'num' });
+      const ico = icon(needIconName(n.key), 13);
+      ico.style.color = NEED_COLORS[n.key] ?? '#ccc';
+      return { el: h('span', { class: 'chip need-chip' }, ico, h('span', null, NEED_LABELS[n.key]), v), v };
+    },
+    (c, n) => { setText(c.v, String(Math.round(n.value))); setState(c.el, 'is-', n.state); c.el.setAttribute('data-tip', `${NEED_LABELS[n.key]} ${Math.round(n.value)} of 100, ${n.state}`); },
+  );
+  const urgent = h('div', { class: 'card-row', hidden: true }, h('span', { class: 'cap' }, 'Pressing'), urgentChips);
+  const relChips = h('div', { class: 'inv-chips' });
+  const relList = new KeyedList<{ kind: ItemKind; n: number }, ItemChipHandle>(relChips, (it) => itemChip(it.kind, it.n), (c, it) => c.set(it.n));
+  const relevant = h('div', { class: 'card-row', hidden: true }, h('span', { class: 'cap' }, 'Carrying for this'), relChips);
+  const openFull = h('button', { type: 'button', class: 'btn block open-full', onClick: () => setDepth('full') }, icon('users', 14), h('span', null, 'Open full character view'));
+  const card = h('div', { class: 'p-card' }, statusEl, urgent, relevant, openFull);
+
+  // ───────── Now: vitals, thoughts, needs, belongings ─────────
   const moodBar = makeBar('thin');
   const healthBar = makeBar('thin');
   const moodTxt = h('span', { class: 'vital-v' });
@@ -179,38 +226,28 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     h('div', { class: 'vital' }, h('div', { class: 'vital-top' }, h('span', { class: 'cap' }, 'Mood'), moodTxt), moodBar.el),
     h('div', { class: 'vital' }, h('div', { class: 'vital-top' }, h('span', { class: 'cap' }, 'Health'), healthTxt), healthBar.el),
   );
-
-  // what is on their mind (rich worlds only)
   const thoughtsList = h('div', { class: 'thought-list' });
   const thoughtsEl = h('div', { class: 'thoughts' }, h('div', { class: 'cap blk-h' }, 'On their mind'), thoughtsList);
   let thoughtsSig = '';
-
-  // ───────── needs ─────────
   const needCells = NEED_KEYS.map((k) => ({ key: k, cell: makeNeedCell(k, NEED_LABELS[k]) }));
   const needsEl = h('div', { class: 'needs', role: 'group', 'aria-label': 'Needs' }, needCells.map((n) => n.cell.el));
-  const nourishmentText=h('span',{class:'num'}),nourishmentBar=makeBar('thin');
-  const nourishmentEl=h('div',{class:'p-home',role:'meter','aria-label':'Stored nourishment','aria-valuemin':'0',title:'From food already eaten. Pays for brief food shortages and health recovery.'},h('div',null,'Stored nourishment ',nourishmentText),nourishmentBar.el);
-
-  // ───────── inventory ─────────
+  const nourishmentText = h('span', { class: 'num' });
+  const nourishmentBar = makeBar('thin');
+  const nourishmentEl = h('div', { class: 'p-home', role: 'meter', 'aria-label': 'Stored nourishment', 'aria-valuemin': '0', title: 'From food already eaten. Pays for brief food shortages and health recovery.' }, h('div', null, 'Stored nourishment ', nourishmentText), nourishmentBar.el);
   const invChips = h('div', { class: 'inv-chips' });
-  const invList = new KeyedList<{ kind: ItemKind; n: number }, ItemChipHandle>(
-    invChips,
-    (it) => itemChip(it.kind, it.n),
-    (c, it) => c.set(it.n),
-  );
+  const invList = new KeyedList<{ kind: ItemKind; n: number }, ItemChipHandle>(invChips, (it) => itemChip(it.kind, it.n), (c, it) => c.set(it.n));
   const invEmpty = h('span', { class: 'inv-empty' }, 'nothing');
   const carryBar = makeBar('thin');
   const carryTxt = h('span', { class: 'carry-txt num' });
-  // the equipment they hold: one small icon each, worn ones paler with a thin bar beneath
   const toolChips = h('div', { class: 'tool-chips' });
   const toolsEmpty = h('span', { class: 'inv-empty' }, 'none');
-  const textileLines = h('div', {class:'p-home',style:'white-space:pre-line;line-height:1.5'});
+  const textileLines = h('div', { class: 'p-home', style: 'white-space:pre-line;line-height:1.5' });
   const toolList = new KeyedList<ToolView, ToolComp>(
     toolChips,
     (t) => {
       const wear = h('i');
       const kind = t.kind as ItemKind;
-      const ico = icon(kind in ITEM_LABEL ? itemIconNameOf(kind) : 'hammer', 17, 'tool-ico');
+      const ico = icon(kind in ITEM_LABEL ? itemIconName(kind) : 'hammer', 17, 'tool-ico');
       ico.style.color = legible(ITEM_COLORS[kind] ?? '#c8c8c0', 0.34);
       const el = h('span', { class: 'tool', role: 'img', tabindex: 0 }, ico, h('span', { class: 'tool-wear' }, wear));
       return { el, wear };
@@ -233,67 +270,59 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Tools'), toolChips, toolsEmpty),
     textileLines,
   );
+  const uptoSlotNow = h('div', { class: 'upto-slot' });
+  const nowBody = h('div', { class: 'blk' }, uptoSlotNow, vitals, thoughtsEl, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, nourishmentEl, inv);
 
-  // ───────── what are they up to? ─────────
-  const speechTxt = h('span', { class: 'speech-t' });
-  const speech = h('blockquote', { class: 'speech', hidden: true }, icon('thought', 14, 'speech-ico'), speechTxt);
-
-  const makeQA = (name: IconName, question: string, cls: string) => {
-    const a = h('dd', { class: 'qa-a' });
-    const q = h('span', null, question);
-    const el = h('div', { class: `qa-row ${cls}` }, h('dt', { class: 'qa-q' }, icon(name, 15, 'qa-ico'), q), a);
-    return { el, a, q };
+  // ───────── the six sections ─────────
+  const sectionHooks = { onSectionToggle: () => hooks.onSectionToggle(), onNavigate: (id: number) => hooks.onNavigate(id) };
+  const mk = (id: string, title: string, hint: string | undefined, body: HTMLElement): SectionHandle => {
+    const sec = makeSection({ id, title, hint, open: ctx.state.sections[id] ?? SECTION_DEFAULT[id] ?? false, onToggle: (open) => { ctx.state.sections[id] = open; ctx.saveState(); hooks.onSectionToggle(); } });
+    sec.body.appendChild(body);
+    return sec;
   };
-  const qDoing = makeQA('q_doing', 'What are they doing?', 'q-doing');
-  const qWhy = makeQA('q_why', 'Why did they choose it?', 'q-why');
-  const qTrying = makeQA('q_goal', 'What are they trying to achieve?', 'q-trying');
-  const qStopping = makeQA('q_block', 'What is stopping them?', 'q-stopping');
-  const qLast = makeQA('q_last', 'What happened after their last attempt?', 'q-last');
-  const qPlan = makeQA('q_goal', 'What are they set on?', 'q-plan');
-  const taskBar = makeBar('thin task');
-  const taskTxt = h('span', { class: 'task-txt num' });
-  const taskRow = h('div', { class: 'task' }, taskBar.el, taskTxt);
-  qDoing.el.appendChild(h('dd', { class: 'qa-task' }, taskRow));
-  // brief by default: what they are doing and anything in the way; the why, the goal and the last attempt on request
-  let uptoMore = ctx.state.sections.uptoMore ?? false;
-  const moreLabel = h('span');
-  const moreBtn = h(
-    'button',
-    {
-      type: 'button',
-      class: 'upto-more',
-      'data-tip': 'Why they chose it, what they are after, how their last attempt went',
-      'aria-controls': 'lw-upto-qa',
-      onClick: () => {
-        uptoMore = !uptoMore;
-        ctx.state.sections.uptoMore = uptoMore;
-        ctx.saveState();
-        syncMore();
-      },
-    },
-    moreLabel,
-    icon('chevron', 11, 'upto-more-chev'),
-  );
-  const upto = h(
-    'section',
-    { class: 'upto', 'aria-labelledby': 'lw-upto-h' },
-    h('div', { class: 'upto-top' }, h('h3', { class: 'upto-h', id: 'lw-upto-h' }, 'What are they up to?'), moreBtn),
-    speech,
-    h('dl', { class: 'qa', id: 'lw-upto-qa' }, qDoing.el, qWhy.el, qTrying.el, qStopping.el, qLast.el, qPlan.el),
-  );
-  function syncMore(): void {
-    toggle(upto, 'is-brief', !uptoMore);
-    setBool(moreBtn, 'aria-expanded', uptoMore);
-    setText(moreLabel, uptoMore ? 'Less' : 'More');
+  const plans = createPlansBlock(ctx, sectionHooks);
+  const know = createKnowledgeBlock(ctx, sectionHooks);
+  const social = createPersonSocial({ game, section: (id, title, hint) => makeSection({ id, title, hint, open: ctx.state.sections[id] ?? true, onToggle: (open) => { ctx.state.sections[id] = open; ctx.saveState(); hooks.onSectionToggle(); } }), onNavigate: hooks.onNavigate });
+  const people = createPeopleBlock(ctx, sectionHooks, social.els);
+  const history = createHistoryBlock(ctx, sectionHooks);
+  const character = createCharacterBlock(ctx, sectionHooks);
+  const debug = createDebugBlock();
+  const secNow = mk('now', 'Now', 'What they are doing, how they are, and what they carry.', nowBody);
+  const secPlans = mk('plans', 'Plans and choices', 'Their plans and how each stands, the reason for the current choice, what was passed over, and earlier decisions with their endings.', plans.el);
+  const secKnow = mk('know', 'What they know', 'Only what they have seen or been told, with its source and age. It is not the same as what really exists.', know.el);
+  const secPeople = mk('people', 'People and relationships', 'The conversation, meal, promises, quarrels and worries they are part of, who they asked and who asked them, and how they feel about people.', people.el);
+  const secHistory = mk('history', 'Recent history', 'What happened to them and what they chose, newest first, in world time.', history.el);
+  const secCharacter = mk('character', 'Household and character', 'Home, township and household record; traits, skills and the trade they settled on.', character.el);
+  const secDebug = mk('debug', 'Debug · raw numbers', undefined, debug.el);
+  const full = h('div', { class: 'secs p-full' }, secNow.el, secPlans.el, secKnow.el, secPeople.el, secHistory.el, secCharacter.el, secDebug.el);
+
+  const uptoSlotCard = h('div', { class: 'upto-slot' });
+  card.insertBefore(uptoSlotCard, urgent);
+  const body = h('div', { class: 'p-body scroll' }, card, full);
+  const el = h('div', { class: 'insp-person', 'data-depth': depth }, head, body);
+
+  function syncDepth(): void {
+    el.dataset.depth = depth;
+    (depth === 'card' ? uptoSlotCard : uptoSlotNow).appendChild(upto);
+    setHidden(full, depth !== 'full');
+    setHidden(openFull, depth !== 'card');
+    setHidden(urgent, depth !== 'card' || !last || !last.needs.some((n) => n.state !== 'ok'));
+    setHidden(relevant, depth !== 'card' || !last || last.relevantItems.length === 0);
+    depthBtn.setAttribute('aria-label', depth === 'card' ? 'Open the full character view' : 'Back to the compact card');
+    depthBtn.setAttribute('data-tip', depth === 'card' ? 'Full view: plans, knowledge, people, history' : 'Back to the compact card');
+    setBool(depthBtn, 'aria-pressed', depth === 'full');
+    ctx.root.dataset.personDepth = depth;
   }
-  syncMore();
-
-  // ───────── collapsible sections ─────────
-  const sections = createPersonSections(ctx, hooks);
-
-  // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, nourishmentEl, inv, civicPanel, historyPanel, relationshipPanel, decisionPanel, sections.el);
-  const el = h('div', { class: 'insp-person' }, head, body);
+  function setDepth(d: PersonDepth): void {
+    if (d === depth) return;
+    depth = d;
+    ctx.state.personDepth = d;
+    ctx.saveState();
+    syncDepth();
+    body.scrollTop = 0;
+    hooks.onDepth(d);
+  }
+  syncDepth();
 
   // ───────── rendering ─────────
   function update(v: PersonView): void {
@@ -309,88 +338,26 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     setText(stageEl, `${cap(v.stage)}, ${v.age}`);
     stageEl.title = `Age in years. A year of life takes ${DAYS_PER_YEAR} days here.`;
     setText(hhName, v.household === 'none' ? 'no household' : `${v.household} household`);
-    setText(townEl, v.civic.township ? `Township: ${v.civic.township}` : '');
-    civicPanel.hidden = !v.civic.township;
-    const civicText = v.civic.lines.join('\n');
-    if (civicLines.dataset.text !== civicText) {
-      civicLines.replaceChildren(...v.civic.lines.map(line => h('p', null, line)));
-      civicLines.dataset.text = civicText;
-    }
-    const relationshipText = v.relationshipHistory.join('\n');
-    if (relationshipLines.dataset.text !== relationshipText) {
-      relationshipLines.replaceChildren(...v.relationshipHistory.map(line => h('p', null, line)));
-      relationshipLines.dataset.text = relationshipText;
-    }
-    const decisionText = v.decisionHistory.join('\n');
-    if (decisionLines.dataset.text !== decisionText) {
-      decisionLines.replaceChildren(...v.decisionHistory.map(line => h('p', null, line)));
-      decisionLines.dataset.text = decisionText;
-    }
-    const histText = v.householdHistory.join('\n');
-    if (historyLines.dataset.text !== histText) {
-      historyLines.replaceChildren(...v.householdHistory.map(line => h('p', null, line)));
-      historyLines.dataset.text = histText;
-    }
-    setText(homeEl, v.home === 'no home yet' ? 'No home yet' : `Home: ${v.home}`);
     syncFollow();
 
-    // vitals
-    setText(moodTxt, moodWord(v.mood));
-    moodBar.set(v.mood / 100, moodTone(v.mood));
-    setHidden(thoughtsEl, v.thoughts === null);
-    if (v.thoughts) {
-      const sig = v.thoughts.map((t) => `${t.why}|${Math.round(t.value)}`).join(';');
-      if (sig !== thoughtsSig) {
-        thoughtsSig = sig;
-        thoughtsList.replaceChildren(
-          ...(v.thoughts.length
-            ? v.thoughts.map((t) => h('div', { class: 'thought' }, h('span', { class: `thought-v num ${t.value < 0 ? 'neg' : 'pos'}` }, `${t.value > 0 ? '+' : ''}${Math.round(t.value)}`), h('span', { class: 'thought-why' }, cap(t.why))))
-            : [h('div', { class: 'thought none' }, 'Nothing in particular.')]),
-        );
-      }
-    }
-    setText(healthTxt, [String(Math.round(v.health)), v.illness, v.injury].filter(Boolean).join(' · '));
-    healthBar.set(v.health / 100, healthTone(v.health));
-
-    // needs
-    for (const n of needCells) {
-      const nv = v.needs.find((x) => x.key === n.key);
-      if (nv) n.cell.set(nv);
-    }
-
-    setHidden(nourishmentEl,!v.nourishment);
-    if(v.nourishment){const n=v.nourishment;setText(nourishmentText,`${n.stored.toFixed(1)} / ${n.capacity}`);nourishmentBar.set(n.stored/n.capacity,n.stored>0?'var(--good)':'var(--warn)');nourishmentEl.setAttribute('aria-valuenow',String(n.stored));nourishmentEl.setAttribute('aria-valuemax',String(n.capacity));}
-
-    // inventory
-    // equipment has its own row below (with its wear); the chips here are goods
-    const held = v.tools ?? [];
-    const toolsIn = new Map<string, number>();
-    for (const t of held) toolsIn.set(t.kind, (toolsIn.get(t.kind) ?? 0) + 1);
-    const goods = v.inventory.filter((it) => !(isToolKind(it.kind) && (toolsIn.get(it.kind) ?? 0) >= it.n));
-    invList.sync(goods, (it) => it.kind);
-    setHidden(invEmpty, goods.length > 0);
-    toolList.sync(held, (t) => String(t.id));
-    const textiles=held.filter(t=>['garment','blanket','bedding'].includes(t.kind));
-    setText(textileLines,textiles.map(t=>`${t.label}; ${100-t.wear}% condition`).join('\n'));
-    setHidden(textileLines,textiles.length===0);
-    setHidden(toolsEmpty, held.length > 0);
-    carryBar.set(v.carry.cap > 0 ? v.carry.used / v.carry.cap : 0, v.carry.used >= v.carry.cap - 0.01 ? 'var(--warn)' : 'var(--accent)');
-    setText(carryTxt, `${round1(v.carry.used)} / ${v.carry.cap}`);
+    // status
+    setText(statusText, v.status.text);
+    setState(statusEl, 't-', v.status.tone);
 
     // what are they up to?
     setHidden(speech, !v.speech);
     if (v.speech) setText(speechTxt, v.speech);
     setText(qDoing.a, v.qa.doing);
     setText(qWhy.a, v.qa.why);
+    setText(qIntent.a, v.intent ? v.intent.text : v.plans.length ? v.plans.map((pl) => `${pl.detail}${pl.missing ? ` Still needs ${pl.missing}.` : ''}`).join(' · ') : v.qa.plan || 'Nothing settled on.');
+    // the pin centres the map on a place worth going to; "here" with nothing named is where they already stand
+    setHidden(intentCentre, !v.intent || v.intent.kind === 'none' || (v.intent.kind === 'here' && v.intent.text === 'Here'));
+    setHidden(provEl, !v.provenance);
+    if (v.provenance) setText(provEl, v.provenance);
     setText(qTrying.a, v.qa.trying);
     setText(qStopping.a, v.qa.stopping);
     setText(qStopping.q, v.qa.stoppingIsHistorical ? 'Last recorded blocker' : 'What is stopping them?');
     setText(qLast.a, v.qa.lastAttempt);
-    // a private plan: only shown when they have one, so an ordinary person's card is no longer than it was
-    // One line per plan they are carrying, each saying how its own step stands. They are listed, not ranked: the one they are
-    // actually getting on with is the one that reads "under way".
-    setText(qPlan.a, v.plans.length ? v.plans.map((pl) => `${pl.detail}${pl.missing ? ` Still needs ${pl.missing}.` : ''}`).join(' · ') : v.qa.plan);
-    setHidden(qPlan.el, !v.plans.length && !v.qa.plan);
     const clear = isClear(v.qa.stopping);
     toggle(qStopping.el, 'is-clear', clear);
     toggle(qStopping.el, 'is-snag', !clear);
@@ -405,7 +372,75 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
       toggle(taskRow, 'is-blocked', !!act.blocked);
     }
 
-    sections.update(v);
+    if (depth === 'card') {
+      const pressing = v.needs.filter((n) => n.state !== 'ok').sort((a, b) => a.value - b.value);
+      urgentList.sync(pressing, (n) => n.key);
+      setHidden(urgent, pressing.length === 0);
+      relList.sync(v.relevantItems, (it) => it.kind);
+      setHidden(relevant, v.relevantItems.length === 0);
+      return;
+    }
+
+    // ───── full view ─────
+    if (secNow.isOpen()) {
+      setText(moodTxt, moodWord(v.mood));
+      moodBar.set(v.mood / 100, moodTone(v.mood));
+      setHidden(thoughtsEl, v.thoughts === null);
+      if (v.thoughts) {
+        const sig = v.thoughts.map((t) => `${t.why}|${Math.round(t.value)}`).join(';');
+        if (sig !== thoughtsSig) {
+          thoughtsSig = sig;
+          thoughtsList.replaceChildren(
+            ...(v.thoughts.length
+              ? v.thoughts.map((t) => h('div', { class: 'thought' }, h('span', { class: `thought-v num ${t.value < 0 ? 'neg' : 'pos'}` }, `${t.value > 0 ? '+' : ''}${Math.round(t.value)}`), h('span', { class: 'thought-why' }, cap(t.why))))
+              : [h('div', { class: 'thought none' }, 'Nothing in particular.')]),
+          );
+        }
+      }
+      setText(healthTxt, [String(Math.round(v.health)), v.illness, v.injury].filter(Boolean).join(' · '));
+      healthBar.set(v.health / 100, healthTone(v.health));
+      for (const n of needCells) {
+        const nv = v.needs.find((x) => x.key === n.key);
+        if (nv) n.cell.set(nv);
+      }
+      setHidden(nourishmentEl, !v.nourishment);
+      if (v.nourishment) {
+        const n = v.nourishment;
+        setText(nourishmentText, `${n.stored.toFixed(1)} / ${n.capacity}`);
+        nourishmentBar.set(n.stored / n.capacity, n.stored > 0 ? 'var(--good)' : 'var(--warn)');
+        nourishmentEl.setAttribute('aria-valuenow', String(n.stored));
+        nourishmentEl.setAttribute('aria-valuemax', String(n.capacity));
+      }
+      // equipment has its own row below (with its wear); the chips here are goods
+      const held = v.tools ?? [];
+      const toolsIn = new Map<string, number>();
+      for (const t of held) toolsIn.set(t.kind, (toolsIn.get(t.kind) ?? 0) + 1);
+      const goods = v.inventory.filter((it) => !(isToolKind(it.kind) && (toolsIn.get(it.kind) ?? 0) >= it.n));
+      invList.sync(goods, (it) => it.kind);
+      setHidden(invEmpty, goods.length > 0);
+      toolList.sync(held, (t) => String(t.id));
+      const textiles = held.filter((t) => ['garment', 'blanket', 'bedding'].includes(t.kind));
+      setText(textileLines, textiles.map((t) => `${t.label}; ${100 - t.wear}% condition`).join('\n'));
+      setHidden(textileLines, textiles.length === 0);
+      setHidden(toolsEmpty, held.length > 0);
+      carryBar.set(v.carry.cap > 0 ? v.carry.used / v.carry.cap : 0, v.carry.used >= v.carry.cap - 0.01 ? 'var(--warn)' : 'var(--accent)');
+      setText(carryTxt, `${round1(v.carry.used)} / ${v.carry.cap}`);
+    }
+    secPlans.setCount(v.plans.length ? String(v.plans.length) : v.suspended ? 'set aside' : '');
+    if (secPlans.isOpen()) plans.update(v);
+    secKnow.setCount(v.knowledge.places ? String(v.knowledge.places) : '');
+    if (secKnow.isOpen()) know.update(v);
+    const peopleCount = (v.interaction.current ? 1 : 0) + v.commitments.filter((c) => c.status === 'active').length + v.concerns.length + v.grievances.length;
+    secPeople.setCount(peopleCount ? String(peopleCount) : v.relationships.length ? String(v.relationships.length) : '');
+    if (secPeople.isOpen()) {
+      social.update(v);
+      people.update(v);
+    }
+    secHistory.setCount(v.timeline.length ? String(v.timeline.length) : '');
+    if (secHistory.isOpen()) history.update(v);
+    if (secCharacter.isOpen()) character.update(v);
+    secDebug.setVisible(game.debug);
+    if (game.debug && secDebug.isOpen()) debug.update(v);
   }
 
   function syncFollow(): void {
@@ -417,11 +452,14 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   return {
     el,
     update,
-    wantsOpportunities: () => sections.wantsOpportunities(),
+    wantsOpportunities: () => depth === 'full' && secPlans.isOpen() && plans.wantsOpportunities(),
     syncFollow,
+    depth: () => depth,
+    setDepth,
     reset() {
       last = null;
-      sections.reset();
+      debug.reset();
+      thoughtsSig = '';
       body.scrollTop = 0;
       el.classList.add('snap');
       window.clearTimeout(snapTimer);

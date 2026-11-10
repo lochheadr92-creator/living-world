@@ -54,6 +54,8 @@ import { NEED_KEYS } from './constants';
 import { hyp } from './util';
 import {describeProject} from './project_graph';
 import {describeRoutines} from './daily_routines';
+import { intentView, knowledgeItems, provenanceCue, relevantItems, statusLine, suspendedView, timeline, whereaboutsItems } from './inspect_observer';
+import type { IntentView, KnowledgeItemView, StatusView, SuspendedView, TimelineView, WhereaboutsView } from './inspect_observer';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
@@ -114,6 +116,8 @@ export interface RelationView {
   familiarity: number;
   recent: string;
   avoiding: boolean;
+  /** one of the person's own household (listed first) */
+  household: boolean;
 }
 export interface RequestView {
   id: number;
@@ -233,6 +237,23 @@ export interface PersonView {
    * that teller (Relation.accounts). Display only: nothing is stored or decided from it. */
   knowledge: { places: number; seen: number; hearsay: number; stale: number; byKind: { kind: string; n: number }[]; told: { key: string; text: string; doubt: boolean }[] };
   speech: string | null;
+  // ── the compact card and the full viewer (inspect_observer.ts): derived from recorded state, nothing invented ──
+  /** one line: at risk, blocked, interrupted, helping, carrying food home, resting, or no immediate problem */
+  status: StatusView;
+  /** where they are going or what they are at, with its place on the map */
+  intent: IntentView | null;
+  /** the knowledge the current action rests on, when that is hearsay, old, or a last known location; null for fresh direct sight */
+  provenance: string | null;
+  /** carried goods that bear on the current action only */
+  relevantItems: ItemView[];
+  /** work set aside that can resume when conditions allow */
+  suspended: SuspendedView | null;
+  /** what they know, item by item, newest observation first, with source, age and the viewer's world check */
+  knowledgeItems: KnowledgeItemView[];
+  /** where they last knew other people to be */
+  whereabouts: WhereaboutsView[];
+  /** the personal log and the decision ledger as one history, newest first, in world time */
+  timeline: TimelineView[];
 }
 
 /** Where the six most recently learned hearsay places came from: "told by Kai 2 days ago", with "who has been wrong
@@ -355,7 +376,11 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
       const pct = a.duration > 0 ? Math.round((a.progress / a.duration) * 100) : 0;
       doing = a.duration > 0 ? `${a.label} (${pct}% of this task).` : `${a.label}.`;
     }
-    why = a.data.why ? `Weighed up: ${a.data.why}` : lastDec?.because ? `Weighed up: ${lastDec.because}` : a.goal;
+    // The last decision's reason belongs to the activity that decision launched. An activity that arrived another way (a
+    // conversation someone else started, a resumed step) carries no `why`, and where the ledger (rules 103) shows the last
+    // decision launched something else, its reason is not repeated as if it were this one's.
+    const decidedThis = !!a.data.why || !p.decisions || !lastDec || p.decisions.some((e) => e.activityId === a.id);
+    why = a.data.why ? `Weighed up: ${a.data.why}` : decidedThis && lastDec?.because ? `Weighed up: ${lastDec.because}` : `Not a weighed choice of theirs; it came about in the course of things. Aim: ${(a.goal || a.label.toLowerCase()).replace(/[.?!]$/, '')}.`;
     trying = a.goal ? a.goal[0].toUpperCase() + a.goal.slice(1) + (tgt ? ` (${tgt})` : '') + '.' : '—';
     if(a.data.workScope)trying+=' '+a.data.workScope.reason+'. These are estimates; the work can be interrupted.';
     if (a.blocked) stopping = a.blocked[0].toUpperCase() + a.blocked.slice(1) + '.';
@@ -592,9 +617,11 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
       familiarity: r.familiarity,
       recent: r.history.length ? r.history[r.history.length - 1].text : '',
       avoiding: r.avoidUntil > world.tick,
+      household: !!hh && hh.members.includes(oid),
     });
   }
-  relationships.sort((x, y) => Math.abs(y.affinity) - Math.abs(x.affinity));
+  // household first, then by how strongly they feel either way
+  relationships.sort((x, y) => Number(y.household) - Number(x.household) || Math.abs(y.affinity) - Math.abs(x.affinity));
 
   const family: PersonView['family'] = [];
   const nm = (ids: number[]) => ids.map((i) => nameOf(world, i));
@@ -737,6 +764,14 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
       .map((l) => ({ when: agoText(world, l.tick), text: l.text, kind: l.kind })),
     knowledge: { places, seen, hearsay, stale, byKind: Object.entries(byKind).map(([kind, n]) => ({ kind: BELIEF_NOUN[kind as keyof typeof BELIEF_NOUN] ?? kind, n })).sort((x, y) => y.n - x.n), told },
     speech: p.speech && p.speech.until > world.tick ? p.speech.text : null,
+    status: statusLine(world, p),
+    intent: intentView(world, p),
+    provenance: provenanceCue(world, p),
+    relevantItems: relevantItems(p),
+    suspended: suspendedView(world, p),
+    knowledgeItems: knowledgeItems(world, p),
+    whereabouts: whereaboutsItems(world, p),
+    timeline: timeline(world, p),
   };
   return view;
 }

@@ -41,8 +41,8 @@ export const OVERLAY_DEFS: OverlayDef[] = [
     key: 'knowledge',
     label: 'Knowledge',
     icon: 'pin',
-    short: 'Places the selected person remembers, fading as they age.',
-    tip: 'Knowledge\nThe places the selected person remembers, fading as the memory ages. This is what they believe, which can differ from what is really there. Diamonds are ore, triangles stone outcrops, squares handcarts; hollow marks are things they were only told about.',
+    short: 'The map as the selected person knows it: unexplored ground, remembered places, hearsay, stale and contradicted memories, last known whereabouts.',
+    tip: 'Knowledge lens\nThe map as the selected person knows it. Unexplored ground is darkened. Remembered places fade as the memory ages; hollow marks are hearsay; a cross marks a memory the world no longer agrees with (gone, or picked bare); a ringed initial is where they last knew someone to be, with a thread to where that person really is. Diamonds are ore, triangles stone outcrops, squares handcarts. Looking changes nothing for them.',
   },
   {
     key: 'labels',

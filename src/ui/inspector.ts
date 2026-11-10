@@ -43,6 +43,13 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
       game.focusEntity(id);
       viaPanel = false;
     },
+    // the full viewer is wider: the camera's inset follows the panel's real width (presentation only)
+    onDepth: (depth) => {
+      wrap.dataset.depth = depth;
+      syncInset();
+      force = true;
+      refresh();
+    },
   });
   const entity = createEntityPanel(ctx, {
     onClose: () => game.select(0),
@@ -110,7 +117,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
     icon('chevron', 14, 'insp-chev'),
     handleDot,
   );
-  const wrap = h('div', { class: 'insp-wrap', 'data-open': 'true', 'data-mode': 'empty' }, handle, aside);
+  const wrap = h('div', { class: 'insp-wrap', 'data-open': 'true', 'data-mode': 'empty', 'data-depth': person.depth() }, handle, aside);
   slots.right.appendChild(wrap);
 
   function applyOpen(): void {

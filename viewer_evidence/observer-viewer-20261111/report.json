@@ -1,0 +1,758 @@
+{
+  "evidence": "ORDINARY river world (Normal, arrivals on), 900 ticks in the page, no staging; then 1,200 more ticks run in 300-tick steps between observer actions, each compared with an unwatched twin built from the same settings.",
+  "person": {
+    "name": "Mira",
+    "id": 1106,
+    "status": {
+      "text": "Interrupted: “Drinking” set aside · now Foraging practice with Viktor",
+      "tone": "warn"
+    },
+    "intent": {
+      "text": "Here",
+      "x": 43.58196862628684,
+      "y": 41.60057739722542,
+      "kind": "here"
+    },
+    "provenance": null,
+    "because": "a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +57 · water in pack +3",
+    "closed": 7,
+    "timeline": 40
+  },
+  "card": {
+    "depth": "card",
+    "status": "Interrupted: “Drinking” set aside · now Foraging practice with Viktor",
+    "doing": "Foraging practice with Viktor.",
+    "why": "Not a weighed choice of theirs; it came about in the course of things. Aim: Could you help me practise recognising food plants.",
+    "intent": "Here",
+    "prov": "",
+    "last": "Family time with Viktor → success: Family time completed: Family time together for 120 ticks. (37 world min ago)",
+    "pressing": "Water\n40",
+    "carrying": "",
+    "fullHidden": true,
+    "height": 596,
+    "sections": 7
+  },
+  "cover": {
+    "person": {
+      "x": 473.6,
+      "y": 450
+    },
+    "inspector": {
+      "left": 1132,
+      "right": 1428,
+      "top": 98,
+      "bottom": 696
+    },
+    "covered": false,
+    "insetRight": 308,
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    }
+  },
+  "full": {
+    "depth": "full",
+    "titles": [
+      "Now",
+      "Plans and choices",
+      "What they know",
+      "People and relationships",
+      "Recent history",
+      "Household and character"
+    ],
+    "width": 540,
+    "nowOpen": true
+  },
+  "now": {
+    "needs": 6,
+    "health": "MOOD\nContent\nHEALTH\n100",
+    "doing": "Sleeping by my lean-to.",
+    "trying": "To recover energy (28/100) (Lean-to).",
+    "carry": "11 / 12"
+  },
+  "plans": {
+    "why": "A step toward “be fed, watered and under shelter before dark”: get to my lean-to · tired +37 · walking −3",
+    "because": "a step toward “be fed, watered and under shelter before dark”: get to my lean-to · tired +37 · walking −3",
+    "alternatives": "Sit down and rest\nSleep at the fire\nLook for timber\nBring food home",
+    "recordedAlternatives": [
+      "Sit down and rest",
+      "Sleep at the fire",
+      "Look for timber",
+      "Bring food home"
+    ],
+    "setAside": "Lay out a hut: the household has only 9 food to hand and wants 12 before starting a hut\nPicking berries: believes it is empty\nPicking berries: believes it is empty\nPicking berries: believes it is empty\nGathering wild grain: believes it is empty\nFishing: believes it is empty",
+    "recordedBlocked": [
+      "Lay out a hut",
+      "Picking berries",
+      "Picking berries",
+      "Picking berries",
+      "Gathering wild grain",
+      "Fishing"
+    ],
+    "techHidden": true,
+    "plans": 2,
+    "planViews": 2
+  },
+  "tech": {
+    "shown": true,
+    "parts": 9,
+    "signed": true
+  },
+  "know": {
+    "rows": 12,
+    "items": 60,
+    "legend": "125 seen first-hand · 0 heard from others · 29 possibly out of date",
+    "seenRow": "SEEN\nBerry bush · believed 1\nseen 1 world min ago · at 46, 44",
+    "toldRow": "n/a",
+    "toldFrom": null,
+    "toldBelief": null,
+    "firstBelief": {
+      "src": "seen",
+      "seen": 1498,
+      "learned": 1498,
+      "kind": "berry_bush"
+    },
+    "firstShown": {
+      "id": 938,
+      "kind": "berry_bush",
+      "label": "Berry bush",
+      "x": 45.5,
+      "y": 43.5,
+      "src": "seen",
+      "from": "",
+      "seenAgo": "1 world min ago",
+      "learnedAgo": "1 world min ago",
+      "stale": false,
+      "worldCheck": "present",
+      "amount": 1
+    },
+    "where": 20,
+    "wrong": 0,
+    "wrongDerived": 0
+  },
+  "lens": {
+    "on": true,
+    "pressed": "true",
+    "chip": "true"
+  },
+  "hist": {
+    "rows": 14,
+    "timeline": 40,
+    "whenOk": true,
+    "hasDecision": true,
+    "hasOutcome": true,
+    "closed": {
+      "chosen": "Sleep at my lean-to",
+      "outcome": "success",
+      "detail": "rested",
+      "endedAt": 1794,
+      "tick": 1071
+    },
+    "match": {
+      "text": "Sleep at my lean-to → success: rested",
+      "when": "Day 2, 01:08",
+      "outcome": true,
+      "decision": false
+    },
+    "sample": [
+      {
+        "text": "Chose “Eat what I am carrying” (free)",
+        "when": "Day 2, 01:08",
+        "outcome": false,
+        "decision": true
+      },
+      {
+        "text": "Slept and recovered 68 energy.",
+        "when": "Day 2, 01:08",
+        "outcome": false,
+        "decision": false
+      },
+      {
+        "text": "Sleep at my lean-to → success: rested",
+        "when": "Day 2, 01:08",
+        "outcome": true,
+        "decision": false
+      },
+      {
+        "text": "The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+        "when": "Day 1, 18:11",
+        "outcome": false,
+        "decision": false
+      },
+      {
+        "text": "The tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+        "when": "Day 1, 17:55",
+        "outcome": false,
+        "decision": false
+      }
+    ]
+  },
+  "people": {
+    "rels": 6,
+    "words": [
+      "devoted",
+      "devoted",
+      "devoted",
+      "fond",
+      "warm",
+      "cool"
+    ],
+    "household": 3,
+    "more": false
+  },
+  "character": {
+    "traits": 5,
+    "skills": 12,
+    "home": "Home: lean-to (92% sound) — last considered 3 world min ago: too hungry to start a building",
+    "ledger": true,
+    "relhist": true
+  },
+  "hashes": [
+    {
+      "label": "the card, follow and the perception overlay",
+      "tick": 1200,
+      "watched": "8dd9f703",
+      "twin": "8dd9f703",
+      "sameState": true
+    },
+    {
+      "label": "the full view, Now and Plans and choices",
+      "tick": 1500,
+      "watched": "73d2c452",
+      "twin": "73d2c452",
+      "sameState": true
+    },
+    {
+      "label": "What they know and the knowledge lens",
+      "tick": 1800,
+      "watched": "86c9e625",
+      "twin": "86c9e625",
+      "sameState": true
+    },
+    {
+      "label": "People, Household and character, and closing back to the card",
+      "tick": 2100,
+      "watched": "5057b169",
+      "twin": "5057b169",
+      "sameState": true
+    }
+  ],
+  "staged": {
+    "planted": {
+      "ok": true,
+      "who": "Viktor",
+      "teller": "Mira",
+      "toldId": 952,
+      "oldId": 934,
+      "oldKind": "berry_bush"
+    },
+    "shown": {
+      "toldRow": "HEARSAY\nBerry bush · believed 2\ntold by Mira just now · at 63, 38",
+      "toldItem": {
+        "id": 952,
+        "kind": "berry_bush",
+        "label": "Berry bush",
+        "x": 62.5,
+        "y": 37.5,
+        "src": "told",
+        "from": "Mira",
+        "seenAgo": "3 world min ago",
+        "learnedAgo": "just now",
+        "stale": false,
+        "worldCheck": "present",
+        "amount": 2
+      },
+      "toldBelief": {
+        "src": "told",
+        "from": 1106,
+        "teller": 1106,
+        "learned": 2400,
+        "tick": 2400
+      },
+      "oldRow": "SEEN, OLD\nBerry bush · believed 3\nseen 1 world day ago · possibly out of date · at 31, 50",
+      "oldItem": {
+        "id": 934,
+        "kind": "berry_bush",
+        "label": "Berry bush",
+        "x": 30.5,
+        "y": 49.5,
+        "src": "seen",
+        "from": "",
+        "seenAgo": "1 world day ago",
+        "learnedAgo": "1 world day ago",
+        "stale": true,
+        "worldCheck": "present",
+        "amount": 3
+      },
+      "oldBelief": {
+        "seen": 0,
+        "tick": 2400
+      },
+      "legend": "126 seen first-hand · 2 heard from others · 78 possibly out of date",
+      "cardCue": null
+    }
+  },
+  "checks": [
+    {
+      "name": "an ordinary river person with a recorded decision and history is selected for the check",
+      "ok": true,
+      "detail": {
+        "name": "Mira",
+        "id": 1106,
+        "status": {
+          "text": "Interrupted: “Drinking” set aside · now Foraging practice with Viktor",
+          "tone": "warn"
+        },
+        "intent": {
+          "text": "Here",
+          "x": 43.58196862628684,
+          "y": 41.60057739722542,
+          "kind": "here"
+        },
+        "provenance": null,
+        "because": "a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +57 · water in pack +3",
+        "closed": 7,
+        "timeline": 40
+      }
+    },
+    {
+      "name": "the watched world and its twin start identical",
+      "ok": true,
+      "detail": {
+        "watched": "f9a56495",
+        "twin": "f9a56495"
+      }
+    },
+    {
+      "name": "the compact card shows status, what they are doing, why, where to or what next, and how the last attempt ended; the six sections stay hidden",
+      "ok": true,
+      "detail": {
+        "depth": "card",
+        "status": "Interrupted: “Drinking” set aside · now Foraging practice with Viktor",
+        "doing": "Foraging practice with Viktor.",
+        "why": "Not a weighed choice of theirs; it came about in the course of things. Aim: Could you help me practise recognising food plants.",
+        "intent": "Here",
+        "prov": "",
+        "last": "Family time with Viktor → success: Family time completed: Family time together for 120 ticks. (37 world min ago)",
+        "pressing": "Water\n40",
+        "carrying": "",
+        "fullHidden": true,
+        "height": 596,
+        "sections": 7
+      }
+    },
+    {
+      "name": "the card’s reason is the person’s recorded decision (lastDecision.because / activity.data.why), not re-scored",
+      "ok": true,
+      "detail": {
+        "shown": "Not a weighed choice of theirs; it came about in the course of things. Aim: Could you help me practise recognising food plants.",
+        "recorded": "a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +57 · water in pack +3"
+      }
+    },
+    {
+      "name": "no provenance cue is shown when the target is known by fresh first-hand sight (nothing invented)",
+      "ok": true,
+      "detail": {
+        "shown": ""
+      }
+    },
+    {
+      "name": "the selected person is on screen and not under the card at the desktop viewport",
+      "ok": true,
+      "detail": {
+        "person": {
+          "x": 473.6,
+          "y": 450
+        },
+        "inspector": {
+          "left": 1132,
+          "right": 1428,
+          "top": 98,
+          "bottom": 696
+        },
+        "covered": false,
+        "insetRight": 308,
+        "viewport": {
+          "w": 1440,
+          "h": 900
+        }
+      }
+    },
+    {
+      "name": "after the card, follow and the perception overlay and 300 more ticks, fingerprint and full state equal the unwatched twin (tick 1200)",
+      "ok": true,
+      "detail": {
+        "label": "the card, follow and the perception overlay",
+        "tick": 1200,
+        "watched": "8dd9f703",
+        "twin": "8dd9f703",
+        "sameState": true
+      }
+    },
+    {
+      "name": "the full character view opens with six named sections: Now, Plans and choices, What they know, People and relationships, Recent history, Household and character",
+      "ok": true,
+      "detail": {
+        "depth": "full",
+        "titles": [
+          "Now",
+          "Plans and choices",
+          "What they know",
+          "People and relationships",
+          "Recent history",
+          "Household and character"
+        ],
+        "width": 540,
+        "nowOpen": true
+      }
+    },
+    {
+      "name": "Now shows the action with progress, the six needs, mood and health, and what they carry against capacity",
+      "ok": true,
+      "detail": {
+        "needs": 6,
+        "health": "MOOD\nContent\nHEALTH\n100",
+        "doing": "Sleeping by my lean-to.",
+        "trying": "To recover energy (28/100) (Lean-to).",
+        "carry": "11 / 12"
+      }
+    },
+    {
+      "name": "Plans and choices shows the recorded reason in words, the recorded alternatives and set-aside options, with scores hidden until asked",
+      "ok": true,
+      "detail": {
+        "why": "A step toward “be fed, watered and under shelter before dark”: get to my lean-to · tired +37 · walking −3",
+        "because": "a step toward “be fed, watered and under shelter before dark”: get to my lean-to · tired +37 · walking −3",
+        "alternatives": "Sit down and rest\nSleep at the fire\nLook for timber\nBring food home",
+        "recordedAlternatives": [
+          "Sit down and rest",
+          "Sleep at the fire",
+          "Look for timber",
+          "Bring food home"
+        ],
+        "setAside": "Lay out a hut: the household has only 9 food to hand and wants 12 before starting a hut\nPicking berries: believes it is empty\nPicking berries: believes it is empty\nPicking berries: believes it is empty\nGathering wild grain: believes it is empty\nFishing: believes it is empty",
+        "recordedBlocked": [
+          "Lay out a hut",
+          "Picking berries",
+          "Picking berries",
+          "Picking berries",
+          "Gathering wild grain",
+          "Fishing"
+        ],
+        "techHidden": true,
+        "plans": 2,
+        "planViews": 2
+      }
+    },
+    {
+      "name": "the technical detail toggle reveals the scores, every part signed + or − so its direction is plain",
+      "ok": true,
+      "detail": {
+        "shown": true,
+        "parts": 9,
+        "signed": true
+      }
+    },
+    {
+      "name": "after the full view, Now and Plans and choices and 300 more ticks, fingerprint and full state equal the unwatched twin (tick 1500)",
+      "ok": true,
+      "detail": {
+        "label": "the full view, Now and Plans and choices",
+        "tick": 1500,
+        "watched": "73d2c452",
+        "twin": "73d2c452",
+        "sameState": true
+      }
+    },
+    {
+      "name": "What they know lists remembered places with source and age (first-hand rows read \"Seen\", hearsay rows name the teller from the belief itself)",
+      "ok": true,
+      "detail": {
+        "rows": 12,
+        "items": 60,
+        "legend": "125 seen first-hand · 0 heard from others · 29 possibly out of date",
+        "seenRow": "SEEN\nBerry bush · believed 1\nseen 1 world min ago · at 46, 44",
+        "toldRow": "n/a",
+        "toldFrom": null,
+        "toldBelief": null,
+        "firstBelief": {
+          "src": "seen",
+          "seen": 1498,
+          "learned": 1498,
+          "kind": "berry_bush"
+        },
+        "firstShown": {
+          "id": 938,
+          "kind": "berry_bush",
+          "label": "Berry bush",
+          "x": 45.5,
+          "y": 43.5,
+          "src": "seen",
+          "from": "",
+          "seenAgo": "1 world min ago",
+          "learnedAgo": "1 world min ago",
+          "stale": false,
+          "worldCheck": "present",
+          "amount": 1
+        },
+        "where": 20,
+        "wrong": 0,
+        "wrongDerived": 0
+      }
+    },
+    {
+      "name": "the world check marks on the list match the derived comparison (within the rows shown)",
+      "ok": true,
+      "detail": {
+        "shown": 0,
+        "derived": 0
+      }
+    },
+    {
+      "name": "the knowledge lens switches on from the viewer and the bottom overlay chip agrees",
+      "ok": true,
+      "detail": {
+        "on": true,
+        "pressed": "true",
+        "chip": "true"
+      }
+    },
+    {
+      "name": "after What they know and the knowledge lens and 300 more ticks, fingerprint and full state equal the unwatched twin (tick 1800)",
+      "ok": true,
+      "detail": {
+        "label": "What they know and the knowledge lens",
+        "tick": 1800,
+        "watched": "86c9e625",
+        "twin": "86c9e625",
+        "sameState": true
+      }
+    },
+    {
+      "name": "Recent history is one newest-first list stamped in world time, with decisions and outcomes; the latest closed ledger entry appears as an outcome row",
+      "ok": true,
+      "detail": {
+        "rows": 14,
+        "timeline": 40,
+        "whenOk": true,
+        "hasDecision": true,
+        "hasOutcome": true,
+        "closed": {
+          "chosen": "Sleep at my lean-to",
+          "outcome": "success",
+          "detail": "rested",
+          "endedAt": 1794,
+          "tick": 1071
+        },
+        "match": {
+          "text": "Sleep at my lean-to → success: rested",
+          "when": "Day 2, 01:08",
+          "outcome": true,
+          "decision": false
+        },
+        "sample": [
+          {
+            "text": "Chose “Eat what I am carrying” (free)",
+            "when": "Day 2, 01:08",
+            "outcome": false,
+            "decision": true
+          },
+          {
+            "text": "Slept and recovered 68 energy.",
+            "when": "Day 2, 01:08",
+            "outcome": false,
+            "decision": false
+          },
+          {
+            "text": "Sleep at my lean-to → success: rested",
+            "when": "Day 2, 01:08",
+            "outcome": true,
+            "decision": false
+          },
+          {
+            "text": "The wild grain I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+            "when": "Day 1, 18:11",
+            "outcome": false,
+            "decision": false
+          },
+          {
+            "text": "The tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+            "when": "Day 1, 17:55",
+            "outcome": false,
+            "decision": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "People and relationships lists relationships with the figure explained in a word, household first, and folds a long list",
+      "ok": true,
+      "detail": {
+        "rels": 6,
+        "words": [
+          "devoted",
+          "devoted",
+          "devoted",
+          "fond",
+          "warm",
+          "cool"
+        ],
+        "household": 3,
+        "more": false
+      }
+    },
+    {
+      "name": "Household and character shows home, traits and skills; the recorded histories keep their disclosures",
+      "ok": true,
+      "detail": {
+        "traits": 5,
+        "skills": 12,
+        "home": "Home: lean-to (92% sound) — last considered 3 world min ago: too hungry to start a building",
+        "ledger": true,
+        "relhist": true
+      }
+    },
+    {
+      "name": "after People, Household and character, and closing back to the card and 300 more ticks, fingerprint and full state equal the unwatched twin (tick 2100)",
+      "ok": true,
+      "detail": {
+        "label": "People, Household and character, and closing back to the card",
+        "tick": 2100,
+        "watched": "5057b169",
+        "twin": "5057b169",
+        "sameState": true
+      }
+    },
+    {
+      "name": "back on the compact card after the full view, with the world still identical to its twin",
+      "ok": true,
+      "detail": {
+        "depth": "card",
+        "watched": "5057b169",
+        "twin": "5057b169",
+        "same": true,
+        "hashes": [
+          {
+            "label": "the card, follow and the perception overlay",
+            "tick": 1200,
+            "watched": "8dd9f703",
+            "twin": "8dd9f703",
+            "sameState": true
+          },
+          {
+            "label": "the full view, Now and Plans and choices",
+            "tick": 1500,
+            "watched": "73d2c452",
+            "twin": "73d2c452",
+            "sameState": true
+          },
+          {
+            "label": "What they know and the knowledge lens",
+            "tick": 1800,
+            "watched": "86c9e625",
+            "twin": "86c9e625",
+            "sameState": true
+          },
+          {
+            "label": "People, Household and character, and closing back to the card",
+            "tick": 2100,
+            "watched": "5057b169",
+            "twin": "5057b169",
+            "sameState": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "STAGED: a told belief and a 3,000-tick-old sight were planted on a second river world at tick 2,400 (not part of the comparisons)",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "who": "Viktor",
+        "teller": "Mira",
+        "toldId": 952,
+        "oldId": 934,
+        "oldKind": "berry_bush"
+      }
+    },
+    {
+      "name": "STAGED: the hearsay row names the teller and the age from the belief itself (src told, from = teller id, learned = now), and the legend counts it among those heard from others",
+      "ok": true,
+      "detail": {
+        "toldRow": "HEARSAY\nBerry bush · believed 2\ntold by Mira just now · at 63, 38",
+        "toldItem": {
+          "id": 952,
+          "kind": "berry_bush",
+          "label": "Berry bush",
+          "x": 62.5,
+          "y": 37.5,
+          "src": "told",
+          "from": "Mira",
+          "seenAgo": "3 world min ago",
+          "learnedAgo": "just now",
+          "stale": false,
+          "worldCheck": "present",
+          "amount": 2
+        },
+        "toldBelief": {
+          "src": "told",
+          "from": 1106,
+          "teller": 1106,
+          "learned": 2400,
+          "tick": 2400
+        },
+        "oldRow": "SEEN, OLD\nBerry bush · believed 3\nseen 1 world day ago · possibly out of date · at 31, 50",
+        "oldItem": {
+          "id": 934,
+          "kind": "berry_bush",
+          "label": "Berry bush",
+          "x": 30.5,
+          "y": 49.5,
+          "src": "seen",
+          "from": "",
+          "seenAgo": "1 world day ago",
+          "learnedAgo": "1 world day ago",
+          "stale": true,
+          "worldCheck": "present",
+          "amount": 3
+        },
+        "oldBelief": {
+          "seen": 0,
+          "tick": 2400
+        },
+        "legend": "126 seen first-hand · 2 heard from others · 78 possibly out of date",
+        "cardCue": null
+      }
+    },
+    {
+      "name": "STAGED: the old first-hand sight reads as seen, old and possibly out of date, from its own seen tick",
+      "ok": true,
+      "detail": {
+        "oldRow": "SEEN, OLD\nBerry bush · believed 3\nseen 1 world day ago · possibly out of date · at 31, 50",
+        "oldItem": {
+          "id": 934,
+          "kind": "berry_bush",
+          "label": "Berry bush",
+          "x": 30.5,
+          "y": 49.5,
+          "src": "seen",
+          "from": "",
+          "seenAgo": "1 world day ago",
+          "learnedAgo": "1 world day ago",
+          "stale": true,
+          "worldCheck": "present",
+          "amount": 3
+        },
+        "oldBelief": {
+          "seen": 0,
+          "tick": 2400
+        }
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

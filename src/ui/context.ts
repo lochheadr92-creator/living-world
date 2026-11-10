@@ -13,11 +13,15 @@ export interface UIState {
   hinted: boolean;
   /** the minimap is unfolded */
   minimapOpen: boolean;
+  /** the person view's depth: the compact card (default) or the full character viewer */
+  personDepth: 'card' | 'full';
+  /** the full viewer shows the scores behind the current choice */
+  techDetail: boolean;
 }
 
 const KEY = 'living-world:ui:v1';
 
-const DEFAULT_STATE: UIState = { sections: {}, hinted: false, minimapOpen: true };
+const DEFAULT_STATE: UIState = { sections: {}, hinted: false, minimapOpen: true, personDepth: 'card', techDetail: false };
 
 export function loadUIState(): UIState {
   try {
@@ -28,6 +32,8 @@ export function loadUIState(): UIState {
       sections: p.sections && typeof p.sections === 'object' ? { ...p.sections } : {},
       hinted: !!p.hinted,
       minimapOpen: p.minimapOpen !== false,
+      personDepth: p.personDepth === 'full' ? 'full' : 'card',
+      techDetail: p.techDetail === true,
     };
   } catch {
     return { ...DEFAULT_STATE, sections: {} };

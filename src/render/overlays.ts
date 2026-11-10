@@ -1,6 +1,7 @@
 import type { Entity, Person, Speech, World } from '../sim/types';
 import type { ActivityKind } from '../sim/types';
 import { NEED_COLORS } from './palette';
+import { isWaterBeliefId } from '../sim/knowledge';
 import { OVERLAY_FONT, type BubbleLayout, type BubblePlacement } from './speech_layout';
 
 // ───────────────────────── world-space overlays (drawn in the iso plane) ─────────────────────────
@@ -129,7 +130,13 @@ function markerPath(ctx: CanvasRenderingContext2D, shape: 'diamond' | 'tri' | 's
   } else ctx.arc(x, y, r, 0, Math.PI * 2);
 }
 
-/** What this person remembers: markers faded by age; hollow rings are things they only heard about. */
+/**
+ * The knowledge lens: what this person remembers, drawn over the real world so the two can be compared. Markers fade by age;
+ * hollow rings are things they only heard about; a cross marks a memory the live world no longer agrees with (the thing is gone,
+ * or a source they remember stocked is bare); a ringed initial is where they last knew another person to be, with a thin thread
+ * to where that person really is now. Reading the world for the comparison is the viewer's, never the person's: nothing is
+ * written back and nothing is learned.
+ */
 export function drawKnowledge(ctx: CanvasRenderingContext2D, world: World, p: Person, simT: number): void {
   for (const k in p.beliefs) {
     const b = p.beliefs[k as unknown as number];
@@ -160,6 +167,61 @@ export function drawKnowledge(ctx: CanvasRenderingContext2D, world: World, p: Pe
       ctx.beginPath();
       ctx.arc(sx, sy, 9 + Math.sin(simT * 6) * 1.5, 0, Math.PI * 2);
       ctx.stroke();
+    }
+    // the world check (knowledgeItems in sim/inspect_observer.ts says the same in the viewer): a cross where the memory is wrong
+    if (!isWaterBeliefId(b.id)) {
+      const e = world.byId.get(b.id);
+      const wrong = !e || (e.ent === 'source' && b.amount > 0 && e.amount <= 0);
+      if (wrong) {
+        ctx.globalAlpha = Math.max(fresh, 0.6);
+        ctx.strokeStyle = '#e5645c';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(sx - 5, sy - 5);
+        ctx.lineTo(sx + 5, sy + 5);
+        ctx.moveTo(sx + 5, sy - 5);
+        ctx.lineTo(sx - 5, sy + 5);
+        ctx.stroke();
+      }
+    }
+  }
+  // where they last knew people to be, and the thread to where those people really are
+  for (const k in p.whereabouts) {
+    const id = Number(k);
+    const w = p.whereabouts[id];
+    if (!w) continue;
+    const q = world.byId.get(id);
+    const name = q?.ent === 'person' ? q.name : '';
+    const age = world.tick - w.tick;
+    const fresh = Math.max(0.3, 1 - age / 7000);
+    const sx = (w.x - w.y) * 32;
+    const sy = (w.x + w.y) * 16 - 8;
+    ctx.globalAlpha = fresh;
+    ctx.strokeStyle = w.from ? '#f3b95f' : '#8ec5ff';
+    ctx.lineWidth = 1.6;
+    ctx.setLineDash(w.from ? [3, 3] : []);
+    ctx.beginPath();
+    ctx.arc(sx, sy, 7, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    if (name) {
+      ctx.fillStyle = ctx.strokeStyle;
+      ctx.font = 'bold 9px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(name[0], sx, sy + 0.5);
+    }
+    if (q?.ent === 'person' && q.alive && Math.hypot(q.x - w.x, q.y - w.y) > 2) {
+      const tx = (q.x - q.y) * 32;
+      const ty = (q.x + q.y) * 16 - 8;
+      ctx.globalAlpha = fresh * 0.6;
+      ctx.setLineDash([2, 5]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(tx, ty);
+      ctx.stroke();
+      ctx.setLineDash([]);
     }
   }
   ctx.globalAlpha = 1;
