@@ -1152,6 +1152,8 @@ export interface Request {
   expires: number;
   status: RequestStatus;
   note: string;
+  /** rules 187 (answer_cause.ts): the term that decided a yes or no to a help-build ask */
+  answerWhy?: string;
   resolved: number;
   /** what the requester needs it for, in their words */
   purpose?: string;

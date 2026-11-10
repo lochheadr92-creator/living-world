@@ -34,6 +34,7 @@ import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interru
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
+import { answerCause, hasAnswerCause } from './answer_cause';
 import { receivedCivicBenefit } from './civic_benefit';
 import { fetchableFood, hasFoodFetch } from './food_help';
 import { agreedPlace } from './delivery_place';
@@ -1579,12 +1580,15 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         break;
       }
       const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
+      // rules 187: the term that decided it, recomputed from the same pure inputs; `w` above is untouched
+      const answerWhy = hasAnswerCause(world) ? answerCause({ w, experience: projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0, affinity: 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100, chance: (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15, drive: 0.5 * (personalDriveMax(world, B) / 100), kin: rel?.kin ? 0.2 : 0, asker: A.name }) : undefined;
       if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
         req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
+        if (answerWhy) req.answerWhy = answerWhy;
         if(project&&receivedCivicBenefit(world,B,A.id))req.note+='; remembers benefiting from their earlier shared storehouse';
         bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
         if(hasPromiseTargets(world)){const agreed=B.commitments.find(x=>x.id===req.commitmentId);if(agreed)rememberExpectation(world,A,B,req,agreed,c.id);}
@@ -1593,6 +1597,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       } else {
         bubble(world, B, D.saying(D.RESP_UNWILLING, B.id, A.id, world.tick >> 5), 'say', 52);
         settle(world, req, 'declined', projectAt(world, d.siteId ?? 0) ? (personalDriveMax(world, B) > 35 ? 'own needs take priority' : (rel?.affinity ?? 0) < 0 ? 'does not want to work with this organiser' : 'not willing to commit to this proposal') : 'busy');
+        if (answerWhy && w < 0.55) req.answerWhy = answerWhy;
       }
       break;
     }

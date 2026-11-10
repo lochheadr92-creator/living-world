@@ -15,7 +15,9 @@ import { civicExperience, hasCivicBenefit } from './civic_benefit';
 export interface Township { extent?: { x0: number; y0: number; x1: number; y1: number; finished: number; updated: number }; origin?: { householdId:number; relocationId:number; fromTownship:number; shelterId:number; organiserId:number }; id: number; name: string; x: number; y: number; founded: number }
 export interface Participation {
  supports?: number;
- decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number}[];
+ decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number;answerWhy?:string}[];
+ /** rules 187 (answer_cause.ts): the term that decided this person's answer */
+ answerWhy?: string;
  personId: number; requestId: number; since: number;
  status: 'supporting' | 'refused' | 'withdrawn'; reason: string;
  materials: Items; work: number;
@@ -90,7 +92,8 @@ export function recordProjectResponse(w: World, asker: Person, responder: Person
   status: req.status === 'promised' ? 'supporting' as const : 'refused' as const, reason: req.note || req.status, materials: {}, work: 0 };
  if(!existing)project.participants.push(m);
  if(req.status==='promised'){m.status='supporting';m.requestId=req.id;m.reason=req.note;}
- recordChoice(w,project,m,asker,req.status==='promised',req.note);
+ if(req.answerWhy)m.answerWhy=req.answerWhy;
+ recordChoice(w,project,m,asker,req.status==='promised',req.note,req.answerWhy);
 
 }
 export function creditProject(w: World, p: Person, siteId: number, item: ItemKind | null, amount: number): void {

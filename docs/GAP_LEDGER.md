@@ -600,3 +600,25 @@ approved in chat on 2026-11-10 ("go with recommended steps").
 - **Metric and comparison (pre-stated):** the version twin on the 12 seeds (Normal, 25 days, arrivals on, control arm) at 185 and 186 with every `builtBy` list emptied and
   `builtAll` dropped before hashing (`--strip-builders`): identical in 12 of 12, else the lab runs.
 - **Order note:** written after the code and before the commit.
+
+### Trace links 6, 10, 28, 33, 34 (rules 187): an answer to a help-build ask keeps the term that decided it
+
+Not a row of the gap map (nearest: G74, G09). Second in the trace's evidence order.
+
+- **Verified at rules 186, 2026-11-10:** `case 'recruit'` (`social.ts`) sums the responder's sight of the organiser's shared work, a base, diligence, generosity, fondness, a draw
+  (`hashUnit`), their own drives and kinship, and accepts at 0.55. The request keeps `note`: "... will help build", or "own needs take priority" (drive above 35), "does not want to
+  work with this organiser" (negative affinity), else "not willing to commit to this proposal". No term is stored. Ordinary aspen: five of the eight answers in the traced
+  outcome carried a label with no cause.
+- **Changes:** at rules 187 in a rich world the request, the participation record and the council decision also keep `answerWhy` (`src/sim/answer_cause.ts`): the first term, in a
+  fixed order, without which the answer would have gone the other way (yes: kin, the organiser's shared work came good, fondness, the draw; no: the organiser's shared work
+  failed, their own needs, the draw, not knowing the asker well enough), else that it is or is not in their nature. The project history prints it in brackets after the label.
+  The inputs are recomputed from the same pure functions; the sum `w` and the branch are untouched.
+- **Must not change:** rules 186 and earlier, authored worlds and `setAnswerCause(false)`; any answer, note, commitment, trust change, id allocation or accounting.
+- **Limits:** it names one deciding term, not every weight. When no single term decides, it says nature and gives no figures. It covers the help-build answer only, not requests for
+  goods or refusals made before the rule is reached ("not eligible", "enough hands already", an opposing coordinator). Inaction (never asking) is still unexplained.
+- **Tests:** `tests/answer_cause.test.ts` (7): the pure function for five yes and five no cases; a staged ask keeps no cause at 186 and one at 187 on the request and the
+  participation, shown in the project history; status and note equal at 186 and 187 for a yes and for a no; the switch. Previous-version pin: `tests/v186_continuation.*`
+  (`294e53a1`); the rules-187 pin follows.
+- **Metric and comparison (pre-stated):** the version twin on the 12 seeds at 186 and 187 with `answerWhy` dropped before hashing (`--strip-answers`): identical in 12 of 12,
+  else the lab runs.
+- **Order note:** written after the code and before the commit.

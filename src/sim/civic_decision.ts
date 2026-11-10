@@ -75,11 +75,11 @@ export function releaseOldSupport(w:World,p:Person,siteId:number,reason:string):
   const r=w.requests.find(r=>r.id===c.requestId);if(r){r.status='interrupted';r.note=reason;r.resolved=w.tick;r.outcome='interrupted';}
  }
 }
-export function recordChoice(w:World,q:CivicProject,m:Participation,a:Person,accepted:boolean,reason:string):void{
+export function recordChoice(w:World,q:CivicProject,m:Participation,a:Person,accepted:boolean,reason:string,answerWhy?:string):void{
  if(!councilFor(w,q))return;
  const decisions=m.decisions??=[];
  if(decisions.some(d=>d.candidateId===a.id))return;
- decisions.push({candidateId:a.id,accepted,reason,tick:w.tick});
+ decisions.push({candidateId:a.id,accepted,reason,tick:w.tick,...(answerWhy?{answerWhy}:{})});
  if(accepted){m.supports=a.id;const p=w.byId.get(m.personId);if(p?.ent==='person')rememberAlignment(w,p,q.id,q.townshipId,a.id);}
  recount(w,q);
 }
