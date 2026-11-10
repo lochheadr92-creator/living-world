@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "4a4d5823d4976b74b9c911b62f459b9e3f7c6266",
+    "rules": 192,
+    "content": "ceb2c2fba745f1a4e4c7364b2371d5b34d40a48bc0cfb27eb120a13b4a619a80",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 7200 ticks including the first storehouse wanted from what a person knows (a recorded reason saying so by tick 7,100, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "e222ce278c978bf684c0de3d665e1b52eaadfa328e2c0e2ca67683016f94caa8",
+  "continued": "4c90e093df8b773126cbb7aa8bf4bb276277be80e4d5bdf94e389ce197d7a456"
+}
