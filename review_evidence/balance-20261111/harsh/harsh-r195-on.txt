@@ -1,0 +1,7 @@
+﻿aspen rules 195 harsh on 25d: alive 0 deaths 29 {"wolf attack":2,"exposure":17,"hunger":5,"thirst":1,"injuries":1,"fever":3} critical-share 0.224
+birch rules 195 harsh on 25d: alive 0 deaths 28 {"hunger":13,"wolf attack":2,"exposure":12,"fever":1} critical-share 0.172
+gen-2 rules 195 harsh on 25d: alive 0 deaths 28 {"hunger":13,"fever":3,"exposure":7,"wolf attack":4,"injuries":1} critical-share 0.249
+gen-5 rules 195 harsh on 25d: alive 1 deaths 27 {"injuries":2,"hunger":8,"exposure":12,"thirst":1,"fever":1,"wolf attack":3} critical-share 0.183
+meadow rules 195 harsh on 25d: alive 0 deaths 31 {"thirst":1,"hunger":8,"exposure":21,"injuries":1} critical-share 0.200
+river rules 195 harsh on 25d: alive 4 deaths 24 {"fever":4,"hunger":7,"wolf attack":2,"exposure":10,"injuries":1} critical-share 0.187
+MEAN rules 195 harsh on 25d over 6: alive 0.8 deaths 27.8 hunger 9.0 thirst 0.5 exposure 13.2 wolf attack 2.2 fever 2.0 injuries 1.0 critical-share 0.200

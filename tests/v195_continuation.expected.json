@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "09880f79de721f2763a7c348f7d25ecc9361e754",
+    "rules": 195,
+    "content": "c6cef19d73f04680fb5906a5d54390523b5bf4d7278e94cf76cfa5276b25e743",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 2,400 ticks under the rules-195 base drains of 0.020 hunger and 0.025 thirst a tick (the trajectory parts from 194 at the first tick), then 120 more after a save and load."
+  },
+  "saved": "e377dd0bdf68101864c2c2616f3aa9672e6300bb0e6338d1a5ba065a1f25829d",
+  "continued": "89d6678fe3686ead518d472539c6d914179658fdab32b6f77b7e02b4b321d552"
+}
