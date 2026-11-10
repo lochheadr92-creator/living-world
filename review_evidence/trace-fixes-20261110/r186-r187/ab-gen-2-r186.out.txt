@@ -1,0 +1,1 @@
+gen-2 r186: alive 25 deaths 4 hh 9 coupled 6 hunger 53.3 mood -11.4 ill 0 hash d8adc3b6cf6bd5d5 conserved true tools true

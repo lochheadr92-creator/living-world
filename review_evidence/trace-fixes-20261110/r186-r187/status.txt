@@ -1,0 +1,2 @@
+started 2026-11-10T15:10:07 head af15790c days 25 before 186 after 187 extra '--strip-answers' stream gap dirty=false
+finished 2026-11-10T15:17:03 compare exit 0

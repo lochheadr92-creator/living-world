@@ -1,0 +1,1 @@
+cedar r185: alive 26 deaths 12 hh 11 coupled 5.5 hunger 27.6 mood -30.3 ill 0 hash ac4c5bc7624ec492 conserved true tools true

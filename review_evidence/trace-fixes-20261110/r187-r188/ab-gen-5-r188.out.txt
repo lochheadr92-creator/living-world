@@ -1,0 +1,1 @@
+gen-5 r188: alive 36 deaths 3 hh 14 coupled 8.5 hunger 37.6 mood -19.5 ill 0 hash 2786737040787144 conserved true tools true

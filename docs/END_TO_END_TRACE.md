@@ -158,3 +158,29 @@ Ranked by how many of the 20 holes each would turn into EXPLAINED.
    defects, not behaviour.
 6. **Let a failed attempt leave a trace** (link 38), and link a new project to the failed one it follows. Ledger G74.
 7. **Keep shared-work lines out of the 60-line roll-off** (links 3, 25). Ledger G05, G08.
+
+## Since this trace (same day)
+
+Chat approved the order above ("go with recommended steps"). Three of the seven items were taken, each as its own rules version, each a record that no decision reads.
+
+- Item 5, half of it: rules 186, `docs/SHARED_BUILDERS.md`. A shared building now lists everyone who built it. Link 36 would read "Built by: Petra, Mona, Dax". Buildings with
+  no project behind them say "Finished by". The feed wording in link 4 is not fixed: it is in a held file.
+- Item 2: rules 187, `docs/ANSWER_CAUSE.md`. An answer to a help-build ask keeps the term that decided it. Links 6, 10, 28, 33 and 34 would carry a cause.
+- Item 4: rules 188, `docs/TAKEN_FROM.md`. The taking log names the goods and the place, and salvage delivered to a shared project is kept on the project record. Link 32
+  would be recorded. Link 17 is not: nothing ties the pile to the project it was left by.
+
+Aspen was traced again at rules 188 from a clean checkout of `6254dc9b` (`review_evidence/trace-fixes-20261110/trace-aspen-r188.json`). The world is the same world: the
+same sites, projects, requests and decisions, and the twins for 186, 187 and 188 are each identical in 12 of 12 seeds. What the records now say:
+
+- Storehouse card: "Built by: Petra, Mona, Dax". Quarry card: "Finished by: Wren".
+- "Delia refused Dax: not willing to commit to this proposal (it is not in their nature to take on shared work)." Esme: "(it was close, and it was no this time)". Mona:
+  "(is fond of Petra)". Wes and Rafe: "(their own needs weighed too much just then)". Dax's yes on day 43: "(it is in their nature to take on shared work)".
+- Mona's log: "Took 1 stone from a pile of abandoned building materials, there since day 24." and "... there since day 13."
+- Project record: "Mona: supporting ... supplied 8 wood, 2 stone (stone from a pile of abandoned building materials, there since day 24; stone from a pile of abandoned
+  building materials, there since day 13); 330 work."
+
+Of the 20 holes, 7 are now recorded (links 6, 10, 28, 32, 33, 34, 36). Thirteen remain: the five proposal triggers, the three kinds of inaction, the wood pile, the wrong
+feed line, the failures nobody remembers, and the two log roll-offs.
+
+One thing reads oddly and is true: "Yusuf refused Dax: own needs take priority (it is not in their nature to take on shared work)". The label is set by his drives being up.
+The cause says his drives alone did not turn the answer. Dax's change from "too busy to stop" three times to yes on day 43 is still not explained: nature does not say why now.

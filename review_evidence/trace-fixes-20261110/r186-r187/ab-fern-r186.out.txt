@@ -1,0 +1,1 @@
+fern r186: alive 11 deaths 19 hh 7 coupled 1 hunger 72.6 mood -4.3 ill 0 hash ecd7affc505ec3ea conserved true tools true

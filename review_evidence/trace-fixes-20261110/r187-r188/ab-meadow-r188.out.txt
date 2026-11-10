@@ -1,0 +1,1 @@
+meadow r188: alive 12 deaths 25 hh 7 coupled 1.5 hunger 33.7 mood -54.7 ill 1 hash 51a30fbb8af68cc3 conserved true tools true

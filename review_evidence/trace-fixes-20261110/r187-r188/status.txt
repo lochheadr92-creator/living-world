@@ -1,0 +1,2 @@
+started 2026-11-10T15:18:03 head 6254dc9b days 25 before 187 after 188 extra '--strip-taken' stream gap dirty=false
+finished 2026-11-10T15:25:15 compare exit 0

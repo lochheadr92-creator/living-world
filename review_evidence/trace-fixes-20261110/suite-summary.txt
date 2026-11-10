@@ -1,0 +1,6 @@
+Full suite, 2026-11-10 15:28, clean worktree living-world-v183-pin at 6254dc9b (rules 188), `npx vitest run`, default worker pool. One run for rules 186, 187 and 188.
+Test Files 16 failed | 551 passed (567). Tests 73 failed | 3118 passed | 3 skipped (3194). Duration 489.85s.
+The 65 baseline names (review_evidence/empty-food-landing-20261109/failing-tests-e019cb33.txt) are all present and none is missing.
+New under load: lab_defaults 3, lab_report 2, lab_provenance 1, zz_review_g_observer_purity 1, zz_review_main_toolreport_saves 1, zz_review_h_retention (file hook).
+Rerun alone, same commit: those six files, Test Files 6 passed (6), Tests 14 passed (14), 163.66s.
+Raw logs are in C:\dev\_claude_scratch\suite188 and are not committed.

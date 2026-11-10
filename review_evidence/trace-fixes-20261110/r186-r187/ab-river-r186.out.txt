@@ -1,0 +1,1 @@
+river r186: alive 25 deaths 5 hh 11 coupled 5.5 hunger 21.7 mood -44 ill 1 hash f951d451afad152b conserved true tools true

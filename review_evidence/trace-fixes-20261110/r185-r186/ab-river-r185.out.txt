@@ -1,0 +1,1 @@
+river r185: alive 25 deaths 5 hh 11 coupled 5.5 hunger 21.7 mood -44 ill 1 hash c4588b9bf13c91fe conserved true tools true

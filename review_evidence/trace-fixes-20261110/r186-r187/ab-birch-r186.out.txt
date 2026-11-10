@@ -1,0 +1,1 @@
+birch r186: alive 9 deaths 19 hh 4 coupled 2 hunger 61.2 mood -24.6 ill 0 hash 1e4a91a94fc47099 conserved true tools true

@@ -6,4 +6,4 @@ above every open claim before it writes gated code. Unused numbers stay unused. 
 
 | stream | first | last | opened | status | note |
 |---|---|---|---|---|---|
-| gap (continuous gap stream, `docs/GAP_LEDGER.md`) | 185 | 189 | 2026-11-10 | open | developed on `main` in the integrate checkout; 185 is G150 first slice |
+| gap (continuous gap stream, `docs/GAP_LEDGER.md`) | 185 | 189 | 2026-11-10 | open | developed on `main` in the integrate checkout; 185 is G150 first slice, 186 shared builders, 187 answer cause, 188 G133 first slice; 189 unused so far |

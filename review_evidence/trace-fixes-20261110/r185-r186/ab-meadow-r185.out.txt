@@ -1,0 +1,1 @@
+meadow r185: alive 12 deaths 25 hh 7 coupled 1.5 hunger 33.7 mood -54.7 ill 1 hash 0db04490b2fc4c63 conserved true tools true

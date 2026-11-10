@@ -1,0 +1,1 @@
+aspen r186: alive 15 deaths 18 hh 6 coupled 1 hunger 56.3 mood -16 ill 0 hash 3d940aa5a84b329b conserved true tools true

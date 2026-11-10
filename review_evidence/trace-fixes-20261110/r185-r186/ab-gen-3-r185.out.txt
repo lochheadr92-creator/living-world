@@ -1,0 +1,1 @@
+gen-3 r185: alive 23 deaths 5 hh 8 coupled 4 hunger 60.4 mood -11.1 ill 0 hash a1e4e452024dbf4d conserved true tools true

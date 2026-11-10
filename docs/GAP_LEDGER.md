@@ -75,7 +75,7 @@ Taken so far: row 1, G29, closed by rules 177 (`9ad63f96`); row 2, G30, closed b
 row 4, G94, partly closed by rules 180 (`e80c291c`); row 5, G154, closed by rules 181 (`e05d939c`, a null in 25-day worlds); row 6, G167, GATED (needs a way to learn an owner's consent; owner
 decision line in `loops.md`); row 7, G26's remainder, skipped (needs the who-lives-with-whom primitive the owner said not to invent); row 8, G01 first slice, rules 182 (`adbc4e0a`,
 decision-neutral); row 9, G16, GATED (what blocks sight is an owner decision); row 10, G17, closed by rules 183 (`ee567e1f`); row 11, G18, GATED (overhearing is a new channel; owner decision
-line); row 12, G19, closed by rules 184 (`e137f697`). row 13, G150 first slice, partly closed by rules 185 (`5405624c`, a record, decision-neutral). Next: G133 and G163 (design checks recorded), then the rows after the queue.
+line); row 12, G19, closed by rules 184 (`e137f697`). row 13, G150 first slice, partly closed by rules 185 (`5405624c`, a record, decision-neutral). Then, in the order `docs/END_TO_END_TRACE.md` gave and chat approved on 2026-11-10: rules 186 (shared builders, `b8e43dc7`, not a map row), rules 187 (answer cause, `90b81762`, not a map row), row 14, G133 first slice, partly closed by rules 188 (`bdfc61cb`). Next: G163 (design check recorded), then the rows after the queue, or the next items of the trace's ranking.
 
 Evidence-ranked alternative to the map order (a proposal, 2026-11-10): `docs/END_TO_END_TRACE.md` traces one 28 day outcome in ordinary aspen and ranks the rows and new
 items by how many of its 20 unexplained links each would close (G32, an answer-to-an-ask cause, G09, G133, two wrong records, G74, G05 and G08). No status below was changed by it.
@@ -96,8 +96,8 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | CLOSED | 7 |
 | DEFERRED | 3 |
 | GATED | 24 |
-| OPEN-VERIFIED | 180 |
-| PARTLY-CLOSED | 11 |
+| OPEN-VERIFIED | 179 |
+| PARTLY-CLOSED | 12 |
 | PRESENT | 7 |
 | UNVERIFIED | 1 |
 | total | 233 |
@@ -238,7 +238,7 @@ pinned with `--rules N`); the previous version's immutable pin; the module switc
 | G130 | Crafting | Building vocabulary stops at 18 types | OPEN-VERIFIED | exists: src/sim/types.ts:833-851 BuildingType (18 members), src/sim/constants.ts BUILD_DEF (18 bd() entries); terms: barn, stable, pen, fence, bridge, stall, chapel, smokehouse, palisade. Rules 163-176 add no building type (rulesversion.ts:215-228). Still 18 | - |
 | G131 | Crafting | Collapsed buildings return none of their materials | OPEN-VERIFIED | exists: src/sim/buildings.ts:259-276 destroyBuilding (rubble pile holds store contents and held batch inputs only), src/sim/options_work.ts:1293 optSalvage (collects from piles); terms: collapse, rubble, salvage, dismantle, demolish, reclaim. docs/MATERIAL_TRACES.md:19-22 confirms construction materials are not recovered. A fix would touch buildings.ts only | - |
 | G132 | Crafting | Preserved meat: no ordinary dried or smoked meat meal ever | PRESENT | exists: src/sim/recipes.ts:67-74 dry_meat and smoke_meat at food_rack, src/sim/preservation.ts:42-85, src/sim/constants.ts:25,67 (dried_meat nutrition and spoilage), src/sim/meals.ts:673 eats it; terms: dried_meat, smoked_meat, preservation, food_rack, PRESERVED_FOODS. Mechanism exists; ordinary meal still unreached (DEPENDENCY_CHAIN_PROGRAMME.md:53, staged only at rules 151) | - |
-| G133 | Logistics | No per-transfer record with carrier, route or ownership | OPEN-VERIFIED | exists: src/sim/settlement_economy.ts:7,41-48 GoodsFlow (last 128 transfers, only between townships, holder tags, no route or ownership), src/sim/types.ts:1320 aggregate Ledger, :1459 optional onTransfer hook (not saved); terms: transferLog, haulLog, DeliveryRecord, GoodsFlow, route. No per-transfer record with carrier, route and ownership for ordinary moves | - |
+| G133 | Logistics | No per-transfer record with carrier, route or ownership | PARTLY-CLOSED | exists: src/sim/settlement_economy.ts:7,41-48 GoodsFlow (last 128 transfers, only between townships, holder tags, no route or ownership), src/sim/types.ts:1320 aggregate Ledger, :1459 optional onTransfer hook (not saved); terms: transferLog, haulLog, DeliveryRecord, GoodsFlow, route. No per-transfer record with carrier, route and ownership for ordinary moves [first slice at rules 188 on 2026-11-10: the taking log names goods and place, the person keeps the last taking, and salvage delivered to a shared project is put down on the participation record (taken_from.ts); still open: carrier and route, ownership, more than one remembered taking, deliveries outside shared projects] | rules 188 (`bdfc61cb`) |
 | G134 | Logistics | Stores and hauls have no visible traffic history | OPEN-VERIFIED | exists: src/sim/transport.ts:218 describeHauling (one person recent loads), src/sim/history.ts:46 economicHistory (last 6 inter-township flows), src/sim/types.ts:853 Building has no log field; terms: traffic, history, recent deposits, visitors, flow, last withdrawal. No per-store or per-haul traffic history | - |
 | G135 | Logistics | No allocation, rationing or scarcity rule for shared stores | GATED | exists: src/sim/facilities.ts:197-203 granary only (household shares, 3-unit emergency ration), options_survival.ts:269 granaryRation, communal_stock.ts:15 (public store aim only); public storehouse and hall are open to any member (facilities.ts:68,204-207). terms: ration, quota, allocat, fair share, commons. Public-store allocation is the 2a-S line, gated on owner decision (a) | - |
 | G136 | Logistics | Carts: the whole chain exists and no cart has been built ordinarily | PRESENT | exists: src/sim/carts.ts:13-127 (newCart, hitch, wear, load), src/sim/cart_priority.ts, src/sim/transport.ts:218, docs/ECONOMY.md:142; terms: cart, handcart, hitch, cart_priority, timber_yard. Mechanism exists. Ordinary build never observed: ECONOMY.md:338, CART_PRIORITY.md:78-79 (plan adopted, no cart built in 45 days); not re-measured at 176 | - |
@@ -641,3 +641,14 @@ Third in the trace's evidence order (`docs/END_TO_END_TRACE.md`, links 17 and 32
 - **Metric and comparison (pre-stated):** the version twin on the 12 seeds at 187 and 188 with `lastTaken` and `salvaged` dropped and every text starting "Took " cut to that
   word before hashing (`--strip-taken`): identical in 12 of 12, else the lab runs. The cut also hides "Took <name> into my household" lines, equally at both versions.
 - **Order note:** written after the code and before the commit.
+
+### Results for rules 186, 187 and 188 (2026-11-10)
+
+- **186:** `b8e43dc7` (rules), `03071ac0` (`--strip-builders`), `294e53a1` (pin). Twin 185 against 186, clean `af15790c`: identical in 12 of 12; cedar unstripped differs.
+- **187:** `90b81762` (rules), `31686cc4` (`--strip-answers`), `af15790c` (pin). Twin 186 against 187, clean `af15790c`: identical in 12 of 12; gen-2 unstripped differs.
+- **188:** `bdfc61cb` (rules), `91a0167c` (`--strip-taken`), `6254dc9b` (pin). Twin 187 against 188, clean `6254dc9b`: identical in 12 of 12; river unstripped differs. Row G133 is
+  PARTLY-CLOSED.
+- **Suite, one run for the three:** clean `6254dc9b`, the 65 baseline failures plus load timeouts in six files that pass alone (14 of 14). No regression.
+- **Ordinary check:** aspen traced again at 188 (`review_evidence/trace-fixes-20261110/trace-aspen-r188.json`): the storehouse card names Petra, Mona and Dax, each answer carries its
+  cause, and Mona's two stones are on the project record as salvage. Seven of the trace's 20 holes are now recorded. Decision-neutral on this evidence. No benefit or harm is claimed.
+

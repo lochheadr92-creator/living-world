@@ -1,0 +1,1 @@
+gen-4 r187: alive 24 deaths 8 hh 14 coupled 5.5 hunger 63.2 mood -8.2 ill 0 hash 6695c7568493970f conserved true tools true
