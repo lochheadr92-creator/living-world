@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "d1a14434b73c7b528b190f28d3a61d024665b9fa",
+    "rules": 186,
+    "content": "0d1800360799fe5ab9369b3943ae150cde3eb5a9531cd8242fda73d759a17720",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal cedar world (arrivals on), 13200 ticks including a shared storehouse that lists both of the people who built it (finished at tick 12908, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "5aeadde3c5f7cc0161ab075d5fba6dbbf010a5cd7a15b4412125dd6981dfb0be",
+  "continued": "be5714fde8b9cba70a5b3d496708020694a7f281325bd98481962bc69e399f7a"
+}
