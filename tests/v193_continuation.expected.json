@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "e3c432770b5c2eab7b7802697407c8116482c744",
+    "rules": 193,
+    "content": "35b106efa6912982d62640e2d4fac2597cc330379e11dcd8c623db4a89ecedd8",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 5000 ticks including a hut laid out by a lean-to household with less than three food per member to hand (by tick 4,875, sampled every 25 ticks), then 120 more after a save and load."
+  },
+  "saved": "2d01d00a0c74d14a9c35994fe7fb4258ce3f321c7bdaf49751b5a8341746bd30",
+  "continued": "3c1f4acaa3fb801d9e6f29c8ca390921cc51b5a66d579a0f0a4e7717f03b3015"
+}
