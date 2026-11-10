@@ -1,4 +1,5 @@
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
+import { alreadyArguing } from './argue_once';
 import {isChildTime,childQuestion,childTimeName,beginChildTime,childTimeProblem,childTurn,finishChildTime,childTimeReport} from './childhood';
 import {textileGiftProblem} from './clothing';
 import {recordCompany} from './companionship';
@@ -1832,7 +1833,7 @@ export function contestLost(world: World, loser: Person, winnerId: number, src: 
 }
 
 export function startArgument(world: World, a: Person, b: Person, why: string, cause: import('./types').GrievanceCause = 'competition'): void {
-  if (a.convId || b.convId) return;
+  if (a.convId || b.convId || alreadyArguing(world, a, b)) return; // rules 194: never on somebody already arguing
   suspendActivity(world, a);
   suspendActivity(world, b);
   const mk = (me: Person, other: Person, first: boolean) => {
