@@ -1,0 +1,83 @@
+Version comparison: rules 193 (pinned) against rules 194; 12 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, river); normal profile, 25 days; arms per version: control, nudge:1, nudge:2.
+Noise floor (sd of one arm against the mean of the other arms of its own run): workplaces ±0.7   solidHomes ±1.7   buildings ±4.0   plots ±4.1   people ±4.3   deaths ±4.4   homeless ±1.6   belowCritical ±2.9   meanHunger ±7.2   firstYardDay ±5.0   firstHallDay ±0.0   meanMood ±11.1   lowMood ±4.0   tools ±8.0   meanCondition ±6.6   projectsAdopted ±12.0   projectsDone ±8.5   projectAsks ±1.3   askUnitsDelivered ±1.6   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±9.8   prepSeason ±2.2   prepHardship ±10.3   prepDone ±2.6   prepDropped ±10.0   prepUnits ±50.4   prepDays ±3.0   hungerExposure ±0.0   homeFoodPerPerson ±0.3   storeFoodPerPerson ±0.3   spears ±2.1   armedAtEnd ±2.0   defenceOffered ±11.4   defenceSetOut ±5.0   defenceTried ±2.0   defenceDroveOff ±1.3   defenceFailed ±1.0   defenceLeftOnItsOwn ±2.4   wolvesWary ±0.2   bitesTaken ±7.5   chats ±19.9   familyTime ±10.7   childPlay ±10.1   foragingPractice ±11.7   coaching ±1.6   otherTalk ±77.6   mealsSat ±1.3   visits ±7.0   spareTime ±10.1   lifeShare ±0.0   survivalShare ±0.0   workShare ±0.0   lifeShareChild ±0.0   lifeShareAdult ±0.0   lifeShareElder ±0.0   deathsHunger ±2.9   deathsThirst ±0.8   deathsExposure ±2.8   thirstExposure ±0.0   coldExposure ±0.0   retainedSharedCompleted ±0.3   retainedSharedFailed ±1.0   retainedRelocationsSettled ±0.0   retainedRelocationsFailed ±0.4   retainedExchangePairs ±0.0   retainedExchangeReceipts ±0.0   alignedResidentsAtEnd ±0.6   factionsAtEnd ±0.3   charcoalHoldersAtEnd ±1.7   taughtCharcoalAtEnd ±0.4   supperHoldersAtEnd ±0.0   familySupperAtEnd ±0.0   secondTransmissionAtEnd ±0.0   newbornSupperAtEnd ±0.0   townsWithRepeatedProduction ±0.0   townProductionDistance ±0.0
+
+metric                            193      194    diff   95% interval    up/down  verdict
+workplaces                        3.3      3.3       0   [-0.1, +0.2]        1/2  not distinguishable from chance
+solidHomes                        7.7      7.6       0   [-0.3, +0.2]        3/2  not distinguishable from chance
+buildings                        23.8     24.1    +0.3   [-0.3, +0.9]        3/2  not distinguishable from chance
+plots                            27.8     28.1    +0.2   [-0.4, +1.0]        2/2  not distinguishable from chance
+people                           22.4     22.7    +0.2   [-0.7, +1.1]        4/1  not distinguishable from chance
+deaths                            9.6      9.1    -0.4   [-1.3, +0.2]        1/3  not distinguishable from chance
+homeless                          0.9      0.8    -0.1   [-0.4, +0.2]        2/2  not distinguishable from chance
+belowCritical                     2.7      2.6    -0.1   [-0.7, +0.4]        1/2  not distinguishable from chance
+meanHunger                       49.6     50.0    +0.4   [-1.4, +2.3]        3/2  not distinguishable from chance
+firstYardDay                     13.3     13.3       0   [-0.9, +0.9]        2/3  not distinguishable from chance
+firstHallDay                     25.0     25.0       0   [0, 0]              0/0  not distinguishable from chance
+meanMood                        -23.2    -21.9    +1.3   [-1.3, +4.3]        3/2  not distinguishable from chance
+lowMood                           6.4      6.1    -0.3   [-1.1, +0.4]        2/2  not distinguishable from chance
+tools                            29.5     28.7    -0.8   [-2.3, +0.6]        2/3  not distinguishable from chance
+meanCondition                    51.4     51.1    -0.3   [-1.5, +1.0]        1/4  not distinguishable from chance
+projectsAdopted                 140.5    140.1    -0.4   [-3.2, +2.5]        2/3  not distinguishable from chance
+projectsDone                     44.8     44.0    -0.8   [-2.6, +0.6]        1/4  not distinguishable from chance
+projectAsks                       2.1      2.2       0   [-0.2, +0.2]        2/2  not distinguishable from chance
+askUnitsDelivered                 1.6      1.4    -0.2   [-0.6, +0.1]        1/2  not distinguishable from chance
+specialisation                    0.5      0.5       0   [0, 0]              4/1  not distinguishable from chance
+topKindShare                      0.7      0.7       0   [0, 0]              3/2  not distinguishable from chance
+prepAdopted                     113.0    112.3    -0.7   [-3.4, +1.7]        3/2  not distinguishable from chance
+prepSeason                        3.8      3.7    -0.1   [-0.3, 0]           1/3  not distinguishable from chance
+prepHardship                    109.2    108.6    -0.6   [-3.4, +1.9]        3/2  not distinguishable from chance
+prepDone                          7.4      7.7    +0.3   [0, +0.7]           3/0  not distinguishable from chance
+prepDropped                      96.4     95.5    -0.9   [-3.9, +1.9]        3/2  not distinguishable from chance
+prepUnits                       250.1    253.0    +2.9   [-3.6, +9.7]        3/2  not distinguishable from chance
+prepDays                         18.9     18.5    -0.3   [-0.9, +0.2]        2/3  not distinguishable from chance
+hungerExposure                    0.0      0.0       0   [0, 0]              1/4  not distinguishable from chance
+homeFoodPerPerson                 0.2      0.2       0   [0, 0]              3/1  not distinguishable from chance
+storeFoodPerPerson                0.3      0.3       0   [-0.1, +0.1]        2/2  not distinguishable from chance
+spears                            3.9      3.8    -0.1   [-0.3, +0.1]        1/3  not distinguishable from chance
+armedAtEnd                        3.1      3.1       0   [-0.2, +0.2]        2/2  not distinguishable from chance
+defenceOffered                   10.1      9.4    -0.7   [-1.4, -0.1]        0/4  systematic, within the noise floor
+defenceSetOut                     4.2      4.0    -0.2   [-0.5, -0.1]        0/4  systematic, within the noise floor
+defenceTried                      1.8      1.9       0   [-0.1, +0.2]        2/2  not distinguishable from chance
+defenceDroveOff                   0.9      0.9    +0.1   [-0.1, +0.3]        2/1  not distinguishable from chance
+defenceFailed                     1.0      0.9    -0.1   [-0.1, 0]           0/2  not distinguishable from chance
+defenceLeftOnItsOwn               1.8      1.6    -0.2   [-0.5, +0.1]        1/3  not distinguishable from chance
+wolvesWary                        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+bitesTaken                       24.6     22.6    -2.0   [-4.4, -0.1]        1/4  systematic, within the noise floor
+chats                           103.9    102.0    -1.9   [-5.0, +0.5]        1/4  not distinguishable from chance
+familyTime                       61.7     62.2    +0.6   [-1.2, +2.3]        3/2  not distinguishable from chance
+childPlay                        53.6     54.6    +1.1   [-0.4, +2.7]        4/1  not distinguishable from chance
+foragingPractice                 94.2     95.6    +1.4   [-0.3, +3.7]        4/1  not distinguishable from chance
+coaching                          1.4      1.4    +0.1   [0, +0.1]           2/0  not distinguishable from chance
+otherTalk                       503.4    509.4    +6.1   [-3.1, +19.9]       2/3  not distinguishable from chance
+mealsSat                          0.5      0.4    -0.1   [-0.3, 0]           0/1  not distinguishable from chance
+visits                           20.0     20.2    +0.2   [-0.9, +1.4]        3/2  not distinguishable from chance
+spareTime                        15.4     15.3    -0.1   [-2.6, +1.9]        3/2  not distinguishable from chance
+lifeShare                         0.1      0.1       0   [0, 0]              5/0  systematic, within the noise floor
+survivalShare                     0.7      0.7       0   [0, 0]              3/2  not distinguishable from chance
+workShare                         0.1      0.1       0   [0, 0]              2/3  not distinguishable from chance
+lifeShareChild                    0.2      0.2       0   [0, 0]              4/1  systematic, within the noise floor
+lifeShareAdult                    0.1      0.1       0   [0, 0]              4/1  not distinguishable from chance
+lifeShareElder                    0.1      0.1       0   [0, 0]              3/2  not distinguishable from chance
+deathsHunger                      3.8      3.6    -0.3   [-1.1, +0.5]        2/3  not distinguishable from chance
+deathsThirst                      0.4      0.3    -0.1   [-0.3, 0]           0/3  not distinguishable from chance
+deathsExposure                    2.5      2.6    +0.1   [-0.1, +0.3]        3/2  not distinguishable from chance
+thirstExposure                    0.0      0.0       0   [0, 0]              0/5  systematic, within the noise floor
+coldExposure                      0.0      0.0       0   [0, 0]              1/4  not distinguishable from chance
+retainedSharedCompleted           1.0      0.9       0   [-0.1, 0]           0/1  not distinguishable from chance
+retainedSharedFailed              0.5      0.5       0   [-0.1, +0.1]        1/1  not distinguishable from chance
+retainedRelocationsSettled        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedRelocationsFailed         0.2      0.2       0   [0, +0.1]           1/0  not distinguishable from chance
+retainedExchangePairs             0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedExchangeReceipts          0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+alignedResidentsAtEnd             0.1      0.2    +0.1   [0, +0.3]           2/0  not distinguishable from chance
+factionsAtEnd                     0.0      0.1       0   [0, +0.1]           1/0  not distinguishable from chance
+charcoalHoldersAtEnd              5.1      5.0    -0.1   [-0.3, 0]           0/2  not distinguishable from chance
+taughtCharcoalAtEnd               0.1      0.2    +0.1   [0, +0.1]           2/0  not distinguishable from chance
+supperHoldersAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+familySupperAtEnd                 0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+secondTransmissionAtEnd           0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+newbornSupperAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+townsWithRepeatedProduction       1.0      1.0       0   [0, 0]              0/0  not distinguishable from chance
+townProductionDistance            0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+
+In words: nothing moved by more than a single draw moves it.
