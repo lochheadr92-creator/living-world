@@ -1,0 +1,80 @@
+{
+ "seed": "meadow",
+ "days": 25,
+ "rules": 202,
+ "sampledEvery": 100,
+ "summary": {
+  "berry_bush": {
+   "blocks": 54125,
+   "trulyEmpty": 49983,
+   "wrong": 4142,
+   "wrongShare": 0.077,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 360,
+   "meanBeliefAgeWhenRight": 164
+  },
+  "wild_grain": {
+   "blocks": 25977,
+   "trulyEmpty": 22620,
+   "wrong": 3357,
+   "wrongShare": 0.129,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 399,
+   "meanBeliefAgeWhenRight": 197
+  },
+  "store:lean_to": {
+   "blocks": 5943,
+   "trulyEmpty": 5798,
+   "wrong": 145,
+   "wrongShare": 0.024,
+   "meanHeldWhenWrong": 2.7,
+   "meanBeliefAgeWhenWrong": 1405,
+   "meanBeliefAgeWhenRight": 284
+  },
+  "fish_spot": {
+   "blocks": 3168,
+   "trulyEmpty": 2868,
+   "wrong": 300,
+   "wrongShare": 0.095,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 299,
+   "meanBeliefAgeWhenRight": 163
+  },
+  "fruit_tree": {
+   "blocks": 5615,
+   "trulyEmpty": 4939,
+   "wrong": 676,
+   "wrongShare": 0.12,
+   "meanHeldWhenWrong": 1.1,
+   "meanBeliefAgeWhenWrong": 424,
+   "meanBeliefAgeWhenRight": 200
+  },
+  "store:hut": {
+   "blocks": 2364,
+   "trulyEmpty": 2217,
+   "wrong": 147,
+   "wrongShare": 0.062,
+   "meanHeldWhenWrong": 2.7,
+   "meanBeliefAgeWhenWrong": 518,
+   "meanBeliefAgeWhenRight": 152
+  },
+  "store:storehouse": {
+   "blocks": 7471,
+   "trulyEmpty": 7387,
+   "wrong": 84,
+   "wrongShare": 0.011,
+   "meanHeldWhenWrong": 2.1,
+   "meanBeliefAgeWhenWrong": 1458,
+   "meanBeliefAgeWhenRight": 708
+  },
+  "store:cellar": {
+   "blocks": 253,
+   "trulyEmpty": 226,
+   "wrong": 27,
+   "wrongShare": 0.107,
+   "meanHeldWhenWrong": 2.5,
+   "meanBeliefAgeWhenWrong": 674,
+   "meanBeliefAgeWhenRight": 296
+  }
+ }
+}

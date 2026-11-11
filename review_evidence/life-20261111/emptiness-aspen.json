@@ -1,0 +1,71 @@
+{
+ "seed": "aspen",
+ "days": 25,
+ "rules": 202,
+ "sampledEvery": 100,
+ "summary": {
+  "berry_bush": {
+   "blocks": 30897,
+   "trulyEmpty": 28619,
+   "wrong": 2278,
+   "wrongShare": 0.074,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 354,
+   "meanBeliefAgeWhenRight": 154
+  },
+  "fish_spot": {
+   "blocks": 4904,
+   "trulyEmpty": 4447,
+   "wrong": 457,
+   "wrongShare": 0.093,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 280,
+   "meanBeliefAgeWhenRight": 121
+  },
+  "fruit_tree": {
+   "blocks": 5337,
+   "trulyEmpty": 4846,
+   "wrong": 491,
+   "wrongShare": 0.092,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 388,
+   "meanBeliefAgeWhenRight": 188
+  },
+  "wild_grain": {
+   "blocks": 26071,
+   "trulyEmpty": 24446,
+   "wrong": 1625,
+   "wrongShare": 0.062,
+   "meanHeldWhenWrong": 1,
+   "meanBeliefAgeWhenWrong": 325,
+   "meanBeliefAgeWhenRight": 126
+  },
+  "store:lean_to": {
+   "blocks": 7009,
+   "trulyEmpty": 6789,
+   "wrong": 220,
+   "wrongShare": 0.031,
+   "meanHeldWhenWrong": 2.2,
+   "meanBeliefAgeWhenWrong": 721,
+   "meanBeliefAgeWhenRight": 335
+  },
+  "store:hut": {
+   "blocks": 3495,
+   "trulyEmpty": 3319,
+   "wrong": 176,
+   "wrongShare": 0.05,
+   "meanHeldWhenWrong": 4.3,
+   "meanBeliefAgeWhenWrong": 365,
+   "meanBeliefAgeWhenRight": 197
+  },
+  "store:storehouse": {
+   "blocks": 6981,
+   "trulyEmpty": 6955,
+   "wrong": 26,
+   "wrongShare": 0.004,
+   "meanHeldWhenWrong": 2,
+   "meanBeliefAgeWhenWrong": 1948,
+   "meanBeliefAgeWhenRight": 753
+  }
+ }
+}
