@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "ad1ab71576c68ebe1a8e5ca4b47665c47af6cdc6",
+    "rules": 216,
+    "content": "ad13809516c284c5d83eee74ab97599afa8685b17f1ae960fb9c586ab9072520",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until somebody has finished an evening by the fire (rules 216, evening_fire.ts), then 120 more after a save and load."
+  },
+  "saved": "f9abd586498b0503923f1d3c69190de81b09ae2b229248a6321cd10c8085919b",
+  "continued": "30e7e50ba26d0ff75f1feb0cc7d3f5070545c50ca14bcbaafe7e9c05e48e9ece",
+  "tick": 1100
+}

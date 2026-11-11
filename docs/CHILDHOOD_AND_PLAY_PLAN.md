@@ -496,3 +496,51 @@ What that supports:
   there are none.
 - **No benefit to survival is claimed, and none was expected**: phase 4 is for what a viewer sees (a carved animal in a pack and the name
   of who made it) and for the children's days.
+
+## 13. Phase 5 result: the evening fire and a story told (rules 216)
+
+Owner instruction, 12 November 2026: "do toys then stage 5". `src/sim/evening_fire.ts`, two separately switched parts. Nothing new is
+saved (two cooldowns, `fire:evening` and `story`).
+
+| part | what changes | lab removal |
+|---|---|---|
+| fire | From the evening (0.62 of the day) until their own bedtime, anyone fed, watered and not worn out, with no danger about, who knows a lit fire within 14 of home may sit by it once an evening (the ordinary spare-time activity, 150 ticks). Worth more the more people they can see sitting there, and to the sociable. Finished, it is company: the want of company eases by 8 and by 3 for each other person there (up to four), and they come to know each other a little. | `rich-no-evening-fire` |
+| story | Halfway through a sitting an elder there, or failing one a grown person of thirty or more, tells a story the settlement remembers (`pickStory`, the chronicle retold), chosen for the youngest listener, once a day for each teller. It goes in the feed; the listeners are glad of it (a child most) and fonder of the teller. | `rich-no-evening-story` |
+
+`rich-no-evening` removes both and equals rules 215 (its deaths, people, tools and mood match the rules-215 control exactly). Contract
+tests `tests/evening_fire.test.ts` (7, each with the rules-215 contrast). Immutable pin `tests/v216_continuation.*` (Normal gen-2,
+arrivals on; somebody who has finished an evening by the fire by tick 1,100; then 120 ticks after a save and load), recorded from a
+clean checkout of `ad1ab715`. In 251 related test files 58 failures: 57 already in the rules-208 full-suite list, and
+`tests/lab_exit_codes.test.ts`, which failed only while the rules-215 lab was running beside it and passes run alone.
+
+Lab: clean checkout of `ad1ab715` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges, both parts
+removed and each alone, 72 arms in about 19 minutes. Compared with the rules-215 lab already recorded. Evidence:
+`review_evidence/childhood-20261111/r216/`, `versions-215-216.txt`, `run216.txt`.
+
+| measure, a settlement in 25 days | 215 | 216 | verdict |
+|---|---|---|---|
+| evenings by the fire finished | 0 | 41.7 (11 to 92 by seed) | larger than chance |
+| the same, by an elder | 0 | 2.4 | larger than chance |
+| stories told at the fire | 0 | 8.4 (1 to 24 by seed) | larger than chance |
+| hearings of a story / by a child | 0 | 37.3 / 22.0 | larger than chance |
+| share of time in company and leisure, everyone | 0.186 | 0.196 | systematic, within the noise floor (higher in 12 of 12) |
+| the same, children / grown people | 0.385 / 0.102 | 0.404 / 0.106 | systematic, within the noise floor |
+| chats | 108.4 | 105.8 | not distinguishable from chance |
+| deaths | 4.4 | 3.3 | not distinguishable from chance |
+| deaths from exposure / from hunger | 1.7 / 1.3 | 0.8 / 0.7 | systematic, within the noise floor |
+| people at day 25 | 27.9 | 28.9 | not distinguishable from chance |
+| mean mood | -17.1 | -15.0 | not distinguishable from chance |
+| tools, projects, plots, food gathering, hunger | | | not distinguishable from chance |
+
+What that supports:
+
+- **People sit together of an evening, and stories are told.** About 42 evenings by the fire a settlement in 25 days and eight stories,
+  heard 37 times, 22 of them by a child, in every seed. A little more of everyone's day is spent in company (12 of 12 seeds).
+- **It does not bring the chats back.** Chats did not move against rules 215, and inside the run the arm without the fire has a few more
+  (118.9 against 105.8, inside the noise floor): an evening at the fire is company that takes the place of some talk, not more talk.
+  The fall in chats since rules 202 is still open.
+- **Elders are a small part of it** (2.4 of 42 sittings): there are few elders in a 25-day settlement. The stories are told mostly by
+  grown people of thirty or more, and how many are told varies a great deal by seed (1 to 24), with how full the chronicle is.
+- **Deaths lean down, not up.** Exposure deaths 1.7 to 0.8 and hunger deaths 1.3 to 0.7, inside the noise floor in both the version
+  comparison and the removal arm; it is recorded because rules 214's watch item is about exposure deaths, and is not claimed as an
+  effect. Nothing about work, food or homes moved.
