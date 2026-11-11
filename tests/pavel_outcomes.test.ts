@@ -71,7 +71,10 @@ it('fresh sight replaces not-found with present availability, then permits an ac
  expect(q.inv.wood).toBe(2);expect(p.inv.wood??0).toBe(0);expect(p.lastInteraction?.outcome).toBe('received gift');expect(p.customers?.[0].units).toBe(2);expect(conservationReport(w).ok).toBe(true);
 });
 it('puts a one-unit surplus into its reserve through the ordinary deposit activity',()=>{
- const s=stage('pavel-reserve'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=CURRENT_RULES_VERSION;w.tick=1000;
+ // Pinned to rules 204, on the owner's instruction of 11 November 2026: the scene stages a hungry elder who keeps three of his four fruit, so
+ // one is the surplus. From rules 205 (light_pack.ts) a grown person with a home store keeps the ration (two portions from 206) and would take
+ // two home. What this case checks, a partial reserve going in through the ordinary deposit, is unchanged.
+ const s=stage('pavel-reserve'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=204;w.tick=1000;
  const p=addPerson(s,'Pavel',40,40,{age:71,inv:{fruit:4},hunger:50,thirst:95,energy:95}),home=building(s,'lean_to',41,40,p.hhId);
  w.households.find(h=>h.id===p.hhId)!.homeId=home.id;done(s);observe(w,p,home);
  p.intentions=[{id:w.nextId++,kind:'stock',goal:'put food by',since:1000,until:5000,status:'active',step:'gather',stepKind:'get',stepItem:'fruit',stepTarget:0,stepKey:null,aboutId:home.id,wants:{},makes:'',sheltered:0,worked:0,blocked:'',reason:'',setAside:0,ended:0,reserve:4,cue:'hardship'}];

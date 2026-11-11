@@ -271,3 +271,8 @@ Every name that failed at 202 still fails at 208; none has gone. Two names fail 
 Neither test has been touched. The first could have its window widened (its comment records that being done at rules 106); the second could be pinned to
 rules 204 with a comment, as `tests/winter_shelter.test.ts` and `tests/tool_plan_capacity.test.ts` were for rules 203 and 204. Both are the owner's decision.
 The owner's instruction was to push if the suite passes; with two failures that were not there at the last full suite, nothing was pushed.
+
+Decided the same day. The owner's instruction: the two tests do not fail on behaviour, they fail on their own staging, so widen them and push without
+retesting. `tests/iron_chain_stall.test.ts` now allows 30 days (its comment records the measurement), and the one case in `tests/pavel_outcomes.test.ts` is
+pinned to rules 204 with a comment. The suite was not rerun and neither test was run after the edit; the typecheck passed. Pushed to `origin/main` after
+this commit.
