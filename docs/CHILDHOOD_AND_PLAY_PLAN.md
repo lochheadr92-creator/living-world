@@ -88,7 +88,7 @@ toy has one more thing to do alone and something to share; a toy given is rememb
 ## 4. Build order
 
 Each phase is one rules version of separately switched parts, with contract tests, a pin, and one lab compared with the lab before it (the procedure the owner
-set: no twin, no second baseline, the suite once at the end of the stream). A new stream, **childhood, rules 205 to 214**, is claimed before the first line.
+set: no twin, no second baseline, the suite once at the end of the stream). A new stream, **childhood**, claims its range in `docs/RULES_RANGES.md` before the first line (above the carrying stream's 205 to 209, so 210 to 219; the numbers in the table below were drafted before that claim and each moves up by five).
 
 | phase | rules | what | why this order | measured by |
 |---|---|---|---|---|

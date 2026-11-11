@@ -131,6 +131,7 @@ import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
 import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
+import { LIGHT_PACK_PARTS, lightPackPartOn, setLightPack } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -243,6 +244,10 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 205 (light_pack.ts): both parts removed (equal to rules 204), and each part alone
+  if (kind === 'rich-no-light-pack') return { spec: label, summary: 'food and materials are carried and eaten as before rules 205; no effect below rules 205', install() { const was = LIGHT_PACK_PARTS.map((k) => lightPackPartOn(k)); setLightPack(false); return () => LIGHT_PACK_PARTS.forEach((k, i) => setLightPack(was[i], k)); } };
+  if (kind === 'rich-no-ration') return { spec: label, summary: 'two or three portions are kept in the pack and eaten from it, as before rules 205; no effect below rules 205', install() { const was = lightPackPartOn('ration'); setLightPack(false, 'ration'); return () => setLightPack(was, 'ration'); } };
+  if (kind === 'rich-no-pack-materials') return { spec: label, summary: 'a filling pack adds nothing to a site delivery and spare wood and stone is not taken home, as before rules 205; no effect below rules 205', install() { const was = lightPackPartOn('materials'); setLightPack(false, 'materials'); return () => setLightPack(was, 'materials'); } };
   // rules 204 (carry_more.ts): all three parts removed (equal to rules 203), and each part alone
   if (kind === 'rich-no-carry-more') return { spec: label, summary: 'a basket is wanted, fetched for and made as before rules 204; no effect below rules 204', install() { const was = CARRY_MORE_PARTS.map((k) => carryMorePartOn(k)); setCarryMore(false); return () => CARRY_MORE_PARTS.forEach((k, i) => setCarryMore(was[i], k)); } };
   if (kind === 'rich-no-basket-want') return { spec: label, summary: 'a basket is wanted only after gathering more than six units, as before rules 204; no effect below rules 204', install() { const was = carryMorePartOn('want'); setCarryMore(false, 'want'); return () => setCarryMore(was, 'want'); } };
@@ -688,6 +693,9 @@ export const METRICS = [
   // what rules 204 is for: grown people (twelve and over) holding a basket at the end, their share of the grown, and trips home made
   // so that the basket's wood would fit
   'grownWithBasket', 'basketShare', 'basketRoomTrips',
+  // what rules 205 is for: trips home with food beyond the ration, trips home with wood or stone nothing needed, meals eaten out of
+  // the pack and from a store, and site deliveries completed
+  'rationTrips', 'materialsHomeTrips', 'mealsFromPack', 'mealsFromStore', 'siteDeliveries',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -866,6 +874,7 @@ export class LifeTally {
   chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
   mealsSat = 0; visits = 0; spareTime = 0;
   approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0; basketRoomTrips = 0;
+  rationTrips = 0; materialsHomeTrips = 0; mealsFromPack = 0; mealsFromStore = 0; siteDeliveries = 0;
   private markets = new Set<number>();
   private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
@@ -888,6 +897,11 @@ export class LifeTally {
     if (a.kind === 'socialize') this.approachesFailed++;
     if (outcome !== 'success') return;
     if (a.kind === 'deposit' && a.data.basketRoom) this.basketRoomTrips++;
+    if (a.kind === 'deposit' && a.data.ration) this.rationTrips++;
+    if (a.kind === 'deposit' && a.data.packMaterials) this.materialsHomeTrips++;
+    if (a.kind === 'eat') this.mealsFromPack++;
+    else if (a.kind === 'eat_store') this.mealsFromStore++;
+    else if (a.kind === 'haul') this.siteDeliveries++;
     if (a.kind === 'fuel_fire') this.fireFeeds++;
     else if (a.kind === 'operate') {
       const at = w.byId.get(a.targetId);
@@ -1089,6 +1103,11 @@ export function outcomeOf(
       grownWithBasket: alive.filter((p) => stageOf(w, p) !== 'child' && (p.inv.basket ?? 0) > 0).length,
       basketShare: ((g) => (g.length ? Math.round((g.filter((p) => (p.inv.basket ?? 0) > 0).length / g.length) * 1000) / 1000 : 0))(alive.filter((p) => stageOf(w, p) !== 'child')),
       basketRoomTrips: life.basketRoomTrips,
+      rationTrips: life.rationTrips,
+      materialsHomeTrips: life.materialsHomeTrips,
+      mealsFromPack: life.mealsFromPack,
+      mealsFromStore: life.mealsFromStore,
+      siteDeliveries: life.siteDeliveries,
     },
     milestones,
   };

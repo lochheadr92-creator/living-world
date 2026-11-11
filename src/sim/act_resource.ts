@@ -1,3 +1,4 @@
+import { mealLeaves } from './light_pack';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
 import {hasRods} from './fishing_rods';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
@@ -324,6 +325,8 @@ registerHandler('eat_store', {
     {const blocked=pileAccessBlocker(p,e);if(blocked)return blocked;}
     observe(world, p, e);
     const items = e.ent === 'building' ? e.store.items : e.items;
+    // rules 205 (light_pack.ts): the meal eats what it takes from the store and leaves the ration the person arrived with
+    const rationLeft = mealLeaves(world, foodUnits(p.inv));
     let want = Math.ceil((92 - p.needs.hunger) / 18);
     // rules 46: at a granary the meal is bounded by the household's share or the emergency ration (facilities.ts), checked unit by
     // unit against the bins as they are now, and each unit taken is booked against the share
@@ -372,7 +375,7 @@ registerHandler('eat_store', {
     if (!k) return 'could not take food';
     a.data.food = k;
     a.duration = WORK.eat;
-    a.data.keep = 0;
+    a.data.keep = rationLeft;
   },
   work: (world, p, a) => eatTick(world, p, a),
   onEnd(world, p, a, outcome, detail) {

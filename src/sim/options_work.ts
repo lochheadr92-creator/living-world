@@ -23,7 +23,8 @@ import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
-import { durableReserve } from './provision';
+import { durableReserve, homeStoreBelief } from './provision';
+import { RATION_WEIGHT, hasPackMaterials, hasRation, packFullWorth, rationKeep } from './light_pack';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
 import {knownConstructionWork} from './construction_finish';
@@ -52,14 +53,14 @@ import { seedStorageOption } from './seed_storage';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
-import { foodUnits, invRoom, roomFor } from './economy';
+import { foodUnits, invRoom, invWeight, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
 import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
 import { careStoreOption, careWaterStoreOption } from './care_capacity';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
-import { stageOf } from './people';
+import { carryCap, stageOf } from './people';
 import { fireCommitment, hasPracticalCare } from './responsibilities';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
@@ -234,14 +235,16 @@ function optStockpile(ctx: Ctx): void {
 function optDepositFood(ctx: Ctx): void {
   const { world, p } = ctx;
   const smallPack = hasChildhood(world) && ctx.stage === 'child';
-  const keepSelf = ctx.drives.hunger > 0 ? 3 : 2;
+  // rules 205 (light_pack.ts): with a home store they know, one portion is the ration and the rest is more than they need to carry
+  const ration = hasRation(world) && !!homeStoreBelief(p);
+  const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
   const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
-  const unreserved = smallPack ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
-  const surplus = (smallPack ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
+  const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
+  const surplus = (smallPack||ration ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
   // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
   const roomShort = basketRoomStall(ctx);
-  if (surplus < (partialReserve||smallPack||roomShort?1:2)) return;
+  if (surplus < (partialReserve||smallPack||roomShort||ration?1:2)) return;
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
@@ -252,7 +255,7 @@ function optDepositFood(ctx: Ctx): void {
     if(surplus<2&&!mine)continue;
     const used = Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
     const cap = BUILD_DEF[b.btype as BuildingType].cap;
-    if (cap - used < ((partialReserve||smallPack)&&mine?1:2)) {
+    if (cap - used < ((partialReserve||smallPack||ration)&&mine?1:2)) {
       addBlocked(ctx, 'deposit', 'Store food', b.id, 'remembers it being full', 'store');
       continue;
     }
@@ -263,6 +266,11 @@ function optDepositFood(ctx: Ctx): void {
       .add('walking', -pen(e));
     if(cellar)sc.add('the cool cellar slows spoilage',7);
     if (roomShort && mine) sc.add('room in my pack for the basket’s wood', BASKET_ROOM_WEIGHT);
+    if (ration && mine) {
+      sc.add('more food than I need to carry', RATION_WEIGHT);
+      const full = packFullWorth(invWeight(p), carryCap(world, p));
+      if (full > 0) sc.add('my pack is filling up', full);
+    }
     if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
@@ -306,7 +314,7 @@ function optDepositFood(ctx: Ctx): void {
           utility: sc.total,
           minCommit: 40,
           maxTicks: 600,
-          data: roomShort && mine ? { items, basketRoom: true } : { items },
+          data: { items, ...(roomShort && mine ? { basketRoom: true } : {}), ...(ration && mine ? { ration: true } : {}) },
         });
       },
     });
@@ -636,6 +644,9 @@ function optSites(ctx: Ctx): void {
       const sc = new Scorer().add('carrying what it needs', 36 * rel.mult + 8).add('walking', -pen(e));
       if (committed) sc.add('I promised', 20);
       if (winterCue(world) && ownHomeSite) sc.add('winter is coming', WINTER_SHELTER_BOOST);
+      // rules 205 (light_pack.ts): the proper place for what a site needs is the site, and a filling pack is a reason to go now
+      const packFull = hasPackMaterials(world) ? packFullWorth(invWeight(p), carryCap(world, p)) : 0;
+      if (packFull > 0) sc.add('my pack is filling up', packFull);
       const util = sc.total * weatherMult(ctx);
       addOption(ctx, {
         kind: 'haul',

@@ -3,6 +3,7 @@ import { firstYardShared } from './shared_yard';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
+import {materialsHomeOption} from './pack_materials';
 import {STORED_STONE_SIGNAL,hasQuarryStock,hasStoredStoneCue,knownStoreHoldsStone} from './shared_stone';
 import {wellFetchOptions} from './wells';
 import {hasLivestock,livestockMaterials} from './livestock';
@@ -1315,6 +1316,7 @@ export function productionOptions(ctx: Ctx): void {
   const demands = demandsOf(ctx);
   for (const d of demands) if(!PRESERVED_FOODS.some(k=>k===d.item)) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
   communalStockOptions(ctx);
+  materialsHomeOption(ctx);
   forestryOptions(ctx);
   projectOptions(ctx);
   optGranaryStore(ctx);
