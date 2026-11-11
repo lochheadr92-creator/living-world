@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "06766d328c2536106d5019af6e20100eda38c54c",
+    "rules": 203,
+    "content": "da7c267109ef12a10edd41c8afb9e2b6bea691c263f42bad5b491205ac96da10",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a home is laid out past the four-site cap (rules 203, home_first.ts), then 120 more after a save and load."
+  },
+  "saved": "b5857d98739e2a512d06b883fb61f69ec09a627bd5d92f900af598f98a355e7b",
+  "continued": "ab6dd7f02b69d8bbac370f02925ecaaa9b782b28296a79ca6e905df5426ea62b",
+  "tick": 800
+}
