@@ -450,3 +450,49 @@ What that supports:
 **Owner decision, 12 November 2026: kept as it is** ("I think we can leave it for now"). Watch item: if deaths (exposure most of all)
 or farm plots move the wrong way in a later lab, check rules 214 first, with the arms `rich-no-child-feeding`, `rich-no-feeding-meals`
 and `rich-no-feeding-provide` against the control.
+
+## 12. Phase 4 result: toys (rules 215)
+
+Owner instruction, 12 November 2026: "do toys then stage 5", and while it was being built, that a toy should give "a higher
+satisfaction level ... to a younger person and gradually lose interest as they get older". `src/sim/toys.ts`, a new kind of owned
+equipment `toy` (a Tool record: maker, owning household, holder; never a working tool, never worn) and three separately switched parts.
+
+| part | what changes | lab removal |
+|---|---|---|
+| make | A grown person with nothing pressing and not tired, by day or after dark, carves a toy for the youngest under-twelve of their household who has none and for whom none is waiting: the ordinary craft step, 1 wood (their own, or from their home store) and 40 ticks, at most one each two days for each maker. | `rich-no-toys-make` |
+| give | Somebody holding a toy hands it to such a child they can see (the ordinary give step, mode `toy`); the child remembers who gave it. | `rich-no-toys-give` |
+| play | A child holding a toy plays with it near home once a day, and keeps at it for its set while unless something presses. | `rich-no-toys-play` |
+
+The owner's age rule is `toyInterest`: full to the age of two, falling evenly to a fifth at eleven, none from twelve. It scales the mood a
+toy gives (6 for a toddler, 3 at seven, 1.2 at eleven), the pull to play with it, the gladness at being given one, and who is carved for
+first. A toy is called a stick doll, a ball or a carved animal by its record; nothing new is saved and the save format is unchanged.
+`rich-no-toys` removes all three and equals rules 214 (its little ones' hunger share matches the rules-214 control to three decimals).
+Contract tests `tests/toys.test.ts` (8, each with the rules-214 contrast). Immutable pin `tests/v215_continuation.*` (Normal gen-2,
+arrivals on; a toy in the world by tick 6,000; then 120 ticks after a save and load), recorded from a clean checkout of `c1137b01`. In
+388 related test files 68 failures, every one already in the rules-208 full-suite list; no new failure.
+
+Lab: clean checkout of `c1137b01` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges, all three
+parts removed and each alone, 84 arms in 26 minutes 51 seconds. Compared with the rules-214 lab already recorded. Evidence:
+`review_evidence/childhood-20261111/r215/`, `versions-214-215.txt`, `run215.txt`.
+
+| measure, a settlement in 25 days (rules-215 run) | control | all removed (= 214) |
+|---|---|---|
+| toys carved / handed to a child | 5.7 / 5.1 | 0 / 0 |
+| plays with a toy | 17.1 | 0 |
+| children holding a toy at day 25 | 4.4 | 0 |
+| plays alone: stones / bugs / sticks | 25.3 / 29.2 / 39.8 | 30.3 / 32.7 / 41.3 |
+| plays alone, all kinds with the toy | 111.4 | 104.3 |
+
+Toys were carved in all 12 seeds (3 to 11 a settlement), almost all reached a child, and children played with them in every seed.
+Against the rules-214 lab nothing moved by more than a single draw: plays alone at stones and bugs lean down (the toy takes some of their
+time), tools lean up and mood leans down, all inside the noise floor; deaths, people, hunger and food work did not move.
+
+What that supports:
+
+- **Toys are real and they reach the children.** About six a settlement in 25 days, five of them handed over, and played with about 17
+  times; four or five children hold one at the end.
+- **They are small.** A toy replaces some of a child's other play alone more than it adds to it (about seven more plays alone in all),
+  and nothing about the settlement's survival or work moved. Without `give` a toy is carved and kept in a grown-up's pack; without `make`
+  there are none.
+- **No benefit to survival is claimed, and none was expected**: phase 4 is for what a viewer sees (a carved animal in a pack and the name
+  of who made it) and for the children's days.

@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "c1137b01680e690e18a07218b21ce0975aca7d30",
+    "rules": 215,
+    "content": "267f17262cf4059b04a4ceb58007e7a970a0f4528dd9e62c6cffa4b591519e32",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a toy has been made (rules 215, toys.ts), then 120 more after a save and load."
+  },
+  "saved": "135c0ceaabe6c96001874382dbff070f5866f98e787cd1ae1e7c4637718251d6",
+  "continued": "c1820ca58487609658819cfd218834bde6e1ae36404b0a3a9328b9ff056c8df8",
+  "tick": 6000
+}
