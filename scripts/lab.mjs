@@ -45,8 +45,6 @@ const labProvenance = () => {
 const assertLabSourceUnchanged = before => {
   if (JSON.stringify(labProvenance().source) !== JSON.stringify(before.source)) throw new Error('Source changed during lab run; results rejected.');
 };
-const provenance = labProvenance();
-// New lab directories retain the runner's start snapshot. Legacy directories cannot be relabelled with today's source.
 const provenancePath = join(out, 'provenance.json');
 // A changed default must never resume old results as if they measured the current simulation - and "both rich" does not mean
 // "the same rules", since every generation of the rich rules has carried that one word. The comparison is by rules VERSION
@@ -59,6 +57,9 @@ const provenancePath = join(out, 'provenance.json');
   });
   if (guard.status !== 0) process.exit(guard.status ?? 1);
 }
+// Captured after the guard: a refused directory is refused in one process start, not two (the guard only reads the existing rows).
+// New lab directories retain the runner's start snapshot. Legacy directories cannot be relabelled with today's source.
+const provenance = labProvenance();
 if (existsSync(out)) {
   if (!existsSync(provenancePath) && readdirSync(out).some(f => /^lab_.+\.jsonl$/.test(f)))
     throw new Error('Lab directory has no source provenance; use a fresh output directory.');
