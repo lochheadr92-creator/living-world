@@ -1,4 +1,5 @@
 import { deceasedById } from './historical_index';
+import { marketMayBeCalled } from './company';
 import {runsPreservation} from './preservation';
 import {PRESERVED_FOODS} from './constants';
 import { continuingOccasion } from './occasion_participation';
@@ -144,7 +145,7 @@ export function occasionsTick(world: World): void {
   if (world.tick % DAY === 11) {
     const day = Math.floor(world.tick / DAY);
     const st = (world.occasionState ??= { harvestUnits: 0, lastHarvestFeastDay: -99, lastMarketDay: -99 });
-    if (day >= 3 && day % MARKET_EVERY === 3 && st.lastMarketDay !== day && world.buildings.some((b) => b.type === 'hall' && b.condition > 15)) {
+    if (day >= 3 && day % MARKET_EVERY === 3 && st.lastMarketDay !== day && marketMayBeCalled(world, world.buildings.some((b) => b.type === 'hall' && b.condition > 15), day)) { // rules 200 (company.ts): at the fire when there is no hall
       st.lastMarketDay = day;
       callOccasion(world, 'market', [], 0.42);
     }

@@ -1,4 +1,5 @@
 import {brewDemand,hasBrewing} from './brewing';
+import { firstYardShared } from './shared_yard';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
@@ -1162,10 +1163,12 @@ function optPlanFacilities(ctx: Ctx): void {
           noteFailure(world, p, key, 'no suitable spot');
           return null;
         }
+        // rules 201 (shared_yard.ts): the first timber yard this person knows of is laid out as the shared project of rules 143
+        const shared = firstYardShared(world, p, type);
         return newActivity(world, p, {
           kind: 'plan_site',
-          label: `Marking out a ${d.label}`,
-          goal: w.why,
+          label: shared ? `Marking out a proposed shared ${d.label}` : `Marking out a ${d.label}`,
+          goal: shared ? `${w.why}; a shared ${d.label}, so that everyone here may use it` : w.why,
           tx: spot.x + d.w / 2,
           ty: spot.y + d.h / 2,
           spotX: spot.x + 0.5,
@@ -1173,7 +1176,7 @@ function optPlanFacilities(ctx: Ctx): void {
           utility: util,
           minCommit: 60,
           maxTicks: 800,
-          data: { type, sx: spot.x, sy: spot.y, hh: hh.id, depositId },
+          data: { type, sx: spot.x, sy: spot.y, hh: hh.id, depositId, ...(shared ? { communal: true } : {}) },
         });
       },
     });

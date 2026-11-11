@@ -1,4 +1,5 @@
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
+import { companyUrgency } from './company';
 import { alreadyArguing } from './argue_once';
 import {isChildTime,childQuestion,childTimeName,beginChildTime,childTimeProblem,childTurn,finishChildTime,childTimeReport} from './childhood';
 import {textileGiftProblem} from './clothing';
@@ -842,7 +843,7 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   if (personalDriveMax(world, b) > 62 && purpose !== 'request' && purpose !== 'warn') return { ok: false, why: 'had more pressing needs' };
   // someone visibly hungry or thirsty asking for help is hard to put off
   const visibleNeed = (a.needs.hunger < 38 || a.needs.thirst < 38) && (purpose === 'request' || purpose === 'ask_info') ? 0.3 : 0;
-  const urgent = (purpose === 'warn' ? 0.4 : purpose === 'request' || purpose === 'offer' || purpose === 'invite' ? 0.12 : 0) + visibleNeed;
+  const urgent = (purpose === 'warn' ? 0.4 : purpose === 'request' || purpose === 'offer' || purpose === 'invite' ? 0.12 : 0) + visibleNeed + companyUrgency(world, purpose); // rules 200 (company.ts): a child's or a learner's ask is as hard to put off as a request
   const prob = clamp(avail * (0.5 + 0.45 * b.traits.sociability) + (rel?.affinity ?? 0) / 220 + urgent + (rel?.kin ? 0.2 : 0), 0, 0.97);
   if (hashUnit(b.id, a.id, world.tick >> 4) < prob) return { ok: true, why: '' };
   return { ok: false, why: 'was too busy to stop' };

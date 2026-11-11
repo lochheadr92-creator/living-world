@@ -1,4 +1,7 @@
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
+import { hasLocalDeath, knowsDeath } from './death_knowledge';
+import { mealOf } from './meals';
+import { GATHERING_FUEL, GATHERING_LEAD, GATHERING_WEIGHT, hasGatheringFire } from './swap_and_fire';
 import {addSharedProjectOption} from './shared_projects';
 import {hasRods} from './fishing_rods';
 import {hasCellars,cellarDemand} from './cellars';
@@ -893,6 +896,22 @@ function optPlanBuild(ctx: Ctx): void {
   }
 }
 
+/**
+ * Rules 202 (swap_and_fire.ts): is a gathering this person can know of called at this fire? An occasion that is open, or due within
+ * GATHERING_LEAD ticks, at that place (a funeral only for somebody who knows the death, as the attend option asks), or their own
+ * called meal that is to be held there. The occasion list is what the attend option already reads.
+ */
+function gatheringCalledAt(ctx: Ctx, fireId: number): boolean {
+  const { world, p } = ctx;
+  for (const o of world.occasions ?? []) {
+    if (o.status === 'done' || o.placeId !== fireId || world.tick < o.at - GATHERING_LEAD || world.tick > o.until) continue;
+    if (o.kind === 'funeral' && hasLocalDeath(world) && !o.about.some((id) => knowsDeath(p, id))) continue;
+    return true;
+  }
+  const m = mealOf(world, p);
+  return !!m && m.placeId === fireId && (m.status === 'inviting' || m.status === 'gathering');
+}
+
 // ───────────────────────── repairs & the fire ─────────────────────────
 function optRepairAndFire(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -908,12 +927,15 @@ function optRepairAndFire(ctx: Ctx): void {
       const spare = fuelAvailable(world,p, item);
       const promised = fireCommitment(p, b.id);
       if ((fuel > wanted && !promised) || spare < 1) continue;
-      if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500 || promised)) continue;
+      // rules 202 (swap_and_fire.ts): a gathering called at this fire is a reason to feed it before it is low
+      const gathering = hasGatheringFire(world) && fuel < GATHERING_FUEL && gatheringCalledAt(ctx, b.id);
+      if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500 || promised || gathering)) continue;
       const lack = Math.max(0, Math.min(1, (wanted - fuel) / wanted));
       const cold = ctx.drives.warmth > 15;
       const sc = new Scorer().add(wanted > 500 ? 'the fire has to last the night' : 'the fire is getting low', 10 + 14 * lack + (ctx.night ? 8 : 0) + 8 * p.traits.generosity).add('walking', -pen(e));
       if (promised) sc.add('promised to keep it going', 18);
       if (cold) sc.add('cold', ctx.drives.warmth * 0.55);
+      if (gathering) sc.add('a gathering is called at this fire', GATHERING_WEIGHT);
       addOption(ctx, {
         kind: 'fuel_fire',
         label: item==='offcuts'?'Add recovered offcuts to the fire':'Add wood to the fire',

@@ -1,4 +1,7 @@
 import {hasCoaching} from './skill_coaching';
+import { approachCommit, learningGateOpen } from './company';
+import { foodRelief } from './relief';
+import { SWAP_RELIEF_CAP, hasSwapWorth, swapReliefWorth } from './swap_and_fire';
 import {CHILD_TIMES,wantsChildTime,childTimeName,childTimeTicks} from './childhood';
 import {companyReason} from './companionship';
 import {hasLivedLife} from './lived_life';
@@ -122,7 +125,7 @@ function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label
         spotX: sx,
         spotY: sy,
         utility: sc.total,
-        minCommit: 40,
+        minCommit: approachCommit(world, e), // rules 200 (company.ts): committed for the walk; 40 before
         maxTicks: 420,
         data: { purpose, conv },
       });
@@ -652,6 +655,10 @@ function optTrade(ctx: Ctx): void {
   spare.sort((a, b) => valueOf(world, p, a.item) * 0 + b.n - a.n);
   const offer = spare[0];
   exchangeJourneyOptions(ctx,want,offer);
+  // rules 202 (swap_and_fire.ts): a swap for food is worth the walk it saves to the nearest food this person believes in
+  const wantIsFood = want.item === 'fish';
+  const knownFood = wantIsFood && hasSwapWorth(world) ? foodRelief(ctx) : null;
+  const swapWorth = swapReliefWorth(world, wantIsFood, ctx.drives.hunger, knownFood ? pen(knownFood.eta) : SWAP_RELIEF_CAP);
   for (const c of candidates(ctx)) {
     if (c.d > 11) continue;
     const hasWant = want.item === 'fish' ? c.s.carrying.some((k) => isFood(k)) : c.s.carrying.includes(want.item);
@@ -662,6 +669,7 @@ function optTrade(ctx: Ctx): void {
     // tried and refused just as often (155 of 155) while costing projects in the lab, so the swap stands as it was.
     const askItem: ItemKind = want.item === 'fish' ? (c.s.carrying.find((k) => isFood(k)) as ItemKind) : want.item;
     const sc = new Scorer().add('a swap could give me what I lack', 14 + 0.05 * c.aff).add('walking', -pen(c.d * 6));
+    if (swapWorth > 0) sc.add('it would save me the walk to food', swapWorth);
     mkSocial(ctx, c, 'trade', { item: askItem, amount: want.n, offer: offer.item, offerAmount: Math.min(offer.n, want.n + 1) }, `Offer ${c.q.name} a swap: ${offer.item} for ${askItem}`, `to get ${askItem}`, null, sc, 'trade', ':' + askItem);
   }
   void hashUnit;
@@ -736,7 +744,7 @@ function optRequestTechnique(ctx: Ctx): void {
 }
 
 export function socialOptions(ctx: Ctx): void {
-  if(hasCoaching(ctx.world)&&ctx.stage!=='child'&&!ctx.critical&&!ctx.night&&Math.min(ctx.p.needs.hunger,ctx.p.needs.thirst,ctx.p.needs.energy)>65&&(ctx.p.cooldowns.coached??0)<=ctx.world.tick&&(ctx.p.cooldowns.coachAsk??0)<=ctx.world.tick){
+  if(hasCoaching(ctx.world)&&ctx.stage!=='child'&&!ctx.critical&&!ctx.night&&learningGateOpen(ctx.world,ctx.p.needs,ctx.drives)/* rules 200 (company.ts): all above 65 as before, or no drive pressing */&&(ctx.p.cooldowns.coached??0)<=ctx.world.tick&&(ctx.p.cooldowns.coachAsk??0)<=ctx.world.tick){
     for(const c of candidates(ctx)){const k=c.s.work;if(!k||c.s.child||c.d>6||ctx.p.skills[k]>=1.2)continue;
       const sc=new Scorer().add('practise a skill seen in use',14+8*ctx.p.traits.curiosity).add('walking',-pen(c.d*6));
       mkSocial(ctx,c,'learn_skill',{skill:k},`Ask ${c.q.name} for ${k} coaching`,'practise together if they agree',null,sc,'learn');break;

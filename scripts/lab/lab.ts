@@ -125,6 +125,11 @@ import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
 import { stageOf } from '../../src/sim/people';
 import { metabolismOn, setLabRates, setMetabolism } from '../../src/sim/metabolism';
+import { COMPANY_PARTS, companyPartOn, setCompany } from '../../src/sim/company';
+import type { CompanyPart } from '../../src/sim/company';
+import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
+import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
+import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks, reconsiderOn, setReconsider } from '../../src/sim/intent';
@@ -223,6 +228,24 @@ export function parseIntervention(specIn: string): Intervention {
     const hunger = Number(a), thirst = Number(b);
     if (!(hunger > 0 && thirst > 0)) throw new Error(`rates:<hunger>:<thirst> wants two positive numbers, not ${spec}`);
     return { spec: label, summary: `base hunger ${hunger} and thirst ${thirst} a tick instead of the rules-195 constants; no effect below rules 195`, install() { setLabRates({ hunger, thirst }); return () => setLabRates(null); } };
+  }
+  // rules 200 to 202 (the life stream): one removal arm per separately switched part, and one per version that removes all of its parts
+  if (kind === 'rich-no-company') return { spec: label, summary: 'remove all four rules-200 parts: approach, learning gate, meal window, market at the fire; no effect below rules 200', install() { const was = COMPANY_PARTS.map((part) => [part, companyPartOn(part)] as const); setCompany(false); return () => { for (const [part, v] of was) setCompany(v, part); }; } };
+  for (const [name, part, what] of [
+    ['rich-no-approach', 'approach', 'a childhood or learning ask adds nothing to the stop-and-talk roll and an approach is committed for 40 ticks, as before rules 200'],
+    ['rich-no-learning-gate', 'learning', 'the coaching ask wants hunger, thirst and energy all above 65, as before rules 200'],
+    ['rich-no-meal-window', 'meal', 'the invitation to a shared meal is made only from 0.50 of the day, as before rules 200'],
+    ['rich-no-market-fire', 'market', 'the market is called only where a sound hall stands, as before rules 200'],
+  ] as [string, CompanyPart, string][]) {
+    if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
+  }
+  if (kind === 'rich-no-shared-yard') return { spec: label, summary: 'every timber yard is laid out privately, as before rules 201; no effect below rules 201', install() { const was = sharedYardOn(); setSharedYard(false); return () => setSharedYard(was); } };
+  if (kind === 'rich-no-swap-and-fire') return { spec: label, summary: 'remove both rules-202 parts: the walk a food swap saves, and the fire fed for a gathering; no effect below rules 202', install() { const was = SWAP_FIRE_PARTS.map((part) => [part, swapFirePartOn(part)] as const); setSwapAndFire(false); return () => { for (const [part, v] of was) setSwapAndFire(v, part); }; } };
+  for (const [name, part, what] of [
+    ['rich-no-swap-worth', 'swap', 'a swap for food is scored without the walk it saves, as before rules 202'],
+    ['rich-no-gathering-fire', 'fire', 'a fire is fed in daylight only below 150 believed fuel whatever is called at it, as before rules 202'],
+  ] as [string, SwapFirePart, string][]) {
+    if (kind === name) return { spec: label, summary: `${what} (rules 202 removal)`, install() { const was = swapFirePartOn(part); setSwapAndFire(false, part); return () => setSwapAndFire(was, part); } };
   }
   if (kind === 'rich-no-metabolism') return { spec: label, summary: 'restore the base drains of 0.03 hunger and 0.04 thirst a tick (rules 194 and earlier) and nothing else; no effect below rules 195', install() { const was = metabolismOn(); setMetabolism(false); return () => setMetabolism(was); } };
   if (kind === 'nudge') {

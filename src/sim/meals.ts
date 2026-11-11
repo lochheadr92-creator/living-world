@@ -1,4 +1,5 @@
 import {hasBrewing,layMealDrinks,sipMealDrink} from './brewing';
+import { mealWindowOpen } from './company';
 import {takeNutrition} from './nourishment';
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import {hasMealLeftovers} from './meal_leftovers';
@@ -110,7 +111,7 @@ function spareFood(ctx: Ctx): number {
 
 function hostingWindow(ctx: Ctx): boolean {
   const f = dayFraction(ctx.world.tick); // the same clock everyone else sleeps and works by
-  return f > 0.5 && f < 0.68; // an invitation made in the afternoon puts the meal (MEAL_LEAD later) at dusk
+  return mealWindowOpen(ctx.world, f); // 0.50 to 0.68: an invitation made in the afternoon puts the meal (MEAL_LEAD later) at dusk; rules 200 (company.ts) opens it at 0.35
 }
 
 export function mealOptions(ctx: Ctx): void {
