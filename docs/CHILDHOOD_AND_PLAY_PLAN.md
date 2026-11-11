@@ -386,3 +386,63 @@ What that supports:
   children's; `shown` and `practice` move nothing beyond chance by themselves.
 - **No benefit to survival is claimed.** Whether to keep the parts as they are, phase them in (the plan's section 3 suggested the cap and
   "shown first", then measuring, before little ones stop), or add a rule for feeding a little one first, is the owner's decision.
+
+## 11. Feeding the children who no longer feed themselves (rules 214)
+
+Owner instruction, 12 November 2026: "+", read as the offered next step after the rules-213 report, add feeding for the children.
+`src/sim/child_feeding.ts`, two separately switched parts. Rich worlds at 214 only.
+
+| part | what changes | lab removal |
+|---|---|---|
+| meals | A carer keeps a child under twelve on a meal rhythm. From the carer's own memory of their last hand-over of food to that child (cooldown `fedby:<id>`, saved with the other cooldowns), once 800 ticks have passed the child counts as hunger 60 for the care option, whether or not they look hungry. A worse read still wins; every other check of the care option stands. | `rich-no-feeding-meals` |
+| provide | The pull an adult with dependants feels to put food by grows by 4 for each under-twelve in the household. | `rich-no-feeding-provide` |
+
+`rich-no-child-feeding` removes both and equals rules 213 (its hunger shares match the rules-213 control to three decimals). Contract
+tests `tests/child_feeding.test.ts` (5, each with the rules-213 contrast). Immutable pin `tests/v214_continuation.*` (Normal gen-2,
+arrivals on; a carer who remembers feeding a child by tick 100; then 120 ticks after a save and load), recorded from a clean checkout of
+`13b42986`. In 256 related test files 59 failures, every one already in the rules-208 full-suite list; no new failure.
+
+Lab: clean checkout of `13b42986` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges, both parts
+removed and each removed alone, 72 arms in 18 minutes 48 seconds. Compared with the rules-213 lab already recorded. Evidence:
+`review_evidence/childhood-20261111/r214/`, `versions-213-214.txt`, `run214.txt`.
+
+| measure, a settlement in 25 days | 212 | 213 | 214 | verdict, 213 against 214 |
+|---|---|---|---|---|
+| share of waking time hungry, everyone | 0.57 | 0.67 | 0.62 | larger than chance (lower in 10 of 12) |
+| the same, little ones | 0.48 | 0.70 | 0.57 | larger than chance (lower in 12 of 12) |
+| the same, children of 7 to 11 | 0.40 | 0.66 | 0.58 | larger than chance (lower in 12 of 12) |
+| the same, twelve and over | 0.62 | 0.66 | 0.65 | not distinguishable from chance |
+| food gathering finished by everyone twelve and over | 988.7 | 1,085.3 | 1,159.5 | larger than chance |
+| hours they spent gathering | | 2,096 | 2,299 | larger than chance |
+| meals eaten from a pack / from a store | | 900.6 / 249.4 | 956.9 / 202.2 | larger than chance, both |
+| farm plots | | 25.8 | 21.3 | larger than chance (lower in 11 of 12) |
+| tools in hand / projects done | 54.6 / 68.3 | 45.1 / 59.4 | 38.9 / 54.6 | systematic, within the noise floor |
+| deaths (from exposure) | 2.3 | 2.9 (0.6) | 4.4 (1.6) | systematic, within the noise floor |
+| deaths from hunger | 0.4 | 1.1 | 1.4 | not distinguishable from chance |
+| people at day 25 | 30.4 | 28.0 | 27.6 | not distinguishable from chance |
+| child play | 102.7 | 123.7 | 139.2 | systematic, within the noise floor (higher in 12 of 12) |
+| family time | | 81.7 | 90.3 | systematic, within the noise floor |
+| visits | 14.7 | 32.7 | 22.5 | systematic, within the noise floor |
+
+Per part, within the rules-214 run (hungry share, little ones / children; grown people's food gathering):
+
+| arm | little ones | children | gathering, twelve and over |
+|---|---|---|---|
+| control (both on) | 0.57 | 0.58 | 1,156 |
+| meals removed | 0.64 | 0.64 | 1,165 |
+| provide removed | 0.60 | 0.56 | 1,109 |
+| both removed (= 213) | 0.70 | 0.66 | 1,083 |
+
+What that supports:
+
+- **Children are fed more.** The hungry share falls for little ones (0.70 to 0.57) and children (0.66 to 0.58) in every seed, and for
+  the whole settlement (0.67 to 0.62). That recovers a little over half of what rules 213 cost a little one and about a third of what it
+  cost a child; neither is back at the rules-212 level.
+- **Which part does what.** `meals` carries most of it for the children (without it their share stays at 0.64) and half of it for
+  little ones; `provide` carries most of the grown people's extra gathering (without it 1,109 against 1,156) and a smaller share of the
+  little ones' gain (without it 0.60), and without it children of seven to eleven are no hungrier (0.56).
+- **What it costs.** Grown people gather a tenth more again and eat more from their packs and less from stores, beyond chance; fewer
+  farm plots are worked (25.8 to 21.3, beyond chance), and tools, projects and visits lean down, inside the noise floor. Deaths lean up
+  (2.9 to 4.4, ten of twelve seeds), most of it exposure (0.6 to 1.6), inside the noise floor; hunger deaths do not move beyond chance.
+- **No benefit to survival is claimed.** The rule does what it was for, feeding the children, and the settlement pays for it in farm
+  work. Whether to keep it, tune the meal gap or the pull, or look at the exposure deaths first is the owner's decision.

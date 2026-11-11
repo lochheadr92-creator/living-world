@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "13b42986d6a75aa2ac75e32c1b9bdf13114dd425",
+    "rules": 214,
+    "content": "ef8a9532d8a7dc6e4ce1f74bfe44ca169e8b427b60b45bd846d686851f58368e",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a carer remembers feeding a child (rules 214, child_feeding.ts), then 120 more after a save and load."
+  },
+  "saved": "1a8d76480af933148cb12275ea0e7b74c152a1b6dbdf74de13f91f0a999868ca",
+  "continued": "7fae90cc451f389c779c6129d111e62058faa56d7a75c77b198b3b5fe5c3afdf",
+  "tick": 100
+}
