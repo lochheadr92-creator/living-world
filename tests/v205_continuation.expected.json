@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "1377966fe4f560b2fdd475d62cf44802d8f97534",
+    "rules": 205,
+    "content": "8c8b94be78be0634129c5dfadec44c28bae732b250c2b5eec2a19137d67c032f",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until somebody is on the way home with food beyond the ration or with wood or stone nothing of theirs needs (rules 205, light_pack.ts), then 120 more after a save and load."
+  },
+  "saved": "d7dc1d8dbb22bdd10acfd078cfe27c58751a1a876be4e143e68ec150c03a7461",
+  "continued": "51a4f446a690351fa9e0c1d7902d2ac960c9aa10c606a2ad0415ba719676665f",
+  "tick": 100
+}
