@@ -1,3 +1,4 @@
+import { giveToy } from './toys';
 import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
@@ -200,6 +201,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
   rod:5,
+  toy:1,
   beer:2,
   cutting:1.5,
   wool:2, rendered_fat:4,
@@ -1995,7 +1997,7 @@ registerHandler('give', {
       return `${t.name} was not where I expected`;
     }
     if ((t.cooldowns.pause ?? 0) > world.tick) return `${t.name} is already being attended to`;
-    if (!(runsRulesVersion(world,124)&&a.data.textileDelivery) && (t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`;
+    if (a.data.mode !== 'toy' && !(runsRulesVersion(world,124)&&a.data.textileDelivery) && (t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`; // rules 215: a toy is not care
     a.duration = 14;
     // the other person stops for a moment to receive (one giver at a time)
     t.cooldowns.pause = world.tick + a.duration + 3;
@@ -2029,6 +2031,13 @@ registerHandler('give', {
       adjustRel(p, t.id, world.tick, { aff: 0.5, trust: 0.8 });
       addEvent(world, 'social', `${p.name} returned ${t.name}'s ${tool.kind}.`, [p.id, t.id], t.x, t.y);
       if (a.data.commitmentId) fulfillCommitment(world, p, a.data.commitmentId as number);
+      a.cycle = 1;
+      return 'done';
+    }
+    // rules 215 (toys.ts): a toy handed to a child, the record moving with it
+    if ((a.data.mode as string) === 'toy') {
+      t.cooldowns.pause = 0;
+      if (!giveToy(world, p, t, a)) return 'fail:the toy could not be handed over';
       a.cycle = 1;
       return 'done';
     }

@@ -1,3 +1,4 @@
+import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
 import {childhoodOn,setChildhood} from '../../src/sim/childhood_rules';
@@ -255,6 +256,10 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
   if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
   if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  if (kind === 'rich-no-toys') return { spec: label, summary: 'nobody makes, gives or plays with a toy, as before rules 215; no effect below rules 215', install() { const was = TOY_PARTS.map((k) => toyPartOn(k)); setToys(false); return () => TOY_PARTS.forEach((k, i) => setToys(was[i], k)); } };
+  if (kind === 'rich-no-toys-make') return { spec: label, summary: 'nobody carves a toy, as before rules 215; no effect below rules 215', install() { const was = toyPartOn('make'); setToys(false, 'make'); return () => setToys(was, 'make'); } };
+  if (kind === 'rich-no-toys-give') return { spec: label, summary: 'a toy is not handed to a child, as before rules 215; no effect below rules 215', install() { const was = toyPartOn('give'); setToys(false, 'give'); return () => setToys(was, 'give'); } };
+  if (kind === 'rich-no-toys-play') return { spec: label, summary: 'a child does not play with a toy, as before rules 215; no effect below rules 215', install() { const was = toyPartOn('play'); setToys(false, 'play'); return () => setToys(was, 'play'); } };
   if (kind === 'rich-no-child-feeding') return { spec: label, summary: 'carers act only on how a child looks and the provider pull is flat, as before rules 214; no effect below rules 214', install() { const was = CHILD_FEEDING_PARTS.map((k) => childFeedingPartOn(k)); setChildFeeding(false); return () => CHILD_FEEDING_PARTS.forEach((k, i) => setChildFeeding(was[i], k)); } };
   if (kind === 'rich-no-feeding-meals') return { spec: label, summary: 'carers act only on how a child looks, as before rules 214; no effect below rules 214', install() { const was = childFeedingPartOn('meals'); setChildFeeding(false, 'meals'); return () => setChildFeeding(was, 'meals'); } };
   if (kind === 'rich-no-feeding-provide') return { spec: label, summary: 'the provider pull is flat, as before rules 214; no effect below rules 214', install() { const was = childFeedingPartOn('provide'); setChildFeeding(false, 'provide'); return () => setChildFeeding(was, 'provide'); } };
@@ -739,6 +744,9 @@ export const METRICS = [
   // ticks each spent at it; the under-twelves' share of food gathered; and hunger by age band (share of waking ticks hungry)
   'gathersLittle', 'gathersChild', 'gathersOlder', 'gatherHoursLittle', 'gatherHoursChild', 'gatherHoursOlder', 'childFoodShare',
   'hungryLittle', 'hungryChild', 'hungryOlder',
+  // what rules 215 is for: toys carved, toys handed to a child, plays with a toy finished, toys in the world at the end and the
+  // under-twelves holding one
+  'toysMade', 'toysGiven', 'toyPlays', 'toysAtEnd', 'childrenWithToy',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -931,6 +939,7 @@ export class LifeTally {
   gamesOf(g: string): number { return this.gameCount((x) => x.outcome === 'completed' && x.game === g); }
   get gameRefusals(): number { return this.gameCount((x) => x.outcome === 'declined' && x.reason.startsWith('I have already had that time today')); }
   solo: Record<string, number> = { stones: 0, bugs: 0, sticks: 0 };
+  toysMade = 0; toysGiven = 0;
   get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
   get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
   get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
@@ -964,6 +973,8 @@ export class LifeTally {
     if (a.kind === 'eat') this.mealsFromPack++;
     else if (a.kind === 'eat_store') this.mealsFromStore++;
     else if (a.kind === 'haul') this.siteDeliveries++;
+    if (a.kind === 'craft' && a.data.tool === 'toy') this.toysMade++;
+    if (a.kind === 'give' && a.data.mode === 'toy') this.toysGiven++;
     if (a.kind === 'fuel_fire') this.fireFeeds++;
     else if (a.kind === 'operate') {
       const at = w.byId.get(a.targetId);
@@ -1189,6 +1200,11 @@ export function outcomeOf(
       soloStones: life.solo.stones ?? 0,
       soloBugs: life.solo.bugs ?? 0,
       soloSticks: life.solo.sticks ?? 0,
+      toysMade: life.toysMade,
+      toysGiven: life.toysGiven,
+      toyPlays: life.solo.toy ?? 0,
+      toysAtEnd: w.tools.filter((t) => t.kind === 'toy').length,
+      childrenWithToy: alive.filter((p) => stageOf(w, p) === 'child' && (p.inv.toy ?? 0) > 0).length,
       gathersLittle: life.gathers.little,
       gathersChild: life.gathers.child,
       gathersOlder: life.gathers.older,

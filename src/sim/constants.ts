@@ -16,7 +16,7 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap', 'rod'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap', 'rod', 'toy'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat', 'wool'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
@@ -26,6 +26,7 @@ export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fis
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
   rod:1,
+  toy:.25,
   beer: 1.5,
   cutting: .5,
   hide:1, fat:.5, rendered_fat:.5,
@@ -72,6 +73,7 @@ export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
   rod:'fishing rod',
+  toy:'toy',
   beer:'beer',
   cutting:'living tree cutting',
   wool:'wool', hide:'raw hide', fat:'raw fat', rendered_fat:'rendered fat',
@@ -377,6 +379,8 @@ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
   // jabbed at something that bites back. From rules version 4: no earlier world ever makes or wants one.
   spear: { label: 'spear', hand: { cost: { wood: 2, stone: 1 }, work: 85 }, wear: 0.09, blurb: "keeping a wolf at arm's length" },
   rod:{label:'fishing rod',hand:{cost:{wood:3,stone:1},work:80},wear:.014,blurb:'A pole, bark line and stone hook for faster active fishing; a held tool that wears with use.'},
+  // rules 215 (toys.ts): a stick doll, a ball or a carved animal; never a working tool, never worn by use
+  toy:{label:'toy',hand:{cost:{wood:1},work:40},wear:0,blurb:'something for a child to play with'},
 };
 /** older name for the hand-made recipes, kept so existing option code reads naturally */
 export const TOOL_RECIPE: Record<ToolKind, { wood: number; stone: number; work: number; label: string }> = Object.fromEntries(

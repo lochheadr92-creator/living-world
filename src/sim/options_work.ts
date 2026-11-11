@@ -1,3 +1,4 @@
+import { toyOptions } from './toys';
 import { hungerToActOn, providePull } from './child_feeding';
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
 import { firstHomePassesCap } from './home_first';
@@ -428,7 +429,7 @@ export function setWorkshopTools(on: boolean): void { workshopTools = on; }
 function workshopTool(ctx: Ctx): HandTool | null {
   if (!workshopTools || ctx.world.settings.dynamics !== 'rich' || !runsRulesVersion(ctx.world, 57) || ctx.stage === 'child') return null;
   const tool = ctx.toolWanted?.kind;
-  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && tool !== 'net' && tool !== 'trap' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
+  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && tool !== 'net' && tool !== 'trap' && tool !== 'toy' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
 }
 
 export function wantedTool(ctx: Ctx): HandTool | null {
@@ -2049,6 +2050,8 @@ function optIdle(ctx: Ctx): void {
     // rules 211 (play.ts): what a child with nothing pressing may do alone, offered after the spare-time walk so that the walk
     // stays the first of its kind
     soloPlayOptions(ctx);
+    // rules 215 (toys.ts): a toy carved for a child, handed over, played with
+    toyOptions(ctx);
     return;
   }
   const hub = nearestHub(world, p.x, p.y);

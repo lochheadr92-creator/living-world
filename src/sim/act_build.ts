@@ -1,3 +1,4 @@
+import { noteToyMade, takeToyWood } from './toys';
 import {mayShareType} from './shared_projects';
 import { householdFirstHomePassesCap } from './home_first';
 import {layoutForWords} from './layout_words';
@@ -238,6 +239,7 @@ registerHandler('craft', {
   begin(world, p, a) {
     const tool = a.data.tool as ToolKind;
     if(tool==='rod'){const block=rodCraftBlock(world,p,a);if(block)return block;}
+    if(tool==='toy'){const block=takeToyWood(world,p,a);if(block)return block;} // rules 215 (toys.ts)
     if(isTextile(tool))return 'textiles must be woven at a timber yard';
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'missing materials';
@@ -270,6 +272,7 @@ registerHandler('craft', {
     // a plan that meant to make this learns that these hands made it, here, where it happened
     creditMade(p, tool);
     if (tool === 'spear') noteSpearMade();
+    if (tool === 'toy') noteToyMade(world, p); // rules 215 (toys.ts)
     p.stats.crafted++;
     p.skills.craft = Math.min(SKILL_MAX, p.skills.craft + 0.02);
     notePractice(world, p, 'craft', 0.02);

@@ -1,3 +1,4 @@
+import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
 import {runsRulesVersion} from './rulesversion';
@@ -107,6 +108,8 @@ registerHandler('wander', {
     a.duration = 18 + Math.floor(((p.id * 31 + world.tick) % 40));
     // rules 211 (play.ts): a child playing alone stays at it for a set while
     if (isSoloPlay(a.data.play)) a.duration = SOLO_TICKS;
+    // rules 215 (toys.ts): a child playing with a toy stays at it for a set while
+    if (isToyPlay(a.data.play)) a.duration = TOY_TICKS;
     // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
     if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
@@ -116,6 +119,7 @@ registerHandler('wander', {
   },
   onEnd(world, p, a, outcome) {
     if (outcome === 'success' && isSoloPlay(a.data.play)) finishSoloPlay(world, p, a.data.play);
+    if (outcome === 'success' && isToyPlay(a.data.play)) finishToyPlay(world, p);
   },
 });
 

@@ -103,6 +103,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 
 export const ITEM_ICON: Record<ItemKind, string> = {
   rod:'wood',
+  toy:'wood',
   beer:'water',
   cutting:'tree',
   wool:'wool', rendered_fat:'rendered fat',
