@@ -131,7 +131,7 @@ import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
 import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
-import { LIGHT_PACK_PARTS, lightPackPartOn, setLightPack } from '../../src/sim/light_pack';
+import { LIGHT_PACK_PARTS, fillingTripsOn, lightPackPartOn, rationTwoOn, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -244,6 +244,9 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 206 (light_pack.ts): the ration back at one portion (equal to rules 205), and the lab-only experiment turned on
+  if (kind === 'rich-ration-one') return { spec: label, summary: 'one portion of food is kept, as at rules 205; no effect below rules 206', install() { const was = rationTwoOn(); setRationTwo(false); return () => setRationTwo(was); } };
+  if (kind === 'rich-filling-trips') return { spec: label, summary: 'an experiment that is off in every world: the trip home with food beyond the ration is made only from a filling pack (three spare portions or more, or three quarters full); no effect below rules 205', install() { const was = fillingTripsOn(); setFillingTrips(true); return () => setFillingTrips(was); } };
   // rules 205 (light_pack.ts): both parts removed (equal to rules 204), and each part alone
   if (kind === 'rich-no-light-pack') return { spec: label, summary: 'food and materials are carried and eaten as before rules 205; no effect below rules 205', install() { const was = LIGHT_PACK_PARTS.map((k) => lightPackPartOn(k)); setLightPack(false); return () => LIGHT_PACK_PARTS.forEach((k, i) => setLightPack(was[i], k)); } };
   if (kind === 'rich-no-ration') return { spec: label, summary: 'two or three portions are kept in the pack and eaten from it, as before rules 205; no effect below rules 205', install() { const was = lightPackPartOn('ration'); setLightPack(false, 'ration'); return () => setLightPack(was, 'ration'); } };

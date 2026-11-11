@@ -27,6 +27,16 @@
 //            store when the pack is three quarters full or more (pack_materials.ts); the communal store of rules 136 is unchanged.
 //
 // Rules 204 and earlier, authored worlds and a part switched off keep the old behaviour.
+//
+// RULES 206: THE RATION IS TWO PORTIONS. The rules-205 lab (docs/CARRYING.md: twelve seeds, 25 days) found the ration part doing what
+// was asked (meals from a store 145 to 369 a settlement) at a cost: people hungry for 60 percent of their waking time instead of 54,
+// and child play, family time and foraging practice down, all beyond chance, with 594 trips home a settlement, nearly one a person a
+// day. The owner's answer in chat the same day: "maybe one extra piece of food for a carry limit". From 206 a person with a home
+// store keeps RATION_KEEP_206 portions and takes home what is beyond them; the portion held for the road is still the last one, so
+// the other may be eaten wherever they are; a meal at a store leaves up to two. `setRationTwo(false)` is rules 205.
+// A second idea is measured in the lab only and is off in every world: `setFillingTrips(true)` (lab arm `rich-filling-trips`) makes
+// the trip home with food beyond the ration only from a filling pack (FILLING_SPARE spare portions or more, or a pack three quarters
+// full) and not for every spare portion. It is never saved or hashed and changes nothing unless the lab turns it on.
 import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
@@ -42,9 +52,28 @@ export function setLightPack(enabled: boolean, part?: LightPackPart): void {
 const rich205 = (w: World): boolean => w.settings.dynamics === 'rich' && runsRulesVersion(w, 205);
 export const hasRation = (w: World): boolean => on.ration && rich205(w);
 export const hasPackMaterials = (w: World): boolean => on.materials && rich205(w);
+let rationTwo = true;
+export const rationTwoOn = (): boolean => rationTwo;
+/** Lab switch (never saved or hashed): off, a rules-206 world keeps one portion as at 205. */
+export function setRationTwo(enabled: boolean): void { rationTwo = enabled; }
+export const hasRationTwo = (w: World): boolean => rationTwo && hasRation(w) && runsRulesVersion(w, 206);
+let fillingTrips = false;
+export const fillingTripsOn = (): boolean => fillingTrips;
+/** Lab-only experiment, off in every world: the trip home with food beyond the ration is made only from a filling pack. */
+export function setFillingTrips(enabled: boolean): void { fillingTrips = enabled; }
 
-/** Portions of food a person with a home store keeps on them. */
+/** Portions of food a person with a home store keeps on them at rules 205, and the portion held for the road at every version. */
 export const RATION_KEEP = 1;
+/** Portions kept from rules 206. */
+export const RATION_KEEP_206 = 2;
+/** Spare portions from which the lab-only filling-trips experiment lets the trip home be made. */
+export const FILLING_SPARE = 3;
+/** The portions this world's ration is: two from 206, one at 205. Only meaningful where the ration applies. */
+export const rationPortions = (w: World): number => (hasRationTwo(w) ? RATION_KEEP_206 : RATION_KEEP);
+/** The lab-only experiment: is a ration trip with this much spare, from a pack this full, not yet worth making? */
+export function tripWaitsForFillingPack(w: World, spare: number, used: number, cap: number): boolean {
+  return fillingTrips && hasRation(w) && spare < FILLING_SPARE && used < cap * PACK_FULL_FRACTION;
+}
 /** What bringing food home gains because it is more than they need to carry. */
 export const RATION_WEIGHT = 8;
 /** The most a filling pack adds to a trip that would empty it: nothing at half full, all of it when full. */
@@ -66,12 +95,12 @@ export function packFullWorth(used: number, cap: number): number {
 
 /** Portions kept on the person: the ration at 205 for someone with a home store they know, else what the caller kept before. */
 export function rationKeep(w: World, knowsHomeStore: boolean, before: number): number {
-  return hasRation(w) && knowsHomeStore ? RATION_KEEP : before;
+  return hasRation(w) && knowsHomeStore ? rationPortions(w) : before;
 }
 
 /** Portions a meal eaten at a store leaves in the pack: what the person carried before it, up to the ration; none before 205. */
 export function mealLeaves(w: World, carriedBefore: number): number {
-  return hasRation(w) ? Math.min(Math.max(0, carriedBefore), RATION_KEEP) : 0;
+  return hasRation(w) ? Math.min(Math.max(0, carriedBefore), rationPortions(w)) : 0;
 }
 
 /** Is the food in the pack only the ration, and is it held for the road rather than offered as a meal now? */

@@ -24,7 +24,7 @@ import { hasTownships, mayWorkProject, participation, townshipOf } from './towns
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
 import { durableReserve, homeStoreBelief } from './provision';
-import { RATION_WEIGHT, hasPackMaterials, hasRation, packFullWorth, rationKeep } from './light_pack';
+import { RATION_WEIGHT, hasPackMaterials, hasRation, packFullWorth, rationKeep, tripWaitsForFillingPack } from './light_pack';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
 import {knownConstructionWork} from './construction_finish';
@@ -245,6 +245,8 @@ function optDepositFood(ctx: Ctx): void {
   // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
   const roomShort = basketRoomStall(ctx);
   if (surplus < (partialReserve||smallPack||roomShort||ration?1:2)) return;
+  // lab only (light_pack.ts setFillingTrips, off in every world): the ration's trip home waits for a filling pack
+  if (ration && !partialReserve && !smallPack && !roomShort && tripWaitsForFillingPack(world, surplus, invWeight(p), carryCap(world, p))) return;
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
