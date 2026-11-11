@@ -78,7 +78,7 @@ as when right), and one blocked because they "remember it being empty" is right 
 
 1. The shared yard and the swap part lean harmful and the stalled ask and the meal window show nothing. By the plan's own rule a part that does not clear its floor
    in the right direction is switched off. Doing that changes rules 201 and 202 worlds, which are pinned, so it is a new rules version (203) that turns those parts
-   off, not an edit. Proposed: 203 turns off swap and the shared yard; the stalled ask and the meal window stay, as harmless.
+   off, not an edit. Proposed: 203 turns off swap and the shared yard; the stalled ask and the meal window stay, as harmless. Done at rules 203 (the section below).
 2. The fall in chats (114 to 93) is unexplained. The removal arms put chats at 79 to 104 against a reference of 93 with a floor near 20, so no single part owns
    it; the committed approach is the first suspect (an approach that used to be dropped for a chat nearby is now carried through). A probe of what chats lost to
    would settle it.
@@ -86,4 +86,68 @@ as when right), and one blocked because they "remember it being empty" is right 
    not a civic project) is the smaller design, if the yard's use is still wanted.
 4. From three lived lives at rules 202 (a child, an adult and an elder in meadow): a pupil is offered, again and again, teachers who cannot teach her (a teacher
    must know more than the pupil, and nobody remembers the refusal); and the site cap ("too many projects under way already", "another layout already reserves this
-   footprint") refused a hut five times in two days to two people who wanted one.
+   footprint") refused a hut five times in two days to two people who wanted one. The first of the two refusals is repaired at rules 203 (the section below); the footprint refusal is not.
+
+## Rules 203: a first roof outside the site cap; the shared first yard and the swap's saved walk retired
+
+Owner instruction, 11 November 2026, after the elder Felix was refused a hut three times in two lived days ("too many projects under way already"): fix the
+building cap first, with the two parts that leaned harmful switched off. One version, two separately switched parts (`src/sim/home_first.ts`).
+
+| part | what changes | lab removal |
+|---|---|---|
+| cap | A hut for a household with no solid home, and a lean-to for a household with no home at all, is offered and marked out even when the settlement already has its four open sites (`optPlanBuild` in `options_work.ts`, `siteConflict` in `act_build.ts`). Every other layout, and a household that already has a hut, keeps the cap. | `rich-no-home-first` |
+| retire | The shared first timber yard (rules 201) and the swap's saved walk (rules 202) no longer apply from 203. Rules 201 and 202 worlds keep them. | `rich-keep-yard-and-swap` |
+
+Contract tests `tests/home_first.test.ts` (8, each with the rules-202 contrast). One existing case in `tests/winter_shelter.test.ts` is pinned to rules 202, with a
+comment, because at 203 a homeless household's first shelter passes the cap by design. Immutable pin `tests/v203_continuation.*` (Normal gen-2, arrivals on; a
+home laid out past the four-site cap is first seen by tick 800; then 120 ticks after a save and load), recorded from a clean checkout of `06766d32`.
+
+Lab: clean checkout of `06766d32` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the two removal arms, 60
+arms in 17 minutes 24 seconds. Evidence: `review_evidence/life-20261111/r203/`, `versions-202-203.txt`, `run203.txt`.
+
+Rules 202 against 203 (`scripts/lab_versions.ts`, the control and the two nudges of each lab, the rules-202 lab being `parts202`):
+
+| measure | 202 | 203 | verdict |
+|---|---|---|---|
+| solid homes | 10.2 | 11.8 | larger than chance, higher in 11 of 12 seeds and lower in none |
+| day of the first yard | 14.3 | 8.5 | larger than chance, earlier in 12 of 12 |
+| spare-time outings | 23.3 | 14.7 | larger than chance, fewer in 12 of 12 |
+| preparation plans finished | 9.2 | 4.7 | larger than chance, fewer in 12 of 12 (dropped 110.1 to 117.7) |
+| chats | 93.3 | 113.2 | systematic, within the noise floor, higher in 12 of 12 |
+| child play | 74.8 | 67.0 | systematic, within the noise floor |
+| family time | 83.1 | 78.8 | systematic, within the noise floor |
+| coaching | 6.3 | 4.3 | systematic, within the noise floor |
+| shared meals | 2.0 | 1.3 | systematic, within the noise floor |
+| trade talk | 8.6 | 6.0 | systematic, within the noise floor |
+| people, deaths (1.8 and 1.8), tools, projects done, mood | | | not distinguishable from chance |
+
+Each part, removed inside rules 203 (reference: the mean of the control and the nudges):
+
+| measure | 203 | cap removed | retirement undone |
+|---|---|---|---|
+| solid homes | 11.8 | 10.4, larger than chance (lower in 11 of 12) | 11.8 |
+| households without a solid home at day 25 | 1.1 | 1.9, within the floor (more in 9 of 12) | 0.9 |
+| home sites still open | 1.3 | 1.9, within the floor | 1.2 |
+| deaths | 1.8 | 3.8, not distinguishable ([-0.6, +5.8]) | 1.7 |
+| day of the first yard | 8.5 | 9.7, within the floor | 13.5, larger than chance (later in 10 of 12) |
+| tools | 44.3 | 43.8 | 40.0, not distinguishable (lower in 10 of 12) |
+| projects done | 59.2 | 59.0 | 55.2, not distinguishable (lower in 9 of 12) |
+| spare-time outings | 14.7 | 21.8, within the floor | 22.3, larger than chance |
+| child play | 67.0 | 78.0, larger than chance (higher in 10 of 12) | 73.6, within the floor |
+| preparation plans finished | 4.7 | 8.7, larger than chance | not listed |
+| chats | 113.2 | 92.1, within the floor | 103.8, not distinguishable |
+
+What that supports, and what it does not:
+
+- **The cap part does what it was built for.** About one and a half more solid homes a settlement, beyond chance, and fewer households left without one (inside
+  the floor). Sites abandoned do not rise (3.0 against 2.8).
+- **The retirement does what it was built for.** The first timber yard comes five to six days sooner, beyond chance, back to where rules 196 had it. Tools and
+  projects done lean up with the two parts retired and are not distinguishable.
+- **Both parts cost idle time.** Spare-time outings fall by about a third, and the cap part lowers child play by eleven sessions (larger than chance on its
+  removal arm) and halves finished preparation plans. People who may now build a home are building it. Family time, coaching and shared meals lean down across
+  the versions, all inside the floor. This is the opposite direction to the life stream's aim and it is the first thing the childhood and play plan should be
+  measured against (`docs/CHILDHOOD_AND_PLAY_PLAN.md`).
+- **Chats are back at the rules-196 level** (114 at 196, 93 at 202, 113 at 203), and inside rules 203 the arm without the cap part sits at 92. Every one of those
+  comparisons is inside the noise floor, so nothing is claimed; the mechanism is still not traced.
+- Not run: the full suite at the rules-203 head (the owner's rule is one suite at the end of a stream). Not touched: the layout-footprint refusal the adult Dax
+  met twice ("another layout already reserves this footprint or its access gap", `layout_claims.ts`), which is a different rule from the cap.
