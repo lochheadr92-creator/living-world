@@ -1,0 +1,75 @@
+tests/carcass_supply.test.ts > takes known body meat through paid dry_meat to an actual meal
+tests/household_continuity_view.test.ts > a real refused conversation leaves the delivery under way
+tests/household_continuity_view.test.ts > complete inspector reads during a pause preserve the entire saved state and RNG
+tests/household_continuity_view.test.ts > does not invent the cause of a suspended step or associate a different plan
+tests/household_continuity_view.test.ts > reads the referenced site belief, never a remote site truth or another household site
+tests/household_continuity_view.test.ts > shows a real conversation pause, resumes the same delivery, and credits only physical goods
+tests/household_continuity_view.test.ts > shows an urgent need without claiming that the plan ended
+tests/household_continuity_view.test.ts > shows the recorded home-plan deadline failure without a false success
+tests/household_continuity_view.test.ts > still reports a stall that the travel engine actually recorded
+tests/household_home.test.ts > 1. a shelter need produces an eligible, locally justified response > reads the site need from the belief, not from the world
+tests/household_home.test.ts > 1. a shelter need produces an eligible, locally justified response > takes a plan on because the household is in a lean-to and its hut wants materials
+tests/household_home.test.ts > 1. a shelter need produces an eligible, locally justified response > wants one material, one trip of it, not the whole cost of the building
+tests/household_home.test.ts > 10. the card says what is going on > the card carries what the plan has really got to the site
+tests/household_home.test.ts > 10. the card says what is going on > the plan shows its goal, step and what it still lacks
+tests/household_home.test.ts > 11. the chain end to end > a household in a lean-to reaches a hut and sleeps in it, by its own decisions
+tests/household_home.test.ts > 1b. food comes before a house, deliberately > and takes the shelter plan on once the food is seen to
+tests/household_home.test.ts > 3. members do not create duplicate projects for the same household need > one plan of this kind at a time
+tests/household_home.test.ts > 3. members do not create duplicate projects for the same household need > two members each plan for the SAME site, not one site each
+tests/household_home.test.ts > 4. materials are paid for and the work is done before completion > once she carries it, the step becomes the ORDINARY site haul
+tests/household_home.test.ts > 4. materials are paid for and the work is done before completion > re-aims at what the site wants next once one material is delivered
+tests/household_home.test.ts > 4. materials are paid for and the work is done before completion > the get step is served by a real gathering option that yields that material
+tests/household_home.test.ts > 4. materials are paid for and the work is done before completion > the material really moves, and only what the site still needs
+tests/household_home.test.ts > 6. the household can physically occupy the completed home > a hut the household got without her carrying anything ends the plan WITHOUT crediting her
+tests/household_home.test.ts > 6. the household can physically occupy the completed home > the plan ends DONE, crediting only what she carried
+tests/household_home.test.ts > 7. interruption, unavailable materials and invalidated sites leave nothing stuck > a plan that runs out of time says what the SITE still wanted, not what the pack lacked
+tests/household_home.test.ts > 7. interruption, unavailable materials and invalidated sites leave nothing stuck > a site that is abandoned ends the plan with the reason, and leaks no claim
+tests/household_home.test.ts > 8. saving and loading preserves the chain > a world saved mid-build comes back identical, plan and site and all
+tests/household_home.test.ts > 9. the lab switch removes only the new mechanism > a live plan ends with a reason when the switch is thrown under it
+tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > records which of the two cues it was, and never reads the lean season
+tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > takes one on because WINTER is close, when nothing is visibly wrong
+tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > takes one on because they themselves went hungry lately
+tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a household already at its target does not, in or out of the window
+tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a store that is nearly full enough does not: a shortfall of one is the ordinary stockpile option
+tests/household_preparation.test.ts > 2. ineligible situations form no preparation > outside the window, with the store merely below target and nothing visibly wrong, nobody prepares
+tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a store that filled behind their back ends nothing until they have SEEN it
+tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a store that reached the target by somebody else is not an achievement
+tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a target reached by their own hands is
+tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > two members of a household converge on one store rather than each demanding a reserve of their own
+tests/iron_chain_stall.test.ts > the smithy's fuel comes to the kiln (rules version 10) > adults who know a standing smithy and a kiln see charcoal made, with no worn tool and no iron plan
+tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing authored rows before starting workers or touching outputs
+tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing undefined rows before starting workers or touching outputs
+tests/lab_defaults.test.ts > refuses to resume ordinary lab rows as a geology generation comparison
+tests/lab_provenance.test.ts > retains runner and measurement source, reports it, resumes only the same content, and refuses changed content
+tests/lab_report.test.ts > pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics
+tests/lab_report.test.ts > reports an unavailable contrast without inventing a result and keeps story output
+tests/pavel_outcomes.test.ts > puts a one-unit surplus into its reserve through the ordinary deposit activity
+tests/preservation.test.ts > a batch expiring before the worker tick cannot be reported as successfully finished food
+tests/preservation.test.ts > an ordinary food-reserve plan can prepare known spare food without taking a second project
+tests/preservation.test.ts > carries household raw food for preservation while retaining two immediate meals
+tests/preservation.test.ts > dry batches continue exactly after saves during labour and passive processing
+tests/preservation.test.ts > offered physical work survives interruption and reload, then preserved fish is actually eaten
+tests/preservation.test.ts > preservation supply uses fresh remembered stores rather than remotely reading their share book
+tests/preservation.test.ts > smoke batches continue exactly after saves during labour and passive processing
+tests/preservation.test.ts > the batch planner does not substitute stale nearby rack stock for a fresh known food supply
+tests/preservation.test.ts > two raw portions can be preserved when other carried food supplies the immediate meals
+tests/preservation.test.ts > uses the existing bounded batch plan to finish a feasible preservation job and leaves passive drying alone
+tests/project_helpers.test.ts > does not promote a project ask over urgent needs or duplicate a covered request
+tests/project_helpers.test.ts > keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay
+tests/project_helpers.test.ts > preserves observation 11 wording and protocol mappings while explaining the new choice in 12
+tests/project_helpers.test.ts > stale sight of a trusted helper does not guarantee contact or a transfer
+tests/project_helpers.test.ts > the trusted helper can refuse goods reserved for another obligation
+tests/project_helpers.test.ts > trust never creates sight, supplies, eligibility or relief from a known refusal
+tests/project_helpers.test.ts > uses personal trust when choosing between otherwise eligible project helpers
+tests/project_inputs.test.ts > crafts through the physical handler, saves mid-work, pays inputs once and releases them for the next step
+tests/stored_materials.test.ts > accepts a partial physical withdrawal and lets later observation correct the remaining shortage
+tests/stored_materials.test.ts > an offered request creates a voluntary promise, collects stock, delivers, credits use and retains personal feedback
+tests/stored_materials.test.ts > keeps a material plan viable when remembered shared storage is the only stone source
+tests/stored_materials.test.ts > storage knowledge does not override urgent needs, conflicting commitments or refusal
+tests/stored_materials.test.ts > uses real withdrawal, crafting and later tool work with full-state save/replay equality
+tests/transport.test.ts > the existing winter reserve cart trip can carry preserved provisions home
+tests/zz_review_e_famine_trace.test.ts > CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed
+tests/zz_review_e_famine_trace.test.ts > traces one day of the retained rules-107 forest famine (diagnostic, writes a report)
+tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical
+tests/zz_review_h_retention.test.ts [ tests/zz_review_h_retention.test.ts ]
+tests/zz_review_main_toolreport_saves.test.ts > REVIEW: tool registry consistency in retained and fresh worlds > fresh current-rules worlds, 12,000 ticks, checked every 600 ticks

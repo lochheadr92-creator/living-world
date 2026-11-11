@@ -253,3 +253,21 @@ The chain is not broken: at 208 charcoal is made in all three. It is later than 
 test still fails at 208. With the ration on children as well (207) meadow made none in 60 days, so the exemption is most of the repair. The test's own comment
 records that its window was widened once before, at rules 106, on the same kind of measurement. Whether to widen it again is the owner's decision; the test has
 not been touched.
+
+## The full suite at the rules-208 head
+
+From a clean checkout of `1f20a0ea` (status empty), nothing else running, 10 minutes 36 seconds: 18 files failed of 603, 74 tests of 3,355 (3 skipped). The
+last full suite was at the rules-202 head (`a7d17666`): 16 files of 591, 72 tests of 3,293. Failing names are compared in
+`review_evidence/carrying-20261111/suite-head-208-failing.txt` and `suite-head-202-failing.txt` (the log itself is gitignored as a log).
+
+Every name that failed at 202 still fails at 208; none has gone. Two names fail at 208 that did not at 202:
+
+1. `tests/iron_chain_stall.test.ts`, "adults who know a standing smithy and a kiln see charcoal made": the first charcoal in its meadow world comes on day
+   25.8 against a window of 24 (the section above). From rules 206.
+2. `tests/pavel_outcomes.test.ts`, "puts a one-unit surplus into its reserve through the ordinary deposit activity": a staged elder with four fruit and a
+   reserve plan is expected to take one home and keep three. Under the ration a grown person keeps two, so he takes two. From rules 205, by design; the file
+   was outside the related sets run for 205 to 208.
+
+Neither test has been touched. The first could have its window widened (its comment records that being done at rules 106); the second could be pinned to
+rules 204 with a comment, as `tests/winter_shelter.test.ts` and `tests/tool_plan_capacity.test.ts` were for rules 203 and 204. Both are the owner's decision.
+The owner's instruction was to push if the suite passes; with two failures that were not there at the last full suite, nothing was pushed.
