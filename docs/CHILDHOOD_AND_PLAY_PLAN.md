@@ -293,3 +293,42 @@ What that supports:
 - **The cost leans the expected way and stays small.** A little more of the day hungry (0.58 against 0.57, inside the noise floor), mood and family time
   leaning down inside the floor, and nothing on people, deaths, tools or buildings that can be told from chance. Children playing more are children gathering a
   little less; how much of their gathering to take away, and who makes it up, is phase 3's question and has its own measurement.
+
+## 9. A little one's pace, and figures for the two ages (rules 212)
+
+The owner asked on 11 November 2026 for new figures for the first two ages, "smaller and slower possibly". Phase 3 (the three ages)
+moves to rules 213.
+
+| part | what changes | lab removal |
+|---|---|---|
+| little (`src/sim/child_pace.ts`, read by `moveSpeed` in `activities.ts`) | A little one, under seven, walks at 0.72 of a grown person's pace instead of the 0.88 every under-twelve had. A child of seven to eleven keeps 0.88. Load, health, injury, ground, dark, storm, tiredness and running apply on top as for anyone. | `rich-no-little-pace` |
+
+The figures are presentation only (`src/render/characters.ts`): a little one is drawn at 0.44 to 0.60 of a grown person, with a
+bigger head and shorter legs, barefoot in a smock, no hat, with a toddling step (short quick steps, a big bob, arms held out for
+balance); a child of seven to eleven at 0.64 to 0.78, longer in the leg, in a tunic, with a bouncier step. A smaller body takes more
+steps over the same ground. Grown people are drawn as before. Page check `scripts/browser/child_figures_check.mjs` (ordinary
+close-ups and a staged line-up walking at each person's own pace); evidence `viewer_evidence/child-figures-20261111/`.
+
+Contract tests `tests/child_pace.test.ts` (5, each with the rules-211 contrast). One case of `tests/iron_chain_stall.test.ts` is pinned
+to rules 211 with a comment: with the pace switched off it passes, with it on that meadow world's first charcoal moves past the
+thirty-day window; the charcoal chain it checks is unchanged. Immutable pin `tests/v212_continuation.*` (Normal gen-2, arrivals on; a
+little one walking by tick 100; then 120 ticks after a save and load), recorded from a clean checkout of `cdf294cc`.
+
+Lab: clean checkout of `cdf294cc` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and
+the removal, 48 arms in 15 minutes 39 seconds. Compared with the rules-211 lab already recorded. Evidence: `review_evidence/childhood-20261111/r212/`,
+`versions-211-212.txt`, `run212.txt`.
+
+| measure, a settlement in 25 days | 212 | little pace removed (as 211) |
+|---|---|---|
+| people, deaths, hunger deaths, tools, projects done, homes, child play, games, practices | | not distinguishable from chance |
+| mean hunger level (higher is fuller) | 53.2 | 50.2, systematic, within the noise floor |
+| mean mood | -11.9 | -15.2, systematic, within the noise floor |
+| chats | 114.4 | 123.1, systematic, within the noise floor |
+| family time | 68.7 | 74.4, systematic, within the noise floor |
+| spare-time outings | 7.1 | 9.9, systematic, within the noise floor |
+
+Rules 211 against 212 on the three shared arms (`scripts/lab_versions.ts`): nothing moved by more than a single draw moves it.
+
+What that supports: the slower pace is seen (a little one falls behind the people it walks with) and costs nothing the lab can find.
+The leanings inside the noise floor (a little fuller and better in mood, a little less company and spare time) are not attributed.
+No benefit or harm is claimed.

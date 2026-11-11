@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "cdf294ccd3e7cffa6a240311ef07d031c82c652e",
+    "rules": 212,
+    "content": "22457d895b2770723eb909607cd5e84c31b734fb496da5731ed2e676dceb0b9c",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a little one (under seven) is walking at the slower pace of rules 212 (child_pace.ts), then 120 more after a save and load."
+  },
+  "saved": "05827c5cb4d00fe81cba5544fa5a2ba13d6ccdf654491b929d5431840d3e6bad",
+  "continued": "ae07abd6eeba2137387320e4b55a7e7ad3c99ed6ad9b2f614e8834e5c63acccd",
+  "tick": 100
+}
