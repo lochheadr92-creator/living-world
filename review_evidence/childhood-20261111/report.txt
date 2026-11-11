@@ -1,0 +1,61 @@
+Childhood probe: 12 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, river), Normal, arrivals on, rules 203, 25 days. Sums over all seeds unless a line says "a settlement".
+
+People alive, mean a settlement (start -> end):
+  under 7   5 -> 4.8
+  7 to 11   3.2 -> 4.2
+  12 to 15  0.7 -> 1.1
+  adult     17.3 -> 19.6
+  elder     1.9 -> 1.6
+
+Hours of a 24-hour day by age band (every tick counted):
+  band             sleep and rest            own needs  food and water work           other work     company and play              nothing
+  under 7                    10.6                  3.0                  4.6                  0.3                  5.4                  0.1
+  7 to 11                    10.8                  2.9                  4.1                  0.5                  5.5                  0.1
+  12 to 15                   10.0                  3.0                  3.9                  4.3                  2.7                  0.1
+  adult                       9.8                  3.0                  3.5                  4.9                  2.8                  0.1
+  elder                      10.1                  3.3                  3.6                  4.0                  2.9                  0.1
+
+The waking day in detail, hours of 24 (activities of 0.05 hours and more):
+  under 7: rest 6.19; gather food 4.63; warm 1.34; socialize 1.28; drink 1.14; talk: learn_foraging 0.87; talk: play_together 0.74; talk: family_time 0.66; talk: request 0.64; talk: warn 0.62; deposit 0.32; wander 0.29; eat 0.25; flee 0.15; talk: chat 0.14; nothing 0.12; eat_store 0.09
+  7 to 11: rest 6.52; gather food 4.09; socialize 1.42; warm 1.34; drink 1.11; talk: learn_foraging 0.86; talk: play_together 0.78; talk: family_time 0.67; talk: warn 0.66; deposit 0.52; talk: request 0.50; wander 0.28; eat 0.27; flee 0.16; talk: chat 0.14; nothing 0.12; alone 0.05
+  12 to 15: rest 3.76; gather food 3.70; drink 1.16; warm 1.06; gather wood 0.83; explore 0.72; attend 0.58; socialize 0.55; build 0.54; flee 0.44; talk: request 0.43; gather stone or clay 0.29; talk: warn 0.28; eat 0.26; haul 0.25; talk: chat 0.24; talk: learn_foraging 0.22; repair 0.21; fuel_fire 0.20; tree_work 0.19; till 0.17; deposit 0.16; plan_site 0.15; harvest 0.15; operate 0.13; craft 0.13; nothing 0.11; withdraw 0.08; eat_store 0.07; plant 0.07; tend 0.07; talk: family_time 0.06; wander 0.05
+  adult: rest 3.61; gather food 3.31; drink 1.20; warm 1.08; gather wood 1.00; build 0.67; talk: request 0.56; gather stone or clay 0.50; socialize 0.47; attend 0.44; explore 0.41; talk: learn_foraging 0.37; deposit 0.35; haul 0.33; repair 0.30; flee 0.28; talk: warn 0.27; fuel_fire 0.24; talk: chat 0.24; plan_site 0.23; eat 0.22; talk: family_time 0.20; eat_store 0.18; craft 0.14; till 0.14; tree_work 0.13; harvest 0.13; operate 0.13; nothing 0.13; give 0.10; visit 0.07; withdraw 0.07; plant 0.07
+  elder: rest 3.51; gather food 3.36; warm 1.35; drink 1.34; socialize 0.93; gather wood 0.85; build 0.78; talk: request 0.49; haul 0.44; attend 0.44; gather stone or clay 0.36; talk: chat 0.33; plan_site 0.29; eat 0.26; repair 0.25; talk: learn_foraging 0.24; harvest 0.22; talk: warn 0.22; flee 0.21; tree_work 0.17; fuel_fire 0.16; till 0.16; deposit 0.14; nothing 0.13; operate 0.12; eat_store 0.11; plant 0.07; withdraw 0.06; visit 0.06
+
+Hunger while awake:
+  band        mean hunger   hungry (<62)  critical (<14)
+  under 7            63.3          46.7%           1.46%
+  7 to 11            65.9          41.5%           0.60%
+  12 to 15           59.3          55.4%           2.95%
+  adult              58.3          58.7%           1.93%
+  elder              54.3          66.5%           3.91%
+
+Food taken from the land, units a settlement over the run (wild plants, fish, hunted, harvest), and per person-day:
+  under 7     335.0 units (12.4% of all), 2.85 a person-day; wild plants 292.2, fish 42.8, hunted 0, harvest 0
+  7 to 11     378.9 units (14.0% of all), 3.75 a person-day; wild plants 332.8, fish 46.1, hunted 0, harvest 0
+  12 to 15     59.5 units (2.2% of all), 3.39 a person-day; wild plants 43.3, fish 11.9, hunted 0, harvest 4.3
+  adult      1775.8 units (65.6% of all), 3.79 a person-day; wild plants 1273, fish 307.6, hunted 0.2, harvest 195.1
+  elder       157.7 units (5.8% of all), 3.37 a person-day; wild plants 121.1, fish 15.7, hunted 0, harvest 20.9
+  under-twelves are 29.1% of person-days and take 26.4% of the food units.
+  households that had an under-twelve and took any food: 76. Their under-twelves took 38.2% of the household's units (pooled); median household 39%; 18 households at half or more, 59 at a quarter or more, 0 at none.
+
+Activities ended in success, a person-day, for the under-twelves and adults (0.02 and more):
+  under 7: converse 3.24; eat 1.36; drink 1.17; sleep 0.95; rest 0.89; gather food 0.85; warm 0.33; deposit 0.26; eat_store 0.13; flee 0.09; wander 0.07
+  7 to 11: converse 3.10; gather food 1.39; eat 1.34; drink 1.20; rest 0.97; sleep 0.96; deposit 0.48; warm 0.33; flee 0.13; wander 0.07; eat_store 0.06
+  adult: converse 2.02; drink 1.25; eat 1.24; sleep 1.07; gather food 0.67; rest 0.58; gather wood 0.54; deposit 0.50; haul 0.39; warm 0.27; eat_store 0.24; flee 0.23; gather stone or clay 0.18; fuel_fire 0.16; withdraw 0.15; attend 0.15; plant 0.11; harvest 0.11; explore 0.09; give 0.09; plan_site 0.08; tree_work 0.08; build 0.07; craft 0.07; tend 0.05; till 0.05; operate 0.05; visit 0.03; argue 0.02
+
+Childhood sessions, a settlement over the run, by how they ended:
+  family_time: 76.1 asked; completed 66.3 (87%); declined: I have already had that time today; I want to do something else now 5.3 (7%); still under way or cut short 3.1 (4%); declined: someone needed to take care of themselves 1.3 (2%)
+  play_together: 63.8 asked; completed 39.7 (62%); declined: I have already had that time today; I want to do something else now 22.8 (36%); still under way or cut short 0.8 (1%); declined: someone needed to take care of themselves 0.3 (1%); never began:  0.1 (0%); declined: this is no longer a childhood activity 0.1 (0%)
+  learn_foraging: 117.8 asked; completed 76.5 (65%); declined: I cannot teach you more about foraging yet 33.2 (28%); still under way or cut short 5.2 (4%); declined: someone needed to take care of themselves 2.9 (2%); never began:  0.1 (0%)
+  completed a child-day: family time 0.30, a game 0.18, foraging practice 0.35.
+
+Skill at the end by age band (living people):
+  band        people   forage    fish    farm
+  under 7         57    0.652   0.320   0.289
+  7 to 11         51    1.083   0.564   0.512
+  12 to 15        13    1.216   0.757   0.738
+  adult          235    1.103   0.933   0.925
+  elder           19    1.221   0.958   0.970
+  under-twelves alive at the end: 108. Foraging skill when first seen 0.406, at the end 0.856; food units taken each over the run, mean 69.6.
+  grown people who could still teach a child foraging (know more than the child): mean 66% of the grown people alive; 1 children have nobody; 14 forage as well as or better than the best grown person in their own household.

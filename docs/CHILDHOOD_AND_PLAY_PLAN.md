@@ -1,6 +1,7 @@
 # Plan: a childhood of play and being shown, and more to do for everyone (draft, 11 November 2026)
 
-Drafted for the owner. Nothing here is approved or started. The owner's idea, in chat on 11 November 2026: children should not work before they are older;
+Drafted for the owner. The owner approved the order and phase 0 on 11 November 2026 ("Yes, start probe"); phase 0 is done and its result is section 6. No rule
+has changed. The five decisions of section 5 are still the owner's. The owner's idea, in chat on 11 November 2026: children should not work before they are older;
 they should play with each other, by themselves, with toys, sticks and bugs; they should learn basic skills from each other or by being shown by an adult, so
 that they do not overdevelop before they are old enough to do tasks; and that needs many more things to do, for them and for everyone.
 
@@ -114,3 +115,79 @@ which bush is ripe, a carved animal in a pack and the name of who gave it, a rin
 3. **Who feeds a little one.** The care system already carries food to dependants; proposed: no change, measured in phase 3.
 4. **Toys as objects.** Proposed: yes, in phase 4, because a thing that can be made, given, kept and inherited is worth more to watch than a mood number.
 5. **Order.** Proposed: 0, 1, 2, 3, 4, 5, 6. Phase 5 (the evening fire) can be pulled forward if the fall in chats is the more urgent thing.
+
+## 6. Phase 0 result: what a child's day is at rules 203
+
+A measurement, not a rule: `scripts/childhood_probe.ts`, twelve ordinary worlds (the lab's seeds, Normal, arrivals on, 25 days, rules 203), run from `d54091cf`
+with no tracked change, twelve processes in 3 minutes 38 seconds. Every tick each living person's activity is counted under their age; food units are read from
+each person's own gathered counter. Evidence: `review_evidence/childhood-20261111/` (`report.txt`, one JSON per seed, `run.txt`). A year is twelve days, so a
+child ages two years inside a run. A settlement has about 5 under-sevens, 3 to 4 children of 7 to 11, 1 youth, 17 to 20 adults and 2 elders.
+
+**The day, in hours of 24.**
+
+| age | sleep and rest | own needs | food and water work | other work | company and play |
+|---|---|---|---|---|---|
+| under 7 | 10.6 | 3.0 | 4.6 | 0.3 | 5.4 |
+| 7 to 11 | 10.8 | 2.9 | 4.1 | 0.5 | 5.5 |
+| 12 to 15 | 10.0 | 3.0 | 3.9 | 4.3 | 2.7 |
+| adult | 9.8 | 3.0 | 3.5 | 4.9 | 2.8 |
+| elder | 10.1 | 3.3 | 3.6 | 4.0 | 2.9 |
+
+Inside those figures, for an under-seven: gathering food 4.6 hours, a foraging lesson 0.9, a game 0.7, family time 0.7, walking up to someone to talk 1.3, asking
+for things 0.6, being warned or warning 0.6, a spare-time walk 0.3. "Rest" is 6.2 of a child's 10.6 hours and 3.6 of an adult's 9.8; it includes waiting in
+shelter until it is light.
+
+**Food.**
+
+| age | units a person-day | share of all food taken | awake time hungry | awake time critical |
+|---|---|---|---|---|
+| under 7 | 2.85 | 12.4% | 47% | 1.5% |
+| 7 to 11 | 3.75 | 14.0% | 42% | 0.6% |
+| 12 to 15 | 3.39 | 2.2% | 55% | 3.0% |
+| adult | 3.79 | 65.6% | 59% | 1.9% |
+| elder | 3.37 | 5.8% | 67% | 3.9% |
+
+Under-twelves are 29 percent of the people and take 26 percent of the food: by head count they nearly feed themselves. In the 76 households that had an
+under-twelve, the under-twelves took 38 percent of the household's food (the median household 39 percent; 18 households at half or more, 59 at a quarter or
+more, none at nothing). Children take wild plants and a little fish; every harvested unit is a grown person's. Units eaten at the bush are counted as taken, and a
+unit of fish is not a unit of berries, so these are shares of units, not of nourishment.
+
+**Skill at day 25.**
+
+| age | people | foraging | fishing | farming |
+|---|---|---|---|---|
+| under 7 | 57 | 0.65 | 0.32 | 0.29 |
+| 7 to 11 | 51 | 1.08 | 0.56 | 0.51 |
+| 12 to 15 | 13 | 1.22 | 0.76 | 0.74 |
+| adult | 235 | 1.10 | 0.93 | 0.93 |
+| elder | 19 | 1.22 | 0.96 | 0.97 |
+
+The under-twelves alive at the end foraged at 0.41 when first seen and 0.86 at the end, having taken 70 units each. A child of 7 to 11 forages as well as an
+adult. Fishing and farming are where a child still has something to learn.
+
+**Childhood time, a settlement in 25 days.**
+
+| kind | asked | completed | the main refusal |
+|---|---|---|---|
+| family time | 76 | 66 (87%) | the other had already had it today, 7% |
+| a game | 64 | 40 (62%) | the other child had already had their game today, 36% |
+| foraging practice | 118 | 77 (65%) | "I cannot teach you more about foraging yet", 28% |
+
+A child completes a game on 0.18 of their days, family time on 0.30 and a lesson on 0.35. On average two thirds of the grown people alive could still teach a
+given child foraging; 14 of 108 children forage as well as or better than the best grown person in their own household, and one has nobody left to learn from.
+
+**What this means for the plan.** These are readings of the measurement, not results of a change.
+
+1. **The owner's worry is confirmed.** Children do more food work than adults (4.1 to 4.6 hours against 3.5), a child of 7 to 11 takes as much food as an adult,
+   and by eleven they forage as well as their parents.
+2. **Stopping it is not free.** If under-sevens stop gathering, 12 percent of the food taken has to come from everyone else, who would each take about 14 percent
+   more. If every under-twelve stops, it is 26 percent, and each person of twelve and over would take about 36 percent more, about an hour and a quarter more food
+   work a day for adults who are already hungry for 59 percent of their waking time. The strict reading of the idea (no gathering at all under twelve) is the
+   expensive one. Phase 3 as drafted (little ones stop, 7 to 11 help a bounded amount) removes somewhere between 12 and 19 percent, depending on the bound.
+3. **Phase 2 has to carry four and a half hours.** That is what an under-seven's food work is today, against 0.7 of an hour of games. The once-a-day limit on the
+   child who is asked refuses a third of all games; the new kinds of play should not inherit it.
+4. **Phase 1 should teach fishing and farming, not more foraging.** Foraging is saturated by the age of seven to eleven, which is why 28 percent of lessons are
+   refused. Fishing and farming are at half the adult level.
+5. **There are idle hours to fill.** A child spends six hours a day at rest, awake, and an adult three and a half. Rest includes waiting in shelter until it is
+   light; the probe does not split it by hour. If most of it is that wait, it is the time the evening fire and a story told (phase 5) would fill, at no cost in
+   food work. Phase 5's own measurement should split rest by time of day first.
