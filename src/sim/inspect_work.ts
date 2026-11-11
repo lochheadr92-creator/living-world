@@ -1,3 +1,4 @@
+import { openToAll } from './open_workplaces';
 import {worldAge,worldDuration} from './time_text';
 import {textileProtection} from './clothing';
 import {PRESERVATION_MAX_AGE,preservationWorkers} from './preservation';
@@ -171,6 +172,8 @@ function accessText(world: World, b: Building): string {
   if (b.hhId === 0) return b.type === 'granary' ? 'Open to everyone; each household keeps its own share in the bins.' : 'Open to everyone.';
   const who = hhName(world, b.hhId);
   const builders = ops ? Object.keys(ops.builders).filter((k) => (ops.builders[Number(k)] ?? 0) >= 0.2 && Number(k) !== b.hhId).map((k) => hhName(world, Number(k))) : [];
+  // rules 207 (open_workplaces.ts): everyone may use a workplace; its own stock stays with the household and those who built it
+  if (openToAll(world, b.type)) return `Belongs to the ${who}. Open to everyone: what a person brings and makes here is theirs.${builders.length ? ` Its own stock is also open to ${builders.join(', ')} (they did a fifth or more of the building).` : ''}${b.type === 'granary' ? ' Each household keeps its own share in the bins.' : ''}`;
   return `Belongs to the ${who}.${builders.length ? ` Also open to ${builders.join(', ')} (they did a fifth or more of the building).` : ''} Others may use it if one of the household counts them a friend; what they make is theirs.`;
 }
 

@@ -4,6 +4,7 @@ import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshop
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
 import {materialsHomeOption} from './pack_materials';
+import {openToAll} from './open_workplaces';
 import {STORED_STONE_SIGNAL,hasQuarryStock,hasStoredStoneCue,knownStoreHoldsStone} from './shared_stone';
 import {wellFetchOptions} from './wells';
 import {hasLivestock,livestockMaterials} from './livestock';
@@ -99,6 +100,8 @@ interface Fac {
 /** Could this person plausibly use that workplace? Judged from what they know of who it belongs to. */
 function mayUseBelief(ctx: Ctx, b: Belief): boolean {
   if (b.hh === 0 || b.hh === ctx.p.hhId) return true;
+  // rules 207 (open_workplaces.ts): a workplace is open to everyone, so knowing of one is knowing of one they may use
+  if (openToAll(ctx.world, b.btype as BuildingType | undefined)) return true;
   // New preservation decisions cannot read a remote workshop's current builder ledger.
   if(b.btype==='food_rack')return friendlyTo(ctx,b.hh??-1)>=12;
   const real = ctx.world.byId.get(b.id);

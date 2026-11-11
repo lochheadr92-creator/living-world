@@ -6,6 +6,7 @@ import {preservationStartBlocker,preservationCanAdvance,preservationReady} from 
 import { recoveredOffcuts } from './offcuts';
 import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
 import { runsRulesVersion } from './rulesversion';
+import { openToAll } from './open_workplaces';
 import { hasKnownRation, knownHungryDependant } from './known_ration';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
@@ -66,6 +67,14 @@ export type AccessLevel = 'owner' | 'communal' | 'builder' | 'friend' | 'none';
  *   – anyone else may use it if one of the owners counts them a friend (affinity of 12 or more) — and the goods they bring and make remain theirs.
  */
 export function accessLevel(world: World, p: Person, b: Building): AccessLevel {
+  const earned = earnedAccess(world, p, b);
+  // rules 207 (open_workplaces.ts): a workplace is open to everyone; somebody with no earned access comes in as a guest, at the level
+  // a friend of the household already has: what they bring and make is theirs, and the workplace's own stock is not
+  return earned === 'none' && openToAll(world, b.type) ? 'friend' : earned;
+}
+
+/** The access a person has by ownership, by having built, or by friendship: every level before rules 207, and still what decides whose the stock is. */
+export function earnedAccess(world: World, p: Person, b: Building): AccessLevel {
   if (b.hhId === 0) return 'communal';
   if (p.hhId === b.hhId) return 'owner';
   const share = b.ops?.builders[p.hhId] ?? 0;

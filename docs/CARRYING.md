@@ -134,3 +134,9 @@ What that supports:
   the portion held for the road, or what the rule does to children, whose pack holds five. That is not attributed yet. The next step is a read of a child's day
   at rules 206 with the probe of the childhood plan (`scripts/childhood_probe.ts`), against its recorded rules-203 baseline.
 - Open for the owner, as at 205: the ration part is a trade. Nothing here argues for two portions over one.
+
+Found after this section was written, while testing rules 207: `tests/iron_chain_stall.test.ts` ("adults who know a standing smithy and a kiln see
+charcoal made"), one ordinary meadow world run for 24 days at the current rules, passes at rules 203, 204 and 205 and fails at 206 and 207: no charcoal is
+made in that world. The file was outside the 112 related files run for rules 206, so the statement that no existing test newly failed at 206 was true of
+that set and not of the suite. It is one seed, so it does not show that the two-portion ration harms the charcoal chain in general; it is a second reason,
+beside the lab, not to prefer two portions.

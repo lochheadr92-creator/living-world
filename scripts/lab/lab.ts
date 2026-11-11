@@ -131,6 +131,8 @@ import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
 import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
+import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplaces';
+import { earnedAccess } from '../../src/sim/facilities';
 import { LIGHT_PACK_PARTS, fillingTripsOn, lightPackPartOn, rationTwoOn, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
@@ -244,6 +246,8 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 207 (open_workplaces.ts): a workplace admits only those the earlier rules admitted (equal to rules 206)
+  if (kind === 'rich-no-open-workplaces') return { spec: label, summary: 'a workplace is used only by its household, its builders and their friends, as before rules 207; no effect below rules 207', install() { const was = openWorkplacesOn(); setOpenWorkplaces(false); return () => setOpenWorkplaces(was); } };
   // rules 206 (light_pack.ts): the ration back at one portion (equal to rules 205), and the lab-only experiment turned on
   if (kind === 'rich-ration-one') return { spec: label, summary: 'one portion of food is kept, as at rules 205; no effect below rules 206', install() { const was = rationTwoOn(); setRationTwo(false); return () => setRationTwo(was); } };
   if (kind === 'rich-filling-trips') return { spec: label, summary: 'an experiment that is off in every world: the trip home with food beyond the ration is made only from a filling pack (three spare portions or more, or three quarters full); no effect below rules 205', install() { const was = fillingTripsOn(); setFillingTrips(true); return () => setFillingTrips(was); } };
@@ -699,6 +703,9 @@ export const METRICS = [
   // what rules 205 is for: trips home with food beyond the ration, trips home with wood or stone nothing needed, meals eaten out of
   // the pack and from a store, and site deliveries completed
   'rationTrips', 'materialsHomeTrips', 'mealsFromPack', 'mealsFromStore', 'siteDeliveries',
+  // what rules 207 is for: jobs finished at any workplace, those of them done by somebody with no earned access to it (a guest),
+  // and handcarts standing at the end
+  'workplaceJobs', 'guestJobs', 'cartsAtEnd',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -878,6 +885,7 @@ export class LifeTally {
   mealsSat = 0; visits = 0; spareTime = 0;
   approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0; basketRoomTrips = 0;
   rationTrips = 0; materialsHomeTrips = 0; mealsFromPack = 0; mealsFromStore = 0; siteDeliveries = 0;
+  workplaceJobs = 0; guestJobs = 0;
   private markets = new Set<number>();
   private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
@@ -909,6 +917,7 @@ export class LifeTally {
     else if (a.kind === 'operate') {
       const at = w.byId.get(a.targetId);
       if (at && at.ent === 'building' && at.type === 'timber_yard') this.yardJobs++;
+      if (at && at.ent === 'building') { this.workplaceJobs++; if (earnedAccess(w, p, at) === 'none') this.guestJobs++; }
     }
     if (a.kind === 'attend_meal' || a.kind === 'host_meal') this.mealsSat++;
     else if (a.kind === 'visit') this.visits++;
@@ -1111,6 +1120,9 @@ export function outcomeOf(
       mealsFromPack: life.mealsFromPack,
       mealsFromStore: life.mealsFromStore,
       siteDeliveries: life.siteDeliveries,
+      workplaceJobs: life.workplaceJobs,
+      guestJobs: life.guestJobs,
+      cartsAtEnd: w.carts.length,
     },
     milestones,
   };

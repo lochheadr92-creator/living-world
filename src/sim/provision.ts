@@ -1,3 +1,4 @@
+import { openToAll } from './open_workplaces';
 import {hasCellars} from './cellars';
 // HOUSEHOLD FOOD PREPARATION (rules version 2, rich worlds only).
 //
@@ -118,7 +119,8 @@ export function knownGranary(world: World, p: Person): Belief | null {
   for (const b of beliefsByKind(p, ['building'])) {
     if (b.btype !== 'granary') continue;
     const real = world.byId.get(b.id);
-    const mine = b.hh === 0 || b.hh === p.hhId || (real && real.ent === 'building' && (real.ops?.builders[p.hhId] ?? 0) >= 0.2);
+    // rules 207 (open_workplaces.ts): any granary they know of may be used; each household's share in the bins stays its own
+    const mine = b.hh === 0 || b.hh === p.hhId || (real && real.ent === 'building' && (real.ops?.builders[p.hhId] ?? 0) >= 0.2) || openToAll(world, 'granary');
     if (!mine) continue;
     const d = Math.hypot(b.x - p.x, b.y - p.y);
     if (d < bestD) {

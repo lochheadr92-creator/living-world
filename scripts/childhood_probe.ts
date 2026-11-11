@@ -7,7 +7,7 @@
 //   skill  each person's foraging, fishing and farming skill when first seen and at the end, and for each under-twelve at the end how
 //          many grown people could still teach them foraging (the rule of childhood.ts: the teacher must know more).
 // Childhood sessions (family time, a game, foraging practice) are counted by how they ended and why.
-//   node node_modules/vite-node/dist/cli.mjs scripts/childhood_probe.ts -- <seed> [days=25] [out.json]
+//   node node_modules/vite-node/dist/cli.mjs scripts/childhood_probe.ts -- <seed> [days=25] [out.json] [rules=current]
 //   node node_modules/vite-node/dist/cli.mjs scripts/childhood_probe.ts -- report <dir with the out.json files> [report.txt]
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -50,8 +50,10 @@ interface Result {
   headcount: { start: Record<Band, number>; end: Record<Band, number> };
 }
 
-function run(seed: string, days: number): Result {
-  const w: World = createWorld(currentWorldSettings('normal', seed, { immigration: true }));
+function run(seed: string, days: number, rules = 0): Result {
+  const settings = currentWorldSettings('normal', seed, { immigration: true });
+  // an earlier rules version may be asked for, so that the same probe reads a child's day before and after a change
+  const w: World = createWorld(rules > 0 ? { ...settings, rulesVersion: rules } : settings);
   const bandOf = (p: Person): Band => bandOfAge(ageYears(w, p));
   const bands = Object.fromEntries(BANDS.map((b) => [b, { personTicks: 0, awakeTicks: 0, hungryTicks: 0, criticalTicks: 0, hungerSum: 0, use: {}, ended: {}, units: {}, talks: {} }])) as Record<Band, BandRow>;
   const people = new Map<number, PersonRow>();
@@ -270,7 +272,7 @@ if (args[0] === 'report') {
 } else {
   const seed = args[0] ?? 'meadow';
   const days = Number(args[1] ?? 25);
-  const result = run(seed, days);
+  const result = run(seed, days, Number(args[3] ?? 0));
   if (args[2]) writeFileSync(args[2], JSON.stringify(result));
   const kids = result.bands.little.personTicks + result.bands.child.personTicks;
   console.log(`${seed}: rules ${result.rules}, ${days} days, under-twelve person-days ${r1(kids / DAY)}, people seen ${result.people.length}`);
