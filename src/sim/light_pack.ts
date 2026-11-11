@@ -39,6 +39,13 @@
 // A second idea is measured in the lab only and is off in every world: `setFillingTrips(true)` (lab arm `rich-filling-trips`) makes
 // the trip home with food beyond the ration only from a filling pack (FILLING_SPARE spare portions or more, or a pack three quarters
 // full) and not for every spare portion. It is never saved or hashed and changes nothing unless the lab turns it on.
+//
+// RULES 208: CHILDREN ARE EXEMPT FROM THE RATION. The child's-day probe read at rules 206 against its rules-203 run (docs/CARRYING.md)
+// showed what the ration does to an under-twelve, whose pack holds five: hours carrying food home 0.32 to 0.71 a day under seven and
+// 0.52 to 1.17 at seven to eleven, more gathering besides, and fewer games and lessons asked for. The rule was written for grown
+// people's packs. The owner's instruction in chat, 11 November 2026: "exempt children from the rule". From 208 the ration part does
+// not apply to anyone under twelve: they keep, carry home and eat food as they did before rules 205, and a meal at a store leaves
+// nothing behind for them as before. The materials part never applied to children. `setChildrenExempt(false)` is rules 207.
 import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
@@ -59,6 +66,14 @@ export const rationTwoOn = (): boolean => rationTwo;
 /** Lab switch (never saved or hashed): off, a rules-206 world keeps one portion as at 205. */
 export function setRationTwo(enabled: boolean): void { rationTwo = enabled; }
 export const hasRationTwo = (w: World): boolean => rationTwo && hasRation(w) && runsRulesVersion(w, 206);
+let childrenExempt = true;
+export const childrenExemptOn = (): boolean => childrenExempt;
+/** Lab switch (never saved or hashed): off, a rules-208 world applies the ration to children as rules 205 to 207 did. */
+export function setChildrenExempt(enabled: boolean): void { childrenExempt = enabled; }
+/** Does the ration part apply to this person? To everyone at 205 to 207; from 208 not to a child (under twelve). */
+export function rationApplies(w: World, isChild: boolean): boolean {
+  return hasRation(w) && !(isChild && childrenExempt && runsRulesVersion(w, 208));
+}
 let fillingTrips = false;
 export const fillingTripsOn = (): boolean => fillingTrips;
 /** Lab-only experiment, off in every world: the trip home with food beyond the ration is made only from a filling pack. */
@@ -101,8 +116,8 @@ export function rationKeep(w: World, knowsHomeStore: boolean, before: number): n
 }
 
 /** Portions a meal eaten at a store leaves in the pack: what the person carried before it, up to the ration; none before 205. */
-export function mealLeaves(w: World, carriedBefore: number): number {
-  return hasRation(w) ? Math.min(Math.max(0, carriedBefore), rationPortions(w)) : 0;
+export function mealLeaves(w: World, carriedBefore: number, isChild = false): number {
+  return rationApplies(w, isChild) ? Math.min(Math.max(0, carriedBefore), rationPortions(w)) : 0;
 }
 
 /** From 206 a meal taken from a store eats the portions it took from the store before anything the person arrived with. */

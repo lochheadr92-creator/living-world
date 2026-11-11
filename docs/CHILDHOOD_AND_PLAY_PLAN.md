@@ -1,7 +1,7 @@
 # Plan: a childhood of play and being shown, and more to do for everyone (draft, 11 November 2026)
 
 Drafted for the owner. The owner approved the order and phase 0 on 11 November 2026 ("Yes, start probe"); phase 0 is done and its result is section 6. No rule
-has changed. The five decisions of section 5 are still the owner's. The owner's idea, in chat on 11 November 2026: children should not work before they are older;
+has changed. The five decisions of section 5 were taken at their proposed defaults on the owner's instruction of the same day (section 5). The owner's idea, in chat on 11 November 2026: children should not work before they are older;
 they should play with each other, by themselves, with toys, sticks and bugs; they should learn basic skills from each other or by being shown by an adult, so
 that they do not overdevelop before they are old enough to do tasks; and that needs many more things to do, for them and for everyone.
 
@@ -108,6 +108,21 @@ What the viewer sees, phase by phase: children running in a knot near the huts, 
 which bush is ripe, a carved animal in a pack and the name of who gave it, a ring of people at the fire after dark and an elder's line in the feed.
 
 ## 5. Decisions the owner should make before phase 3
+
+**Decided, 11 November 2026.** The owner's instruction in chat: "apply default decisions". Each of the five below is taken as proposed:
+
+1. The bands are little ones under 7 and children 7 to 11.
+2. Children of 7 to 11 may help, a bounded amount, and only at tasks they have been shown. The stricter reading (no gathering at all under 12) is not taken;
+   phase 0 measured its cost at 36 percent more food work for everyone of twelve and over.
+3. Who feeds a little one is not changed; it is measured in phase 3.
+4. Toys are real objects, in phase 4.
+5. The order is phases 0, 1, 2, 3, 4, 5, 6. Phase 0 is done.
+
+These are decisions about the plan, not work done: no phase after 0 is started, and each phase still lands as its own rules version with its tests, pin and
+lab. Related and already landed: rules 208 exempts under-twelves from the ration rule of the carrying stream (`docs/CARRYING.md`), which had them carrying
+food home more than twice as often.
+
+The proposals as they were put:
 
 1. **The bands.** Proposed: little ones under 7, children 7 to 11. (Under 8 and 8 to 11 is the other sensible split.)
 2. **Helping at all?** Proposed: yes for 7 to 11, bounded and shown-first. The stricter reading of the idea, no gathering at all under 12, is one switch away

@@ -24,7 +24,7 @@ import { hasTownships, mayWorkProject, participation, townshipOf } from './towns
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
 import { durableReserve, homeStoreBelief } from './provision';
-import { RATION_WEIGHT, hasPackMaterials, hasRation, packFullWorth, rationKeep, tripWaitsForFillingPack } from './light_pack';
+import { RATION_WEIGHT, hasPackMaterials, packFullWorth, rationApplies, rationKeep, tripWaitsForFillingPack } from './light_pack';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
 import {knownConstructionWork} from './construction_finish';
@@ -236,7 +236,8 @@ function optDepositFood(ctx: Ctx): void {
   const { world, p } = ctx;
   const smallPack = hasChildhood(world) && ctx.stage === 'child';
   // rules 205 (light_pack.ts): with a home store they know, one portion is the ration and the rest is more than they need to carry
-  const ration = hasRation(world) && !!homeStoreBelief(p);
+  // rules 208: not for a child, whose pack of five the rule was never sized for
+  const ration = rationApplies(world, ctx.stage === 'child') && !!homeStoreBelief(p);
   const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
   const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
   const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;

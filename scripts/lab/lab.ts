@@ -133,7 +133,7 @@ import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
 import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplaces';
 import { earnedAccess } from '../../src/sim/facilities';
-import { LIGHT_PACK_PARTS, fillingTripsOn, lightPackPartOn, rationTwoOn, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
+import { LIGHT_PACK_PARTS, childrenExemptOn, fillingTripsOn, lightPackPartOn, rationTwoOn, setChildrenExempt, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -246,6 +246,8 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 208 (light_pack.ts): the ration applied to children again (equal to rules 207)
+  if (kind === 'rich-children-ration') return { spec: label, summary: 'under-twelves are held to the ration as at rules 205 to 207; no effect below rules 208', install() { const was = childrenExemptOn(); setChildrenExempt(false); return () => setChildrenExempt(was); } };
   // rules 207 (open_workplaces.ts): a workplace admits only those the earlier rules admitted (equal to rules 206)
   if (kind === 'rich-no-open-workplaces') return { spec: label, summary: 'a workplace is used only by its household, its builders and their friends, as before rules 207; no effect below rules 207', install() { const was = openWorkplacesOn(); setOpenWorkplaces(false); return () => setOpenWorkplaces(was); } };
   // rules 206 (light_pack.ts): the ration back at one portion (equal to rules 205), and the lab-only experiment turned on

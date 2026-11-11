@@ -49,7 +49,7 @@ import { noteSalvageDelivered, noteTaken, takenLine } from './taken_from';
 import { clearFailure, noteFailure, observe, delBelief, isWaterBeliefId } from './knowledge';
 import { mayDeposit, noteDeposit, noteWithdraw, withdrawAllowance } from './facilities';
 import { hasCivicFoodBenefit, recordCivicBenefit, recordCivicFoodBenefit } from './civic_benefit';
-import { carryCap } from './people';
+import { carryCap, stageOf } from './people';
 import { taskMultiplier, wearFor } from './tools';
 import type { ToolTask } from './tools';
 import { adjustRel } from './relations';
@@ -338,7 +338,7 @@ registerHandler('eat_store', {
     observe(world, p, e);
     const items = e.ent === 'building' ? e.store.items : e.items;
     // rules 205 (light_pack.ts): the meal eats what it takes from the store and leaves the ration the person arrived with
-    const rationLeft = mealLeaves(world, foodUnits(p.inv));
+    const rationLeft = mealLeaves(world, foodUnits(p.inv), stageOf(world, p) === 'child');
     let want = Math.ceil((92 - p.needs.hunger) / 18);
     // rules 46: at a granary the meal is bounded by the household's share or the emergency ration (facilities.ts), checked unit by
     // unit against the bins as they are now, and each unit taken is booked against the share

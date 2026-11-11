@@ -25,7 +25,7 @@ import { foodUnits, invRoom } from './economy';
 import { hasCareCapacity } from './care_capacity';
 import { withdrawAllowance } from './facilities';
 import { hasWinterReserve, homeStoreBelief } from './provision';
-import { hasRation, rationHeld } from './light_pack';
+import { rationApplies, rationHeld } from './light_pack';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
 import { delBelief, estimatedAmount, recentFailure } from './knowledge';
@@ -293,7 +293,7 @@ function optEat(ctx: Ctx): void {
   const food = runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food;
   const keep = p.needs.hunger > 20 && !(hasChildhood(world) && ctx.stage==='child') ? Math.min(food, ctx.dependents.length * 2) : 0;
   // rules 205 (light_pack.ts): the last portion is the ration; with food known at home, home near and hunger not yet urgent, the meal is at home
-  const rationHome = hasRation(world) && food > 0 ? homeStoreBelief(p) : null;
+  const rationHome = rationApplies(world, ctx.stage === 'child') && food > 0 ? homeStoreBelief(p) : null;
   const held = !!rationHome && rationHeld(world, food, p.needs.hunger, foodUnits(rationHome.items ?? {}) >= 1 && !recentFailure(world, p, rationHome.id, 400), eta(ctx, rationHome.x, rationHome.y));
   if (held) {
     addBlocked(ctx, 'eat', 'Eat what I am carrying', 0, 'keeping my ration for the road; there is food at home', 'food');
