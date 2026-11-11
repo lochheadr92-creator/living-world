@@ -251,3 +251,45 @@ What that supports:
   remember. It is kept as harmless.
 - **The cost is play.** With all three parts removed child play is 74.8 against 66.5, beyond chance: the extra practices take time that games had. That is the
   thing phase 2 (rules 211, more ways to play) is for, and it is the first measure phase 2 is read against.
+
+## 8. Phase 2 result: more ways to play (rules 211)
+
+`src/sim/play.ts`, two separately switched parts.
+
+| part | what changes | lab removal |
+|---|---|---|
+| games | Chase, hide and seek and playing house join the guessing game between two children. Each has its own once-a-day limit for each child; the asker proposes a game they have not played today, and the one asked declines only if they have played that game. A child waits an eighth of a day between games. | `rich-no-play-games` |
+| solo | Skipping stones at the water's edge, watching bugs among bushes or trees, building with sticks near home: each once a day for a child with nothing pressing, with a small lift of mood and a seed of fishing, foraging or building skill (0.003). A finished play counts as having been at that place. | `rich-no-play-solo` |
+
+`rich-no-play` removes both and equals rules 210. Contract tests `tests/play.test.ts` (10, each with the rules-210 contrast). Two cases in
+`tests/childhood.test.ts` are pinned to rules 210 with comments. Immutable pin `tests/v211_continuation.*` (Normal gen-2, arrivals on; a play of rules 211 in
+the world by tick 400; then 120 ticks after a save and load), recorded from a clean checkout of `eaa44e5d`. Not in this version: a game joined by a third or
+fourth child, children drawn to a game they can see, toys, and anything for grown people. No work is taken from children.
+
+Lab: clean checkout of `eaa44e5d` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the three removal arms, 72
+arms in 20 minutes 42 seconds. Compared with the rules-210 lab already recorded. Evidence: `review_evidence/childhood-20261111/r211/`, `versions-210-211.txt`,
+`run211.txt`.
+
+| measure, a settlement in 25 days | 210 | 211 | both removed | games removed | solo removed |
+|---|---|---|---|---|---|
+| games asked for (child play) | 66.5 | 104.3, larger than chance (higher in 12 of 12 seeds) | 68.2 | 65.3 | 104.5 |
+| games finished, all kinds | | 83.6 | 38.4 | 37.8 | 83.7 |
+| of them the guessing game / chase / hide and seek / playing house | | 21.2 / 20.8 / 20.6 / 20.9 | 38.4 / 0 / 0 / 0 | 37.8 / 0 / 0 / 0 | 21.0 / 20.4 / 22.5 / 19.8 |
+| games refused, "I have already had that time today" | | 18.5 | 28.4, larger than chance | 26.0 | 18.0 |
+| plays alone finished: stones / bugs / sticks | | 6.3 / 6.9 / 6.2 | 0 / 0 / 0 | 7.5 / 8.3 / 8.6 | 0 / 0 / 0 |
+| spare-time outings | 18.4 | 9.1, larger than chance (fewer) | 17.0 | 12.1 | 11.8 |
+| share of waking time hungry | 0.57 | 0.58, systematic, within the noise floor (higher in 12 of 12) | 0.56 | 0.57 | 0.58 |
+| mean mood | -10.8 | -13.4, systematic, within the noise floor | -10.3 | -7.8 | -12.8 |
+| family time | 76.4 | 72.2, systematic, within the noise floor | 78.3 | 78.2 | 72.9 |
+| people, deaths (2.3 and 2.7), deaths from hunger (0.5 and 0.9), tools, projects done, buildings, chats | | | | | not distinguishable from chance |
+
+What that supports:
+
+- **Games more than double.** About 84 games finished a settlement against 38, in four kinds played about equally, and a third fewer refusals for having
+  already played. All beyond chance, all from the games part. The 8 games that the practices of phase 1 cost are recovered several times over.
+- **Play alone happens, a little.** About 19 a settlement in 25 days, a few a day across all the children: a child who is fed and has nothing pressing is
+  rare while children still gather a quarter of the food. It will matter more when phase 3 frees their time.
+- **Fewer spare-time walks,** because a child with a free moment now plays; a play alone is counted as play, not as a walk.
+- **The cost leans the expected way and stays small.** A little more of the day hungry (0.58 against 0.57, inside the noise floor), mood and family time
+  leaning down inside the floor, and nothing on people, deaths, tools or buildings that can be told from chance. Children playing more are children gathering a
+  little less; how much of their gathering to take away, and who makes it up, is phase 3's question and has its own measurement.
