@@ -1,0 +1,209 @@
+[
+  {
+    "ordinary": {
+      "rules": 212,
+      "little": [
+        {
+          "id": 1108,
+          "name": "Viktor",
+          "age": 2
+        },
+        {
+          "id": 1109,
+          "name": "Theo",
+          "age": 4
+        },
+        {
+          "id": 1122,
+          "name": "Eli",
+          "age": 3
+        },
+        {
+          "id": 1139,
+          "name": "Thea",
+          "age": 4
+        },
+        {
+          "id": 1140,
+          "name": "Nico",
+          "age": 2
+        },
+        {
+          "id": 1146,
+          "name": "Edda",
+          "age": 6
+        },
+        {
+          "id": 1147,
+          "name": "Faye",
+          "age": 3
+        }
+      ],
+      "child": [
+        {
+          "id": 1121,
+          "name": "Ivo",
+          "age": 10
+        }
+      ],
+      "youth": [],
+      "adult": [
+        {
+          "id": 1106,
+          "name": "Mira",
+          "age": 32
+        },
+        {
+          "id": 1107,
+          "name": "Emre",
+          "age": 32
+        },
+        {
+          "id": 1112,
+          "name": "Ben",
+          "age": 20
+        },
+        {
+          "id": 1113,
+          "name": "Zia",
+          "age": 26
+        },
+        {
+          "id": 1119,
+          "name": "Cora",
+          "age": 31
+        },
+        {
+          "id": 1120,
+          "name": "Abel",
+          "age": 35
+        },
+        {
+          "id": 1125,
+          "name": "Ines",
+          "age": 27
+        },
+        {
+          "id": 1128,
+          "name": "Tomas",
+          "age": 53
+        },
+        {
+          "id": 1131,
+          "name": "Kai",
+          "age": 24
+        },
+        {
+          "id": 1132,
+          "name": "Petra",
+          "age": 21
+        },
+        {
+          "id": 1135,
+          "name": "Cole",
+          "age": 37
+        },
+        {
+          "id": 1137,
+          "name": "Ivy",
+          "age": 27
+        },
+        {
+          "id": 1138,
+          "name": "Basil",
+          "age": 37
+        },
+        {
+          "id": 1142,
+          "name": "Talia",
+          "age": 44
+        },
+        {
+          "id": 1144,
+          "name": "Alma",
+          "age": 39
+        },
+        {
+          "id": 1145,
+          "name": "Jax",
+          "age": 24
+        },
+        {
+          "id": 1149,
+          "name": "Lena",
+          "age": 22
+        },
+        {
+          "id": 1150,
+          "name": "Arlo",
+          "age": 42
+        }
+      ],
+      "elder": [
+        {
+          "id": 1116,
+          "name": "Milo",
+          "age": 70
+        },
+        {
+          "id": 1134,
+          "name": "Yan",
+          "age": 66
+        }
+      ]
+    }
+  },
+  {
+    "lineup": [
+      {
+        "name": "Viktor",
+        "age": 2
+      },
+      {
+        "name": "Theo",
+        "age": 4
+      },
+      {
+        "name": "Ivo",
+        "age": 10
+      },
+      {
+        "name": "Mira",
+        "age": 32
+      },
+      {
+        "name": "Milo",
+        "age": 70
+      }
+    ]
+  },
+  {
+    "paces": [
+      {
+        "name": "Viktor",
+        "age": 2,
+        "pace": 0.597
+      },
+      {
+        "name": "Theo",
+        "age": 4,
+        "pace": 0.594
+      },
+      {
+        "name": "Ivo",
+        "age": 10,
+        "pace": 0.636
+      },
+      {
+        "name": "Mira",
+        "age": 32,
+        "pace": 0.771
+      },
+      {
+        "name": "Milo",
+        "age": 70,
+        "pace": 0.621
+      }
+    ]
+  }
+]

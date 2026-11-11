@@ -134,6 +134,7 @@ import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/c
 import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplaces';
 import { CANNOT_TEACH, SHOWN_PARTS, setShown, shownPartOn } from '../../src/sim/shown';
 import { PLAY_PARTS, playPartOn, setPlay } from '../../src/sim/play';
+import { childPacePartOn, setChildPace } from '../../src/sim/child_pace';
 import { earnedAccess } from '../../src/sim/facilities';
 import { LIGHT_PACK_PARTS, childrenExemptOn, fillingTripsOn, lightPackPartOn, rationTwoOn, setChildrenExempt, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
@@ -251,6 +252,7 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
   if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
   if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  if (kind === 'rich-no-little-pace') return { spec: label, summary: 'a little one walks at the 0.88 pace of every under-twelve, as before rules 212; no effect below rules 212', install() { const was = childPacePartOn('little'); setChildPace(false, 'little'); return () => setChildPace(was, 'little'); } };
   if (kind === 'rich-no-play-solo') return { spec: label, summary: 'a child has nothing of their own to do alone, as before rules 211; no effect below rules 211', install() { const was = playPartOn('solo'); setPlay(false, 'solo'); return () => setPlay(was, 'solo'); } };
   // rules 210 (shown.ts): all three parts removed (equal to rules 208), and each part alone
   if (kind === 'rich-no-shown') return { spec: label, summary: 'practice is asked for and given as before rules 210; no effect below rules 210', install() { const was = SHOWN_PARTS.map((k) => shownPartOn(k)); setShown(false); return () => SHOWN_PARTS.forEach((k, i) => setShown(was[i], k)); } };

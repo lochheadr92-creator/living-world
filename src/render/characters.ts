@@ -6,6 +6,7 @@ import {toolFor} from '../sim/tools';
 import { angleDiff, clamp, smoothstep } from '../sim/util';
 import { weightOf } from '../sim/economy';
 import { ageYears, carryCap, stageOf } from '../sim/people';
+import { LITTLE_AGE } from '../sim/child_pace';
 import { hashUnit } from '../sim/rng';
 import type { Animal, ItemKind, Person, PoseKind, World } from '../sim/types';
 import { HAND_U, HAND_V, HAND_Z } from './carts';
@@ -110,7 +111,7 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       const run = pose === 'run';
       const s = Math.sin(c.walk * Math.PI * 2);
       const co = Math.cos(c.walk * Math.PI * 2);
-      const stride = run ? 0.3 : 0.2;
+      const stride = run ? 0.3 : c.stage === 'little' ? 0.15 : c.stage === 'child' ? 0.23 : 0.2;
       r[R.FLU] = s * stride;
       r[R.FRU] = -s * stride;
       r[R.FLL] = Math.max(0, co) * (run ? 4 : 2.4);
@@ -121,6 +122,18 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       r[R.HRZ] = run ? 15 : 11.5;
       r[R.BOB] = Math.abs(s) * (run ? 1.7 : 0.9);
       r[R.LEAN] = run ? 0.1 : 0.025;
+      if (c.stage === 'little') {
+        // a toddle: short quick steps, a big bob, arms held out a little for balance
+        r[R.BOB] = Math.abs(s) * (run ? 2 : 1.5);
+        r[R.HLV] = 0.19;
+        r[R.HRV] = -0.19;
+        r[R.HLZ] = run ? 15 : 13.5 + co * 0.8;
+        r[R.HRZ] = run ? 15 : 13.5 - co * 0.8;
+        r[R.LEAN] = run ? 0.08 : 0.04;
+      } else if (c.stage === 'child') {
+        // a bouncier step than a grown person's
+        r[R.BOB] = Math.abs(s) * (run ? 1.9 : 1.2);
+      }
       break;
     }
     case 'pick':
@@ -477,15 +490,37 @@ function applyWave(r: Rig, t: number, strength: number): void {
 }
 
 // ───────────────────────── look-up of appearance ─────────────────────────
-function bodyScale(world: World, p: Person): { s: number; head: number; stoop: number } {
+/** the two ages of childhood the figures show (the plan's bands): a little one under seven, a child of seven to eleven */
+type YoungBand = 'little' | 'child' | null;
+function youngBand(world: World, p: Person): YoungBand {
   const age = ageYears(world, p);
-  const stage = stageOf(world, p);
-  if (stage === 'child') {
-    const k = clamp(age / 12, 0, 1);
-    return { s: 0.5 + 0.28 * k, head: 1.32 - 0.12 * k, stoop: 0 };
+  return age < LITTLE_AGE ? 'little' : stageOf(world, p) === 'child' ? 'child' : null;
+}
+
+/**
+ * Size and proportions. A little one is small, with a big head and short legs (`leg` shortens the legs only, so the body sits low
+ * and the arms reach down less far); a child of seven to eleven is between that and a youth, longer in the leg.
+ */
+function bodyScale(world: World, p: Person): { s: number; head: number; stoop: number; leg: number; band: YoungBand } {
+  const age = ageYears(world, p);
+  const band = youngBand(world, p);
+  if (band === 'little') {
+    const k = clamp(age / LITTLE_AGE, 0, 1);
+    return { s: 0.44 + 0.16 * k, head: 1.46 - 0.12 * k, stoop: 0, leg: 0.76 + 0.06 * k, band };
   }
-  if (stage === 'youth') return { s: 0.86 * p.look.height, head: 1.1, stoop: 0 };
-  return { s: p.look.height, head: 1, stoop: stage === 'elder' ? 0.045 : 0 };
+  if (band === 'child') {
+    const k = clamp((age - LITTLE_AGE) / (12 - LITTLE_AGE), 0, 1);
+    return { s: 0.64 + 0.14 * k, head: 1.24 - 0.08 * k, stoop: 0, leg: 0.9 + 0.05 * k, band };
+  }
+  const stage = stageOf(world, p);
+  if (stage === 'youth') return { s: 0.86 * p.look.height, head: 1.1, stoop: 0, leg: 1, band };
+  return { s: p.look.height, head: 1, stoop: stage === 'elder' ? 0.045 : 0, leg: 1, band };
+}
+
+/** a smaller body takes more steps over the same ground; grown people's steps are as they always were */
+function stepScale(world: World, p: Person): number {
+  const b = bodyScale(world, p);
+  return b.band ? b.s / 0.78 : 1;
 }
 
 interface RigResult {
@@ -519,7 +554,7 @@ export class CharacterRenderer {
       }
       const moved = Math.hypot(x - s.x, y - s.y);
       // stride follows ground covered; clamped so very fast playback does not strobe
-      if (moved > 0 && moved < 3) s.phase = (s.phase + Math.min(moved * 1.55, 0.45)) % 1;
+      if (moved > 0 && moved < 3) s.phase = (s.phase + Math.min((moved * 1.55) / stepScale(world, p), 0.45)) % 1;
       s.moved = moved;
       s.x = x;
       s.y = y;
@@ -532,6 +567,7 @@ export class CharacterRenderer {
   }
 
   private rigFor(world: World, p: Person, simT: number, alphaT: number, walking: boolean, running: boolean): RigResult {
+    const band = youngBand(world, p);
     const s = this.states.get(p.id)!;
     let pose: PoseKind = p.pose;
     const a = p.activity;
@@ -548,7 +584,7 @@ export class CharacterRenderer {
       else if (st === 'ore_vein' || st === 'outcrop') pose = 'mine';
     }
     const speaking = !!(p.speech && p.speech.until > world.tick);
-    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, speed: Math.min(1, s.moved * 6), p, speaking, stage: '', moved: s.moved };
+    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, speed: Math.min(1, s.moved * 6), p, speaking, stage: band ?? '', moved: s.moved };
     if (pose !== s.pose) {
       s.from.set(s.cur);
       s.pose = pose;
@@ -623,7 +659,8 @@ export class CharacterRenderer {
     const elderly = stage === 'elder' || ageYears(world, p) >= 56;
     const hairC = elderly ? HAIR[5] : HAIR[look.hair % HAIR.length];
     const shirt = SHIRT[look.shirt % SHIRT.length];
-    const pants = PANTS[look.pants % PANTS.length];
+    const little = bs.band === 'little';
+    const pants = little ? skin : PANTS[look.pants % PANTS.length];
     const fx = Math.cos(heading);
     const fy = Math.sin(heading);
     const lx = -Math.sin(heading);
@@ -638,8 +675,10 @@ export class CharacterRenderer {
       return [(wx - wy) * 32, (wx + wy) * 16 - z * sc, wx + wy];
     };
 
-    const hipZ = 10.2 - rig[R.CROUCH] * (1 - lie) + rig[R.BOB];
-    const shZ0 = 20.6 - rig[R.CROUCH] * (1 - lie) * 0.7 + rig[R.BOB];
+    // a little one's and a child's legs are shorter for their size: the hips and everything above sit lower, and the hands with them
+    const legDrop = 10.2 * (1 - bs.leg) * (1 - lie);
+    const hipZ = 10.2 - legDrop - rig[R.CROUCH] * (1 - lie) + rig[R.BOB];
+    const shZ0 = 20.6 - legDrop - rig[R.CROUCH] * (1 - lie) * 0.7 + rig[R.BOB];
     // lying: body flat on the ground along the heading
     const hip: V3 = lie > 0.5 ? S(-0.12, 0, 3.4) : S(0, 0, hipZ);
     const lean = rig[R.LEAN] + bs.stoop;
@@ -649,8 +688,8 @@ export class CharacterRenderer {
     const shR: V3 = lie > 0.5 ? S(0.2, -0.09, 4.2) : S(lean, -0.1 * look.build, shZ0 - 0.6);
     const hipL: V3 = lie > 0.5 ? S(-0.16, 0.05, 3.2) : S(0, 0.055 * look.build, hipZ);
     const hipR: V3 = lie > 0.5 ? S(-0.16, -0.05, 3.2) : S(0, -0.055 * look.build, hipZ);
-    const handL: V3 = lie > 0.5 ? S(0.25, 0.12, 3) : S(rig[R.HLU], rig[R.HLV], rig[R.HLZ] - rig[R.CROUCH] * 0.4);
-    const handR: V3 = lie > 0.5 ? S(0.25, -0.12, 3) : S(rig[R.HRU], rig[R.HRV], rig[R.HRZ] - rig[R.CROUCH] * 0.4);
+    const handL: V3 = lie > 0.5 ? S(0.25, 0.12, 3) : S(rig[R.HLU], rig[R.HLV], rig[R.HLZ] - rig[R.CROUCH] * 0.4 - legDrop);
+    const handR: V3 = lie > 0.5 ? S(0.25, -0.12, 3) : S(rig[R.HRU], rig[R.HRV], rig[R.HRZ] - rig[R.CROUCH] * 0.4 - legDrop);
     const footL: V3 = lie > 0.5 ? S(-0.4, 0.04, 2) : S(rig[R.FLU], rig[R.FLV], rig[R.FLL]);
     const footR: V3 = lie > 0.5 ? S(-0.4, -0.04, 2) : S(rig[R.FRU], rig[R.FRV], rig[R.FRL]);
     // knees: halfway, nudged forward when crouched / seated
@@ -709,7 +748,7 @@ export class CharacterRenderer {
       ctx.lineTo(b[0], b[1]);
       ctx.stroke();
     };
-    const lw = 3.1 * sc * look.build;
+    const lw = 3.1 * sc * look.build * (little ? 0.92 : 1);
     const aw = 2.5 * sc;
 
     // legs
@@ -720,11 +759,37 @@ export class CharacterRenderer {
         draw: () => {
           limb(h, k, lw, pants)();
           limb(k, f, lw * 0.95, shade(pants, 0.92))();
-          // shoe
-          ctx.fillStyle = '#3a2c22';
+          // shoe (a little one goes barefoot)
+          ctx.fillStyle = little ? shade(skin, 0.86) : '#3a2c22';
           ctx.beginPath();
           ctx.ellipse(f[0] + (fx - fy) * 32 * 0.04 * sc, f[1] + 0.6, 2.4 * sc, 1.5 * sc, 0, 0, Math.PI * 2);
           ctx.fill();
+        },
+      });
+    }
+
+    // a little one's smock and a child's tunic: a hem below the hips, in the shirt's colour, drawn behind the torso
+    if (bs.band && lie < 0.5) {
+      const hemU = little ? 0.62 : 0.4; // how far down the leg the hem reaches (0 the hips, 1 the knees)
+      const kneeMid: V3 = [(kneeL[0] + kneeR[0]) / 2, (kneeL[1] + kneeR[1]) / 2, (kneeL[2] + kneeR[2]) / 2];
+      const hem: V3 = [hip[0] + (kneeMid[0] - hip[0]) * hemU, hip[1] + (kneeMid[1] - hip[1]) * hemU, hip[2] + (kneeMid[2] - hip[2]) * hemU];
+      const side = (v: number): [number, number] => [(lx - ly) * 32 * v * sc, (lx + ly) * 16 * v * sc];
+      const [ox, oy] = side(little ? 0.16 : 0.12);
+      const [tx, ty] = side(0.09 * look.build);
+      parts.push({
+        d: (hem[2] + hip[2]) / 2 + 0.0045,
+        draw: () => {
+          ctx.fillStyle = shade(shirt, 0.94);
+          ctx.strokeStyle = 'rgba(25,18,12,0.38)';
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.moveTo(hip[0] + tx, hip[1] + ty - 1);
+          ctx.lineTo(hem[0] + ox, hem[1] + oy);
+          ctx.quadraticCurveTo(hem[0], hem[1] + 1.2 * sc, hem[0] - ox, hem[1] - oy);
+          ctx.lineTo(hip[0] - tx, hip[1] - ty - 1);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
         },
       });
     }
@@ -733,7 +798,7 @@ export class CharacterRenderer {
     parts.push({
       d: (hip[2] + shoulderC[2]) / 2 + 0.005,
       draw: () => {
-        const tw = 7.1 * sc * look.build;
+        const tw = 7.1 * sc * look.build * (little ? 1.08 : 1);
         ctx.lineCap = 'round';
         ctx.strokeStyle = 'rgba(25,18,12,0.4)';
         ctx.lineWidth = tw + 1.2;
@@ -760,8 +825,8 @@ export class CharacterRenderer {
         ctx.moveTo(shL[0], shL[1] + 0.5);
         ctx.lineTo((hip[0] + hipR[0]) / 2, (hip[1] + hipR[1]) / 2 - 0.5);
         ctx.stroke();
-        // belt
-        ctx.strokeStyle = 'rgba(40,28,18,0.55)';
+        // belt (a smock has none)
+        ctx.strokeStyle = little ? 'rgba(0,0,0,0)' : 'rgba(40,28,18,0.55)';
         ctx.lineWidth = 1.1;
         ctx.beginPath();
         ctx.moveTo(hip[0] - tw * 0.48, hip[1] - 0.7);
@@ -815,7 +880,7 @@ export class CharacterRenderer {
       d: headC[2] + 0.02,
       draw: () => {
         const hr = 5.1 * sc * bs.head;
-        drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], night: opts.night, elderly, lie: lie > 0.5, child: stage === 'child' });
+        drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], night: opts.night, elderly, lie: lie > 0.5, child: stage === 'child' });
       },
     });
 

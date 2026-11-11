@@ -13,6 +13,7 @@ import { isBoundedNightWait } from './night_wait';
 import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
 import { arriveForResidentCare, isResidentCareJourney } from './resident_contact';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
+import { childPace } from './child_pace';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
 import { stageOf } from './people';
@@ -166,7 +167,7 @@ export function faceToward(p: Person, x: number, y: number, rate = TURN_RATE): v
 export function moveSpeed(world: World, p: Person, run = false): number {
   let s = BASE_SPEED;
   const st = stageOf(world, p);
-  s *= st === 'child' ? 0.88 : st === 'youth' ? 0.97 : st === 'elder' ? 0.8 : 1;
+  s *= st === 'child' ? childPace(world, p) : st === 'youth' ? 0.97 : st === 'elder' ? 0.8 : 1; // rules 212 (child_pace.ts): a little one walks slower
   const cap = carryCap(world, p);
   s *= 1 - 0.22 * Math.min(1, weightOf(p.inv) / cap);
   if (p.health < 70) s *= 0.55 + 0.45 * (p.health / 70);

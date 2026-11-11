@@ -115,7 +115,9 @@ describe("the smithy's fuel comes to the kiln (rules version 10)", () => {
     // smithy's fuel wants itself stocked. What the version does not change (rules version 9 or nothing) is pinned by the
     // continuation reference, not by this test.
     const w = createWorld(freshRunSettings(parseRunRules('rich'), 'normal', 'meadow', { immigration: false }));
-    (w.settings as { rulesVersion?: number }).rulesVersion = CURRENT_RULES_VERSION;
+    // Pinned to rules 211: from rules 212 (child_pace.ts) a little one walks slower, which moves this meadow world's whole timeline,
+    // and its first charcoal falls outside the thirty-day window. The charcoal chain checked here is unchanged by that rule.
+    (w.settings as { rulesVersion?: number }).rulesVersion = Math.min(CURRENT_RULES_VERSION, 211);
     const home = w.buildings.find((b) => b.type === 'hut' || b.type === 'lean_to') ?? w.buildings[0];
     const hx = home?.x ?? 60, hy = home?.y ?? 60;
     const kiln = createBuilding(w, 'kiln', hx + 3, hy + 5, 0);
