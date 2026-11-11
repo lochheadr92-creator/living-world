@@ -1,0 +1,127 @@
+Version comparison: rules 212 against rules 213; 12 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, river); normal profile, 25 days; arms per version: control, nudge:1, nudge:2.
+Arms left out because the other run does not carry them or --arms did not name them: earlier run [rich-no-little-pace], later run [rich-no-three-ages, rich-no-ages-little, rich-no-ages-shown, rich-no-ages-bounded, rich-no-ages-practice].
+Noise floor (sd of one arm against the mean of the other arms of its own run): workplaces ±0.8   solidHomes ±1.4   buildings ±3.6   plots ±4.1   people ±3.8   deaths ±3.1   homeless ±1.1   belowCritical ±1.9   meanHunger ±7.2   firstYardDay ±4.4   firstHallDay ±0.0   meanMood ±7.1   lowMood ±3.2   tools ±9.5   meanCondition ±6.5   projectsAdopted ±10.3   projectsDone ±10.3   projectAsks ±1.5   askUnitsDelivered ±1.2   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±8.8   prepSeason ±2.3   prepHardship ±8.9   prepDone ±2.9   prepDropped ±8.6   prepUnits ±76.0   prepDays ±2.6   hungerExposure ±0.0   homeFoodPerPerson ±0.3   storeFoodPerPerson ±0.5   spears ±2.3   armedAtEnd ±2.4   defenceOffered ±12.2   defenceSetOut ±4.9   defenceTried ±3.1   defenceDroveOff ±1.3   defenceFailed ±2.2   defenceLeftOnItsOwn ±2.2   wolvesWary ±0.0   bitesTaken ±6.0   chats ±26.3   familyTime ±13.2   childPlay ±19.1   foragingPractice ±12.6   coaching ±2.0   otherTalk ±87.5   mealsSat ±0.7   visits ±8.4   spareTime ±13.7   lifeShare ±0.0   survivalShare ±0.0   workShare ±0.0   sleepShare ±0.0   lifeShareChild ±0.0   lifeShareAdult ±0.0   lifeShareElder ±0.0   deathsHunger ±1.2   deathsThirst ±0.3   deathsExposure ±1.4   thirstExposure ±0.0   coldExposure ±0.0   hungryShare ±0.0   thirstyShare ±0.0   fedWindowShare ±0.0   approachesFailed ±84.2   approachFailShare ±0.0   tradeTalk ±3.8   marketsCalled ±0.0   apprenticesAtEnd ±0.4   fireOuts ±4.3   fireFeeds ±15.7   yardJobs ±7.1   sharedYardsAtEnd ±0.5   householdsWithoutSolidHome ±1.2   homeSitesOpen ±1.2   sitesAbandoned ±2.2   grownWithBasket ±2.6   basketShare ±0.1   basketRoomTrips ±18.9   rationTrips ±48.7   materialsHomeTrips ±4.6   mealsFromPack ±53.7   mealsFromStore ±25.7   siteDeliveries ±18.6   workplaceJobs ±10.2   guestJobs ±3.4   cartsAtEnd ±0.0   lessonsForage ±10.9   lessonsFish ±4.2   lessonsFarm ±1.7   lessonsByChild ±3.8   lessonRefusals ±2.7   childForage ±0.1   childFish ±0.0   childFarm ±0.0   gamesGuess ±4.3   gamesChase ±4.3   gamesHide ±4.5   gamesHouse ±3.9   gameRefusals ±7.7   soloStones ±6.5   soloBugs ±5.4   soloSticks ±7.3   retainedSharedCompleted ±0.1   retainedSharedFailed ±0.6   retainedRelocationsSettled ±0.0   retainedRelocationsFailed ±0.7   retainedExchangePairs ±0.0   retainedExchangeReceipts ±0.0   alignedResidentsAtEnd ±0.0   factionsAtEnd ±0.0   charcoalHoldersAtEnd ±1.2   taughtCharcoalAtEnd ±0.6   supperHoldersAtEnd ±0.0   familySupperAtEnd ±0.0   secondTransmissionAtEnd ±0.0   newbornSupperAtEnd ±0.0   townsWithRepeatedProduction ±0.0   townProductionDistance ±0.0
+
+metric                            212      213    diff   95% interval    up/down  verdict
+workplaces                        4.1      3.8    -0.3   [-0.6, -0.1]        1/7  systematic, within the noise floor
+solidHomes                       11.7     10.6    -1.1   [-1.6, -0.6]       1/10  systematic, within the noise floor
+buildings                        33.5     30.1    -3.4   [-4.6, -2.3]       0/12  systematic, within the noise floor
+plots                            28.8     25.8    -3.1   [-4.8, -1.4]       2/10  systematic, within the noise floor
+people                           30.4     28.0    -2.4   [-3.4, -1.4]       1/11  systematic, within the noise floor
+deaths                            2.3      2.9    +0.7   [-0.8, +2.0]        8/3  not distinguishable from chance
+homeless                          0.2      0.9    +0.7   [+0.3, +1.1]        8/1  systematic, within the noise floor
+belowCritical                     1.4      1.6    +0.1   [-0.5, +0.7]        5/2  not distinguishable from chance
+meanHunger                       53.2     49.7    -3.5   [-6.5, 0]          2/10  not distinguishable from chance
+firstYardDay                      8.6     11.2    +2.6   [+1.7, +3.5]       12/0  systematic, within the noise floor
+firstHallDay                     25.0     25.0       0   [0, 0]              0/0  not distinguishable from chance
+meanMood                        -11.9    -15.5    -3.6   [-6.3, -0.9]       2/10  systematic, within the noise floor
+lowMood                           4.0      5.0    +1.1   [-0.2, +2.3]        8/3  not distinguishable from chance
+tools                            54.6     45.1    -9.4   [-12.8, -5.0]      1/11  systematic, within the noise floor
+meanCondition                    54.1     52.5    -1.6   [-3.9, +0.5]        5/7  not distinguishable from chance
+projectsAdopted                 170.8    163.3    -7.5   [-12.5, -2.9]       3/9  systematic, within the noise floor
+projectsDone                     68.3     59.4    -8.8   [-12.7, -4.6]      1/11  systematic, within the noise floor
+projectAsks                       1.4      1.3    -0.1   [-1.0, +0.6]        6/6  not distinguishable from chance
+askUnitsDelivered                 0.8      1.0    +0.2   [-0.3, +0.6]        7/3  not distinguishable from chance
+specialisation                    0.5      0.5       0   [0, 0]             11/1  systematic, within the noise floor
+topKindShare                      0.6      0.6       0   [0, 0]              5/7  not distinguishable from chance
+prepAdopted                     135.4    129.4    -5.9   [-9.2, -2.4]       1/11  systematic, within the noise floor
+prepSeason                        3.0      2.3    -0.7   [-1.3, -0.1]        3/8  systematic, within the noise floor
+prepHardship                    132.4    127.1    -5.2   [-8.5, -1.6]       2/10  systematic, within the noise floor
+prepDone                          9.1      7.4    -1.7   [-2.4, -0.9]       1/10  systematic, within the noise floor
+prepDropped                     115.1    112.5    -2.6   [-6.4, +1.8]        3/8  not distinguishable from chance
+prepUnits                       514.0    477.6   -36.4   [-53.5, -14.9]     1/11  systematic, within the noise floor
+prepDays                         23.6     23.7    +0.1   [-1.1, +1.3]        6/6  not distinguishable from chance
+hungerExposure                    0.0      0.0       0   [0, 0]             11/1  larger than chance
+homeFoodPerPerson                 0.4      0.3    -0.1   [-0.3, 0]           5/7  not distinguishable from chance
+storeFoodPerPerson                0.6      0.4    -0.2   [-0.4, 0]           4/8  not distinguishable from chance
+spears                            5.6      3.6    -2.0   [-2.9, -1.3]       0/12  systematic, within the noise floor
+armedAtEnd                        5.5      3.4    -2.1   [-3.1, -1.3]       0/12  systematic, within the noise floor
+defenceOffered                   15.0      8.6    -6.4   [-13.2, -0.7]      1/11  systematic, within the noise floor
+defenceSetOut                     5.8      3.1    -2.8   [-5.8, -0.6]       1/10  systematic, within the noise floor
+defenceTried                      2.2      1.3    -0.9   [-2.1, 0]           2/7  not distinguishable from chance
+defenceDroveOff                   0.8      0.7    -0.1   [-0.6, +0.4]        4/6  not distinguishable from chance
+defenceFailed                     1.4      0.6    -0.8   [-1.5, -0.2]        2/8  systematic, within the noise floor
+defenceLeftOnItsOwn               3.2      1.3    -1.8   [-3.5, -0.4]       1/10  systematic, within the noise floor
+wolvesWary                        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+bitesTaken                       16.7     16.9    +0.3   [-2.2, +2.6]        6/6  not distinguishable from chance
+chats                           114.4    104.2   -10.2   [-17.1, -2.7]       3/9  systematic, within the noise floor
+familyTime                       68.7     81.7   +13.0   [+6.5, +20.1]      11/1  systematic, within the noise floor
+childPlay                       102.7    123.7   +21.0   [+11.0, +33.4]     10/2  larger than chance
+foragingPractice                104.2    112.1    +7.9   [+0.6, +15.2]       9/3  systematic, within the noise floor
+coaching                          2.7      2.0    -0.7   [-1.2, -0.2]        1/8  systematic, within the noise floor
+otherTalk                       553.8    562.9    +9.2   [-19.9, +36.9]      7/5  not distinguishable from chance
+mealsSat                          0.6      0.7    +0.2   [-0.1, +0.4]        3/1  not distinguishable from chance
+visits                           14.7     32.7   +18.0   [+13.0, +22.6]     11/0  larger than chance
+spareTime                         7.1     69.6   +62.6   [+52.9, +72.2]     12/0  larger than chance
+lifeShare                         0.2      0.2       0   [0, 0]             12/0  larger than chance
+survivalShare                     0.3      0.3       0   [0, 0]              3/9  systematic, within the noise floor
+workShare                         0.2      0.1       0   [0, 0]             1/11  systematic, within the noise floor
+sleepShare                        0.4      0.4       0   [0, 0]              4/8  not distinguishable from chance
+lifeShareChild                    0.3      0.4    +0.1   [+0.1, +0.1]       12/0  larger than chance
+lifeShareAdult                    0.1      0.1       0   [0, 0]              6/6  not distinguishable from chance
+lifeShareElder                    0.1      0.1       0   [0, 0]             2/10  systematic, within the noise floor
+deathsHunger                      0.4      1.1    +0.6   [+0.1, +1.2]        5/1  systematic, within the noise floor
+deathsThirst                      0.0      0.1    +0.1   [0, +0.2]           3/0  not distinguishable from chance
+deathsExposure                    0.7      0.6    -0.1   [-1.1, +0.5]        6/1  not distinguishable from chance
+thirstExposure                    0.0      0.0       0   [0, 0]              7/3  not distinguishable from chance
+coldExposure                      0.0      0.0       0   [0, 0]              9/3  not distinguishable from chance
+hungryShare                       0.6      0.7    +0.1   [+0.1, +0.1]       12/0  larger than chance
+thirstyShare                      0.4      0.4       0   [0, 0]              8/4  systematic, within the noise floor
+fedWindowShare                    0.2      0.1       0   [0, 0]             0/12  larger than chance
+approachesFailed                853.3    899.5   +46.2   [+14.8, +78.2]     10/2  systematic, within the noise floor
+approachFailShare                 0.5      0.5       0   [0, 0]              8/4  not distinguishable from chance
+tradeTalk                         4.3      2.6    -1.7   [-3.5, 0]           3/8  not distinguishable from chance
+marketsCalled                     3.0      3.0       0   [0, 0]              0/0  not distinguishable from chance
+apprenticesAtEnd                  0.1      0.1    -0.1   [-0.2, 0]           0/3  not distinguishable from chance
+fireOuts                         22.3     23.6    +1.3   [+0.2, +2.5]        8/4  systematic, within the noise floor
+fireFeeds                        93.7     77.0   -16.7   [-23.9, -10.3]     0/12  larger than chance
+yardJobs                         16.0     10.5    -5.5   [-8.2, -2.3]       1/11  systematic, within the noise floor
+sharedYardsAtEnd                  0.8      0.8       0   [-0.2, +0.2]        3/4  not distinguishable from chance
+householdsWithoutSolidHome        1.1      1.4    +0.4   [-0.1, +0.8]        7/3  not distinguishable from chance
+homeSitesOpen                     1.2      1.5    +0.3   [-0.2, +0.8]        7/4  not distinguishable from chance
+sitesAbandoned                    2.6      3.4    +0.8   [0, +1.7]           6/4  not distinguishable from chance
+grownWithBasket                  18.6     17.6    -1.0   [-2.2, +0.3]        4/8  not distinguishable from chance
+basketShare                       0.9      0.9       0   [0, 0]              6/5  not distinguishable from chance
+basketRoomTrips                  30.9     26.7    -4.3   [-8.8, +0.3]        4/8  not distinguishable from chance
+rationTrips                     334.9    289.4   -45.5   [-62.6, -29.1]     1/11  systematic, within the noise floor
+materialsHomeTrips               13.8      9.4    -4.4   [-6.6, -1.9]       2/10  systematic, within the noise floor
+mealsFromPack                   888.6    900.6   +12.1   [-12.1, +35.1]      7/5  not distinguishable from chance
+mealsFromStore                  232.9    249.4   +16.5   [+5.4, +26.4]      10/2  systematic, within the noise floor
+siteDeliveries                  191.5    178.3   -13.2   [-18.4, -7.9]      1/11  systematic, within the noise floor
+workplaceJobs                    24.4     19.2    -5.3   [-8.9, -1.0]       1/11  systematic, within the noise floor
+guestJobs                         1.7      2.1    +0.4   [-1.4, +2.4]        6/5  not distinguishable from chance
+cartsAtEnd                        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+lessonsForage                    71.8     85.7   +13.9   [+6.7, +22.0]      11/1  larger than chance
+lessonsFish                      14.4      9.5    -4.9   [-8.0, -2.6]       0/12  larger than chance
+lessonsFarm                       3.1      1.5    -1.6   [-2.4, -0.9]       1/10  systematic, within the noise floor
+lessonsByChild                    9.1      8.4    -0.8   [-3.3, +1.6]        6/6  not distinguishable from chance
+lessonRefusals                    5.9      5.4    -0.5   [-1.3, +0.3]        4/6  not distinguishable from chance
+childForage                       0.8      0.7    -0.1   [-0.1, -0.1]       0/12  larger than chance
+childFish                         0.5      0.5       0   [0, 0]              4/8  not distinguishable from chance
+childFarm                         0.4      0.4       0   [0, 0]              6/6  not distinguishable from chance
+gamesGuess                       21.3     23.6    +2.2   [-0.1, +4.8]        7/5  not distinguishable from chance
+gamesChase                       20.3     24.2    +3.9   [+1.4, +6.9]       10/2  systematic, within the noise floor
+gamesHide                        20.4     23.4    +3.0   [+1.1, +5.3]        9/2  systematic, within the noise floor
+gamesHouse                       21.1     23.1    +1.9   [+0.2, +3.9]        9/3  systematic, within the noise floor
+gameRefusals                     17.4     27.9   +10.5   [+6.7, +14.9]      11/1  larger than chance
+soloStones                        5.9     24.7   +18.8   [+13.4, +23.9]     12/0  larger than chance
+soloBugs                          5.7     26.8   +21.1   [+16.6, +25.9]     12/0  larger than chance
+soloSticks                        6.0     37.8   +31.7   [+25.1, +38.5]     12/0  larger than chance
+retainedSharedCompleted           1.0      1.0       0   [-0.1, 0]           0/1  not distinguishable from chance
+retainedSharedFailed              0.2      0.2    +0.1   [-0.2, +0.3]        3/3  not distinguishable from chance
+retainedRelocationsSettled        0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedRelocationsFailed         0.3      0.2    -0.1   [-0.3, +0.1]        3/4  not distinguishable from chance
+retainedExchangePairs             0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+retainedExchangeReceipts          0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+alignedResidentsAtEnd             0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+factionsAtEnd                     0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+charcoalHoldersAtEnd              7.0      6.4    -0.6   [-1.2, -0.1]        3/6  systematic, within the noise floor
+taughtCharcoalAtEnd               0.4      0.3    -0.1   [-0.3, 0]           1/4  not distinguishable from chance
+supperHoldersAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+familySupperAtEnd                 0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+secondTransmissionAtEnd           0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+newbornSupperAtEnd                0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+townsWithRepeatedProduction       1.0      1.0       0   [0, 0]              0/0  not distinguishable from chance
+townProductionDistance            0.0      0.0       0   [0, 0]              0/0  not distinguishable from chance
+
+In words, beyond chance: hungerExposure 0.0 -> 0.0 (0, higher in 11 and lower in 1 of 12); childPlay 102.7 -> 123.7 (+21.0, higher in 10 and lower in 2 of 12); visits 14.7 -> 32.7 (+18.0, higher in 11 and lower in 0 of 12); spareTime 7.1 -> 69.6 (+62.6, higher in 12 and lower in 0 of 12); lifeShare 0.2 -> 0.2 (0, higher in 12 and lower in 0 of 12); lifeShareChild 0.3 -> 0.4 (+0.1, higher in 12 and lower in 0 of 12); hungryShare 0.6 -> 0.7 (+0.1, higher in 12 and lower in 0 of 12); fedWindowShare 0.2 -> 0.1 (0, higher in 0 and lower in 12 of 12); fireFeeds 93.7 -> 77.0 (-16.7, higher in 0 and lower in 12 of 12); lessonsForage 71.8 -> 85.7 (+13.9, higher in 11 and lower in 1 of 12); lessonsFish 14.4 -> 9.5 (-4.9, higher in 0 and lower in 12 of 12); childForage 0.8 -> 0.7 (-0.1, higher in 0 and lower in 12 of 12); gameRefusals 17.4 -> 27.9 (+10.5, higher in 11 and lower in 1 of 12); soloStones 5.9 -> 24.7 (+18.8, higher in 12 and lower in 0 of 12); soloBugs 5.7 -> 26.8 (+21.1, higher in 12 and lower in 0 of 12); soloSticks 6.0 -> 37.8 (+31.7, higher in 12 and lower in 0 of 12).

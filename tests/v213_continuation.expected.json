@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "464188415867a185cd3d94eaa365a3f77d9e69e2",
+    "rules": 213,
+    "content": "df3a6b14e4981d912f4f5d51e2224d93cca2f21c58906d181ce872e0a683db72",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until the world holds a child recorded as shown a task or resting from gathering (rules 213, three_ages.ts), then 120 more after a save and load."
+  },
+  "saved": "42f0d54e53f4d2e13d954c2408585fbd090dc5912a92901e7d5c2d4c12886f93",
+  "continued": "55225b2ebb947d9fc4d1827a3c267733a8378d2ef04d24f24451d44e86922ed6",
+  "tick": 300
+}

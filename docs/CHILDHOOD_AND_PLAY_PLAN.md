@@ -332,3 +332,57 @@ Rules 211 against 212 on the three shared arms (`scripts/lab_versions.ts`): noth
 What that supports: the slower pace is seen (a little one falls behind the people it walks with) and costs nothing the lab can find.
 The leanings inside the noise floor (a little fuller and better in mood, a little less company and spare time) are not attributed.
 No benefit or harm is claimed.
+
+## 10. Phase 3 result: the three ages (rules 213)
+
+Owner instruction, 12 November 2026: "Start phase 3". `src/sim/three_ages.ts`, four separately switched parts, all on food gathering
+(berries, fruit, wild grain, fish); wood, stone, farm work and building were already closed to children.
+
+| part | what changes | lab removal |
+|---|---|---|
+| little | A little one (under seven) gathers no food; the grown-ups bring it. Eating, drinking and asking are not work. | `rich-no-ages-little` |
+| shown | A child of seven to eleven gathers only a kind of food somebody has shown them. A completed practice records the task in `p.shown` (a small saved list, from 213 only, checked on load and in the fingerprint). | `rich-no-ages-shown` |
+| bounded | After a stretch of gathering, a child of seven to eleven rests from it six times as long (cooldown `childwork`). | `rich-no-ages-bounded` |
+| practice | What gathering teaches is scaled by age: 0.4 for a little one, 0.5 at seven rising to 1 at twelve. Lessons are not scaled. | `rich-no-ages-practice` |
+
+A child whose hunger is critical is held by none of them. `rich-no-three-ages` removes all four and equals rules 212. Contract tests
+`tests/three_ages.test.ts` (10, each with the rules-212 contrast). Immutable pin `tests/v213_continuation.*` (Normal gen-2, arrivals on;
+a child shown a task or resting from gathering by tick 300; then 120 ticks after a save and load), recorded from a clean checkout of
+`46418841`. In 243 related test files no new failure.
+
+Lab: clean checkout of `46418841` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges, all four parts
+removed and each removed alone, 84 arms in 25 minutes 44 seconds. Compared with the rules-212 lab already recorded. Evidence:
+`review_evidence/childhood-20261111/r213/`, `versions-212-213.txt`, `run213.txt`.
+
+| measure, a settlement in 25 days | 212 | 213 | verdict |
+|---|---|---|---|
+| food gathering finished by a little one (all removed / 213) | 166.9 | 20.2 | larger than chance; the `little` part |
+| hours a little one spent gathering | 495 | 93 | larger than chance |
+| food gathering finished by a child of 7 to 11 | 213.3 | 83.4 | larger than chance; `bounded` and `shown` |
+| hours a child spent gathering | 456 | 247 | larger than chance; the `bounded` part |
+| food gathering finished by everyone twelve and over | 988.7 | 1,085.3 | larger than chance (they gather a tenth more) |
+| under-twelves' share of food gathered | about 0.2 | about 0.1 | larger than chance |
+| child play | 102.7 | 123.7 | larger than chance |
+| spare-time outings | 7.1 | 69.6 | larger than chance |
+| plays alone: stones / bugs / sticks | 5.9 / 5.7 / 6.0 | 24.7 / 26.8 / 37.8 | larger than chance |
+| visits | 14.7 | 32.7 | larger than chance |
+| share of waking time hungry, everyone | 0.6 | 0.7 | larger than chance (higher in 12 of 12) |
+| the same, little ones / children / twelve and over (all removed against 213) | 0.5 / 0.4 / 0.6 | 0.7 / 0.7 / 0.7 | larger than chance |
+| deaths from hunger | 0.4 | 1.1 | systematic, within the noise floor |
+| deaths | 2.3 | 2.9 | not distinguishable from chance |
+| people at day 25 | 30.4 | 28.0 | systematic, within the noise floor |
+| tools in hand / projects done | 54.6 / 68.3 | 45.1 / 59.4 | systematic, within the noise floor |
+| children's foraging skill at day 25 | 0.8 | 0.7 | larger than chance |
+
+What that supports:
+
+- **The three ages happen.** Little ones gather about an eighth as often as before and children about two-fifths, and the time goes to
+  play: child play up a fifth, plays alone about four times as many, spare-time outings and visits up sharply. All beyond chance.
+- **Grown people make up only part of it.** They gather about a tenth more, but the settlement is hungry for more of the day: 0.7 of
+  waking time against 0.6, beyond chance in every seed, and most of all for the children themselves (little ones 0.5 to 0.7, children
+  0.4 to 0.7). Hunger deaths lean up (0.4 to 1.1) and people, tools and projects lean down, inside the noise floor. This is the cost the
+  plan named in section 3; who feeds a little one was left unchanged on purpose and is now measured: not enough.
+- **Which part does what.** `little` alone carries the little ones' gathering and their hunger; `bounded` carries most of the
+  children's; `shown` and `practice` move nothing beyond chance by themselves.
+- **No benefit to survival is claimed.** Whether to keep the parts as they are, phase them in (the plan's section 3 suggested the cap and
+  "shown first", then measuring, before little ones stop), or add a rule for feeding a little one first, is the owner's decision.
