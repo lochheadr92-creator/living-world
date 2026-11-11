@@ -1,3 +1,4 @@
+import { eveningFireOptions } from './evening_fire';
 import { toyOptions } from './toys';
 import { hungerToActOn, providePull } from './child_feeding';
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
@@ -2052,6 +2053,8 @@ function optIdle(ctx: Ctx): void {
     soloPlayOptions(ctx);
     // rules 215 (toys.ts): a toy carved for a child, handed over, played with
     toyOptions(ctx);
+    // rules 216 (evening_fire.ts): an evening by the fire, in company
+    eveningFireOptions(ctx);
     return;
   }
   const hub = nearestHub(world, p.x, p.y);

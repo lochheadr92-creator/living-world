@@ -1,3 +1,4 @@
+import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
@@ -110,15 +111,19 @@ registerHandler('wander', {
     if (isSoloPlay(a.data.play)) a.duration = SOLO_TICKS;
     // rules 215 (toys.ts): a child playing with a toy stays at it for a set while
     if (isToyPlay(a.data.play)) a.duration = TOY_TICKS;
+    // rules 216 (evening_fire.ts): an evening by the fire lasts a set while
+    if (isEveningSit(a)) a.duration = FIRE_TICKS;
     // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
     if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
   work(world, p, a): WorkResult {
     a.progress++;
+    if (isEveningSit(a)) eveningFireWork(world, p, a); // rules 216: halfway through, a story may be told
     return a.progress >= a.duration ? 'done' : 'continue';
   },
   onEnd(world, p, a, outcome) {
     if (outcome === 'success' && isSoloPlay(a.data.play)) finishSoloPlay(world, p, a.data.play);
+    if (outcome === 'success' && isEveningSit(a)) finishEveningSit(world, p, a);
     if (outcome === 'success' && isToyPlay(a.data.play)) finishToyPlay(world, p);
   },
 });

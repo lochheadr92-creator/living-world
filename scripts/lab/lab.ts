@@ -1,3 +1,4 @@
+import { EVENING_PARTS, eveningPartOn, setEvening } from '../../src/sim/evening_fire';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -256,6 +257,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
   if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
   if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  if (kind === 'rich-no-evening') return { spec: label, summary: 'nobody sits by the fire of an evening and no story is told there, as before rules 216; no effect below rules 216', install() { const was = EVENING_PARTS.map((k) => eveningPartOn(k)); setEvening(false); return () => EVENING_PARTS.forEach((k, i) => setEvening(was[i], k)); } };
+  if (kind === 'rich-no-evening-fire') return { spec: label, summary: 'nobody sits by the fire of an evening (so no story either), as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('fire'); setEvening(false, 'fire'); return () => setEvening(was, 'fire'); } };
+  if (kind === 'rich-no-evening-story') return { spec: label, summary: 'people sit by the fire but no story is told, as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('story'); setEvening(false, 'story'); return () => setEvening(was, 'story'); } };
   if (kind === 'rich-no-toys') return { spec: label, summary: 'nobody makes, gives or plays with a toy, as before rules 215; no effect below rules 215', install() { const was = TOY_PARTS.map((k) => toyPartOn(k)); setToys(false); return () => TOY_PARTS.forEach((k, i) => setToys(was[i], k)); } };
   if (kind === 'rich-no-toys-make') return { spec: label, summary: 'nobody carves a toy, as before rules 215; no effect below rules 215', install() { const was = toyPartOn('make'); setToys(false, 'make'); return () => setToys(was, 'make'); } };
   if (kind === 'rich-no-toys-give') return { spec: label, summary: 'a toy is not handed to a child, as before rules 215; no effect below rules 215', install() { const was = toyPartOn('give'); setToys(false, 'give'); return () => setToys(was, 'give'); } };
@@ -747,6 +751,9 @@ export const METRICS = [
   // what rules 215 is for: toys carved, toys handed to a child, plays with a toy finished, toys in the world at the end and the
   // under-twelves holding one
   'toysMade', 'toysGiven', 'toyPlays', 'toysAtEnd', 'childrenWithToy',
+  // what rules 216 is for: evenings by the fire finished, by everyone and by elders; stories told there, and those who heard one,
+  // all and children
+  'fireSits', 'fireSitsElder', 'storiesTold', 'storyHearers', 'storyHearersChild',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -940,6 +947,7 @@ export class LifeTally {
   get gameRefusals(): number { return this.gameCount((x) => x.outcome === 'declined' && x.reason.startsWith('I have already had that time today')); }
   solo: Record<string, number> = { stones: 0, bugs: 0, sticks: 0 };
   toysMade = 0; toysGiven = 0;
+  fireSits = 0; fireSitsElder = 0; storiesTold = 0; storyHearers = 0; storyHearersChild = 0;
   get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
   get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
   get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
@@ -984,6 +992,7 @@ export class LifeTally {
     if (a.kind === 'attend_meal' || a.kind === 'host_meal') this.mealsSat++;
     else if (a.kind === 'visit') this.visits++;
     else if (a.kind === 'wander' && typeof a.data.play === 'string') this.solo[a.data.play] = (this.solo[a.data.play] ?? 0) + 1;
+    else if (a.kind === 'wander' && a.data.evening === 'fire') { this.fireSits++; if (stageOf(w, p) === 'elder') this.fireSitsElder++; }
     else if (a.kind === 'wander') this.spareTime++;
   }
   tick(w: World): void {
@@ -1009,6 +1018,10 @@ export class LifeTally {
     // events carry rising ids and the feed is trimmed from the front, so the new ones are at the end
     for (let i = w.events.length - 1; i >= 0 && w.events[i].id > this.lastEvent; i--) {
       if (w.events[i].text === 'The fire has gone out.') this.fireOuts++;
+      if (w.events[i].text.includes(' told a story at the fire: ')) {
+        this.storiesTold++;
+        for (const id of w.events[i].ids.slice(1)) { this.storyHearers++; const q = w.byId.get(id); if (q && q.ent === 'person' && stageOf(w, q) === 'child') this.storyHearersChild++; }
+      }
       else if (w.events[i].text.includes('site was abandoned')) this.sitesAbandoned++;
     }
     if (w.events.length) this.lastEvent = Math.max(this.lastEvent, w.events[w.events.length - 1].id);
@@ -1205,6 +1218,11 @@ export function outcomeOf(
       toyPlays: life.solo.toy ?? 0,
       toysAtEnd: w.tools.filter((t) => t.kind === 'toy').length,
       childrenWithToy: alive.filter((p) => stageOf(w, p) === 'child' && (p.inv.toy ?? 0) > 0).length,
+      fireSits: life.fireSits,
+      fireSitsElder: life.fireSitsElder,
+      storiesTold: life.storiesTold,
+      storyHearers: life.storyHearers,
+      storyHearersChild: life.storyHearersChild,
       gathersLittle: life.gathers.little,
       gathersChild: life.gathers.child,
       gathersOlder: life.gathers.older,
