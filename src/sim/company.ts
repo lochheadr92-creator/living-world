@@ -1,4 +1,4 @@
-// Rules 200: room for company. Four separately switched parts, after the rules-162 pattern (shared_stone.ts), from the mechanism
+// Rules 200: room for company. Five separately switched parts, after the rules-162 pattern (shared_stone.ts), from the mechanism
 // census of 11 November 2026 (docs/MECHANISM_CENSUS_20261111.md) and the plan drafted from it (docs/LIFE_PLAN_20261111.md).
 // Every part is a gate, never a score: what happens more often must happen on its own once the gate allows it.
 //
@@ -12,7 +12,12 @@
 //           13 to 18 percent of their waking time. At 200 it is also open when none of the three drives is pressing at all (hunger at
 //           or above 62, thirst 66, energy 46: DRIVE_BANDS), so the old window is kept and widened, never narrowed.
 // meal      The invitation to eat together (meals.ts mealOptions) was made only between 0.50 and 0.68 of the day. At 200 the window
-//           opens at 0.35. The table is still laid from food in the host's pack, so nothing else about the meal moves.
+//           opens at 0.35.
+// larder    The invitation wanted three units of food in the host's pack beyond what they keep back (two, and two more for each
+//           dependant), and the table is laid from the pack. At 200 the food the host believes their own home store holds counts
+//           toward that (a glance since rules 169: one for each kind seen there), and a host whose pack would not lay the table for
+//           the guests who have accepted is offered the walk home to take the food first. The table is still laid from the pack; if
+//           the store turns out empty the meal is called off as it always was.
 // market    The market (occasions.ts occasionsTick) was called only where a sound hall stood, and no hall stood in any of 36 measured
 //           arms. At 200, with no hall, it is called at the fire, as every other occasion already is, once four households live here
 //           and the day is the sixth or later.
@@ -21,10 +26,10 @@
 import { runsRulesVersion } from './rulesversion';
 import type { ConvPurpose, World } from './types';
 
-const on = { approach: true, learning: true, meal: true, market: true };
+const on = { approach: true, learning: true, meal: true, larder: true, market: true };
 export type CompanyPart = keyof typeof on;
 export const COMPANY_PARTS = Object.keys(on) as CompanyPart[];
-/** Lab switches (never saved or hashed): one part, or with no part every one of the four. */
+/** Lab switches (never saved or hashed): one part, or with no part every one of the five. */
 export const companyPartOn = (part: CompanyPart): boolean => on[part];
 export function setCompany(enabled: boolean, part?: CompanyPart): void {
   if (part) on[part] = enabled;
@@ -34,6 +39,9 @@ const rich200 = (w: World): boolean => w.settings.dynamics === 'rich' && runsRul
 export const hasApproachRules = (w: World): boolean => on.approach && rich200(w);
 export const hasLearningGate = (w: World): boolean => on.learning && rich200(w);
 export const hasMealWindow = (w: World): boolean => on.meal && rich200(w);
+export const hasMealLarder = (w: World): boolean => on.larder && rich200(w);
+/** The weight of going home for the meal's food: just above laying the table (60), which would fail without it. */
+export const LARDER_FETCH_WEIGHT = 62;
 export const hasMarketFire = (w: World): boolean => on.market && rich200(w);
 
 /** The asks that, at 200, are as hard to put off as a request for goods. */

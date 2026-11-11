@@ -5,11 +5,12 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { DAY } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
 import { dayFraction } from '../src/sim/environment';
+import { inviteAsk, inviteRespond } from '../src/sim/meals';
 import { callOccasion } from '../src/sim/occasions';
 import { relOf } from '../src/sim/relations';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
 import { makeSource } from '../src/sim/sources';
-import { GATHERING_FUEL, GATHERING_WEIGHT, SWAP_FIRE_PARTS, SWAP_RELIEF_CAP, setSwapAndFire, swapReliefWorth } from '../src/sim/swap_and_fire';
+import { GATHERING_FUEL, GATHERING_WEIGHT, HOST_FIRE_ASK_WEIGHT, SWAP_FIRE_PARTS, SWAP_RELIEF_CAP, setSwapAndFire, swapReliefWorth } from '../src/sim/swap_and_fire';
 import { addPerson, building, done, learn, pin, stage } from './helpers/kit';
 import type { Option } from '../src/sim/optutil';
 
@@ -124,5 +125,47 @@ describe('fire: fed for the gathering', () => {
   it('with the switch off a rules-202 world leaves the fire as at 201', () => {
     setSwapAndFire(false, 'fire');
     expect(fuel(202, { occasion: 'harvest' })).toBeUndefined();
+  });
+
+  /**
+   * Kim has called a meal at a fire she knows at 300 fuel and her friend Lou has accepted; Kim carries bread for the table and, as
+   * staged, either three wood or none.
+   */
+  function hostScene(version: number, wood: number, tag: string) {
+    const s = world(version, 'rich', `host-${wood}-${tag}`);
+    const kim = addPerson(s, 'Kim', 42.5, 46.5, { age: 30, hunger: 98, thirst: 98, energy: 95, inv: wood ? { bread: 4, wood } : { bread: 4 }, traits: { sociability: 1 } });
+    const lou = addPerson(s, 'Lou', 44.5, 46.5, { age: 30, hunger: 95, thirst: 95, energy: 95, traits: { sociability: 1 } });
+    const fire = building(s, 'fire', 44, 44);
+    fire.fuel = 300;
+    const w = done(s);
+    w.tick = tickAt(0.45);
+    w.light = 1; w.weather.rain = 0; w.weather.temp = 18;
+    pin(lou);
+    kim.needs.warmth = 95; kim.needs.safety = 95;
+    relOf(kim, lou.id).affinity = 30; relOf(lou, kim.id).affinity = 100;
+    learn(w, kim, fire, lou);
+    learn(w, lou, fire);
+    const id = inviteAsk(w, kim, lou, { mealPlan: { placeId: fire.id, placeName: 'the fire', x: fire.x + 0.5, y: fire.y + 1.6 } });
+    inviteRespond(w, kim, lou, id);
+    return { w, kim, lou, fire };
+  }
+
+  it('her own called meal is a gathering too: with wood in hand the host feeds the fire at 202 and not at 201', () => {
+    const fed = (f: ReturnType<typeof hostScene>) => generateOptions(f.w, f.kim, true, true).options.find((o) => o.key === `fuel:${f.fire.id}`);
+    expect(fed(hostScene(BEFORE, 3, 'feed'))).toBeUndefined();
+    const o = fed(hostScene(202, 3, 'feed'));
+    expect(o).toBeTruthy();
+    expect(part(o, GATHERING)).toBe(GATHERING_WEIGHT);
+  });
+
+  it('with no wood on her the host may ask a neighbour to keep the fire at 202; not at 201, not with wood in hand, not with the switch off', () => {
+    const asked = (f: ReturnType<typeof hostScene>) => generateOptions(f.w, f.kim, true, true).options.find((o) => o.key === `socialize:${f.lou.id}:request:fire`);
+    expect(asked(hostScene(BEFORE, 0, 'ask'))).toBeUndefined();
+    const o = asked(hostScene(202, 0, 'ask'));
+    expect(o).toBeTruthy();
+    expect(part(o, 'my meal is to be at that fire and I have no wood')).toBe(HOST_FIRE_ASK_WEIGHT);
+    expect(asked(hostScene(202, 3, 'ask'))).toBeUndefined();
+    setSwapAndFire(false, 'fire');
+    expect(asked(hostScene(202, 0, 'ask-off'))).toBeUndefined();
   });
 });

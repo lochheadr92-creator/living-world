@@ -12,7 +12,7 @@
 // their beliefs) and is not already organising an active shared project, the layout is the shared one: the same spot, the same
 // materials, the site without a household, proposed to the township as the first storehouse is. A later yard, laid out by somebody who
 // knows of one, is private as before. Rules 200 and earlier, authored worlds and `setSharedYard(false)` keep the private layout.
-// Not part of this version: a site that has waited provoking an ask (plan item 5), which was stopped at the design stage.
+// The second part of rules 201, a site that has waited provoking the ask for what it lacks, is stalled_ask.ts.
 import { runsRulesVersion } from './rulesversion';
 import { mayShareType } from './shared_projects';
 import type { BuildingType, Person, World } from './types';

@@ -1,4 +1,4 @@
-// Rules 200: room for company, four separately switched parts (src/sim/company.ts). Every situation here is STAGED: it checks a rule,
+// Rules 200: room for company, five separately switched parts (src/sim/company.ts). Every situation here is STAGED: it checks a rule,
 // it is not an example of spontaneous behaviour; the ordinary-world origin is docs/MECHANISM_CENSUS_20261111.md. Each check has the
 // rules-196 contrast (197 to 199 are unused) so the older behaviour is shown to be kept, and each part has its own switch.
 import { afterEach, describe, expect, it } from 'vitest';
@@ -10,6 +10,8 @@ import {
 import { DAY } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
 import { dayFraction } from '../src/sim/environment';
+import { foodUnits } from '../src/sim/economy';
+import { inviteAsk, inviteRespond } from '../src/sim/meals';
 import { occasionsTick } from '../src/sim/occasions';
 import { relOf } from '../src/sim/relations';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
@@ -32,11 +34,11 @@ function tickAt(frac: number): number {
 }
 
 describe('rules 200 is registered', () => {
-  it('is registered and supported (the current version may be later), with four parts; 197 to 199 are not versions', () => {
+  it('is registered and supported (the current version may be later), with five parts; 197 to 199 are not versions', () => {
     expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(200);
     expect(SUPPORTED_RULES_VERSIONS).toContain(200);
     for (const v of [197, 198, 199]) expect(SUPPORTED_RULES_VERSIONS).not.toContain(v);
-    expect(COMPANY_PARTS).toEqual(['approach', 'learning', 'meal', 'market']);
+    expect(COMPANY_PARTS).toEqual(['approach', 'learning', 'meal', 'larder', 'market']);
   });
 });
 
@@ -176,6 +178,72 @@ describe('meal window: when an invitation to eat together may be made', () => {
     expect(invitation(200, 0.6)).toBe(true);
     expect(invitation(BEFORE, 0.4)).toBe(false);
     expect(invitation(200, 0.4)).toBe(true);
+  });
+});
+
+describe('larder: the home store behind an invitation', () => {
+  /**
+   * Fen, sociable and generous, three berries in her pack (one more than she keeps back), a hut of her own holding bread and fish, her
+   * friend Gil beside her and a lit fire she knows, at 0.60 of the day (inside the window at every version). She stands at her own
+   * door: since rules 184 a home's contents are learned from inside or within two tiles of it.
+   */
+  function larderScene(version: number, tag: string, pack = 3) {
+    const s = world(version, 'rich', `larder-${tag}`);
+    const fen = addPerson(s, 'Fen', 40.5, 42.5, { age: 30, hunger: 98, thirst: 98, energy: 95, inv: { berries: pack }, traits: { sociability: 1, generosity: 1 } });
+    const gil = addPerson(s, 'Gil', 42.5, 42.5, { age: 30, hunger: 95, thirst: 95, energy: 95, traits: { sociability: 1 } });
+    const home = building(s, 'hut', 40, 39, fen.hhId, { bread: 4, fish: 3 });
+    s.w.households.find((h) => h.id === fen.hhId)!.homeId = home.id;
+    const fire = building(s, 'fire', 46, 46);
+    fire.fuel = 900;
+    const w = done(s);
+    w.tick = tickAt(0.6);
+    pin(gil);
+    fen.needs.warmth = 95; fen.needs.safety = 95;
+    relOf(fen, gil.id).affinity = 30; relOf(gil, fen.id).affinity = 100;
+    learn(w, fen, fire, home, gil);
+    learn(w, gil, fire);
+    return { w, fen, gil, home, fire };
+  }
+
+  it('three berries in the pack are not enough to invite at 196; at 200 the bread and fish she knows are at home count, and the switch takes that away', () => {
+    const invited = (f: ReturnType<typeof larderScene>) => generateOptions(f.w, f.fen, true, true).options.some((o) => o.key === `socialize:${f.gil.id}:invite`);
+    expect(invited(larderScene(BEFORE, 'invite'))).toBe(false);
+    expect(invited(larderScene(200, 'invite'))).toBe(true);
+    setCompany(false, 'larder');
+    expect(invited(larderScene(200, 'invite-off'))).toBe(false);
+  });
+
+  /** The meal is called and Gil has accepted; since then Fen is down to one berry, so her pack would not lay a table for two. */
+  function called(version: number, tag: string) {
+    const f = larderScene(version, tag);
+    const id = inviteAsk(f.w, f.fen, f.gil, { mealPlan: { placeId: f.fire.id, placeName: 'the fire', x: f.fire.x + 0.5, y: f.fire.y + 1.6 } });
+    inviteRespond(f.w, f.fen, f.gil, id);
+    expect(f.w.meals.some((m) => m.id === id), 'the staged meal exists').toBe(true);
+    f.fen.inv.berries = 1;
+    return f;
+  }
+  const fetch = (f: ReturnType<typeof larderScene>) => generateOptions(f.w, f.fen, true, true).options.find((o) => o.key === `withdraw:${f.home.id}:meal`);
+
+  it('a host whose pack would not lay the table is offered the walk home for the food at 200 and not at 196, and it really moves the food', () => {
+    expect(fetch(called(BEFORE, 'fetch'))).toBeUndefined();
+    const f = called(200, 'fetch');
+    const o = fetch(f);
+    expect(o, 'the staging offers the walk home at 200').toBeTruthy();
+    const before = { pack: foodUnits(f.fen.inv), store: foodUnits(f.home.store.items) };
+    f.fen.cooldowns.pause = 0;
+    startActivity(f.w, f.fen, o!.make!()!);
+    for (let i = 0; i < 400 && f.fen.activity?.kind === 'withdraw'; i++) stepWorld(f.w);
+    expect(f.fen.lastResult?.outcome, JSON.stringify(f.fen.lastResult)).toBe('success');
+    expect(foodUnits(f.fen.inv)).toBeGreaterThanOrEqual(2);
+    expect(foodUnits(f.fen.inv) - before.pack).toBe(before.store - foodUnits(f.home.store.items)); // what left the store is what is in the pack
+  });
+
+  it('a host who carries enough is not sent home, and with the switch off nobody is', () => {
+    const f = called(200, 'enough');
+    f.fen.inv.berries = 3;
+    expect(fetch(f)).toBeUndefined();
+    setCompany(false, 'larder');
+    expect(fetch(called(200, 'fetch-off'))).toBeUndefined();
   });
 });
 

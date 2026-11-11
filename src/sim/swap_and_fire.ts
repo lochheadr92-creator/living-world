@@ -12,7 +12,9 @@
 //       (options_work.ts) is offered in daylight only once the fire is believed below 150 fuel. At 202, when an occasion is open or
 //       due within GATHERING_LEAD ticks at that fire (and, for a funeral, the person knows the death), or the person's own called
 //       meal is to be there, refuelling is offered from GATHERING_FUEL believed and the reason says so, with a fixed weight. Wood in
-//       hand is still required.
+//       hand is still required. And a host whose own called meal is to be at such a fire, with no wood on them, may ask a neighbour
+//       to keep it going: the request, the answer and the promise of responsibilities.ts, which until now only the laid up could make
+//       (optRequest, options_social.ts).
 //
 // Rules 201 and earlier, authored worlds and a part switched off keep the old behaviour. The third thing the plan put in this batch,
 // the remembered-emptiness question, is a measurement, not a rule: scripts/emptiness_probe.ts.
@@ -46,3 +48,5 @@ export const GATHERING_FUEL = 400;
 export const GATHERING_LEAD = 600;
 /** The fixed weight a gathering adds to feeding its fire. */
 export const GATHERING_WEIGHT = 8;
+/** The weight of a host's ask to have the fire kept for their meal (the laid-up ask is 18 and more). */
+export const HOST_FIRE_ASK_WEIGHT = 16;

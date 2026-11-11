@@ -1,5 +1,5 @@
 import {hasBrewing,layMealDrinks,sipMealDrink} from './brewing';
-import { mealWindowOpen } from './company';
+import { LARDER_FETCH_WEIGHT, hasMealLarder, mealWindowOpen } from './company';
 import {takeNutrition} from './nourishment';
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import {hasMealLeftovers} from './meal_leftovers';
@@ -103,10 +103,17 @@ function placeFor(ctx: Ctx): Place | null {
 }
 
 // ───────────────────────── deciding to host ─────────────────────────
+/** Rules 200 (company.ts, part larder): the food this person believes their own home store holds; 0 before 200. */
+function larderFood(ctx: Ctx): number {
+  if (!hasMealLarder(ctx.world) || !ctx.home) return 0;
+  const b = ctx.p.beliefs[ctx.home.id];
+  return b ? foodUnits(b.items ?? {}) : 0;
+}
+
 function spareFood(ctx: Ctx): number {
   const { p } = ctx;
   const keep = 2 + ctx.dependents.length * 2;
-  return Math.max(0, foodUnits(p.inv) - keep);
+  return Math.max(0, foodUnits(p.inv) + larderFood(ctx) - keep);
 }
 
 function hostingWindow(ctx: Ctx): boolean {
@@ -207,7 +214,7 @@ function hostOptions(ctx: Ctx, m: Meal): void {
   const tooLate = world.tick > m.at + 700;
   if (tooLate) return;
   // keep inviting while there is room at the table
-  if (m.status === 'inviting' && m.invited.length < MAX_GUESTS && m.accepted.length + 1 < Math.min(MAX_GUESTS + 1, foodUnits(p.inv)) && world.tick < m.at - 240) {
+  if (m.status === 'inviting' && m.invited.length < MAX_GUESTS && m.accepted.length + 1 < Math.min(MAX_GUESTS + 1, foodUnits(p.inv) + larderFood(ctx)) && world.tick < m.at - 240) {
     for (const s of ctx.seenPersons) {
       if (s.asleep || s.busyTalking || s.child) continue;
       const q = personById(world, s.id);
@@ -253,6 +260,49 @@ function hostOptions(ctx: Ctx, m: Meal): void {
           }),
       });
       break;
+    }
+  }
+  // rules 200 (company.ts, part larder): a host whose pack would not lay the table for those who accepted takes the food from home first
+  const accepted = hasMeetingKnowledge(world) ? m.heard?.[p.id]?.accepted.length ?? 0 : m.accepted.length;
+  const short = accepted + 1 - foodUnits(p.inv);
+  const larder = hasMealLarder(world) && ctx.home ? p.beliefs[ctx.home.id] : undefined;
+  const tableLaid = hasMeetingKnowledge(world) ? !!m.heard?.[p.id]?.sawTable : m.status !== 'inviting'; // a host's own copy of the meal stays 'inviting' once laid
+  if (larder && m.status === 'inviting' && !tableLaid && accepted > 0 && short > 0) {
+    const kind = (Object.keys(NUTRITION) as FoodKind[]).find((k) => (larder.items?.[k] ?? 0) > 0);
+    if (kind) {
+      const e = eta(ctx, larder.x, larder.y);
+      const sc = new Scorer().add('guests are coming and the food is at home', LARDER_FETCH_WEIGHT).add('walking', -pen(e) * 0.3);
+      addOption(ctx, {
+        kind: 'withdraw',
+        label: 'Take food for the meal from the home store',
+        goal: 'to lay the table for the guests I invited',
+        need: null,
+        util: sc.total,
+        parts: sc.parts,
+        eta: e + 20,
+        key: `withdraw:${larder.id}:meal`,
+        targetId: larder.id,
+        tag: 'meal',
+        make: () => {
+          const spot = spotNear(world, p, larder);
+          if (!spot) return null;
+          return newActivity(world, p, {
+            kind: 'withdraw',
+            label: 'Taking food for the meal from the store',
+            goal: 'to lay the table for the guests I invited',
+            targetId: larder.id,
+            targetType: 'building',
+            tx: larder.x,
+            ty: larder.y,
+            spotX: spot.x,
+            spotY: spot.y,
+            utility: sc.total,
+            minCommit: 120,
+            maxTicks: 500,
+            data: { items: { [kind]: short } },
+          });
+        },
+      });
     }
   }
   // go and lay the table, in time

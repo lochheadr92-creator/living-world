@@ -128,6 +128,7 @@ import { metabolismOn, setLabRates, setMetabolism } from '../../src/sim/metaboli
 import { COMPANY_PARTS, companyPartOn, setCompany } from '../../src/sim/company';
 import type { CompanyPart } from '../../src/sim/company';
 import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
+import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -230,15 +231,17 @@ export function parseIntervention(specIn: string): Intervention {
     return { spec: label, summary: `base hunger ${hunger} and thirst ${thirst} a tick instead of the rules-195 constants; no effect below rules 195`, install() { setLabRates({ hunger, thirst }); return () => setLabRates(null); } };
   }
   // rules 200 to 202 (the life stream): one removal arm per separately switched part, and one per version that removes all of its parts
-  if (kind === 'rich-no-company') return { spec: label, summary: 'remove all four rules-200 parts: approach, learning gate, meal window, market at the fire; no effect below rules 200', install() { const was = COMPANY_PARTS.map((part) => [part, companyPartOn(part)] as const); setCompany(false); return () => { for (const [part, v] of was) setCompany(v, part); }; } };
+  if (kind === 'rich-no-company') return { spec: label, summary: 'remove all five rules-200 parts: approach, learning gate, meal window, meal larder, market at the fire; no effect below rules 200', install() { const was = COMPANY_PARTS.map((part) => [part, companyPartOn(part)] as const); setCompany(false); return () => { for (const [part, v] of was) setCompany(v, part); }; } };
   for (const [name, part, what] of [
     ['rich-no-approach', 'approach', 'a childhood or learning ask adds nothing to the stop-and-talk roll and an approach is committed for 40 ticks, as before rules 200'],
     ['rich-no-learning-gate', 'learning', 'the coaching ask wants hunger, thirst and energy all above 65, as before rules 200'],
     ['rich-no-meal-window', 'meal', 'the invitation to a shared meal is made only from 0.50 of the day, as before rules 200'],
+    ['rich-no-meal-larder', 'larder', 'the invitation counts only food in the pack and the host is not offered the walk home for the meal, as before rules 200'],
     ['rich-no-market-fire', 'market', 'the market is called only where a sound hall stands, as before rules 200'],
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  if (kind === 'rich-no-stalled-ask') return { spec: label, summary: 'the ask for a site\'s materials ignores how long the site has waited, as before rules 201; no effect below rules 201', install() { const was = stalledAskOn(); setStalledAsk(false); return () => setStalledAsk(was); } };
   if (kind === 'rich-no-shared-yard') return { spec: label, summary: 'every timber yard is laid out privately, as before rules 201; no effect below rules 201', install() { const was = sharedYardOn(); setSharedYard(false); return () => setSharedYard(was); } };
   if (kind === 'rich-no-swap-and-fire') return { spec: label, summary: 'remove both rules-202 parts: the walk a food swap saves, and the fire fed for a gathering; no effect below rules 202', install() { const was = SWAP_FIRE_PARTS.map((part) => [part, swapFirePartOn(part)] as const); setSwapAndFire(false); return () => { for (const [part, v] of was) setSwapAndFire(v, part); }; } };
   for (const [name, part, what] of [
@@ -664,6 +667,11 @@ export const METRICS = [
   // the burden itself, as person-time: awake and hungry (hunger below the drive's start, 62), awake and thirsty (thirst below 66),
   // and the fed window (awake with hunger, thirst and energy all above 65, the level coaching and foraging practice ask for)
   'hungryShare', 'thirstyShare', 'fedWindowShare',
+  // what the life stream (rules 200 to 202) is for, counted over the whole branch: approaches that ended before any talk (a socialize
+  // activity that ends is always one: an answered approach becomes the conversation) and their share of all approaches; talk about a
+  // swap; markets called; apprentices at the end; times the fire went out and times it was fed; jobs finished at a timber yard; and
+  // timber yards, laid out or standing, that belong to nobody at the end.
+  'approachesFailed', 'approachFailShare', 'tradeTalk', 'marketsCalled', 'apprenticesAtEnd', 'fireOuts', 'fireFeeds', 'yardJobs', 'sharedYardsAtEnd',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -841,6 +849,9 @@ export class LifeTally {
   private convs = new Set<number>();
   chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
   mealsSat = 0; visits = 0; spareTime = 0;
+  approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0;
+  private markets = new Set<number>();
+  private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
   awakeTicks = 0; hungryTicks = 0; thirstyTicks = 0; fedTicks = 0;
   private byStage: Record<Stage, { life: number; all: number }> = { child: { life: 0, all: 0 }, youth: { life: 0, all: 0 }, adult: { life: 0, all: 0 }, elder: { life: 0, all: 0 } };
@@ -857,7 +868,14 @@ export class LifeTally {
     const st = this.byStage[stageOf(w, p)];
     st.all += ticks;
     if (cat === 'life') st.life += ticks;
+    // an approach that is answered turns into the conversation (its kind becomes 'converse'), so a socialize activity that ENDS never was
+    if (a.kind === 'socialize') this.approachesFailed++;
     if (outcome !== 'success') return;
+    if (a.kind === 'fuel_fire') this.fireFeeds++;
+    else if (a.kind === 'operate') {
+      const at = w.byId.get(a.targetId);
+      if (at && at.ent === 'building' && at.type === 'timber_yard') this.yardJobs++;
+    }
     if (a.kind === 'attend_meal' || a.kind === 'host_meal') this.mealsSat++;
     else if (a.kind === 'visit') this.visits++;
     else if (a.kind === 'wander') this.spareTime++;
@@ -874,7 +892,12 @@ export class LifeTally {
         case 'learn_skill': case 'teach_technique': case 'learn_technique': this.coaching++; break;
         default: this.otherTalk++;
       }
+      if (c.purpose === 'trade') this.tradeTalk++; // beside otherTalk, which keeps counting it so that older rows stay comparable
     }
+    for (const o of w.occasions ?? []) if (o.kind === 'market') this.markets.add(o.id);
+    // events carry rising ids and the feed is trimmed from the front, so the new ones are at the end
+    for (let i = w.events.length - 1; i >= 0 && w.events[i].id > this.lastEvent; i--) if (w.events[i].text === 'The fire has gone out.') this.fireOuts++;
+    if (w.events.length) this.lastEvent = Math.max(this.lastEvent, w.events[w.events.length - 1].id);
     for (const p of w.persons) {
       if (!p.alive) continue;
       this.personTicks++;
@@ -898,6 +921,9 @@ export class LifeTally {
   get fedWindowShare(): number { return this.share(this.fedTicks, this.awakeTicks); }
   stageShare(s: Stage): number { return this.share(this.byStage[s].life, this.byStage[s].all); }
   get thirstExposure(): number { return this.share(this.parchedTicks, this.personTicks); }
+  get marketsCalled(): number { return this.markets.size; }
+  /** failed approaches over all approaches (failed ones plus the conversations that opened) */
+  get approachFailShare(): number { return this.share(this.approachesFailed, this.approachesFailed + this.convs.size); }
   get coldExposure(): number { return this.share(this.coldTicks, this.personTicks); }
 }
 
@@ -1028,6 +1054,15 @@ export function outcomeOf(
       hungryShare: life.hungryShare,
       thirstyShare: life.thirstyShare,
       fedWindowShare: life.fedWindowShare,
+      approachesFailed: life.approachesFailed,
+      approachFailShare: life.approachFailShare,
+      tradeTalk: life.tradeTalk,
+      marketsCalled: life.marketsCalled,
+      apprenticesAtEnd: alive.filter((p) => p.apprentice).length,
+      fireOuts: life.fireOuts,
+      fireFeeds: life.fireFeeds,
+      yardJobs: life.yardJobs,
+      sharedYardsAtEnd: w.sites.filter((s) => s.type === 'timber_yard' && s.hhId === 0).length + w.buildings.filter((b) => b.type === 'timber_yard' && b.hhId === 0).length,
     },
     milestones,
   };

@@ -1,7 +1,9 @@
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
 import { foodRelief } from './relief';
-import { SWAP_RELIEF_CAP, hasSwapWorth, swapReliefWorth } from './swap_and_fire';
+import { GATHERING_FUEL, HOST_FIRE_ASK_WEIGHT, SWAP_RELIEF_CAP, hasGatheringFire, hasSwapWorth, swapReliefWorth } from './swap_and_fire';
+import { knownSiteWait, stallLiftsSelfFetch, stalledAskWorth } from './stalled_ask';
+import { mealOf } from './meals';
 import {CHILD_TIMES,wantsChildTime,childTimeName,childTimeTicks} from './childhood';
 import {companyReason} from './companionship';
 import {hasLivedLife} from './lived_life';
@@ -254,6 +256,26 @@ function optRequest(ctx: Ctx): void {
     }
   }
 
+  // rules 202 (swap_and_fire.ts, part fire): a host whose called meal is to be at a fire that is getting low, with no wood in hand,
+  // asks a neighbour to keep it going. The same request, answer and promise as the laid-up ask above (responsibilities.ts).
+  if (hasGatheringFire(world) && ctx.stage !== 'child' && !laidUp(world, p)) {
+    const meal = mealOf(world, p);
+    const fireB = meal && meal.host === p.id && (meal.status === 'inviting' || meal.status === 'gathering') ? p.beliefs[meal.placeId] : undefined;
+    if (fireB && fireB.btype === 'fire' && (fireB.fuel ?? 0) - (world.tick - fireB.seen) * 0.85 < GATHERING_FUEL && (p.inv.wood ?? 0) < 1) {
+      for (const c of cands) {
+        if (c.d > 14 || c.s.child || stageOf(world, c.q) === 'child' || stageOf(world, c.q) === 'youth') continue;
+        if ((p.cooldowns['askduty' + c.q.id] ?? 0) > world.tick || c.aff < -10) continue;
+        const sc = new Scorer()
+          .add('my meal is to be at that fire and I have no wood', HOST_FIRE_ASK_WEIGHT)
+          .add(c.aff >= 25 ? 'a friend' : c.fam >= 4 ? 'a neighbour' : 'worth a try', c.aff >= 25 ? 5 : 2)
+          .add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
+        if (!ctx.observer) p.cooldowns['askduty' + c.q.id] = world.tick + 400; // as for the laid-up ask: the wait starts when they consider it
+        mkSocial(ctx, c, 'request', { reqKind: 'fire', destKind: 'building', destId: fireB.id, purpose: 'keep the fire going' }, `Ask ${c.q.name} to keep the fire going`, 'to have the fire kept for the meal I called', null, sc, 'request', ':fire');
+        break; // one person at a time
+      }
+    }
+  }
+
   // a home that is failing, with nobody in the household able to mend it: ask a neighbour who can
   const homeB = ctx.home ? p.beliefs[ctx.home.id] : undefined;
   const nobodyAble = ctx.members.every((m) => stageOf(world, m) === 'child' || stageOf(world, m) === 'elder');
@@ -376,12 +398,17 @@ function optRequest(ctx: Ctx): void {
       const already = outstandingFor(world, p.id, item, b.id);
       if (already >= miss - (p.inv[item] ?? 0)) continue;
       const selfFetch = ctx.options.some((o) => (o.kind === 'gather' || o.kind === 'operate' || o.kind === 'withdraw') && o.tag === 'site' && o.eta < 260);
-      if (selfFetch) continue;
+      // rules 201 (stalled_ask.ts): how long this person can know their own site to have waited
+      const siteNow = world.byId.get(b.id);
+      const waited = siteNow && siteNow.ent === 'site' ? knownSiteWait(world, Math.max(siteNow.lastWorkTick, siteNow.createdTick), b.seen, b.src === 'seen') : 0;
+      if (selfFetch && !stallLiftsSelfFetch(world, waited)) continue;
+      const stall = stalledAskWorth(world, waited);
       for (const c of cands) {
         if (c.d > 12 || !c.s.carrying.includes(item)) continue;
         if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
         const raw = item === 'wood' || item === 'stone';
         const sc = new Scorer().add(`the building needs ${item}`, 24 * traitMods(p).work).add('they are carrying some', 4).add('walking', -pen(c.d * 6));
+        if (stall > 0) sc.add('the site has stood waiting', stall);
         const experience=helperExperience(world,p,c.q.id,materialRequestKind(item),item);
         sc.add('personally received this material on an earlier request',experience.bonus);
         mkSocial(
