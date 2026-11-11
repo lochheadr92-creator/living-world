@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "1957b8951c33048c9abac0a6195c6919288f80ad",
+    "rules": 207,
+    "content": "4f2dbac073a01ad12e5f48e06a81b3eb9612e3ce747042687ca4e033aa73bbe4",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until somebody is at work at a workplace they have no earned access to (rules 207, open_workplaces.ts), then 120 more after a save and load."
+  },
+  "saved": "e7075d6048e5275514eee3bcefbeb4405aef2658051c76f1774694cf84336dcd",
+  "continued": "c46a1f3b33102bbcf1f881fcf8e9847701362c06ef18d7e57e929d20bb04dfd7",
+  "tick": 17500
+}

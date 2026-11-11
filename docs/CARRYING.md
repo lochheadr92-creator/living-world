@@ -140,3 +140,65 @@ charcoal made"), one ordinary meadow world run for 24 days at the current rules,
 made in that world. The file was outside the 112 related files run for rules 206, so the statement that no existing test newly failed at 206 was true of
 that set and not of the suite. It is one seed, so it does not show that the two-portion ration harms the charcoal chain in general; it is a second reason,
 beside the lab, not to prefer two portions.
+
+## Where the ration's cost comes from: a child's day at rules 206
+
+`scripts/childhood_probe.ts` run at rules 206 (twelve lab seeds, Normal, arrivals on, 25 days, from `1957b895` with the world's rules set to 206) against its
+recorded rules-203 run (`review_evidence/childhood-20261111/report.txt`). Evidence: `review_evidence/carrying-20261111/child206/`. Rules 204 lies between the
+two and does not touch children (they are offered no tool work).
+
+| a child's day | under 7, rules 203 | under 7, rules 206 | 7 to 11, rules 203 | 7 to 11, rules 206 |
+|---|---|---|---|---|
+| hours carrying food home | 0.32 | 0.71 | 0.52 | 1.17 |
+| trips home with food completed a day | 0.26 | 0.62 | 0.48 | 1.08 |
+| hours gathering food | 4.63 | 5.04 | 4.09 | 4.88 |
+| food units taken a day | 2.85 | 3.35 | 3.75 | 4.36 |
+| hours at rest | 6.19 | 5.34 | 6.52 | 5.59 |
+| hours of company and play | 5.4 | 5.2 | 5.5 | 4.9 |
+| awake time hungry | 46.7% | 50.6% | 41.5% | 45.1% |
+
+Adults are hungry for 62.5 percent of their waking time against 58.7, and elders 71.6 against 66.5. Games asked for fall from 63.8 to 55.4 a settlement and
+foraging lessons from 117.8 to 103.8.
+
+The reading: under the ration rule a child carries food home more than twice as often and gathers more besides, in a pack of five that fills at once. The rule
+was written for grown people's packs and applies to children as it stands. That is the likeliest home of the lost play, and it points the other way from the
+childhood plan. It is a comparison across versions on the same seeds, not a removal arm, so it is a reading and not an attribution. A separate one-world
+assessment at rules 207 (`review_evidence/lived-child-adult-r207-20261111/README.md`, another session's) shows the same thing in one life: a nine-year-old
+spent 23 percent of her time gathering and 6 percent carrying food home, 25 trips in 15 days.
+
+## Rules 207: a workplace is open to everyone
+
+Owner instruction, 11 November 2026: "We need to change the fact that only one household can use public buildings, that would be a major blocker. Many people
+should be able to build and use public buildings like workshop, timber yard, granary". `src/sim/open_workplaces.ts`: from 207 anyone may use any timber yard,
+quarry, kiln, smithy, bakery, granary, food rack, mine, mill, brewery or hall. Somebody with no earned access comes in as a guest: what they bring is held for
+their own batch and what they make is theirs; the workplace's own stock stays with its household and its builders, and each household's share in a granary
+stays its own. Raising a workplace was already open to anyone. Lab removal `rich-no-open-workplaces` (rules 206).
+
+Contract tests `tests/open_workplaces.test.ts` (8, each with the rules-206 contrast). Immutable pin `tests/v207_continuation.*` (Normal gen-2, arrivals on; a
+guest at work at a workplace first seen by tick 17,500; then 120 ticks after a save and load), recorded from a clean checkout of `1957b895`.
+
+Lab: clean checkout of `1957b895` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the removal arm, 48 arms
+in 16 minutes. Compared with the rules-206 lab already recorded. Evidence: `review_evidence/carrying-20261111/r207/`, `versions-206-207.txt`, `run207.txt`.
+
+| measure | 206 | 207 | 207 with the rule removed | verdict |
+|---|---|---|---|---|
+| jobs finished at any workplace | | 26.8 | 28.8 | not distinguishable from chance |
+| of them done by a guest | | 1.1 | 0 | systematic, within the noise floor |
+| handcarts at the end | | 0 | 0 | none in any arm |
+| tools in hand | 53.0 | 56.0 | 53.9 | systematic, within the noise floor |
+| people | 29.4 | 30.0 | 28.6 | within the noise floor on the removal arm |
+| deaths | 3.0 | 2.5 | 3.5 | within the noise floor on the removal arm |
+| projects done, buildings, solid homes, hunger, mood, chats, child play | | | | not distinguishable from chance |
+
+`scripts/lab_versions.ts` ends: nothing moved by more than a single draw moves it.
+
+What that supports:
+
+- **The door is open and almost nobody walks through it in 25 days.** A guest finishes about one job a settlement out of about 27. The rule does what was
+  asked, harms nothing the lab can see, and changes almost nothing yet.
+- **So access was not the gate that binds.** Behind it stand the things a job itself needs: the first yard only stands from about day nine, a workplace runs
+  one batch at a time, most recipes need a tool or a taught technique, and a person has to want the product. The census's 8,100 blocked decisions were people
+  who could not use a yard; unblocked, they still lack the planks, the handles, the hammer or the reason.
+- **Still no handcart, in any arm.** A cart needs four planks, two handles, a hammer, two workers and somebody who has hauled enough to want one. Opening the
+  yard removes one of those obstacles.
+- Not run: the full suite at this head.
