@@ -446,3 +446,7 @@ What that supports:
   (2.9 to 4.4, ten of twelve seeds), most of it exposure (0.6 to 1.6), inside the noise floor; hunger deaths do not move beyond chance.
 - **No benefit to survival is claimed.** The rule does what it was for, feeding the children, and the settlement pays for it in farm
   work. Whether to keep it, tune the meal gap or the pull, or look at the exposure deaths first is the owner's decision.
+
+**Owner decision, 12 November 2026: kept as it is** ("I think we can leave it for now"). Watch item: if deaths (exposure most of all)
+or farm plots move the wrong way in a later lab, check rules 214 first, with the arms `rich-no-child-feeding`, `rich-no-feeding-meals`
+and `rich-no-feeding-provide` against the control.
