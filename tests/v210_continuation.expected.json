@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "d70e02c4d562a2ac82fc5517cbb331cf0b501001",
+    "rules": 210,
+    "content": "f135eb8f2d53d02a965948e295557f1af2d4feb107042458debfd6a819edf50a",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until the world holds a practice in fishing or farming, a practice given by an under-twelve, or a child remembering who could not teach them (rules 210, shown.ts), then 120 more after a save and load."
+  },
+  "saved": "4dc413c5dfab4fc33c8b089b18860d5777c9936a675c481fcd73fcbe587b1a1f",
+  "continued": "77901bc0debcc079dde121714fe32ee476c424455e286f75683c4db5dcea6a5f",
+  "tick": 2400
+}

@@ -206,3 +206,48 @@ given child foraging; 14 of 108 children forage as well as or better than the be
 5. **There are idle hours to fill.** A child spends six hours a day at rest, awake, and an adult three and a half. Rest includes waiting in shelter until it is
    light; the probe does not split it by hour. If most of it is that wait, it is the time the evening fire and a story told (phase 5) would fill, at no cost in
    food work. Phase 5's own measurement should split rest by time of day first.
+
+## 7. Phase 1 result: being shown (rules 210)
+
+Landed on the owner's instruction of 11 November 2026 ("Do 1 then 2"). `src/sim/shown.ts`, three separately switched parts; the childhood stream claims rules
+210 to 219 (`docs/RULES_RANGES.md`).
+
+| part | what changes | lab removal |
+|---|---|---|
+| remember | A child told "I cannot teach you more about foraging yet" does not ask that person for practice again for three days. | `rich-no-shown-remember` |
+| older | A child of seven or more, at least a year older than the asker, may be asked and may give practice on a grown person's terms. Whether they know more is found out by asking. Giving it does not use up their own turn. | `rich-no-shown-older` |
+| more | A teacher who cannot teach more foraging shows fishing, then farming, where they know more: the same paid time and the same gain. Where foraging can still be taught nothing changes. | `rich-no-shown-more` |
+
+`rich-no-shown` removes all three and equals rules 208. Contract tests `tests/shown.test.ts` (13, each with the rules-208 contrast). One case in
+`tests/childhood.test.ts` is pinned to rules 208 with a comment (it stages a grown person who forages worse than the child and expects a refusal). Immutable pin
+`tests/v210_continuation.*` (Normal gen-2, arrivals on; a practice of rules 210 in the world by tick 2,400; then 120 ticks after a save and load), recorded from
+a clean checkout of `d70e02c4`.
+
+Lab: clean checkout of `d70e02c4` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the four removal arms, 84
+arms in 24 minutes 45 seconds. Compared with the rules-208 lab already recorded. Evidence: `review_evidence/childhood-20261111/r210/`, `versions-208-210.txt`,
+`run210.txt`.
+
+| measure, a settlement in 25 days | 210 | all removed | remember removed | older removed | more removed |
+|---|---|---|---|---|---|
+| practices refused "I cannot teach you more" | 5.2 | 34.5, larger than chance | 6.9 | 5.8 | 30.8, larger than chance |
+| fishing practices completed | 18.5 | 0, larger than chance | 17.7 | 20.3 | 0, larger than chance |
+| farming practices completed | 3.6 | 0, larger than chance | 2.8 | 3.1 | 0, larger than chance |
+| foraging practices completed | 74.3 | 80.3 | 74.1 | 71.3 | 82.1 |
+| practices given by a child | 9.8 | 0, larger than chance | 8.1 | 0, larger than chance | 9.0 |
+| under-twelves' fishing skill at day 25 | 0.486 | 0.456 | 0.485 | 0.511 | 0.447 |
+| child play (games) | 66.5 | 74.8, larger than chance | 66.9 | 68.9 | 69.6 |
+
+Rules 208 against 210 on the three shared arms (`scripts/lab_versions.ts`): nothing moved by more than a single draw moves it. Practices asked fall from 121.7
+to 110.6 inside the noise floor; people, deaths, tools, projects, hunger, mood and chats are not distinguishable from chance.
+
+What that supports:
+
+- **The refusal is nearly gone.** From about 35 a settlement to about 5, beyond chance, and it is the `more` part that does it: a teacher who cannot teach
+  foraging shows something else.
+- **Children are taught fishing and farming.** About 18 fishing and 4 farming practices a settlement, where there were none; practices completed rise from
+  about 80 to about 96. Children's fishing skill at day 25 leans up (0.486 against 0.456) and is not distinguishable in 25 days.
+- **An older child does teach a younger.** About 10 practices a settlement are given by an under-twelve.
+- **`remember` shows little by itself** (refusals 5.2 against 6.9 without it): once a teacher has something else to show, there are few refusals left to
+  remember. It is kept as harmless.
+- **The cost is play.** With all three parts removed child play is 74.8 against 66.5, beyond chance: the extra practices take time that games had. That is the
+  thing phase 2 (rules 211, more ways to play) is for, and it is the first measure phase 2 is read against.
