@@ -202,3 +202,54 @@ What that supports:
 - **Still no handcart, in any arm.** A cart needs four planks, two handles, a hammer, two workers and somebody who has hauled enough to want one. Opening the
   yard removes one of those obstacles.
 - Not run: the full suite at this head.
+
+## Rules 208: children are exempt from the ration
+
+Owner instruction, 11 November 2026: "exempt children from the rule". From 208 the ration part does not apply to anyone under twelve
+(`src/sim/light_pack.ts` `rationApplies`): they keep, carry home and eat food as they did before rules 205. Grown people are held to it as at 206. Lab removal
+`rich-children-ration` (rules 207).
+
+Contract tests `tests/children_exempt.test.ts` (5, each with the rules-207 contrast). Immutable pin `tests/v208_continuation.*` (Normal gen-2, arrivals on;
+an under-twelve carrying food to their own home on a trip without the ration mark by tick 2,600; then 120 ticks after a save and load), recorded from a clean
+checkout of `7b6689b3`.
+
+Lab: clean checkout of `7b6689b3` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the removal arm, 48 arms
+in 16 minutes. Compared with the rules-207 lab already recorded. Evidence: `review_evidence/carrying-20261111/r208/`, `versions-207-208.txt`, `run208.txt`.
+
+| measure | 204, no ration | 207, ration on everyone | 208, children exempt | 208 with the exemption removed | 207 to 208 |
+|---|---|---|---|---|---|
+| child play | 67.3 | 56.4 | 70.3 | 56.3 | larger than chance, higher in 12 of 12 seeds |
+| foraging practice | 119.1 | 100.7 | 121.7 | 104.3 | larger than chance, higher in 12 of 12 |
+| family time | 78.6 | 68.1 | 79.1 | 69.7 | systematic, within the noise floor, higher in 11 of 12 |
+| trips home with food beyond the ration | 0 | 478 | 335 | 482 | larger than chance, fewer |
+| share of waking time hungry | 0.54 | 0.58 | 0.56 | 0.59 | systematic, within the noise floor, lower in 9 of 12 |
+| meals from a store | 145 | 247 | 237 | 251 | not distinguishable from chance |
+| people | 31.0 | 30.0 | 30.2 | 29.8 | not distinguishable from chance |
+| deaths | 1.9 | 2.5 | 2.8 | 2.7 | not distinguishable from chance |
+| tools, projects done, buildings, mood, chats | | | | | not distinguishable from chance |
+
+What that supports:
+
+- **The lost play is back.** Child play, foraging practice and family time return to where they stood before the ration, the first two beyond chance, and the
+  removal arm takes them away again. The cost of the ration part was what it did to children.
+- **Grown people keep the behaviour that was asked for.** Meals from a store stay at about 237 a settlement against 145 before the ration, with about 335
+  trips home.
+- **Hunger time comes most of the way back** (0.56 against 0.54 before the ration and 0.58 with children under it), inside the noise floor.
+- Nothing on people, deaths, tools, projects or buildings is distinguishable from chance.
+
+### The charcoal test
+
+`tests/iron_chain_stall.test.ts` ("adults who know a standing smithy and a kiln see charcoal made") runs one ordinary meadow world and allows 24 days for the
+first charcoal. It passes at rules 203 to 205 and fails from 206. `review_evidence/carrying-20261111/charcoal_window.ts` measures the day of the first charcoal
+with the test's own staging, in the three seeds the test's comment names (`charcoal-days.txt`):
+
+| seed | rules 205 | rules 207 | rules 208 |
+|---|---|---|---|
+| forest | 2.7 | 1.7 | 2.8 |
+| river | 12.7 | 33.4 | 16.8 |
+| meadow | 17.5 | none in 60 days | 25.8 |
+
+The chain is not broken: at 208 charcoal is made in all three. It is later than at 205, and in meadow it comes 1.8 days after the test's window closes, so the
+test still fails at 208. With the ration on children as well (207) meadow made none in 60 days, so the exemption is most of the repair. The test's own comment
+records that its window was widened once before, at rules 106, on the same kind of measurement. Whether to widen it again is the owner's decision; the test has
+not been touched.

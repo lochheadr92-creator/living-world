@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "7b6689b3efc11998c070f82b41d886452074d043",
+    "rules": 208,
+    "content": "cea744ac499198e6dc24c18af37fcc0fa10f94aa5bce2623e70541775d0a9902",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until an under-twelve is carrying food to their own home on a trip without the ration mark (rules 208, light_pack.ts), then 120 more after a save and load."
+  },
+  "saved": "0d2511e61a418d432add4372de38bc013c9b80f25fcca5f85196ddfe6cb4ee9e",
+  "continued": "068ebdc5a92820fb8d2578d676fe2819c3a8e805db4cf825b2f60920b9493200",
+  "tick": 2600
+}

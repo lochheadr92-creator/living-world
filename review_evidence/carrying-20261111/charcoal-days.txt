@@ -1,0 +1,9 @@
+{"seed":"forest","rules":205,"limitDays":60,"firstCharcoalDay":2.7,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+{"seed":"forest","rules":207,"limitDays":60,"firstCharcoalDay":1.7,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+{"seed":"forest","rules":208,"limitDays":60,"firstCharcoalDay":2.8,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+{"seed":"meadow","rules":205,"limitDays":60,"firstCharcoalDay":17.5,"pairAlive":2,"peopleAlive":30,"kilnJob":null}
+{"seed":"meadow","rules":207,"limitDays":60,"firstCharcoalDay":null,"pairAlive":2,"peopleAlive":31,"kilnJob":null}
+{"seed":"meadow","rules":208,"limitDays":60,"firstCharcoalDay":25.8,"pairAlive":2,"peopleAlive":31,"kilnJob":null}
+{"seed":"river","rules":205,"limitDays":60,"firstCharcoalDay":12.7,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+{"seed":"river","rules":207,"limitDays":60,"firstCharcoalDay":33.4,"pairAlive":2,"peopleAlive":30,"kilnJob":null}
+{"seed":"river","rules":208,"limitDays":60,"firstCharcoalDay":16.8,"pairAlive":2,"peopleAlive":30,"kilnJob":null}
