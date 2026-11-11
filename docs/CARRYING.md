@@ -91,3 +91,46 @@ Each part, removed inside rules 205 (reference: the mean of the control and the 
   off; or tune it in a rules 206 so that the trip home is made when the pack is filling (three or more spare portions, or a pack three quarters full) instead of
   for every spare portion, which keeps "only what they need" and removes most of the walking. The tune is the recommendation; it needs one lab against this one.
 - Not run: the full suite at this head. A handcart is still never built.
+
+## Rules 206: the ration is two portions
+
+The owner's answer to the rules-205 result, 11 November 2026: "maybe one extra piece of food for a carry limit". From 206 a person with a home store keeps two
+portions and takes home what is beyond them; the portion held for the road is still the last one; a meal at a store leaves up to two and eats what it took from
+the store first (`src/sim/light_pack.ts`; lab removal `rich-ration-one`, which is rules 205). A second idea, mine and not the owner's, is measured in the lab
+only and is off in every world: `rich-filling-trips` makes the trip home with food only from a filling pack (three spare portions or more, or three quarters
+full).
+
+Contract tests `tests/ration_two.test.ts` (9, each with the rules-205 contrast). Immutable pin `tests/v206_continuation.*` (Normal gen-2, arrivals on; a trip
+home that leaves two portions in the pack under way by tick 100; then 120 ticks after a save and load), recorded from a clean checkout of `4f890d31`. One
+correction on the way: `8b4fa6f2` was committed before its test batch was read and said no existing test newly failed; one had
+(`tests/preservation.test.ts`, a meal at a drying rack eating the person's own grain and leaving the rack's meat in the pack). `4f890d31` repairs the behaviour
+and corrects the record.
+
+Lab: clean checkout of `4f890d31` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2`, `rich-ration-one` and
+`rich-filling-trips`, 60 arms in 17 minutes 26 seconds. Compared with the rules-205 lab already recorded. Evidence:
+`review_evidence/carrying-20261111/r206/`, `versions-205-206.txt`, `run206.txt`.
+
+| measure | 204 | 205 (one portion) | 206 (two portions) | 206 with filling trips | 205 to 206 |
+|---|---|---|---|---|---|
+| trips home with food beyond the ration | 0 | 594 | 477 | 469 | larger than chance, fewer |
+| meals from a store | 145 | 369 | 244 | 248 | larger than chance, fewer |
+| meals from the pack | 946 | 791 | 895 | 903 | larger than chance, more |
+| preparation plans finished | 5.5 | 12.2 | 9.3 | 10.1 | systematic, within the noise floor, fewer |
+| share of waking time hungry | 0.54 | 0.60 | 0.59 | 0.58 | not distinguishable from chance |
+| child play | 67.3 | 54.6 | 55.2 | 55.0 | not distinguishable from chance |
+| family time | 78.6 | 68.7 | 66.9 | 68.2 | not distinguishable from chance |
+| foraging practice | 119.1 | 100.5 | 98.8 | 100.1 | not distinguishable from chance |
+| people | 31.0 | 30.1 | 29.4 | 30.2 | not distinguishable from chance |
+| deaths | 1.9 | 2.4 | 3.0 | 2.2 | not distinguishable from chance |
+
+The 204 column is the rules-204 lab's own control and nudges (for trips and meals, the rules-205 lab's arm with both parts removed, which is rules 204).
+
+What that supports:
+
+- **Two portions gives back part of what the ration did and none of what it cost.** A fifth fewer trips home and a third fewer meals from a store, both beyond
+  chance; the hunger time, the child play, the family time and the foraging practice stay where rules 205 put them.
+- **Going home only from a filling pack changes nothing either.** Trips fall from 477 to 469 and nothing else moves.
+- **So the cost is not the number of portions and not the small trips.** It sits somewhere else in the ration part: the weight that bringing food home gained,
+  the portion held for the road, or what the rule does to children, whose pack holds five. That is not attributed yet. The next step is a read of a child's day
+  at rules 206 with the probe of the childhood plan (`scripts/childhood_probe.ts`), against its recorded rules-203 baseline.
+- Open for the owner, as at 205: the ration part is a trade. Nothing here argues for two portions over one.

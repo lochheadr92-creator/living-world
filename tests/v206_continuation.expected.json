@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "4f890d3148db002b108f3d52e840039ff2785c8a",
+    "rules": 206,
+    "content": "b64a782ce70097021558620f6a5f653f0c6e6486e6f3de414f141cca91d778b5",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until somebody is on the way home with food beyond the ration on a trip that leaves two portions in their pack (rules 206, light_pack.ts), then 120 more after a save and load."
+  },
+  "saved": "9fa75eeb512d89e4e7338926a7596e0919e92331a2bb1c7dc31b1f7d621973b4",
+  "continued": "e9bb082d2055e73d0f319106079163bc8bc0d708906090c0d61c8bab3b8b6d4b",
+  "tick": 100
+}
