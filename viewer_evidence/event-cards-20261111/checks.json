@@ -1,0 +1,469 @@
+[
+  {
+    "name": "an ordinary Normal river world is shown, with a fire or hall to hold an occasion",
+    "ok": true,
+    "detail": {
+      "width": 80,
+      "height": 80,
+      "people": 28,
+      "fire": true
+    }
+  },
+  {
+    "name": "loading the world announces nothing",
+    "ok": true,
+    "detail": {
+      "announced": 0,
+      "skipped": 0
+    }
+  },
+  {
+    "name": "a wedding that is only called has no card",
+    "ok": true,
+    "detail": []
+  },
+  {
+    "name": "the wedding card opens when the wedding begins",
+    "ok": true,
+    "detail": [
+      {
+        "key": "occ:1576",
+        "look": "look-wedding",
+        "title": "A wedding has begun!",
+        "lines": [
+          "Milo & Yan",
+          "At the fire"
+        ],
+        "tail": "down",
+        "r": {
+          "x": 598,
+          "y": 298,
+          "w": 244,
+          "h": 120
+        },
+        "bits": 18,
+        "bells": 2,
+        "swing": "evSwing"
+      }
+    ]
+  },
+  {
+    "name": "it says \"A wedding has begun!\" with the couple and the venue from the record",
+    "ok": true,
+    "detail": {
+      "title": "A wedding has begun!",
+      "lines": [
+        "Milo & Yan",
+        "At the fire"
+      ],
+      "couple": [
+        "Milo",
+        "Yan"
+      ]
+    }
+  },
+  {
+    "name": "two bells, swinging",
+    "ok": true,
+    "detail": {
+      "bells": 2,
+      "swing": "evSwing"
+    }
+  },
+  {
+    "name": "a burst of petals and blossoms from the card",
+    "ok": true,
+    "detail": 18
+  },
+  {
+    "name": "the card is about 220-260 px wide and inside the view",
+    "ok": true,
+    "detail": {
+      "x": 598,
+      "y": 298,
+      "w": 244,
+      "h": 120
+    }
+  },
+  {
+    "name": "it points down at the venue and does not cover it (zoomed out over the whole map)",
+    "ok": true,
+    "detail": {
+      "r": {
+        "x": 598,
+        "y": 298,
+        "w": 244,
+        "h": 120
+      },
+      "venue": {
+        "x": 720,
+        "y": 450
+      },
+      "zoom": 0.45,
+      "map": "80x80"
+    }
+  },
+  {
+    "name": "the petals are gone within about two seconds",
+    "ok": true,
+    "detail": 0
+  },
+  {
+    "name": "pausing and resuming does not announce it again",
+    "ok": true,
+    "detail": {
+      "announced": 1,
+      "skipped": 0
+    }
+  },
+  {
+    "name": "the dismiss button (labelled) folds the wedding to its venue marker",
+    "ok": true,
+    "detail": {
+      "close": {
+        "x": 825,
+        "y": 314,
+        "label": "Dismiss: A wedding has begun"
+      },
+      "markers": [
+        {
+          "key": "occ:1576",
+          "r": {
+            "x": 705,
+            "y": 406,
+            "w": 30,
+            "h": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "the marker's Watch centres the camera on the venue (camera moved only on the click)",
+    "ok": true,
+    "detail": {
+      "venue": {
+        "x": 719,
+        "y": 450
+      }
+    }
+  },
+  {
+    "name": "several begin together: two cards open, the rest wait",
+    "ok": true,
+    "detail": {
+      "cards": [
+        "A birth feast has begun!",
+        "The harvest feast has begun!"
+      ],
+      "waiting": 1
+    }
+  },
+  {
+    "name": "the two open cards do not overlap",
+    "ok": true,
+    "detail": {
+      "a": {
+        "x": 597,
+        "y": 288,
+        "w": 244,
+        "h": 130
+      },
+      "b": {
+        "x": 597,
+        "y": 178,
+        "w": 244,
+        "h": 102
+      }
+    }
+  },
+  {
+    "name": "six UI seconds later the next waiting card opens",
+    "ok": true,
+    "detail": [
+      "The market is open"
+    ]
+  },
+  {
+    "name": "distinct looks for the other kinds (birth, harvest, market)",
+    "ok": true,
+    "detail": [
+      "look-birth",
+      "look-harvest",
+      "look-market"
+    ]
+  },
+  {
+    "name": "a shared granary finished gets a card with the builders",
+    "ok": true,
+    "detail": {
+      "key": "bld:1622",
+      "look": "look-civic",
+      "title": "A granary is finished!",
+      "lines": [
+        "For everyone to use",
+        "Built by Mira, Emre & 1 more"
+      ],
+      "tail": "down",
+      "r": {
+        "x": 727,
+        "y": 318,
+        "w": 244,
+        "h": 114
+      },
+      "bits": 7,
+      "bells": 0,
+      "swing": null
+    }
+  },
+  {
+    "name": "a building has no lasting marker",
+    "ok": true,
+    "detail": [
+      {
+        "key": "occ:1576",
+        "r": {
+          "x": 704,
+          "y": 406,
+          "w": 30,
+          "h": 30
+        }
+      },
+      {
+        "key": "occ:1612",
+        "r": {
+          "x": 704,
+          "y": 406,
+          "w": 30,
+          "h": 30
+        }
+      },
+      {
+        "key": "occ:1614",
+        "r": {
+          "x": 704,
+          "y": 406,
+          "w": 30,
+          "h": 30
+        }
+      },
+      {
+        "key": "occ:1616",
+        "r": {
+          "x": 704,
+          "y": 406,
+          "w": 30,
+          "h": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "observer purity: the watched world equals its unwatched twin (fingerprint and full state)",
+    "ok": true,
+    "detail": {
+      "tick": 679,
+      "twinTick": 679,
+      "same": true,
+      "state": true
+    }
+  },
+  {
+    "name": "a venue at the top-left corner: the card stays inside the view",
+    "ok": true,
+    "detail": {
+      "r": {
+        "x": 8,
+        "y": 80,
+        "w": 244,
+        "h": 98
+      },
+      "venue": {
+        "x": 30,
+        "y": 30
+      },
+      "occ": [
+        "1576:wedding:done:-709",
+        "1612:feast:done:-703",
+        "1614:harvest:done:-703",
+        "1616:market:done:-703",
+        "1847:feast:gathering:-1"
+      ],
+      "cards": [
+        "A feast has begun!"
+      ],
+      "open": 1,
+      "waiting": 0
+    }
+  },
+  {
+    "name": "with the inspector open over the venue the card sits clear of the panels",
+    "ok": true,
+    "detail": {
+      "card": {
+        "x": 880,
+        "y": 211,
+        "w": 244,
+        "h": 103
+      },
+      "panels": [
+        {
+          "x": 12,
+          "y": 12,
+          "w": 359,
+          "h": 46
+        },
+        {
+          "x": 491,
+          "y": 12,
+          "w": 457,
+          "h": 46
+        },
+        {
+          "x": 1081,
+          "y": 12,
+          "w": 347,
+          "h": 48
+        },
+        {
+          "x": 12,
+          "y": 526,
+          "w": 340,
+          "h": 362
+        },
+        {
+          "x": 1106,
+          "y": 112,
+          "w": 26,
+          "h": 52
+        },
+        {
+          "x": 1132,
+          "y": 98,
+          "w": 296,
+          "h": 532
+        },
+        {
+          "x": 1246,
+          "y": 706,
+          "w": 182,
+          "h": 182
+        },
+        {
+          "x": 433,
+          "y": 844,
+          "w": 503,
+          "h": 44
+        },
+        {
+          "x": 936,
+          "y": 846,
+          "w": 71,
+          "h": 42
+        }
+      ],
+      "selected": 1106
+    }
+  },
+  {
+    "name": "on a 375 px screen the card fits inside the view",
+    "ok": true,
+    "detail": {
+      "x": 66,
+      "y": 218,
+      "w": 244,
+      "h": 102
+    }
+  },
+  {
+    "name": "six buildings at once at top speed: at most two cards open and at most two waiting",
+    "ok": true,
+    "detail": {
+      "worst": 2,
+      "worstWaiting": 2
+    }
+  },
+  {
+    "name": "loading a save replays nothing: no card opens, an occasion under way keeps its marker only",
+    "ok": true,
+    "detail": {
+      "before": {
+        "announced": 10,
+        "skipped": 2
+      },
+      "after": {
+        "announced": 0,
+        "skipped": 0
+      },
+      "markers": 3
+    }
+  },
+  {
+    "name": "reduced motion: the wedding card and its bells show, the bells do not swing and nothing flies",
+    "ok": true,
+    "detail": {
+      "key": "occ:1869",
+      "look": "look-wedding",
+      "title": "A wedding has begun!",
+      "lines": [
+        "Milo & Yan",
+        "At the fire"
+      ],
+      "tail": "down",
+      "r": {
+        "x": 598,
+        "y": 280,
+        "w": 244,
+        "h": 120
+      },
+      "bits": 0,
+      "bells": 2,
+      "swing": "none"
+    }
+  },
+  {
+    "name": "a funeral (staged fixture) is quiet: no burst",
+    "ok": true,
+    "detail": {
+      "key": "occ:1872",
+      "look": "look-funeral",
+      "title": "A funeral has begun",
+      "lines": [
+        "For Orla (fixture)",
+        "At the fire"
+      ],
+      "tail": "down",
+      "r": {
+        "x": 598,
+        "y": 286,
+        "w": 244,
+        "h": 114
+      },
+      "bits": 0,
+      "bells": 0,
+      "swing": null
+    }
+  },
+  {
+    "name": "Watch is a labelled button that takes keyboard focus",
+    "ok": true,
+    "detail": {
+      "focused": true,
+      "label": "Watch: centre the view on a funeral has begun"
+    }
+  },
+  {
+    "name": "decoration passes clicks through to the map; the card itself takes them",
+    "ok": true,
+    "detail": {
+      "layer": "none",
+      "tail": "none",
+      "card": "auto"
+    }
+  },
+  {
+    "name": "no page errors",
+    "ok": true,
+    "detail": []
+  }
+]

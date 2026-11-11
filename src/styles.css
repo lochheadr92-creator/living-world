@@ -3717,3 +3717,318 @@ button.worker:hover {
   margin: 0;
 }
 .q-intent .qa-prov:has(> [hidden]) { display: none; }
+
+/* ===== event cards (src/ui/event_cards.ts): a small white card beside the place where a big occasion has begun ===== */
+.ev-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ev-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: 240px;
+  padding: 9px 12px 8px 10px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #222a33;
+  border: 1px solid rgba(30, 40, 50, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26), 0 1px 3px rgba(0, 0, 0, 0.14);
+  font-size: calc(12.5px * var(--viewer-text-scale, 1));
+  line-height: 1.3;
+  pointer-events: auto;
+  user-select: none;
+  animation: evIn 380ms var(--ease) both;
+  will-change: transform;
+}
+.ev-card.leaving,
+.ev-marker.leaving {
+  animation: evOut 240ms var(--ease) both;
+  pointer-events: none;
+}
+.ev-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 18px;
+}
+.ev-icon {
+  flex: none;
+  display: inline-flex;
+  width: 34px;
+  height: 30px;
+}
+.ev-icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.look-wedding .ev-icon {
+  width: 46px;
+  height: 36px;
+}
+.ev-title {
+  font-weight: 700;
+  font-size: 1.06em;
+  letter-spacing: 0.005em;
+}
+.ev-lines {
+  margin: 3px 0 0 42px;
+  color: #4e5965;
+}
+.look-wedding .ev-lines {
+  margin-left: 54px;
+}
+.ev-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ev-line:first-child {
+  color: #2b333c;
+  font-weight: 600;
+  /* names may need a second line; never more */
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.ev-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+.ev-watch {
+  font: inherit;
+  font-size: 0.92em;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 40, 50, 0.18);
+  background: #f6f4ef;
+  color: #2b333c;
+  cursor: pointer;
+}
+.ev-watch:hover {
+  background: #ece8de;
+}
+.ev-close {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b7580;
+  font-size: 17px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.ev-close:hover {
+  background: rgba(0, 0, 0, 0.07);
+  color: #222a33;
+}
+.ev-watch:focus-visible,
+.ev-close:focus-visible,
+.ev-marker:focus-visible {
+  outline: 2px solid #3b82c4;
+  outline-offset: 2px;
+}
+/* the pointer to the venue: below the card when it sits above, above it when it sits below */
+.ev-tail {
+  position: absolute;
+  left: var(--tail-x, 50%);
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: inherit;
+  border: inherit;
+  pointer-events: none;
+  display: none;
+}
+.ev-card[data-tail='down'] .ev-tail {
+  display: block;
+  bottom: -7px;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+.ev-card[data-tail='up'] .ev-tail {
+  display: block;
+  top: -7px;
+  border-bottom: 0;
+  border-right: 0;
+  transform: rotate(45deg);
+}
+/* the looks: soft accents on the white card */
+.ev-card.look-wedding {
+  border-color: rgba(233, 139, 166, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26), 0 0 0 3px rgba(249, 214, 224, 0.55);
+}
+.ev-card.look-wedding .ev-title {
+  color: #9b3b5a;
+}
+.ev-card.look-birth .ev-title {
+  color: #8a6a12;
+}
+.ev-card.look-harvest {
+  border-color: rgba(201, 130, 50, 0.45);
+}
+.ev-card.look-harvest .ev-title,
+.ev-card.look-feast .ev-title {
+  color: #9a4e1c;
+}
+.ev-card.look-market {
+  padding-top: 14px;
+}
+.ev-card.look-civic .ev-title {
+  color: #5a4128;
+}
+/* a funeral or remembrance: quiet and subdued, no celebration */
+.ev-card.look-funeral {
+  background: #f3f2ef;
+  color: #3a3d42;
+  border-color: rgba(60, 60, 60, 0.18);
+}
+.ev-card.look-funeral .ev-title {
+  color: #44474d;
+  font-weight: 650;
+}
+.ev-bunting-wrap {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  height: 12px;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+.ev-bunting-wrap svg {
+  width: 100%;
+  height: 12px;
+  display: block;
+}
+/* the wedding bells swing a little, out of step, a few times */
+.ev-bell {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+.ev-card .ev-bell-l {
+  animation: evSwing 900ms ease-in-out 3;
+}
+.ev-card .ev-bell-r {
+  animation: evSwing 900ms ease-in-out 120ms 3 reverse;
+}
+/* the burst: pieces leave the card's edge, fly a little, then drift down and fade, all inside two seconds */
+.ev-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.ev-bit {
+  position: absolute;
+  display: block;
+  margin: -5px 0 0 -5px;
+  opacity: 0;
+  pointer-events: none;
+  animation: evBit var(--dur, 1600ms) cubic-bezier(0.2, 0.7, 0.35, 1) var(--delay, 0ms) both;
+}
+.ev-bit svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* the marker an occasion folds to: a small round badge over its venue until the occasion ends */
+.ev-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid rgba(30, 40, 50, 0.16);
+  background: #ffffff;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: evIn 300ms var(--ease) both;
+}
+.ev-marker .ev-icon {
+  width: 100%;
+  height: 100%;
+}
+.ev-marker.look-funeral {
+  background: #f3f2ef;
+}
+.ev-marker.pinned {
+  opacity: 0.8;
+}
+@keyframes evIn {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@keyframes evOut {
+  to {
+    opacity: 0;
+    translate: 0 6px;
+    scale: 0.94;
+  }
+}
+@keyframes evSwing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-16deg);
+  }
+  70% {
+    transform: rotate(12deg);
+  }
+}
+@keyframes evBit {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(calc(var(--rot) * 0.5));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--dx) * 1.15), calc(var(--dy) + var(--fall))) scale(0.85) rotate(var(--rot));
+  }
+}
+/* reduced motion: the card and its icon stay; nothing swings, flies or slides */
+@media (prefers-reduced-motion: reduce) {
+  .ev-card,
+  .ev-marker,
+  .ev-card.leaving,
+  .ev-marker.leaving,
+  .ev-card .ev-bell-l,
+  .ev-card .ev-bell-r {
+    animation: none;
+  }
+  .ev-burst {
+    display: none;
+  }
+}

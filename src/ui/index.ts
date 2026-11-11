@@ -9,6 +9,7 @@
 //   debug      optional diagnostics                          help       controls and how to read the inspector
 //   tooltip    data-tip labels + hover label over the map    toasts     short messages
 //   faultbanner  a frame stage threw: what, when, and that the world is paused
+//   event_cards  a small card beside the place where a wedding, feast, market or funeral begins or a shared building is finished
 //   shortcuts  keyboard                                      dom / icons / widgets / context   shared helpers
 import type { Game, GameEvent } from '../app/game';
 import { loadPrefs } from '../app/prefs';
@@ -16,6 +17,7 @@ import { loadUIState, makePersistence, type Part, type ToastKind, type UICtx } f
 import { buildLayout } from './layout';
 import { createDebug } from './debug';
 import { createFaultBanner } from './faultbanner';
+import { createEventCards } from './event_cards';
 import { createFeed } from './feed';
 import { createHelp } from './help';
 import { createInspector } from './inspector';
@@ -97,9 +99,11 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
   const viewer = createViewerControls(ctx, slots);
   const shortcuts = createShortcuts(ctx, menu, help);
   const fault = createFaultBanner(ctx, slots);
+  const eventCards = createEventCards(ctx);
   const named: [string, Part][] = [
     ['toasts', toasts],
     ['fault', fault],
+    ['eventCards', eventCards],
     ['tooltips', tips],
     ['hover', hover],
     ['worldmenu', menu],
