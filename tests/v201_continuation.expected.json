@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "24918e9c6b355cec747021f2b90dddb398517e37",
+    "rules": 201,
+    "content": "614be9f29e130748880d4b224e73fea35a301d14fb6535cc6ff7afbdc53ae5ad",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a shared timber yard is laid out (rules 201, shared_yard.ts), then 120 more after a save and load. Recorded with the code of rules 202 present in the tree and gated off for this world."
+  },
+  "saved": "ea76fa31ac811cf734f703ec0f1d8d9e8a6cb94cc89419680a7fbbc079886784",
+  "continued": "d027d397841401d891a871aef0fa00b7c28c15c943eff4ae9c2258112575bcc0",
+  "tick": 19800
+}

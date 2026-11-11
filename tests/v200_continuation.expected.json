@@ -1,0 +1,10 @@
+{
+  "source": {
+    "head": "24918e9c6b355cec747021f2b90dddb398517e37",
+    "rules": 200,
+    "content": "614be9f29e130748880d4b224e73fea35a301d14fb6535cc6ff7afbdc53ae5ad",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), 2,400 ticks in which an approach committed for its walk is seen (rules 200, company.ts), then 120 more after a save and load. Recorded with the code of rules 201 and 202 present in the tree and gated off for this world, because the three versions of the life stream were written before any of their pins."
+  },
+  "saved": "3f56c747a35fb0aae007326461a3f776855c15d9f35f4b4757849aee3a09f711",
+  "continued": "75d26efa8a45a214d90f99721723a7ff3ae6394427fa59128d0c92b7c58aaffc"
+}

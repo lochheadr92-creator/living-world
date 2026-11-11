@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "24918e9c6b355cec747021f2b90dddb398517e37",
+    "rules": 202,
+    "content": "614be9f29e130748880d4b224e73fea35a301d14fb6535cc6ff7afbdc53ae5ad",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until somebody chooses on a rules-202 reason (swap_and_fire.ts), then 120 more after a save and load."
+  },
+  "saved": "832d93f77234e4c5477579262d2308be611033e0243459e1dc963a0e83017463",
+  "continued": "1b1c5846dde0ff3de32c3f1ec4852b4528656b3b70e27322cb77e5e487f6e52e",
+  "tick": 8000
+}
