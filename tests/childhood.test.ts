@@ -49,7 +49,9 @@ it.each(['family_time','play_together','learn_foraging'] as ChildTime[])('pays s
 it('offers play with a child outside the family, without revealing remote people or skills',()=>{
  const {w,p,q,offer}=scene('play_together',false);expect(offer()).toBeTruthy();
  q.x=80;perceive(w,p);expect(offer()).toBeUndefined();
- const lesson=scene('learn_foraging');lesson.q.skills.forage=0.7;expect(lesson.offer()).toBeTruthy();
+ // This lesson is pinned to rules 208: it stages a grown person who forages worse than the child and is expected to decline. From rules 210
+ // (shown.ts) such a teacher shows fishing or farming instead, where they know more; tests/shown.test.ts holds that case and its contrast.
+ const lesson=scene('learn_foraging');lesson.w.settings.rulesVersion=208;lesson.q.skills.forage=0.7;expect(lesson.offer()).toBeTruthy();
  lesson.reach();for(let n=0;n<60&&lesson.p.convId;n++)stepWorld(lesson.w);
  expect(lesson.p.lastInteraction?.outcome).toBe('invitation declined');expect(lesson.p.skills.forage).toBe(0.9);
  expect(lesson.p.relations[lesson.q.id].childhood).toBeUndefined();

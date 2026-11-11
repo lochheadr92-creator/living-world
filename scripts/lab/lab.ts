@@ -132,6 +132,7 @@ import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
 import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplaces';
+import { CANNOT_TEACH, SHOWN_PARTS, setShown, shownPartOn } from '../../src/sim/shown';
 import { earnedAccess } from '../../src/sim/facilities';
 import { LIGHT_PACK_PARTS, childrenExemptOn, fillingTripsOn, lightPackPartOn, rationTwoOn, setChildrenExempt, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
@@ -246,6 +247,11 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 210 (shown.ts): all three parts removed (equal to rules 208), and each part alone
+  if (kind === 'rich-no-shown') return { spec: label, summary: 'practice is asked for and given as before rules 210; no effect below rules 210', install() { const was = SHOWN_PARTS.map((k) => shownPartOn(k)); setShown(false); return () => SHOWN_PARTS.forEach((k, i) => setShown(was[i], k)); } };
+  if (kind === 'rich-no-shown-remember') return { spec: label, summary: 'a child does not remember who could not teach them, as before rules 210; no effect below rules 210', install() { const was = shownPartOn('remember'); setShown(false, 'remember'); return () => setShown(was, 'remember'); } };
+  if (kind === 'rich-no-shown-older') return { spec: label, summary: 'only a grown person gives practice, as before rules 210; no effect below rules 210', install() { const was = shownPartOn('older'); setShown(false, 'older'); return () => setShown(was, 'older'); } };
+  if (kind === 'rich-no-shown-more') return { spec: label, summary: 'practice is in foraging only, as before rules 210; no effect below rules 210', install() { const was = shownPartOn('more'); setShown(false, 'more'); return () => setShown(was, 'more'); } };
   // rules 208 (light_pack.ts): the ration applied to children again (equal to rules 207)
   if (kind === 'rich-children-ration') return { spec: label, summary: 'under-twelves are held to the ration as at rules 205 to 207; no effect below rules 208', install() { const was = childrenExemptOn(); setChildrenExempt(false); return () => setChildrenExempt(was); } };
   // rules 207 (open_workplaces.ts): a workplace admits only those the earlier rules admitted (equal to rules 206)
@@ -708,6 +714,9 @@ export const METRICS = [
   // what rules 207 is for: jobs finished at any workplace, those of them done by somebody with no earned access to it (a guest),
   // and handcarts standing at the end
   'workplaceJobs', 'guestJobs', 'cartsAtEnd',
+  // what rules 210 is for: practices completed by what they were about, those given by a child, practices refused because the teacher
+  // knew no more, and the mean skill of the under-twelves alive at the end
+  'lessonsForage', 'lessonsFish', 'lessonsFarm', 'lessonsByChild', 'lessonRefusals', 'childForage', 'childFish', 'childFarm',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -888,6 +897,14 @@ export class LifeTally {
   approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0; basketRoomTrips = 0;
   rationTrips = 0; materialsHomeTrips = 0; mealsFromPack = 0; mealsFromStore = 0; siteDeliveries = 0;
   workplaceJobs = 0; guestJobs = 0;
+  /** every practice seen, by conversation id, as it last stood: how it ended, what it was about, whether a child gave it */
+  private practices = new Map<number, { outcome: string; reason: string; skill: string; byChild: boolean }>();
+  private practiceCount(pred: (x: { outcome: string; reason: string; skill: string; byChild: boolean }) => boolean): number { let n = 0; for (const x of this.practices.values()) if (pred(x)) n++; return n; }
+  get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
+  get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
+  get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
+  get lessonsByChild(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.byChild); }
+  get lessonRefusals(): number { return this.practiceCount((x) => x.outcome === 'declined' && x.reason === CANNOT_TEACH); }
   private markets = new Set<number>();
   private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
@@ -927,6 +944,10 @@ export class LifeTally {
   }
   tick(w: World): void {
     for (const c of w.conversations) {
+      if (c.purpose === 'learn_foraging' && c.childhood) {
+        const teacher = w.byId.get(c.b);
+        this.practices.set(c.id, { outcome: c.childhood.outcome, reason: c.childhood.reason, skill: c.childhood.skill ?? 'forage', byChild: !!teacher && teacher.ent === 'person' && stageOf(w, teacher) === 'child' });
+      }
       if (this.convs.has(c.id)) continue;
       this.convs.add(c.id);
       switch (c.purpose) {
@@ -1125,6 +1146,12 @@ export function outcomeOf(
       workplaceJobs: life.workplaceJobs,
       guestJobs: life.guestJobs,
       cartsAtEnd: w.carts.length,
+      lessonsForage: life.lessonsForage,
+      lessonsFish: life.lessonsFish,
+      lessonsFarm: life.lessonsFarm,
+      lessonsByChild: life.lessonsByChild,
+      lessonRefusals: life.lessonRefusals,
+      ...((kids) => ({ childForage: kids.length ? Math.round((kids.reduce((n, p) => n + p.skills.forage, 0) / kids.length) * 1000) / 1000 : 0, childFish: kids.length ? Math.round((kids.reduce((n, p) => n + p.skills.fish, 0) / kids.length) * 1000) / 1000 : 0, childFarm: kids.length ? Math.round((kids.reduce((n, p) => n + p.skills.farm, 0) / kids.length) * 1000) / 1000 : 0 }))(alive.filter((p) => stageOf(w, p) === 'child')),
     },
     milestones,
   };

@@ -9,5 +9,5 @@ export const hasMemoryRetention=(w:World)=>enabled&&w.settings.dynamics==='rich'
  * Timestamp/counter keys, whereabouts, kinship, grievances and relationship history remain intact. */
 export function retainOperationalMemory(w:World,p:Person):void{
  if(!hasMemoryRetention(w))return;
- for(const key of Object.keys(p.cooldowns))if(/^(talk|invite|sorry|propose|making:)\d+$/.test(key)&&p.cooldowns[key]<=w.tick)delete p.cooldowns[key];
+ for(const key of Object.keys(p.cooldowns))if(/^(talk|invite|sorry|propose|making:|noteach:)\d+$/.test(key)&&p.cooldowns[key]<=w.tick)delete p.cooldowns[key];
 }
