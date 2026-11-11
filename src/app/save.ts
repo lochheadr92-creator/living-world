@@ -12,6 +12,7 @@ import {validateNourishment} from '../sim/nourishment';
 import {validateLivestock} from '../sim/livestock';
 import {validateGear} from '../sim/passive_gear';
 import {validateChildhood} from '../sim/childhood';
+import {validateShown} from '../sim/three_ages';
 import {validatePreservation} from '../sim/preservation';
 import {validateCarcasses} from '../sim/carcass';
 import {validateClothing} from '../sim/clothing';
@@ -345,6 +346,7 @@ export function deserializeWorld(json: string): World {
   validateGoalHistory(w);
   validateCompany(w);
   validateChildhood(w);
+  validateShown(w);
   validateNightExperience(w);
   validateProjectGraphs(w);
   validateRoutines(w);

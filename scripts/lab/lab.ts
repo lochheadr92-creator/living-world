@@ -135,6 +135,8 @@ import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplac
 import { CANNOT_TEACH, SHOWN_PARTS, setShown, shownPartOn } from '../../src/sim/shown';
 import { PLAY_PARTS, playPartOn, setPlay } from '../../src/sim/play';
 import { childPacePartOn, setChildPace } from '../../src/sim/child_pace';
+import { THREE_AGES_PARTS, bandOf, setThreeAges, threeAgesPartOn } from '../../src/sim/three_ages';
+import type { ThreeAgesPart } from '../../src/sim/three_ages';
 import { earnedAccess } from '../../src/sim/facilities';
 import { LIGHT_PACK_PARTS, childrenExemptOn, fillingTripsOn, lightPackPartOn, rationTwoOn, setChildrenExempt, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
@@ -252,6 +254,8 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
   if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
   if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  if (kind === 'rich-no-three-ages') return { spec: label, summary: 'every under-twelve gathers food as before rules 213; no effect below rules 213', install() { const was = THREE_AGES_PARTS.map((k) => threeAgesPartOn(k)); setThreeAges(false); return () => THREE_AGES_PARTS.forEach((k, i) => setThreeAges(was[i], k)); } };
+  if (kind.startsWith('rich-no-ages-') && (THREE_AGES_PARTS as string[]).includes(kind.slice('rich-no-ages-'.length))) { const part = kind.slice('rich-no-ages-'.length) as ThreeAgesPart; return { spec: label, summary: `the three-ages part '${part}' removed, as before rules 213; no effect below rules 213`, install() { const was = threeAgesPartOn(part); setThreeAges(false, part); return () => setThreeAges(was, part); } }; }
   if (kind === 'rich-no-little-pace') return { spec: label, summary: 'a little one walks at the 0.88 pace of every under-twelve, as before rules 212; no effect below rules 212', install() { const was = childPacePartOn('little'); setChildPace(false, 'little'); return () => setChildPace(was, 'little'); } };
   if (kind === 'rich-no-play-solo') return { spec: label, summary: 'a child has nothing of their own to do alone, as before rules 211; no effect below rules 211', install() { const was = playPartOn('solo'); setPlay(false, 'solo'); return () => setPlay(was, 'solo'); } };
   // rules 210 (shown.ts): all three parts removed (equal to rules 208), and each part alone
@@ -727,6 +731,10 @@ export const METRICS = [
   // what rules 211 is for: games between two children finished, by which game; games refused because the child asked had had
   // theirs; and plays alone finished, by which
   'gamesGuess', 'gamesChase', 'gamesHide', 'gamesHouse', 'gameRefusals', 'soloStones', 'soloBugs', 'soloSticks',
+  // what rules 213 is for: food gathering finished by a little one, by a child and by a grown person (12 and over), and the
+  // ticks each spent at it; the under-twelves' share of food gathered; and hunger by age band (share of waking ticks hungry)
+  'gathersLittle', 'gathersChild', 'gathersOlder', 'gatherHoursLittle', 'gatherHoursChild', 'gatherHoursOlder', 'childFoodShare',
+  'hungryLittle', 'hungryChild', 'hungryOlder',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -907,6 +915,9 @@ export class LifeTally {
   approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0; basketRoomTrips = 0;
   rationTrips = 0; materialsHomeTrips = 0; mealsFromPack = 0; mealsFromStore = 0; siteDeliveries = 0;
   workplaceJobs = 0; guestJobs = 0;
+  /** rules 213: food gathering finished and its ticks, by age band; food units gathered by band; awake and hungry ticks by band */
+  gathers = { little: 0, child: 0, older: 0 }; gatherTicks = { little: 0, child: 0, older: 0 }; gatheredUnits = { little: 0, child: 0, older: 0 };
+  awakeBand = { little: 0, child: 0, older: 0 }; hungryBand = { little: 0, child: 0, older: 0 };
   /** every practice seen, by conversation id, as it last stood: how it ended, what it was about, whether a child gave it */
   private practices = new Map<number, { outcome: string; reason: string; skill: string; byChild: boolean }>();
   private practiceCount(pred: (x: { outcome: string; reason: string; skill: string; byChild: boolean }) => boolean): number { let n = 0; for (const x of this.practices.values()) if (pred(x)) n++; return n; }
@@ -934,6 +945,7 @@ export class LifeTally {
   end(w: World, p: Person, a: Activity, outcome: 'success' | 'failed' | 'interrupted' | 'partial'): void {
     const ticks = Math.max(0, w.tick - a.start);
     const food = a.kind === 'gather' && LifeTally.FOOD_SOURCES.has(String(a.data.stype));
+    if (food) { const b = bandOf(w, p) ?? 'older'; this.gatherTicks[b] += ticks; this.gatheredUnits[b] += a.cycle ?? 0; if (a.cycle > 0) this.gathers[b]++; }
     const cat = LifeTally.SURVIVAL.has(a.kind) || food ? 'survival' : LifeTally.SLEEP.has(a.kind) ? 'sleep' : LifeTally.LIFE.has(a.kind) ? 'life' : 'work';
     this.time[cat] += ticks;
     const st = this.byStage[stageOf(w, p)];
@@ -993,6 +1005,7 @@ export class LifeTally {
       if (p.pose === 'sleep') continue;
       this.awakeTicks++;
       if (p.needs.hunger < 62) this.hungryTicks++;
+      { const b = bandOf(w, p) ?? 'older'; this.awakeBand[b]++; if (p.needs.hunger < 62) this.hungryBand[b]++; }
       if (p.needs.thirst < 66) this.thirstyTicks++;
       if (Math.min(p.needs.hunger, p.needs.thirst, p.needs.energy) > 65) this.fedTicks++;
     }
@@ -1172,6 +1185,16 @@ export function outcomeOf(
       soloStones: life.solo.stones ?? 0,
       soloBugs: life.solo.bugs ?? 0,
       soloSticks: life.solo.sticks ?? 0,
+      gathersLittle: life.gathers.little,
+      gathersChild: life.gathers.child,
+      gathersOlder: life.gathers.older,
+      gatherHoursLittle: Math.round(life.gatherTicks.little / 10) / 10,
+      gatherHoursChild: Math.round(life.gatherTicks.child / 10) / 10,
+      gatherHoursOlder: Math.round(life.gatherTicks.older / 10) / 10,
+      childFoodShare: ((u) => (u.little + u.child + u.older ? Math.round(((u.little + u.child) / (u.little + u.child + u.older)) * 1000) / 1000 : 0))(life.gatheredUnits),
+      hungryLittle: life.awakeBand.little ? Math.round((life.hungryBand.little / life.awakeBand.little) * 1000) / 1000 : 0,
+      hungryChild: life.awakeBand.child ? Math.round((life.hungryBand.child / life.awakeBand.child) * 1000) / 1000 : 0,
+      hungryOlder: life.awakeBand.older ? Math.round((life.hungryBand.older / life.awakeBand.older) * 1000) / 1000 : 0,
       lessonsForage: life.lessonsForage,
       lessonsFish: life.lessonsFish,
       lessonsFarm: life.lessonsFarm,

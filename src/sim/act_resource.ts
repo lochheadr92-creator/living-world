@@ -1,5 +1,6 @@
 import { mealEatsWhatItTook, mealLeaves } from './light_pack';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
+import { childWorkBlock, noteChildWork, practiceScale } from './three_ages';
 import {hasRods} from './fishing_rods';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
 import {cellarAccess} from './cellars';
@@ -149,6 +150,8 @@ registerHandler('gather', {
     a.data.stype = s.type;
     observe(world, p, s); // arriving, they see its real state
     if (childHeavyTask(world, p, s.type)) return CHILD_HEAVY_REASON; // rules 156: refused on arrival and on resumption
+    const young = childWorkBlock(world, p, s.type); // rules 213 (three_ages.ts): the same, for a child's food gathering
+    if (young) return young;
     faceToward(p, s.x + 0.5, s.y + 0.5, 3);
     const err = startCycle(world, p, a, s);
     if (err) {
@@ -199,8 +202,9 @@ registerHandler('gather', {
     if (task) wearFor(world, p, task, a.duration);
     const sk = SOURCE_SKILL[s.type];
     if (s.type === 'tree' || s.type === 'rock') riskOfHarm(world, p, s.type, 0.004);
-    p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + 0.004);
-    notePractice(world, p, sk, 0.004);
+    const practice = 0.004 * practiceScale(world, p); // rules 213: what gathering teaches a child is scaled by age
+    p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + practice);
+    notePractice(world, p, sk, practice);
     let retained=got;
     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
       // shell some of the grain heads for seed
@@ -231,6 +235,7 @@ registerHandler('gather', {
     return 'continue';
   },
   onEnd(world, p, a, outcome, detail) {
+    noteChildWork(world, p, a); // rules 213: a child of seven to eleven rests from gathering after a stretch of it
     const s = sourceOf(world, a);
     const name = a.data.stype ? String(a.data.stype).replace('_', ' ') : 'source';
     if (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0)) {

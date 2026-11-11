@@ -1,4 +1,5 @@
 // Childhood owns invitations and paid shared experiences; social.ts owns contact and consent.
+import {markShown} from './three_ages';
 import {DAY} from './constants';
 import {hasChildhood} from './childhood_rules';
 import {runsRulesVersion} from './rulesversion';
@@ -100,6 +101,7 @@ export function finishChildTime(w:World,c:Conversation,a:Person,b:Person):void{
  s.outcome='completed';
  const k:LessonSkill=s.skill??'forage';
  if(c.purpose==='learn_foraging'){
+  markShown(w,a,k); // rules 213 (three_ages.ts): the child has now been shown this task
   const before=a.skills[k];a.skills[k]=Math.min(b.skills[k],Math.round((before+0.025)*10000)/10000);
   s.gain=Math.round((a.skills[k]-before)*10000)/10000;
  }

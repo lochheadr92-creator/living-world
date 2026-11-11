@@ -1,4 +1,5 @@
 import { childTaskFilter } from './child_tasks';
+import { threeAgesFilter } from './three_ages';
 import {placeOptions} from './options_places';
 import {runsRulesVersion} from './rulesversion';
 import { relocationOptions } from './relocation';
@@ -108,6 +109,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   let opts = ctx.options.filter((o) => o.make && (o.util > 0 || intentFor(p, o) !== null));
   if (ctx.stage === 'child') opts = opts.filter((o) => (!CHILD_FORBIDDEN.includes(o.kind) || runsRulesVersion(ctx.world,124)&&o.key.startsWith('dress:')) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
   opts = childTaskFilter(ctx, opts); // rules 156 (child_tasks.ts): no wood or stone gathering for children
+  opts = threeAgesFilter(ctx, opts); // rules 213 (three_ages.ts): a little one gathers no food; a child only what they were shown, a bounded amount
   // work that would strand someone away from water or food is not taken on (see relief.ts)
   opts = applyReliefGuard(ctx, opts);
   if (ctx.criticals.length) {

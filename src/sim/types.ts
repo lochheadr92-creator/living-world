@@ -724,6 +724,8 @@ export interface Person {
   apprentice?: Apprenticeship;
   /** the change they are living through (lifechanges.ts; rich only, never created in an authored world) */
   lifeEvent?: LifeEvent;
+  /** rules 213 (three_ages.ts): the tasks somebody has shown this child, from a completed practice */
+  shown?: ('forage' | 'fish' | 'farm')[];
   /** time lately spent with three or more people close by (temperament.ts; rich only, never created in an authored world) */
   crowd?: number;
   /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
