@@ -130,6 +130,7 @@ import type { CompanyPart } from '../../src/sim/company';
 import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
 import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
 import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
+import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -242,6 +243,11 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 204 (carry_more.ts): all three parts removed (equal to rules 203), and each part alone
+  if (kind === 'rich-no-carry-more') return { spec: label, summary: 'a basket is wanted, fetched for and made as before rules 204; no effect below rules 204', install() { const was = CARRY_MORE_PARTS.map((k) => carryMorePartOn(k)); setCarryMore(false); return () => CARRY_MORE_PARTS.forEach((k, i) => setCarryMore(was[i], k)); } };
+  if (kind === 'rich-no-basket-want') return { spec: label, summary: 'a basket is wanted only after gathering more than six units, as before rules 204; no effect below rules 204', install() { const was = carryMorePartOn('want'); setCarryMore(false, 'want'); return () => setCarryMore(was, 'want'); } };
+  if (kind === 'rich-no-basket-room') return { spec: label, summary: 'bringing food home gains nothing from a basket whose wood will not fit in the pack, as before rules 204; no effect below rules 204', install() { const was = carryMorePartOn('room'); setCarryMore(false, 'room'); return () => setCarryMore(was, 'room'); } };
+  if (kind === 'rich-no-basket-worth') return { spec: label, summary: 'the wood trip for a basket and its making score as for any other tool, as before rules 204; no effect below rules 204', install() { const was = carryMorePartOn('worth'); setCarryMore(false, 'worth'); return () => setCarryMore(was, 'worth'); } };
   // rules 203 (home_first.ts): the cap exemption removed, and the two retired parts kept on
   if (kind === 'rich-no-home-first') return { spec: label, summary: 'a household\'s first roof waits for the settlement\'s site cap again, as before rules 203; no effect below rules 203', install() { const was = homeFirstPartOn('cap'); setHomeFirst(false, 'cap'); return () => setHomeFirst(was, 'cap'); } };
   if (kind === 'rich-keep-yard-and-swap') return { spec: label, summary: 'the shared first timber yard (201) and the walk a food swap saves (202) still apply, as before rules 203 retired them; no effect below rules 203', install() { const was = homeFirstPartOn('retire'); setHomeFirst(false, 'retire'); return () => setHomeFirst(was, 'retire'); } };
@@ -679,6 +685,9 @@ export const METRICS = [
   // what rules 203 is for: households whose home is a lean-to or nothing at the end, home sites open at the end, and sites given up
   // for idleness over the branch (the cost a looser cap could bring)
   'householdsWithoutSolidHome', 'homeSitesOpen', 'sitesAbandoned',
+  // what rules 204 is for: grown people (twelve and over) holding a basket at the end, their share of the grown, and trips home made
+  // so that the basket's wood would fit
+  'grownWithBasket', 'basketShare', 'basketRoomTrips',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -856,7 +865,7 @@ export class LifeTally {
   private convs = new Set<number>();
   chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
   mealsSat = 0; visits = 0; spareTime = 0;
-  approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0;
+  approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0; basketRoomTrips = 0;
   private markets = new Set<number>();
   private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
@@ -878,6 +887,7 @@ export class LifeTally {
     // an approach that is answered turns into the conversation (its kind becomes 'converse'), so a socialize activity that ENDS never was
     if (a.kind === 'socialize') this.approachesFailed++;
     if (outcome !== 'success') return;
+    if (a.kind === 'deposit' && a.data.basketRoom) this.basketRoomTrips++;
     if (a.kind === 'fuel_fire') this.fireFeeds++;
     else if (a.kind === 'operate') {
       const at = w.byId.get(a.targetId);
@@ -1076,6 +1086,9 @@ export function outcomeOf(
       householdsWithoutSolidHome: w.households.filter((h) => h.members.length > 0 && !w.buildings.some((b) => b.id === h.homeId && (b.type === 'hut' || b.type === 'house'))).length,
       homeSitesOpen: w.sites.filter((s) => s.type === 'hut' || s.type === 'lean_to').length,
       sitesAbandoned: life.sitesAbandoned,
+      grownWithBasket: alive.filter((p) => stageOf(w, p) !== 'child' && (p.inv.basket ?? 0) > 0).length,
+      basketShare: ((g) => (g.length ? Math.round((g.filter((p) => (p.inv.basket ?? 0) > 0).length / g.length) * 1000) / 1000 : 0))(alive.filter((p) => stageOf(w, p) !== 'child')),
+      basketRoomTrips: life.basketRoomTrips,
     },
     milestones,
   };

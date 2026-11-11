@@ -1,5 +1,6 @@
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
 import { firstHomePassesCap } from './home_first';
+import { BASKET_ROOM_WEIGHT, basketRoomShort, basketWant, basketWorth, hasBasketRoom, hasBasketWant } from './carry_more';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
 import { mealOf } from './meals';
 import { GATHERING_FUEL, GATHERING_LEAD, GATHERING_WEIGHT, hasGatheringFire } from './swap_and_fire';
@@ -238,7 +239,9 @@ function optDepositFood(ctx: Ctx): void {
   const unreserved = smallPack ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
   const surplus = (smallPack ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
-  if (surplus < (partialReserve||smallPack?1:2)) return;
+  // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
+  const roomShort = basketRoomStall(ctx);
+  if (surplus < (partialReserve||smallPack||roomShort?1:2)) return;
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
@@ -259,6 +262,7 @@ function optDepositFood(ctx: Ctx): void {
       .add(mine ? 'for my household' : 'for everyone', mine ? 4 + ctx.dependents.length * 3 : 2 + 5 * p.traits.generosity)
       .add('walking', -pen(e));
     if(cellar)sc.add('the cool cellar slows spoilage',7);
+    if (roomShort && mine) sc.add('room in my pack for the basket’s wood', BASKET_ROOM_WEIGHT);
     if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
@@ -302,11 +306,21 @@ function optDepositFood(ctx: Ctx): void {
           utility: sc.total,
           minCommit: 40,
           maxTicks: 600,
-          data: { items },
+          data: roomShort && mine ? { items, basketRoom: true } : { items },
         });
       },
     });
   }
+}
+
+/** Rules 204 (carry_more.ts): does this grown person want a basket whose wood will not fit in the pack as it is? */
+function basketRoomStall(ctx: Ctx): boolean {
+  const { world, p } = ctx;
+  if (!hasBasketRoom(world) || ctx.stage === 'child' || (p.inv.basket ?? 0) > 0) return false;
+  const missing = TOOL_RECIPE.basket.wood - freeOf(p, 'wood');
+  const room = invRoom(world, p, 'wood');
+  if (missing <= 0 || room >= missing) return false;
+  return basketRoomShort(world, wantedTool(ctx) === 'basket', missing, room);
 }
 
 // ───────────────────────── materials ─────────────────────────
@@ -376,7 +390,8 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   const tool = wantedTool(ctx);
   if (tool) {
     const r = TOOL_RECIPE[tool];
-    if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
+    // rules 204 (carry_more.ts): the wood for a basket is worth a little more than the makings of another tool
+    if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6 + basketWorth(world, tool), why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
     if (r.stone) needs.push({ item: 'stone', n: r.stone, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
   }
   // a worn tool is mended with a handle, or at a pinch a piece of wood
@@ -415,7 +430,9 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   const builds = p.stats.built > 0 || beliefsByKind(p, ['site']).some((s) => s.hh === p.hhId);
   const options: { t: HandTool; w: number }[] = [];
   if(hasRods(world)&&!has('rod')&&beliefsByKind(p,['fish_spot']).some(b=>b.amount>0&&world.tick-b.seen<DAY))options.push({t:'rod',w:1.8*p.skills.fish});
-  if (!has('basket') && p.stats.gathered > 6) options.push({ t: 'basket', w: 1 + p.skills.forage });
+  // rules 204 (carry_more.ts): every grown person without a basket wants one; before 204 only after gathering more than six units
+  const basketW = has('basket') ? 0 : basketWant(world, p.stats.gathered, p.skills.forage);
+  if (basketW > 0) options.push({ t: 'basket', w: basketW });
   if (!has('axe') && knowTrees && p.stats.gathered > 3) options.push({ t: 'axe', w: p.skills.wood * 1.4 });
   if (!has('hoe') && farming) options.push({ t: 'hoe', w: p.skills.farm * 1.3 });
   if (!has('pick') && knowRocks && knowTrees) options.push({ t: 'pick', w: p.skills.stone });
@@ -434,8 +451,16 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   if (makesSpears(world) && !has('spear') && metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
-  return options.find(o=>!toolCapacityBlock(world,p,o.t))?.t ?? null;
+  const first = options.find(o=>!toolCapacityBlock(world,p,o.t))?.t ?? null;
+  // rules 204 (carry_more.ts): the basket's new eagerness does not put aside a tool whose makings are already in hand
+  if (first === 'basket' && hasBasketWant(world) && !makingsInHand(p, 'basket')) {
+    const ready = options.find(o => o.t !== 'basket' && !toolCapacityBlock(world,p,o.t) && makingsInHand(p, o.t));
+    if (ready) return ready.t;
+  }
+  return first;
 }
+/** Does this person hold, free of any plan of theirs, everything the hand tool is made of? */
+const makingsInHand = (p: Person, t: HandTool): boolean => freeOf(p, 'wood') >= TOOL_RECIPE[t].wood && freeOf(p, 'stone') >= TOOL_RECIPE[t].stone;
 
 /** Has this person actually met a wolf lately - one in sight now, or one they saw and remember from within the last day? */
 export function metAWolfLately(ctx: Ctx): boolean {
@@ -1125,6 +1150,8 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
   // a spear is not made to work faster; it is made because there are wolves about, and the reason it is offered says so
   const why = workshopTool(ctx) === tool ? `to begin ${ctx.toolWanted!.for}` : tool === 'spear' ? 'to have something to face a wolf with' : 'to work faster';
   const sc = new Scorer().add(tool === 'spear' ? 'wolves about and nothing to face one with' : `wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
+  const worth = basketWorth(world, tool);
+  if (worth > 0) sc.add('a basket carries half as much again', worth);
   const util = sc.total * nightMult(ctx);
   addOption(ctx, {
     kind: 'craft',

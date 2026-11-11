@@ -23,7 +23,9 @@ function scene(version=CURRENT_RULES_VERSION,basket=false){
  return {w,p};
 }
 it('M1: does not adopt a tool whose complete carried recipe exceeds capacity',()=>{
- const {w,p}=scene();expect(carryCap(w,p)).toBe(6);
+ // Pinned to rules 203: the scene stages an axe as the only tool she wants. From rules 204 (carry_more.ts) a grown person without a
+ // basket wants one from the start, and a basket's three wood is within her capacity, so she would take that plan on instead.
+ const {w,p}=scene(203);expect(carryCap(w,p)).toBe(6);
  const r=TOOL_RECIPE.axe;expect(r.wood*WEIGHT.wood+r.stone*WEIGHT.stone).toBeGreaterThan(carryCap(w,p));
  reviewIntentions(generateOptions(w,p,true,true));
  expect(p.intentions.filter(i=>i.kind==='tool'&&i.status==='active')).toEqual([]);
