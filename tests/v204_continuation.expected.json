@@ -1,0 +1,11 @@
+{
+  "source": {
+    "head": "70f335555f1b539ff35c1fd858fc526dcae73996",
+    "rules": 204,
+    "content": "e3e43f6a8b0958cc1e9f085fa5d851e6b811bac13b5a4c110d216dc400739345",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 world (arrivals on), stepped until a grown person who has gathered six units or fewer means to make a basket (rules 204, carry_more.ts), then 120 more after a save and load."
+  },
+  "saved": "88c6293d3a34fa09b1263acdb3f681410a1f02cc6e502e4e90decf707f5ddd3d",
+  "continued": "2ddbc14ae45393a6e49bd6b691ed7eb3c63fbe4353cadc2687e3fefe46d4a947",
+  "tick": 100
+}

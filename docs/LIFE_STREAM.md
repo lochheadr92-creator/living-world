@@ -151,3 +151,59 @@ What that supports, and what it does not:
   comparisons is inside the noise floor, so nothing is claimed; the mechanism is still not traced.
 - Not run: the full suite at the rules-203 head (the owner's rule is one suite at the end of a stream). Not touched: the layout-footprint refusal the adult Dax
   met twice ("another layout already reserves this footprint or its access gap", `layout_claims.ts`), which is a different rule from the cap.
+
+## Rules 204: a basket is worth getting
+
+Owner instruction, 11 November 2026, after the childhood probe showed under-twelves taking a quarter of a settlement's food: grown people should want to carry
+more, and that should be attractive in itself, "rather than having it gated by depending on a number of something". One version, three separately switched parts
+(`src/sim/carry_more.ts`).
+
+The baseline was not rerun. It is the mechanism census of rules 196 (`review_evidence/balance-20261111/census`: about 7 baskets made a settlement in 25 days
+among about 21 grown people, no handcart in any of twelve settlements, and "no room in my pack for one wood" the largest block on the way to a basket) and the
+rules-203 lab recorded above.
+
+| part | what changes | lab removal |
+|---|---|---|
+| want | Every grown person without a basket wants one from the start, at 1 + foraging skill or 2.1, whichever is more (before: only after gathering more than six units). A tool whose makings are already in hand comes before a basket whose wood is not. | `rich-no-basket-want` |
+| room | When the wood a basket still needs does not fit in the pack, bringing food home scores 10 more, says why, and one spare portion is enough (two before). | `rich-no-basket-room` |
+| worth | The wood trip for a basket and its making each score 8 more than for another tool. | `rich-no-basket-worth` |
+
+`rich-no-carry-more` removes all three and equals rules 203. Contract tests `tests/carry_more.test.ts` (12, each with the rules-203 contrast).
+`tests/tool_plan_capacity.test.ts` M1 is pinned to rules 203 with a comment (its scene stages an axe as the only tool wanted; from 204 the same elder takes on a
+basket she can carry). Immutable pin `tests/v204_continuation.*` (Normal gen-2, arrivals on; a grown person who has gathered six units or fewer means to make a
+basket by tick 100; then 120 ticks after a save and load), recorded from a clean checkout of `70f33555`. A handcart is not part of this version.
+
+Lab: clean checkout of `70f33555` (`dirty` false), 12 seeds, Normal, fork 0, 25 days, arrivals on; control, `nudge:1`, `nudge:2` and the four removal arms, 84
+arms in 30 minutes 16 seconds. Evidence: `review_evidence/life-20261111/r204/`, `versions-203-204.txt`, `run204.txt`.
+
+Rules 203 against 204 (`scripts/lab_versions.ts`, the control and the two nudges of each lab):
+
+| measure | 203 | 204 | verdict |
+|---|---|---|---|
+| tools in hand | 44.3 | 55.6 | larger than chance, higher in 10 of 12 seeds |
+| projects done | 59.2 | 69.9 | larger than chance, higher in 10 of 12 |
+| buildings | 33.5 | 34.7 | systematic, within the noise floor |
+| people, deaths (1.8 and 1.9), solid homes, hunger, mood, chats, family time, child play, spare time, coaching, shared meals | | | not distinguishable from chance |
+
+Each part, removed inside rules 204 (reference: the mean of the control and the nudges):
+
+| measure | 204 | all removed | want removed | room removed | worth removed |
+|---|---|---|---|---|---|
+| share of grown people holding a basket at day 25 | 0.84 | 0.59, larger than chance | 0.66, larger than chance | 0.82 | 0.75, larger than chance |
+| grown people holding a basket | 18.6 | 13.2, larger than chance | 14.5, larger than chance | 18.0 | 15.6, larger than chance |
+| tools in hand | 55.6 | 43.7, larger than chance | 50.1, within the floor | 55.7 | 48.9 |
+| projects done | 69.9 | 58.3, larger than chance | 59.9, larger than chance | 65.7 | 65.3 |
+| buildings | 34.7 | 33.1, within the floor | 33.8 | 33.9 | 32.3, within the floor |
+| trips home made for the basket's wood | 16.3 | 0 | 32.4 | 0 | 25.9 |
+
+What that supports, and what it does not:
+
+- **Most grown people now have a basket.** Five in six at day 25, against under three in five without the rule, beyond chance. The want part and the worth
+  part each carry a share of it, beyond chance.
+- **More tools and more projects finished**, beyond chance, with nothing lost that the lab can see: people, deaths, hunger, mood, chats, family time and child
+  play are not distinguishable from chance.
+- **The room part shows nothing the lab can detect.** Its trips happen (16 a settlement) but the share with a basket is 0.82 without it against 0.84 with. It is
+  kept as harmless; rules 205 generalises the same idea (one portion kept, the rest taken home).
+- Food in the home store per person is lower with the three parts than without them (0.2 against 0.5, larger than chance): more of a household's food is in
+  packs. That is the thing rules 205 addresses.
+- Not run: the full suite at this head (one suite at the end of a stream). No handcart is built in any arm.
