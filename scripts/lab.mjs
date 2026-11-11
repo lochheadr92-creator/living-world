@@ -1,11 +1,15 @@
 // Run the counterfactual lab on every core of this machine, then print the report. Works on Windows, macOS, Linux.
 //   node scripts/lab.mjs [--out current_lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
 //     [--arrivals on|off] [--rules N]   (arrivals on by default, as in the app; --rules pins an earlier rich rules version)
+//     [--arms parallel|serial]          (parallel: every arm of every seed is its own process, so a three-arm lab takes about one arm's
+//                                        time on a machine with the cores; the rows are the ones the serial run writes. Default: parallel
+//                                        when --fork is 0 and --branches is given, serial otherwise, because each arm process replays the
+//                                        days before the fork.)
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn, spawnSync } from 'node:child_process';
 import { cpus } from 'node:os';
-import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -70,15 +74,74 @@ const node = (script, rest, stdout) =>
     p.on('exit', (code) => resolve(code));
   });
 
-console.log(`running ${seeds.length} seeds on ${cores} cores into ${out}/`);
+const geology = opt('geology-comparison', 'no') === 'yes';
+const armsMode = opt('arms', opt('fork', '4') === '0' && opt('branches', '') && !geology ? 'parallel' : 'serial');
+if (armsMode !== 'parallel' && armsMode !== 'serial') throw new Error('--arms must be parallel or serial');
+if (armsMode === 'parallel' && (!opt('branches', '') || geology)) throw new Error('--arms parallel needs --branches and no geology comparison');
+const seedDone = (seed) => {
+  const path = join(out, `lab_${seed}.jsonl`);
+  return existsSync(path) && readFileSync(path, 'utf8').trimEnd().endsWith('"done":true}');
+};
 let next = 0;
 let finished = 0;
 let failed = 0;
+if (armsMode === 'parallel') {
+  // Every arm of every seed is one process. An arm prints its row with its sampled hashes; when a seed's arms are all in, the rows are
+  // written to lab_<seed>.jsonl in the serial order (control first), each branch's parting from the control worked out from the two
+  // hash lists exactly as runBranch does when it is handed the control's (the first sample that differs, in ticks after the fork),
+  // and the hashes dropped. The arm files are scratch and are removed once the seed's file is written.
+  const specs = ['control', ...opt('branches', '').split(',').filter((b) => b && b !== 'none')];
+  const sample = Number(opt('sample', '120'));
+  const armDir = join(out, 'arms');
+  mkdirSync(armDir, { recursive: true });
+  const armPath = (seed, i) => join(armDir, `lab_${seed}__${i}.jsonl`); // by index: a spec may hold a colon, which a Windows file name cannot
+  const armDone = (seed, i) => existsSync(armPath(seed, i)) && readFileSync(armPath(seed, i), 'utf8').trimEnd().endsWith('"done":true}');
+  const todo = seeds.filter((s) => !seedDone(s));
+  for (const s of seeds) if (!todo.includes(s)) console.log(`seed ${s} already done  [${++finished}/${seeds.length}]`);
+  const tasks = todo.flatMap((seed) => specs.map((spec, i) => ({ seed, spec, i }))).filter((t) => !armDone(t.seed, t.i));
+  const bad = new Set();
+  console.log(`running ${todo.length} seeds x ${specs.length} arms (${tasks.length} processes to run) on ${cores} cores into ${out}/`);
+  const merge = (seed) => {
+    const rows = specs.map((_, i) => JSON.parse(readFileSync(armPath(seed, i), 'utf8').split(/\r?\n/)[0]));
+    const control = rows[0].hashes;
+    const lines = rows.map((row, i) => {
+      if (i > 0) {
+        let parted = null;
+        for (let k = 0; k < row.hashes.length; k++) if (control[k] !== row.hashes[k]) { parted = (k + 1) * sample; break; }
+        row.divergedAfterTicks = parted;
+      }
+      delete row.hashes;
+      return JSON.stringify(row);
+    });
+    writeFileSync(join(out, `lab_${seed}.jsonl`), lines.join('\n') + '\n' + JSON.stringify({ seed, done: true }) + '\n');
+    for (let i = 0; i < specs.length; i++) rmSync(armPath(seed, i), { force: true });
+  };
+  let at = 0;
+  const armWorker = async () => {
+    while (at < tasks.length) {
+      const t = tasks[at++];
+      const file = createWriteStream(armPath(t.seed, t.i));
+      const code = await node('scripts/lab_seed.ts', ['--seed', t.seed, '--arm', t.spec, ...extra.filter((_, k) => extra[k - 1] !== '--branches' && extra[k] !== '--branches')], file);
+      await new Promise((r) => file.end(r));
+      if (code !== 0) bad.add(t.seed);
+      if (specs.every((_, i) => armDone(t.seed, i))) {
+        merge(t.seed);
+        console.log(`seed ${t.seed} done  [${++finished}/${seeds.length}]`);
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(cores, tasks.length) }, armWorker));
+  for (const seed of todo) if (!seedDone(seed)) {
+    if (specs.every((_, i) => armDone(seed, i))) { merge(seed); console.log(`seed ${seed} done  [${++finished}/${seeds.length}]`); }
+    else { failed++; console.log(`seed ${seed} FAILED (an arm did not finish)  [${++finished}/${seeds.length}]`); }
+  }
+  if (!readdirSync(armDir).length) rmSync(armDir, { recursive: true, force: true });
+} else console.log(`running ${seeds.length} seeds on ${cores} cores into ${out}/`);
 async function worker() {
   while (next < seeds.length) {
     const seed = seeds[next++];
     const path = join(out, `lab_${seed}.jsonl`);
-    if (existsSync(path) && readFileSync(path, 'utf8').trimEnd().endsWith('"done":true}')) {
+    if (seedDone(seed)) {
       console.log(`seed ${seed} already done  [${++finished}/${seeds.length}]`);
       continue;
     }
@@ -89,7 +152,7 @@ async function worker() {
     console.log(`seed ${seed} ${code === 0 ? 'done' : 'FAILED (' + code + ')'}  [${++finished}/${seeds.length}]`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(cores, seeds.length) }, worker));
+if (armsMode === 'serial') await Promise.all(Array.from({ length: Math.min(cores, seeds.length) }, worker));
 assertLabSourceUnchanged(provenance);
 const reportFile = join(out, 'report.txt');
 const report = createWriteStream(reportFile);

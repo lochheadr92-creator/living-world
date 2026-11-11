@@ -2,9 +2,14 @@ import {setDepositGeology} from '../src/sim/geology';
 import {serializeWorld} from '../src/app/save';
 // One seed of the counterfactual lab (see scripts/lab/lab.ts). Prints one JSON line per branch.
 //   npx vite-node scripts/lab_seed.ts -- --seed meadow [--profile large] [--fork 4] [--days 8] [--branches nudge:1,nudge:2,...] [--sample 120]
-//     [--arrivals on|off] [--rules N]
+//     [--arrivals on|off] [--rules N] [--arm <spec>]
 // Run many seeds in parallel, then aggregate: node scripts/lab.mjs --out lab_out --seeds 8
+// `--arm control` (or any one branch spec) runs that one arm alone from the same fork and prints its row WITH its sampled hashes, so
+// the runner can run a seed's arms side by side and work out afterwards when each parted from the control (scripts/lab.mjs). An arm
+// forks from the same saved world whichever process runs it, so the row is the one the serial run prints.
+import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
+import { stepWorld } from '../src/sim/world';
 import { freshRunSettings, parseRunRules, runRulesVersion } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { DEFAULT_BRANCHES, runLab, runBranch, parseIntervention } from './lab/lab';
@@ -47,7 +52,17 @@ const world = createWorld(settings);
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
 // `rulesVersion` is on every row beside `dynamics`, explicitly null for an unversioned run: a reader must never have to
 // guess a generation from the word "rich". `arrivals` is on every row for the same reason.
-const emit=(r:ReturnType<typeof runBranch>)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(pinned!==undefined?{rulesPinned:true}:{}),arrivals,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,hashes:undefined}));};
+const emit=(r:ReturnType<typeof runBranch>,keepHashes=false)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(pinned!==undefined?{rulesPinned:true}:{}),arrivals,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,...(keepHashes?{}:{hashes:undefined})}));};
+const arm=opt('arm','');
+if(arm){
+ // one arm alone, for the runner's side-by-side mode: the same fork, the same save, this arm only, hashes kept
+ if(geologyComparison)throw new Error('--arm cannot be combined with the generation geology comparison');
+ while(world.tick<fork*DAY)stepWorld(world);
+ emit(runBranch(serializeWorld(world),parseIntervention(arm),days,sample),true);
+ assertLabSourceUnchanged(provenance);
+ console.log(JSON.stringify({seed,arm,done:true}));
+ process.exit(0);
+}
 runLab(world,fork,days,branches,sample,emit);
 if(geologyComparison){
  let baseline;setDepositGeology(false);try{baseline=createWorld(settings);}finally{setDepositGeology(true);}
