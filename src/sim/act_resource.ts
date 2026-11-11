@@ -1,4 +1,4 @@
-import { mealLeaves } from './light_pack';
+import { mealEatsWhatItTook, mealLeaves } from './light_pack';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
 import {hasRods} from './fishing_rods';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
@@ -256,6 +256,16 @@ function tableItems(world: World, a: Activity): Items | null {
   return e && e.ent === 'building' ? e.store.items : e && e.ent === 'pile' ? e.items : null;
 }
 
+/** Rules 206 (light_pack.ts): the portions a meal took from a store that are still in the pack, or null when there are none (and before 206). */
+function mealStill(p: Person, a: Activity): Items | null {
+  const meal = a.data.meal as Record<string, number> | undefined;
+  if (!meal) return null;
+  const left: Items = {};
+  let any = false;
+  for (const key of Object.keys(meal)) { const n = Math.min(meal[key] ?? 0, p.inv[key as ItemKind] ?? 0); if (n > 0) { left[key as ItemKind] = n; any = true; } }
+  return any ? left : null;
+}
+
 function eatTick(world: World, p: Person, a: Activity): WorkResult {
   if(a.data.table){const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
   if(a.data.table){const blocked=pileAccessBlocker(p,world.byId.get(a.targetId));if(blocked)return `fail:${blocked}`;}
@@ -279,6 +289,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   }
   if (a.data.table && eaten === 0 && a.cycle === 0) return 'fail:somebody else had finished the food';
   if (eaten > 0) {
+    { const meal = a.data.meal as Record<string, number> | undefined; if (meal && (meal[k] ?? 0) > 0) meal[k] -= eaten; }
     takeNutrition(world,p,NUTRITION[k]);
     p.lastAteTick = world.tick;
     a.cycle++;
@@ -290,7 +301,8 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
     if (lim.portions !== undefined && a.cycle >= lim.portions) return 'done';
     if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
   }
-  const next = pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger);
+  const mealLeft = a.data.table ? null : mealStill(p, a);
+  const next = mealLeft ? pickFood(mealLeft, p.needs.hunger) : pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger);
   const keepFood = (a.data.keep as number) ?? 0;
   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);
   if (!next || p.needs.hunger >= 88 || (keepFood > 0 && foodLeft <= keepFood && p.needs.hunger > 55)) return 'done';
@@ -350,6 +362,8 @@ registerHandler('eat_store', {
       tookAny = true;
       want--;
       a.cycle++;
+      // rules 206 (light_pack.ts): what the meal took from the store, so that it is eaten before the person's own ration
+      if (mealEatsWhatItTook(world)) { const meal = (a.data.meal ??= {}) as Record<string, number>; meal[k] = (meal[k] ?? 0) + got; }
     }
     if (!tookAny) {
       // Version 9: nothing could be moved into the pack. If that is because the pack is full and the store DOES hold food, the
@@ -371,7 +385,7 @@ registerHandler('eat_store', {
     if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
     if (hasCivicFoodBenefit(world)) a.data.took = a.cycle; // rules 49: what left the store for the pack (the meal's own count restarts at the first bite)
     a.cycle = 0;
-    const k = pickFood(p.inv, p.needs.hunger);
+    const k = pickFood(mealStill(p, a) ?? p.inv, p.needs.hunger);
     if (!k) return 'could not take food';
     a.data.food = k;
     a.duration = WORK.eat;

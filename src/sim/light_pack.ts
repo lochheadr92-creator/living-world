@@ -33,7 +33,9 @@
 // and child play, family time and foraging practice down, all beyond chance, with 594 trips home a settlement, nearly one a person a
 // day. The owner's answer in chat the same day: "maybe one extra piece of food for a carry limit". From 206 a person with a home
 // store keeps RATION_KEEP_206 portions and takes home what is beyond them; the portion held for the road is still the last one, so
-// the other may be eaten wherever they are; a meal at a store leaves up to two. `setRationTwo(false)` is rules 205.
+// the other may be eaten wherever they are; a meal at a store leaves up to two, and eats what it took from the store first, so the
+// ration left is the food the person arrived with (found by tests/preservation.test.ts: without this a meal at a drying rack ate the
+// person's own grain and left the rack's meat in the pack). `setRationTwo(false)` is rules 205.
 // A second idea is measured in the lab only and is off in every world: `setFillingTrips(true)` (lab arm `rich-filling-trips`) makes
 // the trip home with food beyond the ration only from a filling pack (FILLING_SPARE spare portions or more, or a pack three quarters
 // full) and not for every spare portion. It is never saved or hashed and changes nothing unless the lab turns it on.
@@ -102,6 +104,9 @@ export function rationKeep(w: World, knowsHomeStore: boolean, before: number): n
 export function mealLeaves(w: World, carriedBefore: number): number {
   return hasRation(w) ? Math.min(Math.max(0, carriedBefore), rationPortions(w)) : 0;
 }
+
+/** From 206 a meal taken from a store eats the portions it took from the store before anything the person arrived with. */
+export const mealEatsWhatItTook = (w: World): boolean => hasRationTwo(w);
 
 /** Is the food in the pack only the ration, and is it held for the road rather than offered as a meal now? */
 export function rationHeld(w: World, carried: number, hunger: number, foodKnownAtHome: boolean, etaHome: number): boolean {

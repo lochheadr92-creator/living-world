@@ -107,6 +107,20 @@ describe('what is eaten where', () => {
     expect(eatCarried(one.w, one.ada)).toBeUndefined();
   });
 
+  it('a meal at home eats the store’s food before her own: with two grain of her own she starts on the dried meat she took', () => {
+    const f = scene(206, { stock: { dried_meat: 3 } as Items, hunger: 35, inv: { grain: 2 }, tag: 'took-first' });
+    const o = ctxOf(f.w, f.ada).options.find((x) => x.kind === 'eat_store');
+    expect(o, 'the home store is offered').toBeTruthy();
+    const a = o!.make?.()!;
+    a.minCommit = f.w.tick + 2000; // staged: she takes the meal at home
+    f.ada.activity = a;
+    for (let i = 0; i < 900 && (f.home.store.items.dried_meat ?? 0) === 3; i++) stepWorld(f.w);
+    expect(f.home.store.items.dried_meat ?? 0, `last result ${JSON.stringify(f.ada.lastResult)}`).toBeLessThan(3);
+    expect(f.ada.activity?.data.food).toBe('dried_meat');
+    for (let i = 0; i < 400 && f.ada.activity?.kind === 'eat_store'; i++) stepWorld(f.w);
+    expect(f.w.ledger.consumed.dried_meat ?? 0).toBeGreaterThan(0);
+  });
+
   it('through to the ground: a meal at home leaves the two portions she arrived with at 206, and one at 205', () => {
     for (const [version, left] of [[206, 2], [205, 1]] as const) {
       // she has no food need the pack could meet without the store at 205 (one is held); at 206 she is sent to the store by hand
