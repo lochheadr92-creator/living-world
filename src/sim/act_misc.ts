@@ -7,6 +7,7 @@ import type { WorkResult } from './activities';
 import { addLog } from './events';
 import { countBeliefs } from './knowledge';
 import { noteHaunt } from './leisure';
+import { SOLO_TICKS, finishSoloPlay, isSoloPlay } from './play';
 import { nearLitFire } from './perception';
 
 import { hyp } from './util';
@@ -104,12 +105,17 @@ registerHandler('wander', {
   pose: () => 'stand',
   begin(world, p, a) {
     a.duration = 18 + Math.floor(((p.id * 31 + world.tick) % 40));
+    // rules 211 (play.ts): a child playing alone stays at it for a set while
+    if (isSoloPlay(a.data.play)) a.duration = SOLO_TICKS;
     // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
     if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
   work(world, p, a): WorkResult {
     a.progress++;
     return a.progress >= a.duration ? 'done' : 'continue';
+  },
+  onEnd(world, p, a, outcome) {
+    if (outcome === 'success' && isSoloPlay(a.data.play)) finishSoloPlay(world, p, a.data.play);
   },
 });
 

@@ -69,6 +69,7 @@ import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
+import { soloPlayOptions } from './play';
 import { leaveHeaviestOption } from './leave_heaviest';
 import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { hasFoodFetch } from './food_help';
@@ -2042,6 +2043,9 @@ function optIdle(ctx: Ctx): void {
   // version 27: several places to spend spare time, not one (leisure.ts); an older world keeps its single fallback below
   if (leisureOn(world)) {
     optLeisure(ctx);
+    // rules 211 (play.ts): what a child with nothing pressing may do alone, offered after the spare-time walk so that the walk
+    // stays the first of its kind
+    soloPlayOptions(ctx);
     return;
   }
   const hub = nearestHub(world, p.x, p.y);

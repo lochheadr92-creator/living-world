@@ -133,6 +133,7 @@ import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { CARRY_MORE_PARTS, carryMorePartOn, setCarryMore } from '../../src/sim/carry_more';
 import { openWorkplacesOn, setOpenWorkplaces } from '../../src/sim/open_workplaces';
 import { CANNOT_TEACH, SHOWN_PARTS, setShown, shownPartOn } from '../../src/sim/shown';
+import { PLAY_PARTS, playPartOn, setPlay } from '../../src/sim/play';
 import { earnedAccess } from '../../src/sim/facilities';
 import { LIGHT_PACK_PARTS, childrenExemptOn, fillingTripsOn, lightPackPartOn, rationTwoOn, setChildrenExempt, setFillingTrips, setLightPack, setRationTwo } from '../../src/sim/light_pack';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
@@ -247,6 +248,10 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
+  if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
+  if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  if (kind === 'rich-no-play-solo') return { spec: label, summary: 'a child has nothing of their own to do alone, as before rules 211; no effect below rules 211', install() { const was = playPartOn('solo'); setPlay(false, 'solo'); return () => setPlay(was, 'solo'); } };
   // rules 210 (shown.ts): all three parts removed (equal to rules 208), and each part alone
   if (kind === 'rich-no-shown') return { spec: label, summary: 'practice is asked for and given as before rules 210; no effect below rules 210', install() { const was = SHOWN_PARTS.map((k) => shownPartOn(k)); setShown(false); return () => SHOWN_PARTS.forEach((k, i) => setShown(was[i], k)); } };
   if (kind === 'rich-no-shown-remember') return { spec: label, summary: 'a child does not remember who could not teach them, as before rules 210; no effect below rules 210', install() { const was = shownPartOn('remember'); setShown(false, 'remember'); return () => setShown(was, 'remember'); } };
@@ -717,6 +722,9 @@ export const METRICS = [
   // what rules 210 is for: practices completed by what they were about, those given by a child, practices refused because the teacher
   // knew no more, and the mean skill of the under-twelves alive at the end
   'lessonsForage', 'lessonsFish', 'lessonsFarm', 'lessonsByChild', 'lessonRefusals', 'childForage', 'childFish', 'childFarm',
+  // what rules 211 is for: games between two children finished, by which game; games refused because the child asked had had
+  // theirs; and plays alone finished, by which
+  'gamesGuess', 'gamesChase', 'gamesHide', 'gamesHouse', 'gameRefusals', 'soloStones', 'soloBugs', 'soloSticks',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -900,6 +908,12 @@ export class LifeTally {
   /** every practice seen, by conversation id, as it last stood: how it ended, what it was about, whether a child gave it */
   private practices = new Map<number, { outcome: string; reason: string; skill: string; byChild: boolean }>();
   private practiceCount(pred: (x: { outcome: string; reason: string; skill: string; byChild: boolean }) => boolean): number { let n = 0; for (const x of this.practices.values()) if (pred(x)) n++; return n; }
+  /** every game seen, by conversation id, as it last stood */
+  private games = new Map<number, { outcome: string; reason: string; game: string }>();
+  private gameCount(pred: (x: { outcome: string; reason: string; game: string }) => boolean): number { let n = 0; for (const x of this.games.values()) if (pred(x)) n++; return n; }
+  gamesOf(g: string): number { return this.gameCount((x) => x.outcome === 'completed' && x.game === g); }
+  get gameRefusals(): number { return this.gameCount((x) => x.outcome === 'declined' && x.reason.startsWith('I have already had that time today')); }
+  solo: Record<string, number> = { stones: 0, bugs: 0, sticks: 0 };
   get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
   get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
   get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
@@ -940,10 +954,12 @@ export class LifeTally {
     }
     if (a.kind === 'attend_meal' || a.kind === 'host_meal') this.mealsSat++;
     else if (a.kind === 'visit') this.visits++;
+    else if (a.kind === 'wander' && typeof a.data.play === 'string') this.solo[a.data.play] = (this.solo[a.data.play] ?? 0) + 1;
     else if (a.kind === 'wander') this.spareTime++;
   }
   tick(w: World): void {
     for (const c of w.conversations) {
+      if (c.purpose === 'play_together' && c.childhood) this.games.set(c.id, { outcome: c.childhood.outcome, reason: c.childhood.reason, game: c.childhood.game ?? 'guess' });
       if (c.purpose === 'learn_foraging' && c.childhood) {
         const teacher = w.byId.get(c.b);
         this.practices.set(c.id, { outcome: c.childhood.outcome, reason: c.childhood.reason, skill: c.childhood.skill ?? 'forage', byChild: !!teacher && teacher.ent === 'person' && stageOf(w, teacher) === 'child' });
@@ -1146,6 +1162,14 @@ export function outcomeOf(
       workplaceJobs: life.workplaceJobs,
       guestJobs: life.guestJobs,
       cartsAtEnd: w.carts.length,
+      gamesGuess: life.gamesOf('guess'),
+      gamesChase: life.gamesOf('chase'),
+      gamesHide: life.gamesOf('hide'),
+      gamesHouse: life.gamesOf('house'),
+      gameRefusals: life.gameRefusals,
+      soloStones: life.solo.stones ?? 0,
+      soloBugs: life.solo.bugs ?? 0,
+      soloSticks: life.solo.sticks ?? 0,
       lessonsForage: life.lessonsForage,
       lessonsFish: life.lessonsFish,
       lessonsFarm: life.lessonsFarm,

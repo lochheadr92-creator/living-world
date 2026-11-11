@@ -57,7 +57,9 @@ it('offers play with a child outside the family, without revealing remote people
  expect(lesson.p.relations[lesson.q.id].childhood).toBeUndefined();
 });
 it('completes paid play with a child outside the family and remembers that relationship',()=>{
- const {w,p,q,reach}=scene('play_together',false);reach();
+ // Pinned to rules 210: this case names the guessing game, the only game there was. From rules 211 (play.ts) the game asked for may be
+ // chase, hide and seek or playing house; tests/play.test.ts holds those and their contrast.
+ const {w,p,q,reach}=scene('play_together',false);w.settings.rulesVersion=210;reach();
  for(let n=0;n<200&&p.convId;n++)stepWorld(w);
  expect(p.relations[q.id].kin).toBe('');expect(p.relations[q.id].childhood?.[0].kind).toBe('play_together');
  expect(p.lastInteraction?.outcome).toBe('A guessing game completed');expect(conservationReport(w).ok).toBe(true);
@@ -87,7 +89,9 @@ it('does not treat a distant remembered danger as danger at the play place',()=>
  expect(ctx.options.some(o=>o.key.endsWith(':play_together'))).toBe(false);
 });
 it('lets another child decline repeated play at actual contact without credit',()=>{
- const {w,p,q,reach}=scene();q.cooldowns['child:play_together']=w.tick+DAY;
+ // Pinned to rules 210: this case stages the one daily limit on play there was. From rules 211 (play.ts) each game has its own limit
+ // and the one asked declines only a game they have played today; tests/play.test.ts holds that and its contrast.
+ const {w,p,q,reach}=scene();w.settings.rulesVersion=210;q.cooldowns['child:play_together']=w.tick+DAY;
  const c=reach();expect(c.childhood?.outcome).toBe('declined');
  for(let i=0;i<70&&p.convId;i++)stepWorld(w);
  expect(p.lastInteraction?.detail).toContain('already had that time');expect(p.relations[q.id].childhood).toBeUndefined();

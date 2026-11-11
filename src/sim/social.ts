@@ -1,3 +1,4 @@
+import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
 import { companyUrgency } from './company';
 import { alreadyArguing } from './argue_once';
@@ -859,6 +860,8 @@ export const MAKING_NOTE = 'making:';
 export const MAKING_MEMORY = DAY / 2;
 
 export interface ConvData {
+  /** rules 211 (play.ts): the game a child proposes when asking another to play */
+  game?: string;
   skill?: import('./types').SkillKey;
   exchangeJourney?: number;
   reqKind?: RequestKind;
@@ -998,7 +1001,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const report=hasCareHandback(world)&&c.purpose==='return_care'?{text:c.data.careReturnAnswered?'childcare return answered':c.data.careReturnHeard?'childcare return heard without answer':'childcare return not proposed',detail:c.data.careReturnReply??c.data.careReturnText??'No childcare responsibility changed.'}:hasWorkHandover(world)&&c.purpose==='handover_work'?{text:c.data.handoverAnswered?'handover answered':c.data.handoverDelivered?'handover heard without answer':'handover not conveyed',detail:c.data.handoverReply??c.data.handoverText??'No responsibility changed.'}:hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted'){interruptLesson(c,'the lesson was cut short');interruptCoaching(c);}
   const gift=hasLivedLife(world)&&c.purpose==='offer'?c.data.giftReceipt:null;
-  const childhood=childTimeReport(c,outcome==='interrupted');
+  const childhood=childTimeReport(c,outcome==='interrupted',world);
   const resultText = c.skillLesson?c.skillLesson.outcome:childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.skillLesson?c.skillLesson.reason:childhood?childhood.detail:gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
@@ -1134,7 +1137,8 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 
 // ── phase 1: the initiator says what they came for ──
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
-  if(isChildTime(c.purpose)){bubble(world,A,childQuestion(c.purpose),'say',70);return;}
+  // rules 211 (play.ts): the game proposed is what is asked aloud
+  if(isChildTime(c.purpose)){bubble(world,A,c.purpose==='play_together'&&hasGames(world)&&isGame(c.data.game)?gameQuestion(c.data.game):childQuestion(c.purpose),'say',70);return;}
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
     case 'return_care': {

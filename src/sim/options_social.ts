@@ -1,3 +1,4 @@
+import {gameName,hasGames,nextGame} from './play';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
 import { foodRelief } from './relief';
@@ -783,7 +784,9 @@ export function socialOptions(ctx: Ctx): void {
       const remembered=ctx.p.relations[c.q.id]?.childhood?.find(e=>e.kind===kind);
       const sc=new Scorer().add(kind==='learn_foraging'?'curious about learning':'time for childhood',18+(kind==='learn_foraging'?8*ctx.p.traits.curiosity:6*ctx.p.traits.sociability)).add('walking',-pen(c.d*6));
       if(remembered)sc.add('remembered time together',Math.min(3,remembered.times));
-      mkSocial(ctx,c,kind,{},`${childTimeName(kind)} with ${c.q.name}`,`to ask for time together; they must agree`, 'social',sc,'childhood');
+      // rules 211 (play.ts): the game this child would ask for now travels with the ask and names the option
+      const game=kind==='play_together'&&hasGames(ctx.world)?nextGame(ctx.world,ctx.p):null;
+      mkSocial(ctx,c,kind,game?{game}:{},`${game?gameName(game):childTimeName(kind)} with ${c.q.name}`,`to ask for time together; they must agree`, 'social',sc,'childhood');
       const offered=ctx.options[ctx.options.length-1];if(offered?.key===`socialize:${c.q.id}:${kind}`)offered.eta+=childTimeTicks(kind);
     }
   }
