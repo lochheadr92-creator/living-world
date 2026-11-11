@@ -1,3 +1,4 @@
+import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
 import { companyUrgency } from './company';
@@ -2044,6 +2045,7 @@ registerHandler('give', {
     }
     t.cooldowns.pause = 0;
     if ((!hasLocalGiving(world) || moved > 0)&&!(runsRulesVersion(world,124)&&a.data.textileDelivery)) t.cooldowns.fedUntil = world.tick + 120; // only actual food receipt gives them time to eat
+    noteFed(world, p, t, (Object.keys(got) as ItemKind[]).some((k) => isFood(k) && (got[k] ?? 0) > 0)); // rules 214 (child_feeding.ts): the carer remembers feeding them
     if (moved <= 0) {
       // rules 157 (handover_outcome.ts): say what the giver now sees; only a real full pack is remembered as one
       const why = hasHandoverTruth(world) ? emptyHandover(world, p, t, want) : 'no room';

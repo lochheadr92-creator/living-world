@@ -1,3 +1,4 @@
+import { hungerToActOn, providePull } from './child_feeding';
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
 import { firstHomePassesCap } from './home_first';
 import { BASKET_ROOM_WEIGHT, basketRoomShort, basketWant, basketWorth, hasBasketRoom, hasBasketWant } from './carry_more';
@@ -214,7 +215,7 @@ function optStockpile(ctx: Ctx): void {
   let depHunger = 0;
   // rules 106 (remembered_need.ts): a dependant out of sight counts as they looked when last seen, not as they are
   for (const d of ctx.dependents) { const kn = knownNeeds(world, p, d, ctx.seenPersons.some((s) => s.id === d.id)); if (kn) depHunger = Math.max(depHunger, Math.max(0, 55 - kn.hunger) / 55); }
-  const providerBonus = ctx.dependents.length > 0 ? 7 : 0;
+  const providerBonus = (ctx.dependents.length > 0 ? 7 : 0) + providePull(world, p, ctx.members); // rules 214: more for each under-twelve at home
   const base = (9 + 26 * hs.shortage + providerBonus + 18 * depHunger) * tm.work * nightMult(ctx) * weatherMult(ctx);
   // Somebody who has taken on putting a reserve by still gets the option when the ambient urge is below the floor - the plan
   // is their reason, and an option that is never generated cannot be a step. The urgency itself is unchanged, so this only
@@ -1632,7 +1633,9 @@ function optCare(ctx: Ctx): void {
     const wh = p.whereabouts[d.id];
     // rules 106 (remembered_need.ts): out of sight, how they LOOKED when last seen stands for how they are; before 106 the
     // live figures were read whether or not the carer could see them
-    const kn = knownNeeds(world, p, d, !!seenNow);
+    const read = knownNeeds(world, p, d, !!seenNow);
+    // rules 214 (child_feeding.ts): a child due a meal by the carer's own memory counts as that hungry, whether or not they look it
+    const kn = read && { ...read, hunger: hungerToActOn(world, p, d, read.hunger) };
     if (!kn) {
       if (wh && world.tick - wh.tick <= 700) addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, 'has not seen how they are', 'care');
       else addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, 'does not know where they are', 'care');

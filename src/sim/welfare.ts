@@ -1,3 +1,4 @@
+import { noteFed } from './child_feeding';
 import {hasPromiseExpectations} from './promise_expectations';
 import { onLookedInOnBereaved } from './lifechanges';
 import { hasPracticalCare, watchTick } from './responsibilities';
@@ -16,7 +17,7 @@ import { knowsDeath } from './death_knowledge';
 import { hasKnownWorry } from './known_worry';
 import { hasKnownWelfare, knownDependent } from './known_welfare';
 import { personById } from './registry';
-import { onGift, surplusOf } from './social';
+import { isFood, onGift, surplusOf } from './social';
 import type { Concern, ItemKind, Items, Person, World } from './types';
 
 import { hyp } from './util';
@@ -377,6 +378,7 @@ registerHandler('visit', {
       const what = (Object.keys(got) as ItemKind[]).map((k) => `${got[k]} ${k}`).join(' and ');
       addEvent(world, 'social', `${p.name} looked in on ${t.name}, who had looked ${KIND_WORD[(a.data.concern as Concern['kind'] | undefined) ?? concern?.kind ?? 'hungry']}, and brought ${what}.`, [p.id, t.id], t.x, t.y);
       t.cooldowns.fedUntil = world.tick + 120;
+      noteFed(world, p, t, (Object.keys(got) as ItemKind[]).some((k) => isFood(k) && (got[k] ?? 0) > 0)); // rules 214 (child_feeding.ts)
       p.concerns = p.concerns.filter((c) => c.about !== t.id);
       p.cooldowns['check' + t.id] = world.tick + CHECK_COOLDOWN;
       a.data.outcome = 'helped';
