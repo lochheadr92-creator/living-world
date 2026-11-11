@@ -13,6 +13,7 @@
 // materials, the site without a household, proposed to the township as the first storehouse is. A later yard, laid out by somebody who
 // knows of one, is private as before. Rules 200 and earlier, authored worlds and `setSharedYard(false)` keep the private layout.
 // The second part of rules 201, a site that has waited provoking the ask for what it lacks, is stalled_ask.ts.
+import { retiresYardAndSwap } from './home_first';
 import { runsRulesVersion } from './rulesversion';
 import { mayShareType } from './shared_projects';
 import type { BuildingType, Person, World } from './types';
@@ -21,7 +22,8 @@ let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-201 rich world lays out every timber yard privately again. */
 export const sharedYardOn = (): boolean => enabled;
 export function setSharedYard(on: boolean): void { enabled = on; }
-export const hasSharedYard = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 201);
+/** Rules 201 and 202 only: retired from 203 (home_first.ts), where the lab's verdict on this part is recorded. */
+export const hasSharedYard = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 201) && !retiresYardAndSwap(w);
 
 /** Should this layout be the shared one? Only a timber yard, only at 201, only for somebody who believes in no yard yet. */
 export function firstYardShared(w: World, p: Person, type: BuildingType): boolean {

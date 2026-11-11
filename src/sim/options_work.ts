@@ -1,4 +1,5 @@
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
+import { firstHomePassesCap } from './home_first';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
 import { mealOf } from './meals';
 import { GATHERING_FUEL, GATHERING_LEAD, GATHERING_WEIGHT, hasGatheringFire } from './swap_and_fire';
@@ -760,6 +761,7 @@ function optPlanBuild(ctx: Ctx): void {
   const tm = traitMods(p);
   const firstStore = firstStorehouseWanted(ctx);
   let storeOnly = false; // rules 162: a gate that would have stopped every layout lets only the first storehouse through
+  let homeOnly = false; // rules 203 (home_first.ts): past the site cap a household's first roof is still laid out, and nothing else
   // Rules 47: while the winter window is open, a household's own home is not blocked from being laid out by its own
   // workshop site, so only a home the household has already started counts against starting one. Below 47 (and outside the
   // window) a workshop occupies the household's site slot exactly as it always did.
@@ -779,9 +781,12 @@ function optPlanBuild(ctx: Ctx): void {
   const rules = rulesOf(world);
   const anchor = settlementAnchor(ctx);
   if (!ownHomeOnly && openSitesNear(world, anchor) >= rules.maxOpenSites) {
-    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', 'too much already being built here at once');
-    if (!firstStore) return;
-    storeOnly = true;
+    // rules 203: the cap does not hold a household's first roof (a hut for those without a solid home, a lean-to for the homeless)
+    const firstHome = wantsHome && firstHomePassesCap(world, home ? 'hut' : 'lean_to', home?.type);
+    if (wantsHome && !firstHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', 'too much already being built here at once');
+    if (!firstStore && !firstHome) return;
+    if (firstHome) homeOnly = true;
+    else storeOnly = true;
   }
   const hs = hhState(ctx);
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
@@ -793,6 +798,7 @@ function optPlanBuild(ctx: Ctx): void {
   const stoneCue = (type: BuildingType): number => (hasStoredStoneCue(world) && knownStoreHoldsStone(ctx, BUILD_DEF[type].stone) ? STORED_STONE_UTILITY : 0);
   const tryPlan = (type: BuildingType, base: number, why: string): void => {
     if (storeOnly && type !== 'storehouse') return;
+    if (homeOnly && !isHomeType(type) && !(type === 'storehouse' && firstStore)) return;
     const key = -1000 - Object.keys(BUILD_DEF).indexOf(type);
     if (recentFailure(world, p, key, 700)) {
       addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, 'could not find a good spot recently', 'build');

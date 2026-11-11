@@ -114,7 +114,9 @@ describe('2. a homeless household can lay its home out while the window is open'
 
   it('is blocked again when the switch is off', () => {
     setWinterShelter(false);
-    const { w, ada } = scene('ws-cap-off', { workshops: 4 });
+    // pinned to rules 202: from 203 (home_first.ts) a homeless household's first shelter passes the site cap whatever this switch says,
+    // so the cap this case documents is the one of rules 47 to 202 (tests/home_first.test.ts holds the 203 side)
+    const { w, ada } = scene('ws-cap-off', { workshops: 4, rulesVersion: 202 });
     expect(hasLeanToOption(w, ada)).toBe(false);
   });
 

@@ -18,6 +18,7 @@
 //
 // Rules 201 and earlier, authored worlds and a part switched off keep the old behaviour. The third thing the plan put in this batch,
 // the remembered-emptiness question, is a measurement, not a rule: scripts/emptiness_probe.ts.
+import { retiresYardAndSwap } from './home_first';
 import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
@@ -31,7 +32,8 @@ export function setSwapAndFire(enabled: boolean, part?: SwapFirePart): void {
   else for (const k of SWAP_FIRE_PARTS) on[k] = enabled;
 }
 const rich202 = (w: World): boolean => w.settings.dynamics === 'rich' && runsRulesVersion(w, 202);
-export const hasSwapWorth = (w: World): boolean => on.swap && rich202(w);
+/** Rules 202 only: retired from 203 (home_first.ts), where the lab's verdict on this part is recorded. */
+export const hasSwapWorth = (w: World): boolean => on.swap && rich202(w) && !retiresYardAndSwap(w);
 export const hasGatheringFire = (w: World): boolean => on.fire && rich202(w);
 
 /** The most a food swap's score may gain from the walk it saves. */

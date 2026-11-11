@@ -129,6 +129,7 @@ import { COMPANY_PARTS, companyPartOn, setCompany } from '../../src/sim/company'
 import type { CompanyPart } from '../../src/sim/company';
 import { setSharedYard, sharedYardOn } from '../../src/sim/shared_yard';
 import { setStalledAsk, stalledAskOn } from '../../src/sim/stalled_ask';
+import { homeFirstPartOn, setHomeFirst } from '../../src/sim/home_first';
 import { SWAP_FIRE_PARTS, setSwapAndFire, swapFirePartOn } from '../../src/sim/swap_and_fire';
 import type { SwapFirePart } from '../../src/sim/swap_and_fire';
 import { setOptionChooser } from '../../src/sim/decision';
@@ -241,6 +242,9 @@ export function parseIntervention(specIn: string): Intervention {
   ] as [string, CompanyPart, string][]) {
     if (kind === name) return { spec: label, summary: `${what} (rules 200 removal)`, install() { const was = companyPartOn(part); setCompany(false, part); return () => setCompany(was, part); } };
   }
+  // rules 203 (home_first.ts): the cap exemption removed, and the two retired parts kept on
+  if (kind === 'rich-no-home-first') return { spec: label, summary: 'a household\'s first roof waits for the settlement\'s site cap again, as before rules 203; no effect below rules 203', install() { const was = homeFirstPartOn('cap'); setHomeFirst(false, 'cap'); return () => setHomeFirst(was, 'cap'); } };
+  if (kind === 'rich-keep-yard-and-swap') return { spec: label, summary: 'the shared first timber yard (201) and the walk a food swap saves (202) still apply, as before rules 203 retired them; no effect below rules 203', install() { const was = homeFirstPartOn('retire'); setHomeFirst(false, 'retire'); return () => setHomeFirst(was, 'retire'); } };
   if (kind === 'rich-no-stalled-ask') return { spec: label, summary: 'the ask for a site\'s materials ignores how long the site has waited, as before rules 201; no effect below rules 201', install() { const was = stalledAskOn(); setStalledAsk(false); return () => setStalledAsk(was); } };
   if (kind === 'rich-no-shared-yard') return { spec: label, summary: 'every timber yard is laid out privately, as before rules 201; no effect below rules 201', install() { const was = sharedYardOn(); setSharedYard(false); return () => setSharedYard(was); } };
   if (kind === 'rich-no-swap-and-fire') return { spec: label, summary: 'remove both rules-202 parts: the walk a food swap saves, and the fire fed for a gathering; no effect below rules 202', install() { const was = SWAP_FIRE_PARTS.map((part) => [part, swapFirePartOn(part)] as const); setSwapAndFire(false); return () => { for (const [part, v] of was) setSwapAndFire(v, part); }; } };
@@ -672,6 +676,9 @@ export const METRICS = [
   // swap; markets called; apprentices at the end; times the fire went out and times it was fed; jobs finished at a timber yard; and
   // timber yards, laid out or standing, that belong to nobody at the end.
   'approachesFailed', 'approachFailShare', 'tradeTalk', 'marketsCalled', 'apprenticesAtEnd', 'fireOuts', 'fireFeeds', 'yardJobs', 'sharedYardsAtEnd',
+  // what rules 203 is for: households whose home is a lean-to or nothing at the end, home sites open at the end, and sites given up
+  // for idleness over the branch (the cost a looser cap could bring)
+  'householdsWithoutSolidHome', 'homeSitesOpen', 'sitesAbandoned',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -849,7 +856,7 @@ export class LifeTally {
   private convs = new Set<number>();
   chats = 0; familyTime = 0; childPlay = 0; foragingPractice = 0; coaching = 0; otherTalk = 0;
   mealsSat = 0; visits = 0; spareTime = 0;
-  approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0;
+  approachesFailed = 0; tradeTalk = 0; fireOuts = 0; fireFeeds = 0; yardJobs = 0; sitesAbandoned = 0;
   private markets = new Set<number>();
   private lastEvent = 0;
   private time = { life: 0, survival: 0, work: 0, sleep: 0 };
@@ -896,7 +903,10 @@ export class LifeTally {
     }
     for (const o of w.occasions ?? []) if (o.kind === 'market') this.markets.add(o.id);
     // events carry rising ids and the feed is trimmed from the front, so the new ones are at the end
-    for (let i = w.events.length - 1; i >= 0 && w.events[i].id > this.lastEvent; i--) if (w.events[i].text === 'The fire has gone out.') this.fireOuts++;
+    for (let i = w.events.length - 1; i >= 0 && w.events[i].id > this.lastEvent; i--) {
+      if (w.events[i].text === 'The fire has gone out.') this.fireOuts++;
+      else if (w.events[i].text.includes('site was abandoned')) this.sitesAbandoned++;
+    }
     if (w.events.length) this.lastEvent = Math.max(this.lastEvent, w.events[w.events.length - 1].id);
     for (const p of w.persons) {
       if (!p.alive) continue;
@@ -1063,6 +1073,9 @@ export function outcomeOf(
       fireFeeds: life.fireFeeds,
       yardJobs: life.yardJobs,
       sharedYardsAtEnd: w.sites.filter((s) => s.type === 'timber_yard' && s.hhId === 0).length + w.buildings.filter((b) => b.type === 'timber_yard' && b.hhId === 0).length,
+      householdsWithoutSolidHome: w.households.filter((h) => h.members.length > 0 && !w.buildings.some((b) => b.id === h.homeId && (b.type === 'hut' || b.type === 'house'))).length,
+      homeSitesOpen: w.sites.filter((s) => s.type === 'hut' || s.type === 'lean_to').length,
+      sitesAbandoned: life.sitesAbandoned,
     },
     milestones,
   };

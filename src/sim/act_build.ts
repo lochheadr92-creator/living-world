@@ -1,4 +1,5 @@
 import {mayShareType} from './shared_projects';
+import { householdFirstHomePassesCap } from './home_first';
 import {layoutForWords} from './layout_words';
 import {hasFirstStorehouse,noFirstStorehouse} from './shared_stone';
 import {rodCraftBlock} from './fishing_rods';
@@ -327,7 +328,7 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
   const rules = rulesOf(world);
   if (isFacilityType(type) || upgradeOf) {
     if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';
-  } else if (sitesNear(world, at, (s) => !isProjectSite(s)) >= rules.maxBasicSites && !(type === 'storehouse' && hasFirstStorehouse(world) && noFirstStorehouse(world, at?.x ?? 0, at?.y ?? 0))) return 'too many projects under way already'; // rules 162: the settlement's first storehouse is not turned away by the cap
+  } else if (sitesNear(world, at, (s) => !isProjectSite(s)) >= rules.maxBasicSites && !(type === 'storehouse' && hasFirstStorehouse(world) && noFirstStorehouse(world, at?.x ?? 0, at?.y ?? 0)) && !householdFirstHomePassesCap(world, type, hh)) return 'too many projects under way already'; // rules 203 (home_first.ts): nor is a household's first roof // rules 162: the settlement's first storehouse is not turned away by the cap
   if (upgradeOf) {
     const old = world.byId.get(upgradeOf);
     if (!old || old.ent !== 'building') return 'the home is gone';
