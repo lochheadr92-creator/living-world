@@ -115,7 +115,7 @@ years each, rules 227, one run each):
 | cellar | 30 | 20 | river only: 9 abandoned short of 9 stone and wood |
 
 In those six years the two settlements made **no bricks and two and three planks**, with a kiln and a timber yard standing from
-the first years. Nobody fired charcoal either. A site of this kind is abandoned after seven days untouched and laid out again.
+the first years. Nobody fired charcoal either. A site of this kind is abandoned after seven days untouched and laid out again. Aspen and meadow, finished later (77 and 76 people at year six), agree: no bricks, none and two planks, all 15 smithy sites short of their 4 bricks; and there cellars are the stone sink, 65 laid out and 32 abandoned short of 9 stone.
 
 **The work is offered, and loses** (`scripts/supply_probe.ts`, new and read-only: each grown person awake, every 300 ticks from
 the second year for two years, asked as an observer what their options are; birch and river). Of 3,409 looks at somebody who knew
