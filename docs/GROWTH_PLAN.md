@@ -52,7 +52,13 @@ on: five open sites at tick 800 where rules 220 has four; recorded from a clean 
 site limit bites on the first day: river, birch, cedar and fern part from their rules-220 twins by ticks 800, 900, 2,400 and 2,600.
 Lab arms: `rich-no-growth-room` and one for each part.
 
-**Result: not measured yet.** The 20-year runs were started on 13 November (12 worlds at rules 225).
+**Result (20-year runs, 12 seeds, arrivals on; `review_evidence/growth-20261113/generation/`): lifting the limits alone does not
+make a settlement bigger.** Eleven of the twelve runs reached year 18 or more (two were stopped at the owner's word at years 18
+and 19). Beside rules 220, to year 12, a settlement: people 35.7 against 36.6; came 37.8 against 30.8; died 38.0 against 30.7;
+starved (all twelve) 216 against 163; falls of eight or more in three days 12 against 14. Peaks went past the old ceiling (78, 74,
+68, 63) and fell back. Open sites 7.2 against 5.5 and sites abandoned 61 against 41 a settlement: the lifted site limit spreads
+the building thinner. One run a seed, so a description and not an effect against chance. The parts are not separated yet (the
+lab arms `rich-no-growth-room-sites` and the others are for that).
 
 ## Step 2: food to grow on (rules 226, `src/sim/plenty.ts`)
 
@@ -70,8 +76,23 @@ Checks: `tests/plenty.test.ts` (7, each with the rules-225 contrast); pin `tests
 one day: 592 wild food standing where rules 225 has 579; recorded from a clean checkout of `e59db513`). Lab arms: `rich-no-plenty`,
 `rich-no-plenty-wild`, `rich-no-plenty-crops`.
 
-**Result: not measured yet.** The 20-year runs were started on 13 November (12 worlds at rules 226, beside the 12 at 225 and the
-12 at rules 220 already recorded in `review_evidence/generation-20261113/`).
+**Result (the same runs at rules 226; five finished 20 years, one died out, six were stopped at the owner's word between years
+12 and 17): more food makes a settlement grow, and shows the next ceilings.** To year 12, a settlement, against rules 220:
+people 51.8 against 36.6 (60.8 against 43.9 at year 9); born 14.3 against 8.5; children 12.5 against 7.9; couples 10.2 against
+6.8; time under the hungry line 53% against 57%; family time 834 against 549; falls of eight or more 8 against 14. Six worlds
+passed 80 people and four passed 100.
+
+- **Water is the next ceiling.** gen-5 reached 112 people with about 500 food in store and lost all of them to thirst in three
+  days of its tenth year (13, then 91, then 5). Thirst took 140 people in the twelve runs against 8 at rules 220.
+- **A lean season that runs into winter still starves the large settlement**: aspen fell from 103 to 63 in three days, meadow
+  from 76 to 56.
+- **Four worlds had no arrival in 20 years** (birch, gen-2, gen-3, gen-6; at rules 225 the last three had 24 to 82). They grew
+  by births alone to 32 to 43 people and lost 2 to 9 people in 20 years. Why nobody came is not looked into.
+- **Nothing higher was built**: no house, smithy, mill or bakery in any of the 24 runs; one hall and one granary. See step 5.
+- Sites abandoned 98 a settlement against 41, open sites 12.8 against 5.5, stone left 198 against 272.
+- The id counter reached 318,000 in 17 years at about 75 people (the limit is 1,000,000).
+
+One run a seed: a description, not an effect against chance. The factor of two was a first dose and is not tuned.
 
 ## Step 5, the diagnosis: why nothing higher is built (measured 13 November, no rule changed)
 
@@ -164,6 +185,67 @@ arms: `rich-no-finish-job`, and `-hold`, `-asleep`, `-quiet`.
 **Result: the paired lab is not run yet** (it waits for the 20-year runs to free the machine). What to watch in it: hunger time
 (a person no longer breaks off work to eat until it is critical, unless the work was for hunger and food is in the pack), family
 time, child play and chats (the quiet part), and deaths.
+
+## Everything found that needs attention (13 November 2026)
+
+Gathered from the 20-year runs at rules 220, 225 and 226, the job, site and supply probes, and the source read on the way. Each
+line says how it is known: measured, read in source, or not looked into.
+
+**What stops growth, in the order it bites**
+
+1. **No bricks and almost no planks are made**, so no smithy, house, hall or granary is finished and ore is never used
+   (measured; step 5). The work is offered and loses; the saw is in its maker's pack, not at the yard; packs have no room for clay.
+2. **Water runs out.** A settlement of 110 died of thirst in three days; nothing slows people or warns them first (measured).
+   Natural water is a stock only rain refills and a well holds a few units (read in source).
+3. **A lean season running into winter** starves a large settlement: 25 to 34 deaths a season at 50 people and more at rules
+   220, and falls of 20 to 40 at 226 (measured). Open since rules 220.
+4. **Arrivals are admitted on one day's food and roofs.** At rules 220 two in three newcomers die and they are 498 of 735
+   deaths (measured). In four of twelve extra-food worlds nobody arrived in 20 years (measured; cause not looked into).
+5. **People are under the hungry line half the time** even with double food (57% to 53%), and farm plots growing from 14 to 95
+   did not change it (measured; cause not looked into).
+6. **Few pair up and few are born.** Births fall each four years at rules 220; with more food births and couples rise by half
+   (measured). Half of all pairs can never be partners and nobody proposes while hungry (read in source). Weddings and partnered
+   women are not counted by the trace, so which rule holds births down is not measured.
+7. **Stone is finite and runs down faster as a settlement grows**: 570 to 193 in 20 years at 220; one quarry's outcrop was
+   worked out in three years; cellars are abandoned for want of stone (measured).
+8. **More sites are abandoned with the site limit lifted**: 41, 61 and 98 a settlement by year 12 at 220, 225 and 226
+   (measured; the part is not separated in a lab yet). It may need to come back in a milder form.
+9. **Lifting the people limit without more food** made nothing bigger and more starved (measured). It belongs with step 2.
+10. **The ladder is short**: 18 building types and three crafts; no healer, school or anything past an iron-age village (read
+    in source; step 8). No cart and almost no apprentice in any run; craft skill falls over 20 years (measured).
+11. Other deaths at rules 220: exposure 178, wolves 78, fever 73 of 735; only 23 people in 24 runs died of old age (measured).
+
+**Behaviour**
+
+12. Jobs dropped half-way: repaired by rules 227, **paired lab not yet read**.
+13. Building is still dropped at the work as often at 227 (149 spells against 145) (measured; not looked into).
+14. Somebody beginning to talk to a worker resets the piece of work in hand (616 times in four worlds over eight days) (measured).
+15. Resting people take a fifth of all second looks; rules 227 holds jobs and sleep, not rest (measured).
+16. Under rules 227 a worker runs hunger and thirst down to the critical line (14) before breaking off; whether that costs
+    anything is for the lab (read in source).
+17. In about a quarter of looks a grown person is too hungry, thirsty or tired to consider any workshop job (measured).
+
+**Engine**
+
+18. Speed: 71 to 110 minutes for 20 years at 40 people; 22 minutes a simulated year at 108 people. Not profiled yet.
+19. The id counter: 318,000 in 17 years at about 75 people, limit 1,000,000 (measured). A world of a few hundred cannot run long.
+20. Remembered things grow without limit and slow an old world (read in `docs/SCALING.md`, not re-measured).
+
+**State of the work**
+
+21. Rules 225, 226 and 227 are the current rules and none has a paired lab verdict; the factor of two in 226 is a first dose.
+22. All of this evidence is one run a seed: descriptions, no noise floor.
+23. The full test suite has not been run since the rules-208 head; `tests/iron_chain_stall.test.ts` has failed since rules 206.
+24. Nothing since `cc0e656a` is pushed.
+25. `PRODUCT_VISION.md` still describes a world of about 100 people.
+26. Another session was working in this checkout on 13 November (`review_evidence/civilian-fifteen-days-20261113/`,
+    `nova-standard-15day-20261113/`). Its ten-year aspen run was stopped by mistake when the 20-year runs were stopped and was
+    started again with the same arguments.
+27. Still open from before: whether a lean season may run into winter; the childhood plan's phase 6 and its rules number; what
+    arrivals are for (OD-04).
+
+**Order proposed**: 1 (planks and bricks), then 2 (water), 4 (arrivals), 3 (lean winter), 7 (stone), 8 (the site limit), 6
+(families, measure first), then the engine (19, then a profile), with 23 and 24 whenever the owner says.
 
 ## Not done, and known
 
