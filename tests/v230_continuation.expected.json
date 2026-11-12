@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "9dd86ad898c734924ed12768f6b972826e562c50",
+    "rules": 230,
+    "content": "3fd6d59c7f8ef64c56a6b843f2240f3bdcdcff0ed411136b4821fc3976be191a",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal cedar (arrivals on) stepped to the tick by which planks have been made at the timber yard and a saw lies on its rack (19,500), then 120 ticks after a save and load."
+  },
+  "saved": "17aab0a66f20eab0c9fd07dfd16ade48531438de4a783fdd43a751e284a45b98",
+  "continued": "6d3066f5bf8c03617ade2d2637c1ef2e3b0dce0f047461ba94007dadc28a79b4",
+  "tick": 19500,
+  "sawsAtYards": 1,
+  "planksMade": 1,
+  "bricksMade": 0
+}

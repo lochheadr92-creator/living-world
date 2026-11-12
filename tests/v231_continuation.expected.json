@@ -1,0 +1,15 @@
+{
+  "source": {
+    "head": "12d3da8cb89b7b4e02fd90769330b16d780e9ac7",
+    "rules": 231,
+    "content": "b8a5668286d8c69f4378496007aad29db3c38c18b47305d26615188bf4c011b3",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen (arrivals on), its outcrops and ore veins laid down with ten times their rules-230 holding, stepped one day (2,400 ticks), then 120 ticks after a save and load."
+  },
+  "saved": "0d334540c7fef04612e4b20e12dfaf58d4ee4e54e1d87b3e6421feb4fe936290",
+  "continued": "7a1b09bbb82cee93637e9dc5f03e1b73b7b0634ca7dd34746d55cd963ab0b07d",
+  "tick": 2400,
+  "outcropStoneAtStart": 1034,
+  "outcropStoneAt230": 103,
+  "veinOreAtStart": 546,
+  "veinOreAt230": 54
+}
