@@ -227,7 +227,17 @@ Checks: `tests/parent_decides.test.ts` (7); 135 tests in 20 related files pass; 
 arrivals on, one day, by when a grown person has said "not now" for a job in hand; clean checkout of `e98d298b`). Lab arms:
 `rich-no-parent-decides`, `-ask`, `-weigh`.
 
-**Result: the paired lab was started on 13 November and is not read yet.**
+**Result (paired lab, clean checkout of `e98d298b`, 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges and
+three removals, 72 arms; `review_evidence/growth-20261113/lab228/report.txt`). Figures are with the rule against without it.**
+
+- **Family time comes back, beyond chance, and the work is not hurt.** Family time 127.8 a settlement against 89.1, larger
+  than chance, in 12 of 12 seeds. Buildings 42.6 against 42.2, tools 74.3 against 74.0, projects finished 86.4 against 88.4,
+  food put by, hunger, chats and child play are not distinguishable. People 36.0 against 34.9 and deaths 0.1 against 0.6 lean
+  the right way inside the noise floor.
+- **Ask** is where the family time comes from: 127.8 against 95.7 without it, larger than chance.
+- **Weigh** costs no family time and its effect on work is too small to see in 25 days: with it family time is 127.8 against
+  117.1 (leaning higher, inside the floor; a child told "not now" asks again), and nothing on work is distinguishable. It is
+  kept because it makes the answer a decision; the lab does not show it earning or costing anything.
 
 ## Everything found that needs attention (13 November 2026)
 
@@ -262,7 +272,7 @@ line says how it is known: measured, read in source, or not looked into.
 
 12. Jobs dropped half-way: repaired by rules 227; the lab finds the hold part beneficial beyond chance and the sleep part
     neutral. Its quiet part cost a fifth of family time for no measured gain; rules 228 lets a child ask and has the grown person
-    decide (its lab is not read yet).
+    decide, and its lab finds family time back (127.8 against 89.1, beyond chance) with nothing lost on work.
 13. Building is still dropped at the work as often at 227 (149 spells against 145) (measured; not looked into).
 14. Somebody beginning to talk to a worker resets the piece of work in hand (616 times in four worlds over eight days) (measured).
 15. Resting people take a fifth of all second looks; rules 227 holds jobs and sleep, not rest (measured).
