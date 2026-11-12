@@ -73,6 +73,52 @@ one day: 592 wild food standing where rules 225 has 579; recorded from a clean c
 **Result: not measured yet.** The 20-year runs were started on 13 November (12 worlds at rules 226, beside the 12 at 225 and the
 12 at rules 220 already recorded in `review_evidence/generation-20261113/`).
 
+## Step 5, the diagnosis: why nothing higher is built (measured 13 November, no rule changed)
+
+The owner's question: why is everything abandoned and nothing higher built. Evidence: `review_evidence/growth-20261113/building-stall/`.
+
+**They do plan the higher buildings.** In the 24 finished rules-220 runs a smithy site was open at the end of 12 to 19 of the 20
+years in every settlement, a house site in every settlement, a hall site in 23 and a granary site in 22; none of the smithies or
+houses was ever finished.
+
+**The sites wait for planks and bricks that are never made** (`scripts/build_trace.ts`, new and read-only; birch and river, six
+years each, rules 227, one run each):
+
+| site | laid out | finished | what the abandoned ones still lacked |
+|---|---|---|---|
+| smithy | 8 | 0 | 4 bricks, every time (the wood and stone had arrived) |
+| house (a hut rebuilt) | 6 | 0 | 7 or 8 planks and 6 bricks |
+| hall | 5 | 0 | 10 planks |
+| granary | 2 | 0 | 8 planks |
+| hut, hut rebuilt, lean-to, well, storehouse, timber yard, kiln, quarry, mine, food rack | 75 | 75 | (one hut still open) |
+| cellar | 30 | 20 | river only: 9 abandoned short of 9 stone and wood |
+
+In those six years the two settlements made **no bricks and two and three planks**, with a kiln and a timber yard standing from
+the first years. Nobody fired charcoal either. A site of this kind is abandoned after seven days untouched and laid out again.
+
+**The work is offered, and loses** (`scripts/supply_probe.ts`, new and read-only: each grown person awake, every 300 ticks from
+the second year for two years, asked as an observer what their options are; birch and river). Of 3,409 looks at somebody who knew
+of a site short of planks or bricks:
+
+- in 2,110 (62%) a step toward planks or bricks was among their options, and it was their first choice 46 times (1.3%). When it
+  lost it was behind by about 25 points, to sleep and waiting for light, storing and gathering food, the fire, fibre and stone;
+- what is offered is nearly always the first step of the chain (bring wood to the yard, chop wood for planks, dig clay for
+  bricks). "Hewing planks" was offered 20 times and "Firing bricks" never;
+- the refusals that concern the chain: "Sawing planks: needs a saw and has none (and none is on the rack)" 638 times, although
+  seven or eight saws had been made in each world (each in its maker's pack); "Get clay ...: no room in my pack for one clay" 411
+  times; "does not know of a kiln they may use" 41 times;
+- in river, "Cutting stone: the outcrop is worked out" 554 times: the quarry's outcrop was finished within three years;
+- in 793 looks (23%) nothing about it was offered or refused: the person was too hungry, thirsty or tired for any production
+  (`production.ts productionOptions`), or it was not their turn to see it.
+
+Read in source: a site's missing material is wanted at 34 times the site's relevance to the person, plus 4
+(`options_work.ts materialNeeds`), and each further step of a chain is worth a little less than the one before
+(`production.ts planRecipe`). A household's own hut gets the full weight and is built in two or three days; a shared smithy
+gets less, and its bricks are three steps away (clay, wood, a firing by two people).
+
+So the stall is priority and logistics, not want: making planks and bricks is a chain of low-scoring steps, the saw is not where
+the sawing is, and packs have no room for clay. No repair is made yet; what to change is the owner's to choose.
+
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
 The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says

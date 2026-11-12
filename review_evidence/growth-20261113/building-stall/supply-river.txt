@@ -1,0 +1,54 @@
+river: 36 days, rules 227; planks made 0, bricks made 0; observer changed the world in 0 checks
+looks at a grown person awake: 2890; of which they knew a site short of planks or bricks: 1644
+  an option about planks or bricks was offered: 946 (their first choice 16 times; otherwise behind by 25.2 on average)
+  none offered but a refusal said why: 354; neither offered nor refused: 344
+  what was offered:
+    340x Digging clay for the shared smithy (fired bricks)
+    161x Bring N wood to the kiln
+    141x Bring N wood to the timber yard
+    91x Collect N wood from the heap
+    69x Bring N clay to the kiln
+    51x Digging clay for my household’s smithy (fired bricks)
+    24x Collect N wood from the timber yard
+    23x Collect N wood from the hut
+    21x Chopping wood for the shared hall (hewn planks)
+    12x Lay out a kiln
+  what beat it:
+    78x sleep: Sleep at my hut
+    69x gather: Picking berries
+    66x rest: Stay at my hut until it is light
+    51x deposit: Store food in the cellar
+    39x gather: Gathering wild grain
+    35x gather: Fishing
+    26x fuel_fire: Add wood to the fire
+    25x build: Build the hut
+    22x gather: Chopping wood to fuel our cold home hearth
+    21x haul: Deliver materials to the cellar site
+    19x attend: Go to the feast at the fire
+    19x fuel_fire: Feed our hearth with wood
+  refusals:
+    809x Work on the building site: site is waiting for materials (N bricks)
+    554x Cutting stone: the outcrop is worked out
+    326x Get clay for the shared smithy (fired bricks): no room in my pack for one clay
+    292x Work on the building site: site is waiting for materials (N planks)
+    261x Work on the building site: site is waiting for materials (N stone, N bricks)
+    131x Sawing planks: needs a saw and has none (and none is on the rack)
+    131x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    66x Get clay for my household’s smithy (fired bricks): no room in my pack for one clay
+    57x Digging clay for the shared smithy (fired bricks): not enough estimated time for the trip and return: energy for the return
+    41x Building a handcart: needs a hammer and has none (and none is on the rack)
+    27x Making a net: the timber yard is busy with net
+    23x Making a net: not enough estimated time for the trip and return: energy for the return
+    20x Firing bricks: does not know of a kiln they may use
+    18x Weaving a wool bedding: the timber yard is busy with net
+    18x Weaving a bedding: the timber yard is busy with net
+    15x Weaving a wool garment: the timber yard is busy with net
+    15x Scraping and sewing a hide garment: the timber yard is busy with net
+    15x Weaving a garment: the timber yard is busy with net
+    12x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    11x Weaving a wool blanket: the timber yard is busy with net
+    11x Weaving a blanket: the timber yard is busy with net
+    10x Digging clay for my household’s smithy (fired bricks): not enough estimated time for the trip and return: energy for the return
+    9x Chopping wood for the shared hall (hewn planks): not enough estimated time for the trip and return: energy for the return
+    9x Get wood for the shared hall (hewn planks): no room in my pack for one wood
+  doing, when nothing was offered or refused: 98x drink; 78x gather; 37x rest; 35x sleep; 19x attend; 17x explore; 16x eat_store; 15x deposit

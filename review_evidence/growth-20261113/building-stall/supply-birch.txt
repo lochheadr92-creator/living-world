@@ -1,0 +1,54 @@
+birch: 36 days, rules 227; planks made 2, bricks made 0; observer changed the world in 0 checks
+looks at a grown person awake: 2910; of which they knew a site short of planks or bricks: 1765
+  an option about planks or bricks was offered: 1164 (their first choice 30 times; otherwise behind by 25.7 on average)
+  none offered but a refusal said why: 152; neither offered nor refused: 449
+  what was offered:
+    443x Bring N wood to the timber yard
+    274x Chopping wood for the shared granary (hewn planks)
+    80x Collect N planks from the timber yard
+    71x Collect N wood from the food rack
+    59x Collect N wood from the heap
+    47x Chopping wood for the shared granary (sawn planks)
+    38x Chopping wood for my household’s granary (hewn planks)
+    29x Bring N wood to the kiln
+    22x Chopping wood for my household’s hall (hewn planks)
+    20x Hewing planks
+  what beat it:
+    100x sleep: Sleep at my hut
+    83x rest: Stay at my hut until it is light
+    74x deposit: Store food in the cellar
+    66x rest: Shelter at the hut
+    44x gather: Picking berries
+    42x gather: Gathering wild grain
+    36x warm: Warm up at the fire
+    34x fuel_fire: Add wood to the fire
+    34x fuel_fire: Feed our hearth with wood
+    32x harvest: Harvest the crop
+    32x operate: Separating and twisting bast fibre
+    27x operate: Cutting stone
+  refusals:
+    1561x Work on the building site: site is waiting for materials (N planks)
+    507x Sawing planks: needs a saw and has none (and none is on the rack)
+    192x Work on the building site: site is waiting for materials (N wood, N planks, N stone)
+    180x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    71x Work on the building site: site is waiting for materials (N stone, N bricks)
+    52x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    45x Work on the building site: site is waiting for materials (N planks, N bricks)
+    38x Building a handcart: needs a hammer and has none (and none is on the rack)
+    29x Chopping wood for the shared granary (hewn planks): not enough estimated time for the trip and return: energy for the return
+    27x Get wood for the shared granary (hewn planks): no room in my pack for one wood
+    25x Work on the building site: site is waiting for materials (N wood, N planks)
+    25x Work on the building site: site is waiting for materials (N wood, N planks, N bricks)
+    21x Firing bricks: does not know of a kiln they may use
+    19x Get clay for the shared smithy (fired bricks): no room in my pack for one clay
+    16x Making a net: tried recently and could not get on
+    11x Hewing planks: tried recently and could not get on
+    11x Weaving a wool blanket: tried recently and could not get on
+    11x Weaving a blanket: tried recently and could not get on
+    11x Weaving a wool bedding: tried recently and could not get on
+    11x Weaving a bedding: tried recently and could not get on
+    11x Work on the building site: site is waiting for materials (N wood, N stone, N bricks)
+    10x Sawing planks: tried recently and could not get on
+    10x Chopping wood for the shared hall (hewn planks): not enough estimated time for the trip and return: energy for the return
+    10x Weaving a wool garment: tried recently and could not get on
+  doing, when nothing was offered or refused: 147x rest; 89x drink; 64x gather; 30x warm; 27x eat_store; 17x sleep; 16x deposit; 15x attend
