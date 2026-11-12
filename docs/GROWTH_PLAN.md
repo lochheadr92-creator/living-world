@@ -29,7 +29,7 @@ every step is the same four numbers: people at years 5, 10 and 20; deaths; falls
 | 3 | **Arrivals the land can carry** | Newcomers admitted on what the settlement has put by for a lean season, not on one day's food | two in three newcomers no longer die; no fall of eight in most worlds | small |
 | 4 | **Families** | Find why few pair up and few are born (count weddings and partnered women), then repair that one thing | births exceed deaths without arrivals | medium |
 | 5 | **Building that goes on** | Find why no house and no smithy is ever built, repair the chain to iron; stone that does not run out | every world has a smithy and iron tools by year 5 and houses by year 10 | medium |
-| 6 | **A faster engine** | Measure where the time goes; a wider id space; the aim is 500 people at the speed 40 run at today | a 20-year run of 500 people finishes overnight | large |
+| 6 | **A faster engine** | Measure where the time goes; a wider id space; the aim is 500 people at the speed 40 run at today. First part taken: a job begun is finished (rules 227) | a 20-year run of 500 people finishes overnight | large |
 | 7 | **Room to spread** | Bigger maps, daughter settlements founded by the crowded, trade between them (maps for 100 and 250 founders exist) | one world passes 300 people across several settlements | large |
 | 8 | **New rungs, one at a time** | Each rung is a new need, new buildings, new crafts and the knowledge to pass on. Village: healer's hut, school, mill and bakery in use, carts and roads. Town: brick and stone streets, coin, a market hall, a hospital. City: buildings of several floors, workshops that become works, and so on up | each rung is reached in an ordinary run by a settlement large and fed enough, and never before | open-ended |
 | 9 | **Near and far** | People close to the viewer simulated in full, those far away in outline, so thousands are possible | a world of thousands runs | large |
@@ -72,6 +72,52 @@ one day: 592 wild food standing where rules 225 has 579; recorded from a clean c
 
 **Result: not measured yet.** The 20-year runs were started on 13 November (12 worlds at rules 226, beside the 12 at 225 and the
 12 at rules 220 already recorded in `review_evidence/generation-20261113/`).
+
+## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
+
+The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says
+otherwise (not the walk there), and should stop changing what they are doing half-way or to talk. It is a repair of behaviour
+first and a saving of work second.
+
+Measured first, at rules 226 (`scripts/job_drops.ts`, four ordinary worlds, eight days, one run each;
+`review_evidence/growth-20261113/job-drops/`):
+
+- People took 31,657 second looks at a job under way against 10,833 fresh choices: three in four of all the choosing done.
+- A third of gathering trips were dropped at the work, on average 46% through (866 of 2,664); so were 30% of spells of building,
+  36% of tilling and 55% of repairs, and no repair was finished in one go. "Something better came up" was 77% of the reasons.
+- Second looks go most to people asleep (about 28%) and resting (21%); about 15% to people at a job.
+- Somebody beginning to talk to a person put their work on hold 616 times, and what had been done of that piece was set back.
+
+Three switched parts:
+
+- **Hold**: somebody at the work of a job takes no second look. A danger, a critical need, a stuck job, hunger eased with food
+  already in the pack, or 800 ticks since the job was chosen bring it back. Walking to the job is not held.
+- **Asleep**: a sleeper takes no second look unless a need is critical or a danger is known.
+- **Quiet**: nobody walks up to a person they can see is at work for a chat, family time or a game. Asking, warning, offering
+  and teaching are unchanged.
+
+The same four worlds at rules 227 (one run each: a description, not a measured effect):
+
+| | rules 226 | rules 227 |
+|---|---|---|
+| second looks at a job under way | 31,657 | 18,511 |
+| gathering trips finished / dropped at the work | 1,019 / 866 of 2,664 | 1,482 / 321 of 2,821 |
+| repairs finished / dropped at the work | 0 / 36 of 66 | 17 / 0 of 44 |
+| crafting dropped at the work | 24 of 114 | 0 of 145 |
+| tilling dropped at the work | 20 of 56 | 3 of 55 |
+| building dropped at the work | 145 of 483 | 149 of 513 |
+| milliseconds a tick (machine busy with other runs) | 3.8 to 4.5 | 3.2 to 3.9 |
+
+Building is not changed, and why is not looked into. The speed figures were taken while 24 other runs used every core, so no
+speed claim is made; the engine is to be profiled on a free machine.
+
+Checks: `tests/finish_job.test.ts` (10); 366 tests in 35 related files pass; pin `tests/v227_continuation.*` (Normal aspen,
+arrivals on, one day: 1 job dropped at the work for something better where rules 226 has 22; clean checkout of `44c6dae1`). Lab
+arms: `rich-no-finish-job`, and `-hold`, `-asleep`, `-quiet`.
+
+**Result: the paired lab is not run yet** (it waits for the 20-year runs to free the machine). What to watch in it: hunger time
+(a person no longer breaks off work to eat until it is critical, unless the work was for hunger and food is in the pack), family
+time, child play and chats (the quiet part), and deaths.
 
 ## Not done, and known
 

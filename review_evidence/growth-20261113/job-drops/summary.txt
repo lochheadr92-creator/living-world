@@ -1,0 +1,10 @@
+-r226 reviews 31657 decisions 10833 ms/tick 3.77 4.01 3.78 4.48 alive 31 28 29 28 ended 15699 droppedWork 2539 walking 1380
+  gather 2664/1019/324/866; build 483/65/221/145; repair 66/0/23/36; craft 114/77/0/24; till 56/24/0/20; tree_work 37/19/0/11; rest 1326/469/1/774; sleep 1108/981/84/25; converse 2608/2366/0/242  (ended/done/partial/dropped at work)
+  something better came up 1949 | food in my pack would ease my hunger sooner 250 | invitation declined: I have already had that time today; I w 166 | danger nearby 87
+  talk holds at work 616 walking 650
+  play_together 248; request 247; warn 237; learn_foraging 198; family_time 153; chat 96; recruit 30; offer 17
+-r227 reviews 18511 decisions 11781 ms/tick 3.2 3.7 3.8 3.92 alive 28 28 34 28 ended 16242 droppedWork 1813 walking 1697
+  gather 2821/1482/482/321; build 513/87/224/149; repair 44/17/17/0; craft 145/125/0/0; till 55/36/0/3; tree_work 32/23/0/0; rest 1012/239/0/695; sleep 1175/1112/19/15; converse 2666/2394/0/272  (ended/done/partial/dropped at work)
+  something better came up 1263 | invitation declined: I have already had that time today; I w 216 | food in my pack would ease my hunger sooner 149 | danger nearby 114
+  talk holds at work 595 walking 712
+  warn 302; play_together 297; learn_foraging 213; request 183; family_time 124; chat 105; recruit 22; offer 14

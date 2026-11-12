@@ -1,0 +1,31 @@
+aspen: 3 days, rules 226, 29 alive, 2.89 ms a tick; 2917 reviews of a job under way against 934 fresh choices
+activities ended 1313; dropped while working 223 (17%), dropped while walking there 105
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     122     39       0      1     9    73  0.74
+          gather     225     74      42     25    12    72  0.42
+        converse     206    182       0      0     0    24     0
+            warm      46     20       3      0     4    19  0.56
+          wander      57     20       0      4    19    14  0.47
+            give      85     53       0      5    19     8  0.54
+           craft      22     15       0      1     1     5  0.76
+           build      18      2      11      1     0     4     0
+       plan_site      16     10       0      2     3     1  0.58
+             eat     103    101       0      0     1     1   0.4
+            haul      26     18       0      0     7     1  0.89
+          repair       1      0       0      0     0     1  0.14
+         deposit      54     33      14      3     4     0     0
+        withdraw       7      6       0      1     0     0     0
+       socialize      52      0       0     41    11     0     0
+           drink     110    100       0     10     0     0     0
+            flee      12      0       0      7     5     0     0
+       eat_store      30     26       0      1     3     0     0
+         explore       7      3       0      0     4     0     0
+           sleep      99     86      13      0     0     0     0
+       fuel_fire       6      4       0      0     2     0     0
+       tree_work       6      3       0      2     1     0     0
+           visit       3      2       0      1     0     0     0
+why a job was dropped at work: something better came up 176; food in my pack would ease my hunger sooner 20; invitation declined: I have already had that time today; I w 18; invitation declined: someone needed to take care of themselv 4; danger nearby 3; time together unfinished: we did not get to spend the reques 2
+put on hold by somebody talking to them: 49 at work (3319 ticks of progress set back to nothing), 47 while walking; later picked up again 94, never 2
+  by the job held: warm 13; wander 11; rest 10; gather 9; eat 2; eat_store 2; craft 1; plan_site 1; give 0; socialize 0; deposit 0; haul 0
+  by what the talk was for: play_together 26; learn_foraging 22; request 18; family_time 14; chat 8; warn 6; offer 1; learn_skill 1
+second looks due, by what the person was doing: sleep 1548; rest 1165; gather 727; warm 406; drink (walking) 314; gather (walking) 228; wander 135; sleep (walking) 135; wander (walking) 102; warm (walking) 92; rest (walking) 88; socialize (walking) 85; give (walking) 85; deposit (walking) 82; build 66; haul (walking) 64

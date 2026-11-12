@@ -1,0 +1,31 @@
+meadow: 8 days, rules 226, 29 alive, 3.78 ms a tick; 8008 reviews of a job under way against 2675 fresh choices
+activities ended 3895; dropped while working 692 (18%), dropped while walking there 306
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     482    217       0      1    22   242  0.71
+          gather     638    233      83     49    53   220  0.46
+        converse     596    550       0      0     0    46     0
+           build     119     17      49      4     6    43     0
+          wander     134     55       0      1    42    36  0.54
+            warm      74     17       4      0    17    36  0.49
+            flee      58     21       0      1    26    10  0.32
+          repair      18      0       8      0     0    10  0.37
+            give     194    113       0     33    40     8  0.47
+           craft      30     19       0      0     3     8  0.57
+           sleep     275    252       8      0     8     7     0
+            till      11      4       0      0     2     5  0.51
+       eat_store      70     62       0      2     1     5   0.2
+       fuel_fire      23     12       0      0     7     4  0.33
+           drink     340    301       0     18    18     3  0.21
+         explore      13      3       0      0     7     3  0.24
+             eat     309    304       0      0     3     2   0.5
+            haul     107     94       0      1    10     2  0.61
+       plan_site      45     28       0     11     5     1  0.42
+     fetch_water       1      0       0      0     0     1  0.39
+       socialize     186      0       0    160    26     0     0
+        withdraw       9      9       0      0     0     0     0
+         deposit     128    107      12      3     6     0     0
+           visit      18     10       0      8     0     0     0
+why a job was dropped at work: something better came up 542; food in my pack would ease my hunger sooner 75; danger nearby 26; invitation declined: I have already had that time today; I w 24; invitation declined: I cannot teach you more about foraging  10; time together unfinished: our time together was cut short; n 6; time together unfinished: we did not get to spend the reques 4; invitation declined: someone needed to take care of themselv 2; woken to be fed 2; a more urgent need (warmth) 1
+put on hold by somebody talking to them: 144 at work (11407 ticks of progress set back to nothing), 146 while walking; later picked up again 281, never 5
+  by the job held: rest 45; gather 27; warm 24; wander 17; build 9; eat 7; drink 5; craft 3; give 2; repair 2; deposit 1; visit 1
+  by what the talk was for: play_together 60; warn 55; request 51; learn_foraging 50; family_time 35; chat 19; recruit 9; cancel_request 5; offer 3; learn_skill 1; argue 1; share_work 1

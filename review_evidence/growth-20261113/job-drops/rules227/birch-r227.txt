@@ -1,0 +1,32 @@
+birch: 8 days, rules 227, 28 alive, 3.7 ms a tick; 4816 reviews of a job under way against 2972 fresh choices
+activities ended 4211; dropped while working 463 (11%), dropped while walking there 481
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     232     50       0      0    15   167  0.72
+          gather     783    336     147     56   136   108  0.41
+        converse     766    704       0      0     0    62     0
+           build     137     24      62      3     5    43     0
+          wander     199     69       0      9    80    41  0.52
+            flee     100     49       0      2    34    15  0.35
+            give     170     92       0     18    50    10  0.48
+           drink     309    283       0      5    12     9  0.17
+             eat     273    269       0      0     2     2  0.45
+           sleep     281    271       0      0     8     2     0
+       eat_store      81     77       0      0     3     1   0.5
+            till      20     15       0      0     4     1  0.27
+          attend      12     10       0      0     1     1  0.73
+            warm       1      0       0      0     0     1  0.15
+       socialize     297      0       0    227    70     0     0
+         deposit     171    133      19      8    11     0     0
+       plan_site      77     31       0     35    11     0     0
+         explore      16      7       0      0     9     0     0
+           craft      38     34       0      0     4     0     0
+        withdraw       8      6       0      1     1     0     0
+            haul     163    139       0      4    20     0     0
+       tree_work       9      6       0      2     1     0     0
+       host_meal       1      0       0      1     0     0     0
+     attend_meal       1      0       0      1     0     0     0
+why a job was dropped at work: something better came up 328; invitation declined: I have already had that time today; I w 44; food in my pack would ease my hunger sooner 36; danger nearby 35; time together unfinished: our time together was cut short; n 8; invitation declined: I cannot teach you more about foraging  4; invitation declined: someone needed to take care of themselv 4; time together unfinished: we did not get to spend the reques 2; woken to be fed 1; the occasion is over 1
+put on hold by somebody talking to them: 146 at work (9616 ticks of progress set back to nothing), 232 while walking; later picked up again 368, never 5
+  by the job held: gather 46; wander 29; rest 27; build 14; drink 7; eat 5; plan_site 3; till 3; eat_store 3; deposit 2; attend 2; give 1
+  by what the talk was for: warn 151; play_together 58; learn_foraging 50; request 43; family_time 25; chat 16; handover_work 8; recruit 7; offer 6; argue 4; invite 2; share_work 2
+second looks due, by what the person was doing: sleep 5529; rest 2186; gather 2161; gather (walking) 856; build 559; drink (walking) 446; sleep (walking) 430; wander 387; socialize (walking) 379; wander (walking) 283; haul (walking) 231; deposit (walking) 211; give (walking) 204; drink 131; plan_site (walking) 123; craft 114

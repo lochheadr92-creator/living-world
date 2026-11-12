@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "44c6dae1c401caefbcab2bac9b7f24d2cb552ac8",
+    "rules": 227,
+    "content": "4c7ec8326a0a7a794add3e6c4667012d90a5c698065ad31fddece78102c2593a",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen world (arrivals on) stepped one day beside its rules-226 twin, where fewer than half as many jobs were dropped at the work because something better came up (finish_job.ts is the only difference), then 120 more after a save and load."
+  },
+  "saved": "ff68f048590d670928d709ce8f078b2573e12fadc163ed82d8b66c44393653cf",
+  "continued": "527754e2a4f435cfcafb373900f7e5f4d932f9d8d0701e9cdb97b75bc5a7c324",
+  "tick": 2400,
+  "dropped": 1,
+  "droppedAt226": 22
+}
