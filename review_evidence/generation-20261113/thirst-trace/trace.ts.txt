@@ -1,0 +1,39 @@
+// scratch: meadow nudge:2 at rules 220, the thirst deaths of day 29 to 30 (lab row r220-60d). Read-only.
+import { writeFileSync } from 'node:fs';
+import { DAY } from 'C:/dev/Claude Experiment/living-world-integrate/src/sim/constants';
+import { createWorld } from 'C:/dev/Claude Experiment/living-world-integrate/src/sim/factory';
+import { freshRunSettings, parseRunRules } from 'C:/dev/Claude Experiment/living-world-integrate/src/sim/profiles';
+import { hashWorld, stepWorld } from 'C:/dev/Claude Experiment/living-world-integrate/src/sim/world';
+import { serializeWorld, deserializeWorld } from 'C:/dev/Claude Experiment/living-world-integrate/src/app/save';
+import type { World } from 'C:/dev/Claude Experiment/living-world-integrate/src/sim/types';
+const args = process.argv.slice(2).filter((a) => a !== '--');
+const opt = (n: string, d: string) => { const i = args.indexOf('--' + n); return i >= 0 ? args[i + 1] : d; };
+const seed = opt('seed', 'meadow'), nudge = Number(opt('nudge', '2')), days = Number(opt('days', '32')), from = Number(opt('from', '26'));
+const w: World = deserializeWorld(serializeWorld(createWorld(freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: true }))));
+for (let i = 0; i < nudge; i++) w.rng.next();
+const pop: number[] = []; const lines: string[] = []; let ev = 0;
+const say = (s: string) => { lines.push(s); };
+for (let i = 1; i <= days * DAY; i++) {
+  stepWorld(w);
+  if (i % DAY === 0) pop.push(w.persons.filter((p) => p.alive).length);
+  const day = i / DAY;
+  if (i % DAY === 0 || (day >= from && i % 200 === 0)) {
+    const alive = w.persons.filter((p) => p.alive);
+    const th = alive.map((p) => p.needs.thirst).sort((a, b) => a - b);
+    const bodies = (w.waterBodies ?? []).map((b) => `${b.id}:${Math.round(b.amount)}/${b.capacity}(${b.tiles.length}t)`);
+    const wells = w.buildings.filter((b) => b.type === 'well').map((b) => `well${b.id}@${b.x},${b.y}:${JSON.stringify((b as any).water ?? b.store?.items?.water ?? '')}`);
+    const acts: Record<string, number> = {};
+    for (const p of alive) if (p.needs.thirst < 30) { const k = p.activity ? `${p.activity.kind}${(p.activity as any).label ? ':' + (p.activity as any).label : ''}` : 'idle'; acts[k] = (acts[k] ?? 0) + 1; }
+    const water = alive.reduce((n, p) => n + ((p.inv as any).water ?? 0), 0);
+    const storeWater = w.buildings.reduce((n, b) => n + ((b.store?.items as any)?.water ?? 0), 0);
+    say(`d${day.toFixed(2)} alive ${alive.length} thirst min ${th[0]?.toFixed(0)} med ${th[Math.floor(th.length / 2)]?.toFixed(0)} <30:${th.filter((x) => x < 30).length} rain ${w.weather.rain.toFixed(2)} temp ${w.weather.temp.toFixed(0)} hardship ${w.hardship?.kind ?? '-'} carried ${water} stored ${storeWater} | bodies ${bodies.join(' ')} | ${wells.join(' ')} | thirsty acts ${JSON.stringify(acts)}`);
+  }
+  if (day >= from) for (; ev < w.events.length; ev++) { const e = w.events[ev]; if (e.tick >= from * DAY) say(`   [${(e.tick / DAY).toFixed(2)}] ${e.kind}: ${e.text}`); }
+  else ev = w.events.length;
+}
+say('pop ' + pop.join(' '));
+say('deaths ' + JSON.stringify(w.deceased.map((d) => ({ day: +(d.tick / DAY).toFixed(2), name: d.name, cause: d.cause, age: Math.round(d.age) }))));
+const centre = (() => { const a = w.persons.filter((p) => p.alive); return [a.reduce((n, p) => n + p.x, 0) / a.length, a.reduce((n, p) => n + p.y, 0) / a.length]; })();
+say('centre of the living ' + centre.map((x) => x.toFixed(0)).join(',') + ' map ' + w.W + 'x' + w.H);
+writeFileSync(opt('out', 'C:/dev/_claude_scratch/thirst-trace/out.txt'), lines.join('\n'));
+console.log(pop.join(' '));

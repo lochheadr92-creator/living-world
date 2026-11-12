@@ -1,0 +1,293 @@
+
+================ arrivals on: 12 seeds, rules 220, days run 240 240 240 240 240 240 240 240 240 240 240 240 (all done: true) ================
+
+People alive at the end of day (28 founders):
+    seed   d12   d24   d36   d60   d96  d120  d156  d192  d216  d240   low (day)  peak (day)
+   aspen    30    30    33    39    49    54    36    48    52    53    28 (1)   55 (102)
+   birch    28    30    31    30    31    32    31    26    25    25    25 (207)   32 (47)
+   cedar    33    31    32    37    49    56    53    43    51    54    28 (1)   56 (113)
+    fern    29    29    30    34    55    59    51    52    41    31    28 (1)   59 (114)
+   gen-1    29    28    31    40    26    39    14    31    38    27    10 (144)   47 (235)
+   gen-2    28    31    30    34    33    36    36    35    33    33    28 (1)   37 (165)
+   gen-3    29    29    30    34    35    36    38    42    56    55    28 (1)   56 (215)
+   gen-4    31    34    38    41    51    32    41    53    23    38    16 (204)   55 (199)
+   gen-5    34    21    26    38    55    56    32    54    54    47    21 (24)   57 (134)
+   gen-6    28    32    34    36    53    57    44    44    53    50    28 (1)   58 (123)
+  meadow    33    38    26    39    46    55    25    44    48    23    11 (133)   56 (122)
+   river    28    28    31    37    44    47    52    36    47    56    20 (168)   57 (239)
+    mean  30.0  30.1  31.0  36.6  43.9  46.6  37.8  42.3  43.4  41.0
+     min    28    21    26    30    26    32    14    26    23    23
+     max    34    38    38    41    55    59    53    54    56    56
+      <4     0     0     0     0     0     0     0     0     0     0   (settlements under four people)
+
+Flows per settlement, by span of 48 days (four years):
+      span   born   came   died  of:    hunger   thirst exposure     wolf  old age    other
+      1-48    3.6    8.2    5.3            1.8      0.2      2.0      0.5      0.0      0.8
+     49-96    2.5   13.1    6.2            1.3      0.1      2.1      1.1      0.2      1.5
+    97-144    2.4    9.5   19.3           10.5      0.4      3.2      2.3      0.3      2.6
+   145-192    1.9   16.2   12.3            6.3      0.2      3.1      0.9      0.2      1.7
+   193-240    1.3   15.6   18.3            8.4      0.3      4.5      1.8      0.1      3.3
+raw causes, all seeds: {"exposure":178,"fever":73,"hunger":340,"injuries":44,"wolf attack":78,"thirst":13,"old age":9}
+
+Deaths in all (735 over 12 seeds): by origin {"arrived":498,"founder":183,"born":54}; by age {"16-61":575,"62+":28,"12-15":15,"3-11":94,"0-2":23}
+
+Falls of eight or more people within three days:
+    aspen days 129-131: 54 -> 45  {"injuries":1,"hunger":6,"fever":2,"wolf attack":1}  hardship lean, winter
+    cedar days 22-24: 39 -> 31  {"exposure":6,"fever":1,"hunger":1}  hardship lean, winter
+    cedar days 123-125: 56 -> 47  {"hunger":9}  hardship lean
+    cedar days 166-168: 54 -> 37  {"hunger":16,"exposure":1,"injuries":1}  hardship lean, winter
+     fern days 122-124: 59 -> 50  {"injuries":2,"hunger":7}  hardship lean
+     fern days 238-240: 51 -> 31  {"hunger":19,"fever":1}  hardship lean, winter
+    gen-1 days 69-71: 43 -> 28  {"wolf attack":1,"exposure":3,"hunger":8,"injuries":3}  hardship lean, winter
+    gen-1 days 140-142: 41 -> 23  {"hunger":6,"thirst":4,"fever":1,"exposure":7}  hardship lean, winter
+    gen-1 days 237-239: 47 -> 38  {"exposure":4,"fever":2,"hunger":2,"wolf attack":1}  hardship lean, winter
+    gen-3 days 220-222: 56 -> 45  {"hunger":8,"thirst":1,"exposure":2}  hardship lean
+    gen-4 days 104-106: 53 -> 37  {"hunger":10,"exposure":2,"wolf attack":2,"fever":1,"injuries":1}  hardship lean, winter
+    gen-4 days 141-143: 45 -> 37  {"exposure":5,"fever":2,"hunger":1}  hardship lean, winter
+    gen-4 days 201-203: 55 -> 22  {"hunger":27,"fever":4,"exposure":2}  hardship lean, winter
+    gen-5 days 21-23: 40 -> 22  {"hunger":4,"exposure":12,"fever":1,"wolf attack":1}  hardship lean, winter
+    gen-5 days 153-155: 56 -> 40  {"thirst":1,"fever":2,"hunger":12,"exposure":2,"injuries":1}  hardship lean, winter
+    gen-5 days 225-227: 54 -> 45  {"exposure":7,"fever":2}  hardship lean, winter
+    gen-6 days 129-131: 58 -> 36  {"hunger":20,"fever":1,"wolf attack":1}  hardship lean, winter
+    gen-6 days 190-192: 55 -> 44  {"exposure":10,"fever":2}  hardship dry, winter
+    gen-6 days 202-204: 51 -> 43  {"hunger":2,"exposure":5,"fever":1,"wolf attack":1}  hardship lean, winter
+    gen-6 days 221-223: 55 -> 43  {"fever":1,"hunger":7,"thirst":1,"wolf attack":1,"injuries":2}  hardship lean
+   meadow days 34-36: 41 -> 26  {"fever":1,"hunger":13,"injuries":1}  hardship lean, winter
+   meadow days 129-131: 56 -> 22  {"hunger":29,"exposure":2,"fever":3}  hardship lean, winter
+   meadow days 203-205: 52 -> 44  {"fever":2,"hunger":5,"injuries":1}  hardship lean, winter
+   meadow days 224-226: 51 -> 38  {"hunger":9,"fever":1,"injuries":1,"exposure":2}  hardship lean, winter
+    river days 102-104: 47 -> 38  {"hunger":6,"wolf attack":3}  hardship lean
+    river days 129-131: 49 -> 41  {"fever":2,"wolf attack":1,"exposure":4,"hunger":1}  hardship lean, winter
+    river days 164-166: 54 -> 41  {"hunger":9,"fever":2,"exposure":2}  hardship lean, winter
+
+The settlement at the end of a year (means over seeds):
+                                    d12      d60     d120     d192     d240
+                        people     30.0     36.6     46.6     42.3     41.0
+          founders still alive     28.0     24.3     21.4     15.6     12.8
+                     born here      0.3      4.0      6.5      7.1      7.3
+                       arrived      1.7      8.3     18.7     19.7     21.0
+           children (under 12)      8.6      8.7      8.7      7.2      5.7
+                youths (12-15)      0.5      2.8      3.1      2.5      2.2
+                adults (16-61)     19.0     23.6     33.8     32.4     32.6
+                  elders (62+)      1.9      1.6      1.0      0.3      0.6
+                      mean age     27.6     27.9     29.1     29.7     30.8
+                        oldest     73.4     76.7     71.6     64.9     60.7
+                       couples      7.4      8.3     10.5      7.8      6.9
+                    households     12.5     15.7     20.2     19.3     19.5
+                 of one person      3.0      5.3      8.0      8.5      8.6
+               households ever     12.5     15.7     20.2     19.3     19.5
+                     mean mood     -6.5    -11.3     -7.9    -14.8    -17.7
+              building: cellar      0.2      5.2      7.0      4.6      4.1
+                building: fire      1.0      1.0      1.0      1.0      1.0
+           building: food_rack      0.2      0.9      1.0      0.9      0.9
+                building: hall      0.0      0.1      0.2      0.2      0.2
+                 building: hut     10.0     12.5     16.8     12.0     12.3
+                building: kiln      0.1      1.0      1.0      0.9      0.8
+             building: lean_to     12.1     11.9     13.8     11.0     11.9
+                building: mine      0.0      1.0      1.0      0.8      0.8
+              building: quarry      0.8      1.1      1.0      0.8      0.8
+          building: storehouse      0.8      1.0      1.0      1.0      1.0
+         building: timber_yard      0.6      1.0      1.0      1.0      1.0
+                building: well      1.4      1.8      1.8      2.1      2.1
+           open building sites      5.4      5.4      6.5      9.2     11.4
+                    farm plots     13.8     35.5     60.5     80.2     95.4
+                     tool: axe      4.8      9.4     13.3     14.6     14.6
+                  tool: basket     16.8     23.1     33.3     38.8     45.2
+                 tool: bedding      0.0      1.6      3.6      5.0      7.3
+                 tool: blanket      0.3      2.3      4.7      5.8      7.7
+                 tool: garment      0.8      8.8     13.1     13.5     16.1
+                  tool: hammer      1.4      6.4      9.2     10.3     10.2
+                     tool: hoe      1.7      6.7     10.0     12.2     12.6
+                     tool: jar      0.0      0.2      0.7      0.8      0.9
+                     tool: net      0.0      0.1      0.4      0.1      0.3
+                    tool: pick      1.5      2.8      3.3      3.4      3.4
+                     tool: rod      3.3      8.2     11.5     12.8     12.8
+                     tool: saw      1.0      5.3      9.3     10.5     11.3
+                   tool: spear      1.8      8.5     11.5     13.6     13.9
+                     tool: toy      4.0      9.3     12.8     15.6     16.9
+                    tool: trap      0.0      0.1      0.0      0.0      0.3
+                         carts      0.0      0.0      0.0      0.0      0.0
+                   apprentices      0.6      0.0      0.0      0.1      0.0
+                knows charcoal      6.3      9.0     13.0     12.3     14.0
+                knows smelting      2.1      2.9      3.5      2.8      2.8
+                 knows forging      1.6      2.2      2.6      2.3      2.2
+          skill forage (grown)     10.5     14.3     15.6     15.6     15.8
+            skill fish (grown)      9.0      9.8     10.1     10.5     10.9
+            skill farm (grown)      8.6      9.8     11.1     11.9     12.3
+           skill build (grown)     10.4     11.0     10.8     10.4     10.6
+           skill craft (grown)      8.6      8.7      8.3      8.2      8.1
+                    stone left    570.0    407.2    297.8    229.4    192.7
+                     clay left    124.8    109.0     94.8     77.7     70.4
+                      ore left     46.0     46.0     46.0     46.0     46.0
+                         trees    842.1    877.4    836.8    808.9    786.3
+                    id counter  11090.9  55862.0 127736.3 209339.6 267854.0
+  (skills are shown x10)
+
+Settlements (of 12) with at least one, at day 240: cellar 11, fire 12, food_rack 11, hall 2, hut 12, kiln 10, lean_to 12, mine 10, quarry 8, storehouse 12, timber_yard 12, well 12
+  first hall standing at a year's end: aspen -, birch -, cedar 108, fern 60, gen-1 -, gen-2 -, gen-3 -, gen-4 -, gen-5 -, gen-6 -, meadow -, river -
+  first timber_yard standing at a year's end: aspen 24, birch 24, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 24, gen-4 12, gen-5 24, gen-6 24, meadow 12, river 12
+  first storehouse standing at a year's end: aspen 24, birch 12, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 12, gen-4 12, gen-5 12, gen-6 24, meadow 12, river 12
+  first house standing at a year's end: aspen -, birch -, cedar -, fern -, gen-1 -, gen-2 -, gen-3 -, gen-4 -, gen-5 -, gen-6 -, meadow -, river -
+  first well standing at a year's end: aspen 12, birch 12, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 12, gen-4 12, gen-5 12, gen-6 12, meadow 12, river 12
+
+Life, per year of 12 days (means over seeds), by span:
+                        1-48     49-96    97-144   145-192   193-240
+             chats      69.4     100.1     118.4     103.0     102.2
+        familyTime      46.0      46.3      44.9      39.1      30.1
+         childPlay      66.8      61.3      56.9      47.5      33.5
+          coaching       1.6       4.4       4.4       4.5       7.4
+           lessons      53.9      55.0      54.4      49.4      39.1
+          mealsSat       0.1       0.1       0.3       0.5       0.8
+            visits       9.7      11.4      14.8      14.7      19.1
+          fireSits      22.6      29.8      25.9      21.9      26.9
+       storiesTold       7.6      14.8      15.0      13.3      18.5
+    mealsFromStore     131.0     168.2     175.2     144.9     134.9
+     mealsFromPack     445.0     557.2     594.3     541.5     632.2
+         tradeTalk       1.9       2.9       3.9       3.9       3.1
+     marketsCalled       1.8       2.0       2.0       2.0       2.0
+     workplaceJobs      10.8      12.9      10.9      10.9      13.7
+          yardJobs       7.8      12.8      10.8      10.9      13.6
+    sitesAbandoned       1.6       3.7       5.0       5.1       7.9
+          toysMade       2.2       0.7       0.7       0.6       0.4
+          leanDays       1.5       1.3       1.7       1.6       1.7
+           dryDays       1.0       0.9       0.6       0.6       0.6
+     hungryShare (to date)     54.1     57.2     56.7     56.8     57.1  % at d12 d60 d120 d192 d240
+    thirstyShare (to date)     41.7     41.7     42.0     42.2     42.3  % at d12 d60 d120 d192 d240
+       lifeShare (to date)     19.7     19.5     18.8     18.3     17.9  % at d12 d60 d120 d192 d240
+   survivalShare (to date)     24.7     26.1     26.8     27.1     27.4  % at d12 d60 d120 d192 d240
+       workShare (to date)     17.1     14.8     14.8     14.7     15.0  % at d12 d60 d120 d192 d240
+minutes: 108 75.7 103.2 108.2 82.5 79.1 88.4 98.5 110 98.4 94.8 99.5; day-60 hashes: aspen a247e60a birch f48c6e8f cedar 318b4799 fern b86e6002 gen-1 0ce64c60 gen-2 eefee53e gen-3 fa002e8c gen-4 5434b05c gen-5 2dd82b76 gen-6 bfeddbe4 meadow 601c5281 river 67d2d1b4
+
+================ arrivals off: 12 seeds, rules 220, days run 240 240 240 240 240 240 240 240 240 240 240 240 (all done: true) ================
+
+People alive at the end of day (28 founders):
+    seed   d12   d24   d36   d60   d96  d120  d156  d192  d216  d240   low (day)  peak (day)
+   aspen    28    31    32    34    35    38    36    37    37    39    28 (1)   39 (133)
+   birch    28    29    30    30    33    34    33    32    29    27    26 (226)   34 (118)
+   cedar    28    29    29    31    33    34    34    35    34    34    28 (1)   35 (158)
+    fern    28    29    30    30    31    32    32    31    31    31    28 (1)   33 (122)
+   gen-1    29    10     8    10    11    12    13    14    14    14     8 (25)   31 (14)
+   gen-2    28    30    30    33    33    35    36    37    37    37    28 (1)   37 (186)
+   gen-3    29    29    30    34    35    34    32    34    35    33    28 (1)   35 (76)
+   gen-4    27    28    28    29    28    27    27    26    26    24    24 (239)   29 (40)
+   gen-5    28    28    29    32    35    35    34    36    37    37    28 (1)   37 (193)
+   gen-6    28    29    29    31    32    34    35    36    36    37    28 (1)   37 (174)
+  meadow    28    28    29    31    33    34    32    32    32    30    28 (1)   34 (110)
+   river    28    28    29    31    30    33    34    32    31    32    28 (1)   34 (150)
+    mean  28.1  27.3  27.8  29.7  30.8  31.8  31.5  31.8  31.6  31.3
+     min    27    10     8    10    11    12    13    14    14    14
+     max    29    31    32    34    35    38    36    37    37    39
+      <4     0     0     0     0     0     0     0     0     0     0   (settlements under four people)
+
+Flows per settlement, by span of 48 days (four years):
+      span   born   came   died  of:    hunger   thirst exposure     wolf  old age    other
+      1-48    2.6    0.0    2.3            0.7      0.0      0.7      0.3      0.1      0.5
+     49-96    3.1    0.0    0.7            0.1      0.1      0.0      0.1      0.2      0.3
+    97-144    2.1    0.0    1.3            0.2      0.1      0.3      0.2      0.4      0.2
+   145-192    1.4    0.0    1.1            0.0      0.2      0.5      0.1      0.3      0.0
+   193-240    0.8    0.0    1.3            0.1      0.2      0.6      0.2      0.2      0.2
+raw causes, all seeds: {"exposure":25,"hunger":12,"wolf attack":10,"fever":9,"injuries":4,"old age":14,"thirst":6}
+
+Deaths in all (80 over 12 seeds): by origin {"founder":67,"born":13}; by age {"62+":25,"16-61":36,"12-15":1,"3-11":15,"0-2":3}
+
+Falls of eight or more people within three days:
+    gen-1 days 21-23: 31 -> 14  {"exposure":8,"hunger":6,"wolf attack":2,"fever":1}  hardship lean, winter
+
+The settlement at the end of a year (means over seeds):
+                                    d12      d60     d120     d192     d240
+                        people     28.1     29.7     31.8     31.8     31.3
+          founders still alive     27.9     26.0     25.1     23.4     22.4
+                     born here      0.2      3.7      6.8      8.4      8.8
+                       arrived      0.0      0.0      0.0      0.0      0.0
+           children (under 12)      8.3      8.4      7.0      6.3      4.2
+                youths (12-15)      0.5      3.0      3.5      2.1      2.6
+                adults (16-61)     17.3     16.6     20.0     22.8     22.6
+                  elders (62+)      1.9      1.7      1.3      0.6      1.9
+                      mean age     27.8     27.8     29.1     31.8     34.8
+                        oldest     73.4     74.2     73.5     66.0     65.9
+                       couples      6.8      6.7      6.3      6.3      6.2
+                    households     11.4     10.4      9.9      9.2      8.7
+                 of one person      2.4      1.9      1.6      1.6      1.3
+               households ever     11.4     10.4      9.9      9.2      8.7
+                     mean mood     -5.0     -4.9     -5.7     -6.1     -6.8
+              building: cellar      0.4      7.6      8.0      7.7      6.9
+                building: fire      1.0      1.0      1.0      1.0      1.0
+           building: food_rack      0.3      0.9      0.9      0.9      0.9
+             building: granary      0.0      0.0      0.1      0.1      0.1
+                building: hall      0.0      0.1      0.3      0.3      0.3
+                 building: hut     10.4     10.0      9.7      8.6      8.1
+                building: kiln      0.0      1.0      1.0      0.8      0.8
+             building: lean_to     11.2      9.0      7.2      5.8      4.9
+                building: mine      0.0      1.3      1.2      1.2      0.9
+              building: quarry      0.8      1.1      0.9      0.9      0.8
+          building: storehouse      1.0      1.0      1.0      1.0      1.0
+         building: timber_yard      0.8      1.0      1.0      0.9      1.0
+                building: well      1.3      1.7      1.7      1.7      1.7
+           open building sites      4.6      2.4      2.8      3.7      3.8
+                    farm plots     13.9     29.5     34.8     36.7     37.5
+                     tool: axe      4.5      8.7     10.5     11.8     12.0
+                  tool: basket     15.8     19.5     21.3     22.2     23.2
+                 tool: bedding      0.2      1.9      4.3      5.7      7.3
+                 tool: blanket      0.2      2.3      5.0      6.8      7.8
+                 tool: garment      1.2      8.2      9.8      9.8     11.9
+                  tool: hammer      1.4      7.3      8.2      8.7      8.8
+                     tool: hoe      1.8      6.3      9.0     10.9     11.8
+                     tool: jar      0.0      0.2      0.8      0.9      0.9
+                     tool: net      0.0      0.2      0.4      0.8      0.7
+                    tool: pick      1.8      2.8      3.4      3.7      3.9
+                     tool: rod      3.3      8.3     10.2     11.4     11.8
+                     tool: saw      0.9      5.1      6.7      7.8      8.0
+                   tool: spear      2.5      8.6     10.3     11.6     11.9
+                     tool: toy      4.8      9.2     11.0     12.3     12.8
+                    tool: trap      0.0      0.0      0.1      0.1      0.3
+                         carts      0.0      0.0      0.0      0.0      0.0
+                   apprentices      0.1      0.1      0.0      0.1      0.0
+                knows charcoal      6.1      7.7      9.3     10.4     12.4
+                knows smelting      2.0      1.9      1.8      1.8      1.8
+                 knows forging      1.5      1.4      1.3      1.3      1.3
+          skill forage (grown)     10.7     15.5     17.5     17.9     17.9
+            skill fish (grown)      9.1     10.2     10.4     11.0     11.3
+            skill farm (grown)      8.6     10.1     11.8     13.4     13.6
+           skill build (grown)     10.6     11.3     10.8     10.8     10.4
+           skill craft (grown)      8.8      8.9      8.2      7.7      7.3
+                    stone left    564.5    412.0    366.3    332.6    314.3
+                     clay left    124.8    110.5    102.8     94.3     90.3
+                      ore left     46.0     46.0     46.0     46.0     46.0
+                         trees    846.3    883.2    885.6    886.9    887.2
+                    id counter  10922.3  49111.9 100428.2 164513.8 207182.3
+  (skills are shown x10)
+
+Settlements (of 12) with at least one, at day 240: cellar 12, fire 12, food_rack 11, granary 1, hall 3, hut 12, kiln 10, lean_to 12, mine 9, quarry 9, storehouse 12, timber_yard 12, well 12
+  first hall standing at a year's end: aspen -, birch -, cedar -, fern 72, gen-1 -, gen-2 -, gen-3 -, gen-4 36, gen-5 -, gen-6 -, meadow 84, river -
+  first timber_yard standing at a year's end: aspen 12, birch 24, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 24, gen-4 12, gen-5 12, gen-6 24, meadow 12, river 12
+  first storehouse standing at a year's end: aspen 12, birch 12, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 12, gen-4 12, gen-5 12, gen-6 12, meadow 12, river 12
+  first house standing at a year's end: aspen -, birch -, cedar -, fern -, gen-1 -, gen-2 -, gen-3 -, gen-4 -, gen-5 -, gen-6 -, meadow -, river -
+  first well standing at a year's end: aspen 12, birch 12, cedar 12, fern 12, gen-1 12, gen-2 12, gen-3 12, gen-4 12, gen-5 12, gen-6 12, meadow 12, river 12
+
+Life, per year of 12 days (means over seeds), by span:
+                        1-48     49-96    97-144   145-192   193-240
+             chats      64.3      89.4     102.0      97.7      97.4
+        familyTime      49.2      48.4      45.4      47.1      33.0
+         childPlay      69.3      63.0      58.2      55.6      36.0
+          coaching       2.5       6.7       7.0       6.7      12.9
+           lessons      55.4      54.2      50.3      50.1      35.9
+          mealsSat       0.3       0.1       0.1       0.4       0.7
+            visits       6.8       5.4       4.9       5.5       6.8
+          fireSits      23.2      20.4      21.3      21.5      26.5
+       storiesTold       7.2       8.5      10.4      12.0      15.4
+    mealsFromStore     125.8     154.7     162.4     154.0     134.5
+     mealsFromPack     372.5     346.8     355.1     348.1     356.0
+         tradeTalk       2.8       2.0       1.4       1.6       1.9
+     marketsCalled       1.7       1.8       1.8       1.8       1.8
+     workplaceJobs      12.0      11.3      11.1      10.7      12.3
+          yardJobs       8.5      11.2      11.1      10.7      12.3
+    sitesAbandoned       1.4       2.3       2.9       3.1       3.3
+          toysMade       2.1       0.5       0.3       0.2       0.1
+          leanDays       1.5       1.3       1.7       1.6       1.7
+           dryDays       1.0       0.9       0.6       0.6       0.6
+     hungryShare (to date)     50.6     52.1     50.8     50.0     49.8  % at d12 d60 d120 d192 d240
+    thirstyShare (to date)     40.8     40.2     40.3     40.3     40.4  % at d12 d60 d120 d192 d240
+       lifeShare (to date)     21.1     20.5     19.8     19.3     18.8  % at d12 d60 d120 d192 d240
+   survivalShare (to date)     22.5     23.7     23.7     23.7     23.7  % at d12 d60 d120 d192 d240
+       workShare (to date)     18.1     15.8     15.8     16.0     16.4  % at d12 d60 d120 d192 d240
+minutes: 82.2 80.1 76.7 79 23.3 79.8 81 71 77.3 83.3 72.1 78.9; day-60 hashes: aspen ff17529e birch 39332d1f cedar d08095e2 fern 4a44a36c gen-1 66cf20d8 gen-2 45ed5602 gen-3 8826074a gen-4 1a389940 gen-5 8f4de6c6 gen-6 232635ed meadow 25b1723b river 4d717331

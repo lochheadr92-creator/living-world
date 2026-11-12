@@ -93,4 +93,5 @@ critically hungry on day 54, and nobody died.
 - One meadow run (nudge:2) lost 32 people to thirst from day 28, with no hardship under way; not looked into.
 - No run builds a hall inside 60 days (two of 36 reach one at rules 220, none before); carts, exchange between households and apprentices are
   still absent.
-- Only the Normal profile and 60 days were measured; no Large run, and no run covers a generation (192 days).
+- Only the Normal profile and 60 days were measured here; no Large run. A generation (240 days, both with and without arrivals) was run
+  afterwards: `docs/GENERATION_RUN.md`.
