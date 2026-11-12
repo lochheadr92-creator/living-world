@@ -9,6 +9,7 @@ import { beginFlood, floodAt, hasFloodAccess } from './flood';
 // Once a day (a deterministic roll from the seed and the day, using no random numbers from the world's stream) a lean season may begin (one chance in five):
 // for three to six days wild food comes back at 10% of its pace and crops grow at a quarter of theirs. It is announced, it weighs on everyone's mood, and
 // it ends. How hard it bites depends on the stores and the farmland the village happens to have: some worlds ride it out, some do not.
+// From rules 220 the daily roll is replaced by lean years, one every two or three (lean_years.ts); what a lean season does is unchanged.
 import { addEvent } from './events';
 import { ledgerSpoil } from './economy';
 import { isToolItem } from './toolreg';
@@ -16,6 +17,7 @@ import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
 import { winterEnded } from './winter_practice';
+import { isLeanYear, leanSeasonsOn, leanStartDay, leanYearsOn } from './lean_years';
 
 /** An experiment switch (beside the world, not in it): with it off, a rich world has no lean seasons, winter, faster spoilage or bolder wolves (the lab uses it to tell stakes from mood). */
 let stakes = true;
@@ -52,21 +54,27 @@ export function updateHardship(world: World): void {
       else addEvent(world, 'nature', 'The lean season is over: the land is giving again.');
       for (const p of world.persons) if (p.alive) think(world, p, 'relief', 6, DAY, h.kind === 'dry' ? 'the dry spell is over' : 'the lean season is over');
     }
-    return;
+    // rules 220: a hardship that ends on the very morning a lean year's season is due does not swallow that season
+    if (world.hardship || !leanYearsOn(world)) return;
   }
   if (world.tick % DAY !== 5 || world.tick < 2 * DAY) return;
   const day = Math.floor(world.tick / DAY);
   const key = hashString(world.seed);
   const into = day % DAYS_PER_YEAR;
+  // rules 220 (lean_years.ts): lean seasons come in lean years, one every two or three, and a lean year has no dry spell
+  const rare = leanYearsOn(world);
+  const year = Math.floor(day / DAYS_PER_YEAR);
+  const leanYear = rare && isLeanYear(key, year);
   // high summer (the middle third of the year) may bring a dry spell instead: the bushes and fields parch, the fish keep
-  if (into >= 4 && into < 8 && hashUnit(key, day, 0xd217) < DRY_CHANCE) {
+  if (!leanYear && into >= 4 && into < 8 && hashUnit(key, day, 0xd217) < DRY_CHANCE) {
     const length = Math.round((2 + 3 * hashUnit(key, day, 0xd218)) * DAY);
     world.hardship = { kind: 'dry', since: world.tick, until: world.tick + length };
     addEvent(world, 'nature', hasWaterBudget(world) ? 'A dry spell sets in: bushes parch, fields crack and natural water evaporates faster.' : 'A dry spell sets in: the bushes parch and the fields crack; the water still runs.');
     for (const p of world.persons) if (p.alive) think(world, p, 'dry', -4, length, 'the dry spell');
     return;
   }
-  if (hashUnit(key, day, 0x1ea7) >= LEAN_CHANCE) return;
+  if (!leanSeasonsOn()) return;
+  if (rare ? !(leanYear && into === leanStartDay(key, year)) : hashUnit(key, day, 0x1ea7) >= LEAN_CHANCE) return;
   const length = Math.round((3 + 3 * hashUnit(key, day, 0x1ea8)) * DAY);
   world.hardship = { kind: 'lean', since: world.tick, until: world.tick + length };
   addEvent(world, 'nature', 'A lean season begins: wild food and crops come slowly.');

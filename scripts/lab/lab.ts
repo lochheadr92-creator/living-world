@@ -1,3 +1,4 @@
+import { leanSeasonsOn, leanYearsPartOn, setLeanSeasons, setLeanYears } from '../../src/sim/lean_years';
 import { EVENING_PARTS, eveningPartOn, setEvening } from '../../src/sim/evening_fire';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
@@ -257,6 +258,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 211 (play.ts): both parts removed (equal to rules 210), and each part alone
   if (kind === 'rich-no-play') return { spec: label, summary: 'one guessing game a day and no play alone, as before rules 211; no effect below rules 211', install() { const was = PLAY_PARTS.map((k) => playPartOn(k)); setPlay(false); return () => PLAY_PARTS.forEach((k, i) => setPlay(was[i], k)); } };
   if (kind === 'rich-no-play-games') return { spec: label, summary: 'the guessing game is the only game between two children, as before rules 211; no effect below rules 211', install() { const was = playPartOn('games'); setPlay(false, 'games'); return () => setPlay(was, 'games'); } };
+  // rules 220 (lean_years.ts): the daily one-in-five roll back (equal to rules 216), and a diagnostic with no lean season at all
+  if (kind === 'rich-no-lean-years') return { spec: label, summary: 'a lean season may begin on any day with one chance in five, as before rules 220; no effect below rules 220', install() { const was = leanYearsPartOn('rare'); setLeanYears(false, 'rare'); return () => setLeanYears(was, 'rare'); } };
+  if (kind === 'rich-no-lean-seasons') return { spec: label, summary: 'no lean season ever begins; dry spells, winter, spoilage and wolves unchanged; a diagnostic, not an earlier rules version', install() { const was = leanSeasonsOn(); setLeanSeasons(false); return () => setLeanSeasons(was); } };
   if (kind === 'rich-no-evening') return { spec: label, summary: 'nobody sits by the fire of an evening and no story is told there, as before rules 216; no effect below rules 216', install() { const was = EVENING_PARTS.map((k) => eveningPartOn(k)); setEvening(false); return () => EVENING_PARTS.forEach((k, i) => setEvening(was[i], k)); } };
   if (kind === 'rich-no-evening-fire') return { spec: label, summary: 'nobody sits by the fire of an evening (so no story either), as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('fire'); setEvening(false, 'fire'); return () => setEvening(was, 'fire'); } };
   if (kind === 'rich-no-evening-story') return { spec: label, summary: 'people sit by the fire but no story is told, as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('story'); setEvening(false, 'story'); return () => setEvening(was, 'story'); } };
@@ -754,6 +758,8 @@ export const METRICS = [
   // what rules 216 is for: evenings by the fire finished, by everyone and by elders; stories told there, and those who heard one,
   // all and children
   'fireSits', 'fireSitsElder', 'storiesTold', 'storyHearers', 'storyHearersChild',
+  // what rules 220 is for: days that ended with a lean season under way, and with a dry spell under way
+  'leanDays', 'dryDays',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -948,6 +954,7 @@ export class LifeTally {
   solo: Record<string, number> = { stones: 0, bugs: 0, sticks: 0 };
   toysMade = 0; toysGiven = 0;
   fireSits = 0; fireSitsElder = 0; storiesTold = 0; storyHearers = 0; storyHearersChild = 0;
+  leanDays = 0; dryDays = 0;
   get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
   get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
   get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
@@ -996,6 +1003,7 @@ export class LifeTally {
     else if (a.kind === 'wander') this.spareTime++;
   }
   tick(w: World): void {
+    if (w.tick % DAY === 0 && w.hardship) { if (w.hardship.kind === 'dry') this.dryDays++; else this.leanDays++; }
     for (const c of w.conversations) {
       if (c.purpose === 'play_together' && c.childhood) this.games.set(c.id, { outcome: c.childhood.outcome, reason: c.childhood.reason, game: c.childhood.game ?? 'guess' });
       if (c.purpose === 'learn_foraging' && c.childhood) {
@@ -1218,6 +1226,8 @@ export function outcomeOf(
       toyPlays: life.solo.toy ?? 0,
       toysAtEnd: w.tools.filter((t) => t.kind === 'toy').length,
       childrenWithToy: alive.filter((p) => stageOf(w, p) === 'child' && (p.inv.toy ?? 0) > 0).length,
+      leanDays: life.leanDays,
+      dryDays: life.dryDays,
       fireSits: life.fireSits,
       fireSitsElder: life.fireSitsElder,
       storiesTold: life.storiesTold,
