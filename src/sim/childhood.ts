@@ -1,5 +1,6 @@
 // Childhood owns invitations and paid shared experiences; social.ts owns contact and consent.
 import {markShown} from './three_ages';
+import {WORK_FIRST,workComesFirst} from './parent_decides';
 import {DAY} from './constants';
 import {hasChildhood} from './childhood_rules';
 import {runsRulesVersion} from './rulesversion';
@@ -66,12 +67,13 @@ export function beginChildTime(w:World,c:Conversation,a:Person,b:Person):string{
  // rules 211 (play.ts): the game proposed travels with the ask; the one asked declines only if they have played THAT game today
  const game:Game|null=c.purpose==='play_together'&&hasGames(w)?(isGame(c.data.game)?c.data.game:'guess'):null;
  const hadIt=game?playedToday(w,b,game):(b.cooldowns['child:'+c.purpose]??0)>w.tick;
- const why=childTimeProblem(w,c,a,b)||((stageOf(w,b)==='child'&&!teaching&&hadIt)?'I have already had that time today; I want to do something else now':'');
+ // rules 228 (parent_decides.ts): a grown person asked for family time with a job in hand weighs the two, and may say not now
+ const why=childTimeProblem(w,c,a,b)||((stageOf(w,b)==='child'&&!teaching&&hadIt)?'I have already had that time today; I want to do something else now':'')||(c.purpose==='family_time'?workComesFirst(w,b,a):'');
  const skill=!why&&c.purpose==='learn_foraging'?lessonSkill(w,a.skills,b.skills):null;
  c.childhood={since:w.tick,until:w.tick+childTimeTicks(c.purpose),outcome:why?'declined':'sharing',reason:why||'we agreed to spend this time together',gain:0,...(skill&&skill!=='forage'?{skill}:{}),...(game&&game!=='guess'?{game}:{})};
  a.cooldowns['child:'+c.purpose]=w.tick+(why?DAY/4:DAY);
  if(why===CANNOT_TEACH&&remembersNoTeach(w))a.cooldowns['noteach:'+b.id]=w.tick+NO_TEACH_DAYS*DAY;
- if(why)return why;
+ if(why)return why.startsWith(WORK_FIRST)?'Not now. I have to finish this first. Ask me again later.':why;
  if(skill&&skill!=='forage'){
   for(const [p,q] of [[a,b],[b,a]])if(p.activity){p.activity.label=`${lessonName(skill)} with ${q.name}`;p.activity.goal=childQuestion(c.purpose);}
   return skill==='fish'?'I cannot teach you more about foraging, but come: I will show you how I fish.':'I cannot teach you more about foraging, but come: I will show you how I work a plot.';
