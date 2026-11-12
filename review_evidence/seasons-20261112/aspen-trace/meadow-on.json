@@ -1,0 +1,3112 @@
+{
+ "seed": "meadow",
+ "arrivals": true,
+ "days": 72,
+ "rulesVersion": 216,
+ "immigrationCap": 54,
+ "hash60": "adaca772",
+ "pop": [
+  28,
+  28,
+  29,
+  29,
+  29,
+  31,
+  31,
+  31,
+  31,
+  31,
+  31,
+  32,
+  32,
+  33,
+  33,
+  33,
+  35,
+  35,
+  35,
+  37,
+  37,
+  37,
+  37,
+  37,
+  37,
+  35,
+  35,
+  35,
+  35,
+  33,
+  33,
+  29,
+  29,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  27,
+  27,
+  27,
+  28,
+  28,
+  30,
+  30,
+  30,
+  30,
+  31,
+  31,
+  31,
+  32,
+  32,
+  33,
+  33,
+  34,
+  35,
+  35,
+  36,
+  36,
+  36,
+  37,
+  37,
+  37,
+  38,
+  38,
+  38,
+  38,
+  39
+ ],
+ "rows": [
+  {
+   "day": 1,
+   "alive": 28,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 104,
+   "harvested": 0,
+   "eaten": 83,
+   "spoiled": 27,
+   "store": 24,
+   "packs": 52,
+   "perHead": 2.71,
+   "wild": 531,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 198,
+    "fruit_tree": 136,
+    "wild_grain": 109,
+    "fish_spot": 88
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 17,
+    "child": 9
+   },
+   "plots": {
+    "tilling": 1
+   },
+   "plotStock": 0,
+   "acts": "sleep 31% converse 18% gather 16% rest 8% wander 5% drink 4% craft 4% socialize 2%"
+  },
+  {
+   "day": 2,
+   "alive": 28,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 141,
+   "harvested": 0,
+   "eaten": 108,
+   "spoiled": 22,
+   "store": 40,
+   "packs": 42,
+   "perHead": 2.93,
+   "wild": 519,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 192,
+    "fruit_tree": 136,
+    "wild_grain": 108,
+    "fish_spot": 83
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 17,
+    "child": 9
+   },
+   "plots": {
+    "growing": 4,
+    "tilling": 1
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% converse 17% gather 16% rest 11% drink 5% deposit 4% socialize 3% wander 3%"
+  },
+  {
+   "day": 3,
+   "alive": 29,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 120,
+   "harvested": 0,
+   "eaten": 100,
+   "spoiled": 26,
+   "store": 20,
+   "packs": 50,
+   "perHead": 2.41,
+   "wild": 534,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 206,
+    "fruit_tree": 134,
+    "wild_grain": 110,
+    "fish_spot": 84
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 18,
+    "child": 9
+   },
+   "plots": {
+    "growing": 4,
+    "tilling": 2
+   },
+   "plotStock": 0,
+   "acts": "sleep 29% gather 16% rest 12% converse 12% drink 5% wander 5% warm 4% socialize 3%"
+  },
+  {
+   "day": 4,
+   "alive": 29,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 108,
+   "harvested": 0,
+   "eaten": 96,
+   "spoiled": 13,
+   "store": 33,
+   "packs": 37,
+   "perHead": 2.41,
+   "wild": 517,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 198,
+    "fruit_tree": 135,
+    "wild_grain": 106,
+    "fish_spot": 78
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 18,
+    "child": 9
+   },
+   "plots": {
+    "ripe": 1,
+    "growing": 3,
+    "tilling": 2
+   },
+   "plotStock": 4,
+   "acts": "sleep 27% gather 15% converse 15% rest 15% wander 6% drink 4% socialize 3% build 2%"
+  },
+  {
+   "day": 5,
+   "alive": 29,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 126,
+   "harvested": 16,
+   "eaten": 94,
+   "spoiled": 26,
+   "store": 49,
+   "packs": 36,
+   "perHead": 2.93,
+   "wild": 400,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 138,
+    "fruit_tree": 130,
+    "wild_grain": 63,
+    "fish_spot": 69
+   },
+   "crit": 0,
+   "hungryShare": 0.01,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 18,
+    "child": 9
+   },
+   "plots": {
+    "growing": 4,
+    "tilling": 2,
+    "tilled": 1
+   },
+   "plotStock": 0,
+   "acts": "sleep 25% rest 16% gather 15% converse 14% wander 7% drink 5% build 4% deposit 3%"
+  },
+  {
+   "day": 6,
+   "alive": 31,
+   "born": 0,
+   "came": 2,
+   "died": 0,
+   "causes": {},
+   "gathered": 76,
+   "harvested": 0,
+   "eaten": 70,
+   "spoiled": 24,
+   "store": 35,
+   "packs": 37,
+   "perHead": 2.32,
+   "wild": 340,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 118,
+    "fruit_tree": 111,
+    "wild_grain": 65,
+    "fish_spot": 46
+   },
+   "crit": 0,
+   "hungryShare": 0.08,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 5,
+    "tilling": 4
+   },
+   "plotStock": 0,
+   "acts": "sleep 25% gather 15% converse 15% rest 13% drink 6% build 5% socialize 4% wander 3%"
+  },
+  {
+   "day": 7,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 66,
+   "harvested": 0,
+   "eaten": 94,
+   "spoiled": 13,
+   "store": 13,
+   "packs": 21,
+   "perHead": 1.1,
+   "wild": 287,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 93,
+    "fruit_tree": 96,
+    "wild_grain": 61,
+    "fish_spot": 37
+   },
+   "crit": 0,
+   "hungryShare": 0.14,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 5,
+    "tilling": 4
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% gather 19% converse 17% rest 9% drink 5% socialize 5% wander 3% build 3%"
+  },
+  {
+   "day": 8,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 114,
+   "harvested": 0,
+   "eaten": 91,
+   "spoiled": 5,
+   "store": 6,
+   "packs": 40,
+   "perHead": 1.48,
+   "wild": 204,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 82,
+    "fruit_tree": 65,
+    "wild_grain": 40,
+    "fish_spot": 17
+   },
+   "crit": 1,
+   "hungryShare": 0.21,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 6,
+    "tilling": 3
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% gather 19% converse 13% rest 11% socialize 6% drink 4% wander 4% build 3%"
+  },
+  {
+   "day": 9,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 67,
+   "harvested": 0,
+   "eaten": 75,
+   "spoiled": 4,
+   "store": 0,
+   "packs": 27,
+   "perHead": 0.87,
+   "wild": 374,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 159,
+    "fruit_tree": 92,
+    "wild_grain": 78,
+    "fish_spot": 45
+   },
+   "crit": 1,
+   "hungryShare": 0.22,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 6,
+    "tilling": 4
+   },
+   "plotStock": 0,
+   "acts": "sleep 26% gather 16% converse 11% warm 10% rest 10% socialize 5% drink 4% wander 3%"
+  },
+  {
+   "day": 10,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 72,
+   "harvested": 0,
+   "eaten": 82,
+   "spoiled": 0,
+   "store": 0,
+   "packs": 10,
+   "perHead": 0.32,
+   "wild": 458,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 184,
+    "fruit_tree": 113,
+    "wild_grain": 90,
+    "fish_spot": 71
+   },
+   "crit": 6,
+   "hungryShare": 0.36,
+   "winter": 1,
+   "hardship": "",
+   "regrow": 0.4,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 6,
+    "tilling": 4
+   },
+   "plotStock": 0,
+   "acts": "warm 49% gather 12% rest 12% converse 6% drink 5% sleep 3% attend 2% wander 2%"
+  },
+  {
+   "day": 11,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 152,
+   "harvested": 0,
+   "eaten": 122,
+   "spoiled": 5,
+   "store": 1,
+   "packs": 34,
+   "perHead": 1.13,
+   "wild": 383,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 139,
+    "fruit_tree": 107,
+    "wild_grain": 66,
+    "fish_spot": 71
+   },
+   "crit": 3,
+   "hungryShare": 0.3,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 9
+   },
+   "plots": {
+    "growing": 6,
+    "tilling": 4
+   },
+   "plotStock": 0,
+   "acts": "sleep 21% rest 20% gather 17% converse 11% warm 8% drink 6% socialize 4% wander 2%"
+  },
+  {
+   "day": 12,
+   "alive": 32,
+   "born": 1,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 127,
+   "harvested": 0,
+   "eaten": 120,
+   "spoiled": 4,
+   "store": 11,
+   "packs": 29,
+   "perHead": 1.25,
+   "wild": 430,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 156,
+    "fruit_tree": 121,
+    "wild_grain": 87,
+    "fish_spot": 66
+   },
+   "crit": 3,
+   "hungryShare": 0.21,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 10
+   },
+   "plots": {
+    "growing": 6,
+    "tilling": 5
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% rest 17% gather 15% converse 14% socialize 6% drink 5% wander 3% deposit 2%"
+  },
+  {
+   "day": 13,
+   "alive": 32,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 143,
+   "harvested": 0,
+   "eaten": 101,
+   "spoiled": 9,
+   "store": 18,
+   "packs": 59,
+   "perHead": 2.41,
+   "wild": 438,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 166,
+    "fruit_tree": 118,
+    "wild_grain": 87,
+    "fish_spot": 67
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 20,
+    "child": 10
+   },
+   "plots": {
+    "growing": 7,
+    "tilling": 7
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% converse 15% gather 13% rest 12% wander 6% drink 5% attend 3% socialize 3%"
+  },
+  {
+   "day": 14,
+   "alive": 33,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 163,
+   "harvested": 4,
+   "eaten": 119,
+   "spoiled": 20,
+   "store": 49,
+   "packs": 52,
+   "perHead": 3.06,
+   "wild": 437,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 161,
+    "fruit_tree": 116,
+    "wild_grain": 83,
+    "fish_spot": 77
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 21,
+    "child": 10
+   },
+   "plots": {
+    "ripe": 3,
+    "tilled": 2,
+    "tilling": 5,
+    "growing": 5
+   },
+   "plotStock": 6,
+   "acts": "sleep 26% converse 15% gather 13% rest 12% drink 6% socialize 4% wander 4% deposit 4%"
+  },
+  {
+   "day": 15,
+   "alive": 33,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 140,
+   "harvested": 8,
+   "eaten": 102,
+   "spoiled": 38,
+   "store": 61,
+   "packs": 49,
+   "perHead": 3.33,
+   "wild": 495,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 182,
+    "fruit_tree": 132,
+    "wild_grain": 98,
+    "fish_spot": 83
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 21,
+    "child": 10
+   },
+   "plots": {
+    "tilled": 4,
+    "tilling": 5,
+    "growing": 7
+   },
+   "plotStock": 0,
+   "acts": "sleep 22% rest 19% converse 13% gather 10% drink 6% attend 5% warm 4% deposit 4%"
+  },
+  {
+   "day": 16,
+   "alive": 33,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 123,
+   "harvested": 4,
+   "eaten": 104,
+   "spoiled": 34,
+   "store": 52,
+   "packs": 44,
+   "perHead": 2.91,
+   "wild": 490,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 177,
+    "fruit_tree": 135,
+    "wild_grain": 101,
+    "fish_spot": 77
+   },
+   "crit": 0,
+   "hungryShare": 0.11,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 21,
+    "child": 10
+   },
+   "plots": {
+    "tilled": 4,
+    "tilling": 5,
+    "growing": 5,
+    "ripe": 2
+   },
+   "plotStock": 8,
+   "acts": "rest 30% warm 18% sleep 14% gather 11% converse 8% drink 6% attend 2% deposit 2%"
+  },
+  {
+   "day": 17,
+   "alive": 35,
+   "born": 0,
+   "came": 2,
+   "died": 0,
+   "causes": {},
+   "gathered": 159,
+   "harvested": 10,
+   "eaten": 107,
+   "spoiled": 44,
+   "store": 61,
+   "packs": 45,
+   "perHead": 3.03,
+   "wild": 375,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 122,
+    "fruit_tree": 125,
+    "wild_grain": 65,
+    "fish_spot": 63
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "dry",
+   "regrow": 0.4,
+   "stages": {
+    "elder": 2,
+    "adult": 23,
+    "child": 10
+   },
+   "plots": {
+    "tilled": 4,
+    "tilling": 7,
+    "growing": 5,
+    "ripe": 2
+   },
+   "plotStock": 10,
+   "acts": "sleep 23% rest 21% gather 16% converse 12% drink 6% deposit 3% socialize 3% wander 2%"
+  },
+  {
+   "day": 18,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 112,
+   "harvested": 18,
+   "eaten": 103,
+   "spoiled": 35,
+   "store": 47,
+   "packs": 45,
+   "perHead": 2.63,
+   "wild": 334,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 113,
+    "fruit_tree": 103,
+    "wild_grain": 59,
+    "fish_spot": 59
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0,
+   "hardship": "dry",
+   "regrow": 0.4,
+   "stages": {
+    "elder": 2,
+    "adult": 23,
+    "child": 10
+   },
+   "plots": {
+    "growing": 10,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "sleep 26% converse 16% gather 14% rest 13% drink 6% socialize 4% build 4% deposit 3%"
+  },
+  {
+   "day": 19,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 129,
+   "harvested": 2,
+   "eaten": 106,
+   "spoiled": 14,
+   "store": 31,
+   "packs": 68,
+   "perHead": 2.83,
+   "wild": 396,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 139,
+    "fruit_tree": 107,
+    "wild_grain": 77,
+    "fish_spot": 73
+   },
+   "crit": 0,
+   "hungryShare": 0.07,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 23,
+    "child": 10
+   },
+   "plots": {
+    "growing": 10,
+    "tilling": 8,
+    "tilled": 3
+   },
+   "plotStock": 0,
+   "acts": "sleep 26% gather 16% converse 15% rest 11% drink 6% socialize 4% build 4% deposit 4%"
+  },
+  {
+   "day": 20,
+   "alive": 37,
+   "born": 0,
+   "came": 2,
+   "died": 0,
+   "causes": {},
+   "gathered": 134,
+   "harvested": 0,
+   "eaten": 121,
+   "spoiled": 28,
+   "store": 34,
+   "packs": 48,
+   "perHead": 2.22,
+   "wild": 402,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 137,
+    "fruit_tree": 120,
+    "wild_grain": 72,
+    "fish_spot": 73
+   },
+   "crit": 1,
+   "hungryShare": 0.07,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9
+   },
+   "plotStock": 0,
+   "acts": "sleep 29% converse 15% gather 14% rest 11% drink 5% wander 4% build 3% socialize 3%"
+  },
+  {
+   "day": 21,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 132,
+   "harvested": 0,
+   "eaten": 105,
+   "spoiled": 28,
+   "store": 37,
+   "packs": 46,
+   "perHead": 2.24,
+   "wild": 266,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 98,
+    "fruit_tree": 74,
+    "wild_grain": 47,
+    "fish_spot": 47
+   },
+   "crit": 0,
+   "hungryShare": 0.06,
+   "winter": 0.71,
+   "hardship": "lean",
+   "regrow": 0.06,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9
+   },
+   "plotStock": 0,
+   "acts": "sleep 26% gather 15% rest 15% converse 14% drink 6% socialize 4% wander 3% deposit 3%"
+  },
+  {
+   "day": 22,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 84,
+   "harvested": 0,
+   "eaten": 92,
+   "spoiled": 16,
+   "store": 27,
+   "packs": 33,
+   "perHead": 1.62,
+   "wild": 182,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 78,
+    "fruit_tree": 52,
+    "wild_grain": 20,
+    "fish_spot": 32
+   },
+   "crit": 2,
+   "hungryShare": 0.14,
+   "winter": 1,
+   "hardship": "lean",
+   "regrow": 0.04,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "sleep 22% gather 18% rest 13% converse 12% warm 10% drink 5% socialize 4% attend 3%"
+  },
+  {
+   "day": 23,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 40,
+   "harvested": 0,
+   "eaten": 71,
+   "spoiled": 8,
+   "store": 12,
+   "packs": 18,
+   "perHead": 0.81,
+   "wild": 149,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 65,
+    "fruit_tree": 42,
+    "wild_grain": 22,
+    "fish_spot": 20
+   },
+   "crit": 11,
+   "hungryShare": 0.43,
+   "winter": 0.71,
+   "hardship": "lean",
+   "regrow": 0.06,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "warm 32% rest 24% gather 16% converse 7% sleep 7% drink 4% socialize 2% wander 2%"
+  },
+  {
+   "day": 24,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 62,
+   "harvested": 0,
+   "eaten": 87,
+   "spoiled": 4,
+   "store": 1,
+   "packs": 6,
+   "perHead": 0.19,
+   "wild": 112,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 41,
+    "fruit_tree": 40,
+    "wild_grain": 19,
+    "fish_spot": 12
+   },
+   "crit": 23,
+   "hungryShare": 0.66,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "gather 37% sleep 23% rest 11% drink 6% converse 6% warm 4% socialize 3% eat_store 2%"
+  },
+  {
+   "day": 25,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 109,
+   "harvested": 0,
+   "eaten": 95,
+   "spoiled": 1,
+   "store": 0,
+   "packs": 22,
+   "perHead": 0.59,
+   "wild": 235,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 100,
+    "fruit_tree": 58,
+    "wild_grain": 58,
+    "fish_spot": 19
+   },
+   "crit": 25,
+   "hungryShare": 0.76,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 25,
+    "child": 10
+   },
+   "plots": {
+    "growing": 14,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "gather 40% sleep 31% rest 7% drink 5% converse 5% socialize 3% wander 2% flee 2%"
+  },
+  {
+   "day": 26,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 2,
+   "causes": {
+    "fever": 2
+   },
+   "gathered": 157,
+   "harvested": 0,
+   "eaten": 136,
+   "spoiled": 7,
+   "store": 12,
+   "packs": 32,
+   "perHead": 1.26,
+   "wild": 330,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 122,
+    "fruit_tree": 101,
+    "wild_grain": 70,
+    "fish_spot": 37
+   },
+   "crit": 11,
+   "hungryShare": 0.39,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "elder": 2,
+    "adult": 24,
+    "child": 9
+   },
+   "plots": {
+    "growing": 15,
+    "tilling": 9,
+    "ripe": 2
+   },
+   "plotStock": 4,
+   "acts": "sleep 33% gather 17% rest 14% converse 11% socialize 6% drink 5% give 2% wander 2%"
+  },
+  {
+   "day": 27,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 127,
+   "harvested": 8,
+   "eaten": 130,
+   "spoiled": 4,
+   "store": 10,
+   "packs": 36,
+   "perHead": 1.31,
+   "wild": 222,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 94,
+    "fruit_tree": 70,
+    "wild_grain": 39,
+    "fish_spot": 19
+   },
+   "crit": 4,
+   "hungryShare": 0.2,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 24,
+    "child": 9
+   },
+   "plots": {
+    "ripe": 2,
+    "tilled": 3,
+    "tilling": 10,
+    "growing": 12
+   },
+   "plotStock": 5,
+   "acts": "sleep 29% gather 15% rest 12% converse 12% drink 6% socialize 4% warm 4% deposit 2%"
+  },
+  {
+   "day": 28,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 90,
+   "harvested": 18,
+   "eaten": 98,
+   "spoiled": 13,
+   "store": 16,
+   "packs": 25,
+   "perHead": 1.17,
+   "wild": 157,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 70,
+    "fruit_tree": 49,
+    "wild_grain": 22,
+    "fish_spot": 16
+   },
+   "crit": 0,
+   "hungryShare": 0.15,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 24,
+    "child": 9
+   },
+   "plots": {
+    "tilled": 7,
+    "tilling": 10,
+    "growing": 9,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "sleep 29% gather 18% converse 12% rest 12% drink 7% socialize 4% wander 3% attend 2%"
+  },
+  {
+   "day": 29,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 67,
+   "harvested": 2,
+   "eaten": 95,
+   "spoiled": 3,
+   "store": 1,
+   "packs": 12,
+   "perHead": 0.37,
+   "wild": 123,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 52,
+    "fruit_tree": 34,
+    "wild_grain": 26,
+    "fish_spot": 11
+   },
+   "crit": 5,
+   "hungryShare": 0.35,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "elder": 2,
+    "adult": 24,
+    "child": 9
+   },
+   "plots": {
+    "tilled": 8,
+    "tilling": 10,
+    "growing": 8,
+    "ripe": 1
+   },
+   "plotStock": 5,
+   "acts": "gather 25% sleep 23% rest 17% converse 9% drink 7% socialize 5% flee 2% warm 2%"
+  },
+  {
+   "day": 30,
+   "alive": 33,
+   "born": 0,
+   "came": 0,
+   "died": 2,
+   "causes": {
+    "hunger": 2
+   },
+   "gathered": 57,
+   "harvested": 10,
+   "eaten": 79,
+   "spoiled": 0,
+   "store": 0,
+   "packs": 6,
+   "perHead": 0.18,
+   "wild": 97,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 44,
+    "fruit_tree": 17,
+    "wild_grain": 25,
+    "fish_spot": 11
+   },
+   "crit": 14,
+   "hungryShare": 0.57,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 9
+   },
+   "plots": {
+    "tilled": 8,
+    "tilling": 10,
+    "growing": 10
+   },
+   "plotStock": 0,
+   "acts": "gather 33% sleep 26% converse 12% drink 5% socialize 5% rest 4% wander 4% flee 2%"
+  },
+  {
+   "day": 31,
+   "alive": 33,
+   "born": 1,
+   "came": 0,
+   "died": 1,
+   "causes": {
+    "hunger": 1
+   },
+   "gathered": 50,
+   "harvested": 0,
+   "eaten": 56,
+   "spoiled": 0,
+   "store": 0,
+   "packs": 2,
+   "perHead": 0.06,
+   "wild": 77,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 42,
+    "fruit_tree": 9,
+    "wild_grain": 20,
+    "fish_spot": 6
+   },
+   "crit": 19,
+   "hungryShare": 0.74,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 22,
+    "elder": 1,
+    "child": 9,
+    "youth": 1
+   },
+   "plots": {
+    "tilled": 6,
+    "tilling": 10,
+    "growing": 11,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "gather 52% sleep 22% drink 6% converse 5% socialize 3% rest 3% flee 2% wander 2%"
+  },
+  {
+   "day": 32,
+   "alive": 29,
+   "born": 0,
+   "came": 0,
+   "died": 4,
+   "causes": {
+    "hunger": 3,
+    "injuries": 1
+   },
+   "gathered": 86,
+   "harvested": 2,
+   "eaten": 87,
+   "spoiled": 0,
+   "store": 0,
+   "packs": 6,
+   "perHead": 0.21,
+   "wild": 243,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 107,
+    "fruit_tree": 51,
+    "wild_grain": 56,
+    "fish_spot": 29
+   },
+   "crit": 22,
+   "hungryShare": 0.76,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 21,
+    "elder": 1,
+    "child": 6,
+    "youth": 1
+   },
+   "plots": {
+    "tilled": 6,
+    "tilling": 9,
+    "ripe": 1,
+    "growing": 12
+   },
+   "plotStock": 2,
+   "acts": "gather 44% sleep 31% drink 5% converse 3% rest 3% socialize 3% wander 2% flee 2%"
+  },
+  {
+   "day": 33,
+   "alive": 29,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 130,
+   "harvested": 2,
+   "eaten": 105,
+   "spoiled": 4,
+   "store": 3,
+   "packs": 29,
+   "perHead": 1.1,
+   "wild": 344,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 142,
+    "fruit_tree": 95,
+    "wild_grain": 72,
+    "fish_spot": 35
+   },
+   "crit": 11,
+   "hungryShare": 0.36,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 21,
+    "elder": 1,
+    "child": 6,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 17,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "sleep 25% rest 24% gather 17% converse 6% drink 4% warm 4% socialize 4% flee 3%"
+  },
+  {
+   "day": 34,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 4,
+   "causes": {
+    "exposure": 4
+   },
+   "gathered": 60,
+   "harvested": 0,
+   "eaten": 77,
+   "spoiled": 3,
+   "store": 4,
+   "packs": 9,
+   "perHead": 0.52,
+   "wild": 397,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 150,
+    "fruit_tree": 115,
+    "wild_grain": 80,
+    "fish_spot": 52
+   },
+   "crit": 5,
+   "hungryShare": 0.47,
+   "winter": 1,
+   "hardship": "",
+   "regrow": 0.4,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 17,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "warm 34% rest 24% gather 12% converse 6% sleep 5% drink 5% attend 3% socialize 2%"
+  },
+  {
+   "day": 35,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 116,
+   "harvested": 18,
+   "eaten": 107,
+   "spoiled": 3,
+   "store": 5,
+   "packs": 38,
+   "perHead": 1.72,
+   "wild": 351,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 126,
+    "fruit_tree": 96,
+    "wild_grain": 76,
+    "fish_spot": 53
+   },
+   "crit": 9,
+   "hungryShare": 0.32,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 15,
+    "tilling": 9,
+    "tilled": 4
+   },
+   "plotStock": 0,
+   "acts": "rest 20% sleep 20% gather 16% warm 15% drink 7% converse 6% socialize 3% attend 2%"
+  },
+  {
+   "day": 36,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 111,
+   "harvested": 5,
+   "eaten": 109,
+   "spoiled": 7,
+   "store": 14,
+   "packs": 26,
+   "perHead": 1.6,
+   "wild": 374,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 138,
+    "fruit_tree": 104,
+    "wild_grain": 79,
+    "fish_spot": 53
+   },
+   "crit": 1,
+   "hungryShare": 0.18,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 15,
+    "tilling": 9,
+    "tilled": 4
+   },
+   "plotStock": 0,
+   "acts": "sleep 24% rest 18% gather 15% converse 9% warm 7% drink 7% socialize 4% deposit 3%"
+  },
+  {
+   "day": 37,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 81,
+   "harvested": 5,
+   "eaten": 75,
+   "spoiled": 9,
+   "store": 11,
+   "packs": 31,
+   "perHead": 1.68,
+   "wild": 302,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 102,
+    "fruit_tree": 89,
+    "wild_grain": 62,
+    "fish_spot": 49
+   },
+   "crit": 0,
+   "hungryShare": 0.1,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 17,
+    "tilling": 9,
+    "tilled": 1,
+    "ripe": 2
+   },
+   "plotStock": 6,
+   "acts": "sleep 28% gather 17% converse 12% rest 11% drink 6% deposit 4% socialize 4% wander 3%"
+  },
+  {
+   "day": 38,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 53,
+   "harvested": 7,
+   "eaten": 81,
+   "spoiled": 7,
+   "store": 8,
+   "packs": 15,
+   "perHead": 0.92,
+   "wild": 255,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 81,
+    "fruit_tree": 82,
+    "wild_grain": 55,
+    "fish_spot": 37
+   },
+   "crit": 0,
+   "hungryShare": 0.17,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 18,
+    "tilling": 9,
+    "tilled": 2
+   },
+   "plotStock": 0,
+   "acts": "sleep 29% gather 21% converse 11% rest 9% drink 5% socialize 4% repair 3% flee 2%"
+  },
+  {
+   "day": 39,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 69,
+   "harvested": 8,
+   "eaten": 79,
+   "spoiled": 9,
+   "store": 8,
+   "packs": 19,
+   "perHead": 1.08,
+   "wild": 197,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 76,
+    "fruit_tree": 66,
+    "wild_grain": 27,
+    "fish_spot": 28
+   },
+   "crit": 0,
+   "hungryShare": 0.25,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 16,
+    "tilled": 6,
+    "tilling": 8
+   },
+   "plotStock": 0,
+   "acts": "sleep 18% gather 18% warm 17% rest 9% converse 8% attend 5% drink 5% socialize 3%"
+  },
+  {
+   "day": 40,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 58,
+   "harvested": 6,
+   "eaten": 64,
+   "spoiled": 5,
+   "store": 7,
+   "packs": 21,
+   "perHead": 1.12,
+   "wild": 211,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 85,
+    "fruit_tree": 60,
+    "wild_grain": 36,
+    "fish_spot": 30
+   },
+   "crit": 1,
+   "hungryShare": 0.23,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 19,
+    "tilling": 8,
+    "tilled": 3
+   },
+   "plotStock": 0,
+   "acts": "sleep 31% gather 22% converse 10% rest 9% drink 5% socialize 5% attend 3% wander 2%"
+  },
+  {
+   "day": 41,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 115,
+   "harvested": 2,
+   "eaten": 101,
+   "spoiled": 4,
+   "store": 9,
+   "packs": 35,
+   "perHead": 1.76,
+   "wild": 327,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 128,
+    "fruit_tree": 80,
+    "wild_grain": 72,
+    "fish_spot": 47
+   },
+   "crit": 2,
+   "hungryShare": 0.13,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 5,
+    "youth": 1
+   },
+   "plots": {
+    "growing": 20,
+    "tilling": 7,
+    "tilled": 3
+   },
+   "plotStock": 0,
+   "acts": "sleep 33% gather 18% rest 8% converse 7% drink 5% deposit 4% socialize 4% wander 3%"
+  },
+  {
+   "day": 42,
+   "alive": 25,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 121,
+   "harvested": 2,
+   "eaten": 84,
+   "spoiled": 12,
+   "store": 25,
+   "packs": 46,
+   "perHead": 2.84,
+   "wild": 371,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 129,
+    "fruit_tree": 106,
+    "wild_grain": 76,
+    "fish_spot": 60
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 18,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 18,
+    "tilling": 7,
+    "tilled": 4,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "sleep 30% gather 16% converse 11% rest 8% drink 6% socialize 4% repair 4% deposit 4%"
+  },
+  {
+   "day": 43,
+   "alive": 27,
+   "born": 0,
+   "came": 2,
+   "died": 0,
+   "causes": {},
+   "gathered": 169,
+   "harvested": 4,
+   "eaten": 88,
+   "spoiled": 28,
+   "store": 66,
+   "packs": 48,
+   "perHead": 4.22,
+   "wild": 374,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 134,
+    "fruit_tree": 108,
+    "wild_grain": 61,
+    "fish_spot": 71
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 20,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 18,
+    "tilling": 6,
+    "ripe": 3,
+    "tilled": 3
+   },
+   "plotStock": 6,
+   "acts": "sleep 30% gather 17% converse 10% rest 8% deposit 7% drink 6% socialize 3% explore 3%"
+  },
+  {
+   "day": 44,
+   "alive": 27,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 137,
+   "harvested": 17,
+   "eaten": 90,
+   "spoiled": 37,
+   "store": 105,
+   "packs": 34,
+   "perHead": 5.15,
+   "wild": 411,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 139,
+    "fruit_tree": 116,
+    "wild_grain": 88,
+    "fish_spot": 68
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 20,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 15,
+    "ripe": 2,
+    "tilling": 6,
+    "tilled": 7
+   },
+   "plotStock": 4,
+   "acts": "sleep 28% gather 15% rest 11% converse 9% deposit 8% drink 5% socialize 4% harvest 2%"
+  },
+  {
+   "day": 45,
+   "alive": 27,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 108,
+   "harvested": 15,
+   "eaten": 88,
+   "spoiled": 40,
+   "store": 95,
+   "packs": 42,
+   "perHead": 5.07,
+   "wild": 408,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 142,
+    "fruit_tree": 116,
+    "wild_grain": 82,
+    "fish_spot": 68
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 20,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "ripe": 3,
+    "tilling": 6,
+    "tilled": 10,
+    "growing": 11
+   },
+   "plotStock": 5,
+   "acts": "sleep 28% gather 16% rest 14% converse 9% drink 6% deposit 5% attend 3% socialize 3%"
+  },
+  {
+   "day": 46,
+   "alive": 28,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 90,
+   "harvested": 7,
+   "eaten": 75,
+   "spoiled": 29,
+   "store": 100,
+   "packs": 31,
+   "perHead": 4.68,
+   "wild": 366,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 126,
+    "fruit_tree": 100,
+    "wild_grain": 77,
+    "fish_spot": 63
+   },
+   "crit": 0,
+   "hungryShare": 0.06,
+   "winter": 1,
+   "hardship": "",
+   "regrow": 0.4,
+   "stages": {
+    "adult": 21,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 13,
+    "tilling": 6,
+    "growing": 11
+   },
+   "plotStock": 0,
+   "acts": "sleep 24% gather 15% rest 14% warm 8% converse 7% drink 6% deposit 5% attend 4%"
+  },
+  {
+   "day": 47,
+   "alive": 28,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 71,
+   "harvested": 0,
+   "eaten": 84,
+   "spoiled": 24,
+   "store": 72,
+   "packs": 22,
+   "perHead": 3.36,
+   "wild": 299,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 104,
+    "fruit_tree": 80,
+    "wild_grain": 57,
+    "fish_spot": 58
+   },
+   "crit": 0,
+   "hungryShare": 0.06,
+   "winter": 0.71,
+   "hardship": "lean",
+   "regrow": 0.06,
+   "stages": {
+    "adult": 21,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 10,
+    "tilling": 6,
+    "growing": 14
+   },
+   "plotStock": 0,
+   "acts": "sleep 24% gather 15% rest 14% converse 11% drink 6% warm 5% attend 3% socialize 3%"
+  },
+  {
+   "day": 48,
+   "alive": 30,
+   "born": 0,
+   "came": 2,
+   "died": 0,
+   "causes": {},
+   "gathered": 92,
+   "harvested": 0,
+   "eaten": 87,
+   "spoiled": 23,
+   "store": 64,
+   "packs": 16,
+   "perHead": 2.67,
+   "wild": 217,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 78,
+    "fruit_tree": 53,
+    "wild_grain": 46,
+    "fish_spot": 40
+   },
+   "crit": 0,
+   "hungryShare": 0.09,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 9,
+    "tilling": 6,
+    "growing": 15
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% gather 18% rest 14% converse 8% drink 6% deposit 5% socialize 3% explore 3%"
+  },
+  {
+   "day": 49,
+   "alive": 30,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 86,
+   "harvested": 0,
+   "eaten": 83,
+   "spoiled": 19,
+   "store": 42,
+   "packs": 25,
+   "perHead": 2.23,
+   "wild": 145,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 68,
+    "fruit_tree": 37,
+    "wild_grain": 27,
+    "fish_spot": 13
+   },
+   "crit": 0,
+   "hungryShare": 0.11,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 19,
+    "tilling": 7,
+    "tilled": 5
+   },
+   "plotStock": 0,
+   "acts": "sleep 29% gather 21% rest 12% converse 9% drink 6% deposit 4% socialize 4% wander 2%"
+  },
+  {
+   "day": 50,
+   "alive": 30,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 65,
+   "harvested": 0,
+   "eaten": 75,
+   "spoiled": 10,
+   "store": 28,
+   "packs": 22,
+   "perHead": 1.67,
+   "wild": 102,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 44,
+    "fruit_tree": 29,
+    "wild_grain": 20,
+    "fish_spot": 9
+   },
+   "crit": 0,
+   "hungryShare": 0.12,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 22,
+    "tilling": 7,
+    "tilled": 3
+   },
+   "plotStock": 0,
+   "acts": "sleep 30% gather 23% rest 10% converse 9% drink 6% socialize 4% deposit 4% wander 2%"
+  },
+  {
+   "day": 51,
+   "alive": 30,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 45,
+   "harvested": 4,
+   "eaten": 77,
+   "spoiled": 6,
+   "store": 10,
+   "packs": 12,
+   "perHead": 0.73,
+   "wild": 93,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 45,
+    "fruit_tree": 21,
+    "wild_grain": 22,
+    "fish_spot": 5
+   },
+   "crit": 3,
+   "hungryShare": 0.28,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 4,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 23,
+    "tilling": 6,
+    "tilled": 3,
+    "ripe": 1
+   },
+   "plotStock": 4,
+   "acts": "sleep 30% gather 28% converse 8% rest 6% drink 6% attend 6% socialize 3% wander 2%"
+  },
+  {
+   "day": 52,
+   "alive": 31,
+   "born": 1,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 74,
+   "harvested": 4,
+   "eaten": 96,
+   "spoiled": 5,
+   "store": 2,
+   "packs": 10,
+   "perHead": 0.39,
+   "wild": 357,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 140,
+    "fruit_tree": 83,
+    "wild_grain": 83,
+    "fish_spot": 51
+   },
+   "crit": 7,
+   "hungryShare": 0.44,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 21,
+    "tilling": 7,
+    "ripe": 3,
+    "tilled": 3
+   },
+   "plotStock": 10,
+   "acts": "gather 25% sleep 23% rest 20% drink 6% converse 4% socialize 3% warm 3% attend 3%"
+  },
+  {
+   "day": 53,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 130,
+   "harvested": 20,
+   "eaten": 118,
+   "spoiled": 10,
+   "store": 18,
+   "packs": 31,
+   "perHead": 1.58,
+   "wild": 406,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 143,
+    "fruit_tree": 109,
+    "wild_grain": 91,
+    "fish_spot": 63
+   },
+   "crit": 1,
+   "hungryShare": 0.2,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 22,
+    "tilling": 7,
+    "ripe": 2,
+    "tilled": 3
+   },
+   "plotStock": 5,
+   "acts": "sleep 33% gather 13% rest 10% converse 9% attend 7% drink 6% deposit 4% socialize 3%"
+  },
+  {
+   "day": 54,
+   "alive": 31,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 105,
+   "harvested": 53,
+   "eaten": 106,
+   "spoiled": 10,
+   "store": 60,
+   "packs": 44,
+   "perHead": 3.35,
+   "wild": 454,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 169,
+    "fruit_tree": 117,
+    "wild_grain": 88,
+    "fish_spot": 80
+   },
+   "crit": 0,
+   "hungryShare": 0.08,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 23,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "ripe": 4,
+    "tilled": 11,
+    "tilling": 6,
+    "growing": 14
+   },
+   "plotStock": 16,
+   "acts": "sleep 28% rest 13% gather 11% converse 10% repair 6% drink 6% socialize 3% deposit 3%"
+  },
+  {
+   "day": 55,
+   "alive": 32,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 157,
+   "harvested": 26,
+   "eaten": 109,
+   "spoiled": 35,
+   "store": 105,
+   "packs": 38,
+   "perHead": 4.47,
+   "wild": 414,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 145,
+    "fruit_tree": 99,
+    "wild_grain": 88,
+    "fish_spot": 82
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 24,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 12,
+    "growing": 17,
+    "tilling": 6
+   },
+   "plotStock": 0,
+   "acts": "sleep 27% gather 17% rest 15% converse 8% drink 7% deposit 7% socialize 3% warm 2%"
+  },
+  {
+   "day": 56,
+   "alive": 32,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 145,
+   "harvested": 14,
+   "eaten": 102,
+   "spoiled": 48,
+   "store": 100,
+   "packs": 47,
+   "perHead": 4.59,
+   "wild": 393,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 135,
+    "fruit_tree": 99,
+    "wild_grain": 74,
+    "fish_spot": 85
+   },
+   "crit": 0,
+   "hungryShare": 0.03,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 24,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 16,
+    "growing": 10,
+    "tilling": 6,
+    "ripe": 3
+   },
+   "plotStock": 12,
+   "acts": "sleep 28% gather 15% rest 11% converse 11% drink 6% deposit 6% socialize 5% wander 3%"
+  },
+  {
+   "day": 57,
+   "alive": 33,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 112,
+   "harvested": 18,
+   "eaten": 94,
+   "spoiled": 29,
+   "store": 117,
+   "packs": 42,
+   "perHead": 4.82,
+   "wild": 382,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 140,
+    "fruit_tree": 100,
+    "wild_grain": 72,
+    "fish_spot": 70
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 25,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 19,
+    "growing": 11,
+    "tilling": 5
+   },
+   "plotStock": 0,
+   "acts": "sleep 28% gather 15% rest 10% converse 7% drink 7% deposit 5% attend 5% wander 3%"
+  },
+  {
+   "day": 58,
+   "alive": 33,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 103,
+   "harvested": 0,
+   "eaten": 94,
+   "spoiled": 35,
+   "store": 81,
+   "packs": 50,
+   "perHead": 3.97,
+   "wild": 343,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 127,
+    "fruit_tree": 92,
+    "wild_grain": 60,
+    "fish_spot": 64
+   },
+   "crit": 0,
+   "hungryShare": 0.06,
+   "winter": 1,
+   "hardship": "",
+   "regrow": 0.4,
+   "stages": {
+    "adult": 25,
+    "elder": 1,
+    "child": 5,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 18,
+    "tilling": 5,
+    "tilled": 12
+   },
+   "plotStock": 0,
+   "acts": "sleep 24% rest 15% gather 13% converse 8% drink 6% attend 6% warm 5% deposit 3%"
+  },
+  {
+   "day": 59,
+   "alive": 34,
+   "born": 1,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 106,
+   "harvested": 0,
+   "eaten": 96,
+   "spoiled": 28,
+   "store": 68,
+   "packs": 45,
+   "perHead": 3.32,
+   "wild": 313,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 114,
+    "fruit_tree": 78,
+    "wild_grain": 58,
+    "fish_spot": 63
+   },
+   "crit": 0,
+   "hungryShare": 0.05,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 25,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 22,
+    "tilling": 5,
+    "tilled": 9
+   },
+   "plotStock": 0,
+   "acts": "sleep 24% rest 19% gather 14% converse 8% drink 7% deposit 4% socialize 3% warm 3%"
+  },
+  {
+   "day": 60,
+   "alive": 35,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 123,
+   "harvested": 2,
+   "eaten": 121,
+   "spoiled": 19,
+   "store": 53,
+   "packs": 55,
+   "perHead": 3.09,
+   "wild": 338,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 119,
+    "fruit_tree": 82,
+    "wild_grain": 68,
+    "fish_spot": 69
+   },
+   "crit": 0,
+   "hungryShare": 0.07,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 26,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 21,
+    "tilling": 5,
+    "tilled": 8,
+    "ripe": 3
+   },
+   "plotStock": 6,
+   "acts": "sleep 24% rest 20% gather 16% converse 10% drink 6% warm 5% deposit 3% fuel_fire 2%"
+  },
+  {
+   "day": 61,
+   "alive": 35,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 130,
+   "harvested": 11,
+   "eaten": 118,
+   "spoiled": 17,
+   "store": 67,
+   "packs": 54,
+   "perHead": 3.46,
+   "wild": 393,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 143,
+    "fruit_tree": 105,
+    "wild_grain": 73,
+    "fish_spot": 72
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 26,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 24,
+    "tilling": 6,
+    "tilled": 8,
+    "ripe": 1
+   },
+   "plotStock": 3,
+   "acts": "rest 38% sleep 15% gather 13% converse 7% drink 6% socialize 3% deposit 3% flee 2%"
+  },
+  {
+   "day": 62,
+   "alive": 36,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 165,
+   "harvested": 4,
+   "eaten": 99,
+   "spoiled": 25,
+   "store": 124,
+   "packs": 43,
+   "perHead": 4.64,
+   "wild": 385,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 124,
+    "fruit_tree": 107,
+    "wild_grain": 74,
+    "fish_spot": 80
+   },
+   "crit": 0,
+   "hungryShare": 0.03,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 27,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 24,
+    "tilling": 6,
+    "tilled": 7,
+    "ripe": 3
+   },
+   "plotStock": 9,
+   "acts": "sleep 29% gather 14% converse 12% rest 9% deposit 8% drink 6% socialize 3% wander 3%"
+  },
+  {
+   "day": 63,
+   "alive": 36,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 144,
+   "harvested": 19,
+   "eaten": 122,
+   "spoiled": 37,
+   "store": 117,
+   "packs": 58,
+   "perHead": 4.86,
+   "wild": 378,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 133,
+    "fruit_tree": 108,
+    "wild_grain": 66,
+    "fish_spot": 71
+   },
+   "crit": 0,
+   "hungryShare": 0.03,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 27,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 17,
+    "ripe": 7,
+    "tilling": 6,
+    "tilled": 10
+   },
+   "plotStock": 17,
+   "acts": "sleep 30% gather 12% converse 11% rest 10% drink 8% attend 5% deposit 5% socialize 4%"
+  },
+  {
+   "day": 64,
+   "alive": 36,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 163,
+   "harvested": 27,
+   "eaten": 98,
+   "spoiled": 55,
+   "store": 140,
+   "packs": 68,
+   "perHead": 5.78,
+   "wild": 366,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 133,
+    "fruit_tree": 92,
+    "wild_grain": 74,
+    "fish_spot": 67
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 27,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 14,
+    "growing": 20,
+    "tilling": 5,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "sleep 31% gather 13% converse 9% rest 8% drink 7% deposit 6% attend 6% wander 3%"
+  },
+  {
+   "day": 65,
+   "alive": 37,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 142,
+   "harvested": 4,
+   "eaten": 114,
+   "spoiled": 44,
+   "store": 168,
+   "packs": 31,
+   "perHead": 5.38,
+   "wild": 372,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 123,
+    "fruit_tree": 101,
+    "wild_grain": 81,
+    "fish_spot": 67
+   },
+   "crit": 0,
+   "hungryShare": 0.02,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 28,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 14,
+    "growing": 22,
+    "tilling": 6
+   },
+   "plotStock": 0,
+   "acts": "sleep 29% gather 15% converse 11% rest 10% deposit 7% drink 6% socialize 4% wander 3%"
+  },
+  {
+   "day": 66,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 175,
+   "harvested": 6,
+   "eaten": 107,
+   "spoiled": 54,
+   "store": 183,
+   "packs": 44,
+   "perHead": 6.14,
+   "wild": 370,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 129,
+    "fruit_tree": 97,
+    "wild_grain": 76,
+    "fish_spot": 68
+   },
+   "crit": 0,
+   "hungryShare": 0.03,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 28,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "tilled": 13,
+    "growing": 22,
+    "tilling": 6,
+    "ripe": 1
+   },
+   "plotStock": 1,
+   "acts": "sleep 29% gather 15% rest 11% converse 9% drink 7% deposit 5% socialize 3% wander 3%"
+  },
+  {
+   "day": 67,
+   "alive": 37,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 118,
+   "harvested": 6,
+   "eaten": 81,
+   "spoiled": 46,
+   "store": 159,
+   "packs": 50,
+   "perHead": 5.65,
+   "wild": 279,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 102,
+    "fruit_tree": 86,
+    "wild_grain": 40,
+    "fish_spot": 51
+   },
+   "crit": 0,
+   "hungryShare": 0.04,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 28,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 25,
+    "tilled": 9,
+    "tilling": 6,
+    "ripe": 2
+   },
+   "plotStock": 9,
+   "acts": "sleep 23% rest 21% gather 15% warm 10% drink 6% converse 4% deposit 3% repair 2%"
+  },
+  {
+   "day": 68,
+   "alive": 38,
+   "born": 0,
+   "came": 1,
+   "died": 0,
+   "causes": {},
+   "gathered": 82,
+   "harvested": 14,
+   "eaten": 132,
+   "spoiled": 23,
+   "store": 109,
+   "packs": 37,
+   "perHead": 3.84,
+   "wild": 224,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 88,
+    "fruit_tree": 67,
+    "wild_grain": 29,
+    "fish_spot": 40
+   },
+   "crit": 0,
+   "hungryShare": 0.1,
+   "winter": 0,
+   "hardship": "lean",
+   "regrow": 0.1,
+   "stages": {
+    "adult": 29,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 27,
+    "tilled": 9,
+    "tilling": 6
+   },
+   "plotStock": 0,
+   "acts": "rest 25% sleep 20% gather 14% drink 9% converse 8% warm 7% socialize 2% eat_store 2%"
+  },
+  {
+   "day": 69,
+   "alive": 38,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 95,
+   "harvested": 6,
+   "eaten": 104,
+   "spoiled": 18,
+   "store": 98,
+   "packs": 33,
+   "perHead": 3.45,
+   "wild": 141,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 55,
+    "fruit_tree": 38,
+    "wild_grain": 23,
+    "fish_spot": 25
+   },
+   "crit": 1,
+   "hungryShare": 0.12,
+   "winter": 0.71,
+   "hardship": "lean",
+   "regrow": 0.06,
+   "stages": {
+    "adult": 29,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 28,
+    "tilled": 7,
+    "tilling": 6,
+    "ripe": 1
+   },
+   "plotStock": 5,
+   "acts": "sleep 27% gather 19% rest 10% converse 10% drink 7% attend 4% socialize 3% flee 3%"
+  },
+  {
+   "day": 70,
+   "alive": 38,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 66,
+   "harvested": 6,
+   "eaten": 91,
+   "spoiled": 15,
+   "store": 77,
+   "packs": 21,
+   "perHead": 2.58,
+   "wild": 88,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 35,
+    "fruit_tree": 26,
+    "wild_grain": 22,
+    "fish_spot": 5
+   },
+   "crit": 5,
+   "hungryShare": 0.22,
+   "winter": 1,
+   "hardship": "lean",
+   "regrow": 0.04,
+   "stages": {
+    "adult": 29,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 28,
+    "tilling": 6,
+    "tilled": 7,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "sleep 23% gather 22% rest 13% converse 8% warm 7% drink 6% attend 4% socialize 3%"
+  },
+  {
+   "day": 71,
+   "alive": 38,
+   "born": 0,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 58,
+   "harvested": 6,
+   "eaten": 110,
+   "spoiled": 10,
+   "store": 27,
+   "packs": 17,
+   "perHead": 1.16,
+   "wild": 176,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 68,
+    "fruit_tree": 45,
+    "wild_grain": 46,
+    "fish_spot": 17
+   },
+   "crit": 6,
+   "hungryShare": 0.27,
+   "winter": 0.71,
+   "hardship": "",
+   "regrow": 0.58,
+   "stages": {
+    "adult": 29,
+    "elder": 1,
+    "child": 6,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 27,
+    "tilling": 6,
+    "tilled": 7,
+    "ripe": 2
+   },
+   "plotStock": 4,
+   "acts": "sleep 26% gather 21% rest 13% converse 9% drink 7% warm 4% attend 4% socialize 3%"
+  },
+  {
+   "day": 72,
+   "alive": 39,
+   "born": 1,
+   "came": 0,
+   "died": 0,
+   "causes": {},
+   "gathered": 149,
+   "harvested": 12,
+   "eaten": 139,
+   "spoiled": 5,
+   "store": 27,
+   "packs": 42,
+   "perHead": 1.77,
+   "wild": 249,
+   "wildCap": 558,
+   "wildByType": {
+    "berry_bush": 106,
+    "fruit_tree": 56,
+    "wild_grain": 54,
+    "fish_spot": 33
+   },
+   "crit": 1,
+   "hungryShare": 0.15,
+   "winter": 0,
+   "hardship": "",
+   "regrow": 1,
+   "stages": {
+    "adult": 29,
+    "elder": 1,
+    "child": 7,
+    "youth": 2
+   },
+   "plots": {
+    "growing": 29,
+    "tilling": 6,
+    "tilled": 6,
+    "ripe": 1
+   },
+   "plotStock": 2,
+   "acts": "sleep 30% gather 20% converse 10% rest 10% drink 7% socialize 4% deposit 2% give 2%"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 25.01,
+   "name": "Thea",
+   "cause": "fever",
+   "age": 23
+  },
+  {
+   "day": 25.54,
+   "name": "Eli",
+   "cause": "fever",
+   "age": 6
+  },
+  {
+   "day": 29.86,
+   "name": "Pavel",
+   "cause": "hunger",
+   "age": 73
+  },
+  {
+   "day": 29.94,
+   "name": "Lars",
+   "cause": "hunger",
+   "age": 35
+  },
+  {
+   "day": 30.88,
+   "name": "Isla",
+   "cause": "hunger",
+   "age": 46
+  },
+  {
+   "day": 31.14,
+   "name": "Ivo",
+   "cause": "hunger",
+   "age": 45
+  },
+  {
+   "day": 31.2,
+   "name": "Lena",
+   "cause": "injuries",
+   "age": 6
+  },
+  {
+   "day": 31.3,
+   "name": "Rafe",
+   "cause": "hunger",
+   "age": 8
+  },
+  {
+   "day": 31.83,
+   "name": "Orla",
+   "cause": "hunger",
+   "age": 4
+  },
+  {
+   "day": 33.65,
+   "name": "Vera",
+   "cause": "exposure",
+   "age": 21
+  },
+  {
+   "day": 33.7,
+   "name": "Wen",
+   "cause": "exposure",
+   "age": 1
+  },
+  {
+   "day": 33.83,
+   "name": "Yara",
+   "cause": "exposure",
+   "age": 41
+  },
+  {
+   "day": 33.97,
+   "name": "Quinn",
+   "cause": "exposure",
+   "age": 35
+  }
+ ]
+}

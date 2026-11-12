@@ -1,0 +1,42 @@
+rules 216: a lean season on a one-in-five daily roll; 60 days
+aspen   ...LLLL.#### .....LLL##w# LLL..dddddww ........w### L..LLLL.####  lean seasons 7, lean days 29/60, dry days 5, lean days in winter 14
+birch   ......dddddw LLLLL..dddww .LLLLL..wwww ......LL##ww ..LLLLLLwwww  lean seasons 4, lean days 20/60, dry days 8, lean days in winter 2
+cedar   .....LLL###w ....LLLL#www LLLLL...w### LL..ddddw### LLL....L####  lean seasons 6, lean days 32/60, dry days 4, lean days in winter 14
+fern    .....LLL##w# LLLL....wwww ..LLLLLLwwww .LLLL...wwww .LLLL...wwww  lean seasons 5, lean days 24/60, dry days 0, lean days in winter 3
+gen-1   .......ddddd ...LLLLLw### LL..LLLL##w# LLL..LLL#w## LLL.....ww##  lean seasons 7, lean days 31/60, dry days 5, lean days in winter 11
+gen-2   ...LLLLL#www ..LLLLLLwww# LLLL....wwww ......dddwww ..LLLLLLwwww  lean seasons 4, lean days 23/60, dry days 3, lean days in winter 2
+gen-3   ....LLLL##ww ....LLLL##ww ..LLLL.dddww ...LLLLLw### L.......wwww  lean seasons 5, lean days 25/60, dry days 3, lean days in winter 7
+gen-4   ...LLLLLw### LLL....ddddd ......LL###w LLLLLL..#### LL.LLLLL#www  lean seasons 6, lean days 34/60, dry days 5, lean days in winter 11
+gen-5   .......ddddw .LLLLL..ww## LLL..LLL##ww .LLLL...wwww ...LLLL.wwww  lean seasons 5, lean days 23/60, dry days 4, lean days in winter 4
+gen-6   ........wwww ..LLLLL.wwww .LLLLL.L###w LLLLL.LL##ww ...LLLLL#www  lean seasons 6, lean days 29/60, dry days 0, lean days in winter 6
+meadow  ....LLLL#www ....ddd.#### L.LLLLLLwwww LLLL....ww## LLLL....wwww  lean seasons 5, lean days 26/60, dry days 3, lean days in winter 7
+river   ..LLLLL.wwww ......LL##ww ..LLLLLLw### LLL.....www# LLL...LL###w  lean seasons 6, lean days 30/60, dry days 0, lean days in winter 9
+key: . ordinary   L lean season   d dry spell   w winter   # lean season during winter
+rules 220: lean years (one every two or three); 60 days
+aspen   ....ddd.wwww ......dddddw .LLLLL..wwww ........wwww LLLLLL..wwww  lean seasons 2, lean days 11/60, dry days 8, lean days in winter 0
+birch   ......dddddw ....LLLL#www ........wwww .....LLL###w ........wwww  lean seasons 2, lean days 11/60, dry days 5, lean days in winter 4
+cedar   ........wwww ......LL##ww ....dddddwww ....ddddwwww LLLLL...wwww  lean seasons 2, lean days 9/60, dry days 9, lean days in winter 2
+fern    ........wwww ........wwww ....LLLL#www ........wwww ...LLLLL#www  lean seasons 2, lean days 11/60, dry days 0, lean days in winter 2
+gen-1   .......ddddd ......LL#### ........wwww .......L###w ........wwww  lean seasons 2, lean days 10/60, dry days 5, lean days in winter 7
+gen-2   .....dddwwww .....dddwwww LLLL....wwww ......dddwww ........wwww  lean seasons 1, lean days 4/60, dry days 9, lean days in winter 0
+gen-3   ........wwww .......ddddw .LLLLLL.wwww ........wwww ........wwww  lean seasons 1, lean days 6/60, dry days 4, lean days in winter 0
+gen-4   ........wwww ..LLLLLLwwww ........wwww ...LLLLLwwww .......dddww  lean seasons 2, lean days 11/60, dry days 3, lean days in winter 0
+gen-5   .......ddddw ....LLLL##ww .......dddww ...LLLLLwwww .......ddddw  lean seasons 2, lean days 11/60, dry days 11, lean days in winter 2
+gen-6   ........wwww .....ddddwww .LLLLL..wwww ....ddddwwww ........wwww  lean seasons 1, lean days 5/60, dry days 8, lean days in winter 0
+meadow  .......dddww ....ddd.wwww ......LL#### ........wwww .....LLL#www  lean seasons 2, lean days 10/60, dry days 6, lean days in winter 5
+river   ........wwww .....LLL###w .....dddddww .....LLL##ww .......ddddd  lean seasons 2, lean days 11/60, dry days 10, lean days in winter 5
+key: . ordinary   L lean season   d dry spell   w winter   # lean season during winter
+rules 220: lean years (one every two or three); 720 days
+aspen (720 days) lean seasons 23, lean days 120/720, dry days 70, lean days in winter 29
+birch (720 days) lean seasons 24, lean days 127/720, dry days 35, lean days in winter 34
+cedar (720 days) lean seasons 23, lean days 118/720, dry days 67, lean days in winter 30
+fern (720 days) lean seasons 23, lean days 111/720, dry days 41, lean days in winter 25
+gen-1 (720 days) lean seasons 25, lean days 126/720, dry days 54, lean days in winter 39
+gen-2 (720 days) lean seasons 23, lean days 112/720, dry days 51, lean days in winter 5
+gen-3 (720 days) lean seasons 23, lean days 110/720, dry days 52, lean days in winter 24
+gen-4 (720 days) lean seasons 24, lean days 125/720, dry days 58, lean days in winter 31
+gen-5 (720 days) lean seasons 24, lean days 119/720, dry days 69, lean days in winter 9
+gen-6 (720 days) lean seasons 23, lean days 118/720, dry days 75, lean days in winter 30
+meadow (720 days) lean seasons 22, lean days 107/720, dry days 59, lean days in winter 34
+river (720 days) lean seasons 25, lean days 124/720, dry days 61, lean days in winter 39
+key: . ordinary   L lean season   d dry spell   w winter   # lean season during winter
