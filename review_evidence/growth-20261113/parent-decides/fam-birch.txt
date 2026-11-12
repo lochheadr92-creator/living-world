@@ -1,0 +1,2 @@
+birch rules 227 family-time asks answered 29 {"completed":27,"declined: I have already had that time today; I wa":1,"declined: someone needed to take care of themselve":1}
+birch rules 228 family-time asks answered 48 {"completed":33,"not now: work":10,"declined: I have already had that time today; I wa":4,"sharing":1}

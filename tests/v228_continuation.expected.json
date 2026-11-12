@@ -1,0 +1,12 @@
+{
+  "source": {
+    "head": "e98d298b56f1aa2945ecd3b66d0680b8d572554d",
+    "rules": 228,
+    "content": "7bb5bbd60516612e58b34e8b89449b947dbce2e236235b74e428d5cbe4114892",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen world (arrivals on) stepped to the tick by which a grown person with a job in hand has answered a child asking for family time with not now (parent_decides.ts; no such answer exists before rules 228), then 120 more after a save and load."
+  },
+  "saved": "531bd480904d8559bcfec08b586ceae6e25e1f7136cd8635274f4100ad8255a1",
+  "continued": "b501af9a72c45e89552031d94b956d3a1296d537bc101416e0321ea0675a14dd",
+  "tick": 2400,
+  "refusedForWork": 1
+}

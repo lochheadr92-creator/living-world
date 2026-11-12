@@ -200,6 +200,35 @@ four removals, 84 arms; `review_evidence/growth-20261113/lab227/report.txt`). Fi
   35.1 against 34.8 and deaths 0.4 against 0.7 are not distinguishable. The worry that held workers would go hungrier is not
   borne out: children are under the hungry line a little less with the rule.
 
+## A child may ask, and the grown person decides (rules 228, `src/sim/parent_decides.ts`)
+
+The owner's instruction after the rules-227 lab (its quiet part cost a fifth of family time for nothing): let children ask, but
+the parent must make a real decision. Children always want time; work is usually important; the parent should be able to choose.
+Before this there was no decision: a grown person asked for family time said yes unless somebody needed food, water, rest or
+warmth, and put down whatever they were doing.
+
+Two switched parts:
+
+- **Ask**: a child may ask a grown relative seen at work for family time. Chats and games still wait, as rules 227 has it.
+- **Weigh**: a grown person asked with a job in hand weighs the job, at what it was worth to them when they chose it, against the
+  child: 20, plus up to 10 for a sociable and 6 for a generous person, plus 4 for each day since the two last had family time, to
+  at most three. If the job counts for more they say "not now" and go back to it; the child may ask again after a quarter of a
+  day. With nothing in hand, or resting, there is nothing to weigh and they say yes.
+
+The numbers come from a measurement (one ordinary world, six days, rules 227): the jobs grown people do are worth 22 at the tenth
+part, 32 at the middle and 44 at the ninetieth; building and carrying to a site about 40, gathering 31, making by hand 25. So a
+parent of middling nature a day after their last time together weighs the child at 32, the middle of their work; three days on
+at 40, above all but building.
+
+Ordinary worlds (aspen, birch, river, eight days, one run each: a description): family-time asks answered 97 at rules 227 and
+151 at rules 228; completed 84 and 103; answered "not now" for work 0 and 32.
+
+Checks: `tests/parent_decides.test.ts` (7); 135 tests in 20 related files pass; pin `tests/v228_continuation.*` (Normal aspen,
+arrivals on, one day, by when a grown person has said "not now" for a job in hand; clean checkout of `e98d298b`). Lab arms:
+`rich-no-parent-decides`, `-ask`, `-weigh`.
+
+**Result: the paired lab was started on 13 November and is not read yet.**
+
 ## Everything found that needs attention (13 November 2026)
 
 Gathered from the 20-year runs at rules 220, 225 and 226, the job, site and supply probes, and the source read on the way. Each
@@ -232,7 +261,8 @@ line says how it is known: measured, read in source, or not looked into.
 **Behaviour**
 
 12. Jobs dropped half-way: repaired by rules 227; the lab finds the hold part beneficial beyond chance and the sleep part
-    neutral. **Its quiet part costs a fifth of family time for no measured gain: the owner's to keep or change.**
+    neutral. Its quiet part cost a fifth of family time for no measured gain; rules 228 lets a child ask and has the grown person
+    decide (its lab is not read yet).
 13. Building is still dropped at the work as often at 227 (149 spells against 145) (measured; not looked into).
 14. Somebody beginning to talk to a worker resets the piece of work in hand (616 times in four worlds over eight days) (measured).
 15. Resting people take a fifth of all second looks; rules 227 holds jobs and sleep, not rest (measured).

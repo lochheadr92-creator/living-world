@@ -1,0 +1,2 @@
+aspen rules 227 family-time asks answered 35 {"completed":33,"sharing":1,"declined: I have already had that time today; I wa":1}
+aspen rules 228 family-time asks answered 59 {"not now: work":9,"completed":43,"sharing":3,"declined: I have already had that time today; I wa":1,"declined: someone needed to take care of themselve":3}
