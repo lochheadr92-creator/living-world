@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\src\\app\\save.ts",
+    "Hash": "33B2CB367246B77D325265579CED17F93724F29BAB2C99A8C9F36CA4BD16A448"
+  },
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\src\\sim\\activities.ts",
+    "Hash": "301A81636CFA7BFEA32A78C44A8CD144F0FE504A009602F5111C04934CD4E541"
+  },
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\src\\sim\\parent_decides.ts",
+    "Hash": "241132F1C0C866703EFF6ED07CF401AF4012652A971C5B934F1FE2FA7973E971"
+  },
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\src\\sim\\empty_news.ts",
+    "Hash": "C57D55DC86D181D076B130CE060DA451DB6E84D19C7C9F04FBB3311849368978"
+  },
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\src\\sim\\knowledge.ts",
+    "Hash": "0F27EB703962BB99DBC95F21BE3B02DB20327E8CA178E6EEB2DC03A267AF9A8B"
+  },
+  {
+    "Path": "C:\\dev\\Claude Experiment\\living-world-integrate\\scripts\\generation_trace.ts",
+    "Hash": "ECB297ACF334F479C515FE9CDB913C86C7159DFAAAF36940392D326DAD5B2377"
+  }
+]

@@ -657,3 +657,7 @@ Third in the trace's evidence order (`docs/END_TO_END_TRACE.md`, links 17 and 32
 - **Ordinary check:** aspen traced again at 188 (`review_evidence/trace-fixes-20261110/trace-aspen-r188.json`): the storehouse card names Petra, Mona and Dax, each answer carries its
   cause, and Mona's two stones are on the project record as salvage. Seven of the trace's 20 holes are now recorded. Decision-neutral on this evidence. No benefit or harm is claimed.
 
+
+## Adversarial recheck — 13 November 2026
+
+See docs/ADVERSARIAL_REVIEW_20261113.md (HEAD 652c3b77, targeted review, five staged reproductions). G226 and G227 still reproduce (AR-04 and AR-03); new review records cover work progress lost even on a refused family-time ask (AR-01), an accepted save with a reused allocator ID (AR-02), and a shrinking counter labelled households ever (AR-05). Findings remain open; no behavior or rules version changed. Evidence: review_evidence/adversarial-20261113/.
