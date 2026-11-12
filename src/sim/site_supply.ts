@@ -30,7 +30,7 @@
 //     for counts for MADE_FOR_SITE more than the site's other needs. The site's own weight (options_work.ts materialNeeds: 34
 //     times what the site is to them, plus 4) was set for wood and stone, which are one walk away; planks and bricks are three
 //     or four steps away, each step chosen on its own, and each a little cheaper than the last (production.ts planRecipe).
-//     The addition brings the first step to about the middle of ordinary work.
+//     The addition brings the first step to about the middle of ordinary work. From rules 230 it is half that (see below).
 //   * SAW. Somebody carrying a saw who knows a timber yard they may use with no saw on its rack is offered to leave it there.
 //     A saw has no use anywhere else (recipes.ts: sawing planks is the only work that asks for one); left on the rack it is
 //     the settlement's (act_resource.ts donateToRack) and whoever saws there uses it at the bench, its maker included.
@@ -49,8 +49,18 @@ import { runsRulesVersion } from './rulesversion';
 import { toolsHeldBy } from './toolreg';
 import type { Belief, ItemKind, World } from './types';
 
-/** what a made material a known site waits for counts for, beyond the site's other needs */
+/** what a made material a known site waits for counts for, beyond the site's other needs, at rules 229 */
 export const MADE_FOR_SITE = 18;
+/**
+ * ... and from rules 230, on the owner's word after the rules-229 lab: half. At 18 the first hall came 4.7 days sooner but
+ * buildings stood at 61.0 of condition against 66.1 without the part (larger than chance, 12 of 12 seeds), with tools and people
+ * leaning the same way; the bench part, not this one, is what gets the planks and bricks made.
+ */
+export const MADE_FOR_SITE_HALVED = 9;
+let doseOverride: number | null = null;
+/** Lab switch (never saved or hashed): hold the worth at a given figure whatever the rules version says; null restores it. */
+export function setMadeForSiteDose(dose: number | null): void { doseOverride = dose; }
+export const madeForSiteDose = (world: World): number => doseOverride ?? (runsRulesVersion(world, 230) ? MADE_FOR_SITE_HALVED : MADE_FOR_SITE);
 /** what leaving the saw at the yard is worth, before the walk: about the middle of ordinary work (at 24 it lost nearly every
  * time: in river two saws stayed in packs for three years while sawing was refused 113 times for want of one) */
 export const SAW_TO_YARD = 34;
@@ -78,7 +88,7 @@ export function benchStock(world: World, b: Belief, item: ItemKind, glanced: num
 
 /** WORTH: what is added to the want for a made material when it is a building site that waits for it. */
 export function madeForSiteWorth(world: World, tag: string, siteId: number | undefined): number {
-  return on.worth && runs(world) && tag === 'site' && !!siteId ? MADE_FOR_SITE : 0;
+  return on.worth && runs(world) && tag === 'site' && !!siteId ? madeForSiteDose(world) : 0;
 }
 
 /** ROOM: whether a workshop's raw material for a site's made goods may be preceded by leaving a left-over (rules 33's rule). */

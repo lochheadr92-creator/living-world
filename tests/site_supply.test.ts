@@ -15,7 +15,7 @@ import { demandsOf } from '../src/sim/production';
 import { RECIPE_BY_ID } from '../src/sim/recipes';
 import { startJob, workJob } from '../src/sim/facilities';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
-import { MADE_FOR_SITE, SAW_TO_YARD, SITE_SUPPLY_PARTS, setSiteSupply } from '../src/sim/site_supply';
+import { MADE_FOR_SITE, MADE_FOR_SITE_HALVED, SAW_TO_YARD, SITE_SUPPLY_PARTS, setMadeForSiteDose, setSiteSupply } from '../src/sim/site_supply';
 import { makeSource } from '../src/sim/sources';
 import { toolsHeldBy } from '../src/sim/toolreg';
 import { mintTool } from '../src/sim/tools';
@@ -25,7 +25,7 @@ import { addPerson, building, done, give, pin, site, stage } from './helpers/kit
 import { finishPrerequisite } from './helpers/tool_prerequisite';
 import { run } from './helpers/util';
 
-afterEach(() => setSiteSupply(true));
+afterEach(() => { setSiteSupply(true); setMadeForSiteDose(null); });
 
 interface Staged { inv?: Items; saw?: boolean; rackSaw?: boolean; yardStock?: Items; delivered?: Items; granary?: boolean }
 /** One grown woman and a shared smithy site that waits for bricks (staged). */
@@ -117,6 +117,21 @@ describe('rules 229: what a waiting site lacks gets made', () => {
     setSiteSupply(false, 'worth');
     expect(bricksWant(now.w, now.p)).toBeCloseTo(before, 6);
     expect(dig(now)!.util).toBeCloseTo(dig(old)!.util, 6);
+  });
+
+  it('rules 230: the worth is half, 9 where rules 229 has 18; the lab arm holds it at 18', () => {
+    expect(SUPPORTED_RULES_VERSIONS).toContain(230);
+    expect([MADE_FOR_SITE, MADE_FOR_SITE_HALVED]).toEqual([18, 9]);
+    const old = fixture(228), was = fixture(229), now = fixture(230);
+    const before = bricksWant(old.w, old.p);
+    expect(bricksWant(was.w, was.p) - before).toBeCloseTo(18, 6);
+    expect(bricksWant(now.w, now.p) - before).toBeCloseTo(9, 6);
+    const undo = parseIntervention('rich-site-supply-worth-full').install!();
+    expect(bricksWant(now.w, now.p) - before).toBeCloseTo(18, 6);
+    undo();
+    expect(bricksWant(now.w, now.p) - before).toBeCloseTo(9, 6);
+    setSiteSupply(false, 'worth');
+    expect(bricksWant(now.w, now.p)).toBeCloseTo(before, 6);
   });
 
   it('worth: the wood and stone a site waits for are wanted exactly as before', () => {
