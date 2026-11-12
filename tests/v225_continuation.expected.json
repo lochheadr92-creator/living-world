@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "c3c3c444c6f20bcee821138f9f97d1e855f9bc22",
+    "rules": 225,
+    "content": "f3a113afc0fc6b272a9b02b0bc176e14a32f458201061a85eeae2a9d2dca065a",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal world (arrivals on) stepped beside its rules-220 twin to the first tick at which the two differ in sites, buildings or living people (the lifted limits of growth_room.ts are the only difference), then 120 more after a save and load."
+  },
+  "saved": "c4a32797a3fb0339bb2260b7b254ac5cf96775eca8b532cde43cf2a79bc0aa81",
+  "continued": "d155e7298f498c8b7548c8497d36a558b1651dc7fae9984be03a91945068a638",
+  "tick": 800,
+  "sites": 5,
+  "sitesAt220": 4
+}
