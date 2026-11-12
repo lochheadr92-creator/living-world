@@ -3,6 +3,7 @@ import {ownedGearRules,ownedGearAt} from './gear_stock';
 import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth } from './ecology';
 import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
+import { wildPlenty } from './plenty';
 import {correctSourceExperience} from './source_learning';
 import { checkAccount } from './checked_accounts';
 import { glancedItems } from './seen_stock';
@@ -207,7 +208,7 @@ export function estimatedAmount(world: World, b: Belief): number {
   if (b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot' || b.kind === 'rock') {
     const every = SOURCE_REGROW[b.kind as Source['type']];
     if (every > 0) {
-      const gained = Math.floor((world.tick - b.seen) * rememberedGrowth(world, b) / every);
+      const gained = Math.floor((world.tick - b.seen) * rememberedGrowth(world, b) * wildPlenty(world, b.kind) / every); // rules 226 (plenty.ts): what is expected follows the faster regrowth
       return Math.min(b.max, b.amount + Math.max(0, gained));
     }
   }

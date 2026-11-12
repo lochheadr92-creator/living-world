@@ -1,6 +1,7 @@
 import { conditionAt } from './ecology';
 import { nearestHub } from './settlements';
 import { growthRate } from './hardship';
+import { cropPlenty } from './plenty';
 import { CARE_DECAY, GROW_TICKS, RIPE_ROT_TICKS } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addEvent, addFx } from './events';
@@ -52,7 +53,7 @@ export function updatePlots(world: World): void {
         pl.progress = 1;
         pl.state = 'ripe';
         pl.ripeTick = world.tick;
-        const grain = Math.max(1, Math.floor((3 + Math.round(pl.careAcc * 4)) * (0.5 + 0.5 * conditionAt(world, pl.x, pl.y))));
+        const grain = Math.max(1, Math.floor((3 + Math.round(pl.careAcc * 4)) * (0.5 + 0.5 * conditionAt(world, pl.x, pl.y)))) * cropPlenty(world); // rules 226 (plenty.ts): a plot carries more grain
         const seeds = 1 + (pl.careAcc > 0.6 ? 1 : 0);
         pl.stock = grain;
         pl.seedStock = seeds;

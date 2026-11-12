@@ -3,6 +3,7 @@ import { nearbyWaterFraction } from './hydrology';
 import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
+import { wildPlenty } from './plenty';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addFx } from './events';
@@ -97,7 +98,7 @@ export function updateSources(world: World): void {
     }
     const waterRate=waterFraction===undefined?1:Math.min(1,waterFraction/0.25);
     if (s.regrowEvery > 0 && s.amount < s.max) {
-      s.regrowTimer += rainBoost * regrowRate(world) * productiveRate(world, s.x, s.y) * waterRate;
+      s.regrowTimer += rainBoost * regrowRate(world) * productiveRate(world, s.x, s.y) * waterRate * wildPlenty(world, s.type); // rules 226 (plenty.ts): wild food comes back faster
       if (s.regrowTimer >= s.regrowEvery) {
         s.regrowTimer = 0;
         s.amount++;
