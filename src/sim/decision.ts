@@ -22,6 +22,7 @@ import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
+import { holdsJob } from './finish_job';
 import { explainsHousing } from './shelter';
 import { indoorHome } from './habitation';
 import { probe, probeWander } from './probe';
@@ -387,6 +388,12 @@ export function reviewActivity(world: World, p: Person): void {
   const a = p.activity;
   if (!a) return;
   if (a.kind === 'converse' || a.kind === 'argue') {
+    p.nextThink = world.tick + REVIEW_EVERY;
+    return;
+  }
+  // rules 227 (finish_job.ts): somebody at the work of a job takes no second look at it; a threat in sight, a critical need or a
+  // stuck job still brings the full look below
+  if (holdsJob(world, p, a)) {
     p.nextThink = world.tick + REVIEW_EVERY;
     return;
   }

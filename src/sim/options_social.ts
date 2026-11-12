@@ -1,6 +1,7 @@
 import {gameName,hasGames,nextGame} from './play';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
+import { leftToWork } from './finish_job';
 import { foodRelief } from './relief';
 import { GATHERING_FUEL, HOST_FIRE_ASK_WEIGHT, SWAP_RELIEF_CAP, hasGatheringFire, hasSwapWorth, swapReliefWorth } from './swap_and_fire';
 import { knownSiteWait, stallLiftsSelfFetch, stalledAskWorth } from './stalled_ask';
@@ -146,6 +147,7 @@ function optChat(ctx: Ctx): void {
   const scored: { c: Cand; sc: Scorer }[] = [];
   for (const c of cands) {
     if (c.d > 13) continue;
+    if (leftToWork(ctx.world, c.s)) continue; // rules 227 (finish_job.ts): nobody is sought out for a chat at their work
     const sc = new Scorer();
     sc.add('wants company', sd * tm.social * 0.85);
     const continuing=companyReason(ctx.world,p,c.q.id);
@@ -781,6 +783,7 @@ export function socialOptions(ctx: Ctx): void {
   if(ctx.stage==='child'&&!ctx.critical&&!ctx.night&&!ctx.dangers.some(b=>hyp(b.x-ctx.p.x,b.y-ctx.p.y)<10)&&Math.min(ctx.p.needs.hunger,ctx.p.needs.thirst,ctx.p.needs.energy)>42){
     for(const c of candidates(ctx))for(const kind of CHILD_TIMES){
       if(!wantsChildTime(ctx.world,ctx.p,c.q,kind))continue;
+      if(kind!=='learn_foraging'&&leftToWork(ctx.world,c.s))continue; // rules 227 (finish_job.ts): nobody is asked for a game or family time at their work
       const remembered=ctx.p.relations[c.q.id]?.childhood?.find(e=>e.kind===kind);
       const sc=new Scorer().add(kind==='learn_foraging'?'curious about learning':'time for childhood',18+(kind==='learn_foraging'?8*ctx.p.traits.curiosity:6*ctx.p.traits.sociability)).add('walking',-pen(c.d*6));
       if(remembered)sc.add('remembered time together',Math.min(3,remembered.times));
