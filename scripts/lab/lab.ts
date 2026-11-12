@@ -1,3 +1,4 @@
+import { GROWTH_ROOM_PARTS, growthRoomPartOn, setGrowthRoom } from '../../src/sim/growth_room';
 import { leanSeasonsOn, leanYearsPartOn, setLeanSeasons, setLeanYears } from '../../src/sim/lean_years';
 import { EVENING_PARTS, eveningPartOn, setEvening } from '../../src/sim/evening_fire';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
@@ -261,6 +262,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 220 (lean_years.ts): the daily one-in-five roll back (equal to rules 216), and a diagnostic with no lean season at all
   if (kind === 'rich-no-lean-years') return { spec: label, summary: 'a lean season may begin on any day with one chance in five, as before rules 220; no effect below rules 220', install() { const was = leanYearsPartOn('rare'); setLeanYears(false, 'rare'); return () => setLeanYears(was, 'rare'); } };
   if (kind === 'rich-no-lean-seasons') return { spec: label, summary: 'no lean season ever begins; dry spells, winter, spoilage and wolves unchanged; a diagnostic, not an earlier rules version', install() { const was = leanSeasonsOn(); setLeanSeasons(false); return () => setLeanSeasons(was); } };
+  // rules 225 (growth_room.ts): every part removed (equal to rules 224), and each part alone
+  if (kind === 'rich-no-growth-room') return { spec: label, summary: 'the fixed limits on people, open sites, projects and workplaces back, as before rules 225; no effect below rules 225', install() { const was = GROWTH_ROOM_PARTS.map((k) => growthRoomPartOn(k)); setGrowthRoom(false); return () => GROWTH_ROOM_PARTS.forEach((k, i) => setGrowthRoom(was[i], k)); } };
+  for (const part of GROWTH_ROOM_PARTS) if (kind === 'rich-no-growth-room-' + part) return { spec: label, summary: `the fixed limit on ${part} back, as before rules 225; no effect below rules 225`, install() { const was = growthRoomPartOn(part); setGrowthRoom(false, part); return () => setGrowthRoom(was, part); } };
   if (kind === 'rich-no-evening') return { spec: label, summary: 'nobody sits by the fire of an evening and no story is told there, as before rules 216; no effect below rules 216', install() { const was = EVENING_PARTS.map((k) => eveningPartOn(k)); setEvening(false); return () => EVENING_PARTS.forEach((k, i) => setEvening(was[i], k)); } };
   if (kind === 'rich-no-evening-fire') return { spec: label, summary: 'nobody sits by the fire of an evening (so no story either), as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('fire'); setEvening(false, 'fire'); return () => setEvening(was, 'fire'); } };
   if (kind === 'rich-no-evening-story') return { spec: label, summary: 'people sit by the fire but no story is told, as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('story'); setEvening(false, 'story'); return () => setEvening(was, 'story'); } };

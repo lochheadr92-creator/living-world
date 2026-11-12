@@ -15,6 +15,7 @@
 import type { RuleSet, World } from './types';
 
 import { hyp } from './util';
+import { withGrowthRoom } from './growth_room';
 /** the founding population the ordinary limits were tuned for; every scaled limit is a ratio of this */
 export const ORDINARY_FOUNDERS = 28;
 
@@ -110,8 +111,13 @@ function scaled(founders: number, settlementFounders: number): Rules {
   return r;
 }
 
-/** the rules this world runs under */
+/** the rules this world runs under: its limits, with the fixed ceilings lifted from rules 225 (growth_room.ts) */
 export function rulesOf(world: World): Readonly<Rules> {
+  return withGrowthRoom(world, limitsOf(world));
+}
+
+/** the limits before rules 225: the ordinary ones, or those scaled to the world's founders */
+function limitsOf(world: World): Readonly<Rules> {
   const rules = rulesFor(world.settings.ruleSet, world.settings.population, world.settings.settlementFounders);
   if (world.settings.dynamics === 'rich' || rules.facilityAllowance <= 1) return rules;
   let authored = authoredRulesCache.get(rules);
