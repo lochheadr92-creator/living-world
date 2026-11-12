@@ -1,4 +1,6 @@
 import {brewDemand,hasBrewing} from './brewing';
+import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
+import { leaveHeaviestOption } from './leave_heaviest';
 import { firstYardShared } from './shared_yard';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
@@ -39,7 +41,7 @@ import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
 import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
-import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
+import { RAW_KINDS, friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
@@ -416,7 +418,8 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
   const short: Items = {};
   for (const k of Object.keys(need) as ItemKind[]) {
-    const lack = unitsOf(need[k]) - stockAt(ctx,b, k);
+    // rules 229 (site_supply.ts): what lies ready at the bench is counted from the workshop's own record, not the glance
+    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx,b, k));
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
@@ -525,6 +528,8 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
         }
       } else if (b.btype && isFacilityType(b.btype as BuildingType)) {
         if (!(rememberedOnly?(b.hh===0||b.hh===p.hhId||friendlyTo(ctx,b.hh??-1)>=12):mayUseBelief(ctx, b))) continue;
+        // rules 229 (site_supply.ts): what waits at a workshop is counted from the workshop's own record, not the glance
+        n = benchStock(world, b, item, n);
         // a batch of mine that will be ready by the time I arrive counts
         const snap = b.ops;
         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
@@ -571,6 +576,9 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   }
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {
+      // rules 229 (site_supply.ts): with no room for one, a left-over of wood or stone may be left first, as rules 33 has it
+      if (chainLeavesLeftover(ctx.world, tag, siteId) && invRoom(ctx.world, p, item) < 1 && !ctx.options.some((o) => o.key?.startsWith('leave:')))
+        leaveHeaviestOption(ctx, { item, base: base * 0.92 * traitMods(p).work, why, sources: RAW_KINDS[item], mult: nightMult(ctx) * weatherMult(ctx), wanted: new Set<ItemKind>([item, ...materialNeeds(ctx).map((n) => n.item)]) });
       gatherMaterial(ctx, item, remaining, base * 0.92 * traitMods(p).work, why, tag);
       if (item !== 'stone' && !(item==='ore'&&hasRecoveredWorkshops(ctx.world))) return; // stone can also be cut at a quarry
     }
@@ -672,7 +680,8 @@ export function demandsOf(ctx: Ctx): Demand[] {
   }
   for (const k of Object.keys(grouped)) {
     const g = grouped[k];
-    out.push({ item: k as ItemKind, qty: g.n, have: 0, base: g.base * traitMods(p).work, why: g.why, tag: g.tag, siteId: g.siteId });
+    // rules 229 (site_supply.ts): a made material a site waits for counts for more than the site's wood and stone
+    out.push({ item: k as ItemKind, qty: g.n, have: 0, base: g.base * traitMods(p).work + (PROCESSED.includes(k as ItemKind) ? madeForSiteWorth(world, g.tag, g.siteId) : 0), why: g.why, tag: g.tag, siteId: g.siteId });
   }
   // promises to bring materials to a site count as wants of their own, at the weight of the promise
   for (const c of p.commitments) {
@@ -1328,6 +1337,7 @@ export function productionOptions(ctx: Ctx): void {
   optCartHaul(ctx);
   cartTripOptions(ctx);
   optRackSpare(ctx);
+  sawToYardOption(ctx, facilitiesOf(ctx, 'timber_yard')); // rules 229 (site_supply.ts)
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);
 }
