@@ -1,5 +1,6 @@
 import {seedSheep} from './livestock';
 import { depositRichness } from './geology';
+import { depositPlenty } from './deposit_plenty';
 import { runsRulesVersion } from './rulesversion';
 import { foundMembership } from './townships';
 import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
@@ -609,7 +610,8 @@ function placeDeposits(world: World, dg: RNG, hubs: FoundingHub[], reach: Uint8A
       const y = (i / W) | 0;
       if (!free(x, y) || !apart(x, y, spacing)) continue;
       const baseline=Math.max(2,Math.round(dg.range(lo,hi)));
-      const amount=Math.max(2,Math.round(baseline*depositRichness(world,type,x,y)));
+      // rules 231 (deposit_plenty.ts): an outcrop and an ore vein hold ten times as much
+      const amount=Math.max(2,Math.round(baseline*depositRichness(world,type,x,y)*depositPlenty(world,type)));
       const source=makeSource(world,type,x,y,amount);source.max=Math.max(source.max,amount);
       placed.push({ x, y });
       k++;
