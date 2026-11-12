@@ -1,0 +1,69 @@
+river: 36 days, rules 229; planks made 0, bricks made 6; observer changed the world in 0 checks
+looks at a grown person awake: 2924; of which they knew a site short of planks or bricks: 205
+  an option about planks or bricks was offered: 87 (their first choice 10 times; otherwise behind by 18.4 on average)
+  none offered but a refusal said why: 69; neither offered nor refused: 49
+  what was offered:
+    28x Digging clay for the shared smithy (fired bricks)
+    18x Collect N bricks from the kiln
+    17x Bring N wood to the kiln
+    9x Collect N wood from the heap
+    7x Bring N clay to the kiln
+    4x Lay out a kiln
+    2x Chopping wood for the shared smithy (fired bricks)
+    1x Firing bricks
+    1x Bring N clay and N wood to the kiln
+  what beat it:
+    7x deposit: Store food in the cellar
+    6x gather: Picking berries
+    6x build: Build the hut
+    5x sleep: Sleep at my hut
+    4x rest: Stay at my hut until it is light
+    3x gather: Gather grain for sheep
+    3x fuel_fire: Add wood to the fire
+    3x give: Bring berries to Thea
+    3x gather: Gathering wild grain
+    3x gather: Fishing
+    2x plan_site: Lay out a shallow well
+    2x haul: Deliver materials to the cellar site
+  refusals:
+    125x Cutting stone: the outcrop is worked out
+    83x Work on the building site: site is waiting for materials (N stone, N bricks)
+    32x Work on the building site: site is waiting for materials (N wood, N stone, N bricks)
+    28x Get clay for the shared smithy (fired bricks): no room in my pack for one clay
+    18x Firing bricks: does not know of a kiln they may use
+    16x Building a handcart: needs a hammer and has none (and none is on the rack)
+    9x Get clay for my household’s smithy (fired bricks): no room in my pack for one clay
+    7x Firing a water jar: not enough estimated time for the trip and return: energy for the return
+    7x Firing a water jar: the kiln is busy with fired bricks
+    6x Digging clay for the shared smithy (fired bricks): not enough estimated time for the trip and return: accepted duty #N due at tick N
+    5x Drying fish: the food rack is busy with dried fish
+    3x Firing a water jar: not enough estimated time for the trip and return: accepted duty #N due at tick N
+    2x Digging clay for my household’s smithy (fired bricks): not enough estimated time for the trip and return: energy for the return
+    2x Digging clay for the shared smithy (fired bricks): not enough estimated time for the trip and return: energy for the return
+    2x Firing a water jar: tried recently and could not get on
+    1x Get wood for the shared smithy (fired bricks): no room in my pack for one wood
+    1x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    1x Weaving a garment: not enough estimated time for the trip and return: accepted duty #N due at tick N
+    1x Weaving a blanket: not enough estimated time for the trip and return: accepted duty #N due at tick N
+    1x Weaving a garment: not enough estimated time for the trip and return: energy for the return
+    1x Weaving a blanket: not enough estimated time for the trip and return: energy for the return
+    1x Collect N bricks: tried recently and found none to take
+  in daylight: a step offered 50 times, first choice 10; behind by (10th, 25th, middle, 75th, 90th) 1.3, 6.4, 12, 17.5, 20.9; the step itself worth (10th, middle, 90th) 20.8, 30.8, 44.4
+  what beat it in daylight:
+    6x gather: Picking berries
+    6x deposit: Store food in the cellar
+    6x build: Build the hut
+    3x gather: Gathering wild grain
+    3x gather: Fishing
+    2x plan_site: Lay out a shallow well
+    1x harvest: Harvest the crop
+    1x give: Bring berries to Wilma
+    1x tend: Prepare the field to rest
+    1x haul: Deliver materials to the cellar site
+    1x give: Bring berries to Ulric
+    1x gather: Chopping wood to fuel our cold home hearth
+    1x gather: Chopping wood for the shared smithy
+    1x repair: Repair the lean-to
+  packs with no room (37 looks, 1.1 weight free on average), weight carried by item: wood 4.8, seeds 2.1, berries 1.6, grain 0.8, basket 0.6, stone 0.6, fish 0.3, clay 0.3, axe 0.2, spear 0.2
+  sawing refused for want of a saw 0 times, 0 of them while a saw was in somebody's pack; a saw lay at a timber yard at 205 looks; saws in packs at the end 1
+  doing, when nothing was offered or refused: 11x rest; 8x drink; 6x sleep; 6x gather; 5x deposit; 5x flee; 2x eat_store; 2x harvest

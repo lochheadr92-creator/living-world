@@ -1,0 +1,72 @@
+birch: 36 days, rules 229; planks made 20, bricks made 12; observer changed the world in 0 checks
+looks at a grown person awake: 2839; of which they knew a site short of planks or bricks: 1548
+  an option about planks or bricks was offered: 628 (their first choice 170 times; otherwise behind by 23.3 on average)
+  none offered but a refusal said why: 498; neither offered nor refused: 422
+  what was offered:
+    292x Hewing planks
+    82x Collect N bricks from the kiln
+    73x Sawing planks
+    54x Bring N wood to the timber yard
+    18x Chopping wood for the shared hall (sawn planks)
+    18x Digging clay for the shared smithy (fired bricks)
+    15x Collect N planks from the timber yard
+    12x Collect N wood from the kiln
+    11x Collect N wood from the food rack
+    8x Bring N clay to the kiln
+  what beat it:
+    63x rest: Stay at my hut until it is light
+    50x sleep: Sleep at my hut
+    26x rest: Shelter at the hut
+    20x fuel_fire: Add wood to the fire
+    16x gather: Gathering wild grain
+    16x deposit: Store food in the cellar
+    14x warm: Warm up at the fire
+    14x harvest: Harvest the crop
+    10x fuel_fire: Feed our hearth with wood
+    9x gather: Picking berries
+    9x gather: Picking fruit
+    8x rest: Stay at my lean-to until it is light
+  refusals:
+    431x Cutting stone: the outcrop is worked out
+    395x Work on the building site: site is waiting for materials (N bricks)
+    392x Work on the building site: site is waiting for materials (N planks)
+    192x Firing bricks: does not know of a kiln they may use
+    189x Sawing planks: needs a saw and has none (and none is on the rack)
+    80x Burning charcoal: has not learned charcoal firing
+    68x Work on the building site: site is waiting for materials (N stone, N bricks)
+    61x Making a net: tried recently and could not get on
+    53x Firing a water jar: the kiln is busy with fired bricks
+    46x Separating and twisting bast fibre: does not know of a timber yard they may use
+    46x Making a net: does not know of a timber yard they may use
+    46x Hewing planks: does not know of a timber yard they may use
+    46x Forging an iron axe: has not learned iron forging
+    43x Collect N bricks: tried recently and found none to take
+    42x Sawing planks: tried recently and could not get on
+    42x Work on the building site: site is waiting for materials (N planks, N bricks)
+    36x Work on the building site: site is waiting for materials (N wood, N planks, N bricks)
+    33x Hewing planks: tried recently and could not get on
+    29x Making a net: not enough estimated time for the trip and return: energy for the return
+    28x Collect N planks: tried recently and found none to take
+    28x Firing a water jar: tried recently and could not get on
+    27x Weaving a wool garment: does not know of a timber yard they may use
+    27x Weaving a wool blanket: does not know of a timber yard they may use
+    27x Weaving a wool bedding: does not know of a timber yard they may use
+  in daylight: a step offered 374 times, first choice 170; behind by (10th, 25th, middle, 75th, 90th) 2.4, 5.5, 12.2, 22.5, 31.9; the step itself worth (10th, middle, 90th) 20.8, 36.2, 48.2
+  what beat it in daylight:
+    16x gather: Gathering wild grain
+    16x deposit: Store food in the cellar
+    15x rest: Shelter at the hut
+    10x warm: Warm up at the fire
+    9x harvest: Harvest the crop
+    9x gather: Picking fruit
+    8x gather: Picking berries
+    7x gather: Chopping wood to fuel our cold home hearth
+    6x plant: Plant seed
+    5x gather: Fishing
+    5x haul: Deliver materials to the cellar site
+    4x attend: Go to the feast at the fire
+    4x attend: Go to the wedding feast at the fire
+    4x withdraw: Collect N stone from the quarry
+  packs with no room (26 looks, 1.2 weight free on average), weight carried by item: wood 3.7, stone 1.8, seeds 1.7, grain 1.1, spear 1.0, berries 1.0, clay 0.9, basket 0.8, axe 0.5, rod 0.4
+  sawing refused for want of a saw 189 times, 24 of them while a saw was in somebody's pack; a saw lay at a timber yard at 1037 looks; saws in packs at the end 2
+  doing, when nothing was offered or refused: 102x rest; 90x drink; 73x gather; 31x warm; 23x eat_store; 23x attend; 14x sleep; 11x eat

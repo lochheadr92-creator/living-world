@@ -1,0 +1,72 @@
+river: 36 days, rules 228; planks made 37, bricks made 18; observer changed the world in 0 checks
+looks at a grown person awake: 2969; of which they knew a site short of planks or bricks: 2949
+  an option about planks or bricks was offered: 1702 (their first choice 84 times; otherwise behind by 24.1 on average)
+  none offered but a refusal said why: 485; neither offered nor refused: 762
+  what was offered:
+    374x Collect N planks from the timber yard
+    310x Bring N wood to the timber yard
+    200x Collect N bricks from the kiln
+    95x Bring N wood to the kiln
+    69x Chopping wood for the shared hall (hewn planks)
+    69x Hewing planks
+    67x Chopping wood for the shared hall (sawn planks)
+    67x Digging clay for the shared smithy (fired bricks)
+    64x Sawing planks
+    57x Collect N wood from the heap
+  what beat it:
+    157x sleep: Sleep at my hut
+    103x rest: Stay at my hut until it is light
+    83x warm: Warm up at the fire
+    70x rest: Shelter at the hut
+    61x deposit: Store food in the cellar
+    58x wander: Sit by the fire for the evening
+    55x gather: Picking berries
+    49x gather: Chopping wood to fuel our cold home hearth
+    40x fuel_fire: Add wood to the fire
+    37x fuel_fire: Feed our hearth with wood
+    29x gather: Gather grain for sheep
+    29x harvest: Harvest the crop
+  refusals:
+    1606x Work on the building site: site is waiting for materials (N planks)
+    942x Work on the building site: site is waiting for materials (N bricks)
+    879x Cutting stone: the outcrop is worked out
+    635x Work on the building site: site is waiting for materials (N planks, N bricks)
+    458x Sawing planks: needs a saw and has none (and none is on the rack)
+    239x Burning charcoal: has not learned charcoal firing
+    193x Work on the building site: site is waiting for materials (N planks, N stone)
+    176x Work on the building site: site is waiting for materials (N stone, N bricks)
+    160x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    114x Forging an iron axe: has not learned iron forging
+    85x Get clay for the shared smithy (fired bricks): no room in my pack for one clay
+    71x Brewing beer: does not know of a brewery they may use
+    50x Firing a water jar: the kiln is busy with fired bricks
+    46x Work on the building site: site is waiting for materials (N wood, N planks, N bricks)
+    38x Get clay for my household’s house (fired bricks): no room in my pack for one clay
+    34x Work on the building site: site is waiting for materials (N wood, N planks)
+    29x Making a net: the timber yard is busy with bast fibre
+    28x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    27x Firing bricks: does not know of a kiln they may use
+    27x Forging an iron hammer: has not learned iron forging
+    25x Get clay for a friend’s house (fired bricks): no room in my pack for one clay
+    22x Get clay for the shared bakery (fired bricks): no room in my pack for one clay
+    21x Separating and twisting bast fibre: the timber yard is busy with bast fibre
+    20x Forging an iron pickaxe: has not learned iron forging
+  in daylight: a step offered 1043 times, first choice 80; behind by (10th, 25th, middle, 75th, 90th) 4.7, 9.4, 16.1, 23.6, 34.3; the step itself worth (10th, middle, 90th) 6.6, 18.9, 30.1
+  what beat it in daylight:
+    61x deposit: Store food in the cellar
+    53x gather: Picking berries
+    49x gather: Chopping wood to fuel our cold home hearth
+    45x warm: Warm up at the fire
+    44x wander: Sit by the fire for the evening
+    43x rest: Shelter at the hut
+    23x attend: Go to the harvest feast at the hall
+    22x gather: Gathering wild grain
+    20x harvest: Harvest the crop
+    17x attend: Go to the feast at the fire
+    17x attend: Go to the harvest feast at the fire
+    16x explore: Explore somewhere new
+    16x gather: Gather grain for sheep
+    16x build: Build the hut
+  packs with no room (207 looks, 1.1 weight free on average), weight carried by item: wood 4.9, stone 1.4, seeds 1.0, berries 1.0, grain 0.8, basket 0.8, axe 0.6, clay 0.6, rod 0.5, saw 0.5
+  sawing refused for want of a saw 458 times, 458 of them while a saw was in somebody's pack; a saw lay at a timber yard at 0 looks; saws in packs at the end 10
+  doing, when nothing was offered or refused: 152x rest; 151x drink; 135x gather; 108x warm; 52x eat_store; 30x sleep; 29x attend; 19x deposit

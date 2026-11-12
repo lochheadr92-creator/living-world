@@ -1,0 +1,72 @@
+birch: 36 days, rules 229; planks made 1, bricks made 0; observer changed the world in 0 checks
+looks at a grown person awake: 2831; of which they knew a site short of planks or bricks: 2334
+  an option about planks or bricks was offered: 1514 (their first choice 460 times; otherwise behind by 21.4 on average)
+  none offered but a refusal said why: 241; neither offered nor refused: 579
+  what was offered:
+    1013x Bring N wood to the timber yard
+    205x Chopping wood for the shared hall (sawn planks)
+    186x Chopping wood for the shared hall (hewn planks)
+    36x Collect N wood from the heap
+    25x Lay out a kiln
+    14x Collect N wood from the food rack
+    9x Lay out a timber yard
+    9x Collect N wood from the hut
+    8x Chopping wood for my household’s hall (hewn planks)
+    3x Leave the saw at the timber yard
+  what beat it:
+    102x sleep: Sleep at my hut
+    87x rest: Stay at my hut until it is light
+    52x gather: Gathering wild grain
+    47x rest: Shelter at the hut
+    45x deposit: Store food in the cellar
+    43x harvest: Harvest the crop
+    40x gather: Picking berries
+    40x fuel_fire: Add wood to the fire
+    36x warm: Warm up at the fire
+    35x fuel_fire: Feed our hearth with wood
+    23x rest: Stay at my lean-to until it is light
+    22x gather: Fishing
+  refusals:
+    1546x Work on the building site: site is waiting for materials (N planks)
+    1042x Cutting stone: the outcrop is worked out
+    419x Sawing planks: needs a saw and has none (and none is on the rack)
+    363x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    196x Work on the building site: site is waiting for materials (N planks, N stone)
+    43x Chopping wood for the shared hall (sawn planks): not enough estimated time for the trip and return: energy for the return
+    38x Separating and twisting bast fibre: does not know of a timber yard they may use
+    38x Making a net: does not know of a timber yard they may use
+    38x Hewing planks: does not know of a timber yard they may use
+    34x Chopping wood for the shared hall (hewn planks): not enough estimated time for the trip and return: energy for the return
+    31x Cutting stone: the quarry is busy with cut stone
+    22x Get wood for the shared hall (hewn planks): no room in my pack for one wood
+    19x Get wood for the shared hall (sawn planks): no room in my pack for one wood
+    17x Building a handcart: needs a hammer and has none (and none is on the rack)
+    17x Separating and twisting bast fibre: tried recently and could not get on
+    17x Making a net: tried recently and could not get on
+    17x Sawing planks: tried recently and could not get on
+    16x Weaving a wool garment: does not know of a timber yard they may use
+    16x Weaving a wool blanket: does not know of a timber yard they may use
+    16x Weaving a wool bedding: does not know of a timber yard they may use
+    15x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    9x Weaving a wool garment: tried recently and could not get on
+    9x Scraping and sewing a hide garment: tried recently and could not get on
+    9x Weaving a garment: tried recently and could not get on
+  in daylight: a step offered 1007 times, first choice 458; behind by (10th, 25th, middle, 75th, 90th) 1.7, 4.9, 9.7, 16.1, 24.3; the step itself worth (10th, middle, 90th) 21.6, 33.4, 42.6
+  what beat it in daylight:
+    51x gather: Gathering wild grain
+    45x deposit: Store food in the cellar
+    39x gather: Picking berries
+    36x harvest: Harvest the crop
+    22x gather: Fishing
+    20x plant: Plant seed
+    18x gather: Picking fruit
+    15x rest: Shelter at the hut
+    14x build: Build the cellar
+    12x deposit: Bring food home
+    11x repair: Repair the hut
+    10x repair: Repair the lean-to
+    10x warm: Warm up at the fire
+    10x fuel_fire: Feed our hearth with wood
+  packs with no room (47 looks, 0.9 weight free on average), weight carried by item: stone 3.1, berries 2.1, seeds 1.5, grain 1.4, wood 1.1, spear 0.8, fish 0.7, fruit 0.5, basket 0.4, hoe 0.2
+  sawing refused for want of a saw 419 times, 373 of them while a saw was in somebody's pack; a saw lay at a timber yard at 996 looks; saws in packs at the end 6
+  doing, when nothing was offered or refused: 152x drink; 125x gather; 97x rest; 41x warm; 28x eat_store; 27x sleep; 20x attend; 17x flee

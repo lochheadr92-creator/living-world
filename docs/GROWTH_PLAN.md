@@ -140,6 +140,65 @@ gets less, and its bricks are three steps away (clay, wood, a firing by two peop
 So the stall is priority and logistics, not want: making planks and bricks is a chain of low-scoring steps, the saw is not where
 the sawing is, and packs have no room for clay. No repair is made yet; what to change is the owner's to choose.
 
+## Step 5, the repair: what a waiting site lacks gets made (rules 229, `src/sim/site_supply.ts`)
+
+The owner's word on 13 November: build the fix for planks and bricks. Evidence: `review_evidence/growth-20261113/site-supply/`.
+
+**The cause was found while measuring the fix.** The first draft raised the worth of the work, and people then chose a step
+toward planks or bricks 697 times in 1,594 daylight looks (before: 46 in 1,485), brought wood to the timber yard, and still made
+four planks and no brick in three years. Read in source: since rules 169 (9 November) a glance at a store remembers each kind
+there as one, or the store as full, and the planner read a workshop's stock from that glance. Three wood at the yard were one;
+a batch needing three was always two short; everybody brought wood and nobody sawed. Only work needing one of a thing, or
+nothing, was ever begun (fibre, cut stone). Checked: the same two worlds at rules 228 with the exact copy restored make 17 and 37
+planks and 18 bricks in three years, against 2 and none.
+
+Four switched parts:
+
+- **Bench**: somebody judging whether a workshop holds what a batch needs, or collecting what it has made, counts what the
+  workshop's own record shows lying ready (kept exact by rules 169, which says so). The glance still governs a house, a
+  storehouse and what is passed on.
+- **Worth**: a made material a known site waits for counts for 18 more than the site's wood and stone, about the middle of
+  ordinary work (the step was worth 16 at the middle, ordinary work 32).
+- **Saw**: somebody carrying a saw may leave it at a timber yard with none on its rack, where it is the settlement's and
+  whoever saws uses it at the bench (worth 34 before the walk; at 24 it lost nearly every time).
+- **Room**: the rule of rules 33 (leave the heaviest left-over of wood or stone to free the hands) also applies to the clay and
+  wood a workshop needs for a site's planks and bricks.
+
+**What becomes of the sites** (`scripts/build_trace.ts`, birch, river, aspen and meadow, six years, one run each: a description):
+
+| site | rules 227: laid out, finished | rules 229: laid out, finished |
+|---|---|---|
+| smithy | 23, 0 | 6, 5 (one still open) |
+| hall | 7, 0 | 4, 4 |
+| house (a hut rebuilt) | 9, 0 | 6, 3 (one abandoned, two open) |
+| granary | 3, 0 | none laid out (not looked into) |
+
+Planks made 22, 18, 20 and 23 (before 2, 3, 0 and 2); bricks 21, 12, 18 and 30 (before none); charcoal in three of the four
+(before none). **No iron yet**: smelting and forging are refused as not learned. A saw lies at the yard in all six worlds tried
+within 20 days (never before). What is abandoned now is short of stone: cellars 45 of 100, huts 23 of 87 in the
+two large settlements, wells 4 of 16.
+
+**Paired lab** (clean checkout of `090424f6` and the untracked pin recorder script, which the lab does not use; 12 seeds,
+Normal, fork 0, 25 days, arrivals on; control, two nudges and five removals, 96 arms;
+`review_evidence/growth-20261113/site-supply/lab229/report.txt`). Figures are with the rule against without it. Three seeds were
+resumed after my own copy of the recorder into the checkout tripped the lab's source guard; the nine finished seeds were kept.
+
+- **The whole rule**: the first hall stands on day 18.1 against 25.0, which is the end of the run, larger than chance, in 11 of
+  12 seeds. Workplaces 5.0 against 4.0 and buildings 43.3 against 41.3 lean the same way inside the noise floor. **Tools in hand
+  67.0 against 73.7, fewer with the rule, larger than chance.** People 35.1 against 36.3, deaths, hunger, family time and child
+  play are not distinguishable.
+- **Bench** carries the hall (18.1 against 25.0, larger than chance) and the workshop work (32.8 jobs against 20.8), with
+  nothing lost that the lab can see; food in store leans higher with it (4.4 against 3.4 a person).
+- **Worth** brings the hall forward (18.1 against 22.9, inside the floor) and **costs upkeep: buildings stand at 61.0 of
+  condition against 66.1 without it, larger than chance, in 12 of 12 seeds**; tools 67.0 against 71.0 and people 35.1 against
+  36.6 lean the wrong way inside the floor. Whether to keep it at 18, lower it or drop it is the owner's to decide.
+- **Saw**: the hall 18.1 against 20.4, inside the floor; nothing else.
+- **Room**: the world ends exactly as without it in every seed. It does nothing in two years.
+
+Checks: `tests/site_supply.test.ts` (9); pin `tests/v229_continuation.*` (Normal forest, arrivals on, 20,200 ticks, by when 13
+planks have been made and a saw lies at the yard; clean checkout of `090424f6`). Lab arms: `rich-no-site-supply`, `-bench`,
+`-worth`, `-saw`, `-room`.
+
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
 The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says
@@ -247,7 +306,10 @@ line says how it is known: measured, read in source, or not looked into.
 **What stops growth, in the order it bites**
 
 1. **No bricks and almost no planks are made**, so no smithy, house, hall or granary is finished and ore is never used
-   (measured; step 5). The work is offered and loses; the saw is in its maker's pack, not at the yard; packs have no room for clay.
+   (measured; step 5). **Repaired at rules 229**: the cause was the glance of rules 169 read at the bench; smithies, halls and
+   houses are now finished. Left open by it: no iron is made (smelting and forging not learned); the worth part costs upkeep;
+   no granary was laid out in four worlds; and a house or a storehouse is still emptied one unit a trip, because the glance
+   remembers one of each kind (read in source, not measured).
 2. **Water runs out.** A settlement of 110 died of thirst in three days; nothing slows people or warns them first (measured).
    Natural water is a stock only rain refills and a well holds a few units (read in source).
 3. **A lean season running into winter** starves a large settlement: 25 to 34 deaths a season at 50 people and more at rules

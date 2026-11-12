@@ -1,0 +1,72 @@
+birch: 36 days, rules 228; planks made 2, bricks made 0; observer changed the world in 0 checks
+looks at a grown person awake: 2932; of which they knew a site short of planks or bricks: 2722
+  an option about planks or bricks was offered: 1653 (their first choice 34 times; otherwise behind by 26.7 on average)
+  none offered but a refusal said why: 365; neither offered nor refused: 704
+  what was offered:
+    554x Bring N wood to the timber yard
+    284x Chopping wood for the shared hall (hewn planks)
+    235x Collect N wood from the heap
+    131x Bring N wood to the kiln
+    124x Collect N wood from the food rack
+    61x Collect N wood from the timber yard
+    50x Collect N wood from the hut
+    31x Chopping wood for the shared granary (hewn planks)
+    30x Digging clay for the shared smithy (fired bricks)
+    26x Collect N planks from the timber yard
+  what beat it:
+    138x rest: Shelter at the hut
+    130x sleep: Sleep at my hut
+    107x rest: Stay at my hut until it is light
+    82x harvest: Harvest the crop
+    79x deposit: Store food in the cellar
+    69x gather: Picking berries
+    55x gather: Gathering wild grain
+    48x gather: Chopping wood to fuel our cold home hearth
+    48x operate: Separating and twisting bast fibre
+    38x fuel_fire: Add wood to the fire
+    37x warm: Warm up at the fire
+    36x fuel_fire: Feed our hearth with wood
+  refusals:
+    1645x Work on the building site: site is waiting for materials (N planks)
+    857x Cutting stone: the outcrop is worked out
+    606x Sawing planks: needs a saw and has none (and none is on the rack)
+    531x Work on the building site: site is waiting for materials (N bricks)
+    435x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    131x Work on the building site: site is waiting for materials (N wood, N planks, N bricks)
+    98x Firing bricks: does not know of a kiln they may use
+    71x Get clay for the shared smithy (fired bricks): no room in my pack for one clay
+    52x Get wood for the shared hall (hewn planks): no room in my pack for one wood
+    46x Separating and twisting bast fibre: does not know of a timber yard they may use
+    46x Making a net: does not know of a timber yard they may use
+    46x Hewing planks: does not know of a timber yard they may use
+    38x Cutting stone: the quarry is busy with cut stone
+    30x Weaving a wool garment: does not know of a timber yard they may use
+    30x Weaving a wool blanket: does not know of a timber yard they may use
+    30x Weaving a wool bedding: does not know of a timber yard they may use
+    30x Building a handcart: needs a hammer and has none (and none is on the rack)
+    27x Chopping wood for the shared hall (hewn planks): not enough estimated time for the trip and return: energy for the return
+    20x Making a net: tried recently and could not get on
+    18x Cutting stone: not enough estimated time for the trip and return: energy for the return
+    17x Chopping wood for the shared granary (hewn planks): not enough estimated time for the trip and return: energy for the return
+    15x Separating and twisting bast fibre: tried recently and could not get on
+    15x Get clay for my household’s smithy (fired bricks): no room in my pack for one clay
+    13x Weaving a wool garment: tried recently and could not get on
+  in daylight: a step offered 1045 times, first choice 34; behind by (10th, 25th, middle, 75th, 90th) 7.2, 11.9, 18.5, 26, 33.8; the step itself worth (10th, middle, 90th) 7.5, 16.6, 26.8
+  what beat it in daylight:
+    79x deposit: Store food in the cellar
+    68x gather: Picking berries
+    68x harvest: Harvest the crop
+    63x rest: Shelter at the hut
+    54x gather: Gathering wild grain
+    48x gather: Chopping wood to fuel our cold home hearth
+    48x operate: Separating and twisting bast fibre
+    29x gather: Picking fruit
+    27x plant: Plant seed
+    24x gather: Fishing
+    17x attend: Go to the wedding feast at the fire
+    15x fuel_fire: Feed our hearth with wood
+    15x warm: Warm up at the fire
+    13x haul: Deliver materials to the cellar site
+  packs with no room (166 looks, 0.9 weight free on average), weight carried by item: wood 2.5, stone 2.1, seeds 2.0, grain 1.4, berries 0.9, spear 0.9, fish 0.8, basket 0.6, axe 0.5, rod 0.5
+  sawing refused for want of a saw 606 times, 501 of them while a saw was in somebody's pack; a saw lay at a timber yard at 0 looks; saws in packs at the end 7
+  doing, when nothing was offered or refused: 215x rest; 139x drink; 93x gather; 61x warm; 35x eat_store; 33x sleep; 32x deposit; 23x attend

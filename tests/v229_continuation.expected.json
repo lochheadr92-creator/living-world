@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "090424f682f9c6d40591c4d5b25e320d18ea41a6",
+    "rules": 229,
+    "content": "725b55c0cf32f5c5781f55577a0188b32ce54694c7f98bbcee9b188b466c202a",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal forest (arrivals on) stepped to the tick by which planks have been made at the timber yard and a saw lies on its rack (20,200), then 120 ticks after a save and load."
+  },
+  "saved": "1258496535a058efb066bb931d6ec095ee44cb081d07671c32b5fcdf88f6fa36",
+  "continued": "c7e18ab3ee09cfbc38aa61b6b679c66b772ce775bede2655a0772f5b26addb16",
+  "tick": 20200,
+  "sawsAtYards": 1,
+  "planksMade": 13,
+  "bricksMade": 0
+}
