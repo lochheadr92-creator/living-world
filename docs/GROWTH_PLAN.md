@@ -182,9 +182,23 @@ Checks: `tests/finish_job.test.ts` (10); 366 tests in 35 related files pass; pin
 arrivals on, one day: 1 job dropped at the work for something better where rules 226 has 22; clean checkout of `44c6dae1`). Lab
 arms: `rich-no-finish-job`, and `-hold`, `-asleep`, `-quiet`.
 
-**Result: the paired lab is not run yet** (it waits for the 20-year runs to free the machine). What to watch in it: hunger time
-(a person no longer breaks off work to eat until it is critical, unless the work was for hunger and food is in the pack), family
-time, child play and chats (the quiet part), and deaths.
+**Result (paired lab, clean checkout of `44c6dae1`, 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges and
+four removals, 84 arms; `review_evidence/growth-20261113/lab227/report.txt`). Figures are with the rule against without it.**
+
+- **Hold works, beyond chance, and costs nothing the lab can see.** Field plots 26.4 against 18.8, tools in hand 74.4 against
+  56.2, projects finished 87.2 against 68.7, building condition 63.3 against 55.1, food put by 990 against 858 units, food in
+  store a person 5.3 against 3.2, fire feeds 110 against 82, all larger than chance and in 10 to 12 of 12 seeds. People, deaths,
+  mood and time under the hungry line are not distinguishable; mean hunger leans better fed (65.9 against 63.6, inside the floor).
+- **Asleep changes nothing**: no metric moves by more than a single draw, and three seeds end identical to the control. It is
+  a saving of work with no effect on what people do.
+- **Quiet costs family time and buys nothing measurable**: family time 94.4 against 120.2 (larger than chance, 12 of 12 seeds);
+  chats, child play, people, deaths and everything else are not distinguishable. Whether to keep it, or to let family time
+  through, is the owner's decision.
+- **All three together**: buildings 42.6 against 38.2, plots 26.4 against 20.5, tools 74.4 against 54.7, projects finished 87.2
+  against 65.8, the first timber yard on day 10.5 against 13.6, food in store a person 5.3 against 2.6, mean hunger 65.9 against
+  62.2, chats 155 against 127, all larger than chance; family time 94.4 against 118.2, larger than chance the other way. People
+  35.1 against 34.8 and deaths 0.4 against 0.7 are not distinguishable. The worry that held workers would go hungrier is not
+  borne out: children are under the hungry line a little less with the rule.
 
 ## Everything found that needs attention (13 November 2026)
 
@@ -217,7 +231,8 @@ line says how it is known: measured, read in source, or not looked into.
 
 **Behaviour**
 
-12. Jobs dropped half-way: repaired by rules 227, **paired lab not yet read**.
+12. Jobs dropped half-way: repaired by rules 227; the lab finds the hold part beneficial beyond chance and the sleep part
+    neutral. **Its quiet part costs a fifth of family time for no measured gain: the owner's to keep or change.**
 13. Building is still dropped at the work as often at 227 (149 spells against 145) (measured; not looked into).
 14. Somebody beginning to talk to a worker resets the piece of work in hand (616 times in four worlds over eight days) (measured).
 15. Resting people take a fifth of all second looks; rules 227 holds jobs and sleep, not rest (measured).
@@ -233,7 +248,8 @@ line says how it is known: measured, read in source, or not looked into.
 
 **State of the work**
 
-21. Rules 225, 226 and 227 are the current rules and none has a paired lab verdict; the factor of two in 226 is a first dose.
+21. Rules 225 and 226 are current rules with no paired lab verdict (their parts are not separated, and the factor of two in
+    226 is a first dose). Rules 227 has one.
 22. All of this evidence is one run a seed: descriptions, no noise floor.
 23. The full test suite has not been run since the rules-208 head; `tests/iron_chain_stall.test.ts` has failed since rules 206.
 24. Nothing since `cc0e656a` is pushed.
