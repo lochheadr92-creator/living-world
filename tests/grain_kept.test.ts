@@ -6,7 +6,7 @@ import { parseIntervention } from '../scripts/lab/lab';
 import { generateOptions } from '../src/sim/decision';
 import { pickFood } from '../src/sim/economy';
 import { createPlot } from '../src/sim/farming';
-import { BAKE_WORTH, GRAIN_IN_PACK, GRAIN_KEPT_PARTS, LOAVES_A_HEAD, grainInPack, setGrainKept } from '../src/sim/grain_kept';
+import { BAKE_WORTH, GRAIN_IN_PACK, GRAIN_KEPT_PARTS, LOAVES_A_HEAD, grainGoesToBins, grainInPack, setGrainKept } from '../src/sim/grain_kept';
 import { observe } from '../src/sim/knowledge';
 import { demandsOf, facilityWants } from '../src/sim/production';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
@@ -117,6 +117,18 @@ describe('rules 243: grain is kept for bread', () => {
     const home = fixture(243, { home: { grain: 9 }, has: ['bakery'] });
     expect(home.p.beliefs[home.home.id].items?.grain ?? 0, 'what she remembers of nine grain at home is one at most').toBeLessThanOrEqual(1);
     expect(breadWant(home.w, home.p)).toBeUndefined();
+  });
+
+  it('with a granary known, carried grain goes to the bins and not home; the other food still goes home', () => {
+    const deposits = (w: World, p: Person) => ctxOf(w, p).options.filter((o) => o.kind === 'deposit').map((o) => ({ label: o.label, target: o.targetId }));
+    const now = fixture(243, { inv: { grain: 6, fish: 5 }, has: ['granary'] });
+    const offered = deposits(now.w, now.p);
+    expect(offered.some((o) => /5 grain/.test(o.label) && /granary/.test(o.label)), 'five of the six go to the bins: ' + JSON.stringify(offered)).toBe(true);
+    expect(offered.filter((o) => o.target === now.home.id).every((o) => !/grain/.test(o.label)), 'nothing sends grain home').toBe(true);
+    const before = fixture(242, { inv: { grain: 6, fish: 5 }, has: ['granary'] });
+    expect(grainGoesToBins(before.w)).toBe(false);
+    expect(grainGoesToBins(now.w)).toBe(true);
+    expect(deposits(before.w, before.p).some((o) => /5 grain/.test(o.label) && /granary/.test(o.label)), 'before, three or four were kept back').toBe(false);
   });
 
   it('each part can be removed', () => {

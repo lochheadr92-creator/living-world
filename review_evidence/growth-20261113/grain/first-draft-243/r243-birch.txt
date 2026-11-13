@@ -1,0 +1,7 @@
+birch: days 0 to 36, rules 243; 46 alive in 23 households; 43 plots {"growing":25,"ripe":4,"tilled":13,"tilling":1}; 1 granaries, 0 mills, 1 bakeries, 13 cellars
+  grain: made 2329 (64.7 a day), eaten or used 1373 (38.1 a day), spoiled 469 (13.0 a day)
+  flour: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  bread: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  every food, made / eaten or used / spoiled over the span: berries 2690/2164/448; fruit 797/622/138; fish 500/370/111; grain 2329/1373/469; meat 6/6/0; dried_fish 2/2/0; smoked_fish 2/1/1
+  held at the end: grain {"packs":29,"lean_to":4,"hut":56,"cellar":335}; flour {}; bread {}
+  the goods account, entries about grain, flour, bread, seed and eating: -eaten 3950; +crop growth 1275; +regrowth: wild grain 1257; -saved as seed 242; +seed saved from wild grain 242; -eaten at the source 198; -sown 146; xcrop left to rot 51; -construction: granary 18; -construction: bakery 16

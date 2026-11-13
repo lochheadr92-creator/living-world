@@ -1,5 +1,5 @@
 import {brewDemand,hasBrewing} from './brewing';
-import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
+import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, binsWorth, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
 import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
 import { IRON_WANT, IRON_WHY, carriesForSmelter, ironWanted, oreLeavesLeftover, smithyShelf } from './smithy_iron';
 import { leaveHeaviestOption } from './leave_heaviest';
@@ -895,7 +895,7 @@ function optGranaryStore(ctx: Ctx): void {
     }
   }
   if (n < (winter ? GRANARY_TRIP - 2 : 3)) return;
-  depositLeaf(ctx, g.b, items, 11 + Math.min(10, n) + 5 * p.traits.diligence, winter ? 'to put grain by for the winter where it keeps' : 'to keep our grain from spoiling', 'store');
+  depositLeaf(ctx, g.b, items, 11 + Math.min(10, n) + 5 * p.traits.diligence + binsWorth(world), winter ? 'to put grain by for the winter where it keeps' : 'to keep our grain from spoiling', 'store');
 }
 
 /**

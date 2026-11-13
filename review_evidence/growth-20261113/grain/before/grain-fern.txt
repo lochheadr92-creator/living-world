@@ -1,0 +1,7 @@
+fern: days 36 to 60, rules 241; 76 alive in 34 households; 75 plots {"growing":67,"tilled":7,"ripe":1}; 0 granaries, 0 mills, 0 bakeries, 21 cellars
+  grain: made 2378 (99.1 a day), eaten or used 2016 (84.0 a day), spoiled 428 (17.8 a day)
+  flour: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  bread: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  every food, made / eaten or used / spoiled over the span: berries 2362/1862/541; fruit 670/513/182; fish 846/677/213; grain 2378/2016/428; meat 4/0/4; dried_fish 2/2/0
+  held at the end: grain {"packs":24,"cellar":66,"hut":2}; flour {}; bread {}
+  the goods account, entries about grain, flour, bread, seed and eating: -eaten 4535; +crop growth 1530; +regrowth: wild grain 1088; -eaten at the source 305; -saved as seed 228; +seed saved from wild grain 228; -sown 198; xcrop left to rot 103

@@ -11,7 +11,11 @@
 // From 243, in rich worlds, four separately switched parts:
 //   spare  raw grain is not eaten while there is anything else to eat in the same pack or store: it is the last thing
 //          taken, not the third. Somebody with nothing but grain still eats it.
-//   bins   a household putting grain by in the granary keeps one unit in the pack for the day, not three or four.
+//   bins   a household putting grain by in the granary keeps one unit in the pack for the day, not three or four; once
+//          somebody knows of a granary their grain goes there and not into the home, the cellar or the storehouse; and the
+//          trip to the bins is worth BINS_WORTH more. (Found measuring the first draft over three years in four worlds: a
+//          granary and a bakery stood in every one, the granaries held no grain and the cellars 121 to 335, and no loaf
+//          was baked.)
 //   want   a granary is wanted by anybody whose household works a plot, and a bakery by anybody who knows of a granary or
 //          works a plot, whether or not they hold grain and whether or not their household is short of food (a short
 //          household needs them more). The granary still needs its timber yard for planks and the bakery its kiln for bricks.
@@ -46,6 +50,11 @@ export const sparesGrain = (world: World): boolean => on.spare && hasGrainKept(w
 /** grain kept in the pack when the rest goes to the bins, in place of three or four (two for a winter reserve) */
 export const GRAIN_IN_PACK = 1;
 export const grainInPack = (world: World, before: number): number => (on.bins && hasGrainKept(world) ? Math.min(before, GRAIN_IN_PACK) : before);
+/** With a granary known, is grain for the bins and not for the home, the cellar or the storehouse? options_work.ts optDepositFood asks. */
+export const grainGoesToBins = (world: World): boolean => on.bins && hasGrainKept(world);
+/** what taking grain to the bins scores above what it did (11 and one a unit up to ten): ordinary work scores 25 to 55 */
+export const BINS_WORTH = 14;
+export const binsWorth = (world: World): number => (on.bins && hasGrainKept(world) ? BINS_WORTH : 0);
 
 /** the signal a worked plot gives for a granary, and a granary or a worked plot for a bakery (0.6 lays one out) */
 export const GRAIN_WORKS_SIGNAL = 0.75;

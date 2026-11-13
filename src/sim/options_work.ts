@@ -1,4 +1,5 @@
 import { eveningFireOptions } from './evening_fire';
+import { grainGoesToBins } from './grain_kept';
 import { plotsWanted } from './farm_scale';
 import { spearReady, spearWorth, toolRecipe, wantsSpearReady } from './wooden_spear';
 import { toyOptions } from './toys';
@@ -248,7 +249,9 @@ function optDepositFood(ctx: Ctx): void {
   const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
   const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
   const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
-  const surplus = (smallPack||ration ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
+  // rules 243 (grain_kept.ts): with a granary known, grain is for the bins (production.ts optGranaryStore), not for here
+  const grainOut = grainGoesToBins(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'granary');
+  const surplus = (smallPack||ration ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf - (grainOut ? unreserved.grain ?? 0 : 0);
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
   // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
   const roomShort = basketRoomStall(ctx);
@@ -286,7 +289,7 @@ function optDepositFood(ctx: Ctx): void {
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
     for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) {
-      const have = unreserved[k] ?? 0;
+      const have = grainOut && k === 'grain' ? 0 : unreserved[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
         items[k] = give;
