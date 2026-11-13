@@ -553,7 +553,23 @@ What it did (`review_evidence/growth-20261113/wolves/r240/` and `lab240/`):
   43.7 -> 41.7 and deaths 0.7 -> 1.5 lean the rule's way inside the noise floor; baskets, buildings, plots and bites do not
   move. So arming everybody makes more stands and more dead wolves and does not, in two years, make fewer bites.
 
-**Not built yet:** a wolf's skin hung at a communal building.
+**Rules 241, a wolf's skin is hung where everybody gathers** (`src/sim/wolf_skin.ts`). The hide cut from a wolf's body is kept
+whole as a skin its cutter holds, not a hide in the pack; whoever killed the wolf values it at 46 and knows the wolf is dead
+(found while testing: at 239 and 240 the killer ran from where it had been until they next looked about them); the holder
+hangs it at the hall, or at the camp fire where they know no hall, three to a building, and keeps to the walk once begun; once
+a day somebody within five tiles of a hung skin takes heart (a thought worth 2 and 1 for each further skin, and 6 of their
+feeling of safety). It keeps no wolf away. Saved: `person.wolfSkins`, `building.wolfSkins`. The building inspector shows them.
+
+The two worths were set from measurements, six worlds over four years, each of which killed one wolf
+(`review_evidence/growth-20261113/wolves/skin-*`):
+
+| the hide worth to the killer | hanging worth | skins cut | skins hung | what happened |
+|---|---|---|---|---|
+| 22 | 16 | 1 of 5 | 1 | the offer stood 3rd to 16th among the killer's options (work scores 25 to 55) and the body rotted in two days |
+| 46 | 30 | 5 of 6 | 4 | birch's skin waited four and a half days and river's was unhung after six and a half; cedar's kill came half a day before the end |
+| 46 | 48, kept to for 240 ticks | 3 of 3 re-run | 3 | birch, fern and meadow hung theirs 182, 263 and 234 ticks after cutting, all at the camp fire |
+
+Pin `tests/v241_continuation.*` (fern, tick 17,400, a skin hung at the camp fire). The lab is running.
 
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
