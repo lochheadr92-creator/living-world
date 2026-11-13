@@ -466,6 +466,56 @@ also beyond chance: stored food a head is lower with the rule (3.9 against 5.4) 
 (10.7 against 6.3 bites in a world); deaths lean higher (1.1 against 0.2, inside the noise floor). More people sooner on the
 same food is the thing to watch: see the famine below.
 
+## Step I, second finding: the famine at 75 to 110 people (measured 13 November, not repaired)
+
+**Found.** In the twenty-year runs at rules 236, six of the eight worlds that grow (aspen, gen-1, gen-4, gen-5, meadow, river)
+lost a third to a half of their people inside two or three days, between years 9 and 18; cedar and fern had not by year 12.
+gen-1 84 -> 42 (days 142 to 143), gen-4 93 -> 57 (106 to 107), river 88 -> 58 (167 to 168). Each is a lean season ending in
+winter: wild food falls from about 400 units to about 40 in four days.
+
+**Measured** (`scripts/famine_probe.ts`, new, read-only; river replayed to day 160 at rules 236 and read every 200 ticks to day
+169; `review_evidence/growth-20261113/famine/`). It is not that there is no food. It is where the food is.
+
+- On the worst day (166.3) the settlement of 83 held 264 units in households' own buildings, 25 in packs and **none in any
+  shared store**; shared stores held 0 to 3 units throughout.
+- 27 of 35 households held nothing at all; 8 held three a head or more, the richest 27 to 41 a head.
+- Of 874 readings of a starving person, 5 in a hundred had food in their own household's stores and 3 in a hundred in their
+  pack. 78 in a hundred were out gathering, where there was nothing to find; 9 in a hundred were eating from a store; about
+  1 in a hundred was asking anybody for food.
+- All 23 who died of hunger: nothing in the pack, nothing in the household, no shared food within 20 tiles.
+
+So a settlement of this size has no common food and no working way for a household with a full cellar to feed a neighbour with
+none. gen-1 and gen-4 are being replayed the same way.
+
+**Not decided.** How food should reach the hungry is the owner's choice (a common store filled in plenty; the hungry asking
+those with a full cellar; rationing in a lean season). No rule is changed.
+
+## Wolves can be fought (rules 239 and 240, on the owner's direction)
+
+**Rules 239, a spear wounds and a wolf can be killed** (`src/sim/wolf_fight.ts`). Since rules 4 a won stand drove a wolf off
+and never hurt it. Now it takes 50 of the wolf's 100 health (8 more for each of up to two people standing by); a wolf brought
+to nothing dies and leaves a body of two meat and a hide, butchered as a deer's is; a wounded wolf mends five points a day;
+two years after a kill another wolf comes in at a map edge, 25 tiles or more from any settlement. Nobody goes looking for
+wolves. Saved: `world.wolfReturns`.
+
+Measured (`scripts/wolf_probe.ts`, six worlds, four years, one run each; `review_evidence/growth-20261113/wolves/`): a world
+has three wolves and one of them takes nearly all the stands. At a first setting of 34 mending ten a day, three wolves died in
+24 world-years; at 50 mending five a day, four (aspen, birch, fern, meadow), and fern's came back. People were bitten 4 to 40
+times a world in the four years. Lab, 12 worlds, 25 days: 0.8 wolves wounded and 0.1 killed a world, and nothing else moved
+beyond a single draw (stands offered are fewer with the rule, 11.4 against 17.5, beyond chance: a wounded wolf keeps away).
+
+**Rules 240, a wooden spear, and everybody grown wants one** (`src/sim/wooden_spear.ts`). A spear made by hand is two wood and
+no stone (60 ticks of work for 85); every grown person without one wants one at 1.9, under the basket's 2.1; its wood trip
+and its making are worth 8 more than another tool's, as the basket's are. Every place that read a hand tool's recipe now asks
+`toolRecipe(world, kind)`.
+
+Set from a measurement (`review_evidence/growth-20261113/wolves/arming/`): at rules 239 aspen had no spear until day 8; wanted
+at 1.5 with no worth it had 3 among 21 grown people on day 8; at 2.3 it had 9 on day 1 and its baskets fell from 9 to 2; at
+1.9 with the worth, aspen, birch and meadow had 7, 13 and 12 on day 8 with baskets and axes as before. What it does to stands,
+bites and kills over four years, and the lab, are running.
+
+**Not built yet:** a wolf's skin hung at a communal building.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and

@@ -1,0 +1,4 @@
+river: 48 days, rules 239; 60 alive; wolves 3 at the start, 3 at the end; 0 killed, 0 came back; 8 bites, 0 people killed by wolves; 13 spears
+  stands: offered 26, set out 13, tried 3, won 3 (wounded 3, killed 0), lost 0, the wolf left first 9
+  wounds by wolf (most first): 3; on days 31.9 41.9 43.9
+  from these wounds, wolves killed under other settings: wound 34, mends 10 a day: 0; wound 34, mends 5 a day: 0; wound 50, mends 10 a day: 0; wound 50, mends 5 a day: 0; wound 50, mends 2 a day: 1; wound 100: 1
