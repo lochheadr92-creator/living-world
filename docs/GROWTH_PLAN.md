@@ -746,7 +746,10 @@ against 248, hunger deaths 18 against 63 (16 of the 18 in gen-4); a granary in 1
 same eight went cedar 97 to 103, fern 122 to 92, gen-1 81 to 82, gen-2 86 to 77, gen-3 72 to 63, gen-4 56 to 63, gen-5 115 to 90,
 meadow 92 to 50 (aspen, stopped at year 10, 111 to 57). Pairing each lean season the 244 worlds reached with the same season at 238
 (lean seasons fall on the same days in both): the reviewer counts 47, one costing 10 percent or more at 244 (gen-4) against nine at
-238; a second pass recomputes this (below, when read).
+238. A second pass (Haiku, `lean-seasons.md`, same day ranges in both rule sets) reproduces it: 46 seasons reached in full by the 244
+runs, one costing 10 percent or more at 244 (gen-4, 115 to 94) against eight at 238 among the same 46 (nine with meadow's season at
+day 127, cut short at 132); the seven that cost 238 10 percent or more and 244 less are birch 66-70, fern 121-123, gen-1 66-70,
+gen-2 121-125, gen-3 103-105 and 123-127, gen-5 126-128. Several 238 losses fall after the 244 runs stop, so they have no pair.
 
 **Verdict.** The famine as measured, at 75 to 125 people, is answered by rules 242 to 244, with fair confidence. Not shown: anything
 above about 128 people (the wild is capped near 578 units), and the large 238 losses that came after year 11 (aspen day 127, gen-1
