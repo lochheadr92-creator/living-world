@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "5a76b75dbeeec53a55659578af5c7df96994bb78",
+    "rules": 237,
+    "content": "913298cf4fb14fc62f6a4881df74cee2270dacdb739bf4d8b4358b63c6a8d53e",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river (arrivals on) at tick 9,500, where a couple holds three food a head only with its cellar counted, saved and continued 120 ticks."
+  },
+  "saved": "93a23a56ade1c1f8701cf6130b67c8dd15ea01ac2cadfe9d49ebceee8ccfad53",
+  "continued": "bc0bbfde9d0a5a741e5b70fde211d94cc3e672b42d19da927acfe5df076844f4",
+  "tick": 9500,
+  "couplesFedByCellar": 1,
+  "expecting": 0
+}
