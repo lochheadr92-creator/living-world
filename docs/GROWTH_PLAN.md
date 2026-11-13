@@ -734,6 +734,49 @@ whether the stocking drive should rest on the true figure instead, is the owner'
 which is a few years from a saved settlement, rule on against off, if wanted. Not looked into: a told glance with a later `seen`
 replaces the exact belief of a member of the building's own household until their next look.
 
+## The famine at rules 244: what years 1 to 11 show, and the next lever (14 November)
+
+The twelve twenty-year runs at rules 244 were killed by an app restart at years 10 to 11 (eight at day 132, four at day 120 of 240;
+they cannot resume). What they and the other measurements show, read by the top-tier reviewer (`review_evidence/growth-20261114/verdict/`;
+one run a seed throughout, a description and not a test):
+
+**Years 1 to 11, 244 against 238** (`gen244-vs-gen238-years1-11.md`): mean people at year 10 112.1 against 91.4; deaths to day 120 66
+against 248, hunger deaths 18 against 63 (16 of the 18 in gen-4); a granary in 11 of 12 worlds against 4; plots 147 to 209 against
+102 to 124; no 244 world fell 30 percent from its peak by year 10; the eight that reached year 11 all grew through it where at 238 the
+same eight went cedar 97 to 103, fern 122 to 92, gen-1 81 to 82, gen-2 86 to 77, gen-3 72 to 63, gen-4 56 to 63, gen-5 115 to 90,
+meadow 92 to 50 (aspen, stopped at year 10, 111 to 57). Pairing each lean season the 244 worlds reached with the same season at 238
+(lean seasons fall on the same days in both): the reviewer counts 47, one costing 10 percent or more at 244 (gen-4) against nine at
+238; a second pass recomputes this (below, when read).
+
+**Verdict.** The famine as measured, at 75 to 125 people, is answered by rules 242 to 244, with fair confidence. Not shown: anything
+above about 128 people (the wild is capped near 578 units), and the large 238 losses that came after year 11 (aspen day 127, gen-1
+137, river 162, cedar 164, birch 174, fern 183). gen-4 is nearer a control than a counter-example: the one world with no granary has the
+one famine, on the days it had at 238. The twelve runs are NOT relaunched at 244: rules 246 supersedes them, and the open question
+(130 people and up) is reached by four years from the saved settlements. The twenty-year set is the milestone after 246.
+
+**Where the grain goes** (`scripts/raw_grain_probe.ts`, six worlds, two years): grain is not short, turning it into food is. About 1.7
+grain a head a day is grown; 58 percent is eaten raw (50 percent from a pack, grain the only food in 12,774 of 12,776 bites), 28
+percent is lost (field rot 15.5, bin spoilage 12.6), 2.3 percent is milled; 455 flour and 424 loaves in six worlds. The bakery fires
+1.6 times a day of a possible 8: a firing takes five or six trips, each scoring 19 to 32 against a first choice of 38 to 44, for four
+loaves. Ranked: (1) bakery and mill throughput, (2) gen-4's missing granary, (3) bin spoilage (tending scores 15 against 37), (4) the
+stocking drive, (5) field rot (one constant, `RIPE_ROT_TICKS`). Not to do: more plots, a loaf worth more, forbidding raw grain (the
+starving ate 201 units), two levers in one rules number.
+
+**Rules 246, a full oven (proposed, not built).** A milling or firing takes one, two or three measures, the largest the household's
+counted grain covers: bakery milling 4, 8 or 12 grain to 3, 6 or 9 flour; mill 6, 12 or 18 to 5, 10 or 15; firing 3, 6 or 9 flour with
+2, 3 or 4 water and a wood to 4, 8 or 12 loaves; work 1, 1.5, 2 times. New `src/sim/oven_load.ts`, parts `mill` and `bake`, arm
+`rich-no-oven-load`. Whether a batch can vary in size is being checked against source before it is built. Measure: no bakery stands
+before day 25, so the 25-day lab only checks that three seeds end day 25 on the hash of 245; then four years from the six saves, four
+arms (244 as saved, 245, 246, 246 with own stores off).
+
+**Rules 245**: keep the knowledge and let the four-arm run decide the stocking drive; if the 245 arm meets lean seasons with less a head
+or loses more people, the repair is its own rules number (a reserve in days of food on the true count, bread counted at its worth in
+`foodCount`). The target is 6 units a head, two days, in `hhState`; only the false count of one made households overshoot.
+
+**gen-4 and the granary.** `findBuildSpot` looks 3 to 11 tiles from the hub for a granary (bakery 5 to 14, kiln 7 to 15) and gen-4 is
+the most crowded world at year 1; likeliest, no free footprint ("no suitable spot", a 900-tick refusal, repeated). A replay of gen-4 to
+day 36 and a read-only probe are running to confirm it.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and
