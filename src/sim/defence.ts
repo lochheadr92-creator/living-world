@@ -38,6 +38,7 @@ import type { Animal, Person, Tool, World } from './types';
 import { hyp } from './util';
 import { isThreat, setFacingCheck, setWaryCheck } from './wildlife';
 import { woundWolf } from './wolf_fight';
+import { sawItDie } from './wolf_skin';
 
 /** the rules version at which wolf defence starts; nothing here applies to a world below it */
 export const DEFENCE_FROM_VERSION = 4;
@@ -340,6 +341,7 @@ function resolve(world: World, p: Person, a: Animal, act: { data: Record<string,
   const hurt = woundWolf(world, a, p, helpers);
   noteWound(hurt);
   if (hurt === 'killed') {
+    sawItDie(world, p, a.id); // rules 241 (wolf_skin.ts)
     p.skills.forage = Math.min(1.8, p.skills.forage + 0.008);
     addFx(world, 'bite', wx, wy, 0);
     const from = forWhom && forWhom !== p.id ? `, which was after ${forName}` : '';

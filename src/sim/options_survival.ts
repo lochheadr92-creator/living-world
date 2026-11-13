@@ -1,4 +1,5 @@
 import {hasRods} from './fishing_rods';
+import { wolfSkinOptions } from './wolf_skin';
 import {taskMultiplier} from './tools';
 import {hasCellars} from './cellars';
 import {wellOptions} from './wells';
@@ -761,6 +762,7 @@ export function survivalOptions(ctx: Ctx): void {
   optEat(ctx);
   huntOptions(ctx);
   carcassOptions(ctx);
+  wolfSkinOptions(ctx); // rules 241 (wolf_skin.ts)
   livestockOptions(ctx);
   gearOptions(ctx);
   optDrink(ctx);

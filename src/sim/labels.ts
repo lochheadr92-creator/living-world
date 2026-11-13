@@ -60,6 +60,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   animal_work:'animal keeping',
   gear_work: 'gear work',
   butcher: 'butchering',
+  hang_skin: 'hanging a wolf skin',
   alone: 'taking some time alone',
   eat: 'eating',
   eat_store: 'eating from stores',

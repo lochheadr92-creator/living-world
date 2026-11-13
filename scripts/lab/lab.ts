@@ -6,6 +6,7 @@ import { GROUNDWATER_PARTS, groundwaterPartOn, setGroundwater } from '../../src/
 import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
 import { WOLF_FIGHT_PARTS, setWolfFight, wolfFightPartOn } from '../../src/sim/wolf_fight';
 import { WOODEN_SPEAR_PARTS, setWoodenSpear, woodenSpearPartOn } from '../../src/sim/wooden_spear';
+import { WOLF_SKIN_PARTS, setWolfSkin, skinsHung, wolfSkinPartOn } from '../../src/sim/wolf_skin';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
@@ -283,6 +284,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 241 (wolf_skin.ts): all three parts removed (equal to rules 240), and each part alone
+  if (kind === 'rich-no-wolf-skin') return { spec: label, summary: 'the hide of a wolf is an ordinary hide and nothing is hung anywhere, as before rules 241; no effect below rules 241', install() { const was = WOLF_SKIN_PARTS.map((k) => wolfSkinPartOn(k)); setWolfSkin(false); return () => WOLF_SKIN_PARTS.forEach((k, i) => setWolfSkin(was[i], k)); } };
+  for (const part of WOLF_SKIN_PARTS) if (kind === 'rich-no-wolf-skin-' + part) return { spec: label, summary: `${part === 'keep' ? 'the hide of a wolf is an ordinary hide' : part === 'hang' ? 'a wolf skin is kept and never hung' : 'a hung wolf skin gives nobody heart'}; no effect below rules 241`, install() { const was = wolfSkinPartOn(part); setWolfSkin(false, part); return () => setWolfSkin(was, part); } };
   // rules 240 (wooden_spear.ts): all three parts removed (equal to rules 239), and each part alone
   if (kind === 'rich-no-wooden-spear') return { spec: label, summary: 'a spear takes a stone and is wanted only after a wolf has been met, as before rules 240; no effect below rules 240', install() { const was = WOODEN_SPEAR_PARTS.map((k) => woodenSpearPartOn(k)); setWoodenSpear(false); return () => WOODEN_SPEAR_PARTS.forEach((k, i) => setWoodenSpear(was[i], k)); } };
   for (const part of WOODEN_SPEAR_PARTS) if (kind === 'rich-no-wooden-spear-' + part) return { spec: label, summary: `${part === 'wood' ? 'a spear made by hand takes a stone' : part === 'ready' ? 'a spear is wanted only after a wolf has been met' : 'a spear and its wood are worth no more than another tool'}; no effect below rules 240`, install() { const was = woodenSpearPartOn(part); setWoodenSpear(false, part); return () => setWoodenSpear(was, part); } };
@@ -767,6 +771,7 @@ export const METRICS = [
   'wolvesWounded',
   'wolvesKilled',
   'wolvesAtEnd',
+  'wolfSkinsHung',
   'bitesTaken',
   // What ordinary life is for, counted over the whole branch (11 November 2026, the survival-pressure rebalance): the conversations
   // that happen (one count per conversation, by purpose; a conversation that never opened is not counted), the meals sat down to, the
@@ -1224,6 +1229,7 @@ export function outcomeOf(
       wolvesWounded: d.wounded,
       wolvesKilled: d.killed,
       wolvesAtEnd: w.animals.filter((a) => a.type === 'wolf').length,
+      wolfSkinsHung: skinsHung(w),
       bitesTaken: defence.bites,
       chats: life.chats,
       familyTime: life.familyTime,

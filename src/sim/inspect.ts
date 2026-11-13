@@ -838,6 +838,8 @@ export function describeEntity(world: World, id: number): EntityView | null {
         rows.push(['State', b.fuel > 0 ? 'burning' : 'out']);
       }
       if (b.store.cap > 0) rows.push(['Storage', `${Math.round(weightOf(b.store.items))}/${b.store.cap} used`]);
+      // rules 241 (wolf_skin.ts): the wolf skins hung here
+      if(b.wolfSkins)rows.push(['Wolf skins',b.wolfSkins===1?'one hangs here, from a wolf killed with a spear':`${b.wolfSkins} hang here, from wolves killed with spears`]);
       if(b.hearth){
         rows.push(['Indoor hearth',b.hearth.fuel>0?'burning':b.hearth.heat>0?'fuel exhausted; residual heat is cooling':'cold; needs fuel']);
         rows.push(['Room heat',`+${b.hearth.heat.toFixed(1)} degrees for occupants only`]);

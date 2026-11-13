@@ -1,4 +1,5 @@
 import type {Activity,Animal,CarcassPart,Person,Pile,World} from './types';
+import {keepsWolfSkin,takeWolfSkin,wolfSkinWorth} from './wolf_skin';
 import {newActivity,registerHandler} from './activities';
 import {addItem,ledgerCreate,ledgerSpoil,weightOf} from './economy';
 import {WEIGHT} from './constants';
@@ -53,7 +54,9 @@ registerHandler('butcher',{
   const b=bodyFor(w,a)!,c=b.carcass!,part=a.data.part as CarcassPart;
   c.claim={person:p.id,until:w.tick+2};c.work[part]++;a.progress=c.work[part];
   if(c.work[part]<CARCASS_WORK)return 'continue';
-  c.work[part]=0;c.remaining[part]--;c.recovered[part]++;addItem(p.inv,part,1);
+  c.work[part]=0;c.remaining[part]--;c.recovered[part]++;
+  // rules 241 (wolf_skin.ts): the hide of a wolf is kept whole as a skin the person holds, not a hide in the pack
+  if(keepsWolfSkin(w,c.species,part))takeWolfSkin(w,p);else addItem(p.inv,part,1);
   if(PARTS.every(k=>c.remaining[k]===0))c.emptySince=w.tick;
   observe(w,p,b);
   if(hasCarcassBatches(w)){
@@ -90,7 +93,7 @@ export function carcassOptions(ctx:Ctx):void{
   const distance=Math.hypot(b.x-p.x,b.y-p.y),travel=distance/Math.max(.03,ctx.speed);
   for(const part of PARTS){
    if((b.carcassParts[part]??0)<1||weightOf(p.inv)+WEIGHT[part]>carryCap(w,p))continue;
-   const need=part==='meat'?Math.max(0,ctx.drives.hunger)*.5+(ctx.food<2?24:6):part==='hide'?(p.inv.garment?5:24):ctx.food<2?18:4;
+   const need=part==='meat'?Math.max(0,ctx.drives.hunger)*.5+(ctx.food<2?24:6):part==='hide'?Math.max(p.inv.garment?5:24,wolfSkinWorth(w,p,b.hh??0)):ctx.food<2?18:4;
    const util=need-pen(travel)*.6;if(util<5)continue;
    addOption(ctx,{kind:'butcher',key:`butcher:${b.id}:${part}`,label:`Recover ${part} from the ${runsRulesVersion(w,130)?'body':'deer'}`,goal:'use the finite body before it decays',need:part==='hide'?'warmth':'hunger',util,parts:[['known recoverable body part',need],['walking',-pen(travel)*.6]],eta:travel+CARCASS_WORK,targetId:b.id,tag:part==='hide'?'warmth':'food',yields:part,make:()=>newActivity(w,p,{kind:'butcher',label:`Recovering ${part}`,goal:'use the body before it decays',targetId:b.id,targetType:'pile',tx:b.x,ty:b.y,spotX:b.x,spotY:b.y,utility:util,minCommit:20,maxTicks:900,data:{part}})});
   }

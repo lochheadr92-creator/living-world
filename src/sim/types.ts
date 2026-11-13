@@ -241,6 +241,7 @@ export type ActivityKind =
   | 'attend'
   | 'hunt'
   | 'butcher'
+  | 'hang_skin'
   | 'animal_work'
   | 'gear_work'
   | 'alone'
@@ -750,6 +751,8 @@ export interface Person {
   lastPercept: { tick: number; seen: number; newBeliefs: number };
   nextThink: number;
   cooldowns: Record<string, number>;
+  /** rules 241 (wolf_skin.ts): wolf skins this person holds, cut from a wolf's body and not yet hung; absent when none */
+  wolfSkins?: number;
   /** chronotype offset to desynchronise bedtimes */
   chrono: number;
   asked: Record<number, number>;
@@ -870,6 +873,8 @@ export interface Building {
   fuel: number;
   /** Paid home fitting; absent means no installed hearth. */
   hearth?: {fuel:number;heat:number};
+  /** rules 241 (wolf_skin.ts): wolf skins hung at this shared building; absent until one is */
+  wolfSkins?: number;
   builtTick: number;
   doorX: number;
   doorY: number;

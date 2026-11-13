@@ -66,6 +66,7 @@ import { updateSources } from './sources';
 import { releaseStaleBench } from './tools';
 import { updateWildlife } from './wildlife';
 import { updateWolfFight } from './wolf_fight';
+import { updateWolfSkin } from './wolf_skin';
 import type { ItemKind, Person, World } from './types';
 
 /** One simulation tick. The only thing that ever mutates the world. */
@@ -110,6 +111,7 @@ export function stepWorld(world: World): void {
   livestockTick(world);
   updateWildlife(world);
   updateWolfFight(world); // rules 239 (wolf_fight.ts)
+  updateWolfSkin(world); // rules 241 (wolf_skin.ts)
   rebuildMobileGrid(world);
 
   const list = world.persons.slice();
@@ -376,6 +378,8 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
   if (world.groundwater) push('Groundwater' + JSON.stringify(world.groundwater));
   if (world.wolfReturns) push('WolfReturns' + JSON.stringify(world.wolfReturns)); // rules 239 (wolf_fight.ts)
+  for (const p of world.persons) if (p.wolfSkins) push('SkinHeld' + p.id + ':' + p.wolfSkins); // rules 241 (wolf_skin.ts)
+  for (const b of world.buildings) if (b.wolfSkins) push('SkinHung' + b.id + ':' + b.wolfSkins);
   if (world.flood) push('Flood' + JSON.stringify(world.flood));
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.kind==='flood')push('FloodMemory'+p.id+':'+JSON.stringify(b));
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.waterSupply !== undefined) push('WaterMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.waterSupply);
