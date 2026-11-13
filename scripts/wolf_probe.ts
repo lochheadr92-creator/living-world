@@ -4,7 +4,9 @@
 // (as if the wolves had behaved the same, which a dead wolf does not).
 //
 //   npx vite-node scripts/wolf_probe.ts -- --seed aspen --days 36 [--rules N] [--out wolves.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
 import { writeFileSync } from 'node:fs';
+import { worldFromArgs } from './world_args';
 import { DAY } from '../src/sim/constants';
 import { defProbe, defReset, defSnapshot } from '../src/sim/defence';
 import { createWorld } from '../src/sim/factory';
@@ -19,13 +21,12 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '36'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+// a world read from --load (a save point written by a long run) or made fresh (scripts/world_args.ts)
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 defProbe.on = true;
 defReset();
 
@@ -37,7 +38,7 @@ let killed = 0, cameBack = 0, bites = 0, wolfDeaths = 0, deceased = 0;
 // rules 241 (wolf_skin.ts): when the first skin was cut and when the first was hung
 let firstSkinCut = 0, firstSkinHung = 0;
 let lastEvent = w.events.length ? w.events[w.events.length - 1].id : 0;
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   const now = wolvesNow();
   for (const [id, h] of now) {

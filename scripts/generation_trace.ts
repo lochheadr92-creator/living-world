@@ -10,6 +10,7 @@
 // left, the id counter, where the living came from, ages, couples, and the lab's own life counters as running totals).
 // `deaths`: every death with its day, cause, age and whether the person was a founder, born here or an arrival.
 import { writeFileSync } from 'node:fs';
+import { savePoint } from './world_args';
 import { CRITICAL, DAY, DAYS_PER_YEAR } from '../src/sim/constants';
 import { foodUnits } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
@@ -31,6 +32,9 @@ const seed = opt('seed', 'aspen');
 const days = Number(opt('days', '240'));
 const arrivals = opt('arrivals', 'on') === 'on';
 const out = opt('out', '');
+// save points (scripts/world_args.ts): the whole world written every so many days, for a probe to start from
+const saveEvery = Number(opt('save-every', '0'));
+const saveDir = opt('save-dir', '');
 
 const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: arrivals });
 const pinned = opt('rules', '');
@@ -120,6 +124,7 @@ for (let i = 1; i <= days * DAY; i++) {
   crit = new Set();
   hungry = 0;
   samples = 0;
+  if (saveEvery > 0 && saveDir && day % saveEvery === 0) savePoint(w, saveDir);
   if (day % DAYS_PER_YEAR !== 0 && day !== days) continue;
   const left = (types: string[]): number => Math.round(w.sources.filter((s) => types.includes(s.type)).reduce((n, s) => n + s.amount, 0));
   const ages = alive.map((p) => ageYears(w, p));

@@ -3,7 +3,9 @@
 // at the end, and how many fields, granaries, mills and bakeries there are for how many people. A year is twelve days.
 //
 //   npx vite-node scripts/grain_probe.ts -- --seed aspen --days 72 [--from 48] [--rules N] [--out grain.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
 import { writeFileSync } from 'node:fs';
+import { worldFromArgs } from './world_args';
 import { DAY, NUTRITION } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
 import { freshRunSettings, parseRunRules } from '../src/sim/profiles';
@@ -16,14 +18,13 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '72'));
 const from = Number(opt('from', '0')); // the flows are counted from this day on (the world is run from the start)
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+// a world read from --load (a save point written by a long run) or made fresh (scripts/world_args.ts)
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const FOODS = Object.keys(NUTRITION) as (keyof typeof NUTRITION)[];
 type Snap = { created: Record<string, number>; consumed: Record<string, number>; spoiled: Record<string, number>; reasons: Record<string, number> };
@@ -33,7 +34,7 @@ let base: Snap = snap();
 const eaten: Record<string, number> = {};
 let prev = new Map<number, Record<string, number>>();
 let personDays = 0;
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   if (i === from * DAY + 1) { base = snap(); for (const k of Object.keys(eaten)) delete eaten[k]; personDays = 0; }
   stepWorld(w);
   if (i % DAY === 0) personDays += w.persons.filter((p) => p.alive).length;

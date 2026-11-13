@@ -4,7 +4,9 @@
 // reading before it, and how far the nearest shared food was.
 //
 //   npx vite-node scripts/famine_probe.ts -- --seed gen-4 --from 100 --to 108 [--rules 236] [--out famine.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
 import { writeFileSync } from 'node:fs';
+import { worldFromArgs } from './world_args';
 import { CRITICAL, DAY } from '../src/sim/constants';
 import { foodUnits } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
@@ -18,14 +20,13 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'gen-4');
+let seed = opt('seed', 'gen-4');
 const from = Number(opt('from', '100'));
 const to = Number(opt('to', '108'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+// a world read from --load (a save point written by a long run) or made fresh (scripts/world_args.ts)
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const bump = (o: Record<string, number>, k: string, n = 1): void => { o[k] = (o[k] ?? 0) + n; };
 const r1 = (n: number): number => Math.round(n * 10) / 10;
@@ -43,7 +44,7 @@ let flowAt = { made: 0, eaten: 0, spoiled: 0, reasons: {} as Record<string, numb
 const flows: Record<string, unknown>[] = [];
 const snapFlow = () => ({ made: foodOf(w.ledger.created as never), eaten: foodOf(w.ledger.consumed as never), spoiled: foodOf(w.ledger.spoiled as never), reasons: { ...w.ledger.reasons } });
 
-for (let i = 1; i <= to * DAY; i++) {
+for (let i = w.tick + 1; i <= to * DAY; i++) {
   stepWorld(w);
   if (i < from * DAY) { deathsSoFar = w.deceased.length; if (i === from * DAY - 1) flowAt = snapFlow(); continue; }
   const todays = w.deceased.slice(deathsSoFar);

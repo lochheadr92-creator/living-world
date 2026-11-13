@@ -4,7 +4,9 @@
 // ranks against their first choice, and what is refused and why.
 //
 //   npx vite-node scripts/bake_probe.ts -- --seed meadow --days 40 [--rules N]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
 import { DAY } from '../src/sim/constants';
+import { worldFromArgs } from './world_args';
 import { generateOptions } from '../src/sim/decision';
 import { createWorld } from '../src/sim/factory';
 import { stageOf } from '../src/sim/people';
@@ -18,18 +20,17 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'meadow');
+let seed = opt('seed', 'meadow');
 const days = Number(opt('days', '40'));
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: true });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w = deserializeWorld(serializeWorld(createWorld(settings)));
+// a world read from --load (a save point written by a long run) or made fresh (scripts/world_args.ts)
+const { w } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const bump = (o: Record<string, number>, k: string): void => { o[k] = (o[k] ?? 0) + 1; };
 const ABOUT = /bread|flour|mill|bak|granary|bins/i;
 const offered: Record<string, number> = {}, rankOf: Record<string, number[]> = {}, first: Record<string, number> = {}, refused: Record<string, number> = {}, doing: Record<string, number> = {};
 let looks = 0, wantsBread = 0, knowsBakery = 0, fourGrain = 0, firstBakery = 0, firstGranary = 0, baking = 0;
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   if (!firstBakery && w.buildings.some((b) => b.type === 'bakery')) firstBakery = w.tick;
   if (!firstGranary && w.buildings.some((b) => b.type === 'granary')) firstGranary = w.tick;

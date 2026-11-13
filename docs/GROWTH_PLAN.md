@@ -631,6 +631,25 @@ and 243 pins are recorded at a head whose current version is 244, because 243 wa
 holds at home (`options_work.ts hhState` reads the home's remembered food), so households may think themselves short when
 they are not; not measured. `tests/preservation.test.ts` has ten failures that predate this work.
 
+## Engine speed: save points and a bundled runner (14 November, no rule changed)
+
+The owner, 14 November: there has to be engine work to improve what the engine can do, using the machine.
+
+**Save points** (`scripts/world_args.ts`). `scripts/generation_trace.ts --save-every N --save-dir DIR` writes the whole world
+every N days; `--load FILE` starts `famine_probe`, `grain_probe`, `bake_probe` and `wolf_probe` from a save. Checked: a probe
+from a day-3 save gave byte-identical output to the same probe replayed from day one. Looking at a famine in year nine no
+longer costs an hour of replay.
+
+**A bundled runner** (`scripts/fast.mjs <script.ts> -- args`). The script and all it imports are bundled into one JavaScript
+file (esbuild, already installed with vite) and run by node. Through vite-node every call from one source file into another
+goes by way of the loader's module object. Measured side by side under the same load, aspen, four years: 9.9 minutes bundled
+against 12.8 through vite-node, the output identical. The pin recorders read files beside themselves and still run through
+vite-node.
+
+**From now on** (the owner, 14 November): twenty-year sets of runs are for milestones, not for each rule. A rule gets its
+tests and pin, the 25-day lab where it acts early, and for late effects a few years run from a saved large settlement with the
+rule on and off.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and
