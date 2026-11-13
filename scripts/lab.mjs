@@ -10,7 +10,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { cpus } from 'node:os';
 import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
 const args = process.argv.slice(2);
 const opt = (name, dflt) => {
@@ -68,9 +68,27 @@ if (existsSync(out)) {
 }
 mkdirSync(out, { recursive: true });
 if (!existsSync(provenancePath)) writeFileSync(provenancePath, JSON.stringify(provenance, null, 2) + '\n');
+// The seed workers and the report are bundled once into plain JavaScript and run from the bundle (esbuild, already a dependency
+// of vite). The same TypeScript runs either way and gives the same rows; through vite-node every call across two source files
+// goes by way of the loader's module object, and the bundle was measured about a quarter quicker (docs/GROWTH_PLAN.md "Engine speed").
+// `--runner vite` runs the workers through vite-node as before; a bundle that fails to build falls back to it and says so.
+const runner = opt('runner', 'bundle');
+if (runner !== 'bundle' && runner !== 'vite') throw new Error('--runner must be bundle or vite');
+const bundles = new Map();
+const bundleOf = (script) => {
+  if (runner !== 'bundle') return null;
+  if (bundles.has(script)) return bundles.get(script);
+  const file = join(out, 'bundle', basename(script).replace(/\.ts$/, '.mjs'));
+  const built = spawnSync(process.execPath, [join('node_modules', 'esbuild', 'bin', 'esbuild'), script, '--bundle', '--platform=node', '--format=esm', '--target=node22', `--outfile=${file}`, '--log-level=error'], { encoding: 'utf8' });
+  const ok = built.status === 0 && existsSync(file);
+  if (!ok) console.error(`could not bundle ${script}; running it through vite-node: ${(built.stderr || '').trim()}`);
+  bundles.set(script, ok ? file : null);
+  return bundles.get(script);
+};
 const node = (script, rest, stdout) =>
   new Promise((resolve) => {
-    const p = spawn(process.execPath, [vite, script, '--', ...rest], { stdio: ['ignore', stdout ? 'pipe' : 'inherit', 'inherit'] });
+    const bundle = bundleOf(script);
+    const p = spawn(process.execPath, bundle ? [bundle, '--', ...rest] : [vite, script, '--', ...rest], { stdio: ['ignore', stdout ? 'pipe' : 'inherit', 'inherit'] });
     if (stdout) p.stdout.pipe(stdout);
     p.on('exit', (code) => resolve(code));
   });
