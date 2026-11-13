@@ -1,0 +1,9 @@
+aspen dose 1.5 
+  d1: spears 0 baskets 9 axes 2 of 18 grown
+  d2: spears 0 baskets 13 axes 2 of 18 grown
+  d3: spears 0 baskets 13 axes 3 of 19 grown
+  d4: spears 2 baskets 14 axes 4 of 19 grown
+  d5: spears 2 baskets 14 axes 4 of 19 grown
+  d6: spears 2 baskets 14 axes 4 of 21 grown
+  d7: spears 3 baskets 16 axes 4 of 21 grown
+  d8: spears 3 baskets 17 axes 4 of 21 grown

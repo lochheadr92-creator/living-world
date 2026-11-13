@@ -7,19 +7,24 @@
 // From 240, in rich worlds:
 //   wood   a spear made by hand is a sharpened stake: two wood and no stone, 60 ticks of work in place of 85. Nobody has to
 //          find stone before they can defend themselves. (An iron one still comes from the smithy, as before.)
-//   ready  every grown person without a spear wants one, wolf or no wolf, a little below the other tools (SPEAR_READY
-//          against about 2 for a basket and 2.2 for a spear once a wolf has been met), so it is made in the first days and
-//          not instead of the basket and the axe.
+//   ready  every grown person without a spear wants one, wolf or no wolf: SPEAR_READY (1.9), under the basket's floor of
+//          2.1 so the basket still comes first, and under the 2.2 of a spear once a wolf has been met.
+//   worth  the wood trip for a spear and the making of it score SPEAR_WORTH more than another tool's, as the basket's do
+//          (carry_more.ts): without it a wanted tool that is not a basket waits days to be made.
+//
+// The two numbers were set from aspen, birch and meadow over their first eight days: at a want of 1.5 and no worth aspen
+// had 3 spears among 21 grown people on day 8; at 2.3 it had 9 on day 1 and its baskets fell from 9 to 2; at 1.9 with a
+// worth of 8 the three worlds had 7, 13 and 12 spears on day 8 and as many baskets and axes as before.
 //
 // Every place that reads a hand tool's recipe asks `toolRecipe`, so the plan, the errand for materials, the craft and the
-// saved project all agree on what a spear is made of. Nothing is saved. Two switched parts. Rich worlds at rules 240 and later.
+// saved project all agree on what a spear is made of. Nothing is saved. Three switched parts. Rich worlds at rules 240 and later.
 import { TOOL_RECIPE } from './constants';
 import { runsRulesVersion } from './rulesversion';
 import type { ToolKind, World } from './types';
 
-export const WOODEN_SPEAR_PARTS = ['wood', 'ready'] as const;
+export const WOODEN_SPEAR_PARTS = ['wood', 'ready', 'worth'] as const;
 export type WoodenSpearPart = (typeof WOODEN_SPEAR_PARTS)[number];
-const on: Record<WoodenSpearPart, boolean> = { wood: true, ready: true };
+const on: Record<WoodenSpearPart, boolean> = { wood: true, ready: true, worth: true };
 /** Lab switch (never saved or hashed): both parts, or one. */
 export function setWoodenSpear(enabled: boolean, part?: WoodenSpearPart): void {
   if (part) on[part] = enabled;
@@ -31,12 +36,22 @@ export const hasWoodenSpear = (world: World): boolean => world.settings.dynamics
 /** the work a wooden spear takes, in place of the 85 of the stone-tipped one */
 export const STAKE_WORK = 60;
 /** how much a grown person with no spear wants one when no wolf has been met */
-export const SPEAR_READY = 1.5;
+export const SPEAR_READY = 1.9;
+let readyDose: number | null = null;
+/** Lab switch (never saved or hashed): another strength for the want, or null for SPEAR_READY. */
+export function setSpearReady(dose: number | null): void { readyDose = dose; }
+export const spearReady = (): number => readyDose ?? SPEAR_READY;
 
 const STAKE = { ...TOOL_RECIPE.spear, stone: 0, work: STAKE_WORK };
 /** What a hand tool is made of in this world: the table in constants.ts, except the wooden spear from rules 240. */
 export function toolRecipe(world: World, kind: ToolKind): (typeof TOOL_RECIPE)[ToolKind] {
   return kind === 'spear' && on.wood && hasWoodenSpear(world) ? STAKE : TOOL_RECIPE[kind];
 }
+/** what the wood trip for a spear, and the making of it with the wood in hand, score above another tool's (the basket's is 8) */
+export const SPEAR_WORTH = 8;
+let worthDose: number | null = null;
+/** Lab switch (never saved or hashed): another worth, or null for SPEAR_WORTH. */
+export function setSpearWorth(dose: number | null): void { worthDose = dose; }
+export const spearWorth = (world: World, tool: string): number => (on.worth && tool === 'spear' && hasWoodenSpear(world) ? worthDose ?? SPEAR_WORTH : 0);
 /** Does a grown person want a spear though they have met no wolf? Only from rules 240. */
 export const wantsSpearReady = (world: World): boolean => on.ready && hasWoodenSpear(world);

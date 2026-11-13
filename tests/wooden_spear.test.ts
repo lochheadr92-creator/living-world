@@ -17,7 +17,8 @@ import { RNG } from '../src/sim/rng';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
 import { testKit } from '../src/sim/scenes';
 import { toolOf } from '../src/sim/tools';
-import { SPEAR_READY, STAKE_WORK, WOODEN_SPEAR_PARTS, setWoodenSpear, toolRecipe } from '../src/sim/wooden_spear';
+import { BASKET_WANT_FLOOR } from '../src/sim/carry_more';
+import { SPEAR_READY, SPEAR_WORTH, STAKE_WORK, WOODEN_SPEAR_PARTS, setWoodenSpear, spearWorth, toolRecipe } from '../src/sim/wooden_spear';
 import type { World } from '../src/sim/types';
 import { give } from './helpers/kit';
 import { settingsFor } from './helpers/util';
@@ -67,6 +68,10 @@ describe('rules 240: a wooden spear, and everybody grown wants one', () => {
     expect(wantedTool(ctxOf(now.w, now.ada))).toBe('spear');
     expect(wantedTool(ctxOf(before.w, before.ada))).not.toBe('spear');
     expect(SPEAR_READY, 'below the 2.2 a spear is wanted at once a wolf has been met').toBeLessThan(2.2);
+    expect(SPEAR_READY, 'and below the basket, which still comes first').toBeLessThan(BASKET_WANT_FLOOR);
+    expect(spearWorth(now.w, 'spear')).toBe(SPEAR_WORTH);
+    expect(spearWorth(now.w, 'axe')).toBe(0);
+    expect(spearWorth(before.w, 'spear')).toBe(0);
   });
 
   it('a child wants none, and somebody who has one wants no second', () => {
@@ -110,5 +115,8 @@ describe('rules 240: a wooden spear, and everybody grown wants one', () => {
     const unwanted = scene(240, { wood: 2 });
     expect(wantedTool(ctxOf(unwanted.w, unwanted.ada))).not.toBe('spear');
     expect(toolRecipe(unwanted.w, 'spear').stone).toBe(0);
+    setWoodenSpear(true);
+    setWoodenSpear(false, 'worth');
+    expect(spearWorth(unwanted.w, 'spear')).toBe(0);
   });
 });

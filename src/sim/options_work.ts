@@ -1,5 +1,5 @@
 import { eveningFireOptions } from './evening_fire';
-import { SPEAR_READY, toolRecipe, wantsSpearReady } from './wooden_spear';
+import { spearReady, spearWorth, toolRecipe, wantsSpearReady } from './wooden_spear';
 import { toyOptions } from './toys';
 import { hungerToActOn, providePull } from './child_feeding';
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
@@ -409,7 +409,7 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   if (tool) {
     const r = toolRecipe(world, tool);
     // rules 204 (carry_more.ts): the wood for a basket is worth a little more than the makings of another tool
-    if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6 + basketWorth(world, tool), why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
+    if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6 + basketWorth(world, tool) + spearWorth(world, tool), why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
     if (r.stone) needs.push({ item: 'stone', n: r.stone, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
   }
   // a worn tool is mended with a handle, or at a pinch a piece of wood
@@ -469,7 +469,7 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   // rules 240 (wooden_spear.ts): and from 240 every grown person without one wants one, a little below the other tools
   if (makesSpears(world) && !has('spear')) {
     if (metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
-    else if (wantsSpearReady(world)) options.push({ t: 'spear', w: SPEAR_READY });
+    else if (wantsSpearReady(world)) options.push({ t: 'spear', w: spearReady() });
   }
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
@@ -1176,8 +1176,8 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
   // a spear is not made to work faster; it is made because there are wolves about, and the reason it is offered says so
   const why = workshopTool(ctx) === tool ? `to begin ${ctx.toolWanted!.for}` : tool === 'spear' ? 'to have something to face a wolf with' : 'to work faster';
   const sc = new Scorer().add(tool === 'spear' ? 'wolves about and nothing to face one with' : `wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
-  const worth = basketWorth(world, tool);
-  if (worth > 0) sc.add('a basket carries half as much again', worth);
+  const worth = basketWorth(world, tool) + spearWorth(world, tool); // rules 240 (wooden_spear.ts): a spear's making is worth as much more
+  if (worth > 0) sc.add(tool === 'spear' ? 'nobody should meet a wolf empty-handed' : 'a basket carries half as much again', worth);
   const util = sc.total * nightMult(ctx);
   addOption(ctx, {
     kind: 'craft',
