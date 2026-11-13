@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "ad3bac1a427edc736028c75d87f79f086bdc2256",
+    "rules": 236,
+    "content": "f7dcf26abc6327e3946344382c398d568447fd2b76054fdf2ccead0d6d590376",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal river (arrivals on) stepped to tick 3,300, a day after a well first stands and draws on the ground beneath it and a day more, saved there, then 120 ticks more."
+  },
+  "saved": "acedc08d7865b3a384f99362f4791299be2dec851eaa8b5bfaebcaff222a980e",
+  "continued": "1d3e2af9e8a41621eefd68568211c3885080c567fc2bbaf305f7061eda8716fa",
+  "tick": 3300,
+  "wellsOnGround": 2,
+  "groundHeld": 184
+}
