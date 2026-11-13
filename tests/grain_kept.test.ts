@@ -6,7 +6,7 @@ import { parseIntervention } from '../scripts/lab/lab';
 import { generateOptions } from '../src/sim/decision';
 import { pickFood } from '../src/sim/economy';
 import { createPlot } from '../src/sim/farming';
-import { BAKE_WORTH, GRAIN_IN_PACK, GRAIN_KEPT_PARTS, LOAVES_A_HEAD, grainGoesToBins, grainInPack, setGrainKept } from '../src/sim/grain_kept';
+import { BAKE_WORTH, GRAIN_IN_PACK, GRAIN_KEPT_PARTS, LOAVES_A_HEAD, STARVING, grainGoesToBins, grainInPack, setGrainKept } from '../src/sim/grain_kept';
 import { observe } from '../src/sim/knowledge';
 import { demandsOf, facilityWants } from '../src/sim/production';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
@@ -60,6 +60,17 @@ describe('rules 243: grain is kept for bread', () => {
     expect(pickFood({ grain: 3, bread: 1 }, 30, now)).toBe('bread');
     expect(pickFood({ grain: 3 }, 30, now), 'somebody with nothing but grain eats it').toBe('grain');
     expect(pickFood({ grain: 3, wood: 5 } as Items, 30, now), 'things that are not food are nothing else to eat').toBe('grain');
+  });
+
+  it('grain remembered in the granary is no reason to go there and eat, unless one is starving', () => {
+    const eatsAtBins = (version: number, hunger: number): boolean => {
+      const f = fixture(version, { share: { grain: 8 }, has: ['granary'] });
+      f.p.needs.hunger = hunger;
+      return ctxOf(f.w, f.p).options.some((o) => o.kind === 'eat_store' && /granary/.test(o.label));
+    };
+    expect(eatsAtBins(243, 40)).toBe(false);
+    expect(eatsAtBins(242, 40), 'before, a hungry household ate its grain from the bins').toBe(true);
+    expect(eatsAtBins(243, STARVING - 5), 'the starving still may').toBe(true);
   });
 
   it('one grain is kept from the bins for the day, where three or four were', () => {

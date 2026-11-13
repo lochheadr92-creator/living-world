@@ -1,0 +1,59 @@
+birch rules 243: first granary day 14.4, first bakery day 29.0; looks 1545; bakery known 1511; four grain in pack or share 802; wants bread 789
+  granary now: {"grain":58} shares {"991":{"grain":6},"996":{"grain":3},"1000":{},"1004":{"grain":17},"1009":{},"1013":{},"1016":{},"1020":{"grain":5},"1025":{"grain":1},"1027":{},"1029":{"grain":14},"1034":{"grain":10},"4858":{},"9561":{},"12239":{},"14765":{"grain":2},"17357":{},"20621":{},"23903":{}}
+  bakery now: {"flour":2}
+  offered:
+    3162x fetch_water: Draw water from the well
+    680x eat_store: Eat from the granary
+    433x deposit: Bring N grain to the bakery
+    358x fetch_water: Fetch water
+    315x deposit: Bring N grain to the granary
+    302x deposit: Bring N wood to the bakery
+    242x withdraw: Collect N grain from the granary
+    170x withdraw: Collect N wood from the food rack
+    139x gather: Breaking stone for the shared mill
+    137x withdraw: Collect N planks from the timber yard
+    101x withdraw: Collect N stone from the quarry
+    91x build: Build the mill
+    86x repair: Help repair a neighbour’s granary
+    82x withdraw: Collect N wood from the kiln
+  first choice:
+    38x eat_store: Eat from the granary
+    24x fetch_water: Draw water from the well
+    10x deposit: Bring N grain to the granary
+    10x haul: Deliver materials to the mill site
+    2x withdraw: Collect N planks from the timber yard
+    2x gather: Chopping wood for the shared mill
+    1x build: Build the bakery
+    1x gather: Digging clay for my household’s bakery (fired bricks)
+    1x withdraw: Collect N grain from the granary
+    1x withdraw: Collect N wood from the hut
+    1x operate: Sawing planks
+    1x build: Build the mill
+  blocked:
+    405x {"kind":"operate","label":"Turning the grain mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"operate:N","targetId":N,"blocked":"does not know of a grain mi
+    194x {"kind":"fetch_water","label":"Fetch water","goal":"to bake the household's grain into bread, which feeds further and keeps (baked bread)","need":null,"util":N,"parts":[[
+    81x {"kind":"gather","label":"Get stone for the shared mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"gather:N","targetId":N,"blocked":"no room in my pack for
+    18x {"kind":"gather","label":"Breaking stone for the shared mill","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N.N],["walking",-N.N],["go
+    10x {"kind":"gather","label":"Get clay for the shared bakery (fired bricks)","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"gather:N","targetId":N,"blocked":"no roo
+    5x {"kind":"gather","label":"Breaking stone for the shared mill","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N],["walking",-N.N],["good
+    4x {"kind":"animal_work","label":"slaughter sheep","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"animal_work:N","targetId":N,"blocked":"known food is available so
+    4x {"kind":"plan_site","label":"Lay out a grain mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"plan_site:N","targetId":N,"blocked":"could not find a good spo
+    4x {"kind":"gather","label":"Breaking stone for the shared mill","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N.N],["walking",-N],["good
+    4x {"kind":"build","label":"Build the mill","goal":"to finish the shared mill","need":null,"util":N,"parts":[["building work to do",N.N],["walking",-N.N],["good builder",N.N
+    3x {"kind":"gather","label":"Get wood for the shared mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"gather:N","targetId":N,"blocked":"no room in my pack for 
+    3x {"kind":"gather","label":"Breaking stone for the shared mill","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N.N],["walking",-N.N]],"et
+    3x {"kind":"build","label":"Build the mill","goal":"to finish the shared mill","need":null,"util":N,"parts":[["building work to do",N.N],["walking",-N.N],["good builder",-N.
+    2x {"kind":"gather","label":"Chopping wood to bake the household's grain into bread, which feeds further and keeps (baked bread)","goal":"to bake the household's grain into 
+    2x {"kind":"gather","label":"Get wood to bake the household's grain into bread, which feeds further and keeps (baked bread)","goal":"","need":null,"util":N,"parts":[],"eta":
+    2x {"kind":"gather","label":"Breaking stone for the shared bakery","goal":"for the shared bakery","need":null,"util":N,"parts":[["for the shared bakery",N.N],["walking",-N.N
+    2x {"kind":"gather","label":"Get stone for the shared mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"gather:N","targetId":N,"blocked":"does not know any rock
+    2x {"kind":"gather","label":"Chopping wood for the shared mill","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N.N],["walking",-N],["good 
+    2x {"kind":"operate","label":"Sawing planks","goal":"for the shared mill","need":null,"util":N,"parts":[["for the shared mill",N.N],["walking",-N.N],["a saw wastes far less 
+    2x {"kind":"gather","label":"Get wood for my household’s mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"gather:N","targetId":N,"blocked":"no room in my pack 
+  samples:
+    Mira plan_site "Lay out a bakery" util 23 rank 11 of 22; top socialize:40
+    Wren deposit "Bring 4 grain to the bakery" util 25 rank 11 of 44; top operate:42
+    Wren fetch_water "Draw water from the well" util 13 rank 31 of 44; top operate:42
+    Wren fetch_water "Draw water from the well" util 24 rank 12 of 44; top operate:42
+    Wren fetch_water "Draw water from the well" util 17 rank 23 of 44; top operate:42
+    Wren fetch_water "Draw water from the well" util 6 rank 35 of 44; top operate:42

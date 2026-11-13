@@ -1,0 +1,38 @@
+meadow rules 243: first granary day 16.0, first bakery day 27.3; looks 1732; bakery known 1629; four grain in pack or share 657; wants bread 576
+  granary now: {} shares {"994":{},"998":{},"1002":{},"1005":{},"1011":{},"1016":{},"1020":{},"1025":{},"1030":{},"1038":{},"3098":{},"5536":{},"7819":{},"10219":{},"12659":{},"16134":{},"18830":{},"21967":{},"25034":{},"32120":{}}
+  bakery now: {"water":2,"wood":1}
+  offered:
+    1676x fetch_water: Draw water from the well
+    599x eat_store: Eat from the granary
+    474x withdraw: Collect N wood from the bakery
+    306x deposit: Bring N grain to the bakery
+    269x withdraw: Collect N grain from the granary
+    183x fetch_water: Fetch water
+    174x deposit: Bring N grain to the granary
+    158x repair: Help repair a neighbour’s granary
+    142x deposit: Bring N wood to the timber yard
+    87x deposit: Bring N wood to the bakery
+    64x withdraw: Collect N grain from the cellar
+    64x operate: Sawing planks
+    57x withdraw: Collect N wood from the timber yard
+    56x build: Build the bakery
+  first choice:
+    43x eat_store: Eat from the granary
+    11x fetch_water: Draw water from the well
+    3x deposit: Bring N grain to the granary
+    1x withdraw: Collect N wood from the bakery
+  blocked:
+    452x {"kind":"operate","label":"Turning the grain mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"operate:N","targetId":N,"blocked":"does not know of a grain mi
+    97x {"kind":"fetch_water","label":"Fetch water","goal":"to bake the household's grain into bread, which feeds further and keeps (baked bread)","need":null,"util":N,"parts":[[
+    9x {"kind":"plan_site","label":"Lay out a grain mill","goal":"","need":null,"util":N,"parts":[],"eta":N,"key":"plan_site:N","targetId":N,"blocked":"could not find a good spo
+    4x {"kind":"build","label":"Build the bakery","goal":"to finish the shared bakery","need":null,"util":N,"parts":[["building work to do",N.N],["walking",-N.N],["good builder"
+    4x {"kind":"operate","label":"Sawing planks","goal":"to help keep a neighbour’s granary standing","need":null,"util":N,"parts":[["to help keep a neighbour’s granary standing
+    3x {"kind":"gather","label":"Digging clay for the shared bakery (fired bricks)","goal":"for the shared bakery (fired bricks)","need":null,"util":N,"parts":[["for the shared 
+    1x {"kind":"build","label":"Build the bakery","goal":"to finish the shared bakery","need":null,"util":N,"parts":[["building work to do",N.N],["walking",-N.N]],"eta":N.N,"sco
+  samples:
+    Pavel withdraw "Collect 1 grain from the granary" util 13 rank 19 of 34; top haul:54
+    Pavel fetch_water "Draw water from the well" util 7 rank 24 of 34; top haul:54
+    Pavel fetch_water "Draw water from the well" util 15 rank 14 of 34; top haul:54
+    Pavel fetch_water "Draw water from the well" util 9 rank 21 of 34; top haul:54
+    Pavel fetch_water "Draw water from the well" util 0 rank 29 of 34; top haul:54
+    Pavel fetch_water "Draw water from the well" util 10 rank 20 of 34; top haul:54

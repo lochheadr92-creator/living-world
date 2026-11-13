@@ -864,13 +864,15 @@ function optTendGranary(ctx: Ctx): void {
   if (!g) return;
   const snap = g.b.ops;
   const held = foodCount(g.b.items ?? {}) + unitsOf(g.b.items?.flour) + unitsOf(g.b.items?.bread);
-  if (held < 3) return;
+  // rules 243 (grain_kept.ts): since rules 169 a look at the bins remembers each kind as one, so "three units held" was never
+  // seen and nobody tended a granary; from 243 any grain known to be there is reason to tend it
+  if (held < (binsWorth(world) > 0 ? 1 : 3)) return;
   const since = world.tick - (snap?.tended ?? g.b.seen - GRANARY_TEND_EVERY);
   if (since < GRANARY_TEND_EVERY * 0.55) return;
   const real = world.byId.get(g.b.id);
   const mine = real && real.ent === 'building' && (real.ops?.shares[p.hhId]?.grain ?? 0) + (real.ops?.shares[p.hhId]?.bread ?? 0) + (real.ops?.shares[p.hhId]?.flour ?? 0) > 0;
   const urgency = Math.min(1, (since - GRANARY_TEND_EVERY * 0.55) / (GRANARY_TEND_EVERY * 0.6));
-  const base = (7 + 10 * urgency + (mine ? 9 : 0) + 6 * p.traits.generosity) * traitMods(p).work;
+  const base = (7 + 10 * urgency + (mine ? 9 : 0) + 6 * p.traits.generosity + binsWorth(world)) * traitMods(p).work;
   const r = RECIPE_BY_ID.tend_granary;
   planRecipe(ctx, g, r, 'tend', 1, base, 'to keep the stored grain from spoiling', 'store', 0);
 }

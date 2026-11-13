@@ -1,0 +1,7 @@
+aspen: days 0 to 36, rules 243; 51 alive in 21 households; 39 plots {"growing":29,"tilled":8,"tilling":2}; 1 granaries, 0 mills, 0 bakeries, 12 cellars
+  grain: made 1740 (48.3 a day), eaten or used 1204 (33.4 a day), spoiled 381 (10.6 a day)
+  flour: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  bread: made 0 (0.0 a day), eaten or used 0 (0.0 a day), spoiled 0 (0.0 a day)
+  every food, made / eaten or used / spoiled over the span: berries 2238/1786/399; fruit 872/716/135; fish 947/689/213; grain 1740/1204/381; meat 10/2/8; smoked_fish 2/2/0
+  held at the end: grain {"packs":40,"cellar":58,"granary":41}; flour {}; bread {}
+  the goods account, entries about grain, flour, bread, seed and eating: -eaten 3911; +regrowth: wild grain 1084; +crop growth 772; -saved as seed 205; +seed saved from wild grain 205; -eaten at the source 195; xcrop left to rot 132; -sown 100; xgrain bins: stored food spoiled 66; -construction: granary 18; -construction: bakery 1

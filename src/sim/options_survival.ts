@@ -1,4 +1,5 @@
 import {hasRods} from './fishing_rods';
+import { binsGrainIsForBread } from './grain_kept';
 import { wolfSkinOptions } from './wolf_skin';
 import {taskMultiplier} from './tools';
 import {hasCellars} from './cellars';
@@ -275,6 +276,8 @@ function granaryRation(world: World, p: Person, id: number): number {
     if(!known||world.tick-known.seen>2400||(known.hh!==0&&known.hh!==p.hhId))return 0;
     // Remembered food at our/common bins justifies a visit, not a guaranteed ration.
     // The actual share and emergency allowance are checked physically on arrival.
+    // rules 243 (grain_kept.ts): the grain there is for baking; only the starving go to the bins to eat it raw
+    if(binsGrainIsForBread(world,p.needs.hunger)){const {grain:_grain,...rest}=known.items??{};void _grain;return foodUnits(rest);}
     return foodUnits(known.items??{});
   }
   const b = world.byId.get(id);
