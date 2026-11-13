@@ -455,7 +455,16 @@ ground and draws 6 to 13 from the lake (70 to 114 before). The ground at the wel
 wells were not the limit in these eight years.
 
 Checks: `tests/groundwater.test.ts` (7); wells, stored water, golden, save and id tests pass (67 tests in 6 files). Lab arms:
-`rich-no-groundwater`, `-ground`, `-anywhere`, `-more`. The paired lab and the pin are not done at this commit.
+`rich-no-groundwater`, `-ground`, `-anywhere`, `-more`. Pin `tests/v236_continuation.*` (Normal river, tick 3,300, two wells on
+their own groundwater; clean checkout of `ad3bac1a`).
+
+**Paired lab** (clean checkout of `ad3bac1a`, 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges and four
+removals, 84 arms; `review_evidence/growth-20261113/water/lab236/report.txt`). Wells are now dug in the first days (river: tick
+900), so this lab is the check on what that costs early. With the rule against without it: people 36.1 against 36.2, deaths 0.2
+against 0.1, hunger, tools, projects finished, food in store and family time not distinguishable. Buildings 48.6 against 47.1
+(the wells themselves) and workplaces 5.1 against 5.8 lean inside the noise floor: a little building effort goes to wells
+before workshops. The share of time people are thirsty is lower with the rule in 10 of 12 seeds, by less than the report
+prints. No part alone shows more. What the rule gives is the eight-year measurement above, a description.
 
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
