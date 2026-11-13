@@ -677,7 +677,7 @@ Since rules 169 a look at a store remembers each kind as one unit, the household
 The older probes (`supply_probe`, `job_drops`, `water_probe`, `family_probe`, `arrivals_probe`, `build_trace`) now start from a
 save point as the newer ones do; each gives the same output as before on a three-day run.
 
-## A household knows its own stores (rules 245, built 14 November; not yet measured in the lab)
+## A household knows its own stores (rules 245, built and measured 14 November)
 
 The repair for the section above. Since rules 169 a look at any store remembers each kind as one unit (`seen_stock.ts`), the
 household's own home and cellar included: a home holding four or five units of food was remembered as holding about one, and
@@ -713,12 +713,26 @@ arm); with the told path forced to copy, the three told-on tests fail.
 **Checks.** Typecheck clean. The 182 test files that name the current version, `seen_stock` or `snapshotEntity` (1,329 tests, two
 workers, a busy machine): 1,324 pass; the five failures (`construction_finish`, `home_replacement`, `pavel_intentions`,
 `project_inputs`, `transport`, one test each) fail the same at `9d6b3437`. The pins of rules 220 to 244 (21 files) pass, so nothing
-below 245 moved. The immutable pin of 245, the lab and the probe comparison come after the commit.
+below 245 moved. The immutable pin is `tests/v245_continuation.*` (gen-2, tick 1,200, ten own-store sights).
 
-**Not yet known.** Whether a household that no longer believes itself short forages, plants or builds less (the false shortage gates
-the extra field, building wants and foraging urgency): that is the 25-day lab arm `rich-no-own-stores`, and `scripts/home_stock_probe.ts`
-at 244 and 245 for the belief itself. Not looked into: a told glance with a later `seen` replaces the exact belief of a household
-member of the building's own household until their next look.
+**Measured** (`review_evidence/growth-20261114/own-stores/`; head `394ac6a8`, clean; 12 seeds, Normal, 25 days, arrivals on, control
+and two nudges against `rich-no-own-stores`; the probe is one run a cell). The belief is repaired: at 244 a household counted itself
+short of food in 87 to 92 samples in a hundred, 26 to 29 of them short only because it remembered one unit where more were there;
+at 245 that is 0.4 to 1.4 (`home_stock_probe.ts`, aspen, birch, meadow, river, 24 days). Three test files that had failed since
+rules 169 now pass in full (`household_home` 19, `household_preparation` 10, `household_continuity_view` 8) and `stored_materials`
+falls from 5 failures to 2; `project_inputs` still fails (its workshop is a shared yard, which keeps the glance).
+
+**A cost, as the hypothesis feared.** With the rule on, against removed: adults gather 1,100 times against 1,289 (-189, interval
+-236 to -141, fewer in 12 of 12 seeds) and gather 1,577 hours against 1,909; food put by 540 against 933; food in store a head 1.8
+against 3.5 (12 of 12); food at home a head 0.3 against 0.8; the hungry share of waking time 0.534 against 0.507 (+0.027, higher in
+11 of 12, inside the noise floor). People (42.4 against 43.9), deaths (none from hunger, thirst or exposure in either arm), plots,
+homes and tools are not distinguishable at 25 days; the first hall comes 4.8 days sooner (inside the noise floor). The false shortage
+was, in effect, what made households gather and put food by; exact knowledge takes that pressure away while real scarcity stays
+(households still count themselves short in 74 to 84 samples in a hundred at 245). Not traced: why food at home falls where its
+count is exact, and why birch's probe world has 36 alive against 49 (one run). No benefit is claimed. Whether to keep 245, and
+whether the stocking drive should rest on the true figure instead, is the owner's; the 25-day horizon cannot show a year's effect,
+which is a few years from a saved settlement, rule on against off, if wanted. Not looked into: a told glance with a later `seen`
+replaces the exact belief of a member of the building's own household until their next look.
 
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
