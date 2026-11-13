@@ -199,6 +199,82 @@ Checks: `tests/site_supply.test.ts` (9); pin `tests/v229_continuation.*` (Normal
 planks have been made and a saw lies at the yard; clean checkout of `090424f6`). Lab arms: `rich-no-site-supply`, `-bench`,
 `-worth`, `-saw`, `-room`.
 
+## The worth halved, and deposits that hold more (rules 230 and 231)
+
+On the owner's word after the rules-229 lab. Evidence: `review_evidence/growth-20261113/deposit-plenty/`.
+
+- **Rules 230** (`src/sim/site_supply.ts madeForSiteDose`): a made material a site waits for counts for 9 more, not 18.
+- **Rules 231** (`src/sim/deposit_plenty.ts`): a stone outcrop and an ore vein are laid down holding ten times as much. The same
+  deposits in the same places from the same draws; loose rocks, clay and the work of a batch unchanged (aspen: outcrop stone
+  103 to 1,034, vein ore 54 to 546). A first dose. It acts when a world is made, so it has no removal arm; versions are compared.
+
+**The worth, at 0, 9 and 18** (paired lab at rules 231, clean checkout of `12d3da8c`, 12 seeds, Normal, fork 0, 25 days,
+arrivals on, 60 arms; figures are with 9 against the other):
+
+- Against none: the first hall on day 19.0 against 22.6, in 12 of 12 seeds, and workshop jobs 34.4 against 27.3, both inside the
+  noise floor; building condition 62.3 against 63.3 and tools 74.2 against 75.8 are not distinguishable. People 35.7 against
+  37.0 and deaths 0.3 against none lean the wrong way inside the floor.
+- Against 18: the hall comes no sooner at 18 (19.1 against 19.0), and projects finished 92.3 against 87.0, tools 74.2 against
+  71.8 and condition 62.3 against 61.1 lean better at 9. **Halving kept what the part gave and the cost that was larger than
+  chance at 18 is no longer distinguishable.**
+
+**Deposits, rules 231 against 230** (`scripts/lab_versions.ts`, the same 12 seeds, rules 230 pinned, control and two nudges
+each): nothing moves by more than a single draw moves it in 25 days. Leaning with 231, all inside the floor: tools 74.2 against
+68.5 (10 of 10 seeds that differ), projects finished 92.3 against 84.8 (11 of 11), workshop jobs 34.4 against 26.5, buildings
+45.3 against 43.9. People, deaths and hunger are not distinguishable.
+
+**Six years, four worlds** (`scripts/build_trace.ts`, birch, river, aspen and meadow, one run each: a description; rules 230
+against 231):
+
+| site | rules 230: laid out, finished, abandoned | rules 231: laid out, finished, abandoned |
+|---|---|---|
+| cellar | 102, 39, 59 | 90, 60, 20 |
+| hut | 103, 73, 14 | 97, 86, 8 |
+| hut rebuilt | 77, 68, 0 | 84, 80, 1 |
+| well | 15, 9, 4 | 12, 11, 0 |
+| smithy | 6, 5, 1 | 5, 5, 0 |
+| hall | 4, 4, 0 | 4, 4, 0 |
+| house | 6, 0, 2 | 5, 2, 1 |
+
+Batches of stone cut at the quarry 35 against 109; stone used 1,542 against 1,942. **Still no iron and no ore mined** in any of
+the eight runs: a mine stands in every world and "Working the ore mine" was done 0 times. People at year six 34, 35, 80 and 73
+against 33, 34, 71 and 69 (one run each; not a finding).
+
+Checks: `tests/deposit_plenty.test.ts` (7), `tests/site_supply.test.ts` (10); pins `tests/v230_continuation.*` (Normal cedar,
+19,500 ticks; clean checkout of `9dd86ad8`) and `tests/v231_continuation.*` (Normal aspen, one day; clean checkout of
+`12d3da8c`). Lab arm `rich-site-supply-worth-full` holds the worth at 18.
+
+## A builder who runs out goes for materials, and work picked up where it was left (rules 232 and 233)
+
+Steps B and C of the order the owner approved on 13 November. Evidence: `review_evidence/growth-20261113/builder-fetches/`.
+
+**Measured first** (`scripts/job_drops.ts` extended, rules 231, aspen, birch, meadow and river, eight days, one run each):
+
+- Building is not abandoned; it runs out of things to build with. Of 425 spells of building that reached the site, 291 ended
+  with the builder standing waiting for materials (60 to 68 ticks each), 85 did no work at all and 85 ended done. Of the 124
+  spells counted as dropped, 118 were dropped while waiting. None had run the 800 ticks at which the hold of rules 227 lapses.
+  A builder may work only as far as what has been delivered allows (`act_build.ts`), and stood up to 80 ticks before leaving.
+- Somebody beginning to talk put work on hold 581 times at the work and set 43,476 ticks of progress back to nothing: rest
+  24,890, wandering and warming up about 11,000, gathering 3,389, building 3,073 (which the site keeps), making, tilling and
+  mending about 1,200. All but 14 of 1,302 held activities were picked up again.
+
+**Rules 232** (`src/sim/builder_fetches.ts`), two switched parts: a builder with nothing left to build with stands 10 ticks, not
+80, and takes a fresh look at the site as they go; and for 600 ticks what that site lacks counts for 10 more to them.
+
+**Rules 233** (`src/sim/picked_up.ts`), two switched parts: work put on hold by talk keeps how far the piece in hand had got, and
+has it back when picked up at the same place for a piece of the same length; for jobs (gather, craft, till, plant, tend,
+harvest, repair, tree work) and for rest and warming up. This answers AR-01 of `docs/ADVERSARIAL_REVIEW_20261113.md`.
+
+Checks: `tests/builder_fetches.test.ts` (5), `tests/picked_up.test.ts` (5); pins `tests/v232_continuation.*` (Normal aspen, one
+day, five builders carrying the note; clean checkout of `574fcdc3`) and `tests/v233_continuation.*` (Normal aspen, tick 134,
+held work carrying its count; clean checkout of `0444278f`). Lab arms: `rich-no-builder-fetches`, `-leave`, `-fetch`;
+`rich-no-picked-up`, `-jobs`, `-rest`.
+
+**Result: the paired lab and the ordinary-world measurements were started on 13 November and are not read yet.**
+
+Found on the way, not from these rules: `tests/household_home.test.ts` fails 19 of 51, equally at `cc0e656a` (rules 220) and
+`652c3b77` (rules 228); cause not looked into.
+
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
 The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says
