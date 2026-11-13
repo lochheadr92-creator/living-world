@@ -275,6 +275,28 @@ held work carrying its count; clean checkout of `0444278f`). Lab arms: `rich-no-
 Found on the way, not from these rules: `tests/household_home.test.ts` fails 19 of 51, equally at `cc0e656a` (rules 220) and
 `652c3b77` (rules 228); cause not looked into.
 
+## Step D, measured: how many people the water carries (13 November, no rule changed)
+
+`scripts/water_probe.ts` (new, read-only), the 12 lab worlds, three years each, rules 233, arrivals on, one run each;
+`review_evidence/growth-20261113/water/`.
+
+Read in source first (`hydrology.ts`, `wells.ts`): natural water is a stock. A body holds 8 a deep tile and 2 a shallow one and
+starts full; only rain puts water in, at most two units a tile a day in full rain; it evaporates, three times as fast in a dry
+spell. **A well adds no water**: it draws one unit every 50 ticks from the nearest body within 14 tiles and holds 12.
+
+Measured:
+
+- A person draws 2.3 to 2.5 units a day, in every world.
+- A settlement takes 56 to 99 parts in a hundred of its water from one body: 365 to 553 tiles, holding 1,804 to 2,690 when full.
+- Rain could put 131 to 301 units a day into that body, and 21 to 33 evaporate. **At the measured draw the rain carries 42 to
+  110 people, 64 at the middle** (sorted: 42, 46, 52, 59, 62, 62, 66, 73, 82, 91, 93, 110).
+- With no rain a full body lasts a settlement of 30 about a month; at 110 people about nine days, fewer in a dry spell.
+- A world has two or three such bodies, so a settlement that draws from all of them has two or three times that; the aspen
+  ten-year run reached 123 people (rules 227) where its own body carries 59.
+
+This is the ceiling under every settlement: gen-5, whose body carries 82, reached 112 at rules 226 and died of thirst in three
+days. Food, housing and stone do not move it. What to change is the owner's to choose.
+
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
 The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says

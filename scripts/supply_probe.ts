@@ -37,7 +37,10 @@ const pinned = opt('rules', '');
 if (pinned) settings.rulesVersion = Number(pinned);
 const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
 
-const MADE = /plank|brick/i;
+// --match REGEX looks at another chain than planks and bricks (iron: "iron|ore|charcoal|smelt|forg"); --knows TYPE then takes
+// every grown person who knows a building of that type, instead of those who know a site short of planks or bricks
+const MADE = new RegExp(opt('match', 'plank|brick'), 'i');
+const KNOWS = opt('knows', '');
 const bump = (o: Record<string, number>, k: string, n = 1): void => { o[k] = (o[k] ?? 0) + n; };
 const strip = (s: string): string => s.replace(/\d+(\.\d+)?/g, 'N').replace(/\b[A-Z][a-z]+(?= household|'s)/g, 'X').slice(0, 110);
 let samples = 0;
@@ -69,7 +72,7 @@ for (let i = 1; i <= days * DAY; i++) {
   for (const p of w.persons) {
     if (!p.alive || stageOf(w, p) === 'child' || p.pose === 'sleep' || p.convId) continue;
     samples++;
-    const wants = Object.values(p.beliefs).some((b) => b.kind === 'site' && ((b.need?.planks ?? 0) > 0 || (b.need?.bricks ?? 0) > 0));
+    const wants = KNOWS ? Object.values(p.beliefs).some((b) => b.kind === 'building' && b.btype === KNOWS) : Object.values(p.beliefs).some((b) => b.kind === 'site' && ((b.need?.planks ?? 0) > 0 || (b.need?.bricks ?? 0) > 0));
     if (!wants) continue;
     wantSamples++;
     const before = samples % 97 === 0 ? hashBefore() : '';
@@ -115,7 +118,12 @@ const sawsHeld = w.persons.filter((x) => x.alive).reduce((n, x) => n + toolsHeld
 const daylight = { offered: dayBest.length, top: dayTop, gapQ: [0.1, 0.25, 0.5, 0.75, 0.9].map((f) => Math.round(q(dayGap, f) * 10) / 10), bestQ: [0.1, 0.5, 0.9].map((f) => Math.round(q(dayBest, f) * 10) / 10), beatenBy: dayBeatenBy };
 const pack = { noRoom, meanFree: noRoom ? noRoomFree / noRoom : 0, weightByItem: packWhenNoRoom };
 const saws = { sawBlocked, sawBlockedWhileHeld, sawOnRack, heldAtEnd: sawsHeld };
-const result = { daylight, pack, saws, seed, days, every, rulesVersion: w.settings.rulesVersion, samples, wantSamples, offered, offeredTop, onlyRefused, silent, meanGap, offeredLabels, refusals, beatenBy, silentDoing, impure, made: { planks: (w.ledger.created as Record<string, number>).planks ?? 0, bricks: (w.ledger.created as Record<string, number>).bricks ?? 0 } };
+const grown = w.persons.filter((x) => x.alive && stageOf(w, x) !== 'child');
+const holds = (k: 'charcoal' | 'smelting' | 'forging'): number => grown.filter((x) => x.techniques?.[k]).length;
+const tries = (k: 'charcoal' | 'smelting' | 'forging'): number => grown.reduce((n, x) => n + (x.techniques?.[k] ? 0 : 0) + Number((x as { trials?: Record<string, { attempts?: number }> }).trials?.[k]?.attempts ?? 0), 0);
+const made = (k: string): number => (w.ledger.created as Record<string, number>)[k] ?? 0;
+const iron = { grown: grown.length, holdCharcoal: holds('charcoal'), holdSmelting: holds('smelting'), holdForging: holds('forging'), trials: { smelting: tries('smelting'), forging: tries('forging') }, made: { charcoal: made('charcoal'), ore: made('ore'), iron: made('iron') }, oreMined: (w.ledger.reasons as Record<string, number>)['extracted from the vein'] ?? 0, picks: grown.reduce((n, x) => n + toolsHeldBy(w, x.id, 'pick').length, 0), worn: grown.filter((x) => toolsHeldBy(w, x.id).some((t) => t.wear >= 18 && t.tier !== 1)).length };
+const result = { iron, daylight, pack, saws, seed, days, every, rulesVersion: w.settings.rulesVersion, samples, wantSamples, offered, offeredTop, onlyRefused, silent, meanGap, offeredLabels, refusals, beatenBy, silentDoing, impure, made: { planks: (w.ledger.created as Record<string, number>).planks ?? 0, bricks: (w.ledger.created as Record<string, number>).bricks ?? 0 } };
 if (out) writeFileSync(out, JSON.stringify(result));
 console.log(`${seed}: ${days} days, rules ${result.rulesVersion}; planks made ${result.made.planks}, bricks made ${result.made.bricks}; observer changed the world in ${impure} checks`);
 console.log(`looks at a grown person awake: ${samples}; of which they knew a site short of planks or bricks: ${wantSamples}`);
@@ -128,4 +136,5 @@ console.log(`  in daylight: a step offered ${daylight.offered} times, first choi
 console.log('  what beat it in daylight:\n    ' + top(dayBeatenBy, 14));
 console.log(`  packs with no room (${noRoom} looks, ${pack.meanFree.toFixed(1)} weight free on average), weight carried by item: ` + Object.entries(packWhenNoRoom).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, v]) => `${k} ${(v / Math.max(1, noRoom)).toFixed(1)}`).join(', '));
 console.log(`  sawing refused for want of a saw ${sawBlocked} times, ${sawBlockedWhileHeld} of them while a saw was in somebody's pack; a saw lay at a timber yard at ${sawOnRack} looks; saws in packs at the end ${sawsHeld}`);
+console.log(`  iron: of ${iron.grown} grown people ${iron.holdCharcoal} know charcoal firing, ${iron.holdSmelting} smelting, ${iron.holdForging} forging; ${iron.picks} picks held; ${iron.worn} people hold a worn tool an iron one would replace; made charcoal ${iron.made.charcoal}, iron ${iron.made.iron}`);
 console.log('  doing, when nothing was offered or refused: ' + top(silentDoing, 8).replace(/\n\s+/g, '; '));

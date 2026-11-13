@@ -1,0 +1,4 @@
+birch: 36 days, rules 233; people 28 to 31 (mean 28.7); 3 bodies of water, 586 tiles, holding 2954 when full
+  the settlement's water: 500 tiles holding 2518 when full; 97% of all that is drawn comes from it; 2 wells at the end
+  a day, on average: drawn 68.7 (2.5 a person), rain could put in 301.1 and did put in 97.4, evaporated 28.9
+  so the rain carries about 110 people at this draw; with no rain a full body lasts 35.6 days at the mean population; lowest it stood 1970 of 2518 (78%)

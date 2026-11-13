@@ -1,0 +1,4 @@
+aspen: 36 days, rules 233; people 28 to 48 (mean 37.9); 3 bodies of water, 552 tiles, holding 3036 when full
+  the settlement's water: 416 tiles holding 2284 when full; 80% of all that is drawn comes from it; 3 wells at the end
+  a day, on average: drawn 72.7 (2.4 a person), rain could put in 168.1 and did put in 64.4, evaporated 26.6
+  so the rain carries about 59 people at this draw; with no rain a full body lasts 25.2 days at the mean population; lowest it stood 1026 of 2284 (45%)

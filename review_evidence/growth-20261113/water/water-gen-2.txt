@@ -1,0 +1,4 @@
+gen-2: 36 days, rules 233; people 28 to 30 (mean 29.6); 2 bodies of water, 518 tiles, holding 2896 when full
+  the settlement's water: 448 tiles holding 2522 when full; 97% of all that is drawn comes from it; 2 wells at the end
+  a day, on average: drawn 69.9 (2.4 a person), rain could put in 130.9 and did put in 91.8, evaporated 27.7
+  so the rain carries about 42 people at this draw; with no rain a full body lasts 35 days at the mean population; lowest it stood 1687 of 2522 (67%)
