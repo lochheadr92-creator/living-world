@@ -1,0 +1,19 @@
+birch: 72 days, rules 236; 32 alive, 21 grown of whom 14 have a partner; 6 women of 17 to 44, 4 with a partner
+  happened: 7 couples formed, 5 conceived, 4 born; 0 arrived, 0 of them grown and alone
+  a partner: 2919 looks at an unattached grown person awake; where each stopped:
+       269   9%  no such person the two could be a couple with (attraction, age within 18 years)
+       433  15%  knows them too little (familiarity under 10)
+      2073  71%  does not like any enough (affinity under 30)
+       107   4%  none of them in sight within ten tiles and free to talk
+        12   0%  too hungry or thirsty to ask
+         5   0%  asked lately (cooling off)
+        20   1%  a proposal is offered
+    of the 20 offers, the first choice 3 times; what beat it: 4x socialize: X with X; 2x haul: X materials to the cellar site; 2x tend: X the field to rest; 2x gather: X stone to keep my promise to bring it; 1x deposit: X 2 wood to the timber yard; 1x fuel_fire: X wood to the fire
+  a child: 7127 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      2464  35%  no partner
+       435   6%  already expecting
+       161   2%  no home yet
+       212   3%  a birth in the last year and a half
+      1773  25%  less than three food a head at home
+        16   0%  unwell or hungry
+      2066  29%  may conceive

@@ -1,0 +1,17 @@
+meadow: 72 days, rules 236; 73 alive, 53 grown of whom 34 have a partner; 20 women of 17 to 44, 12 with a partner
+  happened: 17 couples formed, 10 conceived, 8 born; 37 arrived, 16 of them grown and alone
+  a partner: 4187 looks at an unattached grown person awake; where each stopped:
+       942  22%  no such person the two could be a couple with (attraction, age within 18 years)
+       176   4%  does not know any of them
+      2059  49%  knows them too little (familiarity under 10)
+      1010  24%  does not like any enough (affinity under 30)
+    of the 0 offers, the first choice 0 times; what beat it: 
+  a child: 11322 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      3080  27%  no partner
+       988   9%  already expecting
+       599   5%  no home yet
+        99   1%  three children at home already
+      1241  11%  a birth in the last year and a half
+      2583  23%  less than three food a head at home
+        18   0%  unwell or hungry
+      2714  24%  may conceive

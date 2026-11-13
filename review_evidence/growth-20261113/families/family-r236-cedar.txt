@@ -1,0 +1,22 @@
+cedar: 72 days, rules 236; 72 alive, 54 grown of whom 32 have a partner; 22 women of 17 to 44, 15 with a partner
+  happened: 16 couples formed, 6 conceived, 6 born; 39 arrived, 16 of them grown and alone
+  a partner: 5189 looks at an unattached grown person awake; where each stopped:
+       866  17%  no such person the two could be a couple with (attraction, age within 18 years)
+       153   3%  does not know any of them
+      2274  44%  knows them too little (familiarity under 10)
+      1403  27%  does not like any enough (affinity under 30)
+       464   9%  does not trust any enough (trust under 20)
+        25   0%  none of them in sight within ten tiles and free to talk
+         1   0%  too hungry or thirsty to ask
+         3   0%  a proposal is offered
+    of the 3 offers, the first choice 1 times; what beat it: 2x deposit: X food in the cellar
+  a child: 13820 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      4280  31%  no partner
+       648   5%  already expecting
+      1131   8%  partner not of the household, or not a man
+       394   3%  no home yet
+       225   2%  three children at home already
+       992   7%  a birth in the last year and a half
+      3265  24%  less than three food a head at home
+        34   0%  unwell or hungry
+      2851  21%  may conceive

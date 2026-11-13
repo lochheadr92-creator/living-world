@@ -362,6 +362,44 @@ it, with the whole rule removed or the count part alone (people 35.9 against 36.
 against 81.7, none distinguishable). In 25 days only one world of six tried reaches iron work at all, so this lab says the rule
 does no harm early; what it gives is the five-year measurement above, a description.
 
+## Step G, measured: why few pair up and few are born (13 November, no rule changed)
+
+`scripts/family_probe.ts` (new, read-only), aspen, birch, meadow, river, cedar and gen-5, six years each, rules 236, arrivals
+on, one run each; `review_evidence/growth-20261113/families/`. Every 300 ticks each unattached grown person awake is taken
+through the gates of a partner proposal in order (`options_social.ts optPropose`, `relations.ts spark`); every 200 ticks, as the
+world itself checks, each woman of 17 to 44 is taken through the gates of conception (`lifecycle.ts conceptionTick`).
+
+**What happened in six years**: 42 children born in the six worlds (11, 4, 8, 7, 6, 6) and 153 people arrived in the four that
+had arrivals (birch and river had none). A settlement of 70 to 77 holds 20 to 24 women of 17 to 44, 12 to 19 of them with a
+partner, and has six to eleven births in six years.
+
+**A child** (65,988 checks of a woman of 17 to 44), where each stopped:
+
+| share | gate |
+|---|---|
+| 28.8% | no partner |
+| 23.8% | less than three food a head at home |
+| 23.1% | may conceive (then one chance in two a year: 0.35 in a hundred at each check) |
+| 8.6% | a birth in the last year and a half |
+| 7.4% | already expecting |
+| 3.5% | no home yet |
+| 2.5% | three children at home already |
+| 2.0% | partner not of the household |
+| 0.3% | unwell or hungry |
+
+So a woman may conceive for under a quarter of her childbearing years, and then at a child every two years.
+
+**A partner** (24,182 looks at an unattached grown person awake), where each stopped: does not like any they could be a couple
+with enough (affinity under 30) 39.9%; knows them too little (familiarity under 10) 31.6%; nobody they could be a couple with
+(attraction, which half of all pairs lack by a fixed draw, and age within 18 years) 20.1%; trust 3.8%; none in sight 1.8%; too
+hungry or thirsty to ask 0.1%. **A proposal was among the options at 45 of the 24,182 looks.** Couples do form (84 in the six
+worlds), slowly: a newcomer arriving alone (61 of the 153) has to come to know and like somebody first.
+
+Read in source, not yet measured: the food "at home" that conception asks for is the members' packs and the home's own store;
+a household's cellar is another building and is not counted.
+
+No rule is changed.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and

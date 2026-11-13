@@ -1,0 +1,22 @@
+aspen: 72 days, rules 236; 77 alive, 56 grown of whom 40 have a partner; 24 women of 17 to 44, 19 with a partner
+  happened: 20 couples formed, 13 conceived, 11 born; 38 arrived, 14 of them grown and alone
+  a partner: 3522 looks at an unattached grown person awake; where each stopped:
+       530  15%  no such person the two could be a couple with (attraction, age within 18 years)
+       159   5%  does not know any of them
+      1247  35%  knows them too little (familiarity under 10)
+      1303  37%  does not like any enough (affinity under 30)
+       109   3%  does not trust any enough (trust under 20)
+       150   4%  none of them in sight within ten tiles and free to talk
+        10   0%  too hungry or thirsty to ask
+         5   0%  asked lately (cooling off)
+         9   0%  a proposal is offered
+    of the 9 offers, the first choice 0 times; what beat it: 2x gather: X wood to fuel our cold home hearth; 2x harvest: X the crop; 1x socialize: X X about the wolf; 1x gather: X berries; 1x gather: X stone for a friend’s cellar; 1x fuel_fire: X our hearth with wood
+  a child: 14705 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      3043  21%  no partner
+      1337   9%  already expecting
+       342   2%  no home yet
+       409   3%  three children at home already
+      1533  10%  a birth in the last year and a half
+      4459  30%  less than three food a head at home
+        42   0%  unwell or hungry
+      3540  24%  may conceive

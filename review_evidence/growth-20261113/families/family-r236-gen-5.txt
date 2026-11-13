@@ -1,0 +1,23 @@
+gen-5: 72 days, rules 236; 72 alive, 53 grown of whom 30 have a partner; 23 women of 17 to 44, 14 with a partner
+  happened: 16 couples formed, 7 conceived, 6 born; 39 arrived, 15 of them grown and alone
+  a partner: 6308 looks at an unattached grown person awake; where each stopped:
+       885  14%  no such person the two could be a couple with (attraction, age within 18 years)
+        84   1%  does not know any of them
+      1484  24%  knows them too little (familiarity under 10)
+      3457  55%  does not like any enough (affinity under 30)
+       310   5%  does not trust any enough (trust under 20)
+        71   1%  none of them in sight within ten tiles and free to talk
+         6   0%  too hungry or thirsty to ask
+         5   0%  asked lately (cooling off)
+         6   0%  a proposal is offered
+    of the 6 offers, the first choice 4 times; what beat it: 1x withdraw: X 2 offcut fuel bundles from the timber ; 1x harvest: X the crop
+  a child: 12340 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      5282  43%  no partner
+       654   5%  already expecting
+       207   2%  partner not of the household, or not a man
+       437   4%  no home yet
+       152   1%  three children at home already
+       748   6%  a birth in the last year and a half
+      2652  21%  less than three food a head at home
+        40   0%  unwell or hungry
+      2168  18%  may conceive
