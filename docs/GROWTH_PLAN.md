@@ -734,6 +734,27 @@ whether the stocking drive should rest on the true figure instead, is the owner'
 which is a few years from a saved settlement, rule on against off, if wanted. Not looked into: a told glance with a later `seen`
 replaces the exact belief of a member of the building's own household until their next look.
 
+**Four years from saved settlements** (`review_evidence/growth-20261114/fouryear245/`, `tables.md`; head `f6ff1989`; one run a
+cell, a description and not a test). Six saved worlds at 75 to 100 people (aspen, cedar, fern, meadow from day 96 to 144; birch and
+river from day 84 to 132), each continued four years as saved (A, rules 244), at 245 (B, `--rules-up 245`) and as A with one extra
+random draw (A1, A2: the noise floor). Means of the six worlds, A against B: people at year 4 129.3 against 131.0; deaths 2.8
+against 3.2 (hunger 0.7 against 0.8, exposure 1.0 against 0.7); hungry share of samples 0.135 against 0.145; food in store a head
+(window mean) 5.81 against 5.83; plots 200.5 against 203.3; mills 0.67 in both. The nudged arms differ from A by more than B does on
+almost every row (people -8.0 and -7.3; deaths +6.8 and +7.7), and B is beyond both nudges in 0 to 2 of 6 worlds on each row, so
+**the four years show no difference between 244 and 245 that a nudge does not also make.** The one early-cost pattern that
+returns is in aspen, where B holds 0.87 food a head in year 4 against 2.3 to 2.9 in the three A arms, with hungry time 0.588
+against 0.52 to 0.56 and wild food 94 against 174 to 235; store a head is below all three A arms in 3 of 6 worlds (aspen, fern,
+river) and above in none, but people at year 4 (140 against 141 to 143) are unmoved. Rules 245 stays a repair of a belief, not a
+benefit or a harm that four years can show.
+
+**The lean season is a knife-edge at rules 244, whichever arm.** Over the seven lean seasons in the window, A and B each lose 11
+people to death in the span and a net of one or two (arrivals and births cover them); A1 loses 39 and A2 57, a net of 28 and 48.
+All of that is two worlds: in river's second lean season (day 124 to 131) A loses 3, B 5, A1 27 and A2 56 (A2 has 29 hunger and 6
+injury deaths over the window, 64 alive at the end against 117), and meadow A1 loses 11. So one random draw in a 100-person
+settlement can turn a lean season from a few deaths into a collapse, and the saved worlds are not past the famine; the verdict above
+(bakery and mill throughput is the next lever) stands, and a rule that works must show itself on those two worlds, not on the
+mean.
+
 ## The famine at rules 244: what years 1 to 11 show, and the next lever (14 November)
 
 The twelve twenty-year runs at rules 244 were killed by an app restart at years 10 to 11 (eight at day 132, four at day 120 of 240;
