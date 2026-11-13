@@ -650,6 +650,33 @@ vite-node.
 tests and pin, the 25-day lab where it acts early, and for late effects a few years run from a saved large settlement with the
 rule on and off.
 
+## What a household thinks it holds at home (measured 14 November, not repaired)
+
+`scripts/home_stock_probe.ts` (new, read-only; a run with it and a run without end on the same hash), aspen, birch, meadow and
+river, 24 days each, rules 244, one run each; `review_evidence/growth-20261113/home-stock/`.
+
+Since rules 169 a look at a store remembers each kind as one unit, the household's own home included.
+
+| | aspen | birch | meadow | river |
+|---|---|---|---|---|
+| food at home, remembered / true | 1.08 / 5.52 | 0.77 / 3.72 | 1.19 / 4.27 | 1.06 / 4.54 |
+| households "short" (shortage above 0.4), as the sim has it | 87% | 92% | 87% | 88% |
+| the same with the true home food | 58% | 67% | 58% | 58% |
+| the same with every member's pack counted too | 49% | 59% | 46% | 52% |
+
+- A household counts itself short about thirty points more often than its home justifies: a quarter to a third of all
+  household-samples are short by the sim's count and not by the true one, and never the reverse. It is the memory, not its
+  age: a fresh look gives the same figure.
+- `hhState` (`options_work.ts`) counts the deciding person's own pack only, not the other members'; and it counts with
+  `foodCount`, which leaves out bread and meat (no sampled home held either).
+- Every withdrawal of food asked for one unit: 34, 42, 6 and 0 food withdrawals in the four worlds, all of one, where two or
+  more were really there in 12 of 41 (aspen) and 31 of 65 (birch). Eating at a store takes a meal, usually three units, 255 to
+  322 times a world, so the one-unit trip is real and rare.
+- Not measured: whether the false shortage changes what anybody does.
+
+The older probes (`supply_probe`, `job_drops`, `water_probe`, `family_probe`, `arrivals_probe`, `build_trace`) now start from a
+save point as the newer ones do; each gives the same output as before on a three-day run.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and

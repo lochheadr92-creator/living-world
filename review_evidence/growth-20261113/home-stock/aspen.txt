@@ -1,0 +1,26 @@
+.. day 2 of 24, 9s
+.. day 4 of 24, 18s
+.. day 6 of 24, 29s
+.. day 8 of 24, 40s
+.. day 10 of 24, 53s
+.. day 12 of 24, 68s
+.. day 14 of 24, 84s
+.. day 16 of 24, 104s
+.. day 18 of 24, 124s
+.. day 20 of 24, 149s
+.. day 22 of 24, 174s
+.. day 24 of 24, 203s
+aspen: days 24, rules 244, 43 alive; 177 sample times, 2259 household-samples, 3879 member-samples; end hash 7397f624
+  1 home food: believed 1.08, true 5.52 (fresh glance would give 0.98); true at least 3 above believed in 30.9% (members 35.3%); no belief of the home 0.0%; belief older than 600 ticks 3.1%; bread or meat at home (uncounted by hhState) 0.0%
+  2 shortage mean / share above 0.4 / share above 0.5: sim 0.71 87.3% 83.8%; true home 0.49 58.1% 53.2%; true, all kinds 0.49 58.1% 53.2%; true household (all packs too) 0.40 49.3% 42.4%
+    members: sim above 0.4 91.5%, true home 58.5%; short by the sim but not by the true home figure 29.1% of household-samples (the reverse 0.0%); mean target 14.67, mean pack 2.11
+  3 ended: {"withdraw":{"success":81,"failed":44,"interrupted":9},"eat_store":{"success":314,"interrupted":39,"failed":6}}
+    withdraw all, label integer 1:71 2:3 3:3 4+:4 none:0 | units moved 1:72 2:3 3:3 4+:3 none:0
+    withdraw food, label integer 1:34 2:0 3:0 4+:0 none:0 | units moved 1:34 2:0 3:0 4+:0 none:0
+    withdraw nonfood, label integer 1:37 2:3 3:3 4+:4 none:0 | units moved 1:38 2:3 3:3 4+:3 none:0
+    withdraw own_home, label integer 1:34 2:0 3:0 4+:0 none:0 | units moved 1:34 2:0 3:0 4+:0 none:0
+    eat_store all, units taken to the pack 1:81 2:49 3:140 4+:24 none:0 (0 shows as none)
+    eat_store own_home, units taken to the pack 1:64 2:46 3:127 4+:18 none:0 (0 shows as none)
+    withdraw trips by building type (label): lean_to 6, hut 28, quarry 13, timber_yard 14, pile 6, food_rack 3, cellar 11
+    request against memory at withdraw start, food items: {"items":41,"believed1":41,"requestIs1":41,"requestEqualsBelieved":41,"cappedByMemory":12,"leftBehindWhenCapped":39}; own home: {"items":37,"believed1":37,"requestIs1":37,"requestEqualsBelieved":37,"cappedByMemory":8,"leftBehindWhenCapped":24}
+  checks: {"replicaMismatch":0,"ctxMismatch":0,"ctxChecked":12}

@@ -4,6 +4,8 @@
 // counted. Also what happened: couples formed, children conceived and born, who arrived alone.
 //
 //   npx vite-node scripts/family_probe.ts -- --seed aspen --days 72 [--every 300] [--rules N] [--out family.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
+import { worldFromArgs } from './world_args';
 import { writeFileSync } from 'node:fs';
 import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, DAY, TICKS_PER_YEAR } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
@@ -22,14 +24,12 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '72'));
 const every = Number(opt('every', '300'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const bump = (o: Record<string, number>, k: string, n = 1): void => { o[k] = (o[k] ?? 0) + n; };
 const grown = (p: Person): boolean => { const s = stageOf(w, p); return s === 'adult' || s === 'elder'; };
@@ -61,7 +61,7 @@ let couplesFormed = 0, conceived = 0, born = 0;
 const wasPregnant = new Set<number>();
 const known = new Set<number>(w.persons.map((p) => p.id));
 let arrived = 0, arrivedGrownAlone = 0;
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   for (const p of w.persons) {
     if (!known.has(p.id)) {

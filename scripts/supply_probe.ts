@@ -4,6 +4,8 @@
 // each refusal said.
 //
 //   npx vite-node scripts/supply_probe.ts -- --seed birch --days 36 [--every 300] [--rules N] [--out supply.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
+import { worldFromArgs } from './world_args';
 import { writeFileSync } from 'node:fs';
 import { DAY } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
@@ -25,17 +27,15 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'birch');
+let seed = opt('seed', 'birch');
 const days = Number(opt('days', '36'));
 const every = Number(opt('every', '300'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
 // --off worth,saw,room,bench switches parts of rules 229 off; --exact-stock restores the exact copy of a store's contents (rules 168)
 for (const part of opt('off', '').split(',').filter(Boolean)) setSiteSupply(false, part as SiteSupplyPart);
 if (args.includes('--exact-stock')) setSeenStock(false);
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 // --match REGEX looks at another chain than planks and bricks (iron: "iron|ore|charcoal|smelt|forg"); --knows TYPE then takes
 // every grown person who knows a building of that type, instead of those who know a site short of planks or bricks
@@ -66,7 +66,7 @@ let sawBlockedWhileHeld = 0; // ... while a saw is in somebody's pack
 let sawOnRack = 0; // looks at which a saw lay at some timber yard
 const hashBefore = (): string => serializeWorld(w).length + ':' + w.rng.a;
 let impure = 0;
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   if (i % every !== 0 || i < 12 * DAY) continue; // from the second year, when the yard and the kiln stand
   for (const p of w.persons) {

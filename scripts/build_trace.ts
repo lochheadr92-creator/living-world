@@ -4,6 +4,8 @@
 // at the end.
 //
 //   npx vite-node scripts/build_trace.ts -- --seed aspen --days 72 [--arrivals on|off] [--rules N] [--out build.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
+import { worldFromArgs } from './world_args';
 import { writeFileSync } from 'node:fs';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
@@ -17,13 +19,11 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '72'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 interface Life { id: number; type: string; hh: number; laid: number; ended: number; outcome: 'open' | 'finished' | 'abandoned'; required: Items; delivered: Items; work: number; workTotal: number; lastWorkDay: number; status: string; upgrade: boolean; hauls: number; builds: number; x: number; y: number }
 const lives = new Map<number, Life>();
@@ -45,7 +45,7 @@ w.hooks = {
 };
 const missing = (l: Life): string => Object.entries(l.required).map(([k, n]) => [k, (n ?? 0) - ((l.delivered as Record<string, number>)[k] ?? 0)] as const).filter(([, n]) => n > 0).map(([k, n]) => `${n} ${k}`).join(', ') || 'nothing';
 const daily: Record<string, unknown>[] = [];
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   if (i % 200 !== 0) continue; // a site lives for days: a twelfth of a day is fine enough
   const day = Math.round((i / DAY) * 100) / 100;

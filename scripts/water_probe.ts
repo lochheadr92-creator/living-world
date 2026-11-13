@@ -4,6 +4,8 @@
 // most from), how much rain could refill it in a day at most, and how many people that would carry at the measured draw.
 //
 //   npx vite-node scripts/water_probe.ts -- --seed aspen --days 36 [--arrivals on|off] [--rules N] [--out water.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
+import { worldFromArgs } from './world_args';
 import { writeFileSync } from 'node:fs';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
@@ -17,13 +19,11 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '36'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const bodies = w.waterBodies ?? [];
 const start = bodies.map((b) => ({ id: b.id, tiles: b.tiles.length, capacity: b.capacity }));
@@ -35,7 +35,7 @@ let personDays = 0;
 // rules 236 (groundwater.ts): water that rose in a well from the ground beneath it, and deaths of thirst
 let raised = 0;
 w.hooks = { ...(w.hooks ?? {}), onTransfer: (t) => { if (t.reason === 'water rises in the well') raised += t.n; } };
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   if (w.tick % 60 === 0) bodies.forEach((b, k) => { rainCould[k] += b.tiles.length * Math.max(0, w.weather.rain) * 2 * (60 / DAY); });
   if (i % DAY !== 0) continue;

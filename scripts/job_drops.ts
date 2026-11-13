@@ -3,7 +3,9 @@
 // many times people looked again at what they were doing (a review) against how many times they chose afresh.
 //
 //   npx vite-node scripts/job_drops.ts -- --seed aspen --days 10 [--arrivals on|off] [--rules N] [--out drops.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
 import { writeFileSync } from 'node:fs';
+import { worldFromArgs } from './world_args';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
 import { probe } from '../src/sim/probe';
@@ -17,13 +19,12 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'aspen');
+let seed = opt('seed', 'aspen');
 const days = Number(opt('days', '10'));
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+// a world read from --load (a save point written by a long run) or made fresh (scripts/world_args.ts)
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 interface Row { ended: number; success: number; partial: number; failed: number; droppedWalking: number; droppedWorking: number; workTicksDropped: number; fracSum: number; reasons: Record<string, number> }
 const rows: Record<string, Row> = {};
@@ -73,7 +74,7 @@ const looksBy: Record<string, number> = {};
 let resumed = 0;
 let neverResumed = 0;
 const started = Date.now();
-for (let i = 0; i < days * DAY; i++) {
+for (let i = w.tick; i < days * DAY; i++) {
   for (const p of w.persons) {
     if (!p.alive) continue;
     const a = p.activity;

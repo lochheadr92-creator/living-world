@@ -5,6 +5,8 @@
 // the path), and again counting only the wolves.
 //
 //   npx vite-node scripts/arrivals_probe.ts -- --seed birch --days 72 [--ways 2] [--rules N] [--out arrivals.json]
+//   (or --load <save point> in place of --seed: see scripts/world_args.ts)
+import { worldFromArgs } from './world_args';
 import { writeFileSync } from 'node:fs';
 import { DAY, isHomeType } from '../src/sim/constants';
 import { foodUnits } from '../src/sim/economy';
@@ -24,14 +26,12 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'birch');
+let seed = opt('seed', 'birch');
 const days = Number(opt('days', '72'));
 const waysEvery = Number(opt('ways', '2')); // days between readings of the way in
 const out = opt('out', '');
-const settings = freshRunSettings(parseRunRules('rich'), 'normal', seed, { immigration: opt('arrivals', 'on') === 'on' });
-const pinned = opt('rules', '');
-if (pinned) settings.rulesVersion = Number(pinned);
-const w: World = deserializeWorld(serializeWorld(createWorld(settings)));
+const { w }: { w: World } = worldFromArgs(opt, seed);
+seed = w.settings.seed;
 
 const GATES = ['too many or too few people', 'the first two days', 'a group came lately (spacing)', 'less than 3.2 food a head in the whole settlement', 'too few roofs for the people here', 'all gates passed (then a 35 in 100 chance, then a way in)'];
 const gates: Record<string, number> = {};
@@ -68,7 +68,7 @@ function waysIn(src: World): { points: number; open: number; openWolvesOnly: num
   return { points, open, openWolvesOnly, why };
 }
 const ways: { day: number; points: number; open: number; openWolvesOnly: number; why: Record<string, number> }[] = [];
-for (let i = 1; i <= days * DAY; i++) {
+for (let i = w.tick + 1; i <= days * DAY; i++) {
   stepWorld(w);
   for (const p of w.persons) if (!known.has(p.id)) { known.add(p.id); if (w.tick - p.birthTick > DAY) arrived++; }
   if (w.tick % 400 === 210) {
