@@ -9,7 +9,7 @@ import { stepWorld, hashWorld } from '../src/sim/world';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { conservationReport, ledgerCreate, snapshotInitial } from '../src/sim/economy';
 import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
-import {DAY} from '../src/sim/constants';
+import {DAY, WEIGHT} from '../src/sim/constants';
 import { observe } from '../src/sim/knowledge';
 import { perceive } from '../src/sim/perception';
 import { newCart, cartLoaded } from '../src/sim/carts';
@@ -94,7 +94,7 @@ function provisionScene(version: number) {
 
 it('the existing winter reserve cart trip can carry preserved provisions home',()=>{
   const {w,ann,ben,cal,hut,store,cart}=provisionScene(CURRENT_RULES_VERSION);
-  w.tick=DAY*6;ann.inv={grain:6};store.store.items={dried_fish:30};
+  w.tick=DAY*6;ann.inv={grain:6};store.store.items={dried_fish:Math.floor(store.store.cap/WEIGHT.dried_fish)}; // rules 169: a sight remembers a partly filled store as one of each kind, so the store must look full for her to know it holds enough to carry
   for(const p of [ann,ben,cal]){observe(w,p,hut);observe(w,p,store);observe(w,p,cart);}
   snapshotInitial(w);
   reviewIntentions(generateOptions(w,ann,true));
