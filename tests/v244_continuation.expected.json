@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "b6914de88a06bc610b6f8a60c6fbbad2661e4b88",
+    "rules": 244,
+    "content": "cc2f2b0bfd450ae622431f014a3660972bb85240033736e3a51778bec01fe19b",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal gen-2 (arrivals on) at tick 500, where a household first works more plots than rules 243 could have it want, saved and continued 120 ticks."
+  },
+  "saved": "35a7a396786601d41a9bf6c11b66899c7c7797ed5d3f255b3eac2ec7cdb4b4a5",
+  "continued": "afd0d0bb95180862434cfa338580d13affd702cee588c2fc562ffbd296833c74",
+  "tick": 500,
+  "householdsWithMoreFields": 1,
+  "plots": 3,
+  "alive": 28
+}

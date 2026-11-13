@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "b6914de88a06bc610b6f8a60c6fbbad2661e4b88",
+    "rules": 243,
+    "content": "cc2f2b0bfd450ae622431f014a3660972bb85240033736e3a51778bec01fe19b",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen (arrivals on) at a tick at which three people carry grain with other food, saved and continued 120 ticks. Recorded at a head whose current version is 244: rules 243 was set from three measurements after rules 244 was added; the world is made at rules 243."
+  },
+  "saved": "c12e6e2fb2fe05b89f1829c0e99e5800a7992aeb989e76b60ccc4e1960c35bdd",
+  "continued": "523f65c8509aeee9bd08bccd368794022cbded78eb6f7b459910b5cf304526ee",
+  "tick": 400,
+  "sparingGrain": 4,
+  "grainEatenOrUsed": 2,
+  "alive": 28
+}

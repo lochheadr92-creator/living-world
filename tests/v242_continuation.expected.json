@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "b6914de88a06bc610b6f8a60c6fbbad2661e4b88",
+    "rules": 242,
+    "content": "cc2f2b0bfd450ae622431f014a3660972bb85240033736e3a51778bec01fe19b",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal aspen (arrivals on) at the end of its first day, saved and continued 120 ticks. Does not exercise the rule: no ordinary world at rules 242 holds a loaf in its first five years. Recorded at a head whose current version is 244, after rules 243 and 244 were added; the world is made at rules 242."
+  },
+  "saved": "301394a0a04b50b602e0da62c7255fb98044aa1e098dec6570b8adb436584231",
+  "continued": "8009e6d65c95110a1c11b6be4f45688d93d451d706b21bb9d129733ad5c9ca54",
+  "tick": 2400,
+  "loaves": 0,
+  "alive": 28
+}
