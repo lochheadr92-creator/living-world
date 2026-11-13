@@ -1,0 +1,32 @@
+gen-1: days 136 to 144, rules 236
+  day    alive starving | food: packs  households  shared  wild | households: none  under 1 a head  over 3 a head  (of) richest | hardship | the starving are
+     136    82        0 |         143         384       0   394 |                7               8             28  (41)     18 |      | 
+   136.3    82        0 |         158         417       0   298 |                4               4             28  (41)     18 | lean | 
+   136.7    82        0 |         166         391       0   263 |                3               3             29  (41)     18 | lean | 
+     137    82        0 |         105         350       0   260 |                6               8             24  (41)     16 | lean | 
+   137.3    84        0 |          89         336       0   216 |                8               9             25  (42)   14.5 | lean | 
+   137.7    84        0 |          78         288       0   200 |               10              11             25  (42)     13 | lean | 
+     138    84        0 |          55         231       0   206 |               14              16             21  (42)     11 | lean | 
+   138.3    84        0 |          81         186       0   140 |                7               8             19  (42)     12 | lean | 
+   138.7    84        1 |          84         167       0   100 |               13              13             18  (42)     12 | lean | 1 converse (for hunger)
+     139    84        0 |          61         133       0    98 |               13              16             14  (42)     10 | lean | 
+   139.3    84        0 |          62         105       0    79 |               16              17             12  (42)      9 | lean | 
+   139.7    84        2 |          70          93       0    57 |               13              17             12  (42)    8.5 | lean | 2 gather (for hunger)
+     140    84        2 |          57          77       0    54 |               19              22             12  (42)    8.5 | lean | 1 gather (for hunger), 1 eat (for hunger)
+   140.3    84        5 |          44          78       0    42 |               18              24              9  (42)      8 | lean | 4 gather (for hunger), 1 flee (for safety)
+   140.7    84       15 |          33          58       0    39 |               22              24              5  (42)      8 | lean | 10 gather (for hunger), 3 flee (for safety), 1 drink (for thirst), 1 eat_store (for hunger)
+     141    84       18 |          37          29       0    40 |               24              29              3  (42)      6 | lean | 13 gather (for hunger), 4 flee (for safety), 1 nothing
+   141.3    83       26 |          27          14       0    26 |               30              34              1  (42)    5.5 | lean | 16 gather (for hunger), 6 flee (for safety), 4 eat_store (for hunger)
+   141.7    82       32 |          17           9       0    19 |               34              37              1  (42)    3.5 | lean | 23 gather (for hunger), 4 eat_store (for hunger), 2 flee (for safety), 1 nothing
+     142    75       43 |          12           8       0    35 |               34              34              1  (40)    3.5 |      | 33 gather (for hunger), 6 eat_store (for hunger), 2 drink (for thirst), 1 flee (for safety)
+   142.3    72       32 |          10           5       0   108 |               34              38              1  (39)      3 |      | 31 gather (for hunger), 1 eat (for hunger)
+   142.7    61       12 |           7           1       0   180 |               29              30              0  (33)      1 |      | 10 gather (for hunger), 2 rest (for warmth)
+     143    47       10 |           6           0       0   251 |               23              24              0  (25)      1 |      | 9 gather (for hunger), 1 rest (for warmth)
+   143.3    46       12 |          26           4       0   253 |               16              18              0  (24)    2.3 |      | 8 gather (for hunger), 2 eat_store (for hunger), 1 nothing, 1 drink (for thirst)
+   143.7    45        7 |          29           0       0   282 |               15              16              0  (24)      2 |      | 5 gather (for hunger), 1 sleep (for energy), 1 drink (for thirst)
+     144    42        4 |          42           0       0   343 |               11              14              1  (22)      8 |      | 2 sleep (for energy), 2 gather (for hunger)
+  readings of a starving person: 884; with food in their own household's stores 2%; with food in their pack 6%
+  what the starving were doing: 74% gather (for hunger); 8% eat_store (for hunger); 7% flee (for safety); 5% drink (for thirst); 2% rest (for warmth); 1% eat (for hunger); 1% converse; 1% nothing; 0% socialize (for hunger); 0% sleep (for energy)
+  deaths by hunger: 12
+    at the last reading before death: food in own pack 0 of 12; household held 1 a head or more 0; household's own stores held food 0; shared food stood somewhere 0, within 20 tiles 0
+    doing then: 7 gather (for hunger); 2 eat_store (for hunger); 2 drink (for thirst); 1 flee (for safety)

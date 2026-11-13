@@ -473,8 +473,19 @@ lost a third to a half of their people inside two or three days, between years 9
 gen-1 84 -> 42 (days 142 to 143), gen-4 93 -> 57 (106 to 107), river 88 -> 58 (167 to 168). Each is a lean season ending in
 winter: wild food falls from about 400 units to about 40 in four days.
 
-**Measured** (`scripts/famine_probe.ts`, new, read-only; river replayed to day 160 at rules 236 and read every 200 ticks to day
-169; `review_evidence/growth-20261113/famine/`). It is not that there is no food. It is where the food is.
+**Measured** (`scripts/famine_probe.ts`, new, read-only; river, gen-4 and gen-1 replayed at rules 236 to just before the crash
+and read every 200 ticks through it; `review_evidence/growth-20261113/famine/`). Two things, and they are the same thing seen
+twice: too little is put by, and none of it is common.
+
+- gen-4 (92 people) went into its lean season with 601 units of food in packs and households, gen-1 (82) with 527: six and a
+  half units a head, at about three and a half eaten a head a day. Two days. By the worst day gen-4 held 68 units and gen-1
+  20, with 2 and 1 households holding three a head.
+- River (82) went in with 763, and its food was not gone at the worst: see below.
+- In the twenty-year runs the food stored stays at 2 to 8 units a head whatever the size of the settlement; the wild holds
+  about 580 units whatever the size, so it feeds much of a settlement of 40 and little of one of 100; a lean season of three
+  to five days comes every two or three years. About 24 cellars of 90 units stand mostly empty: room is not the limit.
+
+River in detail:
 
 - On the worst day (166.3) the settlement of 83 held 264 units in households' own buildings, 25 in packs and **none in any
   shared store**; shared stores held 0 to 3 units throughout.
@@ -484,8 +495,9 @@ winter: wild food falls from about 400 units to about 40 in four days.
   1 in a hundred was asking anybody for food.
 - All 23 who died of hunger: nothing in the pack, nothing in the household, no shared food within 20 tiles.
 
-So a settlement of this size has no common food and no working way for a household with a full cellar to feed a neighbour with
-none. gen-1 and gen-4 are being replayed the same way.
+So a settlement of this size puts by two days of food, holds none of it in common, and has no working way for a household with
+a full cellar to feed a neighbour with none. Whether it cannot grow a surplus or does not keep one (food made, eaten and
+spoiled by the day) is being read on gen-4 and aspen.
 
 **Not decided.** How food should reach the hungry is the owner's choice (a common store filled in plenty; the hungry asking
 those with a full cellar; rationing in a lean season). No rule is changed.
@@ -511,8 +523,16 @@ and its making are worth 8 more than another tool's, as the basket's are. Every 
 
 Set from a measurement (`review_evidence/growth-20261113/wolves/arming/`): at rules 239 aspen had no spear until day 8; wanted
 at 1.5 with no worth it had 3 among 21 grown people on day 8; at 2.3 it had 9 on day 1 and its baskets fell from 9 to 2; at
-1.9 with the worth, aspen, birch and meadow had 7, 13 and 12 on day 8 with baskets and axes as before. What it does to stands,
-bites and kills over four years, and the lab, are running.
+1.9 with the worth, aspen, birch and meadow had 7, 13 and 12 on day 8 with baskets and axes as before.
+
+What it did (`review_evidence/growth-20261113/wolves/r240/` and `lab240/`):
+
+- Six worlds, four years, one run each, rules 239 against 240: spears in the settlement 12 to 18 -> 28 to 38; wolves killed
+  4 -> 6 (one in every world); bites 133 -> 120 in all (no difference to speak of); nobody killed by a wolf in either.
+- Lab, 12 worlds, 25 days, with the rule removed: people holding a usable spear 22.5 -> 7.4, stands offered 30.1 -> 13.2,
+  set out 13.0 -> 5.5 and tried 4.7 -> 2.3, all beyond chance; wolves wounded 2.0 -> 0.8 and killed 0.4 -> 0.1; people
+  43.7 -> 41.7 and deaths 0.7 -> 1.5 lean the rule's way inside the noise floor; baskets, buildings, plots and bites do not
+  move. So arming everybody makes more stands and more dead wolves and does not, in two years, make fewer bites.
 
 **Not built yet:** a wolf's skin hung at a communal building.
 

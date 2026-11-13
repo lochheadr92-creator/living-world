@@ -36,16 +36,31 @@ const hungerDeaths: Record<string, unknown>[] = [];
 let deathsSoFar = 0;
 const doing: Record<string, number> = {}; // what the starving (hunger under the critical line) were doing, summed over readings
 let starvingReadings = 0, starvingWithFoodAtHome = 0, starvingWithFoodInPack = 0;
+// the day's flow of food through the goods account: made (gathered, harvested, hunted, cooked), eaten or used, and spoiled
+const foodOf = (items: Record<string, number | undefined>): number => { let n = 0; for (const k of Object.keys(items)) if (isFood(k)) n += items[k] ?? 0; return n; };
+const isFood = (k: string): boolean => foodUnits({ [k]: 1 } as never) > 0;
+let flowAt = { made: 0, eaten: 0, spoiled: 0, reasons: {} as Record<string, number> };
+const flows: Record<string, unknown>[] = [];
+const snapFlow = () => ({ made: foodOf(w.ledger.created as never), eaten: foodOf(w.ledger.consumed as never), spoiled: foodOf(w.ledger.spoiled as never), reasons: { ...w.ledger.reasons } });
 
 for (let i = 1; i <= to * DAY; i++) {
   stepWorld(w);
-  if (i < from * DAY) { deathsSoFar = w.deceased.length; continue; }
+  if (i < from * DAY) { deathsSoFar = w.deceased.length; if (i === from * DAY - 1) flowAt = snapFlow(); continue; }
   const todays = w.deceased.slice(deathsSoFar);
   deathsSoFar = w.deceased.length;
   for (const d of todays) {
     if (d.cause !== 'hunger') continue;
     const s = last.get(d.id);
     hungerDeaths.push({ day: r1(d.tick / DAY), age: Math.round(d.age), ...(s ? { ticksSinceReading: d.tick - s.tick, hunger: r1(s.hunger), pack: r1(s.pack), householdFoodAHead: r1(s.hhAHead), householdOwnStores: r1(s.hhOwn), doing: s.act, nearestSharedFoodTiles: s.nearShared < 0 ? null : Math.round(s.nearShared), sharedFood: Math.round(s.sharedFood) } : {}) });
+  }
+  if (i % DAY === 0) {
+    const now = snapFlow();
+    const why: [string, number][] = [];
+    for (const [k, n] of Object.entries(now.reasons)) { const d = n - (flowAt.reasons[k] ?? 0); if (d >= 3) why.push([k, Math.round(d)]); }
+    let capOwn = 0, capShared = 0;
+    for (const b of w.buildings) if (b.store.cap > 0 && (b.type === 'cellar' || b.type === 'granary' || b.type === 'storehouse' || b.type === 'food_rack')) { if (b.hhId) capOwn += b.store.cap; else capShared += b.store.cap; }
+    flows.push({ day: i / DAY, alive: w.persons.filter((p) => p.alive).length, made: Math.round(now.made - flowAt.made), eaten: Math.round(now.eaten - flowAt.eaten), spoiled: Math.round(now.spoiled - flowAt.spoiled), plots: w.plots.length, roomInHouseholdStores: capOwn, roomInSharedStores: capShared, why: why.sort((a, b) => b[1] - a[1]).slice(0, 14).map(([k, n]) => `${k} ${n}`).join('; ') });
+    flowAt = now;
   }
   if (i % 200 !== 0) continue;
   const alive = w.persons.filter((p) => p.alive);
@@ -80,11 +95,13 @@ for (let i = 1; i <= to * DAY; i++) {
     households: aHead.length, householdsWithNone: aHead.filter((f) => f < 0.5).length, householdsUnderOneAHead: aHead.filter((f) => f < 1).length, householdsOverThreeAHead: aHead.filter((f) => f >= 3).length, richestAHead: r1(Math.max(0, ...aHead)),
     hardship: w.hardship ? w.hardship.kind : '', starvingDoing: Object.entries(doingNow).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, n]) => `${n} ${k}`).join(', ') });
 }
-const result = { seed, from, to, rulesVersion: w.settings.rulesVersion, rows, hungerDeaths, starvingReadings, starvingWithFoodAtHome, starvingWithFoodInPack, doing };
+const result = { seed, from, to, rulesVersion: w.settings.rulesVersion, flows, rows, hungerDeaths, starvingReadings, starvingWithFoodAtHome, starvingWithFoodInPack, doing };
 if (out) writeFileSync(out, JSON.stringify(result));
 console.log(`${seed}: days ${from} to ${to}, rules ${result.rulesVersion}`);
 console.log('  day    alive starving | food: packs  households  shared  wild | households: none  under 1 a head  over 3 a head  (of) richest | hardship | the starving are');
 for (const r of rows as Record<string, number | string>[]) console.log(`  ${String(r.day).padStart(6)} ${String(r.alive).padStart(5)} ${String(r.starving).padStart(8)} | ${String(r.packs).padStart(11)} ${String(r.householdStores).padStart(11)} ${String(r.sharedStores).padStart(7)} ${String(r.wild).padStart(5)} | ${String(r.householdsWithNone).padStart(16)} ${String(r.householdsUnderOneAHead).padStart(15)} ${String(r.householdsOverThreeAHead).padStart(14)}  (${r.households}) ${String(r.richestAHead).padStart(6)} | ${String(r.hardship).padEnd(4)} | ${r.starvingDoing}`);
+console.log('  food through the goods account, by day (all goods in the reasons, largest first):');
+for (const f of flows as Record<string, number | string>[]) console.log(`    day ${String(f.day).padStart(4)}: ${f.alive} alive, ${f.plots} plots; food made ${f.made}, eaten or used ${f.eaten}, spoiled ${f.spoiled}; store room: households ${f.roomInHouseholdStores}, shared ${f.roomInSharedStores} | ${f.why}`);
 const pct = (n: number, d: number): string => (d ? Math.round((100 * n) / d) : 0) + '%';
 console.log(`  readings of a starving person: ${starvingReadings}; with food in their own household's stores ${pct(starvingWithFoodAtHome, starvingReadings)}; with food in their pack ${pct(starvingWithFoodInPack, starvingReadings)}`);
 console.log('  what the starving were doing: ' + Object.entries(doing).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, n]) => `${pct(n, starvingReadings)} ${k}`).join('; '));
