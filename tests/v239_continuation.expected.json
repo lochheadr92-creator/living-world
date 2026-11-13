@@ -1,0 +1,18 @@
+{
+  "source": {
+    "head": "106458df234f84cae40ffb5eabda85c362f4a71d",
+    "rules": 239,
+    "content": "740ca165ef61285436f10e540cf57adcde634dfe6a5d5db7984c31dde7b0af7e",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch (arrivals on) at the next hundred ticks after a wolf is first wounded by a won stand, saved with the wound on it and continued 120 ticks."
+  },
+  "saved": "03e6e647118bb463d7fe10f16d2a9d4e7b77560e54ca3f5f0db06686ed786caa",
+  "continued": "834120c85f4a3abb23d9e6b1ebbf565bdd4f6fd9093f938b20605e9606c46886",
+  "tick": 29000,
+  "woundedWolves": 1,
+  "wolfHealth": [
+    34,
+    100,
+    100
+  ],
+  "alive": 33
+}
