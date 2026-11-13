@@ -1,0 +1,73 @@
+aspen: 60 days, rules 234; planks made 14, bricks made 15; observer changed the world in 0 checks
+looks at a grown person awake: 9972; of which they knew a site short of planks or bricks: 7523
+  an option about planks or bricks was offered: 1833 (their first choice 35 times; otherwise behind by 24.1 on average)
+  none offered but a refusal said why: 2927; neither offered nor refused: 2763
+  what was offered:
+    401x Collect N charcoal from the kiln
+    230x Burning charcoal
+    193x Build the mine
+    146x Help repair a neighbour’s mine
+    142x Bring N wood to the kiln
+    117x Collect N wood from the food rack
+    96x Collect N wood from the timber yard
+    45x Chopping wood to help keep a neighbour’s mine standing
+    42x Chopping wood the smithy burns charcoal to smelt and forge (charcoal)
+    34x Cutting stone for the shared mine
+  what beat it:
+    110x gather: Picking berries
+    110x sleep: Sleep at my hut
+    104x deposit: Store food in the cellar
+    86x rest: Stay at my hut until it is light
+    78x gather: Gathering wild grain
+    71x gather: Fishing
+    55x gather: Picking fruit
+    55x attend: Go to the feast at the hall
+    53x harvest: Harvest the crop
+    51x fuel_fire: Add wood to the fire
+    46x warm: Warm up at the fire
+    40x rest: Shelter at the hut
+  refusals:
+    3518x Burning charcoal: has not learned charcoal firing
+    684x Forging an iron axe: has not learned iron forging
+    607x Forging an iron hammer: has not learned iron forging
+    197x Build the mine: not enough estimated time for the trip and return: energy for the return
+    155x Working the ore mine: needs a pickaxe and has none (and none is on the rack)
+    150x Get stone for the shared mine: no room in my pack for one stone
+    127x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    93x Get ore to work out iron smelting first, to replace my worn axe with an iron one (smelted iron): no room in my pack for one ore
+    83x Building a handcart: needs a hammer and has none (and none is on the rack)
+    67x Weaving a blanket: not enough estimated time for the trip and return: energy for the return
+    66x Digging ore to work out iron smelting first, to replace my worn axe with an iron one (smelted iron): not enough estimated time for the trip and return: energy for the return
+    64x Forging an iron axe: needs a hammer and has none (and none is on the rack)
+    56x Weaving a wool bedding: the timber yard is busy with fibre garment
+    56x Weaving a bedding: the timber yard is busy with fibre garment
+    55x Weaving a wool blanket: the timber yard is busy with fibre garment
+    55x Weaving a blanket: the timber yard is busy with fibre garment
+    46x Weaving a wool garment: the timber yard is busy with fibre garment
+    46x Scraping and sewing a hide garment: the timber yard is busy with fibre garment
+    46x Weaving a garment: the timber yard is busy with fibre garment
+    40x Making a net: not enough estimated time for the trip and return: energy for the return
+    39x Making a trap: not enough estimated time for the trip and return: energy for the return
+    39x Weaving a garment: not enough estimated time for the trip and return: energy for the return
+    35x Weaving a bedding: not enough estimated time for the trip and return: energy for the return
+    33x Making a net: the timber yard is busy with net
+  in daylight: a step offered 1259 times, first choice 34; behind by (10th, 25th, middle, 75th, 90th) 7, 12.2, 18.1, 26.4, 34.3; the step itself worth (10th, middle, 90th) 5.1, 18, 26.5
+  what beat it in daylight:
+    108x gather: Picking berries
+    102x deposit: Store food in the cellar
+    76x gather: Gathering wild grain
+    68x gather: Fishing
+    55x gather: Picking fruit
+    47x attend: Go to the feast at the hall
+    41x harvest: Harvest the crop
+    24x plant: Plant seed
+    23x attend: Go to the harvest feast at the hall
+    22x explore: Explore somewhere new
+    22x attend: Go to the market at the hall
+    20x gear_work: Check the gear
+    20x deposit: Bring food home
+    19x build: Build the hut
+  packs with no room (274 looks, 0.8 weight free on average), weight carried by item: wood 3.4, seeds 1.4, clay 1.3, stone 0.9, fish 0.9, berries 0.6, basket 0.6, grain 0.6, axe 0.6, spear 0.5
+  sawing refused for want of a saw 3 times, 3 of them while a saw was in somebody's pack; a saw lay at a timber yard at 7523 looks; saws in packs at the end 2
+  iron: of 50 grown people 12 know charcoal firing, 4 smelting, 4 forging; 5 picks held; 35 people hold a worn tool an iron one would replace; made charcoal 6, iron 0
+  doing, when nothing was offered or refused: 661x gather; 527x drink; 422x rest; 167x sleep; 159x eat_store; 156x warm; 139x attend; 101x deposit

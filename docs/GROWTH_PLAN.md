@@ -305,11 +305,35 @@ Answers gap ledger G226 and G227 and AR-02 to AR-05 of `docs/ADVERSARIAL_REVIEW_
 - `scripts/generation_trace.ts`: the count labelled `householdsEver` is the households standing now; relabelled.
 
 A world keeps the scheme it was made with. A world at 234 parts from the same world at 233 within days (measured, three worlds),
-because some choices are hashed on a belief's id: a different draw, not a different rule. The lab comparison of versions was
-started on 13 November and is not read yet.
+because some choices are hashed on a belief's id: a different draw, not a different rule. **The lab comparison of versions
+(`scripts/lab_versions.ts`, the 12 seeds, 25 days, control and two nudges each, clean checkouts of `0444278f` and `cd465dae`;
+`review_evidence/growth-20261113/id-ranges/`): nothing moved by more than a single draw moves it; no metric is larger than
+chance (buildings 46.7 and 46.3, people 36.4 and 36.0, deaths 0.1 and 0.2).**
 
 Checks: `tests/id_ranges.test.ts` (7); 92 tests in 12 files pass, among them golden, observer purity and the rules-229 and
 rules-230 pins; pin `tests/v234_continuation.*` (Normal aspen, one day; clean checkout of `cd465dae`).
+
+## Step E, measured: why no iron is made (13 November, no rule changed)
+
+`scripts/supply_probe.ts --match "\\biron\\b|\\bore\\b|charcoal|smelt|forg|\\bmine\\b" --knows smithy`, aspen, birch, meadow
+and river, five years each, rules 234, one run each; `review_evidence/growth-20261113/iron/`. Each grown person who knows of a
+smithy, awake, every 300 ticks from the second year. **No iron was made and no ore mined in any of the four.**
+
+- **The want is weak.** A step toward iron was among the options in 5,071 daylight looks and was the first choice 138 times
+  (under 3 in 100). The step is worth 18 at the middle where ordinary work is worth 32, and is behind the first choice by 18
+  to 21 at the middle: the same shape as planks and bricks before rules 229. The only want for iron is one person's wish to
+  replace a worn tool (13 and a little, `production.ts demandsOf`); the smithy's charcoal has a standing want of 30 (rules 10)
+  and is made (6 to 21 a world) and carried between kiln and smithy; ore and iron have none.
+- **Few know the work, and not for want of knowers.** Of 20 to 50 grown people, 4 to 17 know charcoal firing, 1 to 8 smelting
+  and 1 to 8 forging. The commonest refusals are of those who do not: "Burning charcoal: has not learned charcoal firing"
+  1,257 to 3,518 times a world, "Forging an iron axe: has not learned iron forging" 451 to 798.
+- **The mine has no pick.** "Working the ore mine: needs a pickaxe and has none (and none is on the rack)" 152 to 226 times a
+  world, with 4 to 6 picks in people's packs; "does not know of a mine they may use" 330 times in river.
+- **Packs.** "Get ore ...: no room in my pack for one ore" 63 to 278 times a world; "Forging an iron axe: needs a hammer and has
+  none" 64 to 172 times in the two large worlds.
+- 18 to 35 people a world hold a worn tool an iron one would replace.
+
+No repair is made yet.
 
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 
