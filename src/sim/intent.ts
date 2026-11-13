@@ -1,4 +1,5 @@
 import {recordNightShelter} from './night_experience';
+import { toolRecipe } from './wooden_spear';
 import {stockPreservationOption,hasPreservation} from './preservation';
 import {hasLivedLife} from './lived_life';
 import {toolCapacityBlock} from './tool_feasibility';
@@ -20,7 +21,7 @@ import {reviewJourneyRecovery} from './journey_recovery';
 // the world behind their back.
 //
 // In an authored world every function here is a no-op and `p.intentions` stays empty, so authored behaviour is untouched.
-import { BUILD_DEF, DAY, SOURCE_ITEM, TOOL_RECIPE, homeNoun, isHomeType } from './constants';
+import { BUILD_DEF, DAY, SOURCE_ITEM, homeNoun, isHomeType } from './constants';
 import { carryCap } from './people';
 import { roomFor,weightOf } from './economy';
 import { dayFraction } from './environment';
@@ -639,7 +640,7 @@ export function setToolPlanCapacity(on:boolean):void{toolPlanCapacity=on;}
 function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null {
   const t = wantedTool ? wantedTool(ctx) : null;
   if (!t || alreadyPreparingHandTool(ctx.world,ctx.p,t)) return null;
-  const r = TOOL_RECIPE[t];
+  const r = toolRecipe(ctx.world, t);
   if(toolPlanCapacity&&ctx.world.settings.dynamics==='rich'&&runsRulesVersion(ctx.world,118)&&weightOf({wood:r.wood,stone:r.stone})>carryCap(ctx.world,ctx.p))return null;
   // a plan that does not exist yet may count only what no live plan of theirs has already spoken for
   const spare: Partial<Items> = { wood: freeOf(ctx.p, 'wood'), stone: freeOf(ctx.p, 'stone') };
@@ -1023,7 +1024,7 @@ function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown:
     if (!want || want.aboutId !== u.aboutId) return null;
     made = { ...base, kind: 'shelter', goal: `get the household's ${BUILD_DEF[want.what].label} built`, until: want.until, reason: want.why, aboutId: want.aboutId, wants: want.wants, makes: '' };
   } else if (u.kind === 'tool') {
-    const r = TOOL_RECIPE[u.makes as ToolKind];
+    const r = toolRecipe(world, u.makes as ToolKind);
     if (!r) return null;
     made = { ...base, kind: 'tool', goal: `make a ${u.makes}`, until: world.tick + DAY * 2, reason: `${u.name} meant to make one`, aboutId: 0, wants: { wood: r.wood, stone: r.stone }, makes: u.makes };
   } else if (u.kind === 'stock') {

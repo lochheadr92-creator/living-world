@@ -1,4 +1,5 @@
 import { noteToyMade, takeToyWood } from './toys';
+import { toolRecipe } from './wooden_spear';
 import { hasBuilderFetches, noteRanOut, waitForMaterials } from './builder_fetches';
 import {mayShareType} from './shared_projects';
 import { householdFirstHomePassesCap } from './home_first';
@@ -20,7 +21,7 @@ import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { BUILD_DEF, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WEIGHT, WORK, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, WEIGHT, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { notePractice, onSharedWork } from './apprentice';
 import { riskOfHarm } from './life';
@@ -235,7 +236,7 @@ export function setCraftCapacity(on: boolean): void { craftCapacity = on; }
 /** The completed tool replaces its consumed materials. No goods move during this check. */
 export function craftedToolFits(world: World, p: Person, tool: ToolKind): boolean {
   if (!craftCapacity || world.settings.dynamics !== 'rich' || !runsRulesVersion(world, 58)) return invRoom(world, p, tool) >= 1;
-  const r = TOOL_RECIPE[tool];
+  const r = toolRecipe(world, tool);
   return weightOf(p.inv) - r.wood * WEIGHT.wood - r.stone * WEIGHT.stone + WEIGHT[tool] <= carryCap(world, p) + 1e-9;
 }
 
@@ -247,7 +248,7 @@ registerHandler('craft', {
     if(tool==='rod'){const block=rodCraftBlock(world,p,a);if(block)return block;}
     if(tool==='toy'){const block=takeToyWood(world,p,a);if(block)return block;} // rules 215 (toys.ts)
     if(isTextile(tool))return 'textiles must be woven at a timber yard';
-    const r = TOOL_RECIPE[tool];
+    const r = toolRecipe(world, tool);
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'missing materials';
     const b = world.byId.get(a.targetId);
     if (!b || b.ent !== 'building') return 'no workspace';
@@ -263,7 +264,7 @@ registerHandler('craft', {
     const tool = a.data.tool as ToolKind;
     if(tool==='rod'){const block=rodCraftBlock(world,p,a);if(block)return `fail:${block}`;}
     if(isTextile(tool))return 'fail:textiles must be woven at a timber yard';
-    const r = TOOL_RECIPE[tool];
+    const r = toolRecipe(world, tool);
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';
     if(a.data.projectCraft&&runsRulesVersion(world,69)){
       const plan=p.intentions.find(i=>i.id===a.data.projectCraft&&i.status==='active'&&i.project);

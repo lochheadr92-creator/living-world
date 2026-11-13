@@ -1,4 +1,5 @@
 import { eveningFireOptions } from './evening_fire';
+import { SPEAR_READY, toolRecipe, wantsSpearReady } from './wooden_spear';
 import { toyOptions } from './toys';
 import { hungerToActOn, providePull } from './child_feeding';
 import { HAD_FOOD_REASON, hasHandoverTruth, recentlyHadFood } from './handover_outcome';
@@ -406,7 +407,7 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   // a tool this person wants
   const tool = wantedTool(ctx);
   if (tool) {
-    const r = TOOL_RECIPE[tool];
+    const r = toolRecipe(world, tool);
     // rules 204 (carry_more.ts): the wood for a basket is worth a little more than the makings of another tool
     if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6 + basketWorth(world, tool), why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
     if (r.stone) needs.push({ item: 'stone', n: r.stone, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
@@ -465,19 +466,23 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   // quiet village arms nobody; and the weight is deliberately in the same band as the other wants (an axe reaches about
   // 2.5, a basket about 2) rather than above them, so meeting a wolf is a reason to get one, not a reason to drop
   // everything. One is enough: `has('spear')` ends it.
-  if (makesSpears(world) && !has('spear') && metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
+  // rules 240 (wooden_spear.ts): and from 240 every grown person without one wants one, a little below the other tools
+  if (makesSpears(world) && !has('spear')) {
+    if (metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
+    else if (wantsSpearReady(world)) options.push({ t: 'spear', w: SPEAR_READY });
+  }
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
   const first = options.find(o=>!toolCapacityBlock(world,p,o.t))?.t ?? null;
   // rules 204 (carry_more.ts): the basket's new eagerness does not put aside a tool whose makings are already in hand
-  if (first === 'basket' && hasBasketWant(world) && !makingsInHand(p, 'basket')) {
-    const ready = options.find(o => o.t !== 'basket' && !toolCapacityBlock(world,p,o.t) && makingsInHand(p, o.t));
+  if (first === 'basket' && hasBasketWant(world) && !makingsInHand(world, p, 'basket')) {
+    const ready = options.find(o => o.t !== 'basket' && !toolCapacityBlock(world,p,o.t) && makingsInHand(world, p, o.t));
     if (ready) return ready.t;
   }
   return first;
 }
 /** Does this person hold, free of any plan of theirs, everything the hand tool is made of? */
-const makingsInHand = (p: Person, t: HandTool): boolean => freeOf(p, 'wood') >= TOOL_RECIPE[t].wood && freeOf(p, 'stone') >= TOOL_RECIPE[t].stone;
+const makingsInHand = (world: World, p: Person, t: HandTool): boolean => freeOf(p, 'wood') >= toolRecipe(world, t).wood && freeOf(p, 'stone') >= toolRecipe(world, t).stone;
 
 /** Has this person actually met a wolf lately - one in sight now, or one they saw and remember from within the last day? */
 export function metAWolfLately(ctx: Ctx): boolean {
@@ -1086,7 +1091,7 @@ export function workshopToolOptions(ctx: Ctx): void {
   if (!tool || craftNeedsBlock(ctx)) return;
   const scratch: Ctx = { ...ctx, options: [], blocked: [] };
   craftOption(scratch, tool);
-  const r = TOOL_RECIPE[tool];
+  const r = toolRecipe(ctx.world, tool);
   const forPlan = ctx.p.intentions.some(i => i.status === 'active' && i.kind === 'tool' && i.makes === tool);
   const project = projectCraftPlan(ctx,tool);
   for (const item of ['wood', 'stone'] as const) {
@@ -1145,7 +1150,7 @@ function craftCandidates(ctx: Ctx): void {
 function craftOption(ctx: Ctx, tool: HandTool): void {
   const { world, p } = ctx;
   if ((p.inv[tool] ?? 0) > 0) return; // they already have one
-  const r = TOOL_RECIPE[tool];
+  const r = toolRecipe(world, tool);
   // The tool a live plan of theirs is about may use that plan's own allocation; any other tool may use only what no plan has spoken
   // for - the same rule the site deliveries, the camp fire and a neighbour's roof already follow (intent.ts freeOf). Without this,
   // the wood someone had set aside for a basket could go into an axe instead.

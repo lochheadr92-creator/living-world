@@ -1,5 +1,6 @@
 // Declarative, bounded production prerequisites. These are beliefs and intentions, never inventory or executable code.
 import {WEIGHT,TOOL_DEFS,TOOL_RECIPE} from './constants';
+import {toolRecipe} from './wooden_spear';
 import {RECIPE_BY_ID} from './recipes';
 import {runsRulesVersion} from './rulesversion';
 import type {ItemKind,ToolKind,World} from './types';
@@ -48,7 +49,8 @@ export function projectGoalError(goal:unknown):string|null{
  return null;
 }
 /** Structural validation is independent of the world. Actual access and execution remain engine checks. */
-export function projectGraphError(value:unknown):string|null{
+/** `w` is given wherever a world is to hand: what a hand tool is made of may depend on its rules (wooden_spear.ts toolRecipe). */
+export function projectGraphError(value:unknown,w?:World):string|null{
  if(!value||typeof value!=='object')return 'missing project graph';
  const g=value as ProjectGraph,goalError=projectGoalError(g.goal);if(goalError)return goalError;
  if(g.version!==1||!Array.isArray(g.nodes)||!g.nodes.length||g.nodes.length>PROJECT_LIMITS.nodes)return 'invalid project graph size or version';
@@ -87,7 +89,7 @@ export function projectGraphError(value:unknown):string|null{
   if((n.method==='present'||n.method==='supply')&&(n.dependencies.length||n.recipe||n.place))return 'supply step has production data';
   if(n.method==='recipe'||n.method==='hand'){
    const r=n.method==='recipe'?RECIPE_BY_ID[n.recipe]:null;
-   const hand=n.method==='hand'?TOOL_RECIPE[n.item as ToolKind]:null;
+   const hand=n.method==='hand'?(w?toolRecipe(w,n.item as ToolKind):TOOL_RECIPE[n.item as ToolKind]):null;
    const need:Partial<Record<ItemKind,number>>=r?{...r.inputs}:hand?{wood:hand.wood,stone:hand.stone}:{};
    if(r)for(const k of Object.keys(r.fuel) as ItemKind[])need[k]=(need[k]??0)+(r.fuel[k]??0);
    const children=n.dependencies.map(id=>g.nodes.find(c=>c.id===id)!);
@@ -111,7 +113,7 @@ export function projectGraphError(value:unknown):string|null{
 export function validateProjectGraphs(w:World):void{
  for(const p of w.persons??[])for(const i of p.intentions??[])if(i.project!==undefined){
   if(!runsRulesVersion(w,69)||w.settings.dynamics!=='rich'||i.kind!=='batch')throw new Error('Invalid project rules or intention');
-  const why=projectGraphError(i.project);if(why)throw new Error('Invalid project: '+why);
+  const why=projectGraphError(i.project,w);if(why)throw new Error('Invalid project: '+why);
   if(i.makes!==i.project.goal.item)throw new Error('Invalid project goal identity');
  }
 }

@@ -636,7 +636,8 @@ describe('10. the lab switch removes the action and leaves the rest', () => {
 
 describe('11. staged crafting component and defence chains', () => {
   it('offers a spear after a sighting and the selected craft consumes its real materials', () => {
-    const { w, ada } = scene('def-chain', { materials: true });
+    // pinned to rules 239: from rules 240 a spear takes no stone (wooden_spear.ts; tests/wooden_spear.test.ts)
+    const { w, ada } = scene('def-chain', { materials: true, rulesVersion: 239 });
     expect(unfitPerson(w, ada)!.why).toMatch(/nothing to face it with/);
     expect(wantedTool(ctxFor(w, ada))).toBe('spear');
     const craft = ctxFor(w, ada).options.find((o) => o.key === 'craft:spear')!;

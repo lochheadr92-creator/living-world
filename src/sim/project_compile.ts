@@ -1,9 +1,10 @@
 import {recipeAvailable} from './recipes';
+import {toolRecipe} from './wooden_spear';
 import {isBodyPart,knownCarcassUnits} from './carcass_supply';
 import {CARCASS_WORK} from './carcass';
 import {knownTextileStock} from './textile_stock';
 // Build a finite prerequisite tree from personal knowledge. Compilation creates no action, reservation or material.
-import {TOOL_DEFS,TOOL_RECIPE,isHomeType} from './constants';
+import {TOOL_DEFS,isHomeType} from './constants';
 import {hasKnownResource} from './intent';
 import {isRawMaterial} from './options_work';
 import {rankWaterSpots} from './optutil';
@@ -49,8 +50,8 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
    const checkpoint=nodes.length;
    try{
     node.method='hand';node.recipe=tool;
-    for(const k of ['wood','stone'] as const){const n=TOOL_RECIPE[tool][k];if(n>0)node.dependencies.push(build(k,n,0,0,depth+1,chain));}
-    node.estimatedTicks=TOOL_RECIPE[tool].work+node.dependencies.reduce((n,id)=>n+nodes[id-1].estimatedTicks,0);return node.id;
+    for(const k of ['wood','stone'] as const){const n=toolRecipe(world,tool)[k];if(n>0)node.dependencies.push(build(k,n,0,0,depth+1,chain));}
+    node.estimatedTicks=toolRecipe(world,tool).work+node.dependencies.reduce((n,id)=>n+nodes[id-1].estimatedTicks,0);return node.id;
    }catch{nodes.splice(checkpoint);node.dependencies=[];}
   }
   let failure='no personally known way to obtain '+item;
@@ -77,6 +78,6 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
  };
  try{
   const root=build(goal.item,goal.quantity,goal.tier,0,0,new Set()),graph:ProjectGraph={version:1,goal:{...goal},root,nodes,current:0,completed:[],retries:0,history:[]};
-  const why=projectGraphError(graph);return why?{ok:false,reason:why,searched}:{ok:true,graph,searched};
+  const why=projectGraphError(graph,world);return why?{ok:false,reason:why,searched}:{ok:true,graph,searched};
  }catch(e){return {ok:false,reason:e instanceof Error?e.message:String(e),searched};}
 }

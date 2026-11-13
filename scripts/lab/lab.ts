@@ -5,6 +5,7 @@ import { SMITHY_IRON_PARTS, setSmithyIron, smithyIronPartOn } from '../../src/si
 import { GROUNDWATER_PARTS, groundwaterPartOn, setGroundwater } from '../../src/sim/groundwater';
 import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
 import { WOLF_FIGHT_PARTS, setWolfFight, wolfFightPartOn } from '../../src/sim/wolf_fight';
+import { WOODEN_SPEAR_PARTS, setWoodenSpear, woodenSpearPartOn } from '../../src/sim/wooden_spear';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
@@ -282,6 +283,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 240 (wooden_spear.ts): both parts removed (equal to rules 239), and each part alone
+  if (kind === 'rich-no-wooden-spear') return { spec: label, summary: 'a spear takes a stone and is wanted only after a wolf has been met, as before rules 240; no effect below rules 240', install() { const was = WOODEN_SPEAR_PARTS.map((k) => woodenSpearPartOn(k)); setWoodenSpear(false); return () => WOODEN_SPEAR_PARTS.forEach((k, i) => setWoodenSpear(was[i], k)); } };
+  for (const part of WOODEN_SPEAR_PARTS) if (kind === 'rich-no-wooden-spear-' + part) return { spec: label, summary: `${part === 'wood' ? 'a spear made by hand takes a stone' : 'a spear is wanted only after a wolf has been met'}; no effect below rules 240`, install() { const was = woodenSpearPartOn(part); setWoodenSpear(false, part); return () => setWoodenSpear(was, part); } };
   // rules 239 (wolf_fight.ts): all four parts removed (equal to rules 238), and each part alone
   if (kind === 'rich-no-wolf-fight') return { spec: label, summary: 'a spear drives a wolf off and never hurts it, as before rules 239; no effect below rules 239', install() { const was = WOLF_FIGHT_PARTS.map((k) => wolfFightPartOn(k)); setWolfFight(false); return () => WOLF_FIGHT_PARTS.forEach((k, i) => setWolfFight(was[i], k)); } };
   for (const part of WOLF_FIGHT_PARTS) if (kind === 'rich-no-wolf-fight-' + part) return { spec: label, summary: `${part === 'wound' ? 'a won stand does not wound the wolf' : part === 'kill' ? 'a wolf is wounded but never dies of it' : part === 'heal' ? 'a wounded wolf does not mend' : 'no wolf comes back after one is killed'}; no effect below rules 239`, install() { const was = wolfFightPartOn(part); setWolfFight(false, part); return () => setWolfFight(was, part); } };

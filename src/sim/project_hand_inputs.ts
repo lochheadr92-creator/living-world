@@ -1,5 +1,6 @@
 // Personal inputs for only the hand-tool prerequisite currently being prepared, not the whole graph.
-import {TOOL_DEFS,TOOL_RECIPE} from './constants';
+import {TOOL_DEFS} from './constants';
+import {toolRecipe} from './wooden_spear';
 import {runsRulesVersion} from './rulesversion';
 import type {ProjectGraph} from './project_graph';
 import type {ProjectStep} from './project_step';
@@ -14,7 +15,7 @@ export function currentHandInputs(w:World,g:ProjectGraph,s:ProjectStep):Items|nu
  // A hand recipe has only raw carried input children. A sibling/future hand tool is not the current task.
  const hand=s.node.method==='hand'?s.node:g.nodes.find(n=>n.method==='hand'&&n.dependencies.includes(s.node.id));
  if(!hand||hand.destination!==0||!TOOL_DEFS[hand.item as ToolKind]?.hand)return null;
- const r=TOOL_RECIPE[hand.item as ToolKind],inputs:Items={};
+ const r=toolRecipe(w,hand.item as ToolKind),inputs:Items={};
  if(r.wood>0)inputs.wood=r.wood;if(r.stone>0)inputs.stone=r.stone;return inputs;
 }
 

@@ -34,7 +34,7 @@ export function reviseProject(ctx:Ctx,request:unknown):ProposalResult{
  // prior-graph history, anchored at the new root rather than pretending a new node did them.
  graph.history=old.history.map(h=>({tick:h.tick,node:graph.root,reason:`Prior step ${h.node}: ${h.reason}`.slice(0,240)})).slice(-(PROJECT_LIMITS.history-1));
  const reason=`revised ${old.goal.item} quantity from ${old.goal.quantity} to ${r.quantity}; original deadline retained`;
- const bad=projectGraphError(graph);if(bad)return no(bad);
+ const bad=projectGraphError(graph,world);if(bad)return no(bad);
  // Only now mutate the existing plan. No id, deadline, paid work, goods or activity changes.
  plan.project=graph;plan.reserve=r.quantity;plan.aboutId=aboutId;
  if(root.method==='recipe')plan.recipe=root.recipe;
