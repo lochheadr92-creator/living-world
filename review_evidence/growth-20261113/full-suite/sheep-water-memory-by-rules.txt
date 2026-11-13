@@ -1,0 +1,12 @@
+220: 2 of 2 sheep remember water at tick 300
+225: 2 of 2 sheep remember water at tick 300
+226: 1 of 2 sheep remember water at tick 300
+227: 1 of 2 sheep remember water at tick 300
+228: 1 of 2 sheep remember water at tick 300
+229: 1 of 2 sheep remember water at tick 300
+230: 1 of 2 sheep remember water at tick 300
+231: 1 of 2 sheep remember water at tick 300
+232: 1 of 2 sheep remember water at tick 300
+233: 1 of 2 sheep remember water at tick 300
+234: 1 of 2 sheep remember water at tick 300
+235: 1 of 2 sheep remember water at tick 300

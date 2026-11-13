@@ -1,0 +1,8 @@
+220: {"seed":"meadow","rules":220,"limitDays":60,"firstCharcoalDay":null,"pairAlive":2,"peopleAlive":33,"kilnJob":null}
+226: {"seed":"meadow","rules":226,"limitDays":60,"firstCharcoalDay":null,"pairAlive":2,"peopleAlive":29,"kilnJob":null}
+228: {"seed":"meadow","rules":228,"limitDays":60,"firstCharcoalDay":null,"pairAlive":2,"peopleAlive":32,"kilnJob":null}
+229: {"seed":"meadow","rules":229,"limitDays":60,"firstCharcoalDay":2.6,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+231: {"seed":"meadow","rules":231,"limitDays":60,"firstCharcoalDay":2.6,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+233: {"seed":"meadow","rules":233,"limitDays":60,"firstCharcoalDay":3.6,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+234: {"seed":"meadow","rules":234,"limitDays":60,"firstCharcoalDay":1.7,"pairAlive":2,"peopleAlive":28,"kilnJob":null}
+235: {"seed":"meadow","rules":235,"limitDays":60,"firstCharcoalDay":0.6,"pairAlive":2,"peopleAlive":28,"kilnJob":null}

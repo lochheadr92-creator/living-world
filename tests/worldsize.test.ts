@@ -5,6 +5,7 @@ import { Game } from '../src/app/game';
 import { loadPrefs } from '../src/app/prefs';
 import { layoutFor, profileFacts, restartSettings, settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
+import { withGrowthRoom } from '../src/sim/growth_room';
 import { ORDINARY_RULES, rulesOf } from '../src/sim/rules';
 import { settlementCount } from '../src/sim/settlements';
 
@@ -61,7 +62,9 @@ describe('moving between sizes', () => {
     expect(game.world.persons.length).toBe(28);
     expect(game.world.extraSettlements).toBeUndefined();
     expect(game.settings.profile).toBeUndefined();
-    expect(rulesOf(game.world)).toBe(ORDINARY_RULES);
+    // from rules 225 (growth_room.ts) the ordinary limits are lifted with the living population; the base is still the ordinary one
+    expect(rulesOf(game.world)).toEqual(withGrowthRoom(game.world, ORDINARY_RULES));
+    expect(rulesOf(game.world).facilityRadius).toBe(ORDINARY_RULES.facilityRadius);
   }, 120_000);
 
   it('a village started this way is the same village the ordinary settings make', () => {
@@ -84,7 +87,9 @@ describe('moving between sizes', () => {
     expect(game.settings.scene).toBe('contest');
     expect(game.settings.ruleSet).toBeUndefined();
     expect(game.settings.profile).toBeUndefined();
-    expect(rulesOf(game.world)).toBe(ORDINARY_RULES);
+    // from rules 225 (growth_room.ts) the ordinary limits are lifted with the living population; the base is still the ordinary one
+    expect(rulesOf(game.world)).toEqual(withGrowthRoom(game.world, ORDINARY_RULES));
+    expect(rulesOf(game.world).facilityRadius).toBe(ORDINARY_RULES.facilityRadius);
   }, 120_000);
 });
 

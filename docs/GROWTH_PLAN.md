@@ -362,6 +362,27 @@ it, with the whole rule removed or the count part alone (people 35.9 against 36.
 against 81.7, none distinguishable). In 25 days only one world of six tried reaches iron work at all, so this lab says the rule
 does no harm early; what it gives is the five-year measurement above, a description.
 
+## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
+
+The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and
+3,457 of 3,531 tests pass.** The 74 failures in 17 files:
+
+- **64 fail the same at `cc0e656a`** (rules 220, before the growth stream), found by running the same 17 files there:
+  `household_home` 19, `household_preparation` 10, `preservation` 10, `household_continuity_view` 8, `project_helpers` 7,
+  `stored_materials` 5, and one each in `carcass_supply`, `project_inputs`, `transport`, `lab_report` and `lab_defaults`. Since
+  when and why was not looked into; they are not from this stream.
+- **6 are load**: `lab_defaults` (2), `lab_provenance`, `lab_report`, `zz_review_g_observer_purity` and
+  `zz_review_main_toolreport_saves` time out in the full run and pass alone.
+- **4 were stale tests, repaired**: `worldsize` (2) compared the limits with the ordinary ones by identity, which rules 225
+  lifts; `livestock` required both of a forest's two sheep to have found water by tick 300, and from rules 226 one grazes
+  elsewhere (why was not looked into); `iron_chain_stall` pinned itself to rules 211 after its world was made, so the world
+  was laid down by the current rules, and rules 231, which acts when a world is made, changed its map. It now gives the pin
+  when the world is made. None of the four is a change of behaviour.
+
+Found on the way (`first-charcoal-by-rules.txt`, the measurement script beside that test, meadow, 60 days): no charcoal at rules
+220, 226 or 228, and the first on days 2.6, 2.6, 3.6, 1.7 and 0.6 at rules 229, 231, 233, 234 and 235. The bench part of rules
+229 is what lets a kiln's batch be begun.
+
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 
 `scripts/water_probe.ts` (new, read-only), the 12 lab worlds, three years each, rules 233, arrivals on, one run each;

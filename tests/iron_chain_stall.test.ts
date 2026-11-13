@@ -114,10 +114,11 @@ describe("the smithy's fuel comes to the kiln (rules version 10)", () => {
     // two founders holding fresh (wear 0) axes, so on the want side alone - no worn tool, no personal iron plan - the
     // smithy's fuel wants itself stocked. What the version does not change (rules version 9 or nothing) is pinned by the
     // continuation reference, not by this test.
-    const w = createWorld(freshRunSettings(parseRunRules('rich'), 'normal', 'meadow', { immigration: false }));
     // Pinned to rules 211: from rules 212 (child_pace.ts) a little one walks slower, which moves this meadow world's whole timeline,
     // and its first charcoal falls outside the thirty-day window. The charcoal chain checked here is unchanged by that rule.
-    (w.settings as { rulesVersion?: number }).rulesVersion = Math.min(CURRENT_RULES_VERSION, 211);
+    // The pin is given when the world is MADE (13 November 2026): set afterwards, as it was, the world was laid down by the current
+    // rules and only run at 211, and rules 231 (deposit_plenty.ts), which acts when a world is made, changed its map and timeline.
+    const w = createWorld({ ...freshRunSettings(parseRunRules('rich'), 'normal', 'meadow', { immigration: false }), rulesVersion: Math.min(CURRENT_RULES_VERSION, 211) });
     const home = w.buildings.find((b) => b.type === 'hut' || b.type === 'lean_to') ?? w.buildings[0];
     const hx = home?.x ?? 60, hy = home?.y ?? 60;
     const kiln = createBuilding(w, 'kiln', hx + 3, hy + 5, 0);
