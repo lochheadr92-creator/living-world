@@ -1,0 +1,17 @@
+{
+  "source": {
+    "head": "564e0f3d4b9c8a03c2c9254a89d9fbfdb0c34aaf",
+    "rules": 241,
+    "content": "b5f1ee581cb3394b8b0b4814b8a512dc2a1acaeef50d9cc0560d1fe1077f3c94",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal fern (arrivals on) at tick 17,400, the next hundred after a wolf skin is first hung at the camp fire, saved and continued 120 ticks."
+  },
+  "saved": "b243142e5370fbee235a546f028c374c51cf824c292ebca47a6c39bd47d7837c",
+  "continued": "5c493b54b181dbec1ae7974e1ade05a5b1f1213ad842c6eb2f7814793df31099",
+  "tick": 17400,
+  "skinsHung": 1,
+  "places": [
+    "fire 1"
+  ],
+  "wolves": 2,
+  "alive": 31
+}
