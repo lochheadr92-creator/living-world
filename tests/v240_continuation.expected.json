@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "a4e3693d0218c679d8e71f87fea8aad80a1f48ba",
+    "rules": 240,
+    "content": "9f909e5b97a21058bb65ba8f8e83944b76c07c912eed5b34b50d6acb49c95a0f",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch (arrivals on) at tick 900, the next hundred after its third spear is made, saved and continued 120 ticks."
+  },
+  "saved": "93f8caadff93a085109412970e124b7d20770037591ee52f83bc112bfeeed607",
+  "continued": "21f9240db58e65c7fa3393dc6e5a345798a06175732d4f161a77ab6b68744f71",
+  "tick": 900,
+  "spears": 3,
+  "stoneUsedForTools": 0,
+  "alive": 28
+}
