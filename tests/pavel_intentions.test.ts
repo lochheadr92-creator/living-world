@@ -29,7 +29,11 @@ it('reconsiders an impossible elder tool, releases its wood, and does not readop
  expect(p.inv).toEqual({wood:2});expect(JSON.stringify(p.commitments)).toBe(obligations);
 });
 it('a real increase in carrying capacity makes the tool eligible again, also after loading',()=>{
- const {w,p}=scene();reviewIntentions(makeCtx(w,p,true,true));
+ const {w,p}=scene();
+ // rules 240 (wooden_spear.ts): every grown person without a spear wants one, at 1.9, ahead of a pick (skill ~0.9). The elder is
+ // armed so that the spear does not stand in front of the pick; the test is of the pick and the basket's room.
+ p.inv.spear=1;
+ reviewIntentions(makeCtx(w,p,true,true));
  p.inv.basket=1;
  expect(wantedTool(makeCtx(w,p,true,true))).toBe('pick');
  w.tick+=DAY;reviewIntentions(makeCtx(w,p,true,true));
