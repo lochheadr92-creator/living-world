@@ -30,7 +30,7 @@ function learnShore(w: World, p: Person, keep: (x: number, y: number) => boolean
     if (t < 0) continue;
     const x = (t % w.W) + 0.5;
     const y = Math.floor(t / w.W) + 0.5;
-    if (keep(x, y)) putBelief(p, { id: waterBeliefId(i), kind: 'water', x, y, amount: 0, max: 0, seen: -10, src: 'seen', from: 0, learned: -10 });
+    if (keep(x, y)) putBelief(p, { id: waterBeliefId(w, i), kind: 'water', x, y, amount: 0, max: 0, seen: -10, src: 'seen', from: 0, learned: -10 });
   }
 }
 

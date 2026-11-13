@@ -238,8 +238,8 @@ function householdName(world: World, id: number): string {
   return world.households.find((h) => h.id === id)?.name ?? 'nobody';
 }
 
-function placeNoun(b: Belief): string {
-  if (isWaterBeliefId(b.id)) return 'water (shore)';
+function placeNoun(world: World, b: Belief): string {
+  if (isWaterBeliefId(world, b.id)) return 'water (shore)';
   if ((b.kind === 'building' || b.kind === 'site') && b.btype) {
     const def = BUILD_DEF[b.btype as BuildingType];
     return def ? `${def.label}${b.kind === 'site' ? ' site' : ''}` : b.kind;
@@ -261,7 +261,7 @@ function describePlace(world: World, p: Person, b: Belief, version: number): Obs
   const dy = b.y - p.y;
   const out: ObservedPlace = {
     id: b.id,
-    what: placeNoun(b),
+    what: placeNoun(world, b),
     x: r1(b.x),
     y: r1(b.y),
     distance: Math.round(hyp(dx, dy)),
@@ -270,7 +270,7 @@ function describePlace(world: World, p: Person, b: Belief, version: number): Obs
     source: b.src === 'seen' ? 'seen' : `told by ${nameOf(world, b.from)}${(b.hops ?? 1) > 1 ? ` (${b.hops} mouths)` : ''}`,
     stale: world.tick - b.seen > STALE_AFTER,
   };
-  const isSource = !isWaterBeliefId(b.id) && !['building', 'site', 'plot', 'pile', 'grave', 'cart', 'danger', 'water'].includes(b.kind);
+  const isSource = !isWaterBeliefId(world, b.id) && !['building', 'site', 'plot', 'pile', 'grave', 'cart', 'danger', 'water'].includes(b.kind);
   if (isSource) {
     out.amount = b.amount;
     const est = estimatedAmount(world, b);
@@ -300,7 +300,7 @@ function describeTarget(world: World, p: Person, id: number, version: number): s
     return s.ent === 'person' ? `${nameOf(world, id)} (in sight, ${d} tiles ${compass(s.x - p.x, s.y - p.y)})` : `wolf (in sight, ${d} tiles away)`;
   }
   const b = p.beliefs[id];
-  if (b) return `${placeNoun(b)} ${Math.round(hyp(b.x - p.x, b.y - p.y))} tiles ${compass(b.x - p.x, b.y - p.y)} (seen ${ageText(world, version, b.seen)})`;
+  if (b) return `${placeNoun(world, b)} ${Math.round(hyp(b.x - p.x, b.y - p.y))} tiles ${compass(b.x - p.x, b.y - p.y)} (seen ${ageText(world, version, b.seen)})`;
   const wh = p.whereabouts[id];
   if (wh) return `${nameOf(world, id)} (last seen ${ageText(world, version, wh.tick)})`;
   if (p.relations[id] || p.hhId === (world.byId.get(id) as Person | undefined)?.hhId) return nameOf(world, id);
@@ -310,7 +310,7 @@ function describeTarget(world: World, p: Person, id: number, version: number): s
 function commitmentText(world: World, p: Person, c: Person['commitments'][number]): string {
   const to = nameOf(world, c.to);
   const site = c.siteId ? p.beliefs[c.siteId] : undefined;
-  const siteText = site ? `the ${placeNoun(site)} ${Math.round(hyp(site.x - p.x, site.y - p.y))} tiles ${compass(site.x - p.x, site.y - p.y)}` : 'their building site';
+  const siteText = site ? `the ${placeNoun(world, site)} ${Math.round(hyp(site.x - p.x, site.y - p.y))} tiles ${compass(site.x - p.x, site.y - p.y)}` : 'their building site';
   switch (c.kind) {
     case 'deliver':
       return `Bring ${c.amount} ${c.item ?? 'goods'} to ${to}`;
@@ -397,7 +397,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   const kinOf = (id: number): string => p.relations[id]?.kin || (p.partnerId === id ? 'partner' : p.parents.includes(id) ? 'parent' : p.children.includes(id) ? 'child' : '');
   const home = hh && hh.homeId ? world.byId.get(hh.homeId) : undefined;
   const homeBelief = hh && hh.homeId ? p.beliefs[hh.homeId] : undefined;
-  const homeText = homeBelief ? `${placeNoun(homeBelief)} ${Math.round(hyp(homeBelief.x - p.x, homeBelief.y - p.y))} tiles ${compass(homeBelief.x - p.x, homeBelief.y - p.y)}${homeBelief.cond !== undefined ? ` (${Math.round(homeBelief.cond)}% sound when last seen)` : ''}` : home && home.ent === 'building' ? BUILD_DEF[home.type].label : null;
+  const homeText = homeBelief ? `${placeNoun(world, homeBelief)} ${Math.round(hyp(homeBelief.x - p.x, homeBelief.y - p.y))} tiles ${compass(homeBelief.x - p.x, homeBelief.y - p.y)}${homeBelief.cond !== undefined ? ` (${Math.round(homeBelief.cond)}% sound when last seen)` : ''}` : home && home.ent === 'building' ? BUILD_DEF[home.type].label : null;
 
   const needs = {} as InhabitantObservation['self']['needs'];
   for (const k of NEED_KEYS) {
@@ -511,7 +511,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     const b = p.beliefs[Number(k)];
     if(b.kind==='flood'&&version<15)continue;
     (byKind[b.kind] ??= []).push(b);
-    counts[placeNoun({ ...b, btype: undefined })] = (counts[placeNoun({ ...b, btype: undefined })] ?? 0) + 1;
+    counts[placeNoun(world, { ...b, btype: undefined })] = (counts[placeNoun(world, { ...b, btype: undefined })] ?? 0) + 1;
   }
   const nearest = (list: Belief[] | undefined, n: number): Belief[] => (list ? list.slice().sort((m, o) => hyp(m.x - p.x, m.y - p.y) - hyp(o.x - p.x, o.y - p.y)).slice(0, n) : []);
   const places: ObservedPlace[] = [];

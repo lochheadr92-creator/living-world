@@ -56,7 +56,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
     if (tellingSuppressed(world, S, L.id, b)) {
       if (world.hooks?.onNews && isEmptyFood(b)) {
-        const held = S.newsHeld?.[toldKey(L.id, b.id)];
+        const held = S.newsHeld?.[toldKey(world, L.id, b.id)];
         world.hooks.onNews({ kind: 'skipped', reason: held && held.seen === b.seen ? 'held' : 'cooldown', beliefId: b.id, seen: b.seen, age: world.tick - b.seen, origin: b.origin, from: S.id, hops: b.hops ?? 0, listener: L.id });
       }
       continue;
@@ -80,7 +80,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
 export function tellBelief(world: World, S: Person, L: Person, b: Belief): boolean {
   // Rules 175 records an empty correction only when the listener's belief changes. A positive food report and every
   // other telling still mark the attempt first, so a wolf warning keeps the cooldown it had.
-  if (!tracksFoodDelivery(world, b) || !isEmptyFood(b)) S.told[toldKey(L.id, b.id)] = world.tick;
+  if (!tracksFoodDelivery(world, b) || !isEmptyFood(b)) S.told[toldKey(world, L.id, b.id)] = world.tick;
   const old = L.beliefs[b.id];
   // rules 174: a strictly newer empty food sighting can correct a positive memory inside the ordinary 200-tick gap.
   // learn() would also refresh an equal-time snapshot and then return false, so a refused report is not passed to it.

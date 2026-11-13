@@ -448,7 +448,7 @@ function waterFacing(world: World, p: Person): { x: number; y: number } | null {
 function forgetUnreachableWater(world: World, p: Person, a: Activity, outcome: string, detail: string): void {
   // A temporary remembered hazard changes the route, not the existence of the shore.
   if(hasFloodAccess(world)&&a.data.floodWaitSince!==undefined)return;
-  if (outcome === 'failed' && isWaterBeliefId(a.targetId) && /no way|blocked/.test(detail)) delBelief(p, a.targetId);
+  if (outcome === 'failed' && isWaterBeliefId(world, a.targetId) && /no way|blocked/.test(detail)) delBelief(p, a.targetId);
 }
 
 function beginNaturalWater(world: World, p: Person, a: Activity): string | undefined {

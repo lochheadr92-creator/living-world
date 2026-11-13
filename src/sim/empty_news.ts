@@ -3,6 +3,7 @@
 // Direct regrowth still replaces a stale empty memory through observe/learn, which already accepts an
 // equal or newer personal sighting.
 import { runsRulesVersion } from './rulesversion';
+import { hasSeparateIds, pairKey } from './id_ranges';
 import type { Belief, Person, World } from './types';
 
 let enabled = true;
@@ -54,8 +55,9 @@ export const correctionDeliveryOn = (): boolean => deliveryEnabled;
 export function setCorrectionDelivery(on: boolean): void { deliveryEnabled = on; }
 export const hasCorrectionDelivery = (w: World): boolean => deliveryEnabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 175);
 
-export function toldKey(listenerId: number, beliefId: number): number {
-  return listenerId * 1_000_000 + beliefId;
+/** rules 234 (id_ranges.ts): the pair itself from 234; the product before, which two pairs could share (G227) */
+export function toldKey(world: World, listenerId: number, beliefId: number): number {
+  return pairKey(world, listenerId, beliefId);
 }
 
 export function tracksFoodDelivery(world: World, b: Belief): boolean {
@@ -69,7 +71,7 @@ export function tracksFoodDelivery(world: World, b: Belief): boolean {
  * A telling recorded before this record existed cannot prove that the observation is newer, so its cooldown stands.
  */
 export function tellingSuppressed(world: World, speaker: Person, listenerId: number, b: Belief): boolean {
-  const key = toldKey(listenerId, b.id);
+  const key = toldKey(world, listenerId, b.id);
   if (!hasCorrectionDelivery(world)) {
     const at = speaker.told[key];
     return at !== undefined && world.tick - at < TELL_COOLDOWN;
@@ -94,7 +96,7 @@ function clearHeld(speaker: Person, key: number): void {
 /** Record a food report that the listener accepted. The observation time is what a later correction has to beat. */
 export function noteFoodAccepted(world: World, speaker: Person, listenerId: number, b: Belief): void {
   if (!tracksFoodDelivery(world, b)) return;
-  const key = toldKey(listenerId, b.id);
+  const key = toldKey(world, listenerId, b.id);
   speaker.told[key] = world.tick;
   (speaker.newsTold ??= {})[key] = b.seen;
   clearHeld(speaker, key);
@@ -103,14 +105,16 @@ export function noteFoodAccepted(world: World, speaker: Person, listenerId: numb
 /** A refused empty report is not a successful delivery. Remembering the attempt stops it filling the news again at once. */
 export function noteEmptyRejected(world: World, speaker: Person, listenerId: number, b: Belief): void {
   if (!tracksFoodDelivery(world, b) || !isEmptyFood(b)) return;
-  const key = toldKey(listenerId, b.id);
+  const key = toldKey(world, listenerId, b.id);
   (speaker.newsHeld ??= {})[key] = { tick: world.tick, seen: b.seen };
 }
 
 export function validateEmptyNews(w: World): void {
   const allowed = w.settings.dynamics === 'rich' && runsRulesVersion(w, 175);
   const whole = (n: unknown, min: number, max: number) => typeof n === 'number' && Number.isSafeInteger(n) && n >= min && n <= max;
-  const keyOk = (k: string) => /^\d+$/.test(k) && whole(Number(k), 0, Number.MAX_SAFE_INTEGER);
+  // rules 234 (id_ranges.ts): the key is the pair "listener:belief"; before, one number
+  const pairs = hasSeparateIds(w);
+  const keyOk = (k: string) => pairs ? /^\d+:\d+$/.test(k) && k.split(':').every((n) => whole(Number(n), 0, Number.MAX_SAFE_INTEGER)) : /^\d+$/.test(k) && whole(Number(k), 0, Number.MAX_SAFE_INTEGER);
   const check = (rec: unknown, valueOk: (v: unknown) => boolean) => {
     if (rec === undefined) return;
     if (!allowed || rec === null || typeof rec !== 'object' || Array.isArray(rec)) throw new Error('Invalid empty-food telling record');

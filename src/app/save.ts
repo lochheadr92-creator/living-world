@@ -438,6 +438,10 @@ export function deserializeWorld(json: string): World {
   // exact text not (the 30-day Large River twin mismatch, review_evidence/load-order-20261105). Worlds below 160 keep the old order.
   if (runsRulesVersion(w, 160)) for (const cell of w.grid.cells) cell.sort((a, b) => a.id - b.id);
   for (const c of w.carts) w.byId.set(c.id, c);
+  // Whatever the rules: the id counter must be beyond every id in use, and no two things may share one (adversarial review
+  // AR-02). A save that fails this is refused here, before anything of the running world has been replaced.
+  if (w.byId.size !== w.persons.length + w.animals.length + w.sources.length + w.buildings.length + w.sites.length + w.plots.length + w.piles.length + w.graves.length + w.carts.length) throw new Error('invalid save: two things share an id');
+  for (const id of w.byId.keys()) if (!Number.isSafeInteger(id) || id >= w.nextId) throw new Error('invalid save: the id counter is not beyond the ids in use');
   rebuildMobileGrid(w);
   for (const p of w.persons) {
     if (p.indoors === undefined) continue;

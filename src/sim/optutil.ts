@@ -238,7 +238,7 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
   const trouble: { x: number; y: number; w: number }[] = [];
   for (const k in p.failures) {
     const id = Number(k);
-    if (!isWaterBeliefId(id)) continue;
+    if (!isWaterBeliefId(world, id)) continue;
     const f = currentFailure(world, p, id);
     const wb = p.beliefs[id];
     if (!f || !wb || world.tick - f.tick > 700) continue;

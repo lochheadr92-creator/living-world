@@ -194,7 +194,7 @@ export function perceive(world: World, p: Person): void {
       const tx = t % world.W;
       const ty = Math.floor(t / world.W);
       if (hyp(tx + 0.5 - p.x, ty + 0.5 - p.y) > r) continue;
-      const id = waterBeliefId(idx);
+      const id = waterBeliefId(world, idx);
       const old = p.beliefs[id];
       if (!old) fresh++;
       const supply=waterSupplyNear(world,tx+0.5,ty+0.5);

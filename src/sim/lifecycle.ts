@@ -23,7 +23,7 @@ import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { captureHouseholdCamp } from './cohortcapture';
 import { BUILD_DEF } from './constants';
-import { observe, putBelief } from './knowledge';
+import { observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson, ageYears, blendLook, mixTraits, stageOf, stageOfAge } from './people';
 import { findPath } from './pathfinding';
 import { gridQuery, isFreeLand, isWalkable, registerGeneric } from './registry';
@@ -457,7 +457,7 @@ export function immigrationTick(world: World): void {
       }
       if (bestIdx >= 0) {
         const t = world.accessCell[bestIdx];
-        putBelief(traveller, { id: 1_000_000 + bestIdx, kind: 'water', x: (t % world.W) + 0.5, y: Math.floor(t / world.W) + 0.5, amount: 0, max: 0, seen: world.tick - 60, src: 'seen', from: 0, learned: world.tick });
+        putBelief(traveller, { id: waterBeliefId(world, bestIdx), kind: 'water', x: (t % world.W) + 0.5, y: Math.floor(t / world.W) + 0.5, amount: 0, max: 0, seen: world.tick - 60, src: 'seen', from: 0, learned: world.tick });
       }
       const fb = traveller.beliefs[fireNear(world, hub)?.id ?? -1];
       if (fb) {

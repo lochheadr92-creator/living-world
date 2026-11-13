@@ -1,3 +1,4 @@
+import { checkCounter } from './id_ranges';
 import type { Animal, Building, Entity, Person, Plot, Site, SpatialGrid, Source, World } from './types';
 import { T } from './types';
 
@@ -54,7 +55,7 @@ export function rebuildMobileGrid(world: World): void {
 
 // ───────── ids and registration ─────────
 export function newId(world: World): number {
-  return world.nextId++;
+  return checkCounter(world, world.nextId++); // rules 234 (id_ranges.ts): never into the range kept for water knowledge
 }
 
 export const tileIndex = (world: World, tx: number, ty: number): number => ty * world.W + tx;

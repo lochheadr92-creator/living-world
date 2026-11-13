@@ -2,6 +2,7 @@ import {gameName,hasGames,nextGame} from './play';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
 import { leftToWork } from './finish_job';
+import { pairKey } from './id_ranges';
 import { childLeavesToWork } from './parent_decides';
 import { foodRelief } from './relief';
 import { GATHERING_FUEL, HOST_FIRE_ASK_WEIGHT, SWAP_RELIEF_CAP, hasGatheringFire, hasSwapWorth, swapReliefWorth } from './swap_and_fire';
@@ -485,7 +486,7 @@ function optWarn(ctx: Ctx): void {
   for (const c of candidates(ctx, true)) {
     if (c.d > 11) continue;
     // do not repeat the warning
-    const told = fresh.every((b) => p.told[c.q.id * 1_000_000 + b.id] !== undefined && world.tick - p.told[c.q.id * 1_000_000 + b.id] < 3500);
+    const told = fresh.every((b) => p.told[pairKey(world, c.q.id, b.id)] !== undefined && world.tick - p.told[pairKey(world, c.q.id, b.id)] < 3500);
     if (told) continue;
     const sc = new Scorer().add('saw a wolf recently', 26 * tm.give * (0.8 + 0.4 * p.traits.caution)).add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.5);
     if (c.s.child) sc.add('a child', 6);

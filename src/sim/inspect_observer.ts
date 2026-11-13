@@ -187,7 +187,7 @@ export function suspendedView(world: World, p: Person): SuspendedView | null {
 }
 
 function worldCheck(world: World, b: Belief): KnowledgeItemView['worldCheck'] {
-  if (isWaterBeliefId(b.id)) return 'unchecked';
+  if (isWaterBeliefId(world, b.id)) return 'unchecked';
   const e = world.byId.get(b.id);
   if (!e) return 'gone';
   if (e.ent === 'source' && b.amount > 0 && e.amount <= 0) return 'empty';

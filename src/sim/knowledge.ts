@@ -14,6 +14,7 @@ import { noteBeliefWrite } from './transmission';
 import { addLog } from './events';
 import { SOURCE_NOUN } from './labels';
 import { isEmptyFood } from './empty_news';
+import { waterIdBase } from './id_ranges';
 import { runsRulesVersion } from './rulesversion';
 import { keepUnseenInterior } from './home_interior';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
@@ -22,12 +23,13 @@ import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from '.
 export const WATER_ID_BASE = 1_000_000;
 export const ACCESS_CELL = 4;
 
-export function waterBeliefId(cellIdx: number): number {
-  return WATER_ID_BASE + cellIdx;
+/** rules 234 (id_ranges.ts): the base is out of the id counter's reach; a world made before keeps one million */
+export function waterBeliefId(world: World, cellIdx: number): number {
+  return waterIdBase(world) + cellIdx;
 }
 
-export function isWaterBeliefId(id: number): boolean {
-  return id >= WATER_ID_BASE;
+export function isWaterBeliefId(world: World, id: number): boolean {
+  return id >= waterIdBase(world);
 }
 
 function blank(id: number, kind: BeliefKind, x: number, y: number, tick: number): Belief {
@@ -265,5 +267,5 @@ export function countBeliefs(p: Person): number {
 
 /** Is there an entity-world mismatch the person would notice on arrival? */
 export function beliefStale(world: World, b: Belief): boolean {
-  return !isWaterBeliefId(b.id) && !world.byId.has(b.id);
+  return !isWaterBeliefId(world, b.id) && !world.byId.has(b.id);
 }

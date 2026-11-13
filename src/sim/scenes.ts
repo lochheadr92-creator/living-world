@@ -98,7 +98,7 @@ function everyoneKnowsTheLake(world: World): void {
         const tx = t % world.W;
         const ty = Math.floor(t / world.W);
         if (hyp(tx - world.camp.x, ty - world.camp.y) < 30) {
-          const id = waterBeliefId(cy * cw + cx);
+          const id = waterBeliefId(world, cy * cw + cx);
           putBelief(p, { id, kind: 'water', x: tx + 0.5, y: ty + 0.5, amount: 0, max: 0, seen: -10, src: 'seen', from: 0, learned: -10 });
         }
       }

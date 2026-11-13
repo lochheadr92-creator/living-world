@@ -31,7 +31,7 @@ it('retains history but respects a subsequently reported failure and missing sou
 it.each([76,77])('uses corrected history consistently for food, water and depletion news at rules %s',version=>{
  const {w,p,tree}=correctedRouteScene(version),f=p.failures[tree.id],b={...p.beliefs[tree.id],kind:'berry_bush' as const};
  forget(p,tree.id);learn(p,b);expect(fetchableFood(w,p)).toBe(version===77?'berries':null);
- const water={...b,id:waterBeliefId(0),kind:'water' as const,x:20,y:15};learn(p,water);p.failures[water.id]=structuredClone(f);
+ const water={...b,id:waterBeliefId(w, 0),kind:'water' as const,x:20,y:15};learn(p,water);p.failures[water.id]=structuredClone(f);
  const ctx=generateOptions(w,p,true,true),spots=rankWaterSpots(ctx,100);expect(spots.some(s=>s.trouble>0)).toBe(version===76);
  b.amount=0;b.seen=w.tick;b.learned=w.tick;const listener=structuredClone(p);listener.id+=100;listener.x=60;listener.y=60;
  expect(pickNews(w,p,listener,100).some(x=>x.id===tree.id)).toBe(version===76);

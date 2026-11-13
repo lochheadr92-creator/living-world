@@ -81,7 +81,7 @@ it('learns actual water collection and preserves its dedicated water-belief ID t
  const plot=createPlot(f.w,44,18,f.p.hhId);plot.state='growing';observe(f.w,f.p,plot);
  perceive(f.w,f.p);
  const chosen=selectPrerequisite(f.w,f.p,'fetch_water');
- try{expect(isWaterBeliefId(chosen.act.targetId)).toBe(true);const copy=deserializeWorld(serializeWorld(f.w));
+ try{expect(isWaterBeliefId(f.w, chosen.act.targetId)).toBe(true);const copy=deserializeWorld(serializeWorld(f.w));
   for(let n=0;n<700&&f.p.activity?.id===chosen.act.id;n++){stepWorld(f.w);stepWorld(copy);}
   expect(f.p.lastResult?.outcome).toBe('success');expect(f.p.dailyRoutines?.entries.some(e=>e.kind==='fetch_water'&&e.episodes.length===1)).toBe(true);
   expect(serializeWorld(f.w)).toBe(serializeWorld(copy));expect(conservationReport(f.w).ok).toBe(true);

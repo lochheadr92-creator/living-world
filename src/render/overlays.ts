@@ -169,7 +169,7 @@ export function drawKnowledge(ctx: CanvasRenderingContext2D, world: World, p: Pe
       ctx.stroke();
     }
     // the world check (knowledgeItems in sim/inspect_observer.ts says the same in the viewer): a cross where the memory is wrong
-    if (!isWaterBeliefId(b.id)) {
+    if (!isWaterBeliefId(world, b.id)) {
       const e = world.byId.get(b.id);
       const wrong = !e || (e.ent === 'source' && b.amount > 0 && e.amount <= 0);
       if (wrong) {

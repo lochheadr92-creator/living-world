@@ -1,4 +1,5 @@
 import { giveToy } from './toys';
+import { pairKey } from './id_ranges';
 import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
@@ -97,7 +98,7 @@ import { ALREADY_HAS_FOOD, GIVER_LACKS, emptyHandover, hasHandoverTruth, noteHad
 import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
-const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
+const toldKey = (world: World, listener: number, beliefId: number): number => pairKey(world, listener, beliefId); // rules 234 (id_ranges.ts)
 
 function bubble(world: World, p: Person, text: string, kind: Speech['kind'] = 'say', ticks = 56): void {
   speak(world, p, text, kind, ticks);

@@ -36,7 +36,7 @@ export function waterJourney(version=65){
  for(const id of [...(p.bykind.water??[])])delBelief(p,id);
  const cell=Array.from(w.accessCell).findIndex(t=>t>=0&&(t%w.W)>=54&&(t%w.W)<58);
  if(cell<0)throw new Error('Fixture needs a real drinking shore');
- const tile=w.accessCell[cell],far={id:waterBeliefId(cell),kind:'water' as const,x:tile%w.W+.5,y:Math.floor(tile/w.W)+.5,amount:0,max:0,seen:w.tick,src:'seen' as const,from:0,learned:w.tick};
+ const tile=w.accessCell[cell],far={id:waterBeliefId(w, cell),kind:'water' as const,x:tile%w.W+.5,y:Math.floor(tile/w.W)+.5,amount:0,max:0,seen:w.tick,src:'seen' as const,from:0,learned:w.tick};
  putBelief(p,far);pin(p);
  return {s,w,p,far,key:`drink:${far.id}`};
 }

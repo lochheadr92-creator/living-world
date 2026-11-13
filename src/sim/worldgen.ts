@@ -965,7 +965,7 @@ function seedKnowledge(world: World, gen: RNG): void {
         const tx = t % W;
         const ty = (t / W) | 0;
         if (dist(tx + 0.5, ty + 0.5, camp.x, camp.y) <= R + 6) {
-          const id = waterBeliefId(cy * cw + cx);
+          const id = waterBeliefId(world, cy * cw + cx);
           putBelief(p, { id, kind: 'water', x: tx + 0.5, y: ty + 0.5, amount: 0, max: 0, seen: -50, src: 'seen', from: 0, learned: -50 });
         }
       }

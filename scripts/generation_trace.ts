@@ -137,7 +137,9 @@ for (let i = 1; i <= days * DAY; i++) {
     households: sizes.length,
     largestHousehold: Math.max(0, ...sizes),
     householdsOfOne: sizes.filter((n) => n === 1).length,
-    householdsEver: w.households.length,
+    // the households standing now: a dissolved household leaves the list, so this is not a count of all there ever were
+    // (it was labelled householdsEver until 13 November 2026; adversarial review AR-05). Older JSON keeps the old label.
+    householdsNow: w.households.length,
     buildings: count(w.buildings, (b) => b.type),
     sites: count(w.sites, (s) => s.type),
     plots: w.plots.length,
