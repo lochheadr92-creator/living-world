@@ -1,0 +1,14 @@
+{
+  "source": {
+    "head": "03a45610ed9d13a462033be72e011a9e39d9445b",
+    "rules": 238,
+    "content": "c0bb5e87756ae3a011d7abac6ff055209835e336012466278545b241d25b9050",
+    "note": "Recorded before successor behavior, from a clean checkout; ordinary Normal birch (arrivals on), which no traveller could enter before rules 238, at the next hundred ticks after its first travellers arrive, saved and continued 120 ticks."
+  },
+  "saved": "e36876ee533f092b71f155a6463178d82227728fd45bf320008e4fa364d572ae",
+  "continued": "863cedf74cd0e8447f8338de324232f725403fc693042eb3c9f7f021251a4830",
+  "tick": 5100,
+  "arrivals": 1,
+  "deerAndSheep": 5,
+  "alive": 30
+}
