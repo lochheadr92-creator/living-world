@@ -777,8 +777,14 @@ or loses more people, the repair is its own rules number (a reserve in days of f
 `foodCount`). The target is 6 units a head, two days, in `hhState`; only the false count of one made households overshoot.
 
 **gen-4 and the granary.** `findBuildSpot` looks 3 to 11 tiles from the hub for a granary (bakery 5 to 14, kiln 7 to 15) and gen-4 is
-the most crowded world at year 1; likeliest, no free footprint ("no suitable spot", a 900-tick refusal, repeated). A replay of gen-4 to
-day 36 and a read-only probe are running to confirm it.
+the most crowded world at year 1; the cause is ground, confirmed. A replay of gen-4 to day 36 reproduces the original run exactly (its
+hash at day 60 is `c1e0f6ae`) and `scripts/granary_probe.ts` (`review_evidence/growth-20261114/gen4-granary/`) shows the want and the
+planner work (a granary is wanted in every person-sample, offered in 14 to 19 percent, chosen: 231 "no suitable spot" refusals from 27
+people by day 60), but the ground is gone: free granary spots 3 to 11 tiles from the hub fall from 81 at the start to 10 at day 5.5 and
+0 from day 8.25 for good, while 3 to 20 tiles still had 84 at day 24. Aspen's want came on at day 14 with about 35 spots left and it
+laid its granary out at day 15. The ring is fragmented, not full (216 of 352 tiles free at day 12 and no 2 by 2 spot with its one-tile
+gap: scattered plots, berry bushes, wells, homes), and the bakery's ring is gone by day 44. A repair, not applied: fall back to a wider
+ring (3 to 20) when 3 to 11 finds nothing (`production.ts` about line 1220), as a rules number of its own, after 246.
 
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
