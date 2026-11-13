@@ -1,4 +1,5 @@
 import { harvestPressure } from './ecology';
+import { nutritionOf } from './bread_feeds';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
@@ -8,13 +9,14 @@ import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reserva
 const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
-export function pickFood(items: Items, hunger: number): FoodKind | null {
+/** `world` is given wherever one is to hand: what a food is worth may depend on its rules (bread_feeds.ts nutritionOf). */
+export function pickFood(items: Items, hunger: number, world?: World): FoodKind | null {
   const deficit = 100 - hunger;
   let best: FoodKind | null = null;
   let bestScore = 1e9;
   for (const k of FOOD_ORDER) {
     if ((items[k] ?? 0) <= 0) continue;
-    const n = NUTRITION[k];
+    const n = world ? nutritionOf(world, k) : NUTRITION[k];
     const over = Math.max(0, n - deficit - 4);
     const score = over * 2 + Math.abs(deficit - n) * 0.15;
     if (score < bestScore) {

@@ -486,7 +486,7 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   }
   if (req.kind === 'food' || req.kind === 'care') {
     sev = clamp((62 - A.needs.hunger) / 62, 0.05, 1);
-    item = pickFood(B.inv, A.needs.hunger) ?? null;
+    item = pickFood(B.inv, A.needs.hunger, world) ?? null;
     // someone else’s share must not shortchange B's own dependents
     if (item && surplusOf(world, B, item) < 1) item = FOODS.find((k) => surplusOf(world, B, k) >= 1) ?? null;
   } else if (req.kind === 'water') {

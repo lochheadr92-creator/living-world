@@ -516,7 +516,7 @@ function optOffer(ctx: Ctx): void {
     const items: Items = {};
     let label = '';
     if (needFood) {
-      const k = pickFood(p.inv, hungerNow) as ItemKind | null;
+      const k = pickFood(p.inv, hungerNow, world) as ItemKind | null;
       if (k && surplusOf(world, p, k) >= 1) {
         items[k] = Math.min(surplusOf(world, p, k), hungerNow < 25 ? 3 : 2);
         label = k;

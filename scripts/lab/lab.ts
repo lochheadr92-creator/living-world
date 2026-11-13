@@ -7,6 +7,7 @@ import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
 import { WOLF_FIGHT_PARTS, setWolfFight, wolfFightPartOn } from '../../src/sim/wolf_fight';
 import { WOODEN_SPEAR_PARTS, setWoodenSpear, woodenSpearPartOn } from '../../src/sim/wooden_spear';
 import { WOLF_SKIN_PARTS, setWolfSkin, skinsHung, wolfSkinPartOn } from '../../src/sim/wolf_skin';
+import { BREAD_FEEDS_PARTS, breadFeedsPartOn, setBreadFeeds } from '../../src/sim/bread_feeds';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
@@ -284,6 +285,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 242 (bread_feeds.ts): both parts removed (equal to rules 241), and each part alone
+  if (kind === 'rich-no-bread-feeds') return { spec: label, summary: 'a loaf is worth 30 and goes off faster than grain, as before rules 242; no effect below rules 242', install() { const was = BREAD_FEEDS_PARTS.map((k) => breadFeedsPartOn(k)); setBreadFeeds(false); return () => BREAD_FEEDS_PARTS.forEach((k, i) => setBreadFeeds(was[i], k)); } };
+  for (const part of BREAD_FEEDS_PARTS) if (kind === 'rich-no-bread-feeds-' + part) return { spec: label, summary: `${part === 'feeds' ? 'a loaf is worth 30, not 60' : 'bread goes off faster than grain'}; no effect below rules 242`, install() { const was = breadFeedsPartOn(part); setBreadFeeds(false, part); return () => setBreadFeeds(was, part); } };
   // rules 241 (wolf_skin.ts): all three parts removed (equal to rules 240), and each part alone
   if (kind === 'rich-no-wolf-skin') return { spec: label, summary: 'the hide of a wolf is an ordinary hide and nothing is hung anywhere, as before rules 241; no effect below rules 241', install() { const was = WOLF_SKIN_PARTS.map((k) => wolfSkinPartOn(k)); setWolfSkin(false); return () => WOLF_SKIN_PARTS.forEach((k, i) => setWolfSkin(was[i], k)); } };
   for (const part of WOLF_SKIN_PARTS) if (kind === 'rich-no-wolf-skin-' + part) return { spec: label, summary: `${part === 'keep' ? 'the hide of a wolf is an ordinary hide' : part === 'hang' ? 'a wolf skin is kept and never hung' : 'a hung wolf skin gives nobody heart'}; no effect below rules 241`, install() { const was = wolfSkinPartOn(part); setWolfSkin(false, part); return () => setWolfSkin(was, part); } };

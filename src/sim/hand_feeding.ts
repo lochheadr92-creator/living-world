@@ -10,6 +10,7 @@
 // food (a full pack of other goods). A recipient who is not hungry keeps the rules-63 home fallback; one already holding food
 // is rules 157's case.
 import {NUTRITION} from './constants';
+import {nutritionOf} from './bread_feeds';
 import {consume,roomFor} from './economy';
 import {takeNutrition} from './nourishment';
 import {carryCap,stageOf} from './people';
@@ -35,7 +36,7 @@ export function planHandFeeding(w:World,p:Person,q:Person,want:Items):Items|null
  for(const k of Object.keys(want) as ItemKind[]){
   if(!isFoodKind(k))continue;
   const most=Math.min(p.inv[k]??0,want[k]??0);
-  while((plan[k]??0)<most&&hunger<MEAL_FULL&&units<MEAL_UNITS&&roomFor(q.inv,cap,k)<1){plan[k]=(plan[k]??0)+1;hunger+=NUTRITION[k];units++;}
+  while((plan[k]??0)<most&&hunger<MEAL_FULL&&units<MEAL_UNITS&&roomFor(q.inv,cap,k)<1){plan[k]=(plan[k]??0)+1;hunger+=nutritionOf(w,k);units++;}
  }
  return units>0?plan:null;
 }
@@ -46,7 +47,7 @@ export function applyHandFeeding(w:World,p:Person,q:Person,plan:Items):number{
  for(const k of Object.keys(plan) as ItemKind[]){
   if(!isFoodKind(k))continue;
   const m=consume(w,p.inv,k,plan[k]??0,'eaten');
-  for(let i=0;i<m;i++)takeNutrition(w,q,NUTRITION[k]);
+  for(let i=0;i<m;i++)takeNutrition(w,q,nutritionOf(w,k));
   eaten+=m;
  }
  if(eaten>0)q.lastAteTick=w.tick;

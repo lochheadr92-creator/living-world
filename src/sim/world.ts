@@ -1,4 +1,5 @@
 import {runsRulesVersion} from './rulesversion';
+import { perishableOf } from './bread_feeds';
 import {hasBrewing} from './brewing';
 import {updateWells} from './wells';
 import {updateGroundwater} from './groundwater';
@@ -282,7 +283,7 @@ function spoilGoods(world: World): void {
     const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
     for(const items of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
       const n=items[k]??0;let lost=0;
-      for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*spoilStore(world))lost++;
+      for(let i=0;i<n;i++)if(world.rng.next()<rate*perishableOf(world,k)*spoilStore(world))lost++;
       if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,k==='cutting'?'carried living cutting withered':'carried preserved food spoiled');}
     }
   }
@@ -293,7 +294,7 @@ function spoilGoods(world: World): void {
       const n = b.store.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < rate * (PERISHABLE[k] ?? 1) * bad * spoilStore(world)) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < rate * perishableOf(world, k) * bad * spoilStore(world)) lost++;
       if (lost > 0) {
         b.store.items[k] = n - lost;
         if (b.store.items[k] === 0) delete b.store.items[k];
@@ -307,7 +308,7 @@ function spoilGoods(world: World): void {
       const n = pile.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * (PERISHABLE[k] ?? 1) * spoilPile(world)) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * perishableOf(world, k) * spoilPile(world)) lost++;
       if (lost > 0) {
         pile.items[k] = n - lost;
         if (pile.items[k] === 0) delete pile.items[k];

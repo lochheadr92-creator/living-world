@@ -1,4 +1,5 @@
 import { mealEatsWhatItTook, mealLeaves } from './light_pack';
+import { nutritionOf } from './bread_feeds';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
 import { childWorkBlock, noteChildWork, practiceScale } from './three_ages';
 import {hasRods} from './fishing_rods';
@@ -183,7 +184,7 @@ registerHandler('gather', {
       s.amount -= 1;
       harvestPressure(world, s, 1);
       ledgerConsume(world, s.item, 1, 'eaten at the source');
-      takeNutrition(world,p,NUTRITION[s.item as FoodKind]);
+      takeNutrition(world,p,nutritionOf(world,s.item as FoodKind));
       p.lastAteTick = world.tick;
       addFx(world, 'eat', p.x, p.y, 0);
       got = 1;
@@ -295,7 +296,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   if (a.data.table && eaten === 0 && a.cycle === 0) return 'fail:somebody else had finished the food';
   if (eaten > 0) {
     { const meal = a.data.meal as Record<string, number> | undefined; if (meal && (meal[k] ?? 0) > 0) meal[k] -= eaten; }
-    takeNutrition(world,p,NUTRITION[k]);
+    takeNutrition(world,p,nutritionOf(world,k));
     p.lastAteTick = world.tick;
     a.cycle++;
     addFx(world, 'eat', p.x, p.y, 0);
@@ -307,7 +308,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
     if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
   }
   const mealLeft = a.data.table ? null : mealStill(p, a);
-  const next = mealLeft ? pickFood(mealLeft, p.needs.hunger) : pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger);
+  const next = mealLeft ? pickFood(mealLeft, p.needs.hunger, world) : pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(from).filter(([key])=>withdrawAllowance(world,store,p,key as ItemKind,1)>=1)):from, p.needs.hunger, world);
   const keepFood = (a.data.keep as number) ?? 0;
   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);
   if (!next || p.needs.hunger >= 88 || (keepFood > 0 && foodLeft <= keepFood && p.needs.hunger > 55)) return 'done';
@@ -321,7 +322,7 @@ registerHandler('eat', {
   availability: 0.55,
   pose: () => 'eat',
   begin(world, p, a) {
-    const k = pickFood(p.inv, p.needs.hunger);
+    const k = pickFood(p.inv, p.needs.hunger, world);
     if (!k) return 'no food on me';
     a.data.food = k;
     a.duration = WORK.eat;
@@ -352,7 +353,7 @@ registerHandler('eat_store', {
     // right renewed with every bite
     const budget: Partial<Record<ItemKind, number>> = {};
     const allowed = (k: ItemKind): number => (budget[k] ??= bins && e.ent === 'building' ? withdrawAllowance(world, e, p, k, want) : want);
-    const mealFood=(hunger:number)=>pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(items).filter(([key])=>allowed(key as ItemKind)>=1)):items,hunger);
+    const mealFood=(hunger:number)=>pickFood(bins&&runsPreservation(world)?Object.fromEntries(Object.entries(items).filter(([key])=>allowed(key as ItemKind)>=1)):items,hunger,world);
     let tookAny = false;
     for (let guard = 0; guard < 12 && want > 0; guard++) {
       const k = mealFood(p.needs.hunger + (a.cycle * 14));
@@ -390,7 +391,7 @@ registerHandler('eat_store', {
     if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
     if (hasCivicFoodBenefit(world)) a.data.took = a.cycle; // rules 49: what left the store for the pack (the meal's own count restarts at the first bite)
     a.cycle = 0;
-    const k = pickFood(mealStill(p, a) ?? p.inv, p.needs.hunger);
+    const k = pickFood(mealStill(p, a) ?? p.inv, p.needs.hunger, world);
     if (!k) return 'could not take food';
     a.data.food = k;
     a.duration = WORK.eat;

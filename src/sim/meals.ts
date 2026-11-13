@@ -1,4 +1,5 @@
 import {hasBrewing,layMealDrinks,sipMealDrink} from './brewing';
+import { nutritionOf } from './bread_feeds';
 import { LARDER_FETCH_WEIGHT, hasMealLarder, mealWindowOpen } from './company';
 import {takeNutrition} from './nourishment';
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
@@ -687,10 +688,10 @@ function mealById(world: World, a: Activity): Meal | undefined {
 }
 
 function eatServing(world: World, m: Meal, p: Person): boolean {
-  const k = pickFood(m.table, p.needs.hunger) as FoodKind | null;
+  const k = pickFood(m.table, p.needs.hunger, world) as FoodKind | null;
   if (!k) return false;
   if (consume(world, m.table, k, 1, 'eaten at a shared meal') < 1) return false;
-  takeNutrition(world,p,NUTRITION[k]);
+  takeNutrition(world,p,nutritionOf(world,k));
   p.lastAteTick = world.tick;
   noteSupperPortion(world,m,p);
   sipMealDrink(world,p,m);

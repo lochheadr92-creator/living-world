@@ -1,5 +1,6 @@
 // Conservative credit for future physical consumption, never an immediate change to needs.
 import {NUTRITION,WATER_VALUE,WORK} from './constants';
+import {nutritionOf} from './bread_feeds';
 import {reservedFor} from './reserved_goods';
 import {runsRulesVersion} from './rulesversion';
 import type {FoodKind,ItemKind,Person,World} from './types';
@@ -16,8 +17,8 @@ export function journeyCredit(w:World,p:Person,extraWater=0,extraFood=0):{food:n
  if(!hasJourneys(w))return {food:0,water:0,ticks:0};
  const water=Math.min(JOURNEY_LIMITS.portions,Math.floor(journeyAvailable(w,p,'water'))+extraWater);
  let portions=0,food=0;
- for(const k of Object.keys(NUTRITION).sort((a,b)=>NUTRITION[a as FoodKind]-NUTRITION[b as FoodKind]) as FoodKind[]){
-  const n=Math.min(JOURNEY_LIMITS.portions-portions,Math.floor(journeyAvailable(w,p,k)));portions+=n;food+=n*NUTRITION[k]*0.8;
+ for(const k of Object.keys(NUTRITION).sort((a,b)=>nutritionOf(w,a as FoodKind)-nutritionOf(w,b as FoodKind)) as FoodKind[]){
+  const n=Math.min(JOURNEY_LIMITS.portions-portions,Math.floor(journeyAvailable(w,p,k)));portions+=n;food+=n*nutritionOf(w,k)*0.8;
  }
  const additional=Math.min(JOURNEY_LIMITS.portions-portions,extraFood);portions+=additional;food+=additional*12*0.8;
  return {food,water:water*WATER_VALUE*0.8,ticks:water*8+portions*WORK.eat};
