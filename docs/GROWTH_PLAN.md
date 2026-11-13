@@ -315,7 +315,7 @@ rules-230 pins; pin `tests/v234_continuation.*` (Normal aspen, one day; clean ch
 
 ## Step E, measured: why no iron is made (13 November, no rule changed)
 
-`scripts/supply_probe.ts --match "\\biron\\b|\\bore\\b|charcoal|smelt|forg|\\bmine\\b" --knows smithy`, aspen, birch, meadow
+`scripts/supply_probe.ts --match "\biron\b|\bore\b|charcoal|smelt|forg|\bmine\b" --knows smithy`, aspen, birch, meadow
 and river, five years each, rules 234, one run each; `review_evidence/growth-20261113/iron/`. Each grown person who knows of a
 smithy, awake, every 300 ticks from the second year. **No iron was made and no ore mined in any of the four.**
 
@@ -329,7 +329,7 @@ smithy, awake, every 300 ticks from the second year. **No iron was made and no o
   1,257 to 3,518 times a world, "Forging an iron axe: has not learned iron forging" 451 to 798.
 - **The mine has no pick.** "Working the ore mine: needs a pickaxe and has none (and none is on the rack)" 152 to 226 times a
   world, with 4 to 6 picks in people's packs; "does not know of a mine they may use" 330 times in river.
-- **Packs.** "Get ore ...: no room in my pack for one ore" 63 to 278 times a world; "Forging an iron axe: needs a hammer and has
+- **Packs.** "Get ore ...: no room in my pack for one ore" 93 to 303 times a world; "Forging an iron axe: needs a hammer and has
   none" 64 to 172 times in the two large worlds.
 - 18 to 35 people a world hold a worn tool an iron one would replace.
 
