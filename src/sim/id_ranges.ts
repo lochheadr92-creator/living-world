@@ -10,9 +10,14 @@
 //
 // From 234:
 //
-//   * water knowledge takes its ids from WATER_IDS_FROM (two to the fortieth) upward. The counter cannot get there: at a
-//     thousand ids a tick it would take thirty-five thousand years of world time, and `checkCounter` refuses the id if it ever
-//     did, so the two ranges are apart by rule and not by expectation.
+//   * water knowledge takes its ids from WATER_IDS_FROM (two thousand million) upward. The counter cannot get there in any
+//     run: at the measured 318,000 ids in 20 years it is a hundred thousand years off, at a hundred times that a thousand, and
+//     `checkCounter` refuses the id if it ever did, so the two ranges are apart by rule and not by expectation. The base is
+//     kept under two to the thirty-second on purpose: a JavaScript object lists keys below that in number order and keys above
+//     it in the order they were added, so a larger base would also change the order a person's beliefs are walked in.
+//     Either way a world at 234 parts from the same world at 233 within days (measured, three worlds): some choices are
+//     hashed on a belief's id, and a water belief's id is now a different number. That is a different draw, not a different
+//     rule; the comparison of versions in the lab is the check that nothing moves by more than a single draw moves it.
 //   * the record of who was told what is keyed by the pair itself, "listener:belief", which no two pairs share.
 //
 // A world keeps the scheme it was made with: rules 233 and earlier, and authored worlds, keep one million and the product, so
@@ -24,7 +29,7 @@ import type { World } from './types';
 /** where water-knowledge ids began before rules 234 */
 export const WATER_IDS_BEFORE = 1_000_000;
 /** where they begin from rules 234: out of the counter's reach */
-export const WATER_IDS_FROM = 2 ** 40;
+export const WATER_IDS_FROM = 2_000_000_000;
 
 export const hasSeparateIds = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, 234);
 

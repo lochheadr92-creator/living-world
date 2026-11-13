@@ -17,11 +17,11 @@ describe('rules 234: the ids of real things and of water knowledge no longer mee
   it('is a supported version at or below the current one', () => {
     expect(SUPPORTED_RULES_VERSIONS).toContain(234);
     expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(234);
-    expect([WATER_IDS_BEFORE, WATER_IDS_FROM]).toEqual([1_000_000, 2 ** 40]);
-    expect(Number.isSafeInteger(WATER_IDS_FROM + 10_000_000)).toBe(true);
+    expect([WATER_IDS_BEFORE, WATER_IDS_FROM]).toEqual([1_000_000, 2_000_000_000]);
+    expect(WATER_IDS_FROM + 100_000_000).toBeLessThan(2 ** 32 - 1); // still a key an object lists in number order
   });
 
-  it('water knowledge is numbered from two to the fortieth at 234, and from a million before and in an authored world', () => {
+  it('water knowledge is numbered from two thousand million at 234, and from a million before and in an authored world', () => {
     const now = world('ids-a', 234), old = world('ids-a', 233), authored = world('ids-a', 234, 'authored');
     expect([waterIdBase(now), waterIdBase(old), waterIdBase(authored)]).toEqual([WATER_IDS_FROM, WATER_IDS_BEFORE, WATER_IDS_BEFORE]);
     const a = waterIds(now), b = waterIds(old);
