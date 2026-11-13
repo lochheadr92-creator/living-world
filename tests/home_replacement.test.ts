@@ -66,7 +66,9 @@ it('an observed lost home starts real gathering, hauling and paid construction w
  const f=observedReplacementScene();destroyBuilding(f.w,f.home,'collapsed in sight');refreshBeliefs(f.w,f.p);
  let paid=false;const starts:string[]=[];f.w.hooks={onActivityStart:(p,a)=>{if(p.id===f.p.id)starts.push(a.kind);}};
  // Capture the paid in-flight site after material hauling starts, before completion removes it.
- for(let n=0;n<3500&&!(paid&&starts.includes('haul'));n++){stepWorld(f.w);if(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&(s.used.wood??0)>0))paid=true;}
+ // Rules 242: a loaf feeds 60, so the first meal eats one loaf where it ate two, and the pack (12) stays too full for the fourth
+ // wood (weight 2) until a later drink or meal; the first paid delivery falls at tick 4501 (2274 before 242), so the wait is longer.
+ for(let n=0;n<6000&&!(paid&&starts.includes('haul'));n++){stepWorld(f.w);if(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&(s.used.wood??0)>0))paid=true;}
  expect(paid).toBe(true);
  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','haul','build']));
  expect(f.w.ledger.consumed.wood).toBeGreaterThan(0);
