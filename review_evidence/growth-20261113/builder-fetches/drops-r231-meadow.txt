@@ -1,0 +1,35 @@
+meadow: 8 days, rules 231, 33 alive, 9.03 ms a tick; 5069 reviews of a job under way against 3250 fresh choices
+activities ended 4292; dropped while working 481 (11%), dropped while walking there 358
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     343    127       0      0    19   197  0.73
+        converse     644    550       0      0     0    94     0
+          gather     689    398     118     57    55    61  0.48
+          wander     185     62       0      4    77    42  0.44
+           build     104     21      40      6     7    30     0
+            warm      90     53       0      2    10    25  0.53
+            give     191    119       0     33    34     5  0.39
+           drink     365    312       0     29    19     5   0.2
+       eat_store      86     80       0      0     1     5  0.06
+           sleep     416    300     106      0     5     5     0
+            flee      89     23       0     27    35     4  0.22
+           alone       5      0       2      0     0     3  0.12
+         deposit     206    165      23      8     9     1  0.22
+             eat     309    303       0      0     5     1     0
+         explore      24     11       0      0    12     1  0.71
+          repair      15      7       4      0     3     1   0.3
+         harvest      11      8       0      0     2     1  0.87
+       socialize     229      0       0    201    28     0     0
+        withdraw       8      8       0      0     0     0     0
+       plan_site      53     32       0     15     6     0     0
+            till      12      9       0      0     3     0     0
+           craft      38     32       0      0     6     0     0
+           plant      15     14       0      0     1     0     0
+            haul     135    115       0      3    17     0     0
+why a job was dropped at work: something better came up 313; food in my pack would ease my hunger sooner 43; invitation declined: I have already had that time today; I w 38; danger nearby 25; invitation declined: not now, there was work to finish first 24; time together unfinished: we did not get to spend the reques 14; invitation declined: someone needed to take care of themselv 6; time together unfinished: our time together was cut short; n 6; invitation declined: I cannot teach you more about foraging  6; a more urgent need (energy) 2; a more urgent need (warmth) 1; a more urgent need (hunger) 1
+put on hold by somebody talking to them: 148 at work (12625 ticks of progress set back to nothing), 162 while walking; later picked up again 302, never 5
+  by the job held: gather 40; warm 28; wander 25; rest 23; eat 9; build 7; craft 6; drink 5; deposit 2; eat_store 1; haul 1; attend 1
+  by what the talk was for: play_together 70; learn_foraging 55; warn 47; request 47; family_time 46; chat 27; cancel_request 5; recruit 5; learn_skill 3; argue 3; offer 2
+building: 96 spells reached the site, 18 did no work at all; 60 ended while waiting for materials (stood 60 ticks on average); 0 had run 800 ticks or more; 91 ticks of work a spell
+  how building spells ended: 33x partial, waiting for materials: no materials to work with; 25x interrupted, waiting for materials: something better came up; 21x success: done; 4x partial: the building is complete; my contribution is the work I actu; 3x partial: completed the planned N-tick work spell; unfinished work rem; 2x failed: the site is already finished or gone; 2x interrupted, waiting for materials: danger nearby; 2x interrupted: a more urgent need; 2x failed: not a home of this household; 1x failed: the building is already complete; no further construction is
+  progress set back by talk, by the job held (ticks): rest 5986; warm 3329; wander 1429; gather 915; build 633; craft 217; attend 30; drink 28; eat 28; deposit 20
+second looks due, by what the person was doing: sleep 5158; rest 3686; gather 2305; gather (walking) 786; drink (walking) 723; warm 701; build 508; sleep (walking) 507; wander 395; deposit (walking) 269; wander (walking) 254; socialize (walking) 244; haul (walking) 218; give (walking) 187; rest (walking) 172; explore (walking) 164

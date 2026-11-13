@@ -74,6 +74,7 @@ import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
 import { soloPlayOptions } from './play';
 import { leaveHeaviestOption } from './leave_heaviest';
+import { ranOutWorth } from './builder_fetches';
 import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { hasFoodFetch } from './food_help';
 import { hasDeliveryPlace } from './delivery_place';
@@ -369,7 +370,8 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
       // rules 101 (promised_supply.ts): what somebody promised to bring for this site is not fetched again meanwhile
       const promised = n > 0 ? promisedSupply(world, p, k as ItemKind, b.id) : null;
       if (promised) { n = Math.max(0, n - promised.amount); const reason = promisedText(promised, k as ItemKind); if (!ctx.blocked.some((o) => o.targetId === b.id && o.blocked === reason)) addBlocked(ctx, 'gather', `Get ${k} for ${siteNoun(rel.why, b.btype)}`, b.id, reason, 'site'); }
-      if (n > 0) needs.push({ item: k as ItemKind, n, base: 34 * rel.mult + 4, why: `for ${siteNoun(rel.why, b.btype)}`, tag: 'site', siteId: b.id });
+      // rules 232 (builder_fetches.ts): what a site lacks counts for more to the builder who lately stopped there for want of it
+      if (n > 0) needs.push({ item: k as ItemKind, n, base: 34 * rel.mult + 4 + ranOutWorth(world, p, b.id), why: `for ${siteNoun(rel.why, b.btype)}`, tag: 'site', siteId: b.id });
     }
   }
   // repairs
@@ -650,6 +652,7 @@ function optSites(ctx: Ctx): void {
     if (any) {
       const sc = new Scorer().add('carrying what it needs', 36 * rel.mult + 8).add('walking', -pen(e));
       if (committed) sc.add('I promised', 20);
+      if (ranOutWorth(world, p, b.id) > 0) sc.add('the building stopped for want of this', ranOutWorth(world, p, b.id));
       if (winterCue(world) && ownHomeSite) sc.add('winter is coming', WINTER_SHELTER_BOOST);
       // rules 205 (light_pack.ts): the proper place for what a site needs is the site, and a filling pack is a reason to go now
       const packFull = hasPackMaterials(world) ? packFullWorth(invWeight(p), carryCap(world, p)) : 0;

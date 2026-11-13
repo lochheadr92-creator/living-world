@@ -1,4 +1,5 @@
 import { MADE_FOR_SITE, SITE_SUPPLY_PARTS, setMadeForSiteDose, setSiteSupply, siteSupplyPartOn } from '../../src/sim/site_supply';
+import { BUILDER_FETCHES_PARTS, builderFetchesPartOn, setBuilderFetches } from '../../src/sim/builder_fetches';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
 import { PLENTY_PARTS, plentyPartOn, setPlenty } from '../../src/sim/plenty';
@@ -275,6 +276,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 232 (builder_fetches.ts): both parts removed (equal to rules 231), and each part alone
+  if (kind === 'rich-no-builder-fetches') return { spec: label, summary: 'a builder with nothing to build with stands 80 ticks and leaves with nothing in mind about it, as before rules 232; no effect below rules 232', install() { const was = BUILDER_FETCHES_PARTS.map((k) => builderFetchesPartOn(k)); setBuilderFetches(false); return () => BUILDER_FETCHES_PARTS.forEach((k, i) => setBuilderFetches(was[i], k)); } };
+  for (const part of BUILDER_FETCHES_PARTS) if (kind === 'rich-no-builder-fetches-' + part) return { spec: label, summary: `${part === 'leave' ? 'a builder with nothing to build with stands 80 ticks before stopping' : 'a builder who stopped for want of materials weighs that site\'s materials no more than anybody'}, as before rules 232; no effect below rules 232`, install() { const was = builderFetchesPartOn(part); setBuilderFetches(false, part); return () => setBuilderFetches(was, part); } };
   // rules 230 (site_supply.ts): the worth of a made material a site waits for held at the rules-229 figure
   if (kind === 'rich-site-supply-worth-full') return { spec: label, summary: `a made material a site waits for counts for ${MADE_FOR_SITE} more, as at rules 229, instead of half that; no effect below rules 229`, install() { setMadeForSiteDose(MADE_FOR_SITE); return () => setMadeForSiteDose(null); } };
   // rules 229 (site_supply.ts): all four parts removed (equal to rules 228), and each part alone

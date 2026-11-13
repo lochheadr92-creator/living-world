@@ -1,0 +1,35 @@
+river: 8 days, rules 231, 28 alive, 8.86 ms a tick; 4486 reviews of a job under way against 2973 fresh choices
+activities ended 3788; dropped while working 386 (10%), dropped while walking there 264
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     351    176       0      5    16   154  0.65
+        converse     548    472       0      0     0    76     0
+          gather     648    431      83     42    48    44  0.49
+          wander     167     79       0      8    40    40  0.45
+            warm      79     35       8      0     4    32  0.48
+           build     116     24      60      7     5    20     0
+            flee      33     12       0      2    14     5  0.19
+            give      98     68       0     11    15     4  0.48
+           drink     303    276       0      7    16     4  0.22
+           alone       8      1       0      0     3     4   0.3
+         explore      22     12       0      0     9     1  0.86
+           sleep     269    246       9      3    10     1     0
+     fetch_water       2      1       0      0     0     1  0.78
+       socialize     182      0       0    161    21     0     0
+        withdraw      12     12       0      0     0     0     0
+         deposit     215    190      14      5     6     0     0
+       plan_site      74     31       0     26    17     0     0
+            till      23     14       0      1     8     0     0
+           plant      24     21       0      2     1     0     0
+            haul     148    129       0      3    16     0     0
+            tend      16     15       0      1     0     0     0
+             eat     248    247       0      0     1     0     0
+           craft      30     28       0      0     2     0     0
+       eat_store      84     80       0      0     4     0     0
+why a job was dropped at work: something better came up 268; invitation declined: I have already had that time today; I w 40; food in my pack would ease my hunger sooner 31; invitation declined: not now, there was work to finish first 26; danger nearby 8; invitation declined: someone needed to take care of themselv 8; time together unfinished: we did not get to spend the reques 2; a more urgent need (energy) 1; a more urgent need (thirst) 1; later personal contact no longer shows that need 1
+put on hold by somebody talking to them: 123 at work (10129 ticks of progress set back to nothing), 141 while walking; later picked up again 262, never 2
+  by the job held: rest 29; gather 26; wander 24; warm 9; eat 7; drink 7; build 6; eat_store 4; deposit 2; craft 2; repair 2; give 1
+  by what the talk was for: play_together 62; chat 48; learn_foraging 43; family_time 42; request 38; warn 24; offer 3; recruit 2; cancel_request 1; learn_skill 1
+building: 111 spells reached the site, 29 did no work at all; 70 ended while waiting for materials (stood 68 ticks on average); 0 had run 800 ticks or more; 80 ticks of work a spell
+  how building spells ended: 50x partial, waiting for materials: no materials to work with; 24x success: done; 20x interrupted, waiting for materials: something better came up; 8x partial: the building is complete; my contribution is the work I actu; 6x failed: the site is already finished or gone; 2x partial: completed the planned N-tick work spell; unfinished work rem; 1x failed: the building is already complete; no further construction is
+  progress set back by talk, by the job held (ticks): rest 6238; wander 1273; warm 886; gather 610; build 569; craft 191; attend 120; repair 114; eat 31; drink 23
+second looks due, by what the person was doing: sleep 4882; rest 3348; gather 1991; gather (walking) 680; drink (walking) 536; build 527; warm 520; sleep (walking) 456; wander 452; deposit (walking) 285; haul (walking) 242; wander (walking) 237; plan_site (walking) 164; socialize (walking) 154; explore (walking) 123; rest (walking) 112

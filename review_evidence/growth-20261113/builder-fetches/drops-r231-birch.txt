@@ -1,0 +1,35 @@
+birch: 8 days, rules 231, 28 alive, 8.87 ms a tick; 4481 reviews of a job under way against 2926 fresh choices
+activities ended 4060; dropped while working 433 (11%), dropped while walking there 422
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     210     55       0      0    19   136  0.77
+        converse     822    718       0      0     0   104     0
+          gather     730    378     121     46    93    92  0.44
+           build     118     23      46      4     7    38     0
+          wander     158     49       0      3    76    30  0.38
+            flee      68     22       0      2    33    11  0.21
+            warm      11      0       2      0     2     7  0.36
+           drink     299    276       0      3    14     6  0.21
+            give     152     92       0     19    38     3  0.55
+       eat_store      82     75       0      1     4     2   0.2
+       plan_site      50     29       0      9    11     1  0.04
+            haul     170    128       0      5    36     1  0.44
+             eat     277    276       0      0     0     1   0.1
+           sleep     285    282       0      0     2     1     0
+       socialize     267      0       0    219    48     0     0
+         deposit     206    171      15      4    16     0     0
+         explore      18     11       0      0     7     0     0
+           craft      31     29       0      0     2     0     0
+        withdraw      15     14       0      1     0     0     0
+            till      13     11       0      0     2     0     0
+           plant      12     12       0      0     0     0     0
+       tree_work      16     12       0      2     2     0     0
+       fuel_fire      26     19       0      0     7     0     0
+          repair      11      5       5      0     1     0     0
+why a job was dropped at work: something better came up 269; invitation declined: I have already had that time today; I w 62; food in my pack would ease my hunger sooner 35; danger nearby 24; invitation declined: not now, there was work to finish first 20; time together unfinished: our time together was cut short; n 14; invitation declined: I cannot teach you more about foraging  4; invitation declined: someone needed to take care of themselv 2; time together unfinished: we did not get to spend the reques 2; woken to be fed 1
+put on hold by somebody talking to them: 162 at work (10073 ticks of progress set back to nothing), 240 while walking; later picked up again 393, never 6
+  by the job held: gather 49; wander 35; rest 33; build 12; drink 10; deposit 4; eat 3; give 2; plan_site 2; haul 2; eat_store 2; repair 2
+  by what the talk was for: warn 156; play_together 70; learn_foraging 49; family_time 46; request 43; chat 13; handover_work 6; cancel_request 4; trade 4; recruit 4; offer 3; learn_skill 2
+building: 111 spells reached the site, 19 did no work at all; 76 ended while waiting for materials (stood 60 ticks on average); 0 had run 800 ticks or more; 82 ticks of work a spell
+  how building spells ended: 38x partial, waiting for materials: no materials to work with; 37x interrupted, waiting for materials: something better came up; 23x success: done; 6x partial: the building is complete; my contribution is the work I actu; 4x failed: the site is already finished or gone; 1x partial, waiting for materials: completed the planned N-tick work spell; unfinished work rem; 1x partial: completed the planned N-tick work spell; unfinished work rem; 1x interrupted: danger nearby
+  progress set back by talk, by the job held (ticks): rest 6009; wander 1648; build 1039; gather 941; till 148; repair 57; harvest 44; tree_work 39; craft 38; drink 31
+second looks due, by what the person was doing: sleep 5613; gather 2146; rest 1983; gather (walking) 891; build 547; sleep (walking) 533; drink (walking) 525; socialize (walking) 341; deposit (walking) 315; haul (walking) 275; wander 268; wander (walking) 261; give (walking) 191; drink 125; explore (walking) 111; plan_site (walking) 98

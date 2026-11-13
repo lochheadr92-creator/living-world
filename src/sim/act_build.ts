@@ -1,4 +1,5 @@
 import { noteToyMade, takeToyWood } from './toys';
+import { hasBuilderFetches, noteRanOut, waitForMaterials } from './builder_fetches';
 import {mayShareType} from './shared_projects';
 import { householdFirstHomePassesCap } from './home_first';
 import {layoutForWords} from './layout_words';
@@ -119,7 +120,12 @@ registerHandler('build', {
       a.blocked = miss ? `waiting for ${miss}` : 'waiting';
       site.status = a.blocked;
       a.data.waited++;
-      if (a.data.waited > 80) return `partial:no materials to work with (${miss})`;
+      // rules 232 (builder_fetches.ts): stand a short while, not 80 ticks; go knowing what the site lacks, and remember it stopped for that
+      if (a.data.waited > waitForMaterials(world)) {
+        if (hasBuilderFetches(world)) observe(world, p, site);
+        noteRanOut(world, p, site.id);
+        return `partial:no materials to work with (${miss})`;
+      }
       // standing about is still an honest, visible state
       return 'continue';
     }

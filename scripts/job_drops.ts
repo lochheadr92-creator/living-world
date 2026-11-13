@@ -30,8 +30,22 @@ const rows: Record<string, Row> = {};
 const row = (k: string): Row => (rows[k] ??= { ended: 0, success: 0, partial: 0, failed: 0, droppedWalking: 0, droppedWorking: 0, workTicksDropped: 0, fracSum: 0, reasons: {} });
 // a reason with the names and numbers taken out, so "a more urgent need (thirst)" and "(hunger)" stay apart but people do not
 const bucket = (detail: string): string => detail.replace(/\d+(\.\d+)?/g, 'N').slice(0, 60);
+// Building looked at more closely: of the spells that reached the site, how many did no work at all, how many ended while the
+// builder stood waiting for materials (act_build.ts: the work allowed by what has been delivered was used up), how long they
+// had stood, and how many had been going longer than the hold of rules 227 lasts (finish_job.ts HOLD_MAX, 800 ticks).
+const build = { reached: 0, noWork: 0, waitingAtEnd: 0, waitedTicks: 0, workTicks: 0, pastHold: 0, byEnding: {} as Record<string, number> };
 w.hooks = {
   onActivityEnd: (_p, a, outcome, detail) => {
+    if (a.kind === 'build' && a.phase === 'work') {
+      build.reached++;
+      build.workTicks += a.cycle;
+      if (a.cycle === 0) build.noWork++;
+      const waiting = (a.blocked ?? '').startsWith('waiting');
+      if (waiting) { build.waitingAtEnd++; build.waitedTicks += Number(a.data.waited ?? 0); }
+      if (w.tick - a.start >= 800) build.pastHold++;
+      const key = `${outcome}${waiting ? ', waiting for materials' : ''}: ${bucket(detail).replace(/\(.*$/, '').trim()}`;
+      build.byEnding[key] = (build.byEnding[key] ?? 0) + 1;
+    }
     const r = row(a.kind);
     r.ended++;
     if (outcome !== 'interrupted') { r[outcome]++; return; }
@@ -92,7 +106,7 @@ for (const r of Object.values(rows)) for (const [k, n] of Object.entries(r.reaso
 const talkTotal = Object.values(talk).reduce((n, t) => ({ atWork: n.atWork + t.atWork, walking: n.walking + t.walking, workTicksLost: n.workTicksLost + t.workTicksLost }), { atWork: 0, walking: 0, workTicksLost: 0 });
 const purposes: Record<string, number> = {};
 for (const t of Object.values(talk)) for (const [k, n] of Object.entries(t.purposes)) purposes[k] = (purposes[k] ?? 0) + n;
-const result = { seed, days, looksBy, talk, talkTotal, purposes, resumed, neverResumed, rulesVersion: w.settings.rulesVersion, alive: w.persons.filter((p) => p.alive).length, seconds: Math.round(secs), msPerTick: Math.round((secs * 1000 / (days * DAY)) * 100) / 100, reviews: probe.reviews, decisions: probe.decisions, total, reasons, table };
+const result = { build, seed, days, looksBy, talk, talkTotal, purposes, resumed, neverResumed, rulesVersion: w.settings.rulesVersion, alive: w.persons.filter((p) => p.alive).length, seconds: Math.round(secs), msPerTick: Math.round((secs * 1000 / (days * DAY)) * 100) / 100, reviews: probe.reviews, decisions: probe.decisions, total, reasons, table };
 if (out) writeFileSync(out, JSON.stringify(result));
 const pad = (s: unknown, n: number): string => String(s).padStart(n);
 console.log(`${seed}: ${days} days, rules ${result.rulesVersion}, ${result.alive} alive, ${result.msPerTick} ms a tick; ${probe.reviews} reviews of a job under way against ${probe.decisions} fresh choices`);
@@ -103,4 +117,7 @@ console.log('why a job was dropped at work: ' + Object.entries(reasons).sort((a,
 console.log(`put on hold by somebody talking to them: ${talkTotal.atWork} at work (${Math.round(talkTotal.workTicksLost)} ticks of progress set back to nothing), ${talkTotal.walking} while walking; later picked up again ${resumed}, never ${neverResumed}`);
 console.log('  by the job held: ' + Object.entries(talk).sort((a, b) => b[1].atWork - a[1].atWork).slice(0, 12).map(([k, t]) => `${k} ${t.atWork}`).join('; '));
 console.log('  by what the talk was for: ' + Object.entries(purposes).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, n]) => `${k} ${n}`).join('; '));
+console.log(`building: ${build.reached} spells reached the site, ${build.noWork} did no work at all; ${build.waitingAtEnd} ended while waiting for materials (stood ${Math.round(build.waitedTicks / Math.max(1, build.waitingAtEnd))} ticks on average); ${build.pastHold} had run 800 ticks or more; ${Math.round(build.workTicks / Math.max(1, build.reached))} ticks of work a spell`);
+console.log('  how building spells ended: ' + Object.entries(build.byEnding).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, n]) => `${n}x ${k}`).join('; '));
+console.log('  progress set back by talk, by the job held (ticks): ' + Object.entries(talk).sort((a, b) => b[1].workTicksLost - a[1].workTicksLost).slice(0, 10).map(([k, t]) => `${k} ${Math.round(t.workTicksLost)}`).join('; '));
 console.log('second looks due, by what the person was doing: ' + Object.entries(looksBy).sort((a, b) => b[1] - a[1]).slice(0, 16).map(([k, n]) => `${k} ${n}`).join('; '));
