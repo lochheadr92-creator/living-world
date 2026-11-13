@@ -353,8 +353,14 @@ iron is the first choice in 537 of 7,912 daylight looks at which one is offered 
 "has not learned iron smelting" 1,621 to 2,902 times, "has not learned iron forging" 595 to 1,266, "needs a pickaxe and has
 none" 426 to 1,021, "no room in my pack for one ore" 124 to 743. Whether iron tools are forged from the bars was not counted.
 
-Checks: `tests/smithy_iron.test.ts` (7). Lab arms: `rich-no-smithy-iron`, `-want`, `-carry`, `-count`, `-room`. The paired
-lab and the pin are not done at this commit.
+Checks: `tests/smithy_iron.test.ts` (7). Lab arms: `rich-no-smithy-iron`, `-want`, `-carry`, `-count`, `-room`. Pin
+`tests/v235_continuation.*` (Normal river, tick 48,500, somebody at work for the smithy's iron; clean checkout of `00f58a5c`).
+
+**Paired lab** (clean checkout of `00f58a5c`, 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges and two
+removals, 60 arms; `review_evidence/growth-20261113/iron/lab235/report.txt`): nothing moves by more than a single draw moves
+it, with the whole rule removed or the count part alone (people 35.9 against 36.3, buildings 46.5 against 46.8, tools 78.2
+against 81.7, none distinguishable). In 25 days only one world of six tried reaches iron work at all, so this lab says the rule
+does no harm early; what it gives is the five-year measurement above, a description.
 
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 
