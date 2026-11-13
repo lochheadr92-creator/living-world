@@ -40,8 +40,15 @@ export function setWolfSkin(enabled: boolean, part?: WolfSkinPart): void {
 export const wolfSkinPartOn = (part: WolfSkinPart): boolean => on[part];
 export const hasWolfSkin = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, 241);
 
-/** what the hide on a wolf's body is worth to whoever killed it, in place of 24 without a garment and 5 with one */
-export const SKIN_WORTH = 22;
+/**
+ * What the hide on a wolf's body is worth to whoever killed it, in place of 24 without a garment and 5 with one. Set from a
+ * measurement: at a first setting of 22 the hide was cut in one of five kills in six worlds over four years; traced in fern and
+ * birch, the offer stood third to sixteenth among the killer's options (ordinary work scores 25 to 55) for the two days the
+ * body lasts, and the body rotted with the hide on it.
+ */
+export const SKIN_WORTH = 46;
+/** what hanging a held skin scores before the walk (a first setting of 16 left aspen's skin held for a day and a half) */
+export const HANG_WORTH = 30;
 /** how many skins one building shows */
 export const SKIN_CAP = 3;
 /** the work of hanging one */
@@ -97,7 +104,7 @@ export function wolfSkinOptions(ctx: Ctx): void {
   if (!best) return;
   const place = best.b, noun = placeNoun(place.btype as BuildingType);
   const travel = best.d / Math.max(0.03, ctx.speed);
-  const sc = new Scorer().add('a wolf skin to hang where everybody gathers', 16 + 6 * p.traits.sociability).add('walking', -pen(travel) * 0.5);
+  const sc = new Scorer().add('a wolf skin to hang where everybody gathers', HANG_WORTH + 6 * p.traits.sociability).add('walking', -pen(travel) * 0.5);
   if (sc.total <= 0) return;
   addOption(ctx, {
     kind: 'hang_skin',

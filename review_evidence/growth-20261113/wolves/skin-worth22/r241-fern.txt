@@ -1,0 +1,5 @@
+fern: 48 days, rules 241; 58 alive; wolves 3 at the start, 3 at the end; 1 killed, 1 came back; 9 bites, 0 people killed by wolves; 38 spears
+  stands: offered 39, set out 13, tried 7, won 4 (wounded 3, killed 1), lost 3, the wolf left first 2
+  wolf skins: first cut on tick never, first hung on tick never; 0 hung (nowhere), 0 still held
+  wounds by wolf (most first): 2 2; on days 4.1 7 29.5 41.6
+  from these wounds, wolves killed under other settings: wound 34, mends 10 a day: 0; wound 34, mends 5 a day: 0; wound 50, mends 10 a day: 0; wound 50, mends 5 a day: 0; wound 50, mends 2 a day: 0; wound 100: 2
