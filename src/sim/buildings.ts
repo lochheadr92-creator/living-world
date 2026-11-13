@@ -1,4 +1,5 @@
 import {runsRulesVersion} from './rulesversion';
+import { storeCapOf } from './farm_scale';
 import {wellSpotKnown} from './wells';
 import { constructionAftermath } from './achievement';
 import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
@@ -41,7 +42,7 @@ export function createBuilding(world: World, type: BuildingType, x: number, y: n
     h: d.h,
     condition: opts.condition ?? 100,
     hhId,
-    store: { items: {}, cap: d.cap },
+    store: { items: {}, cap: storeCapOf(world, type) }, // rules 244 (farm_scale.ts): a granary holds more
     fuel: opts.fuel ?? 0,
     builtTick: world.tick,
     doorX: door.x,

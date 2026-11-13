@@ -16,6 +16,7 @@
 // chains and options that already move them. No score, weight or threshold of any other option changes, and a world below
 // version 33 never reaches it. Lab ablation: `rich-no-leave-heaviest`. Contract and measurement: docs/LEAVE_HEAVIEST.md.
 import { newActivity } from './activities';
+import { storeCapOf } from './farm_scale';
 import { BUILD_DEF, ITEM_LABEL, WEIGHT } from './constants';
 import { invRoom } from './economy';
 import { freeOf } from './intent';
@@ -25,7 +26,7 @@ import { Scorer, addOption, beliefsByKind, dangerAt, eta, pen, sourceUsable, spo
 import type { Ctx } from './optutil';
 import { acceptedAt, isFacilityType } from './recipes';
 import { runsRulesVersion } from './rulesversion';
-import type { Belief, BeliefKind, BuildingType, ItemKind, Person } from './types';
+import type { Belief, BeliefKind, BuildingType, ItemKind, Person, World } from './types';
 
 export const LEAVE_HEAVIEST_FROM_VERSION = 33;
 
@@ -78,8 +79,8 @@ export function heaviestLeftover(p: Person, wanted: ReadonlySet<ItemKind>): Item
 const unitsIn = (b: Belief): number => Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
 
 /** the person's own idea of how many of `k` the place could still take */
-function believedRoom(b: Belief, k: ItemKind): number {
-  const cap = BUILD_DEF[b.btype as BuildingType].cap;
+function believedRoom(world: World, b: Belief, k: ItemKind): number {
+  const cap = storeCapOf(world, b.btype as BuildingType);
   return Math.floor((cap - unitsIn(b) + 1e-9) / WEIGHT[k]);
 }
 
@@ -107,7 +108,7 @@ export function leaveHeaviestOption(ctx: Ctx, stall: PackStall): void {
   let place: Belief | null = null;
   let placeEta = Infinity;
   for (const b of beliefsByKind(p, ['building'])) {
-    if (!takesIt(b, k) || believedRoom(b, k) < 1) continue;
+    if (!takesIt(b, k) || believedRoom(world, b, k) < 1) continue;
     if (recentFailure(world, p, b.id, AVOID_FAILED_PLACE)) continue;
     const e = eta(ctx, b.x, b.y) + 40 * dangerAt(ctx, b.x, b.y);
     if (e < placeEta) {
@@ -118,7 +119,7 @@ export function leaveHeaviestOption(ctx: Ctx, stall: PackStall): void {
   if (!place) return;
 
   const b = place;
-  const n = Math.min(p.inv[k] ?? 0, believedRoom(b, k));
+  const n = Math.min(p.inv[k] ?? 0, believedRoom(world, b, k));
   const walk = eta(ctx, b.x, b.y);
   const sc = new Scorer().add(`hands full of ${ITEM_LABEL[k]} that nothing needs`, stall.base * 0.85).add('walking', -pen(walk));
   const dng = dangerAt(ctx, b.x, b.y);

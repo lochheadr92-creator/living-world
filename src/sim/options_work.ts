@@ -1,4 +1,5 @@
 import { eveningFireOptions } from './evening_fire';
+import { plotsWanted } from './farm_scale';
 import { spearReady, spearWorth, toolRecipe, wantsSpearReady } from './wooden_spear';
 import { toyOptions } from './toys';
 import { hungerToActOn, providePull } from './child_feeding';
@@ -1225,7 +1226,7 @@ function optFarm(ctx: Ctx): void {
   const seedsAvail = ctx.seeds;
 
   const myPlots = beliefsByKind(p, ['plot']).filter((b) => b.hh === hh.id);
-  const wantPlots = 1 + Math.floor(mem / 2) + (hs.shortage > 0.4 ? 1 : 0);
+  const wantPlots = plotsWanted(world, mem, hs.shortage > 0.4); // rules 244 (farm_scale.ts): a plot and one a head
   const insecure = 8 * hs.shortage;
 
   for (const b of myPlots) {
