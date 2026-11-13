@@ -569,7 +569,61 @@ The two worths were set from measurements, six worlds over four years, each of w
 | 46 | 30 | 5 of 6 | 4 | birch's skin waited four and a half days and river's was unhung after six and a half; cedar's kill came half a day before the end |
 | 46 | 48, kept to for 240 ticks | 3 of 3 re-run | 3 | birch, fern and meadow hung theirs 182, 263 and 234 ticks after cutting, all at the camp fire |
 
-Pin `tests/v241_continuation.*` (fern, tick 17,400, a skin hung at the camp fire). The lab is running.
+Pin `tests/v241_continuation.*` (fern, tick 17,400, a skin hung at the camp fire). Lab, 12 worlds, 25 days
+(`review_evidence/growth-20261113/wolves/lab241/`): 0.3 skins hung a world; nothing moved by more than a single draw moves it.
+River, re-run at the last setting, hung its skin at the hall 887 ticks after cutting it.
+
+## Farming, grain and bread (rules 242, 243 and 244, on the owner's direction; measured, the long run still going)
+
+The owner, 13 November, on the famine: "Do the farming scale but also make it so people don't eat grain as much and store it to
+be used by a granary for bread. Bread should be much more nutritional for much less storage overall."
+
+**What stood in the way** (`review_evidence/growth-20261113/grain/before/`). Six ordinary worlds baked no loaf in their first
+two and a half years, and four no loaf in five. In twelve twenty-year runs five settlements never raised a granary, seven never a
+bakery, one a mill. Fern at 60 to 76 people, two years: 2,378 grain grown, 2,016 eaten raw, 428 spoiled, none milled. A circle:
+a granary was wanted by somebody holding six grain, a bakery by somebody holding eight, bread by a household with more food
+than it needs, and grain was the third thing eaten. And since rules 169 a look at any store, a household's own home included,
+remembers each kind as one unit: only the pack and the granary's share book count grain.
+
+**Rules 242, bread feeds far more for its size, and keeps** (`src/sim/bread_feeds.ts`). A loaf is worth 60 (30 before), a day's
+food in one unit, and goes off at 0.15 of a berry's rate (0.5 before; grain is 0.22). Recipes unchanged: six grain make five
+flour make six or seven loaves, so baked grain feeds about three times as many.
+
+**Rules 243, grain is kept for bread** (`src/sim/grain_kept.ts`), four parts, set from three measurements:
+
+- *spare*: raw grain is passed over while anything else is there to eat, and grain remembered in the granary is no reason to go
+  there and eat unless one is starving (hunger under 25).
+- *bins*: a household keeps one grain back, not three or four; once it knows a granary its grain goes there and not home or to
+  the cellar; the trip is worth 14 more; and the bins are tended whenever grain is known to be in them.
+- *want*: a granary is wanted by anybody whose household works a plot, a bakery by anybody who works one or knows a granary,
+  grain in hand or not, short of food or not.
+- *bake*: a household with four grain to its name wants bread until it holds three loaves a head, at a worth of 46.
+
+| draft, three worlds, three or four years | granary and bakery | grain in the granary at the end | loaves baked | what was wrong |
+|---|---|---|---|---|
+| rules 241 | none | none | 0 | the circle above |
+| first | one of each in every world | 0 (cellars 121 to 335) | 0 | grain went home and to the cellar first |
+| second | as above | 0 to 41; 66 to 300 spoiled in the bins | 0 | nobody tended the bins (three units were never "seen"); the bins were eaten empty; baking scored 6 to 25 against a first choice of 40 to 54 |
+| third (as it stands) | granary, bakery, usually a mill | 32 to 206 | 32 to 104 | see below |
+
+**Rules 244, farming carries the settlement, and the granary holds what it grows** (`src/sim/farm_scale.ts`). A household wants
+a plot and one for each of its people (one and one for every two before); a granary raised from now on holds 480 (120 before).
+After four years: 49 to 60 plots at rules 243 and 73 to 82 at rules 244, for 54 to 68 people.
+
+**Where it stands** (`grain/third-draft/`, `scripts/bake_probe.ts`). The chain runs and is thin. The bakery is finished on day
+29 (meadow) to 41 (aspen): it needs bricks, so a kiln first. From that day meadow's one bakery ran 24 batches in 15 days, about
+six loaves a day for 54 people, a tenth of what they eat; the commonest refusals are "tried recently and could not get on" and
+"the bakery is busy". Grain collects in the granary (200 to 300 units). Most grain is still eaten raw, from the pack and at the
+wild grain it is picked from. Whether a granary of grain and a bakery carry a settlement through a lean season is what the
+twenty-year runs at rules 244 are for (twelve worlds, started 14 November 00:18 at `88c3e8b3`).
+
+**Pins.** 242: aspen, end of the first day; it does not exercise the rule (no ordinary world at 242 holds a loaf). 243: aspen,
+tick 400, four people carrying grain with other food. 244: gen-2, tick 500, a household with more plots than before. The 242
+and 243 pins are recorded at a head whose current version is 244, because 243 was set after 244 was added.
+
+**Found on the way and not repaired.** The one-unit memory of a store (rules 169) also governs what a household believes it
+holds at home (`options_work.ts hhState` reads the home's remembered food), so households may think themselves short when
+they are not; not measured. `tests/preservation.test.ts` has ten failures that predate this work.
 
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
