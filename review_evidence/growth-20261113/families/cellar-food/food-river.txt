@@ -1,0 +1,22 @@
+river: 48 days, rules 236; 33 alive, 20 grown of whom 16 have a partner; 8 women of 17 to 44, 7 with a partner
+  happened: 8 couples formed, 5 conceived, 5 born; 0 arrived, 0 of them grown and alone
+  a partner: 1456 looks at an unattached grown person awake; where each stopped:
+       860  59%  no such person the two could be a couple with (attraction, age within 18 years)
+       147  10%  knows them too little (familiarity under 10)
+       307  21%  does not like any enough (affinity under 30)
+        44   3%  does not trust any enough (trust under 20)
+        81   6%  none of them in sight within ten tiles and free to talk
+         5   0%  too hungry or thirsty to ask
+         5   0%  asked lately (cooling off)
+         7   0%  a proposal is offered
+    of the 7 offers, the first choice 3 times; what beat it: 2x harvest: X the crop; 1x socialize: X with X; 1x rest: X at the hut
+  a child: 4608 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+       576  13%  no partner
+       540  12%  already expecting
+       145   3%  no home yet
+       603  13%  three children at home already
+       550  12%  a birth in the last year and a half
+       816  18%  less than three food a head at home
+        20   0%  unwell or hungry
+      1358  29%  may conceive
+    of those stopped for food at home, 560 (69%) held three a head once the household's other stores are counted: cellar 9153, lean_to 422

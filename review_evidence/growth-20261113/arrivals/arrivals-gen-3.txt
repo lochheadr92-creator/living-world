@@ -1,0 +1,9 @@
+gen-3: 36 days, rules 237; 31 alive, 0 arrived; 9 wolves; map 80 by 80
+  216 checks for travellers; where each stopped:
+        12   6%  the first two days
+       204  94%  all gates passed (then a 35 in 100 chance, then a way in)
+  at the checks past the spacing: food a head 7.3 on average (3.2 asked), roofs short by -11.1 on average (0 or less passes)
+  the way in, read every 3 days: 0% of edge points give a way in (lowest reading 0%, highest 0%); readings with none at all: 12 of 12
+       605  55%  the path passes within 12 tiles of a wolf den
+       256  23%  a wolf within 14 tiles of the edge point
+       243  22%  the edge there is not open ground

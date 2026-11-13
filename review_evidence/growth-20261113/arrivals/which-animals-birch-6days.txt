@@ -1,0 +1,15 @@
+birch: 6 days, rules 237; 28 alive, 0 arrived; animals {"wolf":3,"sheep":2,"deer":3}; map 80 by 80
+  36 checks for travellers; where each stopped:
+        12  33%  the first two days
+         2   6%  less than 3.2 food a head in the whole settlement
+        22  61%  all gates passed (then a 35 in 100 chance, then a way in)
+  at the checks past the spacing: food a head 3.9 on average (3.2 asked), roofs short by -8.4 on average (0 or less passes)
+  were only wolves counted, 44% of edge points would give a way in
+  the way in, read every 2 days: 0% of edge points give a way in (lowest reading 0%, highest 0%); readings with none at all: 3 of 3
+        80  29%  the path passes within 12 tiles of where an animal began (sheep)
+        57  21%  the edge there is not open ground
+        57  21%  the path passes within 12 tiles of where an animal began (sheep and wolf)
+        35  13%  an animal within 14 tiles of the edge point (deer)
+        25   9%  an animal within 14 tiles of the edge point (wolf)
+        16   6%  an animal within 14 tiles of the edge point (deer and wolf)
+         6   2%  the path passes within 12 tiles of where an animal began (deer and sheep)

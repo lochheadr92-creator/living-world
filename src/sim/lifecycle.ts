@@ -1,4 +1,5 @@
 import {captureFinalAccount,trimFinalAccounts} from './final_account';
+import { barsTheWay } from './arrival_way';
 import { foodInOtherStores } from './family_food';
 import { hasLocalDeath, witnessDeath } from './death_knowledge';
 import { foundMembership } from './townships';
@@ -372,7 +373,7 @@ export function immigrationTick(world: World): void {
     const y = edge === 0 ? 3 : edge === 1 ? t : edge === 2 ? world.H - 4 : t;
     if (!isWalkable(world, Math.floor(x), Math.floor(y)) || world.terrain[Math.floor(y) * world.W + Math.floor(x)] === T.SHALLOW) continue;
     let nearWolf = false;
-    for (const a of world.animals) if (hyp(a.x - x, a.y - y) < 14) nearWolf = true;
+    for (const a of world.animals) if (barsTheWay(world, a) && hyp(a.x - x, a.y - y) < 14) nearWolf = true; // rules 238 (arrival_way.ts): wolves only
     if (nearWolf) continue;
     // anywhere reachable near the middle of the camp will do (the exact tile may be built over by now)
     const hub = nearestHub(world, x, y); // travellers make for the settlement nearest to where they come in
@@ -386,7 +387,7 @@ export function immigrationTick(world: World): void {
     if (!path || path.length < 2) continue;
     // travellers who have heard of the camp would not walk straight past a wolf den to reach it
     let pastADen = false;
-    for (let k = 0; k < path.length && !pastADen; k += 2) for (const a of world.animals) if (hyp(a.denX - path[k], a.denY - path[k + 1]) < 12) pastADen = true;
+    for (let k = 0; k < path.length && !pastADen; k += 2) for (const a of world.animals) if (barsTheWay(world, a) && hyp(a.denX - path[k], a.denY - path[k + 1]) < 12) pastADen = true;
     if (pastADen) continue;
     const arriveX = path[path.length - 2];
     const arriveY = path[path.length - 1];

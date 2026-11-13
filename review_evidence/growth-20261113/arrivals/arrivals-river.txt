@@ -1,0 +1,11 @@
+river: 36 days, rules 237; 32 alive, 0 arrived; 7 wolves; map 80 by 80
+  216 checks for travellers; where each stopped:
+        12   6%  the first two days
+         8   4%  less than 3.2 food a head in the whole settlement
+       196  91%  all gates passed (then a 35 in 100 chance, then a way in)
+  at the checks past the spacing: food a head 8.6 on average (3.2 asked), roofs short by -14.3 on average (0 or less passes)
+  the way in, read every 3 days: 0% of edge points give a way in (lowest reading 0%, highest 0%); readings with none at all: 12 of 12
+       568  51%  the path passes within 12 tiles of a wolf den
+       380  34%  a wolf within 14 tiles of the edge point
+       144  13%  the edge there is not open ground
+        12   1%  no path found to the settlement within 9,000 nodes

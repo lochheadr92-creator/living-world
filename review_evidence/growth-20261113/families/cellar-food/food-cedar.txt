@@ -1,0 +1,19 @@
+cedar: 48 days, rules 236; 58 alive, 42 grown of whom 26 have a partner; 18 women of 17 to 44, 12 with a partner
+  happened: 13 couples formed, 5 conceived, 3 born; 27 arrived, 11 of them grown and alone
+  a partner: 2593 looks at an unattached grown person awake; where each stopped:
+       608  23%  no such person the two could be a couple with (attraction, age within 18 years)
+       100   4%  does not know any of them
+      1251  48%  knows them too little (familiarity under 10)
+       421  16%  does not like any enough (affinity under 30)
+       213   8%  does not trust any enough (trust under 20)
+    of the 0 offers, the first choice 0 times; what beat it: 
+  a child: 7775 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      2196  28%  no partner
+       464   6%  already expecting
+       843  11%  partner not of the household, or not a man
+       167   2%  no home yet
+       610   8%  a birth in the last year and a half
+      1676  22%  less than three food a head at home
+        16   0%  unwell or hungry
+      1803  23%  may conceive
+    of those stopped for food at home, 648 (39%) held three a head once the household's other stores are counted: cellar 11888, lean_to 419

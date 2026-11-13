@@ -3,6 +3,7 @@ import { BUILDER_FETCHES_PARTS, builderFetchesPartOn, setBuilderFetches } from '
 import { PICKED_UP_PARTS, pickedUpPartOn, setPickedUp } from '../../src/sim/picked_up';
 import { SMITHY_IRON_PARTS, setSmithyIron, smithyIronPartOn } from '../../src/sim/smithy_iron';
 import { GROUNDWATER_PARTS, groundwaterPartOn, setGroundwater } from '../../src/sim/groundwater';
+import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
@@ -280,6 +281,8 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 238 (arrival_way.ts): every animal bars a traveller's way in
+  if (kind === 'rich-no-arrival-way') return { spec: label, summary: 'deer and sheep, and where each began, bar a traveller from coming in as wolves and their dens do, as before rules 238; no effect below rules 238', install() { const was = arrivalWayOn(); setArrivalWay(false); return () => setArrivalWay(was); } };
   // rules 237 (family_food.ts): the household's food before a child counts its packs and its home only
   if (kind === 'rich-no-family-food') return { spec: label, summary: 'the food a couple needs at home before a child is counted in the packs and the home\'s store only, not the cellar, as before rules 237; no effect below rules 237', install() { const was = familyFoodOn(); setFamilyFood(false); return () => setFamilyFood(was); } };
   // rules 236 (groundwater.ts): all three parts removed (equal to rules 235), and each part alone
