@@ -1,0 +1,19 @@
+gen-5: 48 days, rules 238; 54 alive, 36 grown of whom 24 have a partner; 16 women of 17 to 44, 11 with a partner
+  happened: 14 couples formed, 7 conceived, 5 born; 27 arrived, 6 of them grown and alone
+  a partner: 2347 looks at an unattached grown person awake; where each stopped:
+       507  22%  no such person the two could be a couple with (attraction, age within 18 years)
+        76   3%  does not know any of them
+       596  25%  knows them too little (familiarity under 10)
+      1124  48%  does not like any enough (affinity under 30)
+        44   2%  does not trust any enough (trust under 20)
+    of the 0 offers, the first choice 0 times; what beat it: 
+  a child: 6212 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      1394  22%  no partner
+       584   9%  already expecting
+       337   5%  no home yet
+       362   6%  three children at home already
+       635  10%  a birth in the last year and a half
+       916  15%  less than three food a head at home
+        41   1%  unwell or hungry
+      1943  31%  may conceive
+    of those stopped for food at home, 0 (0%) held three a head once the household's other stores are counted: cellar 162, lean_to 118

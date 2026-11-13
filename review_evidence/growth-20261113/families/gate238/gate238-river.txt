@@ -1,0 +1,19 @@
+river: 48 days, rules 238; 60 alive, 43 grown of whom 28 have a partner; 20 women of 17 to 44, 14 with a partner
+  happened: 14 couples formed, 6 conceived, 6 born; 26 arrived, 9 of them grown and alone
+  a partner: 3283 looks at an unattached grown person awake; where each stopped:
+       930  28%  no such person the two could be a couple with (attraction, age within 18 years)
+        55   2%  does not know any of them
+      1361  41%  knows them too little (familiarity under 10)
+       786  24%  does not like any enough (affinity under 30)
+       151   5%  does not trust any enough (trust under 20)
+    of the 0 offers, the first choice 0 times; what beat it: 
+  a child: 8124 checks of a woman of 17 to 44 (every 200 ticks, as the world checks); where each stopped:
+      2659  33%  no partner
+       648   8%  already expecting
+       230   3%  no home yet
+       624   8%  three children at home already
+       673   8%  a birth in the last year and a half
+       973  12%  less than three food a head at home
+        36   0%  unwell or hungry
+      2281  28%  may conceive
+    of those stopped for food at home, 0 (0%) held three a head once the household's other stores are counted: cellar 303, lean_to 56

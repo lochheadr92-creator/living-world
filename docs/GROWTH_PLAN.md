@@ -400,6 +400,37 @@ a household's cellar is another building and is not counted.
 
 No rule is changed.
 
+## Step G, the repair: the cellar counts toward the food before a child (rules 237, `src/sim/family_food.ts`)
+
+**Measured first** (`scripts/family_probe.ts`, aspen, cedar, river and gen-5, four years each, rules 236;
+`review_evidence/growth-20261113/families/cellar-food/`). Of the conception checks stopped at "less than three food a head at
+home", 35, 39, 69 and 51 in a hundred held three a head once the household's other buildings were counted: 64,783 units in
+cellars and 1,608 in lean-tos over the readings. `lifecycle.ts householdFoodPerHead` counted the members' packs and the store
+of the home; a cellar is another building.
+
+**Repair.** From rules 237 the count takes in every building the household owns (`foodInOtherStores`). Three a head and every
+other gate are unchanged. One switched part, lab arm `rich-no-family-food`. Nothing is saved.
+
+**Checks.** `tests/family_food.test.ts` 7 of 7 (the cellar counts; another household's cellar and a shared store do not; a
+cellar with too little is still too little; a couple whose food is in the cellar conceives where at 236 it could not; the part
+removed is rules 236); pin `tests/v237_continuation.*` (river, tick 9,500, where a couple is fed only by its cellar) recorded
+from a clean checkout.
+
+**What it did.**
+
+- The gate, read with the world's own count, same four worlds and four years, rules 236 against rules 238 (one run each;
+  `review_evidence/growth-20261113/families/gate238/`): checks stopped for food 22.5 -> 17.1 in a hundred; checks at which the
+  woman may conceive 24.3 -> 30.9 in a hundred. About a quarter more of a woman's childbearing years are open, less than the
+  first measurement promised: a household that now passes is still stopped when its cellar runs down.
+- Births, six worlds, six years, rules 236 against 237, one run each: 42 -> 48 born, 49 -> 58 conceived. Leaning the right
+  way and not distinguishable from chance: the worlds part within days (river received 22 newcomers in one run and none in
+  the other).
+- Lab, 12 worlds, 25 days (`review_evidence/growth-20261113/families/lab237/`): nothing moved by more than a single draw
+  moves it, as expected in two years.
+
+**Still true.** No partner is the first stop (28.8 in a hundred), and a proposal is offered at about one look in five hundred.
+The pairing gates (liking, knowing, the fixed draw of who may be a couple) are a design choice and are the owner's.
+
 ## Step I, first finding: nobody could come in (rules 238, `src/sim/arrival_way.ts`)
 
 **Found.** Twelve ordinary worlds were run for twenty years at rules 236 (`scripts/generation_trace.ts`, arrivals on). Birch,

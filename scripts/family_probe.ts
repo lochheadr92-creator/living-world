@@ -9,6 +9,7 @@ import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, DAY, TICKS_PER_YEAR } from '.
 import { generateOptions } from '../src/sim/decision';
 import { foodUnits } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
+import { householdFoodPerHead } from '../src/sim/lifecycle';
 import { ageYears, stageOf } from '../src/sim/people';
 import { freshRunSettings, parseRunRules } from '../src/sim/profiles';
 import { spark } from '../src/sim/relations';
@@ -41,8 +42,9 @@ const beat: Record<string, number> = {};
 const BABY = ['no partner', 'already expecting', 'partner not of the household, or not a man', 'no home yet', 'three children at home already', 'a birth in the last year and a half', 'less than three food a head at home', 'unwell or hungry', 'may conceive'];
 const baby: Record<string, number> = {};
 let babyChecks = 0;
-// of the checks stopped for want of food at home: how many households held three a head once their other stores are counted
-// (lifecycle.ts householdFoodPerHead counts the members' packs and the home's own store; a household's cellar is another building)
+// of the checks stopped for want of food at home: how many households held three a head once their other stores are counted.
+// The gate itself is the world's own count (lifecycle.ts householdFoodPerHead: the members' packs and the home's own store, and
+// from rules 237 the household's other buildings too, so from 237 this second count finds nothing more).
 let foodElsewhere = 0;
 const elsewhere: Record<string, number> = {};
 const foodPerHead = (p: Person): number => {
@@ -82,13 +84,13 @@ for (let i = 1; i <= days * DAY; i++) {
       const hh = w.households.find((h) => h.id === p.hhId);
       const gate = p.partnerId === 0 ? 0 : p.pregnantUntil > 0 ? 1 : !partner || partner.hhId !== p.hhId || partner.sex !== 'm' ? 2 : !hh || !hh.homeId ? 3
         : w.persons.filter((m) => m.alive && m.hhId === p.hhId && stageOf(w, m) === 'child').length >= 3 ? 4 : w.tick - (p.cooldowns.lastBirth ?? -99999) < BIRTH_SPACING_TICKS ? 5
-        : foodPerHead(p) < 3 ? 6 : p.health < 60 || p.needs.hunger < 35 ? 7 : 8;
+        : householdFoodPerHead(w, p) < 3 ? 6 : p.health < 60 || p.needs.hunger < 35 ? 7 : 8;
       bump(baby, BABY[gate]);
       if (gate === 6) {
         const members = w.persons.filter((m) => m.alive && m.hhId === p.hhId).length;
         let more = 0;
         for (const b of w.buildings) if (b.hhId === p.hhId && b.id !== hh!.homeId) { const f = foodUnits(b.store.items); if (f > 0) { more += f; bump(elsewhere, b.type, f); } }
-        if (foodPerHead(p) + more / Math.max(1, members) >= 3) foodElsewhere++;
+        if ((w.settings.rulesVersion ?? 0) < 237 && foodPerHead(p) + more / Math.max(1, members) >= 3) foodElsewhere++;
       }
     }
   }
