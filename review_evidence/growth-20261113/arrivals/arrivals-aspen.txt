@@ -1,0 +1,11 @@
+aspen: 36 days, rules 237; 46 alive, 16 arrived; 8 wolves; map 80 by 80
+  216 checks for travellers; where each stopped:
+        12   6%  the first two days
+       112  52%  a group came lately (spacing)
+        18   8%  less than 3.2 food a head in the whole settlement
+        74  34%  all gates passed (then a 35 in 100 chance, then a way in)
+  at the checks past the spacing: food a head 4.4 on average (3.2 asked), roofs short by -14.4 on average (0 or less passes)
+  the way in, read every 3 days: 9% of edge points give a way in (lowest reading 0%, highest 14%); readings with none at all: 3 of 12
+       479  43%  the path passes within 12 tiles of a wolf den
+       276  25%  the edge there is not open ground
+       250  23%  a wolf within 14 tiles of the edge point

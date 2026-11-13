@@ -400,6 +400,41 @@ a household's cellar is another building and is not counted.
 
 No rule is changed.
 
+## Step I, first finding: nobody could come in (rules 238, `src/sim/arrival_way.ts`)
+
+**Found.** Twelve ordinary worlds were run for twenty years at rules 236 (`scripts/generation_trace.ts`, arrivals on). Birch,
+gen-2, gen-3 and gen-6 received no newcomer in twenty years and stood at 35, 39, 38 and 40 people, with 10 to 14 born in all
+that time. That is the "thirty people living forever" the owner described.
+
+**Measured** (`scripts/arrivals_probe.ts`, new, read-only; `review_evidence/growth-20261113/arrivals/`). Just before each of the
+world's own checks for travellers (`lifecycle.ts immigrationTick`) the gates were read in order, and every three days each
+point along the map's four edges was tried on a copy of the world as the world tries it. In birch, gen-2, gen-3, gen-6 and
+river, three years each: food, roofs and spacing passed at 88 to 94 in a hundred checks, and **no edge point gave a way in at
+any of the twelve readings**. In aspen, which does get newcomers, 9 in a hundred edge points were open and three readings of
+twelve had none.
+
+**Cause.** Travellers come in "away from known wolf dens": an edge point is refused if a wolf is within 14 tiles, and a way in
+if its path passes within 12 tiles of a den. Both tests read every animal in the world. Deer (hunting) and the founding pair of
+sheep (livestock) came later and were counted as wolves, and the place each began as a den. The sheep stand beside the
+settlement, so every path to it "passes a den". In birch over six days, by animal: sheep alone closed 29 in a hundred edge
+points, sheep and wolf together 21, deer alone 13, a wolf alone 9, and 21 were not open ground; with wolves only counted, 44 in
+a hundred would be open. (The first files in the evidence folder print "wolf" for any animal; `which-animals-birch-6days.txt`
+names them.)
+
+**Repair.** From rules 238 the two tests read wolves only (`barsTheWay`). One switched part, lab arm `rich-no-arrival-way`.
+Nothing is saved. In birch the first travellers arrive at tick 5,012.
+
+**Checks.** `tests/arrival_way.test.ts` 6 of 6 (a sheep or a deer beside the settlement kept every traveller out before and
+does not now; a wolf's den still does; the part removed is rules 237); survival, growth_room, settlements, nourishment,
+livestock and the pins of 236 and 237 pass; pin `tests/v238_continuation.*` (birch, tick 5,100) recorded from a clean checkout.
+
+**Lab** (12 worlds, 25 days, arrivals on, at `2eb9a813`; `review_evidence/growth-20261113/arrivals/lab238/`). With the rule
+removed, beyond chance: people 42.1 -> 35.0 (lower in 10 of 12 worlds), buildings 55.7 -> 47.2, solid homes 15.4 -> 13.0,
+plots 29.4 -> 24.2, projects done 110 -> 92. So with the rule the settlement is a fifth larger after two years. What it costs,
+also beyond chance: stored food a head is lower with the rule (3.9 against 5.4) and people are bitten by wolves more often
+(10.7 against 6.3 bites in a world); deaths lean higher (1.1 against 0.2, inside the noise floor). More people sooner on the
+same food is the thing to watch: see the famine below.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and
