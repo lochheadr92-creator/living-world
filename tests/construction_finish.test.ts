@@ -50,7 +50,7 @@ it('urgent thirst still prevents a near-complete construction offer',()=>{
 it('the retained valid collapse fixture now completes its paid replacement and sleeps there across a save',()=>{
  const f=observedReplacementScene();destroyBuilding(f.w,f.home,'collapsed in sight');refreshBeliefs(f.w,f.p);
  const starts:string[]=[];f.w.hooks={onActivityStart:(p,a)=>{if(p.id===f.p.id)starts.push(a.kind);}};
- for(let n=0;n<4000&&!f.hh.homeId;n++)stepWorld(f.w);
+ for(let n=0;n<8000&&!f.hh.homeId;n++)stepWorld(f.w); // loop bound only: 3147 steps before rules 242 (a loaf feeds 60, so one meal not two), 5030 since
  expect(f.hh.homeId).not.toBe(0);expect(f.p.stats.built).toBe(1);expect(f.w.ledger.consumed.wood).toBe(4);
  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','haul','build']));
  delete f.w.hooks;const twin=deserializeWorld(serializeWorld(f.w));
