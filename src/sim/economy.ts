@@ -1,4 +1,5 @@
 import { harvestPressure } from './ecology';
+import { sparesGrain } from './grain_kept';
 import { nutritionOf } from './bread_feeds';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
@@ -14,8 +15,11 @@ export function pickFood(items: Items, hunger: number, world?: World): FoodKind 
   const deficit = 100 - hunger;
   let best: FoodKind | null = null;
   let bestScore = 1e9;
+  // rules 243 (grain_kept.ts): raw grain is passed over while there is anything else here to eat
+  const spare = !!world && sparesGrain(world) && FOOD_ORDER.some((k) => k !== 'grain' && (items[k] ?? 0) > 0);
   for (const k of FOOD_ORDER) {
     if ((items[k] ?? 0) <= 0) continue;
+    if (spare && k === 'grain') continue;
     const n = world ? nutritionOf(world, k) : NUTRITION[k];
     const over = Math.max(0, n - deficit - 4);
     const score = over * 2 + Math.abs(deficit - n) * 0.15;

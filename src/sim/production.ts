@@ -1,4 +1,5 @@
 import {brewDemand,hasBrewing} from './brewing';
+import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
 import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
 import { IRON_WANT, IRON_WHY, carriesForSmelter, ironWanted, oreLeavesLeftover, smithyShelf } from './smithy_iron';
 import { leaveHeaviestOption } from './leave_heaviest';
@@ -570,8 +571,11 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
         // Preservation moves raw food into another edible form. Its own surplus
         // and start checks retain two immediate meals, including those carried
         // from this home; the general reserve floor would prevent that trip.
-        const hs = hhState(ctx);
-        n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
+        // rules 243 (grain_kept.ts): grain and flour are for baking; turning them into bread is not spending the household's food
+        if (!(breadIsStaple(world) && (item === 'grain' || item === 'flour'))) {
+          const hs = hhState(ctx);
+          n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
+        }
       }
     } else if (b.kind === 'cart') {
       if ((b.hh ?? -1) !== p.hhId && b.hh !== 0) continue;
@@ -773,14 +777,15 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'bakery').length) {
     const hs = hhState(ctx);
     const members = Math.max(1, ctx.members.length);
-    const target = Math.min(8, Math.ceil(1.2 * members));
+    const staple = breadIsStaple(world); // rules 243 (grain_kept.ts): bread is the household's staple, not its luxury
+    const target = staple ? Math.min(LOAVES_MOST, LOAVES_A_HEAD * members) : Math.min(8, Math.ceil(1.2 * members));
     const granary = facilitiesOf(ctx, 'granary')[0];
     const realG = granary ? world.byId.get(granary.b.id) : undefined;
     const share = realG && realG.ent === 'building' ? (realG.ops?.shares[p.hhId] ?? {}) : {};
     const haveBread = unitsOf(p.inv.bread) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.bread : 0) + unitsOf(share.bread);
     const surplusGrain = unitsOf(p.inv.grain) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.grain : 0) + unitsOf(share.grain);
-    if (hs.foodStock >= hs.foodTarget * 1.1 && surplusGrain >= 4 && haveBread < target) {
-      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: (14 + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to turn spare grain into bread for the household', tag: 'food' });
+    if ((staple || hs.foodStock >= hs.foodTarget * 1.1) && surplusGrain >= 4 && haveBread < target) {
+      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: ((staple ? BAKE_WORTH : 14) + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: staple ? 'to bake the household\'s grain into bread, which feeds further and keeps' : 'to turn spare grain into bread for the household', tag: 'food' });
     }
   }
   return out;
@@ -878,7 +883,7 @@ function optGranaryStore(ctx: Ctx): void {
   // rules 46: a winter reserve (provision.ts durableReserve) takes grain to the bins a few at a time, keeping two back for
   // the day; everyone else, and every world below 46, waits for the ordinary load
   const winter = durableReserve(world, p);
-  const keep = winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3;
+  const keep = grainInPack(world, winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3); // rules 243 (grain_kept.ts): one for the day
   const items: Items = {};
   let n = 0;
   for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]) {
@@ -1122,21 +1127,27 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (s > 0) s += storedStone('smithy');
     if (s >= 0.6 || (oreKnown && init > 0.5 && world.tick > DAY * 14)) out.push({ type: 'smithy', signal: Math.min(1, s), why: 'tools are wearing out and there is ore to be smelted' });
   }
-  if (!knowsEnough(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
+  // rules 243 (grain_kept.ts): a worked plot is reason enough for a granary, and a granary or a worked plot for a bakery,
+  // whether or not this household holds grain or is short of food
+  const grainWorks = wantsGrainWorks(world);
+  if (!knowsEnough(ctx, 'granary') && haveYard && (hs.shortage < 0.5 || (grainWorks && plots >= 1))) {
     let s = 0;
     if (grainKnown >= 6) s += 0.5;
     if (plots >= 2) s += 0.4;
     if (init > 0.45) s += 0.15;
     if (s > 0) s += storedStone('granary');
-    if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: 'the grain keeps going off in the stores' });
+    if (grainWorks && plots >= 1) s = Math.max(s, GRAIN_WORKS_SIGNAL);
+    if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: grainWorks && plots >= 1 ? 'the grain from the plots wants keeping for bread' : 'the grain keeps going off in the stores' });
   }
-  if (!knowsEnough(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
+  const bakeryFor = grainWorks && (plots >= 1 || knowsOfAny(ctx, 'granary'));
+  if (!knowsEnough(ctx, 'bakery') && haveKiln && (hs.shortage < 0.4 || bakeryFor)) {
     let s = 0;
     if (grainKnown >= 8) s += 0.45;
     if (plots >= 2) s += 0.3;
     if (knowsOfAny(ctx, 'granary')) s += 0.2;
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s > 0) s += storedStone('bakery');
+    if (bakeryFor) s = Math.max(s, GRAIN_WORKS_SIGNAL);
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
   // a crowd wants a hall (rich only): once two dozen live here, somewhere to gather is wanted whether or not a yard stands
