@@ -1,0 +1,36 @@
+river: 8 days, rules 233, 28 alive, 4.63 ms a tick; 4068 reviews of a job under way against 3111 fresh choices
+activities ended 4017; dropped while working 400 (10%), dropped while walking there 338
+            kind   ended   done partial failed  walk  work  frac  (dropped walking / working, mean fraction done when dropped at work)
+            rest     273     93       0      0    14   166  0.78
+        converse     586    490       0      0     0    96     0
+          gather     758    441     122     55    85    55  0.48
+          wander     210     96       0     10    57    47  0.45
+            warm      24     13       0      0     2     9  0.51
+           alone      10      0       3      0     0     7  0.47
+           build     148     29      97     10     6     6     0
+           drink     301    282       0      7     7     5  0.35
+            flee      25      7       0      0    15     3  0.33
+            till      20     14       0      0     4     2  0.87
+            give     101     67       0     19    14     1  0.86
+         explore      24     10       0      1    12     1  0.21
+           sleep     296    282       9      0     4     1     0
+          attend       9      5       0      3     0     1   0.4
+       socialize     188      0       0    151    37     0     0
+        withdraw      40     27       0      8     5     0     0
+         deposit     233    197      19      4    13     0     0
+       plan_site      87     37       0     37    13     0     0
+           plant      24     24       0      0     0     0     0
+            haul     195    164       0      4    27     0     0
+            tend       9      9       0      0     0     0     0
+           craft      36     31       0      0     5     0     0
+             eat     258    256       0      0     2     0     0
+       eat_store      78     73       0      2     3     0     0
+why a job was dropped at work: something better came up 257; invitation declined: I have already had that time today; I w 62; food in my pack would ease my hunger sooner 33; invitation declined: not now, there was work to finish first 26; danger nearby 12; time together unfinished: we did not get to spend the reques 4; time together unfinished: our time together was cut short; n 4; a more urgent need (warmth) 1; woken to be fed 1
+put on hold by somebody talking to them: 113 at work (8691 ticks of progress set back to nothing), 171 while walking; later picked up again 281, never 2
+  by the job held: gather 34; wander 29; rest 21; eat 9; build 6; drink 6; warm 3; craft 1; give 1; eat_store 1; haul 1; harvest 1
+  by what the talk was for: play_together 70; learn_foraging 48; family_time 45; chat 44; request 39; warn 23; cancel_request 7; recruit 3; handover_work 3; argue 1; learn_skill 1
+building: 141 spells reached the site, 34 did no work at all; 90 ended while waiting for materials (stood 11 ticks on average); 0 had run 800 ticks or more; 73 ticks of work a spell
+  how building spells ended: 84x partial, waiting for materials: no materials to work with; 29x success: done; 11x partial: the building is complete; my contribution is the work I actu; 6x interrupted, waiting for materials: something better came up; 5x failed: the site is already finished or gone; 2x failed: too many people are already working there; 2x partial: completed the planned N-tick work spell; unfinished work rem; 2x failed: not a home of this household
+  picked up again and back at the work: 45; with the count as it was 24 (1216 ticks kept); begun again 21 (759 ticks lost)
+  progress set back by talk, by the job held (ticks): rest 5692; wander 1512; gather 716; warm 335; build 280; craft 80; eat 34; drink 16; harvest 14; eat_store 7
+second looks due, by what the person was doing: sleep 5222; rest 2702; gather 2230; gather (walking) 854; wander 519; drink (walking) 446; sleep (walking) 425; build 420; haul (walking) 349; deposit (walking) 312; wander (walking) 261; socialize (walking) 217; plan_site (walking) 166; warm 163; drink 153; explore (walking) 139

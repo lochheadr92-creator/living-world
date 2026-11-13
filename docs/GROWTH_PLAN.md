@@ -270,10 +270,46 @@ day, five builders carrying the note; clean checkout of `574fcdc3`) and `tests/v
 held work carrying its count; clean checkout of `0444278f`). Lab arms: `rich-no-builder-fetches`, `-leave`, `-fetch`;
 `rich-no-picked-up`, `-jobs`, `-rest`.
 
-**Result: the paired lab and the ordinary-world measurements were started on 13 November and are not read yet.**
+**Ordinary worlds at rules 233 against 231** (`scripts/job_drops.ts`, the same four worlds, eight days, one run each: a
+description): a builder with nothing to build with stands 11 ticks, not 60 to 68; spells of building dropped while waiting 25
+against 118; spells that did no work 87 against 85, and deliveries to sites finished 498 against 490 (no change). Of 219 held
+activities picked up again at the work, 155 had their count as it was (12,944 ticks kept) and 64 began again (1,829 ticks; the
+kinds the rule leaves out, or the person had moved). Six years, four worlds (`scripts/build_trace.ts`, one run each): a cellar
+takes 5.0 days against 6.8, a hut rebuilt 2.0 against 2.6, a well 2.0 against 2.7; what is finished and abandoned is about the
+same.
+
+**Paired lab** (clean checkout of `0444278f`, 12 seeds, Normal, fork 0, 25 days, arrivals on; control, two nudges and six
+removals, 108 arms; `review_evidence/growth-20261113/builder-fetches/lab233/report.txt`). Figures are with the rule against
+without it.
+
+- **Rules 232, both parts**: nothing moves by more than a single draw moves it. **Leave** leans right inside the noise floor:
+  buildings 46.7 against 44.3 (11 of 12 seeds), tools 77.1 against 73.3, projects finished 93.3 against 86.4. **Fetch** changes
+  nothing the lab can see; whether to keep it is the owner's to decide.
+- **Rules 233, jobs**: with the count kept, buildings 46.7 against 43.3, people 36.4 against 34.5 and deaths 0.1 against 0.5, all
+  larger than chance; the first hall 18.3 against 22.1 inside the floor. **Rest** changes nothing the lab can see. With both
+  parts removed together the same three are not distinguishable (buildings 46.7 against 45.9), and tools 77.1 against 81.8 and
+  projects finished 93.3 against 99.8 lean the wrong way inside the floor: the two removals do not agree, so the benefit of the
+  jobs part is one lab's finding, not a settled one.
 
 Found on the way, not from these rules: `tests/household_home.test.ts` fails 19 of 51, equally at `cc0e656a` (rules 220) and
 `652c3b77` (rules 228); cause not looked into.
+
+## Step F: the ids of real things and of water knowledge no longer meet (rules 234, `src/sim/id_ranges.ts`)
+
+Answers gap ledger G226 and G227 and AR-02 to AR-05 of `docs/ADVERSARIAL_REVIEW_20261113.md`.
+
+- Water knowledge takes its ids from two thousand million upward, not from one million, which the id counter crosses in a large
+  world within a lifetime (318,000 ids in 20 years at 30 to 50 people). The counter is refused that range.
+- The record of who was told what is keyed by the pair "listener:belief", not by a product two pairs could share.
+- For every save, whatever its rules: refused on loading if its id counter is not beyond the ids in use, or two things share an id.
+- `scripts/generation_trace.ts`: the count labelled `householdsEver` is the households standing now; relabelled.
+
+A world keeps the scheme it was made with. A world at 234 parts from the same world at 233 within days (measured, three worlds),
+because some choices are hashed on a belief's id: a different draw, not a different rule. The lab comparison of versions was
+started on 13 November and is not read yet.
+
+Checks: `tests/id_ranges.test.ts` (7); 92 tests in 12 files pass, among them golden, observer purity and the rules-229 and
+rules-230 pins; pin `tests/v234_continuation.*` (Normal aspen, one day; clean checkout of `cd465dae`).
 
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 
