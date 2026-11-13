@@ -7,6 +7,7 @@ import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
 import { BELIEF_NOUN } from './labels';
 import { isFacilityType } from './recipes';
+import { itemsToldTo } from './own_stores';
 import { addLog } from './events';
 import { hashUnit } from './rng';
 import type { Belief, BuildingType, Person, World } from './types';
@@ -96,7 +97,7 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   if (old) noteDisagreement(world, S, L, old, b); // rules 107: a differing newer account of a place seen oneself is logged
   const copy: Belief = { ...b, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
   // (a field that is absent stays absent: a key set to undefined is dropped by a save, so the saved and the live record would differ)
-  if (b.items) copy.items = { ...b.items };
+  if (b.items) copy.items = itemsToldTo(world, L, b); // rules 245 (own_stores.ts): another household is not told the exact count of a household's own store
   else delete copy.items;
   if (b.need) copy.need = { ...b.need };
   else delete copy.need;

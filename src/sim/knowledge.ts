@@ -17,6 +17,7 @@ import { isEmptyFood } from './empty_news';
 import { waterIdBase } from './id_ranges';
 import { runsRulesVersion } from './rulesversion';
 import { keepUnseenInterior } from './home_interior';
+import { ownStoreItems } from './own_stores';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
 /** synthetic belief ids for coarse water-access cells (ids below 1e6 are real entities) */
@@ -183,6 +184,7 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if(e.ent==='grave')rememberGrave(world,p,e);
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
+  if (e.ent === 'building') { const own = ownStoreItems(world, p, e); if (own) b.items = own; } // rules 245 (own_stores.ts): a household's own store is remembered exactly, not by the glance
   if(e.ent==='building'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,124)&&textileGoods(world).some(k=>(e.store.items[k]??0)>0)){
     b.textileStock={observer:p.id,items:Object.fromEntries(textileGoods(world).map(k=>[k,usableUnits(world,e,p,k)]))};
   }

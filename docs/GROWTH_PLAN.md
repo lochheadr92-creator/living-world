@@ -677,6 +677,49 @@ Since rules 169 a look at a store remembers each kind as one unit, the household
 The older probes (`supply_probe`, `job_drops`, `water_probe`, `family_probe`, `arrivals_probe`, `build_trace`) now start from a
 save point as the newer ones do; each gives the same output as before on a three-day run.
 
+## A household knows its own stores (rules 245, built 14 November; not yet measured in the lab)
+
+The repair for the section above. Since rules 169 a look at any store remembers each kind as one unit (`seen_stock.ts`), the
+household's own home and cellar included: a home holding four or five units of food was remembered as holding about one, and
+households counted themselves short 87 to 92 times in a hundred where the true figure is 58 to 67.
+
+**What changes** (`src/sim/own_stores.ts`, one switch, rich worlds at 245 and later). A person who looks at a building their own
+household owns (`hhId` theirs and not 0: the home, the cellar, any other building with the household's name on it) remembers its
+store exactly, counts per kind, as before 169. Everything else is unchanged: another household's building and a shared one
+(`hhId` 0: storehouse, granary, workshops) are still the one-unit glance, as are carts and piles. A home seen from the yard still
+keeps the old figure (rules 184). The lookup is in `knowledge.ts observe`, the one place that knows both who looks and what is
+looked at.
+
+**What is told.** A belief passed on (`news.ts tellBelief`) to somebody of another household than the building's goes through the
+same glance, so telling does not hand out a household's exact count; somebody of the building's own household is told the count.
+Other copies of a belief between people were read in source and carry no store: `answerInfo` tells only food, wood, stone and water
+sources, the roof and fire duties build a belief with no items, and `hearUndertaking` (`continuity_knowledge.ts`) copies a belief
+only between members of one household. Not changed: the workshop figures a belief carries (`ops`) and a textile count, which the
+glance already kept exact.
+
+Nothing is saved; save format 5 is unchanged. Rules 244 and earlier, authored worlds and old saves behave exactly as before. Lab
+arm `rich-no-own-stores`.
+
+**Contract tests** (`tests/own_stores.test.ts`, 17, about 4 seconds): own home, cellar and workshop exact at 245 and one of each
+kind at 244; a full own store as it is where 244 gives a stand-in; every member of the household; another household's building and
+a shared storehouse kept (pass at both versions on purpose); a person with no household owns nothing; the switch off equals 244;
+authored worlds; a home's inside still seen only from inside or at the door; told on to another household (glance, a full store
+still full) and to the same household (count); the shortage a household counts for a home of 13 units (above 0.4 at 244, below at
+245); stock conserved, and a saved world reloads with the same beliefs and goes on 40 ticks the same; and an ordinary world
+(aspen, arrivals on, tick 1,200): all 12 fresh sights of a household's own buildings are exact, where at 244 10 of 11 are not, and
+the 64 of another household's stores holding several of a kind are all still glances. With the rule forced off, 13 of the 17 fail (the other four are the guards and the
+arm); with the told path forced to copy, the three told-on tests fail.
+
+**Checks.** Typecheck clean. The 182 test files that name the current version, `seen_stock` or `snapshotEntity` (1,329 tests, two
+workers, a busy machine): 1,324 pass; the five failures (`construction_finish`, `home_replacement`, `pavel_intentions`,
+`project_inputs`, `transport`, one test each) fail the same at `9d6b3437`. The pins of rules 220 to 244 (21 files) pass, so nothing
+below 245 moved. The immutable pin of 245, the lab and the probe comparison come after the commit.
+
+**Not yet known.** Whether a household that no longer believes itself short forages, plants or builds less (the false shortage gates
+the extra field, building wants and foraging urgency): that is the 25-day lab arm `rich-no-own-stores`, and `scripts/home_stock_probe.ts`
+at 244 and 245 for the belief itself. Not looked into: a told glance with a later `seen` replaces the exact belief of a household
+member of the building's own household until their next look.
+
 ## Step H, first part: the full test suite (13 November, at `9c735b7b`, rules 235)
 
 The first full run since rules 208, alone on the machine; `review_evidence/growth-20261113/full-suite/`. **624 of 641 files and
