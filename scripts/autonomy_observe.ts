@@ -9,6 +9,7 @@ import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { conservationReport } from '../src/sim/economy';
 import { DAY } from '../src/sim/constants';
+import { raiseRulesVersion } from './world_args';
 import { TimeBudget } from './observers/time_budget';
 import { ToolDemandTrace } from './observers/tool_demand';
 import { KeptTargetTrace } from './observers/kept_target';
@@ -20,6 +21,7 @@ const seed = arg('seed', 'forest'), profile = arg('profile', 'normal') as Profil
 if (!out || existsSync(out) || !Number.isFinite(days) || days <= 0 || !Number.isFinite(budget) || budget <= 0) throw new Error('Fresh output, positive days and budget required');
 const input = arg('load');
 const w = input ? deserializeWorld(readFileSync(input, 'utf8')) : createWorld(currentWorldSettings(profile, seed, { immigration: false }));
+raiseRulesVersion(w, arg('rules-up'), input); // --rules-up <N> with --load: continue the save at a later rules version (scripts/world_args.ts)
 const from = w.tick, until = from + Math.round(days * DAY), began = performance.now();
 mkdirSync(out, { recursive: true });
 const paths = ['src', 'scripts/observers'].flatMap(root => readdirSync(root, { recursive: true }).map(String).filter(p => p.endsWith('.ts')).map(p => root + '/' + p)).concat('scripts/autonomy_observe.ts').sort();

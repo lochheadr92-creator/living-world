@@ -4,6 +4,7 @@
 //
 //   node scripts/fast.mjs scripts/hash_from_save.ts -- --load C:\saves\aspen-day84.save.json --ticks 2400
 //   (or --seed aspen [--rules N] in place of --load, to hash a fresh world: see scripts/world_args.ts)
+//   --rules-up N with --load carries the save on at a later rules version (the hash then includes that version): see scripts/world_args.ts
 import { DAY } from '../src/sim/constants';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { argsOf, worldFromArgs } from './world_args';
