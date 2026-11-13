@@ -333,7 +333,28 @@ smithy, awake, every 300 ticks from the second year. **No iron was made and no o
   none" 64 to 172 times in the two large worlds.
 - 18 to 35 people a world hold a worn tool an iron one would replace.
 
-No repair is made yet.
+## Step E, the repair: a standing smithy is a standing want for iron (rules 235, `src/sim/smithy_iron.ts`)
+
+Four switched parts:
+
+- **Want**: somebody who knows a smithy they may use, with fewer than two bars of iron lying at the smithies they know, wants
+  the difference at 40: the charcoal want of rules 10 (30) and ten for the walk, an ore vein lying 24 to 46 tiles from the camp.
+  A first dose. The ordinary planner mines, smelts, learns or tries from there.
+- **Carry**: somebody who does not know smelting still brings the ore and the charcoal a batch lacks to the smithy, for whoever
+  does. A first draft without this part made no iron in two worlds over five years: the want reached everybody, one to four
+  of twenty knew smelting, and for the rest it ended at "has not learned iron smelting" about 2,000 times a world.
+- **Count**: what lies at a workshop for the smithy's two standing wants is counted from the workshop's own record, not the
+  glance of rules 169 (four charcoal at the smithy were one, so charcoal went on being made and fetched).
+- **Room**: the left-over rule of rules 33 also applies to ore wanted for a workshop.
+
+**Measured** (the same probe, the same four worlds, five years, rules 235, one run each: a description;
+`review_evidence/growth-20261113/iron/`): **iron is made in all four: 8, 2, 6 and 4 bars, where there was none.** A step toward
+iron is the first choice in 537 of 7,912 daylight looks at which one is offered (7 in 100; before, 3). Still refused, a world:
+"has not learned iron smelting" 1,621 to 2,902 times, "has not learned iron forging" 595 to 1,266, "needs a pickaxe and has
+none" 426 to 1,021, "no room in my pack for one ore" 124 to 743. Whether iron tools are forged from the bars was not counted.
+
+Checks: `tests/smithy_iron.test.ts` (7). Lab arms: `rich-no-smithy-iron`, `-want`, `-carry`, `-count`, `-room`. The paired
+lab and the pin are not done at this commit.
 
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 

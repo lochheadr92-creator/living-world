@@ -1,5 +1,6 @@
 import {brewDemand,hasBrewing} from './brewing';
 import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
+import { IRON_WANT, IRON_WHY, carriesForSmelter, ironWanted, oreLeavesLeftover, smithyShelf } from './smithy_iron';
 import { leaveHeaviestOption } from './leave_heaviest';
 import { firstYardShared } from './shared_yard';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
@@ -362,7 +363,12 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
       const first=RECIPE_BY_ID[TECHNIQUES[next].recipes[0]];
       if(first&&first.at===b.btype){planRecipe(ctx,f,first,item,unmet,base*0.9,`to work out ${TECHNIQUES[next].name} first, ${why}`,tag,depth+1,siteId);return;}
     }
-    if(!(next===lacking&&trialAllowed(world,p,lacking))){addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;}
+    if(!(next===lacking&&trialAllowed(world,p,lacking))){
+      addBlocked(ctx,'operate',r.doing,b.id,technique,tag);
+      // rules 235 (smithy_iron.ts): somebody who cannot smelt still brings the ore and the charcoal for whoever can
+      if(carriesForSmelter(world,r.id,why))bringInputs(ctx,f,r,base,why,tag,depth,siteId);
+      return;
+    }
   }
   const trial = !!technique;
   const snap = b.ops;
@@ -454,6 +460,29 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
       if (missing > 0) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId);
     }
   }
+}
+
+/**
+ * Rules 235 (smithy_iron.ts): what a batch of this recipe still lacks at the workshop is brought there by somebody who will not
+ * work the batch themselves: what they carry is taken there, and what is missing is sought as for any batch. No work is offered.
+ */
+function bringInputs(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag: string, depth: number, siteId: number): void {
+  const { world, p } = ctx;
+  const b = f.b;
+  const need: Items = {};
+  for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
+  for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
+  const carry: Items = {};
+  let any = false;
+  for (const k of Object.keys(need) as ItemKind[]) {
+    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx, b, k));
+    if (lack <= 0) continue;
+    const have = unitsOf(p.inv[k]);
+    if (have > 0) { carry[k] = Math.min(have, lack); any = true; }
+    const missing = lack - have;
+    if (missing > 0 && (depth < 2 || isRawMaterial(k))) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId);
+  }
+  if (any) depositLeaf(ctx, b, carry, base * 0.92, `${why} (${r.label})`, tag, siteId);
 }
 
 function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, tag: string, joining: boolean, siteId = 0, trial = false, ready = ''): void {
@@ -577,7 +606,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {
       // rules 229 (site_supply.ts): with no room for one, a left-over of wood or stone may be left first, as rules 33 has it
-      if (chainLeavesLeftover(ctx.world, tag, siteId) && invRoom(ctx.world, p, item) < 1 && !ctx.options.some((o) => o.key?.startsWith('leave:')))
+      if ((chainLeavesLeftover(ctx.world, tag, siteId) || oreLeavesLeftover(ctx.world, item)) && invRoom(ctx.world, p, item) < 1 && !ctx.options.some((o) => o.key?.startsWith('leave:')))
         leaveHeaviestOption(ctx, { item, base: base * 0.92 * traitMods(p).work, why, sources: RAW_KINDS[item], mult: nightMult(ctx) * weatherMult(ctx), wanted: new Set<ItemKind>([item, ...materialNeeds(ctx).map((n) => n.item)]) });
       gatherMaterial(ctx, item, remaining, base * 0.92 * traitMods(p).work, why, tag);
       if (item !== 'stone' && !(item==='ore'&&hasRecoveredWorkshops(ctx.world))) return; // stone can also be cut at a quarry
@@ -714,11 +743,17 @@ export function demandsOf(ctx: Ctx): Demand[] {
     let onShelves = 0;
     for (const s of beliefsByKind(p, ['building'])) {
       if (s.btype !== 'smithy' && s.btype !== 'kiln') continue;
-      onShelves += unitsOf(s.items?.charcoal);
+      onShelves += smithyShelf(world, s, 'charcoal'); // rules 235 (smithy_iron.ts): the workshop's own count, not the glance
     }
     if (onShelves < 4) {
       out.push({ item: 'charcoal', qty: 4 - onShelves, have: onShelves, base: 30 * tm.work, why: 'the smithy burns charcoal to smelt and forge', tag: 'craft' });
     }
+  }
+
+  // rules 235 (smithy_iron.ts): a standing smithy is a standing want for iron too, as rules 10 made it one for charcoal
+  {
+    const wanted = ironWanted(world, facilitiesOf(ctx, 'smithy').map((f) => f.b));
+    if (wanted > 0) out.push({ item: 'iron', qty: wanted, have: 0, base: IRON_WANT * tm.work, why: IRON_WHY, tag: 'craft' });
   }
 
   // water is heavy to carry for those who fetch it for others

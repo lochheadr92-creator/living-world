@@ -1,0 +1,73 @@
+birch: 60 days, rules 235; planks made 24, bricks made 21; observer changed the world in 0 checks
+looks at a grown person awake: 5605; of which they knew a site short of planks or bricks: 4311
+  an option about planks or bricks was offered: 1355 (their first choice 20 times; otherwise behind by 26.1 on average)
+  none offered but a refusal said why: 1663; neither offered nor refused: 1293
+  what was offered:
+    367x Collect N charcoal from the kiln
+    274x Build the mine
+    113x Collect N wood from the heap
+    99x Bring N wood to the kiln
+    97x Collect N wood from the timber yard
+    54x Collect N wood from the food rack
+    33x Collect N axe from the heap
+    30x Burning charcoal
+    29x Deliver materials to the mine site
+    25x Ask Dara to teach charcoal firing
+  what beat it:
+    151x operate: Sawing planks
+    98x gather: Picking berries
+    87x deposit: Store food in the cellar
+    81x sleep: Sleep at my hut
+    78x rest: Stay at my hut until it is light
+    64x rest: Shelter at the hut
+    58x gather: Gathering wild grain
+    54x harvest: Harvest the crop
+    36x fuel_fire: Add wood to the fire
+    31x gather: Picking fruit
+    27x operate: Separating and twisting bast fibre
+    25x give: Bring berries to Uri
+  refusals:
+    2415x Smelting iron: has not learned iron smelting
+    2054x Burning charcoal: has not learned charcoal firing
+    790x Forging an iron axe: has not learned iron forging
+    479x Separating and twisting bast fibre: not enough estimated time for the trip and return: energy for the return
+    404x Working the ore mine: needs a pickaxe and has none (and none is on the rack)
+    204x Making a net: tried recently and could not get on
+    176x Forging an iron pickaxe: has not learned iron forging
+    156x Making a trap: tried recently and could not get on
+    148x Sawing planks: tried recently and could not get on
+    147x Get ore the smithy forges tools from iron (smelted iron): no room in my pack for one ore
+    143x Digging ore the smithy forges tools from iron (smelted iron): not enough estimated time for the trip and return: energy for the return
+    129x Forging an iron hammer: has not learned iron forging
+    119x Working the ore mine: not enough estimated time for the trip and return: energy for the return
+    81x Build the mine: not enough estimated time for the trip and return: energy for the return
+    75x Sawing planks: not enough estimated time for the trip and return: energy for the return
+    72x Weaving a wool garment: tried recently and could not get on
+    72x Scraping and sewing a hide garment: tried recently and could not get on
+    72x Weaving a garment: tried recently and could not get on
+    72x Weaving a wool blanket: tried recently and could not get on
+    72x Weaving a blanket: tried recently and could not get on
+    72x Weaving a wool bedding: tried recently and could not get on
+    72x Weaving a bedding: tried recently and could not get on
+    62x Digging ore to replace my worn axe with an iron one (an iron axe) (smelted iron): not enough estimated time for the trip and return: energy for the return
+    43x Get ore to work out iron smelting first, to replace my worn axe with an iron one (smelted iron): no room in my pack for one ore
+  in daylight: a step offered 942 times, first choice 19; behind by (10th, 25th, middle, 75th, 90th) 9.5, 14.5, 20.6, 27.6, 38.4; the step itself worth (10th, middle, 90th) 6.2, 18.1, 26.7
+  what beat it in daylight:
+    150x operate: Sawing planks
+    97x gather: Picking berries
+    86x deposit: Store food in the cellar
+    58x gather: Gathering wild grain
+    40x harvest: Harvest the crop
+    31x gather: Picking fruit
+    27x operate: Separating and twisting bast fibre
+    25x rest: Shelter at the hut
+    20x attend: Go to the feast at the hall
+    19x plant: Plant seed
+    17x attend: Go to the harvest feast at the hall
+    15x gather: Chopping wood to fuel our cold home hearth
+    14x gather: Fishing
+    13x warm: Warm up at the fire
+  packs with no room (200 looks, 1.1 weight free on average), weight carried by item: wood 3.9, seeds 1.5, stone 1.3, berries 1.2, basket 1.0, hammer 0.9, grain 0.8, spear 0.8, hoe 0.8, axe 0.7
+  sawing refused for want of a saw 0 times, 0 of them while a saw was in somebody's pack; a saw lay at a timber yard at 4311 looks; saws in packs at the end 7
+  iron: of 22 grown people 4 know charcoal firing, 1 smelting, 1 forging; 6 picks held; 17 people hold a worn tool an iron one would replace; made charcoal 9, iron 0
+  doing, when nothing was offered or refused: 326x rest; 277x drink; 201x gather; 70x warm; 64x eat_store; 56x attend; 56x sleep; 56x deposit
