@@ -27,6 +27,7 @@ import { distToFootprint, entityPos, isWalkable } from './registry';
 import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World } from './types';
 import { clamp, hyp, turnToward } from './util';
 import {recordRoutine} from './daily_routines';
+import { keepCount, putCountBack } from './picked_up';
 import {recordJourney} from './journey_state';
 import {startCareJourney,endCareAcquisition} from './care_journey';
 
@@ -404,6 +405,7 @@ function beginWork(world: World, p: Person, a: Activity): void {
     }
   }
   if (p.activity === a && h) {correctPromiseApproach(world,p,a);p.pose = h.pose(a);}
+  if (p.activity === a) putCountBack(world, p, a); // rules 233 (picked_up.ts)
 }
 
 /** Single place where activities end: every claim is released, the outcome is recorded. */
@@ -561,6 +563,7 @@ export function suspendActivity(world: World, p: Person): void {
   if(!hasLivedLife(world))creditShelterFrom(p, a);
   releaseClaims(world, a.claims);
   if (a.phase === 'work' && !hasOccasionRecovery(world,a)) {
+    keepCount(world, p, a); // rules 233 (picked_up.ts): how far the piece in hand had got is kept through the hold
     a.phase = 'travel';
     a.path = [];
     a.pi = 0;

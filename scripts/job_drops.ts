@@ -64,6 +64,10 @@ probe.on = true;
 interface Held { kind: string; phase: string; progress: number; frac: number }
 const before = new Map<number, { a: object | null; held: Held }>();
 const waiting = new Map<number, object>();
+// rules 233 (picked_up.ts): of the work held at work, how much of its count is there again once the person is back at it
+const heldCount = new Map<object, number>();
+const back = new Map<number, { a: object; held: number }>();
+const kept = { pickedUpAtWork: 0, countKept: 0, ticksKept: 0, ticksLost: 0 };
 const talk: Record<string, { atWork: number; walking: number; workTicksLost: number; fracSum: number; purposes: Record<string, number> }> = {};
 const looksBy: Record<string, number> = {};
 let resumed = 0;
@@ -82,14 +86,24 @@ for (let i = 0; i < days * DAY; i++) {
     if (!p.alive) continue;
     const was = before.get(p.id);
     const wait = waiting.get(p.id);
+    const b = back.get(p.id);
+    if (b) {
+      if (p.activity !== b.a) back.delete(p.id);
+      else if ((p.activity as { phase: string }).phase === 'work') {
+        const now = (p.activity as { progress: number }).progress;
+        kept.pickedUpAtWork++;
+        if (now >= b.held) { kept.countKept++; kept.ticksKept += b.held; } else kept.ticksLost += b.held - now;
+        back.delete(p.id);
+      }
+    }
     if (wait) {
-      if (p.activity === wait) { resumed++; waiting.delete(p.id); }
+      if (p.activity === wait) { resumed++; waiting.delete(p.id); const h = heldCount.get(wait); if (h !== undefined) { back.set(p.id, { a: wait, held: h }); heldCount.delete(wait); } }
       else if (p.suspended !== wait) { neverResumed++; waiting.delete(p.id); }
     }
     if (was && was.a && p.suspended === was.a && p.activity !== was.a && !waiting.has(p.id)) {
       waiting.set(p.id, was.a);
       const t = (talk[was.held.kind] ??= { atWork: 0, walking: 0, workTicksLost: 0, fracSum: 0, purposes: {} });
-      if (was.held.phase === 'work') { t.atWork++; t.workTicksLost += was.held.progress; t.fracSum += was.held.frac; } else t.walking++;
+      if (was.held.phase === 'work') { t.atWork++; t.workTicksLost += was.held.progress; t.fracSum += was.held.frac; if (was.held.progress > 0) heldCount.set(was.a, was.held.progress); } else t.walking++;
       const purpose = w.conversations.find((c) => c.id === p.convId)?.purpose ?? (p.activity?.kind ?? 'other');
       t.purposes[purpose] = (t.purposes[purpose] ?? 0) + 1;
     }
@@ -106,7 +120,7 @@ for (const r of Object.values(rows)) for (const [k, n] of Object.entries(r.reaso
 const talkTotal = Object.values(talk).reduce((n, t) => ({ atWork: n.atWork + t.atWork, walking: n.walking + t.walking, workTicksLost: n.workTicksLost + t.workTicksLost }), { atWork: 0, walking: 0, workTicksLost: 0 });
 const purposes: Record<string, number> = {};
 for (const t of Object.values(talk)) for (const [k, n] of Object.entries(t.purposes)) purposes[k] = (purposes[k] ?? 0) + n;
-const result = { build, seed, days, looksBy, talk, talkTotal, purposes, resumed, neverResumed, rulesVersion: w.settings.rulesVersion, alive: w.persons.filter((p) => p.alive).length, seconds: Math.round(secs), msPerTick: Math.round((secs * 1000 / (days * DAY)) * 100) / 100, reviews: probe.reviews, decisions: probe.decisions, total, reasons, table };
+const result = { kept, build, seed, days, looksBy, talk, talkTotal, purposes, resumed, neverResumed, rulesVersion: w.settings.rulesVersion, alive: w.persons.filter((p) => p.alive).length, seconds: Math.round(secs), msPerTick: Math.round((secs * 1000 / (days * DAY)) * 100) / 100, reviews: probe.reviews, decisions: probe.decisions, total, reasons, table };
 if (out) writeFileSync(out, JSON.stringify(result));
 const pad = (s: unknown, n: number): string => String(s).padStart(n);
 console.log(`${seed}: ${days} days, rules ${result.rulesVersion}, ${result.alive} alive, ${result.msPerTick} ms a tick; ${probe.reviews} reviews of a job under way against ${probe.decisions} fresh choices`);
@@ -119,5 +133,6 @@ console.log('  by the job held: ' + Object.entries(talk).sort((a, b) => b[1].atW
 console.log('  by what the talk was for: ' + Object.entries(purposes).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, n]) => `${k} ${n}`).join('; '));
 console.log(`building: ${build.reached} spells reached the site, ${build.noWork} did no work at all; ${build.waitingAtEnd} ended while waiting for materials (stood ${Math.round(build.waitedTicks / Math.max(1, build.waitingAtEnd))} ticks on average); ${build.pastHold} had run 800 ticks or more; ${Math.round(build.workTicks / Math.max(1, build.reached))} ticks of work a spell`);
 console.log('  how building spells ended: ' + Object.entries(build.byEnding).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, n]) => `${n}x ${k}`).join('; '));
+console.log(`  picked up again and back at the work: ${kept.pickedUpAtWork}; with the count as it was ${kept.countKept} (${Math.round(kept.ticksKept)} ticks kept); begun again ${kept.pickedUpAtWork - kept.countKept} (${Math.round(kept.ticksLost)} ticks lost)`);
 console.log('  progress set back by talk, by the job held (ticks): ' + Object.entries(talk).sort((a, b) => b[1].workTicksLost - a[1].workTicksLost).slice(0, 10).map(([k, t]) => `${k} ${Math.round(t.workTicksLost)}`).join('; '));
 console.log('second looks due, by what the person was doing: ' + Object.entries(looksBy).sort((a, b) => b[1] - a[1]).slice(0, 16).map(([k, n]) => `${k} ${n}`).join('; '));
