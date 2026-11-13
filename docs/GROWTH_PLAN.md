@@ -617,6 +617,12 @@ six loaves a day for 54 people, a tenth of what they eat; the commonest refusals
 wild grain it is picked from. Whether a granary of grain and a bakery carry a settlement through a lean season is what the
 twenty-year runs at rules 244 are for (twelve worlds, started 14 November 00:18 at `88c3e8b3`).
 
+**Lab** (12 worlds, 25 days, at `88c3e8b3`; `review_evidence/growth-20261113/grain/lab244/`). Before any bakery stands, so this
+is the test for early harm. With rules 243 removed: people, deaths, hunger and buildings do not move; food put by in
+preparation is higher without the rule (1,062 units against 928, beyond chance) and food at home 1.2 a head against 0.8
+(inside the noise floor), which is the grain now going to the bins instead. With rules 244 removed: plots 30.7 against 36.9
+(lower in 10 of 12 worlds, inside the noise floor); nothing else moves. No early cost found in either.
+
 **Pins.** 242: aspen, end of the first day; it does not exercise the rule (no ordinary world at 242 holds a loaf). 243: aspen,
 tick 400, four people carrying grain with other food. 244: gen-2, tick 500, a household with more plots than before. The 242
 and 243 pins are recorded at a head whose current version is 244, because 243 was set after 244 was added.
