@@ -1,0 +1,7 @@
+meadow: days 0 to 48, rules 243; 58 alive in 28 households; 60 plots {"growing":47,"ripe":4,"tilled":9}; 1 granaries, 1 mills, 1 bakeries, 18 cellars
+  grain: made 3169 (66.0 a day), eaten or used 2396 (49.9 a day), spoiled 579 (12.1 a day)
+  flour: made 89 (1.9 a day), eaten or used 69 (1.4 a day), spoiled 17 (0.4 a day)
+  bread: made 92 (1.9 a day), eaten or used 77 (1.6 a day), spoiled 6 (0.1 a day)
+  every food, made / eaten or used / spoiled over the span: berries 3745/2909/779; fruit 888/682/184; fish 958/712/229; grain 3169/2396/579; bread 92/77/6; meat 10/2/8; dried_fish 10/5/3
+  held at the end: grain {"packs":74,"granary":106,"mill":5}; flour {"bakery":3}; bread {"packs":9}
+  the goods account, entries about grain, flour, bread, seed and eating: -eaten 5783; +regrowth: wild grain 2177; +crop growth 1199; -saved as seed 443; +seed saved from wild grain 443; -eaten at the source 296; xcrop left to rot 296; -sown 191; -used in baked bread 115; xgrain bins: stored food spoiled 102; +made baked bread 92; -used in milled flour 84; +made milled flour 84; -construction: granary 18; -construction: bakery 16; -construction: mill 16; -used in ground flour 5; +made ground flour 5

@@ -1,0 +1,47 @@
+aspen: 44 days, rules 244; first granary day 19.0, first bakery day 41.5; 62 alive
+  looks at a grown person awake since the bakery stood: 641; knows a bakery 497; four grain in pack or share 466; household wants bread 344; busy with grain, flour or bread 92
+  granary holds {"grain":307}; bakeries hold {"bread":1,"wood":1}; bakery jobs {"recipe":"bake_bread","phase":"work"}; batches 7
+  what they were doing about it:
+    18x withdraw: Collecting N bread
+    15x fetch_water: Drawing well water
+    10x operate: Firing bricks
+    9x deposit: Bringing N grain to the granary
+    6x operate: Heading to help at the bakery
+    5x withdraw: Collecting N bricks
+    5x deposit: Bringing N water to the bakery
+    3x operate: Tending the grain bins
+    3x withdraw: Collecting N grain
+    3x operate: Baking bread
+  offered (times; mean rank, mean worth, mean worth of the first choice):
+    428x operate: Sawing planks [to help keep a neighbour’s granary standing]  (rank 19, worth 13, first choice 37; chosen first 1 times)
+    234x fetch_water: Draw water from the well [to bake the household's grain into bread, which fe]  (rank 6, worth 31, first choice 42; chosen first 23 times)
+    147x operate: Firing bricks [for the shared bakery]  (rank 10, worth 18, first choice 38; chosen first 8 times)
+    129x withdraw: Collect N bricks from the kiln [for the shared bakery]  (rank 11, worth 17, first choice 37; chosen first 8 times)
+    129x withdraw: Collect N bread from the bakery [to bake the household's grain into bread, which fe]  (rank 6, worth 24, first choice 39; chosen first 26 times)
+    122x operate: Tending the grain bins [to keep the stored grain from spoiling]  (rank 15, worth 13, first choice 35; chosen first 0 times)
+    107x plan_site: Lay out a granary [the grain from the plots wants keeping for bread]  (rank 12, worth 18, first choice 38; chosen first 1 times)
+    101x deposit: Bring N grain to the granary [to keep our grain from spoiling]  (rank 15, worth 14, first choice 36; chosen first 1 times)
+    95x repair: Help repair a neighbour’s granary [to keep a neighbour’s roof over their head]  (rank 21, worth 11, first choice 39; chosen first 0 times)
+    91x deposit: Bring N grain to the bakery [to bake the household's grain into bread, which fe]  (rank 9, worth 20, first choice 39; chosen first 2 times)
+    82x withdraw: Collect N grain from the granary [to bake the household's grain into bread, which fe]  (rank 10, worth 20, first choice 39; chosen first 6 times)
+    68x withdraw: Collect N clay from the kiln [for the shared bakery (fired bricks)]  (rank 13, worth 15, first choice 36; chosen first 0 times)
+    45x build: Build the bakery [to finish the shared bakery]  (rank 19, worth 13, first choice 39; chosen first 1 times)
+    41x operate: Lend a hand at the bakery [to bake the household's grain into bread, which fe]  (rank 5, worth 30, first choice 40; chosen first 10 times)
+    36x withdraw: Collect N wood from the timber yard [for the shared bakery (fired bricks)]  (rank 13, worth 14, first choice 35; chosen first 1 times)
+    35x plan_site: Lay out a bakery [grain could be milled and baked into bread]  (rank 13, worth 16, first choice 36; chosen first 0 times)
+  refused:
+    137x operate: Turning the grain mill -> does not know of a grain mill they may use
+    56x withdraw: Collect N bread -> tried recently and found none to take
+    35x operate: Baking bread -> tried recently and could not get on
+    34x operate: Sawing planks -> not enough estimated time for the trip and return: energy for the return
+    15x operate: Firing bricks -> not enough estimated time for the trip and return: energy for the return
+    15x fetch_water: Fetch water -> no room in my pack for one water
+    9x operate: Baking bread -> the bakery is busy with milled flour
+    8x gather: Get stone for my household’s bakery -> no room in my pack for one stone
+    7x build: Build the bakery -> not enough estimated time for the trip and return: energy for the return
+    6x plan_site: Lay out a granary -> could not find a good spot or was beaten to it recently
+    3x operate: Baking bread -> not enough estimated time for the trip and return: energy for the return
+    2x operate: Tending the grain bins -> not enough estimated time for the trip and return: energy for the return
+    2x fetch_water: Fetch water -> not enough estimated time for the trip and return: energy for the return
+    1x operate: Milling flour -> not enough estimated time for the trip and return: energy for the return
+    1x operate: Baking bread -> not enough estimated time for the trip and return: water margin

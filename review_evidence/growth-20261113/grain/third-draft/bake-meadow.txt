@@ -1,0 +1,48 @@
+meadow: 44 days, rules 244; first granary day 16.3, first bakery day 29.0; 54 alive
+  looks at a grown person awake since the bakery stood: 3377; knows a bakery 3209; four grain in pack or share 1871; household wants bread 1797; busy with grain, flour or bread 380
+  granary holds {"grain":252}; bakeries hold {"wood":1,"water":2}; bakery jobs {"recipe":"mill_flour","phase":"work"}; batches 24
+  what they were doing about it:
+    105x fetch_water: Drawing well water
+    68x withdraw: Collecting N bread
+    35x deposit: Bringing N grain to the granary
+    28x operate: Baking bread
+    21x deposit: Bringing N water to the bakery
+    16x deposit: Bringing N grain to the bakery
+    15x eat_store: Eating from the granary
+    10x fetch_water: Fetching water
+    9x deposit: Bringing N wood to the bakery
+    9x operate: Tending the grain bins
+  offered (times; mean rank, mean worth, mean worth of the first choice):
+    1275x fetch_water: Draw water from the well [to bake the household's grain into bread, which fe]  (rank 6, worth 32, first choice 44; chosen first 151 times)
+    857x operate: Tending the grain bins [to keep the stored grain from spoiling]  (rank 14, worth 15, first choice 37; chosen first 6 times)
+    513x withdraw: Collect N planks from the timber yard [to help keep a neighbour’s granary standing]  (rank 22, worth 9, first choice 37; chosen first 0 times)
+    502x withdraw: Collect N bread from the bakery [to bake the household's grain into bread, which fe]  (rank 6, worth 24, first choice 40; chosen first 118 times)
+    411x deposit: Bring N grain to the granary [to keep our grain from spoiling]  (rank 12, worth 16, first choice 38; chosen first 7 times)
+    407x withdraw: Collect N wood from the bakery [set owned gear for later food (trap)]  (rank 24, worth 10, first choice 38; chosen first 0 times)
+    401x withdraw: Collect N wood from the bakery [set owned gear for later food (net)]  (rank 21, worth 10, first choice 37; chosen first 0 times)
+    355x repair: Help repair a neighbour’s granary [to keep a neighbour’s roof over their head]  (rank 19, worth 10, first choice 38; chosen first 0 times)
+    318x withdraw: Collect N grain from the granary [to bake the household's grain into bread, which fe]  (rank 10, worth 19, first choice 39; chosen first 5 times)
+    297x withdraw: Collect N wood from the bakery [to carry more water at a time (a water jar)]  (rank 35, worth -1, first choice 37; chosen first 0 times)
+    266x deposit: Bring N grain to the mill [to bake the household's grain into bread, which fe]  (rank 10, worth 19, first choice 38; chosen first 4 times)
+    263x deposit: Bring N grain to the bakery [to bake the household's grain into bread, which fe]  (rank 10, worth 21, first choice 38; chosen first 11 times)
+    198x withdraw: Collect N wood from the bakery [the smithy burns charcoal to smelt and forge (char]  (rank 24, worth 9, first choice 36; chosen first 0 times)
+    144x withdraw: Collect N wood from the bakery [set owned gear for later food (net) (bast fibre)]  (rank 24, worth 9, first choice 35; chosen first 0 times)
+    144x eat_store: Eat from the granary [to ease hunger]  (rank 12, worth 26, first choice 47; chosen first 24 times)
+    138x withdraw: Collect N flour from the mill [to bake the household's grain into bread, which fe]  (rank 7, worth 23, first choice 38; chosen first 14 times)
+  refused:
+    177x fetch_water: Fetch water -> no room in my pack for one water
+    148x withdraw: Collect N bread -> tried recently and found none to take
+    93x operate: Baking bread -> tried recently and could not get on
+    58x operate: Tending the grain bins -> not enough estimated time for the trip and return: energy for the return
+    18x gather: Get clay for the shared bakery (fired bricks) -> no room in my pack for one clay
+    14x build: Build the mill -> not enough estimated time for the trip and return: energy for the return
+    12x operate: Turning the grain mill -> does not know of a grain mill they may use
+    11x operate: Baking bread -> the bakery is busy with milled flour
+    9x gather: Get stone for the shared mill -> no room in my pack for one stone
+    7x operate: Baking bread -> not enough estimated time for the trip and return: energy for the return
+    6x gather: Get wood for the shared mill -> no room in my pack for one wood
+    6x build: Build the bakery -> not enough estimated time for the trip and return: energy for the return
+    6x gather: Breaking stone for the shared mill -> not enough estimated time for the trip and return: energy for the return
+    5x withdraw: Collect N flour -> tried recently and found none to take
+    4x fetch_water: Fetch water -> not enough estimated time for the trip and return: energy for the return
+    3x operate: Lend a hand at the bakery -> not enough estimated time for the trip and return: energy for the return
