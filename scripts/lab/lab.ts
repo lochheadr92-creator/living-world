@@ -4,6 +4,7 @@ import { PICKED_UP_PARTS, pickedUpPartOn, setPickedUp } from '../../src/sim/pick
 import { SMITHY_IRON_PARTS, setSmithyIron, smithyIronPartOn } from '../../src/sim/smithy_iron';
 import { GROUNDWATER_PARTS, groundwaterPartOn, setGroundwater } from '../../src/sim/groundwater';
 import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
+import { WOLF_FIGHT_PARTS, setWolfFight, wolfFightPartOn } from '../../src/sim/wolf_fight';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
@@ -281,6 +282,9 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 239 (wolf_fight.ts): all four parts removed (equal to rules 238), and each part alone
+  if (kind === 'rich-no-wolf-fight') return { spec: label, summary: 'a spear drives a wolf off and never hurts it, as before rules 239; no effect below rules 239', install() { const was = WOLF_FIGHT_PARTS.map((k) => wolfFightPartOn(k)); setWolfFight(false); return () => WOLF_FIGHT_PARTS.forEach((k, i) => setWolfFight(was[i], k)); } };
+  for (const part of WOLF_FIGHT_PARTS) if (kind === 'rich-no-wolf-fight-' + part) return { spec: label, summary: `${part === 'wound' ? 'a won stand does not wound the wolf' : part === 'kill' ? 'a wolf is wounded but never dies of it' : part === 'heal' ? 'a wounded wolf does not mend' : 'no wolf comes back after one is killed'}; no effect below rules 239`, install() { const was = wolfFightPartOn(part); setWolfFight(false, part); return () => setWolfFight(was, part); } };
   // rules 238 (arrival_way.ts): every animal bars a traveller's way in
   if (kind === 'rich-no-arrival-way') return { spec: label, summary: 'deer and sheep, and where each began, bar a traveller from coming in as wolves and their dens do, as before rules 238; no effect below rules 238', install() { const was = arrivalWayOn(); setArrivalWay(false); return () => setArrivalWay(was); } };
   // rules 237 (family_food.ts): the household's food before a child counts its packs and its home only
@@ -745,6 +749,7 @@ export const METRICS = [
   //   defenceDroveOff / Failed  what those attempts came to
   //   defenceLeftOnItsOwn       the wolf broke off before the attempt: the OLD group-proximity rule, not this one
   //   wolvesWary                wolves keeping clear of somebody they were driven off by, at the end
+  //   wolvesWounded / Killed    won stands that wounded a wolf, and that killed one (rules 239); wolvesAtEnd: wolves alive at the end
   //   bitesTaken                people bitten over the branch, which is what defence is supposed to bear on
   'spears',
   'armedAtEnd',
@@ -755,6 +760,9 @@ export const METRICS = [
   'defenceFailed',
   'defenceLeftOnItsOwn',
   'wolvesWary',
+  'wolvesWounded',
+  'wolvesKilled',
+  'wolvesAtEnd',
   'bitesTaken',
   // What ordinary life is for, counted over the whole branch (11 November 2026, the survival-pressure rebalance): the conversations
   // that happen (one count per conversation, by purpose; a conversation that never opened is not counted), the meals sat down to, the
@@ -1209,6 +1217,9 @@ export function outcomeOf(
       defenceFailed: d.failed,
       defenceLeftOnItsOwn: d.leftOnItsOwn,
       wolvesWary,
+      wolvesWounded: d.wounded,
+      wolvesKilled: d.killed,
+      wolvesAtEnd: w.animals.filter((a) => a.type === 'wolf').length,
       bitesTaken: defence.bites,
       chats: life.chats,
       familyTime: life.familyTime,

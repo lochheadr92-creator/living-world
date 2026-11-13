@@ -65,6 +65,7 @@ import { resumeSuspended } from './activities';
 import { updateSources } from './sources';
 import { releaseStaleBench } from './tools';
 import { updateWildlife } from './wildlife';
+import { updateWolfFight } from './wolf_fight';
 import type { ItemKind, Person, World } from './types';
 
 /** One simulation tick. The only thing that ever mutates the world. */
@@ -108,6 +109,7 @@ export function stepWorld(world: World): void {
   gearTick(world);
   livestockTick(world);
   updateWildlife(world);
+  updateWolfFight(world); // rules 239 (wolf_fight.ts)
   rebuildMobileGrid(world);
 
   const list = world.persons.slice();
@@ -373,6 +375,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
   if (world.groundwater) push('Groundwater' + JSON.stringify(world.groundwater));
+  if (world.wolfReturns) push('WolfReturns' + JSON.stringify(world.wolfReturns)); // rules 239 (wolf_fight.ts)
   if (world.flood) push('Flood' + JSON.stringify(world.flood));
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.kind==='flood')push('FloodMemory'+p.id+':'+JSON.stringify(b));
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.waterSupply !== undefined) push('WaterMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.waterSupply);
@@ -391,7 +394,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.sheep)push(`SheepMemory:${p.id}:${JSON.stringify(b)}`);
   // A wolf that was driven off keeps clear of one person for a while, which changes who it hunts next: that is part of
   // what the world is. Absent on every wolf that was never driven off, so an older world hashes exactly as it did.
-  for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}`);
+  for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}${a.type === 'wolf' && a.health < 100 ? `,h${a.health}` : ''}`);
   for (const t of world.tools) push(`W${t.id}:${t.kind},${t.tier},${r4(t.wear)},${t.holder},${t.ownerHh},${t.loan ? t.loan.borrower : 0}`);
   for (const c of world.carts) push(`K${c.id}:${r4(c.x)},${r4(c.y)},${c.puller},${r4(c.wear)},${JSON.stringify(c.load)}`);
   for (const b of world.buildings) {

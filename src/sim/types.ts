@@ -1038,7 +1038,7 @@ export interface Plot {
 
 export type CarcassPart = 'meat' | 'hide' | 'fat';
 export interface Carcass {
-  animalId:number; species:'deer'|'sheep'; hhId:number;
+  animalId:number; species:'deer'|'sheep'|'wolf'; hhId:number;
   initial:Record<CarcassPart,number>; remaining:Record<CarcassPart,number>;
   recovered:Record<CarcassPart,number>; lost:Record<CarcassPart,number>; work:Record<CarcassPart,number>;
   claim:{person:number;until:number}|null; emptySince:number|null;
@@ -1372,6 +1372,8 @@ export interface SpatialGrid {
 export interface World {
   flood?: import('./flood').Flood;
   waterBodies?: import('./hydrology').WaterBody[];
+  /** rules 239 (wolf_fight.ts): the ticks at which a wolf is due back in the country, one for each wolf killed; absent until one is */
+  wolfReturns?: number[];
   /** rules 236 (groundwater.ts): what the ground holds at each well, by the well's id */
   groundwater?: Record<number, import('./groundwater').Ground>;
   ecology?: Record<number, import('./ecology').EcologicalCondition>;

@@ -1,0 +1,4 @@
+meadow: 48 days, rules 239; 55 alive; wolves 3 at the start, 2 at the end; 1 killed, 0 came back; 0 bites, 0 people killed by wolves; 14 spears
+  stands: offered 51, set out 27, tried 15, won 8 (wounded 7, killed 1), lost 7, the wolf left first 11
+  wounds by wolf (most first): 6 1 1; on days 19.2 24.3 29.9 31 31.8 33.5 41 47.6
+  from these wounds, wolves killed under other settings: wound 34, mends 10 a day: 0; wound 34, mends 2 a day: 1; wound 50, mends 10 a day: 1; wound 50, mends 4 a day: 1; wound 50, mends 2 a day: 1; wound 50, never mends: 1; wound 100: 3

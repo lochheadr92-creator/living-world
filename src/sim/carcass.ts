@@ -22,10 +22,11 @@ export const hasRecoverableParts=(w:World,b:Pile):boolean=>!!b.carcass&&w.tick-b
 /** The one origin of recoverable parts. It consumes an actual live animal,
  * never a historical id or a second call on an already removed body. */
 export function makeCarcass(w:World,animal:Animal,killer:Person|undefined,witness=true,ownerHh=killer?.hhId??0):Pile|null{
- if(!hasCarcasses(w)||!(animal.type==='deer'||animal.type==='sheep'&&runsRulesVersion(w,129))||animal.health<=0||w.byId.get(animal.id)!==animal||!w.animals.includes(animal))return null;
+ if(!hasCarcasses(w)||!(animal.type==='deer'||animal.type==='sheep'&&runsRulesVersion(w,129)||animal.type==='wolf'&&runsRulesVersion(w,239))||animal.health<=0||w.byId.get(animal.id)!==animal||!w.animals.includes(animal))return null;
  const growth=animal.sheep?Math.min(1,animal.sheep.growth/19200):1;
- const initial={meat:Math.floor(4*growth),hide:growth>=1?1:0,fat:growth>=.5?1:0};
- const body:Pile={ent:'pile',id:newId(w),x:Math.floor(animal.x),y:Math.floor(animal.y),items:{},since:w.tick,note:'A '+animal.type+' body awaiting paid butchery',carcass:{animalId:animal.id,species:animal.type as 'deer'|'sheep',hhId:ownerHh,initial:{...initial},remaining:{...initial},recovered:zero(),lost:zero(),work:zero(),claim:null,emptySince:Object.values(initial).some(n=>n>0)?null:w.tick}};
+ // rules 239 (wolf_fight.ts): a wolf killed with a spear leaves two meat and a hide
+ const initial=animal.type==='wolf'?{meat:2,hide:1,fat:0}:{meat:Math.floor(4*growth),hide:growth>=1?1:0,fat:growth>=.5?1:0};
+ const body:Pile={ent:'pile',id:newId(w),x:Math.floor(animal.x),y:Math.floor(animal.y),items:{},since:w.tick,note:'A '+animal.type+' body awaiting paid butchery',carcass:{animalId:animal.id,species:animal.type,hhId:ownerHh,initial:{...initial},remaining:{...initial},recovered:zero(),lost:zero(),work:zero(),claim:null,emptySince:Object.values(initial).some(n=>n>0)?null:w.tick}};
  if(animal.sheep?.wool)ledgerSpoil(w,'wool',animal.sheep.wool,'unshorn wool lost with sheep');
  removeAnimal(w,animal);registerGeneric(w,body);
  for(const part of PARTS)ledgerCreate(w,part,initial[part],'parts of a killed '+animal.type);
@@ -107,10 +108,10 @@ export function validateCarcasses(w:World):void{
  for(const b of w.piles){
   const c=b.carcass;if(!c)continue;
   const bad=()=>{throw Error('invalid carcass state');};
-  if(!hasCarcasses(w)||!(c.species==='deer'||c.species==='sheep'&&runsRulesVersion(w,129))||!integer(c.animalId)||c.animalId<=0||origins.has(c.animalId)||w.animals.some(a=>a.id===c.animalId)||!integer(c.hhId)||!integer(b.since)||b.since>w.tick||b.mealFood||b.estate||Object.keys(b.items).length)bad();
+  if(!hasCarcasses(w)||!(c.species==='deer'||c.species==='sheep'&&runsRulesVersion(w,129)||c.species==='wolf'&&runsRulesVersion(w,239))||!integer(c.animalId)||c.animalId<=0||origins.has(c.animalId)||w.animals.some(a=>a.id===c.animalId)||!integer(c.hhId)||!integer(b.since)||b.since>w.tick||b.mealFood||b.estate||Object.keys(b.items).length)bad();
   origins.add(c.animalId);
   for(const field of [c.initial,c.remaining,c.recovered,c.lost,c.work])if(!field||Object.keys(field).length!==3||PARTS.some(k=>!integer(field[k])))bad();
-  if(c.species==='deer'?(c.initial.meat!==4||c.initial.hide!==1||c.initial.fat!==1):(c.initial.meat>4||c.initial.hide>1||c.initial.fat>1))bad();
+  if(c.species==='deer'?(c.initial.meat!==4||c.initial.hide!==1||c.initial.fat!==1):c.species==='wolf'?(c.initial.meat!==2||c.initial.hide!==1||c.initial.fat!==0):(c.initial.meat>4||c.initial.hide>1||c.initial.fat>1))bad();
   for(const k of PARTS)if(c.initial[k]!==c.remaining[k]+c.recovered[k]+c.lost[k]||c.work[k]>=CARCASS_WORK||(!c.remaining[k]&&c.work[k]))bad();
   const empty=PARTS.every(k=>c.remaining[k]===0);
   if(empty?(c.emptySince===null||!integer(c.emptySince)||c.emptySince<b.since||c.emptySince>w.tick):c.emptySince!==null)bad();

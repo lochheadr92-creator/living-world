@@ -37,6 +37,7 @@ import { dullness, toolOf, wearTool } from './tools';
 import type { Animal, Person, Tool, World } from './types';
 import { hyp } from './util';
 import { isThreat, setFacingCheck, setWaryCheck } from './wildlife';
+import { woundWolf } from './wolf_fight';
 
 /** the rules version at which wolf defence starts; nothing here applies to a world below it */
 export const DEFENCE_FROM_VERSION = 4;
@@ -334,12 +335,33 @@ function resolve(world: World, p: Person, a: Animal, act: { data: Record<string,
     addLog(world, p, 'danger', `Went at the wolf with my spear and it would not give ground${forWhom ? ` (${forName} is still in its way)` : ''}.`);
     return 'fail:it would not give ground';
   }
+  // rules 239 (wolf_fight.ts): a stand that is won wounds the wolf, and a last wound kills it and leaves its body
+  const wx = a.x, wy = a.y;
+  const hurt = woundWolf(world, a, p, helpers);
+  noteWound(hurt);
+  if (hurt === 'killed') {
+    p.skills.forage = Math.min(1.8, p.skills.forage + 0.008);
+    addFx(world, 'bite', wx, wy, 0);
+    const from = forWhom && forWhom !== p.id ? `, which was after ${forName}` : '';
+    addEvent(world, 'danger', `${p.name} killed a wolf${from} with a spear; its body needs butchering.`, forWhom && forWhom !== p.id ? [p.id, forWhom] : [p.id], p.x, p.y);
+    addLog(world, p, 'danger', `Killed a wolf${from} with my spear. Its meat and hide remain in the body.`);
+    think(world, p, 'killed_wolf', 10, 2 * DAY, 'killed a wolf');
+    if (forWhom && forWhom !== p.id) {
+      const q = world.byId.get(forWhom);
+      if (q && q.ent === 'person' && q.alive) {
+        addLog(world, q, 'danger', `${p.name} killed the wolf that was after me.`);
+        think(world, q, 'rescued', 8, DAY, `${p.name} killed a wolf that was after me`);
+      }
+    }
+    return 'done';
+  }
   driveOff(world, a, p);
   p.skills.forage = Math.min(1.8, p.skills.forage + 0.008);
   addFx(world, 'bite', a.x, a.y, 0);
   const whom = forWhom && forWhom !== p.id ? ` away from ${forName}` : '';
-  addEvent(world, 'danger', `${p.name} drove a wolf off${whom} with a spear.`, forWhom && forWhom !== p.id ? [p.id, forWhom] : [p.id], p.x, p.y);
-  addLog(world, p, 'danger', `Drove a wolf off${whom} with my spear.`);
+  const bled = hurt === 'wounded' ? ', and wounded it' : '';
+  addEvent(world, 'danger', `${p.name} drove a wolf off${whom} with a spear${bled}.`, forWhom && forWhom !== p.id ? [p.id, forWhom] : [p.id], p.x, p.y);
+  addLog(world, p, 'danger', `Drove a wolf off${whom} with my spear${bled}.`);
   think(world, p, 'drove_off', 6, DAY, `drove a wolf off${whom}`);
   if (forWhom && forWhom !== p.id) {
     const q = world.byId.get(forWhom);
@@ -455,9 +477,12 @@ export interface DefenceCounters {
   leftOnItsOwn: number;
   /** spears worn past use by defending: retired, not snapped (see MAX_WEAR) */
   spearsRetired: number;
+  /** rules 239 (wolf_fight.ts): won stands that wounded the wolf and it lived, and won stands that killed it */
+  wounded: number;
+  killed: number;
 }
 
-const zeroDef = (): DefenceCounters => ({ spearsMade: 0, offered: 0, offeredForOthers: 0, setOut: 0, attempts: 0, forOthers: 0, droveOff: 0, failed: 0, leftOnItsOwn: 0, spearsRetired: 0 });
+const zeroDef = (): DefenceCounters => ({ spearsMade: 0, offered: 0, offeredForOthers: 0, setOut: 0, attempts: 0, forOthers: 0, droveOff: 0, failed: 0, leftOnItsOwn: 0, spearsRetired: 0, wounded: 0, killed: 0 });
 
 export const defProbe: DefenceCounters & { on: boolean } = { on: false, ...zeroDef() };
 
@@ -497,6 +522,13 @@ export function noteOffered(forOther: boolean): void {
   if (!defProbe.on) return;
   defProbe.offered++;
   if (forOther) defProbe.offeredForOthers++;
+}
+
+/** what a won stand did to the wolf (rules 239) */
+export function noteWound(hurt: 'none' | 'wounded' | 'killed'): void {
+  if (!defProbe.on) return;
+  if (hurt === 'wounded') defProbe.wounded++;
+  if (hurt === 'killed') defProbe.killed++;
 }
 
 export function noteOutcome(won: boolean, retired: boolean): void {

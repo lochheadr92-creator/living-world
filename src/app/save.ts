@@ -8,6 +8,7 @@ import {validateRecoveredWorkshops} from '../sim/recovered_workshops';
 import {validateForestry} from '../sim/forestry';
 import {validateCellars} from '../sim/cellars';
 import {validateWells} from '../sim/wells';
+import {validateWolfFight} from '../sim/wolf_fight';
 import {validateNourishment} from '../sim/nourishment';
 import {validateLivestock} from '../sim/livestock';
 import {validateGear} from '../sim/passive_gear';
@@ -368,6 +369,7 @@ export function deserializeWorld(json: string): World {
   validateEcology(w);
   validateWater(w);
   validateWells(w);
+  validateWolfFight(w);
   validateCellars(w);
   validateForestry(w);
   validateRecoveredWorkshops(w);

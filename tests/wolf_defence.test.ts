@@ -355,7 +355,8 @@ describe('4. no action against an unseen or distant wolf', () => {
 
 describe('5. driving a wolf off changes the real wolf', () => {
   it('a successful attempt ends the stalk, sends it home, and leaves it wary of that person', () => {
-    const { w, ada, wolf } = encounter('won', { armed: true, wolfAt: [43.5, 40.5], wolfHeld: true });
+    // pinned to rules 238: from rules 239 a won stand also wounds the wolf (wolf_fight.ts; tests/wolf_fight.test.ts)
+    const { w, ada, wolf } = encounter('won', { armed: true, wolfAt: [43.5, 40.5], wolfHeld: true, rulesVersion: 238 });
     expect(wolf.state, 'it broke off').toBe('retreat');
     expect(wolf.targetId, 'and is after nobody').toBe(0);
     expect(wolf.wary, 'and remembers to keep clear').toBeGreaterThan(w.tick);
