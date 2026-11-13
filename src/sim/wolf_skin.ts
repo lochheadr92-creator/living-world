@@ -47,8 +47,15 @@ export const hasWolfSkin = (world: World): boolean => world.settings.dynamics ==
  * body lasts, and the body rotted with the hide on it.
  */
 export const SKIN_WORTH = 46;
-/** what hanging a held skin scores before the walk (a first setting of 16 left aspen's skin held for a day and a half) */
-export const HANG_WORTH = 30;
+/**
+ * What hanging a held skin scores before the walk. Set from a measurement: at 16 aspen's skin was held a day and a half; at
+ * 30, of five skins cut in six worlds over four years, birch's waited four and a half days and river's was still held after
+ * six and a half (traced: the offer stood at 19 to 32, first to tenth among her options, and once begun was dropped for
+ * something better). At 48 it stands with the cutting, and once she has set out she keeps to it (HANG_COMMIT).
+ */
+export const HANG_WORTH = 48;
+/** ticks for which somebody who has set out to hang a skin is not drawn off by ordinary work */
+export const HANG_COMMIT = 240;
 /** how many skins one building shows */
 export const SKIN_CAP = 3;
 /** the work of hanging one */
@@ -120,7 +127,7 @@ export function wolfSkinOptions(ctx: Ctx): void {
     make: () => {
       const spot = spotNear(world, p, place);
       if (!spot) return null;
-      return newActivity(world, p, { kind: 'hang_skin', label: `Hanging a wolf skin at the ${noun}`, goal: 'so that everybody sees a wolf can be killed', targetId: place.id, targetType: 'building', tx: place.x, ty: place.y, spotX: spot.x, spotY: spot.y, utility: sc.total, minCommit: 80, maxTicks: 500, data: {} });
+      return newActivity(world, p, { kind: 'hang_skin', label: `Hanging a wolf skin at the ${noun}`, goal: 'so that everybody sees a wolf can be killed', targetId: place.id, targetType: 'building', tx: place.x, ty: place.y, spotX: spot.x, spotY: spot.y, utility: sc.total, minCommit: HANG_COMMIT, maxTicks: 700, data: {} });
     },
   });
 }

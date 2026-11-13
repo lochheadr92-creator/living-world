@@ -1,0 +1,5 @@
+birch: 48 days, rules 241; 48 alive; wolves 3 at the start, 3 at the end; 1 killed, 1 came back; 36 bites, 1 people killed by wolves; 31 spears
+  stands: offered 104, set out 38, tried 15, won 6 (wounded 5, killed 1), lost 9, the wolf left first 16
+  wolf skins: first cut on tick 26935, first hung on tick 38027; 1 hung (fire 1), 0 still held
+  wounds by wolf (most first): 3 2 1; on days 3 6.1 11.1 20.5 35.5 44.4
+  from these wounds, wolves killed under other settings: wound 34, mends 10 a day: 0; wound 34, mends 5 a day: 0; wound 50, mends 10 a day: 0; wound 50, mends 5 a day: 1; wound 50, mends 2 a day: 1; wound 100: 3

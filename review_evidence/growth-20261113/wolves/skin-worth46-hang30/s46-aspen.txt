@@ -1,0 +1,5 @@
+aspen: 48 days, rules 241; 62 alive; wolves 3 at the start, 2 at the end; 1 killed, 0 came back; 17 bites, 0 people killed by wolves; 29 spears
+  stands: offered 69, set out 36, tried 9, won 3 (wounded 2, killed 1), lost 6, the wolf left first 23
+  wolf skins: first cut on tick 86785, first hung on tick 87348; 1 hung (hall 1), 0 still held
+  wounds by wolf (most first): 2 1; on days 31.5 34.6 36.1
+  from these wounds, wolves killed under other settings: wound 34, mends 10 a day: 0; wound 34, mends 5 a day: 0; wound 50, mends 10 a day: 0; wound 50, mends 5 a day: 0; wound 50, mends 2 a day: 0; wound 100: 2

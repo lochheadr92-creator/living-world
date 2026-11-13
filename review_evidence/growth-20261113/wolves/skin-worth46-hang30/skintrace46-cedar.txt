@@ -1,0 +1,7 @@
+cedar
+kill at tick 114154 (day 47.56), body at 64,31 hh 1012; killer Alma hh 1012 at 64.5,30.6; light 0.00
++200: Alma alive true doing sleep skins 0; body there hide left 1; belief seen 165 ago; dangers 0; drives h0 t0 e41; hide 40 rank 3; hang -; places fire hh0 d12,hall hh0 d10; top sleep:69, sleep:55, butcher:40; last undefined:success:done
++400: Alma alive true doing sleep skins 0; body there hide left 1; belief seen 365 ago; dangers 0; drives h0 t0 e0; hide 40 rank 3; hang -; places fire hh0 d10,hall hh0 d9; top sleep:59, sleep:47, butcher:40; last undefined:success:done
++600: Alma alive true doing sleep skins 0; body there hide left 1; belief seen 565 ago; dangers 0; drives h0 t0 e0; hide 40 rank 2; hang -; places fire hh0 d10,hall hh0 d9; top sleep:47, butcher:40, sleep:37; last undefined:success:done
++800: Alma alive true doing butcher skins 0; body there hide left 1; belief seen 765 ago; dangers 0; drives h0 t0 e0; hide 40 rank 1; hang -; places fire hh0 d10,hall hh0 d9; top butcher:40, rest:22, deposit:9; last undefined:success:rested
++1000: Alma alive true doing butcher skins 0; body there hide left 1; belief seen 2 ago; dangers 0; drives h0 t0 e0; hide 46 rank 1; hang -; places fire hh0 d26,hall hh0 d20; top butcher:46, deposit:36, gather:30; last undefined:success:rested
