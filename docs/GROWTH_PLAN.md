@@ -383,6 +383,25 @@ Found on the way (`first-charcoal-by-rules.txt`, the measurement script beside t
 220, 226 or 228, and the first on days 2.6, 2.6, 3.6, 1.7 and 0.6 at rules 229, 231, 233, 234 and 235. The bench part of rules
 229 is what lets a kiln's batch be begun.
 
+## Step H, second part: where the engine's time goes (13 November, no code changed)
+
+One ordinary world under Node's CPU profiler, alone on the machine: aspen, four years, 28 to about 60 people, rules 235, 524
+seconds (`node --cpu-prof ... scripts/generation_trace.ts`; `review_evidence/growth-20261113/engine-profile/`). One run.
+
+| share of all time | what |
+|---|---|
+| 34% | **seeing** (`perception.ts perceive`): 29% is the search of the grid for what is near, and 18% is writing each thing seen into the person's beliefs again (`knowledge.ts observe`, `snapshotEntity`, `seen_stock.ts glancedItems`) |
+| 30% | **choosing** (`decision.ts generateOptions`): 19% in second looks at a job under way, 14% in fresh choices; the workshop options 10%, the work options 7% |
+| 6% | **hand-over checks** (`work_handover.ts reviewHandovers`, `handover_state.ts personalHandovers`), run for every person |
+| 5% | the time-window check on each work option (`action_scope.ts workWindow`) |
+| 5% | needs (`needs.ts updateNeeds`, with `shelterAt`) |
+| 2% | garbage collection |
+
+So two thirds of the time is seeing and choosing. Three places where the same answer could be had for less, none of them a
+rule: a thing seen again unchanged need not be written into the belief again; the hand-over check need not run for somebody
+with nothing to hand over; and the second look, already cut by rules 227, still regenerates every option to compare one.
+Nothing is changed here; each would be checked by the reference recordings staying identical.
+
 ## Step D, measured: how many people the water carries (13 November, no rule changed)
 
 `scripts/water_probe.ts` (new, read-only), the 12 lab worlds, three years each, rules 233, arrivals on, one run each;
