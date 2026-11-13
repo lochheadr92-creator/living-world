@@ -1,6 +1,7 @@
 import {runsRulesVersion} from './rulesversion';
 import {hasBrewing} from './brewing';
 import {updateWells} from './wells';
+import {updateGroundwater} from './groundwater';
 import {hasNourishment} from './nourishment';
 import {livestockTick} from './livestock';
 import {gearTick} from './passive_gear';
@@ -100,6 +101,7 @@ export function stepWorld(world: World): void {
   if (tick % 90 === 0) decayWear(world);
   roadsTick(world);
 
+  updateGroundwater(world); // rules 236 (groundwater.ts)
   updateWells(world);
   clothingTick(world);
   carcassTick(world);
@@ -370,6 +372,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for(const t of world.tools)if(t.textile)push('Textile'+t.id+JSON.stringify(t.textile));
   if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
+  if (world.groundwater) push('Groundwater' + JSON.stringify(world.groundwater));
   if (world.flood) push('Flood' + JSON.stringify(world.flood));
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.kind==='flood')push('FloodMemory'+p.id+':'+JSON.stringify(b));
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.waterSupply !== undefined) push('WaterMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.waterSupply);

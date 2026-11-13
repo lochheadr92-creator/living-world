@@ -424,6 +424,39 @@ Measured:
 This is the ceiling under every settlement: gen-5, whose body carries 82, reached 112 at rules 226 and died of thirst in three
 days. Food, housing and stone do not move it. What to change is the owner's to choose.
 
+## Step D, the repair: a well reaches groundwater (rules 236, `src/sim/groundwater.ts`)
+
+The owner's choice of 13 November, of the two put to them (wells with their own groundwater, or more rain in the lakes).
+
+Three switched parts:
+
+- **Ground**: a well draws from the ground beneath it, not from the lake. The ground at a well holds up to 240 units and takes
+  the rain of 100 tiles of land at the rate a tile of lake takes it; rain measured at 0.29 to 0.60 units a tile a day gives a
+  well 29 to 60 a day against the 48 it can raise: about 12 to 20 people a well. It does not evaporate; in a dry spell nothing
+  comes in. A new well finds 120. The lake is as it was.
+- **Anywhere**: a well may be dug away from any lake, and wells may stand 6 tiles apart, not 14.
+- **More**: somebody with no well known within 10 tiles of home wants one there, lake or no lake; and where the wells near home
+  were all empty when they last looked, they want another.
+
+**Measured** (`scripts/water_probe.ts`, six worlds that grow, eight years each, rules 235 against 236, one run each: a
+description; `review_evidence/growth-20261113/water/eight-years/`):
+
+| world | rules 235: people at year 8, deaths of thirst, the lake's lowest | rules 236: people, deaths of thirst, wells, the lake's lowest |
+|---|---|---|
+| gen-4 | 0 (it reached 75), 73, empty | 90, 1, 16, 74 in 100 |
+| gen-5 | 100, 1, 6 in 100 | 85, 0, 10, 84 |
+| aspen | 90, 2, 42 | 100, 0, 10, 82 |
+| meadow | 78, 0, 60 | 88, 0, 13, 81 |
+| cedar | 89, 0, 78 | 89, 0, 11, 81 |
+| fern | 69, 0, 52 | 76, 1, 10, 91 |
+
+At rules 236 a settlement digs 10 to 16 wells (3 to 5 before, drawing from the lake), raises 107 to 135 units a day from the
+ground and draws 6 to 13 from the lake (70 to 114 before). The ground at the wells held 962 to 3,744 units at the end, so the
+wells were not the limit in these eight years.
+
+Checks: `tests/groundwater.test.ts` (7); wells, stored water, golden, save and id tests pass (67 tests in 6 files). Lab arms:
+`rich-no-groundwater`, `-ground`, `-anywhere`, `-more`. The paired lab and the pin are not done at this commit.
+
 ## Step 6, first part: a job begun is finished (rules 227, `src/sim/finish_job.ts`)
 
 The owner's instruction of 13 November: people should finish certain jobs before doing anything else unless a critical need says

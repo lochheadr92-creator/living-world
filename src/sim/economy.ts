@@ -225,6 +225,7 @@ export function totalItems(world: World): Items {
   for (const m of world.meals) if (m.status !== 'done' && m.status !== 'cancelled') add(m.table);
   for (const s of world.sources) if (s.amount > 0) addItem(t, s.item, s.amount);
   for (const b of world.waterBodies ?? []) if (b.amount > 0) addItem(t, 'water', b.amount);
+  for (const g of Object.values(world.groundwater ?? {})) if (g.amount > 0) addItem(t, 'water', g.amount); // rules 236 (groundwater.ts)
   for (const pl of world.plots) {
     if (pl.stock > 0) addItem(t, 'grain', pl.stock);
     if (pl.seedStock > 0) addItem(t, 'seeds', pl.seedStock);

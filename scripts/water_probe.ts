@@ -32,6 +32,9 @@ const rainCould = bodies.map(() => 0);
 const perDay: { day: number; alive: number; held: number[]; drawn: number[]; rain: number[]; evaporated: number[]; wells: number; wellWater: number }[] = [];
 let last = bodies.map((b) => ({ drawn: b.drawn, replenished: b.replenished, evaporated: b.evaporated }));
 let personDays = 0;
+// rules 236 (groundwater.ts): water that rose in a well from the ground beneath it, and deaths of thirst
+let raised = 0;
+w.hooks = { ...(w.hooks ?? {}), onTransfer: (t) => { if (t.reason === 'water rises in the well') raised += t.n; } };
 for (let i = 1; i <= days * DAY; i++) {
   stepWorld(w);
   if (w.tick % 60 === 0) bodies.forEach((b, k) => { rainCould[k] += b.tiles.length * Math.max(0, w.weather.rain) * 2 * (60 / DAY); });
@@ -53,7 +56,9 @@ const sum = (xs: number[]): number => xs.reduce((a, b) => a + b, 0);
 const drawnBy = bodies.map((_, k) => sum(perDay.map((d) => d.drawn[k])));
 const home = drawnBy.indexOf(Math.max(...drawnBy)); // the settlement's own water: the body most is drawn from
 const drawnAll = sum(drawnBy);
-const perPersonDay = personDays ? drawnAll / personDays : 0;
+const perPersonDay = personDays ? (drawnAll + raised) / personDays : 0;
+const thirst = (w.deceased ?? []).filter((x: { cause?: string }) => /thirst/i.test(x.cause ?? '')).length;
+const groundHeld = Object.values(w.groundwater ?? {}).reduce((n, g) => n + g.amount, 0);
 const homeRainCould = rainCould[home] / days;
 const homeEvaporated = sum(perDay.map((d) => d.evaporated[home])) / days;
 const homeDrawn = drawnBy[home] / days;
@@ -65,11 +70,12 @@ const result = {
   drawnPerPersonDay: perPersonDay, homeDrawnPerDay: homeDrawn, homeRainCouldPerDay: homeRainCould, homeRainTakenPerDay: sum(perDay.map((d) => d.rain[home])) / days,
   homeEvaporatedPerDay: homeEvaporated, peopleTheRainCarries: carries, homeLowest: lowest, homeLowestShare: start[home] ? lowest / start[home].capacity : 0,
   daysOfWaterIfNoRain: perPersonDay > 0 && start[home] ? start[home].capacity / (perPersonDay * (personDays / days)) : 0,
-  wellsAtEnd: perDay[perDay.length - 1]?.wells ?? 0, perDay,
+  wellsAtEnd: perDay[perDay.length - 1]?.wells ?? 0, raisedFromGroundPerDay: raised / days, groundHeldAtEnd: groundHeld, thirstDeaths: thirst, peak: Math.max(...perDay.map((x) => x.alive)), perDay,
 };
 if (out) writeFileSync(out, JSON.stringify(result));
 const r1 = (x: number): string => (Math.round(x * 10) / 10).toString();
 console.log(`${seed}: ${days} days, rules ${result.rulesVersion}; people ${result.aliveStart} to ${result.aliveEnd} (mean ${r1(result.meanAlive)}); ${bodies.length} bodies of water, ${sum(start.map((b) => b.tiles))} tiles, holding ${sum(start.map((b) => b.capacity))} when full`);
 console.log(`  the settlement's water: ${result.home.tiles} tiles holding ${result.home.capacity} when full; ${Math.round(result.shareDrawnFromHome * 100)}% of all that is drawn comes from it; ${result.wellsAtEnd} wells at the end`);
 console.log(`  a day, on average: drawn ${r1(homeDrawn)} (${r1(perPersonDay)} a person), rain could put in ${r1(homeRainCould)} and did put in ${r1(result.homeRainTakenPerDay)}, evaporated ${r1(homeEvaporated)}`);
+console.log(`  wells: ${result.wellsAtEnd} at the end, raising ${r1(result.raisedFromGroundPerDay)} a day from the ground (${groundHeld} held there at the end); most people at once ${result.peak}; deaths of thirst ${thirst}`);
 console.log(`  so the rain carries about ${Math.round(carries)} people at this draw; with no rain a full body lasts ${r1(result.daysOfWaterIfNoRain)} days at the mean population; lowest it stood ${lowest} of ${result.home.capacity} (${Math.round(result.homeLowestShare * 100)}%)`);

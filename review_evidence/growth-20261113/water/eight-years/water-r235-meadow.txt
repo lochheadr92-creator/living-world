@@ -1,0 +1,5 @@
+meadow: 96 days, rules 235; people 28 to 78 (mean 58.6); 3 bodies of water, 444 tiles, holding 2220 when full
+  the settlement's water: 365 tiles holding 1804 when full; 83% of all that is drawn comes from it; 4 wells at the end
+  a day, on average: drawn 112.3 (2.3 a person), rain could put in 221.3 and did put in 132.4, evaporated 20.2
+  wells: 4 at the end, raising 0 a day from the ground (0 held there at the end); most people at once 90; deaths of thirst 0
+  so the rain carries about 87 people at this draw; with no rain a full body lasts 13.4 days at the mean population; lowest it stood 1082 of 1804 (60%)

@@ -852,7 +852,9 @@ export function describeEntity(world: World, id: number): EntityView | null {
       if(b.type==='well'){
         const body=wellBody(world,b.x+b.w/2,b.y+b.h/2);
         rows.push(['Water',`${b.store.items.water??0}/${WELL_CAP} units`]);
-        rows.push(['Refill',b.condition<10?'needs repair':(b.store.items.water??0)>=WELL_CAP?'full; waiting for use':!body?'no connected catchment':body.amount<1?'catchment is dry':'drawing slowly from nearby water']);
+        const ground=world.groundwater?.[b.id];
+        if(ground)rows.push(['Refill',b.condition<10?'needs repair':(b.store.items.water??0)>=WELL_CAP?'full; waiting for use':ground.amount<1?'the ground here is drawn dry until it rains':`rising slowly from the ground (${ground.amount} units held; rain refills it)`]);
+        else rows.push(['Refill',b.condition<10?'needs repair':(b.store.items.water??0)>=WELL_CAP?'full; waiting for use':!body?'no connected catchment':body.amount<1?'catchment is dry':'drawing slowly from nearby water']);
         notes.push(BUILD_DEF.well.blurb);
       }
       if (isHomeType(b.type)) {

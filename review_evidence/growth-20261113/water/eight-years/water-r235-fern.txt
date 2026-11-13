@@ -1,0 +1,5 @@
+fern: 96 days, rules 235; people 28 to 69 (mean 40.2); 3 bodies of water, 614 tiles, holding 3220 when full
+  the settlement's water: 475 tiles holding 2456 when full; 73% of all that is drawn comes from it; 4 wells at the end
+  a day, on average: drawn 70 (2.4 a person), rain could put in 212.4 and did put in 90.8, evaporated 22.3
+  wells: 4 at the end, raising 0 a day from the ground (0 held there at the end); most people at once 69; deaths of thirst 0
+  so the rain carries about 80 people at this draw; with no rain a full body lasts 25.5 days at the mean population; lowest it stood 1266 of 2456 (52%)

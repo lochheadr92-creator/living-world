@@ -1,5 +1,5 @@
 import {runsRulesVersion} from './rulesversion';
-import {knownWellSite} from './wells';
+import {wellSpotKnown} from './wells';
 import { constructionAftermath } from './achievement';
 import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
 import {losePreservationRack} from './preservation';
@@ -324,7 +324,7 @@ export function findBuildSpot(
       const cy = y + d.h / 2;
       const dd = dist(cx, cy, ax, ay);
       if (dd < rMin || dd > rMax) continue;
-      if(type==='well'&&!knownWellSite(p,cx,cy))continue;
+      if(type==='well'&&!wellSpotKnown(world,p,cx,cy))continue;
       if (!footprintFree(world, x, y, d.w, d.h)) continue;
       const dx = x;
       const dy = y + d.h;

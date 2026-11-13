@@ -1372,6 +1372,8 @@ export interface SpatialGrid {
 export interface World {
   flood?: import('./flood').Flood;
   waterBodies?: import('./hydrology').WaterBody[];
+  /** rules 236 (groundwater.ts): what the ground holds at each well, by the well's id */
+  groundwater?: Record<number, import('./groundwater').Ground>;
   ecology?: Record<number, import('./ecology').EcologicalCondition>;
   exchangeReceipts?: import('./exchange_journeys').ExchangeReceipt[];
   economicObservations?: import('./settlement_economy').EconomicObservations;

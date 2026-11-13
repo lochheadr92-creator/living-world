@@ -1,0 +1,5 @@
+gen-5: 96 days, rules 236; people 28 to 85 (mean 55.1); 3 bodies of water, 559 tiles, holding 3080 when full
+  the settlement's water: 415 tiles holding 2318 when full; 56% of all that is drawn comes from it; 10 wells at the end
+  a day, on average: drawn 6 (2.5 a person), rain could put in 183.3 and did put in 28.5, evaporated 23.3
+  wells: 10 at the end, raising 124.9 a day from the ground (1740 held there at the end); most people at once 85; deaths of thirst 0
+  so the rain carries about 65 people at this draw; with no rain a full body lasts 17.1 days at the mean population; lowest it stood 1940 of 2318 (84%)
