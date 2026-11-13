@@ -1,4 +1,5 @@
 import {captureFinalAccount,trimFinalAccounts} from './final_account';
+import { foodInOtherStores } from './family_food';
 import { hasLocalDeath, witnessDeath } from './death_knowledge';
 import { foundMembership } from './townships';
 import { fireNear, nearestHub } from './settlements';
@@ -74,7 +75,7 @@ export function lifeTick(world: World, p: Person): void {
   if (p.pregnantUntil > 0 && world.tick >= p.pregnantUntil) giveBirth(world, p);
 }
 
-function householdFoodPerHead(world: World, p: Person): number {
+export function householdFoodPerHead(world: World, p: Person): number {
   const hh = householdById(world, p.hhId);
   const ms = membersOf(world, hh);
   let food = 0;
@@ -83,6 +84,8 @@ function householdFoodPerHead(world: World, p: Person): number {
     const h = world.byId.get(hh.homeId);
     if (h && h.ent === 'building') food += foodUnits(h.store.items);
   }
+  // rules 237 (family_food.ts): and what the household keeps in its other buildings, its cellar above all
+  if (hh) food += foodInOtherStores(world, hh.id, hh.homeId);
   return food / Math.max(1, ms.length);
 }
 
