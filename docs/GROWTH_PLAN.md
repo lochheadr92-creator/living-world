@@ -480,7 +480,7 @@ twice: too little is put by, and none of it is common.
 - gen-4 (92 people) went into its lean season with 601 units of food in packs and households, gen-1 (82) with 527: six and a
   half units a head, at about three and a half eaten a head a day. Two days. By the worst day gen-4 held 68 units and gen-1
   20, with 2 and 1 households holding three a head.
-- River (82) went in with 763, and its food was not gone at the worst: see below.
+- River (82) went in with 766, and its food was not gone at the worst: see below.
 - In the twenty-year runs the food stored stays at 2 to 8 units a head whatever the size of the settlement; the wild holds
   about 580 units whatever the size, so it feeds much of a settlement of 40 and little of one of 100; a lean season of three
   to five days comes every two or three years. About 24 cellars of 90 units stand mostly empty: room is not the limit.
@@ -496,11 +496,30 @@ River in detail:
 - All 23 who died of hunger: nothing in the pack, nothing in the household, no shared food within 20 tiles.
 
 So a settlement of this size puts by two days of food, holds none of it in common, and has no working way for a household with
-a full cellar to feed a neighbour with none. Whether it cannot grow a surplus or does not keep one (food made, eaten and
-spoiled by the day) is being read on gen-4 and aspen.
+a full cellar to feed a neighbour with none.
 
-**Not decided.** How food should reach the hungry is the owner's choice (a common store filled in plenty; the hungry asking
-those with a full cellar; rationing in a lean season). No rule is changed.
+**Why so little is put by** (the same probe reading the goods account by the day; gen-4, days 85 to 108, 84 to 93 people, 77
+to 96 plots; `famine/flow-gen-4.txt`):
+
+| a day | food made | of it the wild's regrowth | of it crops | eaten | spoiled in store |
+|---|---|---|---|---|---|
+| ordinary (twelve days) | 454 | 374 | 93 | 301 | 86 |
+| winter (days 92 to 94) | 164 | 149 | 14 | 223 | 90 |
+| lean season (days 101 to 105) | 78 | 52 | 18 | 217 | 46 |
+
+- A settlement of ninety still lives off the wild: three quarters of its food is berries, fruit, wild grain and fish growing
+  back, and its ninety plots give about one unit a plot a day. The wild grows back about 370 a day and no more, however many
+  mouths there are; ninety people eat 300.
+- What is stored goes off at about 90 units a day, a third of what is eaten, from a stock of about 600: stored food in a rich
+  world spoils three times as fast (`hardship.ts SPOIL_STORE`), and most of what is stored is the wild's perishables. Grain
+  keeps (0.22 of a berry's rate, and a fifth of that in a tended granary), but there is little grain and there are no
+  granaries or two.
+- So in winter and in a lean season the settlement is short 150 to 185 units a day against a stock of 600: three to four days.
+
+
+**Not decided.** What to change is the owner's choice. The measurement points at three things, in this order: farming has to
+carry a large settlement (more plots a head, or more from each, as the wild runs short); what is grown has to be kept (grain
+in granaries, a granary for every so many people); and some of it has to be common, or reach the hungry. No rule is changed.
 
 ## Wolves can be fought (rules 239 and 240, on the owner's direction)
 
