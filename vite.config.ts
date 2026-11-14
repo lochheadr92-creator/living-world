@@ -5,7 +5,8 @@ export default defineConfig({
   base: './',
   plugins: [inhabitDevServer()],
   server: { port: 5273, strictPort: true, host: '127.0.0.1' },
-  build: { target: 'es2022', sourcemap: true, chunkSizeWarningLimit: 900 },
+  // Production artifacts must not ship source maps (they embed the original source); opt in per build with --sourcemap.
+  build: { target: 'es2022', sourcemap: false, chunkSizeWarningLimit: 900 },
   test: {
     environment: 'node',
     include: ['tests/**/*.test.ts'],

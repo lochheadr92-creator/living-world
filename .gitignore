@@ -46,3 +46,13 @@ pavel_evidence/**/*-final.json
 pavel_evidence/**/live-initial.json
 pavel_evidence/**/live-transcript.json
 pavel_evidence/**/*-observations.json
+
+# Secrets and local environment: never commit
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
