@@ -42,6 +42,7 @@ export interface ParsedReview {
 }
 
 const MAX_NEED_FILES = 10;
+const MAX_FILE = 240;
 const CAPS = { title: 200, mechanism: 2000, trigger: 2000, quote: 1500, direction: 2000, notes: 2000, evidence: 4000, fixInstruction: 4000 } as const;
 const SEVERITIES: readonly Severity[] = ['P0', 'P1', 'P2'];
 const VERDICT_KINDS: readonly VerdictKind[] = ['confirmed', 'refuted', 'not_reproduced', 'out_of_scope', 'unadjudicated'];
@@ -63,6 +64,11 @@ export function cleanText(s: string, max: number): string {
   const last = text.charCodeAt(end - 1);
   if (last >= 0xd800 && last <= 0xdbff) end--;
   return `${text.slice(0, end)} [cut]`;
+}
+
+/** One line of text from a model: line breaks and tabs become single spaces, then the same cleaning and cap as cleanText. */
+export function cleanLine(s: string, max: number): string {
+  return cleanText(String(s).replace(/\s*[\r\n\u2028\u2029]+\s*/g, ' ').replace(/\t/g, ' '), max);
 }
 
 type Json = { ok: true; value: unknown } | { ok: false; error: string };
@@ -132,13 +138,14 @@ export function parseFindings(text: string, opts: { idPrefix: string; max: numbe
       if (!nonEmpty(raw[f])) errors.push(`${at}, ${f}: must be a non-empty string`);
     }
     if (errors.length > before) return;
-    const clean = (f: 'title' | 'mechanism' | 'trigger' | 'direction'): string => cleanText((raw[f] as string).trim(), CAPS[f]);
+    const clean = (f: 'mechanism' | 'trigger' | 'direction'): string => cleanText((raw[f] as string).trim(), CAPS[f]);
     kept.push({
       severity: sev as Severity,
-      file: file as string,
+      file: cleanLine(file as string, MAX_FILE),
       startLine,
       endLine,
-      title: clean('title'),
+      // a title is printed on one line by the callers; a line break in it would start a line of the reviewer's choosing
+      title: cleanLine((raw.title as string).trim(), CAPS.title),
       mechanism: clean('mechanism'),
       trigger: clean('trigger'),
       // the quote keeps its own leading spaces: triage compares it with the file's indentation
@@ -156,7 +163,7 @@ export function parseFindings(text: string, opts: { idPrefix: string; max: numbe
   if (Array.isArray(root.need_files)) {
     for (const n of root.need_files) {
       const c = typeof n === 'string' ? canonicalPath(n) : null;
-      if (c !== null && !needFiles.includes(c) && needFiles.length < MAX_NEED_FILES) needFiles.push(c);
+      if (c !== null && !needFiles.includes(c) && needFiles.length < MAX_NEED_FILES) needFiles.push(cleanLine(c, MAX_FILE));
     }
   }
   const notes = typeof root.notes === 'string' ? cleanText(root.notes.trim(), CAPS.notes) : '';
@@ -343,7 +350,10 @@ export function renderFeedback(findings: Finding[], verdicts: Verdict[], probeOu
   const unlock: string[] = [];
   for (const v of fixes) {
     const f = byId.get(v.id) as Finding;
-    const lines = [`## ${v.id} (${v.severity ?? f.severity})`, `Where: ${f.file}:${f.startLine}-${f.endLine}`, '', v.fixInstruction ?? ''];
+    // the reviewer's file string is only trusted as a place once triage found that file in the clone; otherwise it may be an instruction
+    const lines = [`## ${v.id} (${v.severity ?? f.severity})`];
+    if (f.flags.fileExists) lines.push(`Where: ${f.file}:${f.startLine}-${f.endLine}`);
+    lines.push('', v.fixInstruction ?? '');
     const probe = Object.prototype.hasOwnProperty.call(probeOutputs, v.id) ? probeOutputs[v.id] : undefined;
     if (probe) lines.push('', 'A test that fails on your code:', fenced(tail(probe, 4000)));
     parts.push(lines.join('\n'));
@@ -353,13 +363,20 @@ export function renderFeedback(findings: Finding[], verdicts: Verdict[], probeOu
   return `${parts.join('\n\n')}\n`;
 }
 
+// A stack frame inside node_modules (plain path or file:// URL) names the tool's own files and tells the writer nothing; the
+// frames in the repository's own files and the assertion text stay.
+const TOOL_FRAME = /^\s*(?:at\s|\u276F\s).*node_modules/;
+function dropToolFrames(message: string): string {
+  return message.split(/\r?\n/).filter((l) => !TOOL_FRAME.test(l)).join('\n');
+}
+
 /** What the writer is told when the gate fails: the type errors, then each test the change newly broke. */
 export function renderGateFeedback(verdict: GateVerdict, typecheckOutput: string): string {
   const parts: string[] = [];
   if (verdict.typecheckBroken) parts.push(`The type check fails:\n\n${fenced(tail(typecheckOutput, 6000))}`);
   for (const t of verdict.newFailures) {
     const id = t.id.replace(/[\r\n]+/g, ' ').replace(FORBIDDEN, '?');
-    const message = cleanText(String(t.message).replace(ANSI, ''), 2000);
+    const message = cleanText(dropToolFrames(String(t.message).replace(ANSI, '')), 2000);
     parts.push(`### ${id}\n\n${fenced(message)}`);
   }
   if (!parts.length) return '';

@@ -14,7 +14,10 @@ if (!existsSync(viteNode)) {
   console.error(`node_modules is missing in ${root}: run "npm ci" there first`);
   process.exit(1);
 }
-const run = spawnSync(process.execPath, [viteNode, '--root', root, join(here, 'cli.ts'), '--', ...process.argv.slice(2)], {
+// vite-node is rooted at this folder, not at the repository: with the repository's vite.config.ts in play its file watcher is
+// switched on, and every relay command would watch the whole tree (15,000 watches here; several commands at once ran a Linux
+// machine out of them). This folder has no vite config, so nothing is watched and the command starts in a third of the time.
+const run = spawnSync(process.execPath, [viteNode, '--root', here, join(here, 'cli.ts'), '--', ...process.argv.slice(2)], {
   stdio: 'inherit',
   env: { ...process.env, RELAY_CLI: '1' },
   windowsHide: true,

@@ -336,14 +336,18 @@ export interface RunState {
   baselineDone: boolean;
   /** the last commit the relay made in the clone */
   head: string;
+  /** fingerprint of the clone's git config and hooks when the clone was made (repo.ts gitFolderMark) */
+  gitMark?: string;
   writes: number;
   orchestratorDone: boolean;
   /** the commit a Claude reader passed before anything executed it */
   screenedSha?: string;
   gate?: { sha: string; ok: boolean; file: string };
   gateFixRounds: number;
-  /** test files the writer wrote, hashed at the first green gate (path -> sha256) */
+  /** test files the writer wrote, each hashed at the first green gate that held it (path -> sha256) */
   lockedTests: Record<string, string>;
+  /** the commit at which each of those was frozen (path -> commit) */
+  lockedAt?: Record<string, string>;
   firstGreenSha?: string;
   reviews: ReviewRecord[];
   /** locked test files the writer may change until the review being fixed is settled */
@@ -364,8 +368,8 @@ export type Advance =
   | { status: 'needs'; needs: 'order'; clone: string }
   | { status: 'needs'; needs: 'orchestrator-edits'; paths: string[]; clone: string }
   | { status: 'needs'; needs: 'screen'; sha: string; diffFile: string }
-  | { status: 'needs'; needs: 'adjudicate'; review: number; findingsFile: string; ids: string[]; priorVerdicts: string[] }
-  | { status: 'needs'; needs: 'stuck'; why: string; detailFile: string }
+  | { status: 'needs'; needs: 'adjudicate'; review: number; findingsFile: string; ids: string[]; priorVerdicts: string[]; clone: string }
+  | { status: 'needs'; needs: 'stuck'; why: string; detailFile: string; clone: string }
   | { status: 'needs'; needs: 'finish' }
   | { status: 'finished'; outcome: 'done' | 'failed' }
   | { status: 'error'; error: string };

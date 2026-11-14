@@ -43,6 +43,14 @@ const OUTPUT_KEEP = 2 * 1024 * 1024;
 const CLOSE_GRACE_MS = 2_000;
 
 /** Ends the process and everything it started. A process group on POSIX (the tool is started detached), taskkill /T on Windows. */
+function killGroup(pid: number): void {
+  try {
+    process.kill(-pid, 'SIGKILL');
+  } catch {
+    /* the group is already empty */
+  }
+}
+
 function killTree(child: ChildProcess): void {
   const pid = child.pid;
   if (pid === undefined) return;
@@ -111,6 +119,8 @@ export function runTool(argv: string[], opts: { cwd: string; timeoutMs: number; 
       finish(null);
     });
     child.on('exit', (code) => {
+      // a child the tool left behind with its stdio ignored holds no pipe, so only the group signal reaches it
+      if (process.platform !== 'win32' && child.pid !== undefined) killGroup(child.pid);
       // a grandchild that kept the pipes open must not hold the gate: close the run after a short grace, and end the group
       grace = setTimeout(() => {
         killTree(child);
@@ -176,6 +186,11 @@ function fileInClone(clone: string, name: string): string {
  * own, so that it cannot hide behind green tests.
  */
 export function readVitestReport(json: unknown, clone: string): TestOutcome[] {
+  return readVitestReportFull(json, clone).outcomes;
+}
+
+/** The same reading, and the report's own top-level success flag (undefined when the report does not carry one). */
+export function readVitestReportFull(json: unknown, clone: string): { outcomes: TestOutcome[]; success: boolean | undefined } {
   if (!isRecord(json) || !Array.isArray(json.testResults)) throw new Error('not a vitest JSON report');
   const outcomes: TestOutcome[] = [];
   for (const entry of json.testResults) {
@@ -214,9 +229,12 @@ export function readVitestReport(json: unknown, clone: string): TestOutcome[] {
           outcomes.push({ id, file, state: 'fail', message: `unknown test status: ${String(a.status)}` });
       }
     }
-    if (entry.status === 'failed' && !anyFailed && fileMessage !== '') outcomes.push(fail(file, '(file-level failure)', fileMessage));
+    // vitest leaves the message empty when the error sits on a suite (a describe-level hook), so the message cannot be the test
+    if (entry.status === 'failed' && !anyFailed) {
+      outcomes.push(fail(file, '(file-level failure)', fileMessage !== '' ? fileMessage : 'a hook or a suite in this file failed; see the vitest output'));
+    }
   }
-  return outcomes;
+  return { outcomes, success: typeof json.success === 'boolean' ? json.success : undefined };
 }
 
 function noReport(run: ToolRun): TestOutcome {
@@ -228,9 +246,9 @@ function noReport(run: ToolRun): TestOutcome {
   };
 }
 
-function readReport(path: string, clone: string): TestOutcome[] | null {
+function readReport(path: string, clone: string): { outcomes: TestOutcome[]; success: boolean | undefined } | null {
   try {
-    return readVitestReport(JSON.parse(readFileSync(path, 'utf8').replace(/^﻿/, '')), clone);
+    return readVitestReportFull(JSON.parse(readFileSync(path, 'utf8').replace(/^\uFEFF/, '')), clone);
   } catch {
     return null;
   }
@@ -264,14 +282,15 @@ export async function runGate(o: GateOptions): Promise<GateResult> {
   }
 
   const vitest = join(o.toolsRoot, 'node_modules', 'vitest', 'vitest.mjs');
-  const vitestRun = async (n: number, files: string[], workers: number): Promise<{ run: ToolRun; outcomes: TestOutcome[] | null }> => {
+  const vitestRun = async (n: number, files: string[], workers: number): Promise<{ run: ToolRun; outcomes: TestOutcome[] | null; success: boolean | undefined }> => {
     const report = join(outDir, `vitest-${n}.json`);
     rmSync(report, { force: true });
     const argv = [vitest, 'run', ...files, '--reporter=json', `--outputFile=${report}`, `--maxWorkers=${workers}`];
     const run = await runTool(argv, { cwd: o.clone, timeoutMs: left(), env, now });
     writeFileSync(join(outDir, `vitest-${n}.txt`), run.output);
     if (run.timedOut) timedOut = true;
-    return { run, outcomes: existsSync(report) ? readReport(report, o.clone) : null };
+    const read = existsSync(report) ? readReport(report, o.clone) : null;
+    return { run, outcomes: read === null ? null : read.outcomes, success: read === null ? undefined : read.success };
   };
 
   if (o.tests.length > 0) {
@@ -283,6 +302,23 @@ export async function runGate(o: GateOptions): Promise<GateResult> {
       tests = first.outcomes === null ? [noReport(first.run)] : first.outcomes;
       if (first.outcomes !== null && first.outcomes.length === 0) {
         tests = [fail('(vitest)', '(no tests ran)', `no test results came back for: ${o.tests.join(', ')}`)];
+      }
+
+      // a test the order names that left no result was never run: misnamed for the include pattern, or excluded
+      if (first.outcomes !== null && first.outcomes.length > 0) {
+        const norm = (f: string): string => f.replace(/\\/g, '/').replace(/^\.\//, '');
+        const ran = new Set(first.outcomes.map((t) => norm(t.file)));
+        for (const entry of o.tests) {
+          if (!ran.has(norm(entry))) {
+            tests.push(fail(entry, '(did not run)', `vitest ran nothing from ${entry}: it is misnamed for the include pattern, or excluded`));
+          }
+        }
+      }
+
+      // vitest's own verdict: an unhandled error or a failed suite can leave every test green in the JSON
+      const quiet = !tests.some((t) => t.state === 'fail' || t.state === 'timeout');
+      if (!first.run.timedOut && quiet && (first.run.status !== 0 || first.success === false)) {
+        tests.push(fail('(vitest)', '(run failed with no failing test)', first.run.output.slice(-MESSAGE_KEEP)));
       }
 
       // the second look: a test that only timed out gets one run alone, where nothing else competes for the machine
@@ -304,18 +340,20 @@ export async function runGate(o: GateOptions): Promise<GateResult> {
   return { typecheck, typecheckOutput, tests, timedOut, ms: now() - started };
 }
 
-const failing = (t: TestOutcome | undefined): boolean => t !== undefined && (t.state === 'fail' || t.state === 'timeout');
+const failing = (t: TestOutcome): boolean => t.state === 'fail' || t.state === 'timeout';
 
 /** Compares a gate with the baseline: only a typecheck the change broke and tests it failed or could not settle count. */
 export function judge(baseline: GateResult, now: GateResult): GateVerdict {
-  const typecheckBroken = (baseline.typecheck === 'pass' || baseline.typecheck === 'skipped') && (now.typecheck === 'fail' || now.typecheck === 'timeout');
+  // a typecheck that timed out now says nothing about the change: now.timedOut already makes the verdict not ok
+  const typecheckBroken = (baseline.typecheck === 'pass' || baseline.typecheck === 'skipped') && now.typecheck === 'fail';
   const before = new Map(baseline.tests.map((t) => [t.id, t]));
   const alreadyFailing: string[] = [];
   const inconclusive: TestOutcome[] = [];
   const newFailures: TestOutcome[] = [];
   for (const t of now.tests) {
     const was = before.get(t.id);
-    if (failing(t) && failing(was)) alreadyFailing.push(t.id);
+    // only a base that really failed excuses a test (a base that timed out never judged it), and a synthetic outcome never is excused
+    if (failing(t) && was?.state === 'fail' && !t.file.startsWith('(')) alreadyFailing.push(t.id);
     else if (t.state === 'timeout') inconclusive.push(t);
     else if (t.state === 'fail') newFailures.push(t);
   }

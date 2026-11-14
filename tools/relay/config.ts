@@ -135,7 +135,8 @@ export function configProblems(cfg: RelayConfig): string[] {
       continue;
     }
     problems.push(...baseUrlProblems(name, p.baseUrl));
-    if (!/^[A-Z][A-Z0-9_]*$/.test(p.keyEnv)) problems.push(`providers.${name}.keyEnv: not an environment variable name`);
+    // which variable holds a vendor's key is fixed, like the host it is sent to: a settings file must not be able to send one vendor's key, or any other secret, to another
+    if (p.keyEnv !== DEFAULT_CONFIG.providers[name].keyEnv) problems.push(`providers.${name}.keyEnv: the ${name} key is read from ${DEFAULT_CONFIG.providers[name].keyEnv} and nowhere else`);
     if (p.tokenParam !== 'max_tokens' && p.tokenParam !== 'max_completion_tokens') problems.push(`providers.${name}.tokenParam: must be max_tokens or max_completion_tokens`);
     if (p.jsonMode !== 'json_object' && p.jsonMode !== 'none') problems.push(`providers.${name}.jsonMode: must be json_object or none`);
     if (!p.modelsPath.startsWith('/')) problems.push(`providers.${name}.modelsPath: must start with /`);
@@ -193,7 +194,7 @@ export function loadConfig(home: string): LoadedConfig {
   if (existsSync(file)) {
     used = file;
     try {
-      config = merge(config, JSON.parse(readFileSync(file, 'utf8').replace(/^﻿/, '')), '', problems);
+      config = merge(config, JSON.parse(readFileSync(file, 'utf8').replace(/^\uFEFF/, '')), '', problems);
     } catch (e) {
       problems.push(`${file}: not JSON (${e instanceof Error ? e.message : String(e)})`);
     }

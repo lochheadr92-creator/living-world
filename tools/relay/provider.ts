@@ -12,6 +12,7 @@
 import { request as httpRequest } from 'node:http';
 import type { ClientRequest, IncomingHttpHeaders, IncomingMessage } from 'node:http';
 import { request as httpsRequest } from 'node:https';
+import type { RequestOptions } from 'node:https';
 import { retryAfterMs } from '../../scripts/inhabit/transient';
 import { baseUrlProblems } from './config';
 import { makeRedactor, secretsFrom } from './redact';
@@ -115,9 +116,39 @@ export function buildBody(cfg: RelayConfig, req: ChatRequest): Record<string, un
 
 const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
-/** vendor text made safe to print: control characters (a terminal escape sequence, say) become spaces, newlines and tabs stay */
+/**
+ * vendor text made safe to print: every control character (a terminal escape sequence, a line break) becomes a space, so vendor
+ * text can never start a line of its own in anything the relay prints or writes
+ */
 function plain(text: string): string {
-  return text.replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g, ' ');
+  return text.replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g, ' ');
+}
+
+/** a vendor-supplied name or reason as one short line: redacted first, so a cut cannot leave the front of a key behind */
+const NAME_CHARS = 100;
+function tidy(redact: (text: string) => string, text: string, max: number): string {
+  return shorten(plain(redact(text)), max);
+}
+const keep = (text: string): string => text;
+
+/** true when the environment switches certificate checking off for every https call that does not say otherwise */
+export function tlsCheckingDisabled(env: Record<string, string | undefined>): boolean {
+  return env.NODE_TLS_REJECT_UNAUTHORIZED === '0';
+}
+
+/** The options handed to node's request function. An explicit rejectUnauthorized overrides NODE_TLS_REJECT_UNAUTHORIZED=0. */
+export function requestOptions(url: URL, method: string, headers: Record<string, string>): RequestOptions {
+  return {
+    protocol: url.protocol,
+    hostname: url.hostname,
+    port: url.port || undefined,
+    path: `${url.pathname}${url.search}`,
+    method,
+    headers,
+    // no pooled agent: its own socket timeout would sit beside ours, and a key must never ride a shared connection
+    agent: false,
+    ...(url.protocol === 'https:' ? { rejectUnauthorized: true } : {}),
+  };
 }
 
 function shorten(text: string, max: number): string {
@@ -219,16 +250,7 @@ function exchange(o: ExchangeOptions): Promise<Exchange> {
 
     const tls = o.url.protocol === 'https:';
     try {
-      req = (tls ? httpsRequest : httpRequest)({
-        protocol: o.url.protocol,
-        hostname: o.url.hostname,
-        port: o.url.port || undefined,
-        path: `${o.url.pathname}${o.url.search}`,
-        method: o.method,
-        headers: o.headers,
-        // no pooled agent: its own socket timeout would sit beside ours, and a key must never ride a shared connection
-        agent: false,
-      });
+      req = (tls ? httpsRequest : httpRequest)(requestOptions(o.url, o.method, o.headers));
     } catch (e) {
       reject(new ProviderError('config', o.provider, `the request could not be built: ${e instanceof Error ? plain(e.message) : 'unknown error'}`));
       return;
@@ -336,7 +358,10 @@ class StreamReader {
   usage?: { input: number; output: number };
   done = false;
 
-  constructor(private readonly provider: ProviderName) {}
+  constructor(
+    private readonly provider: ProviderName,
+    private readonly redact: (text: string) => string = keep,
+  ) {}
 
   feed(chunk: Buffer): void {
     this.pending += this.decoder.decode(chunk, { stream: true });
@@ -368,7 +393,7 @@ class StreamReader {
   private line(line: string): void {
     if (this.done || line === '' || line.startsWith(':')) return;
     if (!line.startsWith('data:')) {
-      if (!/^(event|id|retry):/.test(line) && this.stray.length < 300) this.stray += `${this.stray ? ' ' : ''}${shorten(plain(line), 200)}`;
+      if (!/^(event|id|retry):/.test(line) && this.stray.length < 300) this.stray += `${this.stray ? ' ' : ''}${tidy(this.redact, line, 200)}`;
       return;
     }
     const payload = line.slice(5).trim();
@@ -381,19 +406,19 @@ class StreamReader {
     try {
       chunk = JSON.parse(payload);
     } catch {
-      throw new ProviderError('server', this.provider, `malformed stream: a data line was not JSON: ${shorten(plain(payload), 200)}`, { body: shorten(plain(payload), SHOWN_BODY_CHARS) });
+      throw new ProviderError('server', this.provider, `malformed stream: a data line was not JSON: ${tidy(this.redact, payload, 200)}`, { body: tidy(this.redact, payload, SHOWN_BODY_CHARS) });
     }
-    if (!isObject(chunk)) throw new ProviderError('server', this.provider, `malformed stream: a data line was not a JSON object: ${shorten(plain(payload), 200)}`);
+    if (!isObject(chunk)) throw new ProviderError('server', this.provider, `malformed stream: a data line was not a JSON object: ${tidy(this.redact, payload, 200)}`);
     if (chunk.error !== undefined && chunk.error !== null) {
-      const detail = shorten(plain(errorText(chunk.error)), SHOWN_BODY_CHARS);
+      const detail = tidy(this.redact, errorText(chunk.error), SHOWN_BODY_CHARS);
       throw new ProviderError('server', this.provider, `the vendor sent an error in the middle of the stream: ${detail}`, { body: detail });
     }
-    if (!this.model && typeof chunk.model === 'string' && chunk.model) this.model = chunk.model;
+    if (!this.model && typeof chunk.model === 'string' && chunk.model) this.model = tidy(this.redact, chunk.model, NAME_CHARS);
     const usage = usageOf(chunk.usage);
     if (usage) this.usage = usage;
     const choice = Array.isArray(chunk.choices) ? chunk.choices[0] : undefined;
     if (!isObject(choice)) return;
-    if (typeof choice.finish_reason === 'string' && choice.finish_reason) this.finish = choice.finish_reason;
+    if (typeof choice.finish_reason === 'string' && choice.finish_reason) this.finish = tidy(this.redact, choice.finish_reason, NAME_CHARS);
     // reasoning_content and every other field are ignored; only the answer's own text is kept
     const delta = choice.delta;
     if (isObject(delta) && typeof delta.content === 'string') {
@@ -405,24 +430,24 @@ class StreamReader {
 }
 
 /** a non-streamed body: JSON, possibly after the blank lines DeepSeek sends as keep-alives */
-function parseWhole(provider: ProviderName, body: string): Parsed {
+function parseWhole(provider: ProviderName, body: string, redact: (text: string) => string = keep): Parsed {
   let json: unknown;
   try {
     json = JSON.parse(body.trim());
   } catch {
-    throw new ProviderError('server', provider, `the vendor's answer was not JSON: ${shorten(plain(body.trim()), 200)}`, { body: shorten(plain(body.trim()), SHOWN_BODY_CHARS) });
+    throw new ProviderError('server', provider, `the vendor's answer was not JSON: ${tidy(redact, body.trim(), 200)}`, { body: tidy(redact, body.trim(), SHOWN_BODY_CHARS) });
   }
-  if (!isObject(json)) throw new ProviderError('server', provider, `the vendor's answer was not a JSON object: ${shorten(plain(body.trim()), 200)}`);
+  if (!isObject(json)) throw new ProviderError('server', provider, `the vendor's answer was not a JSON object: ${tidy(redact, body.trim(), 200)}`);
   if (json.error !== undefined && json.error !== null) {
-    const detail = shorten(plain(errorText(json.error)), SHOWN_BODY_CHARS);
+    const detail = tidy(redact, errorText(json.error), SHOWN_BODY_CHARS);
     throw new ProviderError('server', provider, `the vendor answered 200 with an error: ${detail}`, { body: detail });
   }
   const choice = Array.isArray(json.choices) ? json.choices[0] : undefined;
   const message = isObject(choice) && isObject(choice.message) ? choice.message : undefined;
   return {
     text: message && typeof message.content === 'string' ? message.content : '',
-    model: typeof json.model === 'string' ? json.model : '',
-    finish: isObject(choice) && typeof choice.finish_reason === 'string' && choice.finish_reason ? choice.finish_reason : null,
+    model: typeof json.model === 'string' ? tidy(redact, json.model, NAME_CHARS) : '',
+    finish: isObject(choice) && typeof choice.finish_reason === 'string' && choice.finish_reason ? tidy(redact, choice.finish_reason, NAME_CHARS) : null,
     usage: usageOf(json.usage),
     done: false,
   };
@@ -506,7 +531,7 @@ async function withRetries<T>(ctx: Ctx, once: () => Promise<T>): Promise<{ value
 /** The error for a non-2xx answer, by status. */
 function httpFailure(ctx: Ctx, ex: Exchange, model?: string, roleName?: string): ProviderError {
   const { status } = ex;
-  const full = plain(ex.body).trim();
+  const full = plain(ctx.redact(ex.body)).trim();
   const shown = shorten(full, SHOWN_BODY_CHARS);
   let kind: ProviderErrorKind;
   let what: string;
@@ -565,7 +590,7 @@ export async function chat(cfg: RelayConfig, req: ChatRequest, deps?: Partial<Ca
   const started = d.now();
 
   const once = async (): Promise<{ parsed: Parsed; status: number }> => {
-    const reader = streaming ? new StreamReader(ctx.provider) : undefined;
+    const reader = streaming ? new StreamReader(ctx.provider, ctx.redact) : undefined;
     const ex = await exchange({
       provider: ctx.provider,
       url,
@@ -587,7 +612,7 @@ export async function chat(cfg: RelayConfig, req: ChatRequest, deps?: Partial<Ca
       reader.end();
       parsed = reader.result();
     } else {
-      parsed = parseWhole(ctx.provider, ex.body);
+      parsed = parseWhole(ctx.provider, ex.body, ctx.redact);
     }
     const seen = (): string => `${parsed.finish ? `finish_reason "${parsed.finish}"` : 'no finish_reason'}, ${streaming ? (parsed.done ? '[DONE] seen' : 'no [DONE]') : 'whole body'}, ${parsed.text.length} characters of text`;
     const stray = reader && reader.strayText() ? ` The body held text that was not server-sent events: ${reader.strayText()}` : '';
@@ -641,10 +666,10 @@ export async function listModels(cfg: RelayConfig, provider: ProviderName, deps?
     try {
       json = JSON.parse(ex.body.trim());
     } catch {
-      throw new ProviderError('server', provider, `the model list was not JSON: ${shorten(plain(ex.body.trim()), 200)}`, { status: ex.status });
+      throw new ProviderError('server', provider, `the model list was not JSON: ${tidy(ctx.redact, ex.body.trim(), 200)}`, { status: ex.status });
     }
     const list = isObject(json) ? (Array.isArray(json.data) ? json.data : Array.isArray(json.models) ? json.models : undefined) : undefined;
-    if (!list) throw new ProviderError('server', provider, `the model list had neither a "data" nor a "models" array: ${shorten(plain(ex.body.trim()), 200)}`, { status: ex.status });
+    if (!list) throw new ProviderError('server', provider, `the model list had neither a "data" nor a "models" array: ${tidy(ctx.redact, ex.body.trim(), 200)}`, { status: ex.status });
     return list.flatMap((m: unknown) => (isObject(m) && typeof m.id === 'string' && m.id ? [m.id] : []));
   };
 

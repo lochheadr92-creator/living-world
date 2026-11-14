@@ -32,6 +32,15 @@ const GLOBALS: ReadonlySet<string> = new Set([
   'fetch', 'XMLHttpRequest', 'WebSocket', 'importScripts', '__dirname', '__filename',
 ]);
 
+// Calls that load a module by name through the test runner. vi.importActual('node:fs') is as good as import('node:fs'), so each is
+// held to the same rule as import(): a string literal first argument, and a non-relative one needs a grant.
+const LOADERS: ReadonlySet<string> = new Set(['importActual', 'importMock', 'mock', 'doMock', 'unmock', 'doUnmock']);
+// What the test runner injects into a transformed module: its own import functions, reachable without any import statement.
+const RUNNER_PREFIXES: readonly string[] = ['__vite_ssr_', '__vitest_', '__vi_'];
+// A module name in a string is how a loader not named above would be reached, so a string that begins "node:" is refused wherever
+// it stands, unless granted. The bare spelling ("fs", "net") is refused only where a loader takes it: this simulation has a fishing
+// net and a stream, and a rule that refused those words as arguments would refuse ordinary tests.
+
 const MAX_SYNTAX_ERRORS = 3;
 const COMPUTED = 'computed module specifier';
 
@@ -133,18 +142,39 @@ function collect(sf: ts.SourceFile): Array<{ line: number; what: string; name: s
     else checkSpecifier(arg as ts.Node, spec);
   };
 
+  const checked = new Set<ts.Node>();
+  const calleeName = (e: ts.Expression): string | null =>
+    ts.isIdentifier(e) ? e.text : ts.isPropertyAccessExpression(e) ? e.name.text : ts.isElementAccessExpression(e) ? stringValue(e.argumentExpression) : null;
+  /** a string that names a built-in module in its prefixed spelling */
+  const checkLiteral = (node: ts.Node, text: string): void => {
+    if (checked.has(node)) return;
+    if (text.startsWith('node:')) report(node, `has the string "${shortened(text)}" (a Node built-in module name, not granted)`, text);
+  };
+
   const visit = (node: ts.Node): void => {
     if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) {
       const spec = stringValue(node.moduleSpecifier);
-      if (spec !== null) checkSpecifier(node.moduleSpecifier as ts.Node, spec);
+      if (spec !== null) {
+        checked.add(node.moduleSpecifier as ts.Node);
+        checkSpecifier(node.moduleSpecifier as ts.Node, spec);
+      }
     } else if (ts.isImportEqualsDeclaration(node) && ts.isExternalModuleReference(node.moduleReference)) {
+      checked.add(node.moduleReference.expression);
       checkCall(node.moduleReference, node.moduleReference.expression, 'import = require()');
     } else if (ts.isImportTypeNode(node)) {
       const lit = ts.isLiteralTypeNode(node.argument) ? stringValue(node.argument.literal) : null;
-      if (lit !== null) checkSpecifier(node.argument, lit);
+      if (lit !== null) {
+        checked.add((node.argument as ts.LiteralTypeNode).literal);
+        checkSpecifier(node.argument, lit);
+      }
     } else if (ts.isCallExpression(node)) {
-      if (node.expression.kind === ts.SyntaxKind.ImportKeyword) checkCall(node, node.arguments[0], 'import()');
-      else if (ts.isIdentifier(node.expression) && node.expression.text === 'require') checkCall(node, node.arguments[0], 'require()');
+      const name = node.expression.kind === ts.SyntaxKind.ImportKeyword ? 'import' : calleeName(node.expression);
+      const via = name === 'import' ? 'import()' : name === 'require' && ts.isIdentifier(node.expression) ? 'require()' : null;
+      const loader = name !== null && LOADERS.has(name) ? `${name}()` : null;
+      if (via !== null || loader !== null) {
+        checked.add(node.arguments[0]);
+        checkCall(node, node.arguments[0], (via ?? loader) as string);
+      }
     } else if (ts.isMetaProperty(node) && node.keywordToken === ts.SyntaxKind.ImportKeyword) {
       report(node, 'reads import.meta', 'import.meta');
     } else if (ts.isWithStatement(node)) {
@@ -158,8 +188,14 @@ function collect(sf: ts.SourceFile): Array<{ line: number; what: string; name: s
       const key = node.propertyName ?? node.name;
       const text = ts.isIdentifier(key) ? key.text : ts.isStringLiteral(key) ? key.text : null;
       if (text === 'constructor') report(key, 'reads ".constructor"', 'constructor');
+    } else if (ts.isIdentifier(node) && RUNNER_PREFIXES.some((p) => node.text.startsWith(p))) {
+      report(node, `uses the test runner's internal "${shortened(node.text)}"`, node.text);
     } else if (ts.isIdentifier(node) && GLOBALS.has(node.text) && !isNameSlot(node) && !inTypePosition(node)) {
       report(node, `uses the global "${node.text}"`, node.text);
+    } else if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
+      checkLiteral(node, node.text);
+    } else if (ts.isTemplateHead(node) || ts.isTemplateMiddle(node) || ts.isTemplateTail(node)) {
+      if (node.text.startsWith('node:')) checkLiteral(node, node.text);
     }
     ts.forEachChild(node, visit);
   };
@@ -174,17 +210,26 @@ function collect(sf: ts.SourceFile): Array<{ line: number; what: string; name: s
 export function scanSource(path: string, text: string, allow: readonly string[]): ScanIssue[] {
   const kind = KINDS[extensionOf(path)];
   if (kind === undefined) return [];
-  const sf = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, kind);
   const granted = new Set(allow);
   const issues = new Map<string, ScanIssue>();
   const add = (line: number, what: string): void => void issues.set(`${line}\u0000${what}`, { path, line, what });
 
+  try {
+    scanTree(path, text, kind, granted, add);
+  } catch {
+    issues.clear();
+    // a tree too deep to walk, or a parser that gave up: the caller must refuse the file, not crash on it
+    add(1, 'could not be scanned (too deeply nested or not parseable)');
+  }
+  return [...issues.values()].sort((a, b) => a.line - b.line || (a.what < b.what ? -1 : a.what > b.what ? 1 : 0));
+}
+
+function scanTree(path: string, text: string, kind: ts.ScriptKind, granted: ReadonlySet<string>, add: (line: number, what: string) => void): void {
+  const sf = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, kind);
   const diagnostics = (sf as unknown as { parseDiagnostics?: readonly ts.Diagnostic[] }).parseDiagnostics ?? [];
   for (const d of diagnostics.slice(0, MAX_SYNTAX_ERRORS)) {
     const line = d.start === undefined ? 1 : sf.getLineAndCharacterOfPosition(d.start).line + 1;
     add(line, `does not parse: ${ts.flattenDiagnosticMessageText(d.messageText, ' ')}`);
   }
   for (const f of collect(sf)) if (!granted.has(f.name)) add(f.line, f.what);
-
-  return [...issues.values()].sort((a, b) => a.line - b.line || (a.what < b.what ? -1 : a.what > b.what ? 1 : 0));
 }

@@ -407,7 +407,7 @@ describe('planEdits: matching', () => {
     const [f] = filesOf(plan([eb(1, 'src/a.ts', 'const a = 1;', 'const a = 2;')], { 'src/a.ts': '\uFEFFconst a = 1;\nlet z;\n' }, ['src/a.ts']));
     expect(f.before?.charCodeAt(0)).toBe(0xfeff);
     expect(f.after).toBe('\uFEFFconst a = 2;\nlet z;\n');
-    const [g] = filesOf(plan([eb(1, 'src/a.ts', 'const', 'let')], { 'src/a.ts': '\uFEFFconst a = 1;\n' }, ['src/a.ts']));
+    const [g] = filesOf(plan([eb(1, 'src/a.ts', 'const a = 1;', 'let a = 1;')], { 'src/a.ts': '\uFEFFconst a = 1;\n' }, ['src/a.ts']));
     expect(g.after).toBe('\uFEFFlet a = 1;\n');
   });
 
@@ -435,8 +435,9 @@ describe('planEdits: matching', () => {
   });
 
   it('allows blocks that touch end to start', () => {
-    const r = plan([eb(1, 'src/a.ts', 'ab', 'X'), eb(2, 'src/a.ts', 'cd', 'Y')], { 'src/a.ts': 'abcd\n' }, ['src/a.ts']);
-    expect(filesOf(r)[0].after).toBe('XY\n');
+    // whole lines only: the first block ends where the blank line starts and the second begins with that blank line's break
+    const r = plan([eb(1, 'src/a.ts', 'ab\n', 'X\n'), eb(2, 'src/a.ts', '\ncd', '\nY')], { 'src/a.ts': 'ab\n\ncd\n' }, ['src/a.ts']);
+    expect(filesOf(r)[0].after).toBe('X\n\nY\n');
   });
 
   it('writes dollar sequences in REPLACE literally', () => {
@@ -626,5 +627,121 @@ describe('renderRepair', () => {
     const m = renderRepair(failures, blocks, memStore({ 'src/a.ts': 'q\n' }), buildPolicy({ edit: ['src/a.ts'], create: [] }, [], []));
     expect(m).toContain('````ts\n' + `${S}\nconst s = \`x\`;\n\`\`\`\nmore\n${D}\ny\n${R}\n` + '````');
     expect(m.startsWith('# 1 of 1 blocks could not be applied. Nothing was written.\n\n## Block 1: src/a.ts: SEARCH not found in the file\n')).toBe(true);
+  });
+});
+
+describe('hidden characters, by Unicode property', () => {
+  const hidden = [0x2028, 0x2029, 0x3164, 0xffa0, 0x115f, 0x1160, 0xe0041, 0xe0100, 0xfe0f, 0x00ad, 0x180e, 0x061c, 0x034f, 0x2800, 0xe000, 0x0378];
+  it('refuses line separators, invisible identifier characters, tags, variation selectors and the braille blank', () => {
+    for (const cp of hidden) expect(forbiddenCharacter(`a\n${String.fromCodePoint(cp)}`), `U+${cp.toString(16)}`).toEqual({ codePoint: cp, line: 2 });
+  });
+
+  it('still allows tab, accented letters, CJK, Greek, mathematics, box drawing and plain emoji', () => {
+    expect(forbiddenCharacter('\tcafé über 中文 αβγ ∑ ∞ ≤ ─│┌┘ \u{1F600} \u{1F680}\n')).toBeNull();
+  });
+
+  it('turns a comment that a line separator would end into a refusal naming the code point, written visibly', () => {
+    const r = plan([eb(1, 'src/a.ts', 'return age >= 12;', '// old shortcut:\u2028 if (age > 0) return true;\nreturn age >= 12;')], { 'src/a.ts': 'return age >= 12;\n' }, ['src/a.ts']);
+    expect(failuresOf(r)[0]).toMatchObject({ reason: 'forbidden_characters' });
+    if (r.ok) throw new Error('unreachable');
+    expect(r.repairMessage).toContain('U+2028');
+    expect(r.repairMessage).not.toContain('\u2028');
+  });
+});
+
+describe('planEdits: whole-line matches', () => {
+  it('does not join two lines when SEARCH has a stray blank line at its end', () => {
+    const file = 'function f() {\n  feed(w); // first\n  age(w);\n}\n';
+    const r = plan([eb(1, 'src/a.ts', '  feed(w); // first\n', '  feed(w); // first')], { 'src/a.ts': file }, ['src/a.ts']);
+    expect(failuresOf(r)[0]).toMatchObject({ reason: 'no_match' });
+  });
+
+  it('does not join two lines when SEARCH has a stray blank line at its start', () => {
+    const file = 'function f() {\n  feed(w); // first\n  age(w);\n}\n';
+    const r = plan([eb(1, 'src/a.ts', '\n  age(w);', '  age(w, 2);')], { 'src/a.ts': file }, ['src/a.ts']);
+    expect(failuresOf(r)[0]).toMatchObject({ reason: 'no_match' });
+  });
+
+  it('applies an edge blank line when the file really has a blank line there', () => {
+    const file = 'a();\n\nb();\n';
+    const r = plan([eb(1, 'src/a.ts', '\nb();', '\nb(1);')], { 'src/a.ts': file }, ['src/a.ts']);
+    if (!r.ok) throw new Error(r.repairMessage);
+    expect(r.files[0].after).toBe('a();\n\nb(1);\n');
+    expect(r.files[0].tiers).toEqual([0]);
+  });
+
+  it('does not match count = 0 inside discount = 0', () => {
+    const r = plan([eb(1, 'src/a.ts', 'count = 0', 'count = 1')], { 'src/a.ts': 'let discount = 0;\n' }, ['src/a.ts']);
+    expect(failuresOf(r)[0]).toMatchObject({ reason: 'no_match' });
+  });
+
+  it('still matches a whole line, a last line without a newline, and a file with CRLF line ends', () => {
+    expect(filesOf(plan([eb(1, 'src/a.ts', 'let n = 0;', 'let n = 1;')], { 'src/a.ts': 'let n = 0;' }, ['src/a.ts']))[0].after).toBe('let n = 1;');
+    const crlf = plan([eb(1, 'src/a.ts', 'a;\nb;', 'a;\nc;')], { 'src/a.ts': 'x;\r\na;\r\nb;\r\ny;\r\n' }, ['src/a.ts']);
+    expect(filesOf(crlf)[0].after).toBe('x;\r\na;\r\nc;\r\ny;\r\n');
+  });
+
+  it('refuses a re-indented window while a second place matches the same lines apart from spacing', () => {
+    const file = 'function eat() {\n  p.mood -= 5; \n  p.log.push("starving");\n}\nfunction drink() {\n    p.mood -= 5;\n    p.log.push("starving");\n}\n';
+    const r = plan([eb(1, 'src/a.ts', '  p.mood -= 5;\n  p.log.push("starving");', '  p.mood -= 6;\n  p.log.push("starving");')], { 'src/a.ts': file }, ['src/a.ts']);
+    const f = failuresOf(r)[0];
+    expect(f.reason).toBe('many_matches');
+    expect(f.detail).toContain('2 places');
+  });
+
+  it('still accepts a re-indented window when it is the only place that matches', () => {
+    const file = 'function drink() {\n    p.mood -= 5;\n    p.log.push("x");\n}\n';
+    const r = plan([eb(1, 'src/a.ts', '  p.mood -= 5;\n  p.log.push("x");', '  p.mood -= 6;\n  p.log.push("x");')], { 'src/a.ts': file }, ['src/a.ts']);
+    expect(filesOf(r)[0].tiers).toEqual([1]);
+  });
+});
+
+describe('hostile replies are cheap to parse and plan', () => {
+  const quick = (f: () => void): number => {
+    const t = Date.now();
+    f();
+    return Date.now() - t;
+  };
+
+  it('parses a path line that is a long run of spaces, and refuses it', () => {
+    const text = `${' '.repeat(10000)}x\n${F}ts\n${S}\na\n${D}\nb\n${R}\n${F}\nEND-OF-EDITS blocks=1\n`;
+    let result: ReturnType<typeof parseEdits> | null = null;
+    const ms = quick(() => {
+      result = parseEdits(text);
+    });
+    expect(ms).toBeLessThan(2000);
+    expect(result).toMatchObject({ ok: false });
+  });
+
+  it('plans a created file with a long run of blank lines inside it', () => {
+    const content = `a\n${'\n'.repeat(10000)}b\n\n\n`;
+    let r: PlanResult | null = null;
+    const ms = quick(() => {
+      r = plan([eb(1, 'src/n.ts', '', content)], {}, [], ['src/n.ts']);
+    });
+    expect(ms).toBeLessThan(2000);
+    expect(r).toMatchObject({ ok: true });
+  });
+
+  it('plans 150 blocks whose SEARCH is one common letter on a large file', () => {
+    const file = 'e\nsome other line to make the file longer\n'.repeat(5000);
+    const blocks = Array.from({ length: 150 }, (_, i) => eb(i + 1, 'src/a.ts', 'e', 'f'));
+    let r: PlanResult | null = null;
+    const ms = quick(() => {
+      r = plan(blocks, { 'src/a.ts': file }, ['src/a.ts']);
+    });
+    expect(ms).toBeLessThan(2000);
+    const fails = failuresOf(r as unknown as PlanResult);
+    expect(fails).toHaveLength(150);
+    expect(fails[0].reason).toBe('many_matches');
+  });
+
+  it('numbers only the lines it prints and says 50 or more for a capped count', () => {
+    const file = 'x\n'.repeat(200);
+    const f = failuresOf(plan([eb(1, 'src/a.ts', 'x', 'y')], { 'src/a.ts': file }, ['src/a.ts']))[0];
+    expect(f.detail).toBe('matches 50 or more places (lines 1, 2, 3 and others)');
+    const r = plan([eb(1, 'src/a.ts', 'x', 'y')], { 'src/a.ts': file }, ['src/a.ts']);
+    if (r.ok) throw new Error('unreachable');
+    expect(r.repairMessage).toContain('This SEARCH matches 50 or more places in src/a.ts (lines 1, 2, 3 and others)');
   });
 });

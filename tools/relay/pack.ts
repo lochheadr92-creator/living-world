@@ -46,7 +46,7 @@ const strings = (v: unknown): v is string[] => Array.isArray(v) && v.every((s) =
 export function parseOrder(text: string): { ok: true; order: WorkOrder } | { ok: false; problems: string[] } {
   let raw: unknown;
   try {
-    raw = JSON.parse(text.replace(/^﻿/, ''));
+    raw = JSON.parse(text.replace(/^\uFEFF/, ''));
   } catch (e) {
     return { ok: false, problems: [`the work order is not JSON: ${e instanceof Error ? e.message : String(e)}`] };
   }
@@ -147,6 +147,8 @@ export function orderProblems(cfg: RelayConfig, order: WorkOrder, tracked: Map<s
     writable('orchestrator', p);
     const real = tracked.get(p.toLowerCase());
     if (real !== undefined && real !== p) problems.push(`orchestrator: ${p} is spelled ${real} in the repository`);
+    // its hunks reach both reviewers inside the diff, so the never-send rule applies to it as to any file that is sent
+    if (matchesAny(p, cfg.neverSend)) problems.push(`orchestrator: ${p} may not be sent to a vendor, and the reviewers are sent the whole diff; edit it outside the relay`);
   }
   for (const raw of order.unlockGuarded) if (!order.edit.includes(raw)) problems.push(`unlockGuarded: ${raw} is not under edit`);
   for (const raw of order.context) {
@@ -163,7 +165,8 @@ export function orderProblems(cfg: RelayConfig, order: WorkOrder, tracked: Map<s
     const p = canon('tests', raw);
     if (p === null) continue;
     const k = p.toLowerCase();
-    if (!k.startsWith('tests/')) problems.push(`tests: ${p} is not under tests/`);
+    // vitest runs only what its include pattern matches; a file named otherwise would be listed here and silently never run
+    if (!/^tests\/.+\.test\.ts$/.test(p)) problems.push(`tests: ${p} is not a tests/**/*.test.ts file, which is all vitest runs here`);
     if (!tracked.has(k) && !seen.has(k)) problems.push(`tests: ${p} neither exists nor is created by this order`);
   }
   for (const k of Object.keys(order.allowImports)) {
@@ -237,14 +240,14 @@ const fence = (label: string, body: string): string => `===== BEGIN ${label} ===
 
 const numbered = (text: string): string =>
   text
-    .replace(/^﻿/, '')
+    .replace(/^\uFEFF/, '')
     .replace(/\r\n/g, '\n')
     .split('\n')
     .map((line, i) => `${i + 1}\t${line}`)
     .join('\n');
 
 function excerpt(text: string, ref: ContextRef, withNumbers: boolean): string {
-  const lines = text.replace(/^﻿/, '').replace(/\r\n/g, '\n').split('\n');
+  const lines = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').split('\n');
   const from = ref.from ?? 1;
   const to = Math.min(ref.to ?? lines.length, lines.length);
   return lines
@@ -273,7 +276,7 @@ function contextSection(input: PackInput, files: PackFile[], withNumbers: boolea
     if (why) throw new PackError(`context: ${ref.path} ${why}`);
     const text = input.read(ref.path);
     if (text === null) throw new PackError(`context: ${ref.path} is not in the run's clone (add its directory to "sparse" in the relay config)`);
-    const body = ref.from === undefined ? (withNumbers ? numbered(text) : text.replace(/^﻿/, '')) : excerpt(text, ref, withNumbers);
+    const body = ref.from === undefined ? (withNumbers ? numbered(text) : text.replace(/^\uFEFF/, '')) : excerpt(text, ref, withNumbers);
     const label = ref.from === undefined ? `FILE ${ref.path} (read-only)` : `FILE ${ref.path} lines ${ref.from}-${ref.to} (read-only excerpt)`;
     out += fence(label, body);
     files.push({ path: ref.path, kind: 'context', chars: body.length });
@@ -317,14 +320,14 @@ export function writerPack(input: PackInput, feedback: string | null): Pack {
     if (why) throw new PackError(`edit: ${path} ${why}`);
     const text = input.read(path);
     if (text === null) throw new PackError(`edit: ${path} is not in the run's clone (add its directory to "sparse" in the relay config)`);
-    const body = text.replace(/^﻿/, '').replace(/\r\n/g, '\n');
+    const body = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n');
     user += fence(`FILE ${path} (you may edit)`, body);
     files.push({ path, kind: 'edit', chars: body.length });
   }
   for (const path of input.order.create) {
     const text = input.read(path);
     if (text === null) continue;
-    const body = text.replace(/^﻿/, '').replace(/\r\n/g, '\n');
+    const body = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n');
     user += fence(`FILE ${path} (you created it; you may edit)`, body);
     files.push({ path, kind: 'edit', chars: body.length });
   }
@@ -361,4 +364,4 @@ export function reviewerPack(input: ReviewInput): Pack {
 }
 
 /** The prompt file's leading HTML comment is for the people who maintain it, not for the model. */
-export const stripLeadingComment = (markdown: string): string => markdown.replace(/^﻿?\s*<!--[\s\S]*?-->\s*/, '');
+export const stripLeadingComment = (markdown: string): string => markdown.replace(/^\uFEFF?\s*<!--[\s\S]*?-->\s*/, '');

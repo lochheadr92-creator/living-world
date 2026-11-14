@@ -39,7 +39,7 @@ ${FENCE}
 
 Rules:
 1. The path stands alone on the line before the opening fence, exactly as the work order writes it, with forward slashes.
-2. SEARCH must match the file exactly, including indentation and comments, and must match in exactly ONE place. Add surrounding lines until it is unique. Keep it small: the lines that change and a few around them, not whole functions.
+2. SEARCH is whole lines, never part of a line, and must match the file exactly, including indentation, comments and blank lines, in exactly ONE place. Add surrounding lines until it is unique. Keep it small: the lines that change and a few around them, not whole functions.
 3. Every SEARCH is matched against the file as you were given it, not against the result of your earlier blocks. Blocks for one file must not overlap.
 4. To create a file listed under "create": the same block with an EMPTY SEARCH section; REPLACE is the whole file.
 5. You may edit only files listed under "edit" and create only files listed under "create". Any other path is refused.
@@ -71,6 +71,8 @@ const isMarker = (line: string): boolean => RE_SEARCH.test(line) || RE_SPLIT.tes
 function quote(line: string): string {
   return JSON.stringify(line.length > 200 ? `${line.slice(0, 200)}...` : line);
 }
+
+const MAX_PATH_LINE = 400;
 
 /** Backticks, asterisks and quotes around a path, a trailing colon, and backslashes: what models put on a path line. */
 function cleanPath(raw: string): string {
@@ -112,6 +114,8 @@ export function parseEdits(reply: string): ParseResult {
     while (p >= floor && body[p].trim() === '') p--;
     if (p >= floor && RE_OPEN_FENCE.test(body[p])) p--;
     while (p >= floor && body[p].trim() === '') p--;
+    // refused before any pattern runs: the wrap-trimming patterns retry a long run of spaces from every position
+    if (p >= floor && body[p].length > MAX_PATH_LINE) return fail(p, `a path line of at most ${MAX_PATH_LINE} characters before the SEARCH marker`);
     const path = p >= floor ? cleanPath(body[p]) : '';
     if (path === '') return fail(i, 'a path line (the file path on its own line) before the SEARCH marker');
 
@@ -200,6 +204,10 @@ export function diskStore(root: string): FileStore {
 
 // ---- forbidden characters ----
 
+// By Unicode property, so that no hand list can miss a character that ends a line (U+2028, U+2029), hides in a name (the
+// default-ignorable fillers and variation selectors, the tag block) or has no use in source (format, private-use, unassigned).
+const HIDDEN_BY_PROPERTY = /[\p{Cf}\p{Zl}\p{Zp}\p{Co}\p{Cn}\p{Default_Ignorable_Code_Point}]/u;
+
 function isForbidden(cp: number): boolean {
   return (
     (cp < 0x20 && cp !== 9 && cp !== 10 && cp !== 13) ||
@@ -209,8 +217,10 @@ function isForbidden(cp: number): boolean {
     (cp >= 0x2060 && cp <= 0x2064) ||
     (cp >= 0x2066 && cp <= 0x2069) ||
     cp === 0xfeff ||
+    cp === 0x2800 ||
     // a lone surrogate would be written as U+FFFD, silently changing the text
-    (cp >= 0xd800 && cp <= 0xdfff)
+    (cp >= 0xd800 && cp <= 0xdfff) ||
+    HIDDEN_BY_PROPERTY.test(String.fromCodePoint(cp))
   );
 }
 
@@ -260,7 +270,7 @@ interface EditGroup {
 const MARKER_IN_FILE = [new RegExp(`^${'<'.repeat(7)} SEARCH\\s*$`, 'm'), new RegExp(`^${'='.repeat(7)}\\s*$`, 'm'), new RegExp(`^${'>'.repeat(7)} REPLACE\\s*$`, 'm')];
 
 function openGroup(path: string, raw: string): EditGroup {
-  const bom = raw.startsWith('﻿') ? '﻿' : '';
+  const bom = raw.startsWith('\uFEFF') ? '\uFEFF' : '';
   const text = raw.slice(bom.length);
   const crlf = (text.match(/\r\n/g) ?? []).length;
   const lf = (text.match(/(?<!\r)\n/g) ?? []).length;
@@ -277,14 +287,26 @@ function lineAt(text: string, offset: number): number {
   return n;
 }
 
-/** every place the needle starts, overlapping ones included: a match that could be read two ways is not unique */
-function findAll(text: string, needle: string): number[] {
+const MAX_HITS = 50;
+
+/**
+ * Every place the needle starts as whole lines (it begins at a line start and ends at a line end), overlapping ones included:
+ * a match that could be read two ways is not unique. A hit inside a line is not a hit, so a blank edge line of the needle needs a
+ * real blank line and `count = 0` cannot match inside `discount = 0`. Collection stops at MAX_HITS: more than one is all that matters.
+ */
+function findAll(text: string, needle: string, eol: string): number[] {
   const hits: number[] = [];
-  for (let at = text.indexOf(needle); at >= 0; at = text.indexOf(needle, at + 1)) hits.push(at);
+  for (let at = text.indexOf(needle); at >= 0 && hits.length < MAX_HITS; at = text.indexOf(needle, at + 1)) {
+    const end = at + needle.length;
+    if ((at === 0 || text[at - 1] === '\n') && (end === text.length || text.startsWith(eol, end))) hits.push(at);
+  }
   return hits;
 }
 
-const manyDetail = (count: number, lineNumbers: number[]): string => `matches ${count} places (lines ${lineNumbers.slice(0, 3).join(', ')}${count > 3 ? ' and others' : ''})`;
+const manyDetail = (count: number, firstLines: number[]): string => {
+  const shown = count >= MAX_HITS ? `${MAX_HITS} or more` : String(count);
+  return `matches ${shown} places (lines ${firstLines.slice(0, 3).join(', ')}${count > 3 ? ' and others' : ''})`;
+};
 
 const isBlank = (l: string): boolean => l.trim() === '';
 const indentOf = (l: string): number => (/^[ \t]*/.exec(l) as RegExpExecArray)[0].length;
@@ -295,9 +317,9 @@ function matchBlock(g: EditGroup, block: EditBlock): Found {
   const { text, eol } = g;
   const toFile = (s: string): string => (eol === '\n' ? s : s.replace(/\n/g, eol));
   const needle = toFile(block.search);
-  const hits = findAll(text, needle);
+  const hits = findAll(text, needle, eol);
   if (hits.length === 1) return { ok: true, match: { block, start: hits[0], end: hits[0] + needle.length, replacement: toFile(block.replace), tier: 0 } };
-  if (hits.length > 1) return { ok: false, reason: 'many_matches', detail: manyDetail(hits.length, hits.map((h) => lineAt(text, h))) };
+  if (hits.length > 1) return { ok: false, reason: 'many_matches', detail: manyDetail(hits.length, hits.slice(0, 3).map((h) => lineAt(text, h))) };
 
   const searchLines = block.search.split('\n');
   if (searchLines.every(isBlank)) return { ok: false, reason: 'no_match', detail: 'SEARCH text not found' };
@@ -336,11 +358,26 @@ function matchBlock(g: EditGroup, block: EditBlock): Found {
     if (ok && prefix !== null) windows.push({ at: s, prefix });
   }
   if (windows.length === 0) return { ok: false, reason: 'no_match', detail: 'SEARCH text not found' };
-  if (windows.length > 1) return { ok: false, reason: 'many_matches', detail: manyDetail(windows.length, windows.map((w) => w.at + 1)) };
+  if (windows.length > 1) return { ok: false, reason: 'many_matches', detail: manyDetail(windows.length, windows.slice(0, 3).map((w) => w.at + 1)) };
+  // a window that only matches once re-indented is not trusted while another place matches the same lines apart from spacing:
+  // the writer's copy may have lost a trailing space on the line it meant, and the only re-indented place is a different one
+  const trimmed = searchLines.map((l) => l.trim());
+  const near: number[] = [];
+  for (let s = 0; s + searchLines.length <= fileLines.length && near.length < 2; s++) {
+    if (trimmed.every((t, k) => fileLines[s + k].trim() === t)) near.push(s + 1);
+  }
+  if (near.length > 1) return { ok: false, reason: 'many_matches', detail: manyDetail(near.length, near) };
   const w = windows[0];
   const last = w.at + searchLines.length - 1;
   const replacement = wantR.map((l) => (isBlank(l) ? l : w.prefix + l)).join(eol);
   return { ok: true, match: { block, start: starts[w.at], end: starts[last] + fileLines[last].length, replacement, tier: 1 } };
+}
+
+/** a loop from the end: /\n+$/ retries a long run of newlines from every position */
+function dropTrailingNewlines(text: string): string {
+  let end = text.length;
+  while (end > 0 && text.charCodeAt(end - 1) === 10) end--;
+  return text.slice(0, end);
 }
 
 export function planEdits(blocks: EditBlock[], policy: FilePolicy, store: FileStore): PlanResult {
@@ -393,7 +430,7 @@ export function planEdits(blocks: EditBlock[], policy: FilePolicy, store: FileSt
         fail(b, path, 'file_exists', 'this file already exists, so it cannot be created; edit it only if the work order lists it under edit');
         continue;
       }
-      creates.set(key, { path, content: `${b.replace.replace(/\n+$/, '')}\n`, index: b.index });
+      creates.set(key, { path, content: `${dropTrailingNewlines(b.replace)}\n`, index: b.index });
       continue;
     }
 
@@ -511,7 +548,7 @@ function sentence(detail: string): string {
 
 /** The real lines near where the first SEARCH line occurs, trimmed on both sides; null when it does not occur. */
 function candidate(fileText: string, search: string): { lines: string[]; replaceNote: (replace: string) => boolean } | null {
-  const fileLines = fileText.replace(/^﻿/, '').split(/\r?\n/);
+  const fileLines = fileText.replace(/^\uFEFF/, '').split(/\r?\n/);
   const searchLines = search.split('\n');
   const first = searchLines.find((l) => !isBlank(l));
   if (first === undefined) return null;
@@ -548,7 +585,7 @@ export function renderRepair(failures: BlockFailure[], blocks: EditBlock[], stor
         if (cand && cand.replaceNote(block.replace)) out.push('', `The REPLACE lines are already in ${f.path}: this block may not be needed.`);
       }
     } else if (f.reason === 'many_matches') {
-      const m = /^matches (\d+) places \(lines (.+)\)$/.exec(f.detail);
+      const m = /^matches (\d+(?: or more)?) places \(lines (.+)\)$/.exec(f.detail);
       out.push(m ? `This SEARCH matches ${m[1]} places in ${f.path} (lines ${m[2]}). Add surrounding lines until it matches exactly one.` : `This SEARCH matches several places in ${f.path}. Add surrounding lines until it matches exactly one.`);
     } else if (f.reason === 'forbidden_characters') {
       out.push(`The block contains a hidden or control character (${f.detail}): remove it and write plain visible characters only.`);

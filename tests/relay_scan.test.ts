@@ -251,3 +251,88 @@ describe('order', () => {
     expect(scanSource('src/sim/a.ts', text, [])).toEqual(got);
   });
 });
+
+describe('module loading through the test runner', () => {
+  const forms: Array<[string, string]> = [
+    ['importActual', "const fs = await vi.importActual<any>('node:fs');"],
+    ['importMock', "const fs = await vi.importMock('node:fs');"],
+    ['doMock', "vi.doMock('node:child_process', () => ({}));"],
+    ['mock', "vi.mock('some-package');"],
+    ['unmock', "vi.unmock('left-pad');"],
+    ['doUnmock', "vi.doUnmock('left-pad');"],
+    ['bare mock call', "mock('left-pad');"],
+  ];
+
+  it.each(forms)('refuses %s with a non-relative specifier', (_name, text) => {
+    expect(scanSource('tests/x.test.ts', text, []).length).toBeGreaterThan(0);
+  });
+
+  it('accepts the same forms when the specifier is granted for the file', () => {
+    expect(whats('tests/x.test.ts', "const fs = await vi.importActual('node:fs'); vi.doMock('node:fs', () => ({}));", ['node:fs'])).toEqual([]);
+    expect(whats('tests/x.test.ts', "vi.mock('left-pad'); vi.unmock('left-pad');", ['left-pad'])).toEqual([]);
+  });
+
+  it('refuses a computed first argument and accepts a relative one', () => {
+    expect(whats('tests/x.test.ts', 'const n = "a"; await vi.importActual(n);')).toEqual(['1: uses a computed module specifier in importActual()']);
+    expect(whats('tests/x.test.ts', "vi.mock('../src/sim/x', () => ({}));")).toEqual([]);
+    expect(whats('tests/x.test.ts', 'await vi.importActual(`node:${n}`);', ['computed module specifier', 'node:'])).toEqual([]);
+  });
+
+  it('refuses the identifiers the runner injects, wherever they appear', () => {
+    for (const id of ['__vite_ssr_dynamic_import__', '__vite_ssr_import_meta__', '__vitest_worker__', '__vi_import_0__']) {
+      expect(scanSource('tests/x.test.ts', `const m = await ${id}('x');`, []).length, id).toBeGreaterThan(0);
+      expect(scanSource('tests/x.test.ts', `const o = { ${id}: 1 }; o.${id};`, []).length, id).toBeGreaterThan(0);
+    }
+    expect(whats('tests/x.test.ts', 'const __vite_ssr_import_meta__ = 1;', ['__vite_ssr_import_meta__'])).toEqual([]);
+  });
+
+  it('refuses a string that names a Node built-in with its prefix anywhere, and a bare name where a loader takes it', () => {
+    expect(scanSource('tests/x.test.ts', "const m = 'node:os';", [])).toHaveLength(1);
+    expect(scanSource('tests/x.test.ts', 'const m = `node:os`; const n = `node:${x}`;', [])).toHaveLength(2);
+    expect(scanSource('tests/x.test.ts', "vi.importActual('child_process');", [])).toHaveLength(1);
+    expect(scanSource('tests/x.test.ts', "vi.doMock('fs/promises');", [])).toHaveLength(1);
+    expect(whats('tests/x.test.ts', "const m = 'node:os'; vi.importActual('child_process');", ['node:os', 'child_process'])).toEqual([]);
+  });
+
+  it('lets a game word that is also a built-in name be passed to an ordinary call', () => {
+    // this simulation has a fishing net, a stream and events; a test that hands those words to a helper is ordinary
+    expect(whats('tests/x.test.ts', "give(p, 'net'); near(w, 'stream'); log('events'); load('child_process');")).toEqual([]);
+  });
+
+  it('lets a bare built-in word stand as a value or a key, and reports one import once', () => {
+    expect(whats('tests/x.test.ts', "const w = 'url'; const o = { events: 'process' };")).toEqual([]);
+    expect(whats('tests/x.test.ts', "import fs from 'node:fs';")).toEqual(['1: imports "node:fs" (not relative, not vitest, not granted)']);
+  });
+
+  it('passes an ordinary test that imports from vitest and a relative module and uses vi', () => {
+    const text = lines(
+      "import { describe, expect, it, vi } from 'vitest';",
+      "import { thing } from '../src/sim/x';",
+      "describe('thing', () => {",
+      "  it('works', () => {",
+      '    const f = vi.fn();',
+      "    const s = vi.spyOn(console, 'log');",
+      '    vi.useFakeTimers();',
+      '    expect(thing(f)).toBe(1);',
+      '    s.mockRestore();',
+      '  });',
+      '});',
+    );
+    expect(whats('tests/x.test.ts', text)).toEqual([]);
+  });
+});
+
+describe('a file the scan cannot walk', () => {
+  it('returns one issue on line 1 for 5,000 nested brackets and does not throw', () => {
+    const text = `const x = ${'['.repeat(5000)}${']'.repeat(5000)};`;
+    const got = scanSource('src/sim/a.ts', text, []);
+    expect(got).toHaveLength(1);
+    expect(got[0].line).toBe(1);
+    expect(got[0].what).toMatch(/could not be scanned/);
+  });
+
+  it('is not silenced by any grant', () => {
+    const text = `${'('.repeat(5000)}1${')'.repeat(5000)};`;
+    expect(scanSource('src/sim/a.ts', text, ['could not be scanned']).length).toBe(1);
+  });
+});

@@ -10,18 +10,18 @@
 //
 // Mechanical steps run in a detached process, because a single vendor call can outlast any shell call an agent may make. While a
 // step runs, only that process writes the state file; `advance` waits for the step's result file and then takes over again.
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
+import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, realpathSync, rmSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative } from 'node:path';
 import { buildPolicy, diskStore, parseEdits, planEdits, writePlanned } from './edits';
 import { diffRanges, parseFindings, renderFeedback, renderGateFeedback, triage } from './findings';
 import { gateSummary, judge, runGate } from './gate';
-import { Ledger, sha256 } from './ledger';
+import { Ledger, oneLine, sha256 } from './ledger';
 import { reviewerPack, stripLeadingComment, writerPack, PackError, type Pack } from './pack';
 import { resolveInside } from './paths';
 import { chat, ProviderError } from './provider';
-import { changed, commitPaths, diffText, headSha, restore, trackedFiles } from './repo';
+import { changed, commitPaths, diffText, git, gitFolderMark, headSha, ignoredFiles, restore, trackedFiles } from './repo';
 import { scanSource } from './scan';
-import type { Advance, Finding, GateResult, GateVerdict, RelayConfig, ReviewRecord, RoleName, RunState, Verdict, WorkOrder } from './types';
+import type { Advance, Finding, GateResult, GateVerdict, RelayConfig, ReviewRecord, RoleName, RunState, TestOutcome, Verdict, WorkOrder } from './types';
 
 export interface Ctx {
   cfg: RelayConfig;
@@ -53,7 +53,18 @@ const clone = (ctx: Ctx): string => ctx.ledger.paths.clone;
 export function clearToolCache(cloneDir: string): void {
   rmSync(join(cloneDir, 'node_modules'), { recursive: true, force: true, maxRetries: 3 });
 }
-export const loadOrder = (ctx: Ctx): WorkOrder => ctx.ledger.readJson<WorkOrder>('order.json');
+
+/**
+ * The registered work order. Its text is checked against the hash taken when it was registered: an order edited in place was
+ * never validated (it could drop a file the writer already wrote, or open one no order may open) and must not steer a step.
+ */
+export function loadOrder(ctx: Ctx, state: RunState): WorkOrder {
+  const text = ctx.ledger.readText('order.json');
+  if (sha256(text) !== state.orderHash) {
+    throw new Error('order.json in the ledger is not the work order that was registered: it was changed in place. Copy order.registered.json over it, then write any change to another file and register that with order --amend');
+  }
+  return JSON.parse(text) as WorkOrder;
+}
 const reviewDir = (n: number): string => join('reviews', String(n));
 export const probeName = (id: string): string => `tests/zz_relay_${id.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.test.ts`;
 
@@ -83,33 +94,43 @@ function standingProbes(ctx: Ctx, state: RunState): Array<{ id: string; file: st
  * ride along from that point), and a failing gate has its own correction rounds; a second pass over the same findings would
  * only rewrite code that already passes. limits.reviewFixRounds of 0 means findings are recorded and never sent.
  */
-function fixDue(ctx: Ctx, rec: ReviewRecord): boolean {
-  return ctx.cfg.limits.reviewFixRounds > 0 && rec.fixRounds === 0 && loadVerdicts(ctx, rec.n).some((v) => v.action === 'fix');
+function fixDue(ctx: Ctx, state: RunState, rec: ReviewRecord): boolean {
+  if (ctx.cfg.limits.reviewFixRounds <= 0 || !loadVerdicts(ctx, rec.n).some((v) => v.action === 'fix')) return false;
+  // a fix is in only when a commit followed the review: while the head is still the commit that was reviewed, nothing was fixed,
+  // whatever any counter says
+  return rec.fixRounds === 0 || state.head === rec.sha;
+}
+
+/** true when the gate at head failed for no reason that can be held against the change: timeouts, or the time limit */
+export function gateUnjudged(ctx: Ctx, state: RunState): boolean {
+  if (!state.gate || state.gate.sha !== state.head || state.gate.ok) return false;
+  const verdict = ctx.ledger.readJson<{ verdict: GateVerdict }>(state.gate.file).verdict;
+  return !verdict.typecheckBroken && verdict.newFailures.length === 0;
 }
 
 /** What comes next for this run. Pure apart from reading the ledger. */
 export function decide(ctx: Ctx, state: RunState): Decision {
   const ask = (a: Advance): Decision => ({ ask: a });
   if (state.finished) return ask({ status: 'finished', outcome: state.finished.outcome });
-  if (state.stuck) return ask({ status: 'needs', needs: 'stuck', why: state.stuck.why, detailFile: ctx.ledger.file(state.stuck.detailFile) });
+  const stuck = (why: string, detailFile: string): Decision => ask({ status: 'needs', needs: 'stuck', why, detailFile, clone: clone(ctx) });
+  if (state.stuck) return stuck(state.stuck.why, ctx.ledger.file(state.stuck.detailFile));
   if (!state.orderHash) return ask({ status: 'needs', needs: 'order', clone: clone(ctx) });
+  // read before any step is started: an order changed in place must stop the run here, not inside a step
+  const order = loadOrder(ctx, state);
   if (!state.baselineDone) return { do: { kind: 'baseline' } };
   if (state.writes === 0) return { do: { kind: 'write', feedback: 'none' } };
-  const order = loadOrder(ctx);
   if (order.orchestrator.length > 0 && !state.orchestratorDone) return ask({ status: 'needs', needs: 'orchestrator-edits', paths: order.orchestrator, clone: clone(ctx) });
   const limits = ctx.cfg.limits;
   if (state.screenReject?.sha === state.head) {
     if (state.gateFixRounds < limits.gateFixRounds) return { do: { kind: 'write', feedback: 'screen' } };
-    return ask({ status: 'needs', needs: 'stuck', why: `the reader refused the code and ${limits.gateFixRounds} correction rounds are spent`, detailFile: ctx.ledger.file('screen', `${state.head}.json`) });
+    return stuck(`the reader refused the code and ${limits.gateFixRounds} correction rounds are spent; an amended work order buys new rounds`, ctx.ledger.file('screen', `${state.head}.json`));
   }
   if (state.screenedSha !== state.head) return ask({ status: 'needs', needs: 'screen', sha: state.head, diffFile: ctx.ledger.file('screen', `${state.head}.diff`) });
   if (!state.gate || state.gate.sha !== state.head) return { do: { kind: 'gate' } };
   if (!state.gate.ok) {
-    const verdict = ctx.ledger.readJson<{ verdict: GateVerdict }>(state.gate.file).verdict;
-    const writersFault = verdict.typecheckBroken || verdict.newFailures.length > 0;
-    if (!writersFault) return ask({ status: 'needs', needs: 'stuck', why: 'the gate could not be judged: tests timed out or the gate hit its time limit', detailFile: ctx.ledger.file(state.gate.file) });
+    if (gateUnjudged(ctx, state)) return stuck('the gate could not be judged: tests timed out or the gate hit its time limit; when the machine is quiet, retry runs it again', ctx.ledger.file(state.gate.file));
     if (state.gateFixRounds < limits.gateFixRounds) return { do: { kind: 'write', feedback: 'gate' } };
-    return ask({ status: 'needs', needs: 'stuck', why: `the gate still fails after ${limits.gateFixRounds} correction rounds`, detailFile: ctx.ledger.file(state.gate.file) });
+    return stuck(`the gate still fails after ${limits.gateFixRounds} correction rounds; an amended work order buys new rounds`, ctx.ledger.file(state.gate.file));
   }
   // the gate is green at head: reviews, in the configured order
   for (let n = 1; n <= ctx.cfg.reviewers.length; n++) {
@@ -119,9 +140,9 @@ export function decide(ctx: Ctx, state: RunState): Decision {
     if (!rec.adjudicated) {
       const ids = loadFindings(ctx, n).map((f) => f.id);
       const prior = state.reviews.filter((r) => r.n < n && r.adjudicated && r.findings > 0).map((r) => ctx.ledger.file(reviewDir(r.n), 'verdicts.json'));
-      return ask({ status: 'needs', needs: 'adjudicate', review: n, findingsFile: ctx.ledger.file(reviewDir(n), 'findings.json'), ids, priorVerdicts: prior });
+      return ask({ status: 'needs', needs: 'adjudicate', review: n, findingsFile: ctx.ledger.file(reviewDir(n), 'findings.json'), ids, priorVerdicts: prior, clone: clone(ctx) });
     }
-    if (fixDue(ctx, rec)) return { do: { kind: 'write', feedback: `verdicts:${n}` } };
+    if (fixDue(ctx, state, rec)) return { do: { kind: 'write', feedback: `verdicts:${n}` } };
     // nothing to fix, or the fix is in and the gate (with the confirmed probes) is green at head: settle() closes it
     return ask({ status: 'error', error: `review ${n} is adjudicated and unsettled at a green gate; run advance again` });
   }
@@ -148,7 +169,7 @@ export function settle(ctx: Ctx, state: RunState): boolean {
       continue;
     }
     if (rec.status === 'skipped' || rec.settled) continue;
-    if (!rec.adjudicated || fixDue(ctx, rec)) return touched;
+    if (!rec.adjudicated || fixDue(ctx, state, rec)) return touched;
     rec.settled = true;
     state.unlocked = [];
     ctx.ledger.log('review settled', { n });
@@ -167,21 +188,70 @@ export interface StepResult {
 
 const prompt = (ctx: Ctx, name: 'writer_rules.md' | 'reviewer_rules.md'): string => stripLeadingComment(readFileSync(join(ctx.toolDir, 'prompts', name), 'utf8'));
 
-const readClone = (ctx: Ctx) => (path: string): string | null => {
-  const abs = resolveInside(clone(ctx), path);
-  return existsSync(abs) ? readFileSync(abs, 'utf8') : null;
+/**
+ * A file of the clone by its repository path, or null when it is not there. A path that reaches its file through a link is
+ * refused: the send rules judged the name that was asked for, and a link would read a file they never saw.
+ */
+export const readClone = (ctx: Ctx) => (path: string): string | null => {
+  const root = clone(ctx);
+  const abs = resolveInside(root, path);
+  if (!existsSync(abs)) return null;
+  const fold = (p: string): string => (process.platform === 'win32' ? p.toLowerCase() : p);
+  if (lstatSync(abs).isSymbolicLink() || fold(realpathSync(abs)) !== fold(join(realpathSync(root), ...path.split('/')))) {
+    throw new PackError(`${path} is reached through a link; the relay neither sends nor edits a file through one`);
+  }
+  return readFileSync(abs, 'utf8');
 };
 
-/** A stuck record. The file is kept relative to the ledger: the state file is redacted, and an absolute path would not survive. */
+/**
+ * A stuck record. The reason is kept to one bounded line: it may quote a vendor, a model or a tool, it is printed where a driver
+ * reads its instructions, and it is handed to an agent. The file is kept relative to the ledger: the state file is redacted, and
+ * an absolute path would not survive.
+ */
 export function stuckAt(ctx: Ctx, why: string, file: string): { why: string; detailFile: string } {
-  return { why, detailFile: isAbsolute(file) ? relative(ctx.ledger.paths.ledger, file) : file };
+  return { why: oneLine(why), detailFile: isAbsolute(file) ? relative(ctx.ledger.paths.ledger, file) : file };
+}
+
+/**
+ * What is in or around the clone that the relay did not put there. Code the gate ran can leave more than git status lists: a
+ * commit of its own, a file under a name git ignores, or a package folder above the clone, which Node would load from before
+ * the relay's own tools. Each is named; an empty list means the clone is as the relay left it. The tools' own cache is removed
+ * first, since it is expected and is the one place a planted package could sit inside the clone.
+ */
+export function strays(ctx: Ctx, state: RunState): string[] {
+  const c = clone(ctx);
+  // Before any git command: git runs programs named in a clone's config and hooks, and the code the gate ran could have written
+  // either. If they changed, nothing more is asked of git here.
+  if (state.gitMark !== undefined && gitFolderMark(c) !== state.gitMark) return [`the clone's .git config or hooks changed since the clone was made; no git command was run in it. Look at ${join(c, '.git', 'config')} and ${join(c, '.git', 'hooks')}`];
+  clearToolCache(c);
+  const out: string[] = [];
+  const head = headSha(c);
+  if (head !== state.head) out.push(`the clone's HEAD is ${head} and the run's last commit is ${state.head}`);
+  out.push(...changed(c));
+  for (const p of ignoredFiles(c)) out.push(`${p} (a name git ignores)`);
+  const run = ctx.ledger.paths.dir;
+  for (const d of [join(run, 'node_modules'), join(dirname(run), 'node_modules')]) if (existsSync(d)) out.push(`${d} (a package folder above the clone)`);
+  return out;
+}
+
+/** Puts the clone back on the run's branch at its last recorded commit, after a step that did not end as it should. */
+function settleClone(ctx: Ctx, state: RunState, half?: { tracked: string[]; created: string[] }): void {
+  const c = clone(ctx);
+  // a baseline retaken after an amendment visits the base commit and leaves the clone detached if it dies there
+  if (git(c, ['symbolic-ref', '-q', 'HEAD'], { allowFail: true }).status !== 0) git(c, ['checkout', '-q', '-f', state.branch]);
+  // a write that died after its commit and before the state was saved: the commit was never recorded, so it goes
+  if (headSha(c) !== state.head) git(c, ['reset', '-q', '--hard', state.head]);
+  if (half) {
+    restore(c, half.tracked, half.created);
+    git(c, ['reset', '-q']);
+  }
 }
 
 function stick(ctx: Ctx, state: RunState, why: string, detailFile: string): StepResult {
   state.stuck = stuckAt(ctx, why, detailFile);
   ctx.ledger.saveState(state);
-  ctx.ledger.log('stuck', { why });
-  return { ok: false, line: why };
+  ctx.ledger.log('stuck', { why: state.stuck.why });
+  return { ok: false, line: state.stuck.why };
 }
 
 /** One vendor call with its request, answer and meta kept in the ledger. The key is never part of what is written. */
@@ -207,21 +277,66 @@ async function call(ctx: Ctx, pack: Pack, label: string, json: boolean): Promise
   }
 }
 
-const providerLine = (e: unknown): string => (e instanceof ProviderError ? `${e.provider} ${e.kind}${e.status ? ` (${e.status})` : ''}: ${e.message}` : e instanceof Error ? e.message : String(e));
+const providerLine = (e: unknown): string => oneLine(e instanceof ProviderError ? `${e.provider} ${e.kind}${e.status ? ` (${e.status})` : ''}: ${e.message}` : e instanceof Error ? e.message : String(e), 400);
 
+const isProbeFile = (file: string): boolean => file.startsWith('tests/zz_relay_');
+/** the relay's own outcomes (a file that did not load, a run with no report) are named in brackets; a real test is not */
+const synthetic = (t: TestOutcome): boolean => t.file.startsWith('(') || t.id.slice(t.file.length + 3).startsWith('(');
+
+/**
+ * A named file in which no test passed and none failed proves nothing: every test in it was skipped, or it holds none. That is
+ * a failure of its own, so that a gate cannot be green on a file that asserted nothing.
+ */
+function markVacuous(result: GateResult, files: string[]): void {
+  for (const f of files) {
+    const mine = result.tests.filter((t) => t.file === f);
+    if (mine.length === 0 || mine.some((t) => t.state !== 'skipped')) continue;
+    result.tests.push({ id: `${f} > (no test in this file passed)`, file: f, state: 'fail', message: `Every test in ${f} was skipped, so the file proved nothing.` });
+  }
+}
+
+/** Why a baseline cannot serve as one, or null. Whatever the baseline could not settle would be forgiven for the whole run. */
+function baselineUnsettled(result: GateResult): string | null {
+  if (result.timedOut || result.typecheck === 'timeout') return 'the time limit ended it';
+  const slow = result.tests.filter((t) => t.state === 'timeout').map((t) => t.id);
+  if (slow.length) return `these tests timed out at the base commit: ${slow.slice(0, 5).join('; ')}`;
+  const tool = result.tests.filter((t) => t.file.startsWith('(')).map((t) => t.id);
+  if (tool.length) return `vitest gave no usable result at the base commit (${tool.join('; ')}); read its output, and if it did not start at all, run init again`;
+  const unrun = result.tests.filter((t) => t.id.endsWith('> (did not run)')).map((t) => t.file);
+  if (unrun.length) return `vitest ran nothing from ${unrun.join(', ')} at the base commit`;
+  return null;
+}
+
+/**
+ * The gate at the base commit, which every later gate is judged against. After an amendment the clone is ahead of the base, so
+ * the step visits the base commit and comes back; it is taken afresh then, because the amended order may name other tests.
+ */
 export async function baselineStep(ctx: Ctx): Promise<StepResult> {
   const state = ctx.ledger.loadState();
-  const order = loadOrder(ctx);
-  const read = readClone(ctx);
-  const tests = order.tests.filter((t) => read(t) !== null);
+  const order = loadOrder(ctx, state);
+  const c = clone(ctx);
+  const before = strays(ctx, state);
+  if (before.length) return stick(ctx, state, `the clone is not as the relay left it: ${before.join('; ')}`, 'log.jsonl');
   const outDir = ctx.ledger.file('gate', 'baseline');
-  const result = await runGate({ clone: clone(ctx), toolsRoot: ctx.ledger.paths.home, tests, typecheck: order.typecheck, timeoutMs: ctx.cfg.limits.gateTimeoutMs, maxWorkers: ctx.cfg.limits.gateMaxWorkers, outDir, env: ctx.env });
+  rmSync(outDir, { recursive: true, force: true });
+  const away = state.head !== state.base;
+  let result: GateResult;
+  try {
+    if (away) git(c, ['checkout', '-q', '--detach', state.base]);
+    const read = readClone(ctx);
+    const tests = order.tests.filter((t) => read(t) !== null);
+    result = await runGate({ clone: c, toolsRoot: ctx.ledger.paths.home, tests, typecheck: order.typecheck, timeoutMs: ctx.cfg.limits.gateTimeoutMs, maxWorkers: ctx.cfg.limits.gateMaxWorkers, outDir, env: ctx.env });
+    markVacuous(result, tests);
+  } finally {
+    if (away) git(c, ['checkout', '-q', '-f', state.branch]);
+  }
   ctx.ledger.writeJson(join('gate', 'baseline', 'result.json'), result);
   ctx.ledger.scrub(outDir);
-  clearToolCache(clone(ctx));
-  const left = changed(clone(ctx));
-  if (left.length) return stick(ctx, state, `the baseline gate left files in the clone: ${left.join(', ')}`, join(outDir, 'result.json'));
-  const failing = result.tests.filter((t) => t.state === 'fail' || t.state === 'timeout').length;
+  const left = strays(ctx, state);
+  if (left.length) return stick(ctx, state, `the baseline gate left the clone changed: ${left.join('; ')}`, join(outDir, 'result.json'));
+  const unsettled = baselineUnsettled(result);
+  if (unsettled) return stick(ctx, state, `the baseline could not be taken: ${unsettled}. Nothing can be judged against it; deal with the cause, then retry`, join(outDir, 'result.json'));
+  const failing = result.tests.filter((t) => t.state === 'fail').length;
   state.baselineDone = true;
   ctx.ledger.saveState(state);
   ctx.ledger.log('baseline', { typecheck: result.typecheck, tests: result.tests.length, failing });
@@ -244,20 +359,35 @@ function feedbackText(ctx: Ctx, state: RunState, source: Feedback): { text: stri
   return { text: renderFeedback(loadFindings(ctx, n), verdicts, outputs), unlock };
 }
 
-/** Ask the writer, parse, plan, scan, and only then write and commit. Nothing reaches the disk unless every block passed. */
+/**
+ * Ask the writer, parse, plan, scan, and only then write and commit. Nothing reaches the disk unless every block passed, and no
+ * counter moves unless a commit was made: an answer that changes nothing is not a round.
+ */
 export async function writeStep(ctx: Ctx, source: Feedback): Promise<StepResult> {
   const state = ctx.ledger.loadState();
-  const order = loadOrder(ctx);
+  const order = loadOrder(ctx, state);
   const round = state.writes + 1;
   const dir = join('writes', String(round));
-  const tracked = trackedFiles(clone(ctx));
+  const c = clone(ctx);
+  // a stray file would make the commit fail after the writer has been paid for; find it first
+  const before = strays(ctx, state);
+  if (before.length) return stick(ctx, state, `the clone is not as the relay left it, so the writer was not asked: ${before.join('; ')}`, 'log.jsonl');
+  const tracked = trackedFiles(c);
   const fb = feedbackText(ctx, state, source);
   ctx.ledger.writeText(join(dir, 'feedback.md'), fb.text ?? '(first attempt: no feedback)');
   // a file the writer created in an earlier round exists now: from then on it is edited like any other, never created again
   const read = readClone(ctx);
   const made = order.create.filter((p) => read(p) !== null);
+  // Everything sent to a vendor has this machine's paths and key values replaced. In a file the writer is to edit that would
+  // show it text the file does not hold: its SEARCH could never match, and its REPLACE would write the placeholder.
+  for (const p of [...order.edit, ...made]) {
+    const body = read(p);
+    if (body !== null && ctx.ledger.redact(body) !== body) {
+      return stick(ctx, state, `${p} holds one of this machine's own paths (or a key value), which is replaced in whatever is sent to a vendor, so the writer cannot edit that file; take it out of the work order and edit it as the orchestrator`, join(dir, 'feedback.md'));
+    }
+  }
   const policy = buildPolicy({ edit: [...order.edit, ...made], create: order.create.filter((p) => !made.includes(p)) }, Object.keys(state.lockedTests), fb.unlock);
-  const store = diskStore(clone(ctx));
+  const store = diskStore(c);
   const input = { cfg: ctx.cfg, order, tracked, read, rules: prompt(ctx, 'writer_rules.md') };
   let repair = '';
   for (let turn = 0; turn <= ctx.cfg.limits.repairTurns; turn++) {
@@ -301,12 +431,26 @@ export async function writeStep(ctx: Ctx, source: Feedback): Promise<StepResult>
     }
     // every block passed: write, then commit, with a marker so a death in between can be undone
     const paths = plan.files.map((f) => f.path);
-    ctx.ledger.writeJson('applying.json', { tracked: plan.files.filter((f) => !f.created).map((f) => f.path), created: plan.files.filter((f) => f.created).map((f) => f.path) });
-    writePlanned(clone(ctx), plan.files);
-    const commit = commitPaths(clone(ctx), paths, `relay: write ${round} (${order.slug})`);
+    const half = { tracked: plan.files.filter((f) => !f.created).map((f) => f.path), created: plan.files.filter((f) => f.created).map((f) => f.path) };
+    ctx.ledger.writeJson('applying.json', half);
+    ctx.ledger.writeText(join(dir, 'notes.txt'), parsed.notes);
+    let commit: { sha: string; committed: boolean };
+    try {
+      writePlanned(c, plan.files);
+      commit = commitPaths(c, paths, `relay: write ${round} (${order.slug})`);
+    } catch (e) {
+      // the files may be written and the commit not made (or made without a file git ignores): put the clone back, so that a
+      // retry shows the writer the files it was shown this time
+      settleClone(ctx, state, half);
+      rmSync(ctx.ledger.file('applying.json'), { force: true });
+      return stick(ctx, state, `the writer's edit could not be committed and was undone: ${e instanceof Error ? e.message : String(e)}`, join(dir, 'notes.txt'));
+    }
     rmSync(ctx.ledger.file('applying.json'), { force: true });
     ctx.ledger.writeJson(join(dir, 'apply.json'), { turn, sha: commit.sha, committed: commit.committed, files: plan.files.map((f) => ({ path: f.path, created: f.created, tiers: f.tiers })) });
-    ctx.ledger.writeText(join(dir, 'notes.txt'), parsed.notes);
+    if (!commit.committed) {
+      // No counter has moved: the same request is still due, and a review's fix is not taken as made.
+      return stick(ctx, state, 'the writer answered, but its blocks left every file unchanged, so nothing was written. Read its notes: retry asks it again as before, an amended work order tells it more', join(dir, 'notes.txt'));
+    }
     state.head = commit.sha;
     state.writes = round;
     if (source === 'gate' || source === 'screen') state.gateFixRounds += 1;
@@ -319,51 +463,76 @@ export async function writeStep(ctx: Ctx, source: Feedback): Promise<StepResult>
     state.screenReject = undefined;
     ctx.ledger.saveState(state);
     ctx.ledger.log('write', { round, sha: commit.sha, files: paths.length, turn, loose: plan.files.flatMap((f) => f.tiers).filter((t) => t > 0).length });
-    if (!commit.committed) return stick(ctx, state, 'the writer answered, but its blocks left every file unchanged', ctx.ledger.file(dir, 'notes.txt'));
     return { ok: true, line: `write ${round}: ${paths.length} file(s) at ${commit.sha.slice(0, 8)} after ${turn} repair turn(s)` };
   }
   return stick(ctx, state, `the writer's answer could not be applied after ${ctx.cfg.limits.repairTurns} repair turns`, ctx.ledger.file('calls'));
 }
 
+/** the files tsc reports errors in, as it prints them: "path(line,col): error TS1234: ..." */
+function typeErrorFiles(output: string): string[] {
+  const files = new Set<string>();
+  for (const m of output.matchAll(/^(.+?)\(\d+,\d+\): error TS\d+/gm)) files.add(m[1].replace(/\\/g, '/'));
+  return [...files];
+}
+
 /** tsc and the named tests, judged against the baseline; confirmed probes ride along once their fix has been asked for. */
 export async function gateStep(ctx: Ctx): Promise<StepResult> {
   const state = ctx.ledger.loadState();
-  const order = loadOrder(ctx);
+  const order = loadOrder(ctx, state);
   const read = readClone(ctx);
+  const c = clone(ctx);
+  const before = strays(ctx, state);
+  if (before.length) return stick(ctx, state, `the clone is not as the relay left it, so the gate did not run: ${before.join('; ')}`, 'log.jsonl');
   const label = `g${state.steps}`;
   const outDir = ctx.ledger.file('gate', label);
   const probes = standingProbes(ctx, state).map((p) => ({ ...p, name: probeName(p.id) }));
+  const named = order.tests.filter((t) => read(t) !== null);
+  const missing = order.tests.filter((t) => !named.includes(t));
   const placed: string[] = [];
   let result: GateResult;
   try {
     for (const p of probes) {
-      const abs = resolveInside(clone(ctx), p.name);
+      const abs = resolveInside(c, p.name);
       mkdirSync(dirname(abs), { recursive: true });
       copyFileSync(p.file, abs);
       placed.push(abs);
     }
-    const tests = [...order.tests.filter((t) => read(t) !== null), ...probes.map((p) => p.name)];
-    result = await runGate({ clone: clone(ctx), toolsRoot: ctx.ledger.paths.home, tests, typecheck: order.typecheck, timeoutMs: ctx.cfg.limits.gateTimeoutMs, maxWorkers: ctx.cfg.limits.gateMaxWorkers, outDir, env: ctx.env });
+    result = await runGate({ clone: c, toolsRoot: ctx.ledger.paths.home, tests: [...named, ...probes.map((p) => p.name)], typecheck: order.typecheck, timeoutMs: ctx.cfg.limits.gateTimeoutMs, maxWorkers: ctx.cfg.limits.gateMaxWorkers, outDir, env: ctx.env });
   } finally {
     for (const abs of placed) rmSync(abs, { force: true });
-    clearToolCache(clone(ctx));
   }
+  // A test the order names and nobody wrote is a failure of the change, not a file to leave out: left out, a change whose
+  // contract test was never written would pass the gate with no test at all.
+  for (const t of missing) {
+    result.tests.push({ id: `${t} > (named by the work order, not written)`, file: t, state: 'fail', message: `The work order names ${t} as a test the gate runs, and that file does not exist. Write it as the work order describes.` });
+  }
+  markVacuous(result, named);
   const baseline = ctx.ledger.readJson<GateResult>(join('gate', 'baseline', 'result.json'));
   const verdict = judge(baseline, result);
   const file = join('gate', label, 'verdict.json');
   ctx.ledger.writeJson(file, { sha: state.head, result, verdict, summary: gateSummary(result, verdict) });
   ctx.ledger.scrub(outDir);
-  const left = changed(clone(ctx));
-  if (left.length) return stick(ctx, state, `running the gate left files in the clone that the writer did not write: ${left.join(', ')}. Read them before anything else is done.`, ctx.ledger.file(file));
+  const left = strays(ctx, state);
+  if (left.length) return stick(ctx, state, `running the gate left the clone changed in ways the writer's commit does not account for: ${left.join('; ')}. Read them before anything else is done.`, ctx.ledger.file(file));
+  // A probe is the orchestrator's file. When the only type errors are in probes, the writer cannot see or repair them.
+  if (verdict.typecheckBroken) {
+    const files = typeErrorFiles(result.typecheckOutput);
+    if (files.length > 0 && files.every(isProbeFile)) {
+      return stick(ctx, state, `the typecheck fails only in a standing probe (${files.join(', ')}), which is the adjudicator's file, not the writer's: correct the probe and register it again with the probe command, then retry`, ctx.ledger.file(file));
+    }
+  }
   state.gate = { sha: state.head, ok: verdict.ok, file };
   if (verdict.ok) {
-    const tests = [...order.edit, ...order.create].filter((p) => p.toLowerCase().startsWith('tests/'));
-    if (!state.firstGreenSha) {
-      state.firstGreenSha = state.head;
-      for (const t of tests) {
-        const text = read(t);
-        if (text !== null) state.lockedTests[t] = sha256(text);
-      }
+    // Freeze the writer's tests as the gate first passes with them, so that a later round cannot turn a failing gate green by
+    // weakening one. A test first written in a later round is frozen at the first green gate that holds it.
+    if (!state.firstGreenSha) state.firstGreenSha = state.head;
+    const lockedAt = (state.lockedAt ??= {});
+    for (const t of [...order.edit, ...order.create].filter((p) => p.toLowerCase().startsWith('tests/'))) {
+      if (t in state.lockedTests) continue;
+      const text = read(t);
+      if (text === null) continue;
+      state.lockedTests[t] = sha256(text);
+      lockedAt[t] = state.head;
     }
   }
   ctx.ledger.saveState(state);
@@ -371,13 +540,21 @@ export async function gateStep(ctx: Ctx): Promise<StepResult> {
   return { ok: verdict.ok, line: `gate at ${state.head.slice(0, 8)}: ${verdict.ok ? 'passed' : 'failed'} (${verdict.newFailures.length} new failures, ${verdict.inconclusive.length} inconclusive${verdict.typecheckBroken ? ', typecheck broken' : ''})` };
 }
 
-function gateSummaryAtHead(ctx: Ctx, state: RunState): string {
-  return state.gate ? ctx.ledger.readJson<{ summary: string }>(state.gate.file).summary : '(no gate recorded)';
+/**
+ * The gate's summary as a reviewer is shown it: without the standing probes. A probe's file name says that an earlier review
+ * had a confirmed finding, and the second reviewer is to judge the change without knowing what the first one found.
+ */
+function gateSummaryForReviewer(ctx: Ctx, state: RunState): string {
+  if (!state.gate) return '(no gate recorded)';
+  const g = ctx.ledger.readJson<{ result: GateResult; verdict: GateVerdict }>(state.gate.file);
+  const own = (t: { file: string }): boolean => !isProbeFile(t.file);
+  const verdict: GateVerdict = { ...g.verdict, newFailures: g.verdict.newFailures.filter(own), inconclusive: g.verdict.inconclusive.filter(own), alreadyFailing: g.verdict.alreadyFailing.filter((id) => !isProbeFile(id)) };
+  return gateSummary({ ...g.result, tests: g.result.tests.filter(own) }, verdict);
 }
 
 export function buildReviewPack(ctx: Ctx, state: RunState, n: number): Pack {
   const role = ctx.cfg.reviewers[n - 1] as 'reviewer1' | 'reviewer2';
-  return reviewerPack({ cfg: ctx.cfg, order: loadOrder(ctx), tracked: trackedFiles(clone(ctx)), read: readClone(ctx), rules: prompt(ctx, 'reviewer_rules.md'), role, diff: diffText(clone(ctx), state.base), gateSummary: gateSummaryAtHead(ctx, state) });
+  return reviewerPack({ cfg: ctx.cfg, order: loadOrder(ctx, state), tracked: trackedFiles(clone(ctx)), read: readClone(ctx), rules: prompt(ctx, 'reviewer_rules.md'), role, diff: diffText(clone(ctx), state.base), gateSummary: gateSummaryForReviewer(ctx, state) });
 }
 
 /** Turn a reviewer's answer into findings on record. Shared by the vendor call and by an answer the owner imported. */
@@ -430,17 +607,27 @@ export async function runStep(ctx: Ctx, step: Step): Promise<StepResult> {
 
 /** A step's process died without a result: undo a half-written apply and leave the run for the orchestrator to look at. */
 export function recoverDeadStep(ctx: Ctx, state: RunState): void {
-  if (ctx.ledger.exists('applying.json')) {
-    const m = ctx.ledger.readJson<{ tracked: string[]; created: string[] }>('applying.json');
-    restore(clone(ctx), m.tracked, m.created);
+  const half = ctx.ledger.exists('applying.json') ? ctx.ledger.readJson<{ tracked: string[]; created: string[] }>('applying.json') : undefined;
+  let put = 'the clone was put back to its last recorded commit';
+  try {
+    settleClone(ctx, state, half);
     rmSync(ctx.ledger.file('applying.json'), { force: true });
-    state.head = headSha(clone(ctx));
+  } catch (e) {
+    put = `the clone could NOT be put back (${e instanceof Error ? e.message : String(e)})`;
   }
   const key = state.step?.key ?? 'step';
   state.step = undefined;
-  state.stuck = stuckAt(ctx, `the ${key} step ended without a result (killed, or the machine restarted); the clone was put back to its last commit`, join('steps', `${key}.log`));
+  state.stuck = stuckAt(ctx, `the ${key} step ended without a result (killed, or the machine restarted); ${put}`, join('steps', `${key}.log`));
   ctx.ledger.saveState(state);
+  ctx.ledger.scrub(ctx.ledger.file('steps'));
   ctx.ledger.log('step died', { key });
+}
+
+/** After a step threw: the clone may be detached at the base commit or hold a half-made write. */
+export function repairAfterThrow(ctx: Ctx, state: RunState): void {
+  const half = ctx.ledger.exists('applying.json') ? ctx.ledger.readJson<{ tracked: string[]; created: string[] }>('applying.json') : undefined;
+  settleClone(ctx, state, half);
+  rmSync(ctx.ledger.file('applying.json'), { force: true });
 }
 
 export const stepArgs = (step: Step): string[] => (step.kind === 'write' ? ['write', step.feedback] : step.kind === 'review' ? ['review', String(step.n)] : [step.kind]);

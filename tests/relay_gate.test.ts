@@ -7,9 +7,9 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, 
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { afterEach, describe, expect, it } from 'vitest';
-import { GateOptions, gateSummary, judge, readVitestReport, runGate, runTool, safeEnv } from '../tools/relay/gate';
-import { RELAY_IDENT, changed, cloneSparse, commitPaths, diffText, fetchBranchInto, git, headSha, removeRunDir, repoRoot, resolveCommit, restore, trackedFiles } from '../tools/relay/repo';
+import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { GateOptions, gateSummary, judge, readVitestReport, readVitestReportFull, runGate, runTool, safeEnv } from '../tools/relay/gate';
+import { RELAY_IDENT, changed, cloneSparse, commitPaths, diffText, fetchBranchInto, git, headSha, ignoredFiles, isIgnored, removeRunDir, repoRoot, resolveCommit, restore, trackedFiles } from '../tools/relay/repo';
 import type { GateResult, TestOutcome } from '../tools/relay/types';
 
 const REPO = fileURLToPath(new URL('..', import.meta.url));
@@ -20,6 +20,30 @@ function tmp(label: string): string {
   temps.push(dir);
   return dir;
 }
+
+// The repositories made here must not depend on the machine's git settings (Git for Windows sets core.autocrlf=true globally):
+// no system or global config is read, and the line-ending arms set theirs through the environment before the checkout happens.
+const GIT_ENV_KEYS = ['GIT_CONFIG_NOSYSTEM', 'GIT_CONFIG_GLOBAL', 'GIT_CONFIG_COUNT', 'GIT_CONFIG_KEY_0', 'GIT_CONFIG_VALUE_0'];
+const savedGitEnv: Record<string, string | undefined> = {};
+
+beforeAll(() => {
+  for (const k of GIT_ENV_KEYS) savedGitEnv[k] = process.env[k];
+  const dir = mkdtempSync(join(tmpdir(), 'relay-gate-gitcfg-'));
+  temps.push(dir);
+  writeFileSync(join(dir, 'empty.gitconfig'), '');
+  process.env.GIT_CONFIG_NOSYSTEM = '1';
+  process.env.GIT_CONFIG_GLOBAL = join(dir, 'empty.gitconfig');
+  delete process.env.GIT_CONFIG_COUNT;
+  delete process.env.GIT_CONFIG_KEY_0;
+  delete process.env.GIT_CONFIG_VALUE_0;
+});
+
+afterAll(() => {
+  for (const k of GIT_ENV_KEYS) {
+    if (savedGitEnv[k] === undefined) delete process.env[k];
+    else process.env[k] = savedGitEnv[k];
+  }
+});
 
 afterEach(() => {
   while (temps.length > 0) rmSync(temps.pop() as string, { recursive: true, force: true, maxRetries: 5 });
@@ -52,7 +76,18 @@ function makeShared(): { dir: string; base: string } {
 function makeClone(autocrlf?: 'true' | 'false'): { shared: string; clone: string; base: string } {
   const { dir, base } = makeShared();
   const clone = join(tmp('clone'), 'wt');
-  cloneSparse(dir, clone, base, 'relay-test', ['src', 'tests']);
+  if (autocrlf) {
+    process.env.GIT_CONFIG_COUNT = '1';
+    process.env.GIT_CONFIG_KEY_0 = 'core.autocrlf';
+    process.env.GIT_CONFIG_VALUE_0 = autocrlf;
+  }
+  try {
+    cloneSparse(dir, clone, base, 'relay-test', ['src', 'tests']);
+  } finally {
+    delete process.env.GIT_CONFIG_COUNT;
+    delete process.env.GIT_CONFIG_KEY_0;
+    delete process.env.GIT_CONFIG_VALUE_0;
+  }
   if (autocrlf) git(clone, ['config', 'core.autocrlf', autocrlf]);
   return { shared: dir, clone, base };
 }
@@ -265,6 +300,45 @@ describe.each(['true', 'false'] as const)('commitPaths and diffText with core.au
   });
 });
 
+describe('commitPaths with ignored files and ignoredFiles / isIgnored', () => {
+  function ignoringClone(): string {
+    const { clone } = makeClone();
+    put(clone, '.gitignore', 'dist\n*.log\n');
+    commitPaths(clone, ['.gitignore'], 'ignore rules');
+    return clone;
+  }
+
+  it('throws when a listed path exists but git skipped it, and still commits the others', () => {
+    const clone = ignoringClone();
+    put(clone, 'src/dist/helper.ts', 'export const h = 1;\n');
+    put(clone, 'src/sum.ts', 'export const s = 1;\n');
+    expect(() => commitPaths(clone, ['src/dist/helper.ts', 'src/sum.ts'], 'both')).toThrow(/^not committed \(ignored by git\?\): src\/dist\/helper\.ts$/);
+    expect(git(clone, ['show', '--name-only', '--format=', 'HEAD']).stdout.trim()).toBe('src/sum.ts');
+  });
+
+  it('also throws when nothing else changed', () => {
+    const clone = ignoringClone();
+    put(clone, 'tests/x.log', 'x\n');
+    expect(() => commitPaths(clone, ['tests/x.log'], 'log')).toThrow(/^not committed \(ignored by git\?\): tests\/x\.log$/);
+  });
+
+  it('lists ignored paths with forward slashes and a directory with its trailing slash', () => {
+    const clone = ignoringClone();
+    put(clone, 'src/dist/helper.ts', 'x\n');
+    put(clone, 'tests/x.log', 'x\n');
+    expect(ignoredFiles(clone).sort()).toEqual(['src/dist/', 'tests/x.log']);
+    expect(ignoredFiles(makeClone().clone)).toEqual([]);
+  });
+
+  it('says whether a path matches the ignore rules, whether or not it exists', () => {
+    const clone = ignoringClone();
+    expect(isIgnored(clone, 'src/dist/helper.ts')).toBe(true);
+    expect(isIgnored(clone, 'a/b/run.log')).toBe(true);
+    expect(isIgnored(clone, 'src/sum.ts')).toBe(false);
+    expect(() => isIgnored(clone, '-x')).toThrow(/not usable/);
+  });
+});
+
 describe('restore', () => {
   it('puts a tracked file back and deletes a created one with the directories it leaves empty', () => {
     const { clone } = makeClone();
@@ -431,11 +505,27 @@ describe('judge', () => {
     expect(v.newFailures.map((t) => t.id)).toEqual(['t/a.test.ts > one']);
   });
 
-  it('does not hold a test against the change when it failed or timed out at the base too', () => {
+  it('does not hold a test against the change when it failed at the base too, and a base timeout excuses nothing', () => {
     const v = judge(base, result([outcome('t/a.test.ts > one', 'pass'), outcome('t/a.test.ts > two', 'fail'), outcome('t/a.test.ts > three', 'fail')]));
-    expect(v.ok).toBe(true);
-    expect(v.alreadyFailing).toEqual(['t/a.test.ts > two', 't/a.test.ts > three']);
-    expect(v.newFailures).toEqual([]);
+    expect(v.ok).toBe(false);
+    expect(v.alreadyFailing).toEqual(['t/a.test.ts > two']);
+    expect(v.newFailures.map((t) => t.id)).toEqual(['t/a.test.ts > three']);
+  });
+
+  it('calls a test that timed out at the base and times out now inconclusive', () => {
+    const v = judge(base, result([outcome('t/a.test.ts > three', 'timeout')]));
+    expect(v.alreadyFailing).toEqual([]);
+    expect(v.inconclusive.map((t) => t.id)).toEqual(['t/a.test.ts > three']);
+    expect(v.ok).toBe(false);
+  });
+
+  it('never excuses an outcome of the vitest run itself, whatever the baseline holds', () => {
+    const synthetic = [outcome('(vitest) > (no report)', 'fail'), outcome('(vitest) > (run failed with no failing test)', 'timeout')];
+    const v = judge(result(synthetic.map((t) => ({ ...t, state: 'fail' as const }))), result(synthetic));
+    expect(v.alreadyFailing).toEqual([]);
+    expect(v.newFailures.map((t) => t.id)).toEqual(['(vitest) > (no report)']);
+    expect(v.inconclusive.map((t) => t.id)).toEqual(['(vitest) > (run failed with no failing test)']);
+    expect(v.ok).toBe(false);
   });
 
   it('also counts a test that timed out now and failed at the base as already failing', () => {
@@ -460,9 +550,15 @@ describe('judge', () => {
 
   it('reports a typecheck the change broke, from pass or from skipped, and not one that was already broken', () => {
     expect(judge(result([]), result([], { typecheck: 'fail' }))).toMatchObject({ ok: false, typecheckBroken: true });
-    expect(judge(result([], { typecheck: 'skipped' }), result([], { typecheck: 'timeout' }))).toMatchObject({ ok: false, typecheckBroken: true });
+    expect(judge(result([], { typecheck: 'skipped' }), result([], { typecheck: 'fail' }))).toMatchObject({ ok: false, typecheckBroken: true });
     expect(judge(result([], { typecheck: 'fail' }), result([], { typecheck: 'fail' }))).toMatchObject({ ok: true, typecheckBroken: false });
     expect(judge(result([]), result([], { typecheck: 'skipped' }))).toMatchObject({ ok: true, typecheckBroken: false });
+  });
+
+  it('does not blame the change for a typecheck that timed out, and reads a base timeout as no knowledge of the base', () => {
+    const timedOut = result([], { typecheck: 'timeout', timedOut: true });
+    expect(judge(result([]), timedOut)).toMatchObject({ ok: false, typecheckBroken: false });
+    expect(judge(result([], { typecheck: 'timeout' }), result([], { typecheck: 'fail' }))).toMatchObject({ typecheckBroken: false });
   });
 
   it('is not ok when the whole gate ran out of time, even with nothing else wrong', () => {
@@ -496,7 +592,8 @@ describe('gateSummary', () => {
     const now = result([], { typecheck: 'timeout', timedOut: true });
     const text = gateSummary(now, judge(result([]), now));
     expect(text).toContain('gate: not ok (the time limit ended it)');
-    expect(text).toContain('typecheck: timeout (the change broke it)');
+    expect(text).toContain('typecheck: timeout\n');
+    expect(text).not.toContain('the change broke it');
     expect(text).toContain('files run: none');
   });
 });
@@ -575,6 +672,21 @@ describe('readVitestReport', () => {
     ]);
   });
 
+  it('reports a failed file with no failed assertion even when its message is empty, as a hook or suite failure', () => {
+    const out = readVitestReport({ testResults: [{ name: at('tests/hook.test.ts'), status: 'failed', message: '', assertionResults: [assertion('a', 'skipped'), assertion('b', 'skipped')] }] }, clone);
+    expect(out.map((t) => [t.id, t.state])).toEqual([
+      ['tests/hook.test.ts > a', 'skipped'],
+      ['tests/hook.test.ts > b', 'skipped'],
+      ['tests/hook.test.ts > (file-level failure)', 'fail'],
+    ]);
+    expect(out[2].message).toBe('a hook or a suite in this file failed; see the vitest output');
+  });
+
+  it('hands back the top-level success flag beside the outcomes', () => {
+    expect(readVitestReportFull({ success: false, testResults: [] }, clone)).toEqual({ outcomes: [], success: false });
+    expect(readVitestReportFull({ testResults: [] }, clone).success).toBeUndefined();
+  });
+
   it('refuses what is not a report', () => {
     expect(() => readVitestReport(null, clone)).toThrow('not a vitest JSON report');
     expect(() => readVitestReport({ testResults: 'no' }, clone)).toThrow('not a vitest JSON report');
@@ -646,6 +758,23 @@ describe('runTool', () => {
     let t = 1_000;
     const run = await runTool(['-e', '1'], { cwd: tmpdir(), timeoutMs: 20_000, env, now: () => (t += 500) });
     expect(run.ms).toBe(500);
+  });
+
+  it.skipIf(process.platform === 'win32')('ends a child the tool left behind with stdio ignored, though the tool exited normally', async () => {
+    const dir = tmp('left');
+    const pidFile = join(dir, 'child.pid');
+    const script = [
+      'const { spawn } = require("node:child_process");',
+      'const c = spawn("sleep", ["30"], { stdio: "ignore" });',
+      'c.unref();',
+      `require("node:fs").writeFileSync(${JSON.stringify(pidFile)}, String(c.pid));`,
+    ].join('\n');
+    const run = await runTool(['-e', script], { cwd: dir, timeoutMs: 20_000, env });
+    expect(run.status).toBe(0);
+    expect(run.timedOut).toBe(false);
+    const pid = Number(readFileSync(pidFile, 'utf8'));
+    expect(pid).toBeGreaterThan(0);
+    expect(await goneWithin(pid, 1_000)).toBe(true);
   });
 
   it('ends the whole process tree when the time limit passes', async () => {
@@ -720,6 +849,38 @@ describe.skipIf(!process.env.RELAY_E2E)('runGate with real tsc and vitest', () =
     expect(v.typecheckBroken).toBe(true);
     expect(v.ok).toBe(false);
   }, 180_000);
+
+  it('fails a file whose describe-level beforeAll throws, though vitest leaves the file message empty', async () => {
+    const { home, wt } = makeProject();
+    put(wt, 'tests/hook.test.ts', ["import { beforeAll, describe, expect, it } from 'vitest';", "describe('rule', () => {", "  beforeAll(() => { throw new Error('world could not be made'); });", "  it('a', () => { expect(1).toBe(1); });", '});', ''].join('\n'));
+    const r = await runGate(options(home, wt, { typecheck: false, tests: ['tests/hook.test.ts'] }));
+    expect(r.tests.some((t) => t.state === 'fail')).toBe(true);
+    expect(judge(result([]), r).ok).toBe(false);
+  }, 120_000);
+
+  it('fails a file whose describe-level afterAll assertion fails', async () => {
+    const { home, wt } = makeProject();
+    put(wt, 'tests/after.test.ts', ["import { afterAll, describe, expect, it } from 'vitest';", "describe('rule', () => {", '  afterAll(() => { expect(1).toBe(2); });', "  it('a', () => { expect(1).toBe(1); });", '});', ''].join('\n'));
+    const r = await runGate(options(home, wt, { typecheck: false, tests: ['tests/after.test.ts'] }));
+    expect(judge(result([]), r).ok).toBe(false);
+  }, 120_000);
+
+  it('fails a run that vitest itself calls failed while every test is green (an unhandled rejection)', async () => {
+    const { home, wt } = makeProject();
+    put(wt, 'tests/later.test.ts', ["import { expect, it } from 'vitest';", "it('adds', () => { void Promise.reject(new Error('nobody awaits me')); expect(1).toBe(1); });", ''].join('\n'));
+    const r = await runGate(options(home, wt, { typecheck: false, tests: ['tests/later.test.ts'] }));
+    expect(r.tests.map((t) => t.id)).toContain('(vitest) > (run failed with no failing test)');
+    expect(r.tests.find((t) => t.file === '(vitest)')?.state).toBe('fail');
+    expect(judge(result([]), r).ok).toBe(false);
+  }, 120_000);
+
+  it('fails a named test file that produced no result, whether misnamed for the include pattern or backslashed', async () => {
+    const { home, wt } = makeProject();
+    put(wt, 'tests/rule.spec.ts', "import { expect, it } from 'vitest';\nit('never runs', () => { expect(1).toBe(2); });\n");
+    const r = await runGate(options(home, wt, { typecheck: false, tests: ['tests/ok.test.ts', 'tests/rule.spec.ts', 'tests\\env.test.ts'] }));
+    expect(r.tests.filter((t) => t.state === 'fail').map((t) => t.id)).toEqual(['tests/rule.spec.ts > (did not run)']);
+    expect(judge(result([]), r).ok).toBe(false);
+  }, 120_000);
 
   it('runs the tests without the keys that the caller holds', async () => {
     const { home, wt } = makeProject();

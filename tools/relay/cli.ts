@@ -5,7 +5,7 @@
 //   node tools/relay/relay.mjs order --run <id> --file <order.json> [--amend]
 //   node tools/relay/relay.mjs advance --run <id> [--max-seconds 540]     repeat until it asks for a judgement or says finished
 //   node tools/relay/relay.mjs adopt --run <id> -m <what> | --nothing     commit the orchestrator's own edits in the clone
-//   node tools/relay/relay.mjs screen --run <id> --sha <sha> --ok|--reject --by <who> --note <text>
+//   node tools/relay/relay.mjs screen --run <id> --sha <sha> --ok|--reject --by <who> --note-file <file>
 //   node tools/relay/relay.mjs probe --run <id> --finding <id> --file <probe.test.ts> [--allow a,b]
 //   node tools/relay/relay.mjs verdicts --run <id> --review <n> --file <verdicts.json> [--unprobed id,id]
 //   node tools/relay/relay.mjs export|import --run <id> --review <n> [--file <answer.json>]   a review done by hand
@@ -14,26 +14,28 @@
 //   node tools/relay/relay.mjs finish --run <id> [--failed <why>] [--keep]
 //   node tools/relay/relay.mjs status --run <id> | runs
 // Every command ends with one line "RELAY_RESULT <json>": that line, not the prose above it, is what a driver reads.
+// Wherever a command takes free text (--note, -m, --failed), <name>-file <path> reads it from a file instead. Text that quotes
+// code a model wrote belongs in a file: on a command line the shell would run whatever it holds between backticks.
 //
 // The relay never merges, never pushes and never writes the working tree of the checkout it runs from. `finish` adds the run's
 // branch to that checkout as a new ref and stops there.
 import { spawn, spawnSync } from 'node:child_process';
-import { closeSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { closeSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, realpathSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_CONFIG, PROVIDERS, ROLES, loadConfig, staleRoles } from './config';
-import { buildReviewPack, clearToolCache, decide, loadFindings, loadOrder, loadVerdicts, probeName, recordReview, recoverDeadStep, runStep, settle, stepArgs, stepFromArgs, stuckAt, type Ctx, type Step } from './driver';
+import { buildReviewPack, decide, gateUnjudged, loadFindings, loadOrder, loadVerdicts, probeName, readClone, recordReview, recoverDeadStep, repairAfterThrow, runStep, settle, stepArgs, stepFromArgs, strays, stuckAt, type Ctx, type Step } from './driver';
 import { buildPolicy, parseEdits, planEdits } from './edits';
 import { parseFindings, parseVerdicts } from './findings';
 import { runGate } from './gate';
-import { Ledger, listRuns, machinePaths, newRunId, pidAlive, relayHome, runPaths, sha256 } from './ledger';
+import { Busy, Ledger, listRuns, lockHeld, machinePaths, newRunId, oneLine, pidAlive, relayHome, runPaths, sha256, withLock } from './ledger';
 import { orderProblems, parseOrder, reviewerPack, stripLeadingComment, writerPack } from './pack';
 import { resolveInside } from './paths';
-import { chat, listModels, ProviderError } from './provider';
+import { chat, listModels, ProviderError, tlsCheckingDisabled } from './provider';
 import { makeRedactor, secretsFrom } from './redact';
-import { changed, cloneSparse, commitPaths, diffText, fetchBranchInto, git, removeRunDir, resolveCommit, trackedFiles } from './repo';
+import { cloneSparse, commitPaths, diffText, fetchBranchInto, git, gitFolderMark, headSha, isIgnored, removeRunDir, resolveCommit, trackedFiles } from './repo';
 import { scanSource } from './scan';
-import type { Advance, RelayConfig, RunState, WorkOrder } from './types';
+import type { Advance, RelayConfig, RunState, TestOutcome, WorkOrder } from './types';
 
 const TOOL_DIR = dirname(fileURLToPath(import.meta.url));
 /** the checkout this code lives in; its node_modules run the relay itself */
@@ -107,6 +109,38 @@ const idle = (state: RunState): void => {
   if (state.step) throw new Refusal(`a step is running (${state.step.key}); run advance to wait for it`);
 };
 
+/** Free text for a command: `--name <text>`, or `--name-file <path>` for text that must not pass through a shell. */
+function textOpt(a: Args, name: string): string | undefined {
+  const file = a.opt(`${name}-file`);
+  if (file !== undefined) return readFileSync(resolve(file), 'utf8').trim();
+  const v = a.opt(name);
+  return v !== undefined && v.startsWith('--') ? undefined : v;
+}
+
+/**
+ * The relay made every commit it knows of. A commit made in the clone by hand has not been in front of the reader, would be run
+ * by the gate under another commit's name, and would be what `finish` hands to the owner.
+ */
+function sameHead(ctx: Ctx, state: RunState): void {
+  const c = ctx.ledger.paths.clone;
+  if (!existsSync(c)) return;
+  if (state.gitMark !== undefined && gitFolderMark(c) !== state.gitMark) throw new Refusal(`the clone's .git config or hooks changed since the clone was made, and git runs what they name: nothing more is done in this clone. Look at ${join(c, '.git')}; then finish the run as failed`);
+  const head = headSha(c);
+  if (head !== state.head) {
+    throw new Refusal(`the clone's HEAD is ${head}, but the last commit this run made is ${state.head}: a commit was made in the clone outside the relay. To keep orchestrator edits, undo that commit keeping its files (git -C "${c}" reset --soft ${state.head}) and run adopt; to drop it, git -C "${c}" reset --hard ${state.head}`);
+  }
+}
+
+/** one command at a time may run code in a run's clone or change it */
+const cloneLock = (ctx: Ctx): string => ctx.ledger.file('clone.lock');
+const samePath = (x: string, y: string): boolean => {
+  const fold = (p: string): string => {
+    const r = existsSync(p) ? realpathSync(p) : resolve(p);
+    return process.platform === 'win32' ? r.toLowerCase() : r;
+  };
+  return fold(x) === fold(y);
+};
+
 const lockHash = (text: string): string => sha256(text.replace(/\r\n/g, '\n'));
 
 // ---- commands ----
@@ -129,10 +163,10 @@ function init(a: Args, io: Io): unknown {
   const lock = git(SHARED, ['show', 'HEAD:package-lock.json']).stdout;
   writeFileSync(join(home, 'package.json'), git(SHARED, ['show', 'HEAD:package.json']).stdout, 'utf8');
   writeFileSync(join(home, 'package-lock.json'), lock, 'utf8');
-  const npm = findNpmCli();
   const manual = `in ${home} run: npm ci --no-audit --no-fund`;
-  if (!npm) throw new Refusal(`npm was not found beside ${process.execPath}; ${manual}, then run init again with --installed`);
   if (!a.flag('installed')) {
+    const npm = findNpmCli();
+    if (!npm) throw new Refusal(`npm was not found beside ${process.execPath}; ${manual}, then run init again with --installed`);
     io.out(`installing the relay's own node_modules in ${home} (the gate runs tsc and vitest from there, so no run needs a link into your checkout)`);
     const r = spawnSync(process.execPath, [npm, 'ci', '--no-audit', '--no-fund'], { cwd: home, stdio: 'inherit', shell: false, windowsHide: true });
     if (r.status !== 0) throw new Refusal(`npm ci failed (exit ${r.status}); ${manual}, then run init again with --installed`);
@@ -154,6 +188,9 @@ async function doctor(a: Args, io: Io): Promise<unknown> {
   io.out(`config: ${loaded.file ?? 'defaults only'}`);
   for (const p of loaded.problems) io.out(`  PROBLEM ${p}`);
   for (const w of staleRoles(cfg)) io.out(`  WARNING ${w}`);
+  const tlsOff = tlsCheckingDisabled(io.env);
+  report.tlsCheckingDisabledInEnvironment = tlsOff;
+  if (tlsOff) io.out('  WARNING NODE_TLS_REJECT_UNAUTHORIZED=0 is set in this shell. The relay checks certificates regardless, so a network that needs that setting will fail here; put its certificate in NODE_EXTRA_CA_CERTS instead.');
   io.out(`node ${process.version}; ${git(SHARED, ['--version']).stdout.trim()}`);
   const keys: Record<string, boolean> = {};
   for (const p of PROVIDERS) {
@@ -245,7 +282,7 @@ function start(a: Args, io: Io): unknown {
   const branch = `relay/${id}`;
   const head = cloneSparse(SHARED, paths.clone, base, branch, cfg.sparse);
   const ledger = new Ledger(paths, makeRedactor(secretsFrom(cfg, io.env), machinePaths(paths, SHARED)));
-  const state: RunState = { id, slug, shared: SHARED, base, branch, createdAt: new Date(io.now()).toISOString(), amendments: 0, baselineDone: false, head, writes: 0, orchestratorDone: false, gateFixRounds: 0, lockedTests: {}, reviews: [], unlocked: [], steps: 0 };
+  const state: RunState = { id, slug, shared: SHARED, base, branch, createdAt: new Date(io.now()).toISOString(), amendments: 0, baselineDone: false, head, gitMark: gitFolderMark(paths.clone), writes: 0, orchestratorDone: false, gateFixRounds: 0, lockedTests: {}, reviews: [], unlocked: [], steps: 0 };
   ledger.saveState(state);
   ledger.log('start', { base, branch });
   const dirty = git(SHARED, ['status', '--porcelain', '--untracked-files=no']).stdout.split('\n').filter(Boolean).length;
@@ -259,15 +296,24 @@ function start(a: Args, io: Io): unknown {
 function order(a: Args, io: Io): unknown {
   const { ctx, state } = open(a, io);
   idle(state);
-  const parsed = parseOrder(readFileSync(resolve(a.need('file')), 'utf8'));
+  const source = resolve(a.need('file'));
+  // The relay keeps the registered order under these names and checks it against a hash. An order edited there would be compared
+  // with itself, and would steer the next step whether or not it was ever accepted.
+  for (const own of ['order.json', 'order.registered.json']) {
+    if (samePath(source, ctx.ledger.file(own))) throw new Refusal(`${own} in the ledger is the relay's own copy of the registered order; write the order to another file (order-draft.json) and register that`);
+  }
+  const parsed = parseOrder(readFileSync(source, 'utf8'));
   if (!parsed.ok) throw new Refusal(`the work order is not usable:\n${parsed.problems.map((p) => `  - ${p}`).join('\n')}`);
   const o = parsed.order;
   if (state.orderHash && !a.flag('amend')) throw new Refusal('this run already has a work order; pass --amend to replace it on purpose');
   const tracked = trackedFiles(ctx.ledger.paths.clone, state.base);
   const problems = orderProblems(ctx.cfg, o, tracked);
   if (o.slug !== state.slug) problems.push(`slug: this run is "${state.slug}"`);
+  // a path git ignores would be written and run, and then left out of the commit, the reader's diff and the branch
+  for (const p of [...o.create, ...o.orchestrator]) if (!problems.length && !tracked.has(p.toLowerCase()) && isIgnored(ctx.ledger.paths.clone, p)) problems.push(`${p}: git ignores this name here (.gitignore), so it could not be committed`);
+  let was: WorkOrder | null = null;
   if (state.orderHash) {
-    const was = loadOrder(ctx);
+    was = loadOrder(ctx, state);
     const still = new Set([...o.edit, ...o.create].map((p) => p.toLowerCase()));
     if (state.writes > 0) for (const p of [...was.edit, ...was.create]) if (!still.has(p.toLowerCase())) problems.push(`amend: ${p} was open to the writer and may have been written; it cannot be dropped`);
     // a file the writer created earlier is tracked in the clone now but was not at base: that is still a "create" path
@@ -280,10 +326,7 @@ function order(a: Args, io: Io): unknown {
   let estimate = 0;
   if (!problems.length) {
     try {
-      const read = (p: string): string | null => {
-        const abs = resolveInside(ctx.ledger.paths.clone, p);
-        return existsSync(abs) ? readFileSync(abs, 'utf8') : null;
-      };
+      const read = readClone(ctx);
       estimate = writerPack({ cfg: ctx.cfg, order: o, tracked: trackedFiles(ctx.ledger.paths.clone), read, rules: '' }, null).tokens;
     } catch (e) {
       problems.push(e instanceof Error ? e.message : String(e));
@@ -291,16 +334,28 @@ function order(a: Args, io: Io): unknown {
   }
   if (problems.length) throw new Refusal(`the work order is not usable:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
   const text = `${JSON.stringify(o, null, 2)}\n`;
-  if (state.orderHash) {
+  let retake = false;
+  if (was) {
     state.amendments += 1;
     copyFileSync(ctx.ledger.file('order.json'), ctx.ledger.file(`order-before-amendment-${state.amendments}.json`));
     state.stuck = undefined;
+    // An amended order is a new instruction: the gate is run afresh under it and the writer's correction rounds start again.
+    state.gate = undefined;
+    state.gateFixRounds = 0;
+    // The baseline holds only the tests the order named when it was taken. A test added now that exists at the base commit has
+    // no record there, and every old failure in it would be charged to the change: the baseline is taken again.
+    const had = new Set(was.tests);
+    retake = was.typecheck !== o.typecheck || o.tests.some((t) => !had.has(t) && tracked.has(t.toLowerCase()));
+    if (retake) state.baselineDone = false;
   }
   ctx.ledger.writeText('order.json', text);
-  state.orderHash = sha256(text);
+  ctx.ledger.writeText('order.registered.json', text);
+  // hashed as it stands on disk (the ledger redacts what it writes), since that is the text every later step reads back
+  state.orderHash = sha256(ctx.ledger.readText('order.json'));
   ctx.ledger.saveState(state);
   ctx.ledger.log(state.amendments ? 'order amended' : 'order', { hash: state.orderHash, edit: o.edit, create: o.create, orchestrator: o.orchestrator, tests: o.tests });
   io.out(`work order registered (${state.amendments ? `amendment ${state.amendments}` : 'first'}): ${o.edit.length} to edit, ${o.create.length} to create, ${o.context.length} context; the writer's pack is about ${estimate} tokens`);
+  if (retake) io.out('the tests or the typecheck changed: the baseline will be taken again at the base commit');
   return { orderHash: state.orderHash, amendments: state.amendments, writerTokens: estimate };
 }
 
@@ -311,7 +366,8 @@ function spawnStep(ctx: Ctx, state: RunState, step: Step, home: string): void {
   const log = openSync(ctx.ledger.file('steps', `${key}.log`), 'a');
   const viteNode = join(CODE_ROOT, 'node_modules', 'vite-node', 'dist', 'cli.mjs');
   const env = { ...ctx.env, RELAY_CLI: '1', RELAY_SHARED: SHARED } as NodeJS.ProcessEnv;
-  const child = spawn(process.execPath, [viteNode, '--root', CODE_ROOT, join(TOOL_DIR, 'cli.ts'), '--', 'run-step', '--run', state.id, '--home', home, '--key', key, ...stepArgs(step)], { cwd: CODE_ROOT, detached: true, stdio: ['ignore', log, log], windowsHide: true, shell: false, env });
+  // rooted at this folder, which has no vite config, so that the step watches no files (see relay.mjs)
+  const child = spawn(process.execPath, [viteNode, '--root', TOOL_DIR, join(TOOL_DIR, 'cli.ts'), '--', 'run-step', '--run', state.id, '--home', home, '--key', key, ...stepArgs(step)], { cwd: CODE_ROOT, detached: true, stdio: ['ignore', log, log], windowsHide: true, shell: false, env });
   closeSync(log);
   child.unref();
   if (child.pid === undefined) throw new Error('the step process could not be started');
@@ -319,6 +375,11 @@ function spawnStep(ctx: Ctx, state: RunState, step: Step, home: string): void {
   ctx.ledger.saveState(state);
   ctx.ledger.log('step started', { key });
 }
+
+/** a step touches this file every few seconds; a recorded process id alone cannot say a step is alive, since ids are reused */
+const beatFile = (ctx: Ctx, key: string): string => ctx.ledger.file('steps', `${key}.beat`);
+const BEAT_MS = 5_000;
+const BEAT_STALE_MS = 5 * 60_000;
 
 async function advance(a: Args, io: Io): Promise<Advance> {
   const home = homeOf(a, io);
@@ -328,29 +389,61 @@ async function advance(a: Args, io: Io): Promise<Advance> {
   for (;;) {
     const { ctx, state } = open(a, io);
     if (state.step) {
-      const result = join('steps', `${state.step.key}.json`);
+      const step = state.step;
+      const result = join('steps', `${step.key}.json`);
       const done = (): boolean => ctx.ledger.exists(result);
-      if (!done() && pidAlive(state.step.pid)) {
-        if (io.now() >= deadline) return { status: 'running', step: state.step.key };
+      const beatAge = (): number => {
+        try {
+          return Date.now() - statSync(beatFile(ctx, step.key)).mtimeMs;
+        } catch {
+          return Date.now() - Date.parse(step.startedAt);
+        }
+      };
+      if (!done() && pidAlive(step.pid) && beatAge() < BEAT_STALE_MS) {
+        if (io.now() >= deadline) return { status: 'running', step: step.key };
         await io.sleep(1000);
         continue;
       }
+      if (!done() && pidAlive(step.pid)) {
+        // The heartbeat stopped while a process with that id exists: the id now belongs to something else, or the machine slept
+        // and the step is only now waking. Give a waking step two beats before it is given up.
+        await io.sleep(2 * BEAT_MS + 2000);
+        if (done() || beatAge() < BEAT_STALE_MS) continue;
+      }
       if (!done()) await io.sleep(500);
       const fresh = ctx.ledger.loadState();
+      if (fresh.step?.key !== step.key) continue;
       if (done()) {
-        io.out(`${fresh.step?.key}: ${ctx.ledger.readJson<{ line: string }>(result).line}`);
+        io.out(`${step.key}: ${oneLine(ctx.ledger.readJson<{ line: string }>(result).line)}`);
         fresh.step = undefined;
         ctx.ledger.saveState(fresh);
+        // the step's log is its raw output and may name this machine's paths; it is closed now
+        ctx.ledger.scrub(ctx.ledger.file('steps'));
       } else recoverDeadStep(ctx, fresh);
       continue;
     }
-    if (settle(ctx, state)) ctx.ledger.saveState(state);
-    const d = decide(ctx, state);
-    if ('ask' in d) {
-      if (d.ask.status === 'needs' && d.ask.needs === 'screen') ctx.ledger.writeText(join('screen', `${state.head}.diff`), diffText(ctx.ledger.paths.clone, state.screenedSha ?? state.base, state.head));
-      return d.ask;
+    if (state.finished) return { status: 'finished', outcome: state.finished.outcome };
+    if (lockHeld(cloneLock(ctx))) {
+      // a probe is running code in the clone; no step may start beside it
+      if (io.now() >= deadline) return { status: 'running', step: 'a probe' };
+      await io.sleep(1000);
+      continue;
     }
-    spawnStep(ctx, state, d.do, home);
+    // two drivers calling at the same moment must not both start the step
+    const asked = await withLock(ctx.ledger.file('advance.lock'), { waitMs: 15_000, staleMs: 60_000, sleep: io.sleep }, async (): Promise<Advance | null> => {
+      const now = ctx.ledger.loadState();
+      if (now.step || now.finished) return null;
+      sameHead(ctx, now);
+      if (settle(ctx, now)) ctx.ledger.saveState(now);
+      const d = decide(ctx, now);
+      if ('ask' in d) {
+        if (d.ask.status === 'needs' && d.ask.needs === 'screen') ctx.ledger.writeText(join('screen', `${now.head}.diff`), diffText(ctx.ledger.paths.clone, now.screenedSha ?? now.base, now.head));
+        return d.ask;
+      }
+      spawnStep(ctx, now, d.do, home);
+      return null;
+    });
+    if (asked) return asked;
   }
 }
 
@@ -360,16 +453,35 @@ async function runStepCommand(a: Args, io: Io): Promise<unknown> {
   if (state.step?.key !== key) throw new Refusal(`step ${key} is not the run's active step`);
   const i = a.rest.indexOf('--key');
   const step = stepFromArgs(a.rest.slice(i + 2).filter((x) => x !== '--'));
+  ctx.ledger.owner = key;
+  const touch = (): void => {
+    try {
+      writeFileSync(beatFile(ctx, key), String(Date.now()), 'utf8');
+    } catch {
+      // a missed beat is made up by the next
+    }
+  };
+  touch();
+  const beat = setInterval(touch, BEAT_MS);
+  beat.unref();
   let result: { ok: boolean; line: string };
   try {
     result = await runStep(ctx, step);
   } catch (e) {
-    const why = e instanceof Error ? (e.stack ?? e.message) : String(e);
     const s = ctx.ledger.loadState();
-    s.stuck = stuckAt(ctx, `the ${key} step failed: ${e instanceof Error ? e.message : String(e)}`, join('steps', `${key}.log`));
+    let repaired = '';
+    try {
+      repairAfterThrow(ctx, s);
+    } catch (e2) {
+      repaired = `; the clone could not be put back (${e2 instanceof Error ? e2.message : String(e2)})`;
+    }
+    s.stuck = stuckAt(ctx, `the ${key} step failed: ${e instanceof Error ? e.message : String(e)}${repaired}`, join('steps', `${key}.log`));
     ctx.ledger.saveState(s);
-    process.stderr.write(`${why}\n`);
+    // this goes to the step's log inside the ledger, so it is redacted like everything else there
+    process.stderr.write(`${ctx.ledger.redact(e instanceof Error ? (e.stack ?? e.message) : String(e))}\n`);
     result = { ok: false, line: s.stuck.why };
+  } finally {
+    clearInterval(beat);
   }
   ctx.ledger.writeJson(join('steps', `${key}.json`), result);
   return result;
@@ -378,10 +490,12 @@ async function runStepCommand(a: Args, io: Io): Promise<unknown> {
 function adopt(a: Args, io: Io): unknown {
   const { ctx, state } = open(a, io);
   idle(state);
-  const o = loadOrder(ctx);
+  sameHead(ctx, state);
+  const o = loadOrder(ctx, state);
   if (!o.orchestrator.length) throw new Refusal('this work order names no orchestrator files; amend it to add them');
   const old = state.head;
-  const commit = commitPaths(ctx.ledger.paths.clone, o.orchestrator, `relay: orchestrator, ${a.flag('nothing') ? 'no edits' : a.need('m')}`);
+  const what = a.flag('nothing') ? 'no edits' : oneLine(textOpt(a, 'm') ?? a.need('m'), 200);
+  const commit = commitPaths(ctx.ledger.paths.clone, o.orchestrator, `relay: orchestrator, ${what}`);
   if (!commit.committed && !a.flag('nothing')) throw new Refusal(`none of the orchestrator files changed (${o.orchestrator.join(', ')}); edit them in ${ctx.ledger.paths.clone}, or pass --nothing`);
   state.head = commit.sha;
   state.orchestratorDone = true;
@@ -395,19 +509,22 @@ function adopt(a: Args, io: Io): unknown {
 function screen(a: Args, io: Io): unknown {
   const { ctx, state } = open(a, io);
   idle(state);
+  sameHead(ctx, state);
   const sha = a.need('sha');
   if (sha !== state.head) throw new Refusal(`--sha ${sha} is not the commit awaiting a reader (${state.head}); read the current diff first`);
   const ok = a.flag('ok');
   if (ok === a.flag('reject')) throw new Refusal('pass exactly one of --ok and --reject');
-  const note = a.opt('note') ?? '';
-  if (!ok && !note.trim()) throw new Refusal('--reject needs --note: it is sent to the writer as the reason');
+  const note = textOpt(a, 'note') ?? '';
+  if (!ok && !note.trim()) throw new Refusal('--reject needs --note-file: the note is sent to the writer as the reason');
+  if (ok && state.screenReject?.sha === sha) throw new Refusal(`commit ${sha.slice(0, 8)} was refused by a reader and the writer has not answered yet; run advance`);
   ctx.ledger.writeJson(join('screen', `${sha}.json`), { sha, ok, by: a.need('by'), note });
   if (ok) state.screenedSha = sha;
   else state.screenReject = { sha, note };
   ctx.ledger.saveState(state);
   ctx.ledger.log('screen', { sha, ok });
   io.out(ok ? `commit ${sha.slice(0, 8)} passed the reader; the gate may run it` : `commit ${sha.slice(0, 8)} refused; the note goes back to the writer`);
-  return { sha, ok };
+  // "ok" in the result line means the command did what was asked; whether the reader passed the commit is "passed"
+  return { sha, passed: ok };
 }
 
 function allFindingIds(ctx: Ctx, state: RunState): Set<string> {
@@ -416,40 +533,74 @@ function allFindingIds(ctx: Ctx, state: RunState): Set<string> {
   return ids;
 }
 
+/** the relay's own outcomes (a file that did not load, a run with no report) are named in brackets; a real test is not */
+const syntheticOutcome = (t: TestOutcome): boolean => t.file.startsWith('(') || t.id.slice(t.file.length + 3).startsWith('(');
+
 async function probe(a: Args, io: Io): Promise<unknown> {
   const { ctx, state } = open(a, io);
   idle(state);
   const id = a.need('finding');
   if (!allFindingIds(ctx, state).has(id)) throw new Refusal(`no finding ${id} in this run`);
+  // a probe executes the code at head exactly as the gate does, so it needs the same reader's pass
+  if (state.screenedSha !== state.head) throw new Refusal('the code at the head of this run has not passed the reader, and a probe would execute it: run advance and screen it first');
   const text = readFileSync(resolve(a.need('file')), 'utf8');
+  if (ctx.ledger.redact(text) !== text) throw new Refusal("the probe names one of this machine's own paths; it is run as a file in the clone's tests folder, so import the way a test there does ('../src/sim/x', './helpers/kit')");
   const name = probeName(id);
   const allow = (a.opt('allow') ?? '').split(',').filter(Boolean);
   const issues = scanSource(name, text, allow);
   if (issues.length) throw new Refusal(`the probe does things a probe should not need:\n${issues.map((i) => `  - line ${i.line}: ${i.what}`).join('\n')}\nRewrite it, or grant a name on purpose with --allow.`);
-  const dir = join('probes', id);
-  ctx.ledger.writeText(join(dir, 'probe.test.ts'), text);
-  const abs = resolveInside(ctx.ledger.paths.clone, name);
-  const outDir = ctx.ledger.file(dir, `run-${readdirSync(ctx.ledger.file(dir)).length}`);
-  let result;
+  const c = ctx.ledger.paths.clone;
+  const limits = ctx.cfg.limits;
+  // Probes of one run use the one clone, so they queue here whatever the driver starts at once.
   try {
-    mkdirSync(dirname(abs), { recursive: true });
-    writeFileSync(abs, text, 'utf8');
-    result = await runGate({ clone: ctx.ledger.paths.clone, toolsRoot: ctx.ledger.paths.home, tests: [name], typecheck: false, timeoutMs: ctx.cfg.limits.probeTimeoutMs, maxWorkers: 1, outDir, env: io.env });
-  } finally {
-    rmSync(abs, { force: true });
-    clearToolCache(ctx.ledger.paths.clone);
+    return await withLock(cloneLock(ctx), { waitMs: 8 * 60_000, staleMs: limits.probeTimeoutMs + limits.gateTimeoutMs, sleep: io.sleep }, async () => {
+      const now = ctx.ledger.loadState();
+      idle(now);
+      if (now.screenedSha !== now.head) throw new Refusal('the head of this run changed while this probe waited; run advance');
+      const before = strays(ctx, now);
+      if (before.length) throw new Refusal(`the clone is not as the relay left it, so nothing was run: ${before.join('; ')}`);
+      const dir = join('probes', id);
+      ctx.ledger.writeText(join(dir, 'probe.test.ts'), text);
+      const abs = resolveInside(c, name);
+      const outDir = ctx.ledger.file(dir, `run-${readdirSync(ctx.ledger.file(dir)).length}`);
+      const typecheck = loadOrder(ctx, now).typecheck;
+      let result;
+      try {
+        mkdirSync(dirname(abs), { recursive: true });
+        writeFileSync(abs, text, 'utf8');
+        // typechecked as it will be when it rides in a gate: a probe that runs but does not typecheck would fail that gate later
+        result = await runGate({ clone: c, toolsRoot: ctx.ledger.paths.home, tests: [name], typecheck, timeoutMs: limits.probeTimeoutMs, maxWorkers: 1, outDir, env: io.env });
+      } finally {
+        rmSync(abs, { force: true });
+      }
+      const left = strays(ctx, now);
+      const base = name.slice(name.lastIndexOf('/') + 1);
+      const typeErrors = result.typecheckOutput.split(/\r?\n/).filter((l) => l.includes(base) && / error TS\d+/.test(l));
+      const real = result.tests.filter((t) => t.file === name && !syntheticOutcome(t));
+      const failed = real.filter((t) => t.state === 'fail');
+      // a file that did not load, a run with no report: the probe itself is broken, which reproduces nothing
+      const broken = result.tests.filter((t) => t.state === 'fail' && !real.includes(t));
+      const timedOut = result.timedOut || result.typecheck === 'timeout' || result.tests.some((t) => t.state === 'timeout');
+      let outcome: 'fails' | 'passes' | 'timeout' | 'error';
+      let words: string;
+      if (left.length) [outcome, words] = ['error', `changed the clone (${left.join('; ')}). Nothing was removed: read what it left, a probe should write nothing`];
+      else if (timedOut) [outcome, words] = ['timeout', 'timed out: neither a reproduction nor a refutation'];
+      else if (typeErrors.length) [outcome, words] = ['error', `does not typecheck, so it proves nothing yet; correct it and run it again:\n${typeErrors.slice(0, 10).join('\n')}`];
+      else if (broken.length) [outcome, words] = ['error', `did not run, so it proves nothing yet (it is run as ${name} inside the clone; write its imports from there):\n${broken.map((t) => `${t.id}: ${t.message}`).join('\n').slice(0, 1500)}`];
+      else if (failed.length) [outcome, words] = ['fails', 'FAILS on the current code: the finding is reproduced'];
+      else if (real.some((t) => t.state === 'pass')) [outcome, words] = ['passes', 'passes on the current code: the finding is not reproduced by this probe'];
+      else [outcome, words] = ['error', 'ran no test'];
+      ctx.ledger.writeJson(join(dir, 'result.json'), { id, sha: now.head, outcome, tests: result.tests, left, typeErrors });
+      ctx.ledger.scrub(outDir);
+      ctx.ledger.writeText(join(dir, 'output.txt'), failed.map((t) => `${t.id}\n${t.message}`).join('\n\n'));
+      ctx.ledger.log('probe', { id, outcome });
+      io.out(`probe for ${id} ${words}`);
+      return { id, outcome };
+    });
+  } catch (e) {
+    if (e instanceof Busy) throw new Refusal(e.message);
+    throw e;
   }
-  const left = changed(ctx.ledger.paths.clone);
-  const failed = result.tests.filter((t) => t.state === 'fail');
-  const timedOut = result.timedOut || result.tests.some((t) => t.state === 'timeout');
-  const outcome = left.length ? 'error' : timedOut ? 'timeout' : failed.length ? 'fails' : result.tests.some((t) => t.state === 'pass') ? 'passes' : 'error';
-  ctx.ledger.writeJson(join(dir, 'result.json'), { id, sha: state.head, outcome, tests: result.tests, left });
-  ctx.ledger.scrub(outDir);
-  ctx.ledger.writeText(join(dir, 'output.txt'), failed.map((t) => `${t.id}\n${t.message}`).join('\n\n'));
-  ctx.ledger.log('probe', { id, outcome });
-  const words = { fails: 'FAILS on the current code: the finding is reproduced', passes: 'passes on the current code: the finding is not reproduced by this probe', timeout: 'timed out: neither a reproduction nor a refutation', error: left.length ? `left files in the clone (${left.join(', ')}): remove them before anything else` : 'ran no test' }[outcome];
-  io.out(`probe for ${id} ${words}`);
-  return { id, outcome };
 }
 
 function verdicts(a: Args, io: Io): unknown {
@@ -459,6 +610,8 @@ function verdicts(a: Args, io: Io): unknown {
   const rec = state.reviews.find((r) => r.n === n);
   if (!rec || rec.status !== 'done') throw new Refusal(`review ${n} has no findings on record`);
   if (rec.fixRounds > 0) throw new Refusal(`review ${n}'s fixes were already sent to the writer`);
+  // once a review is closed nothing reads its verdicts again: a "fix" registered now would be printed and never sent
+  if (rec.settled) throw new Refusal(`review ${n} is settled; its verdicts can no longer be changed`);
   const findings = loadFindings(ctx, n);
   const parsed = parseVerdicts(readFileSync(resolve(a.need('file')), 'utf8'), findings);
   if (!parsed.ok) throw new Refusal(`the verdicts are not usable: ${parsed.error}`);
@@ -522,31 +675,54 @@ function skipReview(a: Args, io: Io): unknown {
   idle(state);
   const n = Number(a.need('review'));
   reviewable(ctx, state, n);
-  state.reviews = [...state.reviews.filter((r) => r.n !== n), { n, role: ctx.cfg.reviewers[n - 1], status: 'skipped' as const, reason: a.need('note'), findings: 0, dropped: 0, adjudicated: true, fixRounds: 0, settled: true }].sort((x, y) => x.n - y.n);
+  const why = oneLine(textOpt(a, 'note') ?? a.need('note'), 300);
+  state.reviews = [...state.reviews.filter((r) => r.n !== n), { n, role: ctx.cfg.reviewers[n - 1], status: 'skipped' as const, reason: why, findings: 0, dropped: 0, adjudicated: true, fixRounds: 0, settled: true }].sort((x, y) => x.n - y.n);
   state.stuck = undefined;
   ctx.ledger.saveState(state);
-  ctx.ledger.log('review skipped', { n, reason: a.need('note') });
-  io.out(`review ${n} skipped: ${a.need('note')}`);
+  ctx.ledger.log('review skipped', { n, reason: why });
+  io.out(`review ${n} skipped: ${why}`);
   return { review: n, skipped: true };
 }
 
 function retry(a: Args, io: Io): unknown {
   const { ctx, state } = open(a, io);
   idle(state);
-  if (!state.stuck) throw new Refusal('this run is not stuck');
-  ctx.ledger.log('retry', { was: state.stuck.why });
-  state.stuck = undefined;
-  ctx.ledger.saveState(state);
-  io.out('cleared; run advance');
-  return { cleared: true };
+  if (state.stuck) {
+    ctx.ledger.log('retry', { was: state.stuck.why });
+    state.stuck = undefined;
+    ctx.ledger.saveState(state);
+    io.out('cleared; run advance');
+    return { cleared: true };
+  }
+  // Some stuck states are read off the gate's record at every call and are not stored. A gate that could not be judged
+  // (timeouts) is run again; a gate the writer failed twice is not something another look can change.
+  if (gateUnjudged(ctx, state)) {
+    ctx.ledger.log('retry', { was: 'the gate could not be judged' });
+    state.gate = undefined;
+    ctx.ledger.saveState(state);
+    io.out('the gate will run again; run advance');
+    return { cleared: true };
+  }
+  const d = decide(ctx, state);
+  if ('ask' in d && d.ask.status === 'needs' && d.ask.needs === 'stuck') {
+    throw new Refusal('retry cannot help here: the correction rounds are spent. An amended work order (order --amend) gives the writer new rounds under the corrected order; otherwise finish the run as failed');
+  }
+  throw new Refusal('this run is not stuck');
 }
 
-function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: string): string {
+function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: string, cloneUsable = true): string {
   const L: string[] = [];
   const cloneDir = ctx.ledger.paths.clone;
-  const o = state.orderHash ? loadOrder(ctx) : null;
+  let o: WorkOrder | null = null;
+  let orderNote = '(none registered)';
+  try {
+    if (state.orderHash) o = loadOrder(ctx, state);
+  } catch (e) {
+    orderNote = `(unreadable: ${oneLine(e instanceof Error ? e.message : String(e), 200)})`;
+  }
+  // every piece of text below that a vendor, a model or a tool supplied is held to one line: this file is quoted to the owner
   L.push(`# Model relay run ${state.id}`, '');
-  L.push(`Outcome: ${outcome}${note ? `: ${note}` : ''}`, `Work order: ${o?.title ?? '(none registered)'}`, `Base ${state.base}, branch ${state.branch}, head ${state.head}`, '');
+  L.push(`Outcome: ${outcome}${note ? `: ${oneLine(note, 400)}` : ''}`, `Work order: ${o ? oneLine(o.title, 200) : orderNote}`, `Base ${state.base}, branch ${state.branch}, head ${state.head}`, '');
   L.push('## Models and tokens (as the vendors reported them)', '');
   const callsDir = ctx.ledger.file('calls');
   const totals = new Map<string, { calls: number; input: number; output: number; failed: number }>();
@@ -554,7 +730,7 @@ function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: 
     const file = join(callsDir, d, 'meta.json');
     if (!existsSync(file)) continue;
     const m = JSON.parse(readFileSync(file, 'utf8')) as { role: string; requestedModel: string; echoedModel?: string; usage?: { input: number; output: number } | null; error?: unknown };
-    const key = `${m.role}: asked for ${m.requestedModel}, ran ${m.echoedModel ?? '(call failed)'}`;
+    const key = `${m.role}: asked for ${m.requestedModel}, ran ${m.echoedModel ? oneLine(m.echoedModel, 100) : '(call failed)'}`;
     const t = totals.get(key) ?? { calls: 0, input: 0, output: 0, failed: 0 };
     t.calls += 1;
     t.input += m.usage?.input ?? 0;
@@ -583,7 +759,7 @@ function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: 
   if (!state.reviews.length) L.push('No review was taken.');
   for (const r of state.reviews) {
     if (r.status === 'skipped') {
-      L.push(`### Review ${r.n} (${r.role}): skipped, ${r.reason}`, '');
+      L.push(`### Review ${r.n} (${r.role}): skipped, ${oneLine(r.reason ?? '', 300)}`, '');
       continue;
     }
     L.push(`### Review ${r.n} (${r.role}) of ${r.sha?.slice(0, 8)}`, '');
@@ -591,8 +767,8 @@ function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: 
     const vs = new Map(loadVerdicts(ctx, r.n).map((v) => [v.id, v]));
     for (const f of loadFindings(ctx, r.n)) {
       const v = vs.get(f.id);
-      L.push(`- ${f.id} ${f.severity} ${f.file}:${f.startLine} "${f.title}": ${v ? `${v.verdict}${v.severity ? ` (regraded ${v.severity})` : ''}, ${v.action}` : 'NOT ADJUDICATED'}`);
-      if (v?.evidence) L.push(`  evidence: ${v.evidence.split('\n')[0]}`);
+      L.push(`- ${f.id} ${f.severity} ${oneLine(f.file, 120)}:${f.startLine} "${oneLine(f.title, 200)}": ${v ? `${v.verdict}${v.severity ? ` (regraded ${v.severity})` : ''}, ${v.action}` : 'NOT ADJUDICATED'}`);
+      if (v?.evidence) L.push(`  evidence: ${oneLine(v.evidence, 300)}`);
     }
     if (r.dropped && r.findings) L.push(`- ${r.dropped} further finding(s) were dropped by the cap of ${ctx.cfg.limits.maxFindings} or as P3`);
     L.push('');
@@ -601,18 +777,18 @@ function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: 
   if (open2.length) L.push(`For the owner to decide: ${open2.join(', ')}`, '');
   L.push('## Tests the writer wrote', '');
   const locked = Object.keys(state.lockedTests);
-  if (!locked.length || !state.firstGreenSha) L.push('None were frozen (the gate never passed, or the writer wrote no test).');
+  if (!locked.length) L.push(state.firstGreenSha ? 'The gate passed, and the work order has the writer write no test file: nothing was frozen.' : 'None were frozen: the gate never passed.');
   for (const t of locked) {
     const now = existsSync(resolveInside(cloneDir, t)) ? readFileSync(resolveInside(cloneDir, t), 'utf8') : '';
     if (sha256(now) === state.lockedTests[t]) {
-      L.push(`- ${t}: unchanged since the gate first passed`);
+      L.push(`- ${t}: unchanged since the gate first passed with it`);
       continue;
     }
-    const then = git(cloneDir, ['show', `${state.firstGreenSha}:${t}`], { allowFail: true }).stdout;
+    const then = cloneUsable ? git(cloneDir, ['show', `${state.lockedAt?.[t] ?? state.firstGreenSha}:${t}`], { allowFail: true }).stdout : '';
     const pick = (s: string): string[] => s.replace(/\r\n/g, '\n').split('\n').map((l) => l.trim()).filter((l) => l.includes('expect('));
     const a1 = pick(then);
     const b1 = pick(now);
-    L.push(`- ${t}: CHANGED after the gate first passed. Assertions removed:`, ...a1.filter((l) => !b1.includes(l)).map((l) => `    - ${l}`), '  Assertions added:', ...b1.filter((l) => !a1.includes(l)).map((l) => `    + ${l}`));
+    L.push(`- ${t}: CHANGED after the gate first passed with it. Assertions removed:`, ...a1.filter((l) => !b1.includes(l)).map((l) => `    - ${l}`), '  Assertions added:', ...b1.filter((l) => !a1.includes(l)).map((l) => `    + ${l}`));
   }
   L.push('');
   return L.join('\n');
@@ -621,28 +797,52 @@ function summarise(ctx: Ctx, state: RunState, outcome: 'done' | 'failed', note: 
 function finish(a: Args, io: Io): unknown {
   const { ctx, state } = open(a, io);
   idle(state);
-  const failed = a.opt('failed');
+  const failed = a.flag('failed') || a.opt('failed-file') !== undefined ? (textOpt(a, 'failed') ?? '') : undefined;
+  const c = ctx.ledger.paths.clone;
+  // git runs what a clone's config and hooks name; if those changed, no git command is run in the clone, not even to finish
+  const tampered = existsSync(c) && state.gitMark !== undefined && gitFolderMark(c) !== state.gitMark;
+  // what is handed to the owner must be the commit this run made, screened and gated under that name
+  const atHead = !tampered && existsSync(c) && headSha(c) === state.head && git(c, ['rev-parse', '--verify', '-q', `refs/heads/${state.branch}`], { allowFail: true }).stdout.trim() === state.head;
   if (failed === undefined) {
+    sameHead(ctx, state);
+    if (!atHead) throw new Refusal(`the clone's branch ${state.branch} is not at the run's last commit ${state.head}`);
     if (settle(ctx, state)) ctx.ledger.saveState(state);
     const d = decide(ctx, state);
     if (!('ask' in d) || d.ask.status !== 'needs' || d.ask.needs !== 'finish') throw new Refusal('the run is not at its end; run advance, or finish it as failed with --failed <why>');
   }
   const outcome = failed === undefined ? 'done' : 'failed';
-  const summary = summarise(ctx, state, outcome, failed ?? '');
+  const summary = summarise(ctx, state, outcome, failed ?? '', !tampered);
   const file = ctx.ledger.writeText('summary.md', summary);
   let branch: string | null = null;
+  // a clone something else wrote into is evidence: it stays for a person to look at
+  let keep = a.flag('keep') || tampered;
   if (state.head !== state.base) {
-    fetchBranchInto(SHARED, ctx.ledger.paths.clone, state.branch);
-    branch = state.branch;
+    if (atHead) {
+      fetchBranchInto(SHARED, c, state.branch);
+      branch = state.branch;
+    } else {
+      // only a failed run gets here: its clone holds something the relay did not commit, so nothing is handed over and it stays
+      keep = true;
+      io.out(`${tampered ? "The clone's git folder was changed by something other than the relay" : "The clone is not at the run's last commit"}, so no branch was added to the checkout. It is kept for inspection: ${c}`);
+    }
   }
-  state.finished = { at: new Date(io.now()).toISOString(), outcome, note: failed ?? '' };
+  state.finished = { at: new Date(io.now()).toISOString(), outcome, note: oneLine(failed ?? '', 400) };
   ctx.ledger.saveState(state);
   ctx.ledger.log('finish', { outcome, branch });
-  if (!a.flag('keep')) removeRunDir(ctx.ledger.paths.home, ctx.ledger.paths.clone);
+  let cloneLeft: string | null = keep ? c : null;
+  if (!keep) {
+    try {
+      removeRunDir(ctx.ledger.paths.home, c);
+    } catch (e) {
+      // on Windows a folder some shell or editor has open cannot be removed; the run is finished all the same
+      cloneLeft = c;
+      io.out(`The clone could not be removed (${oneLine(e instanceof Error ? e.message : String(e), 200)}); delete it by hand: ${c}`);
+    }
+  }
   io.out(ctx.ledger.readText('summary.md'));
-  io.out(branch ? `The change is on branch ${branch} of this checkout (commit ${state.head}). Nothing was merged or pushed: that is the owner's word.` : 'No commit was made; there is no branch.');
+  io.out(branch ? `The change is on branch ${branch} of this checkout (commit ${state.head}). Nothing was merged or pushed: that is the owner's word.` : 'No branch was added to the checkout.');
   io.out(`Summary: ${file}`);
-  return { outcome, branch, head: state.head, summary: file };
+  return { outcome, branch, head: state.head, summary: file, cloneLeft };
 }
 
 function status(a: Args, io: Io): unknown {
@@ -656,7 +856,7 @@ function status(a: Args, io: Io): unknown {
 
 const HELP = readFileSync(fileURLToPath(import.meta.url), 'utf8')
   .split('\n')
-  .slice(0, 16)
+  .slice(0, 18)
   .map((l) => l.replace(/^\/\/ ?/, ''))
   .join('\n');
 

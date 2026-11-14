@@ -9,7 +9,8 @@
 // the relay's own identity, never the owner's name or email, and never waits for a signing prompt. The owner's checkout is never
 // written to, apart from the one ref that fetchBranchInto creates.
 import { spawnSync } from 'node:child_process';
-import { existsSync, lstatSync, readdirSync, realpathSync, rmSync, rmdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync, rmSync, rmdirSync } from 'node:fs';
 import { isAbsolute, join, relative, resolve } from 'node:path';
 import { canonicalPath, resolveInside } from './paths';
 
@@ -18,6 +19,8 @@ export const RELAY_IDENT: string[] = ['-c', 'user.name=model-relay', '-c', 'user
 
 const MAX_BUFFER = 256 * 1024 * 1024;
 const SHA = /^[0-9a-f]{40}$/;
+/** the vendor keys by name, and anything else that is named like a secret */
+const SECRET_NAME = /^(XAI|DEEPSEEK|OPENAI|ANTHROPIC)_|(_API_KEY|_TOKEN|_SECRET|_PASSWORD|_CREDENTIALS)$/i;
 
 export interface GitResult {
   status: number;
@@ -33,6 +36,9 @@ function gitEnv(): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = {};
   for (const [name, value] of Object.entries(process.env)) {
     if (/^GIT_(DIR|WORK_TREE|INDEX_FILE|OBJECT_DIRECTORY|ALTERNATE_OBJECT_DIRECTORIES|COMMON_DIR|NAMESPACE|PREFIX|AUTHOR_.*|COMMITTER_.*)$/i.test(name)) continue;
+    // git has no use for a vendor key, and git can be made to run a program (a hook, a configured helper) by whoever can write
+    // the clone's .git folder, which the code the gate runs can: no secret goes into its environment
+    if (SECRET_NAME.test(name)) continue;
     env[name] = value;
   }
   env.GIT_TERMINAL_PROMPT = '0';
@@ -153,12 +159,40 @@ export function commitPaths(clone: string, paths: string[], message: string): { 
   const now = changed(clone);
   const strangers = now.filter((p) => !allowed.has(p.toLowerCase()));
   if (strangers.length > 0) throw new Error(`unexpected changes in the clone: ${strangers.join(', ')}`);
-  if (now.length === 0) return { sha: headSha(clone), committed: false };
+  if (now.length === 0) {
+    assertTracked(clone, paths);
+    return { sha: headSha(clone), committed: false };
+  }
   git(clone, ['--literal-pathspecs', 'add', '--', ...now]);
   // a change that is only line endings can leave nothing staged
-  if (git(clone, ['diff', '--cached', '--quiet'], { allowFail: true }).status === 0) return { sha: headSha(clone), committed: false };
+  if (git(clone, ['diff', '--cached', '--quiet'], { allowFail: true }).status === 0) {
+    assertTracked(clone, paths);
+    return { sha: headSha(clone), committed: false };
+  }
   git(clone, [...RELAY_IDENT, 'commit', '--no-verify', '-m', message]);
+  assertTracked(clone, paths);
   return { sha: headSha(clone), committed: true };
+}
+
+/** A listed path that is on disk but not in the index was skipped by git (an ignore rule, usually): it would never reach the branch. */
+function assertTracked(clone: string, paths: string[]): void {
+  const missing = paths.filter((p) => {
+    if (!existsSync(join(clone, p))) return false;
+    return git(clone, ['--literal-pathspecs', 'ls-files', '--error-unmatch', '--', p], { allowFail: true }).status !== 0;
+  });
+  if (missing.length > 0) throw new Error(`not committed (ignored by git?): ${missing.join(', ')}`);
+}
+
+/** Paths git ignores in the clone, as `git status --ignored` lists them: forward slashes, a whole ignored directory with its trailing slash. */
+export function ignoredFiles(cloneDir: string): string[] {
+  const parts = git(cloneDir, ['status', '--porcelain=v1', '-z', '--ignored']).stdout.split('\0');
+  return parts.filter((e) => e.startsWith('!! ')).map((e) => e.slice(3).replace(/\\/g, '/'));
+}
+
+/** Whether the ignore rules match the path, whether or not the file exists or is tracked. */
+export function isIgnored(cloneDir: string, path: string): boolean {
+  noDash('path', path);
+  return git(cloneDir, ['check-ignore', '-q', '--no-index', '--', path], { allowFail: true }).status === 0;
 }
 
 /**
@@ -199,6 +233,18 @@ export function restore(clone: string, tracked: string[], created: string[]): vo
       }
     }
   }
+}
+
+/**
+ * A fingerprint of the two places in a clone's .git folder from which git runs programs: its config (hooks path, file-system
+ * monitor, external diff and the like) and its hooks. The relay takes it when the clone is made; a later difference means
+ * something wrote there, and no git command should be run in that clone until a person has looked.
+ */
+export function gitFolderMark(clone: string): string {
+  const dir = join(clone, '.git');
+  const config = existsSync(join(dir, 'config')) ? readFileSync(join(dir, 'config'), 'utf8') : '';
+  const hooks = existsSync(join(dir, 'hooks')) ? readdirSync(join(dir, 'hooks')).filter((n) => !n.endsWith('.sample')).sort() : [];
+  return createHash('sha256').update(`${config}\n--hooks--\n${hooks.join('\n')}`, 'utf8').digest('hex');
 }
 
 export function headSha(clone: string): string {

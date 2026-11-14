@@ -41,6 +41,13 @@ function pathRule(from: string, to: string): PathRule | null {
     spellings.add(backslashes);
     spellings.add(backslashes.replace(/\\/g, '\\\\'));
   }
+  // a stack frame inside an ES module is a file URL, where a space is %20 and a non-ASCII letter is percent-encoded
+  try {
+    const encoded = encodeURI(slashes);
+    if (encoded !== slashes) spellings.add(encoded);
+  } catch {
+    // a lone surrogate cannot be encoded; the other spellings still apply
+  }
   return { spellings: [...spellings].sort((a, b) => b.length - a.length), to, caseless: windows, weight: base.length };
 }
 
