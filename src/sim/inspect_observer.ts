@@ -86,7 +86,7 @@ const CRIT_WORD: Record<NeedKey, string> = { hunger: 'starving', thirst: 'parche
 const HELP_KINDS = new Set<Activity['kind']>(['care', 'give', 'fulfill', 'visit', 'return_tool']);
 const REST_KINDS = new Set<Activity['kind']>(['sleep', 'rest', 'warm']);
 const TALK_KINDS = new Set<Activity['kind']>(['converse', 'socialize', 'argue', 'attend_meal', 'host_meal', 'attend']);
-const FOOD: ReadonlySet<string> = new Set(['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat']);
+const FOOD: ReadonlySet<string> = new Set(['berries', 'fruit', 'corn', 'tomatoes', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat']);
 
 /** One line answering "is anything the matter?", from the most pressing fact down to "no immediate problem". */
 export function statusLine(world: World, p: Person): StatusView {

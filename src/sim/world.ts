@@ -392,7 +392,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for(const s of world.sites)if(s.improvement)push('Fitting'+s.id+':'+s.improvement+':'+s.upgradeOf);
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.hearth)push('HearthMemory'+p.id+':'+b.id+JSON.stringify(b.hearth));
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);
-  for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
+  for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}${pl.crop ? ',' + pl.crop : ''}`);
   for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.gear)push(`Gear:${pile.id}:${JSON.stringify(pile.gear)}`);if(pile.carcass)push(`Carcass:${pile.id}:${pile.since}:${JSON.stringify(pile.carcass)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}
   for(const p of world.persons)for(const b of Object.values(p.beliefs)){if(b.kind==='prey')push(`PreyMemory:${p.id}:${JSON.stringify(b)}`);if(b.gear)push(`GearMemory:${p.id}:${b.id}:${JSON.stringify(b.gear)}`);if(b.gearStock)push(`GearStock:${p.id}:${b.id}:${JSON.stringify(b.gearStock)}`);}
   for(const a of world.animals)if(a.sheep)push(`Sheep:${a.id}:${JSON.stringify(a.sheep)}`);

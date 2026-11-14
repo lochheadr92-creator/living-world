@@ -6,6 +6,7 @@ import {hasNourishment,nourishmentCapacity,nourishmentOf} from './nourishment';
 import {hasRecoverableParts} from './carcass';
 import {worldAge} from './time_text';
 import {runsRulesVersion} from './rulesversion';
+import { cropOf, hasCrops } from './crops';
 import { biological, conditionAt, ecologyNotes, fieldResting, hasEcology } from './ecology';
 import { describeWater } from './inspect_water';
 import { describeFlood } from './inspect_flood';
@@ -19,7 +20,7 @@ import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory, decisionHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
-import { BUILD_DEF, DAY, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, DAY, DEPOSIT_TYPES, ITEM_LABEL, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
@@ -903,7 +904,8 @@ export function describeEntity(world: World, id: number): EntityView | null {
         if (fieldResting(world,pl)) rows[0]=['State','Resting before another crop'];
         if (pl.fallowUntil !== undefined) rows.push(['Prepared rest', pl.fallowUntil > world.tick ? `About ${((pl.fallowUntil-world.tick)/DAY).toFixed(1)} days remaining; recovery is not guaranteed by then` : 'The prepared rest has elapsed; the current ground condition still affects growth']);
       }
-      if (pl.state === 'ripe') rows.push(['Ready to harvest', `${pl.stock} grain, ${pl.seedStock} seed`]);
+      if (pl.state === 'ripe') rows.push(['Ready to harvest', `${pl.stock} ${ITEM_LABEL[cropOf(pl)]}, ${pl.seedStock} seed`]);
+      if (hasCrops(world) && (pl.state === 'growing' || pl.state === 'ripe')) rows.push(['Crop', ITEM_LABEL[cropOf(pl)]]);
       return { kind: 'plot', ...base, title: 'Field plot', subtitle: 'Farmland', rows, bars, notes: ecologyNotes(world,pl.x,pl.y), position: { x: pl.x + 0.5, y: pl.y + 0.5 } };
     }
     case 'pile':

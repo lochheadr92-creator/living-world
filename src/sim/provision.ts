@@ -182,7 +182,7 @@ export const foodPreparationOn = (): boolean => preparation;
 export const preparesFood = (world: World): boolean => preparation && isRich(world) && runsRulesVersion(world, PREPARATION_FROM_VERSION);
 
 /** Everything people eat. What a store HOLDS is counted with this: meat and bread in a home store are food like any other. */
-const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'corn', 'tomatoes', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 /** Is this something people eat? Used by the deposit that credits a reserve, and by every count of what a store holds. */
 export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[]).includes(k);
 
@@ -192,7 +192,7 @@ export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[
  * five units of meat would settle on a step the engine never offers, so the step threshold reads this list and the question
  * "has this household anything to hand" reads the full one.
  */
-const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'corn', 'tomatoes', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
 /** units of food in a remembered container, from the person's own belief and nothing else */
 export function foodInBelief(b: Belief): number {

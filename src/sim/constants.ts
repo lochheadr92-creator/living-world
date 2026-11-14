@@ -20,11 +20,12 @@ export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat', 'wool'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
-export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS, 'cutting', 'beer'];
+export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS, 'cutting', 'beer', 'tomatoes', 'corn'];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26, rendered_fat:24 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26, rendered_fat:24, tomatoes: 14, corn: 20 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  tomatoes:1, corn:1,
   rod:1,
   toy:.25,
   beer: 1.5,
@@ -65,13 +66,14 @@ export const WEIGHT: Record<ItemKind, number> = {
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { beer: .2, cutting: .4, berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, hide:.3, fat:1.4, rendered_fat:.25, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { beer: .2, cutting: .4, berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, hide:.3, fat:1.4, rendered_fat:.25, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25, tomatoes: 0.9, corn: 0.3 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  tomatoes:'tomatoes', corn:'corn',
   rod:'fishing rod',
   toy:'toy',
   beer:'beer',

@@ -2,6 +2,7 @@ import { conditionAt } from './ecology';
 import { nearestHub } from './settlements';
 import { growthRate } from './hardship';
 import { cropPlenty } from './plenty';
+import { cropOf, cropYield } from './crops';
 import { CARE_DECAY, GROW_TICKS, RIPE_ROT_TICKS } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addEvent, addFx } from './events';
@@ -55,9 +56,10 @@ export function updatePlots(world: World): void {
         pl.ripeTick = world.tick;
         const grain = Math.max(1, Math.floor((3 + Math.round(pl.careAcc * 4)) * (0.5 + 0.5 * conditionAt(world, pl.x, pl.y)))) * cropPlenty(world); // rules 226 (plenty.ts): a plot carries more grain
         const seeds = 1 + (pl.careAcc > 0.6 ? 1 : 0);
-        pl.stock = grain;
+        const crop = cropOf(pl);
+        pl.stock = cropYield(crop, grain);
         pl.seedStock = seeds;
-        ledgerCreate(world, 'grain', grain, 'crop growth');
+        ledgerCreate(world, crop, pl.stock, 'crop growth');
         ledgerCreate(world, 'seeds', seeds, 'crop growth');
         addFx(world, 'ripe', pl.x + 0.5, pl.y + 0.5, 0);
         const hh = world.households.find((h) => h.id === pl.hhId);
@@ -68,7 +70,7 @@ export function updatePlots(world: World): void {
       }
     } else if (pl.state === 'ripe') {
       if (world.tick - pl.ripeTick > RIPE_ROT_TICKS) {
-        ledgerSpoil(world, 'grain', pl.stock, 'crop left to rot');
+        ledgerSpoil(world, cropOf(pl), pl.stock, 'crop left to rot');
         ledgerSpoil(world, 'seeds', pl.seedStock, 'crop left to rot');
         pl.stock = 0;
         pl.seedStock = 0;

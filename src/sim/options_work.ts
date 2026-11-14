@@ -247,7 +247,7 @@ function optDepositFood(ctx: Ctx): void {
   // rules 208: not for a child, whose pack of five the rule was never sized for
   const ration = rationApplies(world, ctx.stage === 'child') && !!homeStoreBelief(p);
   const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
-  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'corn', 'tomatoes', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
   const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
   // rules 243 (grain_kept.ts): with a granary known, grain is for the bins (production.ts optGranaryStore), not for here
   const grainOut = grainGoesToBins(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'granary');
@@ -288,7 +288,7 @@ function optDepositFood(ctx: Ctx): void {
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) {
+    for (const k of ['grain', 'fish', 'fruit', 'corn', 'tomatoes', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) {
       const have = grainOut && k === 'grain' ? 0 : unreserved[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
@@ -1408,7 +1408,7 @@ function optSalvage(ctx: Ctx): void {
         value += 10;
       }
     }
-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const) {
+    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'corn', 'tomatoes', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const) {
       const n = unitsOf(items[k]);
       if (n <= 0) continue;
       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
@@ -1680,7 +1680,7 @@ function optCare(ctx: Ctx): void {
     if (hungry && !hadFood && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
       // give what fits best
       // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
-      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] : ['berries', 'fruit', 'grain', 'fish'];
+      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'corn', 'tomatoes', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] : ['berries', 'fruit', 'grain', 'fish'];
       const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, kn.hunger < 25 ? 3 : 2);

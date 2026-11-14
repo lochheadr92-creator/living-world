@@ -9,6 +9,7 @@ import { WOODEN_SPEAR_PARTS, setWoodenSpear, woodenSpearPartOn } from '../../src
 import { WOLF_SKIN_PARTS, setWolfSkin, skinsHung, wolfSkinPartOn } from '../../src/sim/wolf_skin';
 import { BREAD_FEEDS_PARTS, breadFeedsPartOn, setBreadFeeds } from '../../src/sim/bread_feeds';
 import { GRAIN_KEPT_PARTS, grainKeptPartOn, setGrainKept } from '../../src/sim/grain_kept';
+import { cropsOn, setCrops } from '../../src/sim/crops';
 import { FARM_SCALE_PARTS, farmScalePartOn, setFarmScale } from '../../src/sim/farm_scale';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
@@ -287,6 +288,8 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 245 (crops.ts): every plot grows grain
+  if (kind === 'rich-no-crops') return { spec: label, summary: 'every plot grows grain, as before rules 245; no effect below rules 245', install() { const was = cropsOn(); setCrops(false); return () => setCrops(was); } };
   // rules 244 (farm_scale.ts): both parts removed (equal to rules 243), and each part alone
   if (kind === 'rich-no-farm-scale') return { spec: label, summary: 'a household wants one plot and another for every two of its people, and a granary holds 120, as before rules 244; no effect below rules 244', install() { const was = FARM_SCALE_PARTS.map((k) => farmScalePartOn(k)); setFarmScale(false); return () => FARM_SCALE_PARTS.forEach((k, i) => setFarmScale(was[i], k)); } };
   for (const part of FARM_SCALE_PARTS) if (kind === 'rich-no-farm-scale-' + part) return { spec: label, summary: `${part === 'fields' ? 'a household wants one plot and another for every two of its people' : 'a granary holds 120'}; no effect below rules 244`, install() { const was = farmScalePartOn(part); setFarmScale(false, part); return () => setFarmScale(was, part); } };

@@ -20,6 +20,8 @@ export const NEED_COLORS: Record<string, string> = {
 export const ITEM_COLORS: Record<string, string> = {
   berries: '#a8294f',
   fruit: '#e0723a',
+  tomatoes: '#d8432f',
+  corn: '#e8c040',
   fish: '#7fb4c9',
   grain: '#d9b44a',
   seeds: '#9c7a45',

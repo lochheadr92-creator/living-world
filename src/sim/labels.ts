@@ -115,6 +115,8 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   meat: 'meat',
   berries: 'berries',
   fruit: 'fruit',
+  tomatoes: 'tomatoes',
+  corn: 'corn',
   fish: 'fish',
   grain: 'grain',
   bread: 'bread',

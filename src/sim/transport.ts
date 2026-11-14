@@ -49,7 +49,7 @@ export const HAUL_WINDOW = DAY * 6;
 export const HAUL_EXPERIENCE = 30;
 export const HAUL_TRIPS = 6;
 /** food the home store takes from a cart, the kinds a reserve is made of */
-const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'berries', ...PRESERVED_FOODS];
+const STORABLE: readonly ItemKind[] = ['grain', 'fish', 'fruit', 'corn', 'tomatoes', 'berries', ...PRESERVED_FOODS];
 
 let enabled = true;
 export const transportOn = (): boolean => enabled;

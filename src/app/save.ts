@@ -425,6 +425,7 @@ export function deserializeWorld(json: string): World {
     gridInsert(w.grid, s, s.x + s.w / 2, s.y + s.h / 2);
   }
   for (const p of w.plots) {
+    if (p.crop !== undefined && p.crop !== 'tomatoes' && p.crop !== 'corn') throw new Error('invalid save: a plot grows an unknown crop');
     w.byId.set(p.id, p);
     gridInsert(w.grid, p, p.x + 0.5, p.y + 0.5);
   }

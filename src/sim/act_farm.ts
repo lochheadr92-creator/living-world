@@ -2,7 +2,8 @@ import { conditionAt, cultivationPressure, fieldResting, hasEcology, tendConditi
 import { notePractice } from './apprentice';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { DAY, WORK } from './constants';
+import { DAY, ITEM_LABEL, WORK } from './constants';
+import { chooseCrop, hasCrops } from './crops';
 import { claimPlot, consume, harvestPlot } from './economy';
 import { noteHarvest } from './occasions';
 import { addEvent, addFx, addLog } from './events';
@@ -10,7 +11,7 @@ import { createPlot,hasReachableTilling,plotFailureKey } from './farming';
 import { observe,noteFailure } from './knowledge';
 import { taskMultiplier, wearFor } from './tools';
 import { isFreeLand } from './registry';
-import type { Activity, Person, Plot, World } from './types';
+import type { Activity, ItemKind, Person, Plot, World } from './types';
 import { T } from './types';
 
 function plotOf(world: World, a: { targetId: number }): Plot | null {
@@ -122,6 +123,7 @@ registerHandler('plant', {
     if (consume(world, p.inv, 'seeds', 1, 'sown') < 1) return 'fail:no seeds left';
     cultivationPressure(world, plot);
     delete plot.fallowUntil;
+    if (hasCrops(world)) { const c = chooseCrop(world, plot); if (c === 'grain') delete plot.crop; else plot.crop = c; } else if (plot.crop) delete plot.crop;
     plot.state = 'growing';
     plot.progress = 0;
     plot.care = 0.6;
@@ -223,13 +225,14 @@ registerHandler('harvest', {
       plot.careAcc = 0.5;
     }
     a.data.grain = got.grain;
+    a.data.item = got.item;
     a.data.seeds = got.seeds;
     observe(world, p, plot);
     return got.grain + got.seeds > 0 ? 'done' : 'fail:cannot carry any more';
   },
   onEnd(world, p, a, outcome) {
     if (outcome === 'success') {
-      addLog(world, p, 'work', `Harvested ${a.data.grain} grain and ${a.data.seeds} seed${a.data.seeds === 1 ? '' : 's'}.`);
+      addLog(world, p, 'work', `Harvested ${a.data.grain} ${ITEM_LABEL[(a.data.item as ItemKind | undefined) ?? 'grain']} and ${a.data.seeds} seed${a.data.seeds === 1 ? '' : 's'}.`);
       noteHarvest(world, a.data.grain as number);
       if (!world.stats.firstHarvest) {
         world.stats.firstHarvest = 1;

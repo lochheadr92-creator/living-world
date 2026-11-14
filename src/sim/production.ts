@@ -1361,7 +1361,7 @@ export function productionOptions(ctx: Ctx): void {
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
     for(const b of known.slice(0,2)){
       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
-      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const){
+      for(const k of ['bread','meat','fish','fruit', 'corn', 'tomatoes','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const){
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }

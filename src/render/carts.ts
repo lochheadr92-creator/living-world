@@ -394,6 +394,8 @@ export class CartRenderer {
       case 'seeds':
       case 'berries':
       case 'fruit':
+      case 'tomatoes':
+      case 'corn':
       case 'fish':
       case 'water': {
         const body: Record<string, [string, string]> = {
@@ -402,6 +404,8 @@ export class CartRenderer {
           seeds: ['#c9b27a', '#8f7a48'],
           berries: ['#b2486a', '#7a2a44'],
           fruit: ['#e0823a', '#a85a20'],
+          tomatoes: ['#d8432f', '#8f2a1c'],
+          corn: ['#e8c040', '#a8861e'],
           fish: ['#9ac1d4', '#6a93a8'],
           water: ['#6b8fb3', '#456a8c'],
         };

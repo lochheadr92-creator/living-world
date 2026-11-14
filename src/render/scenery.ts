@@ -326,20 +326,34 @@ export class Scenery {
             ctx.fillRect(px - 0.8, py - 2, 1.6, 2);
             continue;
           }
-          ctx.strokeStyle = wilt ? '#a8a05a' : pl.state === 'ripe' ? '#c4b050' : '#6fb04c';
-          ctx.lineWidth = 1.5;
+          const crop = pl.crop; // rules 245: absent is grain, drawn as ever
+          ctx.strokeStyle = wilt ? '#a8a05a' : crop === 'tomatoes' ? '#4f9a3c' : crop === 'corn' ? (pl.state === 'ripe' ? '#b8b04a' : '#5fae44') : pl.state === 'ripe' ? '#c4b050' : '#6fb04c';
+          ctx.lineWidth = crop === 'corn' ? 2 : 1.5;
           ctx.beginPath();
           ctx.moveTo(px, py);
-          ctx.quadraticCurveTo(px + sway * 0.4, py - h * 0.5, px + sway, py - h);
+          const hh2 = crop === 'corn' ? h * 1.25 : crop === 'tomatoes' ? h * 0.7 : h;
+          ctx.quadraticCurveTo(px + sway * 0.4, py - hh2 * 0.5, px + sway, py - hh2);
           ctx.stroke();
-          if (pl.state === 'ripe') {
+          if (crop === 'tomatoes' && g > 0.3) {
+            ctx.fillStyle = pl.state === 'ripe' ? '#d8432f' : '#8ac45a';
+            ctx.beginPath();
+            ctx.arc(px + sway * 0.7 - 1.6, py - hh2 * 0.6, 1.7, 0, Math.PI * 2);
+            ctx.arc(px + sway * 0.7 + 1.8, py - hh2 * 0.35, 1.7, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (crop === 'corn' && g > 0.4) {
+            ctx.fillStyle = pl.state === 'ripe' ? '#e8c040' : '#a8cc62';
+            ctx.beginPath();
+            ctx.ellipse(px + sway * 0.8 + 1.8, py - hh2 * 0.6, 1.4, 3.2, 0.2, 0, Math.PI * 2);
+            ctx.fill();
+            if (pl.state === 'ripe') { ctx.fillStyle = '#e8c040'; ctx.fillRect(px + sway - 1, py - hh2 - 3, 2, 3); }
+          } else if (pl.state === 'ripe' && !crop) {
             ctx.fillStyle = '#e9c752';
             ctx.beginPath();
             ctx.ellipse(px + sway, py - h - 2.4, 1.7, 3.8, sway * 0.04, 0, Math.PI * 2);
             ctx.fill();
             ctx.fillStyle = 'rgba(255,250,190,0.7)';
             ctx.fillRect(px + sway - 0.8, py - h - 5, 0.9, 2.4);
-          } else if (g > 0.3) {
+          } else if (g > 0.3 && !crop) {
             ctx.fillStyle = wilt ? '#b5ad62' : '#8ad162';
             ctx.beginPath();
             ctx.ellipse(px + sway * 0.8 - 2.4, py - h * 0.55, 2.7, 1.2, -0.6, 0, Math.PI * 2);
@@ -443,7 +457,7 @@ export class Scenery {
       } else if (k === 'handles') {
         blit(ctx, handleBundle(this.cache, n), px, py, 0.8);
       } else {
-        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
+        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'tomatoes' ? '#d8432f' : k === 'corn' ? '#e8c040' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
       }
     }
   }

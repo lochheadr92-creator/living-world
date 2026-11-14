@@ -217,7 +217,7 @@ export function relocationOptions(ctx: Ctx): void {
   const store=beliefsByKind(p,['building']).find(b=>b.hh===p.hhId&&b.id===r.oldHomeId);
   const wanted:Items={};const going=ext?travellers(w,r).length:r.members.length;
   if(store){
-   for(const k of ['berries','fruit','fish','grain','water','wood','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const){
+   for(const k of ['berries','fruit','corn','tomatoes','fish','grain','water','wood','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const){
     const target=k==='wood'?BUILD_DEF.lean_to.cost.wood??3:k==='water'?2*going:Math.max(0,2*going-foodCount(p.inv));
     const n=Math.min(store.items?.[k]??0,Math.max(0,target-(k==='water'||k==='wood'?(p.inv[k]??0):0)));
     if(n>0&&roomFor(p.inv,carryCap(w,p),k)>0)wanted[k]=n;

@@ -1,13 +1,14 @@
 import { harvestPressure } from './ecology';
 import { sparesGrain } from './grain_kept';
 import { nutritionOf } from './bread_feeds';
+import { cropOf } from './crops';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
 import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
 
-const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'corn', 'tomatoes', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
 /** `world` is given wherever one is to hand: what a food is worth may depend on its rules (bread_feeds.ts nutritionOf). */
@@ -191,18 +192,19 @@ export function gatherFromSource(world: World, src: Source, p: Person, n: number
 }
 
 /** Move grain/seeds out of a ripe plot into a person's pack. */
-export function harvestPlot(world: World, plot: Plot, p: Person): { grain: number; seeds: number } {
-  const g = Math.min(plot.stock, invRoom(world, p, 'grain'));
+export function harvestPlot(world: World, plot: Plot, p: Person): { grain: number; seeds: number; item: ItemKind } {
+  const item: ItemKind = cropOf(plot);
+  const g = Math.min(plot.stock, invRoom(world, p, item));
   plot.stock -= g;
-  if (g > 0) addItem(p.inv, 'grain', g);
+  if (g > 0) addItem(p.inv, item, g);
   const s = Math.min(plot.seedStock, invRoom(world, p, 'seeds'));
   plot.seedStock -= s;
   if (s > 0) addItem(p.inv, 'seeds', s);
-  if (g > 0) world.hooks?.onTransfer?.({ from: 'plot:' + plot.id, to: 'person:' + p.id, item: 'grain', n: g, reason: 'harvest' });
+  if (g > 0) world.hooks?.onTransfer?.({ from: 'plot:' + plot.id, to: 'person:' + p.id, item, n: g, reason: 'harvest' });
   if (s > 0) world.hooks?.onTransfer?.({ from: 'plot:' + plot.id, to: 'person:' + p.id, item: 'seeds', n: s, reason: 'harvest' });
-  recordPersonalProduction(world,p,'harvest','grain',g,plot.id);
+  recordPersonalProduction(world,p,'harvest',item,g,plot.id);
   recordPersonalProduction(world,p,'harvest','seeds',s,plot.id);
-  return { grain: g, seeds: s };
+  return { grain: g, seeds: s, item };
 }
 
 export function buildingStore(b: Building): Store {
@@ -233,7 +235,7 @@ export function totalItems(world: World): Items {
   for (const b of world.waterBodies ?? []) if (b.amount > 0) addItem(t, 'water', b.amount);
   for (const g of Object.values(world.groundwater ?? {})) if (g.amount > 0) addItem(t, 'water', g.amount); // rules 236 (groundwater.ts)
   for (const pl of world.plots) {
-    if (pl.stock > 0) addItem(t, 'grain', pl.stock);
+    if (pl.stock > 0) addItem(t, cropOf(pl), pl.stock);
     if (pl.seedStock > 0) addItem(t, 'seeds', pl.seedStock);
   }
   return t;

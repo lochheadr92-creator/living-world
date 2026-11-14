@@ -7,7 +7,7 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat' | 'tomatoes' | 'corn';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap' | 'rod' | 'toy';
 /** Raw materials and the things made from them. */
@@ -1020,6 +1020,8 @@ export interface Site {
 
 export type PlotState = 'tilling' | 'tilled' | 'growing' | 'ripe';
 export interface Plot {
+  /** rules 245 (crops.ts): what grows here; absent means grain */
+  crop?: 'tomatoes' | 'corn';
   /** Physical preparation for a bounded rest period; soil condition stays on the tile. */
   fallowUntil?: number;
   ent: 'plot';
