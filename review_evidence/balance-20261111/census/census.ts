@@ -50,7 +50,7 @@ const persons = {
 };
 const res = {
   seed, days: Number(days), rules: w.settings.rulesVersion, persons, deaths: w.deceased.length, births: w.birthCount ?? 0,
-  households: w.households.length, buildings, sites: w.sites.length, plots: w.plots.length, tools: w.tools.length, carts: w.carts.length, animals: w.animals.filter((a: any) => a.kind === 'sheep').length,
+  households: w.households.length, buildings, sites: w.sites.length, plots: w.plots.length, tools: w.tools.length, carts: w.carts.length, animals: w.animals.filter((a: any) => a.type === 'sheep').length,
   occasions, traditions: (w.traditions ?? []).length, crews: (w.crews ?? []).length, civicProjects: (w.civicProjects ?? []).map((q: any) => q.status), exchangeReceipts: (w.exchangeReceipts ?? []).length,
   meals: w.meals.length, chronicle: chron, events, convByPurpose, actStart, actEnd, actEndOk, samples, offered, chosen, blocked, offeredByStage, eventTexts,
 };

@@ -1,0 +1,20 @@
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+const WT='C:/dev/_claude_scratch/audit-20261114/wt';
+const all=readdirSync(WT+'/src/sim').filter(f=>f.endsWith('.ts'));
+const loc=Object.fromEntries(all.map(f=>[f,readFileSync(`${WT}/src/sim/${f}`,'utf8').split('\n').length]));
+const l1=readFileSync('out/lane1_files.txt','utf8').trim().split(/\s+/);
+const l2=['decision.ts','intent.ts','optutil.ts','options_work.ts','options_survival.ts','options_places.ts','relief.ts','welfare.ts','external.ts'];
+const l3names=['production','facilities','economy','trade','recipes','meals','provision','tools','buildings','settlement_economy'].map(n=>n+'.ts');
+const l3=all.filter(f=>l3names.includes(f)||/^act_.*\.ts$/.test(f));
+const l4names=['lifecycle','households','needs','mood','illness','hardship','shelter','wildlife','environment','worldgen','world','knowledge','perception','learning','transmission'].map(n=>n+'.ts');
+const l4=all.filter(f=>l4names.includes(f));
+const taken=new Set([...l1,...l2,...l3,...l4]);
+const l5=all.filter(f=>!taken.has(f)&&f!=='types.ts');
+const sum=a=>a.reduce((s,f)=>s+loc[f],0);
+console.log({l1:[l1.length,sum(l1)],l2:[l2.length,sum(l2)],l3:[l3.length,sum(l3)],l4:[l4.length,sum(l4)],l5:[l5.length,sum(l5)],types:loc['types.ts']});
+console.log('missing l1',l1.filter(f=>!all.includes(f)), 'missing l4',l4names.filter(f=>!all.includes(f)));
+// chunk helper by loc
+const chunk=(files,target)=>{const out=[];let cur=[],n=0;for(const f of files){if(n+loc[f]>target&&cur.length){out.push(cur);cur=[];n=0}cur.push(f);n+=loc[f]}if(cur.length)out.push(cur);return out};
+const res={loc,l1,l2,l3,l4,l5,c2:chunk(l2,2500),c3:chunk(l3,2500),c4:chunk(l4,2500),c5:chunk(l5,2300)};
+console.log('chunks',res.c2.length,res.c3.length,res.c4.length,res.c5.length);
+writeFileSync('out/lanes.json',JSON.stringify(res,null,1));

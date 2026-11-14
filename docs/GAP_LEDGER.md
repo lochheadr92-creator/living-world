@@ -661,3 +661,27 @@ Third in the trace's evidence order (`docs/END_TO_END_TRACE.md`, links 17 and 32
 ## Adversarial recheck — 13 November 2026
 
 See docs/ADVERSARIAL_REVIEW_20261113.md (HEAD 652c3b77, targeted review, five staged reproductions). G226 and G227 still reproduce (AR-04 and AR-03); new review records cover work progress lost even on a refused family-time ask (AR-01), an accepted save with a reused allocator ID (AR-02), and a shrinking counter labelled households ever (AR-05). Findings remain open; no behavior or rules version changed. Evidence: review_evidence/adversarial-20261113/.
+
+
+## Audit of 14 November 2026 (rules 245, commit 4a7a11bb)
+
+A read only audit of all seven lanes at `4a7a11bb`; report `review_evidence/audit-20261114/AUDIT.md` (lane 1: `PILOT.md`), every finding with its refuting reader's evidence in `AUDIT_all_findings.tsv`, baseline numbers in the brain note `knowledge/living-world/2026-11-14-full-audit-baseline`. Method and limits: source read at this commit, one 25 day aspen smoke at 245, saved reports at rules 196 and 202 to 228; no lab, suite or save replay was run. This section does not change a status. The table above is still the rules-176 reconciliation (with updates to 188 and 192); the rows below were read again at 245 only for the point named.
+
+- **AR-01 to AR-05:** the adversarial recheck above lists them as open. `CLAUDE.md` (the rules 233 and 234 lines) and `src/sim/rulesversion.ts:274-275` record rules 233 (`picked_up.ts`) as answering AR-01 and rules 234 (`id_ranges.ts`) as answering AR-02 to AR-04 with G226 and G227; AR-05 was answered by a relabel. Read in docs and source, not run again.
+- **G68, G69, G74 (updates):** the rows cite the broken promise tail (`social.ts:753-787`) as live behaviour. In a rich world from rules 81 it cannot run: `social.ts:747-752` hands an unkept promise to `deadlineOutcome` and continues. The only producers of commitment status `broken`, the rumour kind `unreliable`, the grievance cause `broken_promise` and the trust loss of 12 sit in that tail, so an unkept promise has no social consequence.
+- **G223 (confirms):** `Person.errand` is never set to a value (`people.ts:210`, `act_resource.ts:732`, `:794`, `social.ts:1524` all clear it); a fifth guard that is always false is `pack_materials.ts:21`.
+- **G149 (confirms):** `ProjectNode.alternatives` is computed (`project_compile.ts:72`) and read only by the shape check at `project_graph.ts:63`; reconsideration recompiles (`batch_plan.ts:275-287`).
+- **G156 (updates):** the workshop layouts do happen; the shared proposal option `plan_shared` is never attached to them: `addSharedProjectOption` (`shared_projects.ts:10`) has one caller, `options_work.ts:910` inside `tryPlan`, whose types are none of `SHARED_TYPES`.
+- **G160, G156 (updates):** the shared first yard and the swap's saved walk were retired at rules 203 (`home_first.ts:40-41`); arms `rich-no-shared-yard`, `rich-no-swap-worth` and the swap half of `rich-no-swap-and-fire` change nothing at 245.
+- **G222 (confirms, extends):** `lastAteTick` is read only by tests and scripts; also written and never read: `diedTick`, `lastPercept.seen` and `.newBeliefs`, `world.stats.arrivals`.
+- **G233 (updates):** a pick may declare limits, but the sleep limit `untilEnergy` has a reader (`act_misc.ts:28`) and no writer: no sleep option declares it as a bound.
+- **G29, G30, G154 (updates):** closed on twin runs at rules 176 to 181 that were identical because no ordinary world reached the branch. At 245 the precondition of G29 holds in the smoke (the granary is built and eaten from), so its null is unknown at 245.
+- **G136 (confirms):** no handcart is built in any saved ordinary run; every sampled build is blocked on a missing hammer. A staged probe with a hammer and saw builds one.
+- **G152, G161, G168 (confirm):** relocation proposes and stops; exchange journeys need a second township and all twelve saved worlds have one; political alignment needs three civic projects in a township.
+- **G155 (updates):** the brewery and the mill stand in the 245 smoke; "Brewing beer" is never offered and brewing demand arose in 42 of 42,476 samples.
+- **G182 (updates):** shared supper family transmission is zero in every arm at 245.
+- **G179, G180 (updates):** no option is generated from `shelter.ts`, `hardship.ts`, `illness.ts`, `needs.ts`, `lifecycle.ts`, `wildlife.ts` or `external.ts`; illness reaches options through two score terms and four more places (hunting `hunting.ts:35`, defence `defence.ts:148`, `options_social.ts:92` and `:253`).
+- **G207, G210, G211, G217 (update):** the chronicle filter (`events.ts:21-23`) matches "make peace" (`mediation.ts:70`) but not the apology's "made peace" (`social.ts:1632`), so peace made by apology is never chronicled; nature events carry no ids and cannot be retold; the keyword "'s trade" matches no emitted text.
+- **G02, G36, G113, G153 (confirm):** the memory log, the decision ledger, `weather.wind` and `economicObservations` feed no decision.
+- **G204 (updates):** no lab arm varies a numeric constant in `constants.ts` or in lanes 2 to 5; the only generic override is `rates:` for hunger and thirst.
+- **Census correction:** `review_evidence/balance-20261111/census/census.ts` counted sheep with `a.kind === 'sheep'`; `Animal` has `type`, not `kind`, so "sheep 0" in `docs/MECHANISM_CENSUS_20261111.md` is an artefact, not a measurement.

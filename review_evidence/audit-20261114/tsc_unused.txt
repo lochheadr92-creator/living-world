@@ -1,0 +1,355 @@
+scripts/arrivals_probe.ts(13,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/arrivals_probe.ts(15,1): error TS6192: All imports in import declaration are unused.
+scripts/autonomy_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/autonomy_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/bake_probe.ts(11,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/bake_probe.ts(14,1): error TS6192: All imports in import declaration are unused.
+scripts/bake_probe.ts(16,1): error TS6192: All imports in import declaration are unused.
+scripts/build_trace.ts(11,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/build_trace.ts(12,1): error TS6192: All imports in import declaration are unused.
+scripts/build_trace.ts(14,1): error TS6192: All imports in import declaration are unused.
+scripts/campclock.ts(43,17): error TS6133: 'h' is declared but its value is never read.
+scripts/care_capacity_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/care_handback_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/care_handback_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/care_supply_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/care_supply_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/care_water_diagnostic.ts(2,34): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/care_water_diagnostic.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/care_water_diagnostic.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/care_water_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/care_water_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/cart_episode_observe.ts(6,33): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/cart_episode_observe.ts(7,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/cart_episode_observe.ts(8,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/cart_episode_observe.ts(76,19): error TS6133: 'p' is declared but its value is never read.
+scripts/chain_audit.ts(5,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/chain_audit.ts(6,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/chain_audit.ts(7,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/checked_accounts_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/checked_accounts_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/civic_food_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/civic_food_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/civic_food_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/civic_food_observe.ts(25,26): error TS6133: 'p' is declared but its value is never read.
+scripts/construction_finish_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/construction_finish_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/continuity_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/continuity_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/continuity_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/customers_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/customers_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/customers_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/ecology_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/ecology_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/estate_custody_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/estate_custody_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/experience_connections_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/experience_connections_observe.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/experience_connections_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/family_probe.ts(13,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/family_probe.ts(16,1): error TS6192: All imports in import declaration are unused.
+scripts/family_probe.ts(19,1): error TS6192: All imports in import declaration are unused.
+scripts/famine_probe.ts(12,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/famine_probe.ts(13,1): error TS6192: All imports in import declaration are unused.
+scripts/famine_probe.ts(15,1): error TS6192: All imports in import declaration are unused.
+scripts/first_cart_trace.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/first_cart_trace.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/first_cart_trace.ts(14,7): error TS6133: 'hash' is declared but its value is never read.
+scripts/flood_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/flood_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/flood_story.ts(2,44): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/flood_story.ts(12,7): error TS6133: 'hash' is declared but its value is never read.
+scripts/food_help_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/food_help_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/food_help_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/food_pressure_observe.ts(5,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/full_pack_crop_trace.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/gather_contact_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/gather_contact_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/grain_probe.ts(10,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/grain_probe.ts(11,1): error TS6192: All imports in import declaration are unused.
+scripts/grain_probe.ts(13,1): error TS6192: All imports in import declaration are unused.
+scripts/helper_learning_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/helper_learning_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/home_replacement_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/home_replacement_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/household_rhythm_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/household_supply_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/household_supply_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/household_supply_observe.ts(23,198): error TS6133: 'p' is declared but its value is never read.
+scripts/hungry_harvest_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/hungry_harvest_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/indoor_giving_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/indoor_giving_observe.ts(27,17): error TS6133: 'p' is declared but its value is never read.
+scripts/informed_continuity_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/informed_continuity_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/inhabit.ts(17,33): error TS6133: 'readdirSync' is declared but its value is never read.
+scripts/inhabit.ts(31,1): error TS6133: 'hashString' is declared but its value is never read.
+scripts/job_drops.ts(10,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/job_drops.ts(12,1): error TS6192: All imports in import declaration are unused.
+scripts/job_drops.ts(14,1): error TS6192: All imports in import declaration are unused.
+scripts/journey_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/journey_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/late.ts(20,9): error TS6133: 'owner' is declared but its value is never read.
+scripts/mature_perf.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/meal_leftovers_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/meal_leftovers_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/meeting_arrangements_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/meeting_arrangements_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/observers/time_budget.ts(9,15): error TS6196: 'Activity' is declared but never used.
+scripts/occasion_observe.ts(3,29): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/occasion_observe.ts(5,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/occasion_observe.ts(21,27): error TS6133: 'p' is declared but its value is never read.
+scripts/occasion_recovery_observe.ts(3,29): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/occasion_recovery_observe.ts(5,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/occasion_recovery_observe.ts(21,27): error TS6133: 'p' is declared but its value is never read.
+scripts/offcuts_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/offcuts_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/practical_care_observe.ts(2,44): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/practical_care_observe.ts(3,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/practical_care_observe.ts(4,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/programme_checkpoint.ts(5,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/project_attempts_trace.ts(3,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/project_hand_inputs_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/project_hand_inputs_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/project_helpers_observe.ts(2,33): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/project_helpers_observe.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/project_helpers_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/project_inputs_diagnostic.ts(4,65): error TS6133: 'p' is declared but its value is never read.
+scripts/project_inputs_diagnostic.ts(4,179): error TS6133: 'p' is declared but its value is never read.
+scripts/project_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/project_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promise_delays_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promise_delays_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promise_expectations_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promise_expectations_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promise_knowledge_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promise_knowledge_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promise_outcomes_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promise_outcomes_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promise_targets_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promise_targets_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/promised_supply_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/promised_supply_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/raw_grain_probe.ts(75,7): error TS6133: 'reasonsBase' is declared but its value is never read.
+scripts/raw_grain_probe.ts(447,7): error TS6133: 'milledLoaded' is declared but its value is never read.
+scripts/ready_step_observe.ts(8,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/recovered_wells_attempts.ts(2,9): error TS6133: 'serializeWorld' is declared but its value is never read.
+scripts/recovered_wells_attempts.ts(3,1): error TS6192: All imports in import declaration are unused.
+scripts/recovered_wells_attempts.ts(6,5): error TS6133: 'attempts' is declared but its value is never read.
+scripts/relocation_observe.ts(6,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/relocation_observe.ts(7,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/relocation_observe.ts(8,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/rels.ts(5,75): error TS6133: 'pairs' is declared but its value is never read.
+scripts/remembered_need_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/remembered_need_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/repair_duty_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/repair_duty_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/request_cancellation_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/request_cancellation_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/resident_care_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/resident_care_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/route_learning_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/route_learning_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/routine_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/routine_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/scope_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/scope_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/seasonal_prep_diagnostic.ts(25,7): error TS6133: 'total' is declared but its value is never read.
+scripts/seed_storage_observe.ts(3,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/seed_storage_observe.ts(4,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/seed_storage_observe.ts(5,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/shelter_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/shelter_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/shelter_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/source_learning_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/source_learning_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/stored_materials_inhabitant.ts(2,48): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/stored_materials_inhabitant.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/stored_materials_inhabitant.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/stored_materials_observe.ts(2,44): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/stored_materials_observe.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/stored_materials_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/stored_water_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/stored_water_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/stored_water_observe.ts(21,236): error TS6133: 'p' is declared but its value is never read.
+scripts/supply_probe.ts(12,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/supply_probe.ts(17,1): error TS6192: All imports in import declaration are unused.
+scripts/supply_probe.ts(22,26): error TS6133: 'deserializeWorld' is declared but its value is never read.
+scripts/technique_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/technique_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/technique_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/transport_observe.ts(5,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/transport_observe.ts(6,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/transport_observe.ts(7,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/trap_window_replay.ts(16,40): error TS6133: 'detail' is declared but its value is never read.
+scripts/upkeep.ts(8,31): error TS6133: 'p' is declared but its value is never read.
+scripts/warmth_duty_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/warmth_duty_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/watch_choice_trace.ts(2,1): error TS6133: 'stepWorld' is declared but its value is never read.
+scripts/watch_learning_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/watch_learning_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/water_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/water_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/water_observe.ts(27,27): error TS6133: 'p' is declared but its value is never read.
+scripts/water_probe.ts(11,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/water_probe.ts(12,1): error TS6192: All imports in import declaration are unused.
+scripts/water_probe.ts(14,1): error TS6192: All imports in import declaration are unused.
+scripts/water_search_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/water_search_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/water_story.ts(2,42): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/water_story.ts(3,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/wild_seed_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/wild_seed_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/winter_reserve_observe.ts(4,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/winter_reserve_observe.ts(5,1): error TS6133: 'createHash' is declared but its value is never read.
+scripts/winter_reserve_observe.ts(6,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/wolf_probe.ts(12,1): error TS6133: 'createWorld' is declared but its value is never read.
+scripts/wolf_probe.ts(13,1): error TS6192: All imports in import declaration are unused.
+scripts/wolf_probe.ts(16,1): error TS6192: All imports in import declaration are unused.
+scripts/work_handover_observe.ts(2,30): error TS6133: 'readFileSync' is declared but its value is never read.
+scripts/work_handover_observe.ts(4,1): error TS6133: 'execFileSync' is declared but its value is never read.
+scripts/work_tastes_check.ts(8,9): error TS6133: 'personalWorkTaste' is declared but its value is never read.
+src/app/save.ts(75,1): error TS6133: 'Game' is declared but its value is never read.
+src/render/bld_food.ts(8,56): error TS6133: 'plankLines' is declared but its value is never read.
+src/render/bld_home.ts(5,59): error TS6133: 'poly' is declared but its value is never read.
+src/render/bld_work.ts(13,6): error TS6196: 'Ctx' is declared but never used.
+src/render/characters.ts(1201,110): error TS6133: 'handL' is declared but its value is never read.
+src/render/construction.ts(266,140): error TS6133: 'simT' is declared but its value is never read.
+src/render/effects.ts(4,15): error TS6196: 'Building' is declared but never used.
+src/render/input.ts(23,16): error TS6133: 'K' is declared but its value is never read.
+src/sim/act_build.ts(28,48): error TS6133: 'ledgerCreate' is declared but its value is never read.
+src/sim/act_build.ts(496,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/act_farm.ts(138,19): error TS6133: 'a' is declared but its value is never read.
+src/sim/act_misc.ts(20,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(55,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(55,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/act_misc.ts(135,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(139,8): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(158,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(158,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/act_misc.ts(172,19): error TS6133: 'a' is declared but its value is never read.
+src/sim/act_misc.ts(181,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_misc.ts(181,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/act_misc.ts(184,8): error TS6133: 'world' is declared but its value is never read.
+src/sim/act_resource.ts(401,31): error TS6133: 'detail' is declared but its value is never read.
+src/sim/act_resource.ts(738,22): error TS6133: 'outcome' is declared but its value is never read.
+src/sim/carts.ts(57,23): error TS6133: 'world' is declared but its value is never read.
+src/sim/checked_accounts.ts(24,28): error TS6196: 'SourceType' is declared but never used.
+src/sim/defence.ts(189,29): error TS6133: 'world' is declared but its value is never read.
+src/sim/exchange_journeys.ts(93,33): error TS6133: 'w' is declared but its value is never read.
+src/sim/facilities.ts(226,30): error TS6133: 'world' is declared but its value is never read.
+src/sim/hunting.ts(156,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/inspect.ts(297,36): error TS6133: 'world' is declared but its value is never read.
+src/sim/intent.ts(480,10): error TS6133: 'stillNeeded' is declared but its value is never read.
+src/sim/leave_heaviest.ts(20,10): error TS6133: 'BUILD_DEF' is declared but its value is never read.
+src/sim/life.ts(202,30): error TS6133: 'world' is declared but its value is never read.
+src/sim/options_social.ts(30,32): error TS6133: 'participation' is declared but its value is never read.
+src/sim/preservation.ts(88,60): error TS6133: 'quantity' is declared but its value is never read.
+src/sim/production.ts(1,20): error TS6133: 'hasBrewing' is declared but its value is never read.
+src/sim/production.ts(35,1): error TS6133: 'freeOf' is declared but its value is never read.
+src/sim/production.ts(340,10): error TS6133: 'perBatch' is declared but its value is never read.
+src/sim/relocation.ts(121,36): error TS6133: 'w' is declared but its value is never read.
+src/sim/social.ts(84,1): error TS6133: 'isFacilityType' is declared but its value is never read.
+src/sim/social.ts(101,7): error TS6133: 'toldKey' is declared but its value is never read.
+src/sim/social.ts(1960,22): error TS6133: 'outcome' is declared but its value is never read.
+src/sim/social.ts(1974,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/social.ts(1974,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/temperament.ts(156,9): error TS6133: 'world' is declared but its value is never read.
+src/sim/temperament.ts(156,16): error TS6133: 'p' is declared but its value is never read.
+src/sim/temperament.ts(159,8): error TS6133: 'world' is declared but its value is never read.
+src/sim/temperament.ts(167,19): error TS6133: 'a' is declared but its value is never read.
+src/sim/tools.ts(7,43): error TS6133: 'toolById' is declared but its value is never read.
+src/sim/worldgen.ts(185,10): error TS6133: 'floodReach' is declared but its value is never read.
+src/ui/person_sections.ts(374,35): error TS6133: 'ctx' is declared but its value is never read.
+src/ui/person_sections.ts(486,36): error TS6133: 'ctx' is declared but its value is never read.
+src/ui/tooltip.ts(117,22): error TS6133: 'world' is declared but its value is never read.
+tests/brewing.test.ts(4,54): error TS6133: 'consume' is declared but its value is never read.
+tests/carcass.test.ts(7,64): error TS6133: 'transfer' is declared but its value is never read.
+tests/care_handback.test.ts(43,92): error TS6133: 'outcome' is declared but its value is never read.
+tests/civic_choice.test.ts(4,1): error TS6133: 'testKit' is declared but its value is never read.
+tests/civic_choice.test.ts(5,1): error TS6133: 'RNG' is declared but its value is never read.
+tests/civic_choice.test.ts(6,1): error TS6133: 'observe' is declared but its value is never read.
+tests/civic_choice.test.ts(8,10): error TS6133: 'initialiseCouncil' is declared but its value is never read.
+tests/civic_choice.test.ts(14,30): error TS6133: 'snapshotInitial' is declared but its value is never read.
+tests/civic_choice.test.ts(15,1): error TS6192: All imports in import declaration are unused.
+tests/civic_choice.test.ts(18,1): error TS6192: All imports in import declaration are unused.
+tests/civic_choice.test.ts(77,13): error TS6133: 'q' is declared but its value is never read.
+tests/commitments.test.ts(6,10): error TS6133: 'addItem' is declared but its value is never read.
+tests/daily_routines.test.ts(3,49): error TS6133: 'tiltRoutineChoices' is declared but its value is never read.
+tests/decision_ledger.test.ts(12,1): error TS6133: 'World' is declared but its value is never read.
+tests/ecology.test.ts(7,17): error TS6133: 'estimatedAmount' is declared but its value is never read.
+tests/ecology.test.ts(12,19): error TS6133: 'hashWorld' is declared but its value is never read.
+tests/ecology.test.ts(52,43): error TS6133: 'pl' is declared but its value is never read.
+tests/flood_access.test.ts(2,1): error TS6192: All imports in import declaration are unused.
+tests/flood_access.test.ts(3,1): error TS6133: 'T' is declared but its value is never read.
+tests/flood_access.test.ts(58,73): error TS6133: 'a' is declared but its value is never read.
+tests/flood_protocol.test.ts(10,13): error TS6133: 'food' is declared but its value is never read.
+tests/forestry.test.ts(2,39): error TS6133: 'learn' is declared but its value is never read.
+tests/forestry.test.ts(3,18): error TS6133: 'PLANT_TREE_WORK' is declared but its value is never read.
+tests/helpers/project_acquire.ts(8,1): error TS6133: 'nextProjectStep' is declared but its value is never read.
+tests/helpers/project_acquire.ts(9,1): error TS6133: 'stepWorld' is declared but its value is never read.
+tests/helpers/project_acquire.ts(10,1): error TS6192: All imports in import declaration are unused.
+tests/helpers/project_acquire.ts(12,1): error TS6192: All imports in import declaration are unused.
+tests/helpers/promise_outcomes.ts(4,1): error TS6133: 'rankOptions' is declared but its value is never read.
+tests/helpers/promise_outcomes.ts(12,1): error TS6133: 'conservationReport' is declared but its value is never read.
+tests/helpers/v138ref.ts(3,58): error TS6133: 'generateOptions' is declared but its value is never read.
+tests/helpers/v138ref.ts(3,113): error TS6133: 'startActivity' is declared but its value is never read.
+tests/helpers/v139ref.ts(3,39): error TS6133: 'give' is declared but its value is never read.
+tests/helpers/v139ref.ts(3,58): error TS6133: 'generateOptions' is declared but its value is never read.
+tests/helpers/v139ref.ts(3,113): error TS6133: 'startActivity' is declared but its value is never read.
+tests/helpers/v139ref.ts(12,1): error TS6133: 'makeSource' is declared but its value is never read.
+tests/household_home.test.ts(17,1): error TS6133: 'createWorld' is declared but its value is never read.
+tests/inhabit_manual.test.ts(14,7): error TS6133: 'DAY' is declared but its value is never read.
+tests/inhabitant.test.ts(23,24): error TS6133: 'settingsFor' is declared but its value is never read.
+tests/known_home.test.ts(39,18): error TS6133: 'w' is declared but its value is never read.
+tests/market_locality.test.ts(30,15): error TS6133: 'o' is declared but its value is never read.
+tests/market_locality.test.ts(39,13): error TS6133: 'q' is declared but its value is never read.
+tests/meeting_arrangements.test.ts(6,35): error TS6133: 'endActivity' is declared but its value is never read.
+tests/meeting_arrangements.test.ts(6,47): error TS6133: 'stepActivity' is declared but its value is never read.
+tests/night_plan.test.ts(530,28): error TS6133: 'p' is declared but its value is never read.
+tests/pavel_acquisition.test.ts(27,9): error TS6133: 'conservationReport' is declared but its value is never read.
+tests/personal_places.test.ts(6,9): error TS6133: 'newActivity' is declared but its value is never read.
+tests/plan_reconsider.test.ts(17,15): error TS6133: 'seed' is declared but its value is never read.
+tests/project_cooperation.test.ts(12,1): error TS6192: All imports in import declaration are unused.
+tests/project_cooperation.test.ts(19,10): error TS6133: 'freeOf' is declared but its value is never read.
+tests/project_cooperation.test.ts(19,63): error TS6133: 'plannedFor' is declared but its value is never read.
+tests/project_cooperation.test.ts(35,42): error TS6133: 'give' is declared but its value is never read.
+tests/project_cooperation.test.ts(668,17): error TS6133: 'w' is declared but its value is never read.
+tests/promise_expectations.test.ts(7,61): error TS6133: 'expectedStatus' is declared but its value is never read.
+tests/promise_expectations.test.ts(7,76): error TS6133: 'expectedOutstanding' is declared but its value is never read.
+tests/promise_expectations.test.ts(7,96): error TS6133: 'updateExpectations' is declared but its value is never read.
+tests/promise_outcomes.test.ts(7,23): error TS6133: 'newActivity' is declared but its value is never read.
+tests/promise_outcomes.test.ts(9,1): error TS6133: 'pin' is declared but its value is never read.
+tests/promise_outcomes.test.ts(10,1): error TS6133: 'perceive' is declared but its value is never read.
+tests/promise_targets.test.ts(8,1): error TS6133: 'refreshBeliefs' is declared but its value is never read.
+tests/ready_step.test.ts(6,1): error TS6133: 'nextProjectStep' is declared but its value is never read.
+tests/recovered_workshops.test.ts(2,34): error TS6133: 'site' is declared but its value is never read.
+tests/relocation.test.ts(5,25): error TS6133: 'rankOptions' is declared but its value is never read.
+tests/request_cancellation.test.ts(18,14): error TS6196: 'World' is declared but never used.
+tests/resident_care.test.ts(9,19): error TS6133: 'observe' is declared but its value is never read.
+tests/skill_coaching.test.ts(3,9): error TS6133: 'beginCoaching' is declared but its value is never read.
+tests/techniques.test.ts(10,23): error TS6133: 'abortActivity' is declared but its value is never read.
+tests/townships.test.ts(10,10): error TS6133: 'createSite' is declared but its value is never read.
+tests/townships.test.ts(10,34): error TS6133: 'completeSite' is declared but its value is never read.
+tests/townships.test.ts(11,10): error TS6133: 'newActivity' is declared but its value is never read.
+tests/townships.test.ts(11,38): error TS6133: 'handlerOf' is declared but its value is never read.
+tests/townships.test.ts(14,1): error TS6133: 'relOf' is declared but its value is never read.
+tests/townships.test.ts(15,27): error TS6133: 'rankOptions' is declared but its value is never read.
+tests/townships.test.ts(21,10): error TS6133: 'proposeProject' is declared but its value is never read.
+tests/townships.test.ts(22,1): error TS6192: All imports in import declaration are unused.
+tests/transmission.test.ts(9,1): error TS6133: 'createBuilding' is declared but its value is never read.
+tests/transmission.test.ts(27,15): error TS6196: 'Belief' is declared but never used.
+tests/transmission.test.ts(27,23): error TS6196: 'Person' is declared but never used.
+tests/watch_learning.test.ts(20,86): error TS6133: 'p' is declared but its value is never read.
+tests/water_budget.test.ts(3,1): error TS6192: All imports in import declaration are unused.
+tests/water_budget.test.ts(4,1): error TS6133: 'T' is declared but its value is never read.
+tests/water_budget.test.ts(6,74): error TS6133: 'totalItems' is declared but its value is never read.
+tests/water_budget.test.ts(102,12): error TS6133: 'p' is declared but its value is never read.
+tests/work_tastes.test.ts(8,20): error TS6133: 'stepWorld' is declared but its value is never read.
+tests/zz_review_f_ordinary_probe.test.ts(16,1): error TS6133: 'Intention' is declared but its value is never read.
+tests/zz_review_f_ordinary_probe.test.ts(36,20): error TS6133: 'p' is declared but its value is never read.
+tests/zz_review_main_tool_capacity.test.ts(12,15): error TS6196: 'Intention' is declared but never used.
+tests/zz_review_main_tool_capacity.test.ts(12,26): error TS6196: 'Person' is declared but never used.
+exit 2

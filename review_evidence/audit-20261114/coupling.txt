@@ -1,0 +1,38 @@
+decision layer: decision.ts, facilities.ts, options_places.ts, options_social.ts, options_survival.ts, options_work.ts, optutil.ts, production.ts, relief.ts, social.ts, welfare.ts
+
+channel                    decision files  decision lines  elsewhere (files)   verdict
+health                                  3               3                 24   barely read
+need: hunger                           10              67                 49   read
+need: thirst                            9              52                 40   read
+need: energy                            8              19                 37   read
+need: warmth                            5              15                 16   read
+need: safety                            0               0                 12   NOT READ by any choice
+need: social                            2               3                  7   barely read
+relation: affinity                      3              24                 25   read
+relation: trust                         3              15                 13   read
+relation: familiarity                   2               6                  7   read
+relation: debt                          1               1                  2   barely read
+relation: grievance                     2              14                 12   read
+relation: avoidUntil                    2              10                  8   read
+skills                                  5              18                 15   read
+traits                                  7              59                 28   read
+beliefs                                 8             135                 85   read
+concerns                                1              17                  3   read
+commitments                             4              27                 29   read
+failures (past tries)                   1               1                  9   barely read
+age / life stage                        7              30                 40   read
+weather                                 4              35                 31   read
+time of day                             6              25                 10   read
+partner / kin                           3              10                 12   read
+household                               9              98                 97   read
+inventory                               8              94                 65   read
+memory log                              0               0                  5   NOT READ by any choice
+last result / decision                  2               3                  7   barely read
+
+traits (references in decision files / elsewhere):
+  generosity       35 /   35
+  sociability      15 /   34
+  caution          21 /   18
+  diligence        18 /   21
+  curiosity        11 /   14
+exit 0

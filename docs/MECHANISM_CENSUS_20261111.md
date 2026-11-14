@@ -125,3 +125,5 @@ Each is one rules version with a contract test, a pin and the paired lab's life 
 small rules with knowledge consequences and want their own design note first.
 
 Evidence: `review_evidence/balance-20261111/census/` (the probe, twelve rows, the approach rows, `summary.txt`).
+
+Correction, 14 November 2026 (audit at `4a7a11bb`, `review_evidence/audit-20261114/AUDIT.md` F2-11): the probe counted sheep with `a.kind === 'sheep'`, but `Animal` has `type`, not `kind` (`src/sim/types.ts`), so every "sheep 0" in this document and in `summary.txt` is an artefact of the filter, not a measurement of livestock. The filter in `census.ts` now reads `a.type`; the saved rows were not run again. Lamb births do occur in the saved census files.
