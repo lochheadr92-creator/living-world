@@ -8,6 +8,7 @@ import { invWeight, weightOf } from './economy';
 import { recentFailure } from './knowledge';
 import { MATERIALS_HOME_BASE, PACK_FULL_FRACTION, hasPackMaterials, packFullWorth } from './light_pack';
 import { materialNeeds, nightMult, weatherMult } from './options_work';
+import { errandCarries } from './errand_load';
 import { Scorer, addOption, dangerAt, eta, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
 import { carryCap } from './people';
@@ -18,7 +19,7 @@ import type { BuildingType, Items } from './types';
 /** How many of this material the person carries beyond every use of their own: needs, promises, plans and an errand. */
 export function spareMaterial(ctx: Ctx, k: 'wood' | 'stone', needs = materialNeeds(ctx)): number {
   const { world: w, p } = ctx;
-  if (p.errand?.item === k) return 0;
+  if (errandCarries(w, p, k)) return 0;
   const needed = needs.filter((n) => n.item === k).reduce((s, n) => s + n.n, 0);
   return Math.max(0, Math.floor((p.inv[k] ?? 0) - reservedFor(w, p, k) - needed));
 }

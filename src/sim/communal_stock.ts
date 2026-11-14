@@ -11,6 +11,7 @@ import {Scorer,addOption,beliefsByKind,eta,pen,spotNear} from './optutil';
 import type {Ctx} from './optutil';
 import {reservedFor} from './reserved_goods';
 import {runsRulesVersion} from './rulesversion';
+import {errandCarries,onErrand} from './errand_load';
 import type {Activity,ItemKind,Items,Person,World} from './types';
 const TARGET={wood:12,stone:8};
 const KEEP={wood:2,stone:1};
@@ -19,7 +20,7 @@ type Raw=keyof typeof TARGET;
 const aim=(w:World,k:Raw):number=>k==='stone'&&hasStoneRestock(w)?STONE_TARGET:TARGET[k];
 export const hasCommunalStock=(w:World)=>w.settings.dynamics==='rich'&&runsRulesVersion(w,136);
 export function communalSpare(w:World,p:Person,k:ItemKind):number{
- if(!(Object.hasOwn(TARGET,k))||p.errand?.item===k)return 0;
+ if(!(Object.hasOwn(TARGET,k))||errandCarries(w,p,k))return 0;
  return Math.max(0,Math.floor((p.inv[k]??0)-KEEP[k as Raw]-reservedFor(w,p,k)));
 }
 export function communalRoom(w:World,id:number,k:ItemKind):number{
@@ -54,7 +55,7 @@ export function communalStockOptions(ctx:Ctx):void{
  // Rules 162: for stone only a need for stone itself (a site, a promise, a tool) holds a person back. Every awake, fed person has some small need for
  // wood (a fire, a roof patch, a handle), so the old any-need gate was never open (review_evidence/stone-haul-20261106, restock-gate); wood is unchanged.
  const stoneRestock=hasStoneRestock(w);
- if((!stoneRestock&&needs.length>0)||p.intentions.some(i=>i.status==='active')||p.commitments.some(c=>c.status==='active')||p.errand)return;
+ if((!stoneRestock&&needs.length>0)||p.intentions.some(i=>i.status==='active')||p.commitments.some(c=>c.status==='active')||onErrand(w,p))return;
  const busy=(k:Raw):boolean=>stoneRestock&&k==='stone'?needs.some(n=>n.item==='stone'):needs.length>0;
  const lacking=(['wood','stone'] as const).filter(k=>!busy(k)&&(b.items?.[k]??0)<aim(w,k)/2&&room>=WEIGHT[k]*2&&communalSpare(w,p,k)<1);
  // rules 162: cut stone already stacked at a quarry yard one may draw from is carried over before rocks are broken for it

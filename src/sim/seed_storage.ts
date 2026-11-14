@@ -9,6 +9,7 @@ import {Scorer,addOption,beliefsByKind,dangerAt,eta,pen,spotNear,traitMods} from
 import type {Ctx} from './optutil';
 import {carryCap} from './people';
 import {runsRulesVersion} from './rulesversion';
+import {errandCarries} from './errand_load';
 import type {BuildingType,ItemKind,Person,World} from './types';
 
 let enabled=true;
@@ -18,8 +19,8 @@ export const hasSeedStorage=(w:World):boolean=>enabled&&w.settings.dynamics==='r
 
 /** Keep the existing three-seed withdrawal batch, or one per known household plot,
  * whichever is larger, plus separate promises/plans. No global plot inventory. */
-export function spareSeed(p:Person):number{
- if(p.errand?.item==='seeds')return 0;
+export function spareSeed(p:Person,w?:World):number{
+ if(w?errandCarries(w,p,'seeds'):p.errand?.item==='seeds')return 0;
  const planting=Math.max(3,beliefsByKind(p,['plot']).filter(b=>b.hh===p.hhId).length);
  const promised=p.commitments.reduce((n,c)=>n+(c.status==='active'&&c.item==='seeds'?Math.max(0,c.amount-(c.delivered??0)):0),0);
  return Math.max(0,Math.floor((p.inv.seeds??0)-planting-promised-plannedFor(p,'seeds')));
@@ -29,7 +30,7 @@ export function spareSeed(p:Person):number{
 export function seedStorageOption(ctx:Ctx,item:ItemKind,base:number,why:string,mult:number):void{
  const {world,p}=ctx;
  if(!hasSeedStorage(world)||!p.hhId||ctx.stage==='child'||invRoom(world,p,item)>=1)return;
- const spare=spareSeed(p);if(spare<1)return;
+ const spare=spareSeed(p,world);if(spare<1)return;
  const needed=WEIGHT[item]-(carryCap(world,p)-weightOf(p.inv));
  const homes=beliefsByKind(p,['building']).filter(b=>b.hh===p.hhId&&isHomeType(b.btype)&&!recentFailure(world,p,b.id,300))
   .map(b=>({b,n:Math.min(spare,Math.max(0,Math.floor((BUILD_DEF[b.btype as BuildingType].cap-weightOf(b.items??{}))/WEIGHT.seeds))),distance:eta(ctx,b.x,b.y)+40*dangerAt(ctx,b.x,b.y)}))

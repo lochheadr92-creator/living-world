@@ -1083,3 +1083,44 @@ line says how it is known: measured, read in source, or not looked into.
   220, 225 and 226 pass, and typecheck passes.
 - More people use ids faster: the counter stood at about 268,000 after 20 years of 41 people and breaks at 1,000,000. Step 6.
 - `PRODUCT_VISION.md` still describes a world of about 100 people. It is the owner's to change.
+
+## Two repairs from the audit (rules 247 and 248, built 15 November on a branch; not yet measured in the lab)
+
+From `review_evidence/audit-20261114/AUDIT.md` F2-02 and F2-03, built on the instruction "errand and plan_shared". Both are on the local branch
+`claude/audit-fixes-20261114` (not `main`), claim 247 and 248 in the growth stream's third range and leave 246 for the oven.
+
+**Rules 247, a load on an errand is not put down on the way** (`src/sim/errand_load.ts`, switch `rich-no-errand-load`). `Person.errand` has been
+declared since the first commit and never set; its only writes clear it. Five guards read it and were always false: `communal_stock.ts`
+(`communalSpare`, and the restock gate), `leave_heaviest.ts` (`heaviestLeftover`), `pack_materials.ts` (`spareMaterial`), `seed_storage.ts`
+(`spareSeed`). From 247 the errand is read from what the person is doing: on a `haul` to a building site, or on a `deposit` made for a promise
+(`data.mode` is `promise`), they are on an errand, and the kinds named in that activity's `items` (and still in the pack) are its load. That load is
+not counted as spare, so it is not offered to be put down at home, left at the storehouse or stacked at the communal store, and a person on an
+errand starts no communal restock. The stored field is untouched (still always null); nothing is saved. An old caller with no world (`heaviestLeftover(p, wanted)`,
+`spareSeed(p)`) reads the field as before. The effect should be small: a plan or a promise already keeps its own load out of `spare` through `reservedFor`
+and `freeOf`; the errand adds the loads those do not name (a haul nobody planned, a deposit for a promise).
+Reach (probe on gen-2 and aspen, arrivals on, rules 247): somebody is on an errand with a load of wood, stone or seeds from tick 200 and 400.
+
+**Rules 248, a shared proposal is offered where a workshop is planned** (`src/sim/shared_offer.ts`, switch `rich-no-shared-offer`). Rules 143
+(`shared_projects.ts`) made a public alternative to the private layout of a workshop; it was attached to `tryPlan` in `options_work.ts`, which since
+workshops moved to `optPlanFacilities` (`production.ts`) plans only a lean-to, a hut, a cellar, a well and a storehouse, none of them shareable, so
+`addSharedProjectOption` has had no caller that can reach it and no shared proposal can be generated at any version from 143 (`shared_yard.ts` of
+201 and 202 marked the first yard shared by another road). From 248 `optPlanFacilities` calls `offerShared` right after it adds `plan_site:<type>`: for a
+person `addSharedProjectOption` already admits (generosity of .55, company in sight, no civic project of their own under way) it adds "Propose a shared
+kiln" (and mill, smithy, granary, bakery, hall, mine, brewery, quarry, timber yard) with the same site and walk, worth the private option plus
+2 times their generosity. The whole of rules 143 is behind it: the site is public, nobody works it until a support conversation, a refusal takes
+nothing. The private option stays. Nothing is saved.
+Reach: no recorded decision of gen-2 or aspen holds a shared proposal by tick 12,000 (day 5). One 25 day smoke (aspen, Normal, arrivals on, one run, a description and not a rate; `review_evidence/audit-20261114/` holds the tools, the run is in the brain checkpoint): at 248 "Propose a shared ..." was offered 136 times in the sampled decisions (kiln 36, granary 44, bakery 18, timber yard 19, quarry 16, hall 3) and chosen 7 times (quarry 3, hall 2, timber yard 2); civic projects ended as five completed and one active against one completed at 245. Against that, no kiln, mill, bakery or brewery stood on day 25 where the 245 run of the same seed had one of each. One seed cannot say whether the proposals displace private workshops or that is chance: that is what the paired lab is for (buildings by type, civic projects completed, bread, iron, food in store a head, hungry time).
+
+**Contract tests**: `tests/errand_load.test.ts` (8) and `tests/shared_offer.test.ts` (5); each rules-246 and rules-247 contrast fails if the rule is taken out.
+**Checks**: typecheck clean; the world of aspen over 25 days at rules 245 on this branch has the same hash at every two day checkpoint as at `4a7a11bb`
+(`fe1bb633`), so nothing below 247 moved. Not run: the pins of 247 and 248, the paired lab, the full suite.
+
+**For your machine** (24 cores; about 20 minutes for the lab; paste back only `report.txt`):
+
+```
+cd "C:\dev\Claude Experiment\living-world-audit-fixes"
+node scripts/lab.mjs --out lab248_out --seeds 12 --fork 0 --days 25 --profile normal --branches nudge:1,nudge:2,rich-no-errand-load,rich-no-shared-offer
+npx vite-node scripts/lab_report.ts -- lab248_out
+```
+
+(Both arms and the two nudges run against a control; the verdict for each rule is its own removal arm against the mean of the control and the nudges.)

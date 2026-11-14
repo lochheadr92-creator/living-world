@@ -26,6 +26,7 @@ import { Scorer, addOption, beliefsByKind, dangerAt, eta, pen, sourceUsable, spo
 import type { Ctx } from './optutil';
 import { acceptedAt, isFacilityType } from './recipes';
 import { runsRulesVersion } from './rulesversion';
+import { errandCarries } from './errand_load';
 import type { Belief, BeliefKind, BuildingType, ItemKind, Person, World } from './types';
 
 export const LEAVE_HEAVIEST_FROM_VERSION = 33;
@@ -58,7 +59,7 @@ export interface PackStall {
 }
 
 /** The heaviest left-over: a carried stack nothing they are doing asks for, weightiest first, or null. Pure. */
-export function heaviestLeftover(p: Person, wanted: ReadonlySet<ItemKind>): ItemKind | null {
+export function heaviestLeftover(p: Person, wanted: ReadonlySet<ItemKind>, world?: World): ItemKind | null {
   let best: ItemKind | null = null;
   let bestWeight = 0;
   for (const k of LEAVE_KINDS) {
@@ -66,7 +67,7 @@ export function heaviestLeftover(p: Person, wanted: ReadonlySet<ItemKind>): Item
     if (have < 1 || wanted.has(k)) continue;
     if (freeOf(p, k) < have) continue; // a private plan of theirs has spoken for some of it
     if (p.commitments.some((c) => c.status === 'active' && c.item === k)) continue; // promised to someone
-    if (p.errand && p.errand.item === k) continue; // being carried somewhere
+    if (world ? errandCarries(world, p, k) : p.errand?.item === k) continue; // being carried somewhere
     const w = have * WEIGHT[k];
     if (w > bestWeight) {
       best = k;
@@ -102,7 +103,7 @@ export function leaveHeaviestOption(ctx: Ctx, stall: PackStall): void {
   if (invRoom(world, p, stall.item) >= 1) return;
   // and only if there is something to go and gather once there is: a source they believe is worth the walk
   if (!beliefsByKind(p, stall.sources).some((b) => sourceUsable(ctx, b, 1).ok)) return;
-  const k = heaviestLeftover(p, stall.wanted);
+  const k = heaviestLeftover(p, stall.wanted, ctx.world);
   if (!k) return;
 
   let place: Belief | null = null;

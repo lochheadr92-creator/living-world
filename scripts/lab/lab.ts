@@ -12,6 +12,8 @@ import { GRAIN_KEPT_PARTS, grainKeptPartOn, setGrainKept } from '../../src/sim/g
 import { FARM_SCALE_PARTS, farmScalePartOn, setFarmScale } from '../../src/sim/farm_scale';
 import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { ownStoresOn, setOwnStores } from '../../src/sim/own_stores';
+import { errandLoadOn, setErrandLoad } from '../../src/sim/errand_load';
+import { sharedOfferOn, setSharedOffer } from '../../src/sim/shared_offer';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
 import { PLENTY_PARTS, plentyPartOn, setPlenty } from '../../src/sim/plenty';
@@ -288,6 +290,10 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 248 (shared_offer.ts): workshops are planned without the shared alternative of rules 143
+  if (kind === 'rich-no-shared-offer') return { spec: label, summary: 'a workshop is laid out without the offer to propose it as a shared project, as before rules 248; no effect below rules 248', install() { const was = sharedOfferOn(); setSharedOffer(false); return () => setSharedOffer(was); } };
+  // rules 247 (errand_load.ts): the errand guards read the never set field again
+  if (kind === 'rich-no-errand-load') return { spec: label, summary: 'what a person carries to a site or for a promise is counted as spare again (the guards read the stored errand, which nothing sets), as before rules 247; no effect below rules 247', install() { const was = errandLoadOn(); setErrandLoad(false); return () => setErrandLoad(was); } };
   // rules 245 (own_stores.ts): a household's own stores are remembered by the glance of rules 169 again
   if (kind === 'rich-no-own-stores') return { spec: label, summary: 'a household remembers its own home, cellar and other buildings by the glance of rules 169 (each kind as one unit), as before rules 245; no effect below rules 245', install() { const was = ownStoresOn(); setOwnStores(false); return () => setOwnStores(was); } };
   // rules 244 (farm_scale.ts): both parts removed (equal to rules 243), and each part alone

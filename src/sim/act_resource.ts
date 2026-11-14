@@ -674,7 +674,7 @@ registerHandler('deposit', {
       if (a.data.seedStash && world.settings.dynamics === 'rich' && runsRulesVersion(world,58)) {
         if (e.ent !== 'building' || !isHomeType(e.type) || e.hhId !== a.data.seedOwner || p.hhId !== a.data.seedOwner) return 'fail:the seed store is no longer our home';
         if (k !== 'seeds') return 'fail:only spare seed belongs in this trip';
-        n = Math.min(n, spareSeed(p));
+        n = Math.min(n, spareSeed(p, world));
         if (n === 0) return 'fail:the seed is now needed for planting or promises';
         if (n < want[k]) partial = true;
       }

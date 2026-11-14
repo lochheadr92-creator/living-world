@@ -4,6 +4,7 @@ import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } fr
 import { IRON_WANT, IRON_WHY, carriesForSmelter, ironWanted, oreLeavesLeftover, smithyShelf } from './smithy_iron';
 import { leaveHeaviestOption } from './leave_heaviest';
 import { firstYardShared } from './shared_yard';
+import { offerShared } from './shared_offer';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
@@ -1227,6 +1228,8 @@ function optPlanFacilities(ctx: Ctx): void {
         });
       },
     });
+    // rules 248 (shared_offer.ts): the public alternative of rules 143, offered where the workshop is planned
+    offerShared(ctx, type);
   }
 }
 
