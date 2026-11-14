@@ -19,7 +19,7 @@ import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory, decisionHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
-import { BUILD_DEF, DAY, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, DAY, DEPOSIT_TYPES, isHomeType, isSolidHome } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
@@ -38,7 +38,7 @@ import { describeCustomers } from './customers';
 import { describeWinterPractice } from './winter_practice';
 import { describeHauling } from './transport';
 import { estimatedAmount, recentFailure } from './knowledge';
-import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
+import { BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
 import { isRich, thoughtsOf } from './mood';
 import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people';
@@ -56,7 +56,6 @@ import {describeProject} from './project_graph';
 import {describeRoutines} from './daily_routines';
 import { intentView, knowledgeItems, provenanceCue, relevantItems, statusLine, suspendedView, timeline, whereaboutsItems } from './inspect_observer';
 import type { IntentView, KnowledgeItemView, StatusView, SuspendedView, TimelineView, WhereaboutsView } from './inspect_observer';
-export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
   return runsRulesVersion(world,120)?worldAge(world.tick,tick):legacyAgeText(world,tick);
@@ -999,7 +998,3 @@ export function summarizeWorld(world: World): WorldSummary {
     tick: world.tick,
   };
 }
-
-void NUTRITION;
-void TICKS_PER_YEAR;
-void ACTIVITY_NOUN;

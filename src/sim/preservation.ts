@@ -85,7 +85,7 @@ export function preservationReady(w:World,job:Job,r:Recipe):boolean {
 export function losePreservationRack(w:World,b:Building):void {
   const j=b.ops?.job,r=j&&RECIPE_BY_ID[j.recipe];
   if(!j||!r?.preservation)return;
-  const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat',quantity=r.inputs[raw]??0;
+  const raw=r.inputs.fish?'fish':r.inputs.fat?'fat':'meat';
   const lost=takeFrom(j.held,raw,j.held[raw]??0);
   if(lost)ledgerSpoil(w,raw,lost,'unfinished preservation destroyed with rack');
 }

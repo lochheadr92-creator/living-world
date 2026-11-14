@@ -489,8 +489,6 @@ export function classicBuildingSprite(cache: SpriteCache, kind: ClassicKind, var
   });
 }
 
-export const BUILDING_SIZES: Record<ClassicKind, { w: number; h: number }> = { lean_to: { w: 1, h: 1 }, hut: { w: 2, h: 2 }, storehouse: { w: 2, h: 2 } };
-
 // ───────────────────────── small things ─────────────────────────
 export function stumpSprite(cache: SpriteCache, variant: number): Sprite {
   return cache.get(`stump${variant % 2}`, 36, 26, 18, 16, (ctx) => {

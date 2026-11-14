@@ -138,8 +138,6 @@ export const OFFER_LINES = ['You look hungry, {n}. Take this.', 'Here, {n} — y
 export const CARE_LINES = ['Eat up, {n}.', 'Here you go, {n}.', 'You must be hungry, {n}.'];
 export const TRADE_OK = ['Deal.', 'Fair enough.', 'Done.'];
 export const TRADE_NO = ['No, I need mine.', 'That’s not worth it to me.'];
-export const BUILD_DONE = ['Home at last!', 'It’s finished!', 'Well, that’s that.'];
-export const NEWBORN = ['Welcome, little one.', 'She’s here!', 'He’s here!'];
 
 function agoText(world: World, seen: number): string {
   const d = world.tick - seen;

@@ -21,8 +21,8 @@ import { Scorer, addBlocked, addOption, beliefsByKind, eta, pen, spotNear, trait
 import { personById } from './registry';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
-import type { Activity, Belief, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
-import { SOCIABLE, isReserved, stageOf } from './people';
+import type { Activity, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
+import { SOCIABLE, isReserved } from './people';
 
 import { hyp } from './util';
 /**
@@ -41,10 +41,6 @@ const MAX_GUESTS = 4;
 const bubble = (world: World, p: Person, text: string, kind: 'say' | 'ask' | 'happy' = 'say', ticks = 54): void => speak(world, p, text, kind, ticks);
 
 // ───────────────────────── lookups ─────────────────────────
-export function openMeals(world: World): Meal[] {
-  return world.meals.filter((m) => m.status === 'inviting' || m.status === 'gathering' || m.status === 'eating');
-}
-
 /** The meal this person is hosting or has accepted an invitation to (still to happen or under way). */
 export function mealOf(world: World, p: Person): Meal | null {
   for (const m of world.meals) {
@@ -152,7 +148,7 @@ export function mealOptions(ctx: Ctx): void {
   for (const s of ctx.seenPersons) {
     if (s.asleep || s.busyTalking || s.child) continue;
     const q = personById(world, s.id);
-    if (!q || !q.alive || q.hhId === p.hhId && false) continue;
+    if (!q || !q.alive) continue;
     if (!hasMeetingKnowledge(world)&&mealOf(world, q)) continue;
     if ((p.cooldowns['invite' + q.id] ?? 0) > world.tick) continue;
     const rel = p.relations[q.id];
@@ -365,9 +361,6 @@ function replacementOptions(ctx:Ctx):void{
 
 function guestOptions(ctx: Ctx, m: Meal): void {
   const { world, p } = ctx;
-  if (m.status === 'eating' && m.arrived.includes(p.id) && !m.ate.includes(p.id)) {
-    // already there: handled by the activity itself
-  }
   if (m.arrived.includes(p.id)) return;
   const e = eta(ctx, m.x, m.y);
   // leave early enough to arrive when the meal starts
@@ -768,7 +761,7 @@ registerHandler('host_meal', {
           if (q && q.alive) expose(world, q, p, 0.15);
         }
       }
-      return m.ate.includes(p.id) && m.status === 'eating' ? 'continue' : 'continue';
+      return 'continue';
     }
     return 'continue';
   },
@@ -847,6 +840,3 @@ registerHandler('attend_meal', {
     }
   },
 });
-
-void stageOf;
-void ({} as Belief);

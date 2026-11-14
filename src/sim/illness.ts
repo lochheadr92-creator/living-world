@@ -9,7 +9,7 @@ import { addEvent, addLog } from './events';
 import { winterDepth } from './hardship';
 import { isRich, think } from './mood';
 import { hashString, hashUnit } from './rng';
-import type { Illness, Person, World } from './types';
+import type { Person, World } from './types';
 import { hyp } from './util';
 
 /** how often one person's illness is looked at, in ticks */
@@ -23,15 +23,6 @@ const COURSE_MAX = 3.5 * DAY;
 const ONSET_BASE = 0.00003;
 
 const key = (world: World): number => hashString(world.seed) ^ 0x1115;
-
-export const isIll = (p: Person): boolean => !!p.illness;
-
-/** How visibly ill: 0 (well) to 1 (at the worst of it). 0 in an authored world. */
-export function illnessOf(p: Person): number {
-  const i = p.illness;
-  if (!i) return 0;
-  return i.severity;
-}
 
 /** Someone falls ill. Rich only; never twice at once, never while immune. */
 export function fallIll(world: World, p: Person, how: string): boolean {
@@ -112,5 +103,3 @@ export function describeIllness(world: World, p: Person): string | null {
   const word = i.severity >= 0.7 ? 'bad' : i.severity >= 0.4 ? 'feverish' : 'on the mend';
   return `a fever, day ${day}: ${word}${i.how ? ` (${i.how})` : ''}`;
 }
-
-export type { Illness };

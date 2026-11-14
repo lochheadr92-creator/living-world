@@ -12,7 +12,6 @@ import type { Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-able` restores the live housemate read inside a rules-180 rich world. */
-export const knownAbleOn = (): boolean => enabled;
 export function setKnownAble(on: boolean): void { enabled = on; }
 export const hasKnownAble = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 180);
 

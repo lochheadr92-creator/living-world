@@ -6,6 +6,5 @@ import type { World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-seen-dependant` restores the live in-sight needs inside a rules-173 rich world. */
-export const seenDependantOn = (): boolean => enabled;
 export function setSeenDependant(on: boolean): void { enabled = on; }
 export const hasSeenDependant = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 173);

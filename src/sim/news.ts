@@ -24,7 +24,6 @@ const NEWS_WEIGHT: Partial<Record<Belief['kind'], number>> = {
   tree: 1,
   building: 1.5,
   site: 2.2,
-  water: 1,
   danger: 7,
   clay_pit: 3.2,
   ore_vein: 3.2,
@@ -46,7 +45,6 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'site' && b.hh !== S.hhId && !(b.btype && isFacilityType(b.btype as BuildingType))) continue;
     if (b.kind === 'cart' && b.hh !== S.hhId) continue;
     if (b.kind === 'danger' && (b.amount <= 0 || world.tick - b.seen > 900)) continue;
-    if (b.kind === 'water') continue;
     const isFood = isFoodKind(b.kind);
     // rules 176: a fresh empty sight, including one only heard, uses the same 1,100-tick horizon. Before that, a personal failure.
     const shareableEmpty = emptyFoodShareable(world, b, currentFailure(world, S, b.id));

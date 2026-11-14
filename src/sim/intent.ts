@@ -117,8 +117,6 @@ export function hasKnownResource(world: World, p: Person, item: ItemKind): boole
   return false;
 }
 
-export const activeIntent = (p: Person): Intention | null => p.intentions.find((i) => i.status === 'active') ?? null;
-
 /**
  * How much of a material this person's own plans have spoken for. It is counted the same way a promise is (social.ts reservedFor):
  * derived from the live records, never a separate ledger to keep in step. The moment a plan ends its claim is gone, because the
@@ -475,16 +473,6 @@ export function creditShelterFrom(p: Person, a: Activity): void {
 // Both are projects: the thing someone means to end up with is several activities away, and the engine will not offer the last step
 // (craft, repair) until the materials are already in the pack. The plan is what carries the want across the gap - it keeps the
 // fetching steps in the running and says, truthfully, what is still missing.
-
-/** how much of each material the plan still lacks, from what is actually in the pack */
-function stillNeeded(p: Person, wants: Partial<Items>): Partial<Items> {
-  const out: Partial<Items> = {};
-  for (const k of Object.keys(wants) as ItemKind[]) {
-    const short = (wants[k] ?? 0) - (p.inv[k] ?? 0);
-    if (short > 0) out[k] = short;
-  }
-  return out;
-}
 
 /**
  * How much of one material a plan may count as its own, when the person is carrying more than one plan. The pack is shared out in

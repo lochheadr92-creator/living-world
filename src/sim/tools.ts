@@ -4,7 +4,7 @@ import { LOAN_TERM, TOOL_DEFS, TOOL_DULL_FROM, TOOL_EFFECT, TOOLS } from './cons
 import { addItem, ledgerConsume, ledgerCreate, takeFrom, roomFor } from './economy';
 import {carryCap} from './people';
 import { addEvent, addLog } from './events';
-import { bestOf, holderItems, retagTools, toolById, toolsHeldBy } from './toolreg';
+import { bestOf, holderItems, toolsHeldBy } from './toolreg';
 import { newId } from './registry';
 import type { Items, Person, Tool, ToolKind, World } from './types';
 
@@ -134,11 +134,6 @@ export function registerStartingTools(world: World): void {
   }
 }
 
-/** Equipment whose count was changed directly (scenes, tests) gets records so the two views agree again. */
-export function syncToolRecords(world: World): void {
-  registerStartingTools(world);
-}
-
 export function describeTool(t: Tool): string {
   const d = TOOL_DEFS[t.kind];
   return `${t.tier === 1 ? 'iron ' : ''}${d.label}`;
@@ -262,22 +257,4 @@ export function toolsOnDeath(world: World, dead: Person): void {
       }
     }
   }
-}
-
-/** Move the tool records along with items that were swept into a heap (death, a collapsed building). */
-export function toolsToHeap(world: World, fromId: number, pileId: number, items: Items): void {
-  for (const kind of TOOLS) {
-    const n = items[kind] ?? 0;
-    if (n > 0) retagTools(world, kind, n, fromId, pileId);
-  }
-}
-
-/** A building that collapses scatters what was on its racks; a tool on the bench is dropped with it. */
-export function releaseToolsOf(world: World, buildingId: number): void {
-  for (const t of world.tools) if (t.holder === buildingId) t.loan = null;
-}
-
-/** Equipment that has been out on loan far past its due date (the lender is told by the commitment system; this is the physical fact). */
-export function overdueLoans(world: World): Tool[] {
-  return world.tools.filter((t) => t.loan && t.loan.lender !== 0 && t.loan.due < world.tick - 200);
 }

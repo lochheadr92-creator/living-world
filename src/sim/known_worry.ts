@@ -7,6 +7,5 @@ import type { World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-worry` restores the rules-169 drop inside a rules-170 rich world. */
-export const knownWorryOn = (): boolean => enabled;
 export function setKnownWorry(on: boolean): void { enabled = on; }
 export const hasKnownWorry = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 170);

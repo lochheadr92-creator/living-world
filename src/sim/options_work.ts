@@ -62,16 +62,14 @@ import { findBuildSpot } from './buildings';
 import { foodUnits, invRoom, invWeight, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
-import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
+import { delBelief, missingMaterials, noteFailure, recentFailure } from './knowledge';
 import { careStoreOption, careWaterStoreOption } from './care_capacity';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
-import { drive } from './needs';
 import { carryCap, stageOf } from './people';
 import { fireCommitment, hasPracticalCare } from './responsibilities';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
-import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
@@ -97,28 +95,24 @@ export interface HhState {
   shortage: number;
   homeFood: number;
   homeSeeds: number;
-  homeBelief: Belief | null;
 }
 
 export function hhState(ctx: Ctx): HhState {
   const { p, world } = ctx;
   let homeFood = 0;
   let homeSeeds = 0;
-  let homeBelief: Belief | null = null;
   for (const b of beliefsByKind(p, ['building'])) {
     if(hasCellars(world)&&b.hh===p.hhId&&b.btype==='cellar')homeFood+=foodCount(b.items??{});
     if (b.hh === p.hhId && isHomeType(b.btype)) {
       homeFood += foodCount(b.items ?? {});
       homeSeeds += unitsOf(b.items?.seeds);
-      if (!homeBelief || isSolidHome(b.btype)) homeBelief = b;
     }
   }
   const mem = Math.max(1, ctx.members.length);
   const foodStock = ctx.food + homeFood;
   const foodTarget = (ctx.dependents.length > 0 || mem > 1 ? 6 : 4.5) * mem;
   const shortage = Math.max(0, Math.min(1, 1 - foodStock / foodTarget));
-  void world;
-  return { foodStock, foodTarget, shortage, homeFood, homeSeeds, homeBelief };
+  return { foodStock, foodTarget, shortage, homeFood, homeSeeds };
 }
 
 export function nightMult(ctx: Ctx): number {
@@ -258,8 +252,6 @@ function optDepositFood(ctx: Ctx): void {
   if (surplus < (partialReserve||smallPack||roomShort||ration?1:2)) return;
   // lab only (light_pack.ts setFillingTrips, off in every world): the ration's trip home waits for a filling pack
   if (ration && !partialReserve && !smallPack && !roomShort && tripWaitsForFillingPack(world, surplus, invWeight(p), carryCap(world, p))) return;
-  const mem = Math.max(1, ctx.members.length);
-  void mem;
   for (const b of beliefsByKind(p, ['building'])) {
     const cellar=hasCellars(world)&&b.btype==='cellar'&&b.hh===p.hhId;
     const mine = b.hh === p.hhId && (isHomeType(b.btype)||cellar);
@@ -890,8 +882,7 @@ function optPlanBuild(ctx: Ctx): void {
         const sx = spot.x;
         const sy = spot.y;
         // stand just in front of where it will be
-        let stand = { x: sx + 0.5, y: sy + d.h + 0.5 };
-        if (!isFreeLand(world, Math.floor(stand.x), Math.floor(stand.y)) && !world.solid[Math.floor(stand.y) * world.W + Math.floor(stand.x)]) stand = { x: stand.x, y: stand.y };
+        const stand = { x: sx + 0.5, y: sy + d.h + 0.5 };
         return newActivity(world, p, {
           kind: 'plan_site',
           label: `Marking out a ${d.label}`,
@@ -2176,8 +2167,3 @@ export function workOptions(ctx: Ctx): void {
   optIdle(ctx);
   prioritizeCareReturn(ctx);
 }
-
-void estimatedAmount;
-void drive;
-void T;
-void ({} as Person);

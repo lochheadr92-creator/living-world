@@ -7,7 +7,6 @@ export interface ViewerPreferences {
   reducedMotion: boolean;
 }
 export interface ViewRect { x: number; y: number; w: number; h: number }
-export const DEFAULT_VIEWER: ViewerPreferences = { speech: 'automatic', textSize: 'normal', contrast: 'standard', reducedMotion: false };
 export function viewerPreferences(value?: Partial<ViewerPreferences> | null): ViewerPreferences {
   return {
     speech: value?.speech === 'selected' || value?.speech === 'hidden' ? value.speech : 'automatic',

@@ -32,11 +32,6 @@ export function openGrievance(world: World, holder: Person, other: Person, cause
   if (r.history.length > 24) r.history.shift();
 }
 
-export function grievanceOf(holder: Person, other: number): { cause: GrievanceCause; detail: string; weight: number; apologies: number } | null {
-  const g = holder.relations[other]?.grievance;
-  return g ? { cause: g.cause, detail: g.detail, weight: g.weight, apologies: g.apologies } : null;
-}
-
 /** Something was done to mend it. Returns true if that closed it. */
 export function easeGrievance(world: World, holder: Person, other: Person, amount: number, how: string): boolean {
   const r = holder.relations[other.id];

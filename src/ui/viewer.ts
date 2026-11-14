@@ -47,7 +47,7 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
     const banner = root.querySelector<HTMLElement>('.scene-banner');
     const bannerBottom = banner && !banner.hidden && window.innerWidth <= 680 ? banner.getBoundingClientRect().bottom + 8 : 0;
     root.style.setProperty('--viewer-inspector-top', `${bannerBottom}px`);
-    game.viewOcclusions = [...root.querySelectorAll<HTMLElement>('.glass, .wm, .help-card, .viewer-settings')]
+    game.viewOcclusions = [...root.querySelectorAll<HTMLElement>('.glass, .viewer-settings')]
       .filter(el => !el.closest('[hidden]'))
       .map(el => el.getBoundingClientRect())
       .filter(r => r.width > 0 && r.height > 0)

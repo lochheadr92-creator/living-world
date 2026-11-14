@@ -85,7 +85,6 @@ const ICONS = {
   check: `<path d="m3.4 8.4 3 3 6.2-6.6"/>`,
   alert: `<path d="M8 2.2 14.4 13H1.6Z"/><path d="M8 6.6v3"/><circle cx="8" cy="11.3" r=".7" fill="currentColor" stroke="none"/>`,
   info: `<circle cx="8" cy="8" r="6.4"/><path d="M8 7.2v3.6"/><circle cx="8" cy="5" r=".75" fill="currentColor" stroke="none"/>`,
-  menu: `<path d="M2.6 4.4h10.8M2.6 8h10.8M2.6 11.6h10.8"/>`,
   logo: `<path d="M8 1.6 14.4 5 8 8.4 1.6 5Z" fill="#79b85a" stroke="none"/><path d="M1.6 5 8 8.4v6L1.6 11Z" fill="#a77b4b" stroke="none"/><path d="M14.4 5 8 8.4v6L14.4 11Z" fill="#8a6038" stroke="none"/><circle cx="8" cy="4.7" r="1.6" fill="#f2c14e" stroke="none"/>`,
 
   // ───────── "what are they up to" ─────────
@@ -109,8 +108,6 @@ const ICONS = {
   hall: `<path d="M.9 8.2 8 3l7.1 5.2"/><path d="M2.4 7.2v6.4h11.2V7.2" fill="currentColor" fill-opacity=".18"/><path d="M6.8 13.6V10a1.2 1.2 0 0 1 2.4 0v3.6"/><path d="M8 3V1.4"/>`,
   cart: `<path d="M1.8 4.2h9.4l-.9 5.4H3Z" fill="currentColor" fill-opacity=".25"/><circle cx="5.6" cy="12" r="2.1"/><path d="M11.2 5.4 14.6 3.8"/>`,
   cog: `<circle cx="8" cy="8" r="2.4"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4 5 11M11 5l1.4-1.4"/>`,
-  wrench: `<path d="M9.4 2.4a3.4 3.4 0 0 0-3 4.4l-3.6 3.6a1.4 1.4 0 0 0 2 2l3.6-3.6a3.4 3.4 0 0 0 4.4-3l-2 2-1.8-.4-.4-1.8 2-2a3.4 3.4 0 0 0-1.2-1.2Z"/>`,
-  plate: `<ellipse cx="8" cy="9" rx="6.4" ry="3.4"/><ellipse cx="8" cy="9" rx="3.2" ry="1.6" fill="currentColor" fill-opacity=".3"/>`,
 } as const satisfies Record<string, string>;
 
 export type IconName = keyof typeof ICONS;
@@ -172,8 +169,4 @@ export function setIcon(span: HTMLElement, name: IconName, size = 16): void {
   if (span.dataset.icon === name) return;
   span.dataset.icon = name;
   span.replaceChildren(build(name, size));
-}
-
-export function allIconNames(): IconName[] {
-  return Object.keys(ICONS) as IconName[];
 }

@@ -12,7 +12,6 @@ import type { Concern, Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-welfare` restores the live reads inside a rules-179 rich world. */
-export const knownWelfareOn = (): boolean => enabled;
 export function setKnownWelfare(on: boolean): void { enabled = on; }
 export const hasKnownWelfare = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 179);
 

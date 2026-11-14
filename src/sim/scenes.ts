@@ -13,7 +13,7 @@ import { hashString, RNG } from './rng';
 import { makeSource } from './sources';
 import { mintTool } from './tools';
 import { blankWorld, computeAccessCells, computeWaterDist, lookAround } from './worldgen';
-import type { ItemKind, Items, Person, SceneId, Settings, ToolKind, Traits, World } from './types';
+import type { Items, Person, SceneId, Settings, ToolKind, Traits, World } from './types';
 import { T } from './types';
 import { ACCESS_CELL, waterBeliefId } from './knowledge';
 
@@ -338,5 +338,3 @@ export function createSceneWorld(settings: Settings): World {
 
 /** Builders for hand-made situations in tests. */
 export const testKit = { flatWorld, addPerson, befriend, finish, everyoneKnowsTheLake };
-
-void ({} as ItemKind);

@@ -18,7 +18,7 @@
 //     and time, the first TRIALS_NEEDED−1 attempts come to nothing (the inputs are spent, recorded as "a failed attempt"), and
 //     the TRIALS_NEEDED-th yields the goods and the procedure, recorded as worked out by trial with what it cost. No draw, no
 //     free discovery: the same person at the same work always learns on the same attempt.
-import { AGE_ADULT, AGE_CHILD, DAY, TICKS_PER_YEAR } from './constants';
+import { AGE_ADULT, DAY } from './constants';
 import { isRich } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { addEvent, addLog } from './events';
@@ -130,7 +130,6 @@ export function answerLesson(w: World,c: Conversation,a: Person,b: Person): stri
  let why=lessonProblem(w,a,b,kind);
  if (!why&&b.techniques?.[kind]) why=`already knows ${name}`;
  if (!why) why = learnBlocker(w, b, kind);
- if (!why&&(w.tick-b.birthTick)/TICKS_PER_YEAR<AGE_CHILD) why=kind==='charcoal'?'too young for kiln instruction':'too young for smithy instruction';
  if (!why&&((b.relations[a.id]?.trust??0)<0||(b.relations[a.id]?.affinity??0)<-5)) why='does not want instruction from this teacher';
  if (!why&&b.traits.curiosity+Math.max(0,b.relations[a.id]?.affinity??0)/100<0.45) why='would rather do something else';
  c.lesson={since:w.tick,until:w.tick+LESSON_TICKS,outcome:why?'declined':'learning',reason:why||`accepted ${name} instruction`,...(kind==='charcoal'?{}:{kind})};

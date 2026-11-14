@@ -21,8 +21,7 @@ import { isRich } from './mood';
 import { nightPlansOn, shelters, untilDaylight } from './intent';
 import { hasHabitation, indoorHome } from './habitation';
 import { payNudge } from './learning';
-import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
-import { carryCap } from './people';
+import { isHomeType, isSolidHome, homeNoun } from './constants';
 import { foodUnits, invRoom } from './economy';
 import { hasCareCapacity } from './care_capacity';
 import { withdrawAllowance } from './facilities';
@@ -30,11 +29,10 @@ import { hasWinterReserve, homeStoreBelief } from './provision';
 import { rationApplies, rationHeld } from './light_pack';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
-import { delBelief, estimatedAmount, recentFailure } from './knowledge';
+import { delBelief, recentFailure } from './knowledge';
 import { hearsayTripCosts } from './teller_confidence';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import {runsPreservation} from './preservation';
-import { hashUnit } from './rng';
 import { dayFraction } from './environment';
 import {
   Scorer,
@@ -493,7 +491,7 @@ function optSleep(ctx: Ctx): void {
   if (lateNight && e < 90) sd = Math.max(sd, 26 + (100 - e) * 0.5 + (world.light < 0.12 ? 8 : 0));
   if (sd <= 0) return;
 
-  type Bed = { x: number; y: number; q: number; what: string; id: number; b?: Belief };
+  type Bed = { x: number; y: number; q: number; what: string; id: number; b: Belief };
   const beds: Bed[] = [];
   for (const b of beliefsByKind(p, ['building'])) {
     if (b.hh === p.hhId && isHomeType(b.btype)) {
@@ -527,7 +525,7 @@ function optSleep(ctx: Ctx): void {
       targetId: bed.id,
       tag: 'rest',
       make: () => {
-        const spot = bed.b ? spotNear(world, p, bed.b) : null;
+        const spot = spotNear(world, p, bed.b);
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'sleep',
@@ -580,7 +578,7 @@ function optWarmth(ctx: Ctx): void {
   const tm = traitMods(p);
   let wd = ctx.drives.warmth;
   const w = world.weather;
-  const exposed = (w.rain > 0.3 || w.storm > 0.3) && true;
+  const exposed = w.rain > 0.3 || w.storm > 0.3;
   if (exposed) wd = Math.max(wd, (12 + 34 * w.storm + 16 * w.rain) * tm.caution);
   if (wd <= 0) return;
 
@@ -774,8 +772,3 @@ export function survivalOptions(ctx: Ctx): void {
   optRest(ctx);
   optShelter(ctx);
 }
-
-void carryCap;
-void NUTRITION;
-void estimatedAmount;
-void hashUnit;

@@ -13,7 +13,6 @@ import type { Building, Site, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-185 rich world keeps no extent. */
-export const townshipExtentOn = (): boolean => enabled;
 export function setTownshipExtent(on: boolean): void { enabled = on; }
 export const hasTownshipExtent = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 185);
 

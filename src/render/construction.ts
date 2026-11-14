@@ -140,7 +140,7 @@ export class SiteDrawer {
       // the finished building will take this variant, so the reveal does not change look at the moment it is done
       const old = upgrade ? world.byId.get(s.upgradeOf as number) : undefined;
       const variant = old && old.ent === 'building' ? (old as Building).variant : Math.floor(hashUnit(s.x, s.y, 77) * 4);
-      top = this.structure(ctx, p, s, spec, meta, f, usedAny, upgrade, simT, variant);
+      top = this.structure(ctx, p, s, spec, meta, f, usedAny, upgrade, variant);
     }
 
     for (const pl of piles) if (!pl.back) blit(ctx, pl.spr, pl.x, pl.y);
@@ -263,7 +263,7 @@ export class SiteDrawer {
 
   // ───────────── the structure ─────────────
   /** Draws the footing, frame and revealed building; returns how high the whole thing stands now (for the badge above it). */
-  private structure(ctx: Ctx, p: P3, s: Site, spec: Spec, meta: (typeof STRUCT)[BuildKind], f: number, usedAny: boolean, upgrade: boolean, simT: number, variant: number): number {
+  private structure(ctx: Ctx, p: P3, s: Site, spec: Spec, meta: (typeof STRUCT)[BuildKind], f: number, usedAny: boolean, upgrade: boolean, variant: number): number {
     const { w, h } = s;
     const kind = s.type as BuildKind;
     let top = 10;

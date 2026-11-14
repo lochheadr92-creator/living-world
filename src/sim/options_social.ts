@@ -27,7 +27,7 @@ import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
 import { heldTechniques, hasLearnerInstruction, TECHNIQUES, TECHNIQUE_KINDS, techniqueApplies, knowsTechnique, learnBlocker } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
-import { canInvite, projectAt, participation } from './townships';
+import { canInvite, projectAt } from './townships';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { reputationOf } from './reputation';
@@ -43,17 +43,15 @@ import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
-import { isDependent, stageOf } from './people';
+import { stageOf } from './people';
 import { hasHeardHelpers, heardHelpers } from './heard_helpers';
-import { MAKING_NOTE, MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
+import { MAKING_NOTE, MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, isFood } from './social';
 import { outstandingForPlan, projectAsksOn } from './intent';
 import { attendOptions } from './occasions';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
 import { welfareOptions, seekCarerOptions } from './welfare';
-import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
-import { hashUnit } from './rng';
 import { spark, trustOf } from './relations';
 import { runsRulesVersion } from './rulesversion';
 import { hasProposalBelief } from './proposal_belief';
@@ -142,7 +140,6 @@ function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label
 // ───────────────────────── chat ─────────────────────────
 function optChat(ctx: Ctx): void {
   const { p } = ctx;
-  if (ctx.stage === 'child' && ctx.dependents.length === 0 && false) return;
   const tm = traitMods(p);
   const sd = ctx.drives.social;
   const cands = candidates(ctx).filter((c) => (c.s.hungry || c.s.thirsty ? false : true) || c.aff > 20);
@@ -472,7 +469,6 @@ function optAskInfo(ctx: Ctx): void {
       mkSocial(ctx, c, 'ask_info', { infoKind: 'person', destKind: 'person', destId: who.id }, `Ask ${c.q.name} where ${who.name} is`, `to find ${who.name} and keep my promise`, null, sc, 'info', ':person:' + who.id);
     }
   }
-  void world;
 }
 
 // ───────────────────────── warning others ─────────────────────────
@@ -539,7 +535,6 @@ function optOffer(ctx: Ctx): void {
     sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
     mkSocial(ctx, c, 'offer', { items }, `Offer ${label} to ${q.name}`, `to help ${q.name}`, null, sc, 'offer');
   }
-  void isDependent;
 }
 
 // ───────────────────────── making peace ─────────────────────────
@@ -684,7 +679,7 @@ function optTrade(ctx: Ctx): void {
     if (s >= 2) spare.push({ item: k, n: s });
   }
   if (!spare.length) return;
-  spare.sort((a, b) => valueOf(world, p, a.item) * 0 + b.n - a.n);
+  spare.sort((a, b) => b.n - a.n);
   const offer = spare[0];
   exchangeJourneyOptions(ctx,want,offer);
   // rules 202 (swap_and_fire.ts): a swap for food is worth the walk it saves to the nearest food this person believes in
@@ -704,7 +699,6 @@ function optTrade(ctx: Ctx): void {
     if (swapWorth > 0) sc.add('it would save me the walk to food', swapWorth);
     mkSocial(ctx, c, 'trade', { item: askItem, amount: want.n, offer: offer.item, offerAmount: Math.min(offer.n, want.n + 1) }, `Offer ${c.q.name} a swap: ${offer.item} for ${askItem}`, `to get ${askItem}`, null, sc, 'trade', ':' + askItem);
   }
-  void hashUnit;
 }
 
 // rules 51 (customers.ts): bring a customer what they asked for, as a swap or a gift through the existing conversations
@@ -861,7 +855,4 @@ export function socialOptions(ctx: Ctx): void {
   optTeachTechnique(ctx);
   optRequestTechnique(ctx);
   optChat(ctx);
-  void eta;
 }
-
-void toolsHeldBy;

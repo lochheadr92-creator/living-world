@@ -14,7 +14,7 @@
 // This module is the only owner of all of that: what the current version is, whether a value is valid, what version a given
 // world actually runs, and whether a world is eligible for behaviour introduced at some later version. Nothing else should
 // compare a version number to a literal.
-import type { Settings, World } from './types';
+import type { World } from './types';
 
 /**
  * The generation of behaviour new worlds are created with.
@@ -346,9 +346,6 @@ export function validateRulesVersion(v: unknown): VersionVerdict {
 
 /** The version a world is actually running: what its settings say, with no substitution of the current version. */
 export const rulesVersionOf = (world: World): number | undefined => world.settings.rulesVersion;
-
-/** The same question of a bare settings object (before a world exists). */
-export const settingsRulesVersion = (s: Pick<Settings, 'rulesVersion'>): number | undefined => s.rulesVersion;
 
 /**
  * Is this world eligible for behaviour introduced at version `from`? This is the one place future versioned rules should ask,

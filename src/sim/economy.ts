@@ -5,7 +5,7 @@ import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy'
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
-import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
+import type { FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, World } from './types';
 
 const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 
@@ -89,10 +89,6 @@ export function addItem(items: Items, k: ItemKind, n: number): void {
 }
 
 // ───────── person inventories ─────────
-export function invStore(world: World, p: Person): Store {
-  return { items: p.inv, cap: carryCap(world, p) };
-}
-
 export function invRoom(world: World, p: Person, k: ItemKind): number {
   return roomFor(p.inv, carryCap(world, p), k);
 }
@@ -168,15 +164,6 @@ export function transfer(
   return m;
 }
 
-/** Transfer into a person's pack. */
-export function giveToPerson(world: World, from: Items, p: Person, k: ItemKind, n: number, fromTag: string, reason: string): number {
-  return transfer(world, from, p.inv, carryCap(world, p), k, n, fromTag, 'person:' + p.id, reason);
-}
-
-export function takeFromPerson(world: World, p: Person, to: Items, toCap: number, k: ItemKind, n: number, toTag: string, reason: string): number {
-  return transfer(world, p.inv, to, toCap, k, n, 'person:' + p.id, toTag, reason);
-}
-
 /** Move units out of a natural source into a person's pack. */
 export function gatherFromSource(world: World, src: Source, p: Person, n: number): number {
   const room = invRoom(world, p, src.item);
@@ -203,14 +190,6 @@ export function harvestPlot(world: World, plot: Plot, p: Person): { grain: numbe
   recordPersonalProduction(world,p,'harvest','grain',g,plot.id);
   recordPersonalProduction(world,p,'harvest','seeds',s,plot.id);
   return { grain: g, seeds: s };
-}
-
-export function buildingStore(b: Building): Store {
-  return b.store;
-}
-
-export function siteStoreRoom(): number {
-  return 9999;
 }
 
 // ───────── totals / conservation check ─────────

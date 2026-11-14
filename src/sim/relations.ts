@@ -16,20 +16,12 @@ export function relOf(p: Person, otherId: number): Relation {
   return r;
 }
 
-export function peekRel(p: Person, otherId: number): Relation | undefined {
-  return p.relations[otherId];
-}
-
 export function affinityOf(p: Person, otherId: number): number {
   return p.relations[otherId]?.affinity ?? 0;
 }
 
 export function trustOf(p: Person, otherId: number): number {
   return p.relations[otherId]?.trust ?? 10;
-}
-
-export function familiarityOf(p: Person, otherId: number): number {
-  return p.relations[otherId]?.familiarity ?? 0;
 }
 
 /**

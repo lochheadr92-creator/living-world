@@ -94,8 +94,6 @@ const SOLO_DEF: Record<SoloPlay, { label: string; doing: string; places: BeliefK
   bugs: { label: 'Watch the bugs among the leaves', doing: 'Watching bugs', places: ['berry_bush', 'fruit_tree', 'tree'], skill: 'forage', word: 'watching bugs', haunt: 'trees' },
   sticks: { label: 'Build something with sticks near home', doing: 'Building with sticks', places: null, skill: 'build', word: 'building with sticks', haunt: 'home' },
 };
-export const soloDoing = (k: SoloPlay): string => SOLO_DEF[k].doing;
-export const soloSkill = (k: SoloPlay): SkillKey => SOLO_DEF[k].skill;
 
 /** A walkable spot a step or two from a place, chosen without a random draw. */
 function spotBy(ctx: Ctx, x: number, y: number): { x: number; y: number } | null {

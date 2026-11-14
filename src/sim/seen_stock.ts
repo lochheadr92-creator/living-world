@@ -14,7 +14,6 @@ import type { ItemKind, Items, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-seen-stock` restores the exact copy inside a rules-169 rich world. */
-export const seenStockOn = (): boolean => enabled;
 export function setSeenStock(on: boolean): void { enabled = on; }
 export const hasSeenStock = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 169);
 

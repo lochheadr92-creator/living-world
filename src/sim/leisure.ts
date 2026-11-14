@@ -54,7 +54,6 @@ const STALE_OVER = Math.round(DAY * 0.75);
 const MAX_STROLL = 14;
 /** within this of something they believe dangerous, a place is not somewhere to idle */
 const DANGER_KEEP_AWAY = 12;
-const MAX_HAUNTS = 4;
 /** what the single idle fallback was worth before version 28, and what it is still worth */
 const FALLBACK = 6;
 
@@ -98,7 +97,7 @@ export function hauntsFor(ctx: Ctx): Haunt[] {
   if (water) out.push({ key: 'water', label: "Stroll to the water's edge", doing: "Pottering about at the water's edge", x: water.x, y: water.y, kind: 'water' });
   const trees = near(['tree', 'fruit_tree']);
   if (trees) out.push({ key: 'trees', label: 'Wander out to the trees', doing: 'Sitting out among the trees', x: trees.x, y: trees.y, kind: 'tree' });
-  return out.slice(0, MAX_HAUNTS);
+  return out;
 }
 
 function lastAt(p: Person, key: string): number | null {

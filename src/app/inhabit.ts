@@ -9,8 +9,8 @@ import { DAY } from '../sim/constants';
 import { settingsForProfile } from '../sim/profiles';
 import { CURRENT_RULES_VERSION } from '../sim/rulesversion';
 import type { ProfileName } from '../sim/profiles';
-import type { InhabitantNotes, Settings, World } from '../sim/types';
-import { LiveSession, livingPerson } from '../agent/run';
+import type { InhabitantNotes, Settings } from '../sim/types';
+import { LiveSession } from '../agent/run';
 import { DEFAULT_BUDGET, RetryableModelError } from '../agent/model';
 import type { ModelClient, ModelRequest } from '../agent/model';
 import type { Ask, Call, Transcript } from '../agent/transcript';
@@ -364,14 +364,5 @@ export class InhabitDriver {
     const s = this.session;
     if (!s) return null;
     return s.transcript.end ? s.transcript : s.snapshotTranscript(this.game.world);
-  }
-
-  /** the world the driver is looking at (after a rewind the game holds a new object) */
-  world(): World {
-    return this.game.world;
-  }
-
-  alive(): boolean {
-    return livingPerson(this.game.world, this.personId) !== null;
   }
 }

@@ -53,7 +53,7 @@ import { updateEnvironment } from './environment';
 import { facilityTick, noteSpoiled, spoilMultiplier } from './facilities';
 import { mealTick } from './meals';
 import { noteConcerns } from './welfare';
-import { addEvent, addFx } from './events';
+import { addEvent } from './events';
 import { updatePlots } from './farming';
 import { CONCEPTION_CHECK_EVERY, LIFE_CHECK_EVERY, adoptOrphans, conceptionTick, deathCauseOf, fatalInjuryHolds, immigrationTick, killPerson, lifeTick } from './lifecycle';
 import { updateNeeds } from './needs';
@@ -323,7 +323,6 @@ function spoilGoods(world: World): void {
       if (cell) cell.splice(cell.indexOf(pile), 1);
     }
   }
-  void addFx;
 }
 
 /** Projects that nobody has touched for days are abandoned, which frees the settlement to start something it can finish. */

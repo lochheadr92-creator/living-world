@@ -14,7 +14,6 @@ import { hyp } from './util';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-witness-sight` restores the fixed radius inside a rules-183 rich world. */
-export const witnessSightOn = (): boolean => enabled;
 export function setWitnessSight(on: boolean): void { enabled = on; }
 export const hasWitnessSight = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 183);
 

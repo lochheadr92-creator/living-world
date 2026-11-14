@@ -219,10 +219,6 @@ export function estimatedAmount(world: World, b: Belief): number {
   return b.amount;
 }
 
-export function beliefAge(world: World, b: Belief): number {
-  return world.tick - b.seen;
-}
-
 export function noteFailure(world: World, p: Person, id: number, reason: string): void {
   const f = p.failures[id];
   if (f) {
@@ -252,22 +248,8 @@ export function clearFailure(p: Person, id: number): void {
   delete p.failures[id];
 }
 
-export function beliefsOfKind(p: Person, ...kinds: BeliefKind[]): Belief[] {
-  const out: Belief[] = [];
-  for (const kind of kinds) {
-    const ids = p.bykind[kind];
-    if (ids) for (const id of ids) out.push(p.beliefs[id]);
-  }
-  return out;
-}
-
 export function countBeliefs(p: Person): number {
   let n = 0;
   for (const k in p.bykind) n += p.bykind[k as BeliefKind]?.length ?? 0;
   return n;
-}
-
-/** Is there an entity-world mismatch the person would notice on arrival? */
-export function beliefStale(world: World, b: Belief): boolean {
-  return !isWaterBeliefId(world, b.id) && !world.byId.has(b.id);
 }

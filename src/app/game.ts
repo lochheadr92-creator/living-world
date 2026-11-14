@@ -108,7 +108,7 @@ export class Game {
   /** true once the world's own clock has thrown in this world: its state may be part-way through a tick */
   worldFaulted = false;
   private faultsLogged = new Set<string>();
-  private recent: { dt: number; ticks: number; asked: number }[] = [];
+  private recent: { dt: number; ticks: number }[] = [];
   /** real seconds spent playing, and when (on that clock) ticks were given up, for the "recent" part of the report */
   private playClock = 0;
   private dropLog: { at: number; n: number }[] = [];
@@ -175,7 +175,7 @@ export class Game {
     n = ran;
     this.alpha = this.acc;
     this.lastFrameTicks = n;
-    this.recent.push({ dt: real, ticks: n, asked: this.speed });
+    this.recent.push({ dt: real, ticks: n });
     let span = 0;
     for (let i = this.recent.length - 1; i >= 0; i--) {
       span += this.recent[i].dt;

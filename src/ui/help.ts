@@ -5,10 +5,8 @@ import { OVERLAY_DEFS } from './overlays';
 import type { Part, UICtx } from './context';
 
 export interface HelpPart extends Part {
-  open(): void;
   close(): boolean;
   toggle(): void;
-  isOpen(): boolean;
 }
 
 type KeyRow = [keys: string[], what: string];
@@ -147,13 +145,11 @@ export function createHelp(ctx: UICtx): HelpPart {
   }
 
   return {
-    open,
     close,
     toggle() {
       if (isOpen) close();
       else open();
     },
-    isOpen: () => isOpen,
     dispose() {
       backdrop.remove();
     },

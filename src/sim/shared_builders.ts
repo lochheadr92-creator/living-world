@@ -14,7 +14,6 @@ import type { Building, Site, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-186 rich world records the finisher only, as before. */
-export const sharedBuildersOn = (): boolean => enabled;
 export function setSharedBuilders(on: boolean): void { enabled = on; }
 export const hasSharedBuilders = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 186);
 

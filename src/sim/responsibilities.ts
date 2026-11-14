@@ -60,10 +60,6 @@ export function childrenNeedingWatch(world: World, p: Person): Person[] {
   return members.filter((m) => m !== p && m.alive && stageOf(world, m) === 'child');
 }
 
-/** the watch commitment this person holds, if any */
-export function watchCommitment(p: Person): Commitment | undefined {
-  return p.commitments.find((c) => c.status === 'active' && c.kind === 'work' && c.milestone === 'watched');
-}
 export function fireCommitment(p: Person, fireId: number): Commitment | undefined {
   return p.commitments.find((c) => c.status === 'active' && c.kind === 'work' && c.milestone === 'fire kept' && c.destId === fireId);
 }

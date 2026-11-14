@@ -16,7 +16,6 @@ export const DOOR_REACH = 2;
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-home-interior` restores the sight of a home's contents from outside inside a rules-184 rich world. */
-export const homeInteriorOn = (): boolean => enabled;
 export function setHomeInterior(on: boolean): void { enabled = on; }
 export const hasHomeInterior = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 184);
 

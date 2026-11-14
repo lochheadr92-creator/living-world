@@ -37,10 +37,7 @@ export const hasWoodenSpear = (world: World): boolean => world.settings.dynamics
 export const STAKE_WORK = 60;
 /** how much a grown person with no spear wants one when no wolf has been met */
 export const SPEAR_READY = 1.9;
-let readyDose: number | null = null;
-/** Lab switch (never saved or hashed): another strength for the want, or null for SPEAR_READY. */
-export function setSpearReady(dose: number | null): void { readyDose = dose; }
-export const spearReady = (): number => readyDose ?? SPEAR_READY;
+export const spearReady = (): number => SPEAR_READY;
 
 const STAKE = { ...TOOL_RECIPE.spear, stone: 0, work: STAKE_WORK };
 /** What a hand tool is made of in this world: the table in constants.ts, except the wooden spear from rules 240. */
@@ -49,9 +46,6 @@ export function toolRecipe(world: World, kind: ToolKind): (typeof TOOL_RECIPE)[T
 }
 /** what the wood trip for a spear, and the making of it with the wood in hand, score above another tool's (the basket's is 8) */
 export const SPEAR_WORTH = 8;
-let worthDose: number | null = null;
-/** Lab switch (never saved or hashed): another worth, or null for SPEAR_WORTH. */
-export function setSpearWorth(dose: number | null): void { worthDose = dose; }
-export const spearWorth = (world: World, tool: string): number => (on.worth && tool === 'spear' && hasWoodenSpear(world) ? worthDose ?? SPEAR_WORTH : 0);
+export const spearWorth = (world: World, tool: string): number => (on.worth && tool === 'spear' && hasWoodenSpear(world) ? SPEAR_WORTH : 0);
 /** Does a grown person want a spear though they have met no wolf? Only from rules 240. */
 export const wantsSpearReady = (world: World): boolean => on.ready && hasWoodenSpear(world);

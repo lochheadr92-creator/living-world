@@ -9,7 +9,7 @@ import {recoveredOffcuts} from './offcuts';
 // Nothing here changes the world or draws random numbers.
 import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
 import { weightOf } from './economy';
-import { opsOf, recipeOf, usableUnits } from './facilities';
+import { opsOf, recipeOf } from './facilities';
 import { RECIPES, recipesAt, recipeAvailable } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -532,6 +532,3 @@ export function grievanceViews(world: World, p: Person): GrievanceView[] {
 export function concernViews(world: World, p: Person): { about: string; kind: string; seen: string; source: string }[] {
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
 }
-
-void RECIPES;
-void usableUnits;

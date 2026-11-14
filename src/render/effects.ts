@@ -1,7 +1,7 @@
 // Particles, weather, lighting and ambient creatures. All motion is a function of simulation time
 // (frozen while paused). Particles are spawned from world.fx, a cosmetic event log the simulation writes to.
 import { hashUnit } from '../sim/rng';
-import type { Building, FxEvent, World } from '../sim/types';
+import type { FxEvent, World } from '../sim/types';
 import { T } from '../sim/types';
 import type { CameraState } from '../app/game';
 import { lerp } from '../sim/util';
@@ -50,9 +50,6 @@ export class Effects {
       this.parts.length = 0;
     }
     const fx = world.fx;
-    for (let i = fx.length - 1; i >= 0; i--) {
-      if (fx[i].tick <= this.lastTick) break;
-    }
     let start = fx.length;
     while (start > 0 && fx[start - 1].tick > this.lastTick) start--;
     // when paused at high speed we may have skipped many events: spawn only the most recent ones
@@ -565,9 +562,8 @@ export function drawWeather(ctx: CanvasRenderingContext2D, world: World, simT: n
       const x0 = hashUnit(i, 1, 75) * (w + 200) - 100;
       const y = ((hashUnit(i, 2, 76) * h + simT * sp) % (h + 40)) - 20;
       const len = 10 + hashUnit(i, 4, 78) * 12;
-      const x = x0 - (y / h) * 0;
-      ctx.moveTo(x + y * slant * 0.2, y);
-      ctx.lineTo(x + y * slant * 0.2 - len * slant, y + len);
+      ctx.moveTo(x0 + y * slant * 0.2, y);
+      ctx.lineTo(x0 + y * slant * 0.2 - len * slant, y + len);
     }
     ctx.stroke();
   }

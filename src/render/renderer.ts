@@ -62,10 +62,6 @@ export class Renderer {
     this.resize();
   }
 
-  get viewSize(): { w: number; h: number } {
-    return { w: this.w, h: this.h };
-  }
-
   resize(): void {
     const r = this.canvas.getBoundingClientRect();
     this.dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -307,7 +303,7 @@ export class Renderer {
 
     // ── overlays in screen space ──
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    this.drawScreenOverlays(world, simT, hoverId);
+    this.drawScreenOverlays(world, hoverId);
   }
 
   private drawZzz(ctx: CanvasRenderingContext2D, x: number, y: number, simT: number, id: number): void {
@@ -381,7 +377,7 @@ export class Renderer {
     }
   }
 
-  private drawScreenOverlays(world: World, _simT: number, hoverId: number): void {
+  private drawScreenOverlays(world: World, hoverId: number): void {
     const started = performance.now();
     const { ctx, game, w, h } = this;
     const cam = game.camera, z = cam.zoom, ov = game.overlays;

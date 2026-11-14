@@ -18,7 +18,7 @@ import { tiltWorkChoices } from './temperament';
 import { goalNudge } from './life';
 import { crewNudge } from './crews';
 import { isThreat } from './wildlife';
-import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
+import { REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
@@ -491,5 +491,3 @@ export function urgentInterrupt(world: World, p: Person): boolean {
   }
   return false;
 }
-
-void MIN_COMMIT;

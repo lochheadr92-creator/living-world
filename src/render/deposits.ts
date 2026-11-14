@@ -73,8 +73,6 @@ export function clayPitSprite(cache: SpriteCache, variant: number, stage: 0 | 1 
   });
 }
 
-type Facet = { pts: Pt[]; tone: number };
-
 /** a faceted boulder in three planes, as used by the loose rocks */
 function chunk(ctx: Ctx, cx: number, cy: number, w: number, h: number, tone: number, top: string, left: string, right: string, stroke: string): void {
   const topP: Pt[] = [[cx - w * 0.5, cy - h * 0.5], [cx - w * 0.1, cy - h], [cx + w * 0.45, cy - h * 0.8], [cx + w * 0.55, cy - h * 0.35], [cx, cy - h * 0.25]];
@@ -204,5 +202,3 @@ export function stageOf(amount: number, max: number): 0 | 1 | 2 {
   const f = max > 0 ? amount / max : 0;
   return f > 0.62 ? 2 : f > 0.28 ? 1 : 0;
 }
-
-void (null as unknown as Facet);

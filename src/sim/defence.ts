@@ -100,7 +100,6 @@ let defence = true;
 export function setWolfDefence(on: boolean): void {
   defence = on;
 }
-export const wolfDefenceOn = (): boolean => defence;
 
 /** Does this world have spears in it at all? Rich, and at least version 4. The lab switch does NOT turn this off. */
 export const makesSpears = (world: World): boolean => isRich(world) && runsRulesVersion(world, DEFENCE_FROM_VERSION);
@@ -494,7 +493,6 @@ export function defReset(): void {
 
 export function defSnapshot(): DefenceCounters {
   const { on: _on, ...rest } = defProbe;
-  void _on;
   return { ...rest };
 }
 

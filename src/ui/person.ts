@@ -34,7 +34,6 @@ export interface PersonPanel {
   /** called when a different person is selected: snap bars instead of animating from the previous person */
   reset(): void;
   depth(): PersonDepth;
-  setDepth(d: PersonDepth): void;
 }
 
 export interface PersonHooks {
@@ -103,9 +102,9 @@ interface NeedCell {
 function makeNeedCell(key: NeedKey, label: string): NeedCell {
   const val = h('span', { class: 'need-val num' });
   const bar: BarHandle = makeBar();
-  setVar(bar.fill, '--bar', NEED_COLORS[key] ?? '#cccccc');
+  setVar(bar.fill, '--bar', NEED_COLORS[key]);
   const ico = icon(needIconName(key), 14, 'need-ico');
-  ico.style.color = NEED_COLORS[key] ?? '#cccccc';
+  ico.style.color = NEED_COLORS[key];
   const el = h(
     'div',
     { class: 'need', role: 'meter', tabindex: 0, 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-label': label },
@@ -203,7 +202,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     (n) => {
       const v = h('span', { class: 'num' });
       const ico = icon(needIconName(n.key), 13);
-      ico.style.color = NEED_COLORS[n.key] ?? '#ccc';
+      ico.style.color = NEED_COLORS[n.key];
       return { el: h('span', { class: 'chip need-chip' }, ico, h('span', null, NEED_LABELS[n.key]), v), v };
     },
     (c, n) => { setText(c.v, String(Math.round(n.value))); setState(c.el, 'is-', n.state); c.el.setAttribute('data-tip', `${NEED_LABELS[n.key]} ${Math.round(n.value)} of 100, ${n.state}`); },
@@ -455,7 +454,6 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     wantsOpportunities: () => depth === 'full' && secPlans.isOpen() && plans.wantsOpportunities(),
     syncFollow,
     depth: () => depth,
-    setDepth,
     reset() {
       last = null;
       debug.reset();

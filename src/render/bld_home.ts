@@ -2,7 +2,7 @@
 import { box, boxTones, coursesL, faceL, faceR } from './iso3d';
 import { chimneyStack, doorL, gableR, roofEdge, roofFront, windowL } from './bld_common';
 import type { Roof } from './bld_common';
-import { SpriteCache, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
+import { SpriteCache, groundShadow, line, mk, plankLines, shade } from './sprites';
 import type { Sprite } from './sprites';
 
 export const HOUSE = { plinth: 9, wall: 41, ridge: 82, chimneyTop: 101, chimney: { x: 2.07, y: 1.0 } } as const;

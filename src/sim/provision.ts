@@ -176,7 +176,6 @@ let preparation = true;
 export function setFoodPreparation(on: boolean): void {
   preparation = on;
 }
-export const foodPreparationOn = (): boolean => preparation;
 
 /** Does this world run household food preparation at all? Rich, at least version 2, and not switched off by the lab. */
 export const preparesFood = (world: World): boolean => preparation && isRich(world) && runsRulesVersion(world, PREPARATION_FROM_VERSION);

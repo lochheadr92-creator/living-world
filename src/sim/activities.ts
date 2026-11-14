@@ -628,18 +628,3 @@ export function canInterruptForTalk(p: Person): number {
   if (a.phase === 'travel') return Math.max(base, 0.55);
   return base;
 }
-
-export function minimumCommitLeft(world: World, a: Activity): number {
-  return Math.max(0, a.minCommit - world.tick);
-}
-
-export function clampProgress(a: Activity): number {
-  return a.duration > 0 ? clamp(a.progress / a.duration, 0, 1) : 0;
-}
-
-/** Distance from a person to the footprint of their activity target (for assertions and tests). */
-export function distanceToTarget(world: World, p: Person, a: Activity): number {
-  const e = world.byId.get(a.targetId);
-  if (!e) return Infinity;
-  return distToFootprint(e, p.x, p.y);
-}

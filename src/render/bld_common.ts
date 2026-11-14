@@ -7,7 +7,7 @@ import { line, poly, shade } from './sprites';
 
 type Ctx = CanvasRenderingContext2D;
 
-export type RoofTex = 'thatch' | 'tiles' | 'shingle' | 'slate' | 'planks';
+export type RoofTex = 'thatch' | 'tiles' | 'shingle' | 'slate';
 
 export interface Roof {
   x0: number;
@@ -84,19 +84,6 @@ export function roofFront(ctx: Ctx, p: P3, r: Roof): void {
       }
       break;
     }
-    case 'planks': {
-      const n = Math.max(6, Math.round((xb - xa) * 5));
-      for (let i = 1; i < n; i++) {
-        const xx = xa + ((xb - xa) * i) / n;
-        line(ctx, p(xx, r.ym, r.zR), p(xx, yy, zz), 'rgba(40,24,10,0.4)', 0.8);
-      }
-      for (let i = 0; i < 18; i++) {
-        const [y, z] = at(hashUnit(r.v, i, 61));
-        const xx = xa + (xb - xa) * hashUnit(r.v, i, 62);
-        line(ctx, p(xx, y, z), p(xx + 0.02, Math.min(yy, y + 0.2), z + (zz - r.zR) * 0.1), 'rgba(255,230,180,0.16)', 0.8);
-      }
-      break;
-    }
   }
 }
 
@@ -168,7 +155,6 @@ export interface WindowOpts {
   frame: string;
   glass: string;
   shutter?: string;
-  lit?: boolean;
   bars?: boolean;
 }
 

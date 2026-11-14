@@ -2,11 +2,11 @@ import {textileBegin,textileWork} from './clothing';
 import {pileAccessBlocker} from './pile_access';
 import { faceToward, registerHandler, standSpotFor } from './activities';
 import type { WorkResult } from './activities';
-import { ITEM_LABEL, TOOL_REPAIR, WORK } from './constants';
-import { cartLoaded, cartOf, cartStore, hitch, unhitch } from './carts';
+import { ITEM_LABEL, TOOL_REPAIR } from './constants';
+import { cartLoaded, cartOf, hitch, unhitch } from './carts';
 import { buildingLabel } from './buildings';
-import { consume, transfer, weightOf } from './economy';
-import { addEvent, addFx, addLog } from './events';
+import { consume, transfer } from './economy';
+import { addFx, addLog } from './events';
 import { joinBlocker, mayDeposit, noteBlocker, noteDeposit, noteWithdraw, recipeOf, startJob, withdrawAllowance, workJob } from './facilities';
 import { creditStocked } from './intent';
 import { hasTransport } from './transport';
@@ -14,11 +14,9 @@ import { isFoodKind } from './provision';
 import { delBelief, observe } from './knowledge';
 import { creditContribution } from './social';
 import { findPath } from './pathfinding';
-import { carryCap } from './people';
 import { RECIPE_BY_ID } from './recipes';
 import type { Recipe } from './recipes';
-import { releaseBench, toolById, wearFor } from './tools';
-import { toolsHeldBy } from './toolreg';
+import { releaseBench, toolById } from './tools';
 import type { Activity, Building, BuildingType, Items, ItemKind, Person, PoseKind, Site, World } from './types';
 import { SKILL_MAX } from './constants';
 
@@ -355,11 +353,3 @@ registerHandler('cart_haul', {
     if (a.cycle > 0) addLog(world, p, 'work', 'Hauled a load by handcart.');
   },
 });
-
-void weightOf;
-void carryCap;
-void cartStore;
-void addEvent;
-void WORK;
-void wearFor;
-void toolsHeldBy;

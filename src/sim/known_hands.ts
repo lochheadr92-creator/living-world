@@ -13,7 +13,6 @@ import type { Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-hands` restores the global helper count inside a rules-178 rich world. */
-export const knownHandsOn = (): boolean => enabled;
 export function setKnownHands(on: boolean): void { enabled = on; }
 export const hasKnownHands = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 178);
 

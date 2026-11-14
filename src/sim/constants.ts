@@ -108,7 +108,6 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   spear: 'spear',
 };
 export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
-export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k) || (PRESERVED_FOODS as string[]).includes(k);
 
 export const CARRY_CAP = { child: 5, youth: 9, adult: 12, elder: 8 } as const;
 export const BASKET_BONUS = 6;
@@ -136,7 +135,6 @@ export const CRITICAL: Record<NeedKey, number> = { hunger: 14, thirst: 14, energ
 
 // ── movement ──
 export const BASE_SPEED = 0.13;
-export const REACH = 1.55;
 export const TURN_RATE = 0.42;
 
 // ── perception ──
@@ -156,15 +154,12 @@ export const WORK: Record<string, number> = {
   ore_vein: 84,
   outcrop: 64,
   water: 18,
-  drink: 30,
   eat: 10,
   till: 90,
   plant: 24,
   tend: 30,
   harvest: 42,
   repair: 70,
-  deposit: 8,
-  withdraw: 8,
 };
 
 export type BuildRole = 'home' | 'store' | 'fire' | 'work' | 'meet';
@@ -183,7 +178,6 @@ export interface BuildDef {
   workers: number;
   label: string;
   sleepers: number;
-  protect: number;
   role: BuildRole;
   /** one line for the inspector and docs: what the building is for */
   blurb: string;
@@ -192,8 +186,8 @@ export interface BuildDef {
 const bd = (d: Omit<BuildDef, 'wood' | 'stone'>): BuildDef => ({ ...d, wood: d.cost.wood ?? 0, stone: d.cost.stone ?? 0 });
 
 export const BUILD_DEF: Record<BuildingType, BuildDef> = {
-  lean_to: bd({ w: 1, h: 1, cost: { wood: 4 }, work: 200, cap: 12, workers: 2, label: 'lean-to', sleepers: 3, protect: 5, role: 'home', blurb: 'A rough shelter of branches.' }),
-  hut: bd({ w: 2, h: 2, cost: { wood: 8, stone: 4 }, work: 520, cap: 40, workers: 3, label: 'hut', sleepers: 6, protect: 10, role: 'home', blurb: 'A proper home with a small store.' }),
+  lean_to: bd({ w: 1, h: 1, cost: { wood: 4 }, work: 200, cap: 12, workers: 2, label: 'lean-to', sleepers: 3, role: 'home', blurb: 'A rough shelter of branches.' }),
+  hut: bd({ w: 2, h: 2, cost: { wood: 8, stone: 4 }, work: 520, cap: 40, workers: 3, label: 'hut', sleepers: 6, role: 'home', blurb: 'A proper home with a small store.' }),
   house: bd({
     w: 2,
     h: 2,
@@ -203,12 +197,11 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 3,
     label: 'house',
     sleepers: 8,
-    protect: 16,
     role: 'home',
     blurb: 'A hut rebuilt in place with planked walls and a brick hearth: warmer, roomier, slower to decay.',
   }),
-  storehouse: bd({ w: 2, h: 2, cost: { wood: 10, stone: 4 }, work: 640, cap: 160, workers: 3, label: 'storehouse', sleepers: 0, protect: 0, role: 'store', blurb: 'A shared store for the settlement.' }),
-  fire: bd({ w: 1, h: 1, cost: { wood: 2, stone: 3 }, work: 90, cap: 0, workers: 2, label: 'campfire', sleepers: 0, protect: 0, role: 'fire', blurb: 'A fire to warm and gather round.' }),
+  storehouse: bd({ w: 2, h: 2, cost: { wood: 10, stone: 4 }, work: 640, cap: 160, workers: 3, label: 'storehouse', sleepers: 0, role: 'store', blurb: 'A shared store for the settlement.' }),
+  fire: bd({ w: 1, h: 1, cost: { wood: 2, stone: 3 }, work: 90, cap: 0, workers: 2, label: 'campfire', sleepers: 0, role: 'fire', blurb: 'A fire to warm and gather round.' }),
   timber_yard: bd({
     w: 3,
     h: 2,
@@ -218,7 +211,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 3,
     label: 'timber yard',
     sleepers: 0,
-    protect: 0,
     role: 'work',
     blurb: 'A sawing and carpentry yard: logs become planks and handles, and carts are built here.',
   }),
@@ -231,7 +223,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 3,
     label: 'quarry',
     sleepers: 0,
-    protect: 0,
     role: 'work',
     blurb: 'A cutting face beside a stone outcrop; cut stone is stacked at the yard.',
   }),
@@ -244,7 +235,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 2,
     label: 'kiln',
     sleepers: 0,
-    protect: 0,
     role: 'work',
     blurb: 'A stone-lined kiln: fires bricks and water jars from clay, and burns wood to charcoal.',
   }),
@@ -257,7 +247,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 2,
     label: 'smithy',
     sleepers: 0,
-    protect: 0,
     role: 'work',
     blurb: 'A forge and anvil: ore and charcoal become iron, and iron becomes better tools.',
   }),
@@ -270,7 +259,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 2,
     label: 'granary',
     sleepers: 0,
-    protect: 0,
     role: 'store',
     blurb: 'Raised, ventilated bins for grain, flour and bread. Each household keeps its own share; grain keeps far longer here when the bins are tended.',
   }),
@@ -283,7 +271,6 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 2,
     label: 'bakery',
     sleepers: 0,
-    protect: 0,
     role: 'work',
     blurb: 'A quern and a brick oven: grain is milled to flour and baked into bread.',
   }),
@@ -296,20 +283,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     workers: 4,
     label: 'communal hall',
     sleepers: 0,
-    protect: 0,
     role: 'meet',
     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
   }),
   food_rack: bd({
     w:2, h:2, cost:{wood:4,stone:2}, work:180, cap:30, workers:2,
-    label:'drying and smoking rack', sleepers:0, protect:0, role:'work',
+    label:'drying and smoking rack', sleepers:0, role:'work',
     blurb:'An open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.',
   }),
-  well: bd({w:2,h:2,cost:{wood:4,stone:8},work:260,cap:18,workers:2,label:'shallow well',sleepers:0,protect:0,role:'store',blurb:'A lined shaft draws slowly from a nearby finite water catchment. It may run dry; drawing and carrying still take work.'}),
-  cellar: bd({w:2,h:1,cost:{wood:6,stone:9},work:480,cap:90,workers:2,label:'cellar',sleepers:0,protect:0,role:'store',blurb:'A private stone-lined cool store. Food and flour keep longer here, but still spoil. Goods must be carried through the doorway.'}),
-  mine: bd({w:2,h:2,cost:{wood:9,stone:3},work:440,cap:60,workers:3,label:'mine',sleepers:0,protect:0,role:'work',blurb:'A timbered working beside a finite ore vein. A pick and paid work extract three existing ore at a time.'}),
-  mill: bd({w:2,h:2,cost:{wood:8,planks:4,stone:4},work:600,cap:60,workers:2,label:'grain mill',sleepers:0,protect:0,role:'work',blurb:'A hand-powered grinding floor. Six grain makes five flour while the separate bakery remains free for bread.'}),
-  brewery: bd({w:2,h:2,cost:{wood:6,planks:4,stone:4},work:400,cap:60,workers:1,label:'brewery',sleepers:0,protect:0,role:'work',blurb:'A boiling hearth and fermentation casks turn spare grain and water into beer for shared meals.'}),
+  well: bd({w:2,h:2,cost:{wood:4,stone:8},work:260,cap:18,workers:2,label:'shallow well',sleepers:0,role:'store',blurb:'A lined shaft draws slowly from a nearby finite water catchment. It may run dry; drawing and carrying still take work.'}),
+  cellar: bd({w:2,h:1,cost:{wood:6,stone:9},work:480,cap:90,workers:2,label:'cellar',sleepers:0,role:'store',blurb:'A private stone-lined cool store. Food and flour keep longer here, but still spoil. Goods must be carried through the doorway.'}),
+  mine: bd({w:2,h:2,cost:{wood:9,stone:3},work:440,cap:60,workers:3,label:'mine',sleepers:0,role:'work',blurb:'A timbered working beside a finite ore vein. A pick and paid work extract three existing ore at a time.'}),
+  mill: bd({w:2,h:2,cost:{wood:8,planks:4,stone:4},work:600,cap:60,workers:2,label:'grain mill',sleepers:0,role:'work',blurb:'A hand-powered grinding floor. Six grain makes five flour while the separate bakery remains free for bread.'}),
+  brewery: bd({w:2,h:2,cost:{wood:6,planks:4,stone:4},work:400,cap:60,workers:1,label:'brewery',sleepers:0,role:'work',blurb:'A boiling hearth and fermentation casks turn spare grain and water into beer for shared meals.'}),
 };
 
 /** every kind of building a household can live in */

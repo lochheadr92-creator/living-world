@@ -65,14 +65,13 @@ import { validateTownships } from '../sim/townships';
 // into localStorage where it does not (or where writing to it fails). A small description of the save, which the menu reads at once,
 // always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
-import { hashString, RNG } from '../sim/rng';
+import { RNG } from '../sim/rng';
 import { validateRulesVersion, runsRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
 import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import { setExternalController } from '../sim/external';
 import { stepWorld } from '../sim/world';
 import type { Settings, World } from '../sim/types';
-import type { Game } from './game';
 
 const KEY = 'living-world:save:v1'; // localStorage: {settings, data: base64 gzip}; what every save was before IndexedDB, and the fallback
 const META = 'living-world:save-meta:v1';
@@ -784,5 +783,3 @@ export async function loadAutosave(game: SaveTarget): Promise<boolean> {
     return false;
   }
 }
-
-void hashString;

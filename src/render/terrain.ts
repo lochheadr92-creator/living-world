@@ -194,8 +194,8 @@ export class TerrainPainter {
     const foam:(Path2D|undefined)[][]=[[],[]];
     ctx.lineCap = 'round';
     // batched strokes
-    let tuftL = new Path2D();
-    let tuftD = new Path2D();
+    const tuftL = new Path2D();
+    const tuftD = new Path2D();
     const reeds: { x: number; y: number; h: number; s: number }[] = [];
     const flowers: { x: number; y: number; c: string }[] = [];
     for (let y = b.y0; y <= b.y1; y++) {
@@ -256,10 +256,6 @@ export class TerrainPainter {
               ctx.lineTo(sx + 32, sy + 16);
             }
             ctx.stroke();
-            void ex;
-            void ey;
-            void fx;
-            void fy;
           }
           if (detail && hashUnit(x, y, 11) < 0.55) {
             // light glints drifting across the surface
@@ -361,9 +357,6 @@ export class TerrainPainter {
       }
     }
     paintShoreFoam(ctx,foam,t);
-    void tuftL;
-    tuftL = new Path2D();
-    tuftD = new Path2D();
   }
 
   /** Dim the tiles a person has never seen (for the knowledge overlay). */

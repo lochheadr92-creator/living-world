@@ -15,7 +15,6 @@ import type { Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-ration` restores the live housemate read inside a rules-177 rich world. */
-export const knownRationOn = (): boolean => enabled;
 export function setKnownRation(on: boolean): void { enabled = on; }
 export const hasKnownRation = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 177);
 

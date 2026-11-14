@@ -8,7 +8,6 @@ import type { Belief, Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed). Off restores the 200-tick gap inside a rules-174 rich world. */
-export const emptyCorrectionOn = (): boolean => enabled;
 export function setEmptyCorrection(on: boolean): void { enabled = on; }
 export const hasEmptyCorrection = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 174);
 
@@ -25,7 +24,6 @@ export const EMPTY_NEWS_HORIZON = 1100;
 
 let travelEnabled = true;
 /** Lab switch (never saved or hashed). Off restores the personal-failure gate inside a rules-176 rich world. */
-export const emptyTravelOn = (): boolean => travelEnabled;
 export function setEmptyTravel(on: boolean): void { travelEnabled = on; }
 export const hasEmptyTravel = (w: World): boolean => travelEnabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 176);
 
@@ -51,7 +49,6 @@ export const TELL_COOLDOWN = 3500;
 
 let deliveryEnabled = true;
 /** Lab switch (never saved or hashed). Off restores the plain telling cooldown inside a rules-175 rich world. */
-export const correctionDeliveryOn = (): boolean => deliveryEnabled;
 export function setCorrectionDelivery(on: boolean): void { deliveryEnabled = on; }
 export const hasCorrectionDelivery = (w: World): boolean => deliveryEnabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 175);
 

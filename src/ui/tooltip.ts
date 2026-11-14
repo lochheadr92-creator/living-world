@@ -4,7 +4,7 @@ import { waterSign } from '../sim/hydrology';
 // Two small floating labels, each a single reused element:
 //  * the UI tooltip: any element with a data-tip attribute (delegated, so panels can scroll or clip freely)
 //  * the hover tooltip that follows the pointer over things in the world (driven by game.hover)
-import type { Entity, Person, World } from '../sim/types';
+import type { Entity, Person } from '../sim/types';
 import { describeEntityName } from '../sim/inspect';
 import { RECIPE_BY_ID } from '../sim/recipes';
 import { itemsToText } from '../sim/people';
@@ -114,7 +114,7 @@ function personActivity(p: Person): string {
 const WOLF_STATE: Record<string, string> = { roam: 'prowling', stalk: 'stalking someone', attack: 'attacking', retreat: 'slinking away' };
 
 /** a few words on what something other than a person is doing or holding right now */
-function thingStatus(world: World, e: Entity): string {
+function thingStatus(e: Entity): string {
   switch (e.ent) {
     case 'building': {
       const job = e.ops ? e.ops.job : null;
@@ -205,7 +205,7 @@ export function createHoverTip(ctx: UICtx): Part {
         act = e.type === 'sheep' ? (e.sheep?.tether?'tethered':'grazing') : e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : WOLF_STATE[e.state] ?? '';
       } else if(e) {
         name = describeEntityName(game.world, e);
-        act = thingStatus(game.world, e);
+        act = thingStatus(e);
       }
 
       const key = `${hv.id}|${name}|${act}`;

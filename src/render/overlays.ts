@@ -140,7 +140,7 @@ function markerPath(ctx: CanvasRenderingContext2D, shape: 'diamond' | 'tri' | 's
 export function drawKnowledge(ctx: CanvasRenderingContext2D, world: World, p: Person, simT: number): void {
   for (const k in p.beliefs) {
     const b = p.beliefs[k as unknown as number];
-    if (b.kind === 'tree' && (Number(k) + Math.floor(simT * 0)) % 3 !== 0) continue; // thin out trees: there are hundreds
+    if (b.kind === 'tree' && Number(k) % 3 !== 0) continue; // thin out trees: there are hundreds
     const age = world.tick - b.seen;
     const fresh = Math.max(0.22, 1 - age / 7000);
     const col = BELIEF_COLOR[b.kind] ?? '#fff';

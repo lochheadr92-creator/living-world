@@ -43,7 +43,7 @@ function changed(a:RoutineContext,b:RoutineContext):string{
 /** Called only for an accepted choice, before the ordinary activity starts. */
 export function prepareRoutine(w:World,p:Person,a:Activity,o:Option):void{
  if(!hasRoutines(w)||!KINDS.includes(a.kind)||!Number.isFinite(o.eta)||o.eta<=0||o.key.length>160)return;
- if(a.data.projectWait||a.data.daylightAt||a.data.layoutWait||a.kind==='wander'&&!a.data.haunt)return;
+ if(a.data.projectWait||a.data.daylightAt||a.kind==='wander'&&!a.data.haunt)return;
  // These are remembered measurements, not live needs. The fingerprint already
  // measures live needs to four decimals; retaining engine-specific last bits here
  // made browser recordings fail headless replay despite identical observations.

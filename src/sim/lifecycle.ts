@@ -24,18 +24,16 @@ import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { captureHouseholdCamp } from './cohortcapture';
-import { BUILD_DEF } from './constants';
 import { observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson, ageYears, blendLook, mixTraits, stageOf, stageOfAge } from './people';
 import { findPath } from './pathfinding';
-import { gridQuery, isFreeLand, isWalkable, registerGeneric } from './registry';
+import { isFreeLand, isWalkable, registerGeneric, newId } from './registry';
 import { adjustRel, relOf } from './relations';
 import { abortConversationFor, personOf } from './social';
 import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
 import { rulesOf } from './rules';
 import { runsRulesVersion } from './rulesversion';
-import { newId } from './registry';
 
 import { hyp } from './util';
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
@@ -217,7 +215,6 @@ let fatalHold = true;
 export function setFatalHold(on: boolean): void {
   fatalHold = on;
 }
-export const fatalHoldOn = (): boolean => fatalHold;
 
 /** Does this world refuse to let passive recovery undo a health of zero? */
 export const fatalInjuryHolds = (world: World): boolean => fatalHold && runsRulesVersion(world, FATAL_HOLD_FROM_VERSION);
@@ -493,6 +490,4 @@ export function immigrationTick(world: World): void {
     else addEvent(world, 'life', `A family — ${group[0].name}, ${group[1].name} and little ${group[2].name} — arrives at the settlement.`, ids, x, y);
     return;
   }
-  void gridQuery;
-  void BUILD_DEF;
 }

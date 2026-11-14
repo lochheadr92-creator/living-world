@@ -20,13 +20,13 @@ interface StatEls {
   el: HTMLElement;
   val: HTMLElement;
   sub: HTMLElement;
-  ico: HTMLElement | null;
+  ico: HTMLElement;
 }
 
-function stat(iconName: IconName | null, cls = ''): StatEls {
+function stat(iconName: IconName, cls = ''): StatEls {
   const val = h('div', { class: 'st-val num' });
   const sub = h('div', { class: 'st-sub num' });
-  const ico = iconName ? icon(iconName, 18, 'st-ico') : null;
+  const ico = icon(iconName, 18, 'st-ico');
   const el = h('div', { class: `stat ${cls}`.trim() }, ico, h('div', { class: 'st-txt' }, val, sub));
   return { el, val, sub, ico };
 }
@@ -138,7 +138,7 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
     setText(clockSub, `Day ${s.day} · ${s.phase}`);
     setText(weather.val, s.weather);
     setText(weather.sub, `${s.temp} °C`);
-    if (weather.ico) setIcon(weather.ico, weatherIcon(s), 18);
+    setIcon(weather.ico, weatherIcon(s), 18);
 
     setText(peopleN, String(s.population));
     setText(peopleWord, ` ${s.population === 1 ? 'person' : 'people'}`);

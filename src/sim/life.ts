@@ -23,15 +23,13 @@ import { isRich, think } from './mood';
 import type { Option } from './optutil';
 import { stageOf } from './people';
 import { hashString, hashUnit } from './rng';
-import type { Goal, GoalKind, Injury, InjuryKind, Person, SkillKey, World } from './types';
+import type { Goal, GoalKind, InjuryKind, Person, World } from './types';
 
 const key = (world: World): number => hashString(world.seed) ^ 0x11fe;
 
 // ───────────────────────── injury ─────────────────────────
 const INJURY_NAME: Record<InjuryKind, string> = { sprain: 'a sprained ankle', cut: 'a bad cut', broken: 'a broken arm' };
 const HEAL: Record<InjuryKind, number> = { sprain: 2 * DAY, cut: 3 * DAY, broken: 6 * DAY };
-
-export const isHurt = (p: Person): boolean => !!p.injury;
 
 /** how much an injury slows walking (0.6 at its worst, back to 1 as it heals); 1 when whole */
 export function injuryFactor(world: World, p: Person): number {
@@ -211,8 +209,6 @@ export function describeInjury(world: World, p: Person): string | null {
   const days = Math.ceil((i.until - world.tick) / DAY);
   return `${INJURY_NAME[i.kind]} (${i.how}), ${days} ${days === 1 ? 'day' : 'days'} to heal`;
 }
-
-export type { Goal, Injury, SkillKey };
 
 /** Reject malformed new history without changing an earlier save's meaning. */
 export function validateGoalHistory(w: World): void {

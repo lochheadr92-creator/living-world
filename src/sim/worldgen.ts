@@ -182,10 +182,6 @@ function isWaterAccessTile(world: World, x: number, y: number): boolean {
   return false;
 }
 
-function floodReach(world: World, sx: number, sy: number, useSolid: boolean): Uint8Array {
-  return floodReachFrom(world, [{ x: sx, y: sy }], useSolid);
-}
-
 /** every tile that can be walked to from any of the starting points */
 function floodReachFrom(world: World, starts: { x: number; y: number }[], useSolid: boolean): Uint8Array {
   const { W, H } = world;
@@ -400,7 +396,7 @@ export function generateNatural(settings: Settings): World {
       if (gen.next() < p && treeCountNear(x, y) <= 2) {
         const growth = gen.chance(0.12) ? gen.range(0.25, 0.7) : 1;
         const maxW = SOURCE_MAX.tree;
-        makeSource(world, 'tree', x, y, Math.floor(maxW * growth + 1e-6) > 0 ? Math.max(1, Math.round(gen.range(3, maxW + 0.4) * growth)) : 0, growth);
+        makeSource(world, 'tree', x, y, Math.max(1, Math.round(gen.range(3, maxW + 0.4) * growth)), growth);
       }
     }
   }
@@ -772,7 +768,6 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
     total--;
   }
   const shelterCount = Math.max(1, Math.round(specs.length * 0.6));
-  const used = new Set<number>();
   const households: Household[] = [];
   const homes: { x: number; y: number }[] = [];
 
@@ -826,7 +821,6 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
       world.persons.push(p);
       world.byId.set(p.id, p);
       persons.push(p);
-      used.add(p.id);
     });
     // kinship: adults who live together as couples, kids belong to adults
     const kids = persons.filter((_, i) => members[i].role === 'kid' || members[i].role === 'youth');

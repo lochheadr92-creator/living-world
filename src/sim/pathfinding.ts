@@ -244,13 +244,3 @@ function smooth(world: World, sx: number, sy: number, pts: number[]): number[] {
   }
   return out;
 }
-
-/** Cheap reachability probe (bounded A*). */
-export function reachable(world: World, sx: number, sy: number, gx: number, gy: number, maxNodes = 9000): boolean {
-  return findPath(world, sx, sy, gx, gy, { maxNodes }) !== null;
-}
-
-/** Approximate walking distance for planning (straight line scaled), without running A*. */
-export function walkEstimate(sx: number, sy: number, gx: number, gy: number): number {
-  return hyp(gx - sx, gy - sy) * 1.18;
-}

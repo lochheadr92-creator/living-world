@@ -20,7 +20,7 @@ import {knownTextileStock} from './textile_stock';
 // is not a plan that cannot be fed. It ends when the goods reached their use, or with a stated reason: time up, the workshop or
 // the site gone, nobody able to supply an input. One such plan at a time, after food, shelter, roof and tool plans.
 import type { Belief, ItemKind, Items, Person, World } from './types';
-import type { Ctx, Option } from './optutil';
+import type { Ctx } from './optutil';
 import { DAY,PRESERVED_FOODS } from './constants';
 import {hasPreservation} from './preservation';
 import { isRich } from './mood';
@@ -259,16 +259,6 @@ export function batchOutcome(world: World, p: Person, i: Intention): { status: '
   }
   if (world.tick > i.until) return { status: 'dropped', reason: i.step ? `the time is up (was going to ${i.step})` : 'the time is up' };
   return null;
-}
-
-/** Does this option serve a batch plan's step? Matched on the plan's own key or on what the step is, never on wording. */
-export function servesBatch(i: Intention, o: Option): boolean {
-  if (i.kind !== 'batch' || i.status !== 'active') return false;
-  if (i.stepKey && o.key === i.stepKey) return true;
-  if (i.stepKind === 'get') return o.yields !== undefined && o.yields === i.stepItem;
-  if (i.stepKind === 'store') return o.kind === 'deposit' && o.targetId === i.stepTarget;
-  if (i.stepKind === 'deliver') return o.kind === 'haul' && o.targetId === i.stepTarget;
-  return false;
 }
 
 /** Reconsider a lost prerequisite from current personal knowledge, with bounded attempts and time between them. */

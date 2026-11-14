@@ -35,7 +35,6 @@ export const metabolismOn = (): boolean => enabled;
 export function setMetabolism(on: boolean): void { enabled = on; }
 /** Lab screening switch (never saved or hashed): the rates a rules-195 rich world runs under; null restores the 195 constants. */
 export function setLabRates(rates: { hunger: number; thirst: number } | null): void { labRates = rates; }
-export const labRatesOn = (): { hunger: number; thirst: number } | null => labRates;
 export const hasMetabolism = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 195);
 
 /** The base hunger drain a tick for this world (before the multipliers in needs.ts updateNeeds). */

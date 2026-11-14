@@ -6,7 +6,7 @@ import {backgroundFor,variedBackgrounds} from './background';
 import { elderFactor } from './life';
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
 import type { RNG } from './rng';
-import type { Items, Look, Person, Skills, Stage, ToolKind, Traits, World } from './types';
+import type { Items, Look, Person, Skills, Stage, Traits, World } from './types';
 import { clamp } from './util';
 
 export const FEMALE_NAMES = [
@@ -69,12 +69,6 @@ export function carryCap(world: World, p: Person): number {
   // an elder carries less in a rich world (elderFactor is 1 otherwise, and for everyone else)
   const base = st === 'elder' ? Math.round(CARRY_CAP[st] * elderFactor(world, p)) : CARRY_CAP[st];
   return base + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
-}
-
-export const dependentsOf = (world: World, p: Person): Person[] => world.persons.filter((q) => q.alive && q.id !== p.id && q.hhId === p.hhId && isDependent(world, q));
-
-export function hasTool(p: Person, t: ToolKind): boolean {
-  return (p.inv[t] ?? 0) > 0;
 }
 
 /** Children, frail elders and the hurt rely on others. */

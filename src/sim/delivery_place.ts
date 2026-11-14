@@ -33,7 +33,7 @@ export const hasDeliveryPlace = (world: World): boolean => enabled && isRich(wor
 
 /** Pure. The asker's household home as the helper remembers it, or null: the place a promise to them can name. */
 export function agreedPlace(world: World, helper: Person, asker: Person): Belief | null {
-  if (!hasDeliveryPlace(world) || helper.hhId === asker.hhId && false) return null;
+  if (!hasDeliveryPlace(world)) return null;
   for (const b of beliefsByKind(helper, ['building'])) if (b.hh === asker.hhId && isHomeType(b.btype)) return b;
   return null;
 }

@@ -15,7 +15,6 @@ import type { Entity, ItemKind, Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-188 rich world logs "from storage" and keeps nothing, as before. */
-export const takenFromOn = (): boolean => enabled;
 export function setTakenFrom(on: boolean): void { enabled = on; }
 export const hasTakenFrom = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 188);
 

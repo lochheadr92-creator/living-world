@@ -32,7 +32,6 @@ const R = {
   MOUTH: 19,
   EYES: 20, // 1 open, 0 closed
   TOOL: 21, // tool angle (radians, 0 = pointing forward, +up)
-  TOOLON: 22, // 1 if holding a tool in the right hand
   PH: 23, // 0..1 phase of the work cycle (for props that move with it)
   N: 24,
 } as const;
@@ -50,8 +49,6 @@ interface RigState {
   poseT0: number;
   from: Rig;
   cur: Rig;
-  simT: number;
-  talkT: number;
   /** eased 0..1: arms full of bricks, clay or bread / a jar balanced on the head */
   carry: number;
   jar: number;
@@ -91,7 +88,6 @@ interface PoseCtx {
   t: number;
   alphaT: number;
   walk: number; // 0..1 walk-cycle phase
-  speed: number; // 0..1 how fast they are moving
   p: Person;
   speaking: boolean;
   stage: string;
@@ -184,7 +180,6 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       r[R.HLZ] = hz - 3;
       r[R.FLU] = -0.12;
       r[R.FRU] = 0.12;
-      r[R.TOOLON] = 1;
       r[R.TOOL] = (up * 1.5 - 0.35) * (pose === 'till' ? 0.8 : 1);
       break;
     }
@@ -198,7 +193,6 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       r[R.HLU] = 0.1;
       r[R.HLV] = 0.08;
       r[R.HLZ] = 11;
-      r[R.TOOLON] = 2; // fishing rod
       r[R.TOOL] = 0.9 + Math.sin(k * 6.28) * 0.12 + (k > 0.8 ? -0.35 : 0);
       break;
     }
@@ -264,7 +258,6 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       r[R.HLU] = 0.24;
       r[R.HLV] = 0.07;
       r[R.HLZ] = 14;
-      r[R.TOOLON] = 3; // hammer
       r[R.TOOL] = 0.9 - strike * 1.5;
       r[R.FLU] = -0.05;
       r[R.FRU] = 0.07;
@@ -476,10 +469,6 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       r[R.HEAD_Z] = Math.sin(t * 0.8 + p.id) * 0.2;
     }
   }
-  // greeting wave overrides the right arm for a moment
-  if (p.wave > 0 && pose !== 'sleep' && pose !== 'build' && pose !== 'give') {
-    // handled by caller (needs the tick); see applyWave
-  }
 }
 
 function applyWave(r: Rig, t: number, strength: number): void {
@@ -547,7 +536,7 @@ export class CharacterRenderer {
       const x = p.px + (p.x - p.px) * alphaT;
       const y = p.py + (p.y - p.py) * alphaT;
       if (!s) {
-        s = { x, y, phase: (p.id * 0.37) % 1, moved: 0, pose: p.pose, poseT0: simT - 10, from: newRig(), cur: newRig(), simT, talkT: 0, carry: 0, jar: 0, carryT: simT };
+        s = { x, y, phase: (p.id * 0.37) % 1, moved: 0, pose: p.pose, poseT0: simT - 10, from: newRig(), cur: newRig(), carry: 0, jar: 0, carryT: simT };
         setBase(s.cur);
         setBase(s.from);
         this.states.set(p.id, s);
@@ -558,7 +547,6 @@ export class CharacterRenderer {
       s.moved = moved;
       s.x = x;
       s.y = y;
-      s.simT = simT;
     }
     if (this.states.size > world.persons.length + 40) {
       const alive = new Set(world.persons.map((q) => q.id));
@@ -566,14 +554,13 @@ export class CharacterRenderer {
     }
   }
 
-  private rigFor(world: World, p: Person, simT: number, alphaT: number, walking: boolean, running: boolean): RigResult {
+  private rigFor(world: World, p: Person, simT: number, alphaT: number): RigResult {
     const band = youngBand(world, p);
     const s = this.states.get(p.id)!;
     let pose: PoseKind = p.pose;
     const a = p.activity;
-    // moving without a travel pose (e.g., just finished): show walking
-    if (s.moved > 0.004 && (pose === 'stand' || pose === 'sit')) pose = running ? 'run' : 'walk';
-    if (pose === 'walk' && !walking) pose = 'stand';
+    // moving without a travel pose (e.g., just finished): a seated figure is shown standing
+    if (s.moved > 0.004 && pose === 'sit') pose = 'stand';
     // whoever has hold of a handcart is pulling it, whatever the activity says about walking
     const cart = p.cartId ? world.byId.get(p.cartId) : undefined;
     if (cart && cart.ent === 'cart' && (pose === 'walk' || pose === 'run' || pose === 'stand')) pose = 'pull';
@@ -584,7 +571,7 @@ export class CharacterRenderer {
       else if (st === 'ore_vein' || st === 'outcrop') pose = 'mine';
     }
     const speaking = !!(p.speech && p.speech.until > world.tick);
-    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, speed: Math.min(1, s.moved * 6), p, speaking, stage: band ?? '', moved: s.moved };
+    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, p, speaking, stage: band ?? '', moved: s.moved };
     if (pose !== s.pose) {
       s.from.set(s.cur);
       s.pose = pose;
@@ -647,8 +634,7 @@ export class CharacterRenderer {
     const x = p.px + (p.x - p.px) * alphaT;
     const y = p.py + (p.y - p.py) * alphaT;
     const heading = p.pheading + angleDiff(p.pheading, p.heading) * alphaT;
-    const running = p.pose === 'run';
-    const { rig, s, pose, bt, burden } = this.rigFor(world, p, simT, alphaT, p.pose === 'walk', running);
+    const { rig, s, pose, bt, burden } = this.rigFor(world, p, simT, alphaT);
     const bs = bodyScale(world, p);
     const sc = bs.s;
     const look = p.look;
@@ -858,7 +844,7 @@ export class CharacterRenderer {
 
     // tool in the right hand, and the things set up in front of the worker (trestle, anvil, board, hole)
     if (toolKind > 0 && lie < 0.5) {
-      drawTool(ctx, parts, p, toolKind, rig, handR, handL, fx, fy, sc, simT);
+      drawTool(ctx, parts, p, toolKind, rig, handR, fx, fy, sc, simT);
       drawProps(ctx, parts, p, pose, handL, S, fx, fy, sc, bt);
     } else if (p.pose === 'eat' && p.activity) {
       parts.push({
@@ -880,7 +866,7 @@ export class CharacterRenderer {
       d: headC[2] + 0.02,
       draw: () => {
         const hr = 5.1 * sc * bs.head;
-        drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], night: opts.night, elderly, lie: lie > 0.5, child: stage === 'child' });
+        drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], child: stage === 'child' });
       },
     });
 
@@ -1062,7 +1048,7 @@ function drawHead(
   x: number,
   y: number,
   r: number,
-  o: { skin: string; hair: string; style: number; hat: number; shirt: string; eyeDir: number; toward: number; eyes: number; mouth: number; night: number; elderly: boolean; lie: boolean; child: boolean },
+  o: { skin: string; hair: string; style: number; hat: number; shirt: string; eyeDir: number; toward: number; eyes: number; mouth: number; child: boolean },
 ): void {
   const back = o.toward < -0.15; // facing away from the viewer: we see the back of the head
   const outline = 'rgba(25,18,12,0.5)';
@@ -1190,15 +1176,12 @@ function drawHead(
       ctx.fill();
     }
   }
-  if (o.night > 0.4 && o.eyes < 0.5 && o.lie) {
-    void o.night;
-  }
 }
 
 type Part = { d: number; draw: () => void };
 type SFn = (u: number, v: number, z: number) => V3;
 
-function drawTool(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, kind: number, rig: Rig, hand: V3, handL: V3, fx: number, fy: number, sc: number, simT: number): void {
+function drawTool(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, kind: number, rig: Rig, hand: V3, fx: number, fy: number, sc: number, simT: number): void {
   const ang = rig[R.TOOL];
   // direction on screen of "forward"
   const fxS = (fx - fy) * 32;

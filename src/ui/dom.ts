@@ -195,7 +195,6 @@ export class Every {
 // ───────────── numbers and text ─────────────
 export const clamp = (v: number, a: number, b: number): number => (v < a ? a : v > b ? b : v);
 export const cap = (s: string): string => (s ? s[0].toUpperCase() + s.slice(1) : s);
-export const plural = (n: number, one: string, many = one + 's'): string => `${n} ${n === 1 ? one : many}`;
 export const round1 = (n: number): number => Math.round(n * 10) / 10;
 
 /** "1,234" style thousands separators without depending on locale */

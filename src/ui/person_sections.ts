@@ -41,7 +41,7 @@ const REQ_TONE: Record<string, string> = {
   broken: 'danger',
 };
 
-const PLAN_TONE: Record<string, string> = { 'under way': 'good', waiting: 'info', paused: 'warn', blocked: 'warn', done: 'muted', ended: 'muted', 'settled on': 'accent' };
+const PLAN_TONE: Record<string, string> = { 'under way': 'good', waiting: 'info', paused: 'warn', blocked: 'warn', done: 'muted', ended: 'muted' };
 
 const MEMORY_COLOR: Record<string, string> = {
   work: '#7fb069',
@@ -79,17 +79,17 @@ const SKILL_LABEL: Record<string, string> = {
 const emptyNote = (text: string) => h('p', { class: 'empty' }, text);
 
 /** a `<details>` whose open state is remembered in the UI state under `id` */
-function disclosure(ctx: UICtx, id: string, title: string, hooks: BlockHooks, cls = 'civic-panel', fallback = false): { el: HTMLDetailsElement; body: HTMLElement; summary: HTMLElement; count: HTMLElement } {
+function disclosure(ctx: UICtx, id: string, title: string, hooks: BlockHooks, cls = 'civic-panel'): { el: HTMLDetailsElement; body: HTMLElement; count: HTMLElement } {
   const count = h('span', { class: 'sec-count num' });
   const summary = h('summary', null, title, count);
   const body = h('div', { class: 'disc-body' });
-  const el = h('details', { class: cls, open: ctx.state.sections[id] ?? fallback }, summary, body);
+  const el = h('details', { class: cls, open: ctx.state.sections[id] ?? false }, summary, body);
   el.addEventListener('toggle', () => {
     ctx.state.sections[id] = el.open;
     ctx.saveState();
     hooks.onSectionToggle();
   });
-  return { el, body, summary, count };
+  return { el, body, count };
 }
 
 /** lines of text replaced only when they change */

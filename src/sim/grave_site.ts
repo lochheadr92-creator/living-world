@@ -17,7 +17,6 @@ import type { World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-190 rich world digs graves in doorways again. */
-export const graveSiteOn = (): boolean => enabled;
 export function setGraveSite(on: boolean): void { enabled = on; }
 export const hasGraveSite = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 190);
 

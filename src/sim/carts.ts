@@ -6,8 +6,7 @@ import { makeHousePile } from './buildings';
 import { hashUnit } from './rng';
 import { registerGeneric } from './registry';
 import { newId } from './registry';
-import type { Cart, Items, Person, Store, World } from './types';
-import { T } from './types';
+import type { Cart, Person, Store, World } from './types';
 
 import { hyp } from './util';
 export function newCart(world: World, x: number, y: number, ownerHh: number): Cart {
@@ -93,12 +92,11 @@ export function updateCarts(world: World): void {
     const hx = p.x - c.x;
     const hy = p.y - c.y;
     if (hx * hx + hy * hy > 0.01) {
-      let target = Math.atan2(hy, hx);
+      const target = Math.atan2(hy, hx);
       let d = target - c.heading;
       while (d > Math.PI) d -= Math.PI * 2;
       while (d < -Math.PI) d += Math.PI * 2;
       c.heading += d * 0.35;
-      target = 0;
     }
     if (moved > 0 && cartLoaded(c)) {
       c.wear += CART_WEAR_PER_TILE * moved;
@@ -115,15 +113,4 @@ export function breakCart(world: World, c: Cart, p: Person | null): void {
   // the load is spilled where it stood; the broken cart is not recovered (its wood and planks are written off)
   makeHousePile(world, Math.floor(c.x), Math.floor(c.y), c.load, 'spilled from a broken cart', world.settings.dynamics === 'rich' && runsRulesVersion(world,117) ? c.id : undefined);
   addEvent(world, 'work', `A handcart broke under its load${p ? ` while ${p.name} was pulling it` : ''}.`, p ? [p.id] : [], c.x, c.y);
-}
-
-/** Pulling a cart over ground it cannot cross is refused: forest, stony ground and shallow water are barred to wheels. */
-export function cartCanCross(world: World, tx: number, ty: number): boolean {
-  if (tx < 0 || ty < 0 || tx >= world.W || ty >= world.H) return false;
-  const t = world.terrain[ty * world.W + tx];
-  return t === T.GRASS || t === T.SAND;
-}
-
-export function cartLoadItems(c: Cart): Items {
-  return c.load;
 }

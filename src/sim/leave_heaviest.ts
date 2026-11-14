@@ -17,7 +17,7 @@
 // version 33 never reaches it. Lab ablation: `rich-no-leave-heaviest`. Contract and measurement: docs/LEAVE_HEAVIEST.md.
 import { newActivity } from './activities';
 import { storeCapOf } from './farm_scale';
-import { BUILD_DEF, ITEM_LABEL, WEIGHT } from './constants';
+import { ITEM_LABEL, WEIGHT } from './constants';
 import { invRoom } from './economy';
 import { freeOf } from './intent';
 import { recentFailure } from './knowledge';

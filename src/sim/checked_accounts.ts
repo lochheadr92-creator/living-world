@@ -21,7 +21,7 @@ import {addLog} from './events';
 import {SOURCE_NOUN} from './labels';
 import {adjustRel,relOf} from './relations';
 import {runsRulesVersion} from './rulesversion';
-import type {Belief,Person,SourceType,World} from './types';
+import type {Belief,Person,World} from './types';
 export interface CheckedAccounts {
  checked:number;
  borneOut:number;

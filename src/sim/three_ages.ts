@@ -17,13 +17,13 @@
 // already carries food to dependants); it is measured.
 //
 // Rich worlds at rules 213 and later only. Rules 212 and earlier, authored worlds and a switch thrown keep the old behaviour.
-import { CRITICAL, SKILL_MAX, SOURCE_SKILL } from './constants';
+import { CRITICAL, SOURCE_SKILL } from './constants';
 import { LITTLE_AGE } from './child_pace';
 import { addBlocked } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { ageYears, stageOf } from './people';
 import { runsRulesVersion } from './rulesversion';
-import type { Activity, Person, SkillKey, SourceType, World } from './types';
+import type { Activity, Person, SourceType, World } from './types';
 
 const on = { little: true, shown: true, bounded: true, practice: true };
 export type ThreeAgesPart = keyof typeof on;
@@ -107,8 +107,6 @@ export function practiceScale(w: World, p: Person): number {
   if (band === 'child') return Math.min(1, 0.5 + (0.5 * (ageYears(w, p) - LITTLE_AGE)) / (12 - LITTLE_AGE));
   return 1;
 }
-/** skill after a gathering's practice, scaled (rounded so a save and load continue exactly) */
-export const practiced = (w: World, p: Person, sk: SkillKey, base: number): number => Math.min(SKILL_MAX, p.skills[sk] + base * practiceScale(w, p));
 
 /** Load check: `shown` exists only from rules 213, holds known tasks once each. */
 export function validateShown(w: World): void {

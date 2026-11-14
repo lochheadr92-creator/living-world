@@ -20,7 +20,7 @@ export class CanvasInput {
     private game: Game,
     private view: () => { w: number; h: number },
   ) {
-    const on = <K extends keyof HTMLElementEventMap>(el: HTMLElement | Window, ev: string, fn: (e: any) => void, opts?: AddEventListenerOptions) => {
+    const on = (el: HTMLElement | Window, ev: string, fn: (e: any) => void, opts?: AddEventListenerOptions) => {
       el.addEventListener(ev, fn, opts);
       this.dispose.push(() => el.removeEventListener(ev, fn));
     };

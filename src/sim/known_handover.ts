@@ -8,7 +8,6 @@ import type { Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off restores the rules-167 ask inside a rules-168 rich world. */
-export const knownHandoverOn = (): boolean => enabled;
 export function setKnownHandover(on: boolean): void { enabled = on; }
 export const hasKnownHandover = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 168);
 

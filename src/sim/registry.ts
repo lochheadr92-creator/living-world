@@ -1,5 +1,5 @@
 import { checkCounter } from './id_ranges';
-import type { Animal, Building, Entity, Person, Plot, Site, SpatialGrid, Source, World } from './types';
+import type { Building, Entity, Person, Plot, Site, SpatialGrid, Source, World } from './types';
 import { T } from './types';
 
 import { hyp } from './util';
@@ -58,7 +58,6 @@ export function newId(world: World): number {
   return checkCounter(world, world.nextId++); // rules 234 (id_ranges.ts): never into the range kept for water knowledge
 }
 
-export const tileIndex = (world: World, tx: number, ty: number): number => ty * world.W + tx;
 export const inBounds = (world: World, tx: number, ty: number): boolean => tx >= 0 && ty >= 0 && tx < world.W && ty < world.H;
 
 const solidEpochs = new WeakMap<object, number>();
@@ -150,15 +149,6 @@ export function registerPlot(world: World, p: Plot): void {
   world.occ[p.y * world.W + p.x] = p.id;
 }
 
-export function unregisterPlot(world: World, p: Plot): void {
-  const i = world.plots.indexOf(p);
-  if (i >= 0) world.plots.splice(i, 1);
-  world.byId.delete(p.id);
-  gridRemove(world.grid, p, p.x + 0.5, p.y + 0.5);
-  const t = p.y * world.W + p.x;
-  if (world.occ[t] === p.id) world.occ[t] = 0;
-}
-
 export function registerGeneric(world: World, e: Entity): void {
   switch (e.ent) {
     case 'pile':
@@ -195,11 +185,6 @@ export function unregisterPile(world: World, e: Entity & { ent: 'pile' }): void 
 }
 
 // ───────── tile queries ─────────
-export function terrainAt(world: World, tx: number, ty: number): number {
-  if (!inBounds(world, tx, ty)) return T.DEEP;
-  return world.terrain[ty * world.W + tx];
-}
-
 export function isWalkable(world: World, tx: number, ty: number): boolean {
   if (!inBounds(world, tx, ty)) return false;
   const i = ty * world.W + tx;
@@ -282,7 +267,3 @@ export function personById(world: World, id: number): Person | undefined {
   return e && e.ent === 'person' ? e : undefined;
 }
 
-export function animalById(world: World, id: number): Animal | undefined {
-  const e = world.byId.get(id);
-  return e && e.ent === 'animal' ? e : undefined;
-}

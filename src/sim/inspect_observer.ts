@@ -7,7 +7,7 @@
 // beliefs, whereabouts, seen, log, decisions, lastResult). Nothing is written, no random number is drawn, and no field is
 // invented: where the simulation does not record something, the view says nothing. The "world check" on a belief compares
 // the person's belief with the live world for the VIEWER's benefit; it is labelled as such and never reaches the person.
-import { DAY, NEED_KEYS } from './constants';
+import { NEED_KEYS } from './constants';
 import { clockText, dayNumber } from './environment';
 import { describeEntityName } from './inspect';
 import { isWaterBeliefId } from './knowledge';
@@ -256,9 +256,4 @@ export function timeline(world: World, p: Person, limit = 40): TimelineView[] {
   if (r && !(p.decisions ?? []).some((e) => e.endedAt === r.tick && e.outcome === r.outcome)) rows.push({ ...stamp(r.tick), kind: 'outcome', text: `${r.label} → ${r.outcome}${r.detail ? `: ${r.detail}` : ''}`, detail: '' });
   rows.sort((a, b) => b.tick - a.tick);
   return rows.slice(0, limit);
-}
-
-/** days since a tick, for compact labels */
-export function daysSince(world: World, tick: number): number {
-  return Math.floor((world.tick - tick) / DAY);
 }

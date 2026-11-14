@@ -15,7 +15,6 @@ export const CROWD_AT = 24;
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-crowd` restores the world's live count inside a rules-181 rich world. */
-export const knownCrowdOn = (): boolean => enabled;
 export function setKnownCrowd(on: boolean): void { enabled = on; }
 export const hasKnownCrowd = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 181);
 

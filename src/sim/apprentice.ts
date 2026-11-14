@@ -14,7 +14,7 @@ import { stageOf } from './people';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import { tradeWord, tradesOn } from './trade';
-import type { Apprenticeship, Person, SkillKey, World } from './types';
+import type { Person, SkillKey, World } from './types';
 import { hyp } from './util';
 
 /** a master must be this good, and this much better than the learner */
@@ -110,5 +110,3 @@ export function describeApprentice(world: World, p: Person): string {
   const m = world.byId.get(a.master);
   return `apprentice at ${tradeWord(a.key)}${m && m.ent === 'person' ? ` under ${m.name}` : ''}`;
 }
-
-export type { Apprenticeship };

@@ -1,6 +1,5 @@
 export const clamp = (v: number, lo: number, hi: number): number => (v < lo ? lo : v > hi ? hi : v);
 export const lerp = (a: number, b: number, t: number): number => a + (b - a) * t;
-export const sq = (v: number): number => v * v;
 /**
  * Math.hypot(a, b), bit for bit, without its cost. V8's builtin makes an array and a boxed number on every call, which in a large world
  * is a third of everything the simulation allocates (scripts/allocs.ts) and so a good part of what the garbage collector then has to
@@ -19,7 +18,6 @@ export function hyp(a: number, b: number): number {
   return Math.sqrt(nx * nx + ny * ny) * max;
 }
 export const dist = (ax: number, ay: number, bx: number, by: number): number => hyp(ax - bx, ay - by);
-export const dist2 = (ax: number, ay: number, bx: number, by: number): number => (ax - bx) * (ax - bx) + (ay - by) * (ay - by);
 export const smoothstep = (e0: number, e1: number, x: number): number => {
   const t = clamp((x - e0) / (e1 - e0), 0, 1);
   return t * t * (3 - 2 * t);
@@ -36,10 +34,6 @@ export function normAngle(a: number): number {
 
 export function angleDiff(from: number, to: number): number {
   return normAngle(to - from);
-}
-
-export function lerpAngle(a: number, b: number, t: number): number {
-  return a + angleDiff(a, b) * t;
 }
 
 /** Turn `cur` toward `target` by at most `maxStep`. */
@@ -99,13 +93,4 @@ export class MinHeap {
     }
     return top;
   }
-}
-
-/** Format a count with a unit name, pluralising naively. */
-export function plural(n: number, one: string, many?: string): string {
-  return `${n} ${n === 1 ? one : many ?? one + 's'}`;
-}
-
-export function capFirst(s: string): string {
-  return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }

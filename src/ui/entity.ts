@@ -147,9 +147,6 @@ interface MatRow {
   bar: BarHandle;
 }
 
-/** set to false to drop the workshop card once describeEntity() supplies the same things (a 'Making' row or a 'Batch' bar hides it already) */
-const SHOW_WORKSHOP_CARD = true;
-
 /** which of the simulation's titled blocks start open; the rest fold away until asked for */
 const SECTION_OPEN = new Set(['Under way', 'Idle — what is stopping it', 'Stock', 'The project', 'Materials', 'The cart', 'The outcrop']);
 
@@ -429,7 +426,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
   /** the batch under way, as a card. Returns false when this building has nothing to show (a plain home, a store). */
   function updateShop(b: Building, v: EntityView, world: World): boolean {
     const ops = b.ops;
-    if (!SHOW_WORKSHOP_CARD || !ops) return false;
+    if (!ops) return false;
     if (v.rows.some((r) => r[0] === 'Making')) return false;
     const job = ops.job;
     const r = job ? RECIPE_BY_ID[job.recipe] : undefined;

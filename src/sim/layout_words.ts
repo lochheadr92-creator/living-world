@@ -13,7 +13,6 @@ import type { Household, Site, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): off, a rules-191 rich world names the actor's household on a public site again. */
-export const layoutWordsOn = (): boolean => enabled;
 export function setLayoutWords(on: boolean): void { enabled = on; }
 export const hasLayoutWords = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 191);
 

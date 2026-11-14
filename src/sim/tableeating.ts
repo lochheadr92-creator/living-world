@@ -30,7 +30,6 @@ let tableEating = true;
 export function setTableEating(on: boolean): void {
   tableEating = on;
 }
-export const tableEatingOn = (): boolean => tableEating;
 
 /** Does this world let a person eat at a store they cannot carry food away from? Rich, at least version 9, and not switched off by the lab. */
 export const eatsAtTheStore = (world: World): boolean => tableEating && isRich(world) && runsRulesVersion(world, TABLE_EATING_FROM_VERSION);

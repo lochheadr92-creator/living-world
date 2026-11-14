@@ -1,4 +1,4 @@
-import {brewDemand,hasBrewing} from './brewing';
+import {brewDemand} from './brewing';
 import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, binsWorth, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
 import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
 import { IRON_WANT, IRON_WHY, carriesForSmelter, ironWanted, oreLeavesLeftover, smithyShelf } from './smithy_iron';
@@ -32,10 +32,9 @@ import {hasOffcuts} from './offcuts';
 import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
 import {fireCommitment} from './responsibilities';
 import {fireFuelWanted} from './options_work';
-import {freeOf} from './intent';
 import { isRich } from './mood';
 import { newActivity } from './activities';
-import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, WORK, isSolidHome, workRules } from './constants';
+import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, TOOL_DEFS, WEIGHT, WORK, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
 import { hasBatchResume, hasRequiredToolRecovery } from './facilities';
 import { cartLoaded } from './carts';
@@ -52,10 +51,9 @@ import { cartExperience, cartTripOptions } from './transport';
 import { durableReserve } from './provision';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
-import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
+import { RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
-import { toolOf } from './tools';
 import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
@@ -97,7 +95,6 @@ export interface Demand {
 // ───────────────────────── what a person knows about workplaces ─────────────────────────
 interface Fac {
   b: Belief;
-  type: BuildingType;
   e: number;
 }
 
@@ -120,7 +117,7 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
     // All preservation planners share the same limit on remembered food stock.
     if(type==='food_rack'&&ctx.world.tick-b.seen>DAY)continue;
     if (!mayUseBelief(ctx, b)) continue;
-    out.push({ b, type, e: eta(ctx, b.x, b.y) });
+    out.push({ b, e: eta(ctx, b.x, b.y) });
   }
   out.sort((a, c) => a.e - c.e);
   return out;
@@ -153,10 +150,6 @@ export function knowsEnough(ctx: Ctx, type: BuildingType): boolean {
 }
 
 const stockAt = (ctx:Ctx,b: Belief, item: ItemKind): number => knownGearStock(ctx.world,ctx.p,b,item)??knownTextileStock(ctx.world,ctx.p,b,item);
-
-function belief(ctx: Ctx, id: number): Belief | undefined {
-  return ctx.p.beliefs[id];
-}
 
 // ───────────────────────── leaves: single things a person can go and do ─────────────────────────
 function itemPhrase(items: Items, world:World): string {
@@ -337,18 +330,11 @@ export function preferredRecipeForTools(ctx: Ctx, f: Pick<Fac, 'b'>, r: Recipe):
   return true;
 }
 
-function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
-  if (item === 'cart') return 1;
-  if (r.toolOut && r.toolOut.kind === item) return 1;
-  if (r.fromDeposit && r.fromDeposit.item === item) return r.fromDeposit.n;
-  return r.outputs[item as ItemKind] ?? 1;
-}
-
 /**
  * One batch of a recipe at a workplace: everything the batch needs is either there (so go and work), carried (so bring it),
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
-function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
+function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
   if(!recipeAvailable(ctx.world,r)||r.preservation&&!hasPreservation(ctx.world))return;
   const { world, p } = ctx;
   const b = f.b;
@@ -362,7 +348,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
     // When an earlier procedure is the one lacking, its own recipe at this workshop is the trial (smelting, for the forging wanted)
     if(next!==lacking&&trialAllowed(world,p,next)&&depth<4){
       const first=RECIPE_BY_ID[TECHNIQUES[next].recipes[0]];
-      if(first&&first.at===b.btype){planRecipe(ctx,f,first,item,unmet,base*0.9,`to work out ${TECHNIQUES[next].name} first, ${why}`,tag,depth+1,siteId);return;}
+      if(first&&first.at===b.btype){planRecipe(ctx,f,first,base*0.9,`to work out ${TECHNIQUES[next].name} first, ${why}`,tag,depth+1,siteId);return;}
     }
     if(!(next===lacking&&trialAllowed(world,p,lacking))){
       addBlocked(ctx,'operate',r.doing,b.id,technique,tag);
@@ -636,7 +622,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
     }
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (!preferredRecipeForTools(ctx, fac, r)) continue;
-    planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId, toolRequired);
+    planRecipe(ctx, fac, r, base, why, tag, depth, siteId, toolRequired);
   }
 }
 
@@ -874,7 +860,7 @@ function optTendGranary(ctx: Ctx): void {
   const urgency = Math.min(1, (since - GRANARY_TEND_EVERY * 0.55) / (GRANARY_TEND_EVERY * 0.6));
   const base = (7 + 10 * urgency + (mine ? 9 : 0) + 6 * p.traits.generosity + binsWorth(world)) * traitMods(p).work;
   const r = RECIPE_BY_ID.tend_granary;
-  planRecipe(ctx, g, r, 'tend', 1, base, 'to keep the stored grain from spoiling', 'store', 0);
+  planRecipe(ctx, g, r, base, 'to keep the stored grain from spoiling', 'store', 0);
 }
 
 /** A household with spare grain, flour or bread puts it in the granary, where it keeps. */
@@ -916,7 +902,7 @@ function optRackSpare(ctx: Ctx): void {
     const spare = same.sort((a, c) => (c.tier - a.tier) || a.wear - c.wear)[same.length - 1];
     if (spare.id !== t.id) continue;
     let target: Fac | null = null;
-    for (const type of ['timber_yard', 'smithy', 'quarry', 'kiln', 'bakery'] as BuildingType[]) {
+    for (const type of ['timber_yard', 'smithy', 'quarry'] as BuildingType[]) {
       if (!recipesAt(type).some((r) => r.tool?.kind === t.kind)) continue;
       const f = facilitiesOf(ctx, type)[0];
       if (f && (f.b.hh === 0 || f.b.hh === p.hhId) && !(f.b.tools ?? []).includes(t.kind)) {
@@ -1332,15 +1318,15 @@ function preservationOptions(ctx:Ctx):void {
     else if(waiting>0)addBlocked(ctx,'withdraw','Collect preserved food',f.b.id,'no room to carry the preserved food','food');
     const running=f.b.ops?.job ? RECIPE_BY_ID[f.b.ops.job] : undefined;
     if(running?.preservation&&f.b.ops!.progress<1){
-      planRecipe(ctx,f,running,Object.keys(running.outputs)[0] as ItemKind,2,27,'finish preserving the paid batch','food',0);
+      planRecipe(ctx,f,running,27,'finish preserving the paid batch','food',0);
       continue;
     }
-    if(hasCarcasses(ctx.world)&&waiting===0&&((ctx.p.inv.fat??0)+(f.b.items?.fat??0)+knownCarcassUnits(ctx,'fat')>0))planRecipe(ctx,f,RECIPE_BY_ID.render_fat,'rendered_fat',1,30,'prepare recovered fat for food','food',0);
+    if(hasCarcasses(ctx.world)&&waiting===0&&((ctx.p.inv.fat??0)+(f.b.items?.fat??0)+knownCarcassUnits(ctx,'fat')>0))planRecipe(ctx,f,RECIPE_BY_ID.render_fat,30,'prepare recovered fat for food','food',0);
     const raw=preservationSurplus(ctx);
     if(!raw||waiting>0)continue;
     const method=ctx.world.weather.rain>0.1?'smoke':'dry';
     const r=RECIPE_BY_ID[`${method}_${raw}`];
-    planRecipe(ctx,f,r,Object.keys(r.outputs)[0] as ItemKind,2,27,'keep spare food for later meals','food',0);
+    planRecipe(ctx,f,r,27,'keep spare food for later meals','food',0);
   }
   for(let j=first;j<ctx.options.length;j++)ctx.options[j].preservesFood=true;
 }
@@ -1408,7 +1394,7 @@ function projectOptions(ctx:Ctx):void{
    const r=RECIPE_BY_ID[n.recipe],fac=r?facilitiesOf(ctx,r.at).find(f=>f.b.id===b.id):undefined;
    // rules 99 (ready_step.ts): everything the step takes is on the shelf as last seen, and the tool is to hand
    const ready=r&&fac&&stepPrepared(ctx.world,ctx.p,b,r,toolAvailable(ctx,fac,r))?`everything for it is already at the ${nameOf(b)}`:'';
-   if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0,0,undefined,ready);
+   if(r&&fac)planRecipe(scratch,fac,r,base,why,tag,0,0,undefined,ready);
   }
   if(step.phase==='craft')scratch.toolWanted={kind:item as ToolKind,for:i.goal,required:true};
   if(step.phase==='wait'&&!RECIPE_BY_ID[n.recipe]?.preservation)addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
@@ -1428,12 +1414,6 @@ function projectOptions(ctx:Ctx):void{
   for(const o of scratch.blocked)if(!ctx.blocked.some(x=>x.key===o.key&&x.blocked===o.blocked))ctx.blocked.push(o);
  }
 }
-
-void RECIPES;
-void REPAIR_USES;
-void weightOf;
-void toolOf;
-void belief;
 
 /**
  * A person who would start a workshop if they only knew where the clay, the ore or the big outcrop was goes looking for it.

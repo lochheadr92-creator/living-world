@@ -8,7 +8,7 @@ import { estimatedAmount } from './knowledge';
 import { eta as etaTo } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { isHomeType } from './constants';
-import type { Belief, NeedKey } from './types';
+import type { Belief } from './types';
 
 /**
  * Survival comes before work. Before taking on something discretionary, a person asks: if I do this, can I still get to water
@@ -108,8 +108,7 @@ export function guardOption(ctx: Ctx, o: Option, water: Relief | null, food: Rel
     const left = daylightLeft(ctx);
     if (left < o.eta * 0.8 + 60) return { ok: false, why: 'would not be home before dark with wolves about' };
   }
-  for (const [need, relief] of [['thirst', water], ['hunger', food]] as [NeedKey, Relief | null][]) {
-    if (need !== 'thirst' && need !== 'hunger') continue;
+  for (const [need, relief] of [['thirst', water], ['hunger', food]] as ['thirst' | 'hunger', Relief | null][]) {
     // already at (or on the way to) relief, or the job is short: nothing to fear
     if (relief && relief.eta < 25 && o.eta < 200) continue;
     const r = projected(ctx, need, o.eta, relief);

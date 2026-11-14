@@ -7,7 +7,6 @@ import type { Person, World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-heard-helpers` restores the global helper count inside a rules-172 rich world. */
-export const heardHelpersOn = (): boolean => enabled;
 export function setHeardHelpers(on: boolean): void { enabled = on; }
 export const hasHeardHelpers = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 172);
 

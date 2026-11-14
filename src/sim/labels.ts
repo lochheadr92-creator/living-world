@@ -1,4 +1,4 @@
-import type { ActivityKind, BeliefKind, ItemKind, SourceType } from './types';
+import type { ActivityKind, BeliefKind, SourceType } from './types';
 
 export const SOURCE_NOUN: Record<SourceType, string> = {
   berry_bush: 'berry bush',
@@ -100,44 +100,6 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   host_meal: 'hosting a meal',
   visit: 'checking on someone',
   return_tool: 'returning a tool',
-};
-
-export const ITEM_ICON: Record<ItemKind, string> = {
-  rod:'wood',
-  toy:'wood',
-  beer:'water',
-  cutting:'tree',
-  wool:'wool', rendered_fat:'rendered fat',
-  hide:'raw hide', fat:'raw fat',
-  net:'net',trap:'trap',fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',
-  dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',
-  offcuts: 'wood',
-  meat: 'meat',
-  berries: 'berries',
-  fruit: 'fruit',
-  fish: 'fish',
-  grain: 'grain',
-  bread: 'bread',
-  seeds: 'seeds',
-  water: 'water',
-  wood: 'wood',
-  stone: 'stone',
-  clay: 'clay',
-  ore: 'ore',
-  planks: 'planks',
-  handles: 'handles',
-  bricks: 'bricks',
-  charcoal: 'charcoal',
-  iron: 'iron',
-  flour: 'flour',
-  axe: 'axe',
-  pick: 'pick',
-  hoe: 'hoe',
-  basket: 'basket',
-  hammer: 'hammer',
-  saw: 'saw',
-  jar: 'jar',
-  spear: 'spear',
 };
 
 /** compass word from a world-space delta, as seen on screen (north = up-screen) */

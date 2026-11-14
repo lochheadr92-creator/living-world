@@ -14,7 +14,6 @@ import { isRich, think } from './mood';
 import { adjustRel } from './relations';
 import { noteDeedNear } from './reputation';
 import type { Household, LifeEvent, Person, World } from './types';
-import { hyp } from './util';
 
 /** how long each change colours things */
 const LASTS: Record<LifeEvent['kind'], number> = { bereaved: 10 * DAY, new_parent: 5 * DAY, moved: 4 * DAY, took_in: 6 * DAY };
@@ -167,5 +166,3 @@ export function onLookedInOnBereaved(world: World, visitor: Person, bereaved: Pe
   addLog(world, visitor, 'social', `Looked in on ${bereaved.name} after their loss.`);
   addLog(world, bereaved, 'social', `${visitor.name} came to see how I was.`);
 }
-
-export const near = (a: Person, b: Person, d: number): boolean => hyp(a.x - b.x, a.y - b.y) <= d;

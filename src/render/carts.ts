@@ -380,7 +380,7 @@ export class CartRenderer {
           ctx.beginPath();
           ctx.ellipse(p[0], p[1], it.r, it.r * 0.78, 0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.fillStyle = kind === 'ore' && hashUnit(Math.round(p[0]), 2, 4) > 0.5 ? hi : alpha('#ffffff', kind === 'ore' ? 0 : 0.0);
+          ctx.fillStyle = kind === 'ore' && hashUnit(Math.round(p[0]), 2, 4) > 0.5 ? hi : alpha('#ffffff', 0);
           if (kind === 'ore') ctx.fillRect(p[0] + 0.5, p[1] - 0.5, 1.4, 1.2);
           ctx.fillStyle = kind === 'ore' ? 'rgba(180,180,190,0.35)' : hi;
           ctx.beginPath();

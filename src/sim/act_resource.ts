@@ -38,12 +38,10 @@ import {
   gatherFromSource,
   invRoom,
   ledgerConsume,
-  ledgerCreate,
   pickFood,
   produce,
   releaseClaims,
   roomFor,
-  takeFrom,
   transfer,
 } from './economy';
 import { addFx, addLog } from './events';
@@ -57,7 +55,7 @@ import type { ToolTask } from './tools';
 import { adjustRel } from './relations';
 import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
-import { distToFootprint, isWater } from './registry';
+import { isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
 import { noteHauled } from './transport';
@@ -926,10 +924,3 @@ function borrowFromRack(world: World, p: Person, kind: ToolKind, n: number): voi
     }
   }
 }
-
-void addItem;
-void takeFrom;
-void ledgerCreate;
-void WATER_VALUE;
-void distToFootprint;
-

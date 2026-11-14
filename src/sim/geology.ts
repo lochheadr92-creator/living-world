@@ -4,7 +4,6 @@ import {hashString,hashUnit} from './rng';
 import {runsRulesVersion} from './rulesversion';
 let enabled=true;
 export function setDepositGeology(on:boolean):void{enabled=on;}
-export function depositGeologyOn():boolean{return enabled;}
 export function depositRichness(w:World,type:SourceType,x:number,y:number):number{
  if(!enabled||w.settings.dynamics!=='rich'||!runsRulesVersion(w,26)||!['clay_pit','ore_vein','outcrop'].includes(type))return 1;
  const seed=hashString(w.settings.seed+'|geology|'+type),scale=48;

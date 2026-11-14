@@ -6,7 +6,7 @@ import {restoreWatchProgress} from './care_handback';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY, workRules } from './constants';
-import { carryCap, isAdultWorker, isDependent, stageOf } from './people';
+import { carryCap, isAdultWorker, isDependent } from './people';
 import { isRich } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { addEvent, addLog } from './events';
@@ -48,7 +48,7 @@ function outOfDate(world: World, c: Concern, subject: Person | undefined, knower
   const age = world.tick - c.seen;
   if (age >= CONCERN_LIFE) return true;
   const known = hasKnownWelfare(world); // rules 179: what the worrier knows of someone out of sight, not their live life event or health
-  if (c.kind === 'bereaved') return known ? false : age >= 2 * DAY || !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
+  if (c.kind === 'bereaved') return known ? false : !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
   return c.kind !== 'hurt' && c.kind !== 'missing' && age > SELF_FIX_WINDOW && !(known ? knownDependent(world, subject, c) : isDependent(world, subject));
 }
 
@@ -397,5 +397,3 @@ registerHandler('visit', {
     else if (outcome === 'failed') addLog(world, p, 'social', `Went to see ${t.name}: ${detail}.`);
   },
 });
-
-void stageOf;

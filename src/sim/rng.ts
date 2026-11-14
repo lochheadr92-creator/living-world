@@ -57,10 +57,6 @@ export class RNG {
     for (let i = 0; i < 15; i++) this.next();
   }
 
-  static fromString(s: string): RNG {
-    return new RNG(hashString(s));
-  }
-
   next(): number {
     const t = (((this.a + this.b) | 0) + this.d) | 0;
     this.d = (this.d + 1) | 0;
@@ -113,8 +109,4 @@ export class RNG {
     this.c = s[2] | 0;
     this.d = s[3] | 0;
   }
-}
-
-export function seedToNumber(seed: string | number): number {
-  return typeof seed === 'number' ? seed >>> 0 : hashString(String(seed));
 }

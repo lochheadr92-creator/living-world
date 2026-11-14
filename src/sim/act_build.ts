@@ -25,7 +25,7 @@ import { BUILD_DEF, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USE
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { notePractice, onSharedWork } from './apprentice';
 import { riskOfHarm } from './life';
-import { addItem, claimSlot, consume, invRoom, ledgerCreate, weightOf } from './economy';
+import { addItem, claimSlot, consume, invRoom, weightOf } from './economy';
 import { runsRulesVersion } from './rulesversion';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
@@ -34,7 +34,7 @@ import { householdOf } from './buildings';
 import { missingMaterials, observe, delBelief } from './knowledge';
 import { isFacilityType } from './recipes';
 import { isFreeLand } from './registry';
-import { ORDINARY_RULES, rulesOf, within } from './rules';
+import { rulesOf, within } from './rules';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
@@ -294,11 +294,6 @@ registerHandler('craft', {
 });
 
 // ───────────────────────── lay out a site ─────────────────────────
-/**
- * Homes, fires and the storehouse: as many as four at a time, so the roof over a household never waits on a workshop.
- * That is the ordinary world's limit; a world with scaled rules (rules.ts) allows more, and counts them near where a new one would go.
- */
-export const MAX_BASIC_SITES = ORDINARY_RULES.maxBasicSites;
 /** Workshops, halls, granaries and house rebuilds are a settlement's improvement projects; only so many can be carried at once. */
 export function projectLimit(world: World): number {
   const r = rulesOf(world);
@@ -517,6 +512,3 @@ registerHandler('claim_home', {
     return 'done';
   },
 });
-
-void carryCap;
-void ((): Person | null => null);

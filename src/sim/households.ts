@@ -87,7 +87,3 @@ export function homeBuildingOf(world: World, p: Person): Building | null {
   const e = world.byId.get(hh.homeId);
   return e && e.ent === 'building' ? e : null;
 }
-
-export function sameHousehold(a: Person, b: Person): boolean {
-  return a.hhId !== 0 && a.hhId === b.hhId;
-}

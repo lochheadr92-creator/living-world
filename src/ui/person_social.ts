@@ -345,7 +345,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   return {
     els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el],
     update(v) {
-      const talk = v.interaction ?? { current: null, previous: null };
+      const talk = v.interaction;
       const hasTalk = !!(talk.current || talk.previous);
       talkSec.setVisible(hasTalk);
       talkSec.setCount(talk.current ? 'now' : '');
@@ -354,7 +354,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
         talkPrev.set(talk.previous);
       }
 
-      const meal = v.meal ?? { current: null, previous: null };
+      const meal = v.meal;
       const hasMeal = !!(meal.current || meal.previous);
       mealSec.setVisible(hasMeal);
       mealSec.setCount(meal.current ? meal.current.status : '');
@@ -363,17 +363,17 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
         mealPrev.set(meal.previous);
       }
 
-      const proms = v.commitments ?? [];
+      const proms = v.commitments;
       promSec.setVisible(proms.length > 0);
       promSec.setCount(proms.length ? String(proms.length) : '');
       if (proms.length && promSec.isOpen()) promList.sync(proms, (c) => String(c.id));
 
-      const sore = v.grievances ?? [];
+      const sore = v.grievances;
       soreSec.setVisible(sore.length > 0);
       soreSec.setCount(sore.length ? String(sore.length) : '');
       if (sore.length && soreSec.isOpen()) soreList.sync(sore, (g) => `${g.other}|${g.cause}`);
 
-      const worries = v.concerns ?? [];
+      const worries = v.concerns;
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);

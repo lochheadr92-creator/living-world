@@ -5,7 +5,7 @@
 import { box, boxTones, coursesL, cylinder, dome, domeCourses, faceL, faceR, jointsL } from './iso3d';
 import { brickFaceL, brickFaceR, chimneyStack, doorL, gableR, groundPatch, roofEdge, roofFront, scatter, windowL } from './bld_common';
 import type { Roof } from './bld_common';
-import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
+import { SpriteCache, ellipse, groundShadow, line, mk, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
 /** An earth-covered chamber with one visible timber doorway. */
@@ -145,7 +145,7 @@ export function granaryFront(cache: SpriteCache, variant: number): Sprite {
 }
 
 // ───────────────────────────── bakery (2 x 2) ─────────────────────────────
-export const BAKERY = { dome: { x: 1.52, y: 1.6, z: 32 }, chimney: { x: 1.52, y: 1.6, z: 82 }, mouth: { x: 1.52, y: 2.0, z: 8 } } as const;
+export const BAKERY = { dome: { x: 1.52, y: 1.6 }, chimney: { x: 1.52, y: 1.6, z: 82 }, mouth: { x: 1.52, y: 2.0, z: 8 } } as const;
 
 export function bakerySprite(cache: SpriteCache, variant: number): Sprite {
   const v = variant % 4;

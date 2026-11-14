@@ -10,8 +10,6 @@ import type { Roof } from './bld_common';
 import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
-type Ctx = CanvasRenderingContext2D;
-
 // ───────────────────────────── timber yard (3 x 2) ─────────────────────────────
 export const TIMBER = { roofBack: 50, roofFront: 34 } as const;
 

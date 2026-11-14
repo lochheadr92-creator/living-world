@@ -79,7 +79,6 @@ export function knownStoreHoldsStone(ctx:Ctx,stone:number):boolean{
  * Rules 191 and earlier, authored worlds and `setKnownFirstStorehouse(false)` read the world as before.
  */
 let knownFirst=true;
-export const knownFirstStorehouseOn=():boolean=>knownFirst;
 export function setKnownFirstStorehouse(on:boolean):void{knownFirst=on;}
 export const hasKnownFirstStorehouse=(w:World):boolean=>knownFirst&&hasFirstStorehouse(w)&&runsRulesVersion(w,192);
 

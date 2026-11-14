@@ -68,9 +68,7 @@ function sizeFacts(id: ProfileName): string {
 
 export interface WorldMenu extends Part {
   toggle(): void;
-  open(): void;
   close(): boolean;
-  isOpen(): boolean;
   setOpener(el: HTMLElement): void;
 }
 
@@ -380,9 +378,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       if (isOpen) close();
       else open();
     },
-    open,
     close,
-    isOpen: () => isOpen,
     setOpener(el) {
       opener = el;
     },

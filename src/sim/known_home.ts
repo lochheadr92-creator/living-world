@@ -6,6 +6,5 @@ import type { World } from './types';
 
 let enabled = true;
 /** Lab switch (never saved or hashed): `rich-no-known-home` restores the live household match inside a rules-171 rich world. */
-export const knownHomeOn = (): boolean => enabled;
 export function setKnownHome(on: boolean): void { enabled = on; }
 export const hasKnownHome = (w: World): boolean => enabled && w.settings.dynamics === 'rich' && runsRulesVersion(w, 171);

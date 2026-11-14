@@ -9,13 +9,13 @@ import { runsRulesVersion } from './rulesversion';
 import { openToAll } from './open_workplaces';
 import { hasKnownRation, knownHungryDependant } from './known_ration';
 import { notePractice, onSharedWork } from './apprentice';
-import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
+import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom, foodUnits } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { newCart } from './carts';
 import { RECIPE_BY_ID, acceptedAt, isFacilityType, newOps, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
-import { newId, personById } from './registry';
+import { personById } from './registry';
 import { affinityOf } from './relations';
 import { benchTool, mintTool, recipeToolMultiplier, wearTool } from './tools';
 import { bestOf } from './toolreg';
@@ -151,8 +151,6 @@ export function addEarmark(world: World, b: Building, e: Omit<Earmark, 'until'> 
 
 function expireEarmarks(world: World, ops: FacilityState): void {
   if (!ops.earmarks.length) return;
-  const have = (item: ItemKind, b: Building) => b.store.items[item] ?? 0;
-  void have;
   ops.earmarks = ops.earmarks.filter((e) => e.until > world.tick && e.n > 0);
 }
 
@@ -315,10 +313,6 @@ export function commonsStock(b: Building, item: ItemKind): number {
 }
 
 // ───────────────────────── jobs ─────────────────────────
-function itemsSum(a: Items, k: ItemKind): number {
-  return a[k] ?? 0;
-}
-
 function bump(items: Items, k: ItemKind, n: number): void {
   items[k] = (items[k] ?? 0) + n;
 }
@@ -396,7 +390,7 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe, tr
     if (dep.amount - dep.reserved < r.fromDeposit.n) return b.type==='mine'?'the vein is worked out':'the outcrop is worked out';
   }
   const out = outputWeight(r,world);
-  if (out > 0 && storeFreeWeight(b) - (r.fromDeposit ? 0 : 0) < out - weightOfList(r.inputs) * 0) {
+  if (out > 0 && storeFreeWeight(b) < out) {
     // inputs leave the store when the job starts, so they free up room
     const freed = weightOfList(r.inputs) + weightOfList(r.fuel);
     if (storeFreeWeight(b) + freed < out) return 'no room in the store for the product';
@@ -563,10 +557,7 @@ export function shelveJob(world: World, b: Building, why: string): void {
   for (const k of Object.keys(job.held) as ItemKind[]) {
     const n = job.held[k] ?? 0;
     if (n <= 0) continue;
-    if (r.fromDeposit && k === r.fromDeposit.item) {
-      // stone cut out of the outcrop but never finished is simply stacked at the yard
-      addItem(b.store.items, k, n);
-    } else addItem(b.store.items, k, n);
+    addItem(b.store.items, k, n);
   }
   addEvent(world, 'work', `A batch of ${r.label} at the ${b.type.replace('_', ' ')} was set aside (${why}); its materials went back on the shelves.`, [], b.x + b.w / 2, b.y + b.h / 2);
   ops.job = null;
@@ -582,15 +573,13 @@ export function finishJob(world: World, b: Building): boolean {
   if(!preservationReady(world,job,r))return false;
   const offcuts = recoveredOffcuts(world,r);
   const out = outputWeight(r,world);
-  const freed = weightOfList(job.held) - (r.fromDeposit ? 0 : 0);
   // the held inputs are not in the store, so the product needs its own room
-  if (out > 0 && storeFreeWeight(b) < out - (r.fromDeposit ? 0 : 0) && !(r.cartOut || (r.toolOut && false))) {
+  if (out > 0 && storeFreeWeight(b) < out && !r.cartOut) {
     job.phase = 'ready';
     job.blocked = 'the store is full: there is no room for the finished goods';
     ops.lastBlocker = job.blocked;
     return false;
   }
-  void freed;
   // fuel for recipes with no separate burn phase is spent now
   for (const k of Object.keys(r.fuel) as ItemKind[]) {
     const n = Math.min(job.held[k] ?? 0, r.fuel[k] ?? 0);
@@ -718,15 +707,6 @@ export function finishJob(world: World, b: Building): boolean {
   return true;
 }
 
-/** Destroyed or collapsed: the batch's materials go with the rubble (the caller drops them). Returns the items to scatter. */
-export function scrapJob(b: Building): Items {
-  const job = b.ops?.job;
-  if (!job) return {};
-  const held = job.held;
-  b.ops!.job = null;
-  return held;
-}
-
 // ───────────────────────── views ─────────────────────────
 export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | undefined {
   const ops = b.ops;
@@ -770,6 +750,3 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
 export function noteBlocker(b: Building, why: string): void {
   if (b.ops) b.ops.lastBlocker = why;
 }
-
-export { newId };
-export { PERISHABLE, itemsSum };

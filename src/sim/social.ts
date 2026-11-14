@@ -1,5 +1,4 @@
 import { giveToy } from './toys';
-import { pairKey } from './id_ranges';
 import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
@@ -70,7 +69,7 @@ import {
   suspendActivity,
 } from './activities';
 import type { WorkResult } from './activities';
-import { BUILD_DEF, CONV_REACH, DAY, GREET_COOLDOWN, LOAN_TERM, NUTRITION, PROMISE_TTL, REQUEST_TTL, homeNoun } from './constants';
+import { BUILD_DEF, CONV_REACH, DAY, GREET_COOLDOWN, LOAN_TERM, PROMISE_TTL, REQUEST_TTL, homeNoun } from './constants';
 import { foodUnits, pickFood, roomFor, transfer, releaseClaims } from './economy';
 import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
@@ -81,7 +80,6 @@ import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
 import { BELIEF_NOUN } from './labels';
-import { isFacilityType } from './recipes';
 import { easeGrievance, endGrievanceOnGift, openGrievance, quarrelDamper, settleBoth } from './grievance';
 import { inviteAsk, inviteRespond, mealReserved } from './meals';
 import { shareConcerns } from './welfare';
@@ -98,8 +96,6 @@ import { ALREADY_HAS_FOOD, GIVER_LACKS, emptyHandover, hasHandoverTruth, noteHad
 import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
-const toldKey = (world: World, listener: number, beliefId: number): number => pairKey(world, listener, beliefId); // rules 234 (id_ranges.ts)
-
 function bubble(world: World, p: Person, text: string, kind: Speech['kind'] = 'say', ticks = 56): void {
   speak(world, p, text, kind, ticks);
   world.stats.bubbles = (world.stats.bubbles ?? 0) + 1;
@@ -118,8 +114,6 @@ export function isFood(k: ItemKind): boolean {
 
 /** What a person is holding back for themselves and their dependents. */
 export function reserveOf(world: World, p: Person, item: ItemKind): number {
-  const hh = householdById(world, p.hhId);
-  const dep = membersOf(world, hh).filter((m) => m.id !== p.id && isDependent(world, m)).length;
   switch (item) {
     case 'water':
       return p.needs.thirst < 60 ? 1 : 0;
@@ -152,7 +146,6 @@ export function reserveOf(world: World, p: Person, item: ItemKind): number {
     default:
       return 0;
   }
-  void dep;
 }
 
 /**
@@ -1399,8 +1392,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (lendTool(world, t, B, A, due)) {
           settle(world, req, 'fulfilled', `lent a ${t.kind} until tomorrow`);
           req.outcome = 'lent';
-          const c = addCommitment(world, A, req, { kind: 'return_tool', to: B.id, item: t.kind, amount: 1, toolId: t.id, deadline: due + 400, destKind: 'person', destId: B.id });
-          void c;
+          addCommitment(world, A, req, { kind: 'return_tool', to: B.id, item: t.kind, amount: 1, toolId: t.id, deadline: due + 400, destKind: 'person', destId: B.id });
           bubble(world, B, `Of course. Bring it back when you’re done.`, 'say', 58);
           adjustRel(A, B.id, world.tick, { aff: 3, trust: 2.5, fam: 0.5, note: `${B.name} lent me their ${t.kind}` });
           adjustRel(B, A.id, world.tick, { aff: 0.8, trust: 1, note: `I lent ${A.name} my ${t.kind}` });
@@ -2023,7 +2015,6 @@ registerHandler('give', {
       // a borrowed tool goes back into the lender's hands — that exact tool, not another of the same kind
       const tool = toolsHeldBy(world, p.id).find((x) => x.id === (a.data.toolId as number));
       if (!tool || !tool.loan) return 'fail:there is nothing to hand back';
-      if ((t.inv[tool.kind] ?? 0) >= 1 && carryCap(world, t) < 99 && false) return 'fail:their hands are full';
       if (!returnLoan(world, tool, p, t)) return 'fail:could not hand it back';
       t.cooldowns.pause = 0;
       bubble(world, p, `Here’s your ${tool.kind} back — thank you.`, 'say', 56);
@@ -2097,11 +2088,6 @@ registerHandler('give', {
     if(runsRulesVersion(world,124)&&a.data.textileDelivery&&outcome==='failed')noteFailure(world,p,a.targetId,detail);
   },
 });
-
-void estimatedAmount;
-void NUTRITION;
-void noteFailure;
-void drive;
 
 // rules 51 (customers.ts) reads the barter valuation, the spare-goods rule and the request settlement from here, bound at load
 setCustomerDeps({ surplusOf, valueOf, settle });

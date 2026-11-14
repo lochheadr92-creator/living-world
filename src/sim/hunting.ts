@@ -165,7 +165,7 @@ registerHandler('hunt', {
     faceToward(p, deer.x, deer.y);
     if (d > STRIKE) {
       // it moved: follow it a little, and give up when it is well away
-      if (d > 14 || a.data.tries >= 2) {
+      if (d > 14) {
         p.cooldowns['hunt'] = world.tick + 400;
         return 'fail:it got away';
       }

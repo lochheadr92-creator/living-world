@@ -23,12 +23,6 @@ registerHandler('sleep', {
   work(world, p, a): WorkResult {
     a.progress++;
     const n = p.needs;
-    // a controller may ask to wake at a lower recovery target than the usual 94
-    const lim = a.data.limit as Record<string, number> | undefined;
-    if (lim && lim.untilEnergy !== undefined && n.energy >= lim.untilEnergy) {
-      a.blocked = 'rested enough';
-      return 'done';
-    }
     if (n.energy >= 94) {
       a.blocked = 'rested';
       return 'done';
@@ -165,7 +159,6 @@ registerHandler('flee', {
     if (!threat && (p.needs.safety > 55 || a.progress > a.duration)) return 'done';
     if (threat) {
       a.progress = Math.max(0, a.progress - 1);
-      if (a.progress < 0) a.progress = 0;
     }
     return 'continue';
   },
