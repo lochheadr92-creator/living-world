@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "7ad592a25484388b9b4852a111d3837dbd40b9ca",
+    "rules": 248,
+    "content": "6479d859ce3141e704c4773cc441f6a3fbd126222d55a1b7664500255f3f1a7d",
+    "note": "Recorded from a clean checkout of the commit that added rules 248; ordinary Normal gen-2 (arrivals on) at tick 1200, saved and continued 120 ticks. sharedOffered is recorded, not required."
+  },
+  "saved": "51f59afa54bd9ccbf73000a589cdea52718a4851a7860cb77793bf2632a789a2",
+  "continued": "0e0784357641be820ddcb2a85c5424fef32a0ad0d73a7e31c0ac49c570a96c5c",
+  "tick": 1200,
+  "sharedOffered": 0,
+  "alive": 28
+}
