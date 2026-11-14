@@ -1084,10 +1084,10 @@ line says how it is known: measured, read in source, or not looked into.
 - More people use ids faster: the counter stood at about 268,000 after 20 years of 41 people and breaks at 1,000,000. Step 6.
 - `PRODUCT_VISION.md` still describes a world of about 100 people. It is the owner's to change.
 
-## Two repairs from the audit (rules 247 and 248, built 15 November on a branch; not yet measured in the lab)
+## Two repairs from the audit (rules 247 and 248, built 15 November; lab read 15 November)
 
-From `review_evidence/audit-20261114/AUDIT.md` F2-02 and F2-03, built on the instruction "errand and plan_shared". Both are on the local branch
-`claude/audit-fixes-20261114` (not `main`), claim 247 and 248 in the growth stream's third range and leave 246 for the oven.
+From `review_evidence/audit-20261114/AUDIT.md` F2-02 and F2-03, built on the instruction "errand and plan_shared". Both were merged into `main` from
+`claude/audit-fixes-20261114`, claim 247 and 248 in the growth stream's third range and leave 246 for the oven.
 
 **Rules 247, a load on an errand is not put down on the way** (`src/sim/errand_load.ts`, switch `rich-no-errand-load`). `Person.errand` has been
 declared since the first commit and never set; its only writes clear it. Five guards read it and were always false: `communal_stock.ts`
@@ -1115,6 +1115,11 @@ Reach: no recorded decision of gen-2 or aspen holds a shared proposal by tick 12
 **Checks**: typecheck clean; the world of aspen over 25 days at rules 245 on this branch has the same hash at every two day checkpoint as at `4a7a11bb`
 (`fe1bb633`), so nothing below 247 moved. Not run: the pins of 247 and 248, the paired lab, the full suite.
 
+**Lab result (15 November, `review_evidence/audit-20261114/lab248_report.txt`; 12 seeds, Normal, day 0 fork, 25 days, arrivals on, head `3cb29434`).**
+Each arm is the rule removed, against the mean of the control and the two nudges, so the sign shows what removing the rule did.
+- Rules 248: removing the offer lowers `retainedSharedCompleted` 3.4 to 1.0 (lower in 12 of 12 seeds), the only metric in the report called larger than chance. Aligned residents (1.4 to 0.0) and factions (0.5 to 0.0) fall with it. Deaths, people, hunger, buildings, workplaces (6.4 against 6.6) and projects done show nothing. Store meals, ration trips and chats move within the noise floor.
+- Rules 247: reached 8 of 12 seeds. Removing it lowers buildings 58.6 to 56.7 (lower in 9 of 12) and site deliveries by 13, and raises homeless by 1.0 (10 up, 1 down). All the same direction, all within the noise floor, none larger than chance. Deaths fall 0.2 to 0.0 on removal (a handful of deaths, weak).
+- Not measured: bread, iron and buildings by type (the lab rows hold no per type counts), a second profile, anything past 25 days, the full suite. Both rules are on by default at rules 248; the lab gave no reason to take either out.
 **For your machine** (24 cores; about 20 minutes for the lab; paste back only `report.txt`):
 
 ```
