@@ -24,7 +24,7 @@ import { SKILL_MAX } from './constants';
 function operatePose(a: Activity): PoseKind {
   const r = RECIPE_BY_ID[(a.data.running as string) ?? (a.data.recipe as string)];
   if (!r) return 'craft';
-  switch (r.id) {
+  switch (r.scaleOf ?? r.id) {
     case 'saw_planks':
       return 'saw';
     case 'hew_planks':
@@ -84,9 +84,10 @@ registerHandler('operate', {
       noteBlocker(b, err);
       return err;
     }
-    a.data.running = r.id;
+    const began = b.ops.job ? recipeOf(b.ops.job) : r;
+    a.data.running = began.id;
     a.data.started = true;
-    a.label = r.doing;
+    a.label = began.doing;
   },
   work(world, p, a): WorkResult {
     const b = buildingOf(world, a);

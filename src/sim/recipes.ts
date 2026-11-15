@@ -16,6 +16,8 @@ export interface Recipe {
   /** Passive processing after preparation, without a continuously burning fire. */
   passive?: 'ferment';
   minRules?:number;
+  /** Rules 249 (oven_load.ts): this is a larger batch of the recipe with this id; it is in RECIPE_BY_ID but never in RECIPES. */
+  scaleOf?: string;
   id: string;
   label: string;
   /** e.g. "Sawing planks" */
@@ -318,6 +320,31 @@ RECIPES.push(
 );
 
 export const RECIPE_BY_ID: Record<string, Recipe> = Object.fromEntries(RECIPES.map((r) => [r.id, r]));
+
+/**
+ * Rules 249 (oven_load.ts): a milling or firing of two or three measures. These are not in RECIPES, so no planner offers or counts
+ * them; only startJob (facilities.ts) can begin one, when the workshop's store holds enough, and RECIPE_BY_ID lets everything that
+ * reads a running job find it. Milling takes n times the grain for n times the flour and waste; a firing takes n times the flour
+ * for n times the loaves, one wood still (one fire), and n + 1 water (2, 3, 4); the work is 1, 1.5 and 2 times.
+ */
+export const OVEN_FROM = 249;
+export const OVEN_RECIPES: Record<string, Recipe[]> = {};
+for (const id of ['mill_flour', 'mill_flour_separate', 'bake_bread']) {
+  const base = RECIPE_BY_ID[id];
+  const times = (items: Items, n: number): Items => Object.fromEntries(Object.entries(items).map(([k, v]) => [k, (v as number) * n])) as Items;
+  OVEN_RECIPES[id] = [3, 2].map((n): Recipe => ({
+    ...base,
+    id: `${id}_x${n}`,
+    scaleOf: id,
+    minRules: OVEN_FROM,
+    inputs: id === 'bake_bread' ? { ...times(base.inputs, n), water: n + 1 } : times(base.inputs, n),
+    outputs: times(base.outputs, n),
+    waste: times(base.waste, n),
+    work: Math.round(base.work * (1 + (n - 1) / 2)),
+    benefit: `${base.benefit} A larger batch: ${n} measures at once.`,
+  }));
+  for (const r of OVEN_RECIPES[id]) RECIPE_BY_ID[r.id] = r;
+}
 
 export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);

@@ -69,7 +69,7 @@ export function techniqueApplies(w: World, kind: TechniqueKind): boolean {
   if (!heldTechniques(w)) return false;
   return kind === 'charcoal' ? true : hasTechniqueTree(w);
 }
-export const techniqueOfRecipe = (recipe: string): TechniqueKind | undefined => RECIPE_TECHNIQUE.get(recipe);
+export const techniqueOfRecipe = (recipe: string): TechniqueKind | undefined => RECIPE_TECHNIQUE.get(recipe) ?? RECIPE_TECHNIQUE.get(recipe.replace(/_x[23]$/, ''));
 export function knowsTechnique(w: World, p: Person, kind: TechniqueKind): boolean {
   return !techniqueApplies(w, kind) || !!p.techniques?.[kind];
 }

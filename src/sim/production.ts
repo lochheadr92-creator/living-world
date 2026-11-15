@@ -38,6 +38,7 @@ import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, TOOL_DEFS, WEIGHT, WORK, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
 import { hasBatchResume, hasRequiredToolRecovery } from './facilities';
+import { fullLoadNeed } from './oven_load';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
@@ -424,10 +425,13 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag:
   const carryAll: Items = {};
   let anyCarried = false;
   let stillShort = false;
+  // rules 249 (oven_load.ts): what somebody carries is brought up to a full oven's worth, not only what one measure lacks
+  const fullOven = fullLoadNeed(world, r);
   for (const k of Object.keys(short) as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
     if (have > 0) {
-      carryAll[k] = Math.min(have, unitsOf(short[k]));
+      const room = fullOven ? unitsOf(fullOven[k]) - benchStock(world, b, k, stockAt(ctx, b, k)) : 0;
+      carryAll[k] = Math.min(have, Math.max(unitsOf(short[k]), room));
       anyCarried = true;
     }
     if (have < unitsOf(short[k])) stillShort = true;

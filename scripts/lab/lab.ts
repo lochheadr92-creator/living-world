@@ -14,6 +14,7 @@ import { familyFoodOn, setFamilyFood } from '../../src/sim/family_food';
 import { ownStoresOn, setOwnStores } from '../../src/sim/own_stores';
 import { errandLoadOn, setErrandLoad } from '../../src/sim/errand_load';
 import { sharedOfferOn, setSharedOffer } from '../../src/sim/shared_offer';
+import { ovenLoadOn, setOvenLoad } from '../../src/sim/oven_load';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
 import { PLENTY_PARTS, plentyPartOn, setPlenty } from '../../src/sim/plenty';
@@ -290,6 +291,8 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 249 (oven_load.ts): a milling or a firing is one measure whatever the shelves hold
+  if (kind === 'rich-no-oven-load') return { spec: label, summary: "a milling or a firing is the recipe's one measure however much the shelves hold, as before rules 249; no effect below rules 249", install() { const was = ovenLoadOn(); setOvenLoad(false); return () => setOvenLoad(was); } };
   // rules 248 (shared_offer.ts): workshops are planned without the shared alternative of rules 143
   if (kind === 'rich-no-shared-offer') return { spec: label, summary: 'a workshop is laid out without the offer to propose it as a shared project, as before rules 248; no effect below rules 248', install() { const was = sharedOfferOn(); setSharedOffer(false); return () => setSharedOffer(was); } };
   // rules 247 (errand_load.ts): the errand guards read the never set field again

@@ -15,6 +15,7 @@ import { addEvent, addFx, addLog } from './events';
 import { newCart } from './carts';
 import { RECIPE_BY_ID, acceptedAt, isFacilityType, newOps, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
+import { largerBatches } from './oven_load';
 import { personById } from './registry';
 import { affinityOf } from './relations';
 import { benchTool, mintTool, recipeToolMultiplier, wearTool } from './tools';
@@ -43,7 +44,7 @@ export const hasRequiredToolRecovery = (world: World): boolean => requiredToolRe
 /** Is this the job that `p` may get back to: the same recipe, still being worked, theirs or abandoned long enough? */
 export function resumableJob(world: World, b: Building, p: Person, r: Recipe): boolean {
   const job = b.ops?.job;
-  if (!hasBatchResume(world) || !job || job.phase !== 'work' || job.recipe !== r.id) return false;
+  if (!hasBatchResume(world) || !job || job.phase !== 'work' || (RECIPE_BY_ID[job.recipe]?.scaleOf ?? job.recipe) !== r.id) return false;
   if (!mayUse(world, p, b)) return false;
   return job.client === p.id || world.tick - job.lastWork > RESUME_AFTER;
 }
@@ -409,6 +410,10 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
   if(r.preservation&&(!Number.isSafeInteger(client)||client<=0))return 'a preservation batch needs an identified owner';
   // rules 50: getting back to a batch under way is not starting one; the job stands as it is
   if (resumableJob(world, b, p, r)) return null;
+  // rules 249 (oven_load.ts): the largest batch the shelves cover, the base batch when none of the larger ones can be started
+  for (const bigger of largerBatches(world, r)) {
+    if (!startBlocker(world, b, p, bigger, trial)) { r = bigger; break; }
+  }
   const why = startBlocker(world, b, p, r, trial);
   if (why) return why;
   const ops = opsOf(b)!;
@@ -732,7 +737,7 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
   const dep = depositOf(world, b);
   const rr = job ? recipeOf(job) : null;
   return {
-    job: job ? job.recipe : null,
+    job: job ? (rr?.scaleOf ?? job.recipe) : null,
     progress: job ? Math.min(1, job.progress / Math.max(1, job.total)) : 0,
     burn: job && job.phase !== 'work' && job.burnTotal > 0 ? 1 - Math.max(0, job.burnLeft) / job.burnTotal : 0,
     output,
