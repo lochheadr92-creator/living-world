@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "fb34f1f3da4dd677a4d2b484b317f10a05c2f59c",
+    "rules": 249,
+    "content": "03ed073c791613115bddb0ae1067f91606ba1c006a3ff14af0bda94d4fdd95a2",
+    "note": "Recorded from a clean checkout of the commit that added rules 249; ordinary Normal gen-2 (arrivals on) at tick 70900, the first tick a larger batch is under way, saved and continued 120 ticks."
+  },
+  "saved": "3a3378c163dfac11a064c121a3e98269dd8708cf0e256b7d1292e1abcd36acec",
+  "continued": "8d7fc8b4170375a35ce47f516801b7740c76888be03615285888c0cdba827f84",
+  "tick": 70900,
+  "largerBatchesUnderWay": 1,
+  "alive": 47
+}
