@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "45b89980e4fbb79176f8258dc1e596838361738c",
+    "rules": 250,
+    "content": "6de73b5b62984633d8dd4fef6f70a47da3296af1a35dbba51b74e42e1e614619",
+    "note": "Recorded from a clean checkout of the commit that added rules 250; ordinary Normal gen-4 (arrivals on) at tick 41200, just after the first tick its world differs from the same world at rules 249 (the ring fallback), saved and continued 120 ticks."
+  },
+  "saved": "6c63cdd236b77106f09c12db52da5c638d2659674d8d49d816a93e70fbacb999",
+  "continued": "5ad502cb57635e035cd5447da6f574d3708c9ec3312217b4e842ad707da215d0",
+  "tick": 41200,
+  "workshops": 5,
+  "alive": 36
+}
