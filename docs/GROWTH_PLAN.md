@@ -1193,3 +1193,5 @@ The world hash at day 5 is equal at 249 and 250 on all three seeds (the ring sti
 **Checks.** Contract test `tests/ring_fallback.test.ts` (7; the rules-249 contrast and the lab switch fail if the rule is taken out). Typecheck clean. Pin `tests/v250_continuation.*` (gen-4 at tick 41,200).
 
 **Not done.** The paired lab (the 25-day lab reaches a granary or bakery only in worlds that fill the ring by then, so the useful read is the four-year arms from the saved settlements: 244 as saved, 249, 250, 250 with the switch off), and a count of "no suitable spot" refusals at both versions. No benefit is claimed.
+
+Full suite at rules 250 (`review_evidence/stage3-20261115/`, head `44862f27`): 3,651 of 3,661 tests in 669 files. The 3 tests of the stage 1 list still fail (`preservation` 1, `stored_materials` 2); the other 6 (`lab_report` 2, `v235_continuation`, `v249_continuation`, two `zz_review`) are load timeouts and pass alone. `v250_continuation` and every pin from rules 1 to 249 pass.
