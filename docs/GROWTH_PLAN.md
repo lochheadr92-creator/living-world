@@ -1177,3 +1177,19 @@ One run a seed and chaotic after the first divergence: this shows the rule reach
 **Not done.** The paired lab on the 24-core machine, and the four-year arms from the saved settlements the plan names (244 as saved, 245, 249, 249 with own stores off). No benefit is claimed. The lab rows now carry bread and iron held and made and the building counts by type (stage 1). Things to read in it: bread made and held, buildings by type (`nBakeries`, `nMills`), `mealsFromStore`, hunger time, people and deaths.
 
 Full suite at rules 249 (`review_evidence/stage2-20261115/`, head `fb34f1f3` with the pin): 3,643 of 3,653 tests in 667 files. The 3 tests of the stage 1 list still fail (`preservation` 1, `stored_materials` 2); the other 6 (`lab_report` 2, `v235_continuation`, `v249_continuation`, two `zz_review`) are load timeouts and pass alone, 8 of 8. Every pin from rules 1 to 248 passes, so nothing below 249 moved.
+
+## A wider look for a workshop spot (rules 250, built 15 November 2026; stage 3 of the plan)
+
+From "The famine at rules 244, gen-4 and the granary": a granary is looked for 3 to 11 tiles from the hub (a bakery 5 to 14, a kiln or smithy 7 to 15) and the ring fills; the repair named there was a fallback to 3 to 20, as a rules number of its own after the oven. It took **250**.
+
+**What it does** (`src/sim/ring_fallback.ts`, called from `optPlanFacilities` in `production.ts`; switch `rich-no-ring-fallback`; no effect below 250). When the ordinary search for a workshop's spot finds nothing, the same search is made in the band 9 tiles beyond the ordinary edge, nearest to the old edge first: a granary or hall 11 to 20, a bakery 14 to 23, a kiln or smithy 15 to 24 (and every other workshop that is not a quarry or a mine, which are placed at a deposit). The person must still have seen the ground (`findBuildSpot` reads what they have explored). The ring that worked is untouched, so a world that always found a spot is the same world; only a "no suitable spot" refusal changes. Nothing is saved.
+
+**What the probe showed first, and it moved the question** (`scripts/ring_probe.ts`, ordinary Normal worlds, arrivals on, 60 days, one run each, `review_evidence/stage3-20261115/`). At rules 249 gen-4 already lays out a granary on day 7.2 and has one at day 60 (aspen day 15.2, birch day 14.3): the missing granary was a rules-238 finding, and rules 242 to 244 (a household wants a granary, and holds 480) have since answered it in these three worlds. What the wider look adds is a second workshop where the ring had run out:
+- gen-4: bakeries 2 against 1, kilns 2 against 1, smithies 2 against 1; people 61 against 56; deaths 0 and 0.
+- birch: bakeries 2 against 1, smithies 2 against 1; people 70 against 64; deaths 2 and 2.
+- aspen: the same workshops at both versions; people 56 against 57.
+The world hash at day 5 is equal at 249 and 250 on all three seeds (the ring still had room). gen-4 first differs from its 249 self at tick 41,150 (day 17.1) (`scripts/ring_first_diff.ts`); birch has not differed by day 40. One run a seed and chaotic after the first difference: this shows the rule reaches, not what it does.
+
+**Checks.** Contract test `tests/ring_fallback.test.ts` (7; the rules-249 contrast and the lab switch fail if the rule is taken out). Typecheck clean. Pin `tests/v250_continuation.*` (gen-4 at tick 41,200).
+
+**Not done.** The paired lab (the 25-day lab reaches a granary or bakery only in worlds that fill the ring by then, so the useful read is the four-year arms from the saved settlements: 244 as saved, 249, 250, 250 with the switch off), and a count of "no suitable spot" refusals at both versions. No benefit is claimed.

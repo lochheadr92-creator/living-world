@@ -39,6 +39,7 @@ import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, TOOL_DEFS, W
 import { findBuildSpot } from './buildings';
 import { hasBatchResume, hasRequiredToolRecovery } from './facilities';
 import { fullLoadNeed } from './oven_load';
+import { ringFallbackSpot } from './ring_fallback';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
@@ -1211,6 +1212,8 @@ function optPlanFacilities(ctx: Ctx): void {
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
+        // rules 250 (ring_fallback.ts): nothing near the hub, so look in the band beyond (not for a deposit's quarry or mine)
+        if (!spot && type !== 'quarry' && type !== 'mine') spot = ringFallbackSpot(world, p, type, camp.x, camp.y);
         if (!spot) {
           noteFailure(world, p, key, 'no suitable spot');
           return null;
