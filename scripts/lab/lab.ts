@@ -842,6 +842,11 @@ export const METRICS = [
   'fireSits', 'fireSitsElder', 'storiesTold', 'storyHearers', 'storyHearersChild',
   // what rules 220 is for: days that ended with a lean season under way, and with a dry spell under way
   'leanDays', 'dryDays',
+  // what stage 1 of the 15 November 2026 plan adds, so that a lab can say what a rule did to the bread, the iron and the kinds of building:
+  // loaves and bars of iron held at the end (in every pack and every store) and made over the world's life to the end (the ledger counts
+  // from the start of the world, not the fork, so read these as differences between arms), and how many of each kind of building stand.
+  'breadHeld', 'ironHeld', 'breadMade', 'ironMade',
+  'nHouses', 'nHuts', 'nSmithies', 'nMills', 'nBakeries', 'nBreweries', 'nKilns', 'nGranaries', 'nHalls', 'nWells', 'nCellars', 'nMines', 'nStorehouses', 'nTimberYards', 'nQuarries',
   ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
@@ -1314,6 +1319,25 @@ export function outcomeOf(
       childrenWithToy: alive.filter((p) => stageOf(w, p) === 'child' && (p.inv.toy ?? 0) > 0).length,
       leanDays: life.leanDays,
       dryDays: life.dryDays,
+      breadHeld: heldOf(w, 'bread'),
+      ironHeld: heldOf(w, 'iron'),
+      breadMade: w.ledger.created.bread ?? 0,
+      ironMade: w.ledger.created.iron ?? 0,
+      nHouses: count(['house']),
+      nHuts: count(['hut']),
+      nSmithies: count(['smithy']),
+      nMills: count(['mill']),
+      nBakeries: count(['bakery']),
+      nBreweries: count(['brewery']),
+      nKilns: count(['kiln']),
+      nGranaries: count(['granary']),
+      nHalls: count(['hall']),
+      nWells: count(['well']),
+      nCellars: count(['cellar']),
+      nMines: count(['mine']),
+      nStorehouses: count(['storehouse']),
+      nTimberYards: count(['timber_yard']),
+      nQuarries: count(['quarry']),
       fireSits: life.fireSits,
       fireSitsElder: life.fireSitsElder,
       storiesTold: life.storiesTold,
@@ -1338,6 +1362,14 @@ export function outcomeOf(
     },
     milestones,
   };
+}
+
+/** Units of one item in every living person's pack and every building's store: what the world holds, not what anyone believes. */
+function heldOf(w: World, item: string): number {
+  let n = 0;
+  for (const p of w.persons) if (p.alive) n += (p.inv as Record<string, number>)[item] ?? 0;
+  for (const b of w.buildings) if (b.store) n += (b.store.items as Record<string, number>)[item] ?? 0;
+  return n;
 }
 
 export interface BranchResult {

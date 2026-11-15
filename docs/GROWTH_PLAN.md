@@ -1129,3 +1129,33 @@ npx vite-node scripts/lab_report.ts -- lab248_out
 ```
 
 (Both arms and the two nudges run against a control; the verdict for each rule is its own removal arm against the mean of the control and the nudges.)
+
+## The next stages, as decided 15 November 2026
+
+The world stays peaceful for now. What the world finally becomes, a city and thousands of people, depends on what product this turns into, which is not chosen. Those stages wait; nothing below needs them.
+
+**Active, in order.** Stages 1 to 5 first, then the rest as their needs allow.
+
+1. Green baseline: run the full suite on `main`, sort the failures (`tests/iron_chain_stall.test.ts` has failed since rules 206), and add bread, iron and per type building counts to the lab rows. No rules change.
+2. Full oven (rules 246, `src/sim/oven_load.ts`, arm `rich-no-oven-load`). Check first against source that a batch can vary in size.
+3. Granary ring fallback (rules 249): when 3 to 11 tiles finds no spot, fall back to 3 to 20. Replay gen-4 to check.
+4. Past 130 people: measure first from the four year saves, no rules change; one lever then gets rules 250 (bin spoilage, field rot or the stocking drive).
+5. Milestone 20 year set of 12 worlds, once, after 246, 249 and 250; a new brain baseline; rewrite `PRODUCT_VISION.md` (it still says about 100 people).
+6. Id space and growth of remembered things. 7. Engine profile and a faster tick. 8. Stone and the site limit. 9. Lean season into winter.
+10. Daughter settlements and roads. 11. Village rung (healer's hut, school, carts, roads). 12. Town rung (brick streets, coin, market hall, hospital).
+14. Observer for big worlds (land the left rail legend first). 15. Lab and tests at scale. 16. Disease and the healer. 17. Trade and coin.
+18. Iron to steel and tools that matter. 21. Climate, floods and drought. 22. Knowledge and schools.
+
+**Parked until the product is chosen.** 13 near and far, 19 leaders and law, 20 raiders and defence, 23 the city rung, 24 population in the thousands, 25 the product pass. Wolves stay as they are (rules 239 and 240); nothing new is added that people fight.
+
+**Rule numbers.** 246 is held for the oven; 249 and 250 are the next two behaviour changes. One lever a rules number, a switch each, a paired lab each.
+
+## Stage 1: the full suite at rules 248, and sharper lab rows (15 November 2026, no rules change)
+
+**The suite** (`review_evidence/stage1-20261115/`, at `eba23998`, about 10 minutes, run alone on the machine): **657 of 665 files and 3,630 of 3,641 tests pass** (10 failed, 1 skipped). Against the run of 13 November at rules 235 (17 files, 74 failures) the household test files that failed since rules 169 now pass, which is rules 245. The 8 files that failed here, rerun alone:
+- 3 were load: `lab_report` (2), `v235_continuation` (1), `zz_review_g_observer_purity` and `zz_review_main_toolreport_saves` pass alone.
+- 2 were stale staging and are repaired: `carcass_supply` (the dry meat chain) and `project_inputs` (the hammer craft) stage exact store counts and expect them read exactly; from rules 169 a glance at a store keeps only which kinds are there. Both pass with the glance off (`setSeenStock(false)` in the test), and `seen_stock.test.ts` still pins the rule. No behaviour changed.
+- 3 tests in 2 files still fail and the cause is not found: `preservation` ("carries household raw food for preservation while retaining two immediate meals", no collect option for the fish in a hut) and `stored_materials` (an offered request makes a promise; a partial physical withdrawal). They fail with the glance off and with own stores (rules 245) off. For `stored_materials` the first scene offers the stone withdrawal at every rules version from 100 to 248 (`bisect_storedmat.txt`), so the missing offer is later in the test, not the scene. Failing since at least rules 220. Not looked into further; each is a staged scene and a description, not a measured loss.
+`tests/iron_chain_stall.test.ts` passes.
+
+**The lab rows.** `scripts/lab/lab.ts` now records 19 more metrics: `breadHeld`, `ironHeld` (units in every living pack and every store), `breadMade`, `ironMade` (the ledger's created counts, from the start of the world, so read them as differences between arms), and `nHouses`, `nHuts`, `nSmithies`, `nMills`, `nBakeries`, `nBreweries`, `nKilns`, `nGranaries`, `nHalls`, `nWells`, `nCellars`, `nMines`, `nStorehouses`, `nTimberYards`, `nQuarries`. Old rows that lack them still work (the report skips a metric an old row has not got). Checked on a 1 seed 3 day lab: all 19 print in `report.txt`. Typecheck clean; `lab_report`, `lab_defaults` and `lab_provenance` tests pass.

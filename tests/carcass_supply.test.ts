@@ -1,4 +1,8 @@
-import {expect,it} from 'vitest';
+import {afterAll,beforeAll,expect,it} from 'vitest';
+import {setSeenStock} from '../src/sim/seen_stock';
+// These scenes stage exact store counts and expect them to be read exactly; from rules 169 a glance at a store keeps only which kinds are there,
+// so the glance is off here (the rule has its own tests, tests/seen_stock.test.ts).
+beforeAll(()=>setSeenStock(false));afterAll(()=>setSeenStock(true));
 import {stage,addPerson,building,done,learn} from './helpers/kit';
 import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
 import {makeWolf} from '../src/sim/wildlife';

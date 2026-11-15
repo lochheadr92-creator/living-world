@@ -1,4 +1,8 @@
-import {expect,it} from 'vitest';
+import {afterAll,beforeAll,expect,it} from 'vitest';
+import {setSeenStock} from '../src/sim/seen_stock';
+// These scenes stage exact store counts and expect them to be read exactly; from rules 169 a glance at a store keeps only which kinds are there,
+// so the glance is off here (the rule has its own tests, tests/seen_stock.test.ts).
+beforeAll(()=>setSeenStock(false));afterAll(()=>setSeenStock(true));
 import {projectInputsScene} from './helpers/project_inputs';
 import {freeOf,reviewIntentions} from '../src/sim/intent';
 import {generateOptions} from '../src/sim/decision';
