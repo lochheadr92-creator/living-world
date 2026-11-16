@@ -15,6 +15,7 @@
 // A lean season, a dry spell and winter still cut regrowth and crops by the fractions they always did, now of the larger
 // amount. Nothing is saved. Rich worlds at rules 226 and later only; rules 225 and earlier, authored worlds and a switch thrown
 // keep the old amounts.
+import { cropGrowFactor, wildGrowFactor } from './grow_more';
 import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
@@ -35,6 +36,6 @@ const runs = (world: World): boolean => world.settings.dynamics === 'rich' && ru
 const WILD_FOOD = new Set(['berry_bush', 'fruit_tree', 'fish_spot', 'wild_grain']);
 
 /** how many times as fast this kind of source comes back (1 for anything that is not wild food) */
-export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? PLENTY_WILD : 1);
+export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? wildGrowFactor(world, PLENTY_WILD) : 1) // rules 254 (grow_more.ts);
 /** how many times the grain a ripened plot carries */
-export const cropPlenty = (world: World): number => (on.crops && runs(world) ? PLENTY_CROPS : 1);
+export const cropPlenty = (world: World): number => (on.crops && runs(world) ? cropGrowFactor(world, PLENTY_CROPS) : 1) // rules 254 (grow_more.ts);

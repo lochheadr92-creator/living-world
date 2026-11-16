@@ -1,4 +1,5 @@
 import { openToAll } from './open_workplaces';
+import { seasonReserveCap, seasonReserveDays, seasonWindowDays } from './bigger_reserve';
 import {hasCellars} from './cellars';
 // HOUSEHOLD FOOD PREPARATION (rules version 2, rich worlds only).
 //
@@ -293,7 +294,7 @@ export function preparationWanted(ctx: Ctx): PrepWant | null {
   const short = target - inStore;
   // rules 46: the season asks for more than the one-day cushion, still bounded by the room the store has - unless a granary is
   // known, whose bins have room enough; below 46 (and with the switch off) the season target is the cushion, exactly as before
-  const seasonTarget = hasWinterReserve(world) ? Math.min(DAY_FOOD * SEASON_RESERVE_DAYS * members, SEASON_CAP, knownGranary(world, p) ? Infinity : inStore + roomInBelief(home)) : target;
+  const seasonTarget = hasWinterReserve(world) ? Math.min(DAY_FOOD * seasonReserveDays(world, SEASON_RESERVE_DAYS) * members, seasonReserveCap(world, SEASON_CAP), knownGranary(world, p) ? Infinity : inStore + roomInBelief(home)) : target;
   const seasonShort = seasonTarget - inStore;
   if (short < MIN_SHORTFALL && seasonShort < MIN_SHORTFALL) return null;
 
@@ -316,7 +317,7 @@ export function preparationWanted(ctx: Ctx): PrepWant | null {
   // holder of the practice of keeping winter stores sees the window open PRACTICE_LEAD days earlier, and says so.
   const left = ticksUntilWinter(world);
   const lead = winterPracticeLead(world, p);
-  const window = ((hasWinterReserve(world) ? PREPARE_DAYS_WINTER_RESERVE : PREPARE_DAYS) + lead) * DAY;
+  const window = ((hasWinterReserve(world) ? seasonWindowDays(world, PREPARE_DAYS_WINTER_RESERVE) : PREPARE_DAYS) + lead) * DAY; // rules 253 (bigger_reserve.ts)
   if (seasonShort < MIN_SHORTFALL || left <= 0 || left > window || left < DAY * 0.3) return null;
   return {
     target: seasonTarget,

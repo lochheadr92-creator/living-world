@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "95ce6377f0800915e7217e216102465de0709265",
+    "rules": 253,
+    "content": "4151199f3fe22424c8422ac32733a73d3613ed5bea18003d08a47693717526e9",
+    "note": "Recorded from the working tree at head 95ce6377 plus the uncommitted rules 251 to 253 (nothing committed yet, so not a clean checkout); ordinary Normal gen-4 (arrivals on) at tick 9200, just after the first tick its world differs from the same world at rules 252 (the bigger season reserve), saved and continued 120 ticks."
+  },
+  "saved": "91294481a97b3c51d58cf087fe4a43250ae9a8b5fd0590c5f8ebd1fc02640bcb",
+  "continued": "d9b642ea6b078ae3ac33443229f707ce601c3769070376e9053aaa555bb1bf44",
+  "tick": 9200,
+  "arrivals": 1,
+  "alive": 29
+}

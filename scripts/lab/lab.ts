@@ -16,6 +16,14 @@ import { errandLoadOn, setErrandLoad } from '../../src/sim/errand_load';
 import { sharedOfferOn, setSharedOffer } from '../../src/sim/shared_offer';
 import { ovenLoadOn, setOvenLoad } from '../../src/sim/oven_load';
 import { ringFallbackOn, setRingFallback } from '../../src/sim/ring_fallback';
+import { arrivalPaceOn, setArrivalPace } from '../../src/sim/arrival_pace';
+import { setTreeRegrowth, treeRegrowthOn } from '../../src/sim/tree_regrowth';
+import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow_more';
+import type { GrowMorePart } from '../../src/sim/grow_more';
+import { FARM_DRAW_PARTS, farmDrawPartOn, setFarmDraw } from '../../src/sim/farm_draw';
+import type { FarmDrawPart } from '../../src/sim/farm_draw';
+import { BIGGER_RESERVE_PARTS, biggerReservePartOn, setBiggerReserve } from '../../src/sim/bigger_reserve';
+import type { BiggerReservePart } from '../../src/sim/bigger_reserve';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
 import { FINISH_JOB_PARTS, finishJobPartOn, setFinishJob } from '../../src/sim/finish_job';
 import { PLENTY_PARTS, plentyPartOn, setPlenty } from '../../src/sim/plenty';
@@ -292,6 +300,28 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 227 (finish_job.ts): both parts removed (equal to rules 226), and each part alone
   if (kind === 'rich-no-finish-job') return { spec: label, summary: 'a job under way is looked at again every 45 to 65 ticks and anyone may be approached at their work, as before rules 227; no effect below rules 227', install() { const was = FINISH_JOB_PARTS.map((k) => finishJobPartOn(k)); setFinishJob(false); return () => FINISH_JOB_PARTS.forEach((k, i) => setFinishJob(was[i], k)); } };
   for (const part of FINISH_JOB_PARTS) if (kind === 'rich-no-finish-job-' + part) return { spec: label, summary: `${part === 'hold' ? 'a job under way is looked at again every 45 to 65 ticks' : part === 'asleep' ? 'a sleeper is looked at again every 45 to 65 ticks' : 'anyone may be approached at their work for a chat, family time or a game'}, as before rules 227; no effect below rules 227`, install() { const was = finishJobPartOn(part); setFinishJob(false, part); return () => setFinishJob(was, part); } };
+  // rules 254 (grow_more.ts): wild food regrows twice as fast and a plot carries twice the grain
+  if (kind === 'rich-no-grow-more' || kind.startsWith('rich-no-grow-more-')) {
+    const part = kind === 'rich-no-grow-more' ? undefined : (kind.slice('rich-no-grow-more-'.length) as GrowMorePart);
+    if (part && !GROW_MORE_PARTS.includes(part)) throw new Error(`rich-no-grow-more-${part}: no such part (${GROW_MORE_PARTS.join(', ')})`);
+    return { spec: label, summary: `wild food regrows twice as fast and a plot carries twice the grain${part ? ' (' + part + ' part only)' : ''}, as before rules 254; no effect below rules 254`, install() { const was = Object.fromEntries(GROW_MORE_PARTS.map((q) => [q, growMorePartOn(q)])) as Record<GrowMorePart, boolean>; setGrowMore(false, part); return () => { for (const q of GROW_MORE_PARTS) setGrowMore(was[q], q); }; } };
+  }
+  // rules 255 (farm_draw.ts): no extra pull toward the fields
+  if (kind === 'rich-no-farm-draw' || kind.startsWith('rich-no-farm-draw-')) {
+    const part = kind === 'rich-no-farm-draw' ? undefined : (kind.slice('rich-no-farm-draw-'.length) as FarmDrawPart);
+    if (part && !FARM_DRAW_PARTS.includes(part)) throw new Error(`rich-no-farm-draw-${part}: no such part (${FARM_DRAW_PARTS.join(', ')})`);
+    return { spec: label, summary: `no extra pull toward the fields${part ? ' (' + part + ' part only)' : ''}, as before rules 255; no effect below rules 255`, install() { const was = Object.fromEntries(FARM_DRAW_PARTS.map((q) => [q, farmDrawPartOn(q)])) as Record<FarmDrawPart, boolean>; setFarmDraw(false, part); return () => { for (const q of FARM_DRAW_PARTS) setFarmDraw(was[q], q); }; } };
+  }
+  // rules 253 (bigger_reserve.ts): the season reserve back to two days a head, capped at 20, opening three days before winter
+  if (kind === 'rich-no-bigger-reserve' || kind.startsWith('rich-no-bigger-reserve-')) {
+    const part = kind === 'rich-no-bigger-reserve' ? undefined : (kind.slice('rich-no-bigger-reserve-'.length) as BiggerReservePart);
+    if (part && !BIGGER_RESERVE_PARTS.includes(part)) throw new Error(`rich-no-bigger-reserve-${part}: no such part (${BIGGER_RESERVE_PARTS.join(', ')})`);
+    return { spec: label, summary: `the season reserve is two days a head capped at 20 and opens three days before winter${part ? ' (' + part + ' part only)' : ''}, as before rules 253; no effect below rules 253`, install() { const was = Object.fromEntries(BIGGER_RESERVE_PARTS.map((q) => [q, biggerReservePartOn(q)])) as Record<BiggerReservePart, boolean>; setBiggerReserve(false, part); return () => { for (const q of BIGGER_RESERVE_PARTS) setBiggerReserve(was[q], q); }; } };
+  }
+  // rules 252 (tree_regrowth.ts): a mature tree seeds a sapling at the ordinary chance, as before
+  if (kind === 'rich-no-tree-regrowth') return { spec: label, summary: 'trees seed saplings at the ordinary chance (not eight times it), as before rules 252; no effect below rules 252', install() { const was = treeRegrowthOn(); setTreeRegrowth(false); return () => setTreeRegrowth(was); } };
+  // rules 251 (arrival_pace.ts): the spacing between arriving groups stays fixed whatever the settlement's size, as before
+  if (kind === 'rich-no-arrival-pace') return { spec: label, summary: 'newcomers arrive no faster as the settlement grows (the fixed 6,000-tick spacing), as before rules 251; no effect below rules 251', install() { const was = arrivalPaceOn(); setArrivalPace(false); return () => setArrivalPace(was); } };
   // rules 250 (ring_fallback.ts): a workshop that finds no spot near the hub is refused, as before
   if (kind === 'rich-no-ring-fallback') return { spec: label, summary: 'a workshop that finds no spot within its ordinary ring near the hub is refused (no look 9 tiles further out), as before rules 250; no effect below rules 250', install() { const was = ringFallbackOn(); setRingFallback(false); return () => setRingFallback(was); } };
   // rules 249 (oven_load.ts): a milling or a firing is one measure whatever the shelves hold

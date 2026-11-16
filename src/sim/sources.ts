@@ -4,6 +4,7 @@ import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
 import { wildPlenty } from './plenty';
+import { treeSeedChance } from './tree_regrowth';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addFx } from './events';
@@ -75,7 +76,7 @@ export function updateSources(world: World): void {
           s.amount++;
           ledgerCreate(world, 'wood', 1, 'tree growth');
         }
-      } else if ((world.tick + i) % 240 === 0 && s.amount >= 2 && (world.stats.trees ?? 0) < (world.stats.treeCap ?? 0) && world.rng.next() < 0.0035) {
+      } else if ((world.tick + i) % 240 === 0 && s.amount >= 2 && (world.stats.trees ?? 0) < (world.stats.treeCap ?? 0) && world.rng.next() < treeSeedChance(world)) {
         // seed a sapling nearby (forest slowly recovers)
         const dx = world.rng.int(7) - 3;
         const dy = world.rng.int(7) - 3;

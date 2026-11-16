@@ -1,4 +1,5 @@
 import {captureFinalAccount,trimFinalAccounts} from './final_account';
+import { arrivalSpacingFor } from './arrival_pace';
 import { barsTheWay } from './arrival_way';
 import { foodInOtherStores } from './family_food';
 import { hasLocalDeath, witnessDeath } from './death_knowledge';
@@ -348,7 +349,7 @@ export function immigrationTick(world: World): void {
   const rules = rulesOf(world);
   if (pop >= rules.immigrationCap || pop < 4) return;
   if (world.tick < 4800) return; // the settlement has to prove itself first
-  if (world.tick - (world.stats.lastArrival ?? -99999) < rules.arrivalSpacing) return;
+  if (world.tick - (world.stats.lastArrival ?? -99999) < arrivalSpacingFor(world, pop, rules.arrivalSpacing)) return; // rules 251 (arrival_pace.ts)
   // a settlement that is doing well draws people in
   let food = 0;
   let adults = 0;

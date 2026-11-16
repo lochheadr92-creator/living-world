@@ -1,4 +1,5 @@
 import { eveningFireOptions } from './evening_fire';
+import { farmDraw } from './farm_draw';
 import { grainGoesToBins } from './grain_kept';
 import { plotsWanted } from './farm_scale';
 import { spearReady, spearWorth, toolRecipe, wantsSpearReady } from './wooden_spear';
@@ -1221,7 +1222,7 @@ function optFarm(ctx: Ctx): void {
 
   const myPlots = beliefsByKind(p, ['plot']).filter((b) => b.hh === hh.id);
   const wantPlots = plotsWanted(world, mem, hs.shortage > 0.4); // rules 244 (farm_scale.ts): a plot and one a head
-  const insecure = 8 * hs.shortage;
+  const insecure = 8 * hs.shortage + farmDraw(world, p); // rules 255 (farm_draw.ts): farming draws people, most when the wild food they know is thinning
 
   for (const b of myPlots) {
     const e = eta(ctx, b.x, b.y);

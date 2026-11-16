@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "95ce6377f0800915e7217e216102465de0709265",
+    "rules": 251,
+    "content": "3e15851825804b0e03fd219fa129e0ca915ef9226736f447b13b13f93821aab4",
+    "note": "Recorded from a clean worktree of 95ce6377 with only the rules-251 files copied in (the commit that adds them did not exist yet); ordinary Normal gen-4 (arrivals on) at tick 35500, just after the first tick its world differs from the same world at rules 250 (the arrival pace), saved and continued 120 ticks."
+  },
+  "saved": "d5fa380e3f5c92a8d7e1d9320f2bb3de2f8629e8f8c8ddadf9165787c6085308",
+  "continued": "52ed758af201c91144252536f0464c1174f54c6c5930e5894fcd0f5f1ea6da93",
+  "tick": 35500,
+  "arrivals": 3,
+  "alive": 34
+}

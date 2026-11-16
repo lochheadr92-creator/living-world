@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "95ce6377f0800915e7217e216102465de0709265",
+    "rules": 252,
+    "content": "6f8ede4a3eeb66e1bf71e2295fc16fa2460013ae26ef4c5fb3374c24e3102087",
+    "note": "Recorded from the working tree at head 95ce6377 plus the uncommitted rules 251 and 252 (nothing committed yet, so not a clean checkout); ordinary Normal gen-4 (arrivals on) at tick 6000, after the forest has been seeded at eight times the ordinary chance (first differs from rules 251 at tick 100), saved and continued 120 ticks."
+  },
+  "saved": "c05e447de73f97742403df70ed0fafab68f07ded114b29e7d48c9ca71a6ed928",
+  "continued": "7c4348cc9eddc056480d3e1455f6799f7a7050aad35397259a1ed82f0fda1783",
+  "tick": 6000,
+  "arrivals": 0,
+  "alive": 28
+}

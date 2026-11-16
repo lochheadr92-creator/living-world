@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "95ce6377f0800915e7217e216102465de0709265",
+    "rules": 255,
+    "content": "5f46edd184c3e0886146e729f0fffe88de80f20cbe80eb694be979a2e1728bc5",
+    "note": "Recorded from the working tree at head 95ce6377 plus the uncommitted rules 251 to 255 (nothing committed yet, so not a clean checkout); ordinary Normal gen-4 (arrivals on) at tick 6000, after the first tick its world differs from the same world at the previous rules version, saved and continued 120 ticks."
+  },
+  "saved": "69e59cb4a7417625d3a57b13e052e48231c0582e558ec92f2d64d1e8c44f874c",
+  "continued": "f42488d1e22d96f5410072d60527b87e52c0c679f837d414e9933cb13d824114",
+  "tick": 6000,
+  "arrivals": 1,
+  "alive": 30
+}

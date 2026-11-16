@@ -191,7 +191,8 @@ describe('2. ineligible situations form no preparation', () => {
   });
 
   it('a household already at its target does not, in or out of the window', () => {
-    const { w, ann } = scene('prep-stocked', { homeFood: { grain: 9 } });
+    // 12 = three days' eating for one (rules 253, bigger_reserve.ts; it was 9, above the two days of 8, before)
+    const { w, ann } = scene('prep-stocked', { homeFood: { grain: 12 } });
     expect(preparationWanted(ctxFor(w, ann)), 'nothing to make up').toBeNull();
     w.tick = PRE_WINTER_TICK;
     expect(preparationWanted(ctxFor(w, ann)), 'and winter does not create a want that is not there').toBeNull();
