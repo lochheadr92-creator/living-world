@@ -28,6 +28,7 @@ import { hashWorld, stepWorld } from '../src/sim/world';
 import { ageYears, stageOf } from '../src/sim/people';
 import { TECHNIQUE_KINDS } from '../src/sim/techniques';
 import { LifeTally } from './lab/lab';
+import { refillForest } from './forest_refill';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -40,6 +41,8 @@ const out = opt('out', '');
 const saveEvery = Number(opt('save-every', '0'));
 const saveDir = opt('save-dir', '');
 const nudge = Number(opt('nudge', '0'));
+// --forest-refill on: a counterfactual, wood made plentiful (scripts/forest_refill.ts); the JSON says so
+const forestRefill = opt('forest-refill', 'off') === 'on';
 
 // a world read from --load (and raised by --rules-up), or made fresh from --seed, --rules and --arrivals (scripts/world_args.ts)
 const { w, loaded, startDay } = worldFromArgs(opt, 'aspen');
@@ -50,7 +53,7 @@ const endDay = startDay + days;
 // the lab's `nudge:N`: N extra draws from the world's random state at the start, and nothing else
 for (let k = 0; k < nudge; k++) w.rng.next();
 // said in the JSON only when the run was not a plain fresh one, so a fresh run's JSON is as it was
-const provenance = loaded ? { loaded, startDay, endDay, rulesUp: opt('rules-up', ''), nudge, priorDeaths: w.deceased.length } : nudge > 0 ? { nudge } : {};
+const provenance = loaded ? { loaded, startDay, endDay, rulesUp: opt('rules-up', ''), nudge, forestRefill, priorDeaths: w.deceased.length } : nudge > 0 ? { nudge } : {};
 
 const life = new LifeTally();
 w.hooks = { onActivityEnd: (p, a, outcome) => life.end(w, p, a, outcome) };
@@ -91,6 +94,7 @@ for (let i = startTick + 1; i <= startTick + days * DAY; i++) {
       samples++;
     }
   }
+  if (i % DAY === 0 && forestRefill) refillForest(w);
   if (i % DAY !== 0) continue;
   const day = i / DAY;
   const alive = w.persons.filter((p) => p.alive);

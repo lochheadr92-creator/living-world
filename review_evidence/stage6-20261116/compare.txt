@@ -1,0 +1,36 @@
+
+=== fern from day 144: control vs original trace: 60 days equal, 0 differ
+arm      end alive  min alive  deaths  buildings(end) peakCrit  causes
+control          2          2     196          4       130   {"wolf attack":1,"fever":23,"thirst":1,"exposure":85,"injuries":4,"hunger":82}
+wood            70         63     138        104       167   {"thirst":3,"wolf attack":1,"fever":12,"hunger":38,"injuries":6,"exposure":78}
+day  | ctl alive/store/bldg/died | wood alive/store/bldg/died
+ 150 | 175/187/137/0          | 174/226/144/0
+ 156 | 184/166/137/0          | 177/81/147/0
+ 162 | 190/733/117/0          | 181/787/147/0
+ 168 | 191/695/99/0           | 189/602/147/1
+ 174 | 193/975/65/0           | 196/627/147/0
+ 180 | 163/196/28/2           | 197/438/147/0
+ 186 | 125/0/8/30             | 197/23/147/0
+ 192 | 2/26/5/0               | 63/22/130/3
+ 198 | 2/6/4/0                | 66/367/103/0
+ 204 | 2/0/4/0                | 70/282/104/0
+trees by year row: ctl 156:30 168:0 180:0 192:0 204:0 | wood 156:808 168:806 180:806 192:814 204:807
+buildings (year rows): ctl 156:137 168:99 180:28 192:5 204:4 | wood 156:147 168:147 180:147 192:130 204:104
+
+=== meadow from day 156: control vs original trace: 60 days equal, 0 differ
+arm      end alive  min alive  deaths  buildings(end) peakCrit  causes
+control         11         11     198          8        93   {"wolf attack":4,"fever":13,"exposure":158,"thirst":8,"hunger":15}
+wood           177        168      60        188       163   {"thirst":1,"hunger":33,"old age":1,"fever":7,"exposure":12,"injuries":6}
+day  | ctl alive/store/bldg/died | wood alive/store/bldg/died
+ 162 | 185/1473/162/0         | 186/992/179/0
+ 168 | 184/191/144/1          | 192/10/183/0
+ 174 | 187/548/130/0          | 192/215/186/0
+ 180 | 189/270/125/0          | 195/307/191/0
+ 186 | 189/534/130/0          | 199/386/193/0
+ 192 | 189/294/129/2          | 204/451/194/0
+ 198 | 190/941/87/0           | 216/748/196/0
+ 204 | 35/146/47/3            | 210/9/196/8
+ 210 | 35/192/25/0            | 172/492/187/0
+ 216 | 11/39/8/0              | 177/568/188/0
+trees by year row: ctl 168:57 180:13 192:0 204:0 216:0 | wood 168:806 180:804 192:804 204:807 216:804
+buildings (year rows): ctl 168:144 180:125 192:129 204:47 216:8 | wood 168:183 180:191 192:194 204:196 216:188

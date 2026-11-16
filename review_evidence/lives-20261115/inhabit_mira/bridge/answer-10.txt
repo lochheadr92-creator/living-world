@@ -1,0 +1,1 @@
+{"choose":"build:1243","limit":{"ticks":100},"why":"I am fed enough to build now and the lean-to has all its materials; a long spell before dawn should get me a roof at last.","notes":{"intentions":[{"id":"n3","text":"Build the lean-to until done, then ask Rafe or Kira about the well"}],"journal":"Fed. Building the lean-to in the dark."}}
