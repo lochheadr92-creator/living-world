@@ -93,7 +93,8 @@ function provisionScene(version: number) {
 }
 
 it('the existing winter reserve cart trip can carry preserved provisions home',()=>{
-  const {w,ann,ben,cal,hut,store,cart}=provisionScene(CURRENT_RULES_VERSION);
+  // rules 253 (bigger_reserve.ts) lifts this household's season target from 20 to 36; this test is about the cart trip and its recorded target of 20, so it runs at 252
+  const {w,ann,ben,cal,hut,store,cart}=provisionScene(252);
   w.tick=DAY*6;ann.inv={grain:6};store.store.items={dried_fish:Math.floor(store.store.cap/WEIGHT.dried_fish)}; // rules 169: a sight remembers a partly filled store as one of each kind, so the store must look full for her to know it holds enough to carry
   for(const p of [ann,ben,cal]){observe(w,p,hut);observe(w,p,store);observe(w,p,cart);}
   snapshotInitial(w);

@@ -88,7 +88,9 @@ it('charges greater cold upkeep and remembers breeding cooldown without offering
 });
 
 it('walks onto a real shore before spending time drinking instead of stopping short',()=>{
- const w=createWorld(currentWorldSettings('normal','forest'));
+ // rules 254 (grow_more.ts: wild food back four times as fast) moves where this forest's sheep graze in the first 600 ticks (17 November 2026), so the
+ // trajectory is read at rules 253, where it was recorded; what is checked is the shore walk, not the wild-food pace
+ const w=createWorld({...currentWorldSettings('normal','forest'),rulesVersion:253});
  for(let n=0;n<600;n++)stepWorld(w);
  expect(w.ledger.reasons['-sheep drinking']??0).toBeGreaterThan(0);
  expect(w.animals.some(a=>a.sheep&&a.sheep.water>0)).toBe(true);
@@ -102,7 +104,8 @@ it('accounts for fleece on the animal before shearing and loses it once at slaug
  expect(serializeWorld(deserializeWorld(serializeWorld(w)))).toBe(serializeWorld(w));
 });
 it('retains one personally found water place and saves the return journey exactly',()=>{
- const w=createWorld(currentWorldSettings('normal','forest'));
+ // read at rules 253 for the reason given in the shore test above (rules 254, 17 November 2026)
+ const w=createWorld({...currentWorldSettings('normal','forest'),rulesVersion:253});
  for(let n=0;n<300;n++)stepWorld(w);
  // At least one sheep has found water, so the saved world carries a water memory. Until rules 226 both of this forest's two had by
  // tick 300; from 226 (plenty.ts: wild food back twice as fast) one grazes elsewhere and has not come within sight of water in a
