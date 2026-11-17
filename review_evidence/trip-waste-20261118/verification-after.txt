@@ -1,0 +1,14 @@
+﻿verification-after.txt, taken 2026-11-18T01:06:19
+integrate HEAD 51d2a0d0
+integrate status lines 0
+git worktree list:
+C:/dev/Claude Experiment/living-world           fb754575 [deepseek-b1]
+C:/dev/_claude_scratch/regime-20261117/wt       ea4eaaaa [scratch/free-block-20261117]
+C:/dev/_lw_daylength_20261117/baseline          baa9257d (detached HEAD)
+C:/dev/_lw_daylength_20261117/double            baa9257d (detached HEAD)
+C:/dev/Claude Experiment/living-world-integrate 51d2a0d0 [main]
+C:/dev/Claude Experiment/living-world-left-rail add9bc0c [claude/left-rail-legend]
+scratch tree status:
+ M scripts/free_probe.ts
+?? scripts/observers/withdraw_check.ts
+tsc --noEmit exit 0 (scratch tree)

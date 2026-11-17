@@ -29,6 +29,7 @@ import { DayShape, wakingCounts } from './observers/day_shape';
 import { OutdoorCompany } from './observers/outdoor_company';
 import { TripShape } from './observers/trip_shape';
 import { FreeWindow } from './observers/free_window';
+import { WithdrawCheck } from './observers/withdraw_check';
 import { gitProvenance, sourceManifest } from './observers/provenance';
 import { LifeTally } from './lab/lab';
 
@@ -47,6 +48,7 @@ const blockFrom = has('block-from') ? Number(arg('block-from')) : null;
 if (blockFrom !== null && (!Number.isFinite(blockFrom) || blockFrom <= 0 || blockFrom >= 1)) throw new Error('--block-from must be a day fraction above 0 and below 1');
 const ignoreFood = has('ignore-food');
 if (ignoreFood && blockFrom === null) throw new Error('--ignore-food needs --block-from');
+const withdrawCheck = has('withdraw-check'); // trip waste measurement (18 November 2026): attaches WithdrawCheck, a read-only observer, and writes withdraws.json and withdraws.jsonl
 const nudge = has('nudge') ? Number(arg('nudge')) : 0;
 if (!Number.isInteger(nudge) || nudge < 0) throw new Error('--nudge must be a whole number of draws, 0 or more');
 const gateLabel = blockFrom === null ? '' : (ignoreFood ? 'U' : '') + (blockFrom === 0.62 ? 'D' : blockFrom === 0.5 ? 'E' : `block-${blockFrom}`);
@@ -74,6 +76,7 @@ const shape = new DayShape();
 const outdoor = new OutdoorCompany();
 const trips = new TripShape(), detachTrips = trips.attach(w);
 const freeWin = new FreeWindow();
+const wcheck = withdrawCheck ? new WithdrawCheck() : null, detachWcheck = wcheck ? wcheck.attach(w) : () => {};
 const dayRows: { day: number; people: number; deathsSoFar: number; winter: number; hardship: string }[] = [];
 let stop = 'horizon', purityChecks = 0;
 while (w.tick < until) {
@@ -85,6 +88,7 @@ while (w.tick < until) {
   outdoor.sampleTick(w);
   trips.sampleTick(w);
   freeWin.sampleTick(w);
+  wcheck?.sampleTick(w);
   if (check) {
     observer.samplePlans(w);
     if (serializeWorld(w) !== before) throw new Error('Observation mutated saved state or RNG');
@@ -99,6 +103,7 @@ while (w.tick < until) {
 life.tick(w);
 trips.finish(w); // the state after the last step: settles walks the last step ended; counts no ticks
 detachTrips();
+detachWcheck();
 detach();
 if (JSON.stringify(source) !== JSON.stringify(manifest())) throw new Error('Source changed during run');
 
@@ -109,6 +114,12 @@ const tr = trips.report(tb.totals.travel);
 const rows = trips.tripRows();
 const oc = outdoor.report();
 const fw = freeWin.report();
+const wc = wcheck ? wcheck.report() : null;
+const wcRows = wcheck ? wcheck.rows() : [];
+// the withdraw walking ticks WithdrawCheck counted (all ages) against the ticks TripShape counted for kind withdraw: same state, same test
+const wcTicks = wcRows.reduce((s, r) => s + r.travelTicks, 0) + (wcheck ? wcheck.openTravelTicks() : 0);
+const wcTripTicks = rows.filter((r) => r.kind === 'withdraw').reduce((s, r) => s + r.walkingTicks, 0);
+const withdrawCheckSelf = wc ? { withdrawTravelTicksWithdrawCheck: wcTicks, withdrawTravelTicksTripShape: wcTripTicks, equal: wcTicks === wcTripTicks } : null;
 
 // the travel totals must be one number: DayShape and TripShape read the same state through the same function TimeBudget uses
 const travelCheck = { dayShapeTravelTicks: ds.walking.travelTicks, tripShapeTravelTicks: tr.counts.walkingTicksAll, timeBudgetTravelTicks: tb.totals.travel, equal: ds.walking.travelTicks === tb.totals.travel && tr.counts.walkingTicksAll === tb.totals.travel };
@@ -167,10 +178,12 @@ const report = {
   dayShape: ds,
   outdoor: oc,
   freeWindow: fw,
+  ...(wc ? { withdrawCheck: wc, withdrawCheckSelf } : {}),
 };
 writeFileSync(out + '/report.json', JSON.stringify(report, null, 2));
 writeFileSync(out + '/meals.json', JSON.stringify(shape.mealRows()));
 writeFileSync(out + '/trips.jsonl', '');
 for (let i = 0; i < rows.length; i += 2000) appendFileSync(out + '/trips.jsonl', rows.slice(i, i + 2000).map((r) => JSON.stringify(r)).join('\n') + '\n');
-console.log(JSON.stringify({ seed: report.seed, arm: armLabel, blockFrom, ignoreFood, nudge, tick: report.tick, stop, seconds: report.seconds, startHash, nudgedHash, hash: report.hash, people, travelEqual: travelCheck.equal, lifeTallyEqual: lifeTallyCheck.equal, windowCheckEqual: windowCheck.equal, dayShapeSelfChecks: ds.selfChecks, tripSelfChecks: tr.selfChecks, gate: freeBlockStats, conservation: report.conservation.ok, purityChecks }));
+if (wcheck) { writeFileSync(out + '/withdraws.jsonl', ''); for (let i = 0; i < wcRows.length; i += 2000) appendFileSync(out + '/withdraws.jsonl', wcRows.slice(i, i + 2000).map((r) => JSON.stringify(r)).join('\n') + '\n'); }
+console.log(JSON.stringify({ withdrawCheckSelf, seed: report.seed, arm: armLabel, blockFrom, ignoreFood, nudge, tick: report.tick, stop, seconds: report.seconds, startHash, nudgedHash, hash: report.hash, people, travelEqual: travelCheck.equal, lifeTallyEqual: lifeTallyCheck.equal, windowCheckEqual: windowCheck.equal, dayShapeSelfChecks: ds.selfChecks, tripSelfChecks: tr.selfChecks, gate: freeBlockStats, conservation: report.conservation.ok, purityChecks }));
 if (stop !== 'horizon' || !travelCheck.equal || !lifeTallyCheck.equal || !windowCheck.equal) process.exitCode = 1;

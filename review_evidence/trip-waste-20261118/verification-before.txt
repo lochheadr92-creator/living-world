@@ -1,0 +1,12 @@
+﻿verification-before.txt, recorded at 2026-11-18T00:2x before the first launch (00:26:16)
+integrate HEAD 51d2a0d0
+integrate status lines 0
+scratch tree status before: ' M scripts/free_probe.ts' and '?? scripts/observers/withdraw_check.ts' (the two files of this task, the first edit already made)
+git worktree list before (from logs\trip-waste-worktrees-before.txt):
+C:/dev/Claude Experiment/living-world           fb754575 [deepseek-b1]
+C:/dev/_claude_scratch/regime-20261117/wt       ea4eaaaa [scratch/free-block-20261117]
+C:/dev/_lw_daylength_20261117/baseline          baa9257d (detached HEAD)
+C:/dev/_lw_daylength_20261117/double            baa9257d (detached HEAD)
+C:/dev/Claude Experiment/living-world-integrate 51d2a0d0 [main]
+C:/dev/Claude Experiment/living-world-left-rail add9bc0c [claude/left-rail-legend]
+
