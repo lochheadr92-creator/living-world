@@ -1,0 +1,1 @@
+{"seed":"river","dayTicks":2400,"days":4,"alive":28,"dead":0,"travel":35.681,"work":26.156,"leisure":0.853,"social":7.28,"sleep":22.41,"hungry":51.895,"thirsty":40.288,"meal":{"drink:success":143,"eat:success":133,"eat_store:success":34,"drink:interrupted":7,"drink:failed":1,"eat:interrupted":2,"eat_store:interrupted":1}}

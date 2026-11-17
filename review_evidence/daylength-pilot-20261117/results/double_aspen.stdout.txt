@@ -1,0 +1,1 @@
+{"seed":"aspen","dayTicks":4800,"days":4,"alive":28,"dead":0,"travel":35.685,"work":29.667,"leisure":1.483,"social":8.125,"sleep":23.884,"hungry":48.327,"thirsty":37.496,"meal":{"eat:success":110,"drink:success":155,"drink:interrupted":18,"eat_store:success":57,"eat_store:interrupted":6,"eat:interrupted":2,"fetch_water:interrupted":2}}

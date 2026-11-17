@@ -24,9 +24,9 @@ import { runsRulesVersion } from './rulesversion';
 import type { World } from './types';
 
 /** Hunger lost a tick by an awake adult at rest, rules 195 (58 a day awake, against 72). */
-export const HUNGER_RATE_195 = 0.024;
+export const HUNGER_RATE_195 = 0.012;
 /** Thirst lost a tick by an awake adult at rest, rules 195 (77 a day awake, against 96). */
-export const THIRST_RATE_195 = 0.032;
+export const THIRST_RATE_195 = 0.016;
 
 let enabled = true;
 let labRates: { hunger: number; thirst: number } | null = null;

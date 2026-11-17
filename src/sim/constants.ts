@@ -3,7 +3,7 @@ import type { BuildingType, FoodKind, Items, ItemKind, MaterialKind, NeedKey, Sk
 // ── time ──
 /** simulation ticks per real second at 1x playback */
 export const TPS = 10;
-export const DAY = 2400;
+export const DAY = 4800;
 /** the world starts at this fraction of a day (0.30 ≈ 07:12) */
 export const START_FRAC = 0.3;
 export const SUNRISE = 0.25;
@@ -116,12 +116,12 @@ export const JAR_WATER_UNITS = 4;
 
 // ── needs ──
 export const NEED_KEYS: NeedKey[] = ['hunger', 'thirst', 'energy', 'warmth', 'safety', 'social'];
-export const HUNGER_RATE = 0.03;
-export const THIRST_RATE = 0.04;
-export const ENERGY_RATE = 0.04;
-export const SLEEP_RECOVER = 0.115;
-export const REST_RECOVER = 0.03;
-export const SOCIAL_RATE = 0.017;
+export const HUNGER_RATE = 0.015;
+export const THIRST_RATE = 0.02;
+export const ENERGY_RATE = 0.02;
+export const SLEEP_RECOVER = 0.0575;
+export const REST_RECOVER = 0.015;
+export const SOCIAL_RATE = 0.0085;
 /** [starts mattering, strongly pressing] */
 export const DRIVE_BANDS: Record<NeedKey, [number, number]> = {
   hunger: [62, 36],
@@ -307,8 +307,8 @@ export const isSolidHome = (t: string | undefined): boolean => t === 'hut' || t 
 /** scenes in which the workshop, meal and care planners are on (the original staged scenes keep them off so they stay focused) */
 export const workRules = (scene: string): boolean => scene === 'natural' || scene === 'workshop' || scene === 'meal' || scene === 'haul' || scene === 'care';
 
-export const FIRE_FUEL_PER_WOOD = 380;
-export const FIRE_MAX_FUEL = 2400;
+export const FIRE_FUEL_PER_WOOD = 760;
+export const FIRE_MAX_FUEL = 4800;
 /** condition lost per tick by an unmended building (bad weather makes it worse): a lean-to lasts a couple of weeks, a hut most of a month */
 export const DECAY_PER_TICK: Record<BuildingType, number> = {
   lean_to: 0.0031,

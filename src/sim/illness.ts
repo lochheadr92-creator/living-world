@@ -20,7 +20,7 @@ export const IMMUNE_FOR = 20 * DAY;
 const COURSE_MIN = 2 * DAY;
 const COURSE_MAX = 3.5 * DAY;
 /** the chance, per check, that someone catches nothing from nobody: the fever that comes from cold and want */
-const ONSET_BASE = 0.00003;
+const ONSET_BASE = 0.000015;
 
 const key = (world: World): number => hashString(world.seed) ^ 0x1115;
 
@@ -81,8 +81,8 @@ export function illnessTick(world: World, p: Person): void {
   const age = world.tick - i.since;
   i.severity = Math.round(Math.min(1, 0.4 + (0.6 * age) / DAY) * (1 - i.rested / i.course) * 100) / 100;
   // the cost: health goes, strength goes faster; rest halves it, and a fever on an empty stomach is the one that kills
-  p.health = Math.max(0, p.health - i.severity * (resting ? 0.5 : 1.3) * (n.hunger < 25 ? 2 : 1));
-  n.energy = Math.max(0, n.energy - 1.5 * i.severity);
+  p.health = Math.max(0, p.health - i.severity * (resting ? 0.5 : 1.3) * (n.hunger < 25 ? 2 : 1) * 0.5);
+  n.energy = Math.max(0, n.energy - 0.75 * i.severity);
   if (p.health < 20) p.deathCause = 'fever';
   think(world, p, 'ill', -15 * i.severity, DAY, 'has a fever');
   // those sleeping beside them

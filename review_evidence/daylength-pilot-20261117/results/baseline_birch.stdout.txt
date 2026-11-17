@@ -1,0 +1,1 @@
+{"seed":"birch","dayTicks":2400,"days":4,"alive":28,"dead":0,"travel":41.328,"work":27.19,"leisure":1.551,"social":13.445,"sleep":27.336,"hungry":56.255,"thirsty":39.073,"meal":{"drink:success":147,"eat:success":144,"eat_store:success":38,"eat_store:interrupted":1,"eat:interrupted":1,"drink:failed":1,"drink:interrupted":7}}

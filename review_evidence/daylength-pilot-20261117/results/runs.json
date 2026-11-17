@@ -1,0 +1,50 @@
+[
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\baseline_aspen.json",
+        "variant":  "baseline",
+        "pid":  38172,
+        "seed":  "aspen"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\baseline_birch.json",
+        "variant":  "baseline",
+        "pid":  33916,
+        "seed":  "birch"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\baseline_meadow.json",
+        "variant":  "baseline",
+        "pid":  48920,
+        "seed":  "meadow"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\baseline_river.json",
+        "variant":  "baseline",
+        "pid":  10296,
+        "seed":  "river"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\double_aspen.json",
+        "variant":  "double",
+        "pid":  40360,
+        "seed":  "aspen"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\double_birch.json",
+        "variant":  "double",
+        "pid":  49624,
+        "seed":  "birch"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\double_meadow.json",
+        "variant":  "double",
+        "pid":  57128,
+        "seed":  "meadow"
+    },
+    {
+        "output":  "C:\\dev\\_lw_daylength_20261117\\results\\double_river.json",
+        "variant":  "double",
+        "pid":  8056,
+        "seed":  "river"
+    }
+]

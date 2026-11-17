@@ -1,0 +1,1 @@
+{"seed":"meadow","dayTicks":2400,"days":15,"alive":31,"dead":0,"travel":45.392,"work":23.533,"leisure":1.024,"social":11.159,"sleep":24.285,"hungry":48.893,"thirsty":38.195,"meal":{"drink:success":542,"eat:success":456,"eat_store:success":185,"drink:interrupted":37,"eat_store:interrupted":15,"drink:failed":3,"eat:interrupted":6,"eat_store:failed":6,"fetch_water:success":2}}

@@ -211,7 +211,7 @@ function updateBuildings(world: World): void {
       continue;
     }
     hearthTick(world,b);
-    b.condition -= DECAY_PER_TICK[b.type] * stormy;
+    b.condition -= DECAY_PER_TICK[b.type] * stormy * 0.5;
     if (b.condition <= 0) {
       for (const p of world.persons) if (p.activity && p.activity.targetId === b.id) abortActivity(world, p, 'the building collapsed');
       destroyBuilding(world, b, 'collapsed from neglect');
@@ -276,7 +276,7 @@ function roadsTick(world: World): void {
 
 /** Perishable goods slowly go off: an explicit, recorded process (never silent). */
 function spoilGoods(world: World): void {
-  const rate = 0.011;
+  const rate = 0.0055;
   // New provisions also deteriorate while carried. Historical pack semantics
   // are untouched; an empty new-kind holding consumes no random draw.
   if(runsPreservation(world)){
@@ -308,7 +308,7 @@ function spoilGoods(world: World): void {
       const n = pile.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * perishableOf(world, k) * spoilPile(world)) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < 0.02 * perishableOf(world, k) * spoilPile(world)) lost++;
       if (lost > 0) {
         pile.items[k] = n - lost;
         if (pile.items[k] === 0) delete pile.items[k];

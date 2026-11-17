@@ -1,0 +1,33 @@
+15-day controlled pilot: same four seeds, source rules 255, arrivals off. One run/seed/arm; diagnostic not an ensemble.
+metric | control mean | doubled mean | change | four paired changes
+travel % wake | 42.51 | 36.77 | -5.74 | -7.48,-5.33,-9.18,-0.95
+work % wake | 23.72 | 17.33 | -6.39 | -7.72,-4.98,-7.76,-5.10
+leisure % wake | 0.68 | 1.63 | 0.95 | 1.32,1.21,0.07,1.21
+social % wake | 10.84 | 8.36 | -2.47 | -2.59,-1.92,-3.60,-1.79
+waiting % wake | 10.59 | 20.91 | 10.33 | 9.49,12.20,10.79,8.82
+night waiting % wake | 10.19 | 20.55 | 10.37 | 9.52,12.29,10.68,8.98
+blocked waiting % wake | 0.40 | 0.36 | -0.04 | -0.03,-0.09,0.11,-0.16
+other waiting % wake | 0.00 | 0.00 | 0.00 | 0.00,0.00,0.00,0.00
+sleep % age12 | 23.45 | 17.92 | -5.54 | -6.64,-4.86,-7.56,-3.08
+comfort % wake | 29.13 | 37.35 | 8.23 | 8.01,9.79,5.38,9.72
+fed+watered travel % | 44.35 | 42.14 | -2.21 | -1.50,-2.48,-5.34,0.49
+hungry % wake | 50.88 | 43.04 | -7.83 | -7.96,-11.39,-3.30,-8.70
+thirsty % wake | 40.35 | 35.84 | -4.51 | -5.87,-5.96,-2.11,-4.10
+mean energy | 70.16 | 79.76 | 9.61 | 11.53,9.52,12.10,5.27
+mean health | 99.56 | 99.66 | 0.10 | -0.26,0.94,-0.27,0.00
+meals/person/day | 1.44 | 1.41 | -0.04 | -0.06,0.00,-0.04,-0.06
+drinks/person/day | 1.25 | 1.43 | 0.18 | 0.19,0.21,0.17,0.18
+work completed/person/day | 3.54 | 7.30 | 3.76 | 2.90,5.17,2.41,4.56
+conversations/person/day | 2.58 | 3.77 | 1.19 | 0.91,1.79,0.91,1.16
+wander/person/day | 0.34 | 1.49 | 1.15 | 1.33,1.28,0.66,1.32
+work ticks/person/day | 435.46 | 682.45 | 247.00 | 252.84,277.53,203.01,254.60
+travel ticks/person/day | 780.50 | 1448.34 | 667.85 | 597.76,671.98,622.72,778.92
+leisure ticks/person/day | 12.41 | 64.02 | 51.62 | 60.24,58.96,25.32,61.94
+social ticks/person/day | 198.86 | 329.36 | 130.49 | 140.70,164.23,99.38,117.67
+deaths/world | 0.00 | 0.00 | 0.00 | 0.00,0.00,0.00,0.00
+alive at end | 29.75 | 29.50 | -0.25 | 4.00,-2.00,-2.00,-1.00
+
+aspen deaths 0->0, alive 29->33, waiting(daylight, blocked, other) 9.59/0.32/0.00 -> 19.11/0.29/0.00
+birch deaths 0->0, alive 30->28, waiting(daylight, blocked, other) 9.18/0.25/0.00 -> 21.47/0.16/0.00
+meadow deaths 0->0, alive 31->29, waiting(daylight, blocked, other) 9.93/0.33/0.00 -> 20.61/0.44/0.00
+river deaths 0->0, alive 29->28, waiting(daylight, blocked, other) 12.05/0.71/0.00 -> 21.02/0.55/0.00

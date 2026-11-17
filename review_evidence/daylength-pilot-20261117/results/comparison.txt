@@ -1,0 +1,31 @@
+Isolated day-length pilot; 4 matched seeds, 4 days each, arrivals OFF, normal profile, source baa9257d rules 255.
+BASE=DAY 2400; DOUBLE=DAY 4800, biologic needs/health, spoilage, illness and building decay scaled per tick; movement and work durations unchanged.
+Seed-level differences (double - control) and averages. Four seeds are exploratory, not a statistical ensemble.
+
+Metric | 2400 mean | 4800 mean | delta | seed deltas [aspen,birch,meadow,river]
+Travel (% waking) | 39.39 | 33.42 | -5.97 | -3.77, -4.23, -13.46, -2.42
+Work (% waking) | 28.40 | 25.97 | -2.43 | -0.37, 0.26, -9.05, -0.57
+Leisure (% waking) | 1.31 | 1.05 | -0.26 | 0.42, -0.83, -1.16, 0.52
+Social (% waking) | 10.49 | 8.31 | -2.18 | -3.76, -1.89, -2.94, -0.12
+Waiting (% waking) | 11.12 | 19.31 | 8.18 | 5.75, 10.09, 9.86, 7.03
+Sleep (% age12 time) | 25.86 | 21.52 | -4.33 | -3.14, -2.90, -9.44, -1.85
+Travel (% fed+watered) | 40.71 | 36.38 | -4.33 | -2.92, -2.37, -11.80, -0.21
+Comfortable (% waking) | 27.57 | 32.63 | 5.06 | 4.73, 7.56, 2.16, 5.79
+Hunger below 62 (% waking) | 53.17 | 48.77 | -4.40 | -5.26, -8.47, 1.63, -5.52
+Thirst below 66 (% waking) | 40.82 | 36.55 | -4.27 | -6.22, -4.63, -3.21, -3.02
+Mean hunger (0-100) | 62.44 | 64.02 | 1.58 | 1.49, 3.07, -0.28, 2.05
+Mean thirst (0-100) | 70.90 | 72.84 | 1.94 | 2.61, 1.93, 1.51, 1.71
+Mean energy (0-100) | 68.07 | 75.15 | 7.07 | 5.90, 6.76, 12.84, 2.79
+Mean health (0-100) | 99.41 | 99.24 | -0.17 | 0.06, 0.21, -0.74, -0.21
+Meals per person/day | 1.54 | 1.58 | 0.04 | -0.04, 0.14, 0.02, 0.04
+Drinks per person/day | 1.26 | 1.42 | 0.16 | 0.19, 0.12, 0.12, 0.21
+Work tasks completed/person/day | 3.45 | 6.58 | 3.13 | 3.31, 3.48, 1.96, 3.76
+Waking work ticks/person/day | 504.87 | 974.31 | 469.44 | 557.82, 521.66, 309.52, 488.75
+Waking travel ticks/person/day | 699.94 | 1254.12 | 554.18 | 612.81, 624.98, 374.94, 603.97
+Deaths per world | 0.00 | 0.00 | 0.00 | 0.00, 0.00, 0.00, 0.00
+Alive end | 28.00 | 28.00 | 0.00 | 0.00, 0.00, 0.00, 0.00
+
+aspen: 2400 awake={"idle":0.698,"travel":39.453,"social_contact":11.883,"work":30.039,"failure_recovery":0.073,"waiting":10.72,"eating_drinking_warming":4.092,"leisure":1.067,"rest":1.307,"defence":0.669}; 4800 awake={"idle":0.541,"travel":35.685,"social_contact":8.125,"work":29.667,"failure_recovery":0.075,"waiting":16.47,"eating_drinking_warming":3.75,"leisure":1.483,"rest":4.122,"defence":0.082}
+birch: 2400 awake={"idle":0.732,"travel":41.328,"social_contact":13.445,"work":27.19,"failure_recovery":0.07,"eating_drinking_warming":3.028,"waiting":10.046,"leisure":1.551,"rest":2.067,"defence":0.543}; 4800 awake={"idle":0.561,"travel":37.101,"social_contact":11.55,"work":27.455,"failure_recovery":0.098,"waiting":20.132,"eating_drinking_warming":1.589,"leisure":0.721,"defence":0.413,"rest":0.381}
+meadow: 2400 awake={"idle":0.754,"travel":41.109,"work":30.232,"failure_recovery":0.051,"social_contact":9.341,"waiting":10.85,"eating_drinking_warming":3.119,"leisure":1.764,"rest":2.701,"defence":0.08}; 4800 awake={"idle":0.503,"travel":27.647,"work":21.182,"failure_recovery":0.192,"social_contact":6.397,"waiting":20.708,"leisure":0.602,"eating_drinking_warming":5.06,"rest":17.63,"defence":0.079}
+river: 2400 awake={"idle":0.71,"travel":35.681,"social_contact":7.28,"work":26.156,"failure_recovery":0.065,"waiting":12.88,"eating_drinking_warming":7.794,"leisure":0.853,"rest":8.505,"defence":0.076}; 4800 awake={"idle":0.577,"travel":33.263,"social_contact":7.159,"work":25.59,"failure_recovery":0.071,"waiting":19.911,"eating_drinking_warming":6.123,"leisure":1.376,"rest":5.931,"defence":0}

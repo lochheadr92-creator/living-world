@@ -106,7 +106,7 @@ export function updateNeeds(world: World, p: Person): void {
   const wet = w.rain * 3.6 * (1 - sh.cover);
   const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) + clothingWarmth(world,p) - wet;
   const target = clamp(50 + (eff - 10) * 5, 0, 100);
-  n.warmth += (target - n.warmth) * 0.006;
+  n.warmth += (target - n.warmth) * 0.003;
 
   // energy
   if (sleeping) {
@@ -141,7 +141,7 @@ export function updateNeeds(world: World, p: Person): void {
   if (fire > 0) safetyTarget += 8;
   if (sh.kind === 'hut') safetyTarget += 10;
   safetyTarget = clamp(safetyTarget, 0, 100);
-  n.safety += (safetyTarget - n.safety) * (safetyTarget < n.safety ? 0.08 : 0.02);
+  n.safety += (safetyTarget - n.safety) * (safetyTarget < n.safety ? 0.04 : 0.01);
 
   // social
   n.social -= SOCIAL_RATE * (0.55 + 0.9 * p.traits.sociability) * (sleeping ? 0.3 : 1);
@@ -151,7 +151,7 @@ export function updateNeeds(world: World, p: Person): void {
       if (s.ent !== 'person') continue;
       if (hyp(s.x - p.x, s.y - p.y) < 4.5) near++;
     }
-    if (near > 0) n.social += 0.0035 * Math.min(near, 3);
+    if (near > 0) n.social += 0.00175 * Math.min(near, 3);
   }
 
   n.hunger = clamp(n.hunger, 0, 100);
@@ -163,11 +163,11 @@ export function updateNeeds(world: World, p: Person): void {
 
   // health
   let dh = 0;
-  if (n.hunger <= 0) dh -= 0.022*starvationFraction;
-  if (n.thirst <= 0) dh -= 0.05;
-  if (n.warmth <= 6) dh -= 0.035;
-  if (n.energy <= 0) dh -= 0.01;
-  if (dh === 0 && n.hunger > 40 && n.thirst > 40 && n.warmth > 35) dh = sleeping ? 0.03 : resting ? 0.02 : 0.009;
+  if (n.hunger <= 0) dh -= 0.011*starvationFraction;
+  if (n.thirst <= 0) dh -= 0.025;
+  if (n.warmth <= 6) dh -= 0.0175;
+  if (n.energy <= 0) dh -= 0.005;
+  if (dh === 0 && n.hunger > 40 && n.thirst > 40 && n.warmth > 35) dh = sleeping ? 0.015 : resting ? 0.01 : 0.0045;
   // an elder mends slower (rich only; 1 otherwise)
   if (dh > 0 && stage === 'elder') dh *= elderFactor(world, p);
   if(dh>0&&hasNourishment(world))dh=spendNourishment(world,p,Math.max(0,Math.min(dh,100-p.health)),'recovery');
