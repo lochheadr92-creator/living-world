@@ -1,0 +1,29 @@
+== BEFORE the work (captured at the start of the session, before any edit; the time of day was not recorded)
+-- git -C "C:\dev\Claude Experiment\living-world-integrate" rev-parse --short=8 HEAD
+baa9257d
+-- branch
+main
+-- git status --short | count
+36
+-- git worktree list
+C:/dev/Claude Experiment/living-world           3d54edd4 [deepseek-b1]
+C:/dev/_claude_scratch/regime-20261117/wt       95ce6377 (detached HEAD)
+C:/dev/_lw_daylength_20261117/baseline          baa9257d (detached HEAD)
+C:/dev/_lw_daylength_20261117/double            baa9257d (detached HEAD)
+C:/dev/Claude Experiment/living-world-integrate baa9257d [main]
+C:/dev/Claude Experiment/living-world-left-rail 4a7a11bb [claude/left-rail-legend]
+-- scratch (wt) status --short
+ M src/sim/activities.ts
+ M src/sim/livestock.ts
+ M src/sim/plenty.ts
+ M src/sim/wildlife.ts
+?? scripts/day_probe.ts
+?? scripts/observers/day_shape.ts
+?? scripts/observers/outdoor_company.ts
+?? scripts/observers/trip_shape.ts
+?? scripts/pace_probe.ts
+?? scripts/regime_probe.ts
+?? scripts/trip_probe.ts
+?? src/sim/pace.ts
+-- scratch HEAD
+95ce6377

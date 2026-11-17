@@ -1,0 +1,37 @@
+== 2026-11-17T22:32:51+10:00 BEFORE the upper-bound work (before any edit or run of this task)
+-- integrate HEAD
+baa9257d
+-- branch
+main
+-- status lines
+36
+-- worktree list
+C:/dev/Claude Experiment/living-world           3d54edd4 [deepseek-b1]
+C:/dev/_claude_scratch/regime-20261117/wt       95ce6377 (detached HEAD)
+C:/dev/_lw_daylength_20261117/baseline          baa9257d (detached HEAD)
+C:/dev/_lw_daylength_20261117/double            baa9257d (detached HEAD)
+C:/dev/Claude Experiment/living-world-integrate baa9257d [main]
+C:/dev/Claude Experiment/living-world-left-rail 4a7a11bb [claude/left-rail-legend]
+-- scratch status --short
+ M src/sim/activities.ts
+ M src/sim/decision.ts
+ M src/sim/livestock.ts
+ M src/sim/options_survival.ts
+ M src/sim/plenty.ts
+ M src/sim/wildlife.ts
+?? scripts/day_probe.ts
+?? scripts/free_classify.ts
+?? scripts/free_probe.ts
+?? scripts/observers/day_shape.ts
+?? scripts/observers/free_window.ts
+?? scripts/observers/outdoor_company.ts
+?? scripts/observers/trip_shape.ts
+?? scripts/pace_probe.ts
+?? scripts/regime_probe.ts
+?? scripts/trip_probe.ts
+?? src/sim/free_block.ts
+?? src/sim/pace.ts
+-- scratch HEAD
+95ce6377
+-- out folders
+_checks _smoke _smoke_free _smoke_pace _smoke_trip aspen-A aspen-B aspen-C commands.txt day day2 free gen-4-A gen-4-B gen-4-C pace report.md river-A river-B river-C scratch.patch tables.md trip 
