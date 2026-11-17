@@ -268,7 +268,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
 }
 
 /** Units of grain, bread or flour-free food this person may take from a granary now: their household's share, or the emergency ration. */
-function granaryRation(world: World, p: Person, id: number): number {
+export function granaryRation(world: World, p: Person, id: number): number {
   if(runsPreservation(world)){
     const known=p.beliefs[id];
     if(!known||world.tick-known.seen>2400||(known.hh!==0&&known.hh!==p.hhId))return 0;
