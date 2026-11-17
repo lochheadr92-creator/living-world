@@ -37,9 +37,10 @@
 import { readFileSync } from 'node:fs';
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASE_SPEED, BASKET_BONUS, CARRY_CAP, CART_SPEED_EMPTY, CART_SPEED_LOADED, DAY, MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN, WEIGHT } from '../../src/sim/constants';
 import { foodUnits, weightOf } from '../../src/sim/economy';
+import { withdrawAllowance } from '../../src/sim/facilities';
 import { ageYears, carryCap, stageOf } from '../../src/sim/people';
 import { CHILD_PACE, LITTLE_PACE } from '../../src/sim/child_pace';
-import type { Activity, Household, ItemKind, Person, World } from '../../src/sim/types';
+import type { Activity, Household, ItemKind, Items, Person, World } from '../../src/sim/types';
 import { lifeGroupOf } from './day_shape';
 import { timeCategory } from './time_budget';
 
@@ -75,6 +76,64 @@ export function snapPack(world: World, p: Person): Pack {
   return { units, food: foodUnits(p.inv), wood: items.wood ?? 0, weight: r3(weightOf(p.inv)), cap: carryCap(world, p), items };
 }
 
+/**
+ * One read of the store a withdraw walk is bound for: what the person believed about it and what was really in it. Read only.
+ * The belief is read when the walk begins, because arriving refreshes it (act_resource.ts registerHandler('withdraw') begin() calls
+ * observe), so the belief at the end of the walk is no longer the belief the person set out with. The belief age on arrival is the age at
+ * departure plus the walking ticks. The calls made here are withdrawAllowance (facilities.ts) and what it calls: accessLevel, usableUnits,
+ * earnedAccess, openToAll, affinityOf, knownHungryDependant (known_ration.ts). None of them draws a random number or writes; the purity
+ * runs in review_evidence/stage1c-20261118 are what shows that for the paths a run reaches.
+ */
+export interface StoreLook {
+  tick: number;
+  /** what the target is at this tick: a building's store, goods delivered to a site, a pile, or gone */
+  container: 'building' | 'site' | 'pile' | 'gone';
+  buildingType: string;
+  /** units asked for in the activity (data.items) */
+  wantedUnits: number;
+  hasBelief: boolean;
+  /** the belief carries an item list; a belief without one says nothing about stock */
+  beliefItemsKnown: boolean;
+  /** believed units of the wanted kinds (0 when there is no belief or no item list) */
+  beliefUnits: number;
+  beliefSeen: number | null;
+  beliefAge: number | null;
+  beliefSrc: string;
+  /** units of the wanted kinds really in the container */
+  trueUnits: number;
+  /** units of the wanted kinds the sim's withdrawAllowance lets this person take now; null unless the target is a building */
+  allowedUnits: number | null;
+}
+/** reads the store a walk is bound for; changes nothing */
+export function storeLook(world: World, p: Person, targetId: number, want: Record<string, number>): StoreLook {
+  const kinds = Object.keys(want).filter((k) => (want[k] ?? 0) > 0);
+  const wantedUnits = sum(kinds.map((k) => want[k]));
+  const e = world.byId.get(targetId);
+  let items: Items | undefined;
+  let container: StoreLook['container'] = 'gone';
+  let buildingType = '';
+  if (e && e.ent === 'building') { items = e.store.items; container = 'building'; buildingType = e.type; }
+  else if (e && e.ent === 'site') { items = e.delivered; container = 'site'; buildingType = e.type; }
+  else if (e && e.ent === 'pile') { items = e.items; container = 'pile'; buildingType = 'pile'; }
+  let trueUnits = 0;
+  for (const k of kinds) trueUnits += items?.[k as ItemKind] ?? 0;
+  let allowedUnits: number | null = null;
+  if (e && e.ent === 'building') {
+    allowedUnits = 0;
+    for (const k of kinds) allowedUnits += withdrawAllowance(world, e, p, k as ItemKind, want[k]);
+  }
+  const b = p.beliefs[targetId];
+  const bi = b?.items;
+  let beliefUnits = 0;
+  if (bi) for (const k of kinds) beliefUnits += bi[k as ItemKind] ?? 0;
+  return {
+    tick: world.tick, container, buildingType, wantedUnits,
+    hasBelief: b !== undefined, beliefItemsKnown: bi !== undefined, beliefUnits,
+    beliefSeen: b ? b.seen : null, beliefAge: b ? world.tick - b.seen : null, beliefSrc: b ? b.src : '',
+    trueUnits, allowedUnits,
+  };
+}
+
 interface EndInfo {
   tick: number; outcome: string; detail: string; kind: string; phase: string; pathTries: number; pi: number; pathLen: number;
   progress: number; cycle: number; amount: number; moved: Record<string, number> | null; pack: Pack;
@@ -94,6 +153,8 @@ interface Trip {
   outcome: Outcome | ''; evidence: string; pauseCause: string;
   endOutcome: string; endDetail: string; endTick: number; gapToEnd: number | null; toKind: string;
   actCycle: number | null; actProgress: number | null; actMoved: Record<string, number> | null;
+  /** withdraw walks only: the goods asked for (a copy of data.items), the store read at departure and the store read at the first sample after the walk */
+  want: Record<string, number> | null; storeStart: StoreLook | null; storeEnd: StoreLook | null;
 }
 
 interface DayRec { person: number; day: number; samples: number; awake: number; changes: number }
@@ -106,6 +167,10 @@ interface FactSpec { id: string; topic: string; file: string; after?: string; fi
 const SIM = 'src/sim/';
 function factSpecs(): FactSpec[] {
   return [
+    // what the store look reads (storeBeliefs)
+    { id: 'withdraw_handler_observes_on_arrival', topic: 'a withdraw walk refreshes the person\'s belief of the store when it begins its work phase', file: SIM + 'act_resource.ts', after: "registerHandler('withdraw'", find: 'observe(world, p, e);' },
+    { id: 'withdraw_allowance', topic: 'how many units a person may take out of a building store (earmarks and access)', file: SIM + 'facilities.ts', find: 'export function withdrawAllowance' },
+    { id: 'belief_seen', topic: 'a belief carries the tick of the observation it came from', file: SIM + 'types.ts', after: 'export interface Belief', find: 'seen: number;' },
     // what a walk and an activity are
     { id: 'activity_id', topic: 'every activity gets a unique id when it is built', file: SIM + 'activities.ts', after: 'export function newActivity', find: 'id: world.nextId++,' },
     { id: 'activity_phase_type', topic: 'an activity is in the travel phase or the work phase', file: SIM + 'types.ts', after: 'export interface Activity', find: "phase: 'travel' | 'work';" },
@@ -341,6 +406,7 @@ export class TripShape {
         }
       } else if (st.open) {
         st.open.packEnd = snapPack(world, p);
+        if (st.open.want) st.open.storeEnd = storeLook(world, p, st.open.tgtId, st.open.want);
       }
       st.lastX = p.x;
       st.lastY = p.y;
@@ -360,6 +426,7 @@ export class TripShape {
     const legs = this.legs.get(a.id) ?? [];
     const items = a.data.items as Record<string, number> | undefined;
     const planned = items ? sum(Object.values(items)) : a.amount > 0 ? a.amount : null;
+    const want: Record<string, number> | null = a.kind === 'withdraw' ? { ...(items ?? {}) } : null;
     let sub = '';
     if (a.kind === 'gather') sub = `gather | purpose=${typeof a.data.purpose === 'string' ? a.data.purpose : 'none'} | stype=${String(a.data.stype ?? 'none')}`;
     else if (a.kind === 'deposit') sub = 'deposit | ' + (a.data.ration ? 'ration' : a.data.basketRoom ? 'basketRoom' : a.data.packMaterials ? 'packMaterials' : 'other');
@@ -380,6 +447,7 @@ export class TripShape {
       outcome: '', evidence: '', pauseCause: '',
       endOutcome: '', endDetail: '', endTick: -1, gapToEnd: null, toKind: '',
       actCycle: null, actProgress: null, actMoved: null,
+      want, storeStart: want ? storeLook(world, p, a.targetId, want) : null, storeEnd: null,
     };
     // a later walk of an activity that had reached work: the pack now is the pack after that work
     const waiting = this.awaitEnd.get(a.id);
@@ -402,6 +470,7 @@ export class TripShape {
     const t = st.open!;
     st.open = null;
     t.packEnd = snapPack(world, p);
+    if (t.want) t.storeEnd = storeLook(world, p, t.tgtId, t.want);
     if (a && a.id === t.actId) {
       if (a.phase === 'work') t.pauseCause = '';
       else if (a.blocked) t.pauseCause = 'blocked: ' + this.norm(a.blocked);
@@ -572,6 +641,7 @@ export class TripShape {
         outcome: t.outcome, outcomeEvidence: t.evidence, pauseCause: t.pauseCause,
         endOutcome: t.endOutcome, endDetail: t.endDetail, activityEndTick: t.endTick, gapToEnd: t.gapToEnd, toKind: t.toKind,
         actCycle: t.actCycle, actProgress: t.actProgress, actMoved: t.actMoved,
+        wantedGoods: t.want, storeAtDeparture: t.storeStart, storeAtEndOfWalk: t.storeEnd,
       };
     });
   }
@@ -802,6 +872,68 @@ export class TripShape {
       arrivedWalksMoreThan2TilesFromTheirSpotByKind: Object.fromEntries(Object.entries(byGroup(measured.filter((t) => t.outcome.startsWith('arrived') && dv(t).dEndToEndSpot > 2), (t) => t.kind, (g) => g.length))),
     };
 
+    // what a withdraw walk believed about its store, against what the store held
+    const looked = measured.filter((t) => t.storeStart !== null && t.storeEnd !== null);
+    const storeBlock = (ts: Trip[]) => {
+      const S = (t: Trip) => t.storeStart!, E = (t: Trip) => t.storeEnd!;
+      const withItems = ts.filter((t) => S(t).beliefItemsKnown);
+      const atEnd = (f: (e: StoreLook) => boolean) => ts.filter((t) => f(E(t))).length;
+      const emptyAtEnd = ts.filter((t) => E(t).trueUnits === 0);
+      const stockedAllowedNone = ts.filter((t) => E(t).container === 'building' && E(t).trueUnits > 0 && E(t).allowedUnits === 0);
+      const believedStockedEmptyAtEnd = withItems.filter((t) => S(t).beliefUnits > 0 && E(t).trueUnits === 0);
+      const believedStockedAllowedNone = withItems.filter((t) => S(t).beliefUnits > 0 && E(t).container === 'building' && E(t).allowedUnits === 0);
+      const bucket = (age: number | null): string => (age === null ? 'no_belief' : age < DAY ? 'under_1_day' : age < 3 * DAY ? '1_to_3_days' : age < 10 * DAY ? '3_to_10_days' : '10_days_or_more');
+      const fate = (g: Trip[]) => ({
+        walks: g.length,
+        trueUnitsZeroAtEndOfWalk: g.filter((t) => E(t).trueUnits === 0).length,
+        stockedButAllowedNone: g.filter((t) => E(t).container === 'building' && E(t).trueUnits > 0 && E(t).allowedUnits === 0).length,
+        didJob: g.filter((t) => t.outcome === 'arrived_did_job').length,
+      });
+      return {
+        walks: ts.length,
+        containerAtDeparture: Object.fromEntries(['building', 'site', 'pile', 'gone'].map((c) => [c, ts.filter((t) => S(t).container === c).length])),
+        storeTypeAtDepartureTop10: Object.fromEntries(Object.entries(ts.reduce((m, t) => { bump(m, S(t).buildingType || 'none'); return m; }, {} as Record<string, number>)).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 10)),
+        wantedUnits: dist(ts.map((t) => S(t).wantedUnits)),
+        belief: {
+          withABelief: ts.filter((t) => S(t).hasBelief).length,
+          withAnItemList: withItems.length,
+          seenFirstHand: ts.filter((t) => S(t).beliefSrc === 'seen').length,
+          toldByAnother: ts.filter((t) => S(t).beliefSrc === 'told').length,
+          ageAtDepartureTicks: dist(ts.filter((t) => S(t).beliefAge !== null).map((t) => S(t).beliefAge!)),
+          ageAtDepartureDays: dist(ts.filter((t) => S(t).beliefAge !== null).map((t) => S(t).beliefAge! / DAY)),
+          believedUnitsOfTheWantedGoods: dist(withItems.map((t) => S(t).beliefUnits)),
+        },
+        truth: {
+          unitsAtDeparture: dist(ts.map((t) => S(t).trueUnits)),
+          unitsAtEndOfWalk: dist(ts.map((t) => E(t).trueUnits)),
+          allowedUnitsAtEndOfWalkBuildingsOnly: dist(ts.filter((t) => E(t).allowedUnits !== null).map((t) => E(t).allowedUnits!)),
+          walksWithTrueUnitsZeroAtDeparture: ts.filter((t) => S(t).trueUnits === 0).length,
+          walksWithTrueUnitsZeroAtEndOfWalk: emptyAtEnd.length,
+          shareWithTrueUnitsZeroAtEndOfWalk: share(emptyAtEnd.length, ts.length),
+          walksStockedButAllowedNoneAtEndOfWalk: stockedAllowedNone.length,
+          shareStockedButAllowedNoneAtEndOfWalk: share(stockedAllowedNone.length, ts.length),
+          walksWhereTheTargetWasGoneAtEndOfWalk: atEnd((e) => e.container === 'gone'),
+        },
+        beliefAgainstTruth: {
+          note: 'walks whose belief had an item list: believed units of the wanted goods at departure against true units at the end of the walk (the first sample after the last walking tick)',
+          walks: withItems.length,
+          believedStockedAndTrulyEmpty: believedStockedEmptyAtEnd.length,
+          believedStockedAndAllowedNone: believedStockedAllowedNone.length,
+          believedStockedAndNothingWasAllowedOrThere: withItems.filter((t) => S(t).beliefUnits > 0 && (E(t).container === 'building' ? E(t).allowedUnits === 0 : E(t).trueUnits === 0)).length,
+          shareBelievedStockedAndAllowedNone: share(believedStockedAllowedNone.length, withItems.filter((t) => S(t).beliefUnits > 0).length),
+        },
+        byBeliefAgeAtDeparture: byGroup(ts, (t) => bucket(S(t).beliefAge), fate),
+        byOutcome: byGroup(ts, (t) => t.outcome, fate),
+      };
+    };
+    const storeBeliefs = {
+      definition: "withdraw walks only (the walk of an activity of kind withdraw; eat_store and deposit walks are not read). The goods asked for are a copy of the activity's data.items. The store is read twice: at the walk's first sample (departure) and at the first sample after its last walking tick (end of walk, which is arrival for a walk that arrived). The belief is read at departure only, because arriving refreshes it. Age of the belief on arrival = age at departure + walking ticks. A person's belief is p.beliefs[targetId]; trueUnits come from the container the withdraw handler itself reads (building.store.items, site.delivered, pile.items); allowedUnits is the sim's withdrawAllowance for the wanted goods, buildings only. Measured walks only (not left-censored, not censored).",
+      withdrawWalks: all.filter((t) => t.kind === 'withdraw').length,
+      measuredWithdrawWalksWithBothLooks: looked.length,
+      all: storeBlock(looked),
+      byStage: Object.fromEntries(stages.map((s) => [s, storeBlock(looked.filter((t) => t.stage === s))])),
+    };
+
     // checks
     const ticksAll = sum(all.map((t) => t.ticks));
     const outcomeSum = OUTCOMES.reduce((n, o) => n + all.filter((t) => t.outcome === o).length, 0);
@@ -815,9 +947,15 @@ export class TripShape {
       noActivityVanishedWithoutAnEndRecord: this.vanished === 0,
       leftCensoredOnlyAtTheFirstSample: all.every((t) => !t.leftCensored || t.startTick === this.firstTick),
       livingTicksEqualSampledPersonTicks: this.livingTicks === sum([...this.personDays].map((r) => r.samples)),
+      everyWithdrawWalkHasAStoreLookAtDeparture: all.every((t) => (t.kind === 'withdraw') === (t.storeStart !== null)),
+      everyClosedWithdrawWalkHasAStoreLookAtTheEnd: all.filter((t) => t.storeStart !== null && t.outcome !== 'censored').every((t) => t.storeEnd !== null),
+      storeLooksAddUpToTheContainers: ((): boolean => { const s = storeBeliefs.all; const c = s.containerAtDeparture; return c.building + c.site + c.pile + c.gone === s.walks; })(),
     };
 
     const notMeasured = [
+      { item: 'belief and store contents for walks of any kind but withdraw (eat_store, deposit, haul, cart_haul)', walks: all.filter((t) => t.kind !== 'withdraw' && (t.kind === 'eat_store' || t.kind === 'deposit' || t.kind === 'haul' || t.kind === 'cart_haul')).length, why: 'storeBeliefs reads withdraw walks only; an eat_store walk wants food in general, not a list of goods, so the same read would need its own definition' },
+      { item: 'the belief a withdraw walk holds on arrival', walks: all.filter((t) => t.storeStart !== null).length, why: 'arriving refreshes the belief (begin() calls observe), so only the belief at departure is the one the person acted on; its age on arrival is that age plus the walking ticks' },
+      { item: 'a withdraw whose goods were taken by someone else between departure and arrival, told apart from one that was always empty', walks: null, why: 'trueUnits at departure and at the end of the walk are both recorded, and a drop between them is visible per walk, but no log of who took what is read' },
       { item: 'target tile for walks whose activity carries no target (targetId 0 and no targetType)', walks: all.filter((t) => !t.hasTarget).length, why: 'the sim holds only the stand spot for them; targetTile is null and the spot is recorded instead' },
       { item: 'home distance for people whose household has no home building', walks: all.filter((t) => !t.hasHome).length, why: 'nothing to measure from; the fields are null' },
       { item: 'pack after the work for walks that reached work while the activity was still running at the end of the run', walks: all.filter((t) => t.outcome === 'arrived_did_job' && !t.packAfter).length, why: 'the activity had not ended, so there is no end of the non-travel phase to read; load figures leave them out' },
@@ -892,6 +1030,7 @@ export class TripShape {
       endReasons,
       arrivalGeometry,
       load,
+      storeBeliefs,
       repeatVisits: repeats,
       walkingTicksPerCompletedJobByKind: Object.fromEntries(Object.entries(byKind).map(([k, v]) => [k, v.walkingTicksPerCompletedJob])),
       activitySwitchesPerPersonPerWakingDay: switches,

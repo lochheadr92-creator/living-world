@@ -1,0 +1,457 @@
+{
+ "label": "river-day48",
+ "loaded": "C:\\dev\\lw_saves\\day48\\river-day48.save.json",
+ "rulesVersion": 250,
+ "startTick": 115200,
+ "startPeople": 55,
+ "days": 3,
+ "identicalToUnwatchedTwinEveryDay": true,
+ "selfChecksTripShape": {
+  "tripTicksEqualOwnTravelTickCount": true,
+  "tripTicksByStageEqualOwnCounts": true,
+  "everyWalkHasExactlyOneOutcome": true,
+  "tileChangesEqualOwnCount": true,
+  "noWalkLeftUnresolved": true,
+  "noActivityVanishedWithoutAnEndRecord": true,
+  "leftCensoredOnlyAtTheFirstSample": true,
+  "livingTicksEqualSampledPersonTicks": true,
+  "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+  "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+  "storeLooksAddUpToTheContainers": true
+ },
+ "selfChecksAllTrue": true,
+ "selfChecksCount": 18,
+ "walksAll": 2121,
+ "withdrawWalks": 64,
+ "rowsWithStoreLook": 64,
+ "allowanceAtEndOfWalkAgainstGoodsTaken": {
+  "allowedNoneAndTaken": 1,
+  "allowedNoneAndNothingTaken": 30,
+  "allowedSomeAndTaken": 19,
+  "allowedSomeAndNothingTaken": 6,
+  "noAllowanceReadOrActivityOpen": 3
+ },
+ "anchorsMissing": [],
+ "storeBeliefs": {
+  "definition": "withdraw walks only (the walk of an activity of kind withdraw; eat_store and deposit walks are not read). The goods asked for are a copy of the activity's data.items. The store is read twice: at the walk's first sample (departure) and at the first sample after its last walking tick (end of walk, which is arrival for a walk that arrived). The belief is read at departure only, because arriving refreshes it. Age of the belief on arrival = age at departure + walking ticks. A person's belief is p.beliefs[targetId]; trueUnits come from the container the withdraw handler itself reads (building.store.items, site.delivered, pile.items); allowedUnits is the sim's withdrawAllowance for the wanted goods, buildings only. Measured walks only (not left-censored, not censored).",
+  "withdrawWalks": 64,
+  "measuredWithdrawWalksWithBothLooks": 59,
+  "all": {
+   "walks": 59,
+   "containerAtDeparture": {
+    "building": 56,
+    "site": 0,
+    "pile": 3,
+    "gone": 0
+   },
+   "storeTypeAtDepartureTop10": {
+    "bakery": 18,
+    "smithy": 13,
+    "timber_yard": 11,
+    "mill": 5,
+    "quarry": 5,
+    "kiln": 3,
+    "pile": 3,
+    "granary": 1
+   },
+   "wantedUnits": {
+    "n": 59,
+    "mean": 1.339,
+    "min": 1,
+    "p10": 1,
+    "p25": 1,
+    "median": 1,
+    "p75": 1,
+    "p90": 2,
+    "max": 4
+   },
+   "belief": {
+    "withABelief": 59,
+    "withAnItemList": 59,
+    "seenFirstHand": 59,
+    "toldByAnother": 0,
+    "ageAtDepartureTicks": {
+     "n": 59,
+     "mean": 178.356,
+     "min": 1,
+     "p10": 1,
+     "p25": 2,
+     "median": 2,
+     "p75": 9.5,
+     "p90": 201.8,
+     "max": 6981
+    },
+    "ageAtDepartureDays": {
+     "n": 59,
+     "mean": 0.074,
+     "min": 0,
+     "p10": 0,
+     "p25": 0.001,
+     "median": 0.001,
+     "p75": 0.004,
+     "p90": 0.084,
+     "max": 2.909
+    },
+    "believedUnitsOfTheWantedGoods": {
+     "n": 59,
+     "mean": 1.712,
+     "min": 0,
+     "p10": 1,
+     "p25": 1,
+     "median": 1,
+     "p75": 1,
+     "p90": 5,
+     "max": 10
+    }
+   },
+   "truth": {
+    "unitsAtDeparture": {
+     "n": 59,
+     "mean": 4.119,
+     "min": 0,
+     "p10": 1,
+     "p25": 1,
+     "median": 2,
+     "p75": 4,
+     "p90": 8,
+     "max": 81
+    },
+    "unitsAtEndOfWalk": {
+     "n": 59,
+     "mean": 4.068,
+     "min": 0,
+     "p10": 0,
+     "p25": 1,
+     "median": 2,
+     "p75": 4,
+     "p90": 7.2,
+     "max": 81
+    },
+    "allowedUnitsAtEndOfWalkBuildingsOnly": {
+     "n": 56,
+     "mean": 0.554,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 1,
+     "p90": 1,
+     "max": 3
+    },
+    "walksWithTrueUnitsZeroAtDeparture": 4,
+    "walksWithTrueUnitsZeroAtEndOfWalk": 7,
+    "shareWithTrueUnitsZeroAtEndOfWalk": 0.119,
+    "walksStockedButAllowedNoneAtEndOfWalk": 25,
+    "shareStockedButAllowedNoneAtEndOfWalk": 0.424,
+    "walksWhereTheTargetWasGoneAtEndOfWalk": 0
+   },
+   "beliefAgainstTruth": {
+    "note": "walks whose belief had an item list: believed units of the wanted goods at departure against true units at the end of the walk (the first sample after the last walking tick)",
+    "walks": 59,
+    "believedStockedAndTrulyEmpty": 5,
+    "believedStockedAndAllowedNone": 29,
+    "believedStockedAndNothingWasAllowedOrThere": 30,
+    "shareBelievedStockedAndAllowedNone": 0.527
+   },
+   "byBeliefAgeAtDeparture": {
+    "under_1_day": {
+     "walks": 58,
+     "trueUnitsZeroAtEndOfWalk": 7,
+     "stockedButAllowedNone": 24,
+     "didJob": 44
+    },
+    "1_to_3_days": {
+     "walks": 1,
+     "trueUnitsZeroAtEndOfWalk": 0,
+     "stockedButAllowedNone": 1,
+     "didJob": 1
+    }
+   },
+   "byOutcome": {
+    "arrived_did_job": {
+     "walks": 45,
+     "trueUnitsZeroAtEndOfWalk": 4,
+     "stockedButAllowedNone": 18,
+     "didJob": 45
+    },
+    "switched_mid_walk": {
+     "walks": 13,
+     "trueUnitsZeroAtEndOfWalk": 3,
+     "stockedButAllowedNone": 7,
+     "didJob": 0
+    },
+    "continued_same_activity": {
+     "walks": 1,
+     "trueUnitsZeroAtEndOfWalk": 0,
+     "stockedButAllowedNone": 0,
+     "didJob": 0
+    }
+   }
+  },
+  "byStage": {
+   "under_12": {
+    "walks": 0,
+    "containerAtDeparture": {
+     "building": 0,
+     "site": 0,
+     "pile": 0,
+     "gone": 0
+    },
+    "storeTypeAtDepartureTop10": {},
+    "wantedUnits": {
+     "n": 0,
+     "mean": null,
+     "min": null,
+     "p10": null,
+     "p25": null,
+     "median": null,
+     "p75": null,
+     "p90": null,
+     "max": null
+    },
+    "belief": {
+     "withABelief": 0,
+     "withAnItemList": 0,
+     "seenFirstHand": 0,
+     "toldByAnother": 0,
+     "ageAtDepartureTicks": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     },
+     "ageAtDepartureDays": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     },
+     "believedUnitsOfTheWantedGoods": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     }
+    },
+    "truth": {
+     "unitsAtDeparture": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     },
+     "unitsAtEndOfWalk": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     },
+     "allowedUnitsAtEndOfWalkBuildingsOnly": {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "p10": null,
+      "p25": null,
+      "median": null,
+      "p75": null,
+      "p90": null,
+      "max": null
+     },
+     "walksWithTrueUnitsZeroAtDeparture": 0,
+     "walksWithTrueUnitsZeroAtEndOfWalk": 0,
+     "shareWithTrueUnitsZeroAtEndOfWalk": null,
+     "walksStockedButAllowedNoneAtEndOfWalk": 0,
+     "shareStockedButAllowedNoneAtEndOfWalk": null,
+     "walksWhereTheTargetWasGoneAtEndOfWalk": 0
+    },
+    "beliefAgainstTruth": {
+     "note": "walks whose belief had an item list: believed units of the wanted goods at departure against true units at the end of the walk (the first sample after the last walking tick)",
+     "walks": 0,
+     "believedStockedAndTrulyEmpty": 0,
+     "believedStockedAndAllowedNone": 0,
+     "believedStockedAndNothingWasAllowedOrThere": 0,
+     "shareBelievedStockedAndAllowedNone": null
+    },
+    "byBeliefAgeAtDeparture": {},
+    "byOutcome": {}
+   },
+   "12_and_over": {
+    "walks": 59,
+    "containerAtDeparture": {
+     "building": 56,
+     "site": 0,
+     "pile": 3,
+     "gone": 0
+    },
+    "storeTypeAtDepartureTop10": {
+     "bakery": 18,
+     "smithy": 13,
+     "timber_yard": 11,
+     "mill": 5,
+     "quarry": 5,
+     "kiln": 3,
+     "pile": 3,
+     "granary": 1
+    },
+    "wantedUnits": {
+     "n": 59,
+     "mean": 1.339,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1,
+     "p75": 1,
+     "p90": 2,
+     "max": 4
+    },
+    "belief": {
+     "withABelief": 59,
+     "withAnItemList": 59,
+     "seenFirstHand": 59,
+     "toldByAnother": 0,
+     "ageAtDepartureTicks": {
+      "n": 59,
+      "mean": 178.356,
+      "min": 1,
+      "p10": 1,
+      "p25": 2,
+      "median": 2,
+      "p75": 9.5,
+      "p90": 201.8,
+      "max": 6981
+     },
+     "ageAtDepartureDays": {
+      "n": 59,
+      "mean": 0.074,
+      "min": 0,
+      "p10": 0,
+      "p25": 0.001,
+      "median": 0.001,
+      "p75": 0.004,
+      "p90": 0.084,
+      "max": 2.909
+     },
+     "believedUnitsOfTheWantedGoods": {
+      "n": 59,
+      "mean": 1.712,
+      "min": 0,
+      "p10": 1,
+      "p25": 1,
+      "median": 1,
+      "p75": 1,
+      "p90": 5,
+      "max": 10
+     }
+    },
+    "truth": {
+     "unitsAtDeparture": {
+      "n": 59,
+      "mean": 4.119,
+      "min": 0,
+      "p10": 1,
+      "p25": 1,
+      "median": 2,
+      "p75": 4,
+      "p90": 8,
+      "max": 81
+     },
+     "unitsAtEndOfWalk": {
+      "n": 59,
+      "mean": 4.068,
+      "min": 0,
+      "p10": 0,
+      "p25": 1,
+      "median": 2,
+      "p75": 4,
+      "p90": 7.2,
+      "max": 81
+     },
+     "allowedUnitsAtEndOfWalkBuildingsOnly": {
+      "n": 56,
+      "mean": 0.554,
+      "min": 0,
+      "p10": 0,
+      "p25": 0,
+      "median": 0,
+      "p75": 1,
+      "p90": 1,
+      "max": 3
+     },
+     "walksWithTrueUnitsZeroAtDeparture": 4,
+     "walksWithTrueUnitsZeroAtEndOfWalk": 7,
+     "shareWithTrueUnitsZeroAtEndOfWalk": 0.119,
+     "walksStockedButAllowedNoneAtEndOfWalk": 25,
+     "shareStockedButAllowedNoneAtEndOfWalk": 0.424,
+     "walksWhereTheTargetWasGoneAtEndOfWalk": 0
+    },
+    "beliefAgainstTruth": {
+     "note": "walks whose belief had an item list: believed units of the wanted goods at departure against true units at the end of the walk (the first sample after the last walking tick)",
+     "walks": 59,
+     "believedStockedAndTrulyEmpty": 5,
+     "believedStockedAndAllowedNone": 29,
+     "believedStockedAndNothingWasAllowedOrThere": 30,
+     "shareBelievedStockedAndAllowedNone": 0.527
+    },
+    "byBeliefAgeAtDeparture": {
+     "under_1_day": {
+      "walks": 58,
+      "trueUnitsZeroAtEndOfWalk": 7,
+      "stockedButAllowedNone": 24,
+      "didJob": 44
+     },
+     "1_to_3_days": {
+      "walks": 1,
+      "trueUnitsZeroAtEndOfWalk": 0,
+      "stockedButAllowedNone": 1,
+      "didJob": 1
+     }
+    },
+    "byOutcome": {
+     "arrived_did_job": {
+      "walks": 45,
+      "trueUnitsZeroAtEndOfWalk": 4,
+      "stockedButAllowedNone": 18,
+      "didJob": 45
+     },
+     "switched_mid_walk": {
+      "walks": 13,
+      "trueUnitsZeroAtEndOfWalk": 3,
+      "stockedButAllowedNone": 7,
+      "didJob": 0
+     },
+     "continued_same_activity": {
+      "walks": 1,
+      "trueUnitsZeroAtEndOfWalk": 0,
+      "stockedButAllowedNone": 0,
+      "didJob": 0
+     }
+    }
+   }
+  }
+ }
+}

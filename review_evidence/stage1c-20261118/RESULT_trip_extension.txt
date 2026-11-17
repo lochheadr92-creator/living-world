@@ -1,0 +1,40 @@
+Stage 1c: trip_shape extension, a read of the store each withdraw walk is bound for (18 November 2026, rules 255 head, on top of a4db01d4)
+
+What was added (scripts/observers/trip_shape.ts, read only)
+  storeLook(world, person, targetId, wanted goods): the container kind, the units of the wanted goods really in it, what the sim's own
+  withdrawAllowance would let this person take now (buildings only), and the person's belief about it (present, has an item list, believed
+  units, tick seen, age, seen or told). Each withdraw walk is read at departure and at the first sample after its last walking tick.
+  The belief is read at departure only: arriving refreshes it (act_resource.ts withdraw begin() calls observe). Age on arrival = age at
+  departure + walking ticks. Report block storeBeliefs, per-walk fields in tripRows, three new self checks, three new source anchors,
+  three new notMeasured lines. tests/day_observers.test.ts gained one test of storeLook (4 tests, all pass).
+  Not covered: eat_store, deposit, haul and cart_haul walks.
+
+Checks, highest level first
+  VERIFIED by execution, three saved settlements (copies of C:\dev\_keep_20261118\day48-saves, in C:\dev\lw_saves\day48), 3 days each:
+    All three saves are at rules 250 (read from the save). 55, 51 and 55 people at the start.
+    A watched world (all three observers, store look included) was byte-identical to an unwatched twin at the end of every day, on all three.
+    18 of 18 self checks true on each. 0 source anchors missing (the count is now 73 for TripShape).
+  VERIFIED, fresh worlds: 10 days on river, aspen and birch earlier in this session (typecheck passed, identical every day); those files were
+    from an earlier version of the run script and are not kept. Only 2, 10 and 25 withdraw walks occurred in 10 days there, too few to read.
+  VERIFIED: tsc --noEmit exit 0 (typecheck_ext.txt). tests/day_observers.test.ts 4 of 4 (observer_test_ext.txt).
+
+First reading (adult withdraw walks, 3 days from day 48, rules 250; one run per save, no spread measured)
+  save    measured walks   store truly empty at end of walk   stock there but allowance zero   belief age median / p90 (days)
+  river        59                 7  (11.9%)                      25  (42.4%)                    0.001 / 0.084
+  aspen       140                16  (11.4%)                      71  (50.7%)                    0.001 / 0.575
+  gen-4       142                 6   (4.2%)                     106  (74.6%)                    0.001 / 0.708
+  Under 12: no withdraw walks in any of the three.
+  Does the allowance read predict what was taken? Among walks whose allowance read zero (and whose activity count is known), goods were
+  then taken in 1 of 31 (river), 0 of 86 (aspen), 0 of 111 (gen-4). Where it read above zero, goods were taken in 19 of 25, 38 of 46 and
+  16 of 21. So the read is a good predictor of an empty-handed arrival.
+
+What this does and does not say
+  Staleness is not what sends people to stores they cannot take from: the belief behind nearly every walk was under a day old.
+  The allowance is zero with stock present on 42 to 75% of these walks. The observer does not separate why (an earmark held for someone
+  else, no access, a granary share). The earlier trip waste report attributed it to earmarks; this run does not re-verify that.
+  CONFLICT to settle, not settled: the trip waste report gave 29 to 40% of adult withdraws arriving and taking nothing. This read gives
+  64% (river, 36 of 56), 71% (aspen, 94 of 132) and 88% (gen-4, 116 of 132) of the walks that were read and whose activity count is known
+  taking nothing. LIKELY reason: this counts walks,
+  and a withdraw that begins beside the store has no walk, so the successful near ones are missing from the denominator. UNKNOWN until
+  the two are put on one definition. Do not quote either figure as the share of all withdraws.
+  Three worlds, 3 days each, one run per save: no noise floor yet. Step 4 (the spread) gives one.

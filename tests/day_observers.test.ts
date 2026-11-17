@@ -7,7 +7,9 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { stepWorld } from '../src/sim/world';
 import { DayShape } from '../scripts/observers/day_shape';
-import { TripShape } from '../scripts/observers/trip_shape';
+import { TripShape, storeLook } from '../scripts/observers/trip_shape';
+import { ageYears } from '../src/sim/people';
+import { AGE_CHILD } from '../src/sim/constants';
 import { OutdoorCompany, DAY_PARTS } from '../scripts/observers/outdoor_company';
 
 const world = (seed: string) => createWorld(currentWorldSettings('normal', seed, { immigration: false }));
@@ -43,6 +45,36 @@ it('DayShape and TripShape: every self check in their own reports holds after 60
   expect(d.hungryTime.hungryWakingTicks).toBeLessThanOrEqual(d.hungryTime.wakingTicks);
   expect(t.counts.walksAll).toBeGreaterThan(0);
   expect(trip.tripRows().length).toBe(t.counts.walksAll);
+}, 60000);
+
+it('storeLook reads a store against what a person believes, and changes nothing', () => {
+  const w = world('river');
+  for (let n = 0; n < 1200; n++) stepWorld(w);
+  const person = w.persons.find((p) => p.alive && ageYears(w, p) >= AGE_CHILD);
+  expect(person).toBeDefined();
+  const stocked = [...w.byId.values()].flatMap((e) => (e.ent === 'building' && Object.values(e.store.items).some((n) => (n ?? 0) > 0) ? [e] : []));
+  expect(stocked.length).toBeGreaterThan(0);
+  const b = stocked[0];
+  const kind = Object.keys(b.store.items).find((k) => ((b.store.items as Record<string, number>)[k] ?? 0) > 0)!;
+  const have = (b.store.items as Record<string, number>)[kind];
+  const before = serializeWorld(w);
+  const look = storeLook(w, person!, b.id, { [kind]: 2 });
+  expect(look.container).toBe('building');
+  expect(look.buildingType).toBe(b.type);
+  expect(look.wantedUnits).toBe(2);
+  expect(look.trueUnits).toBe(have);
+  expect(look.allowedUnits).not.toBeNull();
+  expect(look.allowedUnits!).toBeGreaterThanOrEqual(0);
+  expect(look.allowedUnits!).toBeLessThanOrEqual(Math.min(2, have));
+  const belief = person!.beliefs[b.id];
+  expect(look.hasBelief).toBe(belief !== undefined);
+  if (belief) { expect(look.beliefSeen).toBe(belief.seen); expect(look.beliefAge).toBe(w.tick - belief.seen); }
+  else { expect(look.beliefSeen).toBeNull(); expect(look.beliefAge).toBeNull(); expect(look.beliefUnits).toBe(0); }
+  const gone = storeLook(w, person!, -1, { [kind]: 2 });
+  expect(gone.container).toBe('gone');
+  expect(gone.trueUnits).toBe(0);
+  expect(gone.allowedUnits).toBeNull();
+  expect(serializeWorld(w)).toBe(before);
 }, 60000);
 
 it('OutdoorCompany: the parts of the day add up and each count is inside the one before it', () => {
