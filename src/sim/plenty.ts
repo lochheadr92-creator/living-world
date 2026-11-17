@@ -21,6 +21,16 @@ import type { World } from './types';
 export const PLENTY_WILD = 2;
 export const PLENTY_CROPS = 2;
 
+// SCRATCH ONLY (regime experiment, 17 November 2026): a lab setter for the two food factors. Never saved or hashed. At its default
+// (no call, or a call with no argument) the factors are PLENTY_WILD and PLENTY_CROPS, so every world runs as it did.
+let labWild = PLENTY_WILD;
+let labCrops = PLENTY_CROPS;
+export function setPlentyFactors(f?: { wild?: number; crops?: number }): void {
+  labWild = f?.wild ?? PLENTY_WILD;
+  labCrops = f?.crops ?? PLENTY_CROPS;
+}
+export const plentyFactors = (): { wild: number; crops: number } => ({ wild: labWild, crops: labCrops });
+
 const on = { wild: true, crops: true };
 export type PlentyPart = keyof typeof on;
 export const PLENTY_PARTS = Object.keys(on) as PlentyPart[];
@@ -35,6 +45,6 @@ const runs = (world: World): boolean => world.settings.dynamics === 'rich' && ru
 const WILD_FOOD = new Set(['berry_bush', 'fruit_tree', 'fish_spot', 'wild_grain']);
 
 /** how many times as fast this kind of source comes back (1 for anything that is not wild food) */
-export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? PLENTY_WILD : 1);
+export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? labWild : 1);
 /** how many times the grain a ripened plot carries */
-export const cropPlenty = (world: World): number => (on.crops && runs(world) ? PLENTY_CROPS : 1);
+export const cropPlenty = (world: World): number => (on.crops && runs(world) ? labCrops : 1);

@@ -8,6 +8,7 @@ import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
 import { isWalkable, newId, personById, registerGeneric, solidEpoch } from './registry';
 import { findPath } from './pathfinding';
+import { paceFactor } from './pace';
 import { stageOf } from './people';
 import type { Animal, Person, World } from './types';
 import { T } from './types';
@@ -346,7 +347,7 @@ function updateDeer(world: World, a: Animal): void {
       tx = a.denX;
       ty = a.denY;
     }
-    moveLocalAnimal(world, a, tx, ty, 0.2);
+    moveLocalAnimal(world, a, tx, ty, 0.2 * paceFactor());
     if (world.tick >= a.until) {
       a.state = 'roam';
       a.denX = a.x;
@@ -356,7 +357,7 @@ function updateDeer(world: World, a: Animal): void {
     return;
   }
   if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWanderNear(world, a, night ? 3 : 7);
-  moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.03);
+  moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.03 * paceFactor());
 }
 
 function newWanderNear(world: World, a: Animal, r: number): void {
@@ -406,7 +407,7 @@ export function updateWildlife(world: World): void {
     switch (a.state) {
       case 'roam': {
         if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWander(world, a);
-        moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.045);
+        moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.045 * paceFactor());
         if ((world.tick + a.id) % 8 === 0) {
           const prey = pickPrey(world, a, night);
           if (prey) {
@@ -435,7 +436,7 @@ export function updateWildlife(world: World): void {
           a.until = world.tick + 200;
           break;
         }
-        moveLocalAnimal(world, a, t.x, t.y, d < 6 ? 0.15 : 0.1);
+        moveLocalAnimal(world, a, t.x, t.y, (d < 6 ? 0.15 : 0.1) * paceFactor());
         if (d <= 1.2 && a.cooldown === 0 && facingCheck && facingCheck(world, a, t)) break; // squared up to it: it hesitates
         if (d <= 1.2 && a.cooldown === 0) {
           bite(world, a, t);
@@ -449,7 +450,7 @@ export function updateWildlife(world: World): void {
         break;
       }
       case 'retreat': {
-        moveLocalAnimal(world, a, a.denX, a.denY, 0.12);
+        moveLocalAnimal(world, a, a.denX, a.denY, 0.12 * paceFactor());
         if (world.tick >= a.until && hyp(a.denX - a.x, a.denY - a.y) < 3) {
           a.state = 'roam';
           newWander(world, a);

@@ -3,6 +3,7 @@ import type {Animal,Activity,Person,World} from './types';
 import {DAY,NUTRITION} from './constants';
 import {runsRulesVersion} from './rulesversion';
 import {makeWolf,moveLocalAnimal} from './wildlife';
+import {paceFactor} from './pace';
 import {isWalkable,isWaterAccess} from './registry';
 import {shoreWater} from './water_access';
 import {drawWater} from './hydrology';
@@ -99,7 +100,7 @@ function forage(w:World,a:Animal):void{
  if(!target){s.forageTarget=0;s.forageWork=0;return;}
  // A remembered shore point is not water contact: actually reach a legal shore tile.
  const waterContact=target.kind!=='water'||isWaterAccess(w,Math.floor(a.x),Math.floor(a.y))&&(shoreWater(w,a.x,a.y)?.body.amount??0)>=1;
- if(Math.hypot(target.x-a.x,target.y-a.y)>1.3||!waterContact){s.forageWork=0;const x=a.x,y=a.y;moveLocalAnimal(w,a,target.x,target.y,.04);if(!allowed(a.x,a.y)){a.x=x;a.y=y;a.path=[];}return;}
+ if(Math.hypot(target.x-a.x,target.y-a.y)>1.3||!waterContact){s.forageWork=0;const x=a.x,y=a.y;moveLocalAnimal(w,a,target.x,target.y,.04*paceFactor());if(!allowed(a.x,a.y)){a.x=x;a.y=y;a.path=[];}return;}
  if(s.forageTarget!==target.id){s.forageTarget=target.id;s.forageWork=0;}
  if(++s.forageWork<60)return;s.forageWork=0;
  if(target.kind==='water'){const at=shoreWater(w,a.x,a.y);if(at&&at.body.amount>=1){const n=drawWater(w,at.body,1);ledgerConsume(w,'water',n,'sheep drinking');s.water=Math.min(2,s.water+n);}}

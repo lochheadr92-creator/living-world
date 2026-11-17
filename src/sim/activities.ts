@@ -15,6 +15,7 @@ import { arriveForResidentCare, isResidentCareJourney } from './resident_contact
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { childPace } from './child_pace';
 import { cartSpeedFactor } from './carts';
+import { paceFactor } from './pace';
 import { carryCap } from './people';
 import { stageOf } from './people';
 import { releaseClaims, weightOf } from './economy';
@@ -180,7 +181,7 @@ export function moveSpeed(world: World, p: Person, run = false): number {
   s *= 1 - 0.16 * world.weather.storm;
   if (p.needs.energy < 15) s *= 0.82;
   if (run) s *= 1.42;
-  return s;
+  return s * paceFactor();
 }
 
 function wearTile(world: World, x: number, y: number): void {
