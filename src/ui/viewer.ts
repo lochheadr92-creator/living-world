@@ -1,10 +1,11 @@
 import { Every, h } from './dom';
 import type { Part, UICtx } from './context';
 import type { Slots } from './layout';
+import type { Rail } from './rail';
 import type { ViewerPreferences } from '../app/viewer';
 
-/** Accessible native controls; changes affect observation only. */
-export function createViewerControls(ctx: UICtx, slots: Slots): Part {
+/** Accessible native controls, the "View" list on the left rail (rail.ts); changes affect observation only. */
+export function createViewerControls(ctx: UICtx, slots: Slots, rail: Rail): Part {
   const { game, root } = ctx;
   const selects = new Map<keyof ViewerPreferences, HTMLSelectElement>();
   function select<K extends 'speech' | 'textSize' | 'contrast'>(key: K, label: string, options: [ViewerPreferences[K], string][]) {
@@ -14,8 +15,7 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
     return h('label', { class: 'viewer-field', for: input.id }, h('span', null, label), input);
   }
   const reduce = h('input', { type: 'checkbox', id: 'viewer-motion', onChange: () => game.setViewer({ reducedMotion: reduce.checked }) });
-  const controls = h('details', { class: 'viewer-controls glass' },
-    h('summary', null, 'View'),
+  const controls = h('div', { class: 'viewer-controls' },
     h('div', { class: 'viewer-settings' },
       select('speech', 'Map speech', [['automatic','Automatic'],['selected','Selected person only'],['hidden','Hidden']]),
       h('p', { id: 'viewer-speech-help' }, 'Automatic prioritises the selected person and warnings. Selected person only includes only their warnings. Hidden hides all map speech, including warnings. Full current speech stays in the person panel.'),
@@ -24,7 +24,7 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
       h('label', { class: 'viewer-field', for: reduce.id }, 'Reduce motion', reduce),
       h('p', null, 'Map detail also follows zoom. Names, intentions and speech share the available space.')));
   selects.get('speech')!.setAttribute('aria-describedby', 'viewer-speech-help');
-  slots.bottom.appendChild(controls);
+  rail.add({ id: 'view', label: 'View', icon: 'sliders', title: 'View', hint: 'How the world is shown to you. Nothing here changes the world.', body: controls });
   const systemMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const sync = () => {
     for (const [key, input] of selects) input.value = String(game.viewer[key]);
@@ -53,10 +53,6 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
       .filter(r => r.width > 0 && r.height > 0)
       .map(r => ({ x: r.left, y: r.top, w: r.width, h: r.height }));
   };
-  const escape = (event: KeyboardEvent) => {
-    if (event.key === 'Escape' && controls.open) { controls.open = false; controls.querySelector('summary')!.focus(); event.stopPropagation(); }
-  };
-  controls.addEventListener('keydown', escape);
   sync(); measurePanels();
   return {
     onGame(event) { if (event === 'viewer') { sync(); measurePanels(); } },

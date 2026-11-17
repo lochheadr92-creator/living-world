@@ -44,7 +44,7 @@ const GROUPS: { title: string; rows: KeyRow[] }[] = [
 ];
 
 const INSPECTOR_NOTES: [string, string][] = [
-  ['View preferences', 'The View menu controls map speech, text size, contrast and reduced motion. Warnings follow the speech setting. Full current speech remains in the person panel at every zoom. Grouped workshop feed rows can be expanded to see each event.'],
+  ['View preferences', 'The View list on the left rail controls map speech, text size, contrast and reduced motion. Warnings follow the speech setting. Full current speech remains in the person panel at every zoom. Grouped workshop feed rows can be expanded to see each event.'],
   ['The card, then the full view', 'Clicking a person opens a compact card: a status line, what they are doing and why, where they are going or what comes next (with a pin to centre the map there), the knowledge that rests on when it is hearsay or old, pressing needs, goods that matter to the action, and how the last attempt ended. The people icon opens the full character view, in six sections: Now, Plans and choices, What they know, People and relationships, Recent history, and Household and character. Long lists stay folded until you ask.'],
   ['What are they up to?', 'Plain answers: what they are doing, why, where to or what next, what they hope for, what is in the way, and how the last try went.'],
   ['Promises, talk and quarrels', 'A person’s card also shows what they have promised and how earlier promises ended (done, expired, moot, interrupted, failed or broken), the conversation they are in and the last one, a shared meal they are hosting or have said yes to and the last one, who they are worried about, and who they are still sore at. A part with nothing to show stays hidden.'],
@@ -103,7 +103,7 @@ export function createHelp(ctx: UICtx): HelpPart {
       xBtn,
     ),
     h('div', { class: 'help-cols' }, groups),
-    h('section', { class: 'help-group wide' }, h('h3', { class: 'cap' }, 'The bar along the bottom'), h('div', { class: 'help-ovs' }, overlayRows)),
+    h('section', { class: 'help-group wide' }, h('h3', { class: 'cap' }, 'The Lenses list on the left rail'), h('div', { class: 'help-ovs' }, overlayRows)),
     h('section', { class: 'help-group wide' }, h('h3', { class: 'cap' }, 'Reading the inspector'), h('div', { class: 'help-notes' }, notes)),
     h('section', { class: 'help-group wide' }, h('h3', { class: 'cap' }, 'Workshops, tools & carts'), h('div', { class: 'help-notes' }, workNotes)),
     h('footer', { class: 'help-foot' }, h('span', { class: 'muted' }, 'Press ? or H any time to bring this back. Shift+D shows the debug panel.'), closeBtn),

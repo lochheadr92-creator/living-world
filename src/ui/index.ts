@@ -5,7 +5,8 @@
 //   layout     click-through docks the panels live in        topbar     title, seed chip, clock and population
 //   transport  play / step / speed / paused tag              worldmenu  seed, new world, scenes, save / load
 //   inspector  right panel shell  (person.ts, entity.ts)     feed       happenings with category filters
-//   overlays   bottom chip group                             minimap    isometric overview, click or drag to pan
+//   rail       left rail; a click opens a list beside it      minimap    isometric overview, click or drag to pan
+//   overlays   the Lenses list on the rail                    viewer     the View list on the rail (speech, text size, contrast, motion)
 //   debug      optional diagnostics                          help       controls and how to read the inspector
 //   tooltip    data-tip labels + hover label over the map    toasts     short messages
 //   faultbanner  a frame stage threw: what, when, and that the world is paused
@@ -25,6 +26,7 @@ import { createHelp } from './help';
 import { createInspector } from './inspector';
 import { createMinimap } from './minimap';
 import { createOverlays } from './overlays';
+import { createRail } from './rail';
 import { createShortcuts } from './shortcuts';
 import { createToasts } from './toasts';
 import { createTopbar } from './topbar';
@@ -97,8 +99,9 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
   const feed = createFeed(ctx, slots);
   const inspector = createInspector(ctx, slots); // above the minimap
   const minimap = createMinimap(ctx, slots);
-  const overlays = createOverlays(ctx, slots);
-  const viewer = createViewerControls(ctx, slots);
+  const rail = createRail(ctx, slots); // the lenses and the view settings add their lists to it, in this order
+  const overlays = createOverlays(ctx, rail);
+  const viewer = createViewerControls(ctx, slots, rail);
   // the AI inhabitant's run follows a person itself, so the story director is not offered beside it
   const director = extras.inhabit ? null : createDirector(ctx, slots);
   const shortcuts = createShortcuts(ctx, menu, help, director ?? undefined);
@@ -119,6 +122,7 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
     ['feed', feed],
     ['inspector', inspector],
     ['minimap', minimap],
+    ['rail', rail],
     ['overlays', overlays],
     ['viewer', viewer],
     ['shortcuts', shortcuts],
