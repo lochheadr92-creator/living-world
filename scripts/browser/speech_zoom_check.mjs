@@ -67,14 +67,14 @@ try {
     await b.send('Emulation.setTouchEmulationEnabled',{enabled:false});
     await ev(`window.__game.setFollow(true)`); await b.sleep(500);
     check('following retains selected speech priority',await ev(`window.__renderer.lastOverlayLayout.some(r=>r.type==='speech'&&r.id===window.__game.selectedId)`));
-    await ev(`window.__game.setFollow(false);document.querySelector('.viewer-controls').open=true;document.querySelector('#viewer-speech').focus()`);
+    await ev(`window.__game.setFollow(false);{const v=document.querySelector('.rail-btn[data-section=view]');if(v.getAttribute('aria-expanded')!=='true')v.click();}document.querySelector('#viewer-speech').focus()`);
     await b.key('End','End',35); await b.key('Enter','Enter',13); await b.sleep(250);
     check('keyboard can choose Hidden, including warnings',await ev(`window.__game.viewer.speech==='hidden'&&!window.__renderer.lastOverlayLayout.some(r=>r.type==='speech')`));
     await ev(`const input=document.querySelector('#viewer-speech');input.value='selected';input.dispatchEvent(new Event('change',{bubbles:true}));`); await b.sleep(200);
     check('selected-only hides other speech including warnings',await ev(`window.__renderer.lastOverlayLayout.filter(r=>r.type==='speech').every(r=>r.id===window.__game.selectedId)`));
     await ev(`window.__game.setViewer({speech:'automatic',textSize:'large',contrast:'high',reducedMotion:true})`); await b.sleep(350);
     await b.shot(`${out}/preferences.png`);
-    await ev(`document.querySelector('.viewer-controls').open=false`);
+    await ev(`{const v=document.querySelector('.rail-btn[data-section=view]');if(v.getAttribute('aria-expanded')==='true')v.click();}`);
     for (const [name,width,height,dpr] of [['desktop-scaled',1024,768,1.25],['phone',390,844,2],['short',900,500,1]]) {
       await b.send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:false});
       await ev(`window.__game.camera.zoom=1.8;window.__game.setFollow(true);window.__ui.update(1);`); await b.sleep(500);

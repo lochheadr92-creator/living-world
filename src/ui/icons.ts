@@ -58,6 +58,7 @@ const ICONS = {
   thought: `<path d="M3 2.8h10a1.3 1.3 0 0 1 1.3 1.3v5.3A1.3 1.3 0 0 1 13 10.7H8.6L5.4 13.6v-2.9H3a1.3 1.3 0 0 1-1.3-1.3V4.1A1.3 1.3 0 0 1 3 2.8Z"/><g fill="currentColor" stroke="none"><circle cx="5.4" cy="6.7" r=".95"/><circle cx="8" cy="6.7" r=".95"/><circle cx="10.6" cy="6.7" r=".95"/></g>`,
   pin: `<path d="M8 14.4s-4.8-4.1-4.8-7.6a4.8 4.8 0 0 1 9.6 0c0 3.5-4.8 7.6-4.8 7.6Z"/><circle cx="8" cy="6.8" r="1.8"/>`,
   tag: `<path d="M2.2 2.2h5.4l6.2 6.2a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4 0L2.2 7.6Z"/><circle cx="5.2" cy="5.2" r="1" fill="currentColor" stroke="none"/>`,
+  sliders: `<path d="M2.4 4.6h5.2M11.4 4.6h2.2M2.4 11.4h2.2M8.4 11.4h5.2"/><circle cx="9.5" cy="4.6" r="1.8"/><circle cx="6.5" cy="11.4" r="1.8"/>`,
 
   // ───────── interface ─────────
   chevron: `<path d="m6 3.5 4.5 4.5L6 12.5"/>`,
