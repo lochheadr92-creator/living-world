@@ -1,0 +1,56 @@
+== fern ==
+day 96  251: alive 110 bld 144 store 550 wild 327/592 | 252: - | 253: -
+day 120  251: alive 145 bld 133 store 852 wild 297/592 | 252: alive 147 bld 151 store 707 wild 218/592 | 253: alive 138 bld 149 store 1098 wild 276/592
+day 144  251: alive 171 bld 140 store 856 wild 277/592 | 252: alive 169 bld 151 store 871 wild 347/592 | 253: alive 170 bld 151 store 1050 wild 241/592
+day 168  251: alive 191 bld 99 store 695 wild 308/592 | 252: alive 211 bld 152 store 915 wild 193/592 | 253: alive 200 bld 149 store 577 wild 148/592
+day 192  251: alive 2 bld 5 store 26 wild 592/592 | 252: alive 190 bld 143 store 19 wild 142/592 | 253: alive 219 bld 146 store 6 wild 119/592
+yr 96: 251 trees 423 wood 1804 plots 151 | 252 - | 253 -
+yr 120: 251 trees 263 wood 1128 plots 206 | 252 trees 536 wood 2262 plots 211 | 253 trees 578 wood 2404 plots 201
+yr 144: 251 trees 91 wood 393 plots 267 | 252 trees 597 wood 2493 plots 276 | 253 trees 597 wood 2519 plots 256
+yr 168: 251 trees 0 wood 0 plots 326 | 252 trees 626 wood 2642 plots 339 | 253 trees 593 wood 2470 plots 322
+yr 192: 251 trees 0 wood 0 plots 365 | 252 trees 609 wood 2579 plots 362 | 253 trees 614 wood 2505 plots 353
+251 96-192: deaths {"old age":1,"thirst":2,"wolf attack":1,"fever":23,"exposure":85,"injuries":4,"hunger":82} born 19 came 71 minAlive 2
+252 96-192: deaths {"old age":1,"hunger":24,"fever":3,"exposure":14,"injuries":4,"wolf attack":1} born 26 came 101 minAlive 112
+253 96-192: deaths {"wolf attack":1,"exposure":2,"fever":1,"old age":1,"hunger":1} born 20 came 95 minAlive 112
+== meadow ==
+day 96  251: alive 117 bld 149 store 315 wild 237/558 | 252: - | 253: -
+day 120  251: alive 138 bld 163 store 565 wild 182/558 | 252: alive 145 bld 173 store 534 wild 211/558 | 253: alive 150 bld 177 store 750 wild 158/558
+day 144  251: alive 159 bld 169 store 444 wild 322/558 | 252: alive 152 bld 175 store 502 wild 331/558 | 253: alive 178 bld 186 store 1093 wild 172/558
+day 168  251: alive 184 bld 144 store 191 wild 215/558 | 252: alive 186 bld 184 store 349 wild 107/558 | 253: alive 206 bld 197 store 5 wild 63/558
+day 192  251: alive 189 bld 129 store 294 wild 162/558 | 252: alive 213 bld 202 store 630 wild 156/558 | 253: alive 209 bld 196 store 24 wild 150/558
+yr 96: 251 trees 465 wood 1977 plots 168 | 252 - | 253 -
+yr 120: 251 trees 314 wood 1327 plots 239 | 252 trees 647 wood 2797 plots 241 | 253 trees 652 wood 2814 plots 244
+yr 144: 251 trees 198 wood 829 plots 289 | 252 trees 718 wood 3095 plots 293 | 253 trees 702 wood 3009 plots 313
+yr 168: 251 trees 57 wood 242 plots 345 | 252 trees 674 wood 2853 plots 347 | 253 trees 715 wood 3014 plots 362
+yr 192: 251 trees 0 wood 0 plots 388 | 252 trees 622 wood 2602 plots 398 | 253 trees 699 wood 2916 plots 403
+251 96-192: deaths {"exposure":15,"hunger":2,"wolf attack":2,"injuries":1,"fever":7} born 16 came 83 minAlive 117
+252 96-192: deaths {"fever":2,"hunger":14,"injuries":2} born 21 came 93 minAlive 117
+253 96-192: deaths {"fever":6,"old age":1,"hunger":9,"exposure":4} born 24 came 88 minAlive 117
+== birch ==
+day 96  251: alive 117 bld 119 store 314 wild 297/581 | 252: - | 253: -
+day 120  251: alive 120 bld 119 store 383 wild 352/581 | 252: alive 80 bld 122 store 471 wild 418/581 | 253: alive 98 bld 136 store 303 wild 354/581
+day 144  251: alive 146 bld 125 store 431 wild 246/581 | 252: alive 106 bld 146 store 700 wild 343/581 | 253: alive 122 bld 155 store 984 wild 373/581
+day 168  251: alive 168 bld 117 store 449 wild 271/581 | 252: alive 134 bld 158 store 979 wild 295/581 | 253: alive 160 bld 166 store 1233 wild 221/581
+day 192  251: alive 69 bld 16 store 10 wild 289/581 | 252: alive 151 bld 166 store 10 wild 156/581 | 253: alive 121 bld 182 store 27 wild 106/581
+yr 96: 251 trees 428 wood 1834 plots 176 | 252 - | 253 -
+yr 120: 251 trees 318 wood 1360 plots 212 | 252 trees 525 wood 2235 plots 203 | 253 trees 547 wood 2326 plots 210
+yr 144: 251 trees 182 wood 772 plots 254 | 252 trees 553 wood 2352 plots 238 | 253 trees 597 wood 2533 plots 248
+yr 168: 251 trees 27 wood 96 plots 283 | 252 trees 577 wood 2409 plots 273 | 253 trees 567 wood 2390 plots 283
+yr 192: 251 trees 0 wood 0 plots 318 | 252 trees 571 wood 2388 plots 294 | 253 trees 552 wood 2333 plots 303
+251 96-192: deaths {"fever":20,"exposure":62,"hunger":24,"injuries":13,"thirst":6} born 16 came 61 minAlive 69
+252 96-192: deaths {"fever":6,"hunger":23,"exposure":22,"injuries":4,"wolf attack":2,"old age":2} born 13 came 80 minAlive 74
+253 96-192: deaths {"fever":18,"hunger":39,"injuries":16,"exposure":16,"wolf attack":1} born 17 came 77 minAlive 87
+== cedar ==
+day 96  251: alive 100 bld 128 store 222 wild 408/610 | 252: - | 253: -
+day 120  251: alive 133 bld 153 store 365 wild 331/610 | 252: alive 121 bld 154 store 693 wild 328/610 | 253: alive 122 bld 152 store 561 wild 280/610
+day 144  251: alive 116 bld 139 store 14 wild 264/610 | 252: alive 144 bld 159 store 131 wild 252/610 | 253: alive 136 bld 163 store 62 wild 190/610
+day 168  251: alive 130 bld 140 store 31 wild 7/610 | 252: alive 164 bld 164 store 2 wild 7/610 | 253: alive 144 bld 168 store 5 wild 9/610
+day 192  251: alive 141 bld 142 store 957 wild 221/610 | 252: alive 152 bld 152 store 597 wild 206/610 | 253: alive 134 bld 182 store 762 wild 363/610
+yr 96: 251 trees 560 wood 2434 plots 150 | 252 - | 253 -
+yr 120: 251 trees 408 wood 1767 plots 194 | 252 trees 763 wood 3267 plots 202 | 253 trees 766 wood 3267 plots 191
+yr 144: 251 trees 298 wood 1299 plots 232 | 252 trees 870 wood 3699 plots 219 | 253 trees 859 wood 3631 plots 225
+yr 168: 251 trees 140 wood 613 plots 258 | 252 trees 833 wood 3544 plots 226 | 253 trees 870 wood 3701 plots 229
+yr 192: 251 trees 64 wood 277 plots 279 | 252 trees 859 wood 3630 plots 246 | 253 trees 828 wood 3477 plots 251
+251 96-192: deaths {"hunger":13,"exposure":19,"injuries":10,"fever":4,"wolf attack":1,"old age":1} born 19 came 70 minAlive 101
+252 96-192: deaths {"exposure":21,"thirst":1,"wolf attack":1,"hunger":8,"fever":4,"old age":1,"injuries":1} born 13 came 76 minAlive 101
+253 96-192: deaths {"exposure":3,"hunger":19,"injuries":5,"fever":2} born 6 came 57 minAlive 101

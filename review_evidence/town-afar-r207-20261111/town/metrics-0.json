@@ -1,0 +1,43 @@
+{
+  "tick": 0,
+  "day": 0,
+  "population": 100,
+  "deaths": [],
+  "births": 0,
+  "buildings": {
+    "fire": 4,
+    "lean_to": 24
+  },
+  "solidHomes": 0,
+  "openSites": 0,
+  "carts": 0,
+  "personDays": 0,
+  "chats": 0,
+  "familyTime": 0,
+  "childPlay": 0,
+  "foragingPractice": 0,
+  "coaching": 0,
+  "tradeTalk": 0,
+  "markets": 0,
+  "mealsSat": 0,
+  "visits": 0,
+  "spareTime": 0,
+  "workplaceJobs": 0,
+  "guestJobs": 0,
+  "approachesFailed": 0,
+  "approachFailShare": 0,
+  "hungryAwakeShare": 0,
+  "fedWindowShare": 0,
+  "lifeShareOfEndedActivityTime": 0,
+  "survivalShareOfEndedActivityTime": 0,
+  "workShareOfEndedActivityTime": 0,
+  "sleepShareOfEndedActivityTime": 0,
+  "completed": {},
+  "endings": {},
+  "occasions": [],
+  "conversations": [],
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

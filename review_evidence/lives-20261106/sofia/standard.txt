@@ -1,0 +1,3 @@
+standard run: Sofia (#1007) in meadow, tick 2400 to 14400
+end hash 9cd731ea
+Sofia: alive, health 100; needs hunger 53, thirst 92, energy 94, warmth 58, safety 84, social 86; carrying 2 berries, 2 wood, 2 fish; lifetime {"gathered":39,"given":1,"received":0,"built":0,"talked":10,"farmed":0,"crafted":0}; knows 289 places; promises 0

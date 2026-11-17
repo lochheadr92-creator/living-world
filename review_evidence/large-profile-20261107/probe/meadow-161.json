@@ -1,0 +1,105 @@
+{
+ "seed": "meadow",
+ "profile": "large",
+ "rules": 161,
+ "days": 10,
+ "removed": [],
+ "founders": 100,
+ "exactTwin": true,
+ "conserved": true,
+ "storehousesLaidOut": 2,
+ "storehousesFinished": 1,
+ "stoneCommittedToStorehouses": 8,
+ "solidHomesAtEnd": 19,
+ "sitesStartedByType": {
+  "lean_to": 19,
+  "well": 8,
+  "hut": 33,
+  "storehouse": 2,
+  "cellar": 9,
+  "timber_yard": 1,
+  "quarry": 3,
+  "food_rack": 2,
+  "kiln": 1
+ },
+ "storehouses": [
+  {
+   "id": 12972,
+   "hh": 0,
+   "x": 108,
+   "y": 94,
+   "firstDay": 2.46,
+   "builtDay": 3.97,
+   "stoneCost": 4,
+   "woodCost": 10,
+   "nearestOtherStorehouse": 66.4
+  },
+  {
+   "id": 18871,
+   "hh": 0,
+   "x": 51,
+   "y": 60,
+   "firstDay": 4.29,
+   "builtDay": null,
+   "stoneCost": 4,
+   "woodCost": 10,
+   "nearestOtherStorehouse": 66.4
+  }
+ ],
+ "checkpoints": {
+  "day5": {
+   "alive": 110,
+   "deaths": 0,
+   "solidHomes": 8,
+   "homeless": 13,
+   "buildings": {
+    "fire": 4,
+    "lean_to": 36,
+    "well": 6,
+    "hut": 8,
+    "storehouse": 1,
+    "cellar": 1
+   },
+   "openSites": 12,
+   "stoneHeldByStorehouses": 0
+  },
+  "day10": {
+   "alive": 114,
+   "deaths": 0,
+   "solidHomes": 19,
+   "homeless": 8,
+   "buildings": {
+    "fire": 4,
+    "lean_to": 40,
+    "well": 6,
+    "hut": 19,
+    "storehouse": 1,
+    "cellar": 3,
+    "food_rack": 1,
+    "timber_yard": 1,
+    "quarry": 3
+   },
+   "openSites": 16,
+   "stoneHeldByStorehouses": 0
+  }
+ },
+ "end": {
+  "alive": 114,
+  "deaths": 0,
+  "solidHomes": 19,
+  "homeless": 8,
+  "buildings": {
+   "fire": 4,
+   "lean_to": 40,
+   "well": 6,
+   "hut": 19,
+   "storehouse": 1,
+   "cellar": 3,
+   "food_rack": 1,
+   "timber_yard": 1,
+   "quarry": 3
+  },
+  "openSites": 16,
+  "stoneHeldByStorehouses": 0
+ }
+}

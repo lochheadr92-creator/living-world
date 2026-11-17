@@ -1,0 +1,3 @@
+standard run: Milo (#1116) in river, tick 2400 to 14400
+end hash d4b798f0
+Milo: alive, health 79; needs hunger 14, thirst 68, energy 35, warmth 72, safety 83, social 43; carrying 1 seeds, 2 wood; lifetime {"gathered":24,"given":0,"received":2,"built":1,"talked":6,"farmed":5,"crafted":0}; knows 415 places; promises 1

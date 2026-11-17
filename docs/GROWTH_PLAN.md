@@ -1271,7 +1271,7 @@ Final counts: aspen 69, birch 1, cedar 86, fern 0, gen-1 55, gen-2 0, gen-3 132,
 - **Wild food is eaten down as the settlement grows**, which is a third resource going the way of the trees. Standing wild food as a share of its capacity on ordinary days: median 0.92 at 20 to 59 people, 0.80 at 60 to 99, 0.62 at 100 to 139, 0.48 at 140 to 179, 0.37 at 180 or more. The lean season then cuts what is left to a tenth, and with little left (under 0.15 a head, 3 seasons) 75 percent died in 10 days (gen-5 day 183: 8 units for 226 people, 228 dead; meadow day 200: 10 for 190, 158 dead).
 - **What this points at** (a reading, not a test): a lean season is survivable when the store at its start is a week or more, and the store is made by the same people who eat the wild food down; so a lever on how much is put by for a lean year, or on wild food being allowed to recover (regrowth is doubled since 226, which is not keeping up above 100 people), would be the next lean-season lever. Not built, and not separated from each other here.
 
-## Rules 252 to 255: wood, the lean-season store, food that grows, and farming (built 17 November 2026, owner's direction; measured: not yet)
+## Rules 252 to 255: wood, the lean-season store, food that grows, and farming (built 17 November 2026, owner's direction; measured on 17 November 2026, one run per world)
 
 The owner's reading of the stage-6 and lean-season results: store more, grow more and grow it faster, make farming more attractive, and give people a want for a source that does not run out. Four rules versions, each a first dose and not a measured one, each with its own lab switch, test and continuation pin (`tests/v252_continuation.*` to `tests/v255_continuation.*`, recorded from the working tree at `95ce6377` plus the uncommitted 251 to 255, so not from a clean checkout):
 
@@ -1280,4 +1280,23 @@ The owner's reading of the stage-6 and lean-season results: store more, grow mor
 - **254, more food grows, and faster** (`grow_more.ts`, arms `rich-no-grow-more[-wild|-crops]`): wild food comes back four times as fast (from two) and a ripened plot carries three times the grain (from two). A place holds no more than before. Reason: wild food standing falls to 0.37 of capacity at 180 or more people.
 - **255, farming draws people, most when the wild food they know is thinning** (`farm_draw.ts`, arms `rich-no-farm-draw[-base|-thin]`): every field option gains a flat 4 and up to 12 more by how far short of 0.6 of capacity the wild food the person has seen in the last two days stands (at least three places, seen firsthand). Reason: the weighing of a field never looked at whether the wild food was running out.
 
-**Measured so far: nothing.** Eight 96-day runs from the day-96 saves of fern, meadow, birch and cedar are under way (252 and 253), with 251's original traces as the control for 252 and the 252 runs as the control for 253; 254 and 255 get the same treatment after. One run each, a description. No benefit is claimed for any of the four. Not built: seed supply for the fields (a household with no seeds still cannot plant), more wild capacity per place, and a want for sources that do not run out beyond the thinning draw.
+**Measured (17 November 2026, `review_evidence/stage7-20261117/`).** Sixteen 96-day runs from the day-96 saves of fern, meadow, birch and cedar, each run at a version above the one before it (so 254 includes 252 and 253, and 255 all of them), 251's original traces as the control. One run per world and version, a description with no noise floor, and each run's weather and arrivals differ from its neighbour's after the first change, so no benefit is claimed. Totals over the four worlds, days 96 to 192:
+
+| rules | deaths | alive at day 192 | buildings at day 192 |
+|---|---|---|---|
+| 251 | 398 | 401 | 292 |
+| 252 | 161 | 706 | 663 |
+| 253 | 145 | 683 | 706 |
+| 254 | 13 | 970 | 699 |
+| 255 | 194 | 715 | 542 |
+
+- **252:** the forest stays at 450 to 860 trees where 251 had none by day 168 to 192; fern and birch no longer collapse (190 and 151 alive against 2 and 69). Confirms the stage-6 cause for the collapse that ended at the winter store.
+- **253:** fern deaths 47 to 6; birch worse (59 to 90, a 46-person die-off at winter start with 16 units in store); cedar and meadow about flat. Mixed, not attributed.
+- **254:** no world has a winter die-off (13 deaths in all, 0 to 6 a world), the store at day 192 is 1,000 to 2,000 units (253: 6 to 760), and people reach 223 to 279. The clearest change of the four.
+- **255:** meadow, birch and cedar are within 40 people of 254 (247, 241, 227 against 279, 243, 223). Fern died of thirst on days 146 to 148 (179 to none).
+
+**The fern 255 death is the water, not the farm draw.** Replayed from a rerun's day-144 save with the farm draw on and with it switched off, both die the same way (`probe-draw-on.txt`, `probe-draw-off.txt`): the 17 wells' ground water is already 0 and the lake falls 210 to 0 by day 145, with 177 people drawing about 400 units a day. The saves show the stock (ground plus lake, 7,300 at full) at 6,800 on day 120, falling with rain on only a few days to 0 by day 144 (`scripts/water_series.ts`). So a settlement of 150 to 180 on 17 wells and one lake holds about 17 days of water, and a dry stretch of about ten days after the last rain finishes it. The weather is a chain drawn from the world's random numbers, so a changed run has its own weather; whether the same fern at 254 met the same dry stretch is not known (its run kept 175 people on 18 wells and did not run dry). This is the same kind of failure as gen-5's two-day water collapse noted earlier. It matters more now: 254 grows settlements to 220 to 280 people, and the water margin does not grow with them. Whether to answer it (more wells wanted before the stock falls, a larger ground per well, water stored at home) is the owner's choice and is not built.
+
+Found on the way: the day-138 save of that rerun does not load (`Invalid recovered workshop batch`, `src/sim/recovered_workshops.ts`), though the days 140 to 146 saves do. A save the program wrote and will not read back; not looked into.
+
+Other items still open: seed supply for the fields, more wild capacity per place, the brain baseline, and 249 to 251 paired comparisons.

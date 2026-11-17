@@ -1,0 +1,20 @@
+d144.20 alive 177 thirsty<35 59 meanThirst 54 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 210/3220 | thirstyDoing drink52 converse3 visit2 socialize1 explore1 | allDoing drink61 converse32 gather26 withdraw11 socialize9 deposit6
+d144.40 alive 177 thirsty<35 50 meanThirst 51 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 141/3220 | thirstyDoing drink38 converse5 explore3 visit2 socialize1 eat1 | allDoing drink55 converse28 socialize15 gather15 attend13 wander11
+d144.60 alive 177 thirsty<35 39 meanThirst 54 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 51/3220 | thirstyDoing drink25 sleep5 converse4 idle2 visit1 wander1 | allDoing sleep129 drink31 converse8 idle2 deposit1 gather1
+d144.80 alive 179 thirsty<35 55 meanThirst 50 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 17/3220 | thirstyDoing drink33 sleep19 visit2 idle1 | allDoing sleep105 drink39 rest30 visit2 explore2 idle1
+d145.00 alive 179 thirsty<35 82 meanThirst 41 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink74 converse2 visit2 explore2 deposit1 socialize1 | allDoing drink88 gather20 converse16 sleep14 socialize8 withdraw5
+d145.20 alive 179 thirsty<35 105 meanThirst 29 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink83 converse14 visit3 explore3 socialize2 | allDoing drink106 converse22 gather11 socialize10 withdraw5 sleep4
+d145.40 alive 175 thirsty<35 138 meanThirst 18 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink116 converse10 explore8 socialize2 rest1 visit1 | allDoing drink127 converse14 explore8 rest5 attend5 socialize3
+d145.60 alive 163 thirsty<35 145 meanThirst 11 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink128 sleep10 converse2 socialize2 visit2 eat_store1 | allDoing drink130 sleep26 converse2 socialize2 visit2 eat_store1
+d145.80 alive 156 thirsty<35 154 meanThirst 5 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink128 sleep15 socialize3 explore3 converse2 flee1 | allDoing drink128 sleep16 socialize3 explore3 converse2 flee1
+d146.00 alive 146 thirsty<35 144 meanThirst 3 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink137 converse4 explore2 socialize1 | allDoing drink137 converse4 explore3 socialize2
+d146.20 alive 101 thirsty<35 100 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink86 converse10 socialize2 visit1 explore1 | allDoing drink86 converse10 socialize2 visit1 explore1 wander1
+d146.40 alive 79 thirsty<35 78 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink70 converse4 socialize2 explore2 | allDoing drink70 converse4 socialize3 explore2
+d146.60 alive 35 thirsty<35 34 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink31 socialize1 visit1 explore1 | allDoing drink31 socialize1 visit1 explore1 sleep1
+d146.80 alive 23 thirsty<35 23 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink22 socialize1 | allDoing drink22 socialize1
+d147.00 alive 12 thirsty<35 12 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink9 converse2 rest1 | allDoing drink9 converse2 rest1
+d147.20 alive 3 thirsty<35 3 meanThirst 1 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink1 explore1 wander1 | allDoing drink1 explore1 wander1
+d147.40 alive 1 thirsty<35 1 meanThirst 0 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink1 | allDoing drink1
+d147.60 alive 1 thirsty<35 1 meanThirst 0 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink1 | allDoing drink1
+d147.80 alive 1 thirsty<35 1 meanThirst 0 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing drink1 | allDoing drink1
+d148.00 alive 0 thirsty<35 0 meanThirst 0 rain 0.00 wells 17 ground sum 0 empty<5 17 lake 0/3220 | thirstyDoing  | allDoing 
