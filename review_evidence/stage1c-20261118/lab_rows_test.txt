@@ -1,0 +1,33 @@
+﻿.\node_modules\.bin\vitest.cmd : (!) Your Vite config uses features that are unsupported by `configLoader: 
+'native'`, which is planned to become the default in a future major version of Vite:
+At line:1 char:282
++ ... xt").Count; .\node_modules\.bin\vitest.cmd run tests/lab_rows.test.ts ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((!) Your V...ersion of Vite::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file 
+extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ Γ£ô tests/lab_rows.test.ts (6 tests) 5133ms
+   Γ£ô the stage 1c lab rows (6)
+     Γ£ô agree with DayShape on a run: same waking time, same hungry cells, same company, leisure and walking for people 12 and over 5111ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  09:54:07
+   Duration  7.83s (tests 67%, transform 25%, import 8%)
+
+

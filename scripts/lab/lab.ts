@@ -156,8 +156,10 @@ import { setTownships, townshipsOn } from '../../src/sim/townships';
 // Nothing here is read by the simulation: interventions act on a deserialised copy, or flip a switch that is off by default and is never
 // saved or hashed (the option chooser, the wolf search memory).
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
-import { CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
-import { stageOf } from '../../src/sim/people';
+import { AGE_CHILD, CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
+import { ageYears, stageOf } from '../../src/sim/people';
+import { foodUnits } from '../../src/sim/economy';
+import { timeCategory } from '../observers/time_budget';
 import { metabolismOn, setLabRates, setMetabolism } from '../../src/sim/metabolism';
 import { COMPANY_PARTS, companyPartOn, setCompany } from '../../src/sim/company';
 import type { CompanyPart } from '../../src/sim/company';
@@ -843,6 +845,23 @@ export const METRICS = [
   // the burden itself, as person-time: awake and hungry (hunger below the drive's start, 62), awake and thirsty (thirst below 66),
   // and the fed window (awake with hunger, thirst and energy all above 65, the level coaching and foraging practice ask for)
   'hungryShare', 'thirstyShare', 'fedWindowShare',
+  // Stage 1c (plan of 17 November 2026), read only. The yardstick, with the observers' own categories (scripts/observers/time_budget.ts):
+  // company (social_contact) plus leisure (wander, alone) as a share of the waking time of people 12 and over, and the walking share
+  // (travel) of the same time. Sampled once a tick after the step. The share of waking time hungry (hungryShare, above) split by food
+  // to hand, as shares of ALL waking time so that the three add to hungryShare (to rounding): food in the pack; none in the pack but
+  // food in the home store; none in either (a household with no home building lands here). Which cell counts as "no food to hand" is an open decision.
+  'companyShare12', 'leisureShare12', 'companyLeisureShare12', 'walkingShare12',
+  'hungryPackShare', 'hungryStoreOnlyShare', 'hungryNoFoodShare',
+  // How often each built system fired, counted from state or from the end of an activity, never from the sim. Zero is a finding.
+  // sheep: acquired (tethered), shorn, slaughtered, lambs born (distinct lambs seen), sheep and kept sheep (tethered, owned) at the end;
+  // plots rested (a tend that prepared a field for rest) and plots resting at the end; unfinished work: notes kept through a hold,
+  // taken up again (the count put back), and spent without being put back; technique lessons learned, interrupted and declined (the
+  // timed lesson between two people); exchange journeys started, arrived (reached the counterparty) and fulfilled.
+  'sheepAcquired', 'sheepShorn', 'sheepSlaughtered', 'lambsBorn', 'sheepAtEnd', 'sheepKeptAtEnd',
+  'plotsRested', 'plotsRestingAtEnd',
+  'workNotesKept', 'workTakenUp', 'workNotesSpent',
+  'techLessonsLearned', 'techLessonsInterrupted', 'techLessonsDeclined',
+  'exchangeJourneysStarted', 'exchangeJourneysArrived', 'exchangeJourneysFulfilled',
   // what the life stream (rules 200 to 202) is for, counted over the whole branch: approaches that ended before any talk (a socialize
   // activity that ends is always one: an answered approach becomes the conversation) and their share of all approaches; talk about a
   // swap; markets called; apprentices at the end; times the fire went out and times it was fed; jobs finished at a timber yard; and
@@ -1089,6 +1108,32 @@ export class LifeTally {
   awakeTicks = 0; hungryTicks = 0; thirstyTicks = 0; fedTicks = 0;
   private byStage: Record<Stage, { life: number; all: number }> = { child: { life: 0, all: 0 }, youth: { life: 0, all: 0 }, adult: { life: 0, all: 0 }, elder: { life: 0, all: 0 } };
   personTicks = 0; parchedTicks = 0; coldTicks = 0;
+  /** Stage 1c: waking person-ticks of people 12 and over (AGE_CHILD), and how many of them were in company, at leisure and walking, by the
+   *  observers' own category (time_budget.ts timeCategory). Sampled once a tick, after the step. */
+  awake12 = 0; company12 = 0; leisure12 = 0; travel12 = 0;
+  /** Stage 1c: the hungry person-ticks (awake, hunger below 62, every age) by food to hand: in the pack (foodUnits of the pack above 0);
+   *  none in the pack but food in the household's home store; none in either (also a household with no home building). They add to hungryTicks. */
+  hungryPack = 0; hungryStoreOnly = 0; hungryNoFood = 0;
+  /** Stage 1c firing counts. Activity ends that finished (outcome success) and state read each tick; nothing is added to src/sim. */
+  sheepAcquired = 0; sheepShorn = 0; sheepSlaughtered = 0; plotsRested = 0;
+  /** unfinished work (picked_up.ts): notes of two or more ticks of progress kept through a hold, how many were put back when the person
+   *  stood where they stood and the piece was the same length, and how many were spent without being put back. Kept minus the other two
+   *  is what was still held at the end or went with an activity that ended. A note of one tick cannot be told from a fresh start, so none is counted. */
+  workNotesKept = 0; workTakenUp = 0; workNotesSpent = 0;
+  private lambs = new Set<number>();
+  private heldNotes = new WeakMap<Activity, number>();
+  /** every technique lesson seen, by conversation id, as it last stood */
+  private techLessons = new Map<number, string>();
+  /** every exchange journey seen, by id: whether it ever reached the counterparty (status talking or fulfilled), and its last status */
+  private journeys = new Map<number, { arrived: boolean; status: string }>();
+  get lambsBorn(): number { return this.lambs.size; }
+  private lessonCount(outcome: string): number { let n = 0; for (const o of this.techLessons.values()) if (o === outcome) n++; return n; }
+  get techLessonsLearned(): number { return this.lessonCount('learned'); }
+  get techLessonsInterrupted(): number { return this.lessonCount('interrupted'); }
+  get techLessonsDeclined(): number { return this.lessonCount('declined'); }
+  get exchangeJourneysStarted(): number { return this.journeys.size; }
+  get exchangeJourneysArrived(): number { let n = 0; for (const j of this.journeys.values()) if (j.arrived) n++; return n; }
+  get exchangeJourneysFulfilled(): number { let n = 0; for (const j of this.journeys.values()) if (j.status === 'fulfilled') n++; return n; }
   static readonly SURVIVAL = new Set<string>(['eat', 'eat_store', 'drink', 'fetch_water', 'warm', 'flee', 'defend', 'hunt', 'butcher', 'fuel_fire', 'search']);
   static readonly SLEEP = new Set<string>(['sleep', 'rest']);
   static readonly LIFE = new Set<string>(['socialize', 'converse', 'attend', 'attend_meal', 'host_meal', 'visit', 'pay_respects', 'wander', 'alone', 'argue']);
@@ -1105,6 +1150,9 @@ export class LifeTally {
     // an approach that is answered turns into the conversation (its kind becomes 'converse'), so a socialize activity that ENDS never was
     if (a.kind === 'socialize') this.approachesFailed++;
     if (outcome !== 'success') return;
+    // Stage 1c firing counts: a sheep job that finished, and a tend that prepared a field for rest (act_farm.ts sets fallowUntil on that path)
+    if (a.kind === 'animal_work') { const op = a.data.op; if (op === 'acquire') this.sheepAcquired++; else if (op === 'shear') this.sheepShorn++; else if (op === 'slaughter') this.sheepSlaughtered++; }
+    else if (a.kind === 'tend' && a.data.ecologyRest) this.plotsRested++;
     if (a.kind === 'deposit' && a.data.basketRoom) this.basketRoomTrips++;
     if (a.kind === 'deposit' && a.data.ration) this.rationTrips++;
     if (a.kind === 'deposit' && a.data.packMaterials) this.materialsHomeTrips++;
@@ -1127,7 +1175,9 @@ export class LifeTally {
   }
   tick(w: World): void {
     if (w.tick % DAY === 0 && w.hardship) { if (w.hardship.kind === 'dry') this.dryDays++; else this.leanDays++; }
+    for (const a of w.animals) if (a.type === 'sheep' && a.sheep && a.sheep.origin === 'birth') this.lambs.add(a.id);
     for (const c of w.conversations) {
+      if (c.lesson) this.techLessons.set(c.id, c.lesson.outcome);
       if (c.purpose === 'play_together' && c.childhood) this.games.set(c.id, { outcome: c.childhood.outcome, reason: c.childhood.reason, game: c.childhood.game ?? 'guess' });
       if (c.purpose === 'learn_foraging' && c.childhood) {
         const teacher = w.byId.get(c.b);
@@ -1156,14 +1206,45 @@ export class LifeTally {
       else if (w.events[i].text.includes('site was abandoned')) this.sitesAbandoned++;
     }
     if (w.events.length) this.lastEvent = Math.max(this.lastEvent, w.events[w.events.length - 1].id);
+    let homeOf: Map<number, number> | null = null; // household id -> home building id, built when the first hungry person of the tick needs it
     for (const p of w.persons) {
       if (!p.alive) continue;
       this.personTicks++;
       if (p.needs.thirst < CRITICAL.thirst) this.parchedTicks++;
       if (p.needs.warmth < CRITICAL.warmth) this.coldTicks++;
+      // Stage 1c: exchange journeys and held work, read from the person's own records and activity (sleeping people included)
+      for (const j of p.exchangeJourneys ?? []) {
+        const seen = this.journeys.get(j.id);
+        this.journeys.set(j.id, { arrived: !!seen?.arrived || j.status === 'talking' || j.status === 'fulfilled', status: j.status });
+      }
+      const act = p.activity;
+      if (act) {
+        const kept = act.data.kept as { progress: number } | undefined;
+        if (kept) {
+          if (kept.progress >= 2 && !this.heldNotes.has(act)) { this.heldNotes.set(act, kept.progress); this.workNotesKept++; }
+        } else if (this.heldNotes.has(act)) {
+          // the note is gone: put back if the work has resumed with at least the kept count (a spent note leaves 0 or 1 tick of progress)
+          const was = this.heldNotes.get(act)!;
+          this.heldNotes.delete(act);
+          if (act.phase === 'work' && act.progress >= was) this.workTakenUp++; else this.workNotesSpent++;
+        }
+      }
       if (p.pose === 'sleep') continue;
       this.awakeTicks++;
-      if (p.needs.hunger < 62) this.hungryTicks++;
+      if (ageYears(w, p) >= AGE_CHILD) {
+        this.awake12++;
+        const cat = timeCategory(p, w.tick);
+        if (cat === 'social_contact') this.company12++; else if (cat === 'leisure') this.leisure12++; else if (cat === 'travel') this.travel12++;
+      }
+      if (p.needs.hunger < 62) {
+        this.hungryTicks++;
+        if (foodUnits(p.inv) > 0) this.hungryPack++;
+        else {
+          homeOf ??= new Map(w.households.map((h) => [h.id, h.homeId]));
+          const home = w.byId.get(homeOf.get(p.hhId) ?? 0);
+          if (home && home.ent === 'building' && foodUnits(home.store.items) > 0) this.hungryStoreOnly++; else this.hungryNoFood++;
+        }
+      }
       { const b = bandOf(w, p) ?? 'older'; this.awakeBand[b]++; if (p.needs.hunger < 62) this.hungryBand[b]++; }
       if (p.needs.thirst < 66) this.thirstyTicks++;
       if (Math.min(p.needs.hunger, p.needs.thirst, p.needs.energy) > 65) this.fedTicks++;
@@ -1176,6 +1257,15 @@ export class LifeTally {
   get workShare(): number { return this.share(this.time.work, this.all); }
   get sleepShare(): number { return this.share(this.time.sleep, this.all); }
   get hungryShare(): number { return this.share(this.hungryTicks, this.awakeTicks); }
+  /** Stage 1c: the yardstick and its parts (people 12 and over, waking time) */
+  get companyShare12(): number { return this.share(this.company12, this.awake12); }
+  get leisureShare12(): number { return this.share(this.leisure12, this.awake12); }
+  get companyLeisureShare12(): number { return this.share(this.company12 + this.leisure12, this.awake12); }
+  get walkingShare12(): number { return this.share(this.travel12, this.awake12); }
+  /** Stage 1c: hungry time by food to hand, each as a share of ALL waking time (so the three add to hungryShare, to rounding) */
+  get hungryPackShare(): number { return this.share(this.hungryPack, this.awakeTicks); }
+  get hungryStoreOnlyShare(): number { return this.share(this.hungryStoreOnly, this.awakeTicks); }
+  get hungryNoFoodShare(): number { return this.share(this.hungryNoFood, this.awakeTicks); }
   get thirstyShare(): number { return this.share(this.thirstyTicks, this.awakeTicks); }
   get fedWindowShare(): number { return this.share(this.fedTicks, this.awakeTicks); }
   stageShare(s: Stage): number { return this.share(this.byStage[s].life, this.byStage[s].all); }
@@ -1317,6 +1407,30 @@ export function outcomeOf(
       hungryShare: life.hungryShare,
       thirstyShare: life.thirstyShare,
       fedWindowShare: life.fedWindowShare,
+      companyShare12: life.companyShare12,
+      leisureShare12: life.leisureShare12,
+      companyLeisureShare12: life.companyLeisureShare12,
+      walkingShare12: life.walkingShare12,
+      hungryPackShare: life.hungryPackShare,
+      hungryStoreOnlyShare: life.hungryStoreOnlyShare,
+      hungryNoFoodShare: life.hungryNoFoodShare,
+      sheepAcquired: life.sheepAcquired,
+      sheepShorn: life.sheepShorn,
+      sheepSlaughtered: life.sheepSlaughtered,
+      lambsBorn: life.lambsBorn,
+      sheepAtEnd: w.animals.filter((a) => a.type === 'sheep').length,
+      sheepKeptAtEnd: w.animals.filter((a) => a.type === 'sheep' && a.sheep && a.sheep.tether && a.sheep.hhId > 0).length,
+      plotsRested: life.plotsRested,
+      plotsRestingAtEnd: w.plots.filter((pl) => pl.fallowUntil !== undefined && pl.fallowUntil > w.tick).length,
+      workNotesKept: life.workNotesKept,
+      workTakenUp: life.workTakenUp,
+      workNotesSpent: life.workNotesSpent,
+      techLessonsLearned: life.techLessonsLearned,
+      techLessonsInterrupted: life.techLessonsInterrupted,
+      techLessonsDeclined: life.techLessonsDeclined,
+      exchangeJourneysStarted: life.exchangeJourneysStarted,
+      exchangeJourneysArrived: life.exchangeJourneysArrived,
+      exchangeJourneysFulfilled: life.exchangeJourneysFulfilled,
       approachesFailed: life.approachesFailed,
       approachFailShare: life.approachFailShare,
       tradeTalk: life.tradeTalk,
