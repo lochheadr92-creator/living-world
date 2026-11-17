@@ -1,0 +1,11 @@
+seed river day 1 tick 2400 living 28 identical true seconds 11
+seed river day 2 tick 4800 living 28 identical true seconds 21
+seed river day 3 tick 7200 living 28 identical true seconds 32
+seed river day 4 tick 9600 living 28 identical true seconds 43
+seed river day 5 tick 12000 living 28 identical true seconds 55
+seed river day 6 tick 14400 living 28 identical true seconds 68
+seed river day 7 tick 16800 living 28 identical true seconds 80
+seed river day 8 tick 19200 living 28 identical true seconds 93
+seed river day 9 tick 21600 living 28 identical true seconds 105
+seed river day 10 tick 24000 living 29 identical true seconds 117
+VERDICT seed river days 10 identical_every_day true self_checks_true true of 15

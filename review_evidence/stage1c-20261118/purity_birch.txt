@@ -1,0 +1,11 @@
+seed birch day 1 tick 2400 living 28 identical true seconds 10
+seed birch day 2 tick 4800 living 28 identical true seconds 19
+seed birch day 3 tick 7200 living 28 identical true seconds 29
+seed birch day 4 tick 9600 living 28 identical true seconds 41
+seed birch day 5 tick 12000 living 28 identical true seconds 51
+seed birch day 6 tick 14400 living 28 identical true seconds 63
+seed birch day 7 tick 16800 living 28 identical true seconds 73
+seed birch day 8 tick 19200 living 28 identical true seconds 87
+seed birch day 9 tick 21600 living 28 identical true seconds 97
+seed birch day 10 tick 24000 living 28 identical true seconds 108
+VERDICT seed birch days 10 identical_every_day true self_checks_true true of 15
