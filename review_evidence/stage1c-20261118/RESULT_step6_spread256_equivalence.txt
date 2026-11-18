@@ -1,0 +1,59 @@
+
+STAGE 1C STEP 6. THE SPREAD AFTER (RULES 256) AND THE EQUIVALENCE READING. RESULT.
+Scored against readings_step6_spread256.txt (committed bd0760eb before any run). Not pushed.
+
+CODE UNDER TEST
+  Integrate checkout at bd0760eb, then 2ac03408 (adds only review_evidence/stage1d-20261118). `git diff bd0760eb HEAD -- scripts src
+  package.json package-lock.json vite.config.ts` is empty, so no source file changed during the runs (VERIFIED). Provenance of the
+  spread runs: head bd0760eb, dirty false, no modified files (VERIFIED, provenance.json in each dir).
+
+PART A. THE SPREAD AT 256 (finished 12:20 and 12:36 on 18 November; the machine was fully loaded, which changes time, not results)
+  Same three saves as step 4 (day 48, rules 250, raised with --rules-up 256), control, nudge:1, nudge:2, 12 days and 24 days.
+  Data: spread_256_d12 and spread_256_d24 (rows, report, provenance, analysis.txt, compare_vs_255.txt). Scoring: score_step6.mjs,
+  output in spread_256_scoring.txt.
+
+  STOP CONDITION 1 (VERIFIED): does not fire. At 24 days control, nudge:1 and nudge:2 end with three different hashes in all three
+  worlds (aspen f14b67a2, 79683765, 861b635a; gen-4 67534a2d, b563d908, c9fe9fc8; river efcc1f87, f31e8c3d, b26726be). Same at 12
+  days. Step 8 may run on the nudge as a reference. (The 12 seed fresh-world half of the check is Part B below.)
+
+  EXPECTATIONS, SCORED
+  1. Nudge live, three different hashes at 12 and 24 days in each world: HELD, VERIFIED (all six world and horizon sets). The
+     expectation that an absorbed arm is more likely at 256 than at 255 did not show: 0 of 6 arms absorbed at 256 (the 24 day arms
+     repeat the 12 day arms for their first 12 days, so this is six arms, not twelve). At 255 aspen nudge:2 was absorbed at both horizons.
+  2. More rows narrower than wider in every world at 12 days: HELD IN 2 OF 3. aspen narrower 6, wider 7 (fails); gen-4 12 against 4;
+     river 9 against 8 (by one row). Only gen-4 shows a wide margin. At 24 days: aspen 5 against 10 (wider at 256), gen-4 14 against 1,
+     river 13 against 6. So the narrowing is clear in gen-4, weak in river, and absent in aspen. (Rows counted: the ones not zero in
+     all six arms; 16 to 21 per world.)
+  3. The four yardstick shares not wider at 256 than at 255 in at least two of three worlds: AMBIGUOUS AS WRITTEN, scored both ways.
+     Strict reading (no share wider): 12 days, wider counts 2, 3, 1, so it fails in all three worlds. Majority reading (narrower or tied
+     on at least two of four): 12 days aspen 2, gen-4 1, river 3, so held in aspen and river, failed in gen-4; 24 days aspen 1, gen-4 4,
+     river 3, so held in gen-4 and river, failed in aspen. Result: NOT SUPPORTED on the strict reading, MIXED on the majority one.
+  4. people and deaths ranges not wider at 256 than at 255 in at least two of three worlds: HELD at both horizons (gen-4 and river;
+     aspen is wider on one or both). These are integers of 0 to 5, so this carries little weight.
+  5. At 24 days the ranges are wider than at 12 days at both versions and the narrowing is smaller or gone: NOT SUPPORTED. The 24 day
+     range is wider on more rows than narrower only in gen-4 (255: 10 against 5; 256: 11 against 4). In aspen and river it is narrower
+     on more rows at both versions. The net narrowing at 256 is larger at 24 days than at 12 in gen-4 (13 against 8) and river (7
+     against 1), and goes the other way in aspen (-5 against -1).
+  6. The mean of a row at 256 sits inside the 255 range for most rows: HELD AT 12 DAYS, NOT AT 24. 37 of 54 rows (69%) at 12 days;
+     28 of 55 (51%) at 24 days, with aspen 7 of 17 and river 10 of 21. The 255 range is a range of three values (two for aspen, where
+     one nudged arm was absorbed), so "inside" is a hard test.
+
+  WHAT IT SAYS (and what it does not)
+  - The brief expected the spread to shrink by construction. It did in gen-4, a little in river, and did not in aspen. Pooled over
+    the three worlds the net count of narrower over wider rows is +8 at 12 days and +15 at 24, which is a lean, and with three values
+    per range it is not a result.
+  - Aspen's 255 spread rests on two distinct trajectories (control equals nudge:2 at 255, step 4 note). Its 255 ranges are therefore
+    ranges of two values and look narrower than a three arm range would. Part of aspen's "wider at 256" is that, UNKNOWN how much.
+  - Why a nudge still widens the yardstick at 256 is not tested here. LIKELY: births, old age deaths and wildlife stay on the shared
+    stream and move with a nudge, and they feed back into who is awake, who is hungry and who is in company. Which of them does it
+    would need arms that perturb one of them, which is not done here.
+  - For step 8 this means the reference spread is a spread of the shared stream remainder and is not tighter than the 255 spread in
+    a way that can be counted on. The move rule (outside the range by one range, floors 1 and 0.5 points) is unchanged and is read
+    against whatever range the three arms give in that save.
+  - No benefit is claimed for 256 from this step.
+
+  Means at 256, 12 days, companyLeisureShare12: aspen 10.78%, gen-4 9.81%, river 11.73% (255: 10.10, 10.08, 11.50). Numbers only.
+
+PART B. EQUIVALENCE FROM FRESH WORLDS, 255 AGAINST 256
+  Pending. eq255 finished 12:37:23 (36 arms). eq256 started 12:37:23. It is read when it ends, with lab_versions.ts, against the
+  verdict wording fixed in the readings. The check of seeds whose control and nudge:1 end with the same hash at 25 days is part of it.

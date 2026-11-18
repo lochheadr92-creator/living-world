@@ -1,0 +1,104 @@
+Spread, earlier spread_255_d12
+        against later C:\dev\lw_runs\stage1c_spread256_d12
+
+WORLD aspen-day48
+hashes earlier: control=a4af2978  nudge:1=422ecfbe  nudge:2=a4af2978
+hashes later:   control=a82ef09a  nudge:1=d47b5c4a  nudge:2=5eb13c6f
+distinct final hashes among the three arms: earlier 2, later 3   control = nudge:1 at the later version: false
+row                         range earlier   range later   later is   mean earlier   mean later   later mean inside earlier range
+companyShare12                      0.56%         0.60%      wider          9.95%       10.48%                             false
+leisureShare12                      0.18%         0.08%   narrower          0.15%        0.30%                             false
+companyLeisureShare12               0.38%         0.55%      wider         10.10%       10.78%                             false
+walkingShare12                      5.60%         0.50%   narrower         50.33%       50.72%                              true
+hungryPackShare                     0.94%         0.15%   narrower         30.42%       32.39%                             false
+hungryStoreOnlyShare                0.03%         0.85%      wider          1.52%        1.47%                             false
+hungryNoFoodShare                   3.37%         1.02%   narrower         19.48%       19.18%                              true
+hungryShare                         4.29%         1.46%   narrower         51.42%       53.03%                              true
+sheepAcquired             absent in both
+sheepShorn                absent in both
+sheepSlaughtered          absent in both
+lambsBorn                 absent in both
+sheepAtEnd                absent in both
+sheepKeptAtEnd            absent in both
+plotsRested                             5             4   narrower           9.67         9.67                              true
+plotsRestingAtEnd                       1             3      wider           4.33         4.33                              true
+workNotesKept                          28            28       tied         103.33       107.33                              true
+workTakenUp                            14            24      wider          57.67        58.67                              true
+workNotesSpent                          1             1       tied           0.67         0.67                              true
+techLessonsLearned        absent in both
+techLessonsInterrupted    absent in both
+techLessonsDeclined                     5             5       tied          12.33        10.33                              true
+exchangeJourneysStarted   absent in both
+exchangeJourneysArrived   absent in both
+exchangeJourneysFulfilled absent in both
+people                                  1             2      wider          60.33           60                              true
+deaths                                  0             1      wider              0         0.33                             false
+TALLY aspen-day48: all rows narrower 6, wider 7, tied 3, absent 11; yardstick shares (4) narrower 2, wider 2, tied 0; people and deaths narrower 0, wider 2, tied 0
+
+WORLD gen-4-day48
+hashes earlier: control=5014fe2e  nudge:1=0177cb93  nudge:2=6fa8f18a
+hashes later:   control=703cbf6d  nudge:1=5577cddd  nudge:2=8d914d0f
+distinct final hashes among the three arms: earlier 3, later 3   control = nudge:1 at the later version: false
+row                         range earlier   range later   later is   mean earlier   mean later   later mean inside earlier range
+companyShare12                      0.47%         1.41%      wider          9.99%        9.66%                             false
+leisureShare12                      0.16%         0.17%      wider          0.09%        0.16%                              true
+companyLeisureShare12               0.45%         1.57%      wider         10.08%        9.81%                             false
+walkingShare12                      9.95%         0.33%   narrower         48.28%       52.99%                             false
+hungryPackShare                     0.76%         0.58%   narrower         33.21%       32.88%                             false
+hungryStoreOnlyShare                1.73%         0.41%   narrower          2.57%        2.98%                              true
+hungryNoFoodShare                   8.95%         0.81%   narrower         18.05%       18.69%                              true
+hungryShare                         6.46%         0.66%   narrower         53.84%       54.56%                              true
+sheepAcquired             absent in both
+sheepShorn                absent in both
+sheepSlaughtered          absent in both
+lambsBorn                 absent in both
+sheepAtEnd                absent in both
+sheepKeptAtEnd            absent in both
+plotsRested                            10             6   narrower          24.33        23.33                              true
+plotsRestingAtEnd                       5             1   narrower           3.67         1.33                              true
+workNotesKept                          15             7   narrower          95.33        79.67                             false
+workTakenUp                             8             1   narrower             50        42.67                             false
+workNotesSpent                          1             1       tied           0.67         0.67                              true
+techLessonsLearned                      1             0   narrower           0.33            0                              true
+techLessonsInterrupted    absent in both
+techLessonsDeclined                     5             9      wider              8         7.33                              true
+exchangeJourneysStarted   absent in both
+exchangeJourneysArrived   absent in both
+exchangeJourneysFulfilled absent in both
+people                                  3             1   narrower          65.33        60.67                             false
+deaths                                  1             0   narrower           0.33            0                              true
+TALLY gen-4-day48: all rows narrower 12, wider 4, tied 1, absent 10; yardstick shares (4) narrower 1, wider 3, tied 0; people and deaths narrower 2, wider 0, tied 0
+
+WORLD river-day48
+hashes earlier: control=b770ab3d  nudge:1=6a2bcf1f  nudge:2=612e64f9
+hashes later:   control=f2fbd409  nudge:1=5f26c77c  nudge:2=ee3be4c1
+distinct final hashes among the three arms: earlier 3, later 3   control = nudge:1 at the later version: false
+row                         range earlier   range later   later is   mean earlier   mean later   later mean inside earlier range
+companyShare12                      1.31%         0.54%   narrower         11.23%       11.51%                              true
+leisureShare12                      0.14%         0.21%      wider          0.28%        0.22%                              true
+companyLeisureShare12               1.38%         0.39%   narrower         11.50%       11.73%                              true
+walkingShare12                      1.07%         0.36%   narrower         53.05%       53.11%                              true
+hungryPackShare                     1.88%         1.36%   narrower         32.01%       31.08%                              true
+hungryStoreOnlyShare                1.13%         1.15%      wider          2.45%        2.58%                              true
+hungryNoFoodShare                   4.87%         2.54%   narrower         19.24%       18.74%                              true
+hungryShare                         4.40%         1.17%   narrower         53.70%       52.40%                              true
+sheepAcquired                           0             2      wider              1            1                              true
+sheepShorn                              3             7      wider           4.67            4                              true
+sheepSlaughtered          absent in both
+lambsBorn                 absent in both
+sheepAtEnd                              0             0       tied              1            1                              true
+sheepKeptAtEnd                          1             1       tied           0.67         0.67                              true
+plotsRested                             1            13      wider          17.67        27.67                             false
+plotsRestingAtEnd                       2             2       tied              2            3                              true
+workNotesKept                           7            35      wider          93.33       108.67                             false
+workTakenUp                             2            19      wider             45           61                             false
+workNotesSpent                          4             2   narrower           1.33         0.67                              true
+techLessonsLearned                      1             1       tied           0.33         1.33                             false
+techLessonsInterrupted    absent in both
+techLessonsDeclined                     4             8      wider              8            9                              true
+exchangeJourneysStarted   absent in both
+exchangeJourneysArrived   absent in both
+exchangeJourneysFulfilled absent in both
+people                                  5             1   narrower          63.33        65.33                              true
+deaths                                  1             0   narrower           0.33            0                              true
+TALLY river-day48: all rows narrower 9, wider 8, tied 4, absent 6; yardstick shares (4) narrower 3, wider 1, tied 0; people and deaths narrower 2, wider 0, tied 0

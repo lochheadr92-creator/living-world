@@ -1,0 +1,94 @@
+Spread at the reference arms, from C:\dev\lw_runs\stage1c_spread256_d24
+
+WORLD aspen-day48   arms: control, nudge:1, nudge:2
+hashes: control=f14b67a2  nudge:1=79683765  nudge:2=861b635a
+row                            control   nudge:1   nudge:2     range      mean  range/mean
+companyShare12                  10.11%    10.24%     9.87%     0.37%    10.07%          4%
+leisureShare12                   0.31%     0.21%     0.21%     0.10%     0.24%         41%
+companyLeisureShare12           10.42%    10.46%    10.08%     0.38%    10.32%          4%
+walkingShare12                  53.63%    54.53%    54.13%     0.90%    54.10%          2%
+hungryPackShare                 32.78%    33.01%    32.24%     0.77%    32.68%          2%
+hungryStoreOnlyShare             2.48%     2.39%     2.17%     0.31%     2.35%         13%
+hungryNoFoodShare               16.11%    16.85%    18.03%     1.92%    17.00%         11%
+hungryShare                     51.37%    52.25%    52.44%     1.07%    52.02%          2%
+sheepAcquired                        0         0         0         0         0      absent
+sheepShorn                           0         0         0         0         0      absent
+sheepSlaughtered                     0         0         0         0         0      absent
+lambsBorn                            0         0         0         0         0      absent
+sheepAtEnd                           0         0         0         0         0      absent
+sheepKeptAtEnd                       0         0         0         0         0      absent
+plotsRested                         39        40        37         3     38.67          8%
+plotsRestingAtEnd                    2         2         2         0         2          0%
+workNotesKept                      227       212       205        22    214.67         10%
+workTakenUp                        119        96       107        23    107.33         21%
+workNotesSpent                       2         2         2         0         2          0%
+techLessonsLearned                   0         0         0         0         0      absent
+techLessonsInterrupted               0         0         0         0         0      absent
+techLessonsDeclined                 24        26        19         7        23         30%
+exchangeJourneysStarted              0         0         0         0         0      absent
+exchangeJourneysArrived              0         0         0         0         0      absent
+exchangeJourneysFulfilled            0         0         0         0         0      absent
+people                              73        72        73         1     72.67          1%
+deaths                               0         1         0         1      0.33        300%
+
+WORLD gen-4-day48   arms: control, nudge:1, nudge:2
+hashes: control=67534a2d  nudge:1=b563d908  nudge:2=c9fe9fc8
+row                            control   nudge:1   nudge:2     range      mean  range/mean
+companyShare12                   9.91%     9.54%    10.88%     1.34%    10.11%         13%
+leisureShare12                   0.34%     0.29%     0.30%     0.05%     0.31%         16%
+companyLeisureShare12           10.25%     9.83%    11.19%     1.36%    10.42%         13%
+walkingShare12                  54.97%    55.59%    54.87%     0.72%    55.14%          1%
+hungryPackShare                 32.29%    32.36%    32.67%     0.38%    32.44%          1%
+hungryStoreOnlyShare             2.53%     3.50%     2.74%     0.97%     2.92%         33%
+hungryNoFoodShare               19.01%    17.09%    18.25%     1.92%    18.12%         11%
+hungryShare                     53.83%    52.94%    53.66%     0.89%    53.48%          2%
+sheepAcquired                        0         0         0         0         0      absent
+sheepShorn                           0         0         0         0         0      absent
+sheepSlaughtered                     0         0         0         0         0      absent
+lambsBorn                            0         0         0         0         0      absent
+sheepAtEnd                           0         0         0         0         0      absent
+sheepKeptAtEnd                       0         0         0         0         0      absent
+plotsRested                         72        73        66         7     70.33         10%
+plotsRestingAtEnd                    4         2         3         2         3         67%
+workNotesKept                      199       189       173        26       187         14%
+workTakenUp                         99        94        89        10        94         11%
+workNotesSpent                       3         2         3         1      2.67         38%
+techLessonsLearned                   1         1         1         0         1          0%
+techLessonsInterrupted               0         0         0         0         0      absent
+techLessonsDeclined                 20        24        30        10     24.67         41%
+exchangeJourneysStarted              0         0         0         0         0      absent
+exchangeJourneysArrived              0         0         0         0         0      absent
+exchangeJourneysFulfilled            0         0         0         0         0      absent
+people                              70        76        78         8     74.67         11%
+deaths                               1         0         0         1      0.33        300%
+
+WORLD river-day48   arms: control, nudge:1, nudge:2
+hashes: control=efcc1f87  nudge:1=f31e8c3d  nudge:2=b26726be
+row                            control   nudge:1   nudge:2     range      mean  range/mean
+companyShare12                  10.75%    10.65%    10.64%     0.11%    10.68%          1%
+leisureShare12                   0.31%     0.21%     0.19%     0.12%     0.24%         51%
+companyLeisureShare12           11.06%    10.86%    10.84%     0.22%    10.92%          2%
+walkingShare12                  52.82%    51.98%    52.46%     0.84%    52.42%          2%
+hungryPackShare                 31.19%    32.65%    31.45%     1.46%    31.76%          5%
+hungryStoreOnlyShare             3.08%     3.33%     1.75%     1.58%     2.72%         58%
+hungryNoFoodShare               20.77%    19.44%    20.62%     1.33%    20.28%          7%
+hungryShare                     55.04%    55.43%    53.82%     1.61%    54.76%          3%
+sheepAcquired                        2         1         1         1      1.33         75%
+sheepShorn                          10        12         7         5      9.67         52%
+sheepSlaughtered                     0         0         0         0         0      absent
+lambsBorn                            0         0         0         0         0      absent
+sheepAtEnd                           1         1         1         0         1          0%
+sheepKeptAtEnd                       1         1         1         0         1          0%
+plotsRested                         56        66        71        15     64.33         23%
+plotsRestingAtEnd                    1         0         1         1      0.67        150%
+workNotesKept                      263       245       269        24       259          9%
+workTakenUp                        144       139       136         8    139.67          6%
+workNotesSpent                       2         4         3         2         3         67%
+techLessonsLearned                   4         2         3         2         3         67%
+techLessonsInterrupted               0         0         0         0         0      absent
+techLessonsDeclined                 12        15        18         6        15         40%
+exchangeJourneysStarted              0         0         0         0         0      absent
+exchangeJourneysArrived              0         0         0         0         0      absent
+exchangeJourneysFulfilled            0         0         0         0         0      absent
+people                              83        83        81         2     82.33          2%
+deaths                               0         0         0         0         0      absent
