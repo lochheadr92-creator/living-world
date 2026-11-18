@@ -5,12 +5,16 @@
 //                                        time on a machine with the cores; the rows are the ones the serial run writes. Default: parallel
 //                                        when --fork is 0 and --branches is given, serial otherwise, because each arm process replays the
 //                                        days before the fork.)
+//   node scripts/lab.mjs --saves a.save.json,b.save.json [--rules-up N] [--days 8] [--branches nudge:1,nudge:2,...] [--out dir]
+//                                       (from saved settlements: each arm continues the save for --days days; the save's own seed, rules
+//                                        version and arrivals are used, --rules-up raises the rules version, and a removal arm applies from
+//                                        the save's day on. --seeds, --fork, --profile, --dynamics, --arrivals and --rules are refused.)
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn, spawnSync } from 'node:child_process';
 import { cpus } from 'node:os';
 import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { basename, join } from 'node:path';
+import { basename, join, resolve } from 'node:path';
 
 const args = process.argv.slice(2);
 const opt = (name, dflt) => {
@@ -23,17 +27,34 @@ if (dynamics !== 'rich' && dynamics !== 'authored' && dynamics !== 'rich-unversi
   throw new Error('--dynamics must be one of rich, authored, rich-unversioned');
 }
 const n = Number(opt('seeds', '8'));
-const extra = ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profile', opt('profile', 'large')];
+// `--saves a.save.json,b.save.json [--rules-up N]` (stage 1c step 3): start every arm from a saved settlement instead of a fresh world. The
+// fork is each save's own day, `--days` is the days to CONTINUE, and the save's own seed, rules version and arrivals are used (a fresh-world
+// option given with --saves is refused). Each save is one entry, labelled by its file name without .save.json, so two saves of one seed at
+// two days are two entries. A removal arm applies from the save's day on; the report says so. Arms run side by side (--arms parallel).
+const savesArg = opt('saves', '');
+if (savesArg) for (const o of ['seeds', 'fork', 'profile', 'dynamics', 'arrivals', 'rules', 'geology-comparison']) if (args.includes('--' + o)) throw new Error(`--${o} cannot be combined with --saves: each save's own ${o === 'fork' ? 'day' : o} is used`);
+if (!savesArg && args.includes('--rules-up')) throw new Error('--rules-up only goes with --saves');
+const savePaths = new Map();
+for (const p of savesArg ? savesArg.split(',').filter(Boolean) : []) {
+  const label = basename(p).replace(/\.save\.json$|\.json$/, '');
+  if (savePaths.has(label)) throw new Error(`--saves: two saves are labelled ${label}; rename one`);
+  if (!existsSync(p)) throw new Error(`--saves: no such save: ${p}`);
+  savePaths.set(label, resolve(p));
+}
+const extra = savesArg ? ['--days', opt('days', '8')] : ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profile', opt('profile', 'large')];
 if (opt('branches', '')) extra.push('--branches', opt('branches', ''));
-extra.push('--dynamics', dynamics);
+if (savesArg && opt('rules-up', '')) extra.push('--rules-up', opt('rules-up', ''));
+if (!savesArg) extra.push('--dynamics', dynamics);
 if(opt('geology-comparison','no')==='yes')extra.push('--geology-comparison','yes');
 // both are validated by the guard below before any worker starts
 const arrivals = opt('arrivals', 'on');
 const pinnedRules = opt('rules', '');
-extra.push('--arrivals', arrivals);
+if (!savesArg) extra.push('--arrivals', arrivals);
 if (pinnedRules) extra.push('--rules', pinnedRules);
 const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen-2', 'gen-3', 'gen-4', 'gen-5', 'gen-6', ...Array.from({ length: 20 }, (_, i) => `nov-${i + 1}`)];
-const seeds = all.slice(0, n);
+const seeds = savesArg ? [...savePaths.keys()] : all.slice(0, n);
+// what a worker is told to start from: a fresh seed, or a save and its label
+const startArgs = (seed) => (savesArg ? ['--load', savePaths.get(seed), '--label', seed] : ['--seed', seed]);
 const cores = Math.max(1, cpus().length);
 const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
 // Keep the runner plain JavaScript on supported Node releases; the shared TS helper uses the same loader as workers.
@@ -51,7 +72,21 @@ const provenancePath = join(out, 'provenance.json');
 // and lives in scripts/lab/guard.ts, which owns it and can read the version constant. It runs here, before anything is
 // created and before any worker starts, and it only reads the existing files. It checks rules, arrivals and generation-comparison setting, not source provenance:
 // use a fresh directory after any source revision change.
-{
+if (savesArg) {
+  // From saves the rules version and arrivals are each save's own, so the guard's question (the rules this run asks for) does not apply.
+  // What decides whether finished rows can be resumed is the same save, raised the same way, continued the same number of days.
+  for (const [label, path] of savePaths) {
+    const file = join(out, `lab_${label}.jsonl`);
+    if (!existsSync(file)) continue;
+    for (const line of readFileSync(file, 'utf8').split('\n')) {
+      if (!line.trim()) continue;
+      const row = JSON.parse(line);
+      if (!row.spec) continue;
+      if (!row.fromSave || row.fromSave.path !== path || row.fromSave.rulesUp !== opt('rules-up', '') || String(row.days) !== String(opt('days', '8')))
+        throw new Error(`${file} holds results from another save, rules raise or number of days (${row.fromSave ? `${row.fromSave.path}, --rules-up ${row.fromSave.rulesUp || 'none'}, ${row.days} days` : 'a fresh world'}). Use a new output directory; old results were not changed.`);
+    }
+  }
+} else {
   const guard = spawnSync(process.execPath, [vite, join('scripts', 'lab', 'guard_cli.ts'), '--', '--out', out, '--seeds', seeds.join(','), '--dynamics', dynamics, '--geology-comparison', opt('geology-comparison','no'), '--arrivals', arrivals, ...(pinnedRules ? ['--rules', pinnedRules] : [])], {
     stdio: ['ignore', 'inherit', 'inherit'],
   });
@@ -94,7 +129,7 @@ const node = (script, rest, stdout) =>
   });
 
 const geology = opt('geology-comparison', 'no') === 'yes';
-const armsMode = opt('arms', opt('fork', '4') === '0' && opt('branches', '') && !geology ? 'parallel' : 'serial');
+const armsMode = opt('arms', (savesArg || opt('fork', '4') === '0') && opt('branches', '') && !geology ? 'parallel' : 'serial');
 if (armsMode !== 'parallel' && armsMode !== 'serial') throw new Error('--arms must be parallel or serial');
 if (armsMode === 'parallel' && (!opt('branches', '') || geology)) throw new Error('--arms parallel needs --branches and no geology comparison');
 const seedDone = (seed) => {
@@ -140,7 +175,7 @@ if (armsMode === 'parallel') {
     while (at < tasks.length) {
       const t = tasks[at++];
       const file = createWriteStream(armPath(t.seed, t.i));
-      const code = await node('scripts/lab_seed.ts', ['--seed', t.seed, '--arm', t.spec, ...extra.filter((_, k) => extra[k - 1] !== '--branches' && extra[k] !== '--branches')], file);
+      const code = await node('scripts/lab_seed.ts', [...startArgs(t.seed), '--arm', t.spec, ...extra.filter((_, k) => extra[k - 1] !== '--branches' && extra[k] !== '--branches')], file);
       await new Promise((r) => file.end(r));
       if (code !== 0) bad.add(t.seed);
       if (specs.every((_, i) => armDone(t.seed, i))) {
@@ -165,7 +200,7 @@ async function worker() {
       continue;
     }
     const file = createWriteStream(path);
-    const code = await node('scripts/lab_seed.ts', ['--seed', seed, ...extra], file);
+    const code = await node('scripts/lab_seed.ts', [...startArgs(seed), ...extra], file);
     await new Promise((r) => file.end(r));
     if (code !== 0) failed++;
     console.log(`seed ${seed} ${code === 0 ? 'done' : 'FAILED (' + code + ')'}  [${++finished}/${seeds.length}]`);

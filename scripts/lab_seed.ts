@@ -3,6 +3,8 @@ import {serializeWorld} from '../src/app/save';
 // One seed of the counterfactual lab (see scripts/lab/lab.ts). Prints one JSON line per branch.
 //   npx vite-node scripts/lab_seed.ts -- --seed meadow [--profile large] [--fork 4] [--days 8] [--branches nudge:1,nudge:2,...] [--sample 120]
 //     [--arrivals on|off] [--rules N] [--arm <spec>]
+//   npx vite-node scripts/lab_seed.ts -- --load <save point> [--rules-up N] [--label name] [--days 8] [--branches ...] [--sample 120] [--arm <spec>]
+//     from a saved settlement (see the note beside --load below); node scripts/lab.mjs --saves a.save.json,b.save.json runs several.
 // Run many seeds in parallel, then aggregate: node scripts/lab.mjs --out lab_out --seeds 8
 // `--arm control` (or any one branch spec) runs that one arm alone from the same fork and prints its row WITH its sampled hashes, so
 // the runner can run a seed's arms side by side and work out afterwards when each parted from the control (scripts/lab.mjs). An arm
@@ -15,6 +17,8 @@ import type { ProfileName } from '../src/sim/profiles';
 import { DEFAULT_BRANCHES, runLab, runBranch, parseIntervention } from './lab/lab';
 import { labProvenance, assertLabSourceUnchanged } from './observers/provenance';
 import { parseArrivals, parsePinnedRules } from './lab/guard';
+import { worldFromArgs } from './world_args';
+import { basename } from 'node:path';
 
 const provenance = labProvenance();
 
@@ -23,9 +27,22 @@ const opt = (name: string, dflt: string): string => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const seed = opt('seed', 'meadow');
-const profile = opt('profile', 'large') as ProfileName;
-const fork = Number(opt('fork', '4'));
+// `--load <save point> [--rules-up N] [--label name]` (stage 1c step 3): the lab starts from a saved settlement instead of a fresh world,
+// as scripts/generation_trace.ts does (scripts/world_args.ts `worldFromArgs`). The fork IS the save's own day, so every arm (control,
+// nudge:N, removal arms) starts from the same loaded world, applies its switch after the load, and `--days` is the number of days to
+// CONTINUE. The seed, profile, rules version and arrivals are the save's own (`--seed`, `--profile`, `--fork`, `--dynamics`, `--arrivals`
+// and `--rules` are refused, not ignored, so a command that reads as though it chose them cannot quietly run something else).
+// `--rules-up N` raises the loaded world's rules version, as in generation_trace.ts. The row's `seed` is `--label` (the save's file name
+// without .save.json by default) so two saves of one seed at two days are two entries in the report; `saveSeed` is the world's own.
+// A removal arm here removes its part from the save's day on; the save already holds what the part did before.
+const loadPath = opt('load', '');
+if (loadPath) for (const o of ['seed', 'profile', 'fork', 'dynamics', 'arrivals', 'rules', 'geology-comparison']) if (args.includes('--' + o)) throw new Error(`--${o} cannot be combined with --load: the save's own ${o === 'fork' ? 'day' : o} is used`);
+if (!loadPath) for (const o of ['rules-up', 'label']) if (args.includes('--' + o)) throw new Error(`--${o} only goes with --load`);
+const loaded = loadPath ? worldFromArgs(opt) : null;
+if (loaded && !Number.isInteger(loaded.startDay)) throw new Error(`${loadPath} is saved part way through day ${loaded.startDay}; the lab forks on a whole day`);
+const seed = loaded ? opt('label', basename(loadPath).replace(/\.save\.json$|\.json$/, '')) : opt('seed', 'meadow');
+const profile = (loaded ? (loaded.w.settings.profile ?? 'large') : opt('profile', 'large')) as ProfileName;
+const fork = loaded ? loaded.startDay : Number(opt('fork', '4'));
 const days = Number(opt('days', '8'));
 const sample = Number(opt('sample', '120'));
 // `--branches none` runs the control alone (the gates use that)
@@ -35,24 +52,25 @@ const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((
 // one from before rules versions existed. A current run is stamped with the current rules version, as a new world in the app
 // is: a measurement of "the current simulation" that quietly ran the unversioned baseline would be worthless.
 const rules = parseRunRules(opt('dynamics', 'rich'));
-const dynamics = rules === 'authored' ? 'authored' : 'rich';
+const dynamics = loaded ? loaded.w.settings.dynamics : rules === 'authored' ? 'authored' : 'rich';
 // `--rules N` runs an earlier generation of the rich rules on today's code, as a saved world of that version continues. Its rows
 // carry `rulesPinned: true` beside the version, so a pinned run is never read as a measurement of the current simulation.
-const pinned = parsePinnedRules(opt('rules', ''), rules);
-const rulesVersion = pinned ?? runRulesVersion(rules);
+const pinned = loaded ? undefined : parsePinnedRules(opt('rules', ''), rules);
+// from a save, the version is the save's own (or the one --rules-up raised it to), and a row says so in `fromSave`
+const rulesVersion = loaded ? loaded.w.settings.rulesVersion ?? null : pinned ?? runRulesVersion(rules);
 // Arrivals are on, as in a new world in the app: the owner's instruction of 3 November 2026 is to measure the world with
 // everything on. Until then the lab always forced them off; `--arrivals off` reproduces those runs and the recorded gate baselines.
-const arrivals = parseArrivals(opt('arrivals', 'on'));
+const arrivals = loaded ? loaded.w.settings.immigration : parseArrivals(opt('arrivals', 'on'));
 const geologyComparison=opt('geology-comparison','no')==='yes';
 if(geologyComparison&&fork!==0)throw new Error('Generation geology comparison requires --fork 0; no post-fork resource rewrite is permitted');
-const settings=freshRunSettings(rules,profile,seed,{immigration:arrivals});
+const settings=loaded?loaded.w.settings:freshRunSettings(rules,profile,seed,{immigration:arrivals});
 if (pinned !== undefined) settings.rulesVersion = pinned;
-const world = createWorld(settings);
+const world = loaded ? loaded.w : createWorld(settings);
 // `dynamics` goes on every row: a result from a rich world is not comparable with one from an authored world, and the gates
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
 // `rulesVersion` is on every row beside `dynamics`, explicitly null for an unversioned run: a reader must never have to
 // guess a generation from the word "rich". `arrivals` is on every row for the same reason.
-const emit=(r:ReturnType<typeof runBranch>,keepHashes=false)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(pinned!==undefined?{rulesPinned:true}:{}),arrivals,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,...(keepHashes?{}:{hashes:undefined})}));};
+const emit=(r:ReturnType<typeof runBranch>,keepHashes=false)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(pinned!==undefined?{rulesPinned:true}:{}),arrivals,provenance,...(loaded?{fromSave:{path:loadPath,startDay:fork,rulesUp:opt('rules-up',''),saveSeed:loaded.w.settings.seed}}:{}),...(geologyComparison?{generationComparison:true}:{}),...r,...(keepHashes?{}:{hashes:undefined})}));};
 const arm=opt('arm','');
 if(arm){
  // one arm alone, for the runner's side-by-side mode: the same fork, the same save, this arm only, hashes kept

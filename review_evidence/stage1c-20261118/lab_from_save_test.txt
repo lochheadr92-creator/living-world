@@ -1,0 +1,27 @@
+[33m(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90mC:/dev/Claude Experiment/living-world-integrate[39m
+
+ [32m✓[39m tests/lab_from_save.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 23742[2mms[22m[39m
+   [32m✓[39m the lab from a saved settlement [2m(3)[22m
+     [33m[2m✓[22m[39m a control and a nudge from a save end where the measuring scripts and the unsaved world end[33m 12972[2mms[22m[39m
+     [33m[2m✓[22m[39m runLab from a save does not step the world before the fork: every arm starts from the save, and days are days to continue[33m 6777[2mms[22m[39m
+     [33m[2m✓[22m[39m the runners refuse a fresh-world option beside a save, and --rules-up without one[33m 3992[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m   Start at [22m 10:05:58
+[2m   Duration [22m 26.62s[2m (tests 90%, transform 8%, import 3%)[22m
+
+exit=0  

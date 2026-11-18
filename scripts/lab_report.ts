@@ -15,7 +15,7 @@ const storySeed = args.includes('--story') ? args[args.indexOf('--story') + 1] :
 const vsArg = args.includes('--vs') ? args[args.indexOf('--vs') + 1] ?? '' : '';
 for (const a of args) if (a.startsWith('--') && !['--story', '--vs'].includes(a)) console.error(`unknown option ${a} (ignored)`);
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean; generationComparison?:boolean; provenance?: ReturnType<typeof labProvenance> };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean; generationComparison?:boolean; provenance?: ReturnType<typeof labProvenance>; fromSave?: { path: string; startDay: number; rulesUp: string; saveSeed: string } };
 const bySeed = new Map<string, Map<string, Row>>();
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -47,7 +47,17 @@ const refMean = (seed: string, spec: string, m: Metric): number =>
   mean([...bySeed.get(seed)!.values()].filter((r) => (r.spec === 'control' || r.spec.startsWith('nudge')) && r.spec !== spec).map((r) => r.outcome[m]));
 const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '+' : '') + v.toFixed(d));
 
-console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
+const fromSaves = allRows.some((r) => r.fromSave);
+if (fromSaves && allRows.some((r) => !r.fromSave)) console.log('WARNING: this directory mixes rows from saved settlements with rows from fresh worlds; they are not comparable.');
+console.log(fromSaves
+  ? `Counterfactual lab from saved settlements: ${seeds.length} saves (${seeds.map((s) => `${s}, day ${bySeed.get(s)!.get('control')!.fork}`).join('; ')}), each arm continued ${first.days} days from its save's own day.`
+  : `Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
+if (fromSaves) {
+  // said on the report itself: a removal arm from a mature save is not the same experiment as one in a fresh world
+  console.log("A removal arm here applies from the save's day on. A saved settlement already holds what the part did before the save (its buildings, habits, stores and what people learned), so the arm removes the part going forward only. That reads differently from a removal arm in a fresh world, where the part is absent from day 0.");
+  const raised = [...new Set(allRows.filter((r) => r.fromSave?.rulesUp).map((r) => `rules version raised to ${r.fromSave!.rulesUp} with --rules-up`))];
+  if (raised.length) console.log(`${raised.join('; ')}: each save is reinterpreted for measurement and is no longer a pure continuation of the version that saved it.`);
+}
 // which world was measured, said on the report itself. A row from before arrivals were recorded ran with them off (the lab forced
 // that until 3 November 2026); a pinned rules version is an earlier generation run on today's code, never the current simulation.
 const worldOf = (r: Row) => `${r.dynamics ?? 'authored'}, ${typeof r.rulesVersion === 'number' ? `rules version ${r.rulesVersion}${r.rulesPinned ? ` (pinned with --rules; the current version is ${CURRENT_RULES_VERSION})` : ''}` : 'unversioned'}, arrivals ${r.arrivals === true ? 'on' : 'off'}`;
