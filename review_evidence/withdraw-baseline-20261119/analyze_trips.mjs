@@ -19,7 +19,7 @@ for (const name of names) {
     measuredLegs: measured.length, measuredWalkingTicks: ticks(measured), walksByOutcome,
     positiveGatherLegs: gather.length, positiveGatherLegsAtMostTwoUnits: gather.filter(t => t.moved.units <= 2).length,
     selfChecks: d.trip.selfChecks,
-    hungryTime: d.day.hungryTime, walking: d.day.walking,
+    hungryWakingShare: d.day.hungryTime.hungryShareOfWaking,
   };
 }
 writeFileSync(new URL('./TRIP_SUMMARY.json', import.meta.url), JSON.stringify(results, null, 2) + '\n');

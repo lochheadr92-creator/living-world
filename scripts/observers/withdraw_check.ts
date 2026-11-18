@@ -77,6 +77,7 @@ export class WithdrawCheck {
   private readonly live = new Map<number, Rec>();
   private readonly done: Rec[] = [];
   private unseenEnds = 0;
+  private unseenEndDetails: { tick: number; person: number; id: number; phase: string; outcome: string; detail: string; moved: number }[] = [];
   private sampled = 0;
   private firstTick: number | null = null;
   private livingTicks = 0;
@@ -87,16 +88,16 @@ export class WithdrawCheck {
       ...prior,
       onActivityEnd: (p, a, outcome, detail) => {
         prior?.onActivityEnd?.(p, a, outcome, detail);
-        this.noteEnd(world, a, outcome, detail);
+        this.noteEnd(world, p, a, outcome, detail);
       },
     };
     return () => { world.hooks = prior; };
   }
 
-  private noteEnd(world: World, a: Activity, outcome: string, detail: string): void {
+  private noteEnd(world: World, p: Person, a: Activity, outcome: string, detail: string): void {
     if (a.kind !== 'withdraw') return;
     const rec = this.live.get(a.id);
-    if (!rec) { this.unseenEnds++; return; }
+    if (!rec) { this.unseenEnds++; this.unseenEndDetails.push({ tick: world.tick, person: p.id, id: a.id, phase: a.phase, outcome, detail, moved: a.cycle }); return; }
     rec.endTick = world.tick; rec.endOutcome = outcome; rec.endDetail = detail; rec.moved = a.cycle;
     this.live.delete(a.id);
     this.done.push(rec);
@@ -270,6 +271,7 @@ export class WithdrawCheck {
       readOnly: 'reads the world only; no write, no random draw; the runner checks the saved state is byte-identical around a sample every 120 ticks',
       sampledTicks: this.sampled, firstTick: this.firstTick, livingPersonTicks: this.livingTicks, personDays: r3(this.livingTicks / DAY),
       counts: { withdrawsSeen: all.length, adults: adults.length, under12: all.length - adults.length, finished: this.done.length, stillOpenAtRunEnd: this.live.size, endedWithoutBeingSeen: this.unseenEnds, firstSeenInWorkPhase: all.filter((r) => r.firstPhase === 'work').length },
+      unseenEndDetails: this.unseenEndDetails,
       adults: {
         byResult: byResult(adults),
         emptyWithdraws: {

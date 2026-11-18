@@ -401,6 +401,8 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for(const p of world.persons)for(const b of Object.values(p.beliefs)){if(b.kind==='prey')push(`PreyMemory:${p.id}:${JSON.stringify(b)}`);if(b.gear)push(`GearMemory:${p.id}:${b.id}:${JSON.stringify(b.gear)}`);if(b.gearStock)push(`GearStock:${p.id}:${b.id}:${JSON.stringify(b.gearStock)}`);}
   for(const a of world.animals)if(a.sheep)push(`Sheep:${a.id}:${JSON.stringify(a.sheep)}`);
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.sheep)push(`SheepMemory:${p.id}:${JSON.stringify(b)}`);
+  // Rules 257: remembered claims and builder shares affect what a person chooses to collect.
+  for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ops?.held !== undefined || b.ops?.seenBuilders !== undefined) push(`BenchMemory:${p.id}:${b.id}:${JSON.stringify(b.ops.held)}:${JSON.stringify(b.ops.seenBuilders)}`);
   // A wolf that was driven off keeps clear of one person for a while, which changes who it hunts next: that is part of
   // what the world is. Absent on every wolf that was never driven off, so an older world hashes exactly as it did.
   for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}${a.type === 'wolf' && a.health < 100 ? `,h${a.health}` : ''}`);
