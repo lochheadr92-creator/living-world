@@ -72,3 +72,15 @@ WHAT THIS STEP CANNOT SAY
 
 Guard rails from the plan (line 159), for step 8: deaths and hungry time with no food to hand stay inside the spread of the nudged
 controls. Yardstick target 30%; it was 15 to 18% at rules 250.
+
+DATED NOTE, 18 November 10:33, written after the 12 day set finished and before anything else is run.
+  Expectation 1 failed in one arm of six: in aspen, nudge:2 ended with the same hash as the control (a4af2978) and never parted from
+  it at any 120 tick sample. Checked outside the lab with a tick by tick probe on the same save (C:\dev\lw_runs\aspen_check\nudge_probe2.ts):
+  the nudged stream is two draws ahead for the first 11 ticks, the two worlds then take different numbers of draws at ticks 115210 to
+  115212 (6, 7, 7 against 8, 5, 5), the streams realign exactly at tick 115212, and every later tick is identical, state and hash.
+  So an offset of two draws was absorbed, a real property of the stream and not a mislabelled arm (generation_trace on aspen with
+  --nudge 0, 1 and 2 is running as a second check). The rule for what counts as a move is not changed. The aspen spread rests on two
+  distinct trajectories (control and nudge:1), and that is how it is reported.
+  Added, not part of the readings above: supplementary reference arms nudge:3, nudge:4 and nudge:5, 12 days, the same three saves. They
+  are used only to see how well the range of the three fixed arms describes the spread, and to count how often a nudge is absorbed. They
+  do not change the move rule.
