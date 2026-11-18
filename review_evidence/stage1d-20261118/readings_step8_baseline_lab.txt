@@ -105,3 +105,11 @@ WHAT THIS STEP CANNOT SAY
     is judged against a tighter yardstick. That makes a move easier to see and no more meaningful by itself.
   - A removal arm from a save removes the part going forward only.
   - Whether 255 stays the default is Ryan's decision.
+
+DATED NOTE, 18 November 13:11, written after the day-48 set (21 runs) finished and before anything else is run.
+  What the day-48 set showed, before any scoring: in two of the three starts the reference spread rests on two trajectories. In gen-4-day48
+  and river-day48 nudge:2 ended with the same hash as the control (as aspen nudge:2 did at 255, and cedar and river did in the fresh
+  worlds of step 6). The rule for what counts as a move is not changed and the findings below are scored with the three fixed arms.
+  Added, not part of the readings above: supplementary reference arms nudge:3, nudge:4 and nudge:5 on the same three day-48 saves,
+  13 days, to see whether a move survives a wider reference. They change neither the rule nor the count of starts; a move that holds only
+  against the three fixed arms and not against six is reported as that. The same is done for the day-96 saves if they show an absorbed arm.
