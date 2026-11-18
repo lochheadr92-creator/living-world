@@ -1,0 +1,276 @@
+{
+  "aspen-day48": {
+    "adultLegs": 11117,
+    "leftCensored": 7,
+    "rightCensored": 35,
+    "measuredLegs": 11075,
+    "measuredWalkingTicks": 686814,
+    "walksByOutcome": {
+      "arrived_did_job": {
+        "legs": 7462,
+        "walkingTicks": 457710
+      },
+      "arrived_no_job": {
+        "legs": 1224,
+        "walkingTicks": 68770
+      },
+      "switched_mid_walk": {
+        "legs": 1865,
+        "walkingTicks": 139008
+      },
+      "gave_up_before_arrival": {
+        "legs": 42,
+        "walkingTicks": 1647
+      },
+      "continued_same_activity": {
+        "legs": 482,
+        "walkingTicks": 19679
+      }
+    },
+    "positiveGatherLegs": 1391,
+    "positiveGatherLegsAtMostTwoUnits": 996,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": false,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.525
+  },
+  "aspen-day96": {
+    "adultLegs": 21560,
+    "leftCensored": 7,
+    "rightCensored": 79,
+    "measuredLegs": 21474,
+    "measuredWalkingTicks": 1414228,
+    "walksByOutcome": {
+      "arrived_did_job": {
+        "legs": 14652,
+        "walkingTicks": 950128
+      },
+      "switched_mid_walk": {
+        "legs": 3988,
+        "walkingTicks": 316592
+      },
+      "arrived_no_job": {
+        "legs": 1908,
+        "walkingTicks": 109914
+      },
+      "continued_same_activity": {
+        "legs": 840,
+        "walkingTicks": 33928
+      },
+      "gave_up_before_arrival": {
+        "legs": 85,
+        "walkingTicks": 3632
+      },
+      "ended_other": {
+        "legs": 1,
+        "walkingTicks": 34
+      }
+    },
+    "positiveGatherLegs": 2335,
+    "positiveGatherLegsAtMostTwoUnits": 1631,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": false,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.447
+  },
+  "river-day48": {
+    "adultLegs": 11747,
+    "leftCensored": 24,
+    "rightCensored": 37,
+    "measuredLegs": 11686,
+    "measuredWalkingTicks": 734409,
+    "walksByOutcome": {
+      "arrived_did_job": {
+        "legs": 8271,
+        "walkingTicks": 517795
+      },
+      "arrived_no_job": {
+        "legs": 1173,
+        "walkingTicks": 61992
+      },
+      "continued_same_activity": {
+        "legs": 452,
+        "walkingTicks": 17423
+      },
+      "switched_mid_walk": {
+        "legs": 1745,
+        "walkingTicks": 135470
+      },
+      "gave_up_before_arrival": {
+        "legs": 45,
+        "walkingTicks": 1729
+      }
+    },
+    "positiveGatherLegs": 1340,
+    "positiveGatherLegsAtMostTwoUnits": 872,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": true,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.465
+  },
+  "river-day96": {
+    "adultLegs": 19430,
+    "leftCensored": 59,
+    "rightCensored": 62,
+    "measuredLegs": 19309,
+    "measuredWalkingTicks": 1377151,
+    "walksByOutcome": {
+      "arrived_did_job": {
+        "legs": 11684,
+        "walkingTicks": 825422
+      },
+      "arrived_no_job": {
+        "legs": 2410,
+        "walkingTicks": 147287
+      },
+      "switched_mid_walk": {
+        "legs": 4131,
+        "walkingTicks": 352678
+      },
+      "continued_same_activity": {
+        "legs": 1007,
+        "walkingTicks": 47892
+      },
+      "gave_up_before_arrival": {
+        "legs": 77,
+        "walkingTicks": 3872
+      }
+    },
+    "positiveGatherLegs": 2204,
+    "positiveGatherLegsAtMostTwoUnits": 1690,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": false,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.609
+  },
+  "gen-4-day48": {
+    "adultLegs": 11183,
+    "leftCensored": 27,
+    "rightCensored": 44,
+    "measuredLegs": 11112,
+    "measuredWalkingTicks": 712491,
+    "walksByOutcome": {
+      "arrived_did_job": {
+        "legs": 8109,
+        "walkingTicks": 512616
+      },
+      "switched_mid_walk": {
+        "legs": 1575,
+        "walkingTicks": 129710
+      },
+      "arrived_no_job": {
+        "legs": 984,
+        "walkingTicks": 51603
+      },
+      "continued_same_activity": {
+        "legs": 404,
+        "walkingTicks": 17187
+      },
+      "gave_up_before_arrival": {
+        "legs": 40,
+        "walkingTicks": 1375
+      }
+    },
+    "positiveGatherLegs": 1354,
+    "positiveGatherLegsAtMostTwoUnits": 902,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": true,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.51
+  },
+  "gen-4-day96": {
+    "adultLegs": 20795,
+    "leftCensored": 60,
+    "rightCensored": 87,
+    "measuredLegs": 20648,
+    "measuredWalkingTicks": 1425122,
+    "walksByOutcome": {
+      "switched_mid_walk": {
+        "legs": 4012,
+        "walkingTicks": 336405
+      },
+      "arrived_did_job": {
+        "legs": 13326,
+        "walkingTicks": 906956
+      },
+      "arrived_no_job": {
+        "legs": 2354,
+        "walkingTicks": 139722
+      },
+      "continued_same_activity": {
+        "legs": 882,
+        "walkingTicks": 38981
+      },
+      "gave_up_before_arrival": {
+        "legs": 74,
+        "walkingTicks": 3058
+      }
+    },
+    "positiveGatherLegs": 2277,
+    "positiveGatherLegsAtMostTwoUnits": 1720,
+    "selfChecks": {
+      "tripTicksEqualOwnTravelTickCount": true,
+      "tripTicksByStageEqualOwnCounts": true,
+      "everyWalkHasExactlyOneOutcome": true,
+      "tileChangesEqualOwnCount": true,
+      "noWalkLeftUnresolved": true,
+      "noActivityVanishedWithoutAnEndRecord": true,
+      "leftCensoredOnlyAtTheFirstSample": true,
+      "livingTicksEqualSampledPersonTicks": true,
+      "everyWithdrawWalkHasAStoreLookAtDeparture": true,
+      "everyClosedWithdrawWalkHasAStoreLookAtTheEnd": true,
+      "storeLooksAddUpToTheContainers": true
+    },
+    "hungryWakingShare": 0.55
+  }
+}
