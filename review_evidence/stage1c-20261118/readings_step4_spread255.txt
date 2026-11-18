@@ -84,3 +84,5 @@ DATED NOTE, 18 November 10:33, written after the 12 day set finished and before 
   Added, not part of the readings above: supplementary reference arms nudge:3, nudge:4 and nudge:5, 12 days, the same three saves. They
   are used only to see how well the range of the three fixed arms describes the spread, and to count how often a nudge is absorbed. They
   do not change the move rule.
+  CORRECTION to the note above: its heading says 10:33. The machine clock and the commit time (b5b7bcf3, 10:24:35) say it was written at
+  10:24. The supplementary arms below are launched after this correction is committed.
