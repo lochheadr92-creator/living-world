@@ -54,6 +54,43 @@ PART A. THE SPREAD AT 256 (finished 12:20 and 12:36 on 18 November; the machine 
 
   Means at 256, 12 days, companyLeisureShare12: aspen 10.78%, gen-4 9.81%, river 11.73% (255: 10.10, 10.08, 11.50). Numbers only.
 
-PART B. EQUIVALENCE FROM FRESH WORLDS, 255 AGAINST 256
-  Pending. eq255 finished 12:37:23 (36 arms). eq256 started 12:37:23. It is read when it ends, with lab_versions.ts, against the
-  verdict wording fixed in the readings. The check of seeds whose control and nudge:1 end with the same hash at 25 days is part of it.
+PART B. EQUIVALENCE FROM FRESH WORLDS, 255 AGAINST 256 (eq255 finished 12:37, eq256 12:50, 18 November)
+  12 seeds, Normal, 25 days, fork 0, arrivals on, control and two nudges, 36 arms a version. Provenance of both: head 2ac03408, dirty
+  false, no modified files (VERIFIED); `git diff bd0760eb HEAD` over scripts, src and the package files is empty (VERIFIED).
+  Data: equivalence_255_256/ (eq255, eq256, lab_versions_report.txt, floors_and_absorbed_arms.txt). Script: equiv_floors.mjs.
+
+  RESULT (lab_versions.ts, 189 metrics): "larger than chance" on 0. "Not distinguishable from chance" on 180. "Systematic, within the
+  noise floor" on 9. The lab's own summary line: nothing moved by more than a single draw moves it.
+  The nine systematic ones (255 to 256): chats 191.6 to 175.4 (interval -28.5 to -4.2), otherTalk 374.3 to 403.7, spareTime 32.6 to
+  37.2, soloStones 25.1 to 28.4, soloBugs 31.6 to 36.9, guestJobs 1.0 to 2.5, nKilns 0.8 to 0.7, and the shares lifeShareChild (40.9%
+  to 43.0%, taken straight from the rows) and walkingShare12 (42.7% to 44.2%). companyLeisureShare12, the yardstick, is 11.31% to
+  11.50%, not flagged. Six of the nine are time use rows that move together (less talk, more spare time, solo play, walking), so
+  they are one signal and not nine. At 95% intervals about 9 of 189 metrics should clear zero by chance alone if nothing changed, so
+  nine is the chance count, and with the six being one cluster it is fewer independent flags than chance gives. READ AS
+  EQUIVALENCE, with the weakness the readings state (12 seeds is weak evidence of no effect, and 25 days is not 240). Flagged as a
+  lead and not a finding: if a later check of the yardstick or walking share finds a shift by version, this is where to look first.
+
+  EXPECTATIONS, SCORED
+  1. No metric "larger than chance": HELD, VERIFIED (0 of 189). With about a hundred metrics two or three were expected by chance; none
+     were, so there was nothing to run down by seed.
+  2. A smaller spread at 256 for weather and arrival dependent metrics, and the mean of people within one person: PARTLY HELD. The
+     floor of each version on its own (not the pooled one the lab uses) is smaller at 256 on 117 of 168 metrics, larger on 47, equal on
+     4; the median ratio is 0.87 (quartiles 0.70 and 1.05). meanHunger 0.65, people 0.48, meanMood 0.54, deaths 0.71, chats 0.82,
+     otherTalk 0.78. It is larger on belowCritical 1.41, homeless 1.26, lowMood 1.59 and guestJobs 1.12, all small counts. People
+     differ by +0.4 (45.0 to 45.4), under one person (VERIFIED). Arrivals are not a metric in this report, so the arrival part is not
+     scored. Since no metric passed only because of the pooled floor (none was "larger than chance"), the 255 only and 256 only
+     floors did not have to be used to rescue a verdict.
+  3. The 256 and 255 controls end with different hashes in every seed, and the first difference in the weather channel at tick 50 or
+     earlier: THE FIRST HALF IS VACUOUS, THE SECOND IS CHECKED ON ONE SEED. hashWorld includes the rules version label, so two worlds at
+     255 and 256 never end with the same hash whatever happened. The tick 50 first difference is VERIFIED on gen-4 (step 5) and not
+     checked on the other eleven seeds (UNKNOWN).
+
+  STOP CONDITION 1 IN THE FRESH-WORLD SENSE (VERIFIED): control and nudge:1 end with the same hash in 0 of 12 seeds at both versions.
+  It does not fire. Absorbed nudge:2 arms (control and nudge:2 end with the same hash): 255 fern; 256 cedar and river. Counting the
+  save runs of Part A as well, nudge:2 arms absorbed are 2 of 15 at 255 (aspen on the save, fern) and 2 of 15 at 256 (cedar, river).
+  So the expectation that an absorbed arm is more likely at 256 is not borne out (same count, 2 of 15, at both versions), and
+  nudge:1 was never absorbed in 15 arms at either. An absorbed arm means that seed's reference spread rests on two trajectories (as aspen's
+  at 255 did), which step 8 has to watch for in each of its six saves.
+
+NOTE, 18 November 12:5x. The message of commit f00294ed says "Six of the seven expectations are scored". Part A has six
+  expectations and all six are scored (number 3 both ways). The commit is not amended (no history is rewritten).
