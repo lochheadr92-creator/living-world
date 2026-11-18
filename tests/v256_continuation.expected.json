@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "d7201c82b2dd44f61c5d6bacb57c66b1ba1bc42f",
+    "rules": 256,
+    "content": "f1cadee9b8d7a25e4101dfb7d01ffbaccf107aa5dda36d2fe1241aaafb467933",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-4 (arrivals on) at tick 36000, after the first tick its world differs from the same world at the previous rules version (scripts/keyed_first_diff.ts), saved and continued 120 ticks."
+  },
+  "saved": "c6134c5deaea7520fcb652c8df13c2b5fca6bb9205cc2619fca919f93a72aa4f",
+  "continued": "1041f3cd8955fce738085922adebc251b4136c170f1a55867f3ef5a575a60589",
+  "tick": 36000,
+  "arrivals": 5,
+  "alive": 35
+}
