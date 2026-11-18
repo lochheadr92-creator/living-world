@@ -1,0 +1,107 @@
+
+STAGE 1D STEP 8. THE BASELINE LAB. READINGS FIXED IN ADVANCE.
+Written 18 November 2026, about 12:20, before any step 8 run is launched. Nothing in this file is changed after the launch except
+by a dated note at the end that says what changed and why.
+
+WHETHER THIS RUNS AT ALL
+  Step 8 depends on the nudge (the control and two nudged controls give the spread). It runs only if step 6 passes stop condition 1
+  as fixed in readings_step6_spread256.txt: at 24 days, in each of the three worlds, control and nudge:1 end with different hashes.
+  If stop condition 1 fires, nothing here is launched, and Ryan gets the ways of perturbing a world with no choice made.
+
+WHAT IS RUN
+  Six saved worlds from step 7, all at rules 256, arrivals on, Normal, written by scripts/generation_trace.ts (save format 5):
+    C:\dev\lw_saves\rules256\{aspen,gen-4,river}-day48.save.json
+    C:\dev\lw_saves\rules256\{aspen,gen-4,river}-day96.save.json
+  Seven arms per save: control, nudge:1, nudge:2, rich-no-tree-regrowth (252), rich-no-bigger-reserve (253), rich-no-grow-more (254),
+  rich-no-farm-draw (255). 42 runs. A removal arm applies from the save's day on. A save already holds what the part did before the
+  save (trees seeded, reserves laid, fields tilled), so a removal arm removes the part going forward only. That reads differently
+  from a removal arm in a fresh world, and it is the reading the plan asks for (every lab starts from a saved mature settlement).
+  Code: the integrate checkout at the commit that holds this file, or later with nothing under scripts/ or src/ changed. The run
+  is rejected and redone if the provenance in the output shows a source file changed during it.
+  Command, per save (one lab call each, the arms run in parallel as separate processes):
+    node scripts\lab.mjs --saves <save> --days 13 --branches nudge:1,nudge:2,rich-no-tree-regrowth,rich-no-bigger-reserve,rich-no-grow-more,rich-no-farm-draw --out C:\dev\lw_runs\stage1d_<seed>_<day>
+  (The exact --branches syntax for removal arms is checked against scripts/lab.mjs before launch; if it differs the command is
+  corrected in a dated note and the arms are unchanged.)
+
+DAYS (fixed now, read from the code, VERIFIED in hardship.ts and constants.ts)
+  A year is DAYS_PER_YEAR = 12 days. Winter is the last WINTER_LENGTH = 4 days of the year. "Winter sets in" fires on the fifth tick
+  of day 8 of the year, and "Winter loosens its grip" together with winterEnded() (the winter practice that teaches a household to
+  keep stores) fires on the fifth tick of day 0 of the next year.
+    day 48 saves: day 48 is year 5 day 0. Winter is days 56 to 60. The end of winter is the fifth tick of day 60.
+    day 96 saves: day 96 is year 9 day 0. Winter is days 104 to 108. The end of winter is the fifth tick of day 108.
+  Each run is 13 days: day 48 to day 61 and day 96 to day 109. One winter, and one day after it, so the winter practice fires.
+  (Step 4 and step 6 used 12 days. A 12 day run ends at tick 60 x 2400, five ticks before winterEnded, so the spread at 12 days
+  and the baseline here are the same window except for that one day. Not compared as if identical.)
+
+ROWS (per save; the value at the end of the run, and for the share rows the share over the whole run)
+  The 26 rows of readings_step4_spread255.txt:
+    Yardstick (people 12 and over): companyShare12, leisureShare12, companyLeisureShare12, walkingShare12
+    Hungry time by what is to hand: hungryPackShare, hungryStoreOnlyShare, hungryNoFoodShare, and the older hungryShare
+    Sheep: sheepAcquired, sheepShorn, sheepSlaughtered, lambsBorn, sheepAtEnd, sheepKeptAtEnd
+    Fields: plotsRested, plotsRestingAtEnd
+    Held work: workNotesKept, workTakenUp, workNotesSpent
+    Lessons: techLessonsLearned, techLessonsInterrupted, techLessonsDeclined
+    Exchange journeys: exchangeJourneysStarted, exchangeJourneysArrived, exchangeJourneysFulfilled
+    And: people (alive at the end), deaths
+  Added here because three of the four removal arms act on farming and the winter reserve and the 26 rows hardly see them:
+    homeFoodPerPerson, storeFoodPerPerson, plots, buildings
+  A row that is zero in all seven arms of a save is "absent in that save", not a null.
+  Which hungry cell counts as "no food to hand" is Ryan's call and is open. All three cells are reported. hungryNoFoodShare (no food
+  in the pack and none in the home store) is used for the guard rail below provisionally, and is labelled so.
+
+THE REFERENCE SPREAD
+  For one save and one row: the values of control, nudge:1 and nudge:2; the range R0 = largest minus smallest; the mean of the three.
+  Each removal arm is compared with that spread, never with one control alone (AGENTS.md gotchas).
+
+WHAT COUNTS AS A MOVE (the rule fixed in readings_step4_spread255.txt, copied here and not changed)
+  A removal arm moved on a row in one save when its value lies outside [smallest - R, largest + R] of the three reference arms,
+  where R = the range of the three, never less than a floor of 1 for a count row and 0.5 percentage points for a share row.
+  Reported per row and arm as "moved beyond the spread in n of 6 starts", with the direction of each move (up or down).
+  A FINDING is a row that moves the same way in at least 4 of the 6 starts. Anything less is not a finding.
+  Chance reading, so a finding is not over-read: a fourth value from the same distribution lies outside the range by a full range
+  about 13% of the time (checked by simulation, step 4). Four or more of six in one direction then has a chance of well under 1%
+  per row, and with about 30 rows per arm about 1 arm in 10 shows a false finding on some row. So a finding is read with the guard
+  rails and the size of the move, and a lone row is a lead, not a result.
+  The six starts are not six independent worlds: day 48 and day 96 of one seed are the same settlement a year and a half apart.
+  So each finding is also reported per seed: whether both of that seed's starts moved the same way. A finding that rests on one
+  seed's two starts is called that.
+
+GUARD RAILS (plan line 159, applied to the removal arms)
+  Deaths and hungry time with no food to hand stay inside the spread of the nudged controls. Read here as: a removal arm that moves
+  deaths or hungryNoFoodShare DOWN (fewer deaths, less hungry time without food) says the part makes it worse; UP says the part helps.
+  Both directions are reported for every start. The yardstick target is 30% company plus leisure. The plan's figure of 15 to 18% at
+  rules 250 was not reproduced (about 10 to 12% on the day 48 saves at 255, step 4), so what the plan measured is itself unclear.
+
+REPORT (what step 8 produces)
+  1. The day baseline at current rules (256): per save, the yardstick, walking share, the three hungry cells, deaths, people and the
+     firing counts, with the spread of control and the two nudges.
+  2. For each removal arm: the rows that moved beyond the spread, in how many of 6 starts and which way, the findings, and the guard rails.
+  3. A one line view on whether rules 255 stays the default, with the evidence and a recommendation. Whether it stays is Ryan's
+     decision. Nothing is changed.
+
+WHAT I EXPECT (guesses written before any number; none VERIFIED)
+  1. Tree regrowth (252): no finding. Saplings that sprout in 13 days do not grow into anything that changes how people spend their
+     day or what they eat in the same window (LIKELY). The row to watch is none of the 30; this arm is expected to be a null.
+  2. Bigger reserve (253): storeFoodPerPerson and homeFoodPerPerson go DOWN against the reference in most starts, since the removed
+     part is a bigger store target opened five days before winter, so the arm is a larger test of the stores (LIKELY). Whether
+     hungryNoFoodShare goes UP in the winter with a smaller reserve is the guard rail's question and I do not know (UNKNOWN).
+  3. Grow more (254): plots and the fields rows move (plotsRested, plotsRestingAtEnd, homeFood) in at least some starts (UNKNOWN; the
+     saves are mature settlements, so fields were laid out before the save).
+  4. Farm draw (255): the removed part is an extra pull toward the fields. walkingShare12 or the company and leisure shares may move
+     slightly, and may not (UNKNOWN). The rows the arm was built to move are not in the 26; if it shows nothing here, that says the
+     26 rows do not see it, not that it does nothing.
+  5. The yardstick sits well under 30% in all six starts (LIKELY, from step 4: about 10 to 12% at 255). companyLeisureShare12 for
+     the six controls spans under 6 percentage points (UNKNOWN).
+  6. The nudge spread at 13 days is small enough that at least one removal arm, one row, moves beyond it in a few starts by chance
+     alone, and that none of those meets the 4 of 6 rule (LIKELY).
+  7. People and deaths: a range of 4 or less and 1 or less in each save (guess; step 4 expectation 4, reread against its result).
+
+WHAT THIS STEP CANNOT SAY
+  - Three worlds at two ages and 13 days is not 240 days. A part whose effect builds over years (trees, a bigger reserve over several
+    winters, field fertility) can show as a null here and matter later.
+  - Three reference arms give a loose spread. A removal arm that moves by less than the shared-stream remainder cannot be told from it.
+  - At 256 a nudge reaches only the shared stream remainder (births, old age, wildlife, names): weather, arrivals, spoilage, trees
+    and grain are keyed and do not move with a nudge. The spread is therefore smaller than at 255 by construction and a removal arm
+    is judged against a tighter yardstick. That makes a move easier to see and no more meaningful by itself.
+  - A removal arm from a save removes the part going forward only.
+  - Whether 255 stays the default is Ryan's decision.
