@@ -11,6 +11,8 @@ import { generateOptions } from '../src/sim/decision';
 import { addEarmark, usableUnits, withdrawAllowance } from '../src/sim/facilities';
 import { observe } from '../src/sim/knowledge';
 import { perceive } from '../src/sim/perception';
+import { benchStock } from '../src/sim/site_supply';
+import { ironWanted } from '../src/sim/smithy_iron';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { addPerson, building, done, pin, site, stage } from './helpers/kit';
@@ -117,6 +119,24 @@ describe("rules 257: a workshop's goods count only for who may take them", () =>
     const before = hashWorld(f.w);
     f.p.beliefs[f.yard.id].ops!.held = [];
     expect(hashWorld(f.w)).not.toBe(before);
+  });
+
+  it('uses the same remembered access for batch input counting', () => {
+    const f = fixture(257, { earmark: 'ben' });
+    const b = f.p.beliefs[f.yard.id];
+    expect(benchStock(f.w, b, 'planks', 1, f.p)).toBe(0);
+    setBenchAccess(false);
+    expect(benchStock(f.w, b, 'planks', 1, f.p)).toBe(4);
+  });
+
+  it('does not count somebody else\'s earmarked iron against the smithy\'s standing want', () => {
+    const f = fixture(257, { earmark: null });
+    const b = f.p.beliefs[f.yard.id];
+    b.ops!.output.iron = 4;
+    b.ops!.held = [{ owner: f.ben.id, item: 'iron', n: 4, until: f.w.tick + 100 }];
+    const withAccess = ironWanted(f.w, [b], f.p);
+    setBenchAccess(false);
+    expect(withAccess).toBeGreaterThan(ironWanted(f.w, [b], f.p));
   });
 
   it('a belief with no record of earmarks plans as before', () => {
