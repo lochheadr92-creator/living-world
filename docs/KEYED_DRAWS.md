@@ -50,7 +50,7 @@ A key is built from the seed, the tick and ids the world already holds. Nothing 
 
 ## Cost
 
-About 0.2% of run time, inclusive, in a profile of the step loop (profile not kept in the repo). One hash per draw, and the per-world seed hash is cached.
+No slowdown measured. The profile of stage 1c step 0b (`review_evidence/stage1c-20261118/cpu_profile.txt`, a 177-person world at 255) put the five systems together at about 0.2% of run time, so the whole change can cost only a fraction of that: a keyed draw is a hash where a shared draw is a generator step, and the per-world seed hash is cached. Measured side by side, gen-4, 20,000 ticks, arrivals on, four runs at once on one machine: 2.53 and 2.56 ms a tick at 255, 2.31 and 2.36 at 256 (`review_evidence/stage1c-20261118/step5/timing_*.txt`). The 256 runs were faster, which is not a claimed speed-up: it is a different world, one seed, and four processes sharing the machine.
 
 ## What is claimed
 
