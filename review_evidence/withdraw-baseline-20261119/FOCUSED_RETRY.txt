@@ -36,4 +36,3 @@ If this is a long-running test, pass a timeout value as the last argument or con
       Tests  1 failed | 2 passed (3)
    Start at  03:04:45
    Duration  441.91s (tests 99%, transform 1%)
-
