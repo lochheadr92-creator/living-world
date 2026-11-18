@@ -1,0 +1,187 @@
+{
+  "loaded": "C:/dev/lw_saves/rules256/aspen-day48.save.json",
+  "initialHash": "ffd02f1f",
+  "baseline": {
+    "gathers": 1409,
+    "units": 2839,
+    "unitsPerPositiveWalk": 2.014904187366927,
+    "gatherWalkingTicksPerUnit": 50.43395561817541,
+    "small": 999,
+    "constrained": 568,
+    "purposes": {
+      "eat": 99,
+      "repair": 87,
+      "stock": 213,
+      "site": 72,
+      "craft": 10,
+      "animal care": 17,
+      "fire": 69,
+      "promise": 1
+    },
+    "literal": 83,
+    "literalPurposes": {
+      "eat": 78,
+      "animal care": 5
+    },
+    "literalRestoredIgnoringAllClaims": 77,
+    "candidateUpperBound": 25,
+    "candidateWalkingTicks": 1104,
+    "deposits": 1016,
+    "depositWalkingTicks": 64391,
+    "depositUnits": 1688,
+    "completedWalkJobs": 7519,
+    "deaths": 0,
+    "storeFood": 721,
+    "hungryWakingShare": 0.498
+  },
+  "sampleDay": {
+    "observed": 23,
+    "depositOffered": 0,
+    "literal": 4,
+    "roomRestored": 0,
+    "roomRestoredWithAllClay": 0,
+    "items": {
+      "iron": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "wood": {
+        "reserved": 27,
+        "needed": 15,
+        "spare": 0,
+        "protected": 0
+      },
+      "grain": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 23
+      },
+      "fruit": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 9
+      },
+      "toy": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "basket": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 17
+      },
+      "seeds": {
+        "reserved": 0,
+        "needed": 59,
+        "spare": 34,
+        "protected": 0
+      },
+      "saw": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "charcoal": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "hoe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "stone": {
+        "reserved": 8,
+        "needed": 8,
+        "spare": 0,
+        "protected": 0
+      },
+      "hammer": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 12
+      },
+      "spear": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 15
+      },
+      "rod": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "axe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 6
+      },
+      "pick": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "garment": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 6
+      },
+      "fibre": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 3
+      },
+      "fish": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "berries": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 6
+      },
+      "clay": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "cutting": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "water": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      }
+    },
+    "endHash": "0cdc8ef2",
+    "conservation": true,
+    "unwatchedTwinMatched": true
+  }
+}

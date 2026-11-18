@@ -5,7 +5,7 @@ Stage 2 of the plan of 17 November 2026 (brain note `knowledge/living-world/2026
 | part | rules | status | lab arm |
 |---|---|---|---|
 | A, `bench_access` | 257 | built | `rich-no-bench-access` |
-| B, `load_worth` and `put_down` | not claimed | waits for its pack measurement | |
+| B, `load_worth` and `put_down` | not claimed | [Pack measurement](../review_evidence/pack-20261119/RESULTS.md) completed. The near-home stocking change failed its reach threshold. | |
 | C, `walk_stick` | not claimed | waits for its detour measurement | |
 
 The size is small and the designs say so: the three pieces are 0.8 to 1.7%, 3.2 to 3.3% and 6.8 to 8.8% of awake person ticks, against a gap of 15 to 18 points to the 30% of waking time the plan asks for. Nothing here is expected to close it alone. The parts remove plain mismatches and find out whether the walking is a lever at all.

@@ -1,0 +1,216 @@
+{
+  "loaded": "C:/dev/lw_saves/rules256/river-day96.save.json",
+  "initialHash": "6b47f209",
+  "baseline": {
+    "gathers": 2155,
+    "units": 3945,
+    "unitsPerPositiveWalk": 1.8306264501160092,
+    "gatherWalkingTicksPerUnit": 100.15209125475285,
+    "small": 1668,
+    "constrained": 851,
+    "purposes": {
+      "stock": 352,
+      "repair": 106,
+      "fire": 123,
+      "promise": 4,
+      "craft": 40,
+      "site": 17,
+      "eat": 209
+    },
+    "literal": 183,
+    "literalPurposes": {
+      "stock": 3,
+      "eat": 180
+    },
+    "literalRestoredIgnoringAllClaims": 170,
+    "candidateUpperBound": 43,
+    "candidateWalkingTicks": 2733,
+    "deposits": 1096,
+    "depositWalkingTicks": 76290,
+    "depositUnits": 1772,
+    "completedWalkJobs": 11548,
+    "deaths": 0,
+    "storeFood": 779,
+    "hungryWakingShare": 0.596
+  },
+  "sampleDay": {
+    "observed": 92,
+    "depositOffered": 3,
+    "literal": 8,
+    "roomRestored": 1,
+    "roomRestoredWithAllClay": 2,
+    "items": {
+      "toy": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 15
+      },
+      "seeds": {
+        "reserved": 0,
+        "needed": 297,
+        "spare": 164,
+        "protected": 0
+      },
+      "grain": {
+        "reserved": 1,
+        "needed": 0,
+        "spare": 0,
+        "protected": 149
+      },
+      "fruit": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 13
+      },
+      "fibre": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "bread": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "basket": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 67
+      },
+      "saw": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 14
+      },
+      "rod": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 37
+      },
+      "hammer": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 43
+      },
+      "spear": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 61
+      },
+      "axe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 39
+      },
+      "hoe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 30
+      },
+      "blanket": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 13
+      },
+      "stone": {
+        "reserved": 15,
+        "needed": 37,
+        "spare": 3,
+        "protected": 0
+      },
+      "berries": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 62
+      },
+      "garment": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 29
+      },
+      "wood": {
+        "reserved": 72,
+        "needed": 51,
+        "spare": 0,
+        "protected": 0
+      },
+      "planks": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "fish": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 21
+      },
+      "pick": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "cutting": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 19
+      },
+      "bedding": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 5
+      },
+      "clay": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 5
+      },
+      "wool": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "water": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 3
+      },
+      "ore": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "iron": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      }
+    },
+    "endHash": "95c36525",
+    "conservation": true,
+    "unwatchedTwinMatched": true
+  }
+}
