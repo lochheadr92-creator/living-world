@@ -1,0 +1,84 @@
+STAGE 1C STEP 4. THE SPREAD BEFORE (rules 255). RESULT.
+Written 18 November 2026 after both sets finished. Readings fixed in advance: readings_step4_spread255.txt (committed 0d130daf; dated note b5b7bcf3; correction 6c39e923).
+
+STATUS
+  VERIFIED  Both sets ran to the end: 12 days (day 48 to 60) and 24 days (day 48 to 72), three saved worlds (aspen, gen-4, river), arms control,
+            nudge:1, nudge:2, rules raised 250 to 255. Nothing under scripts/, src/, package files or vite.config.ts changed between the step 3
+            commit (281fe057) and the end of the runs (git diff --stat 281fe057..HEAD on those paths is empty), so the provenance holds.
+  VERIFIED  The control of each world reproduces exactly when run again (12 day set against the supplementary set: same final hash in all three).
+  VERIFIED  Expectation 1 failed in one world: in aspen the nudge:2 arm ends with the control's hash at 12 days (a4af2978) and at 24 days (b79d3e15).
+            It is the stream, not the lab: generation_trace on the same save with --nudge 0, 1 and 2 gives a4af2978, 422ecfbe and a4af2978
+            (aspen_nudge_check/), the same three hashes the lab gave. A tick by tick probe shows the nudged stream two draws ahead until tick
+            115210, the worlds then draw 6, 7, 7 numbers against 8, 5, 5 in ticks 115210 to 115212, the sfc32 state is identical from tick
+            115212 and so is everything after it.
+  VERIFIED  In the supplementary 12 day set (nudge:3, 4, 5, same saves) another arm repeated an earlier one: river nudge:3 ends with nudge:1's hash (6a2bcf1f).
+            Aspen nudge:3, 4 and 5 and all three gen-4 extras are distinct trajectories. Across the 18 arms (6 per world), 2 repeat an earlier arm.
+  LIKELY    A nudge of N draws is absorbed when, within a short window, the nudged world takes N fewer draws than the control and nothing the
+            draws decide differs. That is why it is rare and why it cannot be predicted from N. Not tested beyond these 3 worlds and 5 offsets.
+  UNKNOWN   Whether the yardstick at 255 really is about 10 percent against 15 to 18 percent at 250 (see YARDSTICK below).
+
+THE SPREAD (final values, control / nudge:1 / nudge:2; full tables in spread_255_d12/analysis.txt and spread_255_d24/analysis.txt)
+  Rows that matter for the guard rails and the yardstick. R = range of the three, m = mean.
+                              12 days                                          24 days
+  companyLeisureShare12   aspen  10.23 / 9.85 / 10.23    R 0.38 pp        9.86 / 10.11 / 9.86    R 0.25 pp
+                          gen-4   9.88 / 10.33 / 10.02   R 0.45 pp       10.76 / 11.11 / 9.73    R 1.38 pp
+                          river  10.72 / 11.69 / 12.10   R 1.38 pp       10.58 / 11.63 / 11.57   R 1.05 pp
+  leisureShare12          0.05 to 0.36 percent in every arm: nearly all of the yardstick is company.
+  walkingShare12          aspen 52.20 / 46.60 / 52.20 (R 5.60 pp); gen-4 52.65 / 42.70 / 49.48 (R 9.95 pp); river 53.75 / 52.68 / 52.71 (R 1.07 pp) at 12 days.
+  hungryNoFoodShare       12 days: aspen 18.36 / 21.73 / 18.36 (R 3.37); gen-4 14.41 / 23.36 / 16.39 (R 8.95); river 19.77 / 16.54 / 21.41 (R 4.87).
+                          24 days: aspen 18.20 / 18.19 / 18.20 (R 0.01); gen-4 15.24 / 21.26 / 14.61 (R 6.65); river 19.84 / 15.93 / 18.92 (R 3.91).
+  people (alive at end)   12 days: aspen 60 / 61 / 60; gen-4 67 / 65 / 64; river 61 / 63 / 66.   24 days: 68 / 74 / 68; 78 / 84 / 72; 78 / 76 / 79.
+  deaths                  12 days: aspen 0 / 0 / 0; gen-4 0 / 1 / 0; river 1 / 0 / 0.   24 days: aspen 0 / 0 / 0; gen-4 2 / 1 / 1; river 1 / 0 / 0.
+  Aspen's spread rests on two distinct trajectories (control and nudge:1), at both horizons, so its range is a range of two.
+
+THE EIGHT EXPECTATIONS (written before the run)
+  1  The nudge is live in all three worlds .......... FAILED in 1 of 6 arms (aspen nudge:2, both horizons). Live in the other 5 arms.
+  2  Yardstick shares inside 2 pp at 12 days ......... HELD for company (0.47 to 1.31 pp), leisure (0.14 to 0.18) and company+leisure (0.38 to 1.38).
+                                                      FAILED for walking (5.60 and 9.95 pp in aspen and gen-4), which the file allowed for.
+  3  Worlds differ by more than the range inside one . NOT SUPPORTED. Company+leisure means: aspen 10.10, gen-4 10.08, river 11.50 percent; the largest
+                                                      gap between worlds (1.42 pp) is no larger than river's own range (1.38). Three worlds cannot be told
+                                                      apart on the yardstick; what they show is that all three sit near 10 to 12 percent.
+  4  people range 4 or less, deaths range 1 or less .. HELD for deaths. people: aspen 1, gen-4 3 held; river 5 FAILED (12 days).
+  5  hungryNoFoodShare range above 50 percent of mean  FAILED, narrowly: the largest is gen-4 at 12 days, 8.95 / 18.05 = 49.6 percent; 39 percent at 24 days.
+  6  Lessons, held work, exchange journeys range above 25 percent of mean
+                                                      PARTLY. techLessonsDeclined 41, 63 and 50 percent held; learned is 0 to 1 (ratios meaningless).
+                                                      Held work did not hold except aspen workNotesKept (27): workNotesKept 27, 16, 8; workTakenUp 24, 16, 4.
+                                                      Exchange journeys: zero in every arm of every world (absent, not a null).
+  7  24 day ranges at least as wide for counts, similar for shares
+                                                      PARTLY. In gen-4 and river the count ranges widen (workNotesKept 15 to 72 and 7 to 41; workTakenUp 8 to 22 and 2 to 26;
+                                                      plotsRested 10 to 28 and 1 to 15). In aspen they do not (28 to 17; 14 to 8; 5 to 3), which has two trajectories.
+                                                      Share ranges are similar or narrower at 24 days (company+leisure 0.38 to 0.25, 0.45 to 1.38, 1.38 to 1.05).
+  8  Sheep rows absent in some worlds ................ HELD. Absent in aspen and gen-4 at both horizons. River holds sheep (acquired 1 at 12 days and 2 at 24; shorn 3 to 9).
+
+THE MOVE BAND, CHECKED AGAINST THE EXTRA ARMS (not part of the readings; added in the dated note)
+  The rule: an arm moved on a row when it lies outside [smallest - R, largest + R] of the three reference arms (floors 1 for counts, 0.5 pp for shares).
+  Applied to nudge:3, 4 and 5 against the three references at 12 days (spread_255_d12_extra/analysis_extra.txt): 18 of 162 row cells fall outside,
+  11 percent, against about 13 to 15 percent that the rule's own simulation says a fourth value from the same distribution falls outside by a full range.
+  So the band is not too tight in aggregate. A cell by cell look shows some rows that the band would have called a move from noise alone, for example
+  aspen plotsRestingAtEnd (references 4, 5, 4; extras 1, 8, 1), river workNotesKept (references 96, 95, 89; extras 95, 112, 120) and workTakenUp (44 to 46; extras 45, 56, 64),
+  aspen people (references 60 to 61; extras 59, 56, 58). A removal arm that moves such a row by that much is not a finding on its own, and the file's
+  rule of 4 of 6 starts for a finding stands.
+
+YARDSTICK (UNKNOWN until the check below is read)
+  The plan quotes 15 to 18 percent at rules 250 and a target of 30 percent. These three saves at rules 255, over days 48 to 60 and 48 to 72, give 9.9 to 12.1 percent,
+  and leisure is almost nothing. Possible reasons, none tested yet: the definition (this lab row: company plus leisure as a share of waking time, people 12 and over,
+  time_budget categories), the window (days 48 to 72 of a settlement of 60 to 80 people against whatever the plan measured), the rules (251 to 255), or
+  the reinterpretation by --rules-up. CHECK RUN: the same three saves, 12 days, control only, at their own rules 250 with no --rules-up. If that also gives about 10 percent
+  the gap is definition or window, not rules.
+
+CHANGES
+  Evidence only, no code. Added here: spread_255_d12/, spread_255_d24/, spread_255_d12_extra/, aspen_nudge_check/, analyze_spread.mjs, analyze_extra.mjs, this file.
+  Outside git (kept): C:\dev\lw_runs\stage1c_spread255_d12, _d24, _d12_extra, aspen_check.
+
+RISKS
+  - Three worlds, one run each, a range of three or two values: a loose estimate of the true spread (it was about 1.7 standard deviations on average for a normal in the file,
+    and it can be far off). Aspen's is a range of two.
+  - Saves are rules 250 reinterpreted at 255 for measurement; arrivals on, purity not tested.
+  - At 256 the nudge will shake only what stays on the shared stream, and it can be absorbed there too (stop condition 1 in the brief).
+  Rollback: none needed, nothing in src/ or scripts/ changed.
+
+NEXT STEP
+  Step 5, the only rules change (keyed draws, 256), once the yardstick check has run. Stop condition 1 needs more than the offset-N nudge: a perturbation that cannot be absorbed
+  is needed before step 6. Two options, not chosen here: (a) a nudge that reseeds the shared stream (for example sets rng state from a hash of N), which cannot realign with the control,
+  or (b) several offsets per world and drop arms that repeat another arm. Option (a) changes what a nudge is and so changes the meaning of every earlier nudge result; option (b) costs runs and
+  keeps the old meaning. Not chosen: it is Ryan's call and only becomes live if stop condition 1 fires at 256.
