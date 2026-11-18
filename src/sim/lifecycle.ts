@@ -37,6 +37,7 @@ import { rulesOf } from './rules';
 import { runsRulesVersion } from './rulesversion';
 
 import { hyp } from './util';
+import { keyAt, keyedOn, keyedRng } from './keyed_draws';
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
 
 /** Register a freshly created person in the world and their household. */
@@ -361,12 +362,13 @@ export function immigrationTick(world: World): void {
   const perHead = food / Math.max(1, pop);
   const roofs = world.buildings.filter((b) => isHomeType(b.type)).length;
   if (perHead < 3.2 || roofs < Math.ceil(pop / 3.2) - 1) return;
-  if (world.rng.next() > 0.35) return;
+  const rng = keyedOn(world, 'arrivals') ? keyedRng(keyAt(world, 'arrivals', world.tick)) : world.rng; // rules 256 (keyed_draws.ts): one short generator for the whole arrival
+  if (rng.next() > 0.35) return;
 
   // arrive from a map edge, away from known wolf dens
   for (let tries = 0; tries < 24; tries++) {
-    const edge = world.rng.int(4);
-    const t = world.rng.range(6, (edge % 2 === 0 ? world.W : world.H) - 6);
+    const edge = rng.int(4);
+    const t = rng.range(6, (edge % 2 === 0 ? world.W : world.H) - 6);
     const x = edge === 0 ? t : edge === 1 ? world.W - 4 : edge === 2 ? t : 3;
     const y = edge === 0 ? 3 : edge === 1 ? t : edge === 2 ? world.H - 4 : t;
     if (!isWalkable(world, Math.floor(x), Math.floor(y)) || world.terrain[Math.floor(y) * world.W + Math.floor(x)] === T.SHALLOW) continue;
@@ -390,14 +392,14 @@ export function immigrationTick(world: World): void {
     const arriveX = path[path.length - 2];
     const arriveY = path[path.length - 1];
     // who is arriving: mostly a lone traveller, sometimes a couple or a family drawn by what they have heard
-    const rollKind = world.rng.next();
+    const rollKind = rng.next();
     const kind: 'single' | 'couple' | 'family' = pop + 3 <= rules.arrivalGroupCap && rollKind < 0.18 ? 'family' : pop + 2 <= rules.arrivalGroupCap && rollKind < 0.46 ? 'couple' : 'single';
-    const hh = createHousehold(world, world.rng);
+    const hh = createHousehold(world, rng);
     captureHouseholdCamp(world, hh, x, y);
     foundMembership(world, hh, x, y);
     const group: Person[] = [];
     const arrive = (age: number, sex: 'f' | 'm' | undefined, parents: number[] | undefined, dx: number, dy: number): Person => {
-      const person = createPerson(world, world.rng, { age, sex, hhId: hh.id, x: x + dx, y: y + dy, parents });
+      const person = createPerson(world, rng, { age, sex, hhId: hh.id, x: x + dx, y: y + dy, parents });
       person.needs.hunger = 52;
       person.needs.thirst = 55;
       person.needs.energy = 66;
@@ -419,11 +421,11 @@ export function immigrationTick(world: World): void {
         if (q.sex === 'f' && years >= 17 && years <= 44) womenToWed++;
         else if (q.sex === 'm' && years >= 17 && years <= 55) menToWed++;
       }
-      const sex = world.rng.chance(womenToWed <= menToWed ? 0.7 : 0.3) ? 'f' : 'm';
-      arrive(world.rng.range(18, 36), sex, undefined, 0, 0);
+      const sex = rng.chance(womenToWed <= menToWed ? 0.7 : 0.3) ? 'f' : 'm';
+      arrive(rng.range(18, 36), sex, undefined, 0, 0);
     } else {
-      const mother = arrive(world.rng.range(20, 34), 'f', undefined, 0, 0);
-      const father = arrive(world.rng.range(21, 38), 'm', undefined, 0.8, 0.5);
+      const mother = arrive(rng.range(20, 34), 'f', undefined, 0, 0);
+      const father = arrive(rng.range(21, 38), 'm', undefined, 0.8, 0.5);
       mother.partnerId = father.id;
       father.partnerId = mother.id;
       for (const [a, b] of [[mother, father], [father, mother]] as [Person, Person][]) {
@@ -434,7 +436,7 @@ export function immigrationTick(world: World): void {
         r.familiarity = 40;
       }
       if (kind === 'family') {
-        const kid = arrive(world.rng.range(1.5, 8), undefined, [mother.id, father.id], 0.4, 1);
+        const kid = arrive(rng.range(1.5, 8), undefined, [mother.id, father.id], 0.4, 1);
         for (const par of [mother, father]) {
           par.children.push(kid.id);
           bondParentChild(par, kid);

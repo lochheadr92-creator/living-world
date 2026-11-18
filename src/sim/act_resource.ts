@@ -67,6 +67,7 @@ import { personById } from './registry';
 import { eatsAtTheStore } from './tableeating';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
+import { grainSeedRoll } from './keyed_draws';
 
 // ───────────────────────── helpers ─────────────────────────
 function skillOf(p: Person, s: Source): number {
@@ -205,7 +206,7 @@ registerHandler('gather', {
     p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + practice);
     notePractice(world, p, sk, practice);
     let retained=got;
-    if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
+    if (s.type === 'wild_grain' && grainSeedRoll(world, p.id, s.id)) {
       // shell some of the grain heads for seed
       retained-=saveSeedFromGrain(world,p);
     }

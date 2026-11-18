@@ -12,6 +12,7 @@ import { hashUnit } from './rng';
 import { isFreeLand, newId, registerSource, unregisterSource } from './registry';
 import type { Source, SourceType, World } from './types';
 import { T } from './types';
+import { treeRng } from './keyed_draws';
 
 export function makeSource(world: World, type: SourceType, x: number, y: number, amount?: number, growth = 1): Source {
   const s: Source = {
@@ -69,6 +70,7 @@ export function updateSources(world: World): void {
   for (let i = 0; i < list.length; i++) {
     const s = list[i];
     if (s.type === 'tree') {
+      let rng = world.rng; // rules 256 (keyed_draws.ts): this tree's own generator once it is asked
       if (s.growth < 1) {
         s.growth = Math.min(1, s.growth + productiveRate(world, s.x, s.y) / SAPLING_TICKS);
         const target = Math.floor(s.max * s.growth + 1e-6);
@@ -76,10 +78,10 @@ export function updateSources(world: World): void {
           s.amount++;
           ledgerCreate(world, 'wood', 1, 'tree growth');
         }
-      } else if ((world.tick + i) % 240 === 0 && s.amount >= 2 && (world.stats.trees ?? 0) < (world.stats.treeCap ?? 0) && world.rng.next() < treeSeedChance(world)) {
+      } else if ((world.tick + i) % 240 === 0 && s.amount >= 2 && (world.stats.trees ?? 0) < (world.stats.treeCap ?? 0) && (rng = treeRng(world, s.id)).next() < treeSeedChance(world)) {
         // seed a sapling nearby (forest slowly recovers)
-        const dx = world.rng.int(7) - 3;
-        const dy = world.rng.int(7) - 3;
+        const dx = rng.int(7) - 3;
+        const dy = rng.int(7) - 3;
         const tx = s.x + dx;
         const ty = s.y + dy;
         if ((dx || dy) && isFreeLand(world, tx, ty)) {

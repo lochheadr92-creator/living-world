@@ -21,6 +21,7 @@ import { affinityOf } from './relations';
 import { benchTool, mintTool, recipeToolMultiplier, wearTool } from './tools';
 import { bestOf } from './toolreg';
 import type { Building, Earmark, FacilitySnapshot, FacilityState, Items, ItemKind, Job, Person, Source, World } from './types';
+import { SPOIL_SHARE, keyAt, keyMix, keyUnit, keyedOn, spoilPrefix } from './keyed_draws';
 
 /** A batch nobody has worked on for this long is shelved: its inputs go back on the shelves unharmed. */
 export const STALL_LIMIT = DAY * 2;
@@ -288,7 +289,7 @@ export function noteSpoiled(world: World, b: Building, item: ItemKind, lost: num
     let total = 0;
     for (const hid of Object.keys(ops.shares)) total += ops.shares[Number(hid)][item] ?? 0;
     if (total <= 0) break;
-    let pick = world.rng.next() * total;
+    let pick = (keyedOn(world, 'spoilage') ? keyUnit(keyMix(spoilPrefix(keyAt(world, 'spoilage', world.tick), SPOIL_SHARE, b.id, item), i)) : world.rng.next()) * total; // rules 256 (keyed_draws.ts)
     for (const hid of Object.keys(ops.shares)) {
       const v = ops.shares[Number(hid)][item] ?? 0;
       if (pick < v) {

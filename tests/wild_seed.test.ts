@@ -1,4 +1,5 @@
-import {afterEach,expect,it} from 'vitest';
+import {afterAll,afterEach,expect,it} from 'vitest';
+import {setKeyedDraws} from '../src/sim/keyed_draws';
 import {wildSeedScene,finishWildHarvest} from './helpers/wild_seed';
 import {setWildSeedInput,saveSeedFromGrain} from '../src/sim/wild_seed';
 import {conservationReport} from '../src/sim/economy';
@@ -6,6 +7,10 @@ import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {stepActivity} from '../src/sim/activities';
 import {generateOptions} from '../src/sim/decision';
 afterEach(()=>setWildSeedInput(true));
+// The chance to keep grain for seed is the shared-stream draw these tests pin (one in five, and the generator state they compare). From rules 256 it
+// is a keyed draw instead (tests/keyed_draws.test.ts), so this file runs with that one part switched off.
+setKeyedDraws(false,'grain');
+afterAll(()=>setKeyedDraws(true,'grain'));
 it('does not consume a partial grain when the conversion cannot pay its whole input',()=>{
  const {w,p}=wildSeedScene(undefined,{wood:5,grain:.5,seeds:4});const raw=serializeWorld(w);
  expect(saveSeedFromGrain(w,p)).toBe(0);expect(serializeWorld(w)).toBe(raw);

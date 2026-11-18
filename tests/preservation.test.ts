@@ -1,5 +1,6 @@
 import {expect, it, vi} from 'vitest';
 import {createWorld} from '../src/sim/factory';
+import {setKeyedDraws} from '../src/sim/keyed_draws';
 import {currentWorldSettings} from '../src/sim/profiles';
 import {snapshotInitial, conservationReport} from '../src/sim/economy';
 import {startJob, workJob, facilityTick, finishJob, shelveJob,joinBlocker} from '../src/sim/facilities';
@@ -203,8 +204,10 @@ it('cancellation retains paid age and progress; spoiled inputs cannot refund fue
 it('preserved food carried in a pack still spoils through the ordinary world process',()=>{
   const {w,p}=staged();p.inv={dried_fish:2};snapshotInitial(w);
   w.tick=59;
+  // from 256 spoilage draws from a key, not the shared stream this test forces, so the keyed part is switched off here (tests/keyed_draws.test.ts covers the keyed draw)
+  setKeyedDraws(false,'spoilage');
   const draw=vi.spyOn(w.rng,'next').mockReturnValue(0);
-  try{stepWorld(w);}finally{draw.mockRestore();}
+  try{stepWorld(w);}finally{draw.mockRestore();setKeyedDraws(true,'spoilage');}
   expect(p.inv.dried_fish??0).toBe(0);
   expect(w.ledger.spoiled.dried_fish).toBe(2);
   expect(conservationReport(w).ok).toBe(true);

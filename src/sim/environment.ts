@@ -3,6 +3,7 @@ import { coldSnap } from './hardship';
 import { smoothstep, clamp } from './util';
 import type { WeatherKind, World } from './types';
 import { addEvent } from './events';
+import { keyAt, keyedOn, keyedRng } from './keyed_draws';
 
 /** fraction of the current day, 0 = midnight, 0.5 = noon */
 export function dayFraction(tick: number): number {
@@ -65,6 +66,7 @@ export function updateEnvironment(world: World): void {
   world.light = lightAt(dayFraction(world.tick));
 
   if (world.tick >= w.nextChange) {
+    const rng = keyedOn(world, 'weather') ? keyedRng(keyAt(world, 'weather', world.tick)) : world.rng; // rules 256 (keyed_draws.ts)
     const harsh = world.settings.harsh;
     const table = TRANSITIONS[w.kind].map(([k, p]) => {
       let q = p;
@@ -73,7 +75,7 @@ export function updateEnvironment(world: World): void {
       return [k, q] as [WeatherKind, number];
     });
     const total = table.reduce((s, [, p]) => s + p, 0);
-    let r = world.rng.next() * total;
+    let r = rng.next() * total;
     let next: WeatherKind = table[0][0];
     for (const [k, p] of table) {
       if (r < p) {
@@ -87,7 +89,7 @@ export function updateEnvironment(world: World): void {
       addEvent(world, 'nature', text[next], [], world.camp.x, world.camp.y);
     }
     w.kind = next;
-    const len = next === 'storm' ? world.rng.range(500, 1100) : world.rng.range(800, 2300);
+    const len = next === 'storm' ? rng.range(500, 1100) : rng.range(800, 2300);
     w.nextChange = world.tick + Math.round(len);
   }
   const tg = TARGET[w.kind];

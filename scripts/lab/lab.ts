@@ -22,6 +22,8 @@ import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow
 import type { GrowMorePart } from '../../src/sim/grow_more';
 import { FARM_DRAW_PARTS, farmDrawPartOn, setFarmDraw } from '../../src/sim/farm_draw';
 import type { FarmDrawPart } from '../../src/sim/farm_draw';
+import { KEYED_DRAWS_PARTS, keyedDrawsPartOn, setKeyedDraws } from '../../src/sim/keyed_draws';
+import type { KeyedDrawsPart } from '../../src/sim/keyed_draws';
 import { BIGGER_RESERVE_PARTS, biggerReservePartOn, setBiggerReserve } from '../../src/sim/bigger_reserve';
 import type { BiggerReservePart } from '../../src/sim/bigger_reserve';
 import { PARENT_DECIDES_PARTS, parentDecidesPartOn, setParentDecides } from '../../src/sim/parent_decides';
@@ -307,6 +309,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-grow-more' ? undefined : (kind.slice('rich-no-grow-more-'.length) as GrowMorePart);
     if (part && !GROW_MORE_PARTS.includes(part)) throw new Error(`rich-no-grow-more-${part}: no such part (${GROW_MORE_PARTS.join(', ')})`);
     return { spec: label, summary: `wild food regrows twice as fast and a plot carries twice the grain${part ? ' (' + part + ' part only)' : ''}, as before rules 254; no effect below rules 254`, install() { const was = Object.fromEntries(GROW_MORE_PARTS.map((q) => [q, growMorePartOn(q)])) as Record<GrowMorePart, boolean>; setGrowMore(false, part); return () => { for (const q of GROW_MORE_PARTS) setGrowMore(was[q], q); }; } };
+  }
+  // rules 256 (keyed_draws.ts): the weather, arrivals, spoilage, tree seeding and wild grain draw from the shared stream again
+  if (kind === 'rich-no-keyed-draws' || kind.startsWith('rich-no-keyed-draws-')) {
+    const part = kind === 'rich-no-keyed-draws' ? undefined : (kind.slice('rich-no-keyed-draws-'.length) as KeyedDrawsPart);
+    if (part && !KEYED_DRAWS_PARTS.includes(part)) throw new Error(`rich-no-keyed-draws-${part}: no such part (${KEYED_DRAWS_PARTS.join(', ')})`);
+    return { spec: label, summary: `${part ?? 'weather, arrivals, spoilage, tree seeding and wild grain'} draw${part ? 's' : ''} from the shared stream again, as before rules 256; no effect below rules 256`, install() { const was = Object.fromEntries(KEYED_DRAWS_PARTS.map((q) => [q, keyedDrawsPartOn(q)])) as Record<KeyedDrawsPart, boolean>; setKeyedDraws(false, part); return () => { for (const q of KEYED_DRAWS_PARTS) setKeyedDraws(was[q], q); }; } };
   }
   // rules 255 (farm_draw.ts): no extra pull toward the fields
   if (kind === 'rich-no-farm-draw' || kind.startsWith('rich-no-farm-draw-')) {

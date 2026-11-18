@@ -69,6 +69,7 @@ import { updateWildlife } from './wildlife';
 import { updateWolfFight } from './wolf_fight';
 import { updateWolfSkin } from './wolf_skin';
 import type { ItemKind, Person, World } from './types';
+import { SPOIL_PACK, SPOIL_PILE, SPOIL_STORE, keyAt, keyMix, keyUnit, keyedOn, spoilPrefix } from './keyed_draws';
 
 /** One simulation tick. The only thing that ever mutates the world. */
 export function stepWorld(world: World): void {
@@ -275,15 +276,17 @@ function roadsTick(world: World): void {
 }
 
 /** Perishable goods slowly go off: an explicit, recorded process (never silent). */
-function spoilGoods(world: World): void {
+export function spoilGoods(world: World): void {
   const rate = 0.011;
+  const kd = keyedOn(world, 'spoilage') ? keyAt(world, 'spoilage', world.tick) : undefined; // rules 256 (keyed_draws.ts): each unit has its own key
   // New provisions also deteriorate while carried. Historical pack semantics
   // are untouched; an empty new-kind holding consumes no random draw.
   if(runsPreservation(world)){
-    const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
-    for(const items of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
+    const holdings=[...world.persons.filter(p=>p.alive).map(p=>[p.inv,p.id] as const),...world.carts.map(c=>[c.load,c.id] as const)];
+    for(const [items,holder] of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
       const n=items[k]??0;let lost=0;
-      for(let i=0;i<n;i++)if(world.rng.next()<rate*perishableOf(world,k)*spoilStore(world))lost++;
+      const pre=kd===undefined?0:spoilPrefix(kd,SPOIL_PACK,holder,k);
+      for(let i=0;i<n;i++)if((kd===undefined?world.rng.next():keyUnit(keyMix(pre,i)))<rate*perishableOf(world,k)*spoilStore(world))lost++;
       if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,k==='cutting'?'carried living cutting withered':'carried preserved food spoiled');}
     }
   }
@@ -294,7 +297,8 @@ function spoilGoods(world: World): void {
       const n = b.store.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < rate * perishableOf(world, k) * bad * spoilStore(world)) lost++;
+      const pre = kd === undefined ? 0 : spoilPrefix(kd, SPOIL_STORE, b.id, k);
+      for (let i = 0; i < n; i++) if ((kd === undefined ? world.rng.next() : keyUnit(keyMix(pre, i))) < rate * perishableOf(world, k) * bad * spoilStore(world)) lost++;
       if (lost > 0) {
         b.store.items[k] = n - lost;
         if (b.store.items[k] === 0) delete b.store.items[k];
@@ -308,7 +312,8 @@ function spoilGoods(world: World): void {
       const n = pile.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * perishableOf(world, k) * spoilPile(world)) lost++;
+      const pre = kd === undefined ? 0 : spoilPrefix(kd, SPOIL_PILE, pile.id, k);
+      for (let i = 0; i < n; i++) if ((kd === undefined ? world.rng.next() : keyUnit(keyMix(pre, i))) < 0.04 * perishableOf(world, k) * spoilPile(world)) lost++;
       if (lost > 0) {
         pile.items[k] = n - lost;
         if (pile.items[k] === 0) delete pile.items[k];
