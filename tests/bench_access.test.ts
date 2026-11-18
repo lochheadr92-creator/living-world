@@ -119,6 +119,9 @@ describe("rules 257: a workshop's goods count only for who may take them", () =>
     const before = hashWorld(f.w);
     f.p.beliefs[f.yard.id].ops!.held = [];
     expect(hashWorld(f.w)).not.toBe(before);
+    const afterClaims = hashWorld(f.w);
+    f.p.beliefs[f.yard.id].ops!.seenBuilders = { [f.p.hhId]: 0.3 };
+    expect(hashWorld(f.w)).not.toBe(afterClaims);
   });
 
   it('uses the same remembered access for batch input counting', () => {
