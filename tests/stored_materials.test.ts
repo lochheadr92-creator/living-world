@@ -1,4 +1,4 @@
-import { afterEach, expect, it } from 'vitest';
+import { afterEach, beforeEach, expect, it } from 'vitest';
 import { projectHelperScene } from './helpers/project_helpers';
 import { building } from './helpers/kit';
 import { delBelief, observe } from '../src/sim/knowledge';
@@ -22,9 +22,14 @@ import { observeNow } from './helpers/inhabit';
 import { describePerson } from '../src/sim/inspect';
 import { destroyBuilding } from '../src/sim/buildings';
 import { makeSource } from '../src/sim/sources';
+import { setCarryMore } from '../src/sim/carry_more';
+import { setWoodenSpear } from '../src/sim/wooden_spear';
 import type { Person, World } from '../src/sim/types';
 
-afterEach(() => { setStoredMaterialPlans(true); setStoredMaterialPromises(true); });
+// These scenes stage a person who wants a pick. From rules 204 every grown person without a basket wants one first (2.1), and from 240 a spear whose
+// makings they hold outranks a stone skill of 1.8, so the scenes switch those two wants off. The material trip follows the wanted tool, not the intention.
+beforeEach(() => { setCarryMore(false); setWoodenSpear(false); });
+afterEach(() => { setStoredMaterialPlans(true); setStoredMaterialPromises(true); setCarryMore(true); setWoodenSpear(true); });
 const collection = (w: World, p: Person, id: number) => generateOptions(w, p, true, true).options.find(o => o.kind === 'withdraw' && o.targetId === id && o.yields === 'stone');
 function startCollection(f: ReturnType<typeof materialPlanScene>) {
   const o = collection(f.w, f.ada, f.store.id)!;
@@ -212,6 +217,8 @@ it('accepts a partial physical withdrawal and lets later observation correct the
   f.ada.skills.stone=1.8;f.ada.skills.wood=0.5;f.ada.skills.forage=0.2;
   f.ada.intentions[0].makes='pick';f.ada.intentions[0].goal='make a pick';
   f.ada.intentions[0].wants.stone = 2;
+  // From rules 169 a sight of a shared store remembers one unit; here she knows the full count, so the offer is two.
+  f.ada.beliefs[f.store.id].items = { stone: 4 };
   // Competing withdrawal leaves just one unit after the two-unit offer was accepted.
   const a = startCollection(f);
   expect(a.data.items).toEqual({stone:2});

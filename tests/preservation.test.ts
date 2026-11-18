@@ -307,7 +307,8 @@ it.each(['dry','smoke'] as const)('%s batches continue exactly after saves durin
 it('carries household raw food for preservation while retaining two immediate meals',()=>{
   const s=staged(),{w,p,b}=s;
   b.store.items={};p.inv={};w.weather.rain=0;
-  const home=building(s,'hut',45,40,p.hhId,{fish:4});
+  // rules 184 (home_interior.ts): the contents of a home are learned only from inside or within DOOR_REACH of it, so the hut stands at Ada's door
+  const home=building(s,'hut',42,44,p.hhId,{fish:4});
   observe(w,p,home);observe(w,p,b);snapshotInitial(w);
   const collect=generateOptions(w,p,true,true).options.find(o=>o.key===`collect:${home.id}:fish`);
   expect(collect).toBeDefined();startActivity(w,p,collect!.make!()!);
