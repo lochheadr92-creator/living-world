@@ -1,0 +1,42 @@
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 106 revisions left to test after this (roughly 7 steps)
+[055cae15617aa6d27ee0d480eb19f55bdfe60284] docs: record rules-156 child work verification and evidence
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 53 revisions left to test after this (roughly 6 steps)
+[c4f31c1533523569f5f255e9a86b3d099b63d11a] feat: a neighbour is asked to watch a child only if they know the child (rules 168)
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 26 revisions left to test after this (roughly 5 steps)
+[b3f74019a608a9a1607164ec9a967a9396cc9c0d] feat: a fresh empty food sight can be told and relayed (rules 176)
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 13 revisions left to test after this (roughly 4 steps)
+[7840f4e14d1b0e179d500ceb2e9ab902b6028606] docs: record the rules-169 paired lab
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 6 revisions left to test after this (roughly 3 steps)
+[c9949b8624fd4553cbcd002aa415438f985f127a] docs: record rules 169, a glance at a store
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 2 revisions left to test after this (roughly 2 steps)
+[ca6750076688ed4202dbeacc473cf4ba4dc271be] docs: record the rules-168 12-seed paired lab
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[9d6302b58ce812c52a977809a96d158d6b51b596] test: record the immutable rules-169 birch continuation
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[f347ca5f272c4be9fe9aab556f71411b72545ad1] feat: a sight of a store remembers a glance, not the count (rules 169)
+running 'C:\dev\lw_runs\bisect_pres.cmd'
+f347ca5f272c4be9fe9aab556f71411b72545ad1 is the first 'bad' commit
+commit f347ca5f272c4be9fe9aab556f71411b72545ad1
+Author: Ryan Lochhead <lochheadr92@gmail.com>
+Date:   Mon Nov 9 01:41:22 2026 +1000
+
+    feat: a sight of a store remembers a glance, not the count (rules 169)
+    
+    A rich world at rules 169 remembers a building store, a cart load or a pile as which kinds are there, and as full when the true weight meets the cap. The lexicographically first non-textile kind is the fullness stand-in. Textile kinds stay at the counts that were there. Rules 168, authored worlds, and setSeenStock(false) keep the exact copy.
+
+ src/sim/knowledge.ts     |  8 ++---
+ src/sim/rulesversion.ts  |  5 +--
+ src/sim/seen_stock.ts    | 37 +++++++++++++++++++++
+ tests/seen_stock.test.ts | 84 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 128 insertions(+), 6 deletions(-)
+ create mode 100644 src/sim/seen_stock.ts
+ create mode 100644 tests/seen_stock.test.ts
+bisect found first 'bad' commit

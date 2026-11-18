@@ -1,0 +1,72 @@
+STAGE 1C STEP 5. RULES 256, KEYED DRAWS. 18 November 2026. Local commits, nothing pushed, no pull request.
+Commits: ec3d5f42 (code, contract tests, docs, scripts), d5612bde (pin tick), d7201c82 (pin script note), d2a974f4 (the pin), and the commit that holds this file.
+
+STATUS
+  VERIFIED by real execution
+    Typecheck: tsc --noEmit exit 0 on the final tree (step5/tsc_run1.txt, tsc_run2.txt).
+    Contract tests: tests/keyed_draws.test.ts, 33 of 33 (step5/keyed_draws_test_run3.txt). Run 1 had 2 failures, both mistakes in the tests
+      (trees needed 2400 ticks to show a sapling; the 255 contrast needed a longer run), fixed in the tests, not in the code.
+    Twin gate (all keyed parts off equals 255, version label equalised, scripts/keyed_twin.ts, arrivals on, Normal):
+      day 5   aspen dd144297 = dd144297, gen-4 ff250150 = ff250150, river a5e00c29 = a5e00c29
+      day 25  aspen b3acfb5b = b3acfb5b, gen-4 4bd341b5 = 4bd341b5, river e126b45b = e126b45b          (step5/twin_*.txt)
+    First difference 255 against 256 on gen-4 with the parts on: tick 50 (step5/first_diff_gen-4.txt).
+    Observer purity at 256 (step5/observer_purity_256.ts): river, aspen, birch, 10 days, immigration on and off, six runs, a watched world
+      identical to an unwatched twin at the end of every day, self checks 18 of 18 true on each. This closes the earlier UNKNOWN about
+      immigration on, for these three seeds and 10 days.
+    Determinism and save and load at 256 with every part on (step5/determinism_*.txt): two runs of one seed identical at day 5, and a world saved
+      at day 2 and loaded identical to the uninterrupted one at day 5, on gen-4, aspen and river.
+    Pin: tests/v256_continuation.* recorded from a clean checkout of d7201c82 (git status empty). Recorded twice (the first from d5612bde, thrown
+      away because its note named tick 6000): same saved and continued digests both times. gen-4, tick 36000, five newcomers, 35 alive.
+      The test passes (79 s alone, 217 s inside the full suite).
+    Pins 251 to 255 and tests/golden.test.ts pass unchanged, in both full runs. No golden fingerprint was re-recorded, none needed it.
+    Speed: no slowdown found. gen-4, 20,000 ticks, four runs at once: 2.53 and 2.56 ms a tick at 255, 2.31 and 2.36 at 256 (step5/timing_*.txt; a
+      different world, one seed, so not a claimed speed-up). tests/v249_continuation.test.ts, a rules-249 world, takes 239.7 s on the 256 tree against
+      239.6 s on 4ed3837b, side by side (step5/v249_alone_*.txt). The step 0b profile put the five systems together at about 0.2% of run time.
+    Full suite, run 2 on the final tree (step5/full_suite_run2.txt): 684 files, 3,747 tests, 723 s, 24 workers. 8 files and 10 tests failed:
+      A. 3 fail on 255 too, since f347ca5f (rules 169, "a sight of a store remembers a glance", 9 November): tests/preservation.test.ts
+         "carries household raw food for preservation while retaining two immediate meals", tests/stored_materials.test.ts "an offered request creates a
+         voluntary promise ..." and "accepts a partial physical withdrawal ...". Found by running them on 4ed3837b in a temporary worktree (all three fail) and bisecting
+         (the first and the third, from a commit where their test files passed: first bad commit f347ca5f both times; the second fails at f347ca5f and
+         passes at f347ca5f^; step5/bisect_*.txt).
+         Not caused by 256 and not repaired here (one branch, one purpose).
+      B. 7 timed out under load and pass when run alone on the final tree (step5/rerun_timeouts_run2.txt, 6 files, 9 tests, 242 s): tests/lab_report.test.ts
+         (2), v235, v249 and v250 continuations, tests/zz_review_g_observer_purity.test.ts (river), tests/zz_review_main_toolreport_saves.test.ts.
+      C. none is a regression of 256.
+    Full suite, run 1 (step5/full_suite_run1.txt): 16 failed tests in 11 files, because three twin runs and two other test runs shared the machine.
+      Classed: 8 timeouts under load (all pass alone, step5/rerun_timeouts_run1.txt), 5 tests that forced or compared the shared stream (1 in
+      tests/preservation.test.ts, 4 in tests/wild_seed.test.ts: fixed by switching that one keyed part off in those two files) and the same 3 as A.
+  LIKELY
+    No other test forces the shared stream for one of the five parts: one grep for vi.spyOn on an rng found carcass.test.ts (wildlife, which stays
+      shared) and preservation.test.ts, and both full runs show no other failure that is not a timeout or one of the three.
+  UNKNOWN
+    Whether the three failures in A were known to Ryan. They have been red on main for nine days. Nothing in the repo's notes lists them.
+    The behaviour of keyed arrivals in worlds with more than about 50 people (the pin and the labs here do not go there).
+
+CHANGES
+  src/sim/keyed_draws.ts (new): keys, five part switches, the key of each part, the uniform helper.
+  environment.ts (weather), lifecycle.ts (arrivals: one short generator per arrival, used for the gate, the sites, createHousehold, createPerson),
+  world.ts (spoilage per unit; spoilGoods exported), facilities.ts (granary share), sources.ts (trees), act_resource.ts (grain).
+  rulesversion.ts: 256. scripts/lab/lab.ts: arms rich-no-keyed-draws and rich-no-keyed-draws-<part>.
+  scripts/keyed_first_diff.ts, scripts/keyed_twin.ts, scripts/v256_reference.ts. tests/keyed_draws.test.ts (33), tests/helpers/v256ref.ts,
+  tests/v256_continuation.*, and two tests that pinned a shared-stream draw switched that part off (preservation, wild_seed).
+  docs/KEYED_DRAWS.md, AGENTS.md (256 checkpoint paragraph), docs/RULES_RANGES.md (256 row closed).
+  Deviation from the brief: it said to gate through rulesOf. The bundle precedent (bigger_reserve.ts, grow_more.ts, farm_draw.ts) uses plain
+  functions with runsRulesVersion, so keyed_draws.ts does the same.
+  Deviation from the brief: the twin at the brief's length (day 5 and day 25) costs about 11 ms a tick, too slow for the suite, so it lives in
+  scripts/keyed_twin.ts as a gate with its output kept here, and the suite carries a short twin (3 seeds, 3,000 ticks). Said so in docs/KEYED_DRAWS.md.
+
+RISKS
+  The pin test needs 217 s of its limit under a full suite, as v251 does (220 s of 245 s). Its limit is 360 s; the older pins are 245 s. v249 takes
+    240 s alone and fails whenever the machine is busy. That is already the case on 255 and is a margin problem of the suite, not of 256.
+  Three tests have been red on main since 9 November (A above). They hide a real change in what the sim offers: a household member cannot be
+    offered a "collect from home store" or a stone withdrawal that these tests expected. It may be intended (rules 169 made memory of a store a
+    glance, not a count), in which case the tests are stale, or it may be a bug. UNKNOWN. This also touches the Stage 2 earmark and trip work.
+  A 256 world is a different world from a 255 world: every save and run before 256 is a different trajectory from its 256 version.
+  The nudge shakes less at 256 (births, old age, wildlife, names). Step 6 checks that it is still live.
+  Rollback: the work is local and unpushed. To undo, git revert the five commits in reverse (this file's commit, d2a974f4, d7201c82, d5612bde,
+  ec3d5f42); nothing is rewritten. A switch short of that: setKeyedDraws(false) and the lab arms rich-no-keyed-draws give a 256 world that draws
+  from the shared stream again (hash equal to 255 by the twin gate).
+
+NEXT STEP
+  Step 6: commit the readings (written, not yet committed), run the spread at 256 and the 255 against 256 equivalence lab, then the save library
+  and the baseline lab. Ryan's decision wanted on the three red tests (repair, mark as known, or leave) when convenient; not blocking.

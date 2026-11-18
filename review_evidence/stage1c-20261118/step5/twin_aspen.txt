@@ -1,0 +1,3 @@
+{"seed":"aspen","day":5,"tick":12000,"hash256off":"dd144297","hash255":"dd144297","same":true,"alive":30}
+{"seed":"aspen","day":25,"tick":60000,"hash256off":"b3acfb5b","hash255":"b3acfb5b","same":true,"alive":43}
+twin held

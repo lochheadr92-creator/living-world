@@ -1,0 +1,48 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > a running world stores its people as columns in product save format 5
+review H heterogeneous fields retained in columns: lastTaken:4/28 dailyRoutines:21/28 crowd:26/28 leisure:14/28 goal:19/28 skillExperience:9/28 hauling:12/28 newsTold:18/28 heardDemand:4/28 customers:2/28 socialMemory:8/28 shown:8/28
+
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > measures the uncapped per-person records (always passes; numbers for the review)
+review H day-1 uncapped records: {"persons":28,"bytes":1797204,"told":156,"cooldowns":793,"cooldownsExpired":500,"optCooldowns":19,"greetCooldowns":570,"failures":3,"failuresStaleTarget":3,"beliefs":3358,"staleBeliefs":176,"nextId":1949,"idsPerPersonDay":70}
+
+ ✓ tests/zz_review_h_retention.test.ts (3 tests) 4907ms
+ ✓ tests/lab_report.test.ts (2 tests) 30982ms
+   ✓ pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics 15903ms
+   ✓ reports an unavailable contrast without inventing a result and keeps story output 15077ms
+ ✓ tests/lab_provenance.test.ts (2 tests) 56030ms
+   ✓ retains runner and measurement source, reports it, resumes only the same content, and refuses changed content 55093ms
+   ✓ rejects a source change against the start snapshot 935ms
+ ✓ tests/zz_review_main_toolreport_saves.test.ts (2 tests) 70390ms
+   ✓ REVIEW: tool registry consistency in retained and fresh worlds (2)
+     ✓ retained saves 388ms
+     ✓ fresh current-rules worlds, 12,000 ticks, checked every 600 ticks 70001ms
+ ✓ tests/v250_continuation.test.ts (1 test) 128870ms
+   ✓ preserves the rules-250 ordinary gen-4 continuation 128869ms
+ ✓ tests/v235_continuation.test.ts (1 test) 136740ms
+   ✓ preserves the rules-235 ordinary river continuation 136739ms
+ ✓ tests/zz_review_g_observer_purity.test.ts (2 tests) 219479ms
+   ✓ REVIEW G: observation leaves the world exactly as it was, every tick (2)
+     ✓ river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical 152395ms
+     ✓ meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical 67083ms
+ ✓ tests/v249_continuation.test.ts (1 test) 240876ms
+   ✓ preserves the rules-249 ordinary gen-2 continuation 240875ms
+
+ Test Files  8 passed (8)
+      Tests  14 passed (14)
+   Start at  11:29:34
+   Duration  243.57s (tests 98%, transform 1%)
+

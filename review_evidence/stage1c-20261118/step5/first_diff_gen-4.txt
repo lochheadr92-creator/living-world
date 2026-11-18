@@ -1,0 +1,1 @@
+{"seed":"gen-4","firstDiffTick":50,"day":0,"alive":28}

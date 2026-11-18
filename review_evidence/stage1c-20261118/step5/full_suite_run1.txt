@@ -1,0 +1,2306 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:11:47). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:117:21). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:118:21). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/preservation.test.ts (26 tests | 2 failed) 1196ms
+   ✓ pays for a drying batch, pauses in rain, waits for output room and never finishes through observation or reload 317ms
+   ✓ smoking requires paid fuel and consumes it only once 60ms
+   ✓ neglected unfinished fish spoils instead of completing or freshening after reload 119ms
+   ✓ offered physical work survives interruption and reload, then preserved fish is actually eaten 69ms
+   ✓ repeated option and inspector reads are pure; twin worlds remain exact 80ms
+   ✓ rejects missing batch state and prevents two claimants starting the same batch 214ms
+   ✓ collapse settles the held inputs once and cannot leave a free product 5ms
+   ✓ a full pack can eat its preserved granary share even when another food is inaccessible 5ms
+   ✓ preserving does not take the last meal or outrank urgent eating 4ms
+   ✓ historical worlds cannot acquire preserved food or a rack by a missing-field migration 15ms
+   ✓ cancellation retains paid age and progress; spoiled inputs cannot refund fuel into a full store 9ms
+   × preserved food carried in a pack still spoils through the ordinary world process 11ms
+   ✓ a batch expiring before the worker tick cannot be reported as successfully finished food 33ms
+   ✓ two raw portions can be preserved when other carried food supplies the immediate meals 7ms
+   ✓ food reserved to another worker cannot stand in for the preparer's immediate meals 12ms
+   ✓ granary meal planning does not learn remote stock or share changes before arrival 7ms
+   ✓ preservation supply uses fresh remembered stores rather than remotely reading their share book 6ms
+   ✓ a full pack is not sent repeatedly to collect preserved food it cannot carry 3ms
+   ✓ dry batches continue exactly after saves during labour and passive processing 55ms
+   ✓ smoke batches continue exactly after saves during labour and passive processing 36ms
+   × carries household raw food for preservation while retaining two immediate meals 5ms
+   ✓ uses the existing bounded batch plan to finish a feasible preservation job and leaves passive drying alone 59ms
+   ✓ existing meat follows the dry recipe into actual eating 5ms
+   ✓ existing meat follows the smoke recipe into actual eating 4ms
+   ✓ an ordinary food-reserve plan can prepare known spare food without taking a second project 20ms
+   ✓ the batch planner does not substitute stale nearby rack stock for a fresh known food supply 33ms
+ ❯ tests/stored_materials.test.ts (15 tests | 2 failed) 2647ms
+   ✓ keeps a material plan viable when remembered shared storage is the only stone source 46ms
+   ✓ allows a helper to consider remembered shared material, without consulting remote inventory 10ms
+   ✓ offers ordinary collection to execute a raw-material commitment 19ms
+   ✓ only reads known own/public stocks, with pure observers and no knowledge for an absent person 83ms
+   ✓ isolates plan and promise connections and retains all rules-39 behavior 48ms
+   ✓ uses real withdrawal, crafting and later tool work with full-state save/replay equality 1867ms
+   × an offered request creates a voluntary promise, collects stock, delivers, credits use and retains personal feedback 380ms
+   ✓ storage knowledge does not override urgent needs, conflicting commitments or refusal 18ms
+   ✓ stale stock fails physically, records the failure, and stops offering the empty place 21ms
+   ✓ revalidates a private store after household ownership changes during the work 20ms
+   ✓ interruption, capacity changes and repeated completion cannot duplicate stock 26ms
+   ✓ continues identically after a save during a real collection journey 41ms
+   × accepts a partial physical withdrawal and lets later observation correct the remaining shortage 6ms
+   ✓ a demolished destination is learned at arrival, without transferring its scattered goods remotely 6ms
+   ✓ cancelled and expired commitments stop demanding collection and never acquire delivery credit 57ms
+ ✓ tests/save_storage.test.ts (27 tests) 30804ms
+   ✓ where a save is kept (4)
+     ✓ puts the world in IndexedDB and only a short description in localStorage 1406ms
+     ✓ saves and loads a Huge world that is larger than localStorage would take 8902ms
+     ✓ hands the settings back with the world 660ms
+     ✓ replaces the previous save in place 1002ms
+   ✓ a save made before IndexedDB was used (3)
+     ✓ still loads 1183ms
+     ✓ is replaced by the next save, which frees its space in localStorage 2873ms
+     ✓ is replaced by a save even when localStorage is too full to describe the new one until it is removed 2105ms
+   ✓ when IndexedDB does not work (6)
+     ✓ falls back to localStorage when there is no IndexedDB 697ms
+     ✓ falls back to localStorage when the write into IndexedDB fails 533ms
+     ✓ returns false, without throwing, when nothing will take the save, and leaves the previous save as it was 1141ms
+     ✓ loads from localStorage when the description points at IndexedDB but the record is not there 673ms
+   ✓ a saved world is run for one tick before it replaces the running one (2)
+     ✓ refuses a save that reads back but cannot run, and keeps the running world 454ms
+     ✓ the world swapped in has not been ticked by the check 566ms
+   ✓ a save never loses the one it replaces (6)
+     ✓ describes the world as it was when Save was pressed, not the one started while it was compressed 456ms
+     ✓ when the description cannot be written after the world is stored, the old save is still there and still described 983ms
+     ✓ a stored copy that does not read back is not described, and the old save stays 952ms
+     ✓ alternates between two records, so each save leaves the one before it whole 1920ms
+     ✓ in localStorage alone, a description that will not fit puts the old copy back 690ms
+     ✓ a world whose own clock threw is not saved over a good one 559ms
+   ✓ the autosave (3)
+     ✓ is its own record: the hand-made save and its description are left alone, and it loads back exactly 1434ms
+     ✓ describes the world as it was when asked, not as it is after the copy is compressed 314ms
+   ✓ the actual product save writes format 5 and restores heterogeneous person fields exactly 678ms
+ ✓ tests/v241_continuation.test.ts (1 test) 90677ms
+   ✓ preserves the rules-241 ordinary fern continuation 90676ms
+ ✓ tests/parent_decides.test.ts (7 tests) 92496ms
+   ✓ rules 228: a child may ask, and the grown person decides (7)
+     ✓ ordinary worlds: at rules 228 some asks are answered "not now" and some are agreed; at rules 227 none is refused for work 84185ms
+     ✓ nothing is saved: a world saved and loaded continues the same 8028ms
+ ✓ tests/v229_continuation.test.ts (1 test) 89720ms
+   ✓ preserves the rules-229 ordinary forest continuation 89718ms
+ ✓ tests/v164_continuation.test.ts (1 test) 84351ms
+   ✓ preserves the rules-164 ordinary birch continuation 84350ms
+ ✓ tests/purity.test.ts (2 tests) 119920ms
+   ✓ asking what a person could do changes nothing in the world (2)
+     ✓ river: every person looked at every 250 ticks leaves them, and the world, exactly as an unwatched twin 66016ms
+     ✓ meadow: every person looked at every 250 ticks leaves them, and the world, exactly as an unwatched twin 53902ms
+ ✓ tests/v163_continuation.test.ts (1 test) 136586ms
+   ✓ preserves the rules-163 ordinary econ-cc3 continuation 136585ms
+ ✓ tests/zz_review_main_tool_capacity.test.ts (3 tests) 148165ms
+   ✓ REVIEW: hand-tool plans whose inputs cannot fit the planner’s pack (3)
+     ✓ ordinary Normal forest at current rules, 12,000 ticks 49578ms
+     ✓ ordinary Normal river at current rules, 12,000 ticks 54928ms
+     ✓ ordinary Normal meadow at current rules, 12,000 ticks 43657ms
+ ✓ tests/v239_continuation.test.ts (1 test) 157541ms
+   ✓ preserves the rules-239 ordinary birch continuation 157539ms
+ ✓ tests/save_told.test.ts (4 tests) 170389ms
+   ✓ beliefs passed on by word of mouth (default world) (2)
+     ✓ carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically 27112ms
+     ✓ a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does 25716ms
+   ✓ beliefs passed on by word of mouth (product world) (2)
+     ✓ carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically 59745ms
+     ✓ a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does 57813ms
+ ✓ tests/v167_continuation.test.ts (1 test) 172315ms
+   ✓ preserves the rules-167 ordinary forest continuation 172313ms
+ ✓ tests/v207_continuation.test.ts (1 test) 81413ms
+   ✓ preserves the rules-207 ordinary gen-2 continuation 81412ms
+ ✓ tests/v230_continuation.test.ts (1 test) 84378ms
+   ✓ preserves the rules-230 ordinary cedar continuation 84377ms
+ ✓ tests/v170_continuation.test.ts (1 test) 178475ms
+   ✓ preserves the rules-170 ordinary birch continuation 178473ms
+ ✓ tests/ordinary.test.ts (2 tests) 88628ms
+   ✓ the ordinary world over days of play (2)
+     ✓ is deterministic: the same seed and settings give the same world, tick for tick, however much was built, made, promised and eaten 15737ms
+     ✓ keeps honest books for two weeks: every item accounted for, every tool record matching a pack or shelf, nobody lost, and the settlement doing real work 72889ms
+ ✓ tests/iron_chain_stall.test.ts (3 tests) 69420ms
+   ✓ the ore hunt reaches ore (rules version 8) (2)
+     ✓ adults who know a kiln and hold a worn tool come home with an ore belief 582ms
+     ✓ without a kiln belief and without a worn tool there is no ore hunt, and no ore is met 588ms
+   ✓ the smithy's fuel comes to the kiln (rules version 10) (1)
+     ✓ adults who know a standing smithy and a kiln see charcoal made, with no worn tool and no iron plan 68248ms
+ ✓ tests/leave_heaviest.test.ts (16 tests) 188822ms
+   ✓ a real stall in an ordinary world (7)
+     ✓ moves exactly that many units out of the pack and into the place, through the ordinary ledgered deposit 540ms
+     ✓ is offered as an ordinary deposit option, and only to a rich world running 33 with the switch on 811ms
+     ✓ continues identically after a save and load in the middle of the trip 11479ms
+     ✓ loses nothing if the person dies on the way: what was not put down is still counted 531ms
+     ✓ is interrupted without loss when the person turns to something else first 349ms
+   ✓ below rules 33, and with the lab arm, nothing happens (2)
+     ✓ a rules-32 world starts none in the span where rules 33 does 35451ms
+     ✓ a rules-33 world with the lab arm installed starts none, and the arm restores the switch 35191ms
+   ✓ what the rule changes is behaviour, not bookkeeping (2)
+     ✓ with the lab arm installed, rules 33 is byte-identical to the recorded rules-32 world apart from its stamp 31179ms
+     ✓ with it on, the same world differs: the recorded reference passes through the situation the rule acts on 32605ms
+ ✓ tests/v184_continuation.test.ts (1 test) 71254ms
+   ✓ preserves the rules-184 ordinary birch continuation 71253ms
+ ✓ tests/v162_continuation.test.ts (1 test) 64268ms
+   ✓ preserves the rules-162 ordinary river continuation 64267ms
+ ✓ tests/household_preparation.test.ts (43 tests) 206518ms
+   ✓ 6. the new state is deterministic and survives a save (4)
+     ✓ two runs of the same world are the same run 22067ms
+     ✓ a save in the middle of a preparation reads back and carries on identically 33060ms
+     ✓ the observation counters change nothing: a run with them on is the same run 56972ms
+   ✓ 7. version-1 and unversioned worlds do not acquire this behaviour (4)
+     ✓ a whole version-1 run carries no preparation at all 15463ms
+     ✓ a version-1 save keeps its version through a round trip and stays version 1 5477ms
+   ✓ 8. the lab off-switch removes this and only this (4)
+     ✓ with it off, ordinary food work carries on: food is still gathered and still put into stores 21493ms
+   ✓ 9. a fresh world is the same generation of rules wherever it is made (2)
+     ✓ and both of them really run the new behaviour 51478ms
+ ✓ tests/v251_continuation.test.ts (1 test) 220656ms
+   ✓ preserves the rules-251 ordinary gen-4 continuation 220654ms
+ ✓ tests/v181_continuation.test.ts (1 test) 234016ms
+   ✓ preserves the rules-181 ordinary birch continuation 234015ms
+ ✓ tests/v186_continuation.test.ts (1 test) 65655ms
+   ✓ preserves the rules-186 ordinary cedar continuation 65654ms
+ ✓ tests/v168_continuation.test.ts (1 test) 58910ms
+   ✓ preserves the rules-168 ordinary birch continuation 58909ms
+ ✓ tests/v196_continuation.test.ts (1 test) 62214ms
+   ✓ preserves the rules-196 ordinary gen-2 continuation 62212ms
+ ✓ tests/v169_continuation.test.ts (1 test) 62631ms
+   ✓ preserves the rules-169 ordinary birch continuation 62630ms
+ ✓ tests/v171_continuation.test.ts (1 test) 57534ms
+   ✓ preserves the rules-171 ordinary forest continuation 57533ms
+ ✓ tests/zz_review_main_till_path.test.ts (2 tests) 105405ms
+   ✓ REVIEW: new-field tilling that cannot be reached (2)
+     ✓ forest: who fails, which tile, is the standing tile walkable 48692ms
+     ✓ river: who fails, which tile, is the standing tile walkable 56712ms
+ ✓ tests/suspended_scan.test.ts (1 test) 55396ms
+   ✓ no paused activity is lost silently in five ordinary river days at the current rules 55394ms
+ ✓ tests/table_eating.test.ts (16 tests) 57025ms
+   ✓ an ordinary world, not a staged one (1)
+     ✓ version 8 fails at full stores; version 11 never fails for want of room, and its books balance 56595ms
+ ✓ tests/zz_review_main_liveness.test.ts (2 tests) 107176ms
+   ✓ REVIEW: liveness of conversations, suspensions and activity endings (2)
+     ✓ ordinary Normal forest, 12,000 ticks 48648ms
+     ✓ ordinary Normal river, 12,000 ticks 58525ms
+ ✓ tests/zz_review_b_validators.test.ts (7 tests) 275281ms
+   ✓ REVIEW B: validators against engine-produced current-rules worlds (7)
+     ✓ natural river, Normal, 8 days, save+load every 1200 ticks 104499ms
+     ✓ natural meadow, Normal, 8 days, save+load every 1200 ticks 80600ms
+     ✓ natural forest, Normal, 8 days, save+load every 1200 ticks 87124ms
+     ✓ scene meal at current rules, 3 days, save+load every 600 ticks 904ms
+     ✓ scene haul at current rules, 3 days, save+load every 600 ticks 534ms
+     ✓ scene care at current rules, 3 days, save+load every 600 ticks 762ms
+     ✓ scene workshop at current rules, 3 days, save+load every 600 ticks 856ms
+ ✓ tests/v201_continuation.test.ts (1 test) 103412ms
+   ✓ preserves the rules-201 ordinary gen-2 continuation 103411ms
+ ✓ tests/v135_continuation.test.ts (1 test) 55379ms
+   ✓ preserves the recorded autonomous rules-135 cellar continuation 55378ms
+ ✓ tests/run_rules.test.ts (29 tests) 282881ms
+   ✓ a fresh run from the command line (9)
+     ✓ is the current simulation, version and all, for huge 592ms
+   ✓ the scripts themselves, run as a person would run them (8)
+     ✓ a default lab seed run records the current rules version, with arrivals on, on every row 30970ms
+     ✓ a pinned lab seed run records the version it ran and says it was pinned; --arrivals off is recorded too 28913ms
+     ✓ an explicitly legacy lab run records no version, rather than the current one 32683ms
+     ✓ the activity mix records the version of the world it actually ran 27211ms
+     ✓ the cascade tracer records the rules of the world it traced 27231ms
+     ✓ the replay check says which rules its fresh world ran 31521ms
+     ✓ an explicitly legacy cascade run says unversioned instead 25164ms
+   ✓ the lab will not mix one generation of rules with another (12)
+     ✓ refuses a legacy rich row for a current run, before any worker starts or any file is touched 15499ms
+     ✓ refuses a row from an older generation for a current run, before any worker starts or any file is touched 15457ms
+     ✓ refuses an authored row for a current run, before any worker starts or any file is touched 23660ms
+     ✓ refuses a row from before any of it was recorded for a current run, before any worker starts or any file is touched 23654ms
+(node:15164) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inhabitant.test.ts (15 tests) 53622ms
+   ✓ with nothing installed (2)
+     ✓ a controller that claims nobody leaves the world exactly as it was, and so does installing and removing one 5054ms
+     ✓ building observations for everyone, all the time, changes nothing 3137ms
+   ✓ the information boundary (3)
+     ✓ across a natural run, every option and set-aside entry the engine generates targets something the person knows 3655ms
+   ✓ an outside controller (3)
+     ✓ chooses only among what is offered, at the very tick it was asked, and changes the world 6886ms
+     ✓ cannot do anything that was not offered: a made-up action is refused, then the engine chooses 5213ms
+   ✓ the transcript (3)
+     ✓ replays without a model to the same world, verifying every decision against the state it was made in 5360ms
+     ✓ refuses a transcript that does not fit: another simulation, another world, a missing, altered or extra decision 5145ms
+     ✓ survives a save: the mark and the counters come back, the hash agrees, and the world carries on the same 3349ms
+   ✓ a failing model (2)
+     ✓ that throws, answers nothing, or hangs leaves the engine to choose, the world consistent, and the run repeatable 15750ms
+ ✓ tests/v237_continuation.test.ts (1 test) 49858ms
+   ✓ preserves the rules-237 ordinary continuation 49857ms
+ ✓ tests/zz_review_b_roundtrip.test.ts (3 tests) 101342ms
+   ✓ REVIEW B: save/load round trip then continue, natural rules-115 world (3)
+     ✓ river: byte-identical continuation after loading at 600/3000/6000 34630ms
+     ✓ meadow: byte-identical continuation after loading at 600/3000/6000 33455ms
+     ✓ forest: byte-identical continuation after loading at 600/3000/6000 33254ms
+ ✓ tests/v179_continuation.test.ts (1 test) 56898ms
+   ✓ preserves the rules-179 ordinary birch continuation 56897ms
+ ✓ tests/v253_continuation.test.ts (1 test) 49896ms
+   ✓ preserves the rules-253 ordinary gen-4 continuation 49895ms
+ ✓ tests/wolf_defence.test.ts (55 tests) 54697ms
+   ✓ 8. an encounter survives a save and runs the same twice (4)
+     ✓ two runs of the same world are the same run 18497ms
+     ✓ the observation counters change nothing 19407ms
+   ✓ 9. versions below 4 have none of it (7)
+     ✓ a whole version-2 run makes no spear and drives nothing off 16188ms
+ ✓ tests/v1_continuation.test.ts (3 tests) 60910ms
+   ✓ a version-1 world continues as version 1 (3)
+     ✓ short: saved at 1200, read back and run on, is unchanged 11198ms
+     ✓ prewinter: saved at 14400, read back and run on, is unchanged 49710ms
+ ✓ tests/v137_continuation.test.ts (1 test) 51318ms
+   ✓ preserves the recorded autonomous rules-137 planted-tree continuation 51317ms
+ ✓ tests/v165_continuation.test.ts (1 test) 310288ms
+   ✓ preserves the rules-165 ordinary gen-6 continuation 310286ms
+ ✓ tests/load_order.test.ts (3 tests) 51853ms
+   ✓ an ordinary generated world loads to the same cells it had live, and an exact twin stays exact for two days 51802ms
+ ✓ tests/v190_continuation.test.ts (1 test) 312300ms
+   ✓ preserves the rules-190 ordinary birch continuation 312299ms
+ ✓ tests/regions.test.ts (37 tests) 51135ms
+   ✓ large world (7)
+     ✓ runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range 3721ms
+     ✓ is repeatable for a seed and different for another 1605ms
+   ✓ huge world (7)
+     ✓ has the size, camps and people it says it has 785ms
+     ✓ runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range 9975ms
+     ✓ is repeatable for a seed and different for another 6582ms
+   ✓ town world: the Large population in one camp on the ordinary map (6)
+     ✓ runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range 5132ms
+     ✓ is repeatable for a seed and different for another 715ms
+   ✓ authored profiled worlds are still the worlds they were before the town rules (8)
+     ✓ normal/meadow: generated and stepped exactly as it was 1073ms
+     ✓ normal/fern: generated and stepped exactly as it was 851ms
+     ✓ large/meadow: generated and stepped exactly as it was 3360ms
+     ✓ large/fern: generated and stepped exactly as it was 3550ms
+     ✓ town/meadow: generated and stepped exactly as it was 5488ms
+     ✓ town/fern: generated and stepped exactly as it was 5395ms
+     ✓ huge/meadow: generated exactly as it was (28 dens over six camps) 832ms
+     ✓ huge/fern: generated exactly as it was (28 dens over six camps) 903ms
+ ✓ tests/inspect_work_purity.test.ts (1 test) 52313ms
+   ✓ reading the observer material note for every site and workplace every tick changes nothing 52312ms
+ ✓ tests/v202_continuation.test.ts (1 test) 42648ms
+   ✓ preserves the rules-202 ordinary gen-2 continuation 42647ms
+ ✓ tests/inhabit_manual_reliability.test.ts (11 tests) 42166ms
+   ✓ the observed failure: a decision that answered itself (3)
+     ✓ the cap the app actually uses leaves a decision waiting 1211ms
+   ✓ the clock cannot be driven past an unanswered decision (1)
+     ✓ play, speed changes and many frames do not advance a tick while a decision waits 5460ms
+   ✓ handing the decision or the person back (3)
+     ✓ declining records an explicit handoff: the engine chooses and the transcript says who let it 4692ms
+     ✓ Stop cancels a waiting decision, and an answer that arrives afterwards cannot restart anything 5585ms
+     ✓ a bounded visit that ends leaves no pending decision and a transcript that can be kept 5484ms
+   ✓ an accepted choice is not a finished one (1)
+     ✓ a window that closes on an unfinished action records it as unfinished, not as a bare "applied" 5002ms
+   ✓ control is really let go of, at every owner that holds it (3)
+     ✓ Stop releases the pending request, the tick hooks and the controller seam 4892ms
+     ✓ a window that ends of its own accord releases the same things 4956ms
+     ✓ a completion that arrives after Stop changes nothing anywhere 4644ms
+ ✓ tests/settlement_record.test.ts (3 tests) 49698ms
+   ✓ the chronicle (1)
+     ✓ keeps what is worth remembering in a rich world, bounded, and nothing in an authored one 4183ms
+   ✓ roads (1)
+     ✓ harden where the wear stays high for two days, stay worn, and never form in an authored world 22627ms
+   ✓ a building remembers (1)
+     ✓ who finished it, in a rich world only 22885ms
+ ✓ tests/v32_continuation.test.ts (1 test) 54414ms
+   ✓ preserves rules 32 full saved-state continuation, before leave-heaviest 54413ms
+ ✓ tests/v177_continuation.test.ts (1 test) 44198ms
+   ✓ preserves the rules-177 ordinary birch continuation 44197ms
+ ✓ tests/controller.test.ts (11 tests) 45523ms
+   ✓ the clock: simulation results do not depend on frame rate (3)
+     ✓ 30 fps, 144 fps and an irregular stutter all reach the identical world at the same tick 22618ms
+     ✓ playback speed changes how fast time passes, not what happens in it 6621ms
+     ✓ one second of real time at speed s runs about s x TPS ticks, capped per frame 1880ms
+   ✓ selection, follow, restart (4)
+     ✓ restart builds a new world from the chosen seed and clears view state 1452ms
+   ✓ rendering never changes the simulation (2)
+     ✓ drawing a world every tick (with camera moves, zoom, overlays) gives exactly the same result as never drawing it 4928ms
+     ✓ a long stretch of drawing at several playback speeds still matches an undrawn run 7373ms
+ ✓ tests/v50_continuation.test.ts (1 test) 45584ms
+   ✓ preserves rules 50 full saved-state continuation before batch plans 45582ms
+ ✓ tests/world.test.ts (8 tests) 47103ms
+   ✓ saving and loading (5)
+     ✓ a saved world resumes exactly where it left off: continuing from the copy equals continuing the original 4694ms
+     ✓ so does a world in the middle of making things: workshops, batches, tools on racks, a meal under way, a cart on the road 1084ms
+     ✓ an ordinary world a few days in, with a yard and a kiln at work, saves and resumes exactly 40740ms
+ ✓ tests/growth_room.test.ts (9 tests) 44726ms
+   ✓ rules 225: room to grow (9)
+     ✓ people: with food and roofs for them, arrivals go on past 54 and past 64; at rules 220 they stop at 54 43002ms
+     ✓ projects: one for every 14 living people and never fewer than before 455ms
+     ✓ authored worlds keep their limits, and nothing is saved 649ms
+ ✓ tests/v77_continuation.test.ts (1 test) 45523ms
+   ✓ preserves rules-77 ordinary, corrected route and helper-receipt continuations exactly 45522ms
+ ✓ tests/v57_continuation.test.ts (1 test) 47091ms
+   ✓ preserves rules 57 ordinary and active tool crafting continuations before rules 58 47090ms
+ ✓ tests/v53_continuation.test.ts (1 test) 44588ms
+   ✓ preserves rules 53 full saved-state continuation before rules 54 44586ms
+ ✓ tests/v55_continuation.test.ts (1 test) 44673ms
+   ✓ preserves rules 55 full saved-state continuation before rules 56 44672ms
+ ✓ tests/v54_continuation.test.ts (1 test) 46091ms
+   ✓ preserves rules 54 full saved-state continuation before rules 55 46090ms
+ ✓ tests/v51_continuation.test.ts (1 test) 46280ms
+   ✓ preserves rules 51 full saved-state continuation before batch plans 46279ms
+ ✓ tests/v52_continuation.test.ts (1 test) 45700ms
+   ✓ preserves rules 52 full saved-state continuation before batch plans 45699ms
+ ✓ tests/v49_continuation.test.ts (1 test) 45657ms
+   ✓ preserves rules 49 full saved-state continuation before batch plans 45656ms
+ ✓ tests/v81_continuation.test.ts (1 test) 46987ms
+   ✓ preserves rules-81 ordinary partial outcomes and private failure continuations exactly 46986ms
+ ✓ tests/v74_continuation.test.ts (1 test) 43879ms
+   ✓ preserves rules-74 ordinary and source-experience continuations exactly 43878ms
+ ✓ tests/v73_continuation.test.ts (1 test) 41140ms
+   ✓ preserves rules-73 ordinary and source-recovery continuations exactly 41139ms
+ ✓ tests/v59_continuation.test.ts (1 test) 46368ms
+   ✓ preserves the rules-59 ordinary and active-cart full serialized continuations 46367ms
+ ✓ tests/v79_continuation.test.ts (1 test) 42425ms
+   ✓ preserves rules-79 ordinary and witnessed childcare continuations exactly 42424ms
+ ✓ tests/v155_continuation.test.ts (1 test) 39473ms
+   ✓ preserves the rules-155 ordinary river continuation 39472ms
+ ✓ tests/v72_continuation.test.ts (1 test) 41414ms
+   ✓ preserves rules-72 ordinary, provisioning, need-break, travel and lost-source continuations exactly 41413ms
+ ✓ tests/v71_continuation.test.ts (1 test) 41132ms
+   ✓ preserves rules-71 ordinary and scoped-work continuations exactly 41127ms
+ ✓ tests/v31_continuation.test.ts (1 test) 45013ms
+   ✓ preserves rules 31 full saved-state continuation, before observer-facing truth 45012ms
+ ✓ tests/v62_continuation.test.ts (1 test) 42066ms
+   ✓ preserves rules-62 ordinary, indoor hand-over and full-pack continuations 42065ms
+ ✓ tests/v76_continuation.test.ts (1 test) 43313ms
+   ✓ preserves rules-76 ordinary and personal-route continuations exactly 43312ms
+ ✓ tests/v48_continuation.test.ts (1 test) 44614ms
+   ✓ preserves rules 48 full saved-state continuation before the next slice 44613ms
+ ✓ tests/v56_continuation.test.ts (1 test) 45521ms
+   ✓ preserves rules 56 ordinary and childcare full saved-state continuations before rules 57 45520ms
+ ✓ tests/v41_continuation.test.ts (1 test) 43484ms
+   ✓ preserves rules 41 full saved-state continuation before learner-initiated instruction 43483ms
+ ✓ tests/v161_continuation.test.ts (1 test) 37800ms
+   ✓ preserves the rules-161 ordinary river continuation 37799ms
+ ✓ tests/v160_continuation.test.ts (1 test) 38508ms
+   ✓ preserves the rules-160 ordinary meadow continuation 38507ms
+ ✓ tests/v40_continuation.test.ts (1 test) 44908ms
+   ✓ preserves rules 40 full saved-state continuation before learner-initiated instruction 44907ms
+ ✓ tests/v58_continuation.test.ts (1 test) 44761ms
+   ✓ preserves rules 58 ordinary and seed storage continuations before rules 59 44760ms
+ ✓ tests/v192_continuation.test.ts (1 test) 38516ms
+   ✓ preserves the rules-192 ordinary gen-2 continuation 38514ms
+ ✓ tests/v75_continuation.test.ts (1 test) 41810ms
+   ✓ preserves rules-75 ordinary and failed-contact continuations exactly 41809ms
+ ✓ tests/v153_continuation.test.ts (1 test) 38744ms
+   ✓ preserves the rules-153 ordinary river continuation 38743ms
+ ✓ tests/v29_continuation.test.ts (1 test) 46230ms
+   ✓ preserves rules 29 full saved-state continuation, before layout claims 46229ms
+ ✓ tests/leisure.test.ts (5 tests) 425672ms
+   ✓ varied spare time (5)
+     ✓ changes nothing below version 28: the switch makes no difference to a version 27 world 12614ms
+     ✓ is deterministic, remembers where people spent spare time, and survives a save 48664ms
+     ✓ sends people to more than one kind of place 301011ms
+     ✓ does not cost lives: nobody starves in a short run that did not already have deaths 63183ms
+ ✓ tests/v43_continuation.test.ts (1 test) 43199ms
+   ✓ preserves rules 43 full saved-state continuation before varied starting backgrounds 43198ms
+ ✓ tests/v33_continuation.test.ts (1 test) 44148ms
+   ✓ preserves rules 33 full saved-state continuation, before plan reconsideration 44147ms
+ ✓ tests/v42_continuation.test.ts (1 test) 44872ms
+   ✓ preserves rules 42 full saved-state continuation before learner-initiated instruction 44870ms
+ ✓ tests/v34_continuation.test.ts (1 test) 42857ms
+   ✓ preserves rules 34 full saved-state continuation, before crew re-entry consistency 42856ms
+ ✓ tests/v158_continuation.test.ts (1 test) 39034ms
+   ✓ preserves the rules-158 ordinary meadow continuation 39033ms
+ ✓ tests/zz_review_b_validators_harsh.test.ts (3 tests) 445645ms
+   ✓ REVIEW B: validators, harsher worlds (3)
+     ✓ harsh river, Normal, 10 days, save+load every 1200 ticks 129996ms
+     ✓ harsh forest, Normal, 10 days, save+load every 1200 ticks 117629ms
+     ✓ meadow, Normal, 16 days through winter, save+load every 1200 ticks 198018ms
+ ✓ tests/v38_continuation.test.ts (1 test) 43754ms
+   ✓ preserves rules 38 full saved-state continuation before project-helper choice 43753ms
+ ✓ tests/v60_continuation.test.ts (1 test) 42154ms
+   ✓ preserves rules-60 ordinary and active required-tool-loss full saved continuations 42153ms
+ ✓ tests/v78_continuation.test.ts (1 test) 44283ms
+   ✓ preserves rules-78 ordinary and task-specific helper continuations exactly 44282ms
+ ✓ tests/v159_continuation.test.ts (1 test) 38205ms
+   ✓ preserves the rules-159 ordinary meadow continuation 38204ms
+ ✓ tests/v44_continuation.test.ts (1 test) 42825ms
+   ✓ preserves rules 44 full saved-state continuation before food fetch promises 42824ms
+ ✓ tests/v46_continuation.test.ts (1 test) 43481ms
+   ✓ preserves rules 46 full saved-state continuation before winter shelter preparation 43480ms
+ ✓ tests/v154_continuation.test.ts (1 test) 40189ms
+   ✓ preserves the rules-154 ordinary river continuation 40188ms
+ ✓ tests/v37_continuation.test.ts (1 test) 43263ms
+   ✓ preserves rules 37 full saved-state continuation, rules 37 before achievement aftermath 43262ms
+ ✓ tests/v61_continuation.test.ts (1 test) 39869ms
+   ✓ preserves rules-61 ordinary, tool-loss and indoor-care saved continuations 39869ms
+ ✓ tests/v30_continuation.test.ts (1 test) 41188ms
+   ✓ preserves rules 30 full saved-state continuation, before integrated work tastes 41187ms
+ ✓ tests/v47_continuation.test.ts (1 test) 43197ms
+   ✓ preserves rules 47 full saved-state continuation before the agreed delivery place 43196ms
+ ✓ tests/v45_continuation.test.ts (1 test) 43897ms
+   ✓ preserves rules 45 full saved-state continuation before the winter reserve 43896ms
+ ✓ tests/v39_continuation.test.ts (1 test) 43086ms
+   ✓ preserves rules 39 full saved-state continuation before stored material supply 43085ms
+ ✓ tests/v187_continuation.test.ts (1 test) 38176ms
+   ✓ preserves the rules-187 ordinary gen-2 continuation 38175ms
+ ❯ tests/v250_continuation.test.ts (1 test | 1 failed) 291117ms
+   × preserves the rules-250 ordinary gen-4 continuation 291116ms
+ ❯ tests/zz_review_g_observer_purity.test.ts (2 tests | 1 failed) 481492ms
+   ❯ REVIEW G: observation leaves the world exactly as it was, every tick (2)
+     × river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical 311749ms
+     ✓ meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical 169741ms
+ ✓ tests/v36_continuation.test.ts (1 test) 46494ms
+   ✓ preserves rules 36 full saved-state continuation, rules 36 before achievement aftermath 46493ms
+ ✓ tests/v254_continuation.test.ts (1 test) 33546ms
+   ✓ preserves the rules-254 ordinary gen-4 continuation 33545ms
+ ✓ tests/v255_continuation.test.ts (1 test) 34557ms
+   ✓ preserves the rules-255 ordinary gen-4 continuation 34556ms
+ ✓ tests/inhabitant_memory.test.ts (12 tests) 37891ms
+   ✓ the goal keeper experiment (seed meadow, Pavel, the baseline window) (1)
+     ✓ pursues a site from its notes where the same offer, without notes read, is left on the table 12700ms
+   ✓ persistent notes (11)
+     ✓ 1. carry from one decision to the next: each ask is shown what the one before wrote 2732ms
+     ✓ 2. survive a save: the notes come back untouched and the hashes agree 3462ms
+     ✓ 3. replay without a model to the same world and the same notes 3007ms
+     ✓ 4. refuse a tampered, missing or reordered memory update 3282ms
+     ✓ 5. cannot be corrupted by invalid, oversized or malformed updates 6490ms
+     ✓ 6. one inhabitant cannot see another's notes 1762ms
+     ✓ 9. a failing model leaves the notes exactly as they were 2922ms
+     ✓ 12. notes change nothing in the engine: the same options, with or without them, and no reads in src/sim 1444ms
+ ❯ tests/v235_continuation.test.ts (1 test | 1 failed) 307969ms
+   × preserves the rules-235 ordinary river continuation 307968ms
+ ✓ tests/v35_continuation.test.ts (1 test) 43815ms
+   ✓ preserves rules 35 full saved-state continuation, integration baseline 9871662 before further changes 43815ms
+ ✓ tests/v156_continuation.test.ts (1 test) 36926ms
+   ✓ preserves the rules-156 ordinary meadow continuation 36925ms
+ ✓ tests/v70_continuation.test.ts (1 test) 37638ms
+   ✓ preserves rules-70 ordinary and learned-preference continuations exactly 37637ms
+ ✓ tests/v67_continuation.test.ts (1 test) 37156ms
+   ✓ preserves rules-67 ordinary, stored drinking, empty stock, return and blocked entrance continuations 37155ms
+ ✓ tests/v63_continuation.test.ts (1 test) 38028ms
+   ✓ preserves rules-63 ordinary, care capacity recovery and competing-tool continuations 38027ms
+ ✓ tests/v157_continuation.test.ts (1 test) 36621ms
+   ✓ preserves the rules-157 ordinary meadow continuation 36620ms
+ ✓ tests/v69_continuation.test.ts (1 test) 37795ms
+   ✓ preserves rules-69 ordinary and production continuations exactly 37793ms
+ ✓ tests/v68_continuation.test.ts (1 test) 37977ms
+   ✓ preserves rules-68 ordinary, water provision, full store, mixed supply and suspended return continuations 37976ms
+ ✓ tests/v152_continuation.test.ts (1 test) 37298ms
+   ✓ preserves the rules-152 ordinary forest continuation 37297ms
+ ✓ tests/v65_continuation.test.ts (1 test) 37245ms
+   ✓ preserves rules-65 ordinary, source, stock, water and outside-resident continuations 37244ms
+ ✓ tests/v64_continuation.test.ts (1 test) 38451ms
+   ✓ preserves rules-64 ordinary, care, competing tools and actual travelling-source continuations 38450ms
+ ❯ tests/zz_review_main_toolreport_saves.test.ts (2 tests | 1 failed) 165919ms
+   ❯ REVIEW: tool registry consistency in retained and fresh worlds (2)
+     ✓ retained saves 765ms
+     × fresh current-rules worlds, 12,000 ticks, checked every 600 ticks 165152ms
+ ✓ tests/v66_continuation.test.ts (1 test) 38197ms
+   ✓ preserves rules-66 ordinary, resident travel, hand-over, full water pack and unseen death continuations 38196ms
+ ✓ tests/v144_continuation.test.ts (1 test) 33381ms
+   ✓ preserves the recorded ordinary and staged rules-144 final account continuation 33380ms
+ ✓ tests/v80_continuation.test.ts (1 test) 34200ms
+   ✓ preserves rules-80 ordinary reporting and private completion continuations exactly 34200ms
+ ✓ tests/finish_job.test.ts (10 tests) 35535ms
+   ✓ rules 227: a job begun is finished (10)
+     ✓ the critical lines are the ones decision making draws, thirst raised by the walk to known water 7554ms
+     ✓ hold: a second look at a held job generates no options; at rules 226, or with a critical need, it does 333ms
+     ✓ ordinary world: far fewer jobs are dropped at the work for something better, and far fewer second looks are taken 21160ms
+     ✓ nothing is saved: a world saved and loaded continues the same 5949ms
+ ✓ tests/v147_continuation.test.ts (1 test) 35995ms
+   ✓ preserves the recorded ordinary and staged rules-147 final account continuation 35994ms
+ ✓ tests/v146_continuation.test.ts (1 test) 37340ms
+   ✓ preserves the recorded ordinary and staged rules-146 final account continuation 37339ms
+ ✓ tests/v252_continuation.test.ts (1 test) 37351ms
+   ✓ preserves the rules-252 ordinary gen-4 continuation 37350ms
+ ✓ tests/v172_continuation.test.ts (1 test) 39330ms
+   ✓ preserves the rules-172 ordinary aspen continuation 39329ms
+ ✓ tests/golden.test.ts (9 tests) 39210ms
+   ✓ golden fingerprints of the ordinary world (9)
+     ✓ generates the same terrain, resources, founders and knowledge for each seed 718ms
+     ✓ steps meadow to the recorded state at 0, 600, 2400, 12000 ticks 22406ms
+     ✓ steps river to the recorded state at 0, 2400 ticks 4194ms
+     ✓ steps fern to the recorded state at 0, 2400 ticks 3194ms
+     ✓ steps aspen-harsh to the recorded state at 0, 2400 ticks 3393ms
+     ✓ steps meadow-pop60 to the recorded state at 0, 1200 ticks 4968ms
+ ✓ tests/v145_continuation.test.ts (1 test) 34942ms
+   ✓ preserves the recorded ordinary and staged rules-145 final account continuation 34941ms
+ ✓ tests/event_cards.test.ts (14 tests) 32266ms
+   ✓ observer purity: a seeded run watched by the event cards stays identical to an unwatched twin 32218ms
+ ✓ tests/v220_continuation.test.ts (1 test) 36281ms
+   ✓ preserves the rules-220 ordinary aspen continuation 36280ms
+ ✓ tests/v134_continuation.test.ts (1 test) 32862ms
+   ✓ preserves the recorded autonomous rules-134 well continuation 32861ms
+ ✓ tests/v142_continuation.test.ts (1 test) 34064ms
+   ✓ preserves the recorded ordinary and staged rules-142 skill lesson continuation 34063ms
+ ✓ tests/v191_continuation.test.ts (1 test) 34274ms
+   ✓ preserves the rules-191 ordinary gen-2 continuation 34273ms
+stdout | tests/zz_review_f_ordinary_probe.test.ts > ordinary forest probe for 12000 ticks
+{"seed":"forest","tick":12000,"stop":"horizon","seconds":60.7460534,"alive":28,"deaths":0,"buildings":{"fire":1,"lean_to":13,"well":4,"hut":7},"sites":{"hut":5,"storehouse":1,"cellar":2},"tools":{"axe":4,"basket":17,"pick":1,"hoe":1,"toy":4,"spear":9,"rod":2},"carts":0,"counts":{"adult samples":380,"plan_site start:well":5,"plan_site start:lean_to":5,"haul start":101,"haul success":83,"craft start:basket":18,"craft end:basket:success":15,"rock gather end:success:done":33,"craft start:toy":4,"craft end:toy:success":4,"craft start:spear":10,"craft end:spear:success":9,"plan_site start:hut":17,"rock gather end:partial:nothing left":1,"craft end:basket:interrupted":2,"rock gather end:interrupted:danger nearby":2,"adult samples with hauling ground":42,"craft start:axe":4,"craft end:axe:interrupted":1,"rock gather end:failed:nothing left":2,"craft start:rod":2,"plan_site start:storehouse":6,"craft end:rod:success":2,"rock gather end:interrupted:the place looked empty":2,"craft end:spear:interrupted":1,"craft end:axe:success":2,"plan_site start:cellar":2},"planSummary":{"tool:basket:dropped":3,"tool:basket:done":15,"tool:spear:done":5,"shelter:-:dropped":8,"stock:-:dropped":14,"stock:-:done":6,"tool:axe:done":2,"repair:-:dropped":1,"shelter:-:done":8,"tool:rod:done":2,"repair:-:done":3,"stock:-:active":10,"tool:hoe:dropped":1,"tool:basket:active":1,"tool:axe:active":3,"tool:hoe:active":1,"shelter:-:active":2,"tool:spear:active":1,"tool:pick:active":1},"topHauling":[{"name":"Ada","maxWeight":69,"maxTrips":11,"everEnough":77},{"name":"Yusuf","maxWeight":41,"maxTrips":7,"everEnough":30},{"name":"Maren","maxWeight":39,"maxTrips":7,"everEnough":30}]}
+
+ ✓ tests/zz_review_f_ordinary_probe.test.ts (1 test) 60763ms
+   ✓ ordinary forest probe for 12000 ticks 60762ms
+ ✓ tests/save.test.ts (9 tests) 34533ms
+   ✓ saving and loading a world (9)
+     ✓ round-trips an ordinary world after a while 2115ms
+     ✓ round-trips a Large world 6247ms
+     ✓ round-trips a Huge world 19489ms
+     ✓ still reads a save written in the previous format (3: byte-per-tile masks, people one by one) 1628ms
+     ✓ writes a Huge world in well under half the text the previous format needed 2264ms
+     ✓ keeps people in the old per-person form when they do not share the same fields, and still round-trips 1140ms
+     ✓ keeps one person's beliefs as they were when a belief has an undefined value or an id that is not its key 1270ms
+ ❯ tests/lab_provenance.test.ts (2 tests | 1 failed) 152760ms
+   × retains runner and measurement source, reports it, resumes only the same content, and refuses changed content 149916ms
+   ✓ rejects a source change against the start snapshot 2842ms
+ ✓ tests/zz_review_b_observer_purity.test.ts (1 test) 56902ms
+   ✓ REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin 56900ms
+ ✓ tests/v148_continuation.test.ts (1 test) 33525ms
+   ✓ preserves rules-148 ordinary and paid sibling-plan crafting continuations 33524ms
+ ✓ tests/v143_continuation.test.ts (1 test) 34471ms
+   ✓ preserves the recorded ordinary and staged rules-143 shared project continuation 34466ms
+ ✓ tests/v215_continuation.test.ts (1 test) 31613ms
+   ✓ preserves the rules-215 ordinary gen-2 continuation 31612ms
+ ✓ tests/v166_continuation.test.ts (1 test) 32821ms
+   ✓ preserves the rules-166 ordinary birch continuation 32820ms
+ ✓ tests/v149_continuation.test.ts (1 test) 30757ms
+   ✓ preserves rules-149 ordinary and paid preservation collection continuations 30756ms
+ ✓ tests/v139_continuation.test.ts (1 test) 31978ms
+   ✓ preserves the recorded rules-139 ordinary and staged brewing continuation 31977ms
+ ✓ tests/v8_continuation.test.ts (1 test) 32751ms
+   ✓ the version-8 world continues as version 8 (1)
+     ✓ matches the reference recorded before version 9 existed 32749ms
+ ✓ tests/v140_continuation.test.ts (1 test) 32915ms
+   ✓ preserves the recorded autonomous rules-140 crafted-rod continuation 32914ms
+ ✓ tests/v138_continuation.test.ts (1 test) 33571ms
+   ✓ preserves the recorded rules-138 ordinary and staged workshop continuation 33570ms
+ ✓ tests/v136_continuation.test.ts (1 test) 31379ms
+   ✓ preserves the recorded rules-136 ordinary and staged stock continuation 31378ms
+ ✓ tests/v7_continuation.test.ts (1 test) 31750ms
+   ✓ version-7 continuation reference (1)
+     ✓ still runs the version-7 world exactly as recorded 31749ms
+ ✓ tests/v141_continuation.test.ts (1 test) 34198ms
+   ✓ preserves the recorded ordinary and staged rules-141 grave visit continuation 34197ms
+ ✓ tests/presentation.test.ts (10 tests) 35605ms
+   ✓ the clock under stalls and overload (6)
+     ✓ a long gap between frames (a hidden tab, a stalled frame) is a stall, not a debt: the world runs a bounded burst, then carries on normally 578ms
+     ✓ a stall is told as recent for a while and then goes quiet, while the running total stays 4719ms
+     ✓ pausing and resuming never steps the picture backwards: the first frame after resuming carries on from the one that was on screen 2223ms
+     ✓ requested and achieved speed are told apart: keeping up reads as equal, falling behind reads as behind 934ms
+     ✓ stalls and speed changes in the middle of a run do not change what happens: same seed, same tick, same world 19532ms
+   ✓ what is drawn and listed is what is there (3)
+     ✓ inspecting workshops, sites, carts and people never perturbs the simulation 7435ms
+ ✓ tests/v3_continuation.test.ts (1 test) 29759ms
+   ✓ preserves habitation version-3 save continuation from before wolf defence 29758ms
+ ✓ tests/pathfail.test.ts (6 tests) 31317ms
+   ✓ remembering failed wolf searches changes nothing a world does (2)
+     ✓ an ordinary world, 3,000 ticks 10694ms
+     ✓ a Large world, 1,200 ticks 20126ms
+ ✓ tests/reputation.test.ts (5 tests) 33494ms
+   ✓ in a running world (1)
+     ✓ stories arise from what people do and spread beyond those who saw it (rich); an authored world holds none 33489ms
+ ✓ tests/v85_continuation.test.ts (1 test) 28343ms
+   ✓ preserves rules-85 completed building shares and heard-before-answer negotiation continuations exactly 28342ms
+ ✓ tests/v238_continuation.test.ts (1 test) 28055ms
+   ✓ preserves the rules-238 ordinary birch continuation 28054ms
+ ✓ tests/work_tastes.test.ts (7 tests) 28008ms
+   ✓ leaves versions 28 to 30 and authored worlds exactly unchanged with the ablation 12992ms
+   ✓ continues deterministically through saving during ordinary work and observers are pure 13689ms
+   ✓ preserves the recorded rules-39 Sven choice and taste explanation 788ms
+ ✓ tests/v4_continuation.test.ts (1 test) 28383ms
+   ✓ preserves wolf-defence version-4 save continuation from before fatal-injury finality 28382ms
+ ✓ tests/v6_continuation.test.ts (1 test) 29845ms
+   ✓ preserves version-6 save continuation from before household shelter plans 29844ms
+ ✓ tests/v193_continuation.test.ts (1 test) 28806ms
+   ✓ preserves the rules-193 ordinary gen-2 continuation 28805ms
+ ✓ tests/occasions.test.ts (4 tests) 34610ms
+   ✓ a death calls a funeral, and people come (2)
+     ✓ opens, is attended, and those who came met each other and felt it 6877ms
+   ✓ market day (1)
+     ✓ comes round on its day once a hall stands, and food moves from those with spare to those short of it 14278ms
+   ✓ an authored world calls nothing (1)
+     ✓ has no occasions field after a death, a harvest or three days 13451ms
+ ✓ tests/v82_continuation.test.ts (1 test) 24815ms
+   ✓ preserves rules-82 ordinary heard agreements, remote death and late report continuations exactly 24814ms
+ ✓ tests/v226_continuation.test.ts (1 test) 24771ms
+   ✓ preserves the rules-226 ordinary aspen continuation 24770ms
+ ✓ tests/inhabit_choice_identity.test.ts (5 tests) 20109ms
+   ✓ reproduces differing household/hunger offers and preserves the historical first-match interpretation 4346ms
+   ✓ rules 43 public identities select the actual hunger alternative with its own amount and replay exactly 6730ms
+   ✓ rules 44 public identities select the actual hunger alternative with its own amount and replay exactly 5168ms
+   ✓ the engine rejects an index/key mismatch rather than selecting another offer 3863ms
+ ❯ tests/v249_continuation.test.ts (1 test | 1 failed) 580172ms
+   × preserves the rules-249 ordinary gen-2 continuation 580171ms
+ ✓ tests/rich.test.ts (13 tests) 21155ms
+   ✓ rich dynamics (13)
+     ✓ leave an ordinary world without a mood or a season 3105ms
+     ✓ give every person a mood, the same way every time 8284ms
+     ✓ save and load a rich world exactly 3398ms
+     ✓ shows a person's thoughts in the inspector, and only in a rich world 1251ms
+     ✓ inspecting a rich world never perturbs it 4652ms
+ ✓ tests/v28_continuation.test.ts (1 test) 21828ms
+   ✓ preserves rules 28 full saved-state continuation, including its historical event alias 21827ms
+ ✓ tests/inhabit_manual.test.ts (5 tests) 23692ms
+   ✓ a person can be answered by hand (5)
+     ✓ is asked for several decisions in a row, each applied at the moment it was asked, and the record replays 11097ms
+     ✓ refuses a stale or repeated answer, and survives nonsense without applying it 6570ms
+     ✓ hands the person back to the engine when stopped, and the world goes on without being asked 6019ms
+ ✓ tests/v227_continuation.test.ts (1 test) 24031ms
+   ✓ preserves the rules-227 ordinary aspen continuation 24030ms
+ ✓ tests/economy.test.ts (8 tests) 24285ms
+   ✓ resource accounting (8)
+     ✓ conserves every item over long natural runs: initial + created - consumed - spoiled = what exists 24153ms
+ ✓ tests/transmission.test.ts (14 tests) 24331ms
+   ✓ the diagnostics change nothing by looking (4)
+     ✓ a world runs identically with them on and off, to the last field and the generator state 24184ms
+ ✓ tests/v183_continuation.test.ts (1 test) 17813ms
+   ✓ preserves the rules-183 ordinary birch continuation 17812ms
+ ✓ tests/v182_continuation.test.ts (1 test) 17166ms
+   ✓ preserves the rules-182 ordinary birch continuation 17165ms
+ ❯ tests/lab_report.test.ts (2 tests | 2 failed) 41273ms
+   × pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics 20613ms
+   × reports an unavailable contrast without inventing a result and keeps story output 20659ms
+ ✓ tests/traditions.test.ts (3 tests) 17383ms
+   ✓ traditions (3)
+     ✓ form from a well-attended harvest feast, are called again on their day, and lapse when nobody comes twice 12354ms
+     ✓ a well-attended funeral becomes a remembrance of the dead, and a winter survived a midwinter fire; nothing authored 5005ms
+ ✓ tests/v133_continuation.test.ts (1 test) 17198ms
+   ✓ preserves recorded rules-133 ordinary and paid nourishment continuations 17197ms
+ ✓ tests/zz_review_main_large_cost.test.ts (1 test) 48603ms
+   ✓ REVIEW: current-rules Large cost sample (1)
+     ✓ large meadow, 2,400 ticks 48602ms
+ ✓ tests/v131_continuation.test.ts (1 test) 17965ms
+   ✓ preserves recorded rules-131 ordinary and known-carcass supply continuations 17964ms
+ ✓ tests/survival.test.ts (13 tests) 19104ms
+   ✓ a living population: couples, children and newcomers (5)
+     ✓ a settlement that is doing well draws newcomers, who can reach the camp even when its centre has been built over 10287ms
+     ✓ couples and families can arrive together, already bound to each other 8158ms
+ ✓ tests/v176_continuation.test.ts (1 test) 16615ms
+   ✓ preserves the rules-176 ordinary birch continuation 16614ms
+ ✓ tests/v236_continuation.test.ts (1 test) 20438ms
+   ✓ preserves the rules-236 ordinary river continuation 20437ms
+ ✓ tests/id_ranges.test.ts (7 tests) 17705ms
+   ✓ rules 234: the ids of real things and of water knowledge no longer meet (7)
+     ✓ AR-02: a save whose id counter is not beyond the ids in use, or in which two things share an id, is refused 3291ms
+     ✓ an ordinary 234 world tells of water under the new keys, and saved and loaded it continues the same 13888ms
+ ✓ tests/v208_continuation.test.ts (1 test) 16797ms
+   ✓ preserves the rules-208 ordinary gen-2 continuation 16796ms
+ ✓ tests/v178_continuation.test.ts (1 test) 16363ms
+   ✓ preserves the rules-178 ordinary river continuation 16362ms
+ ✓ tests/v26_continuation.test.ts (1 test) 17043ms
+   ✓ preserves local-main version 26 continuation 17042ms
+ ✓ tests/v130_continuation.test.ts (1 test) 17002ms
+   ✓ preserves recorded rules-130 ordinary and known-carcass supply continuations 17001ms
+ ✓ tests/v173_continuation.test.ts (1 test) 17242ms
+   ✓ preserves the rules-173 ordinary birch continuation 17241ms
+ ✓ tests/inhabit_app.test.ts (4 tests) 17410ms
+   ✓ the clock's tick hooks (1)
+     ✓ run around every tick, and a false from afterTick ends the frame 571ms
+   ✓ the in-app driver (3)
+     ✓ pauses while the model thinks, applies the answer at the asked tick, and records a transcript that replays headlessly 16519ms
+ ✓ tests/v129_continuation.test.ts (1 test) 18775ms
+   ✓ preserves recorded rules-129 ordinary sheep and paid capture, shearing and slaughter continuations 18774ms
+ ✓ tests/v180_continuation.test.ts (1 test) 17597ms
+   ✓ preserves the rules-180 ordinary river continuation 17595ms
+ ✓ tests/v28_work_tastes_continuation.test.ts (1 test) 18080ms
+   ✓ preserves main version 28 continuation 18079ms
+stdout | tests/zz_review_e_famine_trace.test.ts > traces one day of the retained rules-107 forest famine (diagnostic, writes a report)
+start 43440 end 45840 alive 29->29 meanHunger 47.4->44.5
+hardship0 {"kind":"lean","since":31205,"until":45242} regrow0 0.1 winter0 0
+hardship1 {"kind":"lean","since":45605,"until":55660} regrow1 0.1 winter1 0
+sources0 {"berry_bush":{"n":39,"nonempty":22,"amount":78,"regrow":300},"fruit_tree":{"n":19,"nonempty":14,"amount":57,"regrow":340},"wild_grain":{"n":21,"nonempty":15,"amount":17,"regrow":330},"fish_spot":{"n":9,"nonempty":5,"amount":14,"regrow":230}}
+sources1 {"berry_bush":{"n":39,"nonempty":30,"amount":93,"regrow":300},"fruit_tree":{"n":19,"nonempty":16,"amount":48,"regrow":340},"wild_grain":{"n":21,"nonempty":12,"amount":14,"regrow":330},"fish_spot":{"n":9,"nonempty":6,"amount":17,"regrow":230}}
+ledger created diff {"wood":25,"berries":38,"fruit":20,"fish":12,"grain":31,"seeds":4,"water":20,"axe":1}
+ledger consumed diff {"grain":26,"seeds":1,"fruit":24,"water":80,"wood":10,"stone":2,"berries":27,"fish":14,"planks":1,"meat":3}
+ledger reasons diff {"+tree growth":25,"+regrowth: berry bush":38,"+regrowth: fruit tree":20,"+regrowth: fish spot":12,"+regrowth: wild grain":27,"xstored food spoiled":2,"xnatural water evaporation":31,"-saved as seed":1,"+seed saved from wild grain":3,"-sown":1,"-eaten":77,"-drunk at natural water":80,"-fuel for the fire":3,"-eaten at the source":16,"+rain captured in natural water":20,"+crop growth":5,"-repairs":4,"-construction: hall":3,"-crafting: axe":3,"+crafted: axe":1}
+eatsCompleted 95
+critOccupancy {"drink|travel":39,"drink|work":19,"gather|travel":523,"none|none":2,"gather|work":160,"rest|work":56,"sleep|work":3,"socialize|travel":39,"converse|work":69,"eat|work":9}
+sampleCounts {
+ "critical samples": 8,
+ "no eligible food option": 1,
+ "no eligible food: lead=hunger criticals=hunger+thirst+energy top=drink": 1,
+ "top:drink": 1,
+ "current:drink|travel": 1,
+ "actual nonempty food source within 10 tiles": 8,
+ "top:gather": 6,
+ "current:gather|travel": 5,
+ "full pack": 3,
+ "current:gather|work": 1,
+ "top:socialize": 1,
+ "current:socialize|travel": 1
+}
+gatherTravelBetter 64 classes {
+ "target still believed nonempty -> next=give": 1,
+ "target has a failure note -> next=gather(food)": 2,
+ "target still believed nonempty -> next=gather(food) farther": 11,
+ "target still believed nonempty -> next=gather(food) nearer": 1,
+ "target now believed empty -> next=gather(food)": 21,
+ "target still believed nonempty -> next=wander": 1,
+ "target still believed nonempty -> next=eat": 6,
+ "target now believed empty -> next=gather(material)": 1,
+ "target still believed nonempty -> next=socialize": 7,
+ "target now believed empty -> next=socialize": 6,
+ "target still believed nonempty -> next=drink": 2,
+ "target has a failure note -> next=attend": 1,
+ "target has a failure note -> next=eat": 1,
+ "target now believed empty -> next=sleep": 2,
+ "target has a failure note -> next=socialize": 1
+}
+endings:
+  86 converse|work|success|finished a conversation
+  64 gather|travel|interrupted|something better came up
+  43 eat|work|success|done
+  37 drink|work|success|done
+  35 gather|work|partial|nothing left
+  32 gather|work|failed|nothing left
+  29 gather|work|success|done
+  29 sleep|work|success|rested
+  23 socialize|travel|interrupted|something better came up
+  19 gather|work|interrupted|something better came up
+  11 rest|work|interrupted|something better came up
+  9 flee|travel|interrupted|something better came up
+  7 gather|travel|interrupted|danger nearby
+  7 attend|work|interrupted|something better came up
+  7 till|travel|failed|no way to get there
+  7 socialize|travel|failed|they are inside a different space
+  6 give|work|success|done
+  6 rest|work|success|done
+  6 rest|work|success|daylight arrived
+  5 gather|work|success|felled the tree
+  4 repair|work|interrupted|something better came up
+  4 visit|travel|failed|they are inside a different space
+  4 sleep|work|success|morning came
+  3 give|travel|interrupted|something better came up
+  3 wander|travel|interrupted|something better came up
+  3 gather|work|partial|someone else is already taking it
+  3 gather|work|failed|someone else is already taking it
+  3 tend|work|success|done
+  3 socialize|work|failed|Arlo was already talking to someone
+  3 haul|work|success|done
+  2 deposit|work|success|done
+  2 socialize|work|failed|Ben was already talking to someone
+  2 explore|travel|interrupted|danger nearby
+  2 till|travel|interrupted|something better came up
+  2 socialize|work|failed|Talia was already talking to someone
+  2 socialize|work|failed|Tessa had more pressing needs
+  2 rest|work|interrupted|a more urgent need (hunger)
+  2 eat_store|work|success|done
+  2 flee|work|interrupted|something better came up
+  2 visit|work|failed|Faye was not where I expected
+deaths []
+
+ ✓ tests/v132_continuation.test.ts (1 test) 17241ms
+   ✓ preserves recorded rules-132 ordinary and paid nourishment continuations 17239ms
+ ✓ tests/v151_continuation.test.ts (1 test) 15980ms
+   ✓ preserves rules-151 ordinary and autonomous lamb-birth continuations 15979ms
+ ✓ tests/v150_continuation.test.ts (1 test) 15284ms
+   ✓ preserves rules-150 ordinary and autonomous trap-meat continuations 15283ms
+ ✓ tests/v13_continuation.test.ts (1 test) 17396ms
+   ✓ preserves local-main version 13 continuation 17395ms
+ ✓ tests/v22_continuation.test.ts (1 test) 16548ms
+   ✓ preserves local-main version 22 continuation 16547ms
+ ✓ tests/v16_continuation.test.ts (1 test) 17242ms
+   ✓ preserves local-main version 16 continuation 17241ms
+ ✓ tests/v200_continuation.test.ts (1 test) 16375ms
+   ✓ preserves the rules-200 ordinary gen-2 continuation 16374ms
+ ✓ tests/v27_continuation.test.ts (1 test) 16770ms
+   ✓ preserves main version 27 continuation 16769ms
+stdout | tests/zz_review_e_famine_trace.test.ts > CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed
+start 43440 end 45840 alive 29->29 meanHunger 47.4->62.0
+hardship0 null regrow0 1 winter0 0
+hardship1 {"kind":"lean","since":45605,"until":55660} regrow1 0.1 winter1 0
+sources0 {"berry_bush":{"n":39,"nonempty":22,"amount":78,"regrow":300},"fruit_tree":{"n":19,"nonempty":14,"amount":57,"regrow":340},"wild_grain":{"n":21,"nonempty":15,"amount":17,"regrow":330},"fish_spot":{"n":9,"nonempty":5,"amount":14,"regrow":230}}
+sources1 {"berry_bush":{"n":39,"nonempty":37,"amount":170,"regrow":300},"fruit_tree":{"n":19,"nonempty":18,"amount":113,"regrow":340},"wild_grain":{"n":21,"nonempty":18,"amount":64,"regrow":330},"fish_spot":{"n":9,"nonempty":9,"amount":35,"regrow":230}}
+ledger created diff {"wood":24,"berries":136,"fruit":79,"fish":47,"grain":111,"seeds":15,"water":19,"axe":1}
+ledger consumed diff {"grain":50,"seeds":1,"fruit":22,"water":86,"wood":21,"stone":3,"berries":30,"fish":20,"planks":2,"meat":4}
+ledger reasons diff {"+tree growth":24,"+regrowth: berry bush":136,"+regrowth: fruit tree":79,"+regrowth: fish spot":47,"+regrowth: wild grain":103,"xstored food spoiled":5,"xnatural water evaporation":31,"-saved as seed":10,"+seed saved from wild grain":13,"-sown":1,"-eaten":74,"-drunk at natural water":86,"-fuel for the fire":5,"-eaten at the source":42,"-construction: hut":3,"+rain captured in natural water":19,"+crop growth":10,"-repairs":11,"-construction: hall":4,"-crafting: axe":3,"+crafted: axe":1}
+eatsCompleted 91
+critOccupancy {"drink|travel":39,"drink|work":19,"gather|travel":218,"gather|work":119,"rest|work":36}
+sampleCounts {
+ "critical samples": 3,
+ "no eligible food option": 1,
+ "no eligible food: lead=hunger criticals=hunger+thirst+energy top=drink": 1,
+ "top:drink": 1,
+ "current:drink|travel": 1,
+ "actual nonempty food source within 10 tiles": 3,
+ "top:gather": 2,
+ "current:gather|travel": 1,
+ "current:gather|work": 1
+}
+gatherTravelBetter 28 classes {
+ "target still believed nonempty -> next=give": 2,
+ "target has a failure note -> next=gather(food)": 2,
+ "target still believed nonempty -> next=gather(food) farther": 9,
+ "target still believed nonempty -> next=gather(food) nearer": 2,
+ "target now believed empty -> next=gather(food)": 1,
+ "target still believed nonempty -> next=wander": 1,
+ "target still believed nonempty -> next=gather(material) nearer": 1,
+ "target still believed nonempty -> next=socialize": 5,
+ "target now believed empty -> next=withdraw": 1,
+ "target has a failure note -> next=explore": 1,
+ "target still believed nonempty -> next=sleep": 2,
+ "target now believed empty -> next=give": 1
+}
+endings:
+  92 converse|work|success|finished a conversation
+  42 drink|work|success|done
+  40 gather|work|success|done
+  36 gather|work|interrupted|something better came up
+  34 sleep|work|success|rested
+  30 eat|work|success|done
+  28 gather|travel|interrupted|something better came up
+  18 gather|work|partial|nothing left
+  17 rest|work|interrupted|something better came up
+  15 wander|work|success|done
+  14 deposit|work|success|done
+  12 gather|work|partial|someone else is already taking it
+  11 socialize|travel|interrupted|something better came up
+  7 rest|work|success|done
+  7 wander|travel|interrupted|something better came up
+  6 give|work|success|done
+  6 repair|work|interrupted|something better came up
+  6 gather|travel|interrupted|danger nearby
+  6 flee|travel|interrupted|something better came up
+  6 attend|work|interrupted|something better came up
+  6 argue|work|success|done
+  6 eat_store|work|success|done
+  5 give|work|failed|they had no room to carry it
+  5 attend|travel|interrupted|something better came up
+  5 till|travel|failed|no way to get there
+  5 gather|work|failed|someone else is already taking it
+  5 socialize|travel|failed|they are inside a different space
+  4 gather|work|success|felled the tree
+  4 gather|work|failed|nothing left
+  4 rest|work|success|daylight arrived
+  3 give|travel|interrupted|something better came up
+  3 harvest|work|success|done
+  3 flee|work|success|done
+  3 tend|work|success|done
+  3 socialize|work|failed|they walked away
+  3 socialize|work|failed|Kaia was too busy to stop
+  3 sleep|work|success|morning came
+  2 socialize|work|failed|Mira was too busy to stop
+  2 gather|work|interrupted|danger nearby
+  2 explore|travel|interrupted|something better came up
+deaths []
+
+ ✓ tests/zz_review_e_famine_trace.test.ts (2 tests) 26483ms
+   ✓ traces one day of the retained rules-107 forest famine (diagnostic, writes a report) 13954ms
+   ✓ CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed 12527ms
+ ✓ tests/v194_continuation.test.ts (1 test) 15843ms
+   ✓ preserves the rules-194 ordinary gen-2 continuation 15842ms
+ ✓ tests/v127_continuation.test.ts (1 test) 16550ms
+   ✓ preserves recorded rules-127 ordinary and paid gear manufacture/placement/waiting continuations 16549ms
+ ✓ tests/v120_continuation.test.ts (1 test) 16535ms
+   ✓ preserves the recorded rules-120 Talia childhood continuation 16534ms
+ ✓ tests/v19_continuation.test.ts (1 test) 16749ms
+   ✓ preserves local-main version 19 continuation 16748ms
+ ✓ tests/v20_continuation.test.ts (1 test) 16740ms
+   ✓ preserves local-main version 20 continuation 16739ms
+ ✓ tests/v21_continuation.test.ts (1 test) 16937ms
+   ✓ preserves local-main version 21 continuation 16937ms
+ ✓ tests/v210_continuation.test.ts (1 test) 17029ms
+   ✓ preserves the rules-210 ordinary gen-2 continuation 17027ms
+ ✓ tests/v14_continuation.test.ts (1 test) 17721ms
+   ✓ preserves local-main version 14 continuation 17720ms
+ ✓ tests/determinism.test.ts (4 tests) 16541ms
+   ✓ determinism (4)
+     ✓ the same seed and settings give the same world after the same number of ticks 8102ms
+     ✓ different seeds give different worlds, and harsh settings change the outcome 2467ms
+     ✓ inspecting people (view-models, opportunity audits) never changes what happens next 5681ms
+ ✓ tests/v125_continuation.test.ts (1 test) 15310ms
+   ✓ preserves recorded rules-125 ordinary and paid carcass/product continuations 15309ms
+ ✓ tests/v185_continuation.test.ts (1 test) 16337ms
+   ✓ preserves the rules-185 ordinary river continuation 16336ms
+ ✓ tests/v25_continuation.test.ts (1 test) 16647ms
+   ✓ preserves local-main version 25 continuation 16646ms
+ ✓ tests/learning.test.ts (8 tests) 18595ms
+   ✓ what has paid: in a running world (4)
+     ✓ an authored world records none, for anyone, ever 4957ms
+     ✓ the estimates survive a save, and a save made before they existed loads with none 420ms
+     ✓ the lab branch without learning parts from the control, and both report how concentrated the gathering was 13166ms
+ ✓ tests/v128_continuation.test.ts (1 test) 16162ms
+   ✓ preserves recorded rules-128 ordinary and paid gear manufacture/placement/waiting continuations 16161ms
+ ✓ tests/v2_continuation.test.ts (1 test) 16542ms
+   ✓ preserves version-2 saved-state continuation from before habitation 16541ms
+ ✓ tests/v126_continuation.test.ts (1 test) 16454ms
+   ✓ preserves recorded rules-126 ordinary and paid gear manufacture/placement/waiting continuations 16453ms
+ ✓ tests/lab_defaults.test.ts (3 tests) 73893ms
+   ✓ current lab defaults cannot silently reuse legacy results (2)
+     ✓ rejects existing undefined rows before starting workers or touching outputs 26172ms
+     ✓ rejects existing authored rows before starting workers or touching outputs 25150ms
+   ✓ refuses to resume ordinary lab rows as a geology generation comparison 22569ms
+ ✓ tests/v15_continuation.test.ts (1 test) 17057ms
+   ✓ preserves local-main version 15 continuation 17056ms
+ ✓ tests/v123_continuation.test.ts (1 test) 15256ms
+   ✓ preserves recorded rules-123 ordinary and paid hearth continuations 15255ms
+ ✓ tests/v195_continuation.test.ts (1 test) 14586ms
+   ✓ preserves the rules-195 ordinary gen-2 continuation 14585ms
+ ✓ tests/v23_continuation.test.ts (1 test) 16407ms
+   ✓ preserves local-main version 23 continuation 16406ms
+ ✓ tests/v188_continuation.test.ts (1 test) 16538ms
+   ✓ preserves the rules-188 ordinary river continuation 16536ms
+ ✓ tests/v18_continuation.test.ts (1 test) 17094ms
+   ✓ preserves local-main version 18 continuation 17090ms
+ ✓ tests/v17_continuation.test.ts (1 test) 17250ms
+   ✓ preserves local-main version 17 continuation 17249ms
+ ✓ tests/v24_continuation.test.ts (1 test) 17971ms
+   ✓ preserves local-main version 24 continuation 17970ms
+ ✓ tests/v10_continuation.test.ts (1 test) 18026ms
+   ✓ preserves local-main version 10 continuation 18024ms
+ ✓ tests/inhabitant_attribute.test.ts (7 tests) 16481ms
+   ✓ attribution (5)
+     ✓ on the goal keeper: every pursued choice is attributed to the goal, by its place reference 16260ms
+ ✓ tests/zz_review_g_ledger_endings.test.ts (2 tests) 23952ms
+   ✓ natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close 8388ms
+   ✓ the listener in a conversation is no longer shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it 15563ms
+ ✓ tests/zz_review_g_feed_caps.test.ts (1 test) 24260ms
+   ✓ feed/chronicle/log reach after two river days (immigration on, as the product world runs) 24259ms
+ ✓ tests/illness.test.ts (3 tests) 16260ms
+   ✓ a fever (3)
+     ✓ never happens in an authored world, and in a rich one the ill rest 16150ms
+ ✓ tests/v83_continuation.test.ts (1 test) 17177ms
+   ✓ preserves rules-83 ordinary cancellation, discovered target and late report continuations exactly 17176ms
+ ✓ tests/v119_continuation.test.ts (1 test) 13794ms
+   ✓ preserves the recorded rules-119 Pavel lived-life company and shelter continuation 13793ms
+ ✓ tests/v121_continuation.test.ts (1 test) 14469ms
+   ✓ preserves the recorded rules-121 resumed gathering credit continuation 14468ms
+ ✓ tests/v12_continuation.test.ts (1 test) 15303ms
+   ✓ preserves local-main version 12 continuation 15302ms
+ ✓ tests/current_recovery.test.ts (3 tests) 13645ms
+   ✓ current product worlds continue exactly through ordinary decisions and pure observation 13574ms
+ ✓ tests/v122_continuation.test.ts (1 test) 15129ms
+   ✓ preserves recorded rules-122 ordinary and paid preservation continuations 15118ms
+ ✓ tests/v11_continuation.test.ts (1 test) 15096ms
+   ✓ preserves local-main version 11 continuation 15095ms
+ ✓ tests/lab_exit_codes.test.ts (2 tests) 111237ms
+   ✓ lab.mjs exits non-zero when a seed worker fails 65890ms
+   ✓ lab_report.ts exits non-zero when there are no results 45346ms
+ ✓ tests/v116_continuation.test.ts (1 test) 14901ms
+   ✓ preserves the rules-116 ordinary continuation through paused-activity endings exactly 14900ms
+ ✓ tests/historical_retention.test.ts (5 tests) 13552ms
+   ✓ preserves full natural continuation against the retention ablation apart from expired storage 13382ms
+ ✓ tests/v234_continuation.test.ts (1 test) 12882ms
+   ✓ preserves the rules-234 ordinary aspen continuation 12881ms
+ ✓ tests/probe.test.ts (8 tests) 13060ms
+   ✓ work counters (3)
+     ✓ leave the world exactly as it would have been without them 5986ms
+     ✓ stay at zero while switched off 793ms
+     ✓ count real work when switched on, and count it the same way every time 2699ms
+   ✓ why people wander (diagnostic) (1)
+     ✓ counts a cause for every wander that was chosen, and changes nothing 3394ms
+ ✓ tests/own_stores.test.ts (17 tests) 12059ms
+   ✓ rules 245: a household knows its own stores (17)
+     ✓ an ordinary world: what a household remembers of its own buildings is what is there; at 244 it is mostly not; another household's stays a glance 11635ms
+ ✓ tests/v228_continuation.test.ts (1 test) 12281ms
+   ✓ preserves the rules-228 ordinary aspen continuation 12280ms
+ ✓ tests/social.test.ts (6 tests) 12899ms
+   ✓ ordinary social life in the natural world (1)
+     ✓ over several days people greet, talk, ask, share and sometimes disagree, and relationships form from those encounters 12682ms
+ ✓ tests/v242_continuation.test.ts (1 test) 13343ms
+   ✓ preserves the rules-242 ordinary aspen continuation 13342ms
+ ✓ tests/v225_continuation.test.ts (1 test) 12779ms
+   ✓ preserves the rules-225 ordinary river continuation 12778ms
+ ✓ tests/v124_continuation.test.ts (1 test) 16378ms
+   ✓ preserves recorded rules-124 ordinary and paid textile continuations 16377ms
+ ✓ tests/suspended_endings.test.ts (14 tests) 10132ms
+   ✓ LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) (14)
+     ✓ gather, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save 2667ms
+     ✓ gather, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save 2416ms
+     ✓ build, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save 2211ms
+     ✓ build, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save 2276ms
+ ✓ tests/rules.test.ts (16 tests) 12444ms
+   ✓ rule sets (8)
+     ✓ keeps the larger workplace allowance behind rich dynamics, including for Huge profiles 361ms
+   ✓ the ordinary world does not notice (2)
+     ✓ naming the ordinary rules explicitly changes nothing 5185ms
+     ✓ a scaled world runs, keeps its books, and is not the ordinary world 6674ms
+ ✓ tests/cooperation.test.ts (5 tests) 11099ms
+   ✓ actions happen in space and take time (2)
+     ✓ nobody teleports during ordinary travel (speed is bounded every single tick) 7158ms
+     ✓ gathering, drinking and farming are only done at the thing itself 3723ms
+ ✓ tests/v245_continuation.test.ts (1 test) 8347ms
+   ✓ preserves the rules-245 ordinary gen-2 continuation 8346ms
+ ✓ tests/v231_continuation.test.ts (1 test) 12421ms
+   ✓ preserves the rules-231 ordinary aspen continuation 12420ms
+ ✓ tests/decision_ledger.test.ts (3 tests) 9116ms
+   ✓ every ordinary decision is kept with the activity it launched and how that activity ended, bounded and counted 4755ms
+   ✓ the ledger is saved and reloaded exactly, never fingerprinted, and never written below rules 103 or with the switch off 4290ms
+ ✓ tests/v84_continuation.test.ts (1 test) 10540ms
+   ✓ preserves rules-84 ordinary reconciliation, private withdrawal and heard cancellation continuations exactly 10539ms
+ ✓ tests/v248_continuation.test.ts (1 test) 8901ms
+   ✓ preserves the rules-248 ordinary gen-2 continuation 8899ms
+ ✓ tests/lab_from_save.test.ts (3 tests) 75197ms
+   ✓ the lab from a saved settlement (3)
+     ✓ a control and a nudge from a save end where the measuring scripts and the unsaved world end 38968ms
+     ✓ runLab from a save does not step the world before the fork: every arm starts from the save, and days are days to continue 21756ms
+     ✓ the runners refuse a fresh-world option beside a save, and --rules-up without one 14471ms
+ ✓ tests/v232_continuation.test.ts (1 test) 12510ms
+   ✓ preserves the rules-232 ordinary aspen continuation 12508ms
+ ✓ tests/knowledge.test.ts (5 tests) 8370ms
+   ✓ knowledge is local (5)
+     ✓ across a whole natural run, every activity aimed at a place or thing starts from something the person knew 8197ms
+ ✓ tests/cascade.test.ts (3 tests) 12237ms
+   ✓ the cascade tracer (3)
+     ✓ leaves the world exactly where it would have been 5285ms
+     ✓ links happenings that share a person within a day, across systems, and not otherwise 1969ms
+     ✓ does not link across more than a day 4967ms
+ ✓ tests/v216_continuation.test.ts (1 test) 8469ms
+   ✓ preserves the rules-216 ordinary gen-2 continuation 8468ms
+ ✓ tests/contest-reservations.test.ts (8 tests) 7915ms
+   ✓ reservations are released (4)
+     ✓ in a long natural run every reservation belongs to a living person with a matching activity, and source counters add up 7777ms
+ ✓ tests/geology.test.ts (3 tests) 8483ms
+   ✓ varies finite geology without moving deposits, changing food/water or drawing simulation RNG 1014ms
+   ✓ does not teach undiscovered deposits or impose occupations and survives save/load 6806ms
+   ✓ keeps historical generation exactly equal with or without the generation-only ablation 663ms
+ ✓ tests/environment.test.ts (5 tests) 9632ms
+   ✓ a dry spell and a flood (2)
+     ✓ a storm at its height floods the shore: goods lying by the water are lost and recorded, shelters there are damaged 854ms
+   ✓ deer and the hunt (2)
+     ✓ deer come to a rich world and none to an authored one 7943ms
+     ✓ a hungry hunter with a deer in sight may stalk it, and a kill puts meat in the pack that the ledger accounts for 641ms
+ ✓ tests/v240_continuation.test.ts (1 test) 7356ms
+   ✓ preserves the rules-240 ordinary birch continuation 7352ms
+ ✓ tests/v247_continuation.test.ts (1 test) 9225ms
+   ✓ preserves the rules-247 ordinary gen-2 continuation 9224ms
+ ✓ tests/zz_review_main_till_root.test.ts (1 test) 16095ms
+   ✓ REVIEW: why the chosen field tile cannot be reached (1)
+     ✓ forest, Isla at tick 3204 16093ms
+ ✓ tests/v86_continuation.test.ts (1 test) 8194ms
+   ✓ preserves rules-86 ordinary ecology, actual sowing, partial field rest and recovery continuations exactly 8193ms
+ ✓ tests/rules_version.test.ts (28 tests) 7675ms
+   ✓ the version survives everything that carries a world (6)
+     ✓ a save and a load keep it, and keep the whole world with it 813ms
+     ✓ a save, a load and then carrying on is the same world as never having stopped 1287ms
+     ✓ restoring into the app keeps the version the save had, and does not overwrite it with the current one 458ms
+     ✓ a lab fork of a saved world runs the version the world was saved with 606ms
+     ✓ is part of what makes a world that world 465ms
+   ✓ a world this build cannot run is refused, not reinterpreted (9)
+     ✓ refuses a save whose rules version is from the future 574ms
+     ✓ refuses a save whose rules version is far in the future 381ms
+     ✓ refuses a save whose rules version is not a whole number 512ms
+     ✓ refuses a save whose rules version is zero 383ms
+     ✓ refuses a save whose rules version is negative 329ms
+     ✓ refuses a save whose rules version is a word 344ms
+     ✓ leaves the running world untouched when a load is refused 706ms
+   ✓ the unversioned past (3)
+     ✓ is accepted, kept unversioned through a save and a load, and never guessed at 338ms
+ ✓ tests/plenty.test.ts (7 tests) 7427ms
+   ✓ rules 226: more food from the same land (7)
+     ✓ wild food comes back twice as fast; a place holds no more than it did 569ms
+     ✓ what a person expects of a place not seen for a while follows the faster regrowth 481ms
+     ✓ nothing is saved: a world saved and loaded continues the same 6125ms
+ ✓ tests/v93_continuation.test.ts (1 test) 6636ms
+   ✓ preserves rules-93 ordinary, owned parcels, paid collection and recovered-tool use exactly 6635ms
+ ✓ tests/promise_targets.test.ts (17 tests) 6384ms
+   ✓ does not call an unseen vanished site complete at the personal deadline 774ms
+   ✓ keeps actual ordinary site completion distinct from a partially delivered hauling promise 4903ms
+ ✓ tests/v203_continuation.test.ts (1 test) 7111ms
+   ✓ preserves the rules-203 ordinary gen-2 continuation 7110ms
+ ✓ tests/v91_continuation.test.ts (1 test) 5709ms
+   ✓ preserves rules-91 ordinary, private waiting, heard cancellation, replacement and shared food continuations exactly 5708ms
+ ✓ tests/v103_continuation.test.ts (1 test) 5787ms
+   ✓ preserves rules-103 ordinary and staged ledger continuations exactly 5786ms
+ ✓ tests/v102_continuation.test.ts (1 test) 5565ms
+   ✓ preserves rules-102 ordinary, declined-second-ask and single-patch continuations exactly 5564ms
+ ✓ tests/inhabit_limit_prompt.test.ts (2 tests) 8300ms
+   ✓ the "limit" key in the prompt (2)
+     ✓ is said under protocols 35 and 36, when an option lists limits, and never before 8298ms
+ ✓ tests/deposit_plenty.test.ts (7 tests) 8075ms
+   ✓ rules 231: stone outcrops and ore veins hold ten times as much (7)
+     ✓ nothing new is saved: a world saved and loaded continues the same 7593ms
+ ✓ tests/v110_continuation.test.ts (1 test) 6207ms
+   ✓ preserves rules-110 ordinary, water search and real drinking exactly 6206ms
+ ✓ tests/v113_continuation.test.ts (1 test) 5738ms
+   ✓ preserves rules-113 ordinary and paid/unpaid grain-to-seed boundaries exactly 5737ms
+ ✓ tests/v99_continuation.test.ts (1 test) 5494ms
+   ✓ preserves rules-99 ordinary, prepared, built, used and lost-component continuations exactly 5493ms
+ ❯ tests/zz_review_h_retention.test.ts (3 tests | 3 skipped) 11641ms
+   ↓ review H: retention after one ordinary day (3)
+     ↓ a running world stores its people as columns in product save format 5
+     ↓ documented caps hold
+     ↓ measures the uncapped per-person records (always passes; numbers for the review)
+ ✓ tests/v98_continuation.test.ts (1 test) 6595ms
+   ✓ preserves rules-98 ordinary, heard, fulfilled, sheltered, paid and interrupted roof-duty continuations exactly 6594ms
+ ✓ tests/v97_continuation.test.ts (1 test) 6687ms
+   ✓ preserves rules-97 ordinary, proposed and answered care return, resumed watch and competing conversation exactly 6685ms
+ ✓ tests/chooser.test.ts (2 tests) 7197ms
+   ✓ the option chooser (2)
+     ✓ ranks by utility unless asked otherwise, deterministically 3405ms
+     ✓ changes what people do when set to random, the same way every time, and goes back 3790ms
+ ✓ tests/worldsize.test.ts (11 tests) 6399ms
+   ✓ moving between sizes (3)
+     ✓ goes from the village to Large, to Huge, and back to the village, leaving nothing of the larger world behind 1335ms
+     ✓ a village started this way is the same village the ordinary settings make 4730ms
+     ✓ a test scene started from a larger world is run by the ordinary rules, as it always was 327ms
+ ✓ tests/v90_continuation.test.ts (1 test) 5626ms
+   ✓ preserves rules-90 ordinary, shared table, recovery travel and limited handling continuations exactly 5625ms
+ ✓ tests/shared_stone.test.ts (19 tests) 6611ms
+   ✓ an ordinary world (1)
+     ✓ continues exactly through save and load, and conserves goods 6293ms
+ ✓ tests/longrun_runner.test.ts (1 test) 4906ms
+   ✓ captures real redirected Windows exit codes and fails closed on incomplete reports 4905ms
+ ✓ tests/v101_continuation.test.ts (1 test) 5435ms
+   ✓ preserves rules-101 ordinary, covered, delivered and expired promise continuations exactly 5434ms
+ ✓ tests/v114_continuation.test.ts (1 test) 5497ms
+   ✓ preserves rules-114 ordinary and accepted hungry-harvest/eating continuations exactly 5495ms
+ ✓ tests/v111_continuation.test.ts (1 test) 5463ms
+   ✓ preserves rules-111 ordinary, ongoing occasion and urgent interruption exactly 5462ms
+ ✓ tests/v106_continuation.test.ts (1 test) 5408ms
+   ✓ preserves rules-106 ordinary, unseen, seen, set-out and after-care continuations exactly 5408ms
+ ✓ tests/v94_continuation.test.ts (1 test) 6244ms
+   ✓ preserves rules-94 ordinary, heard handover, paid cover work and agreed return exactly 6243ms
+ ✓ tests/v115_continuation.test.ts (1 test) 5507ms
+   ✓ preserves rules-115 ordinary and accepted project-handcraft/input-release continuations exactly 5505ms
+ ✓ tests/v100_continuation.test.ts (1 test) 5758ms
+   ✓ preserves rules-100 ordinary, told, deferred, stale and complementary continuations exactly 5757ms
+ ✓ tests/v112_continuation.test.ts (1 test) 5085ms
+   ✓ preserves rules-112 ordinary, paused and resumed occasion and closed refusal exactly 5084ms
+ ✓ tests/v105_continuation.test.ts (1 test) 5581ms
+   ✓ preserves rules-105 ordinary, set-aside, told and delivered continuations exactly 5579ms
+ ✓ tests/v104_continuation.test.ts (1 test) 6184ms
+   ✓ preserves rules-104 ordinary and told-at-supper continuations exactly 6183ms
+ ✓ tests/v211_continuation.test.ts (1 test) 5114ms
+   ✓ preserves the rules-211 ordinary gen-2 continuation 5113ms
+ ✓ tests/v244_continuation.test.ts (1 test) 5718ms
+   ✓ preserves the rules-244 ordinary gen-2 continuation 5717ms
+ ✓ tests/v213_continuation.test.ts (1 test) 4265ms
+   ✓ preserves the rules-213 ordinary gen-2 continuation 4264ms
+ ✓ tests/v92_continuation.test.ts (1 test) 5436ms
+   ✓ preserves rules-92 ordinary, actual heard work, informed succession and private-work continuations exactly 5427ms
+ ✓ tests/life.test.ts (6 tests) 5433ms
+   ✓ age (2)
+     ✓ an authored world runs a day with none of this 5247ms
+ ✓ tests/time_budget.test.ts (3 tests) 4772ms
+   ✓ partitions start-of-tick living time and leaves the full ordinary continuation and RNG unchanged 4761ms
+ ✓ tests/v88_continuation.test.ts (1 test) 5816ms
+   ✓ preserves rules-88 ordinary, flood discovery, physical retreat and waiting recovery continuations exactly 5815ms
+ ✓ tests/v107_continuation.test.ts (1 test) 5901ms
+   ✓ preserves rules-107 ordinary, told, asked and retold continuations exactly 5899ms
+ ✓ tests/project_revision.test.ts (8 tests) 5519ms
+   ✓ replays a revised plan through paid production, including memory=false, and detects tampering 3411ms
+   ✓ replays a revised plan through paid production, including memory=true, and detects tampering 1731ms
+ ✓ tests/v108_continuation.test.ts (1 test) 6004ms
+   ✓ preserves rules-108 ordinary, unseen/seen home loss and interrupted construction exactly 6003ms
+ ✓ tests/v109_continuation.test.ts (1 test) 6176ms
+   ✓ preserves rules-109 ordinary, final construction and replacement use exactly 6175ms
+ ✓ tests/v95_continuation.test.ts (1 test) 5396ms
+   ✓ preserves rules-95 ordinary, paid care acquisition, receipt and informed cancellation exactly 5395ms
+ ✓ tests/v243_continuation.test.ts (1 test) 3711ms
+   ✓ preserves the rules-243 ordinary aspen continuation 3710ms
+ ✓ tests/helper_learning.test.ts (8 tests) 4960ms
+   ✓ retains actual task, direct receipt and useful work without informing an uninvolved person 2018ms
+   ✓ changes an eligible later helper choice across a save, while preserving the helper’s valid refusal 808ms
+   ✓ keeps unavailable tasks unknown and preserves rules 77 and the isolated removal 841ms
+   ✓ rejects malformed helper receipt saves: future 365ms
+   ✓ rejects malformed helper receipt saves: wrong item 317ms
+   ✓ rejects malformed helper receipt saves: old rules 302ms
+ ✓ tests/stage4_cohort.test.ts (6 tests) 3135ms
+   ✓ the founding-camp capture (option A) (6)
+     ✓ captures every initial household in a real Large world and knows all 100 founders at day 0 358ms
+     ✓ knows even the households that have no home yet at day 0, instead of leaving them unknown 344ms
+     ✓ changes nothing by looking: a world runs identically with the capture on and off, to the last field 2403ms
+ ✓ tests/day_observers.test.ts (4 tests) 23952ms
+   ✓ leaves a watched world byte-identical to an unwatched twin, on three seeds 12069ms
+   ✓ DayShape and TripShape: every self check in their own reports holds after 600 ticks 3280ms
+   ✓ storeLook reads a store against what a person believes, and changes nothing 5943ms
+   ✓ OutdoorCompany: the parts of the day add up and each count is inside the one before it 2659ms
+ ✓ tests/empty_news_observer.test.ts (2 tests) 2498ms
+   ✓ empty-news observation (2)
+     ✓ a counting listener leaves the world and the generator unchanged 2469ms
+ ✓ tests/observer_viewer_purity.test.ts (1 test) 36236ms
+   ✓ card, viewer and lens observation leaves a seeded run identical to an unwatched twin at every checkpoint 36235ms
+ ✓ tests/v96_continuation.test.ts (1 test) 5200ms
+   ✓ preserves rules-96 ordinary, heard fire, paid acquisition and personally observed target loss exactly 5199ms
+ ✓ tests/save_columns.test.ts (8 tests) 3307ms
+   ✓ format 5 packs heterogeneous people, preserving field order and absent/undefined/null semantics 1435ms
+ ✓ tests/project_helpers.test.ts (11 tests) 3390ms
+   ✓ keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay 2623ms
+   ✓ the trusted helper can refuse goods reserved for another obligation 496ms
+ ✓ tests/care_handback.test.ts (21 tests) 2547ms
+   ✓ a naturally recovered parent autonomously agrees a safe return without claiming a complete watch 432ms
+ ✓ tests/viewer_purity.test.ts (1 test) 3538ms
+   ✓ speech layouts, panels, camera and persisted viewer modes cannot change saved state, RNG or continuation 3521ms
+ ✓ tests/temperament.test.ts (2 tests) 3705ms
+   ✓ company and the reserved (2)
+     ✓ counts up in a crowd and down alone, weighs on the reserved, and never exists in an authored world 1498ms
+     ✓ offers the crowded reserved person time alone, which clears the count and leaves them the quiet 2205ms
+ ✓ tests/crews.test.ts (1 test) 3725ms
+   ✓ crews (1)
+     ✓ form among mutual friends, pull members toward each other, and drift apart; never in an authored world 3724ms
+ ✓ tests/work_handover.test.ts (17 tests) 2834ms
+   ✓ without nearby relief, accepted work retains its progress but can fail to reach delivery 1810ms
+   ✓ actual accepted cover with known physical relief leads to paid delivery under the retained undertaking 689ms
+ ✓ tests/v206_continuation.test.ts (1 test) 3213ms
+   ✓ preserves the rules-206 ordinary gen-2 continuation 3206ms
+ ✓ tests/known_handover.test.ts (7 tests) 3771ms
+   ✓ rules 168: a watch is asked only of a neighbour who knows the child (7)
+     ✓ at 167 still asks a neighbour who has never seen the child 745ms
+     ✓ at 168 does not ask that stranger, and the inspector says why 787ms
+     ✓ at 168 asks once the neighbour has seen the child 769ms
+     ✓ at 168 asks once the neighbour has been told where the child is 543ms
+     ✓ at 168 kin alone does not qualify 430ms
+     ✓ the lab switch restores the old ask inside a rules-168 rich world 493ms
+ ✓ tests/promise_expectations.test.ts (17 tests) 3867ms
+   ✓ actual material receipt closes the heard expectation and still feeds useful crafting and replay 2020ms
+   ✓ a late spoken failure explanation revises an expired personal expectation through exact saved continuation 712ms
+ ✓ tests/promise_delays.test.ts (20 tests) 2964ms
+   ✓ offers a sourced active-delay explanation without revealing it remotely or mutating observation 319ms
+   ✓ hears the failed attempt before answering and agrees exactly one bounded extension through actual speech 428ms
+ ✓ tests/v204_continuation.test.ts (1 test) 3076ms
+   ✓ preserves the rules-204 ordinary gen-2 continuation 3075ms
+ ✓ tests/livestock.test.ts (26 tests) 20548ms
+   ✓ creates two ordinary founders with zero stores and exact conserved continuation 4154ms
+   ✓ walks onto a real shore before spending time drinking instead of stopping short 3441ms
+   ✓ retains one personally found water place and saves the return journey exactly 12375ms
+ ✓ tests/inhabit_proposals.test.ts (4 tests) 3998ms
+   ✓ the inhabitant protocol carries it: the scripted proposer records a replayable run in which the cart is built from the proposed plan 3876ms
+ ✓ tests/v212_continuation.test.ts (1 test) 3526ms
+   ✓ preserves the rules-212 ordinary gen-2 continuation 3525ms
+ ✓ tests/background.test.ts (4 tests) 3365ms
+   ✓ real births remain novices, get no adult technique, and waiting supplies no background skills 790ms
+   ✓ save/load and observers preserve the background; ablation changes only future creation 2277ms
+ ✓ tests/mediation.test.ts (2 tests) 3807ms
+   ✓ stepping into a quarrel (2)
+     ✓ is open to a friend of both who knows of it, in a rich world only 1027ms
+     ✓ comes to peace, a softening, a rebuff or a turning away, each with its mark; and the unliked are not heard 2778ms
+ ✓ tests/meat_item_validation.test.ts (6 tests) 2034ms
+   ✓ a positive meat delivery receipt survives exact save/load while invalid items are still rejected 1691ms
+ ✓ tests/v87_continuation.test.ts (1 test) 2594ms
+   ✓ preserves rules-87 ordinary sipping, physical depletion, changed access and rain continuations exactly 2593ms
+ ✓ tests/inhabit_world_change.test.ts (3 tests) 3656ms
+   ✓ load ends a pending inhabitant session before replacing its world 2315ms
+   ✓ restart ends a pending inhabitant session before replacing its world 639ms
+   ✓ loading during initial fast-forward cancels preparation without attaching to the loaded world 701ms
+ ✓ tests/project_cooperation.test.ts (36 tests) 3384ms
+   ✓ A: a project need becomes an ask, an answer, real material and then a tool (1)
+     ✓ asks unprompted, is given the stone, and the project is finished by the asker’s own hands 510ms
+   ✓ F: an outstanding promise survives a save (1)
+     ✓ a world saved mid-promise resolves to exactly the same state as one that was never saved 865ms
+   ✓ F5: a promise kept is reported as kept (2)
+     ✓ the gift settles the request, the record says “kept”, and the transcript calls it a success 867ms
+ ✓ tests/v89_continuation.test.ts (1 test) 4457ms
+   ✓ preserves rules-89 ordinary, paid offcut production, collection and partial fuel continuations exactly 4457ms
+ ✓ tests/repair_duty.test.ts (16 tests) 1978ms
+   ✓ acceptance conveys the dated home and a real fallback patch is acquired and worked autonomously 741ms
+ ✓ tests/warmth_duty_protocol.test.ts (2 tests) 1956ms
+   ✓ legal fire-duty offers physically fulfil and replay exactly (notes false) 1483ms
+   ✓ legal fire-duty offers physically fulfil and replay exactly (notes true) 471ms
+ ✓ tests/daily_routines.test.ts (25 tests) 2237ms
+ ✓ tests/lamb_birth.test.ts (2 tests) 2290ms
+   ✓ autonomously acquires, tends and breeds finite sheep; continues exactly through pregnancy and birth 1847ms
+   ✓ retains the old staged pregnancy loss under rules150 441ms
+ ✓ tests/household_practices.test.ts (8 tests) 2470ms
+   ✓ forms a practice from actual hosting, then transmits it through two parent-child meals with time and food costs 655ms
+   ✓ the acquired practice changes a later offered invitation score without bypassing food or timing 503ms
+   ✓ keeps acquired provenance after the parent dies, without teaching an unfinished learner by inheritance 313ms
+ ✓ tests/warmth_duty.test.ts (15 tests) 2512ms
+   ✓ a heard fire duty can collect lawful stored offcuts and burn the actual recovered fuel 336ms
+ ✓ tests/misdeeds.test.ts (4 tests) 2506ms
+   ✓ theft (2)
+     ✓ is an option for the starving with nothing of their own in a rich world, and never in an authored one 1556ms
+     ✓ costs by who saw: a household member who catches it holds a grievance, witnesses hold the story, nobody seen means only the log 589ms
+ ✓ tests/repair_duty_protocol.test.ts (2 tests) 2750ms
+   ✓ legal roof patch acquires real material, repairs and replays exactly (notes false) 2233ms
+   ✓ legal roof patch acquires real material, repairs and replays exactly (notes true) 515ms
+ ✓ tests/townships.test.ts (16 tests) 2665ms
+   ✓ assigns every founder to a stable township without using position as membership 1150ms
+   ✓ does not stamp township state onto previous generations; lab ablation restores 304ms
+ ✓ tests/frame_loop.test.ts (10 tests) 2628ms
+   ✓ a frame has a stepping budget in time, not only in ticks (3)
+     ✓ a heavy world at 16x stops stepping once the frame has spent its budget, and counts the rest as given up 320ms
+     ✓ a light world is not held back: what is owed within the budget is all run 934ms
+     ✓ a smooth 60 fps frame always gets its share, however slow its ticks 553ms
+ ✓ tests/promise_outcomes.test.ts (14 tests) 2771ms
+   ✓ retains an actual failed journey through the natural deadline without inventing blame or remote knowledge 370ms
+   ✓ walks to report a saved failed attempt and acknowledges hearing it without creating firsthand proof 837ms
+   ✓ requires actual contact, preserves a heard explanation across interruption, and deduplicates a retry 498ms
+   ✓ keeps previous rules and removal unchanged; positive completion still reports independently 336ms
+ ✓ tests/ready_step_protocol.test.ts (2 tests) 2911ms
+   ✓ legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes false) 2268ms
+   ✓ legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes true) 642ms
+ ✓ tests/v233_continuation.test.ts (1 test) 2943ms
+   ✓ preserves the rules-233 ordinary aspen continuation 2942ms
+ ✓ tests/passive_gear.test.ts (20 tests) 2944ms
+   ✓ flood loss removes deployed equipment and leaves a valid conserved save 2582ms
+ ✓ tests/flood_tool_records.test.ts (1 test) 3157ms
+   ✓ flood write-off and tool records (1)
+     ✓ a flooded pile loses its axe count and its axe record together 3156ms
+ ✓ tests/v214_continuation.test.ts (1 test) 3148ms
+   ✓ preserves the rules-214 ordinary gen-2 continuation 3147ms
+ ✓ tests/promise_knowledge.test.ts (14 tests) 2854ms
+   ✓ preserves actual direct material delivery, acknowledgement and useful crafting under current rules 1915ms
+ ✓ tests/current_world.test.ts (10 tests) 2810ms
+   ✓ saved worlds retain their recorded rules (3)
+     ✓ loads undefined without silently enabling or disabling systems 1083ms
+     ✓ loads authored without silently enabling or disabling systems 832ms
+     ✓ loads rich without silently enabling or disabling systems 739ms
+ ✓ tests/responsibilities.test.ts (3 tests) 2859ms
+   ✓ asking a neighbour to keep an eye on a child (2)
+     ✓ is offered to a laid-up parent with no able adult at home, in a rich world only 1242ms
+     ✓ is answered by the neighbour's own circumstances, and a promise is kept by staying with the child 1256ms
+   ✓ keeping the fire (1)
+     ✓ a promise to keep it going is kept by feeding it 358ms
+ ✓ tests/v205_continuation.test.ts (1 test) 3192ms
+   ✓ preserves the rules-205 ordinary gen-2 continuation 3191ms
+ ✓ tests/inhabit_eta.test.ts (2 tests) 3152ms
+   ✓ the plan-site estimate says the walk there is not counted (observation 8), and version 7 keeps the bare estimate 3144ms
+ ✓ tests/lifechanges.test.ts (2 tests) 1123ms
+   ✓ losing a partner (1)
+     ✓ leaves the bereaved leaning on those close, who come to look in and help more readily; nothing of it authored 824ms
+ ✓ tests/meeting_arrangements_protocol.test.ts (2 tests) 1122ms
+   ✓ exposes only the AI guest's heard appointment and replays actual uninformed waiting (memory false) 996ms
+ ✓ tests/household_home.test.ts (51 tests) 1410ms
+   ✓ 11. the chain end to end (1)
+     ✓ a household in a lean-to reaches a hut and sleeps in it, by its own decisions 698ms
+ ✓ tests/lean_years.test.ts (12 tests) 1355ms
+   ✓ what begins, year by year (4)
+     ✓ at 216 a lean season begins many times in ten years; at 220 once in each lean year, on its day, and nowhere else 367ms
+     ✓ at 220 no dry spell begins in a lean year, and dry spells still come in other years 494ms
+ ✓ tests/work_handover_protocol.test.ts (2 tests) 1512ms
+   ✓ uses only an offered handover and exactly replays the actual answer (memory false) 1426ms
+ ✓ tests/v119_120_save_provenance.test.ts (3 tests) 1518ms
+   ✓ marks integrated rules 119 and 120 and roundtrips them 434ms
+   ✓ rejects unmarked and foreign 119/120 saves without modifying the input or live world 677ms
+   ✓ keeps Stage 3 rules 117 and 118 and current 121 unmarked 405ms
+ ✓ tests/apprentice.test.ts (4 tests) 1497ms
+   ✓ switched off, and in an authored world (1)
+     ✓ nobody is taken on 1490ms
+ ✓ tests/flood_protocol.test.ts (3 tests) 1710ms
+   ✓ replays actual legal food travel with dated flood observations (memory false) 1521ms
+ ✓ tests/scenes.test.ts (6 tests) 1662ms
+   ✓ the staged test scenes (6)
+     ✓ workshop: a house waiting for planks gets them from logs sawn at the yard, carried to the site, and is finished 786ms
+     ✓ are deterministic: the same scene twice gives the same world 371ms
+ ✓ tests/offcuts_protocol.test.ts (2 tests) 1667ms
+   ✓ exposes real collection/fuel through legal offers and replays the transcript (memory false) 1481ms
+ ✓ tests/inhabitant_versions.test.ts (3 tests) 1771ms
+   ✓ the observation version in the header (3)
+     ✓ a run records the version its protocol implies, and a replay reads it 1597ms
+ ✓ tests/social_warning.test.ts (5 tests) 1738ms
+   ✓ a warning says what it came to (4)
+     ✓ a delivered warning is reported as a success, not as unknown, and the listener keeps the provenance 1412ms
+ ✓ tests/care_supply_protocol.test.ts (2 tests) 1731ms
+   ✓ uses offered care acquisition and exactly replays a paid receipt (memory false) 1584ms
+ ✓ tests/night_wait_interruption.test.ts (7 tests) 1725ms
+   ✓ reproduces the historical night restart through an actual conversation 497ms
+   ✓ finishes at daylight after a real conversation, including save/load during that conversation 463ms
+   ✓ an uninterrupted wait ends at the same daylight boundary 311ms
+ ✓ tests/lifecycle.test.ts (7 tests) 1934ms
+   ✓ life stages, birth and death (5)
+     ✓ a child is born to a couple, joins their household, and has the right family ties 440ms
+     ✓ people grow up: a child crossing the age threshold is noticed 1402ms
+ ✓ tests/care_handback_protocol.test.ts (2 tests) 1898ms
+   ✓ legal childcare return is answered and replayed exactly (notes false) 1732ms
+ ✓ tests/action_bounds.test.ts (11 tests) 1776ms
+   ✓ a bounded choice is recorded and replays (2)
+     ✓ a model may ask for a limit; it is recorded, honoured, and reproduced by a replay with no model 1025ms
+ ✓ tests/pathshortcut.test.ts (2 tests) 1893ms
+   ✓ a search for a tile that cannot be entered (2)
+     ✓ gives the answer the full search gives, for every kind of start and goal on real maps 1869ms
+ ✓ tests/route_learning.test.ts (9 tests) 2046ms
+   ✓ corrects a reopened route on actual arrival but preserves the missing-stone construction failure 772ms
+   ✓ uses another reachable material while reconsidering and later turns recovered wood into real tools 870ms
+ ✓ tests/zz_review_f_chain_time.test.ts (6 tests) 2701ms
+   ✓ chain time: staged helper kit: hammer+saw, yard 8 wood 2 handles 941ms
+   ✓ chain time: hammer+saw, empty yard 606ms
+   ✓ chain time: hammer+axe (hew path), empty yard 355ms
+ ✓ tests/observer_viewer.test.ts (4 tests) 4077ms
+   ✓ an ordinary world’s history merges the log and the decision ledger in one newest-first world-time order, with decisions and their endings 3995ms
+ ✓ tests/lab_rows.test.ts (6 tests) 13644ms
+   ✓ the stage 1c lab rows (6)
+     ✓ agree with DayShape on a run: same waking time, same hungry cells, same company, leisure and walking for people 12 and over 13612ms
+ ✓ tests/care_supply.test.ts (27 tests) 1034ms
+ ✓ tests/ready_step.test.ts (7 tests) 1057ms
+   ✓ adopts, prepares, assembles and then actually uses a cart with ordinary decisions only; the continuation is exact 305ms
+   ✓ keeps the unprepared reading and the same-workshop collect step under legacy 304ms
+ ✓ tests/journey_recovery.test.ts (10 tests) 1081ms
+   ✓ keeps prepared progress across a real drink and source failure, then uses a known same-purpose alternative for construction 587ms
+ ✓ tests/watch_learning.test.ts (13 tests) 1219ms
+   ✓ changes a later eligible childcare choice across a delay and save, followed by voluntary acceptance and real work 489ms
+ ✓ tests/meal_leftovers_protocol.test.ts (2 tests) 1317ms
+   ✓ offers actual leftover recovery to the AI and exactly replays its ordinary action (memory false) 1224ms
+ ✓ tests/ecology_protocol.test.ts (3 tests) 1249ms
+   ✓ exposes coarse ecology through the actual live/stub protocol and replays the physical rest action (memory false) 1052ms
+ ✓ tests/journey.test.ts (14 tests) 1148ms
+   ✓ retains the purpose through autonomous drinking, physical collection and useful construction, saving during the break and travel 713ms
+ ✓ tests/informed_continuity_protocol.test.ts (2 tests) 1342ms
+   ✓ executes only an offered work-sharing conversation and replays heard knowledge (memory false) 1258ms
+ ✓ tests/inhabit_craft_explanation.test.ts (3 tests) 1362ms
+   ✓ real eating restores the offered craft; real crafting spends its materials, and replay matches 1291ms
+ ✓ tests/plan_reconsider.test.ts (9 tests) 1319ms
+   ✓ retains ready tools, young plans, unknown-home plans and plans awaiting help; legacy and ablation stay unchanged 375ms
+ ✓ tests/shared_projects.test.ts (6 tests) 1358ms
+   ✓ pays the full materials and labour and preserves exact continuation through supported construction 485ms
+   ✓ collects the building materials from real home stores within carrying capacity 510ms
+ ✓ tests/request_cancellation.test.ts (21 tests) 1419ms
+   ✓ hears cancellation before acknowledgement, releases suspended work, and continues exactly from save 362ms
+ ✓ tests/ecology.test.ts (23 tests) 1431ms
+   ✓ runs a whole crop through the physical world, harvests its actual output and resows without restoring soil 369ms
+ ✓ tests/project_revision_legacy.test.ts (1 test) 1292ms
+   ✓ replays immutable pre-revision protocol 31/32 recordings with their exact old observations 1291ms
+ ✓ tests/source_learning.test.ts (11 tests) 1472ms
+   ✓ records a real empty-source visit without penalising every never-tried wood source, with exact continuation and useful work 988ms
+ ✓ tests/water_protocol.test.ts (3 tests) 1450ms
+   ✓ uses current protocol coarse water observations and replays actual shore drinking (memory false) 1402ms
+ ✓ tests/zz_review_f_plank_diversion.test.ts (6 tests) 1524ms
+   ✓ plank diversion: HEW PATH (no saw, yard 8 wood): no plank site 437ms
+   ✓ plank diversion: HEW PATH (no saw, yard 8 wood): communal granary site wants 8 planks 423ms
+   ✓ plank diversion: HEW PATH (no saw, yard 8 wood): another villager wants planks for the site 354ms
+ ✓ tests/lab_deaths.test.ts (2 tests) 2145ms
+   ✓ the lab counts deaths since the fork (2)
+     ✓ a branch forked from a world that already had deaths reports none of them as its own 2076ms
+ ✓ tests/observer_lifeevent.test.ts (3 tests) 2923ms
+   ✓ asking about a life change that has run its course (3)
+     ✓ says there is none, and deletes nothing from the person or the world 1810ms
+     ✓ still lapses when the SIMULATION asks: behaviour is unchanged 502ms
+     ✓ describes a change that is still running, and leaves it alone 610ms
+ ✓ tests/practical_care_upkeep.test.ts (10 tests) 501ms
+ ✓ tests/care_water.test.ts (19 tests) 631ms
+ ✓ tests/checked_accounts.test.ts (3 tests) 592ms
+ ✓ tests/location_question.test.ts (6 tests) 666ms
+   ✓ after a failed hand-over the helper asks a present neighbour, keeps her dated answer with the teller, and delivers 303ms
+ ✓ tests/v29_save_provenance.test.ts (3 tests) 891ms
+   ✓ marks main rules 29 and roundtrips without enabling work tastes 347ms
+ ✓ tests/night_plan.test.ts (41 tests) 919ms
+ ✓ tests/workshop_tool_loss.test.ts (6 tests) 701ms
+   ✓ gathers and crafts a replacement, then resumes the same paid job across save without duplicating inputs 353ms
+ ✓ tests/batch_plan.test.ts (7 tests) 1100ms
+   ✓ rules 50: the plan carries the chain through: dig clay, bring it to the kiln, fire bricks, collect them, haul them to the site 461ms
+   ✓ rules 50: the switch removes the plan, saving and replaying are exact, observing changes nothing, and a dead planner’s plan ends 347ms
+ ✓ tests/single_roof_duty.test.ts (4 tests) 909ms
+   ✓ a roof already promised is declined to a second asker in so many words; one real patch keeps the one promise 599ms
+ ✓ tests/project_recovery.test.ts (16 tests) 893ms
+ ✓ tests/construction_finish.test.ts (8 tests) 991ms
+   ✓ the retained valid collapse fixture now completes its paid replacement and sleeps there across a save 792ms
+ ✓ tests/tool_transfer_records.test.ts (3 tests) 1126ms
+   ✓ tool transfers keep counts and records together (3)
+     ✓ control: the rack saw leaves with its record when nobody is at the bench 911ms
+ ✓ tests/supper_telling.test.ts (4 tests) 1038ms
+   ✓ a household supper tells what the host is working on once the guest has really sat with them, carrying the meal id 792ms
+ ✓ tests/home_replacement.test.ts (8 tests) 890ms
+   ✓ an observed lost home starts real gathering, hauling and paid construction with exact saved continuation 758ms
+ ✓ tests/estate_custody.test.ts (14 tests) 883ms
+ ✓ tests/flood_access.test.ts (12 tests) 741ms
+ ✓ tests/projects.test.ts (42 tests) 920ms
+ ✓ tests/chains.test.ts (11 tests) 1039ms
+   ✓ production follows need (3)
+     ✓ the iron chain can be completed by one person’s ordinary decisions: a worn axe, a smithy with ore on its shelf, a kiln and trees end in charcoal, iron and an iron axe 563ms
+ ✓ tests/inhabit_plans.test.ts (4 tests) 809ms
+   ✓ exposes the active plan and the carried/spoken-for/available split of the pack 469ms
+ ✓ tests/meeting_arrangements.test.ts (17 tests) 1100ms
+   ✓ waits physically at an unknowingly cancelled place through a saved early arrival, then times out without inventing a cause 413ms
+ ✓ tests/technique_tree.test.ts (7 tests) 329ms
+ ✓ tests/company.test.ts (13 tests) 401ms
+ ✓ tests/toys.test.ts (8 tests) 396ms
+ ❯ tests/wild_seed.test.ts (8 tests | 4 failed) 260ms
+   ✓ does not consume a partial grain when the conversion cannot pay its whole input 72ms
+   ✓ a grain eaten at the source cannot also make a seed without a carried grain input 6ms
+   × a harvested grain really retained in the pack still pays for its seed 107ms
+   × a separate carried grain can pay while a source grain is eaten 7ms
+   ✓ preserves the prior unpaid seed under old rules 5ms
+   × preserves the prior unpaid seed under removed rules 4ms
+   × keeps the existing chance draw and counts only actual consumed conversion inputs across fixed seeds 11ms
+   ✓ preserves a partly completed real harvest across save and pure inspection 45ms
+ ✓ tests/provenance.test.ts (2 tests) 738ms
+   ✓ records the checked-out commit and whether tracked files differ from it 730ms
+ ✓ tests/childhood.test.ts (14 tests) 320ms
+ ✓ tests/save_lineage.test.ts (2 tests) 507ms
+ ✓ tests/forestry.test.ts (10 tests) 267ms
+ ✓ tests/nourishment.test.ts (26 tests) 404ms
+ ✓ tests/project_production.test.ts (1 test) 579ms
+   ✓ autonomously adopts a forged-tool project and executes charcoal, smelting and forging with exact saved continuation 577ms
+ ✓ tests/cooperation_trade.test.ts (4 tests) 637ms
+ ✓ tests/event_history.test.ts (6 tests) 499ms
+ ✓ tests/community.test.ts (19 tests) 613ms
+ ✓ tests/techniques.test.ts (12 tests) 560ms
+ ✓ tests/offcuts.test.ts (12 tests) 413ms
+ ✓ tests/hand_feeding.test.ts (6 tests) 609ms
+   ✓ plans purely and continues exactly after saving 324ms
+ ✓ tests/estate_release.test.ts (7 tests) 541ms
+ ✓ tests/delivery_place.test.ts (4 tests) 515ms
+ ✓ tests/relocation_extensions.test.ts (6 tests) 654ms
+   ✓ a proposal is heard by whoever is there; a refusal keeps the agreement, the refuser and their child stay, and the travellers found a new household 322ms
+ ✓ tests/resident_care.test.ts (23 tests) 593ms
+ ✓ tests/site_supply.test.ts (10 tests) 462ms
+ ✓ tests/relocation.test.ts (14 tests) 774ms
+   ✓ accepted household physically packs, travels, lays out, supplies and builds shelter before founding 317ms
+ ✓ tests/seed_storage.test.ts (10 tests) 325ms
+ ✓ tests/promised_supply.test.ts (7 tests) 297ms
+ ✓ tests/project_acquire_remaining.test.ts (4 tests) 303ms
+ ✓ tests/evening_fire.test.ts (7 tests) 305ms
+ ✓ tests/resolved_route.test.ts (5 tests) 419ms
+ ✓ tests/exchange_journeys.test.ts (12 tests) 427ms
+ ✓ tests/crews_rejoin.test.ts (5 tests) 460ms
+ ✓ tests/kept_target.test.ts (8 tests) 607ms
+ ✓ tests/teller_confidence.test.ts (4 tests) 496ms
+   ✓ keeps rules 153 and the lab removal identical to no doubt, and continues exactly after saving 420ms
+ ✓ tests/action_scope.test.ts (16 tests) 489ms
+ ✓ tests/source_contact.test.ts (5 tests) 475ms
+ ✓ tests/brewing.test.ts (8 tests) 377ms
+ ✓ tests/care_capacity.test.ts (14 tests) 480ms
+ ✓ tests/hearth.test.ts (10 tests) 417ms
+ ✓ tests/learner_instruction.test.ts (9 tests) 395ms
+ ✓ tests/customers.test.ts (7 tests) 475ms
+ ✓ tests/water_budget.test.ts (16 tests) 402ms
+ ✓ tests/answer_cause.test.ts (7 tests) 568ms
+ ✓ tests/food_help.test.ts (11 tests) 480ms
+ ✓ tests/clothing.test.ts (22 tests) 513ms
+ ✓ tests/commitments.test.ts (34 tests) 491ms
+stdout | tests/zz_review_e_granary.test.ts > Q4a: shares stay consistent with the bins through heavy real spoilage (all grain owned)
+Q4a start items 40 shares {"1":{"grain":20},"4":{"grain":20}} commons 0
+Q4a end items 9 shares {"1":{"grain":4},"4":{"grain":5}} sum 9 commons 0 spoiled ledger 31 violations 0
+
+ ✓ tests/occasion_recovery.test.ts (11 tests) 279ms
+ ✓ tests/lab.test.ts (8 tests) 2827ms
+   ✓ the counterfactual lab (6)
+     ✓ forks exactly: the control ends in the state the unforked world reaches 1444ms
+     ✓ random choice changes the world, and the switch is back afterwards 1370ms
+ ✓ tests/skill_coaching.test.ts (6 tests) 223ms
+ ✓ tests/winter_reserve.test.ts (6 tests) 374ms
+ ✓ tests/communal_stock.test.ts (8 tests) 195ms
+stdout | tests/zz_review_e_granary.test.ts > Q4b: with unowned (commons) grain in the bins, whose grain spoils?
+Q4b start items 40 shares {"1":{"grain":20}} commons 20
+Q4b end items 8 shares {"1":{}} sum 0 commons 8 spoiled 32 violations 0
+
+ ✓ tests/batch_recipe_choice.test.ts (6 tests) 295ms
+ ✓ tests/carcass.test.ts (16 tests) 346ms
+stdout | tests/zz_review_e_granary.test.ts > Q4c: eating from a granary one did not fill: share 0, ration only when starving
+Q4c Bob hunger 60 allowance 0
+Q4c Bob hunger 20 allowance 3
+Q4c Cid hunger 10 allowance 3
+
+ ✓ tests/practical_care.test.ts (8 tests) 337ms
+ ✓ tests/wells.test.ts (23 tests) 383ms
+ ✓ tests/pavel_intentions.test.ts (3 tests) 328ms
+ ✓ tests/lab_civilisation.test.ts (3 tests) 676ms
+   ✓ reads actual acquired practice and preserves the full world 671ms
+ ✓ tests/picked_up.test.ts (5 tests) 265ms
+ ✓ tests/arrival_way.test.ts (6 tests) 387ms
+ ✓ tests/winter_shelter.test.ts (13 tests) 456ms
+ ✓ tests/shown.test.ts (12 tests) 328ms
+ ✓ tests/hungry_harvest.test.ts (12 tests) 313ms
+ ✓ tests/bread_feeds.test.ts (7 tests) 413ms
+ ✓ tests/informed_continuity.test.ts (14 tests) 432ms
+ ✓ tests/tool_prerequisite.test.ts (7 tests) 370ms
+ ✓ tests/suspended_cancellation.test.ts (2 tests) 150ms
+ ✓ tests/inhabit_devserver.test.ts (9 tests) 572ms
+ ✓ tests/zz_review_e_granary.test.ts (3 tests) 433ms
+ ✓ tests/suite_assurance.test.ts (6 tests) 247ms
+ ✓ tests/family_food.test.ts (7 tests) 94ms
+ ✓ tests/project_allocation.test.ts (10 tests) 231ms
+ ✓ tests/succession.test.ts (4 tests) 207ms
+ ✓ tests/tool_plan_capacity.test.ts (4 tests) 205ms
+ ✓ tests/pavel_acquisition.test.ts (2 tests) 150ms
+ ✓ tests/civic_food_benefit.test.ts (4 tests) 213ms
+ ✓ tests/builder_fetches.test.ts (5 tests) 232ms
+ ✓ tests/care_acquisition_ending.test.ts (2 tests) 228ms
+ ✓ tests/carcass_supply.test.ts (11 tests) 209ms
+ ✓ tests/three_ages.test.ts (10 tests) 242ms
+ ✓ tests/play.test.ts (10 tests) 173ms
+ ✓ tests/swap_and_fire.test.ts (9 tests) 92ms
+ ✓ tests/cellar_home_order.test.ts (4 tests) 295ms
+ ✓ tests/settlement_economy.test.ts (8 tests) 148ms
+ ✓ tests/shared_builders.test.ts (8 tests) 310ms
+ ✓ tests/habitation.test.ts (24 tests) 126ms
+ ✓ tests/stored_water.test.ts (12 tests) 185ms
+ ✓ tests/cellars.test.ts (12 tests) 175ms
+ ✓ tests/meal_leftovers.test.ts (16 tests) 196ms
+ ✓ tests/household_continuity_view.test.ts (8 tests) 200ms
+ ✓ tests/kept_target_observer.test.ts (1 test) 108ms
+ ✓ tests/belief_outcome.test.ts (3 tests) 171ms
+stdout | tests/zz_review_e_night_water.test.ts > Q5a: indoors at night, thirst 10, no stored water, shore known ~15 tiles north: drink is eligible and happens
+Q5a {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 13,
+ "water": [
+  "drink \"Go and drink at the water\" util=74.5 eta=225 key=drink:2000000070",
+  "drink \"Go and drink at the water\" util=73.7 eta=237 key=drink:2000000068"
+ ],
+ "eligible": [
+  "drink:2000000068",
+  "drink:2000000070"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "drink drink:2000000068 need=thirst 73.7",
+  "drink drink:2000000070 need=thirst 74.5"
+ ]
+}
+Q5a starts t30 start drink "Drinking at the water" -> (42,14) thirst=9.0
+t230 start sleep "Sleeping by my hut" -> (41,34) thirst=100.0
+Q5a ends t229 end drink|work|success|done thirst=100.0 health=100 at (42,14) indoors=0 waterBeliefs=13
+Q5a firstDrinkStart 30 thirst now 94.6 alive true
+
+ ✓ tests/known_first_storehouse.test.ts (6 tests) 193ms
+stdout | tests/zz_review_e_night_water.test.ts > Q5b: the same with 2 water in the hut store: stored water is drunk
+Q5b {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 13,
+ "water": [
+  "drink \"Drink water stored at home\" util=94.8 eta=8 key=drink:store:4",
+  "drink \"Go and drink at the water\" util=74.5 eta=225 key=drink:2000000070",
+  "drink \"Go and drink at the water\" util=73.7 eta=237 key=drink:2000000068"
+ ],
+ "eligible": [
+  "drink:store:4",
+  "drink:2000000068",
+  "drink:2000000070"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "drink drink:store:4 need=thirst 94.8",
+  "drink drink:2000000068 need=thirst 73.7",
+  "drink drink:2000000070 need=thirst 74.5"
+ ]
+}
+Q5b ends t45 end drink|work|success|done thirst=80.5 health=100 at (41,34) indoors=4 waterBeliefs=13
+t141 end sleep|work|success|rested thirst=78.7 health=100 at (41,34) indoors=4 waterBeliefs=13
+t167 end plan_site|work|success|done thirst=77.8 health=100 at (41,34) indoors=0 waterBeliefs=13
+Q5b thirst now 76.8 indoors 4
+
+stdout | tests/zz_review_e_fullpack_care.test.ts > Q1a: full pack of tools+wood+stone, hunger 30: which food options exist, and does she eat at the source?
+cap 18 weight 18 room 0
+Q1a options {
+ "criticals": [],
+ "drives": 66.66666666666667,
+ "food": [
+  "gather \"Picking berries\" util=53.6 eta=135 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 53.6",
+  "wander wander 6.0"
+ ]
+}
+Q1a trace t213 gather|work|success|done cycle=6 hunger=83.7
+t391 till|work|success|done cycle=0 hunger=78.7
+t425 plant|work|success|done cycle=0 hunger=77.9
+t493 harvest|work|success|done cycle=1 hunger=75.9
+Q1a after: hunger 72.8 weight 18 bush 6 plot 4 eaten at source ["-eaten at the source"]
+
+ ✓ tests/v27_save_provenance.test.ts (4 tests) 62ms
+ ✓ tests/pavel_outcomes.test.ts (7 tests) 183ms
+ ✓ tests/fishing_rods.test.ts (6 tests) 202ms
+ ✓ tests/market_locality.test.ts (11 tests) 266ms
+ ✓ tests/taken_from.test.ts (7 tests) 239ms
+ ✓ tests/oven_load.test.ts (11 tests) 183ms
+ ✓ tests/home_first.test.ts (8 tests) 157ms
+stdout | tests/zz_review_e_fullpack_care.test.ts > Q1b: full pack of seeds+tools only (no wood/stone): food options and leave-heaviest
+cap 18 weight 18
+Q1b options {
+ "criticals": [],
+ "drives": 66.66666666666667,
+ "food": [
+  "gather \"Picking berries\" util=54.4 eta=135 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 54.4",
+  "wander wander 6.0"
+ ]
+}
+Q1b trace t173 gather|work|success|done cycle=6 hunger=84.9
+t326 till|work|success|done cycle=0 hunger=80.6
+t354 plant|work|success|done cycle=0 hunger=80.0
+t411 harvest|work|success|done cycle=1 hunger=78.3
+t522 till|work|success|done cycle=0 hunger=75.1
+t549 plant|work|success|done cycle=0 hunger=74.4
+Q1b after: hunger 73.0 bush 6
+
+stdout | tests/zz_review_e_night_water.test.ts > Q5c: indoors at night, thirst 10, NO known water (as the retained collapsed-home fixture): what does the search do in 2,000 ticks?
+Q5c {
+ "frac": "0.92",
+ "light": "0.00",
+ "night": true,
+ "criticals": [
+  "thirst"
+ ],
+ "lead": "thirst",
+ "waterBeliefs": 0,
+ "water": [
+  "explore \"Search for water\" util=59.2 eta=162 key=explore"
+ ],
+ "eligible": [
+  "explore"
+ ],
+ "blocked": [
+  "sleep \"Sleep\": too thirsty or hungry to sleep",
+  "rest \"Stay in shelter until it is light\": something more pressing comes first"
+ ],
+ "top": [
+  "explore explore need=thirst 59.2"
+ ]
+}
+Q5c starts t30 start explore "Searching for water" -> (32,19) thirst=9.0
+t192 start explore "Searching for water" -> (18,16) thirst=3.8
+t324 start drink "Drinking at the water" -> (18,14) thirst=0.0
+t366 start sleep "Sleeping by my hut" -> (41,34) thirst=100.0
+t805 start plan_site "Laying out an indoor hearth" -> (41,34) thirst=88.2
+t831 start build "Building the hut" -> (40,33) thirst=87.4
+t858 start build "Building the hut" -> (40,33) thirst=86.3
+t869 start explore "Looking for timber" -> (45,18) thirst=85.8
+t1022 start wander "Pottering about" -> (38,34) thirst=80.9
+t1200 start wander "Strolling about the square" -> (43,47) thirst=75.3
+t1324 start explore "Exploring" -> (66,30) thirst=71.3
+t1561 start wander "Pottering about" -> (46,36) thirst=63.7
+t1766 start rest "Resting" -> (46,36) thirst=57.1
+t1876 start explore "Exploring" -> (19,33) thirst=53.6
+Q5c ends t191 end explore|work|success|done thirst=3.9 health=100 at (32,19) indoors=0 waterBeliefs=0
+t323 end explore|work|success|done thirst=0.0 health=99 at (18,16) indoors=0 waterBeliefs=5
+t365 end drink|work|success|done thirst=100.0 health=98 at (18,14) indoors=0 waterBeliefs=5
+t804 end sleep|work|success|morning came thirst=88.3 health=98 at (41,34) indoors=4 waterBeliefs=5
+t830 end plan_site|work|success|done thirst=87.4 health=98 at (41,34) indoors=0 waterBeliefs=5
+t857 end build|work|partial|no materials to work with (1 wood, 2 stone) thirst=86.3 health=98 at (40,33) indoors=0 waterBeliefs=5
+t868 end build|work|partial|no materials to work with (1 wood, 2 stone) thirst=85.9 health=98 at (40,33) indoors=0 waterBeliefs=5
+t1021 end explore|work|success|done thirst=81.0 health=98 at (45,18) indoors=0 waterBeliefs=9
+t1199 end wander|work|success|done thirst=75.3 health=98 at (38,34) indoors=0 waterBeliefs=9
+t1324 end wander|work|interrupted|something better came up thirst=71.3 health=98 at (43,47) indoors=0 waterBeliefs=9
+t1560 end explore|work|success|done thirst=63.7 health=98 at (66,30) indoors=0 waterBeliefs=9
+t1765 end wander|work|success|done thirst=57.2 health=98 at (46,36) indoors=0 waterBeliefs=9
+t1876 end rest|work|interrupted|something better came up thirst=53.6 health=98 at (46,36) indoors=0 waterBeliefs=9
+Q5c explores 5 wanders 3 firstDrinkStart 324 alive true health 98.1 thirst 49.7 waterBeliefs now 9 elapsed 2000 deaths []
+
+stdout | tests/zz_review_e_fullpack_care.test.ts > Q1c: full pack and hunger already critical (10): the same, under critical filtering
+Q1c options {
+ "criticals": [
+  "hunger"
+ ],
+ "drives": 88.88888888888889,
+ "food": [
+  "gather \"Picking berries\" util=71.2 eta=155 key=gather:4"
+ ],
+ "eligible": [
+  "gather:4"
+ ],
+ "blocked": [
+  "harvest \"Harvest food from the ripe crop\": no room to carry a grain from the crop"
+ ],
+ "leave": [],
+ "top": [
+  "gather gather:4 71.2"
+ ]
+}
+Q1c trace t346 gather|work|success|done cycle=6 hunger=65.7
+Q1c after: hunger 64.4 bush 4
+
+stdout | tests/zz_review_e_fullpack_care.test.ts > Q6: a starving child dependant beside a household adult carrying fruit is fed
+Q6 adult sees dependant? true dependents [ 'Eli' ]
+Q6 care options ["give \"Bring fruit to Eli\" util=69.3 key=give:4"] blocked [] top [
+  'give give:4 69.3',
+  'socialize socialize:4:offer 39.7',
+  'explore explore 21.9'
+]
+Q6 dependant options [
+  'wander wander 6.0',
+  'socialize socialize:2:request:food 75.6',
+  'socialize socialize:2:ask_info:food 63.6'
+] criticals [ 'hunger' ]
+Q6 trace t34 transfer person:2->person:4 3 fruit (gift on request)
+t72 Eli converse|work|success|finished a conversation cycle=0
+t72 Hilda converse|work|success|finished a conversation cycle=0
+t73 Hilda give|travel|interrupted|something better came up cycle=0
+t102 Eli eat|work|success|done cycle=3
+t215 Eli wander|work|success|done cycle=0
+t274 Eli wander|travel|interrupted|something better came up cycle=0
+t303 Hilda explore|work|success|done cycle=0
+t363 Eli visit|work|failed|Hilda was not where I expected cycle=0
+Q6 after: dep hunger 41.5 dep inv {} adult inv {"fruit":3,"water":2} fedTick 35 fedUntil undefined
+
+ ✓ tests/child_tasks.test.ts (4 tests) 239ms
+ ✓ tests/found_empty.test.ts (5 tests) 283ms
+ ✓ tests/project_room.test.ts (5 tests) 253ms
+ ✓ tests/death_knowledge.test.ts (7 tests) 284ms
+ ✓ tests/wolf_skin.test.ts (9 tests) 380ms
+ ✓ tests/civic_choice.test.ts (7 tests) 270ms
+ ✓ tests/pavel_company.test.ts (7 tests) 220ms
+ ✓ tests/zz_review_e_night_water.test.ts (3 tests) 278ms
+ ✓ tests/household_supply.test.ts (8 tests) 234ms
+ ✓ tests/tool_precedence.test.ts (8 tests) 325ms
+stdout | tests/zz_review_e_fullpack_care.test.ts > Q6: a starving injured adult dependant beside a household adult carrying fruit is fed
+Q6 adult sees dependant? true dependents [ 'Eli' ]
+Q6 care options ["give \"Bring fruit to Eli\" util=53.1 key=give:4"] blocked [] top [
+  'give give:4 53.1',
+  'socialize socialize:4:offer 29.7',
+  'explore explore 21.9'
+]
+Q6 dependant options [
+  'explore explore 41.5',
+  'wander wander 6.0',
+  'socialize socialize:2:request:food 75.5',
+  'socialize socialize:2:ask_info:food 63.5',
+  'socialize socialize:2:ask_info:wood 15.1'
+] criticals [ 'hunger' ]
+Q6 trace t34 transfer person:2->person:4 3 fruit (gift on request)
+t72 Eli converse|work|success|finished a conversation cycle=0
+t72 Hilda converse|work|success|finished a conversation cycle=0
+t73 Hilda give|travel|interrupted|something better came up cycle=0
+t102 Eli eat|work|success|done cycle=3
+t193 Hilda explore|travel|interrupted|something better came up cycle=0
+t327 Hilda visit|work|failed|Eli was not where I expected cycle=0
+t378 Eli explore|work|success|done cycle=0
+Q6 after: dep hunger 40.4 dep inv {} adult inv {"fruit":3,"water":2} fedTick 35 fedUntil undefined
+
+ ✓ tests/transport.test.ts (7 tests) 392ms
+ ✓ tests/zz_review_e_fullpack_care.test.ts (5 tests) 332ms
+ ✓ tests/settlements.test.ts (9 tests) 150ms
+ ✓ tests/personal_places.test.ts (5 tests) 188ms
+ ✓ tests/cart_break_tool_records.test.ts (2 tests) 304ms
+ ✓ tests/achievement.test.ts (7 tests) 186ms
+ ✓ tests/wolf_habitation.test.ts (6 tests) 62ms
+ ✓ tests/smithy_iron.test.ts (7 tests) 319ms
+ ✓ tests/project_inputs.test.ts (11 tests) 296ms
+ ✓ tests/trap_window.test.ts (8 tests) 235ms
+ ✓ tests/occasion_participation.test.ts (9 tests) 180ms
+ ✓ tests/net_full_pack.test.ts (3 tests) 325ms
+ ✓ tests/pavel_resume.test.ts (1 test) 153ms
+ ✓ tests/local_demand.test.ts (4 tests) 281ms
+ ✓ tests/eat_in_hand.test.ts (3 tests) 289ms
+ ✓ tests/empty_delivery.test.ts (9 tests) 249ms
+ ✓ tests/recovered_workshops.test.ts (9 tests) 258ms
+ ✓ tests/layout_claims.test.ts (17 tests) 240ms
+ ✓ tests/handover_outcome.test.ts (7 tests) 291ms
+ ✓ tests/political_alignment.test.ts (5 tests) 349ms
+ ✓ tests/observer_planning_mode.test.ts (1 test) 401ms
+   ✓ observes a blocked promise without restamping it, distinguishing collect from read-only observer mode 400ms
+ ✓ tests/civic_benefit.test.ts (4 tests) 226ms
+ ✓ tests/tool_demand_observer.test.ts (1 test) 172ms
+ ✓ tests/hypot.test.ts (3 tests) 156ms
+ ✓ tests/ration_two.test.ts (9 tests) 109ms
+ ✓ tests/heard_helpers.test.ts (7 tests) 57ms
+ ✓ tests/project_compile.test.ts (14 tests) 150ms
+ ✓ tests/grain_kept.test.ts (10 tests) 184ms
+ ✓ tests/recovered_tool_spill.test.ts (7 tests) 165ms
+ ✓ tests/visible_need.test.ts (6 tests) 178ms
+ ✓ tests/development.test.ts (6 tests) 111ms
+ ✓ tests/carry_more.test.ts (12 tests) 147ms
+ ✓ tests/fatal_injury.test.ts (8 tests) 171ms
+ ✓ tests/child_feeding.test.ts (5 tests) 189ms
+ ✓ tests/winter_practice.test.ts (4 tests) 224ms
+ ✓ tests/trap_ground.test.ts (7 tests) 155ms
+ ✓ tests/light_pack.test.ts (14 tests) 190ms
+ ✓ tests/stalled_ask.test.ts (7 tests) 60ms
+ ✓ tests/metabolism.test.ts (7 tests) 208ms
+ ✓ tests/wolf_fight.test.ts (9 tests) 258ms
+ ✓ tests/indoor_giving.test.ts (7 tests) 129ms
+ ✓ tests/cart_priority.test.ts (5 tests) 142ms
+ ✓ tests/recovery.test.ts (11 tests) 102ms
+ ✓ tests/defence_response.test.ts (8 tests) 99ms
+ ✓ tests/construction_access.test.ts (7 tests) 184ms
+ ✓ tests/shared_yard.test.ts (5 tests) 152ms
+ ✓ tests/trade.test.ts (13 tests) 232ms
+ ✓ tests/groundwater.test.ts (7 tests) 145ms
+ ✓ tests/v118_continuation.test.ts (1 test) 118ms
+ ✓ tests/fever_sign.test.ts (5 tests) 146ms
+ ✓ tests/remembered_need.test.ts (3 tests) 176ms
+ ✓ tests/v117_continuation.test.ts (1 test) 135ms
+ ✓ tests/inhabit_proposal_boundary.test.ts (2 tests) 166ms
+ ✓ tests/water_search.test.ts (7 tests) 179ms
+ ✓ tests/proposal_belief.test.ts (8 tests) 186ms
+ ✓ tests/trap_catch_truth.test.ts (4 tests) 99ms
+ ✓ tests/child_pace.test.ts (5 tests) 207ms
+ ✓ tests/wooden_spear.test.ts (7 tests) 72ms
+ ✓ tests/zz_review_f_sibling_claim.test.ts (5 tests) 200ms
+ ✓ tests/project_ask.test.ts (9 tests) 60ms
+ ✓ tests/carried_cuttings.test.ts (2 tests) 187ms
+ ✓ tests/field_standing.test.ts (6 tests) 111ms
+ ✓ tests/warmth_v9.test.ts (4 tests) 106ms
+stdout | tests/zz_review_c_v115gate.test.ts > review: compare the v115ref scene assertions at rules 114 and 115
+RULES114 {"version":114,"wantsAtAdoption":{},"began":true,"wantsAtCraft":{},"saved":"4454e7aaa8f7ff45e49f538853aa674af5a8a7c18667f91c7a05d7155a730345","hammer":1,"ledger":3,"wantsStoneAfter":0,"otherToolIntentions":0}
+RULES115 {"version":115,"wantsAtAdoption":{"wood":1,"stone":2},"began":true,"wantsAtCraft":{"wood":1,"stone":2},"saved":"a678791866350f042b3cddbb809d921a210e790b801cda06b826237409039f60","hammer":1,"ledger":3,"wantsStoneAfter":0,"otherToolIntentions":0}
+recorded projectHandcraft.saved=a678791866350f042b3cddbb809d921a210e790b801cda06b826237409039f60 matches115=true matches114=false
+v115ref explicit assertions would pass at rules 114: true
+
+ ✓ tests/zz_review_c_v115gate.test.ts (1 test) 72ms
+ ✓ tests/stall_text.test.ts (1 test) 126ms
+ ✓ tests/causal_events.test.ts (8 tests) 103ms
+ ✓ tests/survival_guard.test.ts (9 tests) 97ms
+ ✓ tests/grave_site.test.ts (7 tests) 87ms
+ ✓ tests/known_hands.test.ts (7 tests) 169ms
+ ✓ tests/known_crowd.test.ts (8 tests) 99ms
+ ✓ tests/known_adoption.test.ts (7 tests) 80ms
+ ✓ tests/carcass_batch.test.ts (4 tests) 104ms
+ ✓ tests/observer_life_event.test.ts (1 test) 162ms
+ ✓ tests/farm_scale.test.ts (6 tests) 124ms
+ ✓ tests/social_memory.test.ts (6 tests) 104ms
+ ✓ tests/preservation_collection.test.ts (8 tests) 102ms
+ ✓ tests/final_account.test.ts (5 tests) 108ms
+ ✓ tests/empty_travel.test.ts (7 tests) 139ms
+ ✓ tests/inspector_blocker_age.test.ts (2 tests) 39ms
+ ✓ tests/children_exempt.test.ts (5 tests) 52ms
+ ✓ tests/witness_sight.test.ts (8 tests) 60ms
+ ✓ tests/open_workplaces.test.ts (8 tests) 67ms
+ ✓ tests/talia_food.test.ts (6 tests) 67ms
+ ✓ tests/trap_recovery.test.ts (5 tests) 76ms
+ ✓ tests/promise_delay_partial.test.ts (1 test) 82ms
+ ✓ tests/no_nested_argument.test.ts (6 tests) 64ms
+ ✓ tests/care_capacity_scoring.test.ts (1 test) 61ms
+ ✓ tests/workshops.test.ts (27 tests) 73ms
+ ✓ tests/hut_before_larder.test.ts (6 tests) 90ms
+ ✓ tests/critical_search_cooldown.test.ts (4 tests) 91ms
+ ✓ tests/shelter.test.ts (3 tests) 96ms
+ ✓ tests/workshop_progress_view.test.ts (1 test) 99ms
+ ✓ tests/home_interior.test.ts (8 tests) 48ms
+ ✓ tests/known_able.test.ts (8 tests) 55ms
+ ✓ tests/livestock_food_choice.test.ts (5 tests) 58ms
+ ✓ tests/building_upgrading_key.test.ts (2 tests) 58ms
+ ✓ tests/known_worry.test.ts (6 tests) 61ms
+ ✓ tests/resumed_gather_credit.test.ts (3 tests) 63ms
+ ✓ tests/chains_consequence.test.ts (2 tests) 65ms
+ ✓ tests/empty_correction.test.ts (14 tests) 68ms
+ ✓ tests/township_extent.test.ts (8 tests) 68ms
+ ✓ tests/prefs_validation.test.ts (3 tests) 70ms
+ ✓ tests/harvest_capacity_offer.test.ts (4 tests) 70ms
+ ✓ tests/known_welfare.test.ts (9 tests) 79ms
+ ✓ tests/defence_lab.test.ts (2 tests) 102ms
+ ✓ tests/zz_review_d_welfare_truth.test.ts (2 tests) 36ms
+ ✓ tests/zz_review_d_propose_truth.test.ts (1 test) 36ms
+ ✓ tests/known_home.test.ts (6 tests) 38ms
+ ✓ tests/shared_offer.test.ts (5 tests) 52ms
+ ✓ tests/intentions.test.ts (2 tests) 53ms
+ ✓ tests/belief_provenance.test.ts (2 tests) 62ms
+ ✓ tests/nourishment_view.test.ts (1 test) 75ms
+stdout | tests/zz_review_b_undefined_keyorder.test.ts > completed upgrade keys stay absent, and a later upgrade continues exactly across a load
+keys before: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built
+uninterrupted: ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,ops,builtBy,built,upgrading
+loaded:        ent,id,type,x,y,w,h,condition,hhId,store,fuel,builtTick,doorX,doorY,variant,inside,builtBy,built,upgrading
+hash equal: true; deepEqualState: true; text equal: true; diffs: 
+
+ ✓ tests/arrival_pace.test.ts (8 tests) 31ms
+ ✓ tests/seen_dependant.test.ts (5 tests) 34ms
+ ✓ tests/layout_words.test.ts (6 tests) 51ms
+ ✓ tests/nourishment_access.test.ts (2 tests) 48ms
+ ✓ tests/inhabit_time_text.test.ts (4 tests) 52ms
+ ✓ tests/known_ration.test.ts (9 tests) 52ms
+ ✓ tests/farm_draw.test.ts (8 tests) 58ms
+ ✓ tests/seen_stock.test.ts (7 tests) 61ms
+ ✓ tests/stage4_metrics.test.ts (15 tests) 62ms
+ ✓ tests/ring_fallback.test.ts (7 tests) 63ms
+ ✓ tests/errand_load.test.ts (8 tests) 70ms
+ ✓ tests/meal_leftovers_picking.test.ts (1 test) 29ms
+ ✓ tests/recovered_mood_guard.test.ts (5 tests) 50ms
+ ✓ tests/zz_review_b_undefined_keyorder.test.ts (1 test) 42ms
+ ✓ tests/statediff.test.ts (6 tests) 8ms
+ ✓ tests/inhabit_summary.test.ts (3 tests) 3ms
+ ✓ tests/feed_rows.test.ts (2 tests) 4ms
+ ✓ tests/speech_layout.test.ts (6 tests) 11ms
+ ✓ tests/viewsize.test.ts (14 tests) 5ms
+ ✓ tests/model_gate.test.ts (10 tests) 9ms
+ ✓ tests/zz_review_d_dependents_truth.test.ts (2 tests) 36ms
+ ✓ tests/zz_review_d_claim_home_truth.test.ts (1 test) 29ms
+ ✓ tests/zz_review_d_perceive_store.test.ts (1 test) 10ms
+ ✓ tests/zz_review_d_request_site_truth.test.ts (1 test) 12ms
+ ✓ tests/tree_regrowth.test.ts (5 tests) 20ms
+ ✓ tests/bigger_reserve.test.ts (6 tests) 20ms
+ ✓ tests/grow_more.test.ts (7 tests) 21ms
+ ✓ tests/zz_review_g_stale_blocked.test.ts (1 test) 16ms
+ ✓ tests/life_tally.test.ts (4 tests) 12ms
+ ✓ tests/estate_picking.test.ts (1 test) 19ms
+ ↓ tests/zz_review_main_mature_large.test.ts (1 test | 1 skipped)
+ ✓ tests/keyed_draws.test.ts (33 tests) 48268ms
+   ✓ rules 256: with every part off a 256 world is a 255 world (contract 2, short) (3)
+     ✓ keyed-twin-a: the same hash at day 0.5 and day 1.25 14529ms
+     ✓ keyed-twin-b: the same hash at day 0.5 and day 1.25 8976ms
+     ✓ keyed-twin-c: the same hash at day 0.5 and day 1.25 8313ms
+   ✓ rules 256: save in the middle, load, continue (contract 5) (2)
+     ✓ a keyed world loaded from a save continues exactly as the uninterrupted world does 5241ms
+     ✓ a 256 world differs from a 255 world in the same seed once a keyed draw has been made 10561ms
+ ✓ tests/lab_no_ask.test.ts (6 tests) 39760ms
+   ✓ the rich-no-ask branch removes the project ask and nothing else (6)
+     ✓ the lab's project tallies agree with this independent count, and the branch's asks and deliveries are zero 18284ms
+     ✓ an authored world, which makes no such ask, is untouched by the switch 21472ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/zz_review_h_retention.test.ts [ tests/zz_review_h_retention.test.ts ]
+Error: Hook timed out in 10000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/zz_review_h_retention.test.ts:21:1
+     19| let text: string;
+     20|
+     21| beforeAll(() => {
+       | ^
+     22|   world = natural('meadow', { dynamics: 'rich', rulesVersion: CURRENT_…
+     23|   run(world, DAY);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/17]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lab_provenance.test.ts > retains runner and measurement source, reports it, resumes only the same content, and refuses changed content
+Error: Test timed out in 120000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/lab_provenance.test.ts:8:1
+      6| import { assertLabSourceUnchanged, labProvenance, lfHash } from '../sc…
+      7|
+      8| it('retains runner and measurement source, reports it, resumes only th…
+       | ^
+      9|   const out = mkdtempSync(join(tmpdir(), 'lw-lab-provenance-'));
+     10|   const args = ['--no-experimental-strip-types', 'scripts/lab.mjs', '-…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/17]⎯
+
+ FAIL  tests/lab_report.test.ts > pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics
+Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+ ❯ report tests/lab_report.test.ts:27:10
+     25|
+     26| function report(dir: string, ...args: string[]) {
+     27|   return execFileSync(process.execPath, [resolve('node_modules/vite-no…
+       |          ^
+     28|     'scripts/lab_report.ts', '--', dir, ...args], { encoding: 'utf8', …
+     29| }
+ ❯ tests/lab_report.test.ts:32:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/17]⎯
+
+ FAIL  tests/lab_report.test.ts > reports an unavailable contrast without inventing a result and keeps story output
+Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+ ❯ report tests/lab_report.test.ts:27:10
+     25|
+     26| function report(dir: string, ...args: string[]) {
+     27|   return execFileSync(process.execPath, [resolve('node_modules/vite-no…
+       |          ^
+     28|     'scripts/lab_report.ts', '--', dir, ...args], { encoding: 'utf8', …
+     29| }
+ ❯ tests/lab_report.test.ts:46:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/17]⎯
+
+ FAIL  tests/preservation.test.ts > preserved food carried in a pack still spoils through the ordinary world process
+AssertionError: expected 2 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 2
+
+ ❯ tests/preservation.test.ts:208:31
+    206|   const draw=vi.spyOn(w.rng,'next').mockReturnValue(0);
+    207|   try{stepWorld(w);}finally{draw.mockRestore();}
+    208|   expect(p.inv.dried_fish??0).toBe(0);
+       |                               ^
+    209|   expect(w.ledger.spoiled.dried_fish).toBe(2);
+    210|   expect(conservationReport(w).ok).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/17]⎯
+
+ FAIL  tests/preservation.test.ts > carries household raw food for preservation while retaining two immediate meals
+AssertionError: expected undefined to be defined
+ ❯ tests/preservation.test.ts:310:19
+    308|   observe(w,p,home);observe(w,p,b);snapshotInitial(w);
+    309|   const collect=generateOptions(w,p,true,true).options.find(o=>o.key==…
+    310|   expect(collect).toBeDefined();startActivity(w,p,collect!.make!()!);
+       |                   ^
+    311|   for(let i=0;i<400&&p.activity;i++){w.tick++;stepActivity(w,p);}
+    312|   expect(p.inv.fish).toBe(4);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/17]⎯
+
+ FAIL  tests/stored_materials.test.ts > an offered request creates a voluntary promise, collects stock, delivers, credits use and retains personal feedback
+TypeError: Cannot read properties of undefined (reading 'status')
+ ❯ tests/stored_materials.test.ts:131:12
+    129|   const p = result.world.persons.find(p => p.id === f.ada.id)!, ben = …
+    130|   const r = result.world.requests.find(r => r.from === p.id && r.to ==…
+    131|   expect(r.status).toBe('fulfilled'); expect(r.delivered).toBe(2);
+       |            ^
+    132|   expect(ben.commitments.find(c => c.requestId === r.id)?.status).toBe…
+    133|   expect(p.inv.pick).toBe(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/17]⎯
+
+ FAIL  tests/stored_materials.test.ts > accepts a partial physical withdrawal and lets later observation correct the remaining shortage
+AssertionError: expected undefined to be defined
+ ❯ startCollection tests/stored_materials.test.ts:31:13
+     29| function startCollection(f: ReturnType<typeof materialPlanScene>) {
+     30|   const o = collection(f.w, f.ada, f.store.id)!;
+     31|   expect(o).toBeDefined(); const a = o.make!()!; startActivity(f.w, f.…
+       |             ^
+     32|   return a;
+     33| }
+ ❯ tests/stored_materials.test.ts:216:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/17]⎯
+
+ FAIL  tests/v235_continuation.test.ts > preserves the rules-235 ordinary river continuation
+Error: Test timed out in 240000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/v235_continuation.test.ts:4:1
+      2| import expected from './v235_continuation.expected.json';
+      3| import {v235Continuation} from './helpers/v235ref';
+      4| it('preserves the rules-235 ordinary river continuation',()=>{
+       | ^
+      5|  const {source,...data}=expected;expect(v235Continuation()).toEqual(da…
+      6| },240000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/17]⎯
+
+ FAIL  tests/v249_continuation.test.ts > preserves the rules-249 ordinary gen-2 continuation
+Error: Test timed out in 245000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/v249_continuation.test.ts:4:1
+      2| import expected from './v249_continuation.expected.json';
+      3| import {v249Continuation,V249_TICK} from './helpers/v249ref';
+      4| it('preserves the rules-249 ordinary gen-2 continuation',()=>{
+       | ^
+      5|  const {source,...data}=expected;expect(v249Continuation(V249_TICK)).t…
+      6| },245000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/17]⎯
+
+ FAIL  tests/v250_continuation.test.ts > preserves the rules-250 ordinary gen-4 continuation
+Error: Test timed out in 245000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/v250_continuation.test.ts:4:1
+      2| import expected from './v250_continuation.expected.json';
+      3| import {v250Continuation,V250_TICK} from './helpers/v250ref';
+      4| it('preserves the rules-250 ordinary gen-4 continuation',()=>{
+       | ^
+      5|  const {source,...data}=expected;expect(v250Continuation(V250_TICK)).t…
+      6| },245000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/17]⎯
+
+ FAIL  tests/wild_seed.test.ts > a harvested grain really retained in the pack still pays for its seed
+AssertionError: expected undefined to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+undefined
+
+ ❯ tests/wild_seed.test.ts:20:107
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/17]⎯
+
+ FAIL  tests/wild_seed.test.ts > a separate carried grain can pay while a source grain is eaten
+AssertionError: expected 1 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ tests/wild_seed.test.ts:24:96
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/17]⎯
+
+ FAIL  tests/wild_seed.test.ts > preserves the prior unpaid seed under removed rules
+AssertionError: expected undefined to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+undefined
+
+ ❯ tests/wild_seed.test.ts:28:87
+     26| it.each(['old','removed'] as const)('preserves the prior unpaid seed u…
+     27|  const {w,p,a}=wildSeedScene(mode==='old'?112:undefined);if(mode==='re…
+     28|  expect(w.ledger.reasons['-saved as seed']??0).toBe(0);expect(w.ledger…
+       |                                                                                       ^
+     29| });
+     30| it('keeps the existing chance draw and counts only actual consumed con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/17]⎯
+
+ FAIL  tests/wild_seed.test.ts > keeps the existing chance draw and counts only actual consumed conversion inputs across fixed seeds
+AssertionError: expected RNG{ a: -943828105, …(3) } to deeply equal RNG{ a: -1892462722, …(3) }
+
+- Expected
++ Received
+
+  RNG {
+-   "a": -1892462722,
+-   "b": 1316217835,
+-   "c": 1112581786,
+-   "d": -1061868867,
++   "a": -943828105,
++   "b": -1888160508,
++   "c": 1100683603,
++   "d": -1061868868,
+  }
+
+ ❯ tests/wild_seed.test.ts:36:21
+     34|   finishWildHarvest(old.w,old.p,old.a.id);finishWildHarvest(now.w,now.…
+     35|   oldUnpaid+=old.w.ledger.created.seeds??0;
+     36|   expect(now.w.rng).toEqual(old.w.rng);expect(now.p.needs.hunger).toBe…
+       |                     ^
+     37|   expect(now.w.ledger.created.seeds??0).toBeLessThanOrEqual(now.w.ledg…
+     38|  }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/17]⎯
+
+ FAIL  tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical
+Error: Test timed out in 170000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/zz_review_g_observer_purity.test.ts:105:5
+    103|   const report: string[] = [];
+    104|   for (const [seed, ticks, every] of [['river', 1000, 1], ['meadow', 2…
+    105|     it(`${seed}: all entry points every ${every} tick(s) for ${ticks} …
+       |     ^
+    106|       installFakeDom();
+    107|       const settings = currentWorldSettings('normal', seed, { immigrat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/17]⎯
+
+ FAIL  tests/zz_review_main_toolreport_saves.test.ts > REVIEW: tool registry consistency in retained and fresh worlds > fresh current-rules worlds, 12,000 ticks, checked every 600 ticks
+Error: Test timed out in 120000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/zz_review_main_toolreport_saves.test.ts:37:3
+     35|     expect(Object.keys(out).length).toBeGreaterThan(0);
+     36|   });
+     37|   it('fresh current-rules worlds, 12,000 ticks, checked every 600 tick…
+       |   ^
+     38|     const out: Record<string, unknown> = {};
+     39|     for (const seed of ['forest', 'river', 'meadow']) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/17]⎯
+
+
+ Test Files  11 failed | 671 passed | 1 skipped (683)
+      Tests  16 failed | 3726 passed | 4 skipped (3746)
+   Start at  11:09:37
+   Duration  821.40s (tests 96%, import 4%, transform 1%)
+
+    Isolate  683 workers spawned · ~467ms startup each (spawn + environment, per file)
+             at least ~13.40s faster with isolate: false — reuses workers across files instead of one per file
+

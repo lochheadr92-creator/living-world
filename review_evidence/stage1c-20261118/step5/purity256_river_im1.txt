@@ -1,0 +1,12 @@
+rules 256 seed river immigration true
+seed river day 1 tick 2400 living 28 identical true seconds 13
+seed river day 2 tick 4800 living 28 identical true seconds 26
+seed river day 3 tick 7200 living 31 identical true seconds 39
+seed river day 4 tick 9600 living 31 identical true seconds 53
+seed river day 5 tick 12000 living 31 identical true seconds 67
+seed river day 6 tick 14400 living 34 identical true seconds 82
+seed river day 7 tick 16800 living 34 identical true seconds 98
+seed river day 8 tick 19200 living 35 identical true seconds 116
+seed river day 9 tick 21600 living 35 identical true seconds 131
+seed river day 10 tick 24000 living 34 identical true seconds 145
+VERDICT rules 256 seed river immigration true days 10 identical_every_day true self_checks_true true of 18

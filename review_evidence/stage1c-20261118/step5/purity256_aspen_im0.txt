@@ -1,0 +1,12 @@
+rules 256 seed aspen immigration false
+seed aspen day 1 tick 2400 living 28 identical true seconds 10
+seed aspen day 2 tick 4800 living 28 identical true seconds 19
+seed aspen day 3 tick 7200 living 28 identical true seconds 30
+seed aspen day 4 tick 9600 living 28 identical true seconds 40
+seed aspen day 5 tick 12000 living 28 identical true seconds 50
+seed aspen day 6 tick 14400 living 28 identical true seconds 59
+seed aspen day 7 tick 16800 living 28 identical true seconds 69
+seed aspen day 8 tick 19200 living 28 identical true seconds 80
+seed aspen day 9 tick 21600 living 28 identical true seconds 90
+seed aspen day 10 tick 24000 living 28 identical true seconds 102
+VERDICT rules 256 seed aspen immigration false days 10 identical_every_day true self_checks_true true of 18

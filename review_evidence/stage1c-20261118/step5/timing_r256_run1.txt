@@ -1,0 +1,1 @@
+{"rules":256,"ticks":20000,"ms":46238,"msPerTick":2.312,"alive":32}
