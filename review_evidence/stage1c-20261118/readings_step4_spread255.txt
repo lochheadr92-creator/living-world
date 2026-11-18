@@ -1,0 +1,74 @@
+STAGE 1C STEP 4. THE SPREAD BEFORE (rules 255). READINGS FIXED IN ADVANCE.
+Written 18 November 2026 before the run is launched. Nothing in this file is changed after the launch except by a dated
+note at the end that says what changed and why.
+
+WHAT IS RUN
+  Three saved worlds, all at day 48, rules 250, arrivals on, Normal:
+    C:\dev\lw_saves\day48\aspen-day48.save.json
+    C:\dev\lw_saves\day48\gen-4-day48.save.json
+    C:\dev\lw_saves\day48\river-day48.save.json
+  Each is raised to rules 255 with --rules-up 255 (reinterpreted for measurement; no longer a pure continuation of rules 250).
+  Three arms per world: control, nudge:1, nudge:2. Nine arms in all, one run each. No removal arm in this step.
+  Code: the integrate checkout at the commit that holds this file. The run is rejected and redone if the provenance in the
+  output shows a source file changed during it.
+
+DAYS (two horizons, both fixed now, both reported)
+  12 days (day 48 to day 60). One year. It holds the winter of days 56 to 60 (hardship.ts: a year is 12 days, winter is the last 4;
+  read from the code, VERIFIED). Step 8 runs one winter from day 48 and from day 96, so this is the same window.
+  24 days (day 48 to day 72). Two years, two winters. Shows how the spread grows with the horizon. Step 6 repeats both horizons.
+  Commands (one run each, output kept outside git, then copied into review_evidence/stage1c-20261118/spread_255_d12 and _d24):
+    node scripts\lab.mjs --saves <aspen>,<gen-4>,<river> --rules-up 255 --days 12 --branches nudge:1,nudge:2 --out C:\dev\lw_runs\stage1c_spread255_d12
+    node scripts\lab.mjs --saves <aspen>,<gen-4>,<river> --rules-up 255 --days 24 --branches nudge:1,nudge:2 --out C:\dev\lw_runs\stage1c_spread255_d24
+
+ROWS (per world; the value at the end of the run, and for the share rows the share over the whole run)
+  Yardstick (people 12 and over):  companyShare12, leisureShare12, companyLeisureShare12, walkingShare12
+  Hungry time by what is to hand:  hungryPackShare, hungryStoreOnlyShare, hungryNoFoodShare   (and the older hungryShare)
+  Sheep:                           sheepAcquired, sheepShorn, sheepSlaughtered, lambsBorn, sheepAtEnd, sheepKeptAtEnd
+  Fields:                          plotsRested, plotsRestingAtEnd
+  Held work:                       workNotesKept, workTakenUp, workNotesSpent
+  Lessons:                         techLessonsLearned, techLessonsInterrupted, techLessonsDeclined
+  Exchange journeys:               exchangeJourneysStarted, exchangeJourneysArrived, exchangeJourneysFulfilled
+  And:                             people (alive at the end), deaths
+  A row that is zero in all three arms of a world is reported as "absent in that world", not as a null.
+
+THE SPREAD
+  For one world and one row: the three final values (control, nudge:1, nudge:2); the range = largest minus smallest; the mean.
+  Reported per world, never pooled across the three worlds. Also the range as a share of the mean where the mean is not zero.
+
+WHAT COUNTS AS A MOVE (used by step 6 and step 8, fixed here so it is not chosen after the numbers)
+  An arm moved on a row in one world when its value lies outside [smallest - R, largest + R] of the three reference arms, where
+  R = the range of the three, but never less than a floor of 1 for a count row and 0.5 percentage points for a share row (so a
+  row that happened to tie in all three is not flagged for a one-unit difference).
+  Why not just "outside the range": a fourth value from the very same distribution falls outside the range of three values half
+  the time (checked by simulation, 2 million trials: normal 50.0%, exponential 50.0%). Outside by a full range: 13.3% normal,
+  15.0% exponential. Outside by one and a half ranges: 8.1% and 10.9%. So with 26 rows, about three or four rows per world will
+  look moved by chance at one full range, and that is expected, not a finding. A removal arm is read per world; a row counts as
+  a finding only when it moves the same way in at least 4 of the 6 step 8 starts (chance for that at 13% per start is about 0.3%, and with 26 rows about 1 in 11
+  that some row passes this test in one arm by chance, so even a finding is read together with the guard rails).
+  The simulation script is C:\dev\lw_runs\profile\null_rate.mjs (not in git; it is twenty lines).
+
+WHAT I EXPECT (guesses, written before the numbers; LIKELY or UNKNOWN, none VERIFIED)
+  1. The nudge is live at 255: control and nudges end with different hashes in all three worlds (LIKELY; one world already did,
+     river, 12 days, 120 ticks after the fork).
+  2. At 12 days the four yardstick shares have a range under 2 percentage points in each world (LIKELY for company, leisure and
+     the sum; walking could be wider).
+  3. Between worlds, the yardstick differs by more than the range inside a world (UNKNOWN; this decides whether three worlds
+     say anything about the 30% target).
+  4. people has a range of 4 or less and deaths a range of 1 or less at 12 days (LIKELY, not sure).
+  5. hungryNoFoodShare is small and noisy: the range as a share of its mean is above 50% in at least one world (LIKELY).
+  6. The count rows for lessons, held work and exchange journeys have a range that is large against their mean (above 25%), so
+     only large moves will show up in step 8 (LIKELY).
+  7. The 24 day ranges are at least as wide as the 12 day ranges for the count rows, and similar for the share rows (UNKNOWN).
+  8. The saves hold few or no sheep, so the sheep rows may be absent in some worlds (UNKNOWN; I have not looked).
+  If expectation 1 fails (a nudged arm ends identical to its control) that is a finding about the nudge at 255 and I stop and
+  report it, as stop condition 1 in the brief says for 256.
+
+WHAT THIS STEP CANNOT SAY
+  - Three worlds, three arms each, one run each: the range of three values is a loose estimate of the true spread (about 1.7
+    standard deviations on average for a normal, and it can be far off in either direction).
+  - Saves from rules 250 raised to 255 are reinterpreted for measurement. Arrivals on, with a purity check, is not tested.
+  - The nudge shakes only what draws from the shared stream. At 255 that is everything random; at 256 it will not be.
+  - Spread at 12 and 24 days is not the spread at 240 days.
+
+Guard rails from the plan (line 159), for step 8: deaths and hungry time with no food to hand stay inside the spread of the nudged
+controls. Yardstick target 30%; it was 15 to 18% at rules 250.
