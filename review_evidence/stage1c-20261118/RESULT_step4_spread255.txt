@@ -15,7 +15,8 @@ STATUS
             Aspen nudge:3, 4 and 5 and all three gen-4 extras are distinct trajectories. Across the 18 arms (6 per world), 2 repeat an earlier arm.
   LIKELY    A nudge of N draws is absorbed when, within a short window, the nudged world takes N fewer draws than the control and nothing the
             draws decide differs. That is why it is rare and why it cannot be predicted from N. Not tested beyond these 3 worlds and 5 offsets.
-  UNKNOWN   Whether the yardstick at 255 really is about 10 percent against 15 to 18 percent at 250 (see YARDSTICK below).
+  VERIFIED  The yardstick row (company + leisure, people 12 and over) is about 10 to 12 percent on these saves at rules 255 and also at their own rules 250 (see YARDSTICK).
+  UNKNOWN   What the plan's 15 to 18 percent at 250 was measured on (see YARDSTICK).
 
 THE SPREAD (final values, control / nudge:1 / nudge:2; full tables in spread_255_d12/analysis.txt and spread_255_d24/analysis.txt)
   Rows that matter for the guard rails and the yardstick. R = range of the three, m = mean.
@@ -59,16 +60,23 @@ THE MOVE BAND, CHECKED AGAINST THE EXTRA ARMS (not part of the readings; added i
   aspen people (references 60 to 61; extras 59, 56, 58). A removal arm that moves such a row by that much is not a finding on its own, and the file's
   rule of 4 of 6 starts for a finding stands.
 
-YARDSTICK (UNKNOWN until the check below is read)
-  The plan quotes 15 to 18 percent at rules 250 and a target of 30 percent. These three saves at rules 255, over days 48 to 60 and 48 to 72, give 9.9 to 12.1 percent,
-  and leisure is almost nothing. Possible reasons, none tested yet: the definition (this lab row: company plus leisure as a share of waking time, people 12 and over,
-  time_budget categories), the window (days 48 to 72 of a settlement of 60 to 80 people against whatever the plan measured), the rules (251 to 255), or
-  the reinterpretation by --rules-up. CHECK RUN: the same three saves, 12 days, control only, at their own rules 250 with no --rules-up. If that also gives about 10 percent
-  the gap is definition or window, not rules.
+YARDSTICK
+  VERIFIED  The same three saves at their own rules 250 (no --rules-up), 12 days, control, nudge:1 and nudge:2 (spread_250_d12/). Company + leisure, percent of
+            waking time, people 12 and over: aspen 10.76 / 10.54 / 10.22, gen-4 11.04 / 10.23 / 11.36, river 10.65 / 11.21 / 11.46. At 255 over the same window:
+            aspen 10.23 / 9.85 / 10.23, gen-4 9.88 / 10.33 / 10.02, river 10.72 / 11.69 / 12.10. The two sets overlap: a difference between 250 and 255 on this row is
+            inside the noise on these saves, and cannot be told apart with three worlds. Leisure alone is 0.1 to 0.4 percent.
+  VERIFIED  So this lab row gives about 10 to 11 percent at 250, not the 15 to 18 percent the plan quotes for 250. The gap is therefore not caused by rules 251 to 255
+            or by the raise with --rules-up: rules 250 shows it too.
+  UNKNOWN   What the 15 to 18 percent was measured on. Candidates, none tested here: another definition (what counts as company, what counts as waking time, the age cut),
+            another window (fresh worlds or earlier days instead of days 48 to 60 and 48 to 72 of a settlement of 55 to 80 people), or another kind of run.
+            If the 30 percent target was set against that figure, it is not comparable with this row until the two are reconciled. That is Ryan's call to ask for; I have not looked it up.
+  Also: all nine arms at rules 250 are distinct trajectories (no absorbed nudge at 250); at 255 aspen nudge:2 is absorbed. The first try at this check used the lab's default
+  arm list (control, two nudges and five removal arms, run one after another) and was stopped after 30 minutes; nothing from it is used.
+  At 250 the 12 day people range is 1, 1 and 3 and deaths range 2, 1 and 0 (aspen control had 2 deaths, the nudged arms 0).
 
 CHANGES
-  Evidence only, no code. Added here: spread_255_d12/, spread_255_d24/, spread_255_d12_extra/, aspen_nudge_check/, analyze_spread.mjs, analyze_extra.mjs, this file.
-  Outside git (kept): C:\dev\lw_runs\stage1c_spread255_d12, _d24, _d12_extra, aspen_check.
+  Evidence only, no code. Added here: spread_255_d12/, spread_255_d24/, spread_255_d12_extra/, spread_250_d12/, aspen_nudge_check/, analyze_spread.mjs, analyze_extra.mjs, this file.
+  Outside git (kept): C:\dev\lw_runs\stage1c_spread255_d12, _d24, _d12_extra, stage1c_spread250_d12, aspen_check.
 
 RISKS
   - Three worlds, one run each, a range of three or two values: a loose estimate of the true spread (it was about 1.7 standard deviations on average for a normal in the file,
@@ -78,7 +86,7 @@ RISKS
   Rollback: none needed, nothing in src/ or scripts/ changed.
 
 NEXT STEP
-  Step 5, the only rules change (keyed draws, 256), once the yardstick check has run. Stop condition 1 needs more than the offset-N nudge: a perturbation that cannot be absorbed
+  Step 5, the only rules change (keyed draws, 256). Stop condition 1 needs more than the offset-N nudge: a perturbation that cannot be absorbed
   is needed before step 6. Two options, not chosen here: (a) a nudge that reseeds the shared stream (for example sets rng state from a hash of N), which cannot realign with the control,
   or (b) several offsets per world and drop arms that repeat another arm. Option (a) changes what a nudge is and so changes the meaning of every earlier nudge result; option (b) costs runs and
   keeps the old meaning. Not chosen: it is Ryan's call and only becomes live if stop condition 1 fires at 256.
