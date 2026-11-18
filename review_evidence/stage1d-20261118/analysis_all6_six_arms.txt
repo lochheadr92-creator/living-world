@@ -1,0 +1,201 @@
+STARTS: aspen-day48, aspen-day96, gen-4-day48, gen-4-day96, river-day48, river-day96 (6); reference arms: control, nudge:1, nudge:2, nudge:3, nudge:4, nudge:5
+
+=== BASELINE AT CURRENT RULES (control, nudge:1, nudge:2; range; mean) ===
+
+aspen-day48   hashes control=e4a86f09  nudge:1=ea3293d2  nudge:2=2c70fda9  nudge:3=ea3293d2  nudge:4=2c70fda9  nudge:5=ea3293d2   distinct 3/6   ** a reference arm repeats another: this start has fewer than 6 trajectories **
+  companyShare12               11.07%   10.71%   10.76%   10.71%   10.76%   10.71%   range    0.36%   mean   10.79%
+  leisureShare12                0.44%    0.20%    0.32%    0.20%    0.32%    0.20%   range    0.24%   mean    0.28%
+  companyLeisureShare12        11.50%   10.91%   11.08%   10.91%   11.08%   10.91%   range    0.59%   mean   11.07%
+  walkingShare12               51.71%   52.63%   52.43%   52.63%   52.43%   52.63%   range    0.92%   mean   52.41%
+  hungryPackShare              34.31%   34.28%   32.18%   34.28%   32.18%   34.28%   range    2.13%   mean   33.59%
+  hungryStoreOnlyShare          1.94%    1.56%    2.40%    1.56%    2.40%    1.56%   range    0.84%   mean    1.90%
+  hungryNoFoodShare            16.25%   15.40%   15.33%   15.40%   15.33%   15.40%   range    0.92%   mean   15.52%
+  hungryShare                  52.50%   51.24%   49.91%   51.24%   49.91%   51.24%   range    2.59%   mean   51.01%
+  sheepAcquired                     1        1        1        1        1        1   range        0   mean        1
+  sheepShorn                        3        3        2        3        2        3   range        1   mean     2.67
+  sheepAtEnd                        0        0        0        0        0        0   range        0   mean        0
+  plotsRested                      14       18       14       18       14       18   range        4   mean       16
+  plotsRestingAtEnd                 6        8        7        8        7        8   range        2   mean     7.33
+  workNotesKept                   151      155      113      155      113      155   range       42   mean   140.33
+  workTakenUp                      70       77       63       77       63       77   range       14   mean    71.17
+  workNotesSpent                    1        0        0        0        0        0   range        1   mean     0.17
+  techLessonsLearned                0        0        0        0        0        0   range        0   mean        0
+  techLessonsDeclined              14       17       17       17       17       17   range        3   mean    16.50
+  people                           82       83       81       83       81       83   range        2   mean    82.17
+  deaths                            0        0        1        0        1        0   range        1   mean     0.33
+  homeFoodPerPerson              0.15     0.13     0.07     0.13     0.07     0.13   range     0.08   mean     0.11
+  storeFoodPerPerson             8.67     8.14     8.86     8.14     8.86     8.14   range     0.72   mean     8.47
+  plots                           106      109      110      109      110      109   range        4   mean   108.83
+  buildings                       111      111      111      111      111      111   range        0   mean      111
+
+aspen-day96   hashes control=6c19867c  nudge:1=ccf687ca  nudge:2=b2c2ba01  nudge:3=ccf687ca  nudge:4=b19832d2  nudge:5=742c6749   distinct 5/6   ** a reference arm repeats another: this start has fewer than 6 trajectories **
+  companyShare12               10.77%   11.82%   11.01%   11.82%   11.50%   10.85%   range    1.05%   mean   11.29%
+  leisureShare12                0.84%    0.55%    0.68%    0.55%    0.65%    0.71%   range    0.29%   mean    0.66%
+  companyLeisureShare12        11.61%   12.37%   11.69%   12.37%   12.15%   11.56%   range    0.81%   mean   11.96%
+  walkingShare12               57.83%   57.59%   57.72%   57.59%   58.19%   57.94%   range    0.60%   mean   57.81%
+  hungryPackShare              30.79%   31.60%   31.23%   31.60%   31.74%   31.49%   range    0.95%   mean   31.41%
+  hungryStoreOnlyShare          1.84%    2.18%    1.79%    2.18%    1.78%    1.62%   range    0.56%   mean    1.90%
+  hungryNoFoodShare            12.10%   12.12%   12.69%   12.12%   12.15%   12.37%   range    0.59%   mean   12.26%
+  hungryShare                  44.74%   45.89%   45.70%   45.89%   45.67%   45.48%   range    1.15%   mean   45.56%
+  plotsRested                     128      136      126      136      123      142   range       19   mean   131.83
+  plotsRestingAtEnd                10       14        8       14        8       12   range        6   mean       11
+  workNotesKept                   207      202      227      202      206      238   range       36   mean   213.67
+  workTakenUp                     109       92      117       92      105      111   range       25   mean   104.33
+  workNotesSpent                    0        2        0        2        1        1   range        2   mean        1
+  techLessonsLearned                3        1        1        1        0        1   range        3   mean     1.17
+  techLessonsDeclined              44       41       38       41       39       35   range        9   mean    39.67
+  people                          140      143      142      143      143      143   range        3   mean   142.33
+  deaths                            1        0        0        0        0        0   range        1   mean     0.17
+  homeFoodPerPerson              0.29     0.30     0.11     0.30     0.10     0.08   range     0.22   mean     0.20
+  storeFoodPerPerson             9.88     9.06     9.02     9.06     9.29     9.36   range     0.86   mean     9.28
+  plots                           210      212      209      212      204      209   range        8   mean   209.33
+  buildings                       160      162      160      162      162      161   range        2   mean   161.17
+
+gen-4-day48   hashes control=3de8459c  nudge:1=8f9eb9a2  nudge:2=3de8459c  nudge:3=cafda76e  nudge:4=e6562163  nudge:5=cafda76e   distinct 4/6   ** a reference arm repeats another: this start has fewer than 6 trajectories **
+  companyShare12               10.79%   10.73%   10.79%   10.58%   10.51%   10.58%   range    0.28%   mean   10.66%
+  leisureShare12                0.44%    0.28%    0.44%    0.56%    0.41%    0.56%   range    0.28%   mean    0.45%
+  companyLeisureShare12        11.23%   11.02%   11.23%   11.14%   10.92%   11.14%   range    0.31%   mean   11.11%
+  walkingShare12               50.74%   50.90%   50.74%   50.41%   50.08%   50.41%   range    0.82%   mean   50.55%
+  hungryPackShare              32.82%   34.12%   32.82%   32.19%   32.84%   32.19%   range    1.93%   mean   32.83%
+  hungryStoreOnlyShare          2.51%    2.72%    2.51%    1.92%    2.48%    1.92%   range    0.80%   mean    2.34%
+  hungryNoFoodShare            15.68%   16.34%   15.68%   15.90%   15.54%   15.90%   range    0.80%   mean   15.84%
+  hungryShare                  51.02%   53.18%   51.02%   50.01%   50.86%   50.01%   range    3.17%   mean   51.02%
+  plotsRested                      52       45       52       44       51       44   range        8   mean       48
+  plotsRestingAtEnd                 7        7        7        9       11        9   range        4   mean     8.33
+  workNotesKept                   150      161      150      149      151      149   range       12   mean   151.67
+  workTakenUp                      82       75       82       69       73       69   range       13   mean       75
+  workNotesSpent                    4        3        4        6        2        6   range        4   mean     4.17
+  techLessonsLearned                0        4        0        3        2        3   range        4   mean        2
+  techLessonsDeclined              19       11       19       25       20       25   range       14   mean    19.83
+  people                           81       78       81       79       79       79   range        3   mean    79.50
+  homeFoodPerPerson              0.27     0.13     0.27     0.11     0.23     0.11   range     0.16   mean     0.19
+  storeFoodPerPerson            10.91    10.13    10.91    11.49    11.91    11.49   range     1.78   mean    11.14
+  plots                           104      103      104      103      103      103   range        1   mean   103.33
+  buildings                       129      124      129      129      128      129   range        5   mean      128
+
+gen-4-day96   hashes control=02e27e8f  nudge:1=e2cdae02  nudge:2=834af9e4  nudge:3=8120a9ce  nudge:4=ba7d2383  nudge:5=7c5cc597   distinct 6/6
+  companyShare12               11.57%   11.92%   12.23%   11.80%   11.83%   12.10%   range    0.66%   mean   11.91%
+  leisureShare12                1.00%    0.82%    0.82%    0.72%    0.88%    0.91%   range    0.28%   mean    0.86%
+  companyLeisureShare12        12.56%   12.74%   13.05%   12.52%   12.71%   13.01%   range    0.53%   mean   12.77%
+  walkingShare12               57.91%   56.99%   58.30%   57.50%   58.08%   58.07%   range    1.31%   mean   57.81%
+  hungryPackShare              28.82%   29.04%   28.87%   28.66%   28.58%   29.76%   range    1.18%   mean   28.95%
+  hungryStoreOnlyShare          1.29%    1.35%    1.57%    1.76%    1.51%    1.17%   range    0.59%   mean    1.44%
+  hungryNoFoodShare            24.91%   26.04%   26.10%   25.53%   25.30%   24.20%   range    1.90%   mean   25.35%
+  hungryShare                  55.01%   56.43%   56.54%   55.96%   55.40%   55.13%   range    1.53%   mean   55.74%
+  plotsRested                      50       47       54       52       49       61   range       14   mean    52.17
+  plotsRestingAtEnd                 2        1        8        9        8       12   range       11   mean     6.67
+  workNotesKept                   239      278      299      256      262      221   range       78   mean   259.17
+  workTakenUp                     122      148      151      126      125      116   range       35   mean   131.33
+  workNotesSpent                    4        1        2        0        2        3   range        4   mean        2
+  techLessonsLearned                1        5        2        4        3        3   range        4   mean        3
+  techLessonsDeclined              24       28       25       25       17       27   range       11   mean    24.33
+  people                          142      141      144      139      139      141   range        5   mean      141
+  deaths                            0        0        0        1        3        3   range        3   mean     1.17
+  homeFoodPerPerson              0.17     0.16     0.22     0.13     0.13     0.18   range     0.09   mean     0.17
+  storeFoodPerPerson             4.87     4.72     4.37     5.27     5.27     5.24   range     0.90   mean     4.96
+  plots                           165      165      162      165      165      168   range        6   mean      165
+  buildings                       165      164      163      165      162      167   range        5   mean   164.33
+
+river-day48   hashes control=93015c04  nudge:1=efd83067  nudge:2=93015c04  nudge:3=44cd73f3  nudge:4=93015c04  nudge:5=bc78cd0c   distinct 4/6   ** a reference arm repeats another: this start has fewer than 6 trajectories **
+  companyShare12               10.52%   10.67%   10.52%   11.54%   10.52%   11.49%   range    1.02%   mean   10.88%
+  leisureShare12                0.67%    0.88%    0.67%    0.67%    0.67%    0.54%   range    0.34%   mean    0.68%
+  companyLeisureShare12        11.19%   11.55%   11.19%   12.20%   11.19%   12.03%   range    1.01%   mean   11.56%
+  walkingShare12               56.25%   56.29%   56.25%   55.38%   56.25%   55.86%   range    0.91%   mean   56.05%
+  hungryPackShare              29.88%   30.01%   29.88%   29.28%   29.88%   29.15%   range    0.86%   mean   29.68%
+  hungryStoreOnlyShare          1.86%    2.34%    1.86%    2.59%    1.86%    2.23%   range    0.73%   mean    2.12%
+  hungryNoFoodShare            14.78%   13.38%   14.78%   15.68%   14.78%   16.67%   range    3.29%   mean   15.01%
+  hungryShare                  46.52%   45.73%   46.52%   47.56%   46.52%   48.04%   range    2.31%   mean   46.81%
+  sheepAcquired                     2        2        2        3        2        2   range        1   mean     2.17
+  sheepShorn                        7       12        7        6        7        6   range        6   mean     7.50
+  sheepAtEnd                        2        2        2        2        2        1   range        1   mean     1.83
+  sheepKeptAtEnd                    2        2        2        2        2        1   range        1   mean     1.83
+  plotsRested                      66       65       66       65       66       53   range       13   mean    63.50
+  plotsRestingAtEnd                13        9       13        8       13        9   range        5   mean    10.83
+  workNotesKept                   123      137      123      150      123      143   range       27   mean   133.17
+  workTakenUp                      59       73       59       84       59       71   range       25   mean    67.50
+  workNotesSpent                    1        2        1        2        1        2   range        1   mean     1.50
+  techLessonsLearned                1        0        1        1        1        3   range        3   mean     1.17
+  techLessonsDeclined              13       14       13       14       13       15   range        2   mean    13.67
+  people                           84       85       84       84       84       83   range        2   mean       84
+  homeFoodPerPerson              0.39     0.25     0.39     0.18     0.39     0.16   range     0.23   mean     0.29
+  storeFoodPerPerson            10.64    11.36    10.64    11.26    10.64    10.93   range     0.72   mean    10.91
+  plots                           124      124      124      131      124      124   range        7   mean   125.17
+  buildings                       117      118      117      119      117      119   range        2   mean   117.83
+
+river-day96   hashes control=594be8ed  nudge:1=c8e0eb15  nudge:2=0459d28f  nudge:3=cb6ebb2a  nudge:4=0459d28f  nudge:5=4ae8c3ad   distinct 5/6   ** a reference arm repeats another: this start has fewer than 6 trajectories **
+  companyShare12               11.87%   12.00%   11.65%   12.51%   11.65%   12.41%   range    0.86%   mean   12.01%
+  leisureShare12                0.57%    0.53%    0.49%    0.53%    0.49%    0.39%   range    0.18%   mean    0.50%
+  companyLeisureShare12        12.44%   12.53%   12.14%   13.04%   12.14%   12.81%   range    0.90%   mean   12.52%
+  walkingShare12               55.94%   55.54%   54.75%   56.21%   54.75%   55.13%   range    1.46%   mean   55.39%
+  hungryPackShare              31.20%   30.90%   31.03%   31.64%   31.03%   30.23%   range    1.41%   mean   31.00%
+  hungryStoreOnlyShare          1.67%    1.04%    1.44%    1.00%    1.44%    0.97%   range    0.70%   mean    1.26%
+  hungryNoFoodShare            28.01%   29.69%   28.54%   28.08%   28.54%   30.57%   range    2.56%   mean   28.90%
+  hungryShare                  60.88%   61.63%   61.01%   60.72%   61.01%   61.77%   range    1.05%   mean   61.17%
+  plotsRested                      29       39       40       40       40       43   range       14   mean    38.50
+  plotsRestingAtEnd                 6        8       11       11       11        9   range        5   mean     9.33
+  workNotesKept                   256      297      290      269      290      288   range       41   mean   281.67
+  workTakenUp                     133      169      155      134      155      159   range       36   mean   150.83
+  workNotesSpent                    1        1        3        1        3        3   range        2   mean        2
+  techLessonsLearned                2        0        0        0        0        0   range        2   mean     0.33
+  techLessonsDeclined              13       15       17       20       17        9   range       11   mean    15.17
+  people                          145      146      146      147      146      147   range        2   mean   146.17
+  homeFoodPerPerson              0.08     0.05     0.03     0.04     0.03     0.07   range     0.05   mean     0.05
+  storeFoodPerPerson             5.45     5.53     5.09     5.67     5.09     4.69   range     0.98   mean     5.25
+  plots                           153      154      153      154      153      153   range        1   mean   153.33
+  buildings                       161      163      160      159      160      158   range        5   mean   160.17
+
+=== rich-no-tree-regrowth against the spread of the three reference arms ===
+rule: outside [min - R, max + R], R = range of the three, floor 1 (count) or 0.5 points (share)
+          hungryNoFoodShare          moved in 1 of 6 starts (up 0, down 1): aspen-day96 down (11.10% against 12.10% to 12.69%)
+          workNotesKept              moved in 1 of 6 starts (up 0, down 1): gen-4-day48 down (122 against 149 to 161)
+          plots                      moved in 1 of 6 starts (up 1, down 0): gen-4-day48 up (106 against 103 to 104)
+  rows moved in at least one start: 3 of 25; findings (same way in at least 4 starts): 0
+
+=== rich-no-bigger-reserve against the spread of the three reference arms ===
+rule: outside [min - R, max + R], R = range of the three, floor 1 (count) or 0.5 points (share)
+          plots                      moved in 1 of 6 starts (up 1, down 0): gen-4-day48 up (107 against 103 to 104)
+          buildings                  moved in 1 of 6 starts (up 1, down 0): aspen-day48 up (113 against 111 to 111)
+  rows moved in at least one start: 2 of 25; findings (same way in at least 4 starts): 0
+
+=== rich-no-grow-more against the spread of the three reference arms ===
+rule: outside [min - R, max + R], R = range of the three, floor 1 (count) or 0.5 points (share)
+  FINDING storeFoodPerPerson         moved in 6 of 6 starts (up 0, down 6): aspen-day48 down (6.74 against 8.14 to 8.86); aspen-day96 down (6.94 against 9.02 to 9.88); gen-4-day48 down (8.05 against 10.13 to 11.91); gen-4-day96 down (1.08 against 4.37 to 5.27); river-day48 down (8.99 against 10.64 to 11.36); river-day96 down (1.27 against 4.69 to 5.67)
+  FINDING hungryNoFoodShare          moved in 5 of 6 starts (up 5, down 0): aspen-day48 up (22.78% against 15.33% to 16.25%); aspen-day96 up (17.98% against 12.10% to 12.69%); gen-4-day48 up (17.97% against 15.54% to 16.34%); gen-4-day96 up (36.48% against 24.20% to 26.10%); river-day96 up (39.04% against 28.01% to 30.57%)
+  FINDING hungryShare                moved in 4 of 6 starts (up 4, down 0): aspen-day48 up (57.33% against 49.91% to 52.50%); aspen-day96 up (50.66% against 44.74% to 45.89%); gen-4-day96 up (63.28% against 55.01% to 56.54%); river-day96 up (67.10% against 60.72% to 61.77%)
+          walkingShare12             moved in 3 of 6 starts (up 3, down 0): aspen-day96 up (58.89% against 57.59% to 58.19%); gen-4-day96 up (60.69% against 56.99% to 58.30%); river-day96 up (58.99% against 54.75% to 56.21%)
+          hungryPackShare            moved in 2 of 6 starts (up 0, down 2): gen-4-day96 down (25.48% against 28.58% to 29.76%); river-day96 down (26.93% against 30.23% to 31.64%)
+          plotsRested                moved in 1 of 6 starts (up 0, down 1): gen-4-day96 down (30 against 47 to 61)
+          workNotesSpent             moved in 1 of 6 starts (up 1, down 0): river-day48 up (4 against 1 to 2)
+          techLessonsLearned         moved in 1 of 6 starts (up 1, down 0): aspen-day48 up (2 against 0 to 0)
+          techLessonsDeclined        moved in 1 of 6 starts (up 0, down 1): river-day48 down (10 against 13 to 15)
+          people                     moved in 1 of 6 starts (up 0, down 1): gen-4-day96 down (133 against 139 to 144)
+  rows moved in at least one start: 10 of 25; findings (same way in at least 4 starts): 3
+    per seed for hungryNoFoodShare: aspen: up/up; gen-4: up/up; river: in/up
+    per seed for hungryShare: aspen: up/up; gen-4: in/up; river: in/up
+    per seed for storeFoodPerPerson: aspen: down/down; gen-4: down/down; river: down/down
+
+=== rich-no-farm-draw against the spread of the three reference arms ===
+rule: outside [min - R, max + R], R = range of the three, floor 1 (count) or 0.5 points (share)
+  FINDING plotsRested                moved in 6 of 6 starts (up 6, down 0): aspen-day48 up (44 against 14 to 18); aspen-day96 up (207 against 123 to 142); gen-4-day48 up (79 against 44 to 52); gen-4-day96 up (121 against 47 to 61); river-day48 up (99 against 53 to 66); river-day96 up (83 against 29 to 43)
+          plotsRestingAtEnd          moved in 3 of 6 starts (up 3, down 0): aspen-day48 up (14 against 6 to 8); gen-4-day48 up (17 against 7 to 11); river-day96 up (18 against 6 to 11)
+          plots                      moved in 3 of 6 starts (up 1, down 2): aspen-day48 up (115 against 106 to 110); gen-4-day48 down (97 against 103 to 104); river-day48 down (114 against 124 to 131)
+          hungryNoFoodShare          moved in 2 of 6 starts (up 2, down 0): aspen-day48 up (17.21% against 15.33% to 16.25%); gen-4-day96 up (28.31% against 24.20% to 26.10%)
+          walkingShare12             moved in 1 of 6 starts (up 1, down 0): river-day48 up (57.71% against 55.38% to 56.29%)
+          workNotesKept              moved in 1 of 6 starts (up 0, down 1): gen-4-day48 down (123 against 149 to 161)
+          workNotesSpent             moved in 1 of 6 starts (up 1, down 0): aspen-day48 up (4 against 0 to 1)
+          techLessonsDeclined        moved in 1 of 6 starts (up 0, down 1): river-day48 down (9 against 13 to 15)
+          storeFoodPerPerson         moved in 1 of 6 starts (up 0, down 1): river-day48 down (8.74 against 10.64 to 11.36)
+  rows moved in at least one start: 9 of 25; findings (same way in at least 4 starts): 1
+    per seed for plotsRested: aspen: up/up; gen-4: up/up; river: up/up
+
+=== GUARD RAILS (provisional cell: hungryNoFoodShare = no food in the pack and none in the home store) ===
+  rich-no-tree-regrowth      deaths             down in 0 (the part makes it worse), up in 0 (the part helps), of 3 starts
+  rich-no-tree-regrowth      hungryNoFoodShare  down in 1 (the part makes it worse), up in 0 (the part helps), of 6 starts
+  rich-no-bigger-reserve     deaths             down in 0 (the part makes it worse), up in 0 (the part helps), of 3 starts
+  rich-no-bigger-reserve     hungryNoFoodShare  down in 0 (the part makes it worse), up in 0 (the part helps), of 6 starts
+  rich-no-grow-more          deaths             down in 0 (the part makes it worse), up in 0 (the part helps), of 3 starts
+  rich-no-grow-more          hungryNoFoodShare  down in 0 (the part makes it worse), up in 5 (the part helps), of 6 starts
+  rich-no-farm-draw          deaths             down in 0 (the part makes it worse), up in 0 (the part helps), of 3 starts
+  rich-no-farm-draw          hungryNoFoodShare  down in 0 (the part makes it worse), up in 2 (the part helps), of 6 starts
+
+YARDSTICK (company plus leisure, 12 and over, mean of the three reference arms): aspen-day48 11.07%, aspen-day96 11.96%, gen-4-day48 11.11%, gen-4-day96 12.77%, river-day48 11.56%, river-day96 12.52%; target 30%

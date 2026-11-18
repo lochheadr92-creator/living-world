@@ -1,14 +1,14 @@
 // Read-only. Stage 1d step 8, as fixed in readings_step8_baseline_lab.txt: the baseline at current rules per save, and for each removal arm
 // which rows moved beyond the spread of control, nudge:1 and nudge:2, in how many starts and which way.
-// usage: node analyze_step8.mjs <lab out dir> [<lab out dir> ...] [--extra=<dir>] [--ref=control,nudge:1,nudge:2]
-//   each dir holds lab_<seed>-day<N>.jsonl files. --extra merges the arms of another run of the same saves (the supplementary nudges of the
+// usage: node analyze_step8.mjs <lab out dir> [<lab out dir> ...] [--extra=<dir>[,<dir>...]] [--ref=control,nudge:1,nudge:2]
+//   each dir holds lab_<seed>-day<N>.jsonl files. --extra merges the arms of other runs of the same saves (the supplementary nudges of the
 //   dated note in the readings); --ref names the reference arms (default: the three fixed in the readings, control, nudge:1, nudge:2).
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const flag = (n) => process.argv.slice(2).find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3);
 const dirs = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-const extraDir = flag('extra');
+const extraDirs = (flag('extra') ?? '').split(',').filter(Boolean);
 const REF = (flag('ref') ?? 'control,nudge:1,nudge:2').split(',');
 const REMOVAL = ['rich-no-tree-regrowth', 'rich-no-bigger-reserve', 'rich-no-grow-more', 'rich-no-farm-draw'];
 const ROWS = [
@@ -37,7 +37,7 @@ for (const dir of dirs) {
     starts.push({ name, seed: m ? m[1] : name, day: m ? Number(m[2]) : 0, by });
   }
 }
-if (extraDir) {
+for (const extraDir of extraDirs) {
   for (const f of readdirSync(extraDir).filter((f) => /^lab_.*\.jsonl$/.test(f)).sort()) {
     const name = f.replace(/^lab_/, '').replace(/\.jsonl$/, '');
     const s = starts.find((x) => x.name === name);
@@ -48,6 +48,7 @@ if (extraDir) {
     }
   }
 }
+starts.sort((a, b) => a.name.localeCompare(b.name)); // the output does not depend on the order the directories are given in
 console.log(`STARTS: ${starts.map((s) => s.name).join(', ')} (${starts.length}); reference arms: ${REF.join(', ')}`);
 const val = (s, spec, row) => s.by[spec]?.outcome?.[row];
 const refStat = (s, row) => {

@@ -1,0 +1,150 @@
+RESULT, Stage 1d step 8: the baseline lab at rules 256
+Written on 18 November 2026, after the day-96 set finished (about 14:48). Scored against readings_step8_baseline_lab.txt, whose rule for a
+move and for a finding was fixed before any number and is not changed here. Nothing in scripts/ or src/ was changed to produce this.
+Nothing was pushed. No rule was changed.
+
+WHAT WAS RUN
+  Six saves from the library (docs/SAVE_LIBRARY.md): aspen, gen-4 and river at day 48 and at day 96, rules 256, rich, arrivals on.
+  From each save, 13 days (a full winter inside the window at both ages: days 56 to 60 and 104 to 108).
+  Main run, 7 arms per save: control, nudge:1, nudge:2, and the four removals rich-no-tree-regrowth (252), rich-no-bigger-reserve (253),
+  rich-no-grow-more (254), rich-no-farm-draw (255). A removal arm applies from the save's day on.
+  Supplementary run, 6 arms per save: control and nudge:1 to nudge:5, as the dated note in the readings set out.
+  78 runs in all. Provenance of every run: clean tree, head 29be601c, 7ebbb145, 10ea8b9d or 4c43ab87. Over scripts/, src/ and the package
+  files these four heads are identical (git diff 29be601c 4c43ab87 over those paths is empty), and so is HEAD, so one build of the rules
+  produced all 78 runs. VERIFIED.
+  Raw rows and provenance: day48/, day48_extra/, day96_<seed>/, day96_<seed>_extra/ in this directory.
+  Reproduce the analyses (the output does not depend on the order of the directories):
+    node analyze_step8.mjs day48 day96_aspen day96_gen-4 day96_river > analysis_all6_three_arms.txt
+    node analyze_step8.mjs day48 day96_aspen day96_gen-4 day96_river --extra=day48_extra,day96_aspen_extra,day96_gen-4_extra,day96_river_extra \
+      --ref=control,nudge:1,nudge:2,nudge:3,nudge:4,nudge:5 > analysis_all6_six_arms.txt
+  Both files in this directory were regenerated from the committed rows and match what was read for this result byte for byte.
+
+STATUS
+  VERIFIED
+  - The 18 arms that ran twice (control, nudge:1, nudge:2 on each of the six saves: once in the main run, once in the supplementary run,
+    in separate processes) ended with the same hash and identical rows. Runs from a save repeat exactly.
+  - Findings by the fixed rule (same way in at least 4 of 6 starts, three reference arms):
+      rich-no-grow-more   storeFoodPerPerson   down in 6 of 6 starts
+      rich-no-grow-more   hungryNoFoodShare    up in 6 of 6
+      rich-no-grow-more   hungryShare          up in 5 of 6
+      rich-no-grow-more   walkingShare12       up in 4 of 6
+      rich-no-farm-draw   plotsRested          up in 6 of 6
+    storeFoodPerPerson, hungryNoFoodShare and plotsRested move the same way in both starts of every seed (aspen, gen-4, river), so none of
+    the three rests on one settlement. hungryShare does not (gen-4: day 48 inside the spread, day 96 up) and neither does walkingShare12
+    (aspen in/up, gen-4 in/up, river up/up); those two rest on fewer settlements.
+  - rich-no-tree-regrowth and rich-no-bigger-reserve: no finding. The one row that moved in 4 of 6 starts (tree regrowth, plots) went up
+    in two and down in two, by 2 to 5 plots past the edge of the spread.
+  - The yardstick, company plus leisure share at 12 and over, mean of the three reference arms: aspen 11.16% (day 48) and 11.89% (day 96),
+    gen-4 11.16% and 12.78%, river 11.31% and 12.37%. The target is 30%. All six are under 13%.
+  - Against the wider reference of six arms (control and nudge:1 to nudge:5) the findings that hold are storeFoodPerPerson down 6 of 6,
+    hungryNoFoodShare up 5 of 6, hungryShare up 4 of 6 (grow-more) and plotsRested up 6 of 6 (farm draw). walkingShare12 drops out.
+    The other two arms still show no finding.
+  LIKELY
+  - Removing the grow-more part (254) leaves less food in the stores and more person-time hungry with no food to hand, and the effect is
+    larger in the older worlds. LIKELY and not VERIFIED because it is 13 days, three seeds, and the hungry cell is provisional.
+  - Removing the farm draw (255) leaves more plots resting. The row is one the part was built to move, so the direction is the expected one.
+  UNKNOWN
+  - Why the bigger reserve (253) shows nothing on any row, including the store rows it was expected to move.
+  - Whether anything here lasts past 13 days (see WHAT THIS CANNOT SAY).
+  - What the plan's 15 to 18% yardstick at rules 250 was measured on. It was not reproduced; the six controls here give 11 to 13%.
+
+1. THE BASELINE AT RULES 256 (mean of control, nudge:1, nudge:2, with the range of the three in brackets; full rows in analysis_all6_three_arms.txt)
+  start         trajectories  yardstick       walking         hungry no food   hungry share    people       deaths range  store food/person
+  aspen day 48  3 of 3        11.16 (0.59)    52.26 (0.92)    15.66 (0.92)     51.22 (2.59)    82 (2)       1             8.56
+  aspen day 96  3 of 3        11.89 (0.76)    57.71 (0.24)    12.30 (0.59)     45.44 (1.15)    141.7 (3)    1             9.32
+  gen-4 day 48  2 of 3        11.16 (0.21)    50.79 (0.16)    15.90 (0.66)     51.74 (2.16)    80 (3)       0             10.65
+  gen-4 day 96  3 of 3        12.78 (0.49)    57.73 (1.31)    25.68 (1.19)     55.99 (1.53)    142.3 (3)    0             4.65
+  river day 48  2 of 3        11.31 (0.36)    56.26 (0.04)    14.31 (1.40)     46.26 (0.79)    84.3 (1)     0             10.88
+  river day 96  3 of 3        12.37 (0.39)    55.41 (1.19)    28.75 (1.68)     61.17 (0.75)    145.7 (1)    0             5.36
+  The share columns are the rows as the lab reports them, in percent. "Trajectories" is the number of distinct final hashes among the three
+  reference arms: in gen-4 day 48 and river day 48 nudge:2 ended exactly where the control did, so those two spreads rest on two
+  trajectories. Deaths in gen-4 day 48, river day 48 and river day 96 were 0 in all seven arms (read from the raw rows, not inferred).
+  What the table says:
+  - The yardstick is 11 to 13% in all six, against a target of 30%. The six control arms alone span 1.4 points (11.19 to 12.56).
+  - The two older worlds that sit lowest on stored food (gen-4 and river at day 96, 4.7 and 5.4 per person against 8.6 to 10.9 elsewhere)
+    are the two with the highest hungry-with-no-food-to-hand share (26% and 29% against 12 to 16%). Whether the one causes the other here
+    is UNKNOWN; the grow-more removal below moves both together.
+  - People: the three reference arms span 4 or less in every save (1 to 3).
+  Nothing here is a claim that 256 is better or worse than 255. These are the numbers at 256.
+
+2. WHAT EACH REMOVAL DID (three fixed reference arms, then the six-arm check)
+  rich-no-tree-regrowth (252)   0 findings. 7 of 25 rows moved in at least one start, none in more than 4, and the 4-start row went both ways.
+                                Under six reference arms 3 of 25 rows move in a start. A null at 13 days.
+  rich-no-bigger-reserve (253)  0 findings. 10 of 25 rows moved in at least one start (six arms: 2 of 25). storeFoodPerPerson and
+                                homeFoodPerPerson did not move in any start, and hungryNoFoodShare did not go up in any start.
+  rich-no-grow-more (254)       4 findings under three reference arms, 3 under six.
+      store food per person   down in 6 of 6 (reference mean to removal arm): aspen 48 8.56 to 6.74, aspen 96 9.32 to 6.94, gen-4 48 10.65 to 8.05,
+                              gen-4 96 4.65 to 1.08, river 48 10.88 to 8.99, river 96 5.36 to 1.27. The fall is 17 to 24% at day 48 and
+                              26 to 77% at day 96.
+      hungry no food          up in 6 of 6 (five of 6 under six arms; river day 48 stops moving), reference mean to removal arm in percent:
+                              aspen 48 15.66 to 22.78, aspen 96 12.30 to 17.98, gen-4 48 15.90 to 17.97, gen-4 96 25.68 to 36.48,
+                              river 48 14.31 to 17.63, river 96 28.75 to 39.04. The rise is 2 to 7 points at day 48 and 6 to 11 at day 96.
+      hungry share            up in 5 of 6 (four of 6 under six arms).
+      walking share           up in 4 of 6 under three arms; not a finding under six.
+      plots rested            down in 3 of 6 (not a finding). people down in 2 of 6 (gen-4 day 96: 133 against 141 to 144).
+      deaths                  gen-4 day 96 ended with 4 against 0 in the three reference arms, which reads as "up" at three arms. The
+                              supplementary nudges 4 and 5 of that same start ended with 3 deaths each, so 4 is inside the six-arm spread.
+                              The death row is NOT a finding and the three-arm reading of it is the spread being too tight.
+  rich-no-farm-draw (255)       1 finding under three arms and under six.
+      plots rested            up in 6 of 6: 14 to 18 against 44 (aspen day 48), 126 to 136 against 207 (aspen 96), 45 to 52 against 79 (gen-4 48),
+                              47 to 54 against 121 (gen-4 96), 65 to 66 against 99 (river 48), 29 to 40 against 83 (river 96). A rise of about
+                              1.5 to 3 times the reference mean.
+      hungry no food          up in 3 of 6 (aspen 48, gen-4 96, river 48), down in none; up in 2 of 6 under six arms. Not a finding (it
+                              needs 4 of 6); a lead.
+      company share           up in 2 of 6 (river day 48 and day 96, one seed). At river day 96 all four removal arms sit above the three-arm
+                              range (12.55 to 12.93 against 11.65 to 12.00), and under six reference arms none of the four moves on this row.
+                              LIKELY the three-arm reference is low in that seed (river day 48 also has only two trajectories), not an effect
+                              of the parts.
+
+3. THE GUARD RAILS (plan line 159, read as the readings fixed them: a removal arm that moves deaths or hungryNoFoodShare DOWN says the part
+   makes it worse, UP says the part helps)
+  rich-no-tree-regrowth   hungryNoFoodShare down in 1 of 6 (aspen day 96, 11.10% against 12.10 to 12.69), up in 0. Deaths: no move.
+  rich-no-bigger-reserve  hungryNoFoodShare down in 1 of 6 under three arms (gen-4 day 48), 0 under six; up in 0. Deaths: no move.
+  rich-no-grow-more       hungryNoFoodShare up in 6 of 6 (5 under six arms), down in 0. Deaths: 4 in gen-4 day 96 against 0 in the three
+                          reference arms, but 3 and 3 in two of the supplementary nudges of that start, so not outside the wider spread.
+  rich-no-farm-draw       hungryNoFoodShare up in 3 of 6 (2 under six arms), down in 0. Deaths: no move.
+  No removal arm moves no-food hunger down in more than 1 of 6 starts. So nothing here says any of the four parts makes things worse on
+  these two rows, and the grow-more part is, on no-food hunger, the one that helps most. hungryNoFoodShare is the provisional cell
+  (no food in the pack and none in the home store); which cell counts as "no food to hand" is still Ryan's open choice.
+
+4. THE SEVEN EXPECTATIONS OF THE READINGS (written before any number)
+  1. Tree regrowth, a null. HELD. 0 findings; the row that moved most (plots, 4 of 6 starts) went both ways.
+  2. Bigger reserve, store food and home food down, winter hunger a question. NOT SUPPORTED. Neither store row moved in any start. On the
+     question, no-food hunger did not go up in any start (down in one). Why the part shows nothing is UNKNOWN: the part may be inert in
+     these worlds, or its effect may not show in the 13 days, or the rows may not see it. This run cannot tell which.
+  3. Grow more, plots and field rows move in some starts. PART HELD. plotsRested moved in 3 of 6 starts (down), plotsRestingAtEnd in 1 of
+     6, homeFoodPerPerson in none. The result that matters was not predicted: store food and no-food hunger, as findings.
+  4. Farm draw, walking and company shares may move slightly or may not. HELD in the "may not" sense (walking up in 1 of 6, company share up
+     in 2 of 6, both river). One sentence of the expectation was wrong: it said the rows the arm was built to move are not in the 26.
+     plotsRested is in them and moved in 6 of 6 starts.
+  5. Yardstick well under 30% in all six, controls spanning under 6 points. HELD. 11.2 to 12.8%; the control arms span 1.4 points.
+  6. At least one chance move and no 4-of-6 row. HELD for tree regrowth and bigger reserve. FAILED as a whole: grow-more and farm draw have
+     five rows at 4 or more of 6, all in one direction, with moves several times the spread (store food at day 96 in gen-4 and river down
+     by about three quarters). The readings put the chance of a false finding at about 1 arm in 10; two arms with consistent moves in every seed are
+     not read as chance.
+  7. People range 4 or less, deaths range 1 or less in each save. HELD with the three reference arms (people 1 to 3; deaths 0 or 1). It does
+     not hold with six reference arms: gen-4 day 96 has deaths 0, 0, 0, 1, 3, 3 across control and nudge:1 to nudge:5.
+
+5. WHAT THIS CANNOT SAY
+  - 13 days, three seeds, two ages. A part whose effect builds over years (trees, a reserve over several winters, field fertility) can
+    show as a null here and matter later. The two ages are one settlement each seed (aspen day 48 and day 96 are the same village), so six
+    starts are three settlements. That is why the per-seed lines are reported, and why store food and no-food hunger, which agree in both
+    starts of all three seeds, are the strongest rows.
+  - The reference is loose. In gen-4 day 48 and river day 48 nudge:2 ended with the control's hash, so those spreads rest on two
+    trajectories. Across the six reference arms the distinct trajectories are 3, 5, 4, 6, 4 and 5 (aspen 48, aspen 96, gen-4 48, gen-4 96,
+    river 48, river 96): 27 of 36. At 256 a nudge reaches only the shared stream (births, old age, wildlife, names), and many nudges realign.
+    A move smaller than that remainder cannot be told from it. The six-arm check exists for this. It dropped one finding (walking share), weakened two
+    (no-food hunger from 6 of 6 to 5, hungry share from 5 to 4) and removed the one death signal. It kept the other findings.
+  - A removal arm removes the part going forward only, from the save's day on.
+  - This lab compares 256 with a part taken out. It does not compare 255 with 256 (that was step 6, read as equivalence over 24 and 25 days).
+  - The yardstick figure of 15 to 18% in the plan was not reproduced (11 to 13% here, 10 to 12% at 255 in step 4). What it was measured
+    on is UNKNOWN, so the 30% target is being read against a baseline of about 12%, not 15 to 18%.
+  - hungryNoFoodShare is a provisional cell. If the choice of cell changes, the hunger rows change with it.
+
+6. ONE LINE ON WHETHER 255 STAYS THE DEFAULT (Ryan decides; nothing is changed)
+  Leave 255 as it is and take no rules action from this step. None of the four parts 252 to 255 worsens deaths or no-food hunger on these
+  six starts, the grow-more part (254) is the one whose removal leaves stores lower and no-food hunger higher in every seed, and the
+  farm draw (255) does what it was built to do on plots rested. The evidence is 13 days. Moving the default to 256 is a separate choice that step 6 supports on equivalence for
+  24 to 25 days, and nothing here argues against it.
+  What would change this: a rerun of the grow-more removal on fresh seeds at day 96 that does not repeat the store food fall, or a part
+  whose removal lowers no-food hunger in 4 or more starts (none did).
