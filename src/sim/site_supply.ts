@@ -41,13 +41,14 @@
 // Nothing is saved. Rich worlds at rules 229 and later only; rules 228 and earlier, authored worlds and a switch thrown keep
 // the glance at the bench, the weights, the saw in its maker's pack and the refusal as they were.
 import { newActivity } from './activities';
+import { takeableAtBench } from './bench_access';
 import { recentFailure } from './knowledge';
 import { nightMult } from './options_work';
 import { Scorer, addOption, dangerAt, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
 import { runsRulesVersion } from './rulesversion';
 import { toolsHeldBy } from './toolreg';
-import type { Belief, ItemKind, World } from './types';
+import type { Belief, ItemKind, Person, World } from './types';
 
 /** what a made material a known site waits for counts for, beyond the site's other needs, at rules 229 */
 export const MADE_FOR_SITE = 18;
@@ -81,9 +82,11 @@ const runs = (world: World): boolean => world.settings.dynamics === 'rich' && ru
  * remembers each kind as one, or as full; the workshop's own record of what lay ready for work (FacilitySnapshot inputs and
  * output, taken at the same sight and left exact by rules 169) is what somebody about to work a batch counts.
  */
-export function benchStock(world: World, b: Belief, item: ItemKind, glanced: number): number {
+export function benchStock(world: World, b: Belief, item: ItemKind, glanced: number, p?: Person): number {
   if (!on.bench || !runs(world) || !b.ops) return glanced;
-  return Math.max(glanced, b.ops.inputs[item] ?? 0, b.ops.output[item] ?? 0);
+  const counted = Math.max(glanced, b.ops.inputs[item] ?? 0, b.ops.output[item] ?? 0);
+  // rules 257 (bench_access.ts): and of those, only what this person may take
+  return p ? takeableAtBench(world, p, b, item, counted) : counted;
 }
 
 /** WORTH: what is added to the want for a made material when it is a building site that waits for it. */

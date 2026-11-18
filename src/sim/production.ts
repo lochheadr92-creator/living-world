@@ -415,7 +415,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag:
   const short: Items = {};
   for (const k of Object.keys(need) as ItemKind[]) {
     // rules 229 (site_supply.ts): what lies ready at the bench is counted from the workshop's own record, not the glance
-    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx,b, k));
+    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx,b, k), ctx.p);
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
@@ -431,7 +431,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag:
   for (const k of Object.keys(short) as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
     if (have > 0) {
-      const room = fullOven ? unitsOf(fullOven[k]) - benchStock(world, b, k, stockAt(ctx, b, k)) : 0;
+      const room = fullOven ? unitsOf(fullOven[k]) - benchStock(world, b, k, stockAt(ctx, b, k), ctx.p) : 0;
       carryAll[k] = Math.min(have, Math.max(unitsOf(short[k]), room));
       anyCarried = true;
     }
@@ -468,7 +468,7 @@ function bringInputs(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag
   const carry: Items = {};
   let any = false;
   for (const k of Object.keys(need) as ItemKind[]) {
-    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx, b, k));
+    const lack = unitsOf(need[k]) - benchStock(world, b, k, stockAt(ctx, b, k), ctx.p);
     if (lack <= 0) continue;
     const have = unitsOf(p.inv[k]);
     if (have > 0) { carry[k] = Math.min(have, lack); any = true; }
@@ -551,7 +551,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
       } else if (b.btype && isFacilityType(b.btype as BuildingType)) {
         if (!(rememberedOnly?(b.hh===0||b.hh===p.hhId||friendlyTo(ctx,b.hh??-1)>=12):mayUseBelief(ctx, b))) continue;
         // rules 229 (site_supply.ts): what waits at a workshop is counted from the workshop's own record, not the glance
-        n = benchStock(world, b, item, n);
+        n = benchStock(world, b, item, n, p);
         // a batch of mine that will be ready by the time I arrive counts
         const snap = b.ops;
         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
@@ -739,7 +739,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     let onShelves = 0;
     for (const s of beliefsByKind(p, ['building'])) {
       if (s.btype !== 'smithy' && s.btype !== 'kiln') continue;
-      onShelves += smithyShelf(world, s, 'charcoal'); // rules 235 (smithy_iron.ts): the workshop's own count, not the glance
+      onShelves += smithyShelf(world, s, 'charcoal', p); // rules 235 (smithy_iron.ts): the workshop's own count, not the glance
     }
     if (onShelves < 4) {
       out.push({ item: 'charcoal', qty: 4 - onShelves, have: onShelves, base: 30 * tm.work, why: 'the smithy burns charcoal to smelt and forge', tag: 'craft' });
@@ -748,7 +748,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
 
   // rules 235 (smithy_iron.ts): a standing smithy is a standing want for iron too, as rules 10 made it one for charcoal
   {
-    const wanted = ironWanted(world, facilitiesOf(ctx, 'smithy').map((f) => f.b));
+    const wanted = ironWanted(world, facilitiesOf(ctx, 'smithy').map((f) => f.b), p);
     if (wanted > 0) out.push({ item: 'iron', qty: wanted, have: 0, base: IRON_WANT * tm.work, why: IRON_WHY, tag: 'craft' });
   }
 

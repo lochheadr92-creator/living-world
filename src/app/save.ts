@@ -15,6 +15,7 @@ import {validateLivestock} from '../sim/livestock';
 import {validateGear} from '../sim/passive_gear';
 import {validateChildhood} from '../sim/childhood';
 import {validateShown} from '../sim/three_ages';
+import {validateHeld} from '../sim/bench_access';
 import {validatePreservation} from '../sim/preservation';
 import {validateCarcasses} from '../sim/carcass';
 import {validateClothing} from '../sim/clothing';
@@ -396,6 +397,7 @@ export function deserializeWorld(json: string): World {
   validateCareHandback(w);
   validateMeetingKnowledge(w);
   validateEmptyNews(w);
+  validateHeld(w); // rules 257 (bench_access.ts): last, so a world of another version fails on its own first-order reason first
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);
