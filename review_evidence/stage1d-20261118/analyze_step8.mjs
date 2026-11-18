@@ -1,11 +1,15 @@
 // Read-only. Stage 1d step 8, as fixed in readings_step8_baseline_lab.txt: the baseline at current rules per save, and for each removal arm
 // which rows moved beyond the spread of control, nudge:1 and nudge:2, in how many starts and which way.
-// usage: node analyze_step8.mjs <lab out dir> [<lab out dir> ...]      (each dir holds lab_<seed>-day<N>.jsonl files)
+// usage: node analyze_step8.mjs <lab out dir> [<lab out dir> ...] [--extra=<dir>] [--ref=control,nudge:1,nudge:2]
+//   each dir holds lab_<seed>-day<N>.jsonl files. --extra merges the arms of another run of the same saves (the supplementary nudges of the
+//   dated note in the readings); --ref names the reference arms (default: the three fixed in the readings, control, nudge:1, nudge:2).
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const dirs = process.argv.slice(2);
-const REF = ['control', 'nudge:1', 'nudge:2'];
+const flag = (n) => process.argv.slice(2).find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3);
+const dirs = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const extraDir = flag('extra');
+const REF = (flag('ref') ?? 'control,nudge:1,nudge:2').split(',');
 const REMOVAL = ['rich-no-tree-regrowth', 'rich-no-bigger-reserve', 'rich-no-grow-more', 'rich-no-farm-draw'];
 const ROWS = [
   'companyShare12', 'leisureShare12', 'companyLeisureShare12', 'walkingShare12',
@@ -33,20 +37,31 @@ for (const dir of dirs) {
     starts.push({ name, seed: m ? m[1] : name, day: m ? Number(m[2]) : 0, by });
   }
 }
-console.log(`STARTS: ${starts.map((s) => s.name).join(', ')} (${starts.length})`);
+if (extraDir) {
+  for (const f of readdirSync(extraDir).filter((f) => /^lab_.*\.jsonl$/.test(f)).sort()) {
+    const name = f.replace(/^lab_/, '').replace(/\.jsonl$/, '');
+    const s = starts.find((x) => x.name === name);
+    if (!s) continue;
+    for (const l of readFileSync(join(extraDir, f), 'utf8').split('\n').filter(Boolean)) {
+      const r = JSON.parse(l);
+      if (r.spec && !s.by[r.spec]) s.by[r.spec] = r; // arms the main run does not carry; the control is kept from the main run
+    }
+  }
+}
+console.log(`STARTS: ${starts.map((s) => s.name).join(', ')} (${starts.length}); reference arms: ${REF.join(', ')}`);
 const val = (s, spec, row) => s.by[spec]?.outcome?.[row];
 const refStat = (s, row) => {
   const v = REF.map((k) => val(s, k, row));
   if (v.some((x) => typeof x !== 'number')) return null;
   const lo = Math.min(...v), hi = Math.max(...v);
-  return { v, lo, hi, range: hi - lo, mean: v.reduce((a, b) => a + b, 0) / 3 };
+  return { v, lo, hi, range: hi - lo, mean: v.reduce((a, b) => a + b, 0) / v.length };
 };
 const absent = (s, row) => [...REF, ...REMOVAL].every((k) => (val(s, k, row) ?? 0) === 0);
 
 console.log('\n=== BASELINE AT CURRENT RULES (control, nudge:1, nudge:2; range; mean) ===');
 for (const s of starts) {
   const hs = REF.map((k) => s.by[k]?.finalHash);
-  console.log(`\n${s.name}   hashes ${REF.map((k, i) => `${k}=${hs[i]}`).join('  ')}   distinct ${new Set(hs).size}/3${new Set(hs).size < 3 ? '   ** a reference arm repeats another: this start has fewer than three trajectories **' : ''}`);
+  console.log(`\n${s.name}   hashes ${REF.map((k, i) => `${k}=${hs[i]}`).join('  ')}   distinct ${new Set(hs).size}/${REF.length}${new Set(hs).size < REF.length ? '   ** a reference arm repeats another: this start has fewer than ' + REF.length + ' trajectories **' : ''}`);
   for (const row of ROWS) {
     if (absent(s, row)) continue;
     const st = refStat(s, row);
