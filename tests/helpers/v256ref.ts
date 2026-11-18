@@ -8,8 +8,8 @@ import type {World} from '../../src/sim/types';
 const digest=(s:string)=>createHash('sha256').update(s).digest('hex');
 export const V256_SEED='gen-4';
 const make=(seed:string):World=>createWorld({...currentWorldSettings('normal',seed,{immigration:true}),rulesVersion:256});
-/** Tick 6000, well after the first tick this ordinary gen-4 differs from the same world at the previous rules version (scripts/keyed_first_diff.ts). */
-export const V256_TICK=6000;
+/** Tick 36000 (day 15): after the first tick this ordinary gen-4 differs from the same world at the previous rules version (tick 50, scripts/keyed_first_diff.ts), after five newcomers have come (one at 6000 would be none) and after one whole winter. */
+export const V256_TICK=36000;
 /** Rules 256. An ordinary Normal gen-4 (arrivals on), run to `tick`, saved there and continued 120 ticks. */
 export function v256Continuation(tick:number){
  const w=make(V256_SEED);
