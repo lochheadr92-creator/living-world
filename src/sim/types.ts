@@ -1476,6 +1476,8 @@ export interface World {
     /** Read-only review measurement, before any choice is made. */
     onTravelReview?: (p: Person, a: Activity, option: 'present' | 'absent' | 'unkeyed') => void;
     onTravelReviewSwitch?: (p: Person, from: Activity, to: Activity, reason: string) => void;
+    onFoodDemand?: (p: Person, stage: Stage, demand: number, unmet: number) => void;
+    onFoodIntake?: (p: Person, nutrition: number) => void;
     onNourishment?: (p:Person,event:import('./nourishment').NourishmentEvent)=>void;
     onActivityStart?: (p: Person, a: Activity) => void;
     /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */

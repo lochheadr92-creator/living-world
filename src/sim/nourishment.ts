@@ -18,6 +18,7 @@ function settleCapacity(w:World,p:Person):number{
 /** Call only after the food portion has actually been consumed. */
 export function takeNutrition(w:World,p:Person,input:number):void{
  if(!Number.isFinite(input)||input<0)throw Error('invalid paid nutrition');
+ w.hooks?.onFoodIntake?.(p,input);
  if(!hasNourishment(w)){p.needs.hunger=Math.max(0,Math.min(100,p.needs.hunger+input));return;}
  const have=settleCapacity(w,p),capacity=nourishmentCapacity(w,p),room=capacity-have;
  const preferred=p.needs.hunger>=40?Math.min(input*.25,room/NOURISHMENT_EFFICIENCY):0;

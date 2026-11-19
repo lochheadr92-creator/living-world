@@ -94,9 +94,11 @@ export function updateNeeds(world: World, p: Person): void {
 
   // hunger / thirst
   const kidMul = (stage === 'child' ? 0.85 : 1) * (world.settings.harsh ? 1.18 : 1);
-  n.hunger -= hungerRate(world) * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1); // rules 195: the base rate is the world's (metabolism.ts)
+  const foodDemand = hungerRate(world) * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1); // rules 195: the base rate is the world's (metabolism.ts)
+  n.hunger -= foodDemand;
   let starvationFraction=1;
   if(hasNourishment(world)){const deficit=Math.max(0,-n.hunger),covered=spendNourishment(world,p,deficit,'shortage');if(deficit>0)starvationFraction=1-covered/deficit;}
+  world.hooks?.onFoodDemand?.(p, stage, foodDemand, Math.max(0, -n.hunger) * starvationFraction);
   const heat = Math.max(0, w.temp - 19) * 0.04;
   n.thirst -= thirstRate(world) * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
 
