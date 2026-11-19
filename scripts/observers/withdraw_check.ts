@@ -86,6 +86,10 @@ export class WithdrawCheck {
     const prior = world.hooks;
     world.hooks = {
       ...prior,
+      onActivityStart: (p, a) => {
+        prior?.onActivityStart?.(p, a);
+        if (a.kind === 'withdraw' && !this.live.has(a.id)) this.live.set(a.id, this.open(world, p, a, world.tick));
+      },
       onActivityEnd: (p, a, outcome, detail) => {
         prior?.onActivityEnd?.(p, a, outcome, detail);
         this.noteEnd(world, p, a, outcome, detail);
@@ -98,6 +102,8 @@ export class WithdrawCheck {
     if (a.kind !== 'withdraw') return;
     const rec = this.live.get(a.id);
     if (!rec) { this.unseenEnds++; this.unseenEndDetails.push({ tick: world.tick, person: p.id, id: a.id, phase: a.phase, outcome, detail, moved: a.cycle }); return; }
+    // Work can begin and fail between samples. Record arrival without inventing a sampled stock or access reading.
+    if (a.phase === 'work' && rec.arrivedTick === null) rec.arrivedTick = world.tick;
     rec.endTick = world.tick; rec.endOutcome = outcome; rec.endDetail = detail; rec.moved = a.cycle;
     this.live.delete(a.id);
     this.done.push(rec);
@@ -178,8 +184,8 @@ export class WithdrawCheck {
     else result = 'ended_before_arrival';
     let why = '';
     if (result === 'took_none_empty') {
-      const last = r.truthLastWork ?? 0, arr = r.truthArr ?? 0, dep = r.truthDep;
-      why = dep <= 0 ? 'stale_at_departure' : arr <= 0 ? 'drained_on_the_way' : last <= 0 ? 'emptied_while_waiting' : 'stock_there_nothing_allowed';
+      const last = r.truthLastWork, arr = r.truthArr, dep = r.truthDep;
+      why = r.firstPhase !== 'travel' || dep < 0 ? 'unobserved' : dep === 0 ? 'stale_at_departure' : arr === null ? 'unobserved' : arr <= 0 ? 'drained_on_the_way' : last === null ? 'unobserved' : last <= 0 ? 'emptied_while_waiting' : 'stock_there_nothing_allowed';
     }
     let beliefClass: string;
     if (!r.beliefPresent) beliefClass = 'no_belief';

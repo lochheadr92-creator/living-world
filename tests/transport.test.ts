@@ -212,3 +212,15 @@ it('rules 55: switch, exact replay, observer purity, hash coverage, load validat
   expect(hashWorld(changed)).not.toBe(hash);
   expect(() => deserializeWorld(saved.replace('"rulesVersion":55', '"rulesVersion":54'))).toThrow('Invalid hauling record');
 });
+import { TripShape } from '../scripts/observers/trip_shape';
+it('the trip observer records real loading and delivery during a cart haul', () => {
+  const {w,hana,st,cart,store}=deathScene(55); const observer=new TripShape(), detach=observer.attach(w);
+  const a=newActivity(w,hana,{kind:'cart_haul',label:'Hauling',goal:'test',targetId:cart.id,targetType:'cart',tx:cart.x,ty:cart.y,spotX:cart.x,spotY:cart.y,utility:100,minCommit:4000,maxTicks:3000,data:{cartId:cart.id,fromId:store.id,toId:st.id,items:{bricks:6,planks:4},leg:0}});
+  hana.cooldowns.pause=0; startActivity(w,hana,a);
+  for(let i=0;i<3000&&hana.activity?.id===a.id;i++){observer.sampleTick(w);stepWorld(w);}
+  observer.finish(w); detach();
+  const events=observer.tripRows().filter(r=>r.actId===a.id).flatMap(r=>r.cartTransfers);
+  expect(events.filter(e=>e.to===`cart:${cart.id}`).reduce((n,e)=>n+e.n,0)).toBe(10);
+  expect(events.filter(e=>e.from===`cart:${cart.id}`&&e.to===`site:${st.id}`).reduce((n,e)=>n+e.n,0)).toBe(10);
+  expect(st.delivered.bricks).toBe(6); expect(st.delivered.planks).toBe(4);
+},40000);
