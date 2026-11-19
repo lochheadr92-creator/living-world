@@ -62,4 +62,3 @@ const endHash=hashWorld(w);
 if(!conservationReport(w).ok) throw Error('Control replay failed '+endHash);
 if(!chains.some(c=>c.first.actual.steps.length || c.second.actual.steps.length) && chains.length) throw Error('Missing planner instrumentation');
 writeFileSync(opt('out',''),JSON.stringify({days,start,initialHash,endHash,switches,chains}));
-

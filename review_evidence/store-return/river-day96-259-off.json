@@ -1,0 +1,96 @@
+{
+  "loaded": "C:/dev/lw_saves/rules256/river-day96.save.json",
+  "start": 230400,
+  "days": 1,
+  "off": true,
+  "initialHash": "47144ccf",
+  "endHash": "6ea72a07",
+  "initialPeopleLost": 0,
+  "switches": 33,
+  "returns": 11,
+  "finishedWithdrawals": 55,
+  "finishedDeposits": 128,
+  "finishedWorkshopOperations": 30,
+  "example": [
+    {
+      "tick": 230524,
+      "event": "interrupted something better came up",
+      "source": 50988,
+      "items": {
+        "water": 1
+      }
+    },
+    {
+      "tick": 230579,
+      "event": "interrupted something better came up",
+      "source": 172895,
+      "items": {
+        "flour": 2
+      }
+    },
+    {
+      "tick": 230632,
+      "event": "interrupted something better came up",
+      "source": 50988,
+      "items": {
+        "water": 1
+      }
+    },
+    {
+      "tick": 230686,
+      "event": "interrupted something better came up",
+      "source": 172895,
+      "items": {
+        "flour": 2
+      }
+    },
+    {
+      "tick": 230743,
+      "event": "interrupted something better came up",
+      "source": 50988,
+      "items": {
+        "water": 1
+      }
+    },
+    {
+      "tick": 230788,
+      "event": "interrupted something better came up",
+      "source": 172895,
+      "items": {
+        "flour": 2
+      }
+    },
+    {
+      "tick": 230838,
+      "event": "interrupted something better came up",
+      "source": 50988,
+      "items": {
+        "water": 1
+      }
+    },
+    {
+      "tick": 230883,
+      "event": "interrupted something better came up",
+      "source": 172895,
+      "items": {
+        "flour": 2
+      }
+    },
+    {
+      "tick": 230932,
+      "event": "interrupted something better came up",
+      "source": 50988,
+      "items": {
+        "water": 1
+      }
+    },
+    {
+      "tick": 231157,
+      "event": "interrupted something better came up",
+      "source": 172895,
+      "items": {
+        "flour": 2
+      }
+    }
+  ]
+}

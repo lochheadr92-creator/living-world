@@ -20,6 +20,7 @@ import { arrivalPaceOn, setArrivalPace } from '../../src/sim/arrival_pace';
 import { setTreeRegrowth, treeRegrowthOn } from '../../src/sim/tree_regrowth';
 import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow_more';
 import type { GrowMorePart } from '../../src/sim/grow_more';
+import { workshopErrandOn, setWorkshopErrand } from '../../src/sim/workshop_errand';
 import { benchAccessOn, setBenchAccess } from '../../src/sim/bench_access';
 import { FARM_DRAW_PARTS, farmDrawPartOn, setFarmDraw } from '../../src/sim/farm_draw';
 import type { FarmDrawPart } from '../../src/sim/farm_draw';
@@ -322,6 +323,11 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-farm-draw' ? undefined : (kind.slice('rich-no-farm-draw-'.length) as FarmDrawPart);
     if (part && !FARM_DRAW_PARTS.includes(part)) throw new Error(`rich-no-farm-draw-${part}: no such part (${FARM_DRAW_PARTS.join(', ')})`);
     return { spec: label, summary: `no extra pull toward the fields${part ? ' (' + part + ' part only)' : ''}, as before rules 255; no effect below rules 255`, install() { const was = Object.fromEntries(FARM_DRAW_PARTS.map((q) => [q, farmDrawPartOn(q)])) as Record<FarmDrawPart, boolean>; setFarmDraw(false, part); return () => { for (const q of FARM_DRAW_PARTS) setFarmDraw(was[q], q); }; } };
+  }
+  if (label === 'rich-no-workshop-errand') {
+    return { spec: label, summary: 'use only the nearest workshop when reviewing an input errand', install() {
+      const was = workshopErrandOn(); setWorkshopErrand(false); return () => setWorkshopErrand(was);
+    } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

@@ -42,3 +42,21 @@ node scripts/store_return_summary.mjs "$env:TEMP/lw-store-returns-370.json"
 ```
 
 All six first-day end hashes matched the existing controls. Each replay checked item conservation. At every sampled cross-store switch, the old key's presence and the chosen new key in the diagnostic options agreed with the actual decision. The two-day checks additionally match the archived activity IDs. The planner trace is inserted only by the diagnostic Vite configuration.
+
+## Rules 259 comparison after the fix
+
+Each pair starts from the same rules-256 save raised to 259, arrivals on. The off arm disables only workshop errand retention. Counts cover age 12 and over. An immediate return links two consecutive travel-review switches for the same person by activity ID and requires the third destination to equal the first. This hook method includes one additional River chain beyond the strict archived trip linkage.
+
+| Start and duration | Cross-store switches, off to on | Immediate returns | Successful withdrawals | Successful deposits | Successful workshop operations |
+|---|---:|---:|---:|---:|---:|
+| Aspen day 96, two days | 33 to 5 | 6 to 0 | 73 to 64 | 174 to 172 | 33 to 35 |
+| Gen-4 day 48, two days | 13 to 1 | 5 to 0 | 150 to 163 | 213 to 228 | 46 to 44 |
+| River day 96, one day | 33 to 9 | 11 to 0 | 55 to 83 | 128 to 150 | 30 to 26 |
+
+River person 1112 completed the water collection from bakery 50988 for oven 172895 at tick 230556 in the enabled arm. In the removal arm that walk ended in a switch at 230524. Every pair passed item conservation and retained all people alive at the start. These windows were selected because they contained reversals. The counts describe these runs, and the workshop operation totals include all successful operations during the window. Longer-term effects on production, survival and leisure are unknown.
+
+To reproduce, run the following twice for each start and duration in the table, once with `--off` and a separate output filename. All six outputs are beside this report.
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/workshop_errand_probe.ts -- --rules-up 259 --days 1 --load C:/dev/lw_saves/rules256/river-day96.save.json --out review_evidence/store-return/river-day96-259-on.json
+```

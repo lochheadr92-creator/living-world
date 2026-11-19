@@ -494,6 +494,9 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for (const p of world.persons) if (p.winterPractice) push('WinterPractice' + p.id + JSON.stringify(p.winterPractice));
   for (const p of world.persons) if (p.dailyRoutines) push('DailyRoutines' + p.id + JSON.stringify(p.dailyRoutines));
   for (const p of world.persons) for (const a of [p.activity,p.suspended]) if(a?.data.dailyRoutine) push('RoutineActivity'+p.id+':'+a.id+JSON.stringify(a.data.dailyRoutine));
+  if (runsRulesVersion(world, 259)) for (const p of world.persons) for (const a of [p.activity, p.suspended]) {
+    if (a?.data.inputWorkshop) push('WorkshopErrand'+p.id+':'+a.id+':'+a.data.inputWorkshop+':'+a.data.inputRecipe);
+  }
   for (const p of world.persons) for (const a of [p.activity,p.suspended]) if(a?.data.workScope) push('WorkScope'+p.id+':'+a.id+JSON.stringify(a.data.workScope));
   for (const p of world.persons) if (p.winterMeals) push('WinterMeals' + p.id + JSON.stringify(p.winterMeals));
   for (const p of world.persons) if (p.hauling) push('Hauling' + p.id + JSON.stringify(p.hauling));

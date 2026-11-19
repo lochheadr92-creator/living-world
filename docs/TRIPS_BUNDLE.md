@@ -45,3 +45,9 @@ Row: the share of adult withdraws that take nothing (29 to 40% at rules 250) and
 Rollback: switch the part off (`rich-no-bench-access`). The `held` field stays in saved beliefs and is ignored.
 
 The reconciled implementation validates and fingerprints both remembered earmarks and builder shares. For a draft-257 belief with earmarks but no recorded builder share, the builder route to free goods becomes available after a fresh sight.
+
+## Part C. Keep a valid workshop input errand (rules 259)
+
+A production withdrawal records the intended workshop and recipe on its activity. During travel review, if a different workshop is now nearest, the planner also checks the original workshop for that recipe. It retains the existing store-and-item option only when the ordinary planner still offers it for the same goal. Current demand, access, recent failure, workshop state, available stock, carrying room and urgent interruptions still apply. Older activities without the two optional fields finish under ordinary review. The lab removal is `rich-no-workshop-errand`.
+
+In three paired continuations immediate returns to the first store fell from 22 to zero. Finished workshop operations moved in both directions. The [decision trace and comparison](../review_evidence/store-return/RESULTS.md) gives the sample and its limits.
