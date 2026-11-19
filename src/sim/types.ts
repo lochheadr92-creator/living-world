@@ -1473,6 +1473,9 @@ export interface World {
   inhabitants?: Record<number, InhabitantState>;
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
+    /** Read-only review measurement, before any choice is made. */
+    onTravelReview?: (p: Person, a: Activity, option: 'present' | 'absent' | 'unkeyed') => void;
+    onTravelReviewSwitch?: (p: Person, from: Activity, to: Activity, reason: string) => void;
     onNourishment?: (p:Person,event:import('./nourishment').NourishmentEvent)=>void;
     onActivityStart?: (p: Person, a: Activity) => void;
     /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */

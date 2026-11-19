@@ -402,6 +402,10 @@ export function reviewActivity(world: World, p: Person): void {
   const ranked = rankOptions(ctx);
   const best = ranked[0];
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 5) * 20);
+  if (a.phase === 'travel' && world.hooks?.onTravelReview) {
+    const key = a.data.optKey;
+    world.hooks.onTravelReview(p, a, !key ? 'unkeyed' : ctx.options.some(o => o.key === key) ? 'present' : 'absent');
+  }
   if (!best) return;
   const key = a.data.optKey as string | undefined;
   // rules 158 (eat_in_hand.ts): food in the pack that would ease hunger better than this way of easing it is eaten first
@@ -414,6 +418,7 @@ export function reviewActivity(world: World, p: Person): void {
       act.data.why = because(inHand, null, tradeReason(world, p, inHand));
       record(world, p, ctx, ranked, inHand, 'urgent need', undefined, act);
       markSetAside(world, p);
+      if (a.phase === 'travel') world.hooks?.onTravelReviewSwitch?.(p, a, act, EAT_IN_HAND_REASON);
       endActivity(world, p, 'interrupted', EAT_IN_HAND_REASON);
       startActivity(world, p, act);
       return;
@@ -460,6 +465,7 @@ export function reviewActivity(world: World, p: Person): void {
     // being driven off from a place is remembered, so the same trip is not repeated at once
     if (danger && a.targetId && (a.kind === 'drink' || a.kind === 'gather' || a.kind === 'fetch_water')) noteFailure(world, p, a.targetId, 'a wolf came too close');
     if (external) ext.notify?.(world, p, { kind: 'override', why, activity: a });
+    if (a.phase === 'travel') world.hooks?.onTravelReviewSwitch?.(p, a, act, why);
     endActivity(world, p, 'interrupted', why);
     startActivity(world, p, act);
   }
