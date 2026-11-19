@@ -1,0 +1,34 @@
+{
+  "seed": "gen-4",
+  "tick": 232412,
+  "arm": "closed",
+  "hash": "968b81ab",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 232412,
+      "room": 6117,
+      "memory": 232364,
+      "goal": "to bring water to Pavel"
+    },
+    {
+      "event": "door",
+      "tick": 232459,
+      "reason": "indoor admission is disabled",
+      "space": 0,
+      "room": 6117
+    },
+    {
+      "event": "end",
+      "tick": 232459,
+      "result": "failed",
+      "detail": "indoor admission is disabled",
+      "space": 0
+    },
+    {
+      "event": "held",
+      "tick": 232460,
+      "memory": 232364
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "seed": "aspen",
+  "tick": 231029,
+  "arm": "closed",
+  "hash": "028a3320",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 231029,
+      "room": 115974,
+      "memory": 230848,
+      "goal": "to bring grain to Cole II"
+    },
+    {
+      "event": "door",
+      "tick": 231326,
+      "reason": "indoor admission is disabled",
+      "space": 0,
+      "room": 115974
+    },
+    {
+      "event": "end",
+      "tick": 231326,
+      "result": "failed",
+      "detail": "indoor admission is disabled",
+      "space": 0
+    }
+  ]
+}

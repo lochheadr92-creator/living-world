@@ -1,0 +1,22 @@
+{
+  "seed": "aspen",
+  "tick": 231029,
+  "arm": "native",
+  "hash": "243d5e61",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 231029,
+      "room": 115974,
+      "memory": 230848,
+      "goal": "to bring grain to Cole II"
+    },
+    {
+      "event": "end",
+      "tick": 231029,
+      "result": "failed",
+      "detail": "they are inside a different space",
+      "space": 0
+    }
+  ]
+}

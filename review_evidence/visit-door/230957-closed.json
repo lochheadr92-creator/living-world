@@ -1,0 +1,39 @@
+{
+  "seed": "aspen",
+  "tick": 230957,
+  "arm": "closed",
+  "hash": "34234018",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 230957,
+      "room": 148968,
+      "memory": 230796,
+      "goal": "to bring fruit to Vik II"
+    },
+    {
+      "event": "door",
+      "tick": 230992,
+      "reason": "indoor admission is disabled",
+      "space": 0,
+      "room": 148968
+    },
+    {
+      "event": "end",
+      "tick": 230992,
+      "result": "failed",
+      "detail": "indoor admission is disabled",
+      "space": 0
+    },
+    {
+      "event": "held",
+      "tick": 230993,
+      "memory": 230796
+    },
+    {
+      "event": "held",
+      "tick": 231064,
+      "memory": 230796
+    }
+  ]
+}

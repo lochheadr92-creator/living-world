@@ -1,0 +1,23 @@
+{
+  "seed": "aspen",
+  "tick": 231102,
+  "arm": "closed",
+  "hash": "f7e29451",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 231102,
+      "room": 148968,
+      "memory": 230796,
+      "goal": "to bring fruit to Vik II"
+    },
+    {
+      "event": "end",
+      "tick": 231141,
+      "result": "success",
+      "detail": "done",
+      "outcome": "helped",
+      "space": 0
+    }
+  ]
+}
