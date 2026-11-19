@@ -12,6 +12,11 @@ export const FARM_SPECIES = {
   goat: { gestation: days(150), mature: days(210), recovery: days(90), litter: 2, meat: 3, feed: .7 },
   sheep: { gestation: days(150), mature: days(240), recovery: days(90), litter: 2, meat: 4, feed: .8 },
 } as const;
+export function adultMeatPortions(w: World, species: FarmSpecies): number {
+  const portions = FARM_SPECIES[species].meat;
+  return runsRulesVersion(w, 263) ? portions * 4 : portions;
+}
+
 export function breedingSeason(w:World,species:FarmSpecies){
   if(species!=='goat'&&species!=='sheep')return true;
   return w.tick%TICKS_PER_YEAR>=TICKS_PER_YEAR/2;

@@ -1,5 +1,5 @@
 import type {Activity,Animal,CarcassPart,Person,Pile,World} from './types';
-import { farmEnabled, FARM_SPECIES, speciesOf, maturity } from './farm_species';
+import { adultMeatPortions, farmEnabled, FARM_SPECIES, speciesOf, maturity } from './farm_species';
 import {keepsWolfSkin,takeWolfSkin,wolfSkinWorth} from './wolf_skin';
 import {newActivity,registerHandler} from './activities';
 import {addItem,ledgerConsume,ledgerCreate,ledgerSpoil,weightOf} from './economy';
@@ -27,7 +27,7 @@ export function makeCarcass(w:World,animal:Animal,killer:Person|undefined,witnes
  if(!hasCarcasses(w)||!(animal.type==='deer'||farmEnabled(w)&&!!animal.sheep||animal.type==='sheep'&&runsRulesVersion(w,129)||animal.type==='wolf'&&runsRulesVersion(w,239))||animal.health<=0||w.byId.get(animal.id)!==animal||!w.animals.includes(animal))return null;
  const growth=animal.sheep?Math.min(1,animal.sheep.growth/maturity(w,animal)):1;
  // rules 239 (wolf_fight.ts): a wolf killed with a spear leaves two meat and a hide
- const initial=animal.type==='wolf'?{meat:2,hide:1,fat:0}:{meat:Math.floor((farmEnabled(w)&&animal.sheep?FARM_SPECIES[speciesOf(animal)].meat:4)*growth),hide:growth>=1&&animal.type!=='chicken'?1:0,fat:growth>=.5?1:0};
+ const initial=animal.type==='wolf'?{meat:2,hide:1,fat:0}:{meat:Math.floor((farmEnabled(w)&&animal.sheep?adultMeatPortions(w,speciesOf(animal)):4)*growth),hide:growth>=1&&animal.type!=='chicken'?1:0,fat:growth>=.5?1:0};
  const body:Pile={ent:'pile',id:newId(w),x:Math.floor(animal.x),y:Math.floor(animal.y),items:{},since:w.tick,note:'A '+animal.type+' body awaiting paid butchery',carcass:{animalId:animal.id,species:animal.type,hhId:ownerHh,initial:{...initial},remaining:{...initial},recovered:zero(),lost:zero(),work:zero(),claim:null,emptySince:Object.values(initial).some(n=>n>0)?null:w.tick}};
  if(animal.sheep?.wool)ledgerSpoil(w,'wool',animal.sheep.wool,'unshorn wool lost with sheep');
  removeAnimal(w,animal);registerGeneric(w,body);
@@ -117,7 +117,7 @@ export function validateCarcasses(w:World):void{
    if(species!==undefined&&(!runsRulesVersion(w,262)||!b.carcassParts||!Object.hasOwn(FARM_SPECIES,species)))throw Error('invalid livestock carcass observation');
    if(b.carcassParts===undefined)continue;
    // Older farm saves remember quantities but omit the species.
-   const maxMeat=species?FARM_SPECIES[species].meat:farmEnabled(w)?FARM_SPECIES.cow.meat:4;
+   const maxMeat=species?adultMeatPortions(w,species):farmEnabled(w)?adultMeatPortions(w,'cow'):4;
    if(!hasCarcasses(w)||b.kind!=='pile'||b.state!=='carcass'||!b.carcassParts||
       Object.entries(b.carcassParts).some(([k,n])=>!PARTS.includes(k as CarcassPart)||!integer(n)||n>(k==='meat'?maxMeat:1)))throw Error('invalid carcass observation');
   }
@@ -131,7 +131,7 @@ export function validateCarcasses(w:World):void{
   if(!hasCarcasses(w)||!(c.species==='deer'||farmEnabled(w)&&Object.hasOwn(FARM_SPECIES,c.species)||c.species==='sheep'&&runsRulesVersion(w,129)||c.species==='wolf'&&runsRulesVersion(w,239))||!integer(c.animalId)||c.animalId<=0||origins.has(c.animalId)||w.animals.some(a=>a.id===c.animalId)||!integer(c.hhId)||!integer(b.since)||b.since>w.tick||b.mealFood||b.estate||Object.keys(b.items).length)bad();
   origins.add(c.animalId);
   for(const field of [c.initial,c.remaining,c.recovered,c.lost,c.work])if(!field||Object.keys(field).length!==3||PARTS.some(k=>!integer(field[k])))bad();
-  if(c.species==='deer'?(c.initial.meat!==4||c.initial.hide!==1||c.initial.fat!==1):c.species==='wolf'?(c.initial.meat!==2||c.initial.hide!==1||c.initial.fat!==0):(c.initial.meat>(farmEnabled(w)?FARM_SPECIES[c.species].meat:4)||c.initial.hide>1||c.initial.fat>1))bad();
+  if(c.species==='deer'?(c.initial.meat!==4||c.initial.hide!==1||c.initial.fat!==1):c.species==='wolf'?(c.initial.meat!==2||c.initial.hide!==1||c.initial.fat!==0):(c.initial.meat>(farmEnabled(w)?adultMeatPortions(w,c.species):4)||c.initial.hide>1||c.initial.fat>1))bad();
   for(const k of PARTS)if(c.initial[k]!==c.remaining[k]+c.recovered[k]+c.lost[k]||c.work[k]>=CARCASS_WORK||(!c.remaining[k]&&c.work[k]))bad();
   const empty=PARTS.every(k=>c.remaining[k]===0);
   if(empty?(c.emptySince===null||!integer(c.emptySince)||c.emptySince<b.since||c.emptySince>w.tick):c.emptySince!==null)bad();

@@ -184,3 +184,23 @@ it('keeps meat on a naturally dead cow until discovered and cut, with a valid sa
  expect(body.carcass!.remaining.meat+p.inv.meat!).toBe(12);
  expect(conservationReport(w).ok).toBe(true);
 });
+
+it.each([
+  ['cow',12,48],['pig',7,28],['chicken',1,4],['goat',3,12],['sheep',4,16],
+] as const)('recovers age-scaled portions from %s at both rules versions', (species, previous, raised)=>{
+  for(const [version,adultYield] of [[262,previous],[263,raised]]){
+    const s=scene(),w=s.w;
+    w.settings.rulesVersion=version;
+    const p=addPerson(s,'Ada',40.5,40.5,{});
+    const adultAnimal=makeFarmAnimal(w,41,40,species,'f');
+    const juvenile=makeFarmAnimal(w,42,40,species,'m');
+    juvenile.sheep!.growth=Math.floor(FARM_SPECIES[species].mature/2);
+    done(s);
+    const adultBody=makeCarcass(w,adultAnimal,p)!;
+    const youngBody=makeCarcass(w,juvenile,p)!;
+    expect(adultBody.carcass!.remaining.meat).toBe(adultYield);
+    expect(youngBody.carcass!.remaining.meat).toBe(Math.floor(adultYield*juvenile.sheep!.growth/FARM_SPECIES[species].mature));
+    expect(conservationReport(w).ok).toBe(true);
+    expect(hashWorld(deserializeWorld(serializeWorld(w,5)))).toBe(hashWorld(w));
+  }
+});
