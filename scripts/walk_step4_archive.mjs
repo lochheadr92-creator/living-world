@@ -3,9 +3,11 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const input = 'review_evidence/withdraw-baseline-20261119/fix-runs';
 const output = 'review_evidence/walk-step4-20261119';
 const result = {};
+const returns = {};
 const dist = (a,b) => Math.hypot(a[0]-b[0],a[1]-b[1]);
 for (const seed of ['aspen','gen-4','river']) for (const day of [48,96]) {
   const id = seed+'-day'+day;
+  returns[id] = [];
   const control = JSON.parse(readFileSync(input+'/'+id+'-on.json','utf8'));
   if (control.rulesVersion !== 257 || control.benchOff || control.nudge || control.days !== 13 ||
       !control.arrivals || !control.conservation.ok) throw Error('Unexpected control '+id);
@@ -66,6 +68,10 @@ for (const seed of ['aspen','gen-4','river']) for (const day of [48,96]) {
             storeChanges.withThirdWithdrawal++;
             if (first.targetId !== second.targetId && first.targetId === last.targetId) {
               storeChanges.returnedToFirstStore++;
+              returns[id].push([first,second,last].map(r=>({
+                act:r.id, person:r.person, store:r.targetId, type:r.buildingType, tick:r.startTick,
+                goods:Object.keys(r.wanted).sort().join(' + '), goal:r.goal
+              })));
               if (!exampleReturn && sameGoodsAndGoal && last.goal === first.goal) {
                 exampleReturn = { person:t.person, stops:[first,second,last].map(r => ({
                   tick:r.startTick, store:r.targetId, type:r.buildingType, wanted:r.wanted, goal:r.goal,
@@ -91,4 +97,5 @@ for (const seed of ['aspen','gen-4','river']) for (const day of [48,96]) {
   }
   result[id] = { adultTicks,dropped,droppedTicks,generic,linked,estimated,low,high,unknownTicks,byReason,byPair,storeChanges,progress,exampleReturn };
 }
-writeFileSync(output+'/full-window.json',JSON.stringify(result,null,1)+'\n');
+if (process.argv[2]==='--returns') writeFileSync(process.argv[3],JSON.stringify(returns));
+else writeFileSync(output+'/full-window.json',JSON.stringify(result,null,1)+'\n');
