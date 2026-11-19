@@ -58,6 +58,7 @@ export function smallTalk(world: World, a: number, b: number, atFire: boolean, c
 }
 
 export const ITEM_PHRASE: Record<ItemKind, string> = {
+  milk:'milk', cheese:'cheese', egg:'an egg', pork:'pork', bacon:'bacon', leather:'leather', stock_feed:'grain feed', hay:'hay', gloves:'gloves', shoes:'shoes',
   rod:'a fishing rod',
   toy:'a toy',
   beer:'a brewed drink',

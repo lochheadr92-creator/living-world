@@ -1,8 +1,9 @@
+import { farmEnabled, speciesOf, maturity } from './farm_species';
 import {rememberGrave} from './personal_places';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
 import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth } from './ecology';
 import { deathStory, hasLocalDeath } from './death_knowledge';
-import { SOURCE_REGROW } from './constants';
+import { SOURCE_REGROW, DAY } from './constants';
 import { wildPlenty } from './plenty';
 import {correctSourceExperience} from './source_learning';
 import { checkAccount } from './checked_accounts';
@@ -100,7 +101,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       return blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
     }
     case 'animal': {
-      if(e.sheep){const s=e.sheep,b=blank(e.id,'livestock',e.x,e.y,tick);b.sheep={hhId:s.hhId,sex:s.sex,adult:s.growth>=19200,hungry:s.food<=22,thirsty:s.water<=1,wool:s.wool,tether:s.tether?.condition??0,pregnant:!!s.pregnancy,breedAfter:s.breedAfter};return b;}
+      if(e.sheep){const s=e.sheep,b=blank(e.id,'livestock',e.x,e.y,tick);b.sheep={hhId:s.hhId,sex:s.sex,...(farmEnabled(world)?{species:speciesOf(e), housing:s.housing, ready:(s.produceWork??0)>=DAY&&(e.type==='chicken'||(s.lactatingUntil??0)>tick)}:{}),adult:s.growth>=maturity(world,e),hungry:s.food<=22,thirsty:s.water<=1,wool:s.wool,tether:s.tether?.condition??0,pregnant:!!s.pregnancy,breedAfter:s.breedAfter};return b;}
       if(e.type==='deer'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,127)){const b=blank(e.id,'prey',e.x,e.y,tick);b.amount=1;b.max=1;return b;}
       const b = blank(e.id, 'danger', e.x, e.y, tick);
       b.amount = 1;

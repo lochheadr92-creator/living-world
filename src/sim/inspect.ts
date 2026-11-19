@@ -19,6 +19,7 @@ import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory, decisionHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
+import { farmEnabled,speciesOf,FARM_SPECIES,homeForAnimal } from './farm_species';
 import { BUILD_DEF, DAY, DEPOSIT_TYPES, isHomeType, isSolidHome } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
@@ -298,7 +299,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'person':
       return e.name;
     case 'animal':
-      return e.type === 'sheep' ? 'Sheep' : e.type === 'deer' ? 'Deer' : 'Wolf';
+      return e.sheep ? e.type[0].toUpperCase()+e.type.slice(1) : e.type === 'deer' ? 'Deer' : 'Wolf';
     case 'source':
       return SOURCE_NOUN[e.type][0].toUpperCase() + SOURCE_NOUN[e.type].slice(1);
     case 'building':
@@ -928,6 +929,19 @@ export function describeEntity(world: World, id: number): EntityView | null {
       return { kind: 'grave', ...base, title: `Grave of ${e.name}`, subtitle: `Died ${agoText(world, e.died)}, aged ${e.age}`, rows, bars:last?(Object.keys(last.needs) as NeedKey[]).map(k=>({label:`${NEED_LABEL[k]} at death`,value:last.needs[k],max:100})):[], notes:last?['Recorded before death cleanup; carried goods shown here are historical, not goods at the grave.',...last.blocked.map(s=>'Could not: '+s),...last.memories]:['No detailed final account retained for this person.'], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     }
     case 'animal':
+      if(e.sheep && farmEnabled(world)){
+        const s=e.sheep, species=speciesOf(e), profile=FARM_SPECIES[species], home=homeForAnimal(world,e);
+        const rows:[string,string][]=[
+          ['Sex',s.sex==='f'?'Female':'Male'],['Age',s.growth>=profile.mature?'Adult':'Young'],
+          ['Household',s.hhId?householdById(world,s.hhId)?.name??String(s.hhId):'Unowned'],
+          ['Housing',home?BUILD_DEF[home.type].label:s.tether?'Tether':'Free-ranging'],
+          ['Parents',s.parents.length?s.parents.join(' and '):'Founder'],
+          ['Feed',s.food.toFixed(1)+' / 44'],['Water',s.water.toFixed(2)+' / 2'],
+          ['Breeding',s.pregnancy?Math.floor(100*s.pregnancy.work/profile.gestation)+'% through '+(species==='chicken'?'incubation':'gestation'):'No young on the way']];
+        if(species==='sheep')rows.push(['Fleeces ready',String(s.wool)]);
+        if(s.sex==='f'&&(species==='chicken'||s.lactatingUntil))rows.push([species==='chicken'?'Egg':'Milk',(s.produceWork??0)>=2400?'Ready to collect':'None ready']);
+        return {kind:'animal',...base,title:species[0].toUpperCase()+species.slice(1),subtitle:'Livestock',rows,bars:[{label:'Health',value:e.health,max:100}],notes:[],position:{x:e.x,y:e.y}};
+      }
       if(e.sheep){const s=e.sheep;return {kind:'animal',...base,title:s.growth>=19200?'Sheep':'Lamb',subtitle:s.hhId?'Kept animal':'Unowned grazing animal',rows:[['Origin',s.origin==='founder'?'Founding wild flock':`Born to #${s.parents.join(' and #')}`],['Belongs to',s.hhId?householdById(world,s.hhId)?.name??`household #${s.hhId}`:'Nobody'],['Containment',s.tether?`Tethered at (${s.tether.x.toFixed(1)}, ${s.tether.y.toFixed(1)}); ${Math.round(s.tether.condition)}% condition`:'Untethered'],['Stored nourishment',`${s.food.toFixed(1)} / 44; ${world.weather.temp<0?33:22} used per day`],['Water',`${s.water.toFixed(2)} / 2; 1 used per day`],['Wool',`${s.wool} ready; ${Math.floor(s.woolWork/48)}% toward next fleece`],['Maturity',`${Math.floor(s.growth/192)}%`],['Breeding',s.pregnancy?`${Math.floor(s.pregnancy.work/96)}% fed gestation`:'Not pregnant']],bars:[{label:'Health',value:e.health,max:100,tone:e.health<40?'warn':'ok'}],notes:['Feeding, watering, capture, shearing and slaughter require a nearby keeper and paid work.','Grazing and drinking remove real local resources. Hungry, thirsty sheep deteriorate. Newborns need their own paid containment.'],position:{x:e.x,y:e.y}};}
       return {
         kind: 'animal',

@@ -1,3 +1,4 @@
+import {farmEnabled,housingCapacity} from './farm_species';
 import { noteToyMade, takeToyWood } from './toys';
 import { toolRecipe } from './wooden_spear';
 import { hasBuilderFetches, noteRanOut, waitForMaterials } from './builder_fetches';
@@ -325,6 +326,10 @@ export function openSitesNear(world: World, near?: Spot): number {
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  if(housingCapacity(type)){
+    if(!farmEnabled(world))return 'livestock housing is unavailable under these rules';
+    if(world.buildings.some(b=>b.hhId===hh&&b.type===type)||world.sites.some(s=>s.hhId===hh&&s.type===type))return 'the household already has that livestock housing';
+  }
   if(type==='brewery'&&!hasBrewing(world))return 'brewing is unavailable in these rules';
   {const block=workshopSiteProblem(world,type,depositId,at?.x??NaN,at?.y??NaN);if(block)return block;}
   if(type==='cellar'){const why=cellarSiteConflict(world,hh);if(why)return why;}

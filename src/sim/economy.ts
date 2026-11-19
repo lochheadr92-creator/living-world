@@ -7,7 +7,7 @@ import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
 import type { FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, World } from './types';
 
-const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', 'milk', 'cheese', 'egg', 'pork', 'bacon'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
 /** `world` is given wherever one is to hand: what a food is worth may depend on its rules (bread_feeds.ts nutritionOf). */

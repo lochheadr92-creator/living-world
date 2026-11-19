@@ -32,10 +32,16 @@ export function setPlenty(enabled: boolean, part?: PlentyPart): void {
   else for (const k of PLENTY_PARTS) on[k] = enabled;
 }
 
+let grainBoost = true;
+export const grainBoostOn = () => grainBoost;
+export const setGrainBoost = (enabled: boolean) => { grainBoost = enabled; };
+export const grainFeedEnabled = (world: World) => world.settings.dynamics === 'rich' && runsRulesVersion(world, 261);
+export const moreGrain = (world: World) => grainBoost && grainFeedEnabled(world);
+
 const runs = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, 226);
 const WILD_FOOD = new Set(['berry_bush', 'fruit_tree', 'fish_spot', 'wild_grain']);
 
 /** how many times as fast this kind of source comes back (1 for anything that is not wild food) */
-export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? wildGrowFactor(world, PLENTY_WILD) : 1) // rules 254 (grow_more.ts);
+export const wildPlenty = (world: World, type: string): number => (on.wild && WILD_FOOD.has(type) && runs(world) ? wildGrowFactor(world, PLENTY_WILD) * (type === 'wild_grain' && moreGrain(world) ? 1.5 : 1) : 1) // rules 254 (grow_more.ts);
 /** how many times the grain a ripened plot carries */
 export const cropPlenty = (world: World): number => (on.crops && runs(world) ? cropGrowFactor(world, PLENTY_CROPS) : 1) // rules 254 (grow_more.ts);

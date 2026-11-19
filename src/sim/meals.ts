@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import {hasBrewing,layMealDrinks,sipMealDrink} from './brewing';
 import { nutritionOf } from './bread_feeds';
 import { LARDER_FETCH_WEIGHT, hasMealLarder, mealWindowOpen } from './company';
@@ -715,7 +716,7 @@ registerHandler('host_meal', {
         return 'not enough food to lay a table';
       }
       let left = need + Math.min(1, have - need);
-      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
       for (const k of order) {
         const n = Math.min(left, p.inv[k] ?? 0);
         if (n > 0) {

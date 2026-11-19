@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import {recipeAvailable} from './recipes';
 import {toolRecipe} from './wooden_spear';
 import {isBodyPart,knownCarcassUnits} from './carcass_supply';
@@ -39,7 +40,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   if(shelf+held>=quantity)return node.id;
   if(item!=='cart'&&isBodyPart(item)&&knownCarcassUnits(ctx,item)>=quantity-shelf-held){node.method='supply';node.estimatedTicks=CARCASS_WORK*(quantity-shelf-held);return node.id;}
   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.
-  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'].includes(item)){
+  if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS].includes(item)){
    const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&knownTextileStock(world,p,b,item)>=quantity&&
     (b.btype==='storehouse'||(b.hh===p.hhId&&isHomeType(b.btype))||!!b.btype&&facilitiesOf(ctx,b.btype as BuildingType).some(f=>f.b.id===b.id)));
    if(stored){node.method='supply';return node.id;}

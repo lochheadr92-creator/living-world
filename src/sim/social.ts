@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import { giveToy } from './toys';
 import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
@@ -106,7 +107,7 @@ export function personOf(world: World, id: number): Person | null {
   return e && e.ent === 'person' && e.alive ? e : null;
 }
 
-const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
 
 export function isFood(k: ItemKind): boolean {
   return FOODS.includes(k);
@@ -194,6 +195,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
+  milk:2, cheese:4, egg:1, pork:3, bacon:4, leather:3, stock_feed:1, hay:1, gloves:5, shoes:6,
   rod:5,
   toy:1,
   beer:2,
@@ -1731,7 +1733,7 @@ export function flushDelayedBubbles(world: World): void {
 function phaseNews(world: World, S: Person, L: Person): void {
   if(hasExchangeJourneys(world)){
     const goods:Items={};
-    for(const k of ['wood','stone','berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
+    for(const k of ['wood','stone','berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
     tellTradeLead(world,S,L,goods);
   }
   shareConcerns(world, S, L);

@@ -86,6 +86,7 @@ function toolTask(s: Source,world:World): ToolTask | null {
       return 'mine';
     case 'berry_bush':
     case 'fruit_tree':
+    case 'hay_meadow':
     case 'wild_grain':
       return 'forage';
     default:

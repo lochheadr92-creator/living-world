@@ -3,6 +3,7 @@ import type { ActivityKind, BeliefKind, SourceType } from './types';
 export const SOURCE_NOUN: Record<SourceType, string> = {
   berry_bush: 'berry bush',
   fruit_tree: 'fruit tree',
+  hay_meadow:'hay meadow',
   wild_grain: 'wild grain',
   fish_spot: 'fishing spot',
   tree: 'tree',
@@ -15,6 +16,7 @@ export const SOURCE_NOUN: Record<SourceType, string> = {
 export const SOURCE_VERB: Record<SourceType, string> = {
   berry_bush: 'Picking berries',
   fruit_tree: 'Picking fruit',
+  hay_meadow:'Cutting grass for hay',
   wild_grain: 'Gathering wild grain',
   fish_spot: 'Fishing',
   tree: 'Chopping wood',
@@ -27,7 +29,7 @@ export const SOURCE_VERB: Record<SourceType, string> = {
 export const FOOD_VALUE: Record<string, number> = { berry_bush: 12, fruit_tree: 16, wild_grain: 22, fish_spot: 28 };
 
 export const BELIEF_NOUN: Record<BeliefKind, string> = {
-  livestock:'known sheep',
+  livestock:'known livestock',
   prey:'dated deer sightings',
   flood: 'flood-affected ground',
   berry_bush: 'berry bush',
@@ -35,6 +37,7 @@ export const BELIEF_NOUN: Record<BeliefKind, string> = {
   tree: 'tree',
   rock: 'rock outcrop',
   fish_spot: 'fishing spot',
+  hay_meadow:'hay meadow',
   wild_grain: 'wild grain',
   clay_pit: 'clay pit',
   ore_vein: 'ore vein',

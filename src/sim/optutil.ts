@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import {rememberedDanger} from './personal_places';
 import { isThreat } from './wildlife';
 import { rememberedDry, rememberedWaterCost } from './water_access';
@@ -104,7 +105,7 @@ export interface Ctx {
   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
 }
 
-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
 
 export function foodCount(inv: Person['inv']): number {
   let n = 0;

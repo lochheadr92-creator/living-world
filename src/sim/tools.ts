@@ -114,7 +114,7 @@ export function mintTool(
     madeTick: world.tick,
     maker,
   };
-  if(kind==='garment'||kind==='blanket'||kind==='bedding')t.textile={wet:0,equipped:false};
+  if(kind==='garment'||kind==='blanket'||kind==='bedding'||kind==='gloves'||kind==='shoes')t.textile={wet:0,equipped:false};
   world.tools.push(t);
   addItem(items, kind, 1);
   if (ledger) ledgerCreate(world, kind, 1, reason);

@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import { hasWorkshopErrand } from './workshop_errand';
 import {brewDemand} from './brewing';
 import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, binsWorth, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
@@ -896,7 +897,7 @@ function optGranaryStore(ctx: Ctx): void {
   const keep = grainInPack(world, winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3); // rules 243 (grain_kept.ts): one for the day
   const items: Items = {};
   let n = 0;
-  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]) {
+  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
     const give = k === 'grain'||k==='rendered_fat'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
     if (give >= (winter ? 1 : 2)) {
@@ -1335,7 +1336,7 @@ function preservationOptions(ctx:Ctx):void {
     // Collection and resumption do not require another raw surplus.
     const goods:Items={};
     let room=carryCap(ctx.world,ctx.p)-weightOf(ctx.p.inv),waiting=0;
-    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const){
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as const){
       const stock=f.b.items?.[k]??0;waiting+=stock;
       const n=Math.min(2,stock,Math.max(0,Math.floor(room/WEIGHT[k])));
       if(n>0){goods[k]=n;room-=n*WEIGHT[k];}
@@ -1373,7 +1374,7 @@ export function productionOptions(ctx: Ctx): void {
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
     for(const b of known.slice(0,2)){
       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
-      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const){
+      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] as const){
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }

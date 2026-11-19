@@ -99,6 +99,7 @@ export class Scenery {
         blit(ctx, outcropSprite(this.cache, s.variant, stageOf(s.amount, s.max)), x, y + 2);
         break;
       }
+      case 'hay_meadow':
       case 'wild_grain': {
         const n = s.amount <= 0 ? 3 : 4 + s.amount;
         for (let i = 0; i < n; i++) {
@@ -106,7 +107,7 @@ export class Scenery {
           const oy = (hashUnit(s.x, s.y, 220 + i) - 0.5) * 14 + 2;
           const h = s.amount <= 0 ? 6 : 15 + hashUnit(s.x, s.y, 240 + i) * 7;
           const sway = Math.sin(simT * 1.6 + i + s.x) * (1 + wind * 3.5);
-          ctx.strokeStyle = s.amount <= 0 ? '#9ab36a' : '#c9b25a';
+          ctx.strokeStyle = s.amount <= 0 ? '#9ab36a' : s.type==='hay_meadow'?'#84a25b':'#c9b25a';
           ctx.lineWidth = 1.1;
           ctx.beginPath();
           ctx.moveTo(x + ox, y + oy);
