@@ -1,0 +1,9040 @@
+{
+ "start": 230400,
+ "initial": "029a8363",
+ "end": 232800,
+ "endHash": "e66b885f",
+ "conservation": true,
+ "rows": [
+  {
+   "id": 1097,
+   "name": "Theo",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 13859,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 6659
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 13,
+   "selected": 4,
+   "outcomes": {
+    "success": 4
+   },
+   "actions": {
+    "harvest": 3,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1098,
+   "name": "Wen",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 7806,
+    "progress": 0.5,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 606
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 25,
+   "offered": 16,
+   "selected": 4,
+   "outcomes": {
+    "failed": 3
+   },
+   "actions": {
+    "socialize": 4
+   },
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 1101,
+   "name": "Eli",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 447,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 1102,
+   "name": "Hugo",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 15994,
+    "progress": 0.4,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 8794
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 1103,
+   "name": "Ben",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 36341,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 1106,
+   "name": "Emre",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 182,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 12,
+   "selected": 3,
+   "outcomes": {
+    "success": 3
+   },
+   "actions": {
+    "deposit": 3
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1107,
+   "name": "Yara",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 129,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 1110,
+   "name": "Yusuf",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 8370,
+    "progress": 0.5,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 1170
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 17,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 1114,
+   "name": "Bea",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 20158,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 958
+     },
+     {
+      "kind": "home",
+      "done": 12958
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 7,
+   "selected": 4,
+   "outcomes": {
+    "success": 2,
+    "failed": 1
+   },
+   "actions": {
+    "harvest": 2,
+    "gather": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1115,
+   "name": "Milo",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 905,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 17,
+   "selected": 10,
+   "outcomes": {
+    "failed": 5,
+    "success": 2,
+    "interrupted": 2
+   },
+   "actions": {
+    "harvest": 8,
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1118,
+   "name": "Brigid",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 7946,
+    "progress": 0.6,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 746
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 10,
+   "selected": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "actions": {
+    "give": 1
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 1119,
+   "name": "Dax",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 693,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 21,
+   "selected": 5,
+   "outcomes": {
+    "success": 3,
+    "failed": 2
+   },
+   "actions": {
+    "deposit": 3,
+    "harvest": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1120,
+   "name": "Leo",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 215440,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 208240
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 7,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1123,
+   "name": "Finn",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 13681,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 6481
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1126,
+   "name": "Viktor",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 322,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 27,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1128,
+   "name": "Una",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 20616,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 216
+     },
+     {
+      "kind": "home",
+      "done": 13416
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 20,
+   "selected": 3,
+   "outcomes": {
+    "failed": 1,
+    "success": 2
+   },
+   "actions": {
+    "harvest": 2,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1129,
+   "name": "Ulric",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 163,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 26,
+   "offered": 26,
+   "selected": 6,
+   "outcomes": {
+    "interrupted": 1,
+    "failed": 1,
+    "success": 4
+   },
+   "actions": {
+    "harvest": 3,
+    "deposit": 3
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1133,
+   "name": "Lia",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 39551,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 1151
+     },
+     {
+      "kind": "family",
+      "done": 32351
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.06,
+   "peak": 0.08,
+   "low": 0,
+   "up": 1,
+   "down": 1,
+   "done": 0,
+   "decisions": 29,
+   "offered": 23,
+   "selected": 10,
+   "outcomes": {
+    "success": 10
+   },
+   "actions": {
+    "deposit": 8,
+    "harvest": 1,
+    "gather": 1
+   },
+   "liveEnd": 0.05555555555555555,
+   "checkpoints": [
+    [
+     231552,
+     0.08
+    ],
+    [
+     232752,
+     0.06
+    ]
+   ]
+  },
+  {
+   "id": 1134,
+   "name": "Rafe",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 39498,
+    "progress": 0.4,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "stocked",
+      "done": 17898
+     },
+     {
+      "kind": "family",
+      "done": 32298
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 5,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 1136,
+   "name": "Ivo",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 992,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 1137,
+   "name": "Pia",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 20139,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 12939
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 30,
+   "offered": 29,
+   "selected": 20,
+   "outcomes": {
+    "success": 5,
+    "failed": 13,
+    "interrupted": 2
+   },
+   "actions": {
+    "harvest": 18,
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1139,
+   "name": "Hal",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 30833,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 23633
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 15,
+   "selected": 5,
+   "outcomes": {
+    "success": 2,
+    "failed": 2
+   },
+   "actions": {
+    "deposit": 1,
+    "gather": 3,
+    "harvest": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 1142,
+   "name": "Wilma",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 674,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 3747,
+   "name": "Lena",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 24609,
+    "progress": 0.2,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 17409
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 6559,
+   "name": "Quinn",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 21973,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 14773
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 7,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 8602,
+   "name": "Sofia",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 159694,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 138094
+     },
+     {
+      "kind": "home",
+      "done": 152494
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 8,
+   "selected": 4,
+   "outcomes": {
+    "failed": 3,
+    "success": 1
+   },
+   "actions": {
+    "harvest": 3,
+    "gather": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 8603,
+   "name": "Corin",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 20441,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 17,
+   "selected": 12,
+   "outcomes": {
+    "success": 9,
+    "interrupted": 1,
+    "failed": 1,
+    "partial": 1
+   },
+   "actions": {
+    "harvest": 6,
+    "deposit": 2,
+    "gather": 4
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 11743,
+   "name": "Cass",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 28021,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 14616,
+   "name": "Elin",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 34152,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 17299,
+   "name": "Nora",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 40753,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 16,
+   "selected": 7,
+   "outcomes": {
+    "success": 4,
+    "interrupted": 2
+   },
+   "actions": {
+    "deposit": 6,
+    "gather": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 17300,
+   "name": "Nico",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 47900,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 40700
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 15,
+   "selected": 4,
+   "outcomes": {
+    "success": 2,
+    "partial": 1,
+    "interrupted": 1
+   },
+   "actions": {
+    "deposit": 2,
+    "gather": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 21045,
+   "name": "Hana",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 48615,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 3,
+   "selected": 3,
+   "outcomes": {
+    "failed": 2,
+    "success": 1
+   },
+   "actions": {
+    "give": 3
+   },
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 21046,
+   "name": "Kai",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 48562,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 1,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "give": 1
+   },
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 23648,
+   "name": "Dara",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 96656,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 53456
+     },
+     {
+      "kind": "home",
+      "done": 89456
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 20,
+   "selected": 2,
+   "outcomes": {
+    "partial": 1,
+    "success": 1
+   },
+   "actions": {
+    "gather": 1,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 23649,
+   "name": "Cole",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 54603,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 22,
+   "selected": 5,
+   "outcomes": {
+    "success": 3,
+    "interrupted": 2
+   },
+   "actions": {
+    "deposit": 4,
+    "gather": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 26659,
+   "name": "Kira",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 59473,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 16,
+   "selected": 2,
+   "outcomes": {
+    "success": 2
+   },
+   "actions": {
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 29556,
+   "name": "Tomas",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 65532,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 8,
+   "selected": 2,
+   "outcomes": {
+    "interrupted": 2
+   },
+   "actions": {
+    "deposit": 1,
+    "gather": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 32373,
+   "name": "Hilde",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 69831,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.02,
+   "peak": 0.02,
+   "low": 0,
+   "up": 1,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 18,
+   "selected": 4,
+   "outcomes": {
+    "failed": 1,
+    "success": 3
+   },
+   "actions": {
+    "deposit": 4
+   },
+   "liveEnd": 0.020833333333333332,
+   "checkpoints": [
+    [
+     231832,
+     0.02
+    ]
+   ]
+  },
+  {
+   "id": 32374,
+   "name": "Lars",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 92578,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 69778
+     },
+     {
+      "kind": "home",
+      "done": 85378
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.02,
+   "peak": 0.02,
+   "low": 0,
+   "up": 1,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 19,
+   "selected": 7,
+   "outcomes": {
+    "success": 4,
+    "interrupted": 3
+   },
+   "actions": {
+    "deposit": 4,
+    "gather": 3
+   },
+   "liveEnd": 0.020833333333333332,
+   "checkpoints": [
+    [
+     231779,
+     0.02
+    ]
+   ]
+  },
+  {
+   "id": 35163,
+   "name": "Clara",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 74361,
+    "progress": 0.6,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 14,
+   "selected": 3,
+   "outcomes": {
+    "success": 2
+   },
+   "actions": {
+    "give": 3
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 35164,
+   "name": "Rolf",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 97108,
+    "progress": 0.6,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 89908
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 9,
+   "selected": 5,
+   "outcomes": {
+    "success": 3,
+    "failed": 1
+   },
+   "actions": {
+    "give": 5
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 39709,
+   "name": "Xavi",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 102223,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 95023
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.08,
+   "peak": 0.08,
+   "low": 0,
+   "up": 1,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 3,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": [
+    [
+     230624,
+     0.08
+    ]
+   ]
+  },
+  {
+   "id": 42843,
+   "name": "Juno",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 87321,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 11,
+   "selected": 2,
+   "outcomes": {
+    "success": 2
+   },
+   "actions": {
+    "harvest": 1,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 42844,
+   "name": "Dov",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 87268,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 3,
+   "selected": 3,
+   "outcomes": {
+    "success": 3
+   },
+   "actions": {
+    "give": 3
+   },
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 47425,
+   "name": "Ivy",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 92875,
+    "progress": 0.02,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.02,
+   "last": 0,
+   "peak": 0.02,
+   "low": 0,
+   "up": 0,
+   "down": 1,
+   "done": 0,
+   "decisions": 19,
+   "offered": 16,
+   "selected": 3,
+   "outcomes": {
+    "success": 1,
+    "interrupted": 2
+   },
+   "actions": {
+    "deposit": 3
+   },
+   "liveEnd": 0,
+   "checkpoints": [
+    [
+     230876,
+     0
+    ]
+   ]
+  },
+  {
+   "id": 47426,
+   "name": "Sven",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 100022,
+    "progress": 0.02,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 92822
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.02,
+   "last": 0,
+   "peak": 0.02,
+   "low": 0,
+   "up": 0,
+   "down": 1,
+   "done": 0,
+   "decisions": 18,
+   "offered": 15,
+   "selected": 3,
+   "outcomes": {
+    "partial": 1,
+    "success": 1,
+    "interrupted": 1
+   },
+   "actions": {
+    "gather": 2,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": [
+    [
+     230823,
+     0
+    ]
+   ]
+  },
+  {
+   "id": 50730,
+   "name": "Greta",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 97710,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 14,
+   "offered": 14,
+   "selected": 4,
+   "outcomes": {
+    "interrupted": 3,
+    "success": 1
+   },
+   "actions": {
+    "gather": 2,
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 50731,
+   "name": "Basil",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 104857,
+    "progress": 0.5,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 97657
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 1,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "socialize": 1
+   },
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 53578,
+   "name": "Nell",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 138766,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 101566
+     },
+     {
+      "kind": "home",
+      "done": 131566
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 11,
+   "offered": 7,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 53579,
+   "name": "Tariq",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 108713,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 101513
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 21,
+   "selected": 4,
+   "outcomes": {
+    "interrupted": 3,
+    "success": 1
+   },
+   "actions": {
+    "deposit": 4
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 59679,
+   "name": "Edda",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 109413,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 62537,
+   "name": "Maren",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 133139,
+    "progress": 0.6,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 113939
+     },
+     {
+      "kind": "home",
+      "done": 125939
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 11,
+   "selected": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "actions": {
+    "give": 1
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 62538,
+   "name": "Vik",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 113886,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.02,
+   "peak": 0.1,
+   "low": 0,
+   "up": 1,
+   "down": 1,
+   "done": 0,
+   "decisions": 18,
+   "offered": 18,
+   "selected": 5,
+   "outcomes": {
+    "interrupted": 2,
+    "success": 3
+   },
+   "actions": {
+    "gather": 2,
+    "deposit": 3
+   },
+   "liveEnd": 0.020833333333333332,
+   "checkpoints": [
+    [
+     231487,
+     0.1
+    ],
+    [
+     232687,
+     0.02
+    ]
+   ]
+  },
+  {
+   "id": 65911,
+   "name": "Mona",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 117517,
+    "progress": 0.6,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 18,
+   "selected": 3,
+   "outcomes": {
+    "failed": 2,
+    "success": 1
+   },
+   "actions": {
+    "give": 3
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 65912,
+   "name": "Abel",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 143864,
+    "progress": 0.6,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 117464
+     },
+     {
+      "kind": "home",
+      "done": 136664
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 9,
+   "selected": 6,
+   "outcomes": {
+    "failed": 3,
+    "success": 3
+   },
+   "actions": {
+    "give": 6
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 72927,
+   "name": "Faye",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 152469,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 126069
+     },
+     {
+      "kind": "home",
+      "done": 145269
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.17,
+   "peak": 0.17,
+   "low": 0,
+   "up": 1,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 8,
+   "selected": 3,
+   "outcomes": {
+    "success": 2,
+    "interrupted": 1
+   },
+   "actions": {
+    "deposit": 2,
+    "gather": 1
+   },
+   "liveEnd": 0.16666666666666666,
+   "checkpoints": [
+    [
+     231670,
+     0.17
+    ]
+   ]
+  },
+  {
+   "id": 76332,
+   "name": "Cora",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 129204,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0.08,
+   "peak": 0.17,
+   "low": 0,
+   "up": 1,
+   "down": 1,
+   "done": 0,
+   "decisions": 13,
+   "offered": 10,
+   "selected": 1,
+   "outcomes": {
+    "partial": 1
+   },
+   "actions": {
+    "gather": 1
+   },
+   "liveEnd": 0.08333333333333333,
+   "checkpoints": [
+    [
+     231205,
+     0.17
+    ],
+    [
+     232405,
+     0.08
+    ]
+   ]
+  },
+  {
+   "id": 76333,
+   "name": "Zeke",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 129151,
+    "progress": 0.6,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.6,
+   "last": 0.6,
+   "peak": 0.6,
+   "low": 0.6,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 10,
+   "selected": 2,
+   "outcomes": {
+    "success": 2
+   },
+   "actions": {
+    "give": 2
+   },
+   "liveEnd": 0.6,
+   "checkpoints": []
+  },
+  {
+   "id": 80666,
+   "name": "Tessa",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 162302,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 155102
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 26,
+   "offered": 14,
+   "selected": 2,
+   "outcomes": {
+    "failed": 2
+   },
+   "actions": {
+    "socialize": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 84898,
+   "name": "Zia",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 139606,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 13,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 90661,
+   "name": "Ada",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 146167,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 90662,
+   "name": "Wes",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 164114,
+    "progress": 0.04,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 156914
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.04,
+   "last": 0.04,
+   "peak": 0.04,
+   "low": 0.04,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 11,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "deposit": 1
+   },
+   "liveEnd": 0.041666666666666664,
+   "checkpoints": []
+  },
+  {
+   "id": 95016,
+   "name": "Kaia",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 150552,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 95017,
+   "name": "Uri",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 150499,
+    "progress": 0.5,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 98401,
+   "name": "Ines",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 153547,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 11,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 103874,
+   "name": "Jonas II",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 167078,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 159878
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 7,
+   "selected": 2,
+   "outcomes": {
+    "failed": 1,
+    "success": 1
+   },
+   "actions": {
+    "socialize": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 107223,
+   "name": "Jess",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 209181,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 201981
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 96,
+   "offered": 4,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 107224,
+   "name": "Sven II",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 209128,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "home",
+      "done": 201928
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 146,
+   "offered": 5,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 110522,
+   "name": "Rhea",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 166334,
+    "progress": 0.2,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 20,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 110523,
+   "name": "Hal II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 166281,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 15,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 114474,
+   "name": "Eli II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 170478,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 13,
+   "offered": 9,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 120108,
+   "name": "Isla",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 182676,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 175476
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 125751,
+   "name": "Esme",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 179997,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 23,
+   "offered": 17,
+   "selected": 8,
+   "outcomes": {
+    "failed": 6,
+    "success": 1,
+    "interrupted": 1
+   },
+   "actions": {
+    "harvest": 7,
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 125752,
+   "name": "Gus III",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 179944,
+    "progress": 0.25,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.25,
+   "last": 0.25,
+   "peak": 0.25,
+   "low": 0.25,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 17,
+   "offered": 4,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.25,
+   "checkpoints": []
+  },
+  {
+   "id": 129011,
+   "name": "Alma",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 182417,
+    "progress": 0.25,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.25,
+   "last": 0.25,
+   "peak": 0.25,
+   "low": 0.25,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 9,
+   "selected": 5,
+   "outcomes": {
+    "success": 4,
+    "partial": 1
+   },
+   "actions": {
+    "plan_site": 1,
+    "haul": 3,
+    "build": 1
+   },
+   "liveEnd": 0.25,
+   "checkpoints": []
+  },
+  {
+   "id": 129012,
+   "name": "Yusuf II",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 182364,
+    "progress": 0.5,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 134842,
+   "name": "Rosa",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 187774,
+    "progress": 0.5,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.5,
+   "last": 0.5,
+   "peak": 0.5,
+   "low": 0.5,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.5,
+   "checkpoints": []
+  },
+  {
+   "id": 134843,
+   "name": "Wen II",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 187721,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 20,
+   "selected": 12,
+   "outcomes": {
+    "failed": 6,
+    "success": 4,
+    "interrupted": 1
+   },
+   "actions": {
+    "harvest": 10,
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 138779,
+   "name": "Finn II",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 190313,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 24,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 143444,
+   "name": "Petra",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 193868,
+    "progress": 0.4,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 1,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "give": 1
+   },
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 143445,
+   "name": "Milo II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 193815,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 3,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 150198,
+   "name": "Lia II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 207906,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 200706
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 10,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 155515,
+   "name": "Dara II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 204505,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 22,
+   "offered": 2,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 160383,
+   "name": "Ada II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 208101,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 10,
+   "selected": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "actions": {
+    "repair": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 160384,
+   "name": "Ulric II",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 208048,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 14,
+   "offered": 6,
+   "selected": 1,
+   "outcomes": {
+    "success": 1
+   },
+   "actions": {
+    "deposit": 1
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 164104,
+   "name": "Hana III",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 218488,
+    "progress": 0.2,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 211288
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.2,
+   "last": 0.2,
+   "peak": 0.2,
+   "low": 0.2,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 18,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0.2,
+   "checkpoints": []
+  },
+  {
+   "id": 164105,
+   "name": "Kai II",
+   "kind": "home",
+   "goal": {
+    "kind": "home",
+    "since": 211235,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 11,
+   "offered": 5,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 168262,
+   "name": "Jax II",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 214114,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 15,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 173425,
+   "name": "Zora II",
+   "kind": "respected",
+   "goal": {
+    "kind": "respected",
+    "since": 226075,
+    "progress": 0.4,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "family",
+      "done": 218875
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0.4,
+   "last": 0.4,
+   "peak": 0.4,
+   "low": 0.4,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 19,
+   "offered": 5,
+   "selected": 3,
+   "outcomes": {
+    "failed": 1,
+    "success": 2
+   },
+   "actions": {
+    "give": 3
+   },
+   "liveEnd": 0.4,
+   "checkpoints": []
+  },
+  {
+   "id": 173426,
+   "name": "Xavi II",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 226022,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 218822
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 13,
+   "selected": 4,
+   "outcomes": {
+    "success": 4
+   },
+   "actions": {
+    "deposit": 4
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 177631,
+   "name": "Sana II",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 228757,
+    "progress": 0,
+    "done": 0,
+    "previous": [
+     {
+      "kind": "trade",
+      "done": 221557
+     }
+    ]
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 21,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 183639,
+   "name": "Vik II",
+   "kind": "stocked",
+   "goal": {
+    "kind": "stocked",
+    "since": 225933,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 230400,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 16,
+   "offered": 11,
+   "selected": 2,
+   "outcomes": {
+    "failed": 1,
+    "success": 1
+   },
+   "actions": {
+    "deposit": 2
+   },
+   "liveEnd": 0,
+   "checkpoints": []
+  },
+  {
+   "id": 188847,
+   "name": "Ines II",
+   "kind": "trade",
+   "goal": {
+    "kind": "trade",
+    "since": 229509,
+    "progress": 1,
+    "done": 229509
+   },
+   "entered": 230400,
+   "entry": 1,
+   "last": 1,
+   "peak": 1,
+   "low": 1,
+   "up": 0,
+   "down": 0,
+   "done": 229509,
+   "decisions": 0,
+   "offered": 0,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 1,
+   "checkpoints": []
+  },
+  {
+   "id": 193636,
+   "name": "Nora II",
+   "kind": "family",
+   "goal": {
+    "kind": "family",
+    "since": 232492,
+    "progress": 0,
+    "done": 0
+   },
+   "entered": 232493,
+   "entry": 0,
+   "last": 0,
+   "peak": 0,
+   "low": 0,
+   "up": 0,
+   "down": 0,
+   "done": 0,
+   "decisions": 5,
+   "offered": 3,
+   "selected": 0,
+   "outcomes": {},
+   "actions": {},
+   "liveEnd": 0,
+   "checkpoints": []
+  }
+ ],
+ "proposals": [],
+ "payoff": {
+  "stocked|aligned|deposit|food": {
+   "success|flat": 21,
+   "interrupted|flat": 14,
+   "success|down": 1
+  },
+  "home|other|eat|food": {
+   "success|flat": 16
+  },
+  "stocked|aligned|deposit|store": {
+   "success|up": 8,
+   "success|flat": 17,
+   "failed|flat": 3,
+   "interrupted|flat": 3
+  },
+  "respected|other|drink|water": {
+   "success|flat": 36,
+   "interrupted|flat": 3,
+   "failed|flat": 4
+  },
+  "respected|other|plant|farm": {
+   "success|flat": 8,
+   "interrupted|flat": 1
+  },
+  "respected|other|socialize|social": {
+   "failed|flat": 13,
+   "success|flat": 7,
+   "interrupted|flat": 1
+  },
+  "respected|other|tend|farm": {
+   "success|flat": 17
+  },
+  "stocked|other|withdraw|craft": {
+   "success|flat": 3,
+   "failed|flat": 4,
+   "interrupted|flat": 2
+  },
+  "family|other|eat|food": {
+   "success|flat": 21
+  },
+  "respected|other|deposit|food": {
+   "success|flat": 11,
+   "interrupted|flat": 11
+  },
+  "respected|other|withdraw|food": {
+   "interrupted|flat": 9,
+   "success|flat": 4
+  },
+  "stocked|aligned|gather|food": {
+   "partial|down": 1,
+   "success|flat": 10,
+   "interrupted|flat": 9,
+   "partial|flat": 4,
+   "failed|flat": 3
+  },
+  "stocked|other|gather|food": {
+   "success|flat": 48,
+   "success|up": 1,
+   "partial|flat": 11,
+   "interrupted|flat": 3,
+   "failed|flat": 4,
+   "partial|down": 1
+  },
+  "stocked|other|socialize|social": {
+   "failed|flat": 4,
+   "interrupted|flat": 1,
+   "success|flat": 9
+  },
+  "stocked|other|visit|care": {
+   "failed|flat": 5,
+   "success|flat": 5,
+   "success|down": 1
+  },
+  "stocked|aligned|harvest|farm": {
+   "failed|flat": 35,
+   "success|flat": 23,
+   "interrupted|flat": 1
+  },
+  "respected|other|harvest|farm": {
+   "success|flat": 20,
+   "failed|flat": 26,
+   "interrupted|flat": 4
+  },
+  "home|other|socialize|request": {
+   "failed|flat": 6,
+   "success|flat": 5
+  },
+  "family|other|deposit|food": {
+   "success|flat": 6,
+   "interrupted|flat": 2
+  },
+  "respected|other|eat|food": {
+   "success|flat": 30
+  },
+  "respected|other|socialize|teach": {
+   "failed|flat": 1
+  },
+  "stocked|other|drink|water": {
+   "success|flat": 51,
+   "interrupted|flat": 3,
+   "failed|flat": 2
+  },
+  "stocked|other|withdraw|food": {
+   "interrupted|flat": 12,
+   "interrupted|down": 2,
+   "success|flat": 3,
+   "failed|flat": 1
+  },
+  "respected|other|deposit|store": {
+   "success|flat": 17,
+   "failed|flat": 3,
+   "interrupted|flat": 2
+  },
+  "stocked|other|gather|repair": {
+   "success|flat": 15,
+   "interrupted|flat": 4
+  },
+  "respected|other|gather|food": {
+   "partial|flat": 8,
+   "interrupted|flat": 8,
+   "success|flat": 40,
+   "failed|flat": 5
+  },
+  "stocked|other|tool_work|warmth": {
+   "success|flat": 3
+  },
+  "family|other|gather|food": {
+   "partial|flat": 4,
+   "success|flat": 13,
+   "failed|flat": 1,
+   "interrupted|flat": 2
+  },
+  "stocked|other|tend|farm": {
+   "success|flat": 12,
+   "interrupted|flat": 1
+  },
+  "respected|aligned|give|promise": {
+   "failed|flat": 2
+  },
+  "family|other|tend|farm": {
+   "success|flat": 14,
+   "failed|flat": 1
+  },
+  "stocked|other|eat_store|food": {
+   "success|flat": 6,
+   "success|down": 2
+  },
+  "stocked|other|eat|food": {
+   "success|flat": 46
+  },
+  "home|other|tend|farm": {
+   "success|flat": 2
+  },
+  "stocked|other|gather|fire": {
+   "success|flat": 5,
+   "interrupted|flat": 2,
+   "failed|flat": 1
+  },
+  "family|other|give|promise": {
+   "success|flat": 1
+  },
+  "family|other|socialize|request": {
+   "success|flat": 5,
+   "failed|flat": 7
+  },
+  "respected|other|eat_store|food": {
+   "failed|flat": 2,
+   "success|flat": 6
+  },
+  "family|other|withdraw|craft": {
+   "failed|flat": 3,
+   "interrupted|flat": 3,
+   "success|flat": 4
+  },
+  "respected|aligned|give|care": {
+   "success|flat": 19,
+   "failed|flat": 8,
+   "interrupted|flat": 1
+  },
+  "family|other|deposit|store": {
+   "success|flat": 6
+  },
+  "family|other|withdraw|food": {
+   "interrupted|flat": 7,
+   "success|flat": 3,
+   "failed|flat": 1
+  },
+  "stocked|other|fetch_water|food": {
+   "failed|flat": 3,
+   "success|flat": 15,
+   "interrupted|flat": 3
+  },
+  "respected|other|operate|food": {
+   "success|flat": 11,
+   "failed|flat": 12,
+   "interrupted|flat": 3
+  },
+  "family|other|operate|food": {
+   "success|flat": 4,
+   "failed|flat": 3
+  },
+  "stocked|other|give|care": {
+   "interrupted|flat": 10,
+   "success|flat": 28,
+   "failed|up": 1,
+   "failed|flat": 2
+  },
+  "home|other|withdraw|food": {
+   "failed|flat": 1,
+   "interrupted|flat": 1
+  },
+  "home|other|operate|craft": {
+   "success|flat": 3
+  },
+  "respected|other|operate|craft": {
+   "failed|flat": 2,
+   "success|flat": 4
+  },
+  "stocked|aligned|deposit|craft": {
+   "success|flat": 7,
+   "interrupted|flat": 2
+  },
+  "stocked|other|operate|craft": {
+   "interrupted|flat": 1,
+   "success|flat": 4,
+   "failed|flat": 1
+  },
+  "respected|other|craft|craft": {
+   "success|flat": 2
+  },
+  "stocked|other|socialize|request": {
+   "success|flat": 4,
+   "failed|flat": 3
+  },
+  "home|other|drink|water": {
+   "success|flat": 13,
+   "failed|flat": 3,
+   "interrupted|flat": 1
+  },
+  "stocked|other|operate|store": {
+   "interrupted|flat": 3
+  },
+  "respected|other|withdraw|craft": {
+   "failed|flat": 8,
+   "interrupted|flat": 1,
+   "success|flat": 1
+  },
+  "stocked|aligned|harvest|food": {
+   "failed|flat": 2,
+   "interrupted|flat": 1,
+   "success|flat": 2
+  },
+  "family|other|drink|water": {
+   "success|flat": 17,
+   "interrupted|flat": 1
+  },
+  "stocked|other|repair|repair": {
+   "success|flat": 3,
+   "interrupted|flat": 5,
+   "partial|flat": 10,
+   "success|up": 1
+  },
+  "respected|other|gather|fire": {
+   "partial|flat": 1,
+   "success|flat": 2,
+   "interrupted|flat": 1
+  },
+  "home|other|gather|food": {
+   "success|flat": 5,
+   "interrupted|flat": 4,
+   "partial|flat": 1,
+   "failed|flat": 1
+  },
+  "respected|other|operate|store": {
+   "interrupted|flat": 4
+  },
+  "family|other|harvest|farm": {
+   "success|flat": 12,
+   "failed|flat": 12,
+   "interrupted|flat": 1
+  },
+  "respected|other|deposit|craft": {
+   "success|flat": 4,
+   "interrupted|flat": 1
+  },
+  "home|other|operate|food": {
+   "interrupted|flat": 1,
+   "failed|flat": 2,
+   "success|flat": 1
+  },
+  "respected|other|operate|repair": {
+   "success|flat": 1,
+   "failed|flat": 1
+  },
+  "home|other|withdraw|craft": {
+   "success|flat": 2
+  },
+  "stocked|aligned|deposit|promise": {
+   "success|flat": 2
+  },
+  "respected|other|gear_work|food": {
+   "success|flat": 3
+  },
+  "respected|other|gather|craft": {
+   "success|flat": 4
+  },
+  "home|other|explore|explore": {
+   "interrupted|flat": 1,
+   "success|flat": 1
+  },
+  "home|other|operate|store": {
+   "success|flat": 1,
+   "interrupted|flat": 1
+  },
+  "stocked|other|operate|food": {
+   "success|flat": 10,
+   "failed|flat": 13,
+   "success|down": 1
+  },
+  "stocked|other|socialize|work-news": {
+   "success|flat": 2
+  },
+  "home|other|socialize|offer": {
+   "success|flat": 1
+  },
+  "stocked|other|socialize|warn": {
+   "failed|flat": 2,
+   "success|flat": 7
+  },
+  "home|other|tool_work|warmth": {
+   "success|flat": 1
+  },
+  "family|other|craft|craft": {
+   "success|flat": 1
+  },
+  "respected|other|socialize|learn": {
+   "success|flat": 1
+  },
+  "family|other|flee|": {
+   "interrupted|flat": 1
+  },
+  "family|other|fetch_water|food": {
+   "failed|flat": 13,
+   "interrupted|flat": 3,
+   "success|flat": 1
+  },
+  "home|other|deposit|craft": {
+   "interrupted|flat": 1,
+   "success|flat": 1
+  },
+  "family|other|gather|repair": {
+   "failed|flat": 1,
+   "success|flat": 4
+  },
+  "home|other|harvest|farm": {
+   "success|flat": 4,
+   "failed|flat": 5
+  },
+  "respected|other|explore|explore": {
+   "success|flat": 1,
+   "interrupted|flat": 2
+  },
+  "stocked|other|flee|": {
+   "interrupted|flat": 2,
+   "failed|flat": 206,
+   "success|flat": 1
+  },
+  "respected|other|fetch_water|water": {
+   "interrupted|flat": 2,
+   "failed|flat": 2
+  },
+  "respected|other|gather|repair": {
+   "failed|flat": 2,
+   "success|flat": 3,
+   "interrupted|flat": 1
+  },
+  "family|other|repair|repair": {
+   "success|flat": 1,
+   "partial|flat": 1
+  },
+  "family|other|gather|fire": {
+   "success|flat": 2
+  },
+  "stocked|other|plant|farm": {
+   "success|flat": 5
+  },
+  "home|aligned|plan_site|build": {
+   "success|flat": 1
+  },
+  "stocked|other|give|promise": {
+   "success|flat": 1
+  },
+  "family|other|gather|craft": {
+   "success|flat": 1
+  },
+  "home|aligned|haul|site": {
+   "success|flat": 3
+  },
+  "home|other|gather|repair": {
+   "success|flat": 1,
+   "interrupted|flat": 1
+  },
+  "respected|other|wander|idle": {
+   "interrupted|flat": 1
+  },
+  "family|aligned|socialize|social": {
+   "failed|flat": 6,
+   "success|flat": 2
+  },
+  "stocked|other|tool_work|craft": {
+   "success|flat": 1
+  },
+  "respected|other|till|farm": {
+   "interrupted|flat": 1,
+   "success|flat": 4
+  },
+  "stocked|other|withdraw|repair": {
+   "success|flat": 1
+  },
+  "stocked|other|fuel_fire|fire": {
+   "interrupted|flat": 5,
+   "success|flat": 4
+  },
+  "home|other|fetch_water|food": {
+   "success|flat": 1,
+   "failed|flat": 5,
+   "interrupted|flat": 2,
+   "partial|flat": 1
+  },
+  "home|other|plant|farm": {
+   "success|flat": 2
+  },
+  "respected|other|fetch_water|food": {
+   "failed|flat": 11,
+   "success|flat": 7,
+   "interrupted|flat": 2,
+   "partial|flat": 1
+  },
+  "stocked|other|socialize|recruit": {
+   "failed|flat": 1
+  },
+  "home|aligned|build|site": {
+   "partial|flat": 1
+  },
+  "home|other|gather|fire": {
+   "success|flat": 3
+  },
+  "respected|other|repair|repair": {
+   "success|flat": 2,
+   "partial|flat": 3
+  },
+  "family|other|fetch_water|water": {
+   "failed|flat": 1
+  },
+  "family|other|socialize|learn": {
+   "success|flat": 1
+  },
+  "home|other|visit|care": {
+   "failed|flat": 1
+  },
+  "home|other|attend|social": {
+   "failed|flat": 3,
+   "success|flat": 8
+  },
+  "stocked|other|tree_work|work": {
+   "success|flat": 1
+  },
+  "home|other|deposit|food": {
+   "interrupted|flat": 3
+  },
+  "home|other|gather|craft": {
+   "success|flat": 2
+  },
+  "stocked|other|build|site": {
+   "interrupted|flat": 2
+  },
+  "stocked|other|explore|explore": {
+   "interrupted|flat": 2,
+   "success|flat": 1
+  },
+  "home|other|craft|craft": {
+   "success|flat": 2,
+   "interrupted|flat": 1
+  },
+  "stocked|aligned|deposit|site": {
+   "success|flat": 1
+  },
+  "respected|other|attend|social": {
+   "interrupted|flat": 4,
+   "success|flat": 14,
+   "failed|flat": 1
+  },
+  "family|other|explore|explore": {
+   "interrupted|flat": 5,
+   "success|flat": 1
+  },
+  "respected|other|tree_work|work": {
+   "success|flat": 1
+  },
+  "stocked|other|gather|craft": {
+   "success|flat": 1
+  },
+  "stocked|other|operate|site": {
+   "success|flat": 1,
+   "failed|flat": 1
+  },
+  "stocked|other|operate|repair": {
+   "failed|flat": 2
+  },
+  "stocked|other|withdraw|site": {
+   "success|flat": 2
+  },
+  "stocked|other|attend|social": {
+   "interrupted|flat": 1,
+   "success|flat": 20,
+   "failed|flat": 2,
+   "success|up": 1
+  },
+  "home|aligned|repair|repair": {
+   "interrupted|flat": 1
+  },
+  "respected|other|flee|": {
+   "interrupted|flat": 3
+  },
+  "stocked|other|defend|danger": {
+   "failed|flat": 1,
+   "success|flat": 1
+  },
+  "home|other|gather|site": {
+   "success|flat": 2
+  },
+  "family|other|operate|craft": {
+   "interrupted|flat": 1,
+   "success|flat": 2
+  },
+  "respected|other|tool_work|craft": {
+   "success|flat": 1
+  },
+  "respected|other|socialize|warn": {
+   "interrupted|flat": 1,
+   "success|flat": 2,
+   "failed|flat": 1
+  },
+  "stocked|other|craft|craft": {
+   "interrupted|flat": 1,
+   "success|flat": 1
+  },
+  "respected|other|visit|care": {
+   "failed|flat": 2,
+   "success|flat": 3
+  },
+  "respected|other|plan_site|build": {
+   "interrupted|flat": 2
+  },
+  "family|other|attend|social": {
+   "success|flat": 9,
+   "interrupted|flat": 1
+  },
+  "family|other|socialize|warn": {
+   "success|flat": 1,
+   "interrupted|flat": 1
+  },
+  "stocked|other|haul|site": {
+   "success|flat": 1
+  },
+  "family|other|withdraw|repair": {
+   "success|flat": 2
+  },
+  "stocked|other|wander|idle": {
+   "interrupted|flat": 1
+  },
+  "stocked|other|wander|leisure": {
+   "interrupted|flat": 4
+  },
+  "respected|other|wander|leisure": {
+   "interrupted|flat": 5
+  },
+  "respected|other|deposit|repair": {
+   "interrupted|flat": 1
+  },
+  "respected|other|rest|rest": {
+   "interrupted|flat": 19,
+   "success|flat": 6
+  },
+  "family|other|rest|rest": {
+   "success|flat": 4,
+   "interrupted|flat": 9
+  },
+  "home|other|fuel_fire|fire": {
+   "success|flat": 1,
+   "interrupted|flat": 1
+  },
+  "family|other|deposit|craft": {
+   "success|flat": 3
+  },
+  "family|other|plant|farm": {
+   "success|flat": 3
+  },
+  "family|other|operate|repair": {
+   "success|flat": 1
+  },
+  "stocked|other|sleep|rest": {
+   "failed|flat": 2,
+   "success|flat": 49,
+   "success|down": 2
+  },
+  "home|other|socialize|meal-update": {
+   "success|flat": 1
+  },
+  "home|other|wander|leisure": {
+   "success|flat": 2
+  },
+  "respected|other|socialize|offer": {
+   "failed|flat": 1
+  },
+  "family|other|fuel_fire|fire": {
+   "interrupted|flat": 1,
+   "success|flat": 2
+  },
+  "home|other|rest|rest": {
+   "interrupted|flat": 5,
+   "success|flat": 3
+  },
+  "stocked|other|rest|rest": {
+   "interrupted|flat": 27,
+   "interrupted|down": 1,
+   "success|flat": 4
+  },
+  "home|other|eat_store|food": {
+   "failed|flat": 1
+  },
+  "stocked|other|butcher|warmth": {
+   "success|flat": 1
+  },
+  "respected|other|sleep|rest": {
+   "success|flat": 41,
+   "interrupted|flat": 1
+  },
+  "family|other|sleep|rest": {
+   "success|flat": 17
+  },
+  "home|other|sleep|rest": {
+   "success|flat": 13
+  },
+  "respected|other|socialize|report": {
+   "failed|flat": 2
+  },
+  "respected|other|fuel_fire|fire": {
+   "success|flat": 4,
+   "interrupted|flat": 1
+  },
+  "family|other|eat_store|food": {
+   "failed|flat": 2
+  },
+  "respected|other|haul|site": {
+   "failed|flat": 2,
+   "interrupted|flat": 1
+  },
+  "home|other|hunt|food": {
+   "failed|flat": 1
+  },
+  "family|other|tool_work|warmth": {
+   "success|flat": 1
+  }
+ },
+ "links": [
+  {
+   "id": 190675,
+   "actor": 1106,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190685,
+   "actor": 1133,
+   "target": 3325,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.027777777777777776,
+   "outcome": "success"
+  },
+  {
+   "id": 190690,
+   "actor": 47426,
+   "target": 983,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.020833333333333332,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "partial"
+  },
+  {
+   "id": 190712,
+   "actor": 1119,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190726,
+   "actor": 1133,
+   "target": 3325,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0.027777777777777776,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.027777777777777776,
+   "outcome": "success"
+  },
+  {
+   "id": 190741,
+   "actor": 125751,
+   "target": 156065,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 190744,
+   "actor": 35164,
+   "target": 88287,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 190747,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190762,
+   "actor": 1106,
+   "target": 101542,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190800,
+   "actor": 173426,
+   "target": 34071,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190801,
+   "actor": 17299,
+   "target": 59805,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190828,
+   "actor": 47426,
+   "target": 985,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190861,
+   "actor": 72927,
+   "target": 89499,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190875,
+   "actor": 8602,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 190879,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 190881,
+   "actor": 29556,
+   "target": 9830,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 190909,
+   "actor": 32374,
+   "target": 51134,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190911,
+   "actor": 50730,
+   "target": 942,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 190915,
+   "actor": 65912,
+   "target": 155515,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 8.818298351510563,
+   "progressBefore": 0.6,
+   "mode": "promise",
+   "affinityAfter": 8.818298351510563,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 190924,
+   "actor": 65912,
+   "target": 146765,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 190928,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 190942,
+   "actor": 42844,
+   "target": 107206,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 190958,
+   "actor": 125751,
+   "target": 154030,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 190985,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 190997,
+   "actor": 1133,
+   "target": 3325,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0.1388888888888889,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.2222222222222222,
+   "outcome": "success"
+  },
+  {
+   "id": 190999,
+   "actor": 1114,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191016,
+   "actor": 134843,
+   "target": 9830,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191030,
+   "actor": 1128,
+   "target": 17896,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191045,
+   "actor": 1129,
+   "target": 17896,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191047,
+   "actor": 125751,
+   "target": 156065,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191059,
+   "actor": 53578,
+   "target": 59029,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "promise",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191062,
+   "actor": 62538,
+   "target": 946,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.0625,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.0625,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191122,
+   "actor": 1128,
+   "target": 16570,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191135,
+   "actor": 1133,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.2222222222222222,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.2222222222222222,
+   "outcome": "success"
+  },
+  {
+   "id": 191139,
+   "actor": 26659,
+   "target": 37603,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191156,
+   "actor": 1119,
+   "target": 3652,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191167,
+   "actor": 39709,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.08333333333333333,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.08333333333333333,
+   "outcome": "success"
+  },
+  {
+   "id": 191174,
+   "actor": 50730,
+   "target": 959,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191223,
+   "actor": 53579,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191226,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191283,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191288,
+   "actor": 32374,
+   "target": 51134,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191334,
+   "actor": 47425,
+   "target": 79552,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191337,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191355,
+   "actor": 21046,
+   "target": 91742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 191372,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191380,
+   "actor": 1119,
+   "target": 1117,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191386,
+   "actor": 62538,
+   "target": 944,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.0625,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.0625,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191392,
+   "actor": 1137,
+   "target": 13938,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191393,
+   "actor": 32373,
+   "target": 51134,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191403,
+   "actor": 107223,
+   "target": 125058,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191404,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191419,
+   "actor": 173426,
+   "target": 51210,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191451,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191473,
+   "actor": 125751,
+   "target": 154030,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191489,
+   "actor": 1128,
+   "target": 17896,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191490,
+   "actor": 72927,
+   "target": 89499,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.16666666666666666,
+   "outcome": "success"
+  },
+  {
+   "id": 191530,
+   "actor": 32373,
+   "target": 42049,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.0625,
+   "outcome": "success"
+  },
+  {
+   "id": 191549,
+   "actor": 65912,
+   "target": 155515,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 12.413494071702477,
+   "progressBefore": 0.6,
+   "mode": "promise",
+   "affinityAfter": 12.413494071702477,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 191571,
+   "actor": 23648,
+   "target": 927,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "partial"
+  },
+  {
+   "id": 191574,
+   "actor": 62538,
+   "target": 73269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0.0625,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.08333333333333333,
+   "outcome": "success"
+  },
+  {
+   "id": 191592,
+   "actor": 134843,
+   "target": 13938,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191609,
+   "actor": 1129,
+   "target": 17896,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191624,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191667,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191679,
+   "actor": 173425,
+   "target": 173427,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "failed"
+  },
+  {
+   "id": 191718,
+   "actor": 1097,
+   "target": 4276,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191736,
+   "actor": 1129,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191799,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191816,
+   "actor": 53579,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 191821,
+   "actor": 23648,
+   "target": 9830,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191832,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191833,
+   "actor": 1139,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191859,
+   "actor": 23649,
+   "target": 49316,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191890,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191902,
+   "actor": 1097,
+   "target": 4276,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191904,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191912,
+   "actor": 173426,
+   "target": 101286,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 191963,
+   "actor": 125751,
+   "target": 154030,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 191973,
+   "actor": 1097,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192029,
+   "actor": 42843,
+   "target": 110025,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192035,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192085,
+   "actor": 8602,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192099,
+   "actor": 32374,
+   "target": 964,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.041666666666666664,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.041666666666666664,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192113,
+   "actor": 8603,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192138,
+   "actor": 62537,
+   "target": 62539,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 99.96068800204847,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 99.96068800204847,
+   "progressAfter": 0.6,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192142,
+   "actor": 47425,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192157,
+   "actor": 32373,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.041666666666666664,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.041666666666666664,
+   "outcome": "success"
+  },
+  {
+   "id": 192164,
+   "actor": 21045,
+   "target": 91742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "failed"
+  },
+  {
+   "id": 192190,
+   "actor": 1097,
+   "target": 17744,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192200,
+   "actor": 173425,
+   "target": 173427,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 192212,
+   "actor": 62538,
+   "target": 73269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0.08333333333333333,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.10416666666666667,
+   "outcome": "success"
+  },
+  {
+   "id": 192216,
+   "actor": 32374,
+   "target": 983,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.041666666666666664,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.041666666666666664,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192226,
+   "actor": 1133,
+   "target": 3325,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0.1111111111111111,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.19444444444444445,
+   "outcome": "success"
+  },
+  {
+   "id": 192227,
+   "actor": 47425,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192232,
+   "actor": 35163,
+   "target": 88287,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 192239,
+   "actor": 53579,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192243,
+   "actor": 1133,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.19444444444444445,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.16666666666666666,
+   "outcome": "success"
+  },
+  {
+   "id": 192251,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192275,
+   "actor": 1129,
+   "target": 28551,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192283,
+   "actor": 35164,
+   "target": 173742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 192286,
+   "actor": 17299,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192300,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192391,
+   "actor": 160384,
+   "target": 22437,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192480,
+   "actor": 76333,
+   "target": 76334,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 192482,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192507,
+   "actor": 8603,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192523,
+   "actor": 17300,
+   "target": 30165,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192524,
+   "actor": 1137,
+   "target": 34071,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192533,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192545,
+   "actor": 143444,
+   "target": 143446,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 192570,
+   "actor": 65911,
+   "target": 146765,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 192579,
+   "actor": 183639,
+   "target": 3700,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192628,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192645,
+   "actor": 1139,
+   "target": 973,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192649,
+   "actor": 8603,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192653,
+   "actor": 183639,
+   "target": 3700,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192685,
+   "actor": 125751,
+   "target": 154030,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192696,
+   "actor": 23649,
+   "target": 49316,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192702,
+   "actor": 173426,
+   "target": 101286,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192742,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192743,
+   "actor": 1139,
+   "target": 975,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192746,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192768,
+   "actor": 76332,
+   "target": 975,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.16666666666666666,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.16666666666666666,
+   "outcome": "partial"
+  },
+  {
+   "id": 192792,
+   "actor": 8602,
+   "target": 85761,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192820,
+   "actor": 90662,
+   "target": 6487,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.041666666666666664,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.041666666666666664,
+   "outcome": "success"
+  },
+  {
+   "id": 192867,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192871,
+   "actor": 23649,
+   "target": 59805,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192879,
+   "actor": 8603,
+   "target": 931,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192907,
+   "actor": 42844,
+   "target": 107206,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 192908,
+   "actor": 53579,
+   "target": 58411,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192918,
+   "actor": 17299,
+   "target": 19125,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 192965,
+   "actor": 125751,
+   "target": 154030,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192979,
+   "actor": 50730,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 192984,
+   "actor": 35164,
+   "target": 88287,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 192994,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 192998,
+   "actor": 1106,
+   "target": 6487,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193018,
+   "actor": 17299,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193043,
+   "actor": 32373,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.020833333333333332,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.020833333333333332,
+   "outcome": "success"
+  },
+  {
+   "id": 193056,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193067,
+   "actor": 1114,
+   "target": 957,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193094,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193136,
+   "actor": 8603,
+   "target": 978,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193140,
+   "actor": 1115,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193145,
+   "actor": 17299,
+   "target": 19125,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193161,
+   "actor": 65912,
+   "target": 146765,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 193166,
+   "actor": 23649,
+   "target": 59805,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193190,
+   "actor": 1114,
+   "target": 956,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193244,
+   "actor": 1115,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193249,
+   "actor": 47426,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193266,
+   "actor": 32374,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.020833333333333332,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.020833333333333332,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193308,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193326,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193352,
+   "actor": 8603,
+   "target": 984,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193372,
+   "actor": 42843,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193379,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193414,
+   "actor": 50730,
+   "target": 101286,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193423,
+   "actor": 1119,
+   "target": 24488,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193430,
+   "actor": 21045,
+   "target": 91742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "failed"
+  },
+  {
+   "id": 193468,
+   "actor": 8603,
+   "target": 964,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "partial"
+  },
+  {
+   "id": 193576,
+   "actor": 65912,
+   "target": 65913,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 193603,
+   "actor": 32374,
+   "target": 1089,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.020833333333333332,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.020833333333333332,
+   "outcome": "success"
+  },
+  {
+   "id": 193629,
+   "actor": 17299,
+   "target": 925,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193633,
+   "actor": 21045,
+   "target": 91742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 193649,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193679,
+   "actor": 65912,
+   "target": 65913,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 193685,
+   "actor": 65911,
+   "target": 65913,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 193688,
+   "actor": 65911,
+   "target": 146765,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 193723,
+   "actor": 1118,
+   "target": 23712,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 193725,
+   "actor": 1133,
+   "target": 4460,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.08333333333333333,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.08333333333333333,
+   "outcome": "success"
+  },
+  {
+   "id": 193729,
+   "actor": 1137,
+   "target": 13396,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193731,
+   "actor": 1119,
+   "target": 24488,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193754,
+   "actor": 62538,
+   "target": 73269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": true,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.020833333333333332,
+   "outcome": "success"
+  },
+  {
+   "id": 193768,
+   "actor": 23649,
+   "target": 934,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193812,
+   "actor": 26659,
+   "target": 108269,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193814,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193831,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193850,
+   "actor": 35163,
+   "target": 173742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 193854,
+   "actor": 76333,
+   "target": 114715,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "success"
+  },
+  {
+   "id": 193860,
+   "actor": 35164,
+   "target": 173742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.6,
+   "outcome": "failed"
+  },
+  {
+   "id": 193869,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 193895,
+   "actor": 72927,
+   "target": 935,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.16666666666666666,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.16666666666666666,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 193903,
+   "actor": 1133,
+   "target": 921,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.08333333333333333,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.08333333333333333,
+   "outcome": "success"
+  },
+  {
+   "id": 193945,
+   "actor": 173425,
+   "target": 173427,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 193953,
+   "actor": 8602,
+   "target": 924,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 193984,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 194089,
+   "actor": 1133,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.05555555555555555,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.05555555555555555,
+   "outcome": "success"
+  },
+  {
+   "id": 194102,
+   "actor": 125751,
+   "target": 34071,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 194113,
+   "actor": 17300,
+   "target": 934,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "partial"
+  },
+  {
+   "id": 194116,
+   "actor": 134843,
+   "target": 154089,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 194129,
+   "actor": 1115,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": ""
+  },
+  {
+   "id": 194140,
+   "actor": 1137,
+   "target": 1259,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 194178,
+   "actor": 1129,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 194208,
+   "actor": 29556,
+   "target": 917,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 194253,
+   "actor": 42844,
+   "target": 107206,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.4,
+   "mode": "care",
+   "affinityAfter": 100,
+   "progressAfter": 0.4,
+   "outcome": "success"
+  },
+  {
+   "id": 194259,
+   "actor": 17300,
+   "target": 935,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "interrupted"
+  },
+  {
+   "id": 194297,
+   "actor": 1139,
+   "target": 4950,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "failed"
+  },
+  {
+   "id": 194325,
+   "actor": 1129,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 194340,
+   "actor": 32374,
+   "target": 51134,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.020833333333333332,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.020833333333333332,
+   "outcome": "success"
+  },
+  {
+   "id": 194360,
+   "actor": 1133,
+   "target": 20991,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0.05555555555555555,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0.05555555555555555,
+   "outcome": "success"
+  },
+  {
+   "id": 194374,
+   "actor": 17299,
+   "target": 30165,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": ""
+  },
+  {
+   "id": 194444,
+   "actor": 35163,
+   "target": 88287,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care"
+  },
+  {
+   "id": 194471,
+   "actor": 17300,
+   "target": 30165,
+   "action": "deposit",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": "",
+   "affinityAfter": null,
+   "progressAfter": 0,
+   "outcome": "success"
+  },
+  {
+   "id": 194484,
+   "actor": 134843,
+   "target": 158505,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": ""
+  },
+  {
+   "id": 194490,
+   "actor": 1139,
+   "target": 922,
+   "action": "gather",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": ""
+  },
+  {
+   "id": 194543,
+   "actor": 35164,
+   "target": 173742,
+   "action": "give",
+   "goal": "respected",
+   "homeTarget": false,
+   "affinityBefore": 100,
+   "progressBefore": 0.6,
+   "mode": "care"
+  },
+  {
+   "id": 194562,
+   "actor": 1114,
+   "target": 35436,
+   "action": "harvest",
+   "goal": "stocked",
+   "homeTarget": false,
+   "affinityBefore": null,
+   "progressBefore": 0,
+   "mode": ""
+  }
+ ],
+ "contacts": [
+  {
+   "actor": 23650,
+   "target": 23648,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 84127,
+   "target": 23650,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 12.313920921279516,
+   "lastTrust": 12.313920921279516,
+   "firstAffinity": 11.110278015982407,
+   "lastAffinity": 11.110278015982407
+  },
+  {
+   "actor": 120108,
+   "target": 114715,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.418303702385293,
+   "lastTrust": 10.403483476670269,
+   "firstAffinity": 0.7907291976462089,
+   "lastAffinity": 1.0588938329689639
+  },
+  {
+   "actor": 90662,
+   "target": 120108,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.500532846590788,
+   "lastTrust": 10.500532846590788,
+   "firstAffinity": 4.63194463258823,
+   "lastAffinity": 4.63194463258823
+  },
+  {
+   "actor": 76334,
+   "target": 65911,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 12.566889232763286,
+   "lastTrust": 12.566889232763286,
+   "firstAffinity": 6.605006947691146,
+   "lastAffinity": 6.605006947691146
+  },
+  {
+   "actor": 177631,
+   "target": 1137,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 155515,
+   "target": 76332,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 106440,
+   "target": 84127,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10.358102574916991,
+   "lastTrust": 10.358102574916991,
+   "firstAffinity": 2.6756582641156714,
+   "lastAffinity": 2.6756582641156714
+  },
+  {
+   "actor": 84127,
+   "target": 106440,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.16277389768955,
+   "lastTrust": 10.16277389768955,
+   "firstAffinity": 2.2731216266936287,
+   "lastAffinity": 2.2731216266936287
+  },
+  {
+   "actor": 120108,
+   "target": 90662,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.749798204192984,
+   "lastTrust": 10.749798204192984,
+   "firstAffinity": 5.1497176094440285,
+   "lastAffinity": 5.1497176094440285
+  },
+  {
+   "actor": 1123,
+   "target": 98401,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 9.944088696885295,
+   "lastTrust": 9.944088696885295,
+   "firstAffinity": 1.9836878293282723,
+   "lastAffinity": 1.9836878293282723
+  },
+  {
+   "actor": 1123,
+   "target": 125752,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 1.2154597685530264,
+   "lastAffinity": 1.2154597685530264
+  },
+  {
+   "actor": 176462,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 1101,
+   "target": 1103,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 155515,
+   "target": 65912,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 12.430834422346312,
+   "lastTrust": 12.430834422346312,
+   "firstAffinity": 4.326725018177248,
+   "lastAffinity": 4.326725018177248
+  },
+  {
+   "actor": 1103,
+   "target": 1101,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 114715,
+   "target": 90662,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.863551042610856,
+   "lastTrust": 10.863551042610856,
+   "firstAffinity": 3.69016883302203,
+   "lastAffinity": 3.69016883302203
+  },
+  {
+   "actor": 107224,
+   "target": 160384,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 9.29644809768879,
+   "lastTrust": 9.29644809768879,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 114715,
+   "target": 120108,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 11.542213693602323,
+   "lastTrust": 11.542213693602323,
+   "firstAffinity": 2.5316531540468374,
+   "lastAffinity": 2.5316531540468374
+  },
+  {
+   "actor": 52299,
+   "target": 47427,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 13.597327123782073,
+   "lastTrust": 13.597327123782073,
+   "firstAffinity": 12.498470590841738,
+   "lastAffinity": 12.498470590841738
+  },
+  {
+   "actor": 106440,
+   "target": 98050,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 11.820973925841958,
+   "lastTrust": 11.820973925841958,
+   "firstAffinity": 4.225531496991808,
+   "lastAffinity": 4.225531496991808
+  },
+  {
+   "actor": 1123,
+   "target": 173742,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 9.805533246212295,
+   "lastTrust": 9.805533246212295,
+   "firstAffinity": -0.6238233897190285,
+   "lastAffinity": -0.6238233897190285
+  },
+  {
+   "actor": 107206,
+   "target": 42844,
+   "chosen": 4,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1130,
+   "target": 1129,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 90662,
+   "target": 90661,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 65.29999999999998,
+   "lastTrust": 65.29999999999998,
+   "firstAffinity": 89.63657331099175,
+   "lastAffinity": 89.63657331099175
+  },
+  {
+   "actor": 156879,
+   "target": 8602,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 85056,
+   "target": 47426,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 143446,
+   "target": 173427,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 188847,
+   "target": 65911,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 52299,
+   "target": 85056,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.312537460942178,
+   "lastTrust": 11.312537460942178,
+   "firstAffinity": 3.9218659822555773,
+   "lastAffinity": 3.9218659822555773
+  },
+  {
+   "actor": 52299,
+   "target": 88287,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.141469105590822,
+   "lastTrust": 10.141469105590822,
+   "firstAffinity": 1.0943144513946301,
+   "lastAffinity": 1.0943144513946301
+  },
+  {
+   "actor": 23648,
+   "target": 90662,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.8915113603793158,
+   "lastAffinity": 0.8915113603793158
+  },
+  {
+   "actor": 17301,
+   "target": 62537,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.93175807841693,
+   "lastTrust": 11.93175807841693,
+   "firstAffinity": 4.243661102369222,
+   "lastAffinity": 4.243661102369222
+  },
+  {
+   "actor": 23648,
+   "target": 23650,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1114,
+   "target": 1115,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 150198,
+   "target": 88287,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 110522,
+   "target": 125752,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 9.457926484572317,
+   "lastTrust": 9.457926484572317,
+   "firstAffinity": 1.7860357490969532,
+   "lastAffinity": 1.7860357490969532
+  },
+  {
+   "actor": 98050,
+   "target": 106440,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.972932041524713,
+   "lastTrust": 10.972932041524713,
+   "firstAffinity": 4.528061206948475,
+   "lastAffinity": 4.528061206948475
+  },
+  {
+   "actor": 62539,
+   "target": 62538,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 97,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 160384,
+   "target": 173427,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 76334,
+   "target": 76333,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1143,
+   "target": 114715,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.3,
+   "lastAffinity": 0.3
+  },
+  {
+   "actor": 120108,
+   "target": 1143,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.709830374756546,
+   "lastTrust": 10.709830374756546,
+   "firstAffinity": 4.370507849420403,
+   "lastAffinity": 4.370507849420403
+  },
+  {
+   "actor": 188847,
+   "target": 146765,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 23648,
+   "target": 176462,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 83.89999999999998,
+   "lastTrust": 83.89999999999998,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 90662,
+   "target": 84898,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 8.762102596243972,
+   "lastTrust": 8.762102596243972,
+   "firstAffinity": 7.722799659970618,
+   "lastAffinity": 7.722799659970618
+  },
+  {
+   "actor": 160384,
+   "target": 14010,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 188847,
+   "target": 14616,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.3,
+   "lastAffinity": 0.3
+  },
+  {
+   "actor": 23648,
+   "target": 23649,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 65913,
+   "target": 65912,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 53580,
+   "target": 187852,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 62.1,
+   "lastTrust": 62.1,
+   "firstAffinity": 70.89999999999999,
+   "lastAffinity": 70.89999999999999
+  },
+  {
+   "actor": 88287,
+   "target": 35164,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 23650,
+   "target": 176462,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 62.699999999999996,
+   "lastTrust": 62.699999999999996,
+   "firstAffinity": 70.04762415469885,
+   "lastAffinity": 70.04762415469885
+  },
+  {
+   "actor": 146765,
+   "target": 65913,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 72.19999999999996,
+   "lastTrust": 72.59999999999995,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 107224,
+   "target": 107223,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 74.90000000000005,
+   "lastTrust": 74.90000000000005,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 114715,
+   "target": 72927,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 12.20100720533729,
+   "lastTrust": 12.20100720533729,
+   "firstAffinity": 6.269313043790113,
+   "lastAffinity": 6.269313043790113
+  },
+  {
+   "actor": 1143,
+   "target": 114474,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173742,
+   "target": 35163,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 97.09902266666658,
+   "lastTrust": 97.09902266666658,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 155515,
+   "target": 8603,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 16.699766835831213,
+   "lastTrust": 16.699766835831213,
+   "firstAffinity": 11.813868138593982,
+   "lastAffinity": 11.813868138593982
+  },
+  {
+   "actor": 47427,
+   "target": 85056,
+   "chosen": 3,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 103874,
+   "target": 32374,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.159113793029409,
+   "lastTrust": 10.159113793029409,
+   "firstAffinity": 0.6699131297275528,
+   "lastAffinity": 0.6699131297275528
+  },
+  {
+   "actor": 23650,
+   "target": 84127,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 12.65971666571748,
+   "lastTrust": 12.65971666571748,
+   "firstAffinity": 11.357809473994672,
+   "lastAffinity": 11.357809473994672
+  },
+  {
+   "actor": 107225,
+   "target": 1101,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.19889224128676,
+   "lastTrust": 10.19889224128676,
+   "firstAffinity": 2.179738761992287,
+   "lastAffinity": 2.179738761992287
+  },
+  {
+   "actor": 1136,
+   "target": 143445,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 12.572130014407874,
+   "lastTrust": 12.572130014407874,
+   "firstAffinity": 4.162545240690058,
+   "lastAffinity": 4.162545240690058
+  },
+  {
+   "actor": 173742,
+   "target": 85056,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 23650,
+   "target": 23649,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 156879,
+   "target": 14010,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 23650,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 12.202428283348308,
+   "lastTrust": 12.202428283348308,
+   "firstAffinity": 10.271614018728293,
+   "lastAffinity": 10.271614018728293
+  },
+  {
+   "actor": 80666,
+   "target": 90662,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.174478952411981,
+   "lastTrust": 10.174478952411981,
+   "firstAffinity": 1.4229081026132815,
+   "lastAffinity": 1.4229081026132815
+  },
+  {
+   "actor": 155515,
+   "target": 23648,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 8.510839152349433,
+   "lastTrust": 8.510839152349433,
+   "firstAffinity": -2.4232587093967686,
+   "lastAffinity": -2.4232587093967686
+  },
+  {
+   "actor": 90662,
+   "target": 80666,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.174478952411981,
+   "lastTrust": 10.174478952411981,
+   "firstAffinity": 1.845452765052878,
+   "lastAffinity": 1.845452765052878
+  },
+  {
+   "actor": 155515,
+   "target": 1119,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.634036412387898,
+   "lastTrust": 11.634036412387898,
+   "firstAffinity": 2.6712970391988633,
+   "lastAffinity": 2.6712970391988633
+  },
+  {
+   "actor": 14010,
+   "target": 156879,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 29556,
+   "target": 134842,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.403483476670269,
+   "lastTrust": 10.403483476670269,
+   "firstAffinity": 1.0141257071040322,
+   "lastAffinity": 1.0141257071040322
+  },
+  {
+   "actor": 62539,
+   "target": 98050,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 90.69999999999993,
+   "lastTrust": 91.49999999999993,
+   "firstAffinity": 99.94340737071867,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 14010,
+   "target": 143446,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 42843,
+   "target": 107206,
+   "chosen": 3,
+   "outcomes": {
+    "failed": 2
+   },
+   "firstTrust": 89.79999999999995,
+   "lastTrust": 90.39999999999995,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 17301,
+   "target": 17300,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 26659,
+   "target": 42844,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 16.542135820556602,
+   "lastTrust": 16.542135820556602,
+   "firstAffinity": 10.569024590349413,
+   "lastAffinity": 10.569024590349413
+  },
+  {
+   "actor": 23650,
+   "target": 65912,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 13.942983640283028,
+   "lastTrust": 13.942983640283028,
+   "firstAffinity": 8.949970591247851,
+   "lastAffinity": 8.949970591247851
+  },
+  {
+   "actor": 26659,
+   "target": 35163,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 16.562508483725352,
+   "lastTrust": 16.562508483725352,
+   "firstAffinity": 16.019067845080787,
+   "lastAffinity": 16.019067845080787
+  },
+  {
+   "actor": 47427,
+   "target": 91742,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 13.74998841903842,
+   "lastTrust": 13.74998841903842,
+   "firstAffinity": 20.72455998896996,
+   "lastAffinity": 20.72455998896996
+  },
+  {
+   "actor": 173742,
+   "target": 47427,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.3,
+   "lastAffinity": 0.3
+  },
+  {
+   "actor": 120108,
+   "target": 114474,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 11.274771579631725,
+   "lastTrust": 11.274771579631725,
+   "firstAffinity": 9.00747186421521,
+   "lastAffinity": 9.00747186421521
+  },
+  {
+   "actor": 173742,
+   "target": 91742,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 146765,
+   "target": 23650,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 155515,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 76334,
+   "target": 176462,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.278478103272272,
+   "lastTrust": 11.278478103272272,
+   "firstAffinity": 6.729529924281915,
+   "lastAffinity": 6.729529924281915
+  },
+  {
+   "actor": 23712,
+   "target": 1119,
+   "chosen": 3,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 176462,
+   "target": 23649,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 93.2,
+   "lastTrust": 97.26757333333244,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 90661,
+   "target": 1106,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.562972664062519,
+   "lastTrust": 10.562972664062519,
+   "firstAffinity": 5.407179686214577,
+   "lastAffinity": 5.407179686214577
+  },
+  {
+   "actor": 155515,
+   "target": 134843,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.760562175643484,
+   "lastTrust": 10.760562175643484,
+   "firstAffinity": 1.3997222673889937,
+   "lastAffinity": 1.3997222673889937
+  },
+  {
+   "actor": 88287,
+   "target": 150198,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 13.973078612992394,
+   "lastTrust": 13.973078612992394,
+   "firstAffinity": 5.890080549263606,
+   "lastAffinity": 5.890080549263606
+  },
+  {
+   "actor": 90661,
+   "target": 1107,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.417202474338728,
+   "lastTrust": 10.417202474338728,
+   "firstAffinity": 4.045606324340866,
+   "lastAffinity": 4.045606324340866
+  },
+  {
+   "actor": 106440,
+   "target": 23649,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 14.630852372455053,
+   "lastTrust": 14.630852372455053,
+   "firstAffinity": 9.794208062450554,
+   "lastAffinity": 9.794208062450554
+  },
+  {
+   "actor": 32375,
+   "target": 107223,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 14.290804307939311,
+   "lastTrust": 14.290804307939311,
+   "firstAffinity": 6.459658241157271,
+   "lastAffinity": 6.459658241157271
+  },
+  {
+   "actor": 84127,
+   "target": 8602,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 107225,
+   "target": 62538,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 107223,
+   "target": 32375,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 9.870789477152982,
+   "lastTrust": 9.870789477152982,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 32375,
+   "target": 107224,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 13.539848911825407,
+   "lastTrust": 13.539848911825407,
+   "firstAffinity": 9.078698224060453,
+   "lastAffinity": 9.078698224060453
+  },
+  {
+   "actor": 76334,
+   "target": 106440,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 155515,
+   "target": 1118,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 17301,
+   "target": 98050,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.48228532806366,
+   "lastTrust": 10.48228532806366,
+   "firstAffinity": 2.906812252025556,
+   "lastAffinity": 2.906812252025556
+  },
+  {
+   "actor": 85056,
+   "target": 173742,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 39709,
+   "target": 187852,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 120108,
+   "target": 23648,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.868638068852237,
+   "lastTrust": 10.868638068852237,
+   "firstAffinity": 5.464004690838687,
+   "lastAffinity": 5.464004690838687
+  },
+  {
+   "actor": 1130,
+   "target": 156879,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 88287,
+   "target": 35163,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 11743,
+   "target": 173426,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": -0.5515774760912646,
+   "lastAffinity": -0.5515774760912646
+  },
+  {
+   "actor": 47427,
+   "target": 47426,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 85056,
+   "target": 47427,
+   "chosen": 2,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 92.59999999999995,
+   "lastTrust": 93.89999999999995,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 23712,
+   "target": 84127,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 12.237146455488718,
+   "lastTrust": 12.237146455488718,
+   "firstAffinity": 12.382081091988113,
+   "lastAffinity": 12.382081091988113
+  },
+  {
+   "actor": 155515,
+   "target": 29556,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 114715,
+   "target": 76333,
+   "chosen": 2,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 80666,
+   "target": 84127,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.267016200586463,
+   "lastTrust": 10.267016200586463,
+   "firstAffinity": 2.0911069236175,
+   "lastAffinity": 2.0911069236175
+  },
+  {
+   "actor": 98050,
+   "target": 62538,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 107224,
+   "target": 32375,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.697784726212195,
+   "lastTrust": 10.697784726212195,
+   "firstAffinity": 4.6367535759342156,
+   "lastAffinity": 4.6367535759342156
+  },
+  {
+   "actor": 106440,
+   "target": 17300,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 173426,
+   "target": 107206,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173742,
+   "target": 35164,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 98.9,
+   "lastTrust": 98.9,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 53580,
+   "target": 14010,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.71528078227563,
+   "lastTrust": 11.71528078227563,
+   "firstAffinity": 9.00828118521266,
+   "lastAffinity": 9.00828118521266
+  },
+  {
+   "actor": 176462,
+   "target": 72927,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 1106,
+   "target": 1107,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 99.7871200000004,
+   "lastTrust": 99.7871200000004,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 164105,
+   "target": 1115,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 1.49475,
+   "lastAffinity": 1.49475
+  },
+  {
+   "actor": 114715,
+   "target": 176462,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 52299,
+   "target": 53580,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.796800000000001,
+   "lastTrust": 10.796800000000001,
+   "firstAffinity": 2.1257700391893493,
+   "lastAffinity": 2.1257700391893493
+  },
+  {
+   "actor": 80666,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 84127,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 11.422831684914359,
+   "lastTrust": 11.422831684914359,
+   "firstAffinity": 12.680688273795123,
+   "lastAffinity": 12.680688273795123
+  },
+  {
+   "actor": 11743,
+   "target": 143446,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 65913,
+   "target": 114715,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.88373517604009,
+   "lastTrust": 10.88373517604009,
+   "firstAffinity": 6.715909745168363,
+   "lastAffinity": 6.715909745168363
+  },
+  {
+   "actor": 88287,
+   "target": 85056,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.15921803825775,
+   "lastTrust": 10.15921803825775,
+   "firstAffinity": 0.4073152377043011,
+   "lastAffinity": 0.4073152377043011
+  },
+  {
+   "actor": 23712,
+   "target": 1120,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 96.71956400000091,
+   "lastTrust": 96.71956400000091,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 90661,
+   "target": 168262,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 9.848928102070788,
+   "lastTrust": 9.848928102070788,
+   "firstAffinity": 2.3751069713690787,
+   "lastAffinity": 2.3751069713690787
+  },
+  {
+   "actor": 52299,
+   "target": 156879,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173427,
+   "target": 1101,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173427,
+   "target": 23712,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.8866956362521,
+   "lastTrust": 11.8866956362521,
+   "firstAffinity": 9.156670798136918,
+   "lastAffinity": 9.156670798136918
+  },
+  {
+   "actor": 32375,
+   "target": 32374,
+   "chosen": 2,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 80666,
+   "target": 155515,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 12.90799138490814,
+   "lastTrust": 12.90799138490814,
+   "firstAffinity": 6.225350797324761,
+   "lastAffinity": 6.225350797324761
+  },
+  {
+   "actor": 1130,
+   "target": 155515,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.766683375715195,
+   "lastTrust": 10.766683375715195,
+   "firstAffinity": 1.129888201716897,
+   "lastAffinity": 1.129888201716897
+  },
+  {
+   "actor": 85056,
+   "target": 26659,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.701346436688313,
+   "lastTrust": 10.701346436688313,
+   "firstAffinity": 1.5273846913923779,
+   "lastAffinity": 1.5273846913923779
+  },
+  {
+   "actor": 98050,
+   "target": 107225,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 11743,
+   "target": 187852,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 143446,
+   "target": 143444,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 11743,
+   "target": 107206,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.354915187378271,
+   "lastTrust": 10.354915187378271,
+   "firstAffinity": 1.8404761046367193,
+   "lastAffinity": 1.8404761046367193
+  },
+  {
+   "actor": 106440,
+   "target": 17301,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 2
+   },
+   "firstTrust": 90.1999999999999,
+   "lastTrust": 90.1999999999999,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 173742,
+   "target": 88287,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 61.800000000000004,
+   "lastTrust": 62.6,
+   "firstAffinity": 79.79999999999995,
+   "lastAffinity": 83.29999999999995
+  },
+  {
+   "actor": 50731,
+   "target": 50730,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 88.89999999999982,
+   "lastTrust": 88.89999999999982,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 14010,
+   "target": 1133,
+   "chosen": 2,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 53580,
+   "target": 53579,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 91742,
+   "target": 85056,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 17.188280886942092,
+   "lastTrust": 17.188280886942092,
+   "firstAffinity": 31.85220140023819,
+   "lastAffinity": 31.85220140023819
+  },
+  {
+   "actor": 1097,
+   "target": 160384,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 106440,
+   "target": 65913,
+   "chosen": 1,
+   "outcomes": {
+    "interrupted": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 91742,
+   "target": 88287,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.238741198183178,
+   "lastTrust": 11.238741198183178,
+   "firstAffinity": 4.369591387561415,
+   "lastAffinity": 4.369591387561415
+  },
+  {
+   "actor": 114474,
+   "target": 1103,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.331209129730949,
+   "lastTrust": 11.331209129730949,
+   "firstAffinity": 7.94770755815038,
+   "lastAffinity": 7.94770755815038
+  },
+  {
+   "actor": 1131,
+   "target": 1130,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 32375,
+   "target": 138779,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 32375,
+   "target": 98401,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173426,
+   "target": 91742,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.3,
+   "lastAffinity": 0.3
+  },
+  {
+   "actor": 47426,
+   "target": 47425,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 143444,
+   "target": 155515,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.889636563583617,
+   "lastTrust": 10.889636563583617,
+   "firstAffinity": 5.013225566032555,
+   "lastAffinity": 5.013225566032555
+  },
+  {
+   "actor": 143446,
+   "target": 155515,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.763616642212334,
+   "lastTrust": 10.763616642212334,
+   "firstAffinity": 1.665183075710107,
+   "lastAffinity": 1.665183075710107
+  },
+  {
+   "actor": 173426,
+   "target": 85056,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173426,
+   "target": 47427,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 90662,
+   "target": 95016,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 103874,
+   "target": 1107,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.852640861922401,
+   "lastTrust": 11.852640861922401,
+   "firstAffinity": 10.262770492495585,
+   "lastAffinity": 10.262770492495585
+  },
+  {
+   "actor": 1098,
+   "target": 1097,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 2
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 35164,
+   "target": 88287,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 2
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 103874,
+   "target": 150198,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 1.0072422043697042,
+   "lastAffinity": 1.0072422043697042
+  },
+  {
+   "actor": 103874,
+   "target": 6559,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.536262323760218,
+   "lastTrust": 11.536262323760218,
+   "firstAffinity": 9.568268642103053,
+   "lastAffinity": 9.568268642103053
+  },
+  {
+   "actor": 150198,
+   "target": 164104,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.089622487452292,
+   "lastTrust": 11.089622487452292,
+   "firstAffinity": 2.1610482791614003,
+   "lastAffinity": 2.1610482791614003
+  },
+  {
+   "actor": 1128,
+   "target": 1142,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.875439073957128,
+   "lastTrust": 10.8719373176613,
+   "firstAffinity": 4.245829729034914,
+   "lastAffinity": 4.529919324983291
+  },
+  {
+   "actor": 1111,
+   "target": 76332,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.162547395941465,
+   "lastTrust": 10.162547395941465,
+   "firstAffinity": 2.4385464774009953,
+   "lastAffinity": 2.4385464774009953
+  },
+  {
+   "actor": 134842,
+   "target": 134843,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 76.65045333333322,
+   "lastTrust": 76.65045333333322,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 103874,
+   "target": 114474,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 14.854134936769249,
+   "lastTrust": 14.854134936769249,
+   "firstAffinity": 17.25256583096527,
+   "lastAffinity": 17.25256583096527
+  },
+  {
+   "actor": 90661,
+   "target": 90662,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 70.09999999999997,
+   "lastTrust": 70.09999999999997,
+   "firstAffinity": 94.13657331099174,
+   "lastAffinity": 94.13657331099174
+  },
+  {
+   "actor": 90661,
+   "target": 80666,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 12.156224159812954,
+   "lastTrust": 12.156224159812954,
+   "firstAffinity": 9.35054543587101,
+   "lastAffinity": 9.35054543587101
+  },
+  {
+   "actor": 134842,
+   "target": 143446,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 16.42854842319712,
+   "lastTrust": 16.42854842319712,
+   "firstAffinity": 11.299102405468401,
+   "lastAffinity": 11.299102405468401
+  },
+  {
+   "actor": 193636,
+   "target": 17299,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 80666,
+   "target": 90661,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.38788647297193,
+   "lastTrust": 11.38788647297193,
+   "firstAffinity": 7.979678122770391,
+   "lastAffinity": 7.979678122770391
+  },
+  {
+   "actor": 42843,
+   "target": 42844,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 134842,
+   "target": 110523,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 1.795175209968891,
+   "lastAffinity": 1.795175209968891
+  },
+  {
+   "actor": 91742,
+   "target": 21045,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 52299,
+   "target": 32375,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 52299,
+   "target": 32373,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 14010,
+   "target": 1134,
+   "chosen": 2,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 129011,
+   "target": 84898,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.658371323981832,
+   "lastTrust": 10.658371323981832,
+   "firstAffinity": 1.7627654401879245,
+   "lastAffinity": 1.7627654401879245
+  },
+  {
+   "actor": 106440,
+   "target": 23650,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 15.080783722539184,
+   "lastTrust": 15.080783722539184,
+   "firstAffinity": 20.43409141055152,
+   "lastAffinity": 20.43409141055152
+  },
+  {
+   "actor": 53580,
+   "target": 53578,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1130,
+   "target": 14010,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 15.444196875726554,
+   "lastTrust": 15.444196875726554,
+   "firstAffinity": 24.573713458255895,
+   "lastAffinity": 24.573713458255895
+  },
+  {
+   "actor": 134842,
+   "target": 1120,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 1.5189616545792564,
+   "lastAffinity": 1.5189616545792564
+  },
+  {
+   "actor": 173427,
+   "target": 155515,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 107225,
+   "target": 21046,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.194800421136144,
+   "lastTrust": 11.194800421136144,
+   "firstAffinity": 2.175342196444312,
+   "lastAffinity": 2.175342196444312
+  },
+  {
+   "actor": 134842,
+   "target": 1102,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 173427,
+   "target": 1107,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 65913,
+   "target": 146765,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 72.19999999999997,
+   "lastTrust": 72.19999999999997,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 156879,
+   "target": 193497,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 193636,
+   "target": 1120,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 193636,
+   "target": 107224,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 0,
+   "lastTrust": 0,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 187852,
+   "target": 53579,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 87.8,
+   "lastTrust": 87.8,
+   "firstAffinity": 89.2,
+   "lastAffinity": 89.2
+  },
+  {
+   "actor": 107225,
+   "target": 1110,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0,
+   "lastAffinity": 0
+  },
+  {
+   "actor": 80666,
+   "target": 129011,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 2.3025032083136328,
+   "lastAffinity": 2.3025032083136328
+  },
+  {
+   "actor": 47427,
+   "target": 47425,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 193497,
+   "target": 17299,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 87.8,
+   "lastTrust": 87.8,
+   "firstAffinity": 89.2,
+   "lastAffinity": 89.2
+  },
+  {
+   "actor": 1123,
+   "target": 1137,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 11.744686583386233,
+   "lastTrust": 11.744686583386233,
+   "firstAffinity": 10.001000621850224,
+   "lastAffinity": 10.001000621850224
+  },
+  {
+   "actor": 1123,
+   "target": 1128,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 20.044282032941826,
+   "lastTrust": 20.044282032941826,
+   "firstAffinity": 26.476611380978248,
+   "lastAffinity": 26.476611380978248
+  },
+  {
+   "actor": 1111,
+   "target": 1110,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 90661,
+   "target": 164105,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10,
+   "lastTrust": 10,
+   "firstAffinity": 0.9860756081298148,
+   "lastAffinity": 0.9860756081298148
+  },
+  {
+   "actor": 80666,
+   "target": 129012,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.190562569329483,
+   "lastTrust": 10.190562569329483,
+   "firstAffinity": 0.6496257302771073,
+   "lastAffinity": 0.6496257302771073
+  },
+  {
+   "actor": 1130,
+   "target": 1142,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.652712248303876,
+   "lastTrust": 10.652712248303876,
+   "firstAffinity": 4.374639628138526,
+   "lastAffinity": 4.374639628138526
+  },
+  {
+   "actor": 1098,
+   "target": 1123,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 9.583265533810238,
+   "lastTrust": 9.583265533810238,
+   "firstAffinity": 15.270023931174808,
+   "lastAffinity": 15.270023931174808
+  },
+  {
+   "actor": 88287,
+   "target": 173742,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 63.699999999999996,
+   "lastTrust": 63.699999999999996,
+   "firstAffinity": 82.39999999999995,
+   "lastAffinity": 82.39999999999995
+  },
+  {
+   "actor": 3747,
+   "target": 1139,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 16.777898982080906,
+   "lastTrust": 16.777898982080906,
+   "firstAffinity": 44.856929276229344,
+   "lastAffinity": 44.856929276229344
+  },
+  {
+   "actor": 1098,
+   "target": 3747,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.155417283375382,
+   "lastTrust": 11.155417283375382,
+   "firstAffinity": 12.12451512063093,
+   "lastAffinity": 12.12451512063093
+  },
+  {
+   "actor": 1097,
+   "target": 1098,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1140,
+   "target": 1139,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 100,
+   "lastTrust": 100,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1123,
+   "target": 1098,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 13.187636516757228,
+   "lastTrust": 13.187636516757228,
+   "firstAffinity": 13.648453004060482,
+   "lastAffinity": 13.648453004060482
+  },
+  {
+   "actor": 76334,
+   "target": 114715,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 83.59999999999997,
+   "lastTrust": 83.59999999999997,
+   "firstAffinity": 100,
+   "lastAffinity": 100
+  },
+  {
+   "actor": 1130,
+   "target": 1139,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 10.673875990766366,
+   "lastTrust": 10.673875990766366,
+   "firstAffinity": 2.972741326870395,
+   "lastAffinity": 2.972741326870395
+  },
+  {
+   "actor": 1123,
+   "target": 1140,
+   "chosen": 1,
+   "outcomes": {
+    "failed": 1
+   },
+   "firstTrust": 10.31285094955121,
+   "lastTrust": 10.31285094955121,
+   "firstAffinity": 3.444737154033923,
+   "lastAffinity": 3.444737154033923
+  },
+  {
+   "actor": 26659,
+   "target": 35164,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 13.121980968724767,
+   "lastTrust": 13.121980968724767,
+   "firstAffinity": 11.686357987655727,
+   "lastAffinity": 11.686357987655727
+  },
+  {
+   "actor": 1123,
+   "target": 107225,
+   "chosen": 1,
+   "outcomes": {},
+   "firstTrust": 11.25722964500373,
+   "lastTrust": 11.25722964500373,
+   "firstAffinity": 2.7834357121885485,
+   "lastAffinity": 2.7834357121885485
+  }
+ ]
+}
