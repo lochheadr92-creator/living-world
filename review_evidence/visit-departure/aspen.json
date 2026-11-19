@@ -1,0 +1,1620 @@
+{
+ "seed": "aspen",
+ "endHash": "243d5e61",
+ "rows": [
+  {
+   "id": 188461,
+   "tick": 230758,
+   "visitor": {
+    "id": 10900,
+    "name": "Milo",
+    "x": 28.5,
+    "y": 31.5,
+    "space": 18301
+   },
+   "target": {
+    "id": 10899,
+    "name": "Odette",
+    "x": 27.51619900255464,
+    "y": 30.61500296711456,
+    "space": 0,
+    "activity": "gather"
+   },
+   "loc": {
+    "x": 28.5,
+    "y": 31.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 28.5,
+    "y": 31.5,
+    "tick": 230720,
+    "room": {
+     "homeId": 18301,
+     "name": "Odette",
+     "hungry": true,
+     "thirsty": false,
+     "needsCare": false,
+     "household": true
+    },
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    28.5,
+    31.5
+   ],
+   "purpose": "to bring grain to Odette",
+   "seen": false,
+   "end": 230769,
+   "result": "failed",
+   "detail": "they needed something I did not have on me",
+   "endVisitor": {
+    "id": 10900,
+    "name": "Milo",
+    "x": 28.5,
+    "y": 31.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 10899,
+    "name": "Odette",
+    "x": 27.51619900255464,
+    "y": 30.61500296711456,
+    "space": 0,
+    "activity": "gather"
+   },
+   "endSpot": [
+    28.5,
+    31.5
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 188822,
+   "tick": 230957,
+   "visitor": {
+    "id": 127104,
+    "name": "Isla II",
+    "x": 42.54077074483503,
+    "y": 13.608408315782436,
+    "space": 0
+   },
+   "target": {
+    "id": 127105,
+    "name": "Vik II",
+    "x": 40.5,
+    "y": 15.5,
+    "space": 148968,
+    "activity": "rest"
+   },
+   "loc": {
+    "x": 40.5,
+    "y": 15.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 40.5,
+    "y": 15.5,
+    "tick": 230796,
+    "room": {
+     "homeId": 148968,
+     "name": "Vik II",
+     "hungry": true,
+     "thirsty": false,
+     "needsCare": false,
+     "household": true
+    },
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    40.5,
+    15.5
+   ],
+   "purpose": "to bring fruit to Vik II",
+   "seen": false,
+   "end": 230957,
+   "result": "failed",
+   "detail": "they are inside a different space",
+   "endVisitor": {
+    "id": 127104,
+    "name": "Isla II",
+    "x": 42.54077074483503,
+    "y": 13.608408315782436,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 127105,
+    "name": "Vik II",
+    "x": 40.5,
+    "y": 15.5,
+    "space": 148968,
+    "activity": "rest"
+   },
+   "endSpot": [
+    40.5,
+    15.5
+   ],
+   "phase": "travel"
+  },
+  {
+   "id": 188989,
+   "tick": 231029,
+   "visitor": {
+    "id": 67472,
+    "name": "Bram",
+    "x": 26.614011166687124,
+    "y": 39.36989500478376,
+    "space": 0
+   },
+   "target": {
+    "id": 127004,
+    "name": "Cole II",
+    "x": 21.5,
+    "y": 45.5,
+    "space": 115974,
+    "activity": "rest"
+   },
+   "loc": {
+    "x": 21.5,
+    "y": 45.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 21.5,
+    "y": 45.5,
+    "tick": 230848,
+    "room": {
+     "homeId": 115974,
+     "name": "Cole II",
+     "hungry": false,
+     "thirsty": false,
+     "needsCare": true,
+     "household": true
+    },
+    "seen": {
+     "hungry": false,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    21.5,
+    45.5
+   ],
+   "purpose": "to bring grain to Cole II",
+   "seen": false,
+   "end": 231029,
+   "result": "failed",
+   "detail": "they are inside a different space",
+   "endVisitor": {
+    "id": 67472,
+    "name": "Bram",
+    "x": 26.614011166687124,
+    "y": 39.36989500478376,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 127004,
+    "name": "Cole II",
+    "x": 21.5,
+    "y": 45.5,
+    "space": 115974,
+    "activity": "rest"
+   },
+   "endSpot": [
+    21.5,
+    45.5
+   ],
+   "phase": "travel"
+  },
+  {
+   "id": 189168,
+   "tick": 231102,
+   "visitor": {
+    "id": 127104,
+    "name": "Isla II",
+    "x": 39.43458196748979,
+    "y": 18.5581473285798,
+    "space": 0
+   },
+   "target": {
+    "id": 127105,
+    "name": "Vik II",
+    "x": 40.5,
+    "y": 15.5,
+    "space": 148968,
+    "activity": "rest"
+   },
+   "loc": {
+    "x": 40.5,
+    "y": 15.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 40.5,
+    "y": 15.5,
+    "tick": 230796,
+    "room": {
+     "homeId": 148968,
+     "name": "Vik II",
+     "hungry": true,
+     "thirsty": false,
+     "needsCare": false,
+     "household": true
+    },
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    40.5,
+    15.5
+   ],
+   "purpose": "to bring fruit to Vik II",
+   "seen": false,
+   "end": 231102,
+   "result": "failed",
+   "detail": "they are inside a different space",
+   "endVisitor": {
+    "id": 127104,
+    "name": "Isla II",
+    "x": 39.43458196748979,
+    "y": 18.5581473285798,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 127105,
+    "name": "Vik II",
+    "x": 40.5,
+    "y": 15.5,
+    "space": 148968,
+    "activity": "rest"
+   },
+   "endSpot": [
+    40.5,
+    15.5
+   ],
+   "phase": "travel"
+  },
+  {
+   "id": 188972,
+   "tick": 231023,
+   "visitor": {
+    "id": 148371,
+    "name": "Rafe III",
+    "x": 37.52320228018798,
+    "y": 29.36185841751285,
+    "space": 0
+   },
+   "target": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 42.944162575003716,
+    "y": 37.83248772501117,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 41.29875639915958,
+    "y": 36.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 41.29875639915958,
+    "y": 36.5,
+    "tick": 230997,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    41.29875639915958,
+    36.5
+   ],
+   "purpose": "to bring grain to Sana",
+   "seen": false,
+   "end": 231102,
+   "result": "failed",
+   "detail": "Sana was not where I expected",
+   "endVisitor": {
+    "id": 148371,
+    "name": "Rafe III",
+    "x": 41.29875639915958,
+    "y": 36.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 46.886450728482345,
+    "y": 44.183383350290235,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "endSpot": [
+    41.29875639915958,
+    36.5
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189189,
+   "tick": 231108,
+   "visitor": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 51.5,
+    "y": 15.5,
+    "space": 165935
+   },
+   "target": {
+    "id": 16452,
+    "name": "Esme",
+    "x": 47.5,
+    "y": 21.5,
+    "space": 0,
+    "activity": "converse"
+   },
+   "loc": {
+    "x": 51.5,
+    "y": 15.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 51.5,
+    "y": 15.5,
+    "tick": 230900,
+    "room": {
+     "homeId": 165935,
+     "name": "Esme",
+     "hungry": false,
+     "thirsty": false,
+     "needsCare": false,
+     "household": true
+    },
+    "seen": {
+     "hungry": false,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    51.5,
+    15.5
+   ],
+   "purpose": "to find Esme, who can see to me",
+   "seen": false,
+   "end": 231108,
+   "result": "failed",
+   "detail": "Esme was not where I expected",
+   "endVisitor": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 51.5,
+    "y": 15.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 16452,
+    "name": "Esme",
+    "x": 47.5,
+    "y": 21.5,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    51.5,
+    15.5
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189191,
+   "tick": 231109,
+   "visitor": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 51.5,
+    "y": 15.5,
+    "space": 0
+   },
+   "target": {
+    "id": 16453,
+    "name": "Zed",
+    "x": 39.62349906012332,
+    "y": 21.26017400612162,
+    "space": 0,
+    "activity": "converse"
+   },
+   "loc": {
+    "x": 51.5,
+    "y": 15.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 51.5,
+    "y": 15.5,
+    "tick": 230807,
+    "room": {
+     "homeId": 165935,
+     "name": "Zed",
+     "hungry": true,
+     "thirsty": false,
+     "needsCare": false,
+     "household": true
+    },
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    51.5,
+    15.5
+   ],
+   "purpose": "to find Zed, who can see to me",
+   "seen": false,
+   "end": 231109,
+   "result": "failed",
+   "detail": "Zed was not where I expected",
+   "endVisitor": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 51.5,
+    "y": 15.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 16453,
+    "name": "Zed",
+    "x": 39.62349906012332,
+    "y": 21.26017400612162,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    51.5,
+    15.5
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189138,
+   "tick": 231086,
+   "visitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 39.49576955505181,
+    "y": 34.387680468941106,
+    "space": 0
+   },
+   "target": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 45.847501166076576,
+    "y": 42.9219246058748,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 43.5,
+    "y": 41.2221053807221,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 43.5,
+    "y": 41.2221053807221,
+    "tick": 231056,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    43.5,
+    41.2221053807221
+   ],
+   "purpose": "to bring fish to Sana",
+   "seen": false,
+   "end": 231160,
+   "result": "failed",
+   "detail": "Sana was not where I expected",
+   "endVisitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 43.5,
+    "y": 41.2221053807221,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 49.6378826385364,
+    "y": 47.524082425772214,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "endSpot": [
+    43.5,
+    41.2221053807221
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189100,
+   "tick": 231071,
+   "visitor": {
+    "id": 144119,
+    "name": "Zed II",
+    "x": 40.37517852669116,
+    "y": 34.59968675407581,
+    "space": 0
+   },
+   "target": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 44.62026403186978,
+    "y": 42.0601320159349,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 43.981939568358,
+    "y": 41.740969784179,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 43.981939568358,
+    "y": 41.740969784179,
+    "tick": 231064,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    43.981939568358,
+    41.740969784179
+   ],
+   "purpose": "to bring grain to Sana",
+   "seen": false,
+   "end": 231231,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 144119,
+    "name": "Zed II",
+    "x": 51.418282873418896,
+    "y": 47.23726179954151,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 53.513605898563526,
+    "y": 50.57859239637463,
+    "space": 0,
+    "activity": "socialize"
+   },
+   "endSpot": [
+    51.418282873418896,
+    47.23726179954151
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189263,
+   "tick": 231136,
+   "visitor": {
+    "id": 1112,
+    "name": "Eli",
+    "x": 42.47124456109013,
+    "y": 13.499117174302228,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 47.5,
+    "y": 39.07638429764466,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 48.251425229743035,
+    "y": 28.991448621541707,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 48.251425229743035,
+    "y": 28.991448621541707,
+    "tick": 231031,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    48.251425229743035,
+    28.991448621541707
+   ],
+   "purpose": "to bring fruit to Mona II",
+   "seen": false,
+   "end": 231313,
+   "result": "failed",
+   "detail": "Mona II was not where I expected",
+   "endVisitor": {
+    "id": 1112,
+    "name": "Eli",
+    "x": 48.251425229743035,
+    "y": 28.991448621541707,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 45.8010180222303,
+    "y": 40.102036044460604,
+    "space": 0,
+    "activity": "wander"
+   },
+   "endSpot": [
+    48.251425229743035,
+    28.991448621541707
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189154,
+   "tick": 231094,
+   "visitor": {
+    "id": 60648,
+    "name": "Jax",
+    "x": 59.54060835433192,
+    "y": 13.559003086667508,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 47.5,
+    "y": 34.988900857782326,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 49.09779115553224,
+    "y": 23.913253066806544,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 49.09779115553224,
+    "y": 23.913253066806544,
+    "tick": 230976,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    49.09779115553224,
+    23.913253066806544
+   ],
+   "purpose": "to bring grain to Mona II",
+   "seen": false,
+   "end": 231328,
+   "result": "failed",
+   "detail": "Mona II was not where I expected",
+   "endVisitor": {
+    "id": 60648,
+    "name": "Jax",
+    "x": 49.09779115553224,
+    "y": 23.913253066806544,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 44.750648962745366,
+    "y": 39.5,
+    "space": 0,
+    "activity": "wander"
+   },
+   "endSpot": [
+    49.09779115553224,
+    23.913253066806544
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189478,
+   "tick": 231220,
+   "visitor": {
+    "id": 122906,
+    "name": "Edda II",
+    "x": 55.42938769357279,
+    "y": 22.39619893224444,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 46.80861926342655,
+    "y": 42.11723852685309,
+    "space": 0,
+    "activity": "warm"
+   },
+   "loc": {
+    "x": 47.87109323481346,
+    "y": 31.2734405911192,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 47.87109323481346,
+    "y": 31.2734405911192,
+    "tick": 231055,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    47.87109323481346,
+    31.2734405911192
+   ],
+   "purpose": "to bring fruit to Mona II",
+   "seen": false,
+   "end": 231331,
+   "result": "failed",
+   "detail": "Mona II was not where I expected",
+   "endVisitor": {
+    "id": 122906,
+    "name": "Edda II",
+    "x": 47.87109323481346,
+    "y": 31.2734405911192,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 44.47182818395121,
+    "y": 39.5,
+    "space": 0,
+    "activity": "wander"
+   },
+   "endSpot": [
+    47.87109323481346,
+    31.2734405911192
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189733,
+   "tick": 231332,
+   "visitor": {
+    "id": 122906,
+    "name": "Edda II",
+    "x": 47.87109323481346,
+    "y": 31.2734405911192,
+    "space": 0
+   },
+   "target": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 55.33279275330477,
+    "y": 23.5,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 55.62540227762041,
+    "y": 24.849674145422316,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 55.62540227762041,
+    "y": 24.849674145422316,
+    "tick": 231313,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    55.62540227762041,
+    24.849674145422316
+   ],
+   "purpose": "to bring fruit to Wes II",
+   "seen": false,
+   "end": 231402,
+   "result": "failed",
+   "detail": "they needed something I did not have on me",
+   "endVisitor": {
+    "id": 122906,
+    "name": "Edda II",
+    "x": 52.54392985676146,
+    "y": 25.49185842870421,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 52.5,
+    "y": 22.64533572048979,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    52.54392985676146,
+    25.49185842870421
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189741,
+   "tick": 231335,
+   "visitor": {
+    "id": 27213,
+    "name": "Pia",
+    "x": 44.501463631377554,
+    "y": 15.500854290137067,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 44.09937537269011,
+    "y": 39.5,
+    "space": 0,
+    "activity": "wander"
+   },
+   "loc": {
+    "x": 48.17228783849838,
+    "y": 29.46627296900966,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 48.17228783849838,
+    "y": 29.46627296900966,
+    "tick": 231036,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    48.17228783849838,
+    29.46627296900966
+   ],
+   "purpose": "to bring fruit to Mona II",
+   "seen": false,
+   "end": 231478,
+   "result": "failed",
+   "detail": "Mona II was not where I expected",
+   "endVisitor": {
+    "id": 27213,
+    "name": "Pia",
+    "x": 48.17228783849838,
+    "y": 29.46627296900966,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 37.84079317391312,
+    "y": 33.5,
+    "space": 0,
+    "activity": "warm"
+   },
+   "endSpot": [
+    48.17228783849838,
+    29.46627296900966
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189675,
+   "tick": 231304,
+   "visitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 53.5,
+    "y": 45.5,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 45.927058081764756,
+    "y": 40.35411616352951,
+    "space": 0,
+    "activity": "converse"
+   },
+   "loc": {
+    "x": 46.13717653746854,
+    "y": 40.77435307493708,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 46.13717653746854,
+    "y": 40.77435307493708,
+    "tick": 231236,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    46.13717653746854,
+    40.77435307493708
+   ],
+   "purpose": "to bring fish to Mona II",
+   "seen": false,
+   "end": 231505,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 38.36471344261731,
+    "y": 34.65,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 38.5,
+    "y": 35.385120708849655,
+    "space": 0,
+    "activity": "warm"
+   },
+   "endSpot": [
+    38.36471344261731,
+    34.65
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189943,
+   "tick": 231415,
+   "visitor": {
+    "id": 94549,
+    "name": "Faye",
+    "x": 42.36344110216014,
+    "y": 42.46448224983178,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 40.5,
+    "y": 34.61437948065787,
+    "space": 0,
+    "activity": "wander"
+   },
+   "loc": {
+    "x": 40.5,
+    "y": 35.00581730357093,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 40.5,
+    "y": 35.00581730357093,
+    "tick": 231410,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    40.5,
+    35.00581730357093
+   ],
+   "purpose": "to bring fruit to Mona II",
+   "seen": false,
+   "end": 231512,
+   "result": "failed",
+   "detail": "they needed something I did not have on me",
+   "endVisitor": {
+    "id": 94549,
+    "name": "Faye",
+    "x": 38.449148733451494,
+    "y": 36.09473006667223,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 38.5,
+    "y": 36.107727684849664,
+    "space": 0,
+    "activity": "warm"
+   },
+   "endSpot": [
+    38.449148733451494,
+    36.09473006667223
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189970,
+   "tick": 231428,
+   "visitor": {
+    "id": 1112,
+    "name": "Eli",
+    "x": 45.5,
+    "y": 27.879587163607436,
+    "space": 0
+   },
+   "target": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 52.5,
+    "y": 22.64533572048979,
+    "space": 0,
+    "activity": "converse"
+   },
+   "loc": {
+    "x": 55.573634963824944,
+    "y": 23.879705169488663,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 55.573634963824944,
+    "y": 23.879705169488663,
+    "tick": 231301,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    55.573634963824944,
+    23.879705169488663
+   ],
+   "purpose": "to bring fruit to Wes II",
+   "seen": false,
+   "end": 231517,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 1112,
+    "name": "Eli",
+    "x": 50.174721669049404,
+    "y": 22.80726286461146,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 52.2625859654612,
+    "y": 24.166155139398544,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    50.174721669049404,
+    22.80726286461146
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 190057,
+   "tick": 231469,
+   "visitor": {
+    "id": 60648,
+    "name": "Jax",
+    "x": 44.512270085536876,
+    "y": 24.59881120421924,
+    "space": 0
+   },
+   "target": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 52.2625859654612,
+    "y": 24.166155139398544,
+    "space": 0,
+    "activity": "converse"
+   },
+   "loc": {
+    "x": 52.5,
+    "y": 22.64533572048979,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 52.5,
+    "y": 22.64533572048979,
+    "tick": 231432,
+    "seen": {
+     "hungry": false,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    52.5,
+    22.64533572048979
+   ],
+   "purpose": "to bring grain to Wes II",
+   "seen": false,
+   "end": 231531,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 60648,
+    "name": "Jax",
+    "x": 49.9625859654612,
+    "y": 24.166155139398544,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 112048,
+    "name": "Wes II",
+    "x": 52.2625859654612,
+    "y": 24.166155139398544,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    49.9625859654612,
+    24.166155139398544
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 190011,
+   "tick": 231445,
+   "visitor": {
+    "id": 157428,
+    "name": "Thea II",
+    "x": 46.621506327646784,
+    "y": 52.371854885062206,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 37.73046423118347,
+    "y": 33.57682141039449,
+    "space": 0,
+    "activity": "wander"
+   },
+   "loc": {
+    "x": 45.31836549777085,
+    "y": 39.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 45.31836549777085,
+    "y": 39.5,
+    "tick": 231321,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    45.31836549777085,
+    39.5
+   ],
+   "purpose": "to bring fruit to Mona II",
+   "seen": false,
+   "end": 231541,
+   "result": "failed",
+   "detail": "Mona II was not where I expected",
+   "endVisitor": {
+    "id": 157428,
+    "name": "Thea II",
+    "x": 45.31836549777085,
+    "y": 39.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 39.63950238432735,
+    "y": 36.45466349490452,
+    "space": 0,
+    "activity": "warm"
+   },
+   "endSpot": [
+    45.31836549777085,
+    39.5
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 189977,
+   "tick": 231432,
+   "visitor": {
+    "id": 53758,
+    "name": "Una",
+    "x": 46.513645043319194,
+    "y": 49.522546202081934,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 39.03023208514899,
+    "y": 34.01007736171632,
+    "space": 0,
+    "activity": "wander"
+   },
+   "loc": {
+    "x": 43.8150638518625,
+    "y": 39.5,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 43.8150638518625,
+    "y": 39.5,
+    "tick": 231338,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    43.8150638518625,
+    39.5
+   ],
+   "purpose": "to bring grain to Mona II",
+   "seen": false,
+   "end": 231597,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 53758,
+    "name": "Una",
+    "x": 39.84011253314574,
+    "y": 37.253988344937056,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 40.4836760771228,
+    "y": 36.538425075798294,
+    "space": 0,
+    "activity": "warm"
+   },
+   "endSpot": [
+    39.84011253314574,
+    37.253988344937056
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 190351,
+   "tick": 231603,
+   "visitor": {
+    "id": 1124,
+    "name": "Zia",
+    "x": 43.55048430003226,
+    "y": 27.605312979314476,
+    "space": 0
+   },
+   "target": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 51.96867399175998,
+    "y": 55.976502074477686,
+    "space": 0,
+    "activity": "socialize"
+   },
+   "loc": {
+    "x": 43.5,
+    "y": 30.5,
+    "how": "at their home"
+   },
+   "memory": null,
+   "spot": [
+    43.5,
+    30.5
+   ],
+   "purpose": "to see how Sana is",
+   "seen": false,
+   "end": 231608,
+   "result": "failed",
+   "detail": "Sana was not where I expected",
+   "endVisitor": {
+    "id": 1124,
+    "name": "Zia",
+    "x": 43.5,
+    "y": 28.2,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 73890,
+    "name": "Sana",
+    "x": 52.40403737039942,
+    "y": 55.91227079674056,
+    "space": 0,
+    "activity": "socialize"
+   },
+   "endSpot": [
+    43.5,
+    28.2
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 190302,
+   "tick": 231581,
+   "visitor": {
+    "id": 161974,
+    "name": "Otto II",
+    "x": 46.65993144382902,
+    "y": 49.99614935543602,
+    "space": 0
+   },
+   "target": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 40.25166961128589,
+    "y": 36.51540466125336,
+    "space": 0,
+    "activity": "warm"
+   },
+   "loc": {
+    "x": 40.5,
+    "y": 35.299404935570934,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 40.5,
+    "y": 35.299404935570934,
+    "tick": 231407,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    40.5,
+    35.299404935570934
+   ],
+   "purpose": "to bring fish to Mona II",
+   "seen": false,
+   "end": 231848,
+   "result": "success",
+   "detail": "done",
+   "endVisitor": {
+    "id": 161974,
+    "name": "Otto II",
+    "x": 39.25877017311934,
+    "y": 32.49836973778797,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 153334,
+    "name": "Mona II",
+    "x": 38.54044492475223,
+    "y": 31.537115953629836,
+    "space": 0,
+    "activity": "sleep"
+   },
+   "endSpot": [
+    39.25877017311934,
+    32.49836973778797
+   ],
+   "phase": "work"
+  },
+  {
+   "id": 190652,
+   "tick": 231951,
+   "visitor": {
+    "id": 84694,
+    "name": "Sofia",
+    "x": 40.42649446176365,
+    "y": 34.591059248079546,
+    "space": 0
+   },
+   "target": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 26.5,
+    "y": 38.5,
+    "space": 17410,
+    "activity": "rest"
+   },
+   "loc": {
+    "x": 33.23415210194794,
+    "y": 32.53041860033774,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 33.23415210194794,
+    "y": 32.53041860033774,
+    "tick": 231665,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    33.23415210194794,
+    32.53041860033774
+   ],
+   "purpose": "to bring grain to Tariq",
+   "seen": false,
+   "end": 231951,
+   "result": "failed",
+   "detail": "they are inside a different space",
+   "endVisitor": {
+    "id": 84694,
+    "name": "Sofia",
+    "x": 40.42649446176365,
+    "y": 34.591059248079546,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 26.5,
+    "y": 38.5,
+    "space": 17410,
+    "activity": "rest"
+   },
+   "endSpot": [
+    33.23415210194794,
+    32.53041860033774
+   ],
+   "phase": "travel"
+  },
+  {
+   "id": 190740,
+   "tick": 232050,
+   "visitor": {
+    "id": 13516,
+    "name": "Cora",
+    "x": 28.5,
+    "y": 35.5,
+    "space": 0
+   },
+   "target": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 26.5,
+    "y": 38.5,
+    "space": 17410,
+    "activity": "rest"
+   },
+   "loc": {
+    "x": 28.360951188959568,
+    "y": 38.49139838241713,
+    "how": "last seen"
+   },
+   "memory": {
+    "x": 28.360951188959568,
+    "y": 38.49139838241713,
+    "tick": 231761,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    28.360951188959568,
+    38.49139838241713
+   ],
+   "purpose": "to bring fish to Tariq",
+   "seen": false,
+   "end": 232050,
+   "result": "failed",
+   "detail": "they are inside a different space",
+   "endVisitor": {
+    "id": 13516,
+    "name": "Cora",
+    "x": 28.5,
+    "y": 35.5,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 26.5,
+    "y": 38.5,
+    "space": 17410,
+    "activity": "rest"
+   },
+   "endSpot": [
+    28.360951188959568,
+    38.49139838241713
+   ],
+   "phase": "travel"
+  },
+  {
+   "id": 191314,
+   "tick": 232681,
+   "visitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 38.55049838162959,
+    "y": 34.58802188099362,
+    "space": 0
+   },
+   "target": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 28.5,
+    "y": 37.26142696730447,
+    "space": 0,
+    "activity": "eat_store"
+   },
+   "loc": {
+    "x": 31.175657283526938,
+    "y": 33.260399308367916,
+    "how": "last seen long ago"
+   },
+   "memory": {
+    "x": 31.175657283526938,
+    "y": 33.260399308367916,
+    "tick": 231689,
+    "seen": {
+     "hungry": true,
+     "thirsty": false,
+     "cold": false
+    }
+   },
+   "spot": [
+    31.175657283526938,
+    33.260399308367916
+   ],
+   "purpose": "to bring fish to Tariq",
+   "seen": false,
+   "end": 232760,
+   "result": "failed",
+   "detail": "Tariq was not where I expected",
+   "endVisitor": {
+    "id": 140824,
+    "name": "Mira II",
+    "x": 31.175657283526938,
+    "y": 33.260399308367916,
+    "space": 0
+   },
+   "endTarget": {
+    "id": 51620,
+    "name": "Tariq",
+    "x": 26.25463041422347,
+    "y": 38.30997710585479,
+    "space": 0,
+    "activity": "converse"
+   },
+   "endSpot": [
+    31.175657283526938,
+    33.260399308367916
+   ],
+   "phase": "work"
+  }
+ ]
+}
