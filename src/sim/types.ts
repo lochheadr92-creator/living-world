@@ -112,6 +112,7 @@ export interface Belief {
   state?: string;
   /** Dated observation of parts still inside a carcass, not withdrawable goods. */
   gear?:Pick<GearState,'kind'|'toolId'|'hhId'|'readyAt'|'state'|'checked'|'bodyId'> & {wear:number;catch:number};
+  carcassLivestock?: FarmSpecies;
   carcassParts?:Partial<Record<CarcassPart,number>>;
   progress?: number;
   fuel?: number;

@@ -95,8 +95,12 @@ export function carcassOptions(ctx:Ctx):void{
   for(const part of PARTS){
    if((b.carcassParts[part]??0)<1||weightOf(p.inv)+WEIGHT[part]>carryCap(w,p))continue;
    const need=part==='meat'?Math.max(0,ctx.drives.hunger)*.5+(ctx.food<2?24:6):part==='hide'?Math.max(p.inv.garment?5:24,wolfSkinWorth(w,p,b.hh??0)):ctx.food<2?18:4;
-   const util=need-pen(travel)*.6;if(util<5)continue;
-   addOption(ctx,{kind:'butcher',key:`butcher:${b.id}:${part}`,label:`Recover ${part} from the ${runsRulesVersion(w,130)?'body':'deer'}`,goal:'use the finite body before it decays',need:part==='hide'?'warmth':'hunger',util,parts:[['known recoverable body part',need],['walking',-pen(travel)*.6]],eta:travel+CARCASS_WORK,targetId:b.id,tag:part==='hide'?'warmth':'food',yields:part,make:()=>newActivity(w,p,{kind:'butcher',label:`Recovering ${part}`,goal:'use the body before it decays',targetId:b.id,targetType:'pile',tx:b.x,ty:b.y,spotX:b.x,spotY:b.y,utility:util,minCommit:20,maxTicks:900,data:{part}})});
+   const salvage = part==='meat' && b.carcassLivestock && b.hh===p.hhId && !ctx.critical
+     && runsRulesVersion(w,262) && w.tick-b.seen<CARCASS_LIFETIME;
+   const priority=salvage?Math.max(85,need):need;
+   const amount=salvage?Math.min(4,b.carcassParts.meat??0,Math.floor((carryCap(w,p)-weightOf(p.inv))/WEIGHT.meat)):1;
+   const util=priority-pen(travel)*.6;if(util<5)continue;
+   addOption(ctx,{kind:'butcher',key:`butcher:${b.id}:${part}`,label:`Recover ${part} from the ${runsRulesVersion(w,130)?'body':'deer'}`,goal:'use the finite body before it decays',need:part==='hide'?'warmth':'hunger',util,parts:[[salvage?'recover household livestock before it spoils':'known recoverable body part',priority],['walking',-pen(travel)*.6]],eta:travel+CARCASS_WORK*amount,targetId:b.id,tag:part==='hide'?'warmth':'food',yields:part,make:()=>newActivity(w,p,{kind:'butcher',label:`Recovering ${part}`,goal:'use the body before it decays',targetId:b.id,targetType:'pile',tx:b.x,ty:b.y,spotX:b.x,spotY:b.y,utility:util,minCommit:20,maxTicks:900,...(salvage?{amount}:{}),data:{part}})});
   }
  }
 }
@@ -105,7 +109,19 @@ export function carcassOptions(ctx:Ctx):void{
 export function validateCarcasses(w:World):void{
  const origins=new Set<number>();const integer=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>=0;
  const check=(items:import('./types').Items|undefined)=>{for(const k of ['hide','fat','rendered_fat'] as const)if(items?.[k]!==undefined&&(!hasCarcasses(w)||!integer(items[k])))throw Error('invalid carcass goods');};
- for(const p of w.persons){check(p.inv);for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);if(b.carcassParts!==undefined&&(!hasCarcasses(w)||b.kind!=='pile'||b.state!=='carcass'||!b.carcassParts||Object.entries(b.carcassParts).some(([k,n])=>!PARTS.includes(k as CarcassPart)||!integer(n)||n>(k==='meat'?4:1))))throw Error('invalid carcass observation');}}
+ for(const p of w.persons){
+  check(p.inv);
+  for(const b of Object.values(p.beliefs)){
+   check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);
+   const species=b.carcassLivestock;
+   if(species!==undefined&&(!runsRulesVersion(w,262)||!b.carcassParts||!Object.hasOwn(FARM_SPECIES,species)))throw Error('invalid livestock carcass observation');
+   if(b.carcassParts===undefined)continue;
+   // Older farm saves remember quantities but omit the species.
+   const maxMeat=species?FARM_SPECIES[species].meat:farmEnabled(w)?FARM_SPECIES.cow.meat:4;
+   if(!hasCarcasses(w)||b.kind!=='pile'||b.state!=='carcass'||!b.carcassParts||
+      Object.entries(b.carcassParts).some(([k,n])=>!PARTS.includes(k as CarcassPart)||!integer(n)||n>(k==='meat'?maxMeat:1)))throw Error('invalid carcass observation');
+  }
+ }
  for(const b of w.buildings){check(b.store.items);check(b.ops?.job?.held);check(b.ops?.produced);check(b.ops?.consumed);check(b.ops?.wasted);}
  for(const p of w.piles)check(p.items);for(const c of w.carts)check(c.load);for(const m of w.meals)check(m.table);for(const s of w.sites){check(s.delivered);check(s.used);}
  check(w.ledger.initial);check(w.ledger.created);check(w.ledger.consumed);check(w.ledger.spoiled);

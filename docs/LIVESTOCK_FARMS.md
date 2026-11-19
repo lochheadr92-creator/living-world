@@ -32,3 +32,9 @@ The final daily records are in `review_evidence/livestock-20261120/final-boost.j
 | Awake person-ticks below hunger meter 40 | 6.60% | 6.47% |
 
 Both runs passed daily conservation checks. Reloading the increased-yield save reproduced the day-12 hash `b18292a9`. One pair shows the grain-to-feed chain operating in Aspen. Longer-term herd growth, hunger and the destination of the remaining grain need separate measurements.
+
+## Recovering livestock after a death
+
+From rules 262, a livestock death from neglect leaves the animal’s recoverable meat, hide and fat available for the ordinary two-day carcass lifetime. A grown household member who learns about their livestock carcass can prioritise meat recovery, limited by carrying room and up to four portions per trip. Each portion takes 120 work ticks. Danger prevents the offer and a critical need removes its priority bonus. Other households cannot take privately held carcasses. Yield depends on species and growth at death. A small chick can leave less than one whole meat unit.
+
+In ordinary Aspen through day 15 the previously immediate loss was seven meat units, from one sheep and three chickens. At rules 262 keepers recovered all seven. Three other chicks died before reaching one whole unit. See the individual death and work records in review_evidence/livestock-20261120/salvage-timing.jsonl and the rules-261 control in salvage-261.jsonl. This tracks recovery into a pack. Consumption at meals is a separate measurement.

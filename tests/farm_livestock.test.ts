@@ -163,3 +163,24 @@ it('turns spare grain into feed at a known coop and accounts for what a hen eats
   expect(conservationReport(w).ok).toBe(true);
   expect(hashWorld(deserializeWorld(serializeWorld(w,5)))).toBe(hashWorld(w));
 });
+
+it('keeps meat on a naturally dead cow until discovered and cut, with a valid save',()=>{
+ const s=scene(),w=s.w;w.settings.rulesVersion=262;
+ const p=addPerson(s,'Ada',40.5,40.5,{inv:{berries:3},hunger:90,thirst:90,energy:90});
+ const cow=makeFarmAnimal(w,41,40,'cow','f');
+ Object.assign(cow.sheep!,{hhId:p.hhId,food:0,water:0});
+ cow.health=.01;
+ done(s);updateSheep(w,cow);
+ const body=w.piles.find(b=>b.carcass?.animalId===cow.id)!;
+ expect(body.carcass!.remaining.meat).toBe(12);
+ const key='butcher:'+body.id+':meat';
+ expect(generateOptions(w,p,true,true).options.some(o=>o.key===key)).toBe(false);
+ learn(w,p,body);
+ const option=generateOptions(w,p,true,true).options.find(o=>o.key===key)!;
+ expect(option.parts.some(([reason])=>reason.includes('recover household livestock'))).toBe(true);
+ expect(hashWorld(deserializeWorld(serializeWorld(w,5)))).toBe(hashWorld(w));
+ job(w,p,key);
+ expect(p.inv.meat).toBeGreaterThan(0);
+ expect(body.carcass!.remaining.meat+p.inv.meat!).toBe(12);
+ expect(conservationReport(w).ok).toBe(true);
+});
