@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { inhabitDevServer } from './scripts/inhabit/devserver';
+import { pinFiles } from './tests/helpers/archived_pins';
 
 export default defineConfig({
   base: './',
@@ -10,6 +11,8 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['tests/**/*.test.ts'],
+    // Continuation pins below the rules support floor (src/sim/support_floor.ts) are kept but not run here: npm run test:archive.
+    exclude: ['**/node_modules/**', ...pinFiles().archived],
     testTimeout: 120_000,
   },
 } as any);

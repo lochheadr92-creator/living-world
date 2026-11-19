@@ -62,6 +62,12 @@ Scaling and performance history: `docs/SCALING.md`.
 - For unfamiliar technical pieces (algorithms, libraries, tooling), not Living World's own behaviour rules, briefly check how established open-source projects do it before writing from scratch, and note what you compared in the commit or relevant doc. Anything borrowed must stay deterministic (seeded RNG, no wall-clock time), and check the licence before copying code.
 
 ## Decisions already made (do not reopen without a reason)
+- Rules support floor (Ryan, 20 November 2026): the project keeps rules 250 and up (`RULES_SUPPORT_FLOOR` in `src/sim/support_floor.ts`).
+  The continuation pins of versions below the floor stay in `tests/` but are left out of `npm test`; `npm run test:archive` runs them.
+  Two later steps are decided and not built: refusing a save below the floor on load, then removing the gates of those versions from
+  `src/sim`, one area at a time. Until the refusal lands a save below the floor still loads, and nothing in `npm test` checks that it
+  runs as it did. Once it lands, the save and replay line below covers only versions at or above the floor. Record: brain note
+  `decisions/manual/claude-living-world/2026-11-20-rules-support-floor-250`.
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
   acceptance test for such a change.

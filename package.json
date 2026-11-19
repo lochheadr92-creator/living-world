@@ -9,6 +9,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:archive": "vitest run --config vitest.archive.config.ts",
     "typecheck": "tsc --noEmit",
     "census": "vite-node scripts/census.ts",
     "docs": "vite-node scripts/docs.ts",
