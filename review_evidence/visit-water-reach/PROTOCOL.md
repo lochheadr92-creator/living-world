@@ -1,0 +1,7 @@
+# Day-96 reach test
+
+Run one day per settlement with arrivals on, using the same day-96 saves raised to rules 259 as the visit-departure trace. Native controls must match the prior endpoints. Allow every eligible ordinary welfare visitor to use recent firsthand room knowledge in the doorway arms. Count visit endings, admissions, actual thirsty contacts with offered water and no carrying room after a zero transfer, direct drinks, and hydration at contact. Apply the fallback only after zero ordinary transfer. Record the identities and ticks. Compare doorway alone to doorway plus drinking. An identical endpoint with zero eligible cases is a valid null result. One deterministic day per start does not establish a long-term effect.
+
+## Reproduce
+
+Build with `node scripts/build_visit_door.mjs <bundle.cjs> scripts/visit_water_reach.ts`. Run `node <bundle.cjs> --load C:/dev/lw_saves/rules256/<seed>-day96.save.json --rules-up 259 --arm <arm> --out review_evidence/visit-water-reach/<seed>-<arm>.json`. Seeds are aspen, river and gen-4. Arms are native, door and drink. Contact counts cover visits that reached the welfare handler's needs check. The water-offer count requires a thirsty recipient, planned water and one or more units in the visitor's pack. An opportunity also requires physical contact, zero successful transfer and no room for one water. Each JSON records visit ending details and the before/after hydration on each opportunity.

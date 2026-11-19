@@ -1,0 +1,29 @@
+{
+  "seed": "gen-4",
+  "arm": "drink",
+  "hash": "58c9aed1",
+  "outcomes": {
+    "failed / Ben II was not where I expected": 1,
+    "failed / Zora II was not where I expected": 4,
+    "success / helped": 8,
+    "success / fine": 1,
+    "success / drank offered water": 1,
+    "failed / they needed something I did not have on me": 1
+  },
+  "admissions": 1,
+  "refused": 0,
+  "contacts": 11,
+  "waterOfferedToThirsty": 1,
+  "opportunities": [
+    {
+      "tick": 232224,
+      "from": "Ulric",
+      "to": "Pavel",
+      "fromId": 1129,
+      "toId": 1131,
+      "start": 232179,
+      "before": 37.916800000004514,
+      "after": 73.91680000000451
+    }
+  ]
+}

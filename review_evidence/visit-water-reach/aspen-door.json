@@ -1,0 +1,20 @@
+{
+  "seed": "aspen",
+  "arm": "door",
+  "hash": "7bb9d535",
+  "outcomes": {
+    "failed / they are not in the room I remembered": 1,
+    "success / helped": 3,
+    "failed / Sana was not where I expected": 2,
+    "failed / Esme was not where I expected": 1,
+    "failed / Zed was not where I expected": 1,
+    "success / fine": 5,
+    "failed / Mona II was not where I expected": 6,
+    "failed / they needed something I did not have on me": 1
+  },
+  "admissions": 3,
+  "refused": 0,
+  "contacts": 9,
+  "waterOfferedToThirsty": 0,
+  "opportunities": []
+}
