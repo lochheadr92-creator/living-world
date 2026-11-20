@@ -22,6 +22,7 @@ import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow
 import type { GrowMorePart } from '../../src/sim/grow_more';
 import {grainBoostOn,setGrainBoost} from '../../src/sim/plenty';
 import {herdValueOn,setHerdValue} from '../../src/sim/herd_value';
+import { batchPriorityOn, setBatchPriority } from '../../src/sim/batch_priority';
 import { gatherReviewOn, setGatherReview } from '../../src/sim/gather_review';
 import { workshopErrandOn, setWorkshopErrand } from '../../src/sim/workshop_errand';
 import { benchAccessOn, setBenchAccess } from '../../src/sim/bench_access';
@@ -336,6 +337,11 @@ export function parseIntervention(specIn: string): Intervention {
     return {spec:label,summary:'Use the base livestock priorities and provisioning decisions',install(){
       const prior=herdValueOn();setHerdValue(false);return ()=>setHerdValue(prior);
     }};
+  }
+  if (label === 'rich-no-batch-priority') {
+    return { spec: label, summary: 'rank casual breaks and the next batch step by score alone', install() {
+      const prior = batchPriorityOn(); setBatchPriority(false); return () => setBatchPriority(prior);
+    } };
   }
   if (label === 'rich-no-gather-review') {
     return { spec: label, summary: 'review a gathering trip against the first offer at its source', install() {

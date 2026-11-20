@@ -12,6 +12,7 @@ import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { proposeProject } from './proposals';
 import { reviseProject } from './project_revision';
+import { preferBatchStep } from './batch_priority';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
@@ -157,7 +158,8 @@ export function rankOptions(ctx: Ctx): Option[] {
     }
   }
   scored.sort((a, b) => b.s - a.s);
-  return scored.map((x) => x.o);
+  const ranked = scored.map((x) => x.o);
+  return chooser === 'random' ? ranked : preferBatchStep(ctx, ranked);
 }
 
 /**
