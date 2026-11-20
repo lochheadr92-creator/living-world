@@ -2,6 +2,7 @@ import { childTaskFilter } from './child_tasks';
 import { threeAgesFilter } from './three_ages';
 import {placeOptions} from './options_places';
 import {runsRulesVersion} from './rulesversion';
+import { reviewedOffer } from './gather_review';
 import { relocationOptions } from './relocation';
 import { oldShelterOptions } from './retire_lean_to';
 import {applyRouteExperience} from './route_learning';
@@ -374,7 +375,7 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
 function currentUtility(ctx: Ctx, a: Activity): number {
   const key = a.data.optKey as string | undefined;
   if (!key) return a.utility;
-  const o = ctx.options.find((x) => x.key === key);
+  const o = reviewedOffer(ctx, a, key);
   if (!o) return 0;
   // finishing what is already underway counts for something
   const frac = a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0;

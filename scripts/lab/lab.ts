@@ -22,6 +22,7 @@ import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow
 import type { GrowMorePart } from '../../src/sim/grow_more';
 import {grainBoostOn,setGrainBoost} from '../../src/sim/plenty';
 import {herdValueOn,setHerdValue} from '../../src/sim/herd_value';
+import { gatherReviewOn, setGatherReview } from '../../src/sim/gather_review';
 import { workshopErrandOn, setWorkshopErrand } from '../../src/sim/workshop_errand';
 import { benchAccessOn, setBenchAccess } from '../../src/sim/bench_access';
 import { FARM_DRAW_PARTS, farmDrawPartOn, setFarmDraw } from '../../src/sim/farm_draw';
@@ -335,6 +336,11 @@ export function parseIntervention(specIn: string): Intervention {
     return {spec:label,summary:'Use the base livestock priorities and provisioning decisions',install(){
       const prior=herdValueOn();setHerdValue(false);return ()=>setHerdValue(prior);
     }};
+  }
+  if (label === 'rich-no-gather-review') {
+    return { spec: label, summary: 'review a gathering trip against the first offer at its source', install() {
+      const prior = gatherReviewOn(); setGatherReview(false); return () => setGatherReview(prior);
+    } };
   }
   if (label === 'rich-no-workshop-errand') {
     return { spec: label, summary: 'use only the nearest workshop when reviewing an input errand', install() {
