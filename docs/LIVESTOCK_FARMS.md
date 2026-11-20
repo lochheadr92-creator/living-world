@@ -44,3 +44,17 @@ In ordinary Aspen through day 15 the previously immediate loss was seven meat un
 A fully grown cow yields 48 portions, a pig 28 portions of pork, a sheep 16 portions, a goat 12 portions and a chicken 4 portions. Four times the rules-262 yield is a first balance setting. A growing animal yields its fraction of the adult amount, rounded down to whole portions. The keeper still has to find the body, cut the meat and carry it away before it decays.
 
 In one paired 15-day Aspen run, the same sheep and three grown chickens supplied 7 portions at rules 262 and 28 at rules 263. At 263, keepers cut 12 of the sheep's 16 portions before the remaining four spoiled, and all 12 chicken portions. People ate 14 by day 15 and 10 recovered portions remained. At 262 all seven were recovered and eaten. Three small chicks yielded zero in both runs. The 15 daily control hashes matched the previous salvage trace, and both runs passed daily conservation. The two portions-*.jsonl files in review_evidence/livestock-20261120 record the daily ledger and individual carcasses.
+
+## Slower livestock carcass spoilage at rules 264
+
+Keepers have four days (9,600 ticks) from death to recover meat, hide and fat from household livestock. Wild game and unowned carcasses last two days. The inspector shows each body's deadline. Each portion still needs 120 ticks of cutting and room in the worker's pack. The change affects parts on the carcass only.
+
+In the paired Aspen trace, the extended deadline let Ben cut three more sheep portions and Kira cut the last one. All 16 were recovered. Across sheep and chickens, all 28 recovered portions had been eaten by day 20. See review_evidence/livestock-20261120/SHEEP_SPOILAGE_AND_MEALS.md for the original loss and the route from packs to eaters.
+
+## Sharing the butcher's meat at rules 265
+
+The usual food delivery now accepts raw meat. When packing a surplus, a person loads raw meat and pork first, leaves a road ration, and uses their memory of the space at home, in the household cellar, or at a communal storehouse. Promises and the ration are checked again when the load arrives. Members can eat from their household store, and another household can eat from the communal storehouse.
+
+In the Aspen replay the original sheep and three chickens yielded 28 portions. Kira and Ben took 14 sheep portions home and Mona stored six chicken portions. Eight of the 20 deposited portions came out for meals, including three that Arlo ate. Twelve spoiled in two lean-tos and a hut. The other eight portions were eaten without entering storage. At rules 264 all 28 portions were eaten and none were deposited. Raw sheep and chicken meat is subject to spoilage in buildings and is absent from the carried-food spoilage list. This one Aspen comparison shows both the route that fed Arlo and its cost. The focused storehouse test exercises access by someone from another household.
+
+The events for this comparison are in `review_evidence/livestock-20261120/meat-sharing-265.jsonl` and `spoilage-264.jsonl`. At ticks 31,611 and 33,779 Arlo collected one portion from the lean-to and two from the hut. He ate them at 31,620, 33,788 and 33,798. Those were individual meals from family stores.

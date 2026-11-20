@@ -1,3 +1,4 @@
+import { clearanceBlocker, DISMANTLE_TICKS, takeDownEmptyShelter } from './retire_lean_to';
 import { mealEatsWhatItTook, mealLeaves } from './light_pack';
 import { nutritionOf } from './bread_feeds';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
@@ -61,7 +62,8 @@ import { creditHauled, creditStocked } from './intent';
 import { noteHauled } from './transport';
 import { customerSuppliedAtSite } from './customers';
 import { noteWinterMeal } from './winter_practice';
-import { hasWinterReserve, isFoodKind } from './provision';
+import { reservedFor } from './reserved_goods';
+import { hasWinterReserve, isFoodKind, storageFoods } from './provision';
 import { hasDeliveryPlace } from './delivery_place';
 import { personById } from './registry';
 import { eatsAtTheStore } from './tableeating';
@@ -653,8 +655,20 @@ registerHandler('deposit', {
     if(e.ent==='pile'&&e.carcass)return 'fail:keep loose goods separate from the body';
     if(e.ent==='pile'&&e.mealFood)return 'fail:keep other goods separate from the leftover meal food';
     if(e.ent==='pile'&&e.estate)return 'fail:keep new goods separate from these belongings';
+    const keep = a.data.meatStoreKeep;
+    let shareable = 0;
+    if (typeof keep === 'number') {
+      if (e.ent !== 'building' || !(e.type === 'storehouse' || (e.hhId === p.hhId && (isHomeType(e.type) || e.type === 'cellar')))) {
+        return 'fail:this is no longer a store for our food';
+      }
+      shareable = storageFoods(world).reduce((n,k)=>n + Math.max(0,(p.inv[k] ?? 0) - reservedFor(world,p,k)),0) - keep;
+    }
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      if (typeof keep === 'number') {
+        n = Math.min(n, shareable, (p.inv[k as ItemKind] ?? 0) - reservedFor(world,p,k as ItemKind));
+        if (n < want[k]) partial = true;
+      }
       if(a.data.communalStock){
         n=Math.min(n,communalSpare(world,p,k as ItemKind),communalRoom(world,a.targetId,k as ItemKind));
         if(n<=0){partial=true;continue;}
@@ -687,6 +701,7 @@ registerHandler('deposit', {
       }
       const m = transfer(world, p.inv, c.items, c.cap, k as ItemKind, n, 'person:' + p.id, c.kind + ':' + a.targetId, 'deposit');
       moved += m;
+      shareable -= m;
       if (m < n) partial = true;
       if (m > 0) {
         a.data.moved = { ...(a.data.moved ?? {}), [k]: ((a.data.moved ?? {})[k] ?? 0) + m };
@@ -838,7 +853,14 @@ registerHandler('withdraw', {
     {const blocked=pileAccessBlocker(p,e);if(blocked)return blocked;}
     observe(world, p, e);
     if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e, world, a.data.materialStock))) return 'this material store is no longer shared or ours';
+    if (a.data.clearLeanTo) {
+      if (e.ent !== 'building') return 'the shelter is gone';
+      const reason = clearanceBlocker(world, p, e);
+      if (reason) return reason;
+      a.data.items = { ...e.store.items };
+    }
     a.duration = transferDuration(a.data.items ?? {});
+    if (a.data.clearLeanTo) a.duration += DISMANTLE_TICKS;
     a.tx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : p.x;
     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
   },
@@ -860,6 +882,11 @@ registerHandler('withdraw', {
     if (a.progress < a.duration) return 'continue';
     const c = containerItems(world, a.targetId);
     if (!c) return 'fail:the place is gone';
+    if (a.data.clearLeanTo) {
+      if (!waitingBuilding) return 'fail:the shelter is gone';
+      const reason = clearanceBlocker(world, p, waitingBuilding);
+      if (reason) return `fail:${reason}`;
+    }
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
     const took: Record<string, number> = {};
@@ -885,6 +912,8 @@ registerHandler('withdraw', {
       }
     }
     if (e) observe(world, p, e);
+    const cleared = a.data.clearLeanTo && waitingBuilding && takeDownEmptyShelter(world, p, waitingBuilding);
+    if (moved === 0 && cleared) return 'done';
     if (moved === 0) {
       noteFailure(world, p, a.targetId, 'nothing there to take');
       return 'fail:there was nothing to take';

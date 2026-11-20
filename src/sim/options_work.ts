@@ -1,3 +1,4 @@
+import { remembersRetiredShelter } from './retire_lean_to';
 import {herdReasons} from './herd_value';
 import {houses} from './farm_species';
 import { FARM_FOODS } from './constants';
@@ -33,7 +34,7 @@ import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
-import { durableReserve, homeStoreBelief } from './provision';
+import { durableReserve, homeStoreBelief, sharesFreshMeat, storageFoods } from './provision';
 import { RATION_WEIGHT, hasPackMaterials, packFullWorth, rationApplies, rationKeep, tripWaitsForFillingPack } from './light_pack';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
@@ -166,6 +167,7 @@ export function fireFuelWanted(world: Ctx['world']): number {
  * and the helper is the sort to lend a hand, 0 for everything else.
  */
 export function repairStake(ctx: Ctx, b: Belief): number {
+  if (remembersRetiredShelter(ctx, b) && !roofDuty(ctx.p, b.id)) return 0;
   if (b.btype === 'storehouse' || b.hh === ctx.p.hhId) return 1;
   if(hasWells(ctx.world)&&b.btype==='well'&&b.hh===0)return 0.5+0.5*ctx.p.traits.generosity;
   // having promised to mend it
@@ -245,11 +247,13 @@ function optDepositFood(ctx: Ctx): void {
   // rules 208: not for a child, whose pack of five the rule was never sized for
   const ration = rationApplies(world, ctx.stage === 'child') && !!homeStoreBelief(p);
   const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
-  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
-  const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
+  const foodKinds = storageFoods(world);
+  const sharingMeat = sharesFreshMeat(world) && ((p.inv.meat ?? 0) > 0 || (p.inv.pork ?? 0) > 0);
+  const countUnreserved = smallPack || ration || sharingMeat;
+  const unreserved = countUnreserved ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
   // rules 243 (grain_kept.ts): with a granary known, grain is for the bins (production.ts optGranaryStore), not for here
   const grainOut = grainGoesToBins(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'granary');
-  const surplus = (smallPack||ration ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf - (grainOut ? unreserved.grain ?? 0 : 0);
+  const surplus = (countUnreserved ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf - (grainOut ? unreserved.grain ?? 0 : 0);
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
   // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
   const roomShort = basketRoomStall(ctx);
@@ -282,15 +286,21 @@ function optDepositFood(ctx: Ctx): void {
     }
     if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
-    // deposit the better-keeping foods and keep a little for myself
+    // Pack in storage order, keeping a ration for the walk back.
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] as ItemKind[]) {
+    let space = cap - used;
+    for (const k of foodKinds) {
       const have = grainOut && k === 'grain' ? 0 : unreserved[k] ?? 0;
-      const give = Math.min(have, toStore);
+      const give = sharingMeat ? Math.min(have, toStore, Math.floor(space / WEIGHT[k])) : Math.min(have, toStore);
       if (give > 0) {
         items[k] = give;
         toStore -= give;
+        space -= give * WEIGHT[k];
       }
+    }
+    if (sharingMeat && Object.keys(items).length === 0) {
+      addBlocked(ctx, 'deposit', 'Store food', b.id, 'no carried surplus portion fits the remembered space', 'store');
+      continue;
     }
     if(smallPack&&mine&&!Object.keys(items).some(k=>(items[k]??0)>0&&cap-used>=WEIGHT[k as ItemKind])){
       addBlocked(ctx,'deposit','Bring food home',b.id,'no carried surplus portion fits the remembered space','store');continue;
@@ -323,7 +333,7 @@ function optDepositFood(ctx: Ctx): void {
           utility: sc.total,
           minCommit: 40,
           maxTicks: 600,
-          data: { items, ...(roomShort && mine ? { basketRoom: true } : {}), ...(ration && mine ? { ration: true } : {}) },
+          data: { items, ...(sharingMeat && (items.meat || items.pork) ? { meatStoreKeep: keepSelf } : {}), ...(roomShort && mine ? { basketRoom: true } : {}), ...(ration && mine ? { ration: true } : {}) },
         });
       },
     });

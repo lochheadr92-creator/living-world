@@ -14,7 +14,7 @@ import {conservationReport,pickFood} from '../src/sim/economy';
 import {currentWorldSettings} from '../src/sim/profiles';
 import {createWorld} from '../src/sim/factory';
 import {clothingWarmth} from '../src/sim/clothing';
-import {makeCarcass} from '../src/sim/carcass';
+import {carcassTick,hasRecoverableParts,makeCarcass} from '../src/sim/carcass';
 import {DAY} from '../src/sim/constants';
 import type {FarmSpecies,Person,World} from '../src/sim/types';
 
@@ -203,4 +203,87 @@ it.each([
     expect(conservationReport(w).ok).toBe(true);
     expect(hashWorld(deserializeWorld(serializeWorld(w,5)))).toBe(hashWorld(w));
   }
+});
+
+it.each([
+  [263, true, 2], [264, true, 4], [264, false, 2],
+] as const)('expires sheep parts at the deadline for rules %i and ownership %s', (version, owned, days)=>{
+  const s=scene(), w=s.w;
+  w.settings.rulesVersion=version;
+  const p=addPerson(s,'Ada',40.5,40.5,{});
+  const sheep=makeFarmAnimal(w,41,40,'sheep','f');
+  done(s);
+  const body=makeCarcass(w,sheep,p,true,owned ? p.hhId : 0)!;
+  if (owned && version===264) {
+    w.tick=body.since+2*DAY;
+    carcassTick(w);
+    learn(w,p,body);
+    job(w,p,'butcher:'+body.id+':meat');
+    expect(p.inv.meat).toBeGreaterThan(0);
+  }
+  w.tick=body.since+days*DAY-1;
+  carcassTick(w);
+  expect(hasRecoverableParts(w,body)).toBe(true);
+  expect(hashWorld(deserializeWorld(serializeWorld(w,5)))).toBe(hashWorld(w));
+  w.tick++;
+  carcassTick(w);
+  expect(hasRecoverableParts(w,body)).toBe(false);
+  expect(body.carcass!.lost.meat).toBe(16-(p.inv.meat??0));
+  expect(conservationReport(w).ok).toBe(true);
+});
+
+it.each([
+  ['hut','meat'], ['cellar','pork'], ['storehouse','meat'],
+] as const)('delivers surplus to a %s where another person can eat the %s', (destination, kind)=>{
+  const s=scene(), w=s.w;
+  w.settings.rulesVersion=265;
+  const keeper=addPerson(s,'Ada',40.5,40.5,{inv:{[kind]:4,berries:2},hunger:95});
+  const reader=addPerson(s,'Sam',40.5,40.5,{hh:destination==='storehouse'?undefined:keeper.hhId,hunger:20});
+  expect(reader.hhId===keeper.hhId).toBe(destination!=='storehouse');
+  const store=building(s,destination,40,37,destination==='storehouse'?0:keeper.hhId);
+  done(s);
+  keeper.x=reader.x=store.doorX+.5;
+  keeper.y=reader.y=store.doorY+.5;
+  learn(w,keeper,store);
+  job(w,keeper,'deposit:'+store.id+':food');
+  expect(store.store.items[kind]).toBe(4);
+  expect(keeper.inv.berries).toBe(2);
+  learn(w,reader,store);
+  job(w,reader,'eat_store:'+store.id);
+  expect(reader.needs.hunger).toBeGreaterThan(20);
+  expect(w.ledger.consumed[kind]).toBeGreaterThan(0);
+  expect(conservationReport(w).ok).toBe(true);
+});
+
+it('counts fresh meat for a surplus trip from rules 265 and keeps the road ration',()=>{
+  const s=scene(), w=s.w;
+  const p=addPerson(s,'Ada',40.5,40.5,{inv:{meat:4},hunger:95});
+  const home=building(s,'hut',40,37,p.hhId);
+  done(s);learn(w,p,home);
+  const offer=()=>generateOptions(w,p,true,true).options.find(o=>o.key==='deposit:'+home.id+':food');
+  w.settings.rulesVersion=264;
+  expect(offer()).toBeUndefined();
+  w.settings.rulesVersion=265;
+  expect(offer()?.make?.()?.data.items).toEqual({meat:2});
+  p.inv.meat=2;
+  expect(offer()).toBeUndefined();
+});
+
+it('rechecks a promise made after choosing the meat delivery',()=>{
+  const s=scene(), w=s.w;
+  w.settings.rulesVersion=265;
+  const p=addPerson(s,'Ada',40.5,40.5,{inv:{meat:6},hunger:95});
+  const recipient=addPerson(s,'Sam',40.5,40.5,{hh:p.hhId});
+  const home=building(s,'hut',40,37,p.hhId);
+  done(s);learn(w,p,home);
+  const offer=generateOptions(w,p,true,true).options.find(o=>o.key==='deposit:'+home.id+':food');
+  const a=offer!.make!()!;
+  expect(a.data.items).toEqual({meat:4});
+  startActivity(w,p,a);
+  p.commitments.push({id:w.nextId++,requestId:0,kind:'deliver',to:recipient.id,item:'meat',amount:3,siteId:0,made:w.tick,deadline:w.tick+2000,status:'active'});
+  for(let i=0;i<1500&&p.activity;i++){w.tick++;stepActivity(w,p);}
+  expect(p.activity).toBeNull();
+  expect(home.store.items.meat).toBe(1);
+  expect(p.inv.meat).toBe(5);
+  expect(conservationReport(w).ok).toBe(true);
 });

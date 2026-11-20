@@ -3,6 +3,7 @@ import { threeAgesFilter } from './three_ages';
 import {placeOptions} from './options_places';
 import {runsRulesVersion} from './rulesversion';
 import { relocationOptions } from './relocation';
+import { oldShelterOptions } from './retire_lean_to';
 import {applyRouteExperience} from './route_learning';
 import { whileObserving } from './lifechanges';
 import { ledgerDecision } from './decision_ledger';
@@ -69,6 +70,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   socialOptions(ctx);
   placeOptions(ctx);
   relocationOptions(ctx);
+  oldShelterOptions(ctx);
   applyRouteExperience(ctx);
   journeyOptions(ctx);
   scopeWorkOptions(ctx);

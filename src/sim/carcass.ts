@@ -14,12 +14,16 @@ import type {Ctx} from './optutil';
 
 export const CARCASS_WORK=120;
 export const CARCASS_LIFETIME=4800;
+export function carcassLifetime(w: World, c: NonNullable<Pile['carcass']>): number {
+  const ownedLivestock = c.hhId !== 0 && c.species !== 'deer' && c.species !== 'wolf';
+  return ownedLivestock && runsRulesVersion(w,264) ? 2 * CARCASS_LIFETIME : CARCASS_LIFETIME;
+}
 const PARTS:CarcassPart[]=['meat','hide','fat'];
 const zero=()=>({meat:0,hide:0,fat:0});
 export const hasCarcasses=(w:World):boolean=>w.settings.dynamics==='rich'&&runsRulesVersion(w,125);
 export const hasCarcassBatches=(w:World):boolean=>hasCarcasses(w)&&runsRulesVersion(w,149);
 /** Current recovery truth; retained origin records are not remaining products. */
-export const hasRecoverableParts=(w:World,b:Pile):boolean=>!!b.carcass&&w.tick-b.since<CARCASS_LIFETIME&&PARTS.some(k=>b.carcass!.remaining[k]>0);
+export const hasRecoverableParts=(w:World,b:Pile):boolean=>!!b.carcass&&w.tick-b.since<carcassLifetime(w,b.carcass)&&PARTS.some(k=>b.carcass!.remaining[k]>0);
 
 /** The one origin of recoverable parts. It consumes an actual live animal,
  * never a historical id or a second call on an already removed body. */
@@ -42,7 +46,7 @@ function problem(w:World,p:Person,a:Activity):string|undefined{
  if(stageOf(w,p)==='child')return 'butchery needs a grown worker';
  if(c.hhId!==0&&c.hhId!==p.hhId)return 'the body belongs to another household';
  if(!PARTS.includes(part))return 'unknown body part';
- if(w.tick-b.since>=CARCASS_LIFETIME||c.remaining[part]<=0)return 'that part is no longer recoverable';
+ if(w.tick-b.since>=carcassLifetime(w,c)||c.remaining[part]<=0)return 'that part is no longer recoverable';
  if(p.indoors||Math.hypot(p.x-(b.x+.5),p.y-(b.y+.5))>2)return 'must reach the body outdoors';
  if(c.claim&&c.claim.person!==p.id&&c.claim.until>w.tick)return 'another worker is cutting this body';
  if(weightOf(p.inv)+WEIGHT[part]>carryCap(w,p)+1e-9)return 'no room for the recovered part';
@@ -80,7 +84,7 @@ export function carcassTick(w:World):void{
  for(const b of w.piles.slice()){
   const c=b.carcass;if(!c)continue;
   if(c.claim&&c.claim.until<=w.tick)c.claim=null;
-  if(w.tick-b.since>=CARCASS_LIFETIME&&c.emptySince===null){
+  if(w.tick-b.since>=carcassLifetime(w,c)&&c.emptySince===null){
    for(const part of PARTS){const n=c.remaining[part];if(n)ledgerSpoil(w,part,n,'unbutchered body decayed');c.lost[part]+=n;c.remaining[part]=0;c.work[part]=0;}
    c.emptySince=w.tick;c.claim=null;
   }

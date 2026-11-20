@@ -1,5 +1,11 @@
 # From needing a home to living in one
 
+## Clearing an old lean-to (rules 266)
+
+Once a household member knows their family’s completed hut or house and remembers the old lean-to, they can walk back and clear it. Each trip carries at most what fits in their pack. Taking down the empty shelter frees its footprint. A sleeper, an active meal, a delivery commitment or an upgrade delays clearance. The household checks its replacement home again before moving goods or taking the shelter down.
+
+In one 15-day Aspen comparison with arrivals on, rules 265 ended with seven obsolete lean-tos and rules 266 with zero. Repair starts at obsolete shelters were 13 and 0, and deposit starts were 19 and 2. At 266 seven clearance attempts found the shelter in use and four arrived after its removal. Both runs passed the resource conservation check. [Run records](../review_evidence/housing-20261120/aspen-15-days.jsonl).
+
 ## Continuity display follow-up — 2026-10-25
 
 Current product remains rules 27. This follow-up changes derived inspector text only.

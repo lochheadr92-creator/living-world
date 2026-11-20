@@ -565,7 +565,7 @@ function stockStep(ctx: Ctx, i: Intention): Step {
   const preparation=stockPreservationOption(ctx);
   if(preparation)return {kind:'make',target:preparation.targetId,item:null,
     step:`${preparation.label.toLowerCase()} for the food reserve`,key:preparation.key,blocked:''};
-  if (foodToStore(p) >= (hasLivedLife(world)?1:CARRY_TO_STORE)) {
+  if (foodToStore(world,p) >= (hasLivedLife(world)?1:CARRY_TO_STORE)) {
     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
   }
   return { kind: 'forage', target: 0, item: null, step: `gather food to put by (${short} more)`, key: null, blocked: '' };

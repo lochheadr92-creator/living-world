@@ -146,3 +146,14 @@ it('refuses ordinary deposits into a body so recovery state cannot become mixed 
  expect(p.inv.wood).toBe(1);expect(body.items).toEqual({});expect(p.lastResult?.detail).toContain('body');
  expect(serializeWorld(deserializeWorld(serializeWorld(w)))).toBe(serializeWorld(w));expect(conservationReport(w).ok).toBe(true);
 });
+
+it('keeps the two-day deadline for a deer taken by a household hunter at rules 264',()=>{
+ const {w,p,deer}=fixture();
+ w.settings.rulesVersion=264;
+ const body=makeCarcass(w,deer,p)!;
+ expect(body.carcass!.hhId).toBe(p.hhId);
+ w.tick=body.since+CARCASS_LIFETIME;
+ carcassTick(w);
+ expect(body.carcass!.lost.meat).toBe(4);
+ expect(conservationReport(w).ok).toBe(true);
+});
