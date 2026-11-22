@@ -1064,3 +1064,21 @@ The bounded preparation feature is finished and closed out. The next actions are
 the proposed stages in `docs/EMERGENCE.md` remain a backlog; nothing here commits to them, and the count of "fifteen"
 written here was wrong (that file proposes stages 0-5). Current direction prefers completing one bounded, watchable
 situation over picking up disconnected mechanics from that list; see `PRODUCT_VISION.md`.
+
+## Android APK prototype checkpoint — 21 November 2026
+
+Added a Capacitor 8 Android wrapper for the existing Vite viewer. The package is `org.livingworld.app`; `capacitor.config.ts` uses `dist` as its web asset directory. `npm run android:sync` runs the production web build and syncs assets to `android/`; `npm run android:open` opens the Android Studio project. Build steps and current limitations are in `docs/ANDROID_APK.md`.
+
+Verified: `npx cap add android` completed; `npm run android:sync` passed TypeScript and Vite production build and synced the bundle. Using a temporary Microsoft OpenJDK 21 and Android SDK 36 toolchain, `android/gradlew.bat assembleDebug` completed successfully. The 4,692,711-byte debug APK is at `android/app/build/outputs/apk/debug/app-debug.apk`, package `org.livingworld.app`, min SDK 24; `apksigner verify --verbose` passed. A LAN HTTP download returned the same SHA-256 (`3BC9F3BD2B2904858AC47CF971A82644DC18AEF49EBE1E0FDA07226BFA1A6459`). No phone or emulator was connected, so on-device behavior is unverified. `npm audit` reports one high-severity advisory in the existing Vite 8.3.2 development dependency (`launch-editor` Windows command escaping); `npm audit --omit=dev` reports zero vulnerabilities. The Vite upgrade remains outside this packaging task. Existing unrelated dirty work was preserved.
+
+Proposed next action: install the debug APK on an Android phone and check touch input, save/load, responsive layout and simulation performance.
+
+## Integration checkpoint — 22 November 2026
+
+Rules 257, part A of the Stage 2 trips bundle, is recorded in the separate commit `9c2bc746` (`Add rules 257 workshop bench access`). It adds the `bench_access` snapshot and planning count, save validation, lab arm and focused contract coverage. Parts B and C remain unbuilt pending their measurements; no ordinary-world benefit is claimed here.
+
+The Android Capacitor wrapper is included in this checkpoint. Fresh verification on this checkout: `npm run build` passed; `npm run android:sync` passed and copied the built web assets; `android/gradlew.bat assembleDebug` passed with the temporary JDK 21 / Android SDK 36 toolchain; `apksigner verify --verbose android/app/build/outputs/apk/debug/app-debug.apk` passed using APK Signature Scheme v2. No phone or emulator was attached, so runtime, touch behavior, save/load and performance on a device remain unverified.
+
+Rules-257 focused regression: `npm test -- tests/bench_access.test.ts` passed (11 tests). Full default suite: `npm test` ran 454 files; 450 passed, 1 skipped and 3 failed by timeout (3,527 tests passed, 1 skipped). Timed out: `tests/zz_review_main_toolreport_saves.test.ts` fresh current-rules 12,000-tick check (120 s limit; 134 s observed), `tests/v250_continuation.test.ts` rules-250 continuation (245 s limit; 265 s observed), and `tests/zz_review_g_observer_purity.test.ts` river 1,000-tick observation check (170 s limit; 283 s observed). These were timeouts, not assertion mismatches; their cause and baseline status remain unclassified. This full-suite result is not a pass.
+
+Proposed next actions: rerun and classify the three timeout cases on a quiet machine against the accepted baseline; install the APK on an Android device for runtime checks; complete the recorded measurements for trips-bundle parts B and C before building either.
