@@ -1097,7 +1097,7 @@ Proposed next actions: add and verify the read-only pack/detour/review measureme
 
 On `C:\\dev\\Claude Experiment\\living-world-integrate`, `main` based on `db27bd1d`, added an observation-only probe for the two pending Stage 2 trip measurements. `scripts/observers/trip_shape.ts` now snapshots tiny-load gatherers' pack items, separating carried units by item into `needed`, `reserved`, `errand` and `spare` (disjoint in that precedence order). It records the gather's uncapped wanted units via the optional unsaved `gather_diagnostics.ts` WeakMap, so the B2 comparison does not mistake a room-capped activity amount for intended load. `src/sim/decision.ts` / `probe.ts` count absent gather/withdraw travel options, present options beaten by the ordinary margin, held options, and actual ordinary drops attributed to absence or the margin. Trip rows include replacement-target detour distance and a tick estimate based on that walk's observed pace.
 
-`scripts/stage2_trip_probe.ts` runs fresh Normal, arrivals-off worlds at current rules and writes per-world metrics plus relevant raw rows. Proposed long-run PowerShell command (not run here, per `AGENTS.md`'s “Expensive runs” instruction):
+`scripts/stage2_trip_probe.ts` runs fresh Normal, arrivals-off worlds at current rules and writes per-world metrics plus relevant raw rows after each seed. Re-running the same command skips completed seeds in a compatible output file; if interruption occurs within a seed, that seed runs again. An incompatible existing output is refused. Proposed long-run PowerShell command (not run here, per `AGENTS.md`'s “Expensive runs” instruction):
 
 ```powershell
 $runRoot = 'C:\\dev\\_claude_scratch\\stage2-trip-probe-20261122'

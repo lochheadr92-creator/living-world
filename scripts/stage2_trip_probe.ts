@@ -1,5 +1,5 @@
 // Observation-only Stage 2 B/C baseline. Long runs are launched by the owner from PowerShell per AGENTS.md.
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
@@ -19,8 +19,20 @@ const ticks = Number(arg('--ticks', String(30 * DAY)));
 const seeds = arg('--seeds', 'aspen,river,gen-4').split(',').map((s) => s.trim()).filter(Boolean);
 if (!Number.isSafeInteger(ticks) || ticks < 1 || !seeds.length) throw new Error('Expected positive --ticks and at least one --seeds value');
 
-const runs: unknown[] = [];
+const method = 'TripShape observation only; rules unchanged';
+const runs: any[] = [];
+mkdirSync(dirname(out), { recursive: true });
+if (existsSync(out)) {
+  const previous = JSON.parse(readFileSync(out, 'utf8')) as { method?: string; runs?: any[] };
+  if (previous.method !== method || !Array.isArray(previous.runs)
+    || previous.runs.some((r) => r.ticks !== ticks || r.rulesVersion !== CURRENT_RULES_VERSION || !seeds.includes(r.seed))) {
+    throw new Error(`Existing output ${out} is incompatible with this run; choose a new --out path or move the old output`);
+  }
+  runs.push(...previous.runs);
+}
+const completedSeeds = new Set(runs.map((r) => r.seed));
 for (const seed of seeds) {
+  if (completedSeeds.has(seed)) continue;
   probeReset();
   probe.on = true;
   setGatherDiagnostics(true);
@@ -56,15 +68,17 @@ for (const seed of seeds) {
   const switched = rows.filter((r) => r.outcome === 'switched_mid_walk' && r.stage === '12_and_over');
   const adultWalkingTicks = report.headline.byStage['12_and_over'].counts.walkingTicks;
   const detourTicks = switched.reduce((s, r) => s + (r.detourTicksEstimate ?? 0), 0);
-  runs.push({
+  const run = {
     seed, ticks, rulesVersion: world.settings.rulesVersion ?? CURRENT_RULES_VERSION,
     counts: { tinyGatherWalks: tiny.length, tinyGatherWithWantedOver2: candidate.length, candidateWithSpareRoomForWantedTrip: rescued.length, shareRescued: candidate.length ? rescued.length / candidate.length : null },
     packItems: byItem,
     walkC: { adultWalkingTicks, interruptedAdultWalks: switched.length, detourTicksEstimate: detourTicks, detourShareOfAdultWalkingTicks: adultWalkingTicks ? detourTicks / adultWalkingTicks : null, reviewProbe: probeCounters },
     rows,
-  });
+  };
+  runs.push(run);
+  completedSeeds.add(seed);
+  writeFileSync(out, JSON.stringify({ generatedAt: new Date().toISOString(), method, runs }, null, 2) + '\n');
 }
 probe.on = false;
-mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, JSON.stringify({ generatedAt: new Date().toISOString(), method: 'TripShape observation only; rules unchanged', runs }, null, 2) + '\n');
+writeFileSync(out, JSON.stringify({ generatedAt: new Date().toISOString(), method, runs }, null, 2) + '\n');
 console.log(JSON.stringify({ out, seeds, ticks, rulesVersion: CURRENT_RULES_VERSION, runSummaries: runs.map((r: any) => ({ seed: r.seed, counts: r.counts, walkC: r.walkC })) }, null, 2));
