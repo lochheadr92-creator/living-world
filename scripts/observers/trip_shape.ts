@@ -39,6 +39,11 @@ import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASE_SPEED, BASKET_BONUS, CARRY_CAP, C
 import { foodUnits, weightOf } from '../../src/sim/economy';
 import { withdrawAllowance } from '../../src/sim/facilities';
 import { ageYears, carryCap, stageOf } from '../../src/sim/people';
+import { makeCtx } from '../../src/sim/optutil';
+import { materialNeeds } from '../../src/sim/options_work';
+import { reservedFor } from '../../src/sim/reserved_goods';
+import { errandCarries } from '../../src/sim/errand_load';
+import { readGatherDiagnostic } from '../../src/sim/gather_diagnostics';
 import { CHILD_PACE, LITTLE_PACE } from '../../src/sim/child_pace';
 import type { Activity, Household, ItemKind, Items, Person, World } from '../../src/sim/types';
 import { lifeGroupOf } from './day_shape';
@@ -152,9 +157,11 @@ interface Trip {
   packStart: Pack; packEnd: Pack | null; packAfter: Pack | null; packAfterBasis: string;
   outcome: Outcome | ''; evidence: string; pauseCause: string;
   endOutcome: string; endDetail: string; endTick: number; gapToEnd: number | null; toKind: string;
+  replacementTarget: [number, number] | null; detourDistance: number | null; detourTicksEstimate: number | null;
   actCycle: number | null; actProgress: number | null; actMoved: Record<string, number> | null;
   /** withdraw walks only: the goods asked for (a copy of data.items), the store read at departure and the store read at the first sample after the walk */
   want: Record<string, number> | null; storeStart: StoreLook | null; storeEnd: StoreLook | null;
+  packAudit: { wantedUnits: number | null; plannedUnits: number; requestedUnits: number | null; believedSourceUnits: number | null; gatheredItem: string; roomUnits: number; items: Record<string, { carried: number; needed: number; reserved: number; errand: number; spare: number }> } | null;
 }
 
 interface DayRec { person: number; day: number; samples: number; awake: number; changes: number }
@@ -427,6 +434,32 @@ export class TripShape {
     const items = a.data.items as Record<string, number> | undefined;
     const planned = items ? sum(Object.values(items)) : a.amount > 0 ? a.amount : null;
     const want: Record<string, number> | null = a.kind === 'withdraw' ? { ...(items ?? {}) } : null;
+    const gatherItem = ({ tree: 'wood', rock: 'stone', outcrop: 'stone', clay_pit: 'clay', ore_vein: 'ore' } as Record<string, string>)[String(a.data.stype ?? '')] ?? '';
+    let packAudit: Trip['packAudit'] = null;
+    if (a.kind === 'gather' && gatherItem) {
+      const gatherDiagnostic = readGatherDiagnostic(a);
+      const ctx = makeCtx(world, p, false, true);
+      const needByItem: Record<string, number> = {};
+      for (const n of materialNeeds(ctx)) needByItem[n.item] = (needByItem[n.item] ?? 0) + n.n;
+      const itemsAudit: NonNullable<Trip['packAudit']>['items'] = {};
+      for (const item of Object.keys(p.inv)) {
+        const carried = p.inv[item as ItemKind] ?? 0;
+        if (carried <= 0) continue;
+        const needed = Math.min(carried, Math.ceil(needByItem[item] ?? 0));
+        const reserved = Math.min(Math.max(0, carried - needed), Math.ceil(reservedFor(world, p, item as ItemKind)));
+        const errand = Math.min(Math.max(0, carried - needed - reserved), errandCarries(world, p, item as ItemKind) ? carried : 0);
+        itemsAudit[item] = { carried, needed, reserved, errand, spare: Math.max(0, carried - needed - reserved - errand) };
+      }
+      const cap = carryCap(world, p);
+      const roomWeight = Math.max(0, cap - weightOf(p.inv));
+      const unitWeight = WEIGHT[gatherItem as ItemKind] ?? 1;
+      const roomUnits = Math.floor((roomWeight + 1e-9) / unitWeight);
+      if (roomUnits <= 2) packAudit = {
+        wantedUnits: gatherDiagnostic?.wantedUnits ?? null, plannedUnits: a.amount,
+        requestedUnits: gatherDiagnostic?.requestedUnits ?? null, believedSourceUnits: gatherDiagnostic?.believedSourceUnits ?? null,
+        gatheredItem: gatherItem, roomUnits, items: itemsAudit,
+      };
+    }
     let sub = '';
     if (a.kind === 'gather') sub = `gather | purpose=${typeof a.data.purpose === 'string' ? a.data.purpose : 'none'} | stype=${String(a.data.stype ?? 'none')}`;
     else if (a.kind === 'deposit') sub = 'deposit | ' + (a.data.ration ? 'ration' : a.data.basketRoom ? 'basketRoom' : a.data.packMaterials ? 'packMaterials' : 'other');
@@ -446,8 +479,10 @@ export class TripShape {
       packStart: snapPack(world, p), packEnd: null, packAfter: null, packAfterBasis: '',
       outcome: '', evidence: '', pauseCause: '',
       endOutcome: '', endDetail: '', endTick: -1, gapToEnd: null, toKind: '',
+      replacementTarget: null, detourDistance: null, detourTicksEstimate: null,
       actCycle: null, actProgress: null, actMoved: null,
       want, storeStart: want ? storeLook(world, p, a.targetId, want) : null, storeEnd: null,
+      packAudit,
     };
     // a later walk of an activity that had reached work: the pack now is the pack after that work
     const waiting = this.awaitEnd.get(a.id);
@@ -502,7 +537,17 @@ export class TripShape {
         t.evidence = info.phase === 'work' ? 'work_phase_entered_ended_with_no_progress' : 'path_used_up_ended_with_no_progress';
       }
     } else if (info.outcome === 'interrupted' && info.detail === 'died') { t.outcome = 'ended_other'; t.evidence = 'person_died'; }
-    else if (info.outcome === 'interrupted') { t.outcome = 'switched_mid_walk'; t.evidence = 'interrupted_before_arrival'; t.toKind = a ? a.kind : 'none'; }
+    else if (info.outcome === 'interrupted') {
+      t.outcome = 'switched_mid_walk'; t.evidence = 'interrupted_before_arrival'; t.toKind = a ? a.kind : 'none';
+      if (a) {
+        t.replacementTarget = [a.tx, a.ty];
+        const direct = Math.hypot(a.tx - t.sx, a.ty - t.sy);
+        const remaining = Math.hypot(a.tx - t.ex, a.ty - t.ey);
+        t.detourDistance = Math.max(0, t.walked + remaining - direct);
+        const pace = t.ticks > 0 ? t.walked / t.ticks : 0;
+        t.detourTicksEstimate = pace > 0 ? t.detourDistance / pace : null;
+      }
+    }
     else if (info.outcome === 'success') { t.outcome = 'ended_other'; t.evidence = 'success_reported_before_arrival'; }
     else { t.outcome = 'gave_up_before_arrival'; t.evidence = 'failed_or_partial_before_arrival'; }
   }
@@ -640,8 +685,10 @@ export class TripShape {
         loadFraction: d.moved && d.cap > 0 ? r3(d.moved.weight / d.cap) : null,
         outcome: t.outcome, outcomeEvidence: t.evidence, pauseCause: t.pauseCause,
         endOutcome: t.endOutcome, endDetail: t.endDetail, activityEndTick: t.endTick, gapToEnd: t.gapToEnd, toKind: t.toKind,
+        replacementTarget: t.replacementTarget, detourDistance: t.detourDistance === null ? null : r2(t.detourDistance), detourTicksEstimate: t.detourTicksEstimate === null ? null : r2(t.detourTicksEstimate),
         actCycle: t.actCycle, actProgress: t.actProgress, actMoved: t.actMoved,
         wantedGoods: t.want, storeAtDeparture: t.storeStart, storeAtEndOfWalk: t.storeEnd,
+        tinyGatherPackAudit: t.packAudit,
       };
     });
   }

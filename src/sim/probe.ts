@@ -24,6 +24,22 @@ export interface ProbeCounters {
   decisions: number;
   /** reviews of an activity already under way */
   reviews: number;
+  /** non-urgent gather/withdraw travel reviews where its option is absent */
+  walkReviewAbsent: number;
+  /** reviews where a different option takes over for danger or critical need */
+  walkReviewUrgent: number;
+  /** reviews held by the activity's minimum commitment */
+  walkReviewCommitted: number;
+  /** reviews controlled by an external decision source */
+  walkReviewExternal: number;
+  /** non-urgent gather/withdraw travel reviews where the current option is present but another option clears the switch margin */
+  walkReviewBeaten: number;
+  /** non-urgent gather/withdraw travel reviews where the current option remains present and the switch margin does not beat it */
+  walkReviewHeld: number;
+  /** actual gather/withdraw travel drops caused by the ordinary switch margin */
+  walkDropMargin: number;
+  /** actual gather/withdraw travel drops whose current option was absent at review */
+  walkDropAbsent: number;
   /** perceive calls */
   perceives: number;
   /** static entities (trees, buildings, sites, …) inside sensing range, summed over perceive calls */
@@ -44,6 +60,14 @@ export const COUNTER_KEYS: (keyof ProbeCounters)[] = [
   'optionsGenerated',
   'decisions',
   'reviews',
+  'walkReviewAbsent',
+  'walkReviewUrgent',
+  'walkReviewCommitted',
+  'walkReviewExternal',
+  'walkReviewBeaten',
+  'walkReviewHeld',
+  'walkDropMargin',
+  'walkDropAbsent',
   'perceives',
   'perceiveStatic',
   'perceiveMobile',
@@ -60,6 +84,14 @@ const zero = (): ProbeCounters => ({
   optionsGenerated: 0,
   decisions: 0,
   reviews: 0,
+  walkReviewAbsent: 0,
+  walkReviewUrgent: 0,
+  walkReviewCommitted: 0,
+  walkReviewExternal: 0,
+  walkReviewBeaten: 0,
+  walkReviewHeld: 0,
+  walkDropMargin: 0,
+  walkDropAbsent: 0,
   perceives: 0,
   perceiveStatic: 0,
   perceiveMobile: 0,

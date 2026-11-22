@@ -1092,3 +1092,19 @@ Android check: the temporary SDK's `adb devices -l` returned no attached device 
 Trips parts B/C remain unmeasured at current rules. The original rules-250 day-48 saves and raw trip logs referenced by `review_evidence/trip-waste-20261118/README.md` were kept under `C:\dev\_claude_scratch\regime-20261117\`; the expected `out\trip-waste`, `out\trip-waste2` and `saves` folders were absent when checked. The checked-in report is historical summary data only. The current `scripts/observers/trip_shape.ts` records start pack contents and walked geometry, but it does not classify the pack units against `materialNeeds`, `reservedFor` and `errandCarries`, calculate replacement-route detour, or count review outcomes as required by `C:\dev\_lw_briefs\stage2-designs-20261118\DESIGNS.txt`. No B/C rule changes were made.
 
 Proposed next actions: add and verify the read-only pack/detour/review measurements; run them on representative saved worlds or explicitly selected fresh worlds with limitations recorded; install the APK only when a device is connected. Keep B/C unbuilt until their readings meet the design criteria.
+
+## Stage 2 trips B/C diagnostic checkpoint — 22 November 2026
+
+On `C:\\dev\\Claude Experiment\\living-world-integrate`, `main` based on `db27bd1d`, added an observation-only probe for the two pending Stage 2 trip measurements. `scripts/observers/trip_shape.ts` now snapshots tiny-load gatherers' pack items, separating carried units by item into `needed`, `reserved`, `errand` and `spare` (disjoint in that precedence order). It records the gather's uncapped wanted units via the optional unsaved `gather_diagnostics.ts` WeakMap, so the B2 comparison does not mistake a room-capped activity amount for intended load. `src/sim/decision.ts` / `probe.ts` count absent gather/withdraw travel options, present options beaten by the ordinary margin, held options, and actual ordinary drops attributed to absence or the margin. Trip rows include replacement-target detour distance and a tick estimate based on that walk's observed pace.
+
+`scripts/stage2_trip_probe.ts` runs fresh Normal, arrivals-off worlds at current rules and writes per-world metrics plus relevant raw rows. Proposed long-run PowerShell command (not run here, per `AGENTS.md`'s “Expensive runs” instruction):
+
+```powershell
+$runRoot = 'C:\\dev\\_claude_scratch\\stage2-trip-probe-20261122'
+New-Item -ItemType Directory -Force -Path $runRoot | Out-Null
+npx vite-node scripts/stage2_trip_probe.ts -- --out "$runRoot\\baseline.json" --ticks 72000 --seeds aspen,river,gen-4
+```
+
+A 2,400-tick Aspen smoke run wrote `C:\\dev\\_claude_scratch\\stage2-trip-probe-20261122\\smoke-final.json`. It saw 15 tiny gathers, 12 with uncapped wanted load above 2, and 0 where spare eligible materials alone would free enough room. The detour estimate was 471.06 ticks / 10,962 adult walking ticks (4.30%); the recorded review counts were 8 absent-option, 1 ordinary margin-clearing, and 31 held reviews, with 3/1 actual ordinary drops attributed to absence/margin. The probe now also separates urgent, minimum-commitment, and externally controlled present-option reviews. This one-world one-day smoke sample is below the design's three-world/30-day evidence and does not justify building or dropping B/C.
+
+Verification: `npx tsc --noEmit` passed; `npx vitest run tests/day_observers.test.ts tests/probe.test.ts --maxWorkers=1 --no-file-parallelism` passed 2 files / 13 tests, including byte-identical serialization with gather diagnostics enabled and probe-on/off equivalence; `git diff --check` passed. The full three-world measurement remains pending. No simulation rule, save format or activity payload changed.

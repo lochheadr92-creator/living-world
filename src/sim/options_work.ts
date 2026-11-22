@@ -87,6 +87,7 @@ import { T } from './types';
 import { payNudge } from './learning';
 import { hyp } from './util';
 import {projectAvailable,projectCraftPlan} from './project_step';
+import { recordGatherDiagnostic } from './gather_diagnostics';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
 // ───────────────────────── household situation ─────────────────────────
@@ -550,7 +551,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       make: () => {
         const spot = spotNear(world, p, c.b);
         if (!spot) return null;
-        return newActivity(world, p, {
+        const activity = newActivity(world, p, {
           kind: 'gather',
           label: SOURCE_VERB[type],
           goal: why,
@@ -567,6 +568,8 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
           // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
           data: { purpose: tag, stype: type, eta: expected },
         });
+        recordGatherDiagnostic(activity, { item, requestedUnits: want, believedSourceUnits: Math.floor(c.est), wantedUnits: Math.min(want, Math.floor(c.est)), roomUnits: room, plannedUnits: units });
+        return activity;
       },
     });
   }

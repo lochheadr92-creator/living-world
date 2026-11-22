@@ -402,8 +402,11 @@ export function reviewActivity(world: World, p: Person): void {
   const ranked = rankOptions(ctx);
   const best = ranked[0];
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 5) * 20);
-  if (!best) return;
   const key = a.data.optKey as string | undefined;
+  const walkReview = a.phase === 'travel' && (a.kind === 'gather' || a.kind === 'withdraw');
+  const currentPresent = !!key && ctx.options.some((o) => o.key === key);
+  if (probe.on && walkReview && !currentPresent) probe.walkReviewAbsent++;
+  if (!best) return;
   // rules 158 (eat_in_hand.ts): food in the pack that would ease hunger better than this way of easing it is eaten first
   const inHand = eatInHand(world, a, ctx, ranked);
   if (inHand) {
@@ -419,7 +422,10 @@ export function reviewActivity(world: World, p: Person): void {
       return;
     }
   }
-  if (best.key === key) return;
+  if (best.key === key) {
+    if (probe.on && walkReview && currentPresent) probe.walkReviewHeld++;
+    return;
+  }
   // Standing and facing a wolf is the one activity fleeing must not simply out-score. The two answer the same
   // situation and are scored to sit close together on purpose, so a defender re-ranked mid-attempt is pulled away
   // before they ever reach the wolf - which made the defence unreachable in practice rather than merely hard.
@@ -447,10 +453,21 @@ export function reviewActivity(world: World, p: Person): void {
   const ext = externalController();
   const external = ext !== null && ext.controls(world, p);
   const better = !external && best.util > cur * SWITCH_MARGIN + 3;
+  if (probe.on && walkReview && currentPresent && best.key !== key) {
+    if (danger || criticalMismatch) probe.walkReviewUrgent++;
+    else if (committed) probe.walkReviewCommitted++;
+    else if (external) probe.walkReviewExternal++;
+    else if (better) probe.walkReviewBeaten++;
+    else probe.walkReviewHeld++;
+  }
   if (danger || criticalMismatch || (!committed && better)) {
     const act = best.make!();
     if (!act) return;
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : foundEmpty(world, a, ctx) ? FOUND_EMPTY_REASON : 'something better came up'; // rules 161 (found_empty.ts)
+    if (probe.on && walkReview && !danger && !criticalMismatch && !committed && !external) {
+      if (currentPresent && better) probe.walkDropMargin++;
+      else if (!currentPresent) probe.walkDropAbsent++;
+    }
     act.data.optKey = best.key;
     prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));

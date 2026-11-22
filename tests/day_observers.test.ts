@@ -10,6 +10,7 @@ import { DayShape } from '../scripts/observers/day_shape';
 import { TripShape, storeLook } from '../scripts/observers/trip_shape';
 import { ageYears } from '../src/sim/people';
 import { AGE_CHILD } from '../src/sim/constants';
+import { setGatherDiagnostics } from '../src/sim/gather_diagnostics';
 import { OutdoorCompany, DAY_PARTS } from '../scripts/observers/outdoor_company';
 
 const world = (seed: string) => createWorld(currentWorldSettings('normal', seed, { immigration: false }));
@@ -46,6 +47,28 @@ it('DayShape and TripShape: every self check in their own reports holds after 60
   expect(t.counts.walksAll).toBeGreaterThan(0);
   expect(trip.tripRows().length).toBe(t.counts.walksAll);
 }, 60000);
+
+it('TripShape snapshots tiny-gather pack claims without changing the world', () => {
+  const w = world('aspen');
+  const twin = deserializeWorld(serializeWorld(w));
+  const trip = new TripShape();
+  setGatherDiagnostics(true);
+  const detach = trip.attach(w);
+  for (let n = 0; n < 2400; n++) { trip.sampleTick(w); stepWorld(w); stepWorld(twin); }
+  trip.finish(w);
+  detach();
+  setGatherDiagnostics(false);
+  const rows = trip.tripRows().filter((r) => r.tinyGatherPackAudit !== null);
+  expect(rows.length).toBeGreaterThan(0);
+  expect(rows.every((r) => r.tinyGatherPackAudit!.wantedUnits !== null)).toBe(true);
+  for (const row of rows) {
+    const audit = row.tinyGatherPackAudit!;
+    for (const item of Object.values(audit.items)) {
+      expect(item.needed + item.reserved + item.errand + item.spare).toBe(item.carried);
+    }
+  }
+  expect(serializeWorld(w)).toBe(serializeWorld(twin));
+}, 120000);
 
 it('storeLook reads a store against what a person believes, and changes nothing', () => {
   const w = world('river');

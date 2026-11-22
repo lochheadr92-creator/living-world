@@ -36,6 +36,7 @@ describe('work counters', () => {
     expect(a.snap).toEqual(b.snap);
     expect(a.snap.perceives).toBeGreaterThan(0);
     expect(a.snap.decisions).toBeGreaterThan(0);
+    expect(a.snap.walkReviewAbsent + a.snap.walkReviewBeaten + a.snap.walkReviewHeld).toBeGreaterThan(0);
     expect(a.snap.generations).toBeGreaterThanOrEqual(a.snap.decisions);
     expect(a.snap.optionsGenerated).toBeGreaterThan(a.snap.generations);
     expect(a.snap.pathCalls).toBeGreaterThan(0);
