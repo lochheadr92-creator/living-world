@@ -1108,3 +1108,13 @@ npx vite-node scripts/stage2_trip_probe.ts -- --out "$runRoot\\baseline.json" --
 A 2,400-tick Aspen smoke run wrote `C:\\dev\\_claude_scratch\\stage2-trip-probe-20261122\\smoke-final.json`. It saw 15 tiny gathers, 12 with uncapped wanted load above 2, and 0 where spare eligible materials alone would free enough room. The detour estimate was 471.06 ticks / 10,962 adult walking ticks (4.30%); reviews counted 8 absent options, 1 urgent switch, 4 held by minimum commitment, 0 externally controlled, 1 present option beaten by the ordinary margin and 31 held. There were 3/1 actual ordinary drops attributed to absence/margin. This one-world one-day smoke sample is below the design's three-world/30-day evidence and does not justify building or dropping B/C.
 
 Verification: `npx tsc --noEmit` passed; `npx vitest run tests/day_observers.test.ts tests/probe.test.ts --maxWorkers=1 --no-file-parallelism` passed 2 files / 13 tests, including byte-identical serialization with gather diagnostics enabled and probe-on/off equivalence; `git diff --check` passed. The full three-world measurement remains pending. No simulation rule, save format or activity payload changed.
+
+### Three-world B/C measurement — 23 November 2026
+
+Ryan ran the full 72,000-tick-per-seed probe at rules 257. Raw output: `C:\dev\_claude_scratch\stage2-trip-probe-20261122\baseline.json` (fresh Normal worlds, arrivals off; original rules-250 day-48 saves unavailable).
+
+**B2 does not meet its build gate.** Candidates where intended load exceeded 2: Aspen 8/206 spare-room rescues (3.9%), River 12/206 (5.8%), Gen-4 20/348 (5.7%). Pooled: 40/760 (5.3%), below the design's 50% threshold. No B2 rule change is justified by this measurement. B1's separate “short of plan” condition is not established by this B2-targeted table, so B1 also remains unbuilt.
+
+**C meets the detour-size gate but fails the cause gate.** Estimated detours were Aspen 28,010.11/439,017 adult walking ticks (6.38%), River 32,415.76/541,675 (5.98%), and Gen-4 37,091.89/606,119 (6.12%), each above 3%. These are geometric upper-bound estimates for the measured switched walks. Actual ordinary drops attributed to margin vs absent current option were 114/109 (Aspen), 104/136 (River), 85/160 (Gen-4); pooled 303/405. Because absence accounts for more drops overall (and in two of three worlds), the design's second C gate fails. Do not build `walk_stick` from this result; investigate why gather/withdraw options disappear only if that becomes a separately authorised diagnostic.
+
+No Stage 2 B/C rule was changed. The earlier one-day smoke is superseded for these readings; the 30-day three-world result still does not establish benefits outside these three fresh Normal trajectories.
