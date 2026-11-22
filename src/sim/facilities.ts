@@ -20,6 +20,7 @@ import { personById } from './registry';
 import { affinityOf } from './relations';
 import { benchTool, mintTool, recipeToolMultiplier, wearTool } from './tools';
 import { bestOf } from './toolreg';
+import { hasBenchAccess, heldAtSight } from './bench_access';
 import type { Building, Earmark, FacilitySnapshot, FacilityState, Items, ItemKind, Job, Person, Source, World } from './types';
 import { SPOIL_SHARE, keyAt, keyMix, keyUnit, keyedOn, spoilPrefix } from './keyed_draws';
 
@@ -749,6 +750,8 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
     readyAt: job ? (job.phase === 'burn' ? world.tick + job.burnLeft : job.phase === 'ready' ? world.tick : world.tick + Math.max(0, job.total - job.progress) + job.burnTotal) : 0,
     client: job ? job.client : 0,
     tended: ops.tended,
+    // rules 257 (bench_access.ts): what is earmarked to whom at this sight
+    ...(hasBenchAccess(world) ? { held: heldAtSight(world, ops.earmarks) } : {}),
   };
 }
 

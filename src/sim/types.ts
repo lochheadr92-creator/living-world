@@ -142,6 +142,8 @@ export interface FacilitySnapshot {
   client: number;
   /** granary: when the bins were last tended */
   tended: number;
+  /** rules 257 (bench_access.ts): the earmarks that were live at the sight, so the planner counts only the stock the person may take */
+  held?: import('./bench_access').HeldEarmark[];
 }
 
 export interface Relation {

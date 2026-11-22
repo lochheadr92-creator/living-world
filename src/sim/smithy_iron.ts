@@ -27,7 +27,7 @@
 // the wants, the glance and the refusal as they were.
 import { runsRulesVersion } from './rulesversion';
 import { benchStock } from './site_supply';
-import type { Belief, ItemKind, World } from './types';
+import type { Belief, ItemKind, Person, World } from './types';
 
 /** how many bars of iron a smithy is kept in */
 export const IRON_KEPT = 2;
@@ -48,16 +48,16 @@ export function setSmithyIron(enabled: boolean, part?: SmithyIronPart): void {
 const runs = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, 235);
 
 /** COUNT: how many of this the person takes a workshop to hold, for the smithy's standing wants. */
-export function smithyShelf(world: World, b: Belief, item: ItemKind): number {
+export function smithyShelf(world: World, b: Belief, item: ItemKind, p?: Person): number {
   const glanced = b.items?.[item] ?? 0;
-  return on.count && runs(world) ? benchStock(world, b, item, glanced) : glanced;
+  return on.count && runs(world) ? benchStock(world, b, item, glanced, p) : glanced;
 }
 
 /** WANT: how many bars of iron are wanted, given the smithies this person knows and may use (their beliefs); 0 when none. */
-export function ironWanted(world: World, smithies: Belief[]): number {
+export function ironWanted(world: World, smithies: Belief[], p?: Person): number {
   if (!on.want || !runs(world) || !smithies.length) return 0;
   let lying = 0;
-  for (const b of smithies) lying += smithyShelf(world, b, 'iron');
+  for (const b of smithies) lying += smithyShelf(world, b, 'iron', p);
   return Math.max(0, IRON_KEPT - lying);
 }
 
