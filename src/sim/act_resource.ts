@@ -4,6 +4,7 @@ import { nutritionOf } from './bread_feeds';
 import { childHeavyTask, CHILD_HEAVY_REASON } from './child_tasks';
 import { childWorkBlock, noteChildWork, practiceScale } from './three_ages';
 import {hasRods} from './fishing_rods';
+import { depositableOutput } from './occupation_storage';
 import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
 import {cellarAccess} from './cellars';
 import {isWellAction,wellSource} from './wells';
@@ -668,6 +669,11 @@ registerHandler('deposit', {
       if (typeof keep === 'number') {
         n = Math.min(n, shareable, (p.inv[k as ItemKind] ?? 0) - reservedFor(world,p,k as ItemKind));
         if (n < want[k]) partial = true;
+      }
+      if (a.data.occupationStore) {
+        n=Math.min(n,depositableOutput(world,p,a.targetId,k as ItemKind));
+        if (n<want[k]) partial=true;
+        if (n<1) continue;
       }
       if(a.data.communalStock){
         n=Math.min(n,communalSpare(world,p,k as ItemKind),communalRoom(world,a.targetId,k as ItemKind));

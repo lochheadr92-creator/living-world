@@ -1,3 +1,4 @@
+import { practiseOccupation } from './occupation';
 import { FARM_FOODS } from './constants';
 import { giveToy } from './toys';
 import { noteFed } from './child_feeding';
@@ -1032,6 +1033,8 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
       recordCompany(world,A,B,c.data.giftReceipt?.outcome==='received gift'||taught&&c.purpose==='teach_technique');
       recordCompany(world,B,A,taught&&c.purpose==='learn_technique');
     }
+    if (c.lesson?.outcome==='learned') practiseOccupation(world,c.purpose==='teach_technique'?A:B,'Teacher');
+    if (c.skillLesson?.outcome==='learned') practiseOccupation(world,B,'Teacher');
     A.wave = world.tick + 20;
     B.wave = world.tick + 24;
   }
@@ -1587,6 +1590,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       // rules 187: the term that decided it, recomputed from the same pure inputs; `w` above is untouched
       const answerWhy = hasAnswerCause(world) ? answerCause({ w, experience: projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0, affinity: 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100, chance: (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15, drive: 0.5 * (personalDriveMax(world, B) / 100), kin: rel?.kin ? 0.2 : 0, asker: A.name }) : undefined;
       if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
+        practiseOccupation(world,A,'Organiser');
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
@@ -1640,7 +1644,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     case 'mediate': {
       const other = d.pair ? personOf(world, d.pair) : null;
       if (!other) break;
+      const sore = !!B.relations[other.id]?.grievance;
       const out = mediate(world, A, B, other);
+      if (sore && (out==='peace' || out==='eased')) practiseOccupation(world,A,'Mediator');
       if (out === 'peace') bubble(world, B, 'You’re right. I’ll let it lie.', 'happy', 56);
       else if (out === 'eased') bubble(world, B, 'Maybe. I’ll think on it.', 'say', 54);
       else if (out === 'worse') {
@@ -1695,6 +1701,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           bubble(world, B, D.saying(D.TRADE_OK, B.id, A.id, world.tick >> 5), 'say', 46);
           adjustRel(A, B.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
+          practiseOccupation(world,A,'Trader');
+          practiseOccupation(world,B,'Trader');
           addEvent(world, 'trade', `${A.name} swapped ${m2} ${take} for ${m1} ${give} with ${B.name}.`, [A.id, B.id], A.x, A.y);
           addLog(world, A, 'social', `Traded ${m2} ${take} for ${m1} ${give} with ${B.name}.`);
           addLog(world, B, 'social', `Traded ${m1} ${give} for ${m2} ${take} with ${A.name}.`);

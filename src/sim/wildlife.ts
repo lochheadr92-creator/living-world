@@ -101,6 +101,10 @@ export function setWolfSearchMemory(on: boolean): void {
   rememberFailures = on;
 }
 
+export function localAnimalPath(world: World, sx: number, sy: number, tx: number, ty: number): number[] | null {
+  return findPath(world, sx, sy, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+}
+
 function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | null {
   const tile = (v: number, max: number): number => Math.min(max - 1, Math.max(0, Math.floor(v)));
   const sx = tile(a.x, world.W);
@@ -111,7 +115,7 @@ function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | n
   let mine = failedSearches.get(world);
   const last = mine?.get(a.id);
   if (rememberFailures && last && last.sx === sx && last.sy === sy && last.gx === gx && last.gy === gy && last.epoch === epoch) return null;
-  const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+  const path = localAnimalPath(world, a.x, a.y, tx, ty);
   if (!rememberFailures) return path;
   if (path) mine?.delete(a.id);
   else {

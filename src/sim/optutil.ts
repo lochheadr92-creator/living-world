@@ -35,6 +35,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** The actual cargo proposed by a storage option. */
+  cargo?: import('./types').Items;
   /** Derived preparation step that can serve an existing food-reserve intention. */
   preservesFood?: boolean;
   /** Material work serving this particular known construction site, when applicable. */

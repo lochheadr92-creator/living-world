@@ -314,7 +314,7 @@ function optDepositFood(ctx: Ctx): void {
       util: (smallPack && mine ? Math.max(8,sc.total) : sc.total) * nightMult(ctx),
       parts: sc.parts,
       eta: e + 20,
-      key: `deposit:${b.id}:food`,
+      key: `deposit:${b.id}:food`, cargo:items,
       targetId: b.id,
       tag: 'store',
       make: () => {

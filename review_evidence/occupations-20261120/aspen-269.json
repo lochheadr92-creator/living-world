@@ -1,0 +1,238 @@
+[
+ {
+  "d": 1,
+  "hash": "aaab4583",
+  "ended": 174,
+  "done": 135,
+  "switched": 14,
+  "stored": 37,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 37
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 18,
+  "workers": 18,
+  "meanPrimaryShare": 0.3537999037999038
+ },
+ {
+  "d": 2,
+  "hash": "3a4f9c40",
+  "ended": 352,
+  "done": 275,
+  "switched": 33,
+  "stored": 113,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 113
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 18,
+  "workers": 18,
+  "meanPrimaryShare": 0.3446671300644468
+ },
+ {
+  "d": 3,
+  "hash": "50af4c22",
+  "ended": 527,
+  "done": 397,
+  "switched": 67,
+  "stored": 168,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 168
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 19,
+  "workers": 18,
+  "meanPrimaryShare": 0.3295433806349401
+ },
+ {
+  "d": 4,
+  "hash": "7afae0ec",
+  "ended": 705,
+  "done": 512,
+  "switched": 102,
+  "stored": 229,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 227,
+   "barn": 2
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 19,
+  "workers": 19,
+  "meanPrimaryShare": 0.31081095290806876
+ },
+ {
+  "d": 5,
+  "hash": "86a969a4",
+  "ended": 856,
+  "done": 620,
+  "switched": 130,
+  "stored": 285,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 261,
+   "barn": 6,
+   "hut": 18
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 19,
+  "workers": 19,
+  "meanPrimaryShare": 0.30568769823048836
+ },
+ {
+  "d": 6,
+  "hash": "9ae492fa",
+  "ended": 1076,
+  "done": 760,
+  "switched": 158,
+  "stored": 333,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 299,
+   "barn": 6,
+   "hut": 28
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 20,
+  "workers": 20,
+  "meanPrimaryShare": 0.3247137446893448
+ },
+ {
+  "d": 7,
+  "hash": "51fff95a",
+  "ended": 1173,
+  "done": 822,
+  "switched": 176,
+  "stored": 359,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 313,
+   "barn": 6,
+   "hut": 40
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 20,
+  "workers": 20,
+  "meanPrimaryShare": 0.30104503933425397
+ },
+ {
+  "d": 8,
+  "hash": "06f1d08d",
+  "ended": 1359,
+  "done": 959,
+  "switched": 199,
+  "stored": 400,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 326,
+   "barn": 11,
+   "hut": 63
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 20,
+  "workers": 20,
+  "meanPrimaryShare": 0.30104187547255323
+ },
+ {
+  "d": 9,
+  "hash": "a258d33d",
+  "ended": 1588,
+  "done": 1114,
+  "switched": 223,
+  "stored": 558,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 360,
+   "barn": 16,
+   "hut": 182
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 22,
+  "workers": 21,
+  "meanPrimaryShare": 0.3195511928082259
+ },
+ {
+  "d": 10,
+  "hash": "923619bc",
+  "ended": 1733,
+  "done": 1214,
+  "switched": 240,
+  "stored": 600,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 362,
+   "barn": 19,
+   "hut": 217,
+   "chicken_cage": 2
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 22,
+  "workers": 21,
+  "meanPrimaryShare": 0.3153426972310821
+ },
+ {
+  "d": 11,
+  "hash": "d390577f",
+  "ended": 1808,
+  "done": 1256,
+  "switched": 244,
+  "stored": 612,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 362,
+   "barn": 20,
+   "hut": 228,
+   "chicken_cage": 2
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 23,
+  "workers": 21,
+  "meanPrimaryShare": 0.31532093230800884
+ },
+ {
+  "d": 12,
+  "hash": "e7d9fe8a",
+  "ended": 2007,
+  "done": 1379,
+  "switched": 265,
+  "stored": 643,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 371,
+   "barn": 21,
+   "hut": 249,
+   "chicken_cage": 2
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 23,
+  "workers": 23,
+  "meanPrimaryShare": 0.32140594888183405
+ }
+]

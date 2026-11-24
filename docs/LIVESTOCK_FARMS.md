@@ -4,6 +4,10 @@ Rules 260 adds cattle, pigs, chickens, goats and sheep to rich worlds. In a new 
 
 The breeding calendar scales to the simulation year. Cow gestation uses 283 calendar days, pig 114, goat and sheep 150, and chicken incubation 21. Litter sizes, maturity, recovery, feed demand and housing limits are simulation parameters. Housing, available space and animal care constrain births. Cows, goats and sheep give milk after a birth. Hens lay eggs, sheep grow wool and carcasses supply meat and hides. Keepers can make cheese, smoke pork into bacon, and work leather into a coat, gloves or shoes.
 
+## Water at founder placement
+
+From rules 269 each founding pair starts near forage on a tile from which it can see a drinkable bank within eight tiles and walk to the bank it would choose. If the route fails, generation tries the next candidate. In the Forest start with arrivals off, the founding sheep moved one tile closer to water. Both drank at tick 241 and survived to day two. At rules 268 neither drank and both died before day two.
+
 ## Grain for animals
 
 Rules 261 increases wild-grain patch capacity from five to eight. Wild grain replenishes at 1.5 times its previous rate under the same conditions. A keeper's estimate of how much has grown back uses that rate. At ripening a field gains half its previous grain yield, rounded down, with the same seed yield. For example, a crop that previously produced nine grain now produces thirteen.

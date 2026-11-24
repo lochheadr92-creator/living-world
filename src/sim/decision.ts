@@ -1,3 +1,5 @@
+import { hasOccupations } from './occupation';
+import { occupationStoreOption } from './occupation_storage';
 import { childTaskFilter } from './child_tasks';
 import { threeAgesFilter } from './three_ages';
 import {placeOptions} from './options_places';
@@ -67,6 +69,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   const ctx = makeCtx(world, p, collect, observer);
   survivalOptions(ctx);
   workOptions(ctx);
+  occupationStoreOption(ctx);
   productionOptions(ctx);
   workshopToolOptions(ctx);
   socialOptions(ctx);
@@ -381,7 +384,9 @@ function currentUtility(ctx: Ctx, a: Activity): number {
   if (!o) return 0;
   // finishing what is already underway counts for something
   const frac = a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0;
-  return o.util * (1.08 + 0.35 * frac);
+  const commitment = ctx.p.occupation?.title && hasOccupations(ctx.world) && !ctx.critical && !ctx.dangers.length
+    ? tradeNudge(ctx.world,ctx.p,o) : 0;
+  return (o.util + commitment) * (1.08 + 0.35 * frac);
 }
 
 /**

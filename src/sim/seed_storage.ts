@@ -41,7 +41,7 @@ export function seedStorageOption(ctx:Ctx,item:ItemKind,base:number,why:string,m
  const danger=dangerAt(ctx,b.x,b.y);if(danger>0)sc.add('wolf nearby',-22*danger*traitMods(p).caution);
  if(sc.total<8)return;
  const util=sc.total*mult;
- addOption(ctx,{kind:'deposit',label:'Keep spare seed at home',goal:`to free my hands ${why}`,need:null,util,parts:sc.parts,eta:walk+20,key,targetId:b.id,tag:'store',
+ addOption(ctx,{kind:'deposit',label:'Keep spare seed at home',goal:`to free my hands ${why}`,need:null,util,parts:sc.parts,eta:walk+20,key,cargo:{seeds:n},targetId:b.id,tag:'store',
   make:()=>{const spot=spotNear(world,p,b);if(!spot)return null;
    return newActivity(world,p,{kind:'deposit',label:`Taking ${n} spare seeds home`,goal:`to free my hands ${why}`,targetId:b.id,targetType:'building',tx:b.x,ty:b.y,spotX:spot.x,spotY:spot.y,utility:util,minCommit:30,maxTicks:600,
     data:{items:{seeds:n},leftAt:'the home store',seedStash:true,seedOwner:p.hhId}});

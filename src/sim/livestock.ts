@@ -11,7 +11,7 @@ import {harvestPressure} from './ecology';
 import type {Animal,Activity,Person,World} from './types';
 import {DAY,NUTRITION} from './constants';
 import {runsRulesVersion} from './rulesversion';
-import {makeWolf,moveLocalAnimal} from './wildlife';
+import {makeWolf,moveLocalAnimal,localAnimalPath} from './wildlife';
 import {isWalkable,isWaterAccess} from './registry';
 import {shoreWater} from './water_access';
 import {drawWater} from './hydrology';
@@ -42,6 +42,22 @@ export function makeSheep(w:World,x:number,y:number,sex:'f'|'m',parents:number[]
 export function makeFarmAnimal(w:World,x:number,y:number,species:FarmSpecies,sex:'f'|'m',parents:number[]=[]):Animal{
  const a=makeWolf(w,x,y,species);a.sheep={origin:parents.length?'birth':'founder',parents:[...parents],born:w.tick,sex,hhId:0,food:0,water:0,growth:parents.length?0:maturity(w,a),wool:0,woolWork:0,tether:null,pregnancy:null,breedAfter:0,forageTarget:0,forageWork:0,waterMemory:null};return a;
 }
+/** Select the same drinkable bank at placement and when foraging, including scan-order ties. */
+function nearestDrinkingBank(w:World, x:number, y:number, allowed?:(x:number,y:number)=>boolean) {
+  const radius = 8;
+  let nearest: {id:number; x:number; y:number; kind:'water'} | undefined;
+  let best = Infinity;
+  for (let dy=-radius; dy<=radius; dy++) for (let dx=-radius; dx<=radius; dx++) {
+    const tx=Math.floor(x)+dx, ty=Math.floor(y)+dy;
+    const bx=tx+.5, by=ty+.5, distance=Math.hypot(bx-x,by-y);
+    if (distance>radius || distance>=best || (allowed && !allowed(bx,by)) || !isWaterAccess(w,tx,ty)) continue;
+    if ((shoreWater(w,bx,by)?.body.amount ?? 0)<1) continue;
+    nearest={id:-1-ty*w.W-tx, x:bx, y:by, kind:'water'};
+    best=distance;
+  }
+  return nearest;
+}
+
 /** One founding pair on reachable land near existing forage and water, never a replenishment. */
 export function seedSheep(w:World,reach?:Uint8Array):void{
  if(!hasLivestock(w)||w.animals.some(a=>a.type==='sheep'))return;
@@ -51,7 +67,12 @@ export function seedSheep(w:World,reach?:Uint8Array):void{
  for(const food of candidates){for(let dy=-3;dy<=3;dy++)for(let dx=-3;dx<=3;dx++){
   const x=food.x+dx,y=food.y+dy;if(!isWalkable(w,x,y)||reach&&reach[y*w.W+x]!==1)continue;
   let water=false;for(let yy=-6;yy<=6&&!water;yy++)for(let xx=-6;xx<=6;xx++)if(isWaterAccess(w,x+xx,y+yy)&&shoreWater(w,x+xx+.5,y+yy+.5)?.body.amount!>=1){water=true;break;}
-  if(!water)continue;const species=founders.shift()!;if(farmEnabled(w)&&isFreeLand(w,x,y))makeSource(w,'hay_meadow',x,y);makeFarmAnimal(w,x+.5,y+.5,species,'f');makeFarmAnimal(w,x+.5,y+.5,species,'m');if(!founders.length)return;
+  if(!water)continue;
+  if(runsRulesVersion(w,269)){
+   const bank=nearestDrinkingBank(w,x+.5,y+.5);
+   if(!bank || localAnimalPath(w,x+.5,y+.5,bank.x,bank.y)===null)continue;
+  }
+  const species=founders.shift()!;if(farmEnabled(w)&&isFreeLand(w,x,y))makeSource(w,'hay_meadow',x,y);makeFarmAnimal(w,x+.5,y+.5,species,'f');makeFarmAnimal(w,x+.5,y+.5,species,'m');if(!founders.length)return;
  }}
 }
 const duration:Record<string,number>={mix_feed:50,acquire:120,feed:30,water:30,shear:80,mate:100,repair:60,slaughter:160,house:100,milk:55,egg:30,hay_feed:30,...Object.fromEntries(Object.entries(FARM_RECIPES).map(([k,r])=>['process_'+k,r.work]))};
@@ -152,10 +173,8 @@ registerHandler('animal_work',{
 function forage(w:World,a:Animal):void{
  const s=a.sheep!,anchor=s.tether;const allowed=(x:number,y:number)=>!anchor||Math.hypot(x-anchor.x,y-anchor.y)<=2;
  let target:{id:number;x:number;y:number;kind:'food'|'water'}|undefined;
- if(s.water<1){let dist=Infinity;for(let dy=-8;dy<=8;dy++)for(let dx=-8;dx<=8;dx++){
-  const x=Math.floor(a.x)+dx+.5,y=Math.floor(a.y)+dy+.5,d=Math.hypot(x-a.x,y-a.y);if(d>8||d>=dist||!allowed(x,y)||!isWaterAccess(w,Math.floor(x),Math.floor(y)))continue;
-  const at=shoreWater(w,x,y);if(!at||at.body.amount<1)continue;target={id:-1-Math.floor(y)*w.W-Math.floor(x),x,y,kind:'water'};dist=d;
- }
+ if(s.water<1){
+  target=nearestDrinkingBank(w,a.x,a.y,allowed);
   if(target)s.waterMemory={x:target.x,y:target.y};
   else if(s.waterMemory&&allowed(s.waterMemory.x,s.waterMemory.y)){const m=s.waterMemory;
    if(Math.hypot(m.x-a.x,m.y-a.y)<=1.3&&(shoreWater(w,m.x,m.y)?.body.amount??0)<1)s.waterMemory=null;
@@ -278,7 +297,7 @@ export function livestockOptions(ctx:Ctx):void{
    if(n<1)continue;
    const x=station.x-BUILD_DEF[type].w/2+.5,y=station.y+BUILD_DEF[type].h/2+.5;
    const label='Bring '+k+' to the '+BUILD_DEF[type].label;
-   addOption(ctx,{kind:'deposit',key:'farm_store:'+station.id+':'+k,label,goal:label,util:40,need:null,parts:[['feed and water for housed animals',40]],eta:60,targetId:station.id,tag:'animals',make:()=>newActivity(w,p,{kind:'deposit',label,goal:label,targetId:station.id,targetType:'building',tx:x,ty:y,spotX:x,spotY:y,utility:40,minCommit:20,maxTicks:900,data:{items:{[k]:n}}})});
+   addOption(ctx,{kind:'deposit',cargo:{[k]:n},key:'farm_store:'+station.id+':'+k,label,goal:label,util:40,need:null,parts:[['feed and water for housed animals',40]],eta:60,targetId:station.id,tag:'animals',make:()=>newActivity(w,p,{kind:'deposit',label,goal:label,targetId:station.id,targetType:'building',tx:x,ty:y,spotX:x,spotY:y,utility:40,minCommit:20,maxTicks:900,data:{items:{[k]:n}}})});
   }
  }
  if(farmEnabled(w))for(const [key,r] of Object.entries(FARM_RECIPES)){

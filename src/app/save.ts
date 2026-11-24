@@ -1,3 +1,4 @@
+import { validateOccupations } from '../sim/occupation';
 import {validateFinalAccounts} from '../sim/final_account';
 import {validateSharedProjects} from '../sim/shared_projects';
 import {validateCoaching} from '../sim/skill_coaching';
@@ -399,6 +400,7 @@ export function deserializeWorld(json: string): World {
   validateMeetingKnowledge(w);
   validateEmptyNews(w);
   validateWorkshopErrands(w);
+  validateOccupations(w);
   validateHeld(w); // rules 257 (bench_access.ts): last, so a world of another version fails on its own first-order reason first
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);

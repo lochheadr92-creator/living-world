@@ -442,6 +442,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     }
     // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
     for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);
+    for (const p of world.persons) if (p.occupation) push('Occupation'+p.id+JSON.stringify(p.occupation));
     if (world.roads) {
       let n = 0;
       for (let i = 0; i < world.roads.length; i++) n += world.roads[i];

@@ -640,6 +640,7 @@ export interface Trade {
 }
 
 export interface Person {
+  occupation?: import('./occupation').OccupationalPractice;
   skillExperience?: import('./skill_coaching').SkillExperience[];
   placeMemories?: import('./personal_places').PlaceMemory[];
   background?: import('./background').Background;

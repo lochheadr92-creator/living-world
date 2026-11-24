@@ -15,9 +15,11 @@
 // No list of the world's jobs, nobody else's skills, no central allocation. Two neighbours may pick the same trade; nothing
 // prevents it, and the crowding term makes it less likely.
 //
-// What a trade IS NOT: it is not a job, a role or an assignment. It tilts the matching work options by TRADE_NUDGE and no more -
-// the same bound as a private plan's step and the payoff estimate - so hunger, thirst, cold and a wolf still win every time, and
-// the engine still generates and ranks every option. Somebody whose trade is the kiln still fetches water when they are thirsty.
+// In rules 270 a person's initial skill preference gives way to a title earned by doing actual jobs (occupation.ts).
+// The title affects ranking, review and putting goods away. Eligibility, relief and danger are still handled by the planner.
+import { tradesOn } from './trade_switch';
+export { setTrades, tradesOn } from './trade_switch';
+import { hasOccupations, occupationName, occupationalPreference } from './occupation';
 import { DAY } from './constants';
 import { RECIPES } from './recipes';
 import { SOURCE_SKILL } from './constants';
@@ -26,16 +28,6 @@ import { repeatedDemand,pruneDemand,DEMAND_BONUS,hasLocalDemand } from './local_
 import { servedBonus, demandLapsed } from './customers';
 import type { Ctx, Option } from './optutil';
 import type { ActivityKind, Belief, BuildingType, Person, SkillKey, SourceType, World } from './types';
-
-/**
- * A switch beside the world, like the mood, night-plan and learning switches: module-level, never saved, never hashed, on unless
- * the lab turns it off. `rich-no-trades` is the counterfactual that holds everything else about a rich world steady.
- */
-let trades = true;
-export function setTrades(on: boolean): void {
-  trades = on;
-}
-export const tradesOn = (): boolean => trades;
 
 /** how much a trade may tilt the work that is it, either way. The same bound as a plan's step and the payoff estimate. */
 export const TRADE_NUDGE = 6;
@@ -154,7 +146,7 @@ export const tradeWord = (k: SkillKey): string => WORD[k];
  */
 export function reviewTrade(ctx: Ctx): void {
   const { world, p } = ctx;
-  if (!trades || !isRich(world) || ctx.stage === 'child') return;
+  if (!tradesOn() || !isRich(world) || ctx.stage === 'child') return;
   if ((p.cooldowns.trade ?? 0) > world.tick) return;
   p.cooldowns.trade = world.tick + TRADE_REVIEW;
   pruneDemand(world,p);
@@ -209,17 +201,21 @@ export function reviewTrade(ctx: Ctx): void {
  * nothing at all for everything else: it can make their own trade win a close call, never outweigh a need.
  */
 export function tradeNudge(world: World, p: Person, o: Option): number {
-  if (!trades || !p.trade || !isRich(world)) return 0;
-  return workOfOption(p, o) === p.trade.key ? TRADE_NUDGE : 0;
+  if (!tradesOn() || !isRich(world)) return 0;
+  if (p.occupation?.title && hasOccupations(world)) return occupationalPreference(p,o);
+  if (!p.trade) return 0;
+  return workOfOption(p, o) === p.trade!.key ? TRADE_NUDGE : 0;
 }
 
 /** why the chosen option was tilted, for the decision record ('' when the trade had nothing to do with it) */
 export function tradeReason(world: World, p: Person, o: Option): string {
+  if (p.occupation?.title && hasOccupations(world)) return tradeNudge(world,p,o)>0 ? 'my trade is '+occupationName(p.occupation.title).toLowerCase() : '';
   return tradeNudge(world, p, o) > 0 ? `${tradeWord(p.trade!.key)} is my trade${hasLocalDemand(world)&&/people asked me/.test(p.trade!.why)?`; ${p.trade!.why}`:''}` : '';
 }
 
 /** the trade as the person card says it, or '' for somebody who has none */
 export function describeTrade(p: Person): string {
+  if (p.occupation?.title) return occupationName(p.occupation.title)+' — earned through completed work';
   const t = p.trade;
   return t ? `${tradeWord(t.key)} — ${t.why}` : '';
 }

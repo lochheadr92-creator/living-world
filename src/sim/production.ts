@@ -243,7 +243,7 @@ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
     util,
     parts: sc.parts,
     eta: e + 20,
-    key: `bring:${b.id}:${Object.keys(take).join('+')}`,
+    key: `bring:${b.id}:${Object.keys(take).join('+')}`, cargo:take,
     targetId: b.id,
     tag,
     make: () => {
@@ -944,7 +944,7 @@ function optRackSpare(ctx: Ctx): void {
       util: sc.total * nightMult(ctx),
       parts: sc.parts,
       eta: target.e + 20,
-      key: `rack:${b.id}:${t.kind}`,
+      key: `rack:${b.id}:${t.kind}`, cargo:{[t.kind]:1},
       targetId: b.id,
       tag: 'craft',
       make: () => {
