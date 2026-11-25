@@ -1,15 +1,17 @@
 // The story director (src/ui/director.ts) in the real page: a real requestAnimationFrame loop, real DOM, real CDP clicks, keys and drags.
 //
 // The world is an ORDINARY Normal river world started by the page. The director is first given up to 45 s of the world's own
-// running at top speed to find a noteworthy event by itself (reported as natural, or as none). The two shots the checks depend on
-// are then STAGED: a couple of living people are paired, and a person nobody knows is said to have died, each with the
-// simulation's own addEvent and its own wording, so that one shot is about a person and one is about a place. Staged events are
-// records the director reads exactly as it reads real ones; none of this is spontaneous runtime evidence, it shows how real
-// records are presented.
+// running at top speed to find a shot by itself (reported as natural, or as none). The shots the checks depend on are then STAGED:
+// a couple of living people are paired, a person nobody knows is said to have died, two buildings for everyone are finished and an
+// ordinary gift and a crew are told, each with the simulation's own addEvent and its own wording; and, in a paused copy cleared of
+// everything else that is live, a market under way (the world's own occasion clock), a mediation (a conversation record) and a wolf
+// stalking (an animal in that state) are put into the world, for the real scan to read. The director reads them exactly as it reads
+// real ones; none of this is spontaneous runtime evidence, it shows how real records and state are presented.
 //
 // Records screenshots and PASS/FAIL checks for: off by default and the camera not moving by itself, the toggle button and the T
 // key, a shot about a person (selected, followed, caption equal to the event's own text, a screen reader announcement), a shot
-// about a place (the camera flies there and stays), Next, the director yielding when the viewer selects, drags the map (following
+// about a place (the camera flies there and stays), a filler shot and its hold and cut, the three live shots (a gathering, a
+// conversation, a wolf: the caption is the simulation's own text and says now, and the shot ends when its thing does), Next, the director yielding when the viewer selects, drags the map (following
 // and not following), or picks a row of the reel, the reel against highlights(), a new world, the stored preference across a
 // reload, a 375 px screen, reduced motion and page errors.
 //
@@ -49,13 +51,13 @@ const STATE = `(() => {
   const cap = document.querySelector('.dir-caption');
   const tog = document.querySelector('.dir-toggle');
   const next = document.querySelector('.dir-next');
-  const s = d.shot ? { id: d.shot.ev.id, text: d.shot.ev.text, tick: d.shot.ev.tick, subjectId: d.shot.subjectId, x: d.shot.x, y: d.shot.y, age: d.shot.age, rev: d.shot.rev, ambient: d.shot.ambient } : null;
+  const s = d.shot ? { id: d.shot.ev ? d.shot.ev.id : null, kind: d.shot.kind, liveKey: d.shot.liveKey, text: d.shot.text, tick: d.shot.tick, subjectId: d.shot.subjectId, x: d.shot.x, y: d.shot.y, age: d.shot.age, rev: d.shot.rev, weight: d.shot.weight, filler: d.shot.filler, ended: d.shot.ended } : null;
   const prefs = (() => { try { return JSON.parse(localStorage.getItem('living-world:prefs:v1') || '{}'); } catch { return {}; } })();
   return {
     on: tog.getAttribute('aria-pressed') === 'true', shot: s, fresh: d.captionFresh(),
     captionShown: !cap.hidden, captionText: cap.hidden ? null : cap.querySelector('.dir-says').innerText, captionWhen: cap.hidden ? null : cap.querySelector('.dir-when').innerText,
     captionRect: cap.hidden ? null : rect(cap), live: document.querySelector('.dir-layer [role=status]').textContent,
-    captionAmbient: cap.classList.contains('is-ambient'), iconColor: getComputedStyle(cap.querySelector('.dir-ico')).color,
+    captionAmbient: cap.classList.contains('is-ambient'), captionLive: cap.classList.contains('is-live'), iconColor: getComputedStyle(cap.querySelector('.dir-ico')).color,
     nextDisabled: next.disabled, waiting: d.waiting().length, hasNext: d.hasNext(), counts: { ...d.counts },
     following: g.following, selectedId: g.selectedId, fly: !!g.fly, cam: { ...g.camera }, tick: g.world.tick, playing: g.playing, speed: g.speed,
     prefDirector: prefs.director === true, groupRect: rect(document.querySelector('.dir-ctl')),
@@ -89,6 +91,13 @@ const stage = (what, n = 0) => b.evaluate(`(() => {
     f.addEvent(w, 'social', text, [p.id, q.id], p.x, p.y);
     return { id: w.events[w.events.length - 1].id, person: p.id, text };
   }
+  if (${JSON.stringify(what)} === 'crew') {
+    const live = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id);
+    const p = live[7 + ${n}], q = live[8 + ${n}];
+    const text = p.name + ' and ' + q.name + ' have become a crew: ' + p.name + "'s crew.";
+    f.addEvent(w, 'social', text, [p.id, q.id], p.x, p.y);
+    return { id: w.events[w.events.length - 1].id, person: p.id, text };
+  }
   if (${JSON.stringify(what)} === 'couple') {
     const live = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id);
     const p = live[3], q = live[4];
@@ -96,16 +105,17 @@ const stage = (what, n = 0) => b.evaluate(`(() => {
     return { id: w.events[w.events.length - 1].id, person: p.id };
   }
   if (${JSON.stringify(what)} === 'builds') {
-    const p = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id)[5];
+    // two buildings for everyone, finished by two different people (the same person within a few ticks would be one moment)
+    const live = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id);
     const ids = [];
-    for (let i = 0; i < 2; i++) { f.addEvent(w, 'build', p.name + ' finished a hut.', [p.id], p.x, p.y); ids.push(w.events[w.events.length - 1].id); }
-    return { ids, person: p.id };
+    [[live[5], 'a storehouse'], [live[6], 'a shallow well']].forEach(([p, what]) => { f.addEvent(w, 'build', p.name + ' finished ' + what + '.', [p.id], p.x, p.y); ids.push(w.events[w.events.length - 1].id); });
+    return { ids, person: live[5].id };
   }
   const x = Math.round(w.camp.x) + 9, y = Math.round(w.camp.y) - 7;
   f.addEvent(w, 'life', 'Orla (fixture) died (fixture), aged 70.', [999001], x, y);
   return { id: w.events[w.events.length - 1].id, x, y };
 })()`);
-const waitShot = (id, ms = 6000) => until(async () => { const s = await state(); return s.shot?.id === id ? s : null; }, ms, 50);
+const waitShot = (id, ms = 20000) => until(async () => { const s = await state(); return s.shot?.id === id ? s : null; }, ms, 50);
 /** a toast (the first-run tip lasts eight seconds, the director's own about three) is a transient panel over the bottom of the map: let it go before clicking there */
 const quiet = () => until(async () => (await b.evaluate(`document.querySelectorAll('.dock-toasts .toast').length`)) === 0, 15000, 200);
 const toastRects = () => b.evaluate(`[...document.querySelectorAll('.dock-toasts .toast')].map((el) => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height, text: el.innerText }; })`);
@@ -119,7 +129,12 @@ try {
     const model = await import('/src/ui/director_model.ts');
     const env = await import('/src/sim/environment.ts');
     const { project } = await import('/src/render/iso.ts');
-    window.__dc = { addEvent: events.addEvent, model, env, project };
+    const live = await import('/src/ui/director_live.ts');
+    const occ = await import('/src/sim/occasions.ts');
+    const cards = await import('/src/ui/event_cards_model.ts');
+    const inspect = await import('/src/sim/inspect.ts');
+    const wild = await import('/src/sim/wildlife.ts');
+    window.__dc = { addEvent: events.addEvent, model, env, project, live, occ, cards, inspect, wild };
   })()`);
   await b.sleep(2000);
 
@@ -158,7 +173,7 @@ try {
   const couple = await stage('couple');
   await b.sleep(120);
   // a natural shot may still be up (MIN_HOLD, and a heavier event cuts in after MIN_CUT): wait for ours
-  const ps = await waitShot(couple.id, 12000);
+  const ps = await waitShot(couple.id);
   const wantText = ps ? await b.evaluate(`window.__game.world.events.find((e) => e.id === ${couple.id}).text`) : null;
   check('the staged couple becomes the shot, about the first of them', !!ps && ps.shot.subjectId === couple.person, { ps: ps && ps.shot, couple });
   if (ps) {
@@ -180,8 +195,8 @@ try {
   const pre = await state();
   const nxt = await b.evaluate(`(() => { const n = document.querySelector('.dir-next'); return { disabled: n.disabled, label: n.getAttribute('aria-label') }; })()`);
   check('Next is a labelled button, disabled when there is nothing to go to (no worthy event waiting and no ordinary candidate)', /^Next/.test(nxt.label) && nxt.disabled === !pre.hasNext, { nxt, waiting: pre.waiting, hasNext: pre.hasNext });
-  // the shot up now has held for MIN_HOLD (6 s), so the first of the two takes its place at once
-  await until(async () => { const s = await state(); return !s.shot || s.shot.age >= 6.2 ? s : null; }, 12000, 100);
+  // the shot up now has held for MIN_HOLD (15 s), so the first of the two takes its place at once
+  await until(async () => { const s = await state(); return !s.shot || s.shot.age >= 15.2 ? s : null; }, 30000, 100);
   const builds = await stage('builds');
   await b.sleep(300);
   const pre2 = await state();
@@ -193,7 +208,7 @@ try {
 
   // ── 5. a shot about a place (STAGED death of someone not in the world): the camera flies there and stays ──
   const second = await stage('place');
-  const place = await waitShot(second.id, 14000);
+  const place = await waitShot(second.id);
   check('a death of someone who is not here becomes a shot of the place (no subject)', !!place && place.shot.subjectId === 0, place && place.shot);
   if (place) {
     const aim = await b.evaluate(`(() => { const p = window.__dc.project(${second.x}, ${second.y}); return { x: p.sx, y: p.sy }; })()`);
@@ -213,7 +228,7 @@ try {
     await pressT();
     await b.sleep(350);
     const third = await stage('place');
-    const place2 = await waitShot(third.id, 14000);
+    const place2 = await waitShot(third.id);
     const aim2 = await b.evaluate(`(() => { const p = window.__dc.project(${third.x}, ${third.y}); return { x: p.sx, y: p.sy }; })()`);
     const landed2 = await until(async () => { const s = await state(); return !s.fly && Math.hypot(s.cam.x - aim2.x, s.cam.y - aim2.y) < 6 ? s : null; }, 6000, 100);
     check('a second place shot: the camera flies there again', !!place2 && !!landed2 && landed2.on, { on: landed2 && landed2.on });
@@ -232,7 +247,7 @@ try {
   check('the T key turns the director on', t1.on && t1.prefDirector, t1);
   const couple2 = await stage('couple');
   await b.sleep(120);
-  const f1 = await waitShot(couple2.id, 8000);
+  const f1 = await waitShot(couple2.id);
   check('a new shot about a person: followed again', !!f1 && f1.following && f1.selectedId === f1.shot.subjectId, f1 && { following: f1.following, selected: f1.selectedId });
   // zooming while following leaves the camera on the person: not the viewer taking it
   await wheelMap();
@@ -257,43 +272,121 @@ try {
   await b.sleep(250);
   const couple3 = await stage('couple');
   await b.sleep(120);
-  const f2 = await waitShot(couple3.id, 8000);
+  const f2 = await waitShot(couple3.id);
   const other = await b.evaluate(`(() => { const g = window.__game; return g.world.persons.filter((p) => p.alive && p.id !== ${f2?.shot?.subjectId ?? 0})[0].id; })()`);
   await b.evaluate(`window.__game.select(${other})`);
   await b.sleep(300);
   const sel = await state();
   check('the viewer selecting someone else turns the director off, and keeps their selection', !!f2 && !sel.on && sel.selectedId === other, { on: sel.on, selected: sel.selectedId, other });
 
-  // ── 7b. quiet stretches: an ordinary event the record would not keep gives the director someone to follow ──
+  // ── 7b. quiet stretches: an ordinary event the record would not keep (FILLER) gives the director someone to follow ──
+  // the world is a paused copy of an ordinary one; anything live in it is cleared first, so that nothing live comes before the filler
+  const clearLive = () => b.evaluate(`(() => {
+    const w = window.__game.world, f = window.__dc;
+    w.conversations = [];
+    for (const o of w.occasions ?? []) if (o.status === 'gathering') o.status = 'done';
+    for (const a of w.animals) if (a.type === 'wolf') a.state = 'roam';
+    for (const p of w.persons) { p.speech = null; for (const k of Object.keys(p.needs)) p.needs[k] = 100; }
+    return f.live.scanLive(w).map((c) => c.key + ':' + c.kind);
+  })()`);
+  const ensureOff = async () => { if ((await state()).on) { await pressT(); await b.sleep(300); } };
   await b.evaluate('window.__game.setPlaying(false); window.__game.select(0)');
   await b.sleep(200);
-  await pressT();
-  await b.sleep(500);
-  const amb = await stage('ambient', 0);
-  const a1 = await waitShot(amb.id, 4000);
-  check('with no shot up, an ordinary event about a living person is the shot at once, flagged ambient', !!a1 && a1.shot.ambient && a1.shot.subjectId === amb.person && a1.counts.ambient === 1 && a1.counts.shown === 1, a1 && { shot: a1.shot, counts: a1.counts });
-  check('its caption is the event\'s own words, on the quieter style (a muted icon), with the camera on that person', !!a1 && a1.captionShown && a1.captionText === amb.text && a1.captionAmbient && !!ps && a1.iconColor !== ps.iconColor && a1.following && a1.selectedId === amb.person, a1 && { caption: a1.captionText, text: amb.text, ambientClass: a1.captionAmbient, icon: [ps && ps.iconColor, a1.iconColor], following: a1.following, selected: a1.selectedId });
-  await shot('03b_ambient_shot.png');
-  const amb2 = await stage('ambient', 1);
-  await b.sleep(2500);
-  const hold = await state();
-  check('a second ordinary event does not replace the shot while it is young, and Next has it to go to', hold.shot?.id === amb.id && hold.hasNext && !hold.nextDisabled, { shot: hold.shot && hold.shot.id, hasNext: hold.hasNext, nextDisabled: hold.nextDisabled });
-  let lastAge = 0;
-  let swapped = null;
-  for (let t = 0; t < 30000 && !swapped; t += 100) {
-    const s = await state();
-    if (s.shot?.id === amb2.id) swapped = s;
-    else { lastAge = s.shot?.age ?? lastAge; await b.sleep(100); }
+  const left = await clearLive();
+  if (left.length) note('something live remained in the staged world (' + left.join(', ') + '), so the filler checks are skipped');
+  else {
+    await pressT();
+    await b.sleep(500);
+    const amb = await stage('ambient', 0);
+    const a1 = await waitShot(amb.id, 6000);
+    check('with no shot up and nothing live, an ordinary event about a living person (FILLER, weight 8) is the shot at once', !!a1 && a1.shot.filler && a1.shot.kind === 'event' && a1.shot.weight < 30 && a1.shot.subjectId === amb.person && a1.counts.filler === 1 && a1.counts.shown === 1, a1 && { shot: a1.shot, counts: a1.counts });
+    check('its caption is the event\'s own words, on the quieter style (a muted icon), with the camera on that person', !!a1 && a1.captionShown && a1.captionText === amb.text && a1.captionAmbient && !a1.captionLive && !!ps && a1.iconColor !== ps.iconColor && a1.following && a1.selectedId === amb.person, a1 && { caption: a1.captionText, text: amb.text, ambientClass: a1.captionAmbient, icon: [ps && ps.iconColor, a1.iconColor], following: a1.following, selected: a1.selectedId });
+    await shot('03b_filler_shot.png');
+    // a heavier filler (a crew formed, 22) takes it at the hold, not before
+    const amb2 = await stage('crew', 1);
+    await b.sleep(3000);
+    const hold = await state();
+    check('a heavier ordinary event does not replace the shot before MIN_HOLD (15 s), and Next has it to go to', hold.shot?.id === amb.id && hold.hasNext && !hold.nextDisabled, { shot: hold.shot && hold.shot.id, hasNext: hold.hasNext, nextDisabled: hold.nextDisabled });
+    let lastAge = 0;
+    let swapped = null;
+    for (let t = 0; t < 30000 && !swapped; t += 100) {
+      const st = await state();
+      if (st.shot?.id === amb2.id) swapped = st;
+      else { lastAge = st.shot?.age ?? lastAge; await b.sleep(100); }
+    }
+    check('it takes over once the shot has been up MIN_HOLD (15 s of UI time)', !!swapped && swapped.shot.filler && lastAge >= 14.5 && lastAge <= 15.5 && swapped.counts.filler === 2, { lastAge, counts: swapped && swapped.counts });
+    // a TOP event takes a FILLER shot after MIN_CUT (3 s), not after the whole of MIN_HOLD (15 s)
+    const cut = await stage('couple');
+    const t0 = Date.now();
+    const cutState = await waitShot(cut.id, 12000);
+    const took = Date.now() - t0;
+    check('a TOP event cuts a FILLER shot after about MIN_CUT (3 s), not MIN_HOLD (15 s)', !!cutState && !cutState.shot.filler && took >= 2500 && took < 5500, { took });
   }
-  check('it takes over once the shot has been up IDLE_SECONDS (20 s of UI time)', !!swapped && swapped.shot.ambient && lastAge >= 19 && lastAge <= 20.5 && swapped.counts.ambient === 2, { lastAge, counts: swapped && swapped.counts });
-  // a worthy event takes an ambient shot after MIN_CUT (3 s), not after the whole of MIN_HOLD (6 s)
-  const cut = await stage('couple');
-  const t0 = Date.now();
-  const cutState = await waitShot(cut.id, 8000);
-  const took = Date.now() - t0;
-  check('a worthy event cuts an ambient shot after about MIN_CUT (3 s), not MIN_HOLD (6 s)', !!cutState && !cutState.shot.ambient && took >= 2500 && took < 5500, { took });
-  await pressT();
-  await b.sleep(500);
+  await ensureOff();
+  await b.evaluate('window.__game.select(0)');
+
+  // ── 7c. live shots: a gathering, a conversation, a wolf (STAGED world state, read by the real scan, with the director freshly on) ──
+  const liveCase = async (stageBody, key, caption, name) => {
+    await ensureOff();
+    await b.evaluate('window.__game.select(0)');
+    const rest = await clearLive();
+    const info = await b.evaluate(`(() => { const w = window.__game.world, f = window.__dc; return (${stageBody})(w, f); })()`);
+    await pressT();
+    const got = await until(async () => { const st = await state(); return st.shot?.liveKey === info.key ? st : null; }, 6000, 100);
+    const want = await b.evaluate(`(() => { const w = window.__game.world, f = window.__dc; return (${caption})(w, f); })()`);
+    check(name + ': it becomes a live shot at once (nothing else is live)', !!got && got.shot.kind === 'live' && got.counts.live === 1 && rest.length === 0, { got: got && got.shot, rest });
+    check(name + ': the caption is the simulation\'s own text, and it says "now"', !!got && got.captionShown && got.captionText === want && got.captionText === got.shot.text && /, now$/.test(got.captionWhen) && got.captionLive, got && { caption: got.captionText, want, when: got.captionWhen, live: got.captionLive });
+    await shot('04c_live_' + key + '.png');
+    return { got, info };
+  };
+
+  // a gathering under way: a market, begun by the world's own clock, a shot of the place
+  const g = await liveCase(
+    `(w, f) => { f.occ.callOccasion(w, 'market', []); for (const o of w.occasions) if (o.status === 'called') { o.until = w.tick + 1 + (o.until - o.at); o.at = w.tick + 1; } window.__game.advanceTicks(2); const o = w.occasions.find((o) => o.status === 'gathering'); return { key: 'occ:' + o.id, id: o.id, x: o.x, y: o.y }; }`,
+    'occasion',
+    `(w, f) => f.cards.occasionNotice(w, w.occasions.find((o) => o.status === 'gathering')).says`,
+    'a gathering (the market)',
+  );
+  if (g.got) {
+    const aim = await b.evaluate(`(() => { const p = window.__dc.project(${g.info.x}, ${g.info.y}); return { x: p.sx, y: p.sy }; })()`);
+    const at = await until(async () => { const st = await state(); return !st.fly && Math.hypot(st.cam.x - aim.x, st.cam.y - aim.y) < 6 ? st : null; }, 6000, 100);
+    check('a gathering is a shot of the place: no subject, and the camera flew to it', g.got.shot.subjectId === 0 && !!at && at.selectedId === 0 && !at.following, { subject: g.got.shot.subjectId, cam: at && at.cam, aim });
+    // it ends when the gathering is over: the caption goes, the camera stays
+    await b.evaluate(`(() => { const o = window.__game.world.occasions.find((o) => o.id === ${g.info.id}); o.status = 'done'; })()`);
+    const over = await until(async () => { const st = await state(); return st.shot?.ended ? st : null; }, 4000, 100);
+    check('when the gathering is over the live shot ends: the caption goes and the camera stays', !!over && !over.captionShown && over.shot.liveKey === g.info.key, over && { shot: over.shot, caption: over.captionShown });
+  }
+
+  // a conversation under way (mediation, the most telling): the person's own "what are they doing" line, following the first of them
+  const c = await liveCase(
+    `(w, f) => { const live = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id); const p = live[11], q = live[12]; w.conversations.push({ id: 990001, a: p.id, b: q.id, purpose: 'mediate', start: w.tick, phase: 0, nextAt: w.tick, end: 0, requestId: 0, data: {} }); return { key: 'talk:990001', person: p.id }; }`,
+    'talk',
+    `(w, f) => f.inspect.describePerson(w, w.conversations[0].a).qa.doing`,
+    'a conversation (mediation)',
+  );
+  if (c.got) {
+    check('a conversation: the first of the two is selected and followed', c.got.following && c.got.selectedId === c.info.person && c.got.shot.subjectId === c.info.person, { following: c.got.following, selected: c.got.selectedId, person: c.info.person });
+    await b.evaluate('window.__game.world.conversations = []');
+    const over = await until(async () => { const st = await state(); return st.shot?.ended ? st : null; }, 4000, 100);
+    check('when the conversation is over the live shot ends', !!over && !over.captionShown, over && over.captionShown);
+  }
+
+  // a wolf stalking close to a person: the two wolf sentences say only what its recorded state is
+  const wlf = await liveCase(
+    `(w, f) => { const live = w.persons.filter((p) => p.alive).sort((a, c) => a.id - c.id); const p = live[13]; const wolf = f.wild.makeWolf(w, p.x + 2, p.y); wolf.state = 'stalk'; wolf.targetId = p.id; return { key: 'wolf:' + wolf.id, person: p.id, name: p.name, wolf: wolf.id }; }`,
+    'wolf',
+    `(w, f) => { const wolf = w.animals.find((a) => a.type === 'wolf' && a.state === 'stalk'); return 'A wolf is stalking near ' + w.byId.get(wolf.targetId).name + '.'; }`,
+    'a wolf stalking',
+  );
+  if (wlf.got) {
+    check('a wolf: the person it is after is selected and followed, and the sentence is "A wolf is stalking near <name>."', wlf.got.following && wlf.got.selectedId === wlf.info.person && wlf.got.captionText === 'A wolf is stalking near ' + wlf.info.name + '.', { caption: wlf.got.captionText, name: wlf.info.name });
+    // 'attack' is the other recorded state
+    await b.evaluate(`(() => { const a = window.__game.world.byId.get(${wlf.info.wolf}); a.state = 'attack'; })()`);
+    const atk = await until(async () => { const st = await state(); return st.captionText === 'A wolf is attacking near ' + wlf.info.name + '.' ? st : null; }, 4000, 100);
+    check('and when the wolf\'s recorded state is attack the sentence says attacking (read again at the next scan)', !!atk, (await state()).captionText);
+    await b.evaluate(`(() => { const a = window.__game.world.byId.get(${wlf.info.wolf}); a.state = 'roam'; })()`);
+  }
+  await ensureOff();
   await b.evaluate('window.__game.select(0)');
 
   // ── 8. the reel, with the director off ──
@@ -354,7 +447,7 @@ try {
   await b.key('Escape', 'Escape', 27);
   const live2 = await stage('couple');
   await b.sleep(120);
-  const fresh = await waitShot(live2.id, 8000);
+  const fresh = await waitShot(live2.id);
   check('and it watches the new world', !!fresh && fresh.on, fresh && fresh.shot);
 
   // ── 11. a narrow screen: controls, caption and reel stay inside; the caption is clear of the inspector ──
@@ -362,7 +455,7 @@ try {
   await b.sleep(500);
   const live3 = await stage('couple');
   await b.sleep(120);
-  const nr = await waitShot(live3.id, 14000);
+  const nr = await waitShot(live3.id);
   await b.sleep(500);
   const nrs = await state();
   const nrPanels = await b.evaluate(`[...document.querySelectorAll('#ui .glass')].filter((el) => !el.closest('.dir-layer') && !el.closest('.dir-ctl') && !el.classList.contains('toast') && el.getBoundingClientRect().width > 4 && el.getBoundingClientRect().height > 4).map((el) => { const r = el.getBoundingClientRect(); return { cls: el.className.slice(0, 30), x: r.left, y: r.top, w: r.width, h: r.height }; })`);
@@ -385,7 +478,7 @@ try {
   await b.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
   const live4 = await stage('couple');
   await b.sleep(120);
-  const rmState = await waitShot(live4.id, 14000);
+  const rmState = await waitShot(live4.id);
   const anim = await b.evaluate(`getComputedStyle(document.querySelector('.dir-caption')).animationName`);
   check('reduced motion: the caption shows without its entrance animation', !!rmState && rmState.captionShown && anim === 'none', { anim });
   await b.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });

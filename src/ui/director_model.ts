@@ -1,71 +1,118 @@
-// The story director's model: how much a real event is worth a shot, the short queue of what is waiting, and the one current shot.
-// No DOM and no Game here, so all of it can be tested; director.ts draws it and drives the view (selection, follow, camera fly).
+// The story director's model: how worth watching a real event is, the short queue of what is waiting, what is happening live, and
+// the one current shot. No DOM and no Game here, so all of it can be tested; director.ts draws it and drives the view (selection,
+// follow, camera fly).
 //
-// Presentation only. Everything is read from records the simulation already keeps: world.events for the shots, and world.chronicle
-// as well for the "What happened" reel. Nothing is written to the world, the world's random state is never drawn from, and
-// nothing here is saved. The words are the event's own; the director adds no explanation of its own. In a quiet stretch an
-// ordinary event the record would not keep can be the shot (the ambient tier), so there is someone to follow.
+// Presentation only. Events are read from world.events (and world.chronicle for the reel); what is live is read from world state
+// by director_live.ts. Nothing is written to the world, the world's random state is never drawn from, and nothing here is saved.
+// The words are the event's own or the simulation's and the inspector's; the director adds none of its own but two wolf sentences.
+//
+// What it follows, in three bands of weight: TOP (80 and up) may cut in early, MIDDLE (50 to 79) waits for the hold, and FILLER
+// (below 30) is shown only when nothing better exists. Between events it follows what is still happening (a gathering, a wolf, a
+// conversation, someone in trouble), so the camera is there during the moment and not after it.
 import { DAY } from '../sim/constants';
-import { chronicleWorthy } from '../sim/events';
 import type { EventKind, World, WorldEvent } from '../sim/types';
+import { scanLive, type LiveCandidate } from './director_live';
 
-// ───────────────────────────── how much an event weighs ─────────────────────────────
+// ───────────────────────────── how worth watching an event is ─────────────────────────────
+
+/** TOP: a death, a bite, a birth, a pairing, a wedding, a conflict. May cut in early over a shot from a lower band. */
+export const TOP_FROM = 80;
+/** MIDDLE: from here up to TOP_FROM. Waits for the hold. Also the least weight the reel lists. */
+export const MIDDLE_FROM = 50;
+/** FILLER: below this. Shown only when nothing better exists. */
+export const FILLER_BELOW = 30;
+
+export type Band = 'top' | 'middle' | 'filler';
+export const bandOf = (weight: number): Band => (weight >= TOP_FROM ? 'top' : weight >= MIDDLE_FROM ? 'middle' : 'filler');
 
 interface Rule {
+  /** names the rule for the repeat fade */
+  id: string;
   kind: EventKind;
-  /** a piece of the event's text; none means every event of the kind */
-  has?: string;
+  /** a test on the event's text; none means every event of the kind */
+  test?: (text: string) => boolean;
   weight: number;
 }
 
+const has = (piece: string) => (t: string) => t.includes(piece);
+/** a gathering called, or beginning (the simulation words these "A <label> for ... is called at ..." and "The <label> at ... begins.") */
+const gathering = (label: string) => (t: string) => t.includes(label) && (t.includes(' is called at ') || t.includes(' begins'));
+
 /**
- * The first rule that fits wins. The wording is the simulation's own (grep addEvent under src/sim): a death is
- * "<name> died peacefully of old age, aged N." or "<name> died (<cause>), aged N.", a birth "<baby> was born to <mother>", a
- * pairing "<a> and <b> became a couple.", a wedding feast is called or over at the hall or the fire, a bite that kills is
- * "A wolf bit <name> fatally.". Deaths, births, pairings, fatal injuries and conflicts outrank a finished building.
+ * The first rule that fits wins. The wording is the simulation's own (grep addEvent under src/sim, and the counts of what an
+ * ordinary world really says in scratchpad review/patterns.json): "<name> died peacefully of old age, aged N." or "<name> died
+ * (<cause>), aged N.", "<baby> was born to <mother>", "<a> and <b> became a couple.", "A wolf bit <name>." and "... fatally.",
+ * "<name> drove a wolf off with a spear" or "killed a wolf", "A <label> is called at ... " and "The <label> at ... begins.".
+ * Weather (nature) and workshop output (work) are never a shot. A household's own hut, lean-to or cellar finished is FILLER, a
+ * building for everyone (no "household" in the text) is MIDDLE. A story told at the fire retells something else, so it is first.
  */
 const RULES: Rule[] = [
-  { kind: 'life', has: ' died ', weight: 100 },
-  { kind: 'danger', has: 'fatally', weight: 95 },
-  { kind: 'life', has: ' was born to ', weight: 90 }, // a lamb is "A lamb was born after ...", so it is not this
-  { kind: 'life', has: ' became a couple', weight: 85 },
-  { kind: 'social', has: 'wedding feast', weight: 75 },
-  { kind: 'conflict', weight: 70 }, // an argument, a refusal, a broken promise, a theft
-  { kind: 'social', has: 'funeral', weight: 65 },
-  { kind: 'danger', has: ' got a ', weight: 60 }, // an injury that is not fatal
-  { kind: 'life', has: ' arrive', weight: 55 }, // a traveller, a couple or a family arrives at the settlement
-  { kind: 'build', has: ' finished ', weight: 50 }, // a finished or rebuilt building
+  // never: weather, and workshop output (a deer, an apprenticeship and a trade of one's own are people's, not output)
+  { id: 'deer', kind: 'work', test: has('brought down a deer'), weight: 55 },
+  { id: 'apprentice', kind: 'work', test: has('apprentice'), weight: 50 },
+  { id: 'own-right', kind: 'work', test: has('own right'), weight: 50 },
+  { id: 'work', kind: 'work', weight: 0 },
+  { id: 'nature', kind: 'nature', weight: 0 },
+  // a tale retold at the fire ("told a story at the fire: how ... finished a shallow well") is not the thing it retells
+  { id: 'story', kind: 'social', test: has('told a story'), weight: 10 },
+  // TOP
+  { id: 'death', kind: 'life', test: has(' died '), weight: 100 },
+  { id: 'bite-fatal', kind: 'danger', test: has('fatally'), weight: 95 },
+  { id: 'birth', kind: 'life', test: has(' was born to '), weight: 90 }, // a lamb is "A lamb was born after ...", not this
+  { id: 'bite', kind: 'danger', test: has('A wolf bit'), weight: 90 },
+  { id: 'wolf-off', kind: 'danger', test: (t) => t.includes('drove a wolf off') || t.includes('killed a wolf'), weight: 88 },
+  { id: 'couple', kind: 'life', test: has(' became a couple'), weight: 85 },
+  { id: 'wedding', kind: 'social', test: gathering('wedding feast'), weight: 80 },
+  { id: 'conflict', kind: 'conflict', weight: 80 }, // an argument, reaching the last berry first, a theft, a broken promise
+  // MIDDLE
+  { id: 'injury', kind: 'danger', test: has(' got a '), weight: 65 },
+  { id: 'arrival', kind: 'life', test: has(' arrive'), weight: 60 }, // a traveller, a couple or a family arrives at the settlement
+  { id: 'expecting', kind: 'life', test: has('expecting a child'), weight: 60 },
+  { id: 'funeral', kind: 'social', test: gathering('funeral'), weight: 60 },
+  { id: 'harvest-feast', kind: 'social', test: gathering('harvest feast'), weight: 58 },
+  { id: 'feast', kind: 'social', test: gathering('feast'), weight: 55 },
+  { id: 'market', kind: 'social', test: gathering('market'), weight: 55 },
+  { id: 'hope-family', kind: 'life', test: has('has what they hoped for: a family'), weight: 55 },
+  { id: 'shared-finished', kind: 'build', test: (t) => t.includes(' finished ') && !t.includes('household'), weight: 55 }, // a storehouse, a shallow well, a hall
+  { id: 'warn-wolf', kind: 'danger', test: has('warned'), weight: 50 },
+  { id: 'peace', kind: 'social', test: (t) => t.includes('make peace') || t.includes('made peace') || t.includes('on good terms again'), weight: 50 },
+  { id: 'tradition', kind: 'social', test: has('has become a tradition'), weight: 50 },
+  // FILLER
+  { id: 'home-finished', kind: 'build', test: has(' finished '), weight: 25 }, // a household's hut, lean-to or cellar
+  { id: 'hope', kind: 'life', test: has('has what they hoped for'), weight: 25 }, // a home, a trade
+  { id: 'crew', kind: 'social', test: has('have become a crew'), weight: 22 },
+  { id: 'over', kind: 'social', test: has(' is over: '), weight: 20 },
+  { id: 'recovered', kind: 'life', test: (t) => t.includes('has healed from') || t.includes('is over the fever'), weight: 20 },
+  { id: 'estate', kind: 'life', test: has('left behind'), weight: 15 },
+  { id: 'lit', kind: 'build', test: has(' lit a '), weight: 15 },
+  { id: 'look-in', kind: 'social', test: has('looked in on'), weight: 12 },
+  { id: 'agreed', kind: 'social', test: has('agreed to help'), weight: 10 },
+  { id: 'marked-out', kind: 'build', test: has(' marked out '), weight: 10 },
+  { id: 'gave', kind: 'social', test: has(' gave '), weight: 8 },
+  { id: 'promised', kind: 'social', test: has('promised'), weight: 8 },
+  { id: 'fed', kind: 'social', test: has(' fed '), weight: 5 },
 ];
 
-/** a worthy event no rule names: what its kind weighs. Routine nature notes (winter, dry spells, a hut decaying) are the lightest. */
-const BY_KIND: Partial<Record<EventKind, number>> = { life: 45, social: 40, work: 40, build: 35, trade: 30, nature: 20 };
+/** a wording no rule names: by kind */
+const DEFAULT_BY_KIND: Partial<Record<EventKind, number>> = { conflict: 80, danger: 50, life: 50, social: 12, build: 10, trade: 10, survival: 8, farm: 6 };
 
-/**
- * How worth a shot an event is. 0 means not at all: anything the settlement's own record (chronicleWorthy) would not keep weighs
- * nothing. Higher weighs more.
- */
-export function storyWeight(ev: WorldEvent): number {
-  if (!chronicleWorthy(ev.kind, ev.text)) return 0;
-  for (const r of RULES) if (r.kind === ev.kind && (r.has === undefined || ev.text.includes(r.has))) return r.weight;
-  return BY_KIND[ev.kind] ?? 10;
+export interface Match {
+  /** the rule that fit, or `default:<kind>`: what the repeat fade is counted by */
+  id: string;
+  weight: number;
 }
 
-/**
- * The ambient tier: ordinary feed events the settlement's record would not keep (a gift, a promise, a tool made), which can give the
- * director someone to follow in a quiet stretch. Every weight stays below the lightest worthy one (nature, 20), so any worthy event
- * outranks any ambient one. Workshop output is routine and weighs nothing, as in the feed. Life, conflict and nature events are all
- * kept by chronicleWorthy, so they never reach this table; their entries are here only so the kinds are listed.
- */
-const AMBIENT_BY_KIND: Partial<Record<EventKind, number>> = { danger: 15, conflict: 14, social: 12, life: 12, build: 10, trade: 10, survival: 8, farm: 6 };
-
-/** 0 for a worthy event (it has its storyWeight) and for workshop output; else what its kind weighs as ambient */
-export function ambientWeight(ev: WorldEvent): number {
-  if (storyWeight(ev) > 0) return 0;
-  return AMBIENT_BY_KIND[ev.kind] ?? 0;
+/** which rule an event fits, and what it weighs */
+export function matchEvent(ev: Pick<WorldEvent, 'kind' | 'text'>): Match {
+  for (const r of RULES) if (r.kind === ev.kind && (!r.test || r.test(ev.text))) return { id: r.id, weight: r.weight };
+  return { id: `default:${ev.kind}`, weight: DEFAULT_BY_KIND[ev.kind] ?? 0 };
 }
+
+/** How worth watching an event is: 0 is never, TOP_FROM and up is TOP, MIDDLE_FROM to TOP_FROM is MIDDLE, below FILLER_BELOW is FILLER. */
+export const storyWeight = (ev: Pick<WorldEvent, 'kind' | 'text'>): number => matchEvent(ev).weight;
 
 /** the first of the event's people who is alive now, or 0 (a shot of the place) */
-export function subjectOf(world: World, ev: WorldEvent): number {
+export function subjectOf(world: World, ev: Pick<WorldEvent, 'ids'>): number {
   for (const id of ev.ids) {
     const e = world.byId.get(id);
     if (e && e.ent === 'person' && e.alive) return id;
@@ -78,8 +125,8 @@ const livingPerson = (world: World, id: number): boolean => {
   return !!e && e.ent === 'person' && e.alive;
 };
 
-/** an event with no position (winter setting in) has no place to fly to */
-export const hasPlace = (ev: Pick<WorldEvent, 'x' | 'y'>): boolean => ev.x !== 0 || ev.y !== 0;
+/** a shot or event with no position (the winter setting in) has no place to fly to */
+export const hasPlace = (at: { x: number; y: number }): boolean => at.x !== 0 || at.y !== 0;
 
 // ───────────────────────────── the reel ─────────────────────────────
 
@@ -88,9 +135,9 @@ export const REEL_DAYS = 3;
 export const REEL_MAX = 8;
 
 /**
- * The heaviest worthy events at or after `sinceTick`, at most `max`, in the order they happened. Read from the chronicle when the
- * world keeps one (older worlds have none) and from the feed's events as well; an event in both is listed once. Heavier first when
- * choosing, newer first among equals.
+ * The heaviest events of TOP and MIDDLE weight (MIDDLE_FROM and up) at or after `sinceTick`, at most `max`, in the order they
+ * happened. Read from the chronicle when the world keeps one (older worlds have none) and from the feed's events as well; an event
+ * in both is listed once. Heavier first when choosing, newer first among equals.
  */
 export function highlights(world: World, sinceTick: number, max: number): WorldEvent[] {
   if (max <= 0) return [];
@@ -105,7 +152,7 @@ export function highlights(world: World, sinceTick: number, max: number): WorldE
       if (seen.has(ev.id)) continue;
       seen.add(ev.id);
       const weight = storyWeight(ev);
-      if (weight > 0) pool.push({ ev, weight });
+      if (weight >= MIDDLE_FROM) pool.push({ ev, weight });
     }
   };
   take(world.chronicle);
@@ -122,50 +169,72 @@ export const reelOf = (world: World): WorldEvent[] => highlights(world, world.ti
 
 // ───────────────────────────── the queue and the shot ─────────────────────────────
 
-/** at most this many events wait for a shot; past it the lightest (the oldest among equals) is dropped */
+/** at most this many events (TOP and MIDDLE) wait for a shot; past it the lightest (the oldest among equals) is dropped */
 export const MAX_WAITING = 6;
-/** a shot stays up at least this long (UI seconds, whatever the simulation's speed, and while it is paused) before another may replace it */
-export const MIN_HOLD = 6;
-/** a strictly heavier event may cut in once the shot has been up this long */
+/** a shot stays up at least this long (UI seconds, whatever the simulation's speed, and while it is paused) before anything but a TOP event may replace it */
+export const MIN_HOLD = 15;
+/** a TOP event may cut in over a shot from a lower band once the shot has been up this long */
 export const MIN_CUT = 3;
-/** with nothing waiting the shot stays, and its caption fades after this long */
+/** an event shot's caption fades after this long (a live shot's stays while it lasts) */
 export const CAPTION_SECONDS = 12;
 /** a waiting event that has waited this long (UI seconds) is dropped as stale */
-export const STALE_SECONDS = 30;
+export const STALE_SECONDS = 60;
 /** a waiting event older than this many world ticks (one day) is dropped as stale */
 export const STALE_TICKS = DAY;
-/** the ambient candidate is dropped once it is older than this many world ticks (a quarter of a day) */
-export const AMBIENT_STALE_TICKS = DAY / 4;
-/** an ambient event becomes the shot only when no shot is up, or the shot has been up at least this long (UI seconds) with nothing worthy waiting */
-export const IDLE_SECONDS = 20;
+/** the FILLER candidate is dropped once it is older than this many world ticks (a quarter of a day) */
+export const FILLER_STALE_TICKS = DAY / 4;
+/** each showing of the same rule within the last DAY of world ticks multiplies a waiting event's weight by this (TOP is exempt) */
+export const REPEAT_FADE = 0.6;
+/** two waiting events this close in world ticks, about the same first living person, are one moment */
+export const MERGE_TICKS = 5;
+/** past the hold a shot lingers until this age (UI seconds) unless a strictly heavier candidate (live, filler or a faded repeat) comes; then any may replace it. An event waiting at TOP or MIDDLE weight does not linger for. */
+export const LINGER_SECONDS = 45;
+/** what is live is read from the world at most this often (UI seconds) */
+export const LIVE_SCAN_SECONDS = 1;
+/** a live thing is not picked again for this long (UI seconds) unless its score is LIVE_EXEMPT or more */
+export const LIVE_COOLDOWN = 60;
+export const LIVE_EXEMPT = 70;
 
 export interface Shot {
-  ev: WorldEvent;
-  /** the living person the event is about, or 0: the shot is then of the place */
+  /** an event the simulation recorded, or something happening now */
+  kind: 'event' | 'live';
+  /** the event, for an event shot */
+  ev: WorldEvent | null;
+  /** the live thing's key, for a live shot ('occ:<id>', 'wolf:<id>', 'talk:<id>', 'person:<id>') */
+  liveKey: string | null;
+  /** the caption: the event's own text, or the live thing's (refreshed at each scan while it lasts) */
+  text: string;
+  /** the world tick the caption refers to: the event's, or when the live shot began */
+  tick: number;
+  /** the living person the shot is about, or 0: the shot is then of the place */
   subjectId: number;
-  /** where the event happened (world tiles) */
+  /** where it is (world tiles) */
   x: number;
   y: number;
+  /** its weight (an event) or score (a live thing): the band says what may cut it */
+  weight: number;
+  /** an event of FILLER weight: shown only because nothing better existed; always about a living person */
+  filler: boolean;
+  /** a live shot whose thing has ended: the camera stays with the person, with no caption, until something worth moving for comes */
+  ended: boolean;
   /** UI seconds this shot has been up */
   age: number;
   /** changes whenever a shot starts or loses its subject, so the view knows when to move the camera */
   rev: number;
-  /** an ordinary event the settlement's record would not keep, shown because nothing worthy was there; always about a living person */
-  ambient: boolean;
 }
 
-export interface Waiting {
+interface Entry {
   ev: WorldEvent;
+  /** the rule it fit (for the repeat fade) */
+  rule: string;
   weight: number;
+  /** its first living person when it arrived, or 0 */
+  subjectId: number;
+}
+
+export interface Waiting extends Entry {
   /** UI seconds waited */
   waited: number;
-}
-
-/** the one ambient event kept: the newest (the heaviest of those that arrived together) about a living person */
-interface Ambient {
-  ev: WorldEvent;
-  weight: number;
-  subjectId: number;
 }
 
 /**
@@ -177,26 +246,42 @@ export class Director {
   private world: World | null = null;
   private lastId = 0;
   private rev = 0;
+  /** UI seconds since the world was first looked at */
+  private clock = 0;
+  private scanAt = -Infinity;
   private queue: Waiting[] = [];
-  private ambient: Ambient | null = null;
+  private filler: Entry | null = null;
+  private live: LiveCandidate[] = [];
+  private pickedAt = new Map<string, number>();
+  private shown: { rule: string; tick: number }[] = [];
   shot: Shot | null = null;
   /**
-   * in the world watched now (for the checks): shots shown (ambient ones too), worthy events dropped as stale, worthy events dropped
-   * because the queue was full, and how many of the shots shown were ambient
+   * in the world watched now (for the checks): shots shown (live and filler ones too), TOP and MIDDLE events dropped as stale or
+   * for a full queue, events folded into another of the same moment, and how many of the shots shown were filler or live
    */
-  readonly counts = { shown: 0, stale: 0, overflow: 0, ambient: 0 };
+  readonly counts = { shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 };
+
+  /** `scan` reads what is live from the world (director_live.ts); the checks may give it another */
+  constructor(private scan: (world: World) => LiveCandidate[] = scanLive) {}
 
   /** Forget everything: the next step primes on whatever world it is given. */
   reset(): void {
     this.world = null;
     this.lastId = 0;
+    this.clock = 0;
+    this.scanAt = -Infinity;
     this.queue = [];
-    this.ambient = null;
+    this.filler = null;
+    this.live = [];
+    this.pickedAt.clear();
+    this.shown = [];
     this.shot = null;
     this.counts.shown = 0;
     this.counts.stale = 0;
     this.counts.overflow = 0;
-    this.counts.ambient = 0;
+    this.counts.merged = 0;
+    this.counts.filler = 0;
+    this.counts.live = 0;
   }
 
   step(world: World, dt: number): void {
@@ -208,29 +293,30 @@ export class Director {
       return;
     }
     const secs = Math.max(0, dt);
+    this.clock += secs;
     if (this.shot) this.shot.age += secs;
     for (const q of this.queue) q.waited += secs;
     this.ingest(world);
     this.expire(world);
     this.trim();
+    if (this.clock - this.scanAt >= LIVE_SCAN_SECONDS) {
+      this.scanAt = this.clock;
+      this.live = this.scan(world);
+      this.refreshLive();
+    }
     this.choose(world);
   }
 
   /**
-   * The viewer asked for the next one: the current shot goes and the best waiting worthy event takes its place; with none waiting,
-   * the ambient candidate, if there is one; with neither there is no shot.
+   * The viewer asked for the next one: the current shot goes and the best waiting event takes its place; with none waiting, the best
+   * live thing; with none, the FILLER candidate; with none, there is no shot.
    */
   skip(): void {
     const world = this.world;
     if (!world) return;
+    const gone = this.shot?.liveKey ?? null;
     this.shot = null;
-    const best = this.best();
-    if (best) {
-      this.start(world, best);
-      return;
-    }
-    this.dropAmbientIfGone(world);
-    if (this.ambient) this.startAmbient(this.ambient);
+    this.pick(world, true, gone);
   }
 
   /** what waits for a shot, in order of arrival */
@@ -238,52 +324,85 @@ export class Director {
     return this.queue;
   }
 
-  /** whether Next has anything to go to: a worthy event waiting, or the ambient candidate */
-  hasNext(): boolean {
-    return this.queue.length > 0 || this.ambient !== null;
+  /** the live things read at the last scan, best first */
+  liveNow(): readonly LiveCandidate[] {
+    return this.live;
   }
 
-  /** false once the shot's caption has been up long enough (CAPTION_SECONDS) to fade, or when there is no shot */
-  captionFresh(): boolean {
-    return this.shot !== null && this.shot.age < CAPTION_SECONDS;
+  /** whether Next has anything to go to: an event waiting, a live thing other than the shot's own, or the FILLER candidate */
+  hasNext(): boolean {
+    return this.queue.length > 0 || this.bestLive(this.shot?.liveKey ?? null) !== null || this.filler !== null;
   }
+
+  /** false once an event shot's caption has been up long enough (CAPTION_SECONDS) to fade, or when there is no shot; a live shot's stays while it lasts */
+  captionFresh(): boolean {
+    return this.shot !== null && !this.shot.ended && this.shot.text !== '' && (this.shot.kind === 'live' || this.shot.age < CAPTION_SECONDS);
+  }
+
+  /** the weight of a waiting event with the repeat fade: each showing of the same rule in the last DAY of world ticks takes REPEAT_FADE off. TOP is exempt. */
+  effective(e: Entry): number {
+    if (e.weight >= TOP_FROM || !this.world) return e.weight;
+    const now = this.world.tick;
+    this.shown = this.shown.filter((s) => now - s.tick <= DAY);
+    let w = e.weight;
+    for (const s of this.shown) if (s.rule === e.rule) w *= REPEAT_FADE;
+    return w;
+  }
+
+  // ───────── events ─────────
 
   private ingest(world: World): void {
     const events = world.events;
     let from = events.length;
     while (from > 0 && events[from - 1].id > this.lastId) from--;
-    let candidate: Ambient | null = null;
     for (let i = from; i < events.length; i++) {
       const ev = events[i];
-      const weight = storyWeight(ev);
-      if (weight > 0) {
-        this.queue.push({ ev, weight, waited: 0 });
-        continue;
-      }
-      // not for the record: a candidate for a quiet stretch, if it is about a living person. Of those arriving together, the heaviest, then the newest.
-      const aw = ambientWeight(ev);
-      if (aw <= 0) continue;
-      const subjectId = subjectOf(world, ev);
-      if (subjectId === 0) continue;
-      if (!candidate || aw >= candidate.weight) candidate = { ev, weight: aw, subjectId };
+      const m = matchEvent(ev);
+      if (m.weight <= 0) continue;
+      this.admit(world, { ev, rule: m.id, weight: m.weight, subjectId: subjectOf(world, ev) });
     }
-    // anything that arrives is newer than the candidate kept, so it replaces it
-    if (candidate) this.ambient = candidate;
     if (events.length) this.lastId = Math.max(this.lastId, events[events.length - 1].id);
   }
 
-  /** a waiting event goes stale after a simulated day or STALE_SECONDS of waiting; the ambient candidate after AMBIENT_STALE_TICKS */
+  /**
+   * Take an event in. Two events within MERGE_TICKS about the same first living person are one moment: the heavier is kept, the other
+   * dropped. Then TOP and MIDDLE ones wait in the queue; a lighter one (FILLER) is the one candidate kept, if it is about a living
+   * person: the newest, and of those arriving together the heaviest, then the newest.
+   */
+  private admit(world: World, e: Entry): void {
+    if (e.subjectId !== 0) {
+      const near = (o: Entry) => o.subjectId === e.subjectId && Math.abs(o.ev.tick - e.ev.tick) <= MERGE_TICKS;
+      const twin = this.queue.find(near);
+      const slot = this.filler && near(this.filler) ? this.filler : null;
+      const other: Entry | null = twin ?? slot;
+      if (other) {
+        this.counts.merged++;
+        if (e.weight <= other.weight) return;
+        if (twin) this.queue.splice(this.queue.indexOf(twin), 1);
+        else this.filler = null;
+      }
+    }
+    if (e.weight >= MIDDLE_FROM) {
+      this.queue.push({ ...e, waited: 0 });
+      return;
+    }
+    if (e.subjectId === 0) return;
+    // the filler of this step: the heavier of those arriving together, then the newer; anything that arrives is newer than the one kept
+    const kept = this.filler && this.filler.ev.id > this.lastId && this.filler.weight > e.weight;
+    if (!kept) this.filler = e;
+  }
+
+  /** a waiting event goes stale after a simulated day or STALE_SECONDS of waiting; the FILLER candidate after FILLER_STALE_TICKS or when its person is gone */
   private expire(world: World): void {
     const keep = this.queue.filter((q) => world.tick - q.ev.tick <= STALE_TICKS && q.waited <= STALE_SECONDS);
     this.counts.stale += this.queue.length - keep.length;
     this.queue = keep;
-    this.dropAmbientIfGone(world);
+    this.dropFillerIfGone(world);
   }
 
-  /** the ambient candidate goes when it is too old or the person it is about is no longer a living person (not counted as stale: it is not queued) */
-  private dropAmbientIfGone(world: World): void {
-    const a = this.ambient;
-    if (a && (world.tick - a.ev.tick > AMBIENT_STALE_TICKS || !livingPerson(world, a.subjectId))) this.ambient = null;
+  private dropFillerIfGone(world: World): void {
+    const f = this.filler;
+    if (f && (world.tick - f.ev.tick > FILLER_STALE_TICKS || !livingPerson(world, f.subjectId))) this.filler = null;
   }
 
   /** no long backlog: past MAX_WAITING the lightest event, the oldest among equals, is dropped */
@@ -300,46 +419,129 @@ export class Director {
     }
   }
 
-  private best(): Waiting | null {
+  /** the heaviest waiting event whose weight, faded, is at least `least`; the oldest among equals */
+  private bestWaiting(least: number): Waiting | null {
     let best: Waiting | null = null;
-    for (const q of this.queue) if (!best || q.weight > best.weight || (q.weight === best.weight && q.ev.id < best.ev.id)) best = q;
+    let bw = 0;
+    for (const q of this.queue) {
+      const w = this.effective(q);
+      if (w < least) continue;
+      if (!best || w > bw || (w === bw && q.ev.id < best.ev.id)) {
+        best = q;
+        bw = w;
+      }
+    }
     return best;
   }
 
+  // ───────── what is live ─────────
+
+  /**
+   * A live shot ends when its condition ends: the thing is no longer among the live candidates (the camera stays with the person and
+   * the caption goes). If it comes back (the wolf stalks again) it is live again. While it lasts its caption and score are read again.
+   */
+  private refreshLive(): void {
+    const s = this.shot;
+    if (!s || s.kind !== 'live') return;
+    const c = this.live.find((x) => x.key === s.liveKey);
+    if (!c) {
+      s.ended = true;
+      return;
+    }
+    s.ended = false;
+    s.text = c.caption();
+    s.weight = c.score;
+  }
+
+  /** the best live candidate not on cooldown, other than `except` */
+  private bestLive(except: string | null): LiveCandidate | null {
+    for (const c of this.live) {
+      if (c.key === except) continue;
+      const at = this.pickedAt.get(c.key);
+      if (at !== undefined && this.clock - at < LIVE_COOLDOWN && c.score < LIVE_EXEMPT) continue;
+      return c;
+    }
+    return null;
+  }
+
+  // ───────── choosing ─────────
+
   private choose(world: World): void {
     let s = this.shot;
-    // the person has gone (died, or is no longer in the world): a worthy shot becomes one of the place and the director carries on;
-    // an ambient shot is only ever about a person, so it simply ends
+    // the person has gone (died, or is no longer in the world): a TOP or MIDDLE event's shot becomes one of the place and the director
+    // carries on; a live or filler shot is only ever about a person, so it simply ends
     if (s && s.subjectId && !livingPerson(world, s.subjectId)) {
-      if (s.ambient) s = this.shot = null;
+      if (s.kind === 'live' || s.filler) s = this.shot = null;
       else {
         s.subjectId = 0;
         s.rev = ++this.rev;
       }
     }
-    const best = this.best();
+    const hold = !s || s.age >= MIN_HOLD;
+    // a live shot whose thing has ended is free to go for a MIDDLE or TOP event at once; for anything else the hold still applies
+    const free = hold || !!s?.ended;
+    const best = this.bestWaiting(MIDDLE_FROM);
     if (best) {
-      // an ambient shot counts for nothing against a worthy event, so one cuts in after MIN_CUT and never waits the whole of MIN_HOLD
-      if (!s || s.age >= MIN_HOLD || (s.age >= MIN_CUT && best.weight > shotWeight(s))) this.start(world, best);
+      // only a TOP event cuts in early, and only over a shot from a lower band; a MIDDLE one waits for the hold
+      if (free || (best.weight >= TOP_FROM && !!s && bandOf(s.weight) !== 'top' && s.age >= MIN_CUT)) this.startEvent(world, best);
       return;
     }
-    // nothing worthy waits: a quiet stretch. The ambient candidate takes a bare screen at once, or a shot that has been up IDLE_SECONDS
-    if (this.ambient && (!s || s.age >= IDLE_SECONDS)) this.startAmbient(this.ambient);
+    if (hold) this.pick(world, false, s?.ended ? s.liveKey : null);
   }
 
-  private start(world: World, w: Waiting): void {
+  /**
+   * The hold is up and no TOP or MIDDLE event waits (or, with `any`, the viewer asked for the next one): the best live candidate,
+   * else the best of the repeated events that faded and the FILLER candidate, else the shot stays. A live shot whose thing goes on
+   * stays unless a candidate scores higher. Until LINGER_SECONDS a shot also stays unless the replacement is strictly heavier than it.
+   */
+  private pick(world: World, any: boolean, gone: string | null): void {
+    if (any) {
+      const w = this.bestWaiting(0);
+      if (w) {
+        this.startEvent(world, w);
+        return;
+      }
+    }
+    const s = this.shot;
+    const cur = s?.kind === 'live' ? this.live.find((c) => c.key === s.liveKey) : undefined;
+    // past the hold a shot lingers: before LINGER_SECONDS only something heavier than it replaces it
+    const lingering = !any && !!s && s.age < LINGER_SECONDS;
+    const beats = (w: number) => !lingering || w > s!.weight;
+    const live = this.bestLive(cur?.key ?? gone);
+    if (live && beats(live.score) && (!cur || live.score > cur.score)) {
+      this.startLive(world, live);
+      return;
+    }
+    if (cur) return;
+    // events: the faded ones still waiting, and the filler candidate, by weight
+    this.dropFillerIfGone(world);
+    const faded = this.bestWaiting(0);
+    const f = this.filler;
+    if (faded && beats(this.effective(faded)) && (!f || this.effective(faded) >= this.effective(f))) this.startEvent(world, faded);
+    else if (f && beats(this.effective(f))) this.startFiller(world, f);
+  }
+
+  private show(shot: Omit<Shot, 'age' | 'rev'>): void {
+    this.shot = { ...shot, age: 0, rev: ++this.rev };
+    this.counts.shown++;
+  }
+
+  private startEvent(world: World, w: Waiting): void {
     this.queue.splice(this.queue.indexOf(w), 1);
-    this.shot = { ev: w.ev, subjectId: subjectOf(world, w.ev), x: w.ev.x, y: w.ev.y, age: 0, rev: ++this.rev, ambient: false };
-    this.counts.shown++;
+    this.shown.push({ rule: w.rule, tick: world.tick });
+    this.show({ kind: 'event', ev: w.ev, liveKey: null, text: w.ev.text, tick: w.ev.tick, subjectId: subjectOf(world, w.ev), x: w.ev.x, y: w.ev.y, weight: w.weight, filler: false, ended: false });
   }
 
-  private startAmbient(a: Ambient): void {
-    this.ambient = null;
-    this.shot = { ev: a.ev, subjectId: a.subjectId, x: a.ev.x, y: a.ev.y, age: 0, rev: ++this.rev, ambient: true };
-    this.counts.shown++;
-    this.counts.ambient++;
+  private startFiller(world: World, f: Entry): void {
+    this.filler = null;
+    this.shown.push({ rule: f.rule, tick: world.tick });
+    this.show({ kind: 'event', ev: f.ev, liveKey: null, text: f.ev.text, tick: f.ev.tick, subjectId: f.subjectId, x: f.ev.x, y: f.ev.y, weight: f.weight, filler: true, ended: false });
+    this.counts.filler++;
+  }
+
+  private startLive(world: World, c: LiveCandidate): void {
+    this.pickedAt.set(c.key, this.clock);
+    this.show({ kind: 'live', ev: null, liveKey: c.key, text: c.caption(), tick: world.tick, subjectId: c.subjectId, x: c.x, y: c.y, weight: c.score, filler: false, ended: false });
+    this.counts.live++;
   }
 }
-
-/** what a shot weighs against a waiting event: an ambient shot weighs nothing */
-const shotWeight = (s: Shot): number => (s.ambient ? 0 : storyWeight(s.ev));

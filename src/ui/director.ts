@@ -1,6 +1,7 @@
-// Story director: an opt-in way to sit back. While it is on, the camera follows the person a noteworthy real event is about (or flies
-// to the place, when nobody in it is alive), a caption says what happened in the simulation's own words, and "What happened" lists
-// the recent highlights so any of them can be jumped to. It is off by default: nothing in this interface moves the camera unasked,
+// Story director: an opt-in way to sit back. While it is on, the camera follows the person a noteworthy real event is about, or what is
+// happening now (a gathering, a wolf near someone, a conversation, someone in trouble), or flies to the place when nobody is the
+// subject; a caption says what happened or is happening, in the simulation's own words; and "What happened" lists the recent
+// highlights so any of them can be jumped to. It is off by default: nothing in this interface moves the camera unasked,
 // and turning the director on is the asking. The moment the viewer takes the camera (a click, a drag, a key, the minimap, a row
 // of the reel) the director turns itself off.
 //
@@ -16,7 +17,7 @@ import { Every, h, KeyedList, setBool, setHidden, setText, setVar, toggle } from
 import { icon } from './icons';
 import type { Part, UICtx } from './context';
 import type { Slots } from './layout';
-import { Director, REEL_DAYS, hasPlace, reelOf, type Shot } from './director_model';
+import { Director, MIDDLE_FROM, REEL_DAYS, hasPlace, reelOf, type Shot } from './director_model';
 
 /** what the director is holding the camera with now: a follow of one person, or a fly to a place and then the camera left where it landed */
 type Driven =
@@ -178,7 +179,7 @@ export function createDirector(ctx: UICtx, slots: Slots): Part & { toggle(): voi
         game.select(shot.subjectId);
         game.setFollow(true);
         driven = { kind: 'follow', id: shot.subjectId };
-      } else if (hasPlace(shot.ev)) {
+      } else if (hasPlace(shot)) {
         game.select(0);
         game.flyTo(shot.x, shot.y);
         driven = { kind: 'place', x: shot.x, y: shot.y, fly: game.fly, held: null };
@@ -189,7 +190,7 @@ export function createDirector(ctx: UICtx, slots: Slots): Part & { toggle(): voi
     } finally {
       acting = false;
     }
-    live.textContent = shot.ev.text;
+    live.textContent = shot.text;
   }
 
   /** The viewer took the camera: a click, a key, the minimap, a drag. Selecting and following say so by themselves; a drag or a turn of the wheel while the camera is not following only clears the fly, so that is read from where the camera is. */
@@ -234,10 +235,12 @@ export function createDirector(ctx: UICtx, slots: Slots): Part & { toggle(): voi
       measuredRev = 0;
       return;
     }
-    setText(says, shot.ev.text);
-    setText(when, `Day ${dayNumber(shot.ev.tick)}, ${agoText(game.world, shot.ev.tick)}`);
-    // an ordinary event shown in a quiet stretch reads the same, only quieter
-    toggle(caption, 'is-ambient', shot.ambient);
+    setText(says, shot.text);
+    // an event says how long ago it was; a live shot is happening now
+    setText(when, `Day ${dayNumber(shot.tick)}, ${shot.kind === 'live' ? 'now' : agoText(game.world, shot.tick)}`);
+    // what only fills a quiet stretch (a FILLER event, a plain chat) reads the same, only quieter
+    toggle(caption, 'is-ambient', shot.weight < MIDDLE_FROM);
+    toggle(caption, 'is-live', shot.kind === 'live');
     const none = !model.hasNext();
     if (nextBtn.disabled !== none) nextBtn.disabled = none;
     // the height the caption takes, for the narrow layouts that lift the inspector above it

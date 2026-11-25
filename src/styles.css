@@ -4144,7 +4144,11 @@ button.worker:hover {
   flex: none;
   color: var(--accent);
 }
-/* an ordinary event shown in a quiet stretch: the same caption, a little quieter */
+/* something happening now: its "when" says so in the accent colour */
+.dir-caption.is-live .dir-when {
+  color: var(--accent);
+}
+/* what only fills a quiet stretch (a FILLER event, a plain chat): the same caption, a little quieter */
 .dir-caption.is-ambient {
   border-color: var(--line-hi);
 }
