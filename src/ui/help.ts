@@ -27,6 +27,7 @@ const GROUPS: { title: string; rows: KeyRow[] }[] = [
     rows: [
       [['Click'], 'a person, building, field or resource to look inside'],
       [['F'], 'follow the selected person (or double-click them)'],
+      [['T'], 'the director: the camera follows noteworthy happenings, with a caption, until you take it'],
       [['N', 'Shift+N'], 'inspect the next or previous living person without a mouse'],
       [['Esc'], 'let go, close menus'],
     ],

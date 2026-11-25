@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 it('a null seed and other damaged fields fall back to the defaults, and the page can still build its world', () => {
-  stored({ seed: null, harsh: 'yes', immigration: 0, speed: 'fast', debug: 1, overlays: { labels: 'on', paths: true }, viewer: 'x', hudFolded: null });
+  stored({ seed: null, harsh: 'yes', immigration: 0, speed: 'fast', debug: 1, overlays: { labels: 'on', paths: true }, viewer: 'x', hudFolded: null, director: 'yes' });
   const p = loadPrefs();
   expect(p.seed).toBe(DEFAULT_PREFS.seed);
   expect(p.harsh).toBe(false);
@@ -20,6 +20,7 @@ it('a null seed and other damaged fields fall back to the defaults, and the page
   expect(p.debug).toBe(false);
   expect(p.overlays).toEqual({ ...DEFAULT_PREFS.overlays, paths: true });
   expect(p.hudFolded).toBe(false);
+  expect(p.director).toBe(false);
   // what main.ts does with them at start-up
   expect(() => new Game(currentWorldSettings(p.size, p.seed, { harsh: p.harsh, immigration: p.immigration }))).not.toThrow();
 });
@@ -35,8 +36,18 @@ it('a speed the transport does not offer, an empty seed, or stored JSON that is 
   expect(loadPrefs().seed).toBe(DEFAULT_PREFS.seed);
 });
 
+it('the story director is off unless the stored preference says true', () => {
+  expect(DEFAULT_PREFS.director).toBe(false);
+  stored({ seed: 'fern-12' });
+  expect(loadPrefs().director).toBe(false);
+  stored({ director: 1 });
+  expect(loadPrefs().director).toBe(false);
+  stored({ director: true });
+  expect(loadPrefs().director).toBe(true);
+});
+
 it('good stored values are kept as they were', () => {
-  stored({ seed: 'fern-12', harsh: true, immigration: false, size: 'large', speed: 8, debug: true, overlays: { labels: true }, viewer: { textSize: 'large' }, inspectorOpen: false, feedOpen: false, hudFolded: true });
+  stored({ seed: 'fern-12', harsh: true, immigration: false, size: 'large', speed: 8, debug: true, overlays: { labels: true }, viewer: { textSize: 'large' }, inspectorOpen: false, feedOpen: false, hudFolded: true, director: true });
   expect(loadPrefs()).toEqual({
     seed: 'fern-12',
     harsh: true,
@@ -49,5 +60,6 @@ it('good stored values are kept as they were', () => {
     inspectorOpen: false,
     feedOpen: false,
     hudFolded: true,
+    director: true,
   });
 });

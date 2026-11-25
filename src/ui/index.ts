@@ -10,12 +10,14 @@
 //   tooltip    data-tip labels + hover label over the map    toasts     short messages
 //   faultbanner  a frame stage threw: what, when, and that the world is paused
 //   event_cards  a small card beside the place where a wedding, feast, market or funeral begins or a shared building is finished
+//   director   opt-in story director: follows noteworthy events with a caption, plus a "What happened" reel (director_model.ts)
 //   shortcuts  keyboard                                      dom / icons / widgets / context   shared helpers
 import type { Game, GameEvent } from '../app/game';
 import { loadPrefs } from '../app/prefs';
 import { loadUIState, makePersistence, type Part, type ToastKind, type UICtx } from './context';
 import { buildLayout } from './layout';
 import { createDebug } from './debug';
+import { createDirector } from './director';
 import { createFaultBanner } from './faultbanner';
 import { createEventCards } from './event_cards';
 import { createFeed } from './feed';
@@ -97,13 +99,16 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
   const minimap = createMinimap(ctx, slots);
   const overlays = createOverlays(ctx, slots);
   const viewer = createViewerControls(ctx, slots);
-  const shortcuts = createShortcuts(ctx, menu, help);
+  // the AI inhabitant's run follows a person itself, so the story director is not offered beside it
+  const director = extras.inhabit ? null : createDirector(ctx, slots);
+  const shortcuts = createShortcuts(ctx, menu, help, director ?? undefined);
   const fault = createFaultBanner(ctx, slots);
   const eventCards = createEventCards(ctx);
   const named: [string, Part][] = [
     ['toasts', toasts],
     ['fault', fault],
     ['eventCards', eventCards],
+    ...(director ? ([['director', director]] as [string, Part][]) : []),
     ['tooltips', tips],
     ['hover', hover],
     ['worldmenu', menu],

@@ -2,13 +2,14 @@
 //
 // Note: the canvas input already uses plain D to pan right, so the debug panel lives on Shift+D. The Shift+D
 // keydown is swallowed in the capture phase so the camera does not also drift while the key is down.
+// T turns the story director on or off (src/ui/director.ts); with no director mounted it does nothing.
 import { SPEEDS } from '../app/game';
 import { isTypingTarget } from './dom';
 import type { HelpPart } from './help';
 import type { Part, UICtx } from './context';
 import type { WorldMenu } from './worldmenu';
 
-export function createShortcuts(ctx: UICtx, menu: WorldMenu, help: HelpPart): Part {
+export function createShortcuts(ctx: UICtx, menu: WorldMenu, help: HelpPart, director?: { toggle(): void }): Part {
   const { game } = ctx;
 
   const escape = (): boolean => {
@@ -67,6 +68,11 @@ export function createShortcuts(ctx: UICtx, menu: WorldMenu, help: HelpPart): Pa
         if (sel && sel.ent === 'person') game.setFollow(!game.following);
         break;
       }
+      case 't':
+      case 'T':
+        if (!director) return;
+        director.toggle();
+        break;
       case 'n':
       case 'N': {
         const people = game.world.persons.filter(p => p.alive).sort((a,b) => a.id-b.id);

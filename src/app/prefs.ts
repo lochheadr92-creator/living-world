@@ -17,6 +17,8 @@ export interface Prefs {
   feedOpen: boolean;
   /** the top bar is folded into one thin strip (seed, play/pause, clock, head-count) */
   hudFolded: boolean;
+  /** the story director (src/ui/director.ts) is on: the camera follows noteworthy happenings until the viewer takes it. Off unless asked for */
+  director: boolean;
 }
 
 const KEY = 'living-world:prefs:v1';
@@ -33,6 +35,7 @@ export const DEFAULT_PREFS: Prefs = {
   inspectorOpen: true,
   feedOpen: true,
   hudFolded: false,
+  director: false,
 };
 
 /** the speeds the transport offers (game.ts SPEEDS; not imported, so this module stays free of the simulation) */
@@ -70,6 +73,7 @@ export function loadPrefs(): Prefs {
       inspectorOpen: bool(p.inspectorOpen, d.inspectorOpen),
       feedOpen: bool(p.feedOpen, d.feedOpen),
       hudFolded: bool(p.hudFolded, d.hudFolded),
+      director: bool(p.director, d.director),
     };
   } catch {
     return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays }, viewer: viewerPreferences() };
