@@ -831,3 +831,63 @@ What was done, on the uncommitted tree at head `11489ece` (the rules-263 pin):
   That is two days of one young settlement with no quarrel in it; it says the three parts did not get in the way of an ordinary world, and nothing about how often they happen.
 - Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-264 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, saved and continued 120 ticks, from a clean checkout of `7bb48295`: `tests/v264_continuation.*`), and the range 260 to 264 is now fully
   used (a fix for anything the uptake count or the lab finds needs 265).
+
+## Measured (rules 260 to 264 together, the end-of-bundles runs of 27 November 2026)
+
+The runs the owner held back until all five bundles were built. Every figure is from the rules-264 tree `41851660` (the lab and the
+suite, from a clean worktree) or `5857a36f` (the counts). Rules 265 and later are not in any of them. Raw outputs:
+`C:/dev/lw_labs/social264` (suite and lab) and `C:/dev/lw_labs/scene_uptake` (counts, with the counting script).
+
+**Full suite**, machine busy with other runs: 4,079 of 4,099 tests passed, 16 failed in 13 files. No failure was a wrong value: ten
+time limits (pins 250, 251 and 260 to 264, two observer-purity cases, the tool-report saves), four child-process timeouts
+(`lab_report` three times, `lab_provenance`), one hook timeout and the two known missing-fixture cases. Rerun with four workers, all
+the pins passed. Three files still timed out under load and have NOT been confirmed passing alone: `tests/lab_report.test.ts`,
+`tests/zz_review_g_observer_purity.test.ts` (the river case) and `tests/zz_review_main_toolreport_saves.test.ts`.
+
+**Lab, stage 1.** 25 days, each bundle switched off as a whole, read against the mean of the control and two one-draw nudges.
+
+- Fresh worlds (12 Normal seeds from day 0, about 45 people at the end): no bundle moved any measure by more than a one-draw nudge
+  does. People, deaths, births, hunger and the homeless are the same with any bundle off.
+- Saved settlements (six saves at rules 256 raised to 264, about 128 people):
+  - Meeting off: new couples 2.6 to 0.0, lower in all six. Without courting no couple formed in any settlement in 25 days. Births and
+    conceptions did not differ in that time. Also with it off: fire sittings 141 to 184 and stories told 64 to 81 (the evenings not
+    spent walking out), plans to stock food 356 to 332, households without a solid home 18.7 to 21.0.
+  - Together off: conceptions 7.3 to 9.8, higher in all six, so the bundle as built costs about 2.5 conceptions a settlement in 25
+    days. Births did not differ (6.8 and 7.0). Not explained. The likeliest cause is the failed search below: 52 companions left
+    their beds for a search that never set out. To be read again once that is fixed.
+  - Hearth, company and kin off: no life measure moved (people, deaths, births, couples, conceptions, hunger, mood).
+  - Each arm also shows a handful of other lines called larger than chance (toy plays, elders at the fire, meals from a store). With
+    some two hundred measures, five arms and six settlements, a few such lines are expected and none is claimed here.
+- Stage 2 (each part's own arm) has not been run.
+
+**How often each scene happens.** Nine worlds, the whole of rules 264 on, arrivals on: three fresh Normal worlds for 45 days and six
+saved settlements for 25 days (the three day-96 saves were stopped at day 20). 876 of 16,029 feed lines were scene lines (5.5%), about
+two a day in a fresh world and five in a large settlement.
+
+| Scene | Count in the nine worlds |
+|---|---|
+| Welcoming newcomers | 126 of 134 arriving households |
+| Courting | 62 asks, 46 accepted; 88 counted walks; all 19 new couples had walked out first |
+| Dance at a feast | on 87 of 91 occasions |
+| Settling a child | 142 lines from 345 sittings begun |
+| Reunion | 75 lines from 292 cues |
+| Naming | 25 names said at 29 naming feasts |
+| Song at the fire | 25 songs; 353 stories took the fire's turn instead |
+| Vigil | 44 begun, 40 sat down, 23 lines; 29 ended because the sitter lost the sick person |
+| Helper at a birth | beside her at 18 of 49 births; 17 more helpers came after the birth or to an empty door |
+| Thanking builders | 37 of 60 buildings due thanks |
+| Coming of age | 7 feasts for 10 who turned sixteen, 5 hopes said |
+| Standing up for someone | 7 of 80 quarrels |
+| Speaking for a shared building | 5 speeches for 37 projects, 32 listeners, 8 said yes |
+| Thanks after a rescue | 1 (one rescue happened) |
+| Sitting with the grieving | 0 (one bereavement in all nine worlds, so the scene is still shown only by its staged tests) |
+| Fetching someone home | 73 asks, 42 promised, 5 searches set out, nobody found, no "brought home" line |
+
+**Fetching someone home does not complete.** The companion who promised is offered the walk at 72 (`FETCH_JOIN_SCORE`). The asker's own
+search stays the ordinary walk to look for somebody, which `joinParty` relabels but does not rescore: 26 to 29 in the two traced cases,
+under sleep at 35 to 51 in the same review. The asker goes to bed and the companion's walk ends "the search never set out". A fix
+changes behaviour and needs the next free rules number.
+
+**Other findings.** The birth helper is beside the mother at 18 of 49 births, against 1 of 13 when rules 261 was first counted; late
+helpers remain the common failure. Two of three vigils end with the sick person lost; `followIn` resets the path counter as it
+should, so the cause is not that and is not yet found.
