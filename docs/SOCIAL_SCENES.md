@@ -893,3 +893,31 @@ changes behaviour and needs the next free rules number.
 **Other findings.** The birth helper is beside the mother at 18 of 49 births, against 1 of 13 when rules 261 was first counted; late
 helpers remain the common failure. Two of three vigils end with the sick person lost; `followIn` resets the path counter as it
 should, so the cause is not that and is not yet found.
+
+## Measured (rules 278, the same six worlds, 27 November 2026)
+
+The count of the section above, made again after the repair, from commit `bd783946`: fresh Normal gen-2, gen-4 and gen-6, arrivals on, 45 days at rules 278, and the saved settlements aspen-day48, gen-4-day48 and river-day48 (rules 256) raised to 278, 25 days. The same read-only watcher (`C:/dev/lw_labs/scene_uptake`), run twice with the same counts both times, with one line pattern added to it for the ending described below; outputs `C:/dev/lw_labs/fetch278`. "Before" is the same six worlds at rules 264. **This describes each world before and after; it is not an effect size.** Each world diverges after its first changed choice, rules 265 to 277 (the farm animals among them) stand between the two runs, and no control at 278 with the arm `rich-no-fetch-sets-out` was run. (The three day-96 saves of the earlier count were not rerun. The earlier section's 73 asks and 42 promised are the totals of these six worlds; with the three day-96 worlds the rules-264 totals read off the watcher's files are 158 asks, 90 promised and 7 searches begun, and the earlier section's "5 searches set out" matches neither total, 1 in these six or 7 in all nine. The table below uses the watcher's own counts for the six.)
+
+| Six worlds, 25 or 45 days | Rules 264 | Rules 278 |
+|---|---|---|
+| Asks to come and look | 73 | 23 |
+| Promised | 42 | 16 |
+| Searches the watcher saw begin | 1 | 6 |
+| Searches that began and ended in one step, "they are inside a different space" (a log line; the earlier count did not look for it) | not counted | 5 |
+| Companions who set out | 28 | 7 |
+| ...and whose walk ended "the search never set out" | 19 | 3 |
+| ...and "they are inside a different space" | 8 | 2 |
+| One looked for found; "brought home" lines | 0; 0 | 0; 0 |
+| "Came back without them" feed lines | 1 | 1 |
+| Births; deaths | 33; 1 | 44; 0 |
+| Wolf bites (fatal); bites on a search party | 109 (1); 0 | 101 (0); 0 |
+
+Endings of the 11 searches that set out (6 seen as an activity, 5 ended in one step): 5 ended at once because the one looked for was indoors; 2 "was home already" (nothing written, as designed); 4 went to the place, looked round 24 ticks, found nobody and came back without them (a feed line for 1: the other 3 had no companion beside them at the door). Nobody was found in any of them. Sixteen promised, eleven set out; at rules 264 the same six worlds had 42 promised and 1 search seen to begin.
+
+**Why 5 of the 16 promises did not set out.** Two were traced tick by tick (gen-4-day48, whose 7 promises were followed; the three others, one each in gen-2, gen-4 and gen-6, were not). One promise was made as the light passed 0.5 (dawn), before the worrier decided, so the cue was gone. One worrier went to bed and never set out. A third went to bed first and set out after waking (one of the 11): his walk was offered at 59.9 and sleep at 46.7, and `rankOptions` put sleep first, because the mood weight by kind and the plan nudge for getting ready for the night are applied after the scores. So the repair lifts the walk to the companion's level, but at that level, too, a worrier (and a companion) who is tired enough (energy 37 there) goes to bed. The other four of the seven set out at once.
+
+**Ideas, not built** (each needs its own rules number and its own measure):
+1. The search is an activity aimed at a person, and `activities.ts` ends any such activity at once, "they are inside a different space", when the walker and that person are not in the same space. That is a read of where the missing person truly is, which the worrier could not know, and it ended 5 of the 11 searches in the step they began (and 8 of 28 companion walks before). The search could be aimed at the place the worrier last saw them, as the companion's is aimed at the worrier, and let the worrier find out on arriving what they see.
+2. The walk offered at the companion's level is `FETCH_JOIN_SCORE` less the whole walk to the place (12 points in the trace above); the companion's own walk is less only the short walk to the worrier. Leaving the walk to the place out of the score would give a larger lead over sleep, a retune.
+3. The ask can be made as the light is passing 0.5 at dawn and the promise then has no use: the cue could let a promise made in the dark stand until the worrier has had one decision.
+4. Nobody is found because the place is where the worrier last saw them over 1,100 ticks ago. A second place to look (home, the last place they were seen by anybody) is a larger change.
