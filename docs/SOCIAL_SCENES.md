@@ -696,4 +696,4 @@ What was done, on the uncommitted tree at head `beabe29a` (the rules-262 pin):
   as first written (worth 40, energy gate 45) the settling was offered 110 times in the two evenings and never chosen, every parent being asleep or choosing sleep; of the ten times a child under eight lay
   down for the night, the parent was already asleep or walking to bed in seven and awake in three (their energy 44, 23 and 22). That is why the worth is 70 and the gate 60 (see "Settling a child for the night").
   It is two evenings of five children in one world.
-- Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-263 continuation pin is NOT recorded: it follows in its own commits, as the earlier pins did.
+- Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-263 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, saved and continued 120 ticks, from a clean checkout of `3346b360`: `tests/v263_continuation.*`), before any code gated at rules 264 or above.
