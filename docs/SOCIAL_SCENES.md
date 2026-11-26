@@ -207,4 +207,4 @@ ETIMEDOUT), `tests/v250_continuation.test.ts`, `tests/zz_review_g_observer_purit
 - How the scenes look in the browser and the inspector. `scripts/browser/director_check.mjs` has not been rerun.
 - The owner has not yet watched the director with the bundle on.
 - Rescue thanks has never been seen in an ordinary world.
-- The rules-260 continuation pin is not recorded yet. It must be recorded before rules 261 lands.
+- The rules-260 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, from a clean checkout of `bc7e9410`: `tests/v260_continuation.*`), before rules 261.

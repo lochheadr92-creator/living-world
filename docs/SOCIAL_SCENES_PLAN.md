@@ -210,4 +210,4 @@ Bundle A, 26 November 2026:
 - Met with limits: uptake was counted over 45 days in three worlds, not 25 days a settlement, and the rescue half of praise has never
   been seen in an ordinary world. The lab ran 12 fresh seeds and six saves, not the 24 seeds planned, and it records no births or
   pairings, so `people` stands in for growth.
-- Open: the owner watches the director with the bundle on; the rules-260 continuation pin is not recorded yet.
+- Open: the owner watches the director with the bundle on. Done since: the rules-260 continuation pin is recorded (gen-2 at tick 48000, `tests/v260_continuation.*`).

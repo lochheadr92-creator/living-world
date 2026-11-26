@@ -1,0 +1,21 @@
+{
+  "source": {
+    "head": "bc7e94107a99d559bf95cf7633709304e605b073",
+    "rules": 260,
+    "content": "e2f138661ade361eed7190d5936df9dca78233c16d1301cdf8946101f07be07c",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000, chosen so the saved world holds the state rules 260 added: gen-2 at tick 36000 held no courted pair, at 48000 it holds one (two relation records) and an arriving household with its welcome record; saved and continued 120 ticks. The counts beside the digests are of the saved world."
+  },
+  "saved": "2d1b91439b942e1fd3a6a3de1562dc4c5295f1ad8718292ad49bd0181754e6ff",
+  "continued": "849f178ccc1ffd0131a511989454d32108f66a5a2950e124ca392df40944d1bf",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 43,
+  "courted": 2,
+  "courtedPairs": 1,
+  "courtRefused": 0,
+  "arrivedHouseholds": 1,
+  "welcomedHouseholds": 1,
+  "thanksOwedPeople": 0,
+  "thanksOwedEntries": 0,
+  "thanksDueBuildings": 0
+}
