@@ -42,6 +42,8 @@ function scene(o: Opts) {
   w.camp = { x: 40, y: 40 };
   const base = { hunger: 95, thirst: o.thirst ?? 95, energy: o.energy ?? 60, inv: { berries: 6, wood: 4, stone: 3, water: 2 } };
   const mira = addPerson(s, 'Mira', 40, 40, { age: 30, sex: 'f', ...base, traits: { generosity: 0.7, sociability: 0.6, caution: 0.3 } });
+  // Cora has full energy on purpose: a child found at night with energy under 90 decides on the next tick, before she has seen the call, and can choose to sleep where she stands,
+  // which is not reviewed, so she would not come (docs/SOCIAL_SCENES.md, "Ideas, not built", 5). That is outside this repair.
   const far = o.far ?? 14;
   const cora = addPerson(s, 'Cora', 40 + far, 41, { age: 6, sex: 'f', ...base, energy: 100, thirst: 95, hh: mira.hhId });
   const dov = addPerson(s, 'Dov', 42, 41.5, { age: 35, sex: 'm', ...base, energy: 90, thirst: 95, traits: { generosity: 0.9, diligence: 0.8, sociability: 0.7, caution: 0.3 } });
