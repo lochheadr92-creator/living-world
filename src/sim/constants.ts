@@ -16,15 +16,17 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap', 'rod', 'toy'];
-export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat', 'wool'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap', 'rod', 'toy', 'gloves', 'shoes'];
+export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat', 'wool', 'hay', 'stock_feed', 'leather'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
+export const FARM_FOODS = ['milk','cheese','egg','pork','bacon'] as const;
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
-export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS, 'cutting', 'beer'];
+export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS, 'milk', 'cheese', 'egg', 'pork', 'bacon', 'cutting', 'beer'];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26, rendered_fat:24 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26, rendered_fat:24, milk:14, cheese:24, egg:12, pork:26, bacon:26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  milk:1, cheese:.5, egg:.25, pork:1.5, bacon:1, leather:.75, stock_feed:.5, hay:.5, gloves:.25, shoes:.75,
   rod:1,
   toy:.25,
   beer: 1.5,
@@ -65,13 +67,14 @@ export const WEIGHT: Record<ItemKind, number> = {
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { beer: .2, cutting: .4, berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, hide:.3, fat:1.4, rendered_fat:.25, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { milk:1.5, cheese:.25, egg:.45, pork:1.4, bacon:.25, beer: .2, cutting: .4, berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4, hide:.3, fat:1.4, rendered_fat:.25, dried_fish:0.18, smoked_fish:0.25, dried_meat:0.18, smoked_meat:0.25 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  milk:'milk', cheese:'cheese', egg:'egg', pork:'pork', bacon:'smoked bacon', leather:'leather', stock_feed:'grain feed', hay:'hay', gloves:'leather gloves', shoes:'leather shoes',
   rod:'fishing rod',
   toy:'toy',
   beer:'beer',
@@ -146,7 +149,7 @@ export const BELIEF_REFRESH_EVERY = 30;
 export const WORK: Record<string, number> = {
   berry_bush: 20,
   fruit_tree: 24,
-  wild_grain: 26,
+  hay_meadow: 65, wild_grain: 26,
   fish_spot: 44,
   tree: 46,
   rock: 60,
@@ -296,6 +299,10 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
   mine: bd({w:2,h:2,cost:{wood:9,stone:3},work:440,cap:60,workers:3,label:'mine',sleepers:0,role:'work',blurb:'A timbered working beside a finite ore vein. A pick and paid work extract three existing ore at a time.'}),
   mill: bd({w:2,h:2,cost:{wood:8,planks:4,stone:4},work:600,cap:60,workers:2,label:'grain mill',sleepers:0,role:'work',blurb:'A hand-powered grinding floor. Six grain makes five flour while the separate bakery remains free for bread.'}),
   brewery: bd({w:2,h:2,cost:{wood:6,planks:4,stone:4},work:400,cap:60,workers:1,label:'brewery',sleepers:0,role:'work',blurb:'A boiling hearth and fermentation casks turn spare grain and water into beer for shared meals.'}),
+  barn: bd({ w:3, h:2, cost:{wood:10, stone:3}, work:560, cap:24, workers:2, label:'barn', sleepers:0, role:'store', blurb:'Housing for household livestock.' }),
+  paddock: bd({ w:3, h:3, cost:{wood:6, fibre:2}, work:300, cap:24, workers:2, label:'paddock', sleepers:0, role:'store', blurb:'Housing for household livestock.' }),
+  chicken_cage: bd({ w:1, h:1, cost:{wood:3, fibre:1}, work:180, cap:24, workers:2, label:'chicken cage', sleepers:0, role:'store', blurb:'Housing for household livestock.' }),
+
 };
 
 /** every kind of building a household can live in */
@@ -314,6 +321,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   lean_to: 0.0031,
   hut: 0.0017,
   house: 0.001,
+  barn: .0012, paddock: .0015, chicken_cage: .0015,
   storehouse: 0.0016,
   fire: 0,
   timber_yard: 0.0013,
@@ -351,6 +359,8 @@ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
   trap:{label:'deadfall trap',hand:null,wear:0,blurb:'set near woodland, then checked later'},
   garment:{label:'fibre garment',hand:null,wear:.002,blurb:'insulation while worn'},
   blanket:{label:'fibre blanket',hand:null,wear:.002,blurb:'insulation while sleeping'},
+  gloves:{label:'leather gloves',hand:null,wear:.002,blurb:'Warm leather handwear.'},
+  shoes:{label:'leather shoes',hand:null,wear:.002,blurb:'Insulating leather footwear.'},
   bedding:{label:'fibre bedroll',hand:null,wear:.002,blurb:'insulation beneath its sleeping owner'},
   axe: { label: 'axe', hand: { cost: { wood: 2, stone: 1 }, work: 90 }, wear: 0.036, blurb: 'felling trees (and hewing planks the hard way)' },
   pick: { label: 'pickaxe', hand: { cost: { wood: 2, stone: 2 }, work: 100 }, wear: 0.044, blurb: 'breaking rock and digging clay and ore' },
@@ -415,19 +425,19 @@ export const SOURCE_ITEM: Record<SourceType, ItemKind> = {
   tree: 'wood',
   rock: 'stone',
   fish_spot: 'fish',
-  wild_grain: 'grain',
+  hay_meadow:'hay', wild_grain: 'grain',
   clay_pit: 'clay',
   ore_vein: 'ore',
   outcrop: 'stone',
 };
-export const SOURCE_MAX: Record<SourceType, number> = { berry_bush: 6, fruit_tree: 8, tree: 5, rock: 10, fish_spot: 10, wild_grain: 5, clay_pit: 48, ore_vein: 30, outcrop: 72 };
+export const SOURCE_MAX: Record<SourceType, number> = { berry_bush: 6, fruit_tree: 8, tree: 5, rock: 10, fish_spot: 10, hay_meadow:10, wild_grain: 5, clay_pit: 48, ore_vein: 30, outcrop: 72 };
 export const SOURCE_REGROW: Record<SourceType, number> = {
   berry_bush: 300,
   fruit_tree: 340,
   tree: 0,
   rock: 1500,
   fish_spot: 230,
-  wild_grain: 330,
+  hay_meadow: DAY / 2, wild_grain: 330,
   clay_pit: 0,
   ore_vein: 0,
   outcrop: 0,
@@ -435,7 +445,7 @@ export const SOURCE_REGROW: Record<SourceType, number> = {
 export const SOURCE_SKILL: Record<SourceType, SkillKey> = {
   berry_bush: 'forage',
   fruit_tree: 'forage',
-  wild_grain: 'forage',
+  hay_meadow:'forage', wild_grain: 'forage',
   fish_spot: 'fish',
   tree: 'wood',
   rock: 'stone',

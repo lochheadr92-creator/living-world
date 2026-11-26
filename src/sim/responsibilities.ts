@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 // Shared responsibilities (rich worlds only). Somebody laid up (a fever at its worst, an injury) with a child to see to and no
 // other able grown-up at home may ask a neighbour to keep an eye on the child for the day; somebody laid up by a low fire with
 // no wood may ask a neighbour to keep it going. The neighbour weighs it as any request (social.ts evaluateRequest: their own
@@ -92,7 +93,7 @@ export function watchTick(world: World, p: Person, a: Activity, child: Person): 
   retainWatchTick(world,a);
   if (a.progress % LOOK_EVERY === 0) {
     const give: Items = {};
-    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
+    if (child.needs.hunger < 60) for (const k of ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] as ItemKind[]) if ((p.inv[k] ?? 0) > 0 && (!bounded || surplusOf(world, p, k) >= 1)) { give[k] = 1; break; }
     if (child.needs.thirst < 55 && (p.inv.water ?? 0) > 0 && (!bounded || surplusOf(world, p, 'water') >= 1)) give.water = 1;
     const got: Items = {};
     let moved = 0;

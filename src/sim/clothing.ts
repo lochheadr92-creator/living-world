@@ -14,11 +14,11 @@ import {recentFailure} from './knowledge';
 import type {Ctx} from './optutil';
 import {textileGoods} from './textile_stock';
 
-export const TEXTILES = ['garment','blanket','bedding'] as const;
+export const TEXTILES = ['garment','blanket','bedding','gloves','shoes'] as const;
 export type TextileKind = typeof TEXTILES[number];
 export const isTextile=(k:ToolKind):k is TextileKind=>(TEXTILES as readonly string[]).includes(k);
 export const hasClothing=(w:World):boolean=>w.settings.dynamics==='rich'&&runsRulesVersion(w,124);
-const insulation={garment:6,blanket:4,bedding:4};
+const insulation={garment:6,blanket:4,bedding:4,gloves:2,shoes:3};
 export function visibleChildNeedsGarment(ctx:Ctx,seen:SeenEntity):boolean{
  return !!seen.child&&(seen.cold||ctx.world.weather.temp<12)&&!seen.carrying.includes('garment')&&ctx.dependents.some(d=>d.id===seen.id);
 }
@@ -31,7 +31,7 @@ export function textileGiftProblem(w:World,p:Person,a:Activity):string|undefined
 export function textileProtection(p:Person,t:Tool):number{return t.textile&&isTextile(t.kind)&&inUse(p,t)?insulation[t.kind]*(1-t.wear/100)*(1-.8*t.textile.wet):0;}
 /** A bedroll belongs to one sleeper. It is rolled for travel and spread beneath
  * its holder when sleeping; it never warms a second person or a whole home. */
-function inUse(p:Person,t:Tool):boolean{return !!t.textile?.equipped&&(t.kind==='garment'||p.pose==='sleep');}
+function inUse(p:Person,t:Tool):boolean{return !!t.textile?.equipped&&(t.kind==='garment'||t.kind==='gloves'||t.kind==='shoes'||p.pose==='sleep');}
 export function clothingWarmth(w:World,p:Person):number{
  if(!hasClothing(w))return 0;
  let heat=0;

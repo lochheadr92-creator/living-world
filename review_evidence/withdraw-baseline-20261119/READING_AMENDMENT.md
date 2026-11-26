@@ -1,0 +1,5 @@
+# Cause classification clarification
+
+Written after the one-day smoke and before the six 13-day results were read. The inherited observer's `stock_there_nothing_allowed` label checks whether wanted stock was present at the last sampled work tick; the label alone does not check that its recorded allowance was zero. For the six runs, report that category as **stock present**, then split it using the recorded `access.allow`: zero allowance, positive allowance, and no recorded building access. Only the zero-allowance subset supports the stronger access finding. Further `accessWhy` classifications are conditional on that subset. No change was made to the running source.
+
+The no-observed-walking group also includes activities already in their work phase at the first sample, so it is not an exact count of trips that started beside a store. Report first-seen-work separately. Interrupted-before-arrival activities remain in all-finished counts but are not called arrived empty. These definitions bound, rather than automatically settle, the earlier denominator discrepancy.

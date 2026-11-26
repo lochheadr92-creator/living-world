@@ -1,3 +1,4 @@
+import { farmBuilding } from './farm';
 // Every building drawing in one place: which sprite(s) a building type uses, and the measurements the rest of the renderer needs
 // (how tall each one stands for click targets, where its chimney is, the heights that construction stages are built to).
 import type { BuildingType } from '../sim/types';
@@ -15,6 +16,7 @@ export type BuildKind = Exclude<BuildingType, 'fire'>;
  */
 export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: number): Sprite[] {
   switch (kind) {
+    case 'barn':case 'paddock':case 'chicken_cage':return [farmBuilding(cache,kind)];
     case 'brewery':case 'mine':case 'mill': return [recoveredWorkshopSprite(cache,kind)];
     case 'cellar': return [cellarSprite(cache)];
     case 'well': return [wellSprite(cache)];
@@ -76,6 +78,7 @@ const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
   lean_to: { plinth: 0, wall: 17, top: 41, click: 44 },
   hut: { plinth: 6, wall: 28, top: 57, click: 66, chimney: { x: 1.65, y: 0.85, z: 66 } },
   house: { plinth: HOUSE.plinth, wall: HOUSE.wall, top: HOUSE.chimneyTop + 4, click: 104, chimney: { x: HOUSE.chimney.x, y: HOUSE.chimney.y, z: HOUSE.chimneyTop + 4 } },
+  barn:{plinth:4,wall:38,top:70,click:70}, paddock:{plinth:0,wall:10,top:14,click:16}, chicken_cage:{plinth:1,wall:12,top:20,click:22},
   storehouse: { plinth: 7, wall: 34, top: 69, click: 70 },
   timber_yard: { plinth: 0, wall: 34, top: 52, click: 66 },
   quarry: { plinth: 0, wall: 30, top: 68, click: 70 },

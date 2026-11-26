@@ -1,0 +1,60 @@
+{
+  "seed": "aspen",
+  "tick": 230957,
+  "arm": "door",
+  "hash": "30d5ab2b",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 230957,
+      "room": 148968,
+      "memory": 230796,
+      "goal": "to bring fruit to Vik II"
+    },
+    {
+      "event": "door",
+      "tick": 230992,
+      "reason": null,
+      "space": 148968,
+      "room": 148968
+    },
+    {
+      "event": "contact",
+      "tick": 231003,
+      "needs": {
+        "hungry": true,
+        "thirsty": false,
+        "hurt": false
+      },
+      "wanted": {
+        "fruit": 1
+      },
+      "pack": {
+        "basket": 1,
+        "spear": 1,
+        "clay": 2,
+        "rod": 1,
+        "bricks": 2,
+        "cutting": 1,
+        "fruit": 2
+      },
+      "visitorSpace": 148968,
+      "targetSpace": 148968
+    },
+    {
+      "event": "transfer",
+      "tick": 231003,
+      "got": {
+        "fruit": 1
+      }
+    },
+    {
+      "event": "end",
+      "tick": 231003,
+      "result": "success",
+      "detail": "done",
+      "outcome": "helped",
+      "space": 148968
+    }
+  ]
+}

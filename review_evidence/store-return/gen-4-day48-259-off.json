@@ -1,0 +1,15 @@
+{
+  "loaded": "C:/dev/lw_saves/rules256/gen-4-day48.save.json",
+  "start": 115200,
+  "days": 2,
+  "off": true,
+  "initialHash": "a7f0ec57",
+  "endHash": "e8be98e3",
+  "initialPeopleLost": 0,
+  "switches": 13,
+  "returns": 5,
+  "finishedWithdrawals": 150,
+  "finishedDeposits": 213,
+  "finishedWorkshopOperations": 46,
+  "example": []
+}

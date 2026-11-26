@@ -9,7 +9,18 @@ import {generateOptions} from '../src/sim/decision';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {stepWorld} from '../src/sim/world';
 import {recoveredWorkshopWants} from '../src/sim/recovered_workshops';
+import {setOvenLoad} from '../src/sim/oven_load';
 function fixture(){const s=stage('recovered-workshops');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:138};const p=addPerson(s,'Ada',40.5,26.5,{hunger:95,thirst:95,energy:95});const dep=makeSource(s.w,'ore_vein',43,24,9),mine=building(s,'mine',40,24,p.hhId);mine.ops!.depositId=dep.id;give(s.w,p,'pick');done(s);return {s,w:s.w,p,dep,mine};}
+it('loads a rules-249 larger mill job, including with the lab switch off, and rejects it in older rules',()=>{
+ const f=fixture(); f.w.settings.rulesVersion=249;
+ const mill=building(f.s,'mill',45,24,f.p.hhId,{grain:18}); snapshotInitial(f.w);
+ expect(startJob(f.w,mill,f.p,RECIPE_BY_ID.mill_flour_separate,f.p.id,'grain')).toBeNull();
+ expect(mill.ops!.job!.recipe).toBe('mill_flour_separate_x3');
+ const raw=serializeWorld(f.w);
+ setOvenLoad(false); try { expect(()=>deserializeWorld(raw)).not.toThrow(); } finally { setOvenLoad(true); }
+ f.w.settings.rulesVersion=248;
+ expect(()=>deserializeWorld(serializeWorld(f.w))).toThrow('Invalid recovered workshop batch');
+});
 function finish(f:ReturnType<typeof fixture>){for(let i=0;i<1800&&f.p.activity;i++){f.w.tick++;stepActivity(f.w,f.p);for(const b of f.w.buildings)facilityTick(f.w,b);}expect(f.p.activity).toBeNull();}
 function operate(f:ReturnType<typeof fixture>,b:typeof f.mine,recipe:string){startActivity(f.w,f.p,newActivity(f.w,f.p,{kind:'operate',label:'Work '+recipe,goal:'paid production',targetId:b.id,targetType:'building',tx:b.x+b.w/2,ty:b.y+b.h/2,spotX:b.doorX+.5,spotY:b.doorY+.5,amount:1,maxTicks:1800,data:{recipe,client:f.p.id}}));finish(f);}
 it('extracts existing finite ore through paid work without minting ore',()=>{const f=fixture();operate(f,f.mine,'mine_ore');expect(f.dep.amount).toBe(6);expect(f.mine.store.items.ore).toBe(3);expect(f.w.ledger.created.ore??0).toBe(0);expect(f.w.tools.find(t=>t.kind==='pick')!.wear).toBeGreaterThan(0);expect(conservationReport(f.w).ok).toBe(true);});

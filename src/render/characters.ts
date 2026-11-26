@@ -1,3 +1,4 @@
+import { drawFarmAnimal } from './farm';
 import {hasRods} from '../sim/fishing_rods';
 import {toolFor} from '../sim/tools';
 // People and wolves are drawn procedurally from a tiny rig (hips, shoulders, head, hands, feet) that is
@@ -893,6 +894,7 @@ export class CharacterRenderer {
       const wy = y + fy * u + ly * v;
       return [(wx - wy) * 32, (wx + wy) * 16 - z, wx + wy];
     };
+    if(a.sheep&&a.type!=='sheep')return drawFarmAnimal(ctx,a,(x-y)*32,(x+y)*16,heading,selected);
     const moving = a.state !== 'roam' || Math.hypot(a.x - a.px, a.y - a.py) > 0.005;
     const run = a.state === 'stalk' || a.state === 'retreat';
     const ph = simT * (run ? 7 : 4) + a.id;

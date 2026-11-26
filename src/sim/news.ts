@@ -5,7 +5,7 @@ import { acceptsToldReport, emptyFoodShareable, isEmptyFood, isFoodKind, noteEmp
 import { currentFailure, estimatedAmount, learn } from './knowledge';
 import { hearsayNewsCost } from './teller_confidence';
 import { noteDisagreement } from './checked_accounts';
-import { BELIEF_NOUN } from './labels';
+import { beliefNoun } from './labels';
 import { isFacilityType } from './recipes';
 import { itemsToldTo } from './own_stores';
 import { addLog } from './events';
@@ -102,7 +102,7 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   learn(L, copy);
   noteFoodAccepted(world, S, L.id, b);
   if (world.hooks?.onNews && isEmptyFood(b)) world.hooks.onNews({ kind: 'accepted', beliefId: b.id, seen: b.seen, age: world.tick - copy.seen, origin: copy.origin, from: S.id, hops: copy.hops ?? 0, listener: L.id });
-  const noun = BELIEF_NOUN[b.kind];
+  const noun = beliefNoun(world, b.kind);
   if (b.kind === 'danger') {
     L.needs.safety = Math.max(0, L.needs.safety - 8);
     addLog(world, L, 'danger', `${S.name} warned me about a wolf ${D.dangerWords(world, b)} of camp.`);

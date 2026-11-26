@@ -46,6 +46,7 @@ const SPEC: Record<BuildingType, Spec> = {
   lean_to: { frame: 'poles', gable: false, footing: 'none', reveal: 0.3 },
   hut: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
   house: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.22 },
+  barn:{frame:'timber',gable:true,footing:'blocks',reveal:.3}, paddock:{frame:'posts',gable:false,footing:'none',reveal:.3}, chicken_cage:{frame:'posts',gable:true,footing:'none',reveal:.3},
   storehouse: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
   fire: { frame: 'none', gable: false, footing: 'none', reveal: 1 },
   timber_yard: { frame: 'posts', gable: false, footing: 'none', reveal: 0.42 },

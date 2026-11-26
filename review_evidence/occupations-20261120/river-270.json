@@ -1,0 +1,347 @@
+[
+ {
+  "d": 1,
+  "hash": "0d887f34",
+  "ended": 216,
+  "done": 168,
+  "switched": 21,
+  "stored": 13,
+  "bulk": 0,
+  "ownTradeStored": 0,
+  "bins": {
+   "lean_to": 12,
+   "chicken_cage": 1
+  },
+  "dead": 0,
+  "titles": {},
+  "eligible": 20,
+  "workers": 20,
+  "meanPrimaryShare": 0.3898568755805598
+ },
+ {
+  "d": 2,
+  "hash": "4751b5d4",
+  "ended": 429,
+  "done": 335,
+  "switched": 46,
+  "stored": 84,
+  "bulk": 0,
+  "ownTradeStored": 37,
+  "bins": {
+   "lean_to": 81,
+   "chicken_cage": 3
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 3,
+   "Caregiver": 2,
+   "Farmer": 1,
+   "Forester": 6,
+   "Hauler": 3,
+   "Builder": 1,
+   "Teacher": 1,
+   "Fisher": 1
+  },
+  "eligible": 20,
+  "workers": 20,
+  "meanPrimaryShare": 0.33989229169569724
+ },
+ {
+  "d": 3,
+  "hash": "c3bf1c80",
+  "ended": 685,
+  "done": 553,
+  "switched": 66,
+  "stored": 156,
+  "bulk": 0,
+  "ownTradeStored": 74,
+  "bins": {
+   "lean_to": 142,
+   "chicken_cage": 7,
+   "barn": 7
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 3,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 6,
+   "Caregiver": 1,
+   "Hauler": 2,
+   "Builder": 1,
+   "Teacher": 1,
+   "Fisher": 1
+  },
+  "eligible": 22,
+  "workers": 20,
+  "meanPrimaryShare": 0.3287253934577007
+ },
+ {
+  "d": 4,
+  "hash": "77d9271d",
+  "ended": 869,
+  "done": 697,
+  "switched": 85,
+  "stored": 207,
+  "bulk": 0,
+  "ownTradeStored": 95,
+  "bins": {
+   "lean_to": 189,
+   "chicken_cage": 9,
+   "barn": 9
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 6,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Builder": 1,
+   "Fisher": 1
+  },
+  "eligible": 22,
+  "workers": 22,
+  "meanPrimaryShare": 0.34489839121687255
+ },
+ {
+  "d": 5,
+  "hash": "f9d52432",
+  "ended": 1098,
+  "done": 875,
+  "switched": 111,
+  "stored": 275,
+  "bulk": 0,
+  "ownTradeStored": 128,
+  "bins": {
+   "lean_to": 254,
+   "chicken_cage": 12,
+   "barn": 9
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 6,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Builder": 2,
+   "Fisher": 1
+  },
+  "eligible": 22,
+  "workers": 22,
+  "meanPrimaryShare": 0.3529855297497751
+ },
+ {
+  "d": 6,
+  "hash": "a67ec387",
+  "ended": 1427,
+  "done": 1103,
+  "switched": 148,
+  "stored": 308,
+  "bulk": 0,
+  "ownTradeStored": 141,
+  "bins": {
+   "lean_to": 277,
+   "chicken_cage": 22,
+   "barn": 9
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 7,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Fisher": 1,
+   "Builder": 1
+  },
+  "eligible": 24,
+  "workers": 23,
+  "meanPrimaryShare": 0.354772187249278
+ },
+ {
+  "d": 7,
+  "hash": "3f55e448",
+  "ended": 1714,
+  "done": 1313,
+  "switched": 191,
+  "stored": 407,
+  "bulk": 0,
+  "ownTradeStored": 174,
+  "bins": {
+   "lean_to": 320,
+   "chicken_cage": 24,
+   "barn": 14,
+   "hut": 49
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 7,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 7,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Fisher": 1,
+   "Builder": 2
+  },
+  "eligible": 24,
+  "workers": 24,
+  "meanPrimaryShare": 0.35925976472779414
+ },
+ {
+  "d": 8,
+  "hash": "d1e2a17d",
+  "ended": 1978,
+  "done": 1531,
+  "switched": 215,
+  "stored": 509,
+  "bulk": 0,
+  "ownTradeStored": 229,
+  "bins": {
+   "lean_to": 368,
+   "chicken_cage": 27,
+   "barn": 14,
+   "hut": 100
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 8,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Fisher": 1,
+   "Builder": 2
+  },
+  "eligible": 25,
+  "workers": 24,
+  "meanPrimaryShare": 0.3481995687930874
+ },
+ {
+  "d": 9,
+  "hash": "baab5c20",
+  "ended": 2207,
+  "done": 1709,
+  "switched": 238,
+  "stored": 574,
+  "bulk": 0,
+  "ownTradeStored": 265,
+  "bins": {
+   "lean_to": 403,
+   "chicken_cage": 31,
+   "barn": 15,
+   "hut": 125
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 8,
+   "Caregiver": 2,
+   "Hauler": 2,
+   "Fisher": 1,
+   "Builder": 2
+  },
+  "eligible": 25,
+  "workers": 25,
+  "meanPrimaryShare": 0.3613524096437515
+ },
+ {
+  "d": 10,
+  "hash": "77f00991",
+  "ended": 2400,
+  "done": 1863,
+  "switched": 248,
+  "stored": 664,
+  "bulk": 0,
+  "ownTradeStored": 328,
+  "bins": {
+   "lean_to": 431,
+   "chicken_cage": 32,
+   "barn": 29,
+   "hut": 172
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 8,
+   "Caregiver": 2,
+   "Hauler": 3,
+   "Fisher": 1,
+   "Builder": 1
+  },
+  "eligible": 25,
+  "workers": 25,
+  "meanPrimaryShare": 0.3603182884531427
+ },
+ {
+  "d": 11,
+  "hash": "810cd283",
+  "ended": 2508,
+  "done": 1938,
+  "switched": 255,
+  "stored": 704,
+  "bulk": 0,
+  "ownTradeStored": 349,
+  "bins": {
+   "lean_to": 450,
+   "chicken_cage": 35,
+   "barn": 30,
+   "hut": 189
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 6,
+   "Herder": 1,
+   "Farmer": 2,
+   "Forester": 8,
+   "Caregiver": 2,
+   "Hauler": 3,
+   "Fisher": 1,
+   "Builder": 1
+  },
+  "eligible": 27,
+  "workers": 25,
+  "meanPrimaryShare": 0.3603771913941449
+ },
+ {
+  "d": 12,
+  "hash": "967b2c68",
+  "ended": 2808,
+  "done": 2155,
+  "switched": 286,
+  "stored": 804,
+  "bulk": 0,
+  "ownTradeStored": 422,
+  "bins": {
+   "lean_to": 478,
+   "chicken_cage": 35,
+   "barn": 38,
+   "hut": 247,
+   "timber_yard": 6
+  },
+  "dead": 0,
+  "titles": {
+   "Gatherer": 5,
+   "Herder": 1,
+   "Farmer": 3,
+   "Forester": 9,
+   "Caregiver": 2,
+   "Hauler": 3,
+   "Fisher": 1,
+   "Builder": 1
+  },
+  "eligible": 27,
+  "workers": 27,
+  "meanPrimaryShare": 0.3811221871560783
+ }
+]

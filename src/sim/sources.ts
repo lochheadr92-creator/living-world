@@ -3,7 +3,7 @@ import { nearbyWaterFraction } from './hydrology';
 import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
-import { wildPlenty } from './plenty';
+import { moreGrain, wildPlenty } from './plenty';
 import { treeSeedChance } from './tree_regrowth';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
@@ -15,6 +15,7 @@ import { T } from './types';
 import { treeRng } from './keyed_draws';
 
 export function makeSource(world: World, type: SourceType, x: number, y: number, amount?: number, growth = 1): Source {
+  const capacity = type === 'wild_grain' && moreGrain(world) ? 8 : SOURCE_MAX[type];
   const s: Source = {
     ent: 'source',
     id: newId(world),
@@ -22,8 +23,8 @@ export function makeSource(world: World, type: SourceType, x: number, y: number,
     x,
     y,
     item: SOURCE_ITEM[type],
-    amount: amount ?? SOURCE_MAX[type],
-    max: SOURCE_MAX[type],
+    amount: amount ?? capacity,
+    max: capacity,
     reserved: 0,
     // in a rich world rock does not grow back: what the land has is what there is, and after that the quarry (an authored world is as it was)
     regrowEvery: type === 'rock' && world.settings.dynamics === 'rich' ? 0 : SOURCE_REGROW[type] * (world.settings.harsh ? 1.7 : 1),

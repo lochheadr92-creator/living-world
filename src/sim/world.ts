@@ -1,4 +1,5 @@
 import {runsRulesVersion} from './rulesversion';
+import { runsSeenBuilders } from './bench_access';
 import { perishableOf } from './bread_feeds';
 import {hasBrewing} from './brewing';
 import {updateWells} from './wells';
@@ -11,7 +12,7 @@ import {clothingTick} from './clothing';
 import { updateEcology } from './ecology';
 import {hearthTick} from './hearth';
 import {runsPreservation} from './preservation';
-import {PRESERVED_FOODS} from './constants';
+import {FARM_FOODS,PRESERVED_FOODS} from './constants';
 import { updateFlood } from './flood';
 import { updateWater } from './hydrology';
 import { retainOperationalMemory } from './memory_retention';
@@ -289,7 +290,7 @@ export function spoilGoods(world: World): void {
   // are untouched; an empty new-kind holding consumes no random draw.
   if(runsPreservation(world)){
     const holdings=[...world.persons.filter(p=>p.alive).map(p=>[p.inv,p.id] as const),...world.carts.map(c=>[c.load,c.id] as const)];
-    for(const [items,holder] of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
+    for(const [items,holder] of holdings)for(const k of [...PRESERVED_FOODS,...(runsRulesVersion(world,267)?FARM_FOODS:[]),...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
       const n=items[k]??0;let lost=0;
       const pre=kd===undefined?0:spoilPrefix(kd,SPOIL_PACK,holder,k);
       for(let i=0;i<n;i++)if((kd===undefined?world.rng.next():keyUnit(keyMix(pre,i)))<rate*perishableOf(world,k)*spoilStore(world))lost++;
@@ -405,8 +406,10 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
   for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.gear)push(`Gear:${pile.id}:${JSON.stringify(pile.gear)}`);if(pile.carcass)push(`Carcass:${pile.id}:${pile.since}:${JSON.stringify(pile.carcass)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}
   for(const p of world.persons)for(const b of Object.values(p.beliefs)){if(b.kind==='prey')push(`PreyMemory:${p.id}:${JSON.stringify(b)}`);if(b.gear)push(`GearMemory:${p.id}:${b.id}:${JSON.stringify(b.gear)}`);if(b.gearStock)push(`GearStock:${p.id}:${b.id}:${JSON.stringify(b.gearStock)}`);}
-  for(const a of world.animals)if(a.sheep)push(`Sheep:${a.id}:${JSON.stringify(a.sheep)}`);
+  for(const a of world.animals)if(a.sheep)push(`Sheep:${a.id}:${runsRulesVersion(world,267)?a.type+':'+a.health+':':''}${JSON.stringify(a.sheep)}`);
   for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.sheep)push(`SheepMemory:${p.id}:${JSON.stringify(b)}`);
+  // Rules 266: remembered claims and builder shares affect what a person chooses to collect. Worlds of rules 257 to 265 never hashed them, so they hash as they did.
+  if (runsSeenBuilders(world)) for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ops?.held !== undefined || b.ops?.seenBuilders !== undefined) push(`BenchMemory:${p.id}:${b.id}:${JSON.stringify(b.ops.held)}:${JSON.stringify(b.ops.seenBuilders)}`);
   // A wolf that was driven off keeps clear of one person for a while, which changes who it hunts next: that is part of
   // what the world is. Absent on every wolf that was never driven off, so an older world hashes exactly as it did.
   for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}${a.type === 'wolf' && a.health < 100 ? `,h${a.health}` : ''}`);
@@ -447,6 +450,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     }
     // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
     for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);
+    for (const p of world.persons) if (p.occupation) push('Occupation'+p.id+JSON.stringify(p.occupation));
     if (world.roads) {
       let n = 0;
       for (let i = 0; i < world.roads.length; i++) n += world.roads[i];
@@ -520,6 +524,9 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for (const p of world.persons) if (p.winterPractice) push('WinterPractice' + p.id + JSON.stringify(p.winterPractice));
   for (const p of world.persons) if (p.dailyRoutines) push('DailyRoutines' + p.id + JSON.stringify(p.dailyRoutines));
   for (const p of world.persons) for (const a of [p.activity,p.suspended]) if(a?.data.dailyRoutine) push('RoutineActivity'+p.id+':'+a.id+JSON.stringify(a.data.dailyRoutine));
+  if (runsRulesVersion(world, 266)) for (const p of world.persons) for (const a of [p.activity, p.suspended]) {
+    if (a?.data.inputWorkshop) push('WorkshopErrand'+p.id+':'+a.id+':'+a.data.inputWorkshop+':'+a.data.inputRecipe);
+  }
   for (const p of world.persons) for (const a of [p.activity,p.suspended]) if(a?.data.workScope) push('WorkScope'+p.id+':'+a.id+JSON.stringify(a.data.workScope));
   for (const p of world.persons) if (p.winterMeals) push('WinterMeals' + p.id + JSON.stringify(p.winterMeals));
   for (const p of world.persons) if (p.hauling) push('Hauling' + p.id + JSON.stringify(p.hauling));

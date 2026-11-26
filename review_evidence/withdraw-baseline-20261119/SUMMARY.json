@@ -1,0 +1,286 @@
+{
+  "aspen-day48": {
+    "finalHash": "e4a86f09",
+    "expectedHash": "e4a86f09",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 0,
+    "openAtEnd": 0,
+    "adultsFinished": 1074,
+    "startedInWorkPhase": 427,
+    "outcomeAll": {
+      "total": 1074,
+      "tookNone": 343,
+      "empty": 340,
+      "other": 3,
+      "endedBeforeArrival": 193,
+      "tookSomeOrAll": 538
+    },
+    "outcomeWalked": {
+      "total": 650,
+      "tookNone": 278,
+      "empty": 275,
+      "other": 3,
+      "endedBeforeArrival": 193,
+      "tookSomeOrAll": 179
+    },
+    "outcomeNoWalk": {
+      "total": 424,
+      "tookNone": 65,
+      "empty": 65,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 359
+    },
+    "arrivedAdults": 881,
+    "emptyAdults": 340,
+    "stockPresent": 315,
+    "stockPresentAllowanceZero": 309,
+    "stockPresentAllowancePositive": 6,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 294,
+      "guest stock": 15
+    },
+    "deaths": 0,
+    "endAlive": 82,
+    "endStoreFood": 711
+  },
+  "aspen-day96": {
+    "finalHash": "6c19867c",
+    "expectedHash": "6c19867c",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 0,
+    "openAtEnd": 16,
+    "adultsFinished": 3711,
+    "startedInWorkPhase": 626,
+    "outcomeAll": {
+      "total": 3711,
+      "tookNone": 1336,
+      "empty": 1330,
+      "other": 6,
+      "endedBeforeArrival": 1373,
+      "tookSomeOrAll": 1002
+    },
+    "outcomeWalked": {
+      "total": 3090,
+      "tookNone": 1246,
+      "empty": 1240,
+      "other": 6,
+      "endedBeforeArrival": 1373,
+      "tookSomeOrAll": 471
+    },
+    "outcomeNoWalk": {
+      "total": 621,
+      "tookNone": 90,
+      "empty": 90,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 531
+    },
+    "arrivedAdults": 2338,
+    "emptyAdults": 1330,
+    "stockPresent": 1264,
+    "stockPresentAllowanceZero": 1202,
+    "stockPresentAllowancePositive": 62,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 1042,
+      "guest stock": 160
+    },
+    "deaths": 1,
+    "endAlive": 140,
+    "endStoreFood": 1383
+  },
+  "gen-4-day48": {
+    "finalHash": "3de8459c",
+    "expectedHash": "3de8459c",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 0,
+    "openAtEnd": 7,
+    "adultsFinished": 1348,
+    "startedInWorkPhase": 280,
+    "outcomeAll": {
+      "total": 1348,
+      "tookNone": 603,
+      "empty": 601,
+      "other": 2,
+      "endedBeforeArrival": 316,
+      "tookSomeOrAll": 429
+    },
+    "outcomeWalked": {
+      "total": 1069,
+      "tookNone": 545,
+      "empty": 543,
+      "other": 2,
+      "endedBeforeArrival": 316,
+      "tookSomeOrAll": 208
+    },
+    "outcomeNoWalk": {
+      "total": 279,
+      "tookNone": 58,
+      "empty": 58,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 221
+    },
+    "arrivedAdults": 1032,
+    "emptyAdults": 601,
+    "stockPresent": 570,
+    "stockPresentAllowanceZero": 556,
+    "stockPresentAllowancePositive": 14,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 459,
+      "guest stock": 96,
+      "granary, no share": 1
+    },
+    "deaths": 0,
+    "endAlive": 81,
+    "endStoreFood": 884
+  },
+  "gen-4-day96": {
+    "finalHash": "02e27e8f",
+    "expectedHash": "02e27e8f",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 0,
+    "openAtEnd": 15,
+    "adultsFinished": 2760,
+    "startedInWorkPhase": 397,
+    "outcomeAll": {
+      "total": 2760,
+      "tookNone": 1106,
+      "empty": 1103,
+      "other": 3,
+      "endedBeforeArrival": 1021,
+      "tookSomeOrAll": 633
+    },
+    "outcomeWalked": {
+      "total": 2366,
+      "tookNone": 1017,
+      "empty": 1014,
+      "other": 3,
+      "endedBeforeArrival": 1021,
+      "tookSomeOrAll": 328
+    },
+    "outcomeNoWalk": {
+      "total": 394,
+      "tookNone": 89,
+      "empty": 89,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 305
+    },
+    "arrivedAdults": 1739,
+    "emptyAdults": 1103,
+    "stockPresent": 1019,
+    "stockPresentAllowanceZero": 925,
+    "stockPresentAllowancePositive": 94,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 910,
+      "granary, no share": 1,
+      "guest stock": 14
+    },
+    "deaths": 0,
+    "endAlive": 142,
+    "endStoreFood": 692
+  },
+  "river-day48": {
+    "finalHash": "93015c04",
+    "expectedHash": "93015c04",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 0,
+    "openAtEnd": 4,
+    "adultsFinished": 1316,
+    "startedInWorkPhase": 408,
+    "outcomeAll": {
+      "total": 1316,
+      "tookNone": 548,
+      "empty": 547,
+      "other": 1,
+      "endedBeforeArrival": 299,
+      "tookSomeOrAll": 469
+    },
+    "outcomeWalked": {
+      "total": 911,
+      "tookNone": 452,
+      "empty": 451,
+      "other": 1,
+      "endedBeforeArrival": 299,
+      "tookSomeOrAll": 160
+    },
+    "outcomeNoWalk": {
+      "total": 405,
+      "tookNone": 96,
+      "empty": 96,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 309
+    },
+    "arrivedAdults": 1017,
+    "emptyAdults": 547,
+    "stockPresent": 524,
+    "stockPresentAllowanceZero": 516,
+    "stockPresentAllowancePositive": 8,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 435,
+      "guest stock": 81
+    },
+    "deaths": 0,
+    "endAlive": 84,
+    "endStoreFood": 894
+  },
+  "river-day96": {
+    "finalHash": "594be8ed",
+    "expectedHash": "594be8ed",
+    "hashMatches": true,
+    "conservation": true,
+    "unseenEnds": 1,
+    "openAtEnd": 2,
+    "adultsFinished": 1514,
+    "startedInWorkPhase": 144,
+    "outcomeAll": {
+      "total": 1514,
+      "tookNone": 507,
+      "empty": 504,
+      "other": 3,
+      "endedBeforeArrival": 772,
+      "tookSomeOrAll": 235
+    },
+    "outcomeWalked": {
+      "total": 1370,
+      "tookNone": 478,
+      "empty": 475,
+      "other": 3,
+      "endedBeforeArrival": 772,
+      "tookSomeOrAll": 120
+    },
+    "outcomeNoWalk": {
+      "total": 144,
+      "tookNone": 29,
+      "empty": 29,
+      "other": 0,
+      "endedBeforeArrival": 0,
+      "tookSomeOrAll": 115
+    },
+    "arrivedAdults": 742,
+    "emptyAdults": 504,
+    "stockPresent": 482,
+    "stockPresentAllowanceZero": 455,
+    "stockPresentAllowancePositive": 27,
+    "stockPresentAccessUnknown": 0,
+    "zeroAllowanceCauses": {
+      "earmarked to others": 315,
+      "guest stock": 140
+    },
+    "deaths": 0,
+    "endAlive": 145,
+    "endStoreFood": 790
+  }
+}

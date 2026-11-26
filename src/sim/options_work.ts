@@ -1,3 +1,7 @@
+import { remembersRetiredShelter } from './retire_lean_to';
+import {herdReasons} from './herd_value';
+import {houses} from './farm_species';
+import { FARM_FOODS } from './constants';
 import { eveningFireOptions } from './evening_fire';
 import { farmDraw } from './farm_draw';
 import { grainGoesToBins } from './grain_kept';
@@ -30,7 +34,7 @@ import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
-import { durableReserve, homeStoreBelief } from './provision';
+import { durableReserve, homeStoreBelief, sharesFreshMeat, storageFoods } from './provision';
 import { RATION_WEIGHT, hasPackMaterials, packFullWorth, rationApplies, rationKeep, tripWaitsForFillingPack } from './light_pack';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
@@ -166,6 +170,7 @@ export function fireFuelWanted(world: Ctx['world']): number {
  * and the helper is the sort to lend a hand, 0 for everything else.
  */
 export function repairStake(ctx: Ctx, b: Belief): number {
+  if (remembersRetiredShelter(ctx, b) && !roofDuty(ctx.p, b.id)) return 0;
   if (b.btype === 'storehouse' || b.hh === ctx.p.hhId) return 1;
   if(hasWells(ctx.world)&&b.btype==='well'&&b.hh===0)return 0.5+0.5*ctx.p.traits.generosity;
   // having promised to mend it
@@ -245,11 +250,13 @@ function optDepositFood(ctx: Ctx): void {
   // rules 208: not for a child, whose pack of five the rule was never sized for
   const ration = rationApplies(world, ctx.stage === 'child') && !!homeStoreBelief(p);
   const keepSelf = rationKeep(world, ration, ctx.drives.hunger > 0 ? 3 : 2);
-  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
-  const unreserved = smallPack||ration ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
+  const foodKinds = storageFoods(world);
+  const sharingMeat = sharesFreshMeat(world) && ((p.inv.meat ?? 0) > 0 || (p.inv.pork ?? 0) > 0);
+  const countUnreserved = smallPack || ration || sharingMeat;
+  const unreserved = countUnreserved ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
   // rules 243 (grain_kept.ts): with a granary known, grain is for the bins (production.ts optGranaryStore), not for here
   const grainOut = grainGoesToBins(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'granary');
-  const surplus = (smallPack||ration ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf - (grainOut ? unreserved.grain ?? 0 : 0);
+  const surplus = (countUnreserved ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf - (grainOut ? unreserved.grain ?? 0 : 0);
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
   // rules 204 (carry_more.ts): the pack is what keeps the basket's wood from being fetched, so one spare portion is worth taking home
   const roomShort = basketRoomStall(ctx);
@@ -282,15 +289,21 @@ function optDepositFood(ctx: Ctx): void {
     }
     if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
-    // deposit the better-keeping foods and keep a little for myself
+    // Pack in storage order, keeping a ration for the walk back.
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as ItemKind[]) {
+    let space = cap - used;
+    for (const k of foodKinds) {
       const have = grainOut && k === 'grain' ? 0 : unreserved[k] ?? 0;
-      const give = Math.min(have, toStore);
+      const give = sharingMeat ? Math.min(have, toStore, Math.floor(space / WEIGHT[k])) : Math.min(have, toStore);
       if (give > 0) {
         items[k] = give;
         toStore -= give;
+        space -= give * WEIGHT[k];
       }
+    }
+    if (sharingMeat && Object.keys(items).length === 0) {
+      addBlocked(ctx, 'deposit', 'Store food', b.id, 'no carried surplus portion fits the remembered space', 'store');
+      continue;
     }
     if(smallPack&&mine&&!Object.keys(items).some(k=>(items[k]??0)>0&&cap-used>=WEIGHT[k as ItemKind])){
       addBlocked(ctx,'deposit','Bring food home',b.id,'no carried surplus portion fits the remembered space','store');continue;
@@ -304,7 +317,7 @@ function optDepositFood(ctx: Ctx): void {
       util: (smallPack && mine ? Math.max(8,sc.total) : sc.total) * nightMult(ctx),
       parts: sc.parts,
       eta: e + 20,
-      key: `deposit:${b.id}:food`,
+      key: `deposit:${b.id}:food`, cargo:items,
       targetId: b.id,
       tag: 'store',
       make: () => {
@@ -323,7 +336,7 @@ function optDepositFood(ctx: Ctx): void {
           utility: sc.total,
           minCommit: 40,
           maxTicks: 600,
-          data: { items, ...(roomShort && mine ? { basketRoom: true } : {}), ...(ration && mine ? { ration: true } : {}) },
+          data: { items, ...(sharingMeat && (items.meat || items.pork) ? { meatStoreKeep: keepSelf } : {}), ...(roomShort && mine ? { basketRoom: true } : {}), ...(ration && mine ? { ration: true } : {}) },
         });
       },
     });
@@ -433,7 +446,7 @@ export function setWorkshopTools(on: boolean): void { workshopTools = on; }
 function workshopTool(ctx: Ctx): HandTool | null {
   if (!workshopTools || ctx.world.settings.dynamics !== 'rich' || !runsRulesVersion(ctx.world, 57) || ctx.stage === 'child') return null;
   const tool = ctx.toolWanted?.kind;
-  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && tool !== 'net' && tool !== 'trap' && tool !== 'toy' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
+  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && tool !== 'net' && tool !== 'trap' && tool !== 'gloves' && tool !== 'shoes' && tool !== 'toy' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
 }
 
 export function wantedTool(ctx: Ctx): HandTool | null {
@@ -907,6 +920,17 @@ function optPlanBuild(ctx: Ctx): void {
     addSharedProjectOption(ctx,type,ctx.options.at(-1));
   };
 
+  if(home && runsRulesVersion(world,267) && knowTrees){
+    const beliefs=Object.values(p.beliefs);
+    const stock=beliefs.filter(b=>b.sheep && (!b.sheep.hhId || b.sheep.hhId===p.hhId));
+    for(const type of ['chicken_cage','paddock','barn'] as const){
+      if(beliefs.some(b=>b.hh===hh.id && b.btype===type))continue;
+      const suitable=stock.filter(b=>b.sheep?.species&&houses(type,b.sheep.species));
+      if(!suitable.length)continue;
+      const best=Math.max(...suitable.map(b=>herdReasons(ctx,b).reduce((sum,r)=>sum+r[1],0)));
+      tryPlan(type,(type==='barn'?27:32)+Math.max(-8,Math.min(18,best)),'house the livestock I have seen');
+    }
+  }
   if (!home) {
     if (knowTrees) {
       const urgent = 22 + (hs.shortage < 0.6 ? 6 : 0) + 4 * Math.min(members, 3);
@@ -1405,7 +1429,7 @@ function optSalvage(ctx: Ctx): void {
         value += 10;
       }
     }
-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const) {
+    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] as const) {
       const n = unitsOf(items[k]);
       if (n <= 0) continue;
       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
@@ -1677,7 +1701,7 @@ function optCare(ctx: Ctx): void {
     if (hungry && !hadFood && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
       // give what fits best
       // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
-      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] : ['berries', 'fruit', 'grain', 'fish'];
+      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] : ['berries', 'fruit', 'grain', 'fish'];
       const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, kn.hunger < 25 ? 3 : 2);

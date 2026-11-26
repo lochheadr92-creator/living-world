@@ -1,3 +1,5 @@
+import { FARM_FOODS } from './constants';
+import { hasWorkshopErrand } from './workshop_errand';
 import {brewDemand} from './brewing';
 import { BAKE_WORTH, GRAIN_WORKS_SIGNAL, LOAVES_A_HEAD, LOAVES_MOST, binsWorth, breadIsStaple, grainInPack, wantsGrainWorks } from './grain_kept';
 import { benchStock, chainLeavesLeftover, madeForSiteWorth, sawToYardOption } from './site_supply';
@@ -187,7 +189,7 @@ function nameOf(b: Belief): string {
 }
 
 /** Go and take stock out of a store, a workplace's shelves or a heap. */
-export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind, forPlace?: number): void {
+export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind, forPlace?: number, workshop?: number, recipe?: string): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items, world)}`, b.id, `tried recently and found none to take`, tag);
@@ -228,7 +230,8 @@ export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, wh
         utility: util,
         minCommit: 30,
         maxTicks: 700,
-        data: { items, ...(materialStock ? { materialStock } : {}), ...(forPlace ? { forPlace } : {}) }, // forPlace: rules 265 (trip_kept.ts), the workshop whose batch this is for
+        // forPlace: rules 265 (trip_kept.ts), the workshop whose batch this is for; inputWorkshop and inputRecipe: rules 266 (workshop_errand.ts)
+        data: { items, ...(materialStock ? { materialStock } : {}), ...(forPlace ? { forPlace } : {}), ...(workshop && recipe && hasWorkshopErrand(world) ? { inputWorkshop: workshop, inputRecipe: recipe } : {}) },
       });
     },
   });
@@ -262,7 +265,7 @@ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
     util,
     parts: sc.parts,
     eta: e + 20,
-    key: `bring:${b.id}:${Object.keys(take).join('+')}`,
+    key: `bring:${b.id}:${Object.keys(take).join('+')}`, cargo:take,
     targetId: b.id,
     tag,
     make: () => {
@@ -463,7 +466,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag:
     // too deep to plan further stages, but raw materials are the end of any chain: wood for the charcoal, ore, clay and stone can always be gathered by hand
     for (const k of Object.keys(short) as ItemKind[]) {
       const missing = unitsOf(short[k]) - unitsOf(p.inv[k]);
-      if (missing > 0 && isRawMaterial(k)) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId);
+      if (missing > 0 && isRawMaterial(k)) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId, r.id);
     }
     return;
   }
@@ -471,7 +474,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag:
   if (stillShort) {
     for (const k of Object.keys(short) as ItemKind[]) {
       const missing = unitsOf(short[k]) - unitsOf(p.inv[k]);
-      if (missing > 0) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId);
+      if (missing > 0) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId, r.id);
     }
   }
 }
@@ -494,7 +497,7 @@ function bringInputs(ctx: Ctx, f: Fac, r: Recipe, base: number, why: string, tag
     const have = unitsOf(p.inv[k]);
     if (have > 0) { carry[k] = Math.min(have, lack); any = true; }
     const missing = lack - have;
-    if (missing > 0 && (depth < 2 || isRawMaterial(k))) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId);
+    if (missing > 0 && (depth < 2 || isRawMaterial(k))) supply(ctx, k, missing, base * 0.93, `${why} (${r.label})`, tag, depth + 1, b, undefined, siteId, r.id);
   }
   if (any) depositLeaf(ctx, b, carry, base * 0.92, `${why} (${r.label})`, tag, siteId);
 }
@@ -549,7 +552,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
 }
 
 // ───────────────────────── supply: how to get hold of something ─────────────────────────
-function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null): number {
+function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null, recipe?: string): number {
   if (item === 'cart') return 0;
   const { world, p } = ctx;
   const rememberedOnly=dest?.btype==='food_rack';
@@ -604,19 +607,19 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
     const take = Math.min(f.n, Math.max(1, Math.ceil(unmet)), invRoom(ctx.world, p, item as ItemKind));
     if (take < 1) continue;
     // rules 265 (trip_kept.ts): a withdrawal for a batch at a known workshop records which one, so the walk does not change the batch's place
-    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag, [], undefined, keepsPlace ? dest!.id : undefined);
+    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag, [], undefined, keepsPlace ? dest!.id : undefined, dest?.id, recipe);
   }
   return total;
 }
 
-function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: number, why: string, tag: string, depth: number, dest: Belief | null, haveOverride?: number, siteId = 0): void {
+function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: number, why: string, tag: string, depth: number, dest: Belief | null, haveOverride?: number, siteId = 0, recipe?: string): void {
   const { p } = ctx;
   const carried = item === 'cart' || item === 'tend' ? 0 : unitsOf(p.inv[item]);
   const have = haveOverride ?? (dest ? 0 : carried);
   const unmet = qty - have;
   if (unmet <= 0) return;
   let remaining = unmet;
-  if (item !== 'tend') remaining = unmet - collectOptions(ctx, item, unmet, base, why, tag, dest);
+  if (item !== 'tend') remaining = unmet - collectOptions(ctx, item, unmet, base, why, tag, dest, recipe);
   // what is already standing on somebody's shelves counts: no one makes more of what is already there
   if (remaining <= 0) return;
   if(item!=='cart'&&item!=='tend'&&hasCarcassSupply(ctx.world)&&isBodyPart(item)){
@@ -642,6 +645,20 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   for (const r of recipes) {
     if(!recipeAvailable(ctx.world,r))continue;
     const fac = batchPlaceOf(ctx, r.at);
+    const walk = p.activity;
+    // The nearest workshop can change on the way to collect an input for a different one.
+    // Recompile the original job and retain only its exact legal collection offer.
+    if (walk?.kind === 'withdraw' && walk.phase === 'travel' && walk.data.inputWorkshop &&
+        walk.data.inputWorkshop !== fac?.b.id && hasWorkshopErrand(ctx.world) &&
+        walk.data.inputRecipe === r.id) {
+      const original = facilitiesOf(ctx, r.at).find(f => f.b.id === walk.data.inputWorkshop);
+      if (original && preferredRecipeForTools(ctx, original, r)) {
+        const prior: Ctx = { ...ctx, options: [], blocked: [] };
+        planRecipe(prior, original, r, base, why, tag, depth, siteId, toolRequired);
+        const offer = prior.options.find(o => o.key === walk.data.optKey && o.goal === walk.goal);
+        if (offer && !ctx.options.some(o => o.key === offer.key && o.goal === offer.goal)) ctx.options.push(offer);
+      }
+    }
     if (!fac) {
       if (!seen.has(r.at)) {
         seen.add(r.at);
@@ -903,7 +920,7 @@ function optGranaryStore(ctx: Ctx): void {
   const keep = grainInPack(world, winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3); // rules 243 (grain_kept.ts): one for the day
   const items: Items = {};
   let n = 0;
-  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]) {
+  for (const k of ['grain', 'flour', 'bread','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
     const give = k === 'grain'||k==='rendered_fat'||k.startsWith('dried_')||k.startsWith('smoked_') ? Math.max(0, have - keep) : have;
     if (give >= (winter ? 1 : 2)) {
@@ -950,7 +967,7 @@ function optRackSpare(ctx: Ctx): void {
       util: sc.total * nightMult(ctx),
       parts: sc.parts,
       eta: target.e + 20,
-      key: `rack:${b.id}:${t.kind}`,
+      key: `rack:${b.id}:${t.kind}`, cargo:{[t.kind]:1},
       targetId: b.id,
       tag: 'craft',
       make: () => {
@@ -1342,7 +1359,7 @@ function preservationOptions(ctx:Ctx):void {
     // Collection and resumption do not require another raw surplus.
     const goods:Items={};
     let room=carryCap(ctx.world,ctx.p)-weightOf(ctx.p.inv),waiting=0;
-    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const){
+    for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as const){
       const stock=f.b.items?.[k]??0;waiting+=stock;
       const n=Math.min(2,stock,Math.max(0,Math.floor(room/WEIGHT[k])));
       if(n>0){goods[k]=n;room-=n*WEIGHT[k];}
@@ -1380,7 +1397,7 @@ export function productionOptions(ctx: Ctx): void {
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
     for(const b of known.slice(0,2)){
       const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
-      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'] as const){
+      for(const k of ['bread','meat','fish','fruit','grain','berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS] as const){
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }

@@ -1,8 +1,12 @@
+import { hasOccupations } from './occupation';
+import { occupationStoreOption } from './occupation_storage';
 import { childTaskFilter } from './child_tasks';
 import { threeAgesFilter } from './three_ages';
 import {placeOptions} from './options_places';
 import {runsRulesVersion} from './rulesversion';
+import { reviewedOffer } from './gather_review';
 import { relocationOptions } from './relocation';
+import { oldShelterOptions } from './retire_lean_to';
 import {applyRouteExperience} from './route_learning';
 import { whileObserving } from './lifechanges';
 import { ledgerDecision } from './decision_ledger';
@@ -10,6 +14,7 @@ import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { proposeProject } from './proposals';
 import { reviseProject } from './project_revision';
+import { preferBatchStep } from './batch_priority';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
@@ -65,11 +70,13 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   const ctx = makeCtx(world, p, collect, observer);
   survivalOptions(ctx);
   workOptions(ctx);
+  occupationStoreOption(ctx);
   productionOptions(ctx);
   workshopToolOptions(ctx);
   socialOptions(ctx);
   placeOptions(ctx);
   relocationOptions(ctx);
+  oldShelterOptions(ctx);
   applyRouteExperience(ctx);
   journeyOptions(ctx);
   scopeWorkOptions(ctx);
@@ -155,7 +162,8 @@ export function rankOptions(ctx: Ctx): Option[] {
     }
   }
   scored.sort((a, b) => b.s - a.s);
-  return scored.map((x) => x.o);
+  const ranked = scored.map((x) => x.o);
+  return chooser === 'random' ? ranked : preferBatchStep(ctx, ranked);
 }
 
 /**
@@ -373,11 +381,13 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
 function currentUtility(ctx: Ctx, a: Activity): number {
   const key = a.data.optKey as string | undefined;
   if (!key) return a.utility;
-  const o = ctx.options.find((x) => x.key === key);
+  const o = reviewedOffer(ctx, a, key);
   if (!o) return 0;
   // finishing what is already underway counts for something
   const frac = a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0;
-  return o.util * (1.08 + 0.35 * frac);
+  const commitment = ctx.p.occupation?.title && hasOccupations(ctx.world) && !ctx.critical && !ctx.dangers.length
+    ? tradeNudge(ctx.world,ctx.p,o) : 0;
+  return (o.util + commitment) * (1.08 + 0.35 * frac);
 }
 
 /**
@@ -421,6 +431,10 @@ export function reviewActivity(world: World, p: Person): void {
   const ranked = rankOptions(ctx);
   const best = ranked[0];
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 5) * 20);
+  if (a.phase === 'travel' && world.hooks?.onTravelReview) {
+    const key = a.data.optKey;
+    world.hooks.onTravelReview(p, a, !key ? 'unkeyed' : ctx.options.some(o => o.key === key) ? 'present' : 'absent');
+  }
   const key = a.data.optKey as string | undefined;
   const walkReview = a.phase === 'travel' && (a.kind === 'gather' || a.kind === 'withdraw');
   const currentPresent = !!key && ctx.options.some((o) => o.key === key);
@@ -436,6 +450,7 @@ export function reviewActivity(world: World, p: Person): void {
       act.data.why = because(inHand, null, tradeReason(world, p, inHand));
       record(world, p, ctx, ranked, inHand, 'urgent need', undefined, act);
       markSetAside(world, p);
+      if (a.phase === 'travel') world.hooks?.onTravelReviewSwitch?.(p, a, act, EAT_IN_HAND_REASON);
       endActivity(world, p, 'interrupted', EAT_IN_HAND_REASON);
       startActivity(world, p, act);
       return;
@@ -502,6 +517,7 @@ export function reviewActivity(world: World, p: Person): void {
     // being driven off from a place is remembered, so the same trip is not repeated at once
     if (danger && a.targetId && (a.kind === 'drink' || a.kind === 'gather' || a.kind === 'fetch_water')) noteFailure(world, p, a.targetId, 'a wolf came too close');
     if (external) ext.notify?.(world, p, { kind: 'override', why, activity: a });
+    if (a.phase === 'travel') world.hooks?.onTravelReviewSwitch?.(p, a, act, why);
     endActivity(world, p, 'interrupted', why);
     startActivity(world, p, act);
   }

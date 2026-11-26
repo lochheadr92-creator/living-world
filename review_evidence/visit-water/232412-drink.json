@@ -1,0 +1,266 @@
+{
+  "seed": "gen-4",
+  "tick": 232412,
+  "arm": "door",
+  "hash": "bd5e23ae",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 232412,
+      "room": 6117,
+      "memory": 232364,
+      "goal": "to bring water to Pavel"
+    },
+    {
+      "event": "door",
+      "tick": 232459,
+      "reason": null,
+      "space": 6117,
+      "room": 6117
+    },
+    {
+      "event": "contact",
+      "tick": 232470,
+      "needs": {
+        "hungry": false,
+        "thirsty": true,
+        "hurt": false
+      },
+      "wanted": {
+        "water": 1
+      },
+      "pack": {
+        "basket": 1,
+        "seeds": 7,
+        "spear": 1,
+        "wood": 1,
+        "grain": 4,
+        "water": 1
+      },
+      "visitorSpace": 6117,
+      "targetSpace": 6117
+    },
+    {
+      "event": "transfer",
+      "tick": 232470,
+      "got": {}
+    },
+    {
+      "event": "water test",
+      "tick": 232470,
+      "mode": "drink",
+      "before": {
+        "ulricWater": 1,
+        "pavelPack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2,
+          "wood": 1
+        },
+        "pavelWater": 0,
+        "weight": 8.5,
+        "capacity": 9,
+        "roomForWater": 0,
+        "thirst": 33.193600000005034,
+        "visitorRoom": 6117,
+        "recipientRoom": 6117
+      },
+      "after": {
+        "ulricWater": 0,
+        "pavelPack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2,
+          "wood": 1
+        },
+        "pavelWater": 0,
+        "weight": 8.5,
+        "capacity": 9,
+        "roomForWater": 0,
+        "thirst": 69.19360000000503,
+        "visitorRoom": 6117,
+        "recipientRoom": 6117
+      },
+      "weights": [
+        {
+          "kind": "toy",
+          "n": 1,
+          "weight": 0.25
+        },
+        {
+          "kind": "seeds",
+          "n": 9,
+          "weight": 2.25
+        },
+        {
+          "kind": "grain",
+          "n": 2,
+          "weight": 2
+        },
+        {
+          "kind": "berries",
+          "n": 2,
+          "weight": 2
+        },
+        {
+          "kind": "wood",
+          "n": 1,
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "event": "end",
+      "tick": 232470,
+      "result": "success",
+      "detail": "done",
+      "outcome": "drank offered water",
+      "space": 6117
+    }
+  ],
+  "water": {
+    "mode": "drink",
+    "packChanges": [
+      {
+        "tick": 230400,
+        "pack": {
+          "toy": 1,
+          "seeds": 8,
+          "wood": 1,
+          "grain": 2
+        }
+      },
+      {
+        "tick": 230439,
+        "pack": {
+          "toy": 1,
+          "seeds": 8,
+          "wood": 1,
+          "grain": 3
+        },
+        "activity": "to bring food home"
+      },
+      {
+        "tick": 230454,
+        "pack": {
+          "toy": 1,
+          "seeds": 8,
+          "wood": 1,
+          "grain": 4
+        }
+      },
+      {
+        "tick": 230543,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "wood": 1,
+          "grain": 4
+        }
+      },
+      {
+        "tick": 230671,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 4
+        }
+      },
+      {
+        "tick": 230785,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 3
+        },
+        "activity": "to ease hunger (48/100)"
+      },
+      {
+        "tick": 230795,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2
+        }
+      },
+      {
+        "tick": 230972,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 1
+        },
+        "activity": "to bring food home"
+      },
+      {
+        "tick": 230984,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2
+        },
+        "activity": "to bring food home"
+      },
+      {
+        "tick": 230996,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 3
+        },
+        "activity": "to bring food home"
+      },
+      {
+        "tick": 231008,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 4
+        }
+      },
+      {
+        "tick": 231137,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2
+        }
+      },
+      {
+        "tick": 231279,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 3
+        }
+      },
+      {
+        "tick": 231399,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2
+        }
+      },
+      {
+        "tick": 231434,
+        "pack": {
+          "toy": 1,
+          "seeds": 9,
+          "grain": 2,
+          "berries": 2,
+          "wood": 1
+        }
+      }
+    ]
+  }
+}

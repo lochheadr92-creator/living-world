@@ -1,0 +1,17 @@
+{
+  "seed": "river",
+  "arm": "drink",
+  "hash": "d1973df5",
+  "outcomes": {
+    "success / fine": 3,
+    "failed / they are inside a different space": 4,
+    "failed / Nora was not where I expected": 1,
+    "failed / Ines was not where I expected": 1,
+    "failed / Nell was not where I expected": 1
+  },
+  "admissions": 0,
+  "refused": 0,
+  "contacts": 3,
+  "waterOfferedToThirsty": 0,
+  "opportunities": []
+}

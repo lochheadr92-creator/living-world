@@ -1,0 +1,212 @@
+{
+  "loaded": "C:/dev/lw_saves/rules256/river-day48.save.json",
+  "initialHash": "49608297",
+  "baseline": {
+    "gathers": 1316,
+    "units": 2822,
+    "unitsPerPositiveWalk": 2.1443768996960486,
+    "gatherWalkingTicksPerUnit": 41.1343019135365,
+    "small": 885,
+    "constrained": 532,
+    "purposes": {
+      "stock": 204,
+      "eat": 60,
+      "fire": 94,
+      "repair": 92,
+      "site": 62,
+      "promise": 3,
+      "animal care": 3,
+      "craft": 14
+    },
+    "literal": 55,
+    "literalPurposes": {
+      "eat": 53,
+      "animal care": 1,
+      "fire": 1
+    },
+    "literalRestoredIgnoringAllClaims": 50,
+    "candidateUpperBound": 24,
+    "candidateWalkingTicks": 1281,
+    "deposits": 1260,
+    "depositWalkingTicks": 83964,
+    "depositUnits": 2032,
+    "completedWalkJobs": 8038,
+    "deaths": 0,
+    "storeFood": 921,
+    "hungryWakingShare": 0.478
+  },
+  "sampleDay": {
+    "observed": 46,
+    "depositOffered": 0,
+    "literal": 8,
+    "roomRestored": 1,
+    "roomRestoredWithAllClay": 3,
+    "items": {
+      "clay": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 26
+      },
+      "seeds": {
+        "reserved": 0,
+        "needed": 159,
+        "spare": 74,
+        "protected": 0
+      },
+      "grain": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 73
+      },
+      "berries": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 61
+      },
+      "fibre": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 10
+      },
+      "basket": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 38
+      },
+      "spear": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 32
+      },
+      "hammer": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 14
+      },
+      "wool": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 29
+      },
+      "rod": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 18
+      },
+      "garment": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 12
+      },
+      "offcuts": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "wood": {
+        "reserved": 20,
+        "needed": 16,
+        "spare": 0,
+        "protected": 0
+      },
+      "stone": {
+        "reserved": 5,
+        "needed": 11,
+        "spare": 0,
+        "protected": 0
+      },
+      "hoe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "axe": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "fish": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 16
+      },
+      "cutting": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 12
+      },
+      "pick": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 7
+      },
+      "planks": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 8
+      },
+      "saw": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 5
+      },
+      "bread": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 14
+      },
+      "water": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "blanket": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "ore": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 1
+      },
+      "toy": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 2
+      },
+      "fruit": {
+        "reserved": 0,
+        "needed": 0,
+        "spare": 0,
+        "protected": 4
+      }
+    },
+    "endHash": "556d8b33",
+    "conservation": true,
+    "unwatchedTwinMatched": true
+  }
+}

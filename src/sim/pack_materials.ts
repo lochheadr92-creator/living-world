@@ -51,7 +51,7 @@ export function materialsHomeOption(ctx: Ctx): void {
   const what = Object.keys(items).join(' and ');
   addOption(ctx, {
     kind: 'deposit', label: `Put the spare ${what} down at home`, goal: 'to empty my pack of what nothing of mine needs', need: null, util, parts: sc.parts, eta: walk + 20,
-    key: `pack_materials:${b.id}`, targetId: b.id, tag: 'store',
+    key: `pack_materials:${b.id}`, cargo:items, targetId: b.id, tag: 'store',
     make: () => {
       const spot = spotNear(w, p, b);
       if (!spot) return null;

@@ -39,13 +39,14 @@ const SOURCE_ICON: Record<SourceType, IconName> = {
   tree: 'leaf',
   rock: 'stone',
   fish_spot: 'fish',
+  hay_meadow:'leaf',
   wild_grain: 'grain',
   clay_pit: 'clay',
   ore_vein: 'ore',
   outcrop: 'stone',
 };
 
-const BUILDING_ICON: Record<BuildingType, IconName> = {
+const BUILDING_ICON: Record<BuildingType, IconName> = {barn:'house', paddock:'wood', chicken_cage:'cube',
   food_rack: 'fish',
   well: 'water',
   cellar: 'bread',

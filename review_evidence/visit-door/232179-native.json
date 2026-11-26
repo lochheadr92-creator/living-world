@@ -1,0 +1,36 @@
+{
+  "seed": "gen-4",
+  "tick": 232179,
+  "arm": "native",
+  "hash": "e66b885f",
+  "events": [
+    {
+      "event": "launch",
+      "tick": 232179,
+      "room": 6117,
+      "memory": 232133,
+      "goal": "to bring water to Pavel"
+    },
+    {
+      "event": "end",
+      "tick": 232179,
+      "result": "failed",
+      "detail": "they are inside a different space",
+      "space": 0
+    },
+    {
+      "event": "launch",
+      "tick": 232412,
+      "room": 6117,
+      "memory": 232364,
+      "goal": "to bring water to Pavel"
+    },
+    {
+      "event": "end",
+      "tick": 232412,
+      "result": "failed",
+      "detail": "they are inside a different space",
+      "space": 0
+    }
+  ]
+}

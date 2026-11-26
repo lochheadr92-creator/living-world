@@ -1,3 +1,4 @@
+import {foundChickenCoop} from './founding_coop';
 import {seedSheep} from './livestock';
 import { depositRichness } from './geology';
 import { depositPlenty } from './deposit_plenty';
@@ -574,6 +575,8 @@ export function generateNatural(settings: Settings): World {
   computeAccessCells(world);
   initializeWater(world);
   seedSheep(world,terrainReach);
+  foundChickenCoop(world,terrainReach);
+  if(runsRulesVersion(world,267))rebuildMobileGrid(world);
   seedKnowledge(world, gen);
   lookAround(world);
   snapshotInitial(world);

@@ -7,11 +7,11 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat' | 'milk' | 'cheese' | 'egg' | 'pork' | 'bacon';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap' | 'rod' | 'toy';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap' | 'rod' | 'toy' | 'gloves' | 'shoes';
 /** Raw materials and the things made from them. */
-export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat' | 'wool';
+export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat' | 'wool' | 'hay' | 'stock_feed' | 'leather';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts' | 'cutting' | 'beer';
 export type Items = Partial<Record<ItemKind, number>>;
 
@@ -63,7 +63,7 @@ export type BeliefKind =
   | 'tree'
   | 'rock'
   | 'fish_spot'
-  | 'wild_grain'
+  | 'hay_meadow' | 'wild_grain'
   | 'water'
   | 'building'
   | 'site'
@@ -112,6 +112,7 @@ export interface Belief {
   state?: string;
   /** Dated observation of parts still inside a carcass, not withdrawable goods. */
   gear?:Pick<GearState,'kind'|'toolId'|'hhId'|'readyAt'|'state'|'checked'|'bodyId'> & {wear:number;catch:number};
+  carcassLivestock?: FarmSpecies;
   carcassParts?:Partial<Record<CarcassPart,number>>;
   progress?: number;
   fuel?: number;
@@ -144,6 +145,8 @@ export interface FacilitySnapshot {
   tended: number;
   /** rules 257 (bench_access.ts): the earmarks that were live at the sight, so the planner counts only the stock the person may take */
   held?: import('./bench_access').HeldEarmark[];
+  /** Builders' shares as seen with the workshop. */
+  seenBuilders?: Record<number, number>;
 }
 
 export interface Relation {
@@ -673,6 +676,7 @@ export interface Person {
   namedAfter?: number;
   /** rules 260 (praise.ts): thanks this person owes somebody who drove a wolf off them or killed one, to say in company; at most three, each kept three days */
   thanksOwed?: { to: number; since: number; killed?: true }[];
+  occupation?: import('./occupation').OccupationalPractice;
   skillExperience?: import('./skill_coaching').SkillExperience[];
   placeMemories?: import('./personal_places').PlaceMemory[];
   background?: import('./background').Background;
@@ -854,7 +858,7 @@ export interface Concern {
 }
 
 // ───────────────────────────── world objects ─────────────────────────────
-export type SourceType = 'berry_bush' | 'fruit_tree' | 'tree' | 'rock' | 'fish_spot' | 'wild_grain' | 'clay_pit' | 'ore_vein' | 'outcrop';
+export type SourceType = 'berry_bush' | 'fruit_tree' | 'tree' | 'rock' | 'fish_spot' | 'hay_meadow' | 'wild_grain' | 'clay_pit' | 'ore_vein' | 'outcrop';
 
 export interface Source {
   planted?: {by:number;at:number;home:number};
@@ -895,7 +899,7 @@ export type BuildingType =
   | 'food_rack'
   | 'well'
   | 'cellar'
-  | 'hall';
+  | 'hall' | 'barn' | 'paddock' | 'chicken_cage';
 
 export interface Building {
   /** rules 262 (song.ts): the tick of the last song sung at this fire; one a fire an evening */
@@ -1085,7 +1089,7 @@ export interface Plot {
 
 export type CarcassPart = 'meat' | 'hide' | 'fat';
 export interface Carcass {
-  animalId:number; species:'deer'|'sheep'|'wolf'; hhId:number;
+  animalId:number; species:'deer'|FarmSpecies|'wolf'; hhId:number;
   initial:Record<CarcassPart,number>; remaining:Record<CarcassPart,number>;
   recovered:Record<CarcassPart,number>; lost:Record<CarcassPart,number>; work:Record<CarcassPart,number>;
   claim:{person:number;until:number}|null; emptySince:number|null;
@@ -1118,11 +1122,12 @@ export interface Grave {
   age: number;
 }
 
+export type FarmSpecies = 'sheep' | 'cow' | 'goat' | 'pig' | 'chicken';
 export interface Animal {
   ent: 'animal';
   id: number;
   /** deer only in rich worlds (hunting.ts) */
-  type: 'wolf' | 'deer' | 'sheep';
+  type: 'wolf' | 'deer' | FarmSpecies;
   sheep?: import('./livestock').SheepState;
   x: number;
   y: number;
@@ -1519,6 +1524,11 @@ export interface World {
   inhabitants?: Record<number, InhabitantState>;
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
+    /** Read-only review measurement, before any choice is made. */
+    onTravelReview?: (p: Person, a: Activity, option: 'present' | 'absent' | 'unkeyed') => void;
+    onTravelReviewSwitch?: (p: Person, from: Activity, to: Activity, reason: string) => void;
+    onFoodDemand?: (p: Person, stage: Stage, demand: number, unmet: number) => void;
+    onFoodIntake?: (p: Person, nutrition: number) => void;
     onNourishment?: (p:Person,event:import('./nourishment').NourishmentEvent)=>void;
     onActivityStart?: (p: Person, a: Activity) => void;
     /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */

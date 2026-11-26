@@ -9,11 +9,65 @@ import { stepWorld } from '../src/sim/world';
 import { DayShape } from '../scripts/observers/day_shape';
 import { TripShape, storeLook } from '../scripts/observers/trip_shape';
 import { ageYears } from '../src/sim/people';
-import { AGE_CHILD } from '../src/sim/constants';
+import { AGE_CHILD, TICKS_PER_YEAR } from '../src/sim/constants';
 import { setGatherDiagnostics } from '../src/sim/gather_diagnostics';
+import { newActivity } from '../src/sim/activities';
+import { WithdrawCheck } from '../scripts/observers/withdraw_check';
 import { OutdoorCompany, DAY_PARTS } from '../scripts/observers/outdoor_company';
 
 const world = (seed: string) => createWorld(currentWorldSettings('normal', seed, { immigration: false }));
+
+it('counts a same-tick withdrawal ending without inventing sampled stock', () => {
+  const w = world('river'), p = w.persons[0], observer = new WithdrawCheck();
+  observer.attach(w);
+  const a = newActivity(w,p,{kind:'withdraw',label:'Take',goal:'take',targetId:0,targetType:'building',tx:p.x,ty:p.y,spotX:p.x,spotY:p.y,data:{items:{wood:1}}});
+  w.hooks!.onActivityStart!(p,a);
+  a.phase='work';
+  w.hooks!.onActivityEnd!(p,a,'failed','the cellar doorway is inaccessible');
+  const report = observer.report(), rows = observer.rows();
+  expect(report.counts.endedWithoutBeingSeen).toBe(0);
+  expect(rows).toHaveLength(1);
+  expect(rows[0].result).toBe('took_none_other');
+  expect(rows[0].truthArr).toBeNull();
+  expect(rows[0].truthLastWork).toBeNull();
+});
+
+it('chains withdrawal hooks, does not double count, and keeps unsampled stock unknown', () => {
+  const w = world('river'), p = w.persons[0], calls: string[] = [];
+  w.hooks = { onActivityStart: () => calls.push('start'), onActivityEnd: () => calls.push('end') };
+  const prior = w.hooks, observer = new WithdrawCheck(), detach = observer.attach(w);
+  const a = newActivity(w,p,{kind:'withdraw',label:'Take',goal:'take',targetId:0,targetType:'building',tx:p.x,ty:p.y,spotX:p.x,spotY:p.y,data:{items:{wood:1}}});
+  w.hooks!.onActivityStart!(p,a);
+  p.activity = a; observer.sampleTick(w);
+  a.phase = 'work'; w.hooks!.onActivityEnd!(p,a,'failed','nothing to take');
+  expect(calls).toEqual(['start', 'end']);
+  expect(observer.rows()).toHaveLength(1);
+  expect(observer.rows()[0].why).toBe('unobserved');
+  detach(); expect(w.hooks).toBe(prior);
+});
+
+it('records a withdrawal already active when observation begins', () => {
+  const w = world('river'), p = w.persons[0], observer = new WithdrawCheck();
+  const a = newActivity(w,p,{kind:'withdraw',label:'Take',goal:'take',targetId:0,targetType:'building',tx:p.x,ty:p.y,spotX:p.x,spotY:p.y,data:{items:{wood:1}}});
+  p.activity = a; observer.attach(w); observer.sampleTick(w);
+  w.hooks!.onActivityEnd!(p,a,'failed','nothing to take');
+  expect(observer.rows()).toHaveLength(1);
+  expect(observer.report().counts.endedWithoutBeingSeen).toBe(0);
+});
+
+it('attributes walking ticks to age at each tick when a twelfth birthday occurs mid-walk', () => {
+  const w = world('river'), p = w.persons[0], trip = new TripShape();
+  for (const person of w.persons) person.activity = null;
+  p.birthTick = w.tick - AGE_CHILD * TICKS_PER_YEAR + 1;
+  p.activity = newActivity(w,p,{kind:'wander',label:'Walk',goal:'walk',tx:p.x+3,ty:p.y,spotX:p.x+3,spotY:p.y});
+  p.activity.phase='travel';
+  trip.sampleTick(w); w.tick++; trip.sampleTick(w); trip.finish(w);
+  const r = trip.report();
+  expect(r.selfChecks.tripTicksByStageEqualOwnCounts).toBe(true);
+  expect(r.counts.byStage.under_12.walkingTicks).toBe(1);
+  expect(r.counts.byStage['12_and_over'].walkingTicks).toBe(1);
+  expect(trip.tripRows()[0].walkingTicksByStage).toEqual({ under_12: 1, '12_and_over': 1 });
+});
 
 it('leaves a watched world byte-identical to an unwatched twin, on three seeds', () => {
   for (const seed of ['river', 'aspen', 'birch']) {
@@ -120,3 +174,21 @@ it('OutdoorCompany: the parts of the day add up and each count is inside the one
   expect(r.shares.all.company).toBeGreaterThanOrEqual(0);
   expect(r.shares.all.company).toBeLessThanOrEqual(1);
 }, 60000);
+import { newCart } from '../src/sim/carts';
+import { transfer } from '../src/sim/economy';
+it('records observed cart transfers against the last observed cart walk and chains the transfer hook', () => {
+  const w = world('river'), p = w.persons[0], cart = newCart(w,p.x,p.y,p.hhId), trip = new TripShape(), calls: string[] = [];
+  cart.puller=p.id; p.cartId=cart.id;
+  const a = newActivity(w,p,{kind:'cart_haul',label:'Haul',goal:'haul',tx:p.x+3,ty:p.y,spotX:p.x+3,spotY:p.y,data:{cartId:cart.id}});
+  p.activity=a; a.phase='travel'; w.hooks={onTransfer:i=>calls.push(i.reason)};
+  const detach=trip.attach(w); a.phase='work';
+  const source: {stone?:number} = {stone:4};
+  expect(transfer(w,source,cart.load,99,'stone',4,'building:123',`cart:${cart.id}`,'load')).toBe(4);
+  a.phase='travel'; trip.sampleTick(w);
+  a.phase='work'; const delivered: {stone?:number} = {};
+  expect(transfer(w,cart.load,delivered,99,'stone',4,`cart:${cart.id}`,'site:123','delivery')).toBe(4);
+  expect(delivered.stone).toBe(4);
+  trip.finish(w); detach(); const row=trip.tripRows().find(x=>x.actId===a.id)!;
+  expect(calls).toEqual(['load','delivery']); expect(row.cartTransfers).toEqual([{tick:w.tick,from:'building:123',to:`cart:${cart.id}`,item:'stone',n:4,reason:'load'}, {tick:w.tick,from:`cart:${cart.id}`,to:'site:123',item:'stone',n:4,reason:'delivery'}]);
+  expect(row.moved).toBeNull(); expect(row.goal).toBe('haul');
+});

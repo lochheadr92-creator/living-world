@@ -46,7 +46,7 @@ export function communalStockOptions(ctx:Ctx):void{
  }
  if(total){
   const walk=eta(ctx,b.x,b.y),sc=new Scorer().add('spare materials for whoever works next',20+Math.min(total,8)+4*p.traits.generosity).add('walking',-pen(walk)),util=sc.total*nightMult(ctx)*weatherMult(ctx);
-  addOption(ctx,{kind:'deposit',label:'Stack spare materials at the communal store',goal:'leave real building and repair supplies for others',need:null,util,parts:sc.parts,eta:walk+20,key:`communal_stock:${b.id}`,targetId:b.id,tag:'store',make:()=>{
+  addOption(ctx,{kind:'deposit',label:'Stack spare materials at the communal store',goal:'leave real building and repair supplies for others',need:null,util,parts:sc.parts,eta:walk+20,key:`communal_stock:${b.id}`,cargo:items,targetId:b.id,tag:'store',make:()=>{
    const spot=spotNear(w,p,b);if(!spot)return null;
    return newActivity(w,p,{kind:'deposit',label:'Stacking communal materials',goal:'supplies for the next builder',targetId:b.id,targetType:'building',tx:b.x,ty:b.y,spotX:spot.x,spotY:spot.y,utility:util,minCommit:30,maxTicks:600,data:{items,communalStock:true}});
   }});return;

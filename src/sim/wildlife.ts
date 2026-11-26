@@ -101,6 +101,10 @@ export function setWolfSearchMemory(on: boolean): void {
   rememberFailures = on;
 }
 
+export function localAnimalPath(world: World, sx: number, sy: number, tx: number, ty: number): number[] | null {
+  return findPath(world, sx, sy, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+}
+
 function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | null {
   const tile = (v: number, max: number): number => Math.min(max - 1, Math.max(0, Math.floor(v)));
   const sx = tile(a.x, world.W);
@@ -111,7 +115,7 @@ function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | n
   let mine = failedSearches.get(world);
   const last = mine?.get(a.id);
   if (rememberFailures && last && last.sx === sx && last.sy === sy && last.gx === gx && last.gy === gy && last.epoch === epoch) return null;
-  const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+  const path = localAnimalPath(world, a.x, a.y, tx, ty);
   if (!rememberFailures) return path;
   if (path) mine?.delete(a.id);
   else {
@@ -275,7 +279,7 @@ function bite(world: World, a: Animal, t: Person): void {
 export function isThreat(world: World, s: { id: number; ent: string }): boolean {
   if (s.ent !== 'animal') return false;
   const a = world.byId.get(s.id);
-  return !a || a.ent !== 'animal' || a.type !== 'deer' && a.type !== 'sheep';
+  return !a || a.ent !== 'animal' || a.type !== 'deer' && !a.sheep;
 }
 
 /** an animal leaves the world (a deer brought down) */
@@ -378,7 +382,7 @@ export function updateWildlife(world: World): void {
   deerTick(world);
   const night = world.light < 0.3;
   for (const a of world.animals) {
-    if (a.type === 'sheep') continue;
+    if (a.sheep) continue;
     if (a.type === 'deer') {
       updateDeer(world, a);
       continue;

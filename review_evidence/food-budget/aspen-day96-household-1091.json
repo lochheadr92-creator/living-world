@@ -1,0 +1,233 @@
+{
+  "seed": "aspen",
+  "tick": 230400,
+  "rules": 256,
+  "unit": "nutrition points",
+  "demandBasis": "ordinary awake day",
+  "localWalkingSteps": 12,
+  "householdId": 1091,
+  "members": 5,
+  "missing": 0,
+  "dailyDemand": 270.72,
+  "carried": 276,
+  "reserved": 12,
+  "nearbyStores": 924,
+  "usable": 1200,
+  "foodDays": 4.4326241134751765,
+  "oneDayShortfall": 0,
+  "distant": 550,
+  "blocked": 88,
+  "inaccessible": 24016,
+  "standingGrain": 0,
+  "growingPlots": 7,
+  "stores": [
+    {
+      "id": 6758,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 60
+    },
+    {
+      "id": 7739,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 232
+    },
+    {
+      "id": 15541,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 76
+    },
+    {
+      "id": 16650,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 36
+    },
+    {
+      "id": 17825,
+      "type": "granary",
+      "nearby": 858,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 9570
+    },
+    {
+      "id": 18153,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 12
+    },
+    {
+      "id": 35405,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 60
+    },
+    {
+      "id": 39137,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 12
+    },
+    {
+      "id": 39664,
+      "type": "mill",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 22,
+      "inaccessible": 0
+    },
+    {
+      "id": 41128,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 24
+    },
+    {
+      "id": 42599,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 76
+    },
+    {
+      "id": 49483,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 144
+    },
+    {
+      "id": 55474,
+      "type": "bakery",
+      "nearby": 0,
+      "distant": 22,
+      "blocked": 0,
+      "inaccessible": 0
+    },
+    {
+      "id": 57513,
+      "type": "granary",
+      "nearby": 0,
+      "distant": 506,
+      "blocked": 0,
+      "inaccessible": 9768
+    },
+    {
+      "id": 57910,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 28
+    },
+    {
+      "id": 68171,
+      "type": "bakery",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 66,
+      "inaccessible": 0
+    },
+    {
+      "id": 75494,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 92
+    },
+    {
+      "id": 88319,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 16
+    },
+    {
+      "id": 96207,
+      "type": "granary",
+      "nearby": 66,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 3642
+    },
+    {
+      "id": 100888,
+      "type": "lean_to",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 28
+    },
+    {
+      "id": 105794,
+      "type": "bakery",
+      "nearby": 0,
+      "distant": 22,
+      "blocked": 0,
+      "inaccessible": 0
+    },
+    {
+      "id": 130633,
+      "type": "lean_to",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 12
+    },
+    {
+      "id": 140897,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 64
+    },
+    {
+      "id": 148664,
+      "type": "hut",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 24
+    },
+    {
+      "id": 148968,
+      "type": "hut",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 12
+    },
+    {
+      "id": 176895,
+      "type": "cellar",
+      "nearby": 0,
+      "distant": 0,
+      "blocked": 0,
+      "inaccessible": 28
+    }
+  ]
+}

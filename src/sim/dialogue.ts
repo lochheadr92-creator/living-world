@@ -1,7 +1,7 @@
 import { nearestHub } from './settlements';
 import { hashUnit } from './rng';
 import { compass } from './labels';
-import { BELIEF_NOUN } from './labels';
+import { beliefNoun } from './labels';
 import { dayFraction } from './environment';
 import type { Belief, ItemKind, World } from './types';
 
@@ -58,6 +58,7 @@ export function smallTalk(world: World, a: number, b: number, atFire: boolean, c
 }
 
 export const ITEM_PHRASE: Record<ItemKind, string> = {
+  milk:'milk', cheese:'cheese', egg:'an egg', pork:'pork', bacon:'bacon', leather:'leather', stock_feed:'grain feed', hay:'hay', gloves:'gloves', shoes:'shoes',
   rod:'a fishing rod',
   toy:'a toy',
   beer:'a brewed drink',
@@ -191,7 +192,7 @@ export function infoLine(world: World, b: Belief, a: number, c: number): string 
     const what = b.kind === 'berry_bush' ? 'berry bushes' : b.kind === 'fruit_tree' ? 'fruit trees' : b.kind === 'wild_grain' ? 'wild grain' : 'fishing spot';
     return saying(['Don’t bother with the {thing} {where}: picked clean.', 'The {thing} {where} are bare now.', 'Nothing left at the {thing} {where}.'], a, c, 29, { thing: what, where: placeWords(world, b) });
   }
-  const noun = b.kind === 'berry_bush' ? 'berry bushes' : b.kind === 'fruit_tree' ? 'fruit trees' : b.kind === 'wild_grain' ? 'wild grain' : b.kind === 'fish_spot' ? 'good fishing' : b.kind === 'rock' ? 'stone' : b.kind === 'tree' ? 'good timber' : BELIEF_NOUN[b.kind];
+  const noun = b.kind === 'berry_bush' ? 'berry bushes' : b.kind === 'fruit_tree' ? 'fruit trees' : b.kind === 'wild_grain' ? 'wild grain' : b.kind === 'fish_spot' ? 'good fishing' : b.kind === 'rock' ? 'stone' : b.kind === 'tree' ? 'good timber' : beliefNoun(world, b.kind);
   const lists = ['There’s {thing} {where}.', 'I saw {thing} {where}, {ago}.', 'Try {where} — {thing}, {ago}.'];
   return saying(lists, a, c, 23, { thing: noun, where: placeWords(world, b), ago: agoText(world, b.seen) });
 }

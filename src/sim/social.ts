@@ -1,3 +1,5 @@
+import { practiseOccupation } from './occupation';
+import { FARM_FOODS } from './constants';
 import { giveToy } from './toys';
 import { PROPOSE_AFFINITY, PROPOSE_AFFINITY_WALKED, WALKS_FOR_PROPOSAL, beginCourtWalk, courtRefusal, noteCourtRefusal, noteCourtYes } from './courting';
 import { hasCourting } from './meeting';
@@ -85,7 +87,7 @@ import { adjustRel, relOf, spark } from './relations';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
-import { BELIEF_NOUN } from './labels';
+import { beliefNoun } from './labels';
 import { easeGrievance, endGrievanceOnGift, openGrievance, quarrelDamper, settleBoth } from './grievance';
 import { inviteAsk, inviteRespond, mealReserved } from './meals';
 import { shareConcerns } from './welfare';
@@ -112,7 +114,7 @@ export function personOf(world: World, id: number): Person | null {
   return e && e.ent === 'person' && e.alive ? e : null;
 }
 
-const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
 
 export function isFood(k: ItemKind): boolean {
   return FOODS.includes(k);
@@ -200,6 +202,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
+  milk:2, cheese:4, egg:1, pork:3, bacon:4, leather:3, stock_feed:1, hay:1, gloves:5, shoes:6,
   rod:5,
   toy:1,
   beer:2,
@@ -1054,6 +1057,8 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
       recordCompany(world,A,B,c.data.giftReceipt?.outcome==='received gift'||taught&&c.purpose==='teach_technique');
       recordCompany(world,B,A,taught&&c.purpose==='learn_technique');
     }
+    if (c.lesson?.outcome==='learned') practiseOccupation(world,c.purpose==='teach_technique'?A:B,'Teacher');
+    if (c.skillLesson?.outcome==='learned') practiseOccupation(world,B,'Teacher');
     A.wave = world.tick + 20;
     B.wave = world.tick + 24;
   }
@@ -1349,6 +1354,7 @@ export function answerRecruit(world: World, A: Person, B: Person, req: Request, 
   // rules 187: the term that decided it, recomputed from the same pure inputs; `w` above is untouched
   const answerWhy = hasAnswerCause(world) ? answerCause({ w, experience: projectAt(world, siteId) ? organiserExperience(B, A.id, world) : 0, affinity: 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100, chance: (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15, drive: 0.5 * (personalDriveMax(world, B) / 100), kin: rel?.kin ? 0.2 : 0, asker: A.name }) : undefined;
   if (w >= 0.55 && siteBelief && (projectAt(world, siteId) || world.byId.has(siteId))) {
+    practiseOccupation(world,A,'Organiser');
     observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
     if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
     addCommitment(world, B, req, { kind: 'help_build', siteId: siteId, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: siteId, milestone: 'work on it or bring materials' });
@@ -1620,7 +1626,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           return told;
         });
         bubble(world, B, D.infoLine(world, belief, B.id, A.id), 'say', 70);
-        settle(world, req, 'fulfilled', `told about a ${BELIEF_NOUN[belief.kind]}`);
+        settle(world, req, 'fulfilled', `told about a ${beliefNoun(world, belief.kind)}`);
         adjustRel(A, B.id, world.tick, { aff: 1.6, trust: 1.2, note: `${B.name} told me where to find ${d.infoKind ?? 'food'}` });
         A.errand = null;
         c.data.thank = true;
@@ -1711,7 +1717,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     case 'mediate': {
       const other = d.pair ? personOf(world, d.pair) : null;
       if (!other) break;
+      const sore = !!B.relations[other.id]?.grievance;
       const out = mediate(world, A, B, other);
+      if (sore && (out==='peace' || out==='eased')) practiseOccupation(world,A,'Mediator');
       if (out === 'peace') bubble(world, B, 'You’re right. I’ll let it lie.', 'happy', 56);
       else if (out === 'eased') bubble(world, B, 'Maybe. I’ll think on it.', 'say', 54);
       else if (out === 'worse') {
@@ -1790,6 +1798,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           bubble(world, B, D.saying(D.TRADE_OK, B.id, A.id, world.tick >> 5), 'say', 46);
           adjustRel(A, B.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
+          practiseOccupation(world,A,'Trader');
+          practiseOccupation(world,B,'Trader');
           addEvent(world, 'trade', `${A.name} swapped ${m2} ${take} for ${m1} ${give} with ${B.name}.`, [A.id, B.id], A.x, A.y);
           addLog(world, A, 'social', `Traded ${m2} ${take} for ${m1} ${give} with ${B.name}.`);
           addLog(world, B, 'social', `Traded ${m1} ${give} for ${m2} ${take} with ${A.name}.`);
@@ -1828,7 +1838,7 @@ export function flushDelayedBubbles(world: World): void {
 function phaseNews(world: World, S: Person, L: Person): void {
   if(hasExchangeJourneys(world)){
     const goods:Items={};
-    for(const k of ['wood','stone','berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
+    for(const k of ['wood','stone','berries','fruit','fish','grain','dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat', ...FARM_FOODS] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
     tellTradeLead(world,S,L,goods);
   }
   shareConcerns(world, S, L);

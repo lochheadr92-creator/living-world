@@ -9,7 +9,7 @@ import { elderFactor } from './life';
 import { isThreat } from './wildlife';
 import { hasHabitation, indoorHome } from './habitation';
 import { runsRulesVersion } from './rulesversion';
-import type { NeedKey, Person, World } from './types';
+import type { NeedKey, Person, Stage, World } from './types';
 import { clamp, hyp } from './util';
 
 /** 0..100 pressure a need puts on decisions (0 = comfortable). */
@@ -82,6 +82,11 @@ function isHeavyWork(kind: string): boolean {
   return kind === 'animal_work' || kind === 'gear_work' || kind === 'butcher' || kind === 'gather' || kind === 'build' || kind === 'till' || kind === 'harvest' || kind === 'repair' || kind === 'haul' || kind === 'craft';
 }
 
+/** Shared age and climate multiplier for food and water demand. */
+export function demandMultiplier(world: World, stage: Stage): number {
+  return (stage === 'child' ? 0.85 : 1) * (world.settings.harsh ? 1.18 : 1);
+}
+
 export function updateNeeds(world: World, p: Person): void {
   const n = p.needs;
   const stage = stageOf(world, p);
@@ -93,10 +98,12 @@ export function updateNeeds(world: World, p: Person): void {
   const w = world.weather;
 
   // hunger / thirst
-  const kidMul = (stage === 'child' ? 0.85 : 1) * (world.settings.harsh ? 1.18 : 1);
-  n.hunger -= hungerRate(world) * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1); // rules 195: the base rate is the world's (metabolism.ts)
+  const kidMul = demandMultiplier(world, stage);
+  const foodDemand = hungerRate(world) * kidMul * (sleeping ? 0.55 : heavy ? 1.25 : running ? 1.3 : 1); // rules 195: the base rate is the world's (metabolism.ts)
+  n.hunger -= foodDemand;
   let starvationFraction=1;
   if(hasNourishment(world)){const deficit=Math.max(0,-n.hunger),covered=spendNourishment(world,p,deficit,'shortage');if(deficit>0)starvationFraction=1-covered/deficit;}
+  world.hooks?.onFoodDemand?.(p, stage, foodDemand, Math.max(0, -n.hunger) * starvationFraction);
   const heat = Math.max(0, w.temp - 19) * 0.04;
   n.thirst -= thirstRate(world) * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
 

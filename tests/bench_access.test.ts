@@ -11,8 +11,10 @@ import { generateOptions } from '../src/sim/decision';
 import { addEarmark, usableUnits, withdrawAllowance } from '../src/sim/facilities';
 import { observe } from '../src/sim/knowledge';
 import { perceive } from '../src/sim/perception';
+import { benchStock } from '../src/sim/site_supply';
+import { ironWanted } from '../src/sim/smithy_iron';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
-import { stepWorld } from '../src/sim/world';
+import { hashWorld, stepWorld } from '../src/sim/world';
 import { addPerson, building, done, pin, site, stage } from './helpers/kit';
 
 afterEach(() => { setBenchAccess(true); });
@@ -110,6 +112,43 @@ describe("rules 257: a workshop's goods count only for who may take them", () =>
     expect(collect(f)).toBeDefined();
   });
 
+  it('from rules 266 a household\'s share of the building counts as she last saw it', () => {
+    const f = fixture(266, { yard: 'other' });
+    expect(collect(f)).toBeUndefined();
+    f.yard.ops!.builders[f.p.hhId] = 0.3;
+    expect(collect(f)).toBeUndefined(); // a remote change has not been observed
+    observe(f.w, f.p, f.yard);
+    expect(collect(f)).toBeDefined();
+  });
+
+  it('includes remembered workshop claims in the fingerprint', () => {
+    const f = fixture(266, { earmark: 'ben' });
+    const before = hashWorld(f.w);
+    f.p.beliefs[f.yard.id].ops!.held = [];
+    expect(hashWorld(f.w)).not.toBe(before);
+    const afterClaims = hashWorld(f.w);
+    f.p.beliefs[f.yard.id].ops!.seenBuilders = { [f.p.hhId]: 0.3 };
+    expect(hashWorld(f.w)).not.toBe(afterClaims);
+  });
+
+  it('uses the same remembered access for batch input counting', () => {
+    const f = fixture(257, { earmark: 'ben' });
+    const b = f.p.beliefs[f.yard.id];
+    expect(benchStock(f.w, b, 'planks', 1, f.p)).toBe(0);
+    setBenchAccess(false);
+    expect(benchStock(f.w, b, 'planks', 1, f.p)).toBe(4);
+  });
+
+  it('does not count somebody else\'s earmarked iron against the smithy\'s standing want', () => {
+    const f = fixture(257, { earmark: null });
+    const b = f.p.beliefs[f.yard.id];
+    b.ops!.output.iron = 4;
+    b.ops!.held = [{ owner: f.ben.id, item: 'iron', n: 4, until: f.w.tick + 100 }];
+    const withAccess = ironWanted(f.w, [b], f.p);
+    setBenchAccess(false);
+    expect(withAccess).toBeGreaterThan(ironWanted(f.w, [b], f.p));
+  });
+
   it('a belief with no record of earmarks plans as before', () => {
     const f = fixture(257, { earmark: 'ben' });
     delete f.p.beliefs[f.yard.id].ops!.held;
@@ -121,6 +160,7 @@ describe("rules 257: a workshop's goods count only for who may take them", () =>
     const back = deserializeWorld(serializeWorld(f.w));
     const p = back.persons.find((q) => q.id === f.p.id)!;
     expect(p.beliefs[f.yard.id].ops?.held).toEqual(f.p.beliefs[f.yard.id].ops?.held);
+    expect(p.beliefs[f.yard.id].ops?.seenBuilders).toEqual(f.p.beliefs[f.yard.id].ops?.seenBuilders);
     const bad = (mut: (h: any[]) => void) => {
       const g = fixture(257, { earmark: 'ben' });
       mut(g.p.beliefs[g.yard.id].ops!.held as any[]);
@@ -129,6 +169,9 @@ describe("rules 257: a workshop's goods count only for who may take them", () =>
     expect(bad((h) => { h[0].n = 1.5; })).toThrow();
     expect(bad((h) => { h[0].item = 'not_a_thing'; })).toThrow();
     expect(bad((h) => { h[0].owner = 'x'; })).toThrow();
+    const badBuilders = fixture(266);
+    (badBuilders.p.beliefs[badBuilders.yard.id].ops as any).seenBuilders = { 1: -1 };
+    expect(() => deserializeWorld(serializeWorld(badBuilders.w))).toThrow();
     const old = fixture(256, { earmark: 'ben' });
     old.p.beliefs[old.yard.id].ops!.held = [];
     expect(() => deserializeWorld(serializeWorld(old.w))).toThrow(); // a record the rules do not run

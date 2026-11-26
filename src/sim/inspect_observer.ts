@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 // Derived observer views for the compact resident card and the full character viewer (ui/person.ts): a one-line status, the
 // immediate intent and its place on the map, a provenance cue for the thing the person is acting on, the carried goods that
 // matter to the current action, the work set aside that can resume, what they know listed item by item with source and age,
@@ -86,7 +87,7 @@ const CRIT_WORD: Record<NeedKey, string> = { hunger: 'starving', thirst: 'parche
 const HELP_KINDS = new Set<Activity['kind']>(['care', 'give', 'fulfill', 'visit', 'return_tool']);
 const REST_KINDS = new Set<Activity['kind']>(['sleep', 'rest', 'warm']);
 const TALK_KINDS = new Set<Activity['kind']>(['converse', 'socialize', 'argue', 'attend_meal', 'host_meal', 'attend']);
-const FOOD: ReadonlySet<string> = new Set(['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat']);
+const FOOD: ReadonlySet<string> = new Set(['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS]);
 
 /** One line answering "is anything the matter?", from the most pressing fact down to "no immediate problem". */
 export function statusLine(world: World, p: Person): StatusView {

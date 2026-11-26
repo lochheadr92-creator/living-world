@@ -20,6 +20,11 @@ import { arrivalPaceOn, setArrivalPace } from '../../src/sim/arrival_pace';
 import { setTreeRegrowth, treeRegrowthOn } from '../../src/sim/tree_regrowth';
 import { GROW_MORE_PARTS, growMorePartOn, setGrowMore } from '../../src/sim/grow_more';
 import type { GrowMorePart } from '../../src/sim/grow_more';
+import {grainBoostOn,setGrainBoost} from '../../src/sim/plenty';
+import {herdValueOn,setHerdValue} from '../../src/sim/herd_value';
+import { batchPriorityOn, setBatchPriority } from '../../src/sim/batch_priority';
+import { gatherReviewOn, setGatherReview } from '../../src/sim/gather_review';
+import { workshopErrandOn, setWorkshopErrand } from '../../src/sim/workshop_errand';
 import { benchAccessOn, setBenchAccess } from '../../src/sim/bench_access';
 import { FARM_DRAW_PARTS, farmDrawPartOn, setFarmDraw } from '../../src/sim/farm_draw';
 import type { FarmDrawPart } from '../../src/sim/farm_draw';
@@ -367,6 +372,31 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-together-scenes' ? undefined : (kind.slice('rich-no-together-'.length) as TogetherScenePart);
     const what: Record<TogetherScenePart, string> = { side: 'nobody walks over to speak up for one side of a quarrel', speech: 'nobody speaks for a shared building at the fire or at an occasion: support is asked for one person at a time, as before', fetch: 'nobody asks a neighbour to come along when a household member is missing after dark: the worrier goes alone, as before' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the together bundle: nobody stands up for a side, speaks for a shared building before company, or asks a neighbour to come and fetch a household member home after dark'}, as before rules 264; no effect below rules 264`, install() { const was = Object.fromEntries(TOGETHER_SCENE_PARTS.map((q) => [q, togetherScenePartOn(q)])) as Record<TogetherScenePart, boolean>; setTogetherScenes(false, part); return () => { for (const q of TOGETHER_SCENE_PARTS) setTogetherScenes(was[q], q); }; } };
+  }
+  if(label==='rich-no-grain-boost'){
+    return {spec:label,summary:'Use previous grain yields and regrowth with livestock feed available',install(){
+      const prior=grainBoostOn();setGrainBoost(false);return ()=>setGrainBoost(prior);
+    }};
+  }
+  if(label==='rich-no-herd-value'){
+    return {spec:label,summary:'Use the base livestock priorities and provisioning decisions',install(){
+      const prior=herdValueOn();setHerdValue(false);return ()=>setHerdValue(prior);
+    }};
+  }
+  if (label === 'rich-no-batch-priority') {
+    return { spec: label, summary: 'rank casual breaks and the next batch step by score alone', install() {
+      const prior = batchPriorityOn(); setBatchPriority(false); return () => setBatchPriority(prior);
+    } };
+  }
+  if (label === 'rich-no-gather-review') {
+    return { spec: label, summary: 'review a gathering trip against the first offer at its source', install() {
+      const prior = gatherReviewOn(); setGatherReview(false); return () => setGatherReview(prior);
+    } };
+  }
+  if (label === 'rich-no-workshop-errand') {
+    return { spec: label, summary: 'use only the nearest workshop when reviewing an input errand', install() {
+      const was = workshopErrandOn(); setWorkshopErrand(false); return () => setWorkshopErrand(was);
+    } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

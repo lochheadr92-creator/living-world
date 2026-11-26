@@ -31,6 +31,10 @@ export function setBenchAccess(enabled: boolean): void { on = enabled; }
 export const hasBenchAccess = (world: World): boolean => on && world.settings.dynamics === 'rich' && runsRulesVersion(world, BENCH_ACCESS_FROM);
 /** whether this build may hold a `held` record at all: the rules, not the lab switch, say so (a save is judged by this) */
 export const runsBenchRecord = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, BENCH_ACCESS_FROM);
+/** Rules 266 (from the withdrawal branch, merged 27 November 2026): a sight of a workshop also records its builders' shares, and the free stock opens on the
+ *  shares as this person last saw them. Rules 257 to 265 read the shares from the building itself and record none. The rules say so, not the lab switch. */
+export const SEEN_BUILDERS_FROM = 266;
+export const runsSeenBuilders = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, SEEN_BUILDERS_FROM);
 
 /** One earmark as a sight records it. */
 export interface HeldEarmark { owner: number; item: ItemKind; n: number; until: number }
@@ -43,6 +47,8 @@ export function heldAtSight(world: World, earmarks: readonly Earmark[]): HeldEar
 /** Do this person's own standing and the workshop's builders open the workshop's free stock to them (owner, communal or builder)? */
 export function opensFreeStock(world: World, p: Person, b: Belief): boolean {
   if (b.hh === 0 || b.hh === p.hhId) return true;
+  // rules 266: the builders' shares count as this person last saw them; before it they are read from the building itself
+  if (runsSeenBuilders(world)) return (b.ops?.seenBuilders?.[p.hhId] ?? 0) >= 0.2;
   const real = world.byId.get(b.id);
   return !!real && real.ent === 'building' && (real.ops?.builders[p.hhId] ?? 0) >= 0.2;
 }
@@ -70,6 +76,8 @@ export function validateHeld(w: World): void {
   for (const p of w.persons) {
     for (const b of Object.values(p.beliefs)) {
       const held = b.ops?.held;
+      const builders = b.ops?.seenBuilders;
+      if (builders !== undefined && (!runsSeenBuilders(w) || !builders || typeof builders !== 'object' || Array.isArray(builders) || Object.entries(builders).some(([id, share]) => !/^\d+$/.test(id) || typeof share !== 'number' || !Number.isFinite(share) || share < 0))) throw new Error('Invalid seen builders');
       if (held === undefined) continue;
       if (!runsBenchRecord(w) || !Array.isArray(held)) throw new Error('Invalid held earmarks');
       for (const e of held) {

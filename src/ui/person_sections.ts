@@ -2,6 +2,7 @@
 // history, household and character, and the debug raw numbers. Each block builds its DOM once and updates in place from the
 // describePerson() view-model; the viewer only calls update on a block whose section is open, so a closed section costs nothing.
 // Nothing in here mutates the world: clicking a place flies the camera, clicking a name selects a person.
+import { householdFoodReserve, foodReserveLines } from '../sim/inspect_household_food';
 import type { HeardView, OpportunityView, PersonView, RelationView, RequestView } from '../sim/inspect';
 import type { KnowledgeItemView, TimelineView, WhereaboutsView } from '../sim/inspect_observer';
 import { cap, h, KeyedList, setBool, setHidden, setState, setText, setVar, setWidth, signed, toggle } from './dom';
@@ -526,6 +527,7 @@ export function createHistoryBlock(ctx: UICtx, hooks: BlockHooks): Block {
 
 // ───────────────────────── household and character ─────────────────────────
 export function createCharacterBlock(ctx: UICtx, hooks: BlockHooks): Block {
+  const reserve = disclosure(ctx, 'foodReserve', 'Household food reserve', hooks);
   const homeEl = h('p', { class: 'p-home' });
   const townEl = h('p', { class: 'p-township' });
   const civic = disclosure(ctx, 'civic', 'Township & shared work', hooks);
@@ -577,12 +579,16 @@ export function createCharacterBlock(ctx: UICtx, hooks: BlockHooks): Block {
   );
   const customerHead = h('div', { class: 'sub-h cap' }, 'Their customers');
   const customerBox = h('div', { class: 'list customers' });
-  const footnote = h('p', { class: 'muted hint' }, 'Everything shown is simulation state that the person acts on: traits weigh their choices, skills set their pace, the rest is recorded as it happened. Nothing here is display-only flavour.');
+  const footnote = h('p', { class: 'muted hint' }, 'Traits weigh this person’s choices and skills set their pace. The household food reserve uses the viewer’s knowledge of the settlement.');
 
-  const el = h('div', { class: 'blk' }, homeEl, townEl, civic.el, household.el, relHist.el, traitHead, traitSummary, traitBox, skillHead, skillExplanation, skillBox, lines, payHead, payBox, customerHead, customerBox, footnote);
+  const el = h('div', { class: 'blk' }, homeEl, townEl, reserve.el, civic.el, household.el, relHist.el, traitHead, traitSummary, traitBox, skillHead, skillExplanation, skillBox, lines, payHead, payBox, customerHead, customerBox, footnote);
   return {
     el,
     update(v) {
+      if (reserve.el.open) {
+        const w = ctx.game.world, p = w.byId.get(v.id);
+        textLines(reserve.body, foodReserveLines(p?.ent === 'person' ? householdFoodReserve(w,p.hhId) : null));
+      }
       setText(homeEl, v.home === 'no home yet' ? 'No home yet' : `Home: ${v.home}`);
       setText(townEl, v.civic.township ? `Township: ${v.civic.township}` : 'No township.');
       setHidden(civic.el, !v.civic.township);

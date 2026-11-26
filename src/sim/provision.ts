@@ -1,3 +1,4 @@
+import { FARM_FOODS } from './constants';
 import { openToAll } from './open_workplaces';
 import { seasonReserveCap, seasonReserveDays, seasonWindowDays } from './bigger_reserve';
 import {hasCellars} from './cellars';
@@ -182,17 +183,18 @@ export function setFoodPreparation(on: boolean): void {
 export const preparesFood = (world: World): boolean => preparation && isRich(world) && runsRulesVersion(world, PREPARATION_FROM_VERSION);
 
 /** Everything people eat. What a store HOLDS is counted with this: meat and bread in a home store are food like any other. */
-const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
 /** Is this something people eat? Used by the deposit that credits a reserve, and by every count of what a store holds. */
 export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[]).includes(k);
 
-/**
- * The food a trip home would actually put down. It is NOT the same list: `optDepositFood` offers to store grain, fish, fruit
- * and berries and nothing else, and `foodCount` (optutil.ts) counts the same four. Deciding to walk home on the strength of
- * five units of meat would settle on a step the engine never offers, so the step threshold reads this list and the question
- * "has this household anything to hand" reads the full one.
- */
-const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
+/** Food a normal storage trip can deliver, in loading order. */
+const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
+
+const MEAT_FIRST: readonly FoodKind[] = ['meat', 'pork', ...STORABLE.filter(k => k !== 'pork')];
+export const sharesFreshMeat = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world,272);
+export function storageFoods(world: World): readonly FoodKind[] {
+  return sharesFreshMeat(world) ? MEAT_FIRST : STORABLE;
+}
 
 /** units of food in a remembered container, from the person's own belief and nothing else */
 export function foodInBelief(b: Belief): number {
@@ -209,9 +211,9 @@ export function foodCarried(p: Person): number {
 }
 
 /** of that, the units a trip home could actually put into the store */
-export function foodToStore(p: Person): number {
+export function foodToStore(world: World, p: Person): number {
   let n = 0;
-  for (const k of STORABLE) n += p.inv[k] ?? 0;
+  for (const k of storageFoods(world)) n += p.inv[k] ?? 0;
   return n;
 }
 

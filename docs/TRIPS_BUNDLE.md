@@ -5,8 +5,8 @@ Stage 2 of the plan of 17 November 2026 (brain note `knowledge/living-world/2026
 | part | rules | status | lab arm |
 |---|---|---|---|
 | A, `bench_access` | 257 | built | `rich-no-bench-access` |
-| B, `load_worth` and `put_down` | not claimed | waits for its pack measurement | |
-| C, `walk_stick` | not claimed | waits for its detour measurement | |
+| B, `load_worth` and `put_down` | not claimed | [Pack measurement](../review_evidence/pack-20261119/RESULTS.md) completed. The near-home stocking change failed its reach threshold. | |
+| C, `walk_stick` | not claimed | [Detours measured](../review_evidence/walk-step4-20261119/RESULTS.md). The old option was absent in most sampled job switches at every start. | |
 
 The size is small and the designs say so: the three pieces are 0.8 to 1.7%, 3.2 to 3.3% and 6.8 to 8.8% of awake person ticks, against a gap of 15 to 18 points to the 30% of waking time the plan asks for. Nothing here is expected to close it alone. The parts remove plain mismatches and find out whether the walking is a lever at all.
 
@@ -40,6 +40,14 @@ Not changed, on purpose: the transfer rules (nobody gains or loses a right to an
 
 ### Measure (reading fixed before the run; the thresholds are Claude's and Ryan may veto them)
 
-Row: the share of adult withdraws that take nothing (29 to 40% at rules 250) and the share of adult walking ticks spent on them (2.2 to 4.1%). Reading: the empty share falls by at least half in every start. If it does not, the mechanism reading is wrong and the report names which class of empty withdraw remains (earmarked, guest, race, stale). This needs the withdraw counter (the scratch observer `withdraw_check.ts`, not one of the three observers Stage 1c landed): landing it, or adding the row to the lab, is the next step of this part.
+Row: the share of adult withdraws that take nothing (29 to 40% at rules 250) and the share of adult walking ticks spent on them (2.2 to 4.1%). Reading: the empty share falls by at least half in every start. If it does not, the mechanism reading is wrong and the report names which class of empty withdraw remains (earmarked, guest, race, stale). This needs the withdraw counter (the scratch observer `withdraw_check.ts`, not one of the three observers Stage 1c landed): the standalone continuation probe now supplies that row. Results and observer limitations for all six starts are in [the paired comparison](../review_evidence/withdraw-baseline-20261119/RESULTS.md).
 
 Rollback: switch the part off (`rich-no-bench-access`). The `held` field stays in saved beliefs and is ignored.
+
+The reconciled implementation validates and fingerprints both remembered earmarks and builder shares. For a draft-257 belief with earmarks but no recorded builder share, the builder route to free goods becomes available after a fresh sight.
+
+## Part C. Keep a valid workshop input errand (rules 266)
+
+A production withdrawal records the intended workshop and recipe on its activity. During travel review, if a different workshop is now nearest, the planner also checks the original workshop for that recipe. It retains the existing store-and-item option only when the ordinary planner still offers it for the same goal. Current demand, access, recent failure, workshop state, available stock, carrying room and urgent interruptions still apply. Older activities without the two optional fields finish under ordinary review. The lab removal is `rich-no-workshop-errand`.
+
+In three paired continuations immediate returns to the first store fell from 22 to zero. Finished workshop operations moved in both directions. The [decision trace and comparison](../review_evidence/store-return/RESULTS.md) gives the sample and its limits.
