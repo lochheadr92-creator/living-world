@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "6624924a2d1ca9049b6a013ef8dcb1acea0769bc",
+    "rules": 279,
+    "content": "0ced7d0c8630a63f0d0c50365eeb489fe49c2b77ca1c645d9f641d1253867f2d",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 279, saved and continued 120 ticks. One pin for rules 279 alone, the lying-in repair (src/sim/birth_help.ts lyingInBegin: from 279 a child born while the woman is still walking to her door leaves no lying-in mark and no line; staleLyingIn, called at the end of lifeTick in src/sim/lifecycle.ts, clears a mark that has no child expected or is older than a day and a third; validateBirthHelp no longer refuses such a mark, for any version). It is the same world, tick and continuation length as the rules 278 pin, written with a copy of its helper (tests/helpers/v279ref.ts), so the two can be compared digest by digest. Rules 279 adds no saved field, no draw and no feed line; the counts beside the digests are the same kind as the 278 pin's and are of the saved world. This pin was not probed for whether anyone in this world is walking to a lie-in rest when her child comes within the 120 continued ticks: the repair itself is shown by the staged scenes of tests/birth_help.test.ts, and this pin holds whatever this world does at 279."
+  },
+  "saved": "9557e0946dbf34e1c2e0566719f7797f1c5153d84563bd79f5957d2f1c579d45",
+  "continued": "15966f93ee79181646c7a0d609c5a1b36e48cb0cbcbc32338bac8a2a3d60b185",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 41,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 2,
+  "housedAnimals": 0,
+  "farmBuildings": {
+    "barn": 10,
+    "chicken_cage": 1,
+    "paddock": 12
+  },
+  "farmGoods": {
+    "hay": 102,
+    "pork": 3,
+    "stock_feed": 91,
+    "wool": 3
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 186
+}
