@@ -91,25 +91,31 @@ The owner's complaint: the director was still picking up people falling asleep i
 screen time after dark was on somebody asleep or going to bed (20.1% of all of it), and 63 of 511 shots started on such a person. What changed
 (`abed(p)` in `director_live.ts`: alive, and `pose` 'sleep' or activity 'sleep'):
 - A shot never starts on somebody abed. An event is shown about the first of its people who is up; a lighter event (under 80) whose living
-  people are all abed waits, its wait clock stopped (it still goes stale after a day), and a TOP event is shown about the first living one all the
-  same. The filler candidate is not shown while its person is abed. Conversations, anger or warnings, trouble (hurt, unwell, at risk), a walk out
-  and a search party never follow somebody abed. A stalking wolf follows the person who is up (its target, else the nearest); when everybody
+  people are all abed waits, its wait clock stopped (it still goes stale after a day); a TOP event whose people are all abed starts as a shot of the
+  place (the event's own x, y, else the lit fire nearest the people). The filler candidate waits while its person is abed. A live candidate is
+  dropped if its person has gone to bed since the scan (read once a second). Conversations, anger or warnings, trouble (hurt, unwell, at risk), a
+  walk out and a search party never follow somebody abed. A stalking wolf follows the person who is up (its target, else the nearest); when everybody
   within `WOLF_NEAR` is abed it is still offered, on the nearest, at 60, under `LIVE_EXEMPT`, so its 60 s cooldown applies. An attacking wolf is as before.
-- A shot whose person goes to bed is spent (`Shot.spent`): after `MIN_HOLD` for an event or filler shot, `MIN_CUT` for a live one (never a wolf's). It
-  has no caption, a waiting MIDDLE or TOP event takes it at once, and at the hold anything replaces it with no linger.
+- An event or filler shot whose person has been abed for `MIN_CUT` (unbroken), before the hold is up, is re-pointed with its caption and its age:
+  to the next of its people who is up, else to the place. `rev` is bumped so the camera moves; `counts.repointed` counts them.
+- A shot whose person is abed when the hold is up (a live shot: after `MIN_CUT`) is spent (`Shot.spent`, never a wolf's): no caption, a waiting
+  MIDDLE or TOP event takes it, else anything replaces it at once with no linger, so it is read only inside a step.
 - Something to cut to: an ambient candidate (`live:ambient`, key `amb:<id>`) for each person who is up and outdoors, 5, 6 more when at the work
-  itself, 2 for each other such person within 4 tiles up to 8, so 5 to 19, under every other live score (plain chat is 20). It is used only when
-  there is no shot, or the shot is spent or its live thing has ended, and after the filler candidate; the 60 s cooldown applies.
+  itself, 2 for each other such person within 4 tiles up to 8, so 5 to 19, under every other live score (plain chat is 20). None for somebody
+  resting at a home of their own household ("Staying at my lean-to"); somebody at the shared fire is one. Used only when there is no shot, or the
+  shot is spent or its live thing has ended, and after the filler candidate; the 60 s cooldown applies.
 - When nobody is up and nothing else is on, the shot becomes the place (`live:quiet`, score 1): the lit fire nearest the people, captioned
   "Everyone is asleep." while nobody at all is up. Anything replaces it at once; it stays until then.
-Re-measured at rules 265 over fresh meadow (12 days) and the saves river-day48 and aspen-day96 raised to 265 (4 days each), the same worlds in both
-arms, director at 1x, commit 964d8291 against this change: screen time on somebody abed 20.5% to 8.1% (after dark 42.3% to 16.7%); shots that
-started on somebody abed 29 of 196 to 5 of 275; stale 54.5% to 38.4%; events of weight 50 and up written 126, shown 93, dropped stale 26, dropped for a full
-queue 2, the same in both. The new shots cost cuts: 24.5 to 34.4 per 10 minutes, ambient shots being 22% of screen time. What is left is the wait for the
-hold (spent shots 5.0%), TOP events and wolves. At 4x the hold is a quarter of a world day, so it only goes from 22.2% to 19.0% (dark 45.7% to 39.0%).
+Re-measured at rules 265 over fresh meadow (12 days) and the saves river-day48 and aspen-day96 raised to 265 (4 days each), the same world in every
+arm (end hashes equal), director at 1x, pooled, main at 964d8291 / first commit be16a13a (a shot spent only at the hold) / this change:
+screen time on somebody abed 20.5% / 8.1% / 2.3% (after dark 42.3% / 16.7% / 4.7%); shots that started on somebody abed 29 of 196 / 5 of 275 / 4 of 287
+(all four wolves); stale 54.5% / 38.4% / 39.2%; events of weight 50 and up written 126, shown 93 / 93 / 92, dropped stale 26 / 26 / 27, dropped for a full
+queue 2. The new shots cost cuts: 24.5 / 34.4 / 35.9 per 10 minutes; ambient is 19% of screen time, 6 s of it on somebody abed (132 s before the
+re-point and the own-home rule). At 4x (the hold is a quarter of a world day) abed went 22.2% / 19.0% / 7.0% (after dark 45.7% / 39.0% / 14.5%). What is
+left at 1x is 109 s of 4,800: a wolf stalking a sleeper (69 s, as designed) and the first few seconds before a re-point or the hold.
 
 ## What it does not do
-No explanation of its own: captions are event text, the inspector's lines or the two wolf sentences. No world writes.
+No explanation of its own: captions are event text, the inspector's lines, the two wolf sentences or "Everyone is asleep.". No world writes.
 
 ## Files and tests
 `src/ui/director_model.ts`, `director_live.ts`, `director.ts`, `src/app/prefs.ts`, `shortcuts.ts` (T), `help.ts`, `styles.css`.

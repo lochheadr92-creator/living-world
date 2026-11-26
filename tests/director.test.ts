@@ -252,7 +252,7 @@ describe('the first look, and a different world', () => {
     d.step(w, 0.016);
     expect(d.shot).toBeNull();
     expect(d.waiting().length).toBe(0);
-    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 });
+    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0, repointed: 0 });
   });
 
   it('a new TOP or MIDDLE event becomes the shot, about the person it is about', () => {
@@ -315,7 +315,7 @@ describe('the first look, and a different world', () => {
     d.step(b.w, 0.016);
     expect(d.shot).toBeNull();
     expect(d.waiting().length).toBe(0);
-    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 });
+    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0, repointed: 0 });
     say(b.w, 'life', TEXT.couple, [b.ada.id], 40, 30);
     d.step(b.w, 0.016);
     expect(d.shot?.text).toBe(TEXT.couple);
@@ -635,7 +635,7 @@ describe('the FILLER candidate: shown only when nothing better exists', () => {
     expect(d.shot?.ev).toBe(gift);
     expect(d.shot?.filler).toBe(true);
     expect(d.shot?.subjectId).toBe(ada.id);
-    expect(d.counts).toEqual({ shown: 1, stale: 0, overflow: 0, merged: 0, filler: 1, live: 0 });
+    expect(d.counts).toEqual({ shown: 1, stale: 0, overflow: 0, merged: 0, filler: 1, live: 0, repointed: 0 });
     expect(d.hasNext(), 'the candidate was used').toBe(false);
   });
 
@@ -1877,16 +1877,38 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       expect(d2.counts.stale).toBe(1);
     });
 
-    it('a TOP event is shown whoever is up, about the first living one; an event about nobody living is a shot of the place', () => {
+    it('a TOP event about people who are all abed starts as a shot of the place, not on the first sleeper; with somebody up it is about them', () => {
       const { w, ada, ben } = village('night-top');
       sleep(ada);
       sleep(ben);
       const d = quiet();
       d.step(w, 0);
-      const couple = say(w, 'life', TEXT.couple, [ada.id, ben.id], 40, 30);
+      const couple = say(w, 'life', TEXT.couple, [ada.id, ben.id], 41, 29);
       d.step(w, 0.016);
       expect(d.shot?.ev, 'a TOP event is not held').toBe(couple);
-      expect(d.shot?.subjectId).toBe(ada.id);
+      expect(d.shot?.subjectId, 'the place').toBe(0);
+      expect([d.shot?.x, d.shot?.y], 'at the event own place').toEqual([41, 29]);
+      expect(d.shot?.text).toBe(TEXT.couple);
+      // no place of its own: the lit fire nearest the people, as for the quiet shot
+      const g = village('night-top-3');
+      sleep(g.ada);
+      sleep(g.ben);
+      sleep(g.cal);
+      const d3 = quiet();
+      d3.step(g.w, 0);
+      say(g.w, 'life', TEXT.death, [g.ada.id]);
+      d3.step(g.w, 0.016);
+      expect(d3.shot?.subjectId).toBe(0);
+      expect([d3.shot?.x, d3.shot?.y]).toEqual([quietPlace(g.w)!.x, quietPlace(g.w)!.y]);
+      // one of them up: about them
+      const h = village('night-top-4');
+      sleep(h.ada);
+      const d4 = quiet();
+      d4.step(h.w, 0);
+      say(h.w, 'life', TEXT.couple, [h.ada.id, h.ben.id], 40, 30);
+      d4.step(h.w, 0.016);
+      expect(d4.shot?.subjectId).toBe(h.ben.id);
+      // an event about nobody living is a shot of the place, as it always was
       const f = village('night-top-2');
       sleep(f.ada);
       sleep(f.ben);
@@ -1897,6 +1919,7 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       d2.step(f.w, 0.016);
       expect(d2.shot?.ev).toBe(gone);
       expect(d2.shot?.subjectId).toBe(0);
+      expect([d2.shot?.x, d2.shot?.y]).toEqual([20, 20]);
     });
   });
 
@@ -1930,6 +1953,27 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       expect(scanLive(g.w).filter((c) => c.kind === 'walk').length).toBe(1);
       sleep(g.ada);
       expect(scanLive(g.w).filter((c) => c.kind === 'walk')).toEqual([]);
+    });
+
+    it('a candidate whose person has gone to bed since the scan (it is read once a second) is not started; a wolf is the exception', () => {
+      const { w, ada, ben } = village('night-stale-scan');
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      const gift = say(w, 'social', TEXT.gave, [ben.id], 41, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.ev, 'a filler is the shot, and a live thing of 40 would take it at the hold').toBe(gift);
+      now = [cand('talk:1', 40, ada.id, 'Talking.'), cand('amb:2', 9, ben.id, 'Fetching water.', 'ambient')];
+      d.step(w, MIN_HOLD - 0.5);
+      sleep(ada);
+      d.step(w, 0.5);
+      expect(d.shot?.ev, 'Ada is abed now, whatever the scan said a moment ago').toBe(gift);
+      const e = village('night-stale-scan-wolf');
+      const d2 = new Director(() => [cand('wolf:1', 70, e.ada.id, 'A wolf is stalking near Ada.', 'wolf')]);
+      d2.step(e.w, 0);
+      sleep(e.ada);
+      d2.step(e.w, 0.016);
+      expect(d2.shot?.liveKey, 'a wolf is still shown on a sleeper').toBe('wolf:1');
     });
 
     it('a wolf stalking is shown on the person who is up: its target if it is, else the nearest; an attack is shown as before', () => {
@@ -2010,42 +2054,60 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       expect(d.shot?.spent).toBe(false);
     });
 
-    it('a live shot is spent once it has been up MIN_CUT: no caption, a waiting MIDDLE event takes it at once, and at the hold anything replaces it without the linger', () => {
+    it('a live shot is spent once it has been up MIN_CUT and is replaced at once, not at the hold: by a waiting event, by anything live without the linger, by an ambient one, else by the place', () => {
+      // the stand-in scan keeps offering the talk, so the shot has not ended: it is spent because its person is abed
+      const talk = () => cand('talk:1', 40, f.ada.id, 'Talking with Ben.');
       const f = village('night-spent-live');
-      const now: LiveCandidate[] = [cand('talk:1', 40, f.ada.id, 'Talking with Ben.')];
+      let now: LiveCandidate[] = [talk()];
       const d = new Director(() => now);
       d.step(f.w, 0);
       d.step(f.w, LIVE_SCAN_SECONDS);
       expect(d.shot?.liveKey).toBe('talk:1');
       expect(d.captionFresh()).toBe(true);
       sleep(f.ada);
-      // the stand-in scan still offers the talk, so the shot has not ended: it is spent because its person is abed
       d.step(f.w, MIN_CUT - 0.5);
+      expect(d.shot?.liveKey, 'not spent yet').toBe('talk:1');
       expect(d.shot?.spent).toBe(false);
       expect(d.captionFresh()).toBe(true);
+      // nothing else on: at MIN_CUT it is the place, long before the hold
       d.step(f.w, 0.5);
-      expect(d.shot?.liveKey).toBe('talk:1');
-      expect(d.shot?.ended).toBe(false);
-      expect(d.shot?.spent).toBe(true);
-      expect(d.captionFresh(), 'no caption on a sleeper').toBe(false);
-      // a waiting MIDDLE event takes it at once, well before the hold
-      const arrival = say(f.w, 'life', TEXT.traveller, [f.ben.id], 41, 30);
-      d.step(f.w, 0);
-      expect(d.shot?.ev).toBe(arrival);
-      expect(d.shot!.age).toBeLessThan(MIN_HOLD);
-      // anything else replaces it at the hold, though a shot of 40 would otherwise linger over a live thing of 25 until LINGER_SECONDS
+      expect(d.shot?.liveKey).toBe('quiet');
+      expect(d.shot?.age).toBe(0);
+      // a waiting MIDDLE event takes it at once
       const g = village('night-spent-live-2');
-      let now2: LiveCandidate[] = [cand('talk:1', 40, g.ada.id, 'Talking.')];
-      const d2 = new Director(() => now2);
+      now = [cand('talk:1', 40, g.ada.id, 'Talking.')];
+      const d2 = new Director(() => now);
       d2.step(g.w, 0);
       d2.step(g.w, LIVE_SCAN_SECONDS);
       sleep(g.ada);
-      now2 = [cand('talk:1', 40, g.ada.id, 'Talking.'), cand('talk:2', 25, g.ben.id, 'Chatting.')];
-      d2.step(g.w, MIN_HOLD - LIVE_SCAN_SECONDS);
-      expect(d2.shot?.liveKey).toBe('talk:1');
-      expect(d2.shot?.spent).toBe(true);
-      d2.step(g.w, LIVE_SCAN_SECONDS);
-      expect(d2.shot?.liveKey, 'a lighter one, because the heavier is spent').toBe('talk:2');
+      d2.step(g.w, MIN_CUT - 0.5);
+      const arrival = say(g.w, 'life', TEXT.traveller, [g.ben.id], 41, 30);
+      d2.step(g.w, 0.5);
+      expect(d2.shot?.ev).toBe(arrival);
+      expect(d2.shot!.age).toBeLessThan(MIN_HOLD);
+      // anything live, though a shot of 40 would otherwise linger over a thing of 25 until LINGER_SECONDS
+      const h = village('night-spent-live-3');
+      now = [cand('talk:1', 40, h.ada.id, 'Talking.')];
+      const d3 = new Director(() => now);
+      d3.step(h.w, 0);
+      d3.step(h.w, LIVE_SCAN_SECONDS);
+      sleep(h.ada);
+      now = [cand('talk:1', 40, h.ada.id, 'Talking.'), cand('talk:2', 25, h.ben.id, 'Chatting.')];
+      d3.step(h.w, MIN_CUT - 0.5);
+      expect(d3.shot?.liveKey).toBe('talk:1');
+      d3.step(h.w, 0.5);
+      expect(d3.shot?.liveKey, 'a lighter one, because the heavier is spent').toBe('talk:2');
+      // an ambient candidate
+      const i = village('night-spent-live-4');
+      now = [cand('talk:1', 40, i.ada.id, 'Talking.')];
+      const d4 = new Director(() => now);
+      d4.step(i.w, 0);
+      d4.step(i.w, LIVE_SCAN_SECONDS);
+      sleep(i.ada);
+      now = [cand('talk:1', 40, i.ada.id, 'Talking.'), cand('amb:2', 9, i.ben.id, 'Fetching water.', 'ambient')];
+      d4.step(i.w, MIN_CUT);
+      expect(d4.shot?.liveKey).toBe('amb:2');
+      expect(d4.shot?.subjectId).toBe(i.ben.id);
     });
 
     it("a wolf's shot is never spent by this, on a sleeper or not", () => {
@@ -2073,6 +2135,126 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       expect(d.shot?.ev, 'an event shot is spent only after MIN_HOLD').toBe(first);
       d.step(w, 1);
       expect(d.shot?.ev).toBe(second);
+    });
+  });
+
+  describe('an event or filler shot whose person has been abed for MIN_CUT is re-pointed, before the hold', () => {
+    /** half-second steps until `secs` of UI time have gone */
+    const run = (d: Director, w: World, secs: number): void => {
+      for (let t = 0; t < secs - 1e-9; t += 0.5) d.step(w, 0.5);
+    };
+
+    it('to the next of its people who is up, keeping its caption and its age, bumping rev; counted', () => {
+      const { w, ada, ben } = village('night-repoint');
+      const d = quiet();
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.subjectId).toBe(ada.id);
+      const rev = d.shot!.rev;
+      sleep(ada);
+      run(d, w, MIN_CUT - 1);
+      expect(d.shot?.subjectId, 'abed for under MIN_CUT: not yet').toBe(ada.id);
+      expect(d.shot!.rev).toBe(rev);
+      run(d, w, 2);
+      expect(d.shot?.ev, 'the same shot').toBe(arrival);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      expect(d.shot!.rev, 'the camera is told').toBeGreaterThan(rev);
+      expect(d.shot?.text).toBe(TEXT.traveller);
+      expect(d.captionFresh(), 'the caption stays').toBe(true);
+      expect(d.shot!.age, 'its age goes on').toBeGreaterThan(MIN_CUT);
+      expect(d.shot!.age).toBeLessThan(MIN_HOLD);
+      expect(d.counts).toMatchObject({ shown: 1, repointed: 1 });
+      expect(d.shot?.spent).toBe(false);
+    });
+
+    it("to the place when nobody else is up: at the event's own x, y, else the quiet place; it is then an ordinary shot of the place", () => {
+      const { w, ada, ben } = village('night-repoint-place');
+      const d = quiet();
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      sleep(ada);
+      sleep(ben);
+      run(d, w, MIN_CUT + 1.5);
+      expect(d.shot?.ev).toBe(arrival);
+      expect(d.shot?.subjectId).toBe(0);
+      expect([d.shot?.x, d.shot?.y]).toEqual([40, 30]);
+      expect(d.shot?.text).toBe(TEXT.traveller);
+      expect(d.counts.repointed).toBe(1);
+      // a shot of the place has no subject, so it is not spent, and it goes on under the existing rules: here, nothing replaces it
+      run(d, w, MIN_HOLD + 30);
+      expect(d.shot?.ev).toBe(arrival);
+      expect(d.shot?.spent).toBe(false);
+      expect(d.counts).toMatchObject({ shown: 1, repointed: 1 });
+      // an event with no place of its own: the quiet place
+      const f = village('night-repoint-place-2');
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      say(f.w, 'life', TEXT.traveller, [f.ada.id]);
+      d2.step(f.w, 0.016);
+      sleep(f.ada);
+      run(d2, f.w, MIN_CUT + 1.5);
+      expect(d2.shot?.subjectId).toBe(0);
+      expect([d2.shot?.x, d2.shot?.y]).toEqual([quietPlace(f.w)!.x, quietPlace(f.w)!.y]);
+    });
+
+    it("a FILLER shot is re-pointed too, and stays a filler; a TOP event's shot as well; MIN_CUT is of unbroken sleep", () => {
+      const { w, ada, ben } = village('night-repoint-filler');
+      const d = quiet();
+      d.step(w, 0);
+      say(w, 'social', TEXT.gave, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.filler).toBe(true);
+      expect(d.shot?.subjectId).toBe(ada.id);
+      sleep(ada);
+      run(d, w, MIN_CUT + 1.5);
+      expect(d.shot?.filler).toBe(true);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      expect(d.counts.repointed).toBe(1);
+      // a TOP event (a bite, about Ada and Cal): Ada is up when it is shown, then goes to bed
+      const f = village('night-repoint-top');
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      const bite = say(f.w, 'danger', TEXT.bite, [f.ada.id, f.cal.id], 40, 30);
+      d2.step(f.w, 0.016);
+      expect(d2.shot?.ev).toBe(bite);
+      sleep(f.ada);
+      run(d2, f.w, MIN_CUT + 1.5);
+      expect(d2.shot?.subjectId).toBe(f.cal.id);
+      // a person who wakes before MIN_CUT and goes back to bed starts the count again
+      const g = village('night-repoint-wake');
+      const d3 = quiet();
+      d3.step(g.w, 0);
+      say(g.w, 'life', TEXT.traveller, [g.ada.id, g.ben.id], 40, 30);
+      d3.step(g.w, 0.016);
+      sleep(g.ada);
+      run(d3, g.w, MIN_CUT - 0.5);
+      wake(g.ada);
+      run(d3, g.w, 0.5);
+      sleep(g.ada);
+      run(d3, g.w, MIN_CUT - 0.5);
+      expect(d3.shot?.subjectId, 'two stretches of 2.5 s are not 3 s of sleep').toBe(g.ada.id);
+      expect(d3.counts.repointed).toBe(0);
+      run(d3, g.w, 1);
+      expect(d3.shot?.subjectId).toBe(g.ben.id);
+    });
+
+    it('after the hold it is spent instead, as before: a shot whose person went to bed late is replaced then', () => {
+      const { w, ada, ben } = village('night-repoint-late');
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      run(d, w, MIN_HOLD - 2);
+      sleep(ada);
+      now = [cand('amb:2', 12, ben.id, 'Fetching water.', 'ambient')];
+      run(d, w, 1);
+      expect(d.shot?.subjectId, 'abed for 1 s: not yet').toBe(ada.id);
+      run(d, w, 1.5);
+      expect(d.counts.repointed, 'the hold came first').toBe(0);
+      expect(d.shot?.liveKey).toBe('amb:2');
     });
   });
 
@@ -2134,6 +2316,40 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       const eq = all.filter((c) => c.kind === 'ambient' && c.score === 13).map((c) => c.subjectId);
       expect(eq.length).toBeGreaterThan(1);
       expect(eq).toEqual([...eq].sort((a, b) => a - b));
+    });
+
+    it("none for somebody resting at their own household's home (turning in); one for somebody resting at the shared fire or at another household's home", () => {
+      const st = stage('director-night-amb-home');
+      st.w.settings.dynamics = 'rich';
+      const ada = addPerson(st, 'Ada', 40, 30, { age: 24, sex: 'f' });
+      const ben = addPerson(st, 'Ben', 41, 30, { age: 26, sex: 'm' });
+      const cal = addPerson(st, 'Cal', 42, 31, { age: 30, sex: 'm' });
+      const dee = addPerson(st, 'Dee', 43, 31, { age: 28, sex: 'f' });
+      ada.hhId = 7;
+      ben.hhId = 8;
+      cal.hhId = 9;
+      dee.hhId = 10;
+      const mine = building(st, 'lean_to', 38, 30, 7);
+      const theirs = building(st, 'lean_to', 38, 33, 11);
+      const fire = building(st, 'fire', 44, 34);
+      done(st);
+      const w = st.w;
+      const rest = (p: Person, at: number, label: string): void => {
+        p.activity = newActivity(w, p, { kind: 'rest', label, goal: 'waiting for the light', targetId: at, here: true, amount: 900, data: {} });
+      };
+      rest(ada, mine.id, 'Staying at my lean-to');
+      rest(ben, theirs.id, 'Staying at the lean-to of another household');
+      rest(cal, fire.id, 'Staying at the fire');
+      const who = () => ambient(w).map((c) => c.subjectId).sort((a, b) => a - b);
+      expect(who(), 'Ada turning in at her own lean-to is no shot').toEqual([ben.id, cal.id, dee.id].sort((a, b) => a - b));
+      // not resting, or resting elsewhere than at a home of her household: she is one
+      ada.activity = null;
+      expect(who()).toContain(ada.id);
+      rest(ada, fire.id, 'Staying at the fire');
+      expect(who()).toContain(ada.id);
+      // a different activity at her own home is not turning in
+      ada.activity = newActivity(w, ada, { kind: 'visit', label: 'Visiting', goal: 'x', targetId: mine.id, here: true, data: {} });
+      expect(who()).toContain(ada.id);
     });
 
     it("its caption is the inspector's own sentence for what they are doing", () => {

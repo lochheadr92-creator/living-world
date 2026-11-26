@@ -7,13 +7,14 @@
 // a person), except the two wolf sentences, which say exactly what the wolf's recorded state is, and the one sentence of the
 // quiet shot (everybody asleep). The director calls scanLive at most once a UI second.
 //
-// Nobody asleep is offered as a subject. `abed` says who: a person who is asleep, or on the way to bed. A conversation, a person's own speech or trouble, a walk out and a search party
-// follow nobody abed. A wolf that is attacking is still shown on whoever it attacks; a wolf that is stalking is shown on the person
-// who is up (its target if it is, else the nearest), and when everybody near is abed it is still offered, on the nearest, but at 60,
-// which is under LIVE_EXEMPT, so it can no longer hold the screen for the whole night. The kinds that are awake by construction
-// (a vigil, a grief sit, a lying-in, a search, a dance, a gathering) need no test. When nothing else is on, an `ambient` candidate
-// is offered for each person who is up and outdoors (the lowest band, below every other live score), so there is something to cut
-// to that is not a sleeper; `quietPlace` is where the camera goes when nobody is up at all (director_model.ts).
+// Nobody asleep is offered as a subject. `abed` says who: a person who is asleep, or on the way to bed. A conversation, a person's
+// own speech or trouble, a walk out and a search party follow nobody abed. A wolf that is attacking is still shown on whoever it
+// attacks; a wolf that is stalking is shown on the person who is up (its target if it is, else the nearest), and when everybody near
+// is abed it is still offered, on the nearest, but at 60, which is under LIVE_EXEMPT, so it can no longer hold the screen for the
+// whole night. The kinds that are awake by construction (a vigil, a grief sit, a lying-in, a search, a dance, a gathering) need no
+// test. When nothing else is on, an `ambient` candidate is offered for each person who is up and outdoors and not turning in at their
+// own home (the lowest band, below every other live score), so there is something to cut to that is not a sleeper; `quietPlace` is
+// where the camera goes when nobody is up at all (director_model.ts).
 import { HELP_NEAR } from '../sim/birth_help';
 import { isCourtWalk, type WalkData } from '../sim/courting';
 import { isDancing } from '../sim/dance';
@@ -22,6 +23,7 @@ import { isGriefSit, type GriefData } from '../sim/grief_sit';
 import { isVigil, type VigilData } from '../sim/vigil';
 import { describePerson } from '../sim/inspect';
 import { statusLine } from '../sim/inspect_observer';
+import { isHomeType } from '../sim/constants';
 import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
@@ -46,6 +48,18 @@ export const WOLF_NEAR = 8;
 
 /** asleep, or on the way to bed: somebody alive who is not somebody to watch. Read from the world, nothing is kept. */
 export const abed = (p: Person): boolean => p.alive && (p.pose === 'sleep' || p.activity?.kind === 'sleep');
+
+/**
+ * Somebody turning in: resting at a home of their own household ("Staying at my lean-to"; the activity's target is that home, the test
+ * the option itself uses to call it "my own"). They are on their way to sleep, with nothing to watch, so no ambient shot is made of them.
+ * Resting at the shared fire, or at somebody else's home, is not this.
+ */
+const restingAtOwnHome = (world: World, p: Person): boolean => {
+  const a = p.activity;
+  if (!a || a.kind !== 'rest' || !a.targetId || !p.hhId) return false;
+  const t = world.byId.get(a.targetId);
+  return t?.ent === 'building' && t.hhId === p.hhId && isHomeType(t.type);
+};
 
 /** the key of the shot of the place when nobody is up (the director_model.ts quiet shot), and its one sentence */
 export const QUIET_KEY = 'quiet';
@@ -284,9 +298,11 @@ export function scanLive(world: World): LiveCandidate[] {
   out.push(...byPerson.values());
 
   // somebody up and outdoors, with nothing else to say about them: one candidate each, the lowest band. Somebody inside a hut cannot be
-  // seen, and somebody abed is not offered. Each is scored by how much there is to watch (the work itself, company close by).
+  // seen, somebody abed is not offered, nor is somebody resting at their own home (turning in). Each is scored by how much there is to
+  // watch (the work itself, company close by); those resting at home still count as company for the others.
   const up = world.persons.filter((p) => p.alive && !p.indoors && !abed(p));
   for (const p of up) {
+    if (restingAtOwnHome(world, p)) continue;
     let company = 0;
     for (const q of up) if (q !== p && hyp(q.x - p.x, q.y - p.y) <= AMBIENT_NEAR) company++;
     const score = AMBIENT_BASE + (p.activity?.phase === 'work' ? AMBIENT_WORK : 0) + Math.min(AMBIENT_COMPANY_MAX, company * AMBIENT_COMPANY);
