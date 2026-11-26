@@ -276,7 +276,9 @@ describe('3. the chosen action goes through ordinary validation and changes the 
   it('a pack full of what no store will take is not a reason to walk home', () => {
     // `optDepositFood` offers to store grain, fish, fruit and berries and nothing else. Settling on "take the food home" on
     // the strength of five units of meat would be settling on a step the engine never offers.
+    // That is so up to rules 271. From rules 272 (provision.ts sharesFreshMeat) fresh meat is put down at home too: see the next test.
     const { w, ann } = scene('prep-meat');
+    w.settings.rulesVersion = 271;
     const plan = reviewIntentions(ctxFor(w, ann))!;
     addItem(ann.inv, 'meat', 6);
     reviewIntentions(ctxFor(w, ann));
@@ -284,6 +286,16 @@ describe('3. the chosen action goes through ordinary validation and changes the 
     addItem(ann.inv, 'berries', CARRY_TO_STORE);
     reviewIntentions(ctxFor(w, ann));
     expect(plan.stepKind, 'and berries can').toBe('store');
+    const ctx = ctxFor(w, ann);
+    expect(ctx.options.some((o) => o.key === plan.stepKey), 'the engine really offers that step').toBe(true);
+  });
+
+  it('from rules 272 fresh meat can be put down at home, so a pack of it is a reason to walk home', () => {
+    const { w, ann } = scene('prep-meat-272');
+    const plan = reviewIntentions(ctxFor(w, ann))!;
+    addItem(ann.inv, 'meat', 6);
+    reviewIntentions(ctxFor(w, ann));
+    expect(plan.stepKind, 'fresh meat is storable from rules 272').toBe('store');
     const ctx = ctxFor(w, ann);
     expect(ctx.options.some((o) => o.key === plan.stepKey), 'the engine really offers that step').toBe(true);
   });

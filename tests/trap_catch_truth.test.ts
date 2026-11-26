@@ -53,5 +53,7 @@ it('keeps mid-check continuation exact and changes only the saved explanation re
  expect(serializeWorld(copy)).toBe(serializeWorld(w));expect(p.log.at(-1)?.text).toContain('no recoverable catch');
  expect(o.log.at(-1)?.text).toContain('a body needs butchering');
  old.settings.rulesVersion=w.settings.rulesVersion;o.log.at(-1)!.text=p.log.at(-1)!.text;
+ // rules 277 (occupation.ts): the finished check also counts as a job toward an earned title, which a rules-132 world does not record
+ if(p.occupation)o.occupation=structuredClone(p.occupation);
  expect(serializeWorld(old)).toBe(serializeWorld(w));expect(conservationReport(w).ok).toBe(true);
 });
