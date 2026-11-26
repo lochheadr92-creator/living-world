@@ -132,6 +132,7 @@ import { careCapacityOn, setCareCapacity } from '../../src/sim/care_capacity';
 import { toolPrecedenceOn, setToolPrecedence } from '../../src/sim/production';
 import { keptTargetOn, setKeptTarget } from '../../src/sim/kept_target';
 import { keptBatchPlaceOn, keptThroughNeedsOn, setKeptBatchPlace, setKeptThroughNeeds } from '../../src/sim/trip_kept';
+import { fetchSetsOutOn, setFetchSetsOut } from '../../src/sim/fetch_home';
 import { residentCareOn, setResidentCare } from '../../src/sim/resident_contact';
 import { customersOn, setCustomers } from '../../src/sim/customers';
 import { successionOn, setSuccession } from '../../src/sim/succession';
@@ -373,6 +374,8 @@ export function parseIntervention(specIn: string): Intervention {
     const what: Record<TogetherScenePart, string> = { side: 'nobody walks over to speak up for one side of a quarrel', speech: 'nobody speaks for a shared building at the fire or at an occasion: support is asked for one person at a time, as before', fetch: 'nobody asks a neighbour to come along when a household member is missing after dark: the worrier goes alone, as before' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the together bundle: nobody stands up for a side, speaks for a shared building before company, or asks a neighbour to come and fetch a household member home after dark'}, as before rules 264; no effect below rules 264`, install() { const was = Object.fromEntries(TOGETHER_SCENE_PARTS.map((q) => [q, togetherScenePartOn(q)])) as Record<TogetherScenePart, boolean>; setTogetherScenes(false, part); return () => { for (const q of TOGETHER_SCENE_PARTS) setTogetherScenes(was[q], q); }; } };
   }
+  // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
+  if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };
   if(label==='rich-no-grain-boost'){
     return {spec:label,summary:'Use previous grain yields and regrowth with livestock feed available',install(){
       const prior=grainBoostOn();setGrainBoost(false);return ()=>setGrainBoost(prior);

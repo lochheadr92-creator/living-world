@@ -35,6 +35,11 @@
 //   not built    The public thanks of bundle A (praise.ts) is not used: it is made of a rescue from a wolf and says so in its words (thanksOwed, "for driving off a wolf"), so it does
 //                not fit what this is without a change to it. The found person's own gratitude is what is here.
 //
+// Rules 278 (one more switched repair of this part, `fetchSetsOutOn`): once somebody has promised to come (`companionsFor`), the worrier's own walk to look is offered at the
+// companion's level, FETCH_JOIN_SCORE less the walk, instead of the ordinary visit's worth. Before it the companion was offered the walk at 72 and the worrier's own walk stayed
+// at 26 to 29, under sleep at 35 to 51, so the worrier went to bed and the companion's walk ended "the search never set out" (docs/SOCIAL_SCENES.md, "Rules 278"). It changes the
+// one number only; the cue, the ask, the answer, the walk and its limits are as they were, and with no promise nothing is touched.
+//
 // Nothing here reads anybody's true state to plan: the worrier acts on their own record of where they saw them and their own sight of them on getting there; the answers are the
 // answerers' own; the one found is offered the walk because they see the worrier come up and speak, and for no other reason. (Bookkeeping is read: whom a search is for, to link the
 // companion's and the found person's walk to it, and whether the found person has set out, which the worrier would see.) No draw from the shared stream is made. Saved: the activities'
@@ -112,6 +117,15 @@ export const FETCH_GLAD_FOR = DAY;
 export const FETCH_AFFINITY = 3;
 export const FETCH_TRUST = 2;
 export const FETCH_COMPANION_AFFINITY = 2;
+// ── the worrier sets out once somebody has promised (rules 278) ──
+/** the first rules version in which the worrier's own walk to look is offered at the companion's level once somebody has promised to come */
+export const FETCH_SETS_OUT_FROM = 278;
+let setsOutOn = true;
+/** Lab switch `rich-no-fetch-sets-out` (never saved or hashed): the worrier's own walk to look keeps the ordinary visit's worth even with a promise made, as before rules 278. */
+export const fetchSetsOutOn = (): boolean => setsOutOn;
+export function setFetchSetsOut(on: boolean): void { setsOutOn = on; }
+/** the repair applies in a rich world at rules 278 and later, with the fetch part on and its own switch on */
+export const hasFetchSetsOut = (w: World): boolean => setsOutOn && hasFetching(w) && runsRulesVersion(w, FETCH_SETS_OUT_FROM);
 
 export interface FetchData {
   /** whom the search is for, when it set out, where home is (the door point of the worrier's home, or the settlement centre) */
@@ -224,17 +238,34 @@ export function fetchScorer(ctx: Ctx, cue: FetchCue, q: Person, aff: number, d: 
 }
 
 /**
+ * Rules 278. The worrier's own walk to look, once somebody has promised to come (`companionsFor`: the promise made to them, by one beside them), is worth what the companion's walk is
+ * worth, FETCH_JOIN_SCORE less the walk to the place, with the reason said plainly. Null with no promise, with the part or the switch off, before 278, or when the ordinary worth is
+ * already as high (it never lowers). A critical need or a danger believed about never reaches here: `fetchCue` is null for them, as the companion's walk is blocked for them.
+ */
+function setsOutScore(ctx: Ctx, cue: FetchCue): Scorer | null {
+  const { world, p } = ctx;
+  if (!hasFetchSetsOut(world)) return null;
+  const companion = companionsFor(world, p, cue.M.id)[0];
+  if (!companion) return null;
+  const sc = new Scorer().add(`${companion.name} has promised to come and look for ${cue.M.name} with me`, FETCH_JOIN_SCORE).add('walking', -pen(eta(ctx, cue.loc.x, cue.loc.y)));
+  return sc.total > cue.visit.util ? sc : null;
+}
+
+/**
  * The ordinary walk to look for them, made the search if somebody has promised to come: the visit activity the worrier would have made goes out carrying the party, and takes
- * the time a search is allowed. Without a companion it is not touched.
+ * the time a search is allowed. Without a companion it is not touched. From rules 278, with a companion, it is also offered at the companion's level (`setsOutScore`).
  */
 export function joinParty(ctx: Ctx, cue: FetchCue): void {
   const { world, p } = ctx;
   const base = cue.visit.make!;
+  const raised = setsOutScore(ctx, cue);
+  if (raised) { cue.visit.util = raised.total; cue.visit.parts = raised.parts; }
   cue.visit.make = () => {
     const a = base();
     if (!a) return null;
     const party = companionsFor(world, p, cue.M.id).slice(0, 1);
     if (!party.length) return a;
+    if (raised) a.utility = raised.total;
     const data: FetchData = { for: cue.M.id, since: world.tick, home: { x: cue.home.x, y: cue.home.y }, party: party.map((q) => q.id), phase: 'out' };
     a.data.fetch = data;
     a.label = `Going out after dark with ${listNames(party.map((q) => q.name))} to look for ${cue.M.name}`;
