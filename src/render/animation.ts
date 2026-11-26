@@ -51,7 +51,20 @@ export const NO_CONDITION: Condition = { fever: 0, limp: false, sling: false, cu
 const BELLY_SHOWS = 9600;
 
 export function conditionOf(world: World, p: Person): Condition {
-  return NO_CONDITION;
+  const ill = p.illness;
+  const inj = p.injury && p.injury.until > world.tick ? p.injury : undefined;
+  const left = p.pregnantUntil > world.tick ? p.pregnantUntil - world.tick : -1;
+  const le = p.lifeEvent;
+  const mourning = !!le && le.kind === 'bereaved' && le.until > world.tick;
+  if (!ill && !inj && left < 0 && !mourning) return NO_CONDITION;
+  return {
+    fever: ill ? Math.min(1, Math.max(0.35, ill.severity / 60)) : 0,
+    limp: inj?.kind === 'sprain',
+    sling: inj?.kind === 'broken',
+    cut: inj?.kind === 'cut',
+    belly: left >= 0 && left < BELLY_SHOWS ? 0.45 + 0.55 * (1 - left / BELLY_SHOWS) : 0,
+    mourning,
+  };
 }
 
 /** what is being said aloud to a company (the evening fire, an occasion), told from the speaker's own speech and thoughts */
@@ -107,6 +120,13 @@ function talkAnim(world: World, p: Person, c: Conversation): AnimId {
       if (!other || other.ent !== 'person') return 'talk';
       return ageYears(world, p) >= ageYears(world, other) ? 'teach' : 'learn';
     }
+    case 'play_together': {
+      const g = c.data.game as string | undefined;
+      if (g === 'chase') return lead ? 'game_chaser' : 'game_runner';
+      if (g === 'hide') return lead ? 'game_count' : 'game_hide';
+      if (g === 'house') return 'game_house';
+      return 'talk';
+    }
     default:
       return 'talk';
   }
@@ -140,6 +160,9 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
         if (s === 'address') return 'fire_address';
         return hearingStory(world, p) ? 'fire_listen' : 'fire_sit';
       }
+      if (d.play === 'stones' || d.play === 'bugs') return 'play_ground';
+      if (d.play === 'sticks') return 'play_sticks';
+      if (d.play === 'toy') return 'play_toy';
       return 'idle';
     }
     case 'explore':
