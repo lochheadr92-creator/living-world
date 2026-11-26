@@ -191,7 +191,7 @@ export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[
 const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat', ...FARM_FOODS];
 
 const MEAT_FIRST: readonly FoodKind[] = ['meat', 'pork', ...STORABLE.filter(k => k !== 'pork')];
-export const sharesFreshMeat = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world,265);
+export const sharesFreshMeat = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world,272);
 export function storageFoods(world: World): readonly FoodKind[] {
   return sharesFreshMeat(world) ? MEAT_FIRST : STORABLE;
 }

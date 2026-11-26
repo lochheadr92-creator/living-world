@@ -6,7 +6,7 @@ import {conservationReport} from '../src/sim/economy';
 import {DAY} from '../src/sim/constants';
 import {argsOf,worldFromArgs} from './world_args';
 const {opt}=argsOf(process.argv),{w,startDay}=worldFromArgs(opt);
-if(startDay!==96 || w.settings.rulesVersion!==259 || !w.settings.immigration)throw Error('Unexpected start');
+if(startDay!==96 || w.settings.rulesVersion!==266 || !w.settings.immigration)throw Error('Unexpected start');
 const watched=opt('observe','on')==='on';
 const counts:Record<string,number>={}, losses:Record<string,number>={},details:Record<string,number>={};
 function add(map:Record<string,number>,key:string,n=1){map[key]=(map[key]??0)+n;}

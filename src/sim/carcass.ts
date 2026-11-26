@@ -16,7 +16,7 @@ export const CARCASS_WORK=120;
 export const CARCASS_LIFETIME=4800;
 export function carcassLifetime(w: World, c: NonNullable<Pile['carcass']>): number {
   const ownedLivestock = c.hhId !== 0 && c.species !== 'deer' && c.species !== 'wolf';
-  return ownedLivestock && runsRulesVersion(w,264) ? 2 * CARCASS_LIFETIME : CARCASS_LIFETIME;
+  return ownedLivestock && runsRulesVersion(w,271) ? 2 * CARCASS_LIFETIME : CARCASS_LIFETIME;
 }
 const PARTS:CarcassPart[]=['meat','hide','fat'];
 const zero=()=>({meat:0,hide:0,fat:0});
@@ -100,7 +100,7 @@ export function carcassOptions(ctx:Ctx):void{
    if((b.carcassParts[part]??0)<1||weightOf(p.inv)+WEIGHT[part]>carryCap(w,p))continue;
    const need=part==='meat'?Math.max(0,ctx.drives.hunger)*.5+(ctx.food<2?24:6):part==='hide'?Math.max(p.inv.garment?5:24,wolfSkinWorth(w,p,b.hh??0)):ctx.food<2?18:4;
    const salvage = part==='meat' && b.carcassLivestock && b.hh===p.hhId && !ctx.critical
-     && runsRulesVersion(w,262) && w.tick-b.seen<CARCASS_LIFETIME;
+     && runsRulesVersion(w,269) && w.tick-b.seen<CARCASS_LIFETIME;
    const priority=salvage?Math.max(85,need):need;
    const amount=salvage?Math.min(4,b.carcassParts.meat??0,Math.floor((carryCap(w,p)-weightOf(p.inv))/WEIGHT.meat)):1;
    const util=priority-pen(travel)*.6;if(util<5)continue;
@@ -118,7 +118,7 @@ export function validateCarcasses(w:World):void{
   for(const b of Object.values(p.beliefs)){
    check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);
    const species=b.carcassLivestock;
-   if(species!==undefined&&(!runsRulesVersion(w,262)||!b.carcassParts||!Object.hasOwn(FARM_SPECIES,species)))throw Error('invalid livestock carcass observation');
+   if(species!==undefined&&(!runsRulesVersion(w,269)||!b.carcassParts||!Object.hasOwn(FARM_SPECIES,species)))throw Error('invalid livestock carcass observation');
    if(b.carcassParts===undefined)continue;
    // Older farm saves remember quantities but omit the species.
    const maxMeat=species?adultMeatPortions(w,species):farmEnabled(w)?adultMeatPortions(w,'cow'):4;

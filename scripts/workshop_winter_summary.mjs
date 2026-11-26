@@ -36,7 +36,7 @@ for(const key of Object.keys(starts[0].rows)){
   mean[key].below=rows.filter(r=>r.outside&&r.delta<0).length;
 }
 const f=x=>Number(x).toFixed(2);
-const sections=['# Rules 259 through winter','',
+const sections=['# Rules 266 through winter','',
   'Six starts, four arms each, 13 simulated days per arm. Means give each start equal weight. Differences are enabled minus disabled. Noise is the largest absolute difference from enabled to either nudged control in the same save. Raw ticks and denominators are in the per-arm JSON files.','',
   '| Start | Returns off → on | Walking off → on (% awake 12+) | Walking Δ / noise (pp) | Company + leisure Δ / noise (pp) | Deaths off → on | Hungry without food Δ / noise (pp) |',
   '|---|---:|---:|---:|---:|---:|---:|'];

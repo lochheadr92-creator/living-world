@@ -5,7 +5,7 @@ import { makeCtx, type Option } from '../src/sim/optutil';
 import { currentWorldSettings } from '../src/sim/profiles';
 import type { Intention } from '../src/sim/types';
 
-function setup(version = 268) {
+function setup(version = 275) {
   const w = createWorld({...currentWorldSettings('normal', 'forest'), rulesVersion: version});
   const p = w.persons[0];
   const ctx = makeCtx(w, p, false);
@@ -53,7 +53,7 @@ it('preserves pressing company, night, critical needs and an insufficient produc
 });
 it('preserves the previous chooser on the older version and removal arm', () => {
   const choices = [rest, step];
-  expect(preferBatchStep(setup(267), choices)).toBe(choices);
+  expect(preferBatchStep(setup(274), choices)).toBe(choices);
   setBatchPriority(false);
   expect(preferBatchStep(setup(), choices)).toBe(choices);
 });

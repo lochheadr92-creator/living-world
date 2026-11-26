@@ -9,7 +9,7 @@ import { setWorkshopErrand } from '../src/sim/workshop_errand';
 import { addPerson, building, done, stage } from './helpers/kit';
 
 afterEach(()=>setWorkshopErrand(true));
-function crossBetweenBakeries(version=259) {
+function crossBetweenBakeries(version=266) {
   const s=stage('input-workshop'), w=s.w;
   w.settings.dynamics='rich';
   w.settings.rulesVersion=version;

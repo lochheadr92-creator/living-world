@@ -2,7 +2,7 @@ import { DAY, TICKS_PER_YEAR } from './constants';
 import { runsRulesVersion } from './rulesversion';
 import type { Animal, BuildingType, FarmSpecies, World } from './types';
 
-export const farmEnabled = (w: World) => w.settings.dynamics === 'rich' && runsRulesVersion(w, 260);
+export const farmEnabled = (w: World) => w.settings.dynamics === 'rich' && runsRulesVersion(w, 267);
 const days = (days: number) => Math.round(days * TICKS_PER_YEAR / 365);
 // Calendar days scaled to the world's twelve-day year. Litter sizes are settlement-scale design values.
 export const FARM_SPECIES = {
@@ -14,7 +14,7 @@ export const FARM_SPECIES = {
 } as const;
 export function adultMeatPortions(w: World, species: FarmSpecies): number {
   const portions = FARM_SPECIES[species].meat;
-  return runsRulesVersion(w, 263) ? portions * 4 : portions;
+  return runsRulesVersion(w, 270) ? portions * 4 : portions;
 }
 
 export function breedingSeason(w:World,species:FarmSpecies){

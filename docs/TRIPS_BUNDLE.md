@@ -1,6 +1,6 @@
 # Stage 2 trips bundle (rules 257 and above)
 
-Stage 2 of the plan of 17 November 2026 (brain note `knowledge/living-world/2026-11-17-research-index-viability-and-plan`), started on Ryan's instruction of 19 November 2026. The designs were written on 18 November 2026 (`C:\dev\_lw_briefs\stage2-designs-20261118\DESIGNS.txt`) from the trip waste measurement (`review_evidence/trip-waste-20261118/` on the branch `scratch/free-block-20261117`; rules 250, three day-48 saves, one run per arm: a description, never a rate). One bundle of separately switched parts, one lab with a removal arm for each part, as rules 200 to 202 did. Rules 257 to 259 are claimed in `docs/RULES_RANGES.md`.
+Stage 2 of the plan of 17 November 2026 (brain note `knowledge/living-world/2026-11-17-research-index-viability-and-plan`), started on Ryan's instruction of 19 November 2026. The designs were written on 18 November 2026 (`C:\dev\_lw_briefs\stage2-designs-20261118\DESIGNS.txt`) from the trip waste measurement (`review_evidence/trip-waste-20261118/` on the branch `scratch/free-block-20261117`; rules 250, three day-48 saves, one run per arm: a description, never a rate). One bundle of separately switched parts, one lab with a removal arm for each part, as rules 200 to 202 did. Rules 257 to 266 are claimed in `docs/RULES_RANGES.md`.
 
 | part | rules | status | lab arm |
 |---|---|---|---|
@@ -46,7 +46,7 @@ Rollback: switch the part off (`rich-no-bench-access`). The `held` field stays i
 
 The reconciled implementation validates and fingerprints both remembered earmarks and builder shares. For a draft-257 belief with earmarks but no recorded builder share, the builder route to free goods becomes available after a fresh sight.
 
-## Part C. Keep a valid workshop input errand (rules 259)
+## Part C. Keep a valid workshop input errand (rules 266)
 
 A production withdrawal records the intended workshop and recipe on its activity. During travel review, if a different workshop is now nearest, the planner also checks the original workshop for that recipe. It retains the existing store-and-item option only when the ordinary planner still offers it for the same goal. Current demand, access, recent failure, workshop state, available stock, carrying room and urgent interruptions still apply. Older activities without the two optional fields finish under ordinary review. The lab removal is `rich-no-workshop-errand`.
 

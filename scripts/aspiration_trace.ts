@@ -10,7 +10,7 @@ import {argsOf, worldFromArgs} from './world_args';
 
 const {opt} = argsOf(process.argv);
 const {w, startDay} = worldFromArgs(opt);
-if (startDay !== 96 || w.settings.rulesVersion !== 259 || !w.settings.immigration) throw Error('Unexpected winter start');
+if (startDay !== 96 || w.settings.rulesVersion !== 266 || !w.settings.immigration) throw Error('Unexpected winter start');
 const start = w.tick;
 const initial = hashWorld(w);
 const reference = JSON.parse(readFileSync(opt('reference', ''), 'utf8'));

@@ -11,7 +11,7 @@ import type {Ctx} from '../src/sim/optutil';
 
 const {opt}=argsOf(process.argv),{w}=worldFromArgs(opt);
 const arm=opt('arm','native'), start=w.tick;
-if(!['native','door','drink'].includes(arm)||start!==96*2400||w.settings.rulesVersion!==259)throw Error('Invalid run');
+if(!['native','door','drink'].includes(arm)||start!==96*2400||w.settings.rulesVersion!==266)throw Error('Invalid run');
 const refusals=new Map<string,number>(), outcomes:Record<string,number>={}, opportunities:object[]=[];
 let contacts=0,waterOfferedToThirsty=0,admissions=0,refused=0;
 function recentRoom(p:Person,id:number){

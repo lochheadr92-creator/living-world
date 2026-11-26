@@ -13,7 +13,7 @@ setGrainBoost(!process.argv.includes('--no-grain-boost'));
 setHerdValue(!process.argv.includes('--no-herd-value'));
 const seed=process.argv[2]??'aspen', days=Number(process.argv[3]??12);
 const acquired=new Set<number>();
-const w=createWorld({...currentWorldSettings('normal',seed),rulesVersion:261});
+const w=createWorld({...currentWorldSettings('normal',seed),rulesVersion:268});
 let awake=0,hungry=0,cropGrain=0;
 const starters=new Set(w.animals.filter(a=>a.sheep?.hhId).map(a=>a.id));
 for(let d=0;d<=days;d++){

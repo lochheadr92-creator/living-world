@@ -8,7 +8,7 @@ import { isWalkable } from '../src/sim/registry';
 import type { Items, Person, World } from '../src/sim/types';
 import { stage, addPerson, building, done, learn } from './helpers/kit';
 
-function scene(stock: Items = {}, version = 266, type: 'hut' | 'house' = 'hut') {
+function scene(stock: Items = {}, version = 273, type: 'hut' | 'house' = 'hut') {
   const s = stage('retiring-shelter'), w = s.w;
   w.settings = { ...w.settings, dynamics: 'rich', rulesVersion: version };
   const p = addPerson(s, 'Ada', 40.5, 40.5, { inv: { wood: 1, berries: 5 } });
@@ -28,7 +28,7 @@ function finish(w: World, p: Person) {
   expect(p.activity).toBeNull();
 }
 it.each(['hut', 'house'] as const)('physically clears a stocked lean-to after moving into a %s', type => {
-  const { w, p, old, home, hh } = scene({ meat: 2 }, 266, type);
+  const { w, p, old, home, hh } = scene({ meat: 2 }, 273, type);
   expect(options(w, p).filter(o => o.targetId === old.id).map(o => o.kind)).not.toContain('repair');
   expect(options(w, p).some(o => o.key === `deposit:${old.id}:food`)).toBe(false);
   const a = clear(w, p)!.make!()!;
@@ -57,7 +57,7 @@ it('requires personal knowledge, ownership and a replacement, and keeps the earl
   delBelief(p,home.id); expect(clear(w,p)).toBeUndefined();
   learn(w,p,home); hh.homeId = old.id; expect(clear(w,p)).toBeUndefined();
   hh.homeId = home.id; old.hhId = 0; learn(w,p,old); expect(clear(w,p)).toBeUndefined();
-  const prev = scene({}, 265); expect(clear(prev.w,prev.p)).toBeUndefined();
+  const prev = scene({}, 272); expect(clear(prev.w,prev.p)).toBeUndefined();
   expect(options(prev.w,prev.p).some(o => o.key === `repair:${prev.old.id}`)).toBe(true);
 });
 it.each(['replacement lost','sleeper','upgrade','meal','delivery','blocked door'] as const)('checks again before removing the shelter when conditions change: %s', change => {

@@ -147,9 +147,9 @@ it('refuses ordinary deposits into a body so recovery state cannot become mixed 
  expect(serializeWorld(deserializeWorld(serializeWorld(w)))).toBe(serializeWorld(w));expect(conservationReport(w).ok).toBe(true);
 });
 
-it('keeps the two-day deadline for a deer taken by a household hunter at rules 264',()=>{
+it('keeps the two-day deadline for a deer taken by a household hunter at rules 271',()=>{
  const {w,p,deer}=fixture();
- w.settings.rulesVersion=264;
+ w.settings.rulesVersion=271;
  const body=makeCarcass(w,deer,p)!;
  expect(body.carcass!.hhId).toBe(p.hhId);
  w.tick=body.since+CARCASS_LIFETIME;

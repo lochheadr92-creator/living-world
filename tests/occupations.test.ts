@@ -12,7 +12,7 @@ import { stage, addPerson, building, done, learn } from './helpers/kit';
 
 function setup(age=30) {
   const s = stage('earned-trades');
-  s.w.settings = {...s.w.settings, dynamics:'rich', rulesVersion:270};
+  s.w.settings = {...s.w.settings, dynamics:'rich', rulesVersion:277};
   const p = addPerson(s,'Ada',40.5,26.5,{age,hunger:95,thirst:95,energy:95,inv:{wool:5}});
   const b = building(s,'storehouse',40,24);
   const foreign = building(s,'storehouse',44,24,999);
@@ -85,9 +85,9 @@ it('uses paid experience over two days, excludes failed and personal attempts an
 
 it('respects predecessor rules, childhood and the lab switch',()=>{
   const f=setup();
-  f.w.settings.rulesVersion=269; earn(f,'Herder');
+  f.w.settings.rulesVersion=276; earn(f,'Herder');
   expect(f.p.occupation).toBeUndefined();
-  f.w.settings.rulesVersion=270;setTrades(false);earn(f,'Herder');
+  f.w.settings.rulesVersion=277;setTrades(false);earn(f,'Herder');
   expect(f.p.occupation).toBeUndefined();
   setTrades(true);
   const child=setup(5); earn(child,'Herder');

@@ -13,7 +13,7 @@ import { argsOf,worldFromArgs } from './world_args';
 
 const {opt}=argsOf(process.argv),{w,loaded,startDay}=worldFromArgs(opt);
 const arm=opt('arm','on'),out=opt('out','');
-if(!loaded || !out || !['on','off','n1','n2'].includes(arm) || w.settings.rulesVersion!==259 ||
+if(!loaded || !out || !['on','off','n1','n2'].includes(arm) || w.settings.rulesVersion!==266 ||
    !w.settings.immigration || ![48,96].includes(startDay)) throw Error('Wrong experiment settings');
 const initial=hashWorld(w), start=w.tick, initialDead=w.deceased.length;
 const digest=(data:Buffer)=>createHash('sha256').update(data).digest('hex');

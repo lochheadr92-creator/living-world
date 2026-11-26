@@ -10,8 +10,8 @@ import type { ItemKind } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 
 const [seed, rules, outputDir] = process.argv.slice(2);
-if (!seed || !['269','270'].includes(rules) || !outputDir) {
-  throw Error('Expected seed, rules (269 or 270), and an existing output directory');
+if (!seed || !['276','277'].includes(rules) || !outputDir) {
+  throw Error('Expected seed, rules (276 or 277), and an existing output directory');
 }
 const world = createWorld({...currentWorldSettings('normal',seed,{immigration:true}),rulesVersion:Number(rules)});
 const jobsByPerson = new Map<number,Map<string,number>>();

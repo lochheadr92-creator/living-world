@@ -28,7 +28,7 @@ export function occupationName(role: Occupation) {
   return role.replace(/[a-z][A-Z]/g, pair => pair[0]+' '+pair[1].toLowerCase());
 }
 export function hasOccupations(w: World) {
-  return tradesOn() && w.settings.dynamics === 'rich' && runsRulesVersion(w,270);
+  return tradesOn() && w.settings.dynamics === 'rich' && runsRulesVersion(w,277);
 }
 const benches: Partial<Record<NonNullable<Belief['btype']>, Occupation>> = {
   timber_yard:'Carpenter', quarry:'Miner', mine:'Miner', kiln:'Potter', smithy:'Toolsmith',
@@ -133,7 +133,7 @@ export function validateOccupations(w: World) {
   for (const p of w.persons) {
     const state=p.occupation;
     if (state===undefined) continue;
-    if (w.settings.dynamics!=='rich' || !runsRulesVersion(w,270) || !state || !state.practice || typeof state.practice!=='object' || Array.isArray(state.practice)) throw Error('Invalid occupational practice');
+    if (w.settings.dynamics!=='rich' || !runsRulesVersion(w,277) || !state || !state.practice || typeof state.practice!=='object' || Array.isArray(state.practice)) throw Error('Invalid occupational practice');
     for (const [role,r] of Object.entries(state.practice)) {
       if (!Object.hasOwn(OUTPUTS,role) || !r || !Number.isInteger(r.jobs) || r.jobs<1 || r.jobs>12 ||
           !Number.isInteger(r.firstDay) || !Number.isInteger(r.lastDay) || r.firstDay<0 || r.firstDay>r.lastDay || r.lastDay>lastDay) throw Error('Invalid occupational record');

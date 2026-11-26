@@ -3,7 +3,7 @@ const dir='review_evidence/visit-departure';
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const lines=['# Where failed visits went','',
-'Rules 259, arrivals on, day 96 to 97. One replay per settlement. Each row is one launch. Distances are in tiles. The first distance is from the actual target to the chosen destination at launch. The last distance is between the two people at failure. Space 0 means outdoors; a positive number identifies an interior. Age is ticks since the whereabouts record, shown only when it supplied the destination. A remembered home is an inference about where someone might be.','',
+'Rules 266, arrivals on, day 96 to 97. One replay per settlement. Each row is one launch. Distances are in tiles. The first distance is from the actual target to the chosen destination at launch. The last distance is between the two people at failure. Space 0 means outdoors; a positive number identifies an interior. Age is ticks since the whereabouts record, shown only when it supplied the destination. A remembered home is an inference about where someone might be.','',
 '| World and tick | Visitor → target | Destination evidence | Age | Distance at launch → at failure | Visitor space at launch → end | Target space at launch → end | Walk ticks | Finding |',
 '|---|---|---|---:|---|---|---|---:|---|'];
 const counts={},sources={},cross={};

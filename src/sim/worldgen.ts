@@ -576,7 +576,7 @@ export function generateNatural(settings: Settings): World {
   initializeWater(world);
   seedSheep(world,terrainReach);
   foundChickenCoop(world,terrainReach);
-  if(runsRulesVersion(world,260))rebuildMobileGrid(world);
+  if(runsRulesVersion(world,267))rebuildMobileGrid(world);
   seedKnowledge(world, gen);
   lookAround(world);
   snapshotInitial(world);

@@ -4,7 +4,7 @@ import {currentWorldSettings} from '../src/sim/profiles';
 import {conservationReport} from '../src/sim/economy';
 import {DAY} from '../src/sim/constants';
 
-const version=Number(process.argv[2]??262);
+const version=Number(process.argv[2]??269);
 const w=createWorld({...currentWorldSettings('normal','aspen'),rulesVersion:version});
 const bodies=new Map<number,object>();
 const timings=new Map<number,{firstSeen?:number;started?:number;firstCut?:number;lastCut?:number;worker?:string}>();

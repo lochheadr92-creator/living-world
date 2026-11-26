@@ -22,7 +22,7 @@ w.hooks={onActivityEnd(p,a,result,detail){
  rows.push({...start,end:w.tick,result,detail,endVisitor:state(p),endTarget:state(q),endSpot:[a.spotX,a.spotY],phase:a.phase});
  active.delete(a.id);
 }};
-if(startDay!==96||w.settings.rulesVersion!==259)throw Error('Wrong start');
+if(startDay!==96||w.settings.rulesVersion!==266)throw Error('Wrong start');
 for(let i=0;i<2400;i++)stepWorld(w);
 if(hashWorld(w)!==ref.end||!conservationReport(w).ok)throw Error('Replay mismatch');
 writeFileSync(opt('out',''),JSON.stringify({seed:w.seed,endHash:ref.end,rows},null,1));

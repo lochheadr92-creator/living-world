@@ -8,8 +8,8 @@ import { stepWorld } from '../src/sim/world';
 import { addPerson, done, stage } from './helpers/kit';
 
 it.each([
-  { rulesVersion: 268, x: 46.5, drank: false },
-  { rulesVersion: 269, x: 47.5, drank: true },
+  { rulesVersion: 275, x: 46.5, drank: false },
+  { rulesVersion: 276, x: 47.5, drank: true },
 ])('Forest founding sheep at rules $rulesVersion', ({ rulesVersion, x, drank }) => {
   const w = createWorld({ ...currentWorldSettings('normal', 'forest', { immigration: false }), rulesVersion });
   const sheep = w.animals.filter(a => a.type === 'sheep');
@@ -26,7 +26,7 @@ it.each([
 it('skips a founder tile separated from the lake until a route opens', () => {
   const s = stage('founder-water-barrier');
   const w = s.w;
-  w.settings = { ...w.settings, dynamics: 'rich', rulesVersion: 269 };
+  w.settings = { ...w.settings, dynamics: 'rich', rulesVersion: 276 };
   addPerson(s, 'Ada', 40.5, 19.5);
   makeSource(w, 'wild_grain', 39, 19, 5);
   done(s);

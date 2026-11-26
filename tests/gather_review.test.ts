@@ -6,7 +6,7 @@ import { setGatherReview } from '../src/sim/gather_review';
 
 afterEach(() => setGatherReview(true));
 
-it.each([[266,true,false],[267,false,false],[267,true,true]] as const)(
+it.each([[273,true,false],[274,false,false],[274,true,true]] as const)(
   'Forest stocking trip under rules %i, purpose review %s', (version, enabled, keepsTrip) => {
     setGatherReview(enabled);
     const w = createWorld({...currentWorldSettings('normal','forest',{immigration:false}),rulesVersion:version});

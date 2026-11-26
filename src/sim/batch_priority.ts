@@ -15,7 +15,7 @@ function canWait(ctx: Ctx, o: Option): boolean {
 /** A casual break can follow the next legal batch step. All other choices retain precedence. */
 export function preferBatchStep(ctx: Ctx, ranked: Option[]): Option[] {
   if (!enabled || !ranked.length || ctx.world.settings.dynamics !== 'rich' ||
-      !runsRulesVersion(ctx.world, 268) || !canWait(ctx, ranked[0])) return ranked;
+      !runsRulesVersion(ctx.world, 275) || !canWait(ctx, ranked[0])) return ranked;
   if (ctx.night || ctx.criticals.length || ctx.p.illness || ctx.p.health < 45 ||
       ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return ranked;
   const batch = ctx.p.intentions.find(i => i.kind === 'batch' && i.status === 'active');

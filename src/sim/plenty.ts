@@ -35,7 +35,7 @@ export function setPlenty(enabled: boolean, part?: PlentyPart): void {
 let grainBoost = true;
 export const grainBoostOn = () => grainBoost;
 export const setGrainBoost = (enabled: boolean) => { grainBoost = enabled; };
-export const grainFeedEnabled = (world: World) => world.settings.dynamics === 'rich' && runsRulesVersion(world, 261);
+export const grainFeedEnabled = (world: World) => world.settings.dynamics === 'rich' && runsRulesVersion(world, 268);
 export const moreGrain = (world: World) => grainBoost && grainFeedEnabled(world);
 
 const runs = (world: World): boolean => world.settings.dynamics === 'rich' && runsRulesVersion(world, 226);

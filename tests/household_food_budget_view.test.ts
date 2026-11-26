@@ -10,7 +10,7 @@ import { deserializeWorld } from '../src/app/save';
 
 function scene() {
   const s=stage('reserve'), w=s.w;
-  w.settings={...w.settings,rulesVersion:266,dynamics:'rich',harsh:false};
+  w.settings={...w.settings,rulesVersion:273,dynamics:'rich',harsh:false};
   const ada=addPerson(s,'Ada',30,30,{inv:{berries:2}});
   const child=addPerson(s,'Eli',30,30,{hh:ada.hhId,age:5,inv:{}});
   const other=addPerson(s,'Cal',34,34);

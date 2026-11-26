@@ -8,7 +8,7 @@ import { argsOf, worldFromArgs } from './world_args';
 
 const {opt}=argsOf(process.argv), {w,loaded}=worldFromArgs(opt);
 const off=process.argv.includes('--off'), days=Number(opt('days','1'));
-if (!loaded || w.settings.rulesVersion!==259 || !Number.isInteger(days) || days<1) throw Error('Expected a rules-259 continuation');
+if (!loaded || w.settings.rulesVersion!==266 || !Number.isInteger(days) || days<1) throw Error('Expected a rules-266 continuation');
 setWorkshopErrand(!off);
 const previous=new Map<number,{source:number, replacement:number}>();
 let switches=0, returns=0, finishedWithdrawals=0, finishedDeposits=0,finishedWorkshopOperations=0;

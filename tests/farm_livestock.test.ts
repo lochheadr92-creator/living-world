@@ -30,7 +30,7 @@ function job(w:World,p:Person,key:string){
 }
 function scene(){
   const s=stage('farm-contract');
-  s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:260};
+  s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:267};
   return s;
 }
 it.each(Object.keys(FARM_SPECIES) as FarmSpecies[])('breeds housed %s through its own fed cycle and resumes from save',species=>{
@@ -93,7 +93,7 @@ it('makes one pig carcass, recovers pork and smokes bacon',()=>{
   expect(pickFood({bacon:p.inv.bacon!},40,w)).toBe('bacon');expect(conservationReport(w).ok).toBe(true);
 });
 it('starts all five species in an ordinary rich world and replays after reload',()=>{
-  const w=createWorld({...currentWorldSettings('normal','aspen'),rulesVersion:260});
+  const w=createWorld({...currentWorldSettings('normal','aspen'),rulesVersion:267});
   for(const species of Object.keys(FARM_SPECIES))expect(w.animals.filter(a=>a.type===species)).toHaveLength(2);
   for(let i=0;i<240;i++)stepWorld(w);
   const twin=deserializeWorld(serializeWorld(w,5));
@@ -135,7 +135,7 @@ it('cuts finite meadow hay and feeds it to a hungry goat',()=>{
 it('increases wild-grain regrowth and plot grain at the same care and ripeness',()=>{
   const sample=(boost:boolean)=>{
     setGrainBoost(boost);
-    const s=scene(),w=s.w;w.settings.rulesVersion=261;
+    const s=scene(),w=s.w;w.settings.rulesVersion=268;
     const patch=makeSource(w,'wild_grain',42,40);
     const plot=createPlot(w,43,40,0);plot.state='growing';plot.progress=1;
     updatePlots(w);
@@ -149,7 +149,7 @@ it('increases wild-grain regrowth and plot grain at the same care and ripeness',
 });
 
 it('turns spare grain into feed at a known coop and accounts for what a hen eats',()=>{
-  const s=scene(),w=s.w;w.settings.rulesVersion=261;
+  const s=scene(),w=s.w;w.settings.rulesVersion=268;
   const p=addPerson(s,'Ada',40.5,40.5,{inv:{grain:3}});
   const coop=building(s,'chicken_cage',40,38,p.hhId,{water:2});
   const hen=makeFarmAnimal(w,coop.doorX,coop.doorY,'chicken','f');
@@ -165,7 +165,7 @@ it('turns spare grain into feed at a known coop and accounts for what a hen eats
 });
 
 it('keeps meat on a naturally dead cow until discovered and cut, with a valid save',()=>{
- const s=scene(),w=s.w;w.settings.rulesVersion=262;
+ const s=scene(),w=s.w;w.settings.rulesVersion=269;
  const p=addPerson(s,'Ada',40.5,40.5,{inv:{berries:3},hunger:90,thirst:90,energy:90});
  const cow=makeFarmAnimal(w,41,40,'cow','f');
  Object.assign(cow.sheep!,{hhId:p.hhId,food:0,water:0});
@@ -188,7 +188,7 @@ it('keeps meat on a naturally dead cow until discovered and cut, with a valid sa
 it.each([
   ['cow',12,48],['pig',7,28],['chicken',1,4],['goat',3,12],['sheep',4,16],
 ] as const)('recovers age-scaled portions from %s at both rules versions', (species, previous, raised)=>{
-  for(const [version,adultYield] of [[262,previous],[263,raised]]){
+  for(const [version,adultYield] of [[269,previous],[270,raised]]){
     const s=scene(),w=s.w;
     w.settings.rulesVersion=version;
     const p=addPerson(s,'Ada',40.5,40.5,{});
@@ -206,7 +206,7 @@ it.each([
 });
 
 it.each([
-  [263, true, 2], [264, true, 4], [264, false, 2],
+  [270, true, 2], [271, true, 4], [271, false, 2],
 ] as const)('expires sheep parts at the deadline for rules %i and ownership %s', (version, owned, days)=>{
   const s=scene(), w=s.w;
   w.settings.rulesVersion=version;
@@ -214,7 +214,7 @@ it.each([
   const sheep=makeFarmAnimal(w,41,40,'sheep','f');
   done(s);
   const body=makeCarcass(w,sheep,p,true,owned ? p.hhId : 0)!;
-  if (owned && version===264) {
+  if (owned && version===271) {
     w.tick=body.since+2*DAY;
     carcassTick(w);
     learn(w,p,body);
@@ -236,7 +236,7 @@ it.each([
   ['hut','meat'], ['cellar','pork'], ['storehouse','meat'],
 ] as const)('delivers surplus to a %s where another person can eat the %s', (destination, kind)=>{
   const s=scene(), w=s.w;
-  w.settings.rulesVersion=265;
+  w.settings.rulesVersion=272;
   const keeper=addPerson(s,'Ada',40.5,40.5,{inv:{[kind]:4,berries:2},hunger:95});
   const reader=addPerson(s,'Sam',40.5,40.5,{hh:destination==='storehouse'?undefined:keeper.hhId,hunger:20});
   expect(reader.hhId===keeper.hhId).toBe(destination!=='storehouse');
@@ -255,15 +255,15 @@ it.each([
   expect(conservationReport(w).ok).toBe(true);
 });
 
-it('counts fresh meat for a surplus trip from rules 265 and keeps the road ration',()=>{
+it('counts fresh meat for a surplus trip from rules 272 and keeps the road ration',()=>{
   const s=scene(), w=s.w;
   const p=addPerson(s,'Ada',40.5,40.5,{inv:{meat:4},hunger:95});
   const home=building(s,'hut',40,37,p.hhId);
   done(s);learn(w,p,home);
   const offer=()=>generateOptions(w,p,true,true).options.find(o=>o.key==='deposit:'+home.id+':food');
-  w.settings.rulesVersion=264;
+  w.settings.rulesVersion=271;
   expect(offer()).toBeUndefined();
-  w.settings.rulesVersion=265;
+  w.settings.rulesVersion=272;
   expect(offer()?.make?.()?.data.items).toEqual({meat:2});
   p.inv.meat=2;
   expect(offer()).toBeUndefined();
@@ -271,7 +271,7 @@ it('counts fresh meat for a surplus trip from rules 265 and keeps the road ratio
 
 it('rechecks a promise made after choosing the meat delivery',()=>{
   const s=scene(), w=s.w;
-  w.settings.rulesVersion=265;
+  w.settings.rulesVersion=272;
   const p=addPerson(s,'Ada',40.5,40.5,{inv:{meat:6},hunger:95});
   const recipient=addPerson(s,'Sam',40.5,40.5,{hh:p.hhId});
   const home=building(s,'hut',40,37,p.hhId);

@@ -11,7 +11,7 @@ const {opt}=argsOf(process.argv);
 const {w}=worldFromArgs(opt);
 const cora=w.persons.find(p=>p.id===76332 && p.name==='Cora')!;
 const ref=JSON.parse(readFileSync('review_evidence/aspiration-trace/gen-4.json','utf8'));
-if(!cora || w.tick!==ref.start || hashWorld(w)!==ref.initial || w.settings.rulesVersion!==259) throw Error('Wrong start');
+if(!cora || w.tick!==ref.start || hashWorld(w)!==ref.initial || w.settings.rulesVersion!==266) throw Error('Wrong start');
 const family=()=>householdOf(w,cora)!;
 const home=()=>homeOf(w,family())!;
 const householdMembers=()=>family().members.map(id=>w.byId.get(id)).filter((p):p is Person=>p?.ent==='person' && p.alive);

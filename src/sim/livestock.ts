@@ -68,7 +68,7 @@ export function seedSheep(w:World,reach?:Uint8Array):void{
   const x=food.x+dx,y=food.y+dy;if(!isWalkable(w,x,y)||reach&&reach[y*w.W+x]!==1)continue;
   let water=false;for(let yy=-6;yy<=6&&!water;yy++)for(let xx=-6;xx<=6;xx++)if(isWaterAccess(w,x+xx,y+yy)&&shoreWater(w,x+xx+.5,y+yy+.5)?.body.amount!>=1){water=true;break;}
   if(!water)continue;
-  if(runsRulesVersion(w,269)){
+  if(runsRulesVersion(w,276)){
    const bank=nearestDrinkingBank(w,x+.5,y+.5);
    if(!bank || localAnimalPath(w,x+.5,y+.5,bank.x,bank.y)===null)continue;
   }
@@ -212,7 +212,7 @@ export function updateSheep(w:World,a:Animal):void{
  if(fed){s.growth=Math.min(maturity(w,a),s.growth+1);if(farm&&adult(w,a)&&s.sex==='f'&&(a.type==='chicken'&&!s.pregnancy||(s.lactatingUntil??0)>w.tick))s.produceWork=Math.min(a.type==='chicken'?profile.litter*DAY:DAY,(s.produceWork??0)+1);if(a.type==='sheep'&&s.wool<2&&++s.woolWork>=2*DAY){s.wool++;s.woolWork=0;ledgerCreate(w,'wool',1,'wool grown by fed sheep');}}
  if(s.tether&&!home){s.tether.condition=Math.max(0,s.tether.condition-.005);if(s.tether.condition===0){s.tether=null;s.hhId=0;s.pregnancy=null;addEvent(w,'life','A neglected sheep tether broke.',[],a.x,a.y);}}
  if(!fed)a.health=Math.max(0,a.health-.025);
- if(a.health<=0){a.health=.001;const body=makeCarcass(w,a,undefined,false,s.hhId);if(body&&!runsRulesVersion(w,262)){const c=body.carcass!;for(const k of ['meat','hide','fat'] as const){ledgerSpoil(w,k,c.remaining[k],'sheep lost to neglect');c.lost[k]+=c.remaining[k];c.remaining[k]=0;}c.emptySince=w.tick;}return;}
+ if(a.health<=0){a.health=.001;const body=makeCarcass(w,a,undefined,false,s.hhId);if(body&&!runsRulesVersion(w,269)){const c=body.carcass!;for(const k of ['meat','hide','fat'] as const){ledgerSpoil(w,k,c.remaining[k],'sheep lost to neglect');c.lost[k]+=c.remaining[k];c.remaining[k]=0;}c.emptySince=w.tick;}return;}
  // Kept adults sharing an enclosure can breed without waiting for a keeper's mating job.
  if(home && (w.tick+a.id)%120===0 && !s.pregnancy && s.sex==='f' && adult(w,a)
     && w.tick>=s.breedAfter && s.food>=11 && s.water>=.5 && breedingSeason(w,speciesOf(a))

@@ -915,7 +915,7 @@ function optPlanBuild(ctx: Ctx): void {
     addSharedProjectOption(ctx,type,ctx.options.at(-1));
   };
 
-  if(home && runsRulesVersion(world,260) && knowTrees){
+  if(home && runsRulesVersion(world,267) && knowTrees){
     const beliefs=Object.values(p.beliefs);
     const stock=beliefs.filter(b=>b.sheep && (!b.sheep.hhId || b.sheep.hhId===p.hhId));
     for(const type of ['chicken_cage','paddock','barn'] as const){

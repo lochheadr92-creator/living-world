@@ -15,7 +15,7 @@
 // No list of the world's jobs, nobody else's skills, no central allocation. Two neighbours may pick the same trade; nothing
 // prevents it, and the crowding term makes it less likely.
 //
-// In rules 270 a person's initial skill preference gives way to a title earned by doing actual jobs (occupation.ts).
+// In rules 277 a person's initial skill preference gives way to a title earned by doing actual jobs (occupation.ts).
 // The title affects ranking, review and putting goods away. Eligibility, relief and danger are still handled by the planner.
 import { tradesOn } from './trade_switch';
 export { setTrades, tradesOn } from './trade_switch';

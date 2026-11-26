@@ -94,7 +94,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       if(e.gear){const g=e.gear,t=world.tools.find(t=>t.id===g.toolId);b.items={};b.hh=g.hhId;b.state='gear';b.gear={kind:g.kind,toolId:g.toolId,hhId:g.hhId,readyAt:g.readyAt,state:g.state,checked:g.checked,bodyId:g.bodyId,wear:t?.wear??100,catch:e.items.fish??0};}
       if(e.carcass){b.state='carcass';b.hh=e.carcass.hhId;b.carcassParts={...e.carcass.remaining};
         const species=e.carcass.species;
-        if(runsRulesVersion(world,262)&&species!=='deer'&&species!=='wolf')b.carcassLivestock=species;}
+        if(runsRulesVersion(world,269)&&species!=='deer'&&species!=='wolf')b.carcassLivestock=species;}
       if(e.mealFood)b.hh=e.mealFood.hhId;
       if(e.estate)b.hh=e.estate.hhId;
       return b;

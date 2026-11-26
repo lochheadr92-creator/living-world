@@ -10,7 +10,7 @@ import { runsRulesVersion } from './rulesversion';
 import type { Building, ItemKind, Person, World } from './types';
 
 export const DISMANTLE_TICKS = 40;
-const enabled = (w: World) => w.settings.dynamics === 'rich' && runsRulesVersion(w, 266);
+const enabled = (w: World) => w.settings.dynamics === 'rich' && runsRulesVersion(w, 273);
 
 function knowsReplacement(ctx: Ctx): boolean {
   if (!ctx.hh || !enabled(ctx.world) || currentRelocation(ctx.hh)) return false;
