@@ -125,7 +125,7 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
   const onFoot = pose === 'walk' || pose === 'run';
   const standing = work && pose === 'stand';
 
-  if (pose === 'talk') return pose;
+  if (pose === 'talk') return conv ? talkAnim(world, p, conv) : 'talk';
 
   switch (a.kind) {
     case 'wander': {
@@ -133,7 +133,12 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
       if (d.walk) return onFoot ? 'stroll' : standing ? 'walkout' : pose;
       if (!standing) return pose;
       if (d.evening === 'fire') {
-        return 'fire_sit';
+        const s = spoken(world, p);
+        if (s === 'story') return 'fire_story';
+        if (s === 'sing') return 'fire_sing';
+        if (s === 'thanks') return 'fire_thanks';
+        if (s === 'address') return 'fire_address';
+        return hearingStory(world, p) ? 'fire_listen' : 'fire_sit';
       }
       return 'idle';
     }
@@ -162,6 +167,9 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
       // early: waiting at the place for it to begin
       if (!o || o.status !== 'gathering') return 'stand';
       if (o.kind === 'funeral') return 'funeral';
+      const s = spoken(world, p);
+      if (s === 'thanks') return 'stand_thanks';
+      if (s === 'address') return 'stand_address';
       return o.kind === 'market' ? 'market' : 'celebrate';
     }
     case 'exchange_journey':
