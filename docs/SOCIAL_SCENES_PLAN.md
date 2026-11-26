@@ -232,7 +232,7 @@ Status of the five bundles:
 | A, meeting | 260 | Courting, welcoming newcomers, public praise | Built and committed |
 | B, hearth | 261 | Helping at a birth, the naming day, keeping vigil | Building |
 | C, company | 262 | Song, dance, reunion | Planned below |
-| D, growing up | 263 | Sitting with the grieving, coming of age, settling a child for the night | Planned below |
+| D, growing up | 263 | Sitting with the grieving, coming of age, settling a child for the night | Built (rules 263, 26 November 2026; `docs/SOCIAL_SCENES.md`, `src/sim/kin_scenes.ts`) |
 | E, standing together | 264 | Fetching someone home after dark, speaking for a shared building, standing up for someone | Planned below |
 
 The owner's ruling (26 November): all five bundles are built before the full test suite and the one 25-day lab are run. Each bundle is still checked on typecheck, its own tests, the reference worlds of every earlier version, the golden test, and a count of how often each scene happens in ordinary worlds.

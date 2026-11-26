@@ -4,6 +4,7 @@ import { rememberSigns } from './remembered_need';
 import { hasFeverSign, looksFeverish } from './fever_sign';
 import { hasCourting } from './meeting';
 import { hasBirthHelp, hasVigil } from './hearth_scenes';
+import { hasGriefSitting, hasSettling } from './kin_scenes';
 import { lapseReunion, noteReunion } from './reunion';
 import { hasVisibleNeed, STARVING_BELOW, PARCHED_BELOW } from './visible_need';
 import { waterSupplyNear } from './water_access';
@@ -78,6 +79,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     ...(e.activity?.data.walk && hasCourting(world) ? { walkingOut: true } : {}), // rules 260 (courting.ts)
     ...(e.activity?.data.lyingIn !== undefined && hasBirthHelp(world) ? { lyingIn: true } : {}), // rules 261 (birth_help.ts)
     ...(e.activity?.data.vigil !== undefined && hasVigil(world) ? { sittingUp: true } : {}), // rules 261 (vigil.ts)
+    ...((e.activity?.data.grief !== undefined && hasGriefSitting(world)) || (e.activity?.data.settle !== undefined && hasSettling(world)) ? { sittingWith: true } : {}), // rules 263 (grief_sit.ts, settle_child.ts)
     asleep: e.pose === 'sleep',
     act: e.activity ? e.activity.kind : '',
     busyTalking: e.convId !== 0,

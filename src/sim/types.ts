@@ -243,6 +243,8 @@ export interface SeenEntity {
   lyingIn?: boolean;
   /** rules 261 (vigil.ts): visibly sitting up beside somebody who is ill or hurt; present only while they do, and only with the part on */
   sittingUp?: boolean;
+  /** rules 263 (grief_sit.ts, settle_child.ts): visibly sitting beside somebody who has lost one of theirs, or beside a small child at bedtime; present only while they do, and only with the part on */
+  sittingWith?: boolean;
 }
 
 export type ActivityKind =
@@ -565,6 +567,8 @@ export interface LifeEvent {
   about: number;
   since: number;
   until: number;
+  /** rules 263 (grief_sit.ts): for a bereaved person, whom they lost when it was not a partner (the partner is the absence of this); set only with the part on */
+  of?: 'parent' | 'child' | 'sibling';
 }
 
 /** an apprenticeship (apprentice.ts; rich worlds only): whose, in what skill, since when, and when they last practised it */
@@ -629,6 +633,8 @@ export interface Occasion {
   named?: number[];
   /** rules 262 (dance.ts): who has begun to dance here (at most 8), how many of them have danced long enough to count (24 ticks), and whether the one line has been written; absent until somebody has begun */
   dance?: { by: number[]; steady?: number; line?: true };
+  /** rules 263 (coming_of_age.ts): the young people turning sixteen whose coming of age this feast is (at most 4); absent unless somebody's turning sixteen called or joined it with the part on */
+  comingOfAge?: number[];
   status: 'called' | 'gathering' | 'done';
   end: string;
 }
@@ -1154,6 +1160,8 @@ export interface Household {
   arrived?: number;
   /** rules 260 (welcome.ts): who has welcomed this household (at most two), kept and cleared with `arrived` */
   welcomed?: number[];
+  /** rules 263 (settle_child.ts): the tick of the last line written in the feed of a parent settling a child for the night, at most one in two days; absent until one is written */
+  settled?: number;
   relocations?: import('./relocation').Relocation[];
   /** rules 53 (succession.ts): undertakings members left unfinished at death, for a survivor to take up */
   unfinished?: import('./succession').Unfinished[];

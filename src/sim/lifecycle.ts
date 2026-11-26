@@ -7,7 +7,7 @@ import { foundMembership } from './townships';
 import { fireNear, nearestHub } from './settlements';
 import { hasHabitation, indoorHome } from './habitation';
 import { mourn, think } from './mood';
-import { noteBirth, noteDeath } from './occasions';
+import { noteBirth, noteComingOfAge, noteDeath } from './occasions';
 import { noteDeedNear } from './reputation';
 import { onBecameParent, onOrphanTaken, onPartnerLost } from './lifechanges';
 import { hasKnownAdoption, knownPlace } from './known_adoption';
@@ -66,6 +66,7 @@ export function lifeTick(world: World, p: Person): void {
     else if (code === 2) addEvent(world, 'life', `${p.name} has come of age and joins the work.`, [p.id], p.x, p.y);
     else if (code === 3) addEvent(world, 'life', `${p.name} is now an elder.`, [p.id], p.x, p.y);
     addLog(world, p, 'life', code === 2 ? 'Became an adult.' : code === 3 ? 'Grew old.' : 'Growing up.');
+    if (code === 2 && prev === 1) noteComingOfAge(world, p); // rules 263 (coming_of_age.ts): a feast is called for them
   }
 
   // death of old age: the yearly hazard rises with every year past the threshold (this runs once a minute of sim time)

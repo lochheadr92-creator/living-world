@@ -145,6 +145,14 @@ export const OFFER_LINES = ['You look hungry, {n}. Take this.', 'Here, {n} — y
 export const CARE_LINES = ['Eat up, {n}.', 'Here you go, {n}.', 'You must be hungry, {n}.'];
 export const TRADE_OK = ['Deal.', 'Fair enough.', 'Done.'];
 export const TRADE_NO = ['No, I need mine.', 'That’s not worth it to me.'];
+// rules 263 (settle_child.ts): a parent at a small child's bedtime
+export const BEDTIME_LINES = ['Time to sleep now, little one.', 'Close your eyes. I am here.', 'Shh. It has been a long day.', 'Sleep well. I will stay a while.'];
+// rules 263 (grief_sit.ts): a visitor sits down beside the bereaved, and the bereaved answers
+export const GRIEF_SIT_LINES = ['I am so sorry.', 'I came as soon as I heard.', 'You do not have to say anything.', 'I will sit with you a while.'];
+export const GRIEF_SIT_REPLIES = ['Thank you for coming.', 'Stay a little.', 'It helps, having you here.'];
+// rules 263 (coming_of_age.ts): a parent, or failing one the eldest there, at a feast for somebody who has turned sixteen
+export const COMING_OF_AGE_PARENT = ['You were so small once, {n}. Look at you now.', 'We are proud of you, {n}.', 'You are grown now, {n}. We are glad of you.'];
+export const COMING_OF_AGE_ELDER = ['{n} is grown now. Welcome among us.', 'Today {n} is one of us, to work and to be counted.', 'Good luck to you, {n}, as you begin.'];
 
 function agoText(world: World, seen: number): string {
   const d = world.tick - seen;

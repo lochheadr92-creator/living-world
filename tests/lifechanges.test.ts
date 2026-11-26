@@ -45,7 +45,8 @@ describe('losing a partner', () => {
       friend.needs.hunger = friend.needs.thirst = friend.needs.energy = 90;
       friend.cooldowns['check' + p.id] = 0;
       const ctx = generateOptions(w, friend, true);
-      expect(ctx.options.some((o) => o.kind === 'visit' && o.targetId === p.id)).toBe(true);
+      // rules 263 (grief_sit.ts): at the current rules the look-in is a sit (an option of kind rest, keyed grief:); before, a visit
+      expect(ctx.options.some((o) => (o.kind === 'visit' || o.key === 'grief:' + p.id) && o.targetId === p.id)).toBe(true);
     }
   });
 });

@@ -1569,6 +1569,99 @@ describe('the company scenes (rules 262): a song, a dance, a reunion', () => {
   });
 });
 
+describe('the kin scenes (rules 263): sitting with the grieving, coming of age, a child settled for the night', () => {
+  // the words are the code's (src/sim/grief_sit.ts, coming_of_age.ts, settle_child.ts)
+  const KIN = {
+    sat: 'Ben sat with Ada, who has lost her mother.',
+    satHim: 'Ada sat with Ben, who has lost his brother.',
+    satPartner: 'Cal sat with Ada, who has lost her partner.',
+    satParent: 'Cal sat with Ben, who has lost his parent.',
+    age: 'Dara came of age before 7 people and hopes for a solid home of their own.',
+    ageOne: 'Dara came of age before 1 person and hopes for a family.',
+    settled: 'Ada settled little Cal for the night.',
+    feastCalled: 'A coming-of-age feast for Dara is called at the fire today.',
+    feastBoth: 'A naming and coming-of-age feast for Tia, Mira and Dara is called at the fire today.',
+    feastBegins: 'The coming-of-age feast at the fire begins.',
+    sixteen: 'Dara has come of age and joins the work.',
+  };
+
+  it('a sit with the grieving is 62 and a child coming of age is 60 (both MIDDLE), whoever was lost and however many were there; a child settled is 20, filler', () => {
+    for (const text of [KIN.sat, KIN.satHim, KIN.satPartner, KIN.satParent]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'sat-grief', weight: 62 });
+    for (const text of [KIN.age, KIN.ageOne]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'came-of-age', weight: 60 });
+    expect(matchEvent(ev('social', KIN.settled))).toEqual({ id: 'settled', weight: 20 });
+    expect([bandOf(62), bandOf(60), bandOf(20)]).toEqual(['middle', 'middle', 'filler']);
+    expect(20).toBeLessThan(FILLER_BELOW);
+  });
+
+  it('nothing already named is taken: the vigil, the line at sixteen, the feast\'s own lines, and the same words in another kind or a retelling', () => {
+    // a vigil still ends in "who has a fever" or "who is hurt" and is the vigil's
+    expect(matchEvent(ev('social', 'Ada sat with Ben, who has a fever.')).id).toBe('vigil');
+    expect(matchEvent(ev('social', 'Ada sat up through the night with Ben, who is hurt.')).id).toBe('vigil');
+    // the line the world has always written at sixteen keeps the kind's weight, and the feast's own lines are the gathering rule
+    expect(matchEvent(ev('life', KIN.sixteen))).toEqual({ id: 'default:life', weight: 50 });
+    for (const text of [KIN.feastCalled, KIN.feastBoth, KIN.feastBegins]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'feast', weight: 55 });
+    // the words in another kind, or without what makes them these
+    expect(storyWeight(ev('work', KIN.sat))).toBe(0);
+    expect(storyWeight(ev('nature', KIN.settled))).toBe(0);
+    expect(matchEvent(ev('social', 'Ada sat with the others at the fire.')).id).not.toBe('sat-grief');
+    expect(matchEvent(ev('social', 'Dara came of age.')).id).not.toBe('came-of-age');
+    expect(matchEvent(ev('social', 'Ada settled the account for the night.')).id).not.toBe('settled');
+    for (const text of [KIN.sat, KIN.age, KIN.settled]) {
+      const told = 'Yan told a story at the fire: how ' + text[0].toLowerCase() + text.slice(1);
+      expect(matchEvent(ev('social', told)), told).toEqual({ id: 'story', weight: 10 });
+    }
+  });
+
+  it('a coming of age (60) is a MIDDLE event that waits its turn: after a first walk (62), behind the death that holds the shot', () => {
+    const { w, ada, ben, cal } = village('kin-order');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31);
+    d.step(w, 0);
+    const age = say(w, 'social', KIN.age, [cal.id, ada.id], 41, 30);
+    const walk = say(w, 'social', 'Ada and Ben walked out together for the first time.', [ben.id], 42, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev)).toEqual([age, walk]);
+    d.step(w, MIN_HOLD);
+    expect(d.shot?.ev, 'the first walk (62) before the coming of age (60)').toBe(walk);
+    expect([storyWeight(walk), storyWeight(age)]).toEqual([62, 60]);
+  });
+
+  /** Cal sits with Ben, as grief_sit.ts sets it up (sat down and in work) */
+  function grieving(tag: string, o: { travel?: boolean; unbegun?: boolean } = {}) {
+    const f = village(tag);
+    const { w, ada, ben, cal } = f;
+    ada.activity = newActivity(w, ada, { kind: 'rest', label: 'Sitting with Ben', goal: 'to sit with Ben, who has lost someone', here: !o.travel, amount: 900, data: { grief: { for: ben.id, since: w.tick, sat: 10, len: 250, ...(o.unbegun ? {} : { began: true as const }) }, sticky: true } });
+    return { ...f, cal };
+  }
+
+  it("a sit with the grieving under way is one live candidate for each bereaved person, 60, from the visitor's side, in the inspector's own words; gone when it ends, or before they have sat down", () => {
+    const { w, ada, ben } = grieving('kin-grief');
+    const g = scanLive(w).filter((c) => c.kind === 'grief');
+    expect(g.length).toBe(1);
+    expect(g[0].key).toBe(`grief:${ben.id}`);
+    expect(g[0].score).toBe(60);
+    expect(g[0].subjectId).toBe(ada.id);
+    expect(g[0].caption()).toBe(describePerson(w, ada.id)!.qa.doing);
+    expect(g[0].caption()).toContain('Sitting with Ben');
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.kind).toBe('live');
+    expect(d.shot?.liveKey).toBe(`grief:${ben.id}`);
+    expect(d.shot?.weight).toBe(60);
+    // it ends: the shot ends (the camera stays, the caption goes)
+    ada.activity = null;
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.ended).toBe(true);
+    expect(d.captionFresh()).toBe(false);
+    // one on the way (travel), or not yet sat down, is no scene; nor is the world with no sit at all
+    expect(scanLive(grieving('kin-grief-travel', { travel: true }).w).filter((c) => c.kind === 'grief')).toEqual([]);
+    expect(scanLive(grieving('kin-grief-unbegun', { unbegun: true }).w).filter((c) => c.kind === 'grief')).toEqual([]);
+    expect(scanLive(village('kin-grief-none').w).filter((c) => c.kind === 'grief')).toEqual([]);
+  });
+});
+
 describe('the reel: TOP and MIDDLE only', () => {
   it('picks the heaviest events of weight 50 and up in the window, in the order they happened', () => {
     const { w, ada } = village('reel');

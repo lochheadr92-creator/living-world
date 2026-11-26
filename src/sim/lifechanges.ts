@@ -11,6 +11,7 @@ import { DAY } from './constants';
 import { addLog } from './events';
 import { householdById, membersOf } from './households';
 import { isRich, think } from './mood';
+import { FEMALE_NAMES, MALE_NAMES } from './people';
 import { adjustRel } from './relations';
 import { noteDeedNear } from './reputation';
 import type { Household, LifeEvent, Person, World } from './types';
@@ -56,11 +57,8 @@ export function lifeEventOf(world: World, p: Person): LifeEvent | null {
   return e;
 }
 
-/** A partner has died: the widow or widower leans on kin and close friends, who come to look in. */
-export function onPartnerLost(world: World, bereaved: Person, dead: Pick<Person, 'id' | 'name'>): void {
-  if (!isRich(world) || !bereaved.alive) return;
-  set(world, bereaved, 'bereaved', dead.id);
-  addLog(world, bereaved, 'life', `Lost ${dead.name}. I will lean on those I have left.`);
+/** the concern raised in everyone near who is kin or fond when somebody is bereaved: the same for a partner and (rules 263) a parent, child or sibling */
+function raiseBereavedConcerns(world: World, bereaved: Person): void {
   for (const q of world.persons) {
     if (q === bereaved || !q.alive) continue;
     if (hasLocalDeath(world) && (q.pose === 'sleep' || !withinHearing(q, bereaved, 8))) continue;
@@ -72,6 +70,43 @@ export function onPartnerLost(world: World, bereaved: Person, dead: Pick<Person,
       if (q.concerns.length > 6) q.concerns.shift();
     }
   }
+}
+
+/** A partner has died: the widow or widower leans on kin and close friends, who come to look in. */
+export function onPartnerLost(world: World, bereaved: Person, dead: Pick<Person, 'id' | 'name'>): void {
+  if (!isRich(world) || !bereaved.alive) return;
+  set(world, bereaved, 'bereaved', dead.id);
+  addLog(world, bereaved, 'life', `Lost ${dead.name}. I will lean on those I have left.`);
+  raiseBereavedConcerns(world, bereaved);
+}
+
+/** the word for whom somebody lost, from the kind of kin and what the dead person's name says of their sex (rules 263) */
+export function kinWord(kin: 'partner' | 'parent' | 'child' | 'sibling', deadName: string): string {
+  if (kin === 'partner') return 'partner';
+  const base = deadName.split(' ')[0];
+  const sex = FEMALE_NAMES.includes(base) ? 'f' : MALE_NAMES.includes(base) ? 'm' : null;
+  if (kin === 'parent') return sex === 'f' ? 'mother' : sex === 'm' ? 'father' : 'parent';
+  if (kin === 'child') return sex === 'f' ? 'daughter' : sex === 'm' ? 'son' : 'child';
+  return sex === 'f' ? 'sister' : sex === 'm' ? 'brother' : 'sibling';
+}
+
+/**
+ * Rules 263 (grief_sit.ts): a person has learned that their parent, child or sibling has died. They are bereaved as a widow or widower is: the same life event, which says
+ * whom they lost, and the same concern in those near who are kin or fond. (Called from death_knowledge.ts learnDeath, with the part on.)
+ */
+export function onKinLost(world: World, bereaved: Person, dead: Pick<Person, 'id' | 'name'>, kin: 'parent' | 'child' | 'sibling'): void {
+  if (!isRich(world) || !bereaved.alive) return;
+  set(world, bereaved, 'bereaved', dead.id);
+  bereaved.lifeEvent!.of = kin;
+  addLog(world, bereaved, 'life', `Lost my ${kinWord(kin, dead.name)}, ${dead.name}. I will lean on those I have left.`);
+  raiseBereavedConcerns(world, bereaved);
+}
+
+/** whom a bereaved person lost, in a word ("mother", "partner", "brother"), or null if they are not bereaved; reads nothing it could write */
+export function lostWord(world: World, p: Person): string | null {
+  const e = peekLifeEvent(world, p);
+  if (!e || e.kind !== 'bereaved') return null;
+  return kinWord(e.of ?? 'partner', deceasedById(world, e.about)?.name ?? '');
 }
 
 /** A child was born to them: the parents are lifted, drawn to each other, and helped a little more readily. */
@@ -146,8 +181,11 @@ export function describeLifeEvent(world: World, p: Person): string | null {
   })();
   const days = Math.max(1, Math.ceil((e.until - world.tick) / DAY));
   switch (e.kind) {
-    case 'bereaved':
-      return `has lost ${name || 'their partner'} and leans on those close to them (${days} more days)`;
+    case 'bereaved': {
+      // rules 263: a lost parent, child or sibling is said as it is ("has lost their mother, Mara, and leans ..."); a partner as it always was
+      const word = e.of ? lostWord(world, p) : null;
+      return `has lost ${word ? `their ${word}${name ? `, ${name},` : ''}` : name || 'their partner'} and leans on those close to them (${days} more days)`;
+    }
     case 'new_parent':
       return `new parent of ${name}`;
     case 'moved':

@@ -130,7 +130,7 @@ export function isNamingMother(world: World, o: Occasion, p: Person): boolean {
 }
 
 /** who has come for this feast and is in the place: their attend activity is for this occasion and they are within reach of it */
-function comeAndThere(world: World, o: Occasion): Person[] {
+export function comeAndThere(world: World, o: Occasion): Person[] {
   const out: Person[] = [];
   for (const q of world.persons) {
     // somebody stopped to talk on the way in still has the feast in hand (their activity is held while they talk)

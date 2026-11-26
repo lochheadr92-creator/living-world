@@ -1,6 +1,8 @@
 import { noteFed } from './child_feeding';
 import {hasPromiseExpectations} from './promise_expectations';
 import { onLookedInOnBereaved } from './lifechanges';
+import { hasGriefSitting } from './kin_scenes';
+import { griefSitOption } from './grief_sit';
 import { hasPracticalCare, watchTick } from './responsibilities';
 import { birthHelpWork, onLookedInOnMother } from './birth_help';
 import {restoreWatchProgress} from './care_handback';
@@ -61,6 +63,7 @@ export function noteConcerns(world: World, p: Person): void {
   for (const s of p.seen) {
     if (s.ent !== 'person') continue;
     const have = p.concerns.find((c) => c.about === s.id);
+    if (have && have.kind === 'bereaved' && hasGriefSitting(world)) continue; // rules 263 (grief_sit.ts): seeing them again, well enough, settles no worry of this kind: the sit is for being with them
     const kind: Concern['kind'] | null = s.hurt ? 'hurt' : s.thirsty ? 'thirsty' : s.hungry ? 'hungry' : null;
     if (!kind) {
       // they are fine now: whatever worry there was is settled by what was just seen
@@ -153,7 +156,7 @@ export function welfareOptions(ctx: Ctx): void {
     }
     if (outOfDate(world, c, subject, p)) continue;
     // already in sight: the ordinary offering and caring options deal with it
-    if (ctx.seenPersons.some((s) => s.id === c.about)) continue;
+    if (ctx.seenPersons.some((s) => s.id === c.about) && !(c.kind === 'bereaved' && hasGriefSitting(world))) continue; // rules 263: a sit may be made beside somebody already in sight
     const rel = p.relations[c.about];
     const kin = !!rel?.kin || (!!living && living.hhId === p.hhId);
     const dependent = !!living && (hasKnownWelfare(world) ? knownDependent(world, living, c) : isDependent(world, living));
@@ -184,6 +187,7 @@ export function welfareOptions(ctx: Ctx): void {
     if (dependent) sc.add('someone who cannot manage alone', 6);
     if (ctx.night && !kin) sc.add('night', -8);
     if (sc.total < 8) continue;
+    if (c.kind === 'bereaved' && hasGriefSitting(world)) { griefSitOption(ctx, c, name, loc, sc, e); continue; } // rules 263 (grief_sit.ts): the look-in made a sit
     const goal = supplies ? `to bring ${Object.keys(supplies).join(' and ')} to ${name}` : `to see how ${name} is`;
     addOption(ctx, {
       kind: 'visit',

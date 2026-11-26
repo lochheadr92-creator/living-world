@@ -9,6 +9,9 @@ rules 123's indoor hearth, so the switch is `setHearthScenes` and the arms are `
 Bundle C (rules 262, `src/sim/company_scenes.ts`): all three parts are built (a song at the fire, a dance at a feast, a reunion); the send-off is out. Their uptake in ordinary worlds and the lab are NOT
 measured: by the owner's ruling of 26 November 2026 both run once, after bundle E (see "Measured (rules 262)" at the end). The bundle's switch file is not `company.ts`, and its whole-bundle arm is not
 `rich-no-company`: both belong to rules 200's room for company, so the switch is `setCompanyScenes` and the arms are `rich-no-company-scenes` and `rich-no-company-song|dance|reunion`.
+Bundle D (rules 263, `src/sim/kin_scenes.ts`): all three parts are built (sitting with the grieving, coming of age, settling a child for the night). Their uptake in ordinary worlds and the lab are NOT
+measured: by the owner's ruling of 26 November 2026 both run once, after bundle E (see "Measured (rules 263)" at the end). Two of the three are rare by nature (a death, a sixteenth birthday) and are proven by staged tests only.
+Nothing else in the code base is called `kin_scenes`, `setKinScenes` or `rich-no-kin`: the arms are `rich-no-kin-scenes` and `rich-no-kin-grief|age|settle`.
 
 ## Courting (rules 260, part 1)
 
@@ -376,6 +379,121 @@ asleep, a pair at rest, the part off, rules 261, an authored world, lapse, one c
 the pair resting); the scene (a run, the line, the wave and the words, fondness, the glad thought, the rest; a child; the other not stopped); failure (he leaves, sleeps, goes indoors, dies); the caps (two days; one of two
 runs); the part off and rules 261 (the shared stream where it was); save and load with a cue held and mid-run; the fingerprint; the validation; and an ordinary two-day world that prints what happened.
 
+## Sitting with the grieving (rules 263, part 10)
+
+**What a person can now do.** Somebody who has lost a PARTNER, a PARENT, a CHILD or a SIBLING is no longer left to it. A relative or a friend who knows of it, and is kin or fond of them, comes and sits beside them
+for about two to three hundred ticks, with a spoken word each, even if the bereaved was already in sight. A viewer sees "Sitting with B" in the inspector and a shot of it, and when it has lasted long enough to count,
+one line: "B sat with A, who has lost her mother." (the true relation: partner, mother, father, son, daughter, sister, brother; "parent", "child" or "sibling" when the name says nothing of sex). The person card of the
+bereaved says whom they lost: "has lost their mother, Mara, and leans on those close to them (10 more days)".
+
+**What it connects to.** Death knowledge (`death_knowledge.ts learnDeath`: whoever learns that their parent, child or sibling has died, by seeing it, by being told or at the grave, is bereaved as a widow or widower
+always was, by `lifechanges.ts onKinLost`; the concern is raised in those within eight tiles who are awake and kin or fond), life changes (the same `bereaved` life event: it is read, as before, by the lean on kin in a
+request's answer, the pull of company in the chat option, and the inspector), the welfare visit (`welfare.ts`: the look-in becomes the sit; a concern of kind `bereaved` is no longer dropped on the next sight of the
+person, and the offer is no longer skipped when they are in sight), a grave visit (the grief is eased as a visit to a grave eases it: the remaining `lost:` thought times 0.7, `options_places.ts`), relations and mood
+(the values of the old look-in, `onLookedInOnBereaved`), the story director (the line 62; a sit under way is a live shot at 60), the inspector (the activity's own label).
+
+**Where it differs from the plan.** (1) "Going to the grave together" is not built, as the plan said. (2) Sitting indoors is limited by the world's own rule that a home admits its own household only (`habitation.ts`): a
+visitor of another household sits with somebody out of doors, and a housemate sits with them in the room. A visitor who finds the bereaved indoors where they cannot follow turns back and writes nothing. (3) The
+concern is kept when the bereaved is in sight, for its own life (0.7 of a day), instead of being settled by a look at them: that is what lets a friend who is already looking at them offer the sit. A concern of another
+kind is dropped as it was. (4) Whom the bereaved lost is the `LifeEvent.of` the new function sets (`parent`, `child`, `sibling`); a lost partner has none and is worded as it always was. The words "mother" and "father",
+"son" and "daughter", "sister" and "brother" are told from the dead person's name (`people.ts` name lists); a name that says nothing of sex gives "parent", "child" or "sibling". (5) A bereaved INFANT is bereaved like anyone: a baby
+within hearing when its mother dies learns of it as everybody there does (`witnessDeath`), and is sat with. No age floor was added. (6) The sit's length (200 to 300 ticks) is drawn from a hash of the visitor, the bereaved
+and the tick, never the shared stream. (7) One feed line when the sit reaches 90 ticks, written at that moment, not at the end.
+
+**Switch and arm.** `setKinScenes(on, 'grief')`; arms `rich-no-kin-scenes` and `rich-no-kin-grief`.
+
+**Constants** (top of `src/sim/grief_sit.ts`). A sit lasts 200 to 300 ticks; it counts from 90; the bereaved answers at tick 24 of the sit; near is within 3.2 tiles; the visitor leaves for a need of their own (thirst under 35,
+hunger under 30, cold under 25, energy under 12) as in a vigil; the grief eased to 0.7 of what is left, at most once a day for each bereaved person; fonder by 3, trust by 2 and acquaintance by 1 for the bereaved, fonder
+by 1 for the visitor, glad thoughts of 6 for a day and 2 for half a day (the values of the look-in); a visitor does not come again to the same person for 1.2 days after a sit that counted (the look-in's own rest), nor for
+0.3 of a day after one that did not. The option is worth what the look-in was (12 plus 26 times the severity 0.7 times how fresh the worry is, less the walk, plus 7 for kin).
+
+**Refusal and interruption.** A danger believed about, the bereaved seen asleep, or somebody seen sitting beside them: not offered. Out of sight when the visitor arrives, asleep, in a home the visitor cannot enter, already sat with by somebody
+else: the visitor turns back, forgets the old place, waits 0.3 of a day, and nothing is written. A critical need or danger, the visitor's own thirst, hunger, cold or weariness, a fever of their own, losing sight of the
+bereaved, or the bereaved falling asleep ends the sit: under 90 ticks, a line in the visitor's own log and nothing in the feed.
+
+**Saved state.** `LifeEvent.of` (parent, child or sibling; absent for a partner), the sit's own record in the activity's data (`grief`: whom for, since when, ticks sat, length, whether they have sat down and whether it
+has counted), and the bereaved person's ordinary `cooldowns` (the day's easing); all in the world fingerprint and checked by `validateGriefSit`. `SeenEntity.sittingWith` is not saved.
+
+**Rare, and proven by staged tests only.** Deaths are 0.1 to 0.8 per settlement in 25 days at current rules (none in six settlements over 25 days, `docs/SOCIAL_SCENES_PLAN.md`): this part has not been seen in an ordinary world and
+is not tuned to be. Its uptake is for the count that follows bundle E to say.
+
+**Tests.** `tests/grief_sit.test.ts`: the switch; who is bereaved (the life event, the words for each of nine relations, the concerns within eight tiles and not beyond, the part off and rules 262, the inspector); the
+cue (offered with the bereaved in sight, the concern kept, six negatives each with its control, the old rule with the part off); the sit (the walk, the sitting, the line and the reply, the count and its one line,
+the eased grief, the end at its length, a partner, a visitor's own need, following her when she moves, her falling asleep); the caps (one sitter at a time, the day's easing); failure (asleep, gone); save and load mid-sit; the
+fingerprint; the validation; the lab arm.
+
+## Coming of age (rules 263, part 11)
+
+**What a person can now do.** The moment somebody turns sixteen, a feast is called for them through the engine's own call: "A coming-of-age feast for D is called at the fire today." The young person goes to it
+(they are in its `about`, which kept the people a feast is about away, and they are exempted as the mother of a child being named is). When it opens and the young person is there with at least one other grown person, a
+parent who is there says a few words (if no parent is, the eldest there does), and the young person says what they hope for. One line: "D came of age before 7 people and hopes for a solid home of their own." The hope
+is the one life.ts always gave: it is chosen at the feast, not up to half a day later.
+
+**What it connects to.** The life cycle (`lifecycle.ts lifeTick`: the same tick that writes "has come of age and joins the work."), occasions (`occasions.ts`: `callOccasion` takes a purpose as the naming day does,
+`Occasion.comingOfAge`; the label; the attend option; the opening), the naming day (`naming.ts`: `comeAndThere` is shared; a feast open for a naming takes the purpose too), hopes (`life.ts takeUpHope`: the half-day check
+now calls the same function), relations and mood (those there come to know the young person a little better; a glad thought), the dance (a coming-of-age feast is a feast: with four or more there it can be danced at),
+the story director (the line 60).
+
+**Where it differs from the plan.** (1) The label of a feast that is for both a naming and a coming of age is "naming and coming-of-age feast". (2) The line at sixteen is untouched and still written. (3) Only the feast
+OPENING says anything: a young person who joins a feast already under way (a second sixteenth birthday the same day after it has opened) has no words said and the hope is picked half a day later as before. (4) At most
+four young people share one feast (`COMING_MAX`, as the naming's four newborns); a fifth turning sixteen the same day joins the feast's `about` as ever but is not exempted from the rule that keeps the people a feast is about
+away. (5) The hope in the line is `GOAL_TEXT` (life.ts): "a solid home of their own" for a home, "a family", "a trade of their own", "a store that would see them through a lean season", "a good name among their
+neighbours"; what the young person SAYS is the same hope in the first person ("I hope for a solid home of my own."). (6) A speaker who is still holding the floor from the naming a moment before does not speak over it: the
+coming of age's line in the feed is written all the same. (7) The young person's brothers and sisters under twelve cannot attend, as before: that rule is not relaxed.
+
+**Switch and arm.** `setKinScenes(on, 'age')`; arms `rich-no-kin-scenes` and `rich-no-kin-age`.
+
+**Constants** (top of `src/sim/coming_of_age.ts`). At most 4 young people to a feast; at least 1 other grown person there; those who came are better acquainted by 3 and fonder by 1.5; the young person is glad,
+8 for a day. The feast is called at the usual 0.58 of the day.
+
+**Refusal.** The young person not there, or nobody else but children, or nobody at all: nothing is said, nothing is written (the empty feast's own "nobody came" is still the line of an empty one), and the hope is picked as
+it always was. A world where the part is off, or of rules 262, calls no feast at sixteen.
+
+**Saved state.** `Occasion.comingOfAge` (the young people whose feast it is, at most 4), in the fingerprint and checked by `validateComingOfAge`. Nothing else.
+
+**Rare.** Eight people turned sixteen in six settlements over 25 days, about one a settlement: this is rare, and not tuned.
+
+**Tests.** `tests/coming_of_age.test.ts`: the switch; the call (the flag, the label, the line still written, the part off and rules 262, nobody already grown, the options for the young person, her mother, a neighbour and
+not her brother of ten); the words (a parent speaks and the young person says what they hope for; the hope the same as life.ts picks for twelve different people; the eldest speaks if no parent is there; the line is
+written once); failure (nobody came, nobody else, she did not come); a feast already open (a naming, and the other way round, and four at most); save and load; the fingerprint; the validation; the lab arm.
+
+## Settling a child for the night (rules 263, part 12)
+
+**What a person can now do.** In the evening a parent who sees their own child under eight visibly tired, or lying down to sleep, at home, goes and sits beside them until the child has been asleep a little while, with
+one bedtime word. A viewer sees "Settling C for the night" in the inspector and a speech bubble, and, at most once for each household in two days, one line: "A settled little C for the night." Every settling writes a line
+in the parent's and the child's own logs. It changes nothing about when or how well the child sleeps.
+
+**What it connects to.** Sleep (`options_survival.ts optSleep` is untouched: the child goes to bed by its own clock as before, and a test shows the same energy and the same sleep with the part off), perception (the sign
+`tired`, energy under 25, and being asleep: all a parent can see; `SeenEntity.sittingWith` for a parent sitting there), the household (own child, same household, near the home door or the settlement centre), relations and mood
+(the parent and the child each a glad thought and a little closer), the story director (the line 20, filler).
+
+**Where it differs from the plan.** (1) The age limit is under 8, as the revised plan said after the count (77% of under-eights already sleep within 3 tiles of a parent, and a settlement of about 130 holds 14 to 38 of them).
+(2) One flag is read that is not a sight: the child's own `cooldowns.settled`, set when a parent sits down, which stands for the parents of a household knowing whether the little one was put to bed tonight. It is what keeps
+"a child is settled at most once an evening" true across both parents. (3) "The parent sees them" is by the ordinary rule: the child and the parent in the same room or on the same open ground; a parent outdoors does not see a
+child asleep indoors. (4) The feed line is written when the sit ends and counted (60 ticks or more), not when it begins. (5) The sit ends early, writing nothing, if the child is neither tired nor asleep for 90 ticks
+(not ready for bed) or the parent is called away by a need of their own. (6) The worth (70) and the energy gate (60) were set after one look at the first two evenings of an ordinary world, not as first written
+(40 and 45): at 40 the settling was offered 110 times in those two evenings and never chosen, because every parent was asleep or choosing sleep, and the three parents who were awake when a child lay down
+had energy 44, 23 and 22, so a gate of 45 would have kept two of them out. At 70 a parent sits first and goes to bed after (the plan's "a slightly later bedtime"), except at home in the dark with energy under
+about 35, where their own sleep is worth more. The children in that world all slept out of doors at a fire (nobody had a home), and seven of ten lay down with their parent already asleep: where the parents
+sleep at the child's hour, this part has nothing to do, and no count says how often that is.
+
+**Switch and arm.** `setKinScenes(on, 'settle')`; arms `rich-no-kin-scenes` and `rich-no-kin-settle`.
+
+**Constants** (top of `src/sim/settle_child.ts`). Under 8 years; the evening from 0.62 of the day to 0.97; within 12 tiles of home; the parent's hunger and thirst drives 30 or under and energy drive 60 or under (energy
+20 and over); worth 70 less the walk; the child is marked for half a day; the sit ends when the child has been asleep 60 ticks, after 240 at most, counts from 60; the parent leaves for thirst under 35, hunger under 30, cold under 25 or energy
+under 12; glad thoughts of 4 for half a day; the child fonder by 1.5, trust by 1, acquaintance by 0.5; the parent fonder by 1; the household's line at most once in 4,800 ticks.
+
+**Refusal and interruption.** Not in the evening, the parent a child or ill or laid up or with a critical need or a danger believed about, a drive over the gates, the child awake and not tired, not their own, of another
+household, eight or over, far from home, or settled already: no offer. On arrival the child gone, awake and not tired, or already being settled by the other parent: the parent turns back, waits 300 ticks for that child, and
+nothing is written.
+
+**Saved state.** `Household.settled` (the tick of the household's last line), the sit's own record in the activity's data (`settle`: whom, since when, ticks sat, ticks the child has been asleep, ticks not ready, whether
+the parent has sat down), the child's and parent's ordinary `cooldowns`; all in the fingerprint and checked by `validateSettling`.
+
+**Tests.** `tests/settle_child.test.ts`: the switch; the cue (offered, a tired child, twelve negatives each with its control, the part off and rules 262, a neighbour, read from the sign); its worth against the parent's own bedtime; the settling (the sit and the
+inspector, done at 60 ticks asleep, the same sleep as with the part off, the longest sit, not ready for bed, a need of the parent's); failure (the child got up, the other parent got there first, once an evening); the
+feed line (two children one line; the two-day boundary); the part off; save and load mid-sit; the fingerprint; the validation; the lab arms; an ordinary two-day world that prints what happened.
+
 ## Measured (rules 260)
 
 Measured on 26 November 2026 on the uncommitted tree at head `d7b55e98`, with rules 260 built and nothing committed. Raw outputs:
@@ -562,3 +680,20 @@ What was done, on the uncommitted tree at head `510cc5a1` (the rules-261 pin):
   the mood levels of those sitting ran from -8 to 19, 12 of 32 at 5 or more and 14 of 32 at 0 or more; with the good-spirits line at 5 no evening had a sociable grown sitter in good spirits among them, at 0 one of the two
   did. That is why the line is 0 (see "A song at the fire"). It is two evenings at one fire in one world.
 - Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-262 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, saved and continued 120 ticks, from a clean checkout of `bf07213c`: `tests/v262_continuation.*`), before any code gated at rules 263 or above.
+
+## Measured (rules 263)
+
+**Uptake in ordinary worlds and the lab are NOT measured.** By the owner's ruling of 26 November 2026 they run once, after bundle E, with every part's removal arm. Nothing below is a claim that a sit with the grieving,
+a coming of age or a settling for the night happens in an ordinary world, how often, or that it helps or harms anybody.
+
+What was done, on the uncommitted tree at head `beabe29a` (the rules-262 pin):
+- Staged scenes only for the three parts (`tests/grief_sit.test.ts`, `tests/coming_of_age.test.ts`, `tests/settle_child.test.ts`, and the kin block of `tests/director.test.ts`): they check each rule, not how often it happens.
+- Sitting with the grieving and coming of age are rare by nature and are proven by staged tests only: deaths are 0.1 to 0.8 a settlement in 25 days at current rules (none in six settlements), and 8 people turned sixteen in six
+  settlements over 25 days (`docs/SOCIAL_SCENES_PLAN.md`). They are reported as rare and not tuned to show.
+- One ordinary Normal world, gen-4, arrivals on, rules 263, the whole bundle on, TWO days (`tests/settle_child.test.ts`, the last test, `KIN_DAYS`; `KIN_REPORT=<file>` appends the line): it ran to the end of day 2 with 28 people
+  (5 under eight) and nothing was thrown. In it: settled lines 2 (185 person-ticks of parents sitting; of 588 evening samples of a parent and a child under eight of the household, the child was tired or asleep in 197, so seen by the parent in 188, and the settling offered in 84), sits with the grieving 0, coming-of-age feasts called 0, people who came of age 0. That is two days of one young settlement (nobody had a home: all slept out of doors at the fire) and says nothing about how often these happen.
+- The settling's worth and energy gate were changed after looking at that same world, which was run four times in all (first build, two read-only counts of why nothing was chosen, final), each two days and 15 to 25 seconds:
+  as first written (worth 40, energy gate 45) the settling was offered 110 times in the two evenings and never chosen, every parent being asleep or choosing sleep; of the ten times a child under eight lay
+  down for the night, the parent was already asleep or walking to bed in seven and awake in three (their energy 44, 23 and 22). That is why the worth is 70 and the gate 60 (see "Settling a child for the night").
+  It is two evenings of five children in one world.
+- Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-263 continuation pin is NOT recorded: it follows in its own commits, as the earlier pins did.

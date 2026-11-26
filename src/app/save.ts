@@ -23,6 +23,9 @@ import {validateVigil} from '../sim/vigil';
 import {validateSong} from '../sim/song';
 import {validateDance} from '../sim/dance';
 import {validateReunion} from '../sim/reunion';
+import {validateGriefSit} from '../sim/grief_sit';
+import {validateComingOfAge} from '../sim/coming_of_age';
+import {validateSettling} from '../sim/settle_child';
 import {validateShown} from '../sim/three_ages';
 import {validateHeld} from '../sim/bench_access';
 import {validatePreservation} from '../sim/preservation';
@@ -366,6 +369,9 @@ export function deserializeWorld(json: string): World {
   validateSong(w); // rules 262 (song.ts)
   validateDance(w); // rules 262 (dance.ts)
   validateReunion(w); // rules 262 (reunion.ts)
+  validateGriefSit(w); // rules 263 (grief_sit.ts)
+  validateComingOfAge(w); // rules 263 (coming_of_age.ts)
+  validateSettling(w); // rules 263 (settle_child.ts)
   validateShown(w);
   validateNightExperience(w);
   validateProjectGraphs(w);

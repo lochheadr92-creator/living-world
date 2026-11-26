@@ -36,6 +36,8 @@ import { praiseAtOccasion } from './praise';
 import { dancePose, danceStep } from './dance';
 import { hasNaming } from './hearth_scenes';
 import { isNamingFeast, isNamingMother, meetNamed, nameAtOpening, NAMING_MAX } from './naming';
+import { hasComingOfAge } from './kin_scenes';
+import { COMING_MAX, comeOfAgeAtOpening, comingOf, isComingOfAge, isComingOfAgeFeast } from './coming_of_age';
 
 /** how long an occasion stays open once it has opened */
 export const OCCASION_OPEN = 600;
@@ -49,7 +51,7 @@ const MEET_AT_MOST = 8;
 const KIND_LABEL: Record<OccasionKind, string> = { funeral: 'funeral', wedding: 'wedding feast', feast: 'feast', harvest: 'harvest feast', market: 'market' };
 
 /** the words for an occasion in the feed: a feast a birth called, with the naming part on, is a naming feast (naming.ts) */
-const labelOf = (o: Occasion): string => (isNamingFeast(o) ? 'naming feast' : KIND_LABEL[o.kind]);
+const labelOf = (o: Occasion): string => (isComingOfAgeFeast(o) ? (isNamingFeast(o) ? 'naming and coming-of-age feast' : 'coming-of-age feast') : isNamingFeast(o) ? 'naming feast' : KIND_LABEL[o.kind]); // rules 263 (coming_of_age.ts): a feast may be for both
 
 export const occasionsOf = (world: World): Occasion[] => world.occasions ?? [];
 
@@ -83,7 +85,7 @@ function nextDaylight(world: World, frac: number): number {
 }
 
 /** Call an occasion. Rich only; nothing happens in an authored world, and nothing without a place to hold it. */
-export function callOccasion(world: World, kind: OccasionKind, about: number[], frac = 0.4, naming?: number): Occasion | null {
+export function callOccasion(world: World, kind: OccasionKind, about: number[], frac = 0.4, naming?: number, comingOfAge?: number): Occasion | null {
   if (!isRich(world)) return null;
   const place = placeFor(world);
   if (!place) return null;
@@ -94,6 +96,8 @@ export function callOccasion(world: World, kind: OccasionKind, about: number[], 
     for (const id of about) if (!open.about.includes(id)) open.about.push(id);
     // rules 261 (naming.ts): a second birth before the feast is held is named at the same feast
     if (naming !== undefined && kind === 'feast' && !(open.naming ?? []).includes(naming) && (open.naming ?? []).length < NAMING_MAX) (open.naming ??= []).push(naming);
+    // rules 263 (coming_of_age.ts): somebody turning sixteen the same day shares the feast, and neither purpose is lost
+    if (comingOfAge !== undefined && kind === 'feast' && !comingOf(open).includes(comingOfAge) && comingOf(open).length < COMING_MAX) (open.comingOfAge ??= []).push(comingOfAge);
     return open;
   }
   const at = nextDaylight(world, frac);
@@ -112,6 +116,7 @@ export function callOccasion(world: World, kind: OccasionKind, about: number[], 
     status: 'called',
     end: '',
     ...(naming !== undefined && kind === 'feast' ? { naming: [naming] } : {}), // rules 261 (naming.ts): this feast is a child's naming
+    ...(comingOfAge !== undefined && kind === 'feast' ? { comingOfAge: [comingOfAge] } : {}), // rules 263 (coming_of_age.ts): this feast is somebody's coming of age
   };
   list.push(o);
   const names = about.map((id) => nameOfId(world, id)).filter(Boolean).join(' and ');
@@ -133,6 +138,11 @@ export function noteDeath(world: World, dead: Person): void {
 }
 export function noteBirth(world: World, baby: Person, mother: Person): void {
   callOccasion(world, 'feast', [baby.id, mother.id], 0.58, hasNaming(world) ? baby.id : undefined);
+}
+/** Somebody has turned sixteen (lifecycle.ts lifeTick): a feast is called for them, with the part on (rules 263, coming_of_age.ts); nothing is called without it. */
+export function noteComingOfAge(world: World, young: Person): void {
+  if (!hasComingOfAge(world)) return;
+  callOccasion(world, 'feast', [young.id], 0.58, undefined, young.id);
 }
 export function noteWedding(world: World, a: Person, b: Person): void {
   callOccasion(world, 'wedding', [a.id, b.id], 0.58);
@@ -173,6 +183,7 @@ export function occasionsTick(world: World): void {
       o.status = 'gathering';
       addEvent(world, 'social', `The ${labelOf(o)} at ${o.placeName} begins.`, o.about, o.x, o.y);
       nameAtOpening(world, o); // rules 261 (naming.ts): a child named aloud before those who are there when it opens
+      comeOfAgeAtOpening(world, o); // rules 263 (coming_of_age.ts): a few words, and the young person says what they hope for
     } else if (o.status === 'gathering' && world.tick >= o.until) {
       o.status = 'done';
       o.end = o.attended.length ? `${o.attended.length} came` : 'nobody came';
@@ -189,7 +200,7 @@ export function occasionsTick(world: World): void {
 function closeness(world: World, p: Person, o: Occasion): number {
   let c = 0;
   for (const id of o.about) {
-    if (id === p.id) return isNamingMother(world, o, p) ? 1 : 0; // the baby, the bride: they are there already by other means, and need no option to go (the mother of a child being named goes, rules 261)
+    if (id === p.id) return isNamingMother(world, o, p) || isComingOfAge(world, o, p) ? 1 : 0; // the baby, the bride: they are there already by other means, and need no option to go (the mother of a child being named goes, rules 261, and so does the young person whose coming of age it is, rules 263)
     const r = p.relations[id];
     if (!r) continue;
     if (r.kin) c = Math.max(c, 1);
@@ -209,7 +220,7 @@ export function attendOptions(ctx: Ctx): void {
   for (const o of list) {
     // worth setting out for a little before it opens, so that people arrive as it begins rather than as it ends
     const continuing=continuingOccasion(ctx,o);
-    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || (o.about.includes(p.id) && !isNamingMother(world, o, p))) continue;
+    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || (o.about.includes(p.id) && !isNamingMother(world, o, p) && !isComingOfAge(world, o, p))) continue;
     if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
     if (o.status === 'called' && world.tick < o.at - 200) continue;
     if(hasLocalMarket(world)&&!p.beliefs[o.placeId])continue;

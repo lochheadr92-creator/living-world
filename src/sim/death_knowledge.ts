@@ -6,7 +6,8 @@ import { isRich, think } from './mood';
 import { DAY } from './constants';
 import { addLog } from './events';
 import { relOf } from './relations';
-import { onPartnerLost } from './lifechanges';
+import { onKinLost, onPartnerLost } from './lifechanges';
+import { hasGriefSitting } from './kin_scenes';
 import { noteDeed } from './reputation';
 import { hyp } from './util';
 let enabled=true;
@@ -29,6 +30,7 @@ export function learnDeath(w:World,p:Person,d:DeathNotice,source:'witness'|'told
  if(kin||r.affinity>=45){p.needs.social=Math.max(0,p.needs.social-24);p.needs.safety=Math.max(0,p.needs.safety-8);}
  addLog(w,p,'life',`${source==='told'?'Heard':source==='grave'?'Read at the grave':'Saw'} that ${d.name} died.`);
  if(p.partnerId===d.id){p.partnerId=0;onPartnerLost(w,p,d);}
+ else if((kin==='parent'||kin==='child'||kin==='sibling')&&hasGriefSitting(w))onKinLost(w,p,d,kin); // rules 263 (grief_sit.ts): a lost parent, child or sibling is grieved as a partner is
 }
 export function deathStory(w:World,p:Person,d:DeathNotice,source:'witness'|'grave'):void{
  if(!hasLocalDeath(w))return;

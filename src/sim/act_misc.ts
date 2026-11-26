@@ -5,6 +5,8 @@ import { songAtFire } from './song';
 import { isReunion, reunionBegin, reunionWork } from './reunion';
 import { lyingInBegin, lyingInWork } from './birth_help';
 import { vigilBegin, vigilEnd, vigilWork } from './vigil';
+import { griefBegin, griefEnd, griefWork } from './grief_sit';
+import { settleBegin, settleEnd, settleWork } from './settle_child';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
@@ -58,10 +60,15 @@ registerHandler('rest', {
     if (a.data.lyingIn !== undefined) lyingInBegin(world, p, a);
     // rules 261 (vigil.ts): sitting up beside somebody who is ill or hurt
     if (a.data.vigil !== undefined) return vigilBegin(world, p, a);
+    // rules 263 (grief_sit.ts, settle_child.ts): sitting with somebody who has lost one of theirs, and settling a small child for the night
+    if (a.data.grief !== undefined) return griefBegin(world, p, a);
+    if (a.data.settle !== undefined) return settleBegin(world, p, a);
   },
   work(world, p, a): WorkResult {
     if (a.data.lyingIn !== undefined) return lyingInWork(world, p, a);
     if (a.data.vigil !== undefined) return vigilWork(world, p, a);
+    if (a.data.grief !== undefined) return griefWork(world, p, a);
+    if (a.data.settle !== undefined) return settleWork(world, p, a);
     if (isBoundedNightWait(world, a)) {
       const shelter = world.byId.get(a.targetId);
       if (!shelter || shelter.ent !== 'building') return 'fail:the shelter is no longer there';
@@ -87,6 +94,8 @@ registerHandler('rest', {
   },
   onEnd(world, p, a, outcome, detail) {
     if (a.data.vigil !== undefined) vigilEnd(world, p, a, outcome, detail); // rules 261 (vigil.ts): one line if it was long enough
+    if (a.data.grief !== undefined) griefEnd(world, p, a, outcome, detail); // rules 263 (grief_sit.ts)
+    if (a.data.settle !== undefined) settleEnd(world, p, a); // rules 263 (settle_child.ts)
   },
 });
 

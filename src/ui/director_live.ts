@@ -9,6 +9,7 @@
 import { HELP_NEAR } from '../sim/birth_help';
 import { isCourtWalk, type WalkData } from '../sim/courting';
 import { isDancing } from '../sim/dance';
+import { isGriefSit, type GriefData } from '../sim/grief_sit';
 import { isVigil, type VigilData } from '../sim/vigil';
 import { describePerson } from '../sim/inspect';
 import { statusLine } from '../sim/inspect_observer';
@@ -16,10 +17,10 @@ import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
 
-export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance';
+export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance' | 'grief';
 
 export interface LiveCandidate {
-  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>' or 'person:<id>' */
+  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>', 'grief:<id>' or 'person:<id>' */
   key: string;
   kind: LiveKind;
   score: number;
@@ -81,6 +82,8 @@ const LYING_SCORE = 72;
 const VIGIL_SCORE = 66;
 /** a dance under way at an occasion (rules 262, dance.ts): one candidate for the occasion */
 const DANCE_SCORE = 68;
+/** somebody sitting with the bereaved (rules 263, grief_sit.ts): one candidate for each bereaved person, once the visitor has sat down */
+const GRIEF_SCORE = 60;
 /** in real trouble: at risk, fleeing or standing against a threat (the inspector's danger tone) */
 const TROUBLE_SCORE = 50;
 /** unwell or hurt: the inspector's status line says so */
@@ -155,6 +158,8 @@ export function scanLive(world: World): LiveCandidate[] {
       const v = a.data.vigil as VigilData;
       if (!v.over) out.push({ key: `vigil:${v.for}`, kind: 'vigil', score: VIGIL_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
     }
+    // somebody sitting with the bereaved (grief_sit.ts: a 'rest' whose data.grief says they have sat down, in work), one for each bereaved person, from the visitor's side
+    if (isGriefSit(a) && (a.data.grief as GriefData).began) out.push({ key: `grief:${(a.data.grief as GriefData).for}`, kind: 'grief', score: GRIEF_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
   }
 
   // a dance under way (dance.ts: an 'attend' activity at the occasion whose data.dance is not over), two or more at one occasion: one candidate for the occasion, from

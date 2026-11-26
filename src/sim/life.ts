@@ -157,6 +157,17 @@ export function goalNudge(world: World, p: Person, o: Option): number {
   }
 }
 
+/**
+ * Take up the hope this person's nature leans to (`p.goal` must not be set already). The one rule that picks it: the half-day check below calls it, and from rules 263
+ * (coming_of_age.ts) so does the feast held for somebody who has just turned sixteen. The pick reads the person's traits and id and never the time it is asked, so asking
+ * at the feast gives the hope that asking up to half a day later would have.
+ */
+export function takeUpHope(world: World, p: Person): Goal {
+  const g: Goal = (p.goal = { kind: pickGoal(world, p), since: world.tick, progress: 0, done: 0 });
+  addLog(world, p, 'life', `What I hope for: ${goalWords(g)}.`);
+  return g;
+}
+
 /** Twice a day per person: take up a hope on coming of age, feel how far it is, and mark it reached. Also heals injuries. */
 export function lifeTickRich(world: World, p: Person): void {
   if (!isRich(world)) return;
@@ -165,10 +176,7 @@ export function lifeTickRich(world: World, p: Person): void {
   const stage = stageOf(world, p);
   if (stage === 'child' || stage === 'youth') return;
   let g = p.goal;
-  if (!g) {
-    g = p.goal = { kind: pickGoal(world, p), since: world.tick, progress: 0, done: 0 };
-    addLog(world, p, 'life', `What I hope for: ${goalWords(g)}.`);
-  }
+  if (!g) g = takeUpHope(world, p);
   if(hasLivedLife(world)&&stage==='elder'&&g.kind==='family'&&!g.done&&!g.companyHope&&!p.partnerId&&!p.children.length&&world.tick-g.since>=2*DAY){
     const companion=Object.entries(p.relations).find(([,r])=>r.company&&r.company.days>=2&&!r.deathKnown&&r.affinity>=20&&r.avoidUntil<=world.tick&&world.tick-r.company.last<=DAY);
     if(companion){g.companyHope={since:world.tick,from:Number(companion[0])};addLog(world,p,'life','After spending time together, I now hope for lasting company and being useful to someone. My earlier hope was a family.');}

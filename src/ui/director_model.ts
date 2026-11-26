@@ -98,12 +98,19 @@ const RULES: Rule[] = [
   // to be filler. The dance's line ("People danced at the wedding feast for A and B.") is not ranked: it keeps the unnamed social weight, and a dance under way is a live shot
   // (director_live.ts). None of them has what the gathering rules need (" is called at ", " begins") and a story that retells one keeps the story rank.
   { id: 'reunion', kind: 'social', test: (t) => / ran to meet .+, back after /.test(t), weight: 60 },
+  // the kin scenes (rules 263; the words are in src/sim/grief_sit.ts, coming_of_age.ts and settle_child.ts). Sitting with the grieving: "<B> sat with <A>, who has lost her mother." (partner, father,
+  // son, daughter, sister, brother), 62: a death's aftermath and rare. Coming of age: "<D> came of age before 7 people and hopes for <a hope>.", 60. A child settled for the night:
+  // "<A> settled little <C> for the night.", 20, filler (the line is written at most once for a household in two days, and a settlement holds dozens of small children). The
+  // life line at sixteen ("has come of age and joins the work") keeps the kind's weight, and the coming-of-age feast's own lines are the gathering rule above.
+  { id: 'sat-grief', kind: 'social', test: (t) => / sat with .+, who has lost (her|his) /.test(t), weight: 62 },
+  { id: 'came-of-age', kind: 'social', test: (t) => / came of age before \d+ (person|people) and hopes for /.test(t), weight: 60 },
   // between MIDDLE and FILLER: the one filler candidate holds one of these against a lighter newcomer (see admit)
   { id: 'walk', kind: 'social', test: has(' walked out together'), weight: 45 },
   { id: 'welcome', kind: 'social', test: has(' welcomed the newcomer'), weight: 40 }, // has " gave " in it as often as not, so it comes before the gift rule
   { id: 'walk-refused', kind: 'social', test: has(' said not today'), weight: 40 },
   { id: 'walk-cut', kind: 'social', test: has(' set out to walk together and turned back'), weight: 35 },
   { id: 'song', kind: 'social', test: (t) => / started a song at the fire and \d+ joined in\.$/.test(t), weight: 30 },
+  { id: 'settled', kind: 'social', test: (t) => / settled little .+ for the night\.$/.test(t), weight: 20 },
   // FILLER
   { id: 'home-finished', kind: 'build', test: has(' finished '), weight: 25 }, // a household's hut, lean-to or cellar
   { id: 'hope', kind: 'life', test: has('has what they hoped for'), weight: 25 }, // a home, a trade

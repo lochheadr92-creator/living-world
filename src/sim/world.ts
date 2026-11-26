@@ -479,6 +479,12 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
       if (p.reunion) push('Reunion' + p.id + ':' + JSON.stringify(p.reunion)); // rules 262 (reunion.ts)
       for (const a of [p.activity, p.suspended]) if (a && (a.data.dance || a.data.reunion)) push('CompanyScene' + p.id + ':' + a.id + ':' + JSON.stringify([a.data.dance, a.data.reunion])); // rules 262 (dance.ts, reunion.ts)
     }
+    for (const h of world.households) if (h.settled !== undefined) push('Settled' + h.id + ':' + h.settled); // rules 263 (settle_child.ts)
+    for (const o of world.occasions ?? []) if (o.comingOfAge) push('ComingOfAge' + o.id + ':' + JSON.stringify(o.comingOfAge)); // rules 263 (coming_of_age.ts)
+    for (const p of world.persons) {
+      if (p.lifeEvent?.of !== undefined) push('KinLost' + p.id + ':' + p.lifeEvent.of); // rules 263 (lifechanges.ts onKinLost)
+      for (const a of [p.activity, p.suspended]) if (a && (a.data.grief || a.data.settle)) push('KinScene' + p.id + ':' + a.id + ':' + JSON.stringify([a.data.grief, a.data.settle])); // rules 263 (grief_sit.ts, settle_child.ts)
+    }
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   if (world.townships) {

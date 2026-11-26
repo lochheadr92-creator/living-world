@@ -33,6 +33,9 @@ Bands, exported: `TOP_FROM` 80 (may cut in early), `MIDDLE_FROM` 50 (waits for t
   has a fever" ("sat with" by day, "who is hurt") 50. A birth with or without a helper is still "was born to" (90) and a naming feast is a feast (55).
   The company scenes (rules 262, `reunion.ts`, `song.ts`, `dance.ts`): a reunion "C ran to meet A, back after two days." (a day and a half, two and a half days, ...) 60.
   The song and the dance's line are below; a dance under way is a live shot.
+  The kin scenes (rules 263, `grief_sit.ts`, `coming_of_age.ts`, `settle_child.ts`): a sit with the grieving "B sat with A, who has lost her mother." (partner, father, son, daughter, sister, brother) 62,
+  a coming of age "D came of age before 7 people and hopes for a solid home of their own." 60; a sit with the grieving under way is a live shot of 60, one for each bereaved person. A child settled is below.
+  A coming-of-age feast, alone or with a naming ("A naming and coming-of-age feast for ... is called at the fire today."), is a feast (55); the line the world has always written at sixteen, "has come of age and joins the work.", keeps the life weight 50.
 - TOP, joined to the death: "A was with B when he died." 100. When it comes within MERGE_TICKS of B's own "died" line the plain death is taken out of the
   queue and this one, which follows A, stands for both: one top shot.
 - Between MIDDLE and FILLER (30 to 49): a later "walked out together." 45, "asked ... to walk out; ... said not today" 40, a later
@@ -40,7 +43,7 @@ Bands, exported: `TOP_FROM` 80 (may cut in early), `MIDDLE_FROM` 50 (waits for t
   be sung on about one evening in three at each fire, so it is meant to be the bottom of this band, filler for the one filler candidate and no more). The one
   filler candidate keeps one of these against a lighter newcomer; under 30 the newest still wins. The dance's line, "People danced at the wedding feast for A and B."
   (or "... at the harvest feast."), is not ranked and keeps the unnamed social weight 12; the dance is followed live instead.
-- FILLER: a household's hut, lean-to or cellar finished 25; "has what they hoped for" a home or a trade 25; a crew formed 22; a
+- FILLER: a child settled for the night "A settled little C for the night." 20 (rules 263: written at most once a household in two days, ranked low so it does not crowd out rarer scenes); a household's hut, lean-to or cellar finished 25; "has what they hoped for" a home or a trade 25; a crew formed 22; a
   gathering over 20; healed 20; "marked out" 10; gave, promised, fed, fire out or relit, made a tool, farm notes 5 to 15; a story
   told at the fire 10 (it retells something else, these scenes too). Never a shot (0): every `nature` and every other `work` event.
 - Unnamed wording: conflict 80, danger 50, life 50, social 12, build 10, trade 10, survival 8, farm 6.
