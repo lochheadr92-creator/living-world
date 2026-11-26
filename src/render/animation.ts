@@ -184,6 +184,44 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
     case 'attend_meal':
     case 'host_meal':
       return pose === 'sit' ? 'meal_sit' : pose === 'eat' ? 'meal_eat' : pose;
+    case 'craft':
+      return pose === 'craft' ? 'whittle' : pose;
+    case 'tool_work':
+      return pose !== 'craft' ? pose : d.textile ? 'weave' : d.cartId ? 'mend_cart' : 'mend_tool';
+    case 'butcher':
+      return pose === 'craft' ? 'butcher' : pose;
+    case 'animal_work': {
+      if (pose !== 'craft') return pose;
+      const op = d.op as string | undefined;
+      return op === 'feed' || op === 'water' ? 'feed_animal' : op === 'shear' ? 'shear' : op === 'slaughter' ? 'butcher' : 'tether';
+    }
+    case 'gear_work': {
+      if (pose !== 'craft') return pose;
+      const op = d.op as string | undefined;
+      return op === 'check' || op === 'retrieve' ? 'haul_net' : 'setgear';
+    }
+    case 'hang_skin':
+      return pose === 'craft' ? 'hangskin' : pose;
+    case 'operate':
+      return pose === 'craft' ? 'workbench' : pose;
+    case 'hunt':
+      return pose === 'pick' ? 'strike' : onFoot ? 'stalk' : pose;
+    case 'defend':
+      return pose === 'pick' ? 'guard' : onFoot ? 'charge' : pose;
+    case 'deposit':
+      return pose === 'store' ? 'putaway' : pose;
+    case 'withdraw':
+      return pose === 'store' ? 'takeout' : pose;
+    case 'haul':
+      return pose === 'store' ? 'heave' : pose;
+    case 'fuel_fire':
+      return pose === 'store' ? 'feedfire' : pose;
+    case 'fetch_water':
+      return pose === 'drink' ? 'filljar' : pose;
+    case 'repair':
+      return pose === 'build' ? 'mend' : pose;
+    case 'plan_site':
+      return pose === 'build' ? 'survey' : pose;
     default:
       return pose;
   }
