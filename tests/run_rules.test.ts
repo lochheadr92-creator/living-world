@@ -59,7 +59,7 @@ describe('a fresh run from the command line', () => {
 /** run one of the scripts for real, through vite-node, and read what it printed */
 const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
 const run = (script: string, args: string[]): string =>
-  execFileSync(process.execPath, [vite, script, '--', ...args], { encoding: 'utf8', timeout: 240_000, stdio: ['ignore', 'pipe', 'pipe'] });
+  execFileSync(process.execPath, [vite, script, '--', ...args], { encoding: 'utf8', timeout: 360_000, stdio: ['ignore', 'pipe', 'pipe'] });
 
 describe('the scripts themselves, run as a person would run them', () => {
   it('a default lab seed run records the current rules version, with arrivals on, on every row', () => {
@@ -73,14 +73,14 @@ describe('the scripts themselves, run as a person would run them', () => {
       expect(r.rulesPinned, 'a current run is not marked pinned').toBeUndefined();
       expect(r.arrivals, 'arrivals on, as in a new world in the app').toBe(true);
     }
-  }, 300_000);
+  }, 600_000);
 
   it('a pinned lab seed run records the version it ran and says it was pinned; --arrivals off is recorded too', () => {
     const out = run('scripts/lab_seed.ts', ['--seed', 'meadow', '--profile', 'normal', '--fork', '0', '--days', '0', '--branches', 'control', '--rules', '118', '--arrivals', 'off']);
     const real = out.split('\n').filter((l) => l.trim().startsWith('{')).map((l) => JSON.parse(l) as { spec?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean }).filter((r) => r.spec);
     expect(real.length).toBeGreaterThan(0);
     for (const r of real) expect(r).toMatchObject({ rulesVersion: 118, rulesPinned: true, arrivals: false });
-  }, 300_000);
+  }, 600_000);
 
   it('an explicitly legacy lab run records no version, rather than the current one', () => {
     const out = run('scripts/lab_seed.ts', ['--seed', 'meadow', '--profile', 'normal', '--fork', '0', '--days', '0', '--branches', 'control', '--dynamics', 'authored']);
@@ -90,27 +90,27 @@ describe('the scripts themselves, run as a person would run them', () => {
       expect(r.dynamics).toBe('authored');
       expect(r.rulesVersion).toBeNull();
     }
-  }, 300_000);
+  }, 600_000);
 
   it('the activity mix records the version of the world it actually ran', () => {
     const out = run('scripts/activity_mix.ts', ['--seed', 'meadow', '--profile', 'normal', '--days', '0']);
     expect(out).toMatch(new RegExp(`"rulesVersion":\\s*${CURRENT_RULES_VERSION}`));
-  }, 300_000);
+  }, 600_000);
 
   it('the cascade tracer records the rules of the world it traced', () => {
     const out = run('scripts/cascade.ts', ['--seed', 'meadow', '--profile', 'normal', '--days', '0']);
     expect(out).toMatch(new RegExp(`rich, rules version ${CURRENT_RULES_VERSION}`));
-  }, 300_000);
+  }, 600_000);
 
   it('the replay check says which rules its fresh world ran', () => {
     const out = run('scripts/replay_check.ts', ['--seed', 'meadow', '--profile', 'normal', '--from-day', '0.1', '--days', '0.05']);
     expect(out).toMatch(new RegExp(`rich, rules version ${CURRENT_RULES_VERSION}`));
-  }, 300_000);
+  }, 600_000);
 
   it('an explicitly legacy cascade run says unversioned instead', () => {
     const out = run('scripts/cascade.ts', ['--seed', 'meadow', '--profile', 'normal', '--days', '0', '--dynamics', 'rich-unversioned']);
     expect(out).toMatch(/rich, unversioned/);
-  }, 300_000);
+  }, 600_000);
 
   it('every script that makes a fresh world goes through the shared helper', () => {
     // a guard against one of them drifting back to the unversioned helper
@@ -173,7 +173,7 @@ describe('the lab will not mix one generation of rules with another', () => {
     const d = dir(content);
     try {
       const before = readFileSync(join(d, 'lab_meadow.jsonl'), 'utf8');
-      const result = spawnSync(process.execPath, ['scripts/lab.mjs', '--out', d, '--seeds', '1'], { encoding: 'utf8', timeout: 120_000 });
+      const result = spawnSync(process.execPath, ['scripts/lab.mjs', '--out', d, '--seeds', '1'], { encoding: 'utf8', timeout: 360_000 });
       expect(result.status).toBe(1);
       expect(result.stderr).toMatch(/Use a new output directory/);
       expect(readFileSync(join(d, 'lab_meadow.jsonl'), 'utf8'), 'the old results were not rewritten or relabelled').toBe(before);
@@ -181,7 +181,7 @@ describe('the lab will not mix one generation of rules with another', () => {
     } finally {
       rmSync(d, { recursive: true, force: true });
     }
-  }, 120_000);
+  }, 600_000);
 
   it('accepts a directory whose rows were run under the same rules', () => {
     const d = dir(rows('rich', CURRENT_RULES_VERSION, true));

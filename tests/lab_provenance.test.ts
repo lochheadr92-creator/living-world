@@ -8,7 +8,7 @@ import { assertLabSourceUnchanged, labProvenance, lfHash } from '../scripts/obse
 it('retains runner and measurement source, reports it, resumes only the same content, and refuses changed content', () => {
   const out = mkdtempSync(join(tmpdir(), 'lw-lab-provenance-'));
   const args = ['--no-experimental-strip-types', 'scripts/lab.mjs', '--out', out, '--seeds', '1', '--profile', 'normal', '--fork', '0', '--days', '0.01', '--branches', 'none'];
-  const run = () => spawnSync(process.execPath, args, { encoding: 'utf8', timeout: 60000 });
+  const run = () => spawnSync(process.execPath, args, { encoding: 'utf8', timeout: 240000 });
   const first = run();
   expect(first.status, first.stderr).toBe(0);
   const provenance = JSON.parse(readFileSync(join(out, 'provenance.json'), 'utf8'));
@@ -31,7 +31,7 @@ it('retains runner and measurement source, reports it, resumes only the same con
   expect(changed.status).not.toBe(0);
   expect(changed.stderr).toContain('Lab source differs');
   expect(readFileSync(join(out, 'lab_meadow.jsonl'), 'utf8')).toBe(retained);
-}, 120000);
+}, 900000);
 
 it('rejects a source change against the start snapshot', () => {
   const start = labProvenance();

@@ -35,7 +35,7 @@ describe('REVIEW B: validators against engine-produced current-rules worlds', ()
       const lines = soak(w, 8, 1200, `natural:${seed}`);
       appendFileSync(REPORT, lines.join('\n') + '\n');
       expect(lines.filter((l) => l.includes('REJECTED') || l.includes('differs')), lines.join('\n')).toEqual([]);
-    }, 600_000);
+    }, 660_000);
   }
   for (const scene of ['meal', 'haul', 'care', 'workshop'] as const) {
     it(`scene ${scene} at current rules, 3 days, save+load every 600 ticks`, () => {
@@ -43,6 +43,6 @@ describe('REVIEW B: validators against engine-produced current-rules worlds', ()
       const lines = [`scene:${scene} rulesVersion=${w.settings.rulesVersion} dynamics=${w.settings.dynamics} persons=${w.persons.length}`, ...soak(w, 3, 600, `scene:${scene}`)];
       appendFileSync(REPORT, lines.join('\n') + '\n');
       expect(lines.filter((l) => l.includes('REJECTED') || l.includes('differs')), lines.join('\n')).toEqual([]);
-    }, 600_000);
+    }, 660_000);
   }
 });

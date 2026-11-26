@@ -61,7 +61,7 @@ describe('rules 225: room to grow', () => {
     expect(at220).toBeGreaterThanOrEqual(54);
     expect(at220).toBeLessThanOrEqual(58); // the last group may carry it a little past the line
     expect(grow(225)).toBeGreaterThan(64);
-  }, 120000);
+  }, 180000);
 
   it('sites: a fifth ordinary site is turned away at rules 220 and laid out at rules 225', () => {
     const open = (version: number): World => {

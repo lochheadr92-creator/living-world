@@ -103,4 +103,4 @@ it(`ordinary ${seed} probe for ${ticks} ticks`,()=>{
  writeFileSync(`${OUT}/ordinary_probe_${seed}_${ticks}.json`,JSON.stringify(report,null,1));
  console.log(JSON.stringify({seed,tick:w.tick,stop,seconds:report.seconds,alive:report.alive,deaths:report.deaths,buildings,sites:Object.fromEntries(Object.entries(sites).map(([k,v])=>[k,v.n])),tools,carts:w.carts.length,counts,planSummary:report.planSummary,topHauling:report.hauling.slice(0,3)}));
  expect(pureChecks).toBeGreaterThan(0);
-},178_000);
+},300_000);

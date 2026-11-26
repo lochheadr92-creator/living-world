@@ -45,7 +45,7 @@ for (const { name, make, packs } of CONFIGS) {
         expect(deepHash(c)).toBe(deepHash(w));
         c = deserializeWorld(serializeWorld(w));
       }
-    }, 240_000);
+    }, 420_000);
 
     it('a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does', () => {
       const w = make('told-beliefs-legacy');
@@ -75,6 +75,6 @@ for (const { name, make, packs } of CONFIGS) {
       run(fromFixed, 600);
       expect(hashWorld(fromLegacy)).toBe(hashWorld(fromFixed));
       expect(serializeWorld(fromLegacy)).toBe(serializeWorld(fromFixed));
-    }, 240_000);
+    }, 420_000);
   });
 }

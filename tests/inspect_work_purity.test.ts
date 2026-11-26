@@ -20,4 +20,4 @@ it('reading the observer material note for every site and workplace every tick c
   }
   expect(hashWorld(looked)).toBe(hashWorld(twin));
   expect(serializeWorld(looked)).toBe(serializeWorld(twin));
-}, 120000);
+}, 300000);

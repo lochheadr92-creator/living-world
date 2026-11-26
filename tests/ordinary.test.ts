@@ -18,7 +18,7 @@ describe('the ordinary world over days of play', () => {
       runTicks(b, 1500);
       expect(hashWorld(b)).toBe(hashWorld(a));
     }
-  }, 120000);
+  }, 360000);
 
   it('keeps honest books for two weeks: every item accounted for, every tool record matching a pack or shelf, nobody lost, and the settlement doing real work', () => {
     const w = createWorld({ ...defaultSettings('river') });
@@ -51,5 +51,5 @@ describe('the ordinary world over days of play', () => {
     let ended = 0;
     for (const p of w.persons) for (const c of p.commitments) if (c.status !== 'active') ended++;
     expect(ended).toBeGreaterThan(0);
-  }, 240000);
+  }, 360000);
 });

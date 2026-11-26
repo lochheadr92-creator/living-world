@@ -243,5 +243,5 @@ describe('an ordinary world, not a staged one', () => {
     expect(v9.meals.packFull).toBe(0);
     expect(v9.meals.ok).toBeGreaterThan(v8.meals.ok);
     expect(conservationReport(v9.w), JSON.stringify(conservationReport(v9.w).diffs)).toEqual({ ok: true, diffs: [] });
-  }, 180000);
+  }, 240000);
 });

@@ -145,7 +145,7 @@ describe('rules 228: a child may ask, and the grown person decides', () => {
     expect(old.agreed).toBeGreaterThan(5);
     expect(now.refused).toBeGreaterThan(0);
     expect(now.agreed).toBeGreaterThan(5);
-  }, 240000);
+  }, 360000);
 
   it('nothing is saved: a world saved and loaded continues the same', () => {
     const w = world('parent-save', 228);

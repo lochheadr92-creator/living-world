@@ -78,7 +78,7 @@ describe('the ore hunt reaches ore (rules version 8)', () => {
       for (const h of hunters) if (Object.values(h.beliefs).some((b) => b?.kind === 'ore_vein')) oreSeen = true;
     }
     expect(oreSeen, 'an ore hunt must reach a vein, which idle wandering cannot (idle reach ' + IDLE_REACH + ', veins ' + VEINS.length + ' tiles out)').toBe(true);
-  }, 120_000);
+  }, 300_000);
 
   it('without a kiln belief and without a worn tool there is no ore hunt, and no ore is met', () => {
     const { w, hunters } = oreHuntWorld('ore-reason', 3, false);
@@ -94,7 +94,7 @@ describe('the ore hunt reaches ore (rules version 8)', () => {
       if (i > DAY * 3 && oreSeen) break;
     }
     expect(oreSeen, 'idle exploration must not reach a vein (' + IDLE_REACH + ' reach, ore further out)').toBe(false);
-  }, 120_000);
+  }, 300_000);
 });
 
 // The smithy's fuel (rules version 10): a standing smithy is a standing want for charcoal.

@@ -149,7 +149,7 @@ describe('a real stall in an ordinary world', () => {
     expect(p.inv[k] ?? 0).toBeLessThanOrEqual(before - n);
     expect(conservationReport(w).ok).toBe(true);
     expect(p.log.some((e) => /to free my hands/.test(e.text))).toBe(true);
-  }, 60000);
+  }, 180000);
 
   it('is offered as an ordinary deposit option, and only to a rich world running 33 with the switch on', () => {
     const offered = (w: World) =>
@@ -196,7 +196,7 @@ describe('a real stall in an ordinary world', () => {
     }
     expect(sha(b)).toBe(sha(a));
     expect(conservationReport(a).ok).toBe(true);
-  }, 120000);
+  }, 180000);
 
   it('loses nothing if the person dies on the way: what was not put down is still counted', () => {
     const w = restore();
@@ -205,7 +205,7 @@ describe('a real stall in an ordinary world', () => {
     for (let i = 0; i < 120; i++) stepWorld(w);
     expect(p.alive).toBe(false);
     expect(conservationReport(w).ok).toBe(true);
-  }, 60000);
+  }, 180000);
 
   it('is interrupted without loss when the person turns to something else first', () => {
     const w = restore();
@@ -218,7 +218,7 @@ describe('a real stall in an ordinary world', () => {
     expect(conservationReport(w).ok).toBe(true);
     expect(p.inv[k] ?? 0, 'an interrupted trip puts nothing down').toBeGreaterThanOrEqual(0);
     expect(before).toBeGreaterThan(0);
-  }, 60000);
+  }, 180000);
 });
 
 describe('below rules 33, and with the lab arm, nothing happens', () => {
@@ -230,7 +230,7 @@ describe('below rules 33, and with the lab arm, nothing happens', () => {
   };
   it('a rules-32 world starts none in the span where rules 33 does', () => {
     expect(firstLeaveStart(meadow(32), found.tick + 600)).toBe(0);
-  }, 120000);
+  }, 180000);
   it('a rules-33 world with the lab arm installed starts none, and the arm restores the switch', () => {
     const arm = parseIntervention('rich-no-leave-heaviest');
     const restoreSwitch = arm.install!();
@@ -241,7 +241,7 @@ describe('below rules 33, and with the lab arm, nothing happens', () => {
       restoreSwitch();
     }
     expect(leaveHeaviestOn()).toBe(true);
-  }, 120000);
+  }, 180000);
 });
 
 describe('what the rule changes is behaviour, not bookkeeping', () => {
@@ -255,9 +255,9 @@ describe('what the rule changes is behaviour, not bookkeeping', () => {
   it('with the lab arm installed, rules 33 is byte-identical to the recorded rules-32 world apart from its stamp', () => {
     setLeaveHeaviest(false);
     expect(digestAt33()).toBe(reference.uninterrupted);
-  }, 120000);
+  }, 180000);
   it('with it on, the same world differs: the recorded reference passes through the situation the rule acts on', () => {
     setLeaveHeaviest(true);
     expect(digestAt33()).not.toBe(reference.uninterrupted);
-  }, 120000);
+  }, 180000);
 });

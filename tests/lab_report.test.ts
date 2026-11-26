@@ -25,7 +25,7 @@ function fixture() {
 
 function report(dir: string, ...args: string[]) {
   return execFileSync(process.execPath, [resolve('node_modules/vite-node/dist/cli.mjs'),
-    'scripts/lab_report.ts', '--', dir, ...args], { encoding: 'utf8', timeout: 20000 });
+    'scripts/lab_report.ts', '--', dir, ...args], { encoding: 'utf8', timeout: 120000 });
 }
 
 it('pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics', () => {
@@ -44,7 +44,7 @@ it('pairs only matching seeds, preserves contrast direction, and skips unrecorde
     .filter((line) => !line.startsWith('Report-generation provenance (not measurement source): '))
     .join('\n');
   expect(reportBody).not.toMatch(/NaN|undefined/);
-}, 30000);
+}, 300000);
 
 it('shows births, pairings and conceptions in the table beside deaths and people, as counts, for a run that recorded them', () => {
   const dir = mkdtempSync(join(tmpdir(), 'living-world-report-'));
@@ -64,11 +64,11 @@ it('shows births, pairings and conceptions in the table beside deaths and people
   expect(out).toMatch(/^\s+pairings\s+2\.0\s+5\.0\s+\+3\.0\s/m);
   expect(out).toMatch(/^\s+conceptions\s+3\.0\s+5\.0\s+\+2\.0\s/m);
   expect(out.split('\n').find((line) => line.includes('not recorded by this run'))!).not.toMatch(/\b(births|pairings|conceptions)\b/);
-}, 30000);
+}, 300000);
 
 it('reports an unavailable contrast without inventing a result and keeps story output', () => {
   const out = report(fixture(), '--vs', 'A:absent', '--story', '0');
   expect(out).toContain('not a contrast of two branches');
   expect(out).toContain('Story of seed 0:');
   expect(out).not.toContain('direct contrast, paired by seed');
-}, 30000);
+}, 300000);

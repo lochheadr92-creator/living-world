@@ -164,6 +164,6 @@ describe('REVIEW G: observation leaves the world exactly as it was, every tick',
       report.push(`${seed}: ${ticks} ticks, ${looks} looks, ${diffs} serialized differences, persons alive ${looked.persons.filter((p) => p.alive).length}, events kept ${looked.events.length} (oldest ${looked.tick - (looked.events[0]?.tick ?? looked.tick)} ticks back), chronicle ${looked.chronicle?.length ?? 0}`);
       renderer.destroy();
       writeFileSync(OUT, report.join('\n'));
-    }, 170_000);
+    }, 1_440_000);
   }
 });

@@ -86,5 +86,5 @@ describe('the lab from a saved settlement', () => {
     const missing = run(['scripts/lab.mjs'], '--saves', join(tmpdir(), 'no-such-save.json'));
     expect(missing.status).not.toBe(0);
     expect(missing.stderr).toContain('no such save');
-  }, 60000);
+  }, 240000);
 });

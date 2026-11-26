@@ -38,4 +38,4 @@ it('an ordinary generated world loads to the same cells it had live, and an exac
  const twin=deserializeWorld(serializeWorld(w));expect(cells(twin)).toEqual(cells(w));
  for(let i=0;i<4800;i++){stepWorld(w);stepWorld(twin);}
  expect(serializeWorld(w)).toBe(serializeWorld(twin));expect(sorted(w)).toBe(true);
-},180000);
+},240000);

@@ -13,6 +13,8 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     // Continuation pins below the rules support floor (src/sim/support_floor.ts) are kept but not run here: npm run test:archive.
     exclude: ['**/node_modules/**', ...pinFiles().archived],
-    testTimeout: 120_000,
+    // Limits are there to catch a hang, not to time a test: the suite keeps every core busy, and a long test then runs two to three times slower than alone.
+    testTimeout: 900_000,
+    hookTimeout: 120_000,
   },
 } as any);

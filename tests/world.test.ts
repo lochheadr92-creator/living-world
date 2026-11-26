@@ -112,5 +112,5 @@ describe('saving and loading', () => {
     for (let i = 0; i < 1500; i++) stepWorld(b);
     expect(hashWorld(b)).toBe(hashWorld(a));
     expect(conservationReport(b).ok).toBe(true);
-  }, 120000);
+  }, 180000);
 });

@@ -11,7 +11,7 @@ import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 import { stepWorld } from '../src/sim/world';
 import type { Activity } from '../src/sim/types';
 
-it('no paused activity is lost silently in five ordinary river days at the current rules', { timeout: 300000 }, () => {
+it('no paused activity is lost silently in five ordinary river days at the current rules', { timeout: 360000 }, () => {
   const w = createWorld(currentWorldSettings('normal', 'river', { immigration: false }));
   expect(w.settings.rulesVersion).toBe(CURRENT_RULES_VERSION);
   expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(116);

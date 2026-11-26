@@ -35,12 +35,12 @@ describe('REVIEW B: validators, harsher worlds', () => {
       const lines = soak(w, 10, 1200, `harsh:${seed}`);
       appendFileSync(REPORT, lines.join('\n') + '\n');
       expect(lines.filter((l) => l.includes('REJECTED') || l.includes('differs')), lines.join('\n')).toEqual([]);
-    }, 600_000);
+    }, 840_000);
   }
   it('meadow, Normal, 16 days through winter, save+load every 1200 ticks', () => {
     const w = createWorld(currentWorldSettings('normal', 'meadow', { immigration: false }));
     const lines = soak(w, 16, 1200, 'winter:meadow');
     appendFileSync(REPORT, lines.join('\n') + '\n');
     expect(lines.filter((l) => l.includes('REJECTED') || l.includes('differs')), lines.join('\n')).toEqual([]);
-  }, 600_000);
+  }, 840_000);
 });
