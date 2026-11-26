@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "1a53fc6ae2809605a168beab745135bb2c5be56d",
+    "rules": 277,
+    "content": "986d267d383b73a9f467993cae0b45e756cebd3cec57fd9a347d562f6d612044",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 277, saved and continued 120 ticks. One pin for the twelve versions merged from the withdrawal branch on 27 November 2026 (rules 266 to 277, which were 259 to 270 there); the branch recorded none of its own. At the save this world holds two cows, two goats and a pig, 23 farm buildings, hay and stock feed, 31 people with an occupation record and 185 beliefs with remembered builders' shares. It holds no chicken, no sheep and no workshop errand, so those are not held by this pin."
+  },
+  "saved": "546a8f48e1aaa5f612856150d8e0ecc7357fb88400c1d3bc35961c3a8c29c872",
+  "continued": "cfdf836e2c74b0b1e63c72b8724e547f145bcc413d784ec44247b6365bf3ea98",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 41,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 2,
+  "housedAnimals": 0,
+  "farmBuildings": {
+    "barn": 10,
+    "chicken_cage": 1,
+    "paddock": 12
+  },
+  "farmGoods": {
+    "hay": 102,
+    "pork": 3,
+    "stock_feed": 91,
+    "wool": 3
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 185
+}
