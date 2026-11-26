@@ -31,11 +31,15 @@ Bands, exported: `TOP_FROM` 80 (may cut in early), `MIDDLE_FROM` 50 (waits for t
   first to welcome the newcomer" 58. The hearth scenes (rules 261, `birth_help.ts`, `naming.ts`, `vigil.ts`): a child named aloud "X and Y named
   their daughter Z before N people, after X's mother" (or "X named her son", "... his daughter") 58; a vigil ended "A sat up through the night with B, who
   has a fever" ("sat with" by day, "who is hurt") 50. A birth with or without a helper is still "was born to" (90) and a naming feast is a feast (55).
+  The company scenes (rules 262, `reunion.ts`, `song.ts`, `dance.ts`): a reunion "C ran to meet A, back after two days." (a day and a half, two and a half days, ...) 60.
+  The song and the dance's line are below; a dance under way is a live shot.
 - TOP, joined to the death: "A was with B when he died." 100. When it comes within MERGE_TICKS of B's own "died" line the plain death is taken out of the
   queue and this one, which follows A, stands for both: one top shot.
 - Between MIDDLE and FILLER (30 to 49): a later "walked out together." 45, "asked ... to walk out; ... said not today" 40, a later
-  "welcomed the newcomer" 40, "set out to walk together and turned back" 35. The one filler candidate keeps one of these against a lighter
-  newcomer; under 30 the newest still wins.
+  "welcomed the newcomer" 40, "set out to walk together and turned back" 35, a song "A started a song at the fire and N joined in." 30 (rules 262: it can
+  be sung on about one evening in three at each fire, so it is meant to be the bottom of this band, filler for the one filler candidate and no more). The one
+  filler candidate keeps one of these against a lighter newcomer; under 30 the newest still wins. The dance's line, "People danced at the wedding feast for A and B."
+  (or "... at the harvest feast."), is not ranked and keeps the unnamed social weight 12; the dance is followed live instead.
 - FILLER: a household's hut, lean-to or cellar finished 25; "has what they hoped for" a home or a trade 25; a crew formed 22; a
   gathering over 20; healed 20; "marked out" 10; gave, promised, fed, fire out or relit, made a tool, farm notes 5 to 15; a story
   told at the fire 10 (it retells something else, these scenes too). Never a shot (0): every `nature` and every other `work` event.
@@ -67,6 +71,9 @@ event takes it at once, anything else at the hold. A live shot's caption says "n
   4 tiles): 72, key `lying:<id>`, follows her; caption the inspector's "doing" line. With nobody beside her it is no shot.
 - A vigil under way (`vigil.ts`: a 'rest' whose `data.vigil` is set, in work, not over): one for each person sat with, 66, key `vigil:<id of the sick>`, follows the
   sitter; caption the inspector's "doing" line; gone when the vigil ends or the sick person has died.
+- A dance under way (`dance.ts`: an 'attend' activity whose `data.dance` is not over, two or more at one gathering that has begun): one candidate for the gathering,
+  68, key `dance:<occasion id>`, follows the first dancer; caption the inspector's "doing" line ("Dancing at the wedding feast"); gone when fewer than two dance
+  or the gathering is over. The gathering's own shot (wedding 70, feast and harvest 60) is there too, as before.
 - Trouble: `statusLine` tone 'danger' 50 (unwell or hurt 40); caption the status text.
 
 ## What it does not do

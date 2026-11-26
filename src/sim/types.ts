@@ -627,6 +627,8 @@ export interface Occasion {
   naming?: number[];
   /** rules 261 (naming.ts): which of them have been named aloud, before those who were there when it opened */
   named?: number[];
+  /** rules 262 (dance.ts): who has begun to dance here (at most 8), how many of them have danced long enough to count (24 ticks), and whether the one line has been written; absent until somebody has begun */
+  dance?: { by: number[]; steady?: number; line?: true };
   status: 'called' | 'gathering' | 'done';
   end: string;
 }
@@ -651,6 +653,8 @@ export interface Trade {
 }
 
 export interface Person {
+  /** rules 262 (reunion.ts): somebody they have just seen first-hand after more than a day and a half apart: who, how long (ticks, by their own last first-hand sighting) and when they saw them; kept 150 ticks, cleared when they set out or it lapses */
+  reunion?: { with: number; gap: number; at: number };
   /** rules 261 (birth_help.ts): the tick she began to lie in beside her home before her child; cleared at the birth */
   lyingIn?: number;
   /** rules 261 (birth_help.ts): how many births this person has been beside as a helper (1 to 99) */
@@ -886,6 +890,8 @@ export type BuildingType =
   | 'hall';
 
 export interface Building {
+  /** rules 262 (song.ts): the tick of the last song sung at this fire; one a fire an evening */
+  sung?: number;
   /** rules 260 (praise.ts): the tick a building for everyone was finished and its builders were due thanks in company; cleared when spoken or after three days */
   thanksDue?: number;
   ent: 'building';

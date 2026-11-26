@@ -1,6 +1,8 @@
 import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
 import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
 import { praiseAtFire } from './praise';
+import { songAtFire } from './song';
+import { isReunion, reunionBegin, reunionWork } from './reunion';
 import { lyingInBegin, lyingInWork } from './birth_help';
 import { vigilBegin, vigilEnd, vigilWork } from './vigil';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
@@ -122,15 +124,20 @@ registerHandler('wander', {
     if (isEveningSit(a)) a.duration = FIRE_TICKS;
     // rules 260 (courting.ts): a walk out together stands for a set while
     if (isCourtWalk(a)) courtWalkBegin(a);
+    // rules 262 (reunion.ts): they have got to the one they ran to meet: a reunion, or nothing (they were gone)
+    if (isReunion(a)) return reunionBegin(world, p, a);
     // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
     if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
   work(world, p, a): WorkResult {
     // rules 260 (courting.ts): a walk out together has its own count, and ends early if the other is called away
     if (isCourtWalk(a)) return courtWalkWork(world, p, a);
+    // rules 262 (reunion.ts): standing with them for a little after the meeting
+    if (isReunion(a)) return reunionWork(world, p, a);
     a.progress++;
-    // rules 260 (praise.ts): halfway through, a thanks owed or due is spoken in place of the story; otherwise (rules 216) a story may be told
-    if (isEveningSit(a) && !praiseAtFire(world, p, a)) eveningFireWork(world, p, a);
+    // rules 260 (praise.ts): halfway through, a thanks owed or due is spoken in place of the story; otherwise (rules 216) a story may be told;
+    // and with neither done at this sitting (rules 262, song.ts) a song may be started
+    if (isEveningSit(a) && !praiseAtFire(world, p, a) && !eveningFireWork(world, p, a)) songAtFire(world, p, a);
     return a.progress >= a.duration ? 'done' : 'continue';
   },
   onEnd(world, p, a, outcome) {

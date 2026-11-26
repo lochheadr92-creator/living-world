@@ -33,6 +33,7 @@ import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, Worl
 import { hyp } from './util';
 import { dueTraditions, noteOccasionOver, noteWinterOver, occasionOf } from './traditions';
 import { praiseAtOccasion } from './praise';
+import { dancePose, danceStep } from './dance';
 import { hasNaming } from './hearth_scenes';
 import { isNamingFeast, isNamingMother, meetNamed, nameAtOpening, NAMING_MAX } from './naming';
 
@@ -381,7 +382,7 @@ export function marketExchange(world: World, p: Person, o: Occasion): void {
 
 registerHandler('attend', {
   availability: 0.8,
-  pose: () => 'stand',
+  pose: (a) => dancePose(a), // rules 262 (dance.ts): walking while they step in the ring, standing otherwise
   begin(world, p, a) {
     const o = occasionsOf(world).find((x) => x.id === a.data.occasion);
     if (!o || o.status === 'done') return 'it was over by the time I got there';
@@ -397,6 +398,8 @@ registerHandler('attend', {
     if (!o.attended.includes(p.id)) arrive(world, p, o);
     // a gathering at the hall is out of the weather
     if (o.placeName === 'the hall' && p.needs.warmth < 90) p.needs.warmth = Math.min(100, p.needs.warmth + 0.06);
+    // rules 262 (dance.ts): with four or more there, those in good spirits walk a ring round the place, on a count of their own that leaves this one alone
+    danceStep(world, p, a, o, labelOf(o), () => o.about.map((id) => nameOfId(world, id)).filter(Boolean).join(' and '));
     a.progress++;
     return a.progress < a.duration ? 'continue' : 'done';
   },

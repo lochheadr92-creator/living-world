@@ -6,6 +6,9 @@ rules version of three separately switched parts, with a lab removal arm for the
 later in this file. Bundle B (rules 261, `src/sim/hearth_scenes.ts`): all three parts are built (helping at a birth, the naming day, keeping vigil); their uptake is in
 "Measured (rules 261)" at the end; the lab is not yet run. The bundle's switch file is not `hearth.ts` and its whole-bundle arm is not `rich-no-hearth`: both belong to
 rules 123's indoor hearth, so the switch is `setHearthScenes` and the arms are `rich-no-hearth-scenes` and `rich-no-hearth-birth|naming|vigil`.
+Bundle C (rules 262, `src/sim/company_scenes.ts`): all three parts are built (a song at the fire, a dance at a feast, a reunion); the send-off is out. Their uptake in ordinary worlds and the lab are NOT
+measured: by the owner's ruling of 26 November 2026 both run once, after bundle E (see "Measured (rules 262)" at the end). The bundle's switch file is not `company.ts`, and its whole-bundle arm is not
+`rich-no-company`: both belong to rules 200's room for company, so the switch is `setCompanyScenes` and the arms are `rich-no-company-scenes` and `rich-no-company-song|dance|reunion`.
 
 ## Courting (rules 260, part 1)
 
@@ -274,6 +277,105 @@ one with its control), the part off and rules 260, the sign and not the illness,
 through the night" in the dark, mended, cut short, a second sitter), no faster mending, no call to `expose`, the death with her beside him (one line, her grief cut) and
 the deaths without, save and load, the validation, the lab arm, and an ordinary-world report.
 
+## A song at the fire (rules 262, part 7a)
+
+**What a person can now do.** At the half-way point of an evening sitting by the fire (the point at which a thanks is spoken or a story told), with neither of those done at that sitting, the most sociable
+grown sitter in good spirits starts a song, and the others sitting there in good spirits join in with a line of their own. A viewer sees speech bubbles, and one line in the feed: "A started a song at the fire and
+N joined in." The fire has at most one song an evening, and the hash of the fire and the day gives it a song on about one evening in three.
+
+**What it connects to.** The evening fire (`evening_fire.ts`: the sitting, its half-way point and who counts as sitting there), public praise (`praise.ts`: a thanks comes first), the story (a story comes second;
+`eveningFireWork` now says whether one was told), mood (the song needs good spirits; it gives a glad thought), relations (a little fonder and better acquainted with every other singer), the want of company, the
+story director (the line is 30, filler).
+
+**Where it differs from the plan.** (1) "In good spirits" is the mood level at 0 or more (the inspector's 70 or more), not 5: in the first two evenings of an ordinary world the people who sat at the fire ran from -8
+to 19 and mostly between -5 and 8 (those who go to the fire are those who want company, which pulls the mood down), and at 5 no fire had a sociable grown sitter in good spirits. (2) Each sitter reaches the half-way
+point at their own tick, so the song is considered at anybody's half-way point; the one who starts it is the most sociable (the lowest id on a tie), not necessarily the one whose point it is. (3) At least one person
+must join, so "joined in" is never nought; the plan's "three or more sitting" is kept. (4) "One song a fire an evening" is kept by the tick of the last song on the fire (`Building.sung`), a fire that has had one being
+quiet for half a day, and the evening's hash.
+
+**Switch and arm.** `setCompanyScenes(on, 'song')`; arms `rich-no-company-scenes` and `rich-no-company-song`.
+
+**Constants** (top of `src/sim/song.ts` and `company_scenes.ts`). A song on about one evening in three (a hash of the fire and the day, 1/3); at least 3 sitting; the starter at sociability 0.5 or more and an adult or
+elder; the fire quiet for half a day (1,200 ticks) after a song; each singer's want of company eased by 6 on top of what the sitting gives, fonder by 1.5 and better acquainted by 0.5 with each other singer, a glad
+thought of 3 for half a day. Good spirits: mood level 0 or more. The story's listener values (fonder by 1.5, a glad thought of 2, 4 for a child) were the yardstick; nothing here is much above them.
+
+**Refusal and interruption.** Too few sitting, nobody sociable and in good spirits to start it, nobody in good spirits to join, the hash giving this fire no song this evening, a song already sung there in the last half
+day: nothing happens and nothing is written. A thanks owed or a story told at that sitting takes the place of the song.
+
+**Saved state.** `Building.sung`, the tick of the last song at that fire, in the world fingerprint and checked by `validateSong` (a fire only; not in the future; rich worlds of rules 262 and later). Nothing else.
+
+**Tests.** `tests/song.test.ts`: the switch, the arm and the rules; the song (the starter, the joiners' lines, the event, the eased want, the closeness, the glad thought); a child who joins and one who does not start;
+the tie; those low in mood; the negatives (two sitters, nobody to join, nobody sociable, nobody in the mood, no hash, the wrong half); the caps (one a fire an evening; the hash about a third); the order (a story first,
+a thanks first, else a song); the part off and rules 261 (events, needs, relations and thoughts equal, and the shared stream where it was); save and load across the half-way point; the fingerprint; the validation.
+
+## A dance at a feast (rules 262, part 7b)
+
+**What a person can now do.** At a wedding, a feast (a naming feast too) or a harvest feast that has begun, never a funeral and never a market, with four or more there, those in good spirits begin to walk a small ring
+round the place, a few steps at a time, for about 120 ticks, and then stand as before. At most eight dance at one gathering. A viewer sees them walking round the fire or the hall, the inspector says "Dancing at the
+wedding feast", and when the second has danced long enough one line in the feed: "People danced at the wedding feast for A and B." (the occasion's own words: "People danced at the harvest feast.").
+
+**What it connects to.** Occasions (`occasions.ts`: the attend handler calls the step; the occasion's own label and names are used), courting (two unpartnered dancers who pass courting's own conditions for walking out
+together gain what one counted walk gives, with the courting part on; the walk is not counted), mood and the want of company, the wolf's safe distance (`hardship.ts` `wolfNerve`), the story director (a dance under way
+is a live shot, 68; the line is not ranked).
+
+**Where it differs from the plan.** (1) At most eight dance (the coordinator's count of 26 November: the median gathering has 16 to 23 there at once, and a ring two tiles across holds eight): of those there who are fit to
+dance, the eight of the lowest ids, by a sort that reads nothing but ids; the rest stand as before. (2) The dancers are moved by direct steps along the ring, not by a path, because arriving at a spot restarts an
+activity (`activities.ts` `beginWork`); every step is checked to be open ground within 2 tiles of the place's footprint, and the first step that is not ends that person's dance where they stand. The attend activity's
+own progress and duration are not touched (tested tick by tick). (3) The ring is round the place's centre at half the footprint's diagonal and 0.8 more (1.5 for a fire, 2.9 for the 3 by 3 hall), not "2 tiles of the
+place": within 2 tiles of the footprint is the guard. (4) The line is written when the second person has danced 24 ticks, so a dance that stopped at once writes nothing. (5) Courting's own test is
+`mayWalkOutTogether` (new, in `courting.ts`, the ask's own conditions read both ways: unpartnered, grown, not kin, a spark, and the familiarity, affinity and trust it asks), without the hunger and the hour of
+`mayCourtNow`; `mayAskToWalk` is unchanged and now calls the same function. (6) There is no dance pose; a dancer is drawn walking on the ticks they step and standing between.
+
+**Switch and arm.** `setCompanyScenes(on, 'dance')`; arms `rich-no-company-scenes` and `rich-no-company-dance`.
+
+**Constants** (top of `src/sim/dance.ts`). At least 4 there at once; at most 8 dancers; 120 ticks a dancer; "has danced here" at 24 ticks; the ring within 2 tiles of the footprint, 0.8 outside the half-diagonal; a step
+of 0.06 of ring on 6 ticks in every 10, at 0.8 of a walk; a person not yet dancing looks every 5th tick; fed and watered (hunger and thirst 30 or more), energy 20 or more, health 60 or more, no injury; each who has
+danced: want of company eased by 6, a glad thought of 3 for half a day, fonder by 1.5 and better acquainted by 0.5 with each other dancer within 6 tiles who has danced as long (each pair once, by the later of the
+two); a pair with a spark: courting's walk gains (fondness 4, trust 2, familiarity 2). Daylight, or the place within 4 tiles (the wolf's safe distance) of a lit fire.
+
+**Refusal and interruption.** Fewer than four there, nobody in good spirits, a funeral or a market, the dark with no lit fire near the place, a step that is not open ground within reach: no dance for that person, nothing
+written. A dance under way stops where the dancer stands when the light goes with no fire near, when the gathering is over, or when a need of theirs falls. A talk that holds the activity keeps the count (it is in the
+activity's data).
+
+**Saved state.** `Occasion.dance` (who has begun, at most 8; how many have danced the 24 ticks; whether the line is written) and a dancer's own record in the activity's data (`dance`: ticks danced, the angle on the
+ring, its radius, stepping, over), both in the world fingerprint and checked by `validateDance`.
+
+**Tests.** `tests/dance.test.ts`: the switch and the arm; the ring (open ground within reach every tick, the attend clock and length untouched, walking while stepping and standing between, the label, the count); the
+line in the occasion's words at a wedding, a feast and a harvest feast, once; what it does for each who has danced; not at a funeral or a market; three there and four; those low in mood, hurt or unfed; eight of twelve,
+the lowest ids, the others standing; the dark away from a lit fire and beside one; a dance stopped by the light going; a hut on the ring; the courting gain once, with no walk counted, and not with courting off, a couple or
+strangers; the part off and rules 261 (positions, events, needs equal, the shared stream where it was); a dancer held and picked up; save and load mid-dance; the fingerprint; the validation.
+
+## A reunion (rules 262, part 8)
+
+**What a person can now do.** Somebody who sees their partner, their own child or their own parent after more than a day and a half apart, close to their own home and free to go, runs to meet them: they wave, each
+says a line, and one line goes in the feed: "C ran to meet A, back after two days." A child can run to a parent. It takes about a hundred ticks, and then both go on.
+
+**What it connects to.** Perception (`perception.ts`: the sighting is where the cue is made, and the person's own previous sighting in `whereabouts` is read before the new one replaces it), kin (the person's own
+record), the decision (an option worth 60, 4 more for a partner, less the walk), movement (the running speed fleeing uses, and the engine's following of a person in sight), relations, mood, the story director (60).
+
+**Where it differs from the plan.** (1) The cue is made in an OUTDOOR sighting only: an indoor one (`rememberRoomContact`) makes none, so a person waiting indoors does not run out. (2) A record that came by hearsay
+(it has a `from`) is no cue: it says nothing of when they last saw them. A record that was never made is none either. (3) The no-danger and no-critical-need tests are made when the run is offered, not at the sighting;
+the cue is kept 150 ticks for that. (4) The other is neither stopped nor given an activity: they wave and say a line where they are, and go on with what they were doing; the runner stands with them for 50 ticks. (5)
+The home test is the household's own home door within 12 tiles, or the nearest settlement centre (the camp, or one of `extraSettlements`) within 12 if the household has no home. (6) "Back after N days" is floored to the
+half day from the runner's own record ("a day and a half", "two days", "two and a half days"). (7) A pair rests two days from another reunion once they have met; the one who sets out holds the pair for 300 ticks while
+they run, so the other does not run too, and a run that fails costs only that hold.
+
+**Switch and arm.** `setCompanyScenes(on, 'reunion')`; arms `rich-no-company-scenes` and `rich-no-company-reunion`.
+
+**Constants** (top of `src/sim/reunion.ts`). More than 3,600 ticks (a day and a half); a cue kept 150 ticks; within 12 tiles of home; a pair rests 4,800 ticks (two days), holds 300 while one runs; the option is worth 60,
+plus 4 for a partner; met within 2.5 tiles, stand 50 ticks; fonder by 2 each way and better acquainted by 0.5; a glad thought of 4 for half a day.
+
+**Refusal and interruption.** A critical need, a danger believed about, the other asleep, busy talking, out of sight, indoors or dead, the runner indoors or in a talk, farther than 12 tiles from home, a cue gone stale,
+or a pair that rested: no run, or a run that ends where it was, and nothing is written (the inspector shows how the activity ended, as for any activity).
+
+**Saved state.** `Person.reunion` (who, the gap, when seen; kept 150 ticks) and the scene's record in the activity's data (`reunion`: whom, the gap, when set out, when met), both in the world fingerprint and checked
+by `validateReunion`. The pair's rest is in the person's ordinary `cooldowns`.
+
+**Tests.** `tests/reunion.test.ts`: the switch and the arm; the gap in words; the cue (the real gap, the old record read first, a child and a parent, no kin, the edge of a day and a half, hearsay, nothing before, either
+asleep, a pair at rest, the part off, rules 261, an authored world, lapse, one cue at a time); the offer (its parts, home and camp, twelve tiles, a critical need, a wolf, the other asleep or talking or gone, a stale cue,
+the pair resting); the scene (a run, the line, the wave and the words, fondness, the glad thought, the rest; a child; the other not stopped); failure (he leaves, sleeps, goes indoors, dies); the caps (two days; one of two
+runs); the part off and rules 261 (the shared stream where it was); save and load with a cue held and mid-run; the fingerprint; the validation; and an ordinary two-day world that prints what happened.
+
 ## Measured (rules 260)
 
 Measured on 26 November 2026 on the uncommitted tree at head `d7b55e98`, with rules 260 built and nothing committed. Raw outputs:
@@ -446,3 +548,17 @@ death in any of them; each took 530 to 550 s with the probe, three at a time and
 **Limits.** Three worlds, 45 days, young settlements of 30 to 66 people: the count of `scripts/vigil_count.ts` in six saved settlements (65 to 159 people, 25 days) was 46 episodes of health under 35 or a visible fever, 38 of them with
 kin alive, against 19 stretches here in 135 world-days, so these counts say what happens in a young settlement and little of an established one. The lab (12 fresh worlds, six saved settlements, two nudges) has not been run; whether any
 part moves people, deaths, mood or births is not measured, and the whole of this table is mechanism and opportunity, not benefit. The rules-261 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, from a clean checkout of `5fb051d2`: `tests/v261_continuation.*`), before rules 262.
+
+## Measured (rules 262)
+
+**Uptake in ordinary worlds and the lab are NOT measured.** By the owner's ruling of 26 November 2026 they run once, after bundle E, with every part's removal arm. Nothing below is a claim that the song, the dance or the
+reunion happens in an ordinary world, how often, or that it helps or harms anybody.
+
+What was done, on the uncommitted tree at head `510cc5a1` (the rules-261 pin):
+- Staged scenes only for the three parts (`tests/song.test.ts`, `tests/dance.test.ts`, `tests/reunion.test.ts`, and the company block of `tests/director.test.ts`): they check each rule, not how often it happens.
+- One ordinary Normal world, gen-4, arrivals on, rules 262, the whole bundle on, TWO days (`tests/reunion.test.ts`, the last test, `COMPANY_DAYS`): it ran to the end of day 2 with 28 people in 22 s and nothing was thrown.
+  In it: songs 0, dances 0, reunions 0, no cue held at the end. That is two days of one young settlement and says nothing about how often these happen.
+- One look at the mood of the people at the evening fire in that same world (the first two evenings, 26 half-way points at one fire): the hash gave that fire no song on either evening; the sitters numbered 2 to 13;
+  the mood levels of those sitting ran from -8 to 19, 12 of 32 at 5 or more and 14 of 32 at 0 or more; with the good-spirits line at 5 no evening had a sociable grown sitter in good spirits among them, at 0 one of the two
+  did. That is why the line is 0 (see "A song at the fire"). It is two evenings at one fire in one world.
+- Not run: the full suite, the lab, the uptake count in three ordinary worlds, the rules-262 continuation pin, a look in the browser or the inspector.

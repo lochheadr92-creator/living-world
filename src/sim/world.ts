@@ -473,6 +473,12 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     for (const h of world.households) if (h.arrived !== undefined || h.welcomed) push('Arrived' + h.id + ':' + JSON.stringify([h.arrived, h.welcomed])); // rules 260 (welcome.ts)
     for (const p of world.persons) if (p.lyingIn !== undefined || p.attended !== undefined || p.namedAfter !== undefined || p.birthAsked !== undefined) push('Hearth' + p.id + ':' + JSON.stringify([p.lyingIn, p.attended, p.namedAfter, p.birthAsked])); // rules 261 (birth_help.ts, naming.ts)
     for (const o of world.occasions ?? []) if (o.naming || o.named) push('Naming' + o.id + ':' + JSON.stringify([o.naming, o.named])); // rules 261 (naming.ts)
+    for (const b of world.buildings) if (b.sung !== undefined) push('Sung' + b.id + ':' + b.sung); // rules 262 (song.ts)
+    for (const o of world.occasions ?? []) if (o.dance) push('Dance' + o.id + ':' + JSON.stringify(o.dance)); // rules 262 (dance.ts)
+    for (const p of world.persons) {
+      if (p.reunion) push('Reunion' + p.id + ':' + JSON.stringify(p.reunion)); // rules 262 (reunion.ts)
+      for (const a of [p.activity, p.suspended]) if (a && (a.data.dance || a.data.reunion)) push('CompanyScene' + p.id + ':' + a.id + ':' + JSON.stringify([a.data.dance, a.data.reunion])); // rules 262 (dance.ts, reunion.ts)
+    }
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   if (world.townships) {

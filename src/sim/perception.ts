@@ -4,6 +4,7 @@ import { rememberSigns } from './remembered_need';
 import { hasFeverSign, looksFeverish } from './fever_sign';
 import { hasCourting } from './meeting';
 import { hasBirthHelp, hasVigil } from './hearth_scenes';
+import { lapseReunion, noteReunion } from './reunion';
 import { hasVisibleNeed, STARVING_BELOW, PARCHED_BELOW } from './visible_need';
 import { waterSupplyNear } from './water_access';
 import { observeFlood } from './flood';
@@ -128,6 +129,7 @@ export function stampExplored(world: World, p: Person, r: number): void {
  * Only things within the person's sensing radius become observations; everything seen is snapshotted into beliefs.
  */
 export function perceive(world: World, p: Person): void {
+  if (p.reunion) lapseReunion(world, p); // rules 262 (reunion.ts)
   observeFlood(world,p);
   const r = senseRadius(world, p);
   p.seen.length = 0;
@@ -160,7 +162,9 @@ export function perceive(world: World, p: Person): void {
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       const seenPerson = describeSeenPerson(world, e);
       p.seen.push(seenPerson);
+      const before = p.whereabouts[e.id]; // rules 262 (reunion.ts): their own last sighting, read before this one replaces it
       p.whereabouts[e.id] = { x: e.x, y: e.y, tick: world.tick };
+      noteReunion(world, p, e, before);
       // rules 106 (remembered_need.ts): how they looked goes with the note of where they were
       rememberSigns(world, p, seenPerson);
     } else if (e.ent === 'cart') {

@@ -19,7 +19,8 @@
 //          listener is glad of it (a child most: STORY_LIFT_CHILD) and a little fonder of the teller, and the teller is glad to have
 //          told it. Children are told first: the story is chosen for the youngest there.
 //
-// Not in this version: a story carried on by a listener to others, songs, an instrument, a fire lit for the evening on purpose.
+// Not in this version: a story carried on by a listener to others, an instrument, a fire lit for the evening on purpose. (Songs came at rules 262:
+// song.ts, called at the same half-way point after a thanks and a story.)
 //
 // Rich worlds at rules 216 and later only; rules 215 and earlier, authored worlds and a part switched off keep the old behaviour.
 import { newActivity, standSpotFor } from './activities';
@@ -127,26 +128,26 @@ export function eveningFireOptions(ctx: Ctx): void {
 
 export const isEveningSit = (a: Activity): boolean => a.data.evening === 'fire';
 
-/** Each tick of a sitting: halfway through, a story may be told. */
-export function eveningFireWork(w: World, p: Person, a: Activity): void {
-  if (a.progress !== Math.floor(a.duration / 2)) return;
-  tellStory(w, p, a);
+/** Each tick of a sitting: halfway through, a story may be told. Returns true if one was (a song, rules 262, is only for a sitting that had none). */
+export function eveningFireWork(w: World, p: Person, a: Activity): boolean {
+  if (a.progress !== Math.floor(a.duration / 2)) return false;
+  return tellStory(w, p, a);
 }
 
-function tellStory(w: World, p: Person, a: Activity): void {
-  if (!partOn(w, 'story') || (p.cooldowns.story ?? 0) > w.tick) return;
+function tellStory(w: World, p: Person, a: Activity): boolean {
+  if (!partOn(w, 'story') || (p.cooldowns.story ?? 0) > w.tick) return false;
   const fire = w.byId.get(a.data.fireId as number);
-  if (!fire || fire.ent !== 'building') return;
+  if (!fire || fire.ent !== 'building') return false;
   const st = stageOf(w, p);
-  if (st === 'child' || st === 'youth' || (st !== 'elder' && ageYears(w, p) < STORY_AGE)) return;
+  if (st === 'child' || st === 'youth' || (st !== 'elder' && ageYears(w, p) < STORY_AGE)) return false;
   const listeners = sittersAt(w, fire, p.id);
-  if (!listeners.length) return;
+  if (!listeners.length) return false;
   // an elder there tells it, not a younger grown person
-  if (st !== 'elder' && listeners.some((q) => stageOf(w, q) === 'elder')) return;
+  if (st !== 'elder' && listeners.some((q) => stageOf(w, q) === 'elder')) return false;
   // the story is chosen for the youngest listener: children are told first
   const youngest = listeners.reduce((x, y) => (ageYears(w, y) < ageYears(w, x) ? y : x));
   const story = pickStory(w, p.id, youngest.id);
-  if (!story) return;
+  if (!story) return false;
   p.cooldowns.story = w.tick + DAY;
   const tale = story.text.replace(/^they still tell how /, '');
   say(w, p, `Listen. They still tell how ${tale}.`, 'say', 90);
@@ -157,6 +158,7 @@ function tellStory(w: World, p: Person, a: Activity): void {
     adjustRel(q, p.id, w.tick, { aff: 1.5, note: `${p.name} told a story at the fire` });
   }
   think(w, p, 'told_story', STORY_LIFT, DAY / 2, 'told a story at the fire');
+  return true;
 }
 
 /** A sitting is finished: had for this evening, and it was company. */

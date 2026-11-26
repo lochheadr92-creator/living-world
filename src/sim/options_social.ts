@@ -4,6 +4,7 @@ import { isEveningFor } from './evening_fire';
 import { hasCourting } from './meeting';
 import { helperScorer, lieInOption, lyingInOpensAt, mayAskForHelpNow, mayBeAskedToAttend, motherAsking, motherSeenLyingIn } from './birth_help';
 import { vigilOption } from './vigil';
+import { reunionOption } from './reunion';
 import { WELCOME_BASE, WELCOME_GENEROUS, WELCOME_SOCIABLE, generousLean, mayWelcome, mayWelcomeNow } from './welcome';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
@@ -930,6 +931,7 @@ export function socialOptions(ctx: Ctx): void {
   lieInOption(ctx); // rules 261 (birth_help.ts)
   optBirthHelp(ctx);
   vigilOption(ctx); // rules 261 (vigil.ts)
+  reunionOption(ctx); // rules 262 (reunion.ts)
   optTrade(ctx);
   optSupply(ctx);
   optTeachTechnique(ctx);

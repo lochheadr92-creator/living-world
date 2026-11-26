@@ -37,6 +37,8 @@ import { MEETING_PARTS, meetingPartOn, setMeeting } from '../../src/sim/meeting'
 import type { MeetingPart } from '../../src/sim/meeting';
 import { HEARTH_PARTS, hearthPartOn, setHearthScenes } from '../../src/sim/hearth_scenes';
 import type { HearthPart } from '../../src/sim/hearth_scenes';
+import { COMPANY_SCENE_PARTS, companyScenePartOn, setCompanyScenes } from '../../src/sim/company_scenes';
+import type { CompanyScenePart } from '../../src/sim/company_scenes';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -340,6 +342,13 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-hearth-scenes' ? undefined : (kind.slice('rich-no-hearth-'.length) as HearthPart);
     const what: Record<HearthPart, string> = { birth: 'no woman lies in by her door, nobody is asked to be with her, and a birth is written as it was', naming: 'a birth feast is no naming feast, nobody is named aloud or after the dead', vigil: 'nobody sits up beside a kinsman who is feverish or hurt' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the hearth bundle: nobody lies in or is helped at a birth, no child is named at its feast, nobody sits up with the sick'}, as before rules 261; no effect below rules 261`, install() { const was = Object.fromEntries(HEARTH_PARTS.map((q) => [q, hearthPartOn(q)])) as Record<HearthPart, boolean>; setHearthScenes(false, part); return () => { for (const q of HEARTH_PARTS) setHearthScenes(was[q], q); }; } };
+  }
+  // rules 262 (company_scenes.ts): all three parts removed (equal to rules 261), and each part alone. `rich-no-company` is the older arm of rules 200's room for company (company.ts) and is untouched: the bundle's own is `rich-no-company-scenes`.
+  // All three parts have behaviour.
+  if (kind === 'rich-no-company-scenes' || (kind.startsWith('rich-no-company-') && (COMPANY_SCENE_PARTS as readonly string[]).includes(kind.slice('rich-no-company-'.length)))) {
+    const part = kind === 'rich-no-company-scenes' ? undefined : (kind.slice('rich-no-company-'.length) as CompanyScenePart);
+    const what: Record<CompanyScenePart, string> = { song: 'nobody starts a song at the evening fire', dance: 'nobody dances at a wedding, a feast or a harvest feast, they stand', reunion: 'nobody runs to meet a partner, child or parent seen again after a day and a half' };
+    return { spec: label, summary: `${part ? what[part] : 'no part of the company bundle: no song at the fire, no dance at a feast, no running to meet somebody home again'}, as before rules 262; no effect below rules 262`, install() { const was = Object.fromEntries(COMPANY_SCENE_PARTS.map((q) => [q, companyScenePartOn(q)])) as Record<CompanyScenePart, boolean>; setCompanyScenes(false, part); return () => { for (const q of COMPANY_SCENE_PARTS) setCompanyScenes(was[q], q); }; } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

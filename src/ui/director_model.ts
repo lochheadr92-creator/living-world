@@ -93,11 +93,17 @@ const RULES: Rule[] = [
   // feast's own lines ("A naming feast for ... is called at ...", "The naming feast at ... begins.") are the gathering rule above and keep 55.
   { id: 'named', kind: 'social', test: (t) => / named (their|her|his) (daughter|son) /.test(t), weight: 58 },
   { id: 'vigil', kind: 'social', test: (t) => / sat (up through the night )?with /.test(t) && (t.endsWith(', who has a fever.') || t.endsWith(', who is hurt.')), weight: 50 },
+  // the company scenes (rules 262; the words are in src/sim/reunion.ts, song.ts and dance.ts). A reunion: "<C> ran to meet <A>, back after two days." (a day and a half, two and
+  // a half days, ...), 60. A song: "<A> started a song at the fire and <N> joined in.", 30, the bottom of the band below, because it can happen most evenings and is meant
+  // to be filler. The dance's line ("People danced at the wedding feast for A and B.") is not ranked: it keeps the unnamed social weight, and a dance under way is a live shot
+  // (director_live.ts). None of them has what the gathering rules need (" is called at ", " begins") and a story that retells one keeps the story rank.
+  { id: 'reunion', kind: 'social', test: (t) => / ran to meet .+, back after /.test(t), weight: 60 },
   // between MIDDLE and FILLER: the one filler candidate holds one of these against a lighter newcomer (see admit)
   { id: 'walk', kind: 'social', test: has(' walked out together'), weight: 45 },
   { id: 'welcome', kind: 'social', test: has(' welcomed the newcomer'), weight: 40 }, // has " gave " in it as often as not, so it comes before the gift rule
   { id: 'walk-refused', kind: 'social', test: has(' said not today'), weight: 40 },
   { id: 'walk-cut', kind: 'social', test: has(' set out to walk together and turned back'), weight: 35 },
+  { id: 'song', kind: 'social', test: (t) => / started a song at the fire and \d+ joined in\.$/.test(t), weight: 30 },
   // FILLER
   { id: 'home-finished', kind: 'build', test: has(' finished '), weight: 25 }, // a household's hut, lean-to or cellar
   { id: 'hope', kind: 'life', test: has('has what they hoped for'), weight: 25 }, // a home, a trade

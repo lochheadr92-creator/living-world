@@ -171,7 +171,24 @@ export function mayCourtNow(ctx: Ctx): boolean {
 
 /** May the asker (who is in a state to, mayCourtNow) ask this person, seen `d` tiles away? Their own record of them only (rules 164). */
 export function mayAskToWalk(ctx: Ctx, q: Person, d: number): boolean {
-  const { world: w, p } = ctx;
+  return canAskToWalk(ctx.world, ctx.p, q, d);
+}
+
+/**
+ * The test of `mayAskToWalk`, from the two people and the world alone (the dance, dance.ts rules 262, asks it of two who are dancing, with no decision in hand): neither
+ * partnered, both grown, and each holds the other as somebody they might walk out with, on their own record, the way `mayAskToWalk` reads it. Not the hunger and the
+ * hour of `mayCourtNow`: they are dancing, not setting out.
+ */
+export function mayWalkOutTogether(w: World, p: Person, q: Person): boolean {
+  if (p.partnerId !== 0 || q.partnerId !== 0) return false;
+  for (const x of [p, q]) {
+    const st = stageOf(w, x);
+    if (st !== 'adult' && st !== 'elder') return false;
+  }
+  return canAskToWalk(w, p, q, 0) && canAskToWalk(w, q, p, 0);
+}
+
+function canAskToWalk(w: World, p: Person, q: Person, d: number): boolean {
   if (d > COURT_REACH || q.partnerId !== 0 || (p.cooldowns['court' + q.id] ?? 0) > w.tick) return false;
   const st = stageOf(w, q);
   if (st === 'child' || st === 'youth') return false;

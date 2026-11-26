@@ -1469,6 +1469,106 @@ describe('the hearth scenes (rules 261): a birth helped, a child named, a vigil 
   });
 });
 
+describe('the company scenes (rules 262): a song, a dance, a reunion', () => {
+  // the words are the code's (src/sim/song.ts, dance.ts, reunion.ts)
+  const COMPANY = {
+    song: 'Ada started a song at the fire and 3 joined in.',
+    song1: 'Ben started a song at the fire and 1 joined in.',
+    dance: 'People danced at the wedding feast for Ada and Ben.',
+    danceHarvest: 'People danced at the harvest feast.',
+    reunion: 'Cal ran to meet Ada, back after two days.',
+    reunionHalf: 'Cal ran to meet Ada, back after a day and a half.',
+    reunionHalf2: 'Ada ran to meet Ben, back after two and a half days.',
+  };
+
+  it('a reunion is 60 (a MIDDLE event), whatever the gap in days; a song is 30, the bottom of the band under MIDDLE and the filler; the dance line keeps the unnamed social weight', () => {
+    for (const text of [COMPANY.reunion, COMPANY.reunionHalf, COMPANY.reunionHalf2]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'reunion', weight: 60 });
+    expect(bandOf(60)).toBe('middle');
+    for (const text of [COMPANY.song, COMPANY.song1]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'song', weight: 30 });
+    expect(bandOf(30)).toBe('filler');
+    for (const text of [COMPANY.dance, COMPANY.danceHarvest]) expect(matchEvent(ev('social', text)).id, text).toBe('default:social');
+  });
+
+  it('nothing already named is taken, the same words in another kind are not these, and a story retelling one keeps the story rank', () => {
+    expect(storyWeight(ev('work', COMPANY.reunion))).toBe(0);
+    expect(storyWeight(ev('nature', COMPANY.song))).toBe(0);
+    expect(matchEvent(ev('social', 'Cal ran to meet the wolf.')).id, 'a run to meet nobody back after anything').not.toBe('reunion');
+    expect(matchEvent(ev('social', 'Ada started a song.')).id).not.toBe('song');
+    for (const text of [COMPANY.reunion, COMPANY.song]) {
+      const told = 'Yan told a story at the fire: how ' + text[0].toLowerCase() + text.slice(1);
+      expect(matchEvent(ev('social', told)), told).toEqual({ id: 'story', weight: 10 });
+    }
+    // the gathering's own lines and a death keep theirs
+    expect(matchEvent(ev('social', TEXT.weddingBegins)).id).toBe('wedding');
+    expect(matchEvent(ev('life', TEXT.death)).id).toBe('death');
+  });
+
+  it('a reunion (60) is a MIDDLE event that waits its turn: after a first walk (62), before a named child (58)', () => {
+    const { w, ada, ben, cal } = village('company-order');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31);
+    d.step(w, 0);
+    const named = say(w, 'social', "Ada and Ben named their daughter Cal before 6 people, after Ada's mother.", [ada.id, ben.id], 40, 30);
+    const reunion = say(w, 'social', COMPANY.reunion, [cal.id, ada.id], 41, 30);
+    const walk = say(w, 'social', 'Ada and Ben walked out together for the first time.', [ben.id], 42, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev)).toEqual([named, reunion, walk]);
+    d.step(w, MIN_HOLD);
+    expect(d.shot?.ev, 'the first walk (62) before the reunion (60)').toBe(walk);
+    expect([storyWeight(walk), storyWeight(reunion), storyWeight(named)]).toEqual([62, 60, 58]);
+  });
+
+  /** an occasion that has begun, with Ada and Ben dancing at it (as dance.ts sets it up) */
+  function dancing(tag: string, o: { second?: boolean; over?: boolean } = {}) {
+    const f = village(tag);
+    const { w, ada, ben } = f;
+    noteWedding(w, f.cal, ada);
+    const occ = w.occasions![0];
+    occ.status = 'gathering';
+    occ.at = w.tick - 5;
+    occ.until = w.tick + 1000;
+    occ.dance = { by: [ada.id, ben.id] };
+    const dance = (n: number, done = false) => ({ n, ang: 0, r: 1.5, ...(done ? { done: true as const } : {}) });
+    const mk = (p: typeof ada, done = false) => { p.activity = newActivity(w, p, { kind: 'attend', label: 'Dancing at the wedding feast', goal: 'to celebrate', targetId: occ.id, targetType: 'occasion', here: true, data: { occasion: occ.id, dance: dance(30, done) } }); };
+    mk(ada, o.over);
+    if (o.second !== false) mk(ben, o.over);
+    return { ...f, occ };
+  }
+
+  it("a dance under way, two or more dancing at an occasion that has begun, is one live candidate for the occasion, 68, from the first dancer's side, in the inspector's own words", () => {
+    const { w, ada, occ } = dancing('company-dance');
+    const live = scanLive(w).filter((c) => c.kind === 'dance');
+    expect(live.length).toBe(1);
+    expect(live[0].key).toBe(`dance:${occ.id}`);
+    expect(live[0].score).toBe(68);
+    expect(live[0].subjectId).toBe(ada.id);
+    expect([live[0].x, live[0].y]).toEqual([occ.x, occ.y]);
+    const doing = describePerson(w, ada.id)!.qa.doing;
+    expect(live[0].caption()).toBe(doing);
+    expect(doing).toContain('Dancing at the wedding feast');
+    // the gathering's own shot is there too (wedding 70), and the dance (68) after it
+    const kinds = scanLive(w).map((c) => c.kind);
+    expect(kinds.indexOf('occasion')).toBeLessThan(kinds.indexOf('dance'));
+    // the director takes the best live shot; with the wedding's own out of the way (its cooldown) it is the dance
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.kind).toBe('live');
+    expect(['occ:' + occ.id, 'dance:' + occ.id]).toContain(d.shot?.liveKey);
+  });
+
+  it('one dancer is no dance, a dance that is over is none, and nor is one at a gathering that has not begun or is done', () => {
+    expect(scanLive(dancing('company-dance-one', { second: false }).w).filter((c) => c.kind === 'dance')).toEqual([]);
+    expect(scanLive(dancing('company-dance-over', { over: true }).w).filter((c) => c.kind === 'dance')).toEqual([]);
+    const done = dancing('company-dance-done');
+    done.occ.status = 'done';
+    expect(scanLive(done.w).filter((c) => c.kind === 'dance')).toEqual([]);
+    const plain = village('company-dance-none');
+    expect(scanLive(plain.w).filter((c) => c.kind === 'dance')).toEqual([]);
+  });
+});
+
 describe('the reel: TOP and MIDDLE only', () => {
   it('picks the heaviest events of weight 50 and up in the window, in the order they happened', () => {
     const { w, ada } = village('reel');
