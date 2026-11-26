@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "c14b6054eaa5a583c0da48007ea6db80bda75b62",
+    "rules": 278,
+    "content": "98ad0b6b6527472a70f4046cb4fcf29db9fa99fa545e69b548dd8ded0ed754ea",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 278, saved and continued 120 ticks. One pin for rules 278 alone, the worrier sets out once somebody has promised to come (src/sim/fetch_home.ts setsOutScore, called from joinParty: from 278, in a rich world with the fetch part and its own switch on, the worrier's walk to look for the missing one is offered at FETCH_JOIN_SCORE less the walk, once somebody has promised to come). It is the same world, tick and continuation length as the rules 277 pin, written with a copy of its helper (tests/helpers/v278ref.ts), so the two can be compared digest by digest. Rules 278 adds no saved field, no draw and no feed line; the counts beside the digests are the same kind as the 277 pin's and are of the saved world. This pin was not probed for whether anyone in this world is asked to fetch someone home, promises and sets out within the 120 continued ticks: the repair itself is shown by the staged scenes of tests/fetch_sets_out.test.ts, and this pin holds whatever this world does at 278."
+  },
+  "saved": "812b485f192a7221bbe8d3af0e1ee8ca3575742be29e0f3ac8a84fd34d58f5b1",
+  "continued": "be594a85988741aa41d64b01a8e0d7997ea9b91c45ffc589827171dd7e90ef92",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 41,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 2,
+  "housedAnimals": 0,
+  "farmBuildings": {
+    "barn": 10,
+    "chicken_cage": 1,
+    "paddock": 12
+  },
+  "farmGoods": {
+    "hay": 102,
+    "pork": 3,
+    "stock_feed": 91,
+    "wool": 3
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 186
+}
