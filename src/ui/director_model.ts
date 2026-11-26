@@ -18,8 +18,9 @@
 // place. A shot whose person goes to bed is `spent` once it has been up the hold (an event or filler shot) or MIN_CUT (a live one):
 // it has no caption, a waiting MIDDLE or TOP event takes it at once, and anything else replaces it at once, without the linger. The
 // one exception is a wolf, which is shown on a sleeper it is stalking (director_live.ts). When a spent shot has nothing to go to, the
-// lowest band is tried: an `ambient` candidate, somebody up and outdoors, which is used only when there is no shot or the shot is
-// spent or its live thing has ended, never in place of a shot that is still about something. With nobody up at all the shot is the
+// lowest band is tried: an `ambient` candidate, somebody up and outdoors, which is used only when the shot is spent or its live thing
+// has ended (or the viewer asks for the next one), never in place of a shot that is still about something and never by itself when
+// there is no shot at all: on a new world the director waits for something to happen. With nobody up at all the shot is the
 // quiet one, of the place (the lit fire nearest the people), which anything replaces at once.
 import { DAY } from '../sim/constants';
 import type { EventKind, Person, World, WorldEvent } from '../sim/types';
@@ -671,8 +672,8 @@ export class Director {
 
   /**
    * The hold is up and no TOP or MIDDLE event waits (or, with `any`, the viewer asked for the next one): the best live candidate,
-   * else the best of the repeated events that faded and the FILLER candidate (if its person is up), else, when there is no shot or
-   * it is spent or its live thing has ended, the best ambient candidate, else, when the shot is spent, the quiet shot of the place;
+   * else the best of the repeated events that faded and the FILLER candidate (if its person is up), else, when the shot is spent or
+   * its live thing has ended (or the viewer asked for the next one), the best ambient candidate, else, when the shot is spent, the quiet shot of the place;
    * else the shot stays. A live shot whose thing goes on stays unless a candidate scores higher (an ambient shot, the lowest band,
    * is also replaced by a waiting event). Until LINGER_SECONDS a shot also stays unless the replacement is strictly heavier than it;
    * a spent shot and the quiet one do not linger.
@@ -712,8 +713,9 @@ export class Director {
     }
     // an ambient shot that is still going stays
     if (cur) return;
-    // nothing about anything: somebody up and outdoors, the lowest band, when there is no shot to protect
-    if (!s || s.ended || over) {
+    // nothing about anything: somebody up and outdoors, the lowest band, when the shot is spent or over, or the viewer asked for the
+    // next one. Never by itself with no shot at all (a new world, a reload): the director then waits for something to happen.
+    if ((any && !s) || (!!s && (s.ended || over))) {
       const amb = this.bestLive(except, 'ambient');
       if (amb) {
         this.startLive(world, amb);

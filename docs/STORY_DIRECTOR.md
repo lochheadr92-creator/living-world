@@ -102,8 +102,9 @@ screen time after dark was on somebody asleep or going to bed (20.1% of all of i
   MIDDLE or TOP event takes it, else anything replaces it at once with no linger, so it is read only inside a step.
 - Something to cut to: an ambient candidate (`live:ambient`, key `amb:<id>`) for each person who is up and outdoors, 5, 6 more when at the work
   itself, 2 for each other such person within 4 tiles up to 8, so 5 to 19, under every other live score (plain chat is 20). None for somebody
-  resting at a home of their own household ("Staying at my lean-to"); somebody at the shared fire is one. Used only when there is no shot, or the
-  shot is spent or its live thing has ended, and after the filler candidate; the 60 s cooldown applies.
+  resting at a home of their own household ("Staying at my lean-to"); somebody at the shared fire is one. Used only when the shot is spent
+  or its live thing has ended, and after the filler candidate; the 60 s cooldown applies. Never by itself when there is no shot at all: on a new
+  world or after a reload the director waits for something to happen, as before (the viewer's Next may still go to one).
 - When nobody is up and nothing else is on, the shot becomes the place (`live:quiet`, score 1): the lit fire nearest the people, captioned
   "Everyone is asleep." while nobody at all is up. Anything replaces it at once; it stays until then.
 Re-measured at rules 265 over fresh meadow (12 days) and the saves river-day48 and aspen-day96 raised to 265 (4 days each), the same world in every
@@ -113,6 +114,8 @@ screen time on somebody abed 20.5% / 8.1% / 2.3% (after dark 42.3% / 16.7% / 4.7
 queue 2. The new shots cost cuts: 24.5 / 34.4 / 35.9 per 10 minutes; ambient is 19% of screen time, 6 s of it on somebody abed (132 s before the
 re-point and the own-home rule). At 4x (the hold is a quarter of a world day) abed went 22.2% / 19.0% / 7.0% (after dark 45.7% / 39.0% / 14.5%). What is
 left at 1x is 109 s of 4,800: a wolf stalking a sleeper (69 s, as designed) and the first few seconds before a re-point or the hold.
+These figures are from 32977f55. The rule that an ambient shot never starts by itself with no shot at all came after them and was not re-measured:
+it only applies while there is no shot, which was 0.0% of screen time in every arm.
 
 ## What it does not do
 No explanation of its own: captions are event text, the inspector's lines, the two wolf sentences or "Everyone is asleep.". No world writes.

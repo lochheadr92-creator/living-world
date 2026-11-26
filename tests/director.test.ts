@@ -2359,12 +2359,16 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       expect(c.caption().length).toBeGreaterThan(0);
     });
 
-    it('with no shot it is the shot; it is never used in place of a shot that is still about something', () => {
+    it('with no shot at all it does not start by itself (a new world waits for something to happen), Next may ask for it; it is never used in place of a shot that is still about something', () => {
       const { w, ada, ben } = village('night-amb-use');
       const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
       d.step(w, 0);
       d.step(w, LIVE_SCAN_SECONDS);
-      expect(d.shot?.liveKey, 'no shot: the ambient one').toBe('amb:1');
+      for (let i = 0; i < 12; i++) d.step(w, 10);
+      expect(d.shot, 'no shot at all: the director waits, it does not pick somebody by itself').toBeNull();
+      expect(d.counts.shown).toBe(0);
+      d.skip();
+      expect(d.shot?.liveKey, 'the viewer asked for the next one: the ambient one').toBe('amb:1');
       expect(d.shot?.subjectId).toBe(ada.id);
       expect(d.counts.live).toBe(1);
       // an event shot still up (nobody is abed) is not replaced by one, not even after the linger
@@ -2410,6 +2414,7 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       const d2 = new Director(() => [cand('amb:2', 9, f.ben.id, 'Fetching water.', 'ambient')]);
       d2.step(f.w, 0);
       d2.step(f.w, LIVE_SCAN_SECONDS);
+      d2.skip();
       expect(d2.shot?.liveKey).toBe('amb:2');
       const hut = say(f.w, 'build', TEXT.hut, [f.cal.id], 42, 31);
       d2.step(f.w, MIN_HOLD);
@@ -2422,12 +2427,15 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
       d.step(w, 0);
       d.step(w, LIVE_SCAN_SECONDS);
+      d.skip();
       expect(d.shot?.liveKey).toBe('amb:1');
       d.skip();
       expect(d.shot).toBeNull();
       for (let t = 0; t < LIVE_COOLDOWN - 10; t += LIVE_SCAN_SECONDS) d.step(w, LIVE_SCAN_SECONDS);
+      d.skip();
       expect(d.shot, 'still inside the minute').toBeNull();
       d.step(w, 10);
+      d.skip();
       expect(d.shot?.liveKey).toBe('amb:1');
     });
 
@@ -2436,11 +2444,16 @@ describe('nobody asleep is shown: who a shot is about, spent shots, something el
       const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
       d.step(w, 0);
       d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot).toBeNull();
+      expect(d.hasNext(), 'no shot, and somebody is up: Next has one to go to').toBe(true);
+      d.skip();
+      expect(d.shot?.liveKey).toBe('amb:1');
       expect(d.hasNext(), 'the shot is the only one').toBe(false);
       const e = village('night-amb-next-2');
       const d2 = new Director(() => [cand('amb:1', 9, e.ada.id, 'Fetching water.', 'ambient'), cand('amb:2', 7, e.ben.id, 'Walking.', 'ambient')]);
       d2.step(e.w, 0);
       d2.step(e.w, LIVE_SCAN_SECONDS);
+      d2.skip();
       expect(d2.shot?.liveKey).toBe('amb:1');
       expect(d2.hasNext()).toBe(true);
       d2.skip();

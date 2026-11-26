@@ -287,7 +287,8 @@ try {
     for (const o of w.occasions ?? []) if (o.status === 'gathering') o.status = 'done';
     for (const a of w.animals) if (a.type === 'wolf') a.state = 'roam';
     for (const p of w.persons) { p.speech = null; for (const k of Object.keys(p.needs)) p.needs[k] = 100; }
-    return f.live.scanLive(w).map((c) => c.key + ':' + c.kind);
+    // an ambient candidate (somebody up and outdoors) is always there and is only ever used in place of a spent or ended shot: not a live thing in the sense of these checks
+    return f.live.scanLive(w).filter((c) => c.kind !== 'ambient').map((c) => c.key + ':' + c.kind);
   })()`);
   const ensureOff = async () => { if ((await state()).on) { await pressT(); await b.sleep(300); } };
   await b.evaluate('window.__game.setPlaying(false); window.__game.select(0)');
