@@ -2,18 +2,28 @@
 // the tally worlds built by hand, so each row is checked against what it was given; one RUN test checks the rows against DayShape's own
 // totals on the same ticks (the observers and the lab must say the same thing about the same world).
 import { describe, expect, it } from 'vitest';
-import { LifeTally, METRICS, outcomeOf } from '../scripts/lab/lab';
+import { LifeTally, METRICS, outcomeOf, parseIntervention, runBranch } from '../scripts/lab/lab';
 import { DayShape } from '../scripts/observers/day_shape';
 import { newActivity } from '../src/sim/activities';
 import { makeSheep } from '../src/sim/livestock';
 import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { foodUnits } from '../src/sim/economy';
-import { stepWorld } from '../src/sim/world';
+import { DAY } from '../src/sim/constants';
+import { createBuilding } from '../src/sim/buildings';
+import { giveBirth, killPerson, spawnPerson } from '../src/sim/lifecycle';
+import { createPerson } from '../src/sim/people';
+import { spark } from '../src/sim/relations';
+import { RNG, hashString } from '../src/sim/rng';
+import { testKit } from '../src/sim/scenes';
+import { deserializeWorld, serializeWorld } from '../src/app/save';
+import { hashWorld, stepWorld } from '../src/sim/world';
 import { addPerson, building, done, stage } from './helpers/kit';
+import { settingsFor } from './helpers/util';
 import type { Conversation, Person, World } from '../src/sim/types';
 
 const NEW_ROWS = [
+  'births', 'pairings', 'conceptions',
   'companyShare12', 'leisureShare12', 'companyLeisureShare12', 'walkingShare12',
   'hungryPackShare', 'hungryStoreOnlyShare', 'hungryNoFoodShare',
   'sheepAcquired', 'sheepShorn', 'sheepSlaughtered', 'lambsBorn', 'sheepAtEnd', 'sheepKeptAtEnd', 'plotsRested', 'plotsRestingAtEnd',
@@ -182,4 +192,138 @@ describe('the stage 1c lab rows', () => {
     expect(life.travel12).toBe(grown('travel'));
     expect(life.awake12).toBeGreaterThan(0);
   }, 240000);
+});
+
+// Births, pairings and conceptions (lab rows `births`, `pairings`, `conceptions`): LifeTally reads them from the people on the world between
+// ticks. STAGED tests change the state by hand between looks; the RUN tests put a real birth, a real courtship and a real pregnancy through the
+// lab's own loop, count the same things from the world's event feed (and `birthCount` where the world keeps one), and require that the watched
+// world is byte for byte the unwatched twin's.
+describe('births, pairings and conceptions in the lab', () => {
+  it('count a baby, a couple and a pregnancy once each, and nothing that was already there when the window began', () => {
+    const { w, ann, bob, cat, eve } = scene();
+    ann.sex = 'f'; bob.sex = 'm'; cat.sex = 'f'; eve.sex = 'm';
+    // already there at the start: Ann and Bob are a couple, and Ann is expecting
+    ann.partnerId = bob.id; bob.partnerId = ann.id;
+    ann.pregnantUntil = w.tick + 50; ann.pregnantBy = bob.id;
+    const life = new LifeTally();
+    life.begin(w);
+    const counts = () => [life.births, life.pairings, life.conceptions];
+    const before = serializeWorld(w);
+    life.tick(w);
+    expect(counts(), 'a couple and a pregnancy that were there at the start are not new').toEqual([0, 0, 0]);
+    expect(serializeWorld(w), 'looking changes nothing, the random state included').toBe(before);
+
+    // Cat and Eve pair up: seen from one side, then from both, it is one couple
+    cat.partnerId = eve.id;
+    life.tick(w);
+    expect(counts()).toEqual([0, 1, 0]);
+    eve.partnerId = cat.id;
+    life.tick(w); life.tick(w);
+    expect(counts()).toEqual([0, 1, 0]);
+
+    // Cat conceives: one conception, however many looks follow
+    cat.pregnantUntil = w.tick + 5000; cat.pregnantBy = eve.id;
+    life.tick(w); life.tick(w);
+    expect(counts()).toEqual([0, 1, 1]);
+
+    // Ann's baby is born by the sim's own giveBirth: a birth, and the pregnancy ending is not a conception
+    const people = w.persons.length;
+    giveBirth(w, ann);
+    expect(w.persons.length).toBe(people + 1);
+    life.tick(w); life.tick(w);
+    expect(counts()).toEqual([1, 1, 1]);
+
+    // a couple that arrives already together, and a child who arrives with them, are neither a pairing nor a birth
+    const rng = new RNG(hashString('lab-rows-arrivals'));
+    const mother = spawnPerson(w, createPerson(w, rng, { age: 30, sex: 'f', hhId: 0, x: 60.5, y: 60.5 }), 0);
+    const father = spawnPerson(w, createPerson(w, rng, { age: 32, sex: 'm', hhId: 0, x: 61.5, y: 60.5 }), 0);
+    mother.partnerId = father.id; father.partnerId = mother.id;
+    spawnPerson(w, createPerson(w, rng, { age: 5, hhId: 0, x: 60.5, y: 61.5, parents: [mother.id, father.id] }), 0);
+    life.tick(w);
+    expect(counts()).toEqual([1, 1, 1]);
+
+    // deaths take nothing back: the baby that dies was born, and a partner left alone has not paired with anybody
+    const baby = w.persons.find((p) => p.parents.includes(ann.id))!;
+    killPerson(w, baby, 'hunger');
+    killPerson(w, bob, 'old age');
+    life.tick(w);
+    expect(ann.partnerId, 'the sim let go of the dead partner').toBe(0);
+    expect(counts()).toEqual([1, 1, 1]);
+    // and later a widow and a newcomer who has been seen to arrive alone become a second couple
+    const newcomer = spawnPerson(w, createPerson(w, rng, { age: 40, sex: 'm', hhId: 0, x: 62.5, y: 62.5 }), 0);
+    life.tick(w);
+    expect(counts()).toEqual([1, 1, 1]);
+    ann.partnerId = newcomer.id; newcomer.partnerId = ann.id;
+    life.tick(w);
+    expect(counts()).toEqual([1, 2, 1]);
+  });
+
+  it('take the first look as the start when nobody has called begin, and never count what that first look holds', () => {
+    const { w, ann, bob } = scene();
+    ann.partnerId = bob.id; bob.partnerId = ann.id; ann.pregnantUntil = w.tick + 50;
+    const life = new LifeTally();
+    life.tick(w);
+    life.tick(w);
+    expect([life.births, life.pairings, life.conceptions]).toEqual([0, 0, 0]);
+  });
+
+  it('agree with the world\'s own record over a run with a real courtship and a real birth, and leave the world as an unwatched twin has it', () => {
+    // the courtship is the one tests/survival.test.ts stages (six singles, a hut, one sparked pair that has come to like each other);
+    // beside them a couple, kept out of everything, whose baby is due on the first day
+    const rng = new RNG(hashString('romance'));
+    const w = testKit.flatWorld(settingsFor('romance', { scene: 'natural' }));
+    const names = ['Una', 'Vic', 'Wren', 'Xan', 'Yara', 'Zed'];
+    const people = names.map((n, i) => testKit.addPerson(w, rng, { name: n, x: 40.5 + (i % 3) * 1.4, y: 44.5 + Math.floor(i / 3) * 1.4, sex: i % 2 === 0 ? 'f' : 'm', age: 24 + i, hunger: 90, thirst: 90, inv: { berries: 6 } }));
+    const hut = createBuilding(w, 'hut', 44, 38, 0);
+    let pair: readonly [Person, Person] | null = null;
+    for (const a of people) for (const b of people) if (!pair && a.sex === 'f' && b.sex === 'm' && spark(a, b)) pair = [a, b];
+    expect(pair, 'there is a sparked pair among six people').toBeTruthy();
+    const [a, b] = pair!;
+    w.households.find((h) => h.id === a.hhId)!.homeId = hut.id;
+    const mae = testKit.addPerson(w, rng, { name: 'Mae', x: 70.5, y: 60.5, sex: 'f', age: 28, hunger: 90, thirst: 90, inv: { berries: 6 } });
+    const noel = testKit.addPerson(w, rng, { name: 'Noel', x: 71.5, y: 60.5, sex: 'm', age: 30, hunger: 90, thirst: 90, inv: { berries: 6 }, hh: mae.hhId });
+    for (const p of [mae, noel]) p.cooldowns.pause = 1e12;
+    mae.partnerId = noel.id; noel.partnerId = mae.id;
+    mae.pregnantUntil = w.tick + 30; mae.pregnantBy = noel.id;
+    testKit.finish(w, 'natural');
+    testKit.befriend(a, b, 44, 40);
+
+    const saved = serializeWorld(w);
+    const twin = deserializeWorld(saved);
+    for (let i = 0; i < DAY; i++) stepWorld(twin);
+    const row = runBranch(saved, parseIntervention('control'), 1, 120);
+    expect(row.finalHash, 'the lab with its observers reaches the unwatched twin\'s hash').toBe(hashWorld(twin));
+
+    const watched = deserializeWorld(saved);
+    const life = new LifeTally();
+    life.begin(watched);
+    for (let i = 0; i < DAY; i++) { stepWorld(watched); life.tick(watched); }
+    expect(serializeWorld(watched), 'the whole saved state, the random state included').toBe(serializeWorld(twin));
+
+    // kind 'life' only: a story told at the fire retells a birth or a wedding in the same words, as a 'social' event
+    const said = (re: RegExp) => twin.events.filter((e) => e.kind === 'life' && re.test(e.text)).length;
+    expect(said(/was born to/)).toBe(1);
+    expect(said(/became a couple/)).toBe(1);
+    expect([row.outcome.births, row.outcome.pairings, row.outcome.conceptions]).toEqual([said(/was born to/), said(/became a couple/), said(/are expecting a child/)]);
+    expect([life.births, life.pairings, life.conceptions]).toEqual([row.outcome.births, row.outcome.pairings, row.outcome.conceptions]);
+  }, 120000);
+
+  it('agree with the lifetime birth count a current world keeps, over a run on a full settlement', () => {
+    const w = createWorld(currentWorldSettings('normal', 'lab-births', { immigration: false }));
+    const mother = w.persons.find((p) => p.alive && p.sex === 'f' && p.partnerId !== 0)!;
+    expect(mother, 'a woman with a partner at the start').toBeTruthy();
+    mother.pregnantUntil = w.tick + 5; mother.pregnantBy = mother.partnerId;
+    const saved = serializeWorld(w);
+    const start = w.birthCount;
+    expect(start).toBe(0);
+    const twin = deserializeWorld(saved);
+    const ticks = Math.round(0.3 * DAY);
+    for (let i = 0; i < ticks; i++) stepWorld(twin);
+    const row = runBranch(saved, parseIntervention('control'), 0.3, 120);
+    expect(row.finalHash).toBe(hashWorld(twin));
+    expect(twin.birthCount, 'the world counted the birth').toBe(1);
+    expect(row.outcome.births).toBe(twin.birthCount! - start!);
+    expect(row.outcome.births).toBe(twin.events.filter((e) => e.kind === 'life' && /was born to/.test(e.text)).length);
+    expect(row.outcome.conceptions, 'the pregnancy forced before the fork is not a conception in the window').toBe(twin.events.filter((e) => e.kind === 'life' && /are expecting a child/.test(e.text)).length);
+  }, 120000);
 });

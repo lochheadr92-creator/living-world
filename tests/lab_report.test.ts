@@ -34,12 +34,36 @@ it('pairs only matching seeds, preserves contrast direction, and skips unrecorde
   expect(out).toMatch(/people\s+15\.0\s+10\.0\s+\+5\.0/);
   expect(out).toMatch(/people\s+10\.0\s+15\.0\s+-5\.0/);
   expect(out).toContain('not recorded by this run');
+  // a run from before births, pairings and conceptions were counted has no value for them: they are named as unrecorded, not shown as zero
+  const unrecorded = out.split('\n').find((line) => line.includes('not recorded by this run'))!;
+  expect(unrecorded).toMatch(/\bbirths, pairings, conceptions\b/);
+  expect(out).not.toMatch(/^\s+births\s/m);
   // Source provenance can contain filenames such as undefined_keyorder.test.ts.
   // Check reported results separately from that explicitly labelled metadata.
   const reportBody = out.split('\n')
     .filter((line) => !line.startsWith('Report-generation provenance (not measurement source): '))
     .join('\n');
   expect(reportBody).not.toMatch(/NaN|undefined/);
+}, 30000);
+
+it('shows births, pairings and conceptions in the table beside deaths and people, as counts, for a run that recorded them', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'living-world-report-'));
+  dirs.push(dir);
+  const rows = [];
+  for (let seed = 0; seed < 4; seed++) {
+    for (const [spec, births, pairings] of [['control', 2, 1], ['nudge:1', 2, 3], ['A', 4, 5]] as const) {
+      rows.push({ seed: String(seed), spec, profile: 'normal', fork: 0, days: 12,
+        outcome: { people: 100, deaths: 1, births, pairings, conceptions: births + 1 }, finalHash: spec, divergedAfterTicks: 1, summary: spec,
+        milestones: {}, popByDay: [100] });
+    }
+  }
+  writeFileSync(join(dir, 'lab_fixture.jsonl'), rows.map((row) => JSON.stringify(row)).join('\n'));
+  const out = report(dir);
+  // reference = mean of the control and the nudge (2 and 2 births; 1 and 3 pairings); the branch has 4 and 5
+  expect(out).toMatch(/^\s+births\s+2\.0\s+4\.0\s+\+2\.0\s/m);
+  expect(out).toMatch(/^\s+pairings\s+2\.0\s+5\.0\s+\+3\.0\s/m);
+  expect(out).toMatch(/^\s+conceptions\s+3\.0\s+5\.0\s+\+2\.0\s/m);
+  expect(out.split('\n').find((line) => line.includes('not recorded by this run'))!).not.toMatch(/\b(births|pairings|conceptions)\b/);
 }, 30000);
 
 it('reports an unavailable contrast without inventing a result and keeps story output', () => {

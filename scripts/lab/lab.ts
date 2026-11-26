@@ -786,6 +786,13 @@ export const METRICS = [
   'plots',
   'people',
   'deaths',
+  // the other side of the population, counted over the branch window (the fork to the end of the branch), read by LifeTally from the
+  // state of the world between ticks and never from the simulation: births (a baby first seen, born since the last look and with a
+  // parent), pairings (new couples: somebody already in the world whose partner became somebody else; one count per couple, and a
+  // couple that arrived together is not a pairing), conceptions (a pregnancy newly begun, whether or not it ended in a birth). Counts.
+  'births',
+  'pairings',
+  'conceptions',
   'homeless',
   'belowCritical',
   'meanHunger',
@@ -1119,6 +1126,47 @@ export class LifeTally {
   toysMade = 0; toysGiven = 0;
   fireSits = 0; fireSitsElder = 0; storiesTold = 0; storyHearers = 0; storyHearersChild = 0;
   leanDays = 0; dryDays = 0;
+  /** Births, pairings and conceptions over the branch window. Read from the people on the world each tick and compared with how each stood
+   *  at the last look: nothing here is read from `src/sim`, drawn from the world's random state, written to the world or saved.
+   *  births: a person first seen who has a parent and was born since the last look (an arrival is older, so is not one; a baby that dies
+   *  later still counts, because it was seen). conceptions: a woman whose `pregnantUntil` is newly set (a pregnancy already under way at
+   *  the fork is not one). pairings: somebody seen before whose `partnerId` has become somebody else; a couple is counted once, however
+   *  many of its two sides were seen to change, and a couple that arrived already together was never seen to change, so is not counted. */
+  births = 0; conceptions = 0;
+  private pairKeys = new Set<string>();
+  get pairings(): number { return this.pairKeys.size; }
+  private partnerSeen = new Map<number, number>();
+  private pregnantSeen = new Map<number, number>();
+  private lookedAt = -1;
+  /** Take the starting point of the window: everyone on the world now is already part of it, so nothing they hold is counted. `tick` does this
+   *  itself on its first call when nobody has, which only leaves out what happened before that first look. */
+  begin(w: World): void {
+    this.partnerSeen.clear();
+    this.pregnantSeen.clear();
+    for (const p of w.persons) {
+      if (!p.alive) continue;
+      this.partnerSeen.set(p.id, p.partnerId);
+      this.pregnantSeen.set(p.id, p.pregnantUntil);
+    }
+    this.lookedAt = w.tick;
+  }
+  private family(w: World): void {
+    if (this.lookedAt < 0) { this.begin(w); return; }
+    for (const p of w.persons) {
+      if (!p.alive) continue;
+      const partner = this.partnerSeen.get(p.id);
+      if (partner === undefined) {
+        // not seen before: a baby born since the last look. (Whoever else turns up, an arrival or a returning traveller, was born long before.)
+        if (p.parents.length > 0 && p.birthTick >= this.lookedAt) this.births++;
+      } else if (p.partnerId !== partner && p.partnerId !== 0) {
+        this.pairKeys.add(p.id < p.partnerId ? `${p.id}:${p.partnerId}` : `${p.partnerId}:${p.id}`);
+      }
+      this.partnerSeen.set(p.id, p.partnerId);
+      if (p.pregnantUntil > 0 && p.pregnantUntil !== (this.pregnantSeen.get(p.id) ?? 0)) this.conceptions++;
+      this.pregnantSeen.set(p.id, p.pregnantUntil);
+    }
+    this.lookedAt = w.tick;
+  }
   get lessonsForage(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'forage'); }
   get lessonsFish(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'fish'); }
   get lessonsFarm(): number { return this.practiceCount((x) => x.outcome === 'completed' && x.skill === 'farm'); }
@@ -1196,6 +1244,7 @@ export class LifeTally {
     else if (a.kind === 'wander') this.spareTime++;
   }
   tick(w: World): void {
+    this.family(w);
     if (w.tick % DAY === 0 && w.hardship) { if (w.hardship.kind === 'dry') this.dryDays++; else this.leanDays++; }
     for (const a of w.animals) if (a.type === 'sheep' && a.sheep && a.sheep.origin === 'birth') this.lambs.add(a.id);
     for (const c of w.conversations) {
@@ -1366,6 +1415,9 @@ export function outcomeOf(
       plots: w.plots.length,
       people: alive.length,
       deaths: w.deceased.filter((d) => d.tick >= from).length,
+      births: life.births,
+      pairings: life.pairings,
+      conceptions: life.conceptions,
       homeless,
       belowCritical: crit,
       meanHunger: Math.round((hunger / Math.max(1, alive.length)) * 10) / 10,
@@ -1609,6 +1661,7 @@ export function runBranch(
         else emptyNews.skippedCooldown++;
       },
     };
+    life.begin(w); // the window starts here: whoever is on the world now, and every pregnancy and couple, was there before it
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
       projects.tick(w);
