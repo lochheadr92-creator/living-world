@@ -43,6 +43,10 @@ export interface ProbeCounters {
   walkDropMargin: number;
   /** actual gather/withdraw travel drops whose current option was absent at review */
   walkDropAbsent: number;
+  /** rules 265 (trip_kept.ts): reviews where the running key was absent and a second pass, with hunger, thirst and tiredness held at their start, kept its value above 0 */
+  keptNeedsReviews: number;
+  /** rules 265 (trip_kept.ts): batch-place choices (one for each recipe weighed in a planner pass) where a withdrawal under way held the place to the workshop it set out for, not the nearest */
+  keptPlaceChoices: number;
   /** perceive calls */
   perceives: number;
   /** static entities (trees, buildings, sites, …) inside sensing range, summed over perceive calls */
@@ -71,6 +75,8 @@ export const COUNTER_KEYS: (keyof ProbeCounters)[] = [
   'walkReviewHeld',
   'walkDropMargin',
   'walkDropAbsent',
+  'keptNeedsReviews',
+  'keptPlaceChoices',
   'perceives',
   'perceiveStatic',
   'perceiveMobile',
@@ -95,6 +101,8 @@ const zero = (): ProbeCounters => ({
   walkReviewHeld: 0,
   walkDropMargin: 0,
   walkDropAbsent: 0,
+  keptNeedsReviews: 0,
+  keptPlaceChoices: 0,
   perceives: 0,
   perceiveStatic: 0,
   perceiveMobile: 0,

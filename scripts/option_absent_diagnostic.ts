@@ -9,6 +9,9 @@
 //   npx vite-node scripts/option_absent_diagnostic.ts -- --load C:/dev/lw_saves/rules256/aspen-day96.save.json --rules-up 260 --days 5 --out ...
 //   --no-hook   run the same world with the probe off and no callback (the control for the hash check; prints finalHash only)
 //   --rows      also write every absent row to <out>.rows.jsonl (for re-cutting the classes)
+//   --no-kept-needs / --no-kept-place   turn off one part of rules 265 (src/sim/trip_kept.ts) for the whole run, as the lab arms rich-no-kept-needs and
+//               rich-no-kept-place do; both flags together are rich-no-trip-kept. Without them a world at rules 265 or above runs both parts. The summary
+//               prints the probe counters (reviews, planner passes, and the two counters the parts keep) under probeCounters.
 //
 // A fresh world is a Normal world with arrivals on (scripts/world_args.ts worldFromArgs), as a new game is. One run per process.
 //
@@ -39,6 +42,7 @@ import { estimatedAmount, recentFailure } from '../src/sim/knowledge';
 import { drive } from '../src/sim/needs';
 import { ageYears } from '../src/sim/people';
 import { probe } from '../src/sim/probe';
+import { setKeptBatchPlace, setKeptThroughNeeds } from '../src/sim/trip_kept';
 import type { OrdinarySwitch } from '../src/sim/probe';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { invRoom } from '../src/sim/economy';
@@ -57,6 +61,10 @@ const out = opt('out', '');
 const days = Number(opt('days', '2'));
 const noHook = args.includes('--no-hook');
 const writeRows = args.includes('--rows');
+const noKeptNeeds = args.includes('--no-kept-needs');
+const noKeptPlace = args.includes('--no-kept-place');
+if (noKeptNeeds) setKeptThroughNeeds(false);
+if (noKeptPlace) setKeptBatchPlace(false);
 const { w, loaded, startDay } = worldFromArgs(opt);
 const startTick = w.tick;
 const stopTick = startTick + Math.round(days * DAY);
@@ -228,7 +236,13 @@ const idleCheckOnPresent: Counts = {};
 const pendingBounce = new Map<number, Row[]>();
 
 // ───────────────────────────────────────────────────── the callback ─────────────────────────────────────────────────────
+/** planner passes the hook itself made (see onSwitch): they are not the simulation's, so the probe counters are put back after each one */
+let hookGenerations = 0;
 function onSwitch(s: OrdinarySwitch): void {
+  const g = probe.generations, o = probe.optionsGenerated, kn = probe.keptNeedsReviews, kp = probe.keptPlaceChoices;
+  try { onSwitchBody(s); } finally { hookGenerations += probe.generations - g; probe.generations = g; probe.optionsGenerated = o; probe.keptNeedsReviews = kn; probe.keptPlaceChoices = kp; }
+}
+function onSwitchBody(s: OrdinarySwitch): void {
   const { world, p, a, ctx, best, key, currentPresent } = s;
   const adult = ageYears(world, p) >= 12;
   const status = key === undefined ? 'unkeyed' : currentPresent ? 'present' : 'absent';
@@ -644,6 +658,16 @@ const summary = {
   seed: w.settings.seed, loaded: loaded || null, startDay, startTick, endTick: w.tick, days, rulesVersion: w.settings.rulesVersion ?? null, arrivals: w.settings.immigration,
   people: w.persons.filter((p) => p.alive).length, finalHash, finalSerial, seconds, adultWalkTicks,
   purity, regen, errors: errorsSeen.slice(0, 10),
+  rules265: { keptNeeds: !noKeptNeeds, keptPlace: !noKeptPlace },
+  probeCounters: {
+    reviews: probe.reviews, generations: probe.generations, optionsGenerated: probe.optionsGenerated, decisions: probe.decisions,
+    generationsPerReview: probe.reviews ? Math.round((probe.generations / probe.reviews) * 10000) / 10000 : null,
+    generationsPerReviewAndDecision: probe.reviews + probe.decisions ? Math.round((probe.generations / (probe.reviews + probe.decisions)) * 10000) / 10000 : null,
+    keptNeedsReviews: probe.keptNeedsReviews, keptPlaceChoices: probe.keptPlaceChoices,
+    walkReviewAbsent: probe.walkReviewAbsent, walkDropAbsent: probe.walkDropAbsent, walkDropMargin: probe.walkDropMargin, hookGenerationsNotCounted: hookGenerations,
+  },
+  deaths: w.deceased.filter((d) => d.tick >= startTick).length,
+  meanNeedsAtEnd: (() => { const live = w.persons.filter((p) => p.alive); const m = (k: 'hunger' | 'thirst' | 'energy') => Math.round((live.reduce((x, p) => x + p.needs[k], 0) / Math.max(1, live.length)) * 100) / 100; return { hunger: m('hunger'), thirst: m('thirst'), energy: m('energy') }; })(),
   switchesByKindPhaseStatus: switchesAll,
   idleCheckOnEveryTenthPresentSwitch: idleCheckOnPresent,
   walkedTicksOnAbandonedLegByStatusAdults: walkedByStatus,

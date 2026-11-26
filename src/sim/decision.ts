@@ -26,6 +26,7 @@ import { holdsJob } from './finish_job';
 import { explainsHousing } from './shelter';
 import { indoorHome } from './habitation';
 import { probe, probeWander } from './probe';
+import { needsToHold, withNeedsHeld } from './trip_kept';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
 import { survivalOptions } from './options_survival';
@@ -380,6 +381,24 @@ function currentUtility(ctx: Ctx, a: Activity): number {
 }
 
 /**
+ * Rules 265 (trip_kept.ts). What the running activity is worth when its key is not among the options just made, if the key is offered
+ * once the person's hunger, thirst and tiredness are held at what they were (the better of then and now) when it began: that option's
+ * score through the same formula `currentUtility` uses for a key that is present, and never below the nothing that absence gives.
+ * Null when nothing could change (no record, no need worse, key still absent). The second planner pass is the observer form: it
+ * writes nothing and draws no random number, and the needs are put back as they were.
+ */
+export function keptRunningUtility(world: World, p: Person, a: Activity, key: string): number | null {
+  const hold = needsToHold(world, p, a);
+  if (!hold) return null;
+  const o = withNeedsHeld(p, hold, () => generateOptions(world, p, false, true).options.find((x) => x.key === key));
+  if (!o) return null;
+  const frac = a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0;
+  const v = Math.max(0, o.util * (1.08 + 0.35 * frac));
+  if (probe.on && v > 0) probe.keptNeedsReviews++;
+  return v;
+}
+
+/**
  * While busy, look again now and then. Commitment is bounded:
  * a switch needs a clearly better option once the minimum commitment has passed,
  * but danger and critical needs interrupt at once.
@@ -447,11 +466,15 @@ export function reviewActivity(world: World, p: Person): void {
   if (a.data.sticky && !danger && !criticalMismatch) return;
   // a drink or a meal under way is finished while it is still doing the person good — unless danger or a deadlier need says otherwise
   if (!danger && !criticalMismatch && (a.kind === 'drink' || a.kind === 'eat' || a.kind === 'eat_store') && a.phase === 'work' && a.need && p.needs[a.need] < 86 && a.progress > 0) return;
-  const cur = currentUtility(ctx, a);
+  let cur = currentUtility(ctx, a);
   const committed = world.tick < a.minCommit;
   // a person driven from outside is not talked out of their choice by a better score; danger and a deadlier need still are
   const ext = externalController();
   const external = ext !== null && ext.controls(world, p);
+  // rules 265 (trip_kept.ts): a key that is absent only because a hunger, thirst or tiredness gate closed since the activity began is
+  // valued as if it were offered. Asked only where it can matter: the running key is missing, something beats 3, and none of danger, a
+  // deadlier need, minimum commitment or an outside controller has already settled the question.
+  if (!!key && !currentPresent && best.util > 3 && !danger && !criticalMismatch && !committed && !external) cur = keptRunningUtility(world, p, a, key) ?? cur;
   const better = !external && best.util > cur * SWITCH_MARGIN + 3;
   if (probe.on && walkReview && currentPresent && best.key !== key) {
     if (danger || criticalMismatch) probe.walkReviewUrgent++;

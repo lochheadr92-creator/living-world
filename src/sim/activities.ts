@@ -30,6 +30,7 @@ import {recordRoutine} from './daily_routines';
 import { keepCount, putCountBack } from './picked_up';
 import {recordJourney} from './journey_state';
 import {startCareJourney,endCareAcquisition} from './care_journey';
+import {recordStartNeeds} from './trip_kept';
 
 // ───────────────────────── handler registry ─────────────────────────
 export type WorkResult = 'continue' | 'done' | `fail:${string}` | `partial:${string}`;
@@ -338,6 +339,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
 
 // ───────────────────────── lifecycle of an activity ─────────────────────────
 export function startActivity(world: World, p: Person, a: Activity): void {
+  recordStartNeeds(world, p, a); // rules 265 (trip_kept.ts): the needs it began with, for review to hold a start gate at
   if (p.activity) endActivity(world, p, 'interrupted', 'switched to something else');
   p.activity = a;
   startCareJourney(world,p,a);

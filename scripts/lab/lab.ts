@@ -126,6 +126,7 @@ import { localGivingOn, setLocalGiving } from '../../src/sim/local_giving';
 import { careCapacityOn, setCareCapacity } from '../../src/sim/care_capacity';
 import { toolPrecedenceOn, setToolPrecedence } from '../../src/sim/production';
 import { keptTargetOn, setKeptTarget } from '../../src/sim/kept_target';
+import { keptBatchPlaceOn, keptThroughNeedsOn, setKeptBatchPlace, setKeptThroughNeeds } from '../../src/sim/trip_kept';
 import { residentCareOn, setResidentCare } from '../../src/sim/resident_contact';
 import { customersOn, setCustomers } from '../../src/sim/customers';
 import { successionOn, setSuccession } from '../../src/sim/succession';
@@ -638,6 +639,12 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-local-giving') return {spec:label,summary:'restore pre-62 forced exit for same-room gifts, start-only range checks and fed cooldown after zero receipt',install(){const was=localGivingOn();setLocalGiving(false);return ()=>setLocalGiving(was);}};
   if (kind === 'rich-no-care-capacity') return {spec:label,summary:'remove rules-63 full-pack food-care memory and home-store alternatives; ordinary giving and storage unchanged',install(){const was=careCapacityOn();setCareCapacity(false);return ()=>setCareCapacity(was);}};
   if (kind === 'rich-no-tool-precedence') return {spec:label,summary:'restore the first missing workshop tool instead of preferring a required tool to a convenience',install(){const was=toolPrecedenceOn();setToolPrecedence(false);return ()=>setToolPrecedence(was);}};
+  // rules 265 (trip_kept.ts): a trip under way survives a start gate (needs) and a workshop swap (place); each part alone, and both
+  if (kind === 'rich-no-kept-needs' || kind === 'rich-no-kept-place' || kind === 'rich-no-trip-kept') {
+    const needs = kind !== 'rich-no-kept-place', place = kind !== 'rich-no-kept-needs';
+    const what = [needs ? 'a trip is dropped when a hunger, thirst or tiredness gate closes on the way' : '', place ? 'a trip to a second workshop of a type is dropped when walking there makes it the batch place' : ''].filter(Boolean).join('; ');
+    return { spec: label, summary: `${what}, as before rules 265; no effect below rules 265`, install() { const wasNeeds = keptThroughNeedsOn(), wasPlace = keptBatchPlaceOn(); if (needs) setKeptThroughNeeds(false); if (place) setKeptBatchPlace(false); return () => { setKeptThroughNeeds(wasNeeds); setKeptBatchPlace(wasPlace); }; } };
+  }
   if (kind === 'rich-no-kept-target') return {spec:label,summary:'allow the short candidate list to omit the running journey destination',install(){const was=keptTargetOn();setKeptTarget(false);return ()=>setKeptTarget(was);}};
   if(kind==='rich-no-water-care')return {spec:label,summary:'remove water hand-over capacity memory and household-store recovery offers',install(){const was=careWaterOn();setCareWater(false);return ()=>setCareWater(was);}};
   if(kind==='rich-no-project-plans')return {spec:label,summary:'remove bounded production prerequisite adoption and step offers; ordinary production remains',install(){const was=projectPlansOn();setProjectPlans(false);return ()=>setProjectPlans(was);}};

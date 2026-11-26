@@ -49,6 +49,8 @@ import { RAW_KINDS, friendlyTo, gatherMaterial, hhState, isRawMaterial, material
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
+import { hasKeptBatchPlace, keptBatchPlaceId } from './trip_kept';
+import { probe } from './probe';
 import { GRANARY_TRIP } from './intent';
 import { cartExperience, cartTripOptions } from './transport';
 import { durableReserve } from './provision';
@@ -127,6 +129,25 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
 }
 
 /**
+ * The workplace a batch of a recipe made at `type` is planned at: the nearest the person may use, as ever, except that rules 265
+ * (trip_kept.ts) keeps the one a withdrawal now under way was made for while it is still among those they know and may use. Without
+ * it the second workshop of a type, walked to for an ingredient, becomes the nearest, so becomes the batch's own place, and the store
+ * being walked to stops being a source for the batch (collectOptions). `facilitiesOf` itself stays nearest-first for everyone else.
+ */
+export function batchPlaceOf(ctx: Ctx, type: BuildingType): Fac | undefined {
+  const all = facilitiesOf(ctx, type);
+  const kept = keptBatchPlaceId(ctx.world, ctx.p);
+  if (kept !== null && all.length > 1 && all[0].b.id !== kept) {
+    const f = all.find((x) => x.b.id === kept);
+    if (f) {
+      if (probe.on) probe.keptPlaceChoices++;
+      return f;
+    }
+  }
+  return all[0];
+}
+
+/**
  * a workplace of that kind that exists or is being built, as far as this person knows (anyone's). With scaled rules only one in their
  * own settlement counts: a workshop on the far side of the map is not a means they can plan around.
  */
@@ -166,7 +187,7 @@ function nameOf(b: Belief): string {
 }
 
 /** Go and take stock out of a store, a workplace's shelves or a heap. */
-export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
+export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind, forPlace?: number): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items, world)}`, b.id, `tried recently and found none to take`, tag);
@@ -207,7 +228,7 @@ export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, wh
         utility: util,
         minCommit: 30,
         maxTicks: 700,
-        data: { items, ...(materialStock ? { materialStock } : {}) },
+        data: { items, ...(materialStock ? { materialStock } : {}), ...(forPlace ? { forPlace } : {}) }, // forPlace: rules 265 (trip_kept.ts), the workshop whose batch this is for
       });
     },
   });
@@ -578,10 +599,12 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
   found.sort((a, c) => a.e - c.e);
   let total = 0;
   for (const f of found) total += f.n;
+  const keepsPlace = !!dest && dest.kind === 'building' && !!dest.btype && isFacilityType(dest.btype as BuildingType) && hasKeptBatchPlace(world);
   for (const f of keepCurrent(ctx, found, 2, c => `collect:${c.b.id}:${item}`)) {
     const take = Math.min(f.n, Math.max(1, Math.ceil(unmet)), invRoom(ctx.world, p, item as ItemKind));
     if (take < 1) continue;
-    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag);
+    // rules 265 (trip_kept.ts): a withdrawal for a batch at a known workshop records which one, so the walk does not change the batch's place
+    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag, [], undefined, keepsPlace ? dest!.id : undefined);
   }
   return total;
 }
@@ -618,7 +641,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   const seen = new Set<string>();
   for (const r of recipes) {
     if(!recipeAvailable(ctx.world,r))continue;
-    const fac = facilitiesOf(ctx, r.at)[0];
+    const fac = batchPlaceOf(ctx, r.at);
     if (!fac) {
       if (!seen.has(r.at)) {
         seen.add(r.at);
@@ -637,7 +660,7 @@ function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
   if (!hasToolPrecedence(ctx.world)) return undefined;
   for (const r of recipes) {
     if(!recipeAvailable(ctx.world,r))continue;
-    const fac = facilitiesOf(ctx, r.at)[0];
+    const fac = batchPlaceOf(ctx, r.at);
     if (!fac || techniqueBlocker(ctx.world, ctx.p, r.id)) continue;
     if (toolAvailable(ctx, fac, r)) return false;
   }
