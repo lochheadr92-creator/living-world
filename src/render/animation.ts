@@ -168,6 +168,22 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
       return onFoot ? 'trek' : standing ? 'barter' : pose;
     case 'relocate':
       return onFoot ? 'trudge' : standing ? 'unpack' : pose;
+    case 'rest': {
+      if (d.side !== undefined) return work && (pose === 'sit' || pose === 'stand') ? 'standup' : pose;
+      if (pose !== 'sit') return pose;
+      if (d.vigil !== undefined) return 'vigil';
+      if (d.lyingIn !== undefined) return 'lyingin';
+      if (d.grief !== undefined) return 'comfort';
+      if (d.settle !== undefined) return 'settle';
+      return 'rest';
+    }
+    case 'warm':
+      return pose === 'sit' ? 'warm' : pose;
+    case 'alone':
+      return pose === 'sit' ? 'alone' : pose;
+    case 'attend_meal':
+    case 'host_meal':
+      return pose === 'sit' ? 'meal_sit' : pose === 'eat' ? 'meal_eat' : pose;
     default:
       return pose;
   }
