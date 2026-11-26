@@ -5,6 +5,9 @@
 // Off by default; scripts/bench.ts turns them on. Timing is deliberately NOT done here: the simulation never reads a clock,
 // so wall-time is measured around it by the runner (or with node --cpu-prof).
 
+import type { Activity, Person, World } from './types';
+import type { Ctx, Option } from './optutil';
+
 export interface ProbeCounters {
   /** findPath calls (including ones that return at once because the start already satisfies the goal) */
   pathCalls: number;
@@ -99,11 +102,38 @@ const zero = (): ProbeCounters => ({
 });
 
 /**
+ * What reviewActivity (decision.ts) knows at the moment an ordinary switch is about to be made: the running activity `a` has been
+ * looked at again, the best option beats it by the switch margin, and none of danger, a deadlier need, minimum commitment or an
+ * outside controller is the reason. `ctx` and `ranked` are the freshly generated ones the decision itself uses. A callback must
+ * only read: it may call the observer forms of the option planner on the person if it restores everything it set aside.
+ */
+export interface OrdinarySwitch {
+  world: World;
+  p: Person;
+  /** the activity being given up */
+  a: Activity;
+  ctx: Ctx;
+  ranked: Option[];
+  /** the option that takes over */
+  best: Option;
+  /** the running activity's option key (undefined when it carries none, in which case its stored utility is used) */
+  key: string | undefined;
+  /** was that key among the freshly generated options? */
+  currentPresent: boolean;
+  /** what the running activity is currently worth to the comparison (decision.ts currentUtility) */
+  cur: number;
+  /** the reason that will be recorded for the switch */
+  why: string;
+}
+
+/**
  * `on` gates every increment, so the cost when off is one boolean test.
  * `verify` (only meaningful while `on`) makes a search that ran out of budget be repeated without one, its answer discarded, to learn
  * whether the goal was reachable after all. That costs real time and changes nothing the simulation can see.
+ * `onSwitch` is a diagnostic seam, null unless a script installs one. Like the counters it is never saved, never hashed, uses no
+ * randomness and is only called under `probe.on`; a callback that only reads leaves the run exactly as it was.
  */
-export const probe: ProbeCounters & { on: boolean; verify: boolean } = { on: false, verify: false, ...zero() };
+export const probe: ProbeCounters & { on: boolean; verify: boolean; onSwitch: ((s: OrdinarySwitch) => void) | null } = { on: false, verify: false, onSwitch: null, ...zero() };
 
 export function probeReset(): void {
   Object.assign(probe, zero());

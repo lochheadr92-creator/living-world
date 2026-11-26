@@ -468,6 +468,8 @@ export function reviewActivity(world: World, p: Person): void {
       if (currentPresent && better) probe.walkDropMargin++;
       else if (!currentPresent) probe.walkDropAbsent++;
     }
+    // diagnostic seam (probe.ts): read-only, only while the probe is on, for any activity kind and phase
+    if (probe.on && probe.onSwitch && !danger && !criticalMismatch && !committed && !external) probe.onSwitch({ world, p, a, ctx, ranked, best, key, currentPresent, cur, why });
     act.data.optKey = best.key;
     prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));
