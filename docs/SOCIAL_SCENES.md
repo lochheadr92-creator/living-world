@@ -445,4 +445,4 @@ death in any of them; each took 530 to 550 s with the probe, three at a time and
 
 **Limits.** Three worlds, 45 days, young settlements of 30 to 66 people: the count of `scripts/vigil_count.ts` in six saved settlements (65 to 159 people, 25 days) was 46 episodes of health under 35 or a visible fever, 38 of them with
 kin alive, against 19 stretches here in 135 world-days, so these counts say what happens in a young settlement and little of an established one. The lab (12 fresh worlds, six saved settlements, two nudges) has not been run; whether any
-part moves people, deaths, mood or births is not measured, and the whole of this table is mechanism and opportunity, not benefit. The rules-261 continuation pin is not recorded.
+part moves people, deaths, mood or births is not measured, and the whole of this table is mechanism and opportunity, not benefit. The rules-261 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, from a clean checkout of `5fb051d2`: `tests/v261_continuation.*`), before rules 262.

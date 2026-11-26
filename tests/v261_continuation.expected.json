@@ -1,0 +1,33 @@
+{
+  "source": {
+    "head": "5fb051d2edd12014b42dde49ef1ccec4881fbc36",
+    "rules": 261,
+    "content": "a05cf1ef3ead5caccb3e0d9d154801019a929ba4f6e1680d2191defbae65efdc",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000, the rules 260 pin world, kept because it already holds the state rules 261 added: one person who has been beside a birth as a helper, two naming feasts with one child named aloud, and four requests to attend a birth; it holds no one lying in, no birth ask record, no child named after the dead and no vigil, none of which appeared at tick 48000 or 60000 in this world; saved and continued 120 ticks. The counts beside the digests are of the saved world."
+  },
+  "saved": "0c2c88a8294321bff5094c8cbd019098e91a3cd536e3cb37378f48ce55eeabd4",
+  "continued": "23cde2dc9c7d7b38cd85e84c56987cb945b34bf9ab5cbc96c8bd21254a0c09e2",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 43,
+  "courted": 2,
+  "courtedPairs": 1,
+  "courtRefused": 1,
+  "arrivedHouseholds": 1,
+  "welcomedHouseholds": 1,
+  "thanksOwedPeople": 0,
+  "thanksOwedEntries": 0,
+  "thanksDueBuildings": 0,
+  "lyingIn": 0,
+  "attendedPeople": 1,
+  "attendedBirths": 1,
+  "birthAsked": 0,
+  "namedAfter": 0,
+  "namingFeasts": 2,
+  "namingChildren": 2,
+  "namedAloud": 1,
+  "attendBirthRequests": 4,
+  "vigilActivities": 0,
+  "lyingInActivities": 0,
+  "birthActivities": 0
+}
