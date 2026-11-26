@@ -245,6 +245,8 @@ export interface SeenEntity {
   sittingUp?: boolean;
   /** rules 263 (grief_sit.ts, settle_child.ts): visibly sitting beside somebody who has lost one of theirs, or beside a small child at bedtime; present only while they do, and only with the part on */
   sittingWith?: boolean;
+  /** rules 264 (fetch_home.ts): visibly out after dark fetching somebody home, and has found them and called them; present only while they are, and only with the part on */
+  fetching?: boolean;
 }
 
 export type ActivityKind =
@@ -1180,7 +1182,7 @@ export interface Household {
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;
 
 // ───────────────────────────── social ─────────────────────────────
-export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire' | 'attend_birth';
+export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire' | 'attend_birth' | 'fetch';
 /**
  * `partial`: it was answered, something real was handed over, and it was less than was asked for. It is not `fulfilled` (the ask was
  * not met) and not `failed` (something did arrive), and it leaves nobody owing the difference: a helper who gives what they can has

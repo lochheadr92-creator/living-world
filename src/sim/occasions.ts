@@ -33,6 +33,7 @@ import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, Worl
 import { hyp } from './util';
 import { dueTraditions, noteOccasionOver, noteWinterOver, occasionOf } from './traditions';
 import { praiseAtOccasion } from './praise';
+import { speakAtOccasion } from './speak_for';
 import { dancePose, danceStep } from './dance';
 import { hasNaming } from './hearth_scenes';
 import { isNamingFeast, isNamingMother, meetNamed, nameAtOpening, NAMING_MAX } from './naming';
@@ -303,7 +304,8 @@ function arrive(world: World, p: Person, o: Occasion): void {
     marketSwap(world, p, o);
   }
   meetNamed(world, p, o); // rules 261 (naming.ts): those who come to a naming feast come to know the child named there
-  praiseAtOccasion(world, p, o, `the ${labelOf(o)}`); // rules 260 (praise.ts): a thanks owed or due may be spoken before those already there
+  const thanked = praiseAtOccasion(world, p, o, `the ${labelOf(o)}`); // rules 260 (praise.ts): a thanks owed or due may be spoken before those already there
+  if (!thanked) speakAtOccasion(world, p, o, `the ${labelOf(o)}`); // rules 264 (speak_for.ts): else a candidate for a shared building without a coordinator may speak for it
 }
 
 const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood', 'stone', 'clay', 'planks', 'bricks', 'charcoal'];

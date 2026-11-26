@@ -26,6 +26,9 @@ import {validateReunion} from '../sim/reunion';
 import {validateGriefSit} from '../sim/grief_sit';
 import {validateComingOfAge} from '../sim/coming_of_age';
 import {validateSettling} from '../sim/settle_child';
+import {validateTakingSides} from '../sim/standing_up';
+import {validateSpeech} from '../sim/speak_for';
+import {validateFetching} from '../sim/fetch_home';
 import {validateShown} from '../sim/three_ages';
 import {validateHeld} from '../sim/bench_access';
 import {validatePreservation} from '../sim/preservation';
@@ -372,6 +375,9 @@ export function deserializeWorld(json: string): World {
   validateGriefSit(w); // rules 263 (grief_sit.ts)
   validateComingOfAge(w); // rules 263 (coming_of_age.ts)
   validateSettling(w); // rules 263 (settle_child.ts)
+  validateTakingSides(w); // rules 264 (standing_up.ts)
+  validateSpeech(w); // rules 264 (speak_for.ts)
+  validateFetching(w); // rules 264 (fetch_home.ts)
   validateShown(w);
   validateNightExperience(w);
   validateProjectGraphs(w);

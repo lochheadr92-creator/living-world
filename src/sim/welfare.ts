@@ -19,6 +19,7 @@ import type { Ctx } from './optutil';
 import { knowsDeath } from './death_knowledge';
 import { hasKnownWorry } from './known_worry';
 import { hasKnownWelfare, knownDependent } from './known_welfare';
+import { fetchBegin, fetchEnd, fetchWork, hasFetchData } from './fetch_home';
 import { personById } from './registry';
 import { isFood, onGift, surplusOf } from './social';
 import type { Concern, ItemKind, Items, Person, World } from './types';
@@ -309,6 +310,8 @@ registerHandler('visit', {
   begin(world, p, a) {
     const t = personById(world, a.targetId);
     if (!t) {if(hasPromiseExpectations(world)&&a.data.commitmentId){delete p.whereabouts[a.targetId];p.cooldowns['check'+a.targetId]=world.tick+240;return 'they were not where I expected';}return 'they are no longer around';}
+    // rules 264 (fetch_home.ts): a walk out after dark with somebody, a walk beside them, or a walk home with them
+    if (hasFetchData(a)) return fetchBegin(world, p, a);
     a.duration = 12;
     restoreWatchProgress(world,a);
     // rules 261 (birth_help.ts): told to come to her door, the helper has come to the door, and whether she is there is for the wait to find out
@@ -333,6 +336,8 @@ registerHandler('visit', {
   work(world, p, a): WorkResult {
     const t = personById(world, a.targetId);
     if (!t) return 'fail:they are no longer around';
+    // rules 264 (fetch_home.ts): the search, or the follower beside it
+    if (hasFetchData(a)) return fetchWork(world, p, a);
     // rules 261 (birth_help.ts): a promised wait beside a woman until her child has come
     if (a.data.birth) return birthHelpWork(world, p, a, t);
     // New watches establish local contact before even orienting toward the child.
@@ -409,8 +414,10 @@ registerHandler('visit', {
     return 'fail:they needed something I did not have on me';
   },
   onEnd(world, p, a, outcome, detail) {
+    if (hasFetchData(a)) fetchEnd(world, p, a, outcome, detail); // rules 264 (fetch_home.ts)
     const t = personById(world, a.targetId);
     if (!t) return;
+    if (hasFetchData(a)) return;
     if (a.data.outcome === 'helped') addLog(world, p, 'social', `Found ${t.name} in need and helped.`);
     else if (outcome === 'failed') addLog(world, p, 'social', `Went to see ${t.name}: ${detail}.`);
   },

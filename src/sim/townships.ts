@@ -28,6 +28,8 @@ export interface Participation {
 export interface CivicProject {
  type?: import('./types').BuildingType;
  council?: Council;
+ /** rules 264 (speak_for.ts): the tick a candidate last spoke for this building before company, so that it is spoken for once an evening; absent until one has */
+ spoke?: number;
  id: number; townshipId: number; siteId: number; organiserId: number;
  proposed: number; reason: string; status: 'active' | 'completed' | 'failed';
  outcome: string; ended?: number; buildingId?: number; participants: Participation[];
@@ -81,14 +83,15 @@ export function proposeProject(w: World, p: Person, site: Site, reason: string, 
  addEvent(w, 'social', `${p.name} proposed a shared ${site.type==='storehouse'?'storehouse':BUILD_DEF[site.type].label} for ${town.name}: ${reason}.`, [p.id, site.id], p.x, p.y);
 }
 /** A real, co-present conversation has reached its response phase. One answer per resident. */
-export function recordProjectResponse(w: World, asker: Person, responder: Person, req: Request | undefined): void {
+/** `reach` is how near the two must be: three tiles for a private ask, and for a word spoken to company (speak_for.ts, rules 264) the hearing of the company. */
+export function recordProjectResponse(w: World, asker: Person, responder: Person, req: Request | undefined, reach = 3): void {
  if (!req || req.kind !== 'help_build') return;
  const project = projectAt(w, req.siteId);
  if (!project) return;
  const council=councilFor(w,project);
  const existing=project.participants.find(m=>m.personId===responder.id);
  if(!council && (project.organiserId!==asker.id||existing))return;
- if (hyp(asker.x - responder.x, asker.y - responder.y) > 3 || asker.indoors !== responder.indoors) return;
+ if (hyp(asker.x - responder.x, asker.y - responder.y) > reach || asker.indoors !== responder.indoors) return;
  if (req.status !== 'promised' && req.status !== 'declined') return;
  if(council&&!council.candidates.some(c=>c.personId===asker.id))return;
  if(!existing&&!projectHasRoom(w,project,responder.id))return; // rules 196: never a thirteenth participant (project_room.ts)

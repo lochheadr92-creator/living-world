@@ -9,6 +9,7 @@
 import { HELP_NEAR } from '../sim/birth_help';
 import { isCourtWalk, type WalkData } from '../sim/courting';
 import { isDancing } from '../sim/dance';
+import { isFetchSearch, type FetchData } from '../sim/fetch_home';
 import { isGriefSit, type GriefData } from '../sim/grief_sit';
 import { isVigil, type VigilData } from '../sim/vigil';
 import { describePerson } from '../sim/inspect';
@@ -17,10 +18,10 @@ import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
 
-export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance' | 'grief';
+export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance' | 'grief' | 'search';
 
 export interface LiveCandidate {
-  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>', 'grief:<id>' or 'person:<id>' */
+  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>', 'grief:<id>', 'search:<id>' or 'person:<id>' */
   key: string;
   kind: LiveKind;
   score: number;
@@ -84,6 +85,8 @@ const VIGIL_SCORE = 66;
 const DANCE_SCORE = 68;
 /** somebody sitting with the bereaved (rules 263, grief_sit.ts): one candidate for each bereaved person, once the visitor has sat down */
 const GRIEF_SCORE = 60;
+/** a search party out after dark under way (rules 264, fetch_home.ts): one candidate for each search that has somebody with the one who set out */
+const SEARCH_SCORE = 66;
 /** in real trouble: at risk, fleeing or standing against a threat (the inspector's danger tone) */
 const TROUBLE_SCORE = 50;
 /** unwell or hurt: the inspector's status line says so */
@@ -142,6 +145,16 @@ export function scanLive(world: World): LiveCandidate[] {
     const walk = a.data.walk as WalkData;
     if (walk.role !== 'a' || walk.done) continue;
     out.push({ key: `walk:${walk.id}`, kind: 'walk', score: WALK_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
+  }
+
+  // a search party out after dark under way (fetch_home.ts: a 'visit' whose data.fetch is not settled and who has set out with somebody), one candidate for each search, from the
+  // worrier's side, in the inspector's own words for what they are doing
+  for (const p of world.persons) {
+    const a = p.alive ? p.activity : null;
+    if (!a || !isFetchSearch(a)) continue;
+    const d = a.data.fetch as FetchData;
+    if (d.done || !d.party.length) continue;
+    out.push({ key: `search:${d.for}`, kind: 'search', score: SEARCH_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
   }
 
   // a woman lying in by her door (birth_help.ts: a 'rest' whose data.lyingIn is set) with a helper beside her in work at the visit that promise sent them on:

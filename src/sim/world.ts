@@ -60,6 +60,7 @@ import { praiseTick } from './praise';
 import { CONCEPTION_CHECK_EVERY, LIFE_CHECK_EVERY, adoptOrphans, conceptionTick, deathCauseOf, fatalInjuryHolds, immigrationTick, killPerson, lifeTick } from './lifecycle';
 import { updateNeeds } from './needs';
 import { perceive, refreshBeliefs } from './perception';
+import { fetchTick } from './fetch_home';
 import { rebuildMobileGrid } from './registry';
 import { decayGrievances } from './grievance';
 import { driftRelations } from './relations';
@@ -170,6 +171,7 @@ function stepPerson(world: World, p: Person): void {
   reviewHandovers(world,p);
   const careEnded=reviewCareJourney(world,p);
   if(careEnded&&p.careJourney)cancelCareAcquisition(world,p,p.careJourney.to,p.careJourney.seen,careEnded);
+  if ((tick + p.id) % PERCEIVE_EVERY === 0) fetchTick(world, p); // rules 264 (fetch_home.ts): a search out after dark is watched over here, every third tick, before they look about them
   if ((tick + p.id) % PERCEIVE_EVERY === 0) perceive(world, p);
   if ((tick + p.id) % BELIEF_REFRESH_EVERY === 0) refreshBeliefs(world, p);
   if ((tick + p.id) % 12 === 5) noteConcerns(world, p);
@@ -484,6 +486,10 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     for (const p of world.persons) {
       if (p.lifeEvent?.of !== undefined) push('KinLost' + p.id + ':' + p.lifeEvent.of); // rules 263 (lifechanges.ts onKinLost)
       for (const a of [p.activity, p.suspended]) if (a && (a.data.grief || a.data.settle)) push('KinScene' + p.id + ':' + a.id + ':' + JSON.stringify([a.data.grief, a.data.settle])); // rules 263 (grief_sit.ts, settle_child.ts)
+    }
+    // rules 264 (standing_up.ts, fetch_home.ts): the scenes of bundle E carried in an activity's data; a project's `spoke` (speak_for.ts) is in the civic projects' own line below
+    for (const p of world.persons) {
+      for (const a of [p.activity, p.suspended]) if (a && (a.data.side || a.data.sided || a.data.fetch || a.data.fetchWith || a.data.fetchedBy)) push('TogetherScene' + p.id + ':' + a.id + ':' + JSON.stringify([a.data.side, a.data.sided, a.data.fetch, a.data.fetchWith, a.data.fetchedBy]));
     }
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }

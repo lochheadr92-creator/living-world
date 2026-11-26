@@ -36,6 +36,10 @@ Bands, exported: `TOP_FROM` 80 (may cut in early), `MIDDLE_FROM` 50 (waits for t
   The kin scenes (rules 263, `grief_sit.ts`, `coming_of_age.ts`, `settle_child.ts`): a sit with the grieving "B sat with A, who has lost her mother." (partner, father, son, daughter, sister, brother) 62,
   a coming of age "D came of age before 7 people and hopes for a solid home of their own." 60; a sit with the grieving under way is a live shot of 60, one for each bereaved person. A child settled is below.
   A coming-of-age feast, alone or with a naming ("A naming and coming-of-age feast for ... is called at the fire today."), is a feast (55); the line the world has always written at sixteen, "has come of age and joins the work.", keeps the life weight 50.
+  The together scenes (rules 264, `fetch_home.ts`, `speak_for.ts`, `standing_up.ts`): somebody fetched home after dark "A and B went out after dark and brought C home." (or "A, B and D ...") 64;
+  speaking for a shared building "At the fire A spoke for a new well; 3 of 5 said they would help." ("At the wedding feast ..."; "0 of 4" too, since it happened) 58; standing up in a quarrel
+  "B stood up for A against C." 55. The same search that came back without them, "A and B went out after dark looking for C and came back without them.", is 52, the floor of what the reel lists.
+  A search party under way is a live shot of 66, one for each search that has somebody with the one who set out.
 - TOP, joined to the death: "A was with B when he died." 100. When it comes within MERGE_TICKS of B's own "died" line the plain death is taken out of the
   queue and this one, which follows A, stands for both: one top shot.
 - Between MIDDLE and FILLER (30 to 49): a later "walked out together." 45, "asked ... to walk out; ... said not today" 40, a later
@@ -77,6 +81,9 @@ event takes it at once, anything else at the hold. A live shot's caption says "n
 - A dance under way (`dance.ts`: an 'attend' activity whose `data.dance` is not over, two or more at one gathering that has begun): one candidate for the gathering,
   68, key `dance:<occasion id>`, follows the first dancer; caption the inspector's "doing" line ("Dancing at the wedding feast"); gone when fewer than two dance
   or the gathering is over. The gathering's own shot (wedding 70, feast and harvest 60) is there too, as before.
+- A search party out after dark under way (`fetch_home.ts`: a 'visit' whose `data.fetch` is not settled, with somebody who went with them): one candidate for each search, 66, key
+  `search:<id of the one looked for>`, follows the one who set out; caption the inspector's "doing" line ("Going out after dark with B to look for C", "Bringing C home"); none if nobody went with them,
+  and gone when the search is settled or ends.
 - Trouble: `statusLine` tone 'danger' 50 (unwell or hurt 40); caption the status text.
 
 ## What it does not do

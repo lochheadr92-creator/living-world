@@ -154,6 +154,15 @@ export const GRIEF_SIT_REPLIES = ['Thank you for coming.', 'Stay a little.', 'It
 export const COMING_OF_AGE_PARENT = ['You were so small once, {n}. Look at you now.', 'We are proud of you, {n}.', 'You are grown now, {n}. We are glad of you.'];
 export const COMING_OF_AGE_ELDER = ['{n} is grown now. Welcome among us.', 'Today {n} is one of us, to work and to be counted.', 'Good luck to you, {n}, as you begin.'];
 
+// rules 264 (standing_up.ts): somebody speaks up for one side of a quarrel they have come upon
+export const SIDE_LINES = ['Leave them be. They meant no harm.', 'That is not fair on them.', 'Enough now. They were here first.', 'Go easy. They have done nothing to deserve this.'];
+// rules 264 (speak_for.ts): a candidate to coordinate a shared building speaks for it to those there
+export const SPEECH_LINES = ['Friends, we ought to build the {what}, and I will see to it if you will help.', 'Hear me: the {what} would serve us all. Will you back me to see it built?', 'Let us make the {what} together. Who will stand with me?'];
+// rules 264 (fetch_home.ts): a worrier asks a neighbour to come with them, and says so when they find the one they came for
+export const FETCH_ASK_LINES = ['It is getting dark and {n} has not come home. Will you come with me to look?', '{n} is out there after dark. Come with me?'];
+export const FETCH_COMING_LINES = ['Of course. I will come with you.', 'Yes. Better two than one out there.'];
+export const FETCH_FOUND_LINES = ['There you are, {n}! Come home with us.', '{n}! We were worried. Walk home with us.', 'Thank goodness. Come, {n}, it is dark.'];
+
 function agoText(world: World, seen: number): string {
   const d = world.tick - seen;
   if (d < 500) return 'just now';

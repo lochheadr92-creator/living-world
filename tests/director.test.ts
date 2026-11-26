@@ -1662,6 +1662,98 @@ describe('the kin scenes (rules 263): sitting with the grieving, coming of age, 
   });
 });
 
+describe('the together scenes (rules 264): standing up for someone, speaking for a shared building, fetching someone home', () => {
+  // the words are the code's (src/sim/standing_up.ts, speak_for.ts, fetch_home.ts)
+  const TOGETHER = {
+    stood: 'Cora stood up for Ada against Ben.',
+    spoke: 'At the fire Ada spoke for a new well; 3 of 5 said they would help.',
+    spokeWedding: 'At the wedding feast Ada spoke for a new storehouse; 0 of 4 said they would help.',
+    brought: 'Mira and Dov went out after dark and brought Cora home.',
+    broughtThree: 'Mira, Dov and Eve went out after dark and brought Cora home.',
+    without: 'Mira and Dov went out after dark looking for Cora and came back without them.',
+  };
+
+  it('standing up is 55, speaking for a building is 58, bringing somebody home is 64 (all MIDDLE), and coming back without them is 52, the floor of what the reel lists', () => {
+    expect(matchEvent(ev('social', TOGETHER.stood))).toEqual({ id: 'stood-up', weight: 55 });
+    for (const text of [TOGETHER.spoke, TOGETHER.spokeWedding]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'spoke-for', weight: 58 });
+    for (const text of [TOGETHER.brought, TOGETHER.broughtThree]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'brought-home', weight: 64 });
+    expect(matchEvent(ev('social', TOGETHER.without))).toEqual({ id: 'came-back-without', weight: 52 });
+    expect([55, 58, 64, 52].map(bandOf)).toEqual(['middle', 'middle', 'middle', 'middle']);
+    expect(52).toBeGreaterThanOrEqual(MIDDLE_FROM);
+  });
+
+  it('nothing already named is taken, the same words in another kind are not these, and a story retelling one keeps the story rank', () => {
+    // the gathering rules and the thanks in company are as they were
+    expect(matchEvent(ev('social', 'A wedding feast for Ada and Ben is called at the fire tomorrow.')).id).toBe('wedding');
+    expect(matchEvent(ev('social', 'At the fire Quinn thanked Pat before 5 people for driving off a wolf.')).id).toBe('rescue-thanked');
+    expect(matchEvent(ev('social', 'At the fire Dan thanked Abe, Bea and Cal for the new kiln.')).id).toBe('builders-thanked');
+    expect(matchEvent(ev('conflict', 'Yara and Zeke argued over the last wood.')).id).toBe('conflict');
+    // the words in another kind, or without what makes them these
+    expect(storyWeight(ev('work', TOGETHER.stood))).toBe(0);
+    expect(storyWeight(ev('nature', TOGETHER.brought))).toBe(0);
+    expect(matchEvent(ev('social', 'Cora stood up and left.')).id).not.toBe('stood-up');
+    expect(matchEvent(ev('social', 'Ada spoke for a while at the fire.')).id).not.toBe('spoke-for');
+    expect(matchEvent(ev('social', 'Mira went out after dark.')).id).not.toBe('brought-home');
+    for (const text of [TOGETHER.stood, TOGETHER.spoke, TOGETHER.brought, TOGETHER.without]) {
+      const told = 'Yan told a story at the fire: how ' + text[0].toLowerCase() + text.slice(1);
+      expect(matchEvent(ev('social', told)), told).toEqual({ id: 'story', weight: 10 });
+    }
+  });
+
+  it('bringing somebody home (64) is a MIDDLE event that waits its turn behind the death that holds the shot, and is taken before a standing up (55) that came first', () => {
+    const { w, ada, ben, cal } = village('together-order');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31);
+    d.step(w, 0);
+    const stood = say(w, 'social', TOGETHER.stood, [cal.id, ada.id, ben.id], 41, 30);
+    const brought = say(w, 'social', TOGETHER.brought, [ada.id, ben.id, cal.id], 41, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev)).toEqual([stood, brought]);
+    d.step(w, MIN_HOLD);
+    expect(d.shot?.ev, 'the one brought home (64) first').toBe(brought);
+    expect([storyWeight(brought), storyWeight(stood)]).toEqual([64, 55]);
+  });
+
+  /** Ada has set out after dark with Ben to look for Cal, as fetch_home.ts sets it up (a visit whose data.fetch is a search under way) */
+  function searching(tag: string, o: { alone?: boolean; done?: boolean } = {}) {
+    const f = village(tag);
+    const { w, ada, ben, cal } = f;
+    ada.activity = newActivity(w, ada, {
+      kind: 'visit',
+      label: 'Going out after dark with Ben to look for Cal',
+      goal: 'to find Cal and bring them home',
+      targetId: cal.id,
+      targetType: 'person',
+      data: { fetch: { for: cal.id, since: w.tick, home: { x: 40, y: 30 }, party: o.alone ? [] : [ben.id], phase: 'out', ...(o.done ? { done: true } : {}) }, concern: 'missing', items: {}, sticky: true },
+    });
+    return { ...f };
+  }
+
+  it("a search party out after dark under way is one live candidate, 66, from the one who set out, in the inspector's own words; none if nobody went with them, or when it is settled", () => {
+    const { w, ada, cal } = searching('together-live');
+    const g = scanLive(w).filter((c) => c.kind === 'search');
+    expect(g.length).toBe(1);
+    expect(g[0].key).toBe(`search:${cal.id}`);
+    expect(g[0].score).toBe(66);
+    expect(g[0].subjectId).toBe(ada.id);
+    expect(g[0].caption()).toBe(describePerson(w, ada.id)!.qa.doing);
+    expect(g[0].caption()).toContain('Going out after dark with Ben to look for Cal');
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.kind).toBe('live');
+    expect(d.shot?.liveKey).toBe(`search:${cal.id}`);
+    expect(d.shot?.weight).toBe(66);
+    ada.activity = null;
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.ended).toBe(true);
+    expect(scanLive(searching('together-live-alone', { alone: true }).w).filter((c) => c.kind === 'search')).toEqual([]);
+    expect(scanLive(searching('together-live-done', { done: true }).w).filter((c) => c.kind === 'search')).toEqual([]);
+    expect(scanLive(village('together-live-none').w).filter((c) => c.kind === 'search')).toEqual([]);
+  });
+});
+
 describe('the reel: TOP and MIDDLE only', () => {
   it('picks the heaviest events of weight 50 and up in the window, in the order they happened', () => {
     const { w, ada } = village('reel');

@@ -61,6 +61,8 @@ import { leanOn, onMovedHousehold } from './lifechanges';
 import { hears, mediate } from './mediation';
 import { communicateWatchLocation, hasPracticalCare, laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
 import { answerBirthHelp, communicateMotherLocation, noteBirthAsked, onBirthHelpDeclined } from './birth_help';
+import { noticeQuarrel } from './standing_up';
+import { answerFetch, onFetchDeclined, FETCH_PROMISE_TTL } from './fetch_home';
 import {
   canInterruptForTalk,
   endActivity,
@@ -425,6 +427,8 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   const rel = B.relations[A.id];
   // rules 261 (birth_help.ts): to be with a woman when her child comes, weighed as a watch is
   if (req.kind === 'attend_birth') return answerBirthHelp(world, B, A, req);
+  // rules 264 (fetch_home.ts): to come with them to look for one of their household after dark, weighed as a watch is
+  if (req.kind === 'fetch') return answerFetch(world, B, A, req);
   // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
   if (req.kind === 'watch' || req.kind === 'fire') {
     if (laidUp(world, B) || personalDriveMax(world, B) > 50) return { kind: 'decline', reason: 'own_need' };
@@ -1228,9 +1232,10 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       if (kind === 'tool') bubble(world, A, `Could I borrow your ${d.toolKind ?? 'tool'}? I’ll bring it back.`, 'ask', 62);
       else if (kind === 'goods' || kind === 'haul') bubble(world, A, `Could you bring ${d.item ?? 'some materials'} to the ${building}?`, 'ask', 62);
       else if (kind === 'attend_birth') bubble(world, A, d.destId === A.id ? 'Will you be with me when my child comes?' : `Will you be with ${personOf(world, d.destId ?? 0)?.name ?? 'her'} when the child comes?`, 'ask', 64); // rules 261 (birth_help.ts)
+      else if (kind === 'fetch') bubble(world, A, D.saying(D.FETCH_ASK_LINES, A.id, B.id, world.tick >> 5, { n: personOf(world, d.destId ?? 0)?.name ?? 'they' }), 'ask', 70); // rules 264 (fetch_home.ts)
       else if (kind === 'repair') bubble(world, A, 'Would you be able to patch our roof? It’s not keeping the rain out.', 'ask', 64);
       else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building, child: d.destKind === 'person' && d.destId ? (personOf(world, d.destId)?.name ?? 'the little one') : 'the little one' }), 'ask', 60);
-      addLog(world, A, 'social', kind === 'attend_birth' ? `Asked ${B.name} to be with ${d.destId === A.id ? 'me' : (personOf(world, d.destId ?? 0)?.name ?? 'her')} when the child comes.` : `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
+      addLog(world, A, 'social', kind === 'fetch' ? `Asked ${B.name} to come with me to look for ${personOf(world, d.destId ?? 0)?.name ?? 'them'} after dark.` : kind === 'attend_birth' ? `Asked ${B.name} to be with ${d.destId === A.id ? 'me' : (personOf(world, d.destId ?? 0)?.name ?? 'her')} when the child comes.` : `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
       break;
     }
     case 'ask_info': {
@@ -1313,6 +1318,53 @@ const lessonKind = (c: Conversation): TechniqueKind => c.lesson?.kind ?? (c.data
 
 function reqOf(world: World, c: Conversation): Request | undefined {
   return world.requests.find((r) => r.id === c.requestId);
+}
+
+/**
+ * B's answer to A's ask for help with a building (a `help_build` request, `req`, for the site `siteId`): the one rule, whoever is asked and wherever. A private ask
+ * (phaseRespond, `conversationId` the talk it is made in) and a word spoken to company (speak_for.ts, rules 264, `conversationId` 0 and `quiet`) are both answered here, so a
+ * mandate formed by a speech is made of the same recorded choices a private ask would have recorded. The answer decides, settles the request, makes the promise on a yes and
+ * speaks; recording it against the project is recordProjectResponse's, after. `quiet` leaves out the one feed line each yes writes (a speech has its own line); no talk, no
+ * expectation is kept of a promise made to company.
+ */
+export function answerRecruit(world: World, A: Person, B: Person, req: Request, siteId: number, conversationId: number, quiet = false): void {
+  const siteBelief = A.beliefs[siteId];
+  if (projectAt(world, siteId) && !canInvite(world, A, B, siteId)) {
+    settle(world, req, 'declined', 'not eligible for this township project'); return;
+  }
+  const project=projectAt(world,siteId);
+  const oppose=project?oppositionReason(world,B,A,project):'';
+  if(oppose){settle(world,req,'declined',oppose);bubble(world,B,'I still support the other organiser.','say',64);return;}
+  const rel = B.relations[A.id];
+  const site0 = world.byId.get(siteId);
+  const cap = (site0 && site0.ent === 'site' ? site0.maxWorkers : 3) + 1;
+  const council=project&&councilFor(world,project);
+  if ((!council && (hasKnownHands(world) ? knownHands(world, B, siteId) : helpersOn(world, siteId)) >= cap) || activeCommitments(B).filter(c=>!council||c.siteId!==project!.siteId).length >= MAX_ACTIVE_COMMITMENTS) {
+    bubble(world, B, 'There are hands enough there already.', 'say', 52);
+    settle(world, req, 'declined', 'enough hands already');
+    A.asked[B.id] = world.tick - 400;
+    return;
+  }
+  const w = (projectAt(world, siteId) ? organiserExperience(B, A.id, world) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
+  // rules 187: the term that decided it, recomputed from the same pure inputs; `w` above is untouched
+  const answerWhy = hasAnswerCause(world) ? answerCause({ w, experience: projectAt(world, siteId) ? organiserExperience(B, A.id, world) : 0, affinity: 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100, chance: (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15, drive: 0.5 * (personalDriveMax(world, B) / 100), kin: rel?.kin ? 0.2 : 0, asker: A.name }) : undefined;
+  if (w >= 0.55 && siteBelief && (projectAt(world, siteId) || world.byId.has(siteId))) {
+    observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
+    if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
+    addCommitment(world, B, req, { kind: 'help_build', siteId: siteId, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: siteId, milestone: 'work on it or bring materials' });
+    req.status = 'promised';
+    req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
+    if (answerWhy) req.answerWhy = answerWhy;
+    if(project&&receivedCivicBenefit(world,B,A.id))req.note+='; remembers benefiting from their earlier shared storehouse';
+    bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
+    if(conversationId>0&&hasPromiseTargets(world)){const agreed=B.commitments.find(x=>x.id===req.commitmentId);if(agreed)rememberExpectation(world,A,B,req,agreed,conversationId);}
+    addLog(world, B, 'social', `Agreed to help ${A.name} with the building.`);
+    if (!quiet) addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);
+  } else {
+    bubble(world, B, D.saying(D.RESP_UNWILLING, B.id, A.id, world.tick >> 5), 'say', 52);
+    settle(world, req, 'declined', projectAt(world, siteId) ? (personalDriveMax(world, B) > 35 ? 'own needs take priority' : (rel?.affinity ?? 0) < 0 ? 'does not want to work with this organiser' : 'not willing to commit to this proposal') : 'busy');
+    if (answerWhy && w < 0.55) req.answerWhy = answerWhy;
+  }
 }
 
 // ── phase 2: the other person answers, and the answer has consequences ──
@@ -1443,6 +1495,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (req.kind === 'repair') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
           if(req.destId)communicateRoofLocation(world,A,B,req.destId);
+        } else if (req.kind === 'fetch') {
+          // rules 264 (fetch_home.ts): a promise to go with them and look, kept by having gone
+          addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + FETCH_PROMISE_TTL, destKind: 'person', destId: req.destId, milestone: 'fetched' });
         } else if (req.kind === 'attend_birth') {
           // rules 261 (birth_help.ts): a promise to be beside her, kept by a visit that waits with her
           // told a time (the woman's own ask), the day of the promise runs from then; a housemate's ask carries none and the day is from now, as for a watch
@@ -1470,6 +1525,12 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
           addLog(world, A, 'social', `${B.name} promised to mend our roof.`);
           addEvent(world, 'social', `${B.name} promised to mend ${A.name}’s roof.`, [A.id, B.id], A.x, A.y);
+        } else if (req.kind === 'fetch') {
+          const who = personOf(world, req.destId ?? 0)?.name ?? 'them';
+          req.note = `${B.name} will go with ${A.name} to look for ${who}`;
+          bubble(world, B, D.saying(D.FETCH_COMING_LINES, B.id, A.id, world.tick >> 5), 'say', 60);
+          addLog(world, B, 'social', `Promised ${A.name} to go with them to look for ${who} after dark.`);
+          addLog(world, A, 'social', `${B.name} promised to come with me to look for ${who}.`);
         } else if (req.kind === 'attend_birth') {
           const who = personOf(world, req.destId ?? 0)?.name ?? 'her';
           const forAsker = req.destId === A.id; // the woman asked for herself
@@ -1503,6 +1564,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         settle(world, req, 'declined', resp.reason.replace('_', ' '));
         if (req.kind === 'watch' || req.kind === 'fire') onDutyDeclined(world, A, B, req.kind);
         if (req.kind === 'attend_birth') onBirthHelpDeclined(world, A, B, personOf(world, req.destId ?? 0)); // rules 261
+        if (req.kind === 'fetch') onFetchDeclined(world, A, B, personOf(world, req.destId ?? 0)); // rules 264 (fetch_home.ts)
         const sev = req.kind === 'food' ? clamp((62 - A.needs.hunger) / 62, 0, 1) : req.kind === 'water' ? clamp((66 - A.needs.thirst) / 66, 0, 1) : 0.3;
         if (resp.reason === 'unwilling' || resp.reason === 'disliked') {
           // a refusal is not a broken promise: it costs a little warmth, in proportion to how much was at stake
@@ -1611,43 +1673,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'recruit': {
       if (!req) break;
-      const siteBelief = A.beliefs[d.siteId ?? 0];
-      if (projectAt(world, d.siteId ?? 0) && !canInvite(world, A, B, d.siteId ?? 0)) {
-        settle(world, req, 'declined', 'not eligible for this township project'); break;
-      }
-      const project=projectAt(world,d.siteId??0);
-      const oppose=project?oppositionReason(world,B,A,project):'';
-      if(oppose){settle(world,req,'declined',oppose);bubble(world,B,'I still support the other organiser.','say',64);break;}
-      const rel = B.relations[A.id];
-      const site0 = world.byId.get(d.siteId ?? 0);
-      const cap = (site0 && site0.ent === 'site' ? site0.maxWorkers : 3) + 1;
-      const council=project&&councilFor(world,project);
-      if ((!council && (hasKnownHands(world) ? knownHands(world, B, d.siteId ?? 0) : helpersOn(world, d.siteId ?? 0)) >= cap) || activeCommitments(B).filter(c=>!council||c.siteId!==project!.siteId).length >= MAX_ACTIVE_COMMITMENTS) {
-        bubble(world, B, 'There are hands enough there already.', 'say', 52);
-        settle(world, req, 'declined', 'enough hands already');
-        A.asked[B.id] = world.tick - 400;
-        break;
-      }
-      const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
-      // rules 187: the term that decided it, recomputed from the same pure inputs; `w` above is untouched
-      const answerWhy = hasAnswerCause(world) ? answerCause({ w, experience: projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0, affinity: 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100, chance: (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15, drive: 0.5 * (personalDriveMax(world, B) / 100), kin: rel?.kin ? 0.2 : 0, asker: A.name }) : undefined;
-      if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
-        observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
-        if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
-        addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
-        req.status = 'promised';
-        req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
-        if (answerWhy) req.answerWhy = answerWhy;
-        if(project&&receivedCivicBenefit(world,B,A.id))req.note+='; remembers benefiting from their earlier shared storehouse';
-        bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
-        if(hasPromiseTargets(world)){const agreed=B.commitments.find(x=>x.id===req.commitmentId);if(agreed)rememberExpectation(world,A,B,req,agreed,c.id);}
-        addLog(world, B, 'social', `Agreed to help ${A.name} with the building.`);
-        addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);
-      } else {
-        bubble(world, B, D.saying(D.RESP_UNWILLING, B.id, A.id, world.tick >> 5), 'say', 52);
-        settle(world, req, 'declined', projectAt(world, d.siteId ?? 0) ? (personalDriveMax(world, B) > 35 ? 'own needs take priority' : (rel?.affinity ?? 0) < 0 ? 'does not want to work with this organiser' : 'not willing to commit to this proposal') : 'busy');
-        if (answerWhy && w < 0.55) req.answerWhy = answerWhy;
-      }
+      answerRecruit(world, A, B, req, d.siteId ?? 0, c.id); // rules 264: the one answer, shared with a word to company (speak_for.ts)
       break;
     }
     case 'apologize': {
@@ -1933,6 +1959,7 @@ export function startArgument(world: World, a: Person, b: Person, why: string, c
   think(world, a, 'argued:' + b.id, -12, DAY, `argued with ${b.name}`);
   think(world, b, 'argued:' + a.id, -12, DAY, `argued with ${a.name}`);
   witness(world, 'quarrel', a, b, a.x, a.y);
+  noticeQuarrel(world, a, b); // rules 264 (standing_up.ts): those who could take a side are made to look again within a few ticks
 }
 
 // ───────────────────────── working side by side ─────────────────────────

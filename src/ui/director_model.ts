@@ -104,6 +104,14 @@ const RULES: Rule[] = [
   // life line at sixteen ("has come of age and joins the work") keeps the kind's weight, and the coming-of-age feast's own lines are the gathering rule above.
   { id: 'sat-grief', kind: 'social', test: (t) => / sat with .+, who has lost (her|his) /.test(t), weight: 62 },
   { id: 'came-of-age', kind: 'social', test: (t) => / came of age before \d+ (person|people) and hopes for /.test(t), weight: 60 },
+  // the together scenes (rules 264; the words are in src/sim/standing_up.ts, speak_for.ts and fetch_home.ts). Fetching somebody home after dark: "<A> and <B> went out after dark and brought <C> home." (or
+  // "<A>, <B> and <D> ..."), 64; the same search that did not find them, or whom they would not come with: "... went out after dark looking for <C> and came back without them.", 52, the floor of
+  // what the reel lists; a search party under way is a live shot (director_live.ts). Speaking for a shared building: "At the fire <A> spoke for a new well; 3 of 5 said they would help." ("At the wedding
+  // feast ..."), 58. Standing up for somebody in a quarrel: "<B> stood up for <A> against <C>.", 55. None of them has what the gathering rules need (" is called at ", " begins").
+  { id: 'brought-home', kind: 'social', test: (t) => / went out after dark and brought .+ home\.$/.test(t), weight: 64 },
+  { id: 'spoke-for', kind: 'social', test: (t) => / spoke for a new .+; \d+ of \d+ said they would help\.$/.test(t), weight: 58 },
+  { id: 'stood-up', kind: 'social', test: (t) => / stood up for .+ against .+\.$/.test(t), weight: 55 },
+  { id: 'came-back-without', kind: 'social', test: (t) => / went out after dark looking for .+ and came back without them\.$/.test(t), weight: 52 },
   // between MIDDLE and FILLER: the one filler candidate holds one of these against a lighter newcomer (see admit)
   { id: 'walk', kind: 'social', test: has(' walked out together'), weight: 45 },
   { id: 'welcome', kind: 'social', test: has(' welcomed the newcomer'), weight: 40 }, // has " gave " in it as often as not, so it comes before the gift rule

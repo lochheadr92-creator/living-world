@@ -41,6 +41,8 @@ import { COMPANY_SCENE_PARTS, companyScenePartOn, setCompanyScenes } from '../..
 import type { CompanyScenePart } from '../../src/sim/company_scenes';
 import { KIN_SCENE_PARTS, kinScenePartOn, setKinScenes } from '../../src/sim/kin_scenes';
 import type { KinScenePart } from '../../src/sim/kin_scenes';
+import { TOGETHER_SCENE_PARTS, setTogetherScenes, togetherScenePartOn } from '../../src/sim/together_scenes';
+import type { TogetherScenePart } from '../../src/sim/together_scenes';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -358,6 +360,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-kin-scenes' ? undefined : (kind.slice('rich-no-kin-'.length) as KinScenePart);
     const what: Record<KinScenePart, string> = { grief: 'nobody is bereaved by the loss of a parent, child or sibling and a partner is looked in on for twelve ticks in silence, as before', age: 'nobody turning sixteen has a feast called for them and the hope is taken up up to half a day later and told to nobody', settle: 'no parent sits beside a small child at bedtime' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the kin bundle: nobody sits with the grieving, no feast marks turning sixteen, no parent settles a child for the night'}, as before rules 263; no effect below rules 263`, install() { const was = Object.fromEntries(KIN_SCENE_PARTS.map((q) => [q, kinScenePartOn(q)])) as Record<KinScenePart, boolean>; setKinScenes(false, part); return () => { for (const q of KIN_SCENE_PARTS) setKinScenes(was[q], q); }; } };
+  }
+  // rules 264 (together_scenes.ts): all three parts removed (equal to rules 263), and each part alone. Nothing else is called `rich-no-together`.
+  if (kind === 'rich-no-together-scenes' || (kind.startsWith('rich-no-together-') && (TOGETHER_SCENE_PARTS as readonly string[]).includes(kind.slice('rich-no-together-'.length)))) {
+    const part = kind === 'rich-no-together-scenes' ? undefined : (kind.slice('rich-no-together-'.length) as TogetherScenePart);
+    const what: Record<TogetherScenePart, string> = { side: 'nobody walks over to speak up for one side of a quarrel', speech: 'nobody speaks for a shared building at the fire or at an occasion: support is asked for one person at a time, as before', fetch: 'nobody asks a neighbour to come along when a household member is missing after dark: the worrier goes alone, as before' };
+    return { spec: label, summary: `${part ? what[part] : 'no part of the together bundle: nobody stands up for a side, speaks for a shared building before company, or asks a neighbour to come and fetch a household member home after dark'}, as before rules 264; no effect below rules 264`, install() { const was = Object.fromEntries(TOGETHER_SCENE_PARTS.map((q) => [q, togetherScenePartOn(q)])) as Record<TogetherScenePart, boolean>; setTogetherScenes(false, part); return () => { for (const q of TOGETHER_SCENE_PARTS) setTogetherScenes(was[q], q); }; } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

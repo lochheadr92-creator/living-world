@@ -12,6 +12,9 @@ measured: by the owner's ruling of 26 November 2026 both run once, after bundle 
 Bundle D (rules 263, `src/sim/kin_scenes.ts`): all three parts are built (sitting with the grieving, coming of age, settling a child for the night). Their uptake in ordinary worlds and the lab are NOT
 measured: by the owner's ruling of 26 November 2026 both run once, after bundle E (see "Measured (rules 263)" at the end). Two of the three are rare by nature (a death, a sixteenth birthday) and are proven by staged tests only.
 Nothing else in the code base is called `kin_scenes`, `setKinScenes` or `rich-no-kin`: the arms are `rich-no-kin-scenes` and `rich-no-kin-grief|age|settle`.
+Bundle E (rules 264, `src/sim/together_scenes.ts`): all three parts are built (standing up for someone, speaking for a shared building, fetching someone home after dark, with one companion). Their uptake in ordinary worlds and the lab are NOT
+measured: by the owner's ruling of 26 November 2026 they run once, now that bundle E is built (see "Measured (rules 264)" at the end). Nothing else in the code base is called `together_scenes`, `setTogetherScenes` or `rich-no-together`: the
+arms are `rich-no-together-scenes` and `rich-no-together-side|speech|fetch`.
 
 ## Courting (rules 260, part 1)
 
@@ -494,6 +497,122 @@ the parent has sat down), the child's and parent's ordinary `cooldowns`; all in 
 inspector, done at 60 ticks asleep, the same sleep as with the part off, the longest sit, not ready for bed, a need of the parent's); failure (the child got up, the other parent got there first, once an evening); the
 feed line (two children one line; the two-day boundary); the part off; save and load mid-sit; the fingerprint; the validation; the lab arms; an ordinary two-day world that prints what happened.
 
+## Standing up for someone (rules 264, part 15)
+
+**What a person can now do.** A grown person (not a child) who comes upon two people quarrelling, and who by their own record is kin or fond (affinity 30 or more) of exactly one of them, walks over and speaks up for that one:
+one spoken line while the quarrel is going on, and one line in the feed, kind `social`: "B stood up for A against C." A viewer sees "Going to stand up for A" and then "Standing up for A" in the inspector, the speech bubble,
+and the line. The one stood up for has a glad thought for half a day and is closer to and more trusting of the supporter; the other side thinks a little less of the supporter, with a note in their record. The quarrel itself is
+not touched: its length, its grievances, what it did to the two and what it was over are as they were.
+
+**What it connects to.** Quarrels (`social.ts startArgument`, the two `argue` activities, visible to others as `SeenEntity.act === 'argue'`), the relations a person holds (kin, affinity), mood, peace-making (`mediation.ts` is
+untouched: a test shows that a friend of both is offered the same quarrel after it has cooled and that the same word has the same outcome as with the part off), the story director (55). It reads no quarrel's true state to plan:
+the cue is the supporter's own sight of two people at an `argue` and their own record of each.
+
+**Where it differs from the plan.** (1) A quarrel lasts about 38 ticks (the `argue` handler: 34, and 4 more for the one who started it) and a person looks at their options every 45, so nearly everybody who could have taken a side would
+have been mid-thought when it was over. When a quarrel begins (`startArgument`) those who could take it up (awake, out of doors, in sight of it within 8 tiles, not a child, rested, kin or fond of exactly one of the two by their own record)
+are made to look again within 4 ticks (`noticeQuarrel`: it only brings their next look forward and decides nothing). (2) The offer is made only to somebody who could walk to the one stood up for in 40 ticks (about four tiles): "within about 8
+tiles" is what a person sees, and what they can reach in time is less. So a bystander near the quarrel can arrive in time and one further off cannot. The plan's count (a bystander tied to exactly one side in 32 of 82 quarrels) counted
+those who could see it, not those who could arrive. It is not known how many of those 32 would arrive; that is the uptake count's to say. (3) Any recorded kin counts, as well as affinity 30 or more (the count found kin in 39 of 39).
+(4) "One supporter for each quarrel": the quarrel's two `argue` activities carry `data.sided`, the supporter's id; a second supporter who arrives finds somebody has already spoken and turns back. That is read as a thing found on
+arriving, as "the quarrel is still going on" is; it is not read to plan. (5) A supporter who turns back writes nothing at all, not even the engine's "gave up" line in their own log.
+
+**Switch and arm.** `setTogetherScenes(on, 'side')`; arms `rich-no-together-scenes` and `rich-no-together-side`.
+
+**Constants** (top of `src/sim/standing_up.ts`; to be tuned from a lab, if it shows). Sees the nearer of the two within 8 tiles; the two are one quarrel within 7 tiles of each other; fond is affinity 30 or kin; the walk is at
+most 40 ticks; worth 56 less the walk (above ordinary work, 20 to 45; below any pressing need); at most once a day for each supporter; 300 ticks before going to the same person again after turning back; reach 3.2 tiles; the supporter
+stays beside them 24 ticks; the one stood up for: a glad thought of 4 for half a day, affinity +3, trust +2, acquaintance +1; the other side: affinity -2; a look again within 4 ticks.
+
+**Refusal and interruption.** Not offered to a child, to somebody with a critical need, a danger believed about, in a talk or quarrelling themselves, to somebody who has stood up for anybody in the last day or turned back from that person
+lately, to somebody kin or fond of both or of neither, or beyond a 40-tick walk. On arrival the quarrel over, the one stood up for not where they were, or somebody having spoken already: the supporter turns back, waits 300 ticks for that
+person, and nothing is said or written. A danger or a critical need ends the walk as it ends any sticky activity.
+
+**Saved state.** The supporter's own record in the activity's data (`side`: whom, against whom, since when, whether they have spoken), `sided` on both `argue` activities, and the supporter's ordinary `cooldowns`; all in the fingerprint
+(`TogetherScene` lines in `world.ts`) and checked by `validateTakingSides`.
+
+**Tests.** `tests/standing_up.test.ts`: the switch; the cue (offered, kin or fond of one, of both, of neither, seven negatives each with its control, the part off and rules 263 and an authored world, a quarrel too far to see); the quarrel
+noticed; the scene (the walk, one line, one spoken line, the inspector, the effects, the quarrel unchanged against a part-off twin, no second quarrel and nobody hurt, once a day); one supporter for each quarrel; failure (over before they
+arrived, not where they were); mediation still offered and with the same outcomes; save and load mid-scene; the validation; the lab arms.
+
+## Speaking for a shared building (rules 264, part 14)
+
+**What a person can now do.** At an evening fire's half-way point, or on arriving at an occasion that has begun (never a funeral), somebody who has put themselves forward to coordinate a shared building that has nobody yet to
+coordinate it stands and makes the case, and each person there who could be asked answers there and then. A viewer sees a speech bubble from the speaker, a bubble from each who answers, and one line: "At the fire A spoke for a new well;
+3 of 5 said they would help." ("At the wedding feast ...", and "0 of 4" when nobody was persuaded, since it happened). Each yes is an ordinary promise to help build, recorded against the project like a private one, so a mandate can form in one evening.
+
+**What it connects to.** The civic record (`townships.ts` `CivicProject` and its council, `civic_decision.ts`: candidates, `mandate`, `recordChoice`), the private ask for help with a building (`options_social.ts optRecruit`, answered in
+`social.ts`), requests and promises (`createRequest`, `addCommitment`), the evening fire and the occasions' arrivals (the same two moments `praise.ts` speaks at), the story director (58). **The answer is shared, not copied:** the body of
+the private ask's answer (`case 'recruit'` in `phaseRespond`) is now one exported function, `social.ts answerRecruit`, which the private ask calls with the conversation's id and the speech calls with none. A test records the same listeners
+asked one at a time by real talks and shows the same choices on the project and the same mandate.
+
+**Where it differs from the plan.** (1) At the fire's half-way slot the order is a thanks, then a speech, then a story, then a song, and whichever is done takes the place of the rest, as a thanks already takes the story's. At an occasion the
+speech is made only if no thanks was. (2) Each answer is the ordinary one, but the one line it writes in the feed on a yes ("B agreed to help A build.") is left out for a speech (`quiet`), because the speech has its own line; the
+promise, the request, the logs and the bubbles are all there. (3) A promise made to company keeps no `rememberExpectation` (the asker's note of a heard agreement carries the conversation's id, and there is none; its saved form requires one),
+so the speaker does not hold the "expected by" note a private promise leaves. (4) In a private ask a person who thinks ill of the asker may refuse to stop for the talk, and then nothing is recorded of them; in company they are asked
+and answer, so a "no" is recorded where a private ask would have recorded nothing (the test says so). (5) The listeners are those the existing rule (`canInvite`) lets the speaker ask: grown members of the project's township who have not
+answered this candidate and do not already support them, within 6 tiles of the speaker; at least 2, at most 8 are asked. (6) The speaker must be one of the project's candidates and still supporting it; a challenger who is not yet a
+candidate does not speak. (7) One speech for a project in half a day, whoever speaks: there is no rival speech in this version. (8) The building is called by `BUILD_DEF[type].label` ("storehouse" for the original public store);
+the plan's example "a new well" is not one of the shared types.
+
+**Switch and arm.** `setTogetherScenes(on, 'speech')`; arms `rich-no-together-scenes` and `rich-no-together-speech`.
+
+**Constants** (top of `src/sim/speak_for.ts`). Listeners within 6 tiles; 2 at least, 8 at most; one speech for a project in 1,200 ticks (half a day: an evening).
+
+**Refusal and interruption.** Fewer than two who could be asked, the project has its coordinator already, no candidate there, a funeral, an occasion not yet begun, the part off, rules 263, an authored world: nothing happens and nothing is
+written. It never removes a candidate, never changes the mandate rule, and cannot leave a project with nobody able to work it: it only adds recorded choices made by the rule that was there. A test with a rival candidate shows the
+candidates unchanged and a tie still a tie.
+
+**Saved state.** `CivicProject.spoke` (the tick of the last speech; it is in the fingerprint with the civic record, which `world.ts` hashes whole), and the requests, promises and recorded choices an answer makes, as for a private ask; checked by
+`validateSpeech` and by `validateTownships` as before.
+
+**Tests.** `tests/speak_for.test.ts`: the switch and the staged world; a speech at the fire (the line, "3 of 4", the promises, the mandate); the same choices and mandate as real private talks; the same answer and note; "0 of 4" and the
+private ask still offered; not a candidate, a project with its coordinator; the order at the slot (a thanks, a speech, a story); an occasion (the label, not a funeral, not before it begins, not with too few, not in place of a thanks);
+who is spoken to; the caps and the half-day rest; a rival candidate kept; save and load; the lab arm.
+
+## Fetching someone home after dark (rules 264, part 13)
+
+**What a person can now do.** When it is dark or nearly dark and somebody holds the worry that one of their own household is missing (the `missing` worry `welfare.ts` raises for a dependant not seen for over 1,100 ticks), they first ask a
+grown person in sight to come with them: an ordinary request of a new kind, `fetch`, answered as a `watch` is. If somebody says yes the two set out together to where the worrier last saw the missing one (the worrier's own record) and keep
+within a few tiles of each other the whole way. On finding them the worrier says a line and the one found is offered a strong option to walk home with them; they all walk back, and when the worrier is within 8 tiles of home with the
+companion still beside them one line is written: "A and B went out after dark and brought C home." If they did not find them, or the one found would not come, or the limit was reached: "A and B went out after dark looking for C and came back
+without them." If the missing one comes home by themselves first, nothing is written. If nobody agrees the worrier goes alone exactly as before.
+
+**What it connects to.** The welfare worry and visit (`welfare.ts`: the search is the same `visit` activity carrying `data.fetch`), requests and promises (`types.ts RequestKind`, `helper_learning.ts KINDS`, `social.ts evaluateRequest`,
+`options_work.ts optCommitments`: the companion's promise is a `work` commitment, milestone `fetched`, kept by having gone, whether or not the one looked for was found), perception (`SeenEntity.fetching`, so the one found sees the worrier
+come up and call), the person's own decision (the walk home is an option like any other: not offered to somebody with a critical need or a danger believed about), the story director (64, 52, and a live shot of 66).
+
+**What was built, and what was dropped.** Built: the ask, the answer, the promise, the walk out together (the companion and the one found follow the worrier; whoever falls more than 2.6 tiles behind turns and follows again, running if more than
+4.5 tiles back, so the group stays together without anybody being held up), the looking round at the place, the finding, the walk home, the three feed lines' cases, the limits, the breaking off, the lapse of a promise nobody took up, and all the saved
+state. Dropped or changed, each with its reason: (1) **One companion, not "one or two".** The worrier asks until one agrees or two have been asked, and the first yes is enough. This is the plan's own smallest honest version ("the asker
+and one companion"), taken from the start rather than after a failed attempt at three: the group stays together, but the code carries `party` as a list of at most one so that two could be added. (2) **No public thanks.** Bundle A's praise is made of
+a wolf rescue and says so in its words ("for driving off a wolf"); it does not fit cheaply, so it is left out. The one brought home is glad of it for a day and fonder of those who came; that is all. (3) **The feed line needs a companion
+beside the worrier at the door.** With none (they dropped out, or were lost), nothing is written to the feed and the worrier's own log says how it ended. (4) **The ask is made first by being worth a little more than the walk to look**
+(the walk's own worth plus 4, less the walk to the person asked), and a worrier who has other things to do (the staged world's first look at its own options had "ask where to find food" above both) does those first, as for any worry; this part
+adds no pressure to go out. Mood weighs a talk and a walk a little differently (`decision.ts moodWeight` is by the kind of option), so a worrier in a low mood may take the walk without asking, which is the old behaviour.
+
+**Where it differs from the plan, otherwise.** "Dark or nearly dark" is a light under 0.5 (dusk to dawn). "In sight" is within 12 tiles. The search is bounded as asked: the place the worrier last saw them must be within 30 tiles of their home door
+(the settlement centre if they have no home), and the party turns back at 600 ticks out or 30 tiles from home. The group's reach was measured in the staged search: over 369 ticks of the walk the companion was at most 2.9 tiles from the worrier
+and the found child (6 years old) at most 4.8, and the plan's bound was "within 3"; the child's is a little over because a child walks slower and runs to catch up, which is the existing child pace. The worrier reads one thing that is not a
+sight: whether the found person has set out with them (it is what she would see). The found person is offered the walk when they see one of their household with the search flag come within 8 tiles; which search it is for is read from the
+worrier's record as bookkeeping (she called them by name).
+
+**Switch and arm.** `setTogetherScenes(on, 'fetch')`; arms `rich-no-together-scenes` and `rich-no-together-fetch`.
+
+**Constants** (top of `src/sim/fetch_home.ts`). Dark: light under 0.5. Range: 30 tiles from the home door. Ask: a person in sight within 12 tiles, at most 2 asked in 900 ticks, worth the walk's own worth + 4, a refusal waits 400 ticks, family +6 and
+a friend (affinity 25) +4; willingness 0.5 as for a watch. Promise: 1,300 ticks, lapses unclaimed after 900. Walk: the companion's worth 72, the walk home's 84; together within 3 tiles (follow at 2.6), run if more than 4.5 tiles back, lost beyond 9
+tiles for 60 ticks; a companion waits 240 ticks for the worrier to set out, with 150 to start walking after they do. Finding: looks round 24 ticks, sees within 5 tiles, greets 24 ticks, waits 90 more for the one found to set out. Out at most 600
+ticks. Home within 8 tiles with the companion within 6 of the worrier. The one brought home: a glad thought of 5 for a day, affinity +3 and trust +2 for the worrier, +2 affinity for the companion; the companion is +2 affinity and +1 trust to the worrier.
+
+**Refusal and interruption.** Not asked: a child or youth, the worrier with a critical need or a danger believed about, in a talk, the missing one in sight, not of their household, a place beyond 30 tiles, two asked already, one who refused lately. A
+companion who is laid up or pressed by a need of their own (a drive over 50), believes in a danger, has a promise too many or two small children of their own to leave, or thinks little of the asker, says no. The promise is let go without blame
+if they have to break off for a need (`interrupted`), lose the party (`moot`), or the worrier never sets out. A companion with a critical need or a danger is not offered the walk (it is shown as blocked, with why).
+
+**Saved state.** The activities' own data (`fetch`: whom, since when, where home is, the party, the phase, how far it has got; `fetchWith`; `fetchedBy`), requests of kind `fetch`, the promises they make (milestone `fetched`) and the asker's
+ordinary `cooldowns`; all in the fingerprint (`TogetherScene` lines in `world.ts`) and checked by `validateFetching`.
+
+**Tests.** `tests/fetch_home.test.ts`: the switch; the cue (offered first, ten negatives each with its control, the real decision raising the worry and offering the ask in one pass); the answer (the promise, five refusals, a refusal in talk,
+alone as before); the search (the whole of it with the group's reach measured, the inspector, the place); not found, would not come, home by themselves, the limits, no companion at the door; breaking off, a promise never taken up, the
+walk blocked for a need; save and load on the way out and on the way home; the validation; the lab arm; an ordinary two-day world that prints what happened for the whole bundle.
+
 ## Measured (rules 260)
 
 Measured on 26 November 2026 on the uncommitted tree at head `d7b55e98`, with rules 260 built and nothing committed. Raw outputs:
@@ -697,3 +816,18 @@ What was done, on the uncommitted tree at head `beabe29a` (the rules-262 pin):
   down for the night, the parent was already asleep or walking to bed in seven and awake in three (their energy 44, 23 and 22). That is why the worth is 70 and the gate 60 (see "Settling a child for the night").
   It is two evenings of five children in one world.
 - Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-263 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, saved and continued 120 ticks, from a clean checkout of `3346b360`: `tests/v263_continuation.*`), before any code gated at rules 264 or above.
+
+## Measured (rules 264)
+
+**Uptake in ordinary worlds and the lab are NOT measured.** By the owner's ruling of 26 November 2026 they run once, now that bundle E is built, with every part's removal arm. Nothing below is a claim that standing up for someone, speaking
+for a shared building or fetching someone home happens in an ordinary world, how often, or that it helps or harms anybody. In particular nothing here says the group is safer from a wolf: that follows from rules that were already there
+(`wildlife.ts safeFromWolf`), and no wolf was in any of these runs.
+
+What was done, on the uncommitted tree at head `11489ece` (the rules-263 pin):
+- Staged scenes only, for each of the three parts (`tests/standing_up.test.ts`, `tests/speak_for.test.ts`, `tests/fetch_home.test.ts`, and the together block of `tests/director.test.ts`): they check each rule, not how often it happens.
+- Two ordinary Normal worlds' worth of looking, both the same one: gen-4, arrivals on, rules 264, the whole bundle on, TWO days (`tests/fetch_home.test.ts`, the last test; `TOGETHER_DAYS`; `TOGETHER_REPORT=<file>` appends the line). It was run twice: the
+  first time to prove that nothing throws, the second after a count of the fetch cue was added to the same test. It ran to the end of day 2 with 28 people in 8 to 10 seconds, nothing was thrown, and in it: arguments 0, stood up for 0, speeches 0, fetch
+  asks 0, brought home 0, came back without 0. The count of the cue: of 2,436 samples (every 20 ticks, in the dark or nearly, of each grown person) none held the worry that one of their own household was missing, so none had a search to make.
+  That is two days of one young settlement with no quarrel in it; it says the three parts did not get in the way of an ordinary world, and nothing about how often they happen.
+- Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-264 continuation pin is NOT recorded: it follows the build, from a clean checkout, and the range 260 to 264 is now fully
+  used (a fix for anything the uptake count or the lab finds needs 265).

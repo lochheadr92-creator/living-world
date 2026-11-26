@@ -2,11 +2,13 @@ import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './e
 import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
 import { praiseAtFire } from './praise';
 import { songAtFire } from './song';
+import { speakAtFire } from './speak_for';
 import { isReunion, reunionBegin, reunionWork } from './reunion';
 import { lyingInBegin, lyingInWork } from './birth_help';
 import { vigilBegin, vigilEnd, vigilWork } from './vigil';
 import { griefBegin, griefEnd, griefWork } from './grief_sit';
 import { settleBegin, settleEnd, settleWork } from './settle_child';
+import { sideBegin, sideWork } from './standing_up';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
@@ -63,12 +65,15 @@ registerHandler('rest', {
     // rules 263 (grief_sit.ts, settle_child.ts): sitting with somebody who has lost one of theirs, and settling a small child for the night
     if (a.data.grief !== undefined) return griefBegin(world, p, a);
     if (a.data.settle !== undefined) return settleBegin(world, p, a);
+    // rules 264 (standing_up.ts): walking over to speak up for one side of a quarrel
+    if (a.data.side !== undefined) return sideBegin(world, p, a);
   },
   work(world, p, a): WorkResult {
     if (a.data.lyingIn !== undefined) return lyingInWork(world, p, a);
     if (a.data.vigil !== undefined) return vigilWork(world, p, a);
     if (a.data.grief !== undefined) return griefWork(world, p, a);
     if (a.data.settle !== undefined) return settleWork(world, p, a);
+    if (a.data.side !== undefined) return sideWork(world, p, a);
     if (isBoundedNightWait(world, a)) {
       const shelter = world.byId.get(a.targetId);
       if (!shelter || shelter.ent !== 'building') return 'fail:the shelter is no longer there';
@@ -144,9 +149,9 @@ registerHandler('wander', {
     // rules 262 (reunion.ts): standing with them for a little after the meeting
     if (isReunion(a)) return reunionWork(world, p, a);
     a.progress++;
-    // rules 260 (praise.ts): halfway through, a thanks owed or due is spoken in place of the story; otherwise (rules 216) a story may be told;
-    // and with neither done at this sitting (rules 262, song.ts) a song may be started
-    if (isEveningSit(a) && !praiseAtFire(world, p, a) && !eveningFireWork(world, p, a)) songAtFire(world, p, a);
+    // rules 260 (praise.ts): halfway through, a thanks owed or due is spoken in place of the story; otherwise (rules 264, speak_for.ts) a candidate for a shared building
+    // with nobody to coordinate it may speak for it; otherwise (rules 216) a story may be told; and with none of these done at this sitting (rules 262, song.ts) a song may be started
+    if (isEveningSit(a) && !praiseAtFire(world, p, a) && !speakAtFire(world, p, a) && !eveningFireWork(world, p, a)) songAtFire(world, p, a);
     return a.progress >= a.duration ? 'done' : 'continue';
   },
   onEnd(world, p, a, outcome) {

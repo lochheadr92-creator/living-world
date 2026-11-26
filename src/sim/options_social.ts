@@ -6,6 +6,8 @@ import { helperScorer, lieInOption, lyingInOpensAt, mayAskForHelpNow, mayBeAsked
 import { vigilOption } from './vigil';
 import { reunionOption } from './reunion';
 import { settleOption } from './settle_child';
+import { standUpOption } from './standing_up';
+import { FETCH_ASKS_MAX, FETCH_ASK_NEAR, companionsFor, fetchAsksMade, fetchCue, fetchScorer, fetchedOption, joinParty, mayBeAskedToFetch } from './fetch_home';
 import { WELCOME_BASE, WELCOME_GENEROUS, WELCOME_SOCIABLE, generousLean, mayWelcome, mayWelcomeNow } from './welcome';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
@@ -714,6 +716,27 @@ function optBirthHelp(ctx: Ctx): void {
   else if (best) mkSocial(ctx, best.c, 'request', { reqKind: 'attend_birth', destKind: 'person', destId: mother.id, purpose: `be with ${mother.name} when her child comes` }, `Ask ${best.c.q.name} to be with ${mother.name} when the child comes`, `to have somebody with ${mother.name} for the birth`, null, best.sc, 'request', ':birth');
 }
 
+// ───────────────────────── fetching somebody home after dark ─────────────────────────
+/**
+ * rules 264 (fetch_home.ts): somebody who holds the worry that one of their own household is missing, in the dark, and who would otherwise go and look alone (welfare.ts offers the walk),
+ * first asks one grown person in sight to come with them: the one worth most, family and friends first. Once somebody has promised, the walk to look carries them as company; after
+ * FETCH_ASKS_MAX asks nobody more is asked and the worrier goes as they would have. Nobody is sought out at their work (rules 227) for it.
+ */
+function optFetchAsk(ctx: Ctx): void {
+  const cue = fetchCue(ctx);
+  if (!cue) return;
+  const { world, p } = ctx;
+  joinParty(ctx, cue);
+  if (companionsFor(world, p, cue.M.id).length > 0 || fetchAsksMade(world, p, cue.M.id) >= FETCH_ASKS_MAX) return;
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const c of candidates(ctx)) {
+    if (c.d > FETCH_ASK_NEAR || c.s.child || leftToWork(world, c.s) || !mayBeAskedToFetch(ctx, cue.M, c.q)) continue;
+    const sc = fetchScorer(ctx, cue, c.q, c.aff, c.d);
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (best) mkSocial(ctx, best.c, 'request', { reqKind: 'fetch', destKind: 'person', destId: cue.M.id, purpose: `come with me to look for ${cue.M.name}` }, `Ask ${best.c.q.name} to come and look for ${cue.M.name}`, `to have ${best.c.q.name} come with me to find ${cue.M.name}`, null, best.sc, 'request', ':fetch');
+}
+
 // ───────────────────────── welcoming newcomers ─────────────────────────
 /**
  * rules 260 (welcome.ts): go and welcome a grown stranger of a household that has just come. What A reasons from is a stranger in sight; the
@@ -934,6 +957,9 @@ export function socialOptions(ctx: Ctx): void {
   vigilOption(ctx); // rules 261 (vigil.ts)
   reunionOption(ctx); // rules 262 (reunion.ts)
   settleOption(ctx); // rules 263 (settle_child.ts)
+  standUpOption(ctx); // rules 264 (standing_up.ts)
+  optFetchAsk(ctx); // rules 264 (fetch_home.ts): a worrier after dark asks somebody to come with them first
+  fetchedOption(ctx); // rules 264 (fetch_home.ts): the one found is offered the walk home
   optTrade(ctx);
   optSupply(ctx);
   optTeachTechnique(ctx);

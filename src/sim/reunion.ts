@@ -118,7 +118,7 @@ export function lapseReunion(w: World, p: Person): void {
 
 // ───────────────────────── the offer (options_social.ts) ─────────────────────────
 /** the settlement centres a person might call home, if their household has no home: the camp and any further settlement */
-function nearestCentre(w: World, p: Person): { x: number; y: number } {
+export function nearestCentre(w: World, p: Person): { x: number; y: number } {
   let best = w.camp;
   let bd = hyp(w.camp.x - p.x, w.camp.y - p.y);
   for (const c of w.extraSettlements ?? []) {

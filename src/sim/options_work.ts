@@ -69,6 +69,7 @@ import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { carryCap, stageOf } from './people';
 import { fireCommitment, hasPracticalCare } from './responsibilities';
 import { birthHelpCommitmentOption } from './birth_help';
+import { fetchCommitmentOption } from './fetch_home';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
@@ -1763,6 +1764,11 @@ function optCommitments(ctx: Ctx): void {
     if (c.kind === 'work' && c.milestone === 'attended') {
       // rules 261 (birth_help.ts): a promise to be with a woman when her child comes: go and stay with her
       birthHelpCommitmentOption(ctx, c);
+      continue;
+    }
+    if (c.kind === 'work' && c.milestone === 'fetched') {
+      // rules 264 (fetch_home.ts): a promise to go with somebody to look for one of their household after dark: go and keep beside them
+      fetchCommitmentOption(ctx, c);
       continue;
     }
     if (c.kind === 'work' && c.milestone === 'watched') {

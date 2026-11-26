@@ -61,7 +61,7 @@ export function describeHelperTask(task:HelperTask|undefined):string{
  if(work)return `Task: watch; asked ${task.asked}; agreed ${task.offered??'not recorded'}. ${work.source==='own work'?'Completed my agreed watch':'Saw completion of the agreed watch'} for person #${work.target}, tick ${work.tick}, activity #${work.eventId}. This does not establish other skills or present willingness.`;
  return `Task: ${task.kind}${task.item?` (${task.item})`:''}; asked ${task.asked}; agreed ${task.offered??'not recorded'}. ${r?`Last direct receipt: ${r.amount} ${r.item}, tick ${r.tick}, ${r.eventKind} #${r.eventId}.`:'No direct material receipt recorded; ability is not established by this outcome.'}`;
 }
-const KINDS:RequestKind[]=['food','water','wood','stone','seeds','tool','help_build','info','trade','care','goods','repair','haul','work','watch','fire','attend_birth'];
+const KINDS:RequestKind[]=['food','water','wood','stone','seeds','tool','help_build','info','trade','care','goods','repair','haul','work','watch','fire','attend_birth','fetch'];
 export function validateHelperLearning(w:World):void{
  const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
  const amount=(n:unknown)=>typeof n==='number'&&Number.isFinite(n)&&n>=0;
