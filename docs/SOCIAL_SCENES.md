@@ -561,4 +561,4 @@ What was done, on the uncommitted tree at head `510cc5a1` (the rules-261 pin):
 - One look at the mood of the people at the evening fire in that same world (the first two evenings, 26 half-way points at one fire): the hash gave that fire no song on either evening; the sitters numbered 2 to 13;
   the mood levels of those sitting ran from -8 to 19, 12 of 32 at 5 or more and 14 of 32 at 0 or more; with the good-spirits line at 5 no evening had a sociable grown sitter in good spirits among them, at 0 one of the two
   did. That is why the line is 0 (see "A song at the fire"). It is two evenings at one fire in one world.
-- Not run: the full suite, the lab, the uptake count in three ordinary worlds, the rules-262 continuation pin, a look in the browser or the inspector.
+- Not run: the full suite, the lab, the uptake count in three ordinary worlds, a look in the browser or the inspector. The rules-262 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, saved and continued 120 ticks, from a clean checkout of `bf07213c`: `tests/v262_continuation.*`), before any code gated at rules 263 or above.

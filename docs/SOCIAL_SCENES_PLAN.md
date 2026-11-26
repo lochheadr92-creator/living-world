@@ -214,7 +214,8 @@ Bundle C, 26 November 2026:
   shot (`tests/director.test.ts`); typecheck, the rules-261, -260 and -257 pins and the golden test pass unchanged; one two-day ordinary world ran at rules 262 with nothing
   thrown.
 - Not met, by the owner's ruling: uptake in ordinary worlds, the lab, the full suite. They run once after bundle E.
-- Open: the rules-262 continuation pin is not recorded; the owner watches the director with the bundle on.
+- Recorded: the rules-262 continuation pin (ordinary Normal gen-2, arrivals on, tick 48000, from a clean checkout of `bf07213c`: `tests/v262_continuation.*`).
+- Open: the owner watches the director with the bundle on.
 
 ## Bundles C, D and E: revised plan (26 November 2026)
 
