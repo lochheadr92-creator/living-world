@@ -3,7 +3,9 @@
 Plan: `docs/SOCIAL_SCENES_PLAN.md` (Group 1, three bundles). Rules ranges: `docs/RULES_RANGES.md` (260 to 264). Each bundle is one
 rules version of three separately switched parts, with a lab removal arm for the whole bundle and for each part. Bundle A (rules 260,
 `src/sim/meeting.ts`): all three parts are built (courting, welcoming newcomers, public praise). Results are in "Measured (rules 260)"
-at the end of this file.
+later in this file. Bundle B (rules 261, `src/sim/hearth_scenes.ts`): all three parts are built (helping at a birth, the naming day, keeping vigil); their uptake is in
+"Measured (rules 261)" at the end; the lab is not yet run. The bundle's switch file is not `hearth.ts` and its whole-bundle arm is not `rich-no-hearth`: both belong to
+rules 123's indoor hearth, so the switch is `setHearthScenes` and the arms are `rich-no-hearth-scenes` and `rich-no-hearth-birth|naming|vigil`.
 
 ## Courting (rules 260, part 1)
 
@@ -120,6 +122,158 @@ scenes. The building half: gen-4, gen-2, gen-6 finished 15, 14 and 14 buildings 
 (7, 3 and 4 lapsed unsaid, 0, 3 and 1 still due at the end); with the bundle off, 8, 12 and 12 were finished and none thanked. Whether the
 thanks changes who is liked, or who comes to the fire, is not measured.
 
+## Helping at a birth (rules 261, part 4)
+
+**What a person can now do.** A woman near her time who has a home, is up and about in daylight and has nothing pressing goes to the door of her home and
+lies in there, sitting beside it, for the last third of a day. In the last day before her time she may ask one grown neighbour she can see to be with her when
+the child comes, and tells them when to come (the moment her lying in opens, a third of a day before her time) and where her door is; a housemate who sees her
+lying in may ask one as well (no time told: the neighbour goes at once). The neighbour answers as to a request to watch a child, may say no, and on a yes goes to her
+door when it is time and stays beside her, whether or not she is there to be seen yet. A viewer sees a woman speak to a neighbour, the neighbour come to her door, the
+woman sitting by it ("Lying in by her door"), and the birth line in the feed: "X was born to M and F, with H there to help." when somebody was beside her, and the old
+plain "X was born to M and F." in every other case (the feed does not say who was not there).
+
+**What it connects to.** Births (`lifecycle.ts giveBirth`: the same tick, the same code, the same draws; the part adds one call that settles the scene
+and writes the line, and it makes no draw, tested against a world with the part off: the baby, its name and the shared stream are the same). Requests and
+promises: a new request kind `attend_birth`, asked in an ordinary conversation (`options_social.ts optBirthHelp` through `mkSocial`), answered by
+`social.ts evaluateRequest` the way a watch is (`birth_help.ts answerBirthHelp`: their own needs, promises, children and liking; having borne or attended
+a child, being a woman and knowing her each count for a little), and a yes is an ordinary promise (a `work` Commitment, milestone 'attended', a day) kept
+(at the birth, with the helper beside her, or a helper who stopped to talk still counts) by a `visit` marked `data.birth` (`options_work.ts optCommitments`, `welfare.ts` visit handler). A housemate tells the helper where they last saw her, as for
+a watch; the woman herself tells her where her door is (the home she holds a belief of, as a told place) and when to come: the tick her lying in opens, carried
+on the request (`Request.deadline`), so the promise falls due then (`communicateMotherLocation`, `birthHelpCommitmentOption`). The helper goes to the door (the tile at the door of the home she holds a belief of: the one the household lives in if she holds a belief of it, else the first home she holds one of; if none, where she last saw the woman)
+whether or not she can see the woman lying in. The woman's ask is `optBirthHelp`
+(`motherAsking`: a woman with a home, from a day before her time until she lies in; her own needs and dangers, the other in sight and free to talk, and not
+sought out at their work, as for any request) and it counts, with the housemates' asks, to one cap of three a day. The welfare visit: the helper is the first to look in afterwards, by a new kind of worry (`Concern` 'newborn',
+raised by what they saw, not settled by seeing her well, `welfare.ts`). Perception: a woman lying in is visible (`SeenEntity.lyingIn`), which is all the
+asker reasons from. The new-parent period (`lifechanges.ts`) is as before. The story director (`lying:<id>` 72 live, only with a helper beside her), the
+inspector (the activity's own label; history rows "Has been beside N births as a helper").
+
+**Where it differs from the plan.** (1) She lies in outside by her door, not inside: a home admits its own household only (`habitation.ts`, "no guests"),
+so a neighbour could not stand beside her indoors. (2) A woman who is asleep indoors, or it is dark, or a storm blows, does not lie in (it needs daylight and
+a woman up and about): her birth has the old line, word for word, as every birth without a helper beside her does. (3) No line says who was not there: the plan's "was alone" (and the first
+build's "M had no helper.") was dropped, because written for every woman who lay in it was on eight of thirteen births in the first measure, and written only when somebody was asked and nobody came it was
+on twelve of fifteen in the second; either way the sad line was the usual one. (4) The woman herself (from a day before her time
+until she lies in), or a housemate who SEES her lying in, asks, and only somebody they see: nobody is sent for from across the settlement. (5) The helper waits at most a third of a
+day (for one who was told a time, and the minute the life check can take to deliver the child, `BIRTH_LAG`); up to three asks in a day, the woman's and her housemates' together, and one promised helper at a time.
+
+**Switch and arm.** `setHearthScenes(on, 'birth')`; lab arms `rich-no-hearth-scenes` (all three parts) and `rich-no-hearth-birth`. (Not `rich-no-hearth`:
+that is rules 123's indoor hearth, `hearth.ts`.) Rich worlds at 261 and later only.
+
+**Constants** (top of `src/sim/birth_help.ts`; to be tuned from a lab). Lying in: from 800 ticks before her time, worth 60 (ordinary work is 20 to 45),
+hunger and thirst drives 40 or less and the warmth drive 20 or less (she sits out of doors: two women broke it off for the cold in the first ordinary run, which set this),
+not in a storm (0.3) or hard rain (0.6), outdoors, in the day; she sits on for 120 ticks past her time. The ask (the woman's own, from `ASK_EARLY` = a day, 2,400 ticks, before her time, and a housemate's, the same): 50,
+plus 8 for a woman who has borne a child (4 for one who has helped at a birth), 3 for a woman, 6 for kin, 4 for a friend (affinity 25), less the walk; seen
+within 14 tiles; at most 3 a day, 400 ticks before the same neighbour is asked again. The answer: as a watch (the neighbour's willingness 0.5 and over),
+plus 0.12 for having borne or attended a child, 0.05 for a woman, 0.1 for knowing her. The help: within 4 tiles of her, worth 56, waits a third of a day (a helper told a time, 60 ticks more: `BIRTH_LAG`, because the life check that delivers a child runs once in 60 ticks),
+stays 60 ticks after the child comes, looks again after 120 if it could not find her. The birth: mother and helper grow fonder (affinity 8 and 4, trust 4
+and 2, familiarity 3), a glad thought of 6 for a day each; an unhelped mother has a thought of -6 for three days (the birth thought of +25 is unchanged).
+Attended counts to 99.
+
+**Refusal and interruption.** A no is an ordinary refusal (it costs what any refusal costs and writes nothing in the feed; the asker waits 400 ticks
+before asking that neighbour again and asks the next). Nobody at home to send, nobody in sight, three asks used up, or everyone refusing: she bears the
+child with the plain old line, and, if she had lain in or somebody was asked, the small lasting thought of a woman with nobody to help.
+A helper told a time who finds an empty door (the woman did not lie in, or has not come) waits a third of a day and a minute, and the promise lapses with a line in her log and none in the feed; a child born before
+she came is the same release as before (moot, request cancelled, a line in her log). A critical need or danger ends her lying in (she may break it off: it is sticky only against
+ordinary options) and the same for the helper's wait; a promise that no helper reached in time is released as moot and the request cancelled, not
+broken (the child was born before they could come); a helper who waited a third of a day for a child that did not come gives up the same way.
+
+**Saved state** (optional fields, bounded, each checked by `validateBirthHelp` on loading): `Person.lyingIn` (the tick, until the birth, with a pregnancy
+and within a day and a third), `Person.attended` (1 to 99), `Person.birthAsked` (the tick somebody was first asked for this birth, cleared at the birth, with a pregnancy; it makes the birth settle the asks even for a woman who did not lie in),
+the activity data (`lyingIn`, `birth`, `birthDone`, `waitFrom`, `told`, `emptyDoor`), requests of kind `attend_birth`
+(destination a person; `deadline`, the told time, 0 or up to a day past now, and only on a request the woman made for herself), the Commitment milestone 'attended', and the Concern kind 'newborn' (not checked: concerns never were). All in the fingerprint
+(`Hearth<id>`), absent below 261 and with the part off.
+
+**Tests.** `tests/birth_help.test.ts`: the registration, lying in offered only when each condition holds (eleven negatives), the activity and what is
+seen of it, the ask (offered to whom, who is preferred, one at a time, not when nobody is in sight, a real request answered like a watch, a no, the limit of
+three), the whole scene (helper there, the line, the counts, the fondness, the promise kept), the same tick and the same shared stream as a world with the
+part off, nobody to send, everyone refusing, the old line when she had not lain in or had no home, the part off and rules 260, a helper too late or
+waiting too long, the look-in afterwards, save and load in the middle, the validation, the lab arms, and an ordinary-world report. For the woman's own ask: it is offered
+and made (a request from her, her bubble and log lines, her home told as a place); not offered when her time is more than a day away or has come, with no home, lying in
+already, hungry, critically thirsty, in danger, when the neighbours in sight are at their work, when only her own household is in sight, when she was refused lately,
+when somebody has already promised, or when three asks are used up (each with a control); the told time is carried (`deadline` is the opening of her lying in, the
+commitment is due a day after it); the helper comes to her door without seeing her, waits at an empty door and then is beside her when she comes home and lies in; one promised helper at a time; the cap of three
+shared with a housemate's asks; a promise that lapses quietly if she never lies in (a line in the helper's log, none in the feed); a helper at the door of a woman who has not lain in is
+counted when the child comes (and for a birth that comes up to the life check's minute late); save and load in the middle of a promise; the validation. The birth lines (helped; the plain line in every other case: asked and nobody came, nobody asked, lain in or not, and never "had no helper"); the part-on and part-off twin (the same baby and shared stream) still holds.
+
+## The naming day (rules 261, part 5)
+
+**What a person can now do.** The feast a birth already called is the child's naming feast. A parent who is there when it opens, with somebody else who came, says
+the name before them; and now and then the child bears the name of somebody who has died. A viewer sees "A naming feast for X and M is called at the fire today.",
+the mother at it (she never went before), and "M and F named their daughter X before 3 people, after M's mother." (the last clause only when true).
+
+**What it connects to.** Occasions (`occasions.ts`: the feast's label, the mother attending, the naming at the opening, the later arrivals coming to know the
+child), births (`giveBirth`: the name still drawn from the shared stream first, so the stream is exactly what it was, then replaced if the rule applies), the
+record of the dead (`world.deceased`: a parent names a dead person they hold a relation with and know to be dead, `death_knowledge.ts`), relations
+(familiarity, a little affinity), the inspector (history row "Named at birth after X, who had died."), the story director ("named" 58; the naming feast is the feast
+rule, 55, and the gathering already a live shot).
+
+**The name.** A parent's dead parent, then partner, then sibling, then close friend (affinity 60), the mother's before the father's, whose name suits the child's
+sex (read from the plain names, numeral or not) and which NO LIVING PERSON BEARS (checked against everybody alive). A name with a numeral ("Cora II", the world's
+way of naming when the plain names ran out) is taken whole: the rule is about the exact name, and nothing is added or taken away. The child records `namedAfter`
+(the dead person's id); the name drawn first goes back among those nobody has borne.
+
+**Where it differs from the plan.** (1) The mother is in the feast's `about`, which kept her away; with the part on she goes (and counts as the one it is most for).
+(2) The naming is said at the tick the feast opens, by a parent who has come for it and is there, before at least ONE other who has come and is there (not
+the plan's several): people set out up to 200 ticks before and many arrive after, so two made the naming rare; a parent who comes late, or nobody else, means no
+naming line (the feast goes on, and the child is met by those who arrive: see below). (3) The feast's lines say "naming feast", including "is over: nobody came."
+
+**Switch and arm.** `setHearthScenes(on, 'naming')`; arms `rich-no-hearth-scenes` and `rich-no-hearth-naming`.
+
+**Constants** (top of `src/sim/naming.ts`). Others needed: 1. Most newborns named at one feast: 4. Hearing a child named: familiarity 3 and affinity 1.5 for each who
+comes to the feast afterwards (and those there, when they arrive); the parents' glad thought 6 for a day. A friend to be named after: affinity 60.
+
+**Refusal and interruption.** No parent there, or nobody else: no line, and nothing is said. "Nobody came" is still the line of an empty feast. A child who has
+died before it opens is not named. A name nobody dead gives, or a dead person's name a living person bears, or that suits the other sex: the drawn name stands.
+
+**Saved state.** `Person.namedAfter`, `Occasion.naming` (at most four newborn ids) and `Occasion.named` (which of them were named aloud), checked by
+`validateNaming` (the namesake must be on the death record), in the fingerprint, absent below 261 and with the part off.
+
+**Tests.** `tests/naming.test.ts`: the plain names, a child named after a dead mother with the shared stream and the baby identical to a world with the part off,
+only a name nobody alive bears and a numeral taken whole, the order of kin and what must be known, the part off and rules 260, the feast's label, the mother
+going, the name said (one line, the three forms, "after M's mother" only when true), no parent there, too few there, nobody came, two births at one feast,
+save and load, the validation, the lab arm, and an ordinary-world report.
+
+## Keeping vigil (rules 261, part 6)
+
+**What a person can now do.** Somebody of the household, or a partner, parent or child, who sees one of theirs visibly feverish or hurt and resting goes and sits
+beside them, through the night if need be, up to half a day, handing over water or food they can spare if the sick person looks thirsty or hungry. A viewer sees
+"Sitting up with B" in the inspector and a shot of it, and when it ends one line: "A sat up through the night with B, who has a fever." ("sat with" by day,
+"who is hurt" for a hurt one); and if B dies with A beside them, "A was with B when he died."
+
+**What it connects to.** Illness (nothing about how a fever spreads is touched: the module never calls `expose`, tested; the sick person mends no faster, tested
+against a world with the part off), welfare (the same transfer and gift, `onGift` 'care', the same visible signs: `feverish` from rules 165 and `hurt`, health
+under 60, which the welfare worry reads), grief (the sitter's grief for the dead is cut to 0.7 of what is left, as a visit to a grave cuts it,
+`options_places.ts`), relations (the sick person remembers who sat with them, more if they mended), mood (a glad thought), the story director (a vigil
+under way 66 live, one per sick person; the line 50; "was with B when he died" 100, taking the plain death's place as one top shot), the inspector (the
+activity's own label, the relation notes).
+
+**Where it differs from the plan.** (1) The trigger is the SIGN, not the number: "health under 35" is in nobody's sight, so a person acts on `hurt` (health under 60,
+what the welfare visit treats as visible) or on a fever of 0.5 and over, and only when the sick person is at rest, asleep or by a fire. That is a wider band
+than the plan's, and the bundle's uptake counts are of vigils begun on the sign. (2) "One sitter at a time" is kept by sight: nobody sits who sees somebody
+sitting beside them, and a second who arrives and finds one there gives it up. (3) The line is written once, when the vigil ends, if it lasted 90 ticks or more;
+a shorter one writes nothing. (4) The sitter does not lose sleep by any rule of the part: they simply do not sleep while they sit, and leave when worn out
+(energy under 12), thirsty (under 35), hungry (under 30) or cold (under 25). The cost is their time. (5) A vigil indoors is kept only in the sitter's own household's home
+(a home admits its own household only, `habitation.ts`); a sitter who was walking up, or sitting outdoors, follows a housemate in at their own door if they saw them go in
+(last seen near the door within 150 ticks); outdoors it is beside them wherever they are, and a walk to a kinsman of another house follows him while he is in sight.
+
+**Switch and arm.** `setHearthScenes(on, 'vigil')`; arms `rich-no-hearth-scenes` and `rich-no-hearth-vigil`.
+
+**Constants** (top of `src/sim/vigil.ts`). The cue: hunger and thirst drives 30, energy drive 45 (the gates `welfare.ts` uses), worth 52, plus 8 for a
+partner, parent or child (4 for a housemate), 6 for a fever (4 hurt), 6 in the dark, less the walk. Half a day at most (1,200 ticks); done after 60 ticks of the sick person looking well;
+near is within 3.2 tiles; a look every 60 ticks; written from 90 ticks; the sitter rests 300 ticks before sitting with the same person again (150 if cut short). The
+sick person's glad thought 5 for half a day; fondness +2 and trust +1 (more, +2 and +1, if they mended).
+
+**Refusal and interruption.** A critical need or danger, the sitter's own thirst, hunger, cold or weariness, a fever of their own, losing sight of the sick
+person, or the sick person leaving the room ends it, with a log line and one in the feed if it had lasted. If the sick person dies, "was with" is written only if
+the sitter was in work beside them, in the same place, at that tick; their vigil is over and nothing else is written.
+
+**Saved state.** The vigil's own record in the activity's data (`vigil`: whom for, since when, ticks sat, fever or hurt, well-for, whether the dark has fallen or the
+death was met), checked by `validateVigil`. Nothing on the person. `SeenEntity.sittingUp` is not saved.
+
+**Tests.** `tests/vigil.test.ts`: the cue and its parts, offered to a partner, a housemate and not a neighbour, a hurt person and not one at 60, eleven negatives (each
+one with its control), the part off and rules 260, the sign and not the illness, the scene (walks, sits, tends, ends at half a day, "sat with" by day, "sat up
+through the night" in the dark, mended, cut short, a second sitter), no faster mending, no call to `expose`, the death with her beside him (one line, her grief cut) and
+the deaths without, save and load, the validation, the lab arm, and an ordinary-world report.
+
 ## Measured (rules 260)
 
 Measured on 26 November 2026 on the uncommitted tree at head `d7b55e98`, with rules 260 built and nothing committed. Raw outputs:
@@ -208,3 +362,87 @@ ETIMEDOUT), `tests/v250_continuation.test.ts`, `tests/zz_review_g_observer_purit
 - The owner has not yet watched the director with the bundle on.
 - Rescue thanks has never been seen in an ordinary world.
 - The rules-260 continuation pin is recorded (ordinary Normal gen-2, arrivals on, tick 48000, from a clean checkout of `bc7e9410`: `tests/v260_continuation.*`), before rules 261.
+
+## Measured (rules 261)
+
+Measured on 26 November 2026 on the uncommitted tree at head `e97aaffa`, nothing committed. Raw outputs, one JSON and one log a world: `C:/dev/lw_labs/hearth261_uptake_v2`
+(`gen-4`, `gen-2`, `gen-6`: the numbers below), `C:/dev/lw_labs/hearth261_uptake_v2/first_run_before_door_fix` (the same worlds on the rework before the helper went to the door tile: 13 births, 1 helped,
+19 asks, 11 promises, 1 in time) and `C:/dev/lw_labs/hearth261_uptake` (the first build, the "was" in the table; it has `gen-6-off-all.json`, the same world with the whole bundle off). The script is `scripts/hearth_uptake.ts`
+(`--probe` also reads, through the observer path of `generateOptions` that writes nothing, who could have asked for a helper and how far each stretch of somebody ill or hurt got toward a vigil). Each count is in the bundle's own words from the
+world's own record.
+
+**What this table is and is not.** It is the part 4 rework (the woman asks for herself, tells the helper when to come, and the helper goes to her door) measured with the helper going to the tile at the door of the home
+and waiting out the life check's minute. It is NOT the final code. Two things changed after it and were NOT measured in ordinary worlds: (1) the helper now picks, among the homes she holds a belief of, the one the household
+lives in (in the one case traced she had gone to an old lean-to of the household, not its hut), and (2) the feed no longer says "M had no helper." (every unhelped birth writes the plain line; the "somebody was asked"
+row below was written that way when it was measured). A scene for a helper who arrives after the birth was considered and NOT built. The helped-birth count below is therefore the count before (1), and the naming and vigil rows
+come from the same runs.
+
+**Uptake.** Three ordinary Normal worlds (gen-4, gen-2, gen-6), 45 days from the start, arrivals on, the whole bundle on, one run each (so a sample of chance, not an effect). The three worlds ended with 64, 64 and 63 people and no
+death in any of them; each took 530 to 550 s with the probe, three at a time and under other load. "was → now" is the first build against this rework.
+
+| Count (was → now) | gen-4 | gen-2 | gen-6 | All three |
+|---|---|---|---|---|
+| Days run / people at the end / deaths (now) | 45 / 64 / 0 | 45 / 64 / 0 | 45 / 63 / 0 | 135 days, 0 deaths |
+| **Helping at a birth** | | | | |
+| Births | 5 → 7 | 2 → 3 | 6 → 5 | 13 → 15 |
+| with a helper there ("with H there to help") | 0 → 0 | 0 → 1 | 1 → 0 | 1 → 1 |
+| unhelped, somebody was asked (written then "M had no helper."; now the plain line) | 2 → 5 | 2 → 2 | 4 → 5 | 8 → 12 |
+| unhelped, nobody asked, she had lain in (the plain line) | 0 → 1 | 0 → 0 | 0 → 0 | 0 → 1 |
+| unhelped, nobody asked, she had a home and had not lain in (the plain line) | 3 → 1 | 0 → 0 | 1 → 0 | 4 → 1 |
+| unhelped, nobody asked, she had no home (the plain line) | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 |
+| lyings in begun (activities started) | 2 → 6 | 2 → 2 | 5 → 5 | 9 → 13 |
+| asks made (requests) | 1 → 8 | 1 → 6 | 5 → 8 | 7 → 22 |
+| by the mother herself | 0 → 8 | 0 → 6 | 0 → 8 | 0 → 22 |
+| by a housemate | 1 → 0 | 1 → 0 | 5 → 0 | 7 → 0 |
+| refused ("own need" and the like) | 1 → 3 | 0 → 3 | 3 → 4 | 4 → 10 |
+| promises given | 0 → 5 | 1 → 3 | 2 → 4 | 3 → 12 |
+| of them to the mother herself | 0 → 5 | 0 → 3 | 0 → 4 | 0 → 12 |
+| helpers who came in time (promise fulfilled, beside her) | 0 → 0 | 0 → 1 | 1 → 0 | 1 → 1 |
+| promised, and the child came first (cancelled) | 0 → 5 | 1 → 2 | 1 → 4 | 2 → 11 |
+| helpers sent to a door (told a time) | 0 → 5 | 0 → 3 | 0 → 4 | 0 → 12 |
+| helpers who waited at an empty door | 0 → 3 | 0 → 1 | 0 → 2 | 0 → 6 |
+| **The naming day** | | | | |
+| naming feasts called | 6 (was 5) | 3 (was 2) | 4 (was 6) | 13 |
+| naming feasts opened by the end of the run | 6 (was 4) | 3 (was 2) | 4 (was 6) | 13 (was 12) |
+| names said (a parent there with somebody else) | 4 (was 3) | 1 | 3 (was 5) | 8 (was 9) |
+| children named after the dead | 0 | 0 | 0 | 0 |
+| feasts nobody came to | 0 | 0 | 0 | 0 |
+| **Keeping vigil** | | | | |
+| people ill or hurt in the world (fevers begun) | 7 (was 6) | 6 (was 2) | 13 (was 10) | 26 (was 18) |
+| stretches of looking feverish (0.5 and over) or hurt (health under 60) | 2 (was 0) | 8 (was 3) | 9 (was 8) | 19 (was 11) |
+| of them with an adult of the household, or a partner, parent or child, alive | 2 (was 0) | 7 (was 2) | 8 (was 7) | 17 (was 9) |
+| of them seen so by one such person | 2 (was 0) | 7 (was 1) | 8 (was 7) | 17 (was 8) |
+| of them seen at rest (asleep, resting or by a fire) | 1 (was 0) | 7 (was 1) | 7 (was 5) | 15 (was 6) |
+| of them for whom the vigil was offered (at a look every 20 ticks) | 0 | 5 (was 0) | 5 (was 2) | 10 (was 2) |
+| vigils begun | 0 | 3 (was 1) | 4 (was 2) | 7 (was 3) |
+| total ticks sat | 0 | 100 (was 341) | 1217 (was 431) | 1317 (was 772) |
+| ended by the sick person mending | 0 | 0 (was 1) | 3 (was 1) | 3 (was 2) |
+| ended by the sitter leaving for a need or falling ill | 0 | 2 (was 0) | 0 (was 1) | 2 (was 1) |
+| ended by the sick person dying (with the sitter beside them) | 0 | 0 | 0 | 0 |
+| ended at the half day | 0 | 0 | 0 | 0 |
+| ended otherwise (not in the same place, lost sight, not where expected) | 0 | 1 (was 0) | 1 (was 0) | 2 (was 0) |
+| lines written ("sat up through the night with" / "sat with") | 0 | 1 | 3 (was 1) | 4 (was 2) |
+| "was with B when he died" | 0 | 0 | 0 | 0 |
+| sitters who caught the fever from the one they sat with | 0 | 0 | 1 (was 0) | 1 (was 0) |
+
+**Reading, and what stops each part.** Counts, not benefits.
+
+- *Helping at a birth*: **one birth in fifteen had a helper there (gen-2), where it was one in thirteen.** The rework did what it was for in the asking: women asked 22 times for themselves (a housemate, 0 times), 10 were
+  refused (the neighbour's own need and the like), 12 promised, and 12 helpers were sent to a door (against 7 asks and 3 promises). It did not bring the helpers to the birth: of the 12 promises 1 was kept in time and 11 ended
+  "the child was born before they could come" (6 of the 12 had waited at an empty door: the woman was not there to be seen). The funnel of the woman's own ask, from the probe, at a look every 20 ticks (1,396 looks at women in the
+  last day before their time, with a home, not yet lying in): 218 offered the ask, 501 had no grown person in sight, 677 had one in sight and were not offered it (her own needs, a neighbour at work, one already refused or
+  promised, or the cap). The housemate's funnel, while a woman lay in (377 looks): a housemate saw her at 89 and was offered the ask at 2 (it was 90 and 29 before; the woman's own ask now comes first).
+- *Why helpers were late* (one case traced, gen-6 Bea and Ivy, on the first run of this rework; the other ten were not traced): births fell across the whole day (ticks of the day 137 to 1937, not at dusk); the promise fell due when her lying in opened and the
+  helper set out within about 30 ticks, from about 27 tiles away (she was carrying food into a cellar); and she never reached the woman, because the home she went to was the first she held a belief of, the household's old lean-to, 7 tiles from the woman lying in by the
+  door of its hut, and she stood there "at an empty door". Two defects of the told-helper path were fixed afterwards (she went to the wall of the home nearest her, not its door; and she took the first home she held a belief of, not the one the household lives in; in the traced case the second was the cause); whether that brings helpers
+  in time in the other cases was not measured. A third was found earlier by a test (the wait ended at the day the child was due, before the life check that delivers it, up to 60 ticks later) and is in these numbers as fixed.
+- *The naming day* fired in every world: 13 naming feasts called, 13 opened by the end, 8 with the name said before somebody. No child was named after the dead, and nobody could have been: there was no death in any of the three
+  worlds in 135 days; the namesake rule is untested outside the staged scenes. No naming feast was empty. Same kind as before (13 called, 12 opened, 9 said); the small moves are the worlds going differently after the first different ask.
+- *Keeping vigil* began 7 times in 135 world-days (0, 3 and 4), against 3, and wrote 4 lines (2 before). The funnel from the probe: 19 stretches of somebody looking ill or hurt (feverish at 0.5 or more, or health under 60; 11 before),
+  17 with an adult housemate or a partner, parent or child alive, 17 seen so by one of them, 15 seen at rest, the vigil offered for 10 and begun 7. 6 of the 7 were for a fever and 1 for a hurt person (gen-2). They ended with the sick person
+  mending (3), the sitter leaving for a need (2) and not finding them or being in another place (2); nobody was with anyone at a death (there was none), and 1 sitter caught the fever from the one they sat with (0 before). This is more than in the first
+  measure and the kind is the same; the three worlds are different worlds after the first different ask (26 fevers against 18), so it is a change of chance in a sample of three, not an effect of the rework.
+
+**Limits.** Three worlds, 45 days, young settlements of 30 to 66 people: the count of `scripts/vigil_count.ts` in six saved settlements (65 to 159 people, 25 days) was 46 episodes of health under 35 or a visible fever, 38 of them with
+kin alive, against 19 stretches here in 135 world-days, so these counts say what happens in a young settlement and little of an established one. The lab (12 fresh worlds, six saved settlements, two nudges) has not been run; whether any
+part moves people, deaths, mood or births is not measured, and the whole of this table is mechanism and opportunity, not benefit. The rules-261 continuation pin is not recorded.

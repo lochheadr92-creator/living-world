@@ -239,6 +239,10 @@ export interface SeenEntity {
   busyTalking: boolean;
   /** rules 260 (courting.ts): visibly out walking with somebody; present only while a walk out is under way, and only with the part on */
   walkingOut?: boolean;
+  /** rules 261 (birth_help.ts): visibly lying in by her home, waiting for her child; present only while she does, and only with the part on */
+  lyingIn?: boolean;
+  /** rules 261 (vigil.ts): visibly sitting up beside somebody who is ill or hurt; present only while they do, and only with the part on */
+  sittingUp?: boolean;
 }
 
 export type ActivityKind =
@@ -619,6 +623,10 @@ export interface Occasion {
   /** who it is for (the dead, the couple, the newborn and mother); nobody for a harvest or a market */
   about: number[];
   attended: number[];
+  /** rules 261 (naming.ts): the newborns whose naming this feast is (at most 4); absent unless a birth called it with the part on */
+  naming?: number[];
+  /** rules 261 (naming.ts): which of them have been named aloud, before those who were there when it opened */
+  named?: number[];
   status: 'called' | 'gathering' | 'done';
   end: string;
 }
@@ -643,6 +651,14 @@ export interface Trade {
 }
 
 export interface Person {
+  /** rules 261 (birth_help.ts): the tick she began to lie in beside her home before her child; cleared at the birth */
+  lyingIn?: number;
+  /** rules 261 (birth_help.ts): how many births this person has been beside as a helper (1 to 99) */
+  attended?: number;
+  /** rules 261 (birth_help.ts): the tick somebody was first asked to be with her at this birth, by her or a housemate; cleared at the birth */
+  birthAsked?: number;
+  /** rules 261 (naming.ts): the person who died whose name this one was given at birth */
+  namedAfter?: number;
   /** rules 260 (praise.ts): thanks this person owes somebody who drove a wolf off them or killed one, to say in company; at most three, each kept three days */
   thanksOwed?: { to: number; since: number; killed?: true }[];
   skillExperience?: import('./skill_coaching').SkillExperience[];
@@ -816,7 +832,7 @@ export interface InteractionRecord {
 
 export interface Concern {
   about: number;
-  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing' | 'bereaved';
+  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing' | 'bereaved' | 'newborn';
   /** when the observation was made (hearsay keeps the original age) */
   seen: number;
   src: 'seen' | 'told';
@@ -1150,7 +1166,7 @@ export interface Household {
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;
 
 // ───────────────────────────── social ─────────────────────────────
-export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire';
+export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire' | 'attend_birth';
 /**
  * `partial`: it was answered, something real was handed over, and it was less than was asked for. It is not `fulfilled` (the ask was
  * not met) and not `failed` (something did arrive), and it leaves nobody owing the difference: a helper who gives what they can has

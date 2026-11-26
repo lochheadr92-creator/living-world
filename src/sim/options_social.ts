@@ -2,6 +2,8 @@ import {gameName,hasGames,nextGame} from './play';
 import { ASK_AFFINITY, ASK_BASE, ASK_EVENING, ASK_PER_AFFINITY, ASK_SOCIABLE, PROPOSE_NOT_YET, PROPOSE_WALKED, WALKS_FOR_PROPOSAL, courtDestination, courtedCount, mayAskToWalk, mayCourtNow } from './courting';
 import { isEveningFor } from './evening_fire';
 import { hasCourting } from './meeting';
+import { helperScorer, lieInOption, lyingInOpensAt, mayAskForHelpNow, mayBeAskedToAttend, motherAsking, motherSeenLyingIn } from './birth_help';
+import { vigilOption } from './vigil';
 import { WELCOME_BASE, WELCOME_GENEROUS, WELCOME_SOCIABLE, generousLean, mayWelcome, mayWelcomeNow } from './welcome';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
@@ -687,6 +689,29 @@ function optCourt(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── helping at a birth ─────────────────────────
+/**
+ * rules 261 (birth_help.ts): the woman herself, from a day before her time until she lies in, or a housemate who sees her lying in by her door, goes and asks one
+ * neighbour in sight to be with her when the child comes. What they reason from is what they see (her lying in, or a neighbour free to be asked) and who they
+ * see. One at a time: the one worth most. The woman tells the helper when to come (the tick her lying-in window opens, on the request); nobody is sought out at
+ * their work (rules 227) by her; a housemate's ask carries no time.
+ */
+function optBirthHelp(ctx: Ctx): void {
+  const seen = motherSeenLyingIn(ctx);
+  const own = seen ? null : motherAsking(ctx);
+  const mother = seen ? seen.mother : own;
+  if (!mother || !mayAskForHelpNow(ctx, mother)) return;
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const c of candidates(ctx)) {
+    if (c.q.id === mother.id || !mayBeAskedToAttend(ctx, mother, c.q) || c.d > 14) continue;
+    if (own && leftToWork(ctx.world, c.s)) continue;
+    const sc = helperScorer(ctx, mother, c.q, c.aff, c.d);
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (best && own) mkSocial(ctx, best.c, 'request', { reqKind: 'attend_birth', destKind: 'person', destId: mother.id, deadline: lyingInOpensAt(ctx.world, mother), purpose: 'have somebody with me when my child comes' }, `Ask ${best.c.q.name} to be with me when the child comes`, 'to have somebody with me for the birth', null, best.sc, 'request', ':birth');
+  else if (best) mkSocial(ctx, best.c, 'request', { reqKind: 'attend_birth', destKind: 'person', destId: mother.id, purpose: `be with ${mother.name} when her child comes` }, `Ask ${best.c.q.name} to be with ${mother.name} when the child comes`, `to have somebody with ${mother.name} for the birth`, null, best.sc, 'request', ':birth');
+}
+
 // ───────────────────────── welcoming newcomers ─────────────────────────
 /**
  * rules 260 (welcome.ts): go and welcome a grown stranger of a household that has just come. What A reasons from is a stranger in sight; the
@@ -902,6 +927,9 @@ export function socialOptions(ctx: Ctx): void {
   optPropose(ctx);
   optCourt(ctx);
   optWelcome(ctx);
+  lieInOption(ctx); // rules 261 (birth_help.ts)
+  optBirthHelp(ctx);
+  vigilOption(ctx); // rules 261 (vigil.ts)
   optTrade(ctx);
   optSupply(ctx);
   optTeachTechnique(ctx);

@@ -17,6 +17,9 @@ import {validateChildhood} from '../sim/childhood';
 import {validateCourting} from '../sim/courting';
 import {validateWelcome} from '../sim/welcome';
 import {validatePraise} from '../sim/praise';
+import {validateBirthHelp} from '../sim/birth_help';
+import {validateNaming} from '../sim/naming';
+import {validateVigil} from '../sim/vigil';
 import {validateShown} from '../sim/three_ages';
 import {validateHeld} from '../sim/bench_access';
 import {validatePreservation} from '../sim/preservation';
@@ -354,6 +357,9 @@ export function deserializeWorld(json: string): World {
   validateCourting(w); // rules 260 (courting.ts)
   validateWelcome(w); // rules 260 (welcome.ts)
   validatePraise(w); // rules 260 (praise.ts)
+  validateBirthHelp(w); // rules 261 (birth_help.ts)
+  validateNaming(w); // rules 261 (naming.ts)
+  validateVigil(w); // rules 261 (vigil.ts)
   validateShown(w);
   validateNightExperience(w);
   validateProjectGraphs(w);

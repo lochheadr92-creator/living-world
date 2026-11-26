@@ -1,6 +1,8 @@
 import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
 import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
 import { praiseAtFire } from './praise';
+import { lyingInBegin, lyingInWork } from './birth_help';
+import { vigilBegin, vigilEnd, vigilWork } from './vigil';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
@@ -50,8 +52,14 @@ registerHandler('rest', {
   pose: () => 'sit',
   begin(world, p, a) {
     a.duration = a.amount > 0 ? a.amount : 150;
+    // rules 261 (birth_help.ts): a woman near her time lying in by her door
+    if (a.data.lyingIn !== undefined) lyingInBegin(world, p, a);
+    // rules 261 (vigil.ts): sitting up beside somebody who is ill or hurt
+    if (a.data.vigil !== undefined) return vigilBegin(world, p, a);
   },
   work(world, p, a): WorkResult {
+    if (a.data.lyingIn !== undefined) return lyingInWork(world, p, a);
+    if (a.data.vigil !== undefined) return vigilWork(world, p, a);
     if (isBoundedNightWait(world, a)) {
       const shelter = world.byId.get(a.targetId);
       if (!shelter || shelter.ent !== 'building') return 'fail:the shelter is no longer there';
@@ -74,6 +82,9 @@ registerHandler('rest', {
     // about energy: ending it because the person happens to be rested made them finish after one tick and decide again, every tick.
     if (a.need !== 'warmth' && !(a.data.projectWait&&runsRulesVersion(world,69)) && p.needs.energy >= 98) return 'done';
     return 'continue';
+  },
+  onEnd(world, p, a, outcome, detail) {
+    if (a.data.vigil !== undefined) vigilEnd(world, p, a, outcome, detail); // rules 261 (vigil.ts): one line if it was long enough
   },
 });
 

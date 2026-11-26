@@ -20,6 +20,8 @@ import { townshipOf } from './townships';
 import { extentLine } from './township_extent';
 import {describeAccounts} from './checked_accounts';
 import { adoptionWaitLine } from './known_adoption';
+import { namingRows } from './naming';
+import { birthHelpRows } from './birth_help';
 const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? deceasedById(w,id)?.name ?? `person #${id}`;
 const items = (i: Items) => Object.entries(i).map(([k,n]) => `${n} ${k}`).join(', ') || 'no materials';
 export function projectHistory(w: World, q: CivicProject): string[] {
@@ -100,6 +102,7 @@ export function relationshipHistory(w: World, p: Person): string[] {
   if(!receipts.length&&!r.history.length)rows.push('Earlier cause not recorded.');
  }
  rows.push(...careReturnHistory(p));
+ rows.push(...namingRows(w,p),...birthHelpRows(p)); // rules 261 (naming.ts, birth_help.ts)
  return rows.length?rows:['No recorded relationships.'];
 }
 

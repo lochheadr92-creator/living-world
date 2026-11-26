@@ -25,6 +25,9 @@ import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { hasWelcome } from './meeting';
+import { birthScene } from './birth_help';
+import { nameAfterTheDead } from './naming';
+import { sittersBeside, vigilAtDeath } from './vigil';
 import { captureHouseholdCamp } from './cohortcapture';
 import { observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson, ageYears, blendLook, mixTraits, stageOf, stageOfAge } from './people';
@@ -154,6 +157,8 @@ export function giveBirth(world: World, mother: Person): void {
     look: blendLook(rng, mother.look, father ? father.look : null, sex),
     parents: father ? [mother.id, father.id] : [mother.id],
   });
+  // rules 261 (naming.ts): the name was drawn above, as it always was; a child may now bear the name of somebody a parent lost (a choice, not a draw)
+  nameAfterTheDead(world, baby, mother, father ?? null);
   baby.needs.hunger = 80;
   baby.needs.thirst = 80;
   baby.needs.energy = 85;
@@ -184,7 +189,9 @@ export function giveBirth(world: World, mother: Person): void {
     b.affinity = 60;
     b.trust = 60;
   }
-  addEvent(world, 'life', `${baby.name} was born to ${mother.name}${father ? ' and ' + father.name : ''}.`, [baby.id, mother.id], mother.x, mother.y);
+  // rules 261 (birth_help.ts): if she had lain in, the line says whether somebody was beside her; nothing before this point is touched, and no draw is made
+  const scene = birthScene(world, mother, baby, father ?? null);
+  addEvent(world, 'life', scene ? scene.text : `${baby.name} was born to ${mother.name}${father ? ' and ' + father.name : ''}.`, scene ? scene.ids : [baby.id, mother.id], mother.x, mother.y);
   noteBirth(world, baby, mother);
   onBecameParent(world, mother, baby, father ?? null);
   if (father) onBecameParent(world, father, baby, mother);
@@ -230,6 +237,7 @@ export function deathCauseOf(p: Person): string {
 
 export function killPerson(world: World, p: Person, cause: string): void {
   const last=captureFinalAccount(world,p);
+  const beside = p.alive ? sittersBeside(world, p) : []; // rules 261 (vigil.ts): who is beside them at this tick, before they are taken from the room
   if (p.alive && hasLocalDeath(world)) witnessDeath(world,p);
   if (hasHabitation(world)) delete p.indoors;
   if (!p.alive) return;
@@ -283,6 +291,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
   noteDeath(world, p);
+  if (beside.length) vigilAtDeath(world, p, beside); // rules 261 (vigil.ts): "A was with B when he died", and the grief of the one beside them shortened
   if (!hasLocalDeath(world)) noteDeedNear(world, p, 'news', `${p.name} died of ${cause}`, p.x, p.y, 10);
   // Historical immediate notification; current knowledge travels through witnesses/markers/talk.
   if (!hasLocalDeath(world)) for (const q of world.persons) {

@@ -33,6 +33,8 @@ import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, Worl
 import { hyp } from './util';
 import { dueTraditions, noteOccasionOver, noteWinterOver, occasionOf } from './traditions';
 import { praiseAtOccasion } from './praise';
+import { hasNaming } from './hearth_scenes';
+import { isNamingFeast, isNamingMother, meetNamed, nameAtOpening, NAMING_MAX } from './naming';
 
 /** how long an occasion stays open once it has opened */
 export const OCCASION_OPEN = 600;
@@ -44,6 +46,9 @@ export const HARVEST_FEAST_AT = 25;
 const MEET_AT_MOST = 8;
 
 const KIND_LABEL: Record<OccasionKind, string> = { funeral: 'funeral', wedding: 'wedding feast', feast: 'feast', harvest: 'harvest feast', market: 'market' };
+
+/** the words for an occasion in the feed: a feast a birth called, with the naming part on, is a naming feast (naming.ts) */
+const labelOf = (o: Occasion): string => (isNamingFeast(o) ? 'naming feast' : KIND_LABEL[o.kind]);
 
 export const occasionsOf = (world: World): Occasion[] => world.occasions ?? [];
 
@@ -77,7 +82,7 @@ function nextDaylight(world: World, frac: number): number {
 }
 
 /** Call an occasion. Rich only; nothing happens in an authored world, and nothing without a place to hold it. */
-export function callOccasion(world: World, kind: OccasionKind, about: number[], frac = 0.4): Occasion | null {
+export function callOccasion(world: World, kind: OccasionKind, about: number[], frac = 0.4, naming?: number): Occasion | null {
   if (!isRich(world)) return null;
   const place = placeFor(world);
   if (!place) return null;
@@ -86,6 +91,8 @@ export function callOccasion(world: World, kind: OccasionKind, about: number[], 
   const open = list.find((o) => o.kind === kind && o.status !== 'done');
   if (open) {
     for (const id of about) if (!open.about.includes(id)) open.about.push(id);
+    // rules 261 (naming.ts): a second birth before the feast is held is named at the same feast
+    if (naming !== undefined && kind === 'feast' && !(open.naming ?? []).includes(naming) && (open.naming ?? []).length < NAMING_MAX) (open.naming ??= []).push(naming);
     return open;
   }
   const at = nextDaylight(world, frac);
@@ -103,11 +110,12 @@ export function callOccasion(world: World, kind: OccasionKind, about: number[], 
     attended: [],
     status: 'called',
     end: '',
+    ...(naming !== undefined && kind === 'feast' ? { naming: [naming] } : {}), // rules 261 (naming.ts): this feast is a child's naming
   };
   list.push(o);
   const names = about.map((id) => nameOfId(world, id)).filter(Boolean).join(' and ');
   const when = dayNumber(at) > dayNumber(world.tick) ? 'tomorrow' : 'today';
-  addEvent(world, 'social', `A ${KIND_LABEL[kind]}${names ? ` for ${names}` : ''} is called at ${o.placeName} ${when}.`, about, o.x, o.y);
+  addEvent(world, 'social', `A ${labelOf(o)}${names ? ` for ${names}` : ''} is called at ${o.placeName} ${when}.`, about, o.x, o.y);
   return o;
 }
 
@@ -123,7 +131,7 @@ export function noteDeath(world: World, dead: Person): void {
   callOccasion(world, 'funeral', [dead.id], 0.38);
 }
 export function noteBirth(world: World, baby: Person, mother: Person): void {
-  callOccasion(world, 'feast', [baby.id, mother.id], 0.58);
+  callOccasion(world, 'feast', [baby.id, mother.id], 0.58, hasNaming(world) ? baby.id : undefined);
 }
 export function noteWedding(world: World, a: Person, b: Person): void {
   callOccasion(world, 'wedding', [a.id, b.id], 0.58);
@@ -162,11 +170,12 @@ export function occasionsTick(world: World): void {
   for (const o of list) {
     if (o.status === 'called' && world.tick >= o.at) {
       o.status = 'gathering';
-      addEvent(world, 'social', `The ${KIND_LABEL[o.kind]} at ${o.placeName} begins.`, o.about, o.x, o.y);
+      addEvent(world, 'social', `The ${labelOf(o)} at ${o.placeName} begins.`, o.about, o.x, o.y);
+      nameAtOpening(world, o); // rules 261 (naming.ts): a child named aloud before those who are there when it opens
     } else if (o.status === 'gathering' && world.tick >= o.until) {
       o.status = 'done';
       o.end = o.attended.length ? `${o.attended.length} came` : 'nobody came';
-      addEvent(world, 'social', `The ${KIND_LABEL[o.kind]} at ${o.placeName} is over: ${o.end}.`, o.about, o.x, o.y);
+      addEvent(world, 'social', `The ${labelOf(o)} at ${o.placeName} is over: ${o.end}.`, o.about, o.x, o.y);
       noteOccasionOver(world, o);
     }
   }
@@ -176,10 +185,10 @@ export function occasionsTick(world: World): void {
 
 // ───────────────────────── going ─────────────────────────
 /** how much this occasion is this person's: for family and friends of whoever it is for, a great deal */
-function closeness(p: Person, o: Occasion): number {
+function closeness(world: World, p: Person, o: Occasion): number {
   let c = 0;
   for (const id of o.about) {
-    if (id === p.id) return 0; // the baby, the bride: they are there already by other means, and need no option to go
+    if (id === p.id) return isNamingMother(world, o, p) ? 1 : 0; // the baby, the bride: they are there already by other means, and need no option to go (the mother of a child being named goes, rules 261)
     const r = p.relations[id];
     if (!r) continue;
     if (r.kin) c = Math.max(c, 1);
@@ -199,14 +208,14 @@ export function attendOptions(ctx: Ctx): void {
   for (const o of list) {
     // worth setting out for a little before it opens, so that people arrive as it begins rather than as it ends
     const continuing=continuingOccasion(ctx,o);
-    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || o.about.includes(p.id)) continue;
+    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || (o.about.includes(p.id) && !isNamingMother(world, o, p))) continue;
     if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
     if (o.status === 'called' && world.tick < o.at - 200) continue;
     if(hasLocalMarket(world)&&!p.beliefs[o.placeId])continue;
     const d = hyp(o.x - p.x, o.y - p.y);
     if (d > 60) continue;
     const e = eta(ctx, o.x, o.y);
-    const close = closeness(p, o);
+    const close = closeness(world, p, o);
     const place = world.byId.get(o.placeId);
     if (!place || place.ent !== 'building') continue;
     // an occasion is a reason to be somewhere: it draws people off ordinary work (which scores 20 to 45) as a called meal does, and
@@ -214,7 +223,7 @@ export function attendOptions(ctx: Ctx): void {
     const sc = new Scorer();
     if (o.kind === 'funeral') sc.add(close > 0 ? 'to mourn someone of mine' : 'to pay respects', 30 + 20 * close);
     else if (o.kind === 'market') sc.add(foodCarried(p) > 8 ? 'food to spare and a market to take it to' : p.needs.hunger < 55 ? 'a market, and little in the pack' : 'market day', foodCarried(p) > 8 || p.needs.hunger < 55 ? 34 : 26);
-    else sc.add(close > 0 ? `a ${KIND_LABEL[o.kind]} for someone of mine` : `a ${KIND_LABEL[o.kind]}`, 30 + 14 * close);
+    else sc.add(close > 0 ? `a ${labelOf(o)} for someone of mine` : `a ${labelOf(o)}`, 30 + 14 * close);
     sc.add('company', 10 * p.traits.sociability);
     // the hall is out of the weather: on a cold day a gathering there is also somewhere warm to be
     if (place.type === 'hall') {
@@ -225,7 +234,7 @@ export function attendOptions(ctx: Ctx): void {
     if (sc.total < 8) continue;
     addOption(ctx, {
       kind: 'attend',
-      label: `${continuing?'Stay at':'Go to'} the ${KIND_LABEL[o.kind]} at ${o.placeName}`,
+      label: `${continuing?'Stay at':'Go to'} the ${labelOf(o)} at ${o.placeName}`,
       goal: o.kind === 'funeral' ? 'to mourn' : o.kind === 'market' ? 'to trade' : 'to celebrate',
       need: 'social',
       util: sc.total,
@@ -240,7 +249,7 @@ export function attendOptions(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'attend',
-          label: `At the ${KIND_LABEL[o.kind]}`,
+          label: `At the ${labelOf(o)}`,
           goal: o.kind === 'funeral' ? 'to mourn' : o.kind === 'market' ? 'to trade' : 'to celebrate',
           need: 'social',
           targetId: o.id,
@@ -268,20 +277,21 @@ function arrive(world: World, p: Person, o: Occasion): void {
   for (const id of there) {
     const q = personById(world, id);
     if (!q || !q.alive || hasLocalMarket(world)&&!togetherAt(world,p,q,o)) continue;
-    const note = `met at the ${KIND_LABEL[o.kind]}`;
+    const note = `met at the ${labelOf(o)}`;
     adjustRel(p, q.id, world.tick, { aff: 1.2, fam: 1, note });
     adjustRel(q, p.id, world.tick, { aff: 1.2, fam: 1, note });
   }
-  const close = closeness(p, o);
+  const close = closeness(world, p, o);
   if (o.kind === 'funeral') think(world, p, 'mourning', close > 0 ? 4 : 1, DAY, close > 0 ? 'grief shared at the funeral' : 'paid respects at the funeral');
   else if (o.kind === 'market') think(world, p, 'market', 3, DAY, 'market day');
-  else think(world, p, 'feast', 6 + 4 * close, DAY, `the ${KIND_LABEL[o.kind]}`);
-  addLog(world, p, 'social', `Went to the ${KIND_LABEL[o.kind]} at ${o.placeName}${there.length ? ` (${there.length} already there)` : ''}.`);
+  else think(world, p, 'feast', 6 + 4 * close, DAY, `the ${labelOf(o)}`);
+  addLog(world, p, 'social', `Went to the ${labelOf(o)} at ${o.placeName}${there.length ? ` (${there.length} already there)` : ''}.`);
   if (o.kind === 'market') {
     marketExchange(world, p, o);
     marketSwap(world, p, o);
   }
-  praiseAtOccasion(world, p, o, `the ${KIND_LABEL[o.kind]}`); // rules 260 (praise.ts): a thanks owed or due may be spoken before those already there
+  meetNamed(world, p, o); // rules 261 (naming.ts): those who come to a naming feast come to know the child named there
+  praiseAtOccasion(world, p, o, `the ${labelOf(o)}`); // rules 260 (praise.ts): a thanks owed or due may be spoken before those already there
 }
 
 const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood', 'stone', 'clay', 'planks', 'bricks', 'charcoal'];

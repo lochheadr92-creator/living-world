@@ -6,17 +6,19 @@
 // simulation's or the inspector's own (occasionNotice for a gathering, the inspector's "what are they doing" and status lines for
 // a person), except the two wolf sentences, which say exactly what the wolf's recorded state is. The director calls scanLive at
 // most once a UI second.
+import { HELP_NEAR } from '../sim/birth_help';
 import { isCourtWalk, type WalkData } from '../sim/courting';
+import { isVigil, type VigilData } from '../sim/vigil';
 import { describePerson } from '../sim/inspect';
 import { statusLine } from '../sim/inspect_observer';
 import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
 
-export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk';
+export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil';
 
 export interface LiveCandidate {
-  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>' or 'person:<id>' */
+  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>' or 'person:<id>' */
   key: string;
   kind: LiveKind;
   score: number;
@@ -73,6 +75,9 @@ const TALK_SCORE: Record<ConvPurpose, number> = {
 const SPEECH_SCORE = { angry: 65, warn: 60 } as const;
 /** two people walking out together (rules 260): the leader's walk, one candidate for the pair */
 const WALK_SCORE = 66;
+/** a woman lying in with a helper beside her (rules 261, birth_help.ts), and a vigil kept beside somebody ill or hurt (vigil.ts) */
+const LYING_SCORE = 72;
+const VIGIL_SCORE = 66;
 /** in real trouble: at risk, fleeing or standing against a threat (the inspector's danger tone) */
 const TROUBLE_SCORE = 50;
 /** unwell or hurt: the inspector's status line says so */
@@ -131,6 +136,22 @@ export function scanLive(world: World): LiveCandidate[] {
     const walk = a.data.walk as WalkData;
     if (walk.role !== 'a' || walk.done) continue;
     out.push({ key: `walk:${walk.id}`, kind: 'walk', score: WALK_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
+  }
+
+  // a woman lying in by her door (birth_help.ts: a 'rest' whose data.lyingIn is set) with a helper beside her in work at the visit that promise sent them on:
+  // only then is it a scene, and one for her; the birth itself stays a top event. And a vigil under way (vigil.ts: a 'rest' whose data.vigil is set, sitting beside
+  // them in work): one for each person sat with, from the sitter's side. Both in the inspector's own words for what they are doing.
+  for (const p of world.persons) {
+    const a = p.alive ? p.activity : null;
+    if (!a || a.kind !== 'rest' || a.phase !== 'work') continue;
+    if (a.data.lyingIn !== undefined) {
+      const helped = world.persons.some((q) => q.alive && q !== p && q.activity?.kind === 'visit' && q.activity.data.birth === true && q.activity.targetId === p.id && q.activity.phase === 'work' && hyp(q.x - p.x, q.y - p.y) <= HELP_NEAR);
+      if (helped) out.push({ key: `lying:${p.id}`, kind: 'lying', score: LYING_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
+    }
+    if (isVigil(a)) {
+      const v = a.data.vigil as VigilData;
+      if (!v.over) out.push({ key: `vigil:${v.for}`, kind: 'vigil', score: VIGIL_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
+    }
   }
 
   // a person's own state: speaking angrily or in warning, or in real trouble. One candidate per person, the higher score.

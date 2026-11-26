@@ -471,6 +471,8 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     for (const p of world.persons) if (p.thanksOwed) push('ThanksOwed' + p.id + ':' + JSON.stringify(p.thanksOwed)); // rules 260 (praise.ts)
     for (const b of world.buildings) if (b.thanksDue !== undefined) push('ThanksDue' + b.id + ':' + b.thanksDue);
     for (const h of world.households) if (h.arrived !== undefined || h.welcomed) push('Arrived' + h.id + ':' + JSON.stringify([h.arrived, h.welcomed])); // rules 260 (welcome.ts)
+    for (const p of world.persons) if (p.lyingIn !== undefined || p.attended !== undefined || p.namedAfter !== undefined || p.birthAsked !== undefined) push('Hearth' + p.id + ':' + JSON.stringify([p.lyingIn, p.attended, p.namedAfter, p.birthAsked])); // rules 261 (birth_help.ts, naming.ts)
+    for (const o of world.occasions ?? []) if (o.naming || o.named) push('Naming' + o.id + ':' + JSON.stringify([o.naming, o.named])); // rules 261 (naming.ts)
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   if (world.townships) {

@@ -2,6 +2,7 @@ import { noteFed } from './child_feeding';
 import {hasPromiseExpectations} from './promise_expectations';
 import { onLookedInOnBereaved } from './lifechanges';
 import { hasPracticalCare, watchTick } from './responsibilities';
+import { birthHelpWork, onLookedInOnMother } from './birth_help';
 import {restoreWatchProgress} from './care_handback';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -36,7 +37,7 @@ export const CHECK_COOLDOWN = Math.round(DAY * 0.6);
 /** how long a sighting of a grown person who was hungry, thirsty or cold stays worth walking over for: by then they will have seen to it themselves */
 export const SELF_FIX_WINDOW = 480;
 
-const KIND_WORD: Record<Concern['kind'], string> = { hungry: 'hungry', thirsty: 'thirsty', cold: 'cold', hurt: 'hurt', tired: 'worn out', missing: 'out of sight', bereaved: 'bereaved' };
+const KIND_WORD: Record<Concern['kind'], string> = { hungry: 'hungry', thirsty: 'thirsty', cold: 'cold', hurt: 'hurt', tired: 'worn out', missing: 'out of sight', bereaved: 'bereaved', newborn: 'with a new baby' };
 
 /** a worry about someone who can look after themselves, over a need they will have met by now */
 function outOfDate(world: World, c: Concern, subject: Person | undefined, knower?: Person): boolean {
@@ -48,6 +49,7 @@ function outOfDate(world: World, c: Concern, subject: Person | undefined, knower
   const age = world.tick - c.seen;
   if (age >= CONCERN_LIFE) return true;
   const known = hasKnownWelfare(world); // rules 179: what the worrier knows of someone out of sight, not their live life event or health
+  if (c.kind === 'newborn') return false; // rules 261 (birth_help.ts): kept for the concern's life, whatever she looks like now
   if (c.kind === 'bereaved') return known ? false : !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
   return c.kind !== 'hurt' && c.kind !== 'missing' && age > SELF_FIX_WINDOW && !(known ? knownDependent(world, subject, c) : isDependent(world, subject));
 }
@@ -62,7 +64,7 @@ export function noteConcerns(world: World, p: Person): void {
     const kind: Concern['kind'] | null = s.hurt ? 'hurt' : s.thirsty ? 'thirsty' : s.hungry ? 'hungry' : null;
     if (!kind) {
       // they are fine now: whatever worry there was is settled by what was just seen
-      if (have && have.seen < tick) p.concerns = p.concerns.filter((c) => c.about !== s.id);
+      if (have && have.seen < tick && have.kind !== 'newborn') p.concerns = p.concerns.filter((c) => c.about !== s.id); // rules 261: a look-in after a birth is not settled by seeing her well
       continue;
     }
     if (have) {
@@ -100,7 +102,7 @@ export function shareConcerns(world: World, S: Person, L: Person): number {
     L.concerns = L.concerns.filter((x) => x.about !== c.about);
     L.concerns.push({ about: c.about, kind: c.kind, seen: c.seen, src: 'told', from: S.id, checked: -99999 });
     if (L.concerns.length > MAX_CONCERNS) L.concerns.sort((a, b) => b.seen - a.seen), (L.concerns.length = MAX_CONCERNS);
-    addLog(world, L, 'social', `${S.name} told me ${name} looked ${KIND_WORD[c.kind]} not long ago.`);
+    addLog(world, L, 'social', `${S.name} told me ${name} ${c.kind === 'newborn' ? 'has a new baby' : `looked ${KIND_WORD[c.kind]}`} not long ago.`);
     n++;
     break;
   }
@@ -161,8 +163,8 @@ export function welfareOptions(ctx: Ctx): void {
       addBlocked(ctx, 'visit', `Check on ${name}`, c.about, 'they are not close enough to go looking', 'care');
       continue;
     }
-    const supplies = c.kind === 'missing' || c.kind === 'bereaved' ? null : suppliesFor(world, p, c.kind);
-    if (c.kind !== 'missing' && c.kind !== 'bereaved' && !supplies) {
+    const supplies = c.kind === 'missing' || c.kind === 'bereaved' || c.kind === 'newborn' ? null : suppliesFor(world, p, c.kind);
+    if (c.kind !== 'missing' && c.kind !== 'bereaved' && c.kind !== 'newborn' && !supplies) {
       addBlocked(ctx, 'visit', `Bring something to ${name}`, c.about, `has nothing to spare for someone ${KIND_WORD[c.kind]}`, 'care');
       continue;
     }
@@ -172,11 +174,11 @@ export function welfareOptions(ctx: Ctx): void {
       continue;
     }
     const age = world.tick - c.seen;
-    const sev = c.kind === 'hurt' ? 1 : c.kind === 'thirsty' ? 0.9 : c.kind === 'hungry' ? 0.75 : c.kind === 'bereaved' ? 0.7 : c.kind === 'missing' ? 0.45 : 0.4;
+    const sev = c.kind === 'hurt' ? 1 : c.kind === 'thirsty' ? 0.9 : c.kind === 'hungry' ? 0.75 : c.kind === 'bereaved' ? 0.7 : c.kind === 'newborn' ? 0.6 : c.kind === 'missing' ? 0.45 : 0.4;
     const fresh = Math.max(0.25, 1 - age / CONCERN_LIFE);
     const e = eta(ctx, loc.x, loc.y);
     const sc = new Scorer()
-      .add(c.kind === 'missing' ? `has not seen ${name} for a while` : c.kind === 'bereaved' ? `${name} has lost someone` : `${name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
+      .add(c.kind === 'missing' ? `has not seen ${name} for a while` : c.kind === 'bereaved' ? `${name} has lost someone` : c.kind === 'newborn' ? `${name} has a new baby` : `${name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
       .add('walking', -pen(e));
     if (kin) sc.add('family', 7);
     if (dependent) sc.add('someone who cannot manage alone', 6);
@@ -305,6 +307,8 @@ registerHandler('visit', {
     if (!t) {if(hasPromiseExpectations(world)&&a.data.commitmentId){delete p.whereabouts[a.targetId];p.cooldowns['check'+a.targetId]=world.tick+240;return 'they were not where I expected';}return 'they are no longer around';}
     a.duration = 12;
     restoreWatchProgress(world,a);
+    // rules 261 (birth_help.ts): told to come to her door, the helper has come to the door, and whether she is there is for the wait to find out
+    if (a.data.birth && a.data.told !== undefined) return;
     // arrived at where they were expected: look around (the ordinary perception has just refreshed what is in view)
     // standing where they were expected, they can see (or not) who is there: anyone this close is in plain view
     if (hyp(t.x - p.x, t.y - p.y) > 5) {
@@ -325,6 +329,8 @@ registerHandler('visit', {
   work(world, p, a): WorkResult {
     const t = personById(world, a.targetId);
     if (!t) return 'fail:they are no longer around';
+    // rules 261 (birth_help.ts): a promised wait beside a woman until her child has come
+    if (a.data.birth) return birthHelpWork(world, p, a, t);
     // New watches establish local contact before even orienting toward the child.
     if (a.data.watch && hasPracticalCare(world)) return watchTick(world, p, a, t);
     faceToward(p, t.x, t.y);
@@ -340,6 +346,14 @@ registerHandler('visit', {
       return 'done';
     }
     // come to see the bereaved: being there is the visit (rich only: the concern is never raised elsewhere)
+    if (a.data.concern === 'newborn') {
+      onLookedInOnMother(world, p, t);
+      p.concerns = p.concerns.filter((c) => c.about !== t.id);
+      p.cooldowns['check' + t.id] = world.tick + CHECK_COOLDOWN * 2;
+      a.data.outcome = 'looked in';
+      a.cycle = 1;
+      return 'done';
+    }
     if (a.data.concern === 'bereaved') {
       onLookedInOnBereaved(world, p, t);
       p.concerns = p.concerns.filter((c) => c.about !== t.id);

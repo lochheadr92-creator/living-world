@@ -68,6 +68,7 @@ import { careStoreOption, careWaterStoreOption } from './care_capacity';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { carryCap, stageOf } from './people';
 import { fireCommitment, hasPracticalCare } from './responsibilities';
+import { birthHelpCommitmentOption } from './birth_help';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
@@ -1759,6 +1760,11 @@ function optCommitments(ctx: Ctx): void {
   const { world, p } = ctx;
   for (const c of p.commitments) {
     if (c.status !== 'active') continue;
+    if (c.kind === 'work' && c.milestone === 'attended') {
+      // rules 261 (birth_help.ts): a promise to be with a woman when her child comes: go and stay with her
+      birthHelpCommitmentOption(ctx, c);
+      continue;
+    }
     if (c.kind === 'work' && c.milestone === 'watched') {
       // a promise to keep an eye on a child (responsibilities.ts): go and stay with them
       const actualChild=world.byId.get(c.destId??0);

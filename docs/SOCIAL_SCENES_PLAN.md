@@ -102,6 +102,8 @@ suite are in `docs/SOCIAL_SCENES.md`, "Measured (rules 260)". The acceptance ite
 
 ## Bundle B (rules 261): hearth
 
+**Status, 26 November 2026: built, uptake measured, not committed; the lab is not run.** All three parts are built and switched (`src/sim/hearth_scenes.ts`; the arms are `rich-no-hearth-scenes` and `rich-no-hearth-birth|naming|vigil`, because `src/sim/hearth.ts` and `rich-no-hearth` already belong to rules 123's indoor hearth). Where the code differs from the text below is listed in `docs/SOCIAL_SCENES.md`, "Helping at a birth", "The naming day" and "Keeping vigil". Uptake is in "Measured (rules 261)" there.
+
 ### 4. Helping at a birth
 - **Viewer sees:** a woman near her time goes home; her partner fetches a neighbour; the child is born with somebody there.
 - **Now:** the birth happens wherever she is, with nobody involved (`lifecycle.ts:139-200`). `pregnantUntil` is known.

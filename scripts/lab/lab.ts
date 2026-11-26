@@ -35,6 +35,8 @@ import { leanSeasonsOn, leanYearsPartOn, setLeanSeasons, setLeanYears } from '..
 import { EVENING_PARTS, eveningPartOn, setEvening } from '../../src/sim/evening_fire';
 import { MEETING_PARTS, meetingPartOn, setMeeting } from '../../src/sim/meeting';
 import type { MeetingPart } from '../../src/sim/meeting';
+import { HEARTH_PARTS, hearthPartOn, setHearthScenes } from '../../src/sim/hearth_scenes';
+import type { HearthPart } from '../../src/sim/hearth_scenes';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -331,6 +333,13 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-meeting' ? undefined : (kind.slice('rich-no-meeting-'.length) as MeetingPart);
     const what: Record<MeetingPart, string> = { courting: 'nobody asks another to walk out, and a proposal weighs no walks', welcome: 'no resident welcomes newcomers, and a household keeps no record of its arrival', praise: 'nobody thanks a rescuer or the builders of a shared building, and a rescue is no brave deed in the eyes of those who saw it' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the meeting bundle: nobody walks out together, welcomes newcomers or thanks a rescuer or builders in company'}, as before rules 260; no effect below rules 260`, install() { const was = Object.fromEntries(MEETING_PARTS.map((q) => [q, meetingPartOn(q)])) as Record<MeetingPart, boolean>; setMeeting(false, part); return () => { for (const q of MEETING_PARTS) setMeeting(was[q], q); }; } };
+  }
+  // rules 261 (hearth_scenes.ts): all three parts removed (equal to rules 260), and each part alone. `rich-no-hearth` is the older arm of rules 123's indoor hearth (hearth.ts) and is untouched: the bundle's own is `rich-no-hearth-scenes`.
+  // All three parts have behaviour.
+  if (kind === 'rich-no-hearth-scenes' || (kind.startsWith('rich-no-hearth-') && (HEARTH_PARTS as readonly string[]).includes(kind.slice('rich-no-hearth-'.length)))) {
+    const part = kind === 'rich-no-hearth-scenes' ? undefined : (kind.slice('rich-no-hearth-'.length) as HearthPart);
+    const what: Record<HearthPart, string> = { birth: 'no woman lies in by her door, nobody is asked to be with her, and a birth is written as it was', naming: 'a birth feast is no naming feast, nobody is named aloud or after the dead', vigil: 'nobody sits up beside a kinsman who is feverish or hurt' };
+    return { spec: label, summary: `${part ? what[part] : 'no part of the hearth bundle: nobody lies in or is helped at a birth, no child is named at its feast, nobody sits up with the sick'}, as before rules 261; no effect below rules 261`, install() { const was = Object.fromEntries(HEARTH_PARTS.map((q) => [q, hearthPartOn(q)])) as Record<HearthPart, boolean>; setHearthScenes(false, part); return () => { for (const q of HEARTH_PARTS) setHearthScenes(was[q], q); }; } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

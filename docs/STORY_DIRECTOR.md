@@ -28,7 +28,11 @@ Bands, exported: `TOP_FROM` 80 (may cut in early), `MIDDLE_FROM` 50 (waits for t
   terms again", apprenticeship, "own right", "has become a tradition" 50. The social scenes (rules 260, the words from
   `courting.ts`, `welcome.ts`, `praise.ts`): a thanks in company "At the fire X thanked Y before N people for driving off a wolf" (or
   "killing") 70, "... thanked ... for the new kiln" 55, a pair's "walked out together for the first time" 62, a household's "was the
-  first to welcome the newcomer" 58.
+  first to welcome the newcomer" 58. The hearth scenes (rules 261, `birth_help.ts`, `naming.ts`, `vigil.ts`): a child named aloud "X and Y named
+  their daughter Z before N people, after X's mother" (or "X named her son", "... his daughter") 58; a vigil ended "A sat up through the night with B, who
+  has a fever" ("sat with" by day, "who is hurt") 50. A birth with or without a helper is still "was born to" (90) and a naming feast is a feast (55).
+- TOP, joined to the death: "A was with B when he died." 100. When it comes within MERGE_TICKS of B's own "died" line the plain death is taken out of the
+  queue and this one, which follows A, stands for both: one top shot.
 - Between MIDDLE and FILLER (30 to 49): a later "walked out together." 45, "asked ... to walk out; ... said not today" 40, a later
   "welcomed the newcomer" 40, "set out to walk together and turned back" 35. The one filler candidate keeps one of these against a lighter
   newcomer; under 30 the newest still wins.
@@ -59,6 +63,10 @@ event takes it at once, anything else at the hold. A live shot's caption says "n
   caption `describePerson(world, id).qa.doing`. Someone speaking 'angry' 65 or 'warn' 60: the same caption.
 - A walk out under way (`courting.ts`: a 'wander' whose `data.walk` has role 'a'): one candidate per pair, 66, follows the one who
   asked; key `walk:<id>`; caption `describePerson(world, id).qa.doing`; gone when the walk ends.
+- A woman lying in with a helper beside her (`birth_help.ts`: a 'rest' whose `data.lyingIn` is set, and a visit with `data.birth` for her, in work, within
+  4 tiles): 72, key `lying:<id>`, follows her; caption the inspector's "doing" line. With nobody beside her it is no shot.
+- A vigil under way (`vigil.ts`: a 'rest' whose `data.vigil` is set, in work, not over): one for each person sat with, 66, key `vigil:<id of the sick>`, follows the
+  sitter; caption the inspector's "doing" line; gone when the vigil ends or the sick person has died.
 - Trouble: `statusLine` tone 'danger' 50 (unwell or hurt 40); caption the status text.
 
 ## What it does not do

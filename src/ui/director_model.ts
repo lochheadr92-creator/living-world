@@ -57,6 +57,8 @@ const RULES: Rule[] = [
   { id: 'story', kind: 'social', test: has('told a story'), weight: 10 },
   // TOP
   { id: 'death', kind: 'life', test: has(' died '), weight: 100 },
+  // rules 261 (vigil.ts): "<sitter> was with <name> when he died." is the death's own shot, with the one who was beside them in it (see admit)
+  { id: 'vigil-death', kind: 'life', test: (t) => / was with .* when (he|she) died.$/.test(t), weight: 100 },
   { id: 'bite-fatal', kind: 'danger', test: has('fatally'), weight: 95 },
   { id: 'birth', kind: 'life', test: has(' was born to '), weight: 90 }, // a lamb is "A lamb was born after ...", not this
   { id: 'bite', kind: 'danger', test: has('A wolf bit'), weight: 90 },
@@ -85,6 +87,12 @@ const RULES: Rule[] = [
   { id: 'builders-thanked', kind: 'social', test: (t) => t.startsWith('At ') && t.includes(' thanked ') && t.includes(' for the new '), weight: 55 },
   { id: 'welcome-first', kind: 'social', test: has(' was the first to welcome the newcomer'), weight: 58 }, // a household's first welcome: "the newcomer B" or "the newcomers B and C"
   { id: 'walk-first', kind: 'social', test: has(' walked out together for the first time'), weight: 62 },
+  // the hearth scenes (rules 261; the words are in src/sim/birth_help.ts, naming.ts and vigil.ts). A birth with or without a helper is still "was born to" (90).
+  // A child named aloud: "<M> and <F> named their daughter <X> before 3 people, after <M>'s mother." (or "<M> named her daughter", "<F> named his son"), 58. A
+  // vigil ended: "<A> sat up through the night with <B>, who has a fever." ("sat with" by day, "who is hurt"), 50, the floor of what the reel lists. The naming
+  // feast's own lines ("A naming feast for ... is called at ...", "The naming feast at ... begins.") are the gathering rule above and keep 55.
+  { id: 'named', kind: 'social', test: (t) => / named (their|her|his) (daughter|son) /.test(t), weight: 58 },
+  { id: 'vigil', kind: 'social', test: (t) => / sat (up through the night )?with /.test(t) && (t.endsWith(', who has a fever.') || t.endsWith(', who is hurt.')), weight: 50 },
   // between MIDDLE and FILLER: the one filler candidate holds one of these against a lighter newcomer (see admit)
   { id: 'walk', kind: 'social', test: has(' walked out together'), weight: 45 },
   { id: 'welcome', kind: 'social', test: has(' welcomed the newcomer'), weight: 40 }, // has " gave " in it as often as not, so it comes before the gift rule
@@ -383,6 +391,15 @@ export class Director {
    * person: the newest, and of those arriving together the heaviest, then the newest.
    */
   private admit(world: World, e: Entry): void {
+    // rules 261: "<A> was with <B> when he died." is the death's own shot: the plain death, if it waits, is taken out and this one, which follows the one
+    // who was beside them, stands for both
+    if (e.rule === 'vigil-death') {
+      const i = this.queue.findIndex((q) => q.rule === 'death' && q.ev.ids[0] === e.ev.ids[1] && Math.abs(q.ev.tick - e.ev.tick) <= MERGE_TICKS);
+      if (i >= 0) {
+        this.queue.splice(i, 1);
+        this.counts.merged++;
+      }
+    }
     if (e.subjectId !== 0) {
       const near = (o: Entry) => o.subjectId === e.subjectId && Math.abs(o.ev.tick - e.ev.tick) <= MERGE_TICKS;
       const twin = this.queue.find(near);

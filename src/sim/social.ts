@@ -60,6 +60,7 @@ import { expose } from './illness';
 import { leanOn, onMovedHousehold } from './lifechanges';
 import { hears, mediate } from './mediation';
 import { communicateWatchLocation, hasPracticalCare, laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
+import { answerBirthHelp, communicateMotherLocation, noteBirthAsked, onBirthHelpDeclined } from './birth_help';
 import {
   canInterruptForTalk,
   endActivity,
@@ -422,6 +423,8 @@ function toolInUse(act: string, kind: ToolKind): boolean {
 
 export function evaluateRequest(world: World, B: Person, A: Person, req: Request): Response {
   const rel = B.relations[A.id];
+  // rules 261 (birth_help.ts): to be with a woman when her child comes, weighed as a watch is
+  if (req.kind === 'attend_birth') return answerBirthHelp(world, B, A, req);
   // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
   if (req.kind === 'watch' || req.kind === 'fire') {
     if (laidUp(world, B) || personalDriveMax(world, B) > 50) return { kind: 'decline', reason: 'own_need' };
@@ -1217,15 +1220,17 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId, likely: d.likely });
       d.reqId = req.id;
       c.requestId = req.id;
+      if (kind === 'attend_birth') noteBirthAsked(world, req); // rules 261 (birth_help.ts): somebody has been asked to be with her
       if (kind === 'wood' || kind === 'stone' || kind === 'goods') A.cooldowns.askMaterials = world.tick + 900;
       // asked about material for a plan of their own: whatever the answer, they do not raise that material again for a while
       if (d.planId && d.item) A.cooldowns['askPlan:' + d.item] = world.tick + 900;
       const building = d.siteId ? String((world.byId.get(d.siteId) as { type?: string } | undefined)?.type ?? 'building').replace('_', '-') : 'building';
       if (kind === 'tool') bubble(world, A, `Could I borrow your ${d.toolKind ?? 'tool'}? I’ll bring it back.`, 'ask', 62);
       else if (kind === 'goods' || kind === 'haul') bubble(world, A, `Could you bring ${d.item ?? 'some materials'} to the ${building}?`, 'ask', 62);
+      else if (kind === 'attend_birth') bubble(world, A, d.destId === A.id ? 'Will you be with me when my child comes?' : `Will you be with ${personOf(world, d.destId ?? 0)?.name ?? 'her'} when the child comes?`, 'ask', 64); // rules 261 (birth_help.ts)
       else if (kind === 'repair') bubble(world, A, 'Would you be able to patch our roof? It’s not keeping the rain out.', 'ask', 64);
       else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building, child: d.destKind === 'person' && d.destId ? (personOf(world, d.destId)?.name ?? 'the little one') : 'the little one' }), 'ask', 60);
-      addLog(world, A, 'social', `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
+      addLog(world, A, 'social', kind === 'attend_birth' ? `Asked ${B.name} to be with ${d.destId === A.id ? 'me' : (personOf(world, d.destId ?? 0)?.name ?? 'her')} when the child comes.` : `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
       break;
     }
     case 'ask_info': {
@@ -1438,6 +1443,11 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (req.kind === 'repair') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
           if(req.destId)communicateRoofLocation(world,A,B,req.destId);
+        } else if (req.kind === 'attend_birth') {
+          // rules 261 (birth_help.ts): a promise to be beside her, kept by a visit that waits with her
+          // told a time (the woman's own ask), the day of the promise runs from then; a housemate's ask carries none and the day is from now, as for a watch
+          addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: Math.max(world.tick, req.deadline || 0) + DAY, destKind: 'person', destId: req.destId, milestone: 'attended' });
+          if (req.destId) communicateMotherLocation(world, A, B, req.destId);
         } else if (req.kind === 'watch' || req.kind === 'fire') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
           if (req.kind === 'watch' && req.destId) communicateWatchLocation(world, A, B, req.destId);
@@ -1460,6 +1470,13 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
           addLog(world, A, 'social', `${B.name} promised to mend our roof.`);
           addEvent(world, 'social', `${B.name} promised to mend ${A.name}’s roof.`, [A.id, B.id], A.x, A.y);
+        } else if (req.kind === 'attend_birth') {
+          const who = personOf(world, req.destId ?? 0)?.name ?? 'her';
+          const forAsker = req.destId === A.id; // the woman asked for herself
+          req.note = `${B.name} will be with ${who} when the child comes`;
+          bubble(world, B, forAsker ? 'Of course. I will come to your door when your time is near.' : 'Of course. I will be with her.', 'say', 60);
+          addLog(world, B, 'social', `Promised ${A.name} to be with ${forAsker ? 'her' : who} when the child comes.`);
+          addLog(world, A, 'social', `${B.name} promised to be with ${forAsker ? 'me' : who} when the child comes.`);
         } else if (req.kind === 'watch' || req.kind === 'fire') {
           const what = req.kind === 'watch' ? `keep an eye on ${personOf(world, req.destId ?? 0)?.name ?? 'the children'}` : 'keep the fire going';
           req.note = `${B.name} will ${what}`;
@@ -1485,6 +1502,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         else bubble(world, B, D.saying(lines, B.id, A.id, world.tick >> 5), 'say', 56);
         settle(world, req, 'declined', resp.reason.replace('_', ' '));
         if (req.kind === 'watch' || req.kind === 'fire') onDutyDeclined(world, A, B, req.kind);
+        if (req.kind === 'attend_birth') onBirthHelpDeclined(world, A, B, personOf(world, req.destId ?? 0)); // rules 261
         const sev = req.kind === 'food' ? clamp((62 - A.needs.hunger) / 62, 0, 1) : req.kind === 'water' ? clamp((66 - A.needs.thirst) / 66, 0, 1) : 0.3;
         if (resp.reason === 'unwilling' || resp.reason === 'disliked') {
           // a refusal is not a broken promise: it costs a little warmth, in proportion to how much was at stake

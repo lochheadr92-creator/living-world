@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { Game } from '../src/app/game';
 import { serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
+import { newActivity } from '../src/sim/activities';
 import { beginCourtWalk, type WalkData } from '../src/sim/courting';
 import { addEvent } from '../src/sim/events';
 import { describePerson } from '../src/sim/inspect';
@@ -1298,6 +1299,173 @@ describe('the social scenes (rules 260): the walk, the welcome, the thanks in co
     d.step(w, LIVE_SCAN_SECONDS);
     expect(d.shot?.ended).toBe(true);
     expect(d.captionFresh()).toBe(false);
+  });
+});
+
+describe('the hearth scenes (rules 261): a birth helped, a child named, a vigil kept', () => {
+  // the words are the code's (src/sim/birth_help.ts, naming.ts, vigil.ts)
+  const HEARTH = {
+    bornHelped: 'Cal was born to Ada and Ben, with Dee there to help.',
+    bornAlone: 'Cal was born to Ada.',
+    namedBoth: "Ada and Ben named their daughter Cal before 6 people, after Ada's mother.",
+    namedOne: 'Ada named her son Cal before 1 person.',
+    namedHis: 'Ben named his daughter Cal before 3 people.',
+    namingCalled: 'A naming feast for Cal and Ada is called at the fire today.',
+    namingBegins: 'The naming feast at the fire begins.',
+    namingOver: 'The naming feast at the fire is over: nobody came.',
+    sitNight: 'Ada sat up through the night with Ben, who has a fever.',
+    sitDay: 'Ada sat with Ben, who has a fever.',
+    sitHurt: 'Ada sat with Ben, who is hurt.',
+    sitHurtNight: 'Ada sat up through the night with Ben, who is hurt.',
+    withDeath: 'Ada was with Ben when he died.',
+    withDeathHer: 'Ben was with Ada when she died.',
+  };
+
+  it('a birth, helped or not, is still a birth (90); the naming feast is a feast (55); a child named aloud is 58, in any of its three forms', () => {
+    for (const text of [HEARTH.bornHelped, HEARTH.bornAlone]) expect(matchEvent(ev('life', text)), text).toEqual({ id: 'birth', weight: 90 });
+    for (const text of [HEARTH.namingCalled, HEARTH.namingBegins]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'feast', weight: 55 });
+    expect(matchEvent(ev('social', HEARTH.namingOver)), 'a gathering over is still filler').toEqual({ id: 'over', weight: 20 });
+    for (const text of [HEARTH.namedBoth, HEARTH.namedOne, HEARTH.namedHis]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'named', weight: 58 });
+    expect(bandOf(58)).toBe('middle');
+  });
+
+  it('a vigil ended is 50 (the floor of what the reel lists), by day or night, a fever or a hurt; "was with B when he died" is TOP, as the death is', () => {
+    for (const text of [HEARTH.sitNight, HEARTH.sitDay, HEARTH.sitHurt, HEARTH.sitHurtNight]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'vigil', weight: 50 });
+    for (const text of [HEARTH.withDeath, HEARTH.withDeathHer]) expect(matchEvent(ev('life', text)), text).toEqual({ id: 'vigil-death', weight: 100 });
+    expect(bandOf(storyWeight(ev('life', HEARTH.withDeath)))).toBe('top');
+    expect(storyWeight(ev('life', TEXT.death))).toBe(100);
+  });
+
+  it('nothing already named is taken, and the same words in another kind are not these; a story that retells one keeps the story rank', () => {
+    expect(storyWeight(ev('nature', HEARTH.namedBoth))).toBe(0);
+    expect(storyWeight(ev('work', HEARTH.sitDay))).toBe(0);
+    expect(matchEvent(ev('social', 'Ada sat with the others at the fire.')).id, 'not a vigil without who is ill or hurt').not.toBe('vigil');
+    expect(matchEvent(ev('social', 'Ada named the new well.')).id).not.toBe('named');
+    for (const text of [HEARTH.namedBoth, HEARTH.sitNight]) {
+      const told = 'Yan told a story at the fire: how ' + text[0].toLowerCase() + text.slice(1);
+      expect(matchEvent(ev('social', told)), told).toEqual({ id: 'story', weight: 10 });
+    }
+    // a death keeps its own words and its own rank
+    expect(matchEvent(ev('life', TEXT.wolfDeath)).id).toBe('death');
+  });
+
+  it('"A was with B when he died" and the plain death of B are one top shot: the plain one is taken out, the sitter\'s stands for both (and follows the one who was there)', () => {
+    const { w, ada, ben, cal } = village('hearth-death');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31); // a shot is up, so candidates wait
+    d.step(w, 0);
+    const died = say(w, 'life', 'Ben died (fever), aged 30.', [ben.id], 41, 30);
+    const withHim = say(w, 'life', HEARTH.withDeath, [ada.id, ben.id], 40, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev), 'one top shot for the death and the one beside them').toEqual([withHim]);
+    expect(d.counts.merged).toBeGreaterThanOrEqual(1);
+    expect(d.waiting()[0].subjectId).toBe(ada.id);
+    expect(died.text).toContain('died (fever)');
+    // with no such sitter, the plain death is as it was
+    const g = village('hearth-death-2');
+    const d2 = quiet();
+    d2.step(g.w, 0);
+    say(g.w, 'life', TEXT.death, [g.cal.id], 42, 31);
+    d2.step(g.w, 0);
+    const lone = say(g.w, 'life', 'Ben died (fever), aged 30.', [g.ben.id], 41, 30);
+    d2.step(g.w, 0);
+    expect(d2.waiting().map((q) => q.ev)).toEqual([lone]);
+  });
+
+  it('a child named aloud (58) waits its turn as a MIDDLE event, after a first walk (62)', () => {
+    const { w, ada, ben, cal } = village('hearth-named');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31);
+    d.step(w, 0);
+    const named = say(w, 'social', HEARTH.namedBoth, [ada.id, ben.id], 40, 30);
+    const walk = say(w, 'social', 'Ada and Ben walked out together for the first time.', [cal.id], 41, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev)).toEqual([named, walk]);
+    d.step(w, MIN_HOLD);
+    expect(d.shot?.ev, 'the first walk (62) before the naming (58)').toBe(walk);
+  });
+
+  /** Ada lies in by her door and Ben has come to be with her: the helper's visit and the rest are set up as birth_help.ts sets them up */
+  function lyingIn(tag: string, helperNear = true, phase: 'work' | 'travel' = 'work') {
+    const f = village(tag);
+    const { w, ada, ben } = f;
+    ada.activity = newActivity(w, ada, { kind: 'rest', label: 'Lying in by her door', goal: 'to wait for the child', here: true, amount: 900, data: { lyingIn: w.tick, sticky: true } });
+    ada.lyingIn = w.tick;
+    ben.activity = newActivity(w, ben, { kind: 'visit', label: 'Waiting with Ada for her child', goal: 'x', targetId: ada.id, targetType: 'person', here: true, data: { birth: true, commitmentId: 1, items: {}, sticky: true } });
+    ben.activity.phase = phase;
+    if (!helperNear) { ben.x = ada.x + 12; ben.y = ada.y; }
+    return f;
+  }
+  /** Ada sits up with Ben, as vigil.ts sets it up */
+  function sitting(tag: string) {
+    const f = village(tag);
+    const { w, ada, ben } = f;
+    ada.activity = newActivity(w, ada, { kind: 'rest', label: 'Sitting up with Ben', goal: 'to be with Ben', here: true, amount: 900, data: { vigil: { for: ben.id, since: w.tick, sat: 10, kind: 'fever' }, sticky: true } });
+    return f;
+  }
+
+  it("a woman lying in with a helper beside her is one live candidate, 72, from her side, in the inspector's own words; with nobody beside her, or the helper not yet there, none", () => {
+    const { w, ada } = lyingIn('hearth-lying');
+    const lying = scanLive(w).filter((c) => c.kind === 'lying');
+    expect(lying.length).toBe(1);
+    expect(lying[0].key).toBe(`lying:${ada.id}`);
+    expect(lying[0].score).toBe(72);
+    expect(lying[0].subjectId).toBe(ada.id);
+    const doing = describePerson(w, ada.id)!.qa.doing;
+    expect(lying[0].caption()).toBe(doing);
+    expect(doing).toContain('Lying in by her door');
+    // the director takes it
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.kind).toBe('live');
+    expect(d.shot?.liveKey).toBe(`lying:${ada.id}`);
+    expect(d.shot?.weight).toBe(72);
+    // nobody beside her (the helper far off, or still walking): no scene
+    expect(scanLive(lyingIn('hearth-lying-far', false).w).filter((c) => c.kind === 'lying')).toEqual([]);
+    expect(scanLive(lyingIn('hearth-lying-travel', true, 'travel').w).filter((c) => c.kind === 'lying')).toEqual([]);
+    // and a woman who is not lying in is not one
+    const g = village('hearth-lying-none');
+    expect(scanLive(g.w).filter((c) => c.kind === 'lying')).toEqual([]);
+  });
+
+  it("a vigil under way is one live candidate for each person sat with, 66, from the sitter's side; gone when it ends or the sick person has died", () => {
+    const { w, ada, ben } = sitting('hearth-vigil');
+    const v = scanLive(w).filter((c) => c.kind === 'vigil');
+    expect(v.length).toBe(1);
+    expect(v[0].key).toBe(`vigil:${ben.id}`);
+    expect(v[0].score).toBe(66);
+    expect(v[0].subjectId).toBe(ada.id);
+    expect(v[0].caption()).toBe(describePerson(w, ada.id)!.qa.doing);
+    expect(v[0].caption()).toContain('Sitting up with Ben');
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.liveKey).toBe(`vigil:${ben.id}`);
+    // the vigil ends: the shot ends (the camera stays, the caption goes)
+    ada.activity = null;
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.ended).toBe(true);
+    expect(d.captionFresh()).toBe(false);
+    // a death with her beside him writes its own line and the vigil is over: not a live shot any more
+    const h = sitting('hearth-vigil-over');
+    (h.ada.activity!.data.vigil as { over?: true }).over = true;
+    expect(scanLive(h.w).filter((c) => c.kind === 'vigil')).toEqual([]);
+    // one not yet at them (travel) is no vigil
+    const g = sitting('hearth-vigil-travel');
+    g.ada.activity!.phase = 'travel';
+    expect(scanLive(g.w).filter((c) => c.kind === 'vigil')).toEqual([]);
+  });
+
+  it('a lying-in and a vigil are both live at once, best first: the lying-in (72) before the vigil (66)', () => {
+    const f = lyingIn('hearth-all');
+    const { w, cal, ben } = f;
+    cal.activity = newActivity(w, cal, { kind: 'rest', label: 'Sitting up with Ben', goal: 'x', here: true, amount: 900, data: { vigil: { for: ben.id, since: w.tick, sat: 5, kind: 'hurt' }, sticky: true } });
+    const live = scanLive(w).filter((c) => c.kind === 'lying' || c.kind === 'vigil');
+    expect(live.map((c) => c.kind)).toEqual(['lying', 'vigil']);
+    expect(live.map((c) => c.score)).toEqual([72, 66]);
   });
 });
 
