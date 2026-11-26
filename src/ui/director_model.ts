@@ -4,14 +4,27 @@
 //
 // Presentation only. Events are read from world.events (and world.chronicle for the reel); what is live is read from world state
 // by director_live.ts. Nothing is written to the world, the world's random state is never drawn from, and nothing here is saved.
-// The words are the event's own or the simulation's and the inspector's; the director adds none of its own but two wolf sentences.
+// The words are the event's own or the simulation's and the inspector's; the director adds none of its own but two wolf sentences
+// and "Everyone is asleep.".
 //
 // What it follows, in three bands of weight: TOP (80 and up) may cut in early, MIDDLE (50 to 79) waits for the hold, and FILLER
 // (below 30) is shown only when nothing better exists. Between events it follows what is still happening (a gathering, a wolf, a
 // conversation, someone in trouble), so the camera is there during the moment and not after it.
+//
+// Nobody asleep is shown. A shot does not start on somebody abed (asleep or going to bed; `abed` in director_live.ts): an event is
+// shown about the first of its people who is up, and a lighter event whose living people are all abed waits (its wait clock does not
+// run) until one of them is up, while a TOP event whose people are all abed starts as a shot of the place. An event or filler shot
+// whose person has been abed for MIN_CUT is re-pointed, with its caption and its age, to the next of its people who is up, else to the
+// place. A shot whose person goes to bed is `spent` once it has been up the hold (an event or filler shot) or MIN_CUT (a live one):
+// it has no caption, a waiting MIDDLE or TOP event takes it at once, and anything else replaces it at once, without the linger. The
+// one exception is a wolf, which is shown on a sleeper it is stalking (director_live.ts). When a spent shot has nothing to go to, the
+// lowest band is tried: an `ambient` candidate, somebody up and outdoors, which is used only when the shot is spent or its live thing
+// has ended (or the viewer asks for the next one), never in place of a shot that is still about something and never by itself when
+// there is no shot at all: on a new world the director waits for something to happen. With nobody up at all the shot is the
+// quiet one, of the place (the lit fire nearest the people), which anything replaces at once.
 import { DAY } from '../sim/constants';
-import type { EventKind, World, WorldEvent } from '../sim/types';
-import { scanLive, type LiveCandidate } from './director_live';
+import type { EventKind, Person, World, WorldEvent } from '../sim/types';
+import { QUIET_KEY, QUIET_SENTENCE, abed, anyoneUp, quietPlace, scanLive, type LiveCandidate } from './director_live';
 
 // ───────────────────────────── how worth watching an event is ─────────────────────────────
 
@@ -162,10 +175,45 @@ export function subjectOf(world: World, ev: Pick<WorldEvent, 'ids'>): number {
   return 0;
 }
 
-const livingPerson = (world: World, id: number): boolean => {
+const personOf = (world: World, id: number): Person | null => {
   const e = world.byId.get(id);
-  return !!e && e.ent === 'person' && e.alive;
+  return e && e.ent === 'person' && e.alive ? e : null;
 };
+const livingPerson = (world: World, id: number): boolean => personOf(world, id) !== null;
+/** the quiet shot of the place, when nobody is up */
+const isQuiet = (s: Shot): boolean => s.liveKey === QUIET_KEY;
+
+/**
+ * Who a shot of this event is about when it starts, or when it is re-pointed: the first of its people who is alive and not abed. 0, a
+ * shot of the place, when none of them is up (every living one is abed, which only a TOP event reaches: a lighter one waits, see
+ * `heldAbed`; or none of them lives).
+ */
+export function shotSubjectOf(world: World, ev: Pick<WorldEvent, 'ids'>): number {
+  for (const id of ev.ids) {
+    const p = personOf(world, id);
+    if (p && !abed(p)) return id;
+  }
+  return 0;
+}
+
+/** where a shot of the place for this event is: its own x, y; an event with none (and somebody alive in it) takes the quiet place; null leaves it as it is */
+function placeOf(world: World, ev: Pick<WorldEvent, 'ids' | 'x' | 'y'>): { x: number; y: number } | null {
+  if (hasPlace(ev)) return { x: ev.x, y: ev.y };
+  return ev.ids.some((id) => personOf(world, id)) ? quietPlace(world) : null;
+}
+
+/** a lighter event (not TOP) about living people who are all abed has nobody to be shown on: it waits */
+function heldAbed(world: World, e: { ev: Pick<WorldEvent, 'ids'>; weight: number }): boolean {
+  if (e.weight >= TOP_FROM) return false;
+  let any = false;
+  for (const id of e.ev.ids) {
+    const p = personOf(world, id);
+    if (!p) continue;
+    if (!abed(p)) return false;
+    any = true;
+  }
+  return any;
+}
 
 /** a shot or event with no position (the winter setting in) has no place to fly to */
 export const hasPlace = (at: { x: number; y: number }): boolean => at.x !== 0 || at.y !== 0;
@@ -242,7 +290,7 @@ export interface Shot {
   kind: 'event' | 'live';
   /** the event, for an event shot */
   ev: WorldEvent | null;
-  /** the live thing's key, for a live shot ('occ:<id>', 'wolf:<id>', 'talk:<id>', 'person:<id>') */
+  /** the live thing's key, for a live shot ('occ:<id>', 'wolf:<id>', 'talk:<id>', 'person:<id>', 'amb:<id>', or 'quiet' for the place when nobody is up) */
   liveKey: string | null;
   /** the caption: the event's own text, or the live thing's (refreshed at each scan while it lasts) */
   text: string;
@@ -255,10 +303,12 @@ export interface Shot {
   y: number;
   /** its weight (an event) or score (a live thing): the band says what may cut it */
   weight: number;
-  /** an event of FILLER weight: shown only because nothing better existed; always about a living person */
+  /** an event of FILLER weight: shown only because nothing better existed; about a living person when it starts (the place if everybody it is about is abed for a while) */
   filler: boolean;
   /** a live shot whose thing has ended: the camera stays with the person, with no caption, until something worth moving for comes */
   ended: boolean;
+  /** the person the shot is about has gone to bed (asleep or on the way), and it has been up the hold (MIN_HOLD for an event or filler shot, MIN_CUT for a live one): no caption, and anything replaces it at once, so in practice it is read only inside a step. Never a wolf's shot. */
+  spent: boolean;
   /** UI seconds this shot has been up */
   age: number;
   /** changes whenever a shot starts or loses its subject, so the view knows when to move the camera */
@@ -295,13 +345,16 @@ export class Director {
   private filler: Entry | null = null;
   private live: LiveCandidate[] = [];
   private pickedAt = new Map<string, number>();
+  /** the event or filler shot whose person was first seen abed at `since` (this.clock), to re-point it once that has been MIN_CUT */
+  private abedFor: { shot: Shot; subject: number; since: number } | null = null;
   private shown: { rule: string; tick: number }[] = [];
   shot: Shot | null = null;
   /**
    * in the world watched now (for the checks): shots shown (live and filler ones too), TOP and MIDDLE events dropped as stale or
-   * for a full queue, events folded into another of the same moment, and how many of the shots shown were filler or live
+   * for a full queue, events folded into another of the same moment, how many of the shots shown were filler or live, and how many
+   * event or filler shots were re-pointed because their person had gone to bed (one shot may be re-pointed more than once)
    */
-  readonly counts = { shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 };
+  readonly counts = { shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0, repointed: 0 };
 
   /** `scan` reads what is live from the world (director_live.ts); the checks may give it another */
   constructor(private scan: (world: World) => LiveCandidate[] = scanLive) {}
@@ -324,6 +377,8 @@ export class Director {
     this.counts.merged = 0;
     this.counts.filler = 0;
     this.counts.live = 0;
+    this.counts.repointed = 0;
+    this.abedFor = null;
   }
 
   step(world: World, dt: number): void {
@@ -337,15 +392,18 @@ export class Director {
     const secs = Math.max(0, dt);
     this.clock += secs;
     if (this.shot) this.shot.age += secs;
-    for (const q of this.queue) q.waited += secs;
+    // an event held because its people are all abed is not waiting, in the sense of STALE_SECONDS (it still goes stale by STALE_TICKS)
+    for (const q of this.queue) if (!heldAbed(world, q)) q.waited += secs;
     this.ingest(world);
     this.expire(world);
     this.trim();
     if (this.clock - this.scanAt >= LIVE_SCAN_SECONDS) {
       this.scanAt = this.clock;
       this.live = this.scan(world);
-      this.refreshLive();
+      this.refreshLive(world);
     }
+    this.repoint(world);
+    this.refreshSpent(world);
     this.choose(world);
   }
 
@@ -371,14 +429,15 @@ export class Director {
     return this.live;
   }
 
-  /** whether Next has anything to go to: an event waiting, a live thing other than the shot's own, or the FILLER candidate */
+  /** whether Next has anything to go to: an event waiting that is not held for being abed, a live thing (an ambient one too) other than the shot's own, or the FILLER candidate if its person is up */
   hasNext(): boolean {
-    return this.queue.length > 0 || this.bestLive(this.shot?.liveKey ?? null) !== null || this.filler !== null;
+    const world = this.world;
+    return (!!world && this.queue.some((q) => !heldAbed(world, q))) || this.bestLive(this.shot?.liveKey ?? null, 'any') !== null || (!!world && this.fillerUp(world) !== null);
   }
 
-  /** false once an event shot's caption has been up long enough (CAPTION_SECONDS) to fade, or when there is no shot; a live shot's stays while it lasts */
+  /** false once an event shot's caption has been up long enough (CAPTION_SECONDS) to fade, or when there is no shot or it is spent; a live shot's stays while it lasts */
   captionFresh(): boolean {
-    return this.shot !== null && !this.shot.ended && this.shot.text !== '' && (this.shot.kind === 'live' || this.shot.age < CAPTION_SECONDS);
+    return this.shot !== null && !this.shot.ended && !this.shot.spent && this.shot.text !== '' && (this.shot.kind === 'live' || this.shot.age < CAPTION_SECONDS);
   }
 
   /** the weight of a waiting event with the repeat fade: each showing of the same rule in the last DAY of world ticks takes REPEAT_FADE off. TOP is exempt. */
@@ -472,11 +531,12 @@ export class Director {
     }
   }
 
-  /** the heaviest waiting event whose weight, faded, is at least `least`; the oldest among equals */
+  /** the heaviest waiting event whose weight, faded, is at least `least`; the oldest among equals. One held because its people are all abed is not among them. */
   private bestWaiting(least: number): Waiting | null {
     let best: Waiting | null = null;
     let bw = 0;
     for (const q of this.queue) {
+      if (this.world && heldAbed(this.world, q)) continue;
       const w = this.effective(q);
       if (w < least) continue;
       if (!best || w > bw || (w === bw && q.ev.id < best.ev.id)) {
@@ -493,9 +553,14 @@ export class Director {
    * A live shot ends when its condition ends: the thing is no longer among the live candidates (the camera stays with the person and
    * the caption goes). If it comes back (the wolf stalks again) it is live again. While it lasts its caption and score are read again.
    */
-  private refreshLive(): void {
+  private refreshLive(world: World): void {
     const s = this.shot;
     if (!s || s.kind !== 'live') return;
+    // the quiet shot is the director's own, not a thing in the scan: its sentence is true while nobody is up
+    if (isQuiet(s)) {
+      s.text = anyoneUp(world) ? '' : QUIET_SENTENCE;
+      return;
+    }
     const c = this.live.find((x) => x.key === s.liveKey);
     if (!c) {
       s.ended = true;
@@ -506,10 +571,70 @@ export class Director {
     s.weight = c.score;
   }
 
-  /** the best live candidate not on cooldown, other than `except` */
-  private bestLive(except: string | null): LiveCandidate | null {
+  /**
+   * An event or filler shot whose person has been abed for MIN_CUT, before the hold is up, is re-pointed (the camera moves, nothing
+   * else about the shot does: it keeps its caption and its age): to the first of the event's people who is up, else to the place, at
+   * the event's own x, y. After the hold it is spent instead. Read from the world at every step.
+   */
+  private repoint(world: World): void {
+    const s = this.shot;
+    const p = s && s.kind === 'event' && s.subjectId ? personOf(world, s.subjectId) : null;
+    if (!s || !p || !abed(p)) {
+      this.abedFor = null;
+      return;
+    }
+    if (!this.abedFor || this.abedFor.shot !== s || this.abedFor.subject !== s.subjectId) this.abedFor = { shot: s, subject: s.subjectId, since: this.clock };
+    if (s.age >= MIN_HOLD || this.clock - this.abedFor.since < MIN_CUT - 1e-9) return;
+    const next = s.ev ? shotSubjectOf(world, s.ev) : 0;
+    s.subjectId = next;
+    if (!next) {
+      const at = s.ev ? placeOf(world, s.ev) : null;
+      if (at) {
+        s.x = at.x;
+        s.y = at.y;
+      }
+    }
+    s.rev = ++this.rev;
+    this.counts.repointed++;
+    this.abedFor = null;
+  }
+
+  /**
+   * A shot whose person has gone to bed, once it has been up the hold, is spent (see Shot.spent). Read from the world at every step.
+   * A wolf's shot is never spent by this: the wolf's own cooldown and ending govern it.
+   */
+  private refreshSpent(world: World): void {
+    const s = this.shot;
+    if (!s) return;
+    const p = s.subjectId ? personOf(world, s.subjectId) : null;
+    const wolf = s.liveKey !== null && s.liveKey.startsWith('wolf:');
+    s.spent = !!p && abed(p) && !wolf && s.age >= (s.kind === 'live' ? MIN_CUT : MIN_HOLD);
+  }
+
+  /** the FILLER candidate if its person is up; one about a sleeper waits (it lapses by FILLER_STALE_TICKS as it does) */
+  private fillerUp(world: World): Entry | null {
+    const f = this.filler;
+    if (!f) return null;
+    const p = personOf(world, f.subjectId);
+    return p && !abed(p) ? f : null;
+  }
+
+  /** the candidate's person has gone to bed since the scan (it is read once a second): a shot never starts on somebody abed, a wolf's is the one exception */
+  private personAbed(c: LiveCandidate): boolean {
+    if (!this.world || !c.subjectId || c.kind === 'wolf') return false;
+    const p = personOf(this.world, c.subjectId);
+    return !!p && abed(p);
+  }
+
+  /**
+   * the best live candidate not on cooldown, other than `except`: of the ordinary kinds, of the ambient kind (the lowest band, used
+   * only when there is no shot or it is spent or over), or either
+   */
+  private bestLive(except: string | null, kind: 'live' | 'ambient' | 'any'): LiveCandidate | null {
     for (const c of this.live) {
       if (c.key === except) continue;
+      if (this.personAbed(c)) continue;
+      if (kind !== 'any' && (c.kind === 'ambient') !== (kind === 'ambient')) continue;
       const at = this.pickedAt.get(c.key);
       if (at !== undefined && this.clock - at < LIVE_COOLDOWN && c.score < LIVE_EXEMPT) continue;
       return c;
@@ -531,21 +656,27 @@ export class Director {
       }
     }
     const hold = !s || s.age >= MIN_HOLD;
-    // a live shot whose thing has ended is free to go for a MIDDLE or TOP event at once; for anything else the hold still applies
-    const free = hold || !!s?.ended;
+    // a live shot whose thing has ended, a spent shot (its person has gone to bed) and the quiet shot are free to go for a MIDDLE or TOP
+    // event at once; for anything else the hold still applies
+    const over = !!s && (s.ended || s.spent || isQuiet(s));
+    const free = hold || over;
     const best = this.bestWaiting(MIDDLE_FROM);
     if (best) {
       // only a TOP event cuts in early, and only over a shot from a lower band; a MIDDLE one waits for the hold
       if (free || (best.weight >= TOP_FROM && !!s && bandOf(s.weight) !== 'top' && s.age >= MIN_CUT)) this.startEvent(world, best);
       return;
     }
-    if (hold) this.pick(world, false, s?.ended ? s.liveKey : null);
+    // the hold still applies to a live shot that has ended; a spent shot and the quiet shot are replaced at once by anything
+    if (hold || (!!s && (s.spent || isQuiet(s)))) this.pick(world, false, s && (s.ended || s.spent) ? s.liveKey : null);
   }
 
   /**
    * The hold is up and no TOP or MIDDLE event waits (or, with `any`, the viewer asked for the next one): the best live candidate,
-   * else the best of the repeated events that faded and the FILLER candidate, else the shot stays. A live shot whose thing goes on
-   * stays unless a candidate scores higher. Until LINGER_SECONDS a shot also stays unless the replacement is strictly heavier than it.
+   * else the best of the repeated events that faded and the FILLER candidate (if its person is up), else, when the shot is spent or
+   * its live thing has ended (or the viewer asked for the next one), the best ambient candidate, else, when the shot is spent, the quiet shot of the place;
+   * else the shot stays. A live shot whose thing goes on stays unless a candidate scores higher (an ambient shot, the lowest band,
+   * is also replaced by a waiting event). Until LINGER_SECONDS a shot also stays unless the replacement is strictly heavier than it;
+   * a spent shot and the quiet one do not linger.
    */
   private pick(world: World, any: boolean, gone: string | null): void {
     if (any) {
@@ -556,33 +687,57 @@ export class Director {
       }
     }
     const s = this.shot;
-    const cur = s?.kind === 'live' ? this.live.find((c) => c.key === s.liveKey) : undefined;
+    const over = !!s && (s.spent || isQuiet(s));
+    const cur = !over && s?.kind === 'live' ? this.live.find((c) => c.key === s.liveKey) : undefined;
     // past the hold a shot lingers: before LINGER_SECONDS only something heavier than it replaces it
-    const lingering = !any && !!s && s.age < LINGER_SECONDS;
+    const lingering = !any && !!s && !over && s.age < LINGER_SECONDS;
     const beats = (w: number) => !lingering || w > s!.weight;
-    const live = this.bestLive(cur?.key ?? gone);
+    const except = cur?.key ?? gone;
+    const live = this.bestLive(except, 'live');
     if (live && beats(live.score) && (!cur || live.score > cur.score)) {
       this.startLive(world, live);
       return;
     }
-    if (cur) return;
+    if (cur && cur.kind !== 'ambient') return;
     // events: the faded ones still waiting, and the filler candidate, by weight
     this.dropFillerIfGone(world);
     const faded = this.bestWaiting(0);
-    const f = this.filler;
-    if (faded && beats(this.effective(faded)) && (!f || this.effective(faded) >= this.effective(f))) this.startEvent(world, faded);
-    else if (f && beats(this.effective(f))) this.startFiller(world, f);
+    const f = this.fillerUp(world);
+    if (faded && beats(this.effective(faded)) && (!f || this.effective(faded) >= this.effective(f))) {
+      this.startEvent(world, faded);
+      return;
+    }
+    if (f && beats(this.effective(f))) {
+      this.startFiller(world, f);
+      return;
+    }
+    // an ambient shot that is still going stays
+    if (cur) return;
+    // nothing about anything: somebody up and outdoors, the lowest band, when the shot is spent or over, or the viewer asked for the
+    // next one. Never by itself with no shot at all (a new world, a reload): the director then waits for something to happen.
+    if ((any && !s) || (!!s && (s.ended || over))) {
+      const amb = this.bestLive(except, 'ambient');
+      if (amb) {
+        this.startLive(world, amb);
+        return;
+      }
+    }
+    // everybody is asleep or indoors: the place, until something replaces it
+    if (s && s.spent) this.startQuiet(world);
   }
 
-  private show(shot: Omit<Shot, 'age' | 'rev'>): void {
-    this.shot = { ...shot, age: 0, rev: ++this.rev };
+  private show(shot: Omit<Shot, 'age' | 'rev' | 'spent'>): void {
+    this.shot = { ...shot, spent: false, age: 0, rev: ++this.rev };
     this.counts.shown++;
   }
 
   private startEvent(world: World, w: Waiting): void {
     this.queue.splice(this.queue.indexOf(w), 1);
     this.shown.push({ rule: w.rule, tick: world.tick });
-    this.show({ kind: 'event', ev: w.ev, liveKey: null, text: w.ev.text, tick: w.ev.tick, subjectId: subjectOf(world, w.ev), x: w.ev.x, y: w.ev.y, weight: w.weight, filler: false, ended: false });
+    const subjectId = shotSubjectOf(world, w.ev);
+    // everybody it is about is abed (a TOP event): the place, its own, or the quiet one when it has none
+    const at = subjectId === 0 ? placeOf(world, w.ev) : null;
+    this.show({ kind: 'event', ev: w.ev, liveKey: null, text: w.ev.text, tick: w.ev.tick, subjectId, x: at?.x ?? w.ev.x, y: at?.y ?? w.ev.y, weight: w.weight, filler: false, ended: false });
   }
 
   private startFiller(world: World, f: Entry): void {
@@ -595,6 +750,14 @@ export class Director {
   private startLive(world: World, c: LiveCandidate): void {
     this.pickedAt.set(c.key, this.clock);
     this.show({ kind: 'live', ev: null, liveKey: c.key, text: c.caption(), tick: world.tick, subjectId: c.subjectId, x: c.x, y: c.y, weight: c.score, filler: false, ended: false });
+    this.counts.live++;
+  }
+
+  /** nobody is up and nothing else is to be shown: the lit fire nearest the people, or the middle of them; the sentence only while nobody at all is up */
+  private startQuiet(world: World): void {
+    const place = quietPlace(world);
+    if (!place) return;
+    this.show({ kind: 'live', ev: null, liveKey: QUIET_KEY, text: anyoneUp(world) ? '' : QUIET_SENTENCE, tick: world.tick, subjectId: 0, x: place.x, y: place.y, weight: 1, filler: false, ended: false });
     this.counts.live++;
   }
 }

@@ -18,7 +18,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { makeWolf } from '../src/sim/wildlife';
 import { hashWorld } from '../src/sim/world';
 import { occasionNotice } from '../src/ui/event_cards_model';
-import { scanLive, wolfSentence, type LiveCandidate, type LiveKind } from '../src/ui/director_live';
+import { AMBIENT_NEAR, QUIET_SENTENCE, STALK_ABED_SCORE, WOLF_NEAR, abed, quietPlace, scanLive, wolfSentence, type LiveCandidate, type LiveKind } from '../src/ui/director_live';
 import {
   CAPTION_SECONDS,
   Director,
@@ -26,6 +26,7 @@ import {
   FILLER_STALE_TICKS,
   LINGER_SECONDS,
   LIVE_COOLDOWN,
+  LIVE_EXEMPT,
   LIVE_SCAN_SECONDS,
   MAX_WAITING,
   MERGE_TICKS,
@@ -45,7 +46,7 @@ import {
   storyWeight,
 } from '../src/ui/director_model';
 import { addPerson, building, done, stage } from './helpers/kit';
-import type { Conversation, EventKind, World, WorldEvent } from '../src/sim/types';
+import type { Conversation, EventKind, Person, World, WorldEvent } from '../src/sim/types';
 
 function village(tag: string) {
   const s = stage(`director-${tag}`);
@@ -251,7 +252,7 @@ describe('the first look, and a different world', () => {
     d.step(w, 0.016);
     expect(d.shot).toBeNull();
     expect(d.waiting().length).toBe(0);
-    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 });
+    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0, repointed: 0 });
   });
 
   it('a new TOP or MIDDLE event becomes the shot, about the person it is about', () => {
@@ -314,7 +315,7 @@ describe('the first look, and a different world', () => {
     d.step(b.w, 0.016);
     expect(d.shot).toBeNull();
     expect(d.waiting().length).toBe(0);
-    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0 });
+    expect(d.counts).toEqual({ shown: 0, stale: 0, overflow: 0, merged: 0, filler: 0, live: 0, repointed: 0 });
     say(b.w, 'life', TEXT.couple, [b.ada.id], 40, 30);
     d.step(b.w, 0.016);
     expect(d.shot?.text).toBe(TEXT.couple);
@@ -634,7 +635,7 @@ describe('the FILLER candidate: shown only when nothing better exists', () => {
     expect(d.shot?.ev).toBe(gift);
     expect(d.shot?.filler).toBe(true);
     expect(d.shot?.subjectId).toBe(ada.id);
-    expect(d.counts).toEqual({ shown: 1, stale: 0, overflow: 0, merged: 0, filler: 1, live: 0 });
+    expect(d.counts).toEqual({ shown: 1, stale: 0, overflow: 0, merged: 0, filler: 1, live: 0, repointed: 0 });
     expect(d.hasNext(), 'the candidate was used').toBe(false);
   });
 
@@ -1751,6 +1752,856 @@ describe('the together scenes (rules 264): standing up for someone, speaking for
     expect(scanLive(searching('together-live-alone', { alone: true }).w).filter((c) => c.kind === 'search')).toEqual([]);
     expect(scanLive(searching('together-live-done', { done: true }).w).filter((c) => c.kind === 'search')).toEqual([]);
     expect(scanLive(village('together-live-none').w).filter((c) => c.kind === 'search')).toEqual([]);
+  });
+});
+
+describe('nobody asleep is shown: who a shot is about, spent shots, something else to cut to, and the quiet place', () => {
+  const sleep = (p: Person): void => {
+    p.pose = 'sleep';
+  };
+  const wake = (p: Person): void => {
+    p.pose = 'stand';
+    p.activity = null;
+  };
+  /** on the way to bed: the sleep activity, not yet asleep */
+  const toBed = (w: World, p: Person): void => {
+    p.activity = newActivity(w, p, { kind: 'sleep', label: 'Going to bed', goal: 'to sleep', here: false, amount: 900, data: {} });
+  };
+  /** at the work itself, in the work phase */
+  const atWork = (w: World, p: Person): void => {
+    p.activity = newActivity(w, p, { kind: 'rest', label: 'Sitting', goal: 'x', here: true, amount: 900, data: {} });
+  };
+  const ambient = (w: World) => scanLive(w).filter((c) => c.kind === 'ambient');
+  const FIRE_FUEL = 50;
+
+  it('abed: alive and asleep, or on the way to bed', () => {
+    const { w, ada, ben } = village('night-abed');
+    expect([ada, ben].map(abed)).toEqual([false, false]);
+    sleep(ada);
+    expect(abed(ada)).toBe(true);
+    wake(ada);
+    expect(abed(ada)).toBe(false);
+    toBed(w, ada);
+    expect(ada.pose).not.toBe('sleep');
+    expect(abed(ada), 'going to bed counts').toBe(true);
+    ada.alive = false;
+    expect(abed(ada), 'a dead person is nobody abed').toBe(false);
+  });
+
+  describe('a shot never starts on somebody abed: events', () => {
+    it('an event whose first person is abed is shown about the second (TOP and MIDDLE; going to bed counts; both up is the first, as before)', () => {
+      const { w, ada, ben } = village('night-first');
+      sleep(ada);
+      const d = quiet();
+      d.step(w, 0);
+      const couple = say(w, 'life', TEXT.couple, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.ev).toBe(couple);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      const g = village('night-first-2');
+      toBed(g.w, g.ada);
+      const d2 = quiet();
+      d2.step(g.w, 0);
+      const arrival = say(g.w, 'life', TEXT.traveller, [g.ada.id, g.ben.id], 40, 30);
+      d2.step(g.w, 0.016);
+      expect(d2.shot?.ev).toBe(arrival);
+      expect(d2.shot?.subjectId).toBe(g.ben.id);
+      const h = village('night-first-3');
+      const d3 = quiet();
+      d3.step(h.w, 0);
+      say(h.w, 'life', TEXT.traveller, [h.ada.id, h.ben.id], 40, 30);
+      d3.step(h.w, 0.016);
+      expect(d3.shot?.subjectId, 'both up: the first').toBe(h.ada.id);
+    });
+
+    it('the FILLER candidate is not shown while its person is abed; it lapses by FILLER_STALE_TICKS as it did', () => {
+      const { w, ada, ben } = village('night-filler');
+      sleep(ada);
+      const d = quiet();
+      d.step(w, 0);
+      say(w, 'social', TEXT.gave, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      d.step(w, 5);
+      expect(d.shot, 'nothing to show on a sleeper').toBeNull();
+      expect(d.hasNext()).toBe(false);
+      wake(ada);
+      d.step(w, 0.016);
+      expect(d.shot?.filler).toBe(true);
+      expect(d.shot?.subjectId).toBe(ada.id);
+      // the same, but it lapses before she is up
+      const f = village('night-filler-2');
+      sleep(f.ada);
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      say(f.w, 'social', TEXT.gave, [f.ada.id, f.ben.id], 40, 30);
+      d2.step(f.w, 0.016);
+      f.w.tick += FILLER_STALE_TICKS + 1;
+      d2.step(f.w, 0.016);
+      wake(f.ada);
+      d2.step(f.w, 0.016);
+      expect(d2.shot).toBeNull();
+    });
+
+    it('a MIDDLE event whose living people are all abed waits, its wait clock does not run, and it is shown when one gets up', () => {
+      const { w, ada, ben } = village('night-wait');
+      sleep(ada);
+      sleep(ben);
+      const d = quiet();
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot, 'not shown yet').toBeNull();
+      expect(d.waiting().map((q) => q.ev)).toEqual([arrival]);
+      expect(d.hasNext(), 'Next has nothing to go to').toBe(false);
+      // four minutes of UI time, far longer than STALE_SECONDS lets an event wait: it is still there, and has not waited
+      for (let i = 0; i < 8; i++) d.step(w, STALE_SECONDS / 2);
+      expect(d.waiting().length).toBe(1);
+      expect(d.waiting()[0].waited).toBe(0);
+      expect(d.counts.stale).toBe(0);
+      wake(ben);
+      d.step(w, 0.016);
+      expect(d.shot?.ev).toBe(arrival);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      // it still goes stale by the day
+      const f = village('night-wait-2');
+      sleep(f.ada);
+      sleep(f.ben);
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      say(f.w, 'life', TEXT.traveller, [f.ada.id, f.ben.id], 40, 30);
+      d2.step(f.w, 0.016);
+      expect(d2.waiting().length).toBe(1);
+      f.w.tick += STALE_TICKS + 1;
+      d2.step(f.w, 0.016);
+      expect(d2.waiting().length).toBe(0);
+      expect(d2.counts.stale).toBe(1);
+    });
+
+    it('a TOP event about people who are all abed starts as a shot of the place, not on the first sleeper; with somebody up it is about them', () => {
+      const { w, ada, ben } = village('night-top');
+      sleep(ada);
+      sleep(ben);
+      const d = quiet();
+      d.step(w, 0);
+      const couple = say(w, 'life', TEXT.couple, [ada.id, ben.id], 41, 29);
+      d.step(w, 0.016);
+      expect(d.shot?.ev, 'a TOP event is not held').toBe(couple);
+      expect(d.shot?.subjectId, 'the place').toBe(0);
+      expect([d.shot?.x, d.shot?.y], 'at the event own place').toEqual([41, 29]);
+      expect(d.shot?.text).toBe(TEXT.couple);
+      // no place of its own: the lit fire nearest the people, as for the quiet shot
+      const g = village('night-top-3');
+      sleep(g.ada);
+      sleep(g.ben);
+      sleep(g.cal);
+      const d3 = quiet();
+      d3.step(g.w, 0);
+      say(g.w, 'life', TEXT.death, [g.ada.id]);
+      d3.step(g.w, 0.016);
+      expect(d3.shot?.subjectId).toBe(0);
+      expect([d3.shot?.x, d3.shot?.y]).toEqual([quietPlace(g.w)!.x, quietPlace(g.w)!.y]);
+      // one of them up: about them
+      const h = village('night-top-4');
+      sleep(h.ada);
+      const d4 = quiet();
+      d4.step(h.w, 0);
+      say(h.w, 'life', TEXT.couple, [h.ada.id, h.ben.id], 40, 30);
+      d4.step(h.w, 0.016);
+      expect(d4.shot?.subjectId).toBe(h.ben.id);
+      // an event about nobody living is a shot of the place, as it always was
+      const f = village('night-top-2');
+      sleep(f.ada);
+      sleep(f.ben);
+      sleep(f.cal);
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      const gone = say(f.w, 'life', TEXT.traveller, [987654], 20, 20);
+      d2.step(f.w, 0.016);
+      expect(d2.shot?.ev).toBe(gone);
+      expect(d2.shot?.subjectId).toBe(0);
+      expect([d2.shot?.x, d2.shot?.y]).toEqual([20, 20]);
+    });
+  });
+
+  describe('a shot never starts on somebody abed: what is live', () => {
+    it('no talk, speech or trouble (a danger or a hurt) candidate for somebody abed, and no walk; they come back when the person is up', () => {
+      const { w, ada, ben, cal } = village('night-scan');
+      ada.speech = { text: 'Stay out of it.', until: w.tick + 50, kind: 'angry' };
+      ben.injury = { kind: 'sprain', since: w.tick, until: w.tick + 2 * DAY, how: 'a fall' };
+      w.conversations = [{ id: 9000, a: cal.id, b: ben.id, purpose: 'teach_technique', start: w.tick, phase: 0, nextAt: w.tick, end: 0, requestId: 0, data: {} } as unknown as Conversation];
+      const kinds = () => scanLive(w).filter((c) => c.kind === 'talk' || c.kind === 'speech' || c.kind === 'trouble').map((c) => c.kind).sort();
+      expect(kinds()).toEqual(['speech', 'talk', 'trouble']);
+      expect(scanLive(w).find((c) => c.kind === 'trouble')!.caption()).toMatch(/^Hurt: /);
+      for (const p of [ada, ben, cal]) sleep(p);
+      expect(kinds()).toEqual([]);
+      // going to bed is the same
+      for (const p of [ada, ben, cal]) {
+        wake(p);
+        toBed(w, p);
+      }
+      expect(kinds()).toEqual([]);
+      for (const p of [ada, ben, cal]) wake(p);
+      expect(kinds()).toEqual(['speech', 'talk', 'trouble']);
+      // the danger kind of trouble, and a walk out
+      ada.speech = null;
+      ada.needs.hunger = 3;
+      expect(scanLive(w).find((c) => c.key === `person:${ada.id}`)?.score).toBe(50);
+      sleep(ada);
+      expect(scanLive(w).find((c) => c.key === `person:${ada.id}`)).toBeUndefined();
+      const g = village('night-scan-walk');
+      beginCourtWalk(g.w, 7001, g.ada, g.ben, { x: 43, y: 31, at: 'water' });
+      expect(scanLive(g.w).filter((c) => c.kind === 'walk').length).toBe(1);
+      sleep(g.ada);
+      expect(scanLive(g.w).filter((c) => c.kind === 'walk')).toEqual([]);
+    });
+
+    it('a candidate whose person has gone to bed since the scan (it is read once a second) is not started; a wolf is the exception', () => {
+      const { w, ada, ben } = village('night-stale-scan');
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      const gift = say(w, 'social', TEXT.gave, [ben.id], 41, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.ev, 'a filler is the shot, and a live thing of 40 would take it at the hold').toBe(gift);
+      now = [cand('talk:1', 40, ada.id, 'Talking.'), cand('amb:2', 9, ben.id, 'Fetching water.', 'ambient')];
+      d.step(w, MIN_HOLD - 0.5);
+      sleep(ada);
+      d.step(w, 0.5);
+      expect(d.shot?.ev, 'Ada is abed now, whatever the scan said a moment ago').toBe(gift);
+      const e = village('night-stale-scan-wolf');
+      const d2 = new Director(() => [cand('wolf:1', 70, e.ada.id, 'A wolf is stalking near Ada.', 'wolf')]);
+      d2.step(e.w, 0);
+      sleep(e.ada);
+      d2.step(e.w, 0.016);
+      expect(d2.shot?.liveKey, 'a wolf is still shown on a sleeper').toBe('wolf:1');
+    });
+
+    it('a wolf stalking is shown on the person who is up: its target if it is, else the nearest; an attack is shown as before', () => {
+      const { w, ada, ben, cal } = village('night-wolf');
+      const wolf = makeWolf(w, 40.5 + 3, 30.5);
+      wolf.state = 'stalk';
+      wolf.targetId = ada.id;
+      const one = () => scanLive(w).find((c) => c.kind === 'wolf')!;
+      const byDistance = (list: Person[]) => [...list].sort((a, b) => Math.hypot(a.x - wolf.x, a.y - wolf.y) - Math.hypot(b.x - wolf.x, b.y - wolf.y));
+      expect([one().subjectId, one().score]).toEqual([ada.id, 70]);
+      sleep(ada);
+      const up = byDistance([ben, cal])[0];
+      expect([one().subjectId, one().score], 'its target is asleep: the nearest who is up').toEqual([up.id, 70]);
+      expect(one().caption()).toBe(wolfSentence('stalk', up.name));
+      sleep(up);
+      const last = [ben, cal].find((p) => p !== up)!;
+      expect([one().subjectId, one().score]).toEqual([last.id, 70]);
+      // an attack is not changed: on its target, asleep or not
+      wolf.state = 'attack';
+      expect([one().subjectId, one().score]).toEqual([ada.id, 80]);
+      wolf.targetId = 0;
+      expect(one().score).toBe(80);
+      expect(one().subjectId, 'no target: the nearest, as before').toBe(byDistance([ada, ben, cal])[0].id);
+    });
+
+    it('a wolf stalking when everybody near is abed is still offered, on the nearest, at 60: under LIVE_EXEMPT, so its cooldown applies', () => {
+      const { w, ada, ben, cal } = village('night-wolf-abed');
+      const wolf = makeWolf(w, 40.5 + 3, 30.5);
+      wolf.state = 'stalk';
+      wolf.targetId = ada.id;
+      for (const p of [ada, ben, cal]) sleep(p);
+      const nearest = [ada, ben, cal].sort((a, b) => Math.hypot(a.x - wolf.x, a.y - wolf.y) - Math.hypot(b.x - wolf.x, b.y - wolf.y))[0];
+      const c = scanLive(w).find((x) => x.kind === 'wolf')!;
+      expect([c.subjectId, c.score]).toEqual([nearest.id, STALK_ABED_SCORE]);
+      expect(STALK_ABED_SCORE).toBe(60);
+      expect(STALK_ABED_SCORE).toBeLessThan(LIVE_EXEMPT);
+      expect(c.caption()).toBe(wolfSentence('stalk', nearest.name));
+      // nobody within WOLF_NEAR at all: nothing, as before
+      wolf.x = 40.5 + WOLF_NEAR + 20;
+      expect(scanLive(w).filter((x) => x.kind === 'wolf')).toEqual([]);
+      // an attack on sleepers is real danger: 80
+      wolf.x = 40.5 + 3;
+      wolf.state = 'attack';
+      expect(scanLive(w).find((x) => x.kind === 'wolf')!.score).toBe(80);
+      // the director: picked once, and when the viewer skips it, not again within the minute
+      wolf.state = 'stalk';
+      const d = new Director();
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot?.liveKey).toBe(`wolf:${wolf.id}`);
+      expect(d.shot?.weight).toBe(60);
+      d.skip();
+      expect(d.shot).toBeNull();
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot, 'on cooldown').toBeNull();
+      d.step(w, LIVE_COOLDOWN);
+      expect(d.shot?.liveKey).toBe(`wolf:${wolf.id}`);
+    });
+  });
+
+  describe('a shot whose subject goes to bed is spent', () => {
+    it('an event shot is spent once it has been up MIN_HOLD: an ambient candidate takes it then, not before', () => {
+      const { w, ada, ben } = village('night-spent-event');
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.ev).toBe(arrival);
+      sleep(ada);
+      now = [cand('amb:2', 12, ben.id, 'Fetching water.', 'ambient')];
+      d.step(w, MIN_HOLD - 1);
+      expect(d.shot?.ev, 'the hold is not up').toBe(arrival);
+      expect(d.shot?.spent).toBe(false);
+      d.step(w, 1);
+      expect(d.shot?.liveKey).toBe('amb:2');
+      expect(d.shot?.subjectId).toBe(ben.id);
+      expect(d.shot?.spent).toBe(false);
+    });
+
+    it('a live shot is spent once it has been up MIN_CUT and is replaced at once, not at the hold: by a waiting event, by anything live without the linger, by an ambient one, else by the place', () => {
+      // the stand-in scan keeps offering the talk, so the shot has not ended: it is spent because its person is abed
+      const talk = () => cand('talk:1', 40, f.ada.id, 'Talking with Ben.');
+      const f = village('night-spent-live');
+      let now: LiveCandidate[] = [talk()];
+      const d = new Director(() => now);
+      d.step(f.w, 0);
+      d.step(f.w, LIVE_SCAN_SECONDS);
+      expect(d.shot?.liveKey).toBe('talk:1');
+      expect(d.captionFresh()).toBe(true);
+      sleep(f.ada);
+      d.step(f.w, MIN_CUT - 0.5);
+      expect(d.shot?.liveKey, 'not spent yet').toBe('talk:1');
+      expect(d.shot?.spent).toBe(false);
+      expect(d.captionFresh()).toBe(true);
+      // nothing else on: at MIN_CUT it is the place, long before the hold
+      d.step(f.w, 0.5);
+      expect(d.shot?.liveKey).toBe('quiet');
+      expect(d.shot?.age).toBe(0);
+      // a waiting MIDDLE event takes it at once
+      const g = village('night-spent-live-2');
+      now = [cand('talk:1', 40, g.ada.id, 'Talking.')];
+      const d2 = new Director(() => now);
+      d2.step(g.w, 0);
+      d2.step(g.w, LIVE_SCAN_SECONDS);
+      sleep(g.ada);
+      d2.step(g.w, MIN_CUT - 0.5);
+      const arrival = say(g.w, 'life', TEXT.traveller, [g.ben.id], 41, 30);
+      d2.step(g.w, 0.5);
+      expect(d2.shot?.ev).toBe(arrival);
+      expect(d2.shot!.age).toBeLessThan(MIN_HOLD);
+      // anything live, though a shot of 40 would otherwise linger over a thing of 25 until LINGER_SECONDS
+      const h = village('night-spent-live-3');
+      now = [cand('talk:1', 40, h.ada.id, 'Talking.')];
+      const d3 = new Director(() => now);
+      d3.step(h.w, 0);
+      d3.step(h.w, LIVE_SCAN_SECONDS);
+      sleep(h.ada);
+      now = [cand('talk:1', 40, h.ada.id, 'Talking.'), cand('talk:2', 25, h.ben.id, 'Chatting.')];
+      d3.step(h.w, MIN_CUT - 0.5);
+      expect(d3.shot?.liveKey).toBe('talk:1');
+      d3.step(h.w, 0.5);
+      expect(d3.shot?.liveKey, 'a lighter one, because the heavier is spent').toBe('talk:2');
+      // an ambient candidate
+      const i = village('night-spent-live-4');
+      now = [cand('talk:1', 40, i.ada.id, 'Talking.')];
+      const d4 = new Director(() => now);
+      d4.step(i.w, 0);
+      d4.step(i.w, LIVE_SCAN_SECONDS);
+      sleep(i.ada);
+      now = [cand('talk:1', 40, i.ada.id, 'Talking.'), cand('amb:2', 9, i.ben.id, 'Fetching water.', 'ambient')];
+      d4.step(i.w, MIN_CUT);
+      expect(d4.shot?.liveKey).toBe('amb:2');
+      expect(d4.shot?.subjectId).toBe(i.ben.id);
+    });
+
+    it("a wolf's shot is never spent by this, on a sleeper or not", () => {
+      const { w, ada } = village('night-spent-wolf');
+      const d = new Director(() => [cand('wolf:1', 60, ada.id, 'A wolf is stalking near Ada.', 'wolf')]);
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot?.liveKey).toBe('wolf:1');
+      sleep(ada);
+      d.step(w, MIN_HOLD * 2);
+      expect(d.shot?.liveKey).toBe('wolf:1');
+      expect(d.shot?.spent).toBe(false);
+      expect(d.captionFresh()).toBe(true);
+    });
+
+    it('an event shot is not spent before it has been up the hold, so a waiting event still waits for it', () => {
+      const { w, ada, ben } = village('night-spent-hold');
+      const d = quiet();
+      d.step(w, 0);
+      const first = say(w, 'life', TEXT.traveller, [ada.id], 40, 30);
+      d.step(w, 0.016);
+      sleep(ada);
+      const second = say(w, 'life', TEXT.expecting, [ben.id], 41, 30);
+      d.step(w, MIN_HOLD - 1);
+      expect(d.shot?.ev, 'an event shot is spent only after MIN_HOLD').toBe(first);
+      d.step(w, 1);
+      expect(d.shot?.ev).toBe(second);
+    });
+  });
+
+  describe('an event or filler shot whose person has been abed for MIN_CUT is re-pointed, before the hold', () => {
+    /** half-second steps until `secs` of UI time have gone */
+    const run = (d: Director, w: World, secs: number): void => {
+      for (let t = 0; t < secs - 1e-9; t += 0.5) d.step(w, 0.5);
+    };
+
+    it('to the next of its people who is up, keeping its caption and its age, bumping rev; counted', () => {
+      const { w, ada, ben } = village('night-repoint');
+      const d = quiet();
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.subjectId).toBe(ada.id);
+      const rev = d.shot!.rev;
+      sleep(ada);
+      run(d, w, MIN_CUT - 1);
+      expect(d.shot?.subjectId, 'abed for under MIN_CUT: not yet').toBe(ada.id);
+      expect(d.shot!.rev).toBe(rev);
+      run(d, w, 2);
+      expect(d.shot?.ev, 'the same shot').toBe(arrival);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      expect(d.shot!.rev, 'the camera is told').toBeGreaterThan(rev);
+      expect(d.shot?.text).toBe(TEXT.traveller);
+      expect(d.captionFresh(), 'the caption stays').toBe(true);
+      expect(d.shot!.age, 'its age goes on').toBeGreaterThan(MIN_CUT);
+      expect(d.shot!.age).toBeLessThan(MIN_HOLD);
+      expect(d.counts).toMatchObject({ shown: 1, repointed: 1 });
+      expect(d.shot?.spent).toBe(false);
+    });
+
+    it("to the place when nobody else is up: at the event's own x, y, else the quiet place; it is then an ordinary shot of the place", () => {
+      const { w, ada, ben } = village('night-repoint-place');
+      const d = quiet();
+      d.step(w, 0);
+      const arrival = say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      sleep(ada);
+      sleep(ben);
+      run(d, w, MIN_CUT + 1.5);
+      expect(d.shot?.ev).toBe(arrival);
+      expect(d.shot?.subjectId).toBe(0);
+      expect([d.shot?.x, d.shot?.y]).toEqual([40, 30]);
+      expect(d.shot?.text).toBe(TEXT.traveller);
+      expect(d.counts.repointed).toBe(1);
+      // a shot of the place has no subject, so it is not spent, and it goes on under the existing rules: here, nothing replaces it
+      run(d, w, MIN_HOLD + 30);
+      expect(d.shot?.ev).toBe(arrival);
+      expect(d.shot?.spent).toBe(false);
+      expect(d.counts).toMatchObject({ shown: 1, repointed: 1 });
+      // an event with no place of its own: the quiet place
+      const f = village('night-repoint-place-2');
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      say(f.w, 'life', TEXT.traveller, [f.ada.id]);
+      d2.step(f.w, 0.016);
+      sleep(f.ada);
+      run(d2, f.w, MIN_CUT + 1.5);
+      expect(d2.shot?.subjectId).toBe(0);
+      expect([d2.shot?.x, d2.shot?.y]).toEqual([quietPlace(f.w)!.x, quietPlace(f.w)!.y]);
+    });
+
+    it("a FILLER shot is re-pointed too, and stays a filler; a TOP event's shot as well; MIN_CUT is of unbroken sleep", () => {
+      const { w, ada, ben } = village('night-repoint-filler');
+      const d = quiet();
+      d.step(w, 0);
+      say(w, 'social', TEXT.gave, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      expect(d.shot?.filler).toBe(true);
+      expect(d.shot?.subjectId).toBe(ada.id);
+      sleep(ada);
+      run(d, w, MIN_CUT + 1.5);
+      expect(d.shot?.filler).toBe(true);
+      expect(d.shot?.subjectId).toBe(ben.id);
+      expect(d.counts.repointed).toBe(1);
+      // a TOP event (a bite, about Ada and Cal): Ada is up when it is shown, then goes to bed
+      const f = village('night-repoint-top');
+      const d2 = quiet();
+      d2.step(f.w, 0);
+      const bite = say(f.w, 'danger', TEXT.bite, [f.ada.id, f.cal.id], 40, 30);
+      d2.step(f.w, 0.016);
+      expect(d2.shot?.ev).toBe(bite);
+      sleep(f.ada);
+      run(d2, f.w, MIN_CUT + 1.5);
+      expect(d2.shot?.subjectId).toBe(f.cal.id);
+      // a person who wakes before MIN_CUT and goes back to bed starts the count again
+      const g = village('night-repoint-wake');
+      const d3 = quiet();
+      d3.step(g.w, 0);
+      say(g.w, 'life', TEXT.traveller, [g.ada.id, g.ben.id], 40, 30);
+      d3.step(g.w, 0.016);
+      sleep(g.ada);
+      run(d3, g.w, MIN_CUT - 0.5);
+      wake(g.ada);
+      run(d3, g.w, 0.5);
+      sleep(g.ada);
+      run(d3, g.w, MIN_CUT - 0.5);
+      expect(d3.shot?.subjectId, 'two stretches of 2.5 s are not 3 s of sleep').toBe(g.ada.id);
+      expect(d3.counts.repointed).toBe(0);
+      run(d3, g.w, 1);
+      expect(d3.shot?.subjectId).toBe(g.ben.id);
+    });
+
+    it('after the hold it is spent instead, as before: a shot whose person went to bed late is replaced then', () => {
+      const { w, ada, ben } = village('night-repoint-late');
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      say(w, 'life', TEXT.traveller, [ada.id, ben.id], 40, 30);
+      d.step(w, 0.016);
+      run(d, w, MIN_HOLD - 2);
+      sleep(ada);
+      now = [cand('amb:2', 12, ben.id, 'Fetching water.', 'ambient')];
+      run(d, w, 1);
+      expect(d.shot?.subjectId, 'abed for 1 s: not yet').toBe(ada.id);
+      run(d, w, 1.5);
+      expect(d.counts.repointed, 'the hold came first').toBe(0);
+      expect(d.shot?.liveKey).toBe('amb:2');
+    });
+  });
+
+  describe('ambient: something to cut to that is not a sleeper', () => {
+    it('one candidate for each person who is up and outdoors: 5, 6 more at the work itself, 2 for each other up and outdoors within 4 tiles (8 at most); the lowest band', () => {
+      const { w, ada, ben, cal } = village('night-amb');
+      const ids = [ada.id, ben.id, cal.id].sort((a, b) => a - b);
+      expect(ambient(w).map((c) => c.key)).toEqual(ids.map((id) => `amb:${id}`));
+      expect(ambient(w).map((c) => c.score), 'three together, none at work: 5 + 2 + 2').toEqual([9, 9, 9]);
+      expect(ambient(w).every((c) => c.kind === 'ambient' && c.subjectId > 0)).toBe(true);
+      atWork(w, ada);
+      expect(ada.activity?.phase).toBe('work');
+      expect(ambient(w).find((c) => c.subjectId === ada.id)!.score, '5 + 6 + 4').toBe(15);
+      expect(ambient(w)[0].subjectId, 'the one at work is the best').toBe(ada.id);
+      // not at the work itself: the phase is the test
+      ada.activity!.phase = 'travel';
+      expect(ambient(w).find((c) => c.subjectId === ada.id)!.score).toBe(9);
+      // inside a hut is not seen, and is no company
+      ada.activity = null;
+      ben.indoors = 7;
+      expect(ambient(w).map((c) => [c.subjectId, c.score])).toEqual([ada, cal].sort((a, b) => a.id - b.id).map((p) => [p.id, 7]));
+      // abed is not offered, and is no company
+      ben.indoors = undefined;
+      sleep(cal);
+      expect(ambient(w).map((c) => [c.subjectId, c.score])).toEqual([ada, ben].sort((a, b) => a.id - b.id).map((p) => [p.id, 7]));
+      toBed(w, ada);
+      expect(ambient(w).map((c) => c.subjectId)).toEqual([ben.id]);
+      expect(ambient(w)[0].score, 'alone').toBe(5);
+      // the dead are nobody
+      ben.alive = false;
+      expect(ambient(w)).toEqual([]);
+    });
+
+    it('company is capped at 8, a person far from the rest is alone, and no ambient score reaches the lowest of any other live score (plain chat, 20)', () => {
+      const s = stage('director-night-amb-crowd');
+      s.w.settings.dynamics = 'rich';
+      const crowd = [0, 1, 2, 3, 4, 5].map((i) => addPerson(s, `P${i}`, 40 + (i % 3), 30 + Math.floor(i / 3), { age: 20 + i }));
+      const far = addPerson(s, 'Far', 70, 70, { age: 30 });
+      done(s);
+      const w = s.w;
+      const byId = new Map(ambient(w).map((c) => [c.subjectId, c.score]));
+      for (const p of crowd) expect(byId.get(p.id), `5 + 8 (the cap) for ${p.name}`).toBe(13);
+      expect(byId.get(far.id)).toBe(5);
+      atWork(w, crowd[0]);
+      expect(ambient(w).find((c) => c.subjectId === crowd[0].id)!.score, 'the most there is: 5 + 6 + 8').toBe(19);
+      expect(Math.max(...ambient(w).map((c) => c.score))).toBeLessThan(20);
+      expect(AMBIENT_NEAR).toBe(4);
+      // below a plain chat, and the plain chat is first
+      w.conversations = [{ id: 9001, a: far.id, b: crowd[1].id, purpose: 'chat', start: w.tick, phase: 0, nextAt: w.tick, end: 0, requestId: 0, data: {} } as unknown as Conversation];
+      const all = scanLive(w);
+      expect(all[0].kind).toBe('talk');
+      expect(all[0].score).toBe(20);
+      expect(all.slice(1).every((c) => c.kind === 'ambient' && c.score < 20)).toBe(true);
+      // the order does not depend on how the people are listed: equal scores go to the lower id
+      const order = all.map((c) => c.key);
+      w.persons.reverse();
+      expect(scanLive(w).map((c) => c.key)).toEqual(order);
+      w.persons.reverse();
+      const eq = all.filter((c) => c.kind === 'ambient' && c.score === 13).map((c) => c.subjectId);
+      expect(eq.length).toBeGreaterThan(1);
+      expect(eq).toEqual([...eq].sort((a, b) => a - b));
+    });
+
+    it("none for somebody resting at their own household's home (turning in); one for somebody resting at the shared fire or at another household's home", () => {
+      const st = stage('director-night-amb-home');
+      st.w.settings.dynamics = 'rich';
+      const ada = addPerson(st, 'Ada', 40, 30, { age: 24, sex: 'f' });
+      const ben = addPerson(st, 'Ben', 41, 30, { age: 26, sex: 'm' });
+      const cal = addPerson(st, 'Cal', 42, 31, { age: 30, sex: 'm' });
+      const dee = addPerson(st, 'Dee', 43, 31, { age: 28, sex: 'f' });
+      ada.hhId = 7;
+      ben.hhId = 8;
+      cal.hhId = 9;
+      dee.hhId = 10;
+      const mine = building(st, 'lean_to', 38, 30, 7);
+      const theirs = building(st, 'lean_to', 38, 33, 11);
+      const fire = building(st, 'fire', 44, 34);
+      done(st);
+      const w = st.w;
+      const rest = (p: Person, at: number, label: string): void => {
+        p.activity = newActivity(w, p, { kind: 'rest', label, goal: 'waiting for the light', targetId: at, here: true, amount: 900, data: {} });
+      };
+      rest(ada, mine.id, 'Staying at my lean-to');
+      rest(ben, theirs.id, 'Staying at the lean-to of another household');
+      rest(cal, fire.id, 'Staying at the fire');
+      const who = () => ambient(w).map((c) => c.subjectId).sort((a, b) => a - b);
+      expect(who(), 'Ada turning in at her own lean-to is no shot').toEqual([ben.id, cal.id, dee.id].sort((a, b) => a - b));
+      // not resting, or resting elsewhere than at a home of her household: she is one
+      ada.activity = null;
+      expect(who()).toContain(ada.id);
+      rest(ada, fire.id, 'Staying at the fire');
+      expect(who()).toContain(ada.id);
+      // a different activity at her own home is not turning in
+      ada.activity = newActivity(w, ada, { kind: 'visit', label: 'Visiting', goal: 'x', targetId: mine.id, here: true, data: {} });
+      expect(who()).toContain(ada.id);
+    });
+
+    it("its caption is the inspector's own sentence for what they are doing", () => {
+      const { w, ada } = village('night-amb-caption');
+      const c = ambient(w).find((x) => x.subjectId === ada.id)!;
+      expect(c.caption()).toBe(describePerson(w, ada.id)!.qa.doing);
+      expect(c.caption().length).toBeGreaterThan(0);
+    });
+
+    it('with no shot at all it does not start by itself (a new world waits for something to happen), Next may ask for it; it is never used in place of a shot that is still about something', () => {
+      const { w, ada, ben } = village('night-amb-use');
+      const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      for (let i = 0; i < 12; i++) d.step(w, 10);
+      expect(d.shot, 'no shot at all: the director waits, it does not pick somebody by itself').toBeNull();
+      expect(d.counts.shown).toBe(0);
+      d.skip();
+      expect(d.shot?.liveKey, 'the viewer asked for the next one: the ambient one').toBe('amb:1');
+      expect(d.shot?.subjectId).toBe(ada.id);
+      expect(d.counts.live).toBe(1);
+      // an event shot still up (nobody is abed) is not replaced by one, not even after the linger
+      const e = village('night-amb-use-2');
+      const d2 = new Director(() => [cand('amb:2', 9, e.ben.id, 'Fetching water.', 'ambient')]);
+      d2.step(e.w, 0);
+      const arrival = say(e.w, 'life', TEXT.traveller, [e.ada.id], 40, 30);
+      d2.step(e.w, 0.016);
+      for (let i = 0; i < 12; i++) d2.step(e.w, 10);
+      expect(d2.shot?.ev).toBe(arrival);
+      // nor a live shot whose thing goes on
+      const f = village('night-amb-use-3');
+      const d3 = new Director(() => [cand('talk:1', 22, f.ada.id, 'Talking.'), cand('amb:2', 9, f.ben.id, 'Fetching water.', 'ambient')]);
+      d3.step(f.w, 0);
+      d3.step(f.w, LIVE_SCAN_SECONDS);
+      expect(d3.shot?.liveKey).toBe('talk:1');
+      for (let i = 0; i < 12; i++) d3.step(f.w, 10);
+      expect(d3.shot?.liveKey).toBe('talk:1');
+      expect(ben.alive).toBe(true);
+    });
+
+    it('a live shot whose thing has ended gives way to it at the hold; it is replaced by anything heavier, and not by another ambient one', () => {
+      const { w, ada, ben, cal } = village('night-amb-ended');
+      let now: LiveCandidate[] = [cand('talk:1', 40, ada.id, 'Talking.')];
+      const d = new Director(() => now);
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      now = [cand('amb:2', 9, ben.id, 'Fetching water.', 'ambient')];
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot?.ended).toBe(true);
+      d.step(w, MIN_HOLD);
+      expect(d.shot?.liveKey, 'the hold is up and the talk is over').toBe('amb:2');
+      // a better ambient one does not move it
+      now = [cand('amb:2', 9, ben.id, 'Fetching water.', 'ambient'), cand('amb:3', 15, cal.id, 'Building.', 'ambient')];
+      for (let i = 0; i < 12; i++) d.step(w, 10);
+      expect(d.shot?.liveKey).toBe('amb:2');
+      // anything ordinary does, at the hold, over the linger: it is the lowest band
+      now = [cand('talk:5', 20, cal.id, 'Chatting.'), cand('amb:2', 9, ben.id, 'Fetching water.', 'ambient')];
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot?.liveKey).toBe('talk:5');
+      // and so is the filler candidate, once the hold is up
+      const f = village('night-amb-heavier');
+      const d2 = new Director(() => [cand('amb:2', 9, f.ben.id, 'Fetching water.', 'ambient')]);
+      d2.step(f.w, 0);
+      d2.step(f.w, LIVE_SCAN_SECONDS);
+      d2.skip();
+      expect(d2.shot?.liveKey).toBe('amb:2');
+      const hut = say(f.w, 'build', TEXT.hut, [f.cal.id], 42, 31);
+      d2.step(f.w, MIN_HOLD);
+      expect(d2.shot?.ev).toBe(hut);
+      expect(d2.shot?.filler).toBe(true);
+    });
+
+    it('the ordinary cooldown applies: not picked again within LIVE_COOLDOWN of the last time', () => {
+      const { w, ada } = village('night-amb-cool');
+      const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      d.skip();
+      expect(d.shot?.liveKey).toBe('amb:1');
+      d.skip();
+      expect(d.shot).toBeNull();
+      for (let t = 0; t < LIVE_COOLDOWN - 10; t += LIVE_SCAN_SECONDS) d.step(w, LIVE_SCAN_SECONDS);
+      d.skip();
+      expect(d.shot, 'still inside the minute').toBeNull();
+      d.step(w, 10);
+      d.skip();
+      expect(d.shot?.liveKey).toBe('amb:1');
+    });
+
+    it('Next goes to one when nothing else is waiting', () => {
+      const { w, ada } = village('night-amb-next');
+      const d = new Director(() => [cand('amb:1', 9, ada.id, 'Fetching water.', 'ambient')]);
+      d.step(w, 0);
+      d.step(w, LIVE_SCAN_SECONDS);
+      expect(d.shot).toBeNull();
+      expect(d.hasNext(), 'no shot, and somebody is up: Next has one to go to').toBe(true);
+      d.skip();
+      expect(d.shot?.liveKey).toBe('amb:1');
+      expect(d.hasNext(), 'the shot is the only one').toBe(false);
+      const e = village('night-amb-next-2');
+      const d2 = new Director(() => [cand('amb:1', 9, e.ada.id, 'Fetching water.', 'ambient'), cand('amb:2', 7, e.ben.id, 'Walking.', 'ambient')]);
+      d2.step(e.w, 0);
+      d2.step(e.w, LIVE_SCAN_SECONDS);
+      d2.skip();
+      expect(d2.shot?.liveKey).toBe('amb:1');
+      expect(d2.hasNext()).toBe(true);
+      d2.skip();
+      expect(d2.shot?.liveKey).toBe('amb:2');
+    });
+  });
+
+  describe('when nobody is up: the quiet place', () => {
+    /** the staged village's fire has no fuel yet: light it */
+    const lit = (w: World) => {
+      const fire = w.buildings.find((b) => b.type === 'fire')!;
+      fire.fuel = FIRE_FUEL;
+      return fire;
+    };
+    /** a shot on Ada (an event), then everybody to bed */
+    function allAbed(tag: string) {
+      const f = village(tag);
+      const fire = lit(f.w);
+      let now: LiveCandidate[] = [];
+      const d = new Director(() => now);
+      d.step(f.w, 0);
+      const arrival = say(f.w, 'life', TEXT.traveller, [f.ada.id], 40, 30);
+      d.step(f.w, 0.016);
+      for (const p of [f.ada, f.ben, f.cal]) sleep(p);
+      return { ...f, fire, d, arrival, set: (c: LiveCandidate[]) => (now = c) };
+    }
+
+    it('with no candidate at all and a spent shot, the shot is of the place: the lit fire nearest the people, kind live, key quiet, score 1, "Everyone is asleep."', () => {
+      const { w, d, fire, arrival } = allAbed('night-quiet');
+      d.step(w, MIN_HOLD - 1);
+      expect(d.shot?.ev, 'not yet: the hold').toBe(arrival);
+      d.step(w, 1);
+      const s = d.shot!;
+      expect(s.kind).toBe('live');
+      expect(s.liveKey).toBe('quiet');
+      expect(s.subjectId).toBe(0);
+      expect(s.weight).toBe(1);
+      expect(s.text).toBe(QUIET_SENTENCE);
+      expect(QUIET_SENTENCE).toBe('Everyone is asleep.');
+      expect([s.x, s.y]).toEqual([fire.x + fire.w / 2, fire.y + fire.h / 2]);
+      expect(s.ev).toBeNull();
+      expect(s.spent).toBe(false);
+      expect(d.captionFresh()).toBe(true);
+      expect(d.counts).toMatchObject({ shown: 2, live: 1 });
+    });
+
+    it('it does not flicker: once up it stays until something replaces it, however long', () => {
+      const { w, d } = allAbed('night-quiet-stay');
+      d.step(w, MIN_HOLD);
+      expect(d.shot?.liveKey).toBe('quiet');
+      const rev = d.shot!.rev;
+      for (let i = 0; i < 40; i++) d.step(w, 10);
+      expect(d.shot?.liveKey).toBe('quiet');
+      expect(d.shot!.rev, 'the camera is not moved again').toBe(rev);
+      expect(d.counts.shown).toBe(2);
+      expect(d.hasNext()).toBe(false);
+    });
+
+    it('anything replaces it at once: a waiting event, a live candidate, an ambient one, the filler', () => {
+      const e = allAbed('night-quiet-event');
+      e.d.step(e.w, MIN_HOLD);
+      expect(e.d.shot?.liveKey).toBe('quiet');
+      const death = say(e.w, 'life', TEXT.wolfDeath, [987654], 12, 34);
+      e.d.step(e.w, 0);
+      expect(e.d.shot?.ev, 'a TOP event, at once').toBe(death);
+      const m = allAbed('night-quiet-middle');
+      m.d.step(m.w, MIN_HOLD);
+      const arrival = say(m.w, 'life', TEXT.traveller, [987654], 12, 34);
+      m.d.step(m.w, 0);
+      expect(m.d.shot?.ev, 'a MIDDLE event, at once').toBe(arrival);
+      const l = allAbed('night-quiet-live');
+      l.d.step(l.w, MIN_HOLD);
+      expect(l.d.shot?.liveKey).toBe('quiet');
+      wake(l.ben);
+      l.set([cand('talk:1', 20, l.ben.id, 'Chatting.')]);
+      l.d.step(l.w, LIVE_SCAN_SECONDS + 0.5);
+      expect(l.d.shot?.liveKey, 'a plain chat, long before the hold').toBe('talk:1');
+      const a = allAbed('night-quiet-amb');
+      a.d.step(a.w, MIN_HOLD);
+      wake(a.cal);
+      a.set([cand('amb:3', 7, a.cal.id, 'Walking.', 'ambient')]);
+      a.d.step(a.w, LIVE_SCAN_SECONDS + 0.5);
+      expect(a.d.shot?.liveKey).toBe('amb:3');
+      const f = allAbed('night-quiet-filler');
+      f.d.step(f.w, MIN_HOLD);
+      wake(f.ada);
+      say(f.w, 'social', TEXT.gave, [f.ada.id, f.ben.id], 40, 30);
+      f.d.step(f.w, 0.016);
+      expect(f.d.shot?.filler).toBe(true);
+    });
+
+    it('the caption is there only while nobody at all is up; somebody up (indoors, say, so no ambient shot) leaves the place without words', () => {
+      const f = village('night-quiet-words');
+      lit(f.w);
+      f.ben.indoors = 5;
+      const d = new Director(() => []);
+      d.step(f.w, 0);
+      say(f.w, 'life', TEXT.traveller, [f.cal.id], 42, 31);
+      d.step(f.w, 0.016);
+      sleep(f.cal);
+      sleep(f.ada);
+      d.step(f.w, MIN_HOLD);
+      expect(d.shot?.liveKey).toBe('quiet');
+      expect(d.shot?.text, 'Ben is up, inside a hut').toBe('');
+      expect(d.captionFresh()).toBe(false);
+      sleep(f.ben);
+      d.step(f.w, LIVE_SCAN_SECONDS + 0.5);
+      expect(d.shot?.liveKey).toBe('quiet');
+      expect(d.shot?.text).toBe(QUIET_SENTENCE);
+      expect(d.captionFresh()).toBe(true);
+    });
+
+    it('the place: the lit fire nearest the centre of the living, an unlit one is no fire, and with none the centre itself', () => {
+      const s = stage('director-night-quiet-place');
+      s.w.settings.dynamics = 'rich';
+      addPerson(s, 'Ada', 40, 30, { age: 24, sex: 'f' });
+      addPerson(s, 'Ben', 42, 30, { age: 26, sex: 'm' });
+      const out = building(s, 'fire', 41, 31);
+      const near = building(s, 'fire', 44, 34);
+      const far = building(s, 'fire', 10, 10);
+      done(s);
+      const w = s.w;
+      for (const b of [out, near, far]) b.fuel = 0;
+      const centre = quietPlace(w)!;
+      const live = w.persons.filter((p) => p.alive);
+      expect(centre.x).toBeCloseTo(live.reduce((a, p) => a + p.x, 0) / live.length, 9);
+      expect(centre.y).toBeCloseTo(live.reduce((a, p) => a + p.y, 0) / live.length, 9);
+      far.fuel = 5;
+      expect(quietPlace(w)).toEqual({ x: far.x + far.w / 2, y: far.y + far.h / 2 });
+      near.fuel = 5;
+      expect(quietPlace(w), 'the nearer lit one').toEqual({ x: near.x + near.w / 2, y: near.y + near.h / 2 });
+      out.fuel = 5;
+      expect(quietPlace(w)).toEqual({ x: out.x + out.w / 2, y: out.y + out.h / 2 });
+      for (const p of w.persons) p.alive = false;
+      expect(quietPlace(w), 'nobody lives').toBeNull();
+    });
+
+    it('a shot is not made of the place when the shot is not spent, or when there is no shot at all', () => {
+      const { w, ada } = village('night-quiet-not');
+      const d = new Director(() => []);
+      d.step(w, 0);
+      for (let i = 0; i < 10; i++) d.step(w, 10);
+      expect(d.shot, 'no shot and nothing to show: none').toBeNull();
+      say(w, 'life', TEXT.traveller, [ada.id], 40, 30);
+      d.step(w, 0.016);
+      for (let i = 0; i < 10; i++) d.step(w, 10);
+      expect(d.shot?.kind, 'a shot nobody has gone to bed from stays').toBe('event');
+    });
   });
 });
 
