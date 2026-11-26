@@ -597,7 +597,7 @@ worrier's record as bookkeeping (she called them by name).
 
 **Switch and arm.** `setTogetherScenes(on, 'fetch')`; arms `rich-no-together-scenes` and `rich-no-together-fetch`.
 
-**Rules 278: the worrier sets out once somebody has promised.** A repair of this part, on the owner's "Yes, fix it" of 27 November 2026, after the count in "Measured (rules 260 to 264 together ...)" below: 73 asks, 42 promised, 5 searches set out, 52 companions waiting for a search that never set out. The companion's walk was offered at `FETCH_JOIN_SCORE` (72) less the walk, and the worrier's own search was still the ordinary "look in on" visit, which `joinParty` relabelled and did not rescore (26 to 29 in two traced cases, under sleep at 35 to 51), so the worrier went to bed. From 278, in a rich world with the fetch part on, once somebody has promised to come and is beside the worrier (`companionsFor`, the promise made to the worrier for this one missing person), the worrier's walk to look is offered at the companion's level: `FETCH_JOIN_SCORE` less the walk to the place they last saw them, with the reason "N has promised to come and look for M with me" (`setsOutScore`, called from `joinParty`; it never lowers the ordinary worth, and the activity made carries the raised worth). A critical need or a danger believed about still stops it as it stops the companion: the cue is not made and the visit is not offered. With no promise, before 278, or with the switch off nothing is changed; nothing is saved that was not saved before, no draw is made, and no new feed line is written. It changes the one number only: the ask, the answer, the walk, the finding, the limits and the three feed lines are as they were, so whatever now fails further on (the one found asleep or not at the place, home already, the party losing each other) is counted and not fixed here. Switch `setFetchSetsOut`; arm `rich-no-fetch-sets-out` (puts the worrier's walk back to the ordinary worth with the promise still made; no effect below 278). Tests: `tests/fetch_sets_out.test.ts`.
+**Rules 278: the worrier sets out once somebody has promised.** A repair of this part, on the owner's "Yes, fix it" of 27 November 2026, after the count in "Measured (rules 260 to 264 together ...)" below: 158 asks, 90 promised, 7 searches seen to begin, 43 companions whose walk ended because the search never set out (nine worlds). The companion's walk was offered at `FETCH_JOIN_SCORE` (72) less the walk, and the worrier's own search was still the ordinary "look in on" visit, which `joinParty` relabelled and did not rescore (26 to 29 in two traced cases, under sleep at 35 to 51), so the worrier went to bed. From 278, in a rich world with the fetch part on, once somebody has promised to come and is beside the worrier (`companionsFor`, the promise made to the worrier for this one missing person), the worrier's walk to look is offered at the companion's level: `FETCH_JOIN_SCORE` less the walk to the place they last saw them, with the reason "N has promised to come and look for M with me" (`setsOutScore`, called from `joinParty`; it never lowers the ordinary worth, and the activity made carries the raised worth). A critical need or a danger believed about still stops it as it stops the companion: the cue is not made and the visit is not offered. With no promise, before 278, or with the switch off nothing is changed; nothing is saved that was not saved before, no draw is made, and no new feed line is written. It changes the one number only: the ask, the answer, the walk, the finding, the limits and the three feed lines are as they were, so whatever now fails further on (the one found asleep or not at the place, home already, the party losing each other) is counted and not fixed here. Switch `setFetchSetsOut`; arm `rich-no-fetch-sets-out` (puts the worrier's walk back to the ordinary worth with the promise still made; no effect below 278). Tests: `tests/fetch_sets_out.test.ts`.
 
 **Constants** (top of `src/sim/fetch_home.ts`). Dark: light under 0.5. Range: 30 tiles from the home door. Ask: a person in sight within 12 tiles, at most 2 asked in 900 ticks, worth the walk's own worth + 4, a refusal waits 400 ticks, family +6 and
 a friend (affinity 25) +4; willingness 0.5 as for a watch. Promise: 1,300 ticks, lapses unclaimed after 900. Walk: the companion's worth 72, the walk home's 84; together within 3 tiles (follow at 2.6), run if more than 4.5 tiles back, lost beyond 9
@@ -855,48 +855,49 @@ the pins passed. Three files still timed out under load and have NOT been confir
     conceptions did not differ in that time. Also with it off: fire sittings 141 to 184 and stories told 64 to 81 (the evenings not
     spent walking out), plans to stock food 356 to 332, households without a solid home 18.7 to 21.0.
   - Together off: conceptions 7.3 to 9.8, higher in all six, so the bundle as built costs about 2.5 conceptions a settlement in 25
-    days. Births did not differ (6.8 and 7.0). Not explained. The likeliest cause is the failed search below: 52 companions left
-    their beds for a search that never set out. To be read again once that is fixed.
+    days. Births did not differ (6.8 and 7.0). Not explained. The likeliest cause is the failed search below: in the nine counted
+    worlds 43 companions left their beds for a search that never set out. To be read again once that is fixed.
   - Hearth, company and kin off: no life measure moved (people, deaths, births, couples, conceptions, hunger, mood).
   - Each arm also shows a handful of other lines called larger than chance (toy plays, elders at the fire, meals from a store). With
     some two hundred measures, five arms and six settlements, a few such lines are expected and none is claimed here.
 - Stage 2 (each part's own arm) has not been run.
 
 **How often each scene happens.** Nine worlds, the whole of rules 264 on, arrivals on: three fresh Normal worlds for 45 days and six
-saved settlements for 25 days (the three day-96 saves were stopped at day 20). 876 of 16,029 feed lines were scene lines (5.5%), about
-two a day in a fresh world and five in a large settlement.
+saved settlements for 25 days, 285 world-days in all. 966 of 17,586 feed lines were scene lines (5.5%), about
+two a day in a fresh world and five in a large settlement. (Corrected 27 November 2026: the table first written here mixed sums
+over six and nine worlds. Every figure below is now the sum of the nine output files in `C:/dev/lw_labs/scene_uptake`.)
 
 | Scene | Count in the nine worlds |
 |---|---|
-| Welcoming newcomers | 126 of 134 arriving households |
-| Courting | 62 asks, 46 accepted; 88 counted walks; all 19 new couples had walked out first |
-| Dance at a feast | on 87 of 91 occasions |
-| Settling a child | 142 lines from 345 sittings begun |
-| Reunion | 75 lines from 292 cues |
-| Naming | 25 names said at 29 naming feasts |
-| Song at the fire | 25 songs; 353 stories took the fire's turn instead |
-| Vigil | 44 begun, 40 sat down, 23 lines; 29 ended because the sitter lost the sick person |
-| Helper at a birth | beside her at 18 of 49 births; 17 more helpers came after the birth or to an empty door |
-| Thanking builders | 37 of 60 buildings due thanks |
-| Coming of age | 7 feasts for 10 who turned sixteen, 5 hopes said |
-| Standing up for someone | 7 of 80 quarrels |
+| Welcoming newcomers | 134 of 144 arriving groups |
+| Courting | 135 asks, 100 accepted; 93 counted walks; all 21 new couples had walked out first |
+| Dance at a feast | on 133 of 138 occasions |
+| Settling a child | 162 lines from 383 sittings begun |
+| Reunion | 87 lines from 327 cues |
+| Naming | 30 names said at 46 naming feasts |
+| Song at the fire | 28 songs; 442 stories took the fire's turn instead |
+| Vigil | 48 begun, 44 sat down, 27 lines; 32 ended because the sitter lost the sick person |
+| Helper at a birth | a helper there at 22 of 55 births (49 promises); 15 helpers came after the birth and 24 waited at an empty door |
+| Thanking builders | 38 of 60 buildings due thanks |
+| Coming of age | 12 feasts for the 12 who turned sixteen, 7 hopes said |
+| Standing up for someone | 9 of 103 quarrels |
 | Speaking for a shared building | 5 speeches for 37 projects, 32 listeners, 8 said yes |
 | Thanks after a rescue | 1 (one rescue happened) |
 | Sitting with the grieving | 0 (one bereavement in all nine worlds, so the scene is still shown only by its staged tests) |
-| Fetching someone home | 73 asks, 42 promised, 5 searches set out, nobody found, no "brought home" line |
+| Fetching someone home | 158 asks, 90 promised, 7 searches seen to begin (3 "was home already", 2 ended at once because the one looked for was indoors, 1 had no way there, 1 came back without them); 63 companion walks, of which 43 ended "the search never set out"; no "brought home" line |
 
 **Fetching someone home does not complete.** The companion who promised is offered the walk at 72 (`FETCH_JOIN_SCORE`). The asker's own
 search stays the ordinary walk to look for somebody, which `joinParty` relabels but does not rescore: 26 to 29 in the two traced cases,
 under sleep at 35 to 51 in the same review. The asker goes to bed and the companion's walk ends "the search never set out". A fix
 changes behaviour and needs the next free rules number.
 
-**Other findings.** The birth helper is beside the mother at 18 of 49 births, against 1 of 13 when rules 261 was first counted; late
+**Other findings.** A helper is there at 22 of 55 births, against 1 of 13 when rules 261 was first counted; late
 helpers remain the common failure. Two of three vigils end with the sick person lost; `followIn` resets the path counter as it
 should, so the cause is not that and is not yet found.
 
 ## Measured (rules 278, the same six worlds, 27 November 2026)
 
-The count of the section above, made again after the repair, from commit `bd783946`: fresh Normal gen-2, gen-4 and gen-6, arrivals on, 45 days at rules 278, and the saved settlements aspen-day48, gen-4-day48 and river-day48 (rules 256) raised to 278, 25 days. The same read-only watcher (`C:/dev/lw_labs/scene_uptake`), run twice with the same counts both times, with one line pattern added to it for the ending described below; outputs `C:/dev/lw_labs/fetch278`. "Before" is the same six worlds at rules 264. **This describes each world before and after; it is not an effect size.** Each world diverges after its first changed choice, rules 265 to 277 (the farm animals among them) stand between the two runs, and no control at 278 with the arm `rich-no-fetch-sets-out` was run. (The three day-96 saves of the earlier count were not rerun. The earlier section's 73 asks and 42 promised are the totals of these six worlds; with the three day-96 worlds the rules-264 totals read off the watcher's files are 158 asks, 90 promised and 7 searches begun, and the earlier section's "5 searches set out" matches neither total, 1 in these six or 7 in all nine. The table below uses the watcher's own counts for the six.)
+The count of the section above, made again after the repair, from commit `bd783946`: fresh Normal gen-2, gen-4 and gen-6, arrivals on, 45 days at rules 278, and the saved settlements aspen-day48, gen-4-day48 and river-day48 (rules 256) raised to 278, 25 days. The same read-only watcher (`C:/dev/lw_labs/scene_uptake`), run twice with the same counts both times, with one line pattern added to it for the ending described below; outputs `C:/dev/lw_labs/fetch278`. "Before" is the same six worlds at rules 264. **This describes each world before and after; it is not an effect size.** Each world diverges after its first changed choice, rules 265 to 277 (the farm animals among them) stand between the two runs, and no control at 278 with the arm `rich-no-fetch-sets-out` was run. (The three day-96 saves of the earlier count were not rerun. The earlier section first gave 73 asks, 42 promised and 5 searches for nine worlds: 73 and 42 were the totals of these six, and that section is now corrected to the nine-world totals read off the watcher's files, 158 asks, 90 promised and 7 searches seen to begin. The table below is the six.)
 
 | Six worlds, 25 or 45 days | Rules 264 | Rules 278 |
 |---|---|---|
