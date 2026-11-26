@@ -74,7 +74,7 @@ drawn alike, and the list at the end says which.
 | store | Feeding a fire | `fuel_fire` | `feedfire`: on one knee, an arm up against the heat, the other throwing |
 | drink | Filling a water jar | `fetch_water` | `filljar`: on both knees, both hands lowering the jar and lifting it |
 | build | Mending a building | `repair` | `mend`: reaching up, nailing above the head |
-| build | Laying out a site | `plan_site` | `survey`: pacing it out, an arm sighting along the line |
+| build | Laying out a site | `plan_site` | `survey`: an arm sighting along the line, then down to mark a corner |
 | talk | Warning of danger | conversation `warn` | `talk_warn` (an arm flung out), the hearer `alarmed` |
 | talk | Teaching | `learn_foraging`, `learn_skill`, `teach_technique`, `learn_technique` | `teach` (down to the learner, a finger on the thing), `learn` |
 | talk | Asking to walk out | conversation `court` | `ask_court` (a small bow, a hand offered), the other `demure` |
@@ -85,7 +85,7 @@ drawn alike, and the list at the end says which.
 | stand | A song | speech, and the thought `sang` dated the tick it began | `fire_sing`: head back, arms wide |
 | stand | Speaking for a building | speech, and the civic project's `spoke` tick with the speaker a candidate | `fire_address`, `stand_address`: an arm raised |
 | stand | Thanks in company | the words of the speech (`praise.ts`) | `fire_thanks`, `stand_thanks`: a hand on the heart, bowing |
-| talk | Chase, hide and seek, house | conversation `play_together`, `data.game` | `game_chaser`/`game_runner`, `game_count`/`game_hide`, `game_house` |
+| talk | Chase, hide and seek, house | conversation `play_together`, `data.game` | `game_chaser` (crouched, lunging to tag) and `game_runner` (twisting away, hopping), `game_count`/`game_hide`, `game_house`. The games are played where the children stand, so nobody is drawn running on the spot |
 | stand | A child playing alone | `wander`, `data.play` | `play_ground` (stones, bugs), `play_sticks`, `play_toy` |
 | none | A fever | `p.illness` | hunched and shivering, arms hugged in, flushed cheeks |
 | none | A sprained ankle | `p.injury.kind === 'sprain'` | a limp |

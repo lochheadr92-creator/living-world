@@ -759,19 +759,17 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
       break;
     }
     case 'survey': {
-      // laying out a site: pacing it out with long slow steps, an arm out sighting along the line, a hand at the chin
+      // laying out a site: standing on the line, an arm out sighting along it, a hand at the chin; then down to mark a corner
       fresh();
-      const f = pr(40) * TAU * 2;
-      const sn = Math.sin(f);
-      const co = Math.cos(f);
-      r[R.FLU] = 0.13 * sn;
-      r[R.FRU] = -0.13 * sn;
-      r[R.FLL] = Math.max(0, co) * 2;
-      r[R.FRL] = Math.max(0, -co) * 2;
-      r[R.BOB] = Math.abs(sn) * 0.6;
-      r[R.LEAN] = 0.03;
-      r[R.ELB] = 0.05;
-      H(0.1, 0.03, 21.8, 0.36, -0.06 + 0.1 * Math.sin(t * 0.9 + id), 19.6);
+      const k = pr(60);
+      const down = ease(clamp((k - 0.6) / 0.1, 0, 1)) - ease(clamp((k - 0.9) / 0.1, 0, 1));
+      const up = 1 - down;
+      r[R.CROUCH] = 5 * down;
+      r[R.LEAN] = 0.03 + 0.14 * down;
+      r[R.KNZ] = 2.5 * down;
+      r[R.ELB] = 0.05 * up;
+      r[R.HEAD_U] = 0.05 * down;
+      H(0.1 * up + 0.2 * down, 0.03 + 0.05 * down, Z(21.8 * up + 7 * down), 0.36 * up + 0.3 * down, (-0.06 + 0.1 * Math.sin(t * 0.9 + id)) * up - 0.04 * down, Z(19.6 * up + 2 * down));
       break;
     }
 
@@ -872,36 +870,35 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
 
     // ───────────────────────── F: children's games ─────────────────────────
     case 'game_chaser': {
-      // chase: running on the spot, low, the hands grabbing forward
+      // chase, the one who catches: crouched and ready, arms spread, a lunge to tag now and then. The game is played where
+      // they stand (the simulation does not move them), so nobody is drawn running on the spot.
       fresh();
-      const f = t * 9 + id;
-      const s = Math.sin(f);
-      const g = Math.sin(t * 4 + id);
-      r[R.CROUCH] = 2.4;
-      r[R.LEAN] = 0.15;
-      r[R.FLU] = 0.1 * s;
-      r[R.FRU] = -0.1 * s;
-      r[R.FLL] = Math.max(0, Math.cos(f)) * 3;
-      r[R.FRL] = Math.max(0, -Math.cos(f)) * 3;
-      r[R.BOB] = Math.abs(s) * 1.4;
+      const k = frac(t * 0.45 + id * 0.3);
+      const lunge = bump(k, 0.55, 0.85);
+      const sway = Math.sin(t * 2.6 + id);
+      r[R.CROUCH] = 2.6 - lunge * 0.8;
+      r[R.LEAN] = 0.12 + lunge * 0.12;
+      r[R.FLV] = 0.11;
+      r[R.FRV] = -0.11;
+      r[R.FLU] = -0.05;
+      r[R.FRU] = 0.05 + lunge * 0.12;
+      r[R.BOB] += Math.abs(sway) * 0.5;
       r[R.MOUTH] = sp ? 1 : 0;
-      H(0.3, 0.08, Z(15 + 2 * g), 0.3, -0.08, Z(15 - 2 * g));
+      H(0.2 + lunge * 0.14, 0.2 - lunge * 0.1, Z(15 + sway), 0.2 + lunge * 0.18, -0.2 + lunge * 0.12, Z(15 - sway + lunge * 2));
       break;
     }
     case 'game_runner': {
-      // chase: the one being chased, bouncing and dodging from side to side
+      // chase, the one who is caught at: up on the toes, hands up, twisting away from side to side with a small two-footed hop
       fresh();
-      const f = t * 10 + id;
-      const s = Math.sin(f);
-      r[R.SPIN] = Math.sin(t * 3 + id) * 0.6;
-      r[R.LEAN] = 0.03;
-      r[R.FLU] = 0.12 * s;
-      r[R.FRU] = -0.12 * s;
-      r[R.FLL] = Math.max(0, Math.cos(f)) * 3.6;
-      r[R.FRL] = Math.max(0, -Math.cos(f)) * 3.6;
-      r[R.BOB] = Math.abs(s) * 1.8;
+      const hop = Math.max(0, Math.sin(t * 3.4 + id));
+      r[R.SPIN] = Math.sin(t * 1.7 + id) * 0.55;
+      r[R.LEAN] = -0.05;
+      r[R.BOB] += hop * 1.6;
+      r[R.FLL] = hop * 1.4;
+      r[R.FRL] = hop * 1.4;
+      r[R.ELB] = 0.05;
       r[R.MOUTH] = sp ? 1 : 0;
-      H(0.1, 0.14, 16 + 2 * s, 0.1, -0.14, 16 - 2 * s);
+      H(0.1, 0.15, 19 + hop * 2, 0.1, -0.15, 19 + hop * 2);
       break;
     }
     case 'game_count': {
