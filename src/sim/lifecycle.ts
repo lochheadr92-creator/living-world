@@ -25,7 +25,7 @@ import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { hasWelcome } from './meeting';
-import { birthScene } from './birth_help';
+import { birthScene, staleLyingIn } from './birth_help';
 import { nameAfterTheDead } from './naming';
 import { sittersBeside, vigilAtDeath } from './vigil';
 import { captureHouseholdCamp } from './cohortcapture';
@@ -79,6 +79,8 @@ export function lifeTick(world: World, p: Person): void {
   }
   // birth
   if (p.pregnantUntil > 0 && world.tick >= p.pregnantUntil) giveBirth(world, p);
+  // rules 279 (birth_help.ts): clear a left-over lying-in mark; after giveBirth, so birthScene has already read it for a woman who truly lay in
+  if (staleLyingIn(world, p)) delete p.lyingIn;
 }
 
 export function householdFoodPerHead(world: World, p: Person): number {

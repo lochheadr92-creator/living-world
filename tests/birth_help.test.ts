@@ -9,7 +9,7 @@ import { endActivity, newActivity, startActivity, suspendActivity } from '../src
 import { DAY, TICKS_PER_YEAR } from '../src/sim/constants';
 import { LIFE_CHECK_EVERY } from '../src/sim/lifecycle';
 import {
-  ASKS_MAX, ASK_BASE, ASK_EARLY, ASK_BORNE, ASK_KIN, ASK_WOMAN, ATTENDED_MAX, BIRTH_LAG, BORN_ALONE, BORN_MOTHER_AFFINITY, HELP_AFTER, HELP_WAIT_MAX, LYING_SCORE, LYING_WINDOW, validateBirthHelp,
+  ASKS_MAX, ASK_BASE, ASK_EARLY, ASK_BORNE, ASK_KIN, ASK_WOMAN, ATTENDED_MAX, BIRTH_LAG, BORN_ALONE, BORN_MOTHER_AFFINITY, HELP_AFTER, HELP_WAIT_MAX, LYING_IN_REPAIR_FROM, LYING_SCORE, LYING_WINDOW, validateBirthHelp,
 } from '../src/sim/birth_help';
 import { generateOptions } from '../src/sim/decision';
 import { dayFraction } from '../src/sim/environment';
@@ -832,7 +832,7 @@ describe('saved state', () => {
     expect(line(f.w)[0]).toMatch(/with Ada there to help\.$/);
   });
 
-  it('bad saved state is refused: lying in below 261 or without a pregnancy, a count out of range, a request kind below 261', () => {
+  it('bad saved state is refused: lying in in the future, a count out of range, a request kind below 261', () => {
     const f = scene(261, { tag: 'validate' });
     expect(() => validateBirthHelp(f.w)).not.toThrow();
     f.mira.lyingIn = f.w.tick;
@@ -840,8 +840,9 @@ describe('saved state', () => {
     f.mira.lyingIn = f.w.tick + 5;
     expect(() => validateBirthHelp(f.w)).toThrow(/lying in/i);
     f.mira.lyingIn = f.w.tick;
+    // rules 279: a mark with no child expected is no longer refused on loading (a world at 261 to 278 can hold one itself)
     f.mira.pregnantUntil = 0;
-    expect(() => validateBirthHelp(f.w)).toThrow(/lying in/i);
+    expect(() => validateBirthHelp(f.w)).not.toThrow();
     f.mira.pregnantUntil = f.w.tick + 100;
     delete f.mira.lyingIn;
     f.ada.attended = 0;
@@ -852,6 +853,184 @@ describe('saved state', () => {
     expect(() => validateBirthHelp(f.w)).not.toThrow();
     f.w.settings.rulesVersion = 260;
     expect(() => validateBirthHelp(f.w)).toThrow(/attended/i);
+  });
+});
+
+describe('rules 279: a child born on the way to the door leaves no lying-in mark', () => {
+  const LAST_BEFORE = LYING_IN_REPAIR_FROM - 1;
+  /** the tick the walk starts at: the next life check (tick % 60 = 17) is three ticks on, and she is a few tiles from her door */
+  const START = Math.ceil(NOON / LIFE_CHECK_EVERY) * LIFE_CHECK_EVERY + 14;
+  const lifeChecks = (w: World, n: number): void => { for (let i = 0; i < n; i++) { while (w.tick % LIFE_CHECK_EVERY !== 17) stepWorld(w); stepWorld(w); } };
+
+  /** Mira chooses to lie in with two ticks to go and starts for her door; the life check delivers the child while she is still walking */
+  function bornOnTheWay(version: number, tag: string): Fx {
+    const f = scene(version, { tag, tick: START, left: 2 });
+    const o = lieIn(f);
+    expect(o, 'lying in is offered with two ticks to go').toBeTruthy();
+    startActivity(f.w, f.mira, o!.make!()!);
+    for (let i = 0; i < 12 && !f.mira.children.length; i++) stepWorld(f.w);
+    expect(f.mira.children.length, 'the child came').toBe(1);
+    expect(f.mira.pregnantUntil).toBe(0);
+    expect(f.mira.activity?.data.lyingIn, 'her lie_in rest is still under way').toBeDefined();
+    expect(f.mira.activity?.phase, 'and she has not reached her door').toBe('travel');
+    expect(f.mira.lyingIn).toBeUndefined();
+    return f;
+  }
+  const untilRestEnds = (f: Fx): void => { for (let i = 0; i < 400 && f.mira.activity?.data.lyingIn !== undefined; i++) stepWorld(f.w); };
+  const wentToLieIn = (f: Fx): boolean => f.mira.log.some((l) => l.text.startsWith('Went to lie in by my door'));
+
+  it('is its own version, supported and current', () => {
+    expect(LYING_IN_REPAIR_FROM).toBe(279);
+    expect(SUPPORTED_RULES_VERSIONS).toContain(LYING_IN_REPAIR_FROM);
+    expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(LYING_IN_REPAIR_FROM);
+  });
+
+  it('at 279 she arrives after the birth, the rest ends at once, and she carries no mark and writes no line; the world saves and loads', () => {
+    const f = bornOnTheWay(LYING_IN_REPAIR_FROM, 'late-279');
+    untilRestEnds(f);
+    expect(f.mira.activity?.data.lyingIn, 'the rest has ended').toBeUndefined();
+    expect(f.mira.lyingIn).toBeUndefined();
+    expect(wentToLieIn(f)).toBe(false);
+    expect(f.mira.log.some((l) => l.text.includes('lie in'))).toBe(false);
+    const baby = f.w.byId.get(f.mira.children[0]) as Person;
+    expect(eventsWith(f.w, 'was born to').map((e) => e.text), 'the old plain line: she had not lain in').toEqual([`${baby.name} was born to Mira and Finn.`]);
+    run(f.w, 200);
+    expect(f.mira.lyingIn).toBeUndefined();
+    expect(() => validateBirthHelp(f.w)).not.toThrow();
+    const back = deserializeWorld(serializeWorld(f.w));
+    expect(hashWorld(back)).toBe(hashWorld(f.w));
+    run(f.w, 300);
+    run(back, 300);
+    expect(hashWorld(back)).toBe(hashWorld(f.w));
+  });
+
+  it('at 278 the same set-up still sets the mark after the birth (the old behaviour), and that world now saves and loads, and goes on as the original does', () => {
+    const f = bornOnTheWay(LAST_BEFORE, 'late-278');
+    untilRestEnds(f);
+    expect(f.mira.pregnantUntil).toBe(0);
+    expect(f.mira.lyingIn, 'the late mark is set as before').toBeDefined();
+    expect(wentToLieIn(f)).toBe(true);
+    // nothing clears it before her next birth: not the life checks that follow
+    lifeChecks(f.w, 3);
+    expect(f.mira.lyingIn).toBeDefined();
+    const text = serializeWorld(f.w);
+    const back = deserializeWorld(text);
+    expect(back.persons.find((p) => p.id === f.mira.id)!.lyingIn).toBe(f.mira.lyingIn);
+    expect(hashWorld(back)).toBe(hashWorld(f.w));
+    run(f.w, 400);
+    run(back, 400);
+    expect(hashWorld(back)).toBe(hashWorld(f.w));
+    expect(back.persons.find((p) => p.id === f.mira.id)!.lyingIn).toBe(f.mira.lyingIn);
+  });
+
+  it('at 279 a mark left over from an older save (no child expected) is gone at the next life check, and the save with it loads first', () => {
+    const f = scene(LYING_IN_REPAIR_FROM, { tag: 'inherited', left: 5000 });
+    f.mira.pregnantUntil = 0;
+    f.mira.pregnantBy = 0;
+    f.mira.lyingIn = f.w.tick - 300;
+    expect(() => validateBirthHelp(f.w)).not.toThrow();
+    const back = deserializeWorld(serializeWorld(f.w));
+    expect(back.persons.find((p) => p.id === f.mira.id)!.lyingIn).toBe(f.w.tick - 300);
+    lifeChecks(f.w, 1);
+    expect(f.mira.lyingIn).toBeUndefined();
+    lifeChecks(back, 1);
+    expect(back.persons.find((p) => p.id === f.mira.id)!.lyingIn).toBeUndefined();
+  });
+
+  it('at 279 a mark older than a day and a third is gone even with a child expected; one inside that is not', () => {
+    const f = scene(LYING_IN_REPAIR_FROM, { tag: 'old-mark', left: 5000 });
+    f.mira.lyingIn = f.w.tick - LYING_WINDOW - DAY - 1;
+    lifeChecks(f.w, 1);
+    expect(f.mira.lyingIn).toBeUndefined();
+    f.mira.lyingIn = f.w.tick - LYING_WINDOW - DAY + 200;
+    lifeChecks(f.w, 1);
+    expect(f.mira.lyingIn, 'still inside the window it could have begun in').toBeDefined();
+  });
+
+  it('the clear is gated: not at 278, not in an authored world, not with the birth part switched off', () => {
+    const stale = (version: number, tag: string): Fx => {
+      const f = scene(version, { tag, left: 5000 });
+      f.mira.pregnantUntil = 0;
+      f.mira.pregnantBy = 0;
+      f.mira.lyingIn = f.w.tick - 300;
+      return f;
+    };
+    const old = stale(LAST_BEFORE, 'gate-278');
+    lifeChecks(old.w, 2);
+    expect(old.mira.lyingIn, 'rules 278 keeps it').toBeDefined();
+    const off = stale(LYING_IN_REPAIR_FROM, 'gate-off');
+    setHearthScenes(false, 'birth');
+    lifeChecks(off.w, 2);
+    setHearthScenes(true, 'birth');
+    expect(off.mira.lyingIn, 'with the part off nothing of it runs').toBeDefined();
+  });
+
+  it('a real lying in at 279 is not cleared by the life checks before the birth, and her birth scene still counts her as having lain in and helped', () => {
+    const f = scene(LYING_IN_REPAIR_FROM, { tag: 'real-279', left: 500 });
+    startLyingIn(f);
+    expect(ask(f, f.finn!, f.ada)).toBe(true);
+    const mark = f.mira.lyingIn;
+    expect(mark).toBeDefined();
+    lifeChecks(f.w, 2);
+    expect(f.mira.pregnantUntil, 'the child has not come yet').toBeGreaterThan(f.w.tick);
+    expect(f.mira.lyingIn, 'the life checks left her mark alone').toBe(mark);
+    for (let i = 0; i < 2400 && !f.mira.children.length; i++) stepWorld(f.w);
+    const baby = f.w.byId.get(f.mira.children[0]) as Person;
+    expect(baby, 'the child came').toBeTruthy();
+    expect(eventsWith(f.w, 'was born to')[0].text).toBe(`${baby.name} was born to Mira and Finn, with Ada there to help.`);
+    expect(f.ada.attended).toBe(1);
+    expect(f.mira.lyingIn).toBeUndefined();
+    expect(f.mira.mood?.thoughts.some((t) => t.kind.startsWith('born_with:'))).toBe(true);
+  });
+
+  it('a woman who lay in with nobody to help still has the lain-in birth at 279 (the small lasting thought of bearing alone)', () => {
+    const f = scene(LYING_IN_REPAIR_FROM, { tag: 'alone-279', alone: true, left: 500 });
+    startLyingIn(f);
+    expect(f.mira.lyingIn).toBeDefined();
+    for (let i = 0; i < 2400 && !f.mira.children.length; i++) stepWorld(f.w);
+    expect(f.mira.children.length).toBe(1);
+    expect(f.mira.mood?.thoughts.some((t) => t.kind === 'bore_alone')).toBe(true);
+    expect(f.mira.lyingIn).toBeUndefined();
+  });
+
+  it('loading still refuses what the game cannot make: a mark that is not a whole tick, a future one, and any mark where birth help does not apply', () => {
+    const f = scene(LYING_IN_REPAIR_FROM, { tag: 'validate-279' });
+    const bad: [string, () => void][] = [
+      ['a fraction', () => { f.mira.lyingIn = f.w.tick - 1.5; }],
+      ['not a number', () => { f.mira.lyingIn = Number.NaN; }],
+      ['negative', () => { f.mira.lyingIn = -1; }],
+      ['in the future', () => { f.mira.lyingIn = f.w.tick + 1; }],
+    ];
+    for (const [label, set] of bad) {
+      set();
+      expect(() => validateBirthHelp(f.w), label).toThrow(/lying in/i);
+    }
+    // what a world at 261 to 278 can hold is loaded, at any of those versions and at 279: no child expected, or an old mark
+    for (const version of [261, LAST_BEFORE, LYING_IN_REPAIR_FROM]) {
+      f.w.settings.rulesVersion = version;
+      f.mira.pregnantUntil = 0;
+      f.mira.lyingIn = 0;
+      expect(() => validateBirthHelp(f.w), `an old mark with no child expected at ${version}`).not.toThrow();
+      f.mira.lyingIn = f.w.tick;
+      expect(() => validateBirthHelp(f.w), `a mark on the tick itself at ${version}`).not.toThrow();
+    }
+    // and none where birth help does not apply
+    f.w.settings.rulesVersion = 260;
+    expect(() => validateBirthHelp(f.w), 'rules 260').toThrow(/lying in/i);
+    f.w.settings.rulesVersion = LYING_IN_REPAIR_FROM;
+    expect(() => validateBirthHelp(f.w)).not.toThrow();
+    f.w.settings.dynamics = 'authored';
+    expect(() => validateBirthHelp(f.w), 'an authored world').toThrow(/lying in/i);
+  });
+
+  it('a world with the stale mark, saved as text with the mark in it, loads (the file the fault left behind)', () => {
+    const f = scene(LAST_BEFORE, { tag: 'old-file' });
+    f.mira.pregnantUntil = 0;
+    f.mira.pregnantBy = 0;
+    f.mira.lyingIn = f.w.tick - 50;
+    const back = deserializeWorld(serializeWorld(f.w));
+    expect(back.persons.find((p) => p.id === f.mira.id)!.lyingIn).toBe(f.w.tick - 50);
+    expect(hashWorld(back)).toBe(hashWorld(f.w));
   });
 });
 

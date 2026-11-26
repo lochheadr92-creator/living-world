@@ -65,6 +65,8 @@ import { hyp } from './util';
 // ── lying in ──
 /** the last third of a day before her time */
 export const LYING_WINDOW = Math.round(DAY / 3);
+/** rules 279: a child born while she was still walking to her door leaves no lying-in mark (lyingInBegin), and a stale mark is cleared (staleLyingIn) */
+export const LYING_IN_REPAIR_FROM = 279;
 /** the worth of lying in: more than the ordinary work of a day (20 to 45), less than a pressing need */
 export const LYING_SCORE = 60;
 /** the hunger and thirst drives she may have and still lie in (over them she sees to herself first), and the warmth drive: she sits out of doors */
@@ -171,7 +173,9 @@ export function lieInOption(ctx: Ctx): void {
 
 /** the rest activity marked `lyingIn` has begun work (act_misc.ts): she is lying in, and it is on her record until the birth */
 export function lyingInBegin(world: World, p: Person, a: Activity): void {
-  if (p.lyingIn === undefined) {
+  // rules 279: the child came while she was walking to her door, so there is nothing to lie in for: no mark, no line (lyingInWork ends it at once)
+  const born = p.pregnantUntil <= 0 && runsRulesVersion(world, LYING_IN_REPAIR_FROM);
+  if (p.lyingIn === undefined && !born) {
     p.lyingIn = world.tick;
     addLog(world, p, 'life', 'Went to lie in by my door: the child will come soon.');
   }
@@ -183,6 +187,15 @@ export function lyingInWork(world: World, p: Person, a: Activity): WorkResult {
   if (!hasBirthHelp(world) || p.pregnantUntil <= 0) return 'done';
   a.progress++;
   return a.progress >= a.duration ? 'done' : 'continue';
+}
+
+/**
+ * rules 279: a lying-in mark that is left over (lifecycle.ts lifeTick clears it): her child has come, or the mark is older than any lying in can be. A world raised
+ * to 279 from a rules 261 to 278 save may carry one (before 279 lyingInBegin could set it after the birth, and nothing but her next birth cleared it).
+ */
+export function staleLyingIn(world: World, p: Person): boolean {
+  if (p.lyingIn === undefined || !hasBirthHelp(world) || !runsRulesVersion(world, LYING_IN_REPAIR_FROM)) return false;
+  return p.pregnantUntil <= 0 || world.tick - p.lyingIn > LYING_WINDOW + DAY;
 }
 
 // ───────────────────────── the ask ─────────────────────────
@@ -570,7 +583,8 @@ export function validateBirthHelp(w: World): void {
   const allowed = w.settings.dynamics === 'rich' && runsRulesVersion(w, HEARTH_FROM);
   const int = (n: unknown, min: number, max: number): boolean => Number.isSafeInteger(n) && (n as number) >= min && (n as number) <= max;
   for (const p of w.persons) {
-    if (p.lyingIn !== undefined && (!allowed || !int(p.lyingIn, 0, w.tick) || w.tick - p.lyingIn > LYING_WINDOW + DAY || !(p.pregnantUntil > 0))) throw new Error('Invalid lying in');
+    // a mark with no child expected, or an old one, is not refused: a world at rules 261 to 278 can hold one itself (a child born while she walked to her door), so refusing it refused a world the game made
+    if (p.lyingIn !== undefined && (!allowed || !int(p.lyingIn, 0, w.tick))) throw new Error('Invalid lying in');
     if (p.attended !== undefined && (!allowed || !int(p.attended, 1, ATTENDED_MAX))) throw new Error('Invalid births attended');
     if (p.birthAsked !== undefined && (!allowed || !int(p.birthAsked, 0, w.tick) || !(p.pregnantUntil > 0))) throw new Error('Invalid birth ask record');
     for (const a of [p.activity, p.suspended]) {

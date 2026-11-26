@@ -164,6 +164,13 @@ on twelve of fifteen in the second; either way the sad line was the usual one. (
 until she lies in), or a housemate who SEES her lying in, asks, and only somebody they see: nobody is sent for from across the settlement. (5) The helper waits at most a third of a
 day (for one who was told a time, and the minute the life check can take to deliver the child, `BIRTH_LAG`); up to three asks in a day, the woman's and her housemates' together, and one promised helper at a time.
 
+**Repair at rules 279.** A child can be born while a woman who has chosen to lie in is still walking to her door. Before 279 she then arrived, and
+`lyingInBegin` set `Person.lyingIn` after the birth, with no child expected. Nothing cleared it until her next birth, so a save of that world was refused on
+loading ("Invalid lying in"), and while it stood she did not ask for help for her next child. From 279 `lyingInBegin` sets no mark and writes no line when the child has
+already come, and the life check (`lifecycle.ts`, after `giveBirth`, so a real lying in has been read by `birthScene` first) clears a mark that is left over: no child
+expected, or older than a day and a third (`staleLyingIn`). For every version, loading no longer refuses such a mark (`validateBirthHelp`), because a world at 261 to
+278 can hold one made by the game itself; a mark that is not a whole tick, is in the future or sits where birth help does not apply is still refused. Worlds at 261 to 278 run as they did.
+
 **Switch and arm.** `setHearthScenes(on, 'birth')`; lab arms `rich-no-hearth-scenes` (all three parts) and `rich-no-hearth-birth`. (Not `rich-no-hearth`:
 that is rules 123's indoor hearth, `hearth.ts`.) Rich worlds at 261 and later only.
 
