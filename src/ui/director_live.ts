@@ -6,16 +6,17 @@
 // simulation's or the inspector's own (occasionNotice for a gathering, the inspector's "what are they doing" and status lines for
 // a person), except the two wolf sentences, which say exactly what the wolf's recorded state is. The director calls scanLive at
 // most once a UI second.
+import { isCourtWalk, type WalkData } from '../sim/courting';
 import { describePerson } from '../sim/inspect';
 import { statusLine } from '../sim/inspect_observer';
 import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
 
-export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble';
+export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk';
 
 export interface LiveCandidate {
-  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>' or 'person:<id>' */
+  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>' or 'person:<id>' */
   key: string;
   kind: LiveKind;
   score: number;
@@ -39,6 +40,8 @@ const OCCASION_SCORE: Record<Occasion['kind'], number> = { wedding: 70, funeral:
  */
 const TALK_SCORE: Record<ConvPurpose, number> = {
   mediate: 68,
+  court: 62,
+  welcome: 58,
   teach_technique: 55,
   learn_technique: 55,
   learn_skill: 55,
@@ -68,6 +71,8 @@ const TALK_SCORE: Record<ConvPurpose, number> = {
 };
 
 const SPEECH_SCORE = { angry: 65, warn: 60 } as const;
+/** two people walking out together (rules 260): the leader's walk, one candidate for the pair */
+const WALK_SCORE = 66;
 /** in real trouble: at risk, fleeing or standing against a threat (the inspector's danger tone) */
 const TROUBLE_SCORE = 50;
 /** unwell or hurt: the inspector's status line says so */
@@ -116,6 +121,16 @@ export function scanLive(world: World): LiveCandidate[] {
     const a = personById(world, c.a);
     if (!a || !a.alive) continue;
     out.push({ key: `talk:${c.id}`, kind: 'talk', score: TALK_SCORE[c.purpose] ?? 20, subjectId: a.id, x: a.x, y: a.y, caption: () => doing(a.id) });
+  }
+
+  // a walk out under way (courting.ts: a 'wander' whose data.walk is held by both, role 'a' the one who asked): one candidate for the pair,
+  // from the leader's side, in the inspector's own words for what they are doing
+  for (const p of world.persons) {
+    const a = p.alive ? p.activity : null;
+    if (!a || !isCourtWalk(a)) continue;
+    const walk = a.data.walk as WalkData;
+    if (walk.role !== 'a' || walk.done) continue;
+    out.push({ key: `walk:${walk.id}`, kind: 'walk', score: WALK_SCORE, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
   }
 
   // a person's own state: speaking angrily or in warning, or in real trouble. One candidate per person, the higher score.

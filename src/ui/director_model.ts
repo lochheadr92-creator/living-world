@@ -77,6 +77,19 @@ const RULES: Rule[] = [
   { id: 'warn-wolf', kind: 'danger', test: has('warned'), weight: 50 },
   { id: 'peace', kind: 'social', test: (t) => t.includes('make peace') || t.includes('made peace') || t.includes('on good terms again'), weight: 50 },
   { id: 'tradition', kind: 'social', test: has('has become a tradition'), weight: 50 },
+  // the social scenes (rules 260; the words are in src/sim/courting.ts, welcome.ts and praise.ts). A thanks in company reads "At <the fire or
+  // the occasion> <name> thanked ...": a rescue "before N people for driving off a wolf" or "for killing a wolf", the builders "for the new <building>".
+  // Each scene's more specific wording is first ("for the first time", "was the first to welcome"). None of them contains what the gathering rules
+  // above need (" is called at ", " begins"), and the story rule at the top has already taken any retelling.
+  { id: 'rescue-thanked', kind: 'social', test: (t) => t.startsWith('At ') && t.includes(' thanked ') && (t.includes(' for driving off a wolf') || t.includes(' for killing a wolf')), weight: 70 },
+  { id: 'builders-thanked', kind: 'social', test: (t) => t.startsWith('At ') && t.includes(' thanked ') && t.includes(' for the new '), weight: 55 },
+  { id: 'welcome-first', kind: 'social', test: has(' was the first to welcome the newcomer'), weight: 58 }, // a household's first welcome: "the newcomer B" or "the newcomers B and C"
+  { id: 'walk-first', kind: 'social', test: has(' walked out together for the first time'), weight: 62 },
+  // between MIDDLE and FILLER: the one filler candidate holds one of these against a lighter newcomer (see admit)
+  { id: 'walk', kind: 'social', test: has(' walked out together'), weight: 45 },
+  { id: 'welcome', kind: 'social', test: has(' welcomed the newcomer'), weight: 40 }, // has " gave " in it as often as not, so it comes before the gift rule
+  { id: 'walk-refused', kind: 'social', test: has(' said not today'), weight: 40 },
+  { id: 'walk-cut', kind: 'social', test: has(' set out to walk together and turned back'), weight: 35 },
   // FILLER
   { id: 'home-finished', kind: 'build', test: has(' finished '), weight: 25 }, // a household's hut, lean-to or cellar
   { id: 'hope', kind: 'life', test: has('has what they hoped for'), weight: 25 }, // a home, a trade
@@ -387,8 +400,10 @@ export class Director {
       return;
     }
     if (e.subjectId === 0) return;
-    // the filler of this step: the heavier of those arriving together, then the newer; anything that arrives is newer than the one kept
-    const kept = this.filler && this.filler.ev.id > this.lastId && this.filler.weight > e.weight;
+    // the filler of this step: the heavier of those arriving together, then the newer; anything that arrives is newer than the one kept,
+    // except that a lighter one does not displace a candidate of FILLER_BELOW or more (a later walk, a refused ask, a welcome)
+    const f = this.filler;
+    const kept = !!f && f.weight > e.weight && (f.ev.id > this.lastId || f.weight >= FILLER_BELOW);
     if (!kept) this.filler = e;
   }
 

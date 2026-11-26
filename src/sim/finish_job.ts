@@ -108,5 +108,7 @@ export function holdsJob(world: World, p: Person, a: Activity): boolean {
 
 /** Whether somebody seen like this is left to their work by a person looking for company (rules 227, the quiet part). */
 export function leftToWork(world: World, s: SeenEntity): boolean {
+  // rules 260 (courting.ts): two people visibly out walking together are left to their walk, by the same mechanism
+  if (s.walkingOut) return true;
   return on.quiet && runs(world) && s.work !== undefined && s.act !== '' && JOBS.has(s.act);
 }

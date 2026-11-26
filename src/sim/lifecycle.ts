@@ -24,6 +24,7 @@ import { socialOnDeath } from './social';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
+import { hasWelcome } from './meeting';
 import { captureHouseholdCamp } from './cohortcapture';
 import { observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson, ageYears, blendLook, mixTraits, stageOf, stageOfAge } from './people';
@@ -487,6 +488,7 @@ export function immigrationTick(world: World): void {
     }
     world.stats.lastArrival = world.tick;
     world.stats.arrivals = (world.stats.arrivals ?? 0) + 1;
+    if (hasWelcome(world)) hh.arrived = world.tick; // rules 260 (welcome.ts): the group's arrival is on record until it has a home or three days have passed
     const ids = group.map((q) => q.id);
     if (kind === 'single') addEvent(world, 'life', `A traveller, ${group[0].name}, arrives at the settlement.`, ids, x, y);
     else if (kind === 'couple') addEvent(world, 'life', `${group[0].name} and ${group[1].name} arrive at the settlement together.`, ids, x, y);

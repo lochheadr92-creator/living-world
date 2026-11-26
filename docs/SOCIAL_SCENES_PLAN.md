@@ -1,6 +1,6 @@
 # Social scenes, Group 1: plan
 
-Drafted 26 November 2026 on the owner's instruction ("draft the plan for Group 1"). Nothing here is built. It is the first of six
+Drafted 26 November 2026 on the owner's instruction ("draft the plan for Group 1"). Bundle A is built (rules 260, `docs/SOCIAL_SCENES.md`); bundles B and C are not. It is the first of six
 groups from the 40 social actions listed in chat the same day; the other groups are not planned yet.
 
 **Why.** The story director (`docs/STORY_DIRECTOR.md`) has too little to follow. Group 1 adds scenes to things the simulation
@@ -44,6 +44,9 @@ Rules common to every part:
 - New saved state is listed per part and is bounded.
 
 ## Bundle A (rules 260): meeting
+
+**Status, 26 November 2026: built and measured, not committed.** All three parts are built and switched. Uptake, the lab and the full
+suite are in `docs/SOCIAL_SCENES.md`, "Measured (rules 260)". The acceptance items are under "Acceptance, per bundle" below.
 
 ### 1. Courting
 - **Viewer sees:** two unpartnered people walk out together of an evening, more than once, before one of them proposes.
@@ -95,7 +98,7 @@ Rules common to every part:
 - **Events:** "At the fire B thanked A before 5 people for driving a wolf off her." / "At the fire D thanked A, B and C for the
   new well."
 - **Strengthens:** wolf defence (a consequence that lasts), reputation, the evening fire, the `respected` hope.
-- **Director:** the spoken thanks is a middle event (60); the rescue itself is already a top event.
+- **Director:** the spoken thanks is a middle event (as built: 70 for a rescuer thanked in company, 55 for builders); the rescue itself is already a top event.
 
 ## Bundle B (rules 261): hearth
 
@@ -167,6 +170,13 @@ Rules common to every part:
 - **Task before any design:** count both in the six rules-256 saves (`docs/SAVE_LIBRARY.md`) over 25 days. Build part 8 only if
   day-long absences happen at least weekly per settlement, and part 9 only if departures do. Otherwise both move to a later group
   and bundle C is song and dance alone.
+- **Counted 26 November 2026** (`scripts/absence_count.ts`, six saves, 25 days each, populations 65 to 159):
+  - Reunion: close kin of one household came back within 10 tiles after a day or more apart 7.8 times a settlement-week for
+    partners and 11 for a parent and a child under 12 (after two days: 0.7 and 1.5). **Part 8 stays.** Not checked: where the two
+    were. Some of these may be two sleeping places a little apart, not a trip, so the design must use what the greeter last saw.
+  - Send-off: no journey plan, exchange journey or relocation departure started in any of the six runs (five relocation proposals,
+    none set out). The detectors had no positive control. Care journeys (6.9 a settlement-week) are short supply errands, not
+    departures. **Part 9 leaves Group 1**: there is nothing to see off.
 
 ## Tasks and models
 
@@ -192,3 +202,12 @@ Owner's rule: the cheapest model that can do the task. "Lead" is the session mod
 - No harm to growth: population, births, pairings and deaths against the mean of control and nudges, per removal arm.
 - Watched: the owner watches the director with the bundle on.
 - No twenty-year runs for these bundles.
+
+Bundle A, 26 November 2026:
+- Met: each part has unit tests and staged scenes (`tests/courting.test.ts`, `tests/welcome.test.ts`, `tests/praise.test.ts`); the
+  rules-257 pin is unchanged; the full suite is recorded with five timeouts under load and no regression (D-3); no part harms growth in
+  the lab.
+- Met with limits: uptake was counted over 45 days in three worlds, not 25 days a settlement, and the rescue half of praise has never
+  been seen in an ordinary world. The lab ran 12 fresh seeds and six saves, not the 24 seeds planned, and it records no births or
+  pairings, so `people` stands in for growth.
+- Open: the owner watches the director with the bundle on; the rules-260 continuation pin is not recorded yet.

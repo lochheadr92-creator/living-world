@@ -1,4 +1,6 @@
 import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
+import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
+import { praiseAtFire } from './praise';
 import { TOY_TICKS, finishToyPlay, isToyPlay } from './toys';
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
@@ -107,18 +109,25 @@ registerHandler('wander', {
     if (isToyPlay(a.data.play)) a.duration = TOY_TICKS;
     // rules 216 (evening_fire.ts): an evening by the fire lasts a set while
     if (isEveningSit(a)) a.duration = FIRE_TICKS;
+    // rules 260 (courting.ts): a walk out together stands for a set while
+    if (isCourtWalk(a)) courtWalkBegin(a);
     // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
     if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
   work(world, p, a): WorkResult {
+    // rules 260 (courting.ts): a walk out together has its own count, and ends early if the other is called away
+    if (isCourtWalk(a)) return courtWalkWork(world, p, a);
     a.progress++;
-    if (isEveningSit(a)) eveningFireWork(world, p, a); // rules 216: halfway through, a story may be told
+    // rules 260 (praise.ts): halfway through, a thanks owed or due is spoken in place of the story; otherwise (rules 216) a story may be told
+    if (isEveningSit(a) && !praiseAtFire(world, p, a)) eveningFireWork(world, p, a);
     return a.progress >= a.duration ? 'done' : 'continue';
   },
   onEnd(world, p, a, outcome) {
     if (outcome === 'success' && isSoloPlay(a.data.play)) finishSoloPlay(world, p, a.data.play);
     if (outcome === 'success' && isEveningSit(a)) finishEveningSit(world, p, a);
     if (outcome === 'success' && isToyPlay(a.data.play)) finishToyPlay(world, p);
+    // rules 260 (courting.ts): however a walk out ends, it is settled once, by the one who asked
+    if (isCourtWalk(a)) courtWalkEnd(world, p, a, outcome);
   },
 });
 

@@ -32,6 +32,7 @@ import { hashUnit } from './rng';
 import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, World } from './types';
 import { hyp } from './util';
 import { dueTraditions, noteOccasionOver, noteWinterOver, occasionOf } from './traditions';
+import { praiseAtOccasion } from './praise';
 
 /** how long an occasion stays open once it has opened */
 export const OCCASION_OPEN = 600;
@@ -280,6 +281,7 @@ function arrive(world: World, p: Person, o: Occasion): void {
     marketExchange(world, p, o);
     marketSwap(world, p, o);
   }
+  praiseAtOccasion(world, p, o, `the ${KIND_LABEL[o.kind]}`); // rules 260 (praise.ts): a thanks owed or due may be spoken before those already there
 }
 
 const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood', 'stone', 'clay', 'planks', 'bricks', 'charcoal'];

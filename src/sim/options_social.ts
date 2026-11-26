@@ -1,4 +1,8 @@
 import {gameName,hasGames,nextGame} from './play';
+import { ASK_AFFINITY, ASK_BASE, ASK_EVENING, ASK_PER_AFFINITY, ASK_SOCIABLE, PROPOSE_NOT_YET, PROPOSE_WALKED, WALKS_FOR_PROPOSAL, courtDestination, courtedCount, mayAskToWalk, mayCourtNow } from './courting';
+import { isEveningFor } from './evening_fire';
+import { hasCourting } from './meeting';
+import { WELCOME_BASE, WELCOME_GENEROUS, WELCOME_SOCIABLE, generousLean, mayWelcome, mayWelcomeNow } from './welcome';
 import {hasCoaching} from './skill_coaching';
 import { approachCommit, learningGateOpen } from './company';
 import { leftToWork } from './finish_job';
@@ -652,8 +656,54 @@ function optPropose(ctx: Ctx): void {
     }
     if (!kind) continue;
     const sc = new Scorer().add(kind === 'partner' ? 'wants to share a life' : 'could share a home', (kind === 'partner' ? 26 + (rel.affinity - 30) * 0.4 + (ctx.night ? 8 : 0) : 15 + (rel.affinity - 40) * 0.15)).add('walking', -pen(c.d * 6));
+    // rules 260 (courting.ts): from my own record of the walks the two of us have made
+    if (kind === 'partner' && hasCourting(world)) {
+      if (courtedCount(p, q.id) >= WALKS_FOR_PROPOSAL) sc.add('they have walked out together', PROPOSE_WALKED);
+      else sc.add('has not walked out with them yet', PROPOSE_NOT_YET);
+    }
     mkSocial(ctx, c, 'propose', { joinKind: kind }, kind === 'partner' ? (sameHome ? `Tell ${q.name} they mean a lot` : `Ask ${q.name} to move in together`) : `Ask ${q.name} about sharing a home`, kind === 'partner' ? (sameHome ? 'to become a couple' : 'to share a household') : 'to find shelter together', null, sc, 'household');
   }
+}
+
+// ───────────────────────── walking out ─────────────────────────
+/**
+ * rules 260 (courting.ts): ask somebody they are fond of, and who is free, to walk out. On their own record of the other only (rules 164: they
+ * cannot read the other's regard); the answer is found out by asking. Nobody is sought out at their work (rules 227).
+ */
+function optCourt(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!mayCourtNow(ctx)) return;
+  let place: ReturnType<typeof courtDestination> | undefined;
+  for (const c of candidates(ctx)) {
+    if (leftToWork(world, c.s) || !mayAskToWalk(ctx, c.q, c.d)) continue;
+    // where to walk is chosen once, from what they know, for the first they could ask
+    if (place === undefined) place = courtDestination(ctx);
+    if (!place) return;
+    const rel = p.relations[c.q.id];
+    const sc = new Scorer().add('wants to walk out together', ASK_BASE).add('fond of them', (rel.affinity - ASK_AFFINITY) * ASK_PER_AFFINITY).add('sociable', ASK_SOCIABLE * p.traits.sociability);
+    if (isEveningFor(world, p)) sc.add('an evening for it', ASK_EVENING);
+    sc.add('walking', -pen(c.d * 6));
+    mkSocial(ctx, c, 'court', { walk: place }, `Ask ${c.q.name} to walk out together`, 'to walk out together; they must agree', null, sc, 'social');
+  }
+}
+
+// ───────────────────────── welcoming newcomers ─────────────────────────
+/**
+ * rules 260 (welcome.ts): go and welcome a grown stranger of a household that has just come. What A reasons from is a stranger in sight; the
+ * household's arrival only bounds the scene. One at a time: the one worth most.
+ */
+function optWelcome(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!mayWelcomeNow(ctx)) return;
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const c of candidates(ctx)) {
+    if (leftToWork(world, c.s) || !mayWelcome(ctx, c.q, c.s, c.d)) continue;
+    const sc = new Scorer().add('somebody new has come', WELCOME_BASE).add('sociable', WELCOME_SOCIABLE * p.traits.sociability);
+    if (generousLean(p)) sc.add('big-hearted', WELCOME_GENEROUS);
+    sc.add('walking', -pen(c.d * 6));
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (best) mkSocial(ctx, best.c, 'welcome', {}, `Welcome ${best.c.q.name}`, 'to welcome somebody new and tell them where the water is', null, best.sc, 'social');
 }
 
 // ───────────────────────── swapping goods ─────────────────────────
@@ -850,6 +900,8 @@ export function socialOptions(ctx: Ctx): void {
   optMediate(ctx);
   optRecruit(ctx);
   optPropose(ctx);
+  optCourt(ctx);
+  optWelcome(ctx);
   optTrade(ctx);
   optSupply(ctx);
   optTeachTechnique(ctx);

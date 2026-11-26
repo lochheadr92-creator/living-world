@@ -2,6 +2,7 @@ import {runsRulesVersion} from './rulesversion';
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import { rememberSigns } from './remembered_need';
 import { hasFeverSign, looksFeverish } from './fever_sign';
+import { hasCourting } from './meeting';
 import { hasVisibleNeed, STARVING_BELOW, PARCHED_BELOW } from './visible_need';
 import { waterSupplyNear } from './water_access';
 import { observeFlood } from './flood';
@@ -72,6 +73,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     carrying,
     ...(plenty && plenty.length ? { plenty } : {}),
     ...(work ? { work } : {}),
+    ...(e.activity?.data.walk && hasCourting(world) ? { walkingOut: true } : {}), // rules 260 (courting.ts)
     asleep: e.pose === 'sleep',
     act: e.activity ? e.activity.kind : '',
     busyTalking: e.convId !== 0,

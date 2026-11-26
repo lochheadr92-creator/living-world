@@ -32,7 +32,7 @@ export const RUMOUR_LIFE = 12 * DAY;
 export const RUMOUR_HOPS = 3;
 
 /** how a kind of story moves an opinion: above 0 to someone's credit */
-const WEIGHT: Record<RumourKind, number> = { generous: 1, reliable: 0.7, quarrelsome: -0.8, unreliable: -0.7, thief: -1.2, news: 0 };
+const WEIGHT: Record<RumourKind, number> = { generous: 1, brave: 1, reliable: 0.7, quarrelsome: -0.8, unreliable: -0.7, thief: -1.2, news: 0 };
 
 const fade = (world: World, r: Rumour): number => Math.max(0, 1 - (world.tick - r.tick) / RUMOUR_LIFE);
 
@@ -60,6 +60,17 @@ function keep(world: World, p: Person, r: Rumour): boolean {
   list.push(r);
   while (list.length > HEARD_MAX) list.shift();
   return true;
+}
+
+/**
+ * `S` tells `L` of something `about` did, as a story heard from S (the path a retold deed takes: one mouth on, S the teller and the first to tell it).
+ * The caller has already moved L's regard for `about` by what was said (rules 13: so it is not counted again as reputation). Rich only.
+ */
+export function hearStory(world: World, S: Person, L: Person, about: Person, kind: RumourKind, text: string, tick: number): boolean {
+  if (!isRich(world) || L === about || !L.alive) return false;
+  const trust = L.relations[S.id]?.trust ?? 10;
+  const weight = Math.round(Math.max(0.35, Math.min(1, 0.55 + trust / 100)) * 100) / 100;
+  return keep(world, L, { about: about.id, kind, tick, from: S.id, origin: S.id, hops: 1, weight, text, ...(singleCountFor(world) ? { relationshipApplied: true } : {}) });
 }
 
 /** Everyone awake within `radius` of (x, y) saw it (rich only). */

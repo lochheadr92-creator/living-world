@@ -55,6 +55,8 @@ import { mealTick } from './meals';
 import { noteConcerns } from './welfare';
 import { addEvent } from './events';
 import { updatePlots } from './farming';
+import { welcomeTick } from './welcome';
+import { praiseTick } from './praise';
 import { CONCEPTION_CHECK_EVERY, LIFE_CHECK_EVERY, adoptOrphans, conceptionTick, deathCauseOf, fatalInjuryHolds, immigrationTick, killPerson, lifeTick } from './lifecycle';
 import { updateNeeds } from './needs';
 import { perceive, refreshBeliefs } from './perception';
@@ -134,6 +136,8 @@ export function stepWorld(world: World): void {
   if (tick % 300 === 151) clearStaleSites(world);
   if (tick % 300 === 43) adoptOrphans(world);
   if (tick % 400 === 211) immigrationTick(world);
+  if (tick % 60 === 29) praiseTick(world); // rules 260 (praise.ts): a thanks that has lapsed is cleared
+  if (tick % 60 === 13) welcomeTick(world); // rules 260 (welcome.ts): a household's record of its arrival is cleared
   if (tick % 120 === 59) spoilGoods(world);
 
   world.tick++;
@@ -422,6 +426,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
       if (p.goal?.companyHope) push('CompanyHope'+p.id+':'+JSON.stringify(p.goal.companyHope));
       for (const [id,r] of Object.entries(p.relations)) if (r.company) push('Company'+p.id+':'+id+':'+JSON.stringify(r.company));
       for (const [id,r] of Object.entries(p.relations)) if (r.childhood) push('Childhood'+p.id+':'+id+':'+JSON.stringify(r.childhood));
+      for (const [id,r] of Object.entries(p.relations)) if (r.courted || r.courtRefused) push('Courted'+p.id+':'+id+':'+JSON.stringify([r.courted, r.courtRefused])); // rules 260 (courting.ts)
       if (p.shown) push('Shown'+p.id+':'+p.shown.join(','));
       for (const i of p.intentions) if (i.shelterChecked !== undefined) push('NightExperience'+p.id+':'+i.id+':'+i.shelterChecked+':'+i.sheltered);
     }
@@ -463,6 +468,9 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     }
     // a request outstanding for someone's own project: who asked whom for what, and where it has got to
     for (const r of world.requests) if (r.planId && (r.status === 'pending' || r.status === 'promised')) push(`J${r.id}:${r.from},${r.to},${r.item ?? '-'},${r.amount},${r.status},${r.planId}`);
+    for (const p of world.persons) if (p.thanksOwed) push('ThanksOwed' + p.id + ':' + JSON.stringify(p.thanksOwed)); // rules 260 (praise.ts)
+    for (const b of world.buildings) if (b.thanksDue !== undefined) push('ThanksDue' + b.id + ':' + b.thanksDue);
+    for (const h of world.households) if (h.arrived !== undefined || h.welcomed) push('Arrived' + h.id + ':' + JSON.stringify([h.arrived, h.welcomed])); // rules 260 (welcome.ts)
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   if (world.townships) {

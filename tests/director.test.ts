@@ -9,7 +9,9 @@ import { describe, expect, it } from 'vitest';
 import { Game } from '../src/app/game';
 import { serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
+import { beginCourtWalk, type WalkData } from '../src/sim/courting';
 import { addEvent } from '../src/sim/events';
+import { describePerson } from '../src/sim/inspect';
 import { noteWedding, occasionsTick } from '../src/sim/occasions';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { makeWolf } from '../src/sim/wildlife';
@@ -1107,6 +1109,198 @@ describe('the live signals, read from staged world state by the real scan', () =
   });
 });
 
+describe('the social scenes (rules 260): the walk, the welcome, the thanks in company', () => {
+  // the words are the code's (src/sim/courting.ts, welcome.ts, praise.ts)
+  const SCENE = {
+    walkFirst: 'Ada and Ben walked out together for the first time.',
+    walk: 'Ada and Ben walked out together.',
+    walkCut: 'Ada and Ben set out to walk together and turned back.',
+    refused: 'Ada asked Ben to walk out; Ben said not today.',
+    welcomeFirst: 'Ada was the first to welcome the newcomers Dee and little Eve and told them where to find water and gave them food.',
+    welcomeFirstBare: 'Ada was the first to welcome the newcomer Dee.',
+    welcome: 'Cal welcomed the newcomer Dee and told them where to find water and gave them food.',
+    welcomeBare: 'Cal welcomed the newcomers Dee and Fay.',
+    rescueOff: 'At the fire Quinn thanked Pat before 5 people for driving off a wolf.',
+    rescueKilled: 'At the harvest feast Quinn thanked Pat before 3 people for killing a wolf.',
+    builders: 'At the fire Dan thanked Abe, Bea and Cal for the new kiln.',
+    buildersMore: 'At the market Dan thanked Abe, Bea, Cal and the others who built it for the new storehouse.',
+  };
+
+  it('each has its rank: a pair\'s first walk 62, a later walk 45, a walk cut short 35, a refused ask 40', () => {
+    const want: [string, string, number][] = [
+      [SCENE.walkFirst, 'walk-first', 62],
+      [SCENE.walk, 'walk', 45],
+      [SCENE.walkCut, 'walk-cut', 35],
+      [SCENE.refused, 'walk-refused', 40],
+    ];
+    for (const [text, id, weight] of want) {
+      expect(matchEvent(ev('social', text)), text).toEqual({ id, weight });
+    }
+    expect(bandOf(62)).toBe('middle');
+    expect(bandOf(45), 'a later walk is below MIDDLE').toBe('filler');
+  });
+
+  it('a household\'s first welcome 58, a later welcome 40, whatever the newcomers and whatever was given', () => {
+    for (const text of [SCENE.welcomeFirst, SCENE.welcomeFirstBare]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'welcome-first', weight: 58 });
+    for (const text of [SCENE.welcome, SCENE.welcomeBare]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'welcome', weight: 40 });
+  });
+
+  it('a rescue thanked in company 70, builders thanked in company 55, at the fire, an occasion or a feast', () => {
+    for (const text of [SCENE.rescueOff, SCENE.rescueKilled]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'rescue-thanked', weight: 70 });
+    for (const text of [SCENE.builders, SCENE.buildersMore]) expect(matchEvent(ev('social', text)), text).toEqual({ id: 'builders-thanked', weight: 55 });
+    expect(bandOf(70)).toBe('middle');
+  });
+
+  it('the more specific wording wins, and nothing already named is taken', () => {
+    // the first of a pair\'s walks is not the later walk, though its words contain it; the first welcome is not the later one
+    expect(storyWeight(ev('social', SCENE.walkFirst))).toBeGreaterThan(storyWeight(ev('social', SCENE.walk)));
+    expect(storyWeight(ev('social', SCENE.welcomeFirst))).toBeGreaterThan(storyWeight(ev('social', SCENE.welcome)));
+    // a welcome that "gave them food" is a welcome, not a gift (8)
+    expect(matchEvent(ev('social', SCENE.welcome)).id).not.toBe('gave');
+    expect(storyWeight(ev('social', 'Pia gave Abel a stick doll.')), 'a gift is still a gift').toBe(8);
+    // a thanks said at a wedding feast or a harvest feast is a thanks, not the feast: the gathering rules need "is called at" or "begins"
+    expect(matchEvent(ev('social', 'At the wedding feast Quinn thanked Pat before 5 people for driving off a wolf.'))).toEqual({ id: 'rescue-thanked', weight: 70 });
+    expect(matchEvent(ev('social', 'At the harvest feast Dan thanked Abe for the new kiln.'))).toEqual({ id: 'builders-thanked', weight: 55 });
+    // and the gatherings, the arrivals and the like keep what they had
+    expect(storyWeight(ev('social', TEXT.weddingCalled))).toBe(80);
+    expect(storyWeight(ev('social', TEXT.weddingBegins))).toBe(80);
+    expect(storyWeight(ev('social', TEXT.feastBegins))).toBe(55);
+    expect(storyWeight(ev('social', TEXT.market))).toBe(55);
+    expect(storyWeight(ev('life', TEXT.traveller))).toBe(60);
+    expect(storyWeight(ev('social', TEXT.peace))).toBe(50);
+    // the same words in another kind are not these (a rescue is a danger event, a walk is never a nature note)
+    expect(storyWeight(ev('nature', SCENE.walkFirst))).toBe(0);
+    expect(matchEvent(ev('danger', TEXT.drove)).id).toBe('wolf-off');
+  });
+
+  it('a story told at the fire that retells one of them keeps the story rank', () => {
+    for (const text of Object.values(SCENE)) {
+      const told = 'Yan told a story at the fire: how ' + text[0].toLowerCase() + text.slice(1);
+      expect(matchEvent(ev('social', told)), told).toEqual({ id: 'story', weight: 10 });
+    }
+  });
+
+  it('a later walk, a refused ask and a welcome are kept against a lighter newcomer; a heavier one still takes their place', () => {
+    const { w, ada, ben, cal } = village('scenes-slot');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31); // a shot is up, so a candidate waits
+    d.step(w, 0);
+    const walk = say(w, 'social', SCENE.walk, [ada.id, ben.id], 40, 30);
+    d.step(w, 0);
+    say(w, 'social', 'Pia fed Abel.', [ben.id], 41, 30);
+    say(w, 'social', TEXT.gave, [ben.id], 41, 30);
+    d.step(w, 0);
+    d.step(w, LINGER_SECONDS);
+    expect(d.shot?.ev, 'a lighter newcomer did not displace it').toBe(walk);
+    // a lighter one displaces a kept candidate under 30 as before; a heavier one displaces a kept walk
+    const e = village('scenes-slot-2');
+    const d2 = quiet();
+    d2.step(e.w, 0);
+    say(e.w, 'life', TEXT.death, [e.cal.id], 42, 31);
+    d2.step(e.w, 0);
+    say(e.w, 'social', TEXT.gave, [e.ada.id], 40, 30);
+    d2.step(e.w, 0);
+    const fed = say(e.w, 'social', 'Pia fed Abel.', [e.ben.id], 41, 30);
+    d2.step(e.w, 0);
+    d2.step(e.w, LINGER_SECONDS);
+    expect(d2.shot?.ev, 'the newest, as before').toBe(fed);
+    const f = village('scenes-slot-3');
+    const d3 = quiet();
+    d3.step(f.w, 0);
+    say(f.w, 'life', TEXT.death, [f.cal.id], 42, 31);
+    d3.step(f.w, 0);
+    say(f.w, 'social', SCENE.refused, [f.ben.id, f.ada.id], 40, 30);
+    d3.step(f.w, 0);
+    const walk3 = say(f.w, 'social', SCENE.walk, [f.ada.id, f.ben.id], 40, 30);
+    d3.step(f.w, 0);
+    d3.step(f.w, LINGER_SECONDS);
+    expect(d3.shot?.ev, 'a later walk (45) over a refused ask (40)').toBe(walk3);
+  });
+
+  it('a pair\'s first walk and a household\'s first welcome are MIDDLE: they wait in the queue for the hold like any other', () => {
+    const { w, ada, ben, cal } = village('scenes-middle');
+    const d = quiet();
+    d.step(w, 0);
+    say(w, 'life', TEXT.death, [cal.id], 42, 31);
+    d.step(w, 0);
+    const walk = say(w, 'social', SCENE.walkFirst, [ada.id, ben.id], 40, 30);
+    const thanks = say(w, 'social', SCENE.rescueOff, [ben.id], 41, 30);
+    d.step(w, 0);
+    expect(d.waiting().map((q) => q.ev)).toEqual([walk, thanks]);
+    d.step(w, MIN_HOLD);
+    expect(d.shot?.ev, 'the rescue thanked, 70, before the first walk, 62').toBe(thanks);
+  });
+
+  /** a walk out under way, set up as courting.ts sets it up (the leader asked, the other follows), in a staged village */
+  function walkOut(tag: string) {
+    const f = village(tag);
+    beginCourtWalk(f.w, 7001, f.ada, f.ben, { x: 43, y: 31, at: 'water' });
+    return f;
+  }
+
+  it('a walk out under way is one live candidate for the pair, from the leader\'s side, in the inspector\'s own words', () => {
+    const { w, ada, ben } = walkOut('scenes-walk');
+    expect((ada.activity?.data.walk as WalkData).role).toBe('a');
+    expect((ben.activity?.data.walk as WalkData).role).toBe('b');
+    const walks = scanLive(w).filter((c) => c.kind === 'walk');
+    expect(walks.length, 'one for the pair, not two').toBe(1);
+    expect(walks[0].key).toBe('walk:7001');
+    expect(walks[0].score).toBe(66);
+    expect(walks[0].subjectId).toBe(ada.id);
+    expect([walks[0].x, walks[0].y]).toEqual([ada.x, ada.y]);
+    const doing = describePerson(w, ada.id)!.qa.doing;
+    expect(walks[0].caption()).toBe(doing);
+    expect(doing).toContain('Walking out with Ben');
+    // the director takes it: a bare screen, nothing else live
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.kind).toBe('live');
+    expect(d.shot?.liveKey).toBe('walk:7001');
+    expect(d.shot?.subjectId).toBe(ada.id);
+    expect(d.shot?.text).toBe(doing);
+  });
+
+  it('two pairs out walking are two candidates; the walk is gone when it ends, and nothing is read from the follower\'s side alone', () => {
+    // two pairs, two walks
+    const st = stage('director-scenes-two');
+    st.w.settings.dynamics = 'rich';
+    const [p1, p2, p3, p4] = ['Ada', 'Ben', 'Cal', 'Dee'].map((n, i) => addPerson(st, n, 38 + 2 * i, 30, { age: 25 + i }));
+    done(st);
+    beginCourtWalk(st.w, 7001, p1, p2, { x: 43, y: 31, at: 'water' });
+    beginCourtWalk(st.w, 7002, p3, p4, { x: 45, y: 31, at: 'fire' });
+    expect(scanLive(st.w).filter((c) => c.kind === 'walk').map((c) => [c.key, c.subjectId])).toEqual([['walk:7001', p1.id], ['walk:7002', p3.id]]);
+    const { w, ada, ben } = walkOut('scenes-walk-2');
+    // the walk ends: the leader's activity is no longer a walk
+    ada.activity = null;
+    expect(scanLive(w).filter((c) => c.kind === 'walk'), 'the follower alone is no candidate').toEqual([]);
+    ben.activity = null;
+    expect(scanLive(w).filter((c) => c.kind === 'walk')).toEqual([]);
+    // settled by the leader (done), while the activity is still being wound up: gone too
+    const f = walkOut('scenes-walk-3');
+    (f.ada.activity!.data.walk as WalkData).done = true;
+    expect(scanLive(f.w).filter((c) => c.kind === 'walk')).toEqual([]);
+    // a walk held while they talk is not under way
+    const g = walkOut('scenes-walk-4');
+    g.ada.suspended = g.ada.activity;
+    g.ada.activity = null;
+    expect(scanLive(g.w).filter((c) => c.kind === 'walk')).toEqual([]);
+  });
+
+  it('a live walk shot ends when the walk does (the camera stays, the caption goes)', () => {
+    const { w, ada } = walkOut('scenes-walk-5');
+    const d = new Director();
+    d.step(w, 0);
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.liveKey).toBe('walk:7001');
+    ada.activity = null;
+    d.step(w, LIVE_SCAN_SECONDS);
+    expect(d.shot?.ended).toBe(true);
+    expect(d.captionFresh()).toBe(false);
+  });
+});
+
 describe('the reel: TOP and MIDDLE only', () => {
   it('picks the heaviest events of weight 50 and up in the window, in the order they happened', () => {
     const { w, ada } = village('reel');
@@ -1131,6 +1325,20 @@ describe('the reel: TOP and MIDDLE only', () => {
     expect(highlights(w, t0 + 45, 50)).toEqual([couple, argued, bite]);
     expect(highlights(w, t0 + 81, 50)).toEqual([]);
     expect(highlights(w, t0, 0)).toEqual([]);
+  });
+
+  it('lists the social scenes of 50 and up (a first walk, a first welcome, a thanks) and not the later ones', () => {
+    const { w, ada, ben } = village('reel-scenes');
+    w.tick = 100;
+    const first = say(w, 'social', 'Ada and Ben walked out together for the first time.', [ada.id, ben.id], 40, 30);
+    const later = say(w, 'social', 'Ada and Ben walked out together.', [ada.id, ben.id], 40, 30);
+    const welcome = say(w, 'social', 'Ada was the first to welcome the newcomer Dee.', [ada.id], 40, 30);
+    const second = say(w, 'social', 'Ben welcomed the newcomer Dee.', [ben.id], 40, 30);
+    const thanks = say(w, 'social', 'At the fire Quinn thanked Pat before 5 people for driving off a wolf.', [ada.id], 40, 30);
+    const built = say(w, 'social', 'At the fire Dan thanked Abe for the new kiln.', [ada.id], 40, 30);
+    const refused = say(w, 'social', 'Ada asked Ben to walk out; Ben said not today.', [ada.id], 40, 30);
+    expect(highlights(w, 100, 20)).toEqual([first, welcome, thanks, built]);
+    expect([later, second, refused].some((e) => highlights(w, 100, 20).includes(e))).toBe(false);
   });
 
   it('lists an event once when it is in both the feed and the chronicle, and works for a world with no chronicle', () => {
@@ -1175,6 +1383,7 @@ it('observer purity: a seeded run watched by the director, with the live scan ru
   const director = new Director();
   const checkpoints = new Set([100, 250, 400]);
   let scanned = 0;
+  let sawWalk = 0;
   for (let t = 1; t <= 400; t++) {
     if (t === 20 || t === 60 || t === 120 || t === 200) {
       // staged in BOTH worlds alike, so that the run holds real events to watch: the simulation's own addEvent, about people who are there
@@ -1186,6 +1395,15 @@ it('observer purity: a seeded run watched by the director, with the live scan ru
         addEvent(g.world, 'danger', `A wolf bit ${adults[5].name}.`, [adults[5].id], adults[5].x, adults[5].y);
       }
     }
+    if (t === 30) {
+      // a walk out under way in BOTH worlds alike (the simulation's own beginCourtWalk), for the scan to read
+      for (const g of [watched, twin]) {
+        // two who are not in a conversation or asleep (a conversation would be torn up by a walk set in its middle)
+        const free = g.world.persons.filter((p) => p.alive && p.pose !== 'sleep' && !p.suspended && !g.world.conversations.some((c) => c.a === p.id || c.b === p.id));
+        const [a, b] = free.sort((x, y) => x.birthTick - y.birthTick || x.id - y.id).slice(0, 2);
+        beginCourtWalk(g.world, 7000001, a, b, { x: Math.round(a.x) + 3, y: Math.round(a.y), at: 'water' });
+      }
+    }
     watched.advanceTicks(1);
     twin.advanceTicks(1);
     director.step(watched.world, 0.05);
@@ -1193,6 +1411,7 @@ it('observer purity: a seeded run watched by the director, with the live scan ru
     for (const c of scanLive(watched.world)) {
       void c.caption();
       scanned++;
+      if (c.kind === 'walk') sawWalk++;
     }
     highlights(watched.world, watched.world.tick - 3 * DAY, 8);
     reelOf(watched.world);
@@ -1204,5 +1423,6 @@ it('observer purity: a seeded run watched by the director, with the live scan ru
   }
   expect(director.counts.shown, 'the watcher really saw events').toBeGreaterThanOrEqual(2);
   expect(scanned, 'and the scan really ran').toBeGreaterThanOrEqual(0);
+  expect(sawWalk, 'and it read a walk out under way, with its caption').toBeGreaterThan(0);
   expect(hashWorld(watched.world)).toBe(hashWorld(twin.world));
 });

@@ -33,6 +33,8 @@ import { PLENTY_PARTS, plentyPartOn, setPlenty } from '../../src/sim/plenty';
 import { GROWTH_ROOM_PARTS, growthRoomPartOn, setGrowthRoom } from '../../src/sim/growth_room';
 import { leanSeasonsOn, leanYearsPartOn, setLeanSeasons, setLeanYears } from '../../src/sim/lean_years';
 import { EVENING_PARTS, eveningPartOn, setEvening } from '../../src/sim/evening_fire';
+import { MEETING_PARTS, meetingPartOn, setMeeting } from '../../src/sim/meeting';
+import type { MeetingPart } from '../../src/sim/meeting';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -322,6 +324,13 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-farm-draw' ? undefined : (kind.slice('rich-no-farm-draw-'.length) as FarmDrawPart);
     if (part && !FARM_DRAW_PARTS.includes(part)) throw new Error(`rich-no-farm-draw-${part}: no such part (${FARM_DRAW_PARTS.join(', ')})`);
     return { spec: label, summary: `no extra pull toward the fields${part ? ' (' + part + ' part only)' : ''}, as before rules 255; no effect below rules 255`, install() { const was = Object.fromEntries(FARM_DRAW_PARTS.map((q) => [q, farmDrawPartOn(q)])) as Record<FarmDrawPart, boolean>; setFarmDraw(false, part); return () => { for (const q of FARM_DRAW_PARTS) setFarmDraw(was[q], q); }; } };
+  }
+  // rules 260 (meeting.ts): all three parts removed (equal to rules 257), and each part alone. Matched exactly: `rich-no-meeting-knowledge` (rules 106's meal arrangements, meeting_knowledge.ts) is an older arm of its own.
+  // All three parts have behaviour.
+  if (kind === 'rich-no-meeting' || (kind.startsWith('rich-no-meeting-') && (MEETING_PARTS as readonly string[]).includes(kind.slice('rich-no-meeting-'.length)))) {
+    const part = kind === 'rich-no-meeting' ? undefined : (kind.slice('rich-no-meeting-'.length) as MeetingPart);
+    const what: Record<MeetingPart, string> = { courting: 'nobody asks another to walk out, and a proposal weighs no walks', welcome: 'no resident welcomes newcomers, and a household keeps no record of its arrival', praise: 'nobody thanks a rescuer or the builders of a shared building, and a rescue is no brave deed in the eyes of those who saw it' };
+    return { spec: label, summary: `${part ? what[part] : 'no part of the meeting bundle: nobody walks out together, welcomes newcomers or thanks a rescuer or builders in company'}, as before rules 260; no effect below rules 260`, install() { const was = Object.fromEntries(MEETING_PARTS.map((q) => [q, meetingPartOn(q)])) as Record<MeetingPart, boolean>; setMeeting(false, part); return () => { for (const q of MEETING_PARTS) setMeeting(was[q], q); }; } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
   if (kind === 'rich-no-bench-access') {

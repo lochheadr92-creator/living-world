@@ -18,6 +18,7 @@ import { retagTools } from './toolreg';
 import { newId, registerBuilding, registerSite, unregisterBuilding, unregisterSite, isFreeLand, isWalkable, registerGeneric } from './registry';
 import type { Building, BuildingType, Household, Items, Person, Pile, Site, World } from './types';
 import { T } from './types';
+import { noteThanksDue } from './praise';
 import { dist } from './util';
 
 export function buildingLabel(t: BuildingType): string {
@@ -259,6 +260,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
   finishProject(world, site, b, 'materials supplied and construction completed');
   constructionAftermath(world, b);
   noteSharedBuilders(world, site, b);
+  noteThanksDue(world, b, isFacilityType(site.type) && !owner); // rules 260 (praise.ts): a building for everyone is due its builders' thanks
   return b;
 }
 

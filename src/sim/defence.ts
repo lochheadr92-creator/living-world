@@ -38,6 +38,7 @@ import type { Animal, Person, Tool, World } from './types';
 import { hyp } from './util';
 import { isThreat, setFacingCheck, setWaryCheck } from './wildlife';
 import { woundWolf } from './wolf_fight';
+import { thankRescuer } from './praise';
 import { sawItDie } from './wolf_skin';
 
 /** the rules version at which wolf defence starts; nothing here applies to a world below it */
@@ -352,6 +353,7 @@ function resolve(world: World, p: Person, a: Animal, act: { data: Record<string,
       if (q && q.ent === 'person' && q.alive) {
         addLog(world, q, 'danger', `${p.name} killed the wolf that was after me.`);
         think(world, q, 'rescued', 8, DAY, `${p.name} killed a wolf that was after me`);
+        thankRescuer(world, p, q, true); // rules 260 (praise.ts)
       }
     }
     return 'done';
@@ -369,6 +371,7 @@ function resolve(world: World, p: Person, a: Animal, act: { data: Record<string,
     if (q && q.ent === 'person' && q.alive) {
       addLog(world, q, 'danger', `${p.name} drove the wolf off me.`);
       think(world, q, 'rescued', 8, DAY, `${p.name} drove a wolf off me`);
+      thankRescuer(world, p, q, false); // rules 260 (praise.ts)
     }
   }
   return 'done';

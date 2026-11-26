@@ -147,6 +147,10 @@ export interface FacilitySnapshot {
 }
 
 export interface Relation {
+  /** rules 260 (courting.ts): how many walks out this pair has made, and when the last was; on both sides, absent until the first */
+  courted?: { n: number; last: number };
+  /** rules 260 (courting.ts): how many times running this person's ask to walk out has been refused by the other (1 to 3); absent after a yes */
+  courtRefused?: number;
   childhood?: import('./childhood').ChildhoodExperience[];
   company?: import('./companionship').CompanyExperience;
   deathKnown?: { learned: number; source: 'witness' | 'told' | 'grave'; via: number };
@@ -233,6 +237,8 @@ export interface SeenEntity {
   /** what they are visibly doing */
   act: ActivityKind | '';
   busyTalking: boolean;
+  /** rules 260 (courting.ts): visibly out walking with somebody; present only while a walk out is under way, and only with the part on */
+  walkingOut?: boolean;
 }
 
 export type ActivityKind =
@@ -575,7 +581,7 @@ export interface Illness {
 }
 
 /** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
-export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
+export type RumourKind = 'generous' | 'brave' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
 export interface DeathNotice { id: number; name: string; hhId: number; tick: number }
 export interface Rumour {
   death?: DeathNotice;
@@ -637,6 +643,8 @@ export interface Trade {
 }
 
 export interface Person {
+  /** rules 260 (praise.ts): thanks this person owes somebody who drove a wolf off them or killed one, to say in company; at most three, each kept three days */
+  thanksOwed?: { to: number; since: number; killed?: true }[];
   skillExperience?: import('./skill_coaching').SkillExperience[];
   placeMemories?: import('./personal_places').PlaceMemory[];
   background?: import('./background').Background;
@@ -862,6 +870,8 @@ export type BuildingType =
   | 'hall';
 
 export interface Building {
+  /** rules 260 (praise.ts): the tick a building for everyone was finished and its builders were due thanks in company; cleared when spoken or after three days */
+  thanksDue?: number;
   ent: 'building';
   id: number;
   type: BuildingType;
@@ -1118,6 +1128,10 @@ export interface Animal {
 }
 
 export interface Household {
+  /** rules 260 (welcome.ts): the tick a group of travellers arrived, kept until the household has a home or three days have passed */
+  arrived?: number;
+  /** rules 260 (welcome.ts): who has welcomed this household (at most two), kept and cleared with `arrived` */
+  welcomed?: number[];
   relocations?: import('./relocation').Relocation[];
   /** rules 53 (succession.ts): undertakings members left unfinished at death, for a survivor to take up */
   unfinished?: import('./succession').Unfinished[];
@@ -1220,6 +1234,8 @@ export type ConvPurpose =
   | 'warn'
   | 'recruit'
   | 'propose'
+  | 'court'
+  | 'welcome'
   | 'ask_info'
   | 'trade'
   | 'invite'

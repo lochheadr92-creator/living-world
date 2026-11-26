@@ -134,6 +134,13 @@ export const PROPOSE_ROOMMATE = ['Share my home, {n}? There’s room.', 'Stay wi
 export const ACCEPT_PROPOSE = ['Yes. I’d like that.', 'Gladly.'];
 export const NO_ROOM = ['I’d say yes — but there isn’t room under my roof yet.', 'Not until there’s more space, {n}.'];
 export const DECLINE_PROPOSE = ['I’m not ready.', 'Not yet.'];
+// rules 260 (courting.ts): the ask to walk out, and the answers
+export const COURT_ASK = ['Walk with me a while?', 'Come for a walk with me, {n}?', 'Would you walk out with me, {n}?', 'Shall we walk a while, you and I?'];
+export const COURT_YES = ['Yes. I would like that.', 'Gladly. Lead on.', 'Yes, let us walk.'];
+export const COURT_NO = ['Not today.', 'Not today, {n}. Another time.', 'I cannot today.'];
+// rules 260 (welcome.ts): a resident welcomes somebody who has just come, and they answer
+export const WELCOME_ASK = ['Welcome. You have come a long way.', 'Welcome, {n}. You must be tired from the road.', 'You are new here. Welcome to the camp.'];
+export const WELCOME_THANKS = ['Thank you. I am glad to have found you.', 'Thank you. It has been a long road.', 'Thank you for the welcome.'];
 export const OFFER_LINES = ['You look hungry, {n}. Take this.', 'Here, {n} — you need this more than I do.', 'Have some {what}, {n}.'];
 export const CARE_LINES = ['Eat up, {n}.', 'Here you go, {n}.', 'You must be hungry, {n}.'];
 export const TRADE_OK = ['Deal.', 'Fair enough.', 'Done.'];

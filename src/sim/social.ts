@@ -1,4 +1,7 @@
 import { giveToy } from './toys';
+import { PROPOSE_AFFINITY, PROPOSE_AFFINITY_WALKED, WALKS_FOR_PROPOSAL, beginCourtWalk, courtRefusal, noteCourtRefusal, noteCourtYes } from './courting';
+import { hasCourting } from './meeting';
+import { completeWelcome, planWelcome } from './welcome';
 import { noteFed } from './child_feeding';
 import {gameQuestion,hasGames,isGame} from './play';
 import {beginCoaching,coachingProblem,finishCoaching,interruptCoaching} from './skill_coaching';
@@ -249,7 +252,7 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
 }
 
 /** Items have moved from `giver` to `receiver`: both remember it and onlookers notice. */
-export function onGift(world: World, giver: Person, receiver: Person, items: Items, mode: string): void {
+export function onGift(world: World, giver: Person, receiver: Person, items: Items, mode: string, quiet = false): void {
   careJourneyReceipt(world,giver,receiver.id,items);
   const hungerSev = isFoodGift(items) ? clamp((60 - receiver.needs.hunger) / 60, 0, 1) : 0;
   const thirstSev = (items.water ?? 0) > 0 ? clamp((60 - receiver.needs.thirst) / 60, 0, 1) : 0;
@@ -269,7 +272,8 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   think(world, receiver, 'gift:' + giver.id, 8, Math.round(DAY * 0.7), `${giver.name} gave me ${txt}`);
   witness(world, 'gift', giver, receiver, receiver.x, receiver.y);
   const notable = sev > 0.35 || giver.hhId !== receiver.hhId;
-  if (notable && mode !== 'care') addEvent(world, 'social', `${giver.name} gave ${txt} to ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
+  // rules 260 (welcome.ts): a gift made as part of a welcome is written once, in the welcome's own line
+  if (quiet) { /* no line of its own */ } else if (notable && mode !== 'care') addEvent(world, 'social', `${giver.name} gave ${txt} to ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   else if (mode === 'care' && stageOf(world, receiver) === 'child' && hashUnit(giver.id, receiver.id, world.tick >> 6) < 0.25) addEvent(world, 'social', `${giver.name} fed ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   addFx(world, 'gift', receiver.x, receiver.y, 0);
   receiver.nextThink = world.tick;
@@ -832,6 +836,11 @@ import { noteContact, observeOffer } from './transmission';
 function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): { ok: boolean; why: string } {
   if (!b.alive || b.pose === 'sleep') return { ok: false, why: 'was asleep' };
   if (b.convId) return { ok: false, why: 'was already talking to someone' };
+  // rules 260 (courting.ts): somebody out walking with another is left to the walk; they take no talk but a warning
+  if (hasCourting(world) && purpose !== 'warn' && b.activity?.data.walk) {
+    const mate = world.byId.get((b.activity.data.walk as { with: number }).with);
+    return { ok: false, why: `is walking out with ${mate && mate.ent === 'person' ? mate.name : 'somebody'}` };
+  }
   if(hasChildhood(world)&&stageOf(world,b)==='child'&&b.activity?.kind==='alone'&&['chat','trade','invite','propose','recruit','family_time','play_together','learn_foraging','learn_technique','teach_technique'].includes(purpose))return {ok:false,why:'wanted to finish some quiet time'};
   const avail = canInterruptForTalk(b);
   if (avail <= 0) return { ok: false, why: 'was busy' };
@@ -870,6 +879,10 @@ export interface ConvData {
   infoKind?: string;
   items?: Items;
   joinKind?: 'partner' | 'roommate';
+  /** rules 260 (courting.ts): the place the asker chose to walk out to */
+  walk?: import('./courting').WalkPlace;
+  /** rules 260 (welcome.ts): what the one welcoming settled to tell and give when the newcomer answered */
+  welcome?: import('./welcome').WelcomePlan;
   requestId?: number;
   toolKind?: ToolKind;
   purpose?: string;
@@ -957,6 +970,10 @@ function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
       return `to get ${name}'s help with a building`;
     case 'propose':
       return `to propose something to ${name}`;
+    case 'court':
+      return `to ask ${name} to walk out together`;
+    case 'welcome':
+      return `to welcome ${name}`;
     case 'trade':
       return `to swap goods with ${name}`;
     case 'invite':
@@ -999,7 +1016,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   if(outcome==='interrupted'){interruptLesson(c,'the lesson was cut short');interruptCoaching(c);}
   const gift=hasLivedLife(world)&&c.purpose==='offer'?c.data.giftReceipt:null;
   const childhood=childTimeReport(c,outcome==='interrupted',world);
-  const resultText = c.skillLesson?c.skillLesson.outcome:childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const resultText = c.skillLesson?c.skillLesson.outcome:childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.purpose === 'court' && c.data.courtYes !== undefined ? (c.data.courtYes ? 'agreed to walk out' : 'said not today') : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.skillLesson?c.skillLesson.reason:childhood?childhood.detail:gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
@@ -1033,10 +1050,14 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
     A.wave = world.tick + 20;
     B.wave = world.tick + 24;
   }
+  // rules 260 (welcome.ts): a welcome is what was settled, carried out only when the talk ended as talks end
+  if (outcome === 'success' && c.purpose === 'welcome' && A && B) completeWelcome(world, c, A, B);
   if (A) endExchangeTalk(world,A,c.data.exchangeJourney,req,detailText||resultText);
   const childEnd=childhood?(c.childhood?.outcome==='completed'?'success':'interrupted'):outcome;
   if (A) endTalkActivity(world, A, childEnd,childhood?`${resultText}: ${detailText}`:undefined);
   if (B) endTalkActivity(world, B, childEnd,childhood?`${resultText}: ${detailText}`:undefined);
+  // rules 260 (courting.ts): a yes to a walk out sends both of them on it, when the talk ended as talks end (not cut short)
+  if (outcome === 'success' && c.purpose === 'court' && c.data.courtYes && A && B) beginCourtWalk(world, c.id, A, B, c.data.walk);
 }
 
 /** Called when someone is removed from the world mid-conversation. */
@@ -1258,6 +1279,14 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'invite': {
       inviteAsk(world, A, B, d,c.id);
+      break;
+    }
+    case 'court': {
+      bubble(world, A, D.saying(D.COURT_ASK, A.id, B.id, world.tick >> 5, vars), 'ask', 62);
+      break;
+    }
+    case 'welcome': {
+      bubble(world, A, D.saying(D.WELCOME_ASK, A.id, B.id, world.tick >> 5, vars), 'say', 62);
       break;
     }
     case 'propose': {
@@ -1647,12 +1676,36 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       } else bubble(world, B, 'Not yet.', 'say', 50);
       break;
     }
+    case 'welcome': {
+      // rules 260 (welcome.ts): the newcomer always answers; what A tells and gives is settled here from what A holds and carries, and carried out when the talk ends
+      const { plan, water, food } = planWelcome(world, A, B);
+      c.data.welcome = plan;
+      const place = water ?? food;
+      if (place) bubble(world, A, D.infoLine(world, place, A.id, B.id), 'say', 66);
+      bubble(world, B, D.saying(D.WELCOME_THANKS, B.id, A.id, world.tick >> 5), 'happy', 56);
+      break;
+    }
+    case 'court': {
+      // rules 260 (courting.ts): the answer is the answerer's own state and record, and a roll from the two ids and the time
+      const why = courtRefusal(world, A, B);
+      c.data.courtYes = !why;
+      if (!why) {
+        noteCourtYes(A, B);
+        bubble(world, B, D.saying(D.COURT_YES, B.id, A.id, world.tick >> 5, { n: A.name }), 'happy', 56);
+      } else {
+        bubble(world, B, D.saying(D.COURT_NO, B.id, A.id, world.tick >> 5, { n: A.name }), 'say', 52);
+        noteCourtRefusal(world, A, B);
+      }
+      break;
+    }
     case 'propose': {
       const rel = B.relations[A.id];
       const aff = rel?.affinity ?? 0;
       const trust = rel?.trust ?? 0;
       const kind = d.joinKind ?? 'roommate';
-      const ok = kind === 'partner' ? aff >= 28 && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B) : aff >= 32 && trust >= 22;
+      // rules 260 (courting.ts): from two walks out together the answerer needs a little less fondness (24 where it was 28)
+      const walked = hasCourting(world) && (rel?.courted?.n ?? 0) >= WALKS_FOR_PROPOSAL;
+      const ok = kind === 'partner' ? aff >= (walked ? PROPOSE_AFFINITY_WALKED : PROPOSE_AFFINITY) && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B) : aff >= 32 && trust >= 22;
       if (ok && hashUnit(B.id, A.id, world.tick >> 6) < 0.8 + 0.2 * B.traits.sociability) {
         if (joinHouseholds(world, A, B, kind)) {
           bubble(world, B, D.saying(D.ACCEPT_PROPOSE, B.id, A.id, world.tick >> 5), 'happy', 56);
@@ -1929,7 +1982,7 @@ registerHandler('socialize', {
     const ok = acceptsTalk(world, t, p, purpose);
     if (!ok.ok) {
       // someone who was simply busy can be tried again soon; someone who wants nothing to do with you cannot
-      p.cooldowns['talk' + t.id] = world.tick + (ok.why === 'was too busy to stop' || ok.why === 'was busy' ? 120 : 420);
+      p.cooldowns['talk' + t.id] = world.tick + (ok.why === 'was too busy to stop' || ok.why === 'was busy' || ok.why.startsWith('is walking out') ? 120 : 420);
       addLog(world, p, 'social', `Wanted a word with ${t.name}, who ${ok.why}.`);
       return `fail:${t.name} ${ok.why}`;
     }
