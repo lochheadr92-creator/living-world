@@ -1,6 +1,6 @@
 {
  "note": "Fingerprints of the ordinary world. Regenerate only when behaviour is meant to change: npx vite-node scripts/golden.ts --write",
- "rules": 270,
+ "rules": 277,
  "cases": {
   "meadow": {
    "0": {

@@ -1,0 +1,16 @@
+import {existsSync,readFileSync,writeFileSync,readdirSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {v277Continuation,V277_TICK} from '../tests/helpers/v277ref';
+import {lfHash,sourceManifest} from './observers/provenance';
+const path=new URL('../tests/v277_continuation.expected.json',import.meta.url);
+if(process.argv.includes('--write')&&existsSync(path))throw Error('Never overwrite a recorded pin');
+if(process.argv.includes('--write')&&execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim()!=='')throw Error('Record the pin only from a clean checkout of the landing commit');
+const actual=v277Continuation(V277_TICK);
+if(process.argv.includes('--probe'))console.log(JSON.stringify(actual));
+else if(process.argv.includes('--write')){
+ const files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f.split(String.fromCharCode(92)).join('/')).sort();
+ const source={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),rules:277,content:lfHash(JSON.stringify(sourceManifest(files))),note:'Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick '+V277_TICK+' (day 25), rules 277, saved and continued 120 ticks. Chosen after probing: gen-2 at tick 48000, the world of the rules 260 to 264 pins, holds 39 activities with data.needsAtStart and none with data.forPlace, so tick 60000 of the same seed was probed too; it holds 43 and 2, and was taken. gen-6 at 48000 and at 60000 could not be probed, because the world saved there does not load (Invalid lying in, birth_help.ts validateBirthHelp). The pin exercises both saved fields rules 277 added: data.needsAtStart (on activities with a string option key) and data.forPlace (on withdrawals made for a batch at a known workshop); needsAtStartActivities and forPlaceActivities count them in the saved world. keptNeedsReviews and keptPlaceChoices are the probe counters of the 120 continued ticks (the probe is on for one of the two worlds and is never saved or hashed): two reviews valued a running activity from the second look at its own key and found it above 0, and no place choice kept a withdrawal workshop over the nearest one, so the kept batch place is exercised here only as saved state and is covered by tests/trip_kept.test.ts for its effect. The counts beside the digests are of the saved world, except those two.'};
+ writeFileSync(path,JSON.stringify({source,...actual},null,2)+String.fromCharCode(10));console.log('Recorded immutable rules277 continuation');
+}else{
+ const {source,...expected}=JSON.parse(readFileSync(path,'utf8'));if(JSON.stringify(actual)!==JSON.stringify(expected))throw Error('Rules277 continuation changed');console.log('Rules277 continuation unchanged');
+}
