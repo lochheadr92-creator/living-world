@@ -4,8 +4,16 @@
 //
 // Presentation only and read-only: nothing here writes to the world or draws from its random state, and the words are the
 // simulation's or the inspector's own (occasionNotice for a gathering, the inspector's "what are they doing" and status lines for
-// a person), except the two wolf sentences, which say exactly what the wolf's recorded state is. The director calls scanLive at
-// most once a UI second.
+// a person), except the two wolf sentences, which say exactly what the wolf's recorded state is, and the one sentence of the
+// quiet shot (everybody asleep). The director calls scanLive at most once a UI second.
+//
+// Nobody asleep is offered as a subject. `abed` says who: a person who is asleep, or on the way to bed. A conversation, a person's own speech or trouble, a walk out and a search party
+// follow nobody abed. A wolf that is attacking is still shown on whoever it attacks; a wolf that is stalking is shown on the person
+// who is up (its target if it is, else the nearest), and when everybody near is abed it is still offered, on the nearest, but at 60,
+// which is under LIVE_EXEMPT, so it can no longer hold the screen for the whole night. The kinds that are awake by construction
+// (a vigil, a grief sit, a lying-in, a search, a dance, a gathering) need no test. When nothing else is on, an `ambient` candidate
+// is offered for each person who is up and outdoors (the lowest band, below every other live score), so there is something to cut
+// to that is not a sleeper; `quietPlace` is where the camera goes when nobody is up at all (director_model.ts).
 import { HELP_NEAR } from '../sim/birth_help';
 import { isCourtWalk, type WalkData } from '../sim/courting';
 import { isDancing } from '../sim/dance';
@@ -18,10 +26,10 @@ import { personById } from '../sim/registry';
 import type { Animal, ConvPurpose, Occasion, Person, World } from '../sim/types';
 import { occasionNotice } from './event_cards_model';
 
-export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance' | 'grief' | 'search';
+export type LiveKind = 'occasion' | 'wolf' | 'talk' | 'speech' | 'trouble' | 'walk' | 'lying' | 'vigil' | 'dance' | 'grief' | 'search' | 'ambient' | 'quiet';
 
 export interface LiveCandidate {
-  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>', 'grief:<id>', 'search:<id>' or 'person:<id>' */
+  /** what the cooldown is kept by: 'occ:<id>', 'wolf:<id>', 'talk:<id>', 'walk:<id>', 'lying:<id>', 'vigil:<id>', 'dance:<id>', 'grief:<id>', 'search:<id>', 'amb:<id>' or 'person:<id>' */
   key: string;
   kind: LiveKind;
   score: number;
@@ -35,6 +43,13 @@ export interface LiveCandidate {
 
 /** a wolf this close to a person (tiles) is near them */
 export const WOLF_NEAR = 8;
+
+/** asleep, or on the way to bed: somebody alive who is not somebody to watch. Read from the world, nothing is kept. */
+export const abed = (p: Person): boolean => p.alive && (p.pose === 'sleep' || p.activity?.kind === 'sleep');
+
+/** the key of the shot of the place when nobody is up (the director_model.ts quiet shot), and its one sentence */
+export const QUIET_KEY = 'quiet';
+export const QUIET_SENTENCE = 'Everyone is asleep.';
 
 /** a gathering under way: its card's own sentence */
 const OCCASION_SCORE: Record<Occasion['kind'], number> = { wedding: 70, funeral: 70, feast: 60, harvest: 60, market: 45 };
@@ -91,6 +106,18 @@ const SEARCH_SCORE = 66;
 const TROUBLE_SCORE = 50;
 /** unwell or hurt: the inspector's status line says so */
 const HURT_SCORE = 40;
+/** a wolf stalking when everybody within WOLF_NEAR is abed: still a real threat, but under LIVE_EXEMPT (70), so the cooldown applies */
+export const STALK_ABED_SCORE = 60;
+/**
+ * Somebody up and outdoors with nothing else on (the lowest band: every score here is under the lowest of any other live thing,
+ * plain chat at 20, and far under MIDDLE_FROM). 5 for being there, 6 more when they are at the work itself and not on the way to
+ * it, and 2 for each other person up and outdoors within AMBIENT_NEAR tiles, at most 8: company makes a scene. So 5 to 19.
+ */
+const AMBIENT_BASE = 5;
+const AMBIENT_WORK = 6;
+const AMBIENT_COMPANY = 2;
+const AMBIENT_COMPANY_MAX = 8;
+export const AMBIENT_NEAR = 4;
 
 const hyp = (a: number, b: number): number => Math.hypot(a, b);
 
@@ -98,9 +125,46 @@ const hyp = (a: number, b: number): number => Math.hypot(a, b);
 export const wolfSentence = (state: Animal['state'], name: string): string => `A wolf is ${state === 'attack' ? 'attacking' : 'stalking'} near ${name}.`;
 
 /**
+ * Where the camera goes when nobody is up: the lit fire (a fire with fuel) nearest the centre of the living people, else the centre
+ * itself; null when nobody lives.
+ */
+export function quietPlace(world: World): { x: number; y: number } | null {
+  let n = 0;
+  let sx = 0;
+  let sy = 0;
+  for (const p of world.persons) {
+    if (!p.alive) continue;
+    n++;
+    sx += p.x;
+    sy += p.y;
+  }
+  if (!n) return null;
+  const cx = sx / n;
+  const cy = sy / n;
+  let best: { x: number; y: number } | null = null;
+  let bd = Infinity;
+  for (const b of world.buildings) {
+    if (b.type !== 'fire' || !(b.fuel > 0)) continue;
+    const x = b.x + b.w / 2;
+    const y = b.y + b.h / 2;
+    const d = hyp(x - cx, y - cy);
+    if (d < bd) {
+      bd = d;
+      best = { x, y };
+    }
+  }
+  return best ?? { x: cx, y: cy };
+}
+
+/** whether anybody alive is up (not abed): what makes "Everyone is asleep." true */
+export const anyoneUp = (world: World): boolean => world.persons.some((p) => p.alive && !abed(p));
+
+/**
  * Every live candidate now, best first. A wolf counts when its state is 'stalk' or 'attack' and it is within WOLF_NEAR tiles of a
- * living person: the person it records as its target when that is one of them, else the nearest. Cheap enough for once a second:
- * the one expensive text (describePerson) is only built, through caption(), for the candidate that is shown.
+ * living person: an attack is shown on the person it records as its target when that is one of them, else the nearest; a stalk on
+ * its target when that is one of them and is up, else the nearest who is up, and when everybody near is abed, on the nearest at
+ * STALK_ABED_SCORE. Nobody abed is the subject of any other kind that follows a person. Cheap enough for once a second: the one
+ * expensive text (describePerson) is only built, through caption(), for the candidate that is shown.
  */
 export function scanLive(world: World): LiveCandidate[] {
   const out: LiveCandidate[] = [];
@@ -112,35 +176,51 @@ export function scanLive(world: World): LiveCandidate[] {
 
   for (const a of world.animals) {
     if (a.type !== 'wolf' || (a.state !== 'stalk' && a.state !== 'attack')) continue;
-    let who: Person | undefined = personById(world, a.targetId);
-    if (!who || !who.alive || hyp(who.x - a.x, who.y - a.y) > WOLF_NEAR) {
-      who = undefined;
-      let best = WOLF_NEAR;
-      for (const p of world.persons) {
-        if (!p.alive) continue;
-        const d = hyp(p.x - a.x, p.y - a.y);
-        if (d <= best) {
-          best = d;
-          who = p;
-        }
+    const attack = a.state === 'attack';
+    const target = personById(world, a.targetId);
+    const targetNear = !!target && target.alive && hyp(target.x - a.x, target.y - a.y) <= WOLF_NEAR;
+    // the nearest person within WOLF_NEAR, and the nearest of those who are up
+    let nearest: Person | undefined;
+    let nearestUp: Person | undefined;
+    let bestAny = WOLF_NEAR;
+    let bestUp = WOLF_NEAR;
+    for (const p of world.persons) {
+      if (!p.alive) continue;
+      const d = hyp(p.x - a.x, p.y - a.y);
+      if (d <= bestAny) {
+        bestAny = d;
+        nearest = p;
       }
+      if (d <= bestUp && !abed(p)) {
+        bestUp = d;
+        nearestUp = p;
+      }
+    }
+    let who: Person | undefined;
+    let score = attack ? 80 : 70;
+    if (attack) who = targetNear ? target : nearest;
+    else if (targetNear && !abed(target!)) who = target;
+    else if (nearestUp) who = nearestUp;
+    else if (nearest) {
+      who = nearest;
+      score = STALK_ABED_SCORE;
     }
     if (!who) continue;
     const name = who.name;
-    out.push({ key: `wolf:${a.id}`, kind: 'wolf', score: a.state === 'attack' ? 80 : 70, subjectId: who.id, x: who.x, y: who.y, caption: () => wolfSentence(a.state, name) });
+    out.push({ key: `wolf:${a.id}`, kind: 'wolf', score, subjectId: who.id, x: who.x, y: who.y, caption: () => wolfSentence(a.state, name) });
   }
 
   const doing = (id: number): string => describePerson(world, id)?.qa.doing ?? '';
   for (const c of world.conversations) {
     const a = personById(world, c.a);
-    if (!a || !a.alive) continue;
+    if (!a || !a.alive || abed(a)) continue;
     out.push({ key: `talk:${c.id}`, kind: 'talk', score: TALK_SCORE[c.purpose] ?? 20, subjectId: a.id, x: a.x, y: a.y, caption: () => doing(a.id) });
   }
 
   // a walk out under way (courting.ts: a 'wander' whose data.walk is held by both, role 'a' the one who asked): one candidate for the pair,
   // from the leader's side, in the inspector's own words for what they are doing
   for (const p of world.persons) {
-    const a = p.alive ? p.activity : null;
+    const a = p.alive && !abed(p) ? p.activity : null;
     if (!a || !isCourtWalk(a)) continue;
     const walk = a.data.walk as WalkData;
     if (walk.role !== 'a' || walk.done) continue;
@@ -150,7 +230,7 @@ export function scanLive(world: World): LiveCandidate[] {
   // a search party out after dark under way (fetch_home.ts: a 'visit' whose data.fetch is not settled and who has set out with somebody), one candidate for each search, from the
   // worrier's side, in the inspector's own words for what they are doing
   for (const p of world.persons) {
-    const a = p.alive ? p.activity : null;
+    const a = p.alive && !abed(p) ? p.activity : null;
     if (!a || !isFetchSearch(a)) continue;
     const d = a.data.fetch as FetchData;
     if (d.done || !d.party.length) continue;
@@ -190,7 +270,7 @@ export function scanLive(world: World): LiveCandidate[] {
     if (!was || c.score > was.score) byPerson.set(c.subjectId, c);
   };
   for (const p of world.persons) {
-    if (!p.alive) continue;
+    if (!p.alive || abed(p)) continue;
     const sp = p.speech;
     if (sp && sp.until > world.tick && (sp.kind === 'angry' || sp.kind === 'warn')) {
       put({ key: `person:${p.id}`, kind: 'speech', score: SPEECH_SCORE[sp.kind], subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
@@ -203,5 +283,16 @@ export function scanLive(world: World): LiveCandidate[] {
   }
   out.push(...byPerson.values());
 
-  return out.sort((a, b) => b.score - a.score);
+  // somebody up and outdoors, with nothing else to say about them: one candidate each, the lowest band. Somebody inside a hut cannot be
+  // seen, and somebody abed is not offered. Each is scored by how much there is to watch (the work itself, company close by).
+  const up = world.persons.filter((p) => p.alive && !p.indoors && !abed(p));
+  for (const p of up) {
+    let company = 0;
+    for (const q of up) if (q !== p && hyp(q.x - p.x, q.y - p.y) <= AMBIENT_NEAR) company++;
+    const score = AMBIENT_BASE + (p.activity?.phase === 'work' ? AMBIENT_WORK : 0) + Math.min(AMBIENT_COMPANY_MAX, company * AMBIENT_COMPANY);
+    out.push({ key: `amb:${p.id}`, kind: 'ambient', score, subjectId: p.id, x: p.x, y: p.y, caption: () => doing(p.id) });
+  }
+
+  // best first; among the ambient ones of one score the lower id, so the order never depends on how the people are listed
+  return out.sort((a, b) => b.score - a.score || (a.kind === 'ambient' && b.kind === 'ambient' ? a.subjectId - b.subjectId : 0));
 }

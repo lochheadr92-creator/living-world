@@ -86,6 +86,28 @@ event takes it at once, anything else at the hold. A live shot's caption says "n
   and gone when the search is settled or ends.
 - Trouble: `statusLine` tone 'danger' 50 (unwell or hurt 40); caption the status text.
 
+## Nobody asleep is shown (27 November 2026, presentation only)
+The owner's complaint: the director was still picking up people falling asleep in a lean-to. Measured at rules 264 over six worlds, 41.7% of
+screen time after dark was on somebody asleep or going to bed (20.1% of all of it), and 63 of 511 shots started on such a person. What changed
+(`abed(p)` in `director_live.ts`: alive, and `pose` 'sleep' or activity 'sleep'):
+- A shot never starts on somebody abed. An event is shown about the first of its people who is up; a lighter event (under 80) whose living
+  people are all abed waits, its wait clock stopped (it still goes stale after a day), and a TOP event is shown about the first living one all the
+  same. The filler candidate is not shown while its person is abed. Conversations, anger or warnings, trouble (hurt, unwell, at risk), a walk out
+  and a search party never follow somebody abed. A stalking wolf follows the person who is up (its target, else the nearest); when everybody
+  within `WOLF_NEAR` is abed it is still offered, on the nearest, at 60, under `LIVE_EXEMPT`, so its 60 s cooldown applies. An attacking wolf is as before.
+- A shot whose person goes to bed is spent (`Shot.spent`): after `MIN_HOLD` for an event or filler shot, `MIN_CUT` for a live one (never a wolf's). It
+  has no caption, a waiting MIDDLE or TOP event takes it at once, and at the hold anything replaces it with no linger.
+- Something to cut to: an ambient candidate (`live:ambient`, key `amb:<id>`) for each person who is up and outdoors, 5, 6 more when at the work
+  itself, 2 for each other such person within 4 tiles up to 8, so 5 to 19, under every other live score (plain chat is 20). It is used only when
+  there is no shot, or the shot is spent or its live thing has ended, and after the filler candidate; the 60 s cooldown applies.
+- When nobody is up and nothing else is on, the shot becomes the place (`live:quiet`, score 1): the lit fire nearest the people, captioned
+  "Everyone is asleep." while nobody at all is up. Anything replaces it at once; it stays until then.
+Re-measured at rules 265 over fresh meadow (12 days) and the saves river-day48 and aspen-day96 raised to 265 (4 days each), the same worlds in both
+arms, director at 1x, commit 964d8291 against this change: screen time on somebody abed 20.5% to 8.1% (after dark 42.3% to 16.7%); shots that
+started on somebody abed 29 of 196 to 5 of 275; stale 54.5% to 38.4%; events of weight 50 and up written 126, shown 93, dropped stale 26, dropped for a full
+queue 2, the same in both. The new shots cost cuts: 24.5 to 34.4 per 10 minutes, ambient shots being 22% of screen time. What is left is the wait for the
+hold (spent shots 5.0%), TOP events and wolves. At 4x the hold is a quarter of a world day, so it only goes from 22.2% to 19.0% (dark 45.7% to 39.0%).
+
 ## What it does not do
 No explanation of its own: captions are event text, the inspector's lines or the two wolf sentences. No world writes.
 
