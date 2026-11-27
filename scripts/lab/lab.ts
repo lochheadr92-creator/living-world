@@ -54,6 +54,8 @@ import { HALL_PARTS, hallPartOn, setHall } from '../../src/sim/hall_repair';
 import type { HallPart } from '../../src/sim/hall_repair';
 import { REVIEW_PARTS, reviewPartOn, setReviewRepairs } from '../../src/sim/review_repairs';
 import type { ReviewPart } from '../../src/sim/review_repairs';
+import { NIGHT_SLEEP_PARTS, nightSleepPartOn, setNightSleep } from '../../src/sim/night_sleep';
+import type { NightSleepPart } from '../../src/sim/night_sleep';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -397,6 +399,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-review-repairs' ? undefined : (kind.slice('rich-no-review-repairs-'.length) as ReviewPart);
     const what: Record<ReviewPart, string> = { chat: 'a chat may be started with a little one after dark', route: 'a walk keeps its old route through a newly solid tile', jar: 'the room for water ignores a jar\'s free allowance', loan: 'a return promise keeps naming the dead lender', wolf: 'a wolf search that ran out of budget is remembered as unreachable' };
     return { spec: label, summary: `${part ? what[part] : 'none of the five review repairs'}, as before rules 282; no effect below rules 282`, install() { const was = Object.fromEntries(REVIEW_PARTS.map((q) => [q, reviewPartOn(q)])) as Record<ReviewPart, boolean>; setReviewRepairs(false, part); return () => { for (const q of REVIEW_PARTS) setReviewRepairs(was[q], q); }; } };
+  }
+  // rules 283 (night_sleep.ts): both parts removed (equal to rules 282), and each part alone. Nothing else is called `rich-no-night-sleep`.
+  if (kind === 'rich-no-night-sleep' || (kind.startsWith('rich-no-night-sleep-') && (NIGHT_SLEEP_PARTS as readonly string[]).includes(kind.slice('rich-no-night-sleep-'.length)))) {
+    const part = kind === 'rich-no-night-sleep' ? undefined : (kind.slice('rich-no-night-sleep-'.length) as NightSleepPart);
+    const what: Record<NightSleepPart, string> = { through: 'a sleeper gets up when rested, in the night', evening: 'a grown person\'s bedtime stays at 0.8 of the day and the wait for the light is offered all evening' };
+    return { spec: label, summary: `${part ? what[part] : 'no night\'s sleep: people lie down at 0.8 of the day and get up rested in the night'}, as before rules 283; no effect below rules 283`, install() { const was = Object.fromEntries(NIGHT_SLEEP_PARTS.map((q) => [q, nightSleepPartOn(q)])) as Record<NightSleepPart, boolean>; setNightSleep(false, part); return () => { for (const q of NIGHT_SLEEP_PARTS) setNightSleep(was[q], q); }; } };
   }
   // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
   if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };

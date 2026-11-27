@@ -35,6 +35,7 @@ import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import {runsPreservation} from './preservation';
 import { dayFraction } from './environment';
 import { BEDTIME_PULL, atBedtime } from './bedtime';
+import { beforeBedtime, bedtimeOf } from './night_sleep';
 import {
   Scorer,
   addBlocked,
@@ -487,7 +488,7 @@ function optSleep(ctx: Ctx): void {
   }
   let sd = ctx.drives.energy;
   const frac = dayFraction(world.tick);
-  const bedtime = 0.8 + p.chrono;
+  const bedtime = bedtimeOf(world, p); // rules 283 (night_sleep.ts, part evening): later for a grown person
   // rules 280 (bedtime.ts, part `bed`): a child under eight has its bedtime at dark, tired or not
   const littleBed = atBedtime(world, p);
   const lateNight = littleBed || frac > bedtime || frac < 0.2 + p.chrono;
@@ -676,6 +677,8 @@ function optWarmth(ctx: Ctx): void {
 function optShelter(ctx: Ctx): void {
   const { world, p } = ctx;
   if (!isRich(world) || !nightPlansOn() || !ctx.night) return;
+  // rules 283 (night_sleep.ts, part evening): the evening before bedtime is not a night to wait through
+  if (beforeBedtime(world, p)) { addBlocked(ctx, 'rest', 'Stay in shelter until it is light', 0, 'the evening is not over', 'rest'); return; }
   // waiting must never stand in for seeing to something urgent
   if (ctx.criticals.length || p.needs.thirst < 24 || p.needs.hunger < 20) {
     addBlocked(ctx, 'rest', 'Stay in shelter until it is light', 0, 'something more pressing comes first', 'rest');

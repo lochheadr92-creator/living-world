@@ -1,5 +1,6 @@
 import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
 import { sleepsTillMorning } from './bedtime';
+import { sleepsThrough } from './night_sleep';
 import { finishHallEvening, isHallEvening } from './hall_repair';
 import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
 import { praiseAtFire } from './praise';
@@ -36,7 +37,7 @@ registerHandler('sleep', {
     a.progress++;
     const n = p.needs;
     // rules 280 (bedtime.ts, part `bed`): a little one asleep sleeps till the morning light, however rested
-    if (n.energy >= 94 && !sleepsTillMorning(world, p)) {
+    if (n.energy >= 94 && !sleepsTillMorning(world, p) && !sleepsThrough(world)) { // rules 283 (night_sleep.ts, part through): nobody gets up rested in the night
       a.blocked = 'rested';
       return 'done';
     }

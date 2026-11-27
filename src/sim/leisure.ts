@@ -20,6 +20,7 @@
 // An authored world, and any world below version 28, never creates it, so its saves and hashes are exactly what they were.
 import { DAY } from './constants';
 import { dayFraction } from './environment';
+import { bedtimeOf } from './night_sleep';
 import { isRich } from './mood';
 import { isReserved } from './people';
 import { Scorer, beliefsByKind, dangerAt, eta, pen } from './optutil';
@@ -118,7 +119,7 @@ function tilt(ctx: Ctx, h: Haunt): Scorer {
   sc.add(taste >= 0 ? 'a favourite spot' : 'not much for it', 1.5 * taste);
   if (h.key === 'square' && !isReserved(p)) {
     const frac = dayFraction(world.tick);
-    const bedtime = 0.8 + p.chrono;
+    const bedtime = bedtimeOf(world, p); // rules 283 (night_sleep.ts, part evening)
     if (frac > 0.62 && frac < bedtime - 0.03) sc.add('the evening gathering', 2.5 * Math.min(1, p.traits.sociability));
   }
   if (h.key !== 'home') sc.add('the walk', -pen(eta(ctx, h.x, h.y)) * 0.3);

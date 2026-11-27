@@ -26,6 +26,7 @@
 import { newActivity, standSpotFor } from './activities';
 import { DAY } from './constants';
 import { dayFraction } from './environment';
+import { bedtimeOf } from './night_sleep';
 import { addEvent, say } from './events';
 import { noteHaunt } from './leisure';
 import { think } from './mood';
@@ -75,7 +76,7 @@ export const STORY_LIFT_CHILD = 4;
 /** Is it this person's evening: past EVENING_FROM and before their own bedtime (the same bedtime ctx.night uses)? */
 export function isEveningFor(w: World, p: Person): boolean {
   const frac = dayFraction(w.tick);
-  return frac >= EVENING_FROM && frac < 0.8 + p.chrono;
+  return frac >= EVENING_FROM && frac < bedtimeOf(w, p); // rules 283 (night_sleep.ts, part evening): to the later bedtime
 }
 
 const sittingAt = (q: Person, fireId: number): boolean => q.alive && q.activity?.kind === 'wander' && q.activity.data.evening === 'fire' && q.activity.data.fireId === fireId;
