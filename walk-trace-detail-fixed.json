@@ -1,0 +1,6248 @@
+{
+ "loaded": "C:/dev/lw_saves/rules256/aspen-day48.save.json",
+ "firstTick": 115200,
+ "initialHash": "ffd02f1f",
+ "endHash": "0cdc8ef2",
+ "walkingTicks": 40265,
+ "adultTicks13d": 697529,
+ "missingTrace": [
+  {
+   "tick": 115780,
+   "person": 53759,
+   "key": "collect:11304:planks",
+   "target": 11304,
+   "items": {
+    "planks": 3
+   },
+   "start": {
+    "tick": 115727,
+    "belief": {
+     "id": 11304,
+     "kind": "building",
+     "x": 37.5,
+     "y": 43,
+     "amount": 0,
+     "max": 0,
+     "seen": 114730,
+     "src": "seen",
+     "from": 0,
+     "learned": 114730,
+     "btype": "timber_yard",
+     "hh": 0,
+     "cond": 32.758589499992006,
+     "fuel": 0,
+     "items": {
+      "bedding": 1,
+      "net": 1,
+      "offcuts": 1,
+      "planks": 1,
+      "saw": 1,
+      "trap": 1,
+      "wood": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "offcuts": 5,
+       "trap": 1,
+       "net": 1,
+       "bedding": 1,
+       "planks": 4
+      },
+      "inputs": {
+       "wood": 2
+      },
+      "blocked": "",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 29063
+     },
+     "tools": [
+      "saw",
+      "saw",
+      "trap",
+      "net",
+      "bedding"
+     ],
+     "textileStock": {
+      "observer": 53759,
+      "items": {
+       "fibre": 0,
+       "garment": 0,
+       "blanket": 0,
+       "bedding": 1,
+       "wool": 0
+      }
+     },
+     "gearStock": {
+      "observer": 53759,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 53759,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 11304,
+     "type": "timber_yard",
+     "x": 36,
+     "y": 42,
+     "w": 3,
+     "h": 2,
+     "condition": 29.699708999991508,
+     "hhId": 0,
+     "store": {
+      "items": {
+       "offcuts": 5,
+       "trap": 1,
+       "net": 1,
+       "bedding": 1,
+       "saw": 2,
+       "planks": 4,
+       "wood": 2
+      },
+      "cap": 70
+     },
+     "fuel": 0,
+     "builtTick": 29063,
+     "doorX": 36,
+     "doorY": 44,
+     "variant": 3,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [
+       {
+        "kind": "out",
+        "item": "planks",
+        "n": 2,
+        "owner": 1118,
+        "until": 116659,
+        "reason": "for the shared hall"
+       },
+       {
+        "kind": "out",
+        "item": "offcuts",
+        "n": 1,
+        "owner": 1118,
+        "until": 116659,
+        "reason": "for the shared hall"
+       },
+       {
+        "kind": "out",
+        "item": "planks",
+        "n": 2,
+        "owner": 1094,
+        "until": 117161,
+        "reason": "for the shared hall"
+       },
+       {
+        "kind": "out",
+        "item": "offcuts",
+        "n": 1,
+        "owner": 1094,
+        "until": 117161,
+        "reason": "for the shared hall"
+       }
+      ],
+      "batches": 91,
+      "produced": {
+       "fibre": 69,
+       "planks": 81,
+       "offcuts": 69,
+       "garment": 12,
+       "blanket": 2,
+       "trap": 1,
+       "net": 1,
+       "bedding": 2
+      },
+      "consumed": {
+       "wood": 179,
+       "fibre": 50,
+       "wool": 6
+      },
+      "contributions": {
+       "1088": 378,
+       "1089": 325,
+       "1093": 811,
+       "1094": 698,
+       "1095": 60,
+       "1098": 166,
+       "1099": 111,
+       "1110": 385,
+       "1111": 60,
+       "1114": 297,
+       "1115": 569,
+       "1116": 220,
+       "1118": 775,
+       "1120": 270,
+       "1121": 218,
+       "1124": 180,
+       "1125": 168,
+       "4850": 180,
+       "4851": 364,
+       "7108": 60,
+       "7109": 108,
+       "10899": 517,
+       "10900": 212,
+       "13516": 49,
+       "13517": 46,
+       "16452": 59,
+       "16453": 104,
+       "37501": 65,
+       "41513": 100
+      },
+      "lastRun": 113561,
+      "lastBlocker": "",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "1096": 0.061124694376528295,
+       "1102": 0.20537897310513523,
+       "1108": 0.42787286063569496,
+       "1113": 0.09168704156479243,
+       "1123": 0.061124694376528295,
+       "4849": 0.15281173594132072
+      },
+      "wasted": {
+       "chips and bark hewn away": 19,
+       "sawdust and offcuts": 15.5
+      },
+      "tended": 29063
+     },
+     "builtBy": [
+      1110
+     ],
+     "built": 29063
+    }
+   },
+   "belief": {
+    "id": 11304,
+    "kind": "building",
+    "x": 37.5,
+    "y": 43,
+    "amount": 0,
+    "max": 0,
+    "seen": 115780,
+    "src": "seen",
+    "from": 0,
+    "learned": 115780,
+    "btype": "timber_yard",
+    "hh": 0,
+    "cond": 29.609105499991482,
+    "fuel": 0,
+    "items": {
+     "bedding": 1,
+     "net": 1,
+     "offcuts": 1,
+     "planks": 1,
+     "saw": 1,
+     "trap": 1
+    },
+    "ops": {
+     "job": "saw_planks",
+     "progress": 0.1741691979967291,
+     "burn": 0,
+     "output": {
+      "offcuts": 5,
+      "trap": 1,
+      "net": 1,
+      "bedding": 1,
+      "planks": 4
+     },
+     "inputs": {},
+     "blocked": "",
+     "deposit": -1,
+     "yields": {
+      "planks": 2,
+      "offcuts": 1
+     },
+     "readyAt": 115829.5498481202,
+     "client": 50829,
+     "tended": 29063,
+     "held": [
+      {
+       "owner": 1118,
+       "item": "planks",
+       "n": 2,
+       "until": 116659
+      },
+      {
+       "owner": 1118,
+       "item": "offcuts",
+       "n": 1,
+       "until": 116659
+      },
+      {
+       "owner": 1094,
+       "item": "planks",
+       "n": 2,
+       "until": 117161
+      },
+      {
+       "owner": 1094,
+       "item": "offcuts",
+       "n": 1,
+       "until": 117161
+      }
+     ],
+     "seenBuilders": {
+      "1096": 0.061124694376528295,
+      "1102": 0.20537897310513523,
+      "1108": 0.42787286063569496,
+      "1113": 0.09168704156479243,
+      "1123": 0.061124694376528295,
+      "4849": 0.15281173594132072
+     }
+    },
+    "tools": [
+     "saw",
+     "saw",
+     "trap",
+     "net",
+     "bedding"
+    ],
+    "textileStock": {
+     "observer": 53759,
+     "items": {
+      "fibre": 0,
+      "garment": 0,
+      "blanket": 0,
+      "bedding": 1,
+      "wool": 0
+     }
+    },
+    "gearStock": {
+     "observer": 53759,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 53759,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 11304,
+    "type": "timber_yard",
+    "x": 36,
+    "y": 42,
+    "w": 3,
+    "h": 2,
+    "condition": 29.609105499991482,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "offcuts": 5,
+      "trap": 1,
+      "net": 1,
+      "bedding": 1,
+      "saw": 2,
+      "planks": 4
+     },
+     "cap": 70
+    },
+    "fuel": 0,
+    "builtTick": 29063,
+    "doorX": 36,
+    "doorY": 44,
+    "variant": 3,
+    "inside": [],
+    "ops": {
+     "job": {
+      "recipe": "saw_planks",
+      "client": 50829,
+      "purpose": "for the shared hall",
+      "destSite": 58024,
+      "phase": "work",
+      "started": 115767,
+      "lastWork": 115780,
+      "progress": 10.450151879803746,
+      "total": 60,
+      "burnLeft": 0,
+      "burnTotal": 0,
+      "held": {
+       "wood": 3
+      },
+      "workers": {
+       "50829": 14
+      },
+      "blocked": ""
+     },
+     "earmarks": [
+      {
+       "kind": "out",
+       "item": "planks",
+       "n": 2,
+       "owner": 1118,
+       "until": 116659,
+       "reason": "for the shared hall"
+      },
+      {
+       "kind": "out",
+       "item": "offcuts",
+       "n": 1,
+       "owner": 1118,
+       "until": 116659,
+       "reason": "for the shared hall"
+      },
+      {
+       "kind": "out",
+       "item": "planks",
+       "n": 2,
+       "owner": 1094,
+       "until": 117161,
+       "reason": "for the shared hall"
+      },
+      {
+       "kind": "out",
+       "item": "offcuts",
+       "n": 1,
+       "owner": 1094,
+       "until": 117161,
+       "reason": "for the shared hall"
+      }
+     ],
+     "batches": 91,
+     "produced": {
+      "fibre": 69,
+      "planks": 81,
+      "offcuts": 69,
+      "garment": 12,
+      "blanket": 2,
+      "trap": 1,
+      "net": 1,
+      "bedding": 2
+     },
+     "consumed": {
+      "wood": 179,
+      "fibre": 50,
+      "wool": 6
+     },
+     "contributions": {
+      "1088": 378,
+      "1089": 325,
+      "1093": 811,
+      "1094": 698,
+      "1095": 60,
+      "1098": 166,
+      "1099": 111,
+      "1110": 385,
+      "1111": 60,
+      "1114": 297,
+      "1115": 569,
+      "1116": 220,
+      "1118": 775,
+      "1120": 270,
+      "1121": 218,
+      "1124": 180,
+      "1125": 168,
+      "4850": 180,
+      "4851": 364,
+      "7108": 60,
+      "7109": 108,
+      "10899": 517,
+      "10900": 212,
+      "13516": 49,
+      "13517": 46,
+      "16452": 59,
+      "16453": 104,
+      "37501": 65,
+      "41513": 100,
+      "50829": 14
+     },
+     "lastRun": 115780,
+     "lastBlocker": "",
+     "depositId": 0,
+     "shares": {},
+     "present": {
+      "50829": 115780
+     },
+     "builders": {
+      "1096": 0.061124694376528295,
+      "1102": 0.20537897310513523,
+      "1108": 0.42787286063569496,
+      "1113": 0.09168704156479243,
+      "1123": 0.061124694376528295,
+      "4849": 0.15281173594132072
+     },
+     "wasted": {
+      "chips and bark hewn away": 19,
+      "sawdust and offcuts": 15.5
+     },
+     "tended": 29063
+    },
+    "builtBy": [
+     1110
+    ],
+    "built": 29063
+   },
+   "next": "gather:713",
+   "trace": [
+    {
+     "item": "offcuts",
+     "unmet": 4,
+     "found": [
+      [
+       11304,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "fibre",
+     "unmet": 1,
+     "found": [
+      [
+       50661,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "trap",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 4,
+     "found": []
+    },
+    {
+     "item": "wood",
+     "unmet": 3,
+     "dest": 50661,
+     "found": [
+      [
+       55488,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "bricks",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 1,
+     "dest": 55488,
+     "found": []
+    },
+    {
+     "item": "stone",
+     "unmet": 1,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "charcoal",
+     "unmet": 2,
+     "found": [
+      [
+       57884,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 30125,
+     "found": []
+    },
+    {
+     "item": "charcoal",
+     "unmet": 2,
+     "dest": 30125,
+     "found": [
+      [
+       57884,
+       2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tick": 115828,
+   "person": 1099,
+   "key": "collect:55474:bread",
+   "target": 55474,
+   "items": {
+    "bread": 4
+   },
+   "start": {
+    "tick": 115774,
+    "belief": {
+     "id": 55474,
+     "kind": "building",
+     "x": 35,
+     "y": 25,
+     "amount": 0,
+     "max": 0,
+     "seen": 113921,
+     "src": "seen",
+     "from": 0,
+     "learned": 113921,
+     "btype": "bakery",
+     "hh": 0,
+     "cond": 92.01719999997809,
+     "fuel": 0,
+     "items": {
+      "bread": 1,
+      "flour": 1,
+      "water": 1,
+      "wood": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "flour": 8,
+       "bread": 6
+      },
+      "inputs": {
+       "wood": 1,
+       "water": 2
+      },
+      "blocked": "lacks 3 flour",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 108219
+     },
+     "gearStock": {
+      "observer": 1099,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 1099,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 55474,
+     "type": "bakery",
+     "x": 34,
+     "y": 24,
+     "w": 2,
+     "h": 2,
+     "condition": 87.160508999979,
+     "hhId": 0,
+     "store": {
+      "items": {
+       "flour": 7,
+       "bread": 6,
+       "wood": 1,
+       "water": 2
+      },
+      "cap": 40
+     },
+     "fuel": 0,
+     "builtTick": 108219,
+     "doorX": 34,
+     "doorY": 26,
+     "variant": 0,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [
+       {
+        "kind": "out",
+        "item": "flour",
+        "n": 7,
+        "owner": 1111,
+        "until": 116663,
+        "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+       },
+       {
+        "kind": "out",
+        "item": "bread",
+        "n": 6,
+        "owner": 1111,
+        "until": 116882,
+        "reason": "to bake the household's grain into bread, which feeds further and keeps"
+       }
+      ],
+      "batches": 8,
+      "produced": {
+       "flour": 21,
+       "bread": 16
+      },
+      "consumed": {
+       "grain": 28,
+       "wood": 4,
+       "flour": 12,
+       "water": 8
+      },
+      "contributions": {
+       "1088": 52,
+       "1099": 114,
+       "1110": 42,
+       "1111": 233,
+       "1120": 11,
+       "7108": 168,
+       "10900": 97
+      },
+      "lastRun": 113282,
+      "lastBlocker": "lacks 3 flour",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "1096": 0.3872017353579168,
+       "1102": 0.25921908893709383,
+       "7107": 0.3535791757049894
+      },
+      "wasted": {
+       "husks and chaff": 7
+      },
+      "tended": 108219
+     },
+     "builtBy": [
+      1104,
+      1105,
+      7108,
+      1099
+     ],
+     "built": 108219,
+     "builtAll": true
+    }
+   },
+   "belief": {
+    "id": 55474,
+    "kind": "building",
+    "x": 35,
+    "y": 25,
+    "amount": 0,
+    "max": 0,
+    "seen": 115826,
+    "src": "seen",
+    "from": 0,
+    "learned": 115826,
+    "btype": "bakery",
+    "hh": 0,
+    "cond": 87.06477699997906,
+    "fuel": 0,
+    "items": {
+     "bread": 1,
+     "flour": 1,
+     "water": 1,
+     "wood": 1
+    },
+    "ops": {
+     "job": null,
+     "progress": 0,
+     "burn": 0,
+     "output": {
+      "flour": 7,
+      "bread": 6
+     },
+     "inputs": {
+      "wood": 1,
+      "water": 2
+     },
+     "blocked": "lacks 3 flour",
+     "deposit": -1,
+     "yields": {},
+     "readyAt": 0,
+     "client": 0,
+     "tended": 108219,
+     "held": [
+      {
+       "owner": 1111,
+       "item": "flour",
+       "n": 7,
+       "until": 116663
+      },
+      {
+       "owner": 1111,
+       "item": "bread",
+       "n": 6,
+       "until": 116882
+      }
+     ],
+     "seenBuilders": {
+      "1096": 0.3872017353579168,
+      "1102": 0.25921908893709383,
+      "7107": 0.3535791757049894
+     }
+    },
+    "gearStock": {
+     "observer": 1099,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 1099,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 55474,
+    "type": "bakery",
+    "x": 34,
+    "y": 24,
+    "w": 2,
+    "h": 2,
+    "condition": 87.06109499997906,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "flour": 7,
+      "bread": 6,
+      "wood": 1,
+      "water": 2
+     },
+     "cap": 40
+    },
+    "fuel": 0,
+    "builtTick": 108219,
+    "doorX": 34,
+    "doorY": 26,
+    "variant": 0,
+    "inside": [],
+    "ops": {
+     "job": null,
+     "earmarks": [
+      {
+       "kind": "out",
+       "item": "flour",
+       "n": 7,
+       "owner": 1111,
+       "until": 116663,
+       "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+      },
+      {
+       "kind": "out",
+       "item": "bread",
+       "n": 6,
+       "owner": 1111,
+       "until": 116882,
+       "reason": "to bake the household's grain into bread, which feeds further and keeps"
+      }
+     ],
+     "batches": 8,
+     "produced": {
+      "flour": 21,
+      "bread": 16
+     },
+     "consumed": {
+      "grain": 28,
+      "wood": 4,
+      "flour": 12,
+      "water": 8
+     },
+     "contributions": {
+      "1088": 52,
+      "1099": 114,
+      "1110": 42,
+      "1111": 233,
+      "1120": 11,
+      "7108": 168,
+      "10900": 97
+     },
+     "lastRun": 113282,
+     "lastBlocker": "lacks 3 flour",
+     "depositId": 0,
+     "shares": {},
+     "present": {},
+     "builders": {
+      "1096": 0.3872017353579168,
+      "1102": 0.25921908893709383,
+      "7107": 0.3535791757049894
+     },
+     "wasted": {
+      "husks and chaff": 7
+     },
+     "tended": 108219
+    },
+    "builtBy": [
+     1104,
+     1105,
+     7108,
+     1099
+    ],
+    "built": 108219,
+    "builtAll": true
+   },
+   "next": "bring:55474:grain",
+   "trace": [
+    {
+     "item": "offcuts",
+     "unmet": 4,
+     "found": [
+      [
+       11304,
+       5
+      ],
+      [
+       50661,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "trap",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 5,
+     "found": [
+      [
+       11304,
+       4
+      ],
+      [
+       50661,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "stone",
+     "unmet": 4,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "bricks",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 3,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "wood",
+     "unmet": 1,
+     "dest": 24746,
+     "found": [
+      [
+       11304,
+       2
+      ],
+      [
+       55474,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "charcoal",
+     "unmet": 2,
+     "found": [
+      [
+       57884,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 57884,
+     "found": []
+    },
+    {
+     "item": "jar",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 2,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "bread",
+     "unmet": 15,
+     "found": []
+    },
+    {
+     "item": "flour",
+     "unmet": 3,
+     "dest": 55474,
+     "found": []
+    },
+    {
+     "item": "grain",
+     "unmet": 1,
+     "dest": 39664,
+     "found": [
+      [
+       17825,
+       1
+      ],
+      [
+       57513,
+       1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tick": 115950,
+   "person": 1125,
+   "key": "collect:39664:flour",
+   "target": 39664,
+   "items": {
+    "flour": 3
+   },
+   "start": {
+    "tick": 115899,
+    "belief": {
+     "id": 39664,
+     "kind": "building",
+     "x": 28,
+     "y": 41,
+     "amount": 0,
+     "max": 0,
+     "seen": 113976,
+     "src": "seen",
+     "from": 0,
+     "learned": 113976,
+     "btype": "mill",
+     "hh": 0,
+     "cond": 60.1731609999714,
+     "fuel": 0,
+     "items": {
+      "flour": 1,
+      "grain": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "flour": 10
+      },
+      "inputs": {
+       "grain": 1
+      },
+      "blocked": "",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 84714
+     },
+     "gearStock": {
+      "observer": 1125,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 1125,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 39664,
+     "type": "mill",
+     "x": 27,
+     "y": 40,
+     "w": 2,
+     "h": 2,
+     "condition": 55.52118899997138,
+     "hhId": 0,
+     "store": {
+      "items": {
+       "flour": 8
+      },
+      "cap": 60
+     },
+     "fuel": 0,
+     "builtTick": 84714,
+     "doorX": 27,
+     "doorY": 42,
+     "variant": 3,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [
+       {
+        "kind": "out",
+        "item": "flour",
+        "n": 8,
+        "owner": 7109,
+        "until": 116974,
+        "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+       }
+      ],
+      "batches": 2,
+      "produced": {
+       "flour": 15
+      },
+      "consumed": {
+       "grain": 18
+      },
+      "contributions": {
+       "1098": 150,
+       "1125": 71,
+       "7109": 118
+      },
+      "lastRun": 113374,
+      "lastBlocker": "",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "13515": 1
+      },
+      "wasted": {
+       "bran and dust": 3
+      },
+      "tended": 84714
+     },
+     "builtBy": [
+      13517,
+      13516
+     ],
+     "built": 84714,
+     "builtAll": true
+    }
+   },
+   "belief": {
+    "id": 39664,
+    "kind": "building",
+    "x": 28,
+    "y": 41,
+    "amount": 0,
+    "max": 0,
+    "seen": 113976,
+    "src": "seen",
+    "from": 0,
+    "learned": 113976,
+    "btype": "mill",
+    "hh": 0,
+    "cond": 60.1731609999714,
+    "fuel": 0,
+    "items": {
+     "flour": 1,
+     "grain": 1
+    },
+    "ops": {
+     "job": null,
+     "progress": 0,
+     "burn": 0,
+     "output": {
+      "flour": 10
+     },
+     "inputs": {
+      "grain": 1
+     },
+     "blocked": "",
+     "deposit": -1,
+     "yields": {},
+     "readyAt": 0,
+     "client": 0,
+     "tended": 84714
+    },
+    "gearStock": {
+     "observer": 1125,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 1125,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 39664,
+    "type": "mill",
+    "x": 27,
+    "y": 40,
+    "w": 2,
+    "h": 2,
+    "condition": 55.434004499971536,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "flour": 8
+     },
+     "cap": 60
+    },
+    "fuel": 0,
+    "builtTick": 84714,
+    "doorX": 27,
+    "doorY": 42,
+    "variant": 3,
+    "inside": [],
+    "ops": {
+     "job": null,
+     "earmarks": [
+      {
+       "kind": "out",
+       "item": "flour",
+       "n": 8,
+       "owner": 7109,
+       "until": 116974,
+       "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+      }
+     ],
+     "batches": 2,
+     "produced": {
+      "flour": 15
+     },
+     "consumed": {
+      "grain": 18
+     },
+     "contributions": {
+      "1098": 150,
+      "1125": 71,
+      "7109": 118
+     },
+     "lastRun": 113374,
+     "lastBlocker": "",
+     "depositId": 0,
+     "shares": {},
+     "present": {},
+     "builders": {
+      "13515": 1
+     },
+     "wasted": {
+      "bran and dust": 3
+     },
+     "tended": 84714
+    },
+    "builtBy": [
+     13517,
+     13516
+    ],
+    "built": 84714,
+    "builtAll": true
+   },
+   "next": "gather:939",
+   "trace": [
+    {
+     "item": "offcuts",
+     "unmet": 4,
+     "found": [
+      [
+       11304,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "wood",
+     "unmet": 1,
+     "found": [
+      [
+       24746,
+       1
+      ],
+      [
+       50661,
+       1
+      ],
+      [
+       55488,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "grain",
+     "unmet": 3,
+     "found": [
+      [
+       17825,
+       1
+      ],
+      [
+       39664,
+       1
+      ],
+      [
+       55474,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bricks",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 4,
+     "dest": 24746,
+     "found": [
+      [
+       55488,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "stone",
+     "unmet": 15,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "wood",
+     "unmet": 2,
+     "dest": 11304,
+     "found": [
+      [
+       24746,
+       1
+      ],
+      [
+       50661,
+       1
+      ],
+      [
+       55488,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "axe",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 57884,
+     "found": [
+      [
+       29692,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "jar",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 3,
+     "dest": 24746,
+     "found": [
+      [
+       55488,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "bread",
+     "unmet": 6,
+     "found": []
+    }
+   ]
+  },
+  {
+   "tick": 116146,
+   "person": 16452,
+   "key": "collect:24746:bricks",
+   "target": 24746,
+   "items": {
+    "bricks": 1
+   },
+   "start": {
+    "tick": 115994,
+    "belief": {
+     "id": 24746,
+     "kind": "building",
+     "x": 31,
+     "y": 42,
+     "amount": 0,
+     "max": 0,
+     "seen": 109134,
+     "src": "seen",
+     "from": 0,
+     "learned": 109134,
+     "btype": "kiln",
+     "hh": 0,
+     "cond": 87.61784200013317,
+     "fuel": 0,
+     "items": {
+      "bricks": 1,
+      "wood": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "bricks": 3
+      },
+      "inputs": {
+       "wood": 3
+      },
+      "blocked": "it is burning; there is nothing to do but wait",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 58074
+     },
+     "gearStock": {
+      "observer": 16452,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 16452,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 24746,
+     "type": "kiln",
+     "x": 30,
+     "y": 41,
+     "w": 2,
+     "h": 2,
+     "condition": 77.3634040001453,
+     "hhId": 0,
+     "store": {
+      "items": {},
+      "cap": 50
+     },
+     "fuel": 0,
+     "builtTick": 58074,
+     "doorX": 30,
+     "doorY": 43,
+     "variant": 1,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [],
+      "batches": 17,
+      "produced": {
+       "bricks": 39,
+       "charcoal": 9,
+       "jar": 1
+      },
+      "consumed": {
+       "wood": 45,
+       "clay": 55
+      },
+      "contributions": {
+       "1084": 28,
+       "1088": 104,
+       "1089": 14,
+       "1094": 65,
+       "1095": 35,
+       "1098": 36,
+       "1099": 75,
+       "1110": 240,
+       "1114": 34,
+       "1118": 56,
+       "7108": 5,
+       "7109": 33,
+       "10900": 77,
+       "13516": 23,
+       "13517": 91,
+       "16452": 40,
+       "22744": 38,
+       "27213": 9,
+       "30233": 30
+      },
+      "lastRun": 111804,
+      "lastBlocker": "it is burning; there is nothing to do but wait",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "1113": 1
+      },
+      "wasted": {
+       "clay that cracked and shrank in the fire": 13,
+       "smoke and ash": 9
+      },
+      "tended": 58074
+     },
+     "builtBy": [
+      1114,
+      1116,
+      1115
+     ],
+     "built": 58074,
+     "builtAll": true
+    }
+   },
+   "belief": {
+    "id": 24746,
+    "kind": "building",
+    "x": 31,
+    "y": 42,
+    "amount": 0,
+    "max": 0,
+    "seen": 116145,
+    "src": "seen",
+    "from": 0,
+    "learned": 116145,
+    "btype": "kiln",
+    "hh": 0,
+    "cond": 77.12512600014605,
+    "fuel": 0,
+    "items": {
+     "wood": 1
+    },
+    "ops": {
+     "job": null,
+     "progress": 0,
+     "burn": 0,
+     "output": {},
+     "inputs": {
+      "wood": 1
+     },
+     "blocked": "it is burning; there is nothing to do but wait",
+     "deposit": -1,
+     "yields": {},
+     "readyAt": 0,
+     "client": 0,
+     "tended": 58074,
+     "held": [],
+     "seenBuilders": {
+      "1113": 1
+     }
+    },
+    "gearStock": {
+     "observer": 16452,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 16452,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 24746,
+    "type": "kiln",
+    "x": 30,
+    "y": 41,
+    "w": 2,
+    "h": 2,
+    "condition": 77.12354800014606,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "wood": 1
+     },
+     "cap": 50
+    },
+    "fuel": 0,
+    "builtTick": 58074,
+    "doorX": 30,
+    "doorY": 43,
+    "variant": 1,
+    "inside": [],
+    "ops": {
+     "job": null,
+     "earmarks": [],
+     "batches": 17,
+     "produced": {
+      "bricks": 39,
+      "charcoal": 9,
+      "jar": 1
+     },
+     "consumed": {
+      "wood": 45,
+      "clay": 55
+     },
+     "contributions": {
+      "1084": 28,
+      "1088": 104,
+      "1089": 14,
+      "1094": 65,
+      "1095": 35,
+      "1098": 36,
+      "1099": 75,
+      "1110": 240,
+      "1114": 34,
+      "1118": 56,
+      "7108": 5,
+      "7109": 33,
+      "10900": 77,
+      "13516": 23,
+      "13517": 91,
+      "16452": 40,
+      "22744": 38,
+      "27213": 9,
+      "30233": 30
+     },
+     "lastRun": 111804,
+     "lastBlocker": "it is burning; there is nothing to do but wait",
+     "depositId": 0,
+     "shares": {},
+     "present": {},
+     "builders": {
+      "1113": 1
+     },
+     "wasted": {
+      "clay that cracked and shrank in the fire": 13,
+      "smoke and ash": 9
+     },
+     "tended": 58074
+    },
+    "builtBy": [
+     1114,
+     1116,
+     1115
+    ],
+    "built": 58074,
+    "builtAll": true
+   },
+   "next": "bring:39664:grain",
+   "trace": [
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "bricks",
+     "unmet": 5,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 4,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "stone",
+     "unmet": 6,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 3,
+     "found": [
+      [
+       11304,
+       2
+      ],
+      [
+       50661,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "charcoal",
+     "unmet": 1,
+     "found": [
+      [
+       30125,
+       2
+      ],
+      [
+       57884,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 57884,
+     "found": [
+      [
+       29692,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "charcoal",
+     "unmet": 1,
+     "dest": 57884,
+     "found": [
+      [
+       30125,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "jar",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 3,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "bread",
+     "unmet": 9,
+     "found": []
+    },
+    {
+     "item": "flour",
+     "unmet": 3,
+     "dest": 55474,
+     "found": []
+    }
+   ]
+  },
+  {
+   "tick": 116244,
+   "person": 7108,
+   "key": "collect:39664:flour",
+   "target": 39664,
+   "items": {
+    "flour": 2
+   },
+   "start": {
+    "tick": 116138,
+    "belief": {
+     "id": 39664,
+     "kind": "building",
+     "x": 28,
+     "y": 41,
+     "amount": 0,
+     "max": 0,
+     "seen": 114083,
+     "src": "seen",
+     "from": 0,
+     "learned": 114083,
+     "btype": "mill",
+     "hh": 0,
+     "cond": 60.034060999971345,
+     "fuel": 0,
+     "items": {
+      "flour": 1,
+      "grain": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "flour": 10
+      },
+      "inputs": {
+       "grain": 1
+      },
+      "blocked": "",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 84714
+     },
+     "gearStock": {
+      "observer": 7108,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 7108,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 39664,
+     "type": "mill",
+     "x": 27,
+     "y": 40,
+     "w": 2,
+     "h": 2,
+     "condition": 55.112618499972115,
+     "hhId": 0,
+     "store": {
+      "items": {
+       "flour": 8
+      },
+      "cap": 60
+     },
+     "fuel": 0,
+     "builtTick": 84714,
+     "doorX": 27,
+     "doorY": 42,
+     "variant": 3,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [
+       {
+        "kind": "out",
+        "item": "flour",
+        "n": 8,
+        "owner": 7109,
+        "until": 116974,
+        "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+       }
+      ],
+      "batches": 2,
+      "produced": {
+       "flour": 15
+      },
+      "consumed": {
+       "grain": 18
+      },
+      "contributions": {
+       "1098": 150,
+       "1125": 71,
+       "7109": 118
+      },
+      "lastRun": 113374,
+      "lastBlocker": "",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "13515": 1
+      },
+      "wasted": {
+       "bran and dust": 3
+      },
+      "tended": 84714
+     },
+     "builtBy": [
+      13517,
+      13516
+     ],
+     "built": 84714,
+     "builtAll": true
+    }
+   },
+   "belief": {
+    "id": 39664,
+    "kind": "building",
+    "x": 28,
+    "y": 41,
+    "amount": 0,
+    "max": 0,
+    "seen": 116243,
+    "src": "seen",
+    "from": 0,
+    "learned": 116243,
+    "btype": "mill",
+    "hh": 0,
+    "cond": 54.93312099997244,
+    "fuel": 0,
+    "items": {
+     "flour": 1
+    },
+    "ops": {
+     "job": "mill_flour_separate",
+     "progress": 0.10458410918137849,
+     "burn": 0,
+     "output": {
+      "flour": 8
+     },
+     "inputs": {},
+     "blocked": "",
+     "deposit": -1,
+     "yields": {
+      "flour": 5
+     },
+     "readyAt": 116431.03733707192,
+     "client": 1105,
+     "tended": 84714,
+     "held": [
+      {
+       "owner": 7109,
+       "item": "flour",
+       "n": 8,
+       "until": 116974
+      }
+     ],
+     "seenBuilders": {
+      "13515": 1
+     }
+    },
+    "gearStock": {
+     "observer": 7108,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 7108,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 39664,
+    "type": "mill",
+    "x": 27,
+    "y": 40,
+    "w": 2,
+    "h": 2,
+    "condition": 54.93141149997244,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "flour": 8
+     },
+     "cap": 60
+    },
+    "fuel": 0,
+    "builtTick": 84714,
+    "doorX": 27,
+    "doorY": 42,
+    "variant": 3,
+    "inside": [],
+    "ops": {
+     "job": {
+      "recipe": "mill_flour_separate",
+      "client": 1105,
+      "purpose": "to bake the household's grain into bread, which feeds further and keeps (baked bread)",
+      "destSite": 0,
+      "phase": "work",
+      "started": 116208,
+      "lastWork": 116244,
+      "progress": 22.57273689831419,
+      "total": 210,
+      "burnLeft": 0,
+      "burnTotal": 0,
+      "held": {
+       "grain": 6
+      },
+      "workers": {
+       "1105": 37
+      },
+      "blocked": ""
+     },
+     "earmarks": [
+      {
+       "kind": "out",
+       "item": "flour",
+       "n": 8,
+       "owner": 7109,
+       "until": 116974,
+       "reason": "to bake the household's grain into bread, which feeds further and keeps (baked bread)"
+      }
+     ],
+     "batches": 2,
+     "produced": {
+      "flour": 15
+     },
+     "consumed": {
+      "grain": 18
+     },
+     "contributions": {
+      "1098": 150,
+      "1105": 37,
+      "1125": 71,
+      "7109": 118
+     },
+     "lastRun": 116244,
+     "lastBlocker": "",
+     "depositId": 0,
+     "shares": {},
+     "present": {
+      "1105": 116244
+     },
+     "builders": {
+      "13515": 1
+     },
+     "wasted": {
+      "bran and dust": 3
+     },
+     "tended": 84714
+    },
+    "builtBy": [
+     13517,
+     13516
+    ],
+    "built": 84714,
+    "builtAll": true
+   },
+   "next": "bring:55474:grain",
+   "trace": [
+    {
+     "item": "offcuts",
+     "unmet": 4,
+     "found": [
+      [
+       11304,
+       3
+      ],
+      [
+       50661,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "trap",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "garment",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "wool",
+     "unmet": 3,
+     "dest": 11304,
+     "found": [
+      [
+       50661,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "hide",
+     "unmet": 1,
+     "dest": 11304,
+     "found": []
+    },
+    {
+     "item": "fibre",
+     "unmet": 2,
+     "dest": 11304,
+     "found": [
+      [
+       50661,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "blanket",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "wool",
+     "unmet": 3,
+     "dest": 11304,
+     "found": [
+      [
+       50661,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "fibre",
+     "unmet": 2,
+     "dest": 11304,
+     "found": [
+      [
+       50661,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "stone",
+     "unmet": 4,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 3,
+     "found": []
+    },
+    {
+     "item": "wood",
+     "unmet": 3,
+     "dest": 11304,
+     "found": [
+      [
+       24746,
+       3
+      ],
+      [
+       55474,
+       3
+      ]
+     ]
+    },
+    {
+     "item": "bricks",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 4,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "charcoal",
+     "unmet": 2,
+     "found": [
+      [
+       57884,
+       2
+      ]
+     ]
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 57884,
+     "found": []
+    },
+    {
+     "item": "jar",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 3,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "bread",
+     "unmet": 8,
+     "found": []
+    },
+    {
+     "item": "flour",
+     "unmet": 2,
+     "dest": 55474,
+     "found": []
+    }
+   ]
+  },
+  {
+   "tick": 117504,
+   "person": 1111,
+   "key": "collect:55474:bread",
+   "target": 55474,
+   "items": {
+    "bread": 2
+   },
+   "start": {
+    "tick": 117455,
+    "belief": {
+     "id": 55474,
+     "kind": "building",
+     "x": 35,
+     "y": 25,
+     "amount": 0,
+     "max": 0,
+     "seen": 116225,
+     "src": "seen",
+     "from": 0,
+     "learned": 116225,
+     "btype": "bakery",
+     "hh": 0,
+     "cond": 86.33021799997951,
+     "fuel": 0,
+     "items": {
+      "bread": 1,
+      "flour": 1,
+      "water": 1,
+      "wood": 1
+     },
+     "ops": {
+      "job": null,
+      "progress": 0,
+      "burn": 0,
+      "output": {
+       "flour": 11,
+       "bread": 2
+      },
+      "inputs": {
+       "water": 2,
+       "wood": 2
+      },
+      "blocked": "",
+      "deposit": -1,
+      "yields": {},
+      "readyAt": 0,
+      "client": 0,
+      "tended": 108219,
+      "held": [
+       {
+        "owner": 1111,
+        "item": "flour",
+        "n": 7,
+        "until": 116663
+       },
+       {
+        "owner": 1111,
+        "item": "bread",
+        "n": 2,
+        "until": 116882
+       },
+       {
+        "owner": 1099,
+        "item": "flour",
+        "n": 3,
+        "until": 119616
+       }
+      ],
+      "seenBuilders": {
+       "1096": 0.3872017353579168,
+       "1102": 0.25921908893709383,
+       "7107": 0.3535791757049894
+      }
+     },
+     "gearStock": {
+      "observer": 1111,
+      "items": {
+       "net": 0,
+       "trap": 0
+      }
+     },
+     "origin": 1111,
+     "hops": 0
+    },
+    "real": {
+     "ent": "building",
+     "id": 55474,
+     "type": "bakery",
+     "x": 34,
+     "y": 24,
+     "w": 2,
+     "h": 2,
+     "condition": 84.35905299997782,
+     "hhId": 0,
+     "store": {
+      "items": {
+       "flour": 7,
+       "bread": 6,
+       "grain": 1
+      },
+      "cap": 40
+     },
+     "fuel": 0,
+     "builtTick": 108219,
+     "doorX": 34,
+     "doorY": 26,
+     "variant": 0,
+     "inside": [],
+     "ops": {
+      "job": null,
+      "earmarks": [
+       {
+        "kind": "out",
+        "item": "bread",
+        "n": 4,
+        "owner": 1099,
+        "until": 120087,
+        "reason": "to bake the household's grain into bread, which feeds further and keeps"
+       }
+      ],
+      "batches": 10,
+      "produced": {
+       "flour": 24,
+       "bread": 20
+      },
+      "consumed": {
+       "grain": 32,
+       "wood": 5,
+       "flour": 15,
+       "water": 10
+      },
+      "contributions": {
+       "1088": 52,
+       "1099": 332,
+       "1110": 58,
+       "1111": 233,
+       "1120": 11,
+       "7108": 168,
+       "10900": 97
+      },
+      "lastRun": 116487,
+      "lastBlocker": "it is burning; there is nothing to do but wait",
+      "depositId": 0,
+      "shares": {},
+      "present": {},
+      "builders": {
+       "1096": 0.3872017353579168,
+       "1102": 0.25921908893709383,
+       "7107": 0.3535791757049894
+      },
+      "wasted": {
+       "husks and chaff": 8
+      },
+      "tended": 108219
+     },
+     "builtBy": [
+      1104,
+      1105,
+      7108,
+      1099
+     ],
+     "built": 108219,
+     "builtAll": true
+    }
+   },
+   "belief": {
+    "id": 55474,
+    "kind": "building",
+    "x": 35,
+    "y": 25,
+    "amount": 0,
+    "max": 0,
+    "seen": 117503,
+    "src": "seen",
+    "from": 0,
+    "learned": 117503,
+    "btype": "bakery",
+    "hh": 0,
+    "cond": 84.29185299997764,
+    "fuel": 0,
+    "items": {
+     "bread": 1,
+     "flour": 1,
+     "grain": 1,
+     "water": 1,
+     "wood": 1
+    },
+    "ops": {
+     "job": null,
+     "progress": 0,
+     "burn": 0,
+     "output": {
+      "flour": 7,
+      "bread": 4
+     },
+     "inputs": {
+      "grain": 1,
+      "water": 1,
+      "wood": 1
+     },
+     "blocked": "it is burning; there is nothing to do but wait",
+     "deposit": -1,
+     "yields": {},
+     "readyAt": 0,
+     "client": 0,
+     "tended": 108219,
+     "held": [
+      {
+       "owner": 1099,
+       "item": "bread",
+       "n": 4,
+       "until": 120087
+      }
+     ],
+     "seenBuilders": {
+      "1096": 0.3872017353579168,
+      "1102": 0.25921908893709383,
+      "7107": 0.3535791757049894
+     }
+    },
+    "gearStock": {
+     "observer": 1111,
+     "items": {
+      "net": 0,
+      "trap": 0
+     }
+    },
+    "origin": 1111,
+    "hops": 0
+   },
+   "real": {
+    "ent": "building",
+    "id": 55474,
+    "type": "bakery",
+    "x": 34,
+    "y": 24,
+    "w": 2,
+    "h": 2,
+    "condition": 84.29045299997763,
+    "hhId": 0,
+    "store": {
+     "items": {
+      "flour": 7,
+      "bread": 4,
+      "grain": 1,
+      "water": 1,
+      "wood": 1
+     },
+     "cap": 40
+    },
+    "fuel": 0,
+    "builtTick": 108219,
+    "doorX": 34,
+    "doorY": 26,
+    "variant": 0,
+    "inside": [],
+    "ops": {
+     "job": null,
+     "earmarks": [
+      {
+       "kind": "out",
+       "item": "bread",
+       "n": 4,
+       "owner": 1099,
+       "until": 120087,
+       "reason": "to bake the household's grain into bread, which feeds further and keeps"
+      }
+     ],
+     "batches": 10,
+     "produced": {
+      "flour": 24,
+      "bread": 20
+     },
+     "consumed": {
+      "grain": 32,
+      "wood": 5,
+      "flour": 15,
+      "water": 10
+     },
+     "contributions": {
+      "1088": 52,
+      "1099": 332,
+      "1110": 58,
+      "1111": 233,
+      "1120": 11,
+      "7108": 168,
+      "10900": 97
+     },
+     "lastRun": 116487,
+     "lastBlocker": "it is burning; there is nothing to do but wait",
+     "depositId": 0,
+     "shares": {},
+     "present": {},
+     "builders": {
+      "1096": 0.3872017353579168,
+      "1102": 0.25921908893709383,
+      "7107": 0.3535791757049894
+     },
+     "wasted": {
+      "husks and chaff": 8
+     },
+     "tended": 108219
+    },
+    "builtBy": [
+     1104,
+     1105,
+     7108,
+     1099
+    ],
+    "built": 108219,
+    "builtAll": true
+   },
+   "next": "fetch_water:well:27036",
+   "trace": [
+    {
+     "item": "offcuts",
+     "unmet": 2,
+     "found": [
+      [
+       11304,
+       5
+      ]
+     ]
+    },
+    {
+     "item": "offcuts",
+     "unmet": 4,
+     "found": [
+      [
+       11304,
+       5
+      ]
+     ]
+    },
+    {
+     "item": "fibre",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "net",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "trap",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "blanket",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "wool",
+     "unmet": 3,
+     "dest": 11304,
+     "found": []
+    },
+    {
+     "item": "fibre",
+     "unmet": 3,
+     "dest": 11304,
+     "found": []
+    },
+    {
+     "item": "bedding",
+     "unmet": 1,
+     "found": [
+      [
+       11304,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "fibre",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "stone",
+     "unmet": 12,
+     "found": [
+      [
+       12367,
+       19
+      ]
+     ]
+    },
+    {
+     "item": "planks",
+     "unmet": 3,
+     "found": [
+      [
+       11304,
+       4
+      ]
+     ]
+    },
+    {
+     "item": "axe",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 30125,
+     "found": []
+    },
+    {
+     "item": "iron",
+     "unmet": 2,
+     "found": []
+    },
+    {
+     "item": "ore",
+     "unmet": 3,
+     "dest": 30125,
+     "found": []
+    },
+    {
+     "item": "jar",
+     "unmet": 1,
+     "found": []
+    },
+    {
+     "item": "clay",
+     "unmet": 3,
+     "dest": 24746,
+     "found": []
+    },
+    {
+     "item": "bread",
+     "unmet": 6,
+     "found": [
+      [
+       17825,
+       1
+      ]
+     ]
+    },
+    {
+     "item": "water",
+     "unmet": 1,
+     "dest": 55474,
+     "found": []
+    }
+   ]
+  }
+ ],
+ "reasons": {
+  "something better came up": {
+   "count": 1683,
+   "ticks": 123110
+  },
+  "danger nearby": {
+   "count": 119,
+   "ticks": 7898
+  },
+  "they are inside a different space": {
+   "count": 49,
+   "ticks": 1360
+  },
+  "the place looked empty": {
+   "count": 133,
+   "ticks": 10831
+  },
+  "the source it was for was gone when the conversation ended": {
+   "count": 8,
+   "ticks": 288
+  },
+  "food in my pack would ease my hunger sooner": {
+   "count": 9,
+   "ticks": 453
+  },
+  "later personal contact no longer shows that need": {
+   "count": 3,
+   "ticks": 54
+  },
+  "cannot reach them": {
+   "count": 2,
+   "ticks": 101
+  },
+  "the occasion is over": {
+   "count": 3,
+   "ticks": 294
+  },
+  "a more urgent need (energy)": {
+   "count": 7,
+   "ticks": 581
+  },
+  "a more urgent need (thirst)": {
+   "count": 1,
+   "ticks": 47
+  },
+  "a more urgent need (warmth)": {
+   "count": 13,
+   "ticks": 1475
+  }
+ },
+ "replacements": {
+  "rest|rest|something better came up": {
+   "count": 1,
+   "ticks": 31
+  },
+  "flee|rest|something better came up": {
+   "count": 4,
+   "ticks": 219
+  },
+  "drink|flee|danger nearby": {
+   "count": 9,
+   "ticks": 391
+  },
+  "socialize|(no immediate replacement)|they are inside a different space": {
+   "count": 20,
+   "ticks": 301
+  },
+  "flee|drink|something better came up": {
+   "count": 14,
+   "ticks": 904
+  },
+  "withdraw|give|something better came up": {
+   "count": 16,
+   "ticks": 771
+  },
+  "give|harvest|something better came up": {
+   "count": 6,
+   "ticks": 398
+  },
+  "gather|gather|the place looked empty": {
+   "count": 82,
+   "ticks": 7016
+  },
+  "gather|withdraw|something better came up": {
+   "count": 8,
+   "ticks": 644
+  },
+  "deposit|operate|something better came up": {
+   "count": 38,
+   "ticks": 2506
+  },
+  "withdraw|gather|something better came up": {
+   "count": 27,
+   "ticks": 1807
+  },
+  "warm|repair|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "warm|drink|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "give|drink|something better came up": {
+   "count": 13,
+   "ticks": 718
+  },
+  "withdraw|deposit|something better came up": {
+   "count": 23,
+   "ticks": 1927
+  },
+  "gather|flee|danger nearby": {
+   "count": 73,
+   "ticks": 4695
+  },
+  "gather|(no immediate replacement)|the source it was for was gone when the conversation ended": {
+   "count": 8,
+   "ticks": 288
+  },
+  "gather|none|danger nearby": {
+   "count": 1,
+   "ticks": 1
+  },
+  "explore|drink|something better came up": {
+   "count": 7,
+   "ticks": 1549
+  },
+  "drink|socialize|something better came up": {
+   "count": 3,
+   "ticks": 120
+  },
+  "flee|give|something better came up": {
+   "count": 5,
+   "ticks": 267
+  },
+  "plan_site|plan_site|something better came up": {
+   "count": 1,
+   "ticks": 102
+  },
+  "give|gather|something better came up": {
+   "count": 21,
+   "ticks": 1172
+  },
+  "deposit|deposit|something better came up": {
+   "count": 22,
+   "ticks": 1179
+  },
+  "eat|give|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "give|give|something better came up": {
+   "count": 28,
+   "ticks": 1701
+  },
+  "gather|gather|something better came up": {
+   "count": 102,
+   "ticks": 9779
+  },
+  "socialize|drink|something better came up": {
+   "count": 4,
+   "ticks": 219
+  },
+  "fetch_water|fetch_water|something better came up": {
+   "count": 4,
+   "ticks": 4
+  },
+  "deposit|visit|something better came up": {
+   "count": 1,
+   "ticks": 105
+  },
+  "flee|deposit|something better came up": {
+   "count": 4,
+   "ticks": 212
+  },
+  "gather|give|something better came up": {
+   "count": 12,
+   "ticks": 896
+  },
+  "socialize|gather|something better came up": {
+   "count": 7,
+   "ticks": 271
+  },
+  "deposit|wander|something better came up": {
+   "count": 7,
+   "ticks": 336
+  },
+  "operate|give|something better came up": {
+   "count": 8,
+   "ticks": 647
+  },
+  "socialize|give|something better came up": {
+   "count": 2,
+   "ticks": 54
+  },
+  "give|socialize|something better came up": {
+   "count": 8,
+   "ticks": 437
+  },
+  "give|deposit|something better came up": {
+   "count": 11,
+   "ticks": 850
+  },
+  "flee|eat|something better came up": {
+   "count": 4,
+   "ticks": 212
+  },
+  "gather|drink|something better came up": {
+   "count": 17,
+   "ticks": 1119
+  },
+  "deposit|sleep|something better came up": {
+   "count": 39,
+   "ticks": 3019
+  },
+  "plan_site|repair|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "deposit|repair|something better came up": {
+   "count": 2,
+   "ticks": 164
+  },
+  "haul|drink|something better came up": {
+   "count": 6,
+   "ticks": 649
+  },
+  "give|wander|something better came up": {
+   "count": 1,
+   "ticks": 54
+  },
+  "gather|harvest|something better came up": {
+   "count": 7,
+   "ticks": 504
+  },
+  "give|tool_work|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "socialize|eat|something better came up": {
+   "count": 3,
+   "ticks": 3
+  },
+  "gather|sleep|something better came up": {
+   "count": 17,
+   "ticks": 1237
+  },
+  "gather|haul|something better came up": {
+   "count": 2,
+   "ticks": 213
+  },
+  "wander|sleep|something better came up": {
+   "count": 19,
+   "ticks": 1561
+  },
+  "rest|sleep|something better came up": {
+   "count": 8,
+   "ticks": 743
+  },
+  "craft|sleep|something better came up": {
+   "count": 2,
+   "ticks": 255
+  },
+  "give|sleep|something better came up": {
+   "count": 20,
+   "ticks": 1585
+  },
+  "flee|sleep|something better came up": {
+   "count": 13,
+   "ticks": 834
+  },
+  "fetch_water|sleep|something better came up": {
+   "count": 22,
+   "ticks": 1072
+  },
+  "give|(no immediate replacement)|they are inside a different space": {
+   "count": 28,
+   "ticks": 990
+  },
+  "fetch_water|socialize|something better came up": {
+   "count": 3,
+   "ticks": 142
+  },
+  "fetch_water|harvest|something better came up": {
+   "count": 13,
+   "ticks": 451
+  },
+  "flee|withdraw|something better came up": {
+   "count": 3,
+   "ticks": 156
+  },
+  "withdraw|fetch_water|something better came up": {
+   "count": 8,
+   "ticks": 486
+  },
+  "rest|deposit|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "deposit|socialize|something better came up": {
+   "count": 18,
+   "ticks": 1192
+  },
+  "rest|build|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "deposit|give|something better came up": {
+   "count": 18,
+   "ticks": 1151
+  },
+  "withdraw|socialize|something better came up": {
+   "count": 7,
+   "ticks": 565
+  },
+  "haul|withdraw|something better came up": {
+   "count": 1,
+   "ticks": 54
+  },
+  "deposit|explore|something better came up": {
+   "count": 2,
+   "ticks": 107
+  },
+  "fetch_water|plant|something better came up": {
+   "count": 3,
+   "ticks": 152
+  },
+  "plan_site|drink|something better came up": {
+   "count": 1,
+   "ticks": 103
+  },
+  "deposit|plant|something better came up": {
+   "count": 2,
+   "ticks": 203
+  },
+  "deposit|withdraw|something better came up": {
+   "count": 11,
+   "ticks": 685
+  },
+  "gather|eat|food in my pack would ease my hunger sooner": {
+   "count": 9,
+   "ticks": 453
+  },
+  "gather|repair|something better came up": {
+   "count": 1,
+   "ticks": 115
+  },
+  "explore|eat|something better came up": {
+   "count": 4,
+   "ticks": 940
+  },
+  "withdraw|operate|something better came up": {
+   "count": 26,
+   "ticks": 1542
+  },
+  "withdraw|withdraw|something better came up": {
+   "count": 60,
+   "ticks": 3579
+  },
+  "deposit|gather|something better came up": {
+   "count": 29,
+   "ticks": 1732
+  },
+  "withdraw|drink|something better came up": {
+   "count": 8,
+   "ticks": 584
+  },
+  "gather|eat_store|the place looked empty": {
+   "count": 7,
+   "ticks": 589
+  },
+  "fetch_water|eat|something better came up": {
+   "count": 6,
+   "ticks": 255
+  },
+  "operate|repair|something better came up": {
+   "count": 2,
+   "ticks": 362
+  },
+  "give|plant|something better came up": {
+   "count": 6,
+   "ticks": 374
+  },
+  "deposit|drink|something better came up": {
+   "count": 16,
+   "ticks": 949
+  },
+  "explore|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 333
+  },
+  "plan_site|deposit|something better came up": {
+   "count": 3,
+   "ticks": 651
+  },
+  "fetch_water|repair|something better came up": {
+   "count": 1,
+   "ticks": 49
+  },
+  "fetch_water|give|something better came up": {
+   "count": 10,
+   "ticks": 429
+  },
+  "operate|drink|something better came up": {
+   "count": 6,
+   "ticks": 844
+  },
+  "eat_store|gather|something better came up": {
+   "count": 22,
+   "ticks": 1264
+  },
+  "plant|drink|something better came up": {
+   "count": 2,
+   "ticks": 96
+  },
+  "deposit|eat|something better came up": {
+   "count": 16,
+   "ticks": 1029
+  },
+  "eat_store|socialize|something better came up": {
+   "count": 6,
+   "ticks": 378
+  },
+  "gather|operate|something better came up": {
+   "count": 10,
+   "ticks": 891
+  },
+  "plan_site|gather|something better came up": {
+   "count": 1,
+   "ticks": 208
+  },
+  "give|operate|something better came up": {
+   "count": 16,
+   "ticks": 920
+  },
+  "socialize|fetch_water|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "give|eat|something better came up": {
+   "count": 3,
+   "ticks": 157
+  },
+  "repair|tend|something better came up": {
+   "count": 1,
+   "ticks": 60
+  },
+  "operate|visit|something better came up": {
+   "count": 1,
+   "ticks": 104
+  },
+  "gather|fetch_water|something better came up": {
+   "count": 8,
+   "ticks": 456
+  },
+  "deposit|attend|something better came up": {
+   "count": 10,
+   "ticks": 964
+  },
+  "fetch_water|drink|something better came up": {
+   "count": 5,
+   "ticks": 229
+  },
+  "operate|build|something better came up": {
+   "count": 3,
+   "ticks": 332
+  },
+  "repair|give|something better came up": {
+   "count": 2,
+   "ticks": 170
+  },
+  "operate|fetch_water|something better came up": {
+   "count": 5,
+   "ticks": 252
+  },
+  "fetch_water|withdraw|something better came up": {
+   "count": 2,
+   "ticks": 102
+  },
+  "deposit|plan_site|something better came up": {
+   "count": 3,
+   "ticks": 113
+  },
+  "explore|wander|something better came up": {
+   "count": 2,
+   "ticks": 273
+  },
+  "explore|deposit|something better came up": {
+   "count": 4,
+   "ticks": 754
+  },
+  "gather|repair|the place looked empty": {
+   "count": 2,
+   "ticks": 120
+  },
+  "plan_site|eat|something better came up": {
+   "count": 2,
+   "ticks": 443
+  },
+  "fetch_water|plan_site|something better came up": {
+   "count": 2,
+   "ticks": 111
+  },
+  "till|drink|something better came up": {
+   "count": 1,
+   "ticks": 160
+  },
+  "tree_work|wander|something better came up": {
+   "count": 1,
+   "ticks": 54
+  },
+  "explore|sleep|something better came up": {
+   "count": 7,
+   "ticks": 1145
+  },
+  "plan_site|give|something better came up": {
+   "count": 3,
+   "ticks": 321
+  },
+  "fetch_water|gather|something better came up": {
+   "count": 9,
+   "ticks": 415
+  },
+  "flee|gather|something better came up": {
+   "count": 27,
+   "ticks": 1410
+  },
+  "till|give|something better came up": {
+   "count": 1,
+   "ticks": 171
+  },
+  "withdraw|eat|something better came up": {
+   "count": 12,
+   "ticks": 663
+  },
+  "operate|sleep|something better came up": {
+   "count": 11,
+   "ticks": 737
+  },
+  "explore|rest|something better came up": {
+   "count": 2,
+   "ticks": 222
+  },
+  "attend|sleep|something better came up": {
+   "count": 10,
+   "ticks": 1136
+  },
+  "drink|sleep|something better came up": {
+   "count": 5,
+   "ticks": 222
+  },
+  "sleep|defend|danger nearby": {
+   "count": 2,
+   "ticks": 336
+  },
+  "haul|sleep|something better came up": {
+   "count": 5,
+   "ticks": 482
+  },
+  "gather|sleep|the place looked empty": {
+   "count": 6,
+   "ticks": 524
+  },
+  "fuel_fire|socialize|something better came up": {
+   "count": 4,
+   "ticks": 262
+  },
+  "eat_store|eat_store|something better came up": {
+   "count": 7,
+   "ticks": 440
+  },
+  "gather|drink|the place looked empty": {
+   "count": 9,
+   "ticks": 610
+  },
+  "socialize|rest|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "gather|rest|later personal contact no longer shows that need": {
+   "count": 2,
+   "ticks": 22
+  },
+  "gather|socialize|the place looked empty": {
+   "count": 8,
+   "ticks": 677
+  },
+  "rest|drink|something better came up": {
+   "count": 6,
+   "ticks": 253
+  },
+  "rest|tend|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "withdraw|visit|something better came up": {
+   "count": 1,
+   "ticks": 106
+  },
+  "plan_site|withdraw|something better came up": {
+   "count": 2,
+   "ticks": 285
+  },
+  "gather|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 226
+  },
+  "operate|gather|something better came up": {
+   "count": 6,
+   "ticks": 205
+  },
+  "plant|plan_site|something better came up": {
+   "count": 1,
+   "ticks": 104
+  },
+  "deposit|harvest|something better came up": {
+   "count": 18,
+   "ticks": 1143
+  },
+  "plan_site|operate|something better came up": {
+   "count": 1,
+   "ticks": 256
+  },
+  "repair|socialize|something better came up": {
+   "count": 5,
+   "ticks": 586
+  },
+  "give|withdraw|something better came up": {
+   "count": 6,
+   "ticks": 159
+  },
+  "give|till|something better came up": {
+   "count": 2,
+   "ticks": 119
+  },
+  "operate|deposit|something better came up": {
+   "count": 12,
+   "ticks": 1104
+  },
+  "harvest|harvest|something better came up": {
+   "count": 2,
+   "ticks": 110
+  },
+  "explore|flee|danger nearby": {
+   "count": 17,
+   "ticks": 1931
+  },
+  "gather|operate|the place looked empty": {
+   "count": 3,
+   "ticks": 293
+  },
+  "operate|haul|something better came up": {
+   "count": 1,
+   "ticks": 98
+  },
+  "withdraw|haul|something better came up": {
+   "count": 1,
+   "ticks": 52
+  },
+  "flee|socialize|something better came up": {
+   "count": 16,
+   "ticks": 861
+  },
+  "operate|flee|danger nearby": {
+   "count": 2,
+   "ticks": 68
+  },
+  "explore|operate|something better came up": {
+   "count": 5,
+   "ticks": 555
+  },
+  "withdraw|plan_site|something better came up": {
+   "count": 1,
+   "ticks": 50
+  },
+  "gather|eat|the place looked empty": {
+   "count": 1,
+   "ticks": 60
+  },
+  "haul|gather|something better came up": {
+   "count": 6,
+   "ticks": 386
+  },
+  "gather|eat|something better came up": {
+   "count": 8,
+   "ticks": 538
+  },
+  "socialize|haul|something better came up": {
+   "count": 1,
+   "ticks": 97
+  },
+  "give|repair|something better came up": {
+   "count": 4,
+   "ticks": 163
+  },
+  "operate|socialize|something better came up": {
+   "count": 4,
+   "ticks": 409
+  },
+  "plant|withdraw|something better came up": {
+   "count": 2,
+   "ticks": 108
+  },
+  "craft|haul|something better came up": {
+   "count": 1,
+   "ticks": 112
+  },
+  "gather|socialize|something better came up": {
+   "count": 7,
+   "ticks": 536
+  },
+  "haul|operate|something better came up": {
+   "count": 1,
+   "ticks": 48
+  },
+  "till|haul|something better came up": {
+   "count": 2,
+   "ticks": 268
+  },
+  "gather|give|the place looked empty": {
+   "count": 4,
+   "ticks": 116
+  },
+  "haul|build|something better came up": {
+   "count": 2,
+   "ticks": 115
+  },
+  "socialize|craft|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "explore|gather|something better came up": {
+   "count": 7,
+   "ticks": 959
+  },
+  "withdraw|sleep|something better came up": {
+   "count": 12,
+   "ticks": 703
+  },
+  "plant|sleep|something better came up": {
+   "count": 5,
+   "ticks": 487
+  },
+  "haul|repair|something better came up": {
+   "count": 1,
+   "ticks": 102
+  },
+  "deposit|haul|something better came up": {
+   "count": 2,
+   "ticks": 53
+  },
+  "withdraw|fuel_fire|something better came up": {
+   "count": 3,
+   "ticks": 166
+  },
+  "fuel_fire|sleep|something better came up": {
+   "count": 11,
+   "ticks": 798
+  },
+  "repair|sleep|something better came up": {
+   "count": 7,
+   "ticks": 639
+  },
+  "eat_store|sleep|something better came up": {
+   "count": 5,
+   "ticks": 272
+  },
+  "defend|(no immediate replacement)|cannot reach them": {
+   "count": 1,
+   "ticks": 19
+  },
+  "sleep|flee|danger nearby": {
+   "count": 5,
+   "ticks": 127
+  },
+  "fetch_water|rest|something better came up": {
+   "count": 3,
+   "ticks": 170
+  },
+  "fetch_water|operate|something better came up": {
+   "count": 5,
+   "ticks": 259
+  },
+  "fuel_fire|repair|something better came up": {
+   "count": 3,
+   "ticks": 167
+  },
+  "gather|deposit|something better came up": {
+   "count": 8,
+   "ticks": 746
+  },
+  "visit|(no immediate replacement)|they are inside a different space": {
+   "count": 1,
+   "ticks": 69
+  },
+  "fetch_water|deposit|something better came up": {
+   "count": 7,
+   "ticks": 258
+  },
+  "haul|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 178
+  },
+  "operate|operate|something better came up": {
+   "count": 11,
+   "ticks": 873
+  },
+  "socialize|attend|something better came up": {
+   "count": 1,
+   "ticks": 153
+  },
+  "explore|tree_work|something better came up": {
+   "count": 2,
+   "ticks": 332
+  },
+  "tree_work|gather|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "withdraw|explore|something better came up": {
+   "count": 3,
+   "ticks": 157
+  },
+  "explore|attend|something better came up": {
+   "count": 2,
+   "ticks": 332
+  },
+  "haul|attend|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "haul|fetch_water|something better came up": {
+   "count": 1,
+   "ticks": 180
+  },
+  "plant|gather|something better came up": {
+   "count": 1,
+   "ticks": 92
+  },
+  "socialize|socialize|something better came up": {
+   "count": 15,
+   "ticks": 1392
+  },
+  "attend|operate|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "wander|socialize|something better came up": {
+   "count": 1,
+   "ticks": 58
+  },
+  "gather|attend|something better came up": {
+   "count": 2,
+   "ticks": 220
+  },
+  "gather|withdraw|the place looked empty": {
+   "count": 3,
+   "ticks": 358
+  },
+  "attend|socialize|something better came up": {
+   "count": 2,
+   "ticks": 421
+  },
+  "repair|repair|something better came up": {
+   "count": 1,
+   "ticks": 110
+  },
+  "plant|operate|something better came up": {
+   "count": 1,
+   "ticks": 99
+  },
+  "attend|none|the occasion is over": {
+   "count": 3,
+   "ticks": 294
+  },
+  "attend|deposit|something better came up": {
+   "count": 1,
+   "ticks": 112
+  },
+  "eat_store|deposit|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "gather|fetch_water|the place looked empty": {
+   "count": 1,
+   "ticks": 103
+  },
+  "socialize|tree_work|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "withdraw|wander|something better came up": {
+   "count": 3,
+   "ticks": 174
+  },
+  "give|fetch_water|something better came up": {
+   "count": 6,
+   "ticks": 355
+  },
+  "plan_site|fuel_fire|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "gather|rest|something better came up": {
+   "count": 4,
+   "ticks": 272
+  },
+  "drink|drink|something better came up": {
+   "count": 13,
+   "ticks": 735
+  },
+  "fuel_fire|none|something better came up": {
+   "count": 2,
+   "ticks": 164
+  },
+  "fuel_fire|withdraw|something better came up": {
+   "count": 1,
+   "ticks": 120
+  },
+  "fuel_fire|rest|something better came up": {
+   "count": 3,
+   "ticks": 372
+  },
+  "deposit|rest|something better came up": {
+   "count": 2,
+   "ticks": 154
+  },
+  "deposit|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 164
+  },
+  "harvest|plant|something better came up": {
+   "count": 1,
+   "ticks": 112
+  },
+  "give|none|something better came up": {
+   "count": 2,
+   "ticks": 144
+  },
+  "gather|none|something better came up": {
+   "count": 6,
+   "ticks": 392
+  },
+  "rest|socialize|something better came up": {
+   "count": 1,
+   "ticks": 119
+  },
+  "withdraw|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 49
+  },
+  "deposit|none|something better came up": {
+   "count": 9,
+   "ticks": 551
+  },
+  "flee|fetch_water|something better came up": {
+   "count": 4,
+   "ticks": 206
+  },
+  "gather|explore|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "fuel_fire|explore|something better came up": {
+   "count": 1,
+   "ticks": 62
+  },
+  "gather|tool_work|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "explore|tend|something better came up": {
+   "count": 1,
+   "ticks": 209
+  },
+  "deposit|tend|something better came up": {
+   "count": 2,
+   "ticks": 91
+  },
+  "tend|give|something better came up": {
+   "count": 1,
+   "ticks": 108
+  },
+  "operate|rest|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "haul|socialize|something better came up": {
+   "count": 4,
+   "ticks": 312
+  },
+  "haul|haul|something better came up": {
+   "count": 1,
+   "ticks": 118
+  },
+  "repair|gather|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "operate|withdraw|something better came up": {
+   "count": 6,
+   "ticks": 677
+  },
+  "haul|deposit|something better came up": {
+   "count": 4,
+   "ticks": 640
+  },
+  "gather|deposit|the place looked empty": {
+   "count": 3,
+   "ticks": 98
+  },
+  "wander|drink|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "socialize|sleep|something better came up": {
+   "count": 4,
+   "ticks": 247
+  },
+  "gather|sleep|a more urgent need (energy)": {
+   "count": 1,
+   "ticks": 60
+  },
+  "harvest|sleep|something better came up": {
+   "count": 4,
+   "ticks": 157
+  },
+  "flee|sleep|a more urgent need (energy)": {
+   "count": 2,
+   "ticks": 96
+  },
+  "drink|sleep|a more urgent need (energy)": {
+   "count": 2,
+   "ticks": 317
+  },
+  "fetch_water|give|later personal contact no longer shows that need": {
+   "count": 1,
+   "ticks": 32
+  },
+  "gather|rest|the place looked empty": {
+   "count": 2,
+   "ticks": 167
+  },
+  "withdraw|rest|something better came up": {
+   "count": 4,
+   "ticks": 216
+  },
+  "eat_store|give|something better came up": {
+   "count": 1,
+   "ticks": 102
+  },
+  "give|eat_store|something better came up": {
+   "count": 8,
+   "ticks": 606
+  },
+  "fuel_fire|give|something better came up": {
+   "count": 3,
+   "ticks": 117
+  },
+  "explore|plan_site|something better came up": {
+   "count": 1,
+   "ticks": 156
+  },
+  "flee|till|something better came up": {
+   "count": 1,
+   "ticks": 48
+  },
+  "give|build|something better came up": {
+   "count": 1,
+   "ticks": 50
+  },
+  "explore|repair|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "tend|eat_store|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "flee|visit|something better came up": {
+   "count": 1,
+   "ticks": 49
+  },
+  "haul|eat|something better came up": {
+   "count": 2,
+   "ticks": 486
+  },
+  "give|tend|something better came up": {
+   "count": 3,
+   "ticks": 149
+  },
+  "give|attend|something better came up": {
+   "count": 6,
+   "ticks": 325
+  },
+  "explore|socialize|something better came up": {
+   "count": 4,
+   "ticks": 461
+  },
+  "operate|none|something better came up": {
+   "count": 3,
+   "ticks": 335
+  },
+  "repair|attend|something better came up": {
+   "count": 2,
+   "ticks": 198
+  },
+  "explore|fetch_water|something better came up": {
+   "count": 3,
+   "ticks": 613
+  },
+  "plan_site|socialize|something better came up": {
+   "count": 1,
+   "ticks": 213
+  },
+  "fetch_water|tend|something better came up": {
+   "count": 1,
+   "ticks": 107
+  },
+  "gather|attend|the place looked empty": {
+   "count": 1,
+   "ticks": 99
+  },
+  "fetch_water|attend|something better came up": {
+   "count": 1,
+   "ticks": 50
+  },
+  "tend|flee|danger nearby": {
+   "count": 1,
+   "ticks": 7
+  },
+  "repair|deposit|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "harvest|drink|something better came up": {
+   "count": 5,
+   "ticks": 5
+  },
+  "flee|eat_store|something better came up": {
+   "count": 3,
+   "ticks": 144
+  },
+  "drink|none|danger nearby": {
+   "count": 1,
+   "ticks": 1
+  },
+  "flee|drink|a more urgent need (thirst)": {
+   "count": 1,
+   "ticks": 47
+  },
+  "fuel_fire|haul|something better came up": {
+   "count": 1,
+   "ticks": 121
+  },
+  "fuel_fire|fetch_water|something better came up": {
+   "count": 1,
+   "ticks": 100
+  },
+  "wander|gather|something better came up": {
+   "count": 1,
+   "ticks": 53
+  },
+  "fuel_fire|deposit|something better came up": {
+   "count": 3,
+   "ticks": 146
+  },
+  "haul|give|something better came up": {
+   "count": 2,
+   "ticks": 216
+  },
+  "explore|give|something better came up": {
+   "count": 4,
+   "ticks": 491
+  },
+  "operate|eat_store|something better came up": {
+   "count": 5,
+   "ticks": 388
+  },
+  "operate|explore|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "flee|rest|a more urgent need (energy)": {
+   "count": 2,
+   "ticks": 108
+  },
+  "socialize|operate|something better came up": {
+   "count": 3,
+   "ticks": 211
+  },
+  "deposit|fetch_water|something better came up": {
+   "count": 3,
+   "ticks": 165
+  },
+  "haul|explore|something better came up": {
+   "count": 2,
+   "ticks": 337
+  },
+  "till|eat|something better came up": {
+   "count": 2,
+   "ticks": 325
+  },
+  "harvest|withdraw|something better came up": {
+   "count": 2,
+   "ticks": 61
+  },
+  "gather|attend_meal|something better came up": {
+   "count": 1,
+   "ticks": 50
+  },
+  "eat_store|harvest|something better came up": {
+   "count": 2,
+   "ticks": 109
+  },
+  "deposit|converse|something better came up": {
+   "count": 1,
+   "ticks": 61
+  },
+  "drink|none|something better came up": {
+   "count": 1,
+   "ticks": 46
+  },
+  "withdraw|tend|something better came up": {
+   "count": 1,
+   "ticks": 49
+  },
+  "harvest|haul|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "wander|flee|danger nearby": {
+   "count": 1,
+   "ticks": 22
+  },
+  "operate|defend|danger nearby": {
+   "count": 1,
+   "ticks": 121
+  },
+  "withdraw|none|something better came up": {
+   "count": 3,
+   "ticks": 225
+  },
+  "fetch_water|eat_store|something better came up": {
+   "count": 2,
+   "ticks": 56
+  },
+  "rest|eat_store|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "tend|operate|something better came up": {
+   "count": 3,
+   "ticks": 3
+  },
+  "socialize|deposit|something better came up": {
+   "count": 1,
+   "ticks": 110
+  },
+  "fetch_water|explore|something better came up": {
+   "count": 1,
+   "ticks": 45
+  },
+  "till|plant|something better came up": {
+   "count": 1,
+   "ticks": 108
+  },
+  "withdraw|attend|something better came up": {
+   "count": 3,
+   "ticks": 336
+  },
+  "deposit|build|something better came up": {
+   "count": 1,
+   "ticks": 117
+  },
+  "flee|harvest|something better came up": {
+   "count": 1,
+   "ticks": 59
+  },
+  "deposit|fuel_fire|something better came up": {
+   "count": 2,
+   "ticks": 93
+  },
+  "fuel_fire|operate|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "flee|converse|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "tend|craft|something better came up": {
+   "count": 1,
+   "ticks": 101
+  },
+  "operate|eat|something better came up": {
+   "count": 3,
+   "ticks": 381
+  },
+  "operate|harvest|something better came up": {
+   "count": 6,
+   "ticks": 477
+  },
+  "wander|tend|something better came up": {
+   "count": 1,
+   "ticks": 95
+  },
+  "withdraw|harvest|something better came up": {
+   "count": 8,
+   "ticks": 708
+  },
+  "animal_work|(no immediate replacement)|cannot reach them": {
+   "count": 1,
+   "ticks": 82
+  },
+  "tend|socialize|something better came up": {
+   "count": 1,
+   "ticks": 207
+  },
+  "explore|harvest|something better came up": {
+   "count": 2,
+   "ticks": 334
+  },
+  "gather|harvest|the place looked empty": {
+   "count": 1,
+   "ticks": 1
+  },
+  "alone|flee|danger nearby": {
+   "count": 1,
+   "ticks": 44
+  },
+  "harvest|eat|something better came up": {
+   "count": 1,
+   "ticks": 95
+  },
+  "tend|sleep|something better came up": {
+   "count": 1,
+   "ticks": 165
+  },
+  "haul|flee|danger nearby": {
+   "count": 2,
+   "ticks": 114
+  },
+  "fetch_water|tool_work|something better came up": {
+   "count": 1,
+   "ticks": 46
+  },
+  "operate|plan_site|something better came up": {
+   "count": 1,
+   "ticks": 108
+  },
+  "plan_site|sleep|something better came up": {
+   "count": 1,
+   "ticks": 61
+  },
+  "fuel_fire|harvest|something better came up": {
+   "count": 1,
+   "ticks": 46
+  },
+  "deposit|warm|something better came up": {
+   "count": 2,
+   "ticks": 152
+  },
+  "fuel_fire|warm|something better came up": {
+   "count": 8,
+   "ticks": 725
+  },
+  "give|rest|something better came up": {
+   "count": 2,
+   "ticks": 104
+  },
+  "warm|gather|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "warm|deposit|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "plan_site|attend|something better came up": {
+   "count": 1,
+   "ticks": 106
+  },
+  "repair|none|something better came up": {
+   "count": 2,
+   "ticks": 219
+  },
+  "rest|gather|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "repair|drink|something better came up": {
+   "count": 2,
+   "ticks": 63
+  },
+  "plan_site|flee|danger nearby": {
+   "count": 1,
+   "ticks": 6
+  },
+  "operate|attend|something better came up": {
+   "count": 1,
+   "ticks": 94
+  },
+  "attend|give|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "tend|harvest|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "eat|attend|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "eat_store|drink|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "tend|deposit|something better came up": {
+   "count": 1,
+   "ticks": 61
+  },
+  "explore|none|something better came up": {
+   "count": 2,
+   "ticks": 436
+  },
+  "wander|none|something better came up": {
+   "count": 1,
+   "ticks": 103
+  },
+  "fuel_fire|drink|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "sleep|rest|a more urgent need (warmth)": {
+   "count": 4,
+   "ticks": 538
+  },
+  "wander|give|something better came up": {
+   "count": 1,
+   "ticks": 53
+  },
+  "eat_store|rest|a more urgent need (warmth)": {
+   "count": 1,
+   "ticks": 59
+  },
+  "drink|rest|a more urgent need (warmth)": {
+   "count": 2,
+   "ticks": 166
+  },
+  "fuel_fire|warm|a more urgent need (warmth)": {
+   "count": 2,
+   "ticks": 281
+  },
+  "explore|warm|something better came up": {
+   "count": 3,
+   "ticks": 996
+  },
+  "operate|warm|something better came up": {
+   "count": 1,
+   "ticks": 106
+  },
+  "fuel_fire|eat|something better came up": {
+   "count": 1,
+   "ticks": 105
+  },
+  "fetch_water|warm|something better came up": {
+   "count": 2,
+   "ticks": 95
+  },
+  "fuel_fire|gather|something better came up": {
+   "count": 1,
+   "ticks": 60
+  },
+  "fuel_fire|attend|something better came up": {
+   "count": 1,
+   "ticks": 104
+  },
+  "fetch_water|fuel_fire|something better came up": {
+   "count": 1,
+   "ticks": 50
+  },
+  "gather|warm|something better came up": {
+   "count": 1,
+   "ticks": 92
+  },
+  "eat_store|attend|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "fetch_water|none|something better came up": {
+   "count": 2,
+   "ticks": 111
+  },
+  "explore|fuel_fire|something better came up": {
+   "count": 1,
+   "ticks": 121
+  },
+  "fuel_fire|fuel_fire|something better came up": {
+   "count": 1,
+   "ticks": 58
+  },
+  "withdraw|warm|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "give|warm|something better came up": {
+   "count": 2,
+   "ticks": 156
+  },
+  "sleep|warm|a more urgent need (warmth)": {
+   "count": 2,
+   "ticks": 323
+  },
+  "give|warm|a more urgent need (warmth)": {
+   "count": 1,
+   "ticks": 50
+  },
+  "rest|flee|danger nearby": {
+   "count": 1,
+   "ticks": 1
+  },
+  "drink|defend|danger nearby": {
+   "count": 1,
+   "ticks": 33
+  },
+  "gather|rest|a more urgent need (warmth)": {
+   "count": 1,
+   "ticks": 58
+  },
+  "eat|deposit|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "build|gather|something better came up": {
+   "count": 1,
+   "ticks": 164
+  },
+  "plant|eat|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "craft|gather|something better came up": {
+   "count": 1,
+   "ticks": 102
+  },
+  "eat|withdraw|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "eat_store|eat|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "warm|harvest|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "operate|wander|something better came up": {
+   "count": 1,
+   "ticks": 157
+  },
+  "plant|socialize|something better came up": {
+   "count": 1,
+   "ticks": 115
+  },
+  "repair|rest|something better came up": {
+   "count": 2,
+   "ticks": 120
+  },
+  "drink|harvest|something better came up": {
+   "count": 2,
+   "ticks": 2
+  },
+  "animal_work|deposit|something better came up": {
+   "count": 1,
+   "ticks": 198
+  },
+  "give|converse|something better came up": {
+   "count": 2,
+   "ticks": 168
+  },
+  "wander|deposit|something better came up": {
+   "count": 1,
+   "ticks": 107
+  },
+  "harvest|socialize|something better came up": {
+   "count": 1,
+   "ticks": 203
+  },
+  "flee|haul|something better came up": {
+   "count": 1,
+   "ticks": 57
+  },
+  "withdraw|craft|something better came up": {
+   "count": 1,
+   "ticks": 108
+  },
+  "socialize|none|something better came up": {
+   "count": 1,
+   "ticks": 109
+  },
+  "explore|attend_meal|something better came up": {
+   "count": 1,
+   "ticks": 55
+  },
+  "withdraw|repair|something better came up": {
+   "count": 1,
+   "ticks": 62
+  },
+  "till|rest|something better came up": {
+   "count": 1,
+   "ticks": 181
+  },
+  "give|visit|something better came up": {
+   "count": 1,
+   "ticks": 48
+  },
+  "give|haul|something better came up": {
+   "count": 1,
+   "ticks": 51
+  },
+  "deposit|host_meal|something better came up": {
+   "count": 1,
+   "ticks": 54
+  },
+  "eat|harvest|something better came up": {
+   "count": 1,
+   "ticks": 1
+  },
+  "fetch_water|converse|something better came up": {
+   "count": 1,
+   "ticks": 1
+  }
+ },
+ "reviews": {
+  "rest|present": {
+   "count": 22,
+   "ticks": 0
+  },
+  "warm|present": {
+   "count": 4,
+   "ticks": 0
+  },
+  "flee|present": {
+   "count": 3,
+   "ticks": 0
+  },
+  "drink|present": {
+   "count": 40,
+   "ticks": 0
+  },
+  "eat_store|present": {
+   "count": 15,
+   "ticks": 0
+  },
+  "gather|present": {
+   "count": 84,
+   "ticks": 0
+  },
+  "fuel_fire|present": {
+   "count": 7,
+   "ticks": 0
+  },
+  "flee|absent": {
+   "count": 8,
+   "ticks": 0
+  },
+  "withdraw|present": {
+   "count": 15,
+   "ticks": 0
+  },
+  "deposit|present": {
+   "count": 35,
+   "ticks": 0
+  },
+  "socialize|present": {
+   "count": 6,
+   "ticks": 0
+  },
+  "give|present": {
+   "count": 17,
+   "ticks": 0
+  },
+  "give|absent": {
+   "count": 11,
+   "ticks": 0
+  },
+  "gather|absent": {
+   "count": 21,
+   "ticks": 0
+  },
+  "deposit|absent": {
+   "count": 9,
+   "ticks": 0
+  },
+  "repair|present": {
+   "count": 3,
+   "ticks": 0
+  },
+  "repair|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "withdraw|absent": {
+   "count": 6,
+   "ticks": 0
+  },
+  "operate|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "operate|present": {
+   "count": 9,
+   "ticks": 0
+  },
+  "plant|present": {
+   "count": 3,
+   "ticks": 0
+  },
+  "socialize|absent": {
+   "count": 9,
+   "ticks": 0
+  },
+  "explore|unkeyed": {
+   "count": 12,
+   "ticks": 0
+  },
+  "visit|absent": {
+   "count": 7,
+   "ticks": 0
+  },
+  "plan_site|present": {
+   "count": 5,
+   "ticks": 0
+  },
+  "eat|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "plan_site|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "fetch_water|present": {
+   "count": 26,
+   "ticks": 0
+  },
+  "wander|present": {
+   "count": 8,
+   "ticks": 0
+  },
+  "tree_work|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "visit|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "wander|absent": {
+   "count": 5,
+   "ticks": 0
+  },
+  "haul|present": {
+   "count": 12,
+   "ticks": 0
+  },
+  "sleep|present": {
+   "count": 94,
+   "ticks": 0
+  },
+  "haul|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "harvest|present": {
+   "count": 6,
+   "ticks": 0
+  },
+  "craft|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "sleep|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "defend|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "rest|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "build|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "build|present": {
+   "count": 1,
+   "ticks": 0
+  }
+ },
+ "switches": {
+  "rest|rest|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|rest|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "drink|flee|danger nearby|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "withdraw|give|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|drink|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "warm|repair|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|harvest|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "warm|drink|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|operate|something better came up|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "withdraw|gather|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "gather|withdraw|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|flee|danger nearby|present": {
+   "count": 5,
+   "ticks": 0
+  },
+  "give|drink|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "gather|gather|the place looked empty|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "withdraw|deposit|something better came up|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "flee|give|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "drink|socialize|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "eat|give|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|gather|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "deposit|deposit|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "plan_site|plan_site|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "socialize|drink|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "fetch_water|fetch_water|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|give|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|gather|something better came up|absent": {
+   "count": 4,
+   "ticks": 0
+  },
+  "gather|give|something better came up|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "socialize|gather|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|flee|danger nearby|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|deposit|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|wander|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "socialize|give|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|visit|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "explore|drink|something better came up|unkeyed": {
+   "count": 2,
+   "ticks": 0
+  },
+  "give|socialize|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "operate|give|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|drink|something better came up|absent": {
+   "count": 2,
+   "ticks": 0
+  },
+  "give|deposit|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|eat|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|wander|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "plan_site|repair|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|tool_work|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|repair|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "socialize|eat|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|sleep|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|sleep|something better came up|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "gather|harvest|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|wander|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "haul|drink|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "wander|sleep|something better came up|absent": {
+   "count": 3,
+   "ticks": 0
+  },
+  "gather|sleep|something better came up|present": {
+   "count": 2,
+   "ticks": 0
+  },
+  "gather|haul|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "give|sleep|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "rest|sleep|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "fetch_water|sleep|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "craft|sleep|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|sleep|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "fetch_water|socialize|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|give|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "flee|withdraw|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "fetch_water|harvest|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "rest|deposit|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "rest|build|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "withdraw|fetch_water|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|socialize|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "deposit|give|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "gather|gather|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "withdraw|socialize|something better came up|present": {
+   "count": 1,
+   "ticks": 0
+  },
+  "haul|withdraw|something better came up|absent": {
+   "count": 1,
+   "ticks": 0
+  }
+ },
+ "unmatched": 0,
+ "stationary": 17,
+ "censoredTicks": 0,
+ "rejectedStarts": {},
+ "detours": [
+  {
+   "person": 13516,
+   "act": 60249,
+   "next": 60287,
+   "tick": 115308,
+   "kind": "rest",
+   "nextKind": "rest",
+   "job": false,
+   "presence": "present",
+   "walked": 1.6345480402462904,
+   "ticks": 31,
+   "startX": 15.55485427452987,
+   "startY": 33.5,
+   "x": 17.18940231477616,
+   "y": 33.5,
+   "targetX": 26.5,
+   "targetY": 38.5,
+   "remaining": 10.568217884586574,
+   "direct": 12.033129890089986,
+   "extraTicks": 3.217230052312707
+  },
+  {
+   "person": 57052,
+   "act": 60375,
+   "next": 60402,
+   "tick": 115542,
+   "kind": "flee",
+   "nextKind": "rest",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.7428019212993275,
+   "ticks": 54,
+   "startX": 44.61272089995394,
+   "startY": 19.5,
+   "x": 45.65522911651046,
+   "y": 24.189541766979076,
+   "targetX": 45.65522911651046,
+   "targetY": 24.189541766979076,
+   "remaining": 0,
+   "direct": 4.804021790732125,
+   "extraTicks": 15.52679854348362
+  },
+  {
+   "person": 1099,
+   "act": 60450,
+   "next": 60488,
+   "tick": 115668,
+   "kind": "withdraw",
+   "nextKind": "give",
+   "job": true,
+   "presence": "present",
+   "walked": 5.6612980740920165,
+   "ticks": 46,
+   "startX": 25.6247950444,
+   "startY": 35.5,
+   "x": 28.265408240606106,
+   "y": 32.24486391979797,
+   "targetX": 21.45090248660454,
+   "targetY": 38.5,
+   "remaining": 9.25009275916548,
+   "direct": 5.140173059734498,
+   "extraTicks": 79.39451548029413
+  },
+  {
+   "person": 27213,
+   "act": 60439,
+   "next": 60538,
+   "tick": 115722,
+   "kind": "flee",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "absent",
+   "walked": 15.594171099528571,
+   "ticks": 111,
+   "startX": 21.92129618145558,
+   "startY": 62.89976314388826,
+   "x": 32.476564361395496,
+   "y": 52.523435638604504,
+   "targetX": 40.5,
+   "targetY": 46.5,
+   "remaining": 10.032810988912315,
+   "direct": 24.781454088750174,
+   "extraTicks": 6.018505720288425
+  },
+  {
+   "person": 1098,
+   "act": 60508,
+   "next": 60563,
+   "tick": 115743,
+   "kind": "give",
+   "nextKind": "harvest",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.998308695450968,
+   "ticks": 58,
+   "startX": 20.62183652,
+   "startY": 38.5,
+   "x": 23.81536753404873,
+   "y": 33.69539550605643,
+   "targetX": 24.511734739737584,
+   "targetY": 30.467652620607986,
+   "remaining": 3.3020071804467577,
+   "direct": 8.92467997090895,
+   "extraTicks": 11.40088069296113
+  },
+  {
+   "person": 50829,
+   "act": 60531,
+   "next": 60581,
+   "tick": 115760,
+   "kind": "deposit",
+   "nextKind": "operate",
+   "job": true,
+   "presence": "absent",
+   "walked": 5.9310554047811594,
+   "ticks": 46,
+   "startX": 31.19575899342173,
+   "startY": 46.5,
+   "x": 35.53560132114249,
+   "y": 44.78194838195685,
+   "targetX": 36.587909482955,
+   "targetY": 44.642626427137294,
+   "remaining": 1.061490967701549,
+   "direct": 5.703080175742108,
+   "extraTicks": 10.000824642820247
+  },
+  {
+   "person": 53759,
+   "act": 60549,
+   "next": 60609,
+   "tick": 115780,
+   "kind": "withdraw",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.973785965391124,
+   "ticks": 53,
+   "startX": 42.486565564857166,
+   "startY": 51.41838767354676,
+   "x": 39.873929292663604,
+   "y": 46.467321832904936,
+   "targetX": 51.5,
+   "targetY": 57.5,
+   "remaining": 16.027648225197655,
+   "direct": 10.873270382267085,
+   "extraTicks": 92.17270002707902
+  },
+  {
+   "person": 1116,
+   "act": 60510,
+   "next": 60620,
+   "tick": 115788,
+   "kind": "gather",
+   "nextKind": "withdraw",
+   "job": true,
+   "presence": "present",
+   "walked": 12.916571599950984,
+   "ticks": 101,
+   "startX": 39.54712087062071,
+   "startY": 36.460493097977746,
+   "x": 40.13581673969423,
+   "y": 25.77163347938843,
+   "targetX": 36.42654837374575,
+   "targetY": 24.495900612184776,
+   "remaining": 3.9225203835148803,
+   "direct": 12.364847191103737,
+   "extraTicks": 34.98596516356474
+  },
+  {
+   "person": 7108,
+   "act": 60572,
+   "next": 60632,
+   "tick": 115796,
+   "kind": "give",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "absent",
+   "walked": 5.893393048974936,
+   "ticks": 49,
+   "startX": 27.552825187483734,
+   "startY": 28.4634405984713,
+   "x": 31.5,
+   "y": 26.532641269148144,
+   "targetX": 36.5,
+   "targetY": 20.5,
+   "remaining": 7.835353258292145,
+   "direct": 11.977826317454534,
+   "extraTicks": 14.557841092193485
+  },
+  {
+   "person": 1099,
+   "act": 60602,
+   "next": 60674,
+   "tick": 115828,
+   "kind": "withdraw",
+   "nextKind": "deposit",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.960518043159535,
+   "ticks": 54,
+   "startX": 24.629970792614888,
+   "startY": 31.45905135297013,
+   "x": 30.044999134080165,
+   "y": 28.5,
+   "targetX": 33.57124101377558,
+   "targetY": 26.417078339168803,
+   "remaining": 4.09547853605383,
+   "direct": 10.264882124979115,
+   "extraTicks": 6.137500149235701
+  },
+  {
+   "person": 7109,
+   "act": 60667,
+   "next": 60729,
+   "tick": 115871,
+   "kind": "flee",
+   "nextKind": "give",
+   "job": false,
+   "presence": "absent",
+   "walked": 8.078051635830587,
+   "ticks": 52,
+   "startX": 36.11940457249603,
+   "startY": 15.434704544062402,
+   "x": 33.876997119048866,
+   "y": 23.195279718871923,
+   "targetX": 40.731176223871756,
+   "targetY": 16.787066989683815,
+   "remaining": 9.383227674074588,
+   "direct": 4.805967327059134,
+   "extraTicks": 81.46472104598406
+  },
+  {
+   "person": 41513,
+   "act": 60659,
+   "next": 60740,
+   "tick": 115877,
+   "kind": "drink",
+   "nextKind": "socialize",
+   "job": false,
+   "presence": "present",
+   "walked": 7.318510121854144,
+   "ticks": 59,
+   "startX": 33.619752824540484,
+   "startY": 54.5,
+   "x": 36.5,
+   "y": 49.17183394493898,
+   "targetX": 36.31490091836595,
+   "targetY": 49.19956570555069,
+   "remaining": 0.18716495550287648,
+   "direct": 5.94629522958837,
+   "extraTicks": 12.571330706179488
+  },
+  {
+   "person": 27214,
+   "act": 60714,
+   "next": 60785,
+   "tick": 115912,
+   "kind": "give",
+   "nextKind": "gather",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.686487668019634,
+   "ticks": 54,
+   "startX": 40.45157325659934,
+   "startY": 40.512326755065,
+   "x": 36.88823110686726,
+   "y": 44.5,
+   "targetX": 35.484510198794304,
+   "targetY": 41.5496679372387,
+   "remaining": 3.2672452721395895,
+   "direct": 5.074228231804817,
+   "extraTicks": 39.40682572576671
+  },
+  {
+   "person": 1095,
+   "act": 60720,
+   "next": 60788,
+   "tick": 115913,
+   "kind": "deposit",
+   "nextKind": "deposit",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.022697936430399,
+   "ticks": 50,
+   "startX": 43.376054628666665,
+   "startY": 27.5,
+   "x": 38.303527360509904,
+   "y": 26.557961966788405,
+   "targetX": 32.64756391956471,
+   "targetY": 40.51059997002594,
+   "remaining": 15.055431899972083,
+   "direct": 16.86345825966092,
+   "extraTicks": 34.98989673089567
+  },
+  {
+   "person": 1085,
+   "act": 60677,
+   "next": 60808,
+   "tick": 115933,
+   "kind": "plan_site",
+   "nextKind": "plan_site",
+   "job": true,
+   "presence": "absent",
+   "walked": 9.287753130232204,
+   "ticks": 102,
+   "startX": 44.585788756302776,
+   "startY": 34.512865475931655,
+   "x": 47.31995949508803,
+   "y": 42.689817727896084,
+   "targetX": 50.5,
+   "targetY": 50.5,
+   "remaining": 8.432769695442126,
+   "direct": 17.046007301586275,
+   "extraTicks": 7.407667117360327
+  },
+  {
+   "person": 1125,
+   "act": 60773,
+   "next": 60832,
+   "tick": 115950,
+   "kind": "withdraw",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.502569390558233,
+   "ticks": 51,
+   "startX": 37.5,
+   "startY": 26.63186311161306,
+   "x": 35.5,
+   "y": 31.913881956065907,
+   "targetX": 32.53515886669047,
+   "targetY": 42.57369529872667,
+   "remaining": 11.06444320542758,
+   "direct": 16.697055457807334,
+   "extraTicks": 6.823120428599299
+  },
+  {
+   "person": 1120,
+   "act": 60759,
+   "next": 60872,
+   "tick": 115994,
+   "kind": "give",
+   "nextKind": "give",
+   "job": false,
+   "presence": "absent",
+   "walked": 13.662050863924014,
+   "ticks": 106,
+   "startX": 43.36853822222222,
+   "startY": 27.5,
+   "x": 32.431240769749635,
+   "y": 32.85625307675012,
+   "targetX": 30.49185842870421,
+   "targetY": 34.35,
+   "remaining": 2.44795501091775,
+   "direct": 14.585313932336014,
+   "extraTicks": 11.8296548238139
+  },
+  {
+   "person": 22744,
+   "act": 60762,
+   "next": 60893,
+   "tick": 116010,
+   "kind": "gather",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 16.05062186758581,
+   "ticks": 119,
+   "startX": 44.43587466674143,
+   "startY": 29.425114447745884,
+   "x": 37.58875120927556,
+   "y": 16.95166827903407,
+   "targetX": 38.60682909663301,
+   "targetY": 12.642856938764453,
+   "remaining": 4.427452738399616,
+   "direct": 17.76575186577152,
+   "extraTicks": 20.109277307023277
+  },
+  {
+   "person": 1124,
+   "act": 60870,
+   "next": 60954,
+   "tick": 116047,
+   "kind": "flee",
+   "nextKind": "deposit",
+   "job": false,
+   "presence": "absent",
+   "walked": 8.821900475091013,
+   "ticks": 54,
+   "startX": 44.42720689819288,
+   "startY": 16.51919115386709,
+   "x": 40.12603758296847,
+   "y": 23.186981208515764,
+   "targetX": 36.62429810238537,
+   "targetY": 23.622229130240157,
+   "remaining": 3.5286853278862704,
+   "direct": 10.551707642343406,
+   "extraTicks": 11.011167145730836
+  },
+  {
+   "person": 1093,
+   "act": 60849,
+   "next": 60979,
+   "tick": 116074,
+   "kind": "gather",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 15.074286799515678,
+   "ticks": 114,
+   "startX": 43.358846,
+   "startY": 27.5,
+   "x": 34.786737224963616,
+   "y": 18.360211674890866,
+   "targetX": 35.58603576165624,
+   "targetY": 13.63045381566044,
+   "remaining": 4.79682056759589,
+   "direct": 15.899084576189587,
+   "extraTicks": 30.038608405649683
+  },
+  {
+   "person": 10900,
+   "act": 60917,
+   "next": 60981,
+   "tick": 116078,
+   "kind": "deposit",
+   "nextKind": "wander",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.441925185300734,
+   "ticks": 57,
+   "startX": 39.410862583179146,
+   "startY": 41.39105797906561,
+   "x": 33.03570139045304,
+   "y": 40.5,
+   "targetX": 39.5060081618838,
+   "targetY": 36.616724766138944,
+   "remaining": 7.5461709666784875,
+   "direct": 4.7752811759310765,
+   "extraTicks": 81.51762687852903
+  },
+  {
+   "person": 22744,
+   "act": 60937,
+   "next": 60982,
+   "tick": 116078,
+   "kind": "flee",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "absent",
+   "walked": 8.634347432084105,
+   "ticks": 48,
+   "startX": 37.451585753912155,
+   "startY": 14.752514393740126,
+   "x": 36.124824251779444,
+   "y": 22.873769762456185,
+   "targetX": 36.5,
+   "targetY": 20.5,
+   "remaining": 2.403235262558401,
+   "direct": 5.82572795805065,
+   "extraTicks": 28.97370407250624
+  },
+  {
+   "person": 1114,
+   "act": 60869,
+   "next": 61014,
+   "tick": 116098,
+   "kind": "deposit",
+   "nextKind": "visit",
+   "job": true,
+   "presence": "absent",
+   "walked": 12.196478683484408,
+   "ticks": 105,
+   "startX": 47.42012895766389,
+   "startY": 31.5,
+   "x": 37.53497954574147,
+   "y": 27.6049386372244,
+   "targetX": 32.87691532795514,
+   "targetY": 33.207386716883825,
+   "remaining": 7.285944464673127,
+   "direct": 14.643095030776031,
+   "extraTicks": 41.66198011013871
+  },
+  {
+   "person": 60649,
+   "act": 60651,
+   "next": 61065,
+   "tick": 116137,
+   "kind": "explore",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "unkeyed",
+   "walked": 34.718893929535355,
+   "ticks": 326,
+   "startX": 76,
+   "startY": 15.733130841515958,
+   "x": 47.90076808455711,
+   "y": 31.548655852025064,
+   "targetX": 47.5,
+   "targetY": 31.5,
+   "remaining": 0.40371084892018655,
+   "direct": 32.57060274328302,
+   "extraTicks": 23.962533632400653
+  },
+  {
+   "person": 16452,
+   "act": 60874,
+   "next": 61078,
+   "tick": 116146,
+   "kind": "withdraw",
+   "nextKind": "deposit",
+   "job": true,
+   "presence": "absent",
+   "walked": 19.068119667203284,
+   "ticks": 152,
+   "startX": 36.40772782907231,
+   "startY": 20.592272170927696,
+   "x": 30.0941533416414,
+   "y": 36.3116933167172,
+   "targetX": 28.554514597775416,
+   "targetY": 39.552393656922504,
+   "remaining": 3.5878442213423964,
+   "direct": 20.522162771498976,
+   "extraTicks": 17.009425966051204
+  },
+  {
+   "person": 27213,
+   "act": 61012,
+   "next": 61084,
+   "tick": 116151,
+   "kind": "give",
+   "nextKind": "socialize",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.530705674492416,
+   "ticks": 54,
+   "startX": 35.78656411135502,
+   "startY": 44.67435745902989,
+   "x": 37.5,
+   "y": 39.36869623234526,
+   "targetX": 38.608623027528374,
+   "targetY": 37.72022779896099,
+   "remaining": 1.9865782624982473,
+   "direct": 7.504927438383634,
+   "extraTicks": 8.370803041744567
+  },
+  {
+   "person": 60650,
+   "act": 60652,
+   "next": 61086,
+   "tick": 116151,
+   "kind": "explore",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "unkeyed",
+   "walked": 36.34911930780985,
+   "ticks": 340,
+   "startX": 76.8,
+   "startY": 16.23313084151596,
+   "x": 47.47450818374273,
+   "y": 32.29461067845021,
+   "targetX": 47.5,
+   "targetY": 31.5,
+   "remaining": 0.795019473348421,
+   "direct": 33.03887549391279,
+   "extraTicks": 38.39954156368151
+  },
+  {
+   "person": 1098,
+   "act": 60955,
+   "next": 61088,
+   "tick": 116154,
+   "kind": "operate",
+   "nextKind": "give",
+   "job": true,
+   "presence": "absent",
+   "walked": 13.268173725678201,
+   "ticks": 105,
+   "startX": 23.72415223088849,
+   "startY": 30.537221656423153,
+   "x": 33.567769436714336,
+   "y": 25.34119240271249,
+   "targetX": 35.5,
+   "targetY": 34.817552124655904,
+   "remaining": 9.671344711536586,
+   "direct": 12.529637648334853,
+   "extraTicks": 82.38040181196997
+  },
+  {
+   "person": 1105,
+   "act": 61061,
+   "next": 61141,
+   "tick": 116193,
+   "kind": "deposit",
+   "nextKind": "operate",
+   "job": true,
+   "presence": "absent",
+   "walked": 7.505205071538323,
+   "ticks": 58,
+   "startX": 25.369493898157923,
+   "startY": 32.441935901917795,
+   "x": 25.5,
+   "y": 38.21959085493764,
+   "targetX": 26.612842088448815,
+   "targetY": 39.52774136308581,
+   "remaining": 1.7174618673471114,
+   "direct": 7.194063785915308,
+   "extraTicks": 15.676984406257008
+  },
+  {
+   "person": 1098,
+   "act": 61088,
+   "next": 61172,
+   "tick": 116211,
+   "kind": "give",
+   "nextKind": "deposit",
+   "job": false,
+   "presence": "absent",
+   "walked": 7.166639603064388,
+   "ticks": 57,
+   "startX": 33.56051765440722,
+   "startY": 25.465192554385286,
+   "x": 35.46709663369929,
+   "y": 31.434193267398577,
+   "targetX": 34.386939879320565,
+   "targetY": 26.486014205240643,
+   "remaining": 5.064702819041622,
+   "direct": 1.313411792502937,
+   "extraTicks": 86.8359622299517
+  },
+  {
+   "person": 30233,
+   "act": 61024,
+   "next": 61189,
+   "tick": 116228,
+   "kind": "gather",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 13.745141489974367,
+   "ticks": 123,
+   "startX": 49.40091310592131,
+   "startY": 28.340545874292282,
+   "x": 57.89476508470247,
+   "y": 17.95392618647315,
+   "targetX": 57.626524448115376,
+   "targetY": 17.455526101985015,
+   "remaining": 0.5659997202600286,
+   "direct": 13.643472336482079,
+   "extraTicks": 5.974712703498566
+  },
+  {
+   "person": 57051,
+   "act": 61125,
+   "next": 61191,
+   "tick": 116232,
+   "kind": "flee",
+   "nextKind": "eat",
+   "job": false,
+   "presence": "absent",
+   "walked": 7.0463149855430185,
+   "ticks": 51,
+   "startX": 37.42193531908973,
+   "startY": 68.25199739122237,
+   "x": 40.87746378475804,
+   "y": 62.74507243048393,
+   "targetX": 40.87746378475804,
+   "targetY": 62.74507243048393,
+   "remaining": 0,
+   "direct": 6.501299831591229,
+   "extraTicks": 3.9447247119338362
+  },
+  {
+   "person": 27214,
+   "act": 61119,
+   "next": 61204,
+   "tick": 116238,
+   "kind": "give",
+   "nextKind": "drink",
+   "job": false,
+   "presence": "absent",
+   "walked": 7.246649424541753,
+   "ticks": 60,
+   "startX": 36.43162088278614,
+   "startY": 47.5860732518049,
+   "x": 36.34221961214954,
+   "y": 41.078890193925226,
+   "targetX": 40.5,
+   "targetY": 46.5,
+   "remaining": 6.831952084369004,
+   "direct": 4.210850715671108,
+   "extraTicks": 81.70190289449785
+  },
+  {
+   "person": 7108,
+   "act": 61067,
+   "next": 61209,
+   "tick": 116244,
+   "kind": "withdraw",
+   "nextKind": "deposit",
+   "job": true,
+   "presence": "absent",
+   "walked": 13.582671967325357,
+   "ticks": 106,
+   "startX": 35.2336585633982,
+   "startY": 26.377180819917985,
+   "x": 30.832764534663312,
+   "y": 36.5,
+   "targetX": 35.36188219417818,
+   "targetY": 26.355715356301516,
+   "remaining": 11.109429225037005,
+   "direct": 0.13000794444444544,
+   "extraTicks": 191.68407295284075
+  },
+  {
+   "person": 7108,
+   "act": 61209,
+   "next": 61264,
+   "tick": 116297,
+   "kind": "deposit",
+   "nextKind": "operate",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.736188558434229,
+   "ticks": 53,
+   "startX": 30.821986259025785,
+   "startY": 36.37043961101883,
+   "x": 31.346838719675585,
+   "y": 30.288290320081096,
+   "targetX": 34.40080512540881,
+   "targetY": 26.42121447066311,
+   "remaining": 4.927574092035445,
+   "direct": 10.573316668475668,
+   "extraTicks": 8.579575310925682
+  },
+  {
+   "person": 1098,
+   "act": 61235,
+   "next": 61278,
+   "tick": 116314,
+   "kind": "give",
+   "nextKind": "wander",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.937407813885417,
+   "ticks": 54,
+   "startX": 34.39184961931532,
+   "startY": 26.616899317614862,
+   "x": 35.5,
+   "y": 33.317980342516684,
+   "targetX": 39.63413636514451,
+   "targetY": 36.3940140794497,
+   "remaining": 5.15296681886856,
+   "direct": 11.093851603099125,
+   "extraTicks": 7.7568228717440135
+  },
+  {
+   "person": 44200,
+   "act": 61176,
+   "next": 61290,
+   "tick": 116322,
+   "kind": "plan_site",
+   "nextKind": "repair",
+   "job": true,
+   "presence": "present",
+   "walked": 12.533334013533695,
+   "ticks": 109,
+   "startX": 18.67169071768297,
+   "startY": 25.4812259490722,
+   "x": 29.844921338348904,
+   "y": 23.810157323302192,
+   "targetX": 32.55930495993234,
+   "targetY": 26.497853669244797,
+   "remaining": 3.819893989774277,
+   "direct": 13.924775088415284,
+   "extraTicks": 21.1197888317246
+  },
+  {
+   "person": 1093,
+   "act": 61188,
+   "next": 61304,
+   "tick": 116336,
+   "kind": "deposit",
+   "nextKind": "repair",
+   "job": true,
+   "presence": "absent",
+   "walked": 14.153969827639726,
+   "ticks": 110,
+   "startX": 35.71477949606762,
+   "startY": 23.431209176091773,
+   "x": 33.5,
+   "y": 34.6782479452391,
+   "targetX": 36.366549023776315,
+   "targetY": 40.60781927208882,
+   "remaining": 6.586115655370111,
+   "direct": 17.188971403407397,
+   "extraTicks": 27.59809110186632
+  },
+  {
+   "person": 1125,
+   "act": 61262,
+   "next": 61315,
+   "tick": 116346,
+   "kind": "deposit",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.538335164710957,
+   "ticks": 54,
+   "startX": 39.50456402428953,
+   "startY": 36.38102492716542,
+   "x": 38.5,
+   "y": 30.95460089183415,
+   "targetX": 37.5,
+   "targetY": 26.5,
+   "remaining": 4.565464829075963,
+   "direct": 10.082307798254337,
+   "extraTicks": 8.436486837884207
+  },
+  {
+   "person": 1116,
+   "act": 61157,
+   "next": 61341,
+   "tick": 116369,
+   "kind": "deposit",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "present",
+   "walked": 19.655566477571842,
+   "ticks": 167,
+   "startX": 20.648350101858107,
+   "startY": 23.59942121946832,
+   "x": 36.963633705920785,
+   "y": 31.483083850600302,
+   "targetX": 34.60657307405491,
+   "targetY": 39.58287208969705,
+   "remaining": 8.435775266121183,
+   "direct": 21.22033671416592,
+   "extraTicks": 58.37826354383342
+  },
+  {
+   "person": 13517,
+   "act": 61289,
+   "next": 61358,
+   "tick": 116384,
+   "kind": "gather",
+   "nextKind": "harvest",
+   "job": true,
+   "presence": "present",
+   "walked": 7.444404713688149,
+   "ticks": 62,
+   "startX": 38.0683918751339,
+   "startY": 36.42167657198552,
+   "x": 45.51264112246889,
+   "y": 36.46978774256654,
+   "targetX": 31.42500052959658,
+   "targetY": 33.49071270579007,
+   "remaining": 14.399184197331754,
+   "direct": 7.261211865446673,
+   "extraTicks": 121.44790773708786
+  },
+  {
+   "person": 44199,
+   "act": 61212,
+   "next": 61378,
+   "tick": 116408,
+   "kind": "haul",
+   "nextKind": "drink",
+   "job": true,
+   "presence": "absent",
+   "walked": 21.681699432285633,
+   "ticks": 164,
+   "startX": 29.708034847411387,
+   "startY": 45.67834943970372,
+   "x": 46.000785354289334,
+   "y": 49.33359511809645,
+   "targetX": 47.5,
+   "targetY": 50.5,
+   "remaining": 1.899511753699302,
+   "direct": 18.433728274999957,
+   "extraTicks": 38.93547182673697
+  },
+  {
+   "person": 7108,
+   "act": 61316,
+   "next": 61401,
+   "tick": 116447,
+   "kind": "gather",
+   "nextKind": "give",
+   "job": true,
+   "presence": "present",
+   "walked": 11.602345718213202,
+   "ticks": 101,
+   "startX": 34.270845105235054,
+   "startY": 26.424744169674028,
+   "x": 24.059047743377537,
+   "y": 25.5,
+   "targetX": 37.26953853155989,
+   "targetY": 33.5,
+   "remaining": 15.443997761740667,
+   "direct": 7.684491351393756,
+   "extraTicks": 168.54756033642235
+  },
+  {
+   "person": 41513,
+   "act": 61336,
+   "next": 61418,
+   "tick": 116464,
+   "kind": "gather",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "present",
+   "walked": 10.08539332692475,
+   "ticks": 99,
+   "startX": 43.53215385407805,
+   "startY": 45.87757032752772,
+   "x": 52.95886248456181,
+   "y": 45.9950326282137,
+   "targetX": 34.510987418331204,
+   "targetY": 45.4342113801511,
+   "remaining": 18.456397669413487,
+   "direct": 9.032054639873714,
+   "extraTicks": 191.511013669006
+  },
+  {
+   "person": 37500,
+   "act": 61377,
+   "next": 61419,
+   "tick": 116466,
+   "kind": "gather",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "present",
+   "walked": 6.9318639153939205,
+   "ticks": 62,
+   "startX": 40.52598218910355,
+   "startY": 48.35207740082013,
+   "x": 36.56350382180061,
+   "y": 44.5,
+   "targetX": 34.56981960379053,
+   "targetY": 36.5449660542421,
+   "remaining": 8.2010573610543,
+   "direct": 13.224362029722807,
+   "extraTicks": 17.070541883286698
+  },
+  {
+   "person": 1114,
+   "act": 61338,
+   "next": 61421,
+   "tick": 116471,
+   "kind": "gather",
+   "nextKind": "haul",
+   "job": true,
+   "presence": "present",
+   "walked": 11.69287832919222,
+   "ticks": 104,
+   "startX": 35.48424598402452,
+   "startY": 41.72275312343363,
+   "x": 29.526839326995137,
+   "y": 48.365803365024306,
+   "targetX": 38.5,
+   "targetY": 51.5,
+   "remaining": 9.504777799099465,
+   "direct": 10.231780332385911,
+   "extraTicks": 97.53381936139468
+  },
+  {
+   "person": 1098,
+   "act": 61394,
+   "next": 61423,
+   "tick": 116475,
+   "kind": "give",
+   "nextKind": "sleep",
+   "job": false,
+   "presence": "absent",
+   "walked": 5.138744001890729,
+   "ticks": 45,
+   "startX": 39.75504273066878,
+   "startY": 36.40881360669005,
+   "x": 42.50146148348342,
+   "y": 34.04710853412403,
+   "targetX": 25.5,
+   "targetY": 35.5,
+   "remaining": 17.06342832451865,
+   "direct": 14.283983527885269,
+   "extraTicks": 69.3396082393835
+  },
+  {
+   "person": 1118,
+   "act": 61357,
+   "next": 61426,
+   "tick": 116486,
+   "kind": "wander",
+   "nextKind": "sleep",
+   "job": false,
+   "presence": "absent",
+   "walked": 9.077622343811589,
+   "ticks": 103,
+   "startX": 24.57537460139649,
+   "startY": 41.37197603381357,
+   "x": 30.111318761943853,
+   "y": 36.49638273236893,
+   "targetX": 44.59217420003843,
+   "targetY": 39.48103140345775,
+   "remaining": 14.785239325382108,
+   "direct": 20.10591797872615,
+   "extraTicks": 42.628475327788884
+  },
+  {
+   "person": 30233,
+   "act": 61374,
+   "next": 61443,
+   "tick": 116505,
+   "kind": "rest",
+   "nextKind": "sleep",
+   "job": false,
+   "presence": "present",
+   "walked": 9.10624233201689,
+   "ticks": 102,
+   "startX": 61.427831919940324,
+   "startY": 8.629588822369444,
+   "x": 53.782812903099384,
+   "y": 11.5,
+   "targetX": 41.5,
+   "targetY": 19.5,
+   "remaining": 14.658359144615904,
+   "direct": 22.699874982037848,
+   "extraTicks": 11.926116008009956
+  },
+  {
+   "person": 1085,
+   "act": 61383,
+   "next": 61453,
+   "tick": 116525,
+   "kind": "craft",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "present",
+   "walked": 8.78362488361492,
+   "ticks": 103,
+   "startX": 66.4160730465899,
+   "startY": 55.44651730283597,
+   "x": 59.899846805223504,
+   "y": 57.19992340261176,
+   "targetX": 44.63528284681961,
+   "targetY": 36.37613152177073,
+   "remaining": 25.81931875818539,
+   "direct": 28.94965346191669,
+   "extraTicks": 66.29254962996217
+  },
+  {
+   "person": 57051,
+   "act": 61420,
+   "next": 61455,
+   "tick": 116528,
+   "kind": "flee",
+   "nextKind": "sleep",
+   "job": false,
+   "presence": "absent",
+   "walked": 8.350549555247543,
+   "ticks": 61,
+   "startX": 40.43712238622961,
+   "startY": 63.37424477245922,
+   "x": 37.85410856607952,
+   "y": 55.46506474229151,
+   "targetX": 40.613375211227684,
+   "targetY": 36.54281320313457,
+   "remaining": 19.122373172024293,
+   "direct": 26.8320104561263,
+   "extraTicks": 4.681805464564861
+  },
+  {
+   "person": 1094,
+   "act": 61581,
+   "next": 61595,
+   "tick": 116986,
+   "kind": "deposit",
+   "nextKind": "sleep",
+   "job": true,
+   "presence": "present",
+   "walked": 5.749046802034987,
+   "ticks": 49,
+   "startX": 40.37458572833334,
+   "startY": 46.5,
+   "x": 36.568791349008045,
+   "y": 44.36079727659262,
+   "targetX": 43.5,
+   "targetY": 43.5,
+   "remaining": 6.984455978454944,
+   "direct": 4.332229722618327,
+   "extraTicks": 71.6053276327465
+  },
+  {
+   "person": 1124,
+   "act": 61590,
+   "next": 61607,
+   "tick": 117011,
+   "kind": "fetch_water",
+   "nextKind": "socialize",
+   "job": true,
+   "presence": "present",
+   "walked": 5.2570908014862185,
+   "ticks": 47,
+   "startX": 37.61483136382897,
+   "startY": 26.5,
+   "x": 41.90315294625957,
+   "y": 27.5,
+   "targetX": 41.568724783556306,
+   "targetY": 27.268460682133995,
+   "remaining": 0.4067587143835201,
+   "direct": 4.027878473160403,
+   "extraTicks": 14.626081593569058
+  },
+  {
+   "person": 27214,
+   "act": 61654,
+   "next": 61683,
+   "tick": 117243,
+   "kind": "gather",
+   "nextKind": "give",
+   "job": true,
+   "presence": "absent",
+   "walked": 12.82487964239632,
+   "ticks": 116,
+   "startX": 34.60245830140467,
+   "startY": 48.55122915070233,
+   "x": 29.18229747103064,
+   "y": 54.45119202337679,
+   "targetX": 34.25794914141077,
+   "targetY": 51.5,
+   "remaining": 5.871266834157292,
+   "direct": 2.9688273919154313,
+   "extraTicks": 142.2523302118995
+  },
+  {
+   "person": 1111,
+   "act": 61668,
+   "next": 61702,
+   "tick": 117300,
+   "kind": "gather",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "absent",
+   "walked": 12.441105958911983,
+   "ticks": 110,
+   "startX": 43.37691690231611,
+   "startY": 27.5,
+   "x": 37.949813537237354,
+   "y": 17.43308471631648,
+   "targetX": 36.5,
+   "targetY": 12.5,
+   "remaining": 5.1417199565040415,
+   "direct": 16.5012722564462,
+   "extraTicks": 9.562727210876119
+  },
+  {
+   "person": 1111,
+   "act": 61750,
+   "next": 61780,
+   "tick": 117455,
+   "kind": "flee",
+   "nextKind": "withdraw",
+   "job": false,
+   "presence": "absent",
+   "walked": 6.455509273719717,
+   "ticks": 45,
+   "startX": 39.49872479871204,
+   "startY": 8.652548743930625,
+   "x": 42.446489076602035,
+   "y": 14.395743477271727,
+   "targetX": 35.3840630058432,
+   "targetY": 23.406618161476217,
+   "remaining": 11.44874336245561,
+   "direct": 15.317082164937572,
+   "extraTicks": 18.034622253530646
+  },
+  {
+   "person": 13516,
+   "act": 61745,
+   "next": 61790,
+   "tick": 117461,
+   "kind": "fetch_water",
+   "nextKind": "harvest",
+   "job": true,
+   "presence": "present",
+   "walked": 7.072450337179895,
+   "ticks": 61,
+   "startX": 28.3829234625,
+   "startY": 35.5,
+   "x": 22.5,
+   "y": 36.722648352695536,
+   "targetX": 29.5286491002189,
+   "targetY": 35.434039717027915,
+   "remaining": 7.145797393568133,
+   "direct": 1.1476227585126302,
+   "extraTicks": 112.7343544732874
+  },
+  {
+   "person": 1111,
+   "act": 61780,
+   "next": 61868,
+   "tick": 117504,
+   "kind": "withdraw",
+   "nextKind": "fetch_water",
+   "job": true,
+   "presence": "absent",
+   "walked": 5.107319230258578,
+   "ticks": 49,
+   "startX": 42.38229430663922,
+   "startY": 14.483232225084834,
+   "x": 39.36089870751719,
+   "y": 18.60098383893615,
+   "targetX": 36.5,
+   "targetY": 20.5,
+   "remaining": 3.4338031094771866,
+   "direct": 8.414444768799529,
+   "extraTicks": 1.2153540235160316
+  },
+  {
+   "person": 1116,
+   "act": 61809,
+   "next": 61885,
+   "tick": 117527,
+   "kind": "deposit",
+   "nextKind": "socialize",
+   "job": true,
+   "presence": "present",
+   "walked": 6.110300026697019,
+   "ticks": 53,
+   "startX": 35.252546025043486,
+   "startY": 39.83020031818261,
+   "x": 38.5,
+   "y": 35.249725953995885,
+   "targetX": 41.684629983907286,
+   "targetY": 31.047330111470625,
+   "remaining": 5.272760088575518,
+   "direct": 10.886253401506972,
+   "extraTicks": 4.309241070738123
+  },
+  {
+   "person": 16452,
+   "act": 61810,
+   "next": 61887,
+   "tick": 117527,
+   "kind": "deposit",
+   "nextKind": "deposit",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.872503557067879,
+   "ticks": 52,
+   "startX": 42.32286486348443,
+   "startY": 29.410602711054565,
+   "x": 37.5,
+   "y": 26.566614902419847,
+   "targetX": 38.473816621489824,
+   "targetY": 23.550272936583497,
+   "remaining": 3.1696431450804288,
+   "direct": 7.01132208893258,
+   "extraTicks": 22.93238243945826
+  },
+  {
+   "person": 27213,
+   "act": 61824,
+   "next": 61898,
+   "tick": 117534,
+   "kind": "deposit",
+   "nextKind": "give",
+   "job": true,
+   "presence": "present",
+   "walked": 5.9992834980673475,
+   "ticks": 53,
+   "startX": 34.60359045535771,
+   "startY": 48.55179522767886,
+   "x": 34.57962086800391,
+   "y": 51.5,
+   "targetX": 34.64240055558163,
+   "targetY": 45.455290629220116,
+   "remaining": 6.045035373458663,
+   "direct": 3.0967478024785184,
+   "extraTicks": 79.04631724976592
+  },
+  {
+   "person": 50829,
+   "act": 61835,
+   "next": 61923,
+   "tick": 117546,
+   "kind": "gather",
+   "nextKind": "gather",
+   "job": true,
+   "presence": "present",
+   "walked": 7.481159456314538,
+   "ticks": 61,
+   "startX": 32.46286035414219,
+   "startY": 48.7010293444795,
+   "x": 27.757946707897986,
+   "y": 53.917974892389026,
+   "targetX": 26.463586026360282,
+   "targetY": 56.4575598357711,
+   "remaining": 2.8504142257860843,
+   "direct": 9.805868534827464,
+   "extraTicks": 4.286503204606249
+  },
+  {
+   "person": 1084,
+   "act": 61872,
+   "next": 61948,
+   "tick": 117559,
+   "kind": "withdraw",
+   "nextKind": "socialize",
+   "job": true,
+   "presence": "present",
+   "walked": 6.314787647286714,
+   "ticks": 49,
+   "startX": 46.367598067629636,
+   "startY": 29.5,
+   "x": 45.5,
+   "y": 24.01451427862395,
+   "targetX": 44.171886912211,
+   "targetY": 26.329073880554557,
+   "remaining": 2.6685334033595316,
+   "direct": 3.85693141409219,
+   "extraTicks": 39.778549370394
+  },
+  {
+   "person": 1093,
+   "act": 61831,
+   "next": 61981,
+   "tick": 117594,
+   "kind": "gather",
+   "nextKind": "drink",
+   "job": true,
+   "presence": "absent",
+   "walked": 14.467712974647226,
+   "ticks": 113,
+   "startX": 36.23738527102817,
+   "startY": 40.6042175223849,
+   "x": 28.89574633720532,
+   "y": 48.845287807311244,
+   "targetX": 40.5,
+   "targetY": 46.5,
+   "remaining": 11.838879928844895,
+   "direct": 7.275309983155416,
+   "extraTicks": 148.64374029029872
+  },
+  {
+   "person": 1098,
+   "act": 61904,
+   "next": 61982,
+   "tick": 117594,
+   "kind": "give",
+   "nextKind": "gather",
+   "job": false,
+   "presence": "absent",
+   "walked": 7.377265127568743,
+   "ticks": 59,
+   "startX": 28.319161564569317,
+   "startY": 36.523882494745365,
+   "x": 24.5,
+   "y": 33.111892718784475,
+   "targetX": 20.51013580097351,
+   "targetY": 31.476703810924665,
+   "remaining": 4.311943771787967,
+   "direct": 9.298112498938542,
+   "extraTicks": 19.122897874102115
+  },
+  {
+   "person": 19527,
+   "act": 61917,
+   "next": 61984,
+   "tick": 117596,
+   "kind": "haul",
+   "nextKind": "withdraw",
+   "job": true,
+   "presence": "absent",
+   "walked": 6.244550616500577,
+   "ticks": 54,
+   "startX": 36.41680696007707,
+   "startY": 44.58951545625727,
+   "x": 36.49197759447471,
+   "y": 50.83361361193692,
+   "targetX": 37.53528999101836,
+   "targetY": 51.41094905312639,
+   "remaining": 1.1923996680790752,
+   "direct": 6.912522014937703,
+   "extraTicks": 4.5350143348722165
+  }
+ ]
+}

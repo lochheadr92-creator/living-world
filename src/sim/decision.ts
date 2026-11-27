@@ -398,6 +398,7 @@ export function reviewActivity(world: World, p: Person): void {
     return;
   }
   if (probe.on) probe.reviews++;
+  (globalThis as any).__walkTrace = [];
   const ctx = generateOptions(world, p, false);
   const ranked = rankOptions(ctx);
   const best = ranked[0];

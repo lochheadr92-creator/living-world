@@ -25,6 +25,8 @@ function add(totals: Totals, key: string, ticks: number) {
   row.ticks += ticks;
 }
 const reasons: Totals = {}, replacements: Totals = {};
+const missingTrace: unknown[] = [];
+const starts = new Map<number, unknown>();
 let adultTicks13d = 0;
 for (const t of control.trips as Trip[]) {
   if (t.stage !== '12_and_over') continue;
@@ -59,6 +61,7 @@ w.hooks = {
     const review = reviewed.get(p.id);
     if (review?.tick !== w.tick || review.act !== a.id) throw Error('Decision without review');
     add(switches, [a.kind, next.kind, reason, review.presence].join('|'), 0);
+    if (reason === 'something better came up' && a.kind === 'withdraw' && review.presence === 'absent') missingTrace.push({tick:w.tick, person:p.id, key:a.data.optKey, target:a.targetId, items:a.data.items, why:a.data.why, inventory:{...p.inv}, start:starts.get(a.id), belief:JSON.parse(JSON.stringify(p.beliefs[a.targetId] ?? null)), real:JSON.parse(JSON.stringify(w.byId.get(a.targetId) ?? null)), next:next.data.optKey, trace:(globalThis as any).__walkTrace});
     if (reason !== 'something better came up') return;
     const leg = legs.get(p.id);
     if (!leg || leg.act !== a.id || leg.kind !== a.kind || leg.target !== a.targetId) { unmatched++; return; }
@@ -77,6 +80,7 @@ w.hooks = {
     pending.delete(p.id);
   },
   onActivityStart(p, next) {
+    if (next.kind === 'withdraw') starts.set(next.id, JSON.parse(JSON.stringify({tick:w.tick, belief:p.beliefs[next.targetId], real:w.byId.get(next.targetId)})));
     const e = pending.get(p.id);
     if (!e) return;
     if (next.id !== e.next || w.tick !== e.tick) throw Error('Replacement mismatch');
@@ -112,4 +116,4 @@ while (w.tick < stop) {
 const endHash = hashWorld(w);
 if (endHash !== reference.sampleDay.endHash || !conservationReport(w).ok || pending.size) throw Error('Replay mismatch');
 writeFileSync(opt('out', ''), JSON.stringify({ loaded, firstTick, initialHash, endHash, walkingTicks, adultTicks13d,
-  reasons, replacements, reviews, switches, unmatched, stationary, censoredTicks, rejectedStarts, detours }, null, 1));
+  missingTrace, reasons, replacements, reviews, switches, unmatched, stationary, censoredTicks, rejectedStarts, detours }, null, 1));

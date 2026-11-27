@@ -46,7 +46,7 @@ import { timeCategory } from './time_budget';
 
 export type Outcome = 'arrived_did_job' | 'arrived_no_job' | 'switched_mid_walk' | 'gave_up_before_arrival' | 'ended_other' | 'continued_same_activity' | 'censored';
 export const OUTCOMES: readonly Outcome[] = ['arrived_did_job', 'arrived_no_job', 'switched_mid_walk', 'gave_up_before_arrival', 'ended_other', 'continued_same_activity', 'censored'];
-/** kinds that take goods up into the pack (gain) or put them down out of it (loss); cart_haul loads ride in the cart, not the pack, so it is not here */
+/** kinds that take goods up into the pack (gain) or put them down out of it (loss); cart_haul loads ride in the cart, not the pack: transfer events are recorded separately */
 export const HAULING_GAIN: readonly string[] = ['gather', 'withdraw', 'fetch_water', 'harvest'];
 export const HAULING_LOSS: readonly string[] = ['deposit', 'haul'];
 export const HAULING_KINDS: readonly string[] = [...HAULING_GAIN, ...HAULING_LOSS];
@@ -141,8 +141,10 @@ interface EndInfo {
 
 interface Trip {
   seq: number; person: number; stage: 'under_12' | '12_and_over'; simStage: string;
+  stageTicks: { under_12: number; '12_and_over': number };
+  cartTransfers: {tick:number;from:string;to:string;item:ItemKind;n:number;reason:string}[];
   actId: number; legIndex: number; actStart: number; actAgeAtStart: number; leftCensored: boolean;
-  kind: string; tgtId: number; targetType: string; kindAfter: string; group: string; plan: string; need: string; sub: string; run: boolean; startIndoors: boolean;
+  kind: string; goal: string; tgtId: number; targetType: string; kindAfter: string; group: string; plan: string; need: string; sub: string; run: boolean; startIndoors: boolean;
   startTick: number; lastTick: number; ticks: number;
   sx: number; sy: number; ex: number; ey: number; tiles: number; walked: number;
   hasTarget: boolean; tx: number; ty: number; txEnd: number; tyEnd: number;
@@ -271,6 +273,7 @@ export class TripShape {
   private readonly legs = new Map<number, Trip[]>();
   /** end-of-activity records since the last sample, by activity id (written only by the hook) */
   private readonly ends = new Map<number, EndInfo>();
+  private readonly cartTransfersBeforeWalk = new Map<number, Trip['cartTransfers']>();
   /** walks already known to have reached work whose activity has not ended yet (waiting for the pack after the work) */
   private readonly awaitEnd = new Map<number, Trip[]>();
   private readonly workSeenTick = new Map<number, number>();
@@ -300,6 +303,22 @@ export class TripShape {
     const prior = world.hooks;
     world.hooks = {
       ...prior,
+      onTransfer: info => {
+        prior?.onTransfer?.(info);
+        const tag = info.from.startsWith('cart:') ? info.from : info.to.startsWith('cart:') ? info.to : '';
+        if (!tag) return;
+        const cart = world.byId.get(Number(tag.slice(5)));
+        if (!cart || cart.ent !== 'cart' || !cart.puller) return;
+        const person = world.byId.get(cart.puller);
+        if (!person || person.ent !== 'person') return;
+        const a = person.activity;
+        if (!a || a.kind !== 'cart_haul' || a.data.cartId !== cart.id) return;
+        const legs = this.legs.get(a.id);
+        const last = legs?.[legs.length - 1];
+        const event = {tick:world.tick,...info};
+        if (last) last.cartTransfers.push(event);
+        else { const events = this.cartTransfersBeforeWalk.get(a.id) ?? []; events.push(event); this.cartTransfersBeforeWalk.set(a.id, events); }
+      },
       onActivityEnd: (p, a, outcome, detail) => {
         prior?.onActivityEnd?.(p, a, outcome, detail);
         this.noteEnd(world, p, a, outcome, detail);
@@ -309,7 +328,7 @@ export class TripShape {
   }
 
   private noteEnd(world: World, p: Person, a: Activity, outcome: string, detail: string): void {
-    if (!this.legs.has(a.id)) return; // an activity never seen walking is of no interest
+    if (!this.legs.has(a.id)) { this.cartTransfersBeforeWalk.delete(a.id); return; } // no observed walk
     const moved = a.data.moved as Record<string, number> | undefined;
     this.ends.set(a.id, {
       tick: world.tick, outcome, detail, kind: a.kind, phase: a.phase, pathTries: a.pathTries, pi: a.pi, pathLen: a.path.length,
@@ -401,6 +420,7 @@ export class TripShape {
           if (!st.open) this.open(world, st, p, a!, tick, fresh, stage);
           const t = st.open!;
           t.ticks++;
+          t.stageTicks[stage]++;
           t.lastTick = tick;
           t.txEnd = a!.tx; t.tyEnd = a!.ty; t.spotEndX = a!.spotX; t.spotEndY = a!.spotY;
         }
@@ -432,10 +452,10 @@ export class TripShape {
     else if (a.kind === 'deposit') sub = 'deposit | ' + (a.data.ration ? 'ration' : a.data.basketRoom ? 'basketRoom' : a.data.packMaterials ? 'packMaterials' : 'other');
     else if (a.kind === 'eat_store') sub = 'eat_store | ' + (a.data.steal ? 'from another household (steal)' : 'own or shared store');
     const t: Trip = {
-      seq: this.seq++, person: p.id, stage, simStage: stageOf(world, p),
+      seq: this.seq++, person: p.id, stage, simStage: stageOf(world, p), stageTicks: { under_12: 0, '12_and_over': 0 }, cartTransfers: this.cartTransfersBeforeWalk.get(a.id) ?? [],
       actId: a.id, legIndex: legs.length + 1, actStart: a.start, actAgeAtStart: tick - a.start,
       leftCensored: fresh && tick === this.firstTick && a.start < tick - 1,
-      kind: a.kind, tgtId: a.targetId, targetType: a.targetType, kindAfter: '', group: lifeGroupOf(a).group,
+      kind: a.kind, goal: a.goal, tgtId: a.targetId, targetType: a.targetType, kindAfter: '', group: lifeGroupOf(a).group,
       plan: forPlan === undefined ? 'no_plan' : plan ? plan.kind : 'plan_not_found', need: a.need ?? 'none', sub, run: a.data.run === true, startIndoors: !!p.indoors,
       startTick: tick, lastTick: tick, ticks: 0,
       sx: p.x, sy: p.y, ex: p.x, ey: p.y, tiles: 0, walked: 0,
@@ -454,6 +474,7 @@ export class TripShape {
     if (waiting) { for (const w of waiting) { w.packAfter = t.packStart; w.packAfterBasis = 'next_walk_start'; } this.awaitEnd.delete(a.id); }
     legs.push(t);
     this.legs.set(a.id, legs);
+    this.cartTransfersBeforeWalk.delete(a.id);
     this.all.push(t);
     st.open = t;
   }
@@ -626,17 +647,17 @@ export class TripShape {
       const d = this.derived(t);
       return {
         person: t.person, stage: t.stage, simStage: t.simStage, actId: t.actId, legIndex: t.legIndex, actStart: t.actStart, actAgeAtStart: t.actAgeAtStart, leftCensored: t.leftCensored,
-        startTick: t.startTick, endTick: t.lastTick, walkingTicks: t.ticks,
+        startTick: t.startTick, endTick: t.lastTick, walkingTicks: t.ticks, walkingTicksByStage: { ...t.stageTicks },
         startPos: [r2(t.sx), r2(t.sy)], endPos: [r2(t.ex), r2(t.ey)],
         startTile: [Math.floor(t.sx), Math.floor(t.sy)], endTile: [Math.floor(t.ex), Math.floor(t.ey)],
         targetTile: t.hasTarget ? [Math.floor(t.tx), Math.floor(t.ty)] : null, spotTile: [Math.floor(t.spotX), Math.floor(t.spotY)], targetType: t.targetType,
         tilesMoved: t.tiles, walkedDistance: r2(t.walked),
         distStartEnd: r2(d.dEnd), distStartTarget: d.dTarget === null ? null : r2(d.dTarget), distStartSpot: r2(d.dSpot), distEndSpot: r2(d.dEndSpot), distEndToEndSpot: r2(d.dEndToEndSpot), coveredShare: d.covered === null ? null : r3(d.covered),
         hasHome: t.hasHome, homeDistTarget: d.homeDistTarget === null ? null : r2(d.homeDistTarget), homeDistStart: d.homeDistStart === null ? null : r2(d.homeDistStart),
-        kind: t.kind, kindAfter: t.kindAfter, lifeGroup: t.group, planKind: t.plan, need: t.need, subKind: t.sub, run: t.run, startIndoors: t.startIndoors,
+        kind: t.kind, goal: t.goal, kindAfter: t.kindAfter, lifeGroup: t.group, planKind: t.plan, need: t.need, subKind: t.sub, run: t.run, startIndoors: t.startIndoors,
         hungerStart: t.hunger, plannedUnits: t.planned,
         packStart: packRow(t.packStart), packEnd: packRow(t.packEnd), packAfter: packRow(t.packAfter), packAfterBasis: t.packAfterBasis,
-        packDelta: d.delta, hauling: d.hauling, moved: d.moved,
+        packDelta: d.delta, hauling: d.hauling, moved: d.moved, cartTransfers: t.cartTransfers.map(x => ({...x})),
         loadFraction: d.moved && d.cap > 0 ? r3(d.moved.weight / d.cap) : null,
         outcome: t.outcome, outcomeEvidence: t.evidence, pauseCause: t.pauseCause,
         endOutcome: t.endOutcome, endDetail: t.endDetail, activityEndTick: t.endTick, gapToEnd: t.gapToEnd, toKind: t.toKind,
@@ -781,7 +802,7 @@ export class TripShape {
     };
     const load = {
       note: "Capacity is a WEIGHT limit, not a count of items (people.ts carryCap, constants.ts CARRY_CAP, WEIGHT). unitsMoved is the change in item count between the pack at the end of the walk and the pack when the activity ended (or when its next walk began); weightMoved weights each unit by constants.ts WEIGHT; loadFraction is weightMoved / capacity. Only walks counted arrived_did_job whose pack after the work is known are in the moved figures.",
-      haulingKinds: { gain: HAULING_GAIN, loss: HAULING_LOSS, notIncluded: 'cart_haul (the load rides in the cart, not the pack), give, return_tool, tree_work, operate and every other kind' },
+      haulingKinds: { gain: HAULING_GAIN, loss: HAULING_LOSS, notIncluded: 'cart_haul pack deltas (cart transfer events are recorded separately per observed walk), give, return_tool, tree_work, operate and every other kind' },
       walksOfHaulingKinds: hauls.length,
       walksWithAMeasuredMove: withMove.length,
       walksDidJobWithNoPackAfterKnown: hauls.filter((t) => t.outcome === 'arrived_did_job' && dv(t).moved === null).length,
@@ -939,7 +960,7 @@ export class TripShape {
     const outcomeSum = OUTCOMES.reduce((n, o) => n + all.filter((t) => t.outcome === o).length, 0);
     const selfChecks = {
       tripTicksEqualOwnTravelTickCount: ticksAll === this.ownTravelTicks,
-      tripTicksByStageEqualOwnCounts: stages.every((s) => sum(stageTrips(s, all).map((t) => t.ticks)) === this.ownTravelByStage[s]),
+      tripTicksByStageEqualOwnCounts: stages.every((s) => sum(all.map((t) => t.stageTicks[s])) === this.ownTravelByStage[s]),
       ...(timeBudgetTravelTicks !== undefined ? { tripTicksEqualTimeBudgetTravelTicks: ticksAll === timeBudgetTravelTicks } : {}),
       everyWalkHasExactlyOneOutcome: outcomeSum === all.length && all.every((t) => (OUTCOMES as readonly string[]).includes(t.outcome)),
       tileChangesEqualOwnCount: sum(all.map((t) => t.tiles)) === this.ownTileChanges,
@@ -959,7 +980,7 @@ export class TripShape {
       { item: 'target tile for walks whose activity carries no target (targetId 0 and no targetType)', walks: all.filter((t) => !t.hasTarget).length, why: 'the sim holds only the stand spot for them; targetTile is null and the spot is recorded instead' },
       { item: 'home distance for people whose household has no home building', walks: all.filter((t) => !t.hasHome).length, why: 'nothing to measure from; the fields are null' },
       { item: 'pack after the work for walks that reached work while the activity was still running at the end of the run', walks: all.filter((t) => t.outcome === 'arrived_did_job' && !t.packAfter).length, why: 'the activity had not ended, so there is no end of the non-travel phase to read; load figures leave them out' },
-      { item: 'load fraction for cart_haul', walks: all.filter((t) => t.kind === 'cart_haul').length, why: 'the load rides in the cart, which is not the pack, so pack capacity does not describe it' },
+      { item: 'load fraction for cart_haul (cart transfer events are in trip rows but do not use pack capacity)', walks: all.filter((t) => t.kind === 'cart_haul').length, why: 'the load rides in the cart, which is not the pack, so pack capacity does not describe it' },
       { item: "why a switch happened beyond the sim's own detail string", walks: sw.length, why: 'the string (for example something better came up, switched to something else, danger nearby) is recorded; whether each is a change of mind is not decided here' },
       { item: 'the first step of an activity chosen and ended inside one step', walks: null, why: 'never visible at a start-of-tick sample, so it has no walk' },
       { item: 'a person walking with the per-tick speed split into terrain, load and age', walks: null, why: 'moveSpeed is not called (the observer calls nothing that could change state); the constants are cited in sourceFacts and the realised speed per walking tick is reported instead' },
@@ -967,7 +988,7 @@ export class TripShape {
       { item: 'work done by a multi-walk activity attributed to one walk', walks: all.filter((t) => t.legIndex > 1).length, why: 'when an activity walks more than once, end-of-activity facts (progress, cycle, pack after) belong to the activity; the pack after is given to the last walk that reached work' },
     ];
 
-    const stageCounts = Object.fromEntries(stages.map((s) => [s, { walks: stageTrips(s, all).length, walkingTicks: sum(stageTrips(s, all).map((t) => t.ticks)) }]));
+    const stageCounts = Object.fromEntries(stages.map((s) => [s, { walks: stageTrips(s, all).length, walkingTicks: sum(all.map((t) => t.stageTicks[s])) }]));
     const nonLeft = all.filter((t) => !t.leftCensored);
     return {
       observer: 'TripShape',
@@ -985,7 +1006,7 @@ export class TripShape {
         } as Record<Outcome, string>)[o]])),
         measuredWalks: 'closed walks that were not under way at the first sample and are not censored: distributions and outcome shares use these',
         movement: 'tiles moved = count of changes of floor(x), floor(y) between consecutive samples across the walk including the step after its last tick (a tile boundary crossed counts one, so a straight diagonal walk scores up to 1.41 times its length); walkedDistance = the sum of the straight steps between those samples, which is the true path length, so walkedDistanceOverStraightLine is the cleaner detour figure',
-        ageStage: `under_12 is ageYears < ${AGE_CHILD} at the first walking tick (AGE_CHILD); simStage is the sim's four stages`,
+        ageStage: `walks use age at their first walking tick; walking ticks use age at each tick (under_12 is ageYears < ${AGE_CHILD}); simStage is the sim's four stages`,
       },
       sampledTicks: this.sampled, firstTick: this.firstTick, lastTick: this.lastTick, livingPersonTicks: this.livingTicks, awakePersonTicks: this.wakingTicks,
       personDays: r2(personDayCount), awakePersonDays: r2(wakingDayCount), firstSampleCounts: this.firstCounts,

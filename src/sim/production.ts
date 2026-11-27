@@ -575,6 +575,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
     if (n < 1) continue;
     found.push({ b, n, e: eta(ctx, b.x, b.y) });
   }
+  if (p.activity?.phase === 'travel' && p.activity.kind === 'withdraw') (globalThis as any).__walkTrace?.push({ item, unmet, dest: dest?.id, found: found.map(f => [f.b.id, f.n]) });
   found.sort((a, c) => a.e - c.e);
   let total = 0;
   for (const f of found) total += f.n;
@@ -1370,6 +1371,7 @@ export function productionOptions(ctx: Ctx): void {
     if(fires.length&&(!duty||fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1))collectOptions(ctx,'offcuts',(duty?1:4)-fuelAvailable(world,p,'offcuts'),duty?48:24+6*p.traits.generosity,duty?`reuse known offcuts for the fire I promised to keep (#${duty.id})`:'reuse known offcuts to keep a low fire burning','fire',null);
   }
   const demands = demandsOf(ctx);
+  (globalThis as any).__walkTrace?.push({demands: demands.map(d => ({item:d.item,qty:d.qty,have:d.have,why:d.why,siteId:d.siteId})), inventory:{...p.inv}});
   for (const d of demands) if(!PRESERVED_FOODS.some(k=>k===d.item)) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
   communalStockOptions(ctx);
   materialsHomeOption(ctx);
