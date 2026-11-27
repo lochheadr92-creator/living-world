@@ -34,6 +34,7 @@ import { hearsayTripCosts } from './teller_confidence';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import {runsPreservation} from './preservation';
 import { dayFraction } from './environment';
+import { BEDTIME_PULL, atBedtime } from './bedtime';
 import {
   Scorer,
   addBlocked,
@@ -487,8 +488,10 @@ function optSleep(ctx: Ctx): void {
   let sd = ctx.drives.energy;
   const frac = dayFraction(world.tick);
   const bedtime = 0.8 + p.chrono;
-  const lateNight = frac > bedtime || frac < 0.2 + p.chrono;
-  if (lateNight && e < 90) sd = Math.max(sd, 26 + (100 - e) * 0.5 + (world.light < 0.12 ? 8 : 0));
+  // rules 280 (bedtime.ts, part `bed`): a child under eight has its bedtime at dark, tired or not
+  const littleBed = atBedtime(world, p);
+  const lateNight = littleBed || frac > bedtime || frac < 0.2 + p.chrono;
+  if (lateNight && (e < 90 || littleBed)) sd = Math.max(sd, 26 + (100 - e) * 0.5 + (world.light < 0.12 ? 8 : 0) + (littleBed ? BEDTIME_PULL : 0));
   if (sd <= 0) return;
 
   type Bed = { x: number; y: number; q: number; what: string; id: number; b: Belief };

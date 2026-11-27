@@ -48,6 +48,8 @@ import { KIN_SCENE_PARTS, kinScenePartOn, setKinScenes } from '../../src/sim/kin
 import type { KinScenePart } from '../../src/sim/kin_scenes';
 import { TOGETHER_SCENE_PARTS, setTogetherScenes, togetherScenePartOn } from '../../src/sim/together_scenes';
 import type { TogetherScenePart } from '../../src/sim/together_scenes';
+import { BEDTIME_PARTS, bedtimePartOn, setBedtime } from '../../src/sim/bedtime';
+import type { BedtimePart } from '../../src/sim/bedtime';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -373,6 +375,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-together-scenes' ? undefined : (kind.slice('rich-no-together-'.length) as TogetherScenePart);
     const what: Record<TogetherScenePart, string> = { side: 'nobody walks over to speak up for one side of a quarrel', speech: 'nobody speaks for a shared building at the fire or at an occasion: support is asked for one person at a time, as before', fetch: 'nobody asks a neighbour to come along when a household member is missing after dark: the worrier goes alone, as before' };
     return { spec: label, summary: `${part ? what[part] : 'no part of the together bundle: nobody stands up for a side, speaks for a shared building before company, or asks a neighbour to come and fetch a household member home after dark'}, as before rules 264; no effect below rules 264`, install() { const was = Object.fromEntries(TOGETHER_SCENE_PARTS.map((q) => [q, togetherScenePartOn(q)])) as Record<TogetherScenePart, boolean>; setTogetherScenes(false, part); return () => { for (const q of TOGETHER_SCENE_PARTS) setTogetherScenes(was[q], q); }; } };
+  }
+  // rules 280 (bedtime.ts): both parts removed (equal to rules 279), and each part alone. Nothing else is called `rich-no-bedtime`.
+  if (kind === 'rich-no-bedtime' || (kind.startsWith('rich-no-bedtime-') && (BEDTIME_PARTS as readonly string[]).includes(kind.slice('rich-no-bedtime-'.length)))) {
+    const part = kind === 'rich-no-bedtime' ? undefined : (kind.slice('rich-no-bedtime-'.length) as BedtimePart);
+    const what: Record<BedtimePart, string> = { bed: 'a little one goes to bed by its own clock and wakes when rested, in the night', home: 'a little one may take up play, talk, practice or errands after dark, and others may start a talk with one' };
+    return { spec: label, summary: `${part ? what[part] : 'no bedtime: a little one goes to bed and gets up as a grown person does, and does as it likes after dark'}, as before rules 280; no effect below rules 280`, install() { const was = Object.fromEntries(BEDTIME_PARTS.map((q) => [q, bedtimePartOn(q)])) as Record<BedtimePart, boolean>; setBedtime(false, part); return () => { for (const q of BEDTIME_PARTS) setBedtime(was[q], q); }; } };
   }
   // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
   if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };
