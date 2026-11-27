@@ -53,14 +53,14 @@ export class SpriteCache {
    * `draw` receives a context whose origin is the ground anchor and whose units are logical px
    * (y grows downward, so things that stand up have negative y).
    */
-  get(key: string, w: number, h: number, ax: number, ay: number, draw: (ctx: CanvasRenderingContext2D) => void): Sprite {
+  get(key: string, w: number, h: number, ax: number, ay: number, draw: (ctx: CanvasRenderingContext2D) => void, resolution = RES): Sprite {
     let s = this.map.get(key);
     if (s) return s;
     const canvas = document.createElement('canvas');
-    canvas.width = Math.ceil(w * RES);
-    canvas.height = Math.ceil(h * RES);
+    canvas.width = Math.ceil(w * resolution);
+    canvas.height = Math.ceil(h * resolution);
     const ctx = canvas.getContext('2d')!;
-    ctx.scale(RES, RES);
+    ctx.scale(resolution, resolution);
     ctx.translate(ax, ay);
     draw(ctx);
     s = { canvas, ax, ay, w, h };
@@ -143,6 +143,25 @@ function trunk(ctx: CanvasRenderingContext2D, h: number, wBase: number, wTop: nu
   ctx.closePath();
   ctx.fillStyle = g;
   ctx.fill();
+  // Fine, irregular bark ridges make the trunk read as wood at the same scale as the new cloth detail.
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(-wBase, 1);
+  ctx.quadraticCurveTo(-wBase * 0.8 + lean * 0.3, -h * 0.4, -wTop + lean, -h);
+  ctx.lineTo(wTop + lean, -h);
+  ctx.quadraticCurveTo(wBase * 0.8 + lean * 0.3, -h * 0.4, wBase, 1);
+  ctx.closePath();
+  ctx.clip();
+  for (let i = -2; i <= 2; i++) {
+    const x = i * wBase * 0.34 + lean * 0.45;
+    ctx.strokeStyle = i % 2 ? 'rgba(255,226,175,0.22)' : 'rgba(35,24,14,0.22)';
+    ctx.lineWidth = Math.max(0.45, wBase * 0.12);
+    ctx.beginPath();
+    ctx.moveTo(x - 0.7, 0);
+    ctx.quadraticCurveTo(x + 0.55, -h * 0.42, x - lean * 0.2, -h);
+    ctx.stroke();
+  }
+  ctx.restore();
   // little root flare
   ctx.beginPath();
   ctx.ellipse(0, 1, wBase * 1.35, 2.4, 0, 0, Math.PI * 2);
@@ -300,6 +319,15 @@ export function rockSprite(cache: SpriteCache, variant: number, stage: 0 | 1 | 2
       poly(ctx, top, shade('#c9c8bf', tone), 'rgba(40,40,40,0.3)', 0.8);
       ctx.fillStyle = 'rgba(255,255,255,0.18)';
       ctx.fillRect(cx - w * 0.2, cy - h * 0.75, w * 0.18, 1.4);
+      // A few fixed mineral flecks give the planes a finer stone surface without noisy per-frame work.
+      for (let i = 0; i < 3; i++) {
+        const fx = cx - w * 0.28 + hashUnit(v, i, 43) * w * 0.56;
+        const fy = cy - h * 0.72 + hashUnit(v, i, 44) * h * 0.48;
+        ctx.fillStyle = i % 2 ? 'rgba(255,255,245,0.28)' : 'rgba(45,45,40,0.22)';
+        ctx.beginPath();
+        ctx.ellipse(fx, fy, Math.max(0.45, w * 0.035), Math.max(0.35, h * 0.025), 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
     };
     if (stage === 0) {
       chunk(-6, 0, 14, 9, 0.98);

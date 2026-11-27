@@ -5,6 +5,7 @@ import { BuildingPainter, sack } from './buildings';
 import { SiteDrawer } from './construction';
 import { clayPitSprite, oreVeinSprite, outcropSprite, stageOf } from './deposits';
 import { brickStack, breadBasket, handleBundle, ironBars, lumpHeap, plankStack, sackPile, stackSprite } from './goods';
+import { campfireMesh, natureMesh } from './nature_models';
 import { HOUSEHOLD_COLORS } from './palette';
 import { BERRY_SPOTS, FRUIT_SPOTS, SpriteCache, blit, bushSprite, ellipse, fruitTreeSprite, graveSprite, groundShadow, poly, rockSprite, shade, stumpSprite, treeSprite } from './sprites';
 
@@ -28,7 +29,7 @@ export class Scenery {
     }
     switch (s.type) {
       case 'tree': {
-        const spr = treeSprite(this.cache, s.variant);
+        const spr = natureMesh(this.cache, s.type, s.variant) ?? treeSprite(this.cache, s.variant);
         const scale = s.growth >= 1 ? 1 : 0.26 + 0.74 * Math.pow(s.growth, 0.8);
         const skew = Math.sin(simT * 1.05 + s.x * 0.7 + s.y * 0.45) * (0.012 + wind * 0.06) * (s.growth >= 1 ? 1 : 1.6);
         ctx.save();
@@ -39,7 +40,8 @@ export class Scenery {
         break;
       }
       case 'fruit_tree': {
-        const spr = fruitTreeSprite(this.cache, s.variant);
+        const mesh = natureMesh(this.cache, s.type, s.variant);
+        const spr = mesh ?? fruitTreeSprite(this.cache, s.variant);
         const skew = Math.sin(simT * 1.1 + s.x * 0.6 + s.y * 0.5) * (0.01 + wind * 0.05);
         ctx.save();
         ctx.translate(x, y + 1);
@@ -48,7 +50,9 @@ export class Scenery {
         const col = ['#e5503a', '#f2a238', '#d9d04a'][s.variant % 3];
         const n = s.amount;
         for (let i = 0; i < Math.min(n, FRUIT_SPOTS.length); i++) {
-          const [fx, fy] = FRUIT_SPOTS[i];
+          const [sx, sy] = FRUIT_SPOTS[i];
+          const fx = mesh ? sx * .8 : sx;
+          const fy = mesh ? sy * .77 : sy;
           ctx.fillStyle = 'rgba(40,20,10,0.35)';
           ctx.beginPath();
           ctx.arc(fx + 0.4, fy + 0.6, 2.7, 0, Math.PI * 2);
@@ -64,7 +68,7 @@ export class Scenery {
         break;
       }
       case 'berry_bush': {
-        const spr = bushSprite(this.cache, s.variant);
+        const spr = natureMesh(this.cache, s.type, s.variant) ?? bushSprite(this.cache, s.variant);
         const skew = Math.sin(simT * 1.3 + s.x * 0.9 + s.y) * (0.012 + wind * 0.05);
         ctx.save();
         ctx.translate(x, y + 1);
@@ -84,19 +88,22 @@ export class Scenery {
       }
       case 'rock': {
         const stage = s.amount > 6 ? 2 : s.amount > 2 ? 1 : 0;
-        blit(ctx, rockSprite(this.cache, s.variant, stage as 0 | 1 | 2), x, y + 2);
+        blit(ctx, natureMesh(this.cache, s.type, s.variant, stage) ?? rockSprite(this.cache, s.variant, stage), x, y + 2);
         break;
       }
       case 'clay_pit': {
-        blit(ctx, clayPitSprite(this.cache, s.variant, stageOf(s.amount, s.max)), x, y);
+        const stage = stageOf(s.amount, s.max);
+        blit(ctx, natureMesh(this.cache, s.type, s.variant, stage) ?? clayPitSprite(this.cache, s.variant, stage), x, y);
         break;
       }
       case 'ore_vein': {
-        blit(ctx, oreVeinSprite(this.cache, s.variant, stageOf(s.amount, s.max)), x, y + 2);
+        const stage = stageOf(s.amount, s.max);
+        blit(ctx, natureMesh(this.cache, s.type, s.variant, stage) ?? oreVeinSprite(this.cache, s.variant, stage), x, y + 2);
         break;
       }
       case 'outcrop': {
-        blit(ctx, outcropSprite(this.cache, s.variant, stageOf(s.amount, s.max)), x, y + 2);
+        const stage = stageOf(s.amount, s.max);
+        blit(ctx, natureMesh(this.cache, s.type, s.variant, stage) ?? outcropSprite(this.cache, s.variant, stage), x, y + 2);
         break;
       }
       case 'hay_meadow':
@@ -159,7 +166,7 @@ export class Scenery {
 
   drawStump(ctx: CanvasRenderingContext2D, x: number, y: number, variant: number): void {
     const [sx, sy] = iso(x + 0.5, y + 0.5);
-    blit(ctx, stumpSprite(this.cache, variant), sx, sy + 1);
+    blit(ctx, natureMesh(this.cache, 'stump', variant) ?? stumpSprite(this.cache, variant), sx, sy + 1);
   }
 
   drawGrave(ctx: CanvasRenderingContext2D, g: Grave): void {
@@ -178,68 +185,12 @@ export class Scenery {
 
   private drawFire(ctx: CanvasRenderingContext2D, b: Building, simT: number): void {
     const [x, y] = iso(b.x + 0.5, b.y + 0.5);
-    // log seats around the fire
-    for (let k = 0; k < 4; k++) {
-      const a = (k / 4) * Math.PI * 2 + 0.6;
-      const [sx, sy] = iso(b.x + 0.5 + Math.cos(a) * 1.15, b.y + 0.5 + Math.sin(a) * 1.15);
-      ctx.fillStyle = 'rgba(20,30,15,0.25)';
-      ctx.beginPath();
-      ctx.ellipse(sx, sy + 2, 9, 3.4, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#7a5434';
-      ctx.beginPath();
-      ctx.ellipse(sx, sy - 2.5, 8, 3.8, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#5a3d26';
-      ctx.fillRect(sx - 8, sy - 2.5, 16, 4);
-      ctx.beginPath();
-      ctx.ellipse(sx, sy + 1.5, 8, 3.2, 0, 0, Math.PI);
-      ctx.fill();
-      ctx.fillStyle = '#d3ad73';
-      ctx.beginPath();
-      ctx.ellipse(sx + 6.5, sy - 0.4, 1.8, 2.8, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    groundShadow(ctx, 20, 8, 0.28, y + 2 - y);
+    const lit = b.fuel > 0;
+    const mesh = campfireMesh(this.cache, lit);
+    if (mesh) blit(ctx, mesh, x, y);
+    else this.drawFireBase(ctx, b, x, y, lit);
     ctx.save();
     ctx.translate(x, y);
-    // scorched ground and stone ring
-    ctx.fillStyle = 'rgba(40,30,24,0.45)';
-    ctx.beginPath();
-    ctx.ellipse(0, 3, 15, 7.4, 0, 0, Math.PI * 2);
-    ctx.fill();
-    for (let k = 0; k < 9; k++) {
-      const a = (k / 9) * Math.PI * 2;
-      const sx = Math.cos(a) * 12;
-      const sy = 3 + Math.sin(a) * 6;
-      const g = ctx.createRadialGradient(sx - 1, sy - 2, 0.5, sx, sy, 4);
-      g.addColorStop(0, '#c9c7bd');
-      g.addColorStop(1, '#8d8b84');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.ellipse(sx, sy, 4.1, 3, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(40,40,36,0.45)';
-      ctx.lineWidth = 0.7;
-      ctx.stroke();
-    }
-    // logs
-    ctx.lineCap = 'round';
-    const lit = b.fuel > 0;
-    for (const [a, c] of [[0.5, lit ? '#6b4325' : '#2c2622'], [2.1, lit ? '#7a5030' : '#332c26'], [3.7, lit ? '#6b4325' : '#2c2622']] as [number, string][]) {
-      ctx.strokeStyle = 'rgba(15,10,6,0.55)';
-      ctx.lineWidth = 5;
-      ctx.beginPath();
-      ctx.moveTo(Math.cos(a) * 9, 3 + Math.sin(a) * 4);
-      ctx.lineTo(-Math.cos(a) * 3, 3 - Math.sin(a) * 1.5);
-      ctx.stroke();
-      ctx.strokeStyle = c;
-      ctx.lineWidth = 3.8;
-      ctx.beginPath();
-      ctx.moveTo(Math.cos(a) * 9, 3 + Math.sin(a) * 4);
-      ctx.lineTo(-Math.cos(a) * 3, 3 - Math.sin(a) * 1.5);
-      ctx.stroke();
-    }
     if (lit) {
       const size = 0.62 + 0.38 * Math.min(1, b.fuel / 700);
       const fl = (k: number) => 1 + 0.16 * Math.sin(simT * 12 + k * 2.1) + 0.08 * Math.sin(simT * 27 + k);
@@ -262,11 +213,75 @@ export class Scenery {
       tongue(0, 25, 6.4, 'rgba(255,150,40,0.97)', 'rgba(255,210,90,0)', 3);
       tongue(0, 15, 3.4, 'rgba(255,235,150,0.97)', 'rgba(255,250,200,0)', 4);
     } else {
-      // embers and ash
       ctx.fillStyle = 'rgba(70,64,60,0.7)';
       ctx.beginPath();
       ctx.ellipse(0, 3, 6, 2.8, 0, 0, Math.PI * 2);
       ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  private drawFireBase(ctx: CanvasRenderingContext2D, b: Building, x: number, y: number, lit: boolean): void {
+    // log seats around the fire
+    for (let k = 0; k < 4; k++) {
+      const a = (k / 4) * Math.PI * 2 + 0.6;
+      const [sx, sy] = iso(b.x + 0.5 + Math.cos(a) * 1.15, b.y + 0.5 + Math.sin(a) * 1.15);
+      ctx.fillStyle = 'rgba(20,30,15,0.25)';
+      ctx.beginPath();
+      ctx.ellipse(sx, sy + 2, 9, 3.4, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#7a5434';
+      ctx.beginPath();
+      ctx.ellipse(sx, sy - 2.5, 8, 3.8, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#5a3d26';
+      ctx.fillRect(sx - 8, sy - 2.5, 16, 4);
+      ctx.beginPath();
+      ctx.ellipse(sx, sy + 1.5, 8, 3.2, 0, 0, Math.PI);
+      ctx.fill();
+      ctx.fillStyle = '#d3ad73';
+      ctx.beginPath();
+      ctx.ellipse(sx + 6.5, sy - 0.4, 1.8, 2.8, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.save();
+    ctx.translate(x, y);
+    groundShadow(ctx, 20, 8, 0.28, 2);
+    // scorched ground and stone ring
+    ctx.fillStyle = 'rgba(40,30,24,0.45)';
+    ctx.beginPath();
+    ctx.ellipse(0, 3, 15, 7.4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    for (let k = 0; k < 9; k++) {
+      const a = (k / 9) * Math.PI * 2;
+      const sx = Math.cos(a) * 12;
+      const sy = 3 + Math.sin(a) * 6;
+      const g = ctx.createRadialGradient(sx - 1, sy - 2, 0.5, sx, sy, 4);
+      g.addColorStop(0, '#c9c7bd');
+      g.addColorStop(1, '#8d8b84');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.ellipse(sx, sy, 4.1, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(40,40,36,0.45)';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    }
+    // logs
+    ctx.lineCap = 'round';
+    for (const [a, c] of [[0.5, lit ? '#6b4325' : '#2c2622'], [2.1, lit ? '#7a5030' : '#332c26'], [3.7, lit ? '#6b4325' : '#2c2622']] as [number, string][]) {
+      ctx.strokeStyle = 'rgba(15,10,6,0.55)';
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a) * 9, 3 + Math.sin(a) * 4);
+      ctx.lineTo(-Math.cos(a) * 3, 3 - Math.sin(a) * 1.5);
+      ctx.stroke();
+      ctx.strokeStyle = c;
+      ctx.lineWidth = 3.8;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a) * 9, 3 + Math.sin(a) * 4);
+      ctx.lineTo(-Math.cos(a) * 3, 3 - Math.sin(a) * 1.5);
+      ctx.stroke();
     }
     ctx.restore();
   }

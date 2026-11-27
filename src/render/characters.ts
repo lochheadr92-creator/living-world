@@ -23,6 +23,7 @@ import { animRig, applyCondition } from './anim_rig';
 import { drawAnimProps } from './anim_props';
 import { WORK_TOOL_OF } from './anim_work'; // work (H)
 import { FOOD_DOT, drawWorkProps } from './anim_work_props'; // work (H)
+import { PersonMeshAtlas } from './person_mesh';
 
 type V3 = readonly [number, number, number];
 
@@ -36,6 +37,7 @@ interface RigState {
   poseT0: number;
   from: Rig;
   cur: Rig;
+  display: Rig;
   /** eased 0..1: arms full of bricks, clay or bread / a jar balanced on the head */
   carry: number;
   jar: number;
@@ -484,8 +486,10 @@ interface RigResult {
 // ───────────────────────── the renderer ─────────────────────────
 export class CharacterRenderer {
   private states = new Map<number, RigState>();
-  private tmp = newRig();
   private target = newRig();
+  private meshes: PersonMeshAtlas | null | undefined;
+  private drawPoses = new Map<number, ReturnType<CharacterRenderer['projectPose']>>();
+  private meshTiles = new Map<number, number>();
   /** the conversations of this frame by id, so a talker's purpose is one look-up */
   private convs = new Map<number, Conversation>();
   private pc: PoseCtx | null = null;
@@ -500,7 +504,7 @@ export class CharacterRenderer {
       const x = p.px + (p.x - p.px) * alphaT;
       const y = p.py + (p.y - p.py) * alphaT;
       if (!s) {
-        s = { x, y, phase: (p.id * 0.37) % 1, moved: 0, pose: p.pose, poseT0: simT - 10, from: newRig(), cur: newRig(), carry: 0, jar: 0, carryT: simT };
+        s = { x, y, phase: (p.id * 0.37) % 1, moved: 0, pose: p.pose, poseT0: simT - 10, from: newRig(), cur: newRig(), display: newRig(), carry: 0, jar: 0, carryT: simT };
         setBase(s.cur);
         setBase(s.from);
         this.states.set(p.id, s);
@@ -550,7 +554,7 @@ export class CharacterRenderer {
     }
     const bt = ease(clamp((simT - s.poseT0) / 0.28, 0, 1));
     lerpRig(s.from, this.target, bt, s.cur);
-    const out = this.tmp;
+    const out = s.display;
     out.set(s.cur);
 
     // what they are carrying changes how they move and what their arms are doing
@@ -602,7 +606,38 @@ export class CharacterRenderer {
     return { rig: out, s, pose, anim, cond, bt, burden };
   }
 
-  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number }): { headX: number; headY: number } {
+  prepareMeshes(world: World, visible: Iterable<Person>, alphaT: number, simT: number, zoom: number): void {
+    this.drawPoses.clear();
+    this.meshTiles.clear();
+    if (this.meshes === undefined) {
+      try {
+        this.meshes = PersonMeshAtlas.create() ?? null;
+      } catch (error) {
+        console.warn('Character mesh rendering unavailable', error);
+        this.meshes = null;
+      }
+    }
+    if (!this.meshes) return;
+    this.meshes.begin(zoom > 3.2);
+    for (const p of visible) {
+      const pose = this.projectPose(world, p, alphaT, simT);
+      this.drawPoses.set(p.id, pose);
+      const tile = this.meshes.add({
+        base: pose.base, hip: pose.hip, shoulder: pose.shoulderC, head: pose.headC,
+        arms: [[pose.shL, pose.elbowL, pose.handL], [pose.shR, pose.elbowR, pose.handR]],
+        legs: [[pose.hipL, pose.kneeL, pose.footL], [pose.hipR, pose.kneeR, pose.footR]],
+        heading: pose.heading, scale: pose.sc, build: p.look.build, headScale: pose.bs.head,
+        lying: pose.lie > 0.5, child: !!pose.bs.band, little: pose.little,
+        shirt: pose.shirt, pants: pose.pants, skin: pose.skin, hair: pose.hairC, accent: pose.accent,
+        cut: p.look.shirt + p.look.pants, hairStyle: p.look.hairStyle, hat: pose.bs.band ? 0 : p.look.hat,
+        eyes: pose.rig[R.EYES], mouth: pose.rig[R.MOUTH], belly: pose.cond.belly,
+      });
+      if (tile !== undefined) this.meshTiles.set(p.id, tile);
+    }
+    this.meshes.finish();
+  }
+
+  private projectPose(world: World, p: Person, alphaT: number, simT: number) {
     const x = p.px + (p.x - p.px) * alphaT;
     const y = p.py + (p.y - p.py) * alphaT;
     const { rig, s, anim, cond, bt, burden } = this.rigFor(world, p, simT, alphaT);
@@ -657,7 +692,7 @@ export class CharacterRenderer {
       const my = (h[1] + f[1]) / 2;
       const bx = (fx - fy) * 32 * kneeBend * sc;
       const by = (fx + fy) * 16 * kneeBend * sc;
-      return [mx + bx, my + by - rig[R.KNZ] * sc, (h[2] + f[2]) / 2];
+      return [mx + bx, my + by - rig[R.KNZ] * sc, (h[2] + f[2]) / 2 + by / 16];
     };
     let kneeL = lie > 0.5 ? footL : knee(hipL, footL);
     let kneeR = lie > 0.5 ? footR : knee(hipR, footR);
@@ -673,12 +708,29 @@ export class CharacterRenderer {
     }
     // elbows: halfway, dropped a little, pushed out sideways for hands on the hips or up at the face
     const elbOut = rig[R.ELB] * sc;
-    const elbow = (s0: V3, h: V3, down: number, side: number): V3 => [(s0[0] + h[0]) / 2 + (lx - ly) * 32 * elbOut * side, (s0[1] + h[1]) / 2 + down + (lx + ly) * 16 * elbOut * side, (s0[2] + h[2]) / 2];
+    const elbow = (s0: V3, h: V3, down: number, side: number): V3 => {
+      const lateral = elbOut * side;
+      const depth = (lx + ly) * lateral;
+      return [(s0[0] + h[0]) / 2 + (lx - ly) * 32 * lateral,
+        (s0[1] + h[1]) / 2 + down + depth * 16, (s0[2] + h[2]) / 2 + depth];
+    };
     const elbowL = elbow(shL, handL, 1.6, 1);
     const elbowR = elbow(shR, handR, 1.6, -1);
 
-    // ground shadow
     const base = S(0, 0, 0);
+    return { rig, s, anim, cond, bt, burden, heading, bs, sc, look, stage, accent, skin,
+      hairC, shirt, little, pants, fx, fy, lx, ly, lie, S, hipZ, shZ0, hip, lean,
+      shoulderC, headC, shL, shR, hipL, hipR, handL, handR, footL, footR,
+      kneeL, kneeR, elbowL, elbowR, base };
+  }
+
+  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number }): { headX: number; headY: number } {
+    const { rig, s, anim, cond, bt, burden, bs, sc, look, stage, accent, skin, hairC, shirt, little, pants,
+      fx, fy, lx, ly, lie, S, hipZ, shZ0, hip, lean, shoulderC, headC, shL, shR, hipL, hipR,
+      handL, handR, footL, footR, kneeL, kneeR, elbowL, elbowR, base } =
+      this.drawPoses.get(p.id) ?? this.projectPose(world, p, alphaT, simT);
+    const tile = this.meshTiles.get(p.id);
+    // ground shadow
     {
       const rx = 8.5 * sc * (lie > 0.5 ? 1.9 : 1);
       ctx.fillStyle = 'rgba(15,25,15,0.30)';
@@ -711,117 +763,147 @@ export class CharacterRenderer {
         ctx.lineTo(b[0], b[1]);
         ctx.stroke();
       }
-      ctx.strokeStyle = color;
+      // Soft, directional material shading turns the old flat strokes into rounded limbs.
+      const g = ctx.createLinearGradient(a[0] - w, a[1] - w, b[0] + w, b[1] + w);
+      g.addColorStop(0, shade(color, 1.14));
+      g.addColorStop(0.48, color);
+      g.addColorStop(1, shade(color, 0.76));
+      ctx.strokeStyle = g;
       ctx.lineWidth = w;
       ctx.beginPath();
       ctx.moveTo(a[0], a[1]);
       ctx.lineTo(b[0], b[1]);
       ctx.stroke();
     };
-    const lw = 3.1 * sc * look.build * (little ? 0.92 : 1);
-    const aw = 2.5 * sc;
+    const lw = 3.45 * sc * look.build * (little ? 0.92 : 1);
+    const aw = 2.8 * sc;
 
-    // legs
-    for (const [h, k, f, side] of [[hipL, kneeL, footL, 1], [hipR, kneeR, footR, -1]] as [V3, V3, V3, number][]) {
-      const dd = (h[2] + f[2]) / 2 - (side > 0 ? 0 : 0.01);
-      parts.push({
-        d: dd,
-        draw: () => {
-          limb(h, k, lw, pants)();
-          limb(k, f, lw * 0.95, shade(pants, 0.92))();
-          // shoe (a little one goes barefoot)
-          ctx.fillStyle = little ? shade(skin, 0.86) : '#3a2c22';
-          ctx.beginPath();
-          ctx.ellipse(f[0] + (fx - fy) * 32 * 0.04 * sc, f[1] + 0.6, 2.4 * sc, 1.5 * sc, 0, 0, Math.PI * 2);
-          ctx.fill();
-        },
-      });
-    }
+    if (tile !== undefined) {
+      parts.push({ d: (hip[2] + shoulderC[2]) / 2 + 0.005, draw: () => this.meshes!.draw(ctx, tile, base) });
+    } else {
+      // legs
+      for (const [h, k, f, side] of [[hipL, kneeL, footL, 1], [hipR, kneeR, footR, -1]] as [V3, V3, V3, number][]) {
+        const dd = (h[2] + f[2]) / 2 - (side > 0 ? 0 : 0.01);
+        parts.push({
+          d: dd,
+          draw: () => {
+            limb(h, k, lw, pants)();
+            limb(k, f, lw * 0.95, shade(pants, 0.92))();
+            // shoe (a little one goes barefoot)
+            ctx.fillStyle = little ? shade(skin, 0.86) : '#3a2c22';
+            ctx.beginPath();
+            ctx.ellipse(f[0] + (fx - fy) * 32 * 0.04 * sc, f[1] + 0.6, 2.4 * sc, 1.5 * sc, 0, 0, Math.PI * 2);
+            ctx.fill();
+          },
+        });
+      }
 
-    // a little one's smock and a child's tunic: a hem below the hips, in the shirt's colour, drawn behind the torso
-    if (bs.band && lie < 0.5) {
-      const hemU = little ? 0.62 : 0.4; // how far down the leg the hem reaches (0 the hips, 1 the knees)
-      const kneeMid: V3 = [(kneeL[0] + kneeR[0]) / 2, (kneeL[1] + kneeR[1]) / 2, (kneeL[2] + kneeR[2]) / 2];
-      const hem: V3 = [hip[0] + (kneeMid[0] - hip[0]) * hemU, hip[1] + (kneeMid[1] - hip[1]) * hemU, hip[2] + (kneeMid[2] - hip[2]) * hemU];
-      const side = (v: number): [number, number] => [(lx - ly) * 32 * v * sc, (lx + ly) * 16 * v * sc];
-      const [ox, oy] = side(little ? 0.16 : 0.12);
-      const [tx, ty] = side(0.09 * look.build);
+      // a little one's smock and a child's tunic: a hem below the hips, in the shirt's colour, drawn behind the torso
+      if (bs.band && lie < 0.5) {
+        const hemU = little ? 0.62 : 0.4; // how far down the leg the hem reaches (0 the hips, 1 the knees)
+        const kneeMid: V3 = [(kneeL[0] + kneeR[0]) / 2, (kneeL[1] + kneeR[1]) / 2, (kneeL[2] + kneeR[2]) / 2];
+        const hem: V3 = [hip[0] + (kneeMid[0] - hip[0]) * hemU, hip[1] + (kneeMid[1] - hip[1]) * hemU, hip[2] + (kneeMid[2] - hip[2]) * hemU];
+        const side = (v: number): [number, number] => [(lx - ly) * 32 * v * sc, (lx + ly) * 16 * v * sc];
+        const [ox, oy] = side(little ? 0.16 : 0.12);
+        const [tx, ty] = side(0.09 * look.build);
+        parts.push({
+          d: (hem[2] + hip[2]) / 2 + 0.0045,
+          draw: () => {
+            ctx.fillStyle = shade(shirt, 0.94);
+            ctx.strokeStyle = 'rgba(25,18,12,0.38)';
+            ctx.lineWidth = 0.9;
+            ctx.beginPath();
+            ctx.moveTo(hip[0] + tx, hip[1] + ty - 1);
+            ctx.lineTo(hem[0] + ox, hem[1] + oy);
+            ctx.quadraticCurveTo(hem[0], hem[1] + 1.2 * sc, hem[0] - ox, hem[1] - oy);
+            ctx.lineTo(hip[0] - tx, hip[1] - ty - 1);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          },
+        });
+      }
+
+      // torso
       parts.push({
-        d: (hem[2] + hip[2]) / 2 + 0.0045,
+        d: (hip[2] + shoulderC[2]) / 2 + 0.005,
         draw: () => {
-          ctx.fillStyle = shade(shirt, 0.94);
-          ctx.strokeStyle = 'rgba(25,18,12,0.38)';
+          const tw = 7.8 * sc * look.build * (little ? 1.08 : 1);
+          const sideX = (lx - ly) * 32 * 0.105 * sc * look.build;
+          const sideY = (lx + ly) * 16 * 0.105 * sc * look.build;
+          const g = ctx.createLinearGradient(hip[0] - tw, hip[1], shoulderC[0] + tw, shoulderC[1]);
+          g.addColorStop(0, shade(shirt, 0.72));
+          g.addColorStop(0.28, shade(shirt, 1.08));
+          g.addColorStop(0.7, shirt);
+          g.addColorStop(1, shade(shirt, 0.7));
+          // A tapered tunic gives the torso a shoulder line, waist and a readable silhouette.
+          ctx.fillStyle = g;
+          ctx.strokeStyle = 'rgba(25,18,12,0.52)';
           ctx.lineWidth = 0.9;
           ctx.beginPath();
-          ctx.moveTo(hip[0] + tx, hip[1] + ty - 1);
-          ctx.lineTo(hem[0] + ox, hem[1] + oy);
-          ctx.quadraticCurveTo(hem[0], hem[1] + 1.2 * sc, hem[0] - ox, hem[1] - oy);
-          ctx.lineTo(hip[0] - tx, hip[1] - ty - 1);
+          ctx.moveTo(shL[0] - sideX * 0.16, shL[1] - sideY * 0.16);
+          ctx.quadraticCurveTo(shoulderC[0] - tw * 0.42, shoulderC[1] - 1.2 * sc, shoulderC[0], shoulderC[1] - 0.8 * sc);
+          ctx.quadraticCurveTo(shoulderC[0] + tw * 0.42, shoulderC[1] - 1.2 * sc, shR[0] + sideX * 0.16, shR[1] - sideY * 0.16);
+          ctx.lineTo(hipR[0] + sideX * 0.2, hipR[1] + sideY * 0.2);
+          ctx.quadraticCurveTo(hip[0], hip[1] + 1.2 * sc, hipL[0] - sideX * 0.2, hipL[1] - sideY * 0.2);
           ctx.closePath();
           ctx.fill();
           ctx.stroke();
-        },
-      });
-    }
-
-    // torso
-    parts.push({
-      d: (hip[2] + shoulderC[2]) / 2 + 0.005,
-      draw: () => {
-        const tw = 7.1 * sc * look.build * (little ? 1.08 : 1);
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = 'rgba(25,18,12,0.4)';
-        ctx.lineWidth = tw + 1.2;
-        ctx.beginPath();
-        ctx.moveTo(hip[0], hip[1]);
-        ctx.lineTo(shoulderC[0], shoulderC[1]);
-        ctx.stroke();
-        ctx.strokeStyle = shirt;
-        ctx.lineWidth = tw;
-        ctx.beginPath();
-        ctx.moveTo(hip[0], hip[1]);
-        ctx.lineTo(shoulderC[0], shoulderC[1]);
-        ctx.stroke();
-        // light on the left, household sash across the chest
-        ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-        ctx.lineWidth = tw * 0.32;
-        ctx.beginPath();
-        ctx.moveTo(hip[0] - tw * 0.2, hip[1]);
-        ctx.lineTo(shoulderC[0] - tw * 0.2, shoulderC[1]);
-        ctx.stroke();
-        ctx.strokeStyle = accent;
-        ctx.lineWidth = Math.max(1.6, 2.1 * sc);
-        ctx.beginPath();
-        ctx.moveTo(shL[0], shL[1] + 0.5);
-        ctx.lineTo((hip[0] + hipR[0]) / 2, (hip[1] + hipR[1]) / 2 - 0.5);
-        ctx.stroke();
-        // belt (a smock has none)
-        ctx.strokeStyle = little ? 'rgba(0,0,0,0)' : 'rgba(40,28,18,0.55)';
-        ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(hip[0] - tw * 0.48, hip[1] - 0.7);
-        ctx.lineTo(hip[0] + tw * 0.48, hip[1] - 0.7);
-        ctx.stroke();
-      },
-    });
-
-    // near her time: the belly, in front of the body (drawn from the record's own date, never a guess)
-    if (cond.belly > 0 && lie < 0.5) {
-      const bz = hipZ + (shZ0 - hipZ) * 0.36;
-      const bc = S(lean * 0.36 + 0.085 * cond.belly, 0, bz);
-      parts.push({
-        d: bc[2] + 0.0055,
-        draw: () => {
-          const br = 3.5 * sc * look.build * cond.belly;
-          ctx.fillStyle = shirt;
-          ctx.strokeStyle = 'rgba(25,18,12,0.4)';
-          ctx.lineWidth = 0.9;
+          // Cloth highlight and a small stitched neckline catch the light at ordinary zoom.
+          ctx.strokeStyle = 'rgba(255,244,210,0.28)';
+          ctx.lineWidth = Math.max(0.8, tw * 0.17);
           ctx.beginPath();
-          ctx.ellipse(bc[0], bc[1], br, br * 1.12, 0, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(shoulderC[0] - tw * 0.25, shoulderC[1] + 0.5 * sc);
+          ctx.lineTo(hip[0] - tw * 0.26, hip[1] - 0.8 * sc);
+          ctx.stroke();
+          ctx.strokeStyle = 'rgba(45,30,20,0.42)';
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(shL[0] + (shR[0] - shL[0]) * 0.25, shL[1] + (shR[1] - shL[1]) * 0.25);
+          ctx.quadraticCurveTo(shoulderC[0], shoulderC[1] + 2.3 * sc, shL[0] + (shR[0] - shL[0]) * 0.75, shL[1] + (shR[1] - shL[1]) * 0.75);
+          ctx.stroke();
+          ctx.strokeStyle = accent;
+          ctx.lineWidth = Math.max(2, 2.4 * sc);
+          ctx.beginPath();
+          ctx.moveTo(shL[0], shL[1] + 0.5);
+          ctx.lineTo((hip[0] + hipR[0]) / 2, (hip[1] + hipR[1]) / 2 - 0.5);
+          ctx.stroke();
+          // Two short seam marks and a simple clasp give garments a little authored character.
+          ctx.strokeStyle = 'rgba(255,235,190,0.62)';
+          ctx.lineWidth = 0.65;
+          for (const t of [0.28, 0.38, 0.48]) {
+            const sx = shL[0] + (hip[0] - shL[0]) * t;
+            const sy = shL[1] + (hip[1] - shL[1]) * t;
+            ctx.beginPath(); ctx.moveTo(sx - 0.55, sy); ctx.lineTo(sx + 0.55, sy + 0.65); ctx.stroke();
+          }
+          // belt (a smock has none)
+          ctx.strokeStyle = little ? 'rgba(0,0,0,0)' : 'rgba(40,28,18,0.55)';
+          ctx.lineWidth = 1.35;
+          ctx.beginPath();
+          ctx.moveTo(hip[0] - tw * 0.48, hip[1] - 0.7);
+          ctx.lineTo(hip[0] + tw * 0.48, hip[1] - 0.7);
           ctx.stroke();
         },
       });
+
+      // near her time: the belly, in front of the body (drawn from the record's own date, never a guess)
+      if (cond.belly > 0 && lie < 0.5) {
+        const bz = hipZ + (shZ0 - hipZ) * 0.36;
+        const bc = S(lean * 0.36 + 0.085 * cond.belly, 0, bz);
+        parts.push({
+          d: bc[2] + 0.0055,
+          draw: () => {
+            const br = 3.5 * sc * look.build * cond.belly;
+            ctx.fillStyle = shirt;
+            ctx.strokeStyle = 'rgba(25,18,12,0.4)';
+            ctx.lineWidth = 0.9;
+            ctx.beginPath();
+            ctx.ellipse(bc[0], bc[1], br, br * 1.12, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+          },
+        });
+      }
     }
 
     // which tool is in hand follows the animation being shown (not the blended rig, which would flicker between kinds)
@@ -837,12 +919,14 @@ export class CharacterRenderer {
       parts.push({
         d: (s0[2] + h[2]) / 2 + (side > 0 ? 0.004 : 0.006),
         draw: () => {
-          limb(s0, e, aw, shirt)();
-          limb(e, h, aw * 0.9, skin)();
-          ctx.fillStyle = skin;
-          ctx.beginPath();
-          ctx.arc(h[0], h[1], 1.55 * sc, 0, Math.PI * 2);
-          ctx.fill();
+          if (tile === undefined) {
+            limb(s0, e, aw, shirt)();
+            limb(e, h, aw * 0.9, skin)();
+            ctx.fillStyle = skin;
+            ctx.beginPath();
+            ctx.arc(h[0], h[1], 1.55 * sc, 0, Math.PI * 2);
+            ctx.fill();
+          }
           if (side === nearSide && lie < 0.5) {
             if (cond.mourning) {
               // bereaved: a dark band on the upper arm
@@ -912,7 +996,7 @@ export class CharacterRenderer {
       d: headC[2] + 0.02,
       draw: () => {
         const hr = 5.1 * sc * bs.head;
-        drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], child: stage === 'child' });
+        if (tile === undefined) drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], child: stage === 'child' });
         if (cond.fever > 0 && faceToward >= -0.15) {
           // a fever: flushed cheeks and a bead of sweat
           ctx.fillStyle = `rgba(222,48,34,${0.8 * cond.fever})`;
@@ -1125,7 +1209,11 @@ function drawHead(
     ctx.fill();
   }
   // skull
-  ctx.fillStyle = o.skin;
+  const face = ctx.createRadialGradient(x - r * 0.34, y - r * 0.38, r * 0.08, x + r * 0.16, y + r * 0.12, r * 1.25);
+  face.addColorStop(0, shade(o.skin, 1.12));
+  face.addColorStop(0.62, o.skin);
+  face.addColorStop(1, shade(o.skin, 0.76));
+  ctx.fillStyle = face;
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI * 2);
   ctx.fill();
@@ -1158,6 +1246,13 @@ function drawHead(
     const ex = o.eyeDir * r * 0.5;
     const spread = r * 0.42 * (1 - Math.abs(o.eyeDir) * 0.5);
     const ey = y + r * 0.1;
+    // A tiny lit bridge makes the profile legible without turning faces into photographic detail.
+    ctx.strokeStyle = 'rgba(255,239,211,0.42)';
+    ctx.lineWidth = Math.max(0.6, r * 0.15);
+    ctx.beginPath();
+    ctx.moveTo(x + ex * 0.72, ey + r * 0.02);
+    ctx.lineTo(x + ex * 0.82, y + r * 0.38);
+    ctx.stroke();
     if (o.eyes > 0.5) {
       ctx.fillStyle = 'rgba(30,22,18,0.9)';
       ctx.beginPath();

@@ -206,6 +206,7 @@ export class Renderer {
     }
     list.sort((a, b) => a.d - b.d || a.id - b.id);
     this.drawnCount = list.length;
+    this.chars.prepareMeshes(world, list.filter((it) => it.k === 7).map((it) => it.o as Person), alphaT, simT, z);
 
     this.heads.clear();
     const night = 1 - Math.min(1, world.light * 1.2);
