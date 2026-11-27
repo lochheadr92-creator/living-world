@@ -3,12 +3,13 @@
 import { defineConfig } from 'vite';
 import { pinFiles } from './tests/helpers/archived_pins';
 import { slowFiles } from './tests/helpers/slow_tests';
+import { EVIDENCE_TESTS } from './tests/helpers/evidence_tests';
 
 export default defineConfig({
   test: {
     environment: 'node',
     include: ['tests/**/*.test.ts'],
-    exclude: ['**/node_modules/**', ...pinFiles().archived, ...slowFiles()],
+    exclude: ['**/node_modules/**', ...pinFiles().archived, ...slowFiles(), ...EVIDENCE_TESTS],
     testTimeout: 120_000,
     hookTimeout: 120_000,
   },

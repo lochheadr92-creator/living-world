@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { inhabitDevServer } from './scripts/inhabit/devserver';
 import { pinFiles } from './tests/helpers/archived_pins';
+import { EVIDENCE_TESTS } from './tests/helpers/evidence_tests';
 
 export default defineConfig({
   base: './',
@@ -12,7 +13,8 @@ export default defineConfig({
     environment: 'node',
     include: ['tests/**/*.test.ts'],
     // Continuation pins below the rules support floor (src/sim/support_floor.ts) are kept but not run here: npm run test:archive.
-    exclude: ['**/node_modules/**', ...pinFiles().archived],
+    // review tests that need evidence kept out of git: npm run test:evidence (tests/helpers/evidence_tests.ts)
+    exclude: ['**/node_modules/**', ...pinFiles().archived, ...EVIDENCE_TESTS],
     // Limits are there to catch a hang, not to time a test: the suite keeps every core busy, and a long test then runs two to three times slower than alone.
     testTimeout: 900_000,
     hookTimeout: 120_000,
