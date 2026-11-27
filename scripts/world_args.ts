@@ -12,12 +12,18 @@
 // world's rules version to N, so a rules-244 save can be continued at 245 or later, with a switch thrown or not, to measure a rule
 // from a settlement that already exists. N must be a version this build runs and above the save's own; it prints a warning, since
 // the world is then reinterpreted and no longer a pure continuation of the version that saved it. Nothing else of the world changes
-// (state that a version in between would have made at the start of a world is not made).
+// (state that a version in between would have made at the start of a world is not made), with one fit: a kept animal grown past the
+// raised version's age of maturity is set to that age, still an adult. Rules 267 made a sheep mature at 18,937 ticks where it had been
+// 8 days (19,200), so an adult sheep of a rules-256 save raised to 267 or later broke the save check ("invalid sheep state") and the
+// raised world could not be read back or forked by the lab. The livestock check runs at the raise, so any other mismatch is reported
+// there and not halfway through a lab.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
+import { maturity } from '../src/sim/farm_species';
+import { validateLivestock } from '../src/sim/livestock';
 import { freshRunSettings, parseRunRules } from '../src/sim/profiles';
 import { CURRENT_RULES_VERSION, isSupportedRulesVersion } from '../src/sim/rulesversion';
 import type { World } from '../src/sim/types';
@@ -46,6 +52,21 @@ export function raiseRulesVersion(w: World, wanted: string, loaded: string): voi
   if (was === undefined) throw new Error(`--rules-up ${n}: ${loaded} is an unversioned world (its original rules are unknown), which cannot be raised`);
   if (n <= was) throw new Error(`--rules-up ${n}: ${loaded} is already at rules ${was}; --rules-up only raises a save above its own version (--rules pins an older one when a world is made from a seed)`);
   w.settings.rulesVersion = n;
+  const fitted: { s: NonNullable<World['animals'][number]['sheep']>; growth: number }[] = [];
+  for (const a of w.animals) {
+    const s = a.sheep;
+    if (!s) continue;
+    const grown = Math.floor(maturity(w, a));
+    if (s.growth > grown) { fitted.push({ s, growth: s.growth }); s.growth = grown; }
+  }
+  try {
+    validateLivestock(w);
+  } catch (e) {
+    for (const f of fitted) f.s.growth = f.growth;
+    w.settings.rulesVersion = was;
+    throw new Error(`--rules-up ${n}: ${loaded} does not fit rules ${n} (${(e as Error).message}); the world is left as it was, at rules ${was}`);
+  }
+  if (fitted.length) console.error(`--rules-up ${n}: ${fitted.length} kept animal(s) grown past rules ${n}'s age of maturity set to it (still adults)`);
   console.error(`WARNING --rules-up: ${loaded} was saved at rules ${was} and now runs rules ${n}; it is reinterpreted for measurement and is no longer a pure continuation of its own version`);
 }
 
