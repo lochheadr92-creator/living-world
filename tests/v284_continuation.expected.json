@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "ed2537e93e0d5b7a4572900bcc574bbeadc47695",
+    "rules": 284,
+    "content": "8dfce7c9cd25fbafb608a3fe2e69aab488ea0bc3fa08f20e6738514ad31cb3cf",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 284, saved and continued 120 ticks. One pin for rules 284 alone, quiet company (src/sim/quiet_company.ts: being together at rest eases the want of company, and that want draws from 60). The same world, tick and continuation length as the rules 278 to 283 pins, written with a copy of their helper (tests/helpers/v284ref.ts). Rules 284 adds no saved field, no draw and no feed line; the counts are of the saved world."
+  },
+  "saved": "428a3ad1f7c18f18a0042d7b360c7adb716b9ad9b42feb9721f683aa1aced1be",
+  "continued": "9111d34db7aff8918c2917febc87811a437e769f7558f9c1b31af86c017d6299",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 42,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 2,
+    "sheep": 1,
+    "wolf": 1
+  },
+  "ownedAnimals": 2,
+  "housedAnimals": 0,
+  "farmBuildings": {
+    "barn": 12,
+    "chicken_cage": 1,
+    "paddock": 14
+  },
+  "farmGoods": {
+    "hay": 118,
+    "stock_feed": 119,
+    "wool": 12
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 115
+}
