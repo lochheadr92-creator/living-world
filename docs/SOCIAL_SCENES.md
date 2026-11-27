@@ -928,5 +928,35 @@ Endings of the 11 searches that set out (6 seen as an activity, 5 ended in one s
 1. The search is an activity aimed at a person, and `activities.ts` ends any such activity at once, "they are inside a different space", when the walker and that person are not in the same space. That is a read of where the missing person truly is, which the worrier could not know, and it ended 5 of the 11 searches in the step they began (and 8 of 28 companion walks before). The search could be aimed at the place the worrier last saw them, as the companion's is aimed at the worrier, and let the worrier find out on arriving what they see.
 2. The walk offered at the companion's level is `FETCH_JOIN_SCORE` less the whole walk to the place (12 points in the trace above); the companion's own walk is less only the short walk to the worrier. Leaving the walk to the place out of the score would give a larger lead over sleep, a retune.
 3. The ask can be made as the light is passing 0.5 at dawn and the promise then has no use: the cue could let a promise made in the dark stand until the worrier has had one decision.
-4. Nobody is found because the place is where the worrier last saw them over 1,100 ticks ago. A second place to look (home, the last place they were seen by anybody) is a larger change.
+4. (Corrected by the count below: the search walks to the household's own home, not to a last-seen place.) Nobody is found because the place is where the worrier last saw them over 1,100 ticks ago. A second place to look (home, the last place they were seen by anybody) is a larger change.
 5. Seen in a staged search, not in the six worlds (nobody was found in them): the one found is told to think again on the next tick, before their own sight has taken in the call, and a child found at night with energy under 90 can choose "sleep right here" in that look; sleep is not reviewed, so the walk home offered at 82 a few ticks later is never taken and the search ends "would not come" (`tests/fetch_sets_out.test.ts` gives the child full energy for this reason).
+
+## Counted (rules 278): where the "missing" person really is (27 November 2026)
+
+A read-only count from a frozen checkout of `82741556`: the same six worlds as the section above (fresh Normal gen-2, gen-4 and gen-6
+for 45 days; aspen-day48, gen-4-day48 and river-day48 raised to 278 for 25 days). The watcher changes nothing: the world hash was the
+same with and without it on every day of three whole runs. Outputs and the script: `C:/dev/lw_labs/fetch_where` (`summary.txt`). An
+episode is one grown worrier holding a "missing" worry about a household member while the light is under 0.5: 740 episodes.
+
+- **Who is missing.** Always a child under twelve (735 of 740 the worrier's own child, 513 under eight). The worry is raised by
+  `welfare.ts` when the worrier's own record of a dependant is absent or over 1,100 ticks old; nobody grown was ever the one missing.
+- **Where they really are when the worry begins.** Indoors in the household's own home 203 (27%); outdoors within 12 tiles of the
+  settlement centre 306 (41%); outdoors farther 231 (31%); never in another building. Doing: resting 26%, talking 20%, wandering 17%,
+  going to bed 10%, asleep 8%.
+- **How episodes end.** The child came into the worrier's sight 495 (67%), median 199 ticks after the worry began, and in 377 of
+  those the worrier was going to bed or asleep: the household met at home at bedtime. Dawn came with the worry still held 115 (16%).
+  A search found them: 0.
+- **Where the search goes: correction to idea 4 above.** The search does not walk to where the worrier last saw the child.
+  `whereIs` (`optutil.ts`) uses a last-seen record only while it is under 900 ticks old, and the worry needs one over 1,100, so the
+  place is the household's own home ("at their home") in 665 of 740 episodes and in all 11 searches.
+- **The 11 searches.** Five ended in the step they began, "they are inside a different space": the child was indoors at home and the
+  worrier 9 to 23 tiles away outdoors (four of those children had come home in the 61 ticks between the ask and setting out). Two ended
+  "was home already", the child seen at the door. Four walked home, looked for 24 ticks and came back without them: each of those
+  children was outdoors within 2.4 tiles of the settlement centre, resting or wandering there ("Staying at the fire" in two), 6.5 to
+  16.5 tiles from the home that was searched and never within 7.5 tiles of the searcher.
+- **Reading.** The child is seldom lost. In 7 of 11 searches the child was at home or at the door by the time the worrier set out,
+  and in the other 4 the child was at the settlement centre while the search looked at home. So a second repair is about two things:
+  letting the walk home end on what the worrier sees there, instead of on the general rule that reads where the child truly is, and a
+  second place to look, the settlement's fire. Not built; needs its own rules number.
+- **Not measured.** Why asks are few (23 from 740 episodes); the found-and-brought-home path, since nobody was found; whether a fire
+  stands where "the centre" is (taken from the activity labels).
