@@ -1,0 +1,356 @@
+{
+  "seed": "river",
+  "version": "266",
+  "arm": "base",
+  "source": "101f840415aa8b5f24ccc24f96d138ac082add98029f3e7277313237aa5c1fcf",
+  "immigration": true,
+  "grainMeals": {
+    "eat": {
+      "travel": 1,
+      "work": 2472,
+      "distance": 0,
+      "meals": 125,
+      "bites": 224
+    },
+    "eat_store": {
+      "travel": 1326,
+      "work": 1044,
+      "distance": 159.90623759277057,
+      "meals": 42,
+      "bites": 87
+    }
+  },
+  "opening": {
+    "grain": {
+      "total": 92,
+      "field": 0,
+      "wild": 74,
+      "stores": 3,
+      "packs": 15,
+      "other": 0
+    },
+    "seeds": {
+      "total": 11,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 11,
+      "other": 0
+    },
+    "flour": {
+      "total": 0,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 0,
+      "other": 0
+    },
+    "bread": {
+      "total": 0,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 0,
+      "other": 0
+    },
+    "stock_feed": {
+      "total": 0,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 0,
+      "other": 0
+    }
+  },
+  "closing": {
+    "grain": {
+      "total": 159,
+      "field": 5,
+      "wild": 99,
+      "stores": 41,
+      "packs": 14,
+      "other": 0
+    },
+    "seeds": {
+      "total": 77,
+      "field": 1,
+      "wild": 0,
+      "stores": 0,
+      "packs": 76,
+      "other": 0
+    },
+    "flour": {
+      "total": 0,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 0,
+      "other": 0
+    },
+    "bread": {
+      "total": 0,
+      "field": 0,
+      "wild": 0,
+      "stores": 0,
+      "packs": 0,
+      "other": 0
+    },
+    "stock_feed": {
+      "total": 33,
+      "field": 0,
+      "wild": 0,
+      "stores": 33,
+      "packs": 0,
+      "other": 0
+    }
+  },
+  "ledger": {
+    "grain": {
+      "-livestock feed": 4,
+      "+regrowth: wild grain": 406,
+      "-sheep grazing": 32,
+      "-mixing grain feed": 31,
+      "-eaten": 311,
+      "-saved as seed": 76,
+      "xstored food spoiled": 86,
+      "+crop growth": 270,
+      "xcrop left to rot": 64,
+      "-leading livestock": 1,
+      "-eaten at the source": 4
+    },
+    "seeds": {
+      "-sown": 39,
+      "+seed saved from wild grain": 76,
+      "+crop growth": 33,
+      "xcrop left to rot": 4
+    },
+    "flour": {},
+    "bread": {},
+    "stock_feed": {
+      "+mixing grain feed": 62,
+      "-livestock eating grain feed": 29
+    }
+  },
+  "routes": {
+    "grain": {
+      "person>person | given": 39,
+      "source>person | gather": 345,
+      "person>building | deposit": 322,
+      "building>person | eat from store": 105,
+      "plot>person | harvest": 201,
+      "person>person | gift on request": 2,
+      "building>person | withdraw": 89,
+      "person>person | offered gift": 2,
+      "person>person | looked after": 1
+    },
+    "seeds": {
+      "plot>person | harvest": 28
+    },
+    "flour": {},
+    "bread": {},
+    "stock_feed": {}
+  },
+  "labour": {
+    "other": {
+      "travel": 253726,
+      "work": 648322,
+      "distance": 27843.245123561708
+    },
+    "till": {
+      "travel": 1909,
+      "work": 1961,
+      "distance": 197.18719009946417
+    },
+    "plant": {
+      "travel": 974,
+      "work": 860,
+      "distance": 110.2139871354746
+    },
+    "wild gather": {
+      "travel": 6958,
+      "work": 9433,
+      "distance": 899.0045352066788
+    },
+    "grain transport": {
+      "travel": 8595,
+      "work": 2657,
+      "distance": 1032.7263810289865
+    },
+    "tend": {
+      "travel": 883,
+      "work": 944,
+      "distance": 103.91621298311871
+    },
+    "mix feed": {
+      "travel": 1776,
+      "work": 1656,
+      "distance": 212.9409943155454
+    },
+    "harvest": {
+      "travel": 3208,
+      "work": 3185,
+      "distance": 367.2515485284011
+    }
+  },
+  "harvestVisits": 61,
+  "partialVisits": 45,
+  "repeatVisits": 40,
+  "days": [
+    {
+      "day": 1,
+      "hash": "5d9a27ad",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 2,
+      "hash": "dc5132d5",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 3,
+      "hash": "06d22173",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 4,
+      "hash": "b62403ad",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 5,
+      "hash": "0a7a00cb",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 6,
+      "hash": "d908ebe0",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 7,
+      "hash": "4b8576b7",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 8,
+      "hash": "6be2954d",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 9,
+      "hash": "79d50013",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 10,
+      "hash": "71e7ca0b",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 11,
+      "hash": "150d81e9",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    },
+    {
+      "day": 12,
+      "hash": "a9db309d",
+      "conserved": true,
+      "residuals": {
+        "grain": 0,
+        "seeds": 0,
+        "flour": 0,
+        "bread": 0,
+        "stock_feed": 0
+      },
+      "fieldResidual": 0
+    }
+  ]
+}

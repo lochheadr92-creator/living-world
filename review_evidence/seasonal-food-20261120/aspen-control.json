@@ -1,0 +1,1271 @@
+{
+  "seed": "aspen",
+  "arm": "control",
+  "source": "9b96ae61",
+  "rules": 266,
+  "grainBoost": false,
+  "days": [
+    {
+      "day": 1,
+      "hash": "59e5afeb",
+      "regrown": {
+        "berries": 151,
+        "fruit": 45,
+        "fish": 63,
+        "grain": 40
+      },
+      "gather": {
+        "berries": 81,
+        "fruit": 5,
+        "fish": 24,
+        "grain": 1
+      },
+      "atSource": {
+        "fish": 2
+      },
+      "eaten": {
+        "berries": 55,
+        "grain": 9,
+        "fruit": 24,
+        "fish": 14
+      },
+      "fieldGrain": 0,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1634,
+      "hungryAwakeTicks": 19885,
+      "awakeTicks": 49413,
+      "alive": 28,
+      "dead": 0
+    },
+    {
+      "day": 2,
+      "hash": "c5458162",
+      "regrown": {
+        "berries": 77,
+        "fruit": 21,
+        "fish": 34,
+        "grain": 19
+      },
+      "gather": {
+        "berries": 83,
+        "fruit": 19,
+        "fish": 29,
+        "grain": 18
+      },
+      "atSource": {},
+      "eaten": {
+        "berries": 59,
+        "fish": 20,
+        "fruit": 12,
+        "grain": 9
+      },
+      "fieldGrain": 0,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1658,
+      "hungryAwakeTicks": 24232,
+      "awakeTicks": 51177,
+      "alive": 28,
+      "dead": 0
+    },
+    {
+      "day": 3,
+      "hash": "849b90ef",
+      "regrown": {
+        "berries": 64,
+        "fruit": 34,
+        "fish": 22,
+        "grain": 22
+      },
+      "gather": {
+        "berries": 66,
+        "fruit": 30,
+        "fish": 23,
+        "grain": 23
+      },
+      "atSource": {},
+      "eaten": {
+        "fish": 19,
+        "berries": 49,
+        "grain": 11,
+        "fruit": 25
+      },
+      "fieldGrain": 0,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1762,
+      "hungryAwakeTicks": 23129,
+      "awakeTicks": 53188,
+      "alive": 29,
+      "dead": 0
+    },
+    {
+      "day": 4,
+      "hash": "78f7bbeb",
+      "regrown": {
+        "berries": 60,
+        "fruit": 25,
+        "fish": 42,
+        "grain": 17
+      },
+      "gather": {
+        "berries": 50,
+        "fruit": 23,
+        "fish": 46,
+        "grain": 14
+      },
+      "atSource": {
+        "berries": 2,
+        "grain": 2
+      },
+      "eaten": {
+        "berries": 40,
+        "fruit": 20,
+        "grain": 9,
+        "fish": 25
+      },
+      "fieldGrain": 24,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1698,
+      "hungryAwakeTicks": 25094,
+      "awakeTicks": 53637,
+      "alive": 29,
+      "dead": 0
+    },
+    {
+      "day": 5,
+      "hash": "fa54c778",
+      "regrown": {
+        "berries": 36,
+        "fruit": 2,
+        "fish": 16,
+        "grain": 25
+      },
+      "gather": {
+        "berries": 41,
+        "fruit": 0,
+        "fish": 16,
+        "grain": 28
+      },
+      "atSource": {},
+      "eaten": {
+        "berries": 32,
+        "grain": 28,
+        "fruit": 6,
+        "fish": 19
+      },
+      "fieldGrain": 12,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1628,
+      "hungryAwakeTicks": 21196,
+      "awakeTicks": 55760,
+      "alive": 30,
+      "dead": 0
+    },
+    {
+      "day": 6,
+      "hash": "103fce45",
+      "regrown": {
+        "berries": 21,
+        "fruit": 8,
+        "fish": 15,
+        "grain": 19
+      },
+      "gather": {
+        "berries": 14,
+        "fruit": 4,
+        "fish": 8,
+        "grain": 16
+      },
+      "atSource": {
+        "fish": 1
+      },
+      "eaten": {
+        "berries": 29,
+        "fish": 8,
+        "grain": 30,
+        "fruit": 4,
+        "meat": 3,
+        "egg": 1
+      },
+      "fieldGrain": 9,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1386,
+      "hungryAwakeTicks": 29566,
+      "awakeTicks": 59073,
+      "alive": 30,
+      "dead": 0
+    },
+    {
+      "day": 7,
+      "hash": "a8107939",
+      "regrown": {
+        "berries": 33,
+        "fruit": 5,
+        "fish": 31,
+        "grain": 9
+      },
+      "gather": {
+        "berries": 39,
+        "fruit": 3,
+        "fish": 29,
+        "grain": 9
+      },
+      "atSource": {
+        "berries": 4,
+        "fish": 2
+      },
+      "eaten": {
+        "berries": 27,
+        "fish": 23,
+        "grain": 15,
+        "fruit": 8,
+        "meat": 1
+      },
+      "fieldGrain": 0,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1452,
+      "hungryAwakeTicks": 36792,
+      "awakeTicks": 60190,
+      "alive": 30,
+      "dead": 0
+    },
+    {
+      "day": 8,
+      "hash": "fa15ea00",
+      "regrown": {
+        "berries": 41,
+        "fruit": 15,
+        "fish": 22,
+        "grain": 39
+      },
+      "gather": {
+        "berries": 34,
+        "fruit": 12,
+        "fish": 21,
+        "grain": 41
+      },
+      "atSource": {
+        "fish": 2,
+        "berries": 1
+      },
+      "eaten": {
+        "berries": 29,
+        "fish": 18,
+        "grain": 29,
+        "fruit": 11,
+        "egg": 2
+      },
+      "fieldGrain": 27,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1690,
+      "hungryAwakeTicks": 30241,
+      "awakeTicks": 56400,
+      "alive": 30,
+      "dead": 0
+    },
+    {
+      "day": 9,
+      "hash": "665e5af5",
+      "regrown": {
+        "berries": 42,
+        "fruit": 13,
+        "fish": 16,
+        "grain": 12
+      },
+      "gather": {
+        "berries": 38,
+        "fruit": 10,
+        "fish": 16,
+        "grain": 10
+      },
+      "atSource": {},
+      "eaten": {
+        "grain": 27,
+        "fish": 16,
+        "berries": 44,
+        "fruit": 7,
+        "egg": 1
+      },
+      "fieldGrain": 48,
+      "winter": 2399,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1694,
+      "hungryAwakeTicks": 34806,
+      "awakeTicks": 64162,
+      "alive": 32,
+      "dead": 0
+    },
+    {
+      "day": 10,
+      "hash": "69fd246e",
+      "regrown": {
+        "berries": 46,
+        "fruit": 14,
+        "fish": 19,
+        "grain": 8
+      },
+      "gather": {
+        "berries": 47,
+        "fruit": 13,
+        "fish": 16,
+        "grain": 8
+      },
+      "atSource": {
+        "fish": 2,
+        "fruit": 1
+      },
+      "eaten": {
+        "grain": 16,
+        "fish": 14,
+        "berries": 30,
+        "fruit": 12
+      },
+      "fieldGrain": 0,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1296,
+      "hungryAwakeTicks": 38553,
+      "awakeTicks": 66251,
+      "alive": 32,
+      "dead": 0
+    },
+    {
+      "day": 11,
+      "hash": "d0945d15",
+      "regrown": {
+        "berries": 39,
+        "fruit": 15,
+        "fish": 9,
+        "grain": 2
+      },
+      "gather": {
+        "berries": 39,
+        "fruit": 8,
+        "fish": 9,
+        "grain": 2
+      },
+      "atSource": {
+        "fish": 3
+      },
+      "eaten": {
+        "berries": 52,
+        "grain": 22,
+        "fish": 16,
+        "fruit": 7,
+        "meat": 2
+      },
+      "fieldGrain": 0,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1720,
+      "hungryAwakeTicks": 51523,
+      "awakeTicks": 73144,
+      "alive": 32,
+      "dead": 0
+    },
+    {
+      "day": 12,
+      "hash": "3808d124",
+      "regrown": {
+        "berries": 59,
+        "fruit": 20,
+        "fish": 25,
+        "grain": 56
+      },
+      "gather": {
+        "berries": 59,
+        "fruit": 17,
+        "fish": 25,
+        "grain": 55
+      },
+      "atSource": {
+        "grain": 1
+      },
+      "eaten": {
+        "fish": 21,
+        "berries": 56,
+        "grain": 34,
+        "meat": 1,
+        "fruit": 22
+      },
+      "fieldGrain": 36,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2386,
+      "hungryAwakeTicks": 41100,
+      "awakeTicks": 63746,
+      "alive": 34,
+      "dead": 0
+    },
+    {
+      "day": 13,
+      "hash": "fc857eea",
+      "regrown": {
+        "berries": 36,
+        "fruit": 11,
+        "fish": 46,
+        "grain": 26
+      },
+      "gather": {
+        "berries": 36,
+        "fruit": 9,
+        "fish": 47,
+        "grain": 28
+      },
+      "atSource": {
+        "berries": 1
+      },
+      "eaten": {
+        "fish": 29,
+        "grain": 34,
+        "berries": 37,
+        "fruit": 5
+      },
+      "fieldGrain": 77,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2084,
+      "hungryAwakeTicks": 33328,
+      "awakeTicks": 62641,
+      "alive": 34,
+      "dead": 0
+    },
+    {
+      "day": 14,
+      "hash": "28f27af4",
+      "regrown": {
+        "berries": 20,
+        "fruit": 10,
+        "fish": 31,
+        "grain": 9
+      },
+      "gather": {
+        "berries": 23,
+        "fruit": 6,
+        "fish": 26,
+        "grain": 9
+      },
+      "atSource": {
+        "fish": 4
+      },
+      "eaten": {
+        "fish": 31,
+        "grain": 38,
+        "berries": 18,
+        "fruit": 7,
+        "meat": 5
+      },
+      "fieldGrain": 77,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2162,
+      "hungryAwakeTicks": 27687,
+      "awakeTicks": 61095,
+      "alive": 34,
+      "dead": 0
+    },
+    {
+      "day": 15,
+      "hash": "8cc91c88",
+      "regrown": {
+        "berries": 26,
+        "fruit": 17,
+        "fish": 18,
+        "grain": 26
+      },
+      "gather": {
+        "berries": 21,
+        "fruit": 15,
+        "fish": 20,
+        "grain": 24
+      },
+      "atSource": {},
+      "eaten": {
+        "berries": 22,
+        "fish": 26,
+        "grain": 34,
+        "fruit": 11,
+        "meat": 6
+      },
+      "fieldGrain": 17,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2072,
+      "hungryAwakeTicks": 27835,
+      "awakeTicks": 63787,
+      "alive": 36,
+      "dead": 0
+    },
+    {
+      "day": 16,
+      "hash": "ea5208f6",
+      "regrown": {
+        "berries": 30,
+        "fruit": 29,
+        "fish": 25,
+        "grain": 11
+      },
+      "gather": {
+        "berries": 34,
+        "fruit": 26,
+        "fish": 20,
+        "grain": 12
+      },
+      "atSource": {
+        "fruit": 6,
+        "berries": 8
+      },
+      "eaten": {
+        "fish": 21,
+        "berries": 28,
+        "fruit": 18,
+        "grain": 30,
+        "meat": 2
+      },
+      "fieldGrain": 20,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1924,
+      "hungryAwakeTicks": 28057,
+      "awakeTicks": 65372,
+      "alive": 36,
+      "dead": 0
+    },
+    {
+      "day": 17,
+      "hash": "f5f1d84b",
+      "regrown": {
+        "berries": 63,
+        "fruit": 16,
+        "fish": 21,
+        "grain": 26
+      },
+      "gather": {
+        "berries": 51,
+        "fruit": 11,
+        "fish": 24,
+        "grain": 29
+      },
+      "atSource": {
+        "berries": 3,
+        "fish": 1
+      },
+      "eaten": {
+        "fish": 16,
+        "fruit": 17,
+        "berries": 43,
+        "grain": 27
+      },
+      "fieldGrain": 40,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1830,
+      "hungryAwakeTicks": 29801,
+      "awakeTicks": 65552,
+      "alive": 39,
+      "dead": 0
+    },
+    {
+      "day": 18,
+      "hash": "0359ff70",
+      "regrown": {
+        "berries": 21,
+        "fruit": 8,
+        "fish": 19,
+        "grain": 69
+      },
+      "gather": {
+        "berries": 21,
+        "fruit": 2,
+        "fish": 25,
+        "grain": 67
+      },
+      "atSource": {
+        "berries": 1
+      },
+      "eaten": {
+        "fruit": 8,
+        "berries": 32,
+        "grain": 54,
+        "fish": 21
+      },
+      "fieldGrain": 23,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2288,
+      "hungryAwakeTicks": 43784,
+      "awakeTicks": 77750,
+      "alive": 39,
+      "dead": 0
+    },
+    {
+      "day": 19,
+      "hash": "60903c00",
+      "regrown": {
+        "berries": 22,
+        "fruit": 15,
+        "fish": 16,
+        "grain": 41
+      },
+      "gather": {
+        "berries": 26,
+        "fruit": 13,
+        "fish": 15,
+        "grain": 49
+      },
+      "atSource": {
+        "fruit": 3
+      },
+      "eaten": {
+        "fish": 17,
+        "berries": 23,
+        "grain": 37,
+        "fruit": 12,
+        "meat": 2
+      },
+      "fieldGrain": 27,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1810,
+      "hungryAwakeTicks": 32382,
+      "awakeTicks": 68551,
+      "alive": 39,
+      "dead": 0
+    },
+    {
+      "day": 20,
+      "hash": "336c4b27",
+      "regrown": {
+        "berries": 46,
+        "fruit": 12,
+        "fish": 32,
+        "grain": 50
+      },
+      "gather": {
+        "berries": 46,
+        "fruit": 13,
+        "fish": 29,
+        "grain": 59
+      },
+      "atSource": {},
+      "eaten": {
+        "grain": 38,
+        "meat": 6,
+        "fish": 16,
+        "berries": 44,
+        "fruit": 12
+      },
+      "fieldGrain": 10,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2160,
+      "hungryAwakeTicks": 35857,
+      "awakeTicks": 71527,
+      "alive": 40,
+      "dead": 0
+    },
+    {
+      "day": 21,
+      "hash": "7ef3a47b",
+      "regrown": {
+        "berries": 30,
+        "fruit": 7,
+        "fish": 25,
+        "grain": 42
+      },
+      "gather": {
+        "berries": 44,
+        "fruit": 10,
+        "fish": 31,
+        "grain": 40
+      },
+      "atSource": {
+        "berries": 1,
+        "fish": 1
+      },
+      "eaten": {
+        "berries": 34,
+        "fish": 32,
+        "grain": 28,
+        "fruit": 11,
+        "meat": 2
+      },
+      "fieldGrain": 0,
+      "winter": 2399,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2148,
+      "hungryAwakeTicks": 33327,
+      "awakeTicks": 73736,
+      "alive": 40,
+      "dead": 0
+    },
+    {
+      "day": 22,
+      "hash": "ba7ac9aa",
+      "regrown": {
+        "berries": 39,
+        "fruit": 10,
+        "fish": 19,
+        "grain": 22
+      },
+      "gather": {
+        "berries": 43,
+        "fruit": 17,
+        "fish": 21,
+        "grain": 23
+      },
+      "atSource": {},
+      "eaten": {
+        "fish": 16,
+        "meat": 7,
+        "berries": 37,
+        "grain": 18,
+        "fruit": 5
+      },
+      "fieldGrain": 0,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 1550,
+      "hungryAwakeTicks": 45255,
+      "awakeTicks": 84152,
+      "alive": 41,
+      "dead": 0
+    },
+    {
+      "day": 23,
+      "hash": "98af1372",
+      "regrown": {
+        "berries": 47,
+        "fruit": 14,
+        "fish": 23,
+        "grain": 20
+      },
+      "gather": {
+        "berries": 48,
+        "fruit": 2,
+        "fish": 10,
+        "grain": 4
+      },
+      "atSource": {
+        "fish": 4,
+        "berries": 3
+      },
+      "eaten": {
+        "grain": 19,
+        "berries": 58,
+        "fish": 30,
+        "meat": 6,
+        "fruit": 15,
+        "pork": 3
+      },
+      "fieldGrain": 0,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2428,
+      "hungryAwakeTicks": 73019,
+      "awakeTicks": 91591,
+      "alive": 41,
+      "dead": 0
+    },
+    {
+      "day": 24,
+      "hash": "53956b51",
+      "regrown": {
+        "berries": 87,
+        "fruit": 19,
+        "fish": 41,
+        "grain": 38
+      },
+      "gather": {
+        "berries": 54,
+        "fruit": 12,
+        "fish": 37,
+        "grain": 36
+      },
+      "atSource": {
+        "berries": 5
+      },
+      "eaten": {
+        "grain": 29,
+        "fish": 28,
+        "berries": 56,
+        "meat": 7,
+        "fruit": 5,
+        "pork": 4
+      },
+      "fieldGrain": 14,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2460,
+      "hungryAwakeTicks": 60333,
+      "awakeTicks": 81477,
+      "alive": 43,
+      "dead": 0
+    },
+    {
+      "day": 25,
+      "hash": "856093f1",
+      "regrown": {
+        "berries": 52,
+        "fruit": 11,
+        "fish": 36,
+        "grain": 42
+      },
+      "gather": {
+        "berries": 46,
+        "fruit": 10,
+        "fish": 29,
+        "grain": 43
+      },
+      "atSource": {
+        "fish": 5,
+        "berries": 3,
+        "fruit": 1
+      },
+      "eaten": {
+        "berries": 48,
+        "fish": 31,
+        "meat": 14,
+        "grain": 31,
+        "fruit": 8,
+        "pork": 3
+      },
+      "fieldGrain": 20,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2696,
+      "hungryAwakeTicks": 52499,
+      "awakeTicks": 86237,
+      "alive": 44,
+      "dead": 0
+    },
+    {
+      "day": 26,
+      "hash": "bbfedb9f",
+      "regrown": {
+        "berries": 7,
+        "fruit": 1,
+        "fish": 6,
+        "grain": 5
+      },
+      "gather": {
+        "berries": 38,
+        "fruit": 4,
+        "fish": 25,
+        "grain": 39
+      },
+      "atSource": {
+        "berries": 6,
+        "fish": 1,
+        "grain": 1
+      },
+      "eaten": {
+        "grain": 60,
+        "berries": 45,
+        "meat": 4,
+        "fruit": 11,
+        "fish": 21
+      },
+      "fieldGrain": 61,
+      "winter": 0,
+      "lean": 2394,
+      "overlap": 0,
+      "intake": 2728,
+      "hungryAwakeTicks": 54755,
+      "awakeTicks": 86479,
+      "alive": 44,
+      "dead": 0
+    },
+    {
+      "day": 27,
+      "hash": "e1e8fc15",
+      "regrown": {
+        "berries": 31,
+        "fruit": 6,
+        "fish": 14,
+        "grain": 22
+      },
+      "gather": {
+        "berries": 78,
+        "fruit": 29,
+        "fish": 23,
+        "grain": 31
+      },
+      "atSource": {
+        "berries": 4,
+        "fish": 3,
+        "fruit": 2
+      },
+      "eaten": {
+        "fish": 25,
+        "berries": 46,
+        "fruit": 19,
+        "grain": 41,
+        "pork": 1,
+        "meat": 2
+      },
+      "fieldGrain": 39,
+      "winter": 0,
+      "lean": 2400,
+      "overlap": 0,
+      "intake": 2536,
+      "hungryAwakeTicks": 42016,
+      "awakeTicks": 84171,
+      "alive": 47,
+      "dead": 0
+    },
+    {
+      "day": 28,
+      "hash": "e062abd2",
+      "regrown": {
+        "berries": 56,
+        "fruit": 15,
+        "fish": 17,
+        "grain": 35
+      },
+      "gather": {
+        "berries": 55,
+        "fruit": 24,
+        "fish": 18,
+        "grain": 42
+      },
+      "atSource": {
+        "berries": 15,
+        "fish": 1,
+        "grain": 1
+      },
+      "eaten": {
+        "berries": 76,
+        "fish": 24,
+        "grain": 24,
+        "fruit": 24
+      },
+      "fieldGrain": 28,
+      "winter": 0,
+      "lean": 2400,
+      "overlap": 0,
+      "intake": 2496,
+      "hungryAwakeTicks": 47347,
+      "awakeTicks": 87263,
+      "alive": 47,
+      "dead": 0
+    },
+    {
+      "day": 29,
+      "hash": "160dfa3a",
+      "regrown": {
+        "berries": 46,
+        "fruit": 14,
+        "fish": 17,
+        "grain": 27
+      },
+      "gather": {
+        "berries": 49,
+        "fruit": 13,
+        "fish": 24,
+        "grain": 40
+      },
+      "atSource": {
+        "berries": 1,
+        "fruit": 4,
+        "fish": 4,
+        "grain": 1
+      },
+      "eaten": {
+        "berries": 69,
+        "fish": 18,
+        "grain": 35,
+        "fruit": 22
+      },
+      "fieldGrain": 17,
+      "winter": 0,
+      "lean": 2400,
+      "overlap": 0,
+      "intake": 2454,
+      "hungryAwakeTicks": 54171,
+      "awakeTicks": 87116,
+      "alive": 48,
+      "dead": 0
+    },
+    {
+      "day": 30,
+      "hash": "d3d7d5e2",
+      "regrown": {
+        "berries": 141,
+        "fruit": 55,
+        "fish": 70,
+        "grain": 89
+      },
+      "gather": {
+        "berries": 55,
+        "fruit": 23,
+        "fish": 38,
+        "grain": 46
+      },
+      "atSource": {
+        "berries": 7,
+        "fish": 4,
+        "grain": 4
+      },
+      "eaten": {
+        "berries": 53,
+        "fish": 30,
+        "fruit": 24,
+        "meat": 6,
+        "grain": 33
+      },
+      "fieldGrain": 6,
+      "winter": 0,
+      "lean": 1490,
+      "overlap": 0,
+      "intake": 2742,
+      "hungryAwakeTicks": 55965,
+      "awakeTicks": 87668,
+      "alive": 48,
+      "dead": 0
+    },
+    {
+      "day": 31,
+      "hash": "78536f79",
+      "regrown": {
+        "berries": 85,
+        "fruit": 34,
+        "fish": 34,
+        "grain": 105
+      },
+      "gather": {
+        "berries": 69,
+        "fruit": 23,
+        "fish": 15,
+        "grain": 76
+      },
+      "atSource": {
+        "fruit": 4,
+        "grain": 3,
+        "fish": 2,
+        "berries": 4
+      },
+      "eaten": {
+        "berries": 68,
+        "grain": 27,
+        "fruit": 24,
+        "fish": 27,
+        "meat": 3
+      },
+      "fieldGrain": 12,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2628,
+      "hungryAwakeTicks": 48320,
+      "awakeTicks": 90304,
+      "alive": 48,
+      "dead": 0
+    },
+    {
+      "day": 32,
+      "hash": "4e85f81d",
+      "regrown": {
+        "berries": 61,
+        "fruit": 28,
+        "fish": 46,
+        "grain": 89
+      },
+      "gather": {
+        "berries": 57,
+        "fruit": 27,
+        "fish": 46,
+        "grain": 86
+      },
+      "atSource": {
+        "fruit": 3,
+        "berries": 5,
+        "grain": 2
+      },
+      "eaten": {
+        "grain": 36,
+        "berries": 61,
+        "fish": 24,
+        "fruit": 30
+      },
+      "fieldGrain": 73,
+      "winter": 0,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2676,
+      "hungryAwakeTicks": 48498,
+      "awakeTicks": 89712,
+      "alive": 49,
+      "dead": 0
+    },
+    {
+      "day": 33,
+      "hash": "7a25be6c",
+      "regrown": {
+        "berries": 72,
+        "fruit": 20,
+        "fish": 35,
+        "grain": 31
+      },
+      "gather": {
+        "berries": 63,
+        "fruit": 25,
+        "fish": 36,
+        "grain": 30
+      },
+      "atSource": {
+        "berries": 5
+      },
+      "eaten": {
+        "berries": 37,
+        "meat": 5,
+        "fish": 30,
+        "fruit": 19,
+        "grain": 58
+      },
+      "fieldGrain": 210,
+      "winter": 2399,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2994,
+      "hungryAwakeTicks": 36885,
+      "awakeTicks": 91709,
+      "alive": 49,
+      "dead": 0
+    },
+    {
+      "day": 34,
+      "hash": "95cd6a84",
+      "regrown": {
+        "berries": 36,
+        "fruit": 17,
+        "fish": 8,
+        "grain": 6
+      },
+      "gather": {
+        "berries": 35,
+        "fruit": 19,
+        "fish": 12,
+        "grain": 9
+      },
+      "atSource": {},
+      "eaten": {
+        "berries": 17,
+        "grain": 56,
+        "fish": 19,
+        "fruit": 16,
+        "meat": 2
+      },
+      "fieldGrain": 117,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2276,
+      "hungryAwakeTicks": 39855,
+      "awakeTicks": 95923,
+      "alive": 52,
+      "dead": 0
+    },
+    {
+      "day": 35,
+      "hash": "f563e035",
+      "regrown": {
+        "berries": 70,
+        "fruit": 15,
+        "fish": 20,
+        "grain": 22
+      },
+      "gather": {
+        "berries": 81,
+        "fruit": 15,
+        "fish": 18,
+        "grain": 26
+      },
+      "atSource": {},
+      "eaten": {
+        "fish": 23,
+        "berries": 63,
+        "grain": 50,
+        "pork": 3,
+        "fruit": 15
+      },
+      "fieldGrain": 21,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2818,
+      "hungryAwakeTicks": 50501,
+      "awakeTicks": 104860,
+      "alive": 52,
+      "dead": 0
+    },
+    {
+      "day": 36,
+      "hash": "d0375069",
+      "regrown": {
+        "berries": 85,
+        "fruit": 35,
+        "fish": 18,
+        "grain": 13
+      },
+      "gather": {
+        "berries": 79,
+        "fruit": 25,
+        "fish": 16,
+        "grain": 7
+      },
+      "atSource": {
+        "berries": 10,
+        "fish": 2,
+        "fruit": 3
+      },
+      "eaten": {
+        "grain": 47,
+        "berries": 83,
+        "fruit": 27,
+        "fish": 17
+      },
+      "fieldGrain": 3,
+      "winter": 2400,
+      "lean": 0,
+      "overlap": 0,
+      "intake": 2938,
+      "hungryAwakeTicks": 44671,
+      "awakeTicks": 100627,
+      "alive": 52,
+      "dead": 0
+    }
+  ]
+}
