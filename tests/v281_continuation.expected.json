@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "5048b8679bb6e157e01eb7aaa256b38c9a76b86b",
+    "rules": 281,
+    "content": "83cd417e660eed3d49a715ca16d25b5f9c4d7849d0891704e45a676fc6a1fc31",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 281, saved and continued 120 ticks. One pin for rules 281 alone, the hall repair (src/sim/hall_repair.ts: news passes among those at a hall, a shared meal spot that cannot be stood on becomes the nearest walkable tile, and an evening may be spent at a sound hall near home). It is the same world, tick and continuation length as the rules 278 to 280 pins, written with a copy of their helper (tests/helpers/v281ref.ts), so the pins can be compared digest by digest. Rules 281 adds no saved field, no draw and no feed line; the counts beside the digests are the same kind as the 280 pin's and are of the saved world."
+  },
+  "saved": "73437c5dfdd82daab9c13fbd08f46bb047d309e700a2d900bf07f1af578c27ca",
+  "continued": "4e4d928e120b71d8440df824467523ab54d2957fddd0e73cd5b5271c1dbda169",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 42,
+  "animals": {
+    "chicken": 6,
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 8,
+  "housedAnimals": 7,
+  "farmBuildings": {
+    "barn": 8,
+    "chicken_cage": 1,
+    "paddock": 9
+  },
+  "farmGoods": {
+    "hay": 89,
+    "stock_feed": 60,
+    "wool": 7
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 123
+}
