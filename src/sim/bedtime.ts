@@ -24,6 +24,7 @@
 import { addBlocked } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { ageYears } from './people';
+import { CHAT_URGENT, hasReviewRepair } from './review_repairs';
 import { runsRulesVersion } from './rulesversion';
 import type { Activity, Person, World } from './types';
 
@@ -72,8 +73,11 @@ export function bedtimeFilter(ctx: Ctx, opts: Option[]): Option[] {
     if (kept.length < opts.length) for (const o of opts) if (!kept.includes(o)) addBlocked(ctx, o.kind, o.label, o.targetId, 'past bedtime', o.tag);
     return kept;
   }
+  const chats = hasReviewRepair(world, 'chat');
   return opts.filter((o) => {
-    if (!WITH_A_CHILD.has(o.kind)) return true;
+    // rules 282 (review_repairs.ts, part chat): a talk is offered as 'socialize' and only becomes a converse when it opens
+    const asChat = chats && o.kind === 'socialize' && !CHAT_URGENT.some((u) => o.key.startsWith(`socialize:${o.targetId}:${u}`));
+    if (!WITH_A_CHILD.has(o.kind) && !asChat) return true;
     const t = world.byId.get(o.targetId);
     if (!t || t.ent !== 'person' || !(t as Person).alive || !little(world, t as Person)) return true;
     addBlocked(ctx, o.kind, o.label, o.targetId, 'a little one should be in bed', o.tag);

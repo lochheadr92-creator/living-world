@@ -6,6 +6,7 @@ import {carryCap} from './people';
 import { addEvent, addLog } from './events';
 import { bestOf, holderItems, toolsHeldBy } from './toolreg';
 import { newId } from './registry';
+import { hasReviewRepair } from './review_repairs';
 import type { Items, Person, Tool, ToolKind, World } from './types';
 
 export { toolById, toolsHeldBy, bestOf } from './toolreg';
@@ -251,6 +252,9 @@ export function toolsOnDeath(world: World, dead: Person): void {
       const borrower = world.byId.get(t.loan.borrower);
       if (heir) {
         t.loan.lender = heir.id;
+        // rules 282 (review_repairs.ts, part loan): the borrower's promise to return it is made over to the heir with the loan
+        if (hasReviewRepair(world, 'loan') && borrower && borrower.ent === 'person')
+          for (const c of borrower.commitments) if (c.kind === 'return_tool' && c.toolId === t.id && c.to === dead.id) { c.to = heir.id; if (c.destId === dead.id) c.destId = heir.id; }
       } else {
         t.loan = null;
         if (borrower && borrower.ent === 'person') t.ownerHh = borrower.hhId;

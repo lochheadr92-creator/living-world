@@ -14,6 +14,9 @@ let Closed = new Uint32Array(0);
 let gen = 0;
 /** tiles expanded by the most recent search; read only by the work counters */
 let lastExpanded = 0;
+/** whether the most recent search stopped because it ran out of its tile budget (not because no route exists); read by wildlife.ts (rules 282) */
+let lastOutOfBudget = false;
+export const lastSearchOutOfBudget = (): boolean => lastOutOfBudget;
 const heap = new MinHeap();
 
 function ensure(n: number): void {
@@ -183,6 +186,7 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
     }
   }
   lastExpanded = expanded;
+  lastOutOfBudget = goalI < 0 && outOfBudget;
   if (probe.on) {
     probe.pathExpanded += expanded;
     if (goalI < 0) {

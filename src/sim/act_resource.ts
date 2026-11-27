@@ -585,7 +585,7 @@ registerHandler('fetch_water', {
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     if(body)observeShore(world,p);
-    if(body&&roomFor(p.inv,carryCap(world,p),'water')<1)return a.cycle>0?'partial:cannot carry more':'fail:cannot carry more';
+    if(body&&roomFor(p.inv,carryCap(world,p),'water',world)<1)return a.cycle>0?'partial:cannot carry more':'fail:cannot carry more';
     const got = body ? drawWater(world,body,1) : produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
     if(body&&!got)return a.cycle>0?'partial:the water source is dry':'fail:the water source is dry';
     if(body&&got){addItem(p.inv,'water',got);world.hooks?.onTransfer?.({from:'water:'+body.id,to:'person:'+p.id,item:'water',n:got,reason:'natural water drawn'});observeShore(world,p);}

@@ -52,6 +52,8 @@ import { BEDTIME_PARTS, bedtimePartOn, setBedtime } from '../../src/sim/bedtime'
 import type { BedtimePart } from '../../src/sim/bedtime';
 import { HALL_PARTS, hallPartOn, setHall } from '../../src/sim/hall_repair';
 import type { HallPart } from '../../src/sim/hall_repair';
+import { REVIEW_PARTS, reviewPartOn, setReviewRepairs } from '../../src/sim/review_repairs';
+import type { ReviewPart } from '../../src/sim/review_repairs';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -389,6 +391,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-hall' ? undefined : (kind.slice('rich-no-hall-'.length) as HallPart);
     const what: Record<HallPart, string> = { news: 'no news passes among those at a hall (the old phase that was never reached)', table: 'a shared meal spot that cannot be stood on is kept, so the walk to it fails', evening: 'nobody spends the evening at the hall' };
     return { spec: label, summary: `${part ? what[part] : 'no hall repair: no news at the hall, meal spots as they fell, no evening at the hall'}, as before rules 281; no effect below rules 281`, install() { const was = Object.fromEntries(HALL_PARTS.map((q) => [q, hallPartOn(q)])) as Record<HallPart, boolean>; setHall(false, part); return () => { for (const q of HALL_PARTS) setHall(was[q], q); }; } };
+  }
+  // rules 282 (review_repairs.ts): all five parts removed (equal to rules 281), and each part alone. Nothing else is called `rich-no-review-repairs`.
+  if (kind === 'rich-no-review-repairs' || (kind.startsWith('rich-no-review-repairs-') && (REVIEW_PARTS as readonly string[]).includes(kind.slice('rich-no-review-repairs-'.length)))) {
+    const part = kind === 'rich-no-review-repairs' ? undefined : (kind.slice('rich-no-review-repairs-'.length) as ReviewPart);
+    const what: Record<ReviewPart, string> = { chat: 'a chat may be started with a little one after dark', route: 'a walk keeps its old route through a newly solid tile', jar: 'the room for water ignores a jar\'s free allowance', loan: 'a return promise keeps naming the dead lender', wolf: 'a wolf search that ran out of budget is remembered as unreachable' };
+    return { spec: label, summary: `${part ? what[part] : 'none of the five review repairs'}, as before rules 282; no effect below rules 282`, install() { const was = Object.fromEntries(REVIEW_PARTS.map((q) => [q, reviewPartOn(q)])) as Record<ReviewPart, boolean>; setReviewRepairs(false, part); return () => { for (const q of REVIEW_PARTS) setReviewRepairs(was[q], q); }; } };
   }
   // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
   if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };

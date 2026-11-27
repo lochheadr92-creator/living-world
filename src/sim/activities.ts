@@ -25,6 +25,7 @@ import { recordPay } from './learning';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
+import { ROUTE_REPLANS, hasReviewRepair } from './review_repairs';
 import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World } from './types';
 import { clamp, hyp, turnToward } from './util';
 import {recordRoutine} from './daily_routines';
@@ -238,6 +239,14 @@ function planPath(world: World, p: Person, a: Activity): boolean {
   return true;
 }
 
+/** rules 282 (review_repairs.ts, part route): the next step goes from a tile one can stand on into one that is solid now and is not the walk's end */
+function enteringSolid(world: World, p: Person, a: Activity, nx: number, ny: number): boolean {
+  const fx = Math.floor(p.x), fy = Math.floor(p.y), tx = Math.floor(nx), ty = Math.floor(ny);
+  if (tx === fx && ty === fy) return false;
+  if (tx === Math.floor(a.spotX) && ty === Math.floor(a.spotY)) return false;
+  return isWalkable(world, fx, fy) && !isWalkable(world, tx, ty);
+}
+
 function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   if(hasFloodAccess(world)){
     if(a.data.floodRetreat&&a.pi>=a.path.length){delete a.data.floodRetreat;a.path=[];a.pi=0;a.pathTries=0;a.blocked='';}
@@ -296,6 +305,12 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
     const dy = wy - p.y;
     const d = hyp(dx, dy);
     const step=Math.min(d,remaining),nx=d>1e-6?p.x+dx/d*step:p.x,ny=d>1e-6?p.y+dy/d*step:p.y;
+    // rules 282 (review_repairs.ts, part route): a site laid across the route since it was planned is not walked through
+    if (hasReviewRepair(world, 'route') && (a.data.solidReplans ?? 0) < ROUTE_REPLANS && enteringSolid(world, p, a, nx, ny)) {
+      a.data.solidReplans = (a.data.solidReplans ?? 0) + 1;
+      if (!planPath(world, p, a)) { a.blocked = 'path blocked'; return 'blocked'; }
+      return 'moving';
+    }
     if(hasFloodAccess(world)&&(!a.data.floodRetreat||!floodMovementBlocked(world,p,p.x,p.y))&&floodMovementBlocked(world,p,nx,ny)){
       observeFlood(world,p);
       if(a.data.floodObservedAt===undefined){a.data.floodObservedAt=world.tick;addLog(world,p,'work',`Saw flood-affected ground ahead during “${a.label}”; looking for a safe route.`);}

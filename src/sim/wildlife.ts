@@ -7,7 +7,8 @@ import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
 import { isWalkable, newId, personById, registerGeneric, solidEpoch } from './registry';
-import { findPath } from './pathfinding';
+import { findPath, lastSearchOutOfBudget } from './pathfinding';
+import { hasReviewRepair } from './review_repairs';
 import { stageOf } from './people';
 import type { Animal, Person, World } from './types';
 import { T } from './types';
@@ -118,6 +119,8 @@ function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | n
   const path = localAnimalPath(world, a.x, a.y, tx, ty);
   if (!rememberFailures) return path;
   if (path) mine?.delete(a.id);
+  // rules 282 (review_repairs.ts, part wolf): a search that ran out of budget is not proof of no route (path costs change), so it is not remembered
+  else if (hasReviewRepair(world, 'wolf') && lastSearchOutOfBudget()) mine?.delete(a.id);
   else {
     if (!mine) failedSearches.set(world, (mine = new Map()));
     mine.set(a.id, { sx, sy, gx, gy, epoch });

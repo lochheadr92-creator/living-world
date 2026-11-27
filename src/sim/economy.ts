@@ -4,6 +4,7 @@ import { nutritionOf } from './bread_feeds';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
+import { hasReviewRepair } from './review_repairs';
 import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
 import type { FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, World } from './types';
 
@@ -61,13 +62,17 @@ export function cloneItems(items: Items): Items {
 }
 
 /** how many of `k` fit into `items` under weight cap */
-export function roomFor(items: Items, cap: number, k: ItemKind): number {
-  return Math.max(0, Math.floor((cap - weightOf(items) + 1e-9) / WEIGHT[k]));
+export function roomFor(items: Items, cap: number, k: ItemKind, world?: World): number {
+  const room = Math.max(0, Math.floor((cap - weightOf(items) + 1e-9) / WEIGHT[k]));
+  // rules 282 (review_repairs.ts, part jar): the water a jar holds without weight is room too, as weightOf counts it
+  if (k !== 'water' || !world || !hasReviewRepair(world, 'jar')) return room;
+  const free = Math.max(0, JAR_WATER_UNITS * (items.jar ?? 0) - (items.water ?? 0));
+  return room + free;
 }
 
 /** add up to n, bounded by weight capacity. returns amount actually added. */
-export function addCapped(items: Items, cap: number, k: ItemKind, n: number): number {
-  const m = Math.min(n, roomFor(items, cap, k));
+export function addCapped(items: Items, cap: number, k: ItemKind, n: number, world?: World): number {
+  const m = Math.min(n, roomFor(items, cap, k, world));
   if (m > 0) items[k] = (items[k] ?? 0) + m;
   return m;
 }
@@ -90,7 +95,7 @@ export function addItem(items: Items, k: ItemKind, n: number): void {
 
 // ───────── person inventories ─────────
 export function invRoom(world: World, p: Person, k: ItemKind): number {
-  return roomFor(p.inv, carryCap(world, p), k);
+  return roomFor(p.inv, carryCap(world, p), k, world);
 }
 
 export function invWeight(p: Person): number {
@@ -131,7 +136,7 @@ export function consume(world: World, items: Items, k: ItemKind, n: number, reas
 
 /** Create items inside a container (world process like fishing renewal or crop growth), bounded by capacity. */
 export function produce(world: World, items: Items, cap: number, k: ItemKind, n: number, reason: string): number {
-  const m = addCapped(items, cap, k, n);
+  const m = addCapped(items, cap, k, n, world);
   ledgerCreate(world, k, m, reason);
   return m;
 }
@@ -150,7 +155,7 @@ export function transfer(
   preferTool = 0,
 ): number {
   if (n <= 0) return 0;
-  const room = roomFor(to, toCap, k);
+  const room = roomFor(to, toCap, k, world);
   let m = Math.min(n, from[k] ?? 0, room);
   // a tool's count moves only with its record: one on a bench for someone else stays where its record stays
   if (preferTool && !isToolItem(k)) return 0;
