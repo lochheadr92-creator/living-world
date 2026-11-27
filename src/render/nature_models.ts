@@ -1,5 +1,6 @@
 import { hashUnit } from '../sim/rng';
-import { EARTH, GRAIN, LEAF, SceneryModel, meshSprite } from './scenery_mesh';
+import { EARTH, END_GRAIN, GRAIN, LEAF, ROCK } from './mesh_materials';
+import { SceneryModel, meshSprite } from './scenery_mesh';
 import type { Finish } from './scenery_mesh';
 import type { Sprite, SpriteCache } from './sprites';
 
@@ -7,8 +8,8 @@ type SourceProp = 'tree' | 'fruit_tree' | 'berry_bush' | 'rock' | 'stump' | 'cla
 const TAU = Math.PI * 2;
 const ORIGIN = [0, 0, 0] as const;
 const BARK: Finish = [0x876347,GRAIN];
-const CUT: Finish = [0xd7ad73,GRAIN];
-const LIMESTONE: Finish = [0xa6a399,EARTH];
+const CUT: Finish = [0xd7ad73,END_GRAIN];
+const LIMESTONE: Finish = [0xa6a399,ROCK];
 const FLOWERS: Finish = [0xbcc980,LEAF];
 
 function pine(m: SceneryModel, seed: number): void {
@@ -89,9 +90,9 @@ function minerals(kind: SourceProp, seed: number, stage: number): SceneryModel {
     return m;
   }
   const full = stage+1;
-  const stone: Finish = kind === 'ore_vein' ? [0x857d74,EARTH] : LIMESTONE;
+  const stone: Finish = kind === 'ore_vein' ? [0x857d74,ROCK] : LIMESTONE;
   m.stone([-.053,-.061,3+full*2.9],.24+full*.078,.22+full*.067,3+full*4,stone,seed);
-  m.stone([.25,.16,2+full],.19,.17,3+full*2,[0x929388,EARTH],seed+5);
+  m.stone([.25,.16,2+full],.19,.17,3+full*2,[0x929388,ROCK],seed+5);
   if (stage > 0) m.stone([-.28,.19,4],.19,.21,4,kind === 'outcrop' ? stone : [0x878c6a,LEAF],seed+19);
   if (kind === 'ore_vein') for (let i = 0; i < full*2; i++) {
     const p = hashUnit(seed, i, 63);

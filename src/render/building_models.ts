@@ -1,12 +1,14 @@
 import { BUILD_DEF } from '../sim/constants';
 import { hashUnit } from '../sim/rng';
 import type { Anchor, BuildKind, StructMeta } from './structures';
-import { EARTH, GRAIN, MASONRY, SceneryModel, THATCH, TILE, meshSprite } from './scenery_mesh';
+import { EARTH, END_GRAIN, GRAIN, MASONRY, THATCH, TILE } from './mesh_materials';
+import { SceneryModel, meshSprite } from './scenery_mesh';
 import type { Finish } from './scenery_mesh';
 import type { Sprite, SpriteCache } from './sprites';
 
 const OAK: Finish = [0x8b5736, GRAIN];
-const END: Finish = [0xc38f57, GRAIN];
+const LIGHT_WOOD: Finish = [0xc38f57, GRAIN];
+const END: Finish = [0xc38f57, END_GRAIN];
 const TRIM: Finish = [0x614231, GRAIN];
 const STONE: Finish = [0xa39e91, MASONRY];
 const BRICK: Finish = [0xb57255, MASONRY];
@@ -58,7 +60,7 @@ function leanTo(v: number): SceneryModel {
   for (const x of [.09, .91]) {
     m.beam([x, .10, 0], [x, .12, 40], .043, .025, OAK);
     m.beam([x, .91, 0], [x, .90, 16], .054, .033, OAK);
-    m.beam([x, .06, 40], [x, 1.0, 14], .033, .025, END);
+    m.beam([x, .06, 40], [x, 1.0, 14], .033, .025, LIGHT_WOOD, 7, END);
   }
   m.face([[.9,.1,3],[.9,.9,3],[.9,.9,16],[.9,.1,39]], cover);
   for (let i = 0; i < 7; i++) {
@@ -67,7 +69,7 @@ function leanTo(v: number): SceneryModel {
     m.face([[.015,y0,z0],[.985,y0,z0],[.985,y1,z1],[.015,y1,z1]], cover);
     m.face([[.985,y1,z1-1.7],[.015,y1,z1-1.7],[.015,y1,z1],[.985,y1,z1]], cover);
   }
-  m.beam([.035,.96,15],[.965,.96,15],.036,.036,END);
+  m.beam([.035,.96,15],[.965,.96,15],.036,.036,LIGHT_WOOD);
   for (const x of [.09, .91]) for (const y of [.12,.9]) {
     const z = y < .2 ? 39 : 15;
     m.beam([x,y,z-3],[x,y,z],.058,.054,[0xc4a577,THATCH]);
@@ -108,8 +110,8 @@ function enclosed(kind: BuildKind, w: number, d: number, meta: StructMeta, v: nu
       const board = half * 2 / 7;
       m.box(door-half+j*board+.013,y1-inset,deck+.3,board-.018,.024,doorTop-deck-.8,barn ? OAK : TRIM);
     }
-    m.box(door-half+.035,y1-inset+.024,deck+4,half*2-.07,.035,2.1,END);
-    m.box(door-half+.035,y1-inset+.024,doorTop-5,half*2-.07,.035,2.1,END);
+    m.box(door-half+.035,y1-inset+.024,deck+4,half*2-.07,.035,2.1,LIGHT_WOOD);
+    m.box(door-half+.035,y1-inset+.024,doorTop-5,half*2-.07,.035,2.1,LIGHT_WOOD);
     m.beam([door-half+.04,y1-inset+.05,deck+5],[door+half-.04,y1-inset+.05,doorTop-4],.034,.034,OAK,5);
     m.box(door+half-.105,y1-inset+.054,deck+9,.055,.035,1.7,[0xdbab64,EARTH]);
   }
@@ -119,9 +121,9 @@ function enclosed(kind: BuildKind, w: number, d: number, meta: StructMeta, v: nu
     const z = deck + (top-deck)*.37;
     m.box(x-.22,y1-.012,z,.44,.048,11,TRIM);
     m.box(x-.18,y1+.039,z+1,.36,.015,9,WINDOW);
-    m.box(x-.018,y1+.056,z+1,.036,.016,9,END);
-    m.box(x-.18,y1+.056,z+5,.36,.016,1.2,END);
-    m.box(x-.25,y1-.01,z-.8,.5,.11,1.5,END);
+    m.box(x-.018,y1+.056,z+1,.036,.016,9,LIGHT_WOOD);
+    m.box(x-.18,y1+.056,z+5,.36,.016,1.2,LIGHT_WOOD);
+    m.box(x-.25,y1-.01,z-.8,.5,.11,1.5,LIGHT_WOOD);
   }
   const gable = (x: number) => m.face([[x,y0,top],[x,y1,top],[x,d/2,peak-.75]], wall);
   gable(x0);
@@ -158,7 +160,7 @@ function facilities(kind: BuildKind, w: number, d: number, meta: StructMeta, v: 
     m.box(.65,.65,1,.7,.7,1,SHADE);
     m.box(.46,.61,8,.085,.085,28,OAK);
     m.box(1.43,1.32,8,.085,.085,28,OAK);
-    m.beam([.5,.65,35],[1.48,1.36,35],.054,.054,END);
+    m.beam([.5,.65,35],[1.48,1.36,35],.054,.054,LIGHT_WOOD);
     m.beam([1.03,1.01,34],[1.03,1.01,19],.014,.014,[0xd1b98d,THATCH]);
     return m;
   }
@@ -167,8 +169,8 @@ function facilities(kind: BuildKind, w: number, d: number, meta: StructMeta, v: 
     const a = .12, b = w-.12, c = d-.12, high = pen ? 11 : 27;
     for (const [x,y] of [[a,a],[b,a],[a,c],[b,c]]) m.box(x-.045,y-.045,0,.09,.09,high+2,OAK);
     for (const z of pen ? [4,8] : [high-1]) {
-      for (const y of [a, c]) m.beam([a,y,z],[b,y,z],.034,.034,END,5);
-      for (const x of [a, b]) m.beam([x,a,z],[x,c,z],.034,.034,END,5);
+      for (const y of [a, c]) m.beam([a,y,z],[b,y,z],.034,.034,LIGHT_WOOD,5);
+      for (const x of [a, b]) m.beam([x,a,z],[x,c,z],.034,.034,LIGHT_WOOD,5);
     }
     if (kind === 'paddock') {
       for (const p of [.33,.67]) for (const [x,y] of [[w*p,a],[w*p,c],[a,d*p],[b,d*p]]) {
@@ -179,7 +181,7 @@ function facilities(kind: BuildKind, w: number, d: number, meta: StructMeta, v: 
     } else if (kind === 'chicken_cage') {
       m.box(.15,.13,0,.67,.32,11,OAK);
       m.face([[.06,.04,20],[.93,.04,20],[.93,.56,11],[.06,.56,11]],[0xb28c58,THATCH]);
-      for (let i = 1; i < 8; i++) m.beam([i/9,c,0],[i/9,c,10],.011,.011,END,4);
+      for (let i = 1; i < 8; i++) m.beam([i/9,c,0],[i/9,c,10],.011,.011,LIGHT_WOOD,4);
     } else {
       m.box(.29,1.36,0,1.28,.39,5,STONE);
       m.box(.25,1.31,21,1.37,.5,3,[0xad8158,THATCH]);
@@ -225,9 +227,9 @@ function facilities(kind: BuildKind, w: number, d: number, meta: StructMeta, v: 
     for (const x of [.15,1.83]) m.box(x-.05,.19,0,.10,.10,38,TRIM);
     m.box(.10,.09,36,1.78,.33,5,[0xb18c57,TILE]);
     m.beam([1,1.02,3],[1,1.02,17],.59,.55,STONE,14);
-    m.beam([1,1.02,17],[1,1.02,20],.14,.13,END,9);
+    m.beam([1,1.02,17],[1,1.02,20],.14,.13,LIGHT_WOOD,9);
     m.beam([1,1.02,22],[1.65,1.02,22],.052,.052,TRIM,7);
-    m.beam([1.65,1.02,22],[1.65,1.02,34],.045,.04,END,7);
+    m.beam([1.65,1.02,22],[1.65,1.02,34],.045,.04,LIGHT_WOOD,7);
     return m;
   }
   // Cellar bulkhead, built into a low earth bank.

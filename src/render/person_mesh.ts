@@ -1,5 +1,7 @@
 // An orthographic WebGL sprite atlas. The canvas scene still owns world ordering, shadows
 // and overlays. One atlas pass depth-tests all the textured, articulated character meshes.
+import { CLOTH, HAIR, LEATHER, SKIN, TRIM, uploadPersonMaterials } from './mesh_materials';
+
 type Vec = readonly [number, number, number];
 type Profile = readonly (readonly [height: number, radius: number])[];
 type Material = readonly [color: string, texture: number];
@@ -37,12 +39,6 @@ const EXTENT = 64;
 const HEADROOM = 44;
 const STRIDE = 17;
 const Z_UP: Vec = [0, 1, 0];
-const CLOTH = 0;
-const TRIM = 1;
-const LEATHER = 2;
-const SKIN = 3;
-const HAIR = 4;
-const MATERIAL_COUNT = 5;
 
 const oval: Profile = [[-1, 0], [-.86, .52], [-.55, .84], [-.05, 1], [.47, .89], [.81, .57], [1, 0]];
 const face: Profile = [[-1, 0], [-.92, .44], [-.71, .68], [-.39, .88], [.08, 1], [.51, .97], [.8, .73], [1, 0]];
@@ -130,7 +126,7 @@ void main() {
 
 const fragmentSource = `#version 300 es
 precision mediump float;
-uniform sampler2D swatches;
+uniform highp sampler2DArray swatches;
 in vec2 coord;
 in vec2 tilePosition;
 in float light;
@@ -139,30 +135,9 @@ out vec4 result;
 void main() {
   // An extreme pose must not draw into a neighboring person's tile.
   if (any(lessThan(tilePosition, vec2(0.0))) || any(greaterThanEqual(tilePosition, vec2(1.0)))) discard;
-  float grain = texture(swatches, vec2(coord.x, (paint.a * 32.0 + 0.5 + coord.y * 31.0) / 160.0)).r;
+  float grain = texture(swatches, vec3(coord, paint.a)).r;
   result = vec4(paint.rgb * (0.38 + grain * 0.84) * light, 1.0);
 }`;
-
-/** Small painted material atlas, shared by every villager. */
-function materialPixels(): Uint8Array<ArrayBuffer> {
-  const out = new Uint8Array(32 * 32 * MATERIAL_COUNT);
-  for (let m = 0; m < MATERIAL_COUNT; m++) {
-    for (let y = 0; y < 32; y++) {
-      for (let x = 0; x < 32; x++) {
-        const speck = ((x * 157 + y * 113) ^ (x * y * 47)) % 19 - 9;
-        const folds = 11 * Math.cos(x * Math.PI / 4) + 6 * Math.sin((x + y * .43) * Math.PI / 4);
-        let value = 188 + speck;
-        if (m === CLOTH) value += folds + (x % 2 === y % 2 ? 7 : -7);
-        if (m === TRIM) value += y < 4 || y >= 28 ? -48 : (x + (y > 15 ? y : -y) + 32) % 8 < 4 ? 36 : -23;
-        if (m === LEATHER) value += speck * 2 + (y === 5 || y === 26 ? (x % 4 < 2 ? 33 : -22) : 0);
-        if (m === SKIN) value = 185 + speck * .3 + 9 * Math.sin(y * Math.PI / 32);
-        if (m === HAIR) value += folds * 1.5 + (x % 4 === 0 ? -25 : 8);
-        out[(m * 32 + y) * 32 + x] = Math.min(255, Math.max(0, value));
-      }
-    }
-  }
-  return out;
-}
 
 function program(gl: WebGL2RenderingContext): WebGLProgram {
   const result = gl.createProgram()!;
@@ -235,11 +210,7 @@ export class PersonMeshAtlas {
       return { vao, instances, count: data.indices.length, used: 0, data: new Float32Array(STRIDE * 128) };
     });
     gl.bindVertexArray(null);
-    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, 32, 32 * MATERIAL_COUNT, 0, gl.RED, gl.UNSIGNED_BYTE, materialPixels());
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    uploadPersonMaterials(gl);
   }
 
   begin(close: boolean): void {
