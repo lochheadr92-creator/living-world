@@ -160,6 +160,8 @@ export const SPECS = [
   { id: 'butcher', group: 'D', was: 'craft', label: 'Butchering a carcass', people: [one({ pose: 'craft', kind: 'butcher', data: { part: 'meat' } })] },
   { id: 'feed_animal', group: 'D', was: 'craft', label: 'Feeding livestock', people: [one({ pose: 'craft', kind: 'animal_work', data: { op: 'feed' } })], animals: [{ type: 'sheep', dx: 1.0, dy: 0.2, heading: 3.3 }] },
   { id: 'shear', group: 'D', was: 'craft', label: 'Shearing', people: [one({ pose: 'craft', kind: 'animal_work', data: { op: 'shear' } })], animals: [{ type: 'sheep', dx: 0.85, dy: 0.17, heading: 1.8 }] },
+  { id: 'milk', group: 'D', was: 'craft', label: 'Milking', people: [one({ pose: 'craft', kind: 'animal_work', data: { op: 'milk' } })], animals: [{ type: 'sheep', dx: 0.85, dy: 0.17, heading: 1.8 }] },
+  { id: 'eggs', group: 'D', was: 'craft', label: 'Collecting eggs', frames: [20, 60, 100], people: [one({ pose: 'craft', kind: 'animal_work', data: { op: 'egg' } })] },
   { id: 'tether', group: 'D', was: 'craft', label: 'Tethering a sheep', people: [one({ pose: 'craft', kind: 'animal_work', data: { op: 'acquire' } })], animals: [{ type: 'sheep', dx: 1.0, dy: 0.2, heading: 3.3 }] },
   { id: 'setgear', group: 'D', was: 'craft', label: 'Setting a net or trap', people: [one({ pose: 'craft', kind: 'gear_work', data: { op: 'place' } })] },
   { id: 'haul_net', group: 'D', was: 'craft', label: 'Hauling in a net', people: [one({ pose: 'craft', kind: 'gear_work', data: { op: 'retrieve' } })] },

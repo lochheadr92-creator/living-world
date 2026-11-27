@@ -1,15 +1,15 @@
 {
-  "generated": "2026-11-26T14:42:31.727Z",
+  "generated": "2026-11-27T04:12:17.787Z",
   "url": "http://127.0.0.1:5311/",
   "worktree": "C:\\dev\\lw-animations-20261127",
-  "head": "964d8291",
+  "head": "49afc8f5",
   "note": "staged figures, not an ordinary world",
   "defaultZoom": 1,
   "zooms": {
     "1x": 1,
     "2x": 2
   },
-  "charactersSha256": "5a1246bf42013efa366e0860e0b191245bd594b87867e8704073763b58efe313",
+  "charactersSha256": "6e0587407862277829fa712825d9b3add8181847664b84da2852508c6ef1cfcc",
   "specs": [
     {
       "id": "stand",
@@ -2005,6 +2005,64 @@
       "notes": []
     },
     {
+      "id": "milk",
+      "label": "Milking",
+      "group": "D",
+      "was": "craft",
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "milk"
+        ],
+        [
+          "milk"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "eggs",
+      "label": "Collecting eggs",
+      "group": "D",
+      "was": "craft",
+      "frames": [
+        20,
+        60,
+        100
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "takeout"
+        ],
+        [
+          "takeout"
+        ],
+        [
+          "takeout"
+        ]
+      ],
+      "notes": []
+    },
+    {
       "id": "tether",
       "label": "Tethering a sheep",
       "group": "D",
@@ -3377,6 +3435,16 @@
     },
     {
       "a": "craft",
+      "b": "milk",
+      "ok": true
+    },
+    {
+      "a": "craft",
+      "b": "eggs",
+      "ok": true
+    },
+    {
+      "a": "craft",
       "b": "tether",
       "ok": true
     },
@@ -3579,37 +3647,17 @@
   "failures": [],
   "files": [
     "sheet_A_1x.png",
-    "sheet_A_1x_part1.png",
-    "sheet_A_1x_part2.png",
-    "sheet_A_1x_part3.png",
     "sheet_A_2x.png",
-    "sheet_A_2x_part1.png",
-    "sheet_A_2x_part2.png",
-    "sheet_A_2x_part3.png",
     "sheet_B_1x.png",
-    "sheet_B_1x_part1.png",
-    "sheet_B_1x_part2.png",
     "sheet_B_2x.png",
-    "sheet_B_2x_part1.png",
-    "sheet_B_2x_part2.png",
     "sheet_C_1x.png",
     "sheet_C_2x.png",
     "sheet_D_1x.png",
-    "sheet_D_1x_part1.png",
-    "sheet_D_1x_part2.png",
     "sheet_D_2x.png",
-    "sheet_D_2x_part1.png",
-    "sheet_D_2x_part2.png",
     "sheet_E_1x.png",
     "sheet_E_2x.png",
     "sheet_F_1x.png",
     "sheet_F_2x.png",
-    "pairs_1x.png",
-    "pairs_1x_part1.png",
-    "pairs_1x_part2.png",
-    "pairs_1x_part3.png",
-    "pairs_1x_part4.png",
-    "pairs_1x_part5.png",
-    "pairs_1x_part6.png"
+    "pairs_1x.png"
   ]
 }

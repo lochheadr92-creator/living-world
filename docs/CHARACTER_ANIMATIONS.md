@@ -62,7 +62,7 @@ drawn alike, and the list at the end says which.
 | craft | Making a tool by hand | `craft` | `whittle`: seated, the piece in the lap, short strokes |
 | craft | Mending a tool, a cart, cloth work | `tool_work` (`cartId`, `textile`) | `mend_tool`, `mend_cart`, `weave` |
 | craft | Butchering | `butcher`; `animal_work` op `slaughter` | `butcher`: on both knees, one hand holding, one cutting |
-| craft | Tending livestock | `animal_work` by `data.op` | `feed_animal` (feed, water), `shear`, `tether` (the rest) |
+| craft | Tending livestock | `animal_work` by `data.op` | `feed_animal` (feed, water, hay), `shear`, `milk` (on a knee, both hands pulling down in turn), `takeout` for eggs (down and in, up to the chest), `workbench` for mixing feed, `mend_cart` for mending a pen, `tether` (bringing in, housing, mating) |
 | craft | Setting a net or trap | `gear_work` by `data.op` | `setgear` (place, reset, repair), `haul_net` (check, retrieve) |
 | craft | Hanging a wolf skin | `hang_skin` | `hangskin`: stretched up, both hands high, the skin between them |
 | craft | Workshop with no motion of its own | `operate`, pose `craft` | `workbench`: both hands working at bench height, no hammer |

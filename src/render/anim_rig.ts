@@ -562,6 +562,15 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
       H(0.3, 0.07, Z(8), 0.18 + 0.14 * tri, -0.04, Z(8.6 + Math.sin(k * 3 * TAU) * 0.9));
       break;
     }
+    case 'milk': {
+      // down on a knee beside the animal, both hands low and forward, pulling down in turn
+      kneel(false, 4.6, 0.16);
+      const k = pr(10) * TAU;
+      r[R.HEAD_U] = 0.05;
+      r[R.HEAD_Z] = -0.6;
+      H(0.3, 0.06, Z(6.2 + 1.3 * Math.sin(k)), 0.3, -0.06, Z(6.2 - 1.3 * Math.sin(k)));
+      break;
+    }
     case 'tether': {
       // down on a knee tying at the ground
       kneel(false, 4.6, 0.17);
