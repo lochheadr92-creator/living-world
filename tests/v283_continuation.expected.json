@@ -1,0 +1,36 @@
+{
+  "source": {
+    "head": "0ace0c33e8a740e61dac8ada1f210eb2d28e89b4",
+    "rules": 283,
+    "content": "b6c9042380da86a34ad7357799f23e005224554c00080ce4bfc731fb3bc1239d",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 283, saved and continued 120 ticks. One pin for rules 283 alone, a night's sleep (src/sim/night_sleep.ts: nobody gets up rested in the dark; a grown bedtime of 0.88 of the day). The same world, tick and continuation length as the rules 278 to 282 pins, written with a copy of their helper (tests/helpers/v283ref.ts). Rules 283 adds no saved field, no draw and no feed line; the counts are of the saved world."
+  },
+  "saved": "a1dcb64c3488ef872767e828f8f66f69fede46c0503a9e922b43835b846fe279",
+  "continued": "c4939a40a3a5a8e8cbf467d48cabcf53e74e6520ac06e992fe075b69f8908eca",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 41,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 2,
+    "sheep": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 5,
+  "housedAnimals": 2,
+  "farmBuildings": {
+    "barn": 11,
+    "chicken_cage": 1,
+    "paddock": 11
+  },
+  "farmGoods": {
+    "hay": 106,
+    "stock_feed": 88,
+    "wool": 9
+  },
+  "occupations": 31,
+  "workshopErrands": 0,
+  "beliefsWithSeenBuilders": 146
+}
