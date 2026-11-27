@@ -1,4 +1,5 @@
 import {runsRulesVersion} from './rulesversion';
+import { quietCompanyStep } from './quiet_company';
 import { runsSeenBuilders } from './bench_access';
 import { perishableOf } from './bread_feeds';
 import {hasBrewing} from './brewing';
@@ -128,6 +129,7 @@ export function stepWorld(world: World): void {
     stepPerson(world, p);
   }
 
+  quietCompanyStep(world); // rules 284 (quiet_company.ts, part quiet): being together at rest eases the want of company
   updateCarts(world);
   updateConversations(world);
   if (tick % 10 === 3) mealTick(world);

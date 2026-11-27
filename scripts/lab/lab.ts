@@ -56,6 +56,8 @@ import { REVIEW_PARTS, reviewPartOn, setReviewRepairs } from '../../src/sim/revi
 import type { ReviewPart } from '../../src/sim/review_repairs';
 import { NIGHT_SLEEP_PARTS, nightSleepPartOn, setNightSleep } from '../../src/sim/night_sleep';
 import type { NightSleepPart } from '../../src/sim/night_sleep';
+import { QUIET_COMPANY_PARTS, quietCompanyPartOn, setQuietCompany } from '../../src/sim/quiet_company';
+import type { QuietCompanyPart } from '../../src/sim/quiet_company';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -405,6 +407,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-night-sleep' ? undefined : (kind.slice('rich-no-night-sleep-'.length) as NightSleepPart);
     const what: Record<NightSleepPart, string> = { through: 'a sleeper gets up when rested, in the night', evening: 'a grown person\'s bedtime stays at 0.8 of the day and the wait for the light is offered all evening' };
     return { spec: label, summary: `${part ? what[part] : 'no night\'s sleep: people lie down at 0.8 of the day and get up rested in the night'}, as before rules 283; no effect below rules 283`, install() { const was = Object.fromEntries(NIGHT_SLEEP_PARTS.map((q) => [q, nightSleepPartOn(q)])) as Record<NightSleepPart, boolean>; setNightSleep(false, part); return () => { for (const q of NIGHT_SLEEP_PARTS) setNightSleep(was[q], q); }; } };
+  }
+  // rules 284 (quiet_company.ts): both parts removed (equal to rules 283), and each part alone. Nothing else is called `rich-no-quiet-company`.
+  if (kind === 'rich-no-quiet-company' || (kind.startsWith('rich-no-quiet-company-') && (QUIET_COMPANY_PARTS as readonly string[]).includes(kind.slice('rich-no-quiet-company-'.length)))) {
+    const part = kind === 'rich-no-quiet-company' ? undefined : (kind.slice('rich-no-quiet-company-'.length) as QuietCompanyPart);
+    const what: Record<QuietCompanyPart, string> = { quiet: 'being together at rest does not ease the want of company', earlier: 'the want of company draws a person only below 48' };
+    return { spec: label, summary: `${part ? what[part] : 'no quiet company'}, as before rules 284; no effect below rules 284`, install() { const was = Object.fromEntries(QUIET_COMPANY_PARTS.map((q) => [q, quietCompanyPartOn(q)])) as Record<QuietCompanyPart, boolean>; setQuietCompany(false, part); return () => { for (const q of QUIET_COMPANY_PARTS) setQuietCompany(was[q], q); }; } };
   }
   // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
   if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };
