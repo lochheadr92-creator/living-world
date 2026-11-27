@@ -15,6 +15,20 @@ function playing(seed: string): Game {
   return g;
 }
 
+describe('a single step that throws (review of 28 November 2026, finding 1)', () => {
+  it('faults the world as playback does, so the save guard keeps the last good save', () => {
+    quiet();
+    const g = new Game(defaultSettings('step-world'));
+    const tick = g.world.tick;
+    (g.world as unknown as { weather: World['weather'] | null }).weather = null;
+    expect(() => g.stepOnce()).not.toThrow();
+    expect(g.fault?.stage).toBe('world');
+    expect(g.worldFaulted).toBe(true);
+    expect(g.playing).toBe(false);
+    expect(g.world.tick).toBe(tick);
+  });
+});
+
 describe('a frame that throws', () => {
   it('pauses the world and records the fault when the world itself throws, and still draws and updates', () => {
     const err = quiet();

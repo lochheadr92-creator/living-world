@@ -495,6 +495,15 @@ export class CharacterRenderer {
   private pc: PoseCtx | null = null;
   private basePose = (pose: PoseKind): void => poseRig(pose, this.pc!, this.target);
 
+  /** A different world is shown (a load, a new world): forget every person's animation history, which is keyed by id and timed in that
+   *  world's clock, so a loaded earlier world does not show the old pose (review of 28 November 2026, finding 6). The mesh atlas is kept. */
+  resetWorld(): void {
+    this.states.clear();
+    this.drawPoses.clear();
+    this.meshTiles.clear();
+    this.convs.clear();
+  }
+
   /** Advance per-person animation state (walk phase, pose blending) using simulation time only. */
   updateAll(world: World, alphaT: number, simT: number): void {
     this.convs.clear();

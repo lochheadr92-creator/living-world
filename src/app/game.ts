@@ -262,7 +262,14 @@ export class Game {
     this.playing = false;
     this.acc = 0;
     if (this.tickHooks?.beforeTick?.() === false) return; // a single step cannot sneak past an unanswered decision either
-    this.tickOnce();
+    // a world that throws on a single step is faulted exactly as in continuous playback (frameloop.ts), so the save guard keeps
+    // the last good save (review of 28 November 2026, finding 1: the step button bypassed reportFault and a broken world could be saved)
+    try {
+      this.tickOnce();
+    } catch (error) {
+      this.reportFault('world', error);
+      return;
+    }
     this.tickHooks?.afterTick?.();
     this.alpha = 1;
     this.stepEase = 0;

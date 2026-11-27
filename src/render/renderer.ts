@@ -122,6 +122,7 @@ export class Renderer {
       this.worldRef = world;
       this.terrain = new TerrainPainter(world);
       this.fx.reset();
+      this.chars.resetWorld();
       this.heads.clear();
       this.speechCache.clear();
       this.speechSlots.clear();
