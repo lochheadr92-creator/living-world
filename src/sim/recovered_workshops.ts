@@ -2,6 +2,7 @@
 import {BUILD_DEF,DAY} from './constants';
 import {beliefsByKind} from './optutil';import type {Ctx} from './optutil';
 import {runsRulesVersion} from './rulesversion';
+import {OVEN_FROM, OVEN_RECIPES, RECIPE_BY_ID} from './recipes';
 import type {Building,BuildingType,World} from './types';
 export const hasRecoveredWorkshops=(w:World)=>w.settings.dynamics==='rich'&&runsRulesVersion(w,138);
 export function workshopSiteProblem(w:World,type:BuildingType,deposit:number,x:number,y:number):string|null{
@@ -36,8 +37,10 @@ export function validateRecoveredWorkshops(w:World):void{
   if(b.ent==='building'){
    if(!b.ops||b.store.cap!==d.cap||b.doorX!==b.x||b.doorY!==b.y+b.h||!Number.isFinite(b.condition)||b.condition<0||b.condition>100)throw Error('Invalid recovered workshop store');
    const j=b.ops.job;
-   if(j){const mine=b.type==='mine',key=mine?'ore':'grain',n=mine?3:6;
-    if(j.recipe!==(mine?'mine_ore':'mill_flour_separate')||j.total!==(mine?110:210)||!['work','ready'].includes(j.phase)||j.burnLeft!==0||j.burnTotal!==0||!Number.isFinite(j.progress)||j.progress<0||(j.phase==='work'?j.progress>=j.total:j.progress<j.total)||j.held[key]!==n||Object.keys(j.held).some(k=>k!==key))throw Error('Invalid recovered workshop batch');
+   if(j){const mine=b.type==='mine',key=mine?'ore':'grain',base=mine?'mine_ore':'mill_flour_separate';
+    const allowed=[RECIPE_BY_ID[base],...(!mine&&runsRulesVersion(w,OVEN_FROM)?OVEN_RECIPES[base]:[])];
+    const recipe=allowed.find(r=>r.id===j.recipe);
+    if(!recipe||j.total!==recipe.work||!['work','ready'].includes(j.phase)||j.burnLeft!==0||j.burnTotal!==0||!Number.isFinite(j.progress)||j.progress<0||(j.phase==='work'?j.progress>=j.total:j.progress<j.total)||j.held[key]!== (mine?3:recipe.inputs[key])||Object.keys(j.held).some(k=>k!==key))throw Error('Invalid recovered workshop batch');
    }
   }else if(b.workTotal!==d.work||!Number.isFinite(b.work)||b.work<0||b.work>b.workTotal||Object.keys(b.required).length!==Object.keys(d.cost).length||Object.entries(d.cost).some(([k,n])=>b.required[k as keyof typeof b.required]!==n))throw Error('Invalid recovered workshop site');
  }

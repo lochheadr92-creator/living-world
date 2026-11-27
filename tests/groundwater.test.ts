@@ -12,10 +12,12 @@ import { observe } from '../src/sim/knowledge';
 import { perceive } from '../src/sim/perception';
 import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
 import { WELL_CAP, updateWells, wellDemand, wellSiteConflict, wellSpotKnown } from '../src/sim/wells';
+import { setWaterReserve, WATER_RESERVE_CAP } from '../src/sim/water_reserve';
 import type { World } from '../src/sim/types';
 import { addPerson, building, done, pin, site, stage } from './helpers/kit';
 
 afterEach(() => setGroundwater(true));
+afterEach(() => setWaterReserve(true));
 
 /** A grown woman, her hut, and a shared well four tiles from it; the lake is far to the north (staged). */
 function fixture(version: number, o: { well?: boolean; wellSite?: boolean; water?: number } = {}) {
@@ -39,6 +41,33 @@ function passTime(w: World, ticks: number, rain: number): void {
   for (let i = 0; i < ticks; i++) { w.tick++; w.weather.rain = rain; updateGroundwater(w); updateWells(w); }
 }
 const lake = (w: World): number => (w.waterBodies ?? []).reduce((n, b) => n + b.amount, 0);
+
+it('candidate reserve fills only from rain, preserves old rules, and roundtrips when switched off', () => {
+  const old = fixture(257), next = fixture(260);
+  for (const f of [old, next]) {
+    const g = groundAt(f.w, f.well!)!;
+    f.well!.store.items.water = WELL_CAP;
+    ledgerCreate(f.w, 'water', WELL_CAP, 'staged: fill the well');
+    passTime(f.w, DAY, 0);
+    expect(g.amount).toBe(GROUND_START);
+    passTime(f.w, 4 * DAY, 1);
+    expect(g.amount).toBe(f === old ? GROUND_CAP : WATER_RESERVE_CAP);
+    expect(conservationReport(f.w).ok).toBe(true);
+  }
+  const text = serializeWorld(next.w);
+  const bad = JSON.parse(text);
+  bad.world.settings.rulesVersion = 257;
+  expect(() => deserializeWorld(JSON.stringify(bad))).toThrow(/Invalid groundwater/);
+  setWaterReserve(false);
+  expect(() => deserializeWorld(text)).not.toThrow();
+  const off = fixture(260);
+  const g = groundAt(off.w, off.well!)!;
+  off.well!.store.items.water = WELL_CAP;
+  ledgerCreate(off.w, 'water', WELL_CAP, 'staged: fill the well');
+  passTime(off.w, 4 * DAY, 1);
+  expect(g.amount).toBe(GROUND_CAP);
+  expect(parseIntervention('rich-no-water-reserve').spec).toBe('rich-no-water-reserve');
+});
 
 describe('rules 236: a well reaches groundwater', () => {
   it('is a supported version at or below the current one, with its three parts and its numbers', () => {

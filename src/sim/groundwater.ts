@@ -23,6 +23,7 @@
 import { DAY } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { runsRulesVersion } from './rulesversion';
+import { hasWaterReserve, WATER_RESERVE_CAP } from './water_reserve';
 import type { Building, World } from './types';
 
 /** the land a well drains, in tiles, each taking rain as a tile of lake does */
@@ -79,7 +80,7 @@ export function updateGroundwater(world: World): void {
     g.acc += GROUND_TILES * Math.max(0, world.weather.rain) * 2 * (60 / DAY);
     const whole = Math.floor(g.acc);
     g.acc -= whole;
-    const taken = Math.min(whole, GROUND_CAP - g.amount);
+    const taken = Math.min(whole, (hasWaterReserve(world) ? WATER_RESERVE_CAP : GROUND_CAP) - g.amount);
     if (taken > 0) { g.amount += taken; ledgerCreate(world, 'water', taken, 'rain soaked into the ground at a well'); }
   }
   const all = world.groundwater;

@@ -3,6 +3,7 @@ import { BUILDER_FETCHES_PARTS, builderFetchesPartOn, setBuilderFetches } from '
 import { PICKED_UP_PARTS, pickedUpPartOn, setPickedUp } from '../../src/sim/picked_up';
 import { SMITHY_IRON_PARTS, setSmithyIron, smithyIronPartOn } from '../../src/sim/smithy_iron';
 import { GROUNDWATER_PARTS, groundwaterPartOn, setGroundwater } from '../../src/sim/groundwater';
+import { setWaterReserve, waterReserveOn } from '../../src/sim/water_reserve';
 import { arrivalWayOn, setArrivalWay } from '../../src/sim/arrival_way';
 import { WOLF_FIGHT_PARTS, setWolfFight, wolfFightPartOn } from '../../src/sim/wolf_fight';
 import { WOODEN_SPEAR_PARTS, setWoodenSpear, woodenSpearPartOn } from '../../src/sim/wooden_spear';
@@ -370,6 +371,7 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 237 (family_food.ts): the household's food before a child counts its packs and its home only
   if (kind === 'rich-no-family-food') return { spec: label, summary: 'the food a couple needs at home before a child is counted in the packs and the home\'s store only, not the cellar, as before rules 237; no effect below rules 237', install() { const was = familyFoodOn(); setFamilyFood(false); return () => setFamilyFood(was); } };
   // rules 236 (groundwater.ts): all three parts removed (equal to rules 235), and each part alone
+  if (kind === 'rich-no-water-reserve') return { spec: label, summary: 'groundwater holds at most 240 per well, as before the experimental reserve', install() { const was = waterReserveOn(); setWaterReserve(false); return () => setWaterReserve(was); } };
   if (kind === 'rich-no-groundwater') return { spec: label, summary: 'a well draws from the lake, stands only beside one and 14 tiles from the next, and is wanted only where water is far, as before rules 236; no effect below rules 236', install() { const was = GROUNDWATER_PARTS.map((k) => groundwaterPartOn(k)); setGroundwater(false); return () => GROUNDWATER_PARTS.forEach((k, i) => setGroundwater(was[i], k)); } };
   for (const part of GROUNDWATER_PARTS) if (kind === 'rich-no-groundwater-' + part) return { spec: label, summary: `${part === 'ground' ? 'a well draws from the lake, not from the ground beneath it' : part === 'anywhere' ? 'a well stands only beside a lake and 14 tiles from the next' : 'a well is wanted only where water is far from home'}, as before rules 236; no effect below rules 236`, install() { const was = groundwaterPartOn(part); setGroundwater(false, part); return () => setGroundwater(was, part); } };
   // rules 235 (smithy_iron.ts): all three parts removed (equal to rules 234), and each part alone

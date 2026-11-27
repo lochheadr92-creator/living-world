@@ -9,6 +9,7 @@ import type {WaterBody} from './hydrology';
 import {Scorer,addOption,beliefsByKind,eta,pen} from './optutil';
 import type {Ctx} from './optutil';
 import {runsRulesVersion} from './rulesversion';
+import {canHoldWaterReserve,WATER_RESERVE_CAP} from './water_reserve';
 import type {Activity,Belief,Building,Person,World} from './types';
 
 export const WELL_CAP=12, WELL_REFILL=50, WELL_REACH=14;
@@ -104,7 +105,7 @@ export function validateWells(w:World):void{
   if(!hasGroundwater(w)&&!(w.settings.dynamics==='rich'&&runsRulesVersion(w,236)))throw Error('Invalid groundwater');
   for(const [k,g] of Object.entries(w.groundwater)){
    const b=w.byId?.get(Number(k));
-   if(!g||!Number.isSafeInteger(g.amount)||g.amount<0||g.amount>GROUND_CAP||!Number.isFinite(g.acc)||g.acc<0||g.acc>=1||(b&&(b.ent!=='building'||b.type!=='well')))throw Error('Invalid groundwater');
+   if(!g||!Number.isSafeInteger(g.amount)||g.amount<0||g.amount>(canHoldWaterReserve(w)?WATER_RESERVE_CAP:GROUND_CAP)||!Number.isFinite(g.acc)||g.acc<0||g.acc>=1||(b&&(b.ent!=='building'||b.type!=='well')))throw Error('Invalid groundwater');
   }
  }
  const geometry=(b:Building|World['sites'][number])=>Number.isSafeInteger(b.x)&&Number.isSafeInteger(b.y)&&b.x>=0&&b.y>=0&&b.x+2<=w.W&&b.y+2<w.H&&b.w===2&&b.h===2&&Number.isSafeInteger(b.hhId)&&b.hhId>=0;
