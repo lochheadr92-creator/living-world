@@ -1,0 +1,1898 @@
+{
+  "generated": "2026-11-27T09:15:37.350Z",
+  "url": "http://127.0.0.1:5412/",
+  "worktree": "C:\\dev\\lw-anim-work-20261127",
+  "head": "4319ff60",
+  "note": "staged figures, not an ordinary world",
+  "defaultZoom": 1,
+  "zooms": {
+    "1x": 1,
+    "2x": 2
+  },
+  "charactersSha256": "1ae92ed96fbce874b3f4716d75ebf7072bd0fd05d2e3cda552ddcc9934cf4d3e",
+  "specs": [
+    {
+      "id": "pick",
+      "label": "Picking berries",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "pick"
+        ],
+        [
+          "pick"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "drink",
+      "label": "Drinking",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "drink"
+        ],
+        [
+          "drink"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "build",
+      "label": "Building",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "build"
+        ],
+        [
+          "build"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "eat",
+      "label": "Eating",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "eat"
+        ],
+        [
+          "eat"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "chop",
+      "label": "Chopping",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "chop"
+        ],
+        [
+          "chop"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "fish",
+      "label": "Fishing",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "fish"
+        ],
+        [
+          "fish"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "plant",
+      "label": "Planting",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "plant"
+        ],
+        [
+          "plant"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "tend",
+      "label": "Tending",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "tend"
+        ],
+        [
+          "tend"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "harvest",
+      "label": "Harvesting",
+      "group": "A",
+      "was": null,
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "harvest"
+        ],
+        [
+          "harvest"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "pick_bush",
+      "label": "Gathering from a berry bush",
+      "group": "H",
+      "was": "pick",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "pick_bush"
+        ],
+        [
+          "pick_bush"
+        ],
+        [
+          "pick_bush"
+        ],
+        [
+          "pick_bush"
+        ],
+        [
+          "pick_bush"
+        ],
+        [
+          "pick_bush"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "pick_tree",
+      "label": "Gathering from a fruit tree",
+      "group": "H",
+      "was": "pick",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "pick_tree"
+        ],
+        [
+          "pick_tree"
+        ],
+        [
+          "pick_tree"
+        ],
+        [
+          "pick_tree"
+        ],
+        [
+          "pick_tree"
+        ],
+        [
+          "pick_tree"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "reap",
+      "label": "Gathering wild grain",
+      "group": "H",
+      "was": "pick",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "mow",
+      "label": "Cutting hay in a meadow",
+      "group": "H",
+      "was": "pick",
+      "frames": [
+        1,
+        6,
+        11,
+        16,
+        24,
+        34,
+        46,
+        54
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ],
+        [
+          "mow"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "fell",
+      "label": "Felling a tree",
+      "group": "H",
+      "was": "chop",
+      "frames": [
+        1,
+        6,
+        11,
+        16,
+        21,
+        26,
+        31,
+        36,
+        41,
+        46,
+        51
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ],
+        [
+          "fell"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "fish_cast",
+      "label": "Fishing with a rod held",
+      "group": "H",
+      "was": "fish",
+      "frames": [
+        1,
+        4,
+        7,
+        11,
+        16,
+        22,
+        28,
+        33,
+        36,
+        38,
+        39
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ],
+        [
+          "fish_cast"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "fish_hand",
+      "label": "Fishing with no rod (bare hands)",
+      "group": "H",
+      "was": "fish",
+      "frames": [
+        1,
+        4,
+        7,
+        11,
+        16,
+        22,
+        28,
+        33,
+        36,
+        38,
+        39
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ],
+        [
+          "fish_hand"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "sow",
+      "label": "Sowing a seed",
+      "group": "H",
+      "was": "plant",
+      "frames": [
+        1,
+        4,
+        7,
+        10,
+        13,
+        16,
+        19,
+        22
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ],
+        [
+          "sow"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "weed",
+      "label": "Tending a bed (no water carried)",
+      "group": "H",
+      "was": "tend",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ],
+        [
+          "weed"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "water_crop",
+      "label": "Tending a bed (water and a jar carried)",
+      "group": "H",
+      "was": "tend",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "water_nojar",
+      "label": "Tending a bed (water, no jar)",
+      "group": "H",
+      "was": null,
+      "frames": [
+        1,
+        9,
+        17,
+        25
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ],
+        [
+          "water_crop"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "reap_field",
+      "label": "Harvesting a household plot",
+      "group": "H",
+      "was": "harvest",
+      "frames": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29,
+        33,
+        37,
+        41
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ],
+        [
+          "reap"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "raise",
+      "label": "Raising a building (planks on the site)",
+      "group": "H",
+      "was": "build",
+      "frames": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        36,
+        40
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "raise_stone",
+      "label": "Raising a building (stone on the site)",
+      "group": "H",
+      "was": null,
+      "frames": [
+        3,
+        9,
+        15,
+        21
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ],
+        [
+          "raise"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "raise_wait",
+      "label": "Waiting at a site for material",
+      "group": "H",
+      "was": "build",
+      "frames": [
+        5,
+        17
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "idle"
+        ],
+        [
+          "idle"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "eat_stand",
+      "label": "Eating alone, standing",
+      "group": "H",
+      "was": "eat",
+      "frames": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        9
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "eat_wipe",
+      "label": "Eating alone: the third bite, wiping the mouth",
+      "group": "H",
+      "was": null,
+      "frames": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ],
+        [
+          "eat_stand"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "drink_shore",
+      "label": "Drinking at the water",
+      "group": "H",
+      "was": "drink",
+      "frames": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ],
+        [
+          "drink_shore"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "take_cutting",
+      "label": "Taking a living cutting from a tree",
+      "group": "H",
+      "was": "chop",
+      "frames": [
+        1,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        78
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ],
+        [
+          "take_cutting"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "plant_tree",
+      "label": "Planting a young tree",
+      "group": "H",
+      "was": "plant",
+      "frames": [
+        3,
+        15,
+        30,
+        50,
+        70,
+        85,
+        100,
+        120,
+        140
+      ],
+      "cell1x": {
+        "w": 144,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ],
+        [
+          "plant_tree"
+        ]
+      ],
+      "notes": []
+    },
+    {
+      "id": "work_conditions",
+      "label": "Work under a fever, near her time and a broken arm (left to right)",
+      "group": "H",
+      "was": null,
+      "frames": [
+        3,
+        9,
+        15
+      ],
+      "cell1x": {
+        "w": 148,
+        "h": 120
+      },
+      "cell2x": {
+        "w": 288,
+        "h": 240
+      },
+      "drawnAs": [
+        [
+          "reap",
+          "pick_bush",
+          "fell"
+        ],
+        [
+          "reap",
+          "pick_bush",
+          "fell"
+        ],
+        [
+          "reap",
+          "pick_bush",
+          "fell"
+        ]
+      ],
+      "notes": []
+    }
+  ],
+  "pairs": [
+    {
+      "a": "stand",
+      "b": "idle",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "fire_sit",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "stroll",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "walkout",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "greet_run",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "embrace",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "lookout",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "search",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "claim",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "respects",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "lookin",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "mind",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "attend_birth",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "search_walk",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "call",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "celebrate",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "market",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "funeral",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "dance",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "trek",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "barter",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "trudge",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "unpack",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "rest",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "warm",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "alone",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "meal_sit",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "meal_eat",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "vigil",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "lyingin",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "comfort",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "settle",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "sit",
+      "b": "standup",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "whittle",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "mend_tool",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "mend_cart",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "weave",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "butcher",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "feed_animal",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "shear",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "milk",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "eggs",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "tether",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "setgear",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "haul_net",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "hangskin",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "craft",
+      "b": "workbench",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "stalk",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "pick",
+      "b": "strike",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "pick",
+      "b": "strike_bare",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "pick",
+      "b": "guard",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "charge",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "store",
+      "b": "putaway",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "store",
+      "b": "takeout",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "store",
+      "b": "heave",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "store",
+      "b": "feedfire",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "drink",
+      "b": "filljar",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "build",
+      "b": "mend",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "build",
+      "b": "survey",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "talk_warn",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "teach",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "ask_court",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "welcome",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "rally",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "peace",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "fire_story",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "fire_sing",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "fire_address",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "fire_thanks",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "stand_address",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "game_chase",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "game_hide",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "talk",
+      "b": "game_house",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "play_ground",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "play_sticks",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "play_toy",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "fever",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "walk",
+      "b": "limp",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "sling",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "cut",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "belly",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "stand",
+      "b": "mourning",
+      "ok": false,
+      "why": "not staged in this run (filtered out or failed)"
+    },
+    {
+      "a": "pick",
+      "b": "pick_bush",
+      "ok": true
+    },
+    {
+      "a": "pick",
+      "b": "pick_tree",
+      "ok": true
+    },
+    {
+      "a": "pick",
+      "b": "reap",
+      "ok": true
+    },
+    {
+      "a": "pick",
+      "b": "mow",
+      "ok": true
+    },
+    {
+      "a": "chop",
+      "b": "fell",
+      "ok": true
+    },
+    {
+      "a": "fish",
+      "b": "fish_cast",
+      "ok": true
+    },
+    {
+      "a": "fish",
+      "b": "fish_hand",
+      "ok": true
+    },
+    {
+      "a": "plant",
+      "b": "sow",
+      "ok": true
+    },
+    {
+      "a": "tend",
+      "b": "weed",
+      "ok": true
+    },
+    {
+      "a": "tend",
+      "b": "water_crop",
+      "ok": true
+    },
+    {
+      "a": "harvest",
+      "b": "reap_field",
+      "ok": true
+    },
+    {
+      "a": "build",
+      "b": "raise",
+      "ok": true
+    },
+    {
+      "a": "build",
+      "b": "raise_wait",
+      "ok": true
+    },
+    {
+      "a": "eat",
+      "b": "eat_stand",
+      "ok": true
+    },
+    {
+      "a": "drink",
+      "b": "drink_shore",
+      "ok": true
+    },
+    {
+      "a": "chop",
+      "b": "take_cutting",
+      "ok": true
+    },
+    {
+      "a": "plant",
+      "b": "plant_tree",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "files": [
+    "sheet_A_1x.png",
+    "sheet_A_2x.png",
+    "sheet_H_1x.png",
+    "sheet_H_2x.png",
+    "pairs_1x.png"
+  ]
+}

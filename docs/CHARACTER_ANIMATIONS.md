@@ -87,6 +87,24 @@ drawn alike, and the list at the end says which.
 | stand | Thanks in company | the words of the speech (`praise.ts`) | `fire_thanks`, `stand_thanks`: a hand on the heart, bowing |
 | talk | Chase, hide and seek, house | conversation `play_together`, `data.game` | `game_chaser` (crouched, lunging to tag) and `game_runner` (twisting away, hopping), `game_count`/`game_hide`, `game_house`. The games are played where the children stand, so nobody is drawn running on the spot |
 | stand | A child playing alone | `wander`, `data.play` | `play_ground` (stones, bugs), `play_sticks`, `play_toy` |
+<!-- work (H): the main work, read from what is being worked at (src/render/anim_work.ts) -->
+| pick | Gathering from a berry bush | `gather`, `data.stype` `berry_bush` | `pick_bush`: upright at the bush, both hands working in it at chest height, one going down to the hip to stow what it has |
+| pick | Gathering from a fruit tree | `gather`, `stype` `fruit_tree` | `pick_tree`: up on the toes, an arm reaching overhead, the fruit brought down to the other arm |
+| pick | Gathering wild grain | `gather`, `stype` `wild_grain` | `reap`: bent at the waist, one hand gathering stalks and the other cutting across, then up to bundle them at the chest |
+| pick | Cutting hay | `gather`, `stype` `hay_meadow` | `mow`: feet wide, both arms sweeping from side to side at the hip with the body turning into it, a step on the beat; every third swing a stand to ease the back |
+| chop | Felling a tree | `gather`, `stype` `tree` | `fell`: feet planted wide, the whole body turning into each full swing; after four strokes a pause to straighten, the axe hanging, a hand to the brow |
+| chop | Taking a living cutting | `tree_work`, `data.op` `cut` | `take_cutting`: on the toes, both arms overhead at a branch, short strokes, the cutting brought down |
+| plant | Planting a young tree | `tree_work`, `data.op` `plant` | `plant_tree`: on both knees, scooping the earth out, the sapling held upright, the earth firmed round it |
+| fish | Fishing with a rod | `gather`, `stype` `fish_spot`, a rod in the pack (or rules with no rods, where it is drawn as before) | `fish_cast`: the rod drawn back and cast, a long still wait with small twitches of the tip, a sharp strike and the haul, the catch coming up at the end of each fish |
+| fish | Fishing with no rod | `gather`, `stype` `fish_spot`, rods exist in the rules and none is in the pack | `fish_hand`: down on a knee at the edge, both hands in the water, still; a snatch and the catch held up |
+| plant | Sowing | `plant` at a household plot | `sow`: on one knee, a seed pressed in, then shuffling along to the next spot |
+| tend | Tending a bed | `tend` at a household plot, no water in the pack | `weed`: on both knees, each hand pulling a weed up and tossing it aside in turn |
+| tend | Watering a bed | `tend` at a household plot, `inv.water` of 1 or more | `water_crop`: bent a little over the bed, the jar tipped in both hands (drawn only if `inv.jar`) and the pour swept along |
+| harvest | Harvesting a plot | `harvest` at a household plot | `reap` (twice the rhythm: a plot is cut in one go) |
+| build | Raising a building | `build` at a site | `raise`: bending to the ground for a piece, up with it to the chest, setting it against the frame, three blows of the hammer; the piece is one of the materials the site has on hand |
+| build | Waiting at a site for material | `build` at a site, `data.waited` above 0 | `idle`: hands on hips (it was an endless hammer) |
+| eat | Eating alone | `eat`, `eat_store` with `data.food` | `eat_stand`: the food held at the chest, a bite with the head going to it, chewed with the head bobbing, a swallow; every third bite (`activity.cycle`) the back of the hand across the mouth |
+| drink | Drinking at the water | `drink` with `data.wx` (the spot at the water), not `fromInv`, `fromStore` or `fromWell` | `drink_shore`: down on a knee, both hands cupped into the water and up to the mouth, a pause upright, again |
 | none | A fever | `p.illness` | hunched and shivering, arms hugged in, flushed cheeks |
 | none | A sprained ankle | `p.injury.kind === 'sprain'` | a limp |
 | none | A broken arm | `p.injury.kind === 'broken'` | the forearm in a sling |
@@ -94,9 +112,10 @@ drawn alike, and the list at the end says which.
 | none | Near her time | `p.pregnantUntil` within 9,600 ticks | the belly, leaning back, a hand to the back |
 | none | Mourning | `p.lifeEvent.kind === 'bereaved'` | head down, arms still, a dark band on the arm |
 
-Walking, running, sleeping, eating alone, drinking, chopping, mining, fishing, tilling, planting, tending, harvesting,
-building, sawing, hammering, forging, baking, digging, plain talk, giving, arguing, pulling a cart, fleeing, carrying and
-waving are drawn as before.
+Walking, running, sleeping, mining, tilling, sawing, hammering, forging, baking, digging, plain talk, giving, arguing,
+pulling a cart, fleeing, carrying and waving are drawn as before. So is any of the work above whose record does not say
+what it is at: gathering with no source on record, chopping with no tree, sowing or tending or harvesting with no plot,
+building with no site, eating with no food on record, drinking from the pack, the household store or a well.
 
 `care`, `fulfill` and `return_tool` are in the `ActivityKind` type but no handler is registered for any of them and no
 activity of those kinds is ever created: `care` is an option tag and a request kind, `return_tool` a commitment kind. A
@@ -112,6 +131,16 @@ is nothing of those three kinds to draw.
 - **A guessing game** is talk, and is drawn as talk.
 - **A net or a trap in the hands.** `gear_work` is drawn by posture; the gear itself is not drawn in the hand.
 - **What is carried on a trading journey or a move** is drawn only from the pack, as it was.
+- **What a plot grows.** A household plot records grain and seed only (`Plot.stock`, `Plot.seedStock`), so a harvest is always
+  a cut crop and uses `reap`. A pulled crop or a picked crop is not drawn: nothing on the record says there is one.
+- **Which material is going in.** A site takes its materials in proportion to the work done, and the record does not name
+  "the next piece". The piece lifted is one of the materials the site has on hand, taken in turn, and nothing is drawn if the
+  site has none on hand.
+- **Whether an axe, a pick or a hoe is held.** The tool drawn for felling, mining and tilling follows the animation, as it
+  always did; only the fishing rod is drawn according to the pack (`inv.rod`, and only where rods exist in the rules).
+- **A scythe, a sickle, a knife.** None is an item, so hay, grain and a cutting are worked with empty hands.
+- **How long a bite or a stroke lasts.** One bite is one portion eaten (`WORK.eat`); the wipe on every third bite, the
+  pauses in felling and mowing and the three blows of a builder are the rhythm of the drawing, not records.
 - **Asking support for a shared building** is the `recruit` conversation (the speech before listeners is the other way of
   asking, and has its own look).
 
@@ -123,3 +152,5 @@ is nothing of those three kinds to draw.
   animation at the default zoom and at twice that, and the tell-apart pairs. Staged figures, not an ordinary world: the
   sheet shows how a state is drawn, not that it arises.
 - `scripts/browser/animation_cost.mjs`: frame time in a Large world.
+- Group H of the sheet (the work animations, `animation_evidence/work_h`): each look as a strip through one unit of the work
+  (a berry, a fish, a bite) at the default zoom and at twice that, and the tell-apart pairs against the old poses.

@@ -8,6 +8,7 @@ import type { PoseKind } from '../sim/types';
 import type { AnimId, Condition } from './animation';
 import { R, cycleOf, ease, setBase } from './rig';
 import type { PoseCtx, Rig } from './rig';
+import { isWorkAnim, workRig } from './anim_work'; // work (H)
 
 const TAU = Math.PI * 2;
 /** 0 outside [a, b], a smooth rise and fall inside it */
@@ -92,6 +93,12 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
       mouth();
     }
   };
+
+  // work (H): the main work motions live in anim_work.ts
+  if (isWorkAnim(anim)) {
+    workRig(anim, c, r);
+    return;
+  }
 
   switch (anim) {
     // ───────────────────────── B: standing about ─────────────────────────

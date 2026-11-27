@@ -20,6 +20,8 @@ import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet } from './anima
 import type { AnimId, Condition } from './animation';
 import { animRig, applyCondition } from './anim_rig';
 import { drawAnimProps } from './anim_props';
+import { WORK_TOOL_OF } from './anim_work'; // work (H)
+import { FOOD_DOT, drawWorkProps } from './anim_work_props'; // work (H)
 
 type V3 = readonly [number, number, number];
 
@@ -822,7 +824,7 @@ export class CharacterRenderer {
     }
 
     // which tool is in hand follows the animation being shown (not the blended rig, which would flicker between kinds)
-    const toolKind = anim==='fish'&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[anim]??0;
+    const toolKind = (anim==='fish'||anim==='fish_cast')&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[anim]??WORK_TOOL_OF[anim]??0; // work (H): fish_cast, fell, raise keep what chop, fish and build had
 
     // carried goods on the back / hips
     drawCarried(ctx, p, parts, S, fx, fy, sc, lie, rig, toolKind, s.carry, s.jar, headC, burden, simT);
@@ -888,7 +890,7 @@ export class CharacterRenderer {
       parts.push({
         d: handR[2] + 0.01,
         draw: () => {
-          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          ctx.fillStyle = FOOD_DOT[p.activity!.data.food as string] ?? ((p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f');
           ctx.beginPath();
           ctx.arc(handR[0], handR[1] - 1.6, 1.9 * sc, 0, Math.PI * 2);
           ctx.fill();
@@ -898,6 +900,7 @@ export class CharacterRenderer {
 
     // what the richer animations hold: a spear, a jar, a skin (each only if the person's record holds it)
     if (!isPose(anim) && lie < 0.5) drawAnimProps(ctx, parts, p, anim, rig, handL, handR, fx, fy, sc, bt);
+    if (!isPose(anim) && lie < 0.5) drawWorkProps(ctx, parts, world, p, anim, rig, handL, handR, fx, fy, sc, bt); // work (H)
 
     // head
     const faceDirScreenX = (fx - fy) / Math.SQRT2; // + = facing screen-right

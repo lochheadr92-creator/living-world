@@ -11,9 +11,12 @@
 // are drawn alike (and `docs/CHARACTER_ANIMATIONS.md` says which).
 import { ageYears } from '../sim/people';
 import type { Conversation, Person, PoseKind, World } from '../sim/types';
+import { workAnimOf } from './anim_work'; // work (H)
+import type { WorkAnimId } from './anim_work'; // work (H)
 
 export type AnimId =
   | PoseKind
+  | WorkAnimId // work (H): gathering, felling, fishing, farming, building, eating and drinking (anim_work.ts)
   // standing about (B)
   | 'idle' | 'fire_sit' | 'fire_story' | 'fire_sing' | 'fire_listen' | 'fire_thanks' | 'fire_address' | 'stand_thanks' | 'stand_address'
   | 'stroll' | 'walkout' | 'greet_run' | 'embrace' | 'lookout' | 'search' | 'claim' | 'respects' | 'lookin' | 'mind' | 'attend_birth'
@@ -148,6 +151,9 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
   if (pose === 'talk') return conv ? talkAnim(world, p, conv) : 'talk';
 
   switch (a.kind) {
+    // ── work (H): what the record says the work is (anim_work.ts); the old pose is the look where it says nothing more ──
+    case 'gather': case 'tree_work': case 'plant': case 'tend': case 'harvest': case 'build': case 'eat': case 'eat_store': case 'drink':
+      return workAnimOf(world, p, pose, a) ?? pose;
     case 'wander': {
       if (d.reunion) return onFoot ? 'greet_run' : standing ? 'embrace' : pose;
       if (d.walk) return onFoot ? 'stroll' : standing ? 'walkout' : pose;

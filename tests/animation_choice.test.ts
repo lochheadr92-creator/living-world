@@ -1,7 +1,7 @@
 // The renderer's choice of animation (src/render/animation.ts): read from a person's own record, never from a new pose.
 // These are staged records: they establish which animation a state is DRAWN with, not that the state arises in a world.
 import { describe, expect, it } from 'vitest';
-import { NO_CONDITION, animationOf, conditionOf, isPose } from '../src/render/animation';
+import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet } from '../src/render/animation';
 import type { AnimId } from '../src/render/animation';
 import type { Conversation, Person, PoseKind, World } from '../src/sim/types';
 
@@ -207,6 +207,85 @@ describe('a condition is drawn only when the record holds it', () => {
     expect(conditionOf(world(), person('stand', null, {}, 'work', { pregnantUntil: TICK + 30000 })).belly).toBe(0);
     expect(conditionOf(world(), person('stand', null, {}, 'work', { lifeEvent: { kind: 'bereaved', until: TICK - 1 } }))).toBe(NO_CONDITION);
     expect(conditionOf(world(), person('stand', null, {}, 'work', { lifeEvent: { kind: 'moved', until: TICK + 10 } }))).toBe(NO_CONDITION);
+  });
+});
+
+// work (H): the main work, told apart by what the record says is being worked at (src/render/anim_work.ts)
+describe('the main work is told apart by what is worked at', () => {
+  const plot = { ent: 'plot', id: 5 };
+  const site = { ent: 'site', id: 6 };
+  const rods = { dynamics: 'rich', rulesVersion: 200 };
+  const w = (settings: Record<string, unknown> = rods): World => world({ byId: new Map<number, unknown>([[5, plot], [6, site]]), settings });
+  /** a person at their work with the activity pointing at `target` (5 is a plot, 6 a site, 0 nothing) */
+  const worker = (pose: PoseKind, kind: string, data: Record<string, unknown> = {}, extra: Record<string, unknown> = {}, target = 0): Person => {
+    const p = person(pose, kind, data, 'work', { inv: {}, ...extra });
+    (p.activity as unknown as { targetId: number }).targetId = target;
+    return p;
+  };
+  const cases: [string, Person, AnimId][] = [
+    // gathering, by what the source is
+    ['a berry bush', worker('pick', 'gather', { stype: 'berry_bush' }), 'pick_bush'],
+    ['a fruit tree', worker('pick', 'gather', { stype: 'fruit_tree' }), 'pick_tree'],
+    ['wild grain', worker('pick', 'gather', { stype: 'wild_grain' }), 'reap'],
+    ['a hay meadow', worker('pick', 'gather', { stype: 'hay_meadow' }), 'mow'],
+    ['gathering with no source on record is the old pick', worker('pick', 'gather'), 'pick'],
+    ['clay is dug (the renderer makes it a spade job)', worker('dig', 'gather', { stype: 'clay_pit' }), 'dig'],
+    ['ore is mined (the renderer makes it a pick job)', worker('mine', 'gather', { stype: 'ore_vein' }), 'mine'],
+    ['rock is mined', worker('mine', 'gather', { stype: 'rock' }), 'mine'],
+    // felling and cuttings
+    ['felling a tree', worker('chop', 'gather', { stype: 'tree' }), 'fell'],
+    ['chopping with no tree on record is the old chop', worker('chop', 'gather'), 'chop'],
+    ['taking a living cutting', worker('chop', 'tree_work', { op: 'cut' }), 'take_cutting'],
+    ['planting a young tree', worker('plant', 'tree_work', { op: 'plant' }), 'plant_tree'],
+    ['tree work of no known kind is the old pose', worker('plant', 'tree_work', { op: 'prune' }), 'plant'],
+    // farming, at a household plot
+    ['sowing a seed', worker('plant', 'plant', {}, {}, 5), 'sow'],
+    ['sowing with no plot on record is the old plant', worker('plant', 'plant'), 'plant'],
+    ['tending a bed, no water carried', worker('tend', 'tend', {}, {}, 5), 'weed'],
+    ['tending a bed with water carried', worker('tend', 'tend', {}, { inv: { water: 2 } }, 5), 'water_crop'],
+    ['tending with no plot on record is the old tend', worker('tend', 'tend'), 'tend'],
+    ['harvesting a plot (it bears grain: cut)', worker('harvest', 'harvest', {}, {}, 5), 'reap'],
+    ['harvesting with no plot on record is the old harvest', worker('harvest', 'harvest'), 'harvest'],
+    ['tilling is as it was', worker('till', 'till', {}, {}, 5), 'till'],
+    // building
+    ['raising a building', worker('build', 'build', {}, {}, 6), 'raise'],
+    ['waiting at a site for material', worker('build', 'build', { waited: 4 }, {}, 6), 'idle'],
+    ['a build that has the site gone is the old build', worker('build', 'build'), 'build'],
+    // eating and drinking alone
+    ['eating alone', worker('eat', 'eat', { food: 'bread' }), 'eat_stand'],
+    ['eating at a store', worker('eat', 'eat_store', { food: 'grain' }), 'eat_stand'],
+    ['eating with no food on record is the old eat', worker('eat', 'eat'), 'eat'],
+    ['drinking at the water', worker('drink', 'drink', { wx: 4, wy: 9 }), 'drink_shore'],
+    ['drinking from the pack', worker('drink', 'drink', { fromInv: true }), 'drink'],
+    ['drinking the household store', worker('drink', 'drink', { wx: 4, wy: 9, fromStore: true }), 'drink'],
+    ['drinking from a well', worker('drink', 'drink', { fromWell: true }), 'drink'],
+  ];
+  it.each(cases)('%s', (_name, p, want) => {
+    expect(pick(w(), p)).toBe(want);
+  });
+
+  it('fishing: a rod in the pack casts, nothing in the pack fishes with bare hands, and where rods do not exist the rod is drawn as before', () => {
+    expect(pick(w(), worker('fish', 'gather', { stype: 'fish_spot' }, { inv: { rod: 1 } }))).toBe('fish_cast');
+    expect(pick(w(), worker('fish', 'gather', { stype: 'fish_spot' }, { inv: {} }))).toBe('fish_hand');
+    expect(pick(w({ dynamics: 'normal' }), worker('fish', 'gather', { stype: 'fish_spot' }, { inv: {} }))).toBe('fish_cast');
+    expect(pick(w(), worker('fish', 'gather', {}, { inv: {} }))).toBe('fish');
+  });
+
+  it('walking to the work is not drawn at the work', () => {
+    const p = person('walk', 'gather', { stype: 'berry_bush' }, 'travel');
+    expect(pick(w(), p)).toBe('walk');
+    const q = person('stand', 'build', {}, 'travel');
+    expect(pick(w(), q)).toBe('stand');
+  });
+
+  it('none of them is a pose or a quiet animation, and choosing one leaves the person as they were', () => {
+    for (const [, p, want] of cases) {
+      if (want === 'idle' || isPose(want)) continue;
+      expect(isQuiet(want)).toBe(false);
+      const before = JSON.stringify(p);
+      pick(w(), p);
+      expect(JSON.stringify(p)).toBe(before);
+    }
   });
 });
 
