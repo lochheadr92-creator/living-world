@@ -28,7 +28,8 @@ import type { Building, World } from './types';
 /** the land a well drains, in tiles, each taking rain as a tile of lake does */
 export const GROUND_TILES = 100;
 /** the most the ground at one well holds */
-export const GROUND_CAP = 240;
+// EXPERIMENT ONLY: larger rain-fed capacity for the paired diagnostic; not a versioned product rule.
+export const GROUND_CAP = 480;
 /** what a new well finds */
 export const GROUND_START = 120;
 /** how near two wells may stand (14 before rules 236) */
