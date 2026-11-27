@@ -64,6 +64,8 @@ Scaling and performance history: `docs/SCALING.md`.
 ## Decisions already made (do not reopen without a reason)
 - Rules support floor (Ryan, 20 November 2026): the project keeps rules 250 and up (`RULES_SUPPORT_FLOOR` in `src/sim/support_floor.ts`).
   The continuation pins of versions below the floor stay in `tests/` but are left out of `npm test`; `npm run test:archive` runs them.
+  `npm run test:quick` leaves out the kept pins, the `zz_review` files and the files named in `tests/helpers/slow_tests.ts`; use it while
+  working. `npm test` is the full suite and must pass before a merge to `main`.
   Two later steps are decided and not built: refusing a save below the floor on load, then removing the gates of those versions from
   `src/sim`, one area at a time. Until the refusal lands a save below the floor still loads, and nothing in `npm test` checks that it
   runs as it did. Once it lands, the save and replay line below covers only versions at or above the floor. Record: brain note

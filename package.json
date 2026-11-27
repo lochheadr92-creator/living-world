@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:archive": "vitest run --config vitest.archive.config.ts",
+    "test:quick": "vitest run --config vitest.quick.config.ts",
     "typecheck": "tsc --noEmit",
     "census": "vite-node scripts/census.ts",
     "docs": "vite-node scripts/docs.ts",
