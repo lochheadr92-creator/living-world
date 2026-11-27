@@ -1,3 +1,4 @@
+import { waterWarningOn, setWaterWarning } from '../../src/sim/water_warning';
 import { MADE_FOR_SITE, SITE_SUPPLY_PARTS, setMadeForSiteDose, setSiteSupply, siteSupplyPartOn } from '../../src/sim/site_supply';
 import { BUILDER_FETCHES_PARTS, builderFetchesPartOn, setBuilderFetches } from '../../src/sim/builder_fetches';
 import { PICKED_UP_PARTS, pickedUpPartOn, setPickedUp } from '../../src/sim/picked_up';
@@ -324,6 +325,9 @@ export function parseIntervention(specIn: string): Intervention {
     return { spec: label, summary: `no extra pull toward the fields${part ? ' (' + part + ' part only)' : ''}, as before rules 255; no effect below rules 255`, install() { const was = Object.fromEntries(FARM_DRAW_PARTS.map((q) => [q, farmDrawPartOn(q)])) as Record<FarmDrawPart, boolean>; setFarmDraw(false, part); return () => { for (const q of FARM_DRAW_PARTS) setFarmDraw(was[q], q); }; } };
   }
   // rules 257 (bench_access.ts): a workshop's stock is counted for everyone who sees it, whoever may take it, as before rules 257
+  if (kind === 'rich-no-water-warning') {
+    return { spec: label, summary: 'disable recent low and dry water warnings', install() { const was = waterWarningOn(); setWaterWarning(false); return () => setWaterWarning(was); } };
+  }
   if (kind === 'rich-no-bench-access') {
     return { spec: label, summary: "a workshop's stock is counted for everyone who sees it, as before rules 257; no effect below rules 257", install() { const was = benchAccessOn(); setBenchAccess(false); return () => setBenchAccess(was); } };
   }

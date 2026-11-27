@@ -1,3 +1,4 @@
+import { hasWaterWarning } from './water_warning';
 import { nearestHub } from './settlements';
 import { hashUnit } from './rng';
 import { compass } from './labels';
@@ -163,6 +164,7 @@ export function placeWords(world: World, b: Belief): string {
 }
 
 export function infoLine(world: World, b: Belief, a: number, c: number): string {
+  if (hasWaterWarning(world) && b.kind === 'water' && (b.waterSupply === 'low' || b.waterSupply === 'dry')) return `The water ${placeWords(world, b)} was ${b.waterSupply}, ${agoText(world, b.seen)}.`;
   if (b.amount <= 0 && (b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot')) {
     const what = b.kind === 'berry_bush' ? 'berry bushes' : b.kind === 'fruit_tree' ? 'fruit trees' : b.kind === 'wild_grain' ? 'wild grain' : 'fishing spot';
     return saying(['Don’t bother with the {thing} {where}: picked clean.', 'The {thing} {where} are bare now.', 'Nothing left at the {thing} {where}.'], a, c, 29, { thing: what, where: placeWords(world, b) });

@@ -1,3 +1,4 @@
+import { hasWaterWarning, isWaterWarning } from './water_warning';
 import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
@@ -38,7 +39,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
   const scored: { b: Belief; score: number }[] = [];
   for (const k in S.beliefs) {
     const b = S.beliefs[k as unknown as number];
-    const wgt = NEWS_WEIGHT[b.kind];
+    const wgt = isWaterWarning(world, b) ? 6 : NEWS_WEIGHT[b.kind];
     if (!wgt) continue;
     if (b.kind === 'building' && !(b.btype === 'storehouse' || (b.btype && isFacilityType(b.btype as BuildingType)))) continue;
     // a household's own building site is its business, but a workshop or hall going up is everybody's news
@@ -53,7 +54,9 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
       continue; // an old, stale 'empty' is not news
     }
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
-    if (tellingSuppressed(world, S, L.id, b)) {
+    // A changed local water observation must be able to correct an earlier warning inside the ordinary cooldown.
+    const warningUpdate = isWaterWarning(world, b) && b.seen > (S.newsTold?.[toldKey(world, L.id, b.id)] ?? Infinity);
+    if (!warningUpdate && tellingSuppressed(world, S, L.id, b)) {
       if (world.hooks?.onNews && isEmptyFood(b)) {
         const held = S.newsHeld?.[toldKey(world, L.id, b.id)];
         world.hooks.onNews({ kind: 'skipped', reason: held && held.seen === b.seen ? 'held' : 'cooldown', beliefId: b.id, seen: b.seen, age: world.tick - b.seen, origin: b.origin, from: S.id, hops: b.hops ?? 0, listener: L.id });
@@ -80,10 +83,11 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   // Rules 175 records an empty correction only when the listener's belief changes. A positive food report and every
   // other telling still mark the attempt first, so a wolf warning keeps the cooldown it had.
   if (!tracksFoodDelivery(world, b) || !isEmptyFood(b)) S.told[toldKey(world, L.id, b.id)] = world.tick;
+  if (hasWaterWarning(world) && b.kind === 'water') (S.newsTold ??= {})[toldKey(world, L.id, b.id)] = b.seen;
   const old = L.beliefs[b.id];
   // rules 174: a strictly newer empty food sighting can correct a positive memory inside the ordinary 200-tick gap.
   // learn() would also refresh an equal-time snapshot and then return false, so a refused report is not passed to it.
-  const isNew = !old || acceptsToldReport(world, b, old);
+  const isNew = !old || (isWaterWarning(world, b) && b.seen > old.seen) || acceptsToldReport(world, b, old);
   if (!isNew) {
     noteEmptyRejected(world, S, L.id, b);
     if (world.hooks?.onNews && isEmptyFood(b)) {
@@ -106,7 +110,8 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   if (b.kind === 'danger') {
     L.needs.safety = Math.max(0, L.needs.safety - 8);
     addLog(world, L, 'danger', `${S.name} warned me about a wolf ${D.dangerWords(world, b)} of camp.`);
-  } else addLog(world, L, 'info', `${S.name} told me about a ${noun} ${D.placeWords(world, b)}.`);
+  } else if (hasWaterWarning(world) && b.kind === 'water' && (b.waterSupply === 'low' || b.waterSupply === 'dry')) addLog(world, L, 'info', `${S.name} said water ${D.placeWords(world, b)} was ${b.waterSupply} at tick ${b.seen}.`);
+  else addLog(world, L, 'info', `${S.name} told me about a ${noun} ${D.placeWords(world, b)}.`);
   return true;
 }
 
