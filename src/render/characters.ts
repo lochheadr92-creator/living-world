@@ -9,44 +9,27 @@ import { weightOf } from '../sim/economy';
 import { ageYears, carryCap, stageOf } from '../sim/people';
 import { LITTLE_AGE } from '../sim/child_pace';
 import { hashUnit } from '../sim/rng';
-import type { Animal, ItemKind, Person, PoseKind, World } from '../sim/types';
+import type { Animal, Conversation, ItemKind, Person, PoseKind, World } from '../sim/types';
 import { HAND_U, HAND_V, HAND_Z } from './carts';
 import { orientedBox } from './iso3d';
 import { HAIR, HOUSEHOLD_COLORS, PANTS, SHIRT, SKIN } from './palette';
 import { shade } from './sprites';
+import { R, cycleOf, ease, newRig, setBase } from './rig';
+import type { PoseCtx, Rig } from './rig';
+import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet } from './animation';
+import type { AnimId, Condition } from './animation';
+import { animRig, applyCondition } from './anim_rig';
+import { drawAnimProps } from './anim_props';
 
 type V3 = readonly [number, number, number];
-
-// rig layout ------------------------------------------------------------------
-const R = {
-  LEAN: 0, // shoulders forward of hips (tiles)
-  CROUCH: 1, // hips lowered (px)
-  BOB: 2, // vertical bounce (px)
-  HEAD_U: 3, // head forward (tiles)
-  HEAD_Z: 4, // head height change (px)
-  HLU: 5, HLV: 6, HLZ: 7, // left hand
-  HRU: 8, HRV: 9, HRZ: 10, // right hand
-  FLU: 11, FLV: 12, FLL: 13, // left foot (lift = height off the ground, px)
-  FRU: 14, FRV: 15, FRL: 16, // right foot
-  LIE: 17, // 0 standing .. 1 lying down
-  SIT: 18, // 0 .. 1 seated
-  MOUTH: 19,
-  EYES: 20, // 1 open, 0 closed
-  TOOL: 21, // tool angle (radians, 0 = pointing forward, +up)
-  PH: 23, // 0..1 phase of the work cycle (for props that move with it)
-  N: 24,
-} as const;
-
-type Rig = Float32Array;
-
-const newRig = (): Rig => new Float32Array(R.N);
 
 interface RigState {
   x: number;
   y: number;
   phase: number;
   moved: number;
-  pose: PoseKind;
+  /** the animation being shown (animation.ts): one of the simulation's poses, or a richer one chosen from the person's record */
+  pose: AnimId;
   poseT0: number;
   from: Rig;
   cur: Rig;
@@ -56,44 +39,11 @@ interface RigState {
   carryT: number;
 }
 
-const ease = (t: number) => t * t * (3 - 2 * t);
-
 /** the tool kind drawn in the right hand for a pose: 1 axe / pick / hoe, 2 rod, 3 hammer, 4 saw, 5 spade, 6 sledge, 7 bread peel */
-const TOOL_OF: Partial<Record<PoseKind, number>> = { chop: 1, mine: 1, till: 1, fish: 2, build: 3, craft: 3, hammer: 3, saw: 4, dig: 5, forge: 6, bake: 7 };
+const TOOL_OF: Partial<Record<AnimId, number>> = { chop: 1, mine: 1, till: 1, fish: 2, build: 3, craft: 3, hammer: 3, saw: 4, dig: 5, forge: 6, bake: 7, mend: 3, mend_cart: 3 };
 
 function lerpRig(a: Rig, b: Rig, t: number, out: Rig): void {
   for (let i = 0; i < R.N; i++) out[i] = a[i] + (b[i] - a[i]) * t;
-}
-
-function setBase(r: Rig): void {
-  r.fill(0);
-  r[R.HLV] = 0.115;
-  r[R.HRV] = -0.115;
-  r[R.HLZ] = 11;
-  r[R.HRZ] = 11;
-  r[R.FLV] = 0.07;
-  r[R.FRV] = -0.07;
-  r[R.EYES] = 1;
-}
-
-/** activity progress 0..1 within the current repeated cycle, smoothly interpolated between ticks */
-function cycleOf(p: Person, alphaT: number, cycleTicks: number): number {
-  const a = p.activity;
-  if (!a) return 0;
-  let prog = a.progress;
-  if (a.progress >= a.pprogress) prog = a.pprogress + (a.progress - a.pprogress) * alphaT;
-  return ((prog / cycleTicks) % 1 + 1) % 1;
-}
-
-interface PoseCtx {
-  t: number;
-  alphaT: number;
-  walk: number; // 0..1 walk-cycle phase
-  p: Person;
-  speaking: boolean;
-  stage: string;
-  /** distance covered since the last frame (tiles) */
-  moved: number;
 }
 
 function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
@@ -518,6 +468,10 @@ interface RigResult {
   s: RigState;
   /** the pose actually shown (it can differ from person.pose: pulling a cart, digging clay) */
   pose: PoseKind;
+  /** the animation drawn for it (animation.ts) */
+  anim: AnimId;
+  /** fever, injury, pregnancy, bereavement: drawn over whatever they are doing */
+  cond: Condition;
   /** 0..1 how far the change into this pose has got, for fading its props in */
   bt: number;
   /** 0..1 how heavy the load is for this person */
@@ -529,9 +483,15 @@ export class CharacterRenderer {
   private states = new Map<number, RigState>();
   private tmp = newRig();
   private target = newRig();
+  /** the conversations of this frame by id, so a talker's purpose is one look-up */
+  private convs = new Map<number, Conversation>();
+  private pc: PoseCtx | null = null;
+  private basePose = (pose: PoseKind): void => poseRig(pose, this.pc!, this.target);
 
   /** Advance per-person animation state (walk phase, pose blending) using simulation time only. */
   updateAll(world: World, alphaT: number, simT: number): void {
+    this.convs.clear();
+    for (const c of world.conversations) this.convs.set(c.id, c);
     for (const p of world.persons) {
       let s = this.states.get(p.id);
       const x = p.px + (p.x - p.px) * alphaT;
@@ -573,12 +533,18 @@ export class CharacterRenderer {
     }
     const speaking = !!(p.speech && p.speech.until > world.tick);
     const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, p, speaking, stage: band ?? '', moved: s.moved };
-    if (pose !== s.pose) {
+    // the simulation's pose says little; what they are really doing is on their own record (animation.ts)
+    const anim = animationOf(world, p, pose, p.convId ? this.convs.get(p.convId) : undefined);
+    if (anim !== s.pose) {
       s.from.set(s.cur);
-      s.pose = pose;
+      s.pose = anim;
       s.poseT0 = simT;
     }
-    poseRig(pose, pc, this.target);
+    if (isPose(anim)) poseRig(anim, pc, this.target);
+    else {
+      this.pc = pc;
+      animRig(anim, pose, pc, this.target, this.basePose);
+    }
     const bt = ease(clamp((simT - s.poseT0) / 0.28, 0, 1));
     lerpRig(s.from, this.target, bt, s.cur);
     const out = this.tmp;
@@ -590,6 +556,8 @@ export class CharacterRenderer {
     const burden = cap > 0 ? clamp(weightOf(inv) / cap, 0, 1) : 0;
     const onFoot = pose === 'walk' || pose === 'run';
     const free = onFoot || pose === 'stand';
+    const cond = conditionOf(world, p);
+    if (cond !== NO_CONDITION) applyCondition(out, cond, pc, isQuiet(anim), onFoot);
     if (burden > 0.06 && free) {
       out[R.LEAN] += 0.05 * burden;
       out[R.CROUCH] += 1.1 * burden;
@@ -628,14 +596,14 @@ export class CharacterRenderer {
       const left = (p.wave - world.tick) / 26;
       applyWave(out, simT, clamp(Math.min(1, left * 3, (1 - left) * 8 + 0.2), 0, 1));
     }
-    return { rig: out, s, pose, bt, burden };
+    return { rig: out, s, pose, anim, cond, bt, burden };
   }
 
   draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number }): { headX: number; headY: number } {
     const x = p.px + (p.x - p.px) * alphaT;
     const y = p.py + (p.y - p.py) * alphaT;
-    const heading = p.pheading + angleDiff(p.pheading, p.heading) * alphaT;
-    const { rig, s, pose, bt, burden } = this.rigFor(world, p, simT, alphaT);
+    const { rig, s, anim, cond, bt, burden } = this.rigFor(world, p, simT, alphaT);
+    const heading = p.pheading + angleDiff(p.pheading, p.heading) * alphaT + rig[R.SPIN];
     const bs = bodyScale(world, p);
     const sc = bs.s;
     const look = p.look;
@@ -686,13 +654,25 @@ export class CharacterRenderer {
       const my = (h[1] + f[1]) / 2;
       const bx = (fx - fy) * 32 * kneeBend * sc;
       const by = (fx + fy) * 16 * kneeBend * sc;
-      return [mx + bx, my + by, (h[2] + f[2]) / 2];
+      return [mx + bx, my + by - rig[R.KNZ] * sc, (h[2] + f[2]) / 2];
     };
-    const kneeL = lie > 0.5 ? footL : knee(hipL, footL);
-    const kneeR = lie > 0.5 ? footR : knee(hipR, footR);
-    const elbow = (s0: V3, h: V3, down: number): V3 => [(s0[0] + h[0]) / 2, (s0[1] + h[1]) / 2 + down, (s0[2] + h[2]) / 2];
-    const elbowL = elbow(shL, handL, 1.6);
-    const elbowR = elbow(shR, handR, 1.6);
+    let kneeL = lie > 0.5 ? footL : knee(hipL, footL);
+    let kneeR = lie > 0.5 ? footR : knee(hipR, footR);
+    // kneeling: a knee on the ground in front of the hip, the shin lying back from it (the right knee first, then both)
+    const kn = lie > 0.5 ? 0 : rig[R.KNEEL];
+    if (kn > 0.01) {
+      const toGround = (k0: V3, v: number, w: number): V3 => {
+        const g = S(0.14, v, 1.2);
+        return [k0[0] + (g[0] - k0[0]) * w, k0[1] + (g[1] - k0[1]) * w, k0[2] + (g[2] - k0[2]) * w];
+      };
+      kneeR = toGround(kneeR, -0.06, clamp(kn * 2, 0, 1));
+      if (kn > 0.5) kneeL = toGround(kneeL, 0.06, clamp(kn * 2 - 1, 0, 1));
+    }
+    // elbows: halfway, dropped a little, pushed out sideways for hands on the hips or up at the face
+    const elbOut = rig[R.ELB] * sc;
+    const elbow = (s0: V3, h: V3, down: number, side: number): V3 => [(s0[0] + h[0]) / 2 + (lx - ly) * 32 * elbOut * side, (s0[1] + h[1]) / 2 + down + (lx + ly) * 16 * elbOut * side, (s0[2] + h[2]) / 2];
+    const elbowL = elbow(shL, handL, 1.6, 1);
+    const elbowR = elbow(shR, handR, 1.6, -1);
 
     // ground shadow
     const base = S(0, 0, 0);
@@ -822,13 +802,33 @@ export class CharacterRenderer {
       },
     });
 
-    // which tool is in hand follows the pose being shown (not the blended rig, which would flicker between kinds)
-    const toolKind = pose==='fish'&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[pose]??0;
+    // near her time: the belly, in front of the body (drawn from the record's own date, never a guess)
+    if (cond.belly > 0 && lie < 0.5) {
+      const bz = hipZ + (shZ0 - hipZ) * 0.36;
+      const bc = S(lean * 0.36 + 0.085 * cond.belly, 0, bz);
+      parts.push({
+        d: bc[2] + 0.0055,
+        draw: () => {
+          const br = 3.5 * sc * look.build * cond.belly;
+          ctx.fillStyle = shirt;
+          ctx.strokeStyle = 'rgba(25,18,12,0.4)';
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.ellipse(bc[0], bc[1], br, br * 1.12, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        },
+      });
+    }
+
+    // which tool is in hand follows the animation being shown (not the blended rig, which would flicker between kinds)
+    const toolKind = anim==='fish'&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[anim]??0;
 
     // carried goods on the back / hips
     drawCarried(ctx, p, parts, S, fx, fy, sc, lie, rig, toolKind, s.carry, s.jar, headC, burden, simT);
 
-    // arms
+    // arms (a mourning band or a binding goes on the arm nearer the viewer, so it can be seen)
+    const nearSide = shL[2] >= shR[2] ? 1 : -1;
     for (const [s0, e, h, side] of [[shL, elbowL, handL, 1], [shR, elbowR, handR, -1]] as [V3, V3, V3, number][]) {
       parts.push({
         d: (s0[2] + h[2]) / 2 + (side > 0 ? 0.004 : 0.006),
@@ -839,6 +839,43 @@ export class CharacterRenderer {
           ctx.beginPath();
           ctx.arc(h[0], h[1], 1.55 * sc, 0, Math.PI * 2);
           ctx.fill();
+          if (side === nearSide && lie < 0.5) {
+            if (cond.mourning) {
+              // bereaved: a dark band on the upper arm
+              ctx.strokeStyle = '#231f1c';
+              ctx.lineWidth = aw + 0.7;
+              ctx.lineCap = 'butt';
+              ctx.beginPath();
+              ctx.moveTo(s0[0] + (e[0] - s0[0]) * 0.42, s0[1] + (e[1] - s0[1]) * 0.42);
+              ctx.lineTo(s0[0] + (e[0] - s0[0]) * 0.78, s0[1] + (e[1] - s0[1]) * 0.78);
+              ctx.stroke();
+            }
+            if (cond.cut) {
+              // a bad cut, bound up (where it is the record does not say: the forearm, by convention)
+              ctx.strokeStyle = '#ece5d4';
+              ctx.lineWidth = aw * 0.9 + 0.5;
+              ctx.lineCap = 'butt';
+              ctx.beginPath();
+              ctx.moveTo(e[0] + (h[0] - e[0]) * 0.3, e[1] + (h[1] - e[1]) * 0.3);
+              ctx.lineTo(e[0] + (h[0] - e[0]) * 0.72, e[1] + (h[1] - e[1]) * 0.72);
+              ctx.stroke();
+            }
+          }
+          if (side > 0 && lie < 0.5) {
+            if (cond.sling) {
+              // a broken arm: a cloth from the neck holding the forearm
+              ctx.fillStyle = '#ece5d4';
+              ctx.strokeStyle = 'rgba(60,50,36,0.6)';
+              ctx.lineWidth = 0.7;
+              ctx.beginPath();
+              ctx.moveTo(shoulderC[0], shoulderC[1] - 1);
+              ctx.lineTo(h[0] + 1.2 * sc, h[1] + 1.6 * sc);
+              ctx.lineTo(e[0] - 0.8 * sc, e[1] + 1.8 * sc);
+              ctx.closePath();
+              ctx.fill();
+              ctx.stroke();
+            }
+          }
         },
       });
     }
@@ -846,7 +883,7 @@ export class CharacterRenderer {
     // tool in the right hand, and the things set up in front of the worker (trestle, anvil, board, hole)
     if (toolKind > 0 && lie < 0.5) {
       drawTool(ctx, parts, p, toolKind, rig, handR, fx, fy, sc, simT);
-      drawProps(ctx, parts, p, pose, handL, S, fx, fy, sc, bt);
+      drawProps(ctx, parts, p, isPose(anim) ? anim : 'stand', handL, S, fx, fy, sc, bt);
     } else if (p.pose === 'eat' && p.activity) {
       parts.push({
         d: handR[2] + 0.01,
@@ -859,6 +896,9 @@ export class CharacterRenderer {
       });
     }
 
+    // what the richer animations hold: a spear, a jar, a skin (each only if the person's record holds it)
+    if (!isPose(anim) && lie < 0.5) drawAnimProps(ctx, parts, p, anim, rig, handL, handR, fx, fy, sc, bt);
+
     // head
     const faceDirScreenX = (fx - fy) / Math.SQRT2; // + = facing screen-right
     const faceToward = (fx + fy) / Math.SQRT2; // + = facing the viewer
@@ -868,6 +908,18 @@ export class CharacterRenderer {
       draw: () => {
         const hr = 5.1 * sc * bs.head;
         drawHead(ctx, headC[0], headC[1], hr, { skin, hair: hairC, style: look.hairStyle, hat: bs.band ? 0 : look.hat, shirt, eyeDir, toward: faceToward, eyes: rig[R.EYES], mouth: rig[R.MOUTH], child: stage === 'child' });
+        if (cond.fever > 0 && faceToward >= -0.15) {
+          // a fever: flushed cheeks and a bead of sweat
+          ctx.fillStyle = `rgba(222,48,34,${0.8 * cond.fever})`;
+          ctx.beginPath();
+          ctx.arc(headC[0] + eyeDir * hr * 0.5 - hr * 0.42, headC[1] + hr * 0.42, hr * 0.36, 0, Math.PI * 2);
+          ctx.arc(headC[0] + eyeDir * hr * 0.5 + hr * 0.42, headC[1] + hr * 0.42, hr * 0.36, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(170,215,240,0.9)';
+          ctx.beginPath();
+          ctx.arc(headC[0] + eyeDir * hr * 0.5 + hr * 0.62, headC[1] - hr * 0.1 + ((simT * 3 + p.id) % 1) * hr * 0.5, Math.max(0.6, hr * 0.14), 0, Math.PI * 2);
+          ctx.fill();
+        }
       },
     });
 
