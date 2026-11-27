@@ -239,6 +239,50 @@ export const SPECS = [
     { dx: -0.4, dy: 0.3, heading: SOLO, pose: 'stand' },
     { dx: 0.4, dy: -0.3, heading: SOLO, pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.04 },
   ], after: (world, people) => { for (const p of people) p.lifeEvent = { kind: 'bereaved', about: 0, since: world.tick - 100, until: world.tick + 5000 }; } },
+
+  // ───────────── H: the main work, told apart by what is being worked at (src/render/anim_work.ts) ─────────────
+  // The frames are the activity's progress, so each strip runs through one unit (a berry, a fish, a bite) or one rhythm of the
+  // motion; `duration` is the unit's length, as the handler would set it. A staged cell shows how a record is DRAWN, not that it arises.
+  { id: 'pick_bush', group: 'H', was: 'pick', label: 'Gathering from a berry bush', frames: [1, 5, 9, 13, 17, 21], people: [one({ pose: 'pick', kind: 'gather', duration: 24, data: { stype: 'berry_bush' } })] },
+  { id: 'pick_tree', group: 'H', was: 'pick', label: 'Gathering from a fruit tree', frames: [1, 5, 9, 13, 17, 21], people: [one({ pose: 'pick', kind: 'gather', duration: 24, data: { stype: 'fruit_tree' } })] },
+  { id: 'reap', group: 'H', was: 'pick', label: 'Gathering wild grain', frames: [1, 5, 9, 13, 17, 21, 25], people: [one({ pose: 'pick', kind: 'gather', duration: 26, data: { stype: 'wild_grain' } })] },
+  { id: 'mow', group: 'H', was: 'pick', label: 'Cutting hay in a meadow', frames: [1, 6, 11, 16, 24, 34, 46, 54], people: [one({ pose: 'pick', kind: 'gather', duration: 65, data: { stype: 'hay_meadow' } })] },
+  { id: 'fell', group: 'H', was: 'chop', label: 'Felling a tree', frames: [1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51], people: [one({ pose: 'chop', kind: 'gather', duration: 46, data: { stype: 'tree' } })] },
+  { id: 'fish_cast', group: 'H', was: 'fish', label: 'Fishing with a rod held', frames: [1, 4, 7, 11, 16, 22, 28, 33, 36, 38, 39], people: [one({ pose: 'fish', kind: 'gather', duration: 40, data: { stype: 'fish_spot' }, inv: { rod: 1 } })],
+    after: (world, people) => { world.tools.length = 0; world.tools.push({ ent: 'tool', id: 9990, kind: 'rod', tier: 0, wear: 0, ownerHh: 0, holder: people[0].id, loan: null, madeTick: 0, maker: 0 }); } },
+  { id: 'fish_hand', group: 'H', was: 'fish', label: 'Fishing with no rod (bare hands)', frames: [1, 4, 7, 11, 16, 22, 28, 33, 36, 38, 39], people: [one({ pose: 'fish', kind: 'gather', duration: 40, data: { stype: 'fish_spot' } })],
+    after: (world) => { world.tools.length = 0; } },
+  { id: 'sow', group: 'H', was: 'plant', label: 'Sowing a seed', frames: [1, 4, 7, 10, 13, 16, 19, 22], people: [one({ pose: 'plant', kind: 'plant', duration: 24, inv: { seeds: 2 } })],
+    after: (world, people) => { people[0].activity.targetId = 9002; world.byId.set(9002, { ent: 'plot', id: 9002, x: 40, y: 40, state: 'growing' }); } },
+  { id: 'weed', group: 'H', was: 'tend', label: 'Tending a bed (no water carried)', frames: [1, 5, 9, 13, 17, 21, 25, 29], people: [one({ pose: 'tend', kind: 'tend', duration: 30 })],
+    after: (world, people) => { people[0].activity.targetId = 9002; world.byId.set(9002, { ent: 'plot', id: 9002, x: 40, y: 40, state: 'growing' }); } },
+  { id: 'water_crop', group: 'H', was: 'tend', label: 'Tending a bed (water and a jar carried)', frames: [1, 5, 9, 13, 17, 21, 25, 29], people: [one({ pose: 'tend', kind: 'tend', duration: 30, inv: { water: 2, jar: 1 } })],
+    after: (world, people) => { people[0].activity.targetId = 9002; world.byId.set(9002, { ent: 'plot', id: 9002, x: 40, y: 40, state: 'growing' }); } },
+  { id: 'water_nojar', group: 'H', label: 'Tending a bed (water, no jar)', frames: [1, 9, 17, 25], people: [one({ pose: 'tend', kind: 'tend', duration: 30, inv: { water: 2 } })],
+    after: (world, people) => { people[0].activity.targetId = 9002; world.byId.set(9002, { ent: 'plot', id: 9002, x: 40, y: 40, state: 'growing' }); } },
+  { id: 'reap_field', group: 'H', was: 'harvest', label: 'Harvesting a household plot', frames: [1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41], people: [one({ pose: 'harvest', kind: 'harvest', duration: 42 })],
+    after: (world, people) => { people[0].activity.targetId = 9002; world.byId.set(9002, { ent: 'plot', id: 9002, x: 40, y: 40, state: 'growing' }); } },
+  { id: 'raise', group: 'H', was: 'build', label: 'Raising a building (planks on the site)', frames: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 36, 40], people: [one({ pose: 'build', kind: 'build', duration: 400, data: {} })],
+    after: (world, people) => { people[0].activity.targetId = 9001; world.byId.set(9001, { ent: 'site', id: 9001, type: 'hut', delivered: { planks: 3, wood: 2 }, required: { planks: 6, wood: 4 }, used: {} }); } },
+  { id: 'raise_stone', group: 'H', label: 'Raising a building (stone on the site)', frames: [3, 9, 15, 21], people: [one({ pose: 'build', kind: 'build', duration: 400, data: {} })],
+    after: (world, people) => { people[0].activity.targetId = 9001; world.byId.set(9001, { ent: 'site', id: 9001, type: 'hut', delivered: { stone: 3 }, required: { stone: 4 }, used: {} }); } },
+  { id: 'raise_wait', group: 'H', was: 'build', label: 'Waiting at a site for material', people: [one({ pose: 'build', kind: 'build', duration: 400, data: { waited: 6 } })],
+    after: (world, people) => { people[0].activity.targetId = 9001; world.byId.set(9001, { ent: 'site', id: 9001, type: 'hut', delivered: {}, required: { stone: 4 }, used: {} }); } },
+  { id: 'eat_stand', group: 'H', was: 'eat', label: 'Eating alone, standing', frames: [0, 2, 4, 6, 8, 9], people: [one({ pose: 'eat', kind: 'eat', duration: 10, data: { food: 'berries' }, inv: { berries: 2 } })] },
+  { id: 'eat_wipe', group: 'H', label: 'Eating alone: the third bite, wiping the mouth', frames: [0, 2, 4, 6, 7, 8, 9], people: [one({ pose: 'eat', kind: 'eat', duration: 10, data: { food: 'fish' }, inv: { fish: 2 }, set: { activity: { cycle: 2 } } })] },
+  { id: 'drink_shore', group: 'H', was: 'drink', label: 'Drinking at the water', frames: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27], people: [one({ pose: 'drink', kind: 'drink', duration: 40, data: { wx: 40, wy: 40 } })] },
+  { id: 'take_cutting', group: 'H', was: 'chop', label: 'Taking a living cutting from a tree', frames: [1, 10, 20, 30, 40, 50, 60, 70, 78], people: [one({ pose: 'chop', kind: 'tree_work', duration: 80, data: { op: 'cut' }, inv: { cutting: 1 } })] },
+  { id: 'plant_tree', group: 'H', was: 'plant', label: 'Planting a young tree', frames: [3, 15, 30, 50, 70, 85, 100, 120, 140], people: [one({ pose: 'plant', kind: 'tree_work', duration: 150, data: { op: 'plant' }, inv: { cutting: 1 } })] },
+
+  { id: 'work_conditions', group: 'H', label: 'Work under a fever, near her time and a broken arm (left to right)', frames: [3, 9, 15], people: [
+    { dx: -0.75, dy: 0.75, heading: SOLO, pose: 'pick', kind: 'gather', duration: 26, data: { stype: 'wild_grain' } },
+    { dx: 0, dy: 0, heading: SOLO, pose: 'pick', kind: 'gather', duration: 24, data: { stype: 'berry_bush' }, ...woman },
+    { dx: 0.75, dy: -0.75, heading: SOLO, pose: 'chop', kind: 'gather', duration: 46, data: { stype: 'tree' } },
+  ], after: (world, people) => {
+    people[0].illness = { since: world.tick - 200, severity: 50, rested: 0, course: 2000, how: 'staged' };
+    people[1].pregnantUntil = world.tick + 600;
+    people[2].injury = { kind: 'broken', since: world.tick - 100, until: world.tick + 2000, how: 'staged' };
+  } },
 ];
 
 /** pairs that used to look the same: [id, baseline id] shown side by side at the default zoom */
