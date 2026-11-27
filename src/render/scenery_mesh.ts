@@ -1,14 +1,13 @@
 // Bake static, depth-tested meshes into the isometric compositor's sprite cache.
 // A shared scratch context is used only on cache misses, including in large worlds.
 import { hashUnit } from '../sim/rng';
+import { uploadSceneryMaterials } from './mesh_materials';
 import { groundShadow, SpriteCache } from './sprites';
 import type { Sprite } from './sprites';
 
 type Point = readonly [x: number, y: number, z: number];
 type UV = readonly [u: number, v: number];
-export const GRAIN = 0, THATCH = 1, MASONRY = 2, LEAF = 3, TILE = 4, EARTH = 5;
 export type Finish = readonly [color: number, texture: number];
-const MATERIALS = 6;
 const RESOLUTION = 3;
 const CIRCLE = Math.PI * 2;
 const UV_QUAD: UV[] = [[0, 0], [1, 0], [1, 1], [0, 1]];
@@ -88,27 +87,6 @@ export class SceneryModel {
   }
 }
 
-function materialPixels(): Uint8Array {
-  const pixels = new Uint8Array(64 * 64 * MATERIALS);
-  for (let m = 0; m < MATERIALS; m++) for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
-    const row = y >> 4;
-    const stoneX = (x + (row % 2) * 9) % 22;
-    const tileX = (x + (row % 2) * 6) % 13;
-    const noise = hashUnit(x, y, m) - .5;
-    const grain = Math.sin(x * 1.35 + Math.sin(y * .18) * 1.5);
-    const patterns = [
-      grain * .085 + Math.sin(x * .35 + y * .07) * .075,
-      Math.sin(x * 1.8 + y * .43) * .09 - (y % 16 === 0 ? .22 : 0),
-      (y % 16 < 2 || stoneX < 2 ? -.28 : .02) + hashUnit((x - stoneX) >> 2, row, 4) * .16,
-      Math.sin(x * .63 + y * .91) * Math.cos(x * .34 - y * .42) * .15,
-      y % 16 < 2 || tileX === 0 ? -.29 : (hashUnit(x - tileX, row, 9) - .5) * .23 + y % 16 * .01,
-      Math.sin(x * .34) * Math.cos(y * .56) * .08,
-    ];
-    pixels[(m * 64 + y) * 64 + x] = Math.min(255, Math.round((.83 + patterns[m] + .14 * noise) * 255));
-  }
-  return pixels;
-}
-
 const VERTEX = `#version 300 es
 layout(location=0) in vec3 p;
 layout(location=1) in vec2 uv;
@@ -131,11 +109,10 @@ precision highp float;
 in vec2 surface;
 in vec3 tint;
 flat in float material;
-uniform sampler2D materials;
+uniform highp sampler2DArray materials;
 out vec4 color;
 void main() {
-  vec2 texel = fract(surface)*62.+1.;
-  float pattern = texture(materials, vec2(texel.x/64., (texel.y+material*64.)/384.)).r;
+  float pattern = texture(materials, vec3(surface, material)).r;
   color = vec4(tint*(.42+pattern*.74), 1.);
 }`;
 
@@ -162,10 +139,7 @@ class MeshBaker {
       gl.enableVertexAttribArray(location);
       gl.vertexAttribPointer(location, size, gl.FLOAT, false, 40, offset * 4);
     }
-    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, 64, 64 * MATERIALS, 0, gl.RED, gl.UNSIGNED_BYTE, materialPixels());
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    uploadSceneryMaterials(gl);
     gl.enable(gl.DEPTH_TEST);
   }
 
