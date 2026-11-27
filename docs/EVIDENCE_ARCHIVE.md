@@ -37,3 +37,7 @@ What still names them:
 `npm run test:evidence` reads local, never-tracked files in `autonomy_evidence/helper-receipt107-first-invalid/`; that folder stays on Ryan's PC. Every other untracked leftover was moved to `C:\dev\_lw_archive\folders-20261128\evidence-leftovers`.
 
 The only `*_evidence` files still tracked are the two single files kept in the first pass.
+
+## Removed (run output at the root, 28 November 2026)
+
+Nine output folders (`gate_v2_unversioned`, `gate_v35`, `learn_out`, `noask_out`, `prep_out8`, `prep_out12`, `stage4_pilot_out`, `stage4_pilot2_out`, `town_out`) and 22 loose files (the `autonomy-*.err` and `autonomy-*-processes.json` run logs, `fix-smoke-*.json`, `smoke.json`, `connection-civic-food-diagnosis.json`): 221 files. Nothing in the code reads them. `experiments/` stays: `tests/inhabitant_attribute.test.ts` reads its transcripts.
