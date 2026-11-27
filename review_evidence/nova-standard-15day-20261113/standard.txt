@@ -1,3 +1,0 @@
-standard run: Ines (#1125) in river, tick 2400 to 38400
-end hash 9f4d2b16
-Ines: alive, health 100; needs hunger 61, thirst 71, energy 94, warmth 81, safety 84, social 76; carrying 1 basket, 1 saw, 1 fibre, 1 grain, 4 wood; lifetime {"gathered":101,"given":0,"received":0,"built":2,"talked":26,"farmed":2,"crafted":3}; knows 808 places; promises 1

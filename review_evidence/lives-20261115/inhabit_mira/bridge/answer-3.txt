@@ -1,1 +1,0 @@
-{"choose":"gather:607","limit":{"amount":2},"why":"Kira is busy. The lean-to needs two more wood and I will fetch them myself; it is a long walk but it is the one thing I can do without anyone's yes.","notes":{"intentions":[{"id":"n3","text":"Chop 2 wood at tree 607, bring it back, build the lean-to"}],"journal":"Kira refused (busy). Going to chop the last two wood myself."}}

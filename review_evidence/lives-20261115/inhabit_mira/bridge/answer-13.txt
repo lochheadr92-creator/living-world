@@ -1,1 +1,0 @@
-{"choose":"drink:2000000191","why":"I am at the water's edge and thirst is at 55; it costs eighteen minutes and I will not have to come back.","notes":{"intentions":[{"id":"n3","text":"Drink, then decide: fish home, or one fish to Yusuf who looked hungry"}],"journal":"Three fish in hand at the shore."}}

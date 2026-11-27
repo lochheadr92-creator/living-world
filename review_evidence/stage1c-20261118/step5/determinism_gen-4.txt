@@ -1,2 +1,0 @@
-{"seed":"gen-4","rules":256,"tick":12000,"hashA":"2ec6977d","hashB":"2ec6977d","hashLoaded":"2ec6977d","twoRuns":true,"saveLoad":true,"alive":29}
-determinism held

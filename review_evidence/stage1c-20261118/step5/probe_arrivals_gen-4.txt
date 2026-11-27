@@ -1,6 +1,0 @@
-{"seed":"gen-4","tick":6000,"arrivals":0,"alive":28,"sec":10}
-{"seed":"gen-4","tick":12000,"arrivals":1,"alive":29,"sec":19}
-{"seed":"gen-4","tick":18000,"arrivals":2,"alive":30,"sec":30}
-{"seed":"gen-4","tick":24000,"arrivals":3,"alive":32,"sec":42}
-{"seed":"gen-4","tick":30000,"arrivals":4,"alive":33,"sec":57}
-{"seed":"gen-4","tick":36000,"arrivals":5,"alive":35,"sec":71}

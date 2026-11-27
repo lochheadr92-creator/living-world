@@ -1,1 +1,0 @@
-{"choose":"socialize:1111:chat","why":"Yusuf is three steps away and friendly, and I have walked a long way for him; if I cannot be useful to him today I can at least sit with him a while.","notes":{"intentions":[{"id":"n3","text":"Chat with Yusuf, then pick berries toward the household's 4 units"}],"journal":"Fed. Chatting with Yusuf, since I came this far."}}

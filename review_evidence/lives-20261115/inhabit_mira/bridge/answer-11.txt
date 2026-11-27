@@ -1,1 +1,0 @@
-{"choose":"build:1243","limit":{"ticks":100},"why":"Still not a roof. The light is coming and I am rested; another long spell.","notes":{"journal":"Dawn of day 3. Second long build spell; still not finished."}}

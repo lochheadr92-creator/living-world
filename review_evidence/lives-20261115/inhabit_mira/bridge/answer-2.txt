@@ -1,1 +1,0 @@
-{"choose":"socialize:1088:recruit","why":"Kira is friendly and two steps away, and an old woman builds a roof faster with a hand; Zia and Wen refused wood, so I will ask for work instead.","notes":{"intentions":[{"id":"n3","text":"Ask Kira for help building; then build or chop 2 more wood"}],"journal":"Delivered 2 wood. The site still wants 2. Asking Kira for a hand."}}

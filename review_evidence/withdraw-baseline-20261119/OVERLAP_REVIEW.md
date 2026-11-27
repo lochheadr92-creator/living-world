@@ -1,8 +1,0 @@
-# Review of the concurrent rules-257 draft
-
-The main checkout contained an uncommitted implementation of the same workshop-access idea during this work. It was inspected read-only; its state may change. No claim is made that its staged tests or ordinary-world comparison pass.
-
-* `bench_access.ts` reads the actual building's current `ops.builders` during option generation. A staged test changes that remote ledger after observation and expects the option to change. The older `production.ts` already reads the live ledger for workplace eligibility, but the new stock calculation adds another dependence. Check whether the builder's own knowledge justifies this and whether an unseen remote change may alter the decision.
-* The proposed person-specific `benchStock` applies to batch input planning and smithy standing wants as well as collecting finished goods. These paths need their own contract checks and ordinary-world measurements; a change in collection alone does not establish their effects.
-* `held` is saved and affects later option generation, but the inspected draft did not change `hashWorld` to include it. `world.ts` fingerprints several other behaviour-relevant belief extensions explicitly. Check that two worlds differing only in the remembered earmarks cannot incorrectly share the same diagnostic fingerprint; preserve old-version hashes.
-* The original observer's label `stock_there_nothing_allowed` checks stock presence, not zero allowance. The stronger statement needs the separately recorded `access.allow` check. The concurrent draft's quoted historical percentages should not be treated as independently verified access-denial percentages without that reconciliation.

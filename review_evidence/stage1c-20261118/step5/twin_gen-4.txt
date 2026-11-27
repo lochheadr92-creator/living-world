@@ -1,3 +1,0 @@
-{"seed":"gen-4","day":5,"tick":12000,"hash256off":"ff250150","hash255":"ff250150","same":true,"alive":30}
-{"seed":"gen-4","day":25,"tick":60000,"hash256off":"4bd341b5","hash255":"4bd341b5","same":true,"alive":47}
-twin held

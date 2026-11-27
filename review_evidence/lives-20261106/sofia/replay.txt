@@ -1,2 +1,0 @@
-replay of review_evidence/lives-20261106/sofia/transcript.json: OK
-ended at tick 14400 in state 0b435b2e (recorded 0b435b2e); 70 decisions consumed, 0 overrides matched

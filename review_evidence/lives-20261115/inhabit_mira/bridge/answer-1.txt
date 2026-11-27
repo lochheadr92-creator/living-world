@@ -1,1 +1,0 @@
-{"choose":"haul:1243","why":"Eating freed room and now I can carry my two wood to the lean-to; a roof comes before everything else for an old woman with no home.","notes":{"intentions":[{"id":"n3","text":"Carry the 2 wood to lean-to site 1243, then find more wood"}],"journal":"Ate a berry, the haul option appeared. Walking to the site."}}

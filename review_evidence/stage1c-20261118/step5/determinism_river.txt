@@ -1,2 +1,0 @@
-{"seed":"river","rules":256,"tick":12000,"hashA":"8625e185","hashB":"8625e185","hashLoaded":"8625e185","twoRuns":true,"saveLoad":true,"alive":31}
-determinism held

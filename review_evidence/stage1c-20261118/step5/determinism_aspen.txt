@@ -1,2 +1,0 @@
-{"seed":"aspen","rules":256,"tick":12000,"hashA":"035d3ce9","hashB":"035d3ce9","hashLoaded":"035d3ce9","twoRuns":true,"saveLoad":true,"alive":30}
-determinism held
