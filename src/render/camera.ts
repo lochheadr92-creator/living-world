@@ -3,7 +3,7 @@ import { clamp } from '../sim/util';
 import { TILE_H, TILE_W, project, unproject } from './iso';
 
 export const MIN_ZOOM = 0.3;
-export const MAX_ZOOM = 3.2;
+export const MAX_ZOOM = 5.5;
 
 /** the ordinary world's size in tiles: its widest view (all of it) is as much ground as any world is drawn at once */
 const ORDINARY_TILES = 80 * 80;

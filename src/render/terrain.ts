@@ -6,7 +6,7 @@ import { hashString, hashUnit } from '../sim/rng';
 import { T } from '../sim/types';
 import type { World } from '../sim/types';
 import { fbm } from '../sim/worldgen';
-import { mix } from './sprites';
+import { SpriteCache, blit, mix } from './sprites';
 
 const STEPS = 8;
 function ramp(a: string, b: string): string[] {
@@ -24,8 +24,8 @@ const PAL = {
   [T.STONY]: ramp('#979689', '#b5b4a8'),
 } as const;
 
-const TUFT_LIGHT = 'rgba(190,235,140,0.75)';
-const TUFT_DARK = 'rgba(45,100,50,0.55)';
+const TUFT_LIGHT = 'rgba(151,190,102,0.85)';
+const TUFT_DARK = 'rgba(69,118,62,0.78)';
 
 export interface View {
   w: number;
@@ -33,6 +33,7 @@ export interface View {
 }
 
 export class TerrainPainter {
+  private readonly details = new SpriteCache();
   private tint: Float32Array;
   private world: World;
   private seedNum: number;
@@ -49,6 +50,21 @@ export class TerrainPainter {
         this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.4));
       }
     }
+  }
+
+  private drawGroundTexture(ctx: CanvasRenderingContext2D, x: number, y: number, variant: number): void {
+    const texture = this.details.get(`ground:${variant}`,64,32,32,16,(stamp) => {
+      for (let i = 0; i < 68; i++) {
+        const fx = hashUnit(variant,i,92)-.5, fy = hashUnit(variant,i,93)-.5;
+        const px = (fx-fy)*30, py = (fx+fy)*15;
+        const detail = hashUnit(variant,i,94);
+        stamp.fillStyle = detail > .5 ? 'rgba(250,239,178,.10)' : 'rgba(70,65,40,.09)';
+        stamp.beginPath();
+        stamp.ellipse(px,py,.5+detail*2,.25+detail*.63,-.27,0,Math.PI*2);
+        stamp.fill();
+      }
+    },3);
+    blit(ctx,texture,x,y+16);
   }
 
   /** visible tile rectangle for the current camera */
@@ -186,6 +202,9 @@ export class TerrainPainter {
         ctx.lineTo(sx - 32.9, sy + 16);
         ctx.closePath();
         ctx.fill();
+        if (z >= 1.15 && type !== T.DEEP && type !== T.SHALLOW && flood !== 'flooded') {
+          this.drawGroundTexture(ctx, sx, sy, (x + y * 3) % 7);
+        }
       }
     }
 
@@ -286,12 +305,14 @@ export class TerrainPainter {
             const gy = (x + fx + (y + fy)) * 16;
             const sway = Math.sin(t * 1.7 + x * 1.3 + y) * wind * 1.4;
             const path = k % 2 ? tuftD : tuftL;
-            path.moveTo(gx - 1.5, gy);
-            path.quadraticCurveTo(gx - 2 + sway * 0.5, gy - 3, gx - 2.5 + sway, gy - 6.5);
-            path.moveTo(gx, gy);
-            path.quadraticCurveTo(gx + sway * 0.4, gy - 4, gx + sway, gy - 8);
-            path.moveTo(gx + 1.5, gy);
-            path.quadraticCurveTo(gx + 2 + sway * 0.5, gy - 3, gx + 3 + sway, gy - 6);
+            const h = 4.3 + hashUnit(x,y,63+k)*2.8;
+            for (const side of [-1,0,1]) {
+              const endX = gx + side*3.3+sway, endY = gy-h+Math.abs(side)*1.5;
+              path.moveTo(gx+side*.66-.51,gy);
+              path.quadraticCurveTo(gx+side*1.3-.53+sway*.45,gy-h*.53,endX,endY);
+              path.quadraticCurveTo(gx+side*2+.6+sway*.45,gy-h*.49,gx+side*.66+.5,gy);
+              path.closePath();
+            }
           }
           if (type === T.GRASS && r < 0.075) {
             const fx = 0.2 + hashUnit(x, y, 60) * 0.6;
@@ -329,11 +350,10 @@ export class TerrainPainter {
       }
     }
     if (detail) {
-      ctx.lineWidth = 1.1;
-      ctx.strokeStyle = TUFT_DARK;
-      ctx.stroke(tuftD);
-      ctx.strokeStyle = TUFT_LIGHT;
-      ctx.stroke(tuftL);
+      ctx.fillStyle = TUFT_DARK;
+      ctx.fill(tuftD);
+      ctx.fillStyle = TUFT_LIGHT;
+      ctx.fill(tuftL);
       for (const f of flowers) {
         ctx.fillStyle = 'rgba(60,110,50,0.8)';
         ctx.fillRect(f.x - 0.4, f.y - 3, 0.9, 3);

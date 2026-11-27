@@ -1,4 +1,5 @@
 import { farmBuilding } from './farm';
+import { buildingMesh } from './building_models';
 // Every building drawing in one place: which sprite(s) a building type uses, and the measurements the rest of the renderer needs
 // (how tall each one stands for click targets, where its chimney is, the heights that construction stages are built to).
 import type { BuildingType } from '../sim/types';
@@ -15,6 +16,8 @@ export type BuildKind = Exclude<BuildingType, 'fire'>;
  * back layer and a front layer so that stock can be painted between them.
  */
 export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: number): Sprite[] {
+  const mesh = buildingMesh(cache, kind, variant, STRUCT[kind]);
+  if (mesh) return mesh;
   switch (kind) {
     case 'barn':case 'paddock':case 'chicken_cage':return [farmBuilding(cache,kind)];
     case 'brewery':case 'mine':case 'mill': return [recoveredWorkshopSprite(cache,kind)];
