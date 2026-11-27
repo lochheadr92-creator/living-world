@@ -1,3 +1,5 @@
+import { earlierCompanyOn, setEarlierCompany } from '../../src/sim/earlier_company';
+import { quietCompanyOn, setQuietCompany } from '../../src/sim/quiet_company';
 import { MADE_FOR_SITE, SITE_SUPPLY_PARTS, setMadeForSiteDose, setSiteSupply, siteSupplyPartOn } from '../../src/sim/site_supply';
 import { BUILDER_FETCHES_PARTS, builderFetchesPartOn, setBuilderFetches } from '../../src/sim/builder_fetches';
 import { PICKED_UP_PARTS, pickedUpPartOn, setPickedUp } from '../../src/sim/picked_up';
@@ -389,6 +391,8 @@ export function parseIntervention(specIn: string): Intervention {
   // rules 228 (parent_decides.ts): both parts removed (equal to rules 227), and each part alone
   if (kind === 'rich-no-parent-decides') return { spec: label, summary: 'a child does not ask somebody at work for family time, and a grown person asked says yes whatever job is in hand, as before rules 228; no effect below rules 228', install() { const was = PARENT_DECIDES_PARTS.map((k) => parentDecidesPartOn(k)); setParentDecides(false); return () => PARENT_DECIDES_PARTS.forEach((k, i) => setParentDecides(was[i], k)); } };
   for (const part of PARENT_DECIDES_PARTS) if (kind === 'rich-no-parent-decides-' + part) return { spec: label, summary: `${part === 'ask' ? 'a child does not ask somebody at work for family time' : 'a grown person asked for family time says yes whatever job is in hand'}, as before rules 228; no effect below rules 228`, install() { const was = parentDecidesPartOn(part); setParentDecides(false, part); return () => setParentDecides(was, part); } };
+  if (kind === 'rich-no-earlier-company') return { spec: label, summary: 'disable experimental earlier social urge', install() { const was = earlierCompanyOn(); setEarlierCompany(false); return () => setEarlierCompany(was); } };
+  if (kind === 'rich-no-quiet-company') return { spec: label, summary: 'disable experimental quiet company', install() { const was = quietCompanyOn(); setQuietCompany(false); return () => setQuietCompany(was); } };
   if (kind === 'rich-no-evening') return { spec: label, summary: 'nobody sits by the fire of an evening and no story is told there, as before rules 216; no effect below rules 216', install() { const was = EVENING_PARTS.map((k) => eveningPartOn(k)); setEvening(false); return () => EVENING_PARTS.forEach((k, i) => setEvening(was[i], k)); } };
   if (kind === 'rich-no-evening-fire') return { spec: label, summary: 'nobody sits by the fire of an evening (so no story either), as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('fire'); setEvening(false, 'fire'); return () => setEvening(was, 'fire'); } };
   if (kind === 'rich-no-evening-story') return { spec: label, summary: 'people sit by the fire but no story is told, as before rules 216; no effect below rules 216', install() { const was = eveningPartOn('story'); setEvening(false, 'story'); return () => setEvening(was, 'story'); } };

@@ -1,3 +1,4 @@
+import { earlierCompanyBands } from './earlier_company';
 import {hasNourishment,spendNourishment} from './nourishment';
 import {clothingWarmth} from './clothing';
 import {hearthWarmth} from './hearth';
@@ -17,6 +18,7 @@ export function drive(level: number, key: NeedKey, world?: World): number {
   let [t1, t2] = DRIVE_BANDS[key];
   // version 9: people tolerate a little cold before the warmth drive starts (a band 46 -> 26 instead of 52 -> 30)
   if (world && key === 'warmth' && runsRulesVersion(world, 9)) [t1, t2] = [46, 26];
+  if (world && key === 'social') [t1, t2] = earlierCompanyBands(world) ?? [t1, t2];
   if (level >= t1) return 0;
   if (level >= t2) return (60 * (t1 - level)) / (t1 - t2);
   return 60 + (40 * (t2 - Math.max(0, level))) / t2;

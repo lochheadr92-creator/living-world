@@ -1,3 +1,4 @@
+import { quietCompanyStep } from './quiet_company';
 import {runsRulesVersion} from './rulesversion';
 import { perishableOf } from './bread_feeds';
 import {hasBrewing} from './brewing';
@@ -124,6 +125,7 @@ export function stepWorld(world: World): void {
     stepPerson(world, p);
   }
 
+  quietCompanyStep(world);
   updateCarts(world);
   updateConversations(world);
   if (tick % 10 === 3) mealTick(world);
