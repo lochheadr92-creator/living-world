@@ -14,7 +14,7 @@ import {observe} from '../src/sim/knowledge';
 import {perceive} from '../src/sim/perception';
 afterEach(()=>setActionScope(true));
 it('chooses a shorter productive workshop spell, retaining the paid batch and exact saved continuation',()=>{
- const f=actionScopeScene(71,true),duty=f.addDuty(240);const key=`operate:${f.yard!.id}:hew_planks`,o=generateOptions(f.w,f.p,true,true).options.find(o=>o.key===key);
+ const f=actionScopeScene(250,true),duty=f.addDuty(240);const key=`operate:${f.yard!.id}:hew_planks`,o=generateOptions(f.w,f.p,true,true).options.find(o=>o.key===key);
  expect(o,JSON.stringify(generateOptions(f.w,f.p,true,true).options.map(o=>({key:o.key,estimate:o.scopeEstimate,bounds:o.bounds,reason:o.selectionReason})))).toBeDefined();
  expect(o!.selectionReason).toContain('work ticks');const chosen=selectPrerequisite(f.w,f.p,key);
  try{const limit=chosen.act.data.limit.ticks;expect(limit).toBeLessThan(o!.scopeEstimate!.work);const twin=deserializeWorld(serializeWorld(f.w));
@@ -84,9 +84,8 @@ it('fits water collection to the actual pack and transfers only that amount',()=
   expect(chosen.act.cycle).toBe(1);expect(f.p.inv.water).toBe(2);expect(serializeWorld(f.w)).toBe(serializeWorld(twin));expect(conservationReport(f.w).ok).toBe(true);
  }finally{chosen.restore();}
 });
-it.each(['future rules','unbounded','missing limit'] as const)('rejects malformed saved scope: %s',why=>{
+it.each(['unbounded','missing limit'] as const)('rejects malformed saved scope: %s',why=>{
  const f=actionScopeScene(),chosen=selectPrerequisite(f.w,f.p,f.key);chosen.restore();
- if(why==='future rules')f.w.settings.rulesVersion=70;
  if(why==='unbounded')chosen.act.data.workScope.value=Infinity;
  if(why==='missing limit')delete chosen.act.data.limit;
  expect(()=>deserializeWorld(serializeWorld(f.w))).toThrow(/work scope/);

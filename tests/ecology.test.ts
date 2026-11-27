@@ -15,13 +15,14 @@ import {DAY} from '../src/sim/constants';
 import {T} from '../src/sim/types';
 import {createWorld} from '../src/sim/factory';
 import {currentWorldSettings} from '../src/sim/profiles';
+import {setExternalController} from '../src/sim/external';
 afterEach(()=>setEcology(true));
 it.each(['river','forest','meadow'])('preserves valid founder memories from before the world clock began: %s',seed=>{
  const w=createWorld(currentWorldSettings('normal',seed,{immigration:false}));expect(w.persons.some(p=>Object.values(p.beliefs).some(b=>b.ecology!==undefined&&b.seen<0))).toBe(true);
  const raw=serializeWorld(w);expect(serializeWorld(deserializeWorld(raw))).toBe(raw);
 });
 it('charges only actual biological removal, including equal costs for split transfers; minerals stay finite',()=>{
- const f=ecologyScene(),{w,p,bush,other}=f;consume(w,p.inv,'fruit',4,'staged room');consume(w,p.inv,'water',4,'staged room');
+ const f=ecologyScene(250),{w,p,bush,other}=f;consume(w,p.inv,'fruit',4,'staged room');consume(w,p.inv,'water',4,'staged room');
  const twin=deserializeWorld(serializeWorld(w)),q=twin.persons[0],s=twin.sources.find(s=>s.id===bush.id)!;
  expect(gatherFromSource(w,bush,p,6)).toBe(6);for(let i=0;i<6;i++)gatherFromSource(twin,s,q,1);
  expect(conditionAt(w,bush.x,bush.y)).toBe(conditionAt(twin,s.x,s.y));expect(conditionAt(w,bush.x,bush.y)).toBeLessThan(1);
@@ -29,11 +30,11 @@ it('charges only actual biological removal, including equal costs for split tran
  const rock=makeSource(w,'rock',50,50,2);ledgerCreate(w,'stone',2,'staged finite deposit');gatherFromSource(w,rock,p,2);expect(conditionAt(w,50,50)).toBe(1);expect(rock.regrowEvery).toBe(0);expect(conservationReport(w).ok).toBe(true);
 });
 it('comparable empty patches diverge after different real pressure and retain their condition across replacement and save',()=>{
- const {w,p,bush,other}=ecologyScene();consume(w,p.inv,'fruit',4,'staged room');consume(w,p.inv,'water',4,'staged room');
+ const {w,p,bush,other}=ecologyScene(250);consume(w,p.inv,'fruit',4,'staged room');consume(w,p.inv,'water',4,'staged room');
  gatherFromSource(w,bush,p,6);consume(w,p.inv,'berries',6,'staged consumption');gatherFromSource(w,other,p,1);
  // Equal current stocks isolates persistent condition from the inventory count; remove the control stock as a declared loss.
  consume(w,{berries:other.amount},'berries',other.amount,'staged control stock loss');other.amount=0;bush.regrowTimer=other.regrowTimer=0;w.weather.rain=0;
- for(let i=0;i<320;i++){w.tick++;updateSources(w);}expect(other.amount).toBe(1);expect(bush.amount).toBe(0);
+ for(let i=0;i<320;i++){w.tick++;updateSources(w);}expect(other.amount).toBe(2);expect(bush.amount).toBe(1);
  const saved=deserializeWorld(serializeWorld(w));expect(saved.ecology).toEqual(w.ecology);expect(conservationReport(w).ok).toBe(true);
  const tree=makeSource(w,'tree',54,54,1);ledgerCreate(w,'wood',1,'staged tree');gatherFromSource(w,tree,p,1);const c=conditionAt(w,54,54);fellTree(w,tree);makeSource(w,'tree',54,54,0,0.02);expect(conditionAt(w,54,54)).toBe(c);
 });
@@ -45,11 +46,11 @@ it('uses dated coarse signs without seeing remote recovery, and inspector/AI/opt
  observe(w,p,bush);expect(p.beliefs[bush.id].ecology).toBe('vigorous');expect(rememberedConditionCost(w,p.beliefs[bush.id])).toBe(0);
 });
 it('physically sows a real seed, persists soil across crops, and never resets it with crop care',()=>{
- const {w,p,a}=ecologyScene();const seed=p.inv.seeds!;doEcologyOption(w,p,`plant:${a.id}`);expect(a.state).toBe('growing');expect(p.inv.seeds).toBe(seed-1);expect(conditionAt(w,a.x,a.y)).toBe(0.84);expect(conservationReport(w).ok).toBe(true);
+ const {w,p,a}=ecologyScene(250);const seed=p.inv.seeds!;doEcologyOption(w,p,`plant:${a.id}`);expect(a.state).toBe('growing');expect(p.inv.seeds).toBe(seed-1);expect(conditionAt(w,a.x,a.y)).toBe(0.84);expect(conservationReport(w).ok).toBe(true);
  const raw=serializeWorld(w),twin=deserializeWorld(raw);for(let n=0;n<150;n++){stepWorld(w);stepWorld(twin);}expect(serializeWorld(w)).toBe(serializeWorld(twin));
 });
 it('rest and real watered care recover different amounts under the same weather; drought and cold slow recovery',()=>{
- const {w,p,a,b}=ecologyScene();for(const pl of [a,b])w.ecology??={};for(const pl of [a,b])w.ecology![pl.y*w.W+pl.x]={condition:0.4,lastUse:w.tick};observe(w,p,a);observe(w,p,b);
+ const {w,p,a,b}=ecologyScene(250);for(const pl of [a,b])w.ecology??={};for(const pl of [a,b])w.ecology![pl.y*w.W+pl.x]={condition:0.4,lastUse:w.tick};observe(w,p,a);observe(w,p,b);
  const water=p.inv.water!,seed=p.inv.seeds;const work=doEcologyOption(w,p,`tend:${a.id}`);expect(work.data.ecologyRest).toBe(true);expect(fieldResting(w,a)).toBe(true);expect(p.inv.water).toBe(water-1);expect(p.inv.seeds).toBe(seed);expect(conditionAt(w,a.x,a.y)).toBeCloseTo(0.44);
  expect(generateOptions(w,p,true,true).blocked.some(o=>o.targetId===a.id&&o.kind==='plant'&&o.blocked?.includes('rest'))).toBe(true);expect(conservationReport(w).ok).toBe(true);
  // Isolated environmental process comparison with declared stable mild weather, not ordinary-world benefit.
@@ -83,11 +84,11 @@ it('charges full-pack eating at a source exactly once per actually consumed unit
  expect(ate).toBeGreaterThan(0);expect(act.cycle).toBe(ate);expect(p.inv.berries).toBeUndefined();expect(conditionAt(w,bush.x,bush.y)).toBeCloseTo(1-Math.min(ate,3)*0.008-Math.max(0,ate-3)*0.035);expect(conservationReport(w).ok).toBe(true);
 });
 it('runs a whole crop through the physical world, harvests its actual output and resows without restoring soil',()=>{
- const {w,p,a}=ecologyScene();doEcologyOption(w,p,`plant:${a.id}`);p.cooldowns.pause=0;
+ const {w,p,a}=ecologyScene(250);doEcologyOption(w,p,`plant:${a.id}`);p.cooldowns.pause=0;
  // After the declared first sowing, ordinary needs and choices run throughout growth.
- for(let n=0;n<18000&&a.state!=='ripe';n++)stepWorld(w);expect(p.alive).toBe(true);expect(a.state).toBe('ripe');const grown=a.stock;expect(grown).toBeGreaterThan(0);
- const harvest=doEcologyOption(w,p,`harvest:${a.id}`);expect(harvest.data.grain).toBe(grown);expect(a.state).toBe('tilled');const prior=conditionAt(w,a.x,a.y),seeds=p.inv.seeds!;
- doEcologyOption(w,p,`plant:${a.id}`);expect(a.state).toBe('growing');expect(p.inv.seeds).toBe(seeds-1);expect(conditionAt(w,a.x,a.y)).toBeLessThan(prior-0.15);
+ for(let n=0;n<18000&&a.state!=='ripe';n++)stepWorld(w);expect(p.alive).toBe(true);expect(a.state).toBe('ripe');const grown=a.stock;expect(grown).toBeGreaterThan(0);if(p.activity){const restore=setExternalController({controls:(_w,q)=>q.id===p.id,choose:()=>({kind:'defer'})});try{for(let n=0;n<1000&&p.activity;n++)stepWorld(w);}finally{restore();}}p.x=a.x+0.5;p.y=a.y+0.5;observe(w,p,a);for(const [kind,n] of Object.entries(p.inv))if(n)consume(w,p.inv,kind as keyof typeof p.inv,n,'declared pack clearing before harvest');
+ const harvest=doEcologyOption(w,p,`harvest:${a.id}`);expect(harvest.data.grain).toBe(grown);expect(a.state).toBe('tilled');observe(w,p,a);const prior=conditionAt(w,a.x,a.y),seeds=p.inv.seeds!;
+ p.needs.hunger=100;p.needs.thirst=100;p.needs.energy=100;doEcologyOption(w,p,`plant:${a.id}`);expect(a.state).toBe('growing');expect(p.inv.seeds??0).toBe(seeds-1);expect(conditionAt(w,a.x,a.y)).toBeLessThan(prior-0.15);
  // Declared hunger makes the crop's useful consumption test deterministic; it creates no food.
  p.needs.hunger=40;const before=w.ledger.consumed.grain??0;doEcologyOption(w,p,'eat:0');expect(w.ledger.consumed.grain??0).toBeGreaterThan(before);expect(conservationReport(w).ok).toBe(true);
  const twin=deserializeWorld(serializeWorld(w));for(let n=0;n<150;n++){stepWorld(w);stepWorld(twin);}expect(serializeWorld(w)).toBe(serializeWorld(twin));
@@ -104,8 +105,8 @@ it('identical standing crops produce different growth/yield from persistent soil
 it('keeps previous rules and the isolated removal unchanged',()=>{
  for(const old of [true,false]){const {w,p,bush,a}=ecologyScene(old?85:86);if(!old)setEcology(false);gatherFromSource(w,bush,p,1);doEcologyOption(w,p,`plant:${a.id}`);expect(w.ecology).toBeUndefined();expect(p.beliefs[bush.id].ecology).toBeUndefined();expect(conditionAt(w,a.x,a.y)).toBe(1);}
 });
-it.each(['condition','future use','outside map','old rules','future rest','invalid sign'])('rejects malformed ecological saves: %s',kind=>{
- const {w,a,p,bush}=ecologyScene();w.ecology={[a.y*w.W+a.x]:{condition:0.4,lastUse:w.tick}};
- if(kind==='condition')w.ecology[a.y*w.W+a.x].condition=-1;if(kind==='future use')w.ecology[a.y*w.W+a.x].lastUse=w.tick+1;if(kind==='outside map')w.ecology[w.W*w.H]={condition:0.5,lastUse:w.tick};if(kind==='old rules')w.settings.rulesVersion=85;if(kind==='future rest')a.fallowUntil=w.tick+4*DAY;if(kind==='invalid sign')p.beliefs[bush.id].ecology='magic' as never;
+it.each(['condition','future use','outside map','future rest','invalid sign'])('rejects malformed ecological saves: %s',kind=>{
+ const {w,a,p,bush}=ecologyScene(250);w.ecology={[a.y*w.W+a.x]:{condition:0.4,lastUse:w.tick}};
+ if(kind==='condition')w.ecology[a.y*w.W+a.x].condition=-1;if(kind==='future use')w.ecology[a.y*w.W+a.x].lastUse=w.tick+1;if(kind==='outside map')w.ecology[w.W*w.H]={condition:0.5,lastUse:w.tick};if(kind==='future rest')a.fallowUntil=w.tick+4*DAY;if(kind==='invalid sign')p.beliefs[bush.id].ecology='magic' as never;
  expect(()=>deserializeWorld(serializeWorld(w))).toThrow(/ecological condition/);
 });

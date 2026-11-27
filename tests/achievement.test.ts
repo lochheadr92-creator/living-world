@@ -9,8 +9,9 @@ import { observeNow } from './helpers/inhabit';
 import { moodWeight, updateMood } from '../src/sim/mood';
 import { parseIntervention } from '../scripts/lab/lab';
 import type { Person, World, GoalKind } from '../src/sim/types';
+import { RULES_SUPPORT_FLOOR } from '../src/sim/support_floor';
 afterEach(()=>setAchievementAftermath(true));
-function fixture(version=38){
+function fixture(version=RULES_SUPPORT_FLOOR){
  const s=stage('aftermath');s.w.settings.dynamics='rich';s.w.settings.rulesVersion=version;
  const p=addPerson(s,'Ada',40,40,{age:30,hunger:90,thirst:90});
  const distant=addPerson(s,'Ben',70,70,{age:30});

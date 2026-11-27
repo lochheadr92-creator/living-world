@@ -15,6 +15,7 @@
 // world actually runs, and whether a world is eligible for behaviour introduced at some later version. Nothing else should
 // compare a version number to a literal.
 import type { World } from './types';
+import { RULES_SUPPORT_FLOOR } from './support_floor';
 
 /**
  * The generation of behaviour new worlds are created with.
@@ -348,6 +349,21 @@ export function validateRulesVersion(v: unknown): VersionVerdict {
       v > latest
         ? `this world was made by a newer build (rules version ${v}); this build runs ${SUPPORTED_RULES_VERSIONS.join(', ')}. It is not loaded, rather than being run under older rules.`
         : `rules version ${v} is no longer supported by this build (it runs ${SUPPORTED_RULES_VERSIONS.join(', ')}).`,
+  };
+}
+
+/**
+ * Check the rules stamp on a save this build is about to load. The rules validator above still describes every generation
+ * represented by this source tree; the support floor is the narrower persistence contract. Unversioned diagnostic worlds
+ * remain accepted because their historical rules are unknown and are not silently assigned a numbered generation.
+ */
+export function validateRulesVersionForLoad(v: unknown): VersionVerdict {
+  const verdict = validateRulesVersion(v);
+  if (!verdict.ok || verdict.version === undefined || verdict.version >= RULES_SUPPORT_FLOOR) return verdict;
+  return {
+    ok: false,
+    version: undefined,
+    reason: `rules version ${verdict.version} is below this build's support floor (${RULES_SUPPORT_FLOOR}); it is not loaded.`,
   };
 }
 

@@ -1,7 +1,7 @@
 // The rules support floor (src/sim/support_floor.ts): which continuation pins `npm test` runs. No simulation here.
 import { readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS } from '../src/sim/rulesversion';
+import { CURRENT_RULES_VERSION, SUPPORTED_RULES_VERSIONS, validateRulesVersionForLoad } from '../src/sim/rulesversion';
 import { RULES_SUPPORT_FLOOR } from '../src/sim/support_floor';
 import { pinFiles, pinVersion } from './helpers/archived_pins';
 
@@ -9,6 +9,13 @@ describe('rules support floor', () => {
   it('is a version this build runs, at or below the current one', () => {
     expect(SUPPORTED_RULES_VERSIONS).toContain(RULES_SUPPORT_FLOOR);
     expect(RULES_SUPPORT_FLOOR).toBeLessThanOrEqual(CURRENT_RULES_VERSION);
+  });
+
+  it('accepts the floor for loading and refuses the immediately older numbered version', () => {
+    expect(validateRulesVersionForLoad(RULES_SUPPORT_FLOOR)).toEqual({ ok: true, version: RULES_SUPPORT_FLOOR });
+    const old = validateRulesVersionForLoad(RULES_SUPPORT_FLOOR - 1);
+    expect(old.ok).toBe(false);
+    expect(old.reason).toMatch(new RegExp(`support floor.*${RULES_SUPPORT_FLOOR}`, 'i'));
   });
 
   it('reads the version out of a pin file name and ignores other tests', () => {

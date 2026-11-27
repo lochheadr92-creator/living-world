@@ -5,7 +5,8 @@ import {observe} from '../../src/sim/knowledge';
 import {perceive} from '../../src/sim/perception';
 import {generateOptions} from '../../src/sim/decision';
 import type {Commitment} from '../../src/sim/types';
-export function actionScopeScene(version=71,workshop=false){
+import {RULES_SUPPORT_FLOOR} from '../../src/sim/support_floor';
+export function actionScopeScene(version=RULES_SUPPORT_FLOOR,workshop=false){
  const s=stage('action-scope'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=version;
  const p=addPerson(s,'Mara',40,40,{age:35,inv:{bread:1,water:1},hunger:100,thirst:100,energy:100,traits:{diligence:0.8,caution:0.5}});
  const home=building(s,'hut',36,34,p.hhId,{grain:12});w.households.find(h=>h.id===p.hhId)!.homeId=home.id;

@@ -1,5 +1,6 @@
-// `npm run test:archive`: the continuation pins of rules versions below the support floor (src/sim/support_floor.ts).
-// They are left out of `npm test` (vite.config.ts) and kept runnable here. Never re-record one to make a change pass.
+// Historical continuation pins below the support floor stay in tests/ but their numbered saves are intentionally no longer
+// loadable by the current build. This config preserves an explicit way to select them for archival inspection; they fail at
+// that support boundary by design. They are not a current-runtime verification suite. Never re-record one to make a change pass.
 import { defineConfig } from 'vite';
 import { pinFiles } from './tests/helpers/archived_pins';
 

@@ -1,0 +1,5 @@
+
+> living-world@1.0.0 test
+> vitest run --reporter=json
+
+JSON report written to C:/dev/lw-floor-refusal-20261121/.vitest/json/output.json

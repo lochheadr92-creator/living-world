@@ -1,0 +1,2876 @@
+{
+  "commit": "aaedb85dc4c4ff72c569f213a81b7350c0994587",
+  "run": "npm test -- --reporter=json",
+  "totals": {
+    "testFiles": 976,
+    "failedFiles": 246,
+    "total": 3529,
+    "passed": 3049,
+    "failed": 476,
+    "pending": 4
+  },
+  "failureClasses": {
+    "direct below-floor refusal": 412,
+    "expected validation masked by floor": 60,
+    "missing fixture": 2,
+    "timeout": 2
+  },
+  "failures": [
+    {
+      "file": "background.test.ts",
+      "case": "save/load and observers preserve the background; ablation changes only future creation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "batch_plan.test.ts",
+      "case": "rules 50: the switch removes the plan, saving and replaying are exact, observing changes nothing, and a dead planner’s plan ends",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "batch_recipe_choice.test.ts",
+      "case": "physically saws the components across a drink break and save, builds the cart and delivers useful stone",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "builder_fetches.test.ts",
+      "case": "rules 232: a builder who runs out goes for materials the accounts balance, and a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "building_upgrading_key.test.ts",
+      "case": "an upgrade completed, the world saved, the home upgraded again: loaded and uninterrupted worlds write the same text",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "building_upgrading_key.test.ts",
+      "case": "an upgrade cancelled, the world saved, the home upgraded again: loaded and uninterrupted worlds write the same text",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "carcass_batch.test.ts",
+      "case": "preserves the paid first portion and partial second portion through save/load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_acquisition_ending.test.ts",
+      "case": "leaves unrelated paused work alone, keeps rules 154 unchanged, and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "learns a real full-pack failure, chooses a known home deposit and lets the elder eat without adding carrying space",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "capacity is learned from a real failed hand-over, remains personal and causes a different pure later option",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "revalidates a full change during the physical deposit without spending the food",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "revalidates a owner change during the physical deposit without spending the food",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "revalidates a promised change during the physical deposit without spending the food",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_capacity.test.ts",
+      "case": "revalidates a interrupt change during the physical deposit without spending the food",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "a naturally recovered parent autonomously agrees a safe return without claiming a complete watch",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "paid watch time survives pause, save and re-arrival; talking and travel add no time",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "renewed incapacity before the answer refuses handback and resumes the same paid watch",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "an interrupted proposal does not transfer responsibility or erase the suspended watch",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "a stale request learns that the exact watch already ended without creating completion credit",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback.test.ts",
+      "case": "an interrupted discussion resumes and completes only the remaining physical watch time",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback_protocol.test.ts",
+      "case": "legal childcare return is answered and replayed exactly (notes false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_handback_protocol.test.ts",
+      "case": "legal childcare return is answered and replayed exactly (notes true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "actual autonomous acquisition, lawful return and consumption survive a saved continuation (water false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "actual autonomous acquisition, lawful return and consumption survive a saved continuation (water true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "rejects a malformed saved supply purpose while preserving a valid in-flight action",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "a saved paid partial acquisition resumes through actual receipt with observer purity",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "actual failed full-pack handoff leads to a lawful deposit without claiming consumption",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "two actual empty-source attempts use known alternatives then stop for that observation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "interruption preserves the private purpose and the second failed attempt closes it without claims",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "a lost grain source can be replaced by actual fruit acquisition and contact receipt",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "ends a retained journey for stale and survives saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "ends a retained journey for missing and survives saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "ends a retained journey for carer died and survives saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "later actual contact cancels only the matching acquisition (suspended false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply.test.ts",
+      "case": "later actual contact cancels only the matching acquisition (suspended true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply_protocol.test.ts",
+      "case": "uses offered care acquisition and exactly replays a paid receipt (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_supply_protocol.test.ts",
+      "case": "uses offered care acquisition and exactly replays a paid receipt (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "turns actual water capacity failure into autonomous physical home provision and later drinking",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "retains personal failure and pure legal AI offers through a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "revalidates full during water deposit with saved continuation and no false relief",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "revalidates owner during water deposit with saved continuation and no false relief",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "revalidates promised during water deposit with saved continuation and no false relief",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "revalidates interrupt during water deposit with saved continuation and no false relief",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "revalidates lost water during water deposit with saved continuation and no false relief",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "care_water.test.ts",
+      "case": "offers water provision after a real departure using the remembered indoor contact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "carried_cuttings.test.ts",
+      "case": "living cuttings wither in packs and carts with accounted loss and exact continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "cart_priority.test.ts",
+      "case": "adopts the cart batch, builds the handcart through the plan's own step and ends the plan with the cart; mid-build continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "causal_events.test.ts",
+      "case": "rules 182: a grievance remembers the event that caused it the id survives a save and load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "cellar_home_order.test.ts",
+      "case": "continues a rules-152 household exactly after saving and conserves goods",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "checked_accounts.test.ts",
+      "case": "a newer differing account of a place she saw herself is adopted and the disagreement logged; saves are exact and refused below 107",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "child_feeding.test.ts",
+      "case": "meals: a carer keeps a child on a meal rhythm through a save and load the rhythm continues exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "child_pace.test.ts",
+      "case": "through to the ground walking the same way for the same ticks, the four-year-old covers less ground at 212, and the world continues exactly through a save and load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "child_tasks.test.ts",
+      "case": "continues a rules-156 child exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "civic_benefit.test.ts",
+      "case": "preserves observer purity, full save continuation, legacy behavior and ablation restore",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "civic_choice.test.ts",
+      "case": "a locally known, distrusted organiser can be challenged in offered options and an actual conversation changes coordinator",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "civic_food_benefit.test.ts",
+      "case": "rules 49: the switch removes only the meal receipt, reversibly; saving and replaying are exact; observing changes nothing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "saves wetness, dries over time, wears out, and clears the worn slot on transfer",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "repairs with fibre only after work and refuses a missing item or malformed free benefit",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "preserves interrupted and saved dressing, pure inspection, and refuses free legacy crafting",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "rejects a competing repair after the last fibre leaves, duplicate slots and count-only equipment",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "rejects shortened saved work and keeps textile recipes out of authored worlds",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "death leaves one recoverable textile with its condition, but no worn protection on the ground",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "keeps access observations dated and personal, including after save/load and hearsay",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "gives the selected owned spare, retaining a loan and worn garment across a saved hand-over",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "clothing.test.ts",
+      "case": "rejects unpaid or shortened saved textile batches and invalid fibre counts",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "commitments.test.ts",
+      "case": "recovered site courier goods wanted at a site by someone whose pack is full are carried to the site by the giver, not refused for want of room",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "communal_stock.test.ts",
+      "case": "continues an in-flight deposit exactly through save/load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "construction_access.test.ts",
+      "case": "a person entering during layout is checked at the mutation boundary, including mid-layout loading",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "customers.test.ts",
+      "case": "rules 51: switch, exact replay, observer purity, and rules 50 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "earns a bounded morning preference from real completed trips on distinct days with exact saved continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "does not count a repeated callback or several trips on one day as several successful days",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "changes an autonomous legal decision under otherwise matched circumstances for a recorded personal reason",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after season changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after injury changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after home changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after dependant changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after contact changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after known loss changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after age changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after phase changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after urgent changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "suppresses the preference after cost changes, without observer mutation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "does not react to an unseen household member or their private need",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "records actual failure on a depleted trip and stops reinforcing that preference",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "learns nothing when old",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "learns nothing when removed",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted duplicate event",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted duplicate day",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted too many entries",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted old rules",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted bad cost",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "rejects persisted future episode",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "daily_routines.test.ts",
+      "case": "learns actual water collection and preserves its dedicated water-belief ID through a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "death_knowledge.test.ts",
+      "case": "only an awake witness grieves; a distant partner learns in co-present talk once",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "death_knowledge.test.ts",
+      "case": "birth accounting survives feed rollover, child death and save/load; legacy scope is explicit",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "decision_ledger.test.ts",
+      "case": "the ledger is saved and reloaded exactly, never fingerprinted, and never written below rules 103 or with the switch off",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "delivery_place.test.ts",
+      "case": "rules 48: the switch removes the place and the trust lean reversibly; saving and replaying are exact; observing changes nothing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "deposit_plenty.test.ts",
+      "case": "rules 231: stone outcrops and ore veins hold ten times as much nothing new is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "development.test.ts",
+      "case": "a real birth starts every proficiency at novice, without inherited adult skills",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "development.test.ts",
+      "case": "actual completed gathering improves only the practised skill with conserved goods and mid-work save continuity",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "eat_in_hand.test.ts",
+      "case": "continues exactly after saving mid-gather",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ecology_protocol.test.ts",
+      "case": "exposes coarse ecology through the actual live/stub protocol and replays the physical rest action (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ecology_protocol.test.ts",
+      "case": "exposes coarse ecology through the actual live/stub protocol and replays the physical rest action (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "empty_delivery.test.ts",
+      "case": "empty correction delivery save and load keeps an accepted observation time and a rejected attempt, and refuses a malformed record",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "empty_delivery.test.ts",
+      "case": "empty correction delivery a loaded world continues identically to the world that was saved",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "empty_news_observer.test.ts",
+      "case": "empty-news observation counts a direct empty sight, an accepted relay and a rejected older report without writing the world",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "estate_custody.test.ts",
+      "case": "separates household, borrowed and public equipment without changing tool identity, wear or ownership",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "estate_custody.test.ts",
+      "case": "a household collector spends actual time, respects capacity and leaves the rest physically in place",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "estate_custody.test.ts",
+      "case": "rejects malformed custody and mismatched registered owners, while the removal keeps historical public heaps",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "estate_release.test.ts",
+      "case": "the last member of a household dies rules 163 makes the parcel shared property, tools included, and a neighbour can collect it; rules 162 leaves it locked to a household nobody belongs to",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "estate_release.test.ts",
+      "case": "the last member of a household is taken into another rules 163 passes the parcel to the household that took the child in; rules 162 locks the child and the carers out of it",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "estate_release.test.ts",
+      "case": "the lab removal restores the rules-162 behaviour inside a rules-163 world and nothing else",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "evening_fire.test.ts",
+      "case": "an evening by the fire through a save and load a world with people sitting at the fire continues exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "exchange_journeys.test.ts",
+      "case": "preserves mid-journey and mid-conversation full-state continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "exchange_journeys.test.ts",
+      "case": "keeps observers pure, rejects stale/unknown leads, and respects the lab and historical gates",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "family_food.test.ts",
+      "case": "rules 237: the food a household has put by counts wherever it keeps it moves and saves nothing: stock is conserved and a saved world reloads the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "farm_scale.test.ts",
+      "case": "rules 244: farming carries the settlement, and the granary holds what it grows the larger granary is saved and read back as it stands",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "fever_sign.test.ts",
+      "case": "a fever that nobody has seen rules 164 avoids Ben the moment his live record says feverish; rules 165 keeps the options as they were until Ada looks again",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "final_account.test.ts",
+      "case": "captures the actual final task and belongings before cleanup; observers do not grant remote knowledge",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "final_account.test.ts",
+      "case": "keeps predecessor deaths unchanged and rejects malformed snapshot records",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "final_account.test.ts",
+      "case": "saves and reloads a final account whose remembered water predates the world, and rejects a future sighting",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "finish_job.test.ts",
+      "case": "rules 227: a job begun is finished nothing is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "fishing_rods.test.ts",
+      "case": "does not grant rod speed from an inventory count or from someone else holding it",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "fishing_rods.test.ts",
+      "case": "keeps an in-flight rod catch through save/load and rejects rods under older rules",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "flood_access.test.ts",
+      "case": "retains a bounded physical footprint through flooded, recovering and clear phases",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "flood_access.test.ts",
+      "case": "discovers a flood after departure, takes a physical alternative and completes offered gathering",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "flood_access.test.ts",
+      "case": "waits with a bound for a flooded destination, retains the saved activity and then releases it truthfully",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "flood_access.test.ts",
+      "case": "rejects duplicate footprint tiles and does not flood an older world",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "flood_protocol.test.ts",
+      "case": "replays actual legal food travel with dated flood observations (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "flood_protocol.test.ts",
+      "case": "replays actual legal food travel with dated flood observations (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "food_help.test.ts",
+      "case": "rules 45: the ablation removes only the fetch promise, saves and replays deterministically, and observing changes nothing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "forestry.test.ts",
+      "case": "continues a carried cutting and planting work exactly and rejects predecessor or malformed state",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "forestry.test.ts",
+      "case": "rejects malformed planted-tree provenance",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "found_empty.test.ts",
+      "case": "is pure to ask and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "grave_site.test.ts",
+      "case": "a death on a doorstep a tile that is not a doorway is placed as before, and the world saves and loads with the grave",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "groundwater.test.ts",
+      "case": "rules 236: a well reaches groundwater what the ground holds is saved, loaded and checked; a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "growth_room.test.ts",
+      "case": "rules 225: room to grow authored worlds keep their limits, and nothing is saved",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "habitation.test.ts",
+      "case": "physical home occupancy preserves occupied save/load and exact saved-state continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "habitation.test.ts",
+      "case": "physical home occupancy preserves occupants during an in-place hut upgrade",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "habitation.test.ts",
+      "case": "physical home occupancy refuses invalid indoor save state rather than guessing a home",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "handover_outcome.test.ts",
+      "case": "classifies purely and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hand_feeding.test.ts",
+      "case": "plans purely and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hearth.test.ts",
+      "case": "takes fuel indoors with paid work, saves exact heat, and cools after the finite fuel ends",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hearth.test.ts",
+      "case": "only warms actual occupants and a damaged home loses residual heat faster",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hearth.test.ts",
+      "case": "old saves gain no hearth and malformed paid state is refused",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hearth.test.ts",
+      "case": "interrupted fuel work resumes after loading without consuming twice; observers are pure and heat is hashed",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "hearth.test.ts",
+      "case": "a missing fitting discriminator cannot load as a discounted home rebuild; cost key order is immaterial",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "retains actual task, direct receipt and useful work without informing an uninvolved person",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "changes an eligible later helper choice across a save, while preserving the helper’s valid refusal",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "keeps unavailable tasks unknown and preserves rules 77 and the isolated removal",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "rejects malformed helper receipt saves: future",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "rejects malformed helper receipt saves: wrong item",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "rejects malformed helper receipt saves: old rules",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "helper_learning.test.ts",
+      "case": "rejects malformed helper receipt saves: unreceived",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "historical_retention.test.ts",
+      "case": "retains real death identity, kinship, relationship causes and graves after indexing and continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "historical_retention.test.ts",
+      "case": "bounds repeated cosmetic felling marks by tile while preserving legacy saves",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "household_practices.test.ts",
+      "case": "preserves midway contact and full-state save continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "household_practices.test.ts",
+      "case": "keeps acquired provenance after the parent dies, without teaching an unfinished learner by inheritance",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "household_practices.test.ts",
+      "case": "rejects malformed practice records and practice state attached to older rules",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "household_preparation.test.ts",
+      "case": "7. version-1 and unversioned worlds do not acquire this behaviour a version-1 save keeps its version through a round trip and stays version 1",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "household_supply.test.ts",
+      "case": "a personally heard reserve undertaking leaves the season reserve to its teller, with a visible reason and no promise",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "household_supply.test.ts",
+      "case": "a deferral saves, reloads and is refused by a build that does not run rules 100",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "id_ranges.test.ts",
+      "case": "rules 234: the ids of real things and of water knowledge no longer meet AR-02: a save whose id counter is not beyond the ids in use, or in which two things share an id, is refused",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "id_ranges.test.ts",
+      "case": "rules 234: the ids of real things and of water knowledge no longer meet an ordinary 234 world tells of water under the new keys, and saved and loaded it continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "indoor_giving.test.ts",
+      "case": "a resident can autonomously hand bread to an injured elder in the same home, who eats it; saved continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "informed_continuity.test.ts",
+      "case": "actual speech, separate acknowledgement and saved continuation inform one voluntary successor and preserve real site delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "informed_continuity.test.ts",
+      "case": "interrupted actual speech preserves only what was heard (heard false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "informed_continuity.test.ts",
+      "case": "interrupted actual speech preserves only what was heard (heard true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "informed_continuity.test.ts",
+      "case": "hearing is bounded, does not transfer skills or possessions, hashes provenance and rejects malformed saves",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "informed_continuity_protocol.test.ts",
+      "case": "executes only an offered work-sharing conversation and replays heard knowledge (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "informed_continuity_protocol.test.ts",
+      "case": "executes only an offered work-sharing conversation and replays heard knowledge (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_choice_identity.test.ts",
+      "case": "rules 43 public identities select the actual hunger alternative with its own amount and replay exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_choice_identity.test.ts",
+      "case": "rules 44 public identities select the actual hunger alternative with its own amount and replay exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_proposals.test.ts",
+      "case": "through the controller seam: adoption is notified, this moment is the engine's own choice, the plan's steps are offered next, and a refusal counts as a retry",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_proposals.test.ts",
+      "case": "the inhabitant protocol carries it: the scripted proposer records a replayable run in which the cart is built from the proposed plan",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_proposals.test.ts",
+      "case": "a proposal under an older protocol falls back; the answer shape is strict; the prompt names proposing only when the observation carries it",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_proposal_boundary.test.ts",
+      "case": "a malformed proposal goal null is refused at the external boundary without crashing the tick",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "inhabit_proposal_boundary.test.ts",
+      "case": "a malformed proposal goal undefined is refused at the external boundary without crashing the tick",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "collects real provisions with saved intention and an exact preparation continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "retains the purpose through autonomous drinking, physical collection and useful construction, saving during the break and travel",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "physically withdraws known food for a trip and rechecks depleted stock at arrival",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "rejects malformed saved journey: deadline",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "rejects malformed saved journey: count",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "rejects malformed saved journey: item",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "rejects malformed saved journey: duplicate evidence",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey.test.ts",
+      "case": "rejects malformed saved journey: predecessor",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey_recovery.test.ts",
+      "case": "keeps prepared progress across a real drink and source failure, then uses a known same-purpose alternative for construction",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "journey_recovery.test.ts",
+      "case": "rejects malformed recovery saves: too many replacements",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey_recovery.test.ts",
+      "case": "rejects malformed recovery saves: future failure",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey_recovery.test.ts",
+      "case": "rejects malformed recovery saves: predecessor metadata",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "journey_recovery.test.ts",
+      "case": "rejects malformed recovery saves: same source",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "kept_target.test.ts",
+      "case": "reaches and gathers from the source across a save, then chooses a useful physical delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "kept_target.test.ts",
+      "case": "retains a real water destination after walking reveals a closer stretch of shore",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "kept_target.test.ts",
+      "case": "keeps a real raw or processed stock journey past the two-store limit",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "kept_target_observer.test.ts",
+      "case": "observes a restored option and its actual ending without changing saved state or continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "known_adoption.test.ts",
+      "case": "who may take a carerless child rules 166 lets the nearest adult take them unseen; rules 167 requires a note, and kin alone is not one",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "known_adoption.test.ts",
+      "case": "who may take a carerless child scores the place the carer remembers, not the child's true coordinates",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "known_adoption.test.ts",
+      "case": "who may take a carerless child leaves the child when nobody knows of them, and the household history says so",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "lamb_birth.test.ts",
+      "case": "autonomously acquires, tends and breeds finite sheep; continues exactly through pregnancy and birth",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "layout_claims.test.ts",
+      "case": "pending layout arbitration reacquires on resume, refusing a suspended layout whose footprint has since been claimed",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "layout_claims.test.ts",
+      "case": "pending layout arbitration keeps the same winner and complete state after saving two competing start attempts",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "layout_claims.test.ts",
+      "case": "pending layout arbitration fingerprints the saved wait and pending footprint rather than only activity progress",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "layout_claims.test.ts",
+      "case": "safe recovery after footprint occupancy waits without placing a site, survives a save, then creates exactly one site when the occupant leaves",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "lean_years.test.ts",
+      "case": "saving saves nothing new: a loaded world in a lean season carries it and reaches the same calendar afterwards",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "learner_instruction.test.ts",
+      "case": "executes the request, saves a timed lesson and enables ordinary material production",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world is hands too full for something short, and the leave is the heaviest unwanted stack at a place that takes it",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world moves exactly that many units out of the pack and into the place, through the ordinary ledgered deposit",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world is offered as an ordinary deposit option, and only to a rich world running 33 with the switch on",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world asking what they could do changes nothing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world continues identically after a save and load in the middle of the trip",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world loses nothing if the person dies on the way: what was not put down is still counted",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "leave_heaviest.test.ts",
+      "case": "a real stall in an ordinary world is interrupted without loss when the person turns to something else first",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "acquires a real sheep through paid work and saved physical ownership",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "preserves interrupted acquisition exactly and denies a competing household",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "rejects malformed animal state and gives old rules no livestock",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "feeds a timed pregnancy from finite supplies and grants no newborn stores or free tether",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "weaves staged wool through paid workshop work, ownership, collection and dressing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "turns three recurring paid fleeces into delivered, owned and worn insulation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "keeps a contained sheep inside its physical radius and refuses an out-of-bounds saved tether",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "accounts for fleece on the animal before shearing and loses it once at slaughter",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "rejects fractional or unpaid newborn maturity on load",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "livestock.test.ts",
+      "case": "remembers only personally usable workshop wool and cannot borrow another observer's access",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "load_order.test.ts",
+      "case": "keeps a live cell in id order through a save and load at rules 160",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "load_order.test.ts",
+      "case": "keeps the recorded old order below 160, so older saves behave as they were recorded",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "load_order.test.ts",
+      "case": "an ordinary generated world loads to the same cells it had live, and an exact twin stays exact for two days",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "local_demand.test.ts",
+      "case": "saves and hashes personal demand, preserves observers and has an isolated reversible ablation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "location_question.test.ts",
+      "case": "after a failed hand-over the helper asks a present neighbour, keeps her dated answer with the teller, and delivers",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "location_question.test.ts",
+      "case": "a told note is refused by a build below rules 105",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "market_locality.test.ts",
+      "case": "co-present barter conserves items and both capacities across save/load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meal_leftovers.test.ts",
+      "case": "offers only remembered owned food and physically collects it after travel and paid handling, with exact saved continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meal_leftovers.test.ts",
+      "case": "keeps saved ownership and observer/AI purity, rejects invalid provenance and supports the isolated lab removal",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meal_leftovers_protocol.test.ts",
+      "case": "offers actual leftover recovery to the AI and exactly replays its ordinary action (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meal_leftovers_protocol.test.ts",
+      "case": "offers actual leftover recovery to the AI and exactly replays its ordinary action (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meat_item_validation.test.ts",
+      "case": "a positive meat delivery receipt survives exact save/load while invalid items are still rejected",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meat_item_validation.test.ts",
+      "case": "unaccounted meat is detected by conservation and accounted meat is balanced",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meat_item_validation.test.ts",
+      "case": "an actual spoken food request and meat hand-over survives save and continuation at rules 78",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meat_item_validation.test.ts",
+      "case": "an actual spoken food request and meat hand-over survives save and continuation at rules 107",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "waits physically at an unknowingly cancelled place through a saved early arrival, then times out without inventing a cause",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "actually conveys a cancellation and separate acknowledgement through the conversation engine with a save between phases",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "retains the original timeout but revises unknown cause when a later explanation is actually heard, once",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "retains a relevant outcome beyond the operational meal and uses it for more preparation in a later invitation",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "rejects malformed heard provenance and does not accept repeated replies twice",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements.test.ts",
+      "case": "connects a real invitation conversation to saved travel, a physical table and useful shared food",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements_protocol.test.ts",
+      "case": "exposes only the AI guest's heard appointment and replays actual uninformed waiting (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "meeting_arrangements_protocol.test.ts",
+      "case": "exposes only the AI guest's heard appointment and replays actual uninformed waiting (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "metabolism.test.ts",
+      "case": "determinism and continuity at 195 two worlds from the same seed hash alike after 300 ticks, and a saved copy continues identically",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "net_full_pack.test.ts",
+      "case": "keeps rules 152 behaviour and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "night_wait_interruption.test.ts",
+      "case": "finishes at daylight after a real conversation, including save/load during that conversation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "nourishment.test.ts",
+      "case": "preserves the last meal and later deficit exactly across a mid-meal save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "nourishment.test.ts",
+      "case": "missing saves get zero benefit and invalid reserves fail clearly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "nourishment.test.ts",
+      "case": "does not turn an age transition into extra stored nutrition",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "nourishment_access.test.ts",
+      "case": "only the person consuming the contested last portion gains nourishment",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "turns only newly paid recoverable wood into owned fuel once, with an explicit remaining sink",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "physically makes, collects and burns offered offcuts, preserving mid-work/travel saves and later warmth",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "rechecks physical collection: lost stock",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "rechecks physical collection: changed owner",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "rechecks physical collection: full pack",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "rechecks physical collection: interrupted",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "resumes interrupted paid work without paying or recovering twice, then preserves real goods through collapse",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "validates new material provenance and preserves the isolated legacy-waste removal",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "offcuts.test.ts",
+      "case": "does not offer an unseen by-product and retains unburned bundles after a partial saved fire action",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts_protocol.test.ts",
+      "case": "exposes real collection/fuel through legal offers and replays the transcript (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "offcuts_protocol.test.ts",
+      "case": "exposes real collection/fuel through legal offers and replays the transcript (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "oven_load.test.ts",
+      "case": "rules 249: the largest batch the shelves cover a save in the middle of a larger batch continues identically",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "own_stores.test.ts",
+      "case": "rules 245: a household knows its own stores moves and saves nothing: stock is conserved, and a saved world reloads with the same beliefs and goes on the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "own_stores.test.ts",
+      "case": "rules 245: a household knows its own stores an ordinary world: what a household remembers of its own buildings is what is there; at 244 it is mostly not; another household's stays a glance",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "parent_decides.test.ts",
+      "case": "rules 228: a child may ask, and the grown person decides nothing is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "places owned gear with paid work, removes finite unreserved fish once, and collects through offered work",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "keeps the saved attempt fixed, expires catches and refuses another household",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "interrupted placement creates no deployed copy and active placement continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "rejects malformed catch state and premature completion without beneficial defaults",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "rejects an unpaid shortened waiting period on reload",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "passive_gear.test.ts",
+      "case": "uses dated personal gear stock but revalidates ownership on collection",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "pavel_company.test.ts",
+      "case": "rejects future or predecessor company evidence in saves",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "pavel_resume.test.ts",
+      "case": "an actual received basket permits the elder to resume and physically make the formerly impossible pick",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "personal_places.test.ts",
+      "case": "keeps observers pure and in-flight exact continuation; rejects malformed and predecessor memories",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "picked_up.test.ts",
+      "case": "rules 233: work is picked up where it was left a world saved while the work is on hold loads and continues the same, and the accounts balance",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "play.test.ts",
+      "case": "games: a child who has had three games today at 210 the one game is the guessing game; at 211 she asks for playing house, it is paid as before and continues exactly through a save and load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "plenty.test.ts",
+      "case": "rules 226: more food from the same land nothing is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "political_alignment.test.ts",
+      "case": "actual repeated choices form a visible faction and one changed prior choice changes a later accepted decision",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "political_alignment.test.ts",
+      "case": "current project support cannot count twice or bootstrap continuity; history is bounded",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "political_alignment.test.ts",
+      "case": "observers and option ranking preserve complete state, and save/load continuation is deterministic",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "practical_care.test.ts",
+      "case": "actual contact accepts the watch, communicates the remembered place, travels and supplies food; intermediate save continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "practical_care_upkeep.test.ts",
+      "case": "repair restores useful operation: an unusable kiln fires real bricks and the saved repair continues exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "practical_care_upkeep.test.ts",
+      "case": "a capable household member physically gives bread to an injured elder, who can eat it; intermediate continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "preservation.test.ts",
+      "case": "historical worlds cannot acquire preserved food or a rack by a missing-field migration",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "preservation_collection.test.ts",
+      "case": "keeps waiting state and paid batch identical through a save and continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "preservation_collection.test.ts",
+      "case": "rejects a forged or unbounded persisted wait counter",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_production.test.ts",
+      "case": "autonomously adopts a forged-tool project and executes charcoal, smelting and forging with exact saved continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "observation and repeated prerequisite offers do not mutate the saved project",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "rejects cycle in persisted graph data",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "rejects wrong output in persisted graph data",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "rejects wrong input in persisted graph data",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "rejects oversized history in persisted graph data",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "rejects old rules in persisted graph data",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "recompiles lost stocked input into a known raw source, without changing goods or accepting unseen stock",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "revalidates cancelled during an actual prerequisite delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "revalidates promised during an actual prerequisite delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "revalidates lost goods during an actual prerequisite delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "waits for a personally started firing even at full energy, and ends when the goal is cancelled",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "revalidates a compiled hand-tool prerequisite before consuming inputs (competing promise: false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_recovery.test.ts",
+      "case": "revalidates a compiled hand-tool prerequisite before consuming inputs (competing promise: true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_revision.test.ts",
+      "case": "revises the existing quantity with the same identity, deadline and paid work, without granting goods",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_revision.test.ts",
+      "case": "replays a revised plan through paid production, including memory=false, and detects tampering",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_revision.test.ts",
+      "case": "replays a revised plan through paid production, including memory=true, and detects tampering",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "project_revision_legacy.test.ts",
+      "case": "replays immutable pre-revision protocol 31/32 recordings with their exact old observations",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promised_supply.test.ts",
+      "case": "a personally heard promise covers the site: nothing is fetched for it meanwhile, the waiting is named, observation is pure",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promised_supply.test.ts",
+      "case": "the helper actually delivers while the asker does other work; nothing is fetched twice and the continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delays.test.ts",
+      "case": "hears the failed attempt before answering and agrees exactly one bounded extension through actual speech",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delays.test.ts",
+      "case": "declines another six-hour wait for childcare without cancelling the existing obligation or inventing care",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delays.test.ts",
+      "case": "interruption after hearing leaves the old agreement intact and retries the same proposal",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delays.test.ts",
+      "case": "returns to actual repair after the staged obstruction clears, retaining work and material accounting",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delays.test.ts",
+      "case": "settles an actually completed building share before its deadline while the larger site remains unfinished",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_delay_partial.test.ts",
+      "case": "reports actual partial foundation work through a refused extension without inventing completion",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_expectations.test.ts",
+      "case": "learns the remote death by physically reaching a grave, then releases the personal obligation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_expectations.test.ts",
+      "case": "a requester continues expecting accepted care after an unknown helper death, without reading shared cancellation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_expectations.test.ts",
+      "case": "a real completion report revises a remembered agreement without duplicating it or inventing direct receipt",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_expectations.test.ts",
+      "case": "actual material receipt closes the heard expectation and still feeds useful crafting and replay",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_expectations.test.ts",
+      "case": "a late spoken failure explanation revises an expired personal expectation through exact saved continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_knowledge.test.ts",
+      "case": "preserves actual direct material delivery, acknowledgement and useful crafting under current rules",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_knowledge.test.ts",
+      "case": "walks to communicate a saved personal completion, keeps report provenance and acknowledges receipt",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_knowledge.test.ts",
+      "case": "retains a heard report after interruption without inventing acknowledgement or duplicate evidence",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_outcomes.test.ts",
+      "case": "retains an actual failed journey through the natural deadline without inventing blame or remote knowledge",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_outcomes.test.ts",
+      "case": "walks to report a saved failed attempt and acknowledges hearing it without creating firsthand proof",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_outcomes.test.ts",
+      "case": "requires actual contact, preserves a heard explanation across interruption, and deduplicates a retry",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_outcomes.test.ts",
+      "case": "retains one bounded personal outcome after operational pruning and bounds report age",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "retains an uninformed accepted repair and offered remembered approach after a distant collapse",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "walks to discover the absent target, releases its promise and retains a report without informing the requester",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "preserves exact saved continuation through physical discovery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "communicates a discovered cancellation in person and acknowledges it once",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "preserves real partial building work when the local site disappears, without claiming completion",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "recognizes a site actually completed by the promised worker as completed work, not missing goods",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "promise_targets.test.ts",
+      "case": "keeps actual ordinary site completion distinct from a partially delivered hauling promise",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "proposal_belief.test.ts",
+      "case": "an unwelcome proposal is found out by asking at 164 a proposal to a lukewarm neighbour is made, refused, and not repeated for a while; the world stays sound",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ready_step.test.ts",
+      "case": "adopts, prepares, assembles and then actually uses a cart with ordinary decisions only; the continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ready_step.test.ts",
+      "case": "an assembly under way survives a save and finishes in both continuations",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ready_step_protocol.test.ts",
+      "case": "legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "ready_step_protocol.test.ts",
+      "case": "legal offered steps saw, assemble and haul with the cart, and the transcript replays exactly (notes true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "recovered_workshops.test.ts",
+      "case": "keeps batch state through save/load and refuses predecessor and malformed mine saves",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "recovered_workshops.test.ts",
+      "case": "saves a completed batch waiting for store room even when the final work tick overshoots",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "relocation.test.ts",
+      "case": "accepted household physically packs, travels, lays out, supplies and builds shelter before founding",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "relocation.test.ts",
+      "case": "load refuses invalid agreement phases; a legacy save never acquires relocation state",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "relocation_extensions.test.ts",
+      "case": "rules 54: switch, exact replay, observer purity, hash coverage, load validation, and rules 53 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "remembered_need.test.ts",
+      "case": "remembered signs are saved only in a 106 world and continue exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty.test.ts",
+      "case": "acceptance conveys the dated home and a real fallback patch is acquired and worked autonomously",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty.test.ts",
+      "case": "materials reserved during paid work cannot be spent on the roof",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty.test.ts",
+      "case": "interrupted paid repair preserves consumed material and resumes through saved continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty.test.ts",
+      "case": "a repaired initially leaking home is later physically entered and used for sleep",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty_protocol.test.ts",
+      "case": "legal roof patch acquires real material, repairs and replays exactly (notes false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "repair_duty_protocol.test.ts",
+      "case": "legal roof patch acquires real material, repairs and replays exactly (notes true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "request_cancellation.test.ts",
+      "case": "hears cancellation before acknowledgement, releases suspended work, and continues exactly from save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "request_cancellation.test.ts",
+      "case": "an interrupted acknowledgement leaves the already heard cancellation real and retry bounded",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "request_cancellation.test.ts",
+      "case": "acknowledges a late cancellation without undoing completed work and reports the actual completion",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "request_cancellation.test.ts",
+      "case": "retains a heard cancellation when the helper has an obligation but no request-memory array",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "remembers personally seen indoor need, returns through the own-home entrance and physically gives food that is eaten",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates blocked entrance during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates ownership during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates recipient gone during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates moved rooms during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates food lost during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates new promise during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates recovered during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resident_care.test.ts",
+      "case": "revalidates interrupt during the actual return without moving food through walls",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resolved_route.test.ts",
+      "case": "distinguishes physically corrected route history from material promise availability at rules 76",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resolved_route.test.ts",
+      "case": "distinguishes physically corrected route history from material promise availability at rules 77",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resumed_gather_credit.test.ts",
+      "case": "retains paid gathering across suspension at rules 120",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "resumed_gather_credit.test.ts",
+      "case": "retains paid gathering across suspension at rules 121",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "route_learning.test.ts",
+      "case": "corrects a reopened route on actual arrival but preserves the missing-stone construction failure",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "route_learning.test.ts",
+      "case": "uses another reachable material while reconsidering and later turns recovered wood into real tools",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "route_learning.test.ts",
+      "case": "rejects malformed route evidence: future event",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "route_learning.test.ts",
+      "case": "rejects malformed route evidence: duplicate event",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "route_learning.test.ts",
+      "case": "rejects malformed route evidence: old rules",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "run_rules.test.ts",
+      "case": "the scripts themselves, run as a person would run them a pinned lab seed run records the version it ran and says it was pinned; --arrivals off is recorded too",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "save_lineage.test.ts",
+      "case": "refuses ambiguous untagged version 8 without changing the input",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "save_lineage.test.ts",
+      "case": "refuses ambiguous untagged version 9 without changing the input",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "seed_storage.test.ts",
+      "case": "physically stores spare seed, frees raw material acquisition and makes the required hammer; travelling save continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "settlement_economy.test.ts",
+      "case": "history and inspectors are pure, and saves resume accounting without duplicating earlier output",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "settlement_economy.test.ts",
+      "case": "historical rules do not create these observations, and malformed new records are refused",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "settlement_economy.test.ts",
+      "case": "observations neither alter ordinary choices nor consume RNG",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "shared_projects.test.ts",
+      "case": "pays the full materials and labour and preserves exact continuation through supported construction",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "shared_projects.test.ts",
+      "case": "rejects forged ownership, invalid building types and predecessor shared records",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "shown.test.ts",
+      "case": "more: a teacher who cannot teach more foraging at 208 refuses; at 210 shows her fishing, the practice is paid as before and continues exactly through a save and load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "single_roof_duty.test.ts",
+      "case": "a roof already promised is declined to a second asker in so many words; one real patch keeps the one promise",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "site_supply.test.ts",
+      "case": "rules 229: what a waiting site lacks gets made nothing is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "skill_coaching.test.ts",
+      "case": "preserves a lesson through exact continuation and validates malformed/predecessor records",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "smithy_iron.test.ts",
+      "case": "rules 235: a standing smithy is a standing want for iron nothing is saved: a world saved and loaded continues the same",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "social_memory.test.ts",
+      "case": "relationship history is pure, honest about missing causes, and survives a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "source_contact.test.ts",
+      "case": "retains remembered stock after actual failed travel and explains the uncertainty",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "source_learning.test.ts",
+      "case": "records a real empty-source visit without penalising every never-tried wood source, with exact continuation and useful work",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "source_learning.test.ts",
+      "case": "rejects malformed experience: excess places",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "source_learning.test.ts",
+      "case": "rejects malformed experience: duplicate event",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "source_learning.test.ts",
+      "case": "rejects malformed experience: future correction",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "source_learning.test.ts",
+      "case": "rejects malformed experience: old rules",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "stored_water.test.ts",
+      "case": "drinks actual water from the owned store indoors despite a full pack, with pure observations and exact save continuation",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "stored_water.test.ts",
+      "case": "walks back to known household water; blocked entrance=false",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "stored_water.test.ts",
+      "case": "walks back to known household water; blocked entrance=true",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "succession.test.ts",
+      "case": "rules 53: switch, exact replay, observer purity, hash coverage, and rules 52 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "supper_telling.test.ts",
+      "case": "a household supper tells what the host is working on once the guest has really sat with them, carrying the meal id",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "supper_telling.test.ts",
+      "case": "a supper record is refused by a build below rules 104",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "suspended_cancellation.test.ts",
+      "case": "a heard cancellation ends the paused repair through the common path and leaves the conversation running (rules 116)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "suspended_endings.test.ts",
+      "case": "LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) gather, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "suspended_endings.test.ts",
+      "case": "LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) gather, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "suspended_endings.test.ts",
+      "case": "LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) build, expiry: the same activity paused for a conversation ends the same way and continues exactly from a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "suspended_endings.test.ts",
+      "case": "LW-01: a paused ordinary activity that cannot resume reaches the common ending (rules 116) build, target loss: the same activity paused for a conversation ends the same way and continues exactly from a save",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "techniques.test.ts",
+      "case": "a real accepted lesson requires contact and time, saves midway, and enables physical charcoal production",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "techniques.test.ts",
+      "case": "observer options and knowledge history are pure, including after loading mid-lesson",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "technique_tree.test.ts",
+      "case": "rules 52: switch, exact replay through a trial batch, observer purity, hash coverage, and rules 51 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "teller_confidence.test.ts",
+      "case": "keeps rules 153 and the lab removal identical to no doubt, and continues exactly after saving",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "three_ages.test.ts",
+      "case": "being shown is recorded from a completed practice at 212 nothing is recorded; at 213 she has been shown foraging, and it survives a save and load and is in the fingerprint",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "tool_demand_observer.test.ts",
+      "case": "observes the same-state displacement without changing world, random state or subsequent autonomous decisions",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "tool_precedence.test.ts",
+      "case": "physically gathers, crafts the required hammer, builds a cart and uses it; mid-craft continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "tool_prerequisite.test.ts",
+      "case": "uses real gathering, hammer crafting, cart construction and an offered useful haul; mid-craft continuation is exact",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "townships.test.ts",
+      "case": "save/load mid-promise continues with identical full state",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "townships.test.ts",
+      "case": "failure persists and only local witnesses learn the organiser outcome",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "townships.test.ts",
+      "case": "two volunteers physically supply and finish a public storehouse with conserved goods",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "townships.test.ts",
+      "case": "rejects invalid saved membership instead of guessing a settlement",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "townships.test.ts",
+      "case": "saves in the middle of physical hauling and completes identically after loading",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "township_extent.test.ts",
+      "case": "rules 185: a township records how far its building has reached the record survives a save and load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "toys.test.ts",
+      "case": "a toy through a save and load a world with a toy being handed over continues exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "transport.test.ts",
+      "case": "rules 55: switch, exact replay, observer purity, hash coverage, load validation, and rules 54 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "trap_ground.test.ts",
+      "case": "uses a personally witnessed deer ground rather than the closest tree",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "trap_ground.test.ts",
+      "case": "refuses future or old-rules deer memories rather than granting knowledge on load",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "trap_ground.test.ts",
+      "case": "keeps the selected trap ground eligible while a newer sighting moves away",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "trap_recovery.test.ts",
+      "case": "recovers finite trap meat, eats a real portion, and resets only after recovering the body",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v119_120_save_provenance.test.ts",
+      "case": "marks integrated rules 119 and 120 and roundtrips them",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v119_120_save_provenance.test.ts",
+      "case": "rejects unmarked and foreign 119/120 saves without modifying the input or live world",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "v119_120_save_provenance.test.ts",
+      "case": "keeps Stage 3 rules 117 and 118 and current 121 unmarked",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v27_save_provenance.test.ts",
+      "case": "writes explicit generation provenance and preserves complete current save/load state",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v27_save_provenance.test.ts",
+      "case": "rejects unmarked or differently marked 27 without editing the original",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "v27_save_provenance.test.ts",
+      "case": "does not reinterpret or require a new marker for historical rules 26",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v27_save_provenance.test.ts",
+      "case": "leaves rules 28 (varied spare time) unmarked and loadable",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v29_save_provenance.test.ts",
+      "case": "marks main rules 29 and roundtrips without enabling work tastes",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "v29_save_provenance.test.ts",
+      "case": "rejects ambiguous and foreign rules 29 without modifying the input or live world",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "v29_save_provenance.test.ts",
+      "case": "keeps rules 30 unmarked and enables tastes only in the integrated version",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "visible_need.test.ts",
+      "case": "a stranger's exact hunger rules 165 weighs the offer by his live figure at once; rules 166 by what Ada last saw, and changes when she looks again",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "visible_need.test.ts",
+      "case": "a stranger's exact thirst is weighed by the parched sign at 166 and by the live figure at 165",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty.test.ts",
+      "case": "autonomous fuel acquisition and physical burning fulfil the duty once and provide actual warmth",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty.test.ts",
+      "case": "paid partial acquisition saves and continues to actual fire consumption",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty.test.ts",
+      "case": "fuel newly promised during work is not burnt or credited as a kept fire duty",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty.test.ts",
+      "case": "a heard fire duty can collect lawful stored offcuts and burn the actual recovered fuel",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty_protocol.test.ts",
+      "case": "legal fire-duty offers physically fulfil and replay exactly (notes false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "warmth_duty_protocol.test.ts",
+      "case": "legal fire-duty offers physically fulfil and replay exactly (notes true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "watch_learning.test.ts",
+      "case": "changes a later eligible childcare choice across a delay and save, followed by voluntary acceptance and real work",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "watch_learning.test.ts",
+      "case": "records physical watch completion, distinct personal sources and no outsider knowledge",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "watch_learning.test.ts",
+      "case": "preserves a mid-watch save and does not invent completed work early",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_budget.test.ts",
+      "case": "saves the exact bounded source state and validates it on restoration",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_budget.test.ts",
+      "case": "continues exactly from the first actual sip before the second",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_budget.test.ts",
+      "case": "physically fetches for a growing household field, saves carried water and then drinks it",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_budget.test.ts",
+      "case": "rejects malformed, invented or inconsistent water histories and invalid draw quantities",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_budget.test.ts",
+      "case": "uses actually fetched water in later physical crop care and saves the result",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_protocol.test.ts",
+      "case": "uses current protocol coarse water observations and replays actual shore drinking (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "water_protocol.test.ts",
+      "case": "uses current protocol coarse water observations and replays actual shore drinking (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "wells.test.ts",
+      "case": "constructed wells share the finite water budget rejects pre-feature and malformed well saves, and continues current saves exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "wells.test.ts",
+      "case": "stops an interrupted supply race without duplicate water and resumes mid-draw saves exactly",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "winter_practice.test.ts",
+      "case": "rules 53: switch, exact replay, observer purity, hash coverage, and rules 52 unchanged",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "winter_reserve.test.ts",
+      "case": "rules 46: the switch removes the slice reversibly, the state saves and replays, and observing changes nothing",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "wolf_fight.test.ts",
+      "case": "rules 239: a spear wounds, and a wolf can be killed wounds and returns are saved, are part of the state hash, and an earlier version may not carry them",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "wolf_skin.test.ts",
+      "case": "rules 241: a wolf's skin is hung where everybody gathers skins held and hung are saved, are part of the state hash, and are refused where they cannot be",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "workshop_progress_view.test.ts",
+      "case": "the person panel reports actual workshop progress, including after save, without changing state",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "workshop_tool_loss.test.ts",
+      "case": "gathers and crafts a replacement, then resumes the same paid job across save without duplicating inputs",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "workshop_tool_loss.test.ts",
+      "case": "also stops required-hammer work and safely shelves a batch whose replacement never arrives",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover.test.ts",
+      "case": "actual speech, saved hearing and separate acceptance create only the helper's own plan",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover.test.ts",
+      "case": "recovery does not transfer responsibility until contact, fresh work communication and agreed handback",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover.test.ts",
+      "case": "without nearby relief, accepted work retains its progress but can fail to reach delivery",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover.test.ts",
+      "case": "actual accepted cover with known physical relief leads to paid delivery under the retained undertaking",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover.test.ts",
+      "case": "rejects malformed saved handover provenance, state and payload",
+      "class": "expected validation masked by floor",
+      "version": null
+    },
+    {
+      "file": "work_handover_protocol.test.ts",
+      "case": "uses only an offered handover and exactly replays the actual answer (memory false)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "work_handover_protocol.test.ts",
+      "case": "uses only an offered handover and exactly replays the actual answer (memory true)",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "zz_review_b_roundtrip.test.ts",
+      "case": "REVIEW B: save/load round trip then continue, natural rules-115 world river: byte-identical continuation after loading at 600/3000/6000",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "zz_review_b_roundtrip.test.ts",
+      "case": "REVIEW B: save/load round trip then continue, natural rules-115 world meadow: byte-identical continuation after loading at 600/3000/6000",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "zz_review_b_roundtrip.test.ts",
+      "case": "REVIEW B: save/load round trip then continue, natural rules-115 world forest: byte-identical continuation after loading at 600/3000/6000",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "zz_review_b_undefined_keyorder.test.ts",
+      "case": "completed upgrade keys stay absent, and a later upgrade continues exactly across a load",
+      "class": "direct below-floor refusal",
+      "version": null
+    },
+    {
+      "file": "zz_review_e_famine_trace.test.ts",
+      "case": "traces one day of the retained rules-107 forest famine (diagnostic, writes a report)",
+      "class": "missing fixture",
+      "version": null
+    },
+    {
+      "file": "zz_review_e_famine_trace.test.ts",
+      "case": "CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed",
+      "class": "missing fixture",
+      "version": null
+    },
+    {
+      "file": "zz_review_g_observer_purity.test.ts",
+      "case": "REVIEW G: observation leaves the world exactly as it was, every tick river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical",
+      "class": "timeout",
+      "version": null
+    },
+    {
+      "file": "zz_review_main_toolreport_saves.test.ts",
+      "case": "REVIEW: tool registry consistency in retained and fresh worlds fresh current-rules worlds, 12,000 ticks, checked every 600 ticks",
+      "class": "timeout",
+      "version": null
+    }
+  ]
+}\n

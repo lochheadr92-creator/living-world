@@ -66,7 +66,7 @@ import { validateTownships } from '../sim/townships';
 // always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { RNG } from '../sim/rng';
-import { validateRulesVersion, runsRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
+import { validateRulesVersionForLoad, validateRulesVersion, runsRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
 import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import { setExternalController } from '../sim/external';
@@ -329,7 +329,7 @@ export function deserializeWorld(json: string): World {
   // The RULES version is a separate question from the save format above: these bytes may be perfectly readable and still
   // describe a world whose behaviour this build cannot run. Refuse it here, where nothing has been replaced yet, so that a
   // refused load leaves the running world exactly as it was. An absent version is the legacy case and is kept absent.
-  const verdict = validateRulesVersion((parsed.world as World).settings?.rulesVersion);
+  const verdict = validateRulesVersionForLoad((parsed.world as World).settings?.rulesVersion);
   if (!verdict.ok) throw new Error(`cannot load this world: ${verdict.reason}`);
   validateSaveLineage(parsed.world.settings?.rulesVersion, parsed.rulesLineage, parsed.rulesGeneration);
   const w = parsed.world as World;

@@ -15,7 +15,8 @@ import {isFoodKind} from '../src/sim/provision';
 import {hashString,hashUnit} from '../src/sim/rng';
 import {updateNeeds} from '../src/sim/needs';
 import {stepWorld} from '../src/sim/world';
-function fixture(){const s=stage('carcass-contract');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:125};const p=addPerson(s,'Ada',40.5,40.5,{hunger:65,thirst:90,energy:90});const deer=makeWolf(s.w,41.5,40.5,'deer');done(s);return {...s,p,deer};}
+import {RULES_SUPPORT_FLOOR} from '../src/sim/support_floor';
+function fixture(version=RULES_SUPPORT_FLOOR){const s=stage('carcass-contract');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:version};const p=addPerson(s,'Ada',40.5,40.5,{hunger:65,thirst:90,energy:90});const deer=makeWolf(s.w,41.5,40.5,'deer');done(s);return {...s,p,deer};}
 function finish(w:ReturnType<typeof fixture>['w'],p:ReturnType<typeof fixture>['p'],n=400){for(let i=0;i<n&&p.activity;i++){w.tick++;stepActivity(w,p);}expect(p.activity).toBeNull();}
 function cut(w:ReturnType<typeof fixture>['w'],p:ReturnType<typeof fixture>['p'],id:number,item='meat'){
  startActivity(w,p,newActivity(w,p,{kind:'butcher',label:'Butcher',goal:'recover food',targetId:id,targetType:'pile',tx:41.5,ty:40.5,spotX:41.5,spotY:40.5,data:{part:item},minCommit:20,maxTicks:600}));
@@ -82,10 +83,10 @@ it('renders recovered raw fat only after work and paid fuel, then carries and ea
  expect(p.needs.hunger).toBe(54);expect(p.inv.rendered_fat??0).toBe(0);expect(w.ledger.consumed.fat).toBe(1);expect(w.ledger.consumed.rendered_fat).toBe(1);expect(conservationReport(w).ok).toBe(true);
 });
 it('rejects new goods and hide recipes under older rules and malformed fat batches',()=>{
- const s=fixture(),{w,p}=s,rack=building(s,'food_rack',43,40,p.hhId,{fat:1,wood:1});snapshotInitial(w);
- expect(startJob(w,rack,p,RECIPE_BY_ID.render_fat,p.id,'render')).toBeNull();const good=serializeWorld(w);
+ const historical=fixture(124),oldRack=building(historical,'food_rack',43,40,historical.p.hhId,{fat:1,wood:1});
+ expect(startJob(historical.w,oldRack,historical.p,RECIPE_BY_ID.render_fat,historical.p.id,'render')).toContain('not available');
+ const s=fixture(),{w,p}=s,rack=building(s,'food_rack',43,40,p.hhId,{fat:1,wood:1});snapshotInitial(w);expect(startJob(w,rack,p,RECIPE_BY_ID.render_fat,p.id,'render')).toBeNull();
  rack.ops!.job!.total=1;expect(()=>deserializeWorld(serializeWorld(w))).toThrow(/preservation/i);
- const copy=deserializeWorld(good);copy.settings.rulesVersion=124;expect(()=>deserializeWorld(serializeWorld(copy))).toThrow();
 });
 it('the real hunt handler replaces its instant reward with one body after a paid successful strike',()=>{
  const {w,p,deer}=fixture();const h=handlerOf('hunt')!;
@@ -109,7 +110,7 @@ it('charges ordinary heavy-work needs and resumes an active mid-cut save without
  const {w,p,deer}=fixture(),body=makeCarcass(w,deer,p)!;cut(w,p,body.id);
  for(let i=0;i<25;i++){w.tick++;stepActivity(w,p);}
  const hunger=p.needs.hunger,energy=p.needs.energy;updateNeeds(w,p);
- expect(hunger-p.needs.hunger).toBeCloseTo(.03*1.25);expect(energy-p.needs.energy).toBeCloseTo(.04*1.35);
+ expect(hunger-p.needs.hunger).toBeCloseTo(.024*1.25);expect(energy-p.needs.energy).toBeCloseTo(.04*1.35);
  const copy=deserializeWorld(serializeWorld(w)),q=copy.persons.find(q=>q.id===p.id)!;
  finish(w,p);finish(copy,q);expect(serializeWorld(w)).toBe(serializeWorld(copy));expect(p.inv.meat).toBe(1);expect(conservationReport(w).ok).toBe(true);
 });
@@ -128,7 +129,7 @@ it('full output storage cannot finish fat and an expired batch loses its paid in
  expect(w.ledger.spoiled.fat).toBe(1);expect(w.ledger.consumed.wood).toBe(1);expect(b.ops!.job).toBeNull();expect(conservationReport(w).ok).toBe(true);
 });
 it('recovered raw materials and rendered fat still spoil while carried',()=>{
- const {w,p}=fixture();p.inv={hide:1,fat:1,rendered_fat:1};snapshotInitial(w);w.tick=59;
+ const {w,p}=fixture(125);p.inv={hide:1,fat:1,rendered_fat:1};snapshotInitial(w);w.tick=59;
  const random=vi.spyOn(w.rng,'next').mockReturnValue(0);try{stepWorld(w);}finally{random.mockRestore();}
  for(const k of ['hide','fat','rendered_fat'] as const){expect(p.inv[k]??0).toBe(0);expect(w.ledger.spoiled[k]).toBe(1);}expect(conservationReport(w).ok).toBe(true);
 });

@@ -9,15 +9,16 @@ import {newActivity,startActivity,stepActivity} from '../src/sim/activities';
 import {conservationReport,snapshotInitial} from '../src/sim/economy';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {stepWorld} from '../src/sim/world';
-function fixture(){const s=stage('private-cellar');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:135};const p=addPerson(s,'Ada',40.5,24.5,{hunger:40,thirst:95,energy:95});const b=building(s,'cellar',40,23,p.hhId,{berries:6});done(s);return {s,w:s.w,p,b};}
+import {RULES_SUPPORT_FLOOR} from '../src/sim/support_floor';
+function fixture(version=135){const s=stage('private-cellar');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:version};const p=addPerson(s,'Ada',40.5,24.5,{hunger:40,thirst:95,energy:95});const b=building(s,'cellar',40,23,p.hhId,{berries:6});done(s);return {s,w:s.w,p,b};}
 function finish(w:ReturnType<typeof fixture>['w'],p:ReturnType<typeof fixture>['p']){for(let i=0;i<300&&p.activity;i++){w.tick++;stepActivity(w,p);}}
 it('accepts food and flour, refuses building materials, and loses protection when ruined',()=>{const {w,b}=fixture();expect(cellarAccepts('berries')).toBe(true);expect(mayDeposit(b,'flour')).toBe(true);expect(mayDeposit(b,'stone')).toBe(false);expect(spoilMultiplier(w,b)).toBe(0.15);b.condition=0;expect(spoilMultiplier(w,b)).toBe(1);});
 it('offers a remembered private meal and consumes real food at the door',()=>{const {w,p,b}=fixture();learn(w,p,b);const o=generateOptions(w,p,true,true).options.find(o=>o.kind==='eat_store'&&o.targetId===b.id);expect(o).toBeTruthy();startActivity(w,p,o!.make!()!);finish(w,p);expect(p.needs.hunger).toBeGreaterThan(40);expect(b.store.items.berries??0).toBeLessThan(6);expect(conservationReport(w).ok).toBe(true);});
 it('rechecks ownership and contact before a foreign meal can take anything',()=>{const {w,p,b}=fixture();b.hhId=999;expect(cellarAccess(w,p,b)).toBeTruthy();startActivity(w,p,newActivity(w,p,{kind:'eat_store',label:'staged intrusion',goal:'attempt access',targetId:b.id,targetType:'building',tx:41,ty:23.5,spotX:40.5,spotY:24.5}));finish(w,p);expect(b.store.items.berries).toBe(6);expect(p.needs.hunger).toBe(40);});
-it('continues exactly after loading and rejects malformed cellar capacity',()=>{const {w,b}=fixture(),copy=deserializeWorld(serializeWorld(w));for(let i=0;i<120;i++){stepWorld(w);stepWorld(copy);}expect(serializeWorld(w)).toBe(serializeWorld(copy));b.store.cap=1000;expect(()=>deserializeWorld(serializeWorld(w))).toThrow();});
+it('continues exactly after loading and rejects malformed cellar capacity',()=>{const {w,b}=fixture(RULES_SUPPORT_FLOOR),copy=deserializeWorld(serializeWorld(w));for(let i=0;i<120;i++){stepWorld(w);stepWorld(copy);}expect(serializeWorld(w)).toBe(serializeWorld(copy));b.store.cap=1000;expect(()=>deserializeWorld(serializeWorld(w))).toThrow();});
 
 it('lays out and constructs a private cellar with paid materials',()=>{
- const s=stage('cellar-building');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:135};const p=addPerson(s,'Builder',40.5,24.5,{hunger:95,thirst:95,energy:95});done(s);
+ const s=stage('cellar-building');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:RULES_SUPPORT_FLOOR};const p=addPerson(s,'Builder',40.5,24.5,{hunger:95,thirst:95,energy:95});done(s);
  startActivity(s.w,p,newActivity(s.w,p,{kind:'plan_site',label:'Lay out cellar',goal:'cool food',tx:41,ty:23.5,spotX:40.5,spotY:24.5,data:{type:'cellar',sx:40,sy:23,hh:p.hhId}}));finish(s.w,p);
  const st=s.w.sites[0];expect(st?.type).toBe('cellar');expect(st.hhId).toBe(p.hhId);
  st.delivered={wood:6,stone:9};snapshotInitial(s.w);
@@ -35,7 +36,7 @@ it('stores actual surplus, refuses stone, and then feeds the owner from that foo
  expect(b.store.items.berries??0).toBeLessThan(stored);expect(p.needs.hunger).toBeGreaterThan(10);expect(conservationReport(w).ok).toBe(true);
 });
 it('reduces actual spoilage without stopping it or creating food',()=>{
- function stock(type:'cellar'|'storehouse'){const s=stage('cellar-spoil');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:135};const b=building(s,type,40,23,0,{berries:60});done(s);return {w:s.w,b};}
+ function stock(type:'cellar'|'storehouse'){const s=stage('cellar-spoil');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:RULES_SUPPORT_FLOOR};const b=building(s,type,40,23,0,{berries:60});done(s);return {w:s.w,b};}
  const cool=stock('cellar'),open=stock('storehouse');
  for(let i=0;i<2400;i++){stepWorld(cool.w);stepWorld(open.w);}
  expect(cool.b.store.items.berries).toBeGreaterThan(open.b.store.items.berries??0);expect(cool.b.store.items.berries).toBeLessThan(60);
@@ -60,9 +61,8 @@ it('rechecks ownership during a pending deposit and preserves all carried goods'
  finish(w,p);expect(p.inv.berries).toBe(5);expect(b.store.items.berries).toBe(6);expect(conservationReport(w).ok).toBe(true);
 });
 
-it('rejects a cellar smuggled into predecessor rules and malformed paid work',()=>{
- const {w}=fixture();w.settings.rulesVersion=134;expect(()=>deserializeWorld(serializeWorld(w))).toThrow('Invalid cellar');
- const s=stage('bad-cellar-site');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:135};const p=addPerson(s,'Builder',40.5,24.5);const st=site(s,'cellar',40,23,p.hhId,p.id);done(s);st.workTotal=1;expect(()=>deserializeWorld(serializeWorld(s.w))).toThrow('Invalid cellar site');
+it('rejects malformed paid work in a supported cellar save',()=>{
+ const s=stage('bad-cellar-site');s.w.settings={...s.w.settings,dynamics:'rich',rulesVersion:RULES_SUPPORT_FLOOR};const p=addPerson(s,'Builder',40.5,24.5);const st=site(s,'cellar',40,23,p.hhId,p.id);done(s);st.workTotal=1;expect(()=>deserializeWorld(serializeWorld(s.w))).toThrow('Invalid cellar site');
 });
 it('refuses remote access and an owner with no household',()=>{
  const {w,p,b}=fixture();p.x+=10;expect(cellarAccess(w,p,b)).toBeTruthy();p.x-=10;p.hhId=0;b.hhId=0;expect(cellarAccess(w,p,b)).toBeTruthy();

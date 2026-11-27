@@ -1,9 +1,9 @@
 // Stage 0: which generation of simulation behaviour a world runs (src/sim/rulesversion.ts).
 //
-// The point of the version is that it is KEPT, not that it exists. A world saved today must still say version 1 after it has
-// been saved, loaded, restored, forked and replayed, and a build that does not know a version must refuse the world rather
-// than run it under today's rules and call it the same world. A world made before versioning existed stays unversioned for
-// ever: nobody can tell which of several historical rich implementations made it, so nothing here guesses.
+// At or above the support floor, a numbered world keeps its rules version through load, restore, fork and replay. A build that
+// does not know a version, or no longer supports it for saves, refuses it rather than reinterpreting it under today's rules.
+// A world made before versioning existed stays unversioned: nobody can tell which historical rich implementation made it, so
+// the support floor does not guess at a number for it.
 //
 // What these tests do NOT establish: that version 1 reproduces any particular historical release. Version 1 is the behaviour
 // of this build, and the first baseline the project can hold itself to from here on.
@@ -21,6 +21,7 @@ import {
   rulesVersionOf,
   runsRulesVersion,
   validateRulesVersion,
+  validateRulesVersionForLoad,
 } from '../src/sim/rulesversion';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { deepEqualState, firstDiffs } from '../scripts/statediff';
@@ -160,6 +161,16 @@ describe('a world this build cannot run is refused, not reinterpreted', () => {
     expect(v.reason).toMatch(/not loaded/);
   });
 
+  it('applies the support floor only to numbered saves, preserving unversioned diagnostics', () => {
+    const below = validateRulesVersionForLoad(249);
+    expect(below.ok).toBe(false);
+    expect(below.reason).toMatch(/below.*support floor.*250/i);
+    expect(validateRulesVersionForLoad(undefined)).toEqual({ ok: true, version: undefined });
+    for (let version = 250; version <= 256; version++) {
+      expect(validateRulesVersionForLoad(version), `rules ${version}`).toEqual({ ok: true, version });
+    }
+  });
+
   it('leaves the running world untouched when a load is refused', async () => {
     const game = new Game({ seed: 'rv-intact' });
     game.advanceTicks(30);
@@ -170,6 +181,22 @@ describe('a world this build cannot run is refused, not reinterpreted', () => {
       const w = deserializeWorld(text);
       game.restoreWorld(w, w.settings);
     }).toThrow();
+    expect(game.stateHash).toBe(before.hash);
+    expect(game.world.tick).toBe(before.tick);
+    expect(game.settings.seed).toBe(before.seed);
+  });
+
+  it('leaves the running world untouched when a below-floor save is refused', () => {
+    const game = new Game({ seed: 'rv-floor-intact' });
+    game.advanceTicks(30);
+    const before = { hash: game.stateHash, tick: game.world.tick, seed: game.settings.seed };
+    const old = current('rv-floor-old');
+    old.settings.rulesVersion = 249;
+    const text = serializeWorld(old);
+    expect(() => {
+      const w = deserializeWorld(text);
+      game.restoreWorld(w, w.settings);
+    }).toThrow(/below.*support floor.*250/i);
     expect(game.stateHash).toBe(before.hash);
     expect(game.world.tick).toBe(before.tick);
     expect(game.settings.seed).toBe(before.seed);

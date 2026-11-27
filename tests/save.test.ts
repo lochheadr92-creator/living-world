@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { createWorld, defaultSettings } from '../src/sim/factory';
-import { settingsForProfile } from '../src/sim/profiles';
+import { currentWorldSettings, settingsForProfile } from '../src/sim/profiles';
 import type { World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { deepHash, legacySaveText } from './helpers/golden';
@@ -49,6 +49,17 @@ describe('saving and loading a world', () => {
     const json = serializeWorld(createWorld(defaultSettings('save-unknown')));
     expect(() => deserializeWorld(json.replace(/^\{"version":\d+/, '{"version":2'))).toThrow(/unsupported save version/);
     expect(() => deserializeWorld(json.replace(/^\{"version":\d+/, '{"version":99'))).toThrow(/unsupported save version/);
+  });
+
+  it('refuses an explicitly numbered save below the rules support floor', () => {
+    const w = createWorld(currentWorldSettings('normal', 'save-rules-249'));
+    w.settings.rulesVersion = 249;
+    expect(() => deserializeWorld(serializeWorld(w))).toThrow(/below.*support floor.*250/i);
+  });
+
+  it.each([250, 251, 252, 253, 254, 255, 256])('loads a numbered rules-%i save at the support floor or above', (rulesVersion) => {
+    const w = createWorld({ ...currentWorldSettings('normal', `save-rules-${rulesVersion}`), rulesVersion });
+    expect(deserializeWorld(serializeWorld(w)).settings.rulesVersion).toBe(rulesVersion);
   });
 
   it('writes a Huge world in well under half the text the previous format needed', () => {
