@@ -1473,6 +1473,8 @@ export interface World {
   inhabitants?: Record<number, InhabitantState>;
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
+    /** Scratch diagnostic, not a product hook. */
+    onWalkReviewTrace?: (event: { currentPresent: boolean; current: number; best: number; reason: string; kind: string; nextKind: string; remaining: number; optionKey: string; targetExists: boolean }) => void;
     onNourishment?: (p:Person,event:import('./nourishment').NourishmentEvent)=>void;
     onActivityStart?: (p: Person, a: Activity) => void;
     /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */

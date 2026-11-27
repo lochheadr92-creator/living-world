@@ -451,6 +451,7 @@ export function reviewActivity(world: World, p: Person): void {
     const act = best.make!();
     if (!act) return;
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : foundEmpty(world, a, ctx) ? FOUND_EMPTY_REASON : 'something better came up'; // rules 161 (found_empty.ts)
+    if (a.phase === 'travel') world.hooks?.onWalkReviewTrace?.({ currentPresent: !key || ctx.options.some(o => o.key === key), current: cur, best: best.util, reason: why, kind: a.kind, nextKind: best.kind, remaining: Math.hypot(a.spotX - p.x, a.spotY - p.y), optionKey: key ?? '', targetExists: world.byId.has(a.targetId) });
     act.data.optKey = best.key;
     prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));
