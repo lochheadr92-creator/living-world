@@ -1,0 +1,37 @@
+{
+  "source": {
+    "head": "1b226d338639f491628d9bd7a92b20a4dd59ae7c",
+    "rules": 282,
+    "content": "56d175034509fa356d652065f106480506d201b969b8241f673c91301e09b17b",
+    "note": "Recorded from a clean checkout of the commit named in head (git status was empty when it was written); ordinary Normal gen-2 (arrivals on) at tick 48000 (day 20), rules 282, saved and continued 120 ticks. One pin for rules 282 alone, the review repairs (src/sim/review_repairs.ts: chat, route, jar, loan, wolf). The same world, tick and continuation length as the rules 278 to 281 pins, written with a copy of their helper (tests/helpers/v282ref.ts). Rules 282 adds no saved field, no draw and no feed line; the counts are of the saved world."
+  },
+  "saved": "3c9b15f94c1871424a9d7f4420cd2402c131565baf48b7b375eab70de50f0a4a",
+  "continued": "6e01ace8ef1bf5274df7e86cef49fcfab023edf11c7a92cbb29dae7fbd952e7a",
+  "tick": 48000,
+  "arrivals": 7,
+  "alive": 41,
+  "animals": {
+    "cow": 2,
+    "deer": 3,
+    "goat": 2,
+    "pig": 1,
+    "sheep": 1,
+    "wolf": 3
+  },
+  "ownedAnimals": 4,
+  "housedAnimals": 0,
+  "farmBuildings": {
+    "barn": 8,
+    "chicken_cage": 1,
+    "paddock": 6
+  },
+  "farmGoods": {
+    "hay": 81,
+    "hide": 1,
+    "stock_feed": 84,
+    "wool": 13
+  },
+  "occupations": 31,
+  "workshopErrands": 1,
+  "beliefsWithSeenBuilders": 41
+}
