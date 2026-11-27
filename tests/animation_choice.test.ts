@@ -1,9 +1,10 @@
 // The renderer's choice of animation (src/render/animation.ts): read from a person's own record, never from a new pose.
 // These are staged records: they establish which animation a state is DRAWN with, not that the state arises in a world.
 import { describe, expect, it } from 'vitest';
-import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet } from '../src/render/animation';
+import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet, walkToolOf } from '../src/render/animation';
 import type { AnimId } from '../src/render/animation';
 import type { Conversation, Person, PoseKind, World } from '../src/sim/types';
+import { TICKS_PER_YEAR } from '../src/sim/constants'; // walking (G)
 
 const TICK = 5000;
 const world = (o: Record<string, unknown> = {}): World => ({ tick: TICK, occasions: [], civicProjects: [], byId: new Map(), ...o }) as unknown as World;
@@ -14,6 +15,10 @@ const person = (pose: PoseKind, kind: string | null, data: Record<string, unknow
     convId: 0,
     speech: null,
     mood: { level: 0, thoughts: [] },
+    // walking (G): a person who is well, thirty and carrying nothing
+    needs: { hunger: 80, thirst: 80, energy: 80, warmth: 80, safety: 80, social: 80 },
+    inv: {},
+    birthTick: TICK - 30 * TICKS_PER_YEAR,
     pregnantUntil: 0,
     activity: kind ? { kind, phase, data, progress: 0, pprogress: 0, duration: 100 } : null,
     ...extra,
@@ -101,6 +106,15 @@ describe('the animation is chosen from the activity the person is in', () => {
     ['drinking', 'drink', 'drink', {}, 'work', 'drink'],
     ['building', 'build', 'build', {}, 'work', 'build'],
     ['walking to work', 'walk', 'gather', {}, 'travel', 'walk'],
+    // G: how a person on foot goes (the ones the activity alone decides; the rest are below)
+    ['on the way to bed', 'walk', 'sleep', {}, 'travel', 'walk_tired'],
+    ['on the way to a fire', 'walk', 'warm', {}, 'travel', 'walk_cold'],
+    ['on the way to talk to somebody', 'walk', 'socialize', {}, 'travel', 'walk_social'],
+    ['on the way to answer somebody', 'walk', 'converse', {}, 'travel', 'walk_social'],
+    ['on the way to look in on somebody', 'walk', 'visit', {}, 'travel', 'walk_social'],
+    ['on the way to hand something over', 'walk', 'give', {}, 'travel', 'walk_social'],
+    ['on the way to a meal', 'walk', 'attend_meal', {}, 'travel', 'walk_social'],
+    ['on the way to host a meal', 'walk', 'host_meal', {}, 'travel', 'walk_social'],
     ['sleeping', 'sleep', 'sleep', {}, 'work', 'sleep'],
     ['fleeing', 'fear', 'flee', {}, 'work', 'fear'],
   ];
@@ -296,5 +310,198 @@ describe('the pose the simulation set is never changed', () => {
     expect(isPose(pick(world(), p))).toBe(false);
     expect(JSON.stringify(p)).toBe(before);
     expect(p.pose).toBe('sit');
+  });
+});
+
+// walking (G): how a person on foot goes, told from their own record (animation.ts walkingOf)
+describe('a person on foot is drawn by what the record says of them', () => {
+  const WELL = { hunger: 80, thirst: 80, energy: 80, warmth: 80, safety: 80, social: 80 };
+  interface Walk {
+    data?: Record<string, unknown>;
+    need?: string | null;
+    needs?: Partial<typeof WELL>;
+    inv?: Record<string, number>;
+    mood?: number;
+    age?: number;
+    target?: number;
+  }
+  /** a person on the way (the travel phase, the walking pose) with the record named */
+  const walker = (kind: string | null, o: Walk = {}): Person => {
+    const p = person('walk', kind, o.data ?? {}, 'travel', {
+      needs: { ...WELL, ...o.needs },
+      inv: o.inv ?? {},
+      mood: { level: o.mood ?? 0, thoughts: [] },
+      birthTick: TICK - (o.age ?? 30) * TICKS_PER_YEAR,
+    });
+    if (p.activity) Object.assign(p.activity, { need: o.need ?? null, targetId: o.target ?? 0, targetType: '', tx: 0, ty: 0 });
+    return p;
+  };
+  const rich = (sources: Record<number, string> = {}): World =>
+    world({ settings: { dynamics: 'rich', rulesVersion: 300 }, byId: new Map(Object.entries(sources).map(([id, type]) => [Number(id), { ent: 'source', type }])) });
+  const is = (p: Person, want: AnimId, w: World = world()): void => expect(pick(w, p)).toBe(want);
+
+  it('worn out is drawn tired, wherever they are going; a little tired is not', () => {
+    is(walker('gather', { needs: { energy: 20 } }), 'walk_tired');
+    is(walker('gather', { needs: { energy: 24 } }), 'walk_tired');
+    is(walker('gather', { needs: { energy: 25 } }), 'walk');
+    is(walker('gather', { needs: { energy: 40 } }), 'walk');
+  });
+  it('cold is drawn hunched; a little cool is not', () => {
+    is(walker('gather', { needs: { warmth: 30 } }), 'walk_cold');
+    is(walker('gather', { needs: { warmth: 35 } }), 'walk');
+  });
+  it('on the way to food or water, in need of it, is drawn quick', () => {
+    is(walker('eat_store', { need: 'hunger', needs: { hunger: 30 } }), 'walk_urgent');
+    is(walker('drink', { need: 'thirst', needs: { thirst: 30 } }), 'walk_urgent');
+    is(walker('gather', { need: 'hunger', needs: { hunger: 20 } }), 'walk_urgent'); // foraging because hungry
+    // not low enough, the other need low, or no need behind the errand: an ordinary walk
+    is(walker('eat_store', { need: 'hunger', needs: { hunger: 60 } }), 'walk');
+    is(walker('drink', { need: 'thirst', needs: { hunger: 10, thirst: 70 } }), 'walk');
+    is(walker('eat_store', { need: null, needs: { hunger: 10 } }), 'walk');
+    is(walker('fetch_water', { needs: { thirst: 10 } }), 'walk'); // water for the household or the crops is not for their own thirst
+  });
+  it('a heavy load on the way to put it down is drawn laden', () => {
+    is(walker('haul', { inv: { wood: 5 } }), 'walk_laden'); // 10 of 12
+    is(walker('deposit', { inv: { stone: 3, grain: 1 } }), 'walk_laden'); // 10 of 12
+    is(walker('give', { inv: { wood: 5 } }), 'walk_laden');
+    is(walker('fuel_fire', { inv: { wood: 4 } }), 'walk_laden'); // 8 of 12
+    is(walker('haul', { age: 9, inv: { wood: 2 } }), 'walk_laden'); // 4 of a child's 5
+  });
+  it('a light load, or a load on some other errand, is not', () => {
+    is(walker('haul', { inv: { wood: 2 } }), 'walk'); // 4 of 12
+    is(walker('deposit', { inv: { grain: 2 } }), 'walk');
+    is(walker('gather', { inv: { wood: 5 } }), 'walk'); // a full pack going out to work is the ordinary walk (the lean is drawn on it)
+    is(walker('socialize', { inv: { wood: 5 } }), 'walk_social');
+  });
+  it('an armful or a jar on the head is left to the drawing that already has it', () => {
+    is(walker('haul', { inv: { bricks: 3 } }), 'walk');
+    is(walker('deposit', { inv: { clay: 3 } }), 'walk');
+    is(walker('deposit', { inv: { bread: 10, grain: 2 } }), 'walk');
+    is(walker('deposit', { inv: { bread: 10, grain: 4, basket: 1 } }), 'walk_laden'); // bread in a basket is on the hip, not in the arms
+    is(walker('haul', { inv: { jar: 1, water: 6, wood: 3 } }), 'walk');
+  });
+  it('going to work is drawn with the tool only when the pack holds the tool for that work', () => {
+    const w = rich({ 501: 'tree', 502: 'rock', 503: 'fish_spot', 504: 'berry_bush', 505: 'ore_vein', 506: 'clay_pit', 507: 'outcrop' });
+    is(walker('gather', { target: 501, inv: { axe: 1 } }), 'walk_work', w);
+    is(walker('gather', { target: 502, inv: { pick: 1 } }), 'walk_work', w);
+    is(walker('gather', { target: 505, inv: { pick: 1 } }), 'walk_work', w);
+    is(walker('gather', { target: 506, inv: { pick: 1 } }), 'walk_work', w);
+    is(walker('gather', { target: 507, inv: { pick: 1 } }), 'walk_work', w);
+    is(walker('gather', { target: 503, inv: { rod: 1 } }), 'walk_work', w);
+    is(walker('till', { inv: { hoe: 1 } }), 'walk_work', w);
+    is(walker('tend', { inv: { hoe: 1 } }), 'walk_work', w);
+    is(walker('build', { inv: { hammer: 1 } }), 'walk_work', w);
+    is(walker('repair', { inv: { hammer: 1 } }), 'walk_work', w);
+    // the wrong tool, no tool, no such work, or a target that is not there
+    is(walker('gather', { target: 501, inv: { pick: 1 } }), 'walk', w);
+    is(walker('gather', { target: 501 }), 'walk', w);
+    is(walker('gather', { target: 502, inv: { axe: 1 } }), 'walk', w);
+    is(walker('gather', { target: 504, inv: { axe: 1, pick: 1, hoe: 1 } }), 'walk', w);
+    is(walker('gather', { target: 999, inv: { axe: 1 } }), 'walk', w);
+    is(walker('till', { inv: { axe: 1 } }), 'walk', w);
+    is(walker('build'), 'walk', w);
+    is(walker('craft', { inv: { hammer: 1, axe: 1 } }), 'walk', w);
+  });
+  it('a rod is carried only where rods exist', () => {
+    const withRods = rich({ 503: 'fish_spot' });
+    const without = world({ settings: { dynamics: 'rich', rulesVersion: 100 }, byId: withRods.byId });
+    const p = walker('gather', { target: 503, inv: { rod: 1 } });
+    is(p, 'walk_work', withRods);
+    is(p, 'walk', without);
+    expect(walkToolOf(withRods, p)).toBe(2);
+    expect(walkToolOf(without, p)).toBe(0);
+  });
+  it('the tool drawn is the kind the work uses', () => {
+    const w = rich({ 501: 'tree', 503: 'fish_spot' });
+    expect(walkToolOf(w, walker('gather', { target: 501, inv: { axe: 1, hammer: 1 } }))).toBe(1);
+    expect(walkToolOf(w, walker('till', { inv: { hoe: 1 } }))).toBe(1);
+    expect(walkToolOf(w, walker('build', { inv: { axe: 1, hammer: 1 } }))).toBe(3);
+    expect(walkToolOf(w, walker('build'))).toBe(0);
+    expect(walkToolOf(w, walker(null))).toBe(0);
+  });
+  it('on the way to somebody is drawn open; a search for somebody lost, or being fetched home, is not', () => {
+    is(walker('visit', { data: {} }), 'walk_social');
+    is(walker('visit', { data: { fetch: {} } }), 'search_walk');
+    is(walker('visit', { data: { fetchWith: {} } }), 'search_walk');
+    is(walker('visit', { data: { fetchedBy: {} } }), 'walk');
+    is(walker('explore'), 'walk');
+    is(walker('attend', { data: { occasion: 1 } }), 'walk'); // the occasion is not looked up while walking: no search of the world
+  });
+  it('a child on the way to play, or pottering about, skips; a little one, a grown person, and the evening fire do not', () => {
+    is(walker('wander', { age: 9 }), 'skip');
+    is(walker('wander', { age: 11 }), 'skip');
+    is(walker('socialize', { age: 9, data: { purpose: 'play_together' }, target: 3 }), 'skip');
+    is(walker('socialize', { age: 9, data: { purpose: 'chat' } }), 'walk_social');
+    is(walker('wander', { age: 9, data: { evening: 'fire' } }), 'walk');
+    is(walker('wander', { age: 5 }), 'walk');
+    is(walker('wander', { age: 30 }), 'walk');
+    is(walker('wander', { age: 14 }), 'walk');
+    is(walker('gather', { age: 9 }), 'walk');
+  });
+  it('by mood where nothing else applies: low, middling, glad', () => {
+    is(walker('gather', { mood: -30 }), 'walk_low');
+    is(walker('gather', { mood: -12 }), 'walk_low');
+    is(walker('gather', { mood: -11.9 }), 'walk');
+    is(walker('gather', { mood: 0 }), 'walk');
+    is(walker('gather', { mood: 4.9 }), 'walk');
+    is(walker('gather', { mood: 5 }), 'walk_glad');
+    is(walker('gather', { mood: 40 }), 'walk_glad');
+    const p = walker('gather');
+    delete (p as { mood?: unknown }).mood; // a world without moods
+    is(p, 'walk');
+  });
+  it('first match wins: tired, then cold, then in need, then laden, then the tool, then somebody, then mood', () => {
+    const w = rich({ 501: 'tree' });
+    is(walker('sleep', { mood: 40, needs: { warmth: 10 } }), 'walk_tired');
+    is(walker('haul', { inv: { wood: 5 }, needs: { energy: 10 } }), 'walk_tired');
+    is(walker('warm', { needs: { hunger: 10 }, mood: -40 }), 'walk_cold');
+    is(walker('eat_store', { need: 'hunger', needs: { hunger: 10, warmth: 20 } }), 'walk_cold');
+    is(walker('eat_store', { need: 'hunger', needs: { hunger: 10 }, inv: { wood: 5 } }), 'walk_urgent');
+    is(walker('give', { inv: { wood: 5 }, mood: 40 }), 'walk_laden');
+    is(walker('gather', { target: 501, inv: { axe: 1 }, mood: -40 }), 'walk_work', w);
+    is(walker('socialize', { mood: -40 }), 'walk_social');
+    is(walker('socialize', { age: 9, data: { purpose: 'play_together' }, mood: -40 }), 'skip');
+  });
+  it('the special walks keep their place, however tired, cold, low or laden the person is', () => {
+    const worn = { needs: { energy: 5, warmth: 5 }, mood: -50, inv: { wood: 5 } };
+    is(walker('wander', { ...worn, data: { walk: { id: 1 } } }), 'stroll');
+    is(walker('exchange_journey', worn), 'trek');
+    is(walker('relocate', worn), 'trudge');
+    is(walker('visit', { ...worn, data: { fetch: {} } }), 'search_walk');
+    is(walker('hunt', worn), 'stalk');
+    is(walker('attend', { ...worn, data: { dance: { n: 3, moving: true } } }), 'dance');
+  });
+  it('running, pulling, fear and fleeing are left alone', () => {
+    const worn = { needs: { energy: 5 }, mood: -50 };
+    const run = walker('gather', worn);
+    run.pose = 'run';
+    expect(pick(world(), run)).toBe('run');
+    const pull = walker('haul', { ...worn, inv: { wood: 5 } });
+    pull.pose = 'pull';
+    expect(pick(world(), pull)).toBe('pull');
+    const fear = walker('flee', worn);
+    fear.pose = 'fear';
+    expect(pick(world(), fear)).toBe('fear');
+    is(walker('flee', worn), 'walk');
+  });
+  it('somebody walking with no activity is drawn from their needs and mood alone', () => {
+    is(walker(null), 'walk');
+    is(walker(null, { needs: { energy: 10 } }), 'walk_tired');
+    is(walker(null, { mood: -30 }), 'walk_low');
+  });
+  it('every walk of these is quiet, so a sling or a bereavement shows in the arms too', () => {
+    for (const a of ['walk_tired', 'walk_cold', 'walk_urgent', 'walk_laden', 'walk_work', 'walk_social', 'skip', 'walk_low', 'walk_glad'] as AnimId[]) {
+      expect(isPose(a)).toBe(false);
+      expect(isQuiet(a)).toBe(true);
+    }
+  });
+  it('choosing one leaves the person as they were', () => {
+    const w = rich({ 501: 'tree' });
+    for (const p of [walker('sleep'), walker('haul', { inv: { wood: 5 } }), walker('gather', { target: 501, inv: { axe: 1 } }), walker('wander', { age: 9 }), walker('gather', { mood: 30 })]) {
+      const before = JSON.stringify(p);
+      expect(pick(w, p)).not.toBe('walk');
+      expect(JSON.stringify(p)).toBe(before);
+      expect(p.pose).toBe('walk');
+    }
   });
 });

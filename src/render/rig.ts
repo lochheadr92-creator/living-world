@@ -60,4 +60,6 @@ export interface PoseCtx {
   stage: string;
   /** distance covered since the last frame (tiles) */
   moved: number;
+  /** an elder (walking (G): the walks of anim_rig.ts take a shorter, more careful step) */
+  elder?: boolean;
 }

@@ -6,6 +6,7 @@
 import { clamp, smoothstep } from '../sim/util';
 import type { PoseKind } from '../sim/types';
 import type { AnimId, Condition } from './animation';
+import { GREET_WITHIN } from './animation'; // walking (G)
 import { R, cycleOf, ease, setBase } from './rig';
 import type { PoseCtx, Rig } from './rig';
 import { isWorkAnim, workRig } from './anim_work'; // work (H)
@@ -14,6 +15,8 @@ const TAU = Math.PI * 2;
 /** 0 outside [a, b], a smooth rise and fall inside it */
 const bump = (k: number, a: number, b: number): number => (k <= a || k >= b ? 0 : Math.sin(((k - a) / (b - a)) * Math.PI));
 const frac = (x: number): number => x - Math.floor(x);
+/** walking (G): how far (0..1, smoothly) the figure's left arm is the one nearer the viewer, from its heading */
+const nearLeft = (heading: number): number => smoothstep(-0.5, 0.5, Math.cos(heading) - Math.sin(heading));
 
 export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: (pose: PoseKind) => void): void {
   const { t, p } = c;
@@ -101,6 +104,196 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
   }
 
   switch (anim) {
+    // ───────────────────────── walking (G): how a person on foot goes ─────────────────────────
+    // Each is the ordinary walk (`base`) with the body, head and hands set by what the person is doing or how they are. The
+    // stride is still the ground covered (c.walk), the feet swing about as far as the plain walk's (no skating), and what differs
+    // is the outline: head height, lean, where the hands are, how high the feet and the body go.
+    case 'walk_tired': {
+      // worn out, or on the way to bed: a slow shuffle, head down, arms hanging, a yawn now and then
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      const k = frac(t * 0.11 + id * 0.37);
+      const yawn = Math.min(1, bump(k, 0.8, 0.95) * 1.7);
+      r[R.LEAN] += 0.09;
+      r[R.CROUCH] += 2.3;
+      r[R.HEAD_U] = 0.05;
+      r[R.HEAD_Z] = -2.4 + yawn * 3.4;
+      r[R.FLU] *= 0.82;
+      r[R.FRU] *= 0.82;
+      r[R.FLL] *= 0.2;
+      r[R.FRL] *= 0.2;
+      r[R.BOB] = Math.abs(s) * 0.35;
+      r[R.EYES] = yawn > 0.5 ? 0 : 1;
+      r[R.MOUTH] = yawn > 0.5 ? 1 : 0;
+      // the arms hang and hardly swing; the right comes up to the mouth to cover the yawn
+      r[R.HLU] *= 0.3;
+      r[R.HRU] = r[R.HRU] * 0.3 * (1 - yawn) + 0.1 * yawn;
+      r[R.HLZ] = Z(8);
+      r[R.HRZ] = Z(8 + 14.5 * yawn);
+      r[R.HRV] = -0.115 + 0.1 * yawn;
+      r[R.ELB] = 0.02 * yawn;
+      break;
+    }
+    case 'walk_cold': {
+      // cold, or on the way to a fire: hunched, the arms hugged across the chest, a shiver
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      const shiver = Math.sin(t * 23 + id);
+      r[R.LEAN] += 0.07;
+      r[R.CROUCH] += 1.5;
+      r[R.HEAD_U] = 0.005;
+      r[R.HEAD_Z] = -1.4;
+      r[R.FLU] *= 0.85;
+      r[R.FRU] *= 0.85;
+      r[R.BOB] = Math.abs(s) * 0.7 + shiver * 0.4;
+      r[R.ELB] = 0.04;
+      H(0.11, 0.02, Z(16), 0.12, -0.02, Z(14.8));
+      break;
+    }
+    case 'walk_urgent': {
+      // on the way to food or water and in need of it: quick, leaning on, a hand to the belly (hungry) or the throat (thirsty)
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      const thirst = p.activity?.need === 'thirst';
+      r[R.LEAN] += 0.08;
+      r[R.HEAD_U] = 0.045;
+      r[R.FLL] *= 1.45;
+      r[R.FRL] *= 1.45;
+      r[R.BOB] = Math.abs(s) * 1.35;
+      r[R.ELB] = 0.03;
+      // one arm is held to the place it hurts (the one nearer the viewer, so it is seen), the other pumps
+      const nl = nearLeft(p.heading);
+      const gu = thirst ? 0.06 : 0.09;
+      const gv = thirst ? 0.025 : 0.035;
+      const gz = thirst ? 20.6 : 12.6;
+      r[R.HLU] = -s * 0.24 + (gu + s * 0.24) * nl;
+      r[R.HLV] = 0.115 + (gv - 0.115) * nl;
+      r[R.HLZ] = 12.5 + (gz - 12.5) * nl;
+      r[R.HRU] = s * 0.24 + (gu - s * 0.24) * (1 - nl);
+      r[R.HRV] = -0.115 + (0.115 - gv) * (1 - nl);
+      r[R.HRZ] = 12.5 + (gz - 12.5) * (1 - nl);
+      if (thirst) r[R.HEAD_Z] = 0.5;
+      else r[R.CROUCH] += 0.6;
+      break;
+    }
+    case 'walk_laden': {
+      // a heavy load to put down: bent under it, short heavy steps, a hand up and back steadying it on the shoulder
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      r[R.LEAN] += 0.08;
+      r[R.CROUCH] += 1.6;
+      r[R.HEAD_U] = 0.035;
+      r[R.HEAD_Z] = -1;
+      r[R.FLU] *= 0.85;
+      r[R.FRU] *= 0.85;
+      r[R.FLL] *= 0.8;
+      r[R.FRL] *= 0.8;
+      r[R.BOB] = Math.abs(s) * 0.6;
+      r[R.HLU] *= 0.45;
+      r[R.HLZ] = Z(9.5);
+      r[R.ELB] = 0.045;
+      r[R.HRU] = -0.06;
+      r[R.HRV] = -0.115;
+      r[R.HRZ] = Z(19.4);
+      break;
+    }
+    case 'walk_work': {
+      // on the way to work with the tool in the pack: a purposeful stride, the tool carried over the shoulder in the right hand
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      r[R.LEAN] += 0.035;
+      r[R.HEAD_Z] = 0.3;
+      r[R.BOB] = Math.abs(s) * 1.1;
+      r[R.HLU] = -s * 0.2;
+      r[R.ELB] = 0.025;
+      r[R.HRU] = 0.02;
+      r[R.HRV] = -0.12;
+      r[R.HRZ] = 18.6;
+      r[R.TOOL] = 2.45; // up and back over the shoulder
+      break;
+    }
+    case 'walk_social': {
+      // on the way to somebody: head up, an easy open swing, and a hand lifted now and then once they are near
+      base(pose);
+      const a = p.activity;
+      r[R.LEAN] = -0.015;
+      r[R.HEAD_Z] = 1;
+      r[R.BOB] *= 1.15;
+      r[R.HLU] *= 1.25;
+      r[R.HRU] *= 1.25;
+      r[R.HLV] = 0.14;
+      r[R.HRV] = -0.14;
+      r[R.HLZ] = 11.8;
+      r[R.HRZ] = 11.8;
+      if (a && a.targetType === 'person' && Math.hypot(a.tx - p.x, a.ty - p.y) < GREET_WITHIN) {
+        const up = Math.min(1, bump(frac(t * 0.19 + id * 0.29), 0.35, 0.8) * 1.6);
+        r[R.HRU] += (0.1 - r[R.HRU]) * up;
+        r[R.HRV] += (-0.17 - r[R.HRV]) * up;
+        r[R.HRZ] += (Z(25.5 + Math.sin(t * 9 + id) * 1.8) - r[R.HRZ]) * up;
+        r[R.ELB] = 0.03 * up;
+        r[R.MOUTH] = up > 0.5 ? 1 : 0;
+      }
+      break;
+    }
+    case 'skip': {
+      // a child on the way to play: a skip, a hop on every step, the arms flung about
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      const co = Math.cos(c.walk * TAU);
+      r[R.BOB] = Math.pow(Math.abs(s), 0.6) * 4.4;
+      r[R.FLL] = Math.max(0, co) * 5.4;
+      r[R.FRL] = Math.max(0, -co) * 5.4;
+      r[R.HEAD_Z] = 0.9;
+      r[R.LEAN] = 0.015;
+      r[R.ELB] = 0.04;
+      r[R.HLU] = -s * 0.2;
+      r[R.HRU] = s * 0.2;
+      r[R.HLV] = 0.22;
+      r[R.HRV] = -0.22;
+      r[R.HLZ] = 17 + co * 4;
+      r[R.HRZ] = 17 - co * 4;
+      break;
+    }
+    case 'walk_low': {
+      // low in spirit: the head hung, the arms slack and slow, the feet dragging
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      r[R.LEAN] += 0.025;
+      r[R.CROUCH] += 0.4;
+      r[R.HEAD_U] = 0.04;
+      r[R.HEAD_Z] = -2.7;
+      r[R.FLU] *= 0.9;
+      r[R.FRU] *= 0.9;
+      r[R.FLL] *= 0.2;
+      r[R.FRL] *= 0.2;
+      r[R.BOB] = Math.abs(s) * 0.3;
+      r[R.HLU] *= 0.3;
+      r[R.HRU] *= 0.3;
+      r[R.HLZ] = Z(8.4);
+      r[R.HRZ] = Z(8.4);
+      r[R.HLV] = 0.09;
+      r[R.HRV] = -0.09;
+      break;
+    }
+    case 'walk_glad': {
+      // in good spirits: a springy step, the chest up, the arms swinging wide
+      base(pose);
+      const s = Math.sin(c.walk * TAU);
+      r[R.LEAN] = -0.035;
+      r[R.HEAD_Z] = 1.2;
+      r[R.BOB] = Math.abs(s) * 2.6;
+      r[R.FLL] *= 1.5;
+      r[R.FRL] *= 1.5;
+      r[R.ELB] = 0.035;
+      r[R.HLU] = -s * 0.28;
+      r[R.HRU] = s * 0.28;
+      r[R.HLV] = 0.2;
+      r[R.HRV] = -0.2;
+      r[R.HLZ] = 14.5 + Math.max(0, -s) * 3;
+      r[R.HRZ] = 14.5 + Math.max(0, s) * 3;
+      break;
+    }
+
     // ───────────────────────── B: standing about ─────────────────────────
     case 'idle': {
       // hands on hips, shifting weight; now and then a stretch
@@ -990,6 +1183,16 @@ export function animRig(anim: AnimId, pose: PoseKind, c: PoseCtx, r: Rig, base: 
     }
     default:
       base(pose);
+  }
+  // walking (G): an elder takes a shorter, more careful step in each of these walks (the plain walk is left as it was)
+  if (c.elder && anim.startsWith('walk_')) {
+    r[R.FLU] *= 0.85;
+    r[R.FRU] *= 0.85;
+    r[R.FLL] *= 0.7;
+    r[R.FRL] *= 0.7;
+    r[R.BOB] *= 0.75;
+    r[R.HLU] *= 0.8;
+    r[R.HRU] *= 0.8;
   }
 }
 

@@ -18,6 +18,7 @@ import { R, cycleOf, ease, newRig, setBase } from './rig';
 import type { PoseCtx, Rig } from './rig';
 import { NO_CONDITION, animationOf, conditionOf, isPose, isQuiet } from './animation';
 import type { AnimId, Condition } from './animation';
+import { walkToolOf } from './animation'; // walking (G)
 import { animRig, applyCondition } from './anim_rig';
 import { drawAnimProps } from './anim_props';
 import { WORK_TOOL_OF } from './anim_work'; // work (H)
@@ -534,7 +535,7 @@ export class CharacterRenderer {
       else if (st === 'ore_vein' || st === 'outcrop') pose = 'mine';
     }
     const speaking = !!(p.speech && p.speech.until > world.tick);
-    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, p, speaking, stage: band ?? '', moved: s.moved };
+    const pc: PoseCtx = { t: simT, alphaT, walk: s.phase, p, speaking, stage: band ?? '', moved: s.moved, elder: stageOf(world, p) === 'elder' };
     // the simulation's pose says little; what they are really doing is on their own record (animation.ts)
     const anim = animationOf(world, p, pose, p.convId ? this.convs.get(p.convId) : undefined);
     if (anim !== s.pose) {
@@ -824,7 +825,8 @@ export class CharacterRenderer {
     }
 
     // which tool is in hand follows the animation being shown (not the blended rig, which would flicker between kinds)
-    const toolKind = (anim==='fish'||anim==='fish_cast')&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[anim]??WORK_TOOL_OF[anim]??0; // work (H): fish_cast, fell, raise keep what chop, fish and build had
+    // walking (G): the tool carried to work is the one the record holds for that work (animation.ts walkToolOf)
+    const toolKind = anim === 'walk_work' ? walkToolOf(world, p) : (anim==='fish'||anim==='fish_cast')&&hasRods(world)&&!toolFor(world,p,'fish')?0:TOOL_OF[anim]??WORK_TOOL_OF[anim]??0; // work (H): fish_cast, fell, raise keep what chop, fish and build had
 
     // carried goods on the back / hips
     drawCarried(ctx, p, parts, S, fx, fy, sc, lie, rig, toolKind, s.carry, s.jar, headC, burden, simT);
@@ -1246,7 +1248,9 @@ function drawTool(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, kind:
   const flen = Math.hypot(fxS, fyS) || 1;
   const dirx = fxS / flen;
   const diry = fyS / flen;
-  const L = (kind === 2 ? 30 : kind === 3 ? 7 : kind === 6 ? 16 : 15) * sc;
+  // a tool carried over the shoulder (the angle is past the vertical) is drawn a little longer for a hammer and shorter for a rod: walking (G)
+  const carried = rig[R.TOOL] > 1.5;
+  const L = (kind === 2 ? (carried ? 24 : 30) : kind === 3 ? (carried ? 11 : 7) : kind === 6 ? 16 : 15) * sc;
   const tipX = hand[0] + dirx * Math.cos(ang) * L * 0.9;
   const tipY = hand[1] + diry * Math.cos(ang) * L * 0.9 - Math.sin(ang) * L;
   const a = p.activity;
@@ -1441,8 +1445,8 @@ function drawTool(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, kind:
         ctx.fillStyle = 'rgba(255,255,255,0.25)';
         ctx.fillRect(tipX - 3.6 * sc, tipY - 2.4 * sc, 7 * sc, 1.2);
       } else if (kind === 2) {
-        // fishing line to the water with a bobber
-        if (a) {
+        // fishing line to the water with a bobber (none while the rod is carried over the shoulder: walking (G))
+        if (a && rig[R.TOOL] < 1.5) {
           const wx = a.tx + 0.5 - 0.5;
           const wy = a.ty;
           const gx = (wx - wy) * 32;
