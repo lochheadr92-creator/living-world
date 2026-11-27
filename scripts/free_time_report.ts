@@ -7,12 +7,12 @@ import { readFileSync } from 'node:fs';
 type Band = 'u8' | 'c8_11' | 'a12';
 const BANDS: Band[] = ['a12', 'c8_11', 'u8'];
 export const GROUPS = [
-  'chosen talk', 'family time', 'teaching and practice', 'called gatherings', 'evening at the fire', 'play and games', 'time alone',
+  'chosen talk', 'family time', 'teaching and practice', 'called gatherings', 'evening at the fire', 'evening at the hall', 'play and games', 'time alone',
   'rest at home', 'care of others', 'asks and gifts', 'work', 'eating, drinking, warming', 'waiting', 'defence', 'none',
 ] as const;
 export type Group = typeof GROUPS[number];
 /** what counts as free time for the 30% yardstick */
-export const FREE: Group[] = ['chosen talk', 'family time', 'called gatherings', 'evening at the fire', 'play and games', 'time alone'];
+export const FREE: Group[] = ['chosen talk', 'family time', 'called gatherings', 'evening at the fire', 'evening at the hall', 'play and games', 'time alone'];
 
 export function groupOf(kind: string, label: string): Group {
   const l = label.toLowerCase();
@@ -20,6 +20,7 @@ export function groupOf(kind: string, label: string): Group {
   if (/practice|showing|teaching|learning|lesson|a story/.test(l) && /converse|socialize|rest|wander/.test(kind)) return 'teaching and practice';
   if (kind === 'converse' && /family time/.test(l)) return 'family time';
   if (['attend', 'attend_meal', 'host_meal', 'pay_respects'].includes(kind)) return 'called gatherings';
+  if (/evening at the hall|in the hall/.test(l) && kind === 'wander') return 'evening at the hall';
   if (/\bfire\b/.test(l) && ['rest', 'wander', 'alone', 'converse'].includes(kind)) return 'evening at the fire';
   if (/play|game|chase|hide|toy|tag\b|catch|skip|dance|sing|song/.test(l) && !['craft', 'gather'].includes(kind)) return 'play and games';
   if (kind === 'converse' || kind === 'argue') return 'chosen talk';

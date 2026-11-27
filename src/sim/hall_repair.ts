@@ -115,7 +115,7 @@ export function hallEveningOptions(ctx: Ctx): void {
     make: () => {
       const spot = standSpotFor(w, p, h);
       if (!spot) return null;
-      const a = newActivity(w, p, { kind: 'wander', label: 'Sitting in the hall', goal: 'to sit in company', spotX: spot.x, spotY: spot.y, tx: spot.x, ty: spot.y, utility: sc.total, minCommit: FIRE_COMMIT, maxTicks: 600 });
+      const a = newActivity(w, p, { kind: 'wander', label: 'Spending the evening at the hall', goal: 'to sit in company', spotX: spot.x, spotY: spot.y, tx: spot.x, ty: spot.y, utility: sc.total, minCommit: FIRE_COMMIT, maxTicks: 600 });
       if (a) { a.data.evening = 'hall'; a.data.hallId = h.id; }
       return a;
     },
