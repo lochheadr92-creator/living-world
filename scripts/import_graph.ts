@@ -184,5 +184,61 @@ ${order.map((d, i) => `<tr><th class="l">${d}</th>${order.map((_, j) => cell(i, 
 ${unsorted.length ? `<h2>Not placed in a domain (${unsorted.length})</h2><p class="mut">${unsorted.join(', ')}</p>` : ''}
 </body></html>`;
 writeFileSync(join(outDir, 'graph.html'), html);
+// ───────────── the flow chart: domains as boxes in layers, an arrow from the importer to what it imports ─────────────
+// Rows run from what presents and drives (top) to what everything stands on (bottom). An arrow that points UP the page is an import
+// against that order: a lower domain reaching up into a higher one (drawn red).
+const LAYERS: string[][] = [
+  ['ui', 'render', 'app', 'agent'],
+  ['world loop and setup', 'decisions and plans', 'activities', 'inspection and diagnostics'],
+  ['social life', 'economy and production', 'care and welfare'],
+  ['buildings and housing', 'farming and food', 'animals and hunting', 'perception and knowledge'],
+  ['body, life and family', 'environment and land'],
+  ['kernel'],
+];
+const layerOf = new Map<string, number>();
+LAYERS.forEach((row, r) => row.forEach((d) => layerOf.set(d, r)));
+const flowNodes = order.filter((d) => layerOf.has(d)).map((d) => ({ name: d, files: filesIn[order.indexOf(d)], layer: layerOf.get(d)!, row: LAYERS[layerOf.get(d)!].indexOf(d), rowSize: LAYERS[layerOf.get(d)!].length }));
+const flowEdges: [string, string, number][] = [];
+for (let i = 0; i < order.length; i++) for (let j = 0; j < order.length; j++) if (i !== j && M[i][j] && layerOf.has(order[i]) && layerOf.has(order[j])) flowEdges.push([order[i], order[j], M[i][j]]);
+const backCount = flowEdges.filter(([a, b]) => layerOf.get(b)! < layerOf.get(a)!).reduce((s, e) => s + e[2], 0);
+const allCount = flowEdges.reduce((s, e) => s + e[2], 0);
+const flow = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Import flow chart</title>
+<style>:root{--bg:#fff;--fg:#1c2330;--mut:#667085;--box:#eef2ff;--boxl:#6366f1;--down:#5b7bb5;--up:#d9342b}
+@media(prefers-color-scheme:dark){:root{--bg:#12161d;--fg:#e6e9ef;--mut:#98a2b3;--box:#1d2540;--boxl:#818cf8;--down:#7f9bd0;--up:#ff6b61}}
+body{margin:0;padding:16px;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans-serif}h1{font-size:20px;margin:0 0 4px}
+.mut{color:var(--mut)}.ctl{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:10px 0}svg{width:100%;height:auto;max-width:1150px;display:block}
+.node rect{fill:var(--box);stroke:var(--boxl);stroke-width:1.5}.node text{fill:var(--fg);font-size:13px;pointer-events:none}.node .n{fill:var(--mut);font-size:11px}
+.edge{fill:none;stroke-linecap:round}.down{stroke:var(--down)}.up{stroke:var(--up)}.dim{opacity:.07}.node{cursor:pointer}.rowlab{fill:var(--mut);font-size:11px}
+#tip{min-height:20px}</style></head><body>
+<h1>How the code imports itself</h1>
+<p class="mut">Each box is a group of files. An arrow runs from the group that imports to the group it imports; thicker means more imports. <span style="color:var(--down)">Blue</span> arrows go down the page (the intended direction); <span style="color:var(--up)">red</span> arrows go back up. ${flowEdges.length} links between groups; ${pct(backCount, allCount)} of imports between groups point back up. Click a box to follow only its links; click it again to clear.</p>
+<div class="ctl"><label>Show links with at least <b id="tv">20</b> imports <input id="th" type="range" min="1" max="200" value="20"></label><label><input id="hk" type="checkbox" checked> hide arrows into the shared foundations (everything imports them)</label><span id="tip" class="mut"></span></div>
+<svg id="s" viewBox="0 0 1150 760"><defs><marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--down)"/></marker><marker id="au" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--up)"/></marker></defs><g id="e"></g><g id="n"></g></svg>
+<script>
+const NODES=${JSON.stringify(flowNodes)},EDGES=${JSON.stringify(flowEdges)},NL=${LAYERS.length};
+const W=1150,H=760,BW=190,BH=44,T0=30,gap=(H-2*T0-BH)/(NL-1);const pos={};
+for(const n of NODES){const cw=W/n.rowSize;pos[n.name]={x:cw*(n.row+0.5),y:T0+n.layer*gap+BH/2};}
+const rl=["shown and driven","orchestrating and choosing","people living together, making things","the places, food and animals they depend on","the body and the land","shared foundations"];
+const g=document.getElementById('n'),e=document.getElementById('e'),NS='http://www.w3.org/2000/svg';let sel=null;
+const mk=(t,a,p)=>{const x=document.createElementNS(NS,t);for(const k in a)x.setAttribute(k,a[k]);p&&p.appendChild(x);return x};
+NL&&rl.forEach((t,i)=>{const y=T0+i*gap+BH/2;const l=mk('text',{x:6,y:y-BH/2-4,class:'rowlab'},g);l.textContent=t});
+const nodeEls={};
+for(const n of NODES){const p=pos[n.name];const gg=mk('g',{class:'node',transform:'translate('+(p.x-BW/2)+','+(p.y-BH/2)+')'},g);mk('rect',{width:BW,height:BH,rx:8},gg);
+const t=mk('text',{x:BW/2,y:19,'text-anchor':'middle'},gg);t.textContent=n.name;const c=mk('text',{x:BW/2,y:35,'text-anchor':'middle',class:'n'},gg);c.textContent=n.files+' files';
+gg.onclick=()=>{sel=sel===n.name?null:n.name;draw()};gg.onmouseenter=()=>{document.getElementById('tip').textContent=n.name+': imports '+EDGES.filter(x=>x[0]===n.name).reduce((s,x)=>s+x[2],0)+' times from other groups; imported '+EDGES.filter(x=>x[1]===n.name).reduce((s,x)=>s+x[2],0)+' times by them'};nodeEls[n.name]=gg}
+function draw(){e.textContent='';const th=+document.getElementById('th').value;document.getElementById('tv').textContent=th;
+for(const k in nodeEls)nodeEls[k].classList.toggle('dim',!!sel&&k!==sel&&!EDGES.some(x=>x[2]>=th&&((x[0]===sel&&x[1]===k)||(x[1]===sel&&x[0]===k))));
+const L=new Map(NODES.map(n=>[n.name,n.layer]));
+const hk=document.getElementById('hk').checked;for(const [a,b,c] of EDGES){if(c<th)continue;if(hk&&b==='kernel'&&a!==sel)continue;if(sel&&a!==sel&&b!==sel)continue;const up=L.get(b)<L.get(a);const pa=pos[a],pb=pos[b];
+const dy=pb.y-pa.y,dx=pb.x-pa.x;const same=Math.abs(dy)<1;const sp=Math.max(-70,Math.min(70,dx/9));let x1=pa.x+(same?0:sp),y1=pa.y,x2=pb.x-(same?0:sp),y2=pb.y;
+y1+=same?0:(dy>0?BH/2:-BH/2);y2+=same?0:(dy>0?-BH/2:BH/2);if(same){x1+=dx>0?BW/2:-BW/2;x2+=dx>0?-BW/2:BW/2}
+const mx=(x1+x2)/2,my=(y1+y2)/2,len=Math.hypot(x2-x1,y2-y1)||1;const off=(up?-1:1)*Math.min(46,10+len*0.09);const cx=mx+(-(y2-y1)/len)*off,cy=my+((x2-x1)/len)*off;
+const p=mk('path',{d:'M'+x1+' '+y1+'Q'+cx+' '+cy+' '+x2+' '+y2,class:'edge '+(up?'up':'down'),'stroke-width':Math.min(9,0.7+Math.sqrt(c)*0.34).toFixed(2),'stroke-opacity':sel?0.85:0.45,'marker-end':'url(#'+(up?'au':'ad')+')'},e);
+const tt=mk('title',{},p);tt.textContent=a+' imports '+b+': '+c}}
+document.getElementById('th').oninput=draw;document.getElementById('hk').onchange=draw;draw();
+</script></body></html>`;
+writeFileSync(join(outDir, 'flow.html'), flow);
+lines.push('', '## Flow chart', '', `${pct(backCount, allCount)} of the ${allCount} imports between domain groups point back up the layering in flow.html (a lower group importing a higher one).`);
+writeFileSync(join(outDir, 'report.md'), lines.join('\n') + '\n');
 console.log(lines.slice(0, 14).join('\n'));
 console.log(`\nwrote ${outDir}/graph.json, report.md, graph.html`);
