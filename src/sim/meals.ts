@@ -7,6 +7,7 @@ import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } 
 import {hasMealLeftovers} from './meal_leftovers';
 import {hasMeetingKnowledge,hearInvitation,hearReply,personalMeal,endMeetingKnowledge,updateMeetingKnowledge,canForgetMeeting,atMeeting,receiveMeetingCancellation,acknowledgeMeetingCancellation} from './meeting_knowledge';
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
+import { hallNewsPhase, standableMealSpot } from './hall_repair';
 import { isRich, think } from './mood';
 import { expose } from './illness';
 import type { WorkResult } from './activities';
@@ -408,7 +409,8 @@ function mealSpot(world: World, p: Person, m: Meal): { x: number; y: number } {
     const spot = standSpotFor(world, p, e);
     if (spot) return spot;
   }
-  return { x: m.x + (hashUnit(p.id, m.id, 3) - 0.5) * 2.2, y: m.y + 0.6 + (hashUnit(p.id, m.id, 4) - 0.2) * 1.4 };
+  // rules 281 (hall_repair.ts, part table): a spot that cannot be stood on becomes the nearest one that can
+  return standableMealSpot(world, { x: m.x + (hashUnit(p.id, m.id, 3) - 0.5) * 2.2, y: m.y + 0.6 + (hashUnit(p.id, m.id, 4) - 0.2) * 1.4 });
 }
 
 // ───────────────────────── conversations (called from social.ts) ─────────────────────────
@@ -656,7 +658,8 @@ export function mealTick(world: World): void {
 
 /** People gathered in a hall exchange what they know — only with those actually sitting there, and one telling at a time. */
 function hallGossip(world: World): void {
-  if (world.tick % 90 !== 17) return;
+  // rules 281 (hall_repair.ts, part news): before 281 the phase was 17, never reached inside mealTick (tick % 10 === 3)
+  if (world.tick % 90 !== hallNewsPhase(world)) return;
   for (const b of world.buildings) {
     if (b.type !== 'hall') continue;
     const present: Person[] = [];

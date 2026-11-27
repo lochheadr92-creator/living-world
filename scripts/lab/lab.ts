@@ -50,6 +50,8 @@ import { TOGETHER_SCENE_PARTS, setTogetherScenes, togetherScenePartOn } from '..
 import type { TogetherScenePart } from '../../src/sim/together_scenes';
 import { BEDTIME_PARTS, bedtimePartOn, setBedtime } from '../../src/sim/bedtime';
 import type { BedtimePart } from '../../src/sim/bedtime';
+import { HALL_PARTS, hallPartOn, setHall } from '../../src/sim/hall_repair';
+import type { HallPart } from '../../src/sim/hall_repair';
 import { TOY_PARTS, setToys, toyPartOn } from '../../src/sim/toys';
 import { CHILD_FEEDING_PARTS, childFeedingPartOn, setChildFeeding } from '../../src/sim/child_feeding';
 import {orderedProjectClaimsOn,setOrderedProjectClaims} from '../../src/sim/reserved_goods';
@@ -381,6 +383,12 @@ export function parseIntervention(specIn: string): Intervention {
     const part = kind === 'rich-no-bedtime' ? undefined : (kind.slice('rich-no-bedtime-'.length) as BedtimePart);
     const what: Record<BedtimePart, string> = { bed: 'a little one goes to bed by its own clock and wakes when rested, in the night', home: 'a little one may take up play, talk, practice or errands after dark, and others may start a talk with one' };
     return { spec: label, summary: `${part ? what[part] : 'no bedtime: a little one goes to bed and gets up as a grown person does, and does as it likes after dark'}, as before rules 280; no effect below rules 280`, install() { const was = Object.fromEntries(BEDTIME_PARTS.map((q) => [q, bedtimePartOn(q)])) as Record<BedtimePart, boolean>; setBedtime(false, part); return () => { for (const q of BEDTIME_PARTS) setBedtime(was[q], q); }; } };
+  }
+  // rules 281 (hall_repair.ts): all three parts removed (equal to rules 280), and each part alone. Nothing else is called `rich-no-hall`.
+  if (kind === 'rich-no-hall' || (kind.startsWith('rich-no-hall-') && (HALL_PARTS as readonly string[]).includes(kind.slice('rich-no-hall-'.length)))) {
+    const part = kind === 'rich-no-hall' ? undefined : (kind.slice('rich-no-hall-'.length) as HallPart);
+    const what: Record<HallPart, string> = { news: 'no news passes among those at a hall (the old phase that was never reached)', table: 'a shared meal spot that cannot be stood on is kept, so the walk to it fails', evening: 'nobody spends the evening at the hall' };
+    return { spec: label, summary: `${part ? what[part] : 'no hall repair: no news at the hall, meal spots as they fell, no evening at the hall'}, as before rules 281; no effect below rules 281`, install() { const was = Object.fromEntries(HALL_PARTS.map((q) => [q, hallPartOn(q)])) as Record<HallPart, boolean>; setHall(false, part); return () => { for (const q of HALL_PARTS) setHall(was[q], q); }; } };
   }
   // rules 278 (fetch_home.ts): the worrier's own walk to look is offered at the companion's level once somebody has promised to come; the arm puts it back to the ordinary visit's worth, as before 278
   if (kind === 'rich-no-fetch-sets-out') return { spec: label, summary: 'the worrier who has a promised companion after dark keeps the ordinary walk to look at its ordinary worth (so may go to bed), as before rules 278; the ask, the promise and the companion unchanged; no effect below rules 278', install() { const was = fetchSetsOutOn(); setFetchSetsOut(false); return () => setFetchSetsOut(was); } };

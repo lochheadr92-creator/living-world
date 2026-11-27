@@ -3,6 +3,7 @@ import {herdReasons} from './herd_value';
 import {houses} from './farm_species';
 import { FARM_FOODS } from './constants';
 import { eveningFireOptions } from './evening_fire';
+import { hallEveningOptions } from './hall_repair';
 import { farmDraw } from './farm_draw';
 import { grainGoesToBins } from './grain_kept';
 import { plotsWanted } from './farm_scale';
@@ -2098,6 +2099,8 @@ function optIdle(ctx: Ctx): void {
     toyOptions(ctx);
     // rules 216 (evening_fire.ts): an evening by the fire, in company
     eveningFireOptions(ctx);
+    // rules 281 (hall_repair.ts, part evening): or an evening at the hall, in company and out of the weather
+    hallEveningOptions(ctx);
     return;
   }
   const hub = nearestHub(world, p.x, p.y);

@@ -1,5 +1,6 @@
 import { FIRE_TICKS, eveningFireWork, finishEveningSit, isEveningSit } from './evening_fire';
 import { sleepsTillMorning } from './bedtime';
+import { finishHallEvening, isHallEvening } from './hall_repair';
 import { courtWalkBegin, courtWalkEnd, courtWalkWork, isCourtWalk } from './courting';
 import { praiseAtFire } from './praise';
 import { songAtFire } from './song';
@@ -138,6 +139,8 @@ registerHandler('wander', {
     if (isToyPlay(a.data.play)) a.duration = TOY_TICKS;
     // rules 216 (evening_fire.ts): an evening by the fire lasts a set while
     if (isEveningSit(a)) a.duration = FIRE_TICKS;
+    // rules 281 (hall_repair.ts, part evening): an evening at the hall lasts as long
+    if (isHallEvening(a)) a.duration = FIRE_TICKS;
     // rules 260 (courting.ts): a walk out together stands for a set while
     if (isCourtWalk(a)) courtWalkBegin(a);
     // rules 262 (reunion.ts): they have got to the one they ran to meet: a reunion, or nothing (they were gone)
@@ -159,6 +162,7 @@ registerHandler('wander', {
   onEnd(world, p, a, outcome) {
     if (outcome === 'success' && isSoloPlay(a.data.play)) finishSoloPlay(world, p, a.data.play);
     if (outcome === 'success' && isEveningSit(a)) finishEveningSit(world, p, a);
+    if (outcome === 'success' && isHallEvening(a)) finishHallEvening(world, p, a);
     if (outcome === 'success' && isToyPlay(a.data.play)) finishToyPlay(world, p);
     // rules 260 (courting.ts): however a walk out ends, it is settled once, by the one who asked
     if (isCourtWalk(a)) courtWalkEnd(world, p, a, outcome);
