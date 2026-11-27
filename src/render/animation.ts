@@ -21,7 +21,7 @@ export type AnimId =
   // seated (C)
   | 'rest' | 'warm' | 'alone' | 'meal_sit' | 'meal_eat' | 'vigil' | 'lyingin' | 'comfort' | 'settle' | 'standup'
   // work (D)
-  | 'whittle' | 'mend_tool' | 'mend_cart' | 'weave' | 'butcher' | 'feed_animal' | 'shear' | 'tether' | 'setgear' | 'haul_net' | 'hangskin'
+  | 'whittle' | 'mend_tool' | 'mend_cart' | 'weave' | 'butcher' | 'feed_animal' | 'shear' | 'milk' | 'tether' | 'setgear' | 'haul_net' | 'hangskin'
   | 'workbench' | 'stalk' | 'strike' | 'guard' | 'charge' | 'putaway' | 'takeout' | 'heave' | 'feedfire' | 'filljar' | 'mend' | 'survey'
   // talk (E)
   | 'talk_warn' | 'alarmed' | 'teach' | 'learn' | 'ask_court' | 'demure' | 'welcome' | 'rally' | 'peace'
@@ -224,7 +224,16 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
     case 'animal_work': {
       if (pose !== 'craft') return pose;
       const op = d.op as string | undefined;
-      return op === 'feed' || op === 'water' ? 'feed_animal' : op === 'shear' ? 'shear' : op === 'slaughter' ? 'butcher' : 'tether';
+      switch (op) {
+        case 'feed': case 'water': case 'hay_feed': return 'feed_animal';
+        case 'shear': return 'shear';
+        case 'milk': return 'milk';
+        case 'egg': return 'takeout';
+        case 'slaughter': return 'butcher';
+        case 'mix_feed': return 'workbench';
+        case 'repair': return 'mend_cart';
+        default: return 'tether'; // acquire, house, mate: a hand on the animal, tying or leading it
+      }
     }
     case 'gear_work': {
       if (pose !== 'craft') return pose;
