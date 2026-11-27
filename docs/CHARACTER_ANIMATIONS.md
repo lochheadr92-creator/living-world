@@ -93,15 +93,52 @@ drawn alike, and the list at the end says which.
 | none | A bad cut | `p.injury.kind === 'cut'` | a binding on the forearm |
 | none | Near her time | `p.pregnantUntil` within 9,600 ticks | the belly, leaning back, a hand to the back |
 | none | Mourning | `p.lifeEvent.kind === 'bereaved'` | head down, arms still, a dark band on the arm |
+| walk | Going to bed, or worn out | `sleep` on the way, or `needs.energy` under 25 | `walk_tired`: bent and slumped, head down, arms hanging, the feet barely lifted, a hand to the open mouth in a yawn now and then |
+| walk | Going to warm up, or cold | `warm` on the way, or `needs.warmth` under 35 | `walk_cold`: hunched, the arms hugged across the chest, a shiver |
+| walk | On the way to food or water, in need of it | the activity's `need` is `hunger` (or `thirst`) and `needs.hunger` is under 42 (`needs.thirst` under 40) | `walk_urgent`: quick, leaning on, one arm held to the belly (hunger) or the throat (thirst), the other pumping |
+| walk | A heavy load to put down | `deposit`, `haul`, `give` or `fuel_fire` on the way, with the burden figure (weight in the pack over what they can carry) at 0.6 or more, and no armful or jar on the head | `walk_laden`: bent under it, short heavy steps, a hand up and back on the load |
+| walk | On the way to work, tool in the pack | `gather` at a tree with an axe, at rock, outcrop, ore or clay with a pick, at a fish spot with a rod (where rods exist); `till` or `tend` with a hoe; `build` or `repair` with a hammer | `walk_work`: a purposeful stride, the tool carried over the shoulder (drawn only because the pack holds it) |
+| walk | On the way to somebody | `socialize`, `converse`, `visit` (not a search or being fetched home), `give`, `attend_meal`, `host_meal` | `walk_social`: head up, the arms easy and open, and a hand lifted now and then once within 7 tiles of the person it goes to |
+| walk | A child on the way to play | a child of seven to eleven; `wander` (not to the evening fire), or `socialize`/`converse` with purpose `play_together` | `skip`: a hop on every step, the arms flung up |
+| walk | Low in spirit | `mood.level` at or under -12, where none of the above applies | `walk_low`: the head hung, the arms slack, the feet dragging |
+| walk | Glad | `mood.level` at or over 5, where none of the above applies | `walk_glad`: a springy step, the chest up, the arms swinging wide |
 
-Walking, running, sleeping, eating alone, drinking, chopping, mining, fishing, tilling, planting, tending, harvesting,
+Running, sleeping, eating alone, drinking, chopping, mining, fishing, tilling, planting, tending, harvesting,
 building, sawing, hammering, forging, baking, digging, plain talk, giving, arguing, pulling a cart, fleeing, carrying and
-waving are drawn as before.
+waving are drawn as before. Walking is drawn as before (the plain walk) only when nothing on the record says how this
+person goes; the rows marked `walk` above, and the section below, say when it does.
 
 `care`, `fulfill` and `return_tool` are in the `ActivityKind` type but no handler is registered for any of them and no
 activity of those kinds is ever created: `care` is an option tag and a request kind, `return_tool` a commitment kind. A
 person caring for somebody is in a `give`, `deposit`, `gather` or `fetch_water`; one returning a tool is in a `give`. There
 is nothing of those three kinds to draw.
+
+## How a person on foot goes (walking, G)
+
+Where the choice above would be the plain walk, `walkingOf` in `animation.ts` reads the person and the first match wins:
+tired, cold, in need of food or water, laden, going to work with the tool, going to somebody, a child going to play, low or
+glad in mood, otherwise the plain walk. The special walks (`stroll`, `greet_run`, `search_walk`, `trek`, `trudge`, `stalk`,
+`charge`, `dance`) are chosen before this and keep their place; running, pulling a cart, fear and fleeing are not touched.
+
+- **Needs.** The lines are the ones the simulation draws for what a watcher can see of somebody (`perception.ts`): energy under
+  25 is tired, warmth under 35 cold, hunger under 42 hungry, thirst under 40 thirsty. Hunger or thirst only counts when the
+  activity's own `need` is that need, so water fetched for the household or the crops (`fetch_water`, which has no need) is not
+  drawn as a thirsty person's hurry. Going to bed (`sleep`) or to a fire (`warm`) is drawn tired or cold whatever the level.
+- **Load.** The burden is the weight in the pack over `carryCap`, as `characters.ts` already reckons it. Most people in an
+  ordinary world walk about with a well-filled pack (about half of all walking has a burden of 0.5 or more), so the weight alone
+  would make this everybody's walk; it is drawn only on the errands that move goods (`deposit`, `haul`, `give`, `fuel_fire`) and
+  from 0.6. An armful (bricks, clay, bread without a basket) or a jar of water on the head already draws the arms and is left to
+  that drawing. Wood, planks and sacks on the person are drawn as they were; the bent walk and the hand on the shoulder are added.
+- **The tool.** The pack's count of the tool is what is read (the tool records are kept in step with it by design), and the tool
+  for the work is the one `tools.ts` names for it. The target is looked up by id (`world.byId`), not searched for. No tool in the
+  pack, or the wrong one, or work with no tool of its own: the plain walk. While a tool is carried in the hand the tools strapped
+  on the back or belt are not drawn (as when it is in use).
+- **Mood.** `mood.level` runs -100 to 100 and is only on the record in rich worlds. In an ordinary world it sits mostly between
+  -20 and 16 (median about -3), so the lines are -12 and 5: the low and the glad are each a small share of those who get as far
+  as the mood, and the middle is the plain walk. A world with no moods has no mood walks.
+- **Elders** (62 and over) take a shorter, more careful step inside each of these walks (the plain walk is as it was).
+- **The greeting hand** is drawn when the activity points at a person and that person's position (kept live on the activity) is
+  within 7 tiles, now and then, by the clock of the simulation. It is not the person's own `wave`, which is drawn as before.
 
 ## What the record does not hold
 
@@ -112,6 +149,12 @@ is nothing of those three kinds to draw.
 - **A guessing game** is talk, and is drawn as talk.
 - **A net or a trap in the hands.** `gear_work` is drawn by posture; the gear itself is not drawn in the hand.
 - **What is carried on a trading journey or a move** is drawn only from the pack, as it was.
+- **Whether the load is on the shoulder.** The burden figure is the whole pack. A heavy load of food or water that is not drawn
+  on the person (only wood, planks, sacks, a basket, a jar are) still gets the bent walk and the hand to the shoulder.
+- **Which of axe, pick and hoe.** All three are drawn with the same head; a rod and a hammer are drawn as themselves.
+- **Where a walk to an occasion goes.** A walk to a feast or a funeral would need the occasion looked up while walking, which
+  this does not do; it is the plain walk (or tired, cold, low, glad by the person).
+- **Whether a mood is "bad".** The two lines are set against the spread in an ordinary world, not a judgement of the level.
 - **Asking support for a shared building** is the `recruit` conversation (the speech before listeners is the other way of
   asking, and has its own look).
 
@@ -121,5 +164,6 @@ is nothing of those three kinds to draw.
   as they were.
 - `scripts/browser/animation_sheet.mjs` with `scripts/browser/animation_specs.mjs`: a labelled contact sheet of every
   animation at the default zoom and at twice that, and the tell-apart pairs. Staged figures, not an ordinary world: the
-  sheet shows how a state is drawn, not that it arises.
+  sheet shows how a state is drawn, not that it arises. Group G is the walks, each set against the plain walk; run it with
+  `--group G`, and with `--only walk,walk_tired,...` for the tell-apart pairs.
 - `scripts/browser/animation_cost.mjs`: frame time in a Large world.

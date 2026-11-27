@@ -5,7 +5,7 @@
 // and a staged cell is evidence of how a state is DRAWN, never that the state arises in an ordinary world.
 //
 //   id      unique, used in file names and by PAIRS
-//   group   'A'..'F' (the groups of the task); one sheet per group
+//   group   'A'..'G' (the groups of the task; G is the walks, each set against the plain walk); one sheet per group
 //   label   what the viewer should read from the figure
 //   was     the id of the baseline spec this state looked like before the upgrade (for the tell-apart pairs)
 //   people  one entry per figure:
@@ -239,6 +239,50 @@ export const SPECS = [
     { dx: -0.4, dy: 0.3, heading: SOLO, pose: 'stand' },
     { dx: 0.4, dy: -0.3, heading: SOLO, pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.04 },
   ], after: (world, people) => { for (const p of people) p.lifeEvent = { kind: 'bereaved', about: 0, since: world.tick - 100, until: world.tick + 5000 }; } },
+
+  // ───────────── G: how a person on foot goes (walking). Every cell is set against the plain 'walk' of group A ─────────────
+  // The walkers go at the plain walk's pace (moving 0.05). What decides each look is on the record: the activity's kind and need, the pack, the needs, the mood.
+  { id: 'walk_plain', group: 'G', label: 'Plain walk, for comparison (as group A)', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05 })] },
+  { id: 'walk_tired', group: 'G', was: 'walk', label: 'Walking to bed, worn out (a yawn now and then)', frames: [5, 18, 31, 44, 57, 70, 83, 96], people: [one({ pose: 'walk', kind: 'sleep', phase: 'travel', moving: 0.05, set: { needs: { energy: 30 } } })] },
+  { id: 'walk_cold', group: 'G', was: 'walk', label: 'Cold, on the way to a fire', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'warm', phase: 'travel', moving: 0.05, set: { needs: { warmth: 25 } } })] },
+  { id: 'walk_urgent_hungry', group: 'G', was: 'walk', label: 'Hungry, on the way to the store', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'eat_store', phase: 'travel', moving: 0.05, set: { needs: { hunger: 18 } } })],
+    after: (world, people) => { people[0].activity.need = 'hunger'; } },
+  { id: 'walk_urgent_thirsty', group: 'G', was: 'walk', label: 'Thirsty, on the way to the water', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'drink', phase: 'travel', moving: 0.05, set: { needs: { thirst: 18 } } })],
+    after: (world, people) => { people[0].activity.need = 'thirst'; } },
+  { id: 'walk_laden', group: 'G', was: 'walk', label: 'Laden: wood on the shoulder, to put it down', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'haul', phase: 'travel', moving: 0.05, inv: { wood: 5 } })] },
+  { id: 'walk_laden_sack', group: 'G', was: 'walk', label: 'Laden: a sack of stone on the back', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'deposit', phase: 'travel', moving: 0.05, inv: { stone: 3, grain: 1 } })] },
+  { id: 'walk_work_axe', group: 'G', was: 'walk', label: 'To a tree, axe in the pack', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05, inv: { axe: 1 } })],
+    after: (world, people) => { world.byId.set(9101, { ent: 'source', type: 'tree', id: 9101 }); people[0].activity.targetId = 9101; } },
+  { id: 'walk_work_pick', group: 'G', was: 'walk', label: 'To the rock, pick in the pack', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05, inv: { pick: 1 } })],
+    after: (world, people) => { world.byId.set(9102, { ent: 'source', type: 'rock', id: 9102 }); people[0].activity.targetId = 9102; } },
+  { id: 'walk_work_hoe', group: 'G', was: 'walk', label: 'To till, hoe in the pack', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'till', phase: 'travel', moving: 0.05, inv: { hoe: 1 } })] },
+  { id: 'walk_work_rod', group: 'G', was: 'walk', label: 'To fish, rod in the pack', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05, inv: { rod: 1 } })],
+    after: (world, people) => { world.byId.set(9103, { ent: 'source', type: 'fish_spot', id: 9103 }); people[0].activity.targetId = 9103; } },
+  { id: 'walk_work_hammer', group: 'G', was: 'walk', label: 'To build, hammer in the pack', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'build', phase: 'travel', moving: 0.05, inv: { hammer: 1 } })] },
+  { id: 'walk_work_bare', group: 'G', was: 'walk', label: 'To a tree with no axe (plain walk)', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05 })],
+    after: (world, people) => { world.byId.set(9101, { ent: 'source', type: 'tree', id: 9101 }); people[0].activity.targetId = 9101; } },
+  { id: 'walk_social', group: 'G', was: 'walk', label: 'On the way to somebody, still far off', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'socialize', phase: 'travel', moving: 0.05 })],
+    after: (world, people) => { const a = people[0].activity; a.targetType = 'person'; a.tx = people[0].x + 30; a.ty = people[0].y; } },
+  { id: 'walk_social_near', group: 'G', was: 'walk', label: 'On the way to somebody, near (a hand lifted now and then)', frames: [5, 21, 37, 53], people: [
+    { dx: -0.5, dy: -0.1, heading: SOLO, pose: 'walk', kind: 'socialize', phase: 'travel', moving: 0.05 },
+    { dx: 1.1, dy: 0.45, face: 0, pose: 'stand' },
+  ], after: (world, people) => { const a = people[0].activity; a.targetType = 'person'; a.tx = people[1].x; a.ty = people[1].y; } },
+  { id: 'skip', group: 'G', was: 'walk', label: 'A child on the way to play', frames: [5, 17, 29], people: [one({ age: 9, pose: 'walk', kind: 'wander', phase: 'travel', moving: 0.05 })] },
+  { id: 'walk_low', group: 'G', was: 'walk', label: 'Low in mood (level -30)', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05, set: { mood: { level: -30 } } })] },
+  { id: 'walk_glad', group: 'G', was: 'walk', label: 'Glad (mood level 30)', frames: [5, 17, 29], people: [one({ pose: 'walk', kind: 'gather', phase: 'travel', moving: 0.05, set: { mood: { level: 30 } } })] },
+  { id: 'walk_elder', group: 'G', was: 'walk', label: 'An elder: laden, and on the way to somebody (a shorter, more careful step)', frames: [5, 17, 29], people: [
+    { dx: -0.4, dy: 0.3, heading: SOLO, age: 70, pose: 'walk', kind: 'haul', phase: 'travel', moving: 0.05, inv: { wood: 3 } },
+    { dx: 0.4, dy: -0.3, heading: SOLO, age: 70, pose: 'walk', kind: 'socialize', phase: 'travel', moving: 0.05 },
+  ] },
+  { id: 'walk_conditions', group: 'G', was: 'walk', label: 'With a condition: a sling and a load; a limp and a yawn; a mourning band and a greeting', frames: [5, 17, 29], people: [
+    { dx: -0.7, dy: 0.55, heading: SOLO, pose: 'walk', kind: 'haul', phase: 'travel', moving: 0.05, inv: { wood: 5 } },
+    { dx: 0.0, dy: 0.0, heading: SOLO, pose: 'walk', kind: 'sleep', phase: 'travel', moving: 0.05 },
+    { dx: 0.7, dy: -0.55, heading: SOLO, pose: 'walk', kind: 'socialize', phase: 'travel', moving: 0.05 },
+  ], after: (world, people) => {
+    people[0].injury = { kind: 'broken', since: world.tick - 100, until: world.tick + 2000, how: 'staged' };
+    people[1].injury = { kind: 'sprain', since: world.tick - 100, until: world.tick + 2000, how: 'staged' };
+    people[2].lifeEvent = { kind: 'bereaved', about: 0, since: world.tick - 100, until: world.tick + 5000 };
+  } },
 ];
 
 /** pairs that used to look the same: [id, baseline id] shown side by side at the default zoom */

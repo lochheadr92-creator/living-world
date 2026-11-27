@@ -11,9 +11,17 @@
 // are drawn alike (and `docs/CHARACTER_ANIMATIONS.md` says which).
 import { ageYears } from '../sim/people';
 import type { Conversation, Person, PoseKind, World } from '../sim/types';
+// walking (G)
+import type { Activity } from '../sim/types';
+import { LITTLE_AGE } from '../sim/child_pace';
+import { weightOf } from '../sim/economy';
+import { hasRods } from '../sim/fishing_rods';
+import { carryCap, stageOf } from '../sim/people';
 
 export type AnimId =
   | PoseKind
+  // walking (G): how a person on foot goes, told from their own record (walkingOf below)
+  | 'walk_tired' | 'walk_cold' | 'walk_urgent' | 'walk_laden' | 'walk_work' | 'walk_social' | 'skip' | 'walk_low' | 'walk_glad'
   // standing about (B)
   | 'idle' | 'fire_sit' | 'fire_story' | 'fire_sing' | 'fire_listen' | 'fire_thanks' | 'fire_address' | 'stand_thanks' | 'stand_address'
   | 'stroll' | 'walkout' | 'greet_run' | 'embrace' | 'lookout' | 'search' | 'claim' | 'respects' | 'lookin' | 'mind' | 'attend_birth'
@@ -136,7 +144,7 @@ function talkAnim(world: World, p: Person, c: Conversation): AnimId {
  * The animation for a person. `pose` is the pose the renderer would have shown (the simulation's, with the renderer's own
  * corrections for a cart or a spade already made); `conv` is the conversation they are in, if any.
  */
-export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conversation | undefined): AnimId {
+function animationOfPose(world: World, p: Person, pose: PoseKind, conv: Conversation | undefined): AnimId {
   const a = p.activity;
   if (!a) return pose;
   if (pose === 'pull' || pose === 'fear' || pose === 'sleep') return pose;
@@ -267,6 +275,131 @@ export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conve
   }
 }
 
+// ───────────────────────── walking (G) ─────────────────────────
+// A person on foot who is in none of the special walks above (stroll, greet_run, search_walk, trek, trudge, stalk, charge, dance)
+// was drawn with the one walk. Here the record tells them apart, first match wins: on the way to bed or worn out; on the way to
+// get warm or cold; on the way to food or water and in need of it; under a heavy load; going to work with the tool in the pack;
+// on the way to somebody; a child on the way to play; low or glad in mood; otherwise the plain walk as before. Each reads only
+// what the simulation keeps, and none draws a random number.
+
+/** the lines the simulation itself draws for what a watcher can see of somebody (perception.ts describeSeenPerson) */
+const TIRED_BELOW = 25;
+const COLD_BELOW = 35;
+const HUNGRY_BELOW = 42;
+const THIRSTY_BELOW = 40;
+/** the burden figure (weight in the pack over what they can carry, as characters.ts reckons it) from which the walk is a laden one */
+const LADEN_FROM = 0.6;
+/** the weight under which nobody is near the line, so the carrying capacity need not be worked out */
+const LADEN_MIN_WEIGHT = 2;
+/** the mood level (mood.ts, -100..100) at and below which the walk is a low one, and at and above which a glad one */
+const LOW_MOOD = -12;
+const GLAD_MOOD = 5;
+/** how near (tiles) to the person they are walking to is "close" */
+export const GREET_WITHIN = 7;
+
+/**
+ * The tool a person walking to work has in the pack for it, as the kind characters.ts draws in the hand: 1 an axe, pick or hoe,
+ * 2 a rod, 3 a hammer; 0 when they are not going to such work or do not hold the tool. It follows the tool each task uses
+ * (tools.ts): an axe for a tree, a pick for rock, outcrop, ore or clay, a rod for a fish spot (only where rods exist), a hoe to
+ * till or tend, a hammer to build or repair. The pack's count is what is read; the tool records are kept in step with it.
+ */
+export function walkToolOf(world: World, p: Person): 0 | 1 | 2 | 3 {
+  const a = p.activity;
+  if (!a) return 0;
+  const inv = p.inv;
+  switch (a.kind) {
+    case 'gather': {
+      const s = world.byId.get(a.targetId);
+      if (!s || s.ent !== 'source') return 0;
+      if (s.type === 'tree') return (inv.axe ?? 0) > 0 ? 1 : 0;
+      if (s.type === 'rock' || s.type === 'outcrop' || s.type === 'ore_vein' || s.type === 'clay_pit') return (inv.pick ?? 0) > 0 ? 1 : 0;
+      if (s.type === 'fish_spot') return hasRods(world) && (inv.rod ?? 0) > 0 ? 2 : 0;
+      return 0;
+    }
+    case 'till':
+    case 'tend':
+      return (inv.hoe ?? 0) > 0 ? 1 : 0;
+    case 'build':
+    case 'repair':
+      return (inv.hammer ?? 0) > 0 ? 3 : 0;
+    default:
+      return 0;
+  }
+}
+
+/**
+ * A heavy load on the way to put it down: going to a store, to a building site or a hearth with it, or to hand it over (the
+ * activities that move goods), with the burden figure at or over the line. Most people in an ordinary world walk about with a
+ * well-filled pack, so the weight alone would make this everybody's walk; the errand is what makes it a load. An armful or a jar
+ * on the head already draws the arms (characters.ts) and is left to that.
+ */
+function ladenWalk(world: World, p: Person, kind: string): boolean {
+  if (kind !== 'deposit' && kind !== 'haul' && kind !== 'give' && kind !== 'fuel_fire') return false;
+  const inv = p.inv;
+  if ((inv.bricks ?? 0) > 0 || (inv.clay ?? 0) > 0 || ((inv.bread ?? 0) > 0 && (inv.basket ?? 0) === 0)) return false;
+  if ((inv.jar ?? 0) > 0 && (inv.water ?? 0) > 0) return false;
+  const w = weightOf(inv);
+  if (w < LADEN_MIN_WEIGHT) return false;
+  const cap = carryCap(world, p);
+  return cap > 0 && w / cap >= LADEN_FROM;
+}
+
+/** on the way to somebody: the activity goes to a person (or to a meal with them), and is not a search for somebody lost */
+function towardSomebody(a: Activity): boolean {
+  switch (a.kind) {
+    case 'socialize':
+    case 'converse':
+    case 'give':
+    case 'attend_meal':
+    case 'host_meal':
+      return true;
+    case 'visit':
+      return !a.data.fetch && !a.data.fetchWith && !a.data.fetchedBy;
+    default:
+      return false;
+  }
+}
+
+/** a child of seven to eleven (the renderer's child band) */
+function playingAge(world: World, p: Person): boolean {
+  return ageYears(world, p) >= LITTLE_AGE && stageOf(world, p) === 'child';
+}
+
+/** how a person on foot goes, when none of the walks above applies to them */
+function walkingOf(world: World, p: Person): AnimId {
+  const a = p.activity;
+  const kind = a ? a.kind : '';
+  if (kind === 'flee') return 'walk';
+  const n = p.needs;
+  if (kind === 'sleep' || n.energy < TIRED_BELOW) return 'walk_tired';
+  if (kind === 'warm' || n.warmth < COLD_BELOW) return 'walk_cold';
+  if (a && ((a.need === 'hunger' && n.hunger < HUNGRY_BELOW) || (a.need === 'thirst' && n.thirst < THIRSTY_BELOW))) return 'walk_urgent';
+  if (ladenWalk(world, p, kind)) return 'walk_laden';
+  if (walkToolOf(world, p) !== 0) return 'walk_work';
+  if (a) {
+    // a child on the way to play, or pottering about (not to sit at the evening fire)
+    const toPlay = kind === 'wander' ? !a.data.evening : (kind === 'socialize' || kind === 'converse') && a.data.purpose === 'play_together';
+    if (toPlay && playingAge(world, p)) return 'skip';
+    if (towardSomebody(a)) return 'walk_social';
+  }
+  const m = p.mood;
+  if (m) {
+    if (m.level <= LOW_MOOD) return 'walk_low';
+    if (m.level >= GLAD_MOOD) return 'walk_glad';
+  }
+  return 'walk';
+}
+
+/**
+ * The animation for a person. `pose` is the pose the renderer would have shown (the simulation's, with the renderer's own
+ * corrections for a cart or a spade already made); `conv` is the conversation they are in, if any. Where that would be the plain
+ * walk, the walking (G) rules above say how this person goes.
+ */
+export function animationOf(world: World, p: Person, pose: PoseKind, conv: Conversation | undefined): AnimId {
+  const an = animationOfPose(world, p, pose, conv);
+  return an === 'walk' ? walkingOf(world, p) : an;
+}
+
 const POSES: ReadonlySet<string> = new Set<PoseKind>([
   'stand', 'walk', 'run', 'pick', 'chop', 'mine', 'fish', 'drink', 'eat', 'sleep', 'sit', 'build', 'till', 'plant', 'tend', 'harvest', 'craft', 'talk', 'give',
   'argue', 'store', 'saw', 'hammer', 'forge', 'bake', 'dig', 'pull', 'fear',
@@ -278,5 +411,7 @@ const QUIET: ReadonlySet<AnimId> = new Set<AnimId>([
   'stand', 'walk', 'run', 'sit', 'talk', 'idle', 'rest', 'fire_sit', 'fire_listen', 'meal_sit', 'funeral', 'walkout', 'stroll', 'trek', 'trudge', 'lookin', 'alone',
   'warm', 'comfort',
 ]);
+/** the walks of (G): like the plain walk, none holds anything with both hands, so a sling or a bereavement shows in the arms too (a fever only shows in the arms of somebody not on foot) */
+const QUIET_WALKS: ReadonlySet<AnimId> = new Set<AnimId>(['walk_tired', 'walk_cold', 'walk_urgent', 'walk_laden', 'walk_work', 'walk_social', 'skip', 'walk_low', 'walk_glad']);
 /** an animation with nothing for the arms to do, so a fever, a sling or a bereavement may show in them too */
-export const isQuiet = (a: AnimId): boolean => QUIET.has(a);
+export const isQuiet = (a: AnimId): boolean => QUIET.has(a) || QUIET_WALKS.has(a);
