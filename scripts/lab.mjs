@@ -12,6 +12,7 @@
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { cpus } from 'node:os';
 import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
@@ -98,13 +99,30 @@ if (savesArg) {
 // Captured after the guard: a refused directory is refused in one process start, not two (the guard only reads the existing rows).
 // New lab directories retain the runner's start snapshot. Legacy directories cannot be relabelled with today's source.
 const provenance = labProvenance();
-if (existsSync(out)) {
-  if (!existsSync(provenancePath) && readdirSync(out).some(f => /^lab_.+\.jsonl$/.test(f)))
-    throw new Error('Lab directory has no source provenance; use a fresh output directory.');
-  if (existsSync(provenancePath) && JSON.stringify(JSON.parse(readFileSync(provenancePath, 'utf8')).source) !== JSON.stringify(provenance.source))
-    throw new Error('Lab source differs from the retained run; use a fresh output directory.');
+// A completed seed and a scratch arm both depend on the experiment that produced them.
+const experimentPath = join(out, 'experiment.json');
+const experiment = {
+  seeds,
+  workerArgs: extra,
+  saves: Array.from(savePaths, ([label, path]) => ({
+    label, path, sha256: createHash('sha256').update(readFileSync(path)).digest('hex'),
+  })),
+};
+const hasRows = dir => existsSync(dir) && readdirSync(dir).some(name => /^lab_.+\.jsonl$/.test(name));
+const hasMeasurements = hasRows(out) || hasRows(join(out, 'arms'));
+if (!existsSync(provenancePath) && hasMeasurements)
+  throw new Error('Lab directory has no source provenance; use a fresh output directory.');
+if (existsSync(provenancePath) && JSON.stringify(JSON.parse(readFileSync(provenancePath, 'utf8')).source) !== JSON.stringify(provenance.source))
+  throw new Error('Lab source differs from the retained run; use a fresh output directory.');
+if (existsSync(experimentPath)) {
+  if (JSON.stringify(JSON.parse(readFileSync(experimentPath, 'utf8'))) !== JSON.stringify(experiment))
+    throw new Error('Lab experiment differs from the retained run. Use a new output directory.');
+} else {
+  if (hasMeasurements)
+    throw new Error('Lab results have no retained experiment configuration. Use a new output directory.');
+  mkdirSync(out, { recursive: true });
+  writeFileSync(experimentPath, JSON.stringify(experiment, null, 2) + '\n', { flag: 'wx' });
 }
-mkdirSync(out, { recursive: true });
 if (!existsSync(provenancePath)) writeFileSync(provenancePath, JSON.stringify(provenance, null, 2) + '\n');
 // The seed workers and the report are bundled once into plain JavaScript and run from the bundle (esbuild, already a dependency
 // of vite). The same TypeScript runs either way and gives the same rows; through vite-node every call across two source files
