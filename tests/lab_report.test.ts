@@ -72,3 +72,20 @@ it('reports an unavailable contrast without inventing a result and keeps story o
   expect(out).toContain('Story of seed 0:');
   expect(out).not.toContain('direct contrast, paired by seed');
 }, 300000);
+
+function verdictFixture(seeds: number) {
+  const dir = mkdtempSync(join(tmpdir(), 'lw-verdict-'));
+  dirs.push(dir);
+  const rows = Array.from({ length: seeds }, (_, seed) =>
+    [['control', 2], ['nudge:1', 10], ['A', 2], ['B', 10]].map(([spec, births]) =>
+      JSON.stringify({ seed: String(seed), spec, summary: spec, profile: 'normal', fork: 0, days: 1,
+        finalHash: spec === 'nudge:1' ? 'other' : 'same', outcome: { births }, divergedAfterTicks: null })));
+  writeFileSync(join(dir, 'lab_fixture.jsonl'), rows.flat().join('\n'));
+  return dir;
+}
+
+it('judges each metric against its paired reference even when final hashes match', () => {
+  const out = report(verdictFixture(1), '--vs', 'A:B');
+  expect(out).toMatch(/births\s+6\.0\s+2\.0\s+-4\.0[^\n]*too few seeds to say/);
+  expect(out).toMatch(/births\s+2\.0\s+10\.0\s+-8\.0[^\n]*too few seeds to say/);
+}, 120000);

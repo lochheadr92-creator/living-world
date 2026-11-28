@@ -104,7 +104,7 @@ for (const spec of specs) {
     const c = rows.map((r) => refMean(r.seed, r.spec, m));
     const b = rows.map((r) => r.outcome[m]);
     const st = paired(b.map((x, i) => x - c[i]));
-    const v = verdict(st, noise[m], same === rows.length);
+    const v = verdict(st, noise[m], st.higher === 0 && st.lower === 0);
     console.log(
       '   ' + m.padEnd(metricWidth) + mean(c).toFixed(1).padStart(9) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
         `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
@@ -114,7 +114,7 @@ for (const spec of specs) {
   const lines: string[] = [];
   for (const m of metrics) {
     const st = paired(rows.map((r) => r.outcome[m] - refMean(r.seed, r.spec, m)));
-    if (verdict(st, noise[m], same === rows.length) !== 'larger than chance') continue;
+    if (verdict(st, noise[m], st.higher === 0 && st.lower === 0) !== 'larger than chance') continue;
     lines.push(`${m} ${mean(rows.map((r) => refMean(r.seed, r.spec, m))).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
   }
   console.log(same === rows.length ? '   In words: the branch ended in exactly the control\'s state in every seed.' : lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
@@ -147,7 +147,7 @@ for (const pair of vsArg ? vsArg.split(',') : []) {
   const lines: string[] = [];
   for (const m of metrics) {
     const st = paired(both.map((s) => ra(s).outcome[m] - rb(s).outcome[m]));
-    const v = verdict(st, noise[m] * contrastScale, same === both.length);
+    const v = verdict(st, noise[m] * contrastScale, st.higher === 0 && st.lower === 0);
     console.log(
       '   ' + m.padEnd(metricWidth) + mean(both.map((s) => ra(s).outcome[m])).toFixed(1).padStart(w) + mean(both.map((s) => rb(s).outcome[m])).toFixed(1).padStart(w) +
         num(st.meanDiff).padStart(8) + `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
