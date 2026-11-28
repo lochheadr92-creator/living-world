@@ -46,6 +46,23 @@ describe('the in-app driver', () => {
     expect(inhabitConfigFromUrl('?inhabit=', { seed: 'river' })).toMatchObject({ person: '', seed: 'river', memory: false, days: null });
   });
 
+  it('stops fast-forwarding before an inhabitant session is installed', async () => {
+    const cfg = inhabitConfigFromUrl('?inhabit=&manual=1&from=0.1', { seed: 'meadow' })!;
+    const game = new Game(settingsFromConfig(cfg));
+    const driver = new InhabitDriver(game, cfg);
+    const starting = driver.start();
+    const tick = game.world.tick;
+    expect(tick).toBeGreaterThan(0);
+    expect(tick).toBeLessThan(cfg.fromDay * DAY);
+    driver.stop();
+    await starting;
+    expect(driver.status).toBe('finished');
+    expect(game.world.tick).toBe(tick);
+    expect(game.playing).toBe(false);
+    expect(game.tickHooks).toBeNull();
+    expect(driver.transcriptNow()).toBeNull();
+  });
+
   it('pauses while the model thinks, applies the answer at the asked tick, and records a transcript that replays headlessly', async () => {
     const cfg: InhabitConfig = { person: 'Pavel', api: 'openai', model: 'stub', effort: '', memory: true, showScores: false, fromDay: 1, days: 0.3, seed: 'meadow', harsh: false, rich: false, size: 'normal', arrivals: true, manual: false };
     const game = new Game(settingsFromConfig(cfg));

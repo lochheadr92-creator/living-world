@@ -342,7 +342,9 @@ export class InhabitDriver {
 
   /** stop driving the person (the world goes on by itself) */
   stop(): void {
-    if (this.session) this.end('finished', 'stopped; save the transcript to keep it');
+    if (!this.over && (this.status === 'preparing' || this.session)) {
+      this.end('finished', this.session ? 'stopped; save the transcript to keep it' : 'stopped before the session began');
+    }
   }
 
   lastDecision(): { ask: Ask; call: Call } | null {
