@@ -287,7 +287,8 @@ export interface ReplayOptions {
 export function runReplay(world: World, transcript: Transcript, opts: ReplayOptions = {}): RunResult & { warnings: string[] } {
   markInhabitant(world, transcript.header.personId, protocolHasMemory(transcript.header.protocol));
   const warnings = verifyHeader(transcript, world, { sources: opts.sources, allowSourceDrift: opts.allowSourceDrift });
-  const until = opts.until ?? transcript.end?.tick ?? world.tick;
+  const endTick = transcript.end?.tick;
+  const until = opts.until === undefined ? endTick ?? world.tick : Math.min(opts.until, endTick ?? opts.until);
   const ctrl = new TranscriptController(transcript, 'replay');
   const restore = setExternalController(ctrl);
   try {
@@ -296,7 +297,7 @@ export function runReplay(world: World, transcript: Transcript, opts: ReplayOpti
       stepWorld(world);
       opts.onTick?.(world);
     }
-    if (opts.until === undefined) ctrl.verifyEnd(world);
+    if (opts.until === undefined || until === endTick) ctrl.verifyEnd(world);
   } finally {
     restore();
   }

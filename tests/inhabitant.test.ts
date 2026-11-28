@@ -195,6 +195,16 @@ describe('the transcript', () => {
     expect(again.transcript.header.mode).toBe('live');
   });
 
+  it('verifies an explicitly requested endpoint and allows a shorter replay', async () => {
+    const { start, live } = await record('explicit-replay-end', 12);
+    const end = live.transcript.end!;
+    const replay = (until: number) => runReplay(deserializeWorld(start), live.transcript, { until });
+    expect(replay(end.tick).world.tick).toBe(end.tick);
+    end.hash = 'incorrect end state';
+    expect(() => replay(end.tick)).toThrow(/world ends in state/);
+    expect(replay(end.tick - 1).world.tick).toBe(end.tick - 1);
+  });
+
   it('refuses a transcript that does not fit: another simulation, another world, a missing, altered or extra decision', async () => {
     const { start, live } = await record('inhabitant-tamper');
     const t = live.transcript;
