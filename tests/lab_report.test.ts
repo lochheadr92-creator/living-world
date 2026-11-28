@@ -89,3 +89,12 @@ it('judges each metric against its paired reference even when final hashes match
   expect(out).toMatch(/births\s+6\.0\s+2\.0\s+-4\.0[^\n]*too few seeds to say/);
   expect(out).toMatch(/births\s+2\.0\s+10\.0\s+-8\.0[^\n]*too few seeds to say/);
 }, 120000);
+
+it.each([[1, 'too few seeds to say'], [6, 'no noise floor to judge against']] as const)(
+  'preserves uncertainty with %i seeds in branch and direct-contrast summaries', (seeds, reason) => {
+    const out = report(verdictFixture(seeds), '--vs', 'A:B');
+    for (const heading of ['── A:', '── A − B:']) {
+      const section = out.split(heading)[1].split('──')[0];
+      expect(section).toContain('In words: 1 metric: ' + reason);
+    }
+  }, 120000);

@@ -5,7 +5,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { METRICS } from './lab/lab';
 import type { BranchResult, Metric } from './lab/lab';
-import { mean, paired, sd, verdict } from './lab/stats';
+import { mean, paired, sd, verdict, type Verdict } from './lab/stats';
 import { labProvenance } from './observers/provenance';
 import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 
@@ -88,8 +88,14 @@ const parted = nd.filter((x): x is number => x !== null);
 console.log(`  nudge branches parted from the control in ${parted.length}/${nd.length} runs, median ${parted.length ? (parted.sort((a, b) => a - b)[parted.length >> 1] / 2400).toFixed(2) : '-'} days after the fork`);
 console.log('  ' + metrics.map((m) => `${m} ±${noise[m].toFixed(1)}`).join('   '));
 const flat = metrics.filter((m) => !(noise[m] > 0));
-if (flat.length) console.log(`  no noise floor for ${flat.join(', ')} (no nudge branch moved it): no effect on these is called larger than chance`);
+if (flat.length) console.log(`  no noise floor for ${flat.join(', ')} (no measurable spread in the nudge differences): no effect on these is called larger than chance`);
 console.log(`  an effect smaller than its noise floor is never called larger than chance, so "not distinguishable from chance" over ${seeds.length} seeds is weak evidence of no effect`);
+
+function printSummary(counts: Map<Verdict, number>, changes: string[]): void {
+  const groups = [...counts].map(([result, n]) => `${n} ${n === 1 ? 'metric' : 'metrics'}: ${result}`);
+  console.log('   In words: ' + (groups.join('; ') || 'no comparable metrics') + '.');
+  if (changes.length) console.log('   ' + changes.join('; ') + '.');
+}
 
 for (const spec of specs) {
   const rows = seeds.map((s) => bySeed.get(s)!.get(spec)).filter((r): r is Row => !!r);
@@ -100,6 +106,8 @@ for (const spec of specs) {
   console.log(`\n── ${spec}: ${rows[0].summary}  [${rows.length} seeds${rows[0].note ? '; e.g. ' + rows[0].note : ''}]`);
   console.log(`   final state identical to control in ${same}/${rows.length} seeds; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
   console.log('   ' + 'metric'.padEnd(metricWidth) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  const counts = new Map<Verdict, number>();
+  const summary: string[] = [];
   for (const m of metrics) {
     const c = rows.map((r) => refMean(r.seed, r.spec, m));
     const b = rows.map((r) => r.outcome[m]);
@@ -109,15 +117,10 @@ for (const spec of specs) {
       '   ' + m.padEnd(metricWidth) + mean(c).toFixed(1).padStart(9) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
         `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
     );
+    if (v === 'larger than chance') summary.push(`${m} ${mean(c).toFixed(1)} → ${mean(b).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
+    counts.set(v, (counts.get(v) ?? 0) + 1);
   }
-  // plain sentences for the metrics that moved beyond chance
-  const lines: string[] = [];
-  for (const m of metrics) {
-    const st = paired(rows.map((r) => r.outcome[m] - refMean(r.seed, r.spec, m)));
-    if (verdict(st, noise[m], st.higher === 0 && st.lower === 0) !== 'larger than chance') continue;
-    lines.push(`${m} ${mean(rows.map((r) => refMean(r.seed, r.spec, m))).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
-  }
-  console.log(same === rows.length ? '   In words: the branch ended in exactly the control\'s state in every seed.' : lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
+  printSummary(counts, summary);
 }
 
 // Direct contrasts, A − B, seed by seed. Both branches are compared with each other, not with a reference, so what they share (the
@@ -144,17 +147,19 @@ for (const pair of vsArg ? vsArg.split(',') : []) {
   console.log(`\n── ${a} − ${b}: direct contrast, paired by seed  [${both.length} seeds]`);
   console.log(`   final state identical in ${same}/${both.length} seeds`);
   console.log('   ' + 'metric'.padEnd(metricWidth) + a.padStart(w) + b.padStart(w) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  const counts = new Map<Verdict, number>();
   const lines: string[] = [];
   for (const m of metrics) {
     const st = paired(both.map((s) => ra(s).outcome[m] - rb(s).outcome[m]));
     const v = verdict(st, noise[m] * contrastScale, st.higher === 0 && st.lower === 0);
+    counts.set(v, (counts.get(v) ?? 0) + 1);
     console.log(
       '   ' + m.padEnd(metricWidth) + mean(both.map((s) => ra(s).outcome[m])).toFixed(1).padStart(w) + mean(both.map((s) => rb(s).outcome[m])).toFixed(1).padStart(w) +
         num(st.meanDiff).padStart(8) + `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
     );
     if (v === 'larger than chance') lines.push(`${m} ${mean(both.map((s) => rb(s).outcome[m])).toFixed(1)} → ${mean(both.map((s) => ra(s).outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
   }
-  console.log(same === both.length ? '   In words: the two branches ended in the same state in every seed.' : lines.length ? `   In words, going from ${b} to ${a}: ` + lines.join('; ') + '.' : `   In words: ${a} and ${b} differ by no more than a one-draw nudge makes them.`);
+  printSummary(counts, lines);
 }
 
 if (storySeed) {
