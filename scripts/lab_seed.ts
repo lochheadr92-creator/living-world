@@ -45,6 +45,7 @@ const profile = (loaded ? (loaded.w.settings.profile ?? 'large') : opt('profile'
 const fork = loaded ? loaded.startDay : Number(opt('fork', '4'));
 const days = Number(opt('days', '8'));
 const sample = Number(opt('sample', '120'));
+if (!Number.isSafeInteger(sample) || sample <= 0) throw new Error('--sample must be a positive integer');
 // `--branches none` runs the control alone (the gates use that)
 const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((b) => b && b !== 'none');
 

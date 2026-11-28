@@ -42,6 +42,9 @@ for (const p of savesArg ? savesArg.split(',').filter(Boolean) : []) {
   savePaths.set(label, resolve(p));
 }
 const extra = savesArg ? ['--days', opt('days', '8')] : ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profile', opt('profile', 'large')];
+const sample = Number(opt('sample', '120'));
+if (!Number.isSafeInteger(sample) || sample <= 0) throw new Error('--sample must be a positive integer');
+extra.push('--sample', String(sample));
 if (opt('branches', '')) extra.push('--branches', opt('branches', ''));
 if (savesArg && opt('rules-up', '')) extra.push('--rules-up', opt('rules-up', ''));
 if (!savesArg) extra.push('--dynamics', dynamics);
@@ -145,7 +148,6 @@ if (armsMode === 'parallel') {
   // hash lists exactly as runBranch does when it is handed the control's (the first sample that differs, in ticks after the fork),
   // and the hashes dropped. The arm files are scratch and are removed once the seed's file is written.
   const specs = ['control', ...opt('branches', '').split(',').filter((b) => b && b !== 'none')];
-  const sample = Number(opt('sample', '120'));
   const armDir = join(out, 'arms');
   mkdirSync(armDir, { recursive: true });
   const armPath = (seed, i) => join(armDir, `lab_${seed}__${i}.jsonl`); // by index: a spec may hold a colon, which a Windows file name cannot
